@@ -16,6 +16,11 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    cache-control = "public, s-max-age=60"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -35,4 +40,4 @@
   command = "pnpm front"
   autoLaunch = false
   functionsPort = 8887
-  targetPort = 3336
+  targetPort = 3334
