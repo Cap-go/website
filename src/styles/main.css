@@ -43,26 +43,20 @@ html.dark {
 }
 
 @font-face {
-  font-family: "Alarm_Clock";
-  font-weight: normal;
+  font-family: 'AirbnbCerealLight';
   font-style: normal;
-  font-size: 8pc;
-  font-display: swap;
-  src:
-    url("/fonts/Alarm_Clock.woff2") format("woff2"),
-    url("/fonts/Alarm_Clock.woff")
-    format("woff"),
-    url("/fonts/Alarm_Clock.ttf")
-    format("truetype"),
-    url("/fonts/Alarm_Clock.svg#svgFontName")
-    format("svg");
+  font-weight: normal;
+  src: url('../../fonts/AirbnbCerealLight.woff');
 }
-
 @font-face {
-  font-family: "Handel_Gothic";
-  font-weight: normal;
+  font-family: 'AirbnbCerealMedium';
   font-style: normal;
-  font-size: 8pc;
-  font-display: swap;
-  src: url("/fonts/Handel_Gothic.ttf") format("truetype");
+  font-weight: normal;
+  src: url('../../fonts/AirbnbCerealMedium.woff');
+}
+@font-face {
+  font-family: 'AirbnbCerealBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../../fonts/AirbnbCerealBold.woff');
 }

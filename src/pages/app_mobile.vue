@@ -1,5 +1,21 @@
 <script setup lang="ts">
 const brand = import.meta.env.brand
+useHead({
+  title: `${brand} | Capacitor sanbox APP`,
+  meta: [
+    { name: 'description', content: 'Try and manage OTA update for your capacitor app from your pocket, available in IOS and Android.' },
+    { name: 'og:type', content: 'website' },
+    { name: 'og:title', content: `${brand} | Capacitor sanbox APP` },
+    { name: 'twitter:title', content: `${brand} | Capacitor sanbox APP` },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:description', content: 'Try and manage OTA update for your capacitor app from your pocket, available in IOS and Android.' },
+    { name: 'twitter:domain', content: import.meta.env.domain },
+    { name: 'twitter:image', content: `https://${import.meta.env.domain}/app_demo.webp` },
+    { name: 'og:image:alt', content: `${brand} App preview` },
+    { name: 'og:image', content: `https://${import.meta.env.domain}/app_demo.webp` },
+    { name: 'og:alt', content: `${brand} app preview` },
+  ],
+})
 </script>
 
 <template>
