@@ -40,4 +40,4 @@
   command = "pnpm front"
   autoLaunch = false
   functionsPort = 8887
-  targetPort = 3334
+  targetPort = 3336
