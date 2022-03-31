@@ -30,7 +30,7 @@ const menuMobile = ref(false)
         </div>
 
         <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
-          <a href="/login" title="" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </a>
+          <a href="https://app.capgo.app/login" title="" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </a>
 
           <a
             href="https://discord.com/invite/VnYRvBfgA6"

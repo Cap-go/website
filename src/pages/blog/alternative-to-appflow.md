@@ -52,4 +52,4 @@ Otherwise :)
 
 # Register here to get your account
 
-[Capgo](https://capgo.app/register)
+[Capgo](https://app.capgo.app/register)

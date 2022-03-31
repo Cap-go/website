@@ -35,7 +35,7 @@ You can read more about it [here](https://capgo.app).
 
 ## Capgo Configuration [#](https://capgo.app/blog/appcenter-migration#Capgo-configuration "Direct link to heading")
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://capgo.app/register).
+It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://app.capgo.app/register).
 
 Once you’re logged into Capgo, navigate to the Account page then click on API key:
 

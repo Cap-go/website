@@ -24,4 +24,4 @@ Development teams can focus completely on the unique features of their app and o
 
 Capacitor customers can take advantage of Capgo's complete list of features and easily migrate from Microsoft App Center to Capgo in just a few steps. I created a [migration guide](https://capgo.app/blog/appcenter-migration) to help you walk through the process of migrating from App Center to Capgo.
 
-If you’re interested in learning more about moving from Microsoft App Center to Capgo, create your [free Capgo account](https://capgo.app/register) today.
+If you’re interested in learning more about moving from Microsoft App Center to Capgo, create your [free Capgo account](https://app.capgo.app/register) today.
