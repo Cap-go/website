@@ -17,6 +17,7 @@ export const handler: Handler = async(event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
   const supabase = useSupabase()
+  // eslint-disable-next-line no-console
   console.log('event.body', event.body)
   const body = JSON.parse(event.body || '{}') as AppStats
   const device: definitions['devices'] = {

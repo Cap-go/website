@@ -17,6 +17,7 @@ interface AppUpload {
 }
 
 export const handler: Handler = async(event) => {
+  // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
@@ -30,6 +31,7 @@ export const handler: Handler = async(event) => {
     const body = JSON.parse(event.body || '{}') as AppUpload
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { app, ...newObject } = body
+    // eslint-disable-next-line no-console
     console.log('body', newObject)
     const dataFormat: BufferEncoding = (body.format || 'base64') as BufferEncoding
     let fileName = uuidv4()

@@ -9,6 +9,7 @@ interface GetLatest {
 }
 
 export const handler: Handler = async(event) => {
+  // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()

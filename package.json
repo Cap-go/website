@@ -10,16 +10,19 @@
     "test": "vitest",
     "test:e2e": "cypress open",
     "test:unit": "vitest",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "types": "npx openapi-typescript https://xvwzpoazmxkqosrdewyv.supabase.co/rest/v1/\\?apikey\\=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzgwNTAwOSwiZXhwIjoxOTUzMzgxMDA5fQ.8tgID1d4jodPwuo_fz4KHN4o1XKB9fnqyt0_GaJSj-w --output src/types/supabase.ts"
   },
   "dependencies": {
     "@netlify/functions": "^1.0.0",
+    "@supabase/supabase-js": "^1.33.2",
     "@vueuse/core": "7.7.1",
     "@vueuse/head": "0.7.5",
     "dayjs": "1.11.0",
     "nprogress": "^0.2.0",
     "pinia": "2.0.12",
     "prism-theme-vars": "^0.2.2",
+    "uuid": "^8.3.2",
     "vite-plugin-environment": "^1.1.0",
     "vue": "3.2.31",
     "vue-demi": "0.12.4",
@@ -34,6 +37,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/markdown-it-link-attributes": "^3.0.1",
     "@types/nprogress": "^0.2.0",
+    "@types/uuid": "^8.3.4",
     "@vitejs/plugin-vue": "2.2.4",
     "@vue/compiler-sfc": "3.2.31",
     "@vue/server-renderer": "3.2.31",

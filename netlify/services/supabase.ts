@@ -13,6 +13,7 @@ export const useSupabase = () => {
 
 export const updateOrCreateVersion = async(update: Partial<definitions['app_versions']>) => {
   const supabase = useSupabase()
+  // eslint-disable-next-line no-console
   console.log('updateOrCreateVersion', update)
   const { data, error } = await supabase
     .from<definitions['app_versions']>('app_versions')
@@ -36,6 +37,7 @@ export const updateOrCreateVersion = async(update: Partial<definitions['app_vers
 
 export const updateOrCreateChannel = async(update: Partial<definitions['channels']>) => {
   const supabase = useSupabase()
+  // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
   const { data, error } = await supabase
     .from<definitions['channels']>('channels')
