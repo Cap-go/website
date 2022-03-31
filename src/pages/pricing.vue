@@ -33,7 +33,7 @@
                   9
                 </p>
                 <p class="text-lg font-bold text-gray-400 font-pj">
-                  /year
+                  /month
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@
                     29
                   </p>
                   <p class="text-lg font-bold text-gray-400 font-pj">
-                    /year
+                    /month
                   </p>
                 </div>
               </div>
@@ -231,7 +231,7 @@
                   99
                 </p>
                 <p class="text-lg font-bold text-gray-400 font-pj">
-                  /year
+                  /month
                 </p>
               </div>
             </div>
