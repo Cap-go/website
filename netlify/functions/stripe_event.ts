@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { extractDataEvent, parseStripeEvent } from 'netlify/services/stripe'
-// import { useSupabase } from '../../services/supabase'
+// import { useSupabase } from '../services/supabase'
 // import type { definitions } from '~/types/supabase'
 
 export const handler: Handler = async({ body, headers }) => {
