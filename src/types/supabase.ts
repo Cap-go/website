@@ -754,13 +754,12 @@ export interface paths {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.stripe_info.id"];
           created_at?: parameters["rowFilter.stripe_info.created_at"];
           updated_at?: parameters["rowFilter.stripe_info.updated_at"];
-          email?: parameters["rowFilter.stripe_info.email"];
-          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
-          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          subscription_id?: parameters["rowFilter.stripe_info.subscription_id"];
+          customer_id?: parameters["rowFilter.stripe_info.customer_id"];
           status?: parameters["rowFilter.stripe_info.status"];
+          product_id?: parameters["rowFilter.stripe_info.product_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -811,13 +810,12 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.stripe_info.id"];
           created_at?: parameters["rowFilter.stripe_info.created_at"];
           updated_at?: parameters["rowFilter.stripe_info.updated_at"];
-          email?: parameters["rowFilter.stripe_info.email"];
-          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
-          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          subscription_id?: parameters["rowFilter.stripe_info.subscription_id"];
+          customer_id?: parameters["rowFilter.stripe_info.customer_id"];
           status?: parameters["rowFilter.stripe_info.status"];
+          product_id?: parameters["rowFilter.stripe_info.product_id"];
         };
         header: {
           /** Preference */
@@ -832,13 +830,12 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.stripe_info.id"];
           created_at?: parameters["rowFilter.stripe_info.created_at"];
           updated_at?: parameters["rowFilter.stripe_info.updated_at"];
-          email?: parameters["rowFilter.stripe_info.email"];
-          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
-          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          subscription_id?: parameters["rowFilter.stripe_info.subscription_id"];
+          customer_id?: parameters["rowFilter.stripe_info.customer_id"];
           status?: parameters["rowFilter.stripe_info.status"];
+          product_id?: parameters["rowFilter.stripe_info.product_id"];
         };
         body: {
           /** stripe_info */
@@ -870,6 +867,7 @@ export interface paths {
           enableNotifications?: parameters["rowFilter.users.enableNotifications"];
           optForNewsletters?: parameters["rowFilter.users.optForNewsletters"];
           legalAccepted?: parameters["rowFilter.users.legalAccepted"];
+          customer_id?: parameters["rowFilter.users.customer_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -931,6 +929,7 @@ export interface paths {
           enableNotifications?: parameters["rowFilter.users.enableNotifications"];
           optForNewsletters?: parameters["rowFilter.users.optForNewsletters"];
           legalAccepted?: parameters["rowFilter.users.legalAccepted"];
+          customer_id?: parameters["rowFilter.users.customer_id"];
         };
         header: {
           /** Preference */
@@ -956,6 +955,7 @@ export interface paths {
           enableNotifications?: parameters["rowFilter.users.enableNotifications"];
           optForNewsletters?: parameters["rowFilter.users.optForNewsletters"];
           legalAccepted?: parameters["rowFilter.users.legalAccepted"];
+          customer_id?: parameters["rowFilter.users.customer_id"];
         };
         body: {
           /** users */
@@ -1215,12 +1215,6 @@ export interface definitions {
   };
   stripe_info: {
     /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
      * Format: timestamp with time zone
      * @default now()
      */
@@ -1231,11 +1225,13 @@ export interface definitions {
      */
     updated_at?: string;
     /** Format: character varying */
-    email: string;
-    /** Format: character varying */
-    subscriptionId?: string;
-    /** Format: character varying */
-    customerId?: string;
+    subscription_id?: string;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    customer_id: string;
     /**
      * Format: public.stripe_status
      * @enum {string}
@@ -1247,6 +1243,8 @@ export interface definitions {
       | "failed"
       | "deleted"
       | "canceled";
+    /** Format: character varying */
+    product_id?: string;
   };
   users: {
     /**
@@ -1281,6 +1279,8 @@ export interface definitions {
     optForNewsletters: boolean;
     /** Format: boolean */
     legalAccepted: boolean;
+    /** Format: character varying */
+    customer_id?: string;
   };
 }
 
@@ -1433,20 +1433,18 @@ export interface parameters {
   "rowFilter.stats.updated_at": string;
   /** @description stripe_info */
   "body.stripe_info": definitions["stripe_info"];
-  /** Format: bigint */
-  "rowFilter.stripe_info.id": string;
   /** Format: timestamp with time zone */
   "rowFilter.stripe_info.created_at": string;
   /** Format: timestamp with time zone */
   "rowFilter.stripe_info.updated_at": string;
   /** Format: character varying */
-  "rowFilter.stripe_info.email": string;
+  "rowFilter.stripe_info.subscription_id": string;
   /** Format: character varying */
-  "rowFilter.stripe_info.subscriptionId": string;
-  /** Format: character varying */
-  "rowFilter.stripe_info.customerId": string;
+  "rowFilter.stripe_info.customer_id": string;
   /** Format: public.stripe_status */
   "rowFilter.stripe_info.status": string;
+  /** Format: character varying */
+  "rowFilter.stripe_info.product_id": string;
   /** @description users */
   "body.users": definitions["users"];
   /** Format: timestamp with time zone */
@@ -1471,6 +1469,8 @@ export interface parameters {
   "rowFilter.users.optForNewsletters": string;
   /** Format: boolean */
   "rowFilter.users.legalAccepted": string;
+  /** Format: character varying */
+  "rowFilter.users.customer_id": string;
 }
 
 export interface operations {}

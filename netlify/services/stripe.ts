@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import Stripe from 'stripe'
+import type { definitions } from '~/types/supabase'
 
 type EventHeaders = Record<string, string | undefined>
 export const parseStripeEvent = (key: string, body: string, headers: EventHeaders, secret: string) => {
@@ -9,14 +10,6 @@ export const parseStripeEvent = (key: string, body: string, headers: EventHeader
   })
   const event = stripe.webhooks.constructEvent(body, String(sig), secret)
   return event
-}
-
-export interface DataEvent {
-  email: string | null
-  status: 'created' | 'succeeded' | 'updated' | 'failed' | 'deleted' | 'canceled' | null
-  customerId?: string | null
-  subscriptionId?: string | null
-  updatedAt: string
 }
 
 export const createPortal = async(key: string, subscriptionId: string, callbackUrl: string) => {
@@ -42,41 +35,41 @@ export const deleteSub = async(key: string, subscriptionId: string) => {
     return err
   }
 }
+export const createCustomer = async(key: string, email: string) => {
+  const stripe = new Stripe(key, {
+    apiVersion: '2020-08-27',
+  })
+  return await stripe.customers.create({
+    email,
+  })
+}
 
-export const extractDataEvent = (event: Stripe.Event): DataEvent => {
-  const data: DataEvent = {
-    email: null,
-    subscriptionId: undefined,
-    customerId: undefined,
-    updatedAt: dayjs().toISOString(),
-    status: null,
+export const extractDataEvent = (event: Stripe.Event): definitions['stripe_info'] => {
+  const data: definitions['stripe_info'] = {
+    product_id: undefined,
+    subscription_id: undefined,
+    customer_id: '',
+    updated_at: dayjs().toISOString(),
+    status: undefined,
   }
   // eslint-disable-next-line no-console
   console.log('event', JSON.stringify(event, null, 2))
   if (event && event.data && event.data.object) {
-    const obj = event.data.object as Stripe.Charge | Stripe.Subscription
-    data.customerId = String(obj.customer)
-    if (data.customerId) {
-      if (event.type === 'charge.succeeded') {
-        data.status = 'succeeded'
-        data.subscriptionId = obj.id
-        data.customerId = String(obj.customer)
-        data.updatedAt = dayjs().toISOString()
-      }
-      else if (event.type === 'customer.deleted') {
-        data.status = 'deleted'
-        data.subscriptionId = null
-        data.customerId = null
-        data.updatedAt = dayjs().toISOString()
-      }
-      else if (event.type === 'charge.failed' || event.type === 'customer.subscription.deleted') {
-        data.status = event.type === 'charge.failed' ? 'failed' : 'canceled'
-        data.subscriptionId = null
-        data.updatedAt = dayjs().toISOString()
-      }
-      else {
-        console.error('Other event', event)
-      }
+    if (event.type === 'customer.subscription.updated') {
+      const subscription = event.data.object as Stripe.Subscription
+      data.product_id = subscription.items.data.length ? subscription.items.data[0].plan.id : undefined
+      data.status = subscription.cancel_at ? 'canceled' : 'succeeded'
+      data.subscription_id = subscription.id
+      data.customer_id = String(subscription.customer)
+    }
+    else if (event.type === 'customer.subscription.deleted') {
+      const charge = event.data.object as Stripe.Charge
+      data.status = 'canceled'
+      data.customer_id = String(charge.customer)
+      data.subscription_id = undefined
+    }
+    else {
+      console.error('Other event', event.type, event)
     }
   }
   return data
