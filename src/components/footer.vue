@@ -22,6 +22,10 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
           <a href="/app_mobile" class="text-base text-gray-500 hover:text-gray-900"> App </a>
         </div>
 
+        <!-- <div class="px-5 py-2">
+          <a href="/pricing" class="text-base text-gray-500 hover:text-gray-900"> Pricing </a>
+        </div> -->
+
         <div class="px-5 py-2">
           <a href="/blogs" class="text-base text-gray-500 hover:text-gray-900"> Blog </a>
         </div>

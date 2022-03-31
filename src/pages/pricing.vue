@@ -57,7 +57,7 @@
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                50 Versions
+                2,500 Monthly Live Updates
               </li>
 
               <li class="flex items-center">
@@ -70,8 +70,8 @@
 
             <div class="mt-12 text-center">
               <a
-                href="#"
-                title=""
+                href="https://web.capgo.app/register"
+                title="register"
                 class="
                                 flex
                                 items-center
@@ -157,7 +157,7 @@
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  200 Versions
+                  25,000 Monthly Live Updates
                 </li>
 
                 <li class="flex items-center">
@@ -177,8 +177,8 @@
 
               <div class="mt-12 text-center">
                 <a
-                  href="#"
-                  title=""
+                  href="https://web.capgo.app/register"
+                  title="register"
                   class="
                                     flex
                                     items-center
@@ -255,7 +255,7 @@
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Unlimited Versions
+                Unlimited Monthly Live Updates
               </li>
 
               <li class="flex items-center">
@@ -296,8 +296,8 @@
 
             <div class="mt-12 text-center">
               <a
-                href="#"
-                title=""
+                href="https://web.capgo.app/register"
+                title="register"
                 class="
                                 flex
                                 items-center
