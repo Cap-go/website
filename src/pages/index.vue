@@ -92,7 +92,7 @@ const brand = import.meta.env.brand
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
         <div>
-          <img class="w-auto max-w-lg mx-auto h-120" src="/manage_app.png" alt="">
+          <img class="w-auto max-w-lg mx-auto h-120" src="/manage_app.png" alt="Manage app illustration">
         </div>
 
         <div class="lg:pr-12">
