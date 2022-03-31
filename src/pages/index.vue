@@ -78,9 +78,9 @@ const brand = import.meta.env.brand
       <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
     </svg>
     <div class="text-center">
-      <h1 class="text-5xl font-semibold">
+      <h2 class="text-5xl font-semibold">
         Send updates in less than 5 mins !
-      </h1>
+      </h2>
       <p class="my-10 text-xl">
         Install the plugin in your app<br>
         Send your first build<br>

@@ -12,13 +12,13 @@ published: true
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.
 
-# Commit convention
+## Commit convention
 
 First you need to start following the commit convention [`conventionalcommits`](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how upgrade the version number, it's 5 min to learn it.
 
 ![Conventional commits](/conventional_commits.webp)
 
-# GitHub actions for tag
+## GitHub actions for tag
 
 Then you need to create your first GitHub action to automatically build and create tag.
 
@@ -83,7 +83,7 @@ This is only necessary the first time, then the tools will keep it up to date.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
-# GitHub actions for build
+## GitHub actions for build
 
 Create a file at this path: `.github/workflows/build.yml`
 

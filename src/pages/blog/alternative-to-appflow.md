@@ -31,7 +31,7 @@ No Native build, not big toolbox like Ionic, just live updates, for the market t
 
 You are welcome to join the community to build together, I use it for my own projects too, and even I expect this become my main project in the future.
 
-# Features comparisons
+## Features comparisons
 
 | Features | Capgo | Appflow |
 | --- | --- | --- |
@@ -50,6 +50,6 @@ If you are a big team with big budget I still think AppFlow is the best solution
 
 Otherwise :)
 
-# Register here to get your account
+## Register here to get your account
 
 [Capgo](https://web.capgo.app/register)

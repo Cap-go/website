@@ -13,7 +13,7 @@ next_blog: ''
 ---
 Greetings Capacitor Community, today I'll be helping you set up Capacitor-updater into your app. So that you can do seamless releases.
 
-# What is Capacitor-updater?
+## What is Capacitor-updater?
 
 Capacitor-updater a technology that helps in the delivery of app updates and improvements to the end users instantly.
 
@@ -23,7 +23,7 @@ You can think of it as "web-like" agility of side-loading updates as soon as the
 
 Moreover, it provides rollbacks if the new update crashed the app
 
-# How does it work?
+## How does it work?
 
 Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help us fine-tune our user's experience.
 
@@ -31,9 +31,9 @@ I use Capgo in all my projects I work with as it is a very promising technology.
 
 You can read more about it [here](https://capgo.app).
 
-# Let's get started 🚀
+## Let's get started 🚀
 
-## Capgo Configuration [#](https://capgo.app/blog/appcenter-migration#Capgo-configuration "Direct link to heading")
+### Capgo Configuration [#](https://capgo.app/blog/appcenter-migration#Capgo-configuration "Direct link to heading")
 
 It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
@@ -45,7 +45,7 @@ Then click on the "write" key to copy it in your clipboard.
 
 ![Api key page](/capgo.app_app_account_api_key.webp "Api key page")
 
-## Install the Capgo SDK [#](https://capgo.app/blog/appcenter-migration#install-the-Capgo-sdk "Direct link to heading")
+### Install the Capgo SDK [#](https://capgo.app/blog/appcenter-migration#install-the-Capgo-sdk "Direct link to heading")
 
 From a command line, directly into the root of your Capacitor app run:
 
