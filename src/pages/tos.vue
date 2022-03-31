@@ -1,6 +1,7 @@
 <script setup lang="ts">
+const brand = import.meta.env.brand
 useHead({
-  title: 'Captime | Terms of Service',
+  title: `${brand} | Terms of Service`,
   meta: [
     { name: 'description', content: 'Terms of Service' },
     { name: 'robots', content: 'noindex, nofollow' },
@@ -28,7 +29,7 @@ const domain = import.meta.env.domain
       <li>
         <p>
           <strong>Application</strong> means the software program provided by the Company downloaded by You
-          on any electronic device, named Captime
+          on any electronic device, named {{ brand }}
         </p>
       </li>
       <li>

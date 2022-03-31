@@ -1,6 +1,5 @@
-<script setup>
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
+<script setup lang="ts">
+const brand = import.meta.env.brand
 </script>
 
 <template>
@@ -9,7 +8,7 @@ import Footer from '~/components/footer.vue'
       <div class="w-full md:w-1/2">
         <div class="pr-4">
           <h1 class="font-bold text-[2.504rem]">
-            Capgo App
+            {{ brand }} App
           </h1>
           <p class="text-lg text-gray-300 mt-8">
             Run your projects on your own device faster than

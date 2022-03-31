@@ -1,6 +1,7 @@
 <script setup lang="ts">
+const brand = import.meta.env.brand
 useHead({
-  title: 'Captime | EULA',
+  title: `${brand} | EULA`,
   meta: [
     { name: 'description', content: 'End-User License Agreement' },
     { name: 'robots', content: 'noindex, nofollow' },
@@ -12,7 +13,7 @@ const domain = import.meta.env.domain
   <div class="prose prose-sm m-auto text-left">
     <h1>End-User License Agreement (&quot;Agreement&quot;)</h1>
     <p>Last updated: January 28, 2022</p>
-    <p>Please read this End-User License Agreement carefully before clicking the &quot;I Agree&quot; button, downloading or using Captime.</p>
+    <p>Please read this End-User License Agreement carefully before clicking the &quot;I Agree&quot; button, downloading or using {{ brand }}.</p>
     <h2>Interpretation and Definitions</h2>
     <h3>Interpretation</h3>
     <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
@@ -23,7 +24,7 @@ const domain = import.meta.env.domain
         <p><strong>Agreement</strong> means this End-User License Agreement that forms the entire agreement between You and the Company regarding the use of the Application.</p>
       </li>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You through an Application Store's account to a Device, named Captime</p>
+        <p><strong>Application</strong> means the software program provided by the Company downloaded by You through an Application Store's account to a Device, named {{ brand }}</p>
       </li>
       <li>
         <p><strong>Application Store</strong> means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) by which the Application has been downloaded to your Device.</p>

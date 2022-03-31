@@ -22,7 +22,8 @@ import EnvironmentPlugin from 'vite-plugin-environment'
 const markdownWrapperClasses = 'prose prose-xl m-auto text-left'
 
 const sitemapIgnore = ['/eula', '/privacy', '/tos', '/disclaimer', '/return', '/404']
-const domain = 'captime.app'
+const domain = 'capgo.app'
+const brand = 'Capgo'
 
 export default defineConfig({
   resolve: {
@@ -36,6 +37,7 @@ export default defineConfig({
     }),
     EnvironmentPlugin({
       domain,
+      brand,
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       VITE_APP_URL: `https://${process.env.BRANCH && process.env.BRANCH === 'development' ? 'development.' : ''}capgo.app`,
       VITE_NETLIFY_URL: process.env.VITE_NETLIFY_URL ? process.env.VITE_NETLIFY_URL : '/api',

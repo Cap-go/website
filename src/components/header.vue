@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+const brand = import.meta.env.brand
 
 const menuMobile = ref(false)
 </script>
@@ -10,8 +11,8 @@ const menuMobile = ref(false)
       <div class="relative flex items-center justify-between">
         <div class="flex-shrink-0">
           <a href="/" title="" class="flex rounded-lg overflow-hidden outline-none font-900 bg-azure-500 items-center focus:ring-1 focus:ring-gray-900 border focus:ring-offset-2 pr-3">
-            <img class="w-auto h-8 pr-3" alt="Capgo logo" src="/capgo.png">
-            Capgo
+            <img class="w-auto h-8 pr-3" :alt="brand + ' logo'" src="/capgo.png">
+            {{ brand }}
           </a>
         </div>
 

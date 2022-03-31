@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 import { initBlog, stringToDate } from '~/services/blog'
+const brand = import.meta.env.brand
 
 useHead({
-  title: 'Capgo | Capacitor Blog',
+  title: `${brand} | Capacitor Blog`,
   meta: [
     { name: 'description', content: 'Check our blog to learn more about Capacitor and live updates.' },
     { name: 'og:type', content: 'website' },
-    { name: 'og:title', content: 'Capgo | Capacitor Blog' },
-    { name: 'twitter:title', content: 'Capgo | Capacitor Blog' },
+    { name: 'og:title', content: `${brand} | Capacitor Blog` },
+    { name: 'twitter:title', content: `${brand} | Capacitor Blog` },
     { name: 'twitter:image', content: `https://${import.meta.env.domain}/blog_meta.webp` },
-    { name: 'og:image:alt', content: 'Capgo illustration' },
+    { name: 'og:image:alt', content: `${brand} illustration` },
     { name: 'og:image', content: `https://${import.meta.env.domain}/blog_meta.webp` },
-    { name: 'og:alt', content: 'Capgo illustration' },
+    { name: 'og:alt', content: `${brand} illustration` },
     { name: 'og:url', content: `https://${import.meta.env.domain}/blogs` },
   ],
 })

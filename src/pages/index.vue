@@ -1,8 +1,6 @@
 
 <script setup lang="ts">
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
-
+const brand = import.meta.env.brand
 </script>
 <template>
   <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
@@ -130,10 +128,10 @@ import Footer from '~/components/footer.vue'
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
         <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-          Customers say about Capgo
+          Customers say about {{ brand }}
         </h2>
         <p class="mt-4 text-lg font-medium text-gray-600 font-pj sm:mt-8">
-          Many people have said how good Capgo is
+          Many people have said how good {{ brand }} is
         </p>
       </div>
 
@@ -265,7 +263,7 @@ import Footer from '~/components/footer.vue'
           Release more often
         </h2>
         <p class="text-lg lg:w-2/3">
-          Using Capgo you are 81% more likely to release multiple times per week, compared to people that aren’t using Capgo.
+          Using {{ brand }} you are 81% more likely to release multiple times per week, compared to people that aren’t using {{ brand }}.
         </p>
       </div>
       <img
@@ -285,7 +283,7 @@ import Footer from '~/components/footer.vue'
           Integration with your pipeline
         </h2>
         <p class="text-lg lg:w-2/3">
-          Use the intuitive CLI to quickly integrate Capgo features with your existing CI/CD platform.<br><br>
+          Use the intuitive CLI to quickly integrate {{ brand }} features with your existing CI/CD platform.<br><br>
           It work with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and more.
         </p>
       </div>

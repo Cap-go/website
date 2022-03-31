@@ -1,12 +1,14 @@
 <script setup lang="ts">
+const domain = import.meta.env.domain
+const brand = import.meta.env.brand
 useHead({
-  title: 'Captime | Privacy Policy',
+  title: `${brand} | Privacy Policy`,
   meta: [
     { name: 'description', content: 'Privacy Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
-const domain = import.meta.env.domain
+
 </script>
 <template>
   <div class="prose prose-sm m-auto text-left">
@@ -27,7 +29,7 @@ const domain = import.meta.env.domain
         <p><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</p>
       </li>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named Captime</p>
+        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named {{ brand }}</p>
       </li>
       <li>
         <p><strong>Business</strong>, for the purpose of the CCPA (California Consumer Privacy Act), refers to the Company as the legal entity that collects Consumers' personal information and determines the purposes and means of the processing of Consumers' personal information, or on behalf of which such information is collected and that alone, or jointly with others, determines the purposes and means of the processing of consumers' personal information, that does business in the State of California.</p>

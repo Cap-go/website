@@ -1,6 +1,7 @@
 <script setup lang="ts">
+const brand = import.meta.env.brand
 useHead({
-  title: 'Captime | Disclaimer',
+  title: `${brand} | Disclaimer`,
   meta: [
     { name: 'description', content: 'Disclaimer' },
     { name: 'robots', content: 'noindex, nofollow' },
@@ -31,7 +32,7 @@ const domain = import.meta.env.domain
         <p><strong>You</strong> means the individual accessing the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
       </li>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device named Captime.</p>
+        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device named {{ brand }}.</p>
       </li>
     </ul>
     <h2>Disclaimer</h2>

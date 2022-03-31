@@ -1,6 +1,7 @@
 <script setup lang="ts">
+const brand = import.meta.env.brand
 useHead({
-  title: 'Captime | Return Policy',
+  title: `${brand} | Return Policy`,
   meta: [
     { name: 'description', content: 'Return Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
@@ -12,7 +13,7 @@ const domain = import.meta.env.domain
   <div class="prose prose-sm m-auto text-left">
     <h1>Return and Refund Policy</h1>
     <p>Last updated: January 28, 2022</p>
-    <p>Thank you for shopping at Captime.</p>
+    <p>Thank you for shopping at {{ brand }}.</p>
     <p>If, for any reason, You are not completely satisfied with a purchase We invite You to review our policy on refunds and returns. This Return and Refund Policy has been created with the help of the <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">Return and Refund Policy Generator</a>.</p>
     <p>The following terms are applicable for any products that You purchased with Us.</p>
     <h2>Interpretation and Definitions</h2>
@@ -22,7 +23,7 @@ const domain = import.meta.env.domain
     <p>For the purposes of this Return and Refund Policy:</p>
     <ul>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named Captime</p>
+        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named {{ brand }}</p>
       </li>
       <li>
         <p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Digital Shift OU, 6 sepapaja 15510 Tallinn.</p>

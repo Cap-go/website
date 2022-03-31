@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Crisp from '~/services/crisp'
-const router = useRouter()
 
+const brand = import.meta.env.brand
+const router = useRouter()
 const crisp = Crisp()
 const openSupport = () => {
   crisp.openMessenger()
@@ -65,7 +66,7 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
         </a>
       </div>
       <p class="mt-8 text-center text-base text-gray-400">
-        &copy; 2022 Capgo, Inc. All rights reserved.
+        &copy; 2022 {{ brand }}, Inc. All rights reserved.
       </p>
     </div>
   </footer>
