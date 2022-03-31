@@ -6,7 +6,7 @@ const brand = import.meta.env.brand
 useHead({
   title: `${brand} | Capacitor Blog`,
   meta: [
-    { name: 'description', content: 'Check our blog to learn more about Capacitor and live updates.' },
+    { name: 'description', content: 'Check our blog to learn more about Capacitor and live updates. Discover tutorials, ways to improve your dev flow and much more.' },
     { name: 'og:type', content: 'website' },
     { name: 'og:title', content: `${brand} | Capacitor Blog` },
     { name: 'twitter:title', content: `${brand} | Capacitor Blog` },

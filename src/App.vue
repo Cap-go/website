@@ -8,7 +8,7 @@ const router = useRouter()
 useHead({
   title: `${brand} | Capacitor auto update tooling`,
   meta: [
-    { name: 'description', content: 'Send update to your capacitor app without store hassle' },
+    { name: 'description', content: 'Send and manage OTA update for your capacitor app without store hassle, 5 min to install in your app.' },
     { name: 'og:type', content: 'website' },
     { name: 'og:title', content: `${brand} | Capacitor auto update tooling` },
     { name: 'twitter:title', content: `${brand} | Capacitor auto update tooling` },
