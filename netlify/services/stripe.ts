@@ -52,7 +52,7 @@ export const extractDataEvent = (event: Stripe.Event): DataEvent => {
     status: null,
   }
   // eslint-disable-next-line no-console
-  console.log('event', event)
+  console.log('event', JSON.stringify(event, null, 2))
   if (event && event.data && event.data.object) {
     const obj = event.data.object as Stripe.Charge | Stripe.Subscription
     data.customerId = String(obj.customer)
