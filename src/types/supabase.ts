@@ -750,6 +750,111 @@ export interface paths {
       };
     };
   };
+  "/stripe_info": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.stripe_info.id"];
+          created_at?: parameters["rowFilter.stripe_info.created_at"];
+          updated_at?: parameters["rowFilter.stripe_info.updated_at"];
+          email?: parameters["rowFilter.stripe_info.email"];
+          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
+          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          status?: parameters["rowFilter.stripe_info.status"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["stripe_info"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** stripe_info */
+          stripe_info?: definitions["stripe_info"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.stripe_info.id"];
+          created_at?: parameters["rowFilter.stripe_info.created_at"];
+          updated_at?: parameters["rowFilter.stripe_info.updated_at"];
+          email?: parameters["rowFilter.stripe_info.email"];
+          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
+          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          status?: parameters["rowFilter.stripe_info.status"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.stripe_info.id"];
+          created_at?: parameters["rowFilter.stripe_info.created_at"];
+          updated_at?: parameters["rowFilter.stripe_info.updated_at"];
+          email?: parameters["rowFilter.stripe_info.email"];
+          subscriptionId?: parameters["rowFilter.stripe_info.subscriptionId"];
+          customerId?: parameters["rowFilter.stripe_info.customerId"];
+          status?: parameters["rowFilter.stripe_info.status"];
+        };
+        body: {
+          /** stripe_info */
+          stripe_info?: definitions["stripe_info"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/users": {
     get: {
       parameters: {
@@ -1108,6 +1213,41 @@ export interface definitions {
      */
     updated_at?: string;
   };
+  stripe_info: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updated_at?: string;
+    /** Format: character varying */
+    email: string;
+    /** Format: character varying */
+    subscriptionId?: string;
+    /** Format: character varying */
+    customerId?: string;
+    /**
+     * Format: public.stripe_status
+     * @enum {string}
+     */
+    status?:
+      | "created"
+      | "succeeded"
+      | "updated"
+      | "failed"
+      | "deleted"
+      | "canceled";
+  };
   users: {
     /**
      * Format: timestamp with time zone
@@ -1291,6 +1431,22 @@ export interface parameters {
   "rowFilter.stats.app_id": string;
   /** Format: timestamp with time zone */
   "rowFilter.stats.updated_at": string;
+  /** @description stripe_info */
+  "body.stripe_info": definitions["stripe_info"];
+  /** Format: bigint */
+  "rowFilter.stripe_info.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.stripe_info.created_at": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.stripe_info.updated_at": string;
+  /** Format: character varying */
+  "rowFilter.stripe_info.email": string;
+  /** Format: character varying */
+  "rowFilter.stripe_info.subscriptionId": string;
+  /** Format: character varying */
+  "rowFilter.stripe_info.customerId": string;
+  /** Format: public.stripe_status */
+  "rowFilter.stripe_info.status": string;
   /** @description users */
   "body.users": definitions["users"];
   /** Format: timestamp with time zone */
