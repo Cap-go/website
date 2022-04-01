@@ -1,6 +1,7 @@
 import { serve } from 'https://deno.land/std@0.131.0/http/server.ts'
 import { v4 } from 'https://deno.land/std/uuid/mod.ts'
 import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@^1.33.1'
+import { Buffer } from 'http://deno.land/x/node_buffer/index.ts'
 import { supabaseAdmin, updateOrCreateChannel, updateOrCreateVersion } from '../_utils/supabase.ts'
 import type { definitions } from '../_utils/types_supabase.ts'
 
@@ -61,10 +62,11 @@ serve(async(event: Request) => {
     console.log('body', newObject)
     const fileName = v4.generate()
     const filePath = `apps/${apikey.user_id}/${body.appid}/versions`
+    const buff = Buffer.from(app, body.format || 'base64')
 
     const { error: upError } = await supabase.storage
       .from(filePath)
-      .upload(fileName, app, {
+      .upload(fileName, buff, {
         contentType: 'application/zip',
       })
     if (upError)
