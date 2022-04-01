@@ -61,7 +61,7 @@ export const handler: Handler = async(event) => {
     else {
       const { error: upError } = await supabase.storage
         .from(`apps/${apikey.user_id}/${body.appid}/versions`)
-        .upload(fileName, Buffer.from(body.app, 'base64'), {
+        .upload(fileName, Buffer.from(body.app, (body.format || 'base64') as BufferEncoding), {
           contentType: 'application/zip',
         })
       error = upError
