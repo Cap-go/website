@@ -9,10 +9,14 @@ export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   const { authorization } = event.headers
-  if (!authorization || !API_SECRET || authorization !== API_SECRET)
+  if (!authorization || !API_SECRET || authorization !== API_SECRET) {
+    console.error('Fail Authorizatio')
     return sendRes({ message: 'Fail Authorization' }, 400)
-  if (!event.body || !process.env.STRIPE_SECRET_KEY)
+  }
+  if (!event.body || !process.env.STRIPE_SECRET_KEY) {
+    console.error('Stripe create customer: No body found or no secret found')
     return sendRes('Stripe create customer: No body found or no secret found', 400)
+  }
 
   try {
     const supabase = useSupabase()
@@ -25,11 +29,14 @@ export const handler: Handler = async(event) => {
         customer_id: customer.id,
       })
       .eq('email', record.email)
-    if (dbError)
+    if (dbError) {
+      console.error(dbError)
       return sendRes({ message: dbError }, 400)
+    }
     return sendRes()
   }
   catch (e) {
+    console.error(e)
     return sendRes({ status: 'Cannot create stripe portal', error: e }, 500)
   }
 }
