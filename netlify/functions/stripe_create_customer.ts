@@ -22,6 +22,8 @@ export const handler: Handler = async(event) => {
     const supabase = useSupabase()
     const body = JSON.parse(event.body || '')
     const record = body.record as definitions['users']
+    if (record.customer_id)
+      return sendRes()
     const customer = await createCustomer(process.env.STRIPE_SECRET_KEY, record.email)
     const { error: dbStripeError } = await supabase
       .from<definitions['stripe_info']>('stripe_info')
