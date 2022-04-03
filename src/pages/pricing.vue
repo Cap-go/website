@@ -100,7 +100,8 @@
                             "
                 role="button"
               >
-                Start 14 Days Trial
+                <!-- Start 14 Days Trial -->
+                Start Trial
               </a>
 
               <p class="mt-4 text-sm text-gray-600 font-pj">
@@ -214,7 +215,8 @@
                                 "
                   role="button"
                 >
-                  Start 14 Days Trial
+                  <!-- Start 14 Days Trial -->
+                  Start Trial
                 </a>
 
                 <p class="mt-4 text-sm text-gray-600 font-pj">
@@ -340,7 +342,8 @@
                             "
                 role="button"
               >
-                Start 14 Days Trial
+                <!-- Start 14 Days Trial -->
+                Start Trial
               </a>
 
               <p class="mt-4 text-sm text-gray-600 font-pj">
@@ -351,6 +354,9 @@
         </div>
       </div>
 
+      <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkin-orange-500 md:mt-16 font-pj">
+        Pricing system is not implemented yet, enjoy Trial until it goes live.
+      </p>
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
         We don’t bill you automatically until your confirmation. We don’t store or sell your data to anyone.
       </p>
