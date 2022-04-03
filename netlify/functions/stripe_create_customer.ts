@@ -23,13 +23,18 @@ export const handler: Handler = async(event) => {
     const body = JSON.parse(event.body || '')
     const record = body.record as definitions['users']
     const customer = await createCustomer(process.env.STRIPE_SECRET_KEY, record.email)
+    const { error: dbStripeError } = await supabase
+      .from<definitions['stripe_info']>('stripe_info')
+      .insert({
+        customer_id: customer.id,
+      })
     const { error: dbError } = await supabase
       .from<definitions['users']>('users')
       .update({
         customer_id: customer.id,
       })
       .eq('email', record.email)
-    if (dbError) {
+    if (dbError || dbStripeError) {
       console.error(dbError)
       return sendRes({ message: dbError }, 400)
     }

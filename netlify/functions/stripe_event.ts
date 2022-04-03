@@ -21,7 +21,7 @@ export const handler: Handler = async({ body, headers }) => {
 
     const { error: dbError } = await supabase
       .from<definitions['stripe_info']>('stripe_info')
-      .insert(stripeEvent)
+      .update(stripeEvent)
       .eq('customer_id', stripeEvent.customer_id)
     // eslint-disable-next-line no-console
     console.log('stripeEvent', stripeEvent)
