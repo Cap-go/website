@@ -11,6 +11,9 @@ interface AppUpload {
   app: string
   format?: string
   fileName?: string
+  isMultipart?: boolean
+  chunk?: number
+  totalChunks?: number
   channel: string
 }
 
@@ -29,23 +32,48 @@ serve(async(event: Request) => {
       .select()
       .eq('app_id', body.appid)
       .eq('user_id', apikey.user_id)
-    if (!appData || dbError0)
+    if (!appData?.length || dbError0)
       return sendRes({ status: `Cannot find app ${body.appid} in your account` }, 400)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { app, ...newObject } = body
     // eslint-disable-next-line no-console
     console.log('body', newObject)
-    const fileName = v4.generate()
+    let fileName = v4.generate()
     const filePath = `apps/${apikey.user_id}/${body.appid}/versions`
-    const buff = Buffer.from(app, body.format || 'base64')
+    const dataFormat = body.format || 'base64'
+    let error
+    if (body.isMultipart && body.fileName) {
+      fileName = body.fileName
+      const { data, error: dnError } = await supabase
+        .storage
+        .from(filePath)
+        .download(fileName)
+      if (dnError || !data)
+        return sendRes({ status: 'Cannot download partial File to concat', error: JSON.stringify(dnError || { err: 'unknow error' }) }, 400)
 
-    const { error: upError } = await supabase.storage
-      .from(filePath)
-      .upload(fileName, buff, {
-        contentType: 'application/zip',
-      })
-    if (upError)
-      return sendRes({ status: 'Cannot Upload File', error: JSON.stringify(upError) }, 400)
+      const arrayBuffer = await data?.arrayBuffer()
+      const buffOld = Buffer.from(arrayBuffer)
+      const buffNew = Buffer.from(app, dataFormat)
+      const bufAll = Buffer.concat([buffOld, buffNew], buffOld.length + buffNew.length)
+      const { error: upError } = await supabase
+        .storage
+        .from(filePath)
+        .update(fileName, bufAll, {
+          contentType: 'application/zip',
+          upsert: false,
+        })
+      error = upError
+    }
+    else {
+      const { error: upError } = await supabase.storage
+        .from(filePath)
+        .upload(fileName, Buffer.from(app, dataFormat), {
+          contentType: 'application/zip',
+        })
+      error = upError
+    }
+    if (error)
+      return sendRes({ status: 'Cannot Upload File', error: JSON.stringify(error) }, 400)
     const { data: version, error: dbError } = await updateOrCreateVersion({
       bucket_id: fileName,
       user_id: apikey.user_id,
@@ -61,7 +89,7 @@ serve(async(event: Request) => {
     if (dbError || dbError2 || !version || !version.length) {
       return sendRes({
         status: 'Cannot add version',
-        err: JSON.stringify(dbError),
+        err: JSON.stringify(dbError || dbError2 || { err: 'unknow error' }),
       }, 400)
     }
     try {

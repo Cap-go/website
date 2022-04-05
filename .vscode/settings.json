@@ -12,4 +12,7 @@
     "*.css": "postcss",
   },
   "editor.formatOnSave": false,
+  "deno.enable": true,
+  "deno.lint": false,
+  "deno.unstable": true,
 }
