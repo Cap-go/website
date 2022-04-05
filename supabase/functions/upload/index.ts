@@ -1,15 +1,9 @@
 import { serve } from 'https://deno.land/std@0.131.0/http/server.ts'
 import { v4 } from 'https://deno.land/std/uuid/mod.ts'
-import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@^1.33.1'
 import { Buffer } from 'http://deno.land/x/node_buffer/index.ts'
 import { supabaseAdmin, updateOrCreateChannel, updateOrCreateVersion } from '../_utils/supabase.ts'
 import type { definitions } from '../_utils/types_supabase.ts'
-
-const basicHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-}
+import { checkKey, sendRes } from '../_utils/utils.ts'
 
 interface AppUpload {
   appid: string
@@ -19,32 +13,6 @@ interface AppUpload {
   fileName?: string
   channel: string
 }
-
-const checkKey = async(authorization: string | undefined, supabase: SupabaseClient, unAllowed: definitions['apikeys']['mode'][]): Promise<definitions['apikeys'] | null> => {
-  if (!authorization)
-    return null
-  try {
-    const { data, error } = await supabase
-      .from<definitions['apikeys']>('apikeys')
-      .select()
-      .eq('key', authorization)
-    if (!data || !data.length || error || unAllowed.includes(data[0].mode))
-      return null
-    return data[0]
-  }
-  catch (error) {
-    console.error(error)
-    return null
-  }
-}
-
-const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => (new Response(
-  JSON.stringify(data),
-  {
-    status: statusCode,
-    headers: { ...basicHeaders, 'Content-Type': 'application/json' },
-  },
-))
 
 serve(async(event: Request) => {
   const supabase = supabaseAdmin
@@ -56,6 +24,13 @@ serve(async(event: Request) => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
   try {
     const body = (await event.json()) as AppUpload
+    const { data: appData, error: dbError0 } = await supabase
+      .from<definitions['apps']>('apps')
+      .select()
+      .eq('app_id', body.appid)
+      .eq('user_id', apikey.user_id)
+    if (!appData || dbError0)
+      return sendRes({ status: `Cannot find app ${body.appid} in your account` }, 400)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { app, ...newObject } = body
     // eslint-disable-next-line no-console
