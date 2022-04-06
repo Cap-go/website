@@ -87,6 +87,7 @@ serve(async(event: Request) => {
       }).eq('app_id', body.appid)
       .eq('user_id', apikey.user_id)
     if (dbError || dbError2 || !version || !version.length) {
+      console.error(dbError, dbError2, 'unknow error')
       return sendRes({
         status: 'Cannot add version',
         err: JSON.stringify(dbError || dbError2 || { err: 'unknow error' }),
