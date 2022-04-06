@@ -10,11 +10,6 @@ interface GetLatest {
   appid: string
   channel: string
 }
-const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-}
 
 export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
@@ -24,15 +19,9 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = event.queryStringParameters as any as GetLatest
-    if (!body.appid || !body.channel) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({
-          message: 'missing appid or channel',
-        }),
-      }
-    }
+    if (!body.appid || !body.channel)
+      return sendRes({ message: 'missing appid or channel' }, 400)
+
     const supabase = useSupabase()
 
     const { data: channels, error: dbError } = await supabase
@@ -45,41 +34,45 @@ export const handler: Handler = async(event) => {
         version (
           name,
           user_id,
-          bucket_id
+          bucket_id,
+          external_url
         )
       `)
       .eq('app_id', body.appid)
       .eq('name', body.channel)
       .eq('public', true)
     if (dbError || !channels || !channels.length) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({
-          message: 'Cannot get channel',
-          err: JSON.stringify(dbError),
-        }),
-      }
+      return sendRes({
+        message: 'Cannot get channel',
+        err: JSON.stringify(dbError),
+      }, 400)
     }
     const channel = channels[0]
-    const res = await supabase
-      .storage
-      .from(`apps/${channel.version.user_id}/${channel.app_id}/versions`)
-      .createSignedUrl(channel.version.bucket_id, 60)
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ version: channel.version.name, url: res.signedURL }),
+    if (!channel.version.bucket_id && !channel.version.external_url) {
+      return sendRes({
+        message: 'Cannot get bucket_id',
+        err: JSON.stringify(dbError),
+      }, 400)
     }
+    let signedURL = channel.version.external_url || ''
+    if (channel.version.bucket_id && !channel.version.external_url) {
+      const res = await supabase
+        .storage
+        .from(`apps/${channel.version.user_id}/${channel.app_id}/versions`)
+        .createSignedUrl(channel.version.bucket_id, 60)
+      if (res && res.signedURL)
+        signedURL = res.signedURL
+    }
+
+    return sendRes({
+      version: channel.version.name,
+      url: signedURL,
+    })
   }
   catch (e) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
-        message: 'Cannot get latest version',
-        err: `${e}!`,
-      }),
-    }
+    return sendRes({
+      message: 'Cannot get latest version',
+      err: `${e}!`,
+    }, 500)
   }
 }
