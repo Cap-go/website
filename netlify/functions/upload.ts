@@ -11,6 +11,7 @@ interface AppUpload {
   format?: string
   fileName?: string
   isMultipart?: boolean
+  external?: string
   chunk?: number
   totalChunks?: number
   channel: string
@@ -36,7 +37,7 @@ export const handler: Handler = async(event) => {
     const dataFormat: BufferEncoding = (body.format || 'base64') as BufferEncoding
     let fileName = uuidv4()
     let error
-    if (body.isMultipart && body.fileName) {
+    if (body.isMultipart && body.fileName && !body.external) {
       fileName = body.fileName
       const { data, error: dnError } = await supabase
         .storage
@@ -58,7 +59,7 @@ export const handler: Handler = async(event) => {
         })
       error = upError
     }
-    else {
+    else if (!body.external) {
       const { error: upError } = await supabase.storage
         .from(`apps/${apikey.user_id}/${body.appid}/versions`)
         .upload(fileName, Buffer.from(body.app, (body.format || 'base64') as BufferEncoding), {
@@ -69,6 +70,9 @@ export const handler: Handler = async(event) => {
     if (error)
       return sendRes({ status: 'Cannot Upload File', error: JSON.stringify(error) }, 400)
 
+    if (body.external && !body.external.startsWith('https://'))
+      return sendRes({ status: 'external refused', error: `it should start with "https://" current is "${body.external}"` }, 400)
+
     if (body.isMultipart) {
       // send filename to allow partial upload
       const isDone = (body.chunk || 0) === (body.totalChunks || 0) && body.fileName
@@ -76,10 +80,11 @@ export const handler: Handler = async(event) => {
         return sendRes({ status: 'multipart', fileName })
     }
     const { data: version, error: dbError } = await updateOrCreateVersion({
-      bucket_id: fileName,
+      bucket_id: body.external ? undefined : fileName,
       user_id: apikey.user_id,
       name: body.version,
       app_id: body.appid,
+      external_url: body.external,
     })
     const { error: dbError2 } = await supabase
       .from<definitions['apps']>('apps')
