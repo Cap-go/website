@@ -14,7 +14,7 @@ This tutorial focuses on the GitHub hosting, but you can adapt it with little tw
 
 ## Commit convention
 
-First you need to start following the commit convention [`conventionalcommits`](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how upgrade the version number, it's 5 min to learn it.
+First you need to start following the commit convention [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how upgrade the version number, it's 5 min to learn it.
 
 ![Conventional commits](/conventional_commits.webp)
 
