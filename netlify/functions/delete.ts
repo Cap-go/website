@@ -61,6 +61,10 @@ export const handler: Handler = async(event) => {
         return sendRes({ status: `App ${body.appid}@${body.version} not found in database`, error: delAppSpecVersionError }, 400)
       return sendRes()
     }
+    const { error: delChannelUserError } = await supabase
+      .from<definitions['channel_users']>('channel_users')
+      .delete()
+      .eq('app_id', body.appid)
     const { error: delAppStatsVersionError } = await supabase
       .from<definitions['stats']>('stats')
       .delete()
@@ -70,8 +74,12 @@ export const handler: Handler = async(event) => {
       .delete()
       .eq('app_id', body.appid)
 
-    if (delDevicesVersionError || delAppStatsVersionError)
-      return sendRes({ status: `Something went wrong when trying to delete ${body.appid}@${body.version}`, error: delDevicesVersionError }, 400)
+    if (delDevicesVersionError || delAppStatsVersionError || delChannelUserError) {
+      return sendRes({
+        status: `Something went wrong when trying to delete ${body.appid}@${body.version}`,
+        error: delDevicesVersionError || delAppStatsVersionError || delChannelUserError,
+      }, 400)
+    }
     const { data, error: vError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()
