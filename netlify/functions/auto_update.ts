@@ -45,17 +45,18 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('public', true)
     if (dbError || !channels || !channels.length) {
+      console.log'Cannot get channel', dbError)
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
-      }, 400)
+      }, 200)
     }
     const channel = channels[0]
     if (!channel.version.bucket_id && !channel.version.external_url) {
+      console.log'Cannot get zip file')
       return sendRes({
         message: 'Cannot get zip file',
-        err: JSON.stringify(dbError),
-      }, 400)
+      }, 200)
     }
     let signedURL = channel.version.external_url || ''
     if (channel.version.bucket_id && !channel.version.external_url) {
