@@ -14,13 +14,16 @@ export const handler: Handler = async(event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
+  let {
+    cap_version_name,
+  } = event.headers
   const {
     cap_platform,
     cap_app_id,
     cap_device_id,
     cap_version_build,
-    cap_version_name,
   } = event.headers
+  cap_version_name = cap_version_name === 'builtin' ? cap_version_build : cap_version_name
   try {
     if (!cap_app_id || !cap_device_id || !cap_version_build || !cap_version_name || !cap_platform) {
       console.error('Cannot get all headers', cap_platform,
@@ -33,34 +36,6 @@ export const handler: Handler = async(event) => {
 
     const supabase = useSupabase()
 
-    const { data: dataVersion, error: errorVersion } = await supabase
-      .from<definitions['app_versions']>('app_versions')
-      .select()
-      .eq('app_id', cap_app_id)
-      .eq('name', cap_version_name)
-    if (!dataVersion || !dataVersion.length || errorVersion) {
-      console.error(`Cannot get current app_versions ${cap_app_id}@${cap_version_name}`)
-      return sendRes({
-        message: 'Cannot get zip file',
-        err: errorVersion,
-      }, 200)
-    }
-    const { data: dataDevice, error: errorDevice } = await supabase
-      .from<definitions['devices']>('devices')
-      .select()
-      .eq('app_id', cap_app_id)
-      .eq('device_id', cap_device_id)
-    if (!dataDevice || !dataDevice.length || errorDevice) {
-      await supabase
-        .from<definitions['devices']>('devices')
-        .insert({
-          app_id: cap_app_id,
-          device_id: cap_device_id,
-          platform: cap_platform,
-          version: dataVersion[0].id,
-        })
-    }
-
     const { data: channels, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
@@ -71,6 +46,7 @@ export const handler: Handler = async(event) => {
         disableAutoUpdateUnderNative,
         disableAutoUpdateToMajor,
         version (
+          id,
           name,
           user_id,
           bucket_id,
@@ -92,6 +68,21 @@ export const handler: Handler = async(event) => {
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
+    }
+    const { data: dataDevice, error: errorDevice } = await supabase
+      .from<definitions['devices']>('devices')
+      .select()
+      .eq('app_id', cap_app_id)
+      .eq('device_id', cap_device_id)
+    if (!dataDevice || !dataDevice.length || errorDevice) {
+      await supabase
+        .from<definitions['devices']>('devices')
+        .insert({
+          app_id: cap_app_id,
+          device_id: cap_device_id,
+          platform: cap_platform,
+          version: channel.version.id,
+        })
     }
     let signedURL = channel.version.external_url || ''
     if (channel.version.bucket_id && !channel.version.external_url) {
