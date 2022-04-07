@@ -22,8 +22,14 @@ export const handler: Handler = async(event) => {
     cap_version_name,
   } = event.headers
   try {
-    if (!cap_app_id || cap_device_id || cap_version_build || cap_version_name)
+    if (!cap_app_id || !cap_device_id || !cap_version_build || !cap_version_name || !cap_platform) {
+      console.error('Cannot get all headers', cap_platform,
+        cap_app_id,
+        cap_device_id,
+        cap_version_build,
+        cap_version_name)
       return sendRes({ message: 'missing appid' }, 400)
+    }
 
     const supabase = useSupabase()
 
@@ -33,7 +39,7 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('name', cap_version_name)
     if (!dataVersion || !dataVersion.length || errorVersion) {
-      console.log(`Cannot get current app_versions ${cap_app_id}@${cap_version_name}`)
+      console.error(`Cannot get current app_versions ${cap_app_id}@${cap_version_name}`)
       return sendRes({
         message: 'Cannot get zip file',
         err: errorVersion,
@@ -74,7 +80,7 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('public', true)
     if (dbError || !channels || !channels.length) {
-      console.log('Cannot get channel', dbError)
+      console.error('Cannot get channel', dbError)
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -82,7 +88,7 @@ export const handler: Handler = async(event) => {
     }
     const channel = channels[0]
     if (!channel.version.bucket_id && !channel.version.external_url) {
-      console.log('Cannot get zip file')
+      console.error('Cannot get zip file')
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
