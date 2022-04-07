@@ -15,6 +15,7 @@ export const handler: Handler = async(event) => {
     return sendRes()
 
   const {
+    cap_platform,
     cap_app_id,
     cap_device_id,
     cap_version_build,
@@ -25,6 +26,34 @@ export const handler: Handler = async(event) => {
       return sendRes({ message: 'missing appid' }, 400)
 
     const supabase = useSupabase()
+
+    const { data: dataVersion, error: errorVersion } = await supabase
+      .from<definitions['app_versions']>('app_versions')
+      .select()
+      .eq('app_id', cap_app_id)
+      .eq('name', cap_version_name)
+    if (!dataVersion || !dataVersion.length || errorVersion) {
+      console.log(`Cannot get current app_versions ${cap_app_id}@${cap_version_name}`)
+      return sendRes({
+        message: 'Cannot get zip file',
+        err: errorVersion,
+      }, 200)
+    }
+    const { data: dataDevice, error: errorDevice } = await supabase
+      .from<definitions['devices']>('devices')
+      .select()
+      .eq('app_id', cap_app_id)
+      .eq('device_id', cap_device_id)
+    if (!dataDevice || !dataDevice.length || errorDevice) {
+      await supabase
+        .from<definitions['devices']>('devices')
+        .insert({
+          app_id: cap_app_id,
+          device_id: cap_device_id,
+          platform: cap_platform,
+          version: dataVersion[0].id,
+        })
+    }
 
     const { data: channels, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
