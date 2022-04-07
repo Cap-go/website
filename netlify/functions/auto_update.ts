@@ -97,22 +97,23 @@ export const handler: Handler = async(event) => {
     if (cap_version_name === channel.version.name) {
       return sendRes({
         message: 'No new version available',
-        signedURL,
       }, 200)
     }
     if (!channel.disableAutoUpdateToMajor && semver.major(channel.version.name) > semver.major(cap_version_name)) {
       return sendRes({
         major: true,
         message: 'Cannot upgrade major version',
-        signedURL,
+        version: channel.version.name,
       }, 200)
     }
     if (!channel.disableAutoUpdateUnderNative && semver.lt(cap_version_build, channel.version.name)) {
       return sendRes({
         message: 'Cannot revert under native version',
-        signedURL,
+        version: channel.version.name,
       }, 200)
     }
+    // eslint-disable-next-line no-console
+    console.log('New version available', channel.version.name, signedURL)
     return sendRes({
       version: channel.version.name,
       url: signedURL,
