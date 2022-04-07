@@ -45,7 +45,7 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('public', true)
     if (dbError || !channels || !channels.length) {
-      console.log'Cannot get channel', dbError)
+      console.log('Cannot get channel', dbError)
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -53,7 +53,7 @@ export const handler: Handler = async(event) => {
     }
     const channel = channels[0]
     if (!channel.version.bucket_id && !channel.version.external_url) {
-      console.log'Cannot get zip file')
+      console.log('Cannot get zip file')
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
