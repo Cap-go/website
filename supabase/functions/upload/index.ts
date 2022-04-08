@@ -34,6 +34,8 @@ serve(async(event: Request) => {
       .eq('user_id', apikey.user_id)
     if (!appData?.length || dbError0)
       return sendRes({ status: `Cannot find app ${body.appid} in your account` }, 400)
+    if (body.totalChunks && body.totalChunks > 30)
+      return sendRes({ status: 'app too big', error: 'we dont support app above 30 Mb for now, try to optimise your assets.' }, 400)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { app, ...newObject } = body
     // eslint-disable-next-line no-console
