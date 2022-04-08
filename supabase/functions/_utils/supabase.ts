@@ -44,6 +44,10 @@ export const updateOrCreateVersion = async(update: Partial<definitions['app_vers
 export const updateOrCreateChannel = async(update: Partial<definitions['channels']>) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
+  if (!update.app_id || !update.name || !update.created_by) {
+    console.error('missing app_id, name, or created_by')
+    return Promise.reject(new Error('missing app_id, name, or created_by'))
+  }
   const { data, error } = await supabaseAdmin
     .from<definitions['channels']>('channels')
     .select()
