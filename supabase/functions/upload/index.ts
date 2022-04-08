@@ -1,6 +1,5 @@
-import { serve } from 'https://deno.land/std@0.131.0/http/server.ts'
-import { v4 } from 'https://deno.land/std/uuid/mod.ts'
-import { Buffer } from 'http://deno.land/x/node_buffer/index.ts'
+import { serve } from 'https://deno.land/std@0.133.0/http/server.ts'
+import { Buffer } from 'http://deno.land/x/node_buffer@1.1.0/index.ts'
 import { supabaseAdmin, updateOrCreateChannel, updateOrCreateVersion } from '../_utils/supabase.ts'
 import type { definitions } from '../_utils/types_supabase.ts'
 import { checkKey, sendRes } from '../_utils/utils.ts'
@@ -39,7 +38,7 @@ serve(async(event: Request) => {
     const { app, ...newObject } = body
     // eslint-disable-next-line no-console
     console.log('body', newObject)
-    let fileName = v4.generate()
+    let fileName = globalThis.crypto.randomUUID()
     const filePath = `apps/${apikey.user_id}/${body.appid}/versions`
     const dataFormat = body.format || 'base64'
     let error
@@ -52,7 +51,7 @@ serve(async(event: Request) => {
       if (dnError || !data)
         return sendRes({ status: 'Cannot download partial File to concat', error: JSON.stringify(dnError || { err: 'unknow error' }) }, 400)
 
-      const arrayBuffer = await data?.arrayBuffer()
+      const arrayBuffer = await data.arrayBuffer()
       const buffOld = Buffer.from(arrayBuffer)
       const buffNew = Buffer.from(app, dataFormat)
       const bufAll = Buffer.concat([buffOld, buffNew], buffOld.length + buffNew.length)
@@ -75,6 +74,9 @@ serve(async(event: Request) => {
     }
     if (error)
       return sendRes({ status: 'Cannot Upload File', error: JSON.stringify(error) }, 400)
+    if (body.isMultipart && !((body.chunk || 0) === (body.totalChunks || 0) && body.fileName))
+      return sendRes({ status: 'multipart', fileName })
+
     if (body.external && !body.external.startsWith('https://'))
       return sendRes({ status: 'external refused', error: `it should start with "https://" current is "${body.external}"` }, 400)
     const { data: version, error: dbError } = await updateOrCreateVersion({
