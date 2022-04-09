@@ -94,6 +94,16 @@ export const handler: Handler = async(event) => {
           version: channel.version.id,
         })
     }
+    else if (dataDevice[0].version !== channel.version.id || dataDevice[0].plugin_version !== cap_plugin_version) {
+      await supabase
+        .from<definitions['devices']>('devices')
+        .update({
+          plugin_version: cap_plugin_version,
+          version: channel.version.id,
+        })
+        .eq('app_id', cap_app_id)
+        .eq('device_id', cap_device_id)
+    }
     let signedURL = channel.version.external_url || ''
     if (channel.version.bucket_id && !channel.version.external_url) {
       const res = await supabase
