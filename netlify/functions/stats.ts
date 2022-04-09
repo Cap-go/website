@@ -8,6 +8,7 @@ interface AppStats {
   action: string
   device_id: string
   version_name?: string
+  plugin_version?: string
   version: number
   version_build: string
   app_id: string
@@ -24,6 +25,7 @@ export const handler: Handler = async(event) => {
     platform: body.platform as definitions['stats']['platform'],
     device_id: body.device_id,
     app_id: body.app_id,
+    plugin_version: body.plugin_version,
     version: -1,
     updated_at: new Date().toISOString(),
   }
