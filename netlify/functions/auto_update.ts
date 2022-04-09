@@ -35,6 +35,13 @@ export const handler: Handler = async(event) => {
         cap_version_name)
       return sendRes({ message: 'missing appid' }, 400)
     }
+    // eslint-disable-next-line no-console
+    console.log('Headers', cap_platform,
+      cap_app_id,
+      cap_device_id,
+      cap_version_build,
+      cap_plugin_version,
+      cap_version_name)
 
     const supabase = useSupabase()
 
