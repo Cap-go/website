@@ -124,12 +124,14 @@ export const handler: Handler = async(event) => {
         major: true,
         message: 'Cannot upgrade major version',
         version: channel.version.name,
+        old: cap_version_name,
       }, 200)
     }
-    if (!channel.disableAutoUpdateUnderNative && semver.lt(cap_version_build, channel.version.name)) {
+    if (!channel.disableAutoUpdateUnderNative && semver.lt(channel.version.name, cap_version_build)) {
       return sendRes({
         message: 'Cannot revert under native version',
         version: channel.version.name,
+        old: cap_version_name,
       }, 200)
     }
     // eslint-disable-next-line no-console
