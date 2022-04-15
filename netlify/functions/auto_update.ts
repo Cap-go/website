@@ -142,6 +142,7 @@ export const handler: Handler = async(event) => {
     })
   }
   catch (e) {
+    console.error('error', e)
     return sendRes({
       message: 'Cannot get latest version',
       err: `${e}!`,
