@@ -55,9 +55,9 @@ To install the plugin into your Capacitor app.
 And then add to your app this code as replacement of CodePush one:
 
 ```javascript
-  import { CapgoCapacitorUpdater } from '@capgo/capacitor-updater'
+  import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-  CapgoCapacitorUpdater.notifyAppReady()
+  CapacitorUpdater.notifyAppReady()
 ```
 
 This will tell the native plugin the installation as succeeded.
@@ -118,7 +118,7 @@ Add this config to your Capacitor config file:
 ```json
 {
   "plugins": {
-    "CapgoCapacitorUpdater": {
+    "CapacitorUpdater": {
       "autoUpdate": true,
     },
   },
