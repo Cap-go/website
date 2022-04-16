@@ -45,7 +45,7 @@ If you do not have Node or NPM installed on your computer, you will need to do t
 
 The Capgo CLI is required to integrate and manage Capgo's Live Updates feature.
 
-    npm install -g capgo
+    npm install -g @capgo/cli
 
 ### Create package.json and Capacitor config files [#](https://capgo.app/blog/appcenter-migration#create-packagejson-and-ionic-config-files "Direct link to heading")
 
@@ -92,13 +92,13 @@ Once you’re logged into Capgo, navigate to the Account page then click on API 
 
 From a command line, directly into the root of your Capacitor app run:
 
-`npm i capacitor-updater && npx cap sync`
+`npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
 
 And then add to your app this code as replacement of CodePush one:
 
 ```javascript
-  import { CapacitorUpdater } from 'capacitor-updater'
+  import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
   CapacitorUpdater.notifyAppReady()
 ```
@@ -151,10 +151,11 @@ Add this config to your Capacitor config file:
 
 ```json
 {
-	"plugins": {
-		"CapacitorUpdater": {
-			"autoUpdateUrl": "https://capgo.app/api/latest?appid=**.****.***&channel=dev"
-		}
+    "plugins": {
+        "CapacitorUpdater": {
+            "autoUpdate": true
+        }
+    }
 }
 ```
 

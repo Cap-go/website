@@ -49,13 +49,13 @@ Then click on the "write" key to copy it in your clipboard.
 
 From a command line, directly into the root of your Capacitor app run:
 
-`npm i capacitor-updater && npx cap sync`
+`npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
 
 And then add to your app this code as replacement of CodePush one:
 
 ```javascript
-  import { CapacitorUpdater } from 'capacitor-updater'
+  import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
   CapacitorUpdater.notifyAppReady()
 ```
