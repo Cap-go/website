@@ -18,6 +18,9 @@ export const handler: Handler = async(event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
   const supabase = useSupabase()
+  let statsDb = 'stats'
+  let deviceDb = 'devices'
+
   // eslint-disable-next-line no-console
   console.log('event.body', event.body)
   const body = JSON.parse(event.body || '{}') as AppStats
@@ -50,27 +53,30 @@ export const handler: Handler = async(event) => {
     device.version = data[0].id
   }
   else {
-    return sendRes({ status: 'ko', error: error || 'version not found' }, 400)
+    device.version = body.version_name
+    stat.version = body.version_name
+    statsDb = `${statsDb}_onprem`
+    deviceDb = `${deviceDb}_onprem`
   }
   const { data: dataDevice, error: errorDevice } = await supabase
-    .from<definitions['devices']>('devices')
+    .from<definitions['devices']>(deviceDb)
     .select()
     .eq('app_id', body.app_id)
     .eq('device_id', body.device_id)
   if (!dataDevice || !dataDevice.length || errorDevice) {
     await supabase
-      .from<definitions['devices']>('devices')
+      .from<definitions['devices']>(deviceDb)
       .insert(device)
   }
   else {
     await supabase
-      .from<definitions['devices']>('devices')
+      .from<definitions['devices']>(deviceDb)
       .update(device)
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
   }
   await supabase
-    .from<definitions['stats']>('stats')
+    .from<definitions['stats']>(statsDb)
     .insert(stat)
   return sendRes()
 }
