@@ -59,3 +59,26 @@ export const updateOrCreateChannel = async(update: Partial<definitions['channels
       .insert(update)
   }
 }
+
+export const updateOrCreateDevice = async(update: Partial<definitions['devices']>) => {
+  const supabase = useSupabase()
+  // eslint-disable-next-line no-console
+  console.log('updateOrCreateDevice', update)
+  const { data, error } = await supabase
+    .from<definitions['devices']>('devices')
+    .select()
+    .eq('app_id', update.app_id)
+    .eq('device_id', update.device_id)
+  if (!data || !data.length || error) {
+    return supabase
+      .from<definitions['devices']>('devices')
+      .insert(update)
+  }
+  else {
+    return supabase
+      .from<definitions['devices']>('devices')
+      .update(update)
+      .eq('app_id', update.app_id)
+      .eq('device_id', update.device_id)
+  }
+}

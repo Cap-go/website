@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
-import { useSupabase } from '../services/supabase'
+import { updateOrCreateDevice, useSupabase } from '../services/supabase'
 import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
@@ -64,6 +64,23 @@ export const handler: Handler = async(event) => {
       `)
       .eq('app_id', cap_app_id)
       .eq('public', true)
+    const { data: devicesOverride } = await supabase
+      .from<definitions['devices_override'] & Channel>('devices_override')
+      .select(`
+        device_id,
+        app_id,
+        created_at,
+        updated_at,
+        version (
+          id,
+          name,
+          user_id,
+          bucket_id,
+          external_url
+        )
+      `)
+      .eq('device_id', cap_device_id)
+      .eq('app_id', cap_app_id)
     if (dbError || !channels || !channels.length) {
       console.error('Cannot get channel', dbError)
       return sendRes({
@@ -72,72 +89,57 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     const channel = channels[0]
-    if (!channel.version.bucket_id && !channel.version.external_url) {
+    let version = channel.version
+    if (devicesOverride && devicesOverride.length)
+      version = devicesOverride[0].version
+
+    if (!version.bucket_id && !version.external_url) {
       console.error('Cannot get zip file')
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
     }
-    const { data: dataDevice, error: errorDevice } = await supabase
-      .from<definitions['devices']>('devices')
-      .select()
-      .eq('app_id', cap_app_id)
-      .eq('device_id', cap_device_id)
-    if (!dataDevice || !dataDevice.length || errorDevice) {
-      await supabase
-        .from<definitions['devices']>('devices')
-        .insert({
-          app_id: cap_app_id,
-          device_id: cap_device_id,
-          platform: cap_platform,
-          plugin_version: cap_plugin_version,
-          version: channel.version.id,
-        })
-    }
-    else if (dataDevice[0].version !== channel.version.id || dataDevice[0].plugin_version !== cap_plugin_version) {
-      await supabase
-        .from<definitions['devices']>('devices')
-        .update({
-          plugin_version: cap_plugin_version,
-          version: channel.version.id,
-        })
-        .eq('app_id', cap_app_id)
-        .eq('device_id', cap_device_id)
-    }
-    let signedURL = channel.version.external_url || ''
-    if (channel.version.bucket_id && !channel.version.external_url) {
+    await updateOrCreateDevice({
+      app_id: cap_app_id,
+      device_id: cap_device_id,
+      platform: cap_platform,
+      plugin_version: cap_plugin_version,
+      version: version.id,
+    })
+    let signedURL = version.external_url || ''
+    if (version.bucket_id && !version.external_url) {
       const res = await supabase
         .storage
-        .from(`apps/${channel.version.user_id}/${channel.app_id}/versions`)
-        .createSignedUrl(channel.version.bucket_id, 60)
+        .from(`apps/${version.user_id}/${cap_app_id}/versions`)
+        .createSignedUrl(version.bucket_id, 60)
       if (res && res.signedURL)
         signedURL = res.signedURL
     }
 
-    if (cap_version_name === channel.version.name) {
+    if (cap_version_name === version.name) {
       return sendRes({
         message: 'No new version available',
       }, 200)
     }
-    if (!channel.disableAutoUpdateToMajor && semver.major(channel.version.name) > semver.major(cap_version_name)) {
+    if (!channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
       return sendRes({
         major: true,
         message: 'Cannot upgrade major version',
-        version: channel.version.name,
+        version: version.name,
         old: cap_version_name,
       }, 200)
     }
-    if (!channel.disableAutoUpdateUnderNative && semver.lt(channel.version.name, cap_version_build)) {
+    if (!channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
       return sendRes({
         message: 'Cannot revert under native version',
-        version: channel.version.name,
+        version: version.name,
         old: cap_version_name,
       }, 200)
     }
     // eslint-disable-next-line no-console
-    console.log('New version available', channel.version.name, signedURL)
+    console.log('New version available', version.name, signedURL)
     return sendRes({
-      version: channel.version.name,
+      version: version.name,
       url: signedURL,
     })
   }

@@ -762,6 +762,105 @@ export interface paths {
       };
     };
   };
+  "/devices_override": {
+    get: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.devices_override.created_at"];
+          updated_at?: parameters["rowFilter.devices_override.updated_at"];
+          device_id?: parameters["rowFilter.devices_override.device_id"];
+          version?: parameters["rowFilter.devices_override.version"];
+          app_id?: parameters["rowFilter.devices_override.app_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["devices_override"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** devices_override */
+          devices_override?: definitions["devices_override"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.devices_override.created_at"];
+          updated_at?: parameters["rowFilter.devices_override.updated_at"];
+          device_id?: parameters["rowFilter.devices_override.device_id"];
+          version?: parameters["rowFilter.devices_override.version"];
+          app_id?: parameters["rowFilter.devices_override.app_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.devices_override.created_at"];
+          updated_at?: parameters["rowFilter.devices_override.updated_at"];
+          device_id?: parameters["rowFilter.devices_override.device_id"];
+          version?: parameters["rowFilter.devices_override.version"];
+          app_id?: parameters["rowFilter.devices_override.app_id"];
+        };
+        body: {
+          /** devices_override */
+          devices_override?: definitions["devices_override"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/stats": {
     get: {
       parameters: {
@@ -1564,6 +1663,37 @@ export interface definitions {
     /** Format: character varying */
     device_id?: string;
   };
+  devices_override: {
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updated_at?: string;
+    /**
+     * Format: text
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `devices.device_id`.<fk table='devices' column='device_id'/>
+     */
+    device_id: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `app_versions.id`.<fk table='app_versions' column='id'/>
+     */
+    version: number;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `apps.app_id`.<fk table='apps' column='app_id'/>
+     */
+    app_id: string;
+  };
   stats: {
     /**
      * Format: bigint
@@ -1872,6 +2002,18 @@ export interface parameters {
   "rowFilter.devices_onprem.app_id": string;
   /** Format: character varying */
   "rowFilter.devices_onprem.device_id": string;
+  /** @description devices_override */
+  "body.devices_override": definitions["devices_override"];
+  /** Format: timestamp with time zone */
+  "rowFilter.devices_override.created_at": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.devices_override.updated_at": string;
+  /** Format: text */
+  "rowFilter.devices_override.device_id": string;
+  /** Format: bigint */
+  "rowFilter.devices_override.version": string;
+  /** Format: character varying */
+  "rowFilter.devices_override.app_id": string;
   /** @description stats */
   "body.stats": definitions["stats"];
   /** Format: bigint */

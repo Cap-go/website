@@ -29,18 +29,16 @@ export const handler: Handler = async(event) => {
     device_id: body.device_id,
     app_id: body.app_id,
     plugin_version: body.plugin_version,
-    version: -1,
-    updated_at: new Date().toISOString(),
+    version: null,
   }
 
-  const stat: Partial<definitions['stats']> = {
+  const stat: definitions['stats'] = {
     platform: body.platform as definitions['stats']['platform'],
     device_id: body.device_id,
     action: body.action,
     app_id: body.app_id,
     version_build: body.version_build,
-    version: -1,
-    updated_at: new Date().toISOString(),
+    version: null,
   }
 
   const { data, error } = await supabase

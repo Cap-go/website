@@ -1,5 +1,5 @@
 import type { Handler } from '@netlify/functions'
-import { useSupabase } from '../services/supabase'
+import { updateOrCreateDevice, useSupabase } from '../services/supabase'
 import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
@@ -54,6 +54,13 @@ export const handler: Handler = async(event) => {
         err: JSON.stringify(dbError),
       }, 400)
     }
+    // await updateOrCreateDevice({
+    //   app_id: body.appid,
+    //   device_id: 'unknown',
+    //   platform: 'unknow',
+    //   plugin_version: '2.3.3',
+    //   version: channel.version.id,
+    // })
     let signedURL = channel.version.external_url || ''
     if (channel.version.bucket_id && !channel.version.external_url) {
       const res = await supabase
