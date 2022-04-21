@@ -102,20 +102,22 @@ serve(async(event: Request) => {
       }, 400)
     }
     try {
-      const { error: dbError2 } = await updateOrCreateChannel({
+      const { error: dbError3 } = await updateOrCreateChannel({
         name: body.channel,
         app_id: body.appid,
         created_by: apikey.user_id,
         version: version[0].id,
       })
-      if (dbError2) {
+      if (dbError3) {
+        console.error(dbError3, 'unknow error')
         return sendRes({
           status: 'Cannot update or add channel',
-          error: JSON.stringify(dbError2),
+          error: JSON.stringify(dbError3),
         }, 400)
       }
     }
     catch (err) {
+      console.error(err, 'unknow error')
       return sendRes({
         status: 'Error channel',
         error: JSON.stringify(err),
