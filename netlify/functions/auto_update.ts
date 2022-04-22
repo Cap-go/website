@@ -64,6 +64,26 @@ export const handler: Handler = async(event) => {
       `)
       .eq('app_id', cap_app_id)
       .eq('public', true)
+    const { data: channelOverride } = await supabase
+      .from<definitions['channel_device'] & Channel>('channel_device')
+      .select(`
+        device_id,
+        app_id,
+        channel_id (
+          name,
+          version (
+            id,
+            name,
+            user_id,
+            bucket_id,
+            external_url
+          )
+        ),
+        created_at,
+        updated_at
+      `)
+      .eq('device_id', cap_device_id)
+      .eq('app_id', cap_app_id)
     const { data: devicesOverride } = await supabase
       .from<definitions['devices_override'] & Channel>('devices_override')
       .select(`
@@ -90,6 +110,8 @@ export const handler: Handler = async(event) => {
     }
     const channel = channels[0]
     let version = channel.version
+    if (channelOverride && channelOverride.length)
+      version = channelOverride[0].channel_id.version
     if (devicesOverride && devicesOverride.length)
       version = devicesOverride[0].version
 

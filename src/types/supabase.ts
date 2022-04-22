@@ -333,6 +333,108 @@ export interface paths {
       };
     };
   };
+  "/channel_devices": {
+    get: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.channel_devices.created_at"];
+          channel_id?: parameters["rowFilter.channel_devices.channel_id"];
+          app_id?: parameters["rowFilter.channel_devices.app_id"];
+          updated_at?: parameters["rowFilter.channel_devices.updated_at"];
+          created_by?: parameters["rowFilter.channel_devices.created_by"];
+          device_id?: parameters["rowFilter.channel_devices.device_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["channel_devices"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** channel_devices */
+          channel_devices?: definitions["channel_devices"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.channel_devices.created_at"];
+          channel_id?: parameters["rowFilter.channel_devices.channel_id"];
+          app_id?: parameters["rowFilter.channel_devices.app_id"];
+          updated_at?: parameters["rowFilter.channel_devices.updated_at"];
+          created_by?: parameters["rowFilter.channel_devices.created_by"];
+          device_id?: parameters["rowFilter.channel_devices.device_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.channel_devices.created_at"];
+          channel_id?: parameters["rowFilter.channel_devices.channel_id"];
+          app_id?: parameters["rowFilter.channel_devices.app_id"];
+          updated_at?: parameters["rowFilter.channel_devices.updated_at"];
+          created_by?: parameters["rowFilter.channel_devices.created_by"];
+          device_id?: parameters["rowFilter.channel_devices.device_id"];
+        };
+        body: {
+          /** channel_devices */
+          channel_devices?: definitions["channel_devices"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/channel_users": {
     get: {
       parameters: {
@@ -1503,6 +1605,43 @@ export interface definitions {
      */
     id?: string;
   };
+  channel_devices: {
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `channels.id`.<fk table='channels' column='id'/>
+     */
+    channel_id: number;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `apps.app_id`.<fk table='apps' column='app_id'/>
+     */
+    app_id: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updated_at: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    created_by?: string;
+    /**
+     * Format: text
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `devices.device_id`.<fk table='devices' column='device_id'/>
+     */
+    device_id: string;
+  };
   channel_users: {
     /**
      * Format: bigint
@@ -1932,6 +2071,20 @@ export interface parameters {
   "rowFilter.apps.updated_at": string;
   /** Format: uuid */
   "rowFilter.apps.id": string;
+  /** @description channel_devices */
+  "body.channel_devices": definitions["channel_devices"];
+  /** Format: timestamp with time zone */
+  "rowFilter.channel_devices.created_at": string;
+  /** Format: bigint */
+  "rowFilter.channel_devices.channel_id": string;
+  /** Format: character varying */
+  "rowFilter.channel_devices.app_id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.channel_devices.updated_at": string;
+  /** Format: uuid */
+  "rowFilter.channel_devices.created_by": string;
+  /** Format: text */
+  "rowFilter.channel_devices.device_id": string;
   /** @description channel_users */
   "body.channel_users": definitions["channel_users"];
   /** Format: bigint */
