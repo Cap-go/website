@@ -62,7 +62,7 @@ serve(async(event: Request) => {
         .from(filePath)
         .update(fileName, bufAll, {
           contentType: 'application/zip',
-          upsert: false,
+          upsert: true,
         })
       error = upError
     }
@@ -74,8 +74,10 @@ serve(async(event: Request) => {
         })
       error = upError
     }
-    if (error)
+    if (error) {
+      console.error(error, 'unknow error')
       return sendRes({ status: 'Cannot Upload File', error: JSON.stringify(error) }, 400)
+    }
     if (body.isMultipart && !((body.chunk || 0) === (body.totalChunks || 0) && body.fileName))
       return sendRes({ status: 'multipart', fileName })
 
