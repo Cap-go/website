@@ -2,6 +2,7 @@ import type { Handler } from '@netlify/functions'
 import { createPortal } from 'netlify/services/stripe'
 import { useSupabase } from '../services/supabase'
 import { sendRes } from './../services/utils'
+import type { definitions } from '~/types/supabase'
 
 interface PortalData {
   callbackUrl: string
@@ -19,10 +20,17 @@ export const handler: Handler = async(event) => {
 
   const supabase = useSupabase()
   try {
-    const { user, error } = await supabase.auth.api.getUser(
+    const { user: auth, error } = await supabase.auth.api.getUser(
       authorization,
     )
-    if (error || !user)
+    if (error || !auth)
+      return sendRes({ status: 'not authorize' }, 400)
+    // get user from users
+    const { data: user, error: dbError } = await supabase
+      .from<definitions['users']>('users')
+      .select()
+      .eq('id', auth.id)
+    if (dbError || !user || !user.length)
       return sendRes({ status: 'not authorize' }, 400)
     const body = JSON.parse(event.body) as PortalData
     const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')
