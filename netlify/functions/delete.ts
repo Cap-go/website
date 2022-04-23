@@ -1,8 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { checkKey, sendRes } from './../services/utils'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
 import type { definitions } from '~/types/supabase'
-import { checkAppOwner } from "../services/utils.ts";
 
 interface AppDelete {
   appid: string

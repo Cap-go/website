@@ -1,5 +1,5 @@
 import type { Handler } from '@netlify/functions'
-import { updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { useSupabase } from '../services/supabase'
 import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 

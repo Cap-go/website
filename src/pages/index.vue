@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 const brand = import.meta.env.brand
 </script>
