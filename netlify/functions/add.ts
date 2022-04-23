@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { v4 as uuidv4 } from 'uuid'
 import { useSupabase } from '../services/supabase'
-import { checkKey, sendRes } from './../services/utils'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
 import type { definitions } from '~/types/supabase'
 
 interface AppAdd {
@@ -23,6 +23,8 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = JSON.parse(event.body || '{}') as AppAdd
+    if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+      return sendRes({ status: 'App exist already' }, 400)
     const fileName = `icon_${uuidv4()}`
     let signedURL = 'https://xvwzpoazmxkqosrdewyv.supabase.in/storage/v1/object/public/images/capgo.png'
     if (body.icon && body.iconType) {

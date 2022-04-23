@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
-import { checkKey, sendRes } from './../services/utils'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
 import type { definitions } from '~/types/supabase'
 
 interface ChannelSet {
@@ -21,6 +21,9 @@ export const handler: Handler = async(event) => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
+
+  if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+    return sendRes({ status: 'You can\'t edit this app' }, 400)
   const channel: Partial<definitions['channels']> = {
     created_by: apikey.user_id,
     app_id: body.appid,

@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { checkKey, sendRes } from './../services/utils'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
 import type { definitions } from '~/types/supabase'
 
 interface GetLatest {
@@ -22,6 +22,8 @@ export const handler: Handler = async(event) => {
     const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !event.body)
       return sendRes({ status: 'Cannot Verify User' }, 400)
+    if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+      return sendRes({ status: 'You can\'t check this app' }, 400)
     const { data: dataVersions, error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()

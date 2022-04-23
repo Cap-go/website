@@ -2,6 +2,7 @@ import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
 import { checkKey, sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
+import { checkAppOwner } from "../services/utils.ts";
 
 interface AppDelete {
   appid: string
@@ -23,6 +24,8 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = JSON.parse(event.body || '{}') as AppDelete
+    if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+      return sendRes({ status: 'You can\'t edit this app' }, 400)
     if (body.version) {
       const { data: versionId, error: versionIdError } = await supabase
         .from<definitions['app_versions']>('app_versions')

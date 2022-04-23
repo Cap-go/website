@@ -30,3 +30,22 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
     return null
   }
 }
+
+export const checkAppOwner = async(userId: string | undefined, appId: string | undefined, supabase: SupabaseClient): Promise<boolean> => {
+  if (!appId || !userId)
+    return false
+  try {
+    const { data, error } = await supabase
+      .from<definitions['apps']>('apps')
+      .select()
+      .eq('user_id', userId)
+      .eq('app_id', appId)
+    if (!data || !data.length || error)
+      return false
+    return true
+  }
+  catch (error) {
+    console.error(error)
+    return false
+  }
+}

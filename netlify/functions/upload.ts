@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { v4 as uuidv4 } from 'uuid'
 import { updateOrCreateChannel, updateOrCreateVersion, useSupabase } from '../services/supabase'
-import { checkKey, sendRes } from './../services/utils'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
 import type { definitions } from '~/types/supabase'
 
 interface AppUpload {
@@ -30,6 +30,8 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = JSON.parse(event.body || '{}') as AppUpload
+    if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+      return sendRes({ status: 'You can\'t upload this app' }, 400)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { app, ...newObject } = body
     // eslint-disable-next-line no-console

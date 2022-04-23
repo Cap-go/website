@@ -2,6 +2,7 @@ import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
 import { checkKey, sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
+import { checkAppOwner } from "../services/utils.ts";
 
 interface DeviceLink {
   app_id: string
@@ -24,6 +25,8 @@ export const handler: Handler = async(event) => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id)
     return sendRes({ status: 'Cannot find device' }, 400)
+  if (await checkAppOwner(apikey.user_id, body.app_id, supabase))
+    return sendRes({ status: 'You can\'t edit this app' }, 400)
   // find device
   const { data: dataDevice, error: dbError } = await supabase
     .from<definitions['devices']>('devices')
