@@ -32,6 +32,7 @@ export const handler: Handler = async(event) => {
       .eq('id', auth.id)
     if (dbError || !user || !user.length)
       return sendRes({ status: 'not authorize' }, 400)
+    console.log('user', user)
     const body = JSON.parse(event.body) as PortalData
     const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')
     return sendRes({ link })
