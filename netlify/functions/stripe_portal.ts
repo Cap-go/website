@@ -26,12 +26,14 @@ export const handler: Handler = async(event) => {
     if (error || !auth)
       return sendRes({ status: 'not authorize' }, 400)
     // get user from users
-    const { data: user, error: dbError } = await supabase
+    const { data: users, error: dbError } = await supabase
       .from<definitions['users']>('users')
       .select()
       .eq('id', auth.id)
-    if (dbError || !user || !user.length)
+    if (dbError || !users || !users.length)
       return sendRes({ status: 'not authorize' }, 400)
+    // eslint-disable-next-line no-console
+    const user = users[0]
     console.log('user', user)
     const body = JSON.parse(event.body) as PortalData
     const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')

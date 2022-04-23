@@ -12,12 +12,12 @@ export const parseStripeEvent = (key: string, body: string, headers: EventHeader
   return event
 }
 
-export const createPortal = async(key: string, subscriptionId: string, callbackUrl: string) => {
+export const createPortal = async(key: string, customerId: string, callbackUrl: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })
   const link = await stripe.billingPortal.sessions.create({
-    customer: subscriptionId,
+    customer: customerId,
     return_url: callbackUrl,
   })
   return link
