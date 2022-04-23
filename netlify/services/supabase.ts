@@ -39,6 +39,8 @@ export const updateOrCreateChannel = async(update: Partial<definitions['channels
   const supabase = useSupabase()
   // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
+  if (!update.app_id || !update.name || !update.created_by)
+    return Promise.reject(Error('updateOrCreateChannel: missing required fields'))
   const { data, error } = await supabase
     .from<definitions['channels']>('channels')
     .select()

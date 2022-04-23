@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { v4 as uuidv4 } from 'uuid'
 import { updateOrCreateChannel, updateOrCreateVersion, useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface AppUpload {

@@ -1,14 +1,14 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface DeviceLink {
   app_id: string
   device_id: string
   version_id?: string
-  channel_id?: string
+  channel?: string
 }
 interface GetDevice {
   app_id: string
@@ -66,11 +66,18 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
     return sendRes({ status: 'Cannot find device', error: dbError }, 400)
   // if version_id set device_override to it
   if (body.version_id) {
+    const { data: dataVersion, error: dbError } = await supabase
+      .from<definitions['app_versions']>('app_versions')
+      .select()
+      .eq('app_id', body.app_id)
+      .eq('name', body.version_id)
+    if (dbError || !dataVersion || !dataVersion.length)
+      return sendRes({ status: 'Cannot find version', error: dbError }, 400)
     supabase
       .from<definitions['devices_override']>('devices_override')
       .upsert({
         device_id: body.device_id,
-        version: body.version_id,
+        version: dataVersion[0].id,
         app_id: body.app_id,
       })
   }
@@ -83,12 +90,20 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .eq('app_id', body.app_id)
   }
   // if channel_id set channel_override to it
-  if (body.channel_id) {
+  if (body.channel) {
+    // get channel by name
+    const { data: dataChannel, error: dbError } = await supabase
+      .from<definitions['channels']>('channels')
+      .select()
+      .eq('app_id', body.app_id)
+      .eq('name', body.channel)
+    if (dbError || !dataChannel || !dataChannel.length)
+      return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
     supabase
       .from<definitions['channel_devices']>('channel_devices')
       .upsert({
         device_id: body.device_id,
-        channel: body.channel_id,
+        channel_id: dataChannel[0].id,
         app_id: body.app_id,
       })
   }

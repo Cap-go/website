@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface ChannelSet {

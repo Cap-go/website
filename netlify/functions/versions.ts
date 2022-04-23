@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils.ts'
+import { checkAppOwner, checkKey, sendRes } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface GetLatest {

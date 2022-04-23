@@ -7,6 +7,9 @@ import type { definitions } from '~/types/supabase'
 interface Channel {
   version: definitions['app_versions']
 }
+interface ChannelDev {
+  channel_id: Channel
+}
 
 export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
@@ -65,7 +68,7 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('public', true)
     const { data: channelOverride } = await supabase
-      .from<definitions['channel_device'] & Channel>('channel_device')
+      .from<definitions['channel_devices'] & ChannelDev>('channel_devices')
       .select(`
         device_id,
         app_id,
@@ -109,11 +112,11 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     const channel = channels[0]
-    let version = channel.version
+    let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (channelOverride && channelOverride.length)
-      version = channelOverride[0].channel_id.version
+      version = channelOverride[0].channel_id.version as definitions['app_versions']
     if (devicesOverride && devicesOverride.length)
-      version = devicesOverride[0].version
+      version = devicesOverride[0].version as definitions['app_versions']
 
     if (!version.bucket_id && !version.external_url) {
       console.error('Cannot get zip file')
@@ -124,7 +127,7 @@ export const handler: Handler = async(event) => {
     await updateOrCreateDevice({
       app_id: cap_app_id,
       device_id: cap_device_id,
-      platform: cap_platform,
+      platform: cap_platform as definitions['devices']['platform'],
       plugin_version: cap_plugin_version,
       version: version.id,
     })
