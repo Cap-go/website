@@ -1,10 +1,9 @@
 import type { Handler } from '@netlify/functions'
 import { createPortal } from 'netlify/services/stripe'
+import { useSupabase } from '../services/supabase'
 import { sendRes } from './../services/utils'
 
 interface PortalData {
-  email: string
-  customerId: string
   callbackUrl: string
 }
 export const handler: Handler = async(event) => {
@@ -12,15 +11,21 @@ export const handler: Handler = async(event) => {
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
-  if (!event.body || !process.env.STRIPE_SECRET_KEY) {
-    return {
-      statusCode: 400,
-      body: 'Portal Error: No body found or no secret found',
-    }
-  }
+  const {
+    authorization,
+  } = event.headers
+  if (!event.body || !process.env.STRIPE_SECRET_KEY || !authorization)
+    return sendRes({ status: 'not authorize' }, 400)
+
+  const supabase = useSupabase()
   try {
+    const { user, error } = await supabase.auth.api.getUser(
+      authorization,
+    )
+    if (error || !user)
+      return sendRes({ status: 'not authorize' }, 400)
     const body = JSON.parse(event.body) as PortalData
-    const link = await createPortal(process.env.STRIPE_SECRET_KEY, body.customerId, body.callbackUrl)
+    const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')
     return sendRes({ link })
   }
   catch (e) {
