@@ -22,7 +22,7 @@ serve(async(event: Request) => {
   const authorization = event.headers.get('apikey')
   if (!authorization)
     return sendRes({ status: 'Cannot find authorization' }, 400)
-  const apikey: definitions['apikeys'] | null = await checkKey(authorization, supabase, ['read'])
+  const apikey: definitions['apikeys'] | null = await checkKey(authorization, supabase, ['upload', 'all', 'write'])
   if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
   try {

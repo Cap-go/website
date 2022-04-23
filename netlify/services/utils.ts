@@ -13,7 +13,7 @@ export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => ({
   body: JSON.stringify(data),
 })
 
-export const checkKey = async(authorization: string | undefined, supabase: SupabaseClient, unAllowed: definitions['apikeys']['mode'][]): Promise<definitions['apikeys'] | null> => {
+export const checkKey = async(authorization: string | undefined, supabase: SupabaseClient, allowed: definitions['apikeys']['mode'][]): Promise<definitions['apikeys'] | null> => {
   if (!authorization)
     return null
   try {
@@ -21,7 +21,7 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       .from<definitions['apikeys']>('apikeys')
       .select()
       .eq('key', authorization)
-    if (!data || !data.length || error || unAllowed.includes(data[0].mode))
+    if (!data || !data.length || error || !allowed.includes(data[0].mode))
       return null
     return data[0]
   }

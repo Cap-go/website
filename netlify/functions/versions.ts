@@ -19,7 +19,7 @@ export const handler: Handler = async(event) => {
       return sendRes({ status: 'Missing appid or channel' }, 400)
 
     const supabase = useSupabase()
-    const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'upload'])
+    const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !event.body)
       return sendRes({ status: 'Cannot Verify User' }, 400)
     const { data: dataVersions, error: dbError } = await supabase

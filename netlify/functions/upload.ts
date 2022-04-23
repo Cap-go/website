@@ -24,7 +24,7 @@ export const handler: Handler = async(event) => {
     return sendRes()
 
   const supabase = useSupabase()
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read'])
+  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all', 'upload'])
   if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
