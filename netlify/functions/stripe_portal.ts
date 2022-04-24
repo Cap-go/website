@@ -36,7 +36,7 @@ export const handler: Handler = async(event) => {
     // eslint-disable-next-line no-console
     const user = users[0]
     console.log('user', user)
-    const body = JSON.parse(event.body || {}) as PortalData
+    const body = JSON.parse(event.body || '{}') as PortalData
     const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')
     return sendRes({ url: link.url })
   }
