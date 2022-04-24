@@ -20,7 +20,7 @@ export const handler: Handler = async(event) => {
 
   try {
     const supabase = useSupabase()
-    const body = JSON.parse(event.body || '')
+    const body = JSON.parse(event.body || '{}')
     const record = body.record as definitions['users']
     if (record.customer_id)
       return sendRes()
