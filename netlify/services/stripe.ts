@@ -23,6 +23,24 @@ export const createPortal = async(key: string, customerId: string, callbackUrl: 
   return link
 }
 
+export const createCheckout = async(key: string, customerId: string, pricesId: string[], successUrl: string, cancelUrl: string) => {
+  const stripe = new Stripe(key, {
+    apiVersion: '2020-08-27',
+  })
+  const session = await stripe.checkout.sessions.create({
+    billing_address_collection: 'auto',
+    line_items: pricesId.map(id => ({
+      price: id,
+      quantity: 1,
+    })),
+    mode: 'subscription',
+    customer: customerId,
+    success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: cancelUrl,
+  })
+  return session
+}
+
 export const deleteSub = async(key: string, subscriptionId: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
