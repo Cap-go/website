@@ -5,7 +5,8 @@ import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface PortalData {
-  pricesId: string
+  priceId: string
+  reccurence: 'month' | 'year'
   successUrl: string
   cancelUrl: string
 }
@@ -41,10 +42,10 @@ export const handler: Handler = async(event) => {
     // console.log('user', user)
     const body = JSON.parse(event.body || '{}') as PortalData
     // key: string, priceId: string, successUrl: string, cancelUrl: string
-    const checkout = await createCheckout(process.env.STRIPE_SECRET_KEY, user.customer_id, body.pricesId || ['price_1KkINoGH46eYKnWwwEi97h1B'], body.successUrl || 'https://web.capgo.app/app/succes', body.cancelUrl || 'https://web.capgo.app/app/cancel')
+    const checkout = await createCheckout(process.env.STRIPE_SECRET_KEY, user.customer_id, body.reccurence || 'month', body.priceId || 'price_1KkINoGH46eYKnWwwEi97h1B', body.successUrl || 'https://web.capgo.app/app/succes', body.cancelUrl || 'https://web.capgo.app/app/cancel')
     return sendRes({ url: checkout.url })
   }
   catch (e) {
-    return sendRes({ status: 'Cannot create stripe portal', error: e }, 500)
+    return sendRes({ status: 'Cannot create stripe checkout', error: e }, 500)
   }
 }

@@ -23,21 +23,44 @@ export const createPortal = async(key: string, customerId: string, callbackUrl: 
   return link
 }
 
-export const createCheckout = async(key: string, customerId: string, pricesId: string[], successUrl: string, cancelUrl: string) => {
+export const createCheckout = async(key: string, customerId: string, reccurence: string, planId: string, successUrl: string, cancelUrl: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })
-  const session = await stripe.checkout.sessions.create({
+  // eslint-disable-next-line no-console
+  // console.log('planId', planId)
+  let priceId = null
+  try {
+    const prices = await stripe.prices.search({
+      query: `product:'${planId}'`,
+    })
+    prices.data.forEach((price: any) => {
+      // eslint-disable-next-line no-console
+      // console.log('price', JSON.stringify(price))
+      if (price.recurring.interval === reccurence)
+        priceId = price.id
+    })
+  }
+  catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('err', err)
+  }
+  if (!priceId)
+    Promise.reject(new Error('Cannot find price'))
+  const checkoutData = {
     billing_address_collection: 'auto',
-    line_items: pricesId.map(id => ({
-      price: id,
+    line_items: [{
+      price: priceId,
       quantity: 1,
-    })),
+    }],
     mode: 'subscription',
     customer: customerId,
     success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: cancelUrl,
-  })
+  }
+  // eslint-disable-next-line no-console
+  // console.log('checkoutData', checkoutData)
+  const session = await stripe.checkout.sessions.create(checkoutData)
   return session
 }
 
