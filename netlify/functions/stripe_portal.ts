@@ -23,6 +23,7 @@ export const handler: Handler = async(event) => {
     const { user: auth, error } = await supabase.auth.api.getUser(
       authorization,
     )
+    console.log('auth', auth)
     if (error || !auth)
       return sendRes({ status: 'not authorize' }, 400)
     // get user from users
