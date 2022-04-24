@@ -37,7 +37,7 @@ export const createCheckout = async(key: string, customerId: string, reccurence:
     prices.data.forEach((price: any) => {
       // eslint-disable-next-line no-console
       // console.log('price', JSON.stringify(price))
-      if (price.recurring.interval === reccurence)
+      if (price.recurring.interval === reccurence && price.active)
         priceId = price.id
     })
   }
