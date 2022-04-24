@@ -37,7 +37,7 @@ export const handler: Handler = async(event) => {
     console.log('user', user)
     const body = JSON.parse(event.body) as PortalData
     const link = await createPortal(process.env.STRIPE_SECRET_KEY, user.customer_id, body.callbackUrl || 'https://web.capgo.app/app/usage')
-    return sendRes({ link })
+    return sendRes({ url: link.url })
   }
   catch (e) {
     return sendRes({ status: 'Cannot create stripe portal', error: e }, 500)
