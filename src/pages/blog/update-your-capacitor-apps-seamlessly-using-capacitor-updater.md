@@ -11,7 +11,6 @@ published: true
 next_blog: ''
 
 ---
-Greetings Capacitor Community, today I'll be helping you set up Capacitor-updater into your app. So that you can do seamless releases.
 
 ## What is Capacitor-updater?
 

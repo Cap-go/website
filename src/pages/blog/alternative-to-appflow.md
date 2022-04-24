@@ -11,7 +11,6 @@ published: true
 next_blog: ''
 
 ---
-Ionic AppFlow is the best complete set of tool for your app, sadly they price is not made for all.
 
 The only other alternative was Microsoft App Center, but they shut down support for apps running on Cordova.
 
