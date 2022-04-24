@@ -5,7 +5,7 @@ import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface PortalData {
-  priceId: string
+  pricesId: string
   successUrl: string
   cancelUrl: string
 }
@@ -41,7 +41,7 @@ export const handler: Handler = async(event) => {
     // console.log('user', user)
     const body = JSON.parse(event.body || '{}') as PortalData
     // key: string, priceId: string, successUrl: string, cancelUrl: string
-    const checkout = await createCheckout(process.env.STRIPE_SECRET_KEY, user.customer_id, body.priceId || ['price_1KkINoGH46eYKnWwwEi97h1B'], body.successUrl || 'https://web.capgo.app/app/succes', body.cancelUrl || 'https://web.capgo.app/app/cancel')
+    const checkout = await createCheckout(process.env.STRIPE_SECRET_KEY, user.customer_id, body.pricesId || ['price_1KkINoGH46eYKnWwwEi97h1B'], body.successUrl || 'https://web.capgo.app/app/succes', body.cancelUrl || 'https://web.capgo.app/app/cancel')
     return sendRes({ url: checkout.url })
   }
   catch (e) {
