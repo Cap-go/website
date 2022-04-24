@@ -3,9 +3,10 @@ import type { definitions } from '~/types/supabase'
 
 export const basicHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS',
 }
+// authorization
 
 export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => ({
   statusCode,
