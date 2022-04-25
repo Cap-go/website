@@ -2,8 +2,8 @@ ci:
   collect:
     numberOfRuns: 5
     url:
-      - https://captime.app
-      - https://captime.app/blogs
+      - https://capgo.app
+      - https://capgo.app/blogs
   assert:
     preset: lighthouse:recommended
     assertions:
