@@ -20,7 +20,6 @@ export const handler: Handler = async(event) => {
   const supabase = useSupabase()
   let statsDb = 'stats'
   let deviceDb = 'devices'
-  const onprem = false
 
   // eslint-disable-next-line no-console
   console.log('event.body', event.body)
@@ -51,16 +50,15 @@ export const handler: Handler = async(event) => {
   }
   else {
     device.version = body.version_name || 'unknown'
+    stat.version = body.version || 'unknown'
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
   }
   await supabase
     .from(deviceDb)
     .upsert(device)
-  if (!onprem) {
-    await supabase
-      .from<definitions['stats']>(statsDb)
-      .insert(stat)
-  }
+  await supabase
+    .from(statsDb)
+    .insert(stat)
   return sendRes()
 }
