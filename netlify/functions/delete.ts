@@ -26,28 +26,35 @@ export const handler: Handler = async(event) => {
     if (await checkAppOwner(apikey.user_id, body.appid, supabase))
       return sendRes({ status: 'You can\'t edit this app' }, 400)
     if (body.version) {
-      const { data: versionId, error: versionIdError } = await supabase
+      const { data: versions, error: versionIdError } = await supabase
         .from<definitions['app_versions']>('app_versions')
-        .select('id')
+        .select()
         .eq('app_id', body.appid)
         .eq('user_id', apikey.user_id)
         .eq('name', body.version)
         .eq('deleted', false)
-      if (!versionId || !versionId.length || versionIdError)
+      if (!versions || !versions.length || versionIdError)
         return sendRes({ status: `Version ${body.appid}@${body.version} don't exist`, error: versionIdError }, 400)
       const { data: channelFound, error: errorChannel } = await supabase
         .from<definitions['channels']>('channels')
         .select()
         .eq('app_id', body.appid)
         .eq('created_by', apikey.user_id)
-        .eq('name', body.name)
+        .eq('version', versions[0].id)
       if ((channelFound && channelFound.length) || errorChannel)
         return sendRes({ status: `Version ${body.appid}@${body.version} is used in a channel, unlink it first`, error: errorChannel }, 400)
+      const { data: deviceFound, error: errorDevice } = await supabase
+        .from<definitions['devices_override']>('devices_override')
+        .select()
+        .eq('app_id', body.appid)
+        .eq('version', versions[0].id)
+      if ((deviceFound && deviceFound.length) || errorDevice)
+        return sendRes({ status: `Version ${body.appid}@${body.version} is used in a device override, unlink it first`, error: errorChannel }, 400)
       // Delete only a specific version in storage
       const { error: delError } = await supabase
         .storage
         .from('apps')
-        .remove([`${apikey.user_id}/${body.appid}/versions/${versionId[0].bucket_id}`])
+        .remove([`${apikey.user_id}/${body.appid}/versions/${versions[0].bucket_id}`])
       if (delError)
         return sendRes({ status: `Something went wrong when trying to delete ${body.appid}@${body.version}`, error: delError }, 400)
 
