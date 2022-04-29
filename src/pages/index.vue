@@ -255,6 +255,56 @@ const brand = import.meta.env.brand
       </div>
     </div>
   </section>
+  <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
+    <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+          Numbers tell our story
+        </h2>
+        <p class="mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
+          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
+        <div>
+          <h3 class="font-bold text-7xl">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 100+ </span>
+          </h3>
+          <p class="mt-4 text-xl font-medium text-gray-900">
+            Stars in GitHub
+          </p>
+          <p class="text-base mt-0.5 text-gray-500">
+            Creating the open-source path
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-7xl">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 15 340 </span>
+          </h3>
+          <p class="mt-4 text-xl font-medium text-gray-900">
+            Updates delivered
+          </p>
+          <p class="text-base mt-0.5 text-gray-500">
+            In last 5 months
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-7xl">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 70+ </span>
+          </h3>
+          <p class="mt-4 text-xl font-medium text-gray-900">
+            Apps
+          </p>
+          <p class="text-base mt-0.5 text-gray-500">
+            Already using us in production
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="mx-10 lg:px-32 lg:mx-20">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
       <div class="order-last md:order-none">
