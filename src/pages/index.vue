@@ -262,7 +262,7 @@ const brand = import.meta.env.brand
           Numbers tell our story
         </h2>
         <p class="mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.
+          We share transparently all with you since day 1.
         </p>
       </div>
 
