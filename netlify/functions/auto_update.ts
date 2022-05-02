@@ -146,7 +146,7 @@ export const handler: Handler = async(event) => {
         message: 'No new version available',
       }, 200)
     }
-    if (!channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
+    if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
       return sendRes({
         major: true,
         message: 'Cannot upgrade major version',
@@ -154,7 +154,7 @@ export const handler: Handler = async(event) => {
         old: cap_version_name,
       }, 200)
     }
-    if (!channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
+    if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
       return sendRes({
         message: 'Cannot revert under native version',
         version: version.name,
