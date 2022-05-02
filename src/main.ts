@@ -18,7 +18,7 @@ import 'virtual:windi-devtools'
 const routes = setupLayouts(generatedRoutes)
 
 const crisp = Crisp()
-crisp.configure({ websiteID: '1f5d5a70-2622-4536-a454-996394feeaad' })
+crisp.configure({ websiteID: import.meta.env.crisp })
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
