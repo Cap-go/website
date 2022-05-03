@@ -26,6 +26,7 @@ export const handler: Handler = async(event) => {
     cap_app_id,
     cap_device_id,
     cap_version_build,
+    cap_mode,
   } = event.headers
   cap_version_name = cap_version_name === 'builtin' ? cap_version_build : cap_version_name
   cap_plugin_version = cap_plugin_version || '2.3.3'
@@ -35,6 +36,7 @@ export const handler: Handler = async(event) => {
         cap_app_id,
         cap_device_id,
         cap_version_build,
+        cap_mode || 'release',
         cap_version_name)
       return sendRes({ message: 'missing appid' }, 400)
     }
