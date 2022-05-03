@@ -45,6 +45,7 @@ export const handler: Handler = async(event) => {
       cap_app_id,
       cap_device_id,
       cap_version_build,
+      cap_mode || 'release',
       cap_plugin_version,
       cap_version_name)
 
