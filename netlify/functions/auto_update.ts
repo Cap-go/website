@@ -26,7 +26,6 @@ export const handler: Handler = async(event) => {
     cap_app_id,
     cap_device_id,
     cap_version_build,
-    cap_mode,
   } = event.headers
   cap_version_name = cap_version_name === 'builtin' ? cap_version_build : cap_version_name
   cap_plugin_version = cap_plugin_version || '2.3.3'
@@ -36,7 +35,6 @@ export const handler: Handler = async(event) => {
         cap_app_id,
         cap_device_id,
         cap_version_build,
-        cap_mode || 'release',
         cap_version_name)
       return sendRes({ message: 'missing appid' }, 400)
     }
@@ -45,7 +43,6 @@ export const handler: Handler = async(event) => {
       cap_app_id,
       cap_device_id,
       cap_version_build,
-      cap_mode || 'release',
       cap_plugin_version,
       cap_version_name)
 
@@ -58,6 +55,7 @@ export const handler: Handler = async(event) => {
         created_at,
         name,
         app_id,
+        beta,
         disableAutoUpdateUnderNative,
         disableAutoUpdateToMajor,
         version (
@@ -70,6 +68,26 @@ export const handler: Handler = async(event) => {
       `)
       .eq('app_id', cap_app_id)
       .eq('public', true)
+    const { data: channelsBeta, error: dbBetaError } = await supabase
+      .from<definitions['channels'] & Channel>('channels')
+      .select(`
+        id,
+        created_at,
+        name,
+        app_id,
+        beta,
+        disableAutoUpdateUnderNative,
+        disableAutoUpdateToMajor,
+        version (
+          id,
+          name,
+          user_id,
+          bucket_id,
+          external_url
+        )
+      `)
+      .eq('app_id', cap_app_id)
+      .eq('beta', true)
     const { data: channelOverride } = await supabase
       .from<definitions['channel_devices'] & ChannelDev>('channel_devices')
       .select(`
@@ -107,8 +125,8 @@ export const handler: Handler = async(event) => {
       `)
       .eq('device_id', cap_device_id)
       .eq('app_id', cap_app_id)
-    if (dbError || !channels || !channels.length) {
-      console.error('Cannot get channel', dbError)
+    if (dbError || dbBetaError || !channels || !channels.length) {
+      console.error('Cannot get channel', dbError || dbBetaError || 'no channel')
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -116,10 +134,21 @@ export const handler: Handler = async(event) => {
     }
     const channel = channels[0]
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
-    if (channelOverride && channelOverride.length)
+    if (channelsBeta && channelsBeta.length && semver.prerelease(cap_version_name)) {
+      // eslint-disable-next-line no-console
+      console.log('Set Beta channel', channelsBeta[0].channel_id.version.name)
+      version = channelsBeta[0].channel_id.version as definitions['app_versions']
+    }
+    if (channelOverride && channelOverride.length) {
+      // eslint-disable-next-line no-console
+      console.log('Set channel override', channelOverride[0].channel_id.version.name)
       version = channelOverride[0].channel_id.version as definitions['app_versions']
-    if (devicesOverride && devicesOverride.length)
+    }
+    if (devicesOverride && devicesOverride.length) {
+      // eslint-disable-next-line no-console
+      console.log('Set device override', devicesOverride[0].version.name)
       version = devicesOverride[0].version as definitions['app_versions']
+    }
 
     if (!version.bucket_id && !version.external_url) {
       console.error('Cannot get zip file')
