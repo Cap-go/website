@@ -35,6 +35,8 @@ export const handler: Handler = async(event) => {
     if (dbError || !users || !users.length)
       return sendRes({ status: 'not authorize' }, 400)
     const user = users[0]
+    if (!user.customer_id)
+      return sendRes({ status: 'no customer' }, 400)
     // eslint-disable-next-line no-console
     // console.log('user', user)
     const body = JSON.parse(event.body || '{}') as PortalData

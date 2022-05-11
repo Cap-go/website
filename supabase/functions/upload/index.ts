@@ -1,5 +1,5 @@
 import { serve } from 'https://deno.land/std@0.133.0/http/server.ts'
-import { Buffer } from 'http://deno.land/x/node_buffer@1.1.0/index.ts'
+import { Buffer } from 'https://deno.land/x/node_buffer@1.1.0/index.ts'
 import { supabaseAdmin, updateOrCreateChannel, updateOrCreateVersion } from '../_utils/supabase.ts'
 import type { definitions } from '../_utils/types_supabase.ts'
 import { checkKey, sendRes } from '../_utils/utils.ts'

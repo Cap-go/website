@@ -136,8 +136,8 @@ export const handler: Handler = async(event) => {
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (channelsBeta && channelsBeta.length && semver.prerelease(cap_version_build)) {
       // eslint-disable-next-line no-console
-      console.log('Set Beta channel', channelsBeta[0].channel_id.version.name)
-      version = channelsBeta[0].channel_id.version as definitions['app_versions']
+      console.log('Set Beta channel', channelsBeta[0].version.name)
+      version = channelsBeta[0].version as definitions['app_versions']
     }
     if (channelOverride && channelOverride.length) {
       // eslint-disable-next-line no-console

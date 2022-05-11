@@ -50,7 +50,7 @@ export const handler: Handler = async(event) => {
   }
   else {
     device.version = body.version_name || 'unknown'
-    stat.version = body.version || 'unknown'
+    stat.version = body.version || 0
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
   }
