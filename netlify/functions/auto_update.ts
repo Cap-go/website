@@ -193,6 +193,16 @@ export const handler: Handler = async(event) => {
         old: cap_version_name,
       }, 200)
     }
+    const stat: Partial<definitions['stats']> = {
+      platform: cap_platform as definitions['stats']['platform'],
+      device_id: cap_device_id,
+      action: 'get',
+      app_id: cap_app_id,
+      version_build: cap_version_build,
+    }
+    await supabase
+      .from<definitions['stats']>('stats')
+      .insert(stat)
     // eslint-disable-next-line no-console
     console.log('New version available', version.name, signedURL)
     return sendRes({
