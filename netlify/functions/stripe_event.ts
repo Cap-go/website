@@ -5,12 +5,9 @@ import { sendRes } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 export const handler: Handler = async({ body, headers }) => {
-  if (!body || !headers['stripe-signature'] || !process.env.STRIPE_WEBHOOK_SECRET || !process.env.STRIPE_SECRET_KEY) {
-    return {
-      statusCode: 400,
-      body: 'Webhook Error: No body found, no signature or no secret found',
-    }
-  }
+  if (!body || !headers['stripe-signature'] || !process.env.STRIPE_WEBHOOK_SECRET || !process.env.STRIPE_SECRET_KEY)
+    return sendRes({ status: 'Webhook Error: no body, no signature or no secret found' }, 400)
+
   const supabase = useSupabase()
 
   try {
