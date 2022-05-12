@@ -1,4 +1,4 @@
-import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@^1.33.1'
+import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@^1.35.3'
 import type { definitions } from '../_utils/types_supabase.ts'
 import type { JwtUser } from './types.ts'
 
