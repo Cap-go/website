@@ -65,7 +65,7 @@ export const updateOrCreateChannel = async(update: Partial<definitions['channels
 export const updateOrCreateDevice = async(update: Partial<definitions['devices']>) => {
   const supabase = useSupabase()
   // eslint-disable-next-line no-console
-  console.log('updateOrCreateDevice', update)
+  // console.log('updateOrCreateDevice', update)
   const { data, error } = await supabase
     .from<definitions['devices']>('devices')
     .select()

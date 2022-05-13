@@ -3,7 +3,7 @@ import type { definitions } from '~/types/supabase'
 
 export const basicHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, cap_version_name, cap_plugin_version, cap_platform, cap_app_id, cap_device_id, cap_version_build',
   'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS',
 }
 // authorization
