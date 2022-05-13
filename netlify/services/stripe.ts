@@ -60,7 +60,7 @@ export const createCheckout = async(key: string, customerId: string, reccurence:
   }
   // eslint-disable-next-line no-console
   // console.log('checkoutData', checkoutData)
-  const session = await stripe.checkout.sessions.create(checkoutData)
+  const session = await stripe.checkout.sessions.create(checkoutData as any)
   return session
 }
 
