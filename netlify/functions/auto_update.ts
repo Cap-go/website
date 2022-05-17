@@ -199,6 +199,7 @@ export const handler: Handler = async(event) => {
       action: 'get',
       app_id: cap_app_id,
       version_build: cap_version_build,
+      version: version.id,
     }
     await supabase
       .from<definitions['stats']>('stats')
