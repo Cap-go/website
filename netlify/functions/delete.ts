@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface AppDelete {
@@ -15,7 +15,7 @@ export const handler: Handler = async(event) => {
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
-  const supabase = useSupabase()
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body)

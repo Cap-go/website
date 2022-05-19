@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface DeviceLink {
@@ -124,7 +124,7 @@ export const handler: Handler = async(event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const supabase = useSupabase()
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'POST')
     return post(event, supabase)
   else if (event.httpMethod === 'GET')

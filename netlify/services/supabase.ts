@@ -1,18 +1,17 @@
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient } from '@supabase/supabase-js'
 import type { definitions } from '~/types/supabase'
-const { VITE_SUPABASE_URL, SUPABASE_ADMIN_KEY } = process.env
 
-export const useSupabase = () => {
+export const useSupabase = (url: string, key: string) => {
   const options = {
     autoRefreshToken: false,
     persistSession: false,
     detectSessionInUrl: false,
   }
-  return createClient(VITE_SUPABASE_URL || '', SUPABASE_ADMIN_KEY || '', options)
+  return createClient(url, key, options)
 }
 
-export const updateOrCreateVersion = async(update: Partial<definitions['app_versions']>) => {
-  const supabase = useSupabase()
+export const updateOrCreateVersion = async(supabase: SupabaseClient, update: Partial<definitions['app_versions']>) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateVersion', update)
   const { data, error } = await supabase
@@ -35,8 +34,7 @@ export const updateOrCreateVersion = async(update: Partial<definitions['app_vers
   }
 }
 
-export const updateOrCreateChannel = async(update: Partial<definitions['channels']>) => {
-  const supabase = useSupabase()
+export const updateOrCreateChannel = async(supabase: SupabaseClient, update: Partial<definitions['channels']>) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
   if (!update.app_id || !update.name || !update.created_by)
@@ -62,8 +60,7 @@ export const updateOrCreateChannel = async(update: Partial<definitions['channels
   }
 }
 
-export const updateOrCreateDevice = async(update: Partial<definitions['devices']>) => {
-  const supabase = useSupabase()
+export const updateOrCreateDevice = async(supabase: SupabaseClient, update: Partial<definitions['devices']>) => {
   // eslint-disable-next-line no-console
   // console.log('updateOrCreateDevice', update)
   const { data, error } = await supabase

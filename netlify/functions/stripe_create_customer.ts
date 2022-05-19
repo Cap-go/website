@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { createCustomer } from './../services/stripe'
 import { useSupabase } from './../services/supabase'
-import { sendRes } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 const { API_SECRET } = process.env
 
@@ -19,12 +19,12 @@ export const handler: Handler = async(event) => {
   }
 
   try {
-    const supabase = useSupabase()
+    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
     const body = JSON.parse(event.body || '{}')
     const record = body.record as definitions['users']
     if (record.customer_id)
       return sendRes()
-    const customer = await createCustomer(process.env.STRIPE_SECRET_KEY, record.email)
+    const customer = await createCustomer(transformEnvVar(findEnv(event.rawUrl), 'STRIPE_SECRET_KEY'), record.email)
     const { error: dbStripeError } = await supabase
       .from<definitions['stripe_info']>('stripe_info')
       .insert({

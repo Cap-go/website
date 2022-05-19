@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { createCheckout } from 'netlify/services/stripe'
 import { useSupabase } from '../services/supabase'
-import { sendRes } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface PortalData {
@@ -21,7 +21,7 @@ export const handler: Handler = async(event) => {
   if (!process.env.STRIPE_SECRET_KEY || !authorization)
     return sendRes({ status: 'not authorize' }, 400)
 
-  const supabase = useSupabase()
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   try {
     const { user: auth, error } = await supabase.auth.api.getUser(
       authorization,
@@ -44,7 +44,7 @@ export const handler: Handler = async(event) => {
     // console.log('user', user)
     const body = JSON.parse(event.body || '{}') as PortalData
     // key: string, priceId: string, successUrl: string, cancelUrl: string
-    const checkout = await createCheckout(process.env.STRIPE_SECRET_KEY, user.customer_id, body.reccurence || 'month', body.priceId || 'price_1KkINoGH46eYKnWwwEi97h1B', body.successUrl || 'https://web.capgo.app/app/usage', body.cancelUrl || 'https://web.capgo.app/app/usage')
+    const checkout = await createCheckout(transformEnvVar(findEnv(event.rawUrl), 'STRIPE_SECRET_KEY'), user.customer_id, body.reccurence || 'month', body.priceId || 'price_1KkINoGH46eYKnWwwEi97h1B', body.successUrl || 'https://web.capgo.app/app/usage', body.cancelUrl || 'https://web.capgo.app/app/usage')
     return sendRes({ url: checkout.url })
   }
   catch (e) {

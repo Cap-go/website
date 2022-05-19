@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import { updateOrCreateDevice, useSupabase } from '../services/supabase'
-import { sendRes } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Channel {
@@ -46,7 +46,7 @@ export const handler: Handler = async(event) => {
       cap_plugin_version,
       cap_version_name)
 
-    const supabase = useSupabase()
+    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
     const { data: channels, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
@@ -156,7 +156,7 @@ export const handler: Handler = async(event) => {
         message: 'Cannot get zip file',
       }, 200)
     }
-    await updateOrCreateDevice({
+    await updateOrCreateDevice(supabase, {
       app_id: cap_app_id,
       device_id: cap_device_id,
       platform: cap_platform as definitions['devices']['platform'],

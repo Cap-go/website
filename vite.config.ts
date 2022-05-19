@@ -18,12 +18,29 @@ import fs from 'fs-extra'
 import matter from 'gray-matter'
 import generateSitemap from 'vite-plugin-pages-sitemap'
 import EnvironmentPlugin from 'vite-plugin-environment'
+import keys from './configs.json'
 
 const markdownWrapperClasses = 'prose prose-xl m-auto text-left'
 
 const sitemapIgnore = ['/eula', '/privacy', '/tos', '/disclaimer', '/return', '/404']
-const domain = 'capgo.app'
 const brand = 'Capgo'
+
+const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
+  if (branch === 'development')
+    return keys[keyname].development
+  else if (branch === 'local')
+    return keys[keyname].local
+  return keys[keyname].prod
+}
+
+const getUrl = (branch = ''): string => {
+  if (branch === 'local')
+    return `http://${getRightKey(branch, 'base_domain')}`
+  else if (branch === 'development')
+    return `http://${getRightKey(branch, 'base_domain')}`
+  else
+    return `https://${getRightKey('prod', 'base_domain')}`
+}
 
 export default defineConfig({
   resolve: {
@@ -36,10 +53,9 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     EnvironmentPlugin({
-      domain,
+      domain: `${getUrl(process.env.BRANCH)}`,
       brand,
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
-      VITE_NETLIFY_URL: process.env.VITE_NETLIFY_URL ? process.env.VITE_NETLIFY_URL : '/api',
     }, { defineOn: 'import.meta.env' }),
 
     // https://github.com/hannoeru/vite-plugin-pages
@@ -61,7 +77,7 @@ export default defineConfig({
       onRoutesGenerated: (routes) => {
         const filetred = routes.filter(route => !sitemapIgnore.includes(route.path)).filter(route => !route.meta?.frontmatter || route.meta?.frontmatter?.published)
         generateSitemap({
-          hostname: `https://${domain}`,
+          hostname: `https://${getUrl(process.env.BRANCH)}`,
           routes: filetred,
         })
         return routes

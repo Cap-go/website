@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { sendRes } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Channel {
@@ -22,7 +22,7 @@ export const handler: Handler = async(event) => {
     if (!body.appid || !body.channel)
       return sendRes({ message: 'missing appid or channel' }, 400)
 
-    const supabase = useSupabase()
+    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
     const { data: channels, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')

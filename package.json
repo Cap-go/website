@@ -22,7 +22,7 @@
     "dayjs": "1.11.1",
     "nprogress": "^0.2.0",
     "pinia": "2.0.13",
-    "prism-theme-vars": "^0.2.2",
+    "prism-theme-vars": "^0.2.3",
     "semver": "7.3.7",
     "stripe": "8.219.0",
     "uuid": "^8.3.2",

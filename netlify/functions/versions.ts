@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface GetLatest {
@@ -18,7 +18,7 @@ export const handler: Handler = async(event) => {
     if (!body.appid)
       return sendRes({ status: 'Missing appid or channel' }, 400)
 
-    const supabase = useSupabase()
+    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
     const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !event.body)
       return sendRes({ status: 'Cannot Verify User' }, 400)

@@ -1,5 +1,32 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
+import keys from '../../configs.json'
 import type { definitions } from '~/types/supabase'
+
+export const findEnv = (url: string): string => {
+  if (url.includes('localhost'))
+    return 'local'
+  else if (url.includes('development'))
+    return 'development'
+  else
+    return 'prod'
+}
+
+export const transformEnvVar = (env: string, v: string): string => {
+  if (env === 'prod')
+    return process.env[v] || v
+  // uppercase env and check if env_v is defined, if yes return it otherwise return v
+  return process.env[`${env.toUpperCase()}_${v}`] || v
+}
+
+export const getRightKey = (env: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
+  // eslint-disable-next-line no-console
+  console.log('env', env)
+  if (env === 'development')
+    return keys[keyname].development
+  else if (env === 'local')
+    return keys[keyname].local
+  return keys[keyname].prod
+}
 
 export const basicHeaders = {
   'Access-Control-Allow-Origin': '*',

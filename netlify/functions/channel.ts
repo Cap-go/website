@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, sendRes } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface ChannelSet {
@@ -75,7 +75,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
     channel.public = body.public
 
   try {
-    const { error: dbError } = await updateOrCreateChannel(channel)
+    const { error: dbError } = await updateOrCreateChannel(supabase, channel)
     if (dbError)
       return sendRes({ status: 'Cannot set channels', error: JSON.stringify(dbError) }, 400)
   }
@@ -91,7 +91,7 @@ export const handler: Handler = async(event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const supabase = useSupabase()
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'POST')
     return post(event, supabase)
   else if (event.httpMethod === 'GET')
