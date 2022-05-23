@@ -13,7 +13,7 @@ interface ChannelDev {
 
 export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
-  console.log(event.httpMethod)
+  // console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
@@ -126,7 +126,7 @@ export const handler: Handler = async(event) => {
       .eq('device_id', cap_device_id)
       .eq('app_id', cap_app_id)
     if (dbError || dbBetaError || !channels || !channels.length) {
-      console.error('Cannot get channel', dbError || dbBetaError || 'no channel')
+      console.error('Cannot get channel', cap_app_id, dbError || dbBetaError || 'no channel')
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -136,22 +136,22 @@ export const handler: Handler = async(event) => {
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (channelsBeta && channelsBeta.length && semver.prerelease(cap_version_build)) {
       // eslint-disable-next-line no-console
-      console.log('Set Beta channel', channelsBeta[0].version.name)
+      console.log('Set Beta channel', cap_app_id, channelsBeta[0].version.name)
       version = channelsBeta[0].version as definitions['app_versions']
     }
     if (channelOverride && channelOverride.length) {
       // eslint-disable-next-line no-console
-      console.log('Set channel override', channelOverride[0].channel_id.version.name)
+      console.log('Set channel override', cap_app_id, channelOverride[0].channel_id.version.name)
       version = channelOverride[0].channel_id.version as definitions['app_versions']
     }
     if (devicesOverride && devicesOverride.length) {
       // eslint-disable-next-line no-console
-      console.log('Set device override', devicesOverride[0].version.name)
+      console.log('Set device override', cap_app_id, devicesOverride[0].version.name)
       version = devicesOverride[0].version as definitions['app_versions']
     }
 
     if (!version.bucket_id && !version.external_url) {
-      console.error('Cannot get zip file')
+      console.error('Cannot get zip file', cap_app_id)
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
@@ -205,14 +205,14 @@ export const handler: Handler = async(event) => {
       .from<definitions['stats']>('stats')
       .insert(stat)
     // eslint-disable-next-line no-console
-    console.log('New version available', version.name, signedURL)
+    console.log('New version available', cap_app_id, version.name, signedURL)
     return sendRes({
       version: version.name,
       url: signedURL,
     })
   }
   catch (e) {
-    console.error('error', e)
+    console.error('error', cap_app_id, e)
     return sendRes({
       message: 'Cannot get latest version',
       err: `${e}!`,
