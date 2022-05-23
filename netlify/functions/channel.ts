@@ -1,15 +1,8 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { updateOrCreateChannel, useSupabase } from '../services/supabase'
+import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
-
-interface ChannelSet {
-  appid: string
-  channel: string
-  version?: string
-  public?: boolean
-}
 interface GetDevice {
   appid: string
   channel?: string
@@ -45,46 +38,6 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 }
 
-export const post = async(event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body)
-    return sendRes({ status: 'Cannot Verify User' }, 400)
-
-  const body = JSON.parse(event.body || '{}') as ChannelSet
-
-  if (await checkAppOwner(apikey.user_id, body.appid, supabase))
-    return sendRes({ status: 'You can\'t edit this app' }, 400)
-  const channel: Partial<definitions['channels']> = {
-    created_by: apikey.user_id,
-    app_id: body.appid,
-    name: body.channel,
-  }
-  if (body.version) {
-    const { data, error: vError } = await supabase
-      .from<definitions['app_versions']>('app_versions')
-      .select()
-      .eq('app_id', body.appid)
-      .eq('name', body.version)
-      .eq('user_id', apikey.user_id)
-      .eq('deleted', false)
-    if (vError || !data || !data.length)
-      return sendRes({ status: `Cannot find version ${body.version}`, error: JSON.stringify(vError) }, 400)
-    channel.version = data[0].id
-  }
-  if (body.public !== undefined)
-    channel.public = body.public
-
-  try {
-    const { error: dbError } = await updateOrCreateChannel(supabase, channel)
-    if (dbError)
-      return sendRes({ status: 'Cannot set channels', error: JSON.stringify(dbError) }, 400)
-  }
-  catch (e) {
-    return sendRes({ status: 'Cannot set channels', error: e }, 500)
-  }
-  return sendRes()
-}
-
 export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
@@ -92,9 +45,7 @@ export const handler: Handler = async(event) => {
     return sendRes()
 
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
-  if (event.httpMethod === 'POST')
-    return post(event, supabase)
-  else if (event.httpMethod === 'GET')
+  if (event.httpMethod === 'GET')
     return get(event, supabase)
   return sendRes({ status: 'Method now allowed' }, 400)
 }
