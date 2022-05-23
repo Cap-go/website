@@ -19,8 +19,10 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = event.queryStringParameters as any as GetLatest
-    if (!body.appid || !body.channel)
+    if (!body.appid || !body.channel) {
+      console.error('missing appid or channel')
       return sendRes({ message: 'missing appid or channel' }, 400)
+    }
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
@@ -42,6 +44,7 @@ export const handler: Handler = async(event) => {
       .eq('name', body.channel)
       .eq('public', true)
     if (dbError || !channels || !channels.length) {
+      console.error('Cannot get channe', body.appid, body.channel, dbError)
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -49,8 +52,9 @@ export const handler: Handler = async(event) => {
     }
     const channel = channels[0]
     if (!channel.version.bucket_id && !channel.version.external_url) {
+      console.error('Cannot get bucket_id or external_url', body.appid, body.channel)
       return sendRes({
-        message: 'Cannot get bucket_id',
+        message: 'Cannot get bucket_id or external_url',
         err: JSON.stringify(dbError),
       }, 400)
     }
@@ -70,13 +74,15 @@ export const handler: Handler = async(event) => {
       if (res && res.signedURL)
         signedURL = res.signedURL
     }
-
+    // eslint-disable-next-line no-console
+    console.log('body.appid', body.appid)
     return sendRes({
       version: channel.version.name,
       url: signedURL,
     })
   }
   catch (e) {
+    console.error('Cannot get latest version', e)
     return sendRes({
       message: 'Cannot get latest version',
       err: `${e}!`,
