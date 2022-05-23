@@ -201,9 +201,15 @@ export const handler: Handler = async(event) => {
       version_build: cap_version_build,
       version: version.id,
     }
-    await supabase
-      .from<definitions['stats']>('stats')
-      .insert(stat)
+    try {
+      await supabase
+        .from<definitions['stats']>('stats')
+        .insert(stat)
+    }
+    catch (err) {
+      console.error('Cannot insert stats', cap_app_id, err)
+    }
+
     // eslint-disable-next-line no-console
     console.log('New version available', cap_app_id, version.name, signedURL)
     return sendRes({
