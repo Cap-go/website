@@ -23,7 +23,7 @@ export const handler: Handler = async(event) => {
 
   try {
     const body = JSON.parse(event.body || '{}') as AppDelete
-    if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+    if (!await checkAppOwner(apikey.user_id, body.appid, supabase))
       return sendRes({ status: 'You can\'t edit this app' }, 400)
     if (body.version) {
       const { data: versions, error: versionIdError } = await supabase
