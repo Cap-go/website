@@ -12,7 +12,7 @@ published: true
 ---
 Microsoft announced that App Center will soon [discontinue support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/). App Center is a cloud product that helps teams build, test, and distribute apps. Among App Center’s more popular services is CodePush, which allows developers to deploy mobile app updates directly to their users’ devices.
 
-## From Microsoft App Center to Ionic Appflow
+## From Microsoft App Center to Capgo Cloud
 
 For businesses and teams using App Center, I'm happy to say that [Capgo](https://capgo.app) platform is a great alternative to App Center that provides full support for Capacitor apps. Capacitor is a new way to build native mobile apps with Ionic. Most of Cordova plugin are supported in Capacitor. It's time to migrate to Cordova successor: Capacitor.
 
