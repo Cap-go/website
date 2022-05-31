@@ -26,9 +26,19 @@ Moreover, it provides rollbacks if the new update crashed the app
 
 Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help us fine-tune our user's experience.
 
-I use Capgo in all my projects I work with as it is a very promising technology.
+I use Capgo in all my projects I build, that allow me to put less time in the App Store review process.
 
 You can read more about it [here](https://capgo.app).
+
+## Are there any limitations ?
+
+As good as it may sound, there are a few things that we need to keep in mind.
+The first thing is that OTA updates __only work with web bundles__. 
+You may think that this isn’t really a big limitation because, in Capacitor, we write almost all code in JS CSS and HTML.
+While this may be true, there still are native modules that we install to our app.
+If a module changes your android or ios directories, you can’t use OTA to update your app.
+That’s because these directories’ contents are used to compile Native binaries, which OTA can’t update.
+Even native app cannot update this part.
 
 ## Let's get started 🚀
 
