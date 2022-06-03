@@ -202,9 +202,11 @@ export const handler: Handler = async(event) => {
       version: version.id,
     }
     try {
-      await supabase
+      const { error } = await supabase
         .from<definitions['stats']>('stats')
         .insert(stat)
+      if (error)
+        console.error('Cannot insert stat', cap_app_id, cap_version_build, error)
     }
     catch (err) {
       console.error('Cannot insert stats', cap_app_id, err)
