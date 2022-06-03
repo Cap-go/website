@@ -59,7 +59,7 @@ export const handler: Handler = async(event) => {
     }
     const stat: Partial<definitions['stats']> = {
       platform: 'ios',
-      device_id: 'unknown',
+      device_id: 'unknow',
       action: 'get',
       app_id: body.appid,
       version_build: '',
