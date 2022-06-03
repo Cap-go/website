@@ -32,6 +32,7 @@ export const handler: Handler = async(event) => {
         name,
         app_id,
         version (
+          id,
           name,
           user_id,
           bucket_id,
@@ -56,20 +57,13 @@ export const handler: Handler = async(event) => {
         err: JSON.stringify(dbError),
       }, 400)
     }
-    // await updateOrCreateDevice({
-    //   app_id: body.appid,
-    //   device_id: 'unknown',
-    //   platform: 'unknow',
-    //   plugin_version: '2.3.3',
-    //   version: channel.version.id,
-    // })
     const stat: Partial<definitions['stats']> = {
       platform: 'ios',
       device_id: 'unknown',
       action: 'get',
       app_id: body.appid,
       version_build: '',
-      version: 0,
+      version: channel.version.id,
     }
     try {
       await supabase
