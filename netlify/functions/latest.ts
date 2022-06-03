@@ -63,6 +63,22 @@ export const handler: Handler = async(event) => {
     //   plugin_version: '2.3.3',
     //   version: channel.version.id,
     // })
+    const stat: Partial<definitions['stats']> = {
+      platform: 'ios',
+      device_id: 'unknown',
+      action: 'get',
+      app_id: body.appid,
+      version_build: '',
+      version: 0,
+    }
+    try {
+      await supabase
+        .from<definitions['stats']>('stats')
+        .insert(stat)
+    }
+    catch (err) {
+      console.error('Cannot insert stats', body.appid, err)
+    }
     let signedURL = channel.version.external_url || ''
     if (channel.version.bucket_id && !channel.version.external_url) {
       const res = await supabase
