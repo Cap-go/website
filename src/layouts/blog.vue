@@ -23,6 +23,7 @@ if (!frontmatter.published)
   meta.push({ name: 'robots', content: 'noindex, nofollow' })
 
 useHead({
+  title: frontmatter.title,
   meta,
 })
 </script>
