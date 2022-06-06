@@ -87,9 +87,12 @@ export const createCustomer = async(key: string, email: string) => {
 
 export const extractDataEvent = (event: Stripe.Event): definitions['stripe_info'] => {
   const data: definitions['stripe_info'] = {
-    product_id: undefined,
+    product_id: '',
+    price_id: '',
     subscription_id: undefined,
     customer_id: '',
+    trial_at: dayjs().toISOString(),
+    created_at: dayjs().toISOString(),
     updated_at: dayjs().toISOString(),
     status: undefined,
   }

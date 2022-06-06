@@ -81,3 +81,23 @@ export const updateOrCreateDevice = async(supabase: SupabaseClient, update: Part
       .eq('device_id', update.device_id)
   }
 }
+
+export const isGoodPlan = async(supabase: SupabaseClient, userId: string): Promise<boolean> => {
+  const { data, error } = await supabase
+    .rpc<boolean>('is_good_plan', { userid: userId })
+    .single()
+  if (error)
+    throw error
+
+  return data || false
+}
+
+export const isTrial = async(supabase: SupabaseClient, userId: string): Promise<number> => {
+  const { data, error } = await supabase
+    .rpc<number>('is_trial', { userid: userId })
+    .single()
+  if (error)
+    throw error
+
+  return data || 0
+}

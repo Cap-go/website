@@ -1,5 +1,5 @@
 import type { Handler } from '@netlify/functions'
-import { useSupabase } from '../services/supabase'
+import { isGoodPlan, isTrial, useSupabase } from '../services/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
@@ -23,12 +23,12 @@ export const handler: Handler = async(event) => {
     }
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
-
-    const { data: channels, error: dbError } = await supabase
+    const { data: channel, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
         id,
         created_at,
+        created_by,
         name,
         app_id,
         version (
@@ -42,14 +42,23 @@ export const handler: Handler = async(event) => {
       .eq('app_id', body.appid)
       .eq('name', body.channel)
       .eq('public', true)
-    if (dbError || !channels || !channels.length) {
-      console.error('Cannot get channe', body.appid, body.channel, dbError)
+      .single()
+    if (dbError || !channel) {
+      console.error('Cannot get channel', body.appid, body.channel, dbError)
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
       }, 400)
     }
-    const channel = channels[0]
+    const trial = await isTrial(supabase, channel.created_by)
+    const paying = await isGoodPlan(supabase, channel.created_by)
+    if (!paying && !trial) {
+      console.error('Cannot update, upgrade plan to continue to update', body.appid)
+      return sendRes({
+        message: 'Cannot update, upgrade plan to continue to update',
+        err: 'not good plan',
+      }, 400)
+    }
     if (!channel.version.bucket_id && !channel.version.external_url) {
       console.error('Cannot get bucket_id or external_url', body.appid, body.channel)
       return sendRes({

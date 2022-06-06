@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
-import { updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { isGoodPlan, isTrial, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
@@ -48,11 +48,12 @@ export const handler: Handler = async(event) => {
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
-    const { data: channels, error: dbError } = await supabase
+    const { data: channel, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
         id,
         created_at,
+        created_by,
         name,
         app_id,
         beta,
@@ -68,6 +69,7 @@ export const handler: Handler = async(event) => {
       `)
       .eq('app_id', cap_app_id)
       .eq('public', true)
+      .single()
     const { data: channelsBeta, error: dbBetaError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
@@ -125,14 +127,22 @@ export const handler: Handler = async(event) => {
       `)
       .eq('device_id', cap_device_id)
       .eq('app_id', cap_app_id)
-    if (dbError || dbBetaError || !channels || !channels.length) {
+    if (dbError || dbBetaError || !channel) {
       console.error('Cannot get channel', cap_app_id, dbError || dbBetaError || 'no channel')
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
       }, 200)
     }
-    const channel = channels[0]
+    const trial = await isTrial(supabase, channel.created_by)
+    const paying = await isGoodPlan(supabase, channel.created_by)
+    if (!paying && !trial) {
+      console.error('Cannot update, upgrade plan to continue to update', cap_app_id)
+      return sendRes({
+        message: 'Cannot update, upgrade plan to continue to update',
+        err: 'not good plan',
+      }, 200)
+    }
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (channelsBeta && channelsBeta.length && semver.prerelease(cap_version_build)) {
       // eslint-disable-next-line no-console
