@@ -23,8 +23,8 @@
   status = 200
 
 [[redirects]]
-  from = "/robot.txt"
-  to = "/robot.txt"
+  from = "/robots.txt"
+  to = "/robots.txt"
   status = 200
 
 [[redirects]]
