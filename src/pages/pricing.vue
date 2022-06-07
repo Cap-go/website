@@ -355,7 +355,7 @@
       </div>
 
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkin-orange-500 md:mt-16 font-pj">
-        Pricing system is not implemented yet, enjoy unlimited Trial until it goes live.
+        1 month free trial for all plans
       </p>
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
         We don’t bill you automatically until your confirmation. We don’t store or sell your data to anyone.
