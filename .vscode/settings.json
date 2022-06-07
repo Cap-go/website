@@ -11,11 +11,5 @@
   "files.associations": {
     "*.css": "postcss",
   },
-  "editor.formatOnSave": false,
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "deno.enablePaths": [
-    "./supabase/functions"
-  ]
+  "editor.formatOnSave": false
 }

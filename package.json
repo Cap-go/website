@@ -11,8 +11,7 @@
     "test:e2e": "cypress open",
     "test:unit": "vitest",
     "typecheck": "vue-tsc --noEmit",
-    "types": "npx openapi-typescript https://xvwzpoazmxkqosrdewyv.supabase.co/rest/v1/\\?apikey\\=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzgwNTAwOSwiZXhwIjoxOTUzMzgxMDA5fQ.8tgID1d4jodPwuo_fz4KHN4o1XKB9fnqyt0_GaJSj-w --output src/types/supabase.ts",
-    "types_deno": "npx openapi-typescript https://xvwzpoazmxkqosrdewyv.supabase.co/rest/v1/\\?apikey\\=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzgwNTAwOSwiZXhwIjoxOTUzMzgxMDA5fQ.8tgID1d4jodPwuo_fz4KHN4o1XKB9fnqyt0_GaJSj-w --output supabase/functions/_utils/types_supabase.ts"
+    "types": "npx openapi-typescript https://xvwzpoazmxkqosrdewyv.supabase.co/rest/v1/\\?apikey\\=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzgwNTAwOSwiZXhwIjoxOTUzMzgxMDA5fQ.8tgID1d4jodPwuo_fz4KHN4o1XKB9fnqyt0_GaJSj-w --output src/types/supabase.ts"
   },
   "dependencies": {
     "@netlify/functions": "^1.0.0",
