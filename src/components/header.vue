@@ -24,13 +24,12 @@ const menuMobile = ref(false)
           </button>
         </div>
 
-        <div class="hidden lg:absolute lg:inset-y-0 lg:flex lg:items-center lg:justify-center lg:space-x-12 lg:-translate-x-1/2 lg:left-3/5">
-          <a href="/app_mobile" title="Sandbox App" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> App </a>
-          <a href="https://github.com/Cap-go/capacitor-updater/wiki" title="Documentation" target="_blank" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Documentation </a>
-        </div>
-
         <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
-          <a href="https://web.capgo.app/login" title="" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </a>
+          <a href="/app_mobile" title="Sandbox App" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> App </a>
+          <a href="/pricing" title="Pricing" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Pricing </a>
+          <a href="/blog" title="Blog" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Blog </a>
+          <a href="https://github.com/Cap-go/capacitor-updater/wiki" title="Documentation" target="_blank" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Documentation </a>
+          <a href="https://web.capgo.app/login" title="Login" target="_blank" class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </a>
 
           <a
             href="https://discord.com/invite/VnYRvBfgA6"
@@ -64,11 +63,36 @@ const menuMobile = ref(false)
       <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-700">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
-        <a href="/app_mobile" title="App" target="_blank" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">App</a>
+        <a href="/app_mobile" title="App" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">App</a>
+        <a href="/pricing" title="Pricing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+        <a href="/blog" title="Blog" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
         <a href="https://github.com/Cap-go/capacitor-updater/wiki" title="Documentation" target="_blank" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Docummentation</a>
 
-        <a href="https://web.capgo.app/login" title="Login" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
-        <a href="https://discord.com/invite/VnYRvBfgA6" title="Communauty" target="_blank" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Join community</a>
+        <a href="https://web.capgo.app/login" target="_blank" title="Login" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
+        <a
+          href="https://discord.com/invite/VnYRvBfgA6" title="Communauty" target="_blank" class="
+                          bg-gray-900
+                          text-white
+                            block
+                            rounded-md
+                            text-base
+                            font-medium
+                            px-5
+                            py-2
+                            text-base
+                            font-semibold
+                            leading-7
+                            text-gray-300
+                            transition-all
+                            duration-200
+                            bg-transparent
+                            border border-gray-300
+                            rounded-xl
+                            font-pj
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300
+                            hover:bg-gray-500 hover:text-white
+                            focus:bg-gray-500 focus:text-white"
+        >Join community</a>
       </div>
     </div>
   </header>
