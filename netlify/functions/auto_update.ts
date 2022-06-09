@@ -187,6 +187,8 @@ export const handler: Handler = async(event) => {
     // eslint-disable-next-line no-console
     console.log('signedURL', cap_device_id, signedURL)
     if (cap_version_name === version.name) {
+      // eslint-disable-next-line no-console
+      console.log('No new version available', cap_device_id, cap_version_name, version.name)
       return sendRes({
         message: 'No new version available',
       }, 200)
