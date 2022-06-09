@@ -70,26 +70,6 @@ export const handler: Handler = async(event) => {
       .eq('app_id', cap_app_id)
       .eq('public', true)
       .single()
-    const { data: channelsBeta, error: dbBetaError } = await supabase
-      .from<definitions['channels'] & Channel>('channels')
-      .select(`
-        id,
-        created_at,
-        name,
-        app_id,
-        beta,
-        disableAutoUpdateUnderNative,
-        disableAutoUpdateToMajor,
-        version (
-          id,
-          name,
-          user_id,
-          bucket_id,
-          external_url
-        )
-      `)
-      .eq('app_id', cap_app_id)
-      .eq('beta', true)
     const { data: channelOverride } = await supabase
       .from<definitions['channel_devices'] & ChannelDev>('channel_devices')
       .select(`
@@ -127,8 +107,8 @@ export const handler: Handler = async(event) => {
       `)
       .eq('device_id', cap_device_id)
       .eq('app_id', cap_app_id)
-    if (dbError || dbBetaError || !channel) {
-      console.error('Cannot get channel', cap_app_id, dbError || dbBetaError || 'no channel')
+    if (dbError || !channel) {
+      console.error('Cannot get channel', cap_app_id, dbError || 'no channel')
       return sendRes({
         message: 'Cannot get channel',
         err: JSON.stringify(dbError),
@@ -144,11 +124,6 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
-    if (channelsBeta && channelsBeta.length && semver.prerelease(cap_version_build)) {
-      // eslint-disable-next-line no-console
-      console.log('Set Beta channel', cap_app_id, channelsBeta[0].version.name)
-      version = channelsBeta[0].version as definitions['app_versions']
-    }
     if (channelOverride && channelOverride.length) {
       // eslint-disable-next-line no-console
       console.log('Set channel override', cap_app_id, channelOverride[0].channel_id.version.name)
@@ -185,7 +160,7 @@ export const handler: Handler = async(event) => {
         signedURL = res.signedURL
     }
     // eslint-disable-next-line no-console
-    console.log('signedURL', cap_device_id, signedURL)
+    console.log('signedURL', cap_device_id, signedURL, cap_version_name, version.name)
     if (cap_version_name === version.name) {
       // eslint-disable-next-line no-console
       console.log('No new version available', cap_device_id, cap_version_name, version.name)
