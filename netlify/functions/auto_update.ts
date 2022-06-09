@@ -193,6 +193,8 @@ export const handler: Handler = async(event) => {
         message: 'No new version available',
       }, 200)
     }
+    // eslint-disable-next-line no-console
+    console.log('check disableAutoUpdateToMajor', cap_device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
       // eslint-disable-next-line no-console
       console.log('Cannot upgrade major version', cap_device_id)
@@ -203,6 +205,8 @@ export const handler: Handler = async(event) => {
         old: cap_version_name,
       }, 200)
     }
+    // eslint-disable-next-line no-console
+    console.log('check disableAutoUpdateUnderNative', cap_device_id)
     if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
       // eslint-disable-next-line no-console
       console.log('Cannot revert under native version', cap_device_id)
@@ -212,6 +216,8 @@ export const handler: Handler = async(event) => {
         old: cap_version_name,
       }, 200)
     }
+    // eslint-disable-next-line no-console
+    console.log('save stats', cap_device_id)
     const stat: Partial<definitions['stats']> = {
       platform: cap_platform as definitions['stats']['platform'],
       device_id: cap_device_id,
