@@ -173,6 +173,8 @@ export const handler: Handler = async(event) => {
       plugin_version: cap_plugin_version,
       version: version.id,
     })
+    // eslint-disable-next-line no-console
+    console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
     if (version.bucket_id && !version.external_url) {
       const res = await supabase
@@ -182,13 +184,16 @@ export const handler: Handler = async(event) => {
       if (res && res.signedURL)
         signedURL = res.signedURL
     }
-
+    // eslint-disable-next-line no-console
+    console.log('signedURL', cap_device_id, signedURL)
     if (cap_version_name === version.name) {
       return sendRes({
         message: 'No new version available',
       }, 200)
     }
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
+      // eslint-disable-next-line no-console
+      console.log('Cannot upgrade major version', cap_device_id)
       return sendRes({
         major: true,
         message: 'Cannot upgrade major version',
@@ -197,6 +202,8 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
+      // eslint-disable-next-line no-console
+      console.log('Cannot revert under native version', cap_device_id)
       return sendRes({
         message: 'Cannot revert under native version',
         version: version.name,
