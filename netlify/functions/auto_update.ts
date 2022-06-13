@@ -27,7 +27,7 @@ export const handler: Handler = async(event) => {
     cap_app_id,
     cap_device_id,
   } = event.headers
-    // if cap_version_build is not semver, then make it semver
+  // if cap_version_build is not semver, then make it semver
   const coerce = semver.coerce(cap_version_build)
   if (coerce)
     cap_version_build = coerce.version
