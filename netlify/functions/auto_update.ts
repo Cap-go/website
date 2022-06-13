@@ -19,14 +19,18 @@ export const handler: Handler = async(event) => {
 
   let {
     cap_version_name,
+    cap_version_build,
     cap_plugin_version,
   } = event.headers
   const {
     cap_platform,
     cap_app_id,
     cap_device_id,
-    cap_version_build,
   } = event.headers
+    // if cap_version_build is not semver, then make it semver
+  const coerce = semver.coerce(cap_version_build)
+  if (coerce)
+    cap_version_build = coerce.version
   cap_version_name = cap_version_name === 'builtin' ? cap_version_build : cap_version_name
   cap_plugin_version = cap_plugin_version || '2.3.3'
   try {
