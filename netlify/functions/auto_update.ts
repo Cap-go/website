@@ -153,7 +153,7 @@ export const handler: Handler = async(event) => {
       version: version.id,
     })
     // eslint-disable-next-line no-console
-    console.log('updateOrCreateDevice done')
+    // console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
     if (version.bucket_id && !version.external_url) {
       const res = await supabase
@@ -164,7 +164,7 @@ export const handler: Handler = async(event) => {
         signedURL = res.signedURL
     }
     // eslint-disable-next-line no-console
-    console.log('signedURL', cap_device_id, signedURL, cap_version_name, version.name)
+    // console.log('signedURL', cap_device_id, signedURL, cap_version_name, version.name)
     if (cap_version_name === version.name) {
       // eslint-disable-next-line no-console
       console.log('No new version available', cap_device_id, cap_version_name, version.name)
@@ -173,7 +173,7 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     // eslint-disable-next-line no-console
-    console.log('check disableAutoUpdateToMajor', cap_device_id)
+    // console.log('check disableAutoUpdateToMajor', cap_device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
       // eslint-disable-next-line no-console
       console.log('Cannot upgrade major version', cap_device_id)
@@ -196,7 +196,7 @@ export const handler: Handler = async(event) => {
       }, 200)
     }
     // eslint-disable-next-line no-console
-    console.log('save stats', cap_device_id)
+    // console.log('save stats', cap_device_id)
     const stat: Partial<definitions['stats']> = {
       platform: cap_platform as definitions['stats']['platform'],
       device_id: cap_device_id,
