@@ -12,7 +12,7 @@ published: true
 next_blog: "/blog/automatic-build-and-release-with-github-actions"
 
 ---
-## Migration Summary [#](https://capgo.app/blog/appcenter-migration#migration-summary "Direct link to heading")
+## Migration Summary
 
 * Capgo is service that helps development teams send live app to deployed apps.
 * Capacitor apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
@@ -27,17 +27,17 @@ Built by the Ionic team as a spiritual successor to Cordova, Capacitor allows de
 
 Fortunately, the migration process is easy and the majority of Cordova plugins are backward compatible with Capacitor. [Start migrating here](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor).
 
-## About Capgo [#](https://capgo.app/blog/appcenter-migration#about-ionic-Capgo "Direct link to heading")
+## About Capgo
 
 Capgo, handles updating apps over time. Development teams can focus completely on the unique features of their app and outsource the complicated app delivery process to Capgo.
 
 Capgo fills in the gaps between web delivery and mobile.
 
-## Capgo Prerequisites [#](https://capgo.app/blog/appcenter-migration#Capgo-prerequisites "Direct link to heading")
+## Capgo Prerequisites
 
 Like App Center, Capgo supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
 
-### Install Capgo CLI [#](https://capgo.app/blog/appcenter-migration#install-capgo-cli "Direct link to heading")
+### Install Capgo CLI
 
 ##### note
 
@@ -47,7 +47,7 @@ The Capgo CLI is required to integrate and manage Capgo's Live Updates feature.
 
     npm install -g @capgo/cli
 
-### Create package.json and Capacitor config files [#](https://capgo.app/blog/appcenter-migration#create-packagejson-and-ionic-config-files "Direct link to heading")
+### Create package.json and Capacitor config files
 
 ##### note
 
@@ -72,7 +72,7 @@ Finally, commit the new files to your project:
 
     git add .git commit -m "added package json and capacitor config" && git push
 
-### Migrate the Code [#](https://capgo.app/blog/appcenter-migration#migrate-the-code "Direct link to heading")
+### Migrate the Code
 
 Now that you have the new required Capgo files in place, you can turn our attention to the actual app itself. Capgo expects the entire built app to be inside a directory named `dist`.
 
@@ -82,13 +82,13 @@ Here is what the app’s directory structure should look like:
 
 ![App Structure](/directory_looklike.webp)
 
-## Capgo Configuration [#](https://capgo.app/blog/appcenter-migration#Capgo-configuration "Direct link to heading")
+## Capgo Configuration
 
 With your app ready for Capgo integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
 Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the "write" key to copy it in your clipboard.
 
-### Install the Capgo SDK [#](https://capgo.app/blog/appcenter-migration#install-the-Capgo-sdk "Direct link to heading")
+### Install the Capgo SDK
 
 From a command line, directly into the root of your Capacitor app run:
 
@@ -105,11 +105,11 @@ And then add to your app this code as replacement of CodePush one:
 
 This will tell the native plugin the installation as succeeded.
 
-## Deploying Live Updates (CodePush Alternative) [#](https://capgo.app/blog/appcenter-migration#deploying-live-updates-codepush-alternative "Direct link to heading")
+## Deploying Live Updates (CodePush Alternative)
 
 The Live Update feature works by using the installed Capgo SDK in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
 
-### Send your first App [#](https://capgo.app/blog/appcenter-migration#send-first-app "Direct link to heading")
+### Send your first App
 
 Next, you need to send to Capgo this local project. Run this command to add your app to Capgo:
 
@@ -125,7 +125,7 @@ Check in [Capgo](https://capgo.app/app) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
-### Create public channel [#](https://capgo.app/blog/appcenter-migration#create-public-channel "Direct link to heading")
+### Create public channel
 
 After you have sent your app to Capgo, you need to create a public channel to let app receive updates from Capgo.
 
@@ -145,7 +145,7 @@ Make it public and copy the link:
 
 ![Public channel](/channel_public.webp)
 
-### Configure app to listen for a Live Update [#](https://capgo.app/blog/appcenter-migration#configure-app-to-listen-for-live-update "Direct link to heading")
+### Configure app to listen for a Live Update
 
 Add this config to your Capacitor config file:
 
@@ -161,7 +161,7 @@ Add this config to your Capacitor config file:
 
 And then do a `npx cap copy` to update your app.
 
-### Receive a Live Update on a Device [#](https://capgo.app/blog/appcenter-migration#receive-a-live-update-on-a-device "Direct link to heading")
+### Receive a Live Update on a Device
 
 For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
 
@@ -171,7 +171,7 @@ Open the app, put it in background and open it again, you should see in the logs
 
 Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://github.com/Cap-go/capacitor-updater/wiki#auto-update).
 
-## Remove App Center Dependencies [#](https://capgo.app/blog/appcenter-migration#remove-app-center-dependencies "Direct link to heading")
+## Remove App Center Dependencies
 
 Now that we've integrated Capgo's services, you should remove any references to App Center. Besides being a best practice to remove unused code/services, removing the SDK should reduce the size of your apps.
 
@@ -195,11 +195,11 @@ Remove the reference to CodePush in the CSP `meta` tag in the `index.html` file 
 
 Finally, within your app, remove any code references to App Center services, such as `codePush.sync();`.
 
-## Next Steps [#](https://capgo.app/blog/appcenter-migration#next-steps "Direct link to heading")
+## Next Steps
 
 You've migrated from App Center to Capgo, utilizing the Live Updates and Native Builds features before removing all App Center dependencies. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Automations (multiple environments and native configurations), App Store Publishing (build native apps in the cloud then deploy them directly to the app stores), and the Cloud CLI use Capgo inside your CI/CD platform of choice (such as Azure DevOps, GitLab, Jenkins, and more).
 
-## Bonus: Automatic send app update [#](https://capgo.app/blog/appcenter-migration#bonus-automatic-send-app-updates "Direct link to heading")
+## Bonus: Automatic send app update
 
 If your code is hosted on GitHub, you can set up automatic build and release in few more step, thanks to GitHub actions.
 

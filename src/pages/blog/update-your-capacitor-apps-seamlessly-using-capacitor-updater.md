@@ -42,7 +42,7 @@ Even native app cannot update this part.
 
 ## Let's get started 🚀
 
-### Capgo Configuration [#](https://capgo.app/blog/appcenter-migration#Capgo-configuration "Direct link to heading")
+### Capgo Configuration
 
 It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
@@ -54,7 +54,7 @@ Then click on the "write" key to copy it in your clipboard.
 
 ![Api key page](/capgo.app_app_account_api_key.webp "Api key page")
 
-### Install the Capgo SDK [#](https://capgo.app/blog/appcenter-migration#install-the-Capgo-sdk "Direct link to heading")
+### Install the Capgo SDK
 
 From a command line, directly into the root of your Capacitor app run:
 
@@ -100,7 +100,7 @@ Check in [Capgo](https://capgo.app/app) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
-## Create public channel [#](https://capgo.app/blog/appcenter-migration#create-public-channel "Direct link to heading")
+## Create public channel
 
 After you have sent your app to Capgo, you need to create a public channel to let app receive updates from Capgo.
 
@@ -120,7 +120,7 @@ Make it public and copy the link:
 
 ![Public channel](/channel_public.webp)
 
-## Configure app to listen for a Live Update [#](https://capgo.app/blog/appcenter-migration#configure-app-to-listen-for-live-update "Direct link to heading")
+## Configure app to listen for a Live Update
 
 Add this config to your Capacitor config file:
 
@@ -136,7 +136,7 @@ Add this config to your Capacitor config file:
 
 Then do a `npx cap copy` to update your app.
 
-## Receive a Live Update on a Device [#](https://capgo.app/blog/appcenter-migration#receive-a-live-update-on-a-device "Direct link to heading")
+## Receive a Live Update on a Device
 
 For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
 
