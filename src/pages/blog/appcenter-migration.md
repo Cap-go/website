@@ -113,11 +113,11 @@ The Live Update feature works by using the installed Capgo SDK in your native ap
 
 Next, you need to send to Capgo this local project. Run this command to add your app to Capgo:
 
-`npx capgo add -a YOURKEY`
+`npx @capgo/cli add -a YOURKEY`
 This command will use all variable defined in the Capacitor config file to create the app.
 
 Run the command to build your code and send it to Capgo with:
-`npx capgo upload -a YOURKEY -channel production`
+`npx @capgo/cli upload -a YOURKEY -channel production`
 
 By default, the version name will be the one in your package.json file.
 

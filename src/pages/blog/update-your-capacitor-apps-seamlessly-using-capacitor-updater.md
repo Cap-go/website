@@ -78,21 +78,21 @@ The Capgo CLI is required to integrate and manage Capgo's Live Updates feature.
 Install it with this command:
 
 ```shell
-npm install -g capgo
+npm install -g @capgo/cli
 ```
 
 ## Add your first version
 
 Let's get started by first creating app in Capgo Cloud with the CLI.
 
-`npx capgo add -a YOU_KEY`
+`npx @capgo/cli add -a YOU_KEY`
 
 This command will use all variable defined in the Capacitor config file to create the app.
 
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx capgo upload -a YOURKEY -channel production`
+`npx @capgo/cli upload -a YOURKEY -channel production`
 
 By default, the version name will be the one in your package.json file.
 
