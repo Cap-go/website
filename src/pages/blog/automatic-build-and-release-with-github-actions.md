@@ -1,6 +1,6 @@
 ---
 title: Automatic build and release with Github actions
-description: Create your own CI/CD pipeline with Github actions for free, to deploy
+description: Create your own CI/CD pipeline with Github actions for free, deploy
   your app every time you push to main.
 author: Martin Donadieu
 date: 2022-03-23
@@ -11,6 +11,10 @@ published: true
 
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.
+
+## Preface 
+
+Be sure you have add your app first to capgo, this tutorial just focus on the upload phase
 
 ## Commit convention
 
@@ -36,20 +40,27 @@ on:
 
 jobs:
   bump-version:
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
     runs-on: ubuntu-latest
-    name: "Bump version and create changelog with commitizen"
+    name: "Bump version and create changelog with standard version"
     steps:
       - name: Check out
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
+      - name: Git config
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
       - name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@0.7.0
-        with:
-          github_token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
-          branch: 'main'
+        run: npx capacitor-standard-version
+      - name: Push to origin
+        run: |
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          remote_repo="https://${GITHUB_ACTOR}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git pull $remote_repo $CURRENT_BRANCH
+          git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
 This will release a tag for every commit in your main branch. And add a changelog entry for each commit in the main branch in `CHANGELOG.md`.
@@ -62,27 +73,13 @@ This is necessary to let the CI commit the changelog.
 
 When you create the token, choose expiration as `never` and the scope as `repo`.
 
-Lastly, to let the tool understand where your version is saved you have to create the file `.cz.toml` at the root of your repository.
-
-And add this inside :
-
-```toml
-[tool.commitizen]
-name = "cz_conventional_commits"
-tag_format = "$major.$minor.$patch$prerelease"
-version = "0.11.5"
-version_files = [
-    "package.json:version",
-    ".cz.toml"
-]
-```
-
-Set the version in this file as the same you have in your `package.json` file.
+Lastly, set the version in your `package.json` file, sync it with your Native version number that will facilitate, then next step.
 
 This is only necessary the first time, then the tools will keep it up to date.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
+Both native and web platform will have the version number bump after each commint.
 ## GitHub actions for build
 
 Create a file at this path: `.github/workflows/build.yml`
@@ -130,3 +127,5 @@ Add the commit will generate a new build for production channel.
 You should add your test in the build step to be sure your code is working.
 
 Go To your Capgo dashboard and check your build who just appear, you now have you own CI/CD system.
+
+If you want to let all of your users get the update whenever it's available go to your channel and set it to `public`.
