@@ -30,7 +30,7 @@ I got many time my presentation delayed by this...
 And for Google this is even worst, the big mistery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days !
 
 
-## solution
+## Solution
 
 To fix this, i crated the Channel system in Capgo.
 
