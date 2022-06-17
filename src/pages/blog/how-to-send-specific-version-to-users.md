@@ -2,11 +2,11 @@
 title: How to send specific version to user
 description: with this you can allow you user to try beta version without the need of TestFlight
 author: Martin Donadieu
-date: 2022-06-16
-head_image: "/testflight_alternative.webp"
+date: 2022-06-17
+head_image: "/capgo_select_update.webp"
 head_image_alt: TestFlight alternative illustration
 tag: alternatives
-published: false
+published: true
 next_blog: ''
 
 ---
