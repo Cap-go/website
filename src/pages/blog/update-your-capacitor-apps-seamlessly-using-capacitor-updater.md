@@ -71,17 +71,13 @@ And then add to your app this code as replacement of CodePush one:
 
 This will tell the native plugin the installation as succeeded.
 
-## Install Capgo CLI
+### Login to capgo CLOUD
 
-The Capgo CLI is required to integrate and manage Capgo's Live Updates feature.
+First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to login with the CLI:
 
-Install it with this command:
+`npx @capgo/cli login YOU_KEY`
 
-```shell
-npm install -g @capgo/cli
-```
-
-## Add your first version
+## Add your first app
 
 Let's get started by first creating app in Capgo Cloud with the CLI.
 
@@ -92,7 +88,7 @@ This command will use all variable defined in the Capacitor config file to creat
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli upload -a YOURKEY -channel production`
+`npx @capgo/cli upload -channel production`
 
 By default, the version name will be the one in your package.json file.
 
@@ -100,25 +96,11 @@ Check in [Capgo](https://capgo.app/app) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
-## Create public channel
+### Make channel public
 
-After you have sent your app to Capgo, you need to create a public channel to let app receive updates from Capgo.
+After you have sent your app to Capgo, you need to make your channel `public` to let apps receive updates from Capgo.
 
-Connect to Capgo to see the list of your app:
-
-![List apps](/list_app.webp)
-
-Select the app you want to create a channel for:
-
-![List version and channels](/list_versions.webp)
-
-Select the channel previously created `production`:
-
-![Channel settings](/make_public.webp)
-
-Make it public and copy the link:
-
-![Public channel](/channel_public.webp)
+`npx @capgo/cli set -c production -s public`
 
 ## Configure app to listen for a Live Update
 

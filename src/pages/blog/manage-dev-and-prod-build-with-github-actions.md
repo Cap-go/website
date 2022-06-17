@@ -4,10 +4,10 @@ description: Use Capgo to release your devbuild to specific channel, and let you
 Google review 
 author: Martin Donadieu
 date: 2022-06-16
-head_image: "/channel_build.webp"
+head_image: "/capgo_ci-cd-illustration.webp"
 head_image_alt: Channel builds illustration
 tag: CI/CD
-published: false
+published: true
 next_blog: '/blog/how-to-send-specific-version-to-users'
 
 ---
