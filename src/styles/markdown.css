@@ -14,6 +14,10 @@
   color: theme('colors.muted-blue.300');
 }
 
+.prose blockquote {
+  color: theme('colors.pumpkin-orange.300');
+}
+
 html:not(.dark) .prose {
   --prism-foreground: #393a34;
   --prism-background: #fbfbfb;
