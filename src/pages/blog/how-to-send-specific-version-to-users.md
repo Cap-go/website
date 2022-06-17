@@ -1,6 +1,6 @@
 ---
-title: How to send specific version to user
-description: with this you can allow you user to try beta version without the need of TestFlight
+title: How to send specific update to one user or a group
+description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your app, and they are in !
 author: Martin Donadieu
 date: 2022-06-17
 head_image: "/capgo_select_update.webp"
