@@ -112,10 +112,10 @@ export const handler: Handler = async(event) => {
       .eq('device_id', cap_device_id)
       .eq('app_id', cap_app_id)
     if (dbError || !channel) {
-      console.error('Cannot get channel', cap_app_id, dbError || 'no channel')
+      console.error('Cannot get channel', cap_app_id, `no public channel ${JSON.stringify(dbError)}`)
       return sendRes({
         message: 'Cannot get channel',
-        err: JSON.stringify(dbError),
+        err: `no public channel ${JSON.stringify(dbError)}`,
       }, 200)
     }
     const trial = await isTrial(supabase, channel.created_by)
