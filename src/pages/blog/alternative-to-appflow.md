@@ -28,6 +28,10 @@ The goal is to provide a simple and easy to use solution to push code updates to
 
 No Native build, not big toolbox like Ionic, just live updates, for the market they don't address, Us.
 
+I contacted them to share with them what i was doing and we found a business friendship agreement.
+
+I build for the maker they build for the big business :)
+
 You are welcome to join the community to build together, I use it for my own projects too, and even I expect this become my main project in the future.
 
 ## Features comparisons
@@ -37,15 +41,16 @@ You are welcome to join the community to build together, I use it for my own pro
 | Live updates | ✅ | ✅ |
 | Updates channel | ✅ | ✅ |
 | Revert/change channel version | ✅ | ❌ |
-| Install Stats | 🏋️‍♀️Coming soon | ❌ |
+| Install Stats | ✅ | ❌ |
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ Cordova compatible |
 | Cordova plugin | ❌ Could be backport | ✅ |
 | 100% open-source | ✅ | ❌ |
-| Affordable pricing | ✅ Start at $9/mo | ❌ Start at $499/mo |
+| Affordable pricing | ✅ Start at $14/mo | ❌ Start at $499/mo |
 | Native build | ❌ | ✅ |
+| 100% Open source | ✅ | ❌ |
 
-If you are a big team with big budget I still think AppFlow is the best solution for you.
+If you are a big team with big budget I recommand you to use AppFlow they build the tool with you in focus, not me.
 
 Otherwise :)
 
