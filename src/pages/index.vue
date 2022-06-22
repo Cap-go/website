@@ -269,7 +269,7 @@ const brand = import.meta.env.brand
       <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 120+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 125+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Stars in GitHub
@@ -281,7 +281,7 @@ const brand = import.meta.env.brand
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 15 340 </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">1 364 774</span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Updates delivered
@@ -293,7 +293,7 @@ const brand = import.meta.env.brand
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 90+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 190+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Apps
