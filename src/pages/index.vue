@@ -287,7 +287,7 @@ const brand = import.meta.env.brand
             Updates delivered
           </p>
           <p class="text-base mt-0.5 text-gray-500">
-            In last 5 months
+            Since january 2022
           </p>
         </div>
 
