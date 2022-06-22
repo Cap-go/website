@@ -49,6 +49,7 @@ export const handler: Handler = async(event) => {
     device.version = data[0].id
   }
   else {
+    console.error('switch to onprem', body.app_id)
     device.version = body.version_name || 'unknown'
     stat.version = body.version || 0
     statsDb = `${statsDb}_onprem`
