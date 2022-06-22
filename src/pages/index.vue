@@ -281,7 +281,7 @@ const brand = import.meta.env.brand
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">1 364 774</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">1,3M+</span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Updates delivered
