@@ -486,8 +486,7 @@ const openSupport = () => {
                   </div>
 
                   <div class="mt-10 md:mt-0">
-                    <a
-                      href="#"
+                    <button
                       title="Get quote now"
                       class="
                                     inline-flex
@@ -508,11 +507,10 @@ const openSupport = () => {
                                     hover:bg-opacity-90
                                     rounded-xl
                                 "
-                      role="button"
                       @click="openSupport()"
                     >
                       Get quote now
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
