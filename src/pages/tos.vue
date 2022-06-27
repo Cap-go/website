@@ -10,7 +10,7 @@ useHead({
 const domain = import.meta.env.domain
 </script>
 <template>
-  <div class="prose prose-sm m-auto text-left">
+  <div class="prose prose-sm m-auto text-left px-3">
     <h1>
       Terms and Conditions
     </h1>

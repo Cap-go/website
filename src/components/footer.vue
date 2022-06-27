@@ -48,7 +48,7 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
 
         <div class="px-5 py-2">
           <a
-            href="https://discord.com/invite/VnYRvBfgA6"
+            href="https://discord.gg/VnYRvBfgA6"
             target="_blank"
             title="Join discord" class="text-base text-gray-500 hover:text-gray-900"
           > Join community </a>

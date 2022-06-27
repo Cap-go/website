@@ -10,7 +10,7 @@ useHead({
 const domain = import.meta.env.domain
 </script>
 <template>
-  <div class="prose prose-sm m-auto text-left">
+  <div class="prose prose-sm m-auto text-left px-3">
     <h1>End-User License Agreement (&quot;Agreement&quot;)</h1>
     <p>Last updated: January 28, 2022</p>
     <p>Please read this End-User License Agreement carefully before clicking the &quot;I Agree&quot; button, downloading or using {{ brand }}.</p>
