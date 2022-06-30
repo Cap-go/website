@@ -57,6 +57,8 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       console.error('checkKey db error', error)
       return null
     }
+    // eslint-disable-next-line no-console
+    console.log('checkKey', data)
     return data
   }
   catch (error) {
