@@ -120,7 +120,7 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
 
 export const handler: Handler = async(event) => {
   // eslint-disable-next-line no-console
-  console.log(event.httpMethod)
+  console.log(event.httpMethod, 'headers', event.headers)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
