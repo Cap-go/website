@@ -239,11 +239,11 @@ export interface paths {
           user_id?: parameters["rowFilter.app_stats_onprem.user_id"];
           created_at?: parameters["rowFilter.app_stats_onprem.created_at"];
           updated_at?: parameters["rowFilter.app_stats_onprem.updated_at"];
-          channels?: parameters["rowFilter.app_stats_onprem.channels"];
           mlu?: parameters["rowFilter.app_stats_onprem.mlu"];
           versions?: parameters["rowFilter.app_stats_onprem.versions"];
-          shared?: parameters["rowFilter.app_stats_onprem.shared"];
           mlu_real?: parameters["rowFilter.app_stats_onprem.mlu_real"];
+          date_id?: parameters["rowFilter.app_stats_onprem.date_id"];
+          devices?: parameters["rowFilter.app_stats_onprem.devices"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -298,11 +298,11 @@ export interface paths {
           user_id?: parameters["rowFilter.app_stats_onprem.user_id"];
           created_at?: parameters["rowFilter.app_stats_onprem.created_at"];
           updated_at?: parameters["rowFilter.app_stats_onprem.updated_at"];
-          channels?: parameters["rowFilter.app_stats_onprem.channels"];
           mlu?: parameters["rowFilter.app_stats_onprem.mlu"];
           versions?: parameters["rowFilter.app_stats_onprem.versions"];
-          shared?: parameters["rowFilter.app_stats_onprem.shared"];
           mlu_real?: parameters["rowFilter.app_stats_onprem.mlu_real"];
+          date_id?: parameters["rowFilter.app_stats_onprem.date_id"];
+          devices?: parameters["rowFilter.app_stats_onprem.devices"];
         };
         header: {
           /** Preference */
@@ -321,11 +321,11 @@ export interface paths {
           user_id?: parameters["rowFilter.app_stats_onprem.user_id"];
           created_at?: parameters["rowFilter.app_stats_onprem.created_at"];
           updated_at?: parameters["rowFilter.app_stats_onprem.updated_at"];
-          channels?: parameters["rowFilter.app_stats_onprem.channels"];
           mlu?: parameters["rowFilter.app_stats_onprem.mlu"];
           versions?: parameters["rowFilter.app_stats_onprem.versions"];
-          shared?: parameters["rowFilter.app_stats_onprem.shared"];
           mlu_real?: parameters["rowFilter.app_stats_onprem.mlu_real"];
+          date_id?: parameters["rowFilter.app_stats_onprem.date_id"];
+          devices?: parameters["rowFilter.app_stats_onprem.devices"];
         };
         body: {
           /** app_stats_onprem */
@@ -1214,14 +1214,16 @@ export interface paths {
           price_m?: parameters["rowFilter.plans.price_m"];
           price_y?: parameters["rowFilter.plans.price_y"];
           stripe_id?: parameters["rowFilter.plans.stripe_id"];
-          apps?: parameters["rowFilter.plans.apps"];
-          channels?: parameters["rowFilter.plans.channels"];
-          updates?: parameters["rowFilter.plans.updates"];
-          versions?: parameters["rowFilter.plans.versions"];
+          app?: parameters["rowFilter.plans.app"];
+          channel?: parameters["rowFilter.plans.channel"];
+          update?: parameters["rowFilter.plans.update"];
+          version?: parameters["rowFilter.plans.version"];
           shared?: parameters["rowFilter.plans.shared"];
           abtest?: parameters["rowFilter.plans.abtest"];
           progressive_deploy?: parameters["rowFilter.plans.progressive_deploy"];
           id?: parameters["rowFilter.plans.id"];
+          price_m_id?: parameters["rowFilter.plans.price_m_id"];
+          price_y_id?: parameters["rowFilter.plans.price_y_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -1279,14 +1281,16 @@ export interface paths {
           price_m?: parameters["rowFilter.plans.price_m"];
           price_y?: parameters["rowFilter.plans.price_y"];
           stripe_id?: parameters["rowFilter.plans.stripe_id"];
-          apps?: parameters["rowFilter.plans.apps"];
-          channels?: parameters["rowFilter.plans.channels"];
-          updates?: parameters["rowFilter.plans.updates"];
-          versions?: parameters["rowFilter.plans.versions"];
+          app?: parameters["rowFilter.plans.app"];
+          channel?: parameters["rowFilter.plans.channel"];
+          update?: parameters["rowFilter.plans.update"];
+          version?: parameters["rowFilter.plans.version"];
           shared?: parameters["rowFilter.plans.shared"];
           abtest?: parameters["rowFilter.plans.abtest"];
           progressive_deploy?: parameters["rowFilter.plans.progressive_deploy"];
           id?: parameters["rowFilter.plans.id"];
+          price_m_id?: parameters["rowFilter.plans.price_m_id"];
+          price_y_id?: parameters["rowFilter.plans.price_y_id"];
         };
         header: {
           /** Preference */
@@ -1308,14 +1312,16 @@ export interface paths {
           price_m?: parameters["rowFilter.plans.price_m"];
           price_y?: parameters["rowFilter.plans.price_y"];
           stripe_id?: parameters["rowFilter.plans.stripe_id"];
-          apps?: parameters["rowFilter.plans.apps"];
-          channels?: parameters["rowFilter.plans.channels"];
-          updates?: parameters["rowFilter.plans.updates"];
-          versions?: parameters["rowFilter.plans.versions"];
+          app?: parameters["rowFilter.plans.app"];
+          channel?: parameters["rowFilter.plans.channel"];
+          update?: parameters["rowFilter.plans.update"];
+          version?: parameters["rowFilter.plans.version"];
           shared?: parameters["rowFilter.plans.shared"];
           abtest?: parameters["rowFilter.plans.abtest"];
           progressive_deploy?: parameters["rowFilter.plans.progressive_deploy"];
           id?: parameters["rowFilter.plans.id"];
+          price_m_id?: parameters["rowFilter.plans.price_m_id"];
+          price_y_id?: parameters["rowFilter.plans.price_y_id"];
         };
         body: {
           /** plans */
@@ -1566,6 +1572,7 @@ export interface paths {
           product_id?: parameters["rowFilter.stripe_info.product_id"];
           trial_at?: parameters["rowFilter.stripe_info.trial_at"];
           price_id?: parameters["rowFilter.stripe_info.price_id"];
+          is_good_plan?: parameters["rowFilter.stripe_info.is_good_plan"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -1624,6 +1631,7 @@ export interface paths {
           product_id?: parameters["rowFilter.stripe_info.product_id"];
           trial_at?: parameters["rowFilter.stripe_info.trial_at"];
           price_id?: parameters["rowFilter.stripe_info.price_id"];
+          is_good_plan?: parameters["rowFilter.stripe_info.is_good_plan"];
         };
         header: {
           /** Preference */
@@ -1646,6 +1654,7 @@ export interface paths {
           product_id?: parameters["rowFilter.stripe_info.product_id"];
           trial_at?: parameters["rowFilter.stripe_info.trial_at"];
           price_id?: parameters["rowFilter.stripe_info.price_id"];
+          is_good_plan?: parameters["rowFilter.stripe_info.is_good_plan"];
         };
         body: {
           /** stripe_info */
@@ -1804,7 +1813,49 @@ export interface paths {
       };
     };
   };
+  "/rpc/is_in_channel": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            ownerid: string;
+            /** Format: uuid */
+            userid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/get_max_channel": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            userid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/get_current_plan_name": {
     post: {
       parameters: {
         body: {
@@ -1848,6 +1899,34 @@ export interface paths {
       };
     };
   };
+  "/rpc/find_best_plan": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            apps_n: number;
+            /** Format: bigint */
+            channels_n: number;
+            /** Format: bigint */
+            shared_n: number;
+            /** Format: bigint */
+            updates_n: number;
+            /** Format: bigint */
+            versions_n: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/exist_channel": {
     post: {
       parameters: {
@@ -1859,6 +1938,34 @@ export interface paths {
             apikey: string;
             /** Format: character varying */
             appid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/find_fit_plan": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            apps_n: number;
+            /** Format: bigint */
+            channels_n: number;
+            /** Format: bigint */
+            shared_n: number;
+            /** Format: bigint */
+            updates_n: number;
+            /** Format: bigint */
+            versions_n: number;
           };
         };
         header: {
@@ -1945,6 +2052,26 @@ export interface paths {
             apikey: string;
             /** Format: character varying */
             appid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/is_paying": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            userid: string;
           };
         };
         header: {
@@ -2047,8 +2174,30 @@ export interface paths {
       parameters: {
         body: {
           args: {
-            /** Format: text */
-            apikey: string;
+            /** Format: character varying */
+            dateid: string;
+            /** Format: uuid */
+            userid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/exist_user": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: character varying */
+            e_mail: string;
           };
         };
         header: {
@@ -2073,6 +2222,46 @@ export interface paths {
             apikey: string;
             /** Format: character varying */
             app_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/is_good_plan": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            userid: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/is_allowed_action": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: text */
+            apikey: string;
           };
         };
         header: {
@@ -2123,7 +2312,11 @@ export interface definitions {
      * @default now()
      */
     created_at?: string;
-    /** Format: uuid */
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
     user_id: string;
     /** Format: character varying */
     key: string;
@@ -2186,7 +2379,11 @@ export interface definitions {
      * This is a Foreign Key to `apps.app_id`.<fk table='apps' column='app_id'/>
      */
     app_id: string;
-    /** Format: uuid */
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
     user_id: string;
     /**
      * Format: timestamp with time zone
@@ -2198,16 +2395,20 @@ export interface definitions {
      * @default now()
      */
     updated_at?: string;
-    /** Format: smallint */
-    channels?: number;
     /** Format: bigint */
     mlu?: number;
     /** Format: bigint */
     versions?: number;
     /** Format: bigint */
-    shared?: number;
-    /** Format: bigint */
     mlu_real?: number;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    date_id: string;
+    /** Format: bigint */
+    devices?: number;
   };
   app_versions: {
     /**
@@ -2231,7 +2432,11 @@ export interface definitions {
     name: string;
     /** Format: character varying */
     bucket_id?: string;
-    /** Format: uuid */
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
     user_id: string;
     /**
      * Format: timestamp with time zone
@@ -2260,7 +2465,11 @@ export interface definitions {
     app_id: string;
     /** Format: character varying */
     icon_url: string;
-    /** Format: uuid */
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
     user_id: string;
     /** Format: character varying */
     name?: string;
@@ -2302,7 +2511,7 @@ export interface definitions {
      * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
-    created_by?: string;
+    created_by: string;
     /**
      * Format: text
      * @description Note:
@@ -2556,13 +2765,13 @@ export interface definitions {
      */
     stripe_id: string;
     /** Format: bigint */
-    apps: number;
+    app: number;
     /** Format: bigint */
-    channels: number;
+    channel: number;
     /** Format: bigint */
-    updates: number;
+    update: number;
     /** Format: bigint */
-    versions: number;
+    version: number;
     /** Format: bigint */
     shared: number;
     /**
@@ -2582,6 +2791,10 @@ export interface definitions {
      * @default extensions.uuid_generate_v4()
      */
     id: string;
+    /** Format: character varying */
+    price_m_id: string;
+    /** Format: character varying */
+    price_y_id: string;
   };
   stats: {
     /**
@@ -2691,8 +2904,13 @@ export interface definitions {
       | "failed"
       | "deleted"
       | "canceled";
-    /** Format: character varying */
-    product_id?: string;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `plans.stripe_id`.<fk table='plans' column='stripe_id'/>
+     * @default free
+     */
+    product_id: string;
     /**
      * Format: timestamp with time zone
      * @default now()
@@ -2700,6 +2918,11 @@ export interface definitions {
     trial_at: string;
     /** Format: character varying */
     price_id?: string;
+    /**
+     * Format: boolean
+     * @default true
+     */
+    is_good_plan?: boolean;
   };
   users: {
     /**
@@ -2743,7 +2966,11 @@ export interface definitions {
      * @default false
      */
     legalAccepted: boolean;
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `stripe_info.customer_id`.<fk table='stripe_info' column='customer_id'/>
+     */
     customer_id?: string;
   };
 }
@@ -2829,16 +3056,16 @@ export interface parameters {
   "rowFilter.app_stats_onprem.created_at": string;
   /** Format: timestamp with time zone */
   "rowFilter.app_stats_onprem.updated_at": string;
-  /** Format: smallint */
-  "rowFilter.app_stats_onprem.channels": string;
   /** Format: bigint */
   "rowFilter.app_stats_onprem.mlu": string;
   /** Format: bigint */
   "rowFilter.app_stats_onprem.versions": string;
   /** Format: bigint */
-  "rowFilter.app_stats_onprem.shared": string;
-  /** Format: bigint */
   "rowFilter.app_stats_onprem.mlu_real": string;
+  /** Format: character varying */
+  "rowFilter.app_stats_onprem.date_id": string;
+  /** Format: bigint */
+  "rowFilter.app_stats_onprem.devices": string;
   /** @description app_versions */
   "body.app_versions": definitions["app_versions"];
   /** Format: bigint */
@@ -2998,13 +3225,13 @@ export interface parameters {
   /** Format: character varying */
   "rowFilter.plans.stripe_id": string;
   /** Format: bigint */
-  "rowFilter.plans.apps": string;
+  "rowFilter.plans.app": string;
   /** Format: bigint */
-  "rowFilter.plans.channels": string;
+  "rowFilter.plans.channel": string;
   /** Format: bigint */
-  "rowFilter.plans.updates": string;
+  "rowFilter.plans.update": string;
   /** Format: bigint */
-  "rowFilter.plans.versions": string;
+  "rowFilter.plans.version": string;
   /** Format: bigint */
   "rowFilter.plans.shared": string;
   /** Format: boolean */
@@ -3013,6 +3240,10 @@ export interface parameters {
   "rowFilter.plans.progressive_deploy": string;
   /** Format: uuid */
   "rowFilter.plans.id": string;
+  /** Format: character varying */
+  "rowFilter.plans.price_m_id": string;
+  /** Format: character varying */
+  "rowFilter.plans.price_y_id": string;
   /** @description stats */
   "body.stats": definitions["stats"];
   /** Format: bigint */
@@ -3071,6 +3302,8 @@ export interface parameters {
   "rowFilter.stripe_info.trial_at": string;
   /** Format: character varying */
   "rowFilter.stripe_info.price_id": string;
+  /** Format: boolean */
+  "rowFilter.stripe_info.is_good_plan": string;
   /** @description users */
   "body.users": definitions["users"];
   /** Format: timestamp with time zone */

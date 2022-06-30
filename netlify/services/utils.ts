@@ -42,8 +42,10 @@ export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => ({
 })
 
 export const checkKey = async(authorization: string | undefined, supabase: SupabaseClient, allowed: definitions['apikeys']['mode'][]): Promise<definitions['apikeys'] | null> => {
-  if (!authorization)
+  if (!authorization) {
+    console.error('checkKey missing authorization')
     return null
+  }
   try {
     const { data, error } = await supabase
       .from<definitions['apikeys']>('apikeys')
@@ -52,13 +54,13 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       .in('mode', allowed)
       .single()
     if (!data || error) {
-      console.error('checkKey error', error)
+      console.error('checkKey db error', error)
       return null
     }
     return data
   }
   catch (error) {
-    console.error(error)
+    console.error('checkKey error', error)
     return null
   }
 }
