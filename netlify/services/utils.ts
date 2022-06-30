@@ -51,8 +51,10 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       .eq('key', authorization)
       .in('mode', allowed)
       .single()
-    if (!data || error)
+    if (!data || error) {
+      console.error('checkKey error', error)
       return null
+    }
     return data
   }
   catch (error) {
