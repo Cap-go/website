@@ -30,9 +30,10 @@ const get = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .select()
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
-    if (dbError || !dataDevice || !dataDevice.length)
+      .single()
+    if (dbError || !dataDevice)
       return sendRes({ status: 'Cannot find device', error: dbError }, 400)
-    return sendRes(dataDevice[0])
+    return sendRes(dataDevice)
   }
   else {
     // get all devices
