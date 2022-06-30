@@ -67,9 +67,10 @@ export const post = async(event: any, supabase: SupabaseClient) => {
       .eq('name', body.version)
       .eq('user_id', apikey.user_id)
       .eq('deleted', false)
-    if (vError || !data || !data.length)
+      .single()
+    if (vError || !data)
       return sendRes({ status: `Cannot find version ${body.version}`, error: JSON.stringify(vError) }, 400)
-    channel.version = data[0].id
+    channel.version = data.id
   }
   if (body.public !== undefined)
     channel.public = body.public

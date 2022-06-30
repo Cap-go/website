@@ -62,7 +62,8 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
     .select()
     .eq('app_id', body.app_id)
     .eq('device_id', body.device_id)
-  if (dbError || !dataDevice || !dataDevice.length)
+    .single()
+  if (dbError || !dataDevice)
     return sendRes({ status: 'Cannot find device', error: dbError }, 400)
   // if version_id set device_override to it
   if (body.version_id) {
@@ -71,13 +72,14 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .select()
       .eq('app_id', body.app_id)
       .eq('name', body.version_id)
-    if (dbError || !dataVersion || !dataVersion.length)
+      .single()
+    if (dbError || !dataVersion)
       return sendRes({ status: 'Cannot find version', error: dbError }, 400)
     supabase
       .from<definitions['devices_override']>('devices_override')
       .upsert({
         device_id: body.device_id,
-        version: dataVersion[0].id,
+        version: dataVersion.id,
         app_id: body.app_id,
       })
   }
@@ -97,13 +99,14 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .select()
       .eq('app_id', body.app_id)
       .eq('name', body.channel)
-    if (dbError || !dataChannel || !dataChannel.length)
+      .single()
+    if (dbError || !dataChannel)
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
     supabase
       .from<definitions['channel_devices']>('channel_devices')
       .upsert({
         device_id: body.device_id,
-        channel_id: dataChannel[0].id,
+        channel_id: dataChannel.id,
         app_id: body.app_id,
       })
   }
