@@ -17,7 +17,7 @@ interface GetDevice {
 
 export const get = async(event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body)
+  if (!apikey)
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
   const body = event.queryStringParameters as any as GetDevice
