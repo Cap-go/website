@@ -49,9 +49,11 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       .from<definitions['apikeys']>('apikeys')
       .select()
       .eq('key', authorization)
-    if (!data || !data.length || error || !allowed.includes(data[0].mode))
+      .in('mode', allowed)
+      .single()
+    if (!data || error)
       return null
-    return data[0]
+    return data
   }
   catch (error) {
     console.error(error)
