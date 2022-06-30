@@ -17,8 +17,6 @@ interface GetDevice {
 
 const get = async(event: any, supabase: SupabaseClient): Promise<any> => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
-  // eslint-disable-next-line no-console
-  console.log('get', apikey)
   if (!apikey)
     return sendRes({ status: 'Cannot Verify User' }, 400)
 

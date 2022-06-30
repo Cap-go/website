@@ -57,8 +57,6 @@ export const checkKey = async(authorization: string | undefined, supabase: Supab
       console.error('checkKey db error', error)
       return null
     }
-    // eslint-disable-next-line no-console
-    console.log('checkKey', data)
     return data
   }
   catch (error) {
@@ -76,8 +74,11 @@ export const checkAppOwner = async(userId: string | undefined, appId: string | u
       .select()
       .eq('user_id', userId)
       .eq('app_id', appId)
-    if (!data || !data.length || error)
+      .single()
+    if (!data || error) {
+      console.error('checkAppOwner db error', error)
       return false
+    }
     return true
   }
   catch (error) {
