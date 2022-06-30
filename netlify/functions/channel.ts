@@ -21,7 +21,7 @@ export const get = async(event: any, supabase: SupabaseClient) => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!body.appid || await checkAppOwner(apikey.user_id, body.appid, supabase))
+  if (!body.appid || !(await checkAppOwner(apikey.user_id, body.appid, supabase)))
     return sendRes({ status: 'You can\'t access this app' }, 400)
   // get one channel or all channels
   if (body.channel) {
@@ -52,7 +52,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
-  if (await checkAppOwner(apikey.user_id, body.appid, supabase))
+  if (!(await checkAppOwner(apikey.user_id, body.appid, supabase)))
     return sendRes({ status: 'You can\'t edit this app' }, 400)
   const channel: Partial<definitions['channels']> = {
     created_by: apikey.user_id,

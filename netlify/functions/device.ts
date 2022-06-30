@@ -21,7 +21,7 @@ const get = async(event: any, supabase: SupabaseClient): Promise<any> => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!body.app_id || await checkAppOwner(apikey.user_id, body.app_id, supabase))
+  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app' }, 400)
   // if device_id get one device
   if (body.device_id) {
@@ -54,7 +54,7 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id)
     return sendRes({ status: 'Cannot find device' }, 400)
-  if (await checkAppOwner(apikey.user_id, body.app_id, supabase))
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app' }, 400)
   // find device
   const { data: dataDevice, error: dbError } = await supabase
