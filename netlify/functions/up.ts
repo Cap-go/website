@@ -1,6 +1,7 @@
 import type { Handler } from '@netlify/functions'
+import axios from 'axios'
 import { useSupabase } from '../services/supabase'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Params {
@@ -23,4 +24,9 @@ export const handler: Handler = async(event) => {
     else
       return sendRes({ error: 'db not answering as expected' }, 500)
   }
+  if (body.service === 'api') {
+    return axios.post('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
+      .then(() => sendRes())
+  }
+  return sendRes({ error: 'unknow error' }, 500)
 }
