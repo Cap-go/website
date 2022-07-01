@@ -25,8 +25,13 @@ export const handler: Handler = async(event) => {
       return sendRes({ error: 'db not answering as expected' }, 500)
   }
   if (body.service === 'api') {
-    return axios.post('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
-      .then(() => sendRes())
+    try {
+      const res = await axios.get('https://api.github.com/repos/netlify/functions/releases/latest')
+      return sendRes()
+    }
+    catch (e) {
+      return sendRes({ error: 'api not answering as expected' }, 500)
+    }
   }
   return sendRes({ error: 'unknow error' }, 500)
 }
