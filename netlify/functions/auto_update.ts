@@ -33,7 +33,7 @@ export const handler: Handler = async(event) => {
     cap_version_build = coerce.version
   else
     return sendRes({ message: `Native version: ${cap_version_build} doesn't follow semver convention, please follow https://semver.org to allow Capgo compare version number` }, 400)
-  cap_version_name = cap_version_name === 'builtin' ? cap_version_build : cap_version_name
+  cap_version_name = (cap_version_name === 'builtin' || !cap_version_name) ? cap_version_build : cap_version_name
   cap_plugin_version = cap_plugin_version || '2.3.3'
   try {
     if (!cap_app_id || !cap_device_id || !cap_version_build || !cap_version_name || !cap_platform) {
