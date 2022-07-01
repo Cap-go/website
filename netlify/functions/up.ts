@@ -27,7 +27,10 @@ export const handler: Handler = async(event) => {
   if (body.service === 'api') {
     try {
       const res = await axios.get('https://api.github.com/repos/netlify/functions/releases/latest')
-      return sendRes()
+      if (res.status === 200)
+        return sendRes()
+      else
+        return sendRes({ error: 'api not answering as expected' }, 500)
     }
     catch (e) {
       return sendRes({ error: 'api not answering as expected' }, 500)
