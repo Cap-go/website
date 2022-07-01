@@ -8,6 +8,8 @@ interface Params {
 }
 
 export const handler: Handler = async(event) => {
+  if (event.httpMethod !== 'GET')
+    return sendRes({ error: 'invalid httpMethod' }, 500)
   const body = event.queryStringParameters as any as Params
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (body.service === 'database') {
