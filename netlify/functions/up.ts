@@ -19,22 +19,26 @@ export const handler: Handler = async(event) => {
       .select()
       .eq('app_id', 'unknow.unknow')
       .single()
-    if (data && !error)
-      return sendRes()
-    else
+    if (data && !error) { return sendRes() }
+    else {
+      console.error('db not answering as expected', error)
       return sendRes({ error: 'db not answering as expected' }, 500)
+    }
   }
   if (body.service === 'api') {
     try {
       const res = await axios.get('https://api.github.com/repos/netlify/functions/releases/latest')
-      if (res.status === 200)
-        return sendRes()
-      else
+      if (res.status === 200) { return sendRes() }
+      else {
+        console.error('api not answering as expected')
         return sendRes({ error: 'api not answering as expected' }, 500)
+      }
     }
     catch (e) {
+      console.error('api not answering as expected', e)
       return sendRes({ error: 'api not answering as expected' }, 500)
     }
   }
+  console.error('unknow error')
   return sendRes({ error: 'unknow error' }, 500)
 }
