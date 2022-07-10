@@ -2,7 +2,6 @@ import type { Handler } from '@netlify/functions'
 import axios from 'axios'
 import { useSupabase } from '../services/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import { post } from './channel'
 import type { definitions } from '~/types/supabase'
 
 interface Params {
