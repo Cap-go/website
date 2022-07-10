@@ -25,9 +25,9 @@ export const handler: Handler = async(event) => {
       return sendRes({ error: 'db not answering as expected' }, 500)
     }
   }
-  if (body.service === 'api') {
+  if (body.service === 'edge') {
     try {
-      const res = await axios.get('https://api.github.com/repos/netlify/functions/releases/latest')
+      const res = await axios.get('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
       if (res.status === 200) { return sendRes() }
       else {
         console.error('api not answering as expected')
