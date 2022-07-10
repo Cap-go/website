@@ -1,8 +1,8 @@
-import { post } from './channel';
 import type { Handler } from '@netlify/functions'
 import axios from 'axios'
 import { useSupabase } from '../services/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
+import { post } from './channel'
 import type { definitions } from '~/types/supabase'
 
 interface Params {
@@ -14,7 +14,10 @@ export const handler: Handler = async(event) => {
     return sendRes({ error: 'invalid httpMethod' }, 500)
   const body = event.queryStringParameters as any as Params
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
-  if (body.service === 'database') {
+  if (body.service === 'api') {
+    return sendRes()
+  }
+  else if (body.service === 'database') {
     const { data, error } = await supabase
       .from<definitions['apps']>('apps')
       .select()
@@ -26,7 +29,7 @@ export const handler: Handler = async(event) => {
       return sendRes({ error: 'db not answering as expected' }, 500)
     }
   }
-  if (body.service === 'edge') {
+  else if (body.service === 'edge') {
     try {
       const res = await axios.post('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
       if (res.status === 200) { return sendRes() }
