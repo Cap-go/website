@@ -1,3 +1,4 @@
+import { post } from './channel';
 import type { Handler } from '@netlify/functions'
 import axios from 'axios'
 import { useSupabase } from '../services/supabase'
@@ -27,7 +28,7 @@ export const handler: Handler = async(event) => {
   }
   if (body.service === 'edge') {
     try {
-      const res = await axios.get('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
+      const res = await axios.post('https://xvwzpoazmxkqosrdewyv.functions.supabase.co/ok')
       if (res.status === 200) { return sendRes() }
       else {
         console.error('api not answering as expected')
