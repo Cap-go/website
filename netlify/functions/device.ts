@@ -76,17 +76,19 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .single()
     if (dbError || !dataVersion)
       return sendRes({ status: 'Cannot find version', error: dbError }, 400)
-    supabase
+    const { data: dataDev, error: dbErrorDev } = await supabase
       .from<definitions['devices_override']>('devices_override')
       .upsert({
         device_id: body.device_id,
         version: dataVersion.id,
         app_id: body.app_id,
       })
+    if (dbErrorDev || !dataDev)
+      return sendRes({ status: 'Cannot save device override', error: dbErrorDev }, 400)
   }
   else {
     // delete device_override
-    supabase
+    await supabase
       .from<definitions['devices_override']>('devices_override')
       .delete()
       .eq('device_id', body.device_id)
@@ -103,17 +105,19 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
       .single()
     if (dbError || !dataChannel)
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
-    supabase
+    const { data: dataChannelDev, error: dbErrorDev } = await supabase
       .from<definitions['channel_devices']>('channel_devices')
       .upsert({
         device_id: body.device_id,
         channel_id: dataChannel.id,
         app_id: body.app_id,
       })
+    if (dbErrorDev || !dataChannelDev)
+      return sendRes({ status: 'Cannot save channel override', error: dbErrorDev }, 400)
   }
   else {
     // delete channel_override
-    supabase
+    await supabase
       .from<definitions['channel_devices']>('channel_devices')
       .delete()
       .eq('device_id', body.device_id)
