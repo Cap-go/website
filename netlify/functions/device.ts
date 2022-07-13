@@ -96,6 +96,7 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
         device_id: body.device_id,
         version: dataVersion.id,
         app_id: body.app_id,
+        created_by: apikey.user_id,
       })
     if (dbErrorDev || !dataDev) {
       console.error('Cannot save device override', dbErrorDev)
@@ -129,6 +130,7 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
         device_id: body.device_id,
         channel_id: dataChannel.id,
         app_id: body.app_id,
+        created_by: apikey.user_id,
       })
     if (dbErrorDev || !dataChannelDev) {
       console.error('Cannot find channel override', dbErrorDev)
