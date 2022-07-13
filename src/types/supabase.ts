@@ -1110,7 +1110,7 @@ export interface paths {
           device_id?: parameters["rowFilter.devices_override.device_id"];
           version?: parameters["rowFilter.devices_override.version"];
           app_id?: parameters["rowFilter.devices_override.app_id"];
-          create_by?: parameters["rowFilter.devices_override.create_by"];
+          created_by?: parameters["rowFilter.devices_override.created_by"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -1166,7 +1166,7 @@ export interface paths {
           device_id?: parameters["rowFilter.devices_override.device_id"];
           version?: parameters["rowFilter.devices_override.version"];
           app_id?: parameters["rowFilter.devices_override.app_id"];
-          create_by?: parameters["rowFilter.devices_override.create_by"];
+          created_by?: parameters["rowFilter.devices_override.created_by"];
         };
         header: {
           /** Preference */
@@ -1186,7 +1186,7 @@ export interface paths {
           device_id?: parameters["rowFilter.devices_override.device_id"];
           version?: parameters["rowFilter.devices_override.version"];
           app_id?: parameters["rowFilter.devices_override.app_id"];
-          create_by?: parameters["rowFilter.devices_override.create_by"];
+          created_by?: parameters["rowFilter.devices_override.created_by"];
         };
         body: {
           /** devices_override */
@@ -2727,7 +2727,7 @@ export interface definitions {
      * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
-    create_by?: string;
+    created_by?: string;
   };
   plans: {
     /**
@@ -3206,7 +3206,7 @@ export interface parameters {
   /** Format: character varying */
   "rowFilter.devices_override.app_id": string;
   /** Format: uuid */
-  "rowFilter.devices_override.create_by": string;
+  "rowFilter.devices_override.created_by": string;
   /** @description plans */
   "body.plans": definitions["plans"];
   /** Format: timestamp with time zone */
