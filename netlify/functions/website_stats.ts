@@ -14,12 +14,12 @@ const get = async (supabase: SupabaseClient) => {
   .eq('date_id', date_id)
   .single()
   if(data && !error)
-    return data
-  return {
-    app: 190,
-    updates: 0,
-    stars: 0
-  }
+    return sendRes(data)
+  return sendRes({
+    apps: 190,
+    updates: 130000,
+    stars: 125
+  })
 }
 
 export const handler: Handler = async(event) => {
