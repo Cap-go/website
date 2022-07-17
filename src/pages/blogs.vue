@@ -29,7 +29,7 @@ const blogs = initBlog()
           Latest from our blog
         </h1>
         <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
-          The best articles to enhence your Crossfit experience.
+          The best articles to enhence your Capacitor experience.
         </p>
       </div>
 

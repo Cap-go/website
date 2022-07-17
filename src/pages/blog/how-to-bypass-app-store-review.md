@@ -5,7 +5,7 @@ description: 'How can Capgo Feature allow you to push code updates to live iOS a
 author: Martin Donadieu
 date: 2022-01-13
 head_image: "/bypass_illustration.webp"
-head_image_alt: Crossfit Men looking for alternative
+head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 next_blog: "/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater"
