@@ -1203,6 +1203,105 @@ export interface paths {
       };
     };
   };
+  "/global_stats": {
+    get: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.global_stats.created_at"];
+          date_id?: parameters["rowFilter.global_stats.date_id"];
+          apps?: parameters["rowFilter.global_stats.apps"];
+          updates?: parameters["rowFilter.global_stats.updates"];
+          stars?: parameters["rowFilter.global_stats.stars"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["global_stats"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** global_stats */
+          global_stats?: definitions["global_stats"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.global_stats.created_at"];
+          date_id?: parameters["rowFilter.global_stats.date_id"];
+          apps?: parameters["rowFilter.global_stats.apps"];
+          updates?: parameters["rowFilter.global_stats.updates"];
+          stars?: parameters["rowFilter.global_stats.stars"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.global_stats.created_at"];
+          date_id?: parameters["rowFilter.global_stats.date_id"];
+          apps?: parameters["rowFilter.global_stats.apps"];
+          updates?: parameters["rowFilter.global_stats.updates"];
+          stars?: parameters["rowFilter.global_stats.stars"];
+        };
+        body: {
+          /** global_stats */
+          global_stats?: definitions["global_stats"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/plans": {
     get: {
       parameters: {
@@ -2191,6 +2290,23 @@ export interface paths {
       };
     };
   };
+  "/rpc/count_all_apps": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/exist_user": {
     post: {
       parameters: {
@@ -2243,6 +2359,23 @@ export interface paths {
             /** Format: uuid */
             userid: string;
           };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/count_all_updates": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
         };
         header: {
           /** Preference */
@@ -2729,6 +2862,25 @@ export interface definitions {
      */
     created_by?: string;
   };
+  global_stats: {
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    date_id: string;
+    /** Format: bigint */
+    apps: number;
+    /** Format: bigint */
+    updates: number;
+    /** Format: bigint */
+    stars: number;
+  };
   plans: {
     /**
      * Format: timestamp with time zone
@@ -3207,6 +3359,18 @@ export interface parameters {
   "rowFilter.devices_override.app_id": string;
   /** Format: uuid */
   "rowFilter.devices_override.created_by": string;
+  /** @description global_stats */
+  "body.global_stats": definitions["global_stats"];
+  /** Format: timestamp with time zone */
+  "rowFilter.global_stats.created_at": string;
+  /** Format: character varying */
+  "rowFilter.global_stats.date_id": string;
+  /** Format: bigint */
+  "rowFilter.global_stats.apps": string;
+  /** Format: bigint */
+  "rowFilter.global_stats.updates": string;
+  /** Format: bigint */
+  "rowFilter.global_stats.stars": string;
   /** @description plans */
   "body.plans": definitions["plans"];
   /** Format: timestamp with time zone */
