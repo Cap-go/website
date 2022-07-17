@@ -54,6 +54,36 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
           > Join community </a>
         </div>
       </nav>
+      <section class="py-12 bg-white sm:py-6">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div class="flex flex-col px-12 space-y-6 sm:max-w-xs sm:mx-auto sm:px-0 lg:flex-row lg:items-center lg:justify-center lg:max-w-none lg:space-x-12 lg:space-y-0">
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <span class="ml-3 text-base font-bold text-gray-400"> Built with Supabase </span>
+            </div>
+
+            <span class="block w-auto h-px bg-gray-200 lg:bg-gray-400 lg:w-px lg:h-4" />
+
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span class="ml-3 text-base font-bold text-gray-400"> 100% Open source </span>
+            </div>
+
+            <span class="block w-auto h-px bg-gray-200 lg:bg-gray-400 lg:w-px lg:h-4" />
+
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span class="ml-3 text-base font-bold text-muted-blue-400"> <a href="https://climate.stripe.com/vxDf62">5% of our revenue go to carbon removal</a></span>
+            </div>
+          </div>
+        </div>
+      </section>
       <div class="mt-8 flex justify-center space-x-6">
         <a href="https://twitter.com/Capgo_app" target="_blank" alt="Open twitter" class="text-gray-400 hover:text-gray-500">
           <span class="sr-only">Twitter</span>

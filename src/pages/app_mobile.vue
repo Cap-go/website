@@ -78,10 +78,10 @@ useHead({
       <div
         class="hidden w-1/2 md:flex space-x-8 justify-end"
       >
-        <div class="border-[0.9rem] h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[1.5rem]" style="background-image: url(/seeit.png);">
+        <div class="border-[0.9rem] h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[1.5rem]" style="background-image: url(/seeit.webp);">
           <span class="flex items-center mx-auto rounded-xl bg-[#d8d8d8] h-3 w-[5rem] mt-2" />
         </div>
-        <div class="border-[0.9rem] h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[2.5rem]" style="background-image: url(/seeit.png);">
+        <div class="border-[0.9rem] h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[2.5rem]" style="background-image: url(/seeit.webp);">
           <span class="flex items-center mx-auto rounded-b-xl bg-[#d8d8d8] h-5 w-[9rem]" />
         </div>
       </div>

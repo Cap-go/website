@@ -51,6 +51,36 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 }
 
+export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
+  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+  if (!apikey || !event.body) {
+    console.error('Cannot Verify User')
+    return sendRes({ status: 'Cannot Verify User' }, 400)
+  }
+
+  const body = JSON.parse(event.body || '{}') as ChannelSet
+
+  if (!(await checkAppOwner(apikey.user_id, body.appid, supabase))) {
+    console.error('You can\'t access this app')
+    return sendRes({ status: 'You can\'t access this app' }, 400)
+  }
+  try {
+    const { error} = await supabase
+      .from<definitions['app_versions']>('app_versions')
+      .delete()
+      .eq('app_id', body.appid)
+    if (error) {
+      console.error('Cannot create channel')
+      return sendRes({ status: 'Cannot create channel', error: JSON.stringify(dbError) }, 400)
+    }
+  }
+  catch (e) {
+    console.error('Cannot create channel', e)
+    return sendRes({ status: 'Cannot set channels', error: e }, 500)
+  }
+  return sendRes()
+}
+
 export const post = async(event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
@@ -112,6 +142,8 @@ export const handler: Handler = async(event) => {
     return post(event, supabase)
   else if (event.httpMethod === 'GET')
     return get(event, supabase)
+    else if (event.httpMethod === 'DELETE')
+    return deleteVersion(event, supabase)
   console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }

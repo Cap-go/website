@@ -1,5 +1,32 @@
 <script setup lang="ts">
 const brand = import.meta.env.brand
+// create function who convert big number in short format
+const shortNumber = (number: number) => {
+  if (number > 1000000)
+    return `${(number / 1000000).toFixed(1)}M`
+
+  if (number > 1000)
+    return `${(number / 1000).toFixed(1)}k`
+
+  return `${number}`
+}
+const stats = reactive({
+  apps: shortNumber(190),
+  updates: shortNumber(70000),
+  stars: shortNumber(125),
+})
+
+// fetch endpoint website_stats to get website stats
+fetch(`${import.meta.env.domain}/api/website_stats`).then((res) => {
+  if (res.ok) {
+    res.json().then((data) => {
+      stats.apps = shortNumber(data.apps)
+      stats.updates = shortNumber(data.updates)
+      stats.stars = shortNumber(data.stars)
+    })
+  }
+})
+
 </script>
 <template>
   <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
@@ -91,7 +118,7 @@ const brand = import.meta.env.brand
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
         <div>
-          <img class="w-auto max-w-lg mx-auto h-120" src="/manage_app.png" alt="Manage app illustration">
+          <img class="w-auto max-w-lg mx-auto h-120" src="/stats_app.webp" alt="Manage app illustration">
         </div>
 
         <div class="lg:pr-12">
@@ -264,12 +291,15 @@ const brand = import.meta.env.brand
         <p class="mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
           We share transparently all with you since day 1.
         </p>
+        <p class="text-base mt-5 text-gray-500 text-center">
+          ( updated every day )
+        </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 125+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> {{ stats.stars }}+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Stars in GitHub
@@ -281,7 +311,7 @@ const brand = import.meta.env.brand
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">1,3M+</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">{{ stats.updates }}+</span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Updates delivered
@@ -293,7 +323,7 @@ const brand = import.meta.env.brand
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> 190+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> {{ stats.apps }}+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Apps
@@ -382,9 +412,9 @@ const brand = import.meta.env.brand
               Like you push a commit
             </p>
           </div>
-          <router-link to="https://web.capgo.app/register" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
+          <a href="https://web.capgo.app/register" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
             Get started &RightArrow;
-          </router-link>
+          </a>
         </div>
       </div>
     </div>
