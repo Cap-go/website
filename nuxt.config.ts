@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
     key: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
   },
-  modules: ['@vueuse/nuxt', '@pinia/nuxt', '@nuxt/content', '@nuxtjs/supabase'],
+  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase'],
   buildModules: ['nuxt-windicss'],
   css: ['@/assets/css/main.css'],
   experimental: {
