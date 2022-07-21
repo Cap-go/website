@@ -15,10 +15,12 @@ const getUrl = (branch = ''): string => {
   else if (branch === 'main')
     return `https://${getRightKey('prod', 'base_domain')}`
   else
-    return `http://${getRightKey('development', 'base_domain')}`
+    return `https://${getRightKey('development', 'base_domain')}`
 }
 
 export default defineNuxtConfig({
+  target: 'static',
+  ssr: false,
   runtimeConfig: {
     public: {
       brand: 'Capgo',
