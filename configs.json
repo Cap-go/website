@@ -2,7 +2,7 @@
     "base_domain": {
       "prod": "capgo.app",
       "development": "development.capgo.app",
-      "local": "localhost:3332"
+      "local": "localhost:8888"
     },
     "supa_anon": {
       "prod": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNzgwNTAwOSwiZXhwIjoxOTUzMzgxMDA5fQ.8tgID1d4jodPwuo_fz4KHN4o1XKB9fnqyt0_GaJSj-w",
@@ -14,4 +14,4 @@
       "development": "https://aucsybvnhavogdmzwtcw.supabase.co",
       "local": "https://aucsybvnhavogdmzwtcw.supabase.co"
     }
-  }
+}

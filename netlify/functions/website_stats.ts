@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
 // https://api.github.com/repos/Cap-go/capacitor-updater
 // stargazers_count
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from 'netlify/services/supabase'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
-const get = async(supabase: SupabaseClient) => {
+const get = async (supabase: SupabaseClient) => {
   const date_id = new Date().toISOString().slice(0, 10)
   const { data, error } = await supabase
     .from<definitions['global_stats']>('global_stats')
@@ -22,13 +23,12 @@ const get = async(supabase: SupabaseClient) => {
   })
 }
 
-export const handler: Handler = async(event) => {
-  // eslint-disable-next-line no-console
+export const handler: Handler = async (event) => {
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
-
-  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const config = useRuntimeConfig()
+  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'GET')
     return get(supabase)
   console.error('Method not allowed')

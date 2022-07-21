@@ -11,7 +11,7 @@ export const useSupabase = (url: string, key: string) => {
   return createClient(url, key, options)
 }
 
-export const updateOrCreateVersion = async(supabase: SupabaseClient, update: Partial<definitions['app_versions']>) => {
+export const updateOrCreateVersion = async (supabase: SupabaseClient, update: Partial<definitions['app_versions']>) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateVersion', update)
   const { data, error } = await supabase
@@ -34,7 +34,7 @@ export const updateOrCreateVersion = async(supabase: SupabaseClient, update: Par
   }
 }
 
-export const updateOrCreateChannel = async(supabase: SupabaseClient, update: Partial<definitions['channels']>) => {
+export const updateOrCreateChannel = async (supabase: SupabaseClient, update: Partial<definitions['channels']>) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
   if (!update.app_id || !update.name || !update.created_by)
@@ -60,8 +60,7 @@ export const updateOrCreateChannel = async(supabase: SupabaseClient, update: Par
   }
 }
 
-export const updateOrCreateDevice = async(supabase: SupabaseClient, update: Partial<definitions['devices']>) => {
-  // eslint-disable-next-line no-console
+export const updateOrCreateDevice = async (supabase: SupabaseClient, update: Partial<definitions['devices']>) => {
   // console.log('updateOrCreateDevice', update)
   const { data, error } = await supabase
     .from<definitions['devices']>('devices')
@@ -82,7 +81,7 @@ export const updateOrCreateDevice = async(supabase: SupabaseClient, update: Part
   }
 }
 
-export const isGoodPlan = async(supabase: SupabaseClient, userId: string): Promise<boolean> => {
+export const isGoodPlan = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
     .rpc<boolean>('is_good_plan', { userid: userId })
     .single()
@@ -92,7 +91,7 @@ export const isGoodPlan = async(supabase: SupabaseClient, userId: string): Promi
   return data || false
 }
 
-export const isTrial = async(supabase: SupabaseClient, userId: string): Promise<number> => {
+export const isTrial = async (supabase: SupabaseClient, userId: string): Promise<number> => {
   const { data, error } = await supabase
     .rpc<number>('is_trial', { userid: userId })
     .single()

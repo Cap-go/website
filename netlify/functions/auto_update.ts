@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import { isGoodPlan, isTrial, updateOrCreateDevice, useSupabase } from '../services/supabase'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Channel {
@@ -11,8 +11,7 @@ interface ChannelDev {
   channel_id: Channel
 }
 
-export const handler: Handler = async(event) => {
-  // eslint-disable-next-line no-console
+export const handler: Handler = async (event) => {
   // console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
@@ -52,7 +51,8 @@ export const handler: Handler = async(event) => {
       cap_plugin_version,
       cap_version_name)
 
-    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+    const config = useRuntimeConfig()
+    const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
     const { data: channel, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
@@ -154,7 +154,7 @@ export const handler: Handler = async(event) => {
       plugin_version: cap_plugin_version,
       version: version.id,
     })
-    // eslint-disable-next-line no-console
+
     // console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
     if (version.bucket_id && !version.external_url) {
@@ -165,7 +165,7 @@ export const handler: Handler = async(event) => {
       if (res && res.signedURL)
         signedURL = res.signedURL
     }
-    // eslint-disable-next-line no-console
+
     // console.log('signedURL', cap_device_id, signedURL, cap_version_name, version.name)
     if (cap_version_name === version.name) {
       // eslint-disable-next-line no-console
@@ -174,7 +174,7 @@ export const handler: Handler = async(event) => {
         message: 'No new version available',
       }, 200)
     }
-    // eslint-disable-next-line no-console
+
     // console.log('check disableAutoUpdateToMajor', cap_device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
       // eslint-disable-next-line no-console
@@ -197,7 +197,7 @@ export const handler: Handler = async(event) => {
         old: cap_version_name,
       }, 200)
     }
-    // eslint-disable-next-line no-console
+
     // console.log('save stats', cap_device_id)
     const stat: Partial<definitions['stats']> = {
       platform: cap_platform as definitions['stats']['platform'],
