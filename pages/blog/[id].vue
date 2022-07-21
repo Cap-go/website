@@ -2,12 +2,11 @@
 <script setup lang="ts">
 import { createMeta } from '~/services/meta'
 import { formatTime, randomArticle } from '~/services/blog'
-const route = useRoute()
 
+const route = useRoute()
 const page = await useAsyncData('articleData', async () => {
   return await queryContent('blog').where({ slug: route.params.id }).findOne()
 })
-
 const random = await useAsyncData('randomData', async () => {
   return page.data.value.next_blog !== ''
     ? await queryContent('blog')
@@ -15,7 +14,6 @@ const random = await useAsyncData('randomData', async () => {
       .findOne()
     : await randomArticle(page.data.value.slug)
 })
-
 useHead(() => ({
   titleTemplate: page.data.value.title || 'No title',
   meta: createMeta(
