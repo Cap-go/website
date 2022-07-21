@@ -12,7 +12,7 @@ export const parseStripeEvent = (key: string, body: string, headers: EventHeader
   return event
 }
 
-export const createPortal = async(key: string, customerId: string, callbackUrl: string) => {
+export const createPortal = async (key: string, customerId: string, callbackUrl: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })
@@ -23,11 +23,11 @@ export const createPortal = async(key: string, customerId: string, callbackUrl: 
   return link
 }
 
-export const createCheckout = async(key: string, customerId: string, reccurence: string, planId: string, successUrl: string, cancelUrl: string) => {
+export const createCheckout = async (key: string, customerId: string, reccurence: string, planId: string, successUrl: string, cancelUrl: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })
-  // eslint-disable-next-line no-console
+
   // console.log('planId', planId)
   let priceId = null
   try {
@@ -35,7 +35,6 @@ export const createCheckout = async(key: string, customerId: string, reccurence:
       query: `product:'${planId}'`,
     })
     prices.data.forEach((price: any) => {
-      // eslint-disable-next-line no-console
       // console.log('price', JSON.stringify(price))
       if (price.recurring.interval === reccurence && price.active)
         priceId = price.id
@@ -58,13 +57,13 @@ export const createCheckout = async(key: string, customerId: string, reccurence:
     success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: cancelUrl,
   }
-  // eslint-disable-next-line no-console
+
   // console.log('checkoutData', checkoutData)
   const session = await stripe.checkout.sessions.create(checkoutData as any)
   return session
 }
 
-export const deleteSub = async(key: string, subscriptionId: string) => {
+export const deleteSub = async (key: string, subscriptionId: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })
@@ -76,7 +75,7 @@ export const deleteSub = async(key: string, subscriptionId: string) => {
     return err
   }
 }
-export const createCustomer = async(key: string, email: string) => {
+export const createCustomer = async (key: string, email: string) => {
   const stripe = new Stripe(key, {
     apiVersion: '2020-08-27',
   })

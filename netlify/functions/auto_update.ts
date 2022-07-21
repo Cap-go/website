@@ -2,7 +2,7 @@ import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isGoodPlan, isTrial, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Channel {
@@ -20,7 +20,7 @@ interface AppInfos {
   device_id: string
 }
 
-export const post = async(event: any, supabase: SupabaseClient) => {
+export const post = async (event: any, supabase: SupabaseClient) => {
   const body = JSON.parse(event.body || '{}') as AppInfos
 
   let {
@@ -159,7 +159,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
       version: version.id,
       platform: platform as definitions['devices']['platform'],
     })
-    // eslint-disable-next-line no-console
+
     // console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
     if (version.bucket_id && !version.external_url) {
@@ -170,7 +170,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
       if (res && res.signedURL)
         signedURL = res.signedURL
     }
-    // eslint-disable-next-line no-console
+
     // console.log('signedURL', device_id, signedURL, version_name, version.name)
     if (version_name === version.name) {
       await sendStats(supabase, 'noNew', platform, device_id, app_id, version_build, version.id)
@@ -180,7 +180,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
         message: 'No new version available',
       }, 200)
     }
-    // eslint-disable-next-line no-console
+
     // console.log('check disableAutoUpdateToMajor', device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
       await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
@@ -205,7 +205,7 @@ export const post = async(event: any, supabase: SupabaseClient) => {
         old: version_name,
       }, 200)
     }
-    // eslint-disable-next-line no-console
+
     // console.log('save stats', device_id)
     await sendStats(supabase, 'get', platform, device_id, app_id, version_build, version.id)
 
@@ -225,13 +225,14 @@ export const post = async(event: any, supabase: SupabaseClient) => {
   }
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const config = useRuntimeConfig()
+  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'POST') { return post(event, supabase) }
   else if (event.httpMethod === 'GET') {
     const {

@@ -1,15 +1,9 @@
-.DS_Store
-.vite-ssg-dist
-.vite-ssg-temp
-*.local
-dist
-dist-ssr
 node_modules
-.idea/
 *.log
-.netlify
+dist
+.output
+.nuxt
 .env
 
-# Supabase
-**/supabase/.branches
-**/supabase/.temp
+# Local Netlify folder
+.netlify

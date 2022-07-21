@@ -1,14 +1,14 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
 interface Version {
   appid?: string
   app_id?: string
 }
-export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
+export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
@@ -40,7 +40,7 @@ export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
   return sendRes()
 }
 
-export const get = async(event: any, supabase: SupabaseClient) => {
+export const get = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey) {
     console.error('Cannot Verify User', event.headers.authorization)
@@ -53,8 +53,8 @@ export const get = async(event: any, supabase: SupabaseClient) => {
       console.error('Missing app_id')
       return sendRes({ status: 'Missing app_id' }, 400)
     }
-
-    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+    const config = useRuntimeConfig()
+    const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
     const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !body) {
       console.error('Cannot Verify User')
@@ -83,13 +83,14 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const config = useRuntimeConfig()
+  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'GET')
     return get(event, supabase)
   else if (event.httpMethod === 'DELETE')
