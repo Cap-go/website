@@ -20,4 +20,4 @@ ci:
           aggregationMethod: optimistic
   upload:
     target: lhci
-    serverBaseUrl: https://captime.app
+    serverBaseUrl: https://capgo.app
