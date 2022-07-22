@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import Crisp from '~/services/crisp'
-
-const config = useRuntimeConfig()
-const brand = config.brand
+import { openMessenger } from '~/services/crisp'
 const router = useRouter()
-const crisp = Crisp()
-const openSupport = () => {
-  crisp.openMessenger()
-}
 router.afterEach((to) => {
   if (to.hash && to.hash.startsWith('#support'))
-    crisp.openMessenger()
+    openMessenger()
 })
-router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
+router.currentRoute.value.hash.startsWith('#support') && openMessenger()
+const config = useRuntimeConfig()
+const brand = config.brand
 </script>
 
 <template>
@@ -28,11 +23,11 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
         </div>
 
         <div class="px-5 py-2">
-          <a href="/blogs" class="text-base text-gray-500 hover:text-gray-900"> Blog </a>
+          <a href="/blog" class="text-base text-gray-500 hover:text-gray-900"> Blog </a>
         </div>
 
         <div class="px-5 py-2">
-          <a href="https://github.com/Cap-go/capacitor-updater/wiki" target="_blank" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
+          <a href="/doc" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
         </div>
 
         <div class="px-5 py-2">
@@ -40,7 +35,7 @@ router.currentRoute.value.hash.startsWith('#support') && crisp.openMessenger()
         </div>
 
         <div class="px-5 py-2">
-          <a href="#" class="text-base text-gray-500 hover:text-gray-900" @click="openSupport"> Support </a>
+          <a href="#support" class="text-base text-gray-500 hover:text-gray-900"> Support </a>
         </div>
 
         <div class="px-5 py-2">

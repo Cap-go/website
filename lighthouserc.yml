@@ -3,7 +3,7 @@ ci:
     numberOfRuns: 5
     url:
       - https://capgo.app
-      - https://capgo.app/blogs
+      - https://capgo.app/blog
   assert:
     preset: lighthouse:recommended
     assertions:
