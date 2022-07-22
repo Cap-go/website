@@ -50,7 +50,7 @@ useHead(() => ({
           <Disclosure v-slot="{ open }">
             <DisclosureButton class="flex w-full justify-between rounded-lg text-black py-2 text-left text-3xl font-medium ">
               <span>Sections</span>
-              <ChevronRightIcon :class="open ? 'transform rotate-90' : ''" class="h-8 w-8 text-purple-500" />
+              <ChevronRightIcon :class="open ? 'transform rotate-90' : ''" class="h-8 w-8 text-gray-900" />
             </DisclosureButton>
             <DisclosurePanel v-slot="{ close }" class="text-lg font-bold text-gray-900">
               <ul class="list-none">
