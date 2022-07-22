@@ -56,7 +56,7 @@ The Capgo app is in AGPLv3, the app have more restri licence since it's not mean
 
 Yes, you can self-host Capgo. Capgo Self-Hosted is our free as in beer and free as in speech version. It’s exactly the same product as our Capgo solution, only the self-hosted version you have to install, host and manage yourself.
 
-We’re fully open source and all our code is available on GitHub. Take a look at the full details of our [self-hosted Auto-update system](https://capgo.app/blog/self-hosted-capgo) solution and read here the [installation instructions](https://github.com/Cap-go/capacitor-updater/wiki/Auto-update-on-premise).
+We’re fully open source and all our code is available on GitHub. Take a look at the full details of our [self-hosted Auto-update system](https://capgo.app/blog/self-hosted-capgo) solution and read here the [installation instructions](/doc#Auto-update-on-premise){:target="_blank"}.
 
 ## Capgo is open in other ways too
 

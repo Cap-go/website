@@ -2,6 +2,8 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.25.2
+  '@headlessui/vue': ^1.6.7
+  '@heroicons/vue': ^1.0.6
   '@iconify-json/carbon': ^1.1.6
   '@iconify-json/twemoji': ^1.1.5
   '@nuxt/content': ^2.0.1
@@ -15,14 +17,18 @@ specifiers:
   nuxt: 3.0.0-rc.6
   nuxt-windicss: ^2.4.3
   prism-theme-vars: ^0.2.4
+  solid: link:@heroicons/vue/solid
   stripe: ^9.14.0
   typescript: ^4.7.4
   vue-meta: ^2.4.0
 
 dependencies:
+  '@headlessui/vue': 1.6.7
+  '@heroicons/vue': 1.0.6
   '@types/semver': 7.3.10
   axios: 0.27.2
   prism-theme-vars: 0.2.4
+  solid: link:@heroicons/vue/solid
   stripe: 9.14.0
   vue-meta: 2.4.0
 
@@ -469,6 +475,19 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/vue/1.6.7:
+    resolution: {integrity: sha512-5sTCBpkUoFE7zhANn/6Z+pf3PUA7MD6BBaTsJcQybq9E4fnNiMM9agOJI9meXbtcawE6Dm8EeB5A8HAJEnZCbQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dev: false
+
+  /@heroicons/vue/1.0.6:
+    resolution: {integrity: sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==}
+    peerDependencies:
+      vue: '>= 3'
+    dev: false
 
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}

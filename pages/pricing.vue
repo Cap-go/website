@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import Crisp from '~/services/crisp'
-
-const crisp = Crisp()
-const openSupport = () => {
-  crisp.sendMessage({ value: 'I need a custom plan' })
-  crisp.openMessenger()
-}
 </script>
 
 <template>
@@ -487,7 +480,7 @@ const openSupport = () => {
                   </div>
 
                   <div class="mt-10 md:mt-0">
-                    <button
+                    <a
                       title="Get quote now"
                       class="
                                     inline-flex
@@ -508,10 +501,10 @@ const openSupport = () => {
                                     hover:bg-opacity-90
                                     rounded-xl
                                 "
-                      @click="openSupport()"
+                      href="#support"
                     >
                       Get quote now
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

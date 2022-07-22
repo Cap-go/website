@@ -3,7 +3,7 @@ const config = useRuntimeConfig()
 
 const brand = config.brand
 useHead({
-  title: `${brand} | Capacitor sanbox APP`,
+  title: `${brand} | Capacitor sandbox app`,
   meta: [
     { name: 'description', content: 'Try and manage OTA update for your capacitor app from your pocket, available in IOS and Android.' },
     { name: 'og:type', content: 'website' },
