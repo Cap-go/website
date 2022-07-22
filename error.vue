@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import Crisp from '~/services/crisp'
+import { openMessenger } from '~/services/crisp'
 
 useHead({
   meta: [
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
-
-const crisp = Crisp()
-const openSupport = () => {
-  crisp.openMessenger()
-}
+const router = useRouter()
+router.afterEach((to) => {
+  if (to.hash && to.hash.startsWith('#support'))
+    openMessenger()
+})
+router.currentRoute.value.hash.startsWith('#support') && openMessenger()
+const config = useRuntimeConfig()
+const brand = config.brand
 </script>
 
 <template>
@@ -31,7 +34,7 @@ const openSupport = () => {
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
             <a href="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500"> Go back home </a>
-            <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornflower-700 bg-cornflower-100 hover:bg-cornflower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500" @click="openSupport"> Contact support </a>
+            <a href="#support" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornflower-700 bg-cornflower-100 hover:bg-cornflower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500"> Contact support </a>
           </div>
         </div>
       </main>
