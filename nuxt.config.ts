@@ -20,6 +20,7 @@ const getUrl = (branch = ''): string => {
 
 export default defineNuxtConfig({
   target: 'static',
+  ssr: false,
   runtimeConfig: {
     public: {
       brand: 'Capgo',
