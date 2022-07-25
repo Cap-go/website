@@ -3,6 +3,7 @@
   "packageManager": "pnpm@7.5.0",
   "scripts": {
     "build": "nuxi build",
+    "generate": "nuxi generate",
     "dev": "nuxi dev",
     "start": "node .output/server/index.mjs",
     "lint": "eslint ."
