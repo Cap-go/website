@@ -4,10 +4,9 @@ import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '~/types/supabase'
 
-interface GetLatest {
+interface Version {
   appid?: string
   app_id?: string
-  channel: string
 }
 export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
@@ -16,7 +15,7 @@ export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
   }
 
-  const body = JSON.parse(event.body || '{}') as GetLatest
+  const body = JSON.parse(event.body || '{}') as Version
 
   if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
     console.error('You can\'t access this app')
@@ -49,7 +48,7 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 
   try {
-    const body = event.queryStringParameters as any as GetLatest
+    const body = event.queryStringParameters as any as Version
     if (!(body.appid || body.app_id))
       return sendRes({ status: 'Missing app_id' }, 400)
 
