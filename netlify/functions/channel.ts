@@ -23,7 +23,7 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!body.appid || !(await checkAppOwner(apikey.user_id, body.appid, supabase))){
+  if (!body.appid || !(await checkAppOwner(apikey.user_id, body.appid, supabase))) {
     console.error('You can\'t access this app')
     return sendRes({ status: 'You can\'t access this app' }, 400)
   }
@@ -65,11 +65,11 @@ export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
     return sendRes({ status: 'You can\'t access this app' }, 400)
   }
   try {
-    const { error} = await supabase
+    const { error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .delete()
       .eq('app_id', body.appid)
-    if (error) {
+    if (dbError) {
       console.error('Cannot create channel')
       return sendRes({ status: 'Cannot create channel', error: JSON.stringify(dbError) }, 400)
     }
@@ -142,7 +142,7 @@ export const handler: Handler = async(event) => {
     return post(event, supabase)
   else if (event.httpMethod === 'GET')
     return get(event, supabase)
-    else if (event.httpMethod === 'DELETE')
+  else if (event.httpMethod === 'DELETE')
     return deleteVersion(event, supabase)
   console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
