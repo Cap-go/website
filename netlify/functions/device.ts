@@ -59,7 +59,7 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
     return sendRes({ status: 'Cannot Verify User' }, 400)
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
-  if (!body.device_id || !body.app_id){
+  if (!body.device_id || !body.app_id) {
     console.error('Cannot find device')
     return sendRes({ status: 'Cannot find device' }, 400)
   }
