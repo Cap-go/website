@@ -1,6 +1,6 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
-import { isGoodPlan, isTrial, updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { isGoodPlan, isTrial, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 import type { definitions } from '~/types/supabase'
 
@@ -122,14 +122,15 @@ export const handler: Handler = async(event) => {
     }
     const trial = await isTrial(supabase, channel.created_by)
     const paying = await isGoodPlan(supabase, channel.created_by)
+    let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (!paying && !trial) {
+      await sendStats(supabase, 'needUpgrade', cap_platform, cap_device_id, cap_app_id, cap_version_build, version.id)
       console.error('Cannot update, upgrade plan to continue to update', cap_app_id)
       return sendRes({
         message: 'Cannot update, upgrade plan to continue to update',
         err: 'not good plan',
       }, 200)
     }
-    let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     if (channelOverride && channelOverride.length) {
       // eslint-disable-next-line no-console
       console.log('Set channel override', cap_app_id, channelOverride[0].channel_id.version.name)
@@ -168,6 +169,7 @@ export const handler: Handler = async(event) => {
     // eslint-disable-next-line no-console
     // console.log('signedURL', cap_device_id, signedURL, cap_version_name, version.name)
     if (cap_version_name === version.name) {
+      await sendStats(supabase, 'noNew', cap_platform, cap_device_id, cap_app_id, cap_version_build, version.id)
       // eslint-disable-next-line no-console
       console.log('No new version available', cap_device_id, cap_version_name, version.name)
       return sendRes({
@@ -177,6 +179,7 @@ export const handler: Handler = async(event) => {
     // eslint-disable-next-line no-console
     // console.log('check disableAutoUpdateToMajor', cap_device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(cap_version_name)) {
+      await sendStats(supabase, 'disableAutoUpdateToMajor', cap_platform, cap_device_id, cap_app_id, cap_version_build, version.id)
       // eslint-disable-next-line no-console
       console.log('Cannot upgrade major version', cap_device_id)
       return sendRes({
@@ -189,6 +192,7 @@ export const handler: Handler = async(event) => {
     // eslint-disable-next-line no-console
     console.log('check disableAutoUpdateUnderNative', cap_device_id)
     if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, cap_version_build)) {
+      await sendStats(supabase, 'disableAutoUpdateUnderNative', cap_platform, cap_device_id, cap_app_id, cap_version_build, version.id)
       // eslint-disable-next-line no-console
       console.log('Cannot revert under native version', cap_device_id)
       return sendRes({
@@ -199,24 +203,7 @@ export const handler: Handler = async(event) => {
     }
     // eslint-disable-next-line no-console
     // console.log('save stats', cap_device_id)
-    const stat: Partial<definitions['stats']> = {
-      platform: cap_platform as definitions['stats']['platform'],
-      device_id: cap_device_id,
-      action: 'get',
-      app_id: cap_app_id,
-      version_build: cap_version_build,
-      version: version.id,
-    }
-    try {
-      const { error } = await supabase
-        .from<definitions['stats']>('stats')
-        .insert(stat)
-      if (error)
-        console.error('Cannot insert stat', cap_app_id, cap_version_build, error)
-    }
-    catch (err) {
-      console.error('Cannot insert stats', cap_app_id, err)
-    }
+    await sendStats(supabase, 'get', cap_platform, cap_device_id, cap_app_id, cap_version_build, version.id)
 
     // eslint-disable-next-line no-console
     console.log('New version available', cap_app_id, version.name, signedURL)
