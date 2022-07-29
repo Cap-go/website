@@ -16,7 +16,7 @@ export const handler: Handler = async(event) => {
       .select()
       .eq('app_id', 'unknow.unknow')
       .single()
-    if (data && !error) { return sendRes() }
+    if (data && !error) { return sendRes({ status: 'ok', service: 'database' }) }
     else {
       console.error('db not answering as expected', error)
       return sendRes({ error: 'db not answering as expected' }, 500)
