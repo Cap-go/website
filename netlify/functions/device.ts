@@ -55,8 +55,10 @@ const get = async(event: any, supabase: SupabaseClient): Promise<any> => {
 
 const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body)
+  if (!apikey || !event.body) {
+    console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
+  }
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id) {
@@ -150,8 +152,10 @@ const post = async(event: any, supabase: SupabaseClient): Promise<any> => {
 
 export const deleteDev = async(event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body)
+  if (!apikey || !event.body) {
+    console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
+  }
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {

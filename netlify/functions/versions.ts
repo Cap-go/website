@@ -43,34 +43,43 @@ export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
 export const get = async(event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey) {
-    console.error('Cannot Verify User')
+    console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
   }
 
   try {
     const body = event.queryStringParameters as any as Version
-    if (!(body.appid || body.app_id))
+    if (!(body.appid || body.app_id)) {
+      console.error('Missing app_id')
       return sendRes({ status: 'Missing app_id' }, 400)
+    }
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
     const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
-    if (!apikey || !event.body)
+    if (!apikey || !body) {
+      console.error('Cannot Verify User')
       return sendRes({ status: 'Cannot Verify User' }, 400)
-    if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase)))
-      return sendRes({ status: 'You can\'t check this app' }, 400)
+    }
+    if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
+      console.error('You can\'t check this app', body.appid || body.app_id)
+      return sendRes({ status: 'You can\'t check this app', app_id: body.appid || body.app_id }, 400)
+    }
     const { data: dataVersions, error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()
       .eq('app_id', body.appid || body.app_id)
       .eq('deleted', false)
       .order('created_at', { ascending: false })
-    if (dbError || !dataVersions || !dataVersions.length)
-      return sendRes({ status: 'Cannot get latest version', error: dbError }, 400)
+    if (dbError || !dataVersions || !dataVersions.length) {
+      console.error('Cannot get versions', dbError)
+      return sendRes({ status: 'Cannot get versions', error: dbError }, 400)
+    }
 
     return sendRes({ versions: dataVersions })
   }
   catch (e) {
-    return sendRes({ status: 'Cannot get latest version', error: e }, 500)
+    console.error('Cannot get versions', e)
+    return sendRes({ status: 'Cannot get versions', error: e }, 500)
   }
 }
 
