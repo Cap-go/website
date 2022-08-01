@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createMeta } from '~~/services/meta'
+import { createMeta } from '~/services/meta'
 
 const config = useRuntimeConfig()
 const brand = config.brand
@@ -153,7 +153,7 @@ useHead(() => ({
   <div class="">
     <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-base font-semibold text-pumpkin-orange-600 tracking-wide uppercase">
+        <h2 class="text-base font-semibold text-pumpkinOrange-600 tracking-wide uppercase">
           CI/CD
         </h2>
         <p class="mt-1 text-4xl font-extrabold text-gray-100 sm:text-5xl sm:tracking-tight lg:text-6xl">
@@ -314,7 +314,7 @@ useHead(() => ({
       <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> {{ stats.stars }}+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600"> {{ stats.stars }}+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Stars in GitHub
@@ -326,7 +326,7 @@ useHead(() => ({
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600">{{ stats.updates }}+</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600">{{ stats.updates }}+</span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Updates delivered
@@ -338,7 +338,7 @@ useHead(() => ({
 
         <div>
           <h3 class="font-bold text-7xl">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkin-orange-600 to-azure-600"> {{ stats.apps }}+ </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600"> {{ stats.apps }}+ </span>
           </h3>
           <p class="mt-4 text-xl font-medium text-gray-900">
             Apps

@@ -21,6 +21,9 @@ const getUrl = (branch = ''): string => {
 export default defineNuxtConfig({
   target: 'static',
   ssr: true,
+  generate: {
+    fallback: 'true',
+  },
   runtimeConfig: {
     public: {
       brand: 'Capgo',
@@ -34,11 +37,26 @@ export default defineNuxtConfig({
     url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
     key: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
   },
-  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase'],
-  buildModules: ['nuxt-windicss'],
-  css: ['@/assets/css/main.css'],
+  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase', '@unocss/nuxt', '@nuxtjs/algolia'],
+  algolia: {
+    apiKey: 'e2b0d6f907e5e4c17d81d43b91a45b62',
+    applicationId: 'I0XZYAJ1M3',
+    globalIndex: 'dev_capgo',
+    docSearch: {
+      indexName: 'dev_capgo',
+    },
+  },
   experimental: {
     reactivityTransform: true,
     viteNode: false,
   },
+  unocss: {
+    preflight: true,
+  },
+  css: ['~/assets/css/main.css'],
+  build: {
+    extractCSS: true,
+    transpile: ['@headlessui/vue', '@heroicons/vue'],
+  },
+
 })

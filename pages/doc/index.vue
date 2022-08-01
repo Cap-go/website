@@ -5,8 +5,10 @@ import {
   DisclosurePanel,
 } from '@headlessui/vue'
 import { ChevronRightIcon } from '@heroicons/vue/solid'
-
+import { indexDocContent } from '~/services/search'
 import { createMeta } from '~/services/meta'
+
+indexDocContent()
 
 const route = useRoute()
 // eslint-disable-next-line no-console
