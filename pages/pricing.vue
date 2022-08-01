@@ -355,7 +355,7 @@
         </div>
       </div>
 
-      <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkin-orange-500 md:mt-16 font-pj">
+      <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
       </p>
       <section class="py-12 sm:py-16 lg:py-20">

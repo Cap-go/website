@@ -11,11 +11,11 @@
 }
 
 .prose thead {
-  color: theme('colors.muted-blue.300');
+  color: theme('colors.mutedBlue.300');
 }
 
 .prose blockquote {
-  color: theme('colors.pumpkin-orange.300');
+  color: theme('colors.pumpkinOrange.300');
 }
 
 html:not(.dark) .prose {

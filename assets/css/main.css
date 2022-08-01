@@ -44,19 +44,18 @@ html.dark {
 
 @font-face {
   font-family: 'AirbnbCerealLight';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../../fonts/AirbnbCerealLight.woff');
+  font-weight: 500;
+  src: url(~/assets/fonts/AirbnbCerealLight.woff) format('woff');
 }
+
 @font-face {
   font-family: 'AirbnbCerealMedium';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../../fonts/AirbnbCerealMedium.woff');
+  font-weight: 500;
+  src: url(~/assets/fonts/AirbnbCerealMedium.woff) format('woff');
 }
+
 @font-face {
   font-family: 'AirbnbCerealBold';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../../fonts/AirbnbCerealBold.woff');
+  font-weight: 500;
+  src: url(~/assets/fonts/AirbnbCerealBold.woff) format('woff');
 }
