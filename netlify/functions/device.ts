@@ -55,8 +55,10 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
 
 const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body)
+  if (!apikey || !event.body) {
+    console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
+  }
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id) {
@@ -148,6 +150,36 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   return sendRes()
 }
 
+export const deleteDev = async (event: any, supabase: SupabaseClient) => {
+  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+  if (!apikey || !event.body) {
+    console.error('Cannot Verify User', event.headers.authorization)
+    return sendRes({ status: 'Cannot Verify User' }, 400)
+  }
+
+  const body = JSON.parse(event.body || '{}') as DeviceLink
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
+    console.error('You can\'t access this app')
+    return sendRes({ status: 'You can\'t access this app' }, 400)
+  }
+  try {
+    const { error } = await supabase
+      .from<definitions['devices_override']>('devices_override')
+      .delete()
+      .eq('app_id', body.app_id)
+      .eq('device_id', body.device_id)
+    if (error) {
+      console.error('Cannot create channel')
+      return sendRes({ status: 'Cannot create channel', error: JSON.stringify(error) }, 400)
+    }
+  }
+  catch (e) {
+    console.error('Cannot create channel', e)
+    return sendRes({ status: 'Cannot set channels', error: e }, 500)
+  }
+  return sendRes()
+}
+
 export const handler: Handler = async (event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
@@ -160,6 +192,8 @@ export const handler: Handler = async (event) => {
     return post(event, supabase)
   else if (event.httpMethod === 'GET')
     return get(event, supabase)
+  else if (event.httpMethod === 'DELETE')
+    return deleteDev(event, supabase)
   console.error('Method now allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
