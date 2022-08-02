@@ -1,5 +1,16 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
+import keys from '../../configs.json'
+
+export const getRightKey = (env: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
+  // eslint-disable-next-line no-console
+  console.log('env', env)
+  if (env === 'development')
+    return keys[keyname].development
+  else if (env === 'local')
+    return keys[keyname].local
+  return keys[keyname].prod
+}
 
 export const findEnv = (url: string): string => {
   if (url.includes('localhost'))
