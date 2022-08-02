@@ -75,7 +75,7 @@ const brand = config.brand
               <svg class="flex-shrink-0 w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-              <span class="ml-3 text-base font-bold text-muted-blue-400"> <a href="https://climate.stripe.com/vxDf62">5% of our revenue go to carbon removal</a></span>
+              <span class="ml-3 text-base font-bold text-mutedBlue-400"> <a href="https://climate.stripe.com/vxDf62">5% of our revenue go to carbon removal</a></span>
             </div>
           </div>
         </div>

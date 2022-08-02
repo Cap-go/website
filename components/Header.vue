@@ -7,8 +7,8 @@ const menuMobile = ref(false)
 </script>
 
 <template>
-  <header class="relative py-4 md:py-6">
-    <div class="px-4 pb-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <header class="relative py-2">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between">
         <div class="flex-shrink-0">
           <a href="/" title="" class="flex rounded-lg overflow-hidden outline-none font-900 bg-azure-500 items-center focus:ring-1 focus:ring-gray-900 border focus:ring-offset-2 pr-3">
@@ -61,7 +61,7 @@ const menuMobile = ref(false)
       </div>
     </div>
     <div :class="{ hidden: !menuMobile }">
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-700">
+      <div class="px-2 pt-2 mt-2 pb-3 space-y-1 bg-gray-700">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
         <a href="/app_mobile" title="App" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">App</a>

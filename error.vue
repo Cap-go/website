@@ -20,7 +20,7 @@ const brand = config.brand
   <div class="bg-white min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
     <div class="max-w-max mx-auto">
       <main class="sm:flex">
-        <p class="text-4xl font-extrabold text-cornflower-600 sm:text-5xl">
+        <p class="text-4xl font-extrabold text-cornFlower-600 sm:text-5xl">
           404
         </p>
         <div class="sm:ml-6">
@@ -33,8 +33,8 @@ const brand = config.brand
             </p>
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
-            <a href="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500"> Go back home </a>
-            <a href="#support" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornflower-700 bg-cornflower-100 hover:bg-cornflower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500"> Contact support </a>
+            <a href="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cornFlower-600 hover:bg-cornFlower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500"> Go back home </a>
+            <a href="#support" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornFlower-700 bg-cornFlower-100 hover:bg-cornFlower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500"> Contact support </a>
           </div>
         </div>
       </main>
