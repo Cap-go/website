@@ -4,8 +4,8 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from 'netlify/services/supabase'
+import type { definitions } from '../../types/supabase'
 import { findEnv, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
 
 const get = async (supabase: SupabaseClient) => {
   const date_id = new Date().toISOString().slice(0, 10)

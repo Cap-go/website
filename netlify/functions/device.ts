@@ -2,7 +2,7 @@ import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, findEnv, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
 
 interface DeviceLink {
   app_id: string

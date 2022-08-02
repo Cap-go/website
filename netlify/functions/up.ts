@@ -2,7 +2,7 @@ import type { Handler } from '@netlify/functions'
 import axios from 'axios'
 import { useSupabase } from '../services/supabase'
 import { findEnv, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
 
 interface Params {
   service: string

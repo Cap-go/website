@@ -2,8 +2,8 @@ import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isGoodPlan, isTrial, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
+import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
 
 interface Channel {
   version: definitions['app_versions']

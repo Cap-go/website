@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
+import type { definitions } from '../../types/supabase'
 import { findEnv, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
 
 interface AppStats {
   platform: string

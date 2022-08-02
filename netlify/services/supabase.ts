@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient } from '@supabase/supabase-js'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
 
 export const useSupabase = (url: string, key: string) => {
   const options = {
@@ -101,7 +101,7 @@ export const isTrial = async (supabase: SupabaseClient, userId: string): Promise
   return data || 0
 }
 
-export const sendStats = async(supabase: SupabaseClient, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
+export const sendStats = async (supabase: SupabaseClient, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
   const stat: Partial<definitions['stats']> = {
     platform: platform as definitions['stats']['platform'],
     device_id,

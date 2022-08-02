@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import Stripe from 'stripe'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
 
 type EventHeaders = Record<string, string | undefined>
 export const parseStripeEvent = (key: string, body: string, headers: EventHeaders, secret: string) => {
