@@ -41,7 +41,7 @@ The only restriction is to use [semver](https://semver.org/) in your `package.js
 
 Follow the documentation to upload your first version to the server here:
 
-[Capgo CLI](https://doc.capgo.app/Capgo-CLI-f5919f0578cf4643ac0a20f3a7718b57)
+[Capgo CLI](https://github.com/Cap-go/capacitor-updater/wiki/Capgo-CLI)
 
 Get in the app, Capgo your link.
 

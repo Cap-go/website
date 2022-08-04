@@ -37,15 +37,7 @@ export default defineNuxtConfig({
     url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
     key: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
   },
-  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase', '@unocss/nuxt', '@nuxtjs/algolia'],
-  algolia: {
-    apiKey: 'e2b0d6f907e5e4c17d81d43b91a45b62',
-    applicationId: 'I0XZYAJ1M3',
-    globalIndex: 'dev_capgo',
-    docSearch: {
-      indexName: 'dev_capgo',
-    },
-  },
+  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase', '@unocss/nuxt'],
   experimental: {
     reactivityTransform: true,
     viteNode: false,
