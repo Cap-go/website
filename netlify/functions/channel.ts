@@ -26,8 +26,8 @@ export const get = async(event: any, supabase: SupabaseClient) => {
 
   const body = event.queryStringParameters as any as GetDevice
   if (!(body.appid || body.app_id) || !(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
-    console.error('You can\'t access this app')
-    return sendRes({ status: 'You can\'t access this app' }, 400)
+    console.error('You can\'t access this app', body.app_id)
+    return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   // get one channel or all channels
   if (body.channel) {
@@ -63,8 +63,8 @@ export const deleteChannel = async(event: any, supabase: SupabaseClient) => {
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
   if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
-    console.error('You can\'t access this app')
-    return sendRes({ status: 'You can\'t access this app' }, 400)
+    console.error('You can\'t access this app', body.app_id)
+    return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   try {
     const { error: dbError } = await supabase
@@ -94,8 +94,8 @@ export const post = async(event: any, supabase: SupabaseClient) => {
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
   if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
-    console.error('You can\'t access this app')
-    return sendRes({ status: 'You can\'t access this app' }, 400)
+    console.error('You can\'t access this app', body.app_id)
+    return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   const channel: Partial<definitions['channels']> = {
     created_by: apikey.user_id,

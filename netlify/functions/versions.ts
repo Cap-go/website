@@ -18,8 +18,8 @@ export const deleteVersion = async(event: any, supabase: SupabaseClient) => {
   const body = JSON.parse(event.body || '{}') as Version
 
   if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
-    console.error('You can\'t access this app')
-    return sendRes({ status: 'You can\'t access this app' }, 400)
+    console.error('You can\'t access this app', body.app_id)
+    return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   try {
     const { error: dbError } = await supabase
