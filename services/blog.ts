@@ -11,7 +11,7 @@ export const randomArticle = async (slug: string) => {
     queryContent('blog').where({ published: true }).find(),
   )
   const articles = content.data.value
-  const list = articles.filter(a => a.slug !== slug)
+  const list = articles.filter((a: { slug: string }) => a.slug !== slug)
   const index = Math.floor(Math.random() * list.length)
 
   return list[index]

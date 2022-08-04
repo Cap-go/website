@@ -72,17 +72,17 @@ Before using the CLI, you should register here : [https://web.capgo.app/registe
 
 # Documentation
 
-[Capgo CLI](/doc#Capgo-CLI){:target="_blank"}
+[Capgo CLI](https://github.com/Cap-go/capacitor-updater/wiki/Capgo-CLI){:target="_blank"}
 
-[Auto-update](/doc#Auto-update){:target="_blank"}
+[Auto-update](https://github.com/Cap-go/capacitor-updater/wiki/Auto-update){:target="_blank"}
 
-[Capgo Sandbox App](/doc#Capgo-Sandbox-App){:target="_blank"}
+[Capgo Sandbox App](https://github.com/Cap-go/capacitor-updater/wiki/Capgo-Sandbox-App){:target="_blank"}
 
-[Auto-update on premise](/doc#Auto-update-on-premise){:target="_blank"}
+[Auto-update on premise](https://github.com/Cap-go/capacitor-updater/wiki/Auto-update-on-premise){:target="_blank"}
 
-[Upgrade from version 2 to 3](/doc#Upgrade-from-version-2-to-3){:target="_blank"}
+[Upgrade from version 2 to 3](https://github.com/Cap-go/capacitor-updater/wiki/Upgrade-from-version-2-to-3){:target="_blank"}
 
-[Capgo API](/doc#Capgo-API){:target="_blank"}
+[Capgo API](https://github.com/Cap-go/capacitor-updater/wiki/Capgo-API){:target="_blank"}
 
 # Manual update
 
@@ -90,9 +90,9 @@ Build your own logic in JavaScript
 
 # Documentation
 
-[Capacitor-updater plugin](/doc#Capacitor-updater-plugin){:target="_blank"}
+[Capacitor-updater plugin](https://github.com/Cap-go/capacitor-updater/wiki/Capacitor-updater-plugin){:target="_blank"}
 
-[Manual update on premise](/doc#Manual-mode){:target="_blank"}
+[Manual update on premise](https://github.com/Cap-go/capacitor-updater/wiki/Manual-mode){:target="_blank"}
 
 # Roadmap
 

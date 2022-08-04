@@ -463,7 +463,7 @@ After install capacitor-updater to your project, you can configure some behavior
 
 This is a different section in the doc, click here to access:
 
-[Auto-updates](https://doc.capgo.app/Auto-update-2cf9edda70484d7fa57111ab9c435d08)
+[Auto-updates](https://github.com/Cap-go/capacitor-updater/wiki/Auto-update)
 
 # Statistics
 

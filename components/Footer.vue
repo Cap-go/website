@@ -27,7 +27,7 @@ const brand = config.brand
         </div>
 
         <div class="px-5 py-2">
-          <a href="/doc" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
+          <a href="https://github.com/Cap-go/capacitor-updater/wiki" target="_blank" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
         </div>
 
         <div class="px-5 py-2">

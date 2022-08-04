@@ -3,7 +3,7 @@ import { createMeta } from '~/services/meta'
 
 const config = useRuntimeConfig()
 const brand = config.brand
-// create function who convert big number in short format
+
 const shortNumber = (number: number) => {
   if (number > 1000000)
     return `${(number / 1000000).toFixed(1)}M`
@@ -19,7 +19,6 @@ const stats = reactive({
   stars: shortNumber(125),
 })
 
-// fetch endpoint website_stats to get website stats
 fetch(`${config.domain}/api/website_stats`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
