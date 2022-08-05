@@ -3,7 +3,7 @@ import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isGoodPlan, isTrial, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
-import { findEnv, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 interface Channel {
   version: definitions['app_versions']
@@ -231,8 +231,8 @@ export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const config = useRuntimeConfig()
-  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
   if (event.httpMethod === 'POST') { return post(event, supabase) }
   else if (event.httpMethod === 'GET') {
     const {

@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, findEnv, sendRes, transformEnvVar } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '../../types/supabase'
 
 interface ChannelSet {
@@ -140,8 +140,8 @@ export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const config = useRuntimeConfig()
-  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
   if (event.httpMethod === 'POST')
     return post(event, supabase)
   else if (event.httpMethod === 'GET')

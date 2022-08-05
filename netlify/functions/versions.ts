@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, findEnv, sendRes, transformEnvVar } from '../services/utils'
+import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '../../types/supabase'
 
 interface Version {
@@ -53,8 +53,8 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       console.error('Missing app_id')
       return sendRes({ status: 'Missing app_id' }, 400)
     }
-    const config = useRuntimeConfig()
-    const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
+    const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
     const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !body) {
       console.error('Cannot Verify User')

@@ -5,7 +5,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
 import type { definitions } from '../../types/supabase'
 import { useSupabase } from '../services/supabase'
-import { findEnv, sendRes, transformEnvVar } from './../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 const get = async (supabase: SupabaseClient) => {
   const date_id = new Date().toISOString().slice(0, 10)
@@ -27,10 +27,9 @@ export const handler: Handler = async (event) => {
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
-  const config = useRuntimeConfig()
   const adminKey = transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY')
   console.log(adminKey)
-  const supabase = useSupabase(config.supa_url, adminKey)
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), adminKey)
   if (event.httpMethod === 'GET')
     return get(supabase)
   console.error('Method not allowed')
