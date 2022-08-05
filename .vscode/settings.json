@@ -1,21 +1,11 @@
 {
-  "cSpell.words": ["Vitesse"],
-  "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": "locales",
-  "i18n-ally.sortKeys": true,
   "prettier.enable": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "files.associations": {
-    "*.css": "postcss",
+    "*.css": "postcss"
   },
   "editor.formatOnSave": false,
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "deno.enablePaths": [
-    "./supabase/functions"
-  ]
+  "nuxt.isNuxtApp": false
 }

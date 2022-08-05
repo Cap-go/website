@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
+import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 
 interface AppStats {
   platform: string
@@ -9,15 +9,18 @@ interface AppStats {
   device_id: string
   version_name?: string
   plugin_version?: string
+  os_version?: string
   version: number
   version_build: string
   app_id: string
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
-  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
+  const config = useRuntimeConfig()
+  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   let statsDb = 'stats'
   let deviceDb = 'devices'
 
@@ -29,6 +32,7 @@ export const handler: Handler = async(event) => {
     device_id: body.device_id,
     app_id: body.app_id,
     plugin_version: body.plugin_version || '2.3.3',
+    os_version: body.os_version,
   }
 
   const stat: Partial<definitions['stats']> = {
@@ -49,6 +53,7 @@ export const handler: Handler = async(event) => {
     device.version = data[0].id
   }
   else {
+    console.error('switch to onprem', body.app_id)
     device.version = body.version_name || 'unknown'
     stat.version = body.version || 0
     statsDb = `${statsDb}_onprem`
