@@ -33,11 +33,7 @@ export default defineNuxtConfig({
     supa_anon: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
     supa_url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
   },
-  supabase: {
-    url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
-    key: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
-  },
-  modules: ['@vueuse/nuxt', '@nuxt/content', '@nuxtjs/supabase', '@unocss/nuxt'],
+  modules: ['@vueuse/nuxt', '@nuxt/content', '@unocss/nuxt'],
   experimental: {
     reactivityTransform: true,
     viteNode: false,
