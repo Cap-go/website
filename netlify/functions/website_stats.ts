@@ -3,8 +3,8 @@
 // stargazers_count
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
-import { useSupabase } from 'netlify/services/supabase'
 import type { definitions } from '../../types/supabase'
+import { useSupabase } from '../services/supabase'
 import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 
 const get = async (supabase: SupabaseClient) => {

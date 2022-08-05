@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
-import { useSupabase } from 'netlify/services/supabase'
-import { findEnv, sendRes, transformEnvVar } from 'netlify/services/utils'
-import type { definitions } from '~/types/supabase'
+import { useSupabase } from '../services/supabase'
+import type { definitions } from '../../types/supabase'
+import { findEnv, sendRes, transformEnvVar } from './../services/utils'
 
 interface Params {
   service: string
