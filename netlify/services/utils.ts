@@ -22,12 +22,10 @@ export const findEnv = (url: string): string => {
 }
 
 export const transformEnvVar = (env: string, v: string): string => {
-  const config = useRuntimeConfig()
-
   if (env === 'prod')
-    return config[v] || v
+    return process.env[v] || v
   // uppercase env and check if env_v is defined, if yes return it otherwise return v
-  return config[`${env.toUpperCase()}_${v}`] || v
+  return process.env[`${env.toUpperCase()}_${v}`] || v
 }
 
 export const basicHeaders = {
