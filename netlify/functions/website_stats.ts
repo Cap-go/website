@@ -16,6 +16,7 @@ const get = async (supabase: SupabaseClient) => {
     .single()
   if (data && !error)
     return sendRes(data)
+  console.log('Supabase error:', error)
   return sendRes({
     apps: 190,
     updates: 130000,
@@ -24,11 +25,10 @@ const get = async (supabase: SupabaseClient) => {
 }
 
 export const handler: Handler = async (event) => {
-  console.log(event.httpMethod)
+  console.log(event.httpMethod, event.path)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
   const adminKey = transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY')
-  console.log(adminKey)
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), adminKey)
   if (event.httpMethod === 'GET')
     return get(supabase)

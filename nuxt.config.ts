@@ -2,17 +2,13 @@ import { defineNuxtConfig } from 'nuxt'
 import keys from './configs.json'
 
 const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
-  if (branch === 'local')
-    return keys[keyname].local
-  else if (branch === 'main')
+  if (branch === 'main')
     return keys[keyname].prod
   return keys[keyname].development
 }
 
 const getUrl = (branch = ''): string => {
-  if (branch === 'local')
-    return `http://${getRightKey(branch, 'base_domain')}`
-  else if (branch === 'main')
+  if (branch === 'main')
     return `https://${getRightKey('prod', 'base_domain')}`
   else
     return `https://${getRightKey('development', 'base_domain')}`
