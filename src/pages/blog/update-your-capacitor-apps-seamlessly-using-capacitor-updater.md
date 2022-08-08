@@ -81,7 +81,7 @@ First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your
 
 Let's get started by first creating app in Capgo Cloud with the CLI.
 
-`npx @capgo/cli@latest add -a YOU_KEY`
+`npx @capgo/cli@latest add`
 
 This command will use all variable defined in the Capacitor config file to create the app.
 
