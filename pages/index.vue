@@ -218,7 +218,7 @@ useHead(() => ({
           <div>
             <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
               <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                “Must have tools for developers, who want to be more prodcutive. Avoiding review for bugfix is golden.”
+                “Must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden.”
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
