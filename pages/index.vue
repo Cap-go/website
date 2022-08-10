@@ -239,7 +239,7 @@ useHead(() => ({
           <div>
             <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
               <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                “So capgo’s over the air update feature just saved us on launch day. We had a crash happening on a critical path but narrowed it down and deployed a fix using OTA in about an hour.”
+                “So Capgo’s over the air update feature just saved us on launch day. We had a crash happening on a critical path but narrowed it down and deployed a fix using OTA in about an hour.”
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
@@ -258,7 +258,7 @@ useHead(() => ({
           <div>
             <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
               <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                “As a career-long ionic developer, getting over the air update working in ionic via capacitor feels like black magic. Loving it.”
+                “As a career-long ionic developer, getting over the air update working in Ionic via Capacitor feels like black magic. Loving it.”
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
@@ -277,7 +277,7 @@ useHead(() => ({
           <div>
             <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
               <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                “It is so easy to build your own mobile app nowadays. With technologies like capacitor and capgo, literally anyone with an idea can rapidly build their dream app. What a time to be alive!”
+                “It is so easy to build your own mobile app nowadays. With technologies like Capacitor and Capgo, literally anyone with an idea can rapidly build their dream app. What a time to be alive!”
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
