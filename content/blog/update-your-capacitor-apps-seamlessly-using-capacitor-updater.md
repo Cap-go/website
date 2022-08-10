@@ -76,20 +76,20 @@ This will tell the native plugin the installation as succeeded.
 
 First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to login with the CLI:
 
-`npx @capgo/cli login YOU_KEY`
+`npx @capgo/cli@latest login YOU_KEY`
 
 ## Add your first app
 
 Let's get started by first creating app in Capgo Cloud with the CLI.
 
-`npx @capgo/cli add -a YOU_KEY`
+`npx @capgo/cli@latest add -a YOU_KEY`
 
 This command will use all variable defined in the Capacitor config file to create the app.
 
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli upload -channel production`
+`npx @capgo/cli@latest upload -channel production`
 
 By default, the version name will be the one in your package.json file.
 
@@ -101,7 +101,7 @@ You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
 After you have sent your app to Capgo, you need to make your channel `public` to let apps receive updates from Capgo.
 
-`npx @capgo/cli set -c production -s public`
+`npx @capgo/cli@latest set -c production -s public`
 
 ## Configure app to listen for a Live Update
 

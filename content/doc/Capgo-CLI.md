@@ -13,14 +13,14 @@ All command should be run in your app folder with capacitor project ignited. See
 
 # **Login to Cloud**
 
-`npx @capgo/cli login [apikey]` 
+`npx @capgo/cli@latest login [apikey]` 
 
 This method is here to remember the `apikey` for you.
 You can also use `--apikey=********` in every command to override it
 
 # **Add app to Cloud**
 
-`npx @capgo/cli add [appId]` 
+`npx @capgo/cli@latest add [appId]` 
 
 
 > 💡 All option will be guessed in your config if not provided
@@ -42,7 +42,7 @@ Example of capacitor.config.json for appId and AppName, the icon is guess in the
 
 # Upload **version to Cloud**
 
-`npx @capgo/cli upload [appId]` 
+`npx @capgo/cli@latest upload [appId]` 
 
 Optionally, you can give:
 
@@ -70,7 +70,7 @@ Example of package.json for version
 
 # **Send version to Cloud channel**
 
-`npx @capgo/cli set [appId]` 
+`npx @capgo/cli@latest set [appId]` 
 
 Optionally, you can give:
 
@@ -81,7 +81,7 @@ Optionally, you can give:
 
 # **Delete package or version to Cloud**
 
-`npx @capgo/cli delete [appId]` 
+`npx @capgo/cli@latest delete [appId]` 
 
 Optionally, you can give:
 
