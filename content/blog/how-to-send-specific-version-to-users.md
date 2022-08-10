@@ -79,7 +79,7 @@ Then in your backend you have to send it to Capgo backend too. below a code exem
 ```js
 import axios from 'axios'
 
-await  axios.post('https://capgo.app/api/device', {
+await  axios.post('https://api.capgo.app/device', {
   app_id: 'YOUR_APP_ID',
   device_id: 'DEVICE_ID',
   channel: 'CHANNEL_NAME', // The name of the channel, or undefined if version_id provided
@@ -100,7 +100,7 @@ If you need to check programatictly what override is set on a device you can get
 ```js
 import axios from 'axios'
 
-const res = await axios.get('https://capgo.app/api/device?app_id=YOUR_APP_ID&device_id=DEVICE_ID', {
+const res = await axios.get('https://api.capgo.app/device?app_id=YOUR_APP_ID&device_id=DEVICE_ID', {
   headers: {
     authorization: 'YOUR_API_KEY' // choose a key with 'write' or 'all' rights
   }

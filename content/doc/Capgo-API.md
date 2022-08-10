@@ -17,7 +17,7 @@ This endpoint allows you to check and modify all available Channels of your app
 
 ## POST
 
-`https://capgo.app/api/channel`
+`https://api.capgo.app/channel`
 
 Send this
 
@@ -40,7 +40,7 @@ receive this:
 
 ## GET
 
-`https://capgo.app/api/channel`
+`https://api.capgo.app/channel`
 
 Send `appid` as URL parameter and receive array of channel:
 
@@ -79,7 +79,7 @@ and optionally `channel` name as URL parameter to receive one:
 
 ## DELETE
 
-`https://capgo.app/api/channel`
+`https://api.capgo.app/channel`
 
 Send this
 
@@ -102,7 +102,7 @@ receive this:
 This endpoint allows you to check and modify all devices link to your app
 
 ##POST
-`https://capgo.app/api/device`
+`https://api.capgo.app/device`
 
 Send this
 
@@ -125,7 +125,7 @@ receive this:
 
 ## GET
 
-`https://capgo.app/api/device`
+`https://api.capgo.app/device`
 
 Send `appid` as URL parameter and receive array of channel:
 
@@ -159,7 +159,7 @@ and optionally `channel` name as URL parameter to receive one:
 
 ## DELETE
 
-`https://capgo.app/api/device`
+`https://api.capgo.app/device`
 
 Send this
 
@@ -183,7 +183,7 @@ This endpoint allows you to check and modify all versions link to your app
 
 ## GET
 
-`https://capgo.app/api/versions`
+`https://api.capgo.app/versions`
 
 Send `app_id` as URL parameter and receive array of channel:
 
@@ -205,7 +205,7 @@ Send `app_id` as URL parameter and receive array of channel:
 
 ## DELETE
 
-`https://capgo.app/api/versions`
+`https://api.capgo.app/versions`
 
 Send this
 
