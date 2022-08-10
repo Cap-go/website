@@ -21,7 +21,7 @@ This endpoint allows you to check and modify all available Channels of your app
 
 Send this
 
-```typescript
+```ts
 interface ChannelSet {
   app_id: string;
   channel: string;
@@ -32,7 +32,7 @@ interface ChannelSet {
 
 receive this:
 
-```javascript
+```json
 {
   status: "ok";
 }
@@ -44,7 +44,7 @@ receive this:
 
 Send `appid` as URL parameter and receive array of channel:
 
-```javascript
+```js
 {
   id: number;
   created_at: string;
@@ -62,7 +62,7 @@ Send `appid` as URL parameter and receive array of channel:
 
 and optionally `channel` name as URL parameter to receive one:
 
-```javascript
+```js
 {
   id: number;
   created_at: string;
@@ -83,7 +83,7 @@ and optionally `channel` name as URL parameter to receive one:
 
 Send this
 
-```typescript
+```ts
 interface Channel {
   channel: string;
 }
@@ -91,7 +91,7 @@ interface Channel {
 
 receive this:
 
-```javascript
+```js
 {
   status: "ok";
 }
@@ -106,7 +106,7 @@ This endpoint allows you to check and modify all devices link to your app
 
 Send this
 
-```typescript
+```ts
 interface DeviceLink {
   app_id: string;
   device_id: string;
@@ -117,7 +117,7 @@ interface DeviceLink {
 
 receive this:
 
-```javascript
+```js
 {
   status: "ok";
 }
@@ -129,7 +129,7 @@ receive this:
 
 Send `appid` as URL parameter and receive array of channel:
 
-```javascript
+```js
 {
     created_at?: string | undefined;
     updated_at?: string | undefined;
@@ -144,7 +144,7 @@ Send `appid` as URL parameter and receive array of channel:
 
 and optionally `channel` name as URL parameter to receive one:
 
-```javascript
+```js
 {
     created_at?: string | undefined;
     updated_at?: string | undefined;
@@ -163,7 +163,7 @@ and optionally `channel` name as URL parameter to receive one:
 
 Send this
 
-```typescript
+```ts
 interface Version {
   device_id: string;
 }
@@ -171,7 +171,7 @@ interface Version {
 
 receive this:
 
-```javascript
+```js
 {
   status: "ok";
 }
@@ -187,7 +187,7 @@ This endpoint allows you to check and modify all versions link to your app
 
 Send `app_id` as URL parameter and receive array of channel:
 
-```javascript
+```js
 {
   id: number;
   created_at: string;
@@ -209,7 +209,7 @@ Send `app_id` as URL parameter and receive array of channel:
 
 Send this
 
-```typescript
+```ts
 interface Version {
   app_id: string;
 }
@@ -217,7 +217,7 @@ interface Version {
 
 receive this:
 
-```javascript
+```js
 {
   status: "ok";
 }

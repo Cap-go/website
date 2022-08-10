@@ -93,7 +93,7 @@ To install the plugin into your Capacitor app.
 
 And then add to your app this code as replacement of CodePush one:
 
-```javascript
+```js
   import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
   CapacitorUpdater.notifyAppReady()

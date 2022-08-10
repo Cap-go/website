@@ -6,7 +6,7 @@ description: "Documentation for Capacitor Updater Plugin"
 ---
 # Install
 
-```bash
+```shell
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
@@ -19,7 +19,7 @@ Then reload the view when user is away.
 
 You can list the version and manage it with the command below.
 
-```tsx
+```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'
@@ -107,7 +107,7 @@ To fix that, use auto-update.
 
 # download(...)
 
-```typescript
+```ts
 download(options: { url: string; }) => Promise<{ version: string; }>
 ```
 
@@ -124,7 +124,7 @@ Download a new version from the provided URL, it should be a zip file, with file
 
 # set(...)
 
-```typescript
+```ts
 set(options: { version: string; versionName?: string; }) => Promise<void>
 ```
 
@@ -139,7 +139,7 @@ Set version as current version, set will return an error if there are is no inde
 
 # getId()
 
-```typescript
+```ts
 getId() => Promise<{ id: string; }>
 ```
 
@@ -152,7 +152,7 @@ Get unique ID used to identify device into auto update server
 
 # delete(...)
 
-```typescript
+```ts
 delete(options: { version: string; }) => Promise<void>
 ```
 
@@ -167,7 +167,7 @@ Delete version in storage
 
 # list()
 
-```typescript
+```ts
 list() => Promise<{ versions: string[]; }>
 ```
 
@@ -180,7 +180,7 @@ Get all available versions
 
 # reset(...)
 
-```typescript
+```ts
 reset(options?: { toAutoUpdate?: boolean | undefined; } | undefined) => Promise<void>
 ```
 
@@ -195,7 +195,7 @@ Set the `builtin` version (the one sent to Apple store / Google play store ) as 
 
 # current()
 
-```typescript
+```ts
 current() => Promise<{ current: string; currentNative: string; }>
 ```
 
@@ -208,7 +208,7 @@ Get the current version, if none are set it returns `builtin`, currentNative is 
 
 # reload()
 
-```typescript
+```ts
 reload() => Promise<void>
 ```
 
@@ -219,7 +219,7 @@ Reload the view
 
 # versionName()
 
-```typescript
+```ts
 versionName() => Promise<{ versionName: string; }>
 ```
 
@@ -232,7 +232,7 @@ Get the version name, if it was set during the set phase
 
 # notifyAppReady()
 
-```typescript
+```ts
 notifyAppReady() => Promise<void>
 ```
 
@@ -243,7 +243,7 @@ Notify native plugin that the update is working, only in auto-update
 
 # delayUpdate()
 
-```typescript
+```ts
 delayUpdate() => Promise<void>
 ```
 
@@ -254,7 +254,7 @@ Skip updates in the next time the app goes into the background, only in auto-upd
 
 # cancelDelay()
 
-```typescript
+```ts
 cancelDelay() => Promise<void>
 ```
 
@@ -265,7 +265,7 @@ allow update in the next time the app goes into the background, only in auto-upd
 
 # addListener('download', ...)
 
-```typescript
+```ts
 addListener(eventName: 'download', listenerFunc: DownloadChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
@@ -285,7 +285,7 @@ Listen for download event in the App, let you know when the download is started,
 
 # addListener('majorAvailable', ...)
 
-```typescript
+```ts
 addListener(eventName: 'majorAvailable', listenerFunc: MajorAvailableListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
@@ -305,7 +305,7 @@ Listen for Major update event in the App, let you know when major update is bloc
 
 # addListener('updateAvailable', ...)
 
-```typescript
+```ts
 addListener(eventName: 'updateAvailable', listenerFunc: UpdateAvailableListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
@@ -325,7 +325,7 @@ Listen for update event in the App, let you know when update is ready to install
 
 # addListener(string, ...)
 
-```typescript
+```ts
 addListener(eventName: string, listenerFunc: (...args: any[]) => any) => Promise<PluginListenerHandle>
 ```
 
@@ -341,7 +341,7 @@ addListener(eventName: string, listenerFunc: (...args: any[]) => any) => Promise
 
 # removeAllListeners()
 
-```typescript
+```ts
 removeAllListeners() => Promise<void>
 ```
 
@@ -407,7 +407,7 @@ Do not password encrypt this file, or it will fail to unpack.
 
 # Listen to download events
 
-```javascript
+```js
   import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 CapacitorUpdater.addListener('download', (info: any) => {
@@ -421,7 +421,7 @@ On iOS, Apple don't allow you to show a message when the app is updated, so you 
 
 You need to use ngZone to let the event be detected in angular
 
-```jsx
+```ts
 public updatingDownloadProgress: number = 0;
 constructor(
   ...
@@ -475,7 +475,7 @@ By default, all stats are sent to our server, to understand usage.
 
 If you want to send data to your server instead, change the config below:
 
-```tsx
+```ts
 // capacitor.config.json
 {
 	"appId": "**.***.**",
@@ -490,7 +490,7 @@ If you want to send data to your server instead, change the config below:
 
 What your server will receive is :
 
-```tsx
+```ts
 {
 	"app_id": "**.***.**", // app identifier in the store
 	"device_id": "*******", // unique id per app install

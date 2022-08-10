@@ -45,7 +45,7 @@ Then you have 2 way to let users get the updates from the channel
 
 This can be usefull for your internal team, this is fast to implement.
 Allow user to copy they deviceID from your app and send it to you manually, this code will help you to get it
-```javascript
+```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getId()
@@ -64,7 +64,7 @@ He should get your version.
 This can be usefull for your beta testers, this is longer to implement.
 
 Same as manual way you have to get the deviceID
-```javascript
+```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getId()
@@ -76,7 +76,7 @@ I will just suggest you to store it in database, that will facilitate your life 
 
 Then in your backend you have to send it to Capgo backend too. below a code exemple in Nodejs
 
-```javascript
+```js
 import axios from 'axios'
 
 await  axios.post('https://capgo.app/api/device', {
@@ -97,7 +97,7 @@ You can also send `null` to remove override
 
 If you need to check programatictly what override is set on a device you can get on the same url
 
-```javascript
+```js
 import axios from 'axios'
 
 const res = await axios.get('https://capgo.app/api/device?app_id=YOUR_APP_ID&device_id=DEVICE_ID', {

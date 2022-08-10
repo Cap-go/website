@@ -9,7 +9,7 @@ This documentation will explain how to upgrade to the version 3 of auto-update.
 
 # First migrate to the last tooling:
 
-```bash
+```shell
 npm remove -g capgo
 npm remove capacitor-updater
 

@@ -18,7 +18,7 @@ This convention should be use in 3 files in your project:
 
 # Install
 
-```bash
+```shell
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
@@ -47,7 +47,7 @@ Get in the app, Capgo your link.
 
 After install capacitor-updater to your project, add this to your config:
 
-```tsx
+```ts
 // capacitor.config.json
 {
 	"appId": "**.***.**",
@@ -97,7 +97,7 @@ To upload version at each commit setup CI/CD with this guide
 
 When `disableAutoUpdateBreaking` is true, you can listen to event to know when app refuse to do major braking update.
 
-```jsx
+```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 CapacitorUpdater.addListener('majorAvailable', (info: any) => {
@@ -114,7 +114,7 @@ You have also other config available only on the [web app](https://web.capgo.app
 
 To configure the plugin, use these settings:
 
-```tsx
+```ts
 // capacitor.config.json
 {
 	"appId": "**.***.**",

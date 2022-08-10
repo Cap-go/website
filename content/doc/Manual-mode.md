@@ -24,7 +24,7 @@ Capgo offer can't suit you, then put your own price and back a bootstrapped Make
 # Quick install
 You can add this code to your app to use manual download
 
-```jsx
+```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'

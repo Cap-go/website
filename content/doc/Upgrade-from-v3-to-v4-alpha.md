@@ -33,7 +33,7 @@ For you, this is the most significant changes, but for the best! You get tons of
 - Delete of `cancelDelay` and `delayUpdate` in favor of `setDelay`
 - No more `versionName` in set
 - Change `version` key who was returned in most function to object `BundleInfo` 
-```typescript
+```ts
 interface BundleInfo {
   id: string;
   version: string;

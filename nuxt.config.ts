@@ -37,6 +37,13 @@ export default defineNuxtConfig({
   unocss: {
     preflight: true,
   },
+
+  content: {
+    highlight: {
+      theme: 'monokai',
+      preload: ['js', 'ts', 'json', 'shell', 'toml']
+    }
+  },
   css: ['~/assets/css/main.css'],
   build: {
     extractCSS: true,
