@@ -29,39 +29,39 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': `${getUrl()}/#website`,
-      'url': getUrl(),
+      '@id': `${getUrl(process.env.BRANCH!)}/#website`,
+      'url': getUrl(process.env.BRANCH!),
       'name': name,
       'isPartOf': {
-        '@id': `${getUrl()}/#website`,
+        '@id': `${getUrl(process.env.BRANCH!)}/#website`,
       },
       'datePublished': '2018-01-12T22:51:56+00:00',
       'dateModified': '2020-03-17T22:30:14+00:00',
       'description': description,
       'breadcrumb': {
-        '@id': `${getUrl()}/#breadcrumb`,
+        '@id': `${getUrl(process.env.BRANCH!)}/#breadcrumb`,
       },
       'inLanguage': 'en-US',
       'potentialAction': [
         {
           '@type': 'ReadAction',
           'target': [
-            getUrl(),
+            getUrl(process.env.BRANCH!),
           ],
         },
       ],
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': `${getUrl()}#breadcrumb`,
+      '@id': `${getUrl(process.env.BRANCH!)}#breadcrumb`,
       'itemListElement': [
         {
           '@type': 'ListItem',
           'position': 1,
           'item': {
             '@type': 'WebPage',
-            '@id': getUrl(),
-            'url': getUrl(),
+            '@id': getUrl(process.env.BRANCH!),
+            'url': getUrl(process.env.BRANCH!),
             'name': 'Home',
           },
         },
@@ -70,8 +70,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl()}/blog`,
-            'url': `${getUrl()}/blog`,
+            '@id': `${getUrl(process.env.BRANCH!)}/blog`,
+            'url': `${getUrl(process.env.BRANCH!)}/blog`,
             'name': 'Blog',
           },
         },
@@ -80,8 +80,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl()}/app_mobile`,
-            'url': `${getUrl()}/app_mobile`,
+            '@id': `${getUrl(process.env.BRANCH!)}/app_mobile`,
+            'url': `${getUrl(process.env.BRANCH!)}/app_mobile`,
             'name': 'App',
           },
         },
@@ -90,8 +90,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl()}/pricing`,
-            'url': `${getUrl()}/pricing`,
+            '@id': `${getUrl(process.env.BRANCH!)}/pricing`,
+            'url': `${getUrl(process.env.BRANCH!)}/pricing`,
             'name': 'Pricing',
           },
         },
