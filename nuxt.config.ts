@@ -2,16 +2,20 @@ import { defineNuxtConfig } from 'nuxt'
 import keys from './configs.json'
 
 const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
-  if (branch === 'main')
-    return keys[keyname].prod
-  return keys[keyname].development
+  if (branch === 'development')
+    return keys[keyname].development
+  else if (branch === 'local')
+    return keys[keyname].local
+  return keys[keyname].prod
 }
 
-const getUrl = (branch: string): string => {
-  if (branch === 'main')
-    return `https://${getRightKey('prod', 'base_domain')}`
+const getUrl = (branch = ''): string => {
+  if (branch === 'local')
+    return `http://${getRightKey(branch, 'base_domain')}`
+  else if (branch === 'development')
+    return `http://${getRightKey(branch, 'base_domain')}`
   else
-    return `https://${getRightKey('development', 'base_domain')}`
+    return `https://${getRightKey('prod', 'base_domain')}`
 }
 
 const baseDomain = () => {
@@ -29,39 +33,39 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': `${getUrl(process.env.BRANCH!)}/#website`,
-      'url': getUrl(process.env.BRANCH!),
+      '@id': `${getUrl(process.env.BRANCH)}/#website`,
+      'url': getUrl(process.env.BRANCH),
       'name': name,
       'isPartOf': {
-        '@id': `${getUrl(process.env.BRANCH!)}/#website`,
+        '@id': `${getUrl(process.env.BRANCH)}/#website`,
       },
       'datePublished': '2018-01-12T22:51:56+00:00',
       'dateModified': '2020-03-17T22:30:14+00:00',
       'description': description,
       'breadcrumb': {
-        '@id': `${getUrl(process.env.BRANCH!)}/#breadcrumb`,
+        '@id': `${getUrl(process.env.BRANCH)}/#breadcrumb`,
       },
       'inLanguage': 'en-US',
       'potentialAction': [
         {
           '@type': 'ReadAction',
           'target': [
-            getUrl(process.env.BRANCH!),
+            getUrl(process.env.BRANCH),
           ],
         },
       ],
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': `${getUrl(process.env.BRANCH!)}#breadcrumb`,
+      '@id': `${getUrl(process.env.BRANCH)}#breadcrumb`,
       'itemListElement': [
         {
           '@type': 'ListItem',
           'position': 1,
           'item': {
             '@type': 'WebPage',
-            '@id': getUrl(process.env.BRANCH!),
-            'url': getUrl(process.env.BRANCH!),
+            '@id': getUrl(process.env.BRANCH),
+            'url': getUrl(process.env.BRANCH),
             'name': 'Home',
           },
         },
@@ -70,8 +74,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH!)}/blog`,
-            'url': `${getUrl(process.env.BRANCH!)}/blog`,
+            '@id': `${getUrl(process.env.BRANCH)}/blog`,
+            'url': `${getUrl(process.env.BRANCH)}/blog`,
             'name': 'Blog',
           },
         },
@@ -80,8 +84,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH!)}/app_mobile`,
-            'url': `${getUrl(process.env.BRANCH!)}/app_mobile`,
+            '@id': `${getUrl(process.env.BRANCH)}/app_mobile`,
+            'url': `${getUrl(process.env.BRANCH)}/app_mobile`,
             'name': 'App',
           },
         },
@@ -90,8 +94,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH!)}/pricing`,
-            'url': `${getUrl(process.env.BRANCH!)}/pricing`,
+            '@id': `${getUrl(process.env.BRANCH)}/pricing`,
+            'url': `${getUrl(process.env.BRANCH)}/pricing`,
             'name': 'Pricing',
           },
         },
@@ -114,7 +118,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       brand: 'Capgo',
-      domain: `${getUrl(process.env.BRANCH!)}`,
+      domain: `${getUrl(process.env.BRANCH)}`,
       site_name: baseDomain(),
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       handler: 'capgo',
