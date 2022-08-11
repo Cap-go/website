@@ -75,6 +75,26 @@ const structuredData = {
             'name': 'Blog',
           },
         },
+        {
+          '@type': 'ListItem',
+          'position': 2,
+          'item': {
+            '@type': 'WebPage',
+            '@id': `${getUrl()}/app_mobile`,
+            'url': `${getUrl()}/app_mobile`,
+            'name': 'App',
+          },
+        },
+        {
+          '@type': 'ListItem',
+          'position': 2,
+          'item': {
+            '@type': 'WebPage',
+            '@id': `${getUrl()}/pricing`,
+            'url': `${getUrl()}/pricing`,
+            'name': 'Pricing',
+          },
+        },
       ],
     },
   ],
