@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
+import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
 
 interface AppStats {
   platform: string
@@ -15,10 +15,12 @@ interface AppStats {
   app_id: string
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
+
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
   let statsDb = 'stats'
   let deviceDb = 'devices'
 

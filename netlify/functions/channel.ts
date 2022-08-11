@@ -2,7 +2,7 @@ import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '~/types/supabase'
+import type { definitions } from '../../types/supabase'
 
 interface ChannelSet {
   appid?: string
@@ -17,7 +17,7 @@ interface GetDevice {
   channel?: string
 }
 
-export const get = async(event: any, supabase: SupabaseClient) => {
+export const get = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey) {
     console.error('Cannot Verify User')
@@ -53,7 +53,7 @@ export const get = async(event: any, supabase: SupabaseClient) => {
   }
 }
 
-export const deleteChannel = async(event: any, supabase: SupabaseClient) => {
+export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
@@ -84,7 +84,7 @@ export const deleteChannel = async(event: any, supabase: SupabaseClient) => {
   return sendRes()
 }
 
-export const post = async(event: any, supabase: SupabaseClient) => {
+export const post = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
@@ -134,13 +134,14 @@ export const post = async(event: any, supabase: SupabaseClient) => {
   return sendRes()
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
   if (event.httpMethod === 'POST')
     return post(event, supabase)
   else if (event.httpMethod === 'GET')

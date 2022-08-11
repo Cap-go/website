@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import { isGoodPlan, isTrial, useSupabase } from '../services/supabase'
+import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
-import type { definitions } from '~/types/supabase'
 
 interface Channel {
   version: definitions['app_versions']
@@ -11,7 +11,7 @@ interface GetLatest {
   channel: string
 }
 
-export const handler: Handler = async(event) => {
+export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
@@ -23,6 +23,7 @@ export const handler: Handler = async(event) => {
     }
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+
     const { data: channel, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
