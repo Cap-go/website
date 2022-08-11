@@ -7,7 +7,7 @@ const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'sup
   return keys[keyname].development
 }
 
-const getUrl = (branch = ''): string => {
+const getUrl = (branch: string): string => {
   if (branch === 'main')
     return `https://${getRightKey('prod', 'base_domain')}`
   else
@@ -114,7 +114,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       brand: 'Capgo',
-      domain: `${getUrl(process.env.BRANCH)}`,
+      domain: `${getUrl(process.env.BRANCH!)}`,
       site_name: baseDomain(),
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       handler: 'capgo',
