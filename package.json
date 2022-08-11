@@ -25,9 +25,10 @@
   "dependencies": {
     "@headlessui/vue": "^1.6.7",
     "@heroicons/vue": "^1.0.6",
+    "@nuxt/schema": "3.0.0-rc.6",
     "@types/semver": "^7.3.10",
     "axios": "^0.27.2",
-    "prism-theme-vars": "^0.2.4",
+    "nuxt-jsonld": "^2.0.3",
     "sitemap": "^7.1.1",
     "solid": "link:@heroicons/vue/solid",
     "stripe": "^9.15.0",

@@ -3,7 +3,9 @@ slug: "how-to-send-specific-version-to-users"
 title: How to send specific update to one user or a group
 description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your app, and they are in !
 author: Martin Donadieu
-date: 2022-06-17
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-06-17
+updated_at: 2022-06-17
 head_image: "/capgo_select_update.webp"
 head_image_alt: TestFlight alternative illustration
 tag: alternatives
@@ -79,7 +81,7 @@ Then in your backend you have to send it to Capgo backend too. below a code exem
 ```js
 import axios from 'axios'
 
-await  axios.post('https://api.capgo.app/device', {
+await axios.post('https://api.capgo.app/device', {
   app_id: 'YOUR_APP_ID',
   device_id: 'DEVICE_ID',
   channel: 'CHANNEL_NAME', // The name of the channel, or undefined if version_id provided

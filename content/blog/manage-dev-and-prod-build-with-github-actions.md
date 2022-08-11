@@ -3,7 +3,9 @@ slug: "manage-dev-and-prod-build-with-github-actions"
 title: Manage development and production build with GitHub actions
 description: Use Capgo to release your devbuild to specific channel, and let your team try it, without waiting Apple and Google review 
 author: Martin Donadieu
-date: 2022-06-16
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-06-16
+updated_at: 2022-06-16
 head_image: "/capgo_ci-cd-illustration.webp"
 head_image_alt: Channel builds illustration
 tag: CI/CD

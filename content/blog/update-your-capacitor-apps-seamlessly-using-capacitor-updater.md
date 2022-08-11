@@ -4,7 +4,9 @@ title: Update your Capacitor apps seamlessly using Capacitor-updater
 description: Greetings Capacitor Community, today I'll be helping you setup Capacitor-updater
   into your app. So that you can do seamless releases.
 author: Martin Donadieu
-date: 2022-02-27
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-02-27
+updated_at: 2022-02-27
 head_image: "/update_flow.webp"
 head_image_alt: Capacitor Dev looking for alternative
 tag: Tutorial
@@ -65,9 +67,9 @@ To install the plugin into your Capacitor app.
 And then add to your app this code as replacement of CodePush one:
 
 ```js
-  import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-  CapacitorUpdater.notifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 This will tell the native plugin the installation as succeeded.

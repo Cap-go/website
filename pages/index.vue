@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { createMeta } from '~/services/meta'
-
 const config = useRuntimeConfig()
 const brand = config.brand
 
@@ -28,18 +26,6 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
     })
   }
 })
-
-const title = 'Capgo | Capacitor Auto-updater'
-const description = 'Instant updates for Capacitor'
-
-useHead(() => ({
-  titleTemplate: title,
-  meta: createMeta(
-    title,
-    description,
-    'Capgo',
-  ),
-}))
 </script>
 
 <template>

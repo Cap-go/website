@@ -5,7 +5,9 @@ description: Migrating from Microsoft App Center to Capgo in just a few simple s
   In this guide, we’ll walk through the complete migration for Live Updates a CodePush
   alternative.
 author: Martin Donadieu
-date: 2022-03-22
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-03-22
+updated_at: 2022-03-22
 head_image: "/migrate_appcenter.webp"
 head_image_alt: Capacitor Dev looking for alternative
 tag: migration
@@ -94,9 +96,9 @@ To install the plugin into your Capacitor app.
 And then add to your app this code as replacement of CodePush one:
 
 ```js
-  import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-  CapacitorUpdater.notifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 This will tell the native plugin the installation as succeeded.

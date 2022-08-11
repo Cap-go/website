@@ -4,7 +4,9 @@ title: Automatic build and release with Github actions
 description: Create your own CI/CD pipeline with Github actions for free, deploy
   your app every time you push to main.
 author: Martin Donadieu
-date: 2022-03-23
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-03-23
+updated_at: 2022-03-23
 head_image: "/github_actions.webp"
 head_image_alt: Github action illustration
 tag: CI/CD

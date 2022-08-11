@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+import { createMeta } from '~/services/meta'
 
 const title = 'Capgo | Capacitor Blog'
 const description = 'The best articles to enhance your Capacitor experience.'
@@ -15,7 +16,7 @@ const articlesOrder = computed(() =>
 
 useHead(() => ({
   titleTemplate: title,
-  title,
+  meta: createMeta(title, description),
 }))
 
 const formatTime = (s: string) => {

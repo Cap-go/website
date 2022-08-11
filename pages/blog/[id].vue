@@ -1,8 +1,10 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
+import type { NewsArticle, WithContext } from 'schema-dts'
 import { createMeta } from '~/services/meta'
 import { formatTime, randomArticle } from '~/services/blog'
 
+const config = useRuntimeConfig()
 const route = useRoute()
 const page = await useAsyncData('articleData', async () => {
   return await queryContent('blog').where({ slug: route.params.id }).findOne()
@@ -14,8 +16,46 @@ const random = await useAsyncData('randomData', async () => {
       .findOne()
     : await randomArticle(page.data.value.slug)
 })
+
+const datePublished = new Date(page.data.value.created_at).toISOString()
+const dateModified = new Date(page.data.value.updated_at).toISOString()
+const structuredData: WithContext<NewsArticle> = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': `${config.getUrl}/${page.data.value.slug}`,
+  },
+  'headline': page.data.value.description,
+  'image': [
+    page.data.value.head_image,
+  ],
+  'datePublished': datePublished,
+  'dateModified': dateModified,
+  'author': {
+    '@type': 'Person',
+    'name': page.data.value.author,
+    'url': page.data.value.author_url,
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Capgo',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': `${config.getUrl}/icon.webp`,
+    },
+  },
+}
+useJsonld(structuredData)
 useHead(() => ({
   titleTemplate: page.data.value.title || 'No title',
+  script: [
+    {
+      hid: 'seo-schema-graph',
+      type: 'application/ld+json',
+      children: JSON.stringify(structuredData),
+    },
+  ],
   meta: createMeta(
     page.data.value.title || 'No title',
     page.data.value.description || 'No description',
@@ -64,7 +104,7 @@ useHead(() => ({
     <a
       v-if="random"
       :href="`/blog/${random.data.value.slug}`"
-      class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-true-gray-800 lg:rounded-lg"
+      class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg"
     >
       <div class="relative mx-4 flex">
         <div :title="random.data.value.title" class="block w-full">

@@ -4,7 +4,9 @@ title: How to update Capacitor Apps without the App Store review.
 description: 'How can Capgo Feature allow you to push code updates to live iOS apps
   and be fully compliant with Apple’s guidelines? '
 author: Martin Donadieu
-date: 2022-01-13
+author_url: https://twitter.com/martindonadieu
+created_at: 2022-01-13
+updated_at: 2022-01-13
 head_image: "/bypass_illustration.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
