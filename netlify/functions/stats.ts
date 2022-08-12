@@ -59,6 +59,7 @@ export const handler: Handler = async (event) => {
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
   }
+  console.error('stats', body)
   await supabase
     .from(deviceDb)
     .upsert(device)
