@@ -18,7 +18,7 @@
     "@unocss/nuxt": "^0.44.7",
     "@vueuse/nuxt": "^8.9.4",
     "dayjs": "^1.11.4",
-    "eslint": "^8.20.0",
+    "eslint": "^8.21.0",
     "nuxt": "3.0.0-rc.6",
     "typescript": "^4.7.4"
   },
@@ -26,12 +26,12 @@
     "@headlessui/vue": "^1.6.7",
     "@heroicons/vue": "^1.0.6",
     "@nuxt/schema": "3.0.0-rc.6",
-    "@types/semver": "^7.3.10",
+    "@types/semver": "^7.3.12",
     "axios": "^0.27.2",
     "nuxt-jsonld": "^2.0.3",
     "sitemap": "^7.1.1",
     "solid": "link:@heroicons/vue/solid",
-    "stripe": "^9.15.0",
+    "stripe": "^9.16.0",
     "vue-meta": "^2.4.0"
   }
 }
