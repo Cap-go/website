@@ -127,6 +127,13 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     const trial = await isTrial(supabase, channel.created_by)
     const paying = await isGoodPlan(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
+    await updateOrCreateDevice(supabase, {
+      app_id,
+      device_id,
+      plugin_version,
+      version: version.id,
+      platform: platform as definitions['devices']['platform'],
+    })
     if (!paying && !trial) {
       await sendStats(supabase, 'needUpgrade', platform, device_id, app_id, version_build, version.id)
       console.error('Cannot update, upgrade plan to continue to update', app_id)
@@ -152,13 +159,6 @@ export const post = async (event: any, supabase: SupabaseClient) => {
         message: 'Cannot get zip file',
       }, 200)
     }
-    await updateOrCreateDevice(supabase, {
-      app_id,
-      device_id,
-      plugin_version,
-      version: version.id,
-      platform: platform as definitions['devices']['platform'],
-    })
 
     // console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
