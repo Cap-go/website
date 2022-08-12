@@ -133,6 +133,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       plugin_version,
       version: version.id,
       platform: platform as definitions['devices']['platform'],
+      updated_at: new Date().toISOString(),
     })
     if (!paying && !trial) {
       await sendStats(supabase, 'needUpgrade', platform, device_id, app_id, version_build, version.id)
