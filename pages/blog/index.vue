@@ -10,7 +10,7 @@ const { data: articles } = await useAsyncData('count', () =>
 
 const articlesOrder = computed(() =>
   articles.value.sort((a, b) => {
-    return dayjs(b.date).valueOf() - dayjs(a.date).valueOf()
+    return dayjs(b.created_at).valueOf() - dayjs(a.created_at).valueOf()
   }),
 )
 
@@ -73,7 +73,7 @@ const formatTime = (s: string) => {
             <span
               class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"
             >
-              {{ formatTime(article.date) }}
+              {{ formatTime(article.created_at) }}
             </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="`/blog/${article.slug}`" :title="article.title" class="text-black">
