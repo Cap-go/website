@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.8.0
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build website
+        run: pnpm run build
+      - name: Generate static pages
+        run: pnpm run generate

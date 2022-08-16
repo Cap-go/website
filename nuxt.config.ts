@@ -111,6 +111,7 @@ export default defineNuxtConfig({
     fallback: 'true',
   },
   nitro: {
+    preset: 'netlify-edge',
     prerender: {
       routes: ['/sitemap.xml', '/robots.txt'],
     },
