@@ -122,7 +122,7 @@ This command will use all variable defined in the Capacitor config file to creat
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli@latest upload -channel production`
+`npx @capgo/cli@latest upload --channel production`
 
 By default, the version name will be the one in your package.json file.
 
