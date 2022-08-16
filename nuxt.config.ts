@@ -177,7 +177,7 @@ export default defineNuxtConfig({
           property: 'og:title',
           content: name,
         },
-        { hid: 'theme-color', name: 'theme-color', content: '#ff2222' },
+        { hid: 'theme-color', name: 'theme-color', content: '#456b9a' },
         { hid: 'og:type', property: 'og:type', content: 'website' },
         {
           hid: 'apple-mobile-web-app-title',
