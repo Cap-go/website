@@ -89,8 +89,7 @@ export const handler: Handler = async (event) => {
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
-  const config = useRuntimeConfig()
-  const supabase = useSupabase(config.supa_url, transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
+  const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
   if (event.httpMethod === 'GET')
     return get(event, supabase)
   else if (event.httpMethod === 'DELETE')
