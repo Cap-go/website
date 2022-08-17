@@ -9,7 +9,7 @@ const updatesSize = ref(1)
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
 
-const totalPrice = ref((mau.value - 200000) * 0.005 + (storage.value - 30) * 0.5 + (bandwidth.value - 300) * 0.2)
+const totalPrice = ref(0)
 
 const calculateTotal = () => {
   const mauPrice = mau.value > 200000 ? (mau.value - 200000) * 0.005 : 0
