@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const mau = ref(1000000)
+const mau = ref(200000)
 const storage = ref(30)
 const updatesByMonth = ref(1)
-const updatesSize = ref(15)
+const updatesSize = ref(1)
 
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
@@ -37,7 +37,7 @@ const calculateUpdates = () => {
   <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
-        <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-3xl font-pj">
+        <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
           Calculate your usage
         </h2>
       </div>
