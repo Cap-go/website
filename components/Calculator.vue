@@ -9,7 +9,12 @@ const updatesSize = ref(1)
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
 
-const totalPrice = ref(0)
+const basePrice = 999
+const totalPrice = ref(basePrice)
+
+const roundNumber = (number: number) => {
+  return Math.round(number * 100) / 100
+}
 
 const calculateTotal = () => {
   const mauPrice = mau.value > 200000 ? (mau.value - 200000) * 0.005 : 0
@@ -17,9 +22,9 @@ const calculateTotal = () => {
   const bandwidthPrice = bandwidth.value > 300 ? (bandwidth.value - 300) * 0.2 : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0)
-    totalPrice.value = sum
+    totalPrice.value = roundNumber(basePrice + sum)
   else
-    totalPrice.value = 0
+    totalPrice.value = basePrice
 }
 
 const calculateBandwidth = () => {
@@ -34,11 +39,12 @@ const calculateUpdates = () => {
 </script>
 
 <template>
-  <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
+  <section id="calculator" class="py-12 bg-gray-50 sm:py-16 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
         <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-          Calculate your usage
+          Calculate your usage<br>
+          <span class="text-xl sm:text-2xl xl:text-3xl">for the Pay-as-you-go plan</span>
         </h2>
       </div>
 
@@ -47,78 +53,78 @@ const calculateUpdates = () => {
           <div class="w-full h-full mx-auto opacity-30 blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
         </div>
 
-        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center bg-white sm:grid-cols-2 gap-y-12 lg:grid-cols-4 rounded-2xl gap-x-20">
+        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 sm:grid-cols-2 gap-y-12 lg:grid-cols-4 rounded-2xl gap-x-20">
           <div class="flex flex-col items-center">
+            <h3 class="calc-label">
+              MAU<br><span class="text-[0.6rem]">Monthly Active Users</span>
+            </h3>
             <input
               v-model.number="mau"
               :placeholder="0"
-              class="break-all w-full p-2 rounded-xl border-b border-blue-700 text-3xl text-center font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj"
+              class="calc-input"
               @input="calculateUpdates"
             >
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
-              MAU
-            </h3>
           </div>
 
           <div class="flex flex-col items-center">
+            <h3 class="calc-label">
+              Storage<br>(GB)
+            </h3>
             <input
               v-model.number="storage"
               :placeholder="0"
-              class="break-all w-full p-2 rounded-xl border-b border-blue-700 text-3xl text-center font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj"
+              class="calc-input"
               @input="calculateTotal"
             >
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
-              Storage (GB)
-            </h3>
           </div>
 
           <div class="flex flex-col items-center">
+            <h3 class="calc-label">
+              Updates<br>by month
+            </h3>
             <input
               v-model.number="updatesByMonth"
               :placeholder="0"
-              class="break-all w-full p-2 rounded-xl border-b border-blue-700 text-3xl text-center font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj"
+              class="calc-input"
               @input="calculateUpdates"
             >
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
-              Updates/month
-            </h3>
           </div>
 
           <div class="flex flex-col items-center">
+            <h3 class="calc-label">
+              Updates Size<br>(MB)
+            </h3>
             <input
               v-model.number="updatesSize"
               :placeholder="0"
-              class="break-all w-full p-2 rounded-xl border-b border-blue-700 text-3xl text-center font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj"
+              class="calc-input"
               @input="calculateBandwidth"
             >
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
-              Updates Size (MB)
-            </h3>
           </div>
 
           <div class="lg:col-span-2 flex flex-col items-center">
-            <p class="break-all text-3xl font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj">
-              {{ bandwidth }}
-            </p>
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
+            <h3 class="calc-label">
               Bandwidth
             </h3>
+            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+              {{ bandwidth }}
+            </p>
           </div>
           <div class="lg:col-span-2 flex flex-col items-center">
-            <p class="break-all text-3xl font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj">
-              {{ updates }}
-            </p>
-            <h3 class="mt-5 text-sm font-bold tracking-widest text-gray-600 uppercase lg:mt-0 lg:order-1 font-pj">
+            <h3 class="calc-label">
               Updates
             </h3>
+            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+              {{ updates }}
+            </p>
           </div>
           <div class="sm:col-span-2 lg:col-span-4 flex flex-col items-center">
-            <p class="break-all text-3xl font-bold text-gray-900 lg:mt-3 lg:order-2 font-pj  p-2 border border-blue-900 rounded-xl">
+            <h3 class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">
+              Monthly Price
+            </h3>
+            <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
               {{ totalPrice }}$
             </p>
-            <h3 class="mt-5 text-md font-bold tracking-widest text-gray-900 uppercase lg:mt-0 lg:order-1 font-pj">
-              Total Price
-            </h3>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
 </script>
 
 <template>
@@ -358,7 +359,6 @@
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
       </p>
-      <Calculator />
       <section class="py-12 sm:py-16 lg:py-20">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="max-w-2xl mx-auto text-center">
@@ -513,8 +513,17 @@
           </div>
         </div>
       </section>
+
+      <Calculator />
+
+      <div class="flex max-w-md mx-auto items-center justify-center -mt-6">
+        <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
+          Subscribe now <ArrowNarrowRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
+        </a>
+      </div>
+
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
-        We don’t bill you automatically until your confirmation. We don’t store or sell your data to anyone.
+        We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
         (¹) each App can have this number.
