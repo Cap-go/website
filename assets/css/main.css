@@ -47,15 +47,11 @@ html.dark {
 }
 
 .calc-input {
-  @apply break-all w-full p-2 border-b 
-  bg-gray-900
-  border-gray-300 text-3xl text-center font-bold
-  lg:mt-3;
+  @apply break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3;
 }
 
 .calc-label {
-  @apply mt-5 text-sm font-bold tracking-widest
-  uppercase mt-0;
+  @apply mt-5 text-sm font-bold tracking-widest uppercase mt-0;
 }
 
 @font-face {
