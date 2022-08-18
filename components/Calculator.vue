@@ -61,7 +61,7 @@ const calculateUpdates = () => {
             <input
               v-model.number="mau"
               :placeholder="0"
-              class="calc-input"
+              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateUpdates"
             >
           </div>
@@ -73,7 +73,7 @@ const calculateUpdates = () => {
             <input
               v-model.number="storage"
               :placeholder="0"
-              class="calc-input"
+              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateTotal"
             >
           </div>
@@ -85,7 +85,7 @@ const calculateUpdates = () => {
             <input
               v-model.number="updatesByMonth"
               :placeholder="0"
-              class="calc-input"
+              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateUpdates"
             >
           </div>
@@ -97,7 +97,7 @@ const calculateUpdates = () => {
             <input
               v-model.number="updatesSize"
               :placeholder="0"
-              class="calc-input"
+              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateBandwidth"
             >
           </div>
