@@ -9,7 +9,7 @@ const pricing: {
 const mau = ref(pricing['pay-as-you-go'].mau.base)
 const storage = ref(pricing['pay-as-you-go'].storage.base)
 const updatesByMonth = ref(1)
-const updatesSize = ref(1)
+const updatesSize = ref(5)
 
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
