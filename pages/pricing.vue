@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
+import pricing from '../assets/sample-data/pricing.json'
+import PriceModal from '~/components/pricing/PriceModal.vue'
 </script>
 
 <template>
@@ -14,7 +16,7 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
         </p>
       </div>
 
-      <div class="grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">
+      <div id="plans" class="grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">
         <div class="bg-white">
           <div class="p-6 lg:px-10 lg:py-9">
             <div class="text-center">
@@ -29,10 +31,10 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
               </p>
               <div class="flex items-end justify-center mt-6">
                 <p class="text-lg font-bold text-gray-400 font-pj">
-                  $
+                  €
                 </p>
                 <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
-                  14
+                  {{ pricing.solo.price }}
                 </p>
                 <p class="text-lg font-bold text-gray-400 font-pj">
                   /month
@@ -45,31 +47,24 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                1 App
+                {{ pricing.solo.mau }} monthly active Users
               </li>
 
               <li class="flex items-center">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                2 channels
+                {{ pricing.solo.storage }} GB/mo of Storage
               </li>
 
               <li class="flex items-center">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                2,500 Monthly Live Updates
+                {{ pricing.solo.bandwidth }} GB/mo of Bandwidth
               </li>
 
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                10 Version history
-              </li>
-
-              <li class="flex items-center">
+              <li class="flex items-center text-gray-400">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -137,10 +132,10 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
                 </p>
                 <div class="flex items-end justify-center mt-6">
                   <p class="text-lg font-bold text-gray-400 font-pj">
-                    $
+                    €
                   </p>
                   <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
-                    39
+                    {{ pricing.maker.price }}
                   </p>
                   <p class="text-lg font-bold text-gray-400 font-pj">
                     /month
@@ -153,35 +148,21 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  3 Apps
+                  {{ pricing.maker.mau }} monthly active Users
                 </li>
 
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  10 channels¹
+                  {{ pricing.maker.storage }} GB/mo of Storage
                 </li>
 
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  25,000 Monthly Live Updates¹
-                </li>
-
-                <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  100 Version history¹
-                </li>
-
-                <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  10 Shared Channel¹
+                  {{ pricing.maker.bandwidth }} GB/mo of Bandwidth
                 </li>
 
                 <li class="flex items-center text-gray-400">
@@ -243,7 +224,7 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
               </p>
               <div class="flex items-end justify-center mt-6">
                 <p class="text-lg font-bold text-gray-400 font-pj">
-                  $
+                  €
                 </p>
                 <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
                   99
@@ -514,9 +495,9 @@ import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
         </div>
       </section>
 
-      <Calculator />
+      <PriceModal />
 
-      <div class="flex max-w-md mx-auto items-center justify-center -mt-6">
+      <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
           Subscribe now <ArrowNarrowRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
         </a>

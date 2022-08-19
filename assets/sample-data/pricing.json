@@ -1,0 +1,35 @@
+{
+    "solo": {
+        "mau": 500,
+        "storage": 1,
+        "bandwidth": 5,
+        "price": 14
+    },
+    "maker": {
+        "mau": 5000,
+        "storage": 3,
+        "bandwidth": 15,
+        "price": 39
+    },
+    "team": {
+        "mau": 20000,
+        "storage": 10,
+        "bandwidth": 60,
+        "price": 99
+    },
+    "pay-as-you-go": {
+        "mau": {
+            "base": 200000,
+            "price-per-unit": 0.0005
+        },
+        "storage": {
+            "base": 30,
+            "price-per-unit": 0.5
+        },
+        "bandwidth": {
+            "base": 300,
+            "price-per-unit": 0.2
+        },
+        "price": 999
+    }
+}

@@ -1,30 +1,48 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import sampleData from '../../assets/sample-data/pricing.json'
 
-const mau = ref(200000)
-const storage = ref(30)
+const pricing: {
+  [key: string]: any
+} = sampleData
+
+const mau = ref(pricing['pay-as-you-go'].mau.base)
+const storage = ref(pricing['pay-as-you-go'].storage.base)
 const updatesByMonth = ref(1)
 const updatesSize = ref(1)
 
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
 
-const basePrice = 999
+const basePrice = pricing['pay-as-you-go'].price
 const totalPrice = ref(basePrice)
+
+const suggestion = ref('')
 
 const roundNumber = (number: number) => {
   return Math.round(number * 100) / 100
 }
 
+const suggestBestPlan = () => {
+  if (mau.value <= pricing.solo.mau && storage.value <= pricing.solo.storage && bandwidth.value <= pricing.solo.bandwidth)
+    suggestion.value = 'solo'
+  else if (mau.value <= pricing.maker.mau && storage.value <= pricing.maker.storage && bandwidth.value <= pricing.maker.bandwidth)
+    suggestion.value = 'maker'
+  else if (mau.value <= pricing.team.mau && storage.value <= pricing.team.storage && bandwidth.value <= pricing.team.bandwidth)
+    suggestion.value = 'team'
+  else suggestion.value = ''
+}
+
 const calculateTotal = () => {
-  const mauPrice = mau.value > 200000 ? (mau.value - 200000) * 0.005 : 0
-  const storagePrice = storage.value > 30 ? (storage.value - 30) * 0.5 : 0
-  const bandwidthPrice = bandwidth.value > 300 ? (bandwidth.value - 300) * 0.2 : 0
+  const mauPrice = mau.value > pricing['pay-as-you-go'].mau.base ? (mau.value - pricing['pay-as-you-go'].mau.base) * pricing['pay-as-you-go'].mau['price-per-unit'] : 0
+  const storagePrice = storage.value > pricing['pay-as-you-go'].storage.base ? (storage.value - pricing['pay-as-you-go'].storage.base) * pricing['pay-as-you-go'].storage['price-per-unit'] : 0
+  const bandwidthPrice = bandwidth.value > pricing['pay-as-you-go'].bandwidth.base ? (bandwidth.value - pricing['pay-as-you-go'].bandwidth.base) * pricing['pay-as-you-go'].bandwidth['price-per-unit'] : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
-  if (sum > 0)
-    totalPrice.value = roundNumber(basePrice + sum)
-  else
-    totalPrice.value = basePrice
+  if (sum > 0) { totalPrice.value = roundNumber(basePrice + sum) }
+  else {
+    suggestBestPlan()
+    totalPrice.value = suggestion.value ? roundNumber(pricing[suggestion.value].price) : basePrice
+  }
 }
 
 const calculateBandwidth = () => {
@@ -60,7 +78,7 @@ const calculateUpdates = () => {
             </h3>
             <input
               v-model.number="mau"
-              :placeholder="0"
+              placeholder="0"
               class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateUpdates"
             >
@@ -72,7 +90,7 @@ const calculateUpdates = () => {
             </h3>
             <input
               v-model.number="storage"
-              :placeholder="0"
+              placeholder="0"
               class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateTotal"
             >
@@ -84,7 +102,7 @@ const calculateUpdates = () => {
             </h3>
             <input
               v-model.number="updatesByMonth"
-              :placeholder="0"
+              placeholder="0"
               class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateUpdates"
             >
@@ -96,7 +114,7 @@ const calculateUpdates = () => {
             </h3>
             <input
               v-model.number="updatesSize"
-              :placeholder="0"
+              placeholder="0"
               class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
               @input="calculateBandwidth"
             >
@@ -123,8 +141,11 @@ const calculateUpdates = () => {
               Monthly Price
             </h3>
             <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
-              {{ totalPrice }}$
+              {{ totalPrice }}€
             </p>
+            <h3 v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-red-400 mt-0 font-pj">
+              We suggest you to choose the <a href="#plans" class="font-bold text-white uppercase">{{ suggestion }}</a> plan
+            </h3>
           </div>
         </div>
       </div>
