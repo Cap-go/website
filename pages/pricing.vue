@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
 import pricing from '../assets/sample-data/pricing.json'
-import PriceModal from '~/components/pricing/PriceModal.vue'
+import Calculator from '~~/components/pricing/Calculator.vue'
+import Plans from '~~/components/pricing/Plans.vue'
 </script>
 
 <template>
@@ -16,7 +17,9 @@ import PriceModal from '~/components/pricing/PriceModal.vue'
         </p>
       </div>
 
-      <div id="plans" class="grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">
+      <Plans />
+
+      <div id="plans" class="hidden grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">
         <div class="bg-white">
           <div class="p-6 lg:px-10 lg:py-9">
             <div class="text-center">
@@ -495,7 +498,7 @@ import PriceModal from '~/components/pricing/PriceModal.vue'
         </div>
       </section>
 
-      <PriceModal />
+      <Calculator />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">

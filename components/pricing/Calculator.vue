@@ -86,7 +86,7 @@ const calculateUpdates = () => {
 
           <div class="flex flex-col items-center">
             <h3 class="calc-label">
-              Storage<br>(GB)
+              Updates Size<br>(MB)
             </h3>
             <input
               v-model.number="storage"
