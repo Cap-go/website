@@ -122,7 +122,7 @@ const calculateUpdates = () => {
 
           <div class="lg:col-span-2 flex flex-col items-center">
             <h3 class="calc-label">
-              Bandwidth
+              Bandwidth<br>(MB)
             </h3>
             <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
               {{ bandwidth }}
@@ -130,7 +130,7 @@ const calculateUpdates = () => {
           </div>
           <div class="lg:col-span-2 flex flex-col items-center">
             <h3 class="calc-label">
-              Updates
+              Updates<br>(Total)
             </h3>
             <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
               {{ updates }}
