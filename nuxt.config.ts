@@ -13,7 +13,7 @@ const getUrl = (branch = ''): string => {
   if (branch === 'local')
     return `http://${getRightKey(branch, 'base_domain')}`
   else if (branch === 'development')
-    return `http://${getRightKey(branch, 'base_domain')}`
+    return `https://${getRightKey(branch, 'base_domain')}`
   else
     return `https://${getRightKey('prod', 'base_domain')}`
 }
