@@ -1,3 +1,4 @@
+<!-- eslint-disable no-console -->
 <script setup lang="ts">
 import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
 import Calculator from '~~/components/pricing/Calculator.vue'
@@ -5,31 +6,28 @@ import Plans from '~~/components/pricing/Plans.vue'
 import type { definitions } from '~~/types/supabase'
 const config = useRuntimeConfig()
 
-let plans: Array<definitions['plans']> = []
-let pay_as_you_go_plan: Array<definitions['pay_as_you_go']> = []
-
-await fetch(`${config.domain}/api/plans`).then((res) => {
-  if (res.ok) {
-    res.json().then((data) => {
-      plans = data
-    })
-  }
+const { data: plans } = await useAsyncData('plans', async () => {
+  const res = await fetch(`${config.domain}/api/plans`)
+  const json = await res.json()
+  if (res.ok)
+    return json as Array<definitions['plans']>
+  return []
 })
 
-await fetch(`${config.domain}/api/pay_as_you_go`).then((res) => {
-  if (res.ok) {
-    res.json().then((data) => {
-      pay_as_you_go_plan = data
-    })
-  }
+const { data: pay_as_you_go_plan } = await useAsyncData('paygo', async () => {
+  const res = await fetch(`${config.domain}/api/pay_as_you_go`)
+  const json = await res.json()
+  if (res.ok)
+    return json as Array<definitions['pay_as_you_go']>
+  else return []
 })
 
 const pricing: {
   [key: string]: any
-} = plans
+} = plans.value
 
-const payg_base = pay_as_you_go_plan.filter(plan => plan.type === 'base')[0]
-const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
+const payg_base = pay_as_you_go_plan.value.filter(plan => plan.type === 'base')[0]
+const payg_units = pay_as_you_go_plan.value.filter(plan => plan.type === 'units')[0]
 </script>
 
 <template>
@@ -44,7 +42,7 @@ const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
         </p>
       </div>
 
-      <Plans :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+      <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
@@ -204,7 +202,7 @@ const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
         </div>
       </section>
 
-      <Calculator :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+      <Calculator v-if="pay_as_you_go_plan.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
