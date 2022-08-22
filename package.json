@@ -3,7 +3,8 @@
   "packageManager": "pnpm@7.5.0",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "serve": "BRANCH=local netlify dev",
+    "dev": "nuxt dev --port 3336",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint ."

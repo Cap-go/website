@@ -48,4 +48,8 @@
 
 
 [dev]
-  command = "pnpm run dev"
+  command = "pnpm dev"
+  autoLaunch = false
+  targetPort = 3336
+  functionsPort = 3335
+  port = 3000
