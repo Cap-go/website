@@ -39,6 +39,10 @@ const brand = config.brand
         </div>
 
         <div class="px-5 py-2">
+          <a href="https://status.capgo.app/" target="_blank" class="text-base text-gray-500 hover:text-gray-900"> Status </a>
+        </div>
+
+        <div class="px-5 py-2">
           <a href="/tos/" class="text-base text-gray-500 hover:text-gray-900"> Terms of services </a>
         </div>
 
