@@ -64,8 +64,8 @@ const structuredData = {
           'position': 1,
           'item': {
             '@type': 'WebPage',
-            '@id': getUrl(process.env.BRANCH),
-            'url': getUrl(process.env.BRANCH),
+            '@id': `${getUrl(process.env.BRANCH)}/`,
+            'url': `${getUrl(process.env.BRANCH)}/`,
             'name': 'Home',
           },
         },
@@ -74,8 +74,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH)}/blog`,
-            'url': `${getUrl(process.env.BRANCH)}/blog`,
+            '@id': `${getUrl(process.env.BRANCH)}/blog/`,
+            'url': `${getUrl(process.env.BRANCH)}/blog/`,
             'name': 'Blog',
           },
         },
@@ -84,8 +84,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH)}/app_mobile`,
-            'url': `${getUrl(process.env.BRANCH)}/app_mobile`,
+            '@id': `${getUrl(process.env.BRANCH)}/app_mobile/`,
+            'url': `${getUrl(process.env.BRANCH)}/app_mobile/`,
             'name': 'App',
           },
         },
@@ -94,8 +94,8 @@ const structuredData = {
           'position': 2,
           'item': {
             '@type': 'WebPage',
-            '@id': `${getUrl(process.env.BRANCH)}/pricing`,
-            'url': `${getUrl(process.env.BRANCH)}/pricing`,
+            '@id': `${getUrl(process.env.BRANCH)}/pricing/`,
+            'url': `${getUrl(process.env.BRANCH)}/pricing/`,
             'name': 'Pricing',
           },
         },
