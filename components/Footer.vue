@@ -23,15 +23,15 @@ const brand = config.brand
         </div>
 
         <div class="px-5 py-2">
-          <a href="/blog" class="text-base text-gray-500 hover:text-gray-900"> Blog </a>
+          <a href="/blog/" class="text-base text-gray-500 hover:text-gray-900"> Blog </a>
         </div>
 
         <div class="px-5 py-2">
-          <a href="https://github.com/Cap-go/capacitor-updater/wiki" target="_blank" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
+          <a href="https://docs.capgo.app/" target="_blank" class="text-base text-gray-500 hover:text-gray-900"> Documentation </a>
         </div>
 
         <div class="px-5 py-2">
-          <a href="/privacy" class="text-base text-gray-500 hover:text-gray-900"> Privacy </a>
+          <a href="/privacy/" class="text-base text-gray-500 hover:text-gray-900"> Privacy </a>
         </div>
 
         <div class="px-5 py-2">
@@ -39,7 +39,7 @@ const brand = config.brand
         </div>
 
         <div class="px-5 py-2">
-          <a href="/tos" class="text-base text-gray-500 hover:text-gray-900"> Terms of services </a>
+          <a href="/tos/" class="text-base text-gray-500 hover:text-gray-900"> Terms of services </a>
         </div>
 
         <div class="px-5 py-2">
