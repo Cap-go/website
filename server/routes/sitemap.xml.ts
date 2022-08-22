@@ -10,16 +10,16 @@ export default defineEventHandler(async (event) => {
     const smStream = new SitemapStream({ hostname: config.public.domain })
 
     smStream.write({ url: '/', changefreq: 'daily', priority: 1 })
-    smStream.write({ url: '/app_mobile', changefreq: 'daily', priority: 1 })
-    smStream.write({ url: '/pricing', changefreq: 'daily', priority: 1 })
+    smStream.write({ url: '/app_mobile/', changefreq: 'daily', priority: 1 })
+    smStream.write({ url: '/pricing/', changefreq: 'daily', priority: 1 })
 
-    smStream.write({ url: '/blog', changefreq: 'daily', priority: 1 })
+    smStream.write({ url: '/blog/', changefreq: 'daily', priority: 1 })
 
     const blogs = await serverQueryContent(event).where({ published: true }).find()
 
     blogs.forEach((article: any) => {
       smStream.write({
-        url: `/blog/${article.slug}`,
+        url: `/blog/${article.slug}/`,
         changefreq: 'daily',
         priority: 0.5,
       })
