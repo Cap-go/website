@@ -36,12 +36,12 @@ const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
   <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-8xl font-pj">
+        <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-8xl font-pj">
           The right plan can change your work
-        </h2>
-        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">
+        </h1>
+        <h2 class="mt-6 text-xl font-normal text-gray-600 font-pj">
           Enterprise-grade cloud that enhance Capacitor application functionality and security.
-        </p>
+        </h2>
       </div>
 
       <Plans :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />

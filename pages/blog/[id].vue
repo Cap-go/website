@@ -87,7 +87,7 @@ useHead(() => ({
     <span
       class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"
     >
-      {{ formatTime(page.data.value.date) }}
+      {{ formatTime(page.data.value.created_at) }}
     </span>
 
     <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
@@ -131,7 +131,7 @@ useHead(() => ({
         <span
           class="block mt-3 text-sm font-semibold tracking-widest text-white uppercase"
         >
-          {{ formatTime(random.data.value.date) }}
+          {{ formatTime(random.data.value.created_at) }}
         </span>
         <p class="mt-1">
           {{ random.data.value.description }}

@@ -1,8 +1,7 @@
 ---
 slug: "appcenter-migration"
 title: Migrating from App Center to Capgo
-description: Migrating from Microsoft App Center to Capgo in just a few simple steps.
-  In this guide, we’ll walk through the complete migration for Live Updates a CodePush
+description: In this guide, we’ll walk through the complete migration for Capgo Live Updates a Microsoft CodePush
   alternative.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
@@ -122,7 +121,7 @@ This command will use all variable defined in the Capacitor config file to creat
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli@latest upload -channel production`
+`npx @capgo/cli@latest upload --channel production`
 
 By default, the version name will be the one in your package.json file.
 
@@ -160,7 +159,7 @@ For your application to receive a live update from Deploy, you'll need to run th
 
 Open the app, put it in background and open it again, you should see in the logs the app did the update.
 
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://github.com/Cap-go/capacitor-updater/wiki#auto-update).
+Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://docs.capgo.app/plugin/auto-update/cloud).
 
 ## Remove App Center Dependencies
 
