@@ -5,12 +5,12 @@
   <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-8xl font-pj">
+        <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-8xl font-pj">
           The right plan can change your work
-        </h2>
-        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">
+        </h1>
+        <h2 class="mt-6 text-xl font-normal text-gray-600 font-pj">
           Enterprise-grade cloud that enhance Capacitor application functionality and security.
-        </p>
+        </h2>
       </div>
 
       <div class="grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">

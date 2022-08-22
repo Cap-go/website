@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { createMeta } from '~/services/meta'
 
 const title = 'Capgo | Capacitor Blog'
-const description = 'The best articles to enhance your Capacitor experience.'
+const description = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
 const { data: articles } = await useAsyncData('count', () =>
   queryContent('blog').where({ published: true }).find(),
 )

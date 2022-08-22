@@ -1,8 +1,7 @@
 ---
 slug: "appcenter-migration"
 title: Migrating from App Center to Capgo
-description: Migrating from Microsoft App Center to Capgo in just a few simple steps.
-  In this guide, we’ll walk through the complete migration for Live Updates a CodePush
+description: In this guide, we’ll walk through the complete migration for Capgo Live Updates a Microsoft CodePush
   alternative.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu

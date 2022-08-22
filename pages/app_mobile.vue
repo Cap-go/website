@@ -1,21 +1,21 @@
 <script setup lang="ts">
+import { createMetaImage } from '~~/services/meta'
+
 const config = useRuntimeConfig()
 
 const brand = config.brand
+const desc = 'Try each version of your app direcly into our sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.'
 useHead({
   title: `${brand} | Capacitor sandbox app`,
   meta: [
-    { name: 'description', content: 'Try and manage OTA update for your capacitor app from your pocket, available in IOS and Android.' },
+    { name: 'description', content: desc },
     { name: 'og:type', content: 'website' },
     { name: 'og:title', content: `${brand} | Capacitor sanbox APP` },
     { name: 'twitter:title', content: `${brand} | Capacitor sanbox APP` },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:description', content: 'Try and manage OTA update for your capacitor app from your pocket, available in IOS and Android.' },
+    { name: 'twitter:description', content: desc },
     { name: 'twitter:domain', content: config.domain },
-    { name: 'twitter:image', content: `https://${config.domain}/app_demo.webp` },
-    { name: 'og:image:alt', content: `${brand} App preview` },
-    { name: 'og:image', content: `https://${config.domain}/app_demo.webp` },
-    { name: 'og:alt', content: `${brand} app preview` },
+    ...createMetaImage(`${config.domain}/app_demo.webp`, `${brand} App preview`),
   ],
 })
 </script>
