@@ -1,20 +1,38 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import sampleData from '../../assets/sample-data/pricing.json'
+import type { definitions } from '~~/types/supabase'
 
-const pricing: {
-  [key: string]: any
-} = sampleData
+const props = defineProps({
+  pricing: {
+    type: Array<definitions['plans']>,
+    required: true,
+  },
+  paygBase: {
+    type: Object,
+    required: true,
+  },
+  paygUnits: {
+    type: Object,
+    required: true,
+  },
+})
 
-const mau = ref(pricing['pay-as-you-go'].mau.base)
-const storage = ref(pricing['pay-as-you-go'].storage.base)
+const config = useRuntimeConfig()
+
+const payg = props.pricing.find(plan => plan.name === 'Pay as you go')!
+const solo = props.pricing.find(plan => plan.name === 'Solo')!
+const maker = props.pricing.find(plan => plan.name === 'Maker')!
+const team = props.pricing.find(plan => plan.name === 'Team')!
+
+const mau = ref(props.paygBase.mau)
+const storage = ref(props.paygBase.storage)
 const updatesByMonth = ref(1)
 const updatesSize = ref(1)
 
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
 
-const basePrice = pricing['pay-as-you-go'].price
+const basePrice = payg.price_m
 const totalPrice = ref(basePrice)
 
 const suggestion = ref('')
@@ -24,24 +42,24 @@ const roundNumber = (number: number) => {
 }
 
 const suggestBestPlan = () => {
-  if (mau.value <= pricing.solo.mau && storage.value <= pricing.solo.storage && bandwidth.value <= pricing.solo.bandwidth)
-    suggestion.value = 'solo'
-  else if (mau.value <= pricing.maker.mau && storage.value <= pricing.maker.storage && bandwidth.value <= pricing.maker.bandwidth)
-    suggestion.value = 'maker'
-  else if (mau.value <= pricing.team.mau && storage.value <= pricing.team.storage && bandwidth.value <= pricing.team.bandwidth)
-    suggestion.value = 'team'
+  if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth)
+    suggestion.value = 'Solo'
+  else if (mau.value <= maker.mau && storage.value <= maker.storage && bandwidth.value <= maker.bandwidth)
+    suggestion.value = 'Maker'
+  else if (mau.value <= team.mau && storage.value <= team.storage && bandwidth.value <= team.bandwidth)
+    suggestion.value = 'Team'
   else suggestion.value = ''
 }
 
 const calculateTotal = () => {
-  const mauPrice = mau.value > pricing['pay-as-you-go'].mau.base ? (mau.value - pricing['pay-as-you-go'].mau.base) * pricing['pay-as-you-go'].mau['price-per-unit'] : 0
-  const storagePrice = storage.value > pricing['pay-as-you-go'].storage.base ? (storage.value - pricing['pay-as-you-go'].storage.base) * pricing['pay-as-you-go'].storage['price-per-unit'] : 0
-  const bandwidthPrice = bandwidth.value > pricing['pay-as-you-go'].bandwidth.base ? (bandwidth.value - pricing['pay-as-you-go'].bandwidth.base) * pricing['pay-as-you-go'].bandwidth['price-per-unit'] : 0
+  const mauPrice = mau.value > props.paygBase.mau ? (mau.value - props.paygBase.mau) * props.paygUnits.mau : 0
+  const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
+  const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? (bandwidth.value - props.paygBase.bandwidth) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) { totalPrice.value = roundNumber(basePrice + sum) }
   else {
     suggestBestPlan()
-    totalPrice.value = suggestion.value ? roundNumber(pricing[suggestion.value].price) : basePrice
+    totalPrice.value = suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice
   }
 }
 

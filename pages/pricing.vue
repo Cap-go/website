@@ -1,8 +1,35 @@
 <script setup lang="ts">
 import { ArrowNarrowRightIcon } from '@heroicons/vue/solid'
-import pricing from '../assets/sample-data/pricing.json'
 import Calculator from '~~/components/pricing/Calculator.vue'
 import Plans from '~~/components/pricing/Plans.vue'
+import type { definitions } from '~~/types/supabase'
+const config = useRuntimeConfig()
+
+let plans: Array<definitions['plans']> = []
+let pay_as_you_go_plan: Array<definitions['pay_as_you_go']> = []
+
+await fetch(`${config.domain}/api/plans`).then((res) => {
+  if (res.ok) {
+    res.json().then((data) => {
+      plans = data
+    })
+  }
+})
+
+await fetch(`${config.domain}/api/pay_as_you_go`).then((res) => {
+  if (res.ok) {
+    res.json().then((data) => {
+      pay_as_you_go_plan = data
+    })
+  }
+})
+
+const pricing: {
+  [key: string]: any
+} = plans
+
+const payg_base = pay_as_you_go_plan.filter(plan => plan.type === 'base')[0]
+const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
 </script>
 
 <template>
@@ -17,328 +44,7 @@ import Plans from '~~/components/pricing/Plans.vue'
         </p>
       </div>
 
-      <Plans />
-
-      <div id="plans" class="hidden grid items-center max-w-md grid-cols-1 mx-auto mt-8 md:max-w-5xl gap-y-6 md:mt-16 md:grid-cols-3">
-        <div class="bg-white">
-          <div class="p-6 lg:px-10 lg:py-9">
-            <div class="text-center">
-              <p class="text-4xl">
-                🚀
-              </p>
-              <h3 class="mt-6 text-sm text-gray-900 font-bold tracking-widest uppercase font-pj">
-                Solo
-              </h3>
-              <p class="mt-1.5 font-pj text-sm text-gray-600">
-                Best for independent developers
-              </p>
-              <div class="flex items-end justify-center mt-6">
-                <p class="text-lg font-bold text-gray-400 font-pj">
-                  €
-                </p>
-                <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
-                  {{ pricing.solo.price }}
-                </p>
-                <p class="text-lg font-bold text-gray-400 font-pj">
-                  /month
-                </p>
-              </div>
-            </div>
-
-            <ul class="space-y-3 text-base font-medium text-gray-900 mt-9">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ pricing.solo.mau }} monthly active Users
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ pricing.solo.storage }} GB/mo of Storage
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ pricing.solo.bandwidth }} GB/mo of Bandwidth
-              </li>
-
-              <li class="flex items-center text-gray-400">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Limited Reporting
-              </li>
-            </ul>
-
-            <div class="mt-12 text-center">
-              <a
-                href="https://web.capgo.app/register"
-                title="register"
-                class="
-                                flex
-                                items-center
-                                justify-center
-                                w-full
-                                px-4
-                                py-4
-                                text-base
-                                font-bold
-                                text-gray-900
-                                transition-all
-                                duration-200
-                                bg-gray-100
-                                border border-transparent
-                                lg:px-8
-                                hover:bg-gray-900 hover:text-white
-                                focus:text-white focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                                font-pj
-                            "
-                role="button"
-              >
-                <!-- Start 14 Days Trial -->
-                Start Trial
-              </a>
-
-              <p class="mt-4 text-sm text-gray-600 font-pj">
-                No credit card required
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative">
-          <div class="absolute -inset-x-2 -inset-y-px">
-            <div class="w-full h-full mx-auto rotate-180 opacity-30 blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
-          </div>
-
-          <div class="relative bg-white shadow-xl">
-            <div class="py-2 text-center bg-gray-700">
-              <p class="text-xs font-bold tracking-widest text-white uppercase font-pj">
-                Most Popular
-              </p>
-            </div>
-            <div class="p-6 lg:px-10 lg:py-9">
-              <div class="text-center">
-                <p class="text-4xl">
-                  ⚡️
-                </p>
-                <h3 class="mt-6 text-sm text-gray-900 font-bold tracking-widest uppercase font-pj">
-                  Maker
-                </h3>
-                <p class="mt-1.5 font-pj text-sm text-gray-600">
-                  Best for small business owners
-                </p>
-                <div class="flex items-end justify-center mt-6">
-                  <p class="text-lg font-bold text-gray-400 font-pj">
-                    €
-                  </p>
-                  <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
-                    {{ pricing.maker.price }}
-                  </p>
-                  <p class="text-lg font-bold text-gray-400 font-pj">
-                    /month
-                  </p>
-                </div>
-              </div>
-
-              <ul class="space-y-3 text-base font-medium text-gray-900 mt-9">
-                <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {{ pricing.maker.mau }} monthly active Users
-                </li>
-
-                <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {{ pricing.maker.storage }} GB/mo of Storage
-                </li>
-
-                <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {{ pricing.maker.bandwidth }} GB/mo of Bandwidth
-                </li>
-
-                <li class="flex items-center text-gray-400">
-                  <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Advanced Reporting
-                </li>
-              </ul>
-
-              <div class="mt-12 text-center">
-                <a
-                  href="https://web.capgo.app/register"
-                  title="register"
-                  class="
-                                    flex
-                                    items-center
-                                    justify-center
-                                    w-full
-                                    px-4
-                                    py-4
-                                    text-base
-                                    font-bold
-                                    text-white
-                                    transition-all
-                                    duration-200
-                                    bg-gray-900
-                                    border border-transparent
-                                    lg:px-8
-                                    hover:bg-gray-700
-                                    focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                                    font-pj
-                                "
-                  role="button"
-                >
-                  <!-- Start 14 Days Trial -->
-                  Start Trial
-                </a>
-
-                <p class="mt-4 text-sm text-gray-600 font-pj">
-                  No credit card required
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white">
-          <div class="p-6 lg:px-10 lg:py-9">
-            <div class="text-center">
-              <p class="text-4xl">
-                👓
-              </p>
-              <h3 class="mt-6 text-sm text-gray-900 font-bold tracking-widest uppercase font-pj">
-                Team
-              </h3>
-              <p class="mt-1.5 font-pj text-sm text-gray-600">
-                Best for medium Enterprise
-              </p>
-              <div class="flex items-end justify-center mt-6">
-                <p class="text-lg font-bold text-gray-400 font-pj">
-                  €
-                </p>
-                <p class="text-4xl ml-0.5 font-bold text-gray-900 font-pj">
-                  99
-                </p>
-                <p class="text-lg font-bold text-gray-400 font-pj">
-                  /month
-                </p>
-              </div>
-            </div>
-
-            <ul class="space-y-3 text-base font-medium text-gray-900 mt-9">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                10 Apps
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                50 channels¹
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                250,000 Monthly Live Updates¹
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                1000 Version history¹
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                1000 Shared Channel¹
-              </li>
-
-              <li class="flex items-center">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Priority Support
-              </li>
-
-              <li class="flex items-center text-gray-400">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Advanced Reporting
-              </li>
-
-              <li class="flex items-center text-gray-400">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Progressive deployment
-              </li>
-
-              <li class="flex items-center text-gray-400">
-                <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                AB testing
-              </li>
-            </ul>
-
-            <div class="mt-12 text-center">
-              <a
-                href="https://web.capgo.app/register"
-                title="register"
-                class="
-                                flex
-                                items-center
-                                justify-center
-                                w-full
-                                px-4
-                                py-4
-                                text-base
-                                font-bold
-                                text-gray-900
-                                transition-all
-                                duration-200
-                                bg-gray-100
-                                border border-transparent
-                                lg:px-8
-                                hover:bg-gray-900 hover:text-white
-                                focus:text-white focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                                font-pj
-                            "
-                role="button"
-              >
-                <!-- Start 14 Days Trial -->
-                Start Trial
-              </a>
-
-              <p class="mt-4 text-sm text-gray-600 font-pj">
-                No credit card required
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Plans :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
@@ -498,7 +204,7 @@ import Plans from '~~/components/pricing/Plans.vue'
         </div>
       </section>
 
-      <Calculator />
+      <Calculator :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
