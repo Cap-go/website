@@ -213,9 +213,6 @@ const payg_units = pay_as_you_go_plan.value.filter(plan => plan.type === 'units'
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
         We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
-      <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
-        (¹) each App can have this number.
-      </p>
     </div>
   </section>
 </template>
