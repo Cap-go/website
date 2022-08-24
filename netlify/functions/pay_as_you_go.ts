@@ -12,6 +12,8 @@ const get = async (supabase: SupabaseClient) => {
   const { data: pay_as_you_go } = await supabase
     .from<definitions['pay_as_you_go']>('pay_as_you_go')
     .select()
+  console.log('pay_as_you_go', pay_as_you_go)
+
   return sendRes(pay_as_you_go) || sendRes([])
 }
 
