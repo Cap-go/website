@@ -22,9 +22,6 @@ const { data: pay_as_you_go_plan } = await useAsyncData('paygo', async () => {
   else return []
 })
 
-console.log('Plans pricing', plans.value)
-console.log('Pay as you go pricing', pay_as_you_go_plan.value)
-
 const pricing: {
   [key: string]: any
 } = plans.value
