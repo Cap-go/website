@@ -1,0 +1,55 @@
+{
+    "solo": {
+        "mau": 500,
+        "storage": 1,
+        "bandwidth": 25,
+        "price": 14,
+        "description": "Best for independent developers",
+        "features": [
+            "Limited Reporting"
+        ]
+    },
+    "maker": {
+        "mau": 5000,
+        "storage": 3,
+        "bandwidth": 250,
+        "price": 39,
+        "description": "Best for small business owners",
+        "features": [
+            "Advanced Reporting"
+        ]
+    },
+    "team": {
+        "mau": 40000,
+        "storage": 30,
+        "bandwidth": 2000,
+        "price": 299,
+        "description": "Best for medium enterprises",
+        "features": [
+            "Advanced Reporting",
+            "Progressive Deployment",
+            "AB testing"
+        ]
+    },
+    "pay-as-you-go": {
+        "mau": {
+            "base": 100000,
+            "price-per-unit": 0.0005
+        },
+        "storage": {
+            "base": 100,
+            "price-per-unit": 0.5
+        },
+        "bandwidth": {
+            "base": 5000,
+            "price-per-unit": 0.2
+        },
+        "price": 999,
+        "description": "Best for scalling enterprises",
+        "features": [
+            "Advanced Reporting",
+            "Progressive Deployment",
+            "AB testing"
+        ]
+    }
+}

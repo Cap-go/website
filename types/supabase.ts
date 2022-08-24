@@ -2904,6 +2904,11 @@ export interface definitions {
      * @default
      */
     description: string
+    /**
+     * Format: character varying
+     * @default
+     */
+    market_desc: string
     /** Format: bigint */
     price_m: number
     /** Format: bigint */
@@ -2946,6 +2951,27 @@ export interface definitions {
     price_m_id: string
     /** Format: character varying */
     price_y_id: string
+    /** Format: bigint */
+    mau: number
+    /** Format: bigint */
+    storage: number
+    /** Format: bigint */
+    bandwidth: number
+  }
+  pay_as_you_go: {
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string
+    /** Format: character varying */
+    type: string
+    /** Format: bigint */
+    mau: number
+    /** Format: bigint */
+    storage: number
+    /** Format: bigint */
+    bandwidth: number
   }
   stats: {
     /**

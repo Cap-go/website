@@ -59,6 +59,7 @@ useHead(() => ({
   meta: createMeta(
     page.data.value.title || 'No title',
     page.data.value.description || 'No description',
+    page.data.value.head_image || '',
     page.data.value.author || 'Capgo',
   ),
 }))
