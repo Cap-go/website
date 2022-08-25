@@ -17,8 +17,6 @@ const props = defineProps({
   },
 })
 
-const config = useRuntimeConfig()
-
 const payg = props.pricing.find(plan => plan.name === 'Pay as you go')!
 const solo = props.pricing.find(plan => plan.name === 'Solo')!
 const maker = props.pricing.find(plan => plan.name === 'Maker')!
