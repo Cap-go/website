@@ -54,7 +54,7 @@ const suggestBestPlan = () => {
 const calculateTotal = () => {
   const mauPrice = mau.value > props.paygBase.mau ? (mau.value - props.paygBase.mau) * props.paygUnits.mau : 0
   const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
-  const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? (bandwidth.value - props.paygBase.bandwidth) * props.paygUnits.bandwidth : 0
+  const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) { totalPrice.value = roundNumber(basePrice + sum) }
   else {
