@@ -94,7 +94,6 @@ const menuMobile = ref(false)
     <div :class="{ hidden: !menuMobile }">
       <div class="px-2 pt-2 mt-2 pb-3 space-y-1 bg-gray-700">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-
         <a
           href="/app_mobile/"
           title="App"
@@ -114,21 +113,19 @@ const menuMobile = ref(false)
           href="https://docs.capgo.app/"
           title="Documentation"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Documenhttps://docs.capgo.app/
-
-          <a
-            href="https://web.capgo.app/login"
-            target="_blank"
-            title="Login"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >Login</a>
-          <a
-            href="https://discord.gg/VnYRvBfgA6"
-            title="Communauty"
-            target="_blank"
-            class="bg-gray-900 text-white block rounded-md text-base font-medium px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
-          >Join community</a>
-        </a>
+        >Documentation</a>
+        <a
+          href="https://web.capgo.app/login"
+          target="_blank"
+          title="Login"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+        >Login</a>
+        <a
+          href="https://discord.gg/VnYRvBfgA6"
+          title="Communauty"
+          target="_blank"
+          class="bg-gray-900 text-white block rounded-md text-base font-medium px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
+        >Join community</a>
       </div>
     </div>
   </header>
