@@ -20,6 +20,9 @@ Capgo use 2 main variable to manage versions in your app:
 
 All versions choices are decide server side by Capgo.
 
+## Versionning system
+
+To manage version Capgo use the Semver system read more about it [here](https://semver.org/).
 ## Native versions
 
 Where capgo find the Native version ?
