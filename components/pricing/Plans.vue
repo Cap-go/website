@@ -29,15 +29,27 @@ const descToText = (desc: string) => {
     default: return desc
   }
 }
+const descToEmoji = (desc: string) => {
+  switch (desc) {
+    case 'plan.solo.desc': return '🚀'
+    case 'plan.maker.desc': return '⚡️'
+    case 'plan.team.desc': return '👓'
+    case 'plan.payasyougo.desc': return '🚆'
+    default: return desc
+  }
+}
 </script>
 
 <template>
   <div id="plans">
-    <section class="pt-32 mt-8">
+    <section class="pt-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 px-12 text-center sm:text-left sm:px-0 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           <div v-for="plan in props.pricing" :key="plan.name" class="">
-            <h3 class="text-lg font-bold text-gray-900 font-pj">
+            <div class="text-center text-4xl">
+              {{ descToEmoji(plan.description) }}
+            </div>
+            <h3 class="text-center pt-4 text-lg font-bold text-gray-900 font-pj">
               {{ plan.name.toUpperCase() }}<br>
             </h3>
             <p class="mt-3 text-sm font-normal text-gray-600 font-pj">
