@@ -15,6 +15,20 @@ const props = defineProps({
     required: true,
   },
 })
+
+const numberWithSpaces = (x: number) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
+const descToText = (desc: string) => {
+  switch (desc) {
+    case 'plan.solo.desc': return 'Best for independent developers'
+    case 'plan.maker.desc': return 'Best for small business owners'
+    case 'plan.team.desc': return 'Best for medium enterprises'
+    case 'plan.payasyougo.desc': return 'Best for scalling enterprises'
+    default: return desc
+  }
+}
 </script>
 
 <template>
@@ -27,7 +41,7 @@ const props = defineProps({
               {{ plan.name }}<br>
             </h3>
             <p class="mt-3 text-sm font-normal text-gray-600 font-pj">
-              {{ plan.market_desc }}
+              {{ descToText(plan.description) }}
             </p>
             <div class="flex items-end justify-center mt-6 sm:justify-start">
               <p class="text-5xl font-bold text-gray-900 font-pj">
@@ -70,21 +84,21 @@ const props = defineProps({
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                {{ plan.mau }} Monthly Active Users
+                {{ numberWithSpaces(plan.mau) }} Monthly Active Users
               </li>
 
               <li class="flex items-center">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                {{ plan.storage }} GB/mo of Storage
+                {{ numberWithSpaces(plan.storage) }} GB/mo of Storage
               </li>
 
               <li class="flex items-center">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                {{ plan.bandwidth }} GB/mo of Bandwidth
+                {{ numberWithSpaces(plan.bandwidth) }} GB/mo of Bandwidth
               </li>
 
               <li class="flex items-center text-gray-400">
@@ -115,7 +129,7 @@ const props = defineProps({
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ props.paygBase.mau }} Monthly Active Users<br> <span class="text-gray-500">{{ props.paygUnits.mau }}€ per added user</span></div>
+                  <div>{{ numberWithSpaces(props.paygBase.mau) }} Monthly Active Users<br> <span class="text-gray-500">{{ props.paygUnits.mau }}€ per added user</span></div>
                 </div>
               </li>
 
@@ -124,7 +138,7 @@ const props = defineProps({
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ props.paygBase.storage }} GB/mo of Storage<br> <span class="text-gray-500">{{ props.paygUnits.storage }}€ per added GB</span></div>
+                  <div>{{ numberWithSpaces(props.paygBase.storage) }} GB/mo of Storage<br> <span class="text-gray-500">{{ props.paygUnits.storage }}€ per added GB</span></div>
                 </div>
               </li>
 
@@ -133,7 +147,7 @@ const props = defineProps({
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ props.paygBase.bandwidth }} GB/mo of Bandwidth<br> <span class="text-gray-500">{{ props.paygUnits.bandwidth }}€ per added GB</span></div>
+                  <div>{{ numberWithSpaces(props.paygBase.bandwidth) }} GB/mo of Bandwidth<br> <span class="text-gray-500">{{ props.paygUnits.bandwidth }}€ per added GB</span></div>
                 </div>
               </li>
 
