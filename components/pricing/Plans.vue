@@ -52,10 +52,10 @@ const descToEmoji = (desc: string) => {
             <h3 class="text-center pt-4 text-lg font-bold text-gray-900 font-pj">
               {{ plan.name.toUpperCase() }}<br>
             </h3>
-            <p class="mt-3 text-sm font-normal text-gray-600 font-pj">
+            <p class="text-center mt-3 text-sm font-normal text-gray-600 font-pj">
               {{ descToText(plan.description) }}
             </p>
-            <div class="flex items-end justify-center mt-6 sm:justify-start">
+            <div class="flex items-end justify-center mt-6">
               <p class="text-5xl font-bold text-gray-900 font-pj">
                 {{ plan.price_m }}€{{ plan.name === 'Pay as you go' ? "+" : "" }}
               </p>
