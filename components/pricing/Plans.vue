@@ -38,7 +38,7 @@ const descToText = (desc: string) => {
         <div class="grid grid-cols-1 px-12 text-center sm:text-left sm:px-0 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           <div v-for="plan in props.pricing" :key="plan.name" class="">
             <h3 class="text-lg font-bold text-gray-900 font-pj">
-              {{ plan.name }}<br>
+              {{ plan.name.toUpperCase() }}<br>
             </h3>
             <p class="mt-3 text-sm font-normal text-gray-600 font-pj">
               {{ descToText(plan.description) }}
