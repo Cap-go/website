@@ -6,13 +6,16 @@ import Plans from '~~/components/pricing/Plans.vue'
 import type { definitions } from '~~/types/supabase'
 const config = useRuntimeConfig()
 
-const { pending: plans_loading, data: plans } = await useFetch<Array<definitions['plans']>>(`${config.domain}/api/plans`)
+const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<definitions['plans']>>)
 
-const { pending: paygo_loading, data: pay_as_you_go_plan } = await useFetch<Array<definitions['pay_as_you_go']>>(`${config.domain}/api/pay_as_you_go`)
+const pay_as_you_go_plan = await fetch(`${config.domain}/api/pay_as_you_go`).then(r => r.json() as Promise<Array<definitions['pay_as_you_go']>>)
 
 const pricing: {
   [key: string]: any
-} = plans.value
+} = plans
+
+const payg_base = pay_as_you_go_plan.filter(plan => plan.type === 'base')[0]
+const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
 </script>
 
 <template>
@@ -27,21 +30,11 @@ const pricing: {
         </h2>
       </div>
 
-      <Plans :pricing="pricing" :paygo="pay_as_you_go_plan" />
+      <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
       </p>
-      <p class="max-w-md mx-auto mt-2 text-base text-center text-gray-500 font-pj">
-        We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
-      </p>
-
-      <Calculator :pricing="pricing" :paygo="pay_as_you_go_plan" />
-
-      <div class="flex max-w-md mx-auto items-center justify-center mt-3">
-        <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
-          Subscribe now <ArrowNarrowRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
-        </a>
-      </div>
       <section class="py-12 sm:py-16 lg:py-20">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="max-w-2xl mx-auto text-center">
@@ -196,6 +189,18 @@ const pricing: {
           </div>
         </div>
       </section>
+
+      <Calculator v-if="pay_as_you_go_plan.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+
+      <div class="flex max-w-md mx-auto items-center justify-center mt-3">
+        <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
+          Subscribe now <ArrowNarrowRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
+        </a>
+      </div>
+
+      <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
+        We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
+      </p>
     </div>
   </section>
 </template>
