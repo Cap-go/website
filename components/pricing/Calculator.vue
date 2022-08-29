@@ -7,23 +7,22 @@ const props = defineProps({
     type: Array<definitions['plans']>,
     required: true,
   },
-  paygBase: {
-    type: Object,
-    required: true,
-  },
-  paygUnits: {
-    type: Object,
+  paygo: {
+    type: Array<definitions['pay_as_you_go']>,
     required: true,
   },
 })
+
+const paygBase = props.paygo.filter(plan => plan.type === 'base')[0]
+const paygUnits = props.paygo.filter(plan => plan.type === 'units')[0]
 
 const payg = props.pricing.find(plan => plan.name === 'Pay as you go')!
 const solo = props.pricing.find(plan => plan.name === 'Solo')!
 const maker = props.pricing.find(plan => plan.name === 'Maker')!
 const team = props.pricing.find(plan => plan.name === 'Team')!
 
-const mau = ref(props.paygBase.mau)
-const storage = ref(props.paygBase.storage)
+const mau = ref(paygBase.mau)
+const storage = ref(paygBase.storage)
 const updatesByMonth = ref(2)
 const updatesSize = ref(30)
 
@@ -50,9 +49,9 @@ const suggestBestPlan = () => {
 }
 
 const calculateTotal = () => {
-  const mauPrice = mau.value > props.paygBase.mau ? (mau.value - props.paygBase.mau) * props.paygUnits.mau : 0
-  const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
-  const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
+  const mauPrice = mau.value > paygBase.mau ? (mau.value - paygBase.mau) * paygUnits.mau : 0
+  const storagePrice = storage.value > paygBase.storage ? (storage.value - paygBase.storage) * paygUnits.storage : 0
+  const bandwidthPrice = bandwidth.value > paygBase.bandwidth ? ((bandwidth.value - paygBase.bandwidth) / 1000) * paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) { totalPrice.value = roundNumber(basePrice + sum) }
   else {

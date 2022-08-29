@@ -6,15 +6,14 @@ const props = defineProps({
     type: Array<definitions['plans']>,
     required: true,
   },
-  paygBase: {
-    type: Object,
-    required: true,
-  },
-  paygUnits: {
-    type: Object,
+  paygo: {
+    type: Array<definitions['pay_as_you_go']>,
     required: true,
   },
 })
+
+const paygBase = props.paygo.filter(plan => plan.type === 'base')[0]
+const paygUnits = props.paygo.filter(plan => plan.type === 'units')[0]
 
 const numberWithSpaces = (x: number) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
@@ -141,7 +140,7 @@ const descToEmoji = (desc: string) => {
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ numberWithSpaces(props.paygBase.mau) }} Monthly Active Users<br> <span class="text-gray-500">{{ props.paygUnits.mau }}€ per added user</span></div>
+                  <div>{{ numberWithSpaces(paygBase.mau) }} Monthly Active Users<br> <span class="text-gray-500">{{ paygUnits.mau }}€ per added user</span></div>
                 </div>
               </li>
 
@@ -150,7 +149,7 @@ const descToEmoji = (desc: string) => {
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ numberWithSpaces(props.paygBase.storage) }} GB/mo of Storage<br> <span class="text-gray-500">{{ props.paygUnits.storage }}€ per added GB</span></div>
+                  <div>{{ numberWithSpaces(paygBase.storage) }} GB/mo of Storage<br> <span class="text-gray-500">{{ paygUnits.storage }}€ per added GB</span></div>
                 </div>
               </li>
 
@@ -159,7 +158,7 @@ const descToEmoji = (desc: string) => {
                   <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <div>{{ numberWithSpaces(props.paygBase.bandwidth) }} GB/mo of Bandwidth<br> <span class="text-gray-500">{{ props.paygUnits.bandwidth }}€ per added GB</span></div>
+                  <div>{{ numberWithSpaces(paygBase.bandwidth) }} GB/mo of Bandwidth<br> <span class="text-gray-500">{{ paygUnits.bandwidth }}€ per added GB</span></div>
                 </div>
               </li>
 
