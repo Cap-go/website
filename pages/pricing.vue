@@ -6,25 +6,16 @@ import Plans from '~~/components/pricing/Plans.vue'
 import type { definitions } from '~~/types/supabase'
 const config = useRuntimeConfig()
 
-const { data: plans } = await useAsyncData('plans', async () => {
-  const res = await fetch(`${config.domain}/api/plans`)
-  const json = await res.json()
-  if (res.ok)
-    return json as Array<definitions['plans']>
-  return []
-})
+const { data: plans } = await useFetch<Array<definitions['plans']>>(`${config.domain}/api/plans`)
 
-const { data: pay_as_you_go_plan } = await useAsyncData('paygo', async () => {
-  const res = await fetch(`${config.domain}/api/pay_as_you_go`)
-  const json = await res.json()
-  if (res.ok)
-    return json as Array<definitions['pay_as_you_go']>
-  else return []
-})
+const { data: pay_as_you_go_plan } = await useFetch<Array<definitions['pay_as_you_go']>>(`${config.domain}/api/pay_as_you_go`)
 
 const pricing: {
   [key: string]: any
 } = plans.value
+
+console.log('PRICING PLANS', plans.value)
+console.log('PRICING PAYGO', pay_as_you_go_plan.value)
 
 const payg_base = pay_as_you_go_plan.value.filter(plan => plan.type === 'base')[0]
 const payg_units = pay_as_you_go_plan.value.filter(plan => plan.type === 'units')[0]
@@ -42,7 +33,7 @@ const payg_units = pay_as_you_go_plan.value.filter(plan => plan.type === 'units'
         </h2>
       </div>
 
-      <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+      <Plans v-if="plans" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
         1 month free trial for all plans
       </p>
@@ -50,7 +41,7 @@ const payg_units = pay_as_you_go_plan.value.filter(plan => plan.type === 'units'
         We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
 
-      <Calculator v-if="pay_as_you_go_plan.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+      <Calculator v-if="pay_as_you_go_plan" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a href="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
