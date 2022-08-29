@@ -95,7 +95,7 @@ Run the command to build your code and send it to Capgo with:
 
 By default, the version name will be the one in your package.json file.
 
-Check in [Capgo](https://capgo.app/app) if the build is present.
+Check in [Capgo](https://web.capgo.app) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 

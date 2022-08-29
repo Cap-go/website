@@ -17,8 +17,6 @@ const props = defineProps({
   },
 })
 
-const config = useRuntimeConfig()
-
 const payg = props.pricing.find(plan => plan.name === 'Pay as you go')!
 const solo = props.pricing.find(plan => plan.name === 'Solo')!
 const maker = props.pricing.find(plan => plan.name === 'Maker')!
@@ -26,8 +24,8 @@ const team = props.pricing.find(plan => plan.name === 'Team')!
 
 const mau = ref(props.paygBase.mau)
 const storage = ref(props.paygBase.storage)
-const updatesByMonth = ref(1)
-const updatesSize = ref(5)
+const updatesByMonth = ref(2)
+const updatesSize = ref(30)
 
 const updates = ref(mau.value * updatesByMonth.value)
 const bandwidth = ref(updates.value * updatesSize.value / 1000)
