@@ -12,8 +12,6 @@ router.afterEach((to) => {
     openMessenger()
 })
 router.currentRoute.value.hash.startsWith('#support') && openMessenger()
-const config = useRuntimeConfig()
-const brand = config.brand
 </script>
 
 <template>
