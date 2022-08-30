@@ -10,7 +10,7 @@ head_image: "/capgo-feature-image.webp"
 head_image_alt: Capgo version system
 tag: Tutorial
 published: true
-next_blog: "how-to-send-specific-version-to-users"
+next_blog: "how-to-release-major-version-in-capgo"
 
 ---
 
