@@ -23,15 +23,21 @@ All versions choices are decide server side by Capgo.
 ## Versionning system
 
 To manage version Capgo use the Semver system read more about it [here](https://semver.org/).
-## Native versions
+### Versions
 
-Where capgo find the Native version ?
+Where capgo find the version to compare
 
-### IOS
+#### IOS
+
   in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
 
-### Android
+#### Android
+
   in Android the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
+
+#### Javascript
+
+  in Javascript the var is set on your project here `package.json` under the key `version`
 
 ## Default behavior
 

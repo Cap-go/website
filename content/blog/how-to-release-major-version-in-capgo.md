@@ -35,7 +35,24 @@ This change mean all tooling have to be aligned to handle the breaking change.
 That why Capgo follow this system.
 So if you release a major version, Capgo will not send it to user who don't have it installed from the store.
 
+### Versions
 
+Where capgo find the version to compare
+
+#### IOS
+  > Will be use by capgo to compare to JavaScript version and find Major upgrade
+
+  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
+
+#### Android
+  > Will be use by capgo to compare to JavaScript version and find Major upgrade
+
+  in Android the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
+
+#### Javascript
+  > Will be use by capgo to compare to Native version and find Major upgrade
+
+  in Javascript the var is set on your project here `package.json` under the key `version`
 ## Exemple
 
 Your app is currently released with the version `1.2.3` with Capacitor 3
