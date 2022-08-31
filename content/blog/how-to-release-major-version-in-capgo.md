@@ -28,7 +28,7 @@ Now it's clear we don't mix them and use them for hat they are made !
 
 ## Major release
 
-In your app a major release is necessary when a breaking change happen, for exemple a new IOS target, or a new version of capacitor, or a plugin you use have been updated to a major version.
+In your app a major release is necessary when a breaking change happen, for exemple a new IOS target (15 to 16), or a new version of capacitorn (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
 
 This change mean all tooling have to be aligned to handle the breaking change.
 
