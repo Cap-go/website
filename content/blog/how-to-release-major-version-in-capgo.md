@@ -72,7 +72,7 @@ If you follow this pattern no need to worry more, all is well handle.
 
 In this case that mean you have to send your new app with Capacitor 4 to Apple and google but don't to Capgo.
 
-Then you have to wait 100% of your users, have the app or at least 90%, it will take month brobably.
+Then you have to wait 100% of your users, have the app or at least 90%, it will take months probably.
 
 While during this time you cannot send any update with Capgo, since old user cannot get new version. and you don't have a way to select only some users to receive the update.
 
