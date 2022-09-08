@@ -1,5 +1,5 @@
 import type { Handler } from '@netlify/functions'
-import { useSupabase } from '../services/supabase'
+import { updateVersionStats, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
@@ -43,14 +43,26 @@ export const handler: Handler = async (event) => {
     version_build: body.version_build,
   }
 
+  const all = []
   const { data, error } = await supabase
     .from<definitions['app_versions']>('app_versions')
     .select()
     .eq('app_id', body.app_id)
     .eq('name', body.version_name || 'unknown')
   if (data && data.length && !error) {
+    const oldVersion = data[0].id
     stat.version = data[0].id
     device.version = data[0].id
+    all.push(updateVersionStats(supabase, {
+      app_id: body.app_id,
+      version_id: data[0].id,
+      devices: 1,
+    }))
+    all.push(updateVersionStats(supabase, {
+      app_id: body.app_id,
+      version_id: oldVersion,
+      devices: -1,
+    }))
   }
   else {
     console.error('switch to onprem', body.app_id)
@@ -60,11 +72,12 @@ export const handler: Handler = async (event) => {
     deviceDb = `${deviceDb}_onprem`
   }
   console.error('stats', body)
-  await supabase
+  all.push(supabase
     .from(deviceDb)
-    .upsert(device)
-  await supabase
+    .upsert(device))
+  all.push(supabase
     .from(statsDb)
-    .insert(stat)
+    .insert(stat))
+  await Promise.all(all)
   return sendRes()
 }

@@ -1,6 +1,11 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient } from '@supabase/supabase-js'
 import type { definitions } from '../../types/supabase'
+export interface VersionStatsIncrement {
+  app_id: string
+  version_id: number
+  devices: number
+}
 
 export const useSupabase = (url: string, key: string) => {
   const options = {
@@ -32,6 +37,13 @@ export const updateOrCreateVersion = async (supabase: SupabaseClient, update: Pa
       .from<definitions['app_versions']>('app_versions')
       .insert(update)
   }
+}
+
+export const updateVersionStats = async (supabase: SupabaseClient, increment: VersionStatsIncrement) => {
+  const { error } = await supabase
+    .rpc('increment_version_stats', increment)
+  if (error)
+    console.error('increment_stats', error)
 }
 
 export const updateOrCreateChannel = async (supabase: SupabaseClient, update: Partial<definitions['channels']>) => {
