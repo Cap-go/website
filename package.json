@@ -5,6 +5,7 @@
     "build": "nuxt build",
     "serve": "BRANCH=local netlify dev",
     "dev": "nuxt dev --port 3336",
+    "types": "node ./scripts/getTypes.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint ."
