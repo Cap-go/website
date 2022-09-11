@@ -135,21 +135,16 @@ After you have sent your app to Capgo, you need to make your channel `public` to
 
 `npx @capgo/cli@latest set -c production -s public`
 
-### Configure app to listen for a Live Update
+## Configure app to validate updates
 
-Add this config to your Capacitor config file:
+Add this config to your main JavaScript file.
 
-```json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoUpdate": true
-    }
-  }
-}
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+CapacitorUpdater.notifyAppReady()
 ```
 
-And then do a `npx cap copy` to update your app.
+Then do a `npm run build && npx cap copy` to update your app.
 
 ### Receive a Live Update on a Device
 
