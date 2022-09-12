@@ -105,14 +105,6 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
       return sendRes({ status: 'Cannot save device override', error: dbErrorDev }, 400)
     }
   }
-  else {
-    // delete device_override
-    await supabase
-      .from<definitions['devices_override']>('devices_override')
-      .delete()
-      .eq('device_id', body.device_id)
-      .eq('app_id', body.app_id)
-  }
   // if channel_id set channel_override to it
   if (body.channel) {
     // get channel by name
@@ -169,13 +161,22 @@ export const deleteDev = async (event: any, supabase: SupabaseClient) => {
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
     if (error) {
-      console.error('Cannot create channel')
-      return sendRes({ status: 'Cannot create channel', error: JSON.stringify(error) }, 400)
+      console.error('Cannot delete override')
+      return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
+    }
+    const { error: errorChannel } = await supabase
+      .from<definitions['channel_devices']>('channel_devices')
+      .delete()
+      .eq('app_id', body.app_id)
+      .eq('device_id', body.device_id)
+    if (errorChannel) {
+      console.error('Cannot delete override')
+      return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
     }
   }
   catch (e) {
-    console.error('Cannot create channel', e)
-    return sendRes({ status: 'Cannot set channels', error: e }, 500)
+    console.error('Cannot delete override', e)
+    return sendRes({ status: 'delete override', error: e }, 500)
   }
   return sendRes()
 }
