@@ -50,7 +50,7 @@ Allow user to copy they deviceID from your app and send it to you manually, this
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-const deviceId = await CapacitorUpdater.getId()
+const deviceId = await CapacitorUpdater.getDeviceId()
 ```
 Hide a button somewhere in your app, or show the button to only connected user with a `admin` role for exemple.
 
@@ -69,14 +69,16 @@ Same as manual way you have to get the deviceID
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-const deviceId = await CapacitorUpdater.getId()
+const deviceId = await CapacitorUpdater.getDeviceId()
 ```
 
 But this time you have to send it automatically to your backend, i let you decide how you do that.
 
 I will just suggest you to store it in database, that will facilitate your life later !
 
-Then in your backend you have to send it to Capgo backend too. below a code exemple in Nodejs
+Then in your backend you have to send it to Capgo backend too. below two code exemple:
+<details>
+  <summary>NodeJS</summary>
 
 ```js
 import axios from 'axios'
@@ -92,6 +94,49 @@ await axios.post('https://api.capgo.app/device', {
   }
 })
 ```
+</details>
+
+
+<details>
+  <summary>Cloudflare</summary>
+  
+```js
+addEventListener('fetch', (event) => {
+  event.respondWith(
+    handleRequest(event.request).catch(
+      err => new Response(err.stack, { status: 500 })
+    )
+  )
+})
+
+async function handleRequest(request) {
+  const { pathname, method } = new URL(request.url)
+  const body = await request.json()
+  const newBody = JSON.stringify({
+    app_id: 'YOUR_APP_ID',
+    device_id: body.device_id,
+    channel: 'alpha'
+  })
+  const newUrl = new URL('https://api.capgo.app/device')
+  const options = {
+    headers: {
+      authorization: 'YOUR_API_KEY',
+    },
+    method: 'POST',
+    body: newBody
+  }
+
+  if (request.method === 'DELETE') {
+    // DELETE the channel link
+    options.method = 'DELETE'
+    return fetch(newUrl.toString(), options)
+  }
+
+  return fetch(newUrl.toString(), options)
+}
+```
+And just send your device_id in body it to the deployed URL with POST to add and DELETE method to delete.
+</details>
 
 After this configured, try to add a button in your app to opt-in to the channel, and check in the web app if that have been set.
 

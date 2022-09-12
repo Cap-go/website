@@ -49,13 +49,12 @@ Even native app cannot update this part.
 
 It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
-Once you’re logged into Capgo, navigate to the Account page then click on API key:
+Once you’re logged into Capgo, You will have onboarding page 
 
-![Account page](/capgo.app_app_account.webp)
+![Onboarding page](/onboarding_1.webp)
 
-Then click on the "write" key to copy it in your clipboard.
+follow the steps in the onboarding page to add your first app.
 
-![Api key page](/capgo.app_app_account_api_key.webp "Api key page")
 
 ### Install the Capgo SDK
 
@@ -91,7 +90,7 @@ This command will use all variable defined in the Capacitor config file to creat
 ## Upload your first version
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli@latest upload --channel production`
+`npx @capgo/cli@latest upload`
 
 By default, the version name will be the one in your package.json file.
 
@@ -105,21 +104,16 @@ After you have sent your app to Capgo, you need to make your channel `public` to
 
 `npx @capgo/cli@latest set -c production -s public`
 
-## Configure app to listen for a Live Update
+## Configure app to validate updates
 
-Add this config to your Capacitor config file:
+Add this config to your main JavaScript file.
 
-```json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoUpdate": true
-    }
-  }
-}
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+CapacitorUpdater.notifyAppReady()
 ```
 
-Then do a `npx cap copy` to update your app.
+Then do a `npm run build && npx cap copy` to update your app.
 
 ## Receive a Live Update on a Device
 
