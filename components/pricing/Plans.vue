@@ -185,8 +185,8 @@ const descToEmoji = (desc: string) => {
               </li>
             </ul>
 
-            <a
-              href="https://web.capgo.app/register"
+            <NuxtLink
+              to="https://web.capgo.app/register"
               title="Register on Capgo"
               target="_blank"
               class="
@@ -212,7 +212,7 @@ const descToEmoji = (desc: string) => {
               role="button"
             >
               Start trial
-            </a>
+            </NuxtLink>
             <a
               v-if="plan.name === 'Pay as you go'"
               href="#calculator"

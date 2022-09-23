@@ -50,8 +50,8 @@ const formatTime = (s: string) => {
         >
           <div class="p-5">
             <div class="relative">
-              <a
-                :href="`/blog/${article.slug}`"
+              <NuxtLink
+                :to="`/blog/${article.slug}/`"
                 :title="article.title"
                 class="block aspect-w-4 aspect-h-3"
               >
@@ -60,7 +60,7 @@ const formatTime = (s: string) => {
                   :src="article.head_image"
                   :alt="`blog illustration ${article.title}`"
                 >
-              </a>
+              </NuxtLink>
 
               <div class="absolute top-4 left-4">
                 <span
@@ -76,15 +76,15 @@ const formatTime = (s: string) => {
               {{ formatTime(article.created_at) }}
             </span>
             <p class="mt-5 text-2xl font-semibold">
-              <a :href="`/blog/${article.slug}`" :title="article.title" class="text-black">
+              <NuxtLink :to="`/blog/${article.slug}/`" :title="article.title" class="text-black">
                 {{ article.title }}
-              </a>
+              </NuxtLink>
             </p>
             <p class="mt-4 text-base text-gray-600">
               {{ article.description }}
             </p>
-            <a
-              :href="`/blog/${article.slug}`"
+            <NuxtLink
+              :to="`/blog/${article.slug}/`"
               :title="article.title"
               class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
             >
@@ -101,7 +101,7 @@ const formatTime = (s: string) => {
                   clip-rule="evenodd"
                 />
               </svg>
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>
