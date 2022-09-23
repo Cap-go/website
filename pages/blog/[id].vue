@@ -60,7 +60,6 @@ useHead(() => ({
     data.value?.head_image || '',
     data.value?.author || 'Capgo',
   ),
-  // meta: [],
 }))
 </script>
 
