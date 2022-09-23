@@ -102,9 +102,9 @@ useHead(() => ({
       <ContentRenderer :value="data" />
     </article>
 
-    <a
+    <NuxtLink
       v-if="randomData"
-      :href="`/blog/${randomData.slug}/`"
+      :to="`/blog/${randomData.slug}/`"
       class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg"
     >
       <div class="relative mx-4 flex">
@@ -137,6 +137,6 @@ useHead(() => ({
           {{ randomData.description }}
         </p>
       </div>
-    </a>
+    </NuxtLink>
   </main>
 </template>
