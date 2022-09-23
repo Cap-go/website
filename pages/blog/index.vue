@@ -36,7 +36,7 @@ const formatTime = (s: string) => {
           Latest from our blog
         </h1>
         <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
-          The best articles to enhance your Capacitor experience.
+          {{ description }}
         </p>
       </div>
 
