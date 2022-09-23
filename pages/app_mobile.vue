@@ -61,14 +61,14 @@ useHead({
           </p>
         </div>
         <div class="flex space-x-6">
-          <NuxtLink to="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
+          <NuxtLink no-rel to="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
             <img
               src="/play-store-button.webp" height="4rem;"
               class="w-auto rounded h-11 sm:h-16 border boder-2 border-white"
               alt="Apple store download link"
             >
           </NuxtLink>
-          <NuxtLink to="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
+          <NuxtLink no-rel to="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
             <img
               src="/app-store-button.webp" height="4rem;"
               class="w-auto rounded h-11 sm:h-16 border boder-2 border-white"
