@@ -9,7 +9,7 @@ updated_at: 2022-09-01
 head_image: "/capgo-feature-image.webp"
 head_image_alt: Capgo major version system
 tag: Tutorial
-published: true
+published: false
 
 ---
 
