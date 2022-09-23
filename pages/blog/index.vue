@@ -4,12 +4,11 @@ import { createMeta } from '~/services/meta'
 
 const title = 'Capgo | Capacitor Blog'
 const description = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
-const { data: articles } = await useAsyncData('count', () =>
-  queryContent('blog').where({ published: true }).find(),
-)
+const { data: articles } = await useAsyncData('allArticles', () =>
+  queryContent('blog').where({ published: true }).find())
 
 const articlesOrder = computed(() =>
-  articles.value.sort((a, b) => {
+  articles.value?.sort((a, b) => {
     return dayjs(b.created_at).valueOf() - dayjs(a.created_at).valueOf()
   }),
 )
