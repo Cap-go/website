@@ -170,7 +170,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://avatars.githubusercontent.com/u/362329?v=4" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://avatars.githubusercontent.com/u/362329?v=4" alt="Lincoln Baxter photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Lincoln Baxter
@@ -189,7 +189,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-1.png" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-1.png" alt="Bessie Cooper photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Bessie Cooper
@@ -208,7 +208,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-2.png" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-2.png" alt="Aakash Chandran photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Aakash Chandran
@@ -229,7 +229,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-2.png" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-2.png" alt="Jamon Holmgren photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Jamon Holmgren
@@ -248,7 +248,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-3.png" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-3.png" alt="Wes Johnson photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Wes Johnson
@@ -267,7 +267,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-3.png" alt="">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-3.png" alt="Trevor Hartman photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Trevor Hartman
