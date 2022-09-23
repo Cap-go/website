@@ -29,9 +29,9 @@ useHead(() => ({
     {
       hid: 'og:url',
       property: 'og:url',
-      content: `${config.baseUrl}${route.fullPath}`,
+      content: `${config.domain}${route.fullPath}`,
     },
-    ...createMetaImage(image),
+    ...createMetaImage(image, 'Capgo banner'),
   ],
 }))
 </script>

@@ -72,7 +72,7 @@ export const createMeta = (
     )
   }
   if (image)
-    base.push(createMetaImage(image))
+    base.push(...createMetaImage(image))
 
   if (audio) {
     base.push(
@@ -84,5 +84,6 @@ export const createMeta = (
       },
     )
   }
+  // console.log('base', base)
   return base
 }
