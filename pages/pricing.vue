@@ -193,7 +193,7 @@ const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
       <Calculator v-if="pay_as_you_go_plan.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
-        <NuxtLink no-rel to="https://web.capgo.app/register" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
+        <NuxtLink no-rel to="https://web.capgo.app/register/" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
           Subscribe now <ArrowNarrowRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
         </NuxtLink>
       </div>

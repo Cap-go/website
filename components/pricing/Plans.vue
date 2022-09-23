@@ -186,7 +186,7 @@ const descToEmoji = (desc: string) => {
             </ul>
 
             <NuxtLink
-              to="https://web.capgo.app/register"
+              to="https://web.capgo.app/register/"
               title="Register on Capgo"
               target="_blank"
               class="
