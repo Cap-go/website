@@ -69,6 +69,8 @@ export const post = async (event: any, supabase: SupabaseClient) => {
         beta,
         disableAutoUpdateUnderNative,
         disableAutoUpdateToMajor,
+        ios,
+        channel,
         version (
           id,
           name,
@@ -182,6 +184,28 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       }, 200)
     }
 
+    if (!channel.ios && platform === 'ios') {
+      // eslint-disable-next-line no-console
+      console.log('Cannot upgrade ios it\t disabled', device_id)
+      await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, version.id)
+      return sendRes({
+        major: true,
+        message: 'Cannot upgrade ios it\t disabled',
+        version: version.name,
+        old: version_name,
+      }, 200)
+    }
+    if (!channel.android && platform === 'android') {
+      // eslint-disable-next-line no-console
+      console.log('Cannot upgrade android it\t disabled', device_id)
+      await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, version.id)
+      return sendRes({
+        major: true,
+        message: 'Cannot upgrade android it\t disabled',
+        version: version.name,
+        old: version_name,
+      }, 200)
+    }
     // console.log('check disableAutoUpdateToMajor', device_id)
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
       await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
