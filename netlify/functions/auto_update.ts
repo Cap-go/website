@@ -134,6 +134,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       device_id,
       plugin_version,
       version: version.id,
+      version_build,
       platform: platform as definitions['devices']['platform'],
       updated_at: new Date().toISOString(),
     })

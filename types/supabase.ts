@@ -598,6 +598,7 @@ export interface paths {
           device_id?: parameters['rowFilter.devices_onprem.device_id']
           os_version?: parameters['rowFilter.devices_onprem.os_version']
           id?: parameters['rowFilter.devices_onprem.id']
+          version_build?: parameters['rowFilter.devices_onprem.version_build']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -657,6 +658,7 @@ export interface paths {
           device_id?: parameters['rowFilter.devices_onprem.device_id']
           os_version?: parameters['rowFilter.devices_onprem.os_version']
           id?: parameters['rowFilter.devices_onprem.id']
+          version_build?: parameters['rowFilter.devices_onprem.version_build']
         }
         header: {
           /** Preference */
@@ -680,6 +682,7 @@ export interface paths {
           device_id?: parameters['rowFilter.devices_onprem.device_id']
           os_version?: parameters['rowFilter.devices_onprem.os_version']
           id?: parameters['rowFilter.devices_onprem.id']
+          version_build?: parameters['rowFilter.devices_onprem.version_build']
         }
         body: {
           /** devices_onprem */
@@ -1795,6 +1798,7 @@ export interface paths {
           plugin_version?: parameters['rowFilter.devices.plugin_version']
           os_version?: parameters['rowFilter.devices.os_version']
           date_id?: parameters['rowFilter.devices.date_id']
+          version_build?: parameters['rowFilter.devices.version_build']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -1854,6 +1858,7 @@ export interface paths {
           plugin_version?: parameters['rowFilter.devices.plugin_version']
           os_version?: parameters['rowFilter.devices.os_version']
           date_id?: parameters['rowFilter.devices.date_id']
+          version_build?: parameters['rowFilter.devices.version_build']
         }
         header: {
           /** Preference */
@@ -1877,6 +1882,7 @@ export interface paths {
           plugin_version?: parameters['rowFilter.devices.plugin_version']
           os_version?: parameters['rowFilter.devices.os_version']
           date_id?: parameters['rowFilter.devices.date_id']
+          version_build?: parameters['rowFilter.devices.version_build']
         }
         body: {
           /** devices */
@@ -3156,6 +3162,11 @@ export interface definitions {
      * @default extensions.uuid_generate_v4()
      */
     id: string
+    /**
+     * Format: text
+     * @default builtin
+     */
+    version_build?: string
   }
   stats_onprem: {
     /**
@@ -3575,6 +3586,11 @@ export interface definitions {
     os_version?: string
     /** Format: character varying */
     date_id?: string
+    /**
+     * Format: text
+     * @default builtin
+     */
+    version_build?: string
   }
   app_versions_meta: {
     /**
@@ -3855,6 +3871,8 @@ export interface parameters {
   'rowFilter.devices_onprem.os_version': string
   /** Format: uuid */
   'rowFilter.devices_onprem.id': string
+  /** Format: text */
+  'rowFilter.devices_onprem.version_build': string
   /** @description stats_onprem */
   'body.stats_onprem': definitions['stats_onprem']
   /** Format: bigint */
@@ -4059,6 +4077,8 @@ export interface parameters {
   'rowFilter.devices.os_version': string
   /** Format: character varying */
   'rowFilter.devices.date_id': string
+  /** Format: text */
+  'rowFilter.devices.version_build': string
   /** @description app_versions_meta */
   'body.app_versions_meta': definitions['app_versions_meta']
   /** Format: timestamp with time zone */
