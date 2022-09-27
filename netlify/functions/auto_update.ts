@@ -70,7 +70,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
         disableAutoUpdateUnderNative,
         disableAutoUpdateToMajor,
         ios,
-        channel,
+        android,
         version (
           id,
           name,
