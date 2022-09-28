@@ -31,8 +31,8 @@ const navigation = {
     // { name: 'Blog', href: '#' },
     // { name: 'Jobs', href: '#' },
     // { name: 'Press', href: '#' },
-    // { name: 'Partners', href: '#' },
     { name: 'Imprint', href: '/imprint/' },
+    { name: 'Contributing', href: '/contributing' },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
