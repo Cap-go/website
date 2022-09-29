@@ -14,6 +14,7 @@ interface ChannelDev {
 interface AppInfos {
   version_name: string
   version_build: string
+  version_os: string
   plugin_version: string
   platform: string
   app_id: string
