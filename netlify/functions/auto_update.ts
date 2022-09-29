@@ -31,6 +31,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   const {
     platform,
     app_id,
+    version_os,
     device_id,
   } = body
   // if version_build is not semver, then make it semver
@@ -135,6 +136,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       plugin_version,
       version: version.id,
       version_build,
+      os_version: version_os,
       platform: platform as definitions['devices']['platform'],
       updated_at: new Date().toISOString(),
     })
@@ -268,6 +270,7 @@ export const handler: Handler = async (event) => {
       cap_plugin_version,
       cap_platform,
       cap_app_id,
+      cap_version_os,
       cap_device_id,
     } = event.headers
     event.body = JSON.stringify({
@@ -276,6 +279,7 @@ export const handler: Handler = async (event) => {
       plugin_version: cap_plugin_version,
       platform: cap_platform,
       app_id: cap_app_id,
+      version_os: cap_version_os,
       device_id: cap_device_id,
     })
     return post(id, event, supabase)
