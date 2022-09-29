@@ -20,7 +20,7 @@ interface AppInfos {
   device_id: string
 }
 
-export const post = async (event: any, supabase: SupabaseClient) => {
+export const post = async (id: string, event: any, supabase: SupabaseClient) => {
   const body = JSON.parse(event.body || '{}') as AppInfos
 
   let {
@@ -43,7 +43,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
   plugin_version = plugin_version || '2.3.3'
   try {
     if (!app_id || !device_id || !version_build || !version_name || !platform) {
-      console.error('Cannot get all headers', platform,
+      console.error(id, 'Cannot get all headers', platform,
         app_id,
         device_id,
         version_build,
@@ -51,7 +51,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       return sendRes({ message: 'missing appid' }, 400)
     }
     // eslint-disable-next-line no-console
-    console.log('Headers', platform,
+    console.log(id, 'Headers', platform,
       app_id,
       device_id,
       version_build,
@@ -120,7 +120,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       .eq('device_id', device_id)
       .eq('app_id', app_id)
     if (dbError || !channel) {
-      console.error('Cannot get channel', app_id, `no public channel ${JSON.stringify(dbError)}`)
+      console.error(id, 'Cannot get channel', app_id, `no public channel ${JSON.stringify(dbError)}`)
       return sendRes({
         message: 'Cannot get channel',
         err: `no public channel ${JSON.stringify(dbError)}`,
@@ -140,7 +140,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     })
     if (!paying && !trial) {
       await sendStats(supabase, 'needUpgrade', platform, device_id, app_id, version_build, version.id)
-      console.error('Cannot update, upgrade plan to continue to update', app_id)
+      console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({
         message: 'Cannot update, upgrade plan to continue to update',
         err: 'not good plan',
@@ -148,17 +148,17 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     }
     if (channelOverride && channelOverride.length) {
       // eslint-disable-next-line no-console
-      console.log('Set channel override', app_id, channelOverride[0].channel_id.version.name)
+      console.log(id, 'Set channel override', app_id, channelOverride[0].channel_id.version.name)
       version = channelOverride[0].channel_id.version as definitions['app_versions']
     }
     if (devicesOverride && devicesOverride.length) {
       // eslint-disable-next-line no-console
-      console.log('Set device override', app_id, devicesOverride[0].version.name)
+      console.log(id, 'Set device override', app_id, devicesOverride[0].version.name)
       version = devicesOverride[0].version as definitions['app_versions']
     }
 
     if (!version.bucket_id && !version.external_url) {
-      console.error('Cannot get zip file', app_id)
+      console.error(id, 'Cannot get zip file', app_id)
       return sendRes({
         message: 'Cannot get zip file',
       }, 200)
@@ -179,7 +179,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     if (version_name === version.name) {
       await sendStats(supabase, 'noNew', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
-      console.log('No new version available', device_id, version_name, version.name)
+      console.log(id, 'No new version available', device_id, version_name, version.name)
       return sendRes({
         message: 'No new version available',
       }, 200)
@@ -187,7 +187,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
 
     if (!channel.ios && platform === 'ios') {
       // eslint-disable-next-line no-console
-      console.log('Cannot upgrade ios it\t disabled', device_id)
+      console.log(id, 'Cannot upgrade ios it\t disabled', device_id)
       await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, version.id)
       return sendRes({
         major: true,
@@ -198,7 +198,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     }
     if (!channel.android && platform === 'android') {
       // eslint-disable-next-line no-console
-      console.log('Cannot upgrade android it\t disabled', device_id)
+      console.log(id, 'Cannot upgrade android it\t disabled', device_id)
       await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, version.id)
       return sendRes({
         major: true,
@@ -211,7 +211,7 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
       await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
-      console.log('Cannot upgrade major version', device_id)
+      console.log(id, 'Cannot upgrade major version', device_id)
       return sendRes({
         major: true,
         message: 'Cannot upgrade major version',
@@ -220,11 +220,11 @@ export const post = async (event: any, supabase: SupabaseClient) => {
       }, 200)
     }
     // eslint-disable-next-line no-console
-    console.log('check disableAutoUpdateUnderNative', device_id)
+    console.log(id, 'check disableAutoUpdateUnderNative', device_id)
     if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, version_build)) {
       await sendStats(supabase, 'disableAutoUpdateUnderNative', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
-      console.log('Cannot revert under native version', device_id)
+      console.log(id, 'Cannot revert under native version', device_id)
       return sendRes({
         message: 'Cannot revert under native version',
         version: version.name,
@@ -236,14 +236,14 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     await sendStats(supabase, 'get', platform, device_id, app_id, version_build, version.id)
 
     // eslint-disable-next-line no-console
-    console.log('New version available', app_id, version.name, signedURL)
+    console.log(id, 'New version available', app_id, version.name, signedURL)
     return sendRes({
       version: version.name,
       url: signedURL,
     })
   }
   catch (e) {
-    console.error('error', app_id, e)
+    console.error(id, 'error', app_id, e)
     return sendRes({
       message: 'Cannot get latest version',
       err: `${e}!`,
@@ -252,14 +252,15 @@ export const post = async (event: any, supabase: SupabaseClient) => {
 }
 
 export const handler: Handler = async (event) => {
+  const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   // eslint-disable-next-line no-console
-  console.log(event.httpMethod)
+  console.log(id, event.httpMethod)
   if (event.httpMethod === 'OPTIONS')
     return sendRes()
 
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
-  if (event.httpMethod === 'POST') { return post(event, supabase) }
+  if (event.httpMethod === 'POST') { return post(id, event, supabase) }
   else if (event.httpMethod === 'GET') {
     const {
       cap_version_name,
@@ -277,8 +278,8 @@ export const handler: Handler = async (event) => {
       app_id: cap_app_id,
       device_id: cap_device_id,
     })
-    return post(event, supabase)
+    return post(id, event, supabase)
   }
-  console.error('Method not allowed')
+  console.error(id, 'Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
