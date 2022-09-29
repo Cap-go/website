@@ -9,7 +9,7 @@ interface AppStats {
   device_id: string
   version_name?: string
   plugin_version?: string
-  os_version?: string
+  version_os?: string
   version: number
   version_build: string
   app_id: string
@@ -32,7 +32,7 @@ export const handler: Handler = async (event) => {
     device_id: body.device_id,
     app_id: body.app_id,
     plugin_version: body.plugin_version || '2.3.3',
-    os_version: body.os_version,
+    os_version: body.version_os,
   }
 
   const stat: Partial<definitions['stats']> = {
