@@ -242,6 +242,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     console.log(id, 'New version available', app_id, version.name, signedURL)
     return sendRes({
       version: version.name,
+      checksum: version.checksum,
       url: signedURL,
     })
   }
