@@ -34,7 +34,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
     const { data: dataChannel, error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .select()
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.appid || body.app_id || '')
       .eq('name', body.channel)
     if (dbError || !dataChannel || !dataChannel.length) {
       console.error('Cannot find channel')
@@ -46,7 +46,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
     const { data: dataChannels, error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .select()
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.appid || body.app_id || '')
     if (dbError || !dataChannels || !dataChannels.length)
       return sendRes([])
     return sendRes(dataChannels)
@@ -70,7 +70,7 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
     const { error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .delete()
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.appid || body.app_id || '')
       .eq('name', body.channel)
     if (dbError) {
       console.error('Cannot delete channel')

@@ -50,7 +50,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         device_id,
         version_build,
         version_name)
-      return sendRes({ message: 'missing appid' }, 400)
+      return sendRes({ message: 'missing app_id' }, 400)
     }
     // eslint-disable-next-line no-console
     console.log(id, 'Headers', platform,
