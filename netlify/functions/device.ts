@@ -14,6 +14,9 @@ interface GetDevice {
   app_id: string
   device_id?: string
 }
+interface DeviceVersion {
+  version: definitions['app_versions']
+}
 
 const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
@@ -30,8 +33,21 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
   // if device_id get one device
   if (body.device_id) {
     const { data: dataDevice, error: dbError } = await supabase
-      .from<definitions['devices']>('devices')
-      .select()
+      .from<definitions['devices'] & DeviceVersion>('devices')
+      .select(`
+          created_at,
+          updated_at,
+          device_id,
+          version (
+            name,
+            id
+          ),
+          app_id,
+          platform,
+          plugin_version,
+          os_version,
+          version_build,
+      `)
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
       .single()
