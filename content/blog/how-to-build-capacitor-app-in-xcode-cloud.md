@@ -15,7 +15,7 @@ published: false
 
 ## Intro
 
-To make Xcode build your Capacitor app, we need to setup few things.
+To make Xcode build your Capacitor app, we need to set up few things.
 
 ## Package Preparation
 
@@ -72,28 +72,28 @@ npm run sync:ios
 
 ## Create a Xcode workflow
 
-Open Xcode ( yes to remove xcode you need Xcode)
+Open Xcode (yes, to remove Xcode you need Xcode)
 
 And go to this tab :
 ![Xcode step 1](/xcode_step_1.webp)
 
-click on create workflow, select your app click next like below.
+Click on create workflow, select your app, click next like below.
 
 ![Xcode step 2](/xcode_step_2.webp)
 
 Click on Edit workflow on the left
 ![Xcode step 2](/xcode_step_3.webp)
 
-Go to environments tab and chose like below Mac 12.4 and check the clean option
+Go to environments tab and chose like below Mac 12.4 and check the proper option
 ![Xcode step 3](/xcode_step_3.webp)
 
 Choose your start condition.
-If you use the same build as us i suggest to use Tag instead of branch, to avoid double build.
+If you use the same build as us, I suggest to use Tag instead of branch, to avoid double build.
 
 Set your env variable
 ![Xcode step 4](/xcode_step_4.webp)
 
-Connect your github account
+Connect your GitHub account
 ![Xcode step 5](/xcode_step_5.webp)
 
 ![Xcode step 6](/xcode_step_6.webp)

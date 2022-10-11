@@ -18,7 +18,7 @@ This tutorial focuses on the GitHub hosting, but you can adapt it with little tw
 
 ## Preface 
 
-Be sure you have add your app first to capgo, this tutorial just focus on the upload phase
+Be sure you have add your app first to Capgo, this tutorial just focus on the upload phase
 
 ## Commit convention
 
@@ -69,9 +69,9 @@ jobs:
 
 This will release a tag for every commit in your main branch. And add a changelog entry for each commit in the main branch in `CHANGELOG.md`.
 
-Don't worry if you don't have this file it will be created for you.
+Don't worry if you don't have this file, it will be created for you.
 
-To make this work, you need to create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
+To make this work, create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
 
 This is necessary to let the CI commit the changelog.
 
@@ -83,7 +83,7 @@ This is only necessary the first time, then the tools will keep it up to date.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
-Both native and web platform will have the version number bump after each commint.
+Both native and web platform will have the version number bump after each commit.
 ## GitHub actions for build
 
 Create a file at this path: `.github/workflows/build.yml`
@@ -120,16 +120,16 @@ jobs:
 
 This will install and build your dependency before sending it to Capgo.
 
-If your command for build is different you can change it in the `build_code` step.
+If your command for build is different, you can change it in the `build_code` step.
 
-To make this work, you need to get your API key for Capgo add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
+To make this work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
 Add the commit will generate a new build for production channel.
 
-You should add your test in the build step to be sure your code is working.
+You should add your test in the build step to ensure your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have you own CI/CD system.
+Go To your Capgo dashboard and check your build who just appear, you now have your own CI/CD system.
 
-If you want to let all of your users get the update whenever it's available go to your channel and set it to `public`.
+If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.

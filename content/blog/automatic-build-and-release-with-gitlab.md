@@ -14,11 +14,11 @@ published: false
 next_blog: ""
 
 ---
-This tutorial focuses on the Gitlab CI, but you can adapt it with little tweak to any other CI/CD platform.
+This tutorial focuses on the GitLab CI, but you can adapt it with little tweak to any other CI/CD platform.
 
 ## Preface 
 
-Be sure you have add your app first to capgo, this tutorial just focus on the upload phase
+Be sure you have add your app first to Capgo, this tutorial just focus on the upload phase
 
 
 ## Commit convention
@@ -27,9 +27,9 @@ First you need to start following the commit convention [conventionalcommits](ht
 
 ![Conventional commits](/conventional_commits.webp)
 
-## Gitlab CI for tag
+## GitLab CI for tag
 
-Then you need to create your first Gitlab to automatically build and create tag.
+Then you need to create your first GitLab to automatically build and create tag.
 
 Create a file at this path: `.github/workflows/bump_version.yml`
 
@@ -72,13 +72,13 @@ This will release a tag for every commit in your main branch. And add a changelo
 
 Don't worry if you don't have this file it will be created for you.
 
-To make this work, you need to create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
+To make this work, create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
 
 This is necessary to let the CI commit the changelog.
 
 When you create the token, choose expiration as `never` and the scope as `repo`.
 
-Lastly, to let the tool understand where your version is saved you have to create the file `.cz.toml` at the root of your repository.
+Lastly, to let the tool understand where your version is saved, you have to create the file `.cz.toml` at the root of your repository.
 
 And add this inside :
 
@@ -135,16 +135,16 @@ jobs:
 
 This will install and build your dependency before sending it to Capgo.
 
-If your command for build is different you can change it in the `build_code` step.
+If your command for build is different, you can change it in the `build_code` step.
 
-To make this work, you need to get your API key for Capgo add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
+To make this work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
 Add the commit will generate a new build for production channel.
 
-You should add your test in the build step to be sure your code is working.
+You should add your test in the build step to ensure your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have you own CI/CD system.
+Go To your Capgo dashboard and check your build who just appear, you now have yout own CI/CD system.
 
-If you want to let all of your users get the update whenever it's available go to your channel and set it to `public`.
+If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.

@@ -47,12 +47,12 @@ You are welcome to join the community to build together, I use it for my own pro
 | Install Stats | ✅ | ❌ |
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ Cordova compatible |
-| Cordova plugin | ❌ Could be backport | ✅ |
+| Cordova plugin | ❌ Could be back port | ✅ |
 | Affordable pricing | ✅ Start at $14/mo | ❌ Start at $499/mo |
 | Native build | ❌ | ✅ |
 | 100% Open source | ✅ | ❌ |
 
-If you are a big team with big budget I recommand you to use AppFlow they build the tool with you in focus, not me.
+If you are a big team with big budget I recommend you to use AppFlow they build the tool with you in focus, not me.
 
 Otherwise :)
 

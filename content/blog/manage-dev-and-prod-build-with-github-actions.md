@@ -17,11 +17,11 @@ This tutorial focuses on the GitHub hosting, but you can adapt it with little tw
 
 ## Preface 
 
-Be sure you have add your app first to capgo, this tutorial just focus on the upload phase
+Be sure you have added your app first to Capgo, this tutorial just focus on the upload phase
 
 ## Commit convention
 
-First you need to start following the commit convention [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how upgrade the version number, it's 5 min to learn it.
+First you need to start following the commit convention [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
 
 ![Conventional commits](/conventional_commits.webp)
 
@@ -74,7 +74,7 @@ jobs:
 
 This will release a tag for every commit in your main branch. And a `alpha` release for `development`, and lastly a changelog entry for each commit in `CHANGELOG.md`.
 
-Don't worry if you don't have this file it will be created for you.
+Don't worry if you don't have this file, it will be created for you.
 
 To make this work, you need to create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
 
@@ -89,7 +89,7 @@ This is only necessary the first time, then the tools will keep it up to date.
 
 You can now commit this both file and see your first tag appear in GitHub!
 
-`capacitor-standard-version` is the package who do the magic, by defaul he also update your version number in Android and ios
+`capacitor-standard-version` is the package who does the magic, by default he also updates your version number in Android and IOS
 
 
 ## GitHub actions for build
@@ -136,11 +136,11 @@ jobs:
 
 This will install and build your dependency before sending it to Capgo.
 
-If your command for build is different you can change it in the `build_code` step.
+If your command for build is different, you can change it in the `build_code` step.
 
-If you need env var use the `MY_ENV_VAR` and set the secret in your github project setting, then secret then Github Action.
+If you need environment variable, use the `MY_ENV_VAR` and set the secret in your GitHub project setting, then secret then GitHub Action.
 
-If don't remove it.
+If you don't remove it.
 
 To make Capgo upload work, you need to get your API key for Capgo add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
@@ -148,6 +148,6 @@ You can now commit this both file and see your first version appear in Capgo!
 
 Add the commit will generate a new build for production and development channel.
 
-You should add your test in the build step to be sure your code is working.
+You should add your test in the build step to be certain your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have you own CI/CD system.
+Go To your Capgo dashboard and check your build who just appear, you now have your own CI/CD system.

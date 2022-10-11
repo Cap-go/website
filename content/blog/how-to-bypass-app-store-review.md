@@ -24,7 +24,8 @@ My lawyers asked me to let you know that this isn't legal advice, but you don't 
 
 With Capgo capacitor plugin, you can only update and modify your HTML CSS and JavaScript, so we’re good on the first condition.
 
-On a side note, the ability for apps to update themselves without the App Store has been around for a quite a while, though only for apps created using JavaScript frameworks such as Facebook's React Native and services such as Expo.
+On a side note, the ability for apps to update themselves without the App Store has been around for a quite a while.
+Only for apps created using JavaScript frameworks such as Facebook's React Native and services such as Expo.
 
 A proof that React Native is not more Native than Capacitor 😆
 
@@ -33,16 +34,16 @@ The second condition, no new features or functionality, is really up to you.
 
 Capgo isn't intended to push new features or functionality. It is meant to tweak or fix them, avoiding the minor releases needed to fix bugs, add logging or tracking, update messages, force users to upgrade, etc.
 
-For new features or functionality you need to release through the app store. FYI, Ionic AppFlow (the alternative for big corporate) is installed on over 50 million iOS devices and there's never been an app rejected because it uses it.
+For new features or functionality, you need to release through the app store. For your information, Ionic AppFlow (the alternative for big corporate) is installed on over 50 million iOS devices and there's never been an app rejected because it uses it.
 
 I'm just saying that because it's good to know that thousands of other developers are using live updates, so you're not alone.
 
-Apple and google have they set of own rules on how to update apps.
+Apple and Google have their set of own rules on how to update apps.
 
-For Apple [Take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf).
+For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf).
 \[...\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[...\] __TLDR__: we should use OTA updates only to fix bugs or make improvements without making significant changes.
 
-__Google__ Play is less restrictive – they say that apps installed from Google Play with Javascript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) to update by Google services only.
+__Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) to update by Google services only.
 
 
 Check our next article for more information on how to install Capgo to bypass review.

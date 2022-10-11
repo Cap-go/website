@@ -16,63 +16,64 @@ next_blog: "how-to-send-specific-version-to-users"
 
 ## When releasing a major version
 
-Versionning can be difficult to manage, ussually you want to send a Major update when a major change appear for the users.
+Versioning can be difficult to manage, usually you want to send a Major update when a major change appears for the users.
 
-But versionning is not made for that, the store version (the one use in the app store) is different from the Native version.
+But versioning is not made for that, the store version (the one use in the app store) is different from the Native version.
 
 Native version is made to manage breaking change in the *code*
 
-In IOS for exemple ios 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seems to use semver there)
+In IOS for example iOS 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seem to use SemVer there)
 
-Now it's clear we don't mix them and use them for hat they are made !
+Now it's clear we don't mix them and use them for hat they are made!
 
 ## Major release
 
-In your app a major release is necessary when a breaking change happen, for exemple a new IOS target (15 to 16), or a new version of capacitorn (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
+In your app a major release is necessary when a breaking change happens, for example a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
 
-This change mean all tooling have to be aligned to handle the breaking change.
+This change means all tooling have to be aligned to handle the breaking change.
 
 That why Capgo follow this system.
-So if you release a major version, Capgo will not send it to user who don't have it installed from the store.
+So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.
 
 ### Versions
 
-Where capgo find the version to compare
+Where Capgo find the version to compare
 
 #### IOS
-  > Will be use by capgo to compare to JavaScript version and find Major upgrade
+  > Will be used by Capgo to compare to JavaScript version and find Major upgrade
 
   in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
 
 #### Android
-  > Will be use by capgo to compare to JavaScript version and find Major upgrade
+  > Will be uses by Capgo to compare to JavaScript version and find Major upgrade
 
-  in Android the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
+  in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
 
-#### Javascript
-  > Will be use by capgo to compare to Native version and find Major upgrade
+#### JavaScript
+  > Will be used by Capgo to compare to Native version and find Major upgrade
 
-  in Javascript the var is set on your project here `package.json` under the key `version`
-## Exemple
+  in JavaScript, the var is set on your project here `package.json` under the key `version`
+## Example
 
 Your app is currently released with the version `1.2.3` with Capacitor 3
 
 You are doing the upgrade to capacitor 4.
 
-You need to upgrade your version number to `2.2.3` then all your package include capgo with notice this big change.
+You need to upgrade your version number to `2.2.3` then all your package include Capgo with notice this big change.
 
-So when you will release this version to Capgo and the appstore.
+When you release this version to Capgo and the App Store.
 
-All next live update in Capgo `2.2.4` will never be send to user with `1.2.3` version. Only with `2.2.3` version.
+All next live update in Capgo `2.2.4` will never be sent to user with `1.2.3` version. Only with `2.2.3` version.
 
-If you follow this pattern no need to worry more, all is well handle.
+If you follow this pattern, no need to worry more, all is well handle.
 
 
-## If i don't follow this
+## If I don't follow this
 
-In this case that mean you have to send your new app with Capacitor 4 to Apple and google but don't to Capgo.
+In this case, that mean you have to send your new app with Capacitor 4 to Apple and Google, but don't to Capgo.
 
-Then you have to wait 100% of your users, have the app or at least 90%, it will take months probably.
+Then you have to wait 100% of your users, have the app or at least 90%, it will take months, probably.
 
-While during this time you cannot send any update with Capgo, since old user cannot get new version. and you don't have a way to select only some users to receive the update.
+While during this time you cannot send any update with Capgo, since old user cannot get new version.
+You don't have a way to select only some users to receive the update.
 

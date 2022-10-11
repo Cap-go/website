@@ -16,21 +16,21 @@ next_blog: ""
 
 ## Preface
 
-When you start to enjoy the update system of Capgo, like me for my own apps, you will start to get the feeling "What if i whant more?"
+When you start to enjoy the update system of Capgo, like me for my apps, you will start to get the feeling "What if I want more?"
 
-I got the feeling too, but since i'm the maker of Capgo i was able to take a look !
+I got the feeling too, but since I'm the maker of Capgo, I was able to take a look!
 
-> Since all is open source you have this power too :)
+> Since all is open-source, you have this power too :)
 
-So the next pain i got in the app distribution process is to make other teammates test the updates !
+The next pain I got in the app distribution process is to make other teammates test the updates!
 
-With TestFlight, the issue is simple, bring people in your team and make them understand how to get it is time consuming !
+With TestFlight, the issue is simple, bring people in your team and make them understand how to get it is time-consuming!
 
-And of course each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
+And of course, each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
 
-I got many time my presentation delayed by this...
+I got many times my presentation delayed by this...
 
-And for Google this is even worst, the big mistery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days !
+And for Google this is even worse, the big mystery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days!
 
 
 ## Solution
@@ -63,9 +63,9 @@ He should get your version.
 
 ### Automatic way
 
-This can be usefull for your beta testers, this is longer to implement.
+This can be useful for your beta testers, this is longer to implement.
 
-Same as manual way you have to get the deviceID
+Same as manual way, you have to get the deviceID
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -138,11 +138,11 @@ async function handleRequest(request) {
 And just send your device_id in body it to the deployed URL with POST to add and DELETE method to delete.
 </details>
 
-After this configured, try to add a button in your app to opt-in to the channel, and check in the web app if that have been set.
+After this configured, try to add a button in your app to opt in to the channel, and check in the web app if that have been set.
 
 You can also send `null` to remove override
 
-If you need to check programatictly what override is set on a device you can get on the same url
+If you need to check programmatically what override is set on a device, you can get on the same URL
 
 ```js
 import axios from 'axios'

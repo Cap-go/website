@@ -16,14 +16,14 @@ next_blog: "automatic-build-and-release-with-github-actions"
 ---
 ## Migration Summary
 
-* Capgo is service that helps development teams send live app to deployed apps.
+* Capgo is a service that helps development teams send live app to deployed apps.
 * Capacitor apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
 * Capgo offers equivalent services for App Center Build (build Android/iOS apps) and App Center Distribute (CodePush). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
 * Ionic has [Advisory services](https://ionicframework.com/advisory) available if you need migration assistance.
 
 ##### Note
 
-If your app is still using Cordova it's necessary to [migrate to Capacitor](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor) first before migrating to Capgo.
+If your app is still using Cordova, it's necessary to [migrate to Capacitor](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor) first before migrating to Capgo.
 
 Built by the Ionic team as a spiritual successor to Cordova, Capacitor allows development to move close to the native tooling and capabilities with the goal of providing an even better user experience and performance.
 
@@ -45,7 +45,7 @@ Like App Center, Capgo supports apps hosted in Git repositories on Azure DevOps,
 
 If you do not have Node or NPM installed on your computer, you will need to do this before proceeding. If you need to install Node, please select the [current LTS version](https://nodejs.org/).
 
-### Create package.json and Capacitor config files
+### Create `package.json` and Capacitor config files
 
 ##### note
 
@@ -83,7 +83,7 @@ Here is what the app’s directory structure should look like:
 
 With your app ready for Capgo integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
-Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the "write" key to copy it in your clipboard.
+Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the 'write' key to copy it to your clipboard.
 
 ### Install the Capgo SDK
 
@@ -106,9 +106,9 @@ This will tell the native plugin the installation as succeeded.
 
 The Live Update feature works by using the installed Capgo SDK in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
 
-### Login to capgo CLOUD
+### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to login with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOURKEY`
 ## Add your first app
@@ -118,12 +118,12 @@ Let's get started by first creating app in Capgo Cloud with the CLI.
 `npx @capgo/cli@latest add`
 
 This command will use all variable defined in the Capacitor config file to create the app.
-## Upload your first version
+## Upload your first bundle
 
 Run the command to build your code and send it to Capgo with:
 `npx @capgo/cli@latest upload --channel production`
 
-By default, the version name will be the one in your package.json file.
+By default, the version name will be the one in your `package.json` file.
 
 Check in [Capgo](https://web.capgo.app/) if the build is present.
 
@@ -182,7 +182,7 @@ Finally, within your app, remove any code references to App Center services, suc
 
 ## Next Steps
 
-You've migrated from App Center to Capgo, utilizing the Live Updates and Native Builds features before removing all App Center dependencies. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Automations (multiple environments and native configurations), App Store Publishing (build native apps in the cloud then deploy them directly to the app stores), and the Cloud CLI use Capgo inside your CI/CD platform of choice (such as Azure DevOps, GitLab, Jenkins, and more).
+You've migrated from App Center to Capgo, utilizing the Live Updates and Native Builds features before removing all App Center dependencies. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Automations (multiple environments and native configurations). App Store Publishing (build native apps in the cloud then deploy them directly to the app stores), and the Cloud CLI use Capgo inside your CI/CD platform of choice (such as Azure DevOps, GitLab, Jenkins, and more).
 
 ## Bonus: Automatic send app update
 
