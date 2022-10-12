@@ -18,7 +18,7 @@ next_blog: "how-to-send-specific-version-to-users"
 
 Versioning can be difficult to manage, usually you want to send a Major update when a major change appears for the users.
 
-But versioning is not made for that, the store version (the one use in the app store) is different from the Native version.
+But versioning is not made for that, the app store version is different from the Native version.
 
 Native version is made to manage breaking change in the *code*
 
@@ -59,7 +59,7 @@ Your app is currently released with the version `1.2.3` with Capacitor 3
 
 You are doing the upgrade to capacitor 4.
 
-You need to upgrade your version number to `2.2.3` then all your package include Capgo with notice this big change.
+You need to upgrade your version number to `2.2.3`, then all your package include Capgo with notice this big change.
 
 When you release this version to Capgo and the App Store.
 

@@ -31,11 +31,11 @@ The goal is to provide a simple and easy to use solution to push code updates to
 
 No Native build, not big toolbox like Ionic, just live updates, for the market they don't address, Us.
 
-I contacted them to share with them what i was doing and we found a business friendship agreement.
+I contacted them to share with them what I was doing, and we found a business friendship agreement.
 
-I build for the maker they build for the big business :)
+I build for the maker, they build for the big business :)
 
-You are welcome to join the community to build together, I use it for my own projects too, and even I expect this become my main project in the future.
+You are welcome to join the community to build together, I use it for my projects too, and even I expect this to become my main project in the future.
 
 ## Features comparisons
 

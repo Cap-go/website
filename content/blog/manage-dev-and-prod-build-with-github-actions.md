@@ -21,7 +21,7 @@ Be sure you have added your app first to Capgo, this tutorial just focus on the 
 
 ## Commit convention
 
-First you need to start following the commit convention [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
+First you need to start following the commit convention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
 
 ![Conventional commits](/conventional_commits.webp)
 
@@ -142,7 +142,7 @@ If you need environment variable, use the `MY_ENV_VAR` and set the secret in you
 
 If you don't remove it.
 
-To make Capgo upload work, you need to get your API key for Capgo add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
+To make Capgo upload work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
 You can now commit this both file and see your first version appear in Capgo!
 
@@ -150,4 +150,4 @@ Add the commit will generate a new build for production and development channel.
 
 You should add your test in the build step to be certain your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have your own CI/CD system.
+Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.

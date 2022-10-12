@@ -22,7 +22,7 @@ Be sure you have add your app first to Capgo, this tutorial just focus on the up
 
 ## Commit convention
 
-First you need to start following the commit convention [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how upgrade the version number, it's 5 min to learn it.
+First you need to start following the commit convention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
 
 ![Conventional commits](/conventional_commits.webp)
 
@@ -130,6 +130,6 @@ Add the commit will generate a new build for production channel.
 
 You should add your test in the build step to ensure your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have your own CI/CD system.
+Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
 
 If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.

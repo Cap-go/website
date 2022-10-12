@@ -87,7 +87,7 @@ Once you’re logged into Capgo, navigate to the Account page then click on API 
 
 ### Install the Capgo SDK
 
-From a command line, directly into the root of your Capacitor app run:
+From a command line, directly into the root of your Capacitor app folder, run the following command:
 
 `npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
@@ -113,7 +113,7 @@ First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your
 `npx @capgo/cli@latest login YOURKEY`
 ## Add your first app
 
-Let's get started by first creating app in Capgo Cloud with the CLI.
+Let's get started by first creating the app in Capgo Cloud with the CLI.
 
 `npx @capgo/cli@latest add`
 

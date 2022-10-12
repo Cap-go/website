@@ -37,7 +37,7 @@ Where Capgo find the version to compare
 
 #### JavaScript
 
-  in JavaScript the var is set on your project here `package.json` under the key `version`
+  in JavaScript, the var is set on your project here `package.json` under the key `version`
 
 ## Default behavior
 
@@ -48,48 +48,48 @@ This is how Capgo channel will behave if you didn't change any settings.
 ### When Fresh installation of your app
 When user did download your app for the first time and open the app it contacts Capgo server.
 
-Currently, 4 output can happen:
+Currently, 4 outputs can happen:
   - The native version (1.2.3) is lower than Capgo version (1.2.4), Capgo send his version to the user.
-  - The native version (1.2.3) is equal to Capgo version (1.2.3), Capgo send "no need to update".
-  - The native version (1.2.4) is higher than Capgo version (1.2.3), Capgo send "no need to update".
-  - Thee native version (1.2.3) is MAJOR lower than Capgo version (2.2.3), Capgo send "no need to update".
+  - The native version (1.2.3) is equal to Capgo version (1.2.3), Capgo send “no need to update”.
+  - The native version (1.2.4) is higher than Capgo version (1.2.3), Capgo send “no need to update”.
+  - The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3), Capgo send “no need to update”.
 
 ### Other settings
 
 #### Disable auto-downgrade under native
 
-If you change this setting to false, Capgo will consider is is always the trustable source of the version.
-So currently if :
+If you change this setting to false, Capgo will consider is always the trustable source of the version.
+Currently, if :
 - The native version (1.2.4) is higher than Capgo version (1.2.3)
 
 Capgo send his version to the user.
 
-#### Disable auto upgrade above major
+#### Disable auto-upgrade above major
 
 If you change this setting to false, Capgo will consider upgrade to MAJOR is not an issue.
-So currently if :
+Currently, if :
 - The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3)
 
 Capgo send his version to the user.
 
 ## JavaScript version
 
-Native version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
+The native version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
 
-If you didn't use the option `--version 1.2.3` Capgo will get the version from your `package.json` file.
+If you didn't use the option `--version 1.2.3`, Capgo will get the version from your `package.json` file.
 
-After Your app has installed one version from Capgo, this is this version who will be compare for:
-  - They JavaScript version (1.2.3) is lower than Capgo version (1.2.4), Capgo send his version to the user.
+After Your app has installed one version from Capgo, this is this version who will be compared for:
+  - Their JavaScript version (1.2.3) is lower than Capgo version (1.2.4), Capgo send his version to the user.
 
 With some guard conditions:
-  - if native version is higher than Capgo version, the `Disable auto downgrade under native` condition is apply.
-  - if native version is MAJOR lower than Capgo version, the `Disable auto upgrade above major` condition is apply.
+  - If native version is higher than Capgo version, the `Disable auto downgrade under native` condition is applied.
+  - If native version is MAJOR lower than Capgo version, the `Disable auto upgrade above major` condition is applied.
 
 ## App store update
 
 When you publish your app on the App Store, what happen is simple.
 
-Your user will get the new version from the store and remove all local update in they app by default.
+Your user will get the new version from the store and remove all local update in their app by default.
 
 If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](https://docs.capgo.app/plugin/auto-update/cloud#advanced-settings)
 
@@ -97,7 +97,7 @@ This can only be change on the app side, not from cloud like other settings.
 
 ### Other settings
 
-After all this behavior you can have above that some specific one liked to the deviceID.
+After all this behavior, you can have above that some specific one liked to the deviceID.
 
 In Capgo, you can decide to override the behavior for each deviceID.
 

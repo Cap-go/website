@@ -41,7 +41,7 @@ I'm just saying that because it's good to know that thousands of other developer
 Apple and Google have their set of own rules on how to update apps.
 
 For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf).
-\[...\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[...\] __TLDR__: we should use OTA updates only to fix bugs or make improvements without making significant changes.
+\[…\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[…\] __TLDR__: we should use OTA updates only to fix bugs or make improvements, without making significant changes.
 
 __Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) to update by Google services only.
 

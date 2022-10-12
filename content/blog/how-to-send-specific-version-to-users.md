@@ -16,7 +16,7 @@ next_blog: ""
 
 ## Preface
 
-When you start to enjoy the update system of Capgo, like me for my apps, you will start to get the feeling "What if I want more?"
+When you start to enjoy the update system of Capgo, like me for my apps, you will start to get the feeling “What if I want more?”
 
 I got the feeling too, but since I'm the maker of Capgo, I was able to take a look!
 
@@ -28,35 +28,35 @@ With TestFlight, the issue is simple, bring people in your team and make them un
 
 And of course, each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
 
-I got many times my presentation delayed by this...
+I got many times my presentation delayed by this…
 
-And for Google this is even worse, the big mystery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days!
+And for Google this is even worse, the big mystery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days.
 
 
 ## Solution
 
-To fix this, i crated the Channel system in Capgo.
+To fix this, I crated the Channel system in Capgo.
 
 `npx @capgo/cli@latest upload -c production` will update to all user (if production channel is set to public)
 
-If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatised in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions). 
+If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions). 
 
 Then you have 2 way to let users get the updates from the channel
 
 ### Manual way
 
-This can be usefull for your internal team, this is fast to implement.
-Allow user to copy they deviceID from your app and send it to you manually, this code will help you to get it
+This can be useful for your internal team, this is fast to implement.
+Allow user to copy their deviceID from your app and send it to you manually, this code will help you to get it:
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getDeviceId()
 ```
-Hide a button somewhere in your app, or show the button to only connected user with a `admin` role for exemple.
+Hide a button somewhere in your app, or show the button to only connected user with a `admin` role, for example.
 
 Then Go to the Web app or native app Capgo, connect as app admin, select your app, click on device list.
 
-Then put in the searchbar the DeviceId click on the one found and then click on Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close again.
+Then put in the search bar the deviceID click on the one found and then click on Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close again.
 
 He should get your version.
 
@@ -72,11 +72,11 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 const deviceId = await CapacitorUpdater.getDeviceId()
 ```
 
-But this time you have to send it automatically to your backend, i let you decide how you do that.
+But this time you have to send it automatically to your backend, I let you decide how you do that.
 
-I will just suggest you to store it in database, that will facilitate your life later !
+I will just suggest you to store it in database, that will facilitate your life later.
 
-Then in your backend you have to send it to Capgo backend too. below two code exemple:
+Then in your backend you have to send it to Capgo backend too. Below two code example:
 <details>
   <summary>NodeJS</summary>
 
