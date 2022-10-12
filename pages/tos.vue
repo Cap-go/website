@@ -438,7 +438,7 @@ const domain = config.domain
     <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
     <ul>
       <li>
-        By visiting this page on our website: <a
+        By visiting this page on the website: <a
           :href="`https://${domain}#support`"
           rel="external nofollow noopener"
           target="_blank"

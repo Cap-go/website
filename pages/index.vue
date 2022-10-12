@@ -286,10 +286,10 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
     <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-          Numbers tell our story
+          Numbers tell the story
         </h2>
         <p class="mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
-          We share transparently all with you since day 1.
+          I share transparently all with you since day 1.
         </p>
         <p class="text-base mt-5 text-gray-500 text-center">
           ( updated every day )

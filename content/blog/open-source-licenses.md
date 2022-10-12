@@ -17,7 +17,7 @@ next_blog: ""
 
 In the early days of Capgo, I followed their move and used the AGPLv3 license. It was for me the good choice, but obviously, I'm not a lawyer. After a lot of talk in the discord community of the project I have discovered this license was putting the users at risk, since capacitor-updater, the plugin part of Capgo, was embedded in all project.
 
-After some research and help of the community, we found that LGPLv3 was the most suitable license for the plugin part.
+After some research and help of the community, I found that LGPLv3 was the most suitable license for the plugin part.
 This change affects anyone subscribing to the Capgo Cloud and anyone who’s running Capgo Self-Hosted on their server. Everything stays the same, but you are now safe to use it legally in your project.
 
 The change protects the project from corporations that want to take my code and modify or use it to create and sell proprietary tools that directly compete with me. Let’s look at the details.

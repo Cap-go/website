@@ -46,4 +46,4 @@ For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs
 __Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) to update by Google services only.
 
 
-Check our next article for more information on how to install Capgo to bypass review.
+Check my next article for more information on how to install Capgo to bypass review.

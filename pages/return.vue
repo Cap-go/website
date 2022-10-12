@@ -80,7 +80,7 @@ const domain = config.domain
     <h3>Contact Us</h3>
     <p>If you have any questions about our Returns and Refunds Policy, please contact us:</p>
     <ul>
-      <li>By visiting this page on our website: <a :href="`https://${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
+      <li>By visiting this page on the website: <a :href="`https://${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
     </ul>
   </div>
 </template>

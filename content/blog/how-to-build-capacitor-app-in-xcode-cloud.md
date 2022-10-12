@@ -15,7 +15,7 @@ published: false
 
 ## Intro
 
-To make Xcode build your Capacitor app, we need to set up a few things.
+To make Xcode build your Capacitor app, you need to set up a few things.
 
 ## Package Preparation
 

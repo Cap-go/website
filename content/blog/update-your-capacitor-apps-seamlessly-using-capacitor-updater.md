@@ -27,7 +27,7 @@ Moreover, it provides rollbacks if the new update crashed the app
 
 ## How does it work?
 
-Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help us fine-tune our user's experience.
+Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help you fine-tune your user's experience.
 
 I use Capgo in all my projects I build that allow me to put less time in the App Store review process.
 
