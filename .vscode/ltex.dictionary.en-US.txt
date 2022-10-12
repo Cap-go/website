@@ -1,0 +1,3 @@
+apikey
+Affero
+Capacitor-updater

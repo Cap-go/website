@@ -17,7 +17,7 @@ next_blog: ""
 
 ## What is Capacitor-updater?
 
-Capacitor-updater a technology that helps in the delivery of app updates and improvements to the end users instantly.
+Capacitor-updater, a technology that helps in the delivery of app updates and improvements to the end users instantly.
 
 This is especially great if you want to do critical bug fixes and deliver instantly without going through the App Store reviews.
 
@@ -29,17 +29,17 @@ Moreover, it provides rollbacks if the new update crashed the app
 
 Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help us fine-tune our user's experience.
 
-I use Capgo in all my projects I build, that allow me to put less time in the App Store review process.
+I use Capgo in all my projects I build that allow me to put less time in the App Store review process.
 
 You can read more about it [here](https://capgo.app).
 
-## Are there any limitations ?
+## Are there any limitations?
 
 As good as it may sound, there are a few things that we need to keep in mind.
 The first thing is that OTA updates __only work with web bundles__. 
 You may think that this isn’t really a big limitation because, in Capacitor, we write almost all code in JS CSS and HTML.
 While this may be true, there still are native modules that we install to our app.
-If a module changes your android or ios directories, you can’t use OTA to update your app.
+If a module changes your android or iOS directories, you can’t use OTA to update your app.
 That’s because these directories’ contents are used to compile Native binaries, which OTA can’t update.
 Even native app cannot update this part.
 
@@ -53,7 +53,7 @@ Once you’re logged into Capgo, You will have onboarding page
 
 ![Onboarding page](/onboarding_1.webp)
 
-follow the steps in the onboarding page to add your first app.
+Follow the steps in the onboarding page to add your first app.
 
 
 ### Install the Capgo SDK
@@ -73,15 +73,15 @@ CapacitorUpdater.notifyAppReady()
 
 This will tell the native plugin the installation as succeeded.
 
-### Login to capgo CLOUD
+### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to login with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
 ## Add your first app
 
-Let's get started by first creating app in Capgo Cloud with the CLI.
+Let's get started by first creating an app in Capgo Cloud with the CLI.
 
 `npx @capgo/cli@latest add`
 
@@ -92,7 +92,7 @@ This command will use all variable defined in the Capacitor config file to creat
 Run the command to build your code and send it to Capgo with:
 `npx @capgo/cli@latest upload`
 
-By default, the version name will be the one in your package.json file.
+By default, the version name will be the one in your `package.json` file.
 
 Check in [Capgo](https://web.capgo.app) if the build is present.
 
