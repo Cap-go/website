@@ -17,6 +17,7 @@ const navigation = {
     { name: 'Community', href: 'https://discord.gg/VnYRvBfgA6', target: '_blank' },
     { name: 'App mobile', href: '/app_mobile/' },
     { name: 'Documentation', href: 'https://docs.capgo.app/', target: '_blank' },
+    { name: 'Plugins', href: '/plugins/' },
     // { name: 'Commerce', href: '#' },
     // { name: 'Insights', href: '#' },
   ],

@@ -42,13 +42,6 @@ const menuMobile = ref(false)
 
         <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
           <a
-            href="/app_mobile/"
-            title="Sandbox App"
-            class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-          >
-            App
-          </a>
-          <a
             href="/pricing/"
             title="Pricing"
             class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
@@ -94,11 +87,6 @@ const menuMobile = ref(false)
     <div :class="{ hidden: !menuMobile }">
       <div class="px-2 pt-2 mt-2 pb-3 space-y-1 bg-gray-700">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a
-          href="/app_mobile/"
-          title="App"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >App</a>
         <a
           href="/pricing/"
           title="Pricing"
