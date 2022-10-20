@@ -9,7 +9,7 @@ interface Channel {
   version: definitions['app_versions']
 }
 interface ChannelDev {
-  channel_id: Channel
+  channel_id: definitions['channels'] & Channel
 }
 interface AppInfos {
   version_name: string
@@ -60,7 +60,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       plugin_version,
       version_name)
 
-    const { data: channel, error: dbError } = await supabase
+    const { data: channelData, error: dbError } = await supabase
       .from<definitions['channels'] & Channel>('channels')
       .select(`
         id,
@@ -90,7 +90,16 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         device_id,
         app_id,
         channel_id (
+          id,
+          created_at,
+          created_by,
           name,
+          app_id,
+          beta,
+          disableAutoUpdateUnderNative,
+          disableAutoUpdateToMajor,
+          ios,
+          android,
           version (
             id,
             name,
@@ -104,6 +113,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       `)
       .eq('device_id', device_id)
       .eq('app_id', app_id)
+      .single()
+
     const { data: devicesOverride } = await supabase
       .from<definitions['devices_override'] & Channel>('devices_override')
       .select(`
@@ -121,13 +132,16 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       `)
       .eq('device_id', device_id)
       .eq('app_id', app_id)
-    if (dbError || !channel) {
+      .single()
+
+    if (dbError || !channelData) {
       console.error(id, 'Cannot get channel', app_id, `no public channel ${JSON.stringify(dbError)}`)
       return sendRes({
         message: 'Cannot get channel',
         err: `no public channel ${JSON.stringify(dbError)}`,
       }, 200)
     }
+    let channel = channelData
     const trial = await isTrial(supabase, channel.created_by)
     const paying = await isGoodPlan(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
@@ -149,15 +163,16 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         err: 'not good plan',
       }, 200)
     }
-    if (channelOverride && channelOverride.length) {
+    if (channelOverride) {
       // eslint-disable-next-line no-console
-      console.log(id, 'Set channel override', app_id, channelOverride[0].channel_id.version.name)
-      version = channelOverride[0].channel_id.version as definitions['app_versions']
+      console.log(id, 'Set channel override', app_id, channelOverride.channel_id.version.name)
+      version = channelOverride.channel_id.version as definitions['app_versions']
+      channel = channelOverride.channel_id
     }
-    if (devicesOverride && devicesOverride.length) {
+    if (devicesOverride) {
       // eslint-disable-next-line no-console
-      console.log(id, 'Set device override', app_id, devicesOverride[0].version.name)
-      version = devicesOverride[0].version as definitions['app_versions']
+      console.log(id, 'Set device override', app_id, devicesOverride.version.name)
+      version = devicesOverride.version as definitions['app_versions']
     }
 
     if (!version.bucket_id && !version.external_url) {
@@ -188,7 +203,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       }, 200)
     }
 
-    if (!channel.ios && platform === 'ios') {
+    if (!devicesOverride && !channel.ios && platform === 'ios') {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot upgrade ios it\t disabled', device_id)
       await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, version.id)
@@ -199,7 +214,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         old: version_name,
       }, 200)
     }
-    if (!channel.android && platform === 'android') {
+    if (!devicesOverride && !channel.android && platform === 'android') {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot upgrade android it\t disabled', device_id)
       await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, version.id)
@@ -211,7 +226,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       }, 200)
     }
     // console.log('check disableAutoUpdateToMajor', device_id)
-    if (channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
+    if (!devicesOverride && channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
       await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot upgrade major version', device_id)
@@ -224,7 +239,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     }
     // eslint-disable-next-line no-console
     console.log(id, 'check disableAutoUpdateUnderNative', device_id)
-    if (channel.disableAutoUpdateUnderNative && semver.lt(version.name, version_build)) {
+    if (!devicesOverride && channel.disableAutoUpdateUnderNative && semver.lt(version.name, version_build)) {
       await sendStats(supabase, 'disableAutoUpdateUnderNative', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot revert under native version', device_id)
