@@ -7,9 +7,9 @@ ci:
   assert:
     preset: lighthouse:recommended
     assertions:
-      offscreen-images: 'on'
-      uses-webp-images: 'on'
-      color-contrast: 'on'
+      offscreen-images: on
+      uses-webp-images: on
+      color-contrast: on
       first-contentful-paint:
         - error
         - maxNumericValue: 2000
