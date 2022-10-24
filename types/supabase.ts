@@ -237,6 +237,11 @@ export interface paths {
           apps?: parameters['rowFilter.global_stats.apps']
           updates?: parameters['rowFilter.global_stats.updates']
           stars?: parameters['rowFilter.global_stats.stars']
+          users?: parameters['rowFilter.global_stats.users']
+          paying?: parameters['rowFilter.global_stats.paying']
+          trial?: parameters['rowFilter.global_stats.trial']
+          need_upgrade?: parameters['rowFilter.global_stats.need_upgrade']
+          not_paying?: parameters['rowFilter.global_stats.not_paying']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -292,6 +297,11 @@ export interface paths {
           apps?: parameters['rowFilter.global_stats.apps']
           updates?: parameters['rowFilter.global_stats.updates']
           stars?: parameters['rowFilter.global_stats.stars']
+          users?: parameters['rowFilter.global_stats.users']
+          paying?: parameters['rowFilter.global_stats.paying']
+          trial?: parameters['rowFilter.global_stats.trial']
+          need_upgrade?: parameters['rowFilter.global_stats.need_upgrade']
+          not_paying?: parameters['rowFilter.global_stats.not_paying']
         }
         header: {
           /** Preference */
@@ -311,6 +321,11 @@ export interface paths {
           apps?: parameters['rowFilter.global_stats.apps']
           updates?: parameters['rowFilter.global_stats.updates']
           stars?: parameters['rowFilter.global_stats.stars']
+          users?: parameters['rowFilter.global_stats.users']
+          paying?: parameters['rowFilter.global_stats.paying']
+          trial?: parameters['rowFilter.global_stats.trial']
+          need_upgrade?: parameters['rowFilter.global_stats.need_upgrade']
+          not_paying?: parameters['rowFilter.global_stats.not_paying']
         }
         body: {
           /** global_stats */
@@ -352,6 +367,9 @@ export interface paths {
           bandwidth?: parameters['rowFilter.plans.bandwidth']
           mau?: parameters['rowFilter.plans.mau']
           market_desc?: parameters['rowFilter.plans.market_desc']
+          storage_unit?: parameters['rowFilter.plans.storage_unit']
+          bandwidth_unit?: parameters['rowFilter.plans.bandwidth_unit']
+          mau_unit?: parameters['rowFilter.plans.mau_unit']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -423,6 +441,9 @@ export interface paths {
           bandwidth?: parameters['rowFilter.plans.bandwidth']
           mau?: parameters['rowFilter.plans.mau']
           market_desc?: parameters['rowFilter.plans.market_desc']
+          storage_unit?: parameters['rowFilter.plans.storage_unit']
+          bandwidth_unit?: parameters['rowFilter.plans.bandwidth_unit']
+          mau_unit?: parameters['rowFilter.plans.mau_unit']
         }
         header: {
           /** Preference */
@@ -458,6 +479,9 @@ export interface paths {
           bandwidth?: parameters['rowFilter.plans.bandwidth']
           mau?: parameters['rowFilter.plans.mau']
           market_desc?: parameters['rowFilter.plans.market_desc']
+          storage_unit?: parameters['rowFilter.plans.storage_unit']
+          bandwidth_unit?: parameters['rowFilter.plans.bandwidth_unit']
+          mau_unit?: parameters['rowFilter.plans.mau_unit']
         }
         body: {
           /** plans */
@@ -2489,6 +2513,28 @@ export interface paths {
       }
     }
   }
+  '/rpc/get_total_stats': {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: character varying */
+            dateid: string
+            /** Format: uuid */
+            userid: string
+          }
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferParams']
+        }
+      }
+      responses: {
+        /** OK */
+        200: unknown
+      }
+    }
+  }
   '/rpc/increment_version_stats': {
     post: {
       parameters: {
@@ -2565,6 +2611,26 @@ export interface paths {
       }
     }
   }
+  '/rpc/is_good_plan_v2': {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            userid: string
+          }
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferParams']
+        }
+      }
+      responses: {
+        /** OK */
+        200: unknown
+      }
+    }
+  }
   '/rpc/get_user_id': {
     post: {
       parameters: {
@@ -2586,6 +2652,26 @@ export interface paths {
     }
   }
   '/rpc/is_trial': {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: uuid */
+            userid: string
+          }
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferParams']
+        }
+      }
+      responses: {
+        /** OK */
+        200: unknown
+      }
+    }
+  }
+  '/rpc/is_admin': {
     post: {
       parameters: {
         body: {
@@ -2634,6 +2720,30 @@ export interface paths {
           args: {
             /** Format: uuid */
             userid: string
+          }
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferParams']
+        }
+      }
+      responses: {
+        /** OK */
+        200: unknown
+      }
+    }
+  }
+  '/rpc/find_best_plan_v2': {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            bandwidth: number
+            /** Format: bigint */
+            mau: number
+            /** Format: bigint */
+            storage: number
           }
         }
         header: {
@@ -2696,6 +2806,30 @@ export interface paths {
           args: {
             /** Format: uuid */
             userid: string
+          }
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferParams']
+        }
+      }
+      responses: {
+        /** OK */
+        200: unknown
+      }
+    }
+  }
+  '/rpc/find_fit_plan_v2': {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            bandwidth: number
+            /** Format: bigint */
+            mau: number
+            /** Format: bigint */
+            storage: number
           }
         }
         header: {
@@ -2998,6 +3132,16 @@ export interface definitions {
     updates: number
     /** Format: bigint */
     stars: number
+    /** Format: bigint */
+    users?: number
+    /** Format: bigint */
+    paying?: number
+    /** Format: bigint */
+    trial?: number
+    /** Format: bigint */
+    need_upgrade?: number
+    /** Format: bigint */
+    not_paying?: number
   }
   plans: {
     /**
@@ -3064,9 +3208,9 @@ export interface definitions {
     price_m_id: string
     /** Format: character varying */
     price_y_id: string
-    /** Format: bigint */
+    /** Format: double precision */
     storage: number
-    /** Format: bigint */
+    /** Format: double precision */
     bandwidth: number
     /** Format: bigint */
     mau: number
@@ -3075,6 +3219,12 @@ export interface definitions {
      * @default
      */
     market_desc?: string
+    /** Format: double precision */
+    storage_unit?: number
+    /** Format: double precision */
+    bandwidth_unit?: number
+    /** Format: double precision */
+    mau_unit?: number
   }
   stripe_info: {
     /**
@@ -3787,6 +3937,16 @@ export interface parameters {
   'rowFilter.global_stats.updates': string
   /** Format: bigint */
   'rowFilter.global_stats.stars': string
+  /** Format: bigint */
+  'rowFilter.global_stats.users': string
+  /** Format: bigint */
+  'rowFilter.global_stats.paying': string
+  /** Format: bigint */
+  'rowFilter.global_stats.trial': string
+  /** Format: bigint */
+  'rowFilter.global_stats.need_upgrade': string
+  /** Format: bigint */
+  'rowFilter.global_stats.not_paying': string
   /** @description plans */
   'body.plans': definitions['plans']
   /** Format: timestamp with time zone */
@@ -3823,14 +3983,20 @@ export interface parameters {
   'rowFilter.plans.price_m_id': string
   /** Format: character varying */
   'rowFilter.plans.price_y_id': string
-  /** Format: bigint */
+  /** Format: double precision */
   'rowFilter.plans.storage': string
-  /** Format: bigint */
+  /** Format: double precision */
   'rowFilter.plans.bandwidth': string
   /** Format: bigint */
   'rowFilter.plans.mau': string
   /** Format: character varying */
   'rowFilter.plans.market_desc': string
+  /** Format: double precision */
+  'rowFilter.plans.storage_unit': string
+  /** Format: double precision */
+  'rowFilter.plans.bandwidth_unit': string
+  /** Format: double precision */
+  'rowFilter.plans.mau_unit': string
   /** @description stripe_info */
   'body.stripe_info': definitions['stripe_info']
   /** Format: timestamp with time zone */

@@ -8,14 +8,21 @@ const config = useRuntimeConfig()
 
 const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<definitions['plans']>>)
 
-const pay_as_you_go_plan = await fetch(`${config.domain}/api/pay_as_you_go`).then(r => r.json() as Promise<Array<definitions['pay_as_you_go']>>)
-
 const pricing: {
   [key: string]: any
 } = plans
 
-const payg_base = pay_as_you_go_plan.filter(plan => plan.type === 'base')[0]
-const payg_units = pay_as_you_go_plan.filter(plan => plan.type === 'units')[0]
+const payg = plans.filter(p => p.name === 'Pay as you go')[0]
+const payg_base = {
+  mau: payg.mau,
+  storage: payg.storage,
+  bandwidth: payg.bandwidth,
+}
+const payg_units = {
+  mau: payg.mau_unit,
+  storage: payg.storage_unit,
+  bandwidth: payg.bandwidth_unit,
+}
 </script>
 
 <template>
