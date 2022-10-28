@@ -16,8 +16,6 @@ next_blog: ""
 
 ## Continuous Delivery for Android using Fastlane and GitHub Actions
 
-![](/fastlane_android.webp)
-
 ## Prerequisites
 
 Before continuing with the tutorial…
