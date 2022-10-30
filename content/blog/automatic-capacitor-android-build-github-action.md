@@ -42,6 +42,10 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 **Steps to follow in the post**
 
 1.  _Copy Fastline files_
+2.  _Storing your secrets in GitHub encrypted secrets_
+3.  _Creating & storing your Google Play service account key_
+4.  _Storing your Android signing key_
+5.  _Set up your GitHub Actions workflow .yml file_
 
 ## 1\. Copy Fastline files
 
@@ -170,7 +174,7 @@ First, let’s create the necessary folders. From your project’s root director
 mkdir .github && cd .github && mkdir workflows && cd workflows && touch build-upload-android.yml
 ```
 
-Then, paste the following code into your newly created build-upload-android.yml file:
+Then, paste the following code into your newly created `build-upload-android.yml` file:
 
 ```yaml
 name: Build source code on android
@@ -237,7 +241,7 @@ jobs:
           retention-days: 60
 ```
 
-This workflow should be triggered after each GitHub tag, if you don't have automatic GitHub tag follow this [tutorial](/blog/automatic-build-and-release-with-github-actions)
+This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions)
 
-Each time you send a new commit, a release will be built in Google Play console, beta channel.
+> Each time you send a new commit, a release will be built in Google Play console, beta channel.
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
