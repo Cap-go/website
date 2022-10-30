@@ -97,3 +97,69 @@ Connect your GitHub account
 ![Xcode step 5](/xcode_step_5.webp)
 
 ![Xcode step 6](/xcode_step_6.webp)
+
+
+# Fastlane config ios
+
+
+Copy files from this repo : capgo app
+
+create a certificat location with fastlane match
+run `fastlane match init`
+follow instruction there 
+
+add this to your github actions:
+
+```yaml
+build_ios:
+  runs-on: macOS-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: pnpm
+    - name: Install dependencies
+      id: install_code
+      run: pnpm install --frozen-lockfile
+    - name: Build
+      id: build_code
+      run: pnpm mobile
+    - name: Sync
+      id: sync_code
+      run: npx cap sync
+    - name: Install fastlane CLI
+      run: |
+        HOMEBREW_NO_INSTALL_CLEANUP=1 brew install fastlane
+    - name: Archive IOS
+      env:
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+        APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+        APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+        CERTIFICATE_STORE_URL: ${{ secrets.CERTIFICATE_STORE_URL }}
+        MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+      run: fastlane ios beta
+    - name: Upload release bundle
+      uses: actions/upload-artifact@v2
+      with:
+        name: ios-release
+        path: ios/App/App.ipa
+        retention-days: 60
+```
+
+create secrets in your github repo
+
+- APP_STORE_CONNECT_API_KEY_ID
+- APP_STORE_CONNECT_API_ISSUER_ID
+- APP_STORE_CONNECT_API_KEY_CONTENT
+- CERTIFICATE_STORE_URL ==> where your fastlane match is created
+- MATCH_KEYCHAIN_PASSWORD ==> password for your fastlane match
+
+create a github personal token with repo right
+and then do 
+` echo -n github_name:token | base64 `
+to get your base64 token

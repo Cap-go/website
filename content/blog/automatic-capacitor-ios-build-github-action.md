@@ -10,7 +10,7 @@ head_image: "/fastlane_ios.webp"
 head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
 published: true
-next_blog: ""
+next_blog: "automatic-capacitor-android-build-github-action"
 
 ---
 
