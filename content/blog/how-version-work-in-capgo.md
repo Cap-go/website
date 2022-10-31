@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-25
 updated_at: 2022-08-25
-head_image: "/capgo-feature-image.webp"
+head_image: "/versionning.webp"
 head_image_alt: Capgo version system
 tag: Tutorial
 published: true

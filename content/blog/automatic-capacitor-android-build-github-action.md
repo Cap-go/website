@@ -245,3 +245,12 @@ This workflow should be triggered after each GitHub _tag_, if you need to automa
 
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+
+### Thanks
+
+This blog is based on the following articles:
+- [Automate publishing app to the Google Play Store with GitHub Actions⚡+ Fastlane🏃](https://medium.com/scalereal/automate-publishing-app-to-the-google-play-store-with-github-actions-fastlane-ac9104712486)
+- [Getting Started CI/CD for Android Project (Part - 3— GitHub Actions)](https://proandroiddev.com/getting-started-ci-cd-for-android-project-part-3-github-actions-157857224cb1)
+- [Android Continuous Integration using Fastlane and CircleCI 2.0 — Part III](https://medium.com/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5)
+- [How to set up a CI/CD pipeline for your Android app using fastlane and GitHub Actions](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions)
+- [Fastlane Documentation](https://docs.fastlane.tools/getting-started/android/beta-deployment/)

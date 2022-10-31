@@ -14,10 +14,9 @@ const menuMobile = ref(false)
           <a
             href="/"
             title=""
-            class="flex rounded-lg overflow-hidden outline-none font-900 bg-azure-500 items-center focus:ring-1 focus:ring-gray-900 border focus:ring-offset-2 pr-3"
+            class="flex text-4xl font-medium font-prompt items-center pr-3"
           >
-            <img class="w-auto h-8 pr-3" :alt="`${brand} logo`" src="/capgo.webp">
-            {{ brand }}
+            <img class="w-auto h-18 pr-1" :alt="`${brand} logo`" src="/capgo_logo.webp">
           </a>
         </div>
 

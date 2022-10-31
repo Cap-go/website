@@ -28,10 +28,16 @@ export default defineConfig({
       provider: 'none', // default provider
       fonts: {
         // these will extend the default theme
-        sans: 'Plus Jakarta Sans',
         light: 'AirbnbCerealLight',
         medium: 'AirbnbCerealMedium',
         bold: 'AirbnbCerealBold',
+      },
+    }),
+    presetWebFonts({
+      provider: 'bunny',
+      fonts: {
+        prompt: 'Prompt',
+        inter: 'Inter',
       },
     }),
   ],

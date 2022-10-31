@@ -55,6 +55,9 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 > Starting February 2021, two-factor authentication or two-step verification is required for all users to sign in to App Store Connect. This extra layer of security for your Apple ID helps ensure that you’re the only person who can access your account.  
 > From [Apple Support](https://developer.apple.com/support/authentication/)
 
+> Getting started with match requires you to revoke your existing certificates. But no worry, you will have the new one directly.
+
+
 ## Requirements
 
 To be able to use App Store Connect API, Fastlane needs **three** things.
@@ -215,7 +218,7 @@ Create a new private repository named `certificates`, for example on your GitHub
 
 Initialize Fastlane match for your iOS app.
 
-```
+```shell
 fastlane match init
 ```
 
@@ -257,7 +260,10 @@ Generated certificates and provisioning profiles are uploaded to the certificate
 
 ![](/certificates.webp)
 
-Repository resources
+
+Lastly, open your `project` in Xcode, and update the provisioning profile for the release configuration of your app.
+
+![](/xcode_cert.webp)
 
 ## Few things to note 💡
 
@@ -457,3 +463,9 @@ Terminal execution: $ Fastlane closed\_beta
 
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+
+### Thanks
+
+This blog is based on the following articles:
+- [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc)
+- [Fastlane Documentation](https://docs.fastlane.tools/app-store-connect-api/)
