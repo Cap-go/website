@@ -71,9 +71,3 @@ html.dark {
   font-weight: 500;
   src: url(~/assets/fonts/AirbnbCerealBold.woff) format('woff');
 }
-
-@font-face {
-  font-family: 'Inter';
-  font-weight: 500;
-  src: url(~/assets/fonts/Inter-VariableFont_slnt_wght.woff) format('woff');
-}
