@@ -1,6 +1,6 @@
 ---
 slug: "automatic-capacitor-android-build-github-action"
-title: Automatic Capacitor Android build GitHub actions
+title: Automatic Capacitor Android build with GitHub actions
 description: How to set up a CI/CD pipeline for your Android app using fastlane and GitHub Actions
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu

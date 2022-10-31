@@ -1,6 +1,6 @@
 ---
 slug: "automatic-capacitor-ios-build-github-action"
-title: Automatic Capacitor IOS build GitHub actions
+title: Automatic Capacitor IOS build with GitHub actions
 description: How to set up a CI/CD pipeline for your IOS app using fastlane and GitHub Actions
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
