@@ -16,7 +16,6 @@ next_blog: "automatic-capacitor-android-build-github-action"
 
 ## Continuous Delivery for iOS using Fastlane and GitHub Actions
 
-![](https://miro.medium.com/max/1400/1*VQon_PVWfxZE6FIYx07Neg.png)
 
 ## Prerequisites
 
@@ -35,9 +34,9 @@ Before continuing with the tutorial…
 The service is ‘_free’_ up to the limit, depending on the chosen machine.  
 We are going to use a **_macOS_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
 
-🔴 **_Once warned of requirements and prices, if you want, we continue..._**
+🔴 **_Once warned of requirements and prices, if you like, we continue…_**
 
-> **_📣_ In the post we assume that we have the app created in itunes connect, we do have the certificates of the Apple ecosystem, everything will be copied by fastlane!**
+> **_📣_ In the post we assume that we have the app created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be copied by Fastlane!**
 
 ## Let’s go to the mess 🧑🏽💻
 
@@ -72,19 +71,19 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users).
 
-![](https://miro.medium.com/max/1400/0*hqGSGc2LNXuKKwTi.png)
+![](/select_user_access.webp)
 
 3 — Select the API Keys tab.
 
-![](https://miro.medium.com/max/1400/0*5DCzqn-O5PIoIiem.png)
+![](/user_access_keys.webp)
 
 4 — Click Generate API Key or the Add (+) button.
 
-![](https://miro.medium.com/max/1400/0*ItFA2hfZvy7c8NdT.png)
+![](/user_access.webp)
 
 5 — Enter a name for the key. The name is for your reference only and is not part of the key itself.
 
-![](https://miro.medium.com/max/1400/0*MVglNfR5zaaNyZ8k.png)
+![](/gen_key.webp)
 
 6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7).
 
@@ -94,18 +93,18 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 The new key’s name, key ID, a download link, and other information appear on the page.
 
-![](https://miro.medium.com/max/1400/0*w7GCuzn3KXSkxZnl.png)
+![](/download_key.webp)
 
 You can grab all three necessary information here.  
 <1> Issue ID.  
 <2> Key ID.  
-<3> Click “Download API Key” to download your API private key. The download link appears only if the private key has not yet been downloaded. Apple does not keep a copy of the private key. So you can download it only once.
+<3> Click “Download API Key” to download your API private key. The download link appears only if the private key has not yet been downloaded. Apple does not keep a copy of the private key. So, you can download it only once.
 
 > _🔴_ Store your private key in a safe place. You should never share your keys, store keys in a code repository, or include keys in client-side code.
 
 ## Using an App Store Connect API Key
 
-The API Key file (p8 file that you download), the key id, and the issuer id are needed to create the JWT token for authorization. There are multiple ways that these pieces of information can be input into Fastlane using Fastlane’s new action, `app_store_connect_api_key`. You can learn other ways in [Fastlane documentation](https://docs.fastlane.tools/actions/app_store_connect_api_key/). I show this method because I think it is the easiest way to work with most CI out there, where you can set environment variables.
+The API Key file (p8 file that you download), the key ID, and the issuer ID are needed to create the JWT token for authorization. There are multiple ways that these pieces of information can be input into Fastlane using Fastlane’s new action, `app_store_connect_api_key`. You can learn other ways in [Fastlane documentation](https://docs.fastlane.tools/actions/app_store_connect_api_key/). I show this method because I think it is the easiest way to work with most CI out there, where you can set environment variables.
 
 _Now we can manage Fastlane with the App Store Connect API key, great!_
 
@@ -212,7 +211,7 @@ team_id(ENV["DEVELOPER_PORTAL_TEAM_ID"])
 
 Fastlane [match](https://docs.fastlane.tools/actions/match/) is a new approach to iOS’s codesigning. Fastlane match makes it easy for teams to manage the required certificates and provisioning profiles for your iOS apps.
 
-Create a new private repository named `certificates` for example on your GitHub personal account or organization.
+Create a new private repository named `certificates`, for example on your GitHub personal account or organization.
 
 Initialize Fastlane match for your iOS app.
 
@@ -232,7 +231,7 @@ Assign the URL of the newly created repository.
 [01:00:00]: Please create a new, private git repository to store the certificates and profiles there[01:00:00]: URL of the Git Repo: <YOUR_CERTIFICATES_REPO_URL>
 ```
 
-> Now you have inside fastlane folder a file named **_Matchfile_** and `_git_url_`should be set to the https URL of the certificates repository. Optionally, you can also use SSH, but it requires a different steps to run.
+> Now you have inside Fastlane folder a file named **_Matchfile_** and `_git_url_`should be set to the HTTPS URL of the certificates repository. Optionally, you can also use SSH, but it requires a different step to run.
 
 ```
 # ios/Matchfilegit_url("https://github.com/gitusername/certificates")storage_mode("git")type("appstore")
@@ -256,7 +255,7 @@ If all went well, you should see something like that:
 
 Generated certificates and provisioning profiles are uploaded to the certificates repository resources
 
-![](https://miro.medium.com/max/1400/1*7GgYpkqj22MtALz9sp12yw.png)
+![](/certificates.webp)
 
 Repository resources
 
@@ -266,9 +265,9 @@ Repository resources
 
 For the CI/CD to import the certificates and provisioning profiles, it needs to have access to the certificates repository. You can do this by generating a personal access token (should be used before) that has the scope to access or read private repositories.
 
-In GitHub, go to **Settings** -> **Developer Settings** -> **Personal access tokens** -> click `Generate New Token` -> tick the `repo` scope -> then click `Generate token`.
+In GitHub, go to **Settings** → **Developer Settings** → **Personal access tokens** → click `Generate New Token` → tick the `repo` scope → then click `Generate token`.
 
-![](https://miro.medium.com/max/1400/0*G8VuxI-BE9AgyRKL.png)
+![](/personal_access_token.webp)
 
 Have a copy of the personal access token generated. You will use it later for the environment variable `GIT_TOKEN`.
 
@@ -298,7 +297,7 @@ For private projects, the estimated cost per build can go up to **$0.08/min x 30
 
 If you share the same concerns for the pricing as I do for private projects, you can keep the `skip_waiting_for_build_processing` to `true`.
 
-What’s the catch? You have to manually update the compliance of your app in App Store Connect after the build has been processed, in order for you to distribute the build to your users.
+What’s the catch? You have to manually update the compliance of your app in App Store Connect after the build has been processed, for you to distribute the build to your users.
 
 This is just an optional parameter to update if you want to save on the build minutes for private projects. For free projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).
 
@@ -307,31 +306,31 @@ This is just an optional parameter to update if you want to save on the build mi
 
 **Configure GitHub secrets**
 
-Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore - it’s from your project’s secret. 🤦
+Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore – it’s from your project’s secret. 🤦
 
-![](https://miro.medium.com/max/1400/1*Xr_SBMeIsm8h_ZcA2YKb4A.png)
+![](/github_secets.webp)
 
-1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams
+1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams.
 
-2\. `DEVELOPER_APP_ID` - in App Store Connect, go to the app -> **App Information** -> Scroll down to the `General Information` section of your app and look for `Apple ID`.
+2\. `DEVELOPER_APP_ID` - in App Store Connect, go to the app → **App Information** → Scroll down to the `General Information` section of your app and look for `Apple ID`.
 
-3\. `DEVELOPER_APP_IDENTIFIER` - your app’s bundle identifier
+3\. `DEVELOPER_APP_IDENTIFIER` - your app’s bundle identifier.
 
-4\. `DEVELOPER_PORTAL_TEAM_ID` - the ID of your Developer Portal team if you’re in multiple teams
+4\. `DEVELOPER_PORTAL_TEAM_ID` - the ID of your Developer Portal team if you’re in multiple teams.
 
-5\. `FASTLANE_APPLE_ID` - the Apple ID or developer email you use to manage the app
+5\. `FASTLANE_APPLE_ID` - the Apple ID or developer email you use to manage the app.
 
-6\. `GIT_USERNAME` & `GIT_TOKEN` - Your git username and your personal access token
+6\. `GIT_USERNAME` & `GIT_TOKEN` - Your git username and your personal access token.
 
-7\. `MATCH_PASSWORD` - the passphrase that you assigned when initializing match, will be used for decrypting the certificates and provisioning profiles
+7\. `MATCH_PASSWORD` - the passphrase that you assigned when initializing match, will be used for decrypting the certificates and provisioning profiles.
 
 8\. `PROVISIONING_PROFILE_SPECIFIER` - `match AppStore <YOUR_APP_BUNDLE_IDENTIFIER>`, eg. `match AppStore com.domain.blabla.demo`.
 
-9\. `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - assign a temp keychain user and password for your workflow
+9\. `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - assign a temp keychain user and password for your workflow.
 
-10\. `APPSTORE_KEY_ID` — App Store Connect API Key 🔺Key ID
+10\. `APPSTORE_KEY_ID` — App Store Connect API Key 🔺Key ID.
 
-11\. `APPSTORE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID
+11\. `APPSTORE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
 
 12\. `APPSTORE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655#issuecomment-881764901)
 
@@ -408,33 +407,27 @@ jobs:
 
 This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions)
 
-## 💥 Important
-
-> If you facing the next issue, you need to specify on your project for _increment\_build\_number_ to VERSIONING\_SYSTEM, [more info here](https://developer.apple.com/library/archive/qa/qa1827/_index.html)
-
-![](https://miro.medium.com/max/1400/1*qyZMvSYh4XaHyohQ2QDbgA.png)
-
 ## 5\. Trigger workflow
 
 **Create a Commit**
 
-Make a _commit_ or a _pull request_ depending on how you have configured it, and you should see the active workflow in the repository.
+Make a _commit_, you should see the active workflow in the repository.
 
 **Trigger the workflow**
 
-Push the new commits to the newly created branch to trigger the workflow.
+Push the new commits to the branch `main` or `developement` to trigger the workflow.
 
-![](https://miro.medium.com/max/1400/1*P-x06ebIoYWG5QO5vZR3cQ.png)
+![](/cd_started.webp)
 
 After a few minutes, the build should be available in your App Store Connect dashboard.
 
-![](https://miro.medium.com/max/1400/1*ksw0yxsHkI_CKeMfwK84yw.png)
+![](/testflight_app.webp)
 
 ## Can deploy from local machine?
 
-Yes, you can, and it is very easy.
+Yes, you can, and it is effortless.
 
-Imagine that you have a private repository and you have used up the minutes of the free plan and you do not want to pay for new releases, or maybe you prefer to submit the application manually.
+Imagine that you have a private repository, and you have used up the minutes of the free plan and you do not want to pay for new releases, or maybe you prefer to submit the application manually.
 
 **_Let’s go for it_**
 
@@ -448,7 +441,7 @@ Now, you can go to the _terminal_ and launch the _Fastlane_ from your machine:
 fastlane closed_beta
 ```
 
-> **❌ Very important about the** _.env_ **file, as we do not want to expose this data, we must add it in our** _.gitignore_**, something like that: ❌**
+> **❌ Essential about the** _.env_ **file, as we would rather not expose this data, we must add it in our** _.gitignore_**, something like that: ❌**
 
 ```
 fastlane/*.env
@@ -456,9 +449,9 @@ fastlane/*.env
 
 It should work the same as it happens from GitHub Actions on the remote machine but in our local machine. 🍻
 
-![](https://miro.medium.com/max/1400/1*B_sMcDaKKSZ2nWmTwxrToQ.png)
+![](/local_fastlane.webp)
 
-Terminal execution: $ fastlane closed\_beta
+Terminal execution: $ Fastlane closed\_beta
 
 **_If you have come this far, my congratulations, now you have a fully automated process for your iOS apps with Fastlane and GitHub Actions._**
 
