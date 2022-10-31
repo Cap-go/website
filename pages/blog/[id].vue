@@ -26,7 +26,7 @@ const structuredData: WithContext<NewsArticle> = {
   },
   'headline': data.value?.description,
   'image': [
-    data.value?.head_image,
+    `${config.getUrl}${data.value?.head_image || 'capgo_banner.webp'}`,
   ],
   'datePublished': datePublished,
   'dateModified': dateModified,
@@ -57,7 +57,7 @@ useHead(() => ({
   meta: createMeta(
     data.value?.title || 'No title',
     data.value?.description || 'No description',
-    data.value?.head_image || '',
+    `${config.getUrl}${data.value?.head_image || 'capgo_banner.webp'}`,
     data.value?.author || 'Capgo',
   ),
 }))
