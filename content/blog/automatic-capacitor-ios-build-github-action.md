@@ -390,9 +390,9 @@ jobs:
           PROVISIONING_PROFILE_SPECIFIER: match AppStore ${{ secrets.DEVELOPER_APP_IDENTIFIER }}
           TEMP_KEYCHAIN_USER: ${{ secrets.TEMP_KEYCHAIN_USER }}
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
-          APPLE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          APPLE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
-          APPLE_KEY_CONTENT: ${{ secrets.APPSTORE_KEY_CONTENT }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
           CERTIFICATE_STORE_URL: https://github.com/${{ secrets.CERTIFICATE_STORE_REPO }}.git
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
