@@ -1,11 +1,13 @@
 <script setup>
 import {
+  BoltIcon,
   BuildingStorefrontIcon,
   ChatBubbleLeftIcon,
   ClockIcon,
   CurrencyDollarIcon,
   GlobeAltIcon,
   GlobeEuropeAfricaIcon,
+  SpeakerWaveIcon,
   SpeakerXMarkIcon,
   StarIcon,
   VideoCameraIcon,
@@ -92,6 +94,22 @@ const actions = [
     icon: ViewfinderCircleIcon,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50',
+  },
+  {
+    title: 'Flash',
+    description: 'Switch the Flashlight / Torch of your device.',
+    href: 'https://github.com/Cap-go/capacitor-flash',
+    icon: BoltIcon,
+    iconForeground: 'text-amber-700',
+    iconBackground: 'bg-amber-50',
+  },
+  {
+    title: 'Native audio',
+    description: 'Play sound with native audio engine.',
+    href: 'https://github.com/Cap-go/native-audio',
+    icon: SpeakerWaveIcon,
+    iconForeground: 'text-fuchsia-700',
+    iconBackground: 'bg-fuchsia-50',
   },
 ]
 </script>
