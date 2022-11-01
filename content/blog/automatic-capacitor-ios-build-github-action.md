@@ -471,3 +471,4 @@ I will improve this blog with your feedbacks, if you have any question or sugges
 This blog is based on the following articles:
 - [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc)
 - [Fastlane Documentation](https://docs.fastlane.tools/app-store-connect-api/)
+- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63#issuecomment-1074328057)

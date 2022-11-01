@@ -254,4 +254,4 @@ This blog is based on the following articles:
 - [Android Continuous Integration using Fastlane and CircleCI 2.0 — Part III](https://medium.com/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5)
 - [How to set up a CI/CD pipeline for your Android app using Fastlane and GitHub Actions](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions)
 - [Fastlane Documentation](https://docs.fastlane.tools/getting-started/android/beta-deployment/)
-- [This GitHub message](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63#issuecomment-1074328057)
+- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63#issuecomment-1074328057)
