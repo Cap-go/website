@@ -334,11 +334,13 @@ Ever wonder where the values of the `ENV` are coming from? Well, it’s not a se
 
 9\. `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - assign a temp keychain user and password for your workflow.
 
-10\. `APPSTORE_KEY_ID` — App Store Connect API Key 🔺Key ID.
+10\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
 
-11\. `APPSTORE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
+11\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
 
-12\. `APPSTORE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655#issuecomment-881764901)
+12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655#issuecomment-881764901)
+
+13\. `CERTIFICATE_STORE_URL` — The repo url of your Match keys (ex: https://github.com/***/fastlane_match.git)
 
 ## **4\. Configure GitHub workflow file**
 
