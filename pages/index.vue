@@ -38,9 +38,9 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
         <h1 class="mt-5 text-4xl font-bold leading-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight font-pj">
           Instant updates for capacitor
         </h1>
-        <p class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
+        <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
           Unlock Continuous Delivery for your app. Ship live updates, bug fixes, content changes, features, and more without struggle with the store review.
-        </p>
+        </h2>
 
         <div class="relative inline-flex mt-10 group">
           <div class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt" />
@@ -170,7 +170,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://avatars.githubusercontent.com/u/362329?v=4" alt="Lincoln Baxter photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/lincoln.webp" alt="Lincoln Baxter photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Lincoln Baxter
@@ -189,7 +189,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-1.png" alt="Bessie Cooper photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-1.webp" alt="Bessie Cooper photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Bessie Cooper
@@ -208,7 +208,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-2.png" alt="Aakash Chandran photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-2.webp" alt="Aakash Chandran photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Aakash Chandran
@@ -229,7 +229,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-2.png" alt="Jamon Holmgren photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-male-2.webp" alt="Jamon Holmgren photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Jamon Holmgren
@@ -248,7 +248,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-female-3.png" alt="Wes Johnson photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-3.webp" alt="Wes Johnson photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Wes Johnson
@@ -267,7 +267,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
               </p>
             </blockquote>
             <div class="flex items-center mt-5">
-              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/5/avatar-male-3.png" alt="Trevor Hartman photo">
+              <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-male-3.webp" alt="Trevor Hartman photo">
               <div class="ml-2">
                 <p class="text-base font-bold text-gray-900 font-pj">
                   Trevor Hartman
