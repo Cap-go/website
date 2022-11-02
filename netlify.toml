@@ -1,3 +1,9 @@
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs.thresholds]
+    performance = 0.9
+    
 [build.environment]
   NPM_FLAGS = "--version"
   NODE_VERSION = "16"
