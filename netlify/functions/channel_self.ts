@@ -17,8 +17,8 @@ interface DeviceChannel {
 const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   const body = await event.json() as DeviceLink
   if (!body.device_id || !body.app_id) {
-    console.error('Cannot find device or appi_id')
-    return sendRes({ status: 'Cannot find device' }, 400)
+    console.error('Cannot find device_id or appi_id')
+    return sendRes({ status: 'Cannot find device_id or appi_id' }, 400)
   }
   // find device
   const { data: dataDevice, error: dbError } = await supabase
@@ -74,6 +74,57 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   return sendRes()
 }
 
+const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
+  const body = await event.json() as DeviceLink
+  if (!body.device_id || !body.app_id) {
+    console.error('Cannot find device or appi_id')
+    return sendRes({ status: 'Cannot find device_id or appi_id' }, 400)
+  }
+  const { data: dataChannel, error: errorChannel } = await supabase
+    .from<definitions['channels'] & DeviceChannel>('channels')
+    .select()
+    .eq('app_id', body.app_id)
+    .eq('public', true)
+    .single()
+  const { data: dataChannelOverride, error } = await supabase
+    .from<definitions['channel_devices'] & DeviceChannel>('channel_devices')
+    .select(`
+      channel_id (
+        allow_device_self_set,
+        name
+      ),
+    `)
+    .eq('app_id', body.app_id)
+    .eq('device_id', body.device_id)
+    .single()
+  if (error) {
+    return sendRes({
+      error,
+    }, 400)
+  }
+  else if (dataChannelOverride && dataChannelOverride.channel_id) {
+    return sendRes({
+      channel: dataChannelOverride.channel_id.name,
+      status: 'override',
+      allowSet: dataChannelOverride.channel_id.allow_device_self_set,
+    })
+  }
+  if (errorChannel) {
+    return sendRes({
+      error,
+    }, 400)
+  }
+  else if (dataChannel) {
+    return sendRes({
+      channel: dataChannel.name,
+      status: 'default',
+    })
+  }
+  return sendRes({
+    error: 'no channel',
+  }, 400)
+}
+
 export const handler: Handler = async (event) => {
   // eslint-disable-next-line no-console
   console.log(event.httpMethod)
@@ -84,6 +135,8 @@ export const handler: Handler = async (event) => {
 
   if (event.httpMethod === 'POST')
     return post(event, supabase)
+  else if (event.httpMethod === 'GET')
+    return get(event, supabase)
   console.error('Method now allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
