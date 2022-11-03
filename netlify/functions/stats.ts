@@ -7,6 +7,7 @@ interface AppStats {
   platform: string
   action: string
   device_id: string
+  custom_id?: string
   version_name?: string
   plugin_version?: string
   version_os?: string
@@ -30,6 +31,7 @@ export const handler: Handler = async (event) => {
   const device: Partial<definitions['devices'] | definitions['devices_onprem']> = {
     platform: body.platform as definitions['stats']['platform'],
     device_id: body.device_id,
+    custom_id: body.custom_id || '',
     app_id: body.app_id,
     plugin_version: body.plugin_version || '2.3.3',
     os_version: body.version_os,
@@ -73,7 +75,7 @@ export const handler: Handler = async (event) => {
   }
   else {
     console.error('switch to onprem', body.app_id)
-    device.version = body.version_name || 'unknown'
+    device.version = body.version_name || 'unknown' as any
     stat.version = body.version || 0
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
