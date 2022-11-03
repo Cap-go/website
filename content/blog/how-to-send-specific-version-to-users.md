@@ -43,6 +43,21 @@ If you do `npx @capgo/cli@latest upload -c development` then the version land to
 
 Then you have 2 way to let users get the updates from the channel
 
+### Super automatic Way
+
+This can be useful when you don't want to create your own backend for channel set, this is fast to implement.
+
+With that one, the only thing you need to do is allow one of your channel to be self set.
+
+![](/self_set.webp)
+
+And then add this in the code of your app, for best experience use this after user click on button like "register for beta"
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const deviceId = await CapacitorUpdater.setChannel({ channel: 'beta' })
+```
+
 ### Manual way
 
 This can be useful for your internal team, this is fast to implement.
@@ -155,4 +170,3 @@ const res = await axios.get('https://api.capgo.app/device?app_id=YOUR_APP_ID&dev
 
 console.log('data', res.json())
 ```
-
