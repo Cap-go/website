@@ -74,7 +74,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   return sendRes()
 }
 
-const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
+const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
   const body = await event.json() as DeviceLink
   if (!body.device_id || !body.app_id) {
     console.error('Cannot find device or appi_id')
@@ -135,8 +135,8 @@ export const handler: Handler = async (event) => {
 
   if (event.httpMethod === 'POST')
     return post(event, supabase)
-  else if (event.httpMethod === 'GET')
-    return get(event, supabase)
+  else if (event.httpMethod === 'PUT')
+    return put(event, supabase)
   console.error('Method now allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
