@@ -27,7 +27,7 @@ Before continuing with the tutorial…
 
 ## Important about the price
 
-![](/price_github_actions.webp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://github.com/features/actions](https://github.com/features/actions)
 
@@ -74,19 +74,19 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users).
 
-![](/select_user_access.webp)
+![App Store Connect user access](/select_user_access.webp)
 
 3 — Select the API Keys tab.
 
-![](/user_access_keys.webp)
+![App Store Connect API Keys](/user_access_keys.webp)
 
 4 — Click Generate API Key or the Add (+) button.
 
-![](/user_access.webp)
+![App Store Connect API keys create](/user_access.webp)
 
 5 — Enter a name for the key. The name is for your reference only and is not part of the key itself.
 
-![](/gen_key.webp)
+![App Store Connect API keys create name](/gen_key.webp)
 
 6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7).
 
@@ -96,7 +96,7 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 The new key’s name, key ID, a download link, and other information appear on the page.
 
-![](/download_key.webp)
+![App Store Connect download keys](/download_key.webp)
 
 You can grab all three necessary information here.  
 <1> Issue ID.  
@@ -258,12 +258,12 @@ If all went well, you should see something like that:
 
 Generated certificates and provisioning profiles are uploaded to the certificates repository resources
 
-![](/certificates.webp)
+![App Store Connect certificates](/certificates.webp)
 
 
 Lastly, open your `project` in Xcode, and update the provisioning profile for the release configuration of your app.
 
-![](/xcode_cert.webp)
+![XCode certificates](/xcode_cert.webp)
 
 ## Few things to note 💡
 
@@ -273,7 +273,7 @@ For the CI/CD to import the certificates and provisioning profiles, it needs to 
 
 In GitHub, go to **Settings** → **Developer Settings** → **Personal access tokens** → click `Generate New Token` → tick the `repo` scope → then click `Generate token`.
 
-![](/personal_access_token.webp)
+![Create Personal access token](/personal_access_token.webp)
 
 Have a copy of the personal access token generated. You will use it later for the environment variable `GIT_TOKEN`.
 
@@ -314,7 +314,7 @@ This is just an optional parameter to update if you want to save on the build mi
 
 Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore – it’s from your project’s secret. 🤦
 
-![](/github_secets.webp)
+![Set GitHub secrets](/github_secets.webp)
 
 1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams.
 
@@ -425,11 +425,11 @@ Make a _commit_, you should see the active workflow in the repository.
 
 Push the new commits to the branch `main` or `developement` to trigger the workflow.
 
-![](/cd_started.webp)
+![Started with commit](/cd_started.webp)
 
 After a few minutes, the build should be available in your App Store Connect dashboard.
 
-![](/testflight_app.webp)
+![Testflight Dashboard](/testflight_app.webp)
 
 ## Can deploy from local machine?
 
@@ -457,7 +457,7 @@ fastlane/*.env
 
 It should work the same as it happens from GitHub Actions on the remote machine but in our local machine. 🍻
 
-![](/local_fastlane.webp)
+![Local Fastlane run](/local_fastlane.webp)
 
 Terminal execution: $ Fastlane closed\_beta
 

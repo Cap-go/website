@@ -49,7 +49,7 @@ This can be useful when you don't want to create your own backend for channel se
 
 With that one, the only thing you need to do is allow one of your channel to be self set.
 
-![](/self_set.webp)
+![Allow set self in Capgo](/self_set.webp)
 
 And then add this in the code of your app, for best experience use this after user click on button like "register for beta"
 ```js

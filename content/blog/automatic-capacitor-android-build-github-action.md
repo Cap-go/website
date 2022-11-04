@@ -26,7 +26,7 @@ Before continuing with the tutorial…
 
 ## Important about the price
 
-![](/price_github_actions.webp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://github.com/features/actions](https://github.com/features/actions)
 
