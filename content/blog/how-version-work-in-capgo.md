@@ -1,7 +1,7 @@
 ---
 slug: "how-version-work-in-capgo"
 title: How version work in Capgo
-description: Understand how Capgo manage versions in your app, and use it at best.
+description: Understand how Capgo manage versions in your app, and use it at best. Major, minor, patch meaning.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-25

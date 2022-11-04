@@ -1,7 +1,7 @@
 ---
 slug: "how-to-release-major-version-in-capgo"
 title: How to release major version in capgo
-description: Understand how and when it's necessary to release major version
+description: Understand how and when it's necessary to release major version for your app without breaking your user app
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-30
