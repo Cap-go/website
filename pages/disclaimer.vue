@@ -4,7 +4,7 @@ const brand = config.brand
 useHead({
   title: `${brand} | Disclaimer`,
   meta: [
-    { name: 'description', content: 'Disclaimer' },
+    { name: 'description', hid: 'description', content: 'Disclaimer' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })

@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const config = useRuntimeConfig()
+const brand = config.brand
+useHead({
+  title: `${brand} | Imprint`,
+  meta: [
+    { name: 'description', hid: 'description', content: `Find the info of ${brand} compnay here` },
+    { name: 'robots', content: 'noindex, nofollow' },
+  ],
+})
+const domain = config.domain
+</script>
+
 <template>
   <div class="relative bg-indigo-800">
     <div class="absolute inset-0">

@@ -6,7 +6,7 @@ const brand = config.brand
 useHead({
   title: `${brand} | Privacy Policy`,
   meta: [
-    { name: 'description', content: 'Privacy Policy' },
+    { name: 'description', hid: 'description', content: 'Privacy Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })

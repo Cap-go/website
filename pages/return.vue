@@ -5,7 +5,7 @@ const brand = config.brand
 useHead({
   title: `${brand} | Return Policy`,
   meta: [
-    { name: 'description', content: 'Return Policy' },
+    { name: 'description', hid: 'description', content: 'Return Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })

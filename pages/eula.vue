@@ -5,7 +5,7 @@ const brand = config.brand
 useHead({
   title: `${brand} | EULA`,
   meta: [
-    { name: 'description', content: 'End-User License Agreement' },
+    { name: 'description', hid: 'description', content: 'End-User License Agreement' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })

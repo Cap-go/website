@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const config = useRuntimeConfig()
+const brand = config.brand
+useHead({
+  title: `${brand} | Contributing`,
+  meta: [
+    { name: 'description', hid: 'description', content: 'How to contribute to capgo open source' },
+    { name: 'robots', content: 'noindex, nofollow' },
+  ],
+})
+const domain = config.domain
+</script>
+
 <template>
   <div class="prose prose-sm m-auto text-left px-3">
     <p>We welcome and appreciate all contributions to Capgo.</p>

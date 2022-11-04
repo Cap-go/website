@@ -5,7 +5,7 @@ const brand = config.brand
 useHead({
   title: `${brand} | Terms of Service`,
   meta: [
-    { name: 'description', content: 'Terms of Service' },
+    { name: 'description', hid: 'description', content: 'Terms of Service' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
