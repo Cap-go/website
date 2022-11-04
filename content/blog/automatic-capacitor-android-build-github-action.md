@@ -241,7 +241,7 @@ jobs:
           retention-days: 60
 ```
 
-This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions)
+This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/)
 
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app

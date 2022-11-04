@@ -39,7 +39,7 @@ To fix this, I crated the Channel system in Capgo.
 
 `npx @capgo/cli@latest upload -c production` will update to all user (if production channel is set to public)
 
-If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions). 
+If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions/). 
 
 Then you have 2 way to let users get the updates from the channel
 
