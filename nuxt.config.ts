@@ -143,7 +143,8 @@ export default defineNuxtConfig({
       title: name,
       script: [
         {
-          'src': 'https://capgo-pls.digitalshift-ee.workers.dev/js/script.js',
+          'src': 'https://pls.digitalshift-ee.workers.dev/js/script.js',
+          'data-api': 'https://pls.digitalshift-ee.workers.dev/api/event',
           'data-domain': 'capgo.app',
           'async': true,
           'defer': true,
