@@ -34,7 +34,7 @@ const navigation = {
     // { name: 'Jobs', href: '#' },
     // { name: 'Press', href: '#' },
     { name: 'Imprint', href: '/imprint/' },
-    { name: 'Contributing', href: '/contributing' },
+    { name: 'Contributing', href: '/contributing/' },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
