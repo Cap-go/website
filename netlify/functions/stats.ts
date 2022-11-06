@@ -31,10 +31,10 @@ export const handler: Handler = async (event) => {
   const device: Partial<definitions['devices'] | definitions['devices_onprem']> = {
     platform: body.platform as definitions['stats']['platform'],
     device_id: body.device_id,
-    custom_id: body.custom_id || '',
     app_id: body.app_id,
     plugin_version: body.plugin_version || '2.3.3',
     os_version: body.version_os,
+    ...(body.custom_id ? { custom_id: body.custom_id } : {}),
   }
 
   const stat: Partial<definitions['stats']> = {

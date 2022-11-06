@@ -157,7 +157,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       device_id,
       plugin_version,
       version: version.id,
-      custom_id,
+      ...(custom_id ? { custom_id } : {}),
       version_build,
       os_version: version_os,
       platform: platform as definitions['devices']['platform'],
