@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { crispLoader } from '~~/services/crisp'
+
 const config = useRuntimeConfig()
 const brand = config.brand
 
+crispLoader()
 const shortNumber = (number: number) => {
   if (number > 1000000)
     return `${(number / 1000000).toFixed(1)}M`

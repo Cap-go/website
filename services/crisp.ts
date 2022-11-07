@@ -29,6 +29,7 @@ export const crispLoader = () => {
         'message:received',
         () => {
           window.$crisp.push(['do', 'chat:show'])
+          window.$crisp.push(['do', 'chat:open'])
         },
       ])
   }
