@@ -43,7 +43,7 @@ Where Capgo find the version to compare
 
 This is how Capgo channel will behave if you didn't change any settings.
 
-> This behavior will be base on the unique channel you made public.
+> This behavior will be base on the unique channel you made default.
 
 ### When Fresh installation of your app
 When user did download your app for the first time and open the app it contacts Capgo server.

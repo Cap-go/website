@@ -142,7 +142,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       .single()
 
     if (dbError || !channelData) {
-      console.error(id, 'Cannot get channel', app_id, `no public channel ${JSON.stringify(dbError)}`)
+      console.error(id, 'Cannot get channel', app_id, `no default channel ${JSON.stringify(dbError)}`)
       return sendRes({
         message: 'Cannot get channel',
         err: `no public channel ${JSON.stringify(dbError)}`,

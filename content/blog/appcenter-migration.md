@@ -129,11 +129,11 @@ Check in [Capgo](https://web.capgo.app/) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
-### Make channel public
+### Make channel default
 
-After you have sent your app to Capgo, you need to make your channel `public` to let apps receive updates from Capgo.
+After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
 
-`npx @capgo/cli@latest set -c production -s public`
+`npx @capgo/cli@latest set -c production -s default`
 
 ## Configure app to validate updates
 
