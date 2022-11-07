@@ -88,7 +88,7 @@ const navigation = {
       }),
     },
     {
-      name: 'Build in public in Twitter',
+      name: 'Build in public on Twitter',
       href: 'https://twitter.com/Capgo_app',
       icon: defineComponent({
         render: () =>
