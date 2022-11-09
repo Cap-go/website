@@ -113,7 +113,7 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: pnpm/action-setup@v2
         with:
           version: 6.22.2
       - name: Install dependencies
