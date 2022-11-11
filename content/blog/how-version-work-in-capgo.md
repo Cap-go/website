@@ -59,18 +59,18 @@ Currently, 4 outputs can happen:
 #### Disable auto-downgrade under native
 
 If you change this setting to false, Capgo will consider is always the trustable source of the version.
-Currently, if :
+Then the behavior become :
 - The native version (1.2.4) is higher than Capgo version (1.2.3)
 
-Capgo send his version to the user.
+> Capgo send his version to the user.
 
 #### Disable auto-upgrade above major
 
 If you change this setting to false, Capgo will consider upgrade to MAJOR is not an issue.
-Currently, if :
+Then the behavior become :
 - The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3)
 
-Capgo send his version to the user.
+> Capgo send his version to the user.
 
 ## JavaScript version
 
@@ -91,7 +91,7 @@ When you publish your app on the App Store, what happen is simple.
 
 Your user will get the new version from the store and remove all local update in their app by default.
 
-If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](https://docs.capgo.app/plugin/auto-update/cloud#advanced-settings)
+If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](https://docs.capgo.app/plugin/api#settings)
 
 This can only be change on the app side, not from cloud like other settings.
 
@@ -108,4 +108,3 @@ Yon can link one deviceID to:
 This will bypass all settings done above.
 
 Learn more about it on the article below.
-
