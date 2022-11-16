@@ -1,13 +1,13 @@
 ---
 slug: "how-version-work-in-capgo"
 title: How version work in Capgo
-description: Understand how Capgo manage versions in your app, and use it at best. Major, minor, patch meaning.
+description: Understand how Capgo manage versions in your app, and use it at best. Learn the meaning of major, minor, patch.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-25
 updated_at: 2022-08-25
 head_image: "/versionning.webp"
-head_image_alt: Capgo version system
+head_image_alt: Capgo bundle version system
 tag: Tutorial
 published: true
 next_blog: "how-to-release-major-version-in-capgo"
@@ -49,10 +49,10 @@ This is how Capgo channel will behave if you didn't change any settings.
 When user did download your app for the first time and open the app it contacts Capgo server.
 
 Currently, 4 outputs can happen:
-  - The native version (1.2.3) is lower than Capgo version (1.2.4), Capgo send his version to the user.
-  - The native version (1.2.3) is equal to Capgo version (1.2.3), Capgo send “no need to update”.
-  - The native version (1.2.4) is higher than Capgo version (1.2.3), Capgo send “no need to update”.
-  - The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3), Capgo send “no need to update”.
+  - The native bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
+  - The native bundle version (1.2.3) is equal to Capgo bundle version (1.2.3), Capgo send “no need to update”.
+  - The native bundle version (1.2.4) is higher than Capgo bundle version (1.2.3), Capgo send “no need to update”.
+  - The native bundle version (1.2.3) is MAJOR lower than Capgo bundle version (2.2.3), Capgo send “no need to update”.
 
 ### Other settings
 
@@ -72,18 +72,18 @@ Then the behavior become :
 
 > Capgo send his version to the user.
 
-## JavaScript version
+## JavaScript bundle version
 
-The native version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
+The javascript bundle version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
 
-If you didn't use the option `--version 1.2.3`, Capgo will get the version from your `package.json` file.
+If you didn't use the option `--bundle 1.2.3`, Capgo will get the bundle version from your `package.json` file (in the version key).
 
 After Your app has installed one version from Capgo, this is this version who will be compared for:
-  - Their JavaScript version (1.2.3) is lower than Capgo version (1.2.4), Capgo send his version to the user.
+  - Their JavaScript bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
 
 With some guard conditions:
-  - If native version is higher than Capgo version, the `Disable auto downgrade under native` condition is applied.
-  - If native version is MAJOR lower than Capgo version, the `Disable auto upgrade above major` condition is applied.
+  - If native bundle version is higher than Capgo version, the `Disable auto downgrade under native` condition is applied.
+  - If native bundle version is MAJOR lower than Capgo version, the `Disable auto upgrade above major` condition is applied.
 
 ## App store update
 
@@ -102,7 +102,7 @@ After all this behavior, you can have above that some specific one liked to the 
 In Capgo, you can decide to override the behavior for each deviceID.
 
 Yon can link one deviceID to:
-  - a specific version
+  - a specific bundle version
   - a specific channel
 
 This will bypass all settings done above.
