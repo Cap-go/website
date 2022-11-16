@@ -95,7 +95,7 @@ export const updateOrCreateDevice = async (supabase: SupabaseClient, update: Par
 
 export const isGoodPlan = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
-    .rpc<boolean>('is_good_plan', { userid: userId })
+    .rpc<boolean>('is_good_plan_v2', { userid: userId })
     .single()
   if (error)
     throw error
