@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { isGoodPlan, isTrial, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
@@ -149,8 +149,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       }, 200)
     }
     let channel = channelData
-    const trial = await isTrial(supabase, channel.created_by)
-    const paying = await isGoodPlan(supabase, channel.created_by)
+    const planValid = await checkPlanValid(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     await updateOrCreateDevice(supabase, {
       app_id,
@@ -163,7 +162,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       platform: platform as definitions['devices']['platform'],
       updated_at: new Date().toISOString(),
     })
-    if (!paying && !trial) {
+    if (!planValid) {
       await sendStats(supabase, 'needUpgrade', platform, device_id, app_id, version_build, version.id)
       console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({

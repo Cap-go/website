@@ -113,6 +113,23 @@ export const isTrial = async (supabase: SupabaseClient, userId: string): Promise
   return data || 0
 }
 
+export const isPaying = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
+  const { data, error } = await supabase
+    .rpc<boolean>('is_paying', { userid: userId })
+    .single()
+  if (error)
+    throw error
+
+  return data || false
+}
+
+export const checkPlanValid = async (supabase: SupabaseClient, userId: string) => {
+  const validPlan = await isGoodPlan(supabase, userId)
+  const paying = await isPaying(supabase, userId)
+  const trialDays = await isTrial(supabase, userId)
+  return ((!paying || !validPlan) && trialDays < 0)
+}
+
 export const sendStats = async (supabase: SupabaseClient, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
   const stat: Partial<definitions['stats']> = {
     platform: platform as definitions['stats']['platform'],
