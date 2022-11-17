@@ -13,6 +13,7 @@ const ipapi = async (ip: string, lang = 'en') => {
 
   return res.data
 }
+
 export const invalidIps = async (ips: string[]) => {
   // check all ip an return true if one is from google
   for (const ip of ips) {
