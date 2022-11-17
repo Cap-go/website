@@ -127,7 +127,7 @@ export const checkPlanValid = async (supabase: SupabaseClient, userId: string) =
   const validPlan = await isGoodPlan(supabase, userId)
   const paying = await isPaying(supabase, userId)
   const trialDays = await isTrial(supabase, userId)
-  return ((!paying || !validPlan) && trialDays < 0)
+  return (paying && validPlan) || (!paying && trialDays < 0)
 }
 
 export const sendStats = async (supabase: SupabaseClient, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
