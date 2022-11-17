@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const ipapi = async (ip: string, lang = 'en') => {
   ip = ip || ''
   lang = lang || 'en'
@@ -7,9 +9,9 @@ const ipapi = async (ip: string, lang = 'en') => {
   if (!langs.includes(lang))
     throw new Error(`unknown language, supported ones are: ${langs.join(', ')}`)
 
-  const data = await fetch(`http://ip-api.com/json/${ip}?lang=${lang}&fields=66842623`)
+  const res = await axios(`http://ip-api.com/json/${ip}?lang=${lang}&fields=66842623`)
 
-  return data.json()
+  return res.data
 }
 export const invalidIps = async (ips: string[]) => {
   // check all ip an return true if one is from google
