@@ -3,6 +3,7 @@ import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
+import { invalidIp } from '../services/invalids_ip'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 interface Channel {
@@ -151,6 +152,15 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     let channel = channelData
     const planValid = await checkPlanValid(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
+    const xForwardedFor = event.headers['x-forwarded-for'] || ''
+    // check if version is created_at more than 4 hours
+    const isOlderEnought = (new Date(version.created_at || Date.now()).getTime() + 4 * 60 * 60 * 1000) < Date.now()
+
+    if (!isOlderEnought && await invalidIp(xForwardedFor.split(',')[0])) {
+      console.error('invalid ip', xForwardedFor)
+      await sendStats(supabase, 'invalidIP', platform, device_id, app_id, version_build, version.id)
+      return sendRes({ message: 'invalid ip' }, 400)
+    }
     await updateOrCreateDevice(supabase, {
       app_id,
       device_id,
@@ -286,7 +296,9 @@ export const handler: Handler = async (event) => {
 
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
 
-  if (event.httpMethod === 'POST') { return post(id, event, supabase) }
+  if (event.httpMethod === 'POST') {
+    return post(id, event, supabase)
+  }
   else if (event.httpMethod === 'GET') {
     const {
       cap_version_name,
