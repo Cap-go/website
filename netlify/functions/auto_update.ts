@@ -15,12 +15,14 @@ interface ChannelDev {
 interface AppInfos {
   version_name: string
   version_build: string
-  custom_id?: string
   version_os: string
   plugin_version: string
   platform: string
   app_id: string
   device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
 }
 
 export const post = async (id: string, event: any, supabase: SupabaseClient) => {
@@ -34,7 +36,9 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   const {
     platform,
     app_id,
-    custom_id = '',
+    custom_id,
+    is_prod,
+    is_emulator,
     version_os,
     device_id,
   } = body
@@ -167,6 +171,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       plugin_version,
       version: version.id,
       ...(custom_id ? { custom_id } : {}),
+      ...(is_emulator !== undefined ? { is_emulator } : {}),
+      ...(is_prod !== undefined ? { is_prod } : {}),
       version_build,
       os_version: version_os,
       platform: platform as definitions['devices']['platform'],

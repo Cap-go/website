@@ -7,13 +7,15 @@ interface AppStats {
   platform: string
   action: string
   device_id: string
-  custom_id?: string
   version_name?: string
   plugin_version?: string
   version_os?: string
   version: number
   version_build: string
   app_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
 }
 
 export const handler: Handler = async (event) => {
@@ -35,6 +37,8 @@ export const handler: Handler = async (event) => {
     plugin_version: body.plugin_version || '2.3.3',
     os_version: body.version_os,
     ...(body.custom_id ? { custom_id: body.custom_id } : {}),
+    ...(body.is_emulator !== undefined ? { is_emulator: body.is_emulator } : {}),
+    ...(body.is_prod !== undefined ? { is_prod: body.is_prod } : {}),
   }
 
   const stat: Partial<definitions['stats']> = {
