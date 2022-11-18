@@ -31,16 +31,16 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   let {
     version_name,
     version_build,
-    plugin_version,
   } = body
   const {
     platform,
     app_id,
-    custom_id,
-    is_prod,
-    is_emulator,
     version_os,
     device_id,
+    plugin_version = '2.3.3',
+    custom_id,
+    is_emulator = false,
+    is_prod = true,
   } = body
   // if version_build is not semver, then make it semver
   const coerce = semver.coerce(version_build)
@@ -49,7 +49,6 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   else
     return sendRes({ message: `Native version: ${version_build} doesn't follow semver convention, please follow https://semver.org to allow Capgo compare version number` }, 400)
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
-  plugin_version = plugin_version || '2.3.3'
   try {
     if (!app_id || !device_id || !version_build || !version_name || !platform) {
       console.error(id, 'Cannot get all headers', platform,
@@ -179,7 +178,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       updated_at: new Date().toISOString(),
     })
     if (!planValid) {
-      await sendStats(supabase, 'needUpgrade', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'needPlanUpgrade', platform, device_id, app_id, version_build, version.id)
       console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({
         message: 'Cannot update, upgrade plan to continue to update',
@@ -228,22 +227,22 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
 
     if (!devicesOverride && !channel.ios && platform === 'ios') {
       // eslint-disable-next-line no-console
-      console.log(id, 'Cannot upgrade ios it\t disabled', device_id)
+      console.log(id, 'Cannot update ios is disabled', device_id)
       await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, version.id)
       return sendRes({
         major: true,
-        message: 'Cannot upgrade ios it\t disabled',
+        message: 'Cannot update ios is disabled',
         version: version.name,
         old: version_name,
       }, 200)
     }
     if (!devicesOverride && !channel.android && platform === 'android') {
       // eslint-disable-next-line no-console
-      console.log(id, 'Cannot upgrade android it\t disabled', device_id)
+      console.log(id, 'Cannot update, android is disabled', device_id)
       await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, version.id)
       return sendRes({
         major: true,
-        message: 'Cannot upgrade android it\t disabled',
+        message: 'Cannot update, android is disabled',
         version: version.name,
         old: version_name,
       }, 200)
@@ -252,22 +251,44 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     if (!devicesOverride && channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
       await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
-      console.log(id, 'Cannot upgrade major version', device_id)
+      console.log(id, 'Cannot update major version', device_id)
       return sendRes({
         major: true,
-        message: 'Cannot upgrade major version',
+        message: 'Cannot update major version',
         version: version.name,
         old: version_name,
       }, 200)
     }
-    // eslint-disable-next-line no-console
-    console.log(id, 'check disableAutoUpdateUnderNative', device_id)
+
+    // console.log(id, 'check disableAutoUpdateUnderNative', device_id)
     if (!devicesOverride && channel.disableAutoUpdateUnderNative && semver.lt(version.name, version_build)) {
       await sendStats(supabase, 'disableAutoUpdateUnderNative', platform, device_id, app_id, version_build, version.id)
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot revert under native version', device_id)
       return sendRes({
         message: 'Cannot revert under native version',
+        version: version.name,
+        old: version_name,
+      }, 200)
+    }
+    if (!devicesOverride && !channel.allow_dev && !is_prod) {
+      // eslint-disable-next-line no-console
+      console.log(id, 'Cannot update dev build is disabled', device_id)
+      await sendStats(supabase, 'disableDevBuild', platform, device_id, app_id, version_build, version.id)
+      return sendRes({
+        major: true,
+        message: 'Cannot update, dev build is disabled',
+        version: version.name,
+        old: version_name,
+      }, 200)
+    }
+    if (!devicesOverride && !channel.allow_emulator && is_emulator) {
+      // eslint-disable-next-line no-console
+      console.log(id, 'Cannot update emulator is disabled', device_id)
+      await sendStats(supabase, 'disableEmulator', platform, device_id, app_id, version_build, version.id)
+      return sendRes({
+        major: true,
+        message: 'Cannot update, emulator is disabled',
         version: version.name,
         old: version_name,
       }, 200)
