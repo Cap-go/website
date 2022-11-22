@@ -18,6 +18,8 @@ While many enterprises leverage, the Live Updates SDK to pull down the latest Ja
 
 That means no more app store delays, quicker bug fixes and content changes, and ensuring your users are always on the app’s latest version.
 
+I’ve also heard time and time again – large enterprises want to use Live Updates, but strict compliance standards get in the way. Until now.
+
 ## How do self-hosted live updates work?
 Capgo-hosted Live Updates can be configured and deployed easily in Capgo with the Capgo SDK. For Self-hosted Live Updates, I’ve added functionality to the Capgo CLI for configuration on your infrastructure.
 
