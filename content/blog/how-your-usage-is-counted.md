@@ -41,7 +41,7 @@ You can see both in your account in the home page:
 - in the chart is the second method
 - in the table of apps is the first method.
 
-> Capgo count emulator and dev build in your usage, disable emulator and dev build in your default channel, after you have done your tests.
+> Capgo don't count emulator and dev build in your usage. Keep in mind after the trial you can't have more than 3% of them, or that will lock your account, until you fix it.
 
 > Capgo is also doing some filtering for you. If you have CI/CD configured to send your version to Google PLAY, Google is running your app each time to 20+ real device. During the 4 first hours of a new bundle, we block Google data center IP to prevent them to be counted.
 
