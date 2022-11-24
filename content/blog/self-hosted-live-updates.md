@@ -4,10 +4,10 @@ title: Self-hosted Live Updates
 description: I'm excited to announce Self-hosted Live Updates, the next iteration of Capgo’s Live Updates!
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2022-11-22
-updated_at: 2022-11-22
-head_image: "/appflow_alt.webp"
-head_image_alt: Appflow alternative illustration
+created_at: 2022-11-26
+updated_at: 2022-11-26
+head_image: "/secure_upload.webp"
+head_image_alt: Secure upload EAS
 tag: Solution
 published: false
 next_blog: ""
