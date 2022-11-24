@@ -9,7 +9,7 @@ created_at: 2022-03-02
 updated_at: 2022-03-02
 head_image: "/appflow_alt.webp"
 head_image_alt: Appflow alternative illustration
-tag: alternatives
+tag: Alternatives
 published: true
 next_blog: ""
 

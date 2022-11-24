@@ -8,7 +8,7 @@ created_at: 2022-04-08
 updated_at: 2022-04-08
 head_image: "/license_change.webp"
 head_image_alt: license change illustration
-tag: license
+tag: License
 published: false
 next_blog: ""
 

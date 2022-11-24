@@ -9,7 +9,7 @@ created_at: 2022-03-21
 updated_at: 2022-03-21
 head_image: "/capgo-feature-image.webp"
 head_image_alt: Capgo logo illustration
-tag: alternatives
+tag: Alternatives
 published: true
 next_blog: ""
 

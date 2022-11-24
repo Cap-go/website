@@ -9,7 +9,7 @@ created_at: 2022-03-22
 updated_at: 2022-03-22
 head_image: "/migrate_appcenter.webp"
 head_image_alt: Capacitor Dev looking for alternative
-tag: migration
+tag: Migration
 published: true
 next_blog: "automatic-build-and-release-with-github-actions"
 
