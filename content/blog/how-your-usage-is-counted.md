@@ -29,15 +29,31 @@ When the app does that, it sends little information, including the most importan
 
 `DeviceID`: is a unique ID (UUID) define by the OS of the device, this ID is unique by app install.
 
-Each time your account receive a new Device ID, it adds one to the chart.
+Each time your account receive a new Device ID, it saved in database.
 Each time an old `DeviceID` request an update (app open), it got is record updated (updated_at in the database).
-This count as well as active device.
+
+This data is saved in 2 places:
+- device table with `update_at` value
+- app_stats with daily counter who represent the number of device who became active today and haven't been active this month.
+
+For plan limit the first method is used because it's 100% reliable, for display the chart the second one is used.
+You can see both in your account in the home page:
+- in the chart is the second method
+- in the table of apps is the first method.
 
 > One way for you to reduce your usage is to disable emulator and dev build in your default channel, after you have done your tests.
 
 > Capgo is also doing some filtering for you. If you have CI/CD configured to send your version to Google PLAY, Google is running your app each time to 20+ real device. During the 4 first hours of a new bundle, we block Google data center IP to prevent them to be counted.
 
 Each month, this data start from zero.
+
+
+- Create or update a device in my database at each device request
+- Add to a daily counter the number of active device who haven't been active this month.
+the first method return : 900+ users
+while the second one is at 200+ users on your account
+For plan limit i use the first method who is 100% reliable and for display the chart i use the second one.
+You can see both on your account home page.
 
 ## Storage
 
