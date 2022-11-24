@@ -58,26 +58,24 @@ export const handler: Handler = async (event) => {
   if (data && data.length && !error) {
     stat.version = data[0].id
     device.version = data[0].id
-    if (!device.is_emulator && device.is_prod) {
-      const { data: deviceData, error: deviceError } = await supabase
-        .from<definitions['devices']>(deviceDb)
-        .select()
-        .eq('app_id', body.app_id)
-        .eq('device_id', body.device_id)
-        .single()
-      if (deviceData && !deviceError) {
-        all.push(updateVersionStats(supabase, {
-          app_id: body.app_id,
-          version_id: deviceData.version,
-          devices: -1,
-        }))
-      }
+    const { data: deviceData, error: deviceError } = await supabase
+      .from<definitions['devices']>(deviceDb)
+      .select()
+      .eq('app_id', body.app_id)
+      .eq('device_id', body.device_id)
+      .single()
+    if (deviceData && !deviceError) {
       all.push(updateVersionStats(supabase, {
         app_id: body.app_id,
-        version_id: data[0].id,
-        devices: 1,
+        version_id: deviceData.version,
+        devices: -1,
       }))
     }
+    all.push(updateVersionStats(supabase, {
+      app_id: body.app_id,
+      version_id: data[0].id,
+      devices: 1,
+    }))
   }
   else {
     console.error('switch to onprem', body.app_id)
