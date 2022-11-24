@@ -37,8 +37,8 @@ export const handler: Handler = async (event) => {
     plugin_version: body.plugin_version || '2.3.3',
     os_version: body.version_os,
     ...(body.custom_id ? { custom_id: body.custom_id } : {}),
-    ...(body.is_emulator !== undefined ? { is_emulator: body.is_emulator } : {}),
-    ...(body.is_prod !== undefined ? { is_prod: body.is_prod } : {}),
+    is_emulator: body.is_emulator === undefined ? false : body.is_emulator,
+    is_prod: body.is_prod === undefined ? true : body.is_prod,
   }
 
   const stat: Partial<definitions['stats']> = {
@@ -58,22 +58,24 @@ export const handler: Handler = async (event) => {
   if (data && data.length && !error) {
     stat.version = data[0].id
     device.version = data[0].id
-    all.push(updateVersionStats(supabase, {
-      app_id: body.app_id,
-      version_id: data[0].id,
-      devices: 1,
-    }))
-    const { data: deviceData, error: deviceError } = await supabase
-      .from<definitions['devices']>(deviceDb)
-      .select()
-      .eq('app_id', body.app_id)
-      .eq('device_id', body.device_id)
-      .single()
-    if (deviceData && !deviceError) {
+    if (!device.is_emulator && device.is_prod) {
+      const { data: deviceData, error: deviceError } = await supabase
+        .from<definitions['devices']>(deviceDb)
+        .select()
+        .eq('app_id', body.app_id)
+        .eq('device_id', body.device_id)
+        .single()
+      if (deviceData && !deviceError) {
+        all.push(updateVersionStats(supabase, {
+          app_id: body.app_id,
+          version_id: deviceData.version,
+          devices: -1,
+        }))
+      }
       all.push(updateVersionStats(supabase, {
         app_id: body.app_id,
-        version_id: deviceData.version,
-        devices: -1,
+        version_id: data[0].id,
+        devices: 1,
       }))
     }
   }
