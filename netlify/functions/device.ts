@@ -10,9 +10,12 @@ interface DeviceLink {
   version_id?: string
   channel?: string
 }
+
+const fetchLimit = 50
 interface GetDevice {
   app_id: string
   device_id?: string
+  page?: number
 }
 interface DeviceVersion {
   version: definitions['app_versions']
@@ -47,6 +50,8 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
           plugin_version,
           os_version,
           version_build,
+          is_emulator,
+          is_prod
       `)
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
@@ -59,10 +64,33 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
   else {
     // get all devices
+    const fetchOffset = body.page === undefined ? 0 : body.page
+    const from = fetchOffset * fetchLimit
+    const to = (fetchOffset + 1) * fetchLimit - 1
+    //  page 0 from = 0 to = 49 [0,1,...,49]
+    //  page 1 from = 50 to = 99 [50,51,...,99]
+    //  page 2 from = 100 to = 149 [100,101,...,149]
     const { data: dataDevices, error: dbError } = await supabase
       .from<definitions['devices']>('devices')
-      .select()
+      .select(`
+          created_at,
+          updated_at,
+          device_id,
+          version (
+            name,
+            id
+          ),
+          app_id,
+          platform,
+          plugin_version,
+          os_version,
+          version_build,
+          is_emulator,
+          is_prod
+      `)
       .eq('app_id', body.app_id)
+      .range(from, to)
+      .order('created_at', { ascending: true })
     if (dbError || !dataDevices || !dataDevices.length)
       return sendRes([])
     return sendRes(dataDevices)
