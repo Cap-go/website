@@ -74,8 +74,8 @@ export const get = async (event: any, supabase: SupabaseClient) => {
           public,
           disableAutoUpdateUnderNative,
           disableAutoUpdateToMajor,
-          is_emulator,
-          is_prod,
+          allow_emulator,
+          allow_dev,
           version (
             name,
             id
