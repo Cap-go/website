@@ -5,7 +5,6 @@ import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar
 import type { definitions } from '../../types/supabase'
 
 interface Version {
-  appid?: string
   app_id?: string
 }
 export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
@@ -17,7 +16,7 @@ export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
 
   const body = JSON.parse(event.body || '{}') as Version
 
-  if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
     console.error('You can\'t access this app', body.app_id)
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
@@ -27,7 +26,7 @@ export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
       .update({
         deleted: true,
       })
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.app_id)
     if (dbError) {
       console.error('Cannot delete version')
       return sendRes({ status: 'Cannot delete version', error: JSON.stringify(dbError) }, 400)
@@ -49,7 +48,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
 
   try {
     const body = event.queryStringParameters as any as Version
-    if (!(body.appid || body.app_id)) {
+    if (!body.app_id) {
       console.error('Missing app_id')
       return sendRes({ status: 'Missing app_id' }, 400)
     }
@@ -60,14 +59,14 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       console.error('Cannot Verify User')
       return sendRes({ status: 'Cannot Verify User' }, 400)
     }
-    if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
-      console.error('You can\'t check this app', body.appid || body.app_id)
-      return sendRes({ status: 'You can\'t check this app', app_id: body.appid || body.app_id }, 400)
+    if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
+      console.error('You can\'t check this app', body.app_id)
+      return sendRes({ status: 'You can\'t check this app', app_id: body.app_id }, 400)
     }
     const { data: dataVersions, error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.app_id)
       .eq('deleted', false)
       .order('created_at', { ascending: false })
     if (dbError || !dataVersions || !dataVersions.length) {

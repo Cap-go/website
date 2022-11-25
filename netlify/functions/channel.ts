@@ -5,14 +5,12 @@ import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar
 import type { definitions } from '../../types/supabase'
 
 interface ChannelSet {
-  appid?: string
   app_id?: string
   channel: string
   version?: string
   public?: boolean
 }
 interface GetDevice {
-  appid?: string
   app_id?: string
   channel?: string
 }
@@ -25,7 +23,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
   }
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!(body.appid || body.app_id) || !(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
+  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
     console.error('You can\'t access this app', body.app_id)
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
@@ -34,7 +32,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
     const { data: dataChannel, error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .select()
-      .eq('app_id', body.appid || body.app_id || '')
+      .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
     if (dbError || !dataChannel || !dataChannel.length) {
       console.error('Cannot find channel')
@@ -46,7 +44,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
     const { data: dataChannels, error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .select()
-      .eq('app_id', body.appid || body.app_id || '')
+      .eq('app_id', body.app_id || '')
     if (dbError || !dataChannels || !dataChannels.length)
       return sendRes([])
     return sendRes(dataChannels)
@@ -62,7 +60,7 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
-  if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
     console.error('You can\'t access this app', body.app_id)
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
@@ -70,7 +68,7 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
     const { error: dbError } = await supabase
       .from<definitions['channels']>('channels')
       .delete()
-      .eq('app_id', body.appid || body.app_id || '')
+      .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
     if (dbError) {
       console.error('Cannot delete channel')
@@ -93,20 +91,20 @@ export const post = async (event: any, supabase: SupabaseClient) => {
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
-  if (!(await checkAppOwner(apikey.user_id, body.appid || body.app_id, supabase))) {
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
     console.error('You can\'t access this app', body.app_id)
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   const channel: Partial<definitions['channels']> = {
     created_by: apikey.user_id,
-    app_id: body.appid || body.app_id,
+    app_id: body.app_id,
     name: body.channel,
   }
   if (body.version) {
     const { data, error: vError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()
-      .eq('app_id', body.appid || body.app_id)
+      .eq('app_id', body.app_id)
       .eq('name', body.version)
       .eq('user_id', apikey.user_id)
       .eq('deleted', false)
