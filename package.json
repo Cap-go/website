@@ -22,7 +22,7 @@
     "vue-meta": "^2.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.31.0",
+    "@antfu/eslint-config": "^0.32.0",
     "@iconify-json/carbon": "^1.1.10",
     "@iconify-json/twemoji": "^1.1.5",
     "@nuxt/content": "^2.2.2",
