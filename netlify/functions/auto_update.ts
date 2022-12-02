@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { checkPlan, checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { invalidIp } from '../services/invalids_ip'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
@@ -86,6 +86,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
           id,
           name,
           checksum,
+          session_key,
           user_id,
           bucket_id,
           external_url
@@ -115,6 +116,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
             id,
             name,
             checksum,
+            session_key,
             user_id,
             bucket_id,
             external_url
@@ -138,6 +140,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
           id,
           name,
           checksum,
+          session_key,
           user_id,
           bucket_id,
           external_url
@@ -156,6 +159,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     }
     let channel = channelData
     const planValid = await checkPlanValid(supabase, channel.created_by)
+    await checkPlan(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     const xForwardedFor = event.headers['x-forwarded-for'] || ''
     // check if version is created_at more than 4 hours
@@ -303,7 +307,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     console.log(id, 'New version available', app_id, version.name, signedURL)
     return sendRes({
       version: version.name,
-      ...(version.checksum ? { checksum: version.checksum } : {}),
+      session_key: version.session_key,
+      checksum: version.checksum,
       url: signedURL,
     })
   }
