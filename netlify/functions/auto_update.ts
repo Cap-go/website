@@ -33,10 +33,15 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   } = body
   // if version_build is not semver, then make it semver
   const coerce = semver.coerce(version_build)
-  if (coerce)
+  if (coerce) {
     version_build = coerce.version
-  else
-    return sendRes({ message: `Native version: ${version_build} doesn't follow semver convention, please follow https://semver.org to allow Capgo compare version number` }, 400)
+  }
+  else {
+    return sendRes({
+      message: `Native version: ${version_build} doesn't follow semver convention, please follow https://semver.org to allow Capgo compare version number`,
+      error: 'semver_error',
+    }, 400)
+  }
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
   try {
     if (!app_id || !device_id || !version_build || !version_name || !platform) {
@@ -46,7 +51,10 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         custom_id,
         version_build,
         version_name)
-      return sendRes({ message: 'missing app_id' }, 400)
+      return sendRes({
+        message: 'Cannot find device_id or appi_id',
+        error: 'missing_info',
+      }, 400)
     }
     // eslint-disable-next-line no-console
     console.log(id, 'Headers', platform,
@@ -142,8 +150,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     if (dbError || !channelData) {
       console.error(id, 'Cannot get channel', app_id, `no default channel ${JSON.stringify(dbError)}`)
       return sendRes({
-        message: 'Cannot get channel',
-        err: `no public channel ${JSON.stringify(dbError)}`,
+        message: `no public channel ${JSON.stringify(dbError)}`,
+        error: 'channel_not_found',
       }, 200)
     }
     let channel = channelData
@@ -157,7 +165,10 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     if (!isOlderEnought && await invalidIp(xForwardedFor.split(',')[0])) {
       console.error('invalid ip', xForwardedFor)
       await sendStats(supabase, 'invalidIP', platform, device_id, app_id, version_build, version.id)
-      return sendRes({ message: 'invalid ip' }, 400)
+      return sendRes({
+        message: `invalid ip ${xForwardedFor}`,
+        error: 'invalid_ip',
+      }, 400)
     }
     await updateOrCreateDevice(supabase, {
       app_id,
@@ -177,7 +188,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({
         message: 'Cannot update, upgrade plan to continue to update',
-        err: 'not good plan',
+        error: 'not_good_plan',
       }, 200)
     }
     if (channelOverride) {
@@ -196,6 +207,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       console.error(id, 'Cannot get zip file', app_id)
       return sendRes({
         message: 'Cannot get zip file',
+        error: 'zip_not_found',
       }, 200)
     }
 
@@ -217,6 +229,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       console.log(id, 'No new version available', device_id, version_name, version.name)
       return sendRes({
         message: 'No new version available',
+        error: 'no_new_version',
       }, 200)
     }
 
@@ -227,6 +240,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       return sendRes({
         major: true,
         message: 'Cannot update ios is disabled',
+        error: 'disabled_platform_ios',
         version: version.name,
         old: version_name,
       }, 200)
@@ -238,6 +252,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       return sendRes({
         major: true,
         message: 'Cannot update, android is disabled',
+        error: 'disable_platform_android',
         version: version.name,
         old: version_name,
       }, 200)
@@ -250,6 +265,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       return sendRes({
         major: true,
         message: 'Cannot update major version',
+        error: 'disable_auto_update_to_major',
         version: version.name,
         old: version_name,
       }, 200)
@@ -262,6 +278,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       console.log(id, 'Cannot revert under native version', device_id)
       return sendRes({
         message: 'Cannot revert under native version',
+        error: 'disable_auto_update_under_native',
         version: version.name,
         old: version_name,
       }, 200)
@@ -273,6 +290,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       return sendRes({
         major: true,
         message: 'Cannot update, dev build is disabled',
+        error: 'disable_dev_build',
         version: version.name,
         old: version_name,
       }, 200)
@@ -284,6 +302,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       return sendRes({
         major: true,
         message: 'Cannot update, emulator is disabled',
+        error: 'disable_emulator',
         version: version.name,
         old: version_name,
       }, 200)
@@ -304,8 +323,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
   catch (e) {
     console.error(id, 'error', app_id, e)
     return sendRes({
-      message: 'Cannot get latest version',
-      err: `${e}!`,
+      message: `Cannot get latest version ${e}!`,
+      error: 'cannot_get_latest_version',
     }, 500)
   }
 }
@@ -344,5 +363,5 @@ export const handler: Handler = async (event) => {
     return post(id, event, supabase)
   }
   console.error(id, 'Method not allowed')
-  return sendRes({ status: 'Method now allowed' }, 400)
+  return sendRes({ message: 'Method now allowed', error: 'not_allowed' }, 400)
 }
