@@ -80,7 +80,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       return sendRes({ status: 'Cannot get bundles', error: dbError }, 400)
     }
 
-    return sendRes({ versions: dataBundles, bundles: dataBundles })
+    return sendRes(dataBundles)
   }
   catch (e) {
     console.error('Cannot get bundles', e)
