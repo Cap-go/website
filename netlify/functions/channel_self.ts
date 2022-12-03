@@ -52,6 +52,8 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   const { data: dataChannelOverride } = await supabase
     .from<definitions['channel_devices'] & DeviceChannel>('channel_devices')
     .select(`
+      app_id,
+      device_id,
       channel_id (
         allow_device_self_set,
         name
@@ -161,9 +163,11 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
     .eq('app_id', app_id)
     .eq('public', true)
     .single()
-  const { data: dataChannelOverride, error } = await supabase
+  const { data: dataChannelOverride } = await supabase
     .from<definitions['channel_devices'] & DeviceChannel>('channel_devices')
     .select(`
+      app_id,
+      device_id,
       channel_id (
         allow_device_self_set,
         name
@@ -172,12 +176,7 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
-  if (error) {
-    return sendRes({
-      error,
-    }, 400)
-  }
-  else if (dataChannelOverride && dataChannelOverride.channel_id) {
+  if (dataChannelOverride && dataChannelOverride.channel_id) {
     return sendRes({
       channel: dataChannelOverride.channel_id.name,
       status: 'override',
@@ -186,7 +185,8 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
   if (errorChannel) {
     return sendRes({
-      error,
+      message: 'Cannot find channel',
+      error: errorChannel,
     }, 400)
   }
   else if (dataChannel) {
@@ -210,7 +210,7 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
     })
   }
   return sendRes({
-    error: 'no channel',
+    message: 'no channel',
   }, 400)
 }
 
