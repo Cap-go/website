@@ -2,6 +2,19 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import type { definitions } from '../../types/supabase'
 import keys from '../../configs.json'
 
+export interface AppInfos {
+  version_name: string
+  version_build: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
 export const getRightKey = (env: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
   // eslint-disable-next-line no-console
   console.log('env', env)

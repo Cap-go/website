@@ -4,6 +4,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { checkPlan, checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { invalidIp } from '../services/invalids_ip'
+import type { AppInfos } from './../services/utils'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 interface Channel {
@@ -11,18 +12,6 @@ interface Channel {
 }
 interface ChannelDev {
   channel_id: definitions['channels'] & Channel
-}
-interface AppInfos {
-  version_name: string
-  version_build: string
-  version_os: string
-  plugin_version: string
-  platform: string
-  app_id: string
-  device_id: string
-  custom_id?: string
-  is_prod?: boolean
-  is_emulator?: boolean
 }
 
 export const post = async (id: string, event: any, supabase: SupabaseClient) => {
