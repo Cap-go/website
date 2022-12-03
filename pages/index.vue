@@ -294,7 +294,7 @@ fetch(`${config.domain}/api/website_stats`).then((res) => {
             Numbers tell the story
           </h2>
           <p class="mt-3 text-xl leading-relaxed text-gray-600 md:mt-8">
-            I share transparently all with you since day 1.
+            Shared transparently with you since day 1.
           </p>
           <p class="text-base mt-5 text-gray-500 text-center">
             ( updated every day )
