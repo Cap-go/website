@@ -4,8 +4,8 @@ title: Introducing end to end security to capacitor-updater with code signing
 description: Using public-key cryptography to verify the integrity of updates, designed for the enterprise
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2022-11-22
-updated_at: 2022-11-22
+created_at: 2022-11-27
+updated_at: 2022-11-27
 head_image: "/secure_upload.webp"
 head_image_alt: Secure upload Capgo
 tag: Solution
