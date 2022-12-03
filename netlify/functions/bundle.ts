@@ -4,18 +4,18 @@ import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '../../types/supabase'
 
-interface Version {
+interface Bundle {
   app_id?: string
   page?: number
 }
-export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
+export const deleteBundle = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
   }
 
-  const body = JSON.parse(event.body || '{}') as Version
+  const body = JSON.parse(event.body || '{}') as Bundle
 
   if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
     console.error('You can\'t access this app', body.app_id)
@@ -34,13 +34,13 @@ export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
       .range(from, to)
       .order('created_at', { ascending: true })
     if (dbError) {
-      console.error('Cannot delete version')
-      return sendRes({ status: 'Cannot delete version', error: JSON.stringify(dbError) }, 400)
+      console.error('Cannot delete bundle')
+      return sendRes({ status: 'Cannot delete bundle', error: JSON.stringify(dbError) }, 400)
     }
   }
   catch (e) {
-    console.error('Cannot delete version', e)
-    return sendRes({ status: 'Cannot delete version', error: e }, 500)
+    console.error('Cannot delete Bundle', e)
+    return sendRes({ status: 'Cannot delete bundle', error: e }, 500)
   }
   return sendRes()
 }
@@ -53,7 +53,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
   }
 
   try {
-    const body = event.queryStringParameters as any as Version
+    const body = event.queryStringParameters as any as Bundle
     if (!body.app_id) {
       console.error('Missing app_id')
       return sendRes({ status: 'Missing app_id' }, 400)
@@ -69,22 +69,22 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       console.error('You can\'t check this app', body.app_id)
       return sendRes({ status: 'You can\'t check this app', app_id: body.app_id }, 400)
     }
-    const { data: dataVersions, error: dbError } = await supabase
+    const { data: dataBundles, error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .select()
       .eq('app_id', body.app_id)
       .eq('deleted', false)
       .order('created_at', { ascending: false })
-    if (dbError || !dataVersions || !dataVersions.length) {
-      console.error('Cannot get versions', dbError)
-      return sendRes({ status: 'Cannot get versions', error: dbError }, 400)
+    if (dbError || !dataBundles || !dataBundles.length) {
+      console.error('Cannot get bundles', dbError)
+      return sendRes({ status: 'Cannot get bundles', error: dbError }, 400)
     }
 
-    return sendRes({ versions: dataVersions })
+    return sendRes({ Bundles: dataBundles })
   }
   catch (e) {
-    console.error('Cannot get versions', e)
-    return sendRes({ status: 'Cannot get versions', error: e }, 500)
+    console.error('Cannot get bundles', e)
+    return sendRes({ status: 'Cannot get bundles', error: e }, 500)
   }
 }
 
@@ -98,7 +98,7 @@ export const handler: Handler = async (event) => {
   if (event.httpMethod === 'GET')
     return get(event, supabase)
   else if (event.httpMethod === 'DELETE')
-    return deleteVersion(event, supabase)
+    return deleteBundle(event, supabase)
   console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
