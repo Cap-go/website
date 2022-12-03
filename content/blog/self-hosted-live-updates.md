@@ -4,12 +4,12 @@ title: Self-hosted Live Updates
 description: I'm excited to announce Self-hosted Live Updates, the next iteration of Capgo’s Live Updates!
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2022-11-26
-updated_at: 2022-11-26
-head_image: "/secure_upload.webp"
-head_image_alt: Secure upload EAS
+created_at: 2022-12-03
+updated_at: 2022-12-03
+head_image: "/self_hosted.webp"
+head_image_alt: Self hosted updates
 tag: Solution
-published: false
+published: true
 next_blog: ""
 
 ---
@@ -21,9 +21,12 @@ That means no more app store delays, quicker bug fixes and content changes, and 
 I’ve also heard time and time again – large enterprises want to use Live Updates, but strict compliance standards get in the way. Until now.
 
 ## How do self-hosted live updates work?
+
 Capgo-hosted Live Updates can be configured and deployed easily in Capgo with the Capgo SDK. For Self-hosted Live Updates, I’ve added functionality to the Capgo CLI for configuration on your infrastructure.
 
 In order for Capgo to ensure a securely coordinated delivery of the newly updated web build artifacts to end-users, the Capacitor Live Updates plugin now utilizes a public/private key pairing. The additional handshake when using Self-hosted Live Updates adds peace of mind that the artifacts delivered by the enterprise’s infrastructure and pulled down via the plugin have remained unmodified.
+
+![Capgo encryption schema](/ecryption_flow.webp)
 
 The following walks through the steps to set up the key pairing, as well as the workflow that ultimately brings the updated experience to end users.
 
@@ -32,56 +35,28 @@ The following walks through the steps to set up the key pairing, as well as the 
 To generate a public/private key pair, enterprises can utilize the following Ionic Cloud CLI command:
 
 ```
-npx @capgo/cli@latest key
+npx @capgo/cli@latest key create
 ```
 
-The resulting private key is stored within the organization’s CI/CD platform. On the app side, the Live Updates plugin must be installed:
+This command will set `CapacitorUpdater.privateKey` properties in your config file.
+And generate 2 key file, `capgo_key.pub` and `capgo_key` in your project root directory.
 
-```
-npm install @capgo/capacitor-updater
-npx cap sync
-```
-
-Once installed, the public key file path can be added to the Capacitor configuration file (\`capacitor.config.ts\` or \`capacitor.config.json\`) inside a `CapacitorUpdater` section under plugins. It should look as follows:
-
-```
-import { CapacitorConfig } from '@capacitor/cli';
-
-
-const config: CapacitorConfig = {
-
-  appId: 'com.company.appname',
-
-  appName: 'My Capacitor App',
-
-  webDir: 'www',
-
-  plugins: {
-
-  CapacitorUpdater: {
-
-      key: 'public_key.pem'
-
-    }
-
-  }
-
-};
-
-
-export default config;
-```
-
-With the remaining `CapacitorUpdater` properties set to your preferences and the ability to handshake the public and private keys, Capgo can safely exchange live updates.
+This key pair is used to sign the update and verify the update on the app side.
 
 ### Self-hosted live updates workflow
 
 Implementing Self-hosted Live Updates begins with an enterprise performing a web build of their bug fix, content updates, or other web-based code changes. They then sign the build artifact with the private key obtained from the one-time setup and upload the bundle to the storage location of their choice.
 
-Capgo must then be informed of a new Live Update that is ready for consumption. This is done via another CLI command:
-
 ```
-npx @capgo/cli@latest upload --external=”https://abc.com/app/updates/abc123.zip”
+npx @capgo/cli@latest encrypt abc123.zip”
+```
+This command will print you a ivSessionKey, you need to save it for the next step.
+
+Now upload your encrypted zip in your enterprise storage and get the URL of the zip file.
+
+Capgo must then be informed of a new Live Update that is ready for consumption. This is done via another CLI command:
+```
+npx @capgo/cli@latest upload --external=https://abc.com/app/updates/abc123.zip --iv-session-key=YourKey
 ```
 
 Once the command is run, Capgo is aware of a new update ready to be distributed to the app’s users. Now, when the app is started, the Live Updates plugin checks with Capgo to see if any changes need to be brought down.
@@ -92,7 +67,7 @@ Capgo responds back to the plugin with “Yes, an update is available” and the
 https://abc.com/app/updates/abc123.zip
 ```
 
-The organization’s API returns the Live Update bundle from the location, and the app applies the live update. Voilà!
+The organization’s API returns the Live Update bundle from the location, and the app decrypt the zip and applies the live update. Voilà!
 
 ## Get started
 

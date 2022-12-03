@@ -9,7 +9,7 @@ updated_at: 2022-11-22
 head_image: "/secure_upload.webp"
 head_image_alt: Secure upload Capgo
 tag: Solution
-published: false
+published: true
 next_blog: ""
 
 ---
@@ -43,7 +43,9 @@ Capgo’s end-to-end code signing uses public-key cryptography to ensure end use
 
 “End-to-end” means this security covers the flow from the time a developer publishes an update to the time an end user’s device receives and runs the update. “Code signing” is using cryptography and a secret private key to “sign” code and later using a trusted public key to verify the signature.
 
-With this Capgo cannot even read the content of your bundle, it can only verify the integrity of the bundle. This is a strong security model that is used by many enterprise customers.
+![Capgo encryption schema](/ecryption_flow.webp)
+
+With this, Capgo cannot even read the content of your bundle, it can only verify the integrity of the bundle. This is a strong security model that is used by many enterprise customers.
 
 With end-to-end code signing, Capgo becomes “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
 
@@ -54,9 +56,8 @@ While web-level HTTPS is sufficient for many apps, some large companies find the
 For large companies or projects who care deeply about security, we want to make code signing easy to set up and maintain. To that end, we now provide the following features:
 
 -   Quick certificate setup and configuration
--   Support for code signing development servers with both Expo Go and development builds
+-   Support for code signing development servers with both Capgo and development builds
 -   Production code signing on every update
--   Straightforward key rotation documentation
 
-Capgo code signing is available for [Team Plan](https://capgo.app/pricing/) customers. To get started, follow the [setup instructions](https://docs.expo.app/tooling/code-signing/).
+Capgo code signing is available for all customers. To get started, follow the [setup instructions](https://docs.capgo.app/tooling/cli#end-to-end-encryption-trustless).
 
