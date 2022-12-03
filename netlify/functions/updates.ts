@@ -4,8 +4,8 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { checkPlan, checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { invalidIp } from '../services/invalids_ip'
-import type { AppInfos } from './../services/utils'
-import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
+import type { AppInfos } from '../services/utils'
+import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 
 interface Channel {
   version: definitions['app_versions']
