@@ -15,7 +15,7 @@ interface DeviceChannel {
 }
 
 const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
-  const body = await event.json() as DeviceLink
+  const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id) {
     console.error('Cannot find device_id or appi_id')
     return sendRes({ status: 'Cannot find device_id or appi_id' }, 400)
@@ -75,7 +75,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
 }
 
 const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
-  const body = await event.json() as DeviceLink
+  const body = JSON.parse(event.body || '{}') as DeviceLink
   if (!body.device_id || !body.app_id) {
     console.error('Cannot find device or appi_id')
     return sendRes({ status: 'Cannot find device_id or appi_id' }, 400)
