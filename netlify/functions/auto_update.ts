@@ -315,7 +315,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     console.log(id, 'New version available', app_id, version.name, signedURL)
     return sendRes({
       version: version.name,
-      session_key: version.session_key,
+      ...(version.session_key ? { session_key: version.session_key } : {}),
       checksum: version.checksum,
       url: signedURL,
     })
