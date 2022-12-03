@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import type { definitions } from '../../types/supabase'
 import keys from '../../configs.json'
 
+export const fetchLimit = 50
 export interface AppInfos {
   version_name: string
   version_build: string

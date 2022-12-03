@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
+import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '../../types/supabase'
 
 interface DeviceLink {
@@ -11,7 +11,6 @@ interface DeviceLink {
   channel?: string
 }
 
-const fetchLimit = 50
 interface GetDevice {
   app_id: string
   device_id?: string

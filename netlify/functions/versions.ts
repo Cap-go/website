@@ -1,11 +1,12 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
-import { checkAppOwner, checkKey, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
+import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
 import type { definitions } from '../../types/supabase'
 
 interface Version {
   app_id?: string
+  page?: number
 }
 export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
   const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
@@ -21,12 +22,17 @@ export const deleteVersion = async (event: any, supabase: SupabaseClient) => {
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   try {
+    const fetchOffset = body.page === undefined ? 0 : body.page
+    const from = fetchOffset * fetchLimit
+    const to = (fetchOffset + 1) * fetchLimit - 1
     const { error: dbError } = await supabase
       .from<definitions['app_versions']>('app_versions')
       .update({
         deleted: true,
       })
       .eq('app_id', body.app_id)
+      .range(from, to)
+      .order('created_at', { ascending: true })
     if (dbError) {
       console.error('Cannot delete version')
       return sendRes({ status: 'Cannot delete version', error: JSON.stringify(dbError) }, 400)
