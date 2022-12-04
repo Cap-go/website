@@ -13,7 +13,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.4",
     "@heroicons/vue": "^2.0.13",
-    "@nuxt/schema": "3.0.0-rc.13",
+    "@nuxt/schema": "3.0.0",
     "@supabase/supabase-js": "1.35.7",
     "@types/semver": "^7.3.13",
     "axios": "^1.1.3",
