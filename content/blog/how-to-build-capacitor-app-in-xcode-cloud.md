@@ -32,9 +32,9 @@ Using Ionic is optional, for Cordova it could work, but I didn't try.
 The service is ‘_free’_ up to the limit.  
 You can see in the screenshot price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
 
-🔴 **_Once warned of requirements and prices, if you want, we continue..._**
+🔴 **_Once warned of requirements and prices, if you like, we continue..._**
 
-> **_📣_ In the post we assume that we have the app created in Apple Store**
+> **_📣_ In the post, we assume that we have the app created in Apple Store**
 
 ## Intro
 
