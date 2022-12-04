@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-09-01
 updated_at: 2022-09-01
-head_image: "/xcode-_cloud.webp"
+head_image: "/xcode_cloud.webp"
 head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
 published: true

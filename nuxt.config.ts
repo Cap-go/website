@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt/config'
 import keys from './configs.json'
 
 const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
@@ -107,9 +107,9 @@ const structuredData = {
 export default defineNuxtConfig({
   target: 'static',
   ssr: true,
-  generate: {
-    fallback: 'true',
-  },
+  // generate: {
+  //   fallback: 'true',
+  // },
   nitro: {
     preset: 'netlify-edge',
     prerender: {
@@ -246,3 +246,7 @@ export default defineNuxtConfig({
   },
 
 })
+
+// export default defineNuxtConfig({
+//   modules: ['@nuxt/content'],
+// })
