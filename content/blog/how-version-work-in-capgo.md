@@ -1,7 +1,7 @@
 ---
 slug: "how-version-work-in-capgo"
 title: How version work in Capgo
-description: Understand how Capgo manage versions in your app, and use it at best. Learn the meaning of major, minor, patch.
+description: Understand how Capgo manage versions in your Capacitor app, and use it at best. Learn the meaning of major, minor, patch.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-25
@@ -14,7 +14,7 @@ next_blog: "how-to-release-major-version-in-capgo"
 
 ---
 
-Capgo use 2 main variable to manage versions in your app:
+Capgo use 2 main variable to manage versions in your Capacitor app:
   - Native version
   - JavaScript versions
 
@@ -45,8 +45,8 @@ This is how Capgo channel will behave if you didn't change any settings.
 
 > This behavior will be base on the unique channel you made default.
 
-### When Fresh installation of your app
-When user did download your app for the first time and open the app it contacts Capgo server.
+### When Fresh installation of your Capacitor app
+When user did download your Ionic app for the first time and open the app it contacts Capgo server.
 
 Currently, 4 outputs can happen:
   - The native bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
@@ -74,11 +74,11 @@ Then the behavior become :
 
 ## JavaScript bundle version
 
-The javascript bundle version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
+The JavaScript bundle version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
 
 If you didn't use the option `--bundle 1.2.3`, Capgo will get the bundle version from your `package.json` file (in the version key).
 
-After Your app has installed one version from Capgo, this is this version who will be compared for:
+After Your Ionic app has installed one version from Capgo, this is this version who will be compared for:
   - Their JavaScript bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
 
 With some guard conditions:
@@ -87,7 +87,7 @@ With some guard conditions:
 
 ## App store update
 
-When you publish your app on the App Store, what happen is simple.
+When you publish your Capacitor JS app on the App Store, what happen is simple.
 
 Your user will get the new version from the store and remove all local update in their app by default.
 

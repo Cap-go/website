@@ -21,13 +21,13 @@ If you are a solo developer, or a small team of developers, you will find that I
 
 Like you, I was complaining about it, Ionic understands the complaint, but there aren't open to change the pricing, tiny teams are outside they focus.
 
-Back in December 2021, I decided to try to fix my biggest pain in my Capacitor development workflow.
+Back in December 2021, I decided to try to fix my biggest pain in my Capacitor JS development workflow.
 
 After one month of trying, I found a solution to download from one URL a zip and replace the source of the app.
 
 That where I started to work on Capgo as AppFlow alternative.
 
-The goal is to provide a simple and easy to use solution to push code updates to Capacitor apps.
+The goal is to provide a simple and easy to use solution to push code updates to Capacitor JavaScript apps.
 
 No Native build, not big toolbox like Ionic, just live updates, for the market they don't address, Us.
 
@@ -51,10 +51,14 @@ You are welcome to join the community to build together, I use it for my project
 | Affordable pricing | ✅ Start at $14/mo | ❌ Start at $499/mo |
 | Native build | ❌ | ✅ |
 | 100% Open source | ✅ | ❌ |
+| End-to-End encryption | ✅ | ❌ only for Portal |
+| Portal | ❌ Could be done | ✅ |
 
-If you are a big team with big budget I recommend you to use AppFlow they build the tool with you in focus, not me.
+If you are a big team with big budget I recommend you to use AppFlow they build the tool with dedicated CSM, not me.
 
-Otherwise :)
+Capgo is more self-service.
+
+Otherwise 👇
 
 ## Register here to get your account
 

@@ -1,7 +1,7 @@
 ---
 slug: "automatic-capacitor-ios-build-github-action"
 title: Automatic Capacitor IOS build with GitHub actions
-description: How to set up a CI/CD pipeline for your IOS app using fastlane and GitHub Actions in 5 mins (2022)
+description: How to set up a CI/CD pipeline for your IOS Ionic app using fastlane and GitHub Actions in 5 mins (2022)
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-10-30
@@ -36,7 +36,7 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 
 🔴 **_Once warned of requirements and prices, if you like, we continue…_**
 
-> **_📣_ In the post we assume that we have the app created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be copied by Fastlane!**
+> **_📣_ In the post we assume that we have the app  created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be copied by Fastlane!**
 
 ## Let’s go to the mess 🧑🏽💻
 
@@ -254,7 +254,7 @@ If all went well, you should see something like that:
 [01:40:52]: All required keys, certificates and provisioning profiles are installed 🙌
 ```
 
-> If you had any problem with GitHub and the necessary permissions, maybe this [post](https://medium.com/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c) will help you to generate authentication tokens for git.
+> If you experienced any problem with GitHub and the necessary permissions, maybe this [post](https://medium.com/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c) will help you to generate authentication tokens for git.
 
 Generated certificates and provisioning profiles are uploaded to the certificates repository resources
 
@@ -297,9 +297,9 @@ And var will be set in GitHub Secrets, instead of hard-coding them in the file.
 
 ## **Build Processing**
 
-In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 15–30 minutes before a build can be processed in App Store Connect.
+In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in App Store Connect.
 
-For private projects, the estimated cost per build can go up to **$0.08/min x 30 mins = $2.4**, or more, depending on the configuration or dependencies of your project.
+For private projects, the estimated cost per build can go up to **$0.08/min x 15 mins = $1.2**, or more, depending on the configuration or dependencies of your project.
 
 If you share the same concerns for the pricing as I do for private projects, you can keep the `skip_waiting_for_build_processing` to `true`.
 
@@ -365,20 +365,20 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: pnpm
+          cache: npm
       - name: Install dependencies
         id: install_code
-        run: pnpm install --frozen-lockfile
+        run: npm ci
       - name: Build
         id: build_code
-        run: pnpm mobile
+        run: npm run build
+      - name: Build
+        id: build_code
+        run: npm run mobile
       - name: Sync
         id: sync_code
         run: npx cap sync
@@ -413,7 +413,13 @@ jobs:
           retention-days: 60
 ```
 
-This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/)
+This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
+
+Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
+
+> Each time you send a new commit, a release will be built in TestFlight.
+
+Your App doesn't need to use Ionic, only Capacitor base is mandatory., it can have old Cordova module, but Capacitor JS plugin should be preferred.
 
 ## 5\. Trigger workflow
 

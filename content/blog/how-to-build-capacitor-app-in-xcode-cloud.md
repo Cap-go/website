@@ -1,17 +1,40 @@
 ---
 slug: "how-to-build-capacitor-app-in-xcode-cloud"
-title: How to build capacitor app in Xcode Cloud
-description: Use Xcode cloud to build your capacitor app and bypass the need of MacOS.
+title: How to build Ionic Capacitor app in Xcode Cloud
+description: Use Xcode cloud to build your Capacitor JS app and bypass the need of MacOS.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-09-01
 updated_at: 2022-09-01
-head_image: "/capgo-feature-image.webp"
-head_image_alt: Capgo major version system
+head_image: "/xcode-_cloud.webp"
+head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
-published: false
+published: true
 
 ---
+
+## Prerequisites
+
+Before continuing with the tutorial…
+
+-   Make sure you use GitHub
+-   Use Capacitor
+-   Your app is already deployed on Apple Store
+-   Desire to read 😆…
+
+Using Ionic is optional, for Cordova it could work, but I didn't try.
+## Important about the price
+
+![Price Xcode Cloud](/xcode_cloud_price.webp)
+
+[https://developer.apple.com/xcode-cloud/](https://developer.apple.com/xcode-cloud/)
+
+The service is ‘_free’_ up to the limit.  
+You can see in the screenshot price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
+
+🔴 **_Once warned of requirements and prices, if you want, we continue..._**
+
+> **_📣_ In the post we assume that we have the app created in Apple Store**
 
 ## Intro
 
@@ -65,9 +88,12 @@ brew install pnpm # optional, you can also install yarn if you use it
 # Install dependencies
 pnpm install --frozen-lockfile
 # or `npm ci` or `yarn install --frozen-lockfile`
-npm run mobile
+npm run mobile 
+# or npm run build
 npm run sync:ios
 ```
+
+Save this file in the root of your project and name it `ios/App/ci_scripts/ci_post_clone.sh`
 
 
 ## Create a Xcode workflow
@@ -99,67 +125,12 @@ Connect your GitHub account
 ![Xcode step 6](/xcode_step_6.webp)
 
 
-# Fastlane config ios
+Then enable and the workflow and commit your first change, you should see your build running in Xcode.
 
+## **Build Processing**
 
-Copy files from this repo : capgo app
+In Xcode Cloud, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in Apple Store.
 
-create a certificat location with fastlane match
-run `fastlane match init`
-follow instruction there 
+For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
 
-add this to your github actions:
-
-```yaml
-build_ios:
-  runs-on: macOS-latest
-  steps:
-    - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: Use Node.js 16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: pnpm
-    - name: Install dependencies
-      id: install_code
-      run: pnpm install --frozen-lockfile
-    - name: Build
-      id: build_code
-      run: pnpm mobile
-    - name: Sync
-      id: sync_code
-      run: npx cap sync
-    - name: Install fastlane CLI
-      run: |
-        HOMEBREW_NO_INSTALL_CLEANUP=1 brew install fastlane
-    - name: Archive IOS
-      env:
-        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
-        APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-        APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-        CERTIFICATE_STORE_URL: ${{ secrets.CERTIFICATE_STORE_URL }}
-        MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
-      run: fastlane ios beta
-    - name: Upload release bundle
-      uses: actions/upload-artifact@v2
-      with:
-        name: ios-release
-        path: ios/App/App.ipa
-        retention-days: 60
-```
-
-create secrets in your github repo
-
-- APP_STORE_CONNECT_API_KEY_ID
-- APP_STORE_CONNECT_API_ISSUER_ID
-- APP_STORE_CONNECT_API_KEY_CONTENT
-- CERTIFICATE_STORE_URL ==> where your fastlane match is created
-- MATCH_KEYCHAIN_PASSWORD ==> password for your fastlane match
-
-create a github personal token with repo right
-and then do 
-` echo -n github_name:token | base64 `
-to get your base64 token
+For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).

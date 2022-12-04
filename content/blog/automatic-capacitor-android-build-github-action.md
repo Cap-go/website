@@ -1,7 +1,7 @@
 ---
 slug: "automatic-capacitor-android-build-github-action"
 title: Automatic Capacitor Android build with GitHub actions
-description: How to set up a CI/CD pipeline for your Android app using fastlane and GitHub Actions in 5 mins (2022)
+description: How to set up a CI/CD pipeline for your Android Ionic app using fastlane and GitHub Actions in 5 mins (2022)
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-10-27
@@ -31,7 +31,7 @@ Before continuing with the tutorial…
 [https://github.com/features/actions](https://github.com/features/actions)
 
 The service is ‘_free’_ up to the limit, depending on the chosen machine.  
-We are going to use a **_macOS_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
+We are going to use a **_Linux_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
 
 🔴 **_Once warned of requirements and prices, if you want, we continue..._**
 
@@ -189,9 +189,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
@@ -202,7 +199,7 @@ jobs:
         run: npm ci
       - name: Build
         id: build_code
-        run: npm rn build
+        run: npm run build
       - name: Sync
         id: sync_code
         run: npx cap sync
@@ -243,8 +240,21 @@ jobs:
 
 This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/)
 
+Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
+
+Your App doesn't need to use Ionic, only Capacitor base is mandatory., it can have old Cordova module, but Capacitor JS plugin should be preferred.
+
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
+
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+
+## **Build Processing**
+
+In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 3–5 minutes before a build can be processed in Google play store.
+
+For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
+
+For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).
 
 ### Thanks
 

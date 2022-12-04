@@ -28,7 +28,7 @@ Now it's clear we don't mix them and use them for hat they are made!
 
 ## Major release
 
-In your app a major release is necessary when a breaking change happens, for example a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
+In your Capacitor app a major release is necessary when a breaking change happens, for example a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
 
 This change means all tooling have to be aligned to handle the breaking change.
 
@@ -55,7 +55,7 @@ Where Capgo find the version to compare
   in JavaScript, the var is set on your project here `package.json` under the key `version`
 ## Example
 
-Your app is currently released with the version `1.2.3` with Capacitor 3
+Your Ionic app is currently released with the version `1.2.3` with Capacitor 3
 
 You are doing the upgrade to capacitor 4.
 

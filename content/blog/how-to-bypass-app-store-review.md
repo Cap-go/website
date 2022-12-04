@@ -1,7 +1,7 @@
 ---
 slug: "how-to-bypass-app-store-review"
-title: How to update Capacitor Apps without the App Store review.
-description: 'How can Capgo Feature allow you to push code updates to live iOS apps
+title: How to update Capacitor JS Apps without the App Store review.
+description: 'How can Capgo Feature allow you to push code updates to live iOS Ionic apps
   and be fully compliant with Apple’s guidelines? '
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu

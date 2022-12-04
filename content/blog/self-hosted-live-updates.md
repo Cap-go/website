@@ -24,7 +24,7 @@ I’ve also heard time and time again – large enterprises want to use Live Upd
 
 Capgo-hosted Live Updates can be configured and deployed easily in Capgo with the Capgo SDK. For Self-hosted Live Updates, I’ve added functionality to the Capgo CLI for configuration on your infrastructure.
 
-In order for Capgo to ensure a securely coordinated delivery of the newly updated web build artifacts to end-users, the Capacitor Live Updates plugin now utilizes a public/private key pairing. The additional handshake when using Self-hosted Live Updates adds peace of mind that the artifacts delivered by the enterprise’s infrastructure and pulled down via the plugin have remained unmodified.
+In order for Capgo to ensure a securely coordinated delivery of the newly updated web build artifacts to end-users, the Capacitor Live Updates plugin now can utilize a public/private key pairing. The additional handshake when using Self-hosted Live Updates adds peace of mind that the artifacts delivered by the enterprise’s infrastructure and pulled down via the plugin have remained unmodified.
 
 ![Capgo encryption schema](/ecryption_flow.webp)
 
@@ -32,7 +32,7 @@ The following walks through the steps to set up the key pairing, as well as the 
 
 ### One-time key pair setup
 
-To generate a public/private key pair, enterprises can utilize the following Ionic Cloud CLI command:
+To generate a public/private key pair, enterprises can utilize the following Capgo Cloud CLI command:
 
 ```
 npx @capgo/cli@latest key create
@@ -71,6 +71,6 @@ The organization’s API returns the Live Update bundle from the location, and t
 
 ## Get started
 
-I'm excited to bring the power of Live Updates to more enterprises than ever. Organizations and app users alike will quickly realize the benefits of Capgo’s secure distribution of over-the-air app updates. 
+I'm excited to bring the power of Live Updates to more enterprises than ever. Organizations and Ionic app users alike will quickly realize the benefits of Capgo’s secure distribution of over-the-air app updates. 
 
 For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](https://docs.capgo.app/tooling/cli#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](https://web.capgo.app/register)

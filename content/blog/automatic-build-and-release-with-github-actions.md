@@ -1,8 +1,8 @@
 ---
 slug: "automatic-build-and-release-with-github-actions"
-title: Automatic build and release with Github actions
+title: Automatic build and release app with Github actions
 description: Create your own CI/CD pipeline with Github actions for free, deploy
-  your app every time you push to main.
+  your Ionic Capacitor JS app every time you push to main.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-23
@@ -11,14 +11,15 @@ head_image: "/github_actions.webp"
 head_image_alt: Github action illustration
 tag: CI/CD
 published: true
-next_blog: ""
+next_blog: "automatic-capacitor-ios-build-github-action"
 
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.
 
 ## Preface 
 
-Be sure you have add your app first to Capgo, this tutorial just focus on the upload phase
+Be sure you have added your Capacitor app first to Capgo, this tutorial just focuses on the upload phase.
+If you need to add your app to Capgo, you can follow this [Tutorial](/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)
 
 ## Commit convention
 
@@ -28,7 +29,7 @@ First you need to start following the commit convention [conventional commits](h
 
 ## GitHub actions for tag
 
-Then you need to create your first GitHub action to automatically build and create tag.
+Then you have to create your first GitHub action to automatically build and create tag.
 
 Create a file at this path: `.github/workflows/bump_version.yml`
 
@@ -133,3 +134,5 @@ You should add your test in the build step to ensure your code is working.
 Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
 
 If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.
+
+You can also add the native build of your Ionic Capacitor JavaScript app by following this tutorial 👇

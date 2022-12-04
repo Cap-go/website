@@ -1,7 +1,7 @@
 ---
 slug: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 title: Update your Capacitor apps seamlessly using Capacitor-updater
-description: Greetings Capacitor Community, today I'll be helping you setup Capacitor-updater
+description: Greetings Capacitor Ionic Community, today I'll be helping you setup Capacitor-updater
   into your app. So that you can do seamless releases.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
@@ -37,11 +37,13 @@ You can read more about it [here](https://capgo.app).
 
 As good as it may sound, there are a few things that we need to keep in mind.
 The first thing is that OTA updates __only work with web bundles__. 
-You may think that this isn’t really a big limitation because, in Capacitor, we write almost all code in JS CSS and HTML.
+You may think that this isn’t really a big limitation because, in Capacitor JS, we write almost all code in JS CSS and HTML.
 While this may be true, there still are native modules that we install to our app.
 If a module changes your android or iOS directories, you can’t use OTA to update your app.
 That’s because these directories’ contents are used to compile Native binaries, which OTA can’t update.
 Even native app cannot update this part.
+
+But you can set up your CI/CD to handle this part, I made a tutorial on how to do it [here for IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and [here for Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
 
 ## Let's get started 🚀
 

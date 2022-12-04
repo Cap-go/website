@@ -1,7 +1,7 @@
 ---
 slug: "how-to-send-specific-version-to-users"
 title: How to send specific update to one user or a group
-description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your app, and they are in !
+description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your Ionic app, and they are in !
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-06-17
@@ -22,7 +22,7 @@ I got the feeling too, but since I'm the maker of Capgo, I was able to take a lo
 
 > Since all is open-source, you have this power too :)
 
-The next pain I got in the app distribution process is to make other teammates test the updates!
+The next pain I got in the Capacitor app distribution process is to make other teammates test the updates!
 
 With TestFlight, the issue is simple, bring people in your team and make them understand how to get it is time-consuming!
 
@@ -51,7 +51,7 @@ With that one, the only thing you need to do is allow one of your channel to be 
 
 ![Allow set self in Capgo](/self_set.webp)
 
-And then add this in the code of your app, for best experience use this after user click on button like "register for beta"
+And then add this in the code of your Ionic app, for best experience use this after user click on button like "register for beta"
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 

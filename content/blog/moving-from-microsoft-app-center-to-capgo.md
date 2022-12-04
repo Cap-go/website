@@ -24,7 +24,7 @@ Capgo helps to streamline app delivery for hundreds of businesses and teams.
 
 Capgo includes live update functionality similar to CodePush without platform dependencies and immediate app publishing.
 
-Development teams can focus completely on the unique features of their app and outsource the complicated app delivery process to Capgo. Plus, unlike App Center, My solution is 100% focused on hybrid architectures like Capacitor.
+Development teams can focus completely on the unique features of their Ionic app and outsource the complicated app delivery process to Capgo. Plus, unlike App Center, My solution is 100% focused on hybrid architectures like Capacitor.
 
 Capacitor customers can take advantage of Capgo's complete list of features and easily migrate from Microsoft App Center to Capgo in just a few steps. I created a [migration guide](https://capgo.app/blog/appcenter-migration) to help you walk through the process of migrating from App Center to Capgo.
 

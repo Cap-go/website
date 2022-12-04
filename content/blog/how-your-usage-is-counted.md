@@ -24,7 +24,7 @@ Each one as a slight different way of being counted
 
 ## Users
 
-Each time a user download your app and open it, it will send a request to Capgo backend to know is update is available.
+Each time a user download your Capacitor JS app and open it, it will send a request to Capgo backend to know is update is available.
 When the app does that, it sends little information, including the most important one `DeviceID`
 
 `DeviceID`: is a unique ID (UUID) define by the OS of the device, this ID is unique by app install.
@@ -43,16 +43,17 @@ You can see both in your account in the home page:
 
 > Capgo don't count emulator and dev build in your usage. Keep in mind after the trial you can't have more than 3% of them, or that will lock your account, until you fix it.
 
-> Capgo is also doing some filtering for you. If you have CI/CD configured to send your version to Google PLAY, Google is running your app each time to 20+ real device. During the 4 first hours of a new bundle, we block Google data center IP to prevent them to be counted.
+> Capgo is also doing some filtering for you. If you have CI/CD configured to send your version to Google PLAY, Google is running your Capacitor app each time to 20+ real device. During the 4 first hours of a new bundle, we block Google data center IP to prevent them to be counted.
 
 Each month, this data start from zero.
 
 
 - Create or update a device in my database at each device request
-- Add to a daily counter the number of active device who haven't been active this month.
-the first method return : 900+ users
+- Add to a daily counter the number of active device who hasn't been active this month.
+
+The first method return : 900+ users
 while the second one is at 200+ users on your account
-For plan limit i use the first method who is 100% reliable and for display the chart i use the second one.
+For plan limit I use the first method who is 100% reliable and to display the chart I use the second one.
 You can see both on your account home page.
 
 ## Storage
@@ -78,7 +79,7 @@ The calculation of this value is a bit more complex, but the idea is the same as
 
 Each time a user download a bundle, this number is increase by the size of the download.
 
-This data is only related to your download size, better your app size is, better you stay in your plan.
+This data is only related to your download size, better your Capacitor JS app size is, better you stay in your plan.
 
 > One important thing to note, Capgo cannot see what size is downloaded, it only sees the size of the bundle. So if you have a big bundle, and you have many users who fail to download it, you will reach the limit quickly.
 

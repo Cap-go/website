@@ -1,21 +1,21 @@
 ---
 slug: "open-source-capacitor-updater"
-title: "Capgo: open-source AppFlow alternative"
-description: Capgo is an open-source, simple and lightweight AppFlow alternative. One aspect that makes Capgo different the other tooling such as AppFlow is the fact that Capgo is fully open-source software and focus on Capacitor. Let’s take a look at what that means exactly.
+title: "Capgo: open-source Ionic AppFlow alternative"
+description: Capgo is an open-source, simple and lightweight Ionic AppFlow alternative. One aspect that makes Capgo different the other tooling such as AppFlow is the fact that Capgo is fully open-source software and focus on Capacitor Js. Let’s take a look at what that means exactly.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-04-08
 updated_at: 2022-04-08
 head_image: "/appflow_alt.webp"
-head_image_alt: AppFlow alternative illustration
+head_image_alt: Ionic AppFlow alternative illustration
 tag: Alternatives
 published: false
 next_blog: ""
 
 ---
-Capgo is an open-source, simple and lightweight AppFlow alternative. One aspect that makes Capgo different from the other tooling such as AppFlow is the fact that Capgo is fully open-source software and focus on Capacitor. Let’s take a look at what that means exactly.
+Capgo is an open-source, simple and lightweight Ionic AppFlow alternative. One aspect that makes Capgo different from the other tooling such as AppFlow is the fact that Capgo is fully open-source software and focus on Capacitor. Let’s take a look at what that means exactly.
 
-![Capgo: open-source AppFlow alternative](https://capgo.app/blog/uploads/google-analytics-alternatives.webp "Capgo: open-source AppFlow alternative")
+![Capgo: open-source Ionic AppFlow alternative](https://capgo.app/blog/uploads/google-analytics-alternatives.webp "Capgo: open-source AppFlow alternative")
 
 1. [What is Auto-update system?](https://capgo.app/blog/open-source-capacitor-updater#what-is-auto-update-system)
 2. [What is an open-source Auto-update system?](https://capgo.app/blog/open-source-capacitor-updater#what-is-open-source-auto-update-system)
@@ -58,7 +58,7 @@ The Capgo app is in AGPLv3, the app have more restricted license since it's not 
 
 Yes, you can self-host Capgo. Capgo Self-Hosted is my free as in beer and free as in speech version. It’s the same product as my Capgo solution, only the self-hosted version you have to install, host and manage yourself.
 
-We’re fully open-source and all my code is available on GitHub. Take a look at the full details of my [self-hosted Auto-update system](https://capgo.app/blog/self-hosted-capgo) solution and read here the [installation instructions](https://docs.capgo.app/plugin/auto-update/self-hosted){:target="_blank"}.
+It's fully open-source and all the code is available on GitHub. Take a look at the full details of my [self-hosted Auto-update system](https://capgo.app/blog/self-hosted-capgo) solution and read here the [installation instructions](https://docs.capgo.app/plugin/auto-update/self-hosted){:target="_blank"}.
 
 ## Capgo is open in other ways too
 

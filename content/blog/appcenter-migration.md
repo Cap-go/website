@@ -8,7 +8,7 @@ author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-22
 updated_at: 2022-03-22
 head_image: "/migrate_appcenter.webp"
-head_image_alt: Capacitor Dev looking for alternative
+head_image_alt: Capacitor JS Dev looking for alternative
 tag: Migration
 published: true
 next_blog: "automatic-build-and-release-with-github-actions"
@@ -17,7 +17,7 @@ next_blog: "automatic-build-and-release-with-github-actions"
 ## Migration Summary
 
 * Capgo is a service that helps development teams send live app to deployed apps.
-* Capacitor apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
+* Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
 * Capgo offers equivalent services for App Center Build (build Android/iOS apps) and App Center Distribute (CodePush). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
 * Ionic has [Advisory services](https://ionicframework.com/advisory) available if you need migration assistance.
 

@@ -1,7 +1,7 @@
 ---
 slug: "manage-dev-and-prod-build-with-github-actions"
 title: Manage development and production build with GitHub actions
-description: Use Capgo to release your devbuild to specific channel, and let your team try it, without waiting Apple and Google review 
+description: Use Capgo to release your devbuild to specific channel, and let your team try your Capacitor Ionic app, without waiting Apple and Google review 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-06-16
@@ -17,7 +17,7 @@ This tutorial focuses on the GitHub hosting, but you can adapt it with little tw
 
 ## Preface 
 
-Be sure you have added your app first to Capgo, this tutorial just focus on the upload phase
+Be sure you have added your Capacitor app first to Capgo, this tutorial just focus on the upload phase
 
 ## Commit convention
 
@@ -140,14 +140,12 @@ If your command for build is different, you can change it in the `build_code` st
 
 If you need environment variable, use the `MY_ENV_VAR` and set the secret in your GitHub project setting, then secret then GitHub Action.
 
-If you don't remove it.
-
 To make Capgo upload work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
 You can now commit this both file and see your first version appear in Capgo!
 
-Add the commit will generate a new build for production and development channel.
+Add the commit will generate a new Capacitor build for production and development channel.
 
-You should add your test in the build step to be certain your code is working.
+You should add your test in the Ionic build step to be certain your code is working.
 
 Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
