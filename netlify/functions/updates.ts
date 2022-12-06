@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { checkPlan, checkPlanValid, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
+import { checkPlan, isAllowedAction, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { definitions } from '../../types/supabase'
 import { invalidIp } from '../services/invalids_ip'
 import type { AppInfos } from '../services/utils'
@@ -155,7 +155,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       }, 200)
     }
     let channel = channelData
-    const planValid = await checkPlanValid(supabase, channel.created_by)
+    const planValid = await isAllowedAction(supabase, channel.created_by)
     await checkPlan(supabase, channel.created_by)
     let version: definitions['app_versions'] = channel.version as definitions['app_versions']
     const xForwardedFor = event.headers['x-forwarded-for'] || ''
