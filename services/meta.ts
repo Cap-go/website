@@ -1,40 +1,45 @@
-import type {
-  MetaDataProperty,
-  MetaPropertyProperty,
-} from 'vue-meta/types/vue-meta'
+interface Meta {
 
-export const createMetaImage = (image: string | null = null, title: string | null = null): MetaPropertyProperty[] => {
+}
+
+export const createMetaImage = (image: string | null = null, title: string | null = null): Meta[] => {
   if (image) {
     const image_unsecure = image.replace('https://', 'http://')
     const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
     return [
       {
-        hid: 'og:image:alt',
+        // hid: 'og:image:alt',
         property: 'og:image:alt',
         content: titleFix,
       },
       {
-        hid: 'og:image:type',
+        // hid: 'og:image:type',
         property: 'og:image:type',
         content: 'image/webp',
       },
       {
-        hid: 'og:image',
+        // hid: 'og:image',
         property: 'og:image',
         content: image_unsecure,
       },
       {
-        hid: 'og:image:secure',
+        // hid: 'og:image:secure',
         property: 'og:image:secure',
         content: image,
       },
       {
-        hid: 'twitter:image',
+        // hid: 'twitter:image',
         property: 'twitter:image',
         content: image,
       },
-      { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
-      { hid: 'og:image:height', property: 'og:image:height', content: '627' },
+      {
+        // hid: 'og:image:width',
+        property: 'og:image:width', content: '1200',
+      },
+      {
+        //  hid: 'og:image:height',
+        property: 'og:image:height', content: '627',
+      },
     ]
   }
   return []
@@ -46,29 +51,38 @@ export const createMeta = (
   image: string | null = null,
   author: string | null = null,
   audio: string | null = null,
-): MetaDataProperty[] => {
-  const base: MetaDataProperty[] = [
-    { hid: 'title', name: 'title', content: title },
+): Meta[] => {
+  const base: Meta[] = [
     {
-      hid: 'og:title',
+      // hid: 'title',
+      name: 'title', content: title,
+    },
+    {
+      // hid: 'og:title',
       property: 'og:title',
       content: title,
     },
     {
-      hid: 'description',
+      // hid: 'description',
       name: 'description',
       content: description,
     },
     {
-      hid: 'og:description',
+      // hid: 'og:description',
       property: 'og:description',
       content: description,
     },
   ]
   if (author) {
     base.push(
-      { hid: 'author', name: 'author', content: author },
-      { hid: 'og:article:author', name: 'og:article:author', content: author },
+      {
+        // hid: 'author',
+        name: 'author', content: author,
+      },
+      {
+        //  hid: 'og:article:author',
+        name: 'og:article:author', content: author,
+      },
     )
   }
   if (image)
@@ -76,9 +90,12 @@ export const createMeta = (
 
   if (audio) {
     base.push(
-      { hid: 'og:audio', property: 'og:audio', content: audio },
       {
-        hid: 'og:audio:type',
+        //  hid: 'og:audio',
+        property: 'og:audio', content: audio,
+      },
+      {
+        // hid: 'og:audio:type',
         property: 'og:audio:type',
         content: 'audio/mpeg',
       },

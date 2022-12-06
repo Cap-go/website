@@ -15,7 +15,7 @@ const articlesOrder = computed(() =>
 )
 
 useHead(() => ({
-  titleTemplate: title,
+  title,
   meta: createMeta(title, description),
 }))
 
