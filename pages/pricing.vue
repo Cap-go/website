@@ -3,10 +3,10 @@
 import { ArrowLongRightIcon } from '@heroicons/vue/20/solid'
 import Calculator from '~~/components/pricing/Calculator.vue'
 import Plans from '~~/components/pricing/Plans.vue'
-import type { definitions } from '~~/types/supabase'
+import type { Database } from '~~/types/supabase.types'
 const config = useRuntimeConfig()
 
-const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<definitions['plans']>>)
+const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
 
 const pricing: {
   [key: string]: any

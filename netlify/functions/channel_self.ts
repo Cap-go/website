@@ -1,20 +1,16 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import semver from 'semver'
+import type { Database } from '../../types/supabase.types'
 import { sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
 import type { AppInfos } from '../services/utils'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '../../types/supabase'
 
 interface DeviceLink extends AppInfos {
   channel?: string
 }
 
-interface DeviceChannel {
-  channel_id: definitions['channels']
-}
-
-const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
+const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
   let {
     version_name,
@@ -52,13 +48,13 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
   // find device
   const { data: dataDevice } = await supabase
-    .from<definitions['devices']>('devices')
+    .from('devices')
     .select()
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
   const { data: dataChannelOverride } = await supabase
-    .from<definitions['channel_devices'] & DeviceChannel>('channel_devices')
+    .from('channel_devices')
     .select(`
       app_id,
       device_id,
@@ -72,7 +68,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
     .single()
   if (!dataDevice) {
     const { data: version } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .select()
       .eq('app_id', app_id)
       .eq('name', version_name || 'unknown')
@@ -94,7 +90,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
       ...(is_prod !== undefined ? { is_prod } : {}),
       version_build,
       os_version: version_os,
-      platform: platform as definitions['devices']['platform'],
+      platform: platform as Database['public']['Enums']['platform_os'],
       updated_at: new Date().toISOString(),
     })
   }
@@ -108,7 +104,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   if (channel) {
     // get channel by name
     const { data: dataChannel, error: dbError } = await supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .select()
       .eq('app_id', app_id)
       .eq('name', channel)
@@ -119,7 +115,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
       return sendRes({ message: `Cannot find channel ${dbError}`, error: 'channel_not_found' }, 400)
     }
     const { data: dataChannelDev, error: dbErrorDev } = await supabase
-      .from<definitions['channel_devices']>('channel_devices')
+      .from('channel_devices')
       .upsert({
         device_id,
         channel_id: dataChannel.id,
@@ -132,7 +128,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
     }
   }
   const { data: dataVersion, error: errorVersion } = await supabase
-    .from<definitions['app_versions']>('app_versions')
+    .from('app_versions')
     .select()
     .eq('app_id', app_id)
     .eq('name', version_name || 'unknown')
@@ -147,7 +143,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   return sendRes()
 }
 
-const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
+const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
   let {
     version_name,
@@ -174,13 +170,13 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
     return sendRes({ message: 'Cannot find device_id or appi_id', error: 'missing_info' }, 400)
   }
   const { data: dataChannel, error: errorChannel } = await supabase
-    .from<definitions['channels'] & DeviceChannel>('channels')
+    .from('channels')
     .select()
     .eq('app_id', app_id)
     .eq('public', true)
     .single()
   const { data: dataChannelOverride } = await supabase
-    .from<definitions['channel_devices'] & DeviceChannel>('channel_devices')
+    .from('channel_devices')
     .select(`
       app_id,
       device_id,
@@ -207,7 +203,7 @@ const put = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
   else if (dataChannel) {
     const { data: dataVersion, error: errorVersion } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .select()
       .eq('app_id', app_id)
       .eq('name', version_name || 'unknown')

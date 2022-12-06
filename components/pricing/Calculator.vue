@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { definitions } from '~~/types/supabase'
 
 const props = defineProps({
   pricing: {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { definitions } from '~~/types/supabase'
 
 const props = defineProps({
   pricing: {

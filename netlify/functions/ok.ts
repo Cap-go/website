@@ -1,6 +1,5 @@
 import type { Handler } from '@netlify/functions'
 import { useSupabase } from '../services/supabase'
-import type { definitions } from '../../types/supabase'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 interface Params {
@@ -13,11 +12,13 @@ export const handler: Handler = async (event) => {
 
   if (body.service === 'database') {
     const { data, error } = await supabase
-      .from<definitions['apps']>('apps')
+      .from('apps')
       .select()
       .eq('app_id', 'unknow.unknow')
       .single()
-    if (data && !error) { return sendRes({ status: 'ok', service: 'database' }) }
+    if (data && !error) {
+      return sendRes({ status: 'ok', service: 'database' })
+    }
     else {
       console.error('db not answering as expected', error)
       return sendRes({ error: 'db not answering as expected' }, 500)

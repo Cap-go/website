@@ -2,19 +2,12 @@ import type { Handler } from '@netlify/functions'
 import semver from 'semver'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { checkPlan, isAllowedAction, sendStats, updateOrCreateDevice, useSupabase } from '../services/supabase'
-import type { definitions } from '../../types/supabase'
 import { invalidIp } from '../services/invalids_ip'
 import type { AppInfos } from '../services/utils'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
+import type { Database } from '../../types/supabase.types'
 
-interface Channel {
-  version: definitions['app_versions']
-}
-interface ChannelDev {
-  channel_id: definitions['channels'] & Channel
-}
-
-export const post = async (id: string, event: any, supabase: SupabaseClient) => {
+export const post = async (id: string, event: any, supabase: SupabaseClient<Database>) => {
   const body = JSON.parse(event.body || '{}') as AppInfos
 
   let {
@@ -64,9 +57,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       version_build,
       plugin_version,
       version_name)
-
     const { data: channelData, error: dbError } = await supabase
-      .from<definitions['channels'] & Channel>('channels')
+      .from('channels')
       .select(`
         id,
         created_at,
@@ -93,7 +85,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       .eq('public', true)
       .single()
     const { data: channelOverride } = await supabase
-      .from<definitions['channel_devices'] & ChannelDev>('channel_devices')
+      .from('channel_devices')
       .select(`
         device_id,
         app_id,
@@ -127,7 +119,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       .single()
 
     const { data: devicesOverride } = await supabase
-      .from<definitions['devices_override'] & Channel>('devices_override')
+      .from('devices_override')
       .select(`
         device_id,
         app_id,
@@ -157,7 +149,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     let channel = channelData
     const planValid = await isAllowedAction(supabase, channel.created_by)
     await checkPlan(supabase, channel.created_by)
-    let version: definitions['app_versions'] = channel.version as definitions['app_versions']
+    let version = channel.version as Database['public']['Tables']['app_versions']['Row']
     const xForwardedFor = event.headers['x-forwarded-for'] || ''
     // check if version is created_at more than 4 hours
     const isOlderEnought = (new Date(version.created_at || Date.now()).getTime() + 4 * 60 * 60 * 1000) < Date.now()
@@ -180,7 +172,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
       ...(is_prod !== undefined ? { is_prod } : {}),
       version_build,
       os_version: version_os,
-      platform: platform as definitions['devices']['platform'],
+      platform: platform as Database['public']['Enums']['platform_os'],
       updated_at: new Date().toISOString(),
     })
     if (!planValid) {
@@ -191,16 +183,16 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
         error: 'not_good_plan',
       }, 200)
     }
-    if (channelOverride) {
+    if (channelOverride && channelOverride.channel_id && channelOverride.channel_id.version) {
       // eslint-disable-next-line no-console
       console.log(id, 'Set channel override', app_id, channelOverride.channel_id.version.name)
-      version = channelOverride.channel_id.version as definitions['app_versions']
+      version = channelOverride.channel_id.version
       channel = channelOverride.channel_id
     }
-    if (devicesOverride) {
+    if (devicesOverride && devicesOverride.version) {
       // eslint-disable-next-line no-console
       console.log(id, 'Set device override', app_id, devicesOverride.version.name)
-      version = devicesOverride.version as definitions['app_versions']
+      version = devicesOverride.version as Database['public']['Tables']['app_versions']['Row']
     }
 
     if (!version.bucket_id && !version.external_url) {
@@ -214,12 +206,12 @@ export const post = async (id: string, event: any, supabase: SupabaseClient) => 
     // console.log('updateOrCreateDevice done')
     let signedURL = version.external_url || ''
     if (version.bucket_id && !version.external_url) {
-      const res = await supabase
+      const { data } = await supabase
         .storage
         .from(`apps/${version.user_id}/${app_id}/versions`)
         .createSignedUrl(version.bucket_id, 60)
-      if (res && res.signedURL)
-        signedURL = res.signedURL
+      if (data?.signedUrl)
+        signedURL = data.signedUrl
     }
 
     // console.log('signedURL', device_id, signedURL, version_name, version.name)

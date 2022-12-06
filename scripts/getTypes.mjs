@@ -1,10 +1,10 @@
 import { exec as execCb } from 'child_process'
 import util from 'util'
-import { supa_anon, supa_url } from './utils.mjs'
+import { supa_url } from './utils.mjs'
 
 const exec = util.promisify(execCb)
-const url = `${supa_url}/rest/v1/\?apikey\=${supa_anon}`
-const command = `npx openapi-typescript@5 ${url} --output types/supabase.ts`
+const supaId = supa_url.split('//')[1].split('.')[0]
+const command = `npx --yes supabase gen types typescript --project-id=${supaId} > types/supabase.types.ts`
 
 const main = async () => {
   try {

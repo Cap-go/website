@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
 import { parseCronExpression } from 'cron-schedule'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import type { Database } from '../../types/supabase.types'
 import { addEventPerson } from './crisp'
-import type { definitions } from '~~/types/supabase'
 
-const sendNow = async (supabase: SupabaseClient, eventName: string, email: string, userId: string, color: string) => {
+const sendNow = async (supabase: SupabaseClient<Database>, eventName: string, email: string, userId: string, color: string) => {
   // eslint-disable-next-line no-console
   console.log('send notif', eventName, email)
   await addEventPerson(email, {}, eventName, color)
   await supabase
-    .from<definitions['notifications']>('notifications')
+    .from('notifications')
     .insert({
       id: eventName,
       user_id: userId,
@@ -33,9 +33,9 @@ const isSendable = (last: string, cron: string) => {
   return (dayjs(now).isAfter(nextDate))
 }
 
-export const sendNotif = async (supabase: SupabaseClient, eventName: string, userId: string, cron: string, color: string) => {
+export const sendNotif = async (supabase: SupabaseClient<Database>, eventName: string, userId: string, cron: string, color: string) => {
   const { data: user } = await supabase
-    .from<definitions['users']>('users')
+    .from('users')
     .select()
     .eq('id', userId)
     .single()
@@ -52,7 +52,7 @@ export const sendNotif = async (supabase: SupabaseClient, eventName: string, use
   }
   // check if notif has already been send in notifications table
   const { data: notif } = await supabase
-    .from<definitions['notifications']>('notifications')
+    .from('notifications')
     .select()
     .eq('user_id', userId)
     .eq('id', eventName)
