@@ -6,7 +6,7 @@ import Plans from '~~/components/pricing/Plans.vue'
 import type { Database } from '~~/types/supabase.types'
 const config = useRuntimeConfig()
 
-const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
+const plans = await fetch(`${config.public.domain}/api/plans`).then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
 
 const pricing: {
   [key: string]: any

@@ -10,7 +10,7 @@ useHead(() => ({
   meta: createMeta(
     `${brand} | Capacitor sanbox APP`,
     desc,
-    `${config.domain}/app_demo.webp`,
+    `${config.public.domain}/app_demo.webp`,
   ),
 }))
 </script>
