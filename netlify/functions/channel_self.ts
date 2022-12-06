@@ -56,13 +56,14 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
   const { data: dataChannelOverride } = await supabase
     .from('channel_devices')
     .select(`
-      app_id,
-      device_id,
-      channel_id (
-        allow_device_self_set,
-        name
-      ),
-    `)
+    device_id,
+    app_id,
+    channel_id (
+      id,
+      allow_device_self_set,
+      name
+    )
+  `)
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
@@ -94,7 +95,8 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       updated_at: new Date().toISOString(),
     })
   }
-  if (!channel || (dataChannelOverride && !dataChannelOverride?.channel_id.allow_device_self_set)) {
+  if (!channel || (dataChannelOverride
+    && !(dataChannelOverride?.channel_id as Database['public']['Tables']['channels']['Row']).allow_device_self_set)) {
     return sendRes({
       message: 'Cannot change device override current channel don\t allow it',
       error: 'cannot_override',
@@ -181,18 +183,20 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
       app_id,
       device_id,
       channel_id (
+        id,
         allow_device_self_set,
         name
-      ),
+      )
     `)
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
   if (dataChannelOverride && dataChannelOverride.channel_id) {
+    const channelId = dataChannelOverride.channel_id as Database['public']['Tables']['channels']['Row']
     return sendRes({
-      channel: dataChannelOverride.channel_id.name,
+      channel: channelId.name,
       status: 'override',
-      allowSet: dataChannelOverride.channel_id.allow_device_self_set,
+      allowSet: channelId.allow_device_self_set,
     })
   }
   if (errorChannel) {

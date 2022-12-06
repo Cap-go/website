@@ -117,7 +117,6 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       .eq('device_id', device_id)
       .eq('app_id', app_id)
       .single()
-
     const { data: devicesOverride } = await supabase
       .from('devices_override')
       .select(`
@@ -183,15 +182,20 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
         error: 'not_good_plan',
       }, 200)
     }
-    if (channelOverride && channelOverride.channel_id && channelOverride.channel_id.version) {
+    if (channelOverride && channelOverride.channel_id) {
+      const channelId = channelOverride.channel_id as Database['public']['Tables']['channels']['Row'] & {
+        version: Database['public']['Tables']['app_versions']['Row']
+      }
+
       // eslint-disable-next-line no-console
-      console.log(id, 'Set channel override', app_id, channelOverride.channel_id.version.name)
-      version = channelOverride.channel_id.version
-      channel = channelOverride.channel_id
+      console.log(id, 'Set channel override', app_id, channelId.version.name)
+      version = channelId.version
+      channel = channelId
     }
     if (devicesOverride && devicesOverride.version) {
+      const deviceVersion = devicesOverride.version as Database['public']['Tables']['app_versions']['Row']
       // eslint-disable-next-line no-console
-      console.log(id, 'Set device override', app_id, devicesOverride.version.name)
+      console.log(id, 'Set device override', app_id, deviceVersion.name)
       version = devicesOverride.version as Database['public']['Tables']['app_versions']['Row']
     }
 
