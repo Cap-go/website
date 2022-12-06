@@ -34,11 +34,13 @@ export const createMetaImage = (image: string | null = null, title: string | nul
       },
       {
         hid: 'og:image:width',
-        property: 'og:image:width', content: '1200',
+        property: 'og:image:width',
+        content: '1200',
       },
       {
-         hid: 'og:image:height',
-        property: 'og:image:height', content: '627',
+        hid: 'og:image:height',
+        property: 'og:image:height',
+        content: '627',
       },
     ]
   }
@@ -55,7 +57,8 @@ export const createMeta = (
   const base: Meta[] = [
     {
       hid: 'title',
-      name: 'title', content: title,
+      name: 'title',
+      content: title,
     },
     {
       hid: 'og:title',
@@ -77,11 +80,13 @@ export const createMeta = (
     base.push(
       {
         hid: 'author',
-        name: 'author', content: author,
+        name: 'author',
+        content: author,
       },
       {
         hid: 'og:article:author',
-        name: 'og:article:author', content: author,
+        name: 'og:article:author',
+        content: author,
       },
     )
   }
@@ -92,7 +97,8 @@ export const createMeta = (
     base.push(
       {
         hid: 'og:audio',
-        property: 'og:audio', content: audio,
+        property: 'og:audio',
+        content: audio,
       },
       {
         hid: 'og:audio:type',
