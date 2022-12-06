@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 
-const domain = config.domain
+const domain = config.public.domain
 const brand = config.brand
 useHead({
   title: `${brand} | Privacy Policy`,

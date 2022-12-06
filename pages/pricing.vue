@@ -6,7 +6,7 @@ import Plans from '~~/components/pricing/Plans.vue'
 import type { definitions } from '~~/types/supabase'
 const config = useRuntimeConfig()
 
-const plans = await fetch(`${config.domain}/api/plans`).then(r => r.json() as Promise<Array<definitions['plans']>>)
+const plans = await fetch(`${config.public.domain}/api/plans`).then(r => r.json() as Promise<Array<definitions['plans']>>)
 
 const pricing: {
   [key: string]: any
