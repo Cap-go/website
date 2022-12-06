@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { Database } from '~~/types/supabase.types'
 
 const props = defineProps({
   pricing: {
-    type: Array<definitions['plans']>,
+    type: Array<Database['public']['Tables']['plans']['Row']>,
     required: true,
   },
   paygBase: {
