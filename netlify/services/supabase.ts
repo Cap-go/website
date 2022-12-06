@@ -149,7 +149,7 @@ export const isPaying = async (supabase: SupabaseClient, userId: string): Promis
 
 export const isAllowedAction = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
-    .rpc<boolean>('is_allowed_action', { userid: userId })
+    .rpc<boolean>('is_allowed_action_user', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
