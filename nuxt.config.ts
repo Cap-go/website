@@ -105,11 +105,7 @@ const structuredData = {
 }
 
 export default defineNuxtConfig({
-  target: 'static',
   ssr: true,
-  // generate: {
-  //   fallback: 'true',
-  // },
   nitro: {
     preset: 'netlify-edge',
     prerender: {
@@ -241,7 +237,6 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   build: {
-    extractCSS: true,
     transpile: ['@headlessui/vue', '@heroicons/vue'],
   },
 
