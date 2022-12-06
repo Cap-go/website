@@ -8,36 +8,36 @@ export const createMetaImage = (image: string | null = null, title: string | nul
     const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
     return [
       {
-        // hid: 'og:image:alt',
+        hid: 'og:image:alt',
         property: 'og:image:alt',
         content: titleFix,
       },
       {
-        // hid: 'og:image:type',
+        hid: 'og:image:type',
         property: 'og:image:type',
         content: 'image/webp',
       },
       {
-        // hid: 'og:image',
+        hid: 'og:image',
         property: 'og:image',
         content: image_unsecure,
       },
       {
-        // hid: 'og:image:secure',
+        hid: 'og:image:secure',
         property: 'og:image:secure',
         content: image,
       },
       {
-        // hid: 'twitter:image',
+        hid: 'twitter:image',
         property: 'twitter:image',
         content: image,
       },
       {
-        // hid: 'og:image:width',
+        hid: 'og:image:width',
         property: 'og:image:width', content: '1200',
       },
       {
-        //  hid: 'og:image:height',
+         hid: 'og:image:height',
         property: 'og:image:height', content: '627',
       },
     ]
@@ -54,21 +54,21 @@ export const createMeta = (
 ): Meta[] => {
   const base: Meta[] = [
     {
-      // hid: 'title',
+      hid: 'title',
       name: 'title', content: title,
     },
     {
-      // hid: 'og:title',
+      hid: 'og:title',
       property: 'og:title',
       content: title,
     },
     {
-      // hid: 'description',
+      hid: 'description',
       name: 'description',
       content: description,
     },
     {
-      // hid: 'og:description',
+      hid: 'og:description',
       property: 'og:description',
       content: description,
     },
@@ -76,11 +76,11 @@ export const createMeta = (
   if (author) {
     base.push(
       {
-        // hid: 'author',
+        hid: 'author',
         name: 'author', content: author,
       },
       {
-        //  hid: 'og:article:author',
+        hid: 'og:article:author',
         name: 'og:article:author', content: author,
       },
     )
@@ -91,11 +91,11 @@ export const createMeta = (
   if (audio) {
     base.push(
       {
-        //  hid: 'og:audio',
+        hid: 'og:audio',
         property: 'og:audio', content: audio,
       },
       {
-        // hid: 'og:audio:type',
+        hid: 'og:audio:type',
         property: 'og:audio:type',
         content: 'audio/mpeg',
       },
