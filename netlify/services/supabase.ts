@@ -46,12 +46,13 @@ export const updateOrCreateVersion = async (supabase: SupabaseClient<Database>,
   update: Database['public']['Tables']['app_versions']['Insert']) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateVersion', update)
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('app_versions')
     .select()
     .eq('app_id', update.app_id)
     .eq('name', update.name)
-  if (data && data.length && !error) {
+    .single()
+  if (data) {
     return supabase
       .from('app_versions')
       .update(update)
@@ -83,13 +84,14 @@ export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
   console.log('updateOrCreateChannel', update)
   if (!update.app_id || !update.name || !update.created_by)
     return Promise.reject(Error('updateOrCreateChannel: missing required fields'))
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('channels')
     .select()
     .eq('app_id', update.app_id)
     .eq('name', update.name)
     .eq('created_by', update.created_by)
-  if (data && data.length && !error) {
+    .single()
+  if (data) {
     return supabase
       .from('channels')
       .update(update)
@@ -111,22 +113,27 @@ export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
 export const updateOrCreateDevice = async (supabase: SupabaseClient<Database>,
   update: Database['public']['Tables']['devices']['Insert']) => {
   // console.log('updateOrCreateDevice', update)
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('devices')
     .select()
     .eq('app_id', update.app_id)
     .eq('device_id', update.device_id)
-  if (!data || !data.length || error) {
-    return supabase
-      .from('devices')
-      .insert(update)
-  }
-  else {
+    .single()
+  if (data) {
     return supabase
       .from('devices')
       .update(update)
       .eq('app_id', update.app_id)
       .eq('device_id', update.device_id)
+      .select()
+      .single()
+  }
+  else {
+    return supabase
+      .from('devices')
+      .insert(update)
+      .select()
+      .single()
   }
 }
 
