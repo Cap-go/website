@@ -39,8 +39,8 @@ const structuredData = {
       'isPartOf': {
         '@id': `${getUrl(process.env.BRANCH)}/#website`,
       },
-      'datePublished': '2018-01-12T22:51:56+00:00',
-      'dateModified': '2020-03-17T22:30:14+00:00',
+      'datePublished': '2022-01-30T22:51:56+00:00',
+      'dateModified': new Date().toISOString(),
       'description': description,
       'breadcrumb': {
         '@id': `${getUrl(process.env.BRANCH)}/#breadcrumb`,
