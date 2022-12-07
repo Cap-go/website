@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient } from '@supabase/supabase-js'
-import type { definitions } from '../../types/supabase'
+import type { Database } from '../../types/supabase.types'
 import { addEventPerson } from './crisp'
 import { logsnag } from './logsnag'
 import { sendNotif } from './notifications'
@@ -33,93 +33,113 @@ const planToInt = (plan: string) => {
 
 export const useSupabase = (url: string, key: string) => {
   const options = {
-    autoRefreshToken: false,
-    persistSession: false,
-    detectSessionInUrl: false,
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+      detectSessionInUrl: false,
+    },
   }
-  return createClient(url, key, options)
+  return createClient<Database>(url, key, options)
 }
 
-export const updateOrCreateVersion = async (supabase: SupabaseClient, update: Partial<definitions['app_versions']>) => {
+export const updateOrCreateVersion = async (supabase: SupabaseClient<Database>,
+  update: Database['public']['Tables']['app_versions']['Insert']) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateVersion', update)
-  const { data, error } = await supabase
-    .from<definitions['app_versions']>('app_versions')
+  const { data } = await supabase
+    .from('app_versions')
     .select()
     .eq('app_id', update.app_id)
     .eq('name', update.name)
-  if (data && data.length && !error) {
+    .single()
+  if (data) {
     return supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .update(update)
       .eq('app_id', update.app_id)
       .eq('name', update.name)
       .eq('deleted', false)
+      .select()
+      .single()
   }
   else {
     return supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .insert(update)
+      .select()
+      .single()
   }
 }
 
-export const updateVersionStats = async (supabase: SupabaseClient, increment: VersionStatsIncrement) => {
+export const updateVersionStats = async (supabase: SupabaseClient<Database>, increment: VersionStatsIncrement) => {
   const { error } = await supabase
     .rpc('increment_version_stats', increment)
   if (error)
     console.error('increment_stats', error)
 }
 
-export const updateOrCreateChannel = async (supabase: SupabaseClient, update: Partial<definitions['channels']>) => {
+export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
+  update: Database['public']['Tables']['channels']['Insert']) => {
   // eslint-disable-next-line no-console
   console.log('updateOrCreateChannel', update)
   if (!update.app_id || !update.name || !update.created_by)
     return Promise.reject(Error('updateOrCreateChannel: missing required fields'))
-  const { data, error } = await supabase
-    .from<definitions['channels']>('channels')
+  const { data } = await supabase
+    .from('channels')
     .select()
     .eq('app_id', update.app_id)
     .eq('name', update.name)
     .eq('created_by', update.created_by)
-  if (data && data.length && !error) {
+    .single()
+  if (data) {
     return supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .update(update)
       .eq('app_id', update.app_id)
       .eq('name', update.name)
       .eq('created_by', update.created_by)
+      .select()
+      .single()
   }
   else {
     return supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .insert(update)
+      .select()
+      .single()
   }
 }
 
-export const updateOrCreateDevice = async (supabase: SupabaseClient, update: Partial<definitions['devices']>) => {
+export const updateOrCreateDevice = async (supabase: SupabaseClient<Database>,
+  update: Database['public']['Tables']['devices']['Insert']) => {
   // console.log('updateOrCreateDevice', update)
-  const { data, error } = await supabase
-    .from<definitions['devices']>('devices')
+  const { data } = await supabase
+    .from('devices')
     .select()
     .eq('app_id', update.app_id)
     .eq('device_id', update.device_id)
-  if (!data || !data.length || error) {
+    .single()
+  if (data) {
     return supabase
-      .from<definitions['devices']>('devices')
-      .insert(update)
-  }
-  else {
-    return supabase
-      .from<definitions['devices']>('devices')
+      .from('devices')
       .update(update)
       .eq('app_id', update.app_id)
       .eq('device_id', update.device_id)
+      .select()
+      .single()
+  }
+  else {
+    return supabase
+      .from('devices')
+      .insert(update)
+      .select()
+      .single()
   }
 }
 
-export const isGoodPlan = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
+export const isGoodPlan = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
-    .rpc<boolean>('is_good_plan_v2', { userid: userId })
+    .rpc('is_good_plan_v2', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -127,9 +147,9 @@ export const isGoodPlan = async (supabase: SupabaseClient, userId: string): Prom
   return data || false
 }
 
-export const isTrial = async (supabase: SupabaseClient, userId: string): Promise<number> => {
+export const isTrial = async (supabase: SupabaseClient<Database>, userId: string): Promise<number> => {
   const { data, error } = await supabase
-    .rpc<number>('is_trial', { userid: userId })
+    .rpc('is_trial', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -137,9 +157,9 @@ export const isTrial = async (supabase: SupabaseClient, userId: string): Promise
   return data || 0
 }
 
-export const isPaying = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
+export const isPaying = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
-    .rpc<boolean>('is_paying', { userid: userId })
+    .rpc('is_paying', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -147,9 +167,9 @@ export const isPaying = async (supabase: SupabaseClient, userId: string): Promis
   return data || false
 }
 
-export const isAllowedAction = async (supabase: SupabaseClient, userId: string): Promise<boolean> => {
+export const isAllowedAction = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
-    .rpc<boolean>('is_allowed_action_user', { userid: userId })
+    .rpc('is_allowed_action_user', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -157,9 +177,9 @@ export const isAllowedAction = async (supabase: SupabaseClient, userId: string):
   return data
 }
 
-export const sendStats = async (supabase: SupabaseClient, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
-  const stat: Partial<definitions['stats']> = {
-    platform: platform as definitions['stats']['platform'],
+export const sendStats = async (supabase: SupabaseClient<Database>, action: string, platform: string, device_id: string, app_id: string, version_build: string, versionId: number) => {
+  const stat: Database['public']['Tables']['stats']['Insert'] = {
+    platform: platform as Database['public']['Enums']['platform_os'],
     device_id,
     action,
     app_id,
@@ -168,7 +188,7 @@ export const sendStats = async (supabase: SupabaseClient, action: string, platfo
   }
   try {
     const { error } = await supabase
-      .from<definitions['stats']>('stats')
+      .from('stats')
       .insert(stat)
     if (error)
       console.error('Cannot insert stat', app_id, version_build, error)
@@ -178,11 +198,12 @@ export const sendStats = async (supabase: SupabaseClient, action: string, platfo
   }
 }
 
-export const findBestPlan = async (supabase: SupabaseClient, stats: StatsV2): Promise<string> => {
+export const findBestPlan = async (supabase: SupabaseClient<Database>,
+  stats: Database['public']['Functions']['get_total_stats']['Returns'][0]): Promise<string> => {
   const storage = Math.round((stats.storage || 0) / 1024 / 1024 / 1024)
   const bandwidth = Math.round((stats.bandwidth || 0) / 1024 / 1024 / 1024)
   const { data, error } = await supabase
-    .rpc<string>('find_best_plan_v2', {
+    .rpc('find_best_plan_v2', {
       mau: stats.mau || 0,
       storage,
       bandwidth,
@@ -194,23 +215,24 @@ export const findBestPlan = async (supabase: SupabaseClient, stats: StatsV2): Pr
   return data || 'Team'
 }
 
-export const getMaxstats = async (supabase: SupabaseClient, userId: string, dateId: string): Promise<StatsV2> => {
+export const getMaxstats = async (supabase: SupabaseClient<Database>,
+  userId: string, dateId: string): Promise<Database['public']['Functions']['get_total_stats']['Returns'][0]> => {
   const { data, error } = await supabase
-    .rpc<StatsV2>('get_total_stats', { userid: userId, dateid: dateId })
+    .rpc('get_total_stats', { userid: userId, dateid: dateId })
     .single()
   if (error)
     throw new Error(error.message)
 
-  return data || {
+  return data[0] || {
     mau: 0,
     storage: 0,
     bandwidth: 0,
   }
 }
 
-export const getCurrentPlanName = async (supabase: SupabaseClient, userId: string): Promise<string> => {
+export const getCurrentPlanName = async (supabase: SupabaseClient<Database>, userId: string): Promise<string> => {
   const { data, error } = await supabase
-    .rpc<string>('get_current_plan_name', { userid: userId })
+    .rpc('get_current_plan_name', { userid: userId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -218,10 +240,10 @@ export const getCurrentPlanName = async (supabase: SupabaseClient, userId: strin
   return data || 'Free'
 }
 
-export const checkPlan = async (supabase: SupabaseClient, userId: string): Promise<void> => {
+export const checkPlan = async (supabase: SupabaseClient<Database>, userId: string): Promise<void> => {
   try {
     const { data: user, error: userError } = await supabase
-      .from<definitions['users']>('users')
+      .from('users')
       .select()
       .eq('id', userId)
       .single()
@@ -229,7 +251,7 @@ export const checkPlan = async (supabase: SupabaseClient, userId: string): Promi
       throw new Error(userError.message)
     if (await isTrial(supabase, userId)) {
       await supabase
-        .from<definitions['stripe_info']>('stripe_info')
+        .from('stripe_info')
         .update({ is_good_plan: true })
         .eq('customer_id', user.customer_id)
         .then()
@@ -283,7 +305,7 @@ export const checkPlan = async (supabase: SupabaseClient, userId: string): Promi
       }
     }
     return supabase
-      .from<definitions['stripe_info']>('stripe_info')
+      .from('stripe_info')
       .update({ is_good_plan: !!is_good_plan })
       .eq('customer_id', user.customer_id)
       .then()

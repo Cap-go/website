@@ -1,15 +1,15 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import type { Database } from '../../types/supabase.types'
 import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '../../types/supabase'
 
 interface Bundle {
   app_id?: string
   page?: number
 }
-export const deleteBundle = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const deleteBundle = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -26,7 +26,7 @@ export const deleteBundle = async (event: any, supabase: SupabaseClient) => {
     const from = fetchOffset * fetchLimit
     const to = (fetchOffset + 1) * fetchLimit - 1
     const { error: dbError } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .update({
         deleted: true,
       })
@@ -45,8 +45,8 @@ export const deleteBundle = async (event: any, supabase: SupabaseClient) => {
   return sendRes()
 }
 
-export const get = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const get = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey) {
     console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -60,7 +60,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
     }
 
     const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
-    const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
+    const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
     if (!apikey || !body) {
       console.error('Cannot Verify User')
       return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -70,7 +70,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       return sendRes({ status: 'You can\'t check this app', app_id: body.app_id }, 400)
     }
     const { data: dataBundles, error: dbError } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .select()
       .eq('app_id', body.app_id)
       .eq('deleted', false)

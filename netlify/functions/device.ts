@@ -2,7 +2,7 @@ import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '../../types/supabase'
+import type { Database } from '../../types/supabase.types'
 
 interface DeviceLink {
   app_id: string
@@ -16,12 +16,9 @@ interface GetDevice {
   device_id?: string
   page?: number
 }
-interface DeviceVersion {
-  version: definitions['app_versions']
-}
 
-const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
+const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
   if (!apikey) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -35,7 +32,7 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
   // if device_id get one device
   if (body.device_id) {
     const { data: dataDevice, error: dbError } = await supabase
-      .from<definitions['devices'] & DeviceVersion>('devices')
+      .from('devices')
       .select(`
           created_at,
           updated_at,
@@ -70,7 +67,7 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
     //  page 1 from = 50 to = 99 [50,51,...,99]
     //  page 2 from = 100 to = 149 [100,101,...,149]
     const { data: dataDevices, error: dbError } = await supabase
-      .from<definitions['devices']>('devices')
+      .from('devices')
       .select(`
           created_at,
           updated_at,
@@ -96,8 +93,8 @@ const get = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
 }
 
-const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -114,7 +111,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   }
   // find device
   const { data: dataDevice, error: dbError } = await supabase
-    .from<definitions['devices']>('devices')
+    .from('devices')
     .select()
     .eq('app_id', body.app_id)
     .eq('device_id', body.device_id)
@@ -126,7 +123,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   // if version_id set device_override to it
   if (body.version_id) {
     const { data: dataVersion, error: dbError } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .select()
       .eq('app_id', body.app_id)
       .eq('name', body.version_id)
@@ -136,7 +133,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
       return sendRes({ status: 'Cannot find version', error: dbError }, 400)
     }
     const { data: dataDev, error: dbErrorDev } = await supabase
-      .from<definitions['devices_override']>('devices_override')
+      .from('devices_override')
       .upsert({
         device_id: body.device_id,
         version: dataVersion.id,
@@ -152,7 +149,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   if (body.channel) {
     // get channel by name
     const { data: dataChannel, error: dbError } = await supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .select()
       .eq('app_id', body.app_id)
       .eq('name', body.channel)
@@ -162,7 +159,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
     }
     const { data: dataChannelDev, error: dbErrorDev } = await supabase
-      .from<definitions['channel_devices']>('channel_devices')
+      .from('channel_devices')
       .upsert({
         device_id: body.device_id,
         channel_id: dataChannel.id,
@@ -177,7 +174,7 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   else {
     // delete channel_override
     await supabase
-      .from<definitions['channel_devices']>('channel_devices')
+      .from('channel_devices')
       .delete()
       .eq('device_id', body.device_id)
       .eq('app_id', body.app_id)
@@ -185,8 +182,8 @@ const post = async (event: any, supabase: SupabaseClient): Promise<any> => {
   return sendRes()
 }
 
-export const deleteDev = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const deleteDev = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User', event.headers.authorization)
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -199,7 +196,7 @@ export const deleteDev = async (event: any, supabase: SupabaseClient) => {
   }
   try {
     const { error } = await supabase
-      .from<definitions['devices_override']>('devices_override')
+      .from('devices_override')
       .delete()
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
@@ -208,7 +205,7 @@ export const deleteDev = async (event: any, supabase: SupabaseClient) => {
       return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
     }
     const { error: errorChannel } = await supabase
-      .from<definitions['channel_devices']>('channel_devices')
+      .from('channel_devices')
       .delete()
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)

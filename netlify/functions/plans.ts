@@ -3,14 +3,14 @@
 // stargazers_count
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
-import type { definitions } from '../../types/supabase'
 import { useSupabase } from '../services/supabase'
+import type { Database } from '../../types/supabase.types'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
 // Get all the paid plans
-const get = async (supabase: SupabaseClient) => {
+const get = async (supabase: SupabaseClient<Database>) => {
   const { data: plans } = await supabase
-    .from<definitions['plans']>('plans')
+    .from('plans')
     .select().neq('name', 'Free')
     .order('price_m')
   console.log('plans', plans)

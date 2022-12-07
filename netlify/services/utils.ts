@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import type { definitions } from '../../types/supabase'
 import keys from '../../configs.json'
+import type { Database } from '../../types/supabase.types'
 
 export const fetchLimit = 50
 export interface AppInfos {
@@ -56,14 +56,15 @@ export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => ({
   body: JSON.stringify(data),
 })
 
-export const checkKey = async (authorization: string | undefined, supabase: SupabaseClient, allowed: definitions['apikeys']['mode'][]): Promise<definitions['apikeys'] | null> => {
+export const checkKey = async (authorization: string | undefined,
+  supabase: SupabaseClient<Database>, allowed: Database['public']['Enums']['key_mode'][]): Promise<Database['public']['Tables']['apikeys']['Row'] | null> => {
   if (!authorization) {
     console.error('checkKey missing authorization')
     return null
   }
   try {
     const { data, error } = await supabase
-      .from<definitions['apikeys']>('apikeys')
+      .from('apikeys')
       .select()
       .eq('key', authorization)
       .in('mode', allowed)
@@ -80,12 +81,12 @@ export const checkKey = async (authorization: string | undefined, supabase: Supa
   }
 }
 
-export const checkAppOwner = async (userId: string | undefined, appId: string | undefined, supabase: SupabaseClient): Promise<boolean> => {
+export const checkAppOwner = async (userId: string | undefined, appId: string | undefined, supabase: SupabaseClient<Database>): Promise<boolean> => {
   if (!appId || !userId)
     return false
   try {
     const { data, error } = await supabase
-      .from<definitions['apps']>('apps')
+      .from('apps')
       .select()
       .eq('user_id', userId)
       .eq('app_id', appId)

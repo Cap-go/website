@@ -1,8 +1,8 @@
 import type { Handler } from '@netlify/functions'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import type { Database } from '../../types/supabase.types'
 import { updateOrCreateChannel, useSupabase } from '../services/supabase'
 import { checkAppOwner, checkKey, fetchLimit, findEnv, getRightKey, sendRes, transformEnvVar } from '../services/utils'
-import type { definitions } from '../../types/supabase'
 
 interface ChannelSet {
   app_id?: string
@@ -16,8 +16,8 @@ interface GetDevice {
   page?: number
 }
 
-export const get = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const get = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -31,7 +31,7 @@ export const get = async (event: any, supabase: SupabaseClient) => {
   // get one channel or all channels
   if (body.channel) {
     const { data: dataChannel, error: dbError } = await supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .select(`
           id,
           created_at,
@@ -51,18 +51,19 @@ export const get = async (event: any, supabase: SupabaseClient) => {
       `)
       .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
-    if (dbError || !dataChannel || !dataChannel.length) {
+      .single()
+    if (dbError || !dataChannel) {
       console.error('Cannot find channel')
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
     }
-    return sendRes(dataChannel[0])
+    return sendRes(dataChannel)
   }
   else {
     const fetchOffset = body.page === undefined ? 0 : body.page
     const from = fetchOffset * fetchLimit
     const to = (fetchOffset + 1) * fetchLimit - 1
     const { data: dataChannels, error: dbError } = await supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .select(`
           id,
           created_at,
@@ -90,8 +91,8 @@ export const get = async (event: any, supabase: SupabaseClient) => {
   }
 }
 
-export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const deleteChannel = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -105,7 +106,7 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
   }
   try {
     const { error: dbError } = await supabase
-      .from<definitions['channels']>('channels')
+      .from('channels')
       .delete()
       .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
@@ -121,8 +122,8 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient) => {
   return sendRes()
 }
 
-export const post = async (event: any, supabase: SupabaseClient) => {
-  const apikey: definitions['apikeys'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
+export const post = async (event: any, supabase: SupabaseClient<Database>) => {
+  const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
   if (!apikey || !event.body) {
     console.error('Cannot Verify User')
     return sendRes({ status: 'Cannot Verify User' }, 400)
@@ -134,14 +135,14 @@ export const post = async (event: any, supabase: SupabaseClient) => {
     console.error('You can\'t access this app', body.app_id)
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
-  const channel: Partial<definitions['channels']> = {
+  const channel: Database['public']['Tables']['channels']['Insert'] = {
     created_by: apikey.user_id,
-    app_id: body.app_id,
+    app_id: body.app_id || '',
     name: body.channel,
   }
   if (body.version) {
     const { data, error: vError } = await supabase
-      .from<definitions['app_versions']>('app_versions')
+      .from('app_versions')
       .select()
       .eq('app_id', body.app_id)
       .eq('name', body.version)

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { definitions } from '~~/types/supabase'
+import type { Database } from '~~/types/supabase.types'
 
 const props = defineProps({
   pricing: {
-    type: Array<definitions['plans']>,
+    type: Array<Database['public']['Tables']['plans']['Row']>,
     required: true,
   },
   paygBase: {
@@ -54,7 +54,9 @@ const calculateTotal = () => {
   const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
   const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
-  if (sum > 0) { totalPrice.value = roundNumber(basePrice + sum) }
+  if (sum > 0) {
+    totalPrice.value = roundNumber(basePrice + sum)
+  }
   else {
     suggestBestPlan()
     totalPrice.value = suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice

@@ -46,7 +46,7 @@ const structuredData: WithContext<NewsArticle> = {
 }
 useJsonld(structuredData)
 useHead(() => ({
-  titleTemplate: data.value?.title || 'No title',
+  title: data.value?.title || 'No title',
   script: [
     {
       hid: 'seo-schema-graph',

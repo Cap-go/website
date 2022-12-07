@@ -3,14 +3,14 @@
 // stargazers_count
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Handler } from '@netlify/functions'
-import type { definitions } from '../../types/supabase'
 import { useSupabase } from '../services/supabase'
+import type { Database } from '../../types/supabase.types'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
-const get = async (supabase: SupabaseClient) => {
+const get = async (supabase: SupabaseClient<Database>) => {
   const date_id = new Date().toISOString().slice(0, 10)
   const { data, error } = await supabase
-    .from<definitions['global_stats']>('global_stats')
+    .from('global_stats')
     .select()
     .eq('date_id', date_id)
     .single()

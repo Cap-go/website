@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import semver from 'semver'
+import type { Database } from '../../types/supabase.types'
 import { updateVersionStats, useSupabase } from '../services/supabase'
-import type { definitions } from '../../types/supabase'
 import type { AppInfos } from './../services/utils'
 import { findEnv, getRightKey, sendRes, transformEnvVar } from './../services/utils'
 
@@ -44,20 +44,22 @@ export const handler: Handler = async (event) => {
     version_build = coerce.version
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
 
-  const device: Partial<definitions['devices'] | definitions['devices_onprem']> = {
-    platform: platform as definitions['stats']['platform'],
+  const device: Database['public']['Tables']['devices']['Insert'] | Database['public']['Tables']['devices_onprem']['Insert'] = {
+    platform: platform as Database['public']['Enums']['platform_os'],
     device_id,
     app_id,
     plugin_version,
     os_version: version_os,
+    version: version_name || 'unknown' as any,
     ...(custom_id ? { custom_id } : {}),
     is_emulator: is_emulator === undefined ? false : is_emulator,
     is_prod: is_prod === undefined ? true : is_prod,
   }
 
-  const stat: Partial<definitions['stats']> = {
-    platform: platform as definitions['stats']['platform'],
+  const stat: Database['public']['Tables']['stats']['Insert'] = {
+    platform: platform as Database['public']['Enums']['platform_os'],
     device_id,
+    version: version || 0,
     action,
     app_id,
     version_build,
@@ -65,16 +67,17 @@ export const handler: Handler = async (event) => {
 
   const all = []
   const { data, error } = await supabase
-    .from<definitions['app_versions']>('app_versions')
+    .from('app_versions')
     .select()
     .eq('app_id', app_id)
     .eq('name', version_name || 'unknown')
-  if (data && data.length && !error) {
-    stat.version = data[0].id
-    device.version = data[0].id
+    .single()
+  if (data && !error) {
+    stat.version = data.id
+    device.version = data.id
     if (!device.is_emulator && device.is_prod) {
       const { data: deviceData, error: deviceError } = await supabase
-        .from<definitions['devices']>(deviceDb)
+        .from(deviceDb)
         .select()
         .eq('app_id', app_id)
         .eq('device_id', device_id)
@@ -88,15 +91,13 @@ export const handler: Handler = async (event) => {
       }
       all.push(updateVersionStats(supabase, {
         app_id,
-        version_id: data[0].id,
+        version_id: data.id,
         devices: 1,
       }))
     }
   }
   else {
     console.error('switch to onprem', app_id)
-    device.version = version_name || 'unknown' as any
-    stat.version = version || 0
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
   }
