@@ -22,16 +22,12 @@ export const deleteBundle = async (event: any, supabase: SupabaseClient<Database
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
   }
   try {
-    const fetchOffset = body.page === undefined ? 0 : body.page
-    const from = fetchOffset * fetchLimit
-    const to = (fetchOffset + 1) * fetchLimit - 1
     const { error: dbError } = await supabase
       .from('app_versions')
       .update({
         deleted: true,
       })
       .eq('app_id', body.app_id)
-      .range(from, to)
       .order('created_at', { ascending: true })
     if (dbError) {
       console.error('Cannot delete bundle')
@@ -69,12 +65,16 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
       console.error('You can\'t check this app', body.app_id)
       return sendRes({ status: 'You can\'t check this app', app_id: body.app_id }, 400)
     }
+    const fetchOffset = body.page === undefined ? 0 : body.page
+    const from = fetchOffset * fetchLimit
+    const to = (fetchOffset + 1) * fetchLimit - 1
     const { data: dataBundles, error: dbError } = await supabase
       .from('app_versions')
       .select()
       .eq('app_id', body.app_id)
       .eq('deleted', false)
       .order('created_at', { ascending: false })
+      .range(from, to)
     if (dbError || !dataBundles || !dataBundles.length) {
       console.error('Cannot get bundles', dbError)
       return sendRes({ status: 'Cannot get bundles', error: dbError }, 400)

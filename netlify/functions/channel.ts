@@ -139,6 +139,7 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
     created_by: apikey.user_id,
     app_id: body.app_id || '',
     name: body.channel,
+    version: -1,
   }
   if (body.version) {
     const { data, error: vError } = await supabase
