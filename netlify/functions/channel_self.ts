@@ -116,7 +116,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       console.error('Cannot find channel', dbError)
       return sendRes({ message: `Cannot find channel ${dbError}`, error: 'channel_not_found' }, 400)
     }
-    const { data: dataChannelDev, error: dbErrorDev } = await supabase
+    const { error: dbErrorDev } = await supabase
       .from('channel_devices')
       .upsert({
         device_id,
@@ -124,7 +124,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id,
         created_by: dataChannel.created_by,
       })
-    if (dbErrorDev || !dataChannelDev) {
+    if (dbErrorDev) {
       console.error('Cannot do channel override', dbErrorDev)
       return sendRes({ message: `Cannot do channel override ${dbErrorDev}`, error: 'override_not_allowed' }, 400)
     }

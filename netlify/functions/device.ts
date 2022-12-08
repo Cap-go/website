@@ -132,7 +132,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       console.error('Cannot find version', dbError)
       return sendRes({ status: 'Cannot find version', error: dbError }, 400)
     }
-    const { data: dataDev, error: dbErrorDev } = await supabase
+    const { error: dbErrorDev } = await supabase
       .from('devices_override')
       .upsert({
         device_id: body.device_id,
@@ -140,7 +140,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id: body.app_id,
         created_by: apikey.user_id,
       })
-    if (dbErrorDev || !dataDev) {
+    if (dbErrorDev) {
       console.error('Cannot save device override', dbErrorDev)
       return sendRes({ status: 'Cannot save device override', error: dbErrorDev }, 400)
     }
@@ -158,7 +158,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       console.error('Cannot find channel', dbError)
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
     }
-    const { data: dataChannelDev, error: dbErrorDev } = await supabase
+    const { error: dbErrorDev } = await supabase
       .from('channel_devices')
       .upsert({
         device_id: body.device_id,
@@ -166,7 +166,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id: body.app_id,
         created_by: apikey.user_id,
       })
-    if (dbErrorDev || !dataChannelDev) {
+    if (dbErrorDev) {
       console.error('Cannot find channel override', dbErrorDev)
       return sendRes({ status: 'Cannot save channel override', error: dbErrorDev }, 400)
     }
