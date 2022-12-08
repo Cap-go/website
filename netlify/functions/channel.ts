@@ -180,13 +180,18 @@ export const handler: Handler = async (event) => {
     return sendRes()
 
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), transformEnvVar(findEnv(event.rawUrl), 'SUPABASE_ADMIN_KEY'))
-
-  if (event.httpMethod === 'POST')
-    return post(event, supabase)
-  else if (event.httpMethod === 'GET')
-    return get(event, supabase)
-  else if (event.httpMethod === 'DELETE')
-    return deleteChannel(event, supabase)
+  try {
+    if (event.httpMethod === 'POST')
+      return post(event, supabase)
+    else if (event.httpMethod === 'GET')
+      return get(event, supabase)
+    else if (event.httpMethod === 'DELETE')
+      return deleteChannel(event, supabase)
+  }
+  catch (e) {
+    console.error('Error', JSON.stringify(e))
+    return sendRes({ status: 'Error', error: JSON.stringify(e) }, 500)
+  }
   console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }
