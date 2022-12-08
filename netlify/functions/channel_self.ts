@@ -246,7 +246,7 @@ export const handler: Handler = async (event) => {
   }
   catch (e) {
     console.error('Error', JSON.stringify(e))
-    return sendRes({ status: 'Error', error: JSON.stringify(e) }, 500)
+    return sendRes({ message: `Error ${JSON.stringify(e)}`, error: 'general_error' }, 400)
   }
   console.error('Method now allowed')
   return sendRes({ message: 'Method now allowed', error: 'not_allowed' }, 400)
