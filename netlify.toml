@@ -13,6 +13,11 @@
   to = '/deepLink/:splat'
 
 [[redirects]]
+  from = "/api/auto_update"
+  to = "/.netlify/functions/updates"
+  status = 200
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
