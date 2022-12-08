@@ -201,7 +201,7 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
   }
   if (errorChannel) {
     return sendRes({
-      message: errorChannel,
+      message: `Cannot find channel ${errorChannel}`,
       error: 'channel_not_found',
     }, 400)
   }
