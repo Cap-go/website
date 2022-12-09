@@ -18,16 +18,13 @@ interface GetDevice {
 
 export const get = async (event: any, supabase: SupabaseClient<Database>) => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey) {
-    console.error('Cannot Verify User')
+  if (!apikey)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   // get one channel or all channels
   if (body.channel) {
     const { data: dataChannel, error: dbError } = await supabase
@@ -52,10 +49,9 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
       .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
       .single()
-    if (dbError || !dataChannel) {
-      console.error('Cannot find channel')
+    if (dbError || !dataChannel)
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
-    }
+
     return sendRes(dataChannel)
   }
   else {
@@ -93,30 +89,24 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
 
 export const deleteChannel = async (event: any, supabase: SupabaseClient<Database>) => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body) {
-    console.error('Cannot Verify User')
+  if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
-  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   try {
     const { error: dbError } = await supabase
       .from('channels')
       .delete()
       .eq('app_id', body.app_id || '')
       .eq('name', body.channel)
-    if (dbError) {
-      console.error('Cannot delete channel')
+    if (dbError)
       return sendRes({ status: 'Cannot delete channel', error: JSON.stringify(dbError) }, 400)
-    }
   }
   catch (e) {
-    console.error('Cannot delete channel', e)
     return sendRes({ status: 'Cannot delete channels', error: e }, 500)
   }
   return sendRes()
@@ -124,17 +114,14 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient<Databas
 
 export const post = async (event: any, supabase: SupabaseClient<Database>) => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body) {
-    console.error('Cannot Verify User')
+  if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = JSON.parse(event.body || '{}') as ChannelSet
 
-  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   const channel: Database['public']['Tables']['channels']['Insert'] = {
     created_by: apikey.user_id,
     app_id: body.app_id || '',
@@ -150,10 +137,9 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
       .eq('user_id', apikey.user_id)
       .eq('deleted', false)
       .single()
-    if (vError || !data) {
-      console.error(`Cannot find version ${body.version}`)
+    if (vError || !data)
       return sendRes({ status: `Cannot find version ${body.version}`, error: JSON.stringify(vError) }, 400)
-    }
+
     channel.version = data.id
   }
   if (body.public !== undefined)
@@ -161,13 +147,10 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
 
   try {
     const { error: dbError } = await updateOrCreateChannel(supabase, channel)
-    if (dbError) {
-      console.error('Cannot create channel')
+    if (dbError)
       return sendRes({ status: 'Cannot create channel', error: JSON.stringify(dbError) }, 400)
-    }
   }
   catch (e) {
-    console.error('Cannot create channel', e)
     return sendRes({ status: 'Cannot set channels', error: e }, 500)
   }
   return sendRes()
@@ -189,9 +172,7 @@ export const handler: Handler = async (event) => {
       return deleteChannel(event, supabase)
   }
   catch (e) {
-    console.error('Error', JSON.stringify(e))
     return sendRes({ status: 'Error', error: JSON.stringify(e) }, 500)
   }
-  console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }

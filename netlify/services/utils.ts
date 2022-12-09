@@ -50,11 +50,16 @@ export const basicHeaders = {
 }
 // authorization
 
-export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => ({
-  statusCode,
-  headers: basicHeaders,
-  body: JSON.stringify(data),
-})
+export const sendRes = (data: any = { status: 'ok' }, statusCode = 200) => {
+  if (statusCode >= 400)
+    console.error('sendRes error', JSON.stringify(data, null, 2))
+
+  return {
+    statusCode,
+    headers: basicHeaders,
+    body: JSON.stringify(data),
+  }
+}
 
 export const checkKey = async (authorization: string | undefined,
   supabase: SupabaseClient<Database>, allowed: Database['public']['Enums']['key_mode'][]): Promise<Database['public']['Tables']['apikeys']['Row'] | null> => {

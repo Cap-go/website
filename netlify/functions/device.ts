@@ -19,16 +19,13 @@ interface GetDevice {
 
 const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['read', 'all'])
-  if (!apikey) {
-    console.error('Cannot Verify User')
+  if (!apikey)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = event.queryStringParameters as any as GetDevice
-  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+  if (!body.app_id || !(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   // if device_id get one device
   if (body.device_id) {
     const { data: dataDevice, error: dbError } = await supabase
@@ -52,10 +49,9 @@ const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
       .single()
-    if (dbError || !dataDevice) {
-      console.error('Cannot find device')
+    if (dbError || !dataDevice)
       return sendRes({ status: 'Cannot find device', error: dbError }, 400)
-    }
+
     return sendRes(dataDevice)
   }
   else {
@@ -95,20 +91,16 @@ const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
 
 const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body) {
-    console.error('Cannot Verify User', event.headers.authorization)
+  if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
-  if (!body.device_id || !body.app_id) {
-    console.error('Cannot find device')
+  if (!body.device_id || !body.app_id)
     return sendRes({ status: 'Cannot find device' }, 400)
-  }
-  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   // find device
   const { data: dataDevice, error: dbError } = await supabase
     .from('devices')
@@ -116,10 +108,9 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
     .eq('app_id', body.app_id)
     .eq('device_id', body.device_id)
     .single()
-  if (dbError || !dataDevice) {
-    console.error('Cannot find device', dbError)
+  if (dbError || !dataDevice)
     return sendRes({ status: 'Cannot find device', error: dbError }, 400)
-  }
+
   // if version_id set device_override to it
   if (body.version_id) {
     const { data: dataVersion, error: dbError } = await supabase
@@ -128,10 +119,9 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       .eq('app_id', body.app_id)
       .eq('name', body.version_id)
       .single()
-    if (dbError || !dataVersion) {
-      console.error('Cannot find version', dbError)
+    if (dbError || !dataVersion)
       return sendRes({ status: 'Cannot find version', error: dbError }, 400)
-    }
+
     const { error: dbErrorDev } = await supabase
       .from('devices_override')
       .upsert({
@@ -140,10 +130,8 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id: body.app_id,
         created_by: apikey.user_id,
       })
-    if (dbErrorDev) {
-      console.error('Cannot save device override', dbErrorDev)
+    if (dbErrorDev)
       return sendRes({ status: 'Cannot save device override', error: dbErrorDev }, 400)
-    }
   }
   // if channel_id set channel_override to it
   if (body.channel) {
@@ -154,10 +142,9 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       .eq('app_id', body.app_id)
       .eq('name', body.channel)
       .single()
-    if (dbError || !dataChannel) {
-      console.error('Cannot find channel', dbError)
+    if (dbError || !dataChannel)
       return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
-    }
+
     const { error: dbErrorDev } = await supabase
       .from('channel_devices')
       .upsert({
@@ -166,10 +153,8 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id: body.app_id,
         created_by: apikey.user_id,
       })
-    if (dbErrorDev) {
-      console.error('Cannot find channel override', dbErrorDev)
+    if (dbErrorDev)
       return sendRes({ status: 'Cannot save channel override', error: dbErrorDev }, 400)
-    }
   }
   else {
     // delete channel_override
@@ -184,38 +169,31 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
 
 export const deleteDev = async (event: any, supabase: SupabaseClient<Database>) => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body) {
-    console.error('Cannot Verify User', event.headers.authorization)
+  if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = JSON.parse(event.body || '{}') as DeviceLink
-  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase))) {
-    console.error('You can\'t access this app', body.app_id)
+  if (!(await checkAppOwner(apikey.user_id, body.app_id, supabase)))
     return sendRes({ status: 'You can\'t access this app', app_id: body.app_id }, 400)
-  }
+
   try {
     const { error } = await supabase
       .from('devices_override')
       .delete()
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
-    if (error) {
-      console.error('Cannot delete override')
+    if (error)
       return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
-    }
+
     const { error: errorChannel } = await supabase
       .from('channel_devices')
       .delete()
       .eq('app_id', body.app_id)
       .eq('device_id', body.device_id)
-    if (errorChannel) {
-      console.error('Cannot delete override')
+    if (errorChannel)
       return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
-    }
   }
   catch (e) {
-    console.error('Cannot delete override', e)
     return sendRes({ status: 'delete override', error: e }, 500)
   }
   return sendRes()
@@ -237,9 +215,7 @@ export const handler: Handler = async (event) => {
       return deleteDev(event, supabase)
   }
   catch (e) {
-    console.error('Error', JSON.stringify(e))
     return sendRes({ status: 'Error', error: JSON.stringify(e) }, 500)
   }
-  console.error('Method now allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }

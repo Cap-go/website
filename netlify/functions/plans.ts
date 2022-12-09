@@ -25,6 +25,5 @@ export const handler: Handler = async (event) => {
   const supabase = useSupabase(getRightKey(findEnv(event.rawUrl), 'supa_url'), adminKey)
   if (event.httpMethod === 'GET')
     return get(supabase)
-  console.error('Method not allowed')
   return sendRes({ status: 'Method now allowed' }, 400)
 }

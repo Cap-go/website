@@ -21,7 +21,6 @@ export const handler: Handler = async (event) => {
       .single()
     if (data && !error)
       return sendRes({ status: 'ok', service })
-    console.error('db not answering as expected', error)
     return sendRes({ error: 'db not answering as expected', service }, 500)
   }
   return sendRes()

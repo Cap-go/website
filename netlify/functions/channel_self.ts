@@ -40,7 +40,6 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
 
   if (!device_id || !app_id) {
-    console.error('Cannot find device_id or appi_id')
     return sendRes({
       message: 'Cannot find device_id or appi_id',
       error: 'missing_info',
@@ -112,10 +111,9 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       .eq('name', channel)
       .eq('allow_device_self_set', true)
       .single()
-    if (dbError || !dataChannel) {
-      console.error('Cannot find channel', dbError)
-      return sendRes({ message: `Cannot find channel ${dbError}`, error: 'channel_not_found' }, 400)
-    }
+    if (dbError || !dataChannel)
+      return sendRes({ message: `Cannot find channel ${JSON.stringify(dbError)}`, error: 'channel_not_found' }, 400)
+
     const { error: dbErrorDev } = await supabase
       .from('channel_devices')
       .upsert({
@@ -124,10 +122,8 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         app_id,
         created_by: dataChannel.created_by,
       })
-    if (dbErrorDev) {
-      console.error('Cannot do channel override', dbErrorDev)
-      return sendRes({ message: `Cannot do channel override ${dbErrorDev}`, error: 'override_not_allowed' }, 400)
-    }
+    if (dbErrorDev)
+      return sendRes({ message: `Cannot do channel override ${JSON.stringify(dbErrorDev)}`, error: 'override_not_allowed' }, 400)
   }
   const { data: dataVersion, error: errorVersion } = await supabase
     .from('app_versions')
@@ -167,10 +163,9 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
     }, 400)
   }
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
-  if (!device_id || !app_id) {
-    console.error('Cannot find device or appi_id')
+  if (!device_id || !app_id)
     return sendRes({ message: 'Cannot find device_id or appi_id', error: 'missing_info' }, 400)
-  }
+
   const { data: dataChannel, error: errorChannel } = await supabase
     .from('channels')
     .select()
@@ -245,10 +240,8 @@ export const handler: Handler = async (event) => {
       return put(event, supabase)
   }
   catch (e) {
-    console.error('Error', JSON.stringify(e))
     return sendRes({ message: `Error ${JSON.stringify(e)}`, error: 'general_error' }, 400)
   }
-  console.error('Method now allowed')
   return sendRes({ message: 'Method now allowed', error: 'not_allowed' }, 400)
 }
 

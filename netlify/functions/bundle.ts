@@ -10,10 +10,8 @@ interface Bundle {
 }
 export const deleteBundle = async (event: any, supabase: SupabaseClient<Database>) => {
   const apikey: Database['public']['Tables']['apikeys']['Row'] | null = await checkKey(event.headers.authorization, supabase, ['write', 'all'])
-  if (!apikey || !event.body) {
-    console.error('Cannot Verify User')
+  if (!apikey || !event.body)
     return sendRes({ status: 'Cannot Verify User' }, 400)
-  }
 
   const body = JSON.parse(event.body || '{}') as Bundle
 
@@ -35,7 +33,6 @@ export const deleteBundle = async (event: any, supabase: SupabaseClient<Database
     }
   }
   catch (e) {
-    console.error('Cannot delete Bundle', e)
     return sendRes({ status: 'Cannot delete bundle', error: e }, 500)
   }
   return sendRes()
@@ -83,7 +80,6 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
     return sendRes(dataBundles)
   }
   catch (e) {
-    console.error('Cannot get bundles', e)
     return sendRes({ status: 'Cannot get bundles', error: e }, 500)
   }
 }
@@ -102,7 +98,6 @@ export const handler: Handler = async (event) => {
       return deleteBundle(event, supabase)
   }
   catch (e) {
-    console.error('Error', JSON.stringify(e))
     return sendRes({ status: 'Error', error: JSON.stringify(e) }, 500)
   }
   console.error('Method not allowed')

@@ -38,12 +38,6 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
   version_name = (version_name === 'builtin' || !version_name) ? version_build : version_name
   try {
     if (!app_id || !device_id || !version_build || !version_name || !platform) {
-      console.error(id, 'Cannot get all headers', platform,
-        app_id,
-        device_id,
-        custom_id,
-        version_build,
-        version_name)
       return sendRes({
         message: 'Cannot find device_id or appi_id',
         error: 'missing_info',
@@ -154,7 +148,6 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     const isOlderEnought = (new Date(version.created_at || Date.now()).getTime() + 4 * 60 * 60 * 1000) < Date.now()
 
     if (!isOlderEnought && await invalidIp(xForwardedFor.split(',')[0])) {
-      console.error('invalid ip', xForwardedFor)
       await sendStats(supabase, 'invalidIP', platform, device_id, app_id, version_build, version.id)
       return sendRes({
         message: `invalid ip ${xForwardedFor}`,
@@ -358,6 +351,5 @@ export const handler: Handler = async (event) => {
     })
     return post(id, event, supabase)
   }
-  console.error(id, 'Method not allowed')
   return sendRes({ message: 'Method now allowed', error: 'not_allowed' }, 400)
 }
