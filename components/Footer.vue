@@ -35,6 +35,7 @@ const navigation = {
     // { name: 'Press', href: '#' },
     { name: 'Imprint', href: '/imprint/' },
     { name: 'Contributing', href: '/contributing/' },
+    { name: 'Security', href: '/trust/' },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
