@@ -39,7 +39,7 @@ const domain = config.public.domain
       Source code encryption
     </h3>
     <ul>
-      <li>Source code is always encrypted in transit via TLS and HTTPS, and is only stored temporarily in ephemeral virtual machines within Capgo.</li>
+      <li>Source code is always encrypted in transit via TLS and HTTPS.</li>
     </ul>
     <h3 id="data-backup">
       Data backup
@@ -109,17 +109,17 @@ const domain = config.public.domain
         </ul>
       </li>
     </ul>
-    <h3 id="incident-response-team">
-      Incident response team
+    <h3 id="incident-response">
+      Incident response
     </h3>
     <ul>
-      <li>Capgo stands at the ready with a dedicated Incident Response Team.</li>
+      <li>Capgo stands at the ready with a dedicated Incident Response Person.</li>
     </ul>
     <h3 id="incident-response-policy-plan">
       Incident response policy &amp; plan
     </h3>
     <ul>
-      <li>An incident response policy is maintained and managed by a dedicated incident response team at Capgo.</li>
+      <li>An incident response policy is maintained and managed by a dedicated incident response Person at Capgo.</li>
     </ul>
     <h3 id="communication">
       Communication
