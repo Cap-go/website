@@ -50,7 +50,7 @@ const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
       .eq('device_id', body.device_id)
       .single()
     if (dbError || !dataDevice)
-      return sendRes({ status: 'Cannot find device', error: dbError }, 400)
+      return sendRes({ status: 'Cannot find device', error: JSON.stringify(dbError) }, 400)
 
     return sendRes(dataDevice)
   }
@@ -109,7 +109,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
     .eq('device_id', body.device_id)
     .single()
   if (dbError || !dataDevice)
-    return sendRes({ status: 'Cannot find device', error: dbError }, 400)
+    return sendRes({ status: 'Cannot find device', error: JSON.stringify(dbError) }, 400)
 
   // if version_id set device_override to it
   if (body.version_id) {
@@ -120,7 +120,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       .eq('name', body.version_id)
       .single()
     if (dbError || !dataVersion)
-      return sendRes({ status: 'Cannot find version', error: dbError }, 400)
+      return sendRes({ status: 'Cannot find version', error: JSON.stringify(dbError) }, 400)
 
     const { error: dbErrorDev } = await supabase
       .from('devices_override')
@@ -131,7 +131,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         created_by: apikey.user_id,
       })
     if (dbErrorDev)
-      return sendRes({ status: 'Cannot save device override', error: dbErrorDev }, 400)
+      return sendRes({ status: 'Cannot save device override', error: JSON.stringify(dbErrorDev) }, 400)
   }
   // if channel_id set channel_override to it
   if (body.channel) {
@@ -143,7 +143,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       .eq('name', body.channel)
       .single()
     if (dbError || !dataChannel)
-      return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
+      return sendRes({ status: 'Cannot find channel', error: JSON.stringify(dbError) }, 400)
 
     const { error: dbErrorDev } = await supabase
       .from('channel_devices')
@@ -154,7 +154,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
         created_by: apikey.user_id,
       })
     if (dbErrorDev)
-      return sendRes({ status: 'Cannot save channel override', error: dbErrorDev }, 400)
+      return sendRes({ status: 'Cannot save channel override', error: JSON.stringify(dbErrorDev) }, 400)
   }
   else {
     // delete channel_override
@@ -194,7 +194,7 @@ export const deleteDev = async (event: any, supabase: SupabaseClient<Database>) 
       return sendRes({ status: 'Cannot delete override', error: JSON.stringify(error) }, 400)
   }
   catch (e) {
-    return sendRes({ status: 'delete override', error: e }, 500)
+    return sendRes({ status: 'delete override', error: JSON.stringify(e) }, 500)
   }
   return sendRes()
 }

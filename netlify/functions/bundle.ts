@@ -33,7 +33,7 @@ export const deleteBundle = async (event: any, supabase: SupabaseClient<Database
     }
   }
   catch (e) {
-    return sendRes({ status: 'Cannot delete bundle', error: e }, 500)
+    return sendRes({ status: 'Cannot delete bundle', error: JSON.stringify(e) }, 500)
   }
   return sendRes()
 }
@@ -74,13 +74,13 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
       .range(from, to)
     if (dbError || !dataBundles || !dataBundles.length) {
       console.error('Cannot get bundles', dbError)
-      return sendRes({ status: 'Cannot get bundles', error: dbError }, 400)
+      return sendRes({ status: 'Cannot get bundles', error: JSON.stringify(dbError) }, 400)
     }
 
     return sendRes(dataBundles)
   }
   catch (e) {
-    return sendRes({ status: 'Cannot get bundles', error: e }, 500)
+    return sendRes({ status: 'Cannot get bundles', error: JSON.stringify(e) }, 500)
   }
 }
 

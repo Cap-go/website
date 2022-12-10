@@ -50,7 +50,7 @@ export const get = async (event: any, supabase: SupabaseClient<Database>) => {
       .eq('name', body.channel)
       .single()
     if (dbError || !dataChannel)
-      return sendRes({ status: 'Cannot find channel', error: dbError }, 400)
+      return sendRes({ status: 'Cannot find channel', error: JSON.stringify(dbError) }, 400)
 
     return sendRes(dataChannel)
   }
@@ -107,7 +107,7 @@ export const deleteChannel = async (event: any, supabase: SupabaseClient<Databas
       return sendRes({ status: 'Cannot delete channel', error: JSON.stringify(dbError) }, 400)
   }
   catch (e) {
-    return sendRes({ status: 'Cannot delete channels', error: e }, 500)
+    return sendRes({ status: 'Cannot delete channels', error: JSON.stringify(e) }, 500)
   }
   return sendRes()
 }
@@ -151,7 +151,7 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
       return sendRes({ status: 'Cannot create channel', error: JSON.stringify(dbError) }, 400)
   }
   catch (e) {
-    return sendRes({ status: 'Cannot set channels', error: e }, 500)
+    return sendRes({ status: 'Cannot set channels', error: JSON.stringify(e) }, 500)
   }
   return sendRes()
 }
