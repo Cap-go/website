@@ -25,8 +25,8 @@ const baseDomain = () => {
   return 'capgo.app'
 }
 
-const name = 'Capgo - Capacitor Auto-updater'
-const description = 'Send and manage OTA update for your capacitor app without store hassle, 5 min to install in your app. Manage all your apps in one place.'
+const name = 'Capgo - Capacitor Live update'
+const description = 'Send and manage Realtime update for your capacitor app without store hassle, 5 min to install Over-the-Air (OTA) updates in your app. Use channels to send updates to specific users or groups of users.'
 // <script type="application/ld+json" class="yoast-schema-graph">
 const structuredData = {
   '@context': 'https://schema.org',
