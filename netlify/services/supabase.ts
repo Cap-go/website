@@ -44,14 +44,14 @@ export const useSupabase = (url: string, key: string) => {
 
 export const updateOrCreateVersion = async (supabase: SupabaseClient<Database>,
   update: Database['public']['Tables']['app_versions']['Insert']) => {
-  // eslint-disable-next-line no-console
-  console.log('updateOrCreateVersion', update)
   const { data } = await supabase
     .from('app_versions')
     .select()
     .eq('app_id', update.app_id)
     .eq('name', update.name)
     .single()
+  // eslint-disable-next-line no-console
+  console.log('updateOrCreateVersion', update, !!data)
   if (data) {
     return supabase
       .from('app_versions')
@@ -80,8 +80,6 @@ export const updateVersionStats = async (supabase: SupabaseClient<Database>, inc
 
 export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
   update: Database['public']['Tables']['channels']['Insert']) => {
-  // eslint-disable-next-line no-console
-  console.log('updateOrCreateChannel', update)
   if (!update.app_id || !update.name || !update.created_by)
     return Promise.reject(Error('updateOrCreateChannel: missing required fields'))
   const { data } = await supabase
@@ -91,6 +89,8 @@ export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
     .eq('name', update.name)
     .eq('created_by', update.created_by)
     .single()
+  // eslint-disable-next-line no-console
+  console.log('updateOrCreateChannel', update, !!data)
   if (data) {
     return supabase
       .from('channels')
@@ -112,13 +112,14 @@ export const updateOrCreateChannel = async (supabase: SupabaseClient<Database>,
 
 export const updateOrCreateDevice = async (supabase: SupabaseClient<Database>,
   update: Database['public']['Tables']['devices']['Insert']) => {
-  // console.log('updateOrCreateDevice', update)
   const { data } = await supabase
     .from('devices')
     .select()
     .eq('app_id', update.app_id)
     .eq('device_id', update.device_id)
     .single()
+  // eslint-disable-next-line no-console
+  console.log('updateOrCreateDevice', update, !!data)
   if (data) {
     return supabase
       .from('devices')

@@ -56,7 +56,7 @@ const get = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
   }
   else {
     // get all devices
-    const fetchOffset = body.page === undefined ? 0 : body.page
+    const fetchOffset = body.page == null ? 0 : body.page
     const from = fetchOffset * fetchLimit
     const to = (fetchOffset + 1) * fetchLimit - 1
     //  page 0 from = 0 to = 49 [0,1,...,49]
