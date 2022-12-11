@@ -66,13 +66,13 @@ export const handler: Handler = async (event) => {
   }
 
   const all = []
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('app_versions')
     .select()
     .eq('app_id', app_id)
     .eq('name', version_name || 'unknown')
     .single()
-  if (data && !error) {
+  if (data) {
     stat.version = data.id
     device.version = data.id
     if (!device.is_emulator && device.is_prod) {
