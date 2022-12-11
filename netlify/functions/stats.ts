@@ -51,7 +51,7 @@ export const handler: Handler = async (event) => {
     plugin_version,
     os_version: version_os,
     version: version_name || 'unknown' as any,
-    ...(custom_id ? { custom_id } : {}),
+    ...(custom_id != null ? { custom_id } : {}),
     is_emulator: is_emulator === undefined ? false : is_emulator,
     is_prod: is_prod === undefined ? true : is_prod,
   }
