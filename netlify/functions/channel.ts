@@ -9,6 +9,13 @@ interface ChannelSet {
   channel: string
   version?: string
   public?: boolean
+  disableAutoUpdateUnderNative?: boolean
+  disableAutoUpdateToMajor?: boolean
+  ios?: boolean
+  android?: boolean
+  allow_device_self_set?: boolean
+  allow_emulator?: boolean
+  allow_dev?: boolean
 }
 interface GetDevice {
   app_id?: string
@@ -127,6 +134,14 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
     app_id: body.app_id || '',
     name: body.channel,
     version: -1,
+    ...(body.public == null ? {} : { public: body.public }),
+    ...(body.disableAutoUpdateUnderNative == null ? {} : { disableAutoUpdateUnderNative: body.disableAutoUpdateUnderNative }),
+    ...(body.disableAutoUpdateToMajor == null ? {} : { disableAutoUpdateToMajor: body.disableAutoUpdateToMajor }),
+    ...(body.allow_device_self_set == null ? {} : { allow_device_self_set: body.allow_device_self_set }),
+    ...(body.allow_emulator == null ? {} : { allow_emulator: body.allow_emulator }),
+    ...(body.allow_dev == null ? {} : { allow_dev: body.allow_dev }),
+    ...(body.ios == null ? {} : { ios: body.ios }),
+    ...(body.android == null ? {} : { android: body.android }),
   }
   if (body.version) {
     const { data, error: vError } = await supabase
@@ -142,8 +157,6 @@ export const post = async (event: any, supabase: SupabaseClient<Database>) => {
 
     channel.version = data.id
   }
-  if (body.public !== undefined)
-    channel.public = body.public
 
   try {
     const { error: dbError } = await updateOrCreateChannel(supabase, channel)
