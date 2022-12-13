@@ -13,7 +13,6 @@ const get = async (supabase: SupabaseClient<Database>) => {
     .from('plans')
     .select().neq('name', 'Free')
     .order('price_m')
-  console.log('plans', plans)
   return sendRes(plans) || sendRes([])
 }
 

@@ -171,7 +171,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       await sendStats(supabase, 'needPlanUpgrade', platform, device_id, app_id, version_build, version.id)
       console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({
-        message: 'Cannot update, upgrade plan to continue to update',
+        message: `Cannot update, upgrade plan to continue to update ${app_id}`,
         error: 'not_good_plan',
       }, 200)
     }
@@ -195,7 +195,8 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     if (!version.bucket_id && !version.external_url) {
       console.error(id, 'Cannot get zip file', app_id)
       return sendRes({
-        message: 'Cannot get zip file',
+        id,
+        message: `Cannot get zip file ${app_id}`,
         error: 'zip_not_found',
       }, 200)
     }
@@ -310,8 +311,9 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     })
   }
   catch (e) {
-    console.error(id, 'error', app_id, e)
     return sendRes({
+      id,
+      app_id,
       message: `Cannot get latest version ${e}!`,
       error: 'cannot_get_latest_version',
     }, 500)
