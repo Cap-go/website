@@ -9,11 +9,7 @@ export interface VersionStatsIncrement {
   version_id: number
   devices: number
 }
-export interface StatsV2 {
-  mau: number
-  storage: number
-  bandwidth: number
-}
+
 const planToInt = (plan: string) => {
   switch (plan) {
     case 'Free':
@@ -138,6 +134,46 @@ export const updateOrCreateDevice = async (supabase: SupabaseClient<Database>,
   }
 }
 
+export const getPlanUsagePercent = async (supabase: SupabaseClient<Database>, userId: string, dateid: string): Promise<number> => {
+  const { data, error } = await supabase
+    .rpc('get_plan_usage_percent', { userid: userId, dateid })
+    .single()
+  if (error)
+    throw new Error(error.message)
+
+  return data || 0
+}
+
+export const isOnboarded = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
+  const { data, error } = await supabase
+    .rpc('is_onboarded', { userid: userId })
+    .single()
+  if (error)
+    throw new Error(error.message)
+
+  return data || false
+}
+
+export const isFreeUsage = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
+  const { data, error } = await supabase
+    .rpc('is_free_usage', { userid: userId })
+    .single()
+  if (error)
+    throw new Error(error.message)
+
+  return data || false
+}
+
+export const isOnboardingNeeded = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
+  const { data, error } = await supabase
+    .rpc('is_onboarding_needed', { userid: userId })
+    .single()
+  if (error)
+    throw new Error(error.message)
+
+  return data || false
+}
+
 export const isGoodPlan = async (supabase: SupabaseClient<Database>, userId: string): Promise<boolean> => {
   const { data, error } = await supabase
     .rpc('is_good_plan_v2', { userid: userId })
@@ -200,14 +236,12 @@ export const sendStats = async (supabase: SupabaseClient<Database>, action: stri
 }
 
 export const findBestPlan = async (supabase: SupabaseClient<Database>,
-  stats: Database['public']['Functions']['get_total_stats']['Returns'][0]): Promise<string> => {
-  const storage = Math.round((stats.storage || 0) / 1024 / 1024 / 1024)
-  const bandwidth = Math.round((stats.bandwidth || 0) / 1024 / 1024 / 1024)
+  stats: Database['public']['Functions']['find_best_plan_v3']['Args']): Promise<string> => {
   const { data, error } = await supabase
-    .rpc('find_best_plan_v2', {
+    .rpc('find_best_plan_v3', {
       mau: stats.mau || 0,
-      storage,
-      bandwidth,
+      storage: stats.storage || 0,
+      bandwidth: stats.bandwidth || 0,
     })
     .single()
   if (error)
@@ -216,10 +250,10 @@ export const findBestPlan = async (supabase: SupabaseClient<Database>,
   return data || 'Team'
 }
 
-export const getMaxstats = async (supabase: SupabaseClient<Database>,
-  userId: string, dateId: string): Promise<Database['public']['Functions']['get_total_stats']['Returns'][0]> => {
+export const getTotalStats = async (supabase: SupabaseClient<Database>,
+  userId: string, dateId: string): Promise<Database['public']['Functions']['get_total_stats_v2']['Returns'][0]> => {
   const { data, error } = await supabase
-    .rpc('get_total_stats', { userid: userId, dateid: dateId })
+    .rpc('get_total_stats_v2', { userid: userId, dateid: dateId })
     .single()
   if (error)
     throw new Error(error.message)
@@ -258,16 +292,20 @@ export const checkPlan = async (supabase: SupabaseClient<Database>, userId: stri
         .then()
       return Promise.resolve()
     }
+    const dateid = new Date().toISOString().slice(0, 7)
     const is_good_plan = await isGoodPlan(supabase, userId)
-    if (!is_good_plan) {
+    const is_onboarded = await isOnboarded(supabase, userId)
+    const is_onboarding_needed = await isOnboardingNeeded(supabase, userId)
+    const is_free_usage = await isFreeUsage(supabase, userId)
+    const percentUsage = await getPlanUsagePercent(supabase, userId, dateid)
+    if (!is_good_plan && is_onboarded && !is_free_usage) {
       // eslint-disable-next-line no-console
       console.log('is_good_plan_v2', userId, is_good_plan)
       // create dateid var with yyyy-mm with dayjs
-      const dateid = new Date().toISOString().slice(0, 7)
-      const get_max_stats = await getMaxstats(supabase, userId, dateid)
+      const get_total_stats = await getTotalStats(supabase, userId, dateid)
       const current_plan = await getCurrentPlanName(supabase, userId)
-      if (get_max_stats) {
-        const best_plan = await findBestPlan(supabase, get_max_stats)
+      if (get_total_stats) {
+        const best_plan = await findBestPlan(supabase, get_total_stats)
         const bestPlanKey = best_plan.toLowerCase().replace(' ', '_')
         // TODO create a rpc method to calculate % of plan usage.
         // TODO send email for 50%, 70%, 90% of current plan usage.
@@ -289,7 +327,7 @@ export const checkPlan = async (supabase: SupabaseClient<Database>, userId: stri
           }).catch()
         }
         else if (planToInt(best_plan) > planToInt(current_plan)) {
-          await sendNotif(supabase, `user:upgrade_to_${bestPlanKey}`, userId, '* * * * *', 'red')
+          await sendNotif(supabase, `user:upgrade_to_${bestPlanKey}`, userId, '0 0 * * 1', 'red')
           // await addEventPerson(user.email, {}, `user:upgrade_to_${bestPlanKey}`, 'red')
           // eslint-disable-next-line no-console
           console.log(`user:upgrade_to_${bestPlanKey}`, userId)
@@ -305,9 +343,24 @@ export const checkPlan = async (supabase: SupabaseClient<Database>, userId: stri
         }
       }
     }
+    else if (!is_onboarded && is_onboarding_needed) {
+      await addEventPerson(user.email, {}, 'user:need_onboarding', 'orange')
+      await logsnag.publish({
+        channel: 'usage',
+        event: 'User need onboarding',
+        icon: '🥲',
+        tags: {
+          'user-id': userId,
+        },
+        notify: false,
+      }).catch()
+    }
     return supabase
       .from('stripe_info')
-      .update({ is_good_plan: !!is_good_plan })
+      .update({
+        is_good_plan: is_good_plan || is_free_usage,
+        plan_usage: percentUsage,
+      })
       .eq('customer_id', user.customer_id)
       .then()
   }
