@@ -41,7 +41,7 @@ fetch(`${config.public.domain}/api/website_stats`).then((res) => {
             Made by Developers, for Developers
           </p>
           <h1 class="mt-5 text-4xl font-bold leading-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight font-pj">
-            Live updates for capacitor
+            Live updates for Capacitor
           </h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
             Unlock Continuous Delivery for your app. Ship live updates, bug fixes, content changes, features, and more without struggle with the store review.
