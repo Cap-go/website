@@ -8,7 +8,7 @@ created_at: 2022-03-01
 updated_at: 2022-03-01
 head_image: "/capgo_birth.webp"
 head_image_alt: Capgo birth illusatration
-tag: Alternatives
+tag: Story
 published: true
 next_blog: ""
 
