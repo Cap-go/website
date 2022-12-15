@@ -12,6 +12,8 @@ interface DeviceLink extends AppInfos {
 
 const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
+  // eslint-disable-next-line no-console
+  console.log('body', body)
   let {
     version_name,
     version_build,
@@ -143,6 +145,8 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
 
 const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any> => {
   const body = JSON.parse(event.body || '{}') as DeviceLink
+  // eslint-disable-next-line no-console
+  console.log('body', body)
   let {
     version_name,
     version_build,
