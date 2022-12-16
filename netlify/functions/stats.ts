@@ -68,9 +68,9 @@ export const handler: Handler = async (event) => {
   const all = []
   const { data } = await supabase
     .from('app_versions')
-    .select()
+    .select('id')
     .eq('app_id', app_id)
-    .eq('name', version_name || 'unknown')
+    .or(`name.eq.${version_name},custom_id.eq.builtin`)
     .single()
   if (data) {
     stat.version = data.id
