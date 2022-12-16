@@ -105,7 +105,8 @@ export const handler: Handler = async (event) => {
     statsDb = `${statsDb}_onprem`
     deviceDb = `${deviceDb}_onprem`
   }
-  console.error('stats', body)
+  // eslint-disable-next-line no-console
+  console.log('stats', body)
   all.push(supabase
     .from(deviceDb)
     .upsert(device))
