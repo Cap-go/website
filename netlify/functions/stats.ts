@@ -70,7 +70,9 @@ export const handler: Handler = async (event) => {
     .from('app_versions')
     .select('id')
     .eq('app_id', app_id)
-    .or(`name.eq.${version_name},custom_id.eq.builtin`)
+    .or(`name.eq.${version_name},name.eq.builtin`)
+    .order('id', { ascending: false })
+    .limit(1)
     .single()
   if (data) {
     stat.version = data.id

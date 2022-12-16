@@ -56,7 +56,9 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       .from('app_versions')
       .select('id')
       .eq('app_id', app_id)
-      .or(`name.eq.${version_name},custom_id.eq.builtin`)
+      .or(`name.eq.${version_name},name.eq.builtin`)
+      .order('id', { ascending: false })
+      .limit(1)
       .single()
     const { data: channelData, error: dbError } = await supabase
       .from('channels')
