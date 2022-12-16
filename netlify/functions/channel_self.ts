@@ -47,6 +47,19 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
       error: 'missing_info',
     }, 400)
   }
+  const { data: version } = await supabase
+    .from('app_versions')
+    .select('id')
+    .eq('app_id', app_id)
+    .or(`name.eq.${version_name},custom_id.eq.builtin`)
+    .single()
+
+  if (!version) {
+    return sendRes({
+      message: `Version ${version_name} doesn't exist`,
+      error: 'version_error',
+    }, 400)
+  }
   // find device
   const { data: dataDevice } = await supabase
     .from('devices')
@@ -54,11 +67,28 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
+  if (!dataDevice) {
+    if (!dataDevice) {
+      await updateOrCreateDevice(supabase, {
+        app_id,
+        device_id,
+        plugin_version,
+        version: version.id,
+        ...(custom_id != null ? { custom_id } : {}),
+        ...(is_emulator != null ? { is_emulator } : {}),
+        ...(is_prod != null ? { is_prod } : {}),
+        version_build,
+        os_version: version_os,
+        platform: platform as Database['public']['Enums']['platform_os'],
+        updated_at: new Date().toISOString(),
+      })
+    }
+  }
   const { data: dataChannelOverride } = await supabase
     .from('channel_devices')
     .select(`
-    device_id,
     app_id,
+    device_id,
     channel_id (
       id,
       allow_device_self_set,
@@ -68,34 +98,6 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
     .eq('app_id', app_id)
     .eq('device_id', device_id)
     .single()
-  if (!dataDevice) {
-    const { data: version } = await supabase
-      .from('app_versions')
-      .select()
-      .eq('app_id', app_id)
-      .eq('name', version_name || 'unknown')
-      .single()
-
-    if (!version) {
-      return sendRes({
-        message: `Version ${version_name} doesn't exist`,
-        error: 'version_error',
-      }, 400)
-    }
-    await updateOrCreateDevice(supabase, {
-      app_id,
-      device_id,
-      plugin_version,
-      version: version.id,
-      ...(custom_id != null ? { custom_id } : {}),
-      ...(is_emulator != null ? { is_emulator } : {}),
-      ...(is_prod != null ? { is_prod } : {}),
-      version_build,
-      os_version: version_os,
-      platform: platform as Database['public']['Enums']['platform_os'],
-      updated_at: new Date().toISOString(),
-    })
-  }
   if (!channel || (dataChannelOverride
     && !(dataChannelOverride?.channel_id as Database['public']['Tables']['channels']['Row']).allow_device_self_set)) {
     return sendRes({
@@ -127,19 +129,7 @@ const post = async (event: any, supabase: SupabaseClient<Database>): Promise<any
     if (dbErrorDev)
       return sendRes({ message: `Cannot do channel override ${JSON.stringify(dbErrorDev)}`, error: 'override_not_allowed' }, 400)
   }
-  const { data: dataVersion, error: errorVersion } = await supabase
-    .from('app_versions')
-    .select()
-    .eq('app_id', app_id)
-    .eq('name', version_name || 'unknown')
-    .single()
-  if (dataVersion && !errorVersion) {
-    await sendStats(supabase, 'setChannel', platform, device_id, app_id, version_build, dataVersion.id)
-  }
-  else {
-    // eslint-disable-next-line no-console
-    console.log('Cannot find app version', errorVersion)
-  }
+  await sendStats(supabase, 'setChannel', platform, device_id, app_id, version_build, version.id)
   return sendRes()
 }
 
@@ -155,6 +145,11 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
     app_id,
     platform,
     device_id,
+    plugin_version,
+    custom_id,
+    is_emulator = false,
+    is_prod = true,
+    version_os,
   } = body
   const coerce = semver.coerce(version_build)
   if (coerce) {
@@ -170,6 +165,43 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
   if (!device_id || !app_id)
     return sendRes({ message: 'Cannot find device_id or appi_id', error: 'missing_info' }, 400)
 
+  const { data: version } = await supabase
+    .from('app_versions')
+    .select('id')
+    .eq('app_id', app_id)
+    .or(`name.eq.${version_name},custom_id.eq.builtin`)
+    .single()
+
+  if (!version) {
+    return sendRes({
+      message: `Version ${version_name} doesn't exist`,
+      error: 'version_error',
+    }, 400)
+  }
+  // find device
+  const { data: dataDevice } = await supabase
+    .from('devices')
+    .select()
+    .eq('app_id', app_id)
+    .eq('device_id', device_id)
+    .single()
+  if (!dataDevice) {
+    if (!dataDevice) {
+      await updateOrCreateDevice(supabase, {
+        app_id,
+        device_id,
+        plugin_version,
+        version: version.id,
+        ...(custom_id != null ? { custom_id } : {}),
+        ...(is_emulator != null ? { is_emulator } : {}),
+        ...(is_prod != null ? { is_prod } : {}),
+        version_build,
+        os_version: version_os,
+        platform: platform as Database['public']['Enums']['platform_os'],
+        updated_at: new Date().toISOString(),
+      })
+    }
+  }
   const { data: dataChannel, error: errorChannel } = await supabase
     .from('channels')
     .select()
@@ -205,20 +237,7 @@ const put = async (event: any, supabase: SupabaseClient<Database>): Promise<any>
     }, 400)
   }
   else if (dataChannel) {
-    const { data: dataVersion, error: errorVersion } = await supabase
-      .from('app_versions')
-      .select()
-      .eq('app_id', app_id)
-      .eq('name', version_name || 'unknown')
-      .single()
-
-    if (dataVersion && !errorVersion) {
-      await sendStats(supabase, 'getChannel', platform, device_id, app_id, version_build, dataVersion.id)
-    }
-    else {
-      // eslint-disable-next-line no-console
-      console.log('Cannot find app version', errorVersion)
-    }
+    await sendStats(supabase, 'getChannel', platform, device_id, app_id, version_build, version.id)
     return sendRes({
       channel: dataChannel.name,
       status: 'default',

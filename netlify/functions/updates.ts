@@ -51,6 +51,13 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       version_build,
       plugin_version,
       version_name)
+
+    const { data: versionData } = await supabase
+      .from('app_versions')
+      .select('id')
+      .eq('app_id', app_id)
+      .or(`name.eq.${version_name},custom_id.eq.builtin`)
+      .single()
     const { data: channelData, error: dbError } = await supabase
       .from('channels')
       .select(`
@@ -143,12 +150,13 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     const planValid = await isAllowedAction(supabase, channel.created_by)
     await checkPlan(supabase, channel.created_by)
     let version = channel.version as Database['public']['Tables']['app_versions']['Row']
+    const versionId = versionData ? versionData.id : version.id
     const xForwardedFor = event.headers['x-forwarded-for'] || ''
     // check if version is created_at more than 4 hours
     const isOlderEnought = (new Date(version.created_at || Date.now()).getTime() + 4 * 60 * 60 * 1000) < Date.now()
 
     if (!isOlderEnought && await invalidIp(xForwardedFor.split(',')[0])) {
-      await sendStats(supabase, 'invalidIP', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'invalidIP', platform, device_id, app_id, version_build, versionId)
       return sendRes({
         message: `invalid ip ${xForwardedFor}`,
         error: 'invalid_ip',
@@ -158,7 +166,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       app_id,
       device_id,
       plugin_version,
-      version: version.id,
+      version: versionId,
       ...(custom_id != null ? { custom_id } : {}),
       ...(is_emulator != null ? { is_emulator } : {}),
       ...(is_prod != null ? { is_prod } : {}),
@@ -168,7 +176,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
       updated_at: new Date().toISOString(),
     })
     if (!planValid) {
-      await sendStats(supabase, 'needPlanUpgrade', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'needPlanUpgrade', platform, device_id, app_id, version_build, versionId)
       console.error(id, 'Cannot update, upgrade plan to continue to update', app_id)
       return sendRes({
         message: `Cannot update, upgrade plan to continue to update ${app_id}`,
@@ -214,7 +222,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
 
     // console.log('signedURL', device_id, signedURL, version_name, version.name)
     if (version_name === version.name) {
-      await sendStats(supabase, 'noNew', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'noNew', platform, device_id, app_id, version_build, versionId)
       // eslint-disable-next-line no-console
       console.log(id, 'No new version available', device_id, version_name, version.name)
       return sendRes({
@@ -226,7 +234,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     if (!devicesOverride && !channel.ios && platform === 'ios') {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot update ios is disabled', device_id)
-      await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disablePlatformIos', platform, device_id, app_id, version_build, versionId)
       return sendRes({
         major: true,
         message: 'Cannot update ios is disabled',
@@ -238,7 +246,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     if (!devicesOverride && !channel.android && platform === 'android') {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot update, android is disabled', device_id)
-      await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disablePlatformAndroid', platform, device_id, app_id, version_build, versionId)
       return sendRes({
         major: true,
         message: 'Cannot update, android is disabled',
@@ -249,7 +257,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     }
     // console.log('check disableAutoUpdateToMajor', device_id)
     if (!devicesOverride && channel.disableAutoUpdateToMajor && semver.major(version.name) > semver.major(version_name)) {
-      await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disableAutoUpdateToMajor', platform, device_id, app_id, version_build, versionId)
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot update major version', device_id)
       return sendRes({
@@ -263,7 +271,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
 
     // console.log(id, 'check disableAutoUpdateUnderNative', device_id)
     if (!devicesOverride && channel.disableAutoUpdateUnderNative && semver.lt(version.name, version_build)) {
-      await sendStats(supabase, 'disableAutoUpdateUnderNative', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disableAutoUpdateUnderNative', platform, device_id, app_id, version_build, versionId)
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot revert under native version', device_id)
       return sendRes({
@@ -276,7 +284,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     if (!devicesOverride && !channel.allow_dev && !is_prod) {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot update dev build is disabled', device_id)
-      await sendStats(supabase, 'disableDevBuild', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disableDevBuild', platform, device_id, app_id, version_build, versionId)
       return sendRes({
         major: true,
         message: 'Cannot update, dev build is disabled',
@@ -288,7 +296,7 @@ export const post = async (id: string, event: any, supabase: SupabaseClient<Data
     if (!devicesOverride && !channel.allow_emulator && is_emulator) {
       // eslint-disable-next-line no-console
       console.log(id, 'Cannot update emulator is disabled', device_id)
-      await sendStats(supabase, 'disableEmulator', platform, device_id, app_id, version_build, version.id)
+      await sendStats(supabase, 'disableEmulator', platform, device_id, app_id, version_build, versionId)
       return sendRes({
         major: true,
         message: 'Cannot update, emulator is disabled',
