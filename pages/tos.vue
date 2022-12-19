@@ -442,7 +442,7 @@ const domain = config.public.baseUrl
           :href="`${domain}#support`"
           rel="external nofollow noopener"
           target="_blank"
-        >https://{{ domain }}#support</a>
+        >{{ domain }}#support</a>
       </li>
     </ul>
   </div>
