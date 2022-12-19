@@ -5,9 +5,9 @@ export default defineEventHandler(async (event) => {
   try {
     const config = useRuntimeConfig()
     // eslint-disable-next-line no-console
-    console.log(config.public.domain)
+    console.log(config.public.baseUrl)
 
-    const smStream = new SitemapStream({ hostname: config.public.domain })
+    const smStream = new SitemapStream({ hostname: config.public.baseUrl })
 
     smStream.write({ url: '/', changefreq: 'daily', priority: 1 })
     smStream.write({ url: '/app_mobile/', changefreq: 'daily', priority: 1 })

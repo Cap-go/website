@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 
-const domain = config.public.domain
+const domain = config.public.baseUrl
 const brand = config.brand
 useHead({
   title: `${brand} | Privacy Policy`,
@@ -374,7 +374,7 @@ useHead({
     <h3>Exercising Your CCPA Data Protection Rights</h3>
     <p>In order to exercise any of Your rights under the CCPA, and if You are a California resident, You can contact Us:</p>
     <ul>
-      <li>By visiting this page on our website: <a :href="`https://${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
+      <li>By visiting this page on our website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
     </ul>
     <p>Only You, or a person registered with the California Secretary of State that You authorize to act on Your behalf, may make a verifiable request related to Your personal information.</p>
     <p>Your request to Us must:</p>
@@ -415,7 +415,7 @@ useHead({
     <h2>Contact Us</h2>
     <p>If you have any questions about this Privacy Policy, You can contact us:</p>
     <ul>
-      <li>By visiting this page on the website: <a :href="`https://${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
+      <li>By visiting this page on the website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">https://{{ domain }}/#support</a></li>
     </ul>
   </div>
 </template>

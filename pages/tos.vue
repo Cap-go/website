@@ -9,7 +9,7 @@ useHead({
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
-const domain = config.public.domain
+const domain = config.public.baseUrl
 </script>
 
 <template>
@@ -439,7 +439,7 @@ const domain = config.public.domain
     <ul>
       <li>
         By visiting this page on the website: <a
-          :href="`https://${domain}#support`"
+          :href="`${domain}#support`"
           rel="external nofollow noopener"
           target="_blank"
         >https://{{ domain }}#support</a>

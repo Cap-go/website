@@ -11,25 +11,25 @@ router.currentRoute.value.hash.startsWith('#support') && openMessenger()
 
 const config = useRuntimeConfig()
 const route = useRoute()
-const image = `${config.public.domain}/capgo_banner.png`
+const image = `${config.public.baseUrl}/capgo_banner.png`
 useHead(() => ({
   link: [
     {
       rel: 'alternate',
       title: 'Capgo',
-      href: `${config.public.domain}${route.fullPath}`,
+      href: `${config.public.baseUrl}${route.fullPath}`,
     },
     {
       rel: 'canonical',
       title: 'Capgo',
-      href: `${config.public.domain}${route.fullPath}`,
+      href: `${config.public.baseUrl}${route.fullPath}`,
     },
   ],
   meta: [
     {
       hid: 'og:url',
       property: 'og:url',
-      content: `${config.public.domain}${route.fullPath}`,
+      content: `${config.public.baseUrl}${route.fullPath}`,
     },
     ...createMetaImage(image, 'Capgo banner'),
   ],

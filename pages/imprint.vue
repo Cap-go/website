@@ -8,7 +8,7 @@ useHead({
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
-const domain = config.public.domain
+const domain = config.public.baseUrl
 </script>
 
 <template>

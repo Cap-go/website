@@ -8,7 +8,7 @@ useHead({
     { name: 'description', hid: 'description', content: 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.' },
   ],
 })
-const domain = config.public.domain
+const domain = config.public.baseUrl
 </script>
 
 <template>
