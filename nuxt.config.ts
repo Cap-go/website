@@ -18,11 +18,11 @@ const getUrl = (branch = ''): string => {
     return `https://${getRightKey('prod', 'base_domain')}`
 }
 
-const baseDomain = () => {
-  if (process.env.NETLIFY && process.env.domain)
-    return process.env.domain
-
-  return 'capgo.app'
+const baseDomain = (branch = '') => {
+  if (branch)
+    return getRightKey(branch, 'base_domain')
+  else
+    return getRightKey('prod', 'base_domain')
 }
 
 const name = 'Capgo - Capacitor Live update'
@@ -115,8 +115,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       brand: 'Capgo',
-      domain: `${getUrl(process.env.BRANCH)}`,
-      site_name: baseDomain(),
+      domain: baseDomain(),
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       handler: 'capgo',
     },
