@@ -27,7 +27,7 @@
     "sitemap": "^7.1.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.32.0",
+    "@antfu/eslint-config": "^0.34.0",
     "@iconify-json/carbon": "^1.1.10",
     "@iconify-json/twemoji": "^1.1.5",
     "dayjs": "^1.11.6",
