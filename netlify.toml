@@ -27,6 +27,12 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    cache-control = "public, s-max-age=60"
+
+
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml"
@@ -46,11 +52,6 @@
   for = "/.well-known/*"
   [headers.values]
     Content-Type = "application/json"
-
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    cache-control = "public, s-max-age=60"
 
 [[headers]]
   for = "/manifest.webmanifest"
