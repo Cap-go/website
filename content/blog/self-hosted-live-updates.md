@@ -73,4 +73,4 @@ The organization’s API returns the Live Update bundle from the location, and t
 
 I'm excited to bring the power of Live Updates to more enterprises than ever. Organizations and Ionic app users alike will quickly realize the benefits of Capgo’s secure distribution of over-the-air app updates. 
 
-For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](https://docs.capgo.app/tooling/cli#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](https://web.capgo.app/register)
+For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](https://docs.capgo.app/tooling/cli#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](https://web.capgo.app/register/)

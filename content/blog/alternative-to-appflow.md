@@ -69,4 +69,4 @@ Join use here 👇
 
 ## Register here to get your account
 
-[Capgo](https://web.capgo.app/register)
+[Capgo](https://web.capgo.app/register/)

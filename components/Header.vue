@@ -63,7 +63,7 @@ const menuMobile = ref(false)
             Documentation
           </a>
           <a
-            href="https://web.capgo.app/login"
+            href="https://web.capgo.app/login/"
             title="Login"
             target="_blank"
             class="text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"

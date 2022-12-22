@@ -57,4 +57,4 @@ Register here to get started with Capgo today.
 
 Join use here 👇
 
-[Capgo](https://web.capgo.app/register)
+[Capgo](https://web.capgo.app/register/)
