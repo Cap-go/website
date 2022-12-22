@@ -154,7 +154,7 @@ For your application to receive a live update from Deploy, you'll need to run th
 
 Open the app, put it in background and open it again, you should see in the logs the app did the update.
 
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://docs.capgo.app/plugin/auto-update/cloud).
+Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://docs.capgo.app/plugin/auto-update/).
 
 ## Remove App Center Dependencies
 
