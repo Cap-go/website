@@ -108,7 +108,7 @@ The Live Update feature works by using the installed Capgo SDK in your native ap
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOURKEY`
 ## Add your first app

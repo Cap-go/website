@@ -77,7 +77,7 @@ This will tell the native plugin the installation as succeeded.
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/app/apikeys) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
