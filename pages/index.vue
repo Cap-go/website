@@ -44,7 +44,7 @@ fetch(`${config.public.baseUrl}/api/website_stats`).then((res) => {
             Live updates for Capacitor
           </h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Unlock Continuous Delivery for your app. Ship live updates, bug fixes, content changes, features, and more without struggle with the store review.
+            Unlock Continuous Delivery for your app. Ship live updates, bug fixes, content changes, features, and more without struggle with the App store review.
           </h2>
 
           <div class="relative inline-flex mt-10 group">
