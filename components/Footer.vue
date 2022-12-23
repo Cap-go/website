@@ -41,6 +41,7 @@ const navigation = {
     // { name: 'Claim', href: '#' },
     { name: 'Privacy', href: '/privacy/' },
     { name: 'Terms', href: '/tos/' },
+    { name: 'Privacy Board', href: 'https://www.privacyboard.co/company/capgo/', target: '_blank' },
   ],
   hero: [
     {
