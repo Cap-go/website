@@ -25,7 +25,7 @@ const navigation = {
   support: [
     { name: 'Pricing', href: '/pricing/' },
     { name: 'Guides', href: '/blog/' },
-    { name: 'API Status', href: 'https://status.capgo.app/', target: '_blank' },
+    { name: 'Status', href: 'https://status.capgo.app/', target: '_blank' },
     { name: 'Chat', href: '#support' },
   ],
   company: [
