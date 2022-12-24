@@ -18,6 +18,15 @@ const getUrl = (branch = ''): string => {
     return `https://${getRightKey('prod', 'base_domain')}`
 }
 
+const getApiUrl = (branch = ''): string => {
+  if (branch === 'local')
+    return `http://api.${getRightKey(branch, 'base_domain')}`
+  else if (branch === 'development')
+    return `https:///api.${getRightKey(branch, 'base_domain')}`
+  else
+    return `https:///api.${getRightKey('prod', 'base_domain')}`
+}
+
 const baseDomain = (branch = '') => {
   if (branch)
     return getRightKey(branch, 'base_domain')
@@ -116,6 +125,7 @@ export default defineNuxtConfig({
     public: {
       brand: 'Capgo',
       baseUrl: getUrl(process.env.BRANCH),
+      baseApiUrl: getApiUrl(process.env.BRANCH),
       domain: baseDomain(),
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       handler: 'capgo',
