@@ -9,7 +9,7 @@ specifiers:
   '@nuxt/content': ^2.3.0
   '@nuxt/schema': 3.0.0
   '@nuxtjs/color-mode': ^3.2.0
-  '@supabase/supabase-js': 2.2.1
+  '@supabase/supabase-js': 2.2.2
   '@types/semver': ^7.3.13
   '@unocss/nuxt': ^0.47.6
   '@vueuse/nuxt': ^9.7.0
@@ -28,7 +28,7 @@ dependencies:
   '@nuxt/content': 2.3.0
   '@nuxt/schema': 3.0.0
   '@nuxtjs/color-mode': 3.2.0
-  '@supabase/supabase-js': 2.2.1
+  '@supabase/supabase-js': 2.2.2
   '@types/semver': 7.3.13
   '@unocss/nuxt': 0.47.6
   '@vueuse/nuxt': 9.7.0_nuxt@3.0.0
@@ -1014,8 +1014,8 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js/2.2.1:
-    resolution: {integrity: sha512-gHm0bYu8NXCVlKIOcuUT9s/izbNlrwIw+UCKTT9sj2gR9QcYoz4jjIWnvNF8Uwtp5Mq1444NI7OH1yK70yJykQ==}
+  /@supabase/supabase-js/2.2.2:
+    resolution: {integrity: sha512-xwuaSYghC5GkV/Pj4lzXbC8RnFxpPh5FO6nVMcbQbpGJDduiMyr2PCq3+hinWKmsFBBXvq+UioOZQIWUzVRoYg==}
     dependencies:
       '@supabase/functions-js': 2.0.0
       '@supabase/gotrue-js': 2.6.1
