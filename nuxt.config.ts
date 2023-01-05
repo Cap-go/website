@@ -138,6 +138,7 @@ export default defineNuxtConfig({
     reactivityTransform: true,
     viteNode: false,
   },
+  telemetry: false,
   unocss: {
     preflight: true,
   },

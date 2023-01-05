@@ -65,17 +65,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Immediate Updates
             </h3>
             <p class="mt-3 text-sm text-gray-400">
-              Release app improvements seamlessly in the background, don't wait to push them to the app stores.
-            </p>
-          </div>
-
-          <div>
-            <svg class="w-auto mx-auto text-white h-14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- ! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M175.1 265.9V243.9L207.1 275.9V279.7C208 279.9 208 280.1 207.1 280.3V303.1C207.1 330.5 229.5 352 255.1 352C264.1 352 271.8 349.1 278.5 346.4L301.8 369.6C288.8 378.7 273 384 255.1 384C230.8 384 208.3 372.3 193.6 354.1L152.9 381.3C145.5 386.2 135.6 384.2 130.7 376.9C125.8 369.5 127.8 359.6 135.1 354.7L178.9 325.5C177 318.7 175.1 311.4 175.1 303.1V298.1L129.1 303.9C121.2 304.1 113.2 298.8 112.1 289.1C111 281.2 117.2 273.2 126 272.1L175.1 265.9zM0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM256 480C312.1 480 363.4 459.4 402.7 425.3L86.7 109.3C52.62 148.6 32 199.9 32 256C32 379.7 132.3 480 256 480H256zM335.5 312.9L425.3 402.7C459.4 363.4 480 312.1 480 255.1C480 132.3 379.7 31.1 255.1 31.1C199.9 31.1 148.6 52.62 109.3 86.7L188.2 165.5C202.3 142.1 227.4 127.1 255.1 127.1C281.2 127.1 303.7 139.7 318.3 157.9L359.1 130.7C366.5 125.8 376.4 127.8 381.3 135.1C386.2 142.5 384.2 152.4 376.9 157.3L333.1 186.5C334.1 193.3 335.1 200.6 335.1 207.1V211.5L380.1 200.5C388.7 198.3 397.4 203.5 399.5 212.1C401.7 220.7 396.5 229.4 387.9 231.5L335.1 244.5V265.9L385.1 272.1C394.8 273.2 400.1 281.2 399.9 289.1C398.8 298.8 390.8 304.1 382 303.9L335.1 298.1V303.1C335.1 307 335.8 309.1 335.5 312.9H335.5zM303.1 281.4V207.1C303.1 181.5 282.5 159.1 255.1 159.1C236.2 159.1 219.1 172 211.8 189.2L303.1 281.4z" /></svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">
-              Instant Critical Bug Fixes
-            </h3>
-            <p class="mt-3 text-sm text-gray-400">
-              Protect your users by releasing critical bug fixes instantaneously, and not one second later.
+              Release now, not one week later.
+              <!-- Release in matter on seconds, not one week later. -->
+              <!-- Reach 90% of first day deployment instead of a month. -->
             </p>
           </div>
 
@@ -85,7 +77,17 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               App Store Compliant
             </h3>
             <p class="mt-3 text-sm text-gray-400">
-              Safely update your Capacitor apps while staying compliant with Apple and Android requirements.
+              100% compliant with Apple and Android requirements.
+            </p>
+          </div>
+
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"/></svg>
+            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">
+              End-to-end encryption
+            </h3>
+            <p class="mt-3 text-sm text-gray-400">
+              Only your users can decrypt your updates, no one else.
             </p>
           </div>
         </div>
@@ -415,7 +417,6 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-
     <div class="relative mt-24 sm:mt-32 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-800 rounded-r-3xl" />
