@@ -40,7 +40,7 @@ const payg_units = {
       <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
-        1 month free trial for all plans
+        15 days free trial for all plans
       </p>
       <section class="py-12 sm:py-16 lg:py-20">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
