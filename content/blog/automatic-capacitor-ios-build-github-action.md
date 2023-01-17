@@ -117,7 +117,7 @@ Fastlane is a Ruby library created to automate common mobile development tasks. 
 
 
 Create a Fastlane folder at the root of your project and copy the following files:
-Fastlane
+Fastfile
 ```ruby
 default_platform(:ios)
 
