@@ -153,6 +153,25 @@ def ensure_temp_keychain(name, password)
 end
 
 platform :ios do
+  lane :refresh_profiles do
+    match(
+      type: "development",
+      force: true)
+    match(
+      type: "adhoc",
+      force: true)
+  end
+  desc "Register new device"
+  lane :register_new_device do  |options|
+      device_name = prompt(text: "Enter the device name: ")
+      device_udid = prompt(text: "Enter the device UDID: ")
+      device_hash = {}
+      device_hash[device_name] = device_udid
+      register_devices(
+                       devices: device_hash
+                       )
+    refresh_profiles
+  end
   lane :closed_beta do
     keychain_name = TEMP_KEYCHAIN_USER
     keychain_password = TEMP_KEYCHAIN_PASSWORD
@@ -471,6 +490,18 @@ Terminal execution: $ Fastlane closed\_beta
 
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
 I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+
+### Build on your device
+
+If you still need to build on your device, you need to add them manually to the provisionning.
+Connect your device to your mac and open the device menu
+![find devic ios menu](/find_ios_device.webp)
+Then copy your identifier 
+![find identifier ios](/find_ios_identifier.webp)
+And then start the command:
+`fastlane register_new_device`
+it will ask you to set a device name and the identifier:
+![set identifier ios](/set_identifier.webp)
 
 ### Thanks
 
