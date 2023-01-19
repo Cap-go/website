@@ -9,7 +9,7 @@ updated_at: 2022-01-13
 head_image: "/bypass_illustration.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
-published: true
+published: false
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---
