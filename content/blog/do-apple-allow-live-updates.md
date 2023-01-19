@@ -6,43 +6,25 @@ author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-01-13
 updated_at: 2022-01-13
-head_image: "/bypass_illustration.webp"
+head_image: "/apple_appstore.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
-published: false
+published: true
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---
-_Glad you asked._
 
-My lawyers asked me to let you know that this isn't legal advice, but you don't need a law degree to understand the wording in Apple's official guidelines. Apple’s guidelines explicitly permit you to push executable code directly to your app, bypassing the App Store, under these three conditions:
+Updating Capacitor JS apps without going through the App Store review process is possible under certain conditions outlined in Apple's official guidelines. However, it is important to note that this is not legal advice. In order for code updates to be pushed directly to an app and remain compliant with Apple's guidelines, the following conditions must be met:
 
-* The code is run by Apple's built-in WebKit framework
-* The code does not provide, unlock or enable additional features or functionality
-* The user doesn't see the update is happening
+- The code must be run by Apple's built-in WebKit framework
+- The code must not provide, unlock or enable additional features or functionality
+- The user must not be aware that an update is occurring
 
-With Capgo capacitor plugin, you can only update and modify your HTML CSS and JavaScript, so we’re good on the first condition.
+The Capgo Capacitor plugin allows for updates and modifications to be made to HTML, CSS, and JavaScript, satisfying the first condition. 
+The ability for apps to update themselves without going through the App Store review process has been available for some time for apps created using JavaScript frameworks such as Facebook's React Native and services like Expo.
 
-On a side note, the ability for apps to update themselves without the App Store has been around for a quite a while.
-Only for apps created using JavaScript frameworks such as Facebook's React Native and services such as Expo.
+The second condition, not providing additional features or functionality, is determined by the developer. Capgo is intended for making small tweaks or fixes, rather than introducing new features or functionality. For significant changes, it is necessary to release updates through the App Store. It is worth noting that many other developers use live updates without any issues or rejection from Apple.
 
-A proof that React Native is not more Native than Capacitor 😆
+Google Play is less restrictive than Apple when it comes to updating apps. Google Play allows for apps installed from their store with JavaScript bundles to be updated by non-Google services. 
 
-Capgo is simply the first affordable solution that provides the ability to push code-level updates to native Capacitor apps.
-The second condition, no new features or functionality, is really up to you.
-
-Capgo isn't intended to push new features or functionality. It is meant to tweak or fix them, avoiding the minor releases needed to fix bugs, add logging or tracking, update messages, force users to upgrade, etc.
-
-For new features or functionality, you need to release through the app store. For your information, Ionic AppFlow (the alternative for big corporate) is installed on over 50 million iOS devices and there's never been an app rejected because it uses it.
-
-I'm just saying that because it's good to know that thousands of other developers are using live updates, so you're not alone.
-
-Apple and Google have their set of own rules on how to update apps.
-
-For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf).
-\[…\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[…\] __TLDR__: we should use OTA updates only to fix bugs or make improvements, without making significant changes.
-
-__Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) to update by Google services only.
-
-
-Check my next article for more information on how to install Capgo to bypass review.
+For more information on how to install Capgo to bypass review, please refer to my next article.
