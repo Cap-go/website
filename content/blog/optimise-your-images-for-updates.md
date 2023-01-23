@@ -4,8 +4,8 @@ title: Optimise your images for updates
 description: How to optimise your images for live updates and help your user get updates faster.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2022-03-02
-updated_at: 2022-12-14
+created_at: 2023-01-23
+updated_at: 2023-01-23
 head_image: "/convert_webp.webp"
 head_image_alt: Convert to webp illustration
 tag: Optimisation
