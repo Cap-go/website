@@ -15,7 +15,7 @@
     "@nuxt/content": "^2.3.0",
     "@nuxt/schema": "3.0.0",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@supabase/supabase-js": "2.4.0",
+    "@supabase/supabase-js": "2.4.1",
     "@types/semver": "^7.3.13",
     "@unocss/nuxt": "^0.47.6",
     "@vueuse/nuxt": "^9.7.0",
