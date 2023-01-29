@@ -331,4 +331,4 @@ Capacitor is the easiest solution when it comes to building a native application
 
 The other common React solution would be React Native, however this usually only allows sharing logic and not the actual UI code, while we didn’t really have to touch the UI at all if we are using Capacitor.
 
-**If you enjoyed the tutorial or got any further questions, just drop a comment below!**
+**If you enjoyed the tutorial or got any further questions, just drop an email to martin@capgo.app**
