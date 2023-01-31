@@ -1,0 +1,107 @@
+<script setup lang="ts">
+import { createMeta } from '~/services/meta'
+import { Database } from '~~/types/supabase.types';
+
+const config = useRuntimeConfig()
+const title = 'Capgo | Top Capacitor apps'
+const description = 'List of top 100 app using Capacitor'
+
+const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
+
+useHead(() => ({
+  title,
+  meta: createMeta(title, description),
+}))
+
+fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
+  if (res.ok) {
+    res.json().then((data) => {
+        apps.value = data.apps
+    })
+  }
+})
+</script>
+
+<template>
+  <section class="py-10 sm:py-12 lg:py-20">
+    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1
+          class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
+        >
+          Top Capacitor apps
+        </h1>
+        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
+          {{ description }}
+        </p>
+      </div>
+
+      <div
+        class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
+      >
+        <div
+          v-for="(app, index) in apps"
+          :key="index"
+          class="overflow-hidden bg-white rounded shadow"
+        >
+          <div class="p-5">
+            <div class="relative">
+              <NuxtLink
+                :to="app.url"
+                :title="app.title"
+                class="block aspect-w-4 aspect-h-3"
+              >
+                <img
+                  class="object-cover w-full h-full rounded-lg"
+                  :src="app.icon"
+                  :alt="`app icon ${app.title}`"
+                >
+              </NuxtLink>
+
+              <div class="absolute top-4 left-4">
+                <span
+                  class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
+                >
+                  {{ app.category }}
+                </span>
+              </div>
+            </div>
+            <span
+              class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"
+            >
+              {{ app.installs }} Downloads
+            </span>
+            <p class="mt-5 text-2xl font-semibold">
+              <NuxtLink :to="app.url" :title="app.title" class="text-black">
+                {{ app.title }}
+              </NuxtLink>
+            </p>
+            <p class="mt-4 text-base text-gray-600">
+              {{ app.summary }}
+            </p>
+            <NuxtLink
+              :to="app.url"
+              :title="app.title"
+              class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+            >
+              See in Play store
+              <svg
+                class="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+

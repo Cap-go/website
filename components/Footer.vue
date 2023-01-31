@@ -19,7 +19,7 @@ const navigation = {
     { name: 'Documentation', href: 'https://docs.capgo.app/', target: '_blank' },
     { name: 'Plugins', href: '/plugins/' },
     { name: 'Awesome capacitor', href: 'https://github.com/riderx/awesome-capacitor', target: '_blank' },
-    // { name: 'Commerce', href: '#' },
+    { name: 'Top capacitor app', href: '/top_capacitor_app' },
     // { name: 'Insights', href: '#' },
   ],
   support: [
