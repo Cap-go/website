@@ -14,6 +14,7 @@ const articlesOrder = computed(() =>
   }),
 )
 
+
 useHead(() => ({
   title,
   meta: createMeta(title, description),
@@ -64,7 +65,7 @@ const formatTime = (s: string) => {
 
               <div class="absolute top-4 left-4">
                 <span
-                  class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
+                  class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg"
                 >
                   {{ article.tag }}
                 </span>

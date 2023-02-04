@@ -8,6 +8,24 @@ const description = 'List of top 100 app using Capacitor'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 
+const shortNumber = (number: number) => {
+
+  if (number > 1000000000)
+    return `${(number / 1000000).toFixed(1)}B`
+
+  if (number > 1000000)
+    return `${(number / 1000000).toFixed(1)}M`
+
+  if (number > 1000)
+    return `${(number / 1000).toFixed(1)}k`
+
+  return `${number}`
+}
+
+const renameCat = (text: string) => {
+  return text.replaceAll('_', ' ')
+}
+
 useHead(() => ({
   title,
   meta: createMeta(title, description),
@@ -60,24 +78,28 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
 
               <div class="absolute top-4 left-4">
                 <span
-                  class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
+                  class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg"
                 >
-                  {{ app.category }}
+                  {{ renameCat(app.category) }}
+                </span>
+              </div>
+              <div class="absolute top-4 right-4">
+                <span
+                  class="px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-pumpkin-orange-500 rounded-full shadow-lg"
+                >
+                  {{ index + 1 }}
                 </span>
               </div>
             </div>
             <span
               class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"
             >
-              {{ app.installs }} Downloads
+              {{ shortNumber(app.installs) }} Downloads
             </span>
             <p class="mt-5 text-2xl font-semibold">
               <NuxtLink :to="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
               </NuxtLink>
-            </p>
-            <p class="mt-4 text-base text-gray-600">
-              {{ app.summary }}
             </p>
             <NuxtLink
               :to="app.url"

@@ -117,7 +117,7 @@ useHead(() => ({
 
         <div class="absolute top-2 left-2">
           <span
-            class="px-4 py-2 text-tiny font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
+            class="px-4 py-2 text-tiny font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg"
           >
             {{ randomData.tag }}
           </span>
