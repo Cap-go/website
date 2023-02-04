@@ -87,7 +87,7 @@ AppFlow is expensive because Ionic has built their company around it, and they b
 
 Capgo has no part in that business model. Nothing is being built in my side. With Capgo, you 100% own and control all of your CI/CD. I just store and manage the version for you.
 
-I choose this business model than CI/CD one. If you want my free as in solution, you can self-host Capgo on your server.
+I choose this business model than CI/CD one. If you want free solution, you can self-host Capgo on your server.
 
 ## How to switch from AppFlow to an open-source updater
 
