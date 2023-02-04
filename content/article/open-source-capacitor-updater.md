@@ -91,6 +91,6 @@ I choose this business model than CI/CD one. If you want free solution, you can 
 
 ## How to switch from AppFlow to an open-source updater
 
-[Sign up for a 15-day unlimited-use free trial](https://capgo.app/blog/register/) with no obligations and explore my open-source app update system. You don’t even need to build a new native app with Capgo, you can use my test app until you’ve tested Capgo and figured out if you like my product.
+[Sign up for a 15-day unlimited-use free trial](https://web.capgo.app/blog/register/) with no obligations and explore my open-source app update system. You don’t even need to build a new native app with Capgo, you can use my test app until you’ve tested Capgo and figured out if you like my product.
 
 Capgo is simple to set up and integrate into your app, regardless of which Framework you use or how you’ve built your app. You simply insert my one-line JavaScript snippet into the `main` section of the app, and I take care of the rest.
