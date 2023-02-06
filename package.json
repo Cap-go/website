@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@7.26.2",
+  "packageManager": "pnpm@7.26.3",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 3336",
