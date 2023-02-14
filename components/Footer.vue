@@ -32,10 +32,10 @@ const navigation = {
     // { name: 'About', href: '#' },
     // { name: 'Blog', href: '#' },
     // { name: 'Jobs', href: '#' },
-    // { name: 'Press', href: '#' },
     { name: 'Imprint', href: '/imprint/' },
     { name: 'Contributing', href: '/contributing/' },
     { name: 'Security', href: '/trust/' },
+    { name: 'Affiliate', href: 'https://capgo.getrewardful.com/', target: '_blank' },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
