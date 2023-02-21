@@ -255,6 +255,48 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             the problem is and how to fix it.<br class="" />
           </p>
         </div>
+        <div class="text-slate-900">
+          <h6
+            class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
+            style='background-image: url("https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg"); background-position: 0px 3px; letter-spacing: 1.7px;'
+          >
+            Case 6
+          </h6>
+        </div>
+        <div class="text-slate-900">
+          <h5
+            class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900"
+            style="line-height: 42px;"
+          >
+            <strong class="font-bold" style="line-height: 42px;"
+              >Plugin is missing</strong
+            >
+          </h5>
+          <p class="mt-0 mb-2">
+            You need a to access to specific native API and the right plugin don't exist. We can develop it for you or support you with it.<br class="" />
+          </p>
+        </div>
+        <div class="text-slate-900">
+          <h6
+            class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
+            style='background-image: url("https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg"); background-position: 0px 3px; letter-spacing: 1.7px;'
+          >
+            Case 7
+          </h6>
+        </div>
+        <div class="text-slate-900">
+          <h5
+            class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900"
+            style="line-height: 42px;"
+          >
+            <strong class="font-bold" style="line-height: 42px;"
+              >CI/CD Setup</strong
+            >
+          </h5>
+          <p class="mt-0 mb-2">
+            Our team helps you with configuring and managing automated builds, tests, and app deployments to app stores through fastlane and Ionic Appflow technologies in your CI/CD environment.<br class="" />
+          </p>
+        </div>
       </div>
     </div>
   </div>
