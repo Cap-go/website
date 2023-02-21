@@ -1,13 +1,13 @@
 ---
 slug: "building-a-native-mobile-app-with-nextjs-and-capacitor"
 title: Creating Mobile Apps with Next.js and Capacitor.
-description: 
+description: How to create a mobile app with Next.js, Capacitor and implement native UI with Kosta UI.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-02-21
 updated_at: 2023-02-21
-head_image: "/fastlane_ios.webp"
-head_image_alt: Fastlane testflight GitHub action illustration
+head_image: "/next_capgo.webp"
+head_image_alt: Next.js and Capgo illustration
 tag: Turotial
 published: true
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
