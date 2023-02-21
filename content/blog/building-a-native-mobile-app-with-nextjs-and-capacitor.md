@@ -381,6 +381,7 @@ You should see the following page as a result:
 ![konsta-next](/konsta-next.webp)
 
 
+Thanks a lot to [Simon](https://twitter.com/schlimmson) for the article inspiration, this article is a fork of his article [here](https://devdactic.com/nextjs-and-capacitor) made with chat-gpt-3 and where Kosta UI replace Ionic UI.
 ## Conclusion
 
 Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 

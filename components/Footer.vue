@@ -35,6 +35,7 @@ const navigation = {
     { name: 'Imprint', href: '/imprint/' },
     { name: 'Contributing', href: '/contributing/' },
     { name: 'Security', href: '/trust/' },
+    { name: 'Consulting', href: '/consulting/' },
     { name: 'Affiliate', href: 'https://capgo.getrewardful.com/', target: '_blank' },
   ],
   legal: [
