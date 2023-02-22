@@ -125,7 +125,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
           <div>
-            <img class="w-auto max-w-lg mx-auto h-120" src="/stats_app.webp" alt="Manage app illustration">
+            <img class="w-auto h-auto" src="/stats_demo.webp" alt="Manage app illustration">
           </div>
 
           <div class="lg:pr-12">
