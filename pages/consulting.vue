@@ -135,7 +135,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         /><br class="" />
       </p>
       <div
-        class="grid mt-16 text-left"
+        class="md:grid mt-16 text-left"
         style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px;"
       >
         <div class="text-slate-900">
@@ -323,7 +323,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
       </p>
     </div>
     <div
-      class="grid grid-flow-row text-left"
+      class="md:grid grid-flow-row md:text-left"
       style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto;"
     >
       <div class="text-slate-900">
@@ -422,7 +422,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
     </div>
     <div
       
-      class="grid gap-8 text-left"
+      class="md:grid gap-8 md:text-left"
       style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch;"
     >
       <div
@@ -549,10 +549,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
     </h2>
   </div>
   <div
-    class="grid gap-4 items-stretch leading-8 text-slate-900"
+    class="md:grid gap-4 items-stretch leading-8 text-slate-900 sm:text-left"
     style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px;"
   >
-    <div class="text-left sm:text-left">
+    <div>
       <div class="mb-6 h-20 text-slate-900">
         <img
           src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
@@ -576,7 +576,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         remove it.
       </p>
     </div>
-    <div class="text-left sm:text-left">
+    <div >
       <div class="mb-6 h-20 text-slate-900">
         <img
           src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
@@ -622,7 +622,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
   </div>
   <div
     
-    class="grid grid-flow-row gap-6 leading-8 text-left"
+    class="md:grid grid-flow-row gap-6 leading-8 md:text-left"
     style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh;"
   >
     <div class="flex flex-col justify-center items-center px-5 text-left">
@@ -822,7 +822,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
   class="block relative flex-col items-center my-auto max-w-none font-sans font-light leading-8 text-center bg-slate-900 text-slate-900 sm:max-w-none"
   style="padding: 10vh 5vw;"
 >
-<div class="flex flex-row w-full">
+<div class="flex flex-col md:flex-row w-full">
 
 <div
   class="flex flex-col font-sans font-light leading-8 text-left text-slate-900 w-1/3"
