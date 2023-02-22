@@ -16,9 +16,9 @@ next_blog: "automatic-build-and-release-with-github-actions"
 ---
 ## Migration Summary
 
-* Capgo is a service that helps development teams send live app to deployed apps.
+* [Capgo](https://web.capgo.app/register/) is a service that helps development teams send live app to deployed apps.
 * Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
-* Capgo offers equivalent services for App Center Build (build Android/iOS apps) and App Center Distribute (CodePush). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
+* [Capgo](https://web.capgo.app/register/) offers equivalent services for App Center Build (build Android/iOS apps) and App Center Distribute (CodePush). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
 * Ionic has [Advisory services](https://ionicframework.com/advisory) available if you need migration assistance.
 
 ##### Note
@@ -37,7 +37,7 @@ Capgo fills in the gaps between web delivery and mobile.
 
 ## Capgo Prerequisites
 
-Like App Center, Capgo supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
+Like App Center, [Capgo](https://web.capgo.app/register/) supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
 
 ### Install Capgo CLI
 
@@ -51,7 +51,7 @@ If you do not have Node or NPM installed on your computer, you will need to do t
 
 Before you begin, I recommend making changes on a fresh Git branch.
 
-Since Capgo was created to automate capacitor apps, it requires one file that your app may not have. First, create a `capacitor.config.json` file. The easiest way to create it is to run in the root of your app:
+Since [Capgo](https://web.capgo.app/register/) was created to automate capacitor apps, it requires one file that your app may not have. First, create a `capacitor.config.json` file. The easiest way to create it is to run in the root of your app:
 
 ```shell
 npm install @capacitor/core
@@ -71,7 +71,7 @@ Finally, commit the new files to your project:
 
 ### Migrate the Code
 
-Now that you have the new required Capgo files in place, you can turn our attention to the actual app itself. Capgo expects the entire built app to be inside a directory named `dist`.
+Now that you have the new required [Capgo](https://web.capgo.app/register/) files in place, you can turn our attention to the actual app itself. [Capgo](https://web.capgo.app/register/) expects the entire built app to be inside a directory named `dist`.
 
 If your built code is not in a `dist` directory, change this value in the Capacitor config file.
 
@@ -81,7 +81,7 @@ Here is what the app’s directory structure should look like:
 
 ## Capgo Configuration
 
-With your app ready for Capgo integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
+With your app ready for [Capgo](https://web.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
 
 Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the 'write' key to copy it to your clipboard.
 
@@ -104,7 +104,7 @@ This will tell the native plugin the installation as succeeded.
 
 ## Deploying Live Updates (CodePush Alternative)
 
-The Live Update feature works by using the installed Capgo SDK in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
+The Live Update feature works by using the installed [Capgo SDK](https://github.com/Cap-go/capacitor-updater) in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
 
 ### Login to Capgo CLOUD
 

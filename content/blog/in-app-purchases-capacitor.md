@@ -42,7 +42,7 @@ add the plugin to your app native code
 
 add in app purchases capability in xcode:
 
-![xcode step 1](/iap_step1.webp)
+![Xcode step 1](/iap_step1.webp)
 then
 ![xcode step 2](/iap_step2.webp)
 
@@ -108,13 +108,13 @@ App configuration page for an Apple App Store app
 
 Service credentials need to be set up for RevenueCat to communicate with the app stores on your behalf. See RevenueCat guides [App Store Connect Shared Secret](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret), [Play Service Credentials](https://www.revenuecat.com/docs/creating-play-service-credentials), and [Amazon Appstore Shared Secret](https://www.revenuecat.com/docs/amazon-appstore) for more information.
 
-Note that Play service credentials can take up to 36 hours to propagate throughout Google's servers.
+Note that play service credentials can take up to 36 hours to propagate throughout Google's servers.
 
 ## 3. Product Configuration
 
 ### ▶️ Store Setup
 
-Before you can start using RevenueCat to fetch products, you must configure your products in the respective stores. See the following guides for [App Store Connect](https://www.revenuecat.com/docs/ios-products), [Google Play Console](https://www.revenuecat.com/docs/android-products), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup), and [Stripe](https://www.revenuecat.com/docs/stripe-products) for help navigating through this process.
+Before you can start using RevenueCat to fetch products, you must configure your products in the respective stores. See the following guides for [App Store Connect](https://www.revenuecat.com/docs/ios-products), [Google Play Console](https://www.revenuecat.com/docs/android-products), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup), and [Stripe](https://www.revenuecat.com/docs/stripe-products) for help to navigate through this process.
 
 If you are selling iOS products, be sure to sign your 'Paid Applications Agreement' and fill out your bank and tax information in **App Store Connect > Agreements, Tax, and Banking**. **This needs to be completed before you can test any purchases**.
 
@@ -128,9 +128,10 @@ If you are selling iOS products, be sure to sign your 'Paid Applications Agreeme
 
 ### ▶️ Configure Products and Entitlements in RevenueCat
 
-Once your in-app products have been configured in [App Store Connect](https://www.revenuecat.com/docs/ios-products), [Google Play Console](https://www.revenuecat.com/docs/android-products), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup), or [Stripe](https://www.revenuecat.com/docs/stripe-products), you'll need to copy that configuration into the RevenueCat dashboard. RevenueCat uses an Entitlements system to control access to premium features, and Offerings to manage the set of products you offer to customers.
+Once your in-app products have been configured in [App Store Connect](https://www.revenuecat.com/docs/ios-products), [Google Play Console](https://www.revenuecat.com/docs/android-products), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup), or [Stripe](https://www.revenuecat.com/docs/stripe-products), you'll need to copy that configuration into the RevenueCat dashboard. RevenueCat uses an Entitlements' system to control access to premium features, and Offerings to manage the set of products you offer to customers.
 
-Entitlements are the level of access that a customer is "entitled" to after purchasing a specific product, and Offerings is a simple way for you to organize the in-app products you wish to "offer" on your paywall and configure them remotely. RevenueCat **recommend** utilizing these features to simplify your code and enable you to change products without releasing an app update.
+Entitlements are the level of access that a customer is “entitled” to after purchasing a specific product.
+Offerings are a simple way for you to organize the in-app products you wish to “offer” on your paywall and configure them remotely. RevenueCat **recommends** utilizing these features to simplify your code and enable you to change products without releasing an app update.
 
 See [Configuring Products](https://www.revenuecat.com/docs/entitlements) to set up your products and then organize them into Offerings or Entitlements.
 
@@ -148,7 +149,7 @@ If you run into issues with the SDK, see [Troubleshooting the SDKs](https://www.
 > 
 > You can get your public SDK key from the **API keys** tab under **Project settings** in the dashboard.
 
-You should only configure the shared instance of _Purchases_ once, usually on app launch. After that, the same instance is shared throughout your app by accessing the `.shared` instance in the SDK.
+You should only configure the shared instance of _Purchases_ once, usually on app launch. Subsequently, the same instance is shared throughout your app by accessing the `.shared` instance in the SDK.
 
 See RevenueCat guide on [Configuring SDK](https://docs.revenuecat.com/docs/configuring-sdk) for more information and best practices.
 
@@ -167,9 +168,9 @@ if (isPlatform('ios')) {
 }
 ```
 
-When in development, RevenueCat recommend enabling more verbose debug logs. For more information about these logs, see their [Debugging](https://www.revenuecat.com/docs/debugging) guide.
+When in development, RevenueCat recommends enabling more verbose debug logs. For more information about these logs, see their [Debugging](https://www.revenuecat.com/docs/debugging) guide.
 
-If you're planning to use RevenueCat alongside your existing purchase code, check out their guide on [Observer Mode](https://www.revenuecat.com/docs/observer-mode).
+If you're planning to use RevenueCat alongside your existing purchase code, refer to their guide on [Observer Mode](https://www.revenuecat.com/docs/observer-mode).
 
 
 > ### 📘
@@ -211,7 +212,7 @@ You can find more info about troubleshooting this issue in RevenueCat [Help Cent
 
 The SDK includes a simple method for facilitating purchases. The `purchase:package` takes a package from the fetched Offering and processes the transaction with the respective app store.
 
-The code sample below shows the process of purchasing a package and confirming it unlocks the "your\_entitlement\_id" content. More detail about the `purchase:package` method can be found in RevenueCat guide on [Making Purchases](https://www.revenuecat.com/docs/making-purchases).
+The code sample below shows the process of purchasing a package and confirming it unlocks the "your\_entitlement\_id" content. More details about the `purchase:package` method can be found in RevenueCat guide on [Making Purchases](https://www.revenuecat.com/docs/making-purchases).
 
 ```typescript
 const purchase = async (p: Package): Promise<PurchaserInfo | null> => {
@@ -237,9 +238,9 @@ const purchase = async (p: Package): Promise<PurchaserInfo | null> => {
 
 ### ▶️ Check Subscription Status
 
-You can use this method whenever you need to get the latest status, and it's safe to call this repeatedly throughout the lifecycle of your app. _Purchases_ automatically caches the latest CustomerInfo whenever it updates — so in most cases, this method pulls from the cache and runs very fast.
+You can use this method whenever you need to get the latest status, and it's safe to call this repeatedly throughout the lifecycle of your app. _Purchases_ automatically caches the latest `CustomerInfo` whenever it updates — so in most cases, this method pulls from the cache and runs very fast.
 
-It's typical to call this method when deciding which UI to show the user and whenever the user performs an action that requires a certain entitlement level.
+It's typical to call this method when deciding which UI to show the user, and whenever the user performs an action that requires a certain entitlement level.
 
 > ### 📘
 > 
@@ -259,11 +260,12 @@ RevenueCat enables your users to restore their in-app purchases, reactivating an
 
 ```
 
-If two different [App User IDs](https://www.revenuecat.com/docs/user-ids) restore transactions from the same underlying store account (Apple, Google, or Amazon account) RevenueCat may attempt to create an alias between the two App User IDs and count them as the same user going forward. See RevenueCat guide on [Restoring Purchases](https://www.revenuecat.com/docs/restoring-purchases) for more information on the different configurable restore behaviors.
+If two different [App User IDs](https://www.revenuecat.com/docs/user-ids) restore transactions from the same underlying store account (Apple, Google, or Amazon account).
+RevenueCat may attempt to create an alias between the two App User IDs and count them as the same user going forward. See RevenueCat guide on [Restoring Purchases](https://www.revenuecat.com/docs/restoring-purchases) for more information on the different configurable restore behaviors.
 
-Since the SDK works seamlessly on any platform, changes to a user's purchase info may come from a variety of sources. You can respond to any changes in a customer's CustomerInfo by conforming to an optional delegate method, `purchases:receivedUpdated:`.
+Since the SDK works seamlessly on any platform, changes to a user's purchase info may come from a variety of sources. You can respond to any changes in a customer's `CustomerInfo` by conforming to an optional delegate method, `purchases:receivedUpdated:`.
 
-This method will fire whenever the SDK receives an updated CustomerInfo object from calls to `getCustomerInfo()`, `purchase(package:)`, `purchase(product:)`, or `restorePurchases()`.
+This method will fire whenever the SDK receives an updated `CustomerInfo` object from calls to `getCustomerInfo()`, `purchase(package:)`, `purchase(product:)`, or `restorePurchases()`.
 
 CustomerInfo updates are _not_ pushed to your app from the RevenueCat backend, updates can only happen from an outbound network request to RevenueCat, as mentioned above.
 

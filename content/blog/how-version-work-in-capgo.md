@@ -14,7 +14,7 @@ next_blog: "how-to-release-major-version-in-capgo"
 
 ---
 
-Capgo use 2 main variable to manage versions in your Capacitor app:
+Capgo uses 2 main variables to manage versions in your Capacitor app:
   - Native version
   - JavaScript versions
 
@@ -43,13 +43,13 @@ Where Capgo find the version to compare
 
 This is how Capgo channel will behave if you didn't change any settings.
 
-> This behavior will be base on the unique channel you made default.
+> This behavior will be based on the unique channel you made default.
 
 ### When Fresh installation of your Capacitor app
-When user did download your Ionic app for the first time and open the app it contacts Capgo server.
+When user did download your Ionic app for the first time and opens the app it contacts Capgo server.
 
 Currently, 4 outputs can happen:
-  - The native bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
+  - The native bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo sends his bundle to the user.
   - The native bundle version (1.2.3) is equal to Capgo bundle version (1.2.3), Capgo send “no need to update”.
   - The native bundle version (1.2.4) is higher than Capgo bundle version (1.2.3), Capgo send “no need to update”.
   - The native bundle version (1.2.3) is MAJOR lower than Capgo bundle version (2.2.3), Capgo send “no need to update”.
@@ -62,12 +62,12 @@ If you change this setting to false, Capgo will consider is always the trustable
 Then the behavior become :
 - The native version (1.2.4) is higher than Capgo version (1.2.3)
 
-> Capgo send his version to the user.
+> Capgo sends his version to the user.
 
 #### Disable auto-upgrade above major
 
 If you change this setting to false, Capgo will consider upgrade to MAJOR is not an issue.
-Then the behavior become :
+Then the behavior becomes:
 - The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3)
 
 > Capgo send his version to the user.

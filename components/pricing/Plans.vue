@@ -16,6 +16,7 @@ const props = defineProps({
   },
 })
 
+const yearly = ref(false)
 const numberWithSpaces = (x: number) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
@@ -42,6 +43,10 @@ const descToEmoji = (desc: string) => {
 
 <template>
   <div id="plans">
+    <div class="relative mt-6 flex self-center rounded-lg bg-gray-800 p-0.5 sm:mt-8 w-[320px] mx-auto">
+      <button type="button" @click="yearly = false" :class="{'border-gray-200 bg-white text-gray-900 shadow-sm': !yearly, 'border-transparent text-gray-100': yearly}" class="relative w-1/2 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-purple-500 sm:w-auto sm:px-8">Monthly billing</button>
+      <button type="button" @click="yearly = true" :class="{'border-gray-200 bg-white text-gray-900 shadow-sm': yearly, 'border-transparent text-gray-100': !yearly}" class="relative ml-0.5 w-1/2 whitespace-nowrap rounded-md border py-2 text-sm font-medium  focus:z-10 focus:outline-none focus:ring-2 focus:ring-purple-500 sm:w-auto sm:px-8">Yearly billing</button>
+    </div>
     <section class="pt-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 px-12 text-center sm:text-left sm:px-0 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
@@ -57,7 +62,7 @@ const descToEmoji = (desc: string) => {
             </p>
             <div class="flex items-end justify-center mt-6">
               <p class="text-5xl font-bold text-gray-900 font-pj">
-                {{ plan.price_m }}€{{ plan.name === 'Pay as you go' ? "+" : "" }}
+                {{ yearly ? plan.price_y :  plan.price_m }}€{{ plan.name === 'Pay as you go' ? "+" : "" }}
               </p>
               <p class="text-lg font-medium text-gray-400 font-pj">
                 /month

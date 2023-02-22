@@ -18,7 +18,7 @@ Microsoft announced that App Center will soon [discontinue support for apps runn
 
 ## From Microsoft App Center to Capgo Cloud
 
-For businesses and teams using App Center, I'm happy to say that [Capgo](https://capgo.app) platform is a great alternative to App Center that provides full support for Capacitor apps. Capacitor is a new way to build native mobile apps with Ionic. Most of Cordova plugin are supported in Capacitor. It's time to migrate to Cordova successor: Capacitor.
+For businesses and teams using App Center, I'm thrilled to say that the [Capgo](https://capgo.app) platform is a great alternative to App Center that provides full support for Capacitor apps. Capacitor is a new way to build native mobile apps with Ionic. Most of the Cordova plugins are supported in Capacitor. It's time to migrate to Cordova's successor: Capacitor.
 
 Capgo helps to streamline app delivery for hundreds of businesses and teams.
 

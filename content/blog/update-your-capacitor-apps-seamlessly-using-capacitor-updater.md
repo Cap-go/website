@@ -23,13 +23,13 @@ This is especially great if you want to do critical bug fixes and deliver instan
 
 You can think of it as "web-like" agility of side-loading updates as soon as they are available.
 
-Moreover, it provides rollbacks if the new update crashed the app
+Moreover, it provides rollbacks if the new update crashes the app
 
 ## How does it work?
 
-Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configuration which can help you fine-tune your user's experience.
+Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app, it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configurations which can help you fine-tune your user's experience.
 
-I use Capgo in all my projects I build that allow me to put less time in the App Store review process.
+I use Capgo in all my projects I build. That allows me to put less time in the App Store review process.
 
 You can read more about it [here](https://capgo.app).
 
@@ -51,21 +51,21 @@ But you can set up your CI/CD to handle this part, I made a tutorial on how to d
 
 It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
 
-Once you’re logged into Capgo, You will have onboarding page 
+Once you’re logged into Capgo, You will have an onboarding page 
 
 ![Onboarding page](/onboarding_1.webp)
 
-Follow the steps in the onboarding page to add your first app.
+Follow the steps on the onboarding page to add your first app.
 
 
 ### Install the Capgo SDK
 
-From a command line, directly into the root of your Capacitor app run:
+From a command line, directly into the root of your Capacitor app, run:
 
 `npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
 
-And then add to your app this code as replacement of CodePush one:
+And then add to your app this code as a replacement of CodePush one:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -87,7 +87,7 @@ Let's get started by first creating an app in Capgo Cloud with the CLI.
 
 `npx @capgo/cli@latest add`
 
-This command will use all variable defined in the Capacitor config file to create the app.
+This command will use all variables defined in the Capacitor config file to create the app.
 
 ## Upload your first version
 
@@ -123,6 +123,6 @@ For your application to receive a live update from Deploy, you'll need to run th
 
     npc cap run [ios | android]
 
-Open the app, put it in background and open it again, you should see in the logs the app did the update.
+Open the app, put it in the background and open it again, you should see in the logs the app did the update.
 
 Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://docs.capgo.app/plugin/auto-update/).

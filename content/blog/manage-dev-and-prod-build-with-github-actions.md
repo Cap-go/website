@@ -13,11 +13,11 @@ published: true
 next_blog: "how-to-send-specific-version-to-users"
 
 ---
-This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.
+This tutorial focuses on the GitHub hosting, but you can adapt it with a little tweak to any other CI/CD platform.
 
 ## Preface 
 
-Be sure you have added your Capacitor app first to Capgo, this tutorial just focus on the upload phase
+Be sure you have added your Capacitor app first to Capgo, this tutorial just focuses on the upload phase
 
 ## Commit convention
 
@@ -27,7 +27,7 @@ First you need to start following the commit convention [conventional commits](h
 
 ## GitHub actions for tag
 
-Then you need to create your first GitHub action to automatically build and create tag.
+Then you need to create your first GitHub action to automatically build and create tags.
 
 Create a file at this path: `.github/workflows/bump_version.yml`
 
@@ -76,7 +76,7 @@ This will release a tag for every commit in your main branch. And a `alpha` rele
 
 Don't worry if you don't have this file, it will be created for you.
 
-To make this work, you need to create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
+To make this work, you need to create a [PERSONAL ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
 
 This is necessary to let the CI commit the changelog and the version bump.
 
@@ -87,9 +87,9 @@ Set the `version` key in your `package.json` file. Use for that the last version
 
 This is only necessary the first time, then the tools will keep it up to date.
 
-You can now commit this both file and see your first tag appear in GitHub!
+You can now commit this both files and see your first tag appear in GitHub!
 
-`capacitor-standard-version` is the package who does the magic, by default he also updates your version number in Android and IOS
+`capacitor-standard-version` is the package who does the magic, by default, he also updates your version number in Android and IOS
 
 
 ## GitHub actions for build
@@ -138,14 +138,14 @@ This will install and build your dependency before sending it to Capgo.
 
 If your command for build is different, you can change it in the `build_code` step.
 
-If you need environment variable, use the `MY_ENV_VAR` and set the secret in your GitHub project setting, then secret then GitHub Action.
+If you need an environment variable, use the `MY_ENV_VAR` and set the `secret` in your GitHub project setting, then secret then GitHub Action.
 
 To make Capgo upload work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
-You can now commit this both file and see your first version appear in Capgo!
+You can now commit this both files and see your first version appear in Capgo!
 
 Add the commit will generate a new Capacitor build for production and development channel.
 
 You should add your test in the Ionic build step to be certain your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
+Go To your Capgo dashboard and check your build who just appeared, you now have your CI/CD system.

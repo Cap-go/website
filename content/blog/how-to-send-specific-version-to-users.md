@@ -24,20 +24,20 @@ I got the feeling too, but since I'm the maker of Capgo, I was able to take a lo
 
 The next pain I got in the Capacitor app distribution process is to make other teammates test the updates!
 
-With TestFlight, the issue is simple, bring people in your team and make them understand how to get it is time-consuming!
+With TestFlight, the issue is simple, bring people into your team and make them understand how to get it is time-consuming!
 
 And of course, each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
 
 I got many times my presentation delayed by this…
 
-And for Google this is even worse, the big mystery of my life, release a production version take less than 2 hours, but release a close beta take 1-2 days.
+And for Google this is even worse, the big mystery of my life, releasing a production version take less than 2 hours, but release a close beta take 1-2 days.
 
 
 ## Solution
 
 To fix this, I crated the Channel system in Capgo.
 
-`npx @capgo/cli@latest upload -c production` will update to all user (if production channel is set to default)
+`npx @capgo/cli@latest upload -c production` will update to all users (if production channel is set to default)
 
 If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions/). 
 
@@ -47,11 +47,11 @@ Then you have 2 way to let users get the updates from the channel
 
 This can be useful when you don't want to create your own backend for channel set, this is fast to implement.
 
-With that one, the only thing you need to do is allow one of your channel to be self set.
+With that one, the only thing you need to do is allow one of your channels to be self set.
 
 ![Allow set self in Capgo](/self_set.webp)
 
-And then add this in the code of your Ionic app, for best experience use this after user click on button like "register for beta"
+And then add this in the code of your Ionic app, for best experience, use this after the user clicks on button like "register for beta"
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -61,7 +61,7 @@ const deviceId = await CapacitorUpdater.setChannel({ channel: 'beta' })
 ### Manual way
 
 This can be useful for your internal team, this is fast to implement.
-Allow user to copy their deviceID from your app and send it to you manually, this code will help you to get it:
+Allow users to copy their deviceID from your app and send it to you manually, this code will help you to get it:
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -69,9 +69,9 @@ const deviceId = await CapacitorUpdater.getDeviceId()
 ```
 Hide a button somewhere in your app, or show the button to only connected user with a `admin` role, for example.
 
-Then Go to the Web app or native app Capgo, connect as app admin, select your app, click on device list.
+Then Go to the Web app or native app Capgo, connect as app admin, select your app, click on the device list.
 
-Then put in the search bar the deviceID click on the one found and then click on Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close again.
+Then put in the search bar the deviceID click on the one found and then click on the Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close again.
 
 He should get your version.
 
@@ -80,7 +80,7 @@ He should get your version.
 
 This can be useful for your beta testers, this is longer to implement.
 
-Same as manual way, you have to get the deviceID
+Same as the manual way, you have to get the deviceID
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -89,9 +89,9 @@ const deviceId = await CapacitorUpdater.getDeviceId()
 
 But this time you have to send it automatically to your backend, I let you decide how you do that.
 
-I will just suggest you to store it in database, that will facilitate your life later.
+I will just suggest you to store it in a database, that will facilitate your life later.
 
-Then in your backend you have to send it to Capgo backend too. Below two code example:
+Then in your backend you have to send it to Capgo backend too. Below two code examples:
 <details>
   <summary>NodeJS</summary>
 
@@ -150,10 +150,10 @@ async function handleRequest(request) {
   return fetch(newUrl.toString(), options)
 }
 ```
-And just send your device_id in body it to the deployed URL with POST to add and DELETE method to delete.
+And just send your device_id in the body it to the deployed URL with POST to add and DELETE method to delete.
 </details>
 
-After this configured, try to add a button in your app to opt in to the channel, and check in the web app if that have been set.
+After this configured, try to add a button in your app to opt in to the channel, and check in the web app if that has been set.
 
 You can also send `null` to remove override
 

@@ -22,4 +22,6 @@ Because Flutter apps are compiled to native code, it is not possible to use Capg
 
 Additionally, making updates to native code is generally against the rules for app stores. Both the Apple App Store and the Google Play Store have policies in place that prohibit developers from introducing changes to an app's native code after it has been submitted for review. This is because introducing changes to native code can potentially introduce security vulnerabilities or other issues that could compromise the app's performance.
 
-In summary, while Capgo Live Update is a useful tool for quickly deploying updates to certain types of mobile apps, it cannot be used to update Flutter apps due to the nature of Flutter's compilation process and the rules of the app stores.
+In summary, while Capgo Live Update is a useful tool for quickly deploying updates to certain types of mobile apps, it cannot be used to update Flutter apps.
+
+It's due to the nature of Flutter's compilation process and the rules of the app stores.

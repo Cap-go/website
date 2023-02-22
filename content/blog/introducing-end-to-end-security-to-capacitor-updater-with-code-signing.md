@@ -30,7 +30,7 @@ Like best-in-class web hosts, Capgo uses HTTPS to protect the privacy and integr
 
 Another thing Capgo and most web hosts have in common is they run on lower-level cloud infrastructure, often from AWS, GCP, or another popular cloud provider. The hardware and software operated by these cloud providers and Capgo or other web hosts are part of the cloud supply chain.
 
-The cloud supply chain and its security model work for a vast number of websites and apps. Every web developer who uses a cloud provider puts trust in that provider and expects the files they upload to be the files that get run or served without being tampered with. And cloud providers work hard at keeping their infrastructure secure.
+The cloud supply chain and its security model work for a vast number of websites and apps. Every web developer who uses a cloud provider puts trust in that provider and expects the files they upload to be the files that are run or served without being tampered with. And cloud providers work hard at keeping their infrastructure secure.
 
 But obviously, hardware and software vulnerabilities get discovered. Cloud providers patch vulnerabilities on timely schedules, proactively prevent malicious software(e.g. [Google’s SLSA](https://security.googleblog.com/2021/06/introducing-slsa-end-to-end-framework.html)), and build layers of defense in depth, and in practice, cloud infrastructure has shown to meet most websites and apps’ security needs. However, some Ionic apps include compromised cloud infrastructure in their threat models. For these Capacitor JS apps with the highest security requirements above the web, we built end-to-end code signing in to Capgo and the [Capgo Updates standard protocol](https://docs.capgo.app/self-hosted/auto-update/update-endpoint/).
 
@@ -38,7 +38,7 @@ But obviously, hardware and software vulnerabilities get discovered. Cloud provi
 
 Capgo’s end-to-end code signing uses public-key cryptography to ensure end users’ devices run only unmodified, original updates from the Capacitor app developer.
 
-“End-to-end” means this security covers the flow from the time a developer publishes an update to the time an end user’s device receives and runs the update. “Code signing” is using cryptography and a secret private key to “sign” code and later using a trusted public key to verify the signature.
+“End-to-end” means this security covers the flow from the time a developer publishes an update to the time an end user’s device receives and runs the update. “Code signing” is using cryptography and a secret private key to “sign” code, and later using a trusted public key to verify the signature.
 
 Here is a simple* schema to explain how it works:
 
@@ -58,7 +58,7 @@ We use two different encryption algorithms because RSA cannot be used to encrypt
 
 With this, Capgo cannot even read the content of your bundle, it can only verify the integrity of the bundle. This is a strong security model that is used by many enterprise customers.
 
-With end-to-end code signing, Capgo becomes “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
+With end-to-end code signing, Capgo becomes a “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
 
 While web-level HTTPS is sufficient for many Ionic apps, some large companies find the extra level of security from end-to-end code signing appealing. Some of these companies make finance apps that issue high-value, permanent transactions. Other companies have CISOs who include compromised cloud infrastructure in their threat models. We built end-to-end code signing in to Capgo for these use cases and are interested in hearing more from companies with higher-level security needs.
 
