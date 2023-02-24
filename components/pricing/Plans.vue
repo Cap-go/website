@@ -65,7 +65,7 @@ const descToEmoji = (desc: string) => {
                 {{ yearly ? plan.price_y :  plan.price_m }}€{{ plan.name === 'Pay as you go' ? "+" : "" }}
               </p>
               <p class="text-lg font-medium text-gray-400 font-pj">
-                /month
+                / {{ yearly ? 'year' :  'month' }}
               </p>
             </div>
 
