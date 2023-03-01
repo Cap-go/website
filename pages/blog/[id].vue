@@ -106,7 +106,7 @@ if (data.value) {
     <a
       v-if="randomData"
       :href="`/blog/${randomData.slug}/`"
-      class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg"
+      class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
     >
       <div class="relative mx-4 flex">
         <div :title="randomData.title" class="block w-full">
