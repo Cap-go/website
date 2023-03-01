@@ -268,7 +268,7 @@ npx cap sync
 
 After hitting the button, you can witness the beautiful native share dialog in action!
 
-![next-capacitor-share](/next-capacitor-share)
+![next-capacitor-share](/next-capacitor-share.webp)
 
 To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - Next.js (no pun intended). 
 
