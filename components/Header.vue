@@ -8,8 +8,6 @@ const menuMobile = ref(false)
 
 <template>
   <header class="relative py-2">
-    <Script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</Script>
-    <Script async src='https://r.wdfl.co/rw.js' data-rewardful='f5a722'></Script>
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between">
         <div class="flex-shrink-0">

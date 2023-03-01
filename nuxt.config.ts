@@ -148,7 +148,19 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       title: name,
+      noscript: [
+        { children: 'JavaScript is required' }
+      ],
       script: [
+        {
+          'src': 'https://r.wdfl.co/rw.js',
+          'data-rewardful': 'f5a722',
+          'async': true,
+        },
+        {      
+          hid: 'rewardful-code',
+          children: "(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');",
+        },
         {
           'src': 'https://pls.digitalshift-ee.workers.dev/js/script.js',
           'data-api': 'https://pls.digitalshift-ee.workers.dev/api/event',
