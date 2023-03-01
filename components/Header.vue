@@ -43,14 +43,14 @@ const menuMobile = ref(false)
           <a
             href="/pricing/"
             title="Pricing"
-            class="text-base font-medium transition-all duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Pricing
           </a>
           <a
             href="/blog/"
             title="Blog"
-            class="text-base font-medium transition-all duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Blog
           </a>
@@ -58,7 +58,7 @@ const menuMobile = ref(false)
             href="https://docs.capgo.app/"
             title="Documentation"
             target="_blank"
-            class="text-base font-medium transition-all duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Documentation
           </a>
@@ -66,7 +66,7 @@ const menuMobile = ref(false)
             href="https://web.capgo.app/login/"
             title="Login"
             target="_blank"
-            class="text-base font-medium transition-all duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Login
           </a>

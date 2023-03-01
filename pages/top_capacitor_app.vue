@@ -64,8 +64,8 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
         >
           <div class="p-5">
             <div class="relative">
-              <NuxtLink
-                :to="app.url"
+              <a
+                :href="app.url"
                 :title="app.title"
                 class="block aspect-w-4 aspect-h-3"
               >
@@ -74,7 +74,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
                   :src="app.icon"
                   :alt="`app icon ${app.title}`"
                 >
-              </NuxtLink>
+            </a>
 
               <div class="absolute top-4 left-4">
                 <span
@@ -97,12 +97,12 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
               {{ shortNumber(app.installs) }} Downloads
             </span>
             <p class="mt-5 text-2xl font-semibold">
-              <NuxtLink :to="app.url" :title="app.title" class="text-black">
+              <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
-              </NuxtLink>
+              </a>
             </p>
-            <NuxtLink
-              :to="app.url"
+            <a
+              :href="app.url"
               :title="app.title"
               class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
             >
@@ -119,7 +119,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
                   clip-rule="evenodd"
                 />
               </svg>
-            </NuxtLink>
+            </a>
           </div>
         </div>
       </div>

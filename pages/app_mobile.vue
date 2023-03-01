@@ -56,20 +56,20 @@ useHead(() => ({
           </p>
         </div>
         <div class="flex space-x-6">
-          <NuxtLink no-rel to="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
+          <a no-rel href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
             <img
               src="/play-store-button.webp" height="4rem;"
               class="w-auto rounded h-11 sm:h-16 border boder-2 border-white"
               alt="Apple store download link"
             >
-          </NuxtLink>
-          <NuxtLink no-rel to="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
+          </a>
+          <a no-rel href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
             <img
               src="/app-store-button.webp" height="4rem;"
               class="w-auto rounded h-11 sm:h-16 border boder-2 border-white"
               alt="Apple store download link"
             >
-          </NuxtLink>
+          </a>
         </div>
       </div>
       <div

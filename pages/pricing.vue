@@ -200,9 +200,9 @@ const payg_units = {
       <Calculator v-if="payg" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
-        <NuxtLink no-rel to="https://web.capgo.app/register/" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
+        <a no-rel href="https://web.capgo.app/register/" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
           Subscribe now <ArrowLongRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
-        </NuxtLink>
+        </a>
       </div>
 
       <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
