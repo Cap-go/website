@@ -3,8 +3,8 @@ import { createMeta } from '~/services/meta'
 import { Database } from '~~/types/supabase.types';
 
 const config = useRuntimeConfig()
-const title = 'Capgo | Top Capacitor apps'
-const description = 'List of top 100 app using Capacitor on android play store'
+const title = 'Capgo | Top Kotlin apps'
+const description = 'List of top 100 app using Kotlin on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 
@@ -25,13 +25,13 @@ const shortNumber = (number: number) => {
 const renameCat = (text: string) => {
   return text.replaceAll('_', ' ')
 }
-const others = ref(['top_cordova_app', 'top_react_native_app', 'top_flutter_app'])
+
 useHead(() => ({
   title,
   meta: createMeta(title, description),
 }))
 
-fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
+fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
         apps.value = data.apps
@@ -47,13 +47,13 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
         <h1
           class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
         >
-          Top Capacitor apps
+          Top Kotlin apps
         </h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Capacitor power aproximately 7.21% of apps on Google Play Store
+          Flutter power aproximately 30.72% of apps on Google Play Store
         </p>
       </div>
 
@@ -125,23 +125,6 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
             </a>
           </div>
         </div>
-      </div>
-      <!-- check other top list cordova, react naitve, flutter -->
-      <div
-        class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
-      >
-          <a
-          v-for="l in others"
-          :key="l"
-          :href="l"
-          class="flex flex-col sm:flex-row py-8 text-center bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
-        >
-          <div class="px-4 pt-2 sm:pt-0 w-full">
-            <p class="text-lg font-bold capitalize">
-              {{ l.replaceAll('_', ' ') }}
-            </p>
-          </div>
-        </a>
       </div>
     </div>
   </section>

@@ -20,6 +20,10 @@ const navigation = {
     { name: 'Plugins', href: '/plugins/' },
     { name: 'Awesome capacitor', href: 'https://github.com/riderx/awesome-capacitor', target: '_blank' },
     { name: 'Top capacitor app', href: '/top_capacitor_app' },
+    // { name: 'Top cordova app', href: '/top_cordova_app' },
+    // { name: 'Top react native app', href: '/top_react_native_app' },
+    // { name: 'Top flutter app', href: '/top_flutter_app' },
+    // { name: 'Top kotlin app', href: '/top_kotlin_app' },
     // { name: 'Insights', href: '#' },
   ],
   support: [
