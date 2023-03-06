@@ -30,6 +30,7 @@ useHead(() => ({
   title,
   meta: createMeta(title, description),
 }))
+const others = ref(['top_capacitor_app', 'top_react_native_app', 'top_flutter_app'])
 
 fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
   if (res.ok) {
@@ -126,7 +127,25 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
           </div>
         </div>
       </div>
+      <!-- check other top list cordova, react naitve, flutter -->
+      <div
+        class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
+      >
+          <a
+          v-for="l in others"
+          :key="l"
+          :href="`/${l}`"
+          class="flex flex-col sm:flex-row py-8 text-center bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
+        >
+          <div class="px-4 pt-2 sm:pt-0 w-full">
+            <p class="text-lg font-bold capitalize">
+              {{ l.replaceAll('_', ' ') }}
+            </p>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 </template>
+
 

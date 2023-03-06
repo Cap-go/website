@@ -133,7 +133,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
           <a
           v-for="l in others"
           :key="l"
-          :href="l"
+          :href="`/${l}`"
           class="flex flex-col sm:flex-row py-8 text-center bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
           <div class="px-4 pt-2 sm:pt-0 w-full">
