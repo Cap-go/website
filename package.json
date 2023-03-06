@@ -13,7 +13,7 @@
     "@headlessui/vue": "^1.7.7",
     "@heroicons/vue": "^2.0.13",
     "@nuxt/content": "^2.3.0",
-    "@nuxt/schema": "3.2.2",
+    "@nuxt/schema": "3.2.3",
     "@nuxtjs/color-mode": "^3.2.0",
     "@supabase/supabase-js": "2.8.0",
     "@types/semver": "^7.3.13",
