@@ -55,7 +55,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Capacitor power aproximately {{usage}} of apps on Google Play Store
+          Capacitor power aproximately {{usage}}% of apps on Google Play Store
         </p>
       </div>
 
