@@ -7,6 +7,7 @@ const title = 'Capgo | Top React Native apps'
 const description = 'List of top 100 app using React Native on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
+const usage = ref(5.22)
 
 const shortNumber = (number: number) => {
 
@@ -36,6 +37,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=reactNative`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
         apps.value = data.apps
+        usage.value = data.usage
     })
   }
 })
@@ -48,13 +50,13 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=reactNative`).then((res) => {
         <h1
           class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
         >
-          Top React Native apps
+          Top React Native Script apps
         </h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          React native power aproximately 5.21% of apps on Google Play Store
+          React native power aproximately {{usage}}% of apps on Google Play Store
         </p>
       </div>
 

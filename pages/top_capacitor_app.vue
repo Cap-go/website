@@ -7,6 +7,7 @@ const title = 'Capgo | Top Capacitor apps'
 const description = 'List of top 100 app using Capacitor on android play store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
+const usage = ref(7.21)
 
 const shortNumber = (number: number) => {
 
@@ -35,6 +36,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
         apps.value = data.apps
+        usage.value = data.usage
     })
   }
 })
@@ -53,7 +55,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Capacitor power aproximately 7.21% of apps on Google Play Store
+          Capacitor power aproximately {{usage}} of apps on Google Play Store
         </p>
       </div>
 

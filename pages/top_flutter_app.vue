@@ -7,6 +7,7 @@ const title = 'Capgo | Top Flutter apps'
 const description = 'List of top 100 app using Flutter on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
+const usage = ref(4.14)
 
 const shortNumber = (number: number) => {
 
@@ -36,6 +37,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=flutter`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
         apps.value = data.apps
+        usage.value = data.usage
     })
   }
 })
@@ -54,7 +56,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=flutter`).then((res) => {
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Flutter power aproximately 4.13% of apps on Google Play Store
+          Flutter power aproximately {{usage}}% of apps on Google Play Store
         </p>
       </div>
 

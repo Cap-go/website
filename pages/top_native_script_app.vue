@@ -3,11 +3,11 @@ import { createMeta } from '~/services/meta'
 import { Database } from '~~/types/supabase.types';
 
 const config = useRuntimeConfig()
-const title = 'Capgo | Top Cordova apps'
-const description = 'List of top 100 app using Cordova on android store'
+const title = 'Capgo | Top Native Script apps'
+const description = 'List of top 100 app using Native Script on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
-const usage = ref(7.21)
+const usage = ref(0.13)
 
 const shortNumber = (number: number) => {
 
@@ -31,9 +31,9 @@ useHead(() => ({
   title,
   meta: createMeta(title, description),
 }))
-const others = ref(['top_capacitor_app', 'top_react_native_app', 'top_flutter_app'])
+const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 
-fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
+fetch(`${config.public.baseApiUrl}/store_top?mode=nativeScript`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
         apps.value = data.apps
@@ -50,13 +50,13 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
         <h1
           class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
         >
-          Top Cordova apps
+          Top Native Script apps
         </h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Cordova power aproximately {{usage}}% of apps on Google Play Store
+          Native Script power aproximately {{usage}}% of apps on Google Play Store
         </p>
       </div>
 
