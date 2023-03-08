@@ -35,8 +35,17 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
           v-for="l in others"
           :key="l"
           :href="`/${l}`"
-          class="flex flex-col sm:flex-row py-8 text-center bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
+          class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
+        <div class="relative mx-auto flex">
+        <div class="block w-full mx-4 pb-4">
+          <img
+            class="object-cover w-full h-full rounded-lg"
+            :src="`${l.replace('top_', '').replace('_app', '')}.webp`"
+            :alt="`blog illustration ${l}`"
+          >
+        </div>
+      </div>
           <div class="px-4 pt-2 sm:pt-0 w-full">
             <p class="text-lg font-bold capitalize">
               {{ l.replaceAll('_', ' ') }}
