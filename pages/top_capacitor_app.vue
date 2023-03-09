@@ -142,7 +142,7 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
         <div class="block w-full mx-4 pb-4">
           <img
             class="object-cover w-full h-full rounded-lg"
-            :src="`${l.replace('top_', '').replace('_app', '')}.webp`"
+            :src="`/${l.replace('top_', '').replace('_app', '')}.webp`"
             :alt="`blog illustration ${l}`"
           >
         </div>
