@@ -17,9 +17,8 @@ next_blog: "automatic-build-and-release-with-github-actions"
 ## Migration Summary
 
 * [Capgo](https://web.capgo.app/register/) is a service that helps development teams send live app to deployed apps.
-* Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.** To see which versions of the Cordova CLI and other tools are supported, view the [Build Stacks page](https://ionic.io/docs/Capgo/build-stacks).
-* [Capgo](https://web.capgo.app/register/) offers equivalent services for App Center Build (build Android/iOS apps) and App Center Distribute (CodePush). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
-* Ionic has [Advisory services](https://ionicframework.com/advisory) available if you need migration assistance.
+* Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.**.
+* [Ionic](https://ionic.io/appflow/native-builds) offers equivalent services for App Center Build (build Android/iOS apps). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
 
 ##### Note
 
@@ -110,7 +109,9 @@ The Live Update feature works by using the installed [Capgo SDK](https://github.
 
 First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
 
-`npx @capgo/cli@latest login YOURKEY`
+```shell
+npx @capgo/cli@latest login YOURKEY
+```
 ## Add your first app
 
 Let's get started by first creating the app in Capgo Cloud with the CLI.
@@ -121,7 +122,9 @@ This command will use all variable defined in the Capacitor config file to creat
 ## Upload your first bundle
 
 Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli@latest upload --channel production`
+```shell
+npx @capgo/cli@latest upload --channel production
+```
 
 By default, the version name will be the one in your `package.json` file.
 
@@ -133,7 +136,9 @@ You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 
 After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
 
-`npx @capgo/cli@latest set -c production -s default`
+```shell
+npx @capgo/cli@latest set -c production -s default
+```
 
 ## Configure app to validate updates
 
@@ -161,30 +166,35 @@ Congrats! 🎉 You have successfully deployed your first Live Update. This is ju
 Now that we've integrated Capgo's services, you should remove any references to App Center. Besides being a best practice to remove unused code/services, removing the SDK should reduce the size of your apps.
 
 First, open a terminal then uninstall the App Center plugins:
-
+```shell
     cordova plugin remove cordova-plugin-appcenter-analytics cordova-plugin-appcenter-crashes cordova-plugin-code-push
+```
 
 Next, open `config.xml` and remove the following `preference` values. They will look similar to:
-
+```xml
     <preference name="APP_SECRET" value="0000-0000-0000-0000-000000000000" /><preference name="CodePushDeploymentKey" value="YOUR-ANDROID-DEPLOYMENT-KEY" /><preference name="CodePushPublicKey" value="YOUR-PUBLIC-KEY" />
+```
 
 If you were using App Center Analytics in your app, remove the following `preferences` elements: `APPCENTER_ANALYTICS_ENABLE_IN_JS` and `APPCENTER_CRASHES_ALWAYS_SEND`.
 
 Remove the following `<access />` elements:
 
+```xml
     <access origin="https://codepush.appcenter.ms" /><access origin="https://codepush.blob.core.windows.net" /><access origin="https://codepushupdates.azureedge.net" />
+```
 
 Remove the reference to CodePush in the CSP `meta` tag in the `index.html` file (`https://codepush.appcenter.ms`):
-
+```xml
     <meta http-equiv="Content-Security-Policy" content="default-src https://codepush.appcenter.ms 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
+```
 
 Finally, within your app, remove any code references to App Center services, such as `codePush.sync();`.
 
 ## Next Steps
 
-You've migrated from App Center to Capgo, utilizing the Live Updates and Native Builds features before removing all App Center dependencies. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Automations (multiple environments and native configurations). App Store Publishing (build native apps in the cloud then deploy them directly to the app stores), and the Cloud CLI use Capgo inside your CI/CD platform of choice (such as Azure DevOps, GitLab, Jenkins, and more).
+You've migrated from App Center to Capgo, utilizing the Live Updates. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Channel (multiple environments) and override. Cloud CLI integration, use Capgo inside your CI/CD platform of choice (such as GitHub Action, GitLab, Jenkins, and more).
 
-## Bonus: Automatic send app update
+## Automatic send app update
 
 If your code is hosted on GitHub, you can set up automatic build and release in few more step, thanks to GitHub actions.
 
