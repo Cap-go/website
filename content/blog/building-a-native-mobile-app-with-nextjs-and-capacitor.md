@@ -5,7 +5,7 @@ description: How to create a mobile app with Next.js, Capacitor and implement na
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-02-21
-updated_at: 2023-02-21
+updated_at: 2023-03-10
 head_image: "/next_capgo.webp"
 head_image_alt: Next.js and Capgo illustration
 tag: Tutorial

@@ -5,7 +5,7 @@ description: I'm excited to announce Self-hosted Live Updates, the next iteratio
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-12-03
-updated_at: 2022-12-03
+updated_at: 2023-03-10
 head_image: "/self_hosted.webp"
 head_image_alt: Self hosted updates
 tag: Solution
@@ -14,21 +14,21 @@ next_blog: ""
 
 ---
 
-While many enterprises leverage, the Live Updates SDK to pull down the latest JavaScript, HTML, and CSS changes into their applications, others are hampered by corporate policy, industry regulations, or other geographical restrictions. With Self-hosted Live Updates, you can now distribute web build artifacts through your infrastructure.
+I am delighted to announce the release of Self-hosted Live Updates, which represents the latest evolution of Capgo's Live Updates.
 
-That means no more app store delays, quicker bug fixes and content changes, and ensuring your users are always on the app’s latest version.
+While many enterprises currently utilize the Live Updates SDK to access the most recent JavaScript, HTML, and CSS updates for their applications, some may encounter hindrances due to corporate policies, industry regulations, or geographical restrictions. With Self-hosted Live Updates, you can now distribute web build artifacts via your own infrastructure.
 
-I’ve also heard time and time again – large enterprises want to use Live Updates, but strict compliance standards get in the way. Until now.
+This means you can avoid delays caused by app store reviews, address bugs and modify content more rapidly, and ensure that your users are always operating on the latest version of your app. Additionally, I have heard from numerous large enterprises who would like to leverage Live Updates but face challenges due to strict compliance standards. This issue is now a thing of the past thanks to Self-hosted Live Updates.
 
 ## How do self-hosted live updates work?
 
-Capgo-hosted Live Updates can be configured and deployed easily in Capgo with the [Capgo SDK](https://github.com/Cap-go/capacitor-updater). For Self-hosted Live Updates, I’ve added functionality to the Capgo CLI for configuration on your infrastructure.
+Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://github.com/Cap-go/capacitor-updater). As for Self-hosted Live Updates, I have enhanced the Capgo CLI with the necessary functionalities to enable configuration on your infrastructure.
 
-In order for Capgo to ensure a securely coordinated delivery of the newly updated web build artifacts to end-users, the Capacitor Live Updates plugin now can utilize a public/private key pairing. The additional handshake when using Self-hosted Live Updates adds peace of mind that the artifacts delivered by the enterprise’s infrastructure and pulled down via the plugin have remained unmodified.
+To ensure a safe and coordinated delivery of the latest web build artifacts to end-users, Capgo now allows the Capacitor Live Updates plugin to employ a public/private key pairing. When using Self-hosted Live Updates, an additional handshake is performed to provide reassurance that the artifacts downloaded via the plugin from the enterprise's infrastructure are unmodified.
 
 ![Capgo encryption schema](/ecryption_flow.webp)
 
-The following walks through the steps to set up the key pairing, as well as the workflow that ultimately brings the updated experience to end users.
+The following outlines the steps to establish the key pairing and the subsequent process for delivering the updated experience to end-users.
 
 ### One-time key pair setup
 
@@ -45,7 +45,7 @@ This key pair is used to sign the update and verify the update on the app side.
 
 ### Self-hosted live updates workflow
 
-Implementing Self-hosted Live Updates begins with an enterprise performing a web build of their bug fixes, content updates, or other web-based code changes. They then sign the build artifact with the private key obtained from the one-time setup and upload the bundle to the storage location of their choice.
+To start implementing Self-hosted Live Updates, an enterprise must first perform a web build of their bug fixes, content updates, or any other web-based code changes they wish to make. Next, they must sign the build artifact using the private key obtained during the one-time setup process, and finally upload the bundle to their preferred storage location.
 
 ```
 npx @capgo/cli@latest encrypt abc123.zip”
@@ -71,6 +71,6 @@ The organization’s API returns the Live Update bundle from the location, and t
 
 ## Get started
 
-I'm excited to bring the power of Live Updates to more enterprises than ever. Organizations and Ionic app users alike will quickly realize the benefits of Capgo’s secure distribution of over-the-air app updates. 
+I am thrilled to extend the reach of Live Updates to even more enterprises than before. Both organizations and Ionic app users will quickly recognize the advantages of Capgo's secure distribution of over-the-air app updates.
 
 For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](https://docs.capgo.app/tooling/cli#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](https://web.capgo.app/register/)
