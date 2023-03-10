@@ -23,3 +23,7 @@ Capacitor is a new way of building native mobile apps with Ionic, and most Cordo
 Capacitor customers can easily migrate from Microsoft App Center to Capgo in just a few steps using my [migration guide](https://capgo.app/blog/appcenter-migration), which walks you through the entire process. Capgo includes a complete list of features that Capacitor users can take advantage of.
 
 If you’re interested in learning more about migrating from Microsoft App Center to Capgo, create your [free Capgo account](https://web.capgo.app/register/) today.
+
+## Credits
+
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewroted with chat-gpt-3 and adapted.

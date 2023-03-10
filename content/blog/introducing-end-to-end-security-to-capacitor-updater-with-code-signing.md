@@ -72,3 +72,6 @@ For large companies or projects who care deeply about security, we want to make 
 
 Capgo code signing is available for all customers. To get started, follow the [setup instructions](https://docs.capgo.app/tooling/cli#end-to-end-encryption-trustless).
 
+## Credits
+
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example) rewroted with chat-gpt-3 and adapted.

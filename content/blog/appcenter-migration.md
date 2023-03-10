@@ -196,6 +196,10 @@ You've migrated from App Center to Capgo, utilizing the Live Updates. This is ju
 
 ## Automatic send app update
 
-If your code is hosted on GitHub, you can set up automatic build and release in few more step, thanks to GitHub actions.
+If your code is hosted on GitHub, you can set up automatic build and release in a few more steps, thanks to GitHub actions.
 
 I have made a second article to allow you to so.
+
+## Credits
+
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewroted with chat-gpt-3 and adapted.

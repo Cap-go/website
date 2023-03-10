@@ -380,8 +380,6 @@ You should see the following page as a result:
 
 ![konsta-next](/konsta-next.webp)
 
-
-Thanks a lot to [Simon](https://twitter.com/schlimmson) for the article inspiration, this article is a fork of his article [here](https://devdactic.com/nextjs-and-capacitor) made with chat-gpt-3 and where Kosta UI replace Ionic UI.
 ## Conclusion
 
 Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 
@@ -390,6 +388,6 @@ And with the addition of [Capgo](https://capgo.app), it's even easier to add liv
 
 If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
 
+## Credits
 
-
-
+Thanks a lot to [Simon](https://twitter.com/schlimmson), this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted with chat-gpt-3 and adapted.
