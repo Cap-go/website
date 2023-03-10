@@ -8,7 +8,7 @@ created_at: 2023-02-21
 updated_at: 2023-02-21
 head_image: "/next_capgo.webp"
 head_image_alt: Next.js and Capgo illustration
-tag: Turotial
+tag: Tutorial
 published: true
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 

@@ -7,7 +7,7 @@ created_at: 2023-01-19
 updated_at: 2023-01-19
 head_image: "/revenuecat_iap.webp"
 head_image_alt: Revenue cat in app purchases
-tag: Turotial
+tag: Tutorial
 published: true
 next_blog: ""
 
