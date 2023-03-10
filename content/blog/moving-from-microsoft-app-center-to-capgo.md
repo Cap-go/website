@@ -6,26 +6,20 @@ description: Microsoft stops support for apps running on Cordova. Move from Micr
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-21
-updated_at: 2022-03-21
-head_image: "/capgo-feature-image.webp"
-head_image_alt: Capgo logo illustration
+updated_at: 2023-03-10
+head_image: "/app_center.webp"
+head_image_alt: Microsoft App Center illustration
 tag: Alternatives
 published: true
 next_blog: ""
 
 ---
-Microsoft announced that App Center will soon [discontinue support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/). App Center is a cloud product that helps teams build, test, and distribute apps. Among App Center’s more popular services is CodePush, which allows developers to deploy mobile app updates directly to their users’ devices.
+Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek out alternatives, and I am thrilled to say that the [Capgo](https://capgo.app) platform is a fantastic option for those looking for full support for Capacitor apps.
 
 ## From Microsoft App Center to Capgo Cloud
 
-For businesses and teams using App Center, I'm thrilled to say that the [Capgo](https://capgo.app) platform is a great alternative to App Center that provides full support for Capacitor apps. Capacitor is a new way to build native mobile apps with Ionic. Most of the Cordova plugins are supported in Capacitor. It's time to migrate to Cordova's successor: Capacitor.
+Capacitor is a new way of building native mobile apps with Ionic, and most Cordova plugins are supported in Capacitor. Capgo provides a live update functionality similar to CodePush, but without platform dependencies and immediate app publishing. With Capgo, development teams can outsource the complicated app delivery process and focus entirely on the unique features of their Ionic app. Additionally, unlike App Center, Capgo is 100% focused on hybrid architectures like Capacitor.
 
-Capgo helps to streamline app delivery for hundreds of businesses and teams.
+Capacitor customers can easily migrate from Microsoft App Center to Capgo in just a few steps using my [migration guide](https://capgo.app/blog/appcenter-migration), which walks you through the entire process. Capgo includes a complete list of features that Capacitor users can take advantage of.
 
-Capgo includes live update functionality similar to CodePush without platform dependencies and immediate app publishing.
-
-Development teams can focus completely on the unique features of their Ionic app and outsource the complicated app delivery process to Capgo. Plus, unlike App Center, My solution is 100% focused on hybrid architectures like Capacitor.
-
-Capacitor customers can take advantage of Capgo's complete list of features and easily migrate from Microsoft App Center to Capgo in just a few steps. I created a [migration guide](https://capgo.app/blog/appcenter-migration) to help you walk through the process of migrating from App Center to Capgo.
-
-If you’re interested in learning more about moving from Microsoft App Center to Capgo, create your [free Capgo account](https://web.capgo.app/register/) today.
+If you’re interested in learning more about migrating from Microsoft App Center to Capgo, create your [free Capgo account](https://web.capgo.app/register/) today.
