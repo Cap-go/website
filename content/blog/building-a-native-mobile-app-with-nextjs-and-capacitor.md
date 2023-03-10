@@ -25,22 +25,22 @@ This tutorial will guide you through the process, starting with a new Next.js ap
 
 ## About Capacitor
 
-Capacitor is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
+CapacitorJS is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
 
 With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
 
 
 ## Preparing Your Next.js App
 
-While there are various methods to initiate React applications, let's go for the simplest one in this tutorial that provides a blank Next.js application.:
+While there are various methods to initiate React applications, let's go for the simplest one in this tutorial that provides a blank Next.js application:
 
-```
+```shell
 npx create-next-app my-app
 ```
 
 In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and export the Next project:
 
-```
+```json
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -50,9 +50,9 @@ In order to create a native mobile app, we require an **export** of our project.
   },
 ```
 
-After executing the command, errors may occur because image optimization is not compatible with this setting. Consequently, open up the **next.config.js** file and modify it as follows:
+After executing the command, errors may occur because image optimization is incompatible with this setting. Consequently, open up the **next.config.js** file and modify it as follows:
 
-```
+```typescript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 reactStrictMode: true,
@@ -73,13 +73,13 @@ This folder will be used by Capacitor later on, but for now, we must set it up c
 
 To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
 
-Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency, and then set it up within our project. During the setup, you can press "enter" to accept the default values for name and bundle ID.
+Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
 
 Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
 
 Finally, we can add the platforms, and Capacitor will create folders for each platform at the root of our project:
 
-```
+```shell
 # Install the Capacitor CLI locally
 npm install -D @capacitor/cli
 
@@ -105,18 +105,18 @@ Additionally, you should find a **capacitor.config.ts** file in your project, wh
 To rectify this, open the **capacitor.config.json** file and update the **webDir**:
 
 
-```
+```json
 {
-"appId": "com.example.app",
-"appName": "my-app",
-"webDir": "out",
-"bundledWebRuntime": false
+  "appId": "com.example.app",
+  "appName": "my-app",
+  "webDir": "out",
+  "bundledWebRuntime": false
 }
 ```
 
 You can try it out by executing the following commands:
 
-```
+```shell
 npm run static
 npx cap sync
 ```
@@ -135,7 +135,7 @@ To develop iOS apps, you need to have **Xcode** installed, and for Android apps,
 If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
 
 
-```
+```shell
 npx cap open ios
 npx cap open android
 ```
@@ -163,13 +163,13 @@ Enable access to your locally hosted application with live reload **on your netw
 
 The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
 
-```
+```shell
 ipconfig getifaddr en0
 ```
 
 On Windows, run :
 
-```
+```shell
 ipconfig
 ```
 
@@ -177,18 +177,18 @@ Then look for the IPv4 address.
 
 We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
 
-```
+```javascript
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-appId: 'com.example.app',
-appName: 'my-app',
-webDir: 'out',
-bundledWebRuntime: false,
-server: {
-url: 'http://192.168.x.xx:3000',
-cleartext: true
-}
+  appId: 'com.example.app',
+  appName: 'my-app',
+  webDir: 'out',
+  bundledWebRuntime: false,
+  server: {
+    url: 'http://192.168.x.xx:3000',
+    cleartext: true
+  }
 };
 
 export default config;
@@ -198,7 +198,7 @@ Be sure to use **the correct IP and port**, I have used the default Next.js port
 
 Now, we can apply these changes by copying them over to our native project:
 
-```
+```shell
 npx cap copy
 ```
 
@@ -215,45 +215,45 @@ Note that you should use the correct IP and port in your configuration. The code
 
 Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
 
-```
-npm i @capacitor/share
+```shell
+npm i @capgo/flash
 ```
 
 There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.js** to this:
 
-```
+```jsx
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Share } from '@capacitor/share';
 
 export default function Home() {
 const share = async () => {
-await Share.share({
-title: 'Simons YT Channel',
-text: 'Learn to build awesome mobile apps!',
-url: 'https://www.youtube.com/simongrimmdev_',
-dialogTitle: 'Share with friends'
-});
+  await Share.share({
+    title: 'Open Youtube',
+    text: 'Check new video on youtube',
+    url: 'https://www.youtube.com',
+    dialogTitle: 'Share with friends'
+  });
 };
 
 return (
 <div className={styles.container}>
-<Head>
-<title>Create Next App</title>
-<meta name="description" content="Generated by create next app" />
-<link rel="icon" href="/favicon.ico" />
-</Head>
+  <Head>
+    <title>Create Next App</title>
+    <meta name="description" content="Generated by create next app" />
+    <link rel="icon" href="/favicon.ico" />
+  </Head>
 
-<main className={styles.main}>
-<h1 className={styles.title}>
-Welcome to <a href="https://nextjs.org">Simonics!</a>
-</h1>
+  <main className={styles.main}>
+    <h1 className={styles.title}>
+      Welcome to <a href="https://nextjs.org">Capgo!</a>
+    </h1>
 
-<p className={styles.description}>
-<h2>Cool channel</h2>
-<a onClick={() => share()}>Share now!</a>
-</p>
-</main>
+    <p className={styles.description}>
+      <h2>Cool channel</h2>
+      <a onClick={() => share()}>Share now!</a>
+    </p>
+  </main>
 </div>
 );
 }
@@ -288,7 +288,7 @@ npm i konsta
 ```
 
 Additionally You need to modify your `tailwind.config.js` file:
-```js
+```javascript
 // import konstaConfig config
 const konstaConfig = require('konsta/config')
 
@@ -314,7 +314,7 @@ Now we need to setup main [App](https://konstaui.com/react/app) component so we 
 
 We need to wrap whole app with `App` in the `pages/_app.js`:
 
-```
+```jsx
 import { App } from 'konsta/react';
 import '../styles/globals.css';
 
@@ -336,7 +336,7 @@ Now when everything is set up, we can use Konsta UI React components in our Next
 
 For example, let's open `pages/index.js` and change it to the following:
 
-```
+```jsx
 // Konsta UI components
 import {
   Page,
