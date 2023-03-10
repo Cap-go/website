@@ -1,28 +1,44 @@
-If you are using Next.js to build a web app, you can easily benefit from Capacitor and make your web app a native mobile app without any big changes or learning something new!
+---
+slug: "building-a-native-mobile-app-with-nextjs-and-capacitor"
+title: Creating Mobile Apps with Next.js and Capacitor.
+description: How to create a mobile app with Next.js, Capacitor and implement native UI with Kosta UI.
+author: Martin Donadieu
+author_url: https://twitter.com/martindonadieu
+created_at: 2023-02-21
+updated_at: 2023-02-21
+head_image: "/next_capgo.webp"
+head_image_alt: Next.js and Capgo illustration
+tag: Tutorial
+published: true
+next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
-I’ve previously talked about [how to build a native mobile app using React with Capacitor](https://galaxies.dev/react-web-to-native-capacitor/) and intentionally without React Native - and you can do the same for most [Next.js](https://nextjs.org/) applications.
+---
 
-In this tutorial we will start with a new Next.js app and move into native land using Capacitor and eventually also add [Ionic](https://ionicframework.com/) for an improved mobile UI, although the last step is completely optional.
+In this tutorial we will start with a new [Next.js](https://nextjs.org/) app and move into native land using Capacitor and eventually also add [Konsta UI](https://konstaui.com/) for an improved Tailwind CSS mobile UI, although the last step is completely optional.
+
+By using Capacitor, you can easily convert your Next.js web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
+
+With just a few simple steps, most Next.js applications can be transformed into mobile apps. 
+
+This tutorial will guide you through the process, starting with a new Next.js app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
+
 
 ## About Capacitor
 
-Unlike React Native, Capacitor can simply be dropped into **any** web project and helps to wrap your whole application into a native webview.
+Capacitor is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
 
-Capacitor then generates the native Xcode and Android Studio project for you, and afterwards only syncs your changes to that project.
+With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
 
-Additionally you can use **Capacitor plugins** (which we will do) to access **native device functionality** like the camera through a JS bridge.
-
-Because Capacitor has a super slim API and not a lot of functionality, it’s very easy to integrate it into any web project while still giving you an amazing native mobile app in the end.
 
 ## Preparing Your Next.js App
 
-There are different ways to start React applications, but for the sake of this tutorial let’s use the easiest one that will give us a blank new Next.js application:
+While there are various methods to initiate React applications, let's go for the simplest one in this tutorial that provides a blank Next.js application.:
 
 ```
 npx create-next-app my-app
 ```
 
-To build a native mobile app in the end we need an **export** of our project, so let’s add a simple script to our **package.json** which we can use to build and export the Next project:
+In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and export the Next project:
 
 ```
   "scripts": {
@@ -34,9 +50,7 @@ To build a native mobile app in the end we need an **export** of our project, so
   },
 ```
 
-When executing the command I got errors, because image optimization won’t work in this setting.
-
-Therefore open up the **next.config.js** and change it to:
+After executing the command, errors may occur because image optimization is not compatible with this setting. Consequently, open up the **next.config.js** file and modify it as follows:
 
 ```
 /** @type {import('next').NextConfig} */
@@ -51,19 +65,19 @@ unoptimized: true
 module.exports = nextConfig;
 ```
 
-Now you can safely run `npm run static` and you should see a new **out** folder at the root of your project.
+You can now run `npm run static` without any worries, and you should be able to spot a fresh out folder at your project's root.
 
-This folder will later be used by Capacitor, but first of all we need to set it up correctly.
+This folder will be used by Capacitor later on, but for now, we must set it up correctly.
 
 ## Adding Capacitor to Your Next.js App
 
-To wrap any web app into a native mobile container we need to take a few steps - but those have to be done just one initial time, later it’s as easy as running a `sync` command.
+To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
 
-First of all we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency and then initialise it in our project - you can press enter during the dialog to use the defualt values for name and bundle ID.
+Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency, and then set it up within our project. During the setup, you can press "enter" to accept the default values for name and bundle ID.
 
-After that we need to install the core package and the respective packages for the iOS and Android platform.
+Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
 
-Finally you can add the platforms, and Capacitor will create the folders for each platform at the root of your project:
+Finally, we can add the platforms, and Capacitor will create folders for each platform at the root of our project:
 
 ```
 # Install the Capacitor CLI locally
@@ -80,15 +94,16 @@ npx cap add ios
 npx cap add android
 ```
 
-At this point you should see a new **ios** and android folder in your React project.
+By this point, you should be able to observe new **ios** and **android** folders in your Next.js project.
 
 **Those are real native projects!**
 
-To open the Android project later you should install [Android Studio](https://developer.android.com/studio/index.html), and for iOS you need to be on a Mac and install [Xcode](https://developer.apple.com/xcode/).
+To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/index.html). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
 
-Additionally you should see a **capacitor.config.ts** in your project, which holds some basic settings for Capacitor that are used during sync. The only thing you need to worry about is the **webDir** which should point to the output of your build command - right now this is incorrect.
+Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
 
-To fix this, open the **capacitor.config.json** and change the **webDir**:
+To rectify this, open the **capacitor.config.json** file and update the **webDir**:
+
 
 ```
 {
@@ -99,61 +114,68 @@ To fix this, open the **capacitor.config.json** and change the **webDir**:
 }
 ```
 
-Now you can give it a try by running the following commands:
+You can try it out by executing the following commands:
 
 ```
 npm run static
 npx cap sync
 ```
 
-The first command will simply build your Next.js project and export the static build, while the second command will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+The first command `npm run static` will simply build your Next.js project and export the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
-Additionally the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins) it’s time to run sync again.
+Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins) it’s time to run `npx cap sync` again.
 
-Without noticing you are now actually done, so let’s see the app on a device!
+Without noticing, you are now actually done, so let’s see the app on a device!
 
-Want to learn more about Next.js? Check out our PRO course!
 
 ## Build and Deploy native apps
 
-You now need **Xcode** for iOS and **Android Studio** for Android apps on your machine. Additionally you need to be enrolled in the Apple Developer Program if you want to build and distribute apps on the app store, and same for the Google Play Store.
+To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
 
-If you never touched a native mobile project, you can easily open both native projects through the Capacitor CLI:
+If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
+
 
 ```
 npx cap open ios
 npx cap open android
 ```
 
-Inside Android Studio you now just need to wait until everything is ready, and you can deploy your app to a connected device without changing any of the settings!
+Once you've set up your native projects, deploying your app to a connected device is easy. In Android Studio, you just need to wait for everything to be ready, and you can deploy your app to a connected device without changing any settings. Here's an example: 
 
-![android-studio-deploy-angular](https://galaxies.dev/img/tutorials/react-web-to-native-capacitor/android-studio-deploy-angular.webp)
+![android-studio-run](/android-studio-run.webp)
 
-Inside Xcode it’s almost the same, but you need to setup your signing account if you wan to deploy your app to a real device and not just the simulator. Xcode guides you through this if you’ve never done it (but again, you need to be enrolled in the Developer Program).
+In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
 
-After that it’s as easy as hitting play and run the app on your connected device which you can select at the top!
+![xcode-run](/xcode-run.webp)
 
-![xcode-deploy-app-angular](https://galaxies.dev/img/tutorials/nextjs-and-capacitor/xcode-deploy-app.webp)
+Congratulations! You have successfully deployed your Next.js web app to a mobile device. Here's an example:
 
-Congratulations, you have just deployed your Next.js web app to a mobile device!
+![nextjs-mobile-app](/nextjs-mobile-app.webp)
 
-![next-mobile-app](https://galaxies.dev/img/tutorials/nextjs-and-capacitor/next-mobile-app.webp) But hold on, there’s also a way to do this in a faster way during development…
+But hold on, there's also a faster way to do this during development...
+
 
 ## Capacitor Live Reload
 
-By now you are used to having hot reload with all modern frameworks, and we can have the same functionality even **on a mobile device** with minimum effort!
+By now, you're probably used to having hot reload with all modern frameworks, and the good news is that you can have the same functionality **on a mobile device** with minimal effort!
 
 Enable access to your locally hosted application with live reload **on your network** by having the Capacitor app load the content from the specific URL.
 
-First step is figuring out your local IP, which you can get on a Mac by running:
+The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
 
 ```
 ipconfig getifaddr en0
 ```
 
-On Windows, run `ipconfig` and look for the IPv4 address.
+On Windows, run :
 
-Now we only need to tell Capacitor to load the app directly from this server, which we can do right in our **capacitor.config.ts** with another entry:
+```
+ipconfig
+```
+
+Then look for the IPv4 address.
+
+We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
 
 ```
 import { CapacitorConfig } from '@capacitor/cli';
@@ -172,23 +194,26 @@ cleartext: true
 export default config;
 ```
 
-Make sure you **use the right IP and port**, I’ve simply used the default Next.js port in here.
+Be sure to use **the correct IP and port**, I have used the default Next.js port in this example.
 
-To apply those changes we can now copy over the changes to our native project:
+Now, we can apply these changes by copying them over to our native project:
 
 ```
 npx cap copy
 ```
 
-Copy is mostly like sync, but will only **copy over the changes of the web folder** and config, not update the native project.
+The `copy` command is similar to `sync`, but it will only **copy over the changes made to the web folder** and configuration, without updating the native project.
 
-Now you can deploy your app one more time through Android Studio or Xcode and then change something in your React app - **the app will automatically reload** and show the changes!
+You can now deploy your app one more time through Android Studio or Xcode. After that, if you change something in your React app, **the app will automatically reload** and show the changes!
 
-**Caution:** If you install new plugins like the camera, this still requires a rebuild of your native project because native files are changed which can’t be done on the fly.
+**Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
+
+Note that you should use the correct IP and port in your configuration. The code block above shows the default Next.js port for demonstration purposes.
+
 
 ## Using Capacitor Plugins
 
-We have teased this a few times, now let’s see the usage of a Capacitor plugin in action. For this we can install a quite simple one by running:
+Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
 
 ```
 npm i @capacitor/share
@@ -234,190 +259,137 @@ Welcome to <a href="https://nextjs.org">Simonics!</a>
 }
 ```
 
-As said before, after installing new plugins we need to run one sync and then redeploy the app to our device:
+As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
+
 
 ```
 npx cap sync
 ```
 
-Now hit that button and witness the beautiful native share dialog!
+After hitting the button, you can witness the beautiful native share dialog in action!
 
-![next-capacitor-share](https://galaxies.dev/img/tutorials/nextjs-and-capacitor/next-capacitor-share.webp)
+![next-capacitor-share](/next-capacitor-share.webp)
 
-But the button doesn’t look mobile friendly without any styling, so let me introduce you to my favourite UI component library for web apps next (no pun intended).
+To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - Next.js (no pun intended). 
 
-## Adding Ionic UI
 
-I’ve worked years with [Ionic](https://ionicframework.com/) to build awesome cross platform applications and it’s one of the best choices if you want a really great looking mobile UI that adapts to iOS and Android specific styling.
+## Adding Konsta UI
 
-To use it, we only need to install the Ionic react package:
+I’ve worked years with [Ionic](https://ionicframework.com/) to build awesome cross platform applications and it was one of the best choices for years.
+But now i don't recommend it anymore it's very hacky to integrate it with Next.js and it's not really worth it when you have already [tailwindcss](https://tailwindcss.com/).
 
-```
-npm install @ionic/react
-```
 
-Additionally Ionic usually ships with [Ionicons](https://ionic.io/ionicons), a great icon library that again adapts to the platform it’s running on. Let’s also add it by running:
+if you want a really great looking mobile UI that adapts to iOS and Android specific styling i recommend kosta UI.
 
-```
-npm install ionicons
-```
-
-Because Next handles the build and export slightly different than usual we also need another plugin to fix a bug that we would get right now if we wanted to use any Ionic component. For this, install the following package:
+To use it, we only need to install the package react package:
 
 ```
-npm install next-transpile-modules
+npm i konsta
 ```
 
-Now we need to include the package and all libraries from Ionic in the **next.config.js** like this:
+Additionally You need to modify your `tailwind.config.js` file:
+```js
+// import konstaConfig config
+const konstaConfig = require('konsta/config')
+
+// wrap config with konstaConfig config
+module.exports = konstaConfig({
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'media', // or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+})
+```
+`konstaConfig` will extend default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
+
+Now we need to setup main [App](https://konstaui.com/react/app) component so we can set some global parameters (like `theme`).
+
+We need to wrap whole app with `App` in the `pages/_app.js`:
 
 ```
-const withTM = require('next-transpile-modules')([
-'@ionic/react',
-'@ionic/core',
-'@stencil/core',
-'ionicons'
-]);
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-reactStrictMode: true,
-swcMinify: true,
-experimental: {
-images: {
-unoptimized: true
-}
-}
-};
-
-module.exports = withTM(nextConfig);
-```
-
-Doesn’t feel cool, but at the time writing this was required to use Ionic UI components with Next.js!
-
-Because we haven’t had enough pain, there’s also a problem with the hydration of Ionic components when using server side rendering, so we effectively need to turn off SSR.
-
-What I found works best is [described in this article](https://blog.bitsrc.io/using-non-ssr-friendly-components-with-next-js-916f38e8992c), so let’s create a new file **components/NoSSRWrapper.jsx** and insert the following:
-
-```
-import dynamic from 'next/dynamic';
-import React from 'react';
-
-const NonSSRWrapper = (props) => <React.Fragment>{props.children}</React.Fragment>;
-export default dynamic(() => Promise.resolve(NonSSRWrapper), {
-ssr: false
-});
-```
-
-We can now surround the rest of our components with this wrapper and fix one bug - but we also need to take care of actually loading Ionic and its styling!
-
-For this we can bring in a bunch of CSS imports and most important call the `setupIonicReact()` because otherwise you will see a blank white page.
-
-For all of this, open the **pages/\_app.js** and change it to this:
-
-```
+import { App } from 'konsta/react';
 import '../styles/globals.css';
-import Head from 'next/head';
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css'; // Remove if nothing is visible
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-import { setupIonicReact } from '@ionic/react';
-
-setupIonicReact();
-
-import NonSSRWrapper from '../components/NoSSrWrapper';
 
 function MyApp({ Component, pageProps }) {
-return (
-<>
-<Head>
-<title>Create Next App</title>
-<meta name="description" content="Generated by create next app" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<link rel="icon" href="/favicon.ico" />
-</Head>
-<NonSSRWrapper>
-<Component {...pageProps} />
-</NonSSRWrapper>
-</>
-);
+  return (
+    // Wrap our app with App component
+    <App theme="ios">
+      <Component {...pageProps} />
+    </App>
+  );
 }
 
 export default MyApp;
 ```
 
-I’ve also added a little **meta tag** in here to set the viewport-fit because Ionic components will like this setting way more. Trust me.
+### Example Page
 
-Now we are free to use any of the [Ionic UI components](https://ionicframework.com/docs/components) so I’m just adding a little header bar to our app and change our one click handler to use a real button UI.
+Now when everything is set up, we can use Konsta UI React components in our Next.js pages.
 
-To use those components we need to import them separately, and because you might not like a mobile friendly status bar on the web you could also surround this with a little **platform check** that’s part of Capacitors core package - very handy and convenient!
-
-Finish up the tutorial by changing your **pages/index.js** to this now:
+For example, let's open `pages/index.js` and change it to the following:
 
 ```
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import { Share } from '@capacitor/share';
-import { IonHeader, IonTitle, IonToolbar } from '@ionic/react';
-import { Capacitor } from '@capacitor/core';
+// Konsta UI components
+import {
+  Page,
+  Navbar,
+  Block,
+  Button,
+  List,
+  ListItem,
+  Link,
+  BlockTitle,
+} from 'konsta/react';
 
 export default function Home() {
-const share = async () => {
-await Share.share({
-title: 'Simons YT Channel',
-text: 'Learn to build awesome mobile apps!',
-url: 'https://www.youtube.com/simongrimmdev_',
-dialogTitle: 'Share with freiends'
-});
-};
+  return (
+    <Page>
+      <Navbar title="My App" />
 
-return (
-<div>
-<Head>
-<title>Create Next App</title>
-<meta name="description" content="Generated by create next app" />
-<link rel="icon" href="/favicon.ico" />
-</Head>
-{Capacitor.isNativePlatform() && (
-<IonHeader>
-<IonToolbar color="primary">
-<IonTitle>Simons Capacitor App</IonTitle>
-</IonToolbar>
-</IonHeader>
-)}
+      <Block strong>
+        <p>
+          Here is your Next.js & Konsta UI app. Let's see what we have here.
+        </p>
+      </Block>
+      <BlockTitle>Navigation</BlockTitle>
+      <List>
+        <ListItem href="/about/" title="About" />
+        <ListItem href="/form/" title="Form" />
+      </List>
 
-<main className={styles.main}>
-<h1 className={styles.title}>
-Welcome to <a href="https://nextjs.org">Simonics!</a>
-</h1>
-<ion-button color="success" onClick={() => share()}>
-Share now!
-</ion-button>
-</main>
-</div>
-);
+      <Block strong className="flex space-x-4">
+        <Button>Button 1</Button>
+        <Button>Button 2</Button>
+      </Block>
+    </Page>
+  );
 }
 ```
 
-If your live reload is out of sync after all the installation just restart everything and then you should see a somewhat native looking mobile app, built with Next.js and Capacitor!
+If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Next.js and Capacitor!
 
+You should see the following page as a result:
+
+![konsta-next](/konsta-next.webp)
+
+
+Thanks a lot to [Simon](https://twitter.com/schlimmson) for the article inspiration, this article is a fork of his article [here](https://devdactic.com/nextjs-and-capacitor) made with chat-gpt-3 and where Kosta UI replace Ionic UI.
 ## Conclusion
 
-Capacitor is the easiest solution when it comes to building a native application based on your existing web project.
+Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 
 
-The other common React solution would be React Native, however this usually only allows to share logic and not the actual UI code while we didn’t really have to touch the UI at all if we are using Capacitor.
+And with the addition of [Capgo](https://capgo.app), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
-Want to learn more about native apps with React an Capacitor?
+If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
 
-Check out our PRO course!
+
+
+
