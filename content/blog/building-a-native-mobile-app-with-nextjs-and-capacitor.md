@@ -150,7 +150,9 @@ In Xcode, you need to set up your signing account to deploy your app to a real d
 
 Congratulations! You have successfully deployed your Next.js web app to a mobile device. Here's an example:
 
-![nextjs-mobile-app](/nextjs-mobile-app.webp)
+<div class="mx-auto" style="width: 50%;">
+  <img src="/nextjs-mobile-app.webp" alt="nextjs-mobile-app">
+</div>
 
 But hold on, there's also a faster way to do this during development...
 
@@ -221,7 +223,7 @@ npm i @capgo/flash
 
 There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.js** to this:
 
-```jsx
+```javascript
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Share } from '@capacitor/share';
@@ -268,8 +270,9 @@ npx cap sync
 
 After hitting the button, you can witness the beautiful native share dialog in action!
 
-![next-capacitor-share](/next-capacitor-share.webp)
-
+<div class="mx-auto" style="width: 50%;">
+  <img src="/next-capacitor-share.webp" alt="next-capacitor-share">
+</div>
 To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - Next.js (no pun intended). 
 
 
@@ -283,7 +286,7 @@ if you want a really great looking mobile UI that adapts to iOS and Android spec
 
 To use it, we only need to install the package react package:
 
-```
+```shell
 npm i konsta
 ```
 
@@ -295,8 +298,8 @@ const konstaConfig = require('konsta/config')
 // wrap config with konstaConfig config
 module.exports = konstaConfig({
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,javascript,tsx}',
+    './components/**/*.{js,ts,javascript,tsx}',
   ],
   darkMode: 'media', // or 'class'
   theme: {
@@ -314,7 +317,7 @@ Now we need to setup main [App](https://konstaui.com/react/app) component so we 
 
 We need to wrap whole app with `App` in the `pages/_app.js`:
 
-```jsx
+```javascript
 import { App } from 'konsta/react';
 import '../styles/globals.css';
 
@@ -336,7 +339,7 @@ Now when everything is set up, we can use Konsta UI React components in our Next
 
 For example, let's open `pages/index.js` and change it to the following:
 
-```jsx
+```javascript
 // Konsta UI components
 import {
   Page,
@@ -378,7 +381,9 @@ If the live reload is out of sync after installing all the necessary components,
 
 You should see the following page as a result:
 
-![konsta-next](/konsta-next.webp)
+<div class="mx-auto" style="width: 50%;">
+  <img src="/konsta-next.webp" alt="konsta-next">
+</div>
 
 ## Conclusion
 
