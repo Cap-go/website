@@ -9,7 +9,7 @@ specifiers:
   '@nuxt/content': ^2.3.0
   '@nuxt/schema': 3.2.3
   '@nuxtjs/color-mode': ^3.2.0
-  '@supabase/supabase-js': 2.8.0
+  '@supabase/supabase-js': 2.10.0
   '@types/semver': ^7.3.13
   '@unocss/nuxt': ^0.47.6
   '@vueuse/nuxt': ^9.7.0
@@ -28,7 +28,7 @@ dependencies:
   '@nuxt/content': 2.4.3
   '@nuxt/schema': 3.2.3
   '@nuxtjs/color-mode': 3.2.0
-  '@supabase/supabase-js': 2.8.0
+  '@supabase/supabase-js': 2.10.0
   '@types/semver': 7.3.13
   '@unocss/nuxt': 0.47.6
   '@vueuse/nuxt': 9.12.0_nuxt@3.0.0
@@ -1119,8 +1119,8 @@ packages:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
     dev: false
 
-  /@supabase/functions-js/2.0.0:
-    resolution: {integrity: sha512-ozb7bds2yvf5k7NM2ZzUkxvsx4S4i2eRKFSJetdTADV91T65g4gCzEs9L3LUXSrghcGIkUaon03VPzOrFredqg==}
+  /@supabase/functions-js/2.1.0:
+    resolution: {integrity: sha512-vRziB+AqRXRaGHjEFHwBo0kuNDTuAxI7VUeqU24Fe86ISoD8YEQm0dGdpleJEcqgDGWaO6pxT1tfj1BRY5PwMg==}
     dependencies:
       cross-fetch: 3.1.5
     transitivePeerDependencies:
@@ -1152,22 +1152,22 @@ packages:
       - supports-color
     dev: false
 
-  /@supabase/storage-js/2.3.0:
-    resolution: {integrity: sha512-YGWVCEYYYF3+UiyL8O4xC78N9n9paLbT0hHl8dmYAtd3DqyWtu5Eph9JTu0PWm+/29Zhns5TbhUZW4xpWjJfPQ==}
+  /@supabase/storage-js/2.3.1:
+    resolution: {integrity: sha512-BaPIvyvjuZW1V0CnfGKUZyzpBUXnsh0XD8eqTOYd+MdiGPmIPI0vtwnT4fAoK8mipp1vpcN62EVQaqeUnWXPtQ==}
     dependencies:
       cross-fetch: 3.1.5
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@supabase/supabase-js/2.8.0:
-    resolution: {integrity: sha512-uzf4J+qAKdUMhB2tnJl6BrQRUQBinwjJ2eWo2ZsDw9EUUP5JcHsxTamiq6p91DpqzmTIRg3xRAT+bItTzbfa0w==}
+  /@supabase/supabase-js/2.10.0:
+    resolution: {integrity: sha512-/vkpPxGDyLfTASWnVHL8vdgQxn9SX/Cs+BotTxFhLSIeGFSazC6rpQSMKu6RqzO7gjBD1KqTv0h3auWfClWs+Q==}
     dependencies:
-      '@supabase/functions-js': 2.0.0
+      '@supabase/functions-js': 2.1.0
       '@supabase/gotrue-js': 2.12.1
       '@supabase/postgrest-js': 1.4.0
       '@supabase/realtime-js': 2.6.0
-      '@supabase/storage-js': 2.3.0
+      '@supabase/storage-js': 2.3.1
       cross-fetch: 3.1.5
     transitivePeerDependencies:
       - encoding
