@@ -41,13 +41,15 @@ npx create-next-app my-app
 In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and export the Next project:
 
 ```json
+{
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "static": "next build && next export"
-  },
+  }
+}
 ```
 
 After executing the command, errors may occur because image optimization is incompatible with this setting. Consequently, open up the **next.config.js** file and modify it as follows:

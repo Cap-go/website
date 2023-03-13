@@ -22,56 +22,48 @@ const solo = props.pricing.find(plan => plan.name === 'Solo')!
 const maker = props.pricing.find(plan => plan.name === 'Maker')!
 const team = props.pricing.find(plan => plan.name === 'Team')!
 
-const mau = ref(props.paygBase.mau)
-const storage = ref(props.paygBase.storage)
+const mau = ref(maker.mau)
+// const storage = ref(props.paygBase.storage)
 const updatesByMonth = ref(2)
-const updatesSize = ref(30)
+const updatesSize = ref(15)
 
-const updates = ref(mau.value * updatesByMonth.value)
-const bandwidth = ref(updates.value * updatesSize.value / 1000)
-
-const basePrice = payg.price_m
-const totalPrice = ref(basePrice)
-
-const suggestion = ref('')
-
-const roundNumber = (number: number) => {
-  return Math.round(number * 100) / 100
-}
-
-const suggestBestPlan = () => {
+const updates = computed(() => {
+  return mau.value * updatesByMonth.value
+})
+const storage = computed(() => {
+  return (updatesByMonth.value * updatesSize.value * 12) / 1000
+})
+const bandwidth = computed(() => {
+  return updates.value * updatesSize.value / 1000
+})
+const suggestion =computed(() => {
   if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth)
-    suggestion.value = 'Solo'
+    return 'Solo'
   else if (mau.value <= maker.mau && storage.value <= maker.storage && bandwidth.value <= maker.bandwidth)
-    suggestion.value = 'Maker'
+  return 'Maker'
   else if (mau.value <= team.mau && storage.value <= team.storage && bandwidth.value <= team.bandwidth)
-    suggestion.value = 'Team'
-  else suggestion.value = ''
-}
+  return 'Team'
+  else return 'Pay as you go'
+})
+const basePrice = payg.price_m
 
-const calculateTotal = () => {
+const totalPrice = computed(() => {
   const mauPrice = mau.value > props.paygBase.mau ? (mau.value - props.paygBase.mau) * props.paygUnits.mau : 0
   const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
   const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) {
-    totalPrice.value = roundNumber(basePrice + sum)
+    return roundNumber(basePrice + sum)
   }
   else {
-    suggestBestPlan()
-    totalPrice.value = suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice
+    return suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice
   }
+})
+
+const roundNumber = (number: number) => {
+  return Math.round(number * 100) / 100
 }
 
-const calculateBandwidth = () => {
-  bandwidth.value = updates.value * updatesSize.value / 1000
-  calculateTotal()
-}
-
-const calculateUpdates = () => {
-  updates.value = mau.value * updatesByMonth.value
-  calculateBandwidth()
-}
 </script>
 
 <template>
@@ -80,90 +72,81 @@ const calculateUpdates = () => {
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
         <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
           Calculate your usage<br>
-          <span class="text-xl sm:text-2xl xl:text-3xl">for the Pay-as-you-go plan</span>
         </h2>
       </div>
 
-      <div class="relative mt-12 lg:mt-20 lg:max-w-5xl lg:mx-auto">
+      <div class="relative mt-6 lg:mt-12 lg:max-w-5xl lg:mx-auto">
         <div class="absolute -inset-2">
           <div class="w-full h-full mx-auto opacity-30 blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
         </div>
 
-        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 sm:grid-cols-2 gap-y-12 lg:grid-cols-4 rounded-2xl gap-x-20">
+        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-y-12 md:grid-cols-3 rounded-2xl gap-x-20">
           <div class="flex flex-col items-center">
-            <h3 class="calc-label">
+            <p class="calc-label">
               MAU<br><span class="text-[0.6rem]">Monthly Active Users</span>
-            </h3>
+            </p>
             <input
               v-model.number="mau"
               placeholder="0"
-              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
-              @input="calculateUpdates"
+              class="break-all w-full p-2 cursor-text hover:bg-gray-800 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
             >
           </div>
 
           <div class="flex flex-col items-center">
-            <h3 class="calc-label">
-              Storage<br>(GB)
-            </h3>
-            <input
-              v-model.number="storage"
-              placeholder="0"
-              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
-              @input="calculateTotal"
-            >
-          </div>
-
-          <div class="flex flex-col items-center">
-            <h3 class="calc-label">
+            <p class="calc-label">
               Updates<br>by month
-            </h3>
+            </p>
             <input
               v-model.number="updatesByMonth"
               placeholder="0"
-              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
-              @input="calculateUpdates"
+              class="break-all w-full p-2 hover:bg-gray-800 cursor-text border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
             >
           </div>
 
           <div class="flex flex-col items-center">
-            <h3 class="calc-label">
+            <p class="calc-label">
               Updates Size<br>(MB)
-            </h3>
+            </p>
             <input
               v-model.number="updatesSize"
               placeholder="0"
-              class="break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
-              @input="calculateBandwidth"
+              class="break-all w-full p-2 cursor-text hover:bg-gray-800 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
             >
           </div>
-
-          <div class="lg:col-span-2 flex flex-col items-center">
-            <h3 class="calc-label">
-              Bandwidth<br>(GB)
-            </h3>
-            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
-              {{ bandwidth }}
-            </p>
-          </div>
-          <div class="lg:col-span-2 flex flex-col items-center">
-            <h3 class="calc-label">
+          <div class="flex flex-col items-center">
+            <p class="calc-label">
               Updates<br>(Total)
-            </h3>
+            </p>
             <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
-              {{ updates }}
+              {{ updates.toLocaleString() }}
             </p>
           </div>
-          <div class="sm:col-span-2 lg:col-span-4 flex flex-col items-center">
-            <h3 class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">
+          <div class="flex flex-col items-center">
+            <p class="calc-label">
+              Bandwidth<br>(GB)
+            </p>
+            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+              {{ bandwidth.toLocaleString() }}
+            </p>
+          </div>
+          <div class="flex flex-col items-center">
+            <p class="calc-label">
+              Storage<br>(GB)
+            </p>
+            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+              {{ storage.toLocaleString() }}
+            </p>
+          </div>
+          <div class="col-span-1 md:col-span-3 flex flex-col items-center">
+            <p class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">
               Monthly Price
-            </h3>
+            </p>
             <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
               {{ totalPrice }}€
             </p>
-            <h3 v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-red-400 mt-0 font-pj">
+            <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-red-400 mt-0 font-pj">
               We suggest you to choose the <a href="#plans" class="font-bold text-white uppercase">{{ suggestion }}</a> plan
-            </h3>
+            </p>
           </div>
         </div>
       </div>

@@ -29,19 +29,21 @@ const payg_units = {
   <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-8xl font-pj">
+        <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl font-pj">
           The right plan can change your work
         </h1>
-        <h2 class="mt-6 text-xl font-normal text-gray-600 font-pj">
+        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">
           Enterprise-grade cloud that enhance Capacitor application functionality and security.
-        </h2>
+        </p>
       </div>
 
+      <Calculator v-if="payg" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
+      <h3 class="max-w-md mx-auto mt-8 text-3xl sm:text-4xl xl:text-5xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
+        15 days free trial for all plans
+      </h3>
       <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
-      <p class="max-w-md mx-auto mt-8 text-2xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
-        15 days free trial for all plans
-      </p>
+
       <section class="py-12 sm:py-16 lg:py-20">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="max-w-2xl mx-auto text-center">
@@ -196,8 +198,6 @@ const payg_units = {
           </div>
         </div>
       </section>
-
-      <Calculator v-if="payg" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
 
       <div class="flex max-w-md mx-auto items-center justify-center mt-3">
         <a no-rel href="https://web.capgo.app/register/" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
