@@ -118,7 +118,7 @@ const descToEmoji = (desc: string) => {
                 {{ numberWithSpaces(plan.bandwidth) }} GB/mo of Bandwidth
               </li>
 
-              <li class="flex items-center text-gray-400">
+              <!-- <li class="flex items-center text-gray-400">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
@@ -137,7 +137,7 @@ const descToEmoji = (desc: string) => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
                 AB Testing
-              </li>
+              </li> -->
             </ul>
 
             <ul v-else class="mt-6 space-y-3 text-base font-medium text-gray-900">
@@ -167,7 +167,7 @@ const descToEmoji = (desc: string) => {
                   <div>{{ numberWithSpaces(props.paygBase.bandwidth) }} GB/mo of Bandwidth<br> <span class="text-gray-500">{{ props.paygUnits.bandwidth }}€ per added GB</span></div>
                 </div>
               </li>
-
+<!-- 
               <li class="flex items-center text-gray-400">
                 <svg class="w-5 h-5 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -187,7 +187,7 @@ const descToEmoji = (desc: string) => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
                 AB Testing
-              </li>
+              </li> -->
             </ul>
 
             <a
@@ -217,34 +217,6 @@ const descToEmoji = (desc: string) => {
               role="button"
             >
               Start trial
-            </a>
-            <a
-              v-if="plan.name === 'Pay as you go'"
-              href="#calculator"
-              title="Calculate your monthly cost"
-              class="
-                        w-full
-                        inline-flex
-                        items-center
-                        justify-center
-                        px-4
-                        py-3
-                        mt-2
-                        text-base
-                        font-bold
-                        text-gray-900
-                        transition-all
-                        duration-200
-                        bg-transparent
-                        border border-gray-400
-                        rounded
-                        font-pj
-                        hover:bg-gray-900 hover:text-white
-                        focus:bg-gray-900 focus:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                    "
-              role="button"
-            >
-              Calculate your monthly cost
             </a>
           </div>
         </div>

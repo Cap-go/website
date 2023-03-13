@@ -144,8 +144,8 @@ const roundNumber = (number: number) => {
             <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
               {{ totalPrice }}€
             </p>
-            <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-red-400 mt-0 font-pj">
-              We suggest you to choose the <a href="#plans" class="font-bold text-white uppercase">{{ suggestion }}</a> plan
+            <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-white mt-0 font-pj">
+              We suggest you to choose the <a href="#plans" class="font-bold underline underline-current text-red-400 uppercase cursor-pointer">{{ suggestion }}</a> plan
             </p>
           </div>
         </div>
