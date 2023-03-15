@@ -24,8 +24,8 @@ const team = props.pricing.find(plan => plan.name === 'Team')!
 
 const mau = ref(maker.mau)
 // const storage = ref(props.paygBase.storage)
-const updatesByMonth = ref(2)
-const updatesSize = ref(15)
+const updatesByMonth = ref(4)
+const updatesSize = ref(12)
 
 const updates = computed(() => {
   return mau.value * updatesByMonth.value
