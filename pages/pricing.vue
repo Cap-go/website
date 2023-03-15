@@ -3,6 +3,7 @@
 import { ArrowLongRightIcon } from '@heroicons/vue/20/solid'
 import Calculator from '~~/components/pricing/Calculator.vue'
 import Plans from '~~/components/pricing/Plans.vue'
+import Faq from '~~/components/pricing/Faq.vue'
 import type { Database } from '~~/types/supabase.types'
 const config = useRuntimeConfig()
 
@@ -205,9 +206,10 @@ const payg_units = {
         </a>
       </div>
 
-      <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj">
+      <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj mb-4">
         We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
     </div>
+    <Faq/>
   </section>
 </template>

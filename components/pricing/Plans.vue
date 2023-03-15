@@ -224,7 +224,3 @@ const descToEmoji = (desc: string) => {
     </section>
   </div>
 </template>
-
-<style>
-
-</style>
