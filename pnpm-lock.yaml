@@ -7,7 +7,7 @@ specifiers:
   '@iconify-json/carbon': ^1.1.11
   '@iconify-json/twemoji': ^1.1.7
   '@nuxt/content': ^2.3.0
-  '@nuxt/schema': 3.2.3
+  '@nuxt/schema': 3.3.1
   '@nuxtjs/color-mode': ^3.2.0
   '@supabase/supabase-js': 2.10.0
   '@types/semver': ^7.3.13
@@ -26,7 +26,7 @@ dependencies:
   '@headlessui/vue': 1.7.9
   '@heroicons/vue': 2.0.15
   '@nuxt/content': 2.4.3
-  '@nuxt/schema': 3.2.3
+  '@nuxt/schema': 3.3.1
   '@nuxtjs/color-mode': 3.2.0
   '@supabase/supabase-js': 2.10.0
   '@types/semver': 7.3.13
@@ -669,16 +669,16 @@ packages:
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/schema': 3.0.0
-      c12: 1.1.2
+      c12: 1.2.0
       consola: 2.15.3
       defu: 6.1.2
       globby: 13.1.3
       hash-sum: 2.0.0
       ignore: 5.2.4
-      jiti: 1.17.1
+      jiti: 1.18.2
       knitwork: 1.0.0
       lodash.template: 4.5.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
@@ -695,16 +695,16 @@ packages:
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/schema': 3.0.0_rollup@2.79.1
-      c12: 1.1.2
+      c12: 1.2.0
       consola: 2.15.3
       defu: 6.1.2
       globby: 13.1.3
       hash-sum: 2.0.0
       ignore: 5.2.4
-      jiti: 1.17.1
+      jiti: 1.18.2
       knitwork: 1.0.0
       lodash.template: 4.5.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
@@ -721,16 +721,16 @@ packages:
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/schema': 3.1.1
-      c12: 1.1.2
+      c12: 1.2.0
       consola: 2.15.3
       defu: 6.1.2
       globby: 13.1.3
       hash-sum: 2.0.0
       ignore: 5.2.4
-      jiti: 1.17.1
+      jiti: 1.18.2
       knitwork: 1.0.0
       lodash.template: 4.5.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
@@ -748,13 +748,13 @@ packages:
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/schema': 3.2.0
-      c12: 1.1.2
+      c12: 1.2.0
       consola: 2.15.3
       defu: 6.1.2
       globby: 13.1.3
       hash-sum: 2.0.0
       ignore: 5.2.4
-      jiti: 1.17.1
+      jiti: 1.18.2
       knitwork: 1.0.0
       lodash.template: 4.5.0
       mlly: 1.1.0
@@ -774,10 +774,10 @@ packages:
     resolution: {integrity: sha512-5fwsidhs5NjFzR8sIzHMXO0WFGkI3tCH3ViANn2W4N5qCwoYZ0n1sZBkQ9Esn1VoEed6RsIlTpWrPZPVtqNkGQ==}
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
-      c12: 1.1.2
+      c12: 1.2.0
       create-require: 1.1.1
       defu: 6.1.2
-      jiti: 1.17.1
+      jiti: 1.18.2
       pathe: 1.1.0
       pkg-types: 1.0.2
       postcss-import-resolver: 2.0.0
@@ -794,10 +794,10 @@ packages:
     resolution: {integrity: sha512-5fwsidhs5NjFzR8sIzHMXO0WFGkI3tCH3ViANn2W4N5qCwoYZ0n1sZBkQ9Esn1VoEed6RsIlTpWrPZPVtqNkGQ==}
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
-      c12: 1.1.2
+      c12: 1.2.0
       create-require: 1.1.1
       defu: 6.1.2
-      jiti: 1.17.1
+      jiti: 1.18.2
       pathe: 1.1.0
       pkg-types: 1.0.2
       postcss-import-resolver: 2.0.0
@@ -814,11 +814,11 @@ packages:
     resolution: {integrity: sha512-/KuoCDVGrLD9W7vwuYhu4HbdT/BpbrhA4Pm9dGn7Jah40kHDGqUnJxugvMjt+4suq53rLQyTA0LRDWfFxfxAOQ==}
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
-      c12: 1.1.2
+      c12: 1.2.0
       create-require: 1.1.1
       defu: 6.1.2
-      hookable: 5.4.2
-      jiti: 1.17.1
+      hookable: 5.5.1
+      jiti: 1.18.2
       pathe: 1.1.0
       pkg-types: 1.0.2
       postcss-import-resolver: 2.0.0
@@ -836,11 +836,11 @@ packages:
     resolution: {integrity: sha512-tz9RandI5LgbT9BQ8dE8n4kItV7+4OUgbX42YemcGbtORVJAWJJvQyHGikJ5akUgiTFYTV8tjV6pRPH9Txx0Pg==}
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
-      c12: 1.1.2
+      c12: 1.2.0
       create-require: 1.1.1
       defu: 6.1.2
-      hookable: 5.4.2
-      jiti: 1.17.1
+      hookable: 5.5.1
+      jiti: 1.18.2
       pathe: 1.1.0
       pkg-types: 1.0.2
       postcss-import-resolver: 2.0.0
@@ -854,22 +854,22 @@ packages:
       - supports-color
     dev: false
 
-  /@nuxt/schema/3.2.3:
-    resolution: {integrity: sha512-AXzRnBivCwn5RpNFWjUkvOPGPSHl5BM+6GfOpSNglPXi0tiQJ+rawSl7no7BkxGDmQ44Bx9AXwvHTrgjpcuo4g==}
+  /@nuxt/schema/3.3.1:
+    resolution: {integrity: sha512-E8HWzU43rXzqwDTmWduTLHY4xIwRSAUt1LbpuE9IjZ4uJZq5Mbaj4nfhANNsTQGw2c+O+rL81yzAP3i61LEJDw==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
-      c12: 1.1.2
+      c12: 1.2.0
       create-require: 1.1.1
       defu: 6.1.2
-      hookable: 5.4.2
-      jiti: 1.17.1
+      hookable: 5.5.1
+      jiti: 1.18.2
       pathe: 1.1.0
       pkg-types: 1.0.2
       postcss-import-resolver: 2.0.0
       scule: 1.0.0
       std-env: 3.3.2
       ufo: 1.1.1
-      unimport: 2.2.4
+      unimport: 3.0.3
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -892,7 +892,7 @@ packages:
       git-url-parse: 13.1.0
       inquirer: 9.1.4
       is-docker: 3.0.0
-      jiti: 1.17.1
+      jiti: 1.18.2
       mri: 1.2.0
       nanoid: 4.0.1
       node-fetch: 3.3.0
@@ -930,7 +930,7 @@ packages:
       h3: 1.4.0
       knitwork: 1.0.0
       magic-string: 0.26.7
-      mlly: 1.1.1
+      mlly: 1.2.0
       ohash: 1.0.0
       pathe: 1.1.0
       perfect-debounce: 0.1.3
@@ -941,7 +941,7 @@ packages:
       rollup: 2.79.1
       rollup-plugin-visualizer: 5.9.0_rollup@2.79.1
       ufo: 1.1.1
-      unplugin: 1.0.1
+      unplugin: 1.3.1
       vite: 3.2.5
       vite-node: 0.25.8
       vite-plugin-checker: 0.5.5_eslint@8.34.0+vite@3.2.5
@@ -1383,7 +1383,7 @@ packages:
     resolution: {integrity: sha512-amYg6vJ37xUhnL6bvL4S3lz6yDs5lWeqJu63/3a5bxH3Dq0WPJ+kdhpUXI+4enoNaWvLvm860WXUOtKr5D+DMg==}
     dependencies:
       '@zhead/schema': 1.1.0
-      hookable: 5.4.2
+      hookable: 5.5.1
 
   /@unhead/ssr/1.0.21:
     resolution: {integrity: sha512-QWy+vKZWVb+XfHl/B/rEoniMGFpDjXiYBkjJZyuf+9By8DzQUscMaTv14neW1ZR6pq56c4B7Tp1N3Lve8SW+rA==}
@@ -1396,7 +1396,7 @@ packages:
       vue: '>=2.7 || >=3'
     dependencies:
       '@unhead/schema': 1.0.21
-      hookable: 5.4.2
+      hookable: 5.5.1
       vue: 3.2.47
 
   /@unocss/astro/0.47.6:
@@ -1591,7 +1591,7 @@ packages:
       '@unocss/config': 0.47.6
       '@unocss/core': 0.47.6
       magic-string: 0.26.7
-      unplugin: 1.0.1
+      unplugin: 1.3.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
       - rollup
@@ -2097,14 +2097,14 @@ packages:
       streamsearch: 1.1.0
     dev: false
 
-  /c12/1.1.2:
-    resolution: {integrity: sha512-fHT5HDEHNMb2oImnqJ88/UlpEOkY/chdyYxSd3YCpvBqBvU0IDlHTkNc7GnjObDMxdis2lL+rwlQcNq8VeZESA==}
+  /c12/1.2.0:
+    resolution: {integrity: sha512-CMznkE0LpNEuD8ILp5QvsQVP+YvcpJnrI/zFeFnosU2PyDtx1wT7tXfZ8S3Tl3l9MTTXbKeuhDYKwgvnAPOx3w==}
     dependencies:
       defu: 6.1.2
       dotenv: 16.0.3
       giget: 1.1.2
-      jiti: 1.17.1
-      mlly: 1.1.1
+      jiti: 1.18.2
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       rc9: 2.0.1
@@ -3482,7 +3482,7 @@ packages:
     resolution: {integrity: sha512-MAU9ci3XdpqOX1aoIoyL2DMzW97P8LYeJxIUkfXhOfsrkH4KLHFaYDwKN0B2l6tqedVJWiTIJtWmxmZfa05vOQ==}
     dependencies:
       enhanced-resolve: 5.12.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       ufo: 1.1.1
 
@@ -3977,6 +3977,9 @@ packages:
   /hookable/5.4.2:
     resolution: {integrity: sha512-6rOvaUiNKy9lET1X0ECnyZ5O5kSV0PJbtA5yZUgdEF7fGJEVwSLSislltyt7nFwVVALYHQJtfGeAR2Y0A0uJkg==}
 
+  /hookable/5.5.1:
+    resolution: {integrity: sha512-ac50aYjbtRMMZEtTG0qnVaBDA+1lqL9fHzDnxMQlVuO6LZWcBB7NXjIu9H9iImClewNdrit4RiEzi9QpRTgKrg==}
+
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
@@ -4390,8 +4393,8 @@ packages:
       merge-stream: 2.0.0
       supports-color: 7.2.0
 
-  /jiti/1.17.1:
-    resolution: {integrity: sha512-NZIITw8uZQFuzQimqjUxIrIcEdxYDFIe/0xYfIlVXTkiBjjyBEvgasj5bb0/cHtPRD/NziPbT312sFrkI5ALpw==}
+  /jiti/1.18.2:
+    resolution: {integrity: sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==}
     hasBin: true
 
   /js-sdsl/4.3.0:
@@ -4630,6 +4633,13 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /magic-string/0.30.0:
+    resolution: {integrity: sha512-LA+31JYDJLs82r2ScLrlz1GjSgu66ZV518eyWT+S8VhyQn/JL0u9MeBOvQMGYiPk1DBiSN9DDMOcXvigJZaViQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
+    dev: false
 
   /make-dir/3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
@@ -5175,8 +5185,8 @@ packages:
       pkg-types: 1.0.2
       ufo: 1.1.1
 
-  /mlly/1.1.1:
-    resolution: {integrity: sha512-Jnlh4W/aI4GySPo6+DyTN17Q75KKbLTyFK8BrGhjNP4rxuUjbRWhE6gHg3bs33URWAF44FRm7gdQA348i3XxRw==}
+  /mlly/1.2.0:
+    resolution: {integrity: sha512-+c7A3CV0KGdKcylsI6khWyts/CYrGTrRVo4R/I7u/cUsy0Conxa6LUhiEzVKIw14lc2L5aiO4+SeVe4TeGRKww==}
     dependencies:
       acorn: 8.8.2
       pathe: 1.1.0
@@ -5242,7 +5252,7 @@ packages:
       '@rollup/pluginutils': 5.0.2_rollup@2.79.1
       '@vercel/nft': 0.22.6
       archiver: 5.3.1
-      c12: 1.1.2
+      c12: 1.2.0
       chalk: 5.2.0
       chokidar: 3.5.3
       consola: 2.15.3
@@ -5257,15 +5267,15 @@ packages:
       globby: 13.1.3
       gzip-size: 7.0.0
       h3: 1.4.0
-      hookable: 5.4.2
+      hookable: 5.5.1
       http-proxy: 1.18.1
       is-primitive: 3.0.1
-      jiti: 1.17.1
+      jiti: 1.18.2
       klona: 2.0.6
       knitwork: 1.0.0
       listhen: 1.0.2
       mime: 3.0.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       mri: 1.2.0
       node-fetch-native: 1.0.2
       ofetch: 1.0.0
@@ -5736,7 +5746,7 @@ packages:
     resolution: {integrity: sha512-hM58GKXOcj8WTqUXnsQyJYXdeAPbythQgEF3nTcEo+nkD49chjQ9IKm/QJy9xf6JakXptz86h7ecP2024rrLaQ==}
     dependencies:
       jsonc-parser: 3.2.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
 
   /pluralize/8.0.0:
@@ -6964,7 +6974,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       defu: 6.1.2
-      jiti: 1.17.1
+      jiti: 1.18.2
     dev: false
 
   /uncrypto/0.1.2:
@@ -6976,7 +6986,7 @@ packages:
       acorn: 8.8.2
       estree-walker: 3.0.3
       magic-string: 0.27.0
-      unplugin: 1.0.1
+      unplugin: 1.3.1
 
   /undici/5.18.0:
     resolution: {integrity: sha512-1iVwbhonhFytNdg0P4PqyIAXbdlVZVebtPDvuM36m66mRw4OGrCm2MYynJv/UENFLdP13J1nPVQzVE2zTs1OeA==}
@@ -6998,7 +7008,7 @@ packages:
     dependencies:
       '@unhead/dom': 1.0.21
       '@unhead/schema': 1.0.21
-      hookable: 5.4.2
+      hookable: 5.5.1
 
   /unified/10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
@@ -7020,12 +7030,12 @@ packages:
       fast-glob: 3.2.12
       local-pkg: 0.4.3
       magic-string: 0.27.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
       strip-literal: 1.0.1
-      unplugin: 1.0.1
+      unplugin: 1.3.1
     transitivePeerDependencies:
       - rollup
 
@@ -7037,12 +7047,12 @@ packages:
       fast-glob: 3.2.12
       local-pkg: 0.4.3
       magic-string: 0.27.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
       strip-literal: 1.0.1
-      unplugin: 1.0.1
+      unplugin: 1.3.1
     transitivePeerDependencies:
       - rollup
 
@@ -7054,12 +7064,30 @@ packages:
       fast-glob: 3.2.12
       local-pkg: 0.4.3
       magic-string: 0.27.0
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
       strip-literal: 1.0.1
-      unplugin: 1.0.1
+      unplugin: 1.3.1
+    transitivePeerDependencies:
+      - rollup
+    dev: false
+
+  /unimport/3.0.3:
+    resolution: {integrity: sha512-RzQqQiqepF5P13SwBGCe4pLlRnAQlbFuDAaQlSkXiNJDpN2iymtGMSfa75AcVSejgV05Q2aQYt6UhCiy5GuZ2A==}
+    dependencies:
+      '@rollup/pluginutils': 5.0.2
+      escape-string-regexp: 5.0.0
+      fast-glob: 3.2.12
+      local-pkg: 0.4.3
+      magic-string: 0.30.0
+      mlly: 1.2.0
+      pathe: 1.1.0
+      pkg-types: 1.0.2
+      scule: 1.0.0
+      strip-literal: 1.0.1
+      unplugin: 1.3.1
     transitivePeerDependencies:
       - rollup
     dev: false
@@ -7150,6 +7178,14 @@ packages:
 
   /unplugin/1.0.1:
     resolution: {integrity: sha512-aqrHaVBWW1JVKBHmGo33T5TxeL0qWzfvjWokObHA9bYmN7eNDkwOxmLjhioHl9878qDFMAaT51XNroRyuz7WxA==}
+    dependencies:
+      acorn: 8.8.2
+      chokidar: 3.5.3
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.5.0
+
+  /unplugin/1.3.1:
+    resolution: {integrity: sha512-h4uUTIvFBQRxUKS2Wjys6ivoeofGhxzTe2sRWlooyjHXVttcVfV/JiavNd3d4+jty0SVV0dxGw9AkY9MwiaCEw==}
     dependencies:
       acorn: 8.8.2
       chokidar: 3.5.3
@@ -7262,7 +7298,7 @@ packages:
     hasBin: true
     dependencies:
       debug: 4.3.4
-      mlly: 1.1.1
+      mlly: 1.2.0
       pathe: 0.2.0
       source-map: 0.6.1
       source-map-support: 0.5.21
