@@ -42,7 +42,7 @@ Where Capgo find the version to compare
 #### IOS
   > Will be used by Capgo to compare to JavaScript version and find Major upgrade
 
-  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
+  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION`
 
 #### Android
   > Will be uses by Capgo to compare to JavaScript version and find Major upgrade

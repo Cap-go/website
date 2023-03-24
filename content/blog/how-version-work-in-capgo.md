@@ -29,7 +29,7 @@ Where Capgo find the version to compare
 
 #### IOS
 
-  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
+  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION`
 
 #### Android
 
