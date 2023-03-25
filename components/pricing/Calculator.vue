@@ -95,6 +95,9 @@ const roundNumber = (number: number) => {
         <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
           Calculate your usage<br>
         </h2>
+        <p class="mt-6 text-sm font-normal text-gray-600 font-pj">
+          Enter your estimated monthly active users, updates per month and update size to get your estimated monthly cost.
+        </p>
       </div>
 
       <div class="relative mt-6 lg:mt-12 lg:max-w-5xl lg:mx-auto">

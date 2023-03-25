@@ -21,7 +21,7 @@ defineProps({
                     <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">🔥</div>
                     <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">Pay as you go</h2>
                 </div>
-                <p class="mt-4 text-base font-medium text-gray-600 font-pj">No limits. No commitments.</p>
+                <p class="mt-4 text-base font-normal text-gray-600 font-pj">No limits. No commitments.</p>
             </div>
 
             <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">

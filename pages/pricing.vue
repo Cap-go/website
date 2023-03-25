@@ -1,6 +1,5 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
-import { ArrowLongRightIcon } from '@heroicons/vue/20/solid'
 import Calculator from '~~/components/pricing/Calculator.vue'
 import Plans from '~~/components/pricing/Plans.vue'
 import PayAsYouGo from '~~/components/pricing/PayAsYouGo.vue'
@@ -17,6 +16,12 @@ fetch(`${config.public.baseApiUrl}/plans`)
 const plans = computed(() => plansAll.value.length ? plansAll.value.filter(p => p.name !== 'Pay as you go'): [])
 const payg = computed(() => plansAll.value.length ? plansAll.value.filter(p => p.name === 'Pay as you go')[0] : undefined)
 
+const scrollToId = (id: string) => {
+  window.scrollTo({
+    top: document.getElementById(id)!.offsetTop,
+    behavior: 'smooth',
+  })
+}
 const payg_base = computed(() =>(payg.value ? {
   mau: payg.value.mau,
   storage: payg.value.storage,
@@ -41,7 +46,9 @@ const payg_units = computed(() =>(payg.value ?{
         </p>
       </div>
 
-      <div class="flex items-center justify-center mt-8 space-x-6 sm:mt-12">
+      <p class="mt-5 text-center"><button @click="scrollToId('calculator')" class="font-medium text-black border-b-1 border-blue-600  border-blue-600 hover:text-blue-600 focus:text-blue-600">Calculate your usage</button></p>
+
+      <div class="flex items-center justify-center mt-6 space-x-6 sm:mt-10">
           <div class="flex items-center" @click="yearly = false">
             <input type="radio" id="monthly" name="pricing-plans"
               class="w-4 h-4 text-blue-600 border border-gray-200 focus:ring-1 focus:outline-none focus:ring-blue-600"
@@ -65,12 +72,13 @@ const payg_units = computed(() =>(payg.value ?{
         </div>
       <Plans v-if="plans.length > 0" class="pb-12 sm:pb-16 lg:pb-20 xl:pb-24" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
 
+      <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg"/>
+
+      <Calculator class="pb-6 bg-gray-50 sm:pb-10 lg:pb-14 pt-3 sm:pt-6 lg:pt-10" v-if="plansAll && payg_base" :yearly="yearly" :pricing="plansAll" :payg-base="payg_base" :payg-units="payg_units" />
+
       <p class="max-w-md mx-auto  text-base text-center text-gray-500 md:mt-16 font-pj mb-8">
         We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
-      <Calculator class="pb-6 bg-gray-50 sm:pb-10 lg:pb-14 pt-3 sm:pt-6 lg:pt-10" v-if="plansAll && payg_base" :yearly="yearly" :pricing="plansAll" :payg-base="payg_base" :payg-units="payg_units" />
-
-      <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg"/>
 
     </div>
     <Faq/>

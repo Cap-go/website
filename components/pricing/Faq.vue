@@ -15,7 +15,7 @@
                     <div class="ml-4">
                         <p class="text-xl font-semibold text-white">How MAU are counted?</p>
                         <p class="mt-4 text-base text-gray-400">MAU are counted by tracking unique users who opened your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.</p>
-                        <p class="mt-4 text-base text-gray-400">Capgo don't count emulator and dev build in your usage. Learn more <a class="border-b-2 border-blue-600  border-blue-600" href="/blog/how-your-usage-is-counted/">here</a></p>
+                        <p class="mt-4 text-base text-gray-400">Capgo don't count emulator and dev build in your usage. Learn more <a class="border-b-2 border-blue-600  border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/">here</a></p>
                         
                     </div>
                 </div>

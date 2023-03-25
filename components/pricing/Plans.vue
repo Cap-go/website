@@ -46,7 +46,7 @@ const descToEmoji = (desc: string) => {
 
 <template>
     <section id="plans" >
-        <div class="grid grid-cols-1 mt-12 lg:grid-cols-4 lg:gap-8 sm:mt-16 lg:mt-20">
+        <div class="grid grid-cols-1 mt-6 lg:grid-cols-4 lg:gap-8 sm:mt-8 lg:mt-10">
           <div  v-for="plan in props.pricing" :key="plan.name" 
           :class="{'border-blue-600 divide-blue-200': plan.name === 'Maker', 'border-gray-200 divide-gray-200': plan.name !== 'Maker'}"
           class="mt-6 relative shadow-xl bg-white border divide-y divide-gray-200 rounded-2xl sm:rounded-3xl lg:mt-0">
