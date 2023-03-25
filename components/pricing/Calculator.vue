@@ -15,6 +15,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  yearly: {
+    type: Boolean,
+    required: true,
+  },
 })
 
 const payg = props.pricing.find(plan => plan.name === 'Pay as you go')!
@@ -53,10 +57,10 @@ const totalPrice = computed(() => {
   const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) {
-    return roundNumber(basePrice + sum)
+    return roundNumber(basePrice + sum) * (props.yearly ? 12 : 1)
   }
   else {
-    return suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice
+    return (suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice) * (props.yearly ? 12 : 1)
   }
 })
 
@@ -67,7 +71,7 @@ const roundNumber = (number: number) => {
 </script>
 
 <template>
-  <section id="calculator" class="py-12 bg-gray-50 sm:py-16 lg:py-20">
+  <section id="calculator">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
         <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
@@ -139,7 +143,7 @@ const roundNumber = (number: number) => {
           </div>
           <div class="col-span-1 md:col-span-3 flex flex-col items-center">
             <p class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">
-              Monthly Price
+              {{ yearly ? 'Yearly' :  'Monthly' }} Price
             </p>
             <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
               {{ totalPrice }}€

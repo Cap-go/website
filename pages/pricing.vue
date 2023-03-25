@@ -3,27 +3,30 @@
 import { ArrowLongRightIcon } from '@heroicons/vue/20/solid'
 import Calculator from '~~/components/pricing/Calculator.vue'
 import Plans from '~~/components/pricing/Plans.vue'
+import PayAsYouGo from '~~/components/pricing/PayAsYouGo.vue'
 import Faq from '~~/components/pricing/Faq.vue'
 import type { Database } from '~~/types/supabase.types'
 const config = useRuntimeConfig()
 
-const plans = await fetch(`${config.public.baseApiUrl}/plans`).then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
+const yearly = ref(false)
+const plansAll = ref<Database['public']['Tables']['plans']['Row'][]>([]) 
+fetch(`${config.public.baseApiUrl}/plans`)
+.then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
+.then((res) => plansAll.value.push(...res))
 
-const pricing: {
-  [key: string]: any
-} = plans
+const plans = computed(() => plansAll.value.length ? plansAll.value.filter(p => p.name !== 'Pay as you go'): [])
+const payg = computed(() => plansAll.value.length ? plansAll.value.filter(p => p.name === 'Pay as you go')[0] : undefined)
 
-const payg = plans.filter(p => p.name === 'Pay as you go')[0]
-const payg_base = {
-  mau: payg.mau,
-  storage: payg.storage,
-  bandwidth: payg.bandwidth,
-}
-const payg_units = {
-  mau: payg.mau_unit,
-  storage: payg.storage_unit,
-  bandwidth: payg.bandwidth_unit,
-}
+const payg_base = computed(() =>(payg.value ? {
+  mau: payg.value.mau,
+  storage: payg.value.storage,
+  bandwidth: payg.value.bandwidth,
+}: undefined))
+const payg_units = computed(() =>(payg.value ?{
+  mau: payg.value.mau_unit,
+  storage: payg.value.storage_unit,
+  bandwidth: payg.value.bandwidth_unit,
+}: undefined))
 </script>
 
 <template>
@@ -31,184 +34,44 @@ const payg_units = {
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
         <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl font-pj">
-          The right plan can change your work
+          Plans that scale with your business
         </h1>
         <p class="mt-6 text-xl font-normal text-gray-600 font-pj">
           Enterprise-grade cloud that enhance Capacitor application functionality and security.
         </p>
       </div>
 
-      <Calculator v-if="payg" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
-      <h3 class="max-w-md mx-auto mt-8 text-3xl sm:text-4xl xl:text-5xl font-800 text-center text-pumpkinOrange-500 md:mt-16 font-pj">
-        15 days free trial for all plans
-      </h3>
-      <Plans v-if="plans.length > 0" :pricing="pricing" :payg-base="payg_base" :payg-units="payg_units" />
-
-
-      <section class="py-12 sm:py-16 lg:py-20">
-        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-              Need more ? Contact us for tailored plan
-            </h2>
+      <div class="flex items-center justify-center mt-8 space-x-6 sm:mt-12">
+          <div class="flex items-center" @click="yearly = false">
+            <input type="radio" id="monthly" name="pricing-plans"
+              class="w-4 h-4 text-blue-600 border border-gray-200 focus:ring-1 focus:outline-none focus:ring-blue-600"
+              :checked="!yearly">
+            <label for="monthly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base">
+              Monthly Plan
+            </label>
           </div>
 
-          <div class="relative max-w-5xl mx-auto mt-8 md:mt-16">
-            <div class="absolute -inset-4">
-              <div class="w-full h-full mx-auto opacity-30 blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
-            </div>
-
-            <div class="relative overflow-hidden bg-gray-900 rounded-2xl">
-              <div class="px-16 py-8 sm:px-8 lg:px-16 lg:py-14">
-                <div class="md:flex md:items-center md:space-x-12 lg:space-x-24">
-                  <div class="grid grid-cols-1 gap-y-3 sm:grid-cols-2 gap-x-12 xl:gap-x-24">
-                    <div>
-                      <ul class="space-y-3 text-base font-medium text-white font-pj">
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          Unlimited updates
-                        </li>
-
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          Bigger app size
-                        </li>
-
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          More version Storage
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <ul class="space-y-3 text-base font-medium text-white font-pj">
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          Custom domain
-                        </li>
-
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          Special API access
-                        </li>
-
-                        <li class="flex items-center">
-                          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          Bulk upload
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="block md:hidden lg:block">
-                    <div class="hidden lg:block">
-                      <svg class="w-4 h-auto text-gray-600" viewBox="0 0 16 123" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 11)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 46)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 81)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 116)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 18)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 53)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 88)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 123)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 25)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 60)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 95)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 32)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 67)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 102)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 39)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 74)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 109)" />
-                      </svg>
-                    </div>
-
-                    <div class="block mt-10 md:hidden">
-                      <svg class="w-auto h-4 text-gray-600" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 116 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 151 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 18 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 53 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 88 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 123 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 158 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 25 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 60 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 95 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 130 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 165 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 32 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 67 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 102 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 137 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 172 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 39 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 74 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 109 1)" />
-                        <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 144 1)" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="mt-10 md:mt-0">
-                    <a
-                      title="Get quote now"
-                      class="
-                                    inline-flex
-                                    items-center
-                                    justify-center
-                                    px-9
-                                    py-3.5
-                                    mt-5
-                                    text-base
-                                    font-bold
-                                    text-gray-900
-                                    transition-all
-                                    duration-200
-                                    bg-white
-                                    border border-transparent
-                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white
-                                    font-pj
-                                    hover:bg-opacity-90
-                                    rounded-xl
-                                "
-                      href="#support"
-                    >
-                      Get quote now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="flex items-center" @click="yearly = true">
+            <input type="radio" id="yearly" name="pricing-plans"
+              class="w-4 h-4 text-blue-600 border border-gray-200 focus:ring-1 focus:outline-none focus:ring-blue-600"
+              :checked="yearly">
+            <label for="yearly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base">
+              Yearly Plan
+            </label>
+            <span class="ml-1 text-sm font-medium text-blue-600">
+              (Save 20%)
+            </span>
           </div>
         </div>
-      </section>
+      <Plans v-if="plans.length > 0" class="pb-12 sm:pb-16 lg:pb-20 xl:pb-24" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
 
-      <div class="flex max-w-md mx-auto items-center justify-center mt-3">
-        <a no-rel href="https://web.capgo.app/register/" class="text-center text-2xl text-white p-3 px-5 border bg-gray-900 rounded-xl hover:bg-transparent hover:border-gray-900 hover:text-gray-900 group transition ease-in-out">
-          Subscribe now <ArrowLongRightIcon class="h-5 w-5 inline-block text-white group-hover:text-gray-900" />
-        </a>
-      </div>
-
-      <p class="max-w-md mx-auto mt-8 text-base text-center text-gray-500 md:mt-16 font-pj mb-4">
+      <p class="max-w-md mx-auto  text-base text-center text-gray-500 md:mt-16 font-pj mb-8">
         We don’t bill you automatically until your confirmation.<br> We don’t store or sell your data to anyone.
       </p>
+      <Calculator class="pb-6 bg-gray-50 sm:pb-10 lg:pb-14 pt-3 sm:pt-6 lg:pt-10" v-if="plansAll && payg_base" :yearly="yearly" :pricing="plansAll" :payg-base="payg_base" :payg-units="payg_units" />
+
+      <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg"/>
+
     </div>
     <Faq/>
   </section>
