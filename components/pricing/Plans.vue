@@ -45,9 +45,11 @@ const descToEmoji = (desc: string) => {
 </script>
 
 <template>
-    <section >
+    <section id="plans" >
         <div class="grid grid-cols-1 mt-12 lg:grid-cols-4 lg:gap-8 sm:mt-16 lg:mt-20">
-          <div  v-for="plan in props.pricing" :key="plan.name" class="mt-6 relative bg-white border border-gray-200 divide-y divide-gray-200 rounded-2xl sm:rounded-3xl lg:mt-0">
+          <div  v-for="plan in props.pricing" :key="plan.name" 
+          :class="{'border-blue-600 divide-blue-200': plan.name === 'Maker', 'border-gray-200 divide-gray-200': plan.name !== 'Maker'}"
+          class="mt-6 relative shadow-xl bg-white border divide-y divide-gray-200 rounded-2xl sm:rounded-3xl lg:mt-0">
             <div class="absolute top-0 right-0 flex items-start -mt-8" v-if="plan.name === 'Maker'">
               <svg class="w-auto h-16 text-blue-600" viewBox="0 0 83 64" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
@@ -86,47 +88,38 @@ const descToEmoji = (desc: string) => {
 <!-- inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-xl  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 -->
               <div class="mt-6">
                 <a href="#" title=""
-                  :class="{'bg-blue-600 hover:bg-blue-700 focus:ring-blue-700': plan.name === 'Maker', 'bg-gray-400 hover:bg-gray-500 focus:ring-gray-500': plan.name !== 'Maker' }"
+                  :class="{'bg-gradient-to-r from-fuchsia-600 to-blue-600': plan.name === 'Maker', 'bg-blue-500': plan.name !== 'Maker' }"
                   
-                  class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-80 focus:opacity-80"
                   role="button">
                   Get 14 days free trial
                 </a>
               </div>
 
               <p class="mt-8 text-xs font-semibold tracking-widest text-gray-500 uppercase">
-                Best for free
+                You get
               </p>
 
               <ul class="mt-8 space-y-4 text-black">
                 <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd" />
-                  </svg>
-                  {{ numberWithSpaces(plan.mau) }} Monthly Active Users
+                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                  <span><span class="font-bold">{{ numberWithSpaces(plan.mau) }}</span> Monthly Active Users</span>
                 </li>
 
                 <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd" />
-                  </svg>
-                  {{ numberWithSpaces(plan.storage) }} GB of Storage
+                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                  <span><span class="font-bold">{{ numberWithSpaces(plan.bandwidth) }}</span> GB/mo of Bandwidth</span>
                 </li>
 
                 <li class="flex items-center">
-                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd" />
-                  </svg>
-                  {{ numberWithSpaces(plan.bandwidth) }} GB/mo of Bandwidth
+                  <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                  <span><span class="font-bold">{{ numberWithSpaces(plan.storage) }}</span> GB of Storage</span>
                 </li>
 
               </ul>

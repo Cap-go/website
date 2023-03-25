@@ -40,6 +40,24 @@ const storage = computed(() => {
 const bandwidth = computed(() => {
   return updates.value * updatesSize.value / 1000
 })
+
+const suggestionClick = () => {
+  if (suggestion.value === 'Pay as you go') {
+    // scroll to pay-as-you-go
+    window.scrollTo({
+      top: document.getElementById('pay-as-you-go')!.offsetTop,
+      behavior: 'smooth',
+    })
+  }
+  else {
+    // scroll to plans
+    window.scrollTo({
+      top: document.getElementById('plans')!.offsetTop,
+      behavior: 'smooth',
+    })
+  }
+
+}
 const suggestion =computed(() => {
   if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth)
     return 'Solo'
@@ -149,7 +167,7 @@ const roundNumber = (number: number) => {
               {{ totalPrice }}€
             </p>
             <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-white mt-0 font-pj">
-              We suggest you to choose the <a href="#plans" class="font-bold underline underline-current text-red-400 uppercase cursor-pointer">{{ suggestion }}</a> plan
+              We suggest you to choose the <button @click="suggestionClick" class="font-bold underline underline-current text-red-400 uppercase cursor-pointer">{{ suggestion }}</button> plan
             </p>
           </div>
         </div>
