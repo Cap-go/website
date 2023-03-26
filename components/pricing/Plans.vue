@@ -87,7 +87,7 @@ const descToEmoji = (desc: string) => {
               </div>
 <!-- inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-xl  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 -->
               <div class="mt-6">
-                <a href="#" title=""
+                <a href="https://web.capgo.app/register" target="_blank" title="register"
                   :class="{'bg-gradient-to-r from-fuchsia-600 to-blue-600': plan.name === 'Maker', 'bg-blue-500': plan.name !== 'Maker' }"
                   
                   class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-80 focus:opacity-80"
