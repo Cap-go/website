@@ -1,16 +1,15 @@
+[build.environment]
+  NODE_VERSION = "19"
+
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
   [plugins.inputs.thresholds]
     performance = 0.7
-   
-[build.environment]
-  NPM_FLAGS = "--version"
-  NODE_VERSION = "16"
 
 [build]
   publish = "dist"
-  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run generate"
+  command = "pnpm run generate"
 
 [[redirects]]
   from = '/.well-known/*'
