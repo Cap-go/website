@@ -41,7 +41,7 @@ defineProps({
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-lg font-bold text-gray-900 font-pj">Monthly active users</p>
-                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"> {{payg?.mau.toLocaleString()}} included, then ${{payg?.mau_unit}}/u</p>
+                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"><span class="font-bold">{{payg?.mau.toLocaleString()}}</span> users included, then ${{payg?.mau_unit}}/u</p>
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@ defineProps({
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-lg font-bold text-gray-900 font-pj">Bandwidth</p>
-                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{payg?.bandwidth.toLocaleString()}}GB, then ${{ payg?.bandwidth_unit }}/GB additional</p>
+                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"><span class="font-bold">{{payg?.bandwidth.toLocaleString()}}</span> GB included, then ${{ payg?.bandwidth_unit }}/GB additional</p>
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@ defineProps({
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-lg font-bold text-gray-900 font-pj">Cloud Storage</p>
-                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{payg?.storage.toLocaleString()}}GB, then ${{ payg?.storage_unit }}/GB additional</p>
+                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"><span class="font-bold">{{payg?.storage.toLocaleString()}}</span> GB included, then ${{ payg?.storage_unit }}/GB additional</p>
                                     </div>
                                 </div>
 
