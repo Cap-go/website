@@ -92,7 +92,7 @@ const descToEmoji = (desc: string) => {
                   
                   class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-80 focus:opacity-80"
                   role="button">
-                  Get 14 days free trial
+                  {{ plan.price_m === 0 ? 'Get started' : 'Get 14 days free trial' }}
                 </a>
               </div>
 
