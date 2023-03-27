@@ -11,6 +11,10 @@ defineProps({
   },
 })
 
+const toTb = (value: number) => {
+  return (value / 1000).toFixed(2).toLocaleString()
+}
+
 </script>
 
 <template>
@@ -58,7 +62,7 @@ defineProps({
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-lg font-bold text-gray-900 font-pj">Bandwidth</p>
-                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"><span class="font-bold">{{payg?.bandwidth.toLocaleString()}}</span> GB included, then ${{ payg?.bandwidth_unit }}/GB additional</p>
+                                        <p class="mt-1 text-sm font-normal text-gray-600 font-pj"><span class="font-bold">{{toTb(payg?.bandwidth)}}</span> TB included, then ${{ payg?.bandwidth_unit }}/GB additional</p>
                                     </div>
                                 </div>
 
