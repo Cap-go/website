@@ -7,7 +7,7 @@ specifiers:
   '@iconify-json/carbon': ^1.1.11
   '@iconify-json/twemoji': ^1.1.7
   '@nuxt/content': ^2.3.0
-  '@nuxt/schema': 3.3.1
+  '@nuxt/schema': 3.3.2
   '@nuxtjs/color-mode': ^3.2.0
   '@supabase/supabase-js': 2.10.0
   '@types/semver': ^7.3.13
@@ -26,7 +26,7 @@ dependencies:
   '@headlessui/vue': 1.7.9
   '@heroicons/vue': 2.0.15
   '@nuxt/content': 2.4.3
-  '@nuxt/schema': 3.3.1
+  '@nuxt/schema': 3.3.2
   '@nuxtjs/color-mode': 3.2.0
   '@supabase/supabase-js': 2.10.0
   '@types/semver': 7.3.13
@@ -854,8 +854,8 @@ packages:
       - supports-color
     dev: false
 
-  /@nuxt/schema/3.3.1:
-    resolution: {integrity: sha512-E8HWzU43rXzqwDTmWduTLHY4xIwRSAUt1LbpuE9IjZ4uJZq5Mbaj4nfhANNsTQGw2c+O+rL81yzAP3i61LEJDw==}
+  /@nuxt/schema/3.3.2:
+    resolution: {integrity: sha512-M2X/iwdX4hct31A7LA2+e41F91VZUXmwS5sZ03G49RnZdEXHMOKBO67e1d+5uxYmRD6eM/EyxWdPVgyLf6wocw==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       c12: 1.2.0
@@ -869,7 +869,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.2
       ufo: 1.1.1
-      unimport: 3.0.3
+      unimport: 3.0.4
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -7074,8 +7074,8 @@ packages:
       - rollup
     dev: false
 
-  /unimport/3.0.3:
-    resolution: {integrity: sha512-RzQqQiqepF5P13SwBGCe4pLlRnAQlbFuDAaQlSkXiNJDpN2iymtGMSfa75AcVSejgV05Q2aQYt6UhCiy5GuZ2A==}
+  /unimport/3.0.4:
+    resolution: {integrity: sha512-eoof/HLiNJcIkVpnqc7sJbzKSLx39J6xTaP7E4ElgVQKeq2t9fPTkvJKcA55IJTaRPkEkDq8kcc/IZPmrypnFg==}
     dependencies:
       '@rollup/pluginutils': 5.0.2
       escape-string-regexp: 5.0.0
