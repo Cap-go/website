@@ -454,33 +454,6 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
     <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-50"></div>
 </section>
 
-    <section class="py-10 bg-white sm:py-16 lg:py-24">
-      <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-xl font-medium text-gray-900">
-            Trusted by world class companies
-          </h2>
-        </div>
-
-        <div class="grid items-center grid-cols-2 gap-10 mt-12 md:grid-cols-4 sm:gap-y-16">
-          <div>
-            <img class="object-contain w-auto mx-auto h-14" src="/fiksuruoka_logo.webp" alt="fiksuruoka app">
-          </div>
-
-          <div>
-            <img class="object-contain w-auto mx-auto h-14" src="/pizza_hut_logo.webp" alt="Pizza hut AU app">
-          </div>
-
-          <div>
-            <img class="object-contain w-auto h-10 mx-auto" src="/remnote_logo.svg" alt="Remnote app">
-          </div>
-
-          <div>
-            <img class="object-contain w-auto mx-auto h-14" src="/revel_logo.webp" alt="Hello revel app">
-          </div>
-        </div>
-      </div>
-    </section>
     <div class="relative mt-24 sm:mt-32 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-800 rounded-r-3xl" />
