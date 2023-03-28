@@ -49,7 +49,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div class="relative inline-flex mt-10 group">
             <div class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt" />
-            <a no-rel href="https://web.capgo.app/register/" title="Get quote now" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+            <a no-rel href="/register/" title="Get quote now" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
               Get it now
             </a>
           </div>
@@ -391,6 +391,69 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
         >
       </div>
     </section>
+    <section class="relative py-12 overflow-hidden bg-gray-50 sm:py-16 lg:py-20 xl:py-32">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid items-center grid-cols-1 xl:grid-cols-2">
+            <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
+                <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">You’re in good company.</h2>
+                <p class="mt-6 text-lg font-normal text-gray-600 font-pj">Capgo enables development teams at some of the most innovative companies.</p>
+            </div>
+
+            <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
+                <div class="absolute inset-16">
+                    <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"></div>
+                </div>
+
+                <div class="relative space-y-5">
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/irec_logo.webp" alt="irec" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/vella_logo.svg" alt="vella" />
+                        </div>
+
+                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                            <img class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-50"></div>
+</section>
+
     <section class="py-10 bg-white sm:py-16 lg:py-24">
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="text-center">
@@ -447,7 +510,7 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
                 Like you push a commit
               </p>
             </div>
-            <a no-rel href="https://web.capgo.app/register/" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
+            <a no-rel href="/register/" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
               Get started &RightArrow;
             </a>
           </div>

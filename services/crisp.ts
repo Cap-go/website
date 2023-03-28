@@ -1,4 +1,18 @@
-declare const window: any
+declare global {
+  interface Window {
+    Rewardful: any
+    $crisp: unknown[]
+    CRISP_RUNTIME_CONFIG: {
+      lock_maximized: boolean
+      lock_full_view: boolean
+      cross_origin_cookies: boolean
+    }
+    CRISP_READY_TRIGGER: () => void
+    pushToCrisp: (data: string) => void
+    CRISP_WEBSITE_ID: string
+    CRISP_TOKEN_ID: string
+  }
+}
 
 export const crispLoader = () => {
   if (!window.$crisp) {

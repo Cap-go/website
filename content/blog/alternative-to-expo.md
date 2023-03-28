@@ -22,13 +22,13 @@ Overall, Expo Live Update and Capgo's live update feature are similar in that th
 
 
 
-If you're a mobile app developer searching for an alternative to Expo, you may want to consider Capgo. [Capgo](https://web.capgo.app/register/) is a cloud-based mobile app development platform that offers many of the same tools and services as Expo, including live updates, but with one key difference: [Capgo](https://web.capgo.app/register/) can be used with any JavaScript framework, while Expo is limited to apps built using React Native.
+If you're a mobile app developer searching for an alternative to Expo, you may want to consider Capgo. [Capgo](/register/) is a cloud-based mobile app development platform that offers many of the same tools and services as Expo, including live updates, but with one key difference: [Capgo](/register/) can be used with any JavaScript framework, while Expo is limited to apps built using React Native.
 
-This means that with Capgo, developers have the freedom to decide the framework that best meets their needs and preferences. Whether you're a fan of AngularJS, Vue.js, or any other JavaScript framework, you can use [Capgo](https://web.capgo.app/register/) to build, test, and deploy your app with ease.
+This means that with Capgo, developers have the freedom to decide the framework that best meets their needs and preferences. Whether you're a fan of AngularJS, Vue.js, or any other JavaScript framework, you can use [Capgo](/register/) to build, test, and deploy your app with ease.
 
-In addition to its flexibility, [Capgo](https://web.capgo.app/register/) also provides a range of other useful tools and services for mobile app development. For example, it offers integration with CI/CD, plugin for native features and tutorial for native CI/CD, and analytics, allowing developers to track their app's performance and ensure that it is running smoothly for their users.
+In addition to its flexibility, [Capgo](/register/) also provides a range of other useful tools and services for mobile app development. For example, it offers integration with CI/CD, plugin for native features and tutorial for native CI/CD, and analytics, allowing developers to track their app's performance and ensure that it is running smoothly for their users.
 
-Overall, [Capgo](https://web.capgo.app/register/) is a powerful and flexible alternative to Expo that offers many of the same features and benefits, with the added advantage of supporting multiple JavaScript frameworks. If you're looking for a platform that can help you streamline your app development process and deliver a great user experience, [Capgo](https://web.capgo.app/register/) is definitely worth considering.
+Overall, [Capgo](/register/) is a powerful and flexible alternative to Expo that offers many of the same features and benefits, with the added advantage of supporting multiple JavaScript frameworks. If you're looking for a platform that can help you streamline your app development process and deliver a great user experience, [Capgo](/register/) is definitely worth considering.
 
 
 ## Features comparisons
@@ -51,10 +51,10 @@ Overall, [Capgo](https://web.capgo.app/register/) is a powerful and flexible alt
 
 ## Conclusion
 
-Expo is a great tool for React Native developers, but it's not the only option out there. If you're seeking an alternative to Expo, [Capgo](https://web.capgo.app/register/) is undoubtedly worth considering. [Capgo](https://web.capgo.app/register/) is a cloud-based mobile app development platform that offers many of the same tools and services as [Expo](https://expo.dev/), including live updates, but with one key difference: [Capgo](https://web.capgo.app/register/) can be used with any JavaScript framework, while Expo is limited to apps built using React Native.
+Expo is a great tool for React Native developers, but it's not the only option out there. If you're seeking an alternative to Expo, [Capgo](/register/) is undoubtedly worth considering. [Capgo](/register/) is a cloud-based mobile app development platform that offers many of the same tools and services as [Expo](https://expo.dev/), including live updates, but with one key difference: [Capgo](/register/) can be used with any JavaScript framework, while Expo is limited to apps built using React Native.
 
-Register here to get started with [Capgo](https://web.capgo.app/register/) today.
+Register here to get started with [Capgo](/register/) today.
 
 Join use here 👇
 
-[Capgo](https://web.capgo.app/register/)
+[Capgo](/register/)

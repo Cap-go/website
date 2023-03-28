@@ -49,7 +49,7 @@ But you can set up your CI/CD to handle this part, I made a tutorial on how to d
 
 ### Capgo Configuration
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
+It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
 
 Once you’re logged into Capgo, You will have an onboarding page 
 

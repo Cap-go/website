@@ -193,7 +193,7 @@ const toTb = (value: number) => {
                 </div>
 
                 <a
-                    href="https://web.capgo.app/register" target="_blank"
+                    href="/register" target="_blank"
                     title="Register"
                     class="relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-200 bg-gray-900 border border-transparent mt-9 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-opacity-90 rounded-xl"
                     role="button"

@@ -16,7 +16,7 @@ next_blog: "automatic-build-and-release-with-github-actions"
 ---
 ## Migration Summary
 
-* [Capgo](https://web.capgo.app/register/) is a service that helps development teams send live app to deployed apps.
+* [Capgo](/register/) is a service that helps development teams send live app to deployed apps.
 * Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.**.
 * [Ionic](https://ionic.io/appflow/native-builds) offers equivalent services for App Center Build (build Android/iOS apps). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
 
@@ -36,7 +36,7 @@ Capgo fills in the gaps between web delivery and mobile.
 
 ## Capgo Prerequisites
 
-Like App Center, [Capgo](https://web.capgo.app/register/) supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
+Like App Center, [Capgo](/register/) supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
 
 ### Install Capgo CLI
 
@@ -50,7 +50,7 @@ If you do not have Node or NPM installed on your computer, you will need to do t
 
 Before you begin, I recommend making changes on a fresh Git branch.
 
-Since [Capgo](https://web.capgo.app/register/) was created to automate capacitor apps, it requires one file that your app may not have. First, create a `capacitor.config.json` file. The easiest way to create it is to run in the root of your app:
+Since [Capgo](/register/) was created to automate capacitor apps, it requires one file that your app may not have. First, create a `capacitor.config.json` file. The easiest way to create it is to run in the root of your app:
 
 ```shell
 npm install @capacitor/core
@@ -70,7 +70,7 @@ Finally, commit the new files to your project:
 
 ### Migrate the Code
 
-Now that you have the new required [Capgo](https://web.capgo.app/register/) files in place, you can turn our attention to the actual app itself. [Capgo](https://web.capgo.app/register/) expects the entire built app to be inside a directory named `dist`.
+Now that you have the new required [Capgo](/register/) files in place, you can turn our attention to the actual app itself. [Capgo](/register/) expects the entire built app to be inside a directory named `dist`.
 
 If your built code is not in a `dist` directory, change this value in the Capacitor config file.
 
@@ -80,7 +80,7 @@ Here is what the app’s directory structure should look like:
 
 ## Capgo Configuration
 
-With your app ready for [Capgo](https://web.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
+With your app ready for [Capgo](https://web.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
 
 Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the 'write' key to copy it to your clipboard.
 
