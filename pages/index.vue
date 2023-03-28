@@ -345,47 +345,48 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
     <section class="mx-10 lg:px-32 lg:mx-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-6xl font-extrabold my-10">
-            Release more often
+          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
+            Release
           </h2>
           <p class="text-lg lg:w-2/3">
-            Using {{ brand }} you are 81% more likely to release multiple times per week, compared to people that aren’t using {{ brand }}.
+            By choosing {{ brand }}, you'll boost your chances of launching multiple releases per week by 81%, compared to those who don't utilize {{ brand }}.
           </p>
         </div>
         <img
           class="mx-auto h-62 rounded-lg"
-          src="/undraw_dev_productivity_umsq.svg"
+          src="/develop_illu.svg"
           alt="productivity illustration"
         >
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <img
           class="mx-auto h-62 rounded-lg my-10"
-          src="/undraw_develop_app_re_bi4i.svg"
+          src="/build_illustration.svg"
           alt="build illustration"
         >
         <div>
-          <h2 class="text-4xl md:text-6xl font-extrabold my-10">
-            Integration with your pipeline
+          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
+            Integration
           </h2>
           <p class="text-lg lg:w-2/3">
-            Use the intuitive CLI to quickly integrate {{ brand }} features with your existing CI/CD platform.<br><br>
-            It work with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and more.
+            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br/><br/>
+
+It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and many more.
           </p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-6xl font-extrabold my-10">
+          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
             Update
           </h2>
           <p class="text-lg lg:w-2/3">
-            Shipped a bug? No worries: with one command, you can deploy a fix that your users will see instantly, without having to re-download your app.
+            Got a bug? No problem: just one command lets users see the fix right away, no app re-download needed!
           </p>
         </div>
         <img
           class="mx-auto h-62 rounded-lg"
-          src="/undraw_pull_request_gld8.svg"
+          src="/update_illustration.svg"
           alt="send update illustration"
         >
       </div>
