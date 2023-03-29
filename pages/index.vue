@@ -40,7 +40,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">
             Made by Developers, for Developers
           </p>
-          <h1 class="mt-5 text-4xl font-bold leading-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight font-pj">
+          <h1 class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">
             Live updates for Capacitor
           </h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
@@ -96,7 +96,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
     <section class="py-10 bg-white sm:py-16 lg:py-24">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">How does it work?</h2>
+            <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">How does it work?</h2>
             <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Send your first update in less than 5 mins !</p>
         </div>
 
@@ -152,7 +152,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
             Numbers tell the story
           </h2>
           <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
@@ -166,7 +166,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600"> {{ stats.stars }}+ </span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.stars }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">
               Stars in GitHub
@@ -178,7 +178,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600">{{ stats.updates }}+</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.updates }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">
               Updates delivered
@@ -190,7 +190,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-pumpkinOrange-600 to-azure-600"> {{ stats.apps }}+ </span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.apps }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">
               Apps
@@ -210,7 +210,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           </div>
           <div class="md:pr-12">
 
-          <h3 class="text-3xl font-bold text-gray-900 sm:text-6xl xl:text-7xl font-pj">
+          <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj">
               Manage update
             </h3>
           <div class="">
@@ -259,11 +259,11 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           <h2 class="text-base font-semibold text-pumpkinOrange-600 tracking-wide uppercase">
             CI/CD
           </h2>
-          <p class="mt-1 text-4xl font-extrabold text-gray-100 sm:text-5xl sm:tracking-tight lg:text-6xl">
-            Save time with fully automatic deploy
+          <p class="mt-1 text-4xl font-bold text-gray-100 sm:text-5xl sm:tracking-tight lg:text-7xl">
+            Fully automatic deploy
           </p>
           <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-            Fully automate your delivery pipeline to never worry about deploying your app again.
+            Save time with automatic delivery pipeline, never worry about deploying your app again.
           </p>
         </div>
       </div>
@@ -272,7 +272,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
     <section class="mx-10 lg:px-32 lg:mx-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
             Release
           </h2>
           <p class="text-lg lg:w-2/3">
@@ -292,7 +292,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           alt="build illustration"
         >
         <div>
-          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
             Integration
           </h2>
           <p class="text-lg lg:w-2/3">
@@ -304,7 +304,7 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-8xl font-extrabold my-10">
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
             Update
           </h2>
           <p class="text-lg lg:w-2/3">
@@ -322,7 +322,7 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
             <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
-                <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">You’re in good company.</h2>
+                <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">You’re in good company.</h2>
                 <p class="mt-6 text-lg font-normal text-gray-600 font-pj">Capgo enables development teams at some of the most innovative companies.</p>
             </div>
 
@@ -403,9 +403,9 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
           </div>
           <div class="relative flex flex-col">
             <div class="sm:text-center">
-              <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+              <h5 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
                 Push hot code updates
-              </h2>
+              </h5>
               <p class="mt-6 mx-auto max-w-2xl text-lg text-gray-100">
                 Like you push a commit
               </p>
