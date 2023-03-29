@@ -159,7 +159,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             Shared transparently with you since january 2022.
           </p>
           <p class="text-base mt-5 text-gray-400 text-center">
-            ( updated every day )
+            Updated every day
           </p>
         </div>
 
