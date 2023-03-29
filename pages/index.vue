@@ -152,11 +152,11 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
             Numbers tell the story
           </h2>
-          <p class="mt-3 text-xl leading-relaxed text-gray-300 md:mt-8">
-            Shared transparently with you since day 1.
+          <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
+            Shared transparently with you since january 2022.
           </p>
           <p class="text-base mt-5 text-gray-400 text-center">
             ( updated every day )
@@ -184,7 +184,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Updates delivered
             </p>
             <p class="text-base mt-0.5 text-gray-400">
-              Since january 2022
+              To users all around the globe
             </p>
           </div>
 
@@ -268,138 +268,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </div>
-    <section class="py-12 bg-white sm:py-16 lg:py-20">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-            Customers say about {{ brand }}
-          </h2>
-          <p class="mt-4 text-lg font-medium text-gray-600 font-pj sm:mt-8">
-            Many people have said how good {{ brand }} is
-          </p>
-        </div>
-
-        <div class="grid max-w-lg grid-cols-1 gap-10 mx-auto mt-8 md:max-w-4xl md:mt-16 md:grid-cols-2 md:gap-x-16">
-          <div class="space-y-10">
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “The community needs this and you are doing something really important!”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/lincoln.webp" alt="Lincoln Baxter photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Lincoln Baxter
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    CEO at TopDecked
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “The nice thing about Capgo is there are multiple ways to get the job done - web, cli and api… ✨”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-1.webp" alt="Bessie Cooper photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Bessie Cooper
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    Senior software developer at Revel
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “Must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden.”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-2.webp" alt="Aakash Chandran photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Aakash Chandran
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    Founder of SAAS
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="space-y-10">
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “So Capgo’s over the air update feature just saved us on launch day. We had a crash happening on a critical path but narrowed it down and deployed a fix using OTA in about an hour.”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-male-2.webp" alt="Jamon Holmgren photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Jamon Holmgren
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    CTO at Infinite Red
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “As a career-long ionic developer, getting over the air update working in Ionic via Capacitor feels like black magic. Loving it.”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-female-3.webp" alt="Wes Johnson photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Wes Johnson
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    Web Development Manager at RSR Group
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <blockquote class="py-6 bg-gray-100 rounded-2xl px-7">
-                <p class="text-lg font-normal leading-relaxed text-gray-900 font-pj">
-                  “It is so easy to build your own mobile app nowadays. With technologies like Capacitor and Capgo, literally anyone with an idea can rapidly build their dream app. What a time to be alive!”
-                </p>
-              </blockquote>
-              <div class="flex items-center mt-5">
-                <img class="flex-shrink-0 object-cover rounded-full w-11 h-11" src="/avatar-male-3.webp" alt="Trevor Hartman photo">
-                <div class="ml-2">
-                  <p class="text-base font-bold text-gray-900 font-pj">
-                    Trevor Hartman
-                  </p>
-                  <p class="mt-0.5 font-pj text-sm text-gray-600">
-                    Senior Staff cartainc
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Testimonials/>
     <section class="mx-10 lg:px-32 lg:mx-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
         <div class="order-last md:order-none">
