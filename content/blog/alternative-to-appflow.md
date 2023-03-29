@@ -21,7 +21,7 @@ One of the standout features of Ionic Appflow is its support for live updates. T
 
 If you already have your own continuous integration solution in place but your are interested in using Ionic Appflow's live update feature, you may find the cost of using Ionic Appflow to be prohibitive. In this case, you may want to consider using a different platform that offers live updates at a more affordable price.
 
-One option is Capgo, an open-source, Capacitor plugin made by Digital shift company. [Capgo](/register/) provides live updates as Ionic Appflow, and can be integrated with a variety of continuous integration tools. This allows you to continue using your existing continuous integration setup while still taking advantage of the convenience and flexibility of live updates.
+One option is Capgo, an open-source, Capacitor plugin made by Digital shift OU company. [Capgo](/register/) provides live updates as Ionic Appflow, and can be integrated with a variety of continuous integration tools. This allows you to continue using your existing continuous integration setup while still taking advantage of the convenience and flexibility of live updates.
 
 Of course, it is important for you to carefully evaluate the features and costs of any platform you are considering using, and to choose the solution that best meets your needs and budget. 
 
@@ -42,7 +42,7 @@ That why we made you a clear and simple table to help you compare.
 | Native build | ❌ | ✅ |
 | 100% Open source | ✅ | ❌ |
 | End-to-End encryption | ✅ | ❌ only for Portal |
-| Portal | ❌ Could be done | ✅ |
+| Portal | ❌ coming soon | ✅ |
 | CI/CD | ❌ Tutorial to do it in popular  | ✅ |
 
 ## Continuous integration alternatives
@@ -59,9 +59,17 @@ If you are ready to set up your CI/CD with Capgo, you can follow this [tutorial 
 
 ## Let's go further
 
-If you are a big team who need a dedicated support person, I recommend you to use [AppFlow](https://ionic.io/appflow), not me. 
+To be honest, I have recommended Appflow for a long time, for big teams who need a dedicated support person.
+But now, I think it's time to change.
 
-Capgo is self-service.
+Capgo is mature enough to be used by all team sizes, and it's a lot more affordable.
+
+If you are a big team who requires a dedicated support person, contact me, and we can find a solution together.
+
+
+Even if Capgo is supposed self-service, I'm really present for the users.
+
+I can help you to configure your build for native code as well, you don't need to pay for Appflow to do it.
 
 If you like open-source self-service community-driven tool,
 

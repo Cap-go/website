@@ -18,7 +18,7 @@ next_blog: "automatic-build-and-release-with-github-actions"
 
 * [Capgo](/register/) is a service that helps development teams send live app to deployed apps.
 * Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.**.
-* [Ionic](https://ionic.io/appflow/native-builds) offers equivalent services for App Center Build (build Android/iOS apps). For Test, Diagnostics, and Analytics services, please see Ionic's recommendations below.
+* [Colt](https://volt.build/) offers equivalent services for App Center Build (build Android/iOS apps). For Test, Diagnostics, and Analytics services.
 
 ##### Note
 

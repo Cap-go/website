@@ -294,7 +294,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             >
           </h5>
           <p class="mt-0 mb-2">
-            Our team helps you with configuring and managing automated builds, tests, and app deployments to app stores through fastlane and Ionic Appflow technologies in your CI/CD environment.<br class="" />
+            Our team helps you with configuring and managing automated builds, tests, and app deployments to app stores through fastlane and VoltBuilder in your CI/CD environment.<br class="" />
           </p>
         </div>
       </div>
