@@ -1,9 +1,9 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import { pwa } from './config/pwa'
 import keys from './configs.json'
-import { appName, appDescription } from './constants/index'
+import { appDescription, appName } from './constants/index'
 
-const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
+function getRightKey(branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string {
   if (branch === 'development')
     return keys[keyname].development
   else if (branch === 'local')
@@ -11,7 +11,7 @@ const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'sup
   return keys[keyname].prod
 }
 
-const getUrl = (branch = ''): string => {
+function getUrl(branch = ''): string {
   if (branch === 'local')
     return `http://${getRightKey(branch, 'base_domain')}`
   else if (branch === 'development')
@@ -20,7 +20,7 @@ const getUrl = (branch = ''): string => {
     return `https://${getRightKey('prod', 'base_domain')}`
 }
 
-const getApiUrl = (branch = ''): string => {
+function getApiUrl(branch = ''): string {
   if (branch === 'local')
     return `http://api.${getRightKey(branch, 'base_domain')}`
   else if (branch === 'development')
@@ -29,7 +29,7 @@ const getApiUrl = (branch = ''): string => {
     return `https:///api.${getRightKey('prod', 'base_domain')}`
 }
 
-const baseDomain = (branch = '') => {
+function baseDomain(branch = '') {
   if (branch)
     return getRightKey(branch, 'base_domain')
   else
@@ -138,10 +138,10 @@ export default defineNuxtConfig({
     supa_url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
   },
   modules: [
-    '@vueuse/nuxt', 
+    '@vueuse/nuxt',
     '@nuxtjs/color-mode',
-    '@nuxt/content', 
-    '@unocss/nuxt', 
+    '@nuxt/content',
+    '@unocss/nuxt',
     ['nuxt-jsonld', { disableOptionsAPI: true }],
     '@vite-pwa/nuxt',
     '@nuxt/devtools',
@@ -161,7 +161,7 @@ export default defineNuxtConfig({
       },
       title: appName,
       noscript: [
-        { children: 'JavaScript is required' }
+        { children: 'JavaScript is required' },
       ],
       script: [
         {
@@ -169,9 +169,9 @@ export default defineNuxtConfig({
           'data-rewardful': 'f5a722',
           'async': true,
         },
-        {      
+        {
           hid: 'rewardful-code',
-          children: "(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');",
+          children: '(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,\'rewardful\');',
         },
         {
           'src': 'https://pls.digitalshift-ee.workers.dev/js/script.js',
@@ -194,16 +194,6 @@ export default defineNuxtConfig({
           hid: 'keywords',
           property: 'keywords',
           content: 'Capacitor, updater, OTA, autoupdate, capgo',
-        },
-        {
-          hid: 'title',
-          name: 'title',
-          content: appName,
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content: appDescription,
         },
         {
           hid: 'og:title',
