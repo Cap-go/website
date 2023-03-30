@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import { pwa } from './config/pwa'
 import keys from './configs.json'
+import { appName, appDescription } from './constants/index'
 
 const getRightKey = (branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string => {
   if (branch === 'development')
@@ -34,8 +36,6 @@ const baseDomain = (branch = '') => {
     return getRightKey('prod', 'base_domain')
 }
 
-const name = 'Capgo - Capacitor Live update'
-const description = 'Send and manage Realtime update for your capacitor app without store hassle, 5 min to install Over-the-Air (OTA) updates in your app. Use channels to send updates to specific users or groups of users.'
 // <script type="application/ld+json" class="yoast-schema-graph">
 const structuredData = {
   '@context': 'https://schema.org',
@@ -44,13 +44,13 @@ const structuredData = {
       '@type': 'WebPage',
       '@id': `${getUrl(process.env.BRANCH)}/#website`,
       'url': getUrl(process.env.BRANCH),
-      'name': name,
+      'name': appName,
       'isPartOf': {
         '@id': `${getUrl(process.env.BRANCH)}/#website`,
       },
       'datePublished': '2022-01-30T22:51:56+00:00',
       'dateModified': new Date().toISOString(),
-      'description': description,
+      'description': appDescription,
       'breadcrumb': {
         '@id': `${getUrl(process.env.BRANCH)}/#breadcrumb`,
       },
@@ -116,9 +116,14 @@ const structuredData = {
 export default defineNuxtConfig({
   ssr: true,
   nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
     preset: 'netlify-edge',
     prerender: {
-      routes: ['/sitemap.xml', '/robots.txt'],
+      routes: ['/', '/sitemap.xml', '/robots.txt'],
     },
   },
   runtimeConfig: {
@@ -133,21 +138,29 @@ export default defineNuxtConfig({
     supa_anon: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
     supa_url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
   },
-  modules: ['@vueuse/nuxt', '@nuxt/content', '@unocss/nuxt', ['nuxt-jsonld', { disableOptionsAPI: true }]],
-  experimental: {
-    reactivityTransform: true,
-    viteNode: false,
+  modules: [
+    '@vueuse/nuxt', 
+    '@nuxtjs/color-mode',
+    '@nuxt/content', 
+    '@unocss/nuxt', 
+    ['nuxt-jsonld', { disableOptionsAPI: true }],
+    '@vite-pwa/nuxt',
+    '@nuxt/devtools',
+  ],
+  colorMode: {
+    classSuffix: '',
   },
-  telemetry: false,
-  unocss: {
-    preflight: true,
+  experimental: {
+    payloadExtraction: false,
+    inlineSSRStyles: false,
   },
   app: {
     head: {
+      viewport: 'width=device-width,initial-scale=1',
       htmlAttrs: {
         lang: 'en',
       },
-      title: name,
+      title: appName,
       noscript: [
         { children: 'JavaScript is required' }
       ],
@@ -186,17 +199,17 @@ export default defineNuxtConfig({
         {
           hid: 'title',
           name: 'title',
-          content: name,
+          content: appName,
         },
         {
           hid: 'description',
           name: 'description',
-          content: description,
+          content: appDescription,
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: name,
+          content: appName,
         },
         { hid: 'theme-color', name: 'theme-color', content: '#456b9a' },
         { hid: 'og:type', property: 'og:type', content: 'website' },
@@ -219,7 +232,7 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:app:id:iphone',
           property: 'twitter:app:id:iphone',
-          content: name,
+          content: appName,
         },
         {
           hid: 'twitter:app:id:googleplay',
@@ -229,7 +242,7 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:app:name:iphone',
           property: 'twitter:app:name:iphone',
-          content: name,
+          content: appName,
         },
         {
           hid: 'twitter:app:name:googleplay',
@@ -244,7 +257,7 @@ export default defineNuxtConfig({
         {
           hid: 'og:description',
           property: 'og:description',
-          content: description,
+          content: appDescription,
         },
       ],
       link: [
@@ -258,11 +271,14 @@ export default defineNuxtConfig({
       preload: ['js', 'ts', 'json', 'shell', 'toml'],
     },
   },
-  css: ['~/assets/css/main.css'],
   build: {
-    transpile: ['@headlessui/vue', '@heroicons/vue'],
+    transpile: ['@headlessui/vue'],
   },
-
+  css: [
+    '~/assets/css/global.css',
+    '@unocss/reset/tailwind.css',
+  ],
+  pwa,
 })
 
 // export default defineNuxtConfig({
