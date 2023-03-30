@@ -30,7 +30,7 @@ const navigation = {
     { name: 'Pricing', href: '/pricing/' },
     { name: 'Guides', href: '/blog/' },
     { name: 'Status', href: 'https://status.capgo.app/', target: '_blank' },
-    { name: 'Chat', href: '#support' },
+    { name: 'Chat', href: '#support', rel: 'nofollow' },
   ],
   company: [
     // { name: 'About', href: '#' },
@@ -44,8 +44,8 @@ const navigation = {
   ],
   legal: [
     // { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '/privacy/' },
-    { name: 'Terms', href: '/tos/' },
+    { name: 'Privacy', href: '/privacy/', rel: 'nofollow' },
+    { name: 'Terms', href: '/tos/', rel: 'nofollow' },
     { name: 'Privacy Board', href: 'https://www.privacyboard.co/company/capgo/', target: '_blank' },
   ],
   hero: [
@@ -154,7 +154,7 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="item.name">
-                  <a :href="item.href" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <a :href="item.href" :rel="item.rel" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
                   </a>
                 </li>
@@ -180,7 +180,7 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
-                  <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <a :href="item.href" :rel="item.rel" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
                   </a>
                 </li>
