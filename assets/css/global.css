@@ -42,16 +42,19 @@ html.dark {
   font-family: 'AirbnbCerealLight';
   font-weight: 500;
   src: url(~/assets/fonts/AirbnbCerealLight.woff) format('woff');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'AirbnbCerealMedium';
   font-weight: 500;
   src: url(~/assets/fonts/AirbnbCerealMedium.woff) format('woff');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'AirbnbCerealBold';
   font-weight: 500;
   src: url(~/assets/fonts/AirbnbCerealBold.woff) format('woff');
+  font-display: swap;
 }
