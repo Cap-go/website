@@ -289,7 +289,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           <p class="mt-1 text-4xl font-bold text-gray-100 sm:text-5xl sm:tracking-tight lg:text-7xl">
             Fully automatic deploy
           </p>
-          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-300">
             Save time with automatic delivery pipeline, never worry about deploying your app again.
           </p>
         </div>

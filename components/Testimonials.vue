@@ -83,7 +83,7 @@ const tweets = ref([
         style="row-gap: 40px; max-width: 1248px;"
       >
         <h2
-          class="py-0 px-8 m-0 text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj tracking-tight text-center text-gray-200 align-baseline border-0 border-solid"
+          class="py-0 px-8 m-0 text-3xl font-boldSave time with auto sm:text-4xl xl:text-5xl font-pj tracking-tight text-center text-gray-200 align-baseline border-0 border-solid"
         >
           They say about Capgo
         </h2>
