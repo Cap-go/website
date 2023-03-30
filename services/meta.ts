@@ -2,7 +2,7 @@ interface Meta {
 
 }
 
-export const createMetaImage = (image: string | null = null, title: string | null = null): Meta[] => {
+export function createMetaImage(image: string | null = null, title: string | null = null): Meta[] {
   if (image) {
     const image_unsecure = image.replace('https://', 'http://')
     const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
@@ -47,13 +47,15 @@ export const createMetaImage = (image: string | null = null, title: string | nul
   return []
 }
 
-export const createMeta = (
-  title: string,
+export function createMeta(title: string,
   description: string,
   image: string | null = null,
   author: string | null = null,
-  audio: string | null = null,
-): Meta[] => {
+  audio: string | null = null): Meta[] {
+  const descSize = 170
+  if (description.length > descSize)
+    description = `${description.substring(0, descSize - 3)}...`
+
   const base: Meta[] = [
     {
       hid: 'title',
