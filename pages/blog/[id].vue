@@ -9,7 +9,7 @@ const route = useRoute()
 
 const { data } = await useAsyncData(`blog-${route.params.id}`, () => queryContent<MyCustomParsedContent>('blog', route.params.id as string).findOne())
 const { data: randomData } = await useAsyncData(`random-blog-${route.params.id}`, async () => {
-  return data.value?.next_blog && data.value?.next_blog !== ''
+  return (data.value?.next_blog && data.value?.next_blog !== '')
     ? await queryContent<MyCustomParsedContent>('blog', data.value.next_blog)
       .findOne()
     : await randomArticle(data.value?.slug)
@@ -62,7 +62,6 @@ if (data.value) {
     ),
   }))
 }
-
 </script>
 
 <template>
@@ -72,7 +71,11 @@ if (data.value) {
         <img
           class="object-cover w-full h-full lg:rounded-lg"
           :src="data?.head_image"
+          loading="eager"
+          height="486"
+          width="864"
           :alt="`blog illustration ${data?.title}`"
+          :title="`blog illustration ${data?.title}`"
         >
       </div>
 
@@ -108,12 +111,16 @@ if (data.value) {
       :href="`/blog/${randomData.slug}/`"
       class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
     >
-      <div class="relative mx-4 flex">
+      <div class="relative mx-4 flex min-w-1/3">
         <div :title="randomData.title" class="block w-full">
           <img
-            class="object-cover w-full sm:w-52 h-full rounded-lg"
+            class="object-cover w-full h-full rounded-lg"
             :src="randomData.head_image"
+            loading="lazy"
+            height="232"
+            width="378"
             :alt="`blog illustration ${randomData.title}`"
+            :title="`blog illustration ${randomData.title}`"
           >
         </div>
 
