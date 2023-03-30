@@ -135,7 +135,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=reactNative`).then((res) => {
         <a
           v-for="l in others"
           :key="l"
-          :href="`/${l}`/"
+          :href="`/${l}/`"
           class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
           <div class="relative mx-auto flex">
