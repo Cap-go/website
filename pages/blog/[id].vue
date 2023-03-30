@@ -14,6 +14,12 @@ const { data: articles } = await useAsyncData('allArticles', () =>
     .sort({ created_at: -1 })
     .limit(3)
     .find())
+if (data.value?.next_blog) {
+  const nextArticle = await queryContent<MyCustomParsedContent>('article', data.value.next_blog)
+    .findOne()
+  if (nextArticle.value && articles.value && articles.value[0])
+    articles.value[0] = nextArticle.value
+}
 
 if (data.value) {
   const datePublished = new Date(data.value?.created_at).toISOString()
@@ -114,7 +120,7 @@ if (data.value) {
             Latest from news
           </h2>
           <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:text-lg lg:mt-6 lg:leading-8">
-            Capgo gives you the best insights you need to create a truly professional Mobile app.
+            capgo gives you the best insights you need to create a truly professional mobile app.
           </p>
         </div>
 

@@ -16,13 +16,13 @@ export interface MyCustomParsedContent extends ParsedContent {
   next_blog: string
 }
 
-export const formatTime = (s: string) => {
+export function formatTime(s: string) {
   // use dayjs to parse dd-mm-yyyy
   const d = dayjs(s, 'YYYY-MM-DD')
   return d.format('MMMM DD, YYYY')
 }
 
-export const randomArticle = async (slug: string) => {
+export async function randomArticle(slug: string) {
   const content = await useAsyncData('randomArticle', () =>
     queryContent<MyCustomParsedContent>('blog').where({ published: true }).find(),
   )

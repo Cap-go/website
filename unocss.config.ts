@@ -10,7 +10,7 @@ import {
 } from 'unocss'
 
 const uno = presetUno()
-const getColor = (name: string, weight: string): string => {
+function getColor(name: string, weight: string): string {
   return (uno?.theme?.colors as Record<string, Record<string, string>>)?.[name]?.[weight] || '#fff'
 }
 
@@ -47,7 +47,6 @@ export default defineConfig({
   ],
   theme: {
     backgroundImage: {
-      none: 'none',
       'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
       'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
       'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
