@@ -19,7 +19,7 @@ const navigation = {
     { name: 'Documentation', href: 'https://docs.capgo.app/', target: '_blank' },
     { name: 'Plugins', href: '/plugins/' },
     { name: 'Awesome capacitor', href: 'https://github.com/riderx/awesome-capacitor', target: '_blank' },
-    { name: 'Top app by Framework', href: '/top_app' },
+    { name: 'Top app by Framework', href: '/top_app/' },
     // { name: 'Top cordova app', href: '/top_cordova_app' },
     // { name: 'Top react native app', href: '/top_react_native_app' },
     // { name: 'Top flutter app', href: '/top_flutter_app' },
