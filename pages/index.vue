@@ -269,8 +269,8 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </div>
     </div>
     <Testimonials/>
-    <section class="mx-10 lg:px-32 lg:mx-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
+    <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">
             Release
@@ -280,14 +280,14 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           </p>
         </div>
         <img
-          class="mx-auto h-62 rounded-lg"
+          class="mx-auto h-full md:h-62 rounded-lg"
           src="/develop_illu.svg"
           alt="productivity illustration"
         >
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <img
-          class="mx-auto h-62 rounded-lg my-10"
+          class="mx-auto h-full md:h-62 rounded-lg my-10"
           src="/build_illustration.svg"
           alt="build illustration"
         >
@@ -302,7 +302,7 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">
             Update
@@ -312,7 +312,7 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
           </p>
         </div>
         <img
-          class="mx-auto h-62 rounded-lg"
+          class="mx-auto h-full md:h-62 rounded-lg"
           src="/update_illustration.svg"
           alt="send update illustration"
         >

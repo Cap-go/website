@@ -11,7 +11,7 @@ const messageFormatter = (message: string) => {
 }
 </script>
 <template>
-    <div class="p-4 mx-3 mt-0 mb-6 max-w-80 md:max-w-72 align-baseline border border-solid border-zinc-700 bg-gray-800"
+    <div class="p-4 mx-auto md:mx-3 mt-0 mb-6 max-w-80 md:max-w-72 align-baseline border border-solid border-zinc-700 bg-gray-800"
         style="border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
         <div class="flex justify-between p-0 m-0 align-baseline border-0 border-solid">
             <div class="grid gap-3 items-center p-0 mx-0 mt-0 mb-3 align-baseline border-0 border-solid"
