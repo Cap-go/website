@@ -20,6 +20,7 @@ const messageFormatter = (message: string) => {
                     <img height="44" width="44" loading="lazy"
                         class="block p-0 m-0 w-10 max-w-full h-10 align-middle border-0 border-solid"
                         :src="tweet.image"
+                        :title="tweet.name +'\'s avatar'"
                         :alt="tweet.name +'\'s avatar'" style="border-radius: 22px;" />
                 </picture>
                 <div class="p-0 m-0 align-baseline border-0 border-solid">

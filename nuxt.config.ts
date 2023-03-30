@@ -260,7 +260,9 @@ export default defineNuxtConfig({
         },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/safari-pinned-tab.svg' },
+        { rel: 'apple-touch-icon', href: '/capgo.webp' },
       ],
     },
   },

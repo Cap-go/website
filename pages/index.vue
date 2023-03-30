@@ -102,13 +102,13 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
         <div class="relative mt-12 lg:mt-20">
             <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
-                <img class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg" alt="" />
+                <img loading="lazy" height="47" width="864" class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg" alt="curved dot line" title="curved dot line" />
             </div>
 
             <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
                 <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-xl font-semibold text-gray-700"> 1 </span>
+                        <span class="text-2xl font-bold text-gray-700"> 1 </span>
                     </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Install the plugin</h3>
                     <p class="mt-4 text-base text-gray-600">It's one simple command, who will guide you step by step.</p>
@@ -116,7 +116,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
                 <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-xl font-semibold text-gray-700"> 2 </span>
+                        <span class="text-2xl font-bold text-gray-700"> 2 </span>
                     </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Send your first update</h3>
                     <p class="mt-4 text-base text-gray-600">Build your app as usual, and then send it to Capgo with one command.</p>
@@ -124,7 +124,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
                 <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-xl font-semibold text-gray-700"> 3 </span>
+                        <span class="text-2xl font-bold text-gray-700"> 3 </span>
                     </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Get the update</h3>
                     <p class="mt-4 text-base text-gray-600">The download happen in background while you are in the app, next open you have the update.</p>
@@ -206,7 +206,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
           <div>
-            <img class="w-auto h-auto" src="/stats_demo_2.webp" alt="Manage app illustration">
+            <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_2.webp" alt="Manage app illustration" title="Manage app illustration">
           </div>
           <div class="md:pr-12">
 
@@ -280,16 +280,22 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           </p>
         </div>
         <img
+          width="310" height="248"
+          loading="lazy"
           class="mx-auto h-full md:h-62 rounded-lg"
           src="/develop_illu.svg"
+          title="productivity illustration"
           alt="productivity illustration"
         >
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <img
+          width="310" height="248"
+          loading="lazy"
           class="mx-auto h-full md:h-62 rounded-lg my-10"
           src="/build_illustration.svg"
           alt="build illustration"
+          title="build illustration"
         >
         <div>
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">
@@ -312,9 +318,12 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
           </p>
         </div>
         <img
+          width="310" height="248"
+          loading="lazy"
           class="mx-auto h-full md:h-62 rounded-lg"
           src="/update_illustration.svg"
           alt="send update illustration"
+          title="send update illustration"
         >
       </div>
     </section>
@@ -334,43 +343,43 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
                 <div class="relative space-y-5">
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka" />
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote" />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel"  title="hello revel"/>
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove" />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/irec_logo.webp" alt="irec" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec" />
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/vella_logo.svg" alt="vella" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella" />
                         </div>
 
                         <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" />
+                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
                         </div>
                     </div>
                 </div>
