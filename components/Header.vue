@@ -21,7 +21,7 @@ const menuMobile = ref(false)
         </div>
 
         <div class="flex lg:hidden">
-          <button type="button" class="text-white" @click="menuMobile = !menuMobile">
+          <button type="button" class="text-white" title="Expand menu" @click="menuMobile = !menuMobile">
             <svg
               class="w-7 h-7"
               xmlns="http://www.w3.org/2000/svg"
