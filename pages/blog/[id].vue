@@ -14,11 +14,11 @@ const { data: articles } = await useAsyncData('allArticles', () =>
     .sort({ created_at: -1 })
     .limit(3)
     .find())
-if (data.value?.next_blog) {
-  const nextArticle = await queryContent<MyCustomParsedContent>('article', data.value.next_blog)
-    .findOne()
-  if (nextArticle.value && articles.value && articles.value[0])
-    articles.value[0] = nextArticle.value
+if (data.value?.next_blog != null) {
+  const nextArticle = await useAsyncData(`nextArticle_${data.value.next_blog}`, () => queryContent<MyCustomParsedContent>('blog', data.value?.next_blog)
+    .findOne())
+  if (nextArticle.data.value && articles.value && articles.value[0])
+    articles.value[0] = nextArticle.data.value as any
 }
 
 if (data.value) {
