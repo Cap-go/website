@@ -14,12 +14,12 @@ declare global {
   }
 }
 
-export const crispLoader = () => {
+export function crispLoader() {
   if (!window.$crisp) {
     // console.log('Load Crips')
     const config = useRuntimeConfig()
     window.$crisp = []
-    window.CRISP_WEBSITE_ID = config.crisp
+    window.CRISP_WEBSITE_ID = config.public.crisp
 
     const d = document
     const s = d.createElement('script')
@@ -49,7 +49,7 @@ export const crispLoader = () => {
   }
 }
 
-export const openMessenger = () => {
+export function openMessenger() {
   crispLoader()
   window.$crisp.push(['do', 'chat:show'])
   window.$crisp.push(['do', 'chat:open'])

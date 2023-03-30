@@ -2,7 +2,7 @@
 import { crispLoader } from '~~/services/crisp'
 
 const config = useRuntimeConfig()
-const brand = config.brand || ''
+const brand = config.public.brand || ''
 
 if (process.client)
   crispLoader()

@@ -2,7 +2,7 @@
 const config = useRuntimeConfig()
 
 const domain = config.public.baseUrl
-const brand = config.brand
+const brand = config.public.brand
 const title = `${brand} | Privacy Policy`
 const description = 'Read our Privacy Policy'
 useHead({

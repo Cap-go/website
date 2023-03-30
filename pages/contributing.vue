@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
-const brand = config.brand
+const brand = config.public.brand
 const title = `${brand} | Contributing`
 const description = 'How to contribute to Capgo open source'
 useHead({

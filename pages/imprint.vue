@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
-const brand = config.brand
+const brand = config.public.brand
 useHead({
   title: `${brand} | Imprint`,
   meta: [

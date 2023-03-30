@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 
-const brand = config.brand
+const brand = config.public.brand
 const title = `${brand} | Terms of Service`
 const description = 'Read our Terms of Service'
 useHead({

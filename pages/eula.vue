@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 
-const brand = config.brand
+const brand = config.public.brand
 const title = `${brand} | End-User License Agreement`
 const description = 'Read our End-User License Agreement'
 useHead({

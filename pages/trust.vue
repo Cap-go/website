@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 
-const brand = config.brand
+const brand = config.public.brand
 const title = `${brand} | Trust`
 const description = 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.'
 useHead({

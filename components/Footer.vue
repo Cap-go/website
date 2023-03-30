@@ -9,7 +9,7 @@ router.afterEach((to) => {
 })
 router.currentRoute.value.hash.startsWith('#support') && openMessenger()
 const config = useRuntimeConfig()
-const brand = config.brand
+const brand = config.public.brand
 const year = new Date().getFullYear()
 // no-rel target="_blank"
 const navigation = {
