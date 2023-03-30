@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { createMeta } from '~/services/meta'
-import { Database } from '~~/types/supabase.types';
+import type { Database } from '~~/types/supabase.types'
 
 const config = useRuntimeConfig()
 const title = 'Capgo | Top Kotlin apps'
@@ -9,8 +9,7 @@ const description = 'List of top 100 app using Kotlin on android store'
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 const usage = ref(30.77)
 
-const shortNumber = (number: number) => {
-
+function shortNumber(number: number) {
   if (number > 1000000000)
     return `${(number / 1000000).toFixed(1)}B`
 
@@ -23,7 +22,7 @@ const shortNumber = (number: number) => {
   return `${number}`
 }
 
-const renameCat = (text: string) => {
+function renameCat(text: string) {
   return text.replaceAll('_', ' ')
 }
 
@@ -36,8 +35,8 @@ const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
-        apps.value = data.apps
-        usage.value = data.usage
+      apps.value = data.apps
+      usage.value = data.usage
     })
   }
 })
@@ -56,7 +55,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          Flutter power aproximately {{usage}}% of apps on Google Play Store
+          Flutter power aproximately {{ usage }}% of apps on Google Play Store
         </p>
       </div>
 
@@ -80,7 +79,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
                   :src="app.icon"
                   :alt="`app icon ${app.title}`"
                 >
-            </a>
+              </a>
 
               <div class="absolute top-4 left-4">
                 <span
@@ -133,21 +132,21 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-          <a
+        <a
           v-for="l in others"
           :key="l"
           :href="`/${l}`"
           class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
-        <div class="relative mx-auto flex">
-        <div class="block w-full mx-4 pb-4">
-          <img
-            class="object-cover w-full h-full rounded-lg"
-            :src="`/${l.replace('top_', '').replace('_app', '')}.webp`"
-            :alt="`blog illustration ${l}`"
-          >
-        </div>
-      </div>
+          <div class="relative mx-auto flex">
+            <div class="block w-full mx-4 pb-4">
+              <img
+                class="object-cover w-full h-full rounded-lg"
+                :src="`/${l.replace('top_', '').replace('_app', '')}.webp`"
+                :alt="`blog illustration ${l}`"
+              >
+            </div>
+          </div>
           <div class="px-4 pt-2 sm:pt-0 w-full">
             <p class="text-lg font-bold capitalize">
               {{ l.replaceAll('_', ' ') }}
@@ -158,5 +157,3 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {
     </div>
   </section>
 </template>
-
-

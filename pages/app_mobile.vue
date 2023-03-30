@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { createMeta, createMetaImage } from '~~/services/meta'
+import { createMeta } from '~~/services/meta'
 
 const config = useRuntimeConfig()
 
 const brand = config.brand
-const desc = 'Try each version of your app direcly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.'
+const desc = 'Try each version of your app directly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.'
 useHead(() => ({
   titleTemplate: `${brand} | Capacitor sandbox app`,
   meta: createMeta(

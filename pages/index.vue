@@ -6,7 +6,7 @@ const brand = config.brand || ''
 
 if (process.client)
   crispLoader()
-const shortNumber = (number: number) => {
+function shortNumber(number: number) {
   if (number > 1000000)
     return `${(number / 1000000).toFixed(1)}M`
 
@@ -82,7 +82,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           </div>
 
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512"><!-- ! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z" /></svg>
             <h3 class="mt-6 text-lg font-medium text-white md:mt-8">
               End-to-end encryption
             </h3>
@@ -94,45 +94,61 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </div>
     </section>
     <section class="py-10 bg-white sm:py-16 lg:py-24">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">How does it work?</h2>
-            <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Send your first update in less than 5 mins !</p>
+          <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">
+            How does it work?
+          </h2>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
+            Send your first update in less than 5 mins !
+          </p>
         </div>
 
         <div class="relative mt-12 lg:mt-20">
-            <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
-                <img loading="lazy" height="47" width="864" class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg" alt="curved dot line" title="curved dot line" />
+          <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
+            <img loading="lazy" height="47" width="864" class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg" alt="curved dot line" title="curved dot line">
+          </div>
+
+          <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 1 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Install the plugin
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                It's one simple command, who will guide you step by step.
+              </p>
             </div>
 
-            <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
-                <div>
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-2xl font-bold text-gray-700"> 1 </span>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Install the plugin</h3>
-                    <p class="mt-4 text-base text-gray-600">It's one simple command, who will guide you step by step.</p>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-2xl font-bold text-gray-700"> 2 </span>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Send your first update</h3>
-                    <p class="mt-4 text-base text-gray-600">Build your app as usual, and then send it to Capgo with one command.</p>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-2xl font-bold text-gray-700"> 3 </span>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Get the update</h3>
-                    <p class="mt-4 text-base text-gray-600">The download happen in background while you are in the app, next open you have the update.</p>
-                </div>
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 2 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Send your first update
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                Build your app as usual, and then send it to Capgo with one command.
+              </p>
             </div>
+
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 3 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Get the update
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                The download happen in background while you are in the app, next open you have the update.
+              </p>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
     <section class="relative md:my-20 py-20 bg-gray-800">
       <svg class="hidden absolute md:block md:-top-5 md:m-0 md:-left-1/3 lg:-left-16" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>
@@ -209,47 +225,58 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_2.webp" alt="Manage app illustration" title="Manage app illustration">
           </div>
           <div class="md:pr-12">
-
-          <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj">
+            <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj">
               Manage update
             </h3>
-          <div class="">
-                    <div class="py-8 md:py-11">
-                        <div class="space-y-12">
-                          <div class="flex items-start">
-                                <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 14l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                                </div>
-
-                                <div class="ml-5">
-                                    <h3 class="text-lg font-bold text-gray-900 font-pj">Assign user</h3>
-                                    <p class="mt-3 text-lg font-normal text-gray-600 font-pj">Send to your private or public tester the last update.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-2.21-6H13V9c0-.55-.45-1-1-1s-1 .45-1 1v4H9.21c-.45 0-.67.54-.35.85l2.79 2.79c.2.2.51.2.71 0l2.79-2.79a.5.5 0 0 0-.36-.85z"/></svg>
-                                </div>
-
-                                <div class="ml-5">
-                                    <h3 class="text-lg font-bold text-gray-900 font-pj">Set update</h3>
-                                    <p class="mt-3 text-lg font-normal text-gray-600 font-pj">When ready, deploy to all your users.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1152 512H896V256h128v128h128v128zm512 1032q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264h-512v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264H384v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-392h640V891q-83-11-153-50t-122-99t-80-135t-29-159q0-93 35-174t96-143t142-96T960 0q93 0 174 35t143 96t96 142t35 175q0 83-29 158t-80 135t-121 99t-154 51v261h640v392zM640 448q0 66 25 124t68 102t102 69t125 25q66 0 124-25t101-68t69-102t26-125q0-66-25-124t-69-101t-102-69t-124-26q-66 0-124 25t-102 69t-69 102t-25 124zM448 1792q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm640 0q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm512 128q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10z"/></svg>
-                                </div>
-
-                                <div class="ml-5">
-                                    <h3 class="text-lg font-bold text-gray-900 font-pj">Manage all in one place</h3>
-                                    <p class="mt-3 text-lg font-normal text-gray-600 font-pj">All configutarion can be managed via the web interface.</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="">
+              <div class="py-8 md:py-11">
+                <div class="space-y-12">
+                  <div class="flex items-start">
+                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 14l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
                     </div>
+
+                    <div class="ml-5">
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">
+                        Assign user
+                      </h3>
+                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">
+                        Send to your private or public tester the last update.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-2.21-6H13V9c0-.55-.45-1-1-1s-1 .45-1 1v4H9.21c-.45 0-.67.54-.35.85l2.79 2.79c.2.2.51.2.71 0l2.79-2.79a.5.5 0 0 0-.36-.85z" /></svg>
+                    </div>
+
+                    <div class="ml-5">
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">
+                        Set update
+                      </h3>
+                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">
+                        When ready, deploy to all your users.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1152 512H896V256h128v128h128v128zm512 1032q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264h-512v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264H384v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-392h640V891q-83-11-153-50t-122-99t-80-135t-29-159q0-93 35-174t96-143t142-96T960 0q93 0 174 35t143 96t96 142t35 175q0 83-29 158t-80 135t-121 99t-154 51v261h640v392zM640 448q0 66 25 124t68 102t102 69t125 25q66 0 124-25t101-68t69-102t26-125q0-66-25-124t-69-101t-102-69t-124-26q-66 0-124 25t-102 69t-69 102t-25 124zM448 1792q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm640 0q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm512 128q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10z" /></svg>
+                    </div>
+
+                    <div class="ml-5">
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">
+                        Manage all in one place
+                      </h3>
+                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">
+                        All configutarion can be managed via the web interface.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -268,7 +295,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </div>
-    <Testimonials/>
+    <Testimonials />
     <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
@@ -302,9 +329,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             Integration
           </h2>
           <p class="text-lg lg:w-2/3">
-            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br/><br/>
+            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br><br>
 
-It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and many more.
+            It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and many more.
           </p>
         </div>
       </div>
@@ -328,67 +355,71 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
       </div>
     </section>
     <section class="relative py-12 overflow-hidden bg-gray-50 sm:py-16 lg:py-20 xl:py-32">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
-            <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
-                <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">You’re in good company.</h2>
-                <p class="mt-6 text-lg font-normal text-gray-600 font-pj">Capgo enables development teams at some of the most innovative companies.</p>
+          <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
+            <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">
+              You’re in good company.
+            </h2>
+            <p class="mt-6 text-lg font-normal text-gray-600 font-pj">
+              Capgo enables development teams at some of the most innovative companies.
+            </p>
+          </div>
+
+          <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
+            <div class="absolute inset-16">
+              <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
             </div>
 
-            <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
-                <div class="absolute inset-16">
-                    <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"></div>
+            <div class="relative space-y-5">
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
                 </div>
 
-                <div class="relative space-y-5">
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka" />
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote" />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel"  title="hello revel"/>
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove" />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec" />
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella" />
-                        </div>
-
-                        <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                            <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
-                        </div>
-                    </div>
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka">
                 </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel" title="hello revel">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving">
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-50"></div>
-</section>
+      <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-50" />
+    </section>
 
     <div class="relative mt-24 sm:mt-32 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">

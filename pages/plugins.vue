@@ -9,8 +9,6 @@ import {
   GlobeEuropeAfricaIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
-  StarIcon,
-  VideoCameraIcon,
   ViewfinderCircleIcon,
 } from '@heroicons/vue/20/solid'
 
@@ -112,6 +110,12 @@ const actions = [
     iconBackground: 'bg-fuchsia-50',
   },
 ]
+useHead({
+  title: 'Capgo plugins',
+  meta: createMeta(
+    'Capgo plugins',
+    'Move forward with confidence. Capgo offer multiple plugins to help you build your app faster and better.'),
+})
 </script>
 
 <template>

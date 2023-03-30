@@ -2,18 +2,19 @@
 import type { NewsArticle, WithContext } from 'schema-dts'
 import { createMeta } from '~/services/meta'
 import type { MyCustomParsedContent } from '~/services/blog'
-import { formatTime, randomArticle } from '~/services/blog'
+import { formatTime } from '~/services/blog'
 
 const config = useRuntimeConfig()
 const route = useRoute()
 
 const { data } = await useAsyncData(`blog-${route.params.id}`, () => queryContent<MyCustomParsedContent>('blog', route.params.id as string).findOne())
-const { data: randomData } = await useAsyncData(`random-blog-${route.params.id}`, async () => {
-  return (data.value?.next_blog && data.value?.next_blog !== '')
-    ? await queryContent<MyCustomParsedContent>('blog', data.value.next_blog)
-      .findOne()
-    : await randomArticle(data.value?.slug)
-})
+const { data: articles } = await useAsyncData('allArticles', () =>
+  queryContent<MyCustomParsedContent>('blog')
+    .where({ published: true, slug: { $ne: route.params.id as string } })
+    .sort({ created_at: -1 })
+    .limit(3)
+    .find())
+
 if (data.value) {
   const datePublished = new Date(data.value?.created_at).toISOString()
   const dateModified = new Date(data.value?.updated_at).toISOString()
@@ -106,45 +107,39 @@ if (data.value) {
       <ContentRenderer :value="data" />
     </article>
 
-    <a
-      v-if="randomData"
-      :href="`/blog/${randomData.slug}/`"
-      class="flex flex-col sm:flex-row py-8 lg:max-w-1/2 mx-auto lg:my-10 bg-gray-700 lg:rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
-    >
-      <div class="relative mx-4 flex min-w-1/3">
-        <div :title="randomData.title" class="block w-full">
-          <img
-            class="object-cover w-full h-full rounded-lg"
-            :src="randomData.head_image"
-            loading="lazy"
-            height="232"
-            width="378"
-            :alt="`blog illustration ${randomData.title}`"
-            :title="`blog illustration ${randomData.title}`"
-          >
+    <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
+      <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div class="max-w-xl mx-auto text-center">
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            Latest from news
+          </h2>
+          <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:text-lg lg:mt-6 lg:leading-8">
+            Capgo gives you the best insights you need to create a truly professional Mobile app.
+          </p>
         </div>
 
-        <div class="absolute top-2 left-2">
-          <span
-            class="px-4 py-2 text-tiny font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg"
-          >
-            {{ randomData.tag }}
-          </span>
+        <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
+          <Blog
+            v-for="article in articles" :key="article._id"
+            :link="`/blog/${article.slug}/`"
+            :title="article.title"
+            :description="article.description"
+            :image="article.head_image"
+            :date="article.created_at"
+            :tag="article.tag"
+          />
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/blog" title="" class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline">
+            See all from our blog
+            <svg class="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
         </div>
       </div>
-      <div class="px-4 pt-2 sm:pt-0 text-left">
-        <p class="text-lg font-bold">
-          {{ randomData.title }}
-        </p>
-        <span
-          class="block mt-3 text-sm font-semibold tracking-widest text-white uppercase"
-        >
-          {{ formatTime(randomData.created_at) }}
-        </span>
-        <p class="mt-1">
-          {{ randomData.description }}
-        </p>
-      </div>
-    </a>
+    </section>
   </main>
 </template>

@@ -3,14 +3,11 @@ import { createMeta } from '~/services/meta'
 
 const title = 'Capgo | Top apps by framework'
 const description = 'List of top 100 app using Diffrents Framworks on android store'
-
-
 useHead(() => ({
   title,
   meta: createMeta(title, description),
 }))
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
-
 </script>
 
 <template>
@@ -31,21 +28,21 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-          <a
+        <a
           v-for="l in others"
           :key="l"
           :href="`/${l}`"
           class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
-        <div class="relative mx-auto flex">
-        <div class="block w-full mx-4 pb-4">
-          <img
-            class="object-cover w-full h-full rounded-lg"
-            :src="`/${l.replace('top_', '').replace('_app', '')}.webp`"
-            :alt="`blog illustration ${l}`"
-          >
-        </div>
-      </div>
+          <div class="relative mx-auto flex">
+            <div class="block w-full mx-4 pb-4">
+              <img
+                class="object-cover w-full h-full rounded-lg"
+                :src="`/${l.replace('top_', '').replace('_app', '')}.webp`"
+                :alt="`blog illustration ${l}`"
+              >
+            </div>
+          </div>
           <div class="px-4 pt-2 sm:pt-0 w-full">
             <p class="text-lg font-bold capitalize">
               {{ l.replaceAll('_', ' ') }}
@@ -56,4 +53,3 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
     </div>
   </section>
 </template>
-

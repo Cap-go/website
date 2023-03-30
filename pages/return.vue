@@ -2,10 +2,16 @@
 const config = useRuntimeConfig()
 
 const brand = config.brand
+const title = `${brand} | Return Policy`
+const description = 'Read our Return Policy'
 useHead({
-  title: `${brand} | Return Policy`,
+  title,
   meta: [
-    { name: 'description', hid: 'description', content: 'Return Policy' },
+    { name: 'title', hid: 'title', content: title },
+    { name: 'og:title', hid: 'og:title', content: title },
+    { name: 'description', hid: 'description', content: description },
+    { name: 'og:description', hid: 'og:description', content: description },
+    { name: 'description', hid: 'description', content: 'Privacy Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })

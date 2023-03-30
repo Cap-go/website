@@ -41,7 +41,16 @@ const bandwidth = computed(() => {
   return updates.value * updatesSize.value / 1000
 })
 
-const suggestionClick = () => {
+const suggestion = computed(() => {
+  if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth)
+    return 'Solo'
+  else if (mau.value <= maker.mau && storage.value <= maker.storage && bandwidth.value <= maker.bandwidth)
+    return 'Maker'
+  else if (mau.value <= team.mau && storage.value <= team.storage && bandwidth.value <= team.bandwidth)
+    return 'Team'
+  else return 'Pay as you go'
+})
+function suggestionClick() {
   if (suggestion.value === 'Pay as you go') {
     // scroll to pay-as-you-go
     window.scrollTo({
@@ -56,17 +65,7 @@ const suggestionClick = () => {
       behavior: 'smooth',
     })
   }
-
 }
-const suggestion =computed(() => {
-  if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth)
-    return 'Solo'
-  else if (mau.value <= maker.mau && storage.value <= maker.storage && bandwidth.value <= maker.bandwidth)
-  return 'Maker'
-  else if (mau.value <= team.mau && storage.value <= team.storage && bandwidth.value <= team.bandwidth)
-  return 'Team'
-  else return 'Pay as you go'
-})
 const basePrice = payg.price_m
 
 const totalPrice = computed(() => {
@@ -74,18 +73,16 @@ const totalPrice = computed(() => {
   const storagePrice = storage.value > props.paygBase.storage ? (storage.value - props.paygBase.storage) * props.paygUnits.storage : 0
   const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? ((bandwidth.value - props.paygBase.bandwidth) / 1000) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
-  if (sum > 0) {
+  if (sum > 0)
     return roundNumber(basePrice + sum) * (props.yearly ? 12 : 1)
-  }
-  else {
+
+  else
     return (suggestion.value ? roundNumber(props.pricing.find(plan => plan.name === suggestion.value)!.price_m) : basePrice) * (props.yearly ? 12 : 1)
-  }
 })
 
-const roundNumber = (number: number) => {
+function roundNumber(number: number) {
   return Math.round(number * 100) / 100
 }
-
 </script>
 
 <template>
@@ -164,13 +161,15 @@ const roundNumber = (number: number) => {
           </div>
           <div class="col-span-1 md:col-span-3 flex flex-col items-center">
             <p class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">
-              {{ yearly ? 'Yearly' :  'Monthly' }} Price
+              {{ yearly ? 'Yearly' : 'Monthly' }} Price
             </p>
             <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">
               {{ totalPrice }}€
             </p>
             <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-white mt-0 font-pj">
-              We suggest you to choose the <button @click="suggestionClick" class="font-bold underline underline-current text-red-400 uppercase cursor-pointer">{{ suggestion }}</button> plan
+              We suggest you to choose the <button class="font-bold underline underline-current text-red-400 uppercase cursor-pointer" @click="suggestionClick">
+                {{ suggestion }}
+              </button> plan
             </p>
           </div>
         </div>

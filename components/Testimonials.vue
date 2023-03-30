@@ -58,7 +58,7 @@ const tweets = ref([
     image: '/osirisrex.webp',
     name: 'NASA\'s OSIRIS-REx',
     handle: 'osirisrex',
-    message: '@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂' 
+    message: '@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂',
   },
   {
     image: '/avatar-male-3.webp',
@@ -74,14 +74,17 @@ const tweets = ref([
   },
 ])
 </script>
+
 <template>
   <section class="bg-gray-800">
     <div class="p-0 m-0 leading-6 text-black align-baseline border-0 border-solid">
-      <div class="grid py-20 px-0 m-auto text-black align-baseline border-0 border-solid"
-        style="row-gap: 40px; max-width: 1248px;">
+      <div
+        class="grid py-20 px-0 m-auto text-black align-baseline border-0 border-solid"
+        style="row-gap: 40px; max-width: 1248px;"
+      >
         <h2
           class="py-0 px-8 m-0 text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj tracking-tight text-center text-gray-200 align-baseline border-0 border-solid"
-          >
+        >
           They say about Capgo
         </h2>
         <div class="flex p-0 m-0 align-baseline border-0 border-solid items-center md:flex-col flex-wrap md:max-h[1000px]">

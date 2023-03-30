@@ -1,10 +1,16 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
 const brand = config.brand
+const title = `${brand} | Contributing`
+const description = 'How to contribute to Capgo open source'
 useHead({
-  title: `${brand} | Contributing`,
+  title,
   meta: [
-    { name: 'description', hid: 'description', content: 'How to contribute to capgo open source' },
+    { name: 'title', hid: 'title', content: title },
+    { name: 'og:title', hid: 'og:title', content: title },
+    { name: 'description', hid: 'description', content: description },
+    { name: 'og:description', hid: 'og:description', content: description },
+    { name: 'description', hid: 'description', content: 'Privacy Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
 })
@@ -108,4 +114,3 @@ useHead({
     </code></pre><p>Find more at: <a href="https://jsdoc.app/">https://jsdoc.app/</a></p>
   </div>
 </template>
-

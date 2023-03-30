@@ -196,6 +196,16 @@ export default defineNuxtConfig({
           content: 'Capacitor, updater, OTA, autoupdate, capgo',
         },
         {
+          hid: 'title',
+          name: 'title',
+          content: appName,
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: appDescription,
+        },
+        {
           hid: 'og:title',
           property: 'og:title',
           content: appName,

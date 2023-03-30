@@ -3,9 +3,15 @@ const config = useRuntimeConfig()
 
 const domain = config.public.baseUrl
 const brand = config.brand
+const title = `${brand} | Privacy Policy`
+const description = 'Read our Privacy Policy'
 useHead({
-  title: `${brand} | Privacy Policy`,
+  title,
   meta: [
+    { name: 'title', hid: 'title', content: title },
+    { name: 'og:title', hid: 'og:title', content: title },
+    { name: 'description', hid: 'description', content: description },
+    { name: 'og:description', hid: 'og:description', content: description },
     { name: 'description', hid: 'description', content: 'Privacy Policy' },
     { name: 'robots', content: 'noindex, nofollow' },
   ],
