@@ -403,9 +403,9 @@ It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, A
           </div>
           <div class="relative flex flex-col">
             <div class="sm:text-center">
-              <h5 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
+              <h3 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
                 Push hot code updates
-              </h5>
+              </h3>
               <p class="mt-6 mx-auto max-w-2xl text-lg text-gray-100">
                 Like you push a commit
               </p>

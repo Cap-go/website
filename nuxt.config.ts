@@ -131,7 +131,6 @@ export default defineNuxtConfig({
       brand: 'Capgo',
       baseUrl: getUrl(process.env.BRANCH),
       baseApiUrl: getApiUrl(process.env.BRANCH),
-      domain: baseDomain(),
       crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
       handler: 'capgo',
     },
