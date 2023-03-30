@@ -35,9 +35,9 @@ function formatTime(s: string) {
         >
           Latest from the blog
         </h1>
-        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
+        <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
-        </p>
+        </h2>
       </div>
 
       <div
