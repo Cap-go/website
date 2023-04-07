@@ -503,6 +503,16 @@ And then start the command:
 it will ask you to set a device name and the identifier:
 ![set identifier ios](/set_identifier.webp)
 
+### if you got issues
+
+There a magic command who can save you:
+```shell
+fastlane match nuke development
+fastlane match development
+```
+If you have issue with dev device not able to test etc that usually fix it.
+
+
 ### Thanks
 
 This blog is based on the following articles:
