@@ -153,6 +153,19 @@ def ensure_temp_keychain(name, password)
 end
 
 platform :ios do
+  lane :build do
+    build_app(
+      configuration: "Release",
+      workspace: "./ios/App/App.xcworkspace",
+      scheme: "App",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: { 
+            DEVELOPER_APP_ID => "#{PROVISIONING_PROFILE_SPECIFIER}"
+        }
+      }
+    )
+  end
   lane :refresh_profiles do
     match(
       type: "development",
@@ -217,6 +230,23 @@ platform :ios do
     )
 
     delete_temp_keychain(keychain_name)
+  end
+  lane :submit_review do
+    version = ''
+    Dir.chdir("..") do
+      file = File.read("package.json")
+      data = JSON.parse(file)
+      version = data["version"]
+    end
+    deliver(
+      app_version: version,
+      submit_for_review: true,
+      automatic_release: true,
+      force: true, # Skip HTMl report verification
+      skip_metadata: false,
+      skip_screenshots: false,
+      skip_binary_upload: true
+    )
   end
 end
 ```
@@ -505,13 +535,18 @@ it will ask you to set a device name and the identifier:
 
 ### if you got issues
 
+If you have issue with dev device not able to test etc that usually fix it.
+
 There a magic command who can save you:
 ```shell
 fastlane match nuke development
 fastlane match development
 ```
-If you have issue with dev device not able to test etc that usually fix it.
 
+Then :
+Clean the project by holding Shift(⇧)+Command(⌘)+K or selecting Product > Clean (it might be labelled "Clean Build Folder")
+
+Then try to run again the app on your device.
 
 ### Thanks
 
