@@ -1,15 +1,16 @@
 {
+  "ignorePatterns": [
+    {
+      "pattern": "^https://developer.android.com/studio/*"
+    }
+  ],
   "httpHeaders": [
     {
       "urls": [
         "https://github.com/",
         "https://guides.github.com/",
         "https://help.github.com/",
-        "https://docs.github.com/",
-        "https://developer.android.com/studio/publish/app-signing/",
-        "https://developer.android.com/studio/publish/app-signing/#app-signing-google-play",
-        "https://developer.android.com/studio/publish/app-signing/#generate-key",
-        "https://developer.android.com/studio/"
+        "https://docs.github.com/"
       ],
       "headers": {
         "Accept-Encoding": "zstd, br, gzip, deflate",
