@@ -38,7 +38,7 @@ All this data you can use to understand the usage of your app and to figure out 
 
 ## What is an open-source Auto-update system?
 
-Being open-source means that my [source code](https://github.com/capgo/capacitor-updater/) is available and accessible on GitHub, so anyone can check it out. You can read it, inspect it and review it to understand how it works and to ensure it keeps the data private and secure.
+Being open-source means that my [source code](https://github.com/cap-go/capacitor-updater/) is available and accessible on GitHub, so anyone can check it out. You can read it, inspect it and review it to understand how it works and to ensure it keeps the data private and secure.
 
 This gives you full transparency on how I handle the update data. It is this transparency and openness that means that open-source products can be more trustworthy than proprietary and closed source products.
 
