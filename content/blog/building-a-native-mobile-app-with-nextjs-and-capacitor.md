@@ -100,7 +100,7 @@ By this point, you should be able to observe new **ios** and **android** folders
 
 **Those are real native projects!**
 
-To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/index.html). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
+To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
 
 Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
 
