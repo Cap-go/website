@@ -11,8 +11,7 @@
   "replacementPatterns": [
     {
       "pattern": "^/",
-      "replacement": "{{BASEURL}}/"
+      "replacement": "https://capgo.app/"
     }
-  ],
-  "projectBaseUrl": "https://capgo.app"
+  ]
 }
