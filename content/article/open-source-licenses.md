@@ -13,6 +13,7 @@ published: false
 next_blog: ""
 
 ---
+<!-- markdown-link-check-disable -->
  Capgo is a software as a service open-source web project. With the feedback of other project such as [Plausible Analytics](https://plausible.io/blog/open-source-licenses) in recent, they have shared the are risks associated with permissive open-source licenses that corporations that aren't concerned about open-source are happy to take advantage of.
 
 In the early days of Capgo, I followed their move and used the AGPLv3 license. It was for me the good choice, but obviously, I'm not a lawyer. After a lot of talk in the discord community of the project I have discovered this license was putting the users at risk, since capacitor-updater, the plugin part of Capgo, was embedded in all project.
@@ -175,9 +176,9 @@ So how can a corporation commercialize a FOSS project without open sourcing thei
 
 Free Software Foundation (FSF) and the GNU project [state](https://www.gnu.org/licenses/licenses.html):
 
-> “We recommend that people consider using the GNU AGPL for any software which will commonly be run over a network”.
+> I recommend that people consider using the GNU AGPL for any software which will commonly be run over a network”.
 
-> “If it is likely that others will make improved versions of your program to run on servers and not distribute their versions to anyone else, and you’re concerned that this will put your released version disadvantaged, we recommend the GNU Affero General Public License (AGPL). The AGPL’s terms are almost identical to the GPL’s; the sole substantive difference is that it has an extra condition to ensure that people who use the software over a network will be able to get the source code for it.”
+> “If it is likely that others will make improved versions of your program to run on servers and not distribute their versions to anyone else, and you’re concerned that this will put your released version disadvantaged, I recommend the GNU Affero General Public License (AGPL). The AGPL’s terms are almost identical to the GPL’s; the sole substantive difference is that it has an extra condition to ensure that people who use the software over a network will be able to get the source code for it.”
 
 This seems the exact license for the Capgo Cloud use case.
 

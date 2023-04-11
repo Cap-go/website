@@ -13,6 +13,7 @@ published: false
 next_blog: ""
 
 ---
+<!-- markdown-link-check-disable -->
 Capgo is an open-source, simple and lightweight Ionic AppFlow alternative. One aspect that makes Capgo different from the other tooling such as AppFlow is the fact that Capgo is fully open-source software and focus on Capacitor. Let’s take a look at what that means exactly.
 
 ![Capgo: open-source Ionic AppFlow alternative](https://capgo.app/blog/uploads/google-analytics-alternatives.webp "Capgo: open-source AppFlow alternative")

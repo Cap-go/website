@@ -388,7 +388,7 @@ Ever wonder where the values of the `ENV` are coming from? Well, it’s not a se
 11\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
 
 12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655#issuecomment-881764901)
-
+<!-- markdown-link-check-disable-next-line -->
 13\. `CERTIFICATE_STORE_URL` — The repo url of your Match keys (ex: https://github.com/***/fastlane_match.git)
 
 ## **4\. Configure GitHub workflow file**
