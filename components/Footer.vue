@@ -40,7 +40,7 @@ const navigation = {
     { name: 'Contributing', href: '/contributing/' },
     { name: 'Security', href: '/trust/' },
     { name: 'Consulting', href: '/consulting/' },
-    { name: 'Affiliate', href: 'https://capgo.getrewardful.com/', target: '_blank' },
+    { name: 'Affiliate', href: 'https://affiliates.reflio.com/invite/capgo', target: '_blank' },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
