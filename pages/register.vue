@@ -2,8 +2,10 @@
 // onMounted
 onMounted(() => {
   // check if window.Rewardful.affiliate present if yes then add it to the register link
+  // TODO: remove Rewardful when reflio is setup
   const affiliate = window?.Rewardful?.affiliate.token
   const registerLink = affiliate ? `https://web.capgo.app/register?via=${affiliate}` : 'https://web.capgo.app/register'
+  // const registerLink = 'https://web.capgo.app/register'
   // redirect to register link
   window.open(registerLink, '_self')
 })

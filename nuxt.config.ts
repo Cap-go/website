@@ -165,6 +165,12 @@ export default defineNuxtConfig({
       ],
       script: [
         {
+          'src': 'https://reflio.com/js/reflio.min.js',
+          'data-reflio': 'hi8q6z93wyt147h',
+          'data-domain': 'https://capgo.app,https://web.capgo.app',
+          'async': true,
+        },
+        {
           'src': 'https://r.wdfl.co/rw.js',
           'data-rewardful': 'f5a722',
           'async': true,
