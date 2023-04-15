@@ -48,7 +48,7 @@ This key pair is used to sign the update and verify the update on the app side.
 To start implementing Self-hosted Live Updates, an enterprise must first perform a web build of their bug fixes, content updates, or any other web-based code changes they wish to make. Next, they must sign the build artifact using the private key obtained during the one-time setup process, and finally upload the bundle to their preferred storage location.
 
 ```
-npx @capgo/cli@latest encrypt abc123.zip”
+npx @capgo/cli@latest bundle encrypt abc123.zip”
 ```
 This command will print you an ivSessionKey, you need to save it for the next step.
 
@@ -56,7 +56,7 @@ Now upload your encrypted zip to your enterprise storage and get the URL of the 
 
 Capgo must then be informed of a new Live Update that is ready for consumption. This is done via another CLI command:
 ```
-npx @capgo/cli@latest upload --external=https://abc.com/app/updates/abc123.zip --iv-session-key=YourKey
+npx @capgo/cli@latest bundle upload --external=https://abc.com/app/updates/abc123.zip --iv-session-key=YourKey
 ```
 
 Once the command is run, Capgo is aware of a new update ready to be distributed to the app’s users. Now, when the app is started, the Live Updates plugin checks with Capgo to see if any changes need to be brought down.

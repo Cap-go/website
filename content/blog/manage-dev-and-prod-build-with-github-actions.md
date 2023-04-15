@@ -127,11 +127,11 @@ jobs:
       - name: Create Release Alpha
         if: "contains(github.ref, '-alpha.')"
         id: create_release_prepro
-        run: npx @capgo/cli@latest upload -a ${{ secrets.CAPGO_TOKEN }} -c development
+        run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c development
       - name: Create Release Production
         if: "!contains(github.ref, '-alpha.')"
         id: create_release_prod
-        run: npx @capgo/cli@latest upload -a ${{ secrets.CAPGO_TOKEN }} -c production
+        run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production
 ```
 
 This will install and build your dependency before sending it to Capgo.

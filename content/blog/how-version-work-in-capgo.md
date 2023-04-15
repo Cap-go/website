@@ -75,7 +75,7 @@ Then the behavior becomes:
 
 ## JavaScript bundle version
 
-The JavaScript bundle version is the one you send when doing `npx @capgo/cli@latest upload --channel production`
+The JavaScript bundle version is the one you send when doing `npx @capgo/cli@latest bundle upload --channel production`
 
 If you didn't use the option `--bundle 1.2.3`, Capgo will get the bundle version from your `package.json` file (in the version key).
 

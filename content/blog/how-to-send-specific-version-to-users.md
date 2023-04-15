@@ -37,9 +37,9 @@ And for Google this is even worse, the big mystery of my life, releasing a produ
 
 To fix this, I crated the Channel system in Capgo.
 
-`npx @capgo/cli@latest upload -c production` will update to all users (if production channel is set to default)
+`npx @capgo/cli@latest bundle upload -c production` will update to all users (if production channel is set to default)
 
-If you do `npx @capgo/cli@latest upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions/). 
+If you do `npx @capgo/cli@latest bundle upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions/). 
 
 Then you have 2 way to let users get the updates from the channel
 

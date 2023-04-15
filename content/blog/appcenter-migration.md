@@ -116,14 +116,14 @@ npx @capgo/cli@latest login YOURKEY
 
 Let's get started by first creating the app in Capgo Cloud with the CLI.
 
-`npx @capgo/cli@latest add`
+`npx @capgo/cli@latest app add`
 
 This command will use all variable defined in the Capacitor config file to create the app.
 ## Upload your first bundle
 
 Run the command to build your code and send it to Capgo with:
 ```shell
-npx @capgo/cli@latest upload --channel production
+npx @capgo/cli@latest bundle upload --channel production
 ```
 
 By default, the version name will be the one in your `package.json` file.
@@ -137,7 +137,7 @@ You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
 After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
 
 ```shell
-npx @capgo/cli@latest set -c production -s default
+npx @capgo/cli@latest channel set production -s default
 ```
 
 ## Configure app to validate updates

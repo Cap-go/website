@@ -63,11 +63,11 @@ Each time you upload a bundle, this number is increased by the size of the uploa
 This data is only related to your upload size, the better your app size is, the better you stay in your plan.
 
 If you reach the limit or near, you can list your bundles with the CLI:
-`npx @capgo/cli@latest list`
+`npx @capgo/cli@latest bundle list`
 To see what you could clean, removing a bundle, free the storage but don't delete the stats.
 
 When you are ready for cleanup, use this command to remove many bundles:
-`npx @capgo/cli@latest cleanup`
+`npx @capgo/cli@latest bundle cleanup`
 
 PS: this is good for the planet, but also for your wallet 💪.
 
