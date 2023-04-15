@@ -30,11 +30,12 @@ Where Capgo find the version to compare
 #### IOS
 
   in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION`
+  > You can override this behavior in `capacitor.config.json` file [docs here](https://docs.capgo.app/plugin/auto-update#advanced-settings)
 
 #### Android
 
   in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
-
+  > You can override this behavior in `capacitor.config.json` file [docs here](https://docs.capgo.app/plugin/auto-update#advanced-settings)
 #### JavaScript
 
   in JavaScript, the var is set on your project here `package.json` under the key `version`
