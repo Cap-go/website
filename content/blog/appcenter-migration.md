@@ -155,7 +155,7 @@ Then do a `npm run build && npx cap copy` to update your app.
 
 For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
 
-    npc cap run [ios | android]
+    npx cap run [ios | android]
 
 Open the app, put it in background and open it again, you should see in the logs the app did the update.
 
