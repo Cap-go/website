@@ -4,7 +4,7 @@ const tweets = ref([
     image: '/andrew.webp',
     name: 'Andrew Peacock',
     handle: '_andypeacock',
-    message: 'Here\'s my view:\n\nReact-native: Too many moving parts that eventually broke.\n\nFlutterflow: new language, stumbled on first attempt to add a plugin.\n\nNow: Capacitor + vue or react + @VoltBuilder + @Capgo 🤘',
+    message: 'Here\'s my view:\n\nReact-native: Too many moving parts that eventually broke.\n\nFlutterflow: new language, stumbled on first attempt to add a plugin.\n\nNow: @Capacitor + @vue or @react + @VoltBuilder + @Capgo 🤘',
   },
   {
     image: '/lincoln.webp',
