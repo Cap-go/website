@@ -13,16 +13,16 @@ const tweets = ref([
     message: 'The community needed this and  @Capgo  is doing something really important!',
   },
   {
-    image: '/simon.webp',
-    name: 'Simon Flack',
-    handle: 'simonflack',
-    message: 'The nice thing about what you’ve done with @Capgo is there are multiple ways to get the job done - web, cli and api… ✨',
-  },
-  {
     image: '/avatar-female-1.webp',
     name: 'Bessie Cooper',
     handle: 'bessiecooper',
     message: '@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden.',
+  },
+  {
+    image: '/LevarBerry.webp',
+    name: 'LeVar Berry',
+    handle: 'levarberry',
+    message: 'Just cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out',
   },
   {
     image: '/mallats.webp',
