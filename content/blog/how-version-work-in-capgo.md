@@ -18,6 +18,11 @@ Capgo uses 2 main variables to manage versions in your Capacitor app:
   - Native version
   - JavaScript versions
 
+
+<div class="mx-auto" style="width:100%;">
+  <img src="/graph_capgo.webp" alt="Capacitor update system">
+</div>
+
 All versions choices are decided server side by Capgo.
 
 ## Versioning system
