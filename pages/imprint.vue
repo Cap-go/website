@@ -27,9 +27,9 @@ const domain = config.public.baseUrl
         Company name: Digital shift OÜ <br>
         Register code : 14236508 <br>
         Address: Sepapaja 6, 15551 , Tallinn, Estonia <br>
-        Hosting: Netlify egde <br>
+        Hosting: Cloudflare Egde, Netlify Egde<br>
         Data storage: AWS eu-west-2 (London) <br>
-        Data processing: Cloudflare edge and Netlify edge <br>
+        Data processing: Cloudflare Egde and Netlify Egde, Supabase <br>
       </p>
     </div>
   </div>
