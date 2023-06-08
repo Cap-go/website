@@ -428,6 +428,12 @@ jobs:
       - name: Build
         id: build_code
         run: npm run mobile
+      - uses: actions/cache@v3
+        with:
+          path: ios/App/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: Sync
         id: sync_code
         run: npx cap sync
