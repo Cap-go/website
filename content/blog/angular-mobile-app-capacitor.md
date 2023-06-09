@@ -5,8 +5,8 @@ title: Building Mobile Apps with Angular and Capacitor
 description: Learn how to create a mobile app with Angular, Capacitor, and enhance the native UI with Konsta UI.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2023-06-09
-updated_at: 2023-06-09
+created_at: 2023-06-06
+updated_at: 2023-06-06
 head_image: "/angular_capacitor.webp"
 head_image_alt: Angular and Capacitor illustration
 tag: Tutorial
