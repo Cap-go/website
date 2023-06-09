@@ -14,7 +14,8 @@ const year = new Date().getFullYear()
 // no-rel target="_blank"
 const navigation = {
   solutions: [
-    { name: 'Community', href: 'https://discord.gg/VnYRvBfgA6', target: '_blank' },
+    { name: 'Register', href: '/register', target: '_blank' },
+    { name: 'Join Community', href: 'https://discord.gg/VnYRvBfgA6', target: '_blank' },
     { name: 'App mobile', href: '/app_mobile/' },
     { name: 'Documentation', href: 'https://docs.capgo.app/', target: '_blank' },
     { name: 'Plugins', href: '/plugins/' },

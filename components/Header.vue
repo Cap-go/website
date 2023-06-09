@@ -72,13 +72,13 @@ const menuMobile = ref(false)
           </a>
 
           <a
-            href="https://discord.gg/VnYRvBfgA6"
+            href="/register"
             target="_blank"
             title="Join discord"
             class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
             role="button"
           >
-            Join community
+            Register
           </a>
         </div>
       </div>
@@ -108,11 +108,11 @@ const menuMobile = ref(false)
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
         >Login</a>
         <a
-          href="https://discord.gg/VnYRvBfgA6"
+          href="/register"
           title="Communauty"
           target="_blank"
           class="bg-gray-900 text-white block rounded-md text-base font-medium px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
-        >Join community</a>
+        >Register</a>
       </div>
     </div>
   </header>
