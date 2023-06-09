@@ -85,7 +85,7 @@ const tweets = ref([
         <h2
           class="py-0 px-8 m-0 text-3xl font-boldSave time with auto sm:text-4xl xl:text-5xl font-pj tracking-tight text-center text-gray-200 align-baseline border-0 border-solid"
         >
-          They say about Capgo
+          They love Capgo
         </h2>
         <div class="flex p-0 m-0 align-baseline border-0 border-solid items-center md:flex-col flex-wrap md:max-h[1000px]">
           <Tweet v-for="tweet in tweets" :key="tweet.handle" :tweet="tweet" />
