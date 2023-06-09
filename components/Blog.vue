@@ -13,10 +13,10 @@ defineProps<{
 
 <template>
   <div
-    class="overflow-hidden bg-white rounded shadow"
+    class="overflow-hidden bg-gray-700 rounded-xl"
   >
-    <div class="p-5">
-      <div class="relative">
+    <div>
+      <div class="relative p-2">
         <a
           :href="link"
           :title="title"
@@ -42,19 +42,19 @@ defineProps<{
         </div>
       </div>
       <span
-        class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"
+        class="px-5 block mt-3 text-sm font-semibold tracking-widest text-gray-300 uppercase"
       >
         {{ formatTime(date) }}
       </span>
-      <p class="mt-5 text-2xl font-semibold">
-        <a :href="link" :title="title" class="text-black">
+      <p class="px-5 mt-3 text-2xl font-semibold">
+        <a :href="link" :title="title" class="text-gray-100">
           {{ title }}
         </a>
       </p>
       <a
         :href="link"
         :title="title"
-        class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+        class="m-5 inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-200 transition-all duration-200 border-b-2 border-blue-300 hover:border-blue-600 focus:border-blue-600"
       >
         Continue Reading
         <svg
