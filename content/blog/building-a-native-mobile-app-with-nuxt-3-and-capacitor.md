@@ -198,7 +198,7 @@ Note that you should use the correct IP and port in your configuration. The code
 Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
 
 ```shell
-npm i @capgo/flash
+npm i @capacitor/share
 ```
 
 There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.vue** to this:
