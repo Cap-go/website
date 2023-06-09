@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
 import { openMessenger } from '~/services/crisp'
+
 const router = useRouter()
 router.afterEach((to) => {
   if (to.hash && to.hash.startsWith('#support'))
@@ -15,7 +16,6 @@ const year = new Date().getFullYear()
 const navigation = {
   solutions: [
     { name: 'Register', href: '/register', target: '_blank' },
-    { name: 'Join Community', href: 'https://discord.gg/VnYRvBfgA6', target: '_blank' },
     { name: 'App mobile', href: '/app_mobile/' },
     { name: 'Documentation', href: 'https://docs.capgo.app/', target: '_blank' },
     { name: 'Plugins', href: '/plugins/' },
@@ -28,6 +28,7 @@ const navigation = {
     // { name: 'Insights', href: '#' },
   ],
   support: [
+    { name: 'Community', href: 'https://discord.gg/VnYRvBfgA6', target: '_blank' },
     { name: 'Pricing', href: '/pricing/' },
     { name: 'Guides', href: '/blog/' },
     { name: 'Status', href: 'https://status.capgo.app/', target: '_blank' },

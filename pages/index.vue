@@ -280,22 +280,88 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <div class="">
+    <section class="relative py-12 overflow-hidden sm:py-16 lg:py-20 xl:py-32">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid items-center grid-cols-1 xl:grid-cols-2">
+          <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
+            <h2 class="font-bold text-gray-100 text-3xl sm:text-4xl xl:text-5xl font-pj">
+              You’re in good company.
+            </h2>
+            <p class="mt-6 text-lg font-normal text-gray-400 font-pj">
+              Capgo enables development teams at some of the most innovative companies.
+            </p>
+          </div>
+
+          <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
+            <div class="absolute inset-16">
+              <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
+            </div>
+
+            <div class="relative space-y-5">
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel" title="hello revel">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-800" />
+    </section>
+    <Testimonials />
+    <section class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2 class="text-base font-semibold text-pumpkinOrange-600 tracking-wide uppercase">
             CI/CD
           </h2>
-          <p class="mt-1 text-4xl font-bold text-gray-100 sm:text-5xl sm:tracking-tight lg:text-7xl">
+          <p class="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-7xl">
             Fully automatic deploy
           </p>
-          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-300">
+          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-700">
             Save time with automatic delivery pipeline, never worry about deploying your app again.
           </p>
         </div>
       </div>
-    </div>
-    <Testimonials />
+    </section>
     <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
@@ -353,72 +419,6 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           title="send update illustration"
         >
       </div>
-    </section>
-    <section class="relative py-12 overflow-hidden bg-gray-50 sm:py-16 lg:py-20 xl:py-32">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="grid items-center grid-cols-1 xl:grid-cols-2">
-          <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
-            <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">
-              You’re in good company.
-            </h2>
-            <p class="mt-6 text-lg font-normal text-gray-600 font-pj">
-              Capgo enables development teams at some of the most innovative companies.
-            </p>
-          </div>
-
-          <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
-            <div class="absolute inset-16">
-              <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter" style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
-            </div>
-
-            <div class="relative space-y-5">
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8 " src="/revel_logo.svg" alt="hello revel" title="hello revel">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-50" />
     </section>
 
     <div class="relative mt-24 sm:mt-32 sm:py-16">
