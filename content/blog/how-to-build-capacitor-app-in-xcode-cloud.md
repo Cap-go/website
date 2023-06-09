@@ -5,7 +5,7 @@ description: Use Xcode cloud to build your Capacitor JS app and bypass the need 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-09-01
-updated_at: 2022-09-01
+updated_at: 2023-06-10
 head_image: "/xcode_cloud.webp"
 head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
@@ -83,18 +83,17 @@ export PATH
 node -v
 npm -v
 
-brew install pnpm # optional, you can also install yarn if you use it
-
 # Install dependencies
-pnpm install --frozen-lockfile
-# or `npm ci` or `yarn install --frozen-lockfile`
-npm run mobile 
+npm ci
+# or `pnpm install --frozen-lockfile` or `yarn install --frozen-lockfile`
+npm run build 
 # or npm run build
 npm run sync:ios
 ```
 
 Save this file in the root of your project and name it `ios/App/ci_scripts/ci_post_clone.sh`
 
+Then make this file executable with this command `chmod +x ios/App/ci_scripts/ci_post_clone.sh`
 
 ## Create a Xcode workflow
 

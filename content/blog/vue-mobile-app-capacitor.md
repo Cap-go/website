@@ -5,8 +5,8 @@ title: Building Mobile Apps with Vue and Capacitor
 description: Learn how to create a mobile app using Vue, Capacitor, and optionally enhance the UI with Konsta UI.
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
-created_at: 2023-06-09
-updated_at: 2023-06-09
+created_at: 2023-06-08
+updated_at: 2023-06-08
 head_image: "/vue_capacitor.webp"
 head_image_alt: Vue and Capacitor illustration
 tag: Tutorial

@@ -76,7 +76,7 @@ if (data.value) {
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div class="block aspect-w-4 aspect-h-3">
         <img
-          class="object-cover w-full h-full lg:rounded-lg"
+          class="object-cover w-full h-full lg:rounded-lg md:shadow-xl md:shadow-gray-700"
           :src="data?.head_image"
           loading="eager"
           height="486"
@@ -108,7 +108,7 @@ if (data.value) {
     </p>
     <article
       v-if="data"
-      class="mx-auto text-left text-white prose text-white pb-4 px-4 lg:max-w-1/2"
+      class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2"
     >
       <ContentRenderer :value="data" />
     </article>
