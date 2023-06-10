@@ -8,7 +8,7 @@ created_at: 2022-12-14
 updated_at: 2022-12-14
 head_image: "/push_notif.webp"
 head_image_alt: "Ionic Capacitor Push Notifications with Firebase"
-tag: ionic
+tag: tutorial
 published: true
 next_blog: ""
 
