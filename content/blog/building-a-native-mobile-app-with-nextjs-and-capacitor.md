@@ -286,6 +286,8 @@ But now i don't recommend it anymore it's very hacky to integrate it with Next.j
 
 if you want a really great looking mobile UI that adapts to iOS and Android specific styling i recommend kosta UI.
 
+You need to have [tailwind already install](https://tailwindcss.com/docs/guides/nextjs) 
+
 To use it, we only need to install the package react package:
 
 ```shell

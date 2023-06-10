@@ -101,7 +101,7 @@ To rectify this, open the **capacitor.config.json** file and update the **webDir
 You can try it out by executing the following commands:
 
 ```shell
-npm run static
+npm run generate
 npx cap sync
 ```
 
@@ -235,7 +235,7 @@ After hitting the button, you can witness the beautiful native share dialog in a
 
 ## Adding Konsta UI
 
-To use Konsta UI in your Nuxt 3 app, you only need to install the package:
+To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/nuxtjs) and to install the package:
 
 ```shell
 npm i konsta

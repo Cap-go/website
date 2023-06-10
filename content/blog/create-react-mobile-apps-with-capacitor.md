@@ -45,8 +45,7 @@ In order to create a native mobile app, we require an **export** of our project.
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "static": "npm run build && next export"
+    "eject": "react-scripts eject"
   }
 }
 ```
@@ -117,11 +116,11 @@ To rectify this, open the **capacitor.config.json** file and update the **webDir
 You can try it out by executing the following commands:
 
 ```shell
-npm run static
+npm run build
 npx cap sync
 ```
 
-The first command `npm run static` will simply build your React project and export the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+The first command `npm run build` will simply build your React project and export the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
 Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins) it’s time to run `npx cap sync` again.
 
@@ -266,6 +265,8 @@ To make the button look more mobile-friendly, we can add some styling using my f
 I’ve worked years with [Ionic](https://ionicframework.com/) to build awesome cross-platform applications, and it was one of the best choices for years. But now I don't recommend it anymore; it's very hacky to integrate it with React, and it's not really worth it when you have already [tailwindcss](https://tailwindcss.com/).
 
 If you want a great-looking mobile UI that adapts to iOS and Android specific styling, I recommend Konsta UI.
+
+You need to have [tailwind already install](https://tailwindcss.com/docs/guides/vite#react) 
 
 To use it, we only need to install the package react package:
 
