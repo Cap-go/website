@@ -32,23 +32,13 @@ Capacitor enables you to create a fantastic native mobile app without any compli
 To create a new SvelteKit app, run the following command:
 
 ```shell
-npm init svelte@next my-app
+npm create svelte@latest my-app
 cd my-app
 npm install
+npm run build
 ```
 
-To create a native mobile app, we need to **export** our project. Let's add a simple script in our **package.json** to build and copy the SvelteKit project:
-
-```json
-{
-  "scripts": {
-    // ...
-    "generate": "svelte-kit build"
-  }
-}
-```
-
-After running the `generate` command, you should see a new `dist` folder at the root of your project.
+After running the `build` command, you should see a new `dist` folder at the root of your project.
 
 This folder will be used by Capacitor later, but for now, we need to set it up correctly.
 
@@ -85,24 +75,72 @@ To access the Android project later, you need to install [Android Studio](https:
 
 Additionally, you should find a **capacitor.config.ts** file in your project, which contains some basic Capacitor settings used during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is incorrect.
 
-To fix this, open the **capacitor.config.json** file and update the **webDir**:
+To fix this, open the **capacitor.config.ts** file and update the **webDir**:
 
-```json
-{
-  "appId": "com.example.app",
-  "appName": "my-app",
-  "webDir": "dist"
+```ts
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'my-app',
+  webDir: 'build',
 }
-```
 
-You can test it by running the following commands:
+export default config
+```
+ow that we’ve updated our Capacitor settings, let’s change out Sveltekit project to a static application by downloading the proper static adapter package:
 
 ```shell
-npm run generate
+npm i -D @sveltejs/adapter-static
+```
+
+After the package is installed, we’ll need to alter _svelte.config.js_ file from the auto-adapter to static:
+
+```ts
+import adapter from '@sveltejs/adapter-static'
+import { vitePreprocess } from '@sveltejs/kit/vite'
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+// Consult https://kit.svelte.dev/docs/integrations#preprocessors
+// for more information about preprocessors
+  preprocess: vitePreprocess(),
+
+  kit: {
+    // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
+    // If your environment is not supported or you settled on a specific environment, switch out the adapter.
+    // See https://kit.svelte.dev/docs/adapters for more information about adapters.
+    adapter: adapter({
+      // default options are shown. On some platforms
+      // these options are set automatically — see below
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+      precompress: false,
+      strict: true
+    })
+  }
+}
+
+export default config
+```
+
+With the _svelte.config.js_ updated, we’ll need to add a _prerender_ option by creating a _+layout.js_ page to _src/routes_ and just add the following export to _+layout.js_:
+
+```ts
+export const prerender = true
+```
+
+After adding and updating the _+layout.js_ page, we’ll need to add our mobile platforms, re-build our project to create the _build_ folder
+
+You can do it by running the following commands:
+
+```shell
+npm run build
 npx cap sync
 ```
 
-The first command `npm run generate` will build your SvelteKit project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+The first command `npm run build` will build your SvelteKit project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
 Additionally, the sync command might update the native platforms and install plugins, so when you install new [Capacitor plugins](https://capacitorjs.com/docs/plugins), it's time to run `npx cap sync` again.
 
@@ -130,7 +168,7 @@ In Xcode, you need to set up your signing account to deploy your app to a real d
 Congratulations! You have successfully deployed your SvelteKit web app to a mobile device. Here's an example:
 
 <div class="mx-auto" style="width: 50%;">
-  <img src="/nextjs-mobile-app.webp" alt="sveltekit-mobile-app">
+  <img src="/sveltekit-mobile-app.webp" alt="sveltekit-mobile-app">
 </div>
 
 But wait, there's also a faster way to do this during development...
@@ -319,7 +357,7 @@ If the live reload is out of sync after installing all the necessary components,
 You should see the following page as a result:
 
 <div class="mx-auto" style="width: 50%;">
-  <img src="/konsta-next.webp" alt="konsta-sveltekit">
+  <img src="/konsta-sveltekit.webp" alt="konsta-sveltekit">
 </div>
 
 ## Conclusion
