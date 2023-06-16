@@ -115,7 +115,7 @@ function descToEmoji(desc: string) {
           <ul class="mt-8 space-y-4 text-black">
             <li class="flex items-center">
               <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0 fill-blue-600" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor" viewBox="0 0 448 512"><path d="M99.9 192C80.1 192 64 208.1 64 227.9V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V227.9C0 172.7 44.7 128 99.9 128c26.5 0 51.9 10.5 70.6 29.3L322.7 309.5c6.7 6.7 15.9 10.5 25.4 10.5c19.8 0 35.9-16.1 35.9-35.9V192c0-17.7 14.3-32 32-32s32 14.3 32 32v92.1c0 55.2-44.7 99.9-99.9 99.9c-26.5 0-51.9-10.5-70.6-29.3L125.3 202.5c-6.7-6.7-15.9-10.5-25.4-10.5z" /></svg>
-              <span><span class="font-bold">{{ numberWithSpaces(updateCalc(plan)) }}</span> Updates/mo</span>
+              <span><span class="font-bold">{{ numberWithSpaces(updateCalc(plan)) }}</span>Live Updates/mo</span>
             </li>
 
             <li class="flex items-center">
