@@ -28,7 +28,7 @@ function toTb(value: number) {
           </h2>
         </div>
         <p class="mt-4 text-base font-normal text-gray-600 font-pj">
-          No limits. No commitments.
+          2,500.000 Live Updates. No commitments.
         </p>
       </div>
 
