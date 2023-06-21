@@ -299,7 +299,7 @@ module.exports = konstaConfig({
 
 Now we need to set up the main [App](https://konstaui.com/vue/app) component so we can set some global parameters (like `theme`).
 
-We need to wrap the whole app with `App` in the `src/routes/_layout.svelte`:
+We need to wrap the whole app with `App` in the `src/routes/+layout.svelte`:
 
 ```html
 <script>
