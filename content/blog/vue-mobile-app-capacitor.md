@@ -69,7 +69,7 @@ npx cap add ios
 npx cap add android
 ```
 
-You should now see new **ios** and **android** folders in your Vue project.
+You should now see new **iOS** and **android** folders in your Vue project.
 
 Update the **capacitor.config.json** file to point the **webDir** to the result of your build command:
 
@@ -179,8 +179,10 @@ To use Konsta UI in your Vue app, install the package and modify your `tailwind.
 npm i konsta
 ```
 
-Wrap your app with the `App` component in the `pages/_app.vue` file and use Konsta UI Vue components in your Vue pages.
+Wrap your app with the `App` component in the `pages/_app.vue` file, and use Konsta UI Vue components in your Vue pages.
 
 ## Conclusion
 
 Capacitor is a great option for building native applications based on an existing web project. With the addition of Capgo, it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+
+Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.

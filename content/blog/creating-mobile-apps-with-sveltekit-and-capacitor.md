@@ -367,3 +367,5 @@ Capacitor is an excellent option for building native applications based on an ex
 And with the addition of [Capgo](https://capgo.app), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
 If you would like to learn how to add Capgo to your SvelteKit app, take a look at the next article:
+
+Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.

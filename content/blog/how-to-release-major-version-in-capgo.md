@@ -22,17 +22,18 @@ But versioning is not made for that, the app store version is different from the
 
 Native version is made to manage breaking change in the *code*
 
-In IOS for example iOS 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seem to use SemVer there)
+In IOS, for example, iOS 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seem to use SemVer there)
 
-Now it's clear we don't mix them and use them for hat they are made!
+Now it's clear we don't mix them and use them for what they are made!
 
 ## Major release
 
-In your Capacitor app a major release is necessary when a breaking change happens, for example a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
+In your Capacitor app, a major release is necessary when a breaking change happens. 
+For example, a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
 
-This change means all tooling have to be aligned to handle the breaking change.
+This change means all tooling has to be aligned to handle the breaking change.
 
-That why Capgo follow this system.
+That why Capgo follows this system.
 So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.
 
 ### Versions
@@ -59,21 +60,21 @@ Your Ionic app is currently released with the version `1.2.3` with Capacitor 3
 
 You are doing the upgrade to capacitor 4.
 
-You need to upgrade your version number to `2.2.3`, then all your package include Capgo with notice this big change.
+You need to upgrade your version number to `2.2.3`, then all your packages include Capgo with notice this big change.
 
 When you release this version to Capgo and the App Store.
 
 All next live update in Capgo `2.2.4` will never be sent to user with `1.2.3` version. Only with `2.2.3` version.
 
-If you follow this pattern, no need to worry more, all is well handle.
+If you follow this pattern, no need to worry more, all is well handled.
 
 
 ## If I don't follow this
 
-In this case, that mean you have to send your new app with Capacitor 4 to Apple and Google, but don't to Capgo.
+In this case, that means you have to send your new app with Capacitor 4 to Apple and Google, but don't to Capgo.
 
 Then you have to wait 100% of your users, have the app or at least 90%, it will take months, probably.
 
-While during this time you cannot send any update with Capgo, since old user cannot get new version.
+While during this time you cannot send any update with Capgo, since old user cannot get the new version.
 You don't have a way to select only some users to receive the update.
 

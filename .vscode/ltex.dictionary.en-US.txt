@@ -3,3 +3,5 @@ Affero
 Capacitor-updater
 deviceID
 Fastlane
+Appflow
+Konsta

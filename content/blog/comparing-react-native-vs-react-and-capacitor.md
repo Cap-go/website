@@ -241,3 +241,6 @@ The choice between React and Capacitor or React Native depends on your specific 
 While React Native has its advantages, Capacitor stands out as a powerful and flexible tool for building cross-platform mobile apps. Its compatibility with various JavaScript frameworks, ability to create progressive web apps, and ease of use for web developers make it a strong contender in the mobile app development space.
 
 Consider your specific needs, preferences, and goals when choosing the right framework for your project. Capacitor offers many benefits that make it an attractive option for developers looking to build high-quality mobile apps with a familiar web development workflow.
+
+
+Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
