@@ -4,7 +4,7 @@ title: in app purchases for capacitor
 description: How to implement in-app purchases for capacitor apps using the Capacitor Purchases plugin and RevenueCat
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-01-19
-updated_at: 2023-01-19
+updated_at: 2023-06-29
 head_image: "/revenuecat_iap.webp"
 head_image_alt: Revenue cat in app purchases
 tag: Tutorial
@@ -40,7 +40,7 @@ add the plugin to your app native code
 `npx cap sync`
 
 
-add in app purchases capability in xcode:
+add in-app purchases capability in Xcode:
 
 ![Xcode step 1](/iap_step1.webp)
 then
@@ -55,7 +55,7 @@ Sign up for a new RevenueCat account [here](https://app.revenuecat.com/).
 > 
 > 💡 Here's a tip!
 > 
-> RevenueCat recommend creating a separate RevenueCat account for each app / project you have, especially if you ever intend on selling the app. This will speed up the transfer process, since you can transfer the entire account rather than waiting for RevenueCat Support to transfer individual projects.
+> RevenueCat recommends creating a separate RevenueCat account for each app / project you have, especially if you ever intend on selling the app. This will speed up the transfer process, since you can transfer the entire account rather than waiting for RevenueCat Support to transfer individual projects.
 
 
 ### Organizations / Enterprise
@@ -91,7 +91,7 @@ App configuration page for an Apple App Store app
 > 
 > 💡 Here's a tip!
 > 
-> After registering your app, RevenueCat recommend setting up [Platform Server Notifications](https://www.revenuecat.com/docs/server-notifications). These notifications aren't required but will speed up [webhooks](https://www.revenuecat.com/docs/webhooks) and integration delivery times and reduce lag time updating your subscribers.
+> After registering your app, RevenueCat recommends setting up [Platform Server Notifications](https://www.revenuecat.com/docs/server-notifications). These notifications aren't required, but will speed up [webhooks](https://www.revenuecat.com/docs/webhooks) and integration delivery times and reduce lag time updating your subscribers.
 
 > ### 📘
 > 
@@ -204,7 +204,7 @@ if (offerings.current !== null) {
 
 If fetching your [Offerings](https://www.revenuecat.com/docs/entitlements#offerings), [products](https://www.revenuecat.com/docs/entitlements#products), or available [packages](https://www.revenuecat.com/docs/entitlements#adding-packages) are empty, it's due to some configuration issue in the respective store.
 
-The most common reasons for this in App Store Connect are an out-of-date 'Paid Applications Agreement' or products not at least in the 'Ready To Submit' state. In Google Play this usually occurs when the app is not published on a closed track and a valid test user added.
+The most common reasons for this in App Store Connect are an out-of-date 'Paid Applications Agreement' or products not at least in the 'Ready To Submit' state. In GooglePlay this usually occurs when the app is not published on a closed track and a valid test user added.
 
 You can find more info about troubleshooting this issue in RevenueCat [Help Center](https://support.revenuecat.com/hc/en-us/articles/360041793174).
 
@@ -295,10 +295,10 @@ If you need to move deep usage of the Capacitor SDK check the documentation [her
 
 ### Next Steps
 \
--   If you haven't already, make sure your products are configured correctly by checking out RevenueCat [guide on entitlements](https://www.revenuecat.com/docs/entitlements) .
+-   If you haven't already, make sure your products are configured correctly by checking out RevenueCat [guide on entitlements](https://www.revenuecat.com/docs/entitlements).
 -   If you want to use your own user identifiers, read about [setting app user IDs](https://www.revenuecat.com/docs/user-ids) .
--   If you're moving to RevenueCat from another system, see RevenueCat guide on [migrating your existing subscriptions](https://www.revenuecat.com/docs/migrating-existing-subscriptions) .
--   Once you're ready to test your integration, you can follow RevenueCat guides on [testing and debugging](https://www.revenuecat.com/docs/debugging) .
+-   If you're moving to RevenueCat from another system, see RevenueCat guide on [migrating your existing subscriptions](https://www.revenuecat.com/docs/migrating-existing-subscriptions).
+-   Once you're ready to test your integration, you can follow RevenueCat guides on [testing and debugging](https://www.revenuecat.com/docs/debugging).
 -   If you qualify for the App Store Small Business Program, check out RevenueCat guide on [how to apply and inform RevenueCat](https://www.revenuecat.com/docs/app-store-small-business-program)
 
 

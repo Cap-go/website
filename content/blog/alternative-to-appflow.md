@@ -6,7 +6,7 @@ description: Ionic Appflow is the best complete set of tool for your app, sadly 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-02
-updated_at: 2022-12-14
+updated_at: 2023-06-29
 head_image: "/appflow_alt.webp"
 head_image_alt: Appflow alternative illustration
 tag: Alternatives

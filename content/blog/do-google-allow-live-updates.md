@@ -5,7 +5,7 @@ description: 'How can you push code updates to production Android apps and be fu
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-01-13
-updated_at: 2022-01-13
+updated_at: 2023-06-29
 head_image: "/playstore.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
@@ -16,7 +16,7 @@ next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 Google Play is less restrictive than Apple when it comes to updating apps.
 
-Updating your apps distributed via Google Play can be a tricky task, but it is important to follow Google's guidelines to remain compliant. According to Google Play's guidelines, apps must not modify, replace or update themselves using any method other than Google Play's own update mechanism. This means that downloading executable code, such as dex, JAR, or .so files, from a source apart from Google Play is not permitted.
+Updating your apps distributed via Google Play can be a tricky task, but it is important to follow Google's guidelines to remain compliant. According to Google Play's guidelines, apps must not modify, replace or update themselves using any method apart from Google Play's own update mechanism. This means that downloading executable code, such as dex, JAR, or .so files, from a source apart from Google Play is not permitted.
 
 However, this restriction does not apply to code that runs in a virtual machine or an interpreter that provides indirect access to Android APIs, such as JavaScript in a webview or browser. This means that you can use interpreted languages, such as JavaScript, Python, Lua, etc., to update your app without going through Google Play's review process. One tool that can help with this process is the Capgo Capacitor plugin. This plugin allows developers to update their HTML, CSS, and JavaScript code and send updates to their apps without the need for review.
 

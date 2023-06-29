@@ -5,7 +5,7 @@ description: Allow you user to try beta version without the need of TestFlight, 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-06-17
-updated_at: 2022-06-17
+updated_at: 2023-06-29
 head_image: "/capgo_select_update.webp"
 head_image_alt: TestFlight alternative illustration
 tag: alternatives
@@ -24,13 +24,13 @@ I got the feeling too, but since I'm the maker of Capgo, I was able to take a lo
 
 The next pain I got in the Capacitor app distribution process is to make other teammates test the updates!
 
-With TestFlight, the issue is simple, bring people into your team and make them understand how to get it is time-consuming!
+With TestFlight, the issue is simple, bringing people into your team and making them understand how to get it is time-consuming!
 
 And of course, each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
 
 I got many times my presentation delayed by this…
 
-And for Google this is even worse, the big mystery of my life, releasing a production version take less than 2 hours, but release a close beta take 1-2 days.
+And for Google this is even worse, the big mystery of my life, releasing a production version takes less than 2 hours, but releasing a close beta takes 1–2 days.
 
 
 ## Solution
@@ -47,11 +47,11 @@ Then you have 2 way to let users get the updates from the channel
 
 This can be useful when you don't want to create your own backend for channel set, this is fast to implement.
 
-With that one, the only thing you need to do is allow one of your channels to be self set.
+With that one, the only thing you need to do is allow one of your channels to be self to set.
 
 ![Allow set self in Capgo](/self_set.webp)
 
-And then add this in the code of your Ionic app, for best experience, use this after the user clicks on button like "register for beta"
+And then add this in the code of your Ionic app, for best experience, use this after the user clicks on a button like "register for beta"
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -67,11 +67,11 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getDeviceId()
 ```
-Hide a button somewhere in your app, or show the button to only connected user with a `admin` role, for example.
+Hide a button somewhere in your app, or show the button to only connected users with a `admin` role, for example.
 
 Then Go to the Web app or native app Capgo, connect as app admin, select your app, click on the device list.
 
-Then put in the search bar the deviceID click on the one found and then click on the Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close again.
+Then put in the search bar the deviceID click on the one found and then click on the Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close.
 
 He should get your version.
 
@@ -150,7 +150,7 @@ async function handleRequest(request) {
   return fetch(newUrl.toString(), options)
 }
 ```
-And just send your device_id in the body it to the deployed URL with POST to add and DELETE method to delete.
+And just send your device_id in the body of it to the deployed URL with POST to add and DELETE method to delete.
 </details>
 
 After this configured, try to add a button in your app to opt in to the channel, and check in the web app if that has been set.

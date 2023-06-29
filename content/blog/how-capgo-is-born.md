@@ -5,7 +5,7 @@ description: Backstory on how i started this journey and builded Capgo
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-01
-updated_at: 2022-03-01
+updated_at: 2023-06-29
 head_image: "/capgo_birth.webp"
 head_image_alt: Capgo birth illusatration
 tag: Story
@@ -14,9 +14,9 @@ next_blog: ""
 
 ---
 
-Hey I'm Martin Donadieu,
+Hey, I'm Martin Donadieu,
 
-In july 2021, I left [Naas](https://naas.ai) the startup I cofounded in 2019 to build project in solo.
+In July 2021, I left [Naas](https://naas.ai) the startup I cofounded in 2019 to build project in solo.
 
 During the first 6 months of my solo journey I focused on rebooting my project Captime, a mobile app I did 4 years earlier, who became a side business with the covid.
 
@@ -29,11 +29,11 @@ At the time, Captime was making $400/month, so I was looking for an affordable s
 
 The only other alternative was Microsoft App Center, but they shut down support for apps running on Cordova / Capacitor.
 
-If you were a solo developer like me, you will find that Ionic AppFlow is not the best Price for you.
+If you are a solo developer like me, you will find that Ionic AppFlow is not the best Price for you.
 
-Like you, I was complaining about it, I contacted Ionic, they understand the complaint, but there aren't open to change the pricing, i wasn't the target.
+Like you, I was complaining about it, I contacted Ionic, they understood the complaint, but there weren't open to change the pricing, i wasn't the target.
 
-So I decided to try to fix my biggest pain in my Capacitor JS development workflow: Live updates.
+So, I decided to try to fix my biggest pain in my Capacitor JS development workflow: Live updates.
 
 After one month of trying, I found a way to download from one URL a zip and replace the source of the app.
 

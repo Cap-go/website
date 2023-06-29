@@ -6,7 +6,7 @@ description: In this guide, we’ll walk through the complete migration for Capg
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-22
-updated_at: 2022-03-22
+updated_at: 2023-06-29
 head_image: "/migrate_appcenter.webp"
 head_image_alt: Capacitor JS Dev looking for alternative
 tag: Migration
@@ -112,13 +112,15 @@ First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present i
 ```shell
 npx @capgo/cli@latest login YOURKEY
 ```
+
 ## Add your first app
 
 Let's get started by first creating the app in Capgo Cloud with the CLI.
 
 `npx @capgo/cli@latest app add`
 
-This command will use all variable defined in the Capacitor config file to create the app.
+This command will use all variables defined in the Capacitor config file to create the app.
+
 ## Upload your first bundle
 
 Run the command to build your code and send it to Capgo with:
@@ -146,6 +148,7 @@ Add this config to your main JavaScript file.
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
 CapacitorUpdater.notifyAppReady()
 ```
 
@@ -157,7 +160,7 @@ For your application to receive a live update from Deploy, you'll need to run th
 
     npx cap run [ios | android]
 
-Open the app, put it in background and open it again, you should see in the logs the app did the update.
+Open the app, put it in the background and open it again, you should see in the logs the app did the update.
 
 Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://docs.capgo.app/plugin/auto-update/).
 
@@ -202,4 +205,4 @@ I have made a second article to allow you to so.
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewroted with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewrote with chat-gpt-3 and adapted.

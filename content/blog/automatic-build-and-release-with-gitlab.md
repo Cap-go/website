@@ -6,7 +6,7 @@ description: Create your own CI/CD pipeline with Gitlab for free, deploy
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-06-16
-updated_at: 2022-06-16
+updated_at: 2023-06-29
 head_image: "/gitlab_ci.webp"
 head_image_alt: Gitlab CI illustration
 tag: CI/CD
@@ -14,11 +14,11 @@ published: false
 next_blog: ""
 
 ---
-This tutorial focuses on the GitLab CI, but you can adapt it with little tweak to any other CI/CD platform.
+This tutorial focuses on the GitLab CI, but you can adapt it with a little tweak to any other CI/CD platform.
 
 ## Preface 
 
-Be sure you added your app first to Capgo, this tutorial just focus on the upload phase
+Be sure you added your app first to Capgo, this tutorial just focuses on the upload phase
 
 
 ## Commit convention
@@ -97,7 +97,7 @@ Set the version in this file as the same you have in your `package.json` file.
 
 This is only necessary the first time, then the tools will keep it up to date.
 
-You can now commit this both file and see your first tag appear in GitHub!
+You can now commit this both files and see your first tag appear in GitHub!
 
 ## GitHub actions for build
 
@@ -139,12 +139,12 @@ If your command for build is different, you can change it in the `build_code` st
 
 To make this work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
-You can now commit this both file and see your first tag appear in GitHub!
+You can now commit this both files and see your first tag appear in GitHub!
 
-Add the commit will generate a new build for production channel.
+Add the commit will generate a new build for the production channel.
 
 You should add your test in the build step to ensure your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
+Go To your Capgo dashboard and check your build who just appeared, you now have your CI/CD system.
 
 If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.

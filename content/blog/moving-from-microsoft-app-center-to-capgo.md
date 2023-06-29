@@ -6,7 +6,7 @@ description: Microsoft stops support for apps running on Cordova. Move from Micr
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-21
-updated_at: 2023-03-10
+updated_at: 2023-06-29
 head_image: "/app_center.webp"
 head_image_alt: Microsoft App Center illustration
 tag: Alternatives
@@ -14,7 +14,7 @@ published: true
 next_blog: ""
 
 ---
-Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek out alternatives, and I am thrilled to say that the [Capgo](https://capgo.app) platform is a fantastic option for those looking for full support for Capacitor apps.
+Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek alternatives, and I am thrilled to say that the [Capgo](https://capgo.app) platform is a fantastic option for those looking for full support for Capacitor apps.
 
 ## From Microsoft App Center to Capgo Cloud
 
@@ -26,4 +26,4 @@ If you’re interested in learning more about migrating from Microsoft App Cente
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewroted with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewrote with chat-gpt-3 and adapted.

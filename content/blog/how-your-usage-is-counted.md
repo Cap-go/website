@@ -5,7 +5,7 @@ description: Understand how Capgo count your usage, and use it at best. Learn to
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-11-25
-updated_at: 2022-11-25
+updated_at: 2023-06-29
 head_image: "/usage_explained.webp"
 head_image_alt: Capgo usage system explained
 tag: Solution
@@ -53,7 +53,7 @@ Each month, this data starts from zero.
 
 The first method returns: 900+ users
 while the second one is at 200+ users on your account
-For plan limit I use the first method, who is 100% reliable and to display the chart I use the second one.
+For plan limit I use the first method, who is 100% reliable, and to display the chart I use the second one.
 You can see both on your account home page.
 
 ## Storage

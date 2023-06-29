@@ -5,7 +5,7 @@ description: How to set up a CI/CD pipeline for your IOS Ionic app using fastlan
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-10-30
-updated_at: 2022-10-30
+updated_at: 2023-06-29
 head_image: "/fastlane_ios.webp"
 head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
@@ -261,7 +261,7 @@ team_id(ENV["DEVELOPER_PORTAL_TEAM_ID"])
 
 ## **Configure Fastlane match**
 
-Fastlane [match](https://docs.fastlane.tools/actions/match/) is a new approach to iOS’s codesigning. Fastlane match makes it easy for teams to manage the required certificates and provisioning profiles for your iOS apps.
+Fastlane [match](https://docs.fastlane.tools/actions/match/) is a new approach to iOS’s code signing. Fastlane match makes it easy for teams to manage the required certificates and provisioning profiles for your iOS apps.
 
 Create a new private repository named `certificates`, for example on your GitHub personal account or organization.
 

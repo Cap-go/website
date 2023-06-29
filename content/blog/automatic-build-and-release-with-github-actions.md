@@ -6,7 +6,7 @@ description: Create your own CI/CD pipeline with Github actions for free, deploy
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-03-23
-updated_at: 2022-03-23
+updated_at: 2023-06-29
 head_image: "/github_actions.webp"
 head_image_alt: Github action illustration
 tag: CI/CD
@@ -82,7 +82,7 @@ Lastly, set the version in your `package.json` file, sync it with your Native ve
 
 This is only necessary the first time, then the tools will keep it up to date.
 
-You can now commit this both file and see your first tag appear in GitHub!
+You can now commit this both files and see your first tag appear in GitHub!
 
 Both native and web platform will have the version number bump after each commit.
 ## GitHub actions for build
@@ -125,13 +125,13 @@ If your command for build is different, you can change it in the `build_code` st
 
 To make this work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `CAPGO_TOKEN`.
 
-You can now commit this both file and see your first tag appear in GitHub!
+You can now commit this both files and see your first tag appear in GitHub!
 
-Add the commit will generate a new build for production channel.
+Add the commit will generate a new build for the production channel.
 
 You should add your test in the build step to ensure your code is working.
 
-Go To your Capgo dashboard and check your build who just appear, you now have your CI/CD system.
+Go To your Capgo dashboard and check your build who just appeared, you now have your CI/CD system.
 
 If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.
 

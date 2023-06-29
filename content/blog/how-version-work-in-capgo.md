@@ -5,7 +5,7 @@ description: Understand how Capgo manage versions in your Capacitor app, and use
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-25
-updated_at: 2022-08-25
+updated_at: 2023-06-29
 head_image: "/versionning.webp"
 head_image_alt: Capgo bundle version system
 tag: Tutorial
@@ -34,7 +34,7 @@ Where Capgo find the version to compare
 
 #### IOS
 
-  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION`
+  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
   > You can override this behavior in `capacitor.config.json` file [docs here](https://docs.capgo.app/plugin/auto-update#advanced-settings)
 
 #### Android
@@ -93,13 +93,13 @@ With some guard conditions:
 
 ## App store update
 
-When you publish your Capacitor JS app on the App Store, what happen is simple.
+When you publish your Capacitor JS app on the App Store, what happens is simple.
 
-Your user will get the new version from the store and remove all local update in their app by default.
+Your user will get the new version from the store and remove all local updates in their app by default.
 
 If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](https://docs.capgo.app/plugin/api#settings)
 
-This can only be change on the app side, not from cloud like other settings.
+This can only be changed on the app side, not from the cloud like other settings.
 
 ### Other settings
 
@@ -111,6 +111,6 @@ Yon can link one deviceID to:
   - a specific bundle version
   - a specific channel
 
-This will bypass all settings done above.
+This will bypass all the settings done above.
 
-Learn more about it on the article below.
+Learn more about it in the article below.

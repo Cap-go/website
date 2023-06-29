@@ -5,7 +5,7 @@ description: This step-by-step guide will help you migrate your web app from Cor
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-06-07
-updated_at: 2023-06-07
+updated_at: 2023-06-29
 head_image: "/migrating-cordova-to-capacitor.webp"
 head_image_alt: Cordova to Capacitor migration illustration
 tag: Migration
@@ -60,7 +60,7 @@ Congratulations! You've successfully migrated your web app from Cordova to Capac
 
 ## Live Updates with Our Capgo Service
 
-We're proud to offer Capgo, our own solution that enables live updates for your Capacitor apps, allowing you to deliver Over-The-Air (OTA) updates at a fair price. This feature is particularly useful for making quick fixes, deploying new features, and ensuring your users always have the latest version of your app without waiting for app store approval.
+We're proud to offer Capgo, our solution that enables live updates for your Capacitor apps, allowing you to deliver Over-The-Air (OTA) updates at a fair price. This feature is particularly useful for making quick fixes, deploying new features, and ensuring your users always have the latest version of your app without waiting for app store approval.
 
 ### How Our Capgo Service Works
 
@@ -69,7 +69,7 @@ Capgo is a cloud-based service that allows you to deploy live updates to your Ca
 ### Benefits of Capgo Live Updates
 
 - **Faster updates:** Deploy updates instantly without waiting for app store approval.
-- **Reduced app store dependence:** Bypass app store restrictions and limitations.
+- **Reduced Apple Store dependence:** Bypass app store restrictions and limitations.
 - **Improved user experience:** Keep users engaged with the latest features and bug fixes without requiring them to manually update the app.
 
 

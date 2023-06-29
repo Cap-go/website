@@ -40,7 +40,7 @@ cd my-app
 
 Choose "Angular" when prompted for the Angular version.
 
-In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Angular project:
+To create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Angular project:
 
 ```json
 {
@@ -113,7 +113,7 @@ Without noticing, you are now actually done, so let’s see the app on a device!
 
 ## Build and Deploy native apps
 
-To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
+To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you have to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
 
 If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
 
@@ -126,7 +126,7 @@ Once you've set up your native projects, deploying your app to a connected devic
 
 ![android-studio-run](/android-studio-run.webp)
 
-In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
+In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you must be enrolled in the Developer Program). Subsequently, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
 
 ![xcode-run](/xcode-run.webp)
 

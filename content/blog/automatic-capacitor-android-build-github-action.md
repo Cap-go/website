@@ -183,20 +183,20 @@ If your team hasn’t yet migrated to Google’s Play App Signing system, then y
 Add the following as repository secrets:
 
 
--   ANDROID_KEYSTORE_FILE:  the base64-encoded .jks or .keystore file used to sign your Android builds. This will either be the keystore file associated with your upload key (if using Play App Signing), or your app signing key.
+-   ANDROID_KEYSTORE_FILE:  the base64-encoded `.jks` or `.keystore` file used to sign your Android builds. This will either be the keystore file associated with your upload key (if using Play App Signing), or your app signing key.
 -   KEYSTORE_KEY_PASSWORD: the password associated with the keystore file
 -   KEYSTORE_KEY_ALIAS: the key store alias
 -   KEYSTORE_STORE_PASSWORD: the private key password
--   DEVELOPER_PACKAGE_NAME: your android app id like com.example.app
+-   DEVELOPER_PACKAGE_NAME: your android app ID like com.example.app
 With these secrets added to GitHub’s repository secrets, we’re ready to set up our GitHub Actions workflow to run our builds.
 
 ![Multiple secrets added successfully in GitHub](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/625571ac033792685131f3ce_3x6nTzPmcJp9r0MHSzRIXwuQp6ImfEiy_UbQW-5KRZK7jJ7us2XiNjJ7l6ckuIPCcPzQd4eb-0AT7HiO7nlUE0BK59V10VnMNAZDX7NB-vrAN1Kl_8e3spUueZudv51uWj-93yTa.png)
 
 ## Set up your GitHub Actions workflow .yml file
 
-Now, let’s set up our Android GitHub Actions workflow .yml file – it’ll define the steps we’ll run as part of our workflow. Within these steps, we’ll call our fastlane lanes.
+Now, let’s set up our Android GitHub Actions workflow .yml file – it’ll define the steps we’ll run as part of our workflow. Within these steps, we’ll call our Fastlane lanes.
 
-First, let’s create the necessary folders. From your project’s root directory call:
+First, let’s create the necessary folders. From your project’s root directory, call:
 
 ```
 mkdir .github && cd .github && mkdir workflows && cd workflows && touch build-upload-android.yml
@@ -276,17 +276,17 @@ jobs:
 
 This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/)
 
-Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
+Then this workflow will pull your Node.js deps, install them and build your JavaScript app.
 
 Your App doesn't need to use Ionic, only Capacitor base is mandatory., it can have old Cordova module, but Capacitor JS plugin should be preferred.
 
 > Each time you send a new commit, a release will be built in Google Play console, beta channel.
 
-I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+I will improve this blog with your feedbacks, if you have any questions or suggestions, please let me know by email martin@capgo.app
 
 ## **Build Processing**
 
-In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 3–5 minutes before a build can be processed in Google play store.
+In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 3–5 minutes before a build can be processed in Google Play Store.
 
 For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
 

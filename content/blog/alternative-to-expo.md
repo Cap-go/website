@@ -5,7 +5,7 @@ description: Looking for a mobile app development platform that offers the conve
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-12-14
-updated_at: 2022-12-14
+updated_at: 2023-06-29
 head_image: "/expo_alternative.webp"
 head_image_alt: Expo alternative illustration
 tag: Alternatives

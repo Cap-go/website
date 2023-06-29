@@ -5,7 +5,7 @@ description: Use Capgo to release your devbuild to specific channel, and let you
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-06-16
-updated_at: 2022-06-16
+updated_at: 2023-06-29
 head_image: "/capgo_ci-cd-illustration.webp"
 head_image_alt: Channel builds illustration
 tag: CI/CD

@@ -5,7 +5,7 @@ description: I'm excited to announce Self-hosted Live Updates, the next iteratio
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-12-03
-updated_at: 2023-03-10
+updated_at: 2023-06-29
 head_image: "/self_hosted.webp"
 head_image_alt: Self hosted updates
 tag: Solution
@@ -16,9 +16,9 @@ next_blog: ""
 
 I am delighted to announce the release of Self-hosted Live Updates, which represents the latest evolution of Capgo's Live Updates.
 
-While many enterprises currently utilize the Live Updates SDK to access the most recent JavaScript, HTML, and CSS updates for their applications, some may encounter hindrances due to corporate policies, industry regulations, or geographical restrictions. With Self-hosted Live Updates, you can now distribute web build artifacts via your own infrastructure.
+While many enterprises currently utilize the Live Updates SDK to access the most recent JavaScript, HTML, and CSS updates for their applications, some may encounter hindrances due to corporate policies, industry regulations, or geographical restrictions. With Self-hosted Live Updates, you can now distribute web build artifacts via your infrastructure.
 
-This means you can avoid delays caused by app store reviews, address bugs and modify content more rapidly, and ensure that your users are always operating on the latest version of your app. Additionally, I have heard from numerous large enterprises who would like to leverage Live Updates but face challenges due to strict compliance standards. This issue is now a thing of the past thanks to Self-hosted Live Updates.
+This means you can avoid delays caused by Apple Store reviews, address bugs and modify content more rapidly, and ensure that your users are always operating on the latest version of your app. Additionally, I have heard from numerous large enterprises who would like to leverage Live Updates but face challenges due to strict compliance standards. This issue is now a thing of the past thanks to Self-hosted Live Updates.
 
 ## How do self-hosted live updates work?
 

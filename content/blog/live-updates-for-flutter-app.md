@@ -5,7 +5,7 @@ description: 'Do it possible to send live update to Flutter Apps without the App
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-12-16
-updated_at: 2022-12-16
+updated_at: 2023-06-29
 head_image: "/bypass_illustration.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
@@ -14,7 +14,7 @@ next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---
 
-Capgo Live Update is a service that allows developers to deploy updates to their mobile apps without going through the traditional app store submission process. This can be a convenient way to quickly fix bugs or make small updates to an app without waiting for the app store review process. However, Capgo Live Update does not support updating Flutter apps because Flutter apps are compiled to native code.
+Capgo Live Update is a service that allows developers to deploy updates to their mobile apps without going through the traditional App Store submission process. This can be a convenient way to quickly fix bugs or make small updates to an app without waiting for the App Store review process. However, Capgo Live Update does not support updating Flutter apps because Flutter apps are compiled to native code.
 
 Flutter is a mobile app development framework that uses the Dart programming language. One of the key features of Flutter is that it allows developers to create apps that can run on both iOS and Android using a single codebase. To achieve this, Flutter compiles the app's code into native code for each platform. This means that the app is essentially a native app, rather than a web-based app or a hybrid app.
 

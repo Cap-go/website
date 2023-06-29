@@ -5,7 +5,7 @@ description: Understand how and when it's necessary to release major version for
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-08-30
-updated_at: 2022-08-30
+updated_at: 2023-06-29
 head_image: "/capgo-feature-image.webp"
 head_image_alt: Capgo major version system
 tag: Tutorial
@@ -43,7 +43,7 @@ Where Capgo find the version to compare
 #### IOS
   > Will be used by Capgo to compare to JavaScript version and find Major upgrade
 
-  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION`
+  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
 
 #### Android
   > Will be uses by Capgo to compare to JavaScript version and find Major upgrade

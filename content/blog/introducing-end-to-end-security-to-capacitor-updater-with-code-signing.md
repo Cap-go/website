@@ -5,7 +5,7 @@ description: Using RSA + AES cryptography to encrypt updates, designed for the e
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-11-27
-updated_at: 2022-11-27
+updated_at: 2023-06-29
 head_image: "/secure_upload.webp"
 head_image_alt: Secure upload Capgo
 tag: Solution
@@ -74,4 +74,4 @@ Capgo code signing is available for all customers. To get started, follow the [s
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example) rewroted with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example) rewrote with chat-gpt-3 and adapted.

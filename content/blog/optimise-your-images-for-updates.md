@@ -5,7 +5,7 @@ description: How to optimise your images for live updates and help your user get
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-01-23
-updated_at: 2023-01-23
+updated_at: 2023-06-29
 head_image: "/convert_webp.webp"
 head_image_alt: Convert to webp illustration
 tag: Optimisation

@@ -5,7 +5,7 @@ description: 'Learn how to integrate push notifications in your Ionic Capacitor 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-12-14
-updated_at: 2022-12-14
+updated_at: 2023-06-29
 head_image: "/push_notif.webp"
 head_image_alt: "Ionic Capacitor Push Notifications with Firebase"
 tag: tutorial

@@ -6,7 +6,7 @@ description: Learn how to create a mobile app using Vue, Capacitor, and optional
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-06-08
-updated_at: 2023-06-08
+updated_at: 2023-06-29
 head_image: "/vue_capacitor.webp"
 head_image_alt: Vue and Capacitor illustration
 tag: Tutorial

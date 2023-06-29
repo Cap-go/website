@@ -6,7 +6,7 @@ description: Learn how to update your project from Capacitor 4 to Capacitor 5 wi
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2023-06-09
-updated_at: 2023-06-09
+updated_at: 2023-06-29
 head_image: "/capacitor-5-update.webp"
 head_image_alt: Capacitor 4 to 5 update illustration
 tag: Capacitor
@@ -31,7 +31,7 @@ Compared to previous updates, the transition from Capacitor 4 to Capacitor 5 inv
    npx cap migrate
    ```
 
-   If any migration steps cannot be completed, additional information will be provided in the terminal output. Manual migration steps are listed below.
+   If any migration steps cannot be achieved, additional information will be provided in the terminal output. Manual migration steps are listed below.
 
 3. If you have the VS Code extension installed, check the recommendations section of the extension to find the option to migrate your project to Capacitor 5.
 
@@ -52,7 +52,7 @@ Compared to previous updates, the transition from Capacitor 4 to Capacitor 5 inv
 
 1. **Upgrade Android Studio**: Capacitor 5 requires Android Studio Flamingo | 2022.2.1 or newer due to the usage of Gradle 8, which requires Java JDK 17. Java 17 ships with Android Studio Flamingo, so no additional downloads are needed.
 
-2. **Run AGP Upgrade Assistant**: Android Studio can help with some updates related to Gradle and moving package into build files. To start, run `Tools -> AGP Upgrade Assistant`.
+2. **Run AGP Upgrade Assistant**: Android Studio can help with some updates related to Gradle and moving packages into build files. To start, run `Tools -> AGP Upgrade Assistant`.
 
 3. **Update Android Project Variables**: In your `variables.gradle` file, update your values to the following new minimums:
 

@@ -6,7 +6,7 @@ description: Greetings Capacitor Ionic Community, today I'll be helping you setu
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-02-27
-updated_at: 2022-02-27
+updated_at: 2023-06-29
 head_image: "/update_flow.webp"
 head_image_alt: Capacitor Dev looking for alternative
 tag: Tutorial
@@ -112,6 +112,7 @@ Add this config to your main JavaScript file.
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
 CapacitorUpdater.notifyAppReady()
 ```
 

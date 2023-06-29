@@ -5,7 +5,7 @@ description: Use Xcode cloud to build your Capacitor JS app and bypass the need 
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
 created_at: 2022-09-01
-updated_at: 2023-06-10
+updated_at: 2023-06-29
 head_image: "/xcode_cloud.webp"
 head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
@@ -23,6 +23,7 @@ Before continuing with the tutorial…
 -   Desire to read 😆…
 
 Using Ionic is optional, for Cordova it could work, but I didn't try.
+
 ## Important about the price
 
 ![Price Xcode Cloud](/xcode_cloud_price.webp)
@@ -95,7 +96,7 @@ Save this file in the root of your project and name it `ios/App/ci_scripts/ci_po
 
 Then make this file executable with this command `chmod +x ios/App/ci_scripts/ci_post_clone.sh`
 
-## Create a Xcode workflow
+## Create an Xcode workflow
 
 Open Xcode (yes, to remove Xcode you need Xcode)
 
@@ -109,11 +110,11 @@ Click on create workflow, select your app, click next like below.
 Click on Edit workflow on the left
 ![Xcode step 2](/xcode_step_3.webp)
 
-Go to environments tab and chose like below Mac 12.4 and check the proper option
+Go to the environments tab and choose like below Mac 12.4 and check the proper option
 ![Xcode step 3](/xcode_step_3.webp)
 
 Choose your start condition.
-If you use the same build as us, I suggest to use Tag instead of branch, to avoid double build.
+If you use the same build as us, I suggest using Tag instead of branch, to avoid double build.
 
 Set your env variable
 ![Xcode step 4](/xcode_step_4.webp)
@@ -128,7 +129,7 @@ Then enable and the workflow and commit your first change, you should see your b
 
 ## **Build Processing**
 
-In Xcode Cloud, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in Apple Store.
+In Xcode Cloud, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in the Apple Store.
 
 For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
 
