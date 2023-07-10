@@ -13,7 +13,7 @@ specifiers:
   '@supabase/supabase-js': 2.24.0
   '@types/semver': ^7.5.0
   '@unocss/nuxt': ^0.53.1
-  '@vite-pwa/nuxt': ^0.0.10
+  '@vite-pwa/nuxt': ^0.1.0
   '@vueuse/nuxt': ^10.1.2
   axios: ^1.4.0
   dayjs: ^1.11.8
@@ -41,7 +41,7 @@ devDependencies:
   '@iconify-json/carbon': 1.1.18
   '@iconify-json/twemoji': 1.1.11
   '@nuxt/devtools': 0.5.5_nuxt@3.5.3
-  '@vite-pwa/nuxt': 0.0.10
+  '@vite-pwa/nuxt': 0.1.0
   dayjs: 1.11.9
   eslint: 8.44.0
   nuxt: 3.5.3_eslint@8.44.0
@@ -3185,8 +3185,8 @@ packages:
       - encoding
       - supports-color
 
-  /@vite-pwa/nuxt/0.0.10:
-    resolution: {integrity: sha512-4GhLfmdC3/zoYSKdAktEAtFzSsfCx/uu0h4CqR+ufyfL0N6e4jiUqveUP/4Y5ReJ9q5JAYfDvLkX6ZZuZbsYhQ==}
+  /@vite-pwa/nuxt/0.1.0:
+    resolution: {integrity: sha512-w6wm/0Y9yIqo6UTj9LeQUMR+xuRTf2sRdUTffu03SbRyWBzF7SnQcTqTRkXQy+NK+XafZuIDDLC12VkhValg4g==}
     dependencies:
       '@nuxt/kit': 3.6.2
       vite-plugin-pwa: 0.16.4
@@ -4740,7 +4740,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.3
+      resolve: 1.22.2
     transitivePeerDependencies:
       - supports-color
     dev: true
