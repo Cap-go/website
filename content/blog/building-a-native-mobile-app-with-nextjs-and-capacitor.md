@@ -250,7 +250,7 @@ return (
 
   <main className={styles.main}>
     <h1 className={styles.title}>
-      Welcome to <a href="https://nextjs.org">Capgo!</a>
+      Welcome to <NuxtLink to="https://nextjs.org">Capgo!</a>
     </h1>
 
     <p className={styles.description}>

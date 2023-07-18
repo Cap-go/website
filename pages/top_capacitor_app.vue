@@ -101,9 +101,9 @@ fetch(`${config.public.baseApiUrl}/store_top`).then((res) => {
               {{ shortNumber(app.installs) }} Downloads
             </span>
             <p class="mt-5 text-2xl font-semibold">
-              <a :href="app.url" :title="app.title" class="text-black">
+              <NuxtLink :to="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
-              </a>
+              </NuxtLink>
             </p>
             <a
               :href="app.url"

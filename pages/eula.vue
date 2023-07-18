@@ -136,7 +136,7 @@ const domain = config.public.baseUrl
     <h2>Contact Us</h2>
     <p>If you have any questions about this Agreement, You can contact Us:</p>
     <ul>
-      <li>By visiting this page on the website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a></li>
+      <li>By visiting this page on the website: <NuxtLink :to="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</NuxtLink></li>
     </ul>
   </div>
 </template>

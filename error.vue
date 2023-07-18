@@ -31,10 +31,12 @@ router.currentRoute.value.hash.startsWith('#support') && openMessenger()
             </p>
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
-            <a href="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cornFlower-600 hover:bg-cornFlower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500">
+            <NuxtLink to="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cornFlower-600 hover:bg-cornFlower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500">
               Go back home
-            </a>
-            <a href="#support" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornFlower-700 bg-cornFlower-100 hover:bg-cornFlower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500"> Contact support </a>
+              </NuxtLink>
+              <NuxtLink to="#support" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-cornFlower-700 bg-cornFlower-100 hover:bg-cornFlower-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornFlower-500">
+                Contact support
+              </NuxtLink>
           </div>
         </div>
       </main>

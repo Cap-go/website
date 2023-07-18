@@ -23,7 +23,10 @@ const domain = config.public.baseUrl
     <h1>Return and Refund Policy</h1>
     <p>Last updated: January 28, 2022</p>
     <p>Thank you for shopping at {{ brand }}.</p>
-    <p>If, for any reason, You are not completely satisfied with a purchase We invite You to review our policy on refunds and returns. This Return and Refund Policy has been created with the help of the <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">Return and Refund Policy Generator</a>.</p>
+    <p>
+      If, for any reason, You are not completely satisfied with a purchase We invite You to review our policy on refunds and returns. This Return and Refund Policy has been created with the help of the <NuxtLink to="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">
+        Return and Refund Policy Generator</NuxtLink>.
+    </p>
     <p>The following terms are applicable for any products that You purchased with Us.</p>
     <h2>Interpretation and Definitions</h2>
     <h3>Interpretation</h3>
@@ -55,7 +58,7 @@ const domain = config.public.baseUrl
     <p>The deadline for cancelling an Order is 14 days from the date on which You received the Goods or on which a third party you have appointed, who is not the carrier, takes possession of the product delivered.</p>
     <p>In order to exercise Your right of cancellation, You must inform Us of your decision by means of a clear statement. You can inform us of your decision by:</p>
     <ul>
-      <li>By visiting this page on our website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a></li>
+      <li>By visiting this page on our website: <NuxtLink :to="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</NuxtLink></li>
     </ul>
     <p>We will reimburse You no later than 14 days from the day on which We receive the returned Goods. We will use the same means of payment as You used for the Order, and You will not incur any fees for such reimbursement.</p>
     <h2>Conditions for Returns</h2>
@@ -86,7 +89,7 @@ const domain = config.public.baseUrl
     <h3>Contact Us</h3>
     <p>If you have any questions about our Returns and Refunds Policy, please contact us:</p>
     <ul>
-      <li>By visiting this page on the website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a></li>
+      <li>By visiting this page on the website: <NuxtLink :to="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</NuxtLink></li>
     </ul>
   </div>
 </template>

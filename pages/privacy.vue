@@ -166,15 +166,27 @@ useHead({
     <ul>
       <li>
         <p><strong>Apple Store In-App Payments</strong></p>
-        <p>Their Privacy Policy can be viewed at <a href="https://www.apple.com/legal/privacy/en-ww/" rel="external nofollow noopener" target="_blank">https://www.apple.com/legal/privacy/en-ww/</a></p>
+        <p>
+          Their Privacy Policy can be viewed at <NuxtLink to="https://www.apple.com/legal/privacy/en-ww/" rel="external nofollow noopener" target="_blank">
+            https://www.apple.com/legal/privacy/en-ww/
+          </NuxtLink>
+        </p>
       </li>
       <li>
         <p><strong>Google Play In-App Payments</strong></p>
-        <p>Their Privacy Policy can be viewed at <a href="https://www.google.com/policies/privacy/" rel="external nofollow noopener" target="_blank">https://www.google.com/policies/privacy/</a></p>
+        <p>
+          Their Privacy Policy can be viewed at <NuxtLink to="https://www.google.com/policies/privacy/" rel="external nofollow noopener" target="_blank">
+            https://www.google.com/policies/privacy/
+          </NuxtLink>
+        </p>
       </li>
       <li>
         <p><strong>Stripe</strong></p>
-        <p>Their Privacy Policy can be viewed at <a href="https://stripe.com/us/privacy" rel="external nofollow noopener" target="_blank">https://stripe.com/us/privacy</a></p>
+        <p>
+          Their Privacy Policy can be viewed at <NuxtLink to="https://stripe.com/us/privacy" rel="external nofollow noopener" target="_blank">
+            https://stripe.com/us/privacy
+          </NuxtLink>
+        </p>
       </li>
     </ul>
     <h2>GDPR Privacy</h2>
@@ -380,7 +392,7 @@ useHead({
     <h3>Exercising Your CCPA Data Protection Rights</h3>
     <p>In order to exercise any of Your rights under the CCPA, and if You are a California resident, You can contact Us:</p>
     <ul>
-      <li>By visiting this page on our website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a></li>
+      <li>By visiting this page on our website: <NuxtLink :to="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</NuxtLink></li>
     </ul>
     <p>Only You, or a person registered with the California Secretary of State that You authorize to act on Your behalf, may make a verifiable request related to Your personal information.</p>
     <p>Your request to Us must:</p>
@@ -421,7 +433,7 @@ useHead({
     <h2>Contact Us</h2>
     <p>If you have any questions about this Privacy Policy, You can contact us:</p>
     <ul>
-      <li>By visiting this page on the website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a></li>
+      <li>By visiting this page on the website: <NuxtLink :to="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</NuxtLink></li>
     </ul>
   </div>
 </template>

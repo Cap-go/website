@@ -23,7 +23,7 @@
               MAU are counted by tracking unique users who opened your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.
             </p>
             <p class="mt-4 text-base text-gray-400">
-              Capgo don't count emulator and dev build in your usage. Learn more <a class="border-b-2 border-blue-600  border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/">here</a>
+              Capgo don't count emulator and dev build in your usage. Learn more <NuxtLink class="border-b-2 border-blue-600  border-blue-600 hover:text-blue-600 focus:text-blue-600" to="/blog/how-your-usage-is-counted/">here</NuxtLink>
             </p>
           </div>
         </div>
@@ -74,7 +74,8 @@
       <div class="flex items-center justify-center mt-12 md:mt-20">
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
-            Didn’t find the answer you are looking for? <a href="#support" title="" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline">Contact our support</a>
+            Didn’t find the answer you are looking for? <NuxtLink to="#support" title="" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline">
+              Contact our support</NuxtLink>
           </p>
         </div>
       </div>

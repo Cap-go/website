@@ -141,11 +141,11 @@ useHead({
         </div>
         <div class="mt-8">
           <h3 class="text-lg font-medium">
-            <a :href="action.href" target="_blank" class="focus:outline-none text-black">
+            <NuxtLink :to="action.href" target="_blank" class="focus:outline-none text-black">
               <!-- Extend touch target to entire panel -->
               <span class="absolute inset-0" aria-hidden="true" />
               {{ action.title }}
-            </a>
+            </NuxtLink>
           </h3>
           <p class="mt-2 text-sm text-gray-500">
             {{ action.description }}

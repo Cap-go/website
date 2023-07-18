@@ -129,10 +129,10 @@ const navigation = {
           </p>
           <ul role="list" class="mt-4 space-y-4">
             <li v-for="item in navigation.hero" :key="item.name">
-              <a :href="item.href" target="_blank" no-rel>
+              <NuxtLink :to="item.href" target="_blank" no-rel>
                 <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
                 <span class="ml-3 text-base font-bold text-gray-400 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"> {{ item.name }} </span>
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -144,9 +144,9 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.solutions" :key="item.name">
-                  <a :href="item.href" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <NuxtLink :to="item.href" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </div>
@@ -156,9 +156,9 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="item.name">
-                  <a :href="item.href" :rel="item.rel" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <NuxtLink :to="item.href" :rel="item.rel" :target="item.target" no-rel class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </div>
@@ -170,9 +170,9 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
-                  <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <NuxtLink :to="item.href" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </div>
@@ -182,9 +182,9 @@ const navigation = {
               </h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
-                  <a :href="item.href" :rel="item.rel" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <NuxtLink :to="item.href" :rel="item.rel" class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </div>

@@ -46,7 +46,11 @@ const domain = config.public.baseUrl
     <h2>Disclaimer</h2>
     <p>The information contained on the Service is for general information purposes only.</p>
     <p>The Company assumes no responsibility for errors or omissions in the contents of the Service.</p>
-    <p>In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <a href="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank">Disclaimer Template</a>.</p>
+    <p>
+      In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <NuxtLink to="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank">
+        Disclaimer Template.
+      </NuxtLink>
+    </p>
     <p>The Company does not warrant that the Service is free of viruses or other harmful components.</p>
     <h2>External Links Disclaimer</h2>
     <p>The Service may contain links to external websites that are not provided or maintained by or in any way affiliated with the Company.</p>
@@ -70,7 +74,7 @@ const domain = config.public.baseUrl
     <h2>Contact Us</h2>
     <p>If you have any questions about this Disclaimer, You can contact Us:</p>
     <ul>
-      <li>By visiting this page on the website: <a :href="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a></li>
+      <li>By visiting this page on the website: <NuxtLink :to="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</NuxtLink></li>
     </ul>
   </div>
 </template>

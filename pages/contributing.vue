@@ -23,42 +23,67 @@ useHead({
     <h2 id="projects">
       Projects
     </h2>
-    <p>There are numerous repositories in the <a href="https://github.com/Cap-go"><code>Capgo</code></a> organization that are part of the Capgo .</p>
+    <p>
+      There are numerous repositories in the <NuxtLink to="https://github.com/Cap-go">
+        <code>Capgo</code></NuxtLink> organization that are part of the Capgo .
+    </p>
     <p>Repositories have different scopes, use different programming languages and have varying level when it comes to contributions.</p>
     <p>To help you decide which repository might be the best to start contributing (and/or falls into your interest), here&#39;s a short comparison (<strong>languages in bold comprise most of the codebase</strong>):</p>
     <h3 id="-capacitor-updater-https-github-com-cap-go-capacitor-updater-">
-      <a href="https://github.com/Cap-go/capacitor-updater"><code>capacitor-updater</code></a>
+      <NuxtLink to="https://github.com/Cap-go/capacitor-updater">
+        <code>capacitor-updater</code></NuxtLink>
     </h3>
     <p>This is the main repository that provides the <code>capacitor-updater</code> Plugin.</p>
     <p>If you want to fix a bug or add a new feature to <code>capacitor-updater</code> this is the repository you want to contribute to.</p>
     <p>Languages: <strong>Swift</strong>, <strong>JavaScript</strong>, <strong>Java</strong></p>
     <h3 id="-capgo-https-github-com-cap-go-capgo-">
-      <a href="https://github.com/Cap-go/capgo"><code>capgo</code></a>
+      <NuxtLink to="https://github.com/Cap-go/capgo">
+        <code>capgo</code></NuxtLink>
     </h3>
     <p>The Webapp and serverless functions that make up the Capgo cloud platform.</p>
     <p>Thare where you want to contribute to fix the backend of Capgo.</p>
     <p>Languages: <strong>TypeScript</strong>.</p>
     <h3 id="-website-https-github-com-cap-go-website-">
-      <a href="https://github.com/Cap-go/website"><code>website</code></a>
+      <NuxtLink to="https://github.com/Cap-go/website">
+        <code>website</code></NuxtLink>
     </h3>
-    <p>Frontend for official Deno webpage: <a href="https://capgo.app/">https://capgo.app/</a></p>
+    <p>
+      Frontend for official Deno webpage: <NuxtLink to="https://capgo.app/">
+        https://capgo.app/
+      </NuxtLink>
+    </p>
     <p>Languages: <strong>TypeScript</strong>, HTML, CSS</p>
     <h3 id="-docs-https-github-com-cap-go-docs-">
-      <a href="https://github.com/Cap-go/docs"><code>docs</code></a>
+      <NuxtLink to="https://github.com/Cap-go/docs">
+        <code>docs</code>
+      </NuxtLink>
     </h3>
-    <p>Documentation in Markdown that powers <a href="https://doc.capgo.app/">https://doc.capgo.app</a></p>
+    <p>
+      Documentation in Markdown that powers <NuxtLink to="https://doc.capgo.app/">
+        https://doc.capgo.app
+      </NuxtLink>
+    </p>
     <p>Languages: <strong>Markdown</strong></p>
     <h3 id="-capacitor-standard-version-https-github-com-cap-go-capacitor-standard-version-">
-      <a href="https://github.com/Cap-go/capacitor-standard-version"><code>capacitor-standard-version</code></a>
+      <NuxtLink to="https://github.com/Cap-go/capacitor-standard-version">
+        <code>capacitor-standard-version</code>
+      </NuxtLink>
     </h3>
     <p>Version manager that power CI/CD to uppdate apps.</p>
     <p>Languages: <strong>JavaScript</strong></p>
     <ul>
       <li>
-        <p>Read the <a href="https://deno.land/manual@v1.25.4/contributing/style_guide">style guide</a>.</p>
+        <p>
+          Read the <NuxtLink to="https://deno.land/manual@v1.25.4/contributing/style_guide">
+            style guide.</NuxtLink>
+        </p>
       </li>
       <li>
-        <p>Ask for help in the <a href="https://discord.com/invite/VnYRvBfgA6">community chat room</a>.</p>
+        <p>
+          Ask for help in the <NuxtLink to="https://discord.com/invite/VnYRvBfgA6">
+            community chat room.
+          </NuxtLink>
+        </p>
       </li>
       <li>
         <p>If you are going to work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.</p>
@@ -67,7 +92,11 @@ useHead({
         <p>If you are going to work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all contributions, but not all proposed features are getting accepted. We don&#39;t want you to spend hours working on a code that might not be accepted.</p>
       </li>
       <li>
-        <p>Please be professional in the forums. We follow <a href="https://www.rust-lang.org/policies/code-of-conduct">Rust&#39;s code of conduct</a> (CoC). Have a problem? Email <a href="mailto:ry@tinyclouds.org">ry@tinyclouds.org</a>.</p>
+        <p>
+          Please be professional in the forums. We follow <NuxtLink to="https://www.rust-lang.org/policies/code-of-conduct">
+            Rust&#39;s code of conduct</NuxtLink> (CoC). Have a problem? Email <NuxtLink to="mailto:ry@tinyclouds.org">
+              ry@tinyclouds.org.</NuxtLink>
+        </p>
       </li>
     </ul>
     <h2 id="submitting-a-pull-request">
@@ -96,7 +125,9 @@ useHead({
       <li>Ensure there are tests that cover the changes.</li>
     </ul>
     <h3 id="submitting-a-pr-to-capgo-https-github-com-cap-go-capgo-">
-      Submitting a PR to <a href="https://github.com/Cap-go/capgo"><code>Capgo</code></a>
+      Submitting a PR to <NuxtLink to="https://github.com/Cap-go/capgo">
+        <code>Capgo</code>
+      </nuxtlink>
     </h3>
     <p>Additionally to the above make sure that:</p>
     <ol>
@@ -111,6 +142,10 @@ useHead({
     </h3>
     <p>All publicly exposed APIs and types, the <code>capacitor-updater</code> module should have JSDoc documentation. This documentation is parsed and available to the TypeScript compiler, and therefore easy to provide further downstream. JSDoc blocks come just prior to the statement they apply to and are denoted by a leading <code>/**</code> before terminating with a <code>*/</code>. For example:</p>
     <pre><code><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> FOO = <span class="hljs-string">"foo"</span>;
-    </code></pre><p>Find more at: <a href="https://jsdoc.app/">https://jsdoc.app/</a></p>
+    </code></pre><p>
+      Find more at: <NuxtLink to="https://jsdoc.app/">
+        https://jsdoc.app/
+      </NuxtLink>
+    </p>
   </div>
 </template>

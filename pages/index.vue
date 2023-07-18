@@ -49,9 +49,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div class="relative inline-flex mt-10 group">
             <div class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt" />
-            <a no-rel href="/register/" title="Get quote now" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+            <NuxtLink no-rel to="/register/" title="Get quote now" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
               Get it now
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -450,9 +450,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 Like you push a commit
               </p>
             </div>
-            <a no-rel href="/register/" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
+            <NuxtLink no-rel to="/register/" class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
               Get started &RightArrow;
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>

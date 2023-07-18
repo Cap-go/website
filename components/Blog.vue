@@ -47,9 +47,9 @@ defineProps<{
         {{ formatTime(date) }}
       </span>
       <p class="px-5 mt-3 text-2xl font-semibold">
-        <a :href="link" :title="title" class="text-gray-100">
+        <NuxtLink :to="link" :title="title" class="text-gray-100">
           {{ title }}
-        </a>
+        </NuxtLink>
       </p>
       <a
         :href="link"

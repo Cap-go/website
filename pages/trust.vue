@@ -75,7 +75,7 @@ useHead({
       Site reliability
     </h3>
     <ul>
-      <li>Capgo use 100% serverless infrastructure, historically achieving 99.9% uptime. See <a href="https://status.capgo.app/en/">status here</a></li>
+      <li>Capgo use 100% serverless infrastructure, historically achieving 99.9% uptime. See <NuxtLink to="https://status.capgo.app/en/">status here</NuxtLink></li>
     </ul>
     <h3 id="application-penetration-testing">
       Application penetration testing
@@ -110,8 +110,8 @@ useHead({
     <ul>
       <li>
         Capgo requires all critical third-party vendors to achieve SOC 2 certification at the minimum, and verifies certifications annually.<ul>
-          <li><a href="https://www.netlify.com/security/">Netlify SOC 2</a></li>
-          <li><a href="https://supabase.com/security">Supabase SOC 2</a></li>
+          <li><NuxtLink href="https://www.netlify.com/security/">Netlify SOC 2</NuxtLink></li>
+          <li><NuxtLink to="https://supabase.com/security">Supabase SOC 2</NuxtLink></li>
         </ul>
       </li>
     </ul>
@@ -131,7 +131,7 @@ useHead({
       Communication
     </h3>
     <ul>
-      <li>In the event of system-wide issues, customers are notified by their email. Capgo&#39;s system status and network and security incidents are published at <a href="https://status.capgo.app/">https://status.capgo.app</a>.</li>
+      <li>In the event of system-wide issues, customers are notified by their email. Capgo&#39;s system status and network and security incidents are published at <NuxtLink to="https://status.capgo.app/">https://status.capgo.app</NuxtLink>.</li>
     </ul>
   </div>
 </template>
