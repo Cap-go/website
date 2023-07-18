@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {
   BoltIcon,
   BuildingStorefrontIcon,
@@ -11,8 +11,17 @@ import {
   SpeakerXMarkIcon,
   ViewfinderCircleIcon,
 } from '@heroicons/vue/20/solid'
+import { createMeta } from '~~/services/meta';
 
-const actions = [
+interface Action {
+  title: string
+  description: string
+  href: string
+  icon: any
+  iconForeground: string
+  iconBackground: string
+}
+const actions: Action[] = [
   {
     title: 'Updater',
     description: 'Update Ionic Capacitor apps without App/Play Store review (Code-push / hot-code updates).',
@@ -133,7 +142,11 @@ useHead({
     </div>
 
     <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0 w-1/2 mx-auto my-10">
-      <div v-for="(action, actionIdx) in actions" :key="action.title" class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500" :class="[actionIdx === 0 ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none' : '', actionIdx === 1 ? 'sm:rounded-tr-lg' : '', actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '', actionIdx === actions.length - 1 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none' : '']">
+      <div 
+      v-for="(action, actionIdx) in actions"
+      :key="action.title"
+      class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+      :class="[actionIdx === 0 ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none' : '', actionIdx === 1 ? 'sm:rounded-tr-lg' : '', actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '', actionIdx === actions.length - 1 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none' : '']">
         <div>
           <span class="rounded-lg inline-flex p-3 ring-4 ring-white" :class="[action.iconBackground, action.iconForeground]">
             <component :is="action.icon" class="h-6 w-6" aria-hidden="true" />
