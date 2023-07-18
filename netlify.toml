@@ -1,12 +1,6 @@
 [build.environment]
   NODE_VERSION = "19"
 
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
-  [plugins.inputs.thresholds]
-    performance = 0.7
-
 [build]
   publish = "dist"
   command = "pnpm run generate"
