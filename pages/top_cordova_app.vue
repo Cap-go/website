@@ -69,8 +69,8 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
         >
           <div class="p-5">
             <div class="relative">
-              <a
-                :href="app.url"
+              <NuxtLink
+                :to="app.url"
                 :title="app.title"
                 class="block aspect-w-4 aspect-h-3"
               >
@@ -79,7 +79,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
                   :src="app.icon"
                   :alt="`app icon ${app.title}`"
                 >
-              </a>
+              </NuxtLink>
 
               <div class="absolute top-4 left-4">
                 <span
@@ -106,8 +106,8 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
                 {{ app.title }}
               </NuxtLink>
             </p>
-            <a
-              :href="app.url"
+            <NuxtLink
+              :to="app.url"
               :title="app.title"
               class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
             >
@@ -124,7 +124,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
                   clip-rule="evenodd"
                 />
               </svg>
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -132,10 +132,10 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-        <a
+        <NuxtLink
           v-for="l in others"
           :key="l"
-          :href="`/${l}/`"
+          :to="`/${l}/`"
           class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
           <div class="relative mx-auto flex">
@@ -152,7 +152,7 @@ fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
               {{ l.replaceAll('_', ' ') }}
             </p>
           </div>
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </section>

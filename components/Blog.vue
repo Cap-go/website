@@ -17,8 +17,8 @@ defineProps<{
   >
     <div>
       <div class="relative p-2">
-        <a
-          :href="link"
+        <NuxtLink
+          :to="link"
           :title="title"
           class="block aspect-w-4 aspect-h-3"
         >
@@ -31,7 +31,7 @@ defineProps<{
             :alt="`blog illustration ${title}`"
             :title="`blog illustration ${title}`"
           >
-        </a>
+        </NuxtLink>
 
         <div class="absolute top-4 left-4">
           <span
@@ -51,8 +51,8 @@ defineProps<{
           {{ title }}
         </NuxtLink>
       </p>
-      <a
-        :href="link"
+      <NuxtLink
+        :to="link"
         :title="title"
         class="m-5 inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-200 transition-all duration-200 border-b-2 border-blue-300 hover:border-blue-600 focus:border-blue-600"
       >
@@ -69,7 +69,7 @@ defineProps<{
             clip-rule="evenodd"
           />
         </svg>
-      </a>
+      </NuxtLink>
     </div>
   </div>
 </template>

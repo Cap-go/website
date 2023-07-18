@@ -28,10 +28,10 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-        <a
+        <NuxtLink
           v-for="l in others"
           :key="l"
-          :href="`/${l}/`"
+          :to="`/${l}/`"
           class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
           <div class="relative mx-auto flex">
@@ -48,7 +48,7 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
               {{ l.replaceAll('_', ' ') }}
             </p>
           </div>
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </section>

@@ -39,12 +39,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             deliver bug-free apps
           </h2>
         </div>
-        <a
-          href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+        <NuxtLink
+          to="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
           target="_blank"
           class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
           style="transition: all 0.2s ease 0s; text-decoration: none; letter-spacing: 2px; background-image: url(&quot;https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg&quot;); background-position: 100% 50%;"
-        ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></a>
+        ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></NuxtLink>
       </div>
     </main>
     <section
@@ -91,8 +91,8 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 <div class="">
                   Click & Boat
                 </div>
-                <a
-                  href="#"
+                <NuxtLink
+                  to="#"
                   class="inline-block mt-3 max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
                   style="transition: all 0.2s ease 0s; text-decoration: none;"
                 ><img
@@ -101,7 +101,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                   alt="logo"
                   src="/click_and_boat.webp"
                   class="inline-block max-w-full align-middle border-0 w-1/2"
-                ></a>
+                ></NuxtLink>
               </div>
             </div>
           </div>
@@ -493,12 +493,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             <span class="text-teal-300" style="line-height: 72px;">CapacitorJS</span>
             Consultants
           </h2>
-          <a
-            href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+          <NuxtLink
+            to="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
             target="_blank"
             class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
             style="transition: all 0.2s ease 0s; text-decoration: none; letter-spacing: 2px; background-image: url(&quot;https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg&quot;); background-position: 100% 50%;"
-          ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></a>
+          ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></NuxtLink>
         </div>
       </div>
     </section>
@@ -598,13 +598,13 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
           >
             Community-trusted
-            <a
-              href="https://twitter.com/martindonadieu"
+            <NuxtLink
+              to="https://twitter.com/martindonadieu"
               target="_blank"
               title=" Capgo team"
               class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
               style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-            > Cordova &amp; CapacitorJS expert</a>
+            > Cordova &amp; CapacitorJS expert</NuxtLink>
           </p>
         </div>
         <div class="flex flex-col justify-center items-center px-5 text-left">
@@ -619,13 +619,13 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
           >
             Experienced in working on demanding
-            <a
-              href="https://github.com/Cap-go/capacitor-updater"
+            <NuxtLink
+              to="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
               title="Cordova &amp; CapacitorJS projects"
               class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
               style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-            >Cordova &amp; CapacitorJS projects</a>
+            >Cordova &amp; CapacitorJS projects</NuxtLink>
           </p>
         </div>
         <div v-if="randomOdd" class="flex flex-col justify-center items-center px-5 text-left">
@@ -640,12 +640,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
           >
             Creators and maintainers of many
-            <a
-              href="/plugins/"
+            <NuxtLink
+              to="/plugins/"
               title="Open source"
               class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
               style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-            >Open Source libraries</a>
+            >Open Source libraries</NuxtLink>
             used by millions
           </p>
         </div>
@@ -661,12 +661,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
           >
             Core Contributors to
-            <a
-              href="https://capacitorjs.com/"
+            <NuxtLink
+              to="https://capacitorjs.com/"
               title="Core contributors"
               class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
               style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-            >CapacitorJS</a> and Ionic
+            >CapacitorJS</NuxtLink> and Ionic
           </p>
         </div>
         <!-- <div class="flex flex-col justify-center items-center px-5 text-left">
@@ -681,12 +681,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
       >
         Host of
-        <a
-          href="/podcast-react-native-show"
+        <NuxtLink
+          to="/podcast-react-native-show"
           title="The CapacitorJS Show podcast"
           class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
           style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-          >The CapacitorJS Show podcast</a
+          >The CapacitorJS Show podcast</NuxtLink
         >
       </p>
     </div>
@@ -702,12 +702,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
       >
         Organizers of the biggest CapacitorJS conference -
-        <a
-          href="https://www.react-native.eu/"
+        <NuxtLink
+          to="https://www.react-native.eu/"
           title="CapacitorJS EU"
           class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
           style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-          >CapacitorJS EU</a
+          >CapacitorJS EU</NuxtLink
         >
       </p>
     </div> -->
@@ -755,8 +755,8 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <div class="">
                 CTO &amp; Co-founder @ WAYNIUM
               </div>
-              <a
-                href="#"
+              <NuxtLink
+                to="#"
                 class="inline-block max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
                 style="transition: all 0.2s ease 0s; text-decoration: none;"
               ><img
@@ -765,7 +765,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 alt="logo"
                 src="/waynium.webp"
                 class="inline-block mt-3 max-w-full align-middle border-0"
-              ></a>
+              ></NuxtLink>
             </div>
           </div>
         </div>
@@ -805,12 +805,12 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           >
             Need help with Cordova or CapacitorJS? Let us know!
           </p>
-          <a
-            href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+          <NuxtLink
+            to="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
             target="_blank"
             class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
             style="transition: all 0.2s ease 0s; text-decoration: none; letter-spacing: 2px; background-image: url(&quot;https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg&quot;); background-position: 100% 50%;"
-          ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></a>
+          ><strong class="uppercase" style="letter-spacing: 2px;">Book a consultation</strong></NuxtLink>
         </div>
       </div>
     </section>

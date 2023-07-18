@@ -444,11 +444,11 @@ const domain = config.public.baseUrl
     <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
     <ul>
       <li>
-        By visiting this page on the website: <a
-          :href="`${domain}#support`"
+        By visiting this page on the website: <NuxtLink
+          :to="`${domain}#support`"
           rel="external nofollow noopener"
           target="_blank"
-        >{{ domain }}#support</a>
+        >{{ domain }}#support</NuxtLink>
       </li>
     </ul>
   </div>
