@@ -26,7 +26,7 @@
     "@antfu/eslint-config": "^0.39.5",
     "@iconify-json/carbon": "^1.1.17",
     "@iconify-json/twemoji": "^1.1.11",
-    "@nuxt/devtools": "^0.6.7",
+    "@nuxt/devtools": "^0.7.0",
     "@vite-pwa/nuxt": "^0.1.0",
     "dayjs": "^1.11.9",
     "eslint": "^8.45.0",
