@@ -165,12 +165,6 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          'src': 'https://reflio.com/js/reflio.min.js',
-          'data-reflio': 'hi8q6z93wyt147h',
-          'data-domain': 'https://capgo.app,https://web.capgo.app',
-          'async': true,
-        },
-        {
           'src': 'https://pls.digitalshift-ee.workers.dev/js/script.js',
           'data-api': 'https://pls.digitalshift-ee.workers.dev/api/event',
           'data-domain': 'capgo.app',

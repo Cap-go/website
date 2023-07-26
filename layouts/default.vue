@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { openMessenger } from '~/services/chatwoot'
+import { initAffiliate } from '~/services/reflio'
 import { createMetaImage } from '~~/services/meta'
 
 const router = useRouter()
@@ -7,8 +8,10 @@ router.afterEach((to) => {
   if (to.hash && to.hash.startsWith('#support') && process.client)
     openMessenger()
 })
-if (process.client)
+if (process.client) {
   router.currentRoute.value.hash.startsWith('#support') && openMessenger()
+  initAffiliate()
+}
 
 const config = useRuntimeConfig()
 const route = useRoute()
