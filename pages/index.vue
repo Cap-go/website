@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { crispLoader } from '~~/services/crisp'
+import { chatLoader } from '~/services/chatwoot'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 
 if (process.client)
-  crispLoader()
+  chatLoader()
 function shortNumber(number: number) {
   if (number > 1000000)
     return `${(number / 1000000).toFixed(1)}M`

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { openMessenger } from '~/services/crisp'
+import { openMessenger } from '~/services/chatwoot'
 import { createMetaImage } from '~~/services/meta'
 
 const router = useRouter()

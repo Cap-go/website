@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/one-component-per-file -->
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
-import { openMessenger } from '~/services/crisp'
+import { openMessenger } from '~/services/chatwoot'
 
 const router = useRouter()
 router.afterEach((to) => {
