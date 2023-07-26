@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
@@ -90,29 +91,39 @@ const menuMobile = ref(false)
           to="/pricing/"
           title="Pricing"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Pricing</NuxtLink>
+        >
+          Pricing
+        </NuxtLink>
         <NuxtLink
           to="/blog/"
           title="Blog"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Blog</NuxtLink>
+        >
+          Blog
+        </NuxtLink>
         <NuxtLink
           to="https://docs.capgo.app/"
           title="Documentation"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Documentation</NuxtLink>
+        >
+          Documentation
+        </NuxtLink>
         <NuxtLink
           to="https://web.capgo.app/login"
           target="_blank"
           title="Login"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Login</NuxtLink>
+        >
+          Login
+        </NuxtLink>
         <NuxtLink
           to="/register"
           title="Communauty"
           target="_blank"
           class="bg-gray-900 text-white block rounded-md text-base font-medium px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
-        >Register</NuxtLink>
+        >
+          Register
+        </NuxtLink>
       </div>
     </div>
   </header>

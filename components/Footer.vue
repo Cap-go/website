@@ -1,14 +1,14 @@
-<!-- eslint-disable vue/one-component-per-file -->
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
 import { openMessenger } from '~/services/chatwoot'
 
 const router = useRouter()
 router.afterEach((to) => {
-  if (to.hash && to.hash.startsWith('#support'))
+  if (to.hash && to.hash.startsWith('#support') && process.client)
     openMessenger()
 })
-router.currentRoute.value.hash.startsWith('#support') && openMessenger()
+if (process.client)
+  router.currentRoute.value.hash.startsWith('#support') && openMessenger()
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const year = new Date().getFullYear()

@@ -4,10 +4,11 @@ import { createMetaImage } from '~~/services/meta'
 
 const router = useRouter()
 router.afterEach((to) => {
-  if (to.hash && to.hash.startsWith('#support'))
+  if (to.hash && to.hash.startsWith('#support') && process.client)
     openMessenger()
 })
-router.currentRoute.value.hash.startsWith('#support') && openMessenger()
+if (process.client)
+  router.currentRoute.value.hash.startsWith('#support') && openMessenger()
 
 const config = useRuntimeConfig()
 const route = useRoute()
