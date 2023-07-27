@@ -6,16 +6,16 @@ import { formatTime } from '~/services/blog'
 
 const config = useRuntimeConfig()
 const route = useRoute()
-
-const { data } = await useAsyncData(`blog-${route.params.id}`, () => queryContent<MyCustomParsedContent>('blog', route.params.id as string).findOne())
+ 
+const { data } = await useAsyncData(route.path, () => queryContent('/', route.path).findOne())
 const { data: articles } = await useAsyncData('allArticles', () =>
-  queryContent<MyCustomParsedContent>('blog')
-    .where({ published: true, slug: { $ne: route.params.id as string } })
+  queryContent<MyCustomParsedContent>('/')
+    .where({ published: true, slug: { $ne: route.path } })
     .sort({ created_at: -1 })
     .limit(3)
     .find())
 if (data.value?.next_blog != null) {
-  const nextArticle = await useAsyncData(`nextArticle_${data.value.next_blog}`, () => queryContent<MyCustomParsedContent>('blog', data.value?.next_blog)
+  const nextArticle = await useAsyncData(`nextArticle_${data.value.next_blog}`, () => queryContent<MyCustomParsedContent>('/blog', data.value?.next_blog)
     .findOne())
   if (nextArticle.data.value && articles.value && articles.value[0])
     articles.value[0] = nextArticle.data.value as any
@@ -73,16 +73,17 @@ if (data.value) {
 
 <template>
   <main class="text-center text-white">
+    <ContentDoc v-slot="{ doc }" >
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div class="block aspect-w-4 aspect-h-3">
         <img
           class="object-cover w-full h-full lg:rounded-lg md:shadow-xl md:shadow-gray-700"
-          :src="data?.head_image"
+          :src="doc?.head_image"
           loading="eager"
           height="486"
           width="864"
-          :alt="`blog illustration ${data?.title}`"
-          :title="`blog illustration ${data?.title}`"
+          :alt="`blog illustration ${doc?.title}`"
+          :title="`blog illustration ${doc?.title}`"
         >
       </div>
 
@@ -90,28 +91,30 @@ if (data.value) {
         <span
           class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
         >
-          {{ data?.tag }}
+          {{ doc?.tag }}
         </span>
       </div>
     </div>
     <span
       class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"
     >
-      {{ formatTime(data?.created_at) }}
+      {{ formatTime(data?.created_at || "") }}
     </span>
 
     <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
-      {{ data?.title }}
+      {{ doc?.title }}
     </h1>
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
-      {{ data?.description }}
+      {{ doc?.description }}
     </p>
     <article
-      v-if="data"
+      v-if="doc"
       class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2"
     >
-      <ContentRenderer :value="data" />
+      <ContentRenderer :value="doc" />
     </article>
+  </ContentDoc>
+
 
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -127,7 +130,7 @@ if (data.value) {
         <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
           <Blog
             v-for="article in articles" :key="article._id"
-            :link="`/blog/${article.slug}/`"
+            :link="article._path"
             :title="article.title"
             :description="article.description"
             :image="article.head_image"

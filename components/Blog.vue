@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { formatTime } from '~/services/blog'
 
-defineProps<{
+const props = defineProps<{
   link: string
   title: string
   image: string
@@ -9,6 +9,7 @@ defineProps<{
   date: string
   tag: string
 }>()
+const cannLink = computed(() => props.link + '/')
 </script>
 
 <template>
@@ -18,7 +19,7 @@ defineProps<{
     <div>
       <div class="relative p-2">
         <NuxtLink
-          :to="link"
+          :to="cannLink"
           :title="title"
           class="block aspect-w-4 aspect-h-3"
         >
