@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@headlessui/vue':
     specifier: ^1.7.14
-    version: 1.7.14(vue@3.3.4)
+    version: 1.7.15(vue@3.3.4)
   '@heroicons/vue':
     specifier: ^2.0.18
     version: 2.0.18(vue@3.3.4)
@@ -51,7 +51,7 @@ devDependencies:
     version: 1.1.11
   '@nuxt/devtools':
     specifier: ^0.7.0
-    version: 0.7.0(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7)
+    version: 0.7.1(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7)
   '@vite-pwa/nuxt':
     specifier: ^0.1.0
     version: 0.1.0(@nuxt/kit@3.6.5)(vite-plugin-pwa@0.16.4)
@@ -1304,7 +1304,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.4.5(@babel/core@7.22.9)
       babel-plugin-polyfill-corejs3: 0.8.3(@babel/core@7.22.9)
       babel-plugin-polyfill-regenerator: 0.5.2(@babel/core@7.22.9)
-      core-js-compat: 3.31.1
+      core-js-compat: 3.32.0
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -1792,8 +1792,8 @@ packages:
       '@hapi/hoek': 9.3.0
     dev: true
 
-  /@headlessui/vue@1.7.14(vue@3.3.4):
-    resolution: {integrity: sha512-aL9U9Sa7wdOzlrfjx6EjMIYNRCma5mngWcWzQBcHFwznpRZ8g/QZ/AYFtRDrZZUw22Ttttja4D7ZRXFwhONewA==}
+  /@headlessui/vue@1.7.15(vue@3.3.4):
+    resolution: {integrity: sha512-3ozVEgQ8mw09nWvUPN+8S6C8l3SM0lVT1aEN/+oP5Y4LF0WNMM9UrVisVTN9LLQ06v/X3EFA0blyL/vg8XNZlg==}
     engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.2.0
@@ -2059,8 +2059,8 @@ packages:
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
 
-  /@nuxt/devtools-kit@0.7.0(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7):
-    resolution: {integrity: sha512-cbSeiIjWau2LxNgo1YHmUunA88IQEESJOlYgpJFxyOkDXzpKaR6xA0i6MT0zZTmQFCkT+u7DtExdp999icbwXQ==}
+  /@nuxt/devtools-kit@0.7.1(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7):
+    resolution: {integrity: sha512-g7OgrU0VlW9fibLdHmhad4tEQzkS4g8yxaqDD/Kri/i3mEOeS7w9E8x7kkA/56FmmnXe6F6lCcLqG6u3FYW6WA==}
     peerDependencies:
       nuxt: ^3.6.1
       vite: '*'
@@ -2075,8 +2075,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/devtools-wizard@0.7.0:
-    resolution: {integrity: sha512-YUHxV8cN6SPqX/uQyLgJ9txcc8IJkG6nsBgfdrLjAkqNU7+/KFpjR0WgpFJNfPqYVpK19mENFTmvBXaBE4kv1A==}
+  /@nuxt/devtools-wizard@0.7.1:
+    resolution: {integrity: sha512-WZ8kdb9yfqgXn77ors9ojykb0wh0/+OdvgLEQt1xmwZxbWP5PPMqS/mcCUtKEuoYF2SM5aMBSPoXz90TJ/DfHQ==}
     hasBin: true
     dependencies:
       consola: 3.2.3
@@ -2092,15 +2092,15 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /@nuxt/devtools@0.7.0(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7):
-    resolution: {integrity: sha512-2r4766kZGTPZcs+o/YcobITc6lBsfsbuz18P+N5hqUXWc6evcWFf2fQXsMYJaD377mSwS1acxuHSrhI/WEYtMg==}
+  /@nuxt/devtools@0.7.1(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7):
+    resolution: {integrity: sha512-fwtsfv6vezD8AAKZO2rCwMc+jBsylP1AWF7WncCjr6KeOLoTjS38aOelO03XvrR61B1t4Vt44S/3afUPkmIEFQ==}
     hasBin: true
     peerDependencies:
       nuxt: ^3.6.1
       vite: '*'
     dependencies:
-      '@nuxt/devtools-kit': 0.7.0(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7)
-      '@nuxt/devtools-wizard': 0.7.0
+      '@nuxt/devtools-kit': 0.7.1(nuxt@3.5.3)(rollup@2.79.1)(vite@4.4.7)
+      '@nuxt/devtools-wizard': 0.7.1
       '@nuxt/kit': 3.6.5(rollup@2.79.1)
       birpc: 0.2.12
       boxen: 7.1.1
@@ -3884,7 +3884,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.9
       '@babel/helper-define-polyfill-provider': 0.4.2(@babel/core@7.22.9)
-      core-js-compat: 3.31.1
+      core-js-compat: 3.32.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4326,8 +4326,8 @@ packages:
   /cookie-es@1.0.0:
     resolution: {integrity: sha512-mWYvfOLrfEc996hlKcdABeIiPHUPC6DM2QYZdGGOvhOTbA3tjm2eBwqlJpoFdjC89NI4Qt6h0Pu06Mp+1Pj5OQ==}
 
-  /core-js-compat@3.31.1:
-    resolution: {integrity: sha512-wIDWd2s5/5aJSdpOJHfSibxNODxoGoWOBHt8JSPB41NOE94M7kuTPZCYLOlTtuoXTsBPKobpJ6T+y0SSy5L9SA==}
+  /core-js-compat@3.32.0:
+    resolution: {integrity: sha512-7a9a3D1k4UCVKnLhrgALyFcP7YCsLOQIxPd0dKjf/6GuPcgyiGP70ewWdCGrSK7evyhymi0qO4EqCmSJofDeYw==}
     dependencies:
       browserslist: 4.21.9
     dev: true
@@ -5017,7 +5017,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: true
