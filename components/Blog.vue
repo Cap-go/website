@@ -9,7 +9,7 @@ const props = defineProps<{
   date: string
   tag: string
 }>()
-const cannLink = computed(() => props.link + '/')
+const cannLink = computed(() => `${props.link}/`)
 </script>
 
 <template>
@@ -18,8 +18,8 @@ const cannLink = computed(() => props.link + '/')
   >
     <div>
       <div class="relative p-2">
-        <NuxtLink
-          :to="cannLink"
+        <a
+          :href="cannLink"
           :title="title"
           class="block aspect-w-4 aspect-h-3"
         >
@@ -32,7 +32,7 @@ const cannLink = computed(() => props.link + '/')
             :alt="`blog illustration ${title}`"
             :title="`blog illustration ${title}`"
           >
-        </NuxtLink>
+        </a>
 
         <div class="absolute top-4 left-4">
           <span
@@ -48,12 +48,12 @@ const cannLink = computed(() => props.link + '/')
         {{ formatTime(date) }}
       </span>
       <p class="px-5 mt-3 text-2xl font-semibold">
-        <NuxtLink :to="link" :title="title" class="text-gray-100">
+        <a :href="cannLink" :title="title" class="text-gray-100">
           {{ title }}
-        </NuxtLink>
+        </a>
       </p>
-      <NuxtLink
-        :to="link"
+      <a
+        :href="cannLink"
         :title="title"
         class="m-5 inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-200 transition-all duration-200 border-b-2 border-blue-300 hover:border-blue-600 focus:border-blue-600"
       >
@@ -70,7 +70,7 @@ const cannLink = computed(() => props.link + '/')
             clip-rule="evenodd"
           />
         </svg>
-      </NuxtLink>
+      </a>
     </div>
   </div>
 </template>
