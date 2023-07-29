@@ -6,21 +6,11 @@ import { formatTime } from '~/services/blog'
 
 const config = useRuntimeConfig()
 const route = useRoute()
- 
-const { data } = await useAsyncData(route.path, () => queryContent('/', route.path).findOne())
-const { data: articles } = await useAsyncData('allArticles', () =>
-  queryContent<MyCustomParsedContent>('/')
-    .where({ published: true, slug: { $ne: route.path } })
-    .sort({ created_at: -1 })
-    .limit(3)
-    .find())
-if (data.value?.next_blog != null) {
-  const nextArticle = await useAsyncData(`nextArticle_${data.value.next_blog}`, () => queryContent<MyCustomParsedContent>('/blog', data.value?.next_blog)
-    .findOne())
-  if (nextArticle.data.value && articles.value && articles.value[0])
-    articles.value[0] = nextArticle.data.value as any
-}
 
+const { data: res } = await useFetch<{ blog: MyCustomParsedContent; related: MyCustomParsedContent[] }>(`/api/blog/${route.params.id}`)
+
+const data = ref(res.value?.blog)
+const articles = ref(res.value?.related)
 if (data.value) {
   const datePublished = new Date(data.value?.created_at).toISOString()
   const dateModified = new Date(data.value?.updated_at).toISOString()
@@ -73,17 +63,16 @@ if (data.value) {
 
 <template>
   <main class="text-center text-white">
-    <ContentDoc v-slot="{ doc }" >
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div class="block aspect-w-4 aspect-h-3">
         <img
           class="object-cover w-full h-full lg:rounded-lg md:shadow-xl md:shadow-gray-700"
-          :src="doc?.head_image"
+          :src="data?.head_image"
           loading="eager"
           height="486"
           width="864"
-          :alt="`blog illustration ${doc?.title}`"
-          :title="`blog illustration ${doc?.title}`"
+          :alt="`blog illustration ${data?.title}`"
+          :title="`blog illustration ${data?.title}`"
         >
       </div>
 
@@ -91,7 +80,7 @@ if (data.value) {
         <span
           class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full"
         >
-          {{ doc?.tag }}
+          {{ data?.tag }}
         </span>
       </div>
     </div>
@@ -102,19 +91,17 @@ if (data.value) {
     </span>
 
     <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
-      {{ doc?.title }}
+      {{ data?.title }}
     </h1>
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
-      {{ doc?.description }}
+      {{ data?.description }}
     </p>
     <article
-      v-if="doc"
+      v-if="data"
       class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2"
     >
-      <ContentRenderer :value="doc" />
+      <ContentRenderer :value="data" />
     </article>
-  </ContentDoc>
-
 
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">

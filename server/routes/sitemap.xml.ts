@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
     smStream.write({ url: '/blog/', changefreq: 'weekly', priority: 1 })
 
-    const blogs = await serverQueryContent(event).where({ published: true }).find()
+    const blogs = await serverQueryContent(event).where({ published: true }).sort({ created_at: -1 }).find()
 
     blogs.forEach((article: any) => {
       smStream.write({

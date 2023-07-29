@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
+// import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
+import type { MyCustomParsedContent } from '~/services/blog'
 import { createMeta } from '~/services/meta'
 
 const title = 'Capgo | Capacitor Blog'
 const description = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
 
-const query: QueryBuilderParams = { path: '/blog', where: [{published: true }], sort: [{ created_at: -1 }] }
+// const query: QueryBuilderParams = { path: '/blog', where: [{published: true }], sort: [{ created_at: -1 }] }
+
+const { data } = await useFetch<MyCustomParsedContent[]>('/api/blogs')
 
 useHead(() => ({
   title,
@@ -30,17 +33,17 @@ useHead(() => ({
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-        <ContentList v-slot="{ list }" :query="query">
-            <Blog
-              v-for="article in list" :key="article._path"
-              :link="article._path"
-              :title="article.title"
-              :description="article.description"
-              :image="article.head_image"
-              :date="article.created_at"
-              :tag="article.tag"
-            />
-        </ContentList>
+        <!-- <ContentList v-slot="{ list }" :query="query"> -->
+        <Blog
+          v-for="article in data" :key="article.slug"
+          :link="article.slug"
+          :title="article.title"
+          :description="article.description"
+          :image="article.head_image"
+          :date="article.created_at"
+          :tag="article.tag"
+        />
+        <!-- </ContentList> -->
       </div>
     </div>
   </section>
