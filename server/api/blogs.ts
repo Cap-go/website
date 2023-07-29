@@ -8,7 +8,9 @@ export default defineEventHandler(async (event) => {
   }
   catch (e) {
     console.error(e)
-    event.res.statusCode = 500
-    return {}
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+    })
   }
 })

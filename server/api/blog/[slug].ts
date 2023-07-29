@@ -2,6 +2,12 @@ import { serverQueryContent } from '#content/server'
 import type { MyCustomParsedContent } from '~/services/blog'
 
 export default defineEventHandler(async (event) => {
+  if (!event.context.params?.slug) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Missing slug',
+    })
+  }
   try {
     const blog = await serverQueryContent<MyCustomParsedContent>(event)
       .where({ slug: event.context.params?.slug ?? '' })
@@ -23,7 +29,9 @@ export default defineEventHandler(async (event) => {
   }
   catch (e) {
     console.error(e)
-    event.res.statusCode = 500
-    return {}
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+    })
   }
 })

@@ -3,12 +3,14 @@ export default defineEventHandler(async (event) => {
 
   try {
     const data = `User-agent: *\nAllow: /\nUser-agent: *\nDisallow: /rss.xml\nSitemap: ${config.public.baseUrl}/sitemap.xml`
-    event.res.setHeader('Content-Type', 'text/plain')
+    event.node.res.setHeader('Content-Type', 'text/plain')
     return data.toString()
   }
   catch (e) {
     console.error(e)
-    event.res.statusCode = 500
-    return {}
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+    })
   }
 })
