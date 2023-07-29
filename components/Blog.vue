@@ -57,7 +57,7 @@ const cannLink = computed(() => `${props.link}/`)
         :title="title"
         class="m-5 inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-200 transition-all duration-200 border-b-2 border-blue-300 hover:border-blue-600 focus:border-blue-600"
       >
-        Continue Reading
+        Read more
         <svg
           class="w-5 h-5"
           xmlns="http://www.w3.org/2000/svg"
