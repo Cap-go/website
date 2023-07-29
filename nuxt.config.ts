@@ -3,7 +3,7 @@ import { pwa } from './config/pwa'
 import keys from './configs.json'
 import { appDescription, appName } from './constants/index'
 
-function getRightKey(branch: string, keyname: 'base_domain' | 'supa_anon' | 'supa_url'): string {
+function getRightKey(branch: string, keyname: 'base_domain'): string {
   if (branch === 'development')
     return keys[keyname].development
   else if (branch === 'local')
@@ -138,8 +138,6 @@ export default defineNuxtConfig({
       baseUrl: getUrl(process.env.BRANCH),
       baseApiUrl: getApiUrl(process.env.BRANCH),
     },
-    supa_anon: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
-    supa_url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
   },
   modules: [
     '@vueuse/nuxt',

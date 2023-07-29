@@ -7,7 +7,7 @@ import { formatTime } from '~/services/blog'
 const config = useRuntimeConfig()
 const route = useRoute()
 
-const { data: res } = await useFetch<{ blog: MyCustomParsedContent; related: MyCustomParsedContent[] }>(`/api/blog/${route.params.id}`)
+const { data: res } = await useFetch<{ blog: MyCustomParsedContent; related: MyCustomParsedContent[] }>(`/api/blog/${route.params.slug}`)
 
 const data = ref(res.value?.blog)
 const articles = ref(res.value?.related)
