@@ -9,7 +9,7 @@ const props = defineProps<{
   date: string
   tag: string
 }>()
-const cannLink = computed(() => `${props.link}/`)
+const cannLink = computed(() => `/blog/${props.link}/`)
 </script>
 
 <template>
