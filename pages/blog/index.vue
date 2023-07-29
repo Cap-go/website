@@ -1,18 +1,14 @@
 <script setup lang="ts">
-// import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
 import type { MyCustomParsedContent } from '~/services/blog'
 import { createMeta } from '~/services/meta'
 
-const title = 'Capgo | Capacitor Blog'
-const description = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
-
-// const query: QueryBuilderParams = { path: '/blog', where: [{published: true }], sort: [{ created_at: -1 }] }
+const config = useRuntimeConfig()
 
 const { data } = await useFetch<MyCustomParsedContent[]>('/api/blogs')
 
 useHead(() => ({
-  title,
-  meta: createMeta(title, description),
+  title: config.public.blog_tile,
+  meta: createMeta(config.public.blog_tile, config.public.blog_description),
 }))
 </script>
 
@@ -26,14 +22,13 @@ useHead(() => ({
           Latest from the blog
         </h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
-          {{ description }}
+          {{ config.public.blog_description }}
         </h2>
       </div>
 
       <div
         class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"
       >
-        <!-- <ContentList v-slot="{ list }" :query="query"> -->
         <Blog
           v-for="article in data" :key="article.slug"
           :link="article.slug"
@@ -43,7 +38,6 @@ useHead(() => ({
           :date="article.created_at"
           :tag="article.tag"
         />
-        <!-- </ContentList> -->
       </div>
     </div>
   </section>

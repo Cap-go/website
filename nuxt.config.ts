@@ -11,6 +11,10 @@ function getRightKey(branch: string, keyname: 'base_domain' | 'supa_anon' | 'sup
   return keys[keyname].prod
 }
 
+const brand = 'Capgo'
+const blogTitle = `${brand} | Capacitor Blog`
+const blogDescription = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
+
 function getUrl(branch = ''): string {
   if (branch === 'local')
     return `http://${getRightKey(branch, 'base_domain')}`
@@ -128,11 +132,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      brand: 'Capgo',
+      brand,
+      blog_title: blogTitle,
+      blog_description: blogDescription,
       baseUrl: getUrl(process.env.BRANCH),
       baseApiUrl: getApiUrl(process.env.BRANCH),
-      crisp: 'e7dbcfa4-91b1-4b74-b563-b9234aeb2eee',
-      handler: 'capgo',
     },
     supa_anon: `${getRightKey(process.env.BRANCH!, 'supa_anon')}`,
     supa_url: `${getRightKey(process.env.BRANCH!, 'supa_url')}`,
