@@ -48,13 +48,13 @@ const menuMobile = ref(false)
           >
             Pricing
           </NuxtLink>
-          <a
-            href="/blog/"
+          <NuxtLink
+            to="/blog/"
             title="Blog"
             class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Blog
-          </a>
+          </NuxtLink>
           <NuxtLink
             to="https://docs.capgo.app/"
             title="Documentation"
