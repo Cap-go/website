@@ -21,8 +21,8 @@ dependencies:
     specifier: ^3.3.0
     version: 3.3.0(rollup@2.79.1)
   '@supabase/supabase-js':
-    specifier: 2.26.0
-    version: 2.26.0
+    specifier: 2.31.0
+    version: 2.31.0
   '@types/semver':
     specifier: ^7.5.0
     version: 7.5.0
@@ -2682,8 +2682,8 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js@2.26.0:
-    resolution: {integrity: sha512-RXmTPTobaYAwkSobadHZmEVLmzX3SGrtRZIGfLWnLv92VzBRrjuXn0a+bJqKl50GUzsyqPA+j5pod7EwMkcH5A==}
+  /@supabase/supabase-js@2.31.0:
+    resolution: {integrity: sha512-W9/4s+KnSUX67wJKBn/3yLq+ieycnMzVjK3nNTLX5Wko3ypNT/081l2iFYrf+nsLQ1CiT4mA92I3dxCy6CmxTg==}
     dependencies:
       '@supabase/functions-js': 2.1.2
       '@supabase/gotrue-js': 2.46.1
