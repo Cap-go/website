@@ -116,7 +116,6 @@ const articles = ref(res.value?.related)
         <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
           <Blog
             v-for="article in articles" :key="article._id"
-            :link="article._path"
             :link="article.slug"
             :title="article.title"
             :description="article.description"
