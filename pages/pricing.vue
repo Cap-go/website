@@ -6,6 +6,7 @@ import PayAsYouGo from '~~/components/pricing/PayAsYouGo.vue'
 import Faq from '~~/components/pricing/Faq.vue'
 import type { Database } from '~~/types/supabase.types'
 import { createMeta } from '~~/services/meta'
+
 const config = useRuntimeConfig()
 
 const yearly = ref(false)

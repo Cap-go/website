@@ -18,8 +18,8 @@ const cannLink = computed(() => `/blog/${props.link}/`)
   >
     <div>
       <div class="relative p-2">
-        <a
-          :href="cannLink"
+        <NuxtLink
+          :to="cannLink"
           :title="title"
           class="block aspect-w-4 aspect-h-3"
         >
@@ -32,8 +32,7 @@ const cannLink = computed(() => `/blog/${props.link}/`)
             :alt="`blog illustration ${title}`"
             :title="`blog illustration ${title}`"
           >
-        </a>
-
+        </NuxtLink>
         <div class="absolute top-4 left-4">
           <span
             class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg"
