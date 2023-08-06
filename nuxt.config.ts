@@ -1,5 +1,5 @@
+import process from 'node:process'
 import { defineNuxtConfig } from 'nuxt/config'
-import { pwa } from './config/pwa'
 import keys from './configs.json'
 import { appDescription, appName } from './constants/index'
 
@@ -272,7 +272,7 @@ export default defineNuxtConfig({
     '~/assets/css/global.css',
     '@unocss/reset/tailwind.css',
   ],
-  pwa,
+  // pwa,
 })
 
 // export default defineNuxtConfig({
