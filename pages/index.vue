@@ -16,9 +16,9 @@ function shortNumber(number: number) {
   return `${number}`
 }
 const stats = reactive({
-  apps: shortNumber(190),
-  updates: shortNumber(70000),
-  stars: shortNumber(125),
+  apps: shortNumber(2900),
+  updates: shortNumber(1000000),
+  stars: shortNumber(336),
 })
 
 fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
