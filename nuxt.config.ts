@@ -125,7 +125,7 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-    preset: 'netlify-edge',
+    // preset: 'netlify-edge',
     prerender: {
       routes: ['/', '/sitemap.xml', '/robots.txt'],
     },
