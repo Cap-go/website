@@ -1,63 +1,64 @@
 <script setup lang="ts">
-// import type { NewsArticle, WithContext } from 'schema-dts'
+import type { NewsArticle, WithContext } from 'schema-dts'
+import { createMeta } from '~/services/meta';
 import type { MyCustomParsedContent } from '~/services/blog'
 import { formatTime } from '~/services/blog'
 
-// const config = useRuntimeConfig()
+const config = useRuntimeConfig()
 const route = useRoute()
 
 const { data: res } = await useFetch<{ blog: MyCustomParsedContent; related: MyCustomParsedContent[] }>(`/api/blog/${route.params.slug}`)
 
 const data = ref(res.value?.blog)
 const articles = ref(res.value?.related)
-// if (data.value) {
-//   const datePublished = new Date(data.value?.created_at).toISOString()
-//   const dateModified = new Date(data.value?.updated_at).toISOString()
-//   const structuredData: WithContext<NewsArticle> = {
-//     '@context': 'https://schema.org',
-//     '@type': 'NewsArticle',
-//     'mainEntityOfPage': {
-//       '@type': 'WebPage',
-//       '@id': `${config.public.baseUrl}/${data.value?.slug}`,
-//     },
-//     'headline': data.value?.description,
-//     'image': [
-//       `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-//     ],
-//     'datePublished': datePublished,
-//     'dateModified': dateModified,
-//     'author': {
-//       '@type': 'Person',
-//       'name': data.value?.author,
-//       'url': data.value?.author_url,
-//     },
-//     'publisher': {
-//       '@type': 'Organization',
-//       'name': 'Capgo',
-//       'logo': {
-//         '@type': 'ImageObject',
-//         'url': `${config.public.baseUrl}/icon.webp`,
-//       },
-//     },
-//   }
-// useJsonld(structuredData)
-// useHead(() => ({
-//   title: data.value?.title || 'No title',
-//   script: [
-//     {
-//       hid: 'seo-schema-graph',
-//       type: 'application/ld+json',
-//       children: JSON.stringify(structuredData),
-//     },
-//   ],
-//   meta: createMeta(
-//     data.value?.title || 'No title',
-//     data.value?.description || 'No description',
-//     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-//     data.value?.author || 'Capgo',
-//   ),
-// }))
-// }
+if (data.value) {
+  const datePublished = new Date(data.value?.created_at).toISOString()
+  const dateModified = new Date(data.value?.updated_at).toISOString()
+  const structuredData: WithContext<NewsArticle> = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `${config.public.baseUrl}/${data.value?.slug}`,
+    },
+    'headline': data.value?.description,
+    'image': [
+      `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
+    ],
+    'datePublished': datePublished,
+    'dateModified': dateModified,
+    'author': {
+      '@type': 'Person',
+      'name': data.value?.author,
+      'url': data.value?.author_url,
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Capgo',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': `${config.public.baseUrl}/icon.webp`,
+      },
+    },
+  }
+useJsonld(structuredData)
+useHead(() => ({
+  title: data.value?.title || 'No title',
+  script: [
+    {
+      hid: 'seo-schema-graph',
+      type: 'application/ld+json',
+      children: JSON.stringify(structuredData),
+    },
+  ],
+  meta: createMeta(
+    data.value?.title || 'No title',
+    data.value?.description || 'No description',
+    `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
+    data.value?.author || 'Capgo',
+  ),
+}))
+}
 </script>
 
 <template>
