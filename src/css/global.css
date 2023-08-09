@@ -1,0 +1,61 @@
+@import "./markdown.css";
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  background: #121212;
+}
+
+.btn {
+  @apply px-4 py-1 rounded inline-block
+    bg-teal-600 text-white cursor-pointer
+    hover:bg-teal-700
+    disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
+}
+
+.icon-btn {
+  @apply inline-block cursor-pointer select-none
+    opacity-75 transition duration-200 ease-in-out
+    hover:opacity-100 hover:text-teal-600;
+  font-size: 0.9em;
+}
+
+.calc-input {
+  @apply break-all w-full p-2 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3;
+}
+
+.calc-label {
+  @apply mt-5 text-sm font-bold tracking-widest uppercase mt-0;
+}
+
+@font-face {
+  font-family: "AirbnbCerealLight";
+  font-weight: 500;
+  src: url(~/fonts/AirbnbCerealLight.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AirbnbCerealMedium";
+  font-weight: 500;
+  src: url(~/fonts/AirbnbCerealMedium.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AirbnbCerealBold";
+  font-weight: 500;
+  src: url(~/fonts/AirbnbCerealBold.woff) format("woff");
+  font-display: swap;
+}

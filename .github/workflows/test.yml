@@ -25,7 +25,5 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
-      - name: Build website
-        run: pnpm build
       - name: Generate static pages
-        run: pnpm generate
+        run: pnpm build
