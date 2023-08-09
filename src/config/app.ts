@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import keys from '../../configs.json'
+import { appDescription, appName } from '../constants/index'
 
 function getRightKey(branch: string, keyname: 'base_domain'): string {
   if (branch === 'development') return keys[keyname].development
@@ -45,3 +46,77 @@ export function useRuntimeConfig() {
     },
   }
 }
+
+export const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${getUrl(import.meta.env.BRANCH)}/#website`,
+      url: getUrl(import.meta.env.BRANCH),
+      name: appName,
+      isPartOf: {
+        '@id': `${getUrl(import.meta.env.BRANCH)}/#website`,
+      },
+      datePublished: '2022-01-30T22:51:56+00:00',
+      dateModified: new Date().toISOString(),
+      description: appDescription,
+      breadcrumb: {
+        '@id': `${getUrl(import.meta.env.BRANCH)}/#breadcrumb`,
+      },
+      inLanguage: 'en-US',
+      potentialAction: [
+        {
+          '@type': 'ReadAction',
+          target: [getUrl(import.meta.env.BRANCH)],
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${getUrl(import.meta.env.BRANCH)}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          item: {
+            '@type': 'WebPage',
+            '@id': `${getUrl(import.meta.env.BRANCH)}/`,
+            url: `${getUrl(import.meta.env.BRANCH)}/`,
+            name: 'Home',
+          },
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          item: {
+            '@type': 'WebPage',
+            '@id': `${getUrl(import.meta.env.BRANCH)}/blog/`,
+            url: `${getUrl(import.meta.env.BRANCH)}/blog/`,
+            name: 'Blog',
+          },
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          item: {
+            '@type': 'WebPage',
+            '@id': `${getUrl(import.meta.env.BRANCH)}/app_mobile/`,
+            url: `${getUrl(import.meta.env.BRANCH)}/app_mobile/`,
+            name: 'App',
+          },
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          item: {
+            '@type': 'WebPage',
+            '@id': `${getUrl(import.meta.env.BRANCH)}/pricing/`,
+            url: `${getUrl(import.meta.env.BRANCH)}/pricing/`,
+            name: 'Pricing',
+          },
+        },
+      ],
+    },
+  ],
+})
