@@ -1,64 +1,75 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import Blog from '../../components/Blog.vue'
+const props = defineProps<{
+  Content?: any
+  slug?: string
+  title?: string
+  description?: string
+  author?: string
+  author_url?: string
+  created_at?: string
+  updated_at?: string
+  head_image?: string
+  head_image_alt?: string
+  tag?: string
+  published?: boolean
+  next_blog?: string
+}>()
+// import { ref } from 'vue'
+// import Blog from '../../components/Blog.vue'
 // import type { NewsArticle, WithContext } from 'schema-dts'
 import { formatTime, useRuntimeConfig } from '../../config/app'
 
 // const config = useRuntimeConfig()
-const route = useRoute()
-
-const { data: res } = await useFetch<{ blog: MyCustomParsedContent; related: MyCustomParsedContent[] }>(`/api/blog/${route.params.slug}`)
-
-const data = ref(res.value?.blog)
-const articles = ref(res.value?.related)
-if (data.value) {
-  // const datePublished = new Date(data.value?.created_at).toISOString()
-  // const dateModified = new Date(data.value?.updated_at).toISOString()
-  // const structuredData: WithContext<NewsArticle> = {
-  //   '@context': 'https://schema.org',
-  //   '@type': 'NewsArticle',
-  //   'mainEntityOfPage': {
-  //     '@type': 'WebPage',
-  //     '@id': `${config.public.baseUrl}/${data.value?.slug}`,
-  //   },
-  //   'headline': data.value?.description,
-  //   'image': [
-  //     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-  //   ],
-  //   'datePublished': datePublished,
-  //   'dateModified': dateModified,
-  //   'author': {
-  //     '@type': 'Person',
-  //     'name': data.value?.author,
-  //     'url': data.value?.author_url,
-  //   },
-  //   'publisher': {
-  //     '@type': 'Organization',
-  //     'name': 'Capgo',
-  //     'logo': {
-  //       '@type': 'ImageObject',
-  //       'url': `${config.public.baseUrl}/icon.webp`,
-  //     },
-  //   },
-  // }
-  // useJsonld(structuredData)
-  // useHead(() => ({
-  //   title: data.value?.title || 'No title',
-  //   script: [
-  //     {
-  //       hid: 'seo-schema-graph',
-  //       type: 'application/ld+json',
-  //       children: JSON.stringify(structuredData),
-  //     },
-  //   ],
-  //   meta: createMeta(
-  //     data.value?.title || 'No title',
-  //     data.value?.description || 'No description',
-  //     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-  //     data.value?.author || 'Capgo',
-  //   ),
-  // }))
-}
+const data = props
+// const articles = ref(res.value?.related)
+// if (data.value) {
+// const datePublished = new Date(data.value?.created_at).toISOString()
+// const dateModified = new Date(data.value?.updated_at).toISOString()
+// const structuredData: WithContext<NewsArticle> = {
+//   '@context': 'https://schema.org',
+//   '@type': 'NewsArticle',
+//   'mainEntityOfPage': {
+//     '@type': 'WebPage',
+//     '@id': `${config.public.baseUrl}/${data.value?.slug}`,
+//   },
+//   'headline': data.value?.description,
+//   'image': [
+//     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
+//   ],
+//   'datePublished': datePublished,
+//   'dateModified': dateModified,
+//   'author': {
+//     '@type': 'Person',
+//     'name': data.value?.author,
+//     'url': data.value?.author_url,
+//   },
+//   'publisher': {
+//     '@type': 'Organization',
+//     'name': 'Capgo',
+//     'logo': {
+//       '@type': 'ImageObject',
+//       'url': `${config.public.baseUrl}/icon.webp`,
+//     },
+//   },
+// }
+// useJsonld(structuredData)
+// useHead(() => ({
+//   title: data.value?.title || 'No title',
+//   script: [
+//     {
+//       hid: 'seo-schema-graph',
+//       type: 'application/ld+json',
+//       children: JSON.stringify(structuredData),
+//     },
+//   ],
+//   meta: createMeta(
+//     data.value?.title || 'No title',
+//     data.value?.description || 'No description',
+//     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
+//     data.value?.author || 'Capgo',
+//   ),
+// }))
+// }
 </script>
 
 <template>
@@ -92,9 +103,7 @@ if (data.value) {
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
       {{ data?.description }}
     </p>
-    <article v-if="data" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2">
-      <ContentRenderer :value="data" />
-    </article>
+    <article v-html="props.Content.props.children" v-if="data" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2" />
 
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -105,7 +114,7 @@ if (data.value) {
           </p>
         </div>
 
-        <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
+        <!-- <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
           <Blog
             v-for="article in articles"
             :key="article._id"
@@ -116,7 +125,7 @@ if (data.value) {
             :date="article.created_at"
             :tag="article.tag"
           />
-        </div>
+        </div> -->
 
         <div class="mt-12 text-center">
           <a href="/blog" title="" class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline">
