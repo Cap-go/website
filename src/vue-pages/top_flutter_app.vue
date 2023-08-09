@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRuntimeConfig } from '../config/app';
-import type { Database } from '../types/supabase.types';
+import { ref } from 'vue'
+import { useRuntimeConfig } from '../config/app'
+import type { Database } from '../types/supabase.types'
 
 const config = useRuntimeConfig()
 // const title = 'Capgo | Top Flutter apps'

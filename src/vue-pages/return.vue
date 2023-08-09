@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from '../config/app';
+import { useRuntimeConfig } from '../config/app'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
