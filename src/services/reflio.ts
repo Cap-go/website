@@ -4,8 +4,7 @@ declare global {
   }
 }
 export function initAffiliate() {
-  if (window.Reflio)
-    return
+  if (window.Reflio) return
   const d = document
   const t = 'script'
   const BASE_URL = 'https://reflio.com'

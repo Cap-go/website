@@ -1,5 +1,5 @@
 .prose pre {
-  background-color: theme("colors.black.DEFAULT");
+  background-color: theme('colors.black.DEFAULT');
 }
 
 .prose * {
@@ -12,9 +12,9 @@
 }
 
 .prose thead {
-  color: theme("colors.mutedBlue.300");
+  color: theme('colors.mutedBlue.300');
 }
 
 .prose blockquote {
-  color: theme("colors.pumpkinOrange.300");
+  color: theme('colors.pumpkinOrange.300');
 }

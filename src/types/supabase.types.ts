@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json } | Json[]
 
 export interface Database {
   public: {
@@ -14,7 +8,7 @@ export interface Database {
           created_at: string | null
           id: number
           key: string
-          mode: Database["public"]["Enums"]["key_mode"]
+          mode: Database['public']['Enums']['key_mode']
           updated_at: string | null
           user_id: string
         }
@@ -22,7 +16,7 @@ export interface Database {
           created_at?: string | null
           id?: number
           key: string
-          mode: Database["public"]["Enums"]["key_mode"]
+          mode: Database['public']['Enums']['key_mode']
           updated_at?: string | null
           user_id: string
         }
@@ -30,7 +24,7 @@ export interface Database {
           created_at?: string | null
           id?: number
           key?: string
-          mode?: Database["public"]["Enums"]["key_mode"]
+          mode?: Database['public']['Enums']['key_mode']
           updated_at?: string | null
           user_id?: string
         }
@@ -320,7 +314,7 @@ export interface Database {
           name: string
           public: boolean
           updated_at: string
-          version: {"name": "string", "created_at": "string"}
+          version: { name: 'string'; created_at: 'string' }
         }
         Insert: {
           allow_dev?: boolean
@@ -386,10 +380,10 @@ export interface Database {
           is_emulator: boolean | null
           is_prod: boolean | null
           os_version: string | null
-          platform: Database["public"]["Enums"]["platform_os"] | null
+          platform: Database['public']['Enums']['platform_os'] | null
           plugin_version: string
           updated_at: string | null
-          version: {"name": "string"}
+          version: { name: 'string' }
           version_build: string | null
         }
         Insert: {
@@ -401,7 +395,7 @@ export interface Database {
           is_emulator?: boolean | null
           is_prod?: boolean | null
           os_version?: string | null
-          platform?: Database["public"]["Enums"]["platform_os"] | null
+          platform?: Database['public']['Enums']['platform_os'] | null
           plugin_version?: string
           updated_at?: string | null
           version: number
@@ -416,7 +410,7 @@ export interface Database {
           is_emulator?: boolean | null
           is_prod?: boolean | null
           os_version?: string | null
-          platform?: Database["public"]["Enums"]["platform_os"] | null
+          platform?: Database['public']['Enums']['platform_os'] | null
           plugin_version?: string
           updated_at?: string | null
           version?: number
@@ -433,7 +427,7 @@ export interface Database {
           is_emulator: boolean | null
           is_prod: boolean | null
           os_version: string | null
-          platform: Database["public"]["Enums"]["platform_os"] | null
+          platform: Database['public']['Enums']['platform_os'] | null
           plugin_version: string
           updated_at: string | null
           version: string | null
@@ -448,7 +442,7 @@ export interface Database {
           is_emulator?: boolean | null
           is_prod?: boolean | null
           os_version?: string | null
-          platform?: Database["public"]["Enums"]["platform_os"] | null
+          platform?: Database['public']['Enums']['platform_os'] | null
           plugin_version?: string
           updated_at?: string | null
           version?: string | null
@@ -463,7 +457,7 @@ export interface Database {
           is_emulator?: boolean | null
           is_prod?: boolean | null
           os_version?: string | null
-          platform?: Database["public"]["Enums"]["platform_os"] | null
+          platform?: Database['public']['Enums']['platform_os'] | null
           plugin_version?: string
           updated_at?: string | null
           version?: string | null
@@ -659,7 +653,7 @@ export interface Database {
           created_at: string | null
           device_id: string
           id: number
-          platform: Database["public"]["Enums"]["platform_os"]
+          platform: Database['public']['Enums']['platform_os']
           updated_at: string | null
           version: number
           version_build: string
@@ -670,7 +664,7 @@ export interface Database {
           created_at?: string | null
           device_id: string
           id?: number
-          platform: Database["public"]["Enums"]["platform_os"]
+          platform: Database['public']['Enums']['platform_os']
           updated_at?: string | null
           version: number
           version_build: string
@@ -681,7 +675,7 @@ export interface Database {
           created_at?: string | null
           device_id?: string
           id?: number
-          platform?: Database["public"]["Enums"]["platform_os"]
+          platform?: Database['public']['Enums']['platform_os']
           updated_at?: string | null
           version?: number
           version_build?: string
@@ -694,7 +688,7 @@ export interface Database {
           created_at: string | null
           device_id: string
           id: number
-          platform: Database["public"]["Enums"]["platform_os"]
+          platform: Database['public']['Enums']['platform_os']
           updated_at: string | null
           version: string
           version_build: string
@@ -705,7 +699,7 @@ export interface Database {
           created_at?: string | null
           device_id: string
           id?: number
-          platform: Database["public"]["Enums"]["platform_os"]
+          platform: Database['public']['Enums']['platform_os']
           updated_at?: string | null
           version: string
           version_build: string
@@ -716,7 +710,7 @@ export interface Database {
           created_at?: string | null
           device_id?: string
           id?: number
-          platform?: Database["public"]["Enums"]["platform_os"]
+          platform?: Database['public']['Enums']['platform_os']
           updated_at?: string | null
           version?: string
           version_build?: string
@@ -783,7 +777,7 @@ export interface Database {
           plan_usage: number | null
           price_id: string | null
           product_id: string
-          status: Database["public"]["Enums"]["stripe_status"] | null
+          status: Database['public']['Enums']['stripe_status'] | null
           subscription_anchor: string
           subscription_id: string | null
           subscription_metered: Json
@@ -797,7 +791,7 @@ export interface Database {
           plan_usage?: number | null
           price_id?: string | null
           product_id?: string
-          status?: Database["public"]["Enums"]["stripe_status"] | null
+          status?: Database['public']['Enums']['stripe_status'] | null
           subscription_anchor?: string
           subscription_id?: string | null
           subscription_metered?: Json
@@ -811,7 +805,7 @@ export interface Database {
           plan_usage?: number | null
           price_id?: string | null
           product_id?: string
-          status?: Database["public"]["Enums"]["stripe_status"] | null
+          status?: Database['public']['Enums']['stripe_status'] | null
           subscription_anchor?: string
           subscription_id?: string | null
           subscription_metered?: Json
@@ -1047,14 +1041,14 @@ export interface Database {
         | {
             Args: {
               apikey: string
-              keymode: Database["public"]["Enums"]["key_mode"][]
+              keymode: Database['public']['Enums']['key_mode'][]
             }
             Returns: boolean
           }
         | {
             Args: {
               apikey: string
-              keymode: Database["public"]["Enums"]["key_mode"][]
+              keymode: Database['public']['Enums']['key_mode'][]
               app_id: string
             }
             Returns: boolean
@@ -1109,17 +1103,11 @@ export interface Database {
       }
     }
     Enums: {
-      app_mode: "prod" | "dev" | "livereload"
-      key_mode: "read" | "write" | "all" | "upload"
-      pay_as_you_go_type: "base" | "units"
-      platform_os: "ios" | "android"
-      stripe_status:
-        | "created"
-        | "succeeded"
-        | "updated"
-        | "failed"
-        | "deleted"
-        | "canceled"
+      app_mode: 'prod' | 'dev' | 'livereload'
+      key_mode: 'read' | 'write' | 'all' | 'upload'
+      pay_as_you_go_type: 'base' | 'units'
+      platform_os: 'ios' | 'android'
+      stripe_status: 'created' | 'succeeded' | 'updated' | 'failed' | 'deleted' | 'canceled'
     }
   }
 }

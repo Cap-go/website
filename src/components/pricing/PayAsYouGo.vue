@@ -8,10 +8,10 @@ defineProps({
     type: Boolean,
     required: true,
   },
-});
+})
 
 function toTb(value: number) {
-  return (value / 1000).toFixed(2).toLocaleString();
+  return (value / 1000).toFixed(2).toLocaleString()
 }
 </script>
 
@@ -20,88 +20,42 @@ function toTb(value: number) {
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
         <div class="flex items-center justify-center">
-          <div
-            class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9"
-          >
-            🔥
-          </div>
-          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">
-            Pay as you go
-          </h2>
+          <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">🔥</div>
+          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">Pay as you go</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">
-          2,500.000 Live Updates/mo. No commitments.
-        </p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">2,500.000 Live Updates/mo. No commitments.</p>
       </div>
 
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">
           <div
             class="w-full h-full mx-auto opacity-30 blur-lg filter"
-            style="
-              background: linear-gradient(
-                90deg,
-                #44ff9a -0.55%,
-                #44b0ff 22.86%,
-                #8b44ff 48.36%,
-                #ff6644 73.33%,
-                #ebff70 99.34%
-              );
-            "
+            style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
 
-        <div
-          class="relative overflow-hidden bg-white border border-gray-200 rounded-2xl"
-        >
+        <div class="relative overflow-hidden bg-white border border-gray-200 rounded-2xl">
           <div class="p-6 md:px-10 md:py-9">
-            <div
-              class="grid items-center grid-cols-1 md:grid-cols-7 gap-y-9 md:gap-y-0"
-            >
+            <div class="grid items-center grid-cols-1 md:grid-cols-7 gap-y-9 md:gap-y-0">
               <div class="md:col-span-3 xl:pr-2 space-y-9">
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Monthly active users
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Monthly active users</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      <span class="font-bold">{{
-                        payg?.mau.toLocaleString()
-                      }}</span>
+                      <span class="font-bold">{{ payg?.mau.toLocaleString() }}</span>
                       users included, then ${{ payg?.mau_unit }}/u
                     </p>
                   </div>
                 </div>
 
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -111,28 +65,17 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Bandwidth
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Bandwidth</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(payg?.bandwidth) }}</span>
-                      TB included, then ${{ payg?.bandwidth_unit }}/GB
-                      additional
+                      TB included, then ${{ payg?.bandwidth_unit }}/GB additional
                     </p>
                   </div>
                 </div>
 
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -142,13 +85,9 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Cloud Storage
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Cloud Storage</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      <span class="font-bold">{{
-                        payg?.storage.toLocaleString()
-                      }}</span>
+                      <span class="font-bold">{{ payg?.storage.toLocaleString() }}</span>
                       GB included, then ${{ payg?.storage_unit }}/GB additional
                     </p>
                   </div>
@@ -157,327 +96,67 @@ function toTb(value: number) {
 
               <div>
                 <div class="hidden md:block">
-                  <svg
-                    class="w-4 h-auto mx-auto text-gray-300"
-                    viewBox="0 0 16 172"
-                    fill="none"
-                    stroke="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 11)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 46)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 81)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 116)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 151)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 18)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 53)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 88)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 123)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 158)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 25)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 60)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 95)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 130)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 165)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 32)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 67)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 102)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 137)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 172)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 39)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 74)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 109)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 144)"
-                    />
+                  <svg class="w-4 h-auto mx-auto text-gray-300" viewBox="0 0 16 172" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 11)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 46)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 81)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 116)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 151)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 18)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 53)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 88)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 123)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 158)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 25)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 60)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 95)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 130)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 165)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 32)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 67)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 102)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 137)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 172)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 39)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 74)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 109)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 144)" />
                   </svg>
                 </div>
 
                 <div class="block md:hidden">
-                  <svg
-                    class="w-auto h-4 mx-auto text-gray-300"
-                    viewBox="0 0 172 16"
-                    fill="none"
-                    stroke="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 116 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 151 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 18 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 53 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 88 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 123 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 158 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 25 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 60 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 95 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 130 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 165 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 32 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 67 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 102 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 137 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 172 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 39 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 74 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 109 1)"
-                    />
-                    <line
-                      y1="-0.5"
-                      x2="18.0278"
-                      y2="-0.5"
-                      transform="matrix(-0.5547 0.83205 0.83205 0.5547 144 1)"
-                    />
+                  <svg class="w-auto h-4 mx-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 116 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 151 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 18 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 53 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 88 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 123 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 158 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 25 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 60 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 95 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 130 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 165 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 32 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 67 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 102 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 137 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 172 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 39 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 74 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 109 1)" />
+                    <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 144 1)" />
                   </svg>
                 </div>
               </div>
               <div class="md:col-span-3 xl:pr-2 space-y-9">
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -487,26 +166,14 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      API Access
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Create anything you want
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">API Access</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Create anything you want</p>
                   </div>
                 </div>
 
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -516,26 +183,14 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Dedicated support
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Get an answer in less than 6h
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Dedicated support</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Get an answer in less than 6h</p>
                   </div>
                 </div>
 
                 <div class="flex items-center">
-                  <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-900"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -545,12 +200,8 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Custom Domain
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Add your own domain
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Custom Domain</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Add your own domain</p>
                   </div>
                 </div>
               </div>
@@ -560,22 +211,14 @@ function toTb(value: number) {
       </div>
 
       <div class="mt-8 text-center">
-        <p class="text-base font-medium text-gray-600 font-pj">
-          All our features are available to all users
-        </p>
+        <p class="text-base font-medium text-gray-600 font-pj">All our features are available to all users</p>
 
         <div class="flex items-end justify-center mt-10">
           <p class="text-lg font-bold text-gray-400 font-pj">$</p>
           <p class="text-6xl font-bold text-gray-900 font-pj">
-            {{
-              yearly
-                ? payg.price_y.toLocaleString()
-                : payg?.price_m.toLocaleString()
-            }}
+            {{ yearly ? payg.price_y.toLocaleString() : payg?.price_m.toLocaleString() }}
           </p>
-          <p class="text-lg font-bold text-gray-400 font-pj">
-            /{{ yearly ? "Year" : "Month" }}
-          </p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/{{ yearly ? 'Year' : 'Month' }}</p>
         </div>
         <a
           href="/register"

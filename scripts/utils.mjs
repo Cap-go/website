@@ -1,5 +1,5 @@
 import { config } from 'dotenv'
-import keys from '../configs.json' assert {type: 'json'}
+import keys from '../configs.json' assert { type: 'json' }
 
 config()
 
@@ -8,12 +8,9 @@ console.log('Branch', branch)
 
 export const getRightKey = (keyname) => {
   // console.log('getRightKey', branch, keyname)
-  if (!keys || !keys[keyname])
-    return ''
-  if (branch === 'development')
-    return keys[keyname].development
-  else if (branch === 'local')
-    return keys[keyname].local
+  if (!keys || !keys[keyname]) return ''
+  if (branch === 'development') return keys[keyname].development
+  else if (branch === 'local') return keys[keyname].local
   return keys[keyname].prod
 }
 export const supa_url = getRightKey('supa_url')

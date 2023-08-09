@@ -9,12 +9,9 @@ const command = `npx --yes supabase gen types typescript --project-id=${supaId} 
 const main = async () => {
   try {
     const { stderr } = await exec(command)
-    if (stderr)
-      console.error(stderr)
-    else
-      console.log('Type generated ✅')
-  }
-  catch (e) {
+    if (stderr) console.error(stderr)
+    else console.log('Type generated ✅')
+  } catch (e) {
     console.error(e) // should contain code (exit code) and signal (that caused the termination).
   }
 }

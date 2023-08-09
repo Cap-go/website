@@ -1,6 +1,4 @@
-interface Meta {
-
-}
+interface Meta {}
 
 export function createMetaImage(image: string | null = null, title: string | null = null): Meta[] {
   if (image) {
@@ -47,14 +45,9 @@ export function createMetaImage(image: string | null = null, title: string | nul
   return []
 }
 
-export function createMeta(title: string,
-  description: string,
-  image: string | null = null,
-  author: string | null = null,
-  audio: string | null = null): Meta[] {
+export function createMeta(title: string, description: string, image: string | null = null, author: string | null = null, audio: string | null = null): Meta[] {
   const descSize = 170
-  if (description.length > descSize)
-    description = `${description.substring(0, descSize - 3)}...`
+  if (description.length > descSize) description = `${description.substring(0, descSize - 3)}...`
 
   const base: Meta[] = [
     {
@@ -92,8 +85,7 @@ export function createMeta(title: string,
       },
     )
   }
-  if (image)
-    base.push(...createMetaImage(image))
+  if (image) base.push(...createMetaImage(image))
 
   if (audio) {
     base.push(

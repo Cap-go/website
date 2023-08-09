@@ -5,9 +5,7 @@
     "bandwidth": 25,
     "price": 14,
     "description": "Best for independent developers",
-    "features": [
-      "Limited Reporting"
-    ]
+    "features": ["Limited Reporting"]
   },
   "maker": {
     "mau": 5000,
@@ -15,9 +13,7 @@
     "bandwidth": 250,
     "price": 39,
     "description": "Best for small business owners",
-    "features": [
-      "Advanced Reporting"
-    ]
+    "features": ["Advanced Reporting"]
   },
   "team": {
     "mau": 40000,
@@ -25,11 +21,7 @@
     "bandwidth": 2000,
     "price": 299,
     "description": "Best for medium enterprises",
-    "features": [
-      "Advanced Reporting",
-      "Progressive Deployment",
-      "AB testing"
-    ]
+    "features": ["Advanced Reporting", "Progressive Deployment", "AB testing"]
   },
   "pay-as-you-go": {
     "mau": {
@@ -46,10 +38,6 @@
     },
     "price": 999,
     "description": "Best for scalling enterprises",
-    "features": [
-      "Advanced Reporting",
-      "Progressive Deployment",
-      "AB testing"
-    ]
+    "features": ["Advanced Reporting", "Progressive Deployment", "AB testing"]
   }
 }
