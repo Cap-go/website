@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { createMeta } from '~/services/meta'
-import type { Database } from '~~/types/supabase.types'
+import { ref } from 'vue'
+import { useRuntimeConfig } from '../config/app'
+import type { Database } from '../types/supabase.types'
 
 const config = useRuntimeConfig()
 const title = 'Capgo | Top Native Script apps'
@@ -23,10 +24,10 @@ function renameCat(text: string) {
   return text.replaceAll('_', ' ')
 }
 
-useHead(() => ({
-  title,
-  meta: createMeta(title, description, `${config.public.baseUrl}/native_script.webp`),
-}))
+// useHead(() => ({
+//   title,
+//   meta: createMeta(title, description, `${config.public.baseUrl}/native_script.webp`),
+// }))
 const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 
 fetch(`${config.public.baseApiUrl}/store_top?mode=nativeScript`).then((res) => {

@@ -11,7 +11,7 @@ import {
   SpeakerXMarkIcon,
   ViewfinderCircleIcon,
 } from '@heroicons/vue/20/solid'
-import { createMeta } from '~~/services/meta'
+// import { createMeta } from '../services/meta'
 
 interface Action {
   title: string
@@ -119,10 +119,10 @@ const actions: Action[] = [
     iconBackground: 'bg-fuchsia-50',
   },
 ]
-useHead({
-  title: 'Capgo plugins',
-  meta: createMeta('Capgo plugins', 'Move forward with confidence. Capgo offer multiple plugins to help you build your app faster and better.'),
-})
+// useHead({
+//   title: 'Capgo plugins',
+//   meta: createMeta('Capgo plugins', 'Move forward with confidence. Capgo offer multiple plugins to help you build your app faster and better.'),
+// })
 </script>
 
 <template>

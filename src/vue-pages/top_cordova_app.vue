@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { createMeta } from '~/services/meta'
-import type { Database } from '~~/types/supabase.types'
+import { ref } from 'vue'
+import { useRuntimeConfig } from '../config/app'
+import type { Database } from '../types/supabase.types'
 
 const config = useRuntimeConfig()
-const title = 'Capgo | Top Cordova apps'
+// const title = 'Capgo | Top Cordova apps'
 const description = 'List of top 100 app using Cordova on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
@@ -23,10 +24,10 @@ function renameCat(text: string) {
   return text.replaceAll('_', ' ')
 }
 
-useHead(() => ({
-  title,
-  meta: createMeta(title, description, `${config.public.baseUrl}/cordova.webp`),
-}))
+// useHead(() => ({
+//   title,
+//   meta: createMeta(title, description, `${config.public.baseUrl}/cordova.webp`),
+// }))
 const others = ref(['top_capacitor_app', 'top_react_native_app', 'top_flutter_app'])
 
 fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {

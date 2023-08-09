@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { createMeta } from '~~/services/meta'
+// import { createMeta } from '~~/services/meta'
 
-useHead({
-  title: 'CapacitorJS Consultancy',
-  meta: createMeta(
-    'Capgo | Capacitor consulting',
-    'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.',
-  ),
-})
+// useHead({
+//   title: 'CapacitorJS Consultancy',
+//   meta: createMeta(
+//     'Capgo | Capacitor consulting',
+//     'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.',
+//   ),
+// })
 
 const randomOdd = Math.floor(Math.random() * 100) + 1
 </script>

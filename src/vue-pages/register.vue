@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
 // onMounted
 onMounted(() => {
   // check if window.Rewardful.affiliate present if yes then add it to the register link
