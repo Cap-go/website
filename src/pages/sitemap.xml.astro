@@ -1,0 +1,48 @@
+---
+import { useRuntimeConfig } from '../config/app'
+import { SitemapStream, streamToPromise } from 'sitemap'
+
+try {
+  const config = useRuntimeConfig()
+  const smStream = new SitemapStream({ hostname: config.public.baseUrl })
+  smStream.write({ url: '/', changefreq: 'daily', priority: 1 })
+  smStream.write({ url: '/app_mobile/', changefreq: 'weekly', priority: 1 })
+  smStream.write({ url: '/pricing/', changefreq: 'weekly', priority: 1 })
+  smStream.write({ url: '/blog/', changefreq: 'weekly', priority: 1 })
+  const blogs = await Astro.glob('../content/blog/**/*.md')
+  blogs.forEach((article: any) => {
+    smStream.write({
+      url: `/blog/${article.frontmatter.slug}/`,
+      changefreq: 'weekly',
+      priority: 0.5,
+    })
+  })
+  const articles = await Astro.glob('../content/article/**/*.md')
+  articles.forEach((article: any) => {
+    smStream.write({
+      url: `/article/${article.frontmatter.slug}/`,
+      changefreq: 'weekly',
+      priority: 0.5,
+    })
+  })
+  smStream.end()
+  const sitemap = await streamToPromise(smStream)
+  return new Response(sitemap, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/xml',
+    },
+  })
+} catch (e) {
+  console.log(e)
+
+  return new Response(null, {
+    status: 404,
+    // @ts-ignore
+    location: '/404',
+    headers: {
+      'Content-Type': 'text/html',
+    },
+  })
+}
+---
