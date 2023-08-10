@@ -1,4 +1,8 @@
 ---
+import Layout from '../../layouts/Layout.astro'
+import { useRuntimeConfig } from '../../config/app'
+import VueBlogSlug from '../../vue-pages/blog/[slug].vue'
+
 export async function getStaticPaths() {
   const posts = await Astro.glob('../../content/blog/**/*.md')
   return posts.map((post) => ({
@@ -12,14 +16,31 @@ export async function getStaticPaths() {
 }
 
 const data = Astro.props.post
+
 const { Content } = data
+
+const config = useRuntimeConfig()
 
 const markdown = await Content()
 
-import Layout from '../../layouts/Layout.astro'
-import VueBlogSlug from '../../vue-pages/blog/[slug].vue'
+const content = {}
+
+if (data.frontmatter.title) {
+  // @ts-ignore
+  content['title'] = data.frontmatter.title
+}
+
+if (data.frontmatter.description) {
+  // @ts-ignore
+  content['description'] = data.frontmatter.description
+}
+
+if (data.frontmatter.head_image) {
+  // @ts-ignore
+  content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
+}
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout content={content}>
   <VueBlogSlug Content={markdown} client:load {...data.frontmatter} />
 </Layout>
