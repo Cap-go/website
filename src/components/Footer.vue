@@ -1,23 +1,12 @@
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
 import { useRuntimeConfig } from '../config/app'
-// import { openMessenger } from "../services/chatwoot.ts";
-
-// const router = useRouter();
-
-// router.afterEach((to) => {
-//   if (to.hash && to.hash.startsWith("#support") && process.client)
-//     openMessenger();
-// });
-
-// if (process.client) {
-//   router.currentRoute.value.hash.startsWith("#support") && openMessenger();
-// }
+import { openMessenger } from '../services/chatwoot'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const year = new Date().getFullYear()
-// no-rel target="_blank"
+
 const navigation = {
   solutions: [
     { name: 'Register', href: '/register', target: '_blank' },
@@ -49,7 +38,12 @@ const navigation = {
     { name: 'Pricing', href: '/pricing/' },
     { name: 'Guides', href: '/blog/' },
     { name: 'Status', href: 'https://status.capgo.app/', target: '_blank' },
-    { name: 'Chat', href: '#support', rel: 'nofollow' },
+    {
+      name: 'Chat',
+      href: '#support',
+      execute: openMessenger,
+      rel: 'nofollow',
+    },
   ],
   company: [
     // { name: 'About', href: '#' },
@@ -215,9 +209,10 @@ const navigation = {
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="item.name">
                   <a
-                    :href="item.href"
                     :rel="item.rel"
+                    :href="item.href"
                     :target="item.target"
+                    @click="item.execute && item.execute()"
                     class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
                   >
                     {{ item.name }}
