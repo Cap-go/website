@@ -3,12 +3,12 @@ import { appDescription, appName } from '../constants/index'
 const scope = '/'
 
 export const pwa = {
-  registerType: 'autoUpdate',
   scope,
   base: scope,
+  registerType: 'autoUpdate',
   manifest: {
-    id: scope,
     scope,
+    id: scope,
     name: appName,
     short_name: appName,
     description: appDescription,
@@ -33,10 +33,11 @@ export const pwa = {
     ],
   },
   workbox: {
-    globPatterns: ['**/*.{js,css,html,txt,png,ico,svg}'],
-    navigateFallbackDenylist: [/^\/api\//],
-    navigateFallback: '/',
+    globDirectory: 'dist',
+    navigateFallback: null,
+    globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
     cleanupOutdatedCaches: true,
+    navigateFallbackDenylist: [/^\/api\//],
     runtimeCaching: [
       {
         urlPattern: /^https:\/\/fonts.googleapis.com\/.*/i,
@@ -68,8 +69,8 @@ export const pwa = {
       },
     ],
   },
-  registerWebManifestInRouteRules: true,
   writePlugin: true,
+  registerWebManifestInRouteRules: true,
   devOptions: {
     enabled: import.meta.env.VITE_PLUGIN_PWA === 'true',
     navigateFallback: scope,
