@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { openMessenger } from '../../services/chatwoot'
+</script>
+
 <template>
   <section class="py-10 bg-gray-900 sm:py-16 lg:py-24">
     <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -61,12 +65,11 @@
           </div>
         </div>
       </div>
-
       <div class="flex items-center justify-center mt-12 md:mt-20">
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
             Didn’t find the answer you are looking for?
-            <a title="" href="#support" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline"> Contact our support</a>
+            <button @click="openMessenger()" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline"> Contact our support</button>
           </p>
         </div>
       </div>
