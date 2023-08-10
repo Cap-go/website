@@ -16,19 +16,11 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
-      provider: 'none', // default provider
+      provider: 'none',
       fonts: {
-        // these will extend the default theme
         light: 'AirbnbCerealLight',
         medium: 'AirbnbCerealMedium',
         bold: 'AirbnbCerealBold',
-      },
-    }),
-    presetWebFonts({
-      provider: 'bunny',
-      fonts: {
-        prompt: 'Prompt',
-        inter: 'Inter',
       },
     }),
   ],

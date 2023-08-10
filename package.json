@@ -1,7 +1,6 @@
 {
   "name": "proud-planet",
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -15,18 +14,17 @@
     "@astrojs/vue": "^2.2.1",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
-    "@types/semver": "^7.5.0",
-    "@unocss/astro": "^0.55.0",
     "astro": "^2.10.3",
     "sitemap": "^7.1.1",
-    "vue": "^3.3.4",
-    "vue-router": "4"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.0",
     "@iconify-json/carbon": "^1.1.19",
     "@iconify-json/twemoji": "^1.1.12",
     "@types/node": "^20.4.9",
+    "@types/semver": "^7.5.0",
+    "@unocss/astro": "^0.55.0",
     "@unocss/reset": "^0.55.0",
     "@vite-pwa/astro": "^0.1.1",
     "dayjs": "^1.11.9",
