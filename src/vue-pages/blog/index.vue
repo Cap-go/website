@@ -8,8 +8,6 @@ const props = defineProps<{
   Content?: any
 }>()
 
-console.log(props.Content[0].Content)
-
 // const { data } = await useFetch<MyCustomParsedContent[]>('/api/blogs')
 
 // const query: QueryBuilderParams = { path: '/blog', where: [{ published: true }], sort: [{ created_at: -1 }] }
