@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VuePlugins from '../vue-pages/plugins.vue'
+
+const title = 'Capgo plugins'
+const description = 'Move forward with confidence. Capgo offer multiple plugins to help you build your app faster and better.'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VuePlugins client:load /></Layout>

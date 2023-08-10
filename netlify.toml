@@ -3,7 +3,7 @@
 
 [build]
   publish = "dist"
-  command = "pnpm run generate"
+  command = "pnpm run build"
 
 [[redirects]]
   from = '/.well-known/*'
@@ -11,34 +11,19 @@
   to = '/deepLink/:splat'
 
 [[redirects]]
+  from = '/register'
+  status = 200
+  to = 'https://web.capgo.app/register'
+
+[[redirects]]
   from = "/api/auto_update"
   to = "https://api.capgo.app/updates"
   status = 200
-
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.html"
-#   status = 200
 
 [[headers]]
   for = "/.well-known/*"
   [headers.values]
     Content-Type = "application/json"
-
-[[headers]]
-  for = "/manifest.webmanifest"
-  [headers.values]
-    Content-Type = "application/manifest+json"
 
 [[headers]]
   for = "/*"

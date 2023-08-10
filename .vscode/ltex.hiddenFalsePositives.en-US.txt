@@ -1,1 +1,0 @@
-{"rule":"AI_EN_LECTOR_MISSING_DETERMINER_THE","sentence":"^\\QMore detail about the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q method can be found in RevenueCat guide on Making Purchases.\\E$"}

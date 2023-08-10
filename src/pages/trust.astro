@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueTrust from '../vue-pages/trust.vue'
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Trust`
+const description = 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTrust client:load /></Layout>

@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VuePricing from '../vue-pages/pricing.vue'
+
+const title = 'Capgo pricing'
+const description = 'Move forward with confidence. Capgo is the enterprise-grade cloud platform for Capacitor applications.'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VuePricing client:load /></Layout>

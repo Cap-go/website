@@ -1,0 +1,46 @@
+---
+import '../css/global.css'
+import SEO from '../components/SEO.astro'
+// @ts-ignore
+import { pwaInfo } from 'virtual:pwa-info'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+import MessengerAffiliateVue from '../components/MessengerAffliate.vue'
+
+const { content } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <SEO {...content} />
+  </head>
+  <body>
+    <div class="overflow-x-hidden bg-gray-900 text-white">
+      <Header client:load />
+      <slot />
+      <Footer client:load />
+    </div>
+    <script
+      is:inline
+      async="true"
+      defer="true"
+      data-domain="capgo.app"
+      src="https://pls.digitalshift-ee.workers.dev/js/script.js"
+      data-api="https://pls.digitalshift-ee.workers.dev/api/event"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(function (registration) {
+            console.log('SW registration succeeded with scope:', registration.scope)
+          })
+          .catch(function (e) {
+            console.log('SW registration failed with error:', e)
+          })
+      }
+    </script>
+    <MessengerAffiliateVue client:only />
+  </body>
+</html>

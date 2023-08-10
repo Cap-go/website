@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+import VueDisclaimer from '../vue-pages/disclaimer.vue'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Disclaimer`
+
+const description = 'Read our disclaimer'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueDisclaimer client:load /></Layout>

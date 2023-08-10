@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueTopkotlinapp from '../vue-pages/top_kotlin_app.vue'
+
+const title = 'Capgo | Top Kotlin apps'
+const description = 'List of top 100 app using Kotlin on android store'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTopkotlinapp client:load /></Layout>

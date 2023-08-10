@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueTopflutterapp from '../vue-pages/top_flutter_app.vue'
+
+const title = 'Capgo | Top Flutter apps'
+const description = 'List of top 100 app using Flutter on android store'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTopflutterapp client:load /></Layout>

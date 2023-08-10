@@ -1,35 +1,38 @@
 {
-  "private": true,
-  "packageManager": "pnpm@8.6.8",
+  "name": "proud-planet",
+  "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --port 3336",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "types": "node ./scripts/getTypes.mjs",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "lint": "eslint ."
+    "fmt": "prettier --write '**/*' --ignore-unknown"
   },
   "dependencies": {
+    "@astrojs/vue": "^2.2.1",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
-    "@nuxt/content": "^2.7.2",
-    "@nuxt/schema": "3.6.5",
-    "@nuxtjs/color-mode": "^3.3.0",
-    "@types/semver": "^7.5.0",
-    "@unocss/nuxt": "^0.54.1",
-    "@vueuse/nuxt": "^10.3.0",
-    "nuxt-jsonld": "^2.0.8",
-    "schema-dts": "^1.1.2",
-    "sitemap": "^7.1.1"
+    "astro": "^2.10.3",
+    "sitemap": "^7.1.1",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.0",
     "@iconify-json/carbon": "^1.1.19",
     "@iconify-json/twemoji": "^1.1.12",
-    "@nuxt/devtools": "^0.7.5",
-    "@vite-pwa/nuxt": "^0.1.0",
+    "@types/node": "^20.4.9",
+    "@types/semver": "^7.5.0",
+    "@unocss/astro": "^0.55.0",
+    "@unocss/reset": "^0.55.0",
+    "@vite-pwa/astro": "^0.1.1",
     "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
     "eslint": "^8.46.0",
-    "nuxt": "3.6.5"
+    "prettier": "^3.0.1",
+    "prettier-plugin-astro": "^0.11.0",
+    "schema-dts": "^1.1.2",
+    "unocss": "^0.55.0"
   }
 }

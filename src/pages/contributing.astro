@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+import VueContributing from '../vue-pages/contributing.vue'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Contributing`
+
+const description = 'How to contribute to Capgo open source'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueContributing client:load /></Layout>

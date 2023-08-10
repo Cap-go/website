@@ -1,0 +1,27 @@
+---
+let posts = await Astro.glob('../../content/blog/**/*.md')
+
+import Layout from '../../layouts/Layout.astro'
+import { useRuntimeConfig } from '../../config/app'
+import VueBlogIndex from '../../vue-pages/blog/index.vue'
+
+posts = posts.filter((i) => i.frontmatter.published).sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
+
+const config = useRuntimeConfig()
+
+const content = {}
+
+if (config.public.blog_title) {
+  // @ts-ignore
+  content['title'] = config.public.blog_title
+}
+
+if (config.public.blog_description) {
+  // @ts-ignore
+  content['description'] = config.public.blog_description
+}
+---
+
+<Layout content={content}>
+  <VueBlogIndex Content={posts} client:load />
+</Layout>

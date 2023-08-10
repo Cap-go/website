@@ -1,0 +1,19 @@
+---
+import VueTos from '../vue-pages/tos.vue'
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Terms of Service`
+const description = 'Read our Terms of Service'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTos client:load /></Layout>

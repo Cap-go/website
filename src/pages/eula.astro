@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueEula from '../vue-pages/eula.vue'
+
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | End-User License Agreement`
+const description = 'Read our End-User License Agreement'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueEula client:load /></Layout>

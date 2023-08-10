@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueReturn from '../vue-pages/return.vue'
+
+import { useRuntimeConfig } from '../config/app'
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Return Policy`
+
+const description = 'Read our Return Policy'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueReturn client:load /></Layout>

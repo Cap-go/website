@@ -1,0 +1,81 @@
+---
+import { structuredData } from '../config/app'
+import { appDescription, appName } from '../constants'
+import { baseDomain, useRuntimeConfig } from '../config/app'
+
+const {
+  ldJSON = structuredData,
+  title = appName,
+  description = appDescription,
+  url = Astro.url,
+  image = `${useRuntimeConfig().public.baseUrl}/capgo_banner.png`,
+  canonical = Astro.url,
+  author = `Martin DONADIEU`,
+  audio = null,
+} = Astro.props
+
+let displayDescription = description
+
+const descSize = 170
+
+if (description.length > descSize) {
+  displayDescription = `${description.substring(0, descSize - 3)}...`
+}
+
+const image_unsecure = image.replace('https://', 'http://')
+const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="theme-color" content="#456b9a" />
+<meta name="generator" content={Astro.generator} />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-title" content={baseDomain()} />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta property="keywords" content="Capacitor, updater, OTA, autoupdate, capgo" />
+
+<link rel="canonical" href={canonical} />
+<link rel="apple-touch-icon" href="/capgo.webp" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/safari-pinned-tab.svg" />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="author" content={author} />
+<meta name="description" content={displayDescription} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:audio" content={audio} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_EN" />
+<meta property="og:type" content="website" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="627" />
+<meta property="og:image:alt" content={titleFix} />
+<meta property="og:image:secure" content={image} />
+<meta property="og:image" content={image_unsecure} />
+<meta property="og:image:type" content="image/webp" />
+<meta property="og:article:author" content={author} />
+<meta property="og:audio:type" content="audio/mpeg" />
+<meta property="og:site_name" content={baseDomain()} />
+<meta property="og:description" content={displayDescription} />
+
+<!-- Twitter -->
+<meta property="twitter:url" content={url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:image" content={image} />
+<meta property="twitter:app:id:iphone" content={appName} />
+<meta property="twitter:app:name:iphone" content={appName} />
+<meta property="twitter:creator" content="@martindonadieu" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:description" content={displayDescription} />
+<meta property="twitter:app:id:googleplay" content="ee.forgr.capgo" />
+<meta property="twitter:app:name:googleplay" content="ee.forgr.capgo" />
+
+<!-- @ts-ignore -->
+<script hid="seo-schema-graph" type="application/ld+json" set:html={ldJSON} />

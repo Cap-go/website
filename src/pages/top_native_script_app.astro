@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueTopnativescriptapp from '../vue-pages/top_native_script_app.vue'
+
+const title = 'Capgo | Top Native Script apps'
+const description = 'List of top 100 app using Native Script on android store'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTopnativescriptapp client:load /></Layout>
