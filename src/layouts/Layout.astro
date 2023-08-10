@@ -30,12 +30,14 @@ const { title } = Astro.props
       <slot />
       <Footer client:load />
     </div>
-    <!-- <script
+    <script
+      is:inline
       async="true"
       defer="true"
       data-domain="capgo.app"
       src="https://pls.digitalshift-ee.workers.dev/js/script.js"
-      data-api="https://pls.digitalshift-ee.workers.dev/api/event"></script> -->
+      data-api="https://pls.digitalshift-ee.workers.dev/api/event"
+    ></script>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
