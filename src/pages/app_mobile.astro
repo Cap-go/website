@@ -1,6 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
 import VueAppmobile from '../vue-pages/app_mobile.vue'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+const description =
+  'Try each version of your app directly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.'
+
+const content = {
+  description,
+  title: `${brand} | Capacitor sanbox APP`,
+  image: `${config.public.baseUrl}/app_demo.webp`,
+}
 ---
 
-<Layout><VueAppmobile client:load /></Layout>
+<Layout content={content}><VueAppmobile client:load /></Layout>

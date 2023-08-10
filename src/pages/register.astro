@@ -1,6 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import VueRegister from '../vue-pages/register.vue'
+
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Register`
+
+const content = {
+  title,
+}
 ---
 
-<Layout><VueRegister client:load /></Layout>
+<Layout content={content}><VueRegister client:load /></Layout>

@@ -1,6 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import VuePrivacy from '../vue-pages/privacy.vue'
+
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Privacy Policy`
+const description = 'Read our Privacy Policy'
+
+const content = {
+  description,
+  title,
+}
 ---
 
-<Layout><VuePrivacy client:load /></Layout>
+<Layout content={content}><VuePrivacy client:load /></Layout>

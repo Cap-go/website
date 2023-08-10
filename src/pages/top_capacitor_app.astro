@@ -1,6 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import VueTopcapacitorapp from '../vue-pages/top_capacitor_app.vue'
+
+const title = 'Capgo | Top Capacitor apps'
+const description = 'List of top 100 app using Capacitor on android play store'
+
+const content = {
+  description,
+  title,
+}
 ---
 
-<Layout><VueTopcapacitorapp client:load /></Layout>
+<Layout content={content}><VueTopcapacitorapp client:load /></Layout>

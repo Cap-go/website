@@ -1,6 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import VueImprint from '../vue-pages/imprint.vue'
+
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Imprint`
+const description = `Find the info of ${brand} company here`
+
+const content = {
+  description,
+  title,
+}
 ---
 
-<Layout><VueImprint client:load /></Layout>
+<Layout content={content}><VueImprint client:load /></Layout>

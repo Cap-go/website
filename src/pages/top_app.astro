@@ -1,6 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import VueTopapp from '../vue-pages/top_app.vue'
+
+const title = 'Capgo | Top apps by framework'
+
+const description = 'List of top 100 app using Diffrents Framworks on android store'
+const content = {
+  description,
+  title,
+}
 ---
 
-<Layout><VueTopapp client:load /></Layout>
+<Layout content={content}><VueTopapp client:load /></Layout>
