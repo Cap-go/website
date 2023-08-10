@@ -4,9 +4,9 @@ import { initAffiliate } from '../services/reflio'
 import { openMessenger } from '../services/chatwoot'
 
 onMounted(() => {
+  initAffiliate()
   if (window.location.hash.includes('#support')) {
     openMessenger()
-    initAffiliate()
   }
 })
 </script>
