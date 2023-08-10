@@ -5,17 +5,36 @@ import VueArticleID from '../../vue-pages/article/[id].vue'
 
 export async function getStaticPaths() {
   const posts = await Astro.glob('../../content/article/**/*.md')
-  return posts.map((post) => ({
-    params: {
-      id: post.frontmatter.slug,
-    },
-    props: {
-      post,
-    },
-  }))
+  return posts.map((post) => {
+    let related = posts
+      .filter((i) => i.frontmatter.slug !== post.frontmatter.slug)
+      .filter((i) => i.frontmatter.published)
+      .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
+      .slice(0, 3)
+    if (post.frontmatter.next_blog) {
+      if (related.length > 0) {
+        const next_blog = posts.find((i) => i.frontmatter.slug === post.frontmatter.next_blog)
+        if (next_blog) {
+          related[0] = next_blog
+        }
+      } else {
+        related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
+      }
+    }
+    return {
+      params: {
+        id: post.frontmatter.slug,
+      },
+      props: {
+        post,
+        related,
+      },
+    }
+  })
 }
 
 const data = Astro.props.post
+const related = Astro.props.related
 
 const { Content } = data
 
@@ -72,5 +91,5 @@ content['ldJSON'] = {
 ---
 
 <Layout content={content}>
-  <VueArticleID Content={markdown} client:load {...data.frontmatter} />
+  <VueArticleID related={related} Content={markdown} client:load {...data.frontmatter} />
 </Layout>

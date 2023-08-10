@@ -13,6 +13,7 @@ const props = defineProps<{
   tag?: string
   published?: boolean
   next_blog?: string
+  related?: any
 }>()
 
 import Blog from '../../components/Blog.vue'
@@ -116,18 +117,18 @@ const data = props
           </p>
         </div>
 
-        <!-- <div class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
+        <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
           <Blog
-            v-for="article in articles"
-            :key="article._id"
-            :link="`/blog/${article.slug}/`"
-            :title="article.title"
-            :description="article.description"
-            :image="article.head_image"
-            :date="article.created_at"
-            :tag="article.tag"
+            v-for="article in related"
+            :tag="article.frontmatter.tag"
+            :key="article.frontmatter.slug"
+            :title="article.frontmatter.title"
+            :date="article.frontmatter.created_at"
+            :image="article.frontmatter.head_image"
+            :link="`/blog/${article.frontmatter.slug}/`"
+            :description="article.frontmatter.description"
           />
-        </div> -->
+        </div>
 
         <div class="mt-12 text-center">
           <a href="/blog" title="" class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline">
