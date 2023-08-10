@@ -39,6 +39,36 @@ if (data.frontmatter.head_image) {
   // @ts-ignore
   content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
 }
+
+const dateModified = new Date(data.frontmatter.updated_at).toISOString()
+const datePublished = new Date(data.frontmatter.created_at).toISOString()
+
+// @ts-ignore
+content['ldJSON'] = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${config.public.baseUrl}/${data.frontmatter?.slug}`,
+  },
+  headline: data.frontmatter?.description,
+  image: [`${config.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
+  datePublished: datePublished,
+  dateModified: dateModified,
+  author: {
+    '@type': 'Person',
+    name: data.frontmatter?.author,
+    url: data.frontmatter?.author_url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Capgo',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${config.public.baseUrl}/icon.webp`,
+    },
+  },
+}
 ---
 
 <Layout content={content}>

@@ -1,8 +1,16 @@
 ---
+import { structuredData } from '../config/app'
 import { appDescription, appName } from '../constants'
 import { baseDomain, useRuntimeConfig } from '../config/app'
 
-const { title = appName, description = appDescription, url = Astro.url, image = `${useRuntimeConfig().public.baseUrl}/capgo_banner.png`, canonical = Astro.url } = Astro.props
+const {
+  ldJSON = structuredData,
+  title = appName,
+  description = appDescription,
+  url = Astro.url,
+  image = `${useRuntimeConfig().public.baseUrl}/capgo_banner.png`,
+  canonical = Astro.url,
+} = Astro.props
 ---
 
 <!-- Global Metadata -->
@@ -48,3 +56,6 @@ const { title = appName, description = appDescription, url = Astro.url, image = 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:app:id:googleplay" content="ee.forgr.capgo" />
 <meta property="twitter:app:name:googleplay" content="ee.forgr.capgo" />
+
+<!-- @ts-ignore -->
+<script hid="seo-schema-graph" type="application/ld+json" set:html={ldJSON} />

@@ -5,7 +5,6 @@ import SEO from '../components/SEO.astro'
 import { pwaInfo } from 'virtual:pwa-info'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
-import { structuredData } from '../config/app'
 import MessengerAffiliateVue from '../components/MessengerAffliate.vue'
 
 const { content } = Astro.props
@@ -14,8 +13,6 @@ const { content } = Astro.props
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- @ts-ignore -->
-    <script hid="seo-schema-graph" type="application/ld+json" set:html={structuredData} />
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <SEO {...content} />
   </head>
