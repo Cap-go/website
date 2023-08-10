@@ -1,0 +1,50 @@
+---
+import { appDescription, appName } from '../constants'
+import { baseDomain, useRuntimeConfig } from '../config/app'
+
+const { title = appName, description = appDescription, url = Astro.url, image = `${useRuntimeConfig().public.baseUrl}/capgo_banner.png`, canonical = Astro.url } = Astro.props
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta property="og:locale" content="en_EN" />
+<meta name="theme-color" content="#456b9a" />
+<meta property="og:type" content="website" />
+<meta name="generator" content={Astro.generator} />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta property="og:site_name" content={baseDomain()} />
+<meta property="og:article:author" content="Martin DONADIEU" />
+<meta name="apple-mobile-web-app-title" content={baseDomain()} />
+<meta property="og:title" content="Capgo - Capacitor Live update" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta property="keywords" content="Capacitor, updater, OTA, autoupdate, capgo" />
+
+<link rel="canonical" href={canonical} />
+<link rel="apple-touch-icon" href="/capgo.webp" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/safari-pinned-tab.svg" />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:image" content={image} />
+<meta property="og:type" content="website" />
+<meta property="og:description" content={description} />
+
+<!-- Twitter -->
+<meta property="twitter:url" content={url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:image" content={image} />
+<meta property="twitter:app:id:iphone" content={appName} />
+<meta property="twitter:app:name:iphone" content={appName} />
+<meta property="twitter:creator" content="@martindonadieu" />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:app:id:googleplay" content="ee.forgr.capgo" />
+<meta property="twitter:app:name:googleplay" content="ee.forgr.capgo" />

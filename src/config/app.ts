@@ -24,7 +24,7 @@ function getApiUrl(branch = ''): string {
   else return `https:///api.${getRightKey('prod', 'base_domain')}`
 }
 
-function baseDomain(branch = '') {
+export function baseDomain(branch = '') {
   if (branch) return getRightKey(branch, 'base_domain')
   else return getRightKey('prod', 'base_domain')
 }
