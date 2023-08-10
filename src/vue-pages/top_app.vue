@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-// import { createMeta } from '~/services/meta'
-
-// const title = 'Capgo | Top apps by framework'
 const description = 'List of top 100 app using Diffrents Framworks on android store'
-// useHead(() => ({
-//   title,
-//   meta: createMeta(title, description),
-// }))
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>
 

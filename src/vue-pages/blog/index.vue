@@ -7,14 +7,6 @@ const config = useRuntimeConfig()
 const props = defineProps<{
   Content?: any
 }>()
-
-// const { data } = await useFetch<MyCustomParsedContent[]>('/api/blogs')
-
-// const query: QueryBuilderParams = { path: '/blog', where: [{ published: true }], sort: [{ created_at: -1 }] }
-// useHead(() => ({
-//   title: config.public.blog_tile,
-//   meta: createMeta(config.public.blog_tile, config.public.blog_description),
-// }))
 </script>
 
 <template>

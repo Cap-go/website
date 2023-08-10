@@ -4,7 +4,6 @@ import { useRuntimeConfig } from '../config/app'
 import type { Database } from '../types/supabase.types'
 
 const config = useRuntimeConfig()
-const title = 'Capgo | Top Kotlin apps'
 const description = 'List of top 100 app using Kotlin on android store'
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
@@ -24,10 +23,6 @@ function renameCat(text: string) {
   return text.replaceAll('_', ' ')
 }
 
-// useHead(() => ({
-//   title,
-//   meta: createMeta(title, description, `${config.public.baseUrl}/kotlin.webp`),
-// }))
 const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 
 fetch(`${config.public.baseApiUrl}/store_top?mode=kotlin`).then((res) => {

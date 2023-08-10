@@ -16,63 +16,8 @@ const props = defineProps<{
   related?: any
 }>()
 
-// import { ref } from 'vue'
 import Blog from '../../components/Blog.vue'
-// import type { NewsArticle, WithContext } from 'schema-dts'
-import { formatTime, useRuntimeConfig } from '../../config/app'
-
-// const config = useRuntimeConfig()
-const data = props
-
-// const articles = ref(res.value?.related)
-// if (data.value) {
-// const datePublished = new Date(data.value?.created_at).toISOString()
-// const dateModified = new Date(data.value?.updated_at).toISOString()
-// const structuredData: WithContext<NewsArticle> = {
-//   '@context': 'https://schema.org',
-//   '@type': 'NewsArticle',
-//   'mainEntityOfPage': {
-//     '@type': 'WebPage',
-//     '@id': `${config.public.baseUrl}/${data.value?.slug}`,
-//   },
-//   'headline': data.value?.description,
-//   'image': [
-//     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-//   ],
-//   'datePublished': datePublished,
-//   'dateModified': dateModified,
-//   'author': {
-//     '@type': 'Person',
-//     'name': data.value?.author,
-//     'url': data.value?.author_url,
-//   },
-//   'publisher': {
-//     '@type': 'Organization',
-//     'name': 'Capgo',
-//     'logo': {
-//       '@type': 'ImageObject',
-//       'url': `${config.public.baseUrl}/icon.webp`,
-//     },
-//   },
-// }
-// useJsonld(structuredData)
-// useHead(() => ({
-//   title: data.value?.title || 'No title',
-//   script: [
-//     {
-//       hid: 'seo-schema-graph',
-//       type: 'application/ld+json',
-//       children: JSON.stringify(structuredData),
-//     },
-//   ],
-//   meta: createMeta(
-//     data.value?.title || 'No title',
-//     data.value?.description || 'No description',
-//     `${config.public.baseUrl}${data.value?.head_image || '/capgo_banner.webp'}`,
-//     data.value?.author || 'Capgo',
-//   ),
-// }))
-// }
+import { formatTime } from '../../config/app'
 </script>
 
 <template>
@@ -81,32 +26,32 @@ const data = props
       <div class="block aspect-w-4 aspect-h-3">
         <img
           class="object-cover w-full h-full lg:rounded-lg md:shadow-xl md:shadow-gray-700"
-          :src="data?.head_image"
+          :src="props?.head_image"
           loading="eager"
           height="486"
           width="864"
-          :alt="`blog illustration ${data?.title}`"
-          :title="`blog illustration ${data?.title}`"
+          :alt="`blog illustration ${props?.title}`"
+          :title="`blog illustration ${props?.title}`"
         />
       </div>
 
       <div class="absolute top-4 left-4 lg:top-15 lg:left-10">
         <span class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-          {{ data?.tag }}
+          {{ props?.tag }}
         </span>
       </div>
     </div>
     <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase">
-      {{ formatTime(data?.created_at || '') }}
+      {{ formatTime(props?.created_at || '') }}
     </span>
 
     <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
-      {{ data?.title }}
+      {{ props?.title }}
     </h1>
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
-      {{ data?.description }}
+      {{ props?.description }}
     </p>
-    <article v-html="props.Content.props.children" v-if="data" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2" />
+    <article v-html="props.Content.props.children" v-if="props" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2" />
 
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">

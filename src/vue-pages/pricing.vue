@@ -43,11 +43,6 @@ const payg_units = computed(() =>
       }
     : undefined,
 )
-const title = 'Capgo pricing'
-// useHead({
-//   title,
-//   meta: createMeta(title, 'Move forward with confidence. Capgo is the enterprise-grade cloud platform for Capacitor applications.'),
-// })
 </script>
 
 <template>
