@@ -13,5 +13,7 @@ export const getRightKey = (keyname) => {
   else if (branch === 'local') return keys[keyname].local
   return keys[keyname].prod
 }
+
 export const supa_url = getRightKey('supa_url')
+
 export const supa_anon = getRightKey('supa_anon')
