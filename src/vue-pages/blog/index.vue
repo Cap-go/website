@@ -4,9 +4,15 @@ import { useRuntimeConfig } from '../../config/app'
 
 const config = useRuntimeConfig()
 
+const props = defineProps<{
+  Content?: any
+}>()
+
+console.log(props.Content[0].Content)
+
 // const { data } = await useFetch<MyCustomParsedContent[]>('/api/blogs')
 
-const query: QueryBuilderParams = { path: '/blog', where: [{ published: true }], sort: [{ created_at: -1 }] }
+// const query: QueryBuilderParams = { path: '/blog', where: [{ published: true }], sort: [{ created_at: -1 }] }
 // useHead(() => ({
 //   title: config.public.blog_tile,
 //   meta: createMeta(config.public.blog_tile, config.public.blog_description),
@@ -22,20 +28,17 @@ const query: QueryBuilderParams = { path: '/blog', where: [{ published: true }],
           {{ config.public.blog_description }}
         </h2>
       </div>
-
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-        <ContentList v-slot="{ list }" :query="query">
-          <Blog
-            v-for="article in list"
-            :key="article.slug"
-            :link="article.slug"
-            :title="article.title"
-            :description="article.description"
-            :image="article.head_image"
-            :date="article.created_at"
-            :tag="article.tag"
-          />
-        </ContentList>
+        <Blog
+          :tag="article.frontmatter.tag"
+          :key="article.frontmatter.slug"
+          v-for="article in props.Content"
+          :link="article.frontmatter.slug"
+          :title="article.frontmatter.title"
+          :date="article.frontmatter.created_at"
+          :image="article.frontmatter.head_image"
+          :description="article.frontmatter.description"
+        />
       </div>
     </div>
   </section>

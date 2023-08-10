@@ -14,6 +14,7 @@ const props = defineProps<{
   published?: boolean
   next_blog?: string
 }>()
+
 // import { ref } from 'vue'
 // import Blog from '../../components/Blog.vue'
 // import type { NewsArticle, WithContext } from 'schema-dts'
@@ -21,6 +22,7 @@ import { formatTime, useRuntimeConfig } from '../../config/app'
 
 // const config = useRuntimeConfig()
 const data = props
+
 // const articles = ref(res.value?.related)
 // if (data.value) {
 // const datePublished = new Date(data.value?.created_at).toISOString()
