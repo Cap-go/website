@@ -1,10 +1,8 @@
-import process from 'node:process'
-import type { ModuleOptions } from '@vite-pwa/nuxt'
 import { appDescription, appName } from '../constants/index'
 
 const scope = '/'
 
-export const pwa: ModuleOptions = {
+export const pwa = {
   registerType: 'autoUpdate',
   scope,
   base: scope,

@@ -28,6 +28,7 @@
     "@iconify-json/twemoji": "^1.1.12",
     "@types/node": "^20.4.9",
     "@unocss/reset": "^0.55.0",
+    "@vite-pwa/astro": "^0.1.1",
     "dayjs": "^1.11.9",
     "eslint": "^8.46.0",
     "prettier": "^3.0.1",
