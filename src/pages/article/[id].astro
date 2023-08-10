@@ -59,6 +59,11 @@ if (data.frontmatter.head_image) {
   content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
 }
 
+if (data.frontmatter.author) {
+  // @ts-ignore
+  content['author'] = data.frontmatter.author || 'Capgo'
+}
+
 const dateModified = new Date(data.frontmatter.updated_at).toISOString()
 const datePublished = new Date(data.frontmatter.created_at).toISOString()
 
