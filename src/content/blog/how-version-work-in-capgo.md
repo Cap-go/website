@@ -35,12 +35,12 @@ Where Capgo find the version to compare
 #### IOS
 
   in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
-  > You can override this behavior in `capacitor.config.json` file [docs here](https://docs.capgo.app/plugin/auto-update#advanced-settings)
+  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
 
 #### Android
 
   in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
-  > You can override this behavior in `capacitor.config.json` file [docs here](https://docs.capgo.app/plugin/auto-update#advanced-settings)
+  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
 #### JavaScript
 
   in JavaScript, the var is set on your project here `package.json` under the key `version`
@@ -97,7 +97,7 @@ When you publish your Capacitor JS app on the App Store, what happens is simple.
 
 Your user will get the new version from the store and remove all local updates in their app by default.
 
-If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](https://docs.capgo.app/plugin/api#settings)
+If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugin/api#settings)
 
 This can only be changed on the app side, not from the cloud like other settings.
 

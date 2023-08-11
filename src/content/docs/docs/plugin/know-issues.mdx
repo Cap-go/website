@@ -1,0 +1,68 @@
+---
+title: "Known issues"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionic live reload
+
+* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+
+## Quasar live reload
+
+* It uses the same system as ionic under the hood, so you will not see your updates.
+
+## Update fail
+
+* Big app update (> 20mb) will have a big percentage of users who doesn't get the last version.  In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
+
+## Android
+
+### Self-hosted
+
+Then you self-host update, be mindful you cannot use "HTTP" endpoint it's again the security rule of Android apps, if you want to try it, follow this guide:
+
+<LinkCard
+	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+Unzip issue. If you zipped your bundle with Window, the format could be incorrect, please use the CLI command or ZIP with Linux.
+
+## Build
+
+### Clearfix issue
+
+* If you have issue with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the case it will work, but with some plugins that cause issue.
+
+To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+## IOS
+
+## Build
+
+### GetConfig
+
+This problem happens when your app uses capacitor 3 with Capgo 4, upgrade your app to v4 or use Capgo v3 (not recommended it's deprecated and soon will not work)
+
+<figure><img src="/issue_get_config.png" alt="" /><figcaption></figcaption></figure>
+
+## CLI
+
+if your CLI has trouble doing the basic action,
+
+Check if **appId** and **appName** are present in your **capacitor.config.ts**
+
+Follow the guidance of the official doc:
+
+<LinkCard
+	title="Capacitor Configuration"
+	href="https://capacitorjs.com/docs/config"
+/>

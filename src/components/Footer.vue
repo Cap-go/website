@@ -13,7 +13,7 @@ const navigation = {
     { name: 'App mobile', href: '/app_mobile/' },
     {
       name: 'Documentation',
-      href: 'https://docs.capgo.app/',
+      href: '/docs',
       target: '_blank',
     },
     { name: 'Plugins', href: '/plugins/' },

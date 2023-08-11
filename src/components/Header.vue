@@ -42,7 +42,7 @@ const menuMobile = ref(false)
             Blog
           </a>
           <a
-            href="https://docs.capgo.app/"
+            href="/docs"
             title="Documentation"
             target="_blank"
             class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
@@ -74,7 +74,7 @@ const menuMobile = ref(false)
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a href="/pricing/" title="Pricing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Pricing </a>
         <a href="/blog/" title="Blog" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Blog </a>
-        <a href="https://docs.capgo.app/" title="Documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+        <a href="/docs" title="Documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
           Documentation
         </a>
         <a

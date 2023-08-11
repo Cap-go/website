@@ -79,4 +79,4 @@ Capgo is open-source under the GNU Affero General Public License Version 3 (AGPL
 
 ## How do I self-host Capgo?
 
-This is the free as in beer and free as in speech version of Capgo. Here’s [how you can install Capgo Self-Hosted on your server](https://docs.capgo.app/self-hosted/getting-started).
+This is the free as in beer and free as in speech version of Capgo. Here’s [how you can install Capgo Self-Hosted on your server](/docs/self-hosted/getting-started).
