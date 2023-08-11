@@ -1,0 +1,88 @@
+---
+title: "Manual mode"
+sidebar:
+  order: 5
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+If you want to manage yourself when update is applied. Use manual mode with Capgo cloud.
+
+Here is what you need to do:
+
+## Quick installs
+
+```
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+#### Config
+
+Add this to your config, to disable auto-update:
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false
+		}
+	}
+}
+```
+
+Then add manage update yourself.\
+Here is an example on how you can do it:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import type { BundleInfo } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+
+CapacitorUpdater.notifyAppReady()
+
+let data: BundleInfo | null = null
+
+App.addListener('appStateChange', async (state: any) => {
+  console.log('appStateChange', state)
+  if (state.isActive) {
+    console.log('getLatest')
+    // Do the download during user active app time to prevent failed download
+    const latest = await CapacitorUpdater.getLatest()
+    console.log('latest', latest)
+    if (latest.url) {
+      data = await CapacitorUpdater.download({
+        url: latest.url,
+        version: latest.version,
+      })
+      console.log('download', data)
+    }
+  }
+  if (!state.isActive && data) {
+    console.log('set')
+    // Do the switch when user leave app or when you want
+    SplashScreen.show()
+    try {
+      await CapacitorUpdater.set({ id: data.id })
+    }
+    catch (err) {
+      console.log(err)
+      SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+    }
+  }
+})
+```
+
+Documentation of all Available API in the plugin:
+
+<LinkCard
+	title="Methods"
+	href="/docs/plugin/api/"
+/>
+
+There are some usecase you can allow users to subscribe to channels and try different version:\
+[https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

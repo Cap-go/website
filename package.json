@@ -2,19 +2,21 @@
   "name": "proud-planet",
   "type": "module",
   "scripts": {
+    "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
     "types": "node ./scripts/getTypes.mjs",
-    "fmt": "prettier --write '**/*' --ignore-unknown"
+    "fmt": "prettier --write '**/*' --ignore-unknown",
+    "build": "astro build && npx -y pagefind@latest --source 'dist/docs'"
   },
   "dependencies": {
+    "@astrojs/starlight": "^0.7.1",
     "@astrojs/vue": "^2.2.1",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
-    "astro": "^2.10.3",
+    "astro": "^2.10.5",
+    "sharp": "^0.32.4",
     "sitemap": "^7.1.1",
     "vue": "^3.3.4"
   },
