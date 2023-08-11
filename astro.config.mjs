@@ -1,10 +1,10 @@
 import vue from '@astrojs/vue'
 import UnoCSS from '@unocss/astro'
-import config from './configs.json'
-import { pwa } from './src/config/pwa'
 import AstroPWA from '@vite-pwa/astro'
 import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
+import { pwa } from './src/config/pwa'
+import config from './configs.json'
 
 export default defineConfig({
   compressHTML: true,
@@ -16,6 +16,10 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       logo: { src: './logo.svg' },
+      social: {
+        discord: 'https://discord.com/invite/VnYRvBfgA6',
+        github: 'https://github.com/Cap-go',
+      },
       sidebar: [
         {
           label: 'Getting Started',
