@@ -14,7 +14,6 @@ const navigation = {
     {
       name: 'Documentation',
       href: '/docs',
-      target: '_blank',
     },
     { name: 'Plugins', href: '/plugins/' },
     {

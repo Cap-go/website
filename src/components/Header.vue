@@ -44,7 +44,6 @@ const menuMobile = ref(false)
           <a
             href="/docs"
             title="Documentation"
-            target="_blank"
             class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             Documentation
