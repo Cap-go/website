@@ -9,6 +9,12 @@ import config from './configs.json'
 export default defineConfig({
   compressHTML: true,
   site: `https://${config.base_domain.prod}`,
+  redirects: {
+    '/register': {
+      status: 302,
+      destination: 'https://web.capgo.app/register',
+    },
+  },
   integrations: [
     UnoCSS({ injectReset: true }),
     vue(),

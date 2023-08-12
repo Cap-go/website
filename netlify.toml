@@ -11,12 +11,6 @@
   to = '/deepLink/:splat'
 
 [[redirects]]
-  from = '/register'
-  force = true 
-  status = 200
-  to = 'https://web.capgo.app/register'
-
-[[redirects]]
   from = "/api/auto_update"
   to = "https://api.capgo.app/updates"
   status = 200
