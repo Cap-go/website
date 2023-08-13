@@ -343,4 +343,4 @@ If you would like to learn how to add Capgo to your Next.js app, take a look at 
 
 ## Credits
 
-Thanks a lot to [Simon](https://x.com/schlimmson), this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted for nuxt3 with chat-gpt-4 and adapted.
+Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted for nuxt3 with chat-gpt-4 and adapted.

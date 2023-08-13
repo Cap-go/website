@@ -32,7 +32,7 @@ What we will cover:
 
 With Capacitor, you can create mobile applications using your JavaScript code. It then renders the apps using your phone's native WebView. Using Capacitor's plugins and APIs, you can access native features like the camera, speaker, and others.
 
-Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/docs/guides/using-react).
+Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/solution/react).
 
 ## What is React Native?
 
@@ -100,7 +100,7 @@ Also, when apps aren't rendered on the native view of devices, they cannot fully
 
 Testing is easier with Capacitor, as it permits running apps in a web browser. With React Native, [compiling, running, and testing apps requires installing Xcode](https://blog.logrocket.com/xcode-for-react-native-developers-tutorial-and-best-practices/) or Android Studio, adding another step to the compilation process.
 
-Although you can [skip the Xcode/Android Studio step with Expo](https://blog.logrocket.com/getting-started-with-react-native-and-expo-sdk/), Expo is [not without its limitations](https://docs.expo.dev/introduction/why-not-expo/).
+Although you can [skip the Xcode/Android Studio step with Expo](https://blog.logrocket.com/getting-started-with-react-native-and-expo-sdk/), Expo is [not without its limitations](https://docs.expo.dev/faq/).
 
 A hybrid WebView tool like Capacitor saves you cost and a lot of time. But if high performance is very important to you, or if you're building a complex application that might be run on cheap devices and devices with old hardware, then React Native might be a better option.
 

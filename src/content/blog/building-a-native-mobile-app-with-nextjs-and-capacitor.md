@@ -399,6 +399,6 @@ If you would like to learn how to add Capgo to your Next.js app, take a look at 
 
 ## Credits
 
-Thanks a lot to [Simon](https://x.com/schlimmson), this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted with chat-gpt-3 and adapted.
+Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted with chat-gpt-3 and adapted.
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
