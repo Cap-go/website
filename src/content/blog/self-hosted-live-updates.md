@@ -3,7 +3,7 @@ slug: "self-hosted-live-updates"
 title: Self-hosted Live Updates
 description: I'm excited to announce Self-hosted Live Updates, the next iteration of Capgo’s Live Updates!
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-12-03
 updated_at: 2023-06-29
 head_image: "/self_hosted.webp"

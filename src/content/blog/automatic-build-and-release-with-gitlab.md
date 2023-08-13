@@ -4,7 +4,7 @@ title: Automatic build and release with Gitlab
 description: Create your own CI/CD pipeline with Gitlab for free, deploy
   your app every time you push to main.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-06-16
 updated_at: 2023-06-29
 head_image: "/gitlab_ci.webp"

@@ -3,7 +3,7 @@ slug: "building-a-native-mobile-app-with-nuxt-3-and-capacitor"
 title: Creating Mobile Apps with Nuxt 3 and Capacitor.
 description: How to create a mobile app with Nuxt 3, Capacitor and implement native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-03
 updated_at: 2023-06-03
 head_image: "/nuxt_capgo.webp"
@@ -343,4 +343,4 @@ If you would like to learn how to add Capgo to your Next.js app, take a look at 
 
 ## Credits
 
-Thanks a lot to [Simon](https://twitter.com/schlimmson), this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted for nuxt3 with chat-gpt-4 and adapted.
+Thanks a lot to [Simon](https://x.com/schlimmson), this article is based on [this article](https://devdactic.com/nextjs-and-capacitor) rewroted for nuxt3 with chat-gpt-4 and adapted.

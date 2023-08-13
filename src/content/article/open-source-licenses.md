@@ -3,7 +3,7 @@ slug: "open-source-licenses"
 title: open-source licensing and why i'm' changing them to the AGPL/LGPL
 description: I'm changing my license as i have become aware that there are risks associated with open-source licenses that corporations that can't use.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-04-08
 updated_at: 2022-04-08
 head_image: "/license_change.webp"

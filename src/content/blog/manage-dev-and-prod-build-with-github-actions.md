@@ -3,7 +3,7 @@ slug: "manage-dev-and-prod-build-with-github-actions"
 title: Manage development and production build with GitHub actions
 description: Use Capgo to release your devbuild to specific channel, and let your team try your Capacitor Ionic app, without waiting Apple and Google review 
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-06-16
 updated_at: 2023-06-29
 head_image: "/capgo_ci-cd-illustration.webp"

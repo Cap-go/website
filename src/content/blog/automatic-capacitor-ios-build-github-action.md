@@ -3,7 +3,7 @@ slug: "automatic-capacitor-ios-build-github-action"
 title: Automatic Capacitor IOS build with GitHub actions
 description: How to set up a CI/CD pipeline for your IOS Ionic app using fastlane and GitHub Actions in 5 mins (2022)
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-10-30
 updated_at: 2023-06-29
 head_image: "/fastlane_ios.webp"

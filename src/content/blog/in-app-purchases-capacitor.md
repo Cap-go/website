@@ -2,7 +2,7 @@
 slug: "in-app-purchases-capacitor"
 title: in app purchases for capacitor
 description: How to implement in-app purchases for capacitor apps using the Capacitor Purchases plugin and RevenueCat
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-01-19
 updated_at: 2023-06-29
 head_image: "/revenuecat_iap.webp"

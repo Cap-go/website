@@ -3,7 +3,7 @@ slug: "live-updates-for-flutter-app"
 title: Flutter live update
 description: 'Do it possible to send live update to Flutter Apps without the App Store review ?'
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-12-16
 updated_at: 2023-06-29
 head_image: "/bypass_illustration.webp"

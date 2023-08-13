@@ -3,7 +3,7 @@ slug: "do-capgo-work-for-cordova"
 title: "Why Capgo Doesn't Support Cordova: Upgrading Your App to access live Updates"
 description: In this guide, i will share you my experience with Capgo and Cordova.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-01-29
 updated_at: 2023-01-29
 head_image: "/cordova.webp"

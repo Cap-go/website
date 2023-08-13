@@ -3,7 +3,7 @@ slug: "how-version-work-in-capgo"
 title: How version work in Capgo
 description: Understand how Capgo manage versions in your Capacitor app, and use it at best. Learn the meaning of major, minor, patch.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-08-25
 updated_at: 2023-06-29
 head_image: "/versionning.webp"

@@ -3,7 +3,7 @@ slug: "alternative-to-expo"
 title: Alternative to Expo Live Update
 description: Looking for a mobile app development platform that offers the convenience of Expo's live updates without the limitation of being tied to React Native? Check out Capgo.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-12-14
 updated_at: 2023-06-29
 head_image: "/expo_alternative.webp"

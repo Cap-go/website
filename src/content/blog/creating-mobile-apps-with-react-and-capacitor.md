@@ -3,7 +3,7 @@ slug: "creating-mobile-apps-with-react-and-capacitor"
 title: 'Building Mobile Apps with Pure React.js and Capacitor'
 description: 'A guide on how to transform a React.js web application into a native mobile app utilizing Capacitor, and enhancing the native UI with Konsta UI.'
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-29
 updated_at: 2023-06-29
 head_image: "/react_capacitor.webp"

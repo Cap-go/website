@@ -3,7 +3,7 @@ slug: "how-your-usage-is-counted"
 title: How your usage is counted in Capgo
 description: Understand how Capgo count your usage, and use it at best. Learn to manage better your plan
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-11-25
 updated_at: 2023-06-29
 head_image: "/usage_explained.webp"

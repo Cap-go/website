@@ -3,7 +3,7 @@ slug: "migrating-cordova-to-capacitor"
 title: 'Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide'
 description: This step-by-step guide will help you migrate your web app from Cordova to Capacitor, covering all sections and making it easy to read and follow.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-07
 updated_at: 2023-06-29
 head_image: "/migrating-cordova-to-capacitor.webp"

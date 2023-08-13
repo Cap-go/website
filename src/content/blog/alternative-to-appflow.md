@@ -4,7 +4,7 @@ title: Alternative to Ionic Appflow
 description: Ionic Appflow is the best complete set of tool for your app, sadly they
   price is not made for all, Capgo is here to let you handle OTA update at fair price.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-03-02
 updated_at: 2023-06-29
 head_image: "/appflow_alt.webp"

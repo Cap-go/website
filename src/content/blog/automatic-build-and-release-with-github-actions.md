@@ -4,7 +4,7 @@ title: Automatic build and release app with Github actions
 description: Create your own CI/CD pipeline with Github actions for free, deploy
   your Ionic Capacitor JS app every time you push to main.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-03-23
 updated_at: 2023-06-29
 head_image: "/github_actions.webp"

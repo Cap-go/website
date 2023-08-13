@@ -3,7 +3,7 @@ slug: "introducing-end-to-end-security-to-capacitor-updater-with-code-signing"
 title: Introducing end to end encryption to capacitor-updater with code signing
 description: Using RSA + AES cryptography to encrypt updates, designed for the enterprise and high security apps
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-11-27
 updated_at: 2023-06-29
 head_image: "/secure_upload.webp"

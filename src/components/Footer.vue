@@ -140,7 +140,7 @@ const navigation = {
     },
     {
       name: 'Build in public on Twitter',
-      href: 'https://twitter.com/Capgo_app',
+      href: 'https://x.com/Capgo_app',
       icon: defineComponent({
         render: () =>
           h(

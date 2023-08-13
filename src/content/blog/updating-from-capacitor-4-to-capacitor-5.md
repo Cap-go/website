@@ -4,7 +4,7 @@ slug: "updating-from-capacitor-4-to-capacitor-5"
 title: 'Updating from Capacitor 4 to Capacitor 5: A Step-by-Step Guide'
 description: Learn how to update your project from Capacitor 4 to Capacitor 5 with minimal breaking changes, including updating official plugins and required tools.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-09
 updated_at: 2023-06-29
 head_image: "/capacitor-5-update.webp"

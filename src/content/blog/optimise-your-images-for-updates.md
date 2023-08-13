@@ -3,7 +3,7 @@ slug: "optimise-your-images-for-updates"
 title: Optimise your images for updates
 description: How to optimise your images for live updates and help your user get updates faster.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-01-23
 updated_at: 2023-06-29
 head_image: "/convert_webp.webp"

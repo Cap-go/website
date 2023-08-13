@@ -4,7 +4,7 @@ title: Moving from Microsoft App Center to Capgo for Live App Updates
 description: Microsoft stops support for apps running on Cordova. Move from Microsoft
   App Center to Capgo for Mobile Live App Updates
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-03-21
 updated_at: 2023-06-29
 head_image: "/app_center.webp"

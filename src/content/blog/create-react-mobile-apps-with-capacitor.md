@@ -4,7 +4,7 @@ slug: "create-react-mobile-apps-with-capacitor"
 title: Building Mobile Apps with React and Capacitor
 description: Learn how to build a mobile app using React, Capacitor, and enhance the native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-02-21
 updated_at: 2023-03-10
 head_image: "/react_capacitor.webp"

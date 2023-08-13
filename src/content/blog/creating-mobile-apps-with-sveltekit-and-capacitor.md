@@ -4,7 +4,7 @@ slug: "creating-mobile-apps-with-sveltekit-and-capacitor"
 title: Building Mobile Apps with SvelteKit and Capacitor
 description: Learn how to build a mobile app using SvelteKit, Capacitor, and enhance the native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-04
 updated_at: 2023-06-04
 head_image: "/sveltekit_capacitor.webp"

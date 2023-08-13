@@ -3,7 +3,7 @@ slug: "capacitor-comprehensive-guide"
 title: 'Capacitor: A Comprehensive Guid'
 description: CapacitorJS is a powerful tool that enables web developers to build native iOS, Android, Desktop, and Progressive Web Apps with a single standard web codebase. Learn everything you need to know about Capacitor in this comprehensive guide.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2023-06-10
 updated_at: 2023-06-10
 head_image: "/capacitor-guide.webp"

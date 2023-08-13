@@ -458,7 +458,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
             Community-trusted
             <a
-              href="https://twitter.com/martindonadieu"
+              href="https://x.com/martindonadieu"
               target="_blank"
               title=" Capgo team"
               class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"

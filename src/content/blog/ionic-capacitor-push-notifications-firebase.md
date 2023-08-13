@@ -3,7 +3,7 @@ slug: "ionic-capacitor-push-notifications-firebase"
 title: 'Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide'
 description: 'Learn how to integrate push notifications in your Ionic Capacitor app using Firebase, with step-by-step instructions for both Android and iOS platforms.'
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-12-14
 updated_at: 2023-06-29
 head_image: "/push_notif.webp"

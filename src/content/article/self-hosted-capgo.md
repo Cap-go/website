@@ -3,7 +3,7 @@ slug: "self-hosted-capgo"
 title: open-source licensing and why we're changing capacitor-updater to the LGPL license
 description: I'm changing my license as I’ve become aware that there are risks associated with not enougth permissive open-source licenses that corporations that can't use.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
+author_url: https://x.com/martindonadieu
 created_at: 2022-04-08
 updated_at: 2022-04-08
 head_image: "/appflow_alt.webp"
