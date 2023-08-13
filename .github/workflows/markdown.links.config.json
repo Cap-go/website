@@ -2,6 +2,9 @@
   "ignorePatterns": [
     {
       "pattern": "^https://developer.android.com/studio/*"
+    },
+    {
+      "pattern": "^https://twitter.com/martindonadieu"
     }
   ],
   "httpHeaders": [
