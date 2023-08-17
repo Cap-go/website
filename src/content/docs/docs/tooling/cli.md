@@ -62,7 +62,7 @@ Example of `capacitor.config.json` for appId and AppName, the icon is guess in t
 {
   "appId": "ee.forgr.capacitor_go",
   "appName": "Capgo",
-  "webDir": "dist",
+  "webDir": "dist"
 }
 ```
 
@@ -76,6 +76,7 @@ Optionally, you can give:
 
 * `--icon [/path/to/my/icon]` to have a custom icon display in Capgo web app.
 * `--name [test]` to have a custom name in the list.
+* `--retention [retention]` retention period of app bundle in days, 0 by default = infinite.
 * `--apikey [key]` API key to link to your account.
 
 ### **List**
@@ -140,7 +141,7 @@ Example of `package.json` for version
 
 ```json
 {
- "version": "1.0.2"
+  "version": "1.0.2"
 }
 ```
 
