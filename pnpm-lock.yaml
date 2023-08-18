@@ -17,18 +17,9 @@ dependencies:
   '@heroicons/vue':
     specifier: ^2.0.18
     version: 2.0.18(vue@3.3.4)
-  '@types/dompurify':
-    specifier: ^3.0.2
-    version: 3.0.2
-  '@types/marked':
-    specifier: ^5.0.1
-    version: 5.0.1
   astro:
     specifier: ^2.10.5
     version: 2.10.5(@types/node@20.4.9)(sharp@0.32.4)
-  dompurify:
-    specifier: ^3.0.5
-    version: 3.0.5
   marked:
     specifier: ^7.0.3
     version: 7.0.3
@@ -52,6 +43,9 @@ devDependencies:
   '@iconify-json/twemoji':
     specifier: ^1.1.12
     version: 1.1.12
+  '@types/marked':
+    specifier: ^5.0.1
+    version: 5.0.1
   '@types/node':
     specifier: ^20.4.9
     version: 20.4.9
@@ -2261,12 +2255,6 @@ packages:
   /@types/dom-view-transitions@1.0.1:
     resolution: {integrity: sha512-A9S1ijj/4MX06I1W/6on8lhaYyq1Ir7gaOvfllW1o4RzVWW88HAeqX0pUx9VgOLnNpdiGeUW2CTkg18p5LWIrA==}
 
-  /@types/dompurify@3.0.2:
-    resolution: {integrity: sha512-YBL4ziFebbbfQfH5mlC+QTJsvh0oJUrWbmxKMyEdL7emlHJqGR2Qb34TEFKj+VCayBvjKy3xczMFNhugThUsfQ==}
-    dependencies:
-      '@types/trusted-types': 2.0.3
-    dev: false
-
   /@types/estree-jsx@1.0.0:
     resolution: {integrity: sha512-3qvGd0z8F2ENTGr/GG1yViqfiKmRfrXVx5sJyHGFu3z7m5g5utCQtGp/g29JnjflhtQJBv1WDQukHiT58xPcYQ==}
     dependencies:
@@ -2294,7 +2282,7 @@ packages:
 
   /@types/marked@5.0.1:
     resolution: {integrity: sha512-Y3pAUzHKh605fN6fvASsz5FDSWbZcs/65Q6xYRmnIP9ZIYz27T4IOmXfH9gWJV1dpi7f1e7z7nBGUTx/a0ptpA==}
-    dev: false
+    dev: true
 
   /@types/mdast@3.0.12:
     resolution: {integrity: sha512-DT+iNIRNX884cx0/Q1ja7NyUPpZuv0KPyL5rGNxm1WC1OtHstl7n4Jb7nk+xacNShQMbczJjt8uFzznpp6kYBg==}
@@ -2348,6 +2336,7 @@ packages:
 
   /@types/trusted-types@2.0.3:
     resolution: {integrity: sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==}
+    dev: true
 
   /@types/unist@2.0.7:
     resolution: {integrity: sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==}
@@ -3657,10 +3646,6 @@ packages:
     dependencies:
       domelementtype: 2.3.0
     dev: true
-
-  /dompurify@3.0.5:
-    resolution: {integrity: sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==}
-    dev: false
 
   /domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
