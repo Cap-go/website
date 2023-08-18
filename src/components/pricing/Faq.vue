@@ -69,7 +69,9 @@ import { openMessenger } from '../../services/chatwoot'
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
             Didn’t find the answer you are looking for?
-            <button @click="openMessenger()" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline"> Contact our support</button>
+            <button @click="openMessenger()" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline">
+              Contact our support
+            </button>
           </p>
         </div>
       </div>
