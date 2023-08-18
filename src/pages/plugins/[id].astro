@@ -31,7 +31,6 @@ export async function getStaticPaths() {
           const npmData = await npmResponse.json()
           plugins[index].npmDownloads = npmData.downloads
         }
-
         // Extract the GitHub repository owner and name from the URL
         const githubUrlParts = item.href.split('/')
         const githubOwner = githubUrlParts[3]
