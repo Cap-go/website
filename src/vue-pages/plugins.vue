@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { marked } from 'marked'
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
 
 interface Action {
@@ -208,7 +209,10 @@ const actions: Action[] = [
     href: 'N/A',
     title: 'WalletConnect',
   },
-]
+].map((i: Action) => ({
+  ...i,
+  description: marked.parse(i.description),
+}))
 </script>
 
 <template>
@@ -227,7 +231,7 @@ const actions: Action[] = [
         >
           <div class="flex flex-col p-3">
             <div class="text-lg font-bold text-white">{{ item.title }}</div>
-            <p class="mt-3 line-clamp-2 w-full break-all text-sm text-gray-200">{{ item.description }}</p>
+            <div class="mt-3 line-clamp-2 w-full break-all text-sm text-gray-200" v-html="item.description" />
           </div>
           <div class="mt-auto flex flex-row items-center justify-between p-3">
             <span class="text-sm font-light text-gray-400">by {{ item.author }}</span>

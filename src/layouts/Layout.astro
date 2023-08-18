@@ -29,7 +29,7 @@ const { content } = Astro.props
       data-domain="capgo.app"
       src="https://pls.digitalshift-ee.workers.dev/js/script.js"
       data-api="https://pls.digitalshift-ee.workers.dev/api/event"></script>
-    <script>
+    <!-- <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
           .register('/sw.js')
@@ -40,7 +40,7 @@ const { content } = Astro.props
             console.log('SW registration failed with error:', e)
           })
       }
-    </script>
+    </script> -->
     <MessengerAffiliateVue client:only />
   </body>
 </html>
