@@ -29,6 +29,7 @@ import {
   VideoCameraIcon,
   WalletIcon,
 } from '@heroicons/vue/20/solid'
+import { onMounted, ref } from 'vue'
 
 interface Action {
   icon?: any
@@ -40,7 +41,8 @@ interface Action {
   iconForeground?: string
   iconBackground?: string
 }
-const actions: Action[] = [
+
+const actions = ref<Action[]>([
   {
     name: '@capgo/cli',
     author: 'github.com/riderx',
@@ -265,10 +267,13 @@ const actions: Action[] = [
     title: 'WalletConnect',
     icon: WalletIcon,
   },
-].map((i: Action) => ({
-  ...i,
-  description: marked.parse(i.description),
-}))
+])
+
+onMounted(() => {
+  actions.value.forEach((i) => {
+    i.description = marked.parse(i.description)
+  })
+})
 </script>
 
 <template>
@@ -282,7 +287,7 @@ const actions: Action[] = [
         <a
           v-for="item in actions"
           :key="item.href"
-          :href="`/plugins/${item.href.substring(item.href.lastIndexOf('/') + 1)}`"
+          :href="item.href !== 'N/A' ? `/plugins/${item.href.substring(item.href.lastIndexOf('/') + 1)}` : '#'"
           class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
         >
           <div class="flex flex-col px-5 py-3">
