@@ -1,32 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import type { Action } from '../../config/plugins'
+import type { Plugin } from '../../config/plugins'
 
-const props = defineProps<Action>()
-
-const stars = ref('...')
-const npmDownloads = ref('...')
-
-onMounted(() => {
-  if (props.href) {
-    const githubSlug = new URL(props.href).pathname
-    fetch(`https://api.github.com/repos${githubSlug}`)
-      .then((res: any) => res.json())
-      .then((res) => {
-        stars.value = res.stargazers_count
-      })
-      .catch(console.error)
-  }
-  if (props.name) {
-    const npmCall = new URL(`downloads/point/last-month/${props.name}`, 'https://api.npmjs.org/').toString()
-    fetch(npmCall)
-      .then((res: any) => res.json())
-      .then((res) => {
-        npmDownloads.value = res.downloads
-      })
-      .catch(console.error)
-  }
-})
+const props = defineProps<Plugin>()
 </script>
 
 <template>
@@ -40,14 +15,15 @@ onMounted(() => {
         <h1 class="mt-8 text-lg font-light md:text-xl">
           {{ props.description }}
         </h1>
-        <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
-          <span class="text-sm font-semibold text-gray-400">GitHub Stars</span> <span class="text-gray-600">{{ stars }}</span>
+        <div v-if="props.githubStars" class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+          <span class="text-sm font-semibold text-gray-400">GitHub Stars</span> <span class="text-gray-600">{{ props.githubStars }}</span>
         </div>
-        <div class="mt-4 flex flex-row items-center justify-between border-t border-white/10 pt-2">
-          <span class="text-sm font-semibold text-gray-400">NPM Downloads</span> <span class="text-gray-600">{{ npmDownloads }}</span>
+        <div v-if="props.npmDownloads" class="mt-4 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+          <span class="text-sm font-semibold text-gray-400">NPM Downloads</span> <span class="text-gray-600">{{ props.npmDownloads }}</span>
         </div>
         <div class="flex flex-row flex-wrap items-center justify-between">
           <a
+            v-if="props.href"
             aria-label="View Repo URL"
             class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
             :href="props.href"
@@ -56,6 +32,7 @@ onMounted(() => {
             View Repo &rarr;
           </a>
           <a
+            v-if="props.name"
             aria-label="View NPM"
             class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
             :href="`https://www.npmjs.com/package/${props.name}`"
@@ -65,10 +42,23 @@ onMounted(() => {
           </a>
         </div>
       </div>
-      <!-- <div class="flex w-full flex-col md:w-2/3 md:border-l border-white/10 md:pl-10">
-        <div class="prose my-8">
-        </div>
-      </div> -->
+      <div v-if="props.readme" id="readme" class="flex w-full flex-col md:w-2/3 md:border-l border-white/10 md:pl-10">
+        <div class="prose my-8" v-html="props.readme" />
+      </div>
     </div>
   </div>
 </template>
+
+<style>
+img[src*='badge'] {
+  width: auto;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+img[src*='shields.io'] {
+  width: auto;
+  height: 25px;
+  margin-bottom: 10px;
+}
+</style>

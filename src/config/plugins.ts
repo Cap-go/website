@@ -38,6 +38,12 @@ export interface Action {
   iconBackground?: string
 }
 
+export interface Plugin extends Action {
+  npmDownloads?: number
+  githubStars?: number
+  readme?: string
+}
+
 export const actions = [
   {
     name: '@capgo/cli',

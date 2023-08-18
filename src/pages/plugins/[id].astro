@@ -1,10 +1,63 @@
 ---
+import { marked } from 'marked'
 import { actions } from '../../config/plugins'
 import Layout from '../../layouts/Layout.astro'
+import type { Plugin } from '../../config/plugins'
 import VuePluginPDP from '../../vue-pages/plugins/[id].vue'
 
 export async function getStaticPaths() {
-  return actions.map((item) => {
+  let plugins: Plugin[] = actions
+  await Promise.all(
+    actions.map(async (item, index) => {
+      const fetchWithToken = async (githubApiUrl: string) => {
+        if (import.meta.env.BEARER_TOKEN) {
+          return await fetch(githubApiUrl, {
+            headers: {
+              // Replace with your GitHub personal access token
+              Authorization: `Bearer ${import.meta.env.BEARER_TOKEN}`,
+            },
+          })
+        } else {
+          return await fetch(githubApiUrl)
+        }
+      }
+      try {
+        // Update the item with fetched data
+        plugins[index].readme = marked.parse(`# ${item.title}\n\n${item.description}`)
+        // Fetch npm package details to get npm stars
+        const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${item.name}`
+        const npmResponse = await fetch(npmApiUrl)
+        if (npmResponse.ok) {
+          const npmData = await npmResponse.json()
+          plugins[index].npmDownloads = npmData.downloads
+        }
+
+        // Extract the GitHub repository owner and name from the URL
+        const githubUrlParts = item.href.split('/')
+        const githubOwner = githubUrlParts[3]
+        const githubRepo = githubUrlParts[4]
+
+        // Fetch GitHub repository details to get GitHub stars
+        const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
+        const githubResponse = await fetchWithToken(githubApiUrl)
+        if (githubResponse.ok) {
+          const githubData = await githubResponse.json()
+          plugins[index].githubStars = githubData.stargazers_count
+        }
+
+        // Fetch README.md content from GitHub
+        const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
+        const readmeResponse = await fetchWithToken(readmeApiUrl)
+        if (readmeResponse.ok) {
+          const readmeData = await readmeResponse.json()
+          plugins[index].readme = marked.parse(Buffer.from(readmeData.content, 'base64').toString('utf-8'))
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }),
+  )
+  return plugins.map((item) => {
     let slug = item.href.substring(item.href.lastIndexOf('/') + 1)
     return {
       params: {
