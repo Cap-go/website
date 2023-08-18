@@ -1,0 +1,37 @@
+---
+import { actions } from '../../config/plugins'
+import Layout from '../../layouts/Layout.astro'
+import VuePluginPDP from '../../vue-pages/plugins/[id].vue'
+
+export async function getStaticPaths() {
+  return actions.map((item) => {
+    let slug = item.href.substring(item.href.lastIndexOf('/') + 1)
+    return {
+      params: {
+        id: slug,
+      },
+      props: {
+        item,
+      },
+    }
+  })
+}
+
+const plugin = Astro.props.item
+
+const content = {}
+
+if (plugin.title) {
+  // @ts-ignore
+  content['title'] = plugin.title
+}
+
+if (plugin.description) {
+  // @ts-ignore
+  content['description'] = plugin.description
+}
+---
+
+<Layout content={content}>
+  <VuePluginPDP client:load {...plugin} />
+</Layout>
