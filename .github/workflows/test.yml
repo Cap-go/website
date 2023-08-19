@@ -27,5 +27,3 @@ jobs:
         run: pnpm install
       - name: Generate static pages
         run: pnpm build
-        env:
-          BEARER_TOKEN: ${{secrets.BEARER_TOKEN}}
