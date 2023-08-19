@@ -5,10 +5,10 @@
     "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
+    "build": "astro build",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
-    "fmt": "prettier --write '**/*' --ignore-unknown",
-    "build": "astro build && npx -y pagefind@latest --source 'dist/docs'"
+    "fmt": "prettier --write '**/*' --ignore-unknown"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.7.1",
