@@ -42,6 +42,8 @@ export interface Plugin extends Action {
   npmDownloads?: number
   githubStars?: number
   readme?: string
+  datePublished?: string
+  dateModified?: string
 }
 
 export const actions = [
