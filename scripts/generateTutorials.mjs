@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { appendFileSync, existsSync } from 'node:fs'
+import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { z } from 'zod'
 import * as dotenv from 'dotenv'
 import { Document } from 'langchain/document'
@@ -21,14 +21,16 @@ async function loadVectorStore() {
 }
 
 async function chat(input, pluginPath) {
+  const outputFile = join(process.cwd(), 'src', 'content', 'plugins-tutorials', `${pluginPath}.md`)
+  const currentContent = readFileSync(outputFile, 'utf8')
   try {
     const vectorStore = await loadVectorStore()
+    writeFileSync(outputFile, '', 'utf8')
     const model = new ChatOpenAI({
       streaming: true,
       callbacks: [
         {
           handleLLMNewToken(token) {
-            const outputFile = join(process.cwd(), 'src', 'content', 'plugins-tutorials', `${pluginPath}.md`)
             appendFileSync(outputFile, token)
           },
         },
@@ -50,6 +52,7 @@ async function chat(input, pluginPath) {
     const chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), prompt)
     await chain.call({ query: input })
   } catch (error) {
+    writeFileSync(outputFile, currentContent, 'utf8')
     console.error(error.message || error.toString())
   }
 }
