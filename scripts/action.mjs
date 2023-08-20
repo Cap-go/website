@@ -1,52 +1,3 @@
-import {
-  AdjustmentsHorizontalIcon,
-  ArchiveBoxArrowDownIcon,
-  ArrowPathIcon,
-  Bars3Icon,
-  BoltIcon,
-  CameraIcon,
-  ChatBubbleLeftIcon,
-  CommandLineIcon,
-  CurrencyDollarIcon,
-  DevicePhoneMobileIcon,
-  DocumentMagnifyingGlassIcon,
-  EllipsisHorizontalIcon,
-  FingerPrintIcon,
-  GlobeAltIcon,
-  HomeIcon,
-  MapPinIcon,
-  PaintBrushIcon,
-  PhoneArrowUpRightIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-  PlayIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  StopIcon,
-  VideoCameraIcon,
-  WalletIcon,
-} from '@heroicons/vue/20/solid'
-
-export interface Action {
-  icon?: any
-  href: string
-  title: string
-  name?: string
-  author: string
-  description: string
-  iconForeground?: string
-  iconBackground?: string
-}
-
-export interface Plugin extends Action {
-  npmDownloads?: number
-  githubStars?: number
-  readme?: string
-  datePublished?: string
-  dateModified?: string
-  tutorial?: string
-}
-
 export const actions = [
   {
     name: '@capgo/cli',
@@ -54,7 +5,7 @@ export const actions = [
     description: 'A CLI to upload to capgo servers',
     href: 'https://github.com/Cap-go/capgo-cli',
     title: 'CLI',
-    icon: CommandLineIcon,
+    // icon: CommandLineIcon,
   },
   {
     name: '@capgo/standard-version',
@@ -62,7 +13,7 @@ export const actions = [
     description: 'replacement for `npm version` with automatic CHANGELOG generation',
     href: 'https://github.com/Cap-go/standard-version',
     title: 'Standard Version',
-    icon: AdjustmentsHorizontalIcon,
+    // icon: AdjustmentsHorizontalIcon,
   },
   {
     name: '@capgo/native-market',
@@ -70,7 +21,7 @@ export const actions = [
     description: 'A native market plugin for linking to google play or app store.',
     href: 'https://github.com/riderx/native-market',
     title: 'Native Market',
-    icon: ArchiveBoxArrowDownIcon,
+    // icon: ArchiveBoxArrowDownIcon,
   },
   {
     name: '@capgo/capacitor-native-biometric',
@@ -78,7 +29,7 @@ export const actions = [
     description: 'This plugin gives access to the native biometric apis for android and iOS',
     href: 'https://github.com/Cap-go/capacitor-native-biometric',
     title: 'Native Biometric',
-    icon: FingerPrintIcon,
+    // icon: FingerPrintIcon,
   },
   {
     name: '@capgo/camera-preview',
@@ -86,7 +37,7 @@ export const actions = [
     description: 'Camera preview',
     href: 'https://github.com/Cap-go/camera-preview',
     title: 'Camera Preview',
-    icon: CameraIcon,
+    // icon: CameraIcon,
   },
   {
     name: '@capgo/google-play-scraper',
@@ -94,7 +45,7 @@ export const actions = [
     description: 'scrapes app data from google play store',
     href: 'https://github.com/facundoolano/google-play-scraper',
     title: 'Google Play Scraper',
-    icon: PlayIcon,
+    // icon: PlayIcon,
   },
   {
     name: '@capgo/ngx-intl-tel-input-app',
@@ -102,7 +53,7 @@ export const actions = [
     description: '[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)',
     href: 'N/A',
     title: 'International Telephone Input',
-    icon: PhoneIcon,
+    // icon: PhoneIcon,
   },
   {
     name: '@capgo/konsta',
@@ -110,7 +61,7 @@ export const actions = [
     description: 'Mobile UI components made with Tailwind CSS',
     href: 'https://github.com/konstaui/konsta',
     title: 'Konsta',
-    icon: PaintBrushIcon,
+    // icon: PaintBrushIcon,
   },
   {
     name: '@capgo/capacitor-updater',
@@ -118,7 +69,7 @@ export const actions = [
     description: 'Live update for capacitor apps',
     href: 'https://github.com/Cap-go/capacitor-updater',
     title: 'Updater',
-    icon: ArrowPathIcon,
+    // icon: ArrowPathIcon,
   },
   {
     name: '@capgo/capacitor-purchases',
@@ -126,7 +77,7 @@ export const actions = [
     description: 'In-app Subscriptions Made Easy with RevenueCat sdk',
     href: 'https://github.com/Cap-go/capacitor-purchases',
     title: 'Purchases',
-    icon: CurrencyDollarIcon,
+    // icon: CurrencyDollarIcon,
   },
   {
     name: '@capgo/capacitor-flash',
@@ -134,7 +85,7 @@ export const actions = [
     description: 'Switch the Flashlight / Torch of your device.',
     href: 'https://github.com/riderx/capacitor-flash',
     title: 'Flash',
-    icon: BoltIcon,
+    // icon: BoltIcon,
   },
   {
     name: '@capgo/capacitor-screen-recorder',
@@ -143,7 +94,7 @@ export const actions = [
     description: 'Record device\'s screen',
     href: 'https://github.com/riderx/capacitor-screen-recorder',
     title: 'Screen Recorder',
-    icon: VideoCameraIcon,
+    // icon: VideoCameraIcon,
   },
   {
     name: '@capgo/capacitor-crisp',
@@ -151,7 +102,7 @@ export const actions = [
     description: 'Crisp native SDK for capacitor',
     href: 'https://github.com/Cap-go/capacitor-crisp',
     title: 'Crisp',
-    icon: ChatBubbleLeftIcon,
+    // icon: ChatBubbleLeftIcon,
   },
   {
     name: '@capgo/nativegeocoder',
@@ -159,7 +110,7 @@ export const actions = [
     description: 'Capacitor plugin for native forward and reverse geocoding',
     href: 'https://github.com/Cap-go/capacitor-nativegeocoder',
     title: 'Native Geocoder',
-    icon: MapPinIcon,
+    // icon: MapPinIcon,
   },
   {
     name: '@capgo/inappbrowser',
@@ -167,7 +118,7 @@ export const actions = [
     description: 'Capacitor plugin in app browser',
     href: 'https://github.com/Cap-go/capacitor-inappbrowser',
     title: 'In App Browser',
-    icon: GlobeAltIcon,
+    // icon: GlobeAltIcon,
   },
   {
     name: '@capgo/capacitor-mute',
@@ -175,7 +126,7 @@ export const actions = [
     description: 'Detect if the mute switch is enabled/disabled on a device',
     href: 'https://github.com/riderx/capacitor-mute',
     title: 'Mute',
-    icon: SpeakerXMarkIcon,
+    // icon: SpeakerXMarkIcon,
   },
   {
     name: '@capgo/angular-ng-stepper',
@@ -183,7 +134,7 @@ export const actions = [
     description: 'Angular stepper',
     href: 'https://github.com/gmerabishvili/angular-ng-stepper',
     title: 'Stepper',
-    icon: EllipsisHorizontalIcon,
+    // icon: EllipsisHorizontalIcon,
   },
   {
     name: '@capgo/native-audio',
@@ -191,7 +142,7 @@ export const actions = [
     description: 'A native plugin for native audio engine',
     href: 'https://github.com/Cap-go/native-audio',
     title: 'Native Audio',
-    icon: SpeakerWaveIcon,
+    // icon: SpeakerWaveIcon,
   },
   {
     name: '@capgo/capacitor-shake',
@@ -199,7 +150,7 @@ export const actions = [
     description: 'Detect shake gesture in device',
     href: 'https://github.com/Cap-go/capacitor-shake',
     title: 'Shake',
-    icon: DevicePhoneMobileIcon,
+    // icon: DevicePhoneMobileIcon,
   },
   {
     name: '@capgo/capacitor-navigation-bar',
@@ -207,7 +158,7 @@ export const actions = [
     description: 'Set navigation bar color for android lolipop and higher',
     href: 'https://github.com/Cap-go/capacitor-navigation-bar',
     title: 'Navigation Bar',
-    icon: Bars3Icon,
+    // icon: Bars3Icon,
   },
   {
     name: '@capgo/ivs-player',
@@ -215,7 +166,7 @@ export const actions = [
     description: 'Ivs player for capacitor app',
     href: 'https://github.com/Cap-go/ivs-player',
     title: 'IVS Player',
-    icon: PlayCircleIcon,
+    // icon: PlayCircleIcon,
   },
   {
     name: '@capgo/home-indicator',
@@ -223,7 +174,7 @@ export const actions = [
     description: 'hide and show home button indicator in Capacitor app',
     href: 'https://github.com/Cap-go/home-indicator',
     title: 'Indicator',
-    icon: HomeIcon,
+    // icon: HomeIcon,
   },
   {
     name: '@capgo/find-package-manager',
@@ -231,7 +182,7 @@ export const actions = [
     description: 'Live update for capacitor apps',
     href: 'https://github.com/Cap-go/find-package-manager',
     title: 'Package Manager',
-    icon: DocumentMagnifyingGlassIcon,
+    // icon: DocumentMagnifyingGlassIcon,
   },
   {
     name: '@capgo/native-purchases',
@@ -239,7 +190,7 @@ export const actions = [
     description: 'In-app Subscriptions Made Easy',
     href: 'https://github.com/Cap-go/native-purchases',
     title: 'Native Purchases',
-    icon: CurrencyDollarIcon,
+    // icon: CurrencyDollarIcon,
   },
   {
     name: '@capgo/capacitor-fingerprint',
@@ -247,7 +198,7 @@ export const actions = [
     description: 'Capacitor client for Fingerprint PRO. 100% accurate device identification for fraud detection.',
     href: 'https://github.com/Cap-go/capacitor-fingerprint',
     title: 'Fingerprint',
-    icon: FingerPrintIcon,
+    // icon: FingerPrintIcon,
   },
   {
     name: '@capgo/capacitor-callkit-voip',
@@ -255,7 +206,7 @@ export const actions = [
     description: 'Provide PushKit functionality to ionic capacitor',
     href: 'https://github.com/Cap-go/capacitor-callkit-voip',
     title: 'CallKit VOIP',
-    icon: PhoneArrowUpRightIcon,
+    // icon: PhoneArrowUpRightIcon,
   },
   {
     name: '@capgo/logsnag',
@@ -263,7 +214,7 @@ export const actions = [
     description: 'LogSnag Client',
     href: 'https://github.com/LogSnag/logsnag.js',
     title: 'LogSang',
-    icon: StopIcon,
+    // icon: StopIcon,
   },
   {
     name: '@capgo/walletconnect',
@@ -271,6 +222,6 @@ export const actions = [
     description: 'WIP: Capacitor plugin for WalletConnect',
     href: 'N/A',
     title: 'WalletConnect',
-    icon: WalletIcon,
+    // icon: WalletIcon,
   },
 ]

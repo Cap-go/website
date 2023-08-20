@@ -8,6 +8,12 @@ import VuePluginPDP from '../../vue-pages/plugins/[id].vue'
 
 export async function getStaticPaths() {
   let plugins: Plugin[] = actions
+  let tuts = await Astro.glob('../../content/plugins-tutorials/**/*.md')
+  let tutMap: any = {}
+  tuts.forEach((i) => {
+    const slug = i.file.substring(i.file.lastIndexOf('/') + 1).replace('.md', '')
+    tutMap[slug] = i.rawContent()
+  })
   await Promise.all(
     actions.map(async (item, index) => {
       const fetchWithToken = async (githubApiUrl: string) => {
@@ -79,12 +85,18 @@ export async function getStaticPaths() {
       },
       props: {
         item,
+        tutorial: tutMap[slug],
       },
     }
   })
 }
 
 const plugin = Astro.props.item
+let tutorial = Astro.props.tutorial
+
+if (tutorial) {
+  plugin['tutorial'] = marked.parse(tutorial)
+}
 
 if (!plugin || !plugin.title) {
   return new Response(null, {

@@ -46,6 +46,9 @@ const props = defineProps<Plugin>()
         <div class="prose my-8" v-html="props.readme" />
       </div>
     </div>
+    <div v-if="props.tutorial" id="tutorial" class="z-10 flex w-full flex-row flex-wrap gap-10 mt-24 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0 border-t border-white/10">
+      <div class="w-full prose my-8" v-html="props.tutorial" />
+    </div>
   </div>
 </template>
 
