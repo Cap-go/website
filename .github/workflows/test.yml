@@ -25,5 +25,9 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Generate tutorials
+        run: node scripts/generateTutorials.mjs
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Generate static pages
         run: pnpm build
