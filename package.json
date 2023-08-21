@@ -5,10 +5,10 @@
     "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
+    "build": "astro build",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
-    "fmt": "prettier --write '**/*' --ignore-unknown",
-    "build": "astro build && npx -y pagefind@latest --source 'dist/docs'"
+    "fmt": "prettier --write '**/*' --ignore-unknown"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.7.1",
@@ -16,6 +16,10 @@
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
     "astro": "^2.10.5",
+    "faiss-node": "^0.3.0",
+    "langchain": "^0.0.131",
+    "marked": "^7.0.3",
+    "openai": "^4.0.1",
     "sharp": "^0.32.4",
     "sitemap": "^7.1.1",
     "vue": "^3.3.4"
@@ -24,17 +28,20 @@
     "@antfu/eslint-config": "^0.40.0",
     "@iconify-json/carbon": "^1.1.19",
     "@iconify-json/twemoji": "^1.1.12",
+    "@types/marked": "^5.0.1",
     "@types/node": "^20.4.9",
     "@types/semver": "^7.5.0",
     "@unocss/astro": "^0.55.0",
     "@unocss/reset": "^0.55.0",
     "@vite-pwa/astro": "^0.1.1",
+    "cheerio": "1.0.0-rc.12",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "eslint": "^8.46.0",
     "prettier": "^3.0.1",
     "prettier-plugin-astro": "^0.11.0",
     "schema-dts": "^1.1.2",
-    "unocss": "^0.55.0"
+    "unocss": "^0.55.0",
+    "zod": "^3.22.2"
   }
 }
