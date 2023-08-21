@@ -87,7 +87,7 @@ const payg_units = computed(() =>
           <span class="ml-1 text-sm font-medium text-blue-600"> (Save 20%) </span>
         </div>
       </div>
-      <Plans v-if="plans.length > 0" class="pb-12 sm:pb-16 lg:pb-20 xl:pb-24" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
+      <Plans v-if="plans && plans.length > 0" class="pb-12 sm:pb-16 lg:pb-20 xl:pb-24" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
 
       <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg" />
 
