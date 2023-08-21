@@ -32,9 +32,9 @@ to only let this:
 
 ```json
 {
-  CapacitorUpdater: {
-      autoUpdate: true,
-  },
+  "CapacitorUpdater": {
+    "autoUpdate": true
+  }
 }
 ```
 
@@ -57,10 +57,10 @@ This will also remove the need to update often the plugin, most updates will be 
 
 ```json
 {
-  CapacitorUpdater: {
-      autoUpdate: true,
-      resetWhenUpdate: false,
-  },
+  "CapacitorUpdater": {
+    "autoUpdate": true,
+    "resetWhenUpdate": false
+  }
 }
 ```
 
