@@ -4,7 +4,7 @@ import type { Plugin } from '../../config/plugins'
 
 const props = defineProps<Plugin>()
 
-const showReadme = ref(0)
+const showReadme = ref(1)
 </script>
 
 <template>
