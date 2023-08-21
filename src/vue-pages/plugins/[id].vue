@@ -13,16 +13,16 @@ const showReadme = ref(1)
       <a aria-label="Back To Plugins" href="/plugins/" class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">← Back To Plugins</a>
     </div>
     <div class="mt-6 w-full flex flex-row flex-wrap px-10 gap-8 lg:max-w-6xl xl:px-0">
-      <button class="text-sm px-3 py-1" :class="showReadme === 0 ? 'border border-white rounded' : 'border rounded border-white/10'" @click="showReadme = 0">
-        About {{ props.title }}
-      </button>
       <button class="text-sm px-3 py-1" :class="showReadme !== 0 ? 'border border-white rounded' : 'border rounded border-white/10'" @click="showReadme = 1">
         Tutorial on {{ props.title }}
+      </button>
+      <button class="text-sm px-3 py-1" :class="showReadme === 0 ? 'border border-white rounded' : 'border rounded border-white/10'" @click="showReadme = 0">
+        About {{ props.title }}
       </button>
     </div>
     <div class="mt-6 flex w-full flex-col items-center">
       <div :class="showReadme === 1 ? 'hidden' : 'flex'" class="z-10 w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0 mb-8">
-        <div class="flex w-full flex-col md:w-1/3">
+        <div class="flex w-full flex-col">
           <h1 class="mt-4 text-2xl font-bold md:text-4xl">
             {{ props.title }}
           </h1>
@@ -55,9 +55,7 @@ const showReadme = ref(1)
               View on NPM &rarr;
             </a>
           </div>
-        </div>
-        <div v-if="props.readme" id="readme" class="flex w-full flex-col md:w-2/3 md:border-l border-white/10 md:pl-10">
-          <div class="prose my-8" v-html="props.readme" />
+          <div v-if="props.readme" id="readme" class="prose my-8" v-html="props.readme" />
         </div>
       </div>
     </div>

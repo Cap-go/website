@@ -1,102 +1,97 @@
-# Using Capgo CLI for Uploading and Downloading Files
+## Using @capgo/cli for Uploading and Downloading Files to Capgo Cloud
 
-The Capgo CLI is a command-line tool that allows you to upload and download files from the Capgo Cloud. It is designed to work with the Capgo Cloud service, which provides a platform for managing and distributing updates to your Ionic Capacitor apps. In this tutorial, we will walk you through the steps of using the Capgo CLI to upload and download files.
+[@capgo/cli](https://www.npmjs.com/package/@capgo/cli) is a command-line interface (CLI) tool that allows you to upload and download files to and from the Capgo Cloud. In this tutorial, we will walk through the steps to use @capgo/cli for managing files in the Capgo Cloud.
 
-## Prerequisites
+### Step 1: Registration
 
-Before you can use the Capgo CLI, you need to register on the Capgo website and obtain an API key. You can register at [https://capgo.app/](https://capgo.app/) and obtain your API key from the "apikey" section in your account.
+Before using @capgo/cli, you need to register an account on [capgo.app](https://capgo.app/) and obtain your API key.
 
-## Installation
+### Step 2: Installation
 
-To install the Capgo CLI, open your terminal and run the following command:
+To install @capgo/cli, open your terminal and run the following command:
 
-```
+```bash
 npm install -g @capgo/cli
 ```
 
-## Login to Cloud
+### Step 3: Login to Capgo Cloud
 
-To login to the Capgo Cloud using the API key, run the following command:
+To log in to the Capgo Cloud using @capgo/cli, run the following command:
 
-```
+```bash
 npx @capgo/cli login [apikey]
 ```
 
-Replace `[apikey]` with your actual API key.
+Replace `[apikey]` with your API key obtained during registration. Optionally, you can use the `--local` flag to save the API key in the local folder.
 
-Optionally, you can add the `--local` flag to save the API key in the local folder.
-
-## Adding a New App to Cloud
+### Step 4: Adding a new app to Capgo Cloud
 
 To add a new app to the Capgo Cloud, use the following command:
 
-```
+```bash
 npx @capgo/cli add [appId]
 ```
 
-Replace `[appId]` with your app ID in the format `com.test.app`.
+Replace `[appId]` with your app ID in the format `com.test.app`. You can also use the `--icon`, `--name`, and `--apikey` flags to customize the icon, name, and API key for the app.
 
-Optionally, you can provide additional options:
-- `--icon [/path/to/my/icon]`: Specify a custom icon for the app in the list.
-- `--name [test]`: Provide a custom name for the app in the list.
-- `--apikey [key]`: Link the app to a specific API key.
+### Step 5: Uploading a version to Capgo Cloud
 
-## Sending a Version to Cloud
+To upload a version of your app to the Capgo Cloud, run the following command:
 
-To send a version of your app to the Capgo Cloud, use the following command:
-
-```
+```bash
 npx @capgo/cli upload [appId]
 ```
 
-Replace `[appId]` with your app ID in the format `com.test.app`.
+Replace `[appId]` with your app ID. You can use the `--apikey`, `--path`, `--channel`, `--external`, `--key`, `--key-data`, `--no-key`, `--bundle`, and `--iv-session-key` flags to customize the upload options.
 
-Optionally, you can provide additional options:
-- `--apikey [key]`: Link the version to a specific API key.
-- `--path [/path/to/my/app]`: Upload a specific folder instead of the default.
-- `--channel [test]`: Upload the version to a specific channel.
-- `--external [https://mydomain.com/myapp.zip]`: Link to an external URL instead of uploading to the Capgo Cloud. The URL should be a zip file in HTTPS.
-- `--key [/path/to/my/private_key]`: Specify the path of your private key.
-- `--key-data [privateKey]`: Specify the private key data inline.
-- `--no-key`: Ignore signing key and send a clear update.
-- `--bundle [1.0.0]`: Set the bundle version number of the file to upload.
-- `--iv-session-key [key]`: Send a custom session key to the cloud.
+### Step 6: Managing channels
 
-## Managing Channels
+You can create and delete channels in the Capgo Cloud using @capgo/cli. 
 
-You can manage channels in the Capgo Cloud using the following commands:
-
-### Add a Channel
 To add a new channel, use the command:
 
-```
+```bash
 npx @capgo/cli channel add [channelId] [appId]
 ```
 
-Replace `[channelId]` with the name of the new channel, and `[appId]` with your app ID.
+Replace `[channelId]` with the name of the new channel and `[appId]` with your app ID.
 
-### Delete a Channel
 To delete a channel, use the command:
 
-```
+```bash
 npx @capgo/cli channel delete [channelId] [appId]
 ```
 
-Replace `[channelId]` with the name of the channel you want to delete, and `[appId]` with your app ID.
+Replace `[channelId]` with the name of the channel to delete and `[appId]` with your app ID.
 
-Please note that deleting a channel will ignore any bundles that are currently in use in any channel.
+### Step 7: End-to-End Encryption
 
-## End-to-End Encryption
+@capgo/cli supports end-to-end encryption for your code. You can generate an RSA key pair using the following command:
 
-The Capgo CLI supports end-to-end encryption, which ensures that your code is encrypted before being sent to the cloud and decrypted on the device. To set up encryption, follow these steps:
-
-### Create a Key Pair for Your App
-To generate an RSA key pair, use the following command:
-
-```
+```bash
 npx @capgo/cli key create
 ```
 
-Optionally, you can add the `--force` flag to overwrite any existing key.
+You can save the private key in your app config by running:
 
-This command
+```bash
+npx @capgo/cli key save
+```
+
+To encrypt a zip file with your key, use the command:
+
+```bash
+npx @capgo/cli encrypt [path/to/zip]
+```
+
+To decrypt a zip file with your key, use the command:
+
+```bash
+npx @capgo/cli encrypt [path/to/zip] [ivSessionKey]
+```
+
+Replace `[path/to/zip]` and `[ivSessionKey]` with the appropriate values.
+
+### Conclusion
+
+In this tutorial, we have learned how to use @capgo/cli for uploading and downloading files to and from the Capgo Cloud. @capgo/cli provides a convenient command-line interface for managing your app versions and channels. For more information, refer to the official [documentation](https://capgo.app/docs/).
