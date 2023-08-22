@@ -1,0 +1,51 @@
+---
+title: "Using the capacitor updater with self-hosted capgo"
+sidebar:
+    order: 2
+---
+
+## What this tutorial will cover?
+
+This tutorial will show how to use capacitor updater in a dev environment with self hosted capgo
+
+## Requirements
+
+ 1. [Cloned capgo](https://github.com/Cap-go/capgo)
+
+## Getting started
+
+To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'com.demo.app',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      statsUrl: "http://localhost:54321/functions/v1/stats",
+      channelUrl: "http://localhost:54321/functions/v1/channel_self",
+      updateUrl: "http://localhost:54321/functions/v1/updates"
+    },
+  },
+};
+```
+
+This will enable you to use local capgo in development. However, by default, this is not enough.
+
+In Android enabling [plaintext communication](https://developer.android.com/topic/security/risks/cleartext) is required as by default SSL is disabled in local.
+This can be achived by modifying [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) and adding `android:usesCleartextTraffic="true"` in the `application` tag
+A full example of this change can be seen [here](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+
+Since by default, Android does not allow `http` capgo has implemented a check for http [here](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/index.ts#L396)
+This code might not be always here, but for now a change to this line is required to get updates working  
+This line should look something like this:
+```ts
+    if (!signedURL || (signedURL.startsWith('http://') || signedURL.startsWith('https://'))) {
+```
+
+:::danger
+⚠️ Do not commit `supabase/functions/updates/index.ts` into the remote repo\
+This code is here [on purpose](https://github.com/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
+:::
