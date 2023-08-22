@@ -56,6 +56,15 @@ export default defineConfig({
           items: [
             { label: 'Getting Started', link: '/docs/self-hosted/getting-started' },
             { label: 'Auto Update', autogenerate: { directory: 'docs/self-hosted/Auto Update' } },
+            {
+              label: 'Local development',
+              items: [
+                { label: 'Getting started', link: '/docs/self-hosted/local-dev/getting-started/' },
+                { label: 'Setup S3', link: '/docs/self-hosted/local-dev/s3' },
+                { label: 'CLI', link: '/docs/self-hosted/local-dev/cli' },
+                { label: 'Capacitor updater', link: '/docs/self-hosted/local-dev/capacitor-updater' },
+              ],
+            },
             { label: 'Manual', link: '/docs/self-hosted/manual' },
           ],
         },
