@@ -49,3 +49,8 @@ This line should look something like this:
 ⚠️ Do not commit `supabase/functions/updates/index.ts` into the remote repo\
 This code is here [on purpose](https://github.com/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
 :::
+
+There also could be a problem that prevents the android app from connecting. If you do not see any requests being send to edge functions run
+```bash
+adb reverse tcp:54321 tcp:54321
+```
