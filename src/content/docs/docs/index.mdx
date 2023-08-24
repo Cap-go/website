@@ -11,8 +11,8 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 [Join the Capacitor-updater Discord Server!](https://discord.gg/VnYRvBfgA6)
 
 :::danger
-⚠️ Update OTA(Over the Air) only works on HTML, CSS, JS changes.\
-When you update native code (capacitor plugin), you must resubmit to the app store.
+⚠️ Important Note: \
+Update OTA (Over the Air) only works for HTML, CSS, and JS changes. If you update native code (capacitor plugin), you must resubmit it to the app store.
 :::
 
 ## Maintenance
@@ -20,45 +20,31 @@ When you update native code (capacitor plugin), you must resubmit to the app sto
 | Plugin version | Capacitor compatibility | Maintained        |
 | -------------- | ----------------------- | ----------------- |
 | v5.\*.\*       | v5.\*.\*                | ✅                 |
-| v4.\*.\*       | v4.\*.\*                | only critical bug |
+| v4.\*.\*       | v4.\*.\*                | Critical bug only |
 | v3.\*.\*       | v3.\*.\*                | ⚠️ Deprecated     |
 
-## Choose between all modes
+## Choose Your Mode
 
-In **cloud auto mode,** logic is handled by **Capgo** backend, updates are decided server side, this is more secure and allow fine grain update, partial deploy to one device or group and more.\
-In **cloud manual mode** the logic of when update is handled by your **JS**, the **Capgo** backend still handle the what to update.
+- **Cloud Auto Mode:**  <br/> Logic is handled by Capgo backend, providing enhanced security and fine-grained updates. You can deploy updates to specific devices or groups.
+- **Cloud Manual Mode:**  <br/> Update logic is handled by your JS, while Capgo backend handles the update content.
+- **Self-hosted Auto Mode:**  <br/> You need to recreate the update logic in your backend.
+- **Self-hosted Manual Mode:**  <br/> Update logic is handled by your JS, while the server handles the update content.
+- **Manual Mode without Backend:**  <br/> All logic must be handled by your JS.
 
-In **self-hosted** **auto mode**, you have to recreate the update logic in your backend.\
-In **self-hosted manual mode** the logic of when update is handled by your **JS,** the server still handle the what to update.\
-Or lastly you can go in **manual mode without backend**, all the logic have to be handled by your **JS.**
 
-\
-**Manual mode** can lead to very complex issue since you ship the code for update withing the update itself.
+⚠️ Please note that using **Manual Mode** can lead to complex issues since the code for the update is shipped within the update itself.
 
-### Cloud Auto
+### Cloud Auto (Recommended)
 
-<details>
-
-<summary>Good ✅</summary>
-
-* No logic to handle, all is done for you
-* Auto-revert is handle for you
-* Statistics of updates available
-* Possibility to revert user
-* Channels to share version to your team or users
-* Define advanced strategies like AB test or partial deploy
-* 5 min to configure and then you forgot about it
-
-</details>
-
-<details>
-
-<summary>Bad 🥲</summary>
-
-* Need to use SemVer
-* Only one way to update users
-
-</details>
+| Pros                                                                | Cons                                 |
+| ------------------------------------------------------------------- | ------------------------------------ |
+| ✅ No need to handle logic - we do it for you                       | 🟠 Requires SemVer usage              |
+| ✅ Auto-revert feature included                                     | 🟠 Only one way to update users      |
+| ✅ Get valuable update statistics                                   |                                      |
+| ✅ Ability to revert users if needed                                |                                      |
+| ✅ Share versions with your team or users via channels              |                                      |
+| ✅ Define advanced strategies like AB testing or partial deployment |                                      |
+| ✅ Quick and easy configuration - set it up and forget about it     |                                      |
 
 <LinkCard
 	title="Auto Update"
@@ -67,24 +53,12 @@ Or lastly you can go in **manual mode without backend**, all the logic have to b
 
 ### Manual
 
-<details>
-
-<summary>Good ✅</summary>
-
-* Full control of the update logic
-* Version server optional
-
-</details>
-
-<details>
-
-<summary>Bad 🥲</summary>
-
-* Long to handle all scenario yourself
-* Long to handle if you need on-premise server
-* You spend time on something not related to your core business
-
-</details>
+| Pros                             | Cons                                                             |
+| -------------------------------- | ---------------------------------------------------------------- |
+| ✅ Full control over update logic | 🟠 You handle if you need an on-premise server                   |
+| ✅ Version server optional        | 🟠 You spend time on something not related to your core business |
+|                                  | 🟠 You handle all scenarios yourself                             |
+|                                  | 🟠 You handle on-premise server requirements                     |
 
 <LinkCard
 	title="Manual Mode"
@@ -93,9 +67,7 @@ Or lastly you can go in **manual mode without backend**, all the logic have to b
 
 ## Roadmap
 
-The roadmap is handle in GitHub&#x20;
-
-[Roadmap](https://github.com/orgs/Cap-go/projects/1)
+The roadmap is managed on [GitHub](https://github.com/orgs/Cap-go/projects/1).
 
 ## Open source
 
@@ -104,7 +76,7 @@ The plugin is under the LGPL-3.0 License and the back-end is AGPL-3.0 License.
 > 💡 LGPL-3.0 mean if someone modify the code of the plugin, it’s mandatory to publish it, in open-source with same licensing. If you use the code without modification, that doesn’t concern you. See issue below for more details check the link 👇
 
 <LinkCard
-	title="Licencing?"
+	title="Licensing?"
 	href="https://github.com/Cap-go/capacitor-updater/issues/7"
 />
 
@@ -112,16 +84,8 @@ The plugin is under the LGPL-3.0 License and the back-end is AGPL-3.0 License.
 
 ## Last words
 
-If you use this tool for free, take time to support my work with [GitHub sponsor](https://github.com/sponsors/riderx).
+If you self host and find this tool useful, please consider supporting my work by becoming a [GitHub sponsor](https://github.com/sponsors/riderx).
 
-I made a bet to open source all the code I built here.
+I made a bet to open-source all the code I built here instead of keeping it for myself and charging a high price. By opening up instead of fighting and hiding, I believe we can make the world a better place.
 
-I could have kept it for myself and put a high ticket price.
-
-Instead, I want to make it an open and transparent business.
-
-I do think it would make our world a better place by opening instead of fighting and hiding.
-
-To make it possible, it is necessary for all of us to do our part, including you 🥹.
-
-If Capgo cloud offer can't suit you, back a bootstrapped Maker [HERE](https://github.com/sponsors/riderx) on your own terms.
+To make this possible, it's necessary for all of us to do our part, including you 🥹. If Capgo cloud doesn't meet your needs, you can back a bootstrapped Maker [here](https://github.com/sponsors/riderx) on your own terms.

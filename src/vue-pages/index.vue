@@ -40,9 +40,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center">
           <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">Made by Developers, for Developers</p>
-          <h1 class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">Live updates for Capacitor</h1>
+          <h1 class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">Instant updates for Capacitor</h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Unlock Continuous Delivery for your app. Ship live updates, bug fixes, content changes, features, and more without struggle with the App store review.
+            Ship updates, bug fixes, content changes, and new features instantly, without the hassle of lengthy App store reviews.
           </h2>
 
           <div class="relative inline-flex mt-10 group">
@@ -55,7 +55,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               role="button"
             >
-              Get it now
+              Try for Free
             </a>
           </div>
         </div>
@@ -71,9 +71,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z"
               />
             </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">Immediate Updates</h3>
+            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">Instant Updates</h3>
             <p class="mt-3 text-sm text-gray-400">
-              Release now, not one week later.
+              Reach users now, not one week later.
               <!-- Release in matter on seconds, not one week later. -->
               <!-- Reach 90% of first day deployment instead of a month. -->
             </p>
@@ -107,7 +107,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">How does it work?</h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Send your first update in less than 5 mins !</p>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
+            Ship your first update in less than 5 minutes!
+          </p>
         </div>
 
         <div class="relative mt-12 lg:mt-20">
@@ -128,8 +130,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 1 </span>
               </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Install the plugin</h3>
-              <p class="mt-4 text-base text-gray-600">It's one simple command, who will guide you step by step.</p>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Install our plugin</h3>
+              <p class="mt-4 text-base text-gray-600">
+                Just follow one simple command in Capgo's CLI to install the plugin.
+              </p>
             </div>
 
             <div>
@@ -137,7 +141,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 <span class="text-2xl font-bold text-gray-700"> 2 </span>
               </div>
               <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Send your first update</h3>
-              <p class="mt-4 text-base text-gray-600">Build your app as usual, and then send it to Capgo with one command.</p>
+              <p class="mt-4 text-base text-gray-600">
+                Build your app as usual, then send it to Capgo via our CLI 
+              </p>
             </div>
 
             <div>
@@ -145,14 +151,16 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 <span class="text-2xl font-bold text-gray-700"> 3 </span>
               </div>
               <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Get the update</h3>
-              <p class="mt-4 text-base text-gray-600">The download happen in background while you are in the app, next open you have the update.</p>
+              <p class="mt-4 text-base text-gray-600">
+                Update downloads in the background without interrupting user activity
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
     <section class="relative md:my-20 py-20 bg-gray-800">
-      <svg class="hidden absolute md:block md:-top-5 md:m-0 md:-left-1/3 lg:-left-16" width="404" height="392" fill="none" viewBox="0 0 404 392">
+      <svg class="hidden absolute md:block md:-top-5 md:m-0 md:-left-1/3 lg:-left-16 opacity-30" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>
           <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
             <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
@@ -160,7 +168,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </defs>
         <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
       </svg>
-      <svg class="hidden absolute md:block md:-bottom-5 md:m-0 md:-right-1/3 lg:-right-16" width="404" height="392" fill="none" viewBox="0 0 404 392">
+      <svg class="hidden absolute md:block md:-bottom-5 md:m-0 md:-right-1/3 lg:-right-16 opacity-30" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>
           <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
             <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
@@ -178,15 +186,15 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.stars }}</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.stars }}+</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">Stars in GitHub</p>
-            <p class="text-base mt-0.5 text-gray-400">Creating the open-source path</p>
+            <p class="text-base mt-0.5 text-gray-400">Paving the open-source path</p>
           </div>
 
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.updates }}</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.updates }}+</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">Updates delivered</p>
             <p class="text-base mt-0.5 text-gray-400">To users all around the globe</p>
@@ -194,7 +202,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">+{{ stats.apps }}</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.apps }}+</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">Apps</p>
             <p class="text-base mt-0.5 text-gray-400">Already using us in production</p>
@@ -204,12 +212,14 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
     </section>
     <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj md:!leading-[85px] text-center">
+              Manage Updates Effortlessly
+            </h3>
         <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
           <div>
             <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_2.webp" alt="Manage app illustration" title="Manage app illustration" />
           </div>
           <div class="md:pr-12">
-            <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj">Manage update</h3>
             <div class="">
               <div class="py-8 md:py-11">
                 <div class="space-y-12">
@@ -221,8 +231,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">Assign user</h3>
-                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">Send to your private or public tester the last update.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">User Assignment</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">
+                        Easily assign users and send the latest update to your private or public testers.
+                      </p>
                     </div>
                   </div>
                   <div class="flex items-start">
@@ -236,8 +248,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">Set update</h3>
-                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">When ready, deploy to all your users.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">Seamless Deployment Process</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">
+                        When your update is ready, deploy it seamlessly to all your users.
+                      </p>
                     </div>
                   </div>
                   <div class="flex items-start">
@@ -251,8 +265,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">Manage all in one place</h3>
-                      <p class="mt-3 text-lg font-normal text-gray-600 font-pj">All configutarion can be managed via the web interface.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">Simple Configuration Management</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">
+                        Manage all your configurations conveniently through our user-friendly web interface.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -332,7 +348,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2 class="text-base font-semibold text-pumpkinOrange-600 tracking-wide uppercase">CI/CD</h2>
-          <p class="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-7xl">Fully automatic deploy</p>
+          <p class="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-7xl">Fully Automatic Deployments</p>
           <p class="max-w-xl mt-5 mx-auto text-xl text-gray-700">Save time with automatic delivery pipeline, never worry about deploying your app again.</p>
         </div>
       </div>
@@ -340,9 +356,9 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
     <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Release</h2>
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Faster Releases</h2>
           <p class="text-lg lg:w-2/3">
-            By choosing {{ brand }}, you'll boost your chances of launching multiple releases per week by 81%, compared to those who don't utilize {{ brand }}.
+            With {{ brand }}, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.
           </p>
         </div>
         <img
@@ -376,8 +392,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Update</h2>
-          <p class="text-lg lg:w-2/3">Got a bug? No problem: just one command lets users see the fix right away, no app re-download needed!</p>
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Instant Updates</h2>
+          <p class="text-lg lg:w-2/3">
+            Instant Changes, Bug Fixes No need to wait for app re-downloads! With just one command, users can quickly see bug fixes in action. Say goodbye to frustrating delays.
+          </p>
         </div>
         <img
           width="310"
@@ -411,17 +429,19 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               <path class="text-gray-800 text-opacity-40" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z" />
             </svg>
           </div>
-          <div class="relative flex flex-col">
-            <div class="sm:text-center">
-              <h3 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">Push hot code updates</h3>
-              <p class="mt-6 mx-auto max-w-2xl text-lg text-gray-100">Like you push a commit</p>
+          <div class="relative flex flex-col md:flex-row">
+            <div class="sm:text-center md:w-1/2">
+              <h3 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">Push App updates like you push your commits</h3>
             </div>
-            <a
+            <div class="sm:text-center md:w-1/2">
+              <span class="text-white tracking-tight text-xl">Try risk free with a 14 days free trial — no credit card required</span>
+              <a
               href="/register/"
               class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
-            >
-              Get started &RightArrow;
+              >
+              Get Started &RightArrow;
             </a>
+          </div>
           </div>
         </div>
       </div>
