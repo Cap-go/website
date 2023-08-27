@@ -48,7 +48,7 @@ function toTb(value: number) {
                     <p class="text-lg font-bold text-gray-900 font-pj">Monthly active users</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ payg?.mau.toLocaleString() }}</span>
-                      users included, then ${{ payg?.mau_unit }}/u
+                      users included, then ${{ payg?.mau_unit }}/user
                     </p>
                   </div>
                 </div>
@@ -68,7 +68,7 @@ function toTb(value: number) {
                     <p class="text-lg font-bold text-gray-900 font-pj">Bandwidth</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(payg?.bandwidth) }}</span>
-                      TB included, then ${{ payg?.bandwidth_unit }}/GB additional
+                      TB included, then ${{ payg?.bandwidth_unit }} per GB 
                     </p>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ function toTb(value: number) {
                     <p class="text-lg font-bold text-gray-900 font-pj">Cloud Storage</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ payg?.storage.toLocaleString() }}</span>
-                      GB included, then ${{ payg?.storage_unit }}/GB additional
+                      GB included, then ${{ payg?.storage_unit }} per GB 
                     </p>
                   </div>
                 </div>

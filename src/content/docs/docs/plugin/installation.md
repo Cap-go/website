@@ -5,14 +5,15 @@ sidebar:
   order: 1
 ---
 
-Add this to your main file.
+To integrate Capgo, follow these simple steps:
 
-```typescript
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
+1. If you don't have an account yet, create one by visiting our registration page at [https://web.capgo.app/register](https://web.capgo.app/register).
 
-CapacitorUpdater.notifyAppReady();
-```
+![onboarding screenshot](/onboard.png "onboarding screenshot")
 
-Then you are all set.
 
-`notifyAppReady` is important for your app, it allows the plugin to validate your update run properly.
+2. Once you have your account set up, use the CLI command displayed on your screen for onboarding. This command will guide you through the setup process.
+
+3. In the CLI, you will be presented with a series of questions. Simply follow the prompts and provide the necessary answers to complete the automated setup.
+
+By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is here to help. Happy onboarding!

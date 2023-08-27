@@ -16,13 +16,13 @@ import { openMessenger } from '../../services/chatwoot'
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">How MAU are counted?</p>
+            <p class="text-xl font-semibold text-white">How are Monthly Active Users (MAU) counted?</p>
             <p class="mt-4 text-base text-gray-400">
-              MAU are counted by tracking unique users who opened your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.
+              We count MAU (Monthly Active Users) by tracking unique users who open your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.
             </p>
             <p class="mt-4 text-base text-gray-400">
-              Capgo don't count emulator and dev build in your usage. Learn more
-              <a class="border-b-2 border-blue-600 border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/"> here </a>
+              At Capgo, we don't count emulators and dev builds in your usage. Learn more about this
+              <a class="border-b-2 border-blue-600 border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/"> here.</a>
             </p>
           </div>
         </div>
@@ -32,9 +32,9 @@ import { openMessenger } from '../../services/chatwoot'
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">What storage stand for?</p>
+            <p class="text-xl font-semibold text-white">What does storage mean?</p>
             <p class="mt-4 text-base text-gray-400">
-              Capgo store your updates in a edge locations to ensure that users receive the latest version of the app or service quickly and efficiently.
+              Storage, specifically edge storage, refers to the total capacity Capgo provides at edge locations to store all your update bundles. This ensures that users receive the latest version of your app or service quickly and efficiently.
             </p>
           </div>
         </div>
@@ -46,8 +46,7 @@ import { openMessenger } from '../../services/chatwoot'
           <div class="ml-4">
             <p class="text-xl font-semibold text-white">How is Bandwidth Counted ?</p>
             <p class="mt-4 text-base text-gray-400">
-              In Capgo, bandwidth is counted in a live update context by measuring the amount of data transmitted between the storage location and user devices through edge servers
-              for delivering updates in real-time.
+              At Capgo, we measure bandwidth by tracking the amount of data transmitted between the storage location and user devices through edge servers. This helps us deliver real-time updates.
             </p>
           </div>
         </div>
@@ -57,10 +56,9 @@ import { openMessenger } from '../../services/chatwoot'
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">I don't know my Number of active users?</p>
+            <p class="text-xl font-semibold text-white">Not sure about your number of active users?</p>
             <p class="mt-4 text-base text-gray-400">
-              Take advantage of Capgo's free trial if you're unsure of your user count and concerned about hitting your plan limit. It's a great way to test the service and
-              determine the right plan for your needs to avoid unexpected charges and ensure service functionality.
+              If you're unsure about the number of active users you have and worried about reaching your plan limit, take advantage of Capgo's free trial. It's a great way to test our service, find the right plan, avoid unexpected charges, and ensure everything works smoothly.
             </p>
           </div>
         </div>
@@ -68,7 +66,7 @@ import { openMessenger } from '../../services/chatwoot'
       <div class="flex items-center justify-center mt-12 md:mt-20">
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
-            Didn’t find the answer you are looking for?
+            Didn’t find the answer you were looking for?
             <button @click="openMessenger()" class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline">
               Contact our support
             </button>

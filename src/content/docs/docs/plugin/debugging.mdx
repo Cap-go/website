@@ -8,38 +8,42 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Understanding cloud logs:
 
-### Send from the backend
+### Sent from the backend
 
-* **InvalidIp** => the user is located in Google data center and the update is less than 4 hours old, this has been made to prevent Google bots device to count as device in your account
-* **needPlanUpgrade** (previously **needUpgrade**) => Mean you have reached the limit of your plan, and device will not receive update until you upgrade or next month.
-* **noNew** => The device has the latest version available
-* **disablePlatformIos** => The device is on iOS platform but that disabled in channel settings
-* **disablePlatformAndroid** => The device is on android platform but that disabled in channel settings
-* **disableAutoUpdateToMajor** => The device has a version (**1**.2.3) and the channel has major update (**2**.0.0) to send but that disable in channel settings
-* **disableAutoUpdateUnderNative** => The device has a version (1.2.**3**) and the channel has updated (1.2.**2**) under the device version to send but that disable in channel settings
-* **disableDevBuild** => The device has a dev build but that disable in channel settings
-* **disableEmulator** => The device is an emulator but that disable in channel settings.
+| code                          | Description                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | The user is located in a Google data center and the update is less than 4 hours old. This is done to prevent Google bots' devices from counting as devices in your account. |
+| **needPlanUpgrade** (previously **needUpgrade**) | Indicates that you have reached the limit of your plan, and the device will not receive updates until you upgrade or until the next month.                                  |
+| **noNew**                                        | The device has the latest available version.                                                                                                                                |
+| **disablePlatformIos**                           | The device is on the iOS platform, but that is disabled in the channel settings.                                                                                            |
+| **disablePlatformAndroid**                       | The device is on the Android platform, but that is disabled in the channel settings.                                                                                        |
+| **disableAutoUpdateToMajor**                     | The device has version (`1.2.3`), and the channel has a major update (`2.0.0`) to send, but that is disabled in the channel settings.                                       |
+| **disableAutoUpdateUnderNative**                 | The device has version (`1.2.3`), and the channel has an update (`1.2.2`) under the device version to send, but that is disabled in the channel settings.                   |
+| **disableDevBuild**                              | The device has a dev build, but that is disabled in the channel settings.                                                                                                   |
+| **disableEmulator**                              | The device is an emulator, but that is disabled in the channel settings.                                                                                                    |
 
-### Send from the device
+### Sent from the device
 
-* **get** => Info for download new version has been sent to device
-* **delete** => one bundle has been deleted in the device
-* **set** => bundle has been set on the device
-* **set\_fail** => bundle failed to set
-* **reset** => device reset ton **builtin** bundle
-* **download\_XX** => new bundle has been download from xx % (every 10%)
-* **download\_complete** => new bundle finish download
-* **download\_fail** => new bundle fail download
-* **update\_fail** => new bundle has been installed but failed to call `notifyAppReady`
-* **checksum\_fail** => new bundle fail to validate checksum
+| code  | Description                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | Info for downloading the new version has been sent to the device.                 |
+| **delete**            | One bundle has been deleted on the device.                                        |
+| **set**               | A bundle has been set on the device.                                              |
+| **set_fail**          | The bundle failed to set.                                                         |
+| **reset**             | The device reset to the `builtin` bundle.                                         |
+| **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
+| **download_complete** | The new bundle has finished downloading.                                          |
+| **download_fail**     | The new bundle failed to download.                                                |
+| **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
+| **checksum_fail**     | The new bundle failed to validate the checksum.                                   |
 
 ### Bundle status
 
-* SUCCESS: install bundle done
-* ERROR: install or download failed
-* PENDING: Download done, pending release
-* DELETED: Bundle deleted still present for stats
-* DOWNLOADING: Currently downloading a bundle
+* `SUCCESS`: install bundle done
+* `ERROR`: install or download failed
+* `PENDING`: Download done, pending release
+* `DELETED`: Bundle deleted still present for stats
+* `DOWNLOADING`: Currently downloading a bundle
 
 ## Understanding device logs:
 
