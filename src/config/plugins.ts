@@ -49,7 +49,7 @@ export const actions = [
   },
   // {
   //   name: '@capgo/standard-version',
-  //   author: 'Martin Donadieu',
+  //   author: 'github.com/riderx',
   //   description: 'replacement for `npm version` with automatic CHANGELOG generation',
   //   href: 'https://github.com/Cap-go/standard-version',
   //   title: 'Standard Version',
@@ -57,7 +57,7 @@ export const actions = [
   // },
   {
     name: '@capgo/native-market',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'A native market plugin for linking to google play or app store.',
     href: 'https://github.com/riderx/native-market',
     title: 'Native Market',
@@ -73,7 +73,7 @@ export const actions = [
   },
   {
     name: '@capgo/camera-preview',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Camera preview',
     href: 'https://github.com/Cap-go/camera-preview',
     title: 'Camera Preview',
@@ -105,7 +105,7 @@ export const actions = [
   // },
   {
     name: '@capgo/capacitor-updater',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Live update for capacitor apps',
     href: 'https://github.com/Cap-go/capacitor-updater',
     title: 'Updater',
@@ -113,7 +113,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-purchases',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'In-app Subscriptions Made Easy with RevenueCat sdk',
     href: 'https://github.com/Cap-go/capacitor-purchases',
     title: 'Purchases',
@@ -121,7 +121,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-flash',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Switch the Flashlight / Torch of your device.',
     href: 'https://github.com/riderx/capacitor-flash',
     title: 'Flash',
@@ -129,7 +129,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-screen-recorder',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     // prettier-ignore
     description: 'Record device\'s screen',
     href: 'https://github.com/riderx/capacitor-screen-recorder',
@@ -138,7 +138,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-crisp',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Crisp native SDK for capacitor',
     href: 'https://github.com/Cap-go/capacitor-crisp',
     title: 'Crisp',
@@ -146,7 +146,7 @@ export const actions = [
   },
   {
     name: '@capgo/nativegeocoder',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Capacitor plugin for native forward and reverse geocoding',
     href: 'https://github.com/Cap-go/capacitor-nativegeocoder',
     title: 'Native Geocoder',
@@ -154,7 +154,7 @@ export const actions = [
   },
   {
     name: '@capgo/inappbrowser',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Capacitor plugin in app browser',
     href: 'https://github.com/Cap-go/capacitor-inappbrowser',
     title: 'In App Browser',
@@ -162,7 +162,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-mute',
-    author: 'Martin donadieu',
+    author: 'github.com/riderx',
     description: 'Detect if the mute switch is enabled/disabled on a device',
     href: 'https://github.com/riderx/capacitor-mute',
     title: 'Mute',
@@ -178,7 +178,7 @@ export const actions = [
   // },
   {
     name: '@capgo/native-audio',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'A native plugin for native audio engine',
     href: 'https://github.com/Cap-go/native-audio',
     title: 'Native Audio',
@@ -186,7 +186,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-shake',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Detect shake gesture in device',
     href: 'https://github.com/Cap-go/capacitor-shake',
     title: 'Shake',
@@ -194,7 +194,7 @@ export const actions = [
   },
   {
     name: '@capgo/capacitor-navigation-bar',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Set navigation bar color for android lolipop and higher',
     href: 'https://github.com/Cap-go/capacitor-navigation-bar',
     title: 'Navigation Bar',
@@ -202,7 +202,7 @@ export const actions = [
   },
   {
     name: '@capgo/ivs-player',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'Ivs player for capacitor app',
     href: 'https://github.com/Cap-go/ivs-player',
     title: 'IVS Player',
@@ -210,7 +210,7 @@ export const actions = [
   },
   {
     name: '@capgo/home-indicator',
-    author: 'Martin Donadieu',
+    author: 'github.com/riderx',
     description: 'hide and show home button indicator in Capacitor app',
     href: 'https://github.com/Cap-go/home-indicator',
     title: 'Indicator',
@@ -226,7 +226,7 @@ export const actions = [
   // },
   {
     name: '@capgo/native-purchases',
-    author: 'Martin donadieu',
+    author: 'github.com/riderx',
     description: 'In-app Subscriptions Made Easy',
     href: 'https://github.com/Cap-go/native-purchases',
     title: 'Native Purchases',
@@ -234,7 +234,7 @@ export const actions = [
   },
   // {
   //   name: '@capgo/capacitor-fingerprint',
-  //   author: 'Martin Donadieu',
+  //   author: 'github.com/riderx',
   //   description: 'Capacitor client for Fingerprint PRO. 100% accurate device identification for fraud detection.',
   //   href: 'https://github.com/Cap-go/capacitor-fingerprint',
   //   title: 'Fingerprint',
@@ -242,7 +242,7 @@ export const actions = [
   // },
   // {
   //   name: '@capgo/capacitor-callkit-voip',
-  //   author: 'Martin Donadieu',
+  //   author: 'github.com/riderx',
   //   description: 'Provide PushKit functionality to ionic capacitor',
   //   href: 'https://github.com/Cap-go/capacitor-callkit-voip',
   //   title: 'CallKit VOIP',
@@ -250,7 +250,7 @@ export const actions = [
   // },
   // {
   //   name: '@capgo/walletconnect',
-  //   author: 'Martin Donadieu',
+  //   author: 'github.com/riderx',
   //   description: 'WIP: Capacitor plugin for WalletConnect',
   //   href: 'N/A',
   //   title: 'WalletConnect',
