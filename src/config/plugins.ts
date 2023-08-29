@@ -262,7 +262,7 @@ export const actions = [
     author: 'Shayan',
     description: 'LogSnag Client',
     href: 'https://github.com/LogSnag/logsnag.js',
-    title: 'LogSang',
+    title: 'LogSnag',
     icon: StopIcon,
   },
   {
