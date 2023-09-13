@@ -6,6 +6,11 @@ author: Ayush Mishra
 author_url: https://twitter.com/ayusham001
 created_at: 2023-09-13
 updated_at: 2023-09-13
+head_image: ""
+head_image_alt: Quasar
+tag: TUTORIAL
+published: true
+next_blog: ""
 ---
 
 # Simplifying Quasar Configuration with CapGo
