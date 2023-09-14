@@ -1,12 +1,31 @@
 <script setup lang="ts">
 import Blog from '../../components/Blog.vue'
 import { useRuntimeConfig } from '../../config/app'
+import { ref, computed } from 'vue'
 
 const config = useRuntimeConfig()
+const selectedTag = ref('all') 
 
 const props = defineProps<{
   Content?: any
 }>()
+
+const filteredPosts = computed(() => {
+  if (selectedTag.value === 'all') {
+    return props.Content
+  } else {
+    return props.Content.filter((article) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
+  }
+})
+
+const uniqueTags = computed(() => {
+  const tags = new Set();
+  for (const article of props.Content) {
+    tags.add(article.frontmatter.tag.toUpperCase());
+  }
+  const uniqueTagsArray = Array.from(tags).map(tag => tag[0].toUpperCase() + tag.slice(1)).sort();
+  return uniqueTagsArray;
+});
 </script>
 
 <template>
@@ -18,11 +37,33 @@ const props = defineProps<{
           {{ config.public.blog_description }}
         </h2>
       </div>
+      <div class="mx-auto max-w-3xl mt-8 text-center">
+        <div class="mb-4">
+          <div class="flex justify-center flex-wrap mt-5 gap-2">
+            <button
+              :class="{ ' bg-gray-500': selectedTag === 'all', ' bg-transparent border border-gray-300': selectedTag !== 'all' }"
+              @click="selectedTag = 'all'"
+              class="px-3 py-2 rounded-md hover:bg-gray-500 hover:border-transparent text-base font-medium hover:text-white transition-colors duration-300 ease-in-out"
+            >
+              ALL
+            </button>
+            <button
+              v-for="(tag, index) in uniqueTags"
+              :key="index"
+              :class="{ 'bg-gray-500': selectedTag === tag, 'bg-transparent border border-gray-300': selectedTag !== tag }"
+              @click="selectedTag = tag"
+              class="px-3 py-2 rounded-md hover:bg-gray-500 hover:border-transparent text-base font-medium hover:text-white transition-colors duration-300 ease-in-out"
+            >
+              {{ tag }}
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
         <Blog
-          :tag="article.frontmatter.tag"
+          v-for="article in filteredPosts"
           :key="article.frontmatter.slug"
-          v-for="article in props.Content"
+          :tag="article.frontmatter.tag"
           :link="article.frontmatter.slug"
           :title="article.frontmatter.title"
           :date="article.frontmatter.created_at"
@@ -33,3 +74,4 @@ const props = defineProps<{
     </div>
   </section>
 </template>
+
