@@ -1,4 +1,3 @@
-
 ---
 title: "Settings"
 description: "All available setting for Capacitor Updater"
