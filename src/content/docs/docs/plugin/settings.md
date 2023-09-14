@@ -1,4 +1,11 @@
 
+---
+title: "Settings"
+description: "All available setting for Capacitor Updater"
+sidebar:
+  order: 8
+---
+
 To have more control over updater system, you can configure it with these settings:
 
 ## `appReadyTimeout` :

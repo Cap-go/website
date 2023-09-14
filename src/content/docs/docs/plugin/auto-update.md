@@ -85,9 +85,9 @@ To upload version at each commit setup CI/CD with this guide
 When `disableAutoUpdateBreaking` is true, you can listen to event to know when the app refuses to do a major braking update.
 
 ```jsx
-import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.addListener('majorAvailable', (info: any) => {
-  console.log('majorAvailable was fired', info.version);
-});
+  console.log('majorAvailable was fired', info.version)
+})
 ```
