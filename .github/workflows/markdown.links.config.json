@@ -5,6 +5,15 @@
     },
     {
       "pattern": "^https://x.com/martindonadieu"
+    },
+    {
+      "pattern": "^https://www.indeed.com/*"
+    },
+    {
+      "pattern": "^https://litoarias.medium.com/*"
+    },
+    {
+      "pattern": "^https://medium.com/*"
     }
   ],
   "httpHeaders": [
