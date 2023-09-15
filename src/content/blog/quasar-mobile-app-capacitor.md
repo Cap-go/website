@@ -133,60 +133,81 @@ Congratulations! You have successfully deployed your Quasar web app to a mobile 
 
 But hold on, there's also a faster way to do this during development...
 
-## Capacitor Live Reload
+## Capgo Live Update
 
-By now, you're probably used to having hot reload with all modern frameworks, and the good news is that you can have the same functionality **on a mobile device** with minimal effort!
+Capgo Live Update is a service that allows developers to deploy updates to their mobile apps without going through the traditional App Store submission process. This can be a convenient way to quickly fix bugs or make small updates to an app without waiting for the App Store review process.
 
-Enable access to your locally hosted application with live reload **on your network** by having the Capacitor app load the content from the specific URL.
+Integrating Capgo into your Quasar app is a straightforward process that empowers you to harness the power of real-time live updates. This step-by-step guide will walk you through the integration and implementation of Capgo Live Update, enabling you to deliver seamless updates.
 
-The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
+**Sign Up and Access the Capgo Dashboard**:
 
-```shell
-ipconfig getifaddr en0
-```
+It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register).
 
-On Windows, run :
+**Install the Capgo SDK**:
 
-```shell
-ipconfig
-```
+From a command line, directly into the root of your Capacitor app, run:
 
-Then look for the IPv4 address.
+`npm i @capgo/capacitor-updater && npx cap sync` To install the plugin into your Capacitor app.
 
-We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
+And then add to your app this code as a replacement of CodePush one:
 
-```javascript
-import { CapacitorConfig } from '@capacitor/cli';
+    import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'my-app',
-  webDir: 'dist',
-  bundledWebRuntime: false,
-  server: {
-    url: 'http://192.168.x.xx:3000',
-    cleartext: true
-  }
-};
+    CapacitorUpdater.notifyAppReady()
 
-export default config;
-```
+This will tell the native plugin the installation as succeeded. 
 
-Be sure to use **the correct IP and port**, I have used the default Quasar port in this example.
+**Login to Capgo CLOUD**:
 
-Now, we can apply these changes by copying them over to our native project:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
 
-```shell
-npx cap copy
-```
+    `npx @capgo/cli@latest login YOU_KEY`
 
-The `copy` command is similar to `sync`, but it will only **copy over the changes made to the web folder** and configuration, without updating the native project.
+**Add your first App**:
 
-You can now deploy your app one more time through Android Studio or Xcode. After that, if you change something in your Quasar app, **the app will automatically reload** and show the changes!
+Let’s get started by first creating an app in Capgo Cloud with the CLI.
 
-**Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
+    `npx @capgo/cli@latest app add`
 
-Note that you should use the correct IP and port in your configuration. The code block above shows the default Quasar port for demonstration purposes.
+This command will use all variables defined in the Capacitor config file to create the app.
+
+**Upload your first version**:
+
+Run the command to build your code and send it to Capgo with: 
+
+    `npx @capgo/cli@latest bundle upload`
+
+By default, the version name will be the one in your package.json file.
+
+Check in [Capgo](https://web.capgo.app/login) if the build is present.
+
+You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
+
+**Make channel default**:
+
+After you have sent your app to Capgo, you need to make your channel default to let apps receive updates from Capgo.
+
+`npx @capgo/cli@latest channel set production -s default`
+
+**Configure app to validate updates**:
+
+Add this config to your main JavaScript file.
+
+     import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+    CapacitorUpdater.notifyAppReady()
+
+Then do a `npm run build && npx cap copy` to update your app.
+
+**Receive a Live Update**:
+
+For your application to receive a live update from Deploy, you’ll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
+
+      npx cap run [ios | android]
+
+Open the app, put it in the background and open it again, you should see in the logs the app did the update.
+
+Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://capgo.app/docs/plugin/auto-update/).
 
 ## Using Capacitor Plugins
 
