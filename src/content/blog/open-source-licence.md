@@ -4,8 +4,8 @@ title: Understanding Open-Source Software Licenses
 description: 
 author: Anik Dhabal Babu
 author_url: https://x.com/anikdhabal
-created_at: 2023-09-16
-updated_at: 2023-09-16
+created_at: 2023-09-18
+updated_at: 2023-09-18
 head_image: "/open_source_licence.webp"
 head_image_alt: Open Source Licence
 tag: Open Source
@@ -130,9 +130,9 @@ Choosing the correct license for your open source project is an important decisi
 
 How do I accomplish all that? By changing my license. 
 
-Capgo has now changed the license from the MIT to a newer licensing scheme called GNU Affero General Public License V3 (AGPLv3) or any later version. Capgo version can be [found here](https://github.com/cap-go/capgo/blob/main/LICENSE.md).
+Capgo has now changed the license from the MIT to a newer licensing scheme called GNU Affero General Public License V3 (AGPLv3) or any later version. Capgo version can be [found here](https://github.com/Cap-go/capgo/blob/main/LICENSE).
 
-Capacitor-updater (the plugin) has now changed the license from the MIT to a newer licensing scheme called GNU Lesser General Public License V3 (LGPLv3) or any later version. Capacitor-updater version can be [found here](https://github.com/cap-go/capacitor-updater/blob/main/LICENSE.md).
+Capacitor-updater (the plugin) has now changed the license from the LGPLv3 to a newer licensing scheme called Mozilla Public License Version 2.0 (MPLv2) or any later version. Capacitor-updater version can be [found here](https://github.com/Cap-go/capacitor-updater/blob/main/LICENCE).
 
 This change makes no difference to any of you who subscribe to Capgo Cloud or who self-host Capgo, but it may upset a few corporations who tried to use my software to directly compete with me without contributing back.
 

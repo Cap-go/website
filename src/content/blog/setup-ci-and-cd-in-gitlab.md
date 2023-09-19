@@ -4,8 +4,8 @@ title: Setup CI/CD in Gitlab
 description: Learn how to supercharge your software development workflow by setting up Continuous Integration and Continuous Deployment (CI/CD) with GitLab.
 author: Anik Dhabal Babu
 author_url: https://x.com/anikdhabal
-created_at: 2023-09-16
-updated_at: 2023-09-16
+created_at: 2023-09-14
+updated_at: 2023-09-14
 head_image: "/CI_CD_in_Gitlab.webp"
 head_image_alt: CI/CD in GitLab
 tag: CI/CD
