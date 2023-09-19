@@ -1,7 +1,7 @@
 ---
-slug: "building-a-native-mobile-app-with-quasar-and-capacitor"
-title: Creating Mobile Apps with Quasar and Capacitor.
-description: How to create a mobile app with Quasar, Capacitor and implement native UI with Konsta UI.
+slug: "live-update-with-quasar-and-capacitor"
+title: Creating Mobile Apps with live updates, Quasar and Capacitor.
+description: How to create a mobile app with Quasar, Capacitor and implement live updates.
 author: Anik Dhabal Babu
 author_url: https://twitter.com/AnikDhabal
 created_at: 2023-09-14
@@ -13,11 +13,11 @@ published: true
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---
-In this tutorial, we will begin with creating a new web app using [Quasar](https://quasar.dev/). Later on, we'll learn how to turn it into a mobile app using Capacitor. If you want to make your app look better on mobile, you can also use a tool called [Konsta UI](https://konstaui.com/) to help with that. But remember, this part is optional.
+In this tutorial, we will begin with creating a new web app using [Quasar](https://quasar.dev/). Later on, we'll learn how to turn it into a mobile app using Capacitor. If you want to make your app look better on mobile.
 
 With Capacitor, you can change your Quasar web app into a mobile app without needing to do lots of hard things or learn a completely new way of making apps like you would with something called React Native. 
 
-This tutorial will guide you through the process, starting with a new Quasar app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
+This tutorial will guide you through the process, starting with a new Quasar app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you will use [Capgo](https://capgo.app/) to send live update to your app in seconds.
 
 ## About Capacitor
 
@@ -43,7 +43,7 @@ In order to create a native mobile app, we require an **export** of our project.
 {
   "scripts": {
     // ...
-    "build": "quasar build",
+    "build": "quasar build"
   }
 }
 ```
@@ -155,9 +155,11 @@ From a command line, directly into the root of your Capacitor app, run:
 
 And then add to your app this code as a replacement of CodePush one:
 
-    import { CapacitorUpdater } from '@capgo/capacitor-updater'
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-    CapacitorUpdater.notifyAppReady()
+CapacitorUpdater.notifyAppReady()
+```
 
 This will tell the native plugin the installation as succeeded. 
 
@@ -171,15 +173,18 @@ First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present i
 
 Let’s get started by first creating an app in Capgo Cloud with the CLI.
 
-    `npx @capgo/cli@latest app add`
-
+```shell
+    npx @capgo/cli@latest app add
+```
 This command will use all variables defined in the Capacitor config file to create the app.
 
 **Upload your first version**:
 
 Run the command to build your code and send it to Capgo with: 
 
-    `npx @capgo/cli@latest bundle upload`
+```shell
+npx @capgo/cli@latest bundle upload`
+```
 
 By default, the version name will be the one in your package.json file.
 
@@ -197,9 +202,11 @@ After you have sent your app to Capgo, you need to make your channel default to 
 
 Add this config to your main JavaScript file.
 
-     import { CapacitorUpdater } from '@capgo/capacitor-updater'
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-    CapacitorUpdater.notifyAppReady()
+CapacitorUpdater.notifyAppReady()
+```
 
 Then do a `npm run build && npx cap copy` to update your app.
 
@@ -253,7 +260,7 @@ npx cap sync
 
 After hitting the button, you can witness the beautiful native share dialog in action!
 
-## Adding Konsta UI
+## Optionally Adding Konsta UI
 
 To use Konsta UI in your Quasar app, you need to have [tailwind already install](https://tailwindcss.com/docs/installation) and to install the package:
 
