@@ -85,47 +85,9 @@ To upload version at each commit setup CI/CD with this guide
 When `disableAutoUpdateBreaking` is true, you can listen to event to know when the app refuses to do a major braking update.
 
 ```jsx
-import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.addListener('majorAvailable', (info: any) => {
-  console.log('majorAvailable was fired', info.version);
-});
-```
-
-### Advanced settings
-
-To have more control over auto-update system, I added 2 setting to allow you:
-
-* `resetWhenUpdate` : When store update happens, disable force reset to the native version
-
-You have also other config available only on the [web app](https://web.capgo.app/login)
-
-To configure the plugin, use these settings:
-
-```tsx
-// capacitor.config.json
-{
-	"appId": "**.***.**",
-	"appName": "Name",
-	"plugins": {
-		"CapacitorUpdater": {
-			"autoUpdate": true,
-			"resetWhenUpdate": false
-		}
-	}
-}
-```
-
-* `version` : Send this version to the server to identify your version at the first download. This setting disables the plugin to read the version in your native code.
-```tsx
-// capacitor.config.json
-{
-    "appId": "**.***.**",
-    "appName": "Name",
-    "plugins": {
-        "CapacitorUpdater": {
-            "version": "1.2.3"
-        }
-    }
-}
+  console.log('majorAvailable was fired', info.version)
+})
 ```

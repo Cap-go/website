@@ -34,7 +34,7 @@ The following outlines the steps to establish the key pairing and the subsequent
 
 To generate a public/private key pair, enterprises can utilize the following Capgo Cloud CLI command:
 
-```
+```shell
 npx @capgo/cli@latest key create
 ```
 
@@ -47,15 +47,29 @@ This key pair is used to sign the update and verify the update on the app side.
 
 To start implementing Self-hosted Live Updates, an enterprise must first perform a web build of their bug fixes, content updates, or any other web-based code changes they wish to make. Next, they must sign the build artifact using the private key obtained during the one-time setup process, and finally upload the bundle to their preferred storage location.
 
+First build your code:
+```shell
+npm run build
 ```
+
+Then Zip your build:
+```shell
+npx @capgo/cli/latest bundle zip
+```
+
+Then encrypt your zip:
+
+```shell
 npx @capgo/cli@latest bundle encrypt abc123.zip”
 ```
+
 This command will print you an ivSessionKey, you need to save it for the next step.
 
 Now upload your encrypted zip to your enterprise storage and get the URL of the zip file.
 
 Capgo must then be informed of a new Live Update that is ready for consumption. This is done via another CLI command:
-```
+
+```shell
 npx @capgo/cli@latest bundle upload --external=https://abc.com/app/updates/abc123.zip --iv-session-key=YourKey
 ```
 
@@ -63,7 +77,7 @@ Once the command is run, Capgo is aware of a new update ready to be distributed 
 
 Capgo responds back to the plugin with “Yes, an update is available” and the Live Updates plugin downloads the new live update using the URL location provided from the \`register\` CLI command:
 
-```
+```shell
 https://abc.com/app/updates/abc123.zip
 ```
 
