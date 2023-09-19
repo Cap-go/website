@@ -59,7 +59,7 @@ const menuMobile = ref(false)
           <a
             href="/register"
             target="_blank"
-            title="Join discord"
+            title="Register"
             class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
             role="button"
           >
