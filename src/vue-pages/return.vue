@@ -96,8 +96,8 @@ const domain = config.public.baseUrl
     <h2>Returning Goods</h2>
     <p>You are responsible for the cost and risk of returning the Goods to Us. You should send the Goods at the following address:</p>
     <p>
-      6 sepapaja<br />
-      Tallinn, 15510<br />
+      6 sepapaja<br>
+      Tallinn, 15510<br>
       Estonia
     </p>
     <p>

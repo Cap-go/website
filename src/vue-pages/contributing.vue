@@ -22,15 +22,15 @@
   <div class="prose prose-sm m-auto text-left px-3">
     <h1>We welcome and appreciate all contributions to Capgo.</h1>
     <p>This page serves as a helper to get you started on contributing.</p>
-    <h2 id="projects">Projects</h2>
+    <h2 id="projects">
+      Projects
+    </h2>
     <p>
       There are numerous repositories in the <a href="https://github.com/Cap-go"> <code>Capgo</code></a> organization that are part of the Capgo .
     </p>
     <p>Repositories have different scopes, use different programming languages and have varying level when it comes to contributions.</p>
     <p>
-      To help you decide which repository might be the best to start contributing (and/or falls into your interest), here&#39;s a short comparison (<strong
-        >languages in bold comprise most of the codebase</strong
-      >):
+      To help you decide which repository might be the best to start contributing (and/or falls into your interest), here&#39;s a short comparison (<strong>languages in bold comprise most of the codebase</strong>):
     </p>
     <h3 id="-capacitor-updater-https-github-com-cap-go-capacitor-updater-">
       <a href="https://github.com/Cap-go/capacitor-updater"> <code>capacitor-updater</code></a>
@@ -86,7 +86,9 @@
         </p>
       </li>
     </ul>
-    <h2 id="submitting-a-pull-request">Submitting a pull request</h2>
+    <h2 id="submitting-a-pull-request">
+      Submitting a pull request
+    </h2>
     <p>Before submitting a PR to any of the repos, please make sure the following is done:</p>
     <ol>
       <li>Give the PR a descriptive title.</li>
@@ -122,9 +124,13 @@
         <code>eslint</code> (for JavaScript and Java)
       </li>
     </ol>
-    <h2 id="documenting-apis">Documenting APIs</h2>
+    <h2 id="documenting-apis">
+      Documenting APIs
+    </h2>
     <p>It is important to document all public APIs and we want to do that inline with the code. This helps ensure that code and documentation are tightly coupled together.</p>
-    <h3 id="javascript-and-typescript">JavaScript and TypeScript</h3>
+    <h3 id="javascript-and-typescript">
+      JavaScript and TypeScript
+    </h3>
     <p>
       All publicly exposed APIs and types, the <code>capacitor-updater</code> module should have JSDoc documentation. This documentation is parsed and available to the TypeScript
       compiler, and therefore easy to provide further downstream. JSDoc blocks come just prior to the statement they apply to and are denoted by a leading <code>/**</code> before

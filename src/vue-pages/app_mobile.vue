@@ -11,9 +11,15 @@ const brand = config.public.brand
     <div class="md:my-20 flex justify-between">
       <div class="w-full md:w-1/2">
         <div class="pr-4">
-          <h1 class="font-bold text-[2.504rem]">{{ brand }} App</h1>
-          <p class="text-lg text-gray-300 mt-8">Run your projects on your own device faster than ever, and share those projects across your whole team.</p>
-          <p class="text-sm text-gray-300 mt-10 mb-20">Test version in the sandbox app, manage version and channel</p>
+          <h1 class="font-bold text-[2.504rem]">
+            {{ brand }} App
+          </h1>
+          <p class="text-lg text-gray-300 mt-8">
+            Run your projects on your own device faster than ever, and share those projects across your whole team.
+          </p>
+          <p class="text-sm text-gray-300 mt-10 mb-20">
+            Test version in the sandbox app, manage version and channel
+          </p>
         </div>
         <div class="flex items-center space-x-10">
           <span class="flex items-center bg-[#EAEAEA] px-4 py-1 rounded-[1.125rem]">
@@ -48,14 +54,16 @@ const brand = config.public.brand
           </span>
         </div>
         <div class="mt-8 mb-16">
-          <p class="text-sm text-[#bfbfbf]">Start building rich experiences with your device and your computer.</p>
+          <p class="text-sm text-[#bfbfbf]">
+            Start building rich experiences with your device and your computer.
+          </p>
         </div>
         <div class="flex space-x-6">
           <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
-            <img src="/play-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link" />
+            <img src="/play-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link">
           </a>
           <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
-            <img src="/app-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link" />
+            <img src="/app-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link">
           </a>
         </div>
       </div>

@@ -14,7 +14,7 @@ const menuMobile = ref(false)
       <div class="relative flex items-center justify-between">
         <div class="flex-shrink-0">
           <a href="/" title="Capgo home" aria-label="Capgo home" class="flex text-4xl font-medium font-prompt items-center pr-3">
-            <img class="w-auto h-18 pr-1" loading="eager" height="72" width="133" :alt="`${brand} logo`" :title="`${brand} logo`" src="/capgo_logo.webp" />
+            <img class="w-auto h-18 pr-1" loading="eager" height="72" width="133" :alt="`${brand} logo`" :title="`${brand} logo`" src="/capgo_logo.webp">
           </a>
         </div>
 

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import Blog from '../../components/Blog.vue'
+import { formatTime } from '../../config/app'
+
 const props = defineProps<{
   Content?: any
   slug?: string
@@ -15,16 +18,13 @@ const props = defineProps<{
   next_blog?: string
   related?: any
 }>()
-
-import Blog from '../../components/Blog.vue'
-import { formatTime } from '../../config/app'
 </script>
 
 <template>
   <main class="text-center text-white">
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div v-if="props?.head_image" class="block aspect-w-4 aspect-h-3">
-        <img class="object-cover w-full h-full lg:rounded-lg" :src="props?.head_image" :alt="`article illustration ${props?.title}`" />
+        <img class="object-cover w-full h-full lg:rounded-lg" :src="props?.head_image" :alt="`article illustration ${props?.title}`">
       </div>
 
       <div class="absolute top-4 left-4 lg:top-15 lg:left-10">
@@ -43,11 +43,13 @@ import { formatTime } from '../../config/app'
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
       {{ props?.description }}
     </p>
-    <article v-html="props.Content.props.children" v-if="props" class="mx-auto text-left text-white prose text-white pb-4 px-4 lg:max-w-1/2" />
+    <article v-if="props" class="mx-auto text-left text-white prose text-white pb-4 px-4 lg:max-w-1/2" v-html="props.Content.props.children" />
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-xl mx-auto text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">Latest from news</h2>
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            Latest from news
+          </h2>
           <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:text-lg lg:mt-6 lg:leading-8">
             capgo gives you the best insights you need to create a truly professional mobile app.
           </p>
@@ -56,8 +58,8 @@ import { formatTime } from '../../config/app'
         <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
           <Blog
             v-for="article in related"
-            :tag="article.frontmatter.tag"
             :key="article.frontmatter.slug"
+            :tag="article.frontmatter.tag"
             :title="article.frontmatter.title"
             :date="article.frontmatter.created_at"
             :image="article.frontmatter.head_image"
