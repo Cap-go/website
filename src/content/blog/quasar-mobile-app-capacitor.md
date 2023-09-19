@@ -6,7 +6,7 @@ author: Anik Dhabal Babu
 author_url: https://twitter.com/AnikDhabal
 created_at: 2023-09-14
 updated_at: 2023-09-14
-head_image: "/quasar_capgo.webp"
+head_image: "/quasar-config-with-capgo.webp"
 head_image_alt: Quasar and Capgo illustration
 tag: Tutorial
 published: true
@@ -32,6 +32,8 @@ To create a new Quasar app, run the following command:
 ```shell
 npm init quasar
 ```
+
+![Quasar Project Setup](/quasar-setup.webp)
 
 Pick the "App with Quasar CLI" option then "Quasar v2".
 
@@ -74,6 +76,8 @@ npm install @capacitor/core @capacitor/ios @capacitor/android
 npx cap add ios
 npx cap add android
 ```
+
+![Initialize Capacitor](/capacitor-init.webp)
 
 By this point, you should be able to observe new **ios** and **android** folders in your Quasar project.
 
