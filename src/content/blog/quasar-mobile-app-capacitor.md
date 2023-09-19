@@ -6,7 +6,7 @@ author: Anik Dhabal Babu
 author_url: https://twitter.com/AnikDhabal
 created_at: 2023-09-14
 updated_at: 2023-09-14
-head_image: "/qusar_capgo.webp"
+head_image: "/quasar_capgo.webp"
 head_image_alt: Quasar and Capgo illustration
 tag: Tutorial
 published: true
