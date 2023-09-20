@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.7.1",
-    "@astrojs/vue": "^2.2.1",
+    "@astrojs/vue": "^3.0.0",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
     "astro": "^2.10.5",
