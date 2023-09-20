@@ -27,8 +27,8 @@ dependencies:
     specifier: ^0.0.131
     version: 0.0.131(cheerio@1.0.0-rc.12)(faiss-node@0.3.0)
   marked:
-    specifier: ^7.0.3
-    version: 7.0.5
+    specifier: ^9.0.0
+    version: 9.0.3
   openai:
     specifier: ^4.0.1
     version: 4.7.1
@@ -5846,8 +5846,8 @@ packages:
   /markdown-table@3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
 
-  /marked@7.0.5:
-    resolution: {integrity: sha512-lwNAFTfXgqpt/XvK17a/8wY9/q6fcSPZT1aP6QW0u74VwaJF/Z9KbRcX23sWE4tODM+AolJNcUtErTkgOeFP/Q==}
+  /marked@9.0.3:
+    resolution: {integrity: sha512-pI/k4nzBG1PEq1J3XFEHxVvjicfjl8rgaMaqclouGSMPhk7Q3Ejb2ZRxx/ZQOcQ1909HzVoWCFYq6oLgtL4BpQ==}
     engines: {node: '>= 16'}
     hasBin: true
     dev: false
