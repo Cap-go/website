@@ -20,24 +20,6 @@ While many enterprises currently utilize the Live Updates SDK to access the most
 
 This means you can avoid delays caused by Apple Store reviews, address bugs and modify content more rapidly, and ensure that your users are always operating on the latest version of your app. Additionally, I have heard from numerous large enterprises who would like to leverage Live Updates but face challenges due to strict compliance standards. This issue is now a thing of the past thanks to Self-hosted Live Updates.
 
-## What is self hosting?
-
-Self-hosting, in the context of the digital realm, refers to the practice of running your own servers or hosting infrastructure to manage and control your online presence and services. Instead of relying on third-party hosting providers, individuals and organizations choose to set up and manage their servers, websites, applications, and data storage on their terms.
-
-## Why do you choose self-hosting?
-
-There are many reasons why people choose to self-host. Some of the most common benefits include:
-
-* **Privacy and control:** Self-hosting gives you complete control over your data and privacy. You don't have to worry about third-party providers tracking your activity or selling your data.
-
-* **Cost savings:** Self-hosting can be more cost-effective in the long run, especially if you're using a lot of resources or running multiple services.
-
-* **Customization:** Self-hosting gives you the flexibility to customize your applications and services to meet your specific needs.
-
-* **Learning and experimentation:** Self-hosting can be a great way to learn about Linux, system administration, and other technical topics. It can also be a fun way to experiment with new software and services.
-
-* **Independence:** Self-hosting reduces your dependency on external providers. You're not at the mercy of their terms of service, pricing changes, or potential service disruptions. This independence can be crucial for businesses and individuals who rely on their online presence for critical functions.
-
 ## How do self-hosted live updates work?
 
 Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://github.com/Cap-go/capacitor-updater). As for Self-hosted Live Updates, I have enhanced the Capgo CLI with the necessary functionalities to enable configuration on your infrastructure.

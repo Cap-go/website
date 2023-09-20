@@ -1,7 +1,7 @@
 ---
 slug: "setup-ci-and-cd-gitlab"
 title: Setup CI/CD in Gitlab
-description: Learn how to supercharge your software development workflow by setting up Continuous Integration and Continuous Deployment (CI/CD) with GitLab.
+description: Create your own CI/CD pipeline with GitLab for free, deploy your Ionic Capacitor JS app every time you push to main.
 author: Anik Dhabal Babu
 author_url: https://x.com/anikdhabal
 created_at: 2023-09-14
@@ -20,15 +20,13 @@ This article will guide you on how to do CI/CD pipeline setup with GitLab.
 
 For a developer, running and testing your code offline is one thing and deploying online for development or production is another. Either you are merging a reviewed PR (Pull Request) or you are pushing your code directly to the staging/development branch, you might have to repeatedly do that manually or you can choose to automate the process and saves time.
 
-## Requirements
+Be sure you have added your Capacitor app first to Capgo, this tutorial just focuses on the upload phase. If you need to add your app to Capgo, you can follow this [Tutorial](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/).
 
-Before we dive into the `CI/CD` implementation, we should make sure the following are ready with us.
+## Commit convention
 
-    1. GitLab repository
+First you need to start following the commit convention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
 
-    2. Remote server
-
-Create a repository on GitLab and set up your project in it. We also need a remote machine with `git` installed on it. The remote instance can be used to run our pipeline scripts and also deploy our project.
+![Conventional commits](/conventional_commits.webp)
 
 ## Setting up GitLab runner agent
 
@@ -162,51 +160,63 @@ There are also two edge cases worth mentioning:
 
 2. If a job does not specify a stage, the job will automatically be assigned to the test stage. 
 
-4. **Continuous Integration (CI)**
+# Continuous Integration (CI)
 
 You can set up a set of scripts to build and test your application on every code push that could save your application from sudden surprises.
 
 Let's do a simple CI.
 
-         stages:
-               - test
+```toml
+stages:
+  - bump_version
 
-         Test:
-           stage: test
-           script:
-             - echo "write your test here."
-             - test -f "index.html"
+bump_version:
+  stage: bump_version
+  only:
+    - main  # Trigger this job only on pushes to the main branch
+  script:
+    - git clone https://github.com/${CI_PROJECT_PATH}.git  # Clone the repository
+    - cd ${CI_PROJECT_NAME}  # Change directory to the cloned repository
+    - git config user.name "GitLab CI/CD"
+    - git config user.email "gitlab-ci@example.com"
+    - git checkout main
+    - git pull origin main
+    - git checkout -b version-bump-${CI_COMMIT_SHORT_SHA}  # Create a new branch for bumping the version
+    - npx capacitor-standard-version  # Bump the version and create a changelog
+    - git add .  # Stage the changes
+    - git commit -m "chore(release): Bump version and update changelog"  # Commit the changes
+    - git push origin version-bump-${CI_COMMIT_SHORT_SHA}  # Push the changes to a new branch
+  tags:
+    - docker  # Specify any runner tags that are required for your setup
+```
 
-The above job will check the index.html file exists or not. If it does not exist, the job will fail. Here the CI runs on every code push to the repository, Although we haven't given any control to the job Test.
+ Here the CI runs on every code push to the repository, Although we haven't given any control to the job Test.
 
 Alright, Let's move on to the delivery.
 
-5. **Continuous Delivery (CD)**
+# Continuous Delivery (CD)
 
 Continuous delivery is a development practice where code changes automatically prepared for a release to production. It is an extension of continuous integration to make sure that you can release new changes to your customers quickly in a sustainable way.
 
-           stages:
-             - test
-             - deploy
+```toml
+  stages:
+  - deploy
 
-           Test:
-             stage: test
-             script:
-              - echo "write your test here."
-              - test -f "index.html"
-
-            Deploy:
-              only:
-                refs:
-                  - master
-              stage: deploy
-              script:
-                  - sudo cp -R ./index.html /var/www/html/
+deploy:
+  stage: deploy
+  only:
+    - tags  # Trigger this job only on tag pushes
+  script:
+    - apt-get update -qy
+    - apt-get install -y nodejs npm
+    - npm install
+    - npm run build
+    - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN -c production
+  tags:
+    - docker  # Specify any runner tags that are required for your setup
+```
 
 Here you see a Deploy job with the only keyword, which lets the job trigger only on the master branch actions.
-
-Whenever you come across any job failing, you'll be able to see the logs on the console. It will help you move forward.
-
 
 ## Conclusion
 
