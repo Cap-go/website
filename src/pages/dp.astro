@@ -1,0 +1,19 @@
+---
+import VueDataPolicy from '../vue-pages/data_policy.vue'
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Data Policy`
+const description = 'Data Policy'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueDataPolicy client:load /></Layout>

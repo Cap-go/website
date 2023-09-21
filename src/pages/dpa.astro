@@ -1,0 +1,19 @@
+---
+import VueDpa from '../vue-pages/dpa.vue'
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+
+const title = `${brand} | Data Processing Agreement`
+const description = 'Data Processing Agreement'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueDpa client:load /></Layout>

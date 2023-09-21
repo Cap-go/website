@@ -66,6 +66,8 @@ const navigation = {
       href: 'https://www.privacyboard.co/company/capgo/',
       target: '_blank',
     },
+    { name: 'Data Policy', href: '/dp/', rel: 'nofollow' },
+    { name: 'DPA', href: '/dpa/', rel: 'nofollow' },
   ],
   hero: [
     {
