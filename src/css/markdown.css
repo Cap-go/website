@@ -1,5 +1,5 @@
 .prose pre {
-  background-color: theme('colors.black.DEFAULT');
+  background-color: theme('colors.black.DEFAULT') !important;
 }
 
 .prose * {
@@ -7,14 +7,14 @@
 }
 
 .prose img {
-  width: 100%;
-  border-radius: 0.5rem;
+  width: 100% !important;
+  border-radius: 0.5rem !important;
 }
 
 .prose thead {
-  color: theme('colors.mutedBlue.300');
+  color: theme('colors.mutedBlue.300') !important;
 }
 
 .prose blockquote {
-  color: theme('colors.pumpkinOrange.300');
+  color: theme('colors.pumpkinOrange.300') !important;
 }
