@@ -78,4 +78,4 @@ const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
 <meta property="twitter:app:name:googleplay" content="ee.forgr.capgo" />
 
 <!-- @ts-ignore -->
-<script hid="seo-schema-graph" type="application/ld+json" set:html={ldJSON} />
+<script hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />
