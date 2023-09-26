@@ -21,6 +21,11 @@
     Content-Type = "application/json"
 
 [[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "text/xml"
+
+[[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
