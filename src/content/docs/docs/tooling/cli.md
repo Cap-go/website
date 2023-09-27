@@ -131,6 +131,7 @@ Optionally, you can give:
 * `--bundle [1.0.0]` to set the bundle version number of the file to upload.
 * `--iv-session-key [key]` to send a custom session key to the cloud.
 * `--bundle-url` prints bundle url into stdout. Useful when [parsing bundle url from shell](https://github.com/Cap-go/CLI/pull/132).
+* `--no-code-check` to ignore the code check and send the bundle anyway.
 
 > ⭐️ External option helps to unlock 2 cases: corporate with privacy concern, don't send the code to a third part and app bigger than 200 MB. With this setting, Capgo store only the link to the zip and sends the link to all apps.
 
@@ -199,13 +200,13 @@ This command will ignore bundles which are currently in use in any channel.
 
 `npx @capgo/cli bundle encrypt [path/to/zip]`
 
+This command is used when you use external source to store your code or for test purpose. 
+
 Optionally, you can give:
 
 `--key [/path/to/my/private_key]` the path of your private key.
-
-`--key-data [privateKey]` the private key data, if you want to use inline. This command is use when you use external source to store your code or for test purpose. The command will print your `ivSessionKe`y and the encrypted zip, you can use it with the
-
-`--iv-session-key` and `--external` option of the `upload` command, or for decrypting the zip.
+`--key-data [privateKey]` the private key data, if you want to use inline. 
+The command will print your `ivSessionKey`y and generate an encrypted zip, to use it with the upload command or decryt command.
 
 ### **Decrypt**
 
@@ -227,6 +228,7 @@ Optionally, you can give:
 
 * `--path [/path/to/my/bundle]` to upload a specific folder.
 * `--bundle [1.0.0]` to set the bundle version number of the filename.
+* `--name [myapp]` to override the filename.
 
 ## Channel
 
