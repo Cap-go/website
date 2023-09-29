@@ -18,7 +18,7 @@ next_blog:
 
 Before continuing with the tutorial…
 
--   Make sure you use GitHub
+-   Make sure you use GitLab
 -   Your app is already deployed on Google Play store
 -   Desire to read 😆…
 
