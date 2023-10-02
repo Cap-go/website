@@ -119,69 +119,74 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <section class="py-10 bg-white sm:py-16 lg:py-24">
+    <section class="relative py-12 overflow-hidden sm:py-16 lg:py-20 xl:py-32 bg-white">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">
-            How does it work?
-          </h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
-            Ship your first update in less than 5 minutes!
-          </p>
-        </div>
-
-        <div class="relative mt-12 lg:mt-20">
-          <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
-            <img
-              loading="lazy"
-              height="47"
-              width="864"
-              class="w-full"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
-              alt="curved dot line"
-              title="curved dot line"
-            >
+        <div class="grid items-center grid-cols-1 xl:grid-cols-2">
+          <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
+            <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">
+              You’re in good company.
+            </h2>
+            <p class="mt-6 text-lg font-normal text-gray-800 font-pj">
+              Capgo enables development teams at some of the most innovative companies.
+            </p>
           </div>
 
-          <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
-            <div>
-              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                <span class="text-2xl font-bold text-gray-700"> 1 </span>
-              </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Install our plugin
-              </h3>
-              <p class="mt-4 text-base text-gray-600">
-                Just follow one simple command in Capgo's CLI to install the plugin.
-              </p>
+          <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
+            <div class="absolute inset-16">
+              <div
+                class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter"
+                style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
+              />
             </div>
 
-            <div>
-              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                <span class="text-2xl font-bold text-gray-700"> 2 </span>
-              </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Send your first update
-              </h3>
-              <p class="mt-4 text-base text-gray-600">
-                Build your app as usual, then send it to Capgo via our CLI
-              </p>
-            </div>
+            <div class="relative space-y-5">
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/kick_logo.webp" alt="Kick" title="Kick">
+                </div>
 
-            <div>
-              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                <span class="text-2xl font-bold text-gray-700"> 3 </span>
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote">
+                </div>
               </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Get the update
-              </h3>
-              <p class="mt-4 text-base text-gray-600">
-                Update downloads in the background without interrupting user activity
-              </p>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/revel_logo.svg" alt="hello revel" title="hello revel">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella">
+                </div>
+
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving">
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-500" />
     </section>
     <section class="relative md:my-20 py-20 bg-gray-800">
       <svg class="hidden absolute md:block md:-top-5 md:m-0 md:-left-1/3 lg:-left-16 opacity-30" width="404" height="392" fill="none" viewBox="0 0 404 392">
@@ -216,19 +221,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.stars }}+</span>
-            </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">
-              Stars in GitHub
-            </p>
-            <p class="text-base mt-0.5 text-gray-400">
-              Paving the open-source path
-            </p>
-          </div>
-
-          <div>
-            <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.updates }}+</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.updates }}⬆</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">
               Updates delivered
@@ -240,7 +233,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
 
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.apps }}+</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.apps }}❤️</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">
               Apps
@@ -249,7 +242,159 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Already using us in production
             </p>
           </div>
+
+          <div>
+            <h3 class="font-bold text-7xl">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.stars }}⭐️</span>
+            </h3>
+            <p class="mt-4 text-xl font-medium text-gray-300">
+              Stars in GitHub
+            </p>
+            <p class="text-base mt-0.5 text-gray-400">
+              Paving the open-source path
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
+    <section class="py-10 bg-white sm:py-16 lg:py-24">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">
+            How does it work?
+          </h2>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
+            Ship your first update in less than 5 minutes!
+          </p>
+        </div>
+
+        <div class="relative mt-12 lg:mt-20">
+          <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
+            <img
+              loading="lazy"
+              height="47"
+              width="864"
+              class="w-full"
+              src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
+              alt="curved dot line"
+              title="curved dot line"
+            >
+          </div>
+
+          <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 1 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Install the plugin
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                Run <span class="text-gray-900 font-bold">npx @capgo/cli init</span> that it !
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 2 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Send your first update
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                Build your app as usual, then send with the CLI
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span class="text-2xl font-bold text-gray-700"> 3 </span>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                Get the update
+              </h3>
+              <p class="mt-4 text-base text-gray-600">
+                Open the app, it downloads in the background
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="relative inline-flex mt-10 group">
+            <div
+              class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
+            />
+            <a
+              href="/register/"
+              title="Get quote now"
+              class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              role="button"
+            >
+              Start Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
+        <div class="order-last md:order-none">
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
+            Faster Releases
+          </h2>
+          <p class="text-lg lg:w-2/3">
+            With {{ brand }}, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.
+          </p>
+        </div>
+        <img
+          width="310"
+          height="248"
+          loading="lazy"
+          class="mx-auto h-full md:h-62 rounded-lg"
+          src="/develop_illu.svg"
+          title="productivity illustration"
+          alt="productivity illustration"
+        >
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
+        <img
+          width="310"
+          height="248"
+          loading="lazy"
+          class="mx-auto h-full md:h-62 rounded-lg my-10"
+          src="/build_illustration.svg"
+          alt="build illustration"
+          title="build illustration"
+        >
+        <div>
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
+            Integration
+          </h2>
+          <p class="text-lg lg:w-2/3">
+            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br><br>
+
+            It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and many more.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
+        <div class="order-last md:order-none">
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
+            Instant Updates
+          </h2>
+          <p class="text-lg lg:w-2/3">
+            Instant Changes, Bug Fixes No need to wait for app re-downloads! With just one command, users can quickly see bug fixes in action. Say goodbye to frustrating delays.
+          </p>
+        </div>
+        <img
+          width="310"
+          height="248"
+          loading="lazy"
+          class="mx-auto h-full md:h-62 rounded-lg"
+          src="/update_illustration.svg"
+          alt="send update illustration"
+          title="send update illustration"
+        >
       </div>
     </section>
     <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
@@ -326,75 +471,6 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <section class="relative py-12 overflow-hidden sm:py-16 lg:py-20 xl:py-32">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="grid items-center grid-cols-1 xl:grid-cols-2">
-          <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
-            <h2 class="font-bold text-gray-100 text-3xl sm:text-4xl xl:text-5xl font-pj">
-              You’re in good company.
-            </h2>
-            <p class="mt-6 text-lg font-normal text-gray-400 font-pj">
-              Capgo enables development teams at some of the most innovative companies.
-            </p>
-          </div>
-
-          <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
-            <div class="absolute inset-16">
-              <div
-                class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter"
-                style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
-              />
-            </div>
-
-            <div class="relative space-y-5">
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/kick_logo.webp" alt="Kick" title="Kick">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/revel_logo.svg" alt="hello revel" title="hello revel">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella">
-                </div>
-
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-800" />
-    </section>
     <Testimonials />
     <section class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -411,68 +487,6 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
-        <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
-            Faster Releases
-          </h2>
-          <p class="text-lg lg:w-2/3">
-            With {{ brand }}, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.
-          </p>
-        </div>
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="mx-auto h-full md:h-62 rounded-lg"
-          src="/develop_illu.svg"
-          title="productivity illustration"
-          alt="productivity illustration"
-        >
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="mx-auto h-full md:h-62 rounded-lg my-10"
-          src="/build_illustration.svg"
-          alt="build illustration"
-          title="build illustration"
-        >
-        <div>
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
-            Integration
-          </h2>
-          <p class="text-lg lg:w-2/3">
-            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br><br>
-
-            It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, and many more.
-          </p>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
-        <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">
-            Instant Updates
-          </h2>
-          <p class="text-lg lg:w-2/3">
-            Instant Changes, Bug Fixes No need to wait for app re-downloads! With just one command, users can quickly see bug fixes in action. Say goodbye to frustrating delays.
-          </p>
-        </div>
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="mx-auto h-full md:h-62 rounded-lg"
-          src="/update_illustration.svg"
-          alt="send update illustration"
-          title="send update illustration"
-        >
-      </div>
-    </section>
-
     <div class="relative mt-24 sm:mt-32 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-800 rounded-r-3xl" />
@@ -495,8 +509,8 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
           </div>
           <div class="relative flex flex-col md:flex-row">
             <div class="sm:text-center md:w-1/2">
-              <h3 class="font-bold text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
-                Push App updates like you push your commits
+              <h3 class=" text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
+                Push <span class="font-bold">updates</span> like your <span class="font-bold">commits</span>
               </h3>
             </div>
             <div class="sm:text-center md:w-1/2">
