@@ -48,7 +48,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             Instant updates for Capacitor
           </h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Ship updates, bug fixes, content changes, and new features instantly, without the hassle of lengthy App store reviews.
+            Ship updates, fixes, changes, and features<br><span class="font-bold">withing minutes</span>
           </h2>
 
           <div class="relative inline-flex mt-10 group">
@@ -81,7 +81,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Instant Updates
             </h3>
             <p class="mt-3 text-sm text-gray-400">
-              Reach users now, not one week later.
+              Reach users now, not weeks later.
               <!-- Release in matter on seconds, not one week later. -->
               <!-- Reach 90% of first day deployment instead of a month. -->
             </p>
@@ -227,7 +227,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Updates delivered
             </p>
             <p class="text-base mt-0.5 text-gray-400">
-              To users all around the globe
+              All around the globe
             </p>
           </div>
 
@@ -239,7 +239,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Apps
             </p>
             <p class="text-base mt-0.5 text-gray-400">
-              Already using us in production
+              Using us in production
             </p>
           </div>
 
@@ -251,7 +251,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
               Stars in GitHub
             </p>
             <p class="text-base mt-0.5 text-gray-400">
-              Paving the open-source path
+              100% open source
             </p>
           </div>
         </div>
