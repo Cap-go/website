@@ -36,11 +36,9 @@ export async function getStaticPaths() {
 const data = Astro.props.post
 const related = Astro.props.related
 
-const { Content } = data
-
 const config = useRuntimeConfig()
 
-const markdown = await Content()
+const markdown = data.compiledContent()
 
 const content = {}
 

@@ -43,7 +43,7 @@ const props = defineProps<{
     <p class="py-5 px-4 lg:max-w-1/2 mx-auto text-left">
       {{ props?.description }}
     </p>
-    <article v-if="props" class="mx-auto text-left text-white prose text-white pb-4 px-4 lg:max-w-1/2" v-html="props.Content.props.children" />
+    <article v-if="props" class="mx-auto text-left text-white prose text-white pb-4 px-4 lg:max-w-1/2" v-html="props.Content" />
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-xl mx-auto text-center">
