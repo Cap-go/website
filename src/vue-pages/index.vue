@@ -208,10 +208,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
-            Numbers tell the story
+            More than 10% of Capacitor apps use us
           </h2>
           <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
-            Shared transparently with you since january 2022.
+            Shared transparently with you since December 2021.
           </p>
           <p class="text-base mt-5 text-gray-400 text-center">
             Updated every day
@@ -261,10 +261,10 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">
-            How does it work?
+            How it work?
           </h2>
           <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
-            Ship your first update in less than 5 minutes!
+            Ship your first update in less than 15 minutes!
           </p>
         </div>
 
@@ -314,7 +314,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 Get the update
               </h3>
               <p class="mt-4 text-base text-gray-600">
-                Open the app, it downloads in the background
+                Open the app, it update in the background
               </p>
             </div>
           </div>
