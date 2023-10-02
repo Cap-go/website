@@ -207,8 +207,11 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">
+            10% of Capacitor apps
+          </h2>
           <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
-            More than 10% of Capacitor apps use us
+            use Capgo
           </h2>
           <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
             Shared transparently with you since December 2021.
