@@ -17,6 +17,12 @@
     },
     {
       "pattern": "^https://kick.com"
+    },
+    {
+      "pattern": "^https://opensource.org/license/*"
+    },
+    {
+      "pattern": "^https://foundation.mozilla.org/*"
     }
   ],
   "httpHeaders": [
