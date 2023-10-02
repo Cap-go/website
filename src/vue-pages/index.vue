@@ -349,11 +349,11 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             <div class="relative space-y-5">
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
                 <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/kick_logo.webp" alt="Kick" title="Kick">
                 </div>
 
                 <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/fiksuruoka_logo.webp" alt="fiksuruoka" title="fiksuruoka">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut">
                 </div>
 
                 <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
