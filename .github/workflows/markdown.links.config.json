@@ -4,7 +4,7 @@
       "pattern": "^https://developer.android.com/studio/*"
     },
     {
-      "pattern": "^https://x.com/martindonadieu"
+      "pattern": "^https://x.com/*"
     },
     {
       "pattern": "^https://www.indeed.com/*"
@@ -14,6 +14,9 @@
     },
     {
       "pattern": "^https://medium.com/*"
+    },
+    {
+      "pattern": "^https://kick.com"
     }
   ],
   "httpHeaders": [
