@@ -53,9 +53,9 @@ See the Github [Readme](https://github.com/Cap-go/capacitor-updater) for more in
 notifyAppReady() => Promise<{ bundle: BundleInfo; }>
 ```
 
-Notify Capacitor Updater that the current bundle is working (a rollback will occur of this method is not called on every app launch)
-By default this method should be called in the first 10 sec after app launch, otherwise a rollback will occur.
-Change this behaviour with {@link appReadyTimeout}
+Notify Capacitor Updater that the current bundle is working (a rollback will occur if this method is not called on every app launch)
+By default this method should be called in the first 10 sec after the app launch, otherwise, a rollback will occur.
+Change this behavior with {@link appReadyTimeout}
 
 **Returns:** <code>Promise&lt;{ bundle: <a href="#bundleinfo">BundleInfo</a>; }&gt;</code>
 
@@ -102,7 +102,7 @@ Set the next bundle to be used when the app is reloaded.
 set(options: { id: string; }) => Promise<void>
 ```
 
-Set the current bundle and immediately reloads the app.
+Set the current bundle and immediately reload the app.
 
 | Param         | Type                         |
 | ------------- | ---------------------------- |
@@ -145,7 +145,7 @@ Get all locally downloaded bundles in your app
 reset(options?: { toLastSuccessful?: boolean | undefined; } | undefined) => Promise<void>
 ```
 
-Set the `builtin` bundle (the one sent to Apple store / Google play store ) as current bundle
+Set the `builtin` bundle (the one sent to Apple store / Google play store ) as a current bundle
 
 | Param         | Type                                         |
 | ------------- | -------------------------------------------- |
@@ -229,7 +229,7 @@ Get Latest bundle available from update Url
 setChannel(options: SetChannelOptions) => Promise<channelRes>
 ```
 
-Set Channel for this device, the channel have to allow self assignement to make this work
+Set Channel for this device, the channel has to allow self assignment to make this work
 
 | Param         | Type                                                            | Description                                                                      |
 | ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -297,7 +297,7 @@ Set Channel for this device
 addListener(eventName: "download", listenerFunc: DownloadChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for download event in the App, let you know when the download is started, loading and finished, with a percent value
+Listen for download event in the App, let you know when the download is started, loading, and finished, with a percent value
 
 | Param              | Type                                                                      |
 | ------------------ | ------------------------------------------------------------------------- |
@@ -357,7 +357,7 @@ Listen for availbale update event, usefull when you want to force check every ti
 addListener(eventName: "downloadComplete", listenerFunc: DownloadCompleteListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for download event in the App, let you know when the download is started, loading and finished
+Listen for download event in the App, let you know when the download is started, loading, and finished
 
 | Param              | Type                                                                          |
 | ------------------ | ----------------------------------------------------------------------------- |
@@ -377,7 +377,7 @@ Listen for download event in the App, let you know when the download is started,
 addListener(eventName: "majorAvailable", listenerFunc: MajorAvailableListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for Major update event in the App, let you know when major update is blocked by setting disableAutoUpdateBreaking
+Listen for Major update event in the App, and let you know when a major update is blocked by setting disableAutoUpdateBreaking
 
 | Param              | Type                                                                      |
 | ------------------ | ------------------------------------------------------------------------- |
@@ -397,7 +397,7 @@ Listen for Major update event in the App, let you know when major update is bloc
 addListener(eventName: "updateFailed", listenerFunc: UpdateFailedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for update fail event in the App, let you know when update has fail to install at next app start
+Listen for update fail event in the App, and let you know when the update has failed to install at the next app start
 
 | Param              | Type                                                                  |
 | ------------------ | --------------------------------------------------------------------- |
@@ -417,7 +417,7 @@ Listen for update fail event in the App, let you know when update has fail to in
 addListener(eventName: "downloadFailed", listenerFunc: DownloadFailedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for download fail event in the App, let you know when download has fail finished
+Listen for download fail event in the App, and let you know when the download has failed finished
 
 | Param              | Type                                                                      |
 | ------------------ | ------------------------------------------------------------------------- |
@@ -437,7 +437,7 @@ Listen for download fail event in the App, let you know when download has fail f
 addListener(eventName: "appReloaded", listenerFunc: AppReloadedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for reload event in the App, let you know when reload has happend
+Listen for reload event in the App, and let you know when the reload has happened
 
 | Param              | Type                                                                |
 | ------------------ | ------------------------------------------------------------------- |
@@ -457,7 +457,7 @@ Listen for reload event in the App, let you know when reload has happend
 addListener(eventName: "appReady", listenerFunc: AppReadyListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for app ready event in the App, let you know when app is ready to use
+Listen for app ready event in the App, and let you know when the app is ready to use
 
 | Param              | Type                                                          |
 | ------------------ | ------------------------------------------------------------- |
@@ -477,7 +477,7 @@ Listen for app ready event in the App, let you know when app is ready to use
 getBuiltinVersion() => Promise<{ version: string; }>
 ```
 
-Get the native app version or the builtin version if set in config
+Get the native app version or the builtin version if set in the config
 
 **Returns:** <code>Promise&lt;{ version: string; }&gt;</code>
 
@@ -492,7 +492,7 @@ Get the native app version or the builtin version if set in config
 getDeviceId() => Promise<{ deviceId: string; }>
 ```
 
-Get unique ID used to identify device (sent to auto update server)
+Get a unique ID used to identify the device (sent to auto-update server)
 
 **Returns:** <code>Promise&lt;{ deviceId: string; }&gt;</code>
 

@@ -75,7 +75,7 @@ Shake your phone at any time to see the menu below
 * [Status Bar](https://github.com/ionic-team/capacitor-plugins/tree/main/status-bar) - Provides methods for configuring the style of the Status Bar, along with showing or hiding it.
 * [Storage](https://github.com/ionic-team/capacitor-plugins/tree/main/preferences)(preferences) - Provides a simple key/value persistent store for lightweight data.
 * [Text Zoom](https://github.com/ionic-team/capacitor-plugins/tree/main/text-zoom) - Provides the ability to change Web View text size for visual accessibility.
-* [Toast](https://github.com/ionic-team/capacitor-plugins/tree/main/toast) - Provides a notification pop up for displaying important information to a user. Just like real toast!
+* [Toast](https://github.com/ionic-team/capacitor-plugins/tree/main/toast) - Provides a notification pop-up for displaying important information to a user. Just like real toast!
 
 #### Some unofficial plugins are installed and preconfigured too
 
@@ -86,20 +86,20 @@ Shake your phone at any time to see the menu below
 * [capacitor-flash](https://github.com/riderx/capacitor-flash) - Switch the Flashlight / Torch of your device.
 * [capacitor-mute](https://github.com/riderx/capacitor-mute) - Detect if the mute switch is enabled/disabled on a device
 * [capacitor-native-audio](https://github.com/capacitor-community/native-audio) - Capacitor plugin for native audio engine.
-* [capacitor-native-biometric](https://github.com/epicshaggy/capacitor-native-biometric) - Use biometrics confirm device owner presence or authenticate users.
+* [capacitor-native-biometric](https://github.com/epicshaggy/capacitor-native-biometric) - Use biometrics to confirm device owner presence or authenticate users.
 * [capacitor-purchases](https://github.com/riderx/capacitor-purchases) - In-app Subscriptions Made Easy with RevenueCat SDK
 * [capacitor-rate-app](https://github.com/Nodonisko/capacitor-rate-app) - Let users rate your app using native review app dialog for both Android and iOS.
 * [capacitor-screen-recorder](https://github.com/TeamMaestro/capacitor-video-recorder) - A video recording plugin for Capacitor that allows applications to use the native camera and microphone and display the recording interface either below or above their application.
 * [capacitor-updater](https://github.com/riderx/capacitor-updater) - OTA update for capacitor
 
-> ⚠️ All other Native API you use who are not in this list will raise error.
+> ⚠️ All other Native APIs you use that are not in this list will raise errors.
 
 > 💡 If you need a capacitor plugin to test your app open issue in [GitHub](https://github.com/Cap-go/capgo) I will add it to the next build.
 
-> ⛔ Cordova plugin are not supported in sandbox test app
+> ⛔ Cordova plugins are not supported in the sandbox test app
 
 ## Troubleshooting
 
-If your app uses module, there are not installed in the sandbox app, your app may crash. If that happens, you could be in a situation where you cannot go out back to the app.\
-If that happens, uninstall the sandbox app and install again.\
+If your app uses a module, there are not installed in the sandbox app, your app may crash. If that happens, you could be in a situation where you cannot go out back to the app.\
+If that happens, uninstall the sandbox app and install it again.\
 I am searching better solution for the future.

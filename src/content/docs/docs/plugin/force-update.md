@@ -17,7 +17,7 @@ You have 3 options to force your user to update:
 
 ## Direct update
 
-You can force update to happen at every app start by setting `directUpdate` to `true`:
+You can force an update to happen at every app start by setting `directUpdate` to `true`:
 
 ```tsx
 // capacitor.config.json
@@ -32,7 +32,7 @@ You can force update to happen at every app start by setting `directUpdate` to `
 }
 ```
 
-And then in your app you should hide the splash until receive the event `appReady`:
+And then in your app, you should hide the splash until receive the event  `appReady`:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

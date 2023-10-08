@@ -38,11 +38,11 @@ to only let this:
 }
 ```
 
-> ⚠️ If you were using your server, with `autoUpdateURL`, I will upgrade this guide soon for you. Meanwhile, take a look at the new upload option `external` who allows you to send only the link of your zip, not the code in Capgo cloud. This has been made for companies with strict privacy policy. In external mode, the code will never land to Capgo server, we just store the URL and send it to device, they will direct download it. In the standard way, the code is zipped and stored in our server, but we will never open it or use it either.
+> ⚠️ If you were using your server, with `autoUpdateURL`, I will upgrade this guide soon for you. Meanwhile, take a look at the new upload option `external` which allows you to send only the link of your zip, not the code in Capgo cloud. This has been made for companies with strict privacy policies. In external mode, the code will never land on Capgo server, we just store the URL and send it to the device, which will directly download it. In the standard way, the code is zipped and stored in our server, but we will never open it or use it either.
 
 ## What change
 
-All configuration become server side for auto-update, to give you more control on how you send an update to users.
+All configurations become server-side for auto-update, to give you more control on how you send an update to users.
 
 That allows us to revert, AB test, partial deploy or even deploy just to one user! These settings are added back to the web interface:
 
@@ -53,7 +53,7 @@ That allows us to revert, AB test, partial deploy or even deploy just to one use
 
 This will also remove the need to update often the plugin, most updates will be done server side, and you will get it without any change in your side.
 
-> ⚠️ Reset when update becomes default, so if you prefer not to remove all download versions when update from the store, do this:
+> ⚠️ Reset when an update becomes the default, so if you prefer not to remove all download versions when updating from the store, do this:
 
 ```json
 {

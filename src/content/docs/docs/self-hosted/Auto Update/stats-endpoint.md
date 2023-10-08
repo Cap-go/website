@@ -4,7 +4,7 @@ sidebar:
   order: 2
 ---
 
-Here is an example of code in JavaScript to save stats of the plugin
+Here is an example of code in JavaScript to save the stats of the plugin
 
 ```typescript
 interface AppInfos {
@@ -60,7 +60,7 @@ export const handler: Handler = async (event) => {
     version_name,
     version_build,
     plugin_version)
-  // save it in your database
+  // Save it in your database
   return { status: 'ok' }
 }
 ```
