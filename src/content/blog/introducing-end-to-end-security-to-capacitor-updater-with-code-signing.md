@@ -14,7 +14,7 @@ next_blog: ""
 
 ---
 
-[Capacitor-updater](https://github.com/Cap-go/capacitor-updater) now supports end-to-end code encryption for enterprise customers. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.
+[Capacitor-updater](https://github.com/Cap-go/capacitor-updater) now supports end-to-end code encryption. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.
 
 ## The default security of Capacitor-updater
 
