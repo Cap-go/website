@@ -44,6 +44,10 @@ export default defineConfig({
           autogenerate: { directory: 'docs/tooling' },
         },
         {
+          label: 'Web app',
+          autogenerate: { directory: 'docs/webapp' },
+        },
+        {
           label: 'Upgrade',
           autogenerate: { directory: 'docs/upgrade' },
         },
@@ -55,6 +59,7 @@ export default defineConfig({
           label: 'Self Hosted',
           items: [
             { label: 'Getting Started', link: '/docs/self-hosted/getting-started' },
+            { label: 'Contributing to capgo OSS', link: '/docs/self-hosted/contributing' },
             { label: 'Auto Update', autogenerate: { directory: 'docs/self-hosted/Auto Update' } },
             {
               label: 'Local development',
