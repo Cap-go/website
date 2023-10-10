@@ -53,6 +53,6 @@ NativeAudio.play({
 
 The `preload` method is used to load an audio file into memory, and the `play` method is used to play the loaded audio file.
 
-Other supported methods include `pause`, `resume`, `loop`, `stop`, `unload`, `setVolume`, `getDuration`, and `getCurrentTime`. You can refer to the [official documentation](https://github.com/riderx/native-audio/blob/master/README.md) for more details on these methods.
+Other supported methods include `pause`, `resume`, `loop`, `stop`, `unload`, `setVolume`, `getDuration`, and `getCurrentTime`. You can refer to the [official documentation](https://github.com/Cap-go/native-audio/blob/main/README.md) for more details on these methods.
 
 That's it! You have now learned how to use the `@capgo/native-audio` package to play sounds in your Capacitor application.

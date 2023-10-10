@@ -4,7 +4,25 @@
       "pattern": "^https://developer.android.com/studio/*"
     },
     {
-      "pattern": "^https://x.com/martindonadieu"
+      "pattern": "^https://x.com/*"
+    },
+    {
+      "pattern": "^https://www.indeed.com/*"
+    },
+    {
+      "pattern": "^https://litoarias.medium.com/*"
+    },
+    {
+      "pattern": "^https://medium.com/*"
+    },
+    {
+      "pattern": "^https://kick.com"
+    },
+    {
+      "pattern": "^https://opensource.org/license/*"
+    },
+    {
+      "pattern": "^https://foundation.mozilla.org/*"
     }
   ],
   "httpHeaders": [
