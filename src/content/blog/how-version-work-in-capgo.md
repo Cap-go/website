@@ -34,13 +34,14 @@ Where Capgo find the version to compare
 
 #### IOS
 
-  in IOS the var is set on your project here `ios/App/App.xcodeproj/project.pbxproj` under the key `CURRENT_PROJECT_VERSION`
+ In IOS the var is set on your project here `ios/App/App/Info.plist` under the key`CFBundleShortVersionString` or `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION` if `MARKETING_VERSION` was set in your `Info.plist` file.
   > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
 
 #### Android
 
-  in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
+  In Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
   > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
+
 #### JavaScript
 
   in JavaScript, the var is set on your project here `package.json` under the key `version`
