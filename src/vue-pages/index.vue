@@ -48,7 +48,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
             Instant updates for Capacitor
           </h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Ship updates, fixes, changes, and features<br><span class="font-bold">withing minutes</span>
+            Ship updates, fixes, changes, and features<br><span class="font-bold">within minutes</span>
           </h2>
 
           <div class="relative inline-flex mt-10 group">
