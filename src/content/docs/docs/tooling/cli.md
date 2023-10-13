@@ -229,7 +229,8 @@ Optionally, you can give:
 * `--path [/path/to/my/bundle]` to upload a specific folder.
 * `--bundle [1.0.0]` to set the bundle version number of the filename.
 * `--name [myapp]` to override the filename.
-
+* `--json` to output info as json.
+  
 ## Channel
 
 ### **Add**
