@@ -1,0 +1,70 @@
+---
+title: "Channels"
+sidebar:
+  order: 6
+---
+
+## Managing channels
+
+First let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
+
+
+<figure><img src="/channels.png" alt="" /><figcaption></figcaption></figure>
+
+## Creating a channel
+
+As you can see, there exists a plus button in the lower right corner. (`1` in the image) Clicking on it will open a modal where you can create a new channel.
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modal.png" alt="" /><figcaption></figcaption></figure>
+
+Then after you click on `Add` a new channel should appear in the list.
+<figure><img src="/post-channel-create.png" alt="" /><figcaption></figcaption></figure>
+
+## What does misconfigured mean?
+Sometimes the configuration of a channel is not valid. In that case you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
+You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+
+## Deleting a channel
+
+Deleting a channel is straigh forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
+
+## Managing a channel
+
+Clicking on the channel name will open a modal where you can manage the channel. (`3` in the image)
+This page should look something like this:
+
+<figure><img src="/manage_channel_main.png" alt="" /><figcaption></figcaption></figure>
+
+Let's go through the different sections.
+
+First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
+Clicking on it should take you to the [bundle](TODO) page.
+
+Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and a better system is in the works.
+
+Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](TODO) page.
+
+Lastly the settings (`4` in the image). This is where you can manage how the channels behaves.
+After you click on it you should see something like this:
+
+<figure><img src="/channel_settings.png" alt="" /><figcaption></figcaption></figure>
+
+The list of settings is long, but I will do my best to explain them all.
+
+---
+First the `Default channel` **THIS IS PROPABLY THE MOST IMPORTANT ONE**.\
+If a channel is marked as default, then it will be used as the default channel for all new devices.\
+In different temrs: If you have a new user capgo will try to serve him the latest version of this default channel.
+Only 1 channel can be default at a time. If you try to break this rule you will be asked to confirm your action.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.png" alt="" /><figcaption></figcaption></figure>
+
+After you confirm the old default channel will be unmarked as default and the new one will be marked as default.
+
+---
+Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
+
+Third is the `Android` setting. This is simular to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
+
+---
+Foototes:
+[^1]: \*: There are **A LOT** of exceptions to this but regardless that is the main version for the channel.
