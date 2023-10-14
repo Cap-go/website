@@ -6,7 +6,7 @@ sidebar:
 
 ## Managing channels
 
-First let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
+First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
 
 
 <figure><img src="/channels.png" alt="" /><figcaption></figcaption></figure>
@@ -20,12 +20,12 @@ Then after you click on `Add` a new channel should appear in the list.
 <figure><img src="/post-channel-create.png" alt="" /><figcaption></figcaption></figure>
 
 ## What does misconfigured mean?
-Sometimes the configuration of a channel is not valid. In that case you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
+Sometimes the configuration of a channel is not valid. In that case, you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
 You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
 
 ## Deleting a channel
 
-Deleting a channel is straigh forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
+Deleting a channel is straight forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
 
 ## Managing a channel
 
@@ -37,13 +37,13 @@ This page should look something like this:
 Let's go through the different sections.
 
 First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
-Clicking on it should take you to the [bundle](TODO) page.
+Clicking on it should take you to the [bundle](/docs/webapp/bundles/) page.
 
-Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and a better system is in the works.
+Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and better system is in the works.
 
-Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](TODO) page.
+Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](/docs/webapp/devices/) page.
 
-Lastly the settings (`4` in the image). This is where you can manage how the channels behaves.
+Lastly the settings (`4` in the image). This is where you can manage how the channels behave.
 After you click on it you should see something like this:
 
 <figure><img src="/channel_settings.png" alt="" /><figcaption></figcaption></figure>
@@ -53,8 +53,8 @@ The list of settings is long, but I will do my best to explain them all.
 ---
 First the `Default channel` **THIS IS PROPABLY THE MOST IMPORTANT ONE**.\
 If a channel is marked as default, then it will be used as the default channel for all new devices.\
-In different temrs: If you have a new user capgo will try to serve him the latest version of this default channel.
-Only 1 channel can be default at a time. If you try to break this rule you will be asked to confirm your action.
+In different terms: If you have a new user capgo will try to serve him the latest version of this default channel.
+Only 1 channel can be set to default at a time. If you try to break this rule you will be asked to confirm your action.
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.png" alt="" /><figcaption></figcaption></figure>
 
@@ -63,9 +63,9 @@ After you confirm the old default channel will be unmarked as default and the ne
 ---
 Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
 
-Third is the `Android` setting. This is simular to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
+Third is the `Android` setting. This is similar to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
 
-Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be inpossible to down grade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
 
 Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
 
@@ -78,13 +78,13 @@ Eight is the `Allow devices to self associate`. If this is true then the [setCha
 ---
 
 Next is the AB testing. This is a VERY complex setting.
-Let's start at the beggining. After enabling this setting you should see 2 versions instead of 1.
+Let's start at the beginning. After enabling this setting you should see 2 versions instead of 1.
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/ab-start.png" alt="" /><figcaption></figcaption></figure>
 
 The idea is that after you upload the bundle to capgo cloud you will be able to select which version you want to serve to which percentage of users.
-For example you could say that you want only 30% of your users to recive the new update. In that case you would set the `A` version to the old version and the `B` version to the new version (the one thay you only want 30% of users to recive)
-Next you would set the `Percentage of users recving secondary version` to `30%`.
+For example, you could say that you want only 30% of your users to receive the new update. In that case, you would set the `A` version to the old version and the `B` version to the new version (the one thay you only want 30% of users to receive)
+Next, you would set the `Percentage of users recving secondary version` to `30%`.
 
 :::danger
 ⚠️ Sending a new version from the CLI into the `production` channel will set `version A` to it. If you want to change it you will have to do it manually from the webapp.
@@ -92,14 +92,14 @@ Next you would set the `Percentage of users recving secondary version` to `30%`.
 
 ---
 
-The last setting is the `Enable progressive deploy`. This is simular to AB testing, however the `Percentage of users recving secondary version` will be increaded every 10 minutes by 10% until it reaches 100%.
-Progressive deploy is exclusive with AB testing. You can't have both enabled at the same time.
+The last setting is the `Enable progressive deploy`. This is similar to AB testing, however, the `Percentage of users recving secondary version` will be increased every 10 minutes by 10% until it reaches 100%.
+Progressive deploy is exclusive to AB testing. You can't have both enabled at the same time.
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/progressive-deploy-show.png" alt="" /><figcaption></figcaption></figure>
 
 First, do not worry about the `Progressive deploy status failed` message. It is just a warning that will go away once you deploy the first version.
 
-To start a new progressive deploy go to the [specific bundle page](TODO) and click on `Channel`. Then click on the channel that has progressive deploy enabled. You should see something like this:
+To start a new progressive deploy go to the [specific bundle page](/docs/webapp/bundles/) and click on `Channel`. Then click on the channel that has progressive deploy enabled. You should see something like this:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/progressive-start.png" alt="" /><figcaption></figcaption></figure>
 
@@ -114,5 +114,5 @@ After the progressive deploy finishes you should see something like this:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/progressive-deploy-finish.png" alt="" /><figcaption></figcaption></figure>
 
-Foototes:
+Footnotes:
 [^1]: \*: There are **A LOT** of exceptions to this but regardless that is the main version for the channel.
