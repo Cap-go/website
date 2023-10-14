@@ -21,7 +21,7 @@ export default defineConfig({
     AstroPWA(pwa),
     starlight({
       title: 'Capgo',
-      logo: { src: './logo.svg' },
+      // logo: { src: './logo.svg' },
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
         github: 'https://github.com/Cap-go',
