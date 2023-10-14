@@ -65,6 +65,54 @@ Second the `IOS` setting. This is relatively simple. If this is false then IOS d
 
 Third is the `Android` setting. This is simular to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
 
+Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be inpossible to down grade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+
+Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+
+As for `Allow develoment build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
+
+Seventh is the `Allow Emulators`. If this is false then cagpo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+
+Eight is the `Allow devices to self associate`. If this is true then the [setChannel](docs/plugin/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](docs/plugin/api/#setchannel) method with this channel then the call will fail.
+
 ---
+
+Next is the AB testing. This is a VERY complex setting.
+Let's start at the beggining. After enabling this setting you should see 2 versions instead of 1.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/ab-start.png" alt="" /><figcaption></figcaption></figure>
+
+The idea is that after you upload the bundle to capgo cloud you will be able to select which version you want to serve to which percentage of users.
+For example you could say that you want only 30% of your users to recive the new update. In that case you would set the `A` version to the old version and the `B` version to the new version (the one thay you only want 30% of users to recive)
+Next you would set the `Percentage of users recving secondary version` to `30%`.
+
+:::danger
+⚠️ Sending a new version from the CLI into the `production` channel will set `version A` to it. If you want to change it you will have to do it manually from the webapp.
+:::
+
+---
+
+The last setting is the `Enable progressive deploy`. This is simular to AB testing, however the `Percentage of users recving secondary version` will be increaded every 10 minutes by 10% until it reaches 100%.
+Progressive deploy is exclusive with AB testing. You can't have both enabled at the same time.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/progressive-deploy-show.png" alt="" /><figcaption></figcaption></figure>
+
+First, do not worry about the `Progressive deploy status failed` message. It is just a warning that will go away once you deploy the first version.
+
+To start a new progressive deploy go to the [specific bundle page](TODO) and click on `Channel`. Then click on the channel that has progressive deploy enabled. You should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/progressive-start.png" alt="" /><figcaption></figcaption></figure>
+
+If you skip progressive deploy it should look like this:
+<figure><img style="margin-left: auto; margin-right: auto" src="/progressive-skip.png" alt="" /><figcaption></figcaption></figure>
+
+If you do not skip progressive deploy it should look like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/progressive-no-skip.png" alt="" /><figcaption></figcaption></figure>
+
+After the progressive deploy finishes you should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/progressive-deploy-finish.png" alt="" /><figcaption></figcaption></figure>
+
 Foototes:
 [^1]: \*: There are **A LOT** of exceptions to this but regardless that is the main version for the channel.
