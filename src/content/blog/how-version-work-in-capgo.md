@@ -71,13 +71,9 @@ Then the behavior become :
 
 > Capgo sends his version to the user.
 
-#### Disable auto-upgrade above major
+#### Disable auto-upgrade strategy
 
-If you change this setting to false, Capgo will consider upgrade to MAJOR is not an issue.
-Then the behavior becomes:
-- The native version (1.2.3) is MAJOR lower than Capgo version (2.2.3)
-
-> Capgo send his version to the user.
+There are a couple of stategies you can chose from. You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
 
 ## JavaScript bundle version
 
