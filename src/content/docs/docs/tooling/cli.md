@@ -231,6 +231,18 @@ Optionally, you can give:
 * `--name [myapp]` to override the filename.
 * `--json` to output info as json.
   
+### **Compatibility** 
+
+`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[channelId]` the name of your new channel.
+
+Optionally, you can give:
+
+* `--apikey [key]` API key to link to your account.
+* `--text` use text instead of emojis in the table
+
 ## Channel
 
 ### **Add**
