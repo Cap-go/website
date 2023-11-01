@@ -231,6 +231,18 @@ Optionally, you can give:
 * `--name [myapp]` to override the filename.
 * `--json` to output info as json.
   
+### **Compatibility** 
+
+`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[channelId]` the name of your new channel.
+
+Optionally, you can give:
+
+* `--apikey [key]` API key to link to your account.
+* `--text` use text instead of emojis in the table
+
 ## Channel
 
 ### **Add**
@@ -309,6 +321,19 @@ Now, you likely do not want to set this data manually every time you update. For
 
 To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the valid semver. Something like this:
 <figure><img src="/cli-upload-with-metadata.png" alt=""></figure>
+
+The `--min-update-version` is not the ONLY way to do compatibility.
+There also exists the `--auto-min-update-version`. Here is how it works.
+
+First, it takes a look at the version curently uploaded to the channel. It checks compatibility same as `bundle compatibility` command would.
+Second, if the new version is 100% compatible it reuses the `min_update_version` from the latest version in the channel.
+If not, then it sets the `min_update_version` to the bundle number of the newly uploaded version.
+
+You will always get an information what is the `min_update_version` when using this option. It will look something like this:
+<figure><img src="/min_update_version_info.png" alt=""></figure>
+
+If the new version is not compatible it should look something like this
+<figure><img src="/min_update_version_not_compatible.png" alt=""></figure>
 
 ## End-to-End encryption (Trustless)
 
