@@ -85,7 +85,7 @@ If you prefer to manually control the update process, follow these steps:
    await CapacitorUpdater.set(version)
    ```
 
-   Replace the `url` with the URL of your update distribution zip file.
+   Replace the `url` with the URL of your updated distribution zip file.
 
 5. Failed updates will automatically roll back to the last successful version.
 

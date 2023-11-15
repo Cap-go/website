@@ -226,7 +226,7 @@ Listen for Major update events in the App, let you know when a major update is b
 addListener(eventName: 'updateAvailable', listenerFunc: UpdateAvailableListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-Listen for update event in the App, let you know when the update is ready to install at next app start
+Listen for update event in the App, and let you know when the update update is ready to install at the next app start
 
 | Param              | Type                      |
 | ------------------ | ------------------------- |
@@ -308,7 +308,7 @@ removeAllListeners() => Promise<void>
 
 After install capacitor-updater to your project, you can configure some behavior:
 
-* `resetWhenUpdate` set it false to disable the reset version when update
+* `resetWhenUpdate` set it false to disable the reset version when updating
 * `autoUpdateUrl` the target URL to get updates
 * `autoUpdate` true or false depend on if you want manual or auto
 * `statsUrl` the target URL for stats, set it to "" to disable stats
