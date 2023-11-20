@@ -229,6 +229,19 @@ Optionally, you can give:
 * `--path [/path/to/my/bundle]` to upload a specific folder.
 * `--bundle [1.0.0]` to set the bundle version number of the filename.
 * `--name [myapp]` to override the filename.
+* `--json` to output info as json.
+  
+### **Compatibility** 
+
+`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[channelId]` the name of your new channel.
+
+Optionally, you can give:
+
+* `--apikey [key]` API key to link to your account.
+* `--text` use text instead of emojis in the table
 
 ## Channel
 
@@ -264,7 +277,6 @@ Optionally, you can give:
 
 * `--bundle [1.2.3]` your app bundle already sent to the cloud, to link it to a channel.
 * `--latest` get the bundle version from `package.json:version`, cannot be used with `--bundle`.
-* `--state [ normal | default ]` set the channel state, can be `normal` or `default`. One channel needs to be `default`.
 * `--downgrade` allows the channel to send downgrade version to devices.
 * `--no-downgrade` disallows the channel to send downgrade version to devices.
 * `--upgrade` allows the channel to send upgrade (major) version to devices.
@@ -275,7 +287,53 @@ Optionally, you can give:
 * `--no-android` disallows the channel to send version to android devices.
 * `--self-assign` allows devices to self assign to this channel.
 * `--no-self-assign` disallows devices to self assign to this channel.
+* `--disable-auto-update STRATEGY`  Disable auto update strategy for this channel.The possible options are: major, minor, metadata, none.
 * `--apikey [key]` API key to link to your account.
+
+## Disable updates strategy
+
+There are a few ways to handle disabling updates for too old versions.\
+Capgo cannot update native code thus an update from a version with the old native code to a version with the updated native code should not be possible.
+There are a couple of ways to achieve that.
+
+First, the `major` strategy. It prevents an update from `0.0.0` -> `1.0.0`. The major is the highlighted number (**1**.0.0 and **0**.0.0).\
+Second is the `minor` strategy. It prevents an update from `0.0.0` -> `1.1.0` or an update from `1.1.0` to `1.2.0`. 
+**BE AWARE** this strategy does not prevent an update from `0.1.0` -> `1.1.0`
+
+Lastly the most complicated strategy. The `metadata` strategy.\
+First you need to know that initially after you enable it the updates **WILL** fail as the channel is lacking the required metadata.\
+If the channel is lacking metadata you will see a message like this:
+<figure><img src="/fail-metadata.png" alt=""></figure>
+
+If you see something like this you know that you have to go to the current bundle for the failing channel and set the metadata.\
+First, figure out what channel is failing. You can do that by looking at the `misconfigured` column
+<figure><img src="/misconfigured-table.png" alt=""></figure>
+
+Then go to the failing channel and click on `Bundle number`. This should take you to the bundle page.
+<figure><img src="/fail-channel-show.png" alt=""></figure>
+
+Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver).\
+If the value you pass is not a semver you will get an error, but if everything goes correctly you should see something like this:
+<figure><img src="/set-min-update-version.png" alt=""></figure>
+
+Now, you likely do not want to set this data manually every time you update. Fortunately, the CLI will prevent you from sending an update without this metadata
+<figure><img src="/cli-fail-no-metadata.png" alt=""></figure>
+
+To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the valid semver. Something like this:
+<figure><img src="/cli-upload-with-metadata.png" alt=""></figure>
+
+The `--min-update-version` is not the ONLY way to do compatibility.
+There also exists the `--auto-min-update-version`. Here is how it works.
+
+First, it takes a look at the version curently uploaded to the channel. It checks compatibility same as `bundle compatibility` command would.
+Second, if the new version is 100% compatible it reuses the `min_update_version` from the latest version in the channel.
+If not, then it sets the `min_update_version` to the bundle number of the newly uploaded version.
+
+You will always get an information what is the `min_update_version` when using this option. It will look something like this:
+<figure><img src="/min_update_version_info.png" alt=""></figure>
+
+If the new version is not compatible it should look something like this
+<figure><img src="/min_update_version_not_compatible.png" alt=""></figure>
 
 ## End-to-End encryption (Trustless)
 

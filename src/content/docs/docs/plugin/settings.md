@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "All available setting for Capacitor Updater"
+description: "All available settings for Capacitor Updater"
 sidebar:
   order: 8
 ---
@@ -51,7 +51,7 @@ Default: `20` (20 second)
 
 ## `autoDeleteFailed` :
 
-> Configure whether the plugin should use automatically delete failed bundles.
+> Configure whether the plugin should automatically delete failed bundles.
 
 Only available for Android and iOS.
 
@@ -156,7 +156,7 @@ Default: `https://api.capgo.app/stats`
 
 ## `privateKey` :
 
-> Configure the private key for end to end live update encryption.
+> Configure the private key for end-to-end live update encryption.
 
 Only available for Android and iOS.
 
@@ -179,7 +179,7 @@ Default: `undefined`
 
 ## `directUpdate` :
 
-> Make the plugin direct install the update when the app what just updated/installed. Only for autoUpdate mode.
+> Make the plugin directly install the update when the app what just updated/installed. Only for autoUpdate mode.
 
 Only available for Android and iOS.
 

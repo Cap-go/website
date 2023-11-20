@@ -42,7 +42,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 * `SUCCESS`: install bundle done
 * `ERROR`: install or download failed
 * `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted still present for stats
+* `DELETED`: Bundle deleted, still present for stats
 * `DOWNLOADING`: Currently downloading a bundle
 
 ## Understanding device logs:
@@ -55,7 +55,7 @@ There is a debug command for Capgo cloud users.
 npx @capgo/cli@latest app debug
 ```
 
-This will allow you to check all event happening in app and find solution if update don't happen.
+This will allow you to check all events happening in the app and find a solution if updates don't happen.
 
 ### IOS
 
@@ -75,7 +75,7 @@ to find your logs on Android studio
     href="https://developer.android.com/studio/debug/am-logcat"
 />
 
-### Explainations
+### Explanations
 
 * `Failed to download from` **=>** same as **download\_fail**
 * `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
@@ -84,16 +84,16 @@ to find your logs on Android studio
 
 ### iOS
 
-To debug on iOS, you need to dump the app on your computer, you can do it like that :
+To debug on iOS, you need to dump the app on your computer, you can do it like this:
 
-Xcode has a built-in feature for inspecting the file system of developer installed apps on an iOS device.
+Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
 
 To achieve this:
 
 * Connect your device to your Mac and select Window > Devices in the Xcode menubar.
 * Select your device in the left pane under the Devices section.
-* This will show a list of developer installed apps for that device.
-* Select the app you want to inspect and then the select the gear icon near the bottom of the screen.
+* This will show a list of developer-installed apps for that device.
+* Select the app you want to inspect and then select the gear icon near the bottom of the screen.
 * Here you can view the current file system by selecting Show Container or download a snapshot of it.
 
 Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
@@ -104,9 +104,9 @@ Open the App Data folder, and you should now see a few folders like Documents, L
 
 ![image](https://user-images.githubusercontent.com/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243e.png)
 
-Then you will find version in 2 folders:
+Then you will find a version in 2 folders:
 
-`library/NoCloud/ionic_built_snapshots` who is necessary after app reboot
+`library/NoCloud/ionic_built_snapshots` is necessary after the app reboot
 
 and `documents/versions` for hot reload
 
@@ -120,10 +120,10 @@ To debug on Android, you need to access the device from Android Studio:
 
 ![image](https://user-images.githubusercontent.com/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5f.png)
 
-Then Find the `versions` folder to see all the folder versions
+Then Find the `versions` folder to see all the versions
 
 :::tip[Did you know?]
-On android all version are stored in one folder, unlike IOS where it has to be duplicated in two location.
+On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
 :::
 
 ## Understand ios production crash
