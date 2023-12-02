@@ -94,5 +94,5 @@ content['ldJSON'] = {
 ---
 
 <Layout content={content}>
-  <VueBlogSlug related={related} Content={markdown} client:load {...data.frontmatter} />
+  <VueBlogSlug toc={data.getHeadings()} related={related} Content={markdown} client:load {...data.frontmatter} />
 </Layout>
