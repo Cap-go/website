@@ -3,7 +3,7 @@ import { useRuntimeConfig } from '../config/app'
 
 try {
   const config = useRuntimeConfig()
-  const data = `User-agent: *\nAllow: /\nUser-agent: *\nDisallow: /rss.xml\nSitemap: ${config.public.baseUrl}/sitemap.xml`
+  const data = `User-agent: *\nAllow: /\nUser-agent: *\nDisallow: /rss.xml\nSitemap: ${config.public.baseUrl}/sitemap-index.xml`
   return new Response(data.toString(), {
     status: 200,
     headers: {

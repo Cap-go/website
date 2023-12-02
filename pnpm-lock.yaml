@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@astrojs/sitemap':
+    specifier: latest
+    version: 3.0.3
   '@astrojs/starlight':
     specifier: ^0.10.3
     version: 0.10.4(astro@3.6.0)
