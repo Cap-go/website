@@ -22,7 +22,8 @@
     "openai": "^4.0.1",
     "sharp": "^0.32.4",
     "sitemap": "^7.1.1",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "@astrojs/sitemap": "latest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.0",
