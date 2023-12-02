@@ -48,8 +48,8 @@ const props = defineProps<{
       <div class="hidden pl-2 pl-4 pl-6 pl-8 pl-10" />
       <ul class="list-none hidden xl-flex flex-col rounded text-left bg-white/10 absolute w-[280px] top-0 left-10 p-5">
         <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
-        <li v-for="item in toc" class="block mt-2 text-gray-400 hover:text-gray-200">
-          <a class="truncate" :class="'pl-' + (item.depth - 2) * 2" :href="'#' + item.slug">
+        <li v-for="item in toc" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+          <a :class="'pl-' + Math.max(0, (item.depth - 2) * 2)" :href="'#' + item.slug">
             {{ item.text }}
           </a>
         </li>
@@ -58,14 +58,15 @@ const props = defineProps<{
         <ul class="flex flex-col p-4 rounded bg-white/10">
           <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
           <div class="hidden pl-4 pl-8 pl-12 pl-16 pl-20" />
-          <li v-for="item in toc" class="block mt-2 text-gray-400 hover:text-gray-200">
-            <a :class="'pl-' + (item.depth - 2) * 4" :href="'#' + item.slug">
+          <li v-for="item in toc" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+            <a :class="'pl-' + Math.max(0, (item.depth - 2) * 4)" :href="'#' + item.slug">
               {{ item.text }}
             </a>
           </li>
         </ul>
       </div>
-      <article v-if="props" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2" v-html="props.Content" />
+      <article v-if="props" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2"
+        v-html="props.Content" />
     </div>
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">

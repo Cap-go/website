@@ -25,7 +25,8 @@ const props = defineProps<{
   <main class="text-center text-white">
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div v-if="props?.head_image" class="block aspect-w-4 aspect-h-3">
-        <img class="object-cover w-full h-full lg:rounded-lg" :src="props?.head_image" :alt="`article illustration ${props?.title}`">
+        <img class="object-cover w-full h-full lg:rounded-lg" :src="props?.head_image"
+          :alt="`article illustration ${props?.title}`">
       </div>
 
       <div class="absolute top-4 left-4 lg:top-15 lg:left-10">
@@ -47,8 +48,8 @@ const props = defineProps<{
       <div class="hidden pl-2 pl-4 pl-6 pl-8 pl-10" />
       <ul class="list-none hidden xl-flex flex-col rounded text-left bg-white/10 absolute w-[280px] top-0 left-10 p-5">
         <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
-        <li v-for="item in toc" class="block mt-2 text-gray-400 hover:text-gray-200">
-          <a class="truncate" :class="'pl-' + (item.depth - 2) * 2" :href="'#' + item.slug">
+        <li v-for="item in toc" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+          <a :class="'pl-' + Math.max(0, (item.depth - 2) * 2)" :href="'#' + item.slug">
             {{ item.text }}
           </a>
         </li>
@@ -57,14 +58,15 @@ const props = defineProps<{
         <ul class="flex flex-col p-4 rounded bg-white/10">
           <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
           <div class="hidden pl-4 pl-8 pl-12 pl-16 pl-20" />
-          <li v-for="item in toc" class="block mt-2 text-gray-400 hover:text-gray-200">
-            <a :class="'pl-' + (item.depth - 2) * 4" :href="'#' + item.slug">
+          <li v-for="item in toc" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+            <a :class="'pl-' + Math.max(0, (item.depth - 2) * 4)" :href="'#' + item.slug">
               {{ item.text }}
             </a>
           </li>
         </ul>
       </div>
-      <article v-if="props" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2" v-html="props.Content" />
+      <article v-if="props" class="mx-auto text-left text-white prose md:rounded-lg text-white pb-4 px-4 lg:max-w-1/2"
+        v-html="props.Content" />
     </div>
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -77,31 +79,21 @@ const props = defineProps<{
           </p>
         </div>
 
-        <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
-          <Blog
-            v-for="article in related"
-            :key="article.frontmatter.slug"
-            :tag="article.frontmatter.tag"
-            :title="article.frontmatter.title"
-            :date="article.frontmatter.created_at"
-            :image="article.frontmatter.head_image"
-            :link="`/blog/${article.frontmatter.slug}/`"
-            :description="article.frontmatter.description"
-          />
+        <div v-if="related"
+          class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 xl:gap-6 lg:grid-cols-3 lg:max-w-none sm:mt-16">
+          <Blog v-for="article in related" :key="article.frontmatter.slug" :tag="article.frontmatter.tag"
+            :title="article.frontmatter.title" :date="article.frontmatter.created_at"
+            :image="article.frontmatter.head_image" :link="`/blog/${article.frontmatter.slug}/`"
+            :description="article.frontmatter.description" />
         </div>
 
         <div class="mt-12 text-center">
-          <a href="/blog" title="" class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline">
+          <a href="/blog" title=""
+            class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline">
             See all from our blog
-            <svg
-              class="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2.5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg class="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"
+              stroke-linejoin="round">
               <line x1="7" y1="17" x2="17" y2="7" />
               <polyline points="7 7 17 7 17 17" />
             </svg>
