@@ -20,6 +20,7 @@ export default defineConfig({
     vue(),
     AstroPWA(pwa),
     starlight({
+      favicon: '/favicon.svg',
       title: 'Capgo',
       // logo: { src: './logo.svg' },
       social: {
