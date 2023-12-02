@@ -164,7 +164,7 @@ fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
                 </div>
 
                 <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/mangroove_logo.svg" alt="mangroove" title="mangroove">
+                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/suez_logo.webp" alt="suez moneau" title="suez moneau">
                 </div>
               </div>
 
