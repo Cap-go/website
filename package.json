@@ -11,7 +11,7 @@
     "fmt": "prettier --write '**/*' --ignore-unknown"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.10.3",
+    "@astrojs/starlight": "^0.15.0",
     "@astrojs/vue": "^3.0.0",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
