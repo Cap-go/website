@@ -29,7 +29,15 @@ Then you self-host update, be mindful you cannot use "HTTP" endpoint it's again 
 	href="https://stackoverflow.com/a/51902630/5511370"
 />
 
-Unzip issue. If you zipped your bundle with Window, the format could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER` or ZIP with Linux.
+Unzip issue: DEFLATED entries can have EXT descriptor
+
+If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+
+This is a know issue of Java:
+
+<LinkCard
+	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	href="https://bugs.openjdk.org/browse/JDK-8143613"
 
 
 ## Build
