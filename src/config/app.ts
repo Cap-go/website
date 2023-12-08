@@ -54,7 +54,7 @@ export function useRuntimeConfig() {
   }
 }
 
-export const structuredData = JSON.stringify({
+export const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -126,4 +126,4 @@ export const structuredData = JSON.stringify({
       ],
     },
   ],
-})
+}
