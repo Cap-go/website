@@ -17,11 +17,17 @@ export default defineConfig({
   },
   integrations: [
     UnoCSS({ injectReset: true }),
-    vue(),
+    vue({
+      template: {
+        transformAssetUrls: {
+          includeAbsolute: false,
+        },
+      },
+    }),
     AstroPWA(pwa),
     starlight({
-      favicon: '/favicon.svg',
       title: 'Capgo',
+      favicon: '/favicon.svg',
       // logo: { src: './logo.svg' },
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
