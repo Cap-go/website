@@ -1,5 +1,6 @@
 ---
 title: "From V4 to V5"
+description: "How to upgrade from V4 to V5"
 sidebar:
   order: 1
 ---

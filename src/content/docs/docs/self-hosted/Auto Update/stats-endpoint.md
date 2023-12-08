@@ -1,5 +1,6 @@
 ---
 title: "Stats endpoint"
+description: "How to create an self-hosted stats endpoint"
 sidebar:
   order: 2
 ---

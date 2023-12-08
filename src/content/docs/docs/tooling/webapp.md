@@ -1,5 +1,6 @@
 ---
 title: "Webapp"
+description: "How to use Capgo webapp"
 sidebar:
   order: 3
 ---

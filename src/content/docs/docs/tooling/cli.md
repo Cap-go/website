@@ -1,5 +1,6 @@
 ---
 title: "CLI"
+description: "Capgo CLI documentation"
 sidebar:
   order: 1
 ---

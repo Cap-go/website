@@ -1,5 +1,6 @@
 ---
 title: "Update endpoint"
+description: "How to create an self-hosted update endpoint"
 sidebar:
   order: 1
 ---
@@ -64,8 +65,8 @@ This endpoint should return a JSON:
 
 ```json
 {
-      "version": "1.0.2",
-      "url": "https://apiurl.com/mybuild_102.zip",
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip"
 }
 ```
 
@@ -73,9 +74,9 @@ And if no update or error, add the `message` key and optionally an `error`
 
 ```json
 {
-    "message": "Version not found",
-    "error": "The backend crashed",
-    "version": "1.0.2",
-     "url": "https://apiurl.com/mybuild_102.zip",
+  "message": "Version not found",
+  "error": "The backend crashed",
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip"
 }
 ```

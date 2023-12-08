@@ -1,5 +1,6 @@
 ---
 title: "API"
+description: "Capgo cloud API documentation"
 sidebar:
   order: 2
 ---

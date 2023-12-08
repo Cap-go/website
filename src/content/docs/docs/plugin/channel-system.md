@@ -1,5 +1,6 @@
 ---
 title: "Channel system"
+description: "How to use channel system with capacitor-updater"
 sidebar:
   order: 6
 ---

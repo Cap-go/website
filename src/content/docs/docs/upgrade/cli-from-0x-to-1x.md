@@ -1,5 +1,6 @@
 ---
 title: "CLI From 0.x to 1.x"
+description: "How to upgrade from 0.x to 1.x"
 sidebar:
   order: 4
 ---

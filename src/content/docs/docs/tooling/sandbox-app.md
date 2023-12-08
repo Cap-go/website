@@ -1,5 +1,6 @@
 ---
 title: "Sandbox App"
+description: "Capgo sandbox app documentation"
 sidebar:
   order: 4
 ---

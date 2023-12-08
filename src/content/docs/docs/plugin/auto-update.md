@@ -1,5 +1,6 @@
 ---
 title: "Auto update"
+description: "How to use auto-update with capacitor-updater"
 sidebar:
   order: 3
 ---

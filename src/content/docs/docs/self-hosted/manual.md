@@ -1,5 +1,6 @@
 ---
 title: "Manual"
+description: "How to use Capgo updater in manual mode"
 sidebar:
     order: 3
 ---

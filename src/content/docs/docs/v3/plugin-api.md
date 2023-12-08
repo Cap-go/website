@@ -1,5 +1,6 @@
 ---
 title: "Plugin API"
+description: "Capacitor Updater plugin API Deprecated V3"
 sidebar:
   order: 1
 ---

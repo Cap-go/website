@@ -1,5 +1,6 @@
 ---
 title: "Cordova"
+description: "Will capacitor-updater be available in Cordova?"
 sidebar:
   order: 8
 ---
