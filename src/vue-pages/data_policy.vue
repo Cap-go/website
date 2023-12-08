@@ -19,38 +19,38 @@ const brand = config.public.brand
 // })
 </script>
 
-
 <template>
   <div class="prose prose-sm m-auto text-left px-3">
-  <p>Last updated: September 21, 2023</p>
-  <p>A data policy contains a set of rules, principles, and guidelines that provide a framework for different areas of data management throughout the enterprise, including but not limited to data governance, data quality, and data architecture.</p>
-  <h2>What we collect and what we use it for</h2>
-  <p>We do not track people across their devices and across websites and apps that they visit. All the data is isolated to a single day, single website and single device only. There is no way to know whether the same person visits a site from more than one device or visits another website</p>
-  <p>The goal of Capgo is to track overall trends in your website traffic, it is not to track individual visitors. We don’t use cookies, we don’t generate any persistent identifiers and we don’t collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.</p>
-  <p>By using Capgo, all the site measurement is carried out absolutely anonymously. We measure only the most essential data points and nothing else. All the metrics we do collect fit on one single page.</p>
-  <h2>How we count unique users without cookies</h2>
-  <p>Counting unique visitors is an integral part of web analytics. Capgo attempts to strike a reasonable balance between de-duplicating pageviews and staying respectful of visitor privacy.</p>
-  <p>We do not attempt to generate a device-persistent identifier because they are considered personal data under GDPR. We do not use cookies, browser cache nor the local storage. We do not store, retrieve nor extract anything from visitor’s devices.</p>
-  <p>Every single HTTP request sends the IP address and the User-Agent to the server so that’s what we use. We generate a daily changing identifier using the visitor’s IP address and User-Agent.</p>
-  <p>In our testing, using IP addresses to count visitors is remarkably accurate when compared to using a cookie. In some cases it might even be more accurate than using a cookie because some visitors block cookies altogether.</p>
-  <p>We’re happy to provide information on how Capgo is built to help you comply with the different privacy regulations. We encourage you to discuss specific issues with your lawyer to help you decide whether our service allows you to fulfill the legal requirements that apply to you.</p>
-  <h2>Data ownership of your web</h2>
-  <p>When you use our service,Capgo will collect information about your visitors. You entrust us with your site data and we take that trust to heart. The privacy of your site data — and it is your data, not ours! — is a big deal to us.</p>
-  <p>By using Capgo, you keep 100% ownership of your website data. Although when using our hosted service, your site analytics are stored on our server in the cloud, you remain completely in control of your site data and you fully own all of your data too.</p>
-  <p>You own all right, title, and interest to your website data. We obtain no rights from you to your website data. We will never sell or share your site data to any third-parties.</p>
-  <ul>
-  <li>Your website data is not shared with advertising companies or any other companies in general.</li>
-  <li>Your website data is not sent to any third-parties at all.</li>
-  <li>Your website data is not mined and harvested for personal and behavioral trends.</li>
-  <li>Your website data is not monetized.</li>
-  <p>You can choose to delete your account and delete your site stats at any time. We provide simple no-questions-asked deletion links.</p>
-  <p>All your stats will be permanently deleted immediately when you delete your Capgo account or when you delete your site stats. We cannot recover this information once it has been permanently deleted.</p>
-  <h2>Why should I trust you?</h2>
-  <p><a :href="`${domain}/`" rel="external nofollow noopener" target="_blank">Capgo</a> is 100% open source . Our source code is available and accessible on GitHub so you can read it and review it to ensure our code does what we say.</p>
-  <p>We are not a black box. Everything is in the open. Anyone can view, review and inspect the code we’re running to verify that we practice what we preach.</p>
-  <p>This is essential in the market of privacy software. Corporations and proprietary software cannot always be trusted when data is in question. The only way to prove your trust is to allow experts to look into your code and verify that you’re actually doing what you’re saying you’re doing.</p>
-  </ul>
-      <h2>GDPR Privacy</h2>
+    <h1>Data Policy</h1>
+    <p>Last updated: September 21, 2023</p>
+    <p>A data policy contains a set of rules, principles, and guidelines that provide a framework for different areas of data management throughout the enterprise, including but not limited to data governance, data quality, and data architecture.</p>
+    <h2>What we collect and what we use it for</h2>
+    <p>We do not track people across their devices and across websites and apps that they visit. All the data is isolated to a single day, single website and single device only. There is no way to know whether the same person visits a site from more than one device or visits another website</p>
+    <p>The goal of Capgo is to track overall trends in your website traffic, it is not to track individual visitors. We don’t use cookies, we don’t generate any persistent identifiers and we don’t collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.</p>
+    <p>By using Capgo, all the site measurement is carried out absolutely anonymously. We measure only the most essential data points and nothing else. All the metrics we do collect fit on one single page.</p>
+    <h2>How we count unique users without cookies</h2>
+    <p>Counting unique visitors is an integral part of web analytics. Capgo attempts to strike a reasonable balance between de-duplicating pageviews and staying respectful of visitor privacy.</p>
+    <p>We do not attempt to generate a device-persistent identifier because they are considered personal data under GDPR. We do not use cookies, browser cache nor the local storage. We do not store, retrieve nor extract anything from visitor’s devices.</p>
+    <p>Every single HTTP request sends the IP address and the User-Agent to the server so that’s what we use. We generate a daily changing identifier using the visitor’s IP address and User-Agent.</p>
+    <p>In our testing, using IP addresses to count visitors is remarkably accurate when compared to using a cookie. In some cases it might even be more accurate than using a cookie because some visitors block cookies altogether.</p>
+    <p>We’re happy to provide information on how Capgo is built to help you comply with the different privacy regulations. We encourage you to discuss specific issues with your lawyer to help you decide whether our service allows you to fulfill the legal requirements that apply to you.</p>
+    <h2>Data ownership of your web</h2>
+    <p>When you use our service,Capgo will collect information about your visitors. You entrust us with your site data and we take that trust to heart. The privacy of your site data — and it is your data, not ours! — is a big deal to us.</p>
+    <p>By using Capgo, you keep 100% ownership of your website data. Although when using our hosted service, your site analytics are stored on our server in the cloud, you remain completely in control of your site data and you fully own all of your data too.</p>
+    <p>You own all right, title, and interest to your website data. We obtain no rights from you to your website data. We will never sell or share your site data to any third-parties.</p>
+    <ul>
+      <li>Your website data is not shared with advertising companies or any other companies in general.</li>
+      <li>Your website data is not sent to any third-parties at all.</li>
+      <li>Your website data is not mined and harvested for personal and behavioral trends.</li>
+      <li>Your website data is not monetized.</li>
+      <p>You can choose to delete your account and delete your site stats at any time. We provide simple no-questions-asked deletion links.</p>
+      <p>All your stats will be permanently deleted immediately when you delete your Capgo account or when you delete your site stats. We cannot recover this information once it has been permanently deleted.</p>
+      <h2>Why should I trust you?</h2>
+      <p><a :href="`${domain}/`" rel="external nofollow noopener" target="_blank">Capgo</a> is 100% open source . Our source code is available and accessible on GitHub so you can read it and review it to ensure our code does what we say.</p>
+      <p>We are not a black box. Everything is in the open. Anyone can view, review and inspect the code we’re running to verify that we practice what we preach.</p>
+      <p>This is essential in the market of privacy software. Corporations and proprietary software cannot always be trusted when data is in question. The only way to prove your trust is to allow experts to look into your code and verify that you’re actually doing what you’re saying you’re doing.</p>
+    </ul>
+    <h2>GDPR Privacy</h2>
     <h3>Legal Basis for Processing Personal Data under GDPR</h3>
     <p>We may process Personal Data under the following conditions:</p>
     <ul>
@@ -417,4 +417,4 @@ const brand = config.public.brand
       entity to another entity without hindrance.
     </p>
   </div>
-  </template>
+</template>
