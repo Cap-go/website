@@ -10,7 +10,7 @@ updated_at: 2023-06-29
 head_image: "/gitlab_ci.webp"
 head_image_alt: Gitlab CI illustration
 tag: CI/CD
-published: false
+published: true
 next_blog: ""
 
 ---
