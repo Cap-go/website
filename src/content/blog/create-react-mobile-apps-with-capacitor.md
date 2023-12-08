@@ -50,22 +50,7 @@ In order to create a native mobile app, we require an **export** of our project.
 }
 ```
 
-After executing the command, errors may occur because image optimization is incompatible with this setting. Consequently, open up the **next.config.js** file and modify it as follows:
-
-```typescript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-reactStrictMode: true,
-swcMinify: true,
-images: {
-unoptimized: true
-}
-};
-
-module.exports = nextConfig;
-```
-
-You can now run `npm run static` without any worries, and you should be able to spot a fresh out folder at your project's root.
+You can now run `npm run build` without any worries, and you should be able to spot a fresh out folder at your project's root.
 
 This folder will be used by Capacitor later on, but for now, we must set it up correctly.
 
@@ -120,7 +105,9 @@ npm run build
 npx cap sync
 ```
 
-The first command `npm run build` will simply build your React project and export the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+The first command `npm run build` will simply build your React project and export the static build.
+
+While the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
 Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins) it’s time to run `npx cap sync` again.
 
@@ -255,7 +242,7 @@ npx cap sync
 After hitting the button, you can witness the beautiful native share dialog in action!
 
 <div class="mx-auto" style="width: 50%;">
-  <img src="/react-capacitor-share.webp" alt="react-capacitor-share">
+  <img src="/next-capacitor-share.webp" alt="react-capacitor-share">
 </div>
 
 To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - React (no pun intended).
