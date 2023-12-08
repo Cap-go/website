@@ -42,7 +42,7 @@ const menuMobile = ref(false)
             Blog
           </a>
           <a
-            href="/docs"
+            href="/docs/"
             title="Documentation"
             class="text-base font-medium duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
@@ -57,7 +57,7 @@ const menuMobile = ref(false)
             Login
           </a>
           <a
-            href="/register"
+            href="/register/"
             target="_blank"
             title="Register"
             class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
@@ -73,9 +73,9 @@ const menuMobile = ref(false)
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a href="/pricing/" title="Pricing" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Pricing </a>
         <a href="/blog/" title="Blog" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Blog </a>
-        <a href="/docs" title="Documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Documentation </a>
+        <a href="/docs/" title="Documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Documentation </a>
         <a
-          href="https://web.capgo.app/login"
+          href="https://web.capgo.app/login/"
           target="_blank"
           title="Login"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
@@ -83,7 +83,7 @@ const menuMobile = ref(false)
           Login
         </a>
         <a
-          href="/register"
+          href="/register/"
           title="Communauty"
           target="_blank"
           class="bg-gray-900 text-white block rounded-md text-base font-medium px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white"
