@@ -46,7 +46,7 @@ const props = defineProps<{
         {{ props?.description }}
       </p>
       <div class="hidden pl-2 pl-4 pl-6 pl-8 pl-10" />
-      <ul class="list-none hidden xl-flex flex-col rounded text-left bg-white/10 absolute w-[280px] top-0 left-10 p-5">
+      <ul v-if="toc?.length" class="list-none hidden xl-flex flex-col rounded text-left bg-white/10 absolute w-[280px] top-0 left-10 p-5">
         <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
         <li v-for="item in toc" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
           <a :class="'pl-' + Math.max(0, (item.depth - 2) * 2)" :href="'#' + item.slug">
@@ -54,7 +54,7 @@ const props = defineProps<{
           </a>
         </li>
       </ul>
-      <div class="flex flex-col xl-hidden mx-auto lg:max-w-1/2 rounded text-left px-4">
+      <div v-if="toc?.length" class="flex flex-col xl-hidden mx-auto lg:max-w-1/2 rounded text-left px-4">
         <ul class="flex flex-col p-4 rounded bg-white/10">
           <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
           <div class="hidden pl-4 pl-8 pl-12 pl-16 pl-20" />
