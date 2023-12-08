@@ -9,16 +9,16 @@ const year = new Date().getFullYear()
 
 const navigation = {
   solutions: [
-    { name: 'Register', href: '/register', target: '_blank' },
+    { name: 'Register', href: '/register/', target: '_blank' },
     { name: 'App mobile', href: '/app_mobile/' },
     {
       name: 'Documentation',
-      href: '/docs',
+      href: '/docs/',
     },
     { name: 'Plugins', href: '/plugins/' },
     {
       name: 'Awesome capacitor',
-      href: 'https://github.com/riderx/awesome-capacitor',
+      href: 'https://github.com/riderx/awesome-capacitor/',
       target: '_blank',
     },
     { name: 'Top app by Framework', href: '/top_app/' },
@@ -31,7 +31,7 @@ const navigation = {
   support: [
     {
       name: 'Community',
-      href: 'https://discord.gg/VnYRvBfgA6',
+      href: 'https://discord.gg/VnYRvBfgA6/',
       target: '_blank',
     },
     { name: 'Pricing', href: '/pricing/' },
@@ -47,13 +47,13 @@ const navigation = {
   company: [
     // { name: 'About', href: '#' },
     { name: 'Imprint', href: '/imprint/' },
-    { name: 'Jobs', href: 'https://console.algora.io/org/capgo/bounties?status=open' },
+    { name: 'Jobs', href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: 'Contributing', href: '/contributing/' },
     { name: 'Security', href: '/trust/' },
     { name: 'Consulting', href: '/consulting/' },
     {
       name: 'Affiliate',
-      href: 'https://affiliates.reflio.com/invite/capgo',
+      href: 'https://affiliates.reflio.com/invite/capgo/',
       target: '_blank',
     },
   ],
@@ -72,7 +72,7 @@ const navigation = {
   hero: [
     {
       name: '5% of revenue go to carbon removal',
-      href: 'https://climate.stripe.com/vxDf62',
+      href: 'https://climate.stripe.com/vxDf62/',
       icon: defineComponent({
         render: () =>
           h(
@@ -95,7 +95,7 @@ const navigation = {
     },
     {
       name: '100% open-source',
-      href: 'https://github.com/Cap-go',
+      href: 'https://github.com/Cap-go/',
       icon: `
 
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0 0 16 15" version="1.1">
@@ -131,7 +131,7 @@ const navigation = {
     },
     {
       name: 'Build in public on Twitter',
-      href: 'https://x.com/Capgo_app',
+      href: 'https://x.com/martindonadieu/',
       icon: defineComponent({
         render: () =>
           h(
