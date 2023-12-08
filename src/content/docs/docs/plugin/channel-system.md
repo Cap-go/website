@@ -24,7 +24,7 @@ You can also, for a specific case, assign a device directly to a bundle, for deb
 
 ## Channel options
 
-<figure><img src="/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
 
 Meaning of each:
 

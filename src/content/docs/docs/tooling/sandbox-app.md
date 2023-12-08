@@ -34,11 +34,11 @@ Connect your account.
 
 Like below
 
-![](https://user-images.githubusercontent.com/4084527/163660693-fb5446ea-ec37-48c4-b6a7-f3a9d1870bf5.png)
+![](https://user-images.githubusercontent.com/4084527/163660693-fb5446ea-ec37-48c4-b6a7-f3a9d1870bf5.webp)
 
 #### Then click on it to see all versions uploaded:
 
-![](https://user-images.githubusercontent.com/4084527/163660706-71d10686-a576-4dc4-be2c-a42ce813a198.png)
+![](https://user-images.githubusercontent.com/4084527/163660706-71d10686-a576-4dc4-be2c-a42ce813a198.webp)
 
 If you click on one, you can test the version directly in the test app
 
@@ -48,7 +48,7 @@ If you click on one, you can test the version directly in the test app
 
 Shake your phone at any time to see the menu below
 
-![](https://user-images.githubusercontent.com/4084527/163660713-dbfd8d37-494d-4ce2-a696-67faa02f4b01.png)
+![](https://user-images.githubusercontent.com/4084527/163660713-dbfd8d37-494d-4ce2-a696-67faa02f4b01.webp)
 
 ## Available native API
 

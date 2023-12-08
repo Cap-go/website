@@ -9,7 +9,7 @@ To integrate Capgo, follow these simple steps:
 
 1. If you don't have an account yet, create one by visiting our registration page at [https://web.capgo.app/register](https://web.capgo.app/register).
 
-![onboarding screenshot](/onboard.png "onboarding screenshot")
+![onboarding screenshot](/onboard.webp "onboarding screenshot")
 
 
 2. Once you have your account set up, use the CLI command displayed on your screen for onboarding. This command will guide you through the setup process.
