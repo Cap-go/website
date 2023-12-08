@@ -1,3 +1,7 @@
+---
+published: true
+---
+
 # @capgo/native-market Package Tutorial
 
 The `@capgo/native-market` package is a Capacitor community plugin for the native market, allowing you to interact with the Play Store and App Store. This tutorial will guide you through the installation and usage of this package in your Capacitor project.

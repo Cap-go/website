@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
 import { actions } from '../config/plugins'
 import type { Action } from '../config/plugins'
+import { getSlug } from '../services/github'
 
 const plugins = ref<Action[]>(actions)
 
@@ -27,7 +28,7 @@ onMounted(() => {
         <a
           v-for="item in plugins"
           :key="item.href"
-          :href="item.href !== 'N/A' ? `/plugins/${item.href.substring(item.href.lastIndexOf('/') + 1)}` : '#'"
+          :href="item.href !== 'N/A' ? `/plugins/${getSlug(item.href)}` : '#'"
           class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
         >
           <div class="flex flex-col px-5 py-3">
