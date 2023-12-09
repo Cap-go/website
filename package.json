@@ -11,19 +11,19 @@
     "fmt": "prettier --write '**/*' --ignore-unknown"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.10.3",
-    "@astrojs/vue": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.3",
+    "@astrojs/starlight": "^0.15.0",
+    "@astrojs/vue": "^4.0.2",
     "@headlessui/vue": "^1.7.15",
     "@heroicons/vue": "^2.0.18",
-    "astro": "^3.2.1",
+    "astro": "^4.0.3",
     "faiss-node": "^0.3.0",
     "langchain": "^0.0.131",
     "marked": "^7.0.3",
     "openai": "^4.0.1",
     "sharp": "^0.32.4",
     "sitemap": "^7.1.1",
-    "vue": "^3.3.4",
-    "@astrojs/sitemap": "latest"
+    "vue": "^3.3.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.40.0",
