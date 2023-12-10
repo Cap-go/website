@@ -59,13 +59,20 @@ xmlns:tools="http://schemas.android.com/tools"
 
 ## IOS
 
-## Build
+### Network permissions
 
-### GetConfig
+When using local server for testing update, the app will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
 
-This problem happens when your app uses capacitor 3 with Capgo 4, upgrade your app to v4 or use Capgo v3 (not recommended it's deprecated and soon will not work)
 
-<figure><img src="/issue_get_config.webp" alt="" /><figcaption></figcaption></figure>
+## Both OS
+
+When doing manual mode update, some event are not easy to catch, like update fail is trigger just before your JS code reload, so you will not be able to catch it.
+
+One alternative is to list the bundles and check if one is in error stats to know if the update fail.
+
+We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do update.
+
+PR are welcome to help us improve this.
 
 ## CLI
 
