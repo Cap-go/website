@@ -17,11 +17,6 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       provider: 'none',
-      fonts: {
-        light: 'AirbnbCerealLight',
-        medium: 'AirbnbCerealMedium',
-        bold: 'AirbnbCerealBold',
-      },
     }),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
