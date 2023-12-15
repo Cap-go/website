@@ -38,24 +38,3 @@ html.dark {
 .calc-label {
   @apply mt-5 text-sm font-bold tracking-widest uppercase mt-0;
 }
-
-@font-face {
-  font-family: 'AirbnbCerealLight';
-  font-weight: 500;
-  src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AirbnbCerealMedium';
-  font-weight: 500;
-  src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AirbnbCerealBold';
-  font-weight: 500;
-  src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-  font-display: swap;
-}
