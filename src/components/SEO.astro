@@ -1,4 +1,5 @@
 ---
+import { AstroFont } from 'astro-font'
 import { structuredData } from '../config/app'
 import { appDescription, appName } from '../constants'
 import { baseDomain, useRuntimeConfig } from '../config/app'
@@ -25,6 +26,53 @@ if (description.length > descSize) {
 const image_unsecure = image.replace('https://', 'http://')
 const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
 ---
+
+<AstroFont
+  config={[
+    {
+      preload: false,
+      display: 'swap',
+      fallback: 'serif',
+      selector: '.font-light',
+      name: 'AirbnbCerealLight',
+      src: [
+        {
+          style: 'light',
+          weight: '300',
+          path: './public/fonts/AirbnbCerealLight.woff',
+        },
+      ],
+    },
+    {
+      preload: false,
+      display: 'swap',
+      fallback: 'serif',
+      selector: '.font-medium',
+      name: 'AirbnbCerealMedium',
+      src: [
+        {
+          style: 'medium',
+          weight: '500',
+          path: './public/fonts/AirbnbCerealMedium.woff',
+        },
+      ],
+    },
+    {
+      preload: true,
+      display: 'swap',
+      fallback: 'serif',
+      selector: '.font-bold',
+      name: 'AirbnbCerealBold',
+      src: [
+        {
+          style: 'bold',
+          weight: '800',
+          path: './public/fonts/AirbnbCerealBold.woff',
+        },
+      ],
+    },
+  ]}
+/>
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
