@@ -8,7 +8,7 @@ created_at: 2023-12-14
 updated_at: 2023-12-14
 head_image: "/deeplink_next_capacitor.webp"
 head_image_alt: "Capacitor Universal Links"
-tag: Next.js, Capacitor, Deep Links
+tag: DeepLinking
 published: true
 next_blog: ""
 
