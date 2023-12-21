@@ -4,11 +4,11 @@ import { useRuntimeConfig } from '../../config/app'
 import VueBlogSlug from '../../vue-pages/blog/[slug].vue'
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob('../../content/blog/**/*.md')
+const allBlogPosts = await Astro.glob('../../content/blog/**/*.md');
+const posts = allBlogPosts.filter((j) => j.frontmatter.published);
   return posts.map((post) => {
     let related = posts
       .filter((i) => i.frontmatter.slug !== post.frontmatter.slug)
-      .filter((i) => i.frontmatter.published)
       .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
       .slice(0, 3)
     if (post.frontmatter.next_blog) {
