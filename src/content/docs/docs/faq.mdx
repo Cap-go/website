@@ -6,37 +6,37 @@ Code push, also referred to as "over the air updates" (OTA) is a cloud service e
 
 "Code Push" is a reference to the name of a deploy feature used by the React Native community from [Microsoft](https://appcenter.ms/) and [Expo](https://expo.dev/), neither of which support Capacitor.
 
-### What is the difference between a patch and a release?[](https://capgo.app/docs/faq#what-is-the-difference-between-a-patch-and-a-release "Direct link to What is the difference between a patch and a release?")
+### What is the difference between a bundle and a release?[](https://capgo.app/docs/faq#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")
 
-We use the term "release" to mean preparing a binary for the app stores. In order to later generate a patch Capgo needs to know the exact binary that was shipped to the app stores. The `capgo release` command is used to prepare a binary for the app stores which includes the Capgo updater.
+We use the term "release" to mean preparing a binary for the app stores. In order to later generate a bundle Capgo needs to know the exact binary that was shipped to the app stores.
 
-We use the term "patch" to mean a binary that can be applied to a release to update it to new code. The `capgo patch` command is used to generate a patch from your new local code which is then diffed with the release binary to generate a patch which is then shipped to your users.
+We use the term "bundle" to mean a patch that can be applied to a release to update it to new code. The `npx @capgo/cli app update` command is used to generate a bundle from your new local code which is then shipped to your users.
 
-We explain more of these terms in [Concepts](https://docs.capgo.dev/concepts).
+We explain more of these terms in [Concepts](https://capgo.app/docs/concepts).
 
 ### What is the roadmap?[](https://capgo.app/docs/faq#what-is-the-roadmap "Direct link to What is the roadmap?")
 
-We try to keep: [https://docs.capgo.dev/status](https://docs.capgo.dev/status) up to date with the status of the project.
+We try to keep: [https://capgo.app/docs/status](https://capgo.app/docs/status) up to date with the status of the project.
 
-Our project boards are also public an found at: [https://github.com/orgs/capgotech/projects](https://github.com/orgs/capgotech/projects)
+Our project boards are also public an found at: [https://github.com/orgs/Cap-go/projects](https://github.com/orgs/Cap-go/projects)
 
-Our team also operates in the public, so you can see what we're working on at any time. We're happy to answer any questions you have about our roadmap or priorities via Github issues or [Discord](https://discord.gg/capgo).
+Our team also operates in the public, so you can see what we're working on at any time. We're happy to answer any questions you have about our roadmap or priorities via Github issues or [Discord](https://discord.gg/VnYRvBfgA6).
 
 ### Can I use Capgo with my team?[](https://capgo.app/docs/faq#can-i-use-capgo-with-my-team "Direct link to Can I use Capgo with my team?")
 
 Yes! The Capgo free "Hobby" tier only supports a single developer, but all other plans support unlimited developers.
 
-See [Teams](https://docs.capgo.dev/teams) for more information.
+See [Teams](https://capgo.app/docs/teams) for more information.
 
 ### Does Capgo store my source code?[](https://capgo.app/docs/faq#does-capgo-store-my-source-code "Direct link to Does Capgo store my source code?")
 
-No. Capgo servers never see your source code. When you run `capgo release` or `capgo patch` the `capgo` tool only uploads the same compiled app binary that you send to the app stores. Capgo servers never store your source code at any time.
+No. Capgo servers never see your source code. When you run `npx @capgo/cli app update` the `npx @capgo/cli` tool only uploads the same compiled code that you send to the app stores. If you desire additional security, you can use End to End encryption to encrypt your bundle before uploading it to Capgo servers.
 
-See also our privacy policy: [https://capgo.dev/privacy](https://capgo.dev/privacy)
+See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy)
 
 ### Can I use Capgo from my CI system?[](https://capgo.app/docs/faq#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
 
-Yes. Capgo is intended to be used from CI systems. We've published a guide for [Github Actions](https://docs.capgo.dev/ci/github), other CI systems should be similar.
+Yes. Capgo is intended to be used from CI systems. We've published a guide for [Github Actions](https://capgo.app/docs/ci/github), other CI systems should be similar.
 
 Please don't hesitate to reach out over GitHub issues or Discord if you encounter any issues.
 
@@ -50,7 +50,7 @@ I haven't measured recently, but I expect the code push library to add less than
 
 ### Does code push work with large applications?[](https://capgo.app/docs/faq#does-code-push-work-with-large-applications "Direct link to Does code push work with large applications?")
 
-Yes. There is no limit on the size of the application that can be patched with code push. As noted [below](https://capgo.app/docs/faq#what-types-of-changes-does-capgo-code-push-support), Capgo can change any JS code in your application no matter of size.
+Yes. There is no limit on the size of the application that can be updated with code push. As noted [below](https://capgo.app/docs/faq#what-types-of-changes-does-capgo-code-push-support), Capgo can change any JS code in your application no matter of size.
 
 To note: A bigger size make it harder for users to download updates. We recommend keeping your app as small as possible.
 
@@ -68,7 +68,7 @@ Note that most app stores prohibit shipping code that changes the behavior of th
 
 As above, Capgo should not be used to violate app store polices. Please see [below](https://capgo.app/docs/faq#does-capgo-comply-with-play-store-guidelines) for more information.
 
-Also Capgo does not support changing native code (e.g. Java/Kotlin on Android or Objective-C/Swift on iOS). The tool will warn you during an attempted patch if you have changed native code.
+Also Capgo does not support changing native code (e.g. Java/Kotlin on Android or Objective-C/Swift on iOS). The tool will warn you during an attempted update if you have changed native code.
 
 ### Does Capgo submit to the stores for me?[](https://capgo.app/docs/faq#does-capgo-submit-to-the-stores-for-me "Direct link to Does Capgo submit to the stores for me?")
 
@@ -114,9 +114,9 @@ Capgo supports the same versions of Android that Capacitor supports.
 
 Capacitor currently supports Android API level 22+ and iOS 13.0+: [https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy)
 
-### What versions of Flutter does Capgo support?[](https://capgo.app/docs/faq#what-versions-of-flutter-does-capgo-support "Direct link to What versions of Flutter does Capgo support?")
+### What versions of Capacitor does Capgo support?[](https://capgo.app/docs/faq#what-versions-of-flutter-does-capgo-support "Direct link to What versions of Flutter does Capgo support?")
 
-Capgo currently supports only recent stable releases of Flutter. We could support older versions of Flutter as well, we just haven't built out the infrastructure necessary to maintain such over time. We intend to support more versions of Flutter in the future, including any version for our enterprise customers. [https://github.com/capgotech/capgo/issues/1100](https://github.com/capgotech/capgo/issues/1100)
+Capgo currently supports only recent stable releases of Capacitor. We could support older versions of Capacitor as well, we just haven't built out the infrastructure necessary to maintain such over time. We intend to support more versions of Capacitor in the future, including any version for our enterprise customers. [https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100)
 
 Capgo tracks Flutter stable and generally updates within a few hours of any stable release. Our system for doing these updates is automated takes a few minutes to run. We then do an extra manual verification step before publishing to our servers.
 
@@ -140,9 +140,9 @@ The Play Store offers two restrictions relating to update tools.
 <span><span>    An app distributed via Google Play may not modify, replace, or update itself</span><br></span><span><span>    using any method other than Google Play's update mechanism. Likewise, an app</span><br></span><span><span>    may not download executable code (such as dex, JAR, .so files) from a</span><br></span><span><span>    source other than Google Play. *This restriction does not apply to code</span><br></span><span><span>    that runs in a virtual machine or an interpreter* where either provides</span><br></span><span><span>    indirect access to Android APIs (such as JavaScript in a webview or</span><br></span><span><span>    browser).</span><br></span><span><span></span><br></span><span><span>    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,</span><br></span><span><span>    Python, Lua, etc.) loaded at run time (for example, not packaged with the</span><br></span><span><span>    app) must not allow potential violations of Google Play policies.</span><br></span>
 ```
 
-2.  Changes to the app must not be deceptive (e.g. changing the purpose of the app via update). [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077) Please be clear with your users about what you are providing with your application and do not violate their expectations with significant behavioral changes through the use of Shorebird.
+2.  Changes to the app must not be deceptive (e.g. changing the purpose of the app via update). [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077) Please be clear with your users about what you are providing with your application and do not violate their expectations with significant behavioral changes through the use of Capgo.
 
-Capgo is designed to be compatible with the Play Store guidelines. However Capgo is a tool, and as with any tool, can be abused. Deliberately abusing Capgo to violate Play Store guidelines is in violation of the Capgo [Terms of Service](https://capgo.dev/terms) and can result in termination of your account.
+Capgo is designed to be compatible with the Play Store guidelines. However Capgo is a tool, and as with any tool, can be abused. Deliberately abusing Capgo to violate Play Store guidelines is in violation of the Capgo [Terms of Service](https://capgo.app/terms) and can result in termination of your account.
 
 Finally, code push services are widely used in the industry (all of the large apps I'm aware of use them) and there are multiple other code push services publicly available (e.g. expo.dev & appcenter.ms). This is a well trodden path.
 
@@ -160,7 +160,7 @@ Similar to the Play Store, the App Store offers both technical and policy restri
 
 Capgo uses a custom Dart interpreter to comply with the interpreter-only restriction for updates on iOS. So long as your application is not engaging in deceptive behavior via updates (e.g. changing the purpose of the app via update), updating via Capgo (or any other code push solution) is standard industry practice and compliant with App Store guidelines.
 
-Deliberately abusing Capgo to violate App Store guidelines is in violation of the Capgo [Terms of Service](https://capgo.dev/terms) and can result in termination of your account.
+Deliberately abusing Capgo to violate App Store guidelines is in violation of the Capgo [Terms of Service](https://capgo.app/terms) and can result in termination of your account.
 
 Microsoft also publishes a guide on how their react native "codepush" library complies with the app stores: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push#store-guideline-compliance)
 
@@ -168,21 +168,20 @@ Microsoft also publishes a guide on how their react native "codepush" library co
 
 We have not attempted to restrict access to Capgo from any country.
 
-We recognize that some countries have restrictions on what urls can be accessed from within the country. Capgo currently uses Google Cloud for hosting, including Google Cloud Storage and Google Cloud Run.
+We recognize that some countries have restrictions on what urls can be accessed from within the country. Capgo currently uses Cloudflare Cloud for hosting, including R2 Storage and Cloudflare workers.
 
-The following URLs are used by Shorebird:
+The following URLs are used by Capgo:
 
--   [https://api.capgo.dev](https://api.capgo.dev/) -- used by the `capgo` command line tools to interact with the Capgo servers as well as the Shorbird updater on users' devices to check for updates.
--   [https://download.capgo.dev](https://download.capgo.dev/) -- used by the `capgo` command line tool to download Flutter artifacts for building releases and patches.
--   [https://storage.googleapis.com](https://storage.googleapis.com/) -- used by the `capgo` command line tool to upload and download release and patch artifacts.
+-   [https://api.capgo.app](https://api.capgo.app/) -- used by the `npx @capgo/cli` command line tools to interact with the Capgo servers as well as the Capgo updater on users' devices to check for updates.
+-   [https://*.r2.cloudflarestorage.com](https://*.r2.cloudflarestorage.com) -- used by the `npx @capgo/cli` command line tool to upload and download bundle
 
 If all of those URLs are accessible from your country, then Capgo should work.
 
-If your region requires use of [FLUTTER\_STORAGE\_BASE\_URL](https://docs.flutter.dev/community/china) Capgo may not work for you at this time as we also use that environment variable as part of our implementation. We have plans to [remove this restriction](https://github.com/capgotech/capgo/issues/435), let us know if this is important to you.
+If your region requires blocking access to any of those URLs, please let us know and we can work with you to find a solution. Proxy servers are one option.
 
-### Can I self-host Shorebird?[](https://capgo.app/docs/faq#can-i-self-host-capgo "Direct link to Can I self-host Shorebird?")
+### Can I self-host Capgo?[](https://capgo.app/docs/faq#can-i-self-host-capgo "Direct link to Can I self-host Capgo?")
 
-Not currently. We intend to offer [cloud-prem and on-prem hosting](https://github.com/capgotech/capgo/issues/485) as an option on enterprise plans. Please contact us if such is required for your adoption.
+Yes, you can self-host Capgo. The guide is not yet written, but the code is open source and available at [https://github.com/cap-go/capgo](https://github.com/cap-go/capgo)
 
 ### Does code push require the internet to work?[](https://capgo.app/docs/faq#does-code-push-require-the-internet-to-work "Direct link to Does code push require the internet to work?")
 
@@ -190,26 +189,17 @@ Yes. One could imagine running a server to distribute the updates separately fro
 
 ### How is Capgo affected by lack of network connectivity?[](https://capgo.app/docs/faq#how-is-capgo-affected-by-lack-of-network-connectivity "Direct link to How is Capgo affected by lack of network connectivity?")
 
-Capgo updater (included in your application when you build your app with Shorebird) is designed to be resilient to network connectivity issues.
+Capgo updater (included in your application when you build your app with Capgo) is designed to be resilient to network connectivity issues.
 
-In the default update behavior, when the application launches it alerts the Capgo updater, which spawns a separate thread to make a network request to Shorebird's servers and ask for an update. We intentionally use a separate thread to avoid affecting blocking anything else the application might be doing. If the network request fails or times out, the updater will simply try to check again next time the application launches.
+In the default update behavior, when the application launches it alerts the Capgo updater, which spawns a separate thread to make a network request to Capgo's servers and ask for an update. We intentionally use a separate thread to avoid affecting blocking anything else the application might be doing. If the network request fails or times out, the updater will simply try to check again next time the application launches.
 
-Capgo command line tools (e.g. `capgo patch`) require network connectivity to function. If you are using Capgo to distribute your app, you should ensure that your CI system has network connectivity.
+Capgo command line tools (e.g. `npx @capgo/cli app update`) require network connectivity to function. If you are using Capgo to distribute your app, you should ensure that your CI system has network connectivity.
 
 ### What happens if a user doesn't update for a long time and misses an update?[](https://capgo.app/docs/faq#what-happens-if-a-user-doesnt-update-for-a-long-time-and-misses-an-update "Direct link to What happens if a user doesn't update for a long time and misses an update?")
 
 Our implementation always sends an update specifically tailored for the device that is requesting it updating the requestor always to the latest version available. Thus if a user doesn't update for a while they will "miss" intermediate updates.
 
 The update server could be changed to support responding with either the next incremental version or the latest version depending on your application's needs. Please let us know if alternative update behaviors are important to you.
-
-### Why are some parts of the code push library written in Rust?[](https://capgo.app/docs/faq#why-are-some-parts-of-the-code-push-library-written-in-rust "Direct link to Why are some parts of the code push library written in Rust?")
-
-Parts of the code push ("updater") system are written in Rust:
-
-1.  Avoids starting two Dart VMs (one for the updater and one for the app).
-2.  Allows accessing the updater code from multiple languages (e.g. both the C++ engine as well as a Dart/Flutter application, or even Kotlin/Swift code if needed)
-
-See our [Languages Philosophy](https://github.com/capgotech/handbook/blob/main/engineering.md#languages) for more information as to why we chose Rust.
 
 ### How does Capgo relate to Capacitor?[](https://capgo.app/docs/faq#how-does-capgo-relate-to-capacitor "Direct link to How does Capgo relate to Capacitor?")
 
@@ -241,15 +231,16 @@ Requests sent from the app to Capgo servers include:
 
 -   app\_id (specified `capacitor.config.json`)
 -   channel (optional in `capacitor.config.json`)
--   release\_version (versionName from AndroidManifest.xml)
--   patch\_number (generated as part of `capgo patch android`)
--   arch (e.g. 'aarch64', needed to send down the right patch)
+-   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist)
+-   version\_number (generated as part of `npx @capgo/cli app update`)
+-   os_version (e.g. '11.2.1')
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`
--   client\_id (generated on the device on first run, used to de-duplicate per-device installs and allow us to charge based on users installed to (e.g. monthly active users), rather than total patches or total patch installs)
+-   device\_id (generated on the device on first run, used to de-duplicate per-device installs and allow us to charge based on users installed to (e.g. monthly active users), rather than total patches or total patch installs)
+-   custom\_id ( optional, set at runtime by the developer, used for you to link a device to a user in your system)
 
 ### What platforms does Capgo support?[](https://capgo.app/docs/faq#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
 
-Currently, Capgo supports iOS and Android. Android support is production ready, iOS support is in alpha with [known issues](https://docs.capgo.dev/status#ios-alpha).
+Currently, Capgo supports iOS and Android. Both are production ready.
 
 Use of Capgo for iOS or Android can be independent decisions. You can set in your channel to ship to Android and an ipa built to the App Store or vice versa.
 
@@ -261,31 +252,33 @@ Each of the app stores have separate mechanisms for distributing apps to limited
 
 Unfortunately, these not all of these mechanisms allow 3rd parties to detect when apps are installed in any specific Test Track or via TestFlight. Thus, we do not have reliable visibility into composition of these groups, and cannot reliably gate access to Capgo patches based on these groups. [https://stackoverflow.com/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play](https://stackoverflow.com/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play) [https://stackoverflow.com/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i](https://stackoverflow.com/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i)
 
-If you'd like to segment availability of Capgo patches, there are 4 potential options:
+If you'd like to segment availability of Capgo bundle, there are 4 potential options:
 
-1.  Use separate binaries / bundle ids for each group. This is the most straightforward approach, but requires you to manage multiple binaries. On Android the easy way to accomplish this is through flavors. You may already have a dev flavor and prod flavor with different availability. You can thus patch your dev flavor, verify it and then separately patch your prod flavor. We recommend using branches / tags in your version control to help keep track of the sources associated with each release.
+1.  Use separate channel for each group. This is the most straightforward approach, but requires you to manage multiple channels. You may already have a dev channels and prod channels with different availability. You can thus update your dev channels, verify it and then separately update your prod channels. We recommend using branches / tags in your version control to help keep track of the sources associated with each release.
 2.  Track your own set of opt-in users, disable automatic updates, and trigger updates only for certain users via package:capgo\_code\_push. This works today, but requires you to manage your own opt-in list.
-3.  Capgo could create its own opt-in mechanism on a per-device basis (similar to Test Tracks or TestFlight, just platform agnostic). This could allow your QA team to opt-in to patches before they're promoted to the general public. If this is important to you, please let us know: [https://github.com/capgotech/capgo/issues/498](https://github.com/capgotech/capgo/issues/498)
-4.  Capgo plans to add percentage based rollouts. This does not let you choose which devices to send to, but can help you roll out incrementally and roll-back on sight of any problems. [https://github.com/capgotech/capgo/issues/497](https://github.com/capgotech/capgo/issues/497)
+3.  Capgo allow creare its own opt-in mechanism on a per-device basis (similar to Test Tracks or TestFlight, just platform agnostic). This allow your QA team to opt-in to bundle before they're promoted to the general public.
+4.  Capgo have percentage based rollouts. This does not let you choose which devices to send to, but can help you roll out incrementally and roll-back on sight of any problems.
 
 ## Billing[](https://capgo.app/docs/faq#billing "Direct link to Billing")
 
 ### How do I upgrade or downgrade my plan?[](https://capgo.app/docs/faq#how-do-i-upgrade-or-downgrade-my-plan "Direct link to How do I upgrade or downgrade my plan?")
 
-You can upgrade or downgrade your plan at any time by running `capgo account upgrade` or `capgo account downgrade`.
+You can upgrade or downgrade your plan at any time in your dashboard: [https://web.capgo.app/dashboard/settings/plans](https://web.capgo.app/dashboard/settings/plans)
 
 ### When does my billing period reset?[](https://capgo.app/docs/faq#when-does-my-billing-period-reset "Direct link to When does my billing period reset?")
 
-Billing periods are reset automatically every month on the month you first subscribed to Shorebird. For example, if you subscribed on the 15th of the month, your billing period will reset on the 15th of every month.
+Billing periods are reset automatically every month on the month you first subscribed to Capgo. For example, if you subscribed on the 15th of the month, your billing period will reset on the 15th of every month.
 
 ### How do I cancel my subscription?[](https://capgo.app/docs/faq#how-do-i-cancel-my-subscription "Direct link to How do I cancel my subscription?")
 
-You can cancel your subscription at any time by running `capgo account downgrade`. You will continue to have all the features of a paid account until the end of your billing period.
+You can cancel your subscription at any time in your dashboard: [https://web.capgo.app/dashboard/settings/plans](https://web.capgo.app/dashboard/settings/plans)
 
 ### Can I pay for a year in advance?[](https://capgo.app/docs/faq#can-i-pay-for-a-year-in-advance "Direct link to Can I pay for a year in advance?")
 
-Currently we have not yet implemented yearly billing. We don't expect it will be hard, we just aren't quite sure what customers expect in terms of overage charges on a yearly plan. If you have thoughts on this, please let us know: [https://github.com/capgotech/capgo/issues/733](https://github.com/capgotech/capgo/issues/733)
+Yes you can can at any time in your dashboard: [https://web.capgo.app/dashboard/settings/plans](https://web.capgo.app/dashboard/settings/plans)
 
-### What counts as a "patch install" for Shorebird?[](https://capgo.app/docs/faq#what-counts-as-a-patch-install-for-capgo "Direct link to What counts as a "patch install" for Shorebird?")
+### What counts as a "MAU" for Capgo?[](https://capgo.app/docs/faq#what-counts-as-a-mau-for-capgo "Direct link to What counts as a "MAU" for Capgo?")
 
-A "patch install" is counted when a patch is successfully installed on a user's device.
+A MAU is a "Monthly Active User". We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
+
+
