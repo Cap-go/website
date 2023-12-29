@@ -43,6 +43,10 @@ export default defineConfig({
           link: '/docs/how-to',
         },
         {
+          label: 'Tech support for capgo',
+          link: '/docs/getting-help',
+        },
+        {
           label: 'Plugin',
           autogenerate: { directory: 'docs/plugin' },
         },
