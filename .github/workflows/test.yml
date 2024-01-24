@@ -31,6 +31,7 @@ jobs:
         run: cp _headers dist/_headers & cp _redirects dist/_redirects
       - name: Publish
         uses: cloudflare/pages-action@1
+        if: github.ref == 'refs/heads/main'
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
