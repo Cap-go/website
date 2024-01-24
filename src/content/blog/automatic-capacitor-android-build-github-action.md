@@ -132,23 +132,25 @@ If you need to create a new service account key, [follow the steps outlined here
 
 To add a new secret to GitHub’s encrypted secrets, first navigate to the Android repo to which you’ll be adding the GitHub Actions workflow. On the far right, click “Settings”.
 
-![Settings in GitHub repo](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/6255710d6da8a3599b1752fb_IK6M5KDh3qtcBE1ErVlzfyBly2VQTG_I1nypDM_Ge1aRwdaUwRqg76ocD7UbfjCxxgUfqpbuod313uYq-qROmF6pmm_JiQIbMjWp1R070QhCQ3ERFqc0-KoQ1kefxzNgViZ_CT5n.webp)
+![Settings in GitHub repo](/github_project_settings.webp)
 
-Then, click “Secrets”, then “Actions” from the list in the left menu.
+Then, click “Secrets”, 
 
-![Secrets in GitHub repo, from Settings](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/6255710d82132b25dee2587b_u5J1RM5gE4JcRPpt5QwBKi8kuzvRfBuCuOyyE8DsxlEn-QlFxe_YCwSEJqCRG7pNcavn-PT4qqWG6oOnFJxpmHpV-tHS7meN-sJPwjf2lPR0VrGucA6VcNvXAoIvK19hLbMPEKXL.webp)
+![Secrets in GitHub repo, from Settings](/github_project_settings_secrets.webp)
 
-![Actions under Secrets in GitHub repo](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/6255710d6f88fabadb0c0352__NOkuYstgMY7RuTAgm_PqdFqas6yCLHRkJg-OmTmBIXOtKI4BUbMwa9ZbS14gtGnGexc1k6d8hfdZsjuFlXh1TFKoeCzzNVG_PWkkGZ-3N1VTO6KtDHOuJFqJEACUuXr_dcJAVWg.webp)
+then “Actions” from the list in the left menu.
+
+![Actions under Secrets in GitHub repo](/github_project_settings_secrets_actions.webp)
 
 These are the encrypted secret environment variables for the repository. Any workflows set up on the repository will have access to these repository secrets.
 
 From here, click “New repository secret” to add a new secret:
 
-![New repository secret action in GitHub](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/6255710d82d547424281b428_95X96FBnJ-19LL0Q3KWqvY4Nq7jOu9fdnxctghrr49VwPD-vTdFINm5wIa0GGJJgPvVXCklXhH87U6IFhkQnQyfz3cJh-mucXJnwZe7CcpvMdq8Wg6mHsSGo2WoSn9RvDfBjWL8t.webp)
+![New repository secret action in GitHub](/github_project_settings_secrets_actions_new.webp)
 
 When you click “New repository secret”, you’ll see a form that will prompt you to enter a name for your new secret, and its value.
 
-![Adding name and value for new secret in GitHub](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/62557143bd70e00632025b86_I1QkOTN_GWsb6tttkz45bpy-euXI66Rhu9BiZ4Y6RU_ZbNHhd8c33BhHkKOmE6ijqnfFAj5MTObiSit8IKHDF27rm6yotLg4sFHIkst-hfMdfoayRAKAxGGxAGca-oC4v2s4Se-A.webp)
+![Adding name and value for new secret in GitHub](/github_project_settings_secrets_actions_new_add.webp)
 
 GitHub secrets only accept string values, so for certain credentials (any .jks or .json files for example), you’ll first need to convert the file to a base64-encoded string before adding it to GitHub secrets. You can do this from the command line:
 
@@ -172,7 +174,7 @@ _Kindly note that you should store a backup copy of your secrets securely in ano
 
 With our service account key added to GitHub’s repository secrets, we can now authenticate with the Google Play Developer API from within any GitHub Actions workflows added to the repository.
 
-![New secret added successfully in GitHub](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/625571ab34113a4f7f840ca9_VnbirWsmsj_kFz_ohXs65Ug1LYLHGlR6qwrzdQ22sYa_Z9PYxahwEob97E1kFonMlY7doqml_ScBOv5MpCPYNhGLwcEnfgeACjXjPTchcTqeZbrGJ25g3bDIvUN8mQajeET8SiLU.webp)
+![New secret added successfully in GitHub](/github_project_settings_secrets_added.webp)
 
 ### Storing your Android signing key
 
@@ -190,7 +192,7 @@ Add the following as repository secrets:
 -   DEVELOPER_PACKAGE_NAME: your android app ID like com.example.app
 With these secrets added to GitHub’s repository secrets, we’re ready to set up our GitHub Actions workflow to run our builds.
 
-![Multiple secrets added successfully in GitHub](https://uploads-ssl.webflow.com/5ef1f28e08458502ba614d85/625571ac033792685131f3ce_3x6nTzPmcJp9r0MHSzRIXwuQp6ImfEiy_UbQW-5KRZK7jJ7us2XiNjJ7l6ckuIPCcPzQd4eb-0AT7HiO7nlUE0BK59V10VnMNAZDX7NB-vrAN1Kl_8e3spUueZudv51uWj-93yTa.webp)
+![Multiple secrets added successfully in GitHub](/github_project_settings_multi_secrets_added.webp)
 
 ## Set up your GitHub Actions workflow .yml file
 
