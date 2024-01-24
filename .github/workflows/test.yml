@@ -27,3 +27,13 @@ jobs:
         run: pnpm install
       - name: Generate static pages
         run: pnpm build
+      - name: Copy header & redirect specific files
+        run: cp _headers dist/_headers & cp _redirects dist/_redirects
+      - name: Publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: YOUR_PROJECT_NAME
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
