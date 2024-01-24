@@ -7,6 +7,9 @@
       "pattern": "^https://x.com/*"
     },
     {
+      "pattern": "^https://twitter.com/*"
+    },
+    {
       "pattern": "^https://www.indeed.com/*"
     },
     {
