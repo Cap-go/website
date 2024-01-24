@@ -1,0 +1,2 @@
+/.well-known/* /deepLink/:splat 200
+/api/auto_update https://api.capgo.app/updates 200

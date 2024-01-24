@@ -1,4 +1,5 @@
 ---
+import { join } from 'node:path'
 import { AstroFont } from 'astro-font'
 import { structuredData } from '../config/app'
 import { appDescription, appName } from '../constants'
@@ -25,6 +26,8 @@ if (description.length > descSize) {
 
 const image_unsecure = image.replace('https://', 'http://')
 const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
+
+const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', name)
 ---
 
 <AstroFont
@@ -39,7 +42,7 @@ const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
         {
           style: 'light',
           weight: '300',
-          path: './public/fonts/AirbnbCerealLight.woff',
+          path: makeFontPath('AirbnbCerealLight.woff'),
         },
       ],
     },
@@ -53,7 +56,7 @@ const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
         {
           style: 'medium',
           weight: '500',
-          path: './public/fonts/AirbnbCerealMedium.woff',
+          path: makeFontPath('AirbnbCerealMedium.woff'),
         },
       ],
     },
@@ -67,7 +70,7 @@ const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
         {
           style: 'bold',
           weight: '800',
-          path: './public/fonts/AirbnbCerealBold.woff',
+          path: makeFontPath('AirbnbCerealBold.woff'),
         },
       ],
     },
