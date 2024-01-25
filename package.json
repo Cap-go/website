@@ -19,7 +19,7 @@
     "astro": "^4.0.3",
     "faiss-node": "^0.3.0",
     "langchain": "^0.0.131",
-    "marked": "^7.0.3",
+    "marked": "^11.0.0",
     "openai": "^4.0.1",
     "sharp": "^0.32.4",
     "sitemap": "^7.1.1",
