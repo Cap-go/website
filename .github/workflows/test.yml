@@ -15,18 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
         with:
-          version: 8
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
+          bun-version: latest
+
       - name: Install dependencies
-        run: pnpm install
+        run: bun install
       - name: Generate static pages
-        run: pnpm build
+        run: bun run build
       - name: Copy header & redirect specific files
         run: cp _headers dist/_headers & cp _redirects dist/_redirects
       - name: Publish

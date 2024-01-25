@@ -218,7 +218,7 @@ jobs:
   build_android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:

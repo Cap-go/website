@@ -49,7 +49,7 @@ jobs:
     name: "Bump version and create changelog with standard version"
     steps:
       - name: Check out
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
@@ -112,10 +112,7 @@ jobs:
     name: "Build code and release"
     steps:
       - name: Check out
-        uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 6.22.2
+        uses: actions/checkout@v4
       - name: Install dependencies
         id: install_code
         run: npm i

@@ -3,7 +3,7 @@
 
 [build]
   publish = "dist"
-  command = "pnpm run build"
+  command = "bun run build"
 
 [[redirects]]
   from = '/.well-known/*'
@@ -32,7 +32,7 @@
     X-XSS-Protection = "1; mode=block"
 
 [dev]
-  command = "pnpm dev"
+  command = "bun run dev"
   autoLaunch = false
   targetPort = 3336
   functionsPort = 3335
