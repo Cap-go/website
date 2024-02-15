@@ -1,0 +1,84 @@
+---
+title: "Organization system"
+description: "Managing organizations in your capgo account."
+sidebar:
+  order: 11
+---
+
+
+## What is the organization system?
+
+The organization system is a system in capgo that allows you to securely share your apps with members of your team.
+
+#### Q: How can I access my organization's info?
+
+In order to access your organization's info, please go to [settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and then click on the `Organization settings`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.png" alt="" /><figcaption></figcaption></figure>
+
+#### Q: How can I change the organization I am viewing?
+
+To view the settings of a different organization, please click on the organization selector near your name.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.png" alt="" /><figcaption></figcaption></figure>
+
+If you cannot see this, then you are likely not on the settings page.
+
+#### Q: How can I see the members of my organization?
+
+Please click on the `members`
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.png" alt="" /><figcaption></figcaption></figure>
+
+#### Q: How can I invite a user to an organization?
+
+Please click on `Add member`
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.png" alt="" /><figcaption></figcaption></figure>
+
+Then a pop-out will showup - please enter the user's email address.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.png" alt="" /><figcaption></figcaption></figure>
+
+Then click `invite`. Another popout will show up, this time asking you about the permission that the invited user should have.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.png" alt="" /><figcaption></figcaption></figure>
+
+Here is a breakdown of all the permissions:
+
+| Permission                        | Read | Upload | Write | Admin | Owner |
+|-----------------------------------|------|--------|-------|-------|-------|
+| Show app stats                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show app channels                 |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show devices                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show logs                         |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show bundles                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Delete app                        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| Delete channel                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Delete version                    |   🚧  |    🚧   |   🚧   |   🚧   |   ✅   |
+| Change org's settings             |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Manage org users                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Alter channel settings            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Upload new version                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Alter devices                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Change channel's  current version |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Create new channel                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Alter version  (metadata)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Manage billing                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+
+
+
+🚧: The feature is broken
+
+#### Q: How is billing done within orgs?
+
+Right now, organization share the billing of the owner. This means that only the owner can change the plan.
+
+:::danger
+⚠️ Buying a plan will not affect the organizations you are invited to.\
+Only the apps you own will benefit  
+:::
+
+
+#### Q: Can I create more than one organization?
+
+No, not yet.
+
