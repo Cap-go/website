@@ -18,7 +18,7 @@
     "@heroicons/vue": "^2.1.1",
     "astro": "^4.4.0",
     "faiss-node": "^0.5.1",
-    "langchain": "^0.0.131",
+    "langchain": "^0.1.0",
     "marked": "^12.0.0",
     "openai": "^4.28.0",
     "sharp": "^0.33.2",
