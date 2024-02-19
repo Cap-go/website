@@ -12,7 +12,7 @@ const config = useRuntimeConfig()
 
 const yearly = ref(false)
 const plansAll = ref<Database['public']['Tables']['plans']['Row'][]>([])
-await fetch(`${config.public.baseApiUrl}/plans`)
+await fetch(`${config.public.baseApiUrl}/private/plans`)
   .then(r => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
   .then(res => plansAll.value.push(...res))
 

@@ -25,7 +25,7 @@ const stats = reactive({
   stars: shortNumber(358),
 })
 
-fetch(`${config.public.baseApiUrl}/website_stats`).then((res) => {
+fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
       stats.apps = shortNumber(data.apps)

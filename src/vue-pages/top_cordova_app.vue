@@ -28,7 +28,7 @@ function renameCat(text: string) {
 
 const others = ref(['top_capacitor_app', 'top_react_native_app', 'top_flutter_app'])
 
-fetch(`${config.public.baseApiUrl}/store_top?mode=cordova`).then((res) => {
+fetch(`${config.public.baseApiUrl}/private/store_top?mode=cordova`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
       apps.value = data.apps
