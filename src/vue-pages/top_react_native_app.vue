@@ -10,14 +10,11 @@ const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 const usage = ref(5.22)
 
 function shortNumber(number: number) {
-  if (number > 1000000000)
-    return `${(number / 1000000).toFixed(1)}B`
+  if (number > 1000000000) return `${(number / 1000000).toFixed(1)}B`
 
-  if (number > 1000000)
-    return `${(number / 1000000).toFixed(1)}M`
+  if (number > 1000000) return `${(number / 1000000).toFixed(1)}M`
 
-  if (number > 1000)
-    return `${(number / 1000).toFixed(1)}k`
+  if (number > 1000) return `${(number / 1000).toFixed(1)}k`
 
   return `${number}`
 }
@@ -42,15 +39,11 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=reactNative`).then((re
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-          Top React Native Script apps
-        </h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top React Native Script apps</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
-        <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          React native power aproximately {{ usage }}% of apps on Google Play Store
-        </p>
+        <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">React native power aproximately {{ usage }}% of apps on Google Play Store</p>
       </div>
 
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
@@ -58,7 +51,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=reactNative`).then((re
           <div class="p-5">
             <div class="relative">
               <a :href="app.url" :title="app.title" class="block aspect-w-4 aspect-h-3">
-                <img class="object-cover w-full h-full rounded-lg" :src="app.icon" :alt="`app icon ${app.title}`">
+                <img class="object-cover w-full h-full rounded-lg" :src="app.icon" :alt="`app icon ${app.title}`" />
               </a>
 
               <div class="absolute top-4 left-4">
@@ -105,7 +98,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=reactNative`).then((re
         >
           <div class="relative mx-auto flex">
             <div class="block w-full mx-4 pb-4">
-              <img class="object-cover w-full h-full rounded-lg" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`">
+              <img class="object-cover w-full h-full rounded-lg" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`" />
             </div>
           </div>
           <div class="px-4 pt-2 sm:pt-0 w-full">

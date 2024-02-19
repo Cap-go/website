@@ -10,19 +10,17 @@ const config = useRuntimeConfig()
 const selectedTag = ref('all')
 
 const filteredPosts = computed(() => {
-  if (selectedTag.value === 'all')
-    return props.Content
-
-  else
-    return props.Content.filter(article => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
+  if (selectedTag.value === 'all') return props.Content
+  else return props.Content.filter((article) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
 })
 
 const uniqueTags = computed(() => {
   const tags = new Set()
-  for (const article of props.Content)
-    tags.add(article.frontmatter.tag.toUpperCase())
+  for (const article of props.Content) tags.add(article.frontmatter.tag.toUpperCase())
 
-  const uniqueTagsArray = Array.from(tags).map(tag => tag[0].toUpperCase() + tag.slice(1)).sort()
+  const uniqueTagsArray = Array.from(tags)
+    .map((tag) => tag[0].toUpperCase() + tag.slice(1))
+    .sort()
   return uniqueTagsArray
 })
 </script>
@@ -31,9 +29,7 @@ const uniqueTags = computed(() => {
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-          Latest from the blog
-        </h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Latest from the blog</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ config.public.blog_description }}
         </h2>

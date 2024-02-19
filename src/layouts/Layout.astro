@@ -12,7 +12,7 @@ const { content } = Astro.props
 const isLocalhost = Astro.url.origin.includes('localhost:')
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}

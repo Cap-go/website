@@ -20,16 +20,10 @@ function toTb(value: number) {
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
         <div class="flex items-center justify-center">
-          <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">
-            🔥
-          </div>
-          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">
-            Pay as you go
-          </h2>
+          <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">🔥</div>
+          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">Pay as you go</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">
-          2,500.000 Live Updates/mo. No commitments.
-        </p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">2,500.000 Live Updates/mo. No commitments.</p>
       </div>
 
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
@@ -51,9 +45,7 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Monthly active users
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Monthly active users</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ payg?.mau.toLocaleString() }}</span>
                       users included, then ${{ payg?.mau_unit }}/user
@@ -73,9 +65,7 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Bandwidth
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Bandwidth</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(payg?.bandwidth) }}</span>
                       TB included, then ${{ payg?.bandwidth_unit }} per GB
@@ -95,9 +85,7 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Cloud Storage
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Cloud Storage</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ payg?.storage.toLocaleString() }}</span>
                       GB included, then ${{ payg?.storage_unit }} per GB
@@ -178,12 +166,8 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      API Access
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Create anything you want
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">API Access</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Create anything you want</p>
                   </div>
                 </div>
 
@@ -199,12 +183,8 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Dedicated support
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Get an answer in less than 6h
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Dedicated support</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Get an answer in less than 6h</p>
                   </div>
                 </div>
 
@@ -220,12 +200,8 @@ function toTb(value: number) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">
-                      Custom Domain
-                    </p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      Add your own domain
-                    </p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">Custom Domain</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Add your own domain</p>
                   </div>
                 </div>
               </div>
@@ -235,20 +211,14 @@ function toTb(value: number) {
       </div>
 
       <div class="mt-8 text-center">
-        <p class="text-base font-medium text-gray-600 font-pj">
-          All our features are available to all users
-        </p>
+        <p class="text-base font-medium text-gray-600 font-pj">All our features are available to all users</p>
 
         <div class="flex items-end justify-center mt-10">
-          <p class="text-lg font-bold text-gray-400 font-pj">
-            $
-          </p>
+          <p class="text-lg font-bold text-gray-400 font-pj">$</p>
           <p class="text-6xl font-bold text-gray-900 font-pj">
             {{ yearly ? payg.price_y.toLocaleString() : payg?.price_m.toLocaleString() }}
           </p>
-          <p class="text-lg font-bold text-gray-400 font-pj">
-            /{{ yearly ? 'Year' : 'Month' }}
-          </p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/{{ yearly ? 'Year' : 'Month' }}</p>
         </div>
         <a
           href="/register"

@@ -9,9 +9,7 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-          Top apps by framework
-        </h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top apps by framework</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
@@ -27,7 +25,7 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
         >
           <div class="relative mx-auto flex">
             <div class="block w-full mx-4 pb-4">
-              <img class="object-cover w-full h-full rounded-lg" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`">
+              <img class="object-cover w-full h-full rounded-lg" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`" />
             </div>
           </div>
           <div class="px-4 pt-2 sm:pt-0 w-full">

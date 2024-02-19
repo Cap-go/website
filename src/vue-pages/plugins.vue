@@ -17,9 +17,7 @@ onMounted(() => {
 
 <template>
   <div class="z-10 mt-24 mb-24 flex w-full flex-col md:items-center">
-    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">
-      Powerful App Plugins
-    </h1>
+    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">Powerful App Plugins</h1>
     <h2 class="mt-8 px-10 max-w-full lg:max-w-[75%] text-2xl font-light md:text-center">
       Enterprise-grade plugins with great documentation, ongoing updates, code snippets and premium support so you can focus on building your app.
     </h2>

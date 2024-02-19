@@ -28,15 +28,13 @@ function messageFormatter(message: string) {
             :title="`${tweet.name}'s avatar`"
             :alt="`${tweet.name}'s avatar`"
             style="border-radius: 22px"
-          >
+          />
         </picture>
         <div class="p-0 m-0 align-baseline border-0 border-solid">
           <p class="p-0 m-0 text-base font-normal tracking-normal leading-relaxed text-gray-200 align-baseline border-0 border-solid">
             <span class="p-0 m-0 font-semibold align-baseline border-0 border-solid">{{ tweet.name }}</span>
           </p>
-          <p class="p-0 m-0 text-base font-normal tracking-normal leading-relaxed align-baseline border-0 border-solid text-zinc-400">
-            @{{ tweet.handle }}
-          </p>
+          <p class="p-0 m-0 text-base font-normal tracking-normal leading-relaxed align-baseline border-0 border-solid text-zinc-400">@{{ tweet.handle }}</p>
         </div>
       </div>
       <svg viewBox="0 0 20 20" fill="none" width="20" height="20" role="img" color="#03A9F4" size="20" class="block align-middle border-0 border-solid text-sky-500">

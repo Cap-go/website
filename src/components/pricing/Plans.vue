@@ -97,12 +97,8 @@ function descToEmoji(desc: string) {
 
         <div class="px-4 py-5 sm:p-6">
           <div class="flex items-end">
-            <p class="text-5xl font-semibold text-gray-900">
-              ${{ yearly ? plan.price_y : plan.price_m }}
-            </p>
-            <p class="py-1 text-sm font-normal text-gray-500">
-              /{{ yearly ? 'year' : 'month' }}
-            </p>
+            <p class="text-5xl font-semibold text-gray-900">${{ yearly ? plan.price_y : plan.price_m }}</p>
+            <p class="py-1 text-sm font-normal text-gray-500">/{{ yearly ? 'year' : 'month' }}</p>
           </div>
           <!-- inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-xl  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 -->
           <div class="mt-6">
@@ -121,9 +117,7 @@ function descToEmoji(desc: string) {
             </a>
           </div>
 
-          <p class="mt-8 text-xs font-semibold tracking-widest text-gray-500 uppercase">
-            You get
-          </p>
+          <p class="mt-8 text-xs font-semibold tracking-widest text-gray-500 uppercase">You get</p>
 
           <ul class="mt-8 space-y-4 text-black">
             <li class="flex items-center">
@@ -132,7 +126,10 @@ function descToEmoji(desc: string) {
                   d="M99.9 192C80.1 192 64 208.1 64 227.9V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V227.9C0 172.7 44.7 128 99.9 128c26.5 0 51.9 10.5 70.6 29.3L322.7 309.5c6.7 6.7 15.9 10.5 25.4 10.5c19.8 0 35.9-16.1 35.9-35.9V192c0-17.7 14.3-32 32-32s32 14.3 32 32v92.1c0 55.2-44.7 99.9-99.9 99.9c-26.5 0-51.9-10.5-70.6-29.3L125.3 202.5c-6.7-6.7-15.9-10.5-25.4-10.5z"
                 />
               </svg>
-              <span><span class="font-bold">{{ numberWithSpaces(updateCalc(plan)) }}</span>Live Updates/mo</span>
+              <span
+                ><span class="font-bold">{{ numberWithSpaces(updateCalc(plan)) }}</span
+                >Live Updates/mo</span
+              >
             </li>
 
             <li class="flex items-center">
@@ -141,7 +138,9 @@ function descToEmoji(desc: string) {
                   d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
                 />
               </svg>
-              <span><span class="font-bold">{{ numberWithSpaces(plan.mau) }}</span> Monthly Active Users</span>
+              <span
+                ><span class="font-bold">{{ numberWithSpaces(plan.mau) }}</span> Monthly Active Users</span
+              >
             </li>
 
             <li class="flex items-center">
@@ -150,7 +149,9 @@ function descToEmoji(desc: string) {
                   d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
                 />
               </svg>
-              <span><span class="font-bold">{{ numberWithSpaces(plan.bandwidth) }}</span> GB/mo of Bandwidth</span>
+              <span
+                ><span class="font-bold">{{ numberWithSpaces(plan.bandwidth) }}</span> GB/mo of Bandwidth</span
+              >
             </li>
 
             <li class="flex items-center">
@@ -159,7 +160,9 @@ function descToEmoji(desc: string) {
                   d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
                 />
               </svg>
-              <span><span class="font-bold">{{ numberWithSpaces(plan.storage) }}</span> GB of Storage</span>
+              <span
+                ><span class="font-bold">{{ numberWithSpaces(plan.storage) }}</span> GB of Storage</span
+              >
             </li>
           </ul>
         </div>
