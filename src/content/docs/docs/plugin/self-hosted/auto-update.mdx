@@ -1,0 +1,81 @@
+---
+title: "Auto Update"
+description: "How to use the auto-update plugin in self-hosted mode"
+sidebar:
+  order: 3
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+This documentation will explain how to run your auto-update server.
+
+## Serve your bundle
+Make sure your bundle is served over HTTPS, and the server has the right CORS headers to allow the app to download the update.
+e.g. ```https://myserver.com/app/updates/updates.json```
+
+
+If you're unfamiliar with serving a bundle, we recommend you try Capgo Cloud or see an example here:
+<LinkCard
+	title="Serving a Bundle"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Configuration
+Add an ``updateUrl`` to your ``capacitor.config.json``.
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myserver.com/app/updates/updates.json",
+		}
+	}
+}
+```
+:::caution
+When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, for testing purposes you can [allow it](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
+:::
+
+## Update API
+
+The plugin will do a POST call to your API each time the app is open, with this body:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+The server API should respond, in JSON, to the capacitor-updater plugin. With this data if an update is necessary:
+
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip"
+}
+```
+
+In Auto-update mode the server should compare the versions and return the right one, if the URL key is present, the plugin starts the download process.
+
+If you add "message" and "error" key, the version will not be set, and the message will be displayed in logs instead.
+
+`version` key should be in [`semver`](https://semver.org/) format.
+
+The zip should have `index.html` as a file at the root, or only one folder at the root with `index.html` inside.
+
+
+You can use the command of the CLI to zip your bundle:
+
+```bash title="Create a bundle with your files to serve from your server"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

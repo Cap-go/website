@@ -12,8 +12,9 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 [Join the Capacitor-updater Discord Server!](https://discord.gg/VnYRvBfgA6)
 
 :::danger
-⚠️ Important Note: \
-Update OTA (Over the Air) only works for HTML, CSS, and JS changes. If you update native code (capacitor plugin), you must resubmit it to the app store.
+The Over-the-Air (OTA) update feature is applicable only for modifications made to HTML, CSS, and JavaScript files.
+
+If you make any changes to the native code, such as updates to Capacitor plugins, it is mandatory to resubmit the application to the app store for approval.
 :::
 
 ## Maintenance
@@ -24,22 +25,20 @@ Update OTA (Over the Air) only works for HTML, CSS, and JS changes. If you updat
 | v4.\*.\*       | v4.\*.\*                | Critical bug only |
 | v3.\*.\*       | v3.\*.\*                | ⚠️ Deprecated     |
 
-## Choose Your Mode
+## Plugin Modes
 
-- **Cloud Auto Mode:**  <br/> Logic is handled by Capgo backend, providing enhanced security and fine-grained updates. You can deploy updates to specific devices or groups.
-- **Cloud Manual Mode:**  <br/> Update logic is handled by your JS, while Capgo backend handles the update content.
-- **Self-hosted Auto Mode:**  <br/> You need to recreate the update logic in your backend.
-- **Self-hosted Manual Mode:**  <br/> Update logic is handled by your JS, while the server handles the updates.
-- **Manual Mode without Backend:**  <br/> All logic must be handled by your JS.
+<br />
+### Cloud Auto Mode (Recommended)
+- Capgo backend handles all logic.
+- Updates are decided server side by Capgo, providing enhanced security and fine-grained control like deploying partially to specific devices or groups.
 
-
-⚠️ Please note that using **Manual Mode** can lead to complex issues since the code for the update is shipped within the update itself.
-
-### Cloud Auto (Recommended)
-
+### Cloud Mode Manual
+- You control the update by your JavaScript code.
+- Updates are decided server side by Capgo, providing enhanced security and fine-grained control like deploying partially to specific devices or groups.
+<br />
 | Pros                                                                | Cons                                 |
 | ------------------------------------------------------------------- | ------------------------------------ |
-| ✅ No need to handle logic - we do it for you                       | 🟠 Requires SemVer usage              |
+| ✅ No need to handle logic, we'll do it for you                     | 🟠 Requires SemVer usage             |
 | ✅ Auto-revert feature included                                     | 🟠 Only one way to update users      |
 | ✅ Get valuable update statistics                                   |                                      |
 | ✅ Ability to revert users if needed                                |                                      |
@@ -48,22 +47,33 @@ Update OTA (Over the Air) only works for HTML, CSS, and JS changes. If you updat
 | ✅ Quick and easy configuration - set it up and forget about it     |                                      |
 
 <LinkCard
-	title="Auto Update"
+	title="Cloud Mode"
 	href="/docs/plugin/auto-update/"
 />
 
-### Manual
+### Self Hosted Auto Mode
+- Capgo handles all logic.
+- Updates are decided by your server, you will have to re-create the logic on your own.
+
+### Self Hosted Manual Mode
+- You control the update by your JavaScript code.
+- Updates are decided by your server, you will have to re-create the logic on your own.
+
+:::caution
+Please note that using **Self Hosted Manual Mode** mode can lead to complex issues, as the update code is included in the updates themselves.
+:::
+
 
 | Pros                             | Cons                                                             |
 | -------------------------------- | ---------------------------------------------------------------- |
-| ✅ Full control over update logic | 🟠 You handle if you need an on-premise server                   |
+| ✅ Full control over the update logic | 🟠 A separate update server for hosting updates is required |
 | ✅ Version server optional        | 🟠 You spend time on something not related to your core business |
 |                                  | 🟠 You handle all scenarios yourself                             |
 |                                  | 🟠 You handle on-premise server requirements                     |
 
 <LinkCard
 	title="Manual Mode"
-	href="/docs/plugin/manual-mode/"
+	href="/docs/plugin/self-hosted/manual-mode/"
 />
 
 ## Store Guideline Compliance
@@ -75,21 +85,21 @@ Android Google Play and iOS App Store have corresponding guidelines that have ru
 Third paragraph of [Device and Network Abuse](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en) topic describe that updating source code by any method other than Google Play's update mechanism is restricted. But this restriction does not apply to updating javascript bundles.
 > This restriction does not apply to code that runs in a virtual machine and has limited access to Android APIs (such as JavaScript in a webview or browser).
 
-That fully allow Capacitor-updater as it updates just JS bundles and can't update native code part.
+That fully allows Capacitor-updater as it updates just the JS bundles and won't update native code.
 
 ### App Store
 
-Paragraph **3.3.2**, since back in 2015's [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) fully allowed performing over-the-air updates of JavaScript and assets -  and in its latest version (20170605) [downloadable here](https://developer.apple.com/terms/) this ruling is even broader:
+Paragraph **3.3.2**, since back in 2015's [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) fully allows performing over-the-air updates of JavaScript and assets -  and in its latest version (20170605) [downloadable here](https://developer.apple.com/terms/) this ruling is even broader:
 
 > Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS.
 
 Capacitor-updater allows you to follow these rules in full compliance so long as the update you push does not significantly deviate your product from its original App Store approved intent.
 
-To further remain in compliance with Apple's guidelines we suggest that App Store-distributed apps don't enable the `Force update` scenario, since in the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) it is written that:
+To further remain in compliance with Apple's guidelines we suggest that App Store-distributed apps do not enable the `Force update` scenario, since in the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) state that:
 
 > Apps must not force users to rate the app, review the app, download other apps, or other similar actions in order to access functionality, content, or use of the app.
 
-This is not a problem for the default behavior of background update, since it won't force the user to apply the new version until next app close, but at least you should be aware of that ruling if you decide to show it.
+This is not a problem for the default behavior of background update, since it won't force the user to apply the new version until next time they close the app, but at least you should be aware of that role if you decide to show it.
 
 ## Roadmap
 
@@ -115,16 +125,16 @@ The plugin is under the LGPL-3.0 License and the back-end is AGPL-3.0 License.
 
 > You can include it in your app without worrying
 
-## Last words
+## Final Notes
 
 If you self-host and find this tool useful, please consider supporting my work by becoming a [GitHub sponsor](https://github.com/sponsors/riderx).
 
-I made a bet to open-source all the code I built here instead of keeping it for myself and charging a high price. By opening up instead of fighting and hiding, I believe we can make the world a better place.
+I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
 
 To make this possible, it's necessary for all of us to do our part, including you 🥹. If Capgo cloud doesn't meet your needs, you can back a bootstrapped Maker [here](https://github.com/sponsors/riderx) on your own terms.
 
-### Simple Maths
+## Simple Maths
 
-The price of basic plan: $14*12 = $168 a year.
-While average dev will be $60 an hour.
-So it mean if you used more than 3 hour of work a year on self hosted you basically lost money ^^
+The price of the basic plan: $14*12 = $168 a year.
+While average dev/hour = $60.
+That means that 3 hours wasted of dev time on self-host allows you to pay for a whole year, if you spent more than 3 hours you're losing money ^^

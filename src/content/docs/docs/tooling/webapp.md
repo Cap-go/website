@@ -9,7 +9,7 @@ sidebar:
 
 If you have a team who need to test your update, ask them to register to Capgo and add them to a channel. They will see the app appear in their app list, and they will be able to test it from Capgo app.
 
-⛔ Shared channel don’t allow you to upload to the channel, this will come, ti’s in the roadmap
+⛔ Shared channel don’t allow you to upload to the channel, this will come, it’s in the roadmap
 
 ### Configure channel
 

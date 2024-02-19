@@ -38,3 +38,7 @@ html.dark {
 .calc-label {
   @apply mt-5 text-sm font-bold tracking-widest uppercase mt-0;
 }
+
+.content-panel ul, .content-panel ol {
+  list-style: unset !important;
+}

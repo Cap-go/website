@@ -9,6 +9,7 @@ import config from './configs.json'
 export default defineConfig({
   compressHTML: true,
   site: `https://${config.base_domain.prod}`,
+  
   redirects: {
     '/register': {
       status: 302,
@@ -29,6 +30,7 @@ export default defineConfig({
       title: 'Capgo',
       favicon: '/favicon.svg',
       // logo: { src: './logo.svg' },
+      customCss: ['./src/css/global.css'],
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
         github: 'https://github.com/Cap-go',
@@ -43,12 +45,35 @@ export default defineConfig({
           link: '/docs/how-to',
         },
         {
-          label: 'Tech support for capgo',
+          label: 'Tech support for Capgo',
           link: '/docs/getting-help',
         },
         {
           label: 'Plugin',
-          autogenerate: { directory: 'docs/plugin' },
+          items: [
+           
+            { label: 'Overview', link: '/docs/plugin/overview' },
+            { label: 'Cloud Mode', autogenerate: { directory: 'docs/plugin/cloud-mode/' }},
+            {
+              label: 'Self Hosted', items: [
+                { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
+                { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
+                { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
+                { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
+                { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
+                { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
+                { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
+                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true}
+              ],
+              collapsed: true
+            },
+            { label: 'Plugin Methods', link: '/docs/plugin/api' },
+            { label: 'Known Issues', link: '/docs/plugin/known-issues' },
+            { label: 'Cordova', link: '/docs/plugin/cordova' },
+            { label: 'Settings', link: '/docs/plugin/settings' },
+            { label: 'Statistics', link: '/docs/plugin/statistics-api' },
+            { label: 'Debugging', link: '/docs/plugin/debugging' },
+          ]
         },
         {
           label: 'Tooling',
@@ -63,27 +88,9 @@ export default defineConfig({
           autogenerate: { directory: 'docs/upgrade' },
         },
         {
-          label: 'v3',
+          label: 'v3 (legacy)',
           autogenerate: { directory: 'docs/v3' },
-        },
-        {
-          label: 'Self Hosted',
-          items: [
-            { label: 'Getting Started', link: '/docs/self-hosted/getting-started' },
-            { label: 'Contributing to capgo OSS', link: '/docs/self-hosted/contributing' },
-            { label: 'Auto Update', autogenerate: { directory: 'docs/self-hosted/Auto Update' } },
-            {
-              label: 'Local development',
-              items: [
-                { label: 'Getting started', link: '/docs/self-hosted/local-dev/getting-started/' },
-                { label: 'Setup S3', link: '/docs/self-hosted/local-dev/s3' },
-                { label: 'CLI', link: '/docs/self-hosted/local-dev/cli' },
-                { label: 'Capacitor updater', link: '/docs/self-hosted/local-dev/capacitor-updater' },
-              ],
-            },
-            { label: 'Manual', link: '/docs/self-hosted/manual' },
-          ],
-        },
+        }
       ],
     }),
   ],

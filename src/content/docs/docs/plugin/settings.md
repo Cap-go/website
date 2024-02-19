@@ -5,9 +5,9 @@ sidebar:
   order: 8
 ---
 
-To have more control over updater system, you can configure it with these settings:
+To have more fine-grained control over the update system, you can configure it with these settings:
 
-## `appReadyTimeout` :
+## `appReadyTimeout` 
 
 > Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.
 
@@ -28,7 +28,7 @@ Default: `10000` (10 seconds)
 }
 ```
 
-## `responseTimeout` :
+## `responseTimeout` 
 
 > Configure the number of milliseconds the native plugin should wait before considering API timeout.
 
@@ -49,7 +49,7 @@ Default: `20` (20 second)
 }
 ```
 
-## `autoDeleteFailed` :
+## `autoDeleteFailed` 
 
 > Configure whether the plugin should automatically delete failed bundles.
 
@@ -70,9 +70,9 @@ Default: `true`
 }
 ```
 
-## `autoDeletePrevious` :
+## `autoDeletePrevious` 
 
-> Configure whether the plugin should use automatically delete previous bundles after a successful update.
+> Configure whether the plugin should automatically delete previous bundles after a successful update.
 
 Only available for Android and iOS.
 
@@ -91,7 +91,7 @@ Default: `true`
 }
 ```
 
-## `autoUpdate` :
+## `autoUpdate` 
 
 > Configure whether the plugin should use Auto Update via an update server.
 
@@ -112,7 +112,7 @@ Default: `true`
 }
 ```
 
-## `updateUrl` :
+## `updateUrl` 
 
 > Configure the URL / endpoint to which update checks are sent.
 
@@ -133,7 +133,7 @@ Default: `https://api.capgo.app/auto_update`
 }
 ```
 
-## `statsUrl` :
+## `statsUrl` 
 
 > Configure the URL / endpoint to which update statistics are sent.
 
@@ -154,7 +154,7 @@ Default: `https://api.capgo.app/stats`
 }
 ```
 
-## `privateKey` :
+## `privateKey` 
 
 > Configure the private key for end-to-end live update encryption.
 
@@ -177,9 +177,9 @@ Default: `undefined`
 }
 ```
 
-## `directUpdate` :
+## `directUpdate` 
 
-> Make the plugin directly install the update when the app what just updated/installed. Only for autoUpdate mode.
+> Make the plugin directly install the update when the app what just updated/installed. Only applicable for autoUpdate mode.
 
 Only available for Android and iOS.
 
@@ -199,11 +199,13 @@ Default: `undefined`
 }
 ```
 
-## `resetWhenUpdate` :
+## `resetWhenUpdate` 
 
-> When store update happens, disable force reset to the native version
+:::note
+When an store update happens, disable force reset to the native version
+:::
 
-You have also other config available only on the [web app](https://web.capgo.app/login)
+There are many more settings avaialble only on the [web app](https://web.capgo.app/login)
 
 To configure the plugin, use these settings:
 
@@ -222,9 +224,11 @@ To configure the plugin, use these settings:
 ```
 
 ## `version`
+Send this version to the server to identify your version at the first download. 
 
-> Send this version to the server to identify your version at the first download. This setting disables the plugin to read the version in your native code.
-
+:::caution 
+This setting disables the plugin to read the version in your native code.
+:::
 ```json
 // capacitor.config.json
 {

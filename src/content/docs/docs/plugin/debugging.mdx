@@ -43,7 +43,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 * `SUCCESS`: install bundle done
 * `ERROR`: install or download failed
 * `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted, still present for stats
+* `DELETED`: Bundle deleted, still presented for stats
 * `DOWNLOADING`: Currently downloading a bundle
 
 ## Understanding device logs:
@@ -76,7 +76,7 @@ to find your logs on Android studio
     href="https://developer.android.com/studio/debug/am-logcat"
 />
 
-### Explanations
+### Explanations Logs
 
 * `Failed to download from` **=>** same as **download\_fail**
 * `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
@@ -127,7 +127,7 @@ Then Find the `versions` folder to see all the versions
 On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
 :::
 
-## Understand ios production crash
+## Understanding ios production crash logs
 
 <LinkCard
     title="How to review your app’s crash logs"

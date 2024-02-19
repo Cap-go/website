@@ -1,0 +1,77 @@
+---
+title: "Getting started"
+description: "This tutorial will show how to start the supabase from scratch as well as start edge functions"
+sidebar:
+    order: 1
+---
+
+## What this tutorial will cover?
+
+This tutorial will show how to start the supabase from scratch as well as start edge functions 
+
+## Requirements
+ 1. Cloned [capgo](https://github.com/Cap-go/capgo)
+ 3. [supabase](https://supabase.com/)
+
+## Getting started
+
+To get started run
+```bash
+supabase start
+```
+
+Next should see something like this:
+```js
+Started supabase local development setup.
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [truncated]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+Next open `configs.json` and set the following values:
+```json
+{
+  "base_domain": {
+    "prod": "web.capgo.app",
+    "development": "development.web.capgo.app",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+where `supa_key_anon` is the value from the previous step.
+
+:::danger
+⚠️ Do not commit `configs.json` into the remote repo
+:::
+
+Next, verify that you can go to [localhost:54323](http://localhost:54323/projects) and that the table `users` looks something like this
+
+<figure><img src="/supabase.webp" alt="" /><figcaption></figcaption></figure>
+
+If it does start edge functions by running:
+
+```bash
+supabase functions serve
+```
+
+and start fronend by running:
+```bash
+bun run serve
+```
