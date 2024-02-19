@@ -26,6 +26,9 @@
     },
     {
       "pattern": "^https://foundation.mozilla.org/*"
+    },
+    {
+      "pattern": "^https://stackoverflow.com/questions/*"
     }
   ],
   "httpHeaders": [

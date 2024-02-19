@@ -106,7 +106,7 @@ App configuration page for an Apple App Store app
 
 ### ▶️ Service Credentials
 
-Service credentials need to be set up for RevenueCat to communicate with the app stores on your behalf. See RevenueCat guides [App Store Connect Shared Secret](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret), [Play Service Credentials](https://www.revenuecat.com/docs/creating-play-service-credentials), and [Amazon Appstore Shared Secret](https://www.revenuecat.com/docs/amazon-appstore) for more information.
+Service credentials need to be set up for RevenueCat to communicate with the app stores on your behalf. See RevenueCat guides [App Store Connect Shared Secret](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret), [Play Service Credentials](https://www.revenuecat.com/docs/creating-play-service-credentials), and [Amazon Appstore Shared Secret](https://www.revenuecat.com/docs/service-credentials/amazon-appstore-credentials) for more information.
 
 Note that play service credentials can take up to 36 hours to propagate throughout Google's servers.
 
