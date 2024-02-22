@@ -150,7 +150,7 @@ Example of `package.json` for version
 
 > ⛔ Version should be greater than “0.0.0”.
 
-> 💡 Don't forget to update the version number each time you send one, or the device will don't see the update.
+> 💡 Don't forget to update the version number each time you send one, version number cannot be overrode, or reused after deletion for security reason.
 
 ### **List**
 
