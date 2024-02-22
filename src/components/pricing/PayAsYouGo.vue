@@ -218,7 +218,7 @@ function toTb(value: number) {
           <p class="text-6xl font-bold text-gray-900 font-pj">
             {{ yearly ? payg.price_y.toLocaleString() : payg?.price_m.toLocaleString() }}
           </p>
-          <p class="text-lg font-bold text-gray-400 font-pj">/{{ yearly ? 'Year' : 'Month' }}</p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/Month</p>
         </div>
         <a
           href="/register"
