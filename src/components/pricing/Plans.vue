@@ -144,7 +144,6 @@ function descToEmoji(desc: string) {
                 ><span class="font-bold">{{ numberWithSpaces(plan.mau) }}</span> Monthly Active Users</span
               >
             </li>
-
             <li class="flex items-center">
               <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
                 <path
