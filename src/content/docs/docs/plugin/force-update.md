@@ -32,15 +32,38 @@ You can force an update to happen at every app start by setting `directUpdate` t
 }
 ```
 
-And then in your app, you should hide the splash until receive the event  `appReady`:
+And then in your app, you should hide the splash until receive the event `appReady`:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 
-CapacitorUpdater.addListener('appReady', () => {
+// when the app boot for the first time it should hide the splash screen and show the downloading screen
+// Keep in mind Apple and Google policy about splash screen, saying "downloading" or "updating" is not allowed
+// You should show a loading screen with a progress bar or a spinner
+// Keep in mind that the api respond time is average 1 sec and in the most far location ( Australia ) from our DB ( Germany ) is 3 sec
+// To that you add the time to download (serve at the edge) your zip bundle and unzip it ( 1-2 sec  for a 5MB zip file )
+// So you should show a loading screen for at least 5 sec in most of the case
+// This has beeen reported to be a bad user experience outside of gaming, so we recommend to use the modal update, the force update or background ( the best )
+// You can consider around 20-30% of user will close the app and never open it again if they see a loading screen for more than 5 sec
+
+let isReady = false
+SplashScreen.hide()
+let percent = 0
+let listDownload
+
+const listReady = CapacitorUpdater.addListener('appReady', () => {
   // Hide splash
-  SplashScreen.hide()
+  isReady = true
+  // Remove listeners
+  listReady?.remove()
+  listDownload?.remove()
+})
+
+listDownload = CapacitorUpdater.addListener('download', (res) => {
+  // update download progress
+  console.log(`Downloading ${res.bundle} ${res.percent}%`)
+  percent = res.percent
 })
 
 CapacitorUpdater.notifyAppReady()
