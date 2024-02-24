@@ -42,7 +42,7 @@ import { SplashScreen } from '@capacitor/splash-screen'
 // Keep in mind Apple and Google policy about splash screen, saying "downloading" or "updating" is not allowed
 // You should show a loading screen with a progress bar or a spinner
 // Keep in mind that the api respond time is average 1 sec and in the most far location ( Australia ) from our DB ( Germany ) is 3 sec
-// To that you add the time to download (serve at the edge) your zip bundle and unzip it ( 1-2 sec  for a 5MB zip file )
+// To that you add the time to download (serve at the edge for Capgo) your zip bundle and unzip it ( 1-2 sec for a 5MB zip file )
 // So you should show a loading screen for at least 5 sec in most of the case
 // This has beeen reported to be a bad user experience outside of gaming, so we recommend to use the modal update, the force update or background ( the best )
 // You can consider around 20-30% of user will close the app and never open it again if they see a loading screen for more than 5 sec
