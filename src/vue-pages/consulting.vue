@@ -59,7 +59,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                     <strong class="italic font-bold">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
                   </p>
                 </div>
-                <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
+                <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="click an boat" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
                 <div class="text-xl font-medium leading-6">TC Nicolas</div>
                 <div class="">Click & Boat</div>
                 <a
@@ -247,7 +247,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa52311f7e41c2d850aa66a_icon-code-consulting-01.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="Icon consulting"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -261,7 +261,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa523110b6488629923d270_icon-code-consulting-02.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 2"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -275,7 +275,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa5231016002724c966c3ce_icon-code-consulting-03.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 3"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -289,7 +289,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa5231166c750849eb12738_icon-code-consulting-04.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 4"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -318,7 +318,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754a59f4a273466af44c_icon-cc-special-01.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -338,7 +338,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754aded9d51509ed1e5e_icon-cc-special-02.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special 2"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -356,7 +356,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754a1644d1e0529a915c_icon-cc-special-03.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special 3"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -409,7 +409,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
               loading="lazy"
               height="80"
-              alt=""
+              alt="icon consulting 5"
               class="inline-block max-w-full align-middle border-0"
             />
           </div>
@@ -426,7 +426,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
               loading="lazy"
               height="80"
-              alt=""
+              alt="icon consulting 6"
               class="inline-block max-w-full align-middle border-0"
             />
           </div>
@@ -608,7 +608,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                   to others, to provide a flexible solution to an existing workforce or on a longer-term basis as part of a remote team
                 </p>
               </div>
-              <img loading="lazy" height="80" src="/waynium.webp" alt="" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
+              <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
               <div class="text-xl font-medium leading-6">Iannis</div>
               <div class="">CTO &amp; Co-founder @ WAYNIUM</div>
               <a
