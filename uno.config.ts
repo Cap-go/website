@@ -6,7 +6,7 @@ function getColor(name: string, weight: string): string {
 }
 
 export default defineConfig({
-  // https://windicss.org/posts/v30.html#attributify-mode
+  // https://windicss.org/posts/v30.html/#attributify-mode
   shortcuts: [],
   presets: [
     presetUno(),
