@@ -22,7 +22,7 @@ This means you can avoid delays caused by Apple Store reviews, address bugs and 
 
 ## How do self-hosted live updates work?
 
-Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://github.com/Cap-go/capacitor-updater). As for Self-hosted Live Updates, I have enhanced the Capgo CLI with the necessary functionalities to enable configuration on your infrastructure.
+Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://github.com/Cap-go/capacitor-updater/). As for Self-hosted Live Updates, I have enhanced the Capgo CLI with the necessary functionalities to enable configuration on your infrastructure.
 
 To ensure a safe and coordinated delivery of the latest web build artifacts to end-users, Capgo now allows the Capacitor Live Updates plugin to employ a public/private key pairing. When using Self-hosted Live Updates, an additional handshake is performed to provide reassurance that the artifacts downloaded via the plugin from the enterprise's infrastructure are unmodified.
 
@@ -87,4 +87,4 @@ The organization’s API returns the Live Update bundle from the location, and t
 
 I am thrilled to extend the reach of Live Updates to even more enterprises than before. Both organizations and Ionic app users will quickly recognize the advantages of Capgo's secure distribution of over-the-air app updates.
 
-For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](/docs/tooling/cli#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](/register/)
+For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](/docs/tooling/cli/#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](/register/)

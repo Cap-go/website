@@ -32,7 +32,7 @@ What we will cover:
 
 With Capacitor, you can create mobile applications using your JavaScript code. It then renders the apps using your phone's native WebView. Using Capacitor's plugins and APIs, you can access native features like the camera, speaker, and others.
 
-Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/solution/react).
+Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/solution/react/).
 
 ## What is React Native?
 
@@ -60,7 +60,7 @@ Both frameworks are open source for anyone to contribute their source code to an
 
 When working in React Native, developers can build native apps using React's syntax and core principles. It is often referred to as an unopinionated framework, meaning it comes with [very few official libraries and functionalities](https://blog.logrocket.com/react-native-component-libraries/).
 
-React Native's creators preferred to give developers [freedom when structuring apps and solving different problems](https://reactjs.org/docs/add-react-to-a-website.html), letting developers who do not want to write code from scratch build different functionalities using community-developed third-party libraries.
+React Native's creators preferred to give developers [freedom when structuring apps and solving different problems](https://reactjs.org/docs/add-react-to-a-website.html/), letting developers who do not want to write code from scratch build different functionalities using community-developed third-party libraries.
 
 Some of these libraries include:
 
@@ -86,7 +86,7 @@ If you were a fan of Cordova, you should consider using Capacitor. It is well-ma
 
 Let's take a look at the design philosophies of these two tools and how they differ from each other.
 
-Capacitor takes a web-based approach to mobile development. It renders apps on phones [using the devices' native WebView](https://ionicframework.com/docs/core-concepts/webview) and it comes with plugins out of the box that convert your web code into APIs that interact with devices' native features.
+Capacitor takes a web-based approach to mobile development. It renders apps on phones [using the devices' native WebView](https://ionicframework.com/docs/core-concepts/webview/) and it comes with plugins out of the box that convert your web code into APIs that interact with devices' native features.
 
 With React Native, on the other hand, developers skip web code and go straight to mobile.
 
@@ -106,13 +106,13 @@ A hybrid WebView tool like Capacitor saves you cost and a lot of time. But if hi
 
 React Native apps are likely to be faster and more performant, as they are converted into the native languages of devices and work directly with the native features of those devices as opposed to running in a WebView.
 
-With [over 2,000 contributors and just under 700,000 users on GitHub](https://github.com/facebook/react-native), as well as [a large community on Stack Overflow](https://stackoverflow.com/questions/tagged/react-native?sort=Newest), React Native has the support developers need to learn and grow in the framework.
+With [over 2,000 contributors and just under 700,000 users on GitHub](https://github.com/facebook/react-native/), as well as [a large community on Stack Overflow](https://stackoverflow.com/questions/tagged/react-native/?sort=Newest), React Native has the support developers need to learn and grow in the framework.
 
 Additionally, because React Native is based on JavaScript and is a cross-platform framework, it's accessible and popular among developers.
 
 React Native also became popular because Facebook created it. Facebook is currently using React Native in many of its apps and investing heavily in the framework.
 
-Other [companies that use the React Native framework](https://stackshare.io/react-native) include:
+Other [companies that use the React Native framework](https://stackshare.io/react-native/) include:
 
 - Walmart
 - Microsoft
@@ -121,7 +121,7 @@ Other [companies that use the React Native framework](https://stackshare.io/reac
 - Shopify
 - Instagram
 
-Since Capacitor is still fairly new, there aren't as many resources and materials online for developers to consume. It only has [under 300 contributors on GitHub](https://github.com/ionic-team/capacitor) and [a small community on Stack Overflow](https://stackoverflow.com/questions/tagged/capacitor). However, it does have [comprehensive documentation](https://capacitorjs.com/).
+Since Capacitor is still fairly new, there aren't as many resources and materials online for developers to consume. It only has [under 300 contributors on GitHub](https://github.com/ionic-team/capacitor/) and [a small community on Stack Overflow](https://stackoverflow.com/questions/tagged/capacitor/). However, it does have [comprehensive documentation](https://capacitorjs.com/).
 
 Companies that currently use Capacitor include:
 
@@ -223,7 +223,7 @@ In summary, if you're already familiar with web development and prefer using HTM
 
 ## React Native vs. Capacitor: Demand for skills
 
-React Native has been around for longer and is used by many large companies, making it a more in-demand skill in the job market. According to [Indeed](https://www.indeed.com/jobs?q=react+native&l=), there are thousands of job openings for React Native developers.
+React Native has been around for longer and is used by many large companies, making it a more in-demand skill in the job market. According to [Indeed](https://www.indeed.com/jobs/?q=react+native&l=), there are thousands of job openings for React Native developers.
 
 Capacitor, being a newer and less popular technology, has fewer job openings. However, as more companies adopt Capacitor for their mobile app development, the demand for Capacitor developers may increase.
 

@@ -12,7 +12,7 @@ export default defineConfig({
   redirects: {
     '/register': {
       status: 302,
-      destination: 'https://web.capgo.app/register',
+      destination: 'https://web.capgo.app/register/',
     },
   },
   integrations: [
@@ -31,7 +31,7 @@ export default defineConfig({
       // logo: { src: './logo.svg' },
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
-        github: 'https://github.com/Cap-go',
+        github: 'https://github.com/Cap-go/',
       },
       sidebar: [
         {
@@ -40,11 +40,11 @@ export default defineConfig({
         },
         {
           label: 'How To',
-          link: '/docs/how-to',
+          link: '/docs/how-to/',
         },
         {
           label: 'Tech support for capgo',
-          link: '/docs/getting-help',
+          link: '/docs/getting-help/',
         },
         {
           label: 'Plugin',
@@ -69,19 +69,19 @@ export default defineConfig({
         {
           label: 'Self Hosted',
           items: [
-            { label: 'Getting Started', link: '/docs/self-hosted/getting-started' },
-            { label: 'Contributing to capgo OSS', link: '/docs/self-hosted/contributing' },
-            { label: 'Auto Update', autogenerate: { directory: 'docs/self-hosted/Auto Update' } },
+            { label: 'Getting Started', link: '/docs/self-hosted/getting-started/' },
+            { label: 'Contributing to capgo OSS', link: '/docs/self-hosted/contributing/' },
+            { label: 'Auto Update', autogenerate: { directory: 'docs/self-hosted/Auto Update/' } },
             {
               label: 'Local development',
               items: [
                 { label: 'Getting started', link: '/docs/self-hosted/local-dev/getting-started/' },
-                { label: 'Setup S3', link: '/docs/self-hosted/local-dev/s3' },
-                { label: 'CLI', link: '/docs/self-hosted/local-dev/cli' },
-                { label: 'Capacitor updater', link: '/docs/self-hosted/local-dev/capacitor-updater' },
+                { label: 'Setup S3', link: '/docs/self-hosted/local-dev/s3/' },
+                { label: 'CLI', link: '/docs/self-hosted/local-dev/cli/' },
+                { label: 'Capacitor updater', link: '/docs/self-hosted/local-dev/capacitor-updater/' },
               ],
             },
-            { label: 'Manual', link: '/docs/self-hosted/manual' },
+            { label: 'Manual', link: '/docs/self-hosted/manual/' },
           ],
         },
       ],

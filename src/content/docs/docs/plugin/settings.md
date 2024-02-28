@@ -203,7 +203,7 @@ Default: `undefined`
 
 > When store update happens, disable force reset to the native version
 
-You have also other config available only on the [web app](https://web.capgo.app/login)
+You have also other config available only on the [web app](https://web.capgo.app/login/)
 
 To configure the plugin, use these settings:
 

@@ -35,7 +35,7 @@ This change means all tooling has to be aligned to handle the breaking change.
 
 That why Capgo follows this system.
 So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.\
-This behavior can be customized. You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+This behavior can be customized. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
 
 ### Versions
 
@@ -45,13 +45,13 @@ Where Capgo find the version to compare
   > Will be used by Capgo to compare to JavaScript version and find Major upgrade
 
  In IOS the var is set on your project here `ios/App/App/Info.plist` under the key`CFBundleShortVersionString` or `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION` if `MARKETING_VERSION` was set in your `Info.plist` file.
-  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
+  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
 
 #### Android
   > Will be uses by Capgo to compare to JavaScript version and find Major upgrade
 
   in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
-  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings)
+  > You can override this behavior in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
 
 #### JavaScript
   > Will be used by Capgo to compare to Native version and find Major upgrade

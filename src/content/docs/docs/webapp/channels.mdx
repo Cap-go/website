@@ -22,7 +22,7 @@ Then after you click on `Add` a new channel should appear in the list.
 
 ## What does misconfigured mean?
 Sometimes the configuration of a channel is not valid. In that case, you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
-You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
 
 ## Deleting a channel
 
@@ -68,7 +68,7 @@ Third is the `Android` setting. This is similar to `IOS`. If this is false then 
 
 Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
 
-Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
 
 As for `Allow develoment build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
 

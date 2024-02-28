@@ -59,7 +59,7 @@ This folder will be used by Capacitor later on, but for now, we must set it up c
 
 To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
 
-Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
+Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
 
 Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
 
@@ -107,7 +107,7 @@ npx cap sync
 
 The first command `npm run build` will simply build your Angular project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
-Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins) it’s time to run `npx cap sync` again.
+Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins/) it’s time to run `npx cap sync` again.
 
 Without noticing, you are now actually done, so let’s see the app on a device!
 
@@ -201,7 +201,7 @@ Let's take a look at how to use a Capacitor plugin in action, which we've mentio
 npm i @capacitor/share
 ```
 
-There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **src/app/app.component.ts** to this:
+There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **src/app/app.component.ts** to this:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -236,7 +236,7 @@ After hitting the button, you can witness the beautiful native share dialog in a
 
 ## Adding Konsta UI
 
-To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/angular) and to install the package:
+To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/angular/) and to install the package:
 
 ```shell
 npm i konsta
@@ -266,7 +266,7 @@ module.exports = konstaConfig({
 
 `konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
 
-Now we need to set up the main [App](https://konstaui.com/vue/app) component so we can set some global parameters (like `theme`).
+Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
 
 We need to wrap the whole app with `App` in the `src/app/app.component.html`:
 
@@ -319,6 +319,6 @@ You should see the following page as a result:
 
 Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI.
 
-And with the addition of [Capgo](https://capgo.app), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
 If you would like to learn how to add Capgo to your Angular app, take a look at the next article:

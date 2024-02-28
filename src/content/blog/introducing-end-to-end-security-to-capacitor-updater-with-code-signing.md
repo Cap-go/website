@@ -14,11 +14,11 @@ next_blog: ""
 
 ---
 
-[Capacitor-updater](https://github.com/Cap-go/capacitor-updater) now supports end-to-end code encryption. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.
+[Capacitor-updater](https://github.com/Cap-go/capacitor-updater/) now supports end-to-end code encryption. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.
 
 ## The default security of Capacitor-updater
 
-By default, Capgo’s security model is similar to that of web hosting providers. Capgo stores updates [encrypted at rest](https://cloud.google.com/docs/security/encryption/default-encryption) and serves them over HTTPS using modern ciphers. Similarly, publishing an update from a developer’s computer always uses HTTPS.
+By default, Capgo’s security model is similar to that of web hosting providers. Capgo stores updates [encrypted at rest](https://cloud.google.com/docs/security/encryption/default-encryption/) and serves them over HTTPS using modern ciphers. Similarly, publishing an update from a developer’s computer always uses HTTPS.
 
 ![Capgo scores an A+ on SSL Labs’ HTTPS test](/ssllabs_report.webp)
 
@@ -32,7 +32,7 @@ Another thing Capgo and most web hosts have in common is they run on lower-level
 
 The cloud supply chain and its security model work for a vast number of websites and apps. Every web developer who uses a cloud provider puts trust in that provider and expects the files they upload to be the files that are run or served without being tampered with. And cloud providers work hard at keeping their infrastructure secure.
 
-But obviously, hardware and software vulnerabilities get discovered. Cloud providers patch vulnerabilities on timely schedules, proactively prevent malicious software(e.g. [Google’s SLSA](https://security.googleblog.com/2021/06/introducing-slsa-end-to-end-framework.html)), and build layers of defense in depth, and in practice, cloud infrastructure has shown to meet most websites and apps’ security needs. However, some Ionic apps include compromised cloud infrastructure in their threat models. For these Capacitor JS apps with the highest security requirements above the web, we built end-to-end code signing in to Capgo and the [Capgo Updates standard protocol](/docs/self-hosted/auto-update/update-endpoint/).
+But obviously, hardware and software vulnerabilities get discovered. Cloud providers patch vulnerabilities on timely schedules, proactively prevent malicious software(e.g. [Google’s SLSA](https://security.googleblog.com/2021/06/introducing-slsa-end-to-end-framework.html/)), and build layers of defense in depth, and in practice, cloud infrastructure has shown to meet most websites and apps’ security needs. However, some Ionic apps include compromised cloud infrastructure in their threat models. For these Capacitor JS apps with the highest security requirements above the web, we built end-to-end code signing in to Capgo and the [Capgo Updates standard protocol](/docs/self-hosted/auto-update/update-endpoint/).
 
 ## End-to-end code signing with Capgo
 
@@ -70,8 +70,8 @@ For large companies or projects who care deeply about security, we want to make 
 -   Support for code signing development servers with both Capgo and development builds
 -   Production code signing on every update
 
-Capgo code signing is available for all customers. To get started, follow the [setup instructions](/docs/tooling/cli#end-to-end-encryption-trustless).
+Capgo code signing is available for all customers. To get started, follow the [setup instructions](/docs/tooling/cli/#end-to-end-encryption-trustless).
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example) rewrote with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example/) rewrote with chat-gpt-3 and adapted.

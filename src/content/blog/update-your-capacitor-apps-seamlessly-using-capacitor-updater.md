@@ -31,7 +31,7 @@ Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and ever
 
 I use Capgo in all my projects I build. That allows me to put less time in the App Store review process.
 
-You can read more about it [here](https://capgo.app).
+You can read more about it [here](https://capgo.app/).
 
 ## Are there any limitations?
 
@@ -77,7 +77,7 @@ This will tell the native plugin the installation as succeeded.
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -96,9 +96,9 @@ Run the command to build your code and send it to Capgo with:
 
 By default, the version name will be the one in your `package.json` file.
 
-Check in [Capgo](https://web.capgo.app) if the build is present.
+Check in [Capgo](https://web.capgo.app/) if the build is present.
 
-You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
+You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
 
 ### Make channel default
 

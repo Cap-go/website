@@ -9,7 +9,7 @@ sidebar:
 
 All command should be run in your app folder with capacitor project ignited. See below.
 
-[Capacitor: Cross-platform native runtime for web apps](https://capacitorjs.com/docs/getting-started)
+[Capacitor: Cross-platform native runtime for web apps](https://capacitorjs.com/docs/getting-started/)
 
 ### **Init**
 
@@ -47,7 +47,7 @@ This command will also be useful for bug report.
 
 `npx @capgo/cli app add [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 > 💡 All option will be guessed in your config if not provided.
 
@@ -71,7 +71,7 @@ Example of `capacitor.config.json` for appId and AppName, the icon is guess in t
 
 `npx @capgo/cli app set [appId]`
 
-`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -84,7 +84,7 @@ Optionally, you can give:
 
 `npx @capgo/cli app list [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -94,7 +94,7 @@ Optionally, you can give:
 
 `npx @capgo/cli app delete [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -105,7 +105,7 @@ Optionally, you can give:
 
 `npx @capgo/cli app debug [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -118,7 +118,7 @@ Optionally, you can give:
 
 `npx @capgo/cli bundle upload [appId]`
 
-`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -131,7 +131,7 @@ Optionally, you can give:
 * `--no-key` to ignore the signing key and send clear update.
 * `--bundle [1.0.0]` to set the bundle version number of the file to upload.
 * `--iv-session-key [key]` to send a custom session key to the cloud.
-* `--bundle-url` prints bundle url into stdout. Useful when [parsing bundle url from shell](https://github.com/Cap-go/CLI/pull/132).
+* `--bundle-url` prints bundle url into stdout. Useful when [parsing bundle url from shell](https://github.com/Cap-go/CLI/pull/132/).
 * `--no-code-check` to ignore the code check and send the bundle anyway.
 
 > ⭐️ External option helps to unlock 2 cases: corporate with privacy concern, don't send the code to a third part and app bigger than 200 MB. With this setting, Capgo store only the link to the zip and sends the link to all apps.
@@ -156,7 +156,7 @@ Example of `package.json` for version
 
 `npx @capgo/cli bundle list [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -166,7 +166,7 @@ Optionally, you can give:
 
 `npx @capgo/cli bundle delete [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -179,7 +179,7 @@ in a SemVer range for a major version to Cloud
 
 `npx @capgo/cli bundle cleanup [appId] --bundle=[majorVersion] --keep=[numberToKeep]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -223,7 +223,7 @@ Optionally, you can give:
 
 `npx @capgo/cli bundle zip [appId]`
 
-`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -236,7 +236,7 @@ Optionally, you can give:
 
 `npx @capgo/cli bundle compatibility [appId] -c [channelId]`
 
-`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 `[channelId]` the name of your new channel.
 
 Optionally, you can give:
@@ -250,19 +250,19 @@ Optionally, you can give:
 
 `npx @capgo/cli channel add [channelId] [appId]`
 
-`[channelId]` the name of your new channel. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[channelId]` the name of your new channel. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **Delete**
 
 `npx @capgo/cli channel delete [channelId] [appId]`
 
-`[channelId]` the name of your channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[channelId]` the name of your channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **List**
 
 `npx @capgo/cli channel list [appId]`
 
-`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -272,7 +272,7 @@ Optionally, you can give:
 
 `npx @capgo/cli channel set [channelId] [appId]`
 
-`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init).
+`[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 Optionally, you can give:
 
@@ -313,7 +313,7 @@ First, figure out what channel is failing. You can do that by looking at the `mi
 Then go to the failing channel and click on `Bundle number`. This should take you to the bundle page.
 <figure><img src="/fail-channel-show.webp" alt="Locate failing channel"></figure>
 
-Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver).\
+Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver/).\
 If the value you pass is not a semver you will get an error, but if everything goes correctly you should see something like this:
 <figure><img src="/set-min-update-version.webp" alt="Set min version"></figure>
 
@@ -368,10 +368,10 @@ Optionally, you can give:
 
 To automate your work, I recommend you make GitHub action do the job of pushing to our server
 
-[GitHub action tutorial](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
+[GitHub action tutorial](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
 
 ## Our demo app
 
-[GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app)
+[GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app/)
 
 Don’t forget to configure CI env variable with your API key

@@ -64,7 +64,7 @@ By emerging yourself into a certain open-source project, you’re getting valuab
 
 **Leveraging your career prospects**
 
-By contributing to open-source projects, you are signaling your talent to potential employers. For them, it’s easy to check your actual work and evaluate if you’d be a good fit for their open roles. In the words of [Frank Scheffler](https://medium.com/digitalfrontiers/5-reasons-why-you-should-contribute-to-open-source-projects-2f65443b4077), "active open source contributions emphasize your expertise and knowledge, more than certificates alone will ever do”.
+By contributing to open-source projects, you are signaling your talent to potential employers. For them, it’s easy to check your actual work and evaluate if you’d be a good fit for their open roles. In the words of [Frank Scheffler](https://medium.com/digitalfrontiers/5-reasons-why-you-should-contribute-to-open-source-projects-2f65443b4077/), "active open source contributions emphasize your expertise and knowledge, more than certificates alone will ever do”.
 
 Moreover, by contributing to multiple projects, you’re building your network of contacts, which can never hurt your career!
 
@@ -133,7 +133,7 @@ As you know, open-source technologies have multiple advantages. They are availab
 
 These are all principles we adhere to in Capgo! We're an open source live update system for Capacitor apps whose mission is to live update the Capacitor apps. We allows you to deploy updates to your users without the need to re-install the app. We're a cloud-based service, but you can also self-host it.
 
-Why not try it for yourself? [Try our free version](https://web.capgo.app/register) and [contribute to our ever-evolving open-source project](https://github.com/Cap-go) - we’d be happy to have you on board!
+Why not try it for yourself? [Try our free version](https://web.capgo.app/register/) and [contribute to our ever-evolving open-source project](https://github.com/Cap-go/) - we’d be happy to have you on board!
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">

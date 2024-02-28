@@ -85,7 +85,7 @@ Note: To get localSupaAnon please follow this [tutorial](https://capgo.app/docs/
 
 **Requirement**
 
-Cloned [capgo](https://github.com/Cap-go/capgo)
+Cloned [capgo](https://github.com/Cap-go/capgo/)
 
 To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
 

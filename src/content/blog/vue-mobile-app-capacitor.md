@@ -172,7 +172,7 @@ npx cap sync
 
 ## Adding Konsta UI
 
-To use Konsta UI in your Vue app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/vite#vue) and to install the package:
+To use Konsta UI in your Vue app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/vite/#vue) and to install the package:
 To use Konsta UI in your Vue app, install the package and modify your `tailwind.config.js` file:
 
 ```shell

@@ -16,7 +16,7 @@ next_blog: ""
 
 Hey, I'm Martin Donadieu,
 
-In July 2021, I left [Naas](https://naas.ai) the startup I cofounded in 2019 to build project in solo.
+In July 2021, I left [Naas](https://naas.ai/) the startup I cofounded in 2019 to build project in solo.
 
 During the first 6 months of my solo journey I focused on rebooting my project Captime, a mobile app I did 4 years earlier, who became a side business with the covid.
 

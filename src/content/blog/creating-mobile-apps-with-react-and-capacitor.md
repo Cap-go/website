@@ -143,7 +143,7 @@ Do keep in mind that if new plugins are installed, such as the camera, it necess
 
 ## Using Capacitor Plugins
 
-Let's take a quick look at how to use a Capacitor plugin. Let's install a simple one, the [Share plugin](https://capacitorjs.com/docs/apis/share), which prompts the native share dialog:
+Let's take a quick look at how to use a Capacitor plugin. Let's install a simple one, the [Share plugin](https://capacitorjs.com/docs/apis/share/), which prompts the native share dialog:
 
 ```shell
 npm i @capacitor/share

@@ -73,7 +73,7 @@ Then the behavior become :
 
 #### Disable auto-upgrade strategy
 
-There are a couple of stategies you can chose from. You can learn more about it [here](/docs/tooling/cli#disable-updates-strategy)
+There are a couple of stategies you can chose from. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
 
 ## JavaScript bundle version
 

@@ -291,6 +291,6 @@ Now, when the user goes offline, the offline screen will be displayed. When the 
 
 The Network API provides several methods and interfaces to help you handle the network connection. Here are some of the key ones:
 
-- [`getStatus()`](https://capacitorjs.com/docs/apis/network#getstatus): Query the current status of the network connection.
-- [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network#addlistenernetworkstatuschange): Listen for changes in the network connection.
+- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Query the current status of the network connection.
+- [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Listen for changes in the network connection.
 -

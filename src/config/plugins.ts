@@ -90,7 +90,7 @@ export const actions = [
   // {
   //   name: '@capgo/ngx-intl-tel-input-app',
   //   author: 'Unknown',
-  //   description: '[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)',
+  //   description: '[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg/?style=flat-square/)](#contributors)',
   //   href: 'N/A',
   //   title: 'International Telephone Input',
   //   icon: PhoneIcon,

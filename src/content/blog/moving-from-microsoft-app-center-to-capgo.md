@@ -14,16 +14,16 @@ published: true
 next_blog: ""
 
 ---
-Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek alternatives, and I am thrilled to say that the [Capgo](https://capgo.app) platform is a fantastic option for those looking for full support for Capacitor apps.
+Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek alternatives, and I am thrilled to say that the [Capgo](https://capgo.app/) platform is a fantastic option for those looking for full support for Capacitor apps.
 
 ## From Microsoft App Center to Capgo Cloud
 
 Capacitor is a new way of building native mobile apps with Ionic, and most Cordova plugins are supported in Capacitor. Capgo provides a live update functionality similar to CodePush, but without platform dependencies and immediate app publishing. With Capgo, development teams can outsource the complicated app delivery process and focus entirely on the unique features of their Ionic app. Additionally, unlike App Center, Capgo is 100% focused on hybrid architectures like Capacitor.
 
-Capacitor customers can easily migrate from Microsoft App Center to Capgo in just a few steps using my [migration guide](https://capgo.app/blog/appcenter-migration), which walks you through the entire process. Capgo includes a complete list of features that Capacitor users can take advantage of.
+Capacitor customers can easily migrate from Microsoft App Center to Capgo in just a few steps using my [migration guide](https://capgo.app/blog/appcenter-migration/), which walks you through the entire process. Capgo includes a complete list of features that Capacitor users can take advantage of.
 
 If you’re interested in learning more about migrating from Microsoft App Center to Capgo, create your [free Capgo account](/register/) today.
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewrote with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow/) rewrote with chat-gpt-3 and adapted.
