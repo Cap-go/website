@@ -615,7 +615,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 href="#"
                 class="inline-block max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
                 style="transition: all 0.2s ease 0s; text-decoration: none"
-                ><img width="39" loading="lazy" alt="logo" src="/waynium.webp" class="inline-block mt-3 max-w-full align-middle border-0"
+                ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="inline-block mt-3 max-w-full align-middle border-0"
               /></a>
             </div>
           </div>
