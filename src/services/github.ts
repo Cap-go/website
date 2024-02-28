@@ -17,4 +17,4 @@ const removeTrailingSlash = (item: string) => item.replace(/\/$/, '')
 export const getSlug = (item: string) =>
   removeTrailingSlash(item)
     .substring(removeTrailingSlash(item).lastIndexOf('/') + 1)
-    .toLowerCase()
+    .toLowerCase() + '/'
