@@ -7,7 +7,7 @@ sidebar:
 
 # Updater Plugin Config
 
-See the Github [Readme](https://github.com/Cap-go/capacitor-updater/) for more information.
+See the Github [Readme](https://github.com/Cap-go/capacitor-updater) for more information.
 
 <docgen-config>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
@@ -44,8 +44,8 @@ In `capacitor.config.json`:
 {
   "plugins": {
     "CapacitorUpdater": {
-      "appReadyTimeout": 1000, // (1 second)
-      "responseTimeout": 10, // (10 second)
+      "appReadyTimeout": 1000 // (1 second),
+      "responseTimeout": 10 // (10 second),
       "autoDeleteFailed": false,
       "autoDeletePrevious": false,
       "autoUpdate": false,
