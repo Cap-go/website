@@ -78,7 +78,7 @@ Capacitor and Flutter both provide tooling and plugin infrastructure for cross-p
 
 ## Can I embed Capacitor into React Native or traditional native apps to build mobile micro frontends?
 
-Yes, you can use [Ionic Portals](https://ionic.io/portals) to embed Capacitor into React Native or traditional native apps built with Swift/Kotlin for a mobile micro frontend approach.
+Yes, you can use [Ionic Portals](https://ionic.io/portals/) to embed Capacitor into React Native or traditional native apps built with Swift/Kotlin for a mobile micro frontend approach.
 
 ## What are my options for high-performance animations in Capacitor?
 
@@ -86,15 +86,15 @@ You can use pre-baked, optimized components from Ionic Framework, Quasar, Framew
 
 ## How many plugins does Capacitor have?
 
-Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor), the [capacitor-community](https://github.com/capacitor-community) organization, and [Capawesome](https://github.com/capawesome-team) for community plugin resources.
+Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and [Capawesome](https://github.com/capawesome-team/) for community plugin resources.
 
 ## Is there a VS Code Extension for Capacitor?
 
-Yes, the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic) also serves as a Capacitor extension, offering features like embedded preview, device running, external debugging, project quality linting, security analysis, and more.
+Yes, the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items/?itemName=ionic.ionic) also serves as a Capacitor extension, offering features like embedded preview, device running, external debugging, project quality linting, security analysis, and more.
 
 ## Is there enterprise-specific support available?
 
-Yes, Capgo offers [Enterprise support and features](https://capgo.app) for Capacitor, including dedicated support, native plugins for live update and authentication, and more.
+Yes, Capgo offers [Enterprise support and features](https://capgo.app/) for Capacitor, including dedicated support, native plugins for live update and authentication, and more.
 
 ## How do I get started with Capacitor?
 

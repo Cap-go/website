@@ -31,7 +31,7 @@ npx cap sync
 
 To enable auto-updates in your app, you need to follow these steps:
 
-1. Create an account on [capgo.app](https://capgo.app) and obtain your API key.
+1. Create an account on [capgo.app](https://capgo.app/) and obtain your API key.
 
 2. Login to the CLI using the API key:
 
@@ -43,7 +43,7 @@ To enable auto-updates in your app, you need to follow these steps:
 
 3. Follow the steps provided by the CLI to complete the setup.
 
-For detailed instructions on the auto-update setup, refer to the [Auto update documentation](https://capgo.app/docs/plugin/auto-update).
+For detailed instructions on the auto-update setup, refer to the [Auto update documentation](https://capgo.app/docs/plugin/auto-update/).
 
 ## Manual Setup
 

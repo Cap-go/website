@@ -207,6 +207,7 @@ When an store update happens, disable force reset to the native version
 
 There are many more settings avaialble only on the [web app](https://web.capgo.app/login)
 
+
 To configure the plugin, use these settings:
 
 ```json

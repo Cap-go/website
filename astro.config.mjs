@@ -13,7 +13,7 @@ export default defineConfig({
   redirects: {
     '/register': {
       status: 302,
-      destination: 'https://web.capgo.app/register',
+      destination: 'https://web.capgo.app/register/',
     },
   },
   integrations: [
@@ -33,7 +33,7 @@ export default defineConfig({
       customCss: ['./src/css/global.css'],
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
-        github: 'https://github.com/Cap-go',
+        github: 'https://github.com/Cap-go/',
       },
       sidebar: [
         {
@@ -42,11 +42,15 @@ export default defineConfig({
         },
         {
           label: 'How To',
-          link: '/docs/how-to',
+          link: '/docs/how-to/',
         },
         {
-          label: 'Tech support for Capgo',
-          link: '/docs/getting-help',
+          label: 'FAQ',
+          link: '/docs/faq/',
+        },
+        {
+          label: 'Tech support for capgo',
+          link: '/docs/getting-help/',
         },
         {
           label: 'Plugin',

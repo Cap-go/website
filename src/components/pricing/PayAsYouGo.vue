@@ -13,6 +13,15 @@ defineProps({
 function toTb(value: number) {
   return (value / 1000).toFixed(2).toLocaleString()
 }
+
+function numberWithSpaces(x: number) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
+function updateCalc(plan: any) {
+  // return aprox number of updates per month
+  return plan.mau * 5
+}
 </script>
 
 <template>
@@ -23,7 +32,7 @@ function toTb(value: number) {
           <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">🔥</div>
           <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">Pay as you go</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">2,500.000 Live Updates/mo. No commitments.</p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">{{numberWithSpaces(updateCalc(payg))}} Live Updates/mo. No commitments.</p>
       </div>
 
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
@@ -218,7 +227,7 @@ function toTb(value: number) {
           <p class="text-6xl font-bold text-gray-900 font-pj">
             {{ yearly ? payg.price_y.toLocaleString() : payg?.price_m.toLocaleString() }}
           </p>
-          <p class="text-lg font-bold text-gray-400 font-pj">/{{ yearly ? 'Year' : 'Month' }}</p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/Month</p>
         </div>
         <a
           href="/register"

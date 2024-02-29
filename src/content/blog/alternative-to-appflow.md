@@ -47,7 +47,7 @@ That why we made you a clear and simple table to help you compare.
 
 ## Continuous integration alternatives
 
-If you are interested in using [Capgo](https://capgo.app/pricing) to take advantage of live updates but do not have a continuous integration solution in place, you can easily set up a low-cost continuous integration workflow using GitHub Actions. GitHub Actions is a free, built-in continuous integration and deployment service for GitHub repositories that allows developers to automate their software development workflows.
+If you are interested in using [Capgo](https://capgo.app/pricing/) to take advantage of live updates but do not have a continuous integration solution in place, you can easily set up a low-cost continuous integration workflow using GitHub Actions. GitHub Actions is a free, built-in continuous integration and deployment service for GitHub repositories that allows developers to automate their software development workflows.
 
 To set up continuous integration with GitHub Actions and Capgo, You will first need to create a GitHub repository for your app's code. Then you can create a workflow file in your repository that defines the steps that should be run whenever code is pushed to the repository. For example, a simple workflow file might include steps to build and test the app, and then use [Capgo](/register/) to create a live update and deploy it to the app's users.
 

@@ -21,11 +21,11 @@ This is the convention it used to manage versions. This convention should be use
 
 Setup your app in 5 mins
 
-[Update your capacitor apps seamlessly using capacitor updater](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[Update your capacitor apps seamlessly using capacitor updater](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)
 
 Setup your CI in 5 mins
 
-[Automatic build and release with GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
+[Automatic build and release with GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
 
 
 
@@ -38,7 +38,7 @@ npx cap sync
 
 ### Intro
 
-Click on [register](https://capgo.app) to create your account if you don't have one.
+Click on [register](https://capgo.app/) to create your account if you don't have one.
 
 The server allows you to manage channels and versions and much more.
 
@@ -79,7 +79,7 @@ When you develop new features, be sure to block `autoUpdate`, otherwise you will
 
 To upload the version at each commit setup CI/CD with this guide
 
-[Automatic build and release with GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
+[Automatic build and release with GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
 
 #### Major Available event
 

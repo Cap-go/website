@@ -120,4 +120,4 @@ In Xcode Cloud, **you are billed based on the minutes** you have used for runnin
 
 For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
 
-For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).
+For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing/).

@@ -24,8 +24,8 @@ Before we begin, ensure you have the following tools installed:
 
 - [**Node.js**](https://nodejs.org/en/) **(v14.16.1)** or higher
 - **NPM (v7.6.2)** or higher
-- [**Android Studio**](https://developer.android.com/studio) for Android app development
-- [**Xcode**](https://apps.apple.com/de/app/xcode/id497799835?mt=12) for iOS app development (macOS only)
+- [**Android Studio**](https://developer.android.com/studio/) for Android app development
+- [**Xcode**](https://apps.apple.com/de/app/xcode/id497799835/?mt=12) for iOS app development (macOS only)
 
 > **Note**: iOS app development is only possible on a macOS device.
 
@@ -88,7 +88,7 @@ Let's modify some files to work with pure JavaScript:
 
 ## www/index.html
 
-1. Remove the script imports for [**Ionic PWA Elements**](https://capacitorjs.com/docs/web/pwa-elements) if you're not releasing the app as a PWA:
+1. Remove the script imports for [**Ionic PWA Elements**](https://capacitorjs.com/docs/web/pwa-elements/) if you're not releasing the app as a PWA:
 
 ```
 <script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"></script>

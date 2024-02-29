@@ -1,6 +1,6 @@
 ## Using @capgo/cli for Uploading and Downloading Files to Capgo Cloud
 
-[@capgo/cli](https://www.npmjs.com/package/@capgo/cli) is a command-line interface (CLI) tool that allows you to upload and download files to and from the Capgo Cloud. In this tutorial, we will walk through the steps to use @capgo/cli for managing files in the Capgo Cloud.
+[@capgo/cli](https://www.npmjs.com/package/@capgo/cli/) is a command-line interface (CLI) tool that allows you to upload and download files to and from the Capgo Cloud. In this tutorial, we will walk through the steps to use @capgo/cli for managing files in the Capgo Cloud.
 
 ### Step 1: Registration
 

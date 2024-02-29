@@ -68,4 +68,4 @@ interface BundleInfo {
 
 ## Contributors
 
-[@lincolnthree](https://github.com/lincolnthree) Thank you so much for starting this work, it was impossible to make this update work without you.
+[@lincolnthree](https://github.com/lincolnthree/) Thank you so much for starting this work, it was impossible to make this update work without you.

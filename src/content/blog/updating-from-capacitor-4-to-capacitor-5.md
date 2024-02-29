@@ -173,7 +173,7 @@ The following plugin functionality has been modified or removed. Update your cod
 ### Device
 
 - Change `DeviceId.uuid` to `DeviceId.identifier`.
-- On iOS 16+, `DeviceInfo.name` will return a generic device name unless you add the appropriate [entitlements](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name).
+- On iOS 16+, `DeviceInfo.name` will return a generic device name unless you add the appropriate [entitlements](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name/).
 
 ### Geolocation
 

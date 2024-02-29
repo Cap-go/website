@@ -9,7 +9,7 @@ sidebar:
 
 This is the documentation of the backend API of Capgo cloud
 
-You can access to the API. You need to add in the headers your API key as `authorization`. You get it [there](https://web.capgo.app/dashboard/apikeys)
+You can access to the API. You need to add in the headers your API key as `authorization`. You get it [there](https://web.capgo.app/dashboard/apikeys/)
 
 ## Channels
 

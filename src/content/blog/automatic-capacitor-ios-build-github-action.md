@@ -29,7 +29,7 @@ Before continuing with the tutorial…
 
 ![Price GitHub Action](/price_github_actions.webp)
 
-[https://github.com/features/actions](https://github.com/features/actions)
+[https://github.com/features/actions](https://github.com/features/actions/)
 
 The service is ‘_free’_ up to the limit, depending on the chosen machine.  
 We are going to use a **_macOS_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
@@ -72,7 +72,7 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 1 — Log in to [App Store Connect](https://appstoreconnect.apple.com/).
 
-2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users).
+2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users/).
 
 ![App Store Connect user access](/select_user_access.webp)
 
@@ -88,7 +88,7 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect API keys create name](/gen_key.webp)
 
-6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7).
+6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/).
 
 7 — Click Generate.
 
@@ -303,7 +303,7 @@ If all went well, you should see something like that:
 [01:40:52]: All required keys, certificates and provisioning profiles are installed 🙌
 ```
 
-> If you experienced any problem with GitHub and the necessary permissions, maybe this [post](https://medium.com/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c) will help you to generate authentication tokens for git.
+> If you experienced any problem with GitHub and the necessary permissions, maybe this [post](https://medium.com/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c/) will help you to generate authentication tokens for git.
 
 Generated certificates and provisioning profiles are uploaded to the certificates repository resources
 
@@ -354,7 +354,7 @@ If you share the same concerns for the pricing as I do for private projects, you
 
 What’s the catch? You have to manually update the compliance of your app in App Store Connect after the build has been processed, for you to distribute the build to your users.
 
-This is just an optional parameter to update if you want to save on the build minutes for private projects. For free projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).
+This is just an optional parameter to update if you want to save on the build minutes for private projects. For free projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing/).
 
 
 ## 3\. Setup GitHub Actions
@@ -387,7 +387,7 @@ Ever wonder where the values of the `ENV` are coming from? Well, it’s not a se
 
 11\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
 
-12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655#issuecomment-881764901)
+12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
 <!-- markdown-link-check-disable-next-line -->
 13\. `CERTIFICATE_STORE_URL` — The repo url of your Match keys (ex: https://github.com/***/fastlane_match.git)
 
@@ -557,6 +557,6 @@ Then try to run again the app on your device.
 ### Thanks
 
 This blog is based on the following articles:
-- [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc)
+- [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
 - [Fastlane Documentation](https://docs.fastlane.tools/app-store-connect-api/)
-- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63#issuecomment-1074328057)
+- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)

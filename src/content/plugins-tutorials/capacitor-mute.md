@@ -51,7 +51,7 @@ In this example, if the device is muted, a message "The device is currently mute
 
 ## Possible Issues
 
-Please note that on iOS devices with Xcode 14, the `@capgo/capacitor-mute` library may not be configured as expected by Apple. This issue is currently being addressed by the library developers. To resolve this issue, you can follow the instructions provided in the [known issue](https://github.com/CocoaPods/CocoaPods/issues/8891) section of the package's documentation.
+Please note that on iOS devices with Xcode 14, the `@capgo/capacitor-mute` library may not be configured as expected by Apple. This issue is currently being addressed by the library developers. To resolve this issue, you can follow the instructions provided in the [known issue](https://github.com/CocoaPods/CocoaPods/issues/8891/) section of the package's documentation.
 
 ## Conclusion
 

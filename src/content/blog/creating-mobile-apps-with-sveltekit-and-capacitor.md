@@ -46,7 +46,7 @@ This folder will be used by Capacitor later, but for now, we need to set it up c
 
 To package any web app into a native mobile container, we need to follow a few initial steps. Afterward, it's as simple as running a single `sync` command.
 
-First, install the [Capacitor CLI](https://capacitorjs.com/docs/cli) as a development dependency and set it up within your project. During the setup, you can press "enter" to accept the default values for name and bundle ID.
+First, install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency and set it up within your project. During the setup, you can press "enter" to accept the default values for name and bundle ID.
 
 Next, install the core package and the relevant packages for the iOS and Android platforms.
 
@@ -142,7 +142,7 @@ npx cap sync
 
 The first command `npm run build` will build your SvelteKit project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
-Additionally, the sync command might update the native platforms and install plugins, so when you install new [Capacitor plugins](https://capacitorjs.com/docs/plugins), it's time to run `npx cap sync` again.
+Additionally, the sync command might update the native platforms and install plugins, so when you install new [Capacitor plugins](https://capacitorjs.com/docs/plugins/), it's time to run `npx cap sync` again.
 
 Without realizing it, you've now completed the process, so let's see the app on a device!
 
@@ -236,7 +236,7 @@ Let's take a look at how to use a Capacitor plugin in action, which we've mentio
 npm i @capacitor/share
 ```
 
-There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share), but it brings up the native share dialog! For this, we now only need to import the package and call the `share()` function from our app, so let’s change the **src/routes/index.svelte** to this:
+There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it brings up the native share dialog! For this, we now only need to import the package and call the `share()` function from our app, so let’s change the **src/routes/index.svelte** to this:
 
 ```html
 <script>
@@ -266,7 +266,7 @@ After hitting the button, you can witness the beautiful native share dialog in a
 
 ## Adding Konsta UI
 
-To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/sveltekit) and to install the package:
+To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/sveltekit/) and to install the package:
 
 ```shell
 npm i konsta
@@ -297,7 +297,7 @@ module.exports = konstaConfig({
 
 `konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
 
-Now we need to set up the main [App](https://konstaui.com/vue/app) component so we can set some global parameters (like `theme`).
+Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
 
 We need to wrap the whole app with `App` in the `src/routes/+layout.svelte`:
 
@@ -364,7 +364,7 @@ You should see the following page as a result:
 
 Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI.
 
-And with the addition of [Capgo](https://capgo.app), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
 If you would like to learn how to add Capgo to your SvelteKit app, take a look at the next article:
 

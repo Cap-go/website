@@ -26,7 +26,7 @@ onMounted(() => {
         <a
           v-for="item in plugins"
           :key="item.href"
-          :href="item.href !== 'N/A' ? `/plugins/${getSlug(item.href)}` : '#'"
+          :href="item.href !== 'N/A' ? `/plugins/${getSlug(item.href)}/` : '#'"
           class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
         >
           <div class="flex flex-col px-5 py-3">

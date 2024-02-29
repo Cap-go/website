@@ -7,7 +7,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
     <main
       class="flex justify-center items-center md:pt-24 h-screen font-light leading-8 text-center bg-scroll bg-no-repeat bg-slate-900 text-slate-900 sm:flex-col sm:items-center"
       style="
-        background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp');
+        background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp');
         background-position: 50% 100%;
         background-size: 520px;
       "
@@ -36,7 +36,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             transition: all 0.2s ease 0s;
             text-decoration: none;
             letter-spacing: 2px;
-            background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+            background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
             background-position: 100% 50%;
           "
           ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a
@@ -59,7 +59,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                     <strong class="italic font-bold">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
                   </p>
                 </div>
-                <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
+                <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="click an boat" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
                 <div class="text-xl font-medium leading-6">TC Nicolas</div>
                 <div class="">Click & Boat</div>
                 <a
@@ -90,7 +90,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -108,7 +108,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -129,7 +129,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -150,7 +150,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -168,7 +168,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -186,7 +186,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -206,7 +206,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="
-                  background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
                   background-position: 0px 3px;
                   letter-spacing: 1.7px;
                 "
@@ -244,10 +244,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <div class="text-slate-900">
             <div class="mb-6 h-20">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa52311f7e41c2d850aa66a_icon-code-consulting-01.svg"
+                src="/5fa52311f7e41c2d850aa66a_icon-code-consulting-01.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="Icon consulting"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -258,10 +258,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <div class="text-slate-900">
             <div class="mb-6 h-20">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa523110b6488629923d270_icon-code-consulting-02.svg"
+                src="/5fa523110b6488629923d270_icon-code-consulting-02.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 2"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -272,10 +272,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <div class="text-slate-900">
             <div class="mb-6 h-20">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa5231016002724c966c3ce_icon-code-consulting-03.svg"
+                src="/5fa5231016002724c966c3ce_icon-code-consulting-03.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 3"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -286,10 +286,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <div class="text-slate-900">
             <div class="mb-6 h-20">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa5231166c750849eb12738_icon-code-consulting-04.svg"
+                src="/5fa5231166c750849eb12738_icon-code-consulting-04.svg"
                 loading="lazy"
                 height="80"
-                alt=""
+                alt="icon consulting 4"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -315,10 +315,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           >
             <div class="mb-6 h-12">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754a59f4a273466af44c_icon-cc-special-01.svg"
+                src="/5faa754a59f4a273466af44c_icon-cc-special-01.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -335,10 +335,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           >
             <div class="mb-6 h-12">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754aded9d51509ed1e5e_icon-cc-special-02.svg"
+                src="/5faa754aded9d51509ed1e5e_icon-cc-special-02.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special 2"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -353,10 +353,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           >
             <div class="mb-6 h-12">
               <img
-                src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5faa754a1644d1e0529a915c_icon-cc-special-03.svg"
+                src="/5faa754a1644d1e0529a915c_icon-cc-special-03.svg"
                 loading="lazy"
                 height="50"
-                alt=""
+                alt="icon consulting special 3"
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
@@ -387,7 +387,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               transition: all 0.2s ease 0s;
               text-decoration: none;
               letter-spacing: 2px;
-              background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+              background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
             ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a
@@ -406,10 +406,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <div>
           <div class="mb-6 h-20 text-slate-900">
             <img
-              src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
+              src="/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
               loading="lazy"
               height="80"
-              alt=""
+              alt="icon consulting 5"
               class="inline-block max-w-full align-middle border-0"
             />
           </div>
@@ -423,10 +423,10 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <div>
           <div class="mb-6 h-20 text-slate-900">
             <img
-              src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
+              src="/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
               loading="lazy"
               height="80"
-              alt=""
+              alt="icon consulting 6"
               class="inline-block max-w-full align-middle border-0"
             />
           </div>
@@ -449,7 +449,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
       <div class="md:grid grid-flow-row gap-6 leading-8 md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
         <div class="flex flex-col justify-center items-center px-5 text-left">
           <img
-            src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/628664bc9a5b8b85917e5c1f_community.svg"
+            src="/628664bc9a5b8b85917e5c1f_community.svg"
             loading="lazy"
             width="151"
             alt="Community icon"
@@ -475,7 +475,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         </div>
         <div class="flex flex-col justify-center items-center px-5 text-left">
           <img
-            src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/628665001abcfb45461302f2_our%20work.svg"
+            src="/628665001abcfb45461302f2_our%20work.svg"
             loading="lazy"
             width="151"
             alt="RN projects icon"
@@ -500,7 +500,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         </div>
         <div v-if="randomOdd" class="flex flex-col justify-center items-center px-5 text-left">
           <img
-            src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/628665198526443cedf94743_open%20source.svg"
+            src="/628665198526443cedf94743_open%20source.svg"
             loading="lazy"
             width="151"
             alt="Open source icon"
@@ -525,7 +525,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         </div>
         <div v-else class="flex flex-col justify-center items-center px-5 text-left">
           <img
-            src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/6286658deaf6961fb2d6d4c0_core%20contrubutor.svg"
+            src="/6286658deaf6961fb2d6d4c0_core%20contrubutor.svg"
             loading="lazy"
             width="151"
             alt="Core contributors icon"
@@ -550,7 +550,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         </div>
         <!-- <div class="flex flex-col justify-center items-center px-5 text-left">
       <img
-        src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/628665a5ba01e30ef2b73d6e_podcats.svg"
+        src="/628665a5ba01e30ef2b73d6e_podcats.svg"
         loading="lazy"
         width="151"
         alt="Podcast icon"
@@ -571,7 +571,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
     </div>
     <div class="flex flex-col justify-center items-center px-5 text-left">
       <img
-        src="https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/6286660c09b3981a1294914e_rneu.webp"
+        src="/6286660c09b3981a1294914e_rneu.webp"
         loading="lazy"
         width="151"
         alt="RNEU icon"
@@ -608,14 +608,14 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                   to others, to provide a flexible solution to an existing workforce or on a longer-term basis as part of a remote team
                 </p>
               </div>
-              <img loading="lazy" height="80" src="/waynium.webp" alt="" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
+              <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
               <div class="text-xl font-medium leading-6">Iannis</div>
               <div class="">CTO &amp; Co-founder @ WAYNIUM</div>
               <a
                 href="#"
                 class="inline-block max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
                 style="transition: all 0.2s ease 0s; text-decoration: none"
-                ><img width="39" loading="lazy" alt="logo" src="/waynium.webp" class="inline-block mt-3 max-w-full align-middle border-0"
+                ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="inline-block mt-3 max-w-full align-middle border-0"
               /></a>
             </div>
           </div>
@@ -633,7 +633,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <h2
             class="block justify-center items-start pt-0 pb-10 pl-16 mt-5 mb-0 text-xs font-bold leading-4 text-black uppercase bg-no-repeat bg-auto"
             style="
-              background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c922ef1b872549f97d10_bg-subtitle.svg');
+              background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
               background-position: 0px 3px;
               filter: invert(100%);
               letter-spacing: 1.7px;
@@ -661,7 +661,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               transition: all 0.2s ease 0s;
               text-decoration: none;
               letter-spacing: 2px;
-              background-image: url('https://global-uploads.webflow.com/5f58b425f8d1c77413f14703/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+              background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
             ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a

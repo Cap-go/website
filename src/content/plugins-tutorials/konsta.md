@@ -81,7 +81,7 @@ let name = 'world';
 
 ## Step 3: Customize and Style the Components
 
-The `@capgo/konsta` package provides a wide range of UI components that can be easily customized and styled to match your project's design. You can modify component properties, add custom CSS classes, or apply inline styles to achieve the desired look and feel. Refer to the documentation available at [https://konstaui.com](https://konstaui.com) for more information on customizing and styling the components.
+The `@capgo/konsta` package provides a wide range of UI components that can be easily customized and styled to match your project's design. You can modify component properties, add custom CSS classes, or apply inline styles to achieve the desired look and feel. Refer to the documentation available at [https://konstaui.com](https://konstaui.com/) for more information on customizing and styling the components.
 
 ## Step 4: Build and Test
 

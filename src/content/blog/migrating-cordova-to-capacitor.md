@@ -26,7 +26,7 @@ Cordova and Capacitor are both tools that enable web developers to create native
 
 Migrating from Cordova to Capacitor can be done gradually or as a complete replacement, depending on the complexity of your app. Capacitor is backward-compatible with Cordova, allowing you to switch your existing web apps to it whenever you're ready.
 
-To assist with migration, consider using the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic) and auditing your existing Cordova plugins. You can continue to use Cordova plugins if needed, or replace them with Capacitor equivalents.
+To assist with migration, consider using the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items/?itemName=ionic.ionic) and auditing your existing Cordova plugins. You can continue to use Cordova plugins if needed, or replace them with Capacitor equivalents.
 
 ## Step-by-Step Migration Guide
 
@@ -34,7 +34,7 @@ Follow these steps to migrate your web app from Cordova to Capacitor:
 
 1. **Work in a separate code branch**: It's recommended to work in a separate code branch when applying these changes.
 
-2. **Initialize your app with Capacitor**: Open your project in the terminal and follow the guides for [adding Capacitor to a web app](https://capacitorjs.com/docs/getting-started#adding-capacitor-to-your-app) or [adding Capacitor to an Ionic app](https://capacitorjs.com/docs/getting-started/with-ionic#existing-ionic-project). Use the information from your Cordova `config.xml` file for the app name and Bundle ID.
+2. **Initialize your app with Capacitor**: Open your project in the terminal and follow the guides for [adding Capacitor to a web app](https://capacitorjs.com/docs/getting-started/#adding-capacitor-to-your-app) or [adding Capacitor to an Ionic app](https://capacitorjs.com/docs/getting-started/with-ionic/#existing-ionic-project). Use the information from your Cordova `config.xml` file for the app name and Bundle ID.
 
 3. **Build your web app**: Build your web project at least once before adding any native platforms. This ensures that the `www` folder is properly configured in the Capacitor configuration file.
 
@@ -56,7 +56,7 @@ Follow these steps to migrate your web app from Cordova to Capacitor:
 
 12. **Test and remove Cordova**: Test your migrated app to ensure all changes have been applied correctly. Once satisfied, you can remove Cordova from your project or leave it if you plan to continue using Cordova plugins.
 
-Congratulations! You've successfully migrated your web app from Cordova to Capacitor. To learn more about using Cordova plugins in a Capacitor project or the Capacitor development workflow, visit the [official Capacitor documentation](https://capacitorjs.com/docs).
+Congratulations! You've successfully migrated your web app from Cordova to Capacitor. To learn more about using Cordova plugins in a Capacitor project or the Capacitor development workflow, visit the [official Capacitor documentation](https://capacitorjs.com/docs/).
 
 ## Live Updates with Our Capgo Service
 
@@ -83,4 +83,4 @@ To implement Capgo live updates in your Capacitor project, follow these steps:
 
 ## Conclusion
 
-We hope this guide has helped you migrate your web app from Cordova to Capacitor. If you have any questions or need assistance with the migration process, feel free to contact us on our [discord](https://discord.gg/VnYRvBfgA6) server.
+We hope this guide has helped you migrate your web app from Cordova to Capacitor. If you have any questions or need assistance with the migration process, feel free to contact us on our [discord](https://discord.gg/VnYRvBfgA6/) server.

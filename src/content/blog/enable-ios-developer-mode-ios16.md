@@ -56,6 +56,6 @@ Remember, you can disable Developer Mode at any time through the same settings. 
 
 ## Alternative Method for Enabling Developer Mode
 
-If you encounter issues with the above method and you have access to a Mac, you can enable Developer Mode by connecting your iOS device to your Mac and following the instructions provided in [Apple's official documentation](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device).
+If you encounter issues with the above method and you have access to a Mac, you can enable Developer Mode by connecting your iOS device to your Mac and following the instructions provided in [Apple's official documentation](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
 
 By following these steps, you'll be ready to test and develop apps effectively on your iOS device running iOS 16 or later.

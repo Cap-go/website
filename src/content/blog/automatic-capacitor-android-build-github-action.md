@@ -28,7 +28,7 @@ Before continuing with the tutorial…
 
 ![Price GitHub Action](/price_github_actions.webp)
 
-[https://github.com/features/actions](https://github.com/features/actions)
+[https://github.com/features/actions](https://github.com/features/actions/)
 
 The service is ‘_free’_ up to the limit, depending on the chosen machine.  
 We are going to use a **_Linux_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
@@ -128,7 +128,7 @@ To authenticate with the Google Play Developer API, we’ll need a service accou
 
 ### Creating & storing your Google Play service account key
 
-If you need to create a new service account key, [follow the steps outlined here](https://docs.runway.team/integrations/app-stores/google-play-console#service-account-api-key-setup). One you have your service account key JSON file, let’s add it to your GitHub repository’s encrypted secrets.
+If you need to create a new service account key, [follow the steps outlined here](https://docs.runway.team/integrations/app-stores/google-play-console/#service-account-api-key-setup). One you have your service account key JSON file, let’s add it to your GitHub repository’s encrypted secrets.
 
 To add a new secret to GitHub’s encrypted secrets, first navigate to the Android repo to which you’ll be adding the GitHub Actions workflow. On the far right, click “Settings”.
 
@@ -178,7 +178,7 @@ With our service account key added to GitHub’s repository secrets, we can now 
 
 ### Storing your Android signing key
 
-To properly [sign Android release builds](https://developer.android.com/studio/publish/app-signing/) in CI, the workflow will need access to either an Android upload key or an app signing key. Apps created after August 2021 will use Google’s new [Play App Signing](https://developer.android.com/studio/publish/app-signing/#app-signing-google-play) system by default, in which a user-managed upload key is used to sign AABs before upload, but the app signing key is managed by Google. If your team is making use of Google’s Play App Signing, then all you’ll need for the CI pipeline is your app’s _upload key,_ since signing is deferred until after the AAB has been uploaded to the Play Console. If you still need to create an upload key and keystore, follow the [instructions](https://developer.android.com/studio/publish/app-signing/#generate-key) found in the Android developer documentation.
+To properly [sign Android release builds](https://developer.android.com/studio/publish/app-signing/) in CI, the workflow will need access to either an Android upload key or an app signing key. Apps created after August 2021 will use Google’s new [Play App Signing](https://developer.android.com/studio/publish/app-signing/#app-signing-google-play/) system by default, in which a user-managed upload key is used to sign AABs before upload, but the app signing key is managed by Google. If your team is making use of Google’s Play App Signing, then all you’ll need for the CI pipeline is your app’s _upload key,_ since signing is deferred until after the AAB has been uploaded to the Play Console. If you still need to create an upload key and keystore, follow the [instructions](https://developer.android.com/studio/publish/app-signing/#generate-key/) found in the Android developer documentation.
 
 If your team hasn’t yet migrated to Google’s Play App Signing system, then you’ll instead need to make your app _signing_ key available to the CI workflow to properly sign your app before upload.
 
@@ -292,14 +292,14 @@ In GitHub Actions, **you are billed based on the minutes** you have used for run
 
 For private projects, the estimated cost per build can go up to **$0.008/min x 5 mins = $0.4**, or more, depending on the configuration or dependencies of your project.
 
-For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing).
+For Open-source projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing/).
 
 ### Thanks
 
 This blog is based on the following articles:
-- [Automate publishing app to the Google Play Store with GitHub Actions⚡+ Fastlane🏃](https://medium.com/scalereal/automate-publishing-app-to-the-google-play-store-with-github-actions-fastlane-ac9104712486)
-- [Getting Started CI/CD for Android Project (Part - 3— GitHub Actions)](https://proandroiddev.com/getting-started-ci-cd-for-android-project-part-3-github-actions-157857224cb1)
-- [Android Continuous Integration using Fastlane and CircleCI 2.0 — Part III](https://medium.com/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5)
-- [How to set up a CI/CD pipeline for your Android app using Fastlane and GitHub Actions](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions)
+- [Automate publishing app to the Google Play Store with GitHub Actions⚡+ Fastlane🏃](https://medium.com/scalereal/automate-publishing-app-to-the-google-play-store-with-github-actions-fastlane-ac9104712486/)
+- [Getting Started CI/CD for Android Project (Part - 3— GitHub Actions)](https://proandroiddev.com/getting-started-ci-cd-for-android-project-part-3-github-actions-157857224cb1/)
+- [Android Continuous Integration using Fastlane and CircleCI 2.0 — Part III](https://medium.com/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5/)
+- [How to set up a CI/CD pipeline for your Android app using Fastlane and GitHub Actions](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions/)
 - [Fastlane Documentation](https://docs.fastlane.tools/getting-started/android/beta-deployment/)
-- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63#issuecomment-1074328057)
+- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)

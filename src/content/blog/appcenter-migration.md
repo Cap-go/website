@@ -22,11 +22,11 @@ next_blog: "automatic-build-and-release-with-github-actions"
 
 ##### Note
 
-If your app is still using Cordova, it's necessary to [migrate to Capacitor](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor) first before migrating to Capgo.
+If your app is still using Cordova, it's necessary to [migrate to Capacitor](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/) first before migrating to Capgo.
 
 Built by the Ionic team as a spiritual successor to Cordova, Capacitor allows development to move close to the native tooling and capabilities with the goal of providing an even better user experience and performance.
 
-Fortunately, the migration process is easy and the majority of Cordova plugins are backward compatible with Capacitor. [Start migrating here](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor).
+Fortunately, the migration process is easy and the majority of Cordova plugins are backward compatible with Capacitor. [Start migrating here](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/).
 
 ## About Capgo
 
@@ -103,11 +103,11 @@ This will tell the native plugin the installation as succeeded.
 
 ## Deploying Live Updates (CodePush Alternative)
 
-The Live Update feature works by using the installed [Capgo SDK](https://github.com/Cap-go/capacitor-updater) in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
+The Live Update feature works by using the installed [Capgo SDK](https://github.com/Cap-go/capacitor-updater/) in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -132,7 +132,7 @@ By default, the version name will be the one in your `package.json` file.
 
 Check in [Capgo](https://web.capgo.app/) if the build is present.
 
-You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile).
+You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
 
 ### Make channel default
 
@@ -205,4 +205,4 @@ I have made a second article to allow you to so.
 
 ## Credits
 
-Thanks a lot to [Ionic](https://ionic.com), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow) rewrote with chat-gpt-3 and adapted.
+Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow/) rewrote with chat-gpt-3 and adapted.

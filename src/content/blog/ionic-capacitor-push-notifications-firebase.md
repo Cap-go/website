@@ -86,13 +86,13 @@ That's all for Android. Now let's configure iOS.
 
 ### iOS Push Preparation
 
-This part is more complicated. First, [create an App ID for your app within the identifiers list](https://developer.apple.com/account/resources/identifiers/list) of your Apple Developer account. Make sure you **select the Push Notifications capability** from the list.
+This part is more complicated. First, [create an App ID for your app within the identifiers list](https://developer.apple.com/account/resources/identifiers/list/) of your Apple Developer account. Make sure you **select the Push Notifications capability** from the list.
 
 ![ionic-ios-push-id](/ionic-ios-push-id.webp)
 
 The **Bundle ID** should be the same as your App ID within Capacitor and Firebase.
 
-Now, [create a Key](https://developer.apple.com/account/resources/authkeys/list) and enable the **Apple Push Notifications service (APNs)**. If you have reached the maximum number of keys, you can use an existing key or a certificate instead, but the process is more complicated.
+Now, [create a Key](https://developer.apple.com/account/resources/authkeys/list/) and enable the **Apple Push Notifications service (APNs)**. If you have reached the maximum number of keys, you can use an existing key or a certificate instead, but the process is more complicated.
 
 ![ios-developer-push-key](/ios-developer-push-key.webp)
 
