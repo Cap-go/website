@@ -43,6 +43,10 @@ export default defineConfig({
           link: '/docs/how-to/',
         },
         {
+          label: 'FAQ',
+          link: '/docs/faq/',
+        },
+        {
           label: 'Tech support for capgo',
           link: '/docs/getting-help/',
         },
@@ -57,14 +61,6 @@ export default defineConfig({
         {
           label: 'Web app',
           autogenerate: { directory: 'docs/webapp' },
-        },
-        {
-          label: 'Upgrade',
-          autogenerate: { directory: 'docs/upgrade' },
-        },
-        {
-          label: 'v3',
-          autogenerate: { directory: 'docs/v3' },
         },
         {
           label: 'Self Hosted',
@@ -82,6 +78,19 @@ export default defineConfig({
               ],
             },
             { label: 'Manual', link: '/docs/self-hosted/manual/' },
+          ],
+        },
+        {
+          label: 'Migrations',
+          items: [
+            {
+              label: 'Upgrade',
+              autogenerate: { directory: 'docs/upgrade' },
+            },
+            {           
+              label: 'v3',
+              autogenerate: { directory: 'docs/v3' } 
+            },
           ],
         },
       ],
