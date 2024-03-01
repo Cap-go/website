@@ -2,7 +2,7 @@
 title: "Auto update"
 description: "How to use auto-update with capacitor-updater"
 sidebar:
-  order: 4
+  order: 2
 ---
 
 This mode allows developers to use capacitor-updater with auto-update mode and push updates via Capgo channels or equivalent.

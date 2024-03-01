@@ -1,6 +1,6 @@
 ---
-title: "Update Methods"
-description: "Update methods when pushing updates"
+title: "Hybrid update"
+description: "Update methods for auto updates"
 sidebar:
   order: 3
 ---
