@@ -49,7 +49,7 @@ export default defineConfig({
           link: '/docs/faq/',
         },
         {
-          label: 'Tech support for capgo',
+          label: 'Tech support for Capgo',
           link: '/docs/getting-help/',
         },
         {
