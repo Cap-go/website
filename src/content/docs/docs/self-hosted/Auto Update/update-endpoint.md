@@ -53,7 +53,7 @@ export const handler: Handler = async (event) => {
   }
   else {
     return {
-      message: 'Error version not found'
+      message: 'Error version not found',
       version: '',
       url: '',
     }
