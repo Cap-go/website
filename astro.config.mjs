@@ -71,7 +71,7 @@ export default defineConfig({
               ],
               collapsed: true
             },
-            { label: 'Plugin Methods', link: '/docs/plugin/api' },
+            { label: 'Plugin methods', link: '/docs/plugin/api' },
             { label: 'Known Issues', link: '/docs/plugin/known-issues' },
             { label: 'Cordova', link: '/docs/plugin/cordova' },
             { label: 'Settings', link: '/docs/plugin/settings' },
@@ -88,13 +88,9 @@ export default defineConfig({
           autogenerate: { directory: 'docs/webapp' },
         },
         {
-          label: 'Upgrade',
+          label: 'Migrations',
           autogenerate: { directory: 'docs/upgrade' },
         },
-        {
-          label: 'v3 (legacy)',
-          autogenerate: { directory: 'docs/v3' },
-        }
       ],
     }),
   ],
