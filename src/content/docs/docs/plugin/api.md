@@ -78,8 +78,8 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      appReadyTimeout: 1000, // (1 second)
-      responseTimeout: 10, // (10 second)
+      appReadyTimeout: 1000 // (1 second),
+      responseTimeout: 10 // (10 second),
       autoDeleteFailed: false,
       autoDeletePrevious: false,
       autoUpdate: false,
