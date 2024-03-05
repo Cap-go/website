@@ -17,7 +17,6 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
   <head>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <SEO {...content} />
-    <script defer data-domain="capgo.app" src="https://poopup.co/js/script.js"></script>
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
