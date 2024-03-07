@@ -53,19 +53,28 @@ It’s time to sign up, and get your API key to upload your first version! Begin
 
 Once you’re logged into Capgo, You will have an onboarding page 
 
-![Onboarding page](/onboarding_1.webp)
+![Onboarding page](/onboarding_1_new.webp)
 
 Follow the steps on the onboarding page to add your first app.
 
 
-### Install the Capgo SDK
+### Follow the CLI guidance
 
 From a command line, directly into the root of your Capacitor app, run:
+
+`npx @capgo/cli@latest init`
+To install the Capgo into your Capacitor app, the CLI will walk you through the process of setting up your app with Capgo.
+
+If you want to do it manually, you can follow the steps below.
+
+### Install the plugin
+
+You should end up with this code added to your app :
 
 `npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
 
-And then add to your app this code as a replacement of CodePush one:
+And then add to your app this code to notify the native plugin that the JS bundle is healthy (if you don't do this, the native plugin will rollback to the previous version):
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
