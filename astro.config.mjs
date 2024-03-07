@@ -49,13 +49,16 @@ export default defineConfig({
           link: '/docs/faq/',
         },
         {
+          label: 'Fix the doc',
+          link: 'https://github.com/Cap-go/website/tree/main/src/content/docs/docs',
+        },
+        {
           label: 'Tech support for Capgo',
           link: '/docs/getting-help/',
         },
         {
           label: 'Plugin',
           items: [
-           
             { label: 'Overview', link: '/docs/plugin/overview' },
             { label: 'Cloud Mode', autogenerate: { directory: 'docs/plugin/cloud-mode/' }},
             {
