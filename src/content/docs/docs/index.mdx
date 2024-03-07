@@ -1,140 +1,36 @@
 ---
-title: "Getting Started"
-description: "Capacitor-updater is a plugin that allows you to update your app over the air (OTA)."
-sidebar:
-  order: 1
+title: Capgo
+description: Instant updates for Capacitor apps
+template: splash
+hero:
+  tagline: Instant updates for Capacitor apps
+  image:
+    file: /logo.svg
+  actions:
+    - text: Documentation
+      link: /docs/getting-started
+      icon: right-arrow
+      variant: primary
+    - text: Source Code
+      link: https://github.com/Cap-go/capacitor-updater/
+      icon: external
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Join Discord Community
+## Next steps
 
-[Join the Capacitor-updater Discord Server!](https://discord.gg/VnYRvBfgA6/)
-
-:::danger
-The Over-the-Air (OTA) update feature is applicable only for modifications made to HTML, CSS, and JavaScript files.
-
-If you make any changes to the native code, such as updates to Capacitor plugins, it is mandatory to resubmit the application to the app store for approval.
-:::
-
-## Maintenance
-
-| Plugin version | Capacitor compatibility | Maintained        |
-| -------------- | ----------------------- | ----------------- |
-| v5.\*.\*       | v5.\*.\*                | ✅                 |
-| v4.\*.\*       | v4.\*.\*                | Critical bug only |
-| v3.\*.\*       | v3.\*.\*                | ⚠️ Deprecated     |
-
-## Plugin Modes
-
-<br />
-### Cloud Auto Mode (Recommended)
-- Capgo backend handles all logic.
-- Updates are decided server side by Capgo, providing enhanced security and fine-grained control like deploying partially to specific devices or groups.
-
-### Cloud Mode Manual
-- You control the update by your JavaScript code.
-- Updates are decided server side by Capgo, providing enhanced security and fine-grained control like deploying partially to specific devices or groups.
-<br />
-| Pros                                                                | Cons                                 |
-| ------------------------------------------------------------------- | ------------------------------------ |
-| ✅ No need to handle logic, we'll do it for you                     | 🟠 Requires SemVer usage             |
-| ✅ Work in the background                                           | 🟠 Only one way to update users      |
-| ✅ Get valuable update statistics                                   | 🟠 Custom Update logic can break     |
-| ✅ Ability to revert users if needed                                |                                      |
-| ✅ Share apps with your team                                        |                                      |
-| ✅ Define advanced strategies like AB testing or partial deployment |                                      |
-| ✅ Quick and easy configuration - set it up and forget about it     |                                      |
-
-<LinkCard
-	title="Cloud Mode"
-	href="/docs/plugin/cloud-mode/getting-started/"
-/>
-
-### Self Hosted Auto Mode
-- Capgo handles all logic.
-- Updates are decided by your server, you will have to re-create the logic on your own.
-
-### Self Hosted Manual Mode
-- You control the update by your JavaScript code.
-- Updates are decided by your server, you will have to re-create the logic on your own.
-
-:::caution
-Please note that using **Self Hosted Manual Mode** mode can lead to complex issues, as the update code is included in the updates themselves.
-:::
-
-
-| Pros                                  | Cons                                                             |
-| ------------------------------------- | ---------------------------------------------------------------- |
-| ✅ Full control over the update logic | 🟠 A separate update server for hosting updates is required       |
-| ✅ Version server optional            | 🟠 You spend time on something not related to your core business  |
-|                                       | 🟠 You handle all scenarios yourself                             |
-|                                       | 🟠 You handle on-premise server requirements                     |
-
-<LinkCard
-	title="Manual Mode"
-	href="/docs/plugin/self-hosted/manual-mode/"
-/>
-
-## Store Guideline Compliance
-
-Android Google Play and iOS App Store have corresponding guidelines that have rules you should be aware of before integrating the Capacitor-updater solution within your application.
-
-### Google play
-
-Third paragraph of [Device and Network Abuse](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) topic describe that updating source code by any method other than Google Play's update mechanism is restricted. But this restriction does not apply to updating javascript bundles.
-> This restriction does not apply to code that runs in a virtual machine and has limited access to Android APIs (such as JavaScript in a webview or browser).
-
-That fully allows Capacitor-updater as it updates just the JS bundles and won't update native code.
-
-### App Store
-
-Paragraph **3.3.2**, since back in 2015's [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) fully allows performing over-the-air updates of JavaScript and assets -  and in its latest version (20170605) [downloadable here](https://developer.apple.com/terms/) this ruling is even broader:
-
-> Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS.
-
-Capacitor-updater allows you to follow these rules in full compliance so long as the update you push does not significantly deviate your product from its original App Store approved intent.
-
-To further remain in compliance with Apple's guidelines we suggest that App Store-distributed apps do not enable the `Force update` scenario, since in the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) state that:
-
-> Apps must not force users to rate the app, review the app, download other apps, or other similar actions in order to access functionality, content, or use of the app.
-
-This is not a problem for the default behavior of background update, since it won't force the user to apply the new version until next time they close the app, but at least you should be aware of that role if you decide to show it.
-
-## Roadmap
-
-The roadmap is managed on [GitHub](https://github.com/orgs/Cap-go/projects/1/).
-
-## Open source
-
-The plugin is under the LGPL-3.0 License and the back-end is AGPL-3.0 License.
-
-> 💡 LGPL-3.0 means if someone modifies the code of the plugin, it’s mandatory to publish it, in open-source with the same licensing. If you use the code without modification, that doesn’t concern you. See the issue below for more details check the link 👇
-
-<LinkCard
-	title="Licensing?"
-	href="https://github.com/Cap-go/capacitor-updater/issues/7"
-/>
-
-
-<LinkCard
-	title="Try GPTS Capgo to Get help instead of reading  the docs"
-	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
-/>
-
-
-> You can include it in your app without worrying
-
-## Final Notes
-
-If you self-host and find this tool useful, please consider supporting my work by becoming a [GitHub sponsor](https://github.com/sponsors/riderx/).
-
-I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
-
-To make this possible, it's necessary for all of us to do our part, including you 🥹. If Capgo cloud doesn't meet your needs, you can back a bootstrapped Maker [here](https://github.com/sponsors/riderx/) on your own terms.
-
-## Simple Maths
-
-The price of the basic plan: $14*12 = $168 a year.
-While average dev/hour = $60.
-That means that 3 hours wasted of dev time on self-host allows you to pay for a whole year, if you spent more than 3 hours you're losing money ^^
+<CardGrid stagger>
+  <Card title="The power of Live Update" icon="rocket">
+    Seamlessly deliver live app updates, critical bug fixes, content changes, beta features, and more to give your users the best experience possible.
+  </Card>
+  <Card title="Easy to integrate" icon="pencil">
+    The plugin take 5 min to install in your codebase and allow you to send update to your user in matter of minutes instead of days !
+  </Card>
+  <Card title="Install" icon="setting">
+    Run `npm install @capgo/capacitor-updater` to get started
+  </Card>
+  <Card title="Read the docs" icon="open-book">
+    Learn more in the [docs](/docs/getting-started).
+  </Card>
+</CardGrid>

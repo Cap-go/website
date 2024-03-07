@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import VueTopcapgoapp from '../vue-pages/top_capgo_app.vue'
+
+const title = 'Capgo | Top Capgo apps'
+const description = 'List of top app using Capgo'
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTopcapgoapp client:load /></Layout>
