@@ -30,6 +30,9 @@ export default defineConfig({
       title: 'Capgo',
       favicon: '/favicon.svg',
       // logo: { src: './logo.svg' },
+      editLink: {
+				baseUrl: 'https://github.com/Cap-go/website/edit/main/',
+			},
       customCss: ['./src/css/global.css'],
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
