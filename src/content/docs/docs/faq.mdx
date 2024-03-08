@@ -69,6 +69,18 @@ We've seen a variety of uses, including:
 
 Note that most app stores prohibit shipping code that changes the behavior of the app in a significant way. Please see [below](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies) for more information.
 
+### What counts as a "MAU" for Capgo?[](https://capgo.app/docs/faq/#what-counts-as-a-mau-for-capgo "Direct link to What counts as a \"MAU\" for Capgo?")
+
+A MAU is a "Monthly Active User". We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
+
+Each time a device install your app again, a new MAU is counted, this happen because Apple store limitation about privacy. We cannot track the same device if the user reinstall the app.
+
+During development, each time you reinstall the app, a new MAU is counted.
+
+Same for testflight download or switch channel in Android. Updating the app do not create a new Device ID.
+
+> We recommend after first setup, to disabled dev devices and emulator to reduce the ammount of duplicated devices.
+
 ### What can't we use Capgo code push for?[](https://capgo.app/docs/faq/#what-cant-we-use-capgo-code-push-for "Direct link to What can't we use Capgo code push for?")
 
 As above, Capgo should not be used to violate app store polices. Please see [below](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines) for more information.
@@ -281,13 +293,4 @@ You can cancel your subscription at any time in your dashboard: [https://web.cap
 ### Can I pay for a year in advance?[](https://capgo.app/docs/faq/#can-i-pay-for-a-year-in-advance "Direct link to Can I pay for a year in advance?")
 
 Yes you can can at any time in your dashboard: [https://web.capgo.app/dashboard/settings/plans](https://web.capgo.app/dashboard/settings/plans/)
-
-### What counts as a "MAU" for Capgo?[](https://capgo.app/docs/faq/#what-counts-as-a-mau-for-capgo "Direct link to What counts as a \"MAU\" for Capgo?")
-
-A MAU is a "Monthly Active User". We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
-
-Each time a device install your app again, a new MAU is counted, this happen because Apple store limitation about privacy. We cannot track the same device if the user reinstall the app.
-
-During development, each time you reinstall the app, a new MAU is counted.
-
 
