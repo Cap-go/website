@@ -98,7 +98,7 @@ function descToEmoji(desc: string) {
         <div class="px-4 py-5 sm:p-6">
           <div class="flex items-end">
             <p class="text-5xl font-semibold text-gray-900">${{ yearly ? (plan.price_y / 12).toFixed() : plan.price_m }}</p>
-            <p class="py-1 text-sm font-normal text-gray-500">/{{ yearly ? 'year' : 'month' }}</p>
+            <p class="py-1 text-sm font-normal text-gray-500">/month</p>
           </div>
           <!-- inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-xl  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 -->
           <div class="mt-6">
