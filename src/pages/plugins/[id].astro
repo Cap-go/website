@@ -123,7 +123,7 @@ const config = useRuntimeConfig()
 const { id } = Astro.params
 
 // @ts-ignore
-content['ldJSON'] = JSON.stringify({
+content['ldJSON'] = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   mainEntityOfPage: {
@@ -142,7 +142,7 @@ content['ldJSON'] = JSON.stringify({
   },
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),
   ...(plugin.hasOwnProperty('dateModified') && { dateModified: plugin.dateModified }),
-})
+}
 ---
 
 <Layout content={content}>
