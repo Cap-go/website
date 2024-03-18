@@ -3,4 +3,6 @@
 /docs/plugin/auto-update /docs/plugin/cloud-mode/getting-started 200
 /docs/self-hosted/auto-update /docs/plugin/self-hosted/getting-started 200
 /docs/v3/plugin-api /docs/upgrade/api-v3/ 200
-docs/plugin/know-issues/ docs/plugin/known-issues/ 200
+docs/plugin/know-issues docs/plugin/known-issues/ 200
+/self-hosted-capgo /docs/plugin/self-hosted/getting-started/ 200
+/self-hosted-live-updates /docs/plugin/self-hosted/auto-update/ 200
