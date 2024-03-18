@@ -16,6 +16,11 @@ interface AppInfos {
           'set_fail' |
           'update_fail' |
           'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
           'update_fail' |
           'download_10' |
           'download_20' |
