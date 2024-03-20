@@ -35,7 +35,7 @@ The website is deployed to [Cloudflare Pages](https://pages.cloudflare.com/). Th
 
 ## License
 
-The source code is licensed under the MIT license. See the [LICENSE](LICENSE) file for details.
+The source code is licensed under the GNU AFFERO GENERAL PUBLIC license. See the [LICENSE](LICENSE) file for details.
 
 # Astro Starter Kit: Basics
 
