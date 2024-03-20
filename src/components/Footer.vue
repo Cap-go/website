@@ -72,7 +72,7 @@ const navigation = {
   hero: [
     {
       name: '5% of revenue go to carbon removal',
-      href: 'https://climate.stripe.com/vxDf62/',
+      href: 'https://climate.stripe.com/vxDf62',
       icon: defineComponent({
         render: () =>
           h(
