@@ -118,7 +118,7 @@ Default: `true`
 
 Only available for Android and iOS.
 
-Default: `https://api.capgo.app/auto_update`
+Default: `https://api.capgo.app/updates`
 
 ```json
 // capacitor.config.json
@@ -127,7 +127,7 @@ Default: `https://api.capgo.app/auto_update`
   "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
-      "updateUrl": "https://example.com/api/auto_update"
+      "updateUrl": "https://example.com/api/updates"
     }
   }
 }
