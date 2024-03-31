@@ -31,7 +31,7 @@ const navigation = {
   support: [
     {
       name: 'Community',
-      href: 'https://discord.gg/VnYRvBfgA6/',
+      href: 'https://discord.com/invite/VnYRvBfgA6',
       target: '_blank',
     },
     { name: 'Pricing', href: '/pricing/' },

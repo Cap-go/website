@@ -435,13 +435,14 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </h3>
             </div>
             <div class="sm:text-center md:w-1/2">
-              <span class="text-white tracking-tight text-xl">Try risk free with a 14 days free trial — no credit card required</span>
+              <p class="text-white tracking-tight text-xl">Try risk free with a 7 days free trial</p>
               <a
                 href="/register/"
                 class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
               >
                 Get Started &RightArrow;
               </a>
+              <p class="text-white tracking-tight">No credit card required</p>
             </div>
           </div>
         </div>
