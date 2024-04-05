@@ -22,13 +22,14 @@ This endpoint allows you to check and modify all available Channels of your app
 Send this to create or update channel
 
 ```typescript
+type disable_update = "major" | "minor" | "version_number" | "none"
 interface ChannelSet {
   app_id: string
   channel: string
   version?: string
   public?: boolean
   disableAutoUpdateUnderNative?: boolean
-  disableAutoUpdateToMajor?: boolean
+  disableAutoUpdate?: disable_update
   ios?: boolean
   android?: boolean
   allow_device_self_set?: boolean
@@ -64,7 +65,7 @@ interface Channel {
     updated_at: string;
     public: boolean; // default or not
     disableAutoUpdateUnderNative: boolean;
-    disableAutoUpdateToMajor: boolean;
+    disableAutoUpdate: boolean;
     allow_emulator: boolean;
     allow_dev: boolean;
 }[]
@@ -86,7 +87,7 @@ interface Channel {
     updated_at: string;
     public: boolean; // default or not
     disableAutoUpdateUnderNative: boolean;
-    disableAutoUpdateToMajor: boolean;
+    disableAutoUpdate: boolean;
     allow_emulator: boolean;
     allow_dev: boolean;
 }
@@ -213,16 +214,22 @@ You can get the next one by sending `page=1`
 
 ```typescript
 interface Bundle {
-    id: number;
-    created_at: string;
-    name: string;
-    app_id: string;
-    version: number;
-    created_by: string;
-    updated_at: string;
-    public: boolean;
-    disableAutoUpdateUnderNative: boolean;
-    disableAutoUpdateToMajor: boolean;
+  app_id: string
+  bucket_id: string | null
+  checksum: string | null
+  created_at: string | null
+  deleted: boolean
+  external_url: string | null
+  id: number
+  minUpdateVersion: string | null
+  name: string
+  native_packages: Json[] | null
+  owner_org: string
+  r2_path: string | null
+  session_key: string | null
+  storage_provider: string
+  updated_at: string | null
+  user_id: string | null
 }[]
 ```
 
