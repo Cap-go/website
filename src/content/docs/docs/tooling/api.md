@@ -192,6 +192,7 @@ Send this
 ```typescript
 interface Device {
   device_id: string
+  app_id: string
 }
 ```
 
