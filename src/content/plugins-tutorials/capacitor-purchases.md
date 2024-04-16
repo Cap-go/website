@@ -8,7 +8,7 @@ To install the @capgo/capacitor-purchases package, open your terminal and run th
 
 ```bash
 npm install @capgo/capacitor-purchases
-bunx cap sync
+npx cap sync
 ```
 
 ## Step 2: Configure the Android platform
