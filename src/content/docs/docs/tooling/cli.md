@@ -305,7 +305,7 @@ First, the `major` strategy. It prevents an update from `0.0.0` -> `1.0.0`. The 
 Second is the `minor` strategy. It prevents an update from `0.0.0` -> `1.1.0` or an update from `1.1.0` to `1.2.0`. 
 **BE AWARE** this strategy does not prevent an update from `0.1.0` -> `1.1.0`
 
-Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recomended to be use unless you fully understand how it works.
+Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recomended to be used unless you fully understand how it works.
 In order for it to accept a update the following conditions must be meet:
  - The major is the same between the new and the old version
  - The minor is the same between the new and the old version
