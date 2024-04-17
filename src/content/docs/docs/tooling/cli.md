@@ -305,6 +305,21 @@ First, the `major` strategy. It prevents an update from `0.0.0` -> `1.0.0`. The 
 Second is the `minor` strategy. It prevents an update from `0.0.0` -> `1.1.0` or an update from `1.1.0` to `1.2.0`. 
 **BE AWARE** this strategy does not prevent an update from `0.1.0` -> `1.1.0`
 
+Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recomended to be used unless you fully understand how it works.
+In order for it to accept a update the following conditions must be meet:
+ - The major is the same between the new and the old version
+ - The minor is the same between the new and the old version
+ - The patch of the new version if greater then the patch of the old version
+
+Here is an example of which scenarios the update is allowed or denied
+
+ - 0.0.311 -> 0.0.314 ✅
+ - 0.0.0 -> 0.0.314 ✅
+ - 0.0.316 -> 0.0.314 ❌
+ - 0.1.312 -> 0.0.314 ❌
+ - 1.0.312 -> 0.0.314 ❌
+
+
 Lastly the most complicated strategy. The `metadata` strategy.\
 First you need to know that initially after you enable it the updates **WILL** fail as the channel is lacking the required metadata.\
 If the channel is lacking metadata you will see a message like this:
