@@ -61,7 +61,7 @@ function descToEmoji(desc: string) {
 
 <template>
   <section id="plans">
-    <div class="grid grid-cols-1 mt-6 lg:grid-cols-4 lg:gap-8 sm:mt-8 lg:mt-10">
+    <div class="grid grid-cols-1 mt-6 lg:grid-cols-3 lg:gap-8 sm:mt-8 lg:mt-10">
       <div
         v-for="plan in props.pricing"
         :key="plan.name"
