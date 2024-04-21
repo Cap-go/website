@@ -36,20 +36,10 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
-
 function handleScroll() {
-  const headings = document.querySelectorAll('h2,h3,h4,h5,h6')
-  for (let i = 0; i < headings.length; i++) {
-    const heading = headings[i]
-    const rect = heading.getBoundingClientRect()
-    if (rect.top <= 50 && rect.bottom >= 50) {
-      activeSlug.value = heading.getAttribute('id')
-      break
-    }
-  }
+  observeArticleTitles()
   if (staticToc.value && fixedToc.value) {
     const staticTocRect = staticToc.value.getBoundingClientRect()
-
     if (staticTocRect.top <= 80) {
       isFixedTocVisible.value = true
     } else {
@@ -59,7 +49,6 @@ function handleScroll() {
 }
 
 function observeArticleTitles() {
-  console.log('observeArticleTitles', article.value)
   if (article.value) {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -67,33 +56,14 @@ function observeArticleTitles() {
           if (entry.isIntersecting) {
             const slug = entry.target.id
             activeSlug.value = slug
-            updateURL(slug)
+            window.location.hash = slug
           }
         })
       },
       { rootMargin: '-20% 0px -80% 0px' }
     )
-
-    const titles = article.value.querySelectorAll('h1, h2, h3, h4, h5, h6')
-    titles.forEach((title) => {
-      observer.observe(title)
-    })
-
-    // Check if the first title is already in view
-    const firstTitle = titles[0]
-    if (firstTitle) {
-      const firstTitleRect = firstTitle.getBoundingClientRect()
-      const articleRect = article.value.getBoundingClientRect()
-      if (firstTitleRect.top >= articleRect.top) {
-        activeSlug.value = firstTitle.id
-      }
-    }
+    article.value.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(observer.observe)
   }
-}
-
-function updateURL(slug: string) {
-  // console.log('updateURL', slug)
-  window.location.hash = slug
 }
 </script>
 
