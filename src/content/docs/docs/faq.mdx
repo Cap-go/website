@@ -248,7 +248,7 @@ Requests sent from the app to Capgo servers include:
 
 -   app\_id (specified `capacitor.config.json`)
 -   channel (optional in `capacitor.config.json`)
--   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist)
+-   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/docs/plugin/settings/#version) )
 -   version\_number (generated as part of `npx @capgo/cli app update`)
 -   os_version (e.g. '11.2.1')
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`

@@ -228,7 +228,8 @@ To configure the plugin, use these settings:
 Send this version to the server to identify your version at the first download. 
 
 :::caution 
-This setting disables the plugin to read the version in your native code.
+This setting disables the plugin to read the version in your native code. 
+This is useful when you want to have a different version in your native code and in your JS code.
 :::
 ```json
 // capacitor.config.json
