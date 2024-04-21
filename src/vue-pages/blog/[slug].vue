@@ -29,7 +29,6 @@ const activeSlug = ref('')
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  observeArticleTitles()
 })
 
 onUnmounted(() => {
@@ -37,32 +36,23 @@ onUnmounted(() => {
 })
 
 function handleScroll() {
-  observeArticleTitles()
   if (staticToc.value && fixedToc.value) {
     const staticTocRect = staticToc.value.getBoundingClientRect()
-    if (staticTocRect.top <= 80) {
-      isFixedTocVisible.value = true
-    } else {
-      isFixedTocVisible.value = false
-    }
+    isFixedTocVisible.value = staticTocRect.top <= 80
   }
+  observeArticleTitles()
 }
 
 function observeArticleTitles() {
-  if (article.value) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const slug = entry.target.id
-            activeSlug.value = slug
-            window.location.hash = slug
-          }
-        })
-      },
-      { rootMargin: '-20% 0px -80% 0px' }
-    )
-    article.value.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(observer.observe)
+  const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+  for (let i = 0; i < headings.length; i++) {
+    const heading = headings[i]
+    const rect = heading.getBoundingClientRect()
+    if (rect.top <= 50 && rect.bottom >= 50) {
+      activeSlug.value = heading.getAttribute('id')
+      window.location.hash = heading.getAttribute('id')
+      break
+    }
   }
 }
 </script>
