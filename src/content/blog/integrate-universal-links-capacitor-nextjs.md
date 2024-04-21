@@ -16,8 +16,6 @@ next_blog: ""
 
 Universal links on iOS and App Links on Android allow users to be taken directly into your app from a link, bypassing the browser. This is particularly useful for improving user experience and maintaining the context from a web page to an app. In this guide, we'll walk through the process of setting up these deep links for a Next.js app using Capacitor.
 
-![capacitor-deep-links](https://devdactic.com/img/blog/wp-img/wp-content-uploads-2022-01-capacitor-deep-links.gif/)
-
 Setting up deep links doesn't require a lot of code, but it does involve some configuration. By the end of this guide, you'll be able to click a link like `https://www.capgo.app/details/22` and have your app open to the correct page if it's installed.
 
 ## Next.js Deep Link Setup

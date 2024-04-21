@@ -77,14 +77,13 @@ function observeArticleTitles() {
       const articleRect = article.value.getBoundingClientRect()
       if (firstTitleRect.top >= articleRect.top) {
         activeSlug.value = firstTitle.id
-        updateURL(firstTitle.id)
       }
     }
   }
 }
 
 function updateURL(slug: string) {
-  console.log('updateURL', slug)
+  // console.log('updateURL', slug)
   window.location.hash = slug
 }
 </script>

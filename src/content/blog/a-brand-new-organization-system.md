@@ -74,7 +74,7 @@ We quickly fixed the issue manually and it was at this point that we decided tha
 
 The migration was rather smooth. It took a week of work but compared to V1 and V2 it really was not that hard 🚀
 
-### Organizations v4 - the future
+## Organizations v4 - the future
 
 After all of this hard work I think it's time to focus on something else for now 😎
 
