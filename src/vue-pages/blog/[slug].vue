@@ -50,7 +50,7 @@ function observeArticleTitles() {
     const rect = heading.getBoundingClientRect()
     if (rect.top <= 50 && rect.bottom >= 50) {
       activeSlug.value = heading.getAttribute('id')
-      window.location.hash = heading.getAttribute('id')
+      history.replaceState(null, null, '#'+heading.getAttribute('id'));
       break
     }
   }
