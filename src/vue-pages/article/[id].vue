@@ -38,6 +38,15 @@ onUnmounted(() => {
 
 
 function handleScroll() {
+  const headings = document.querySelectorAll('h2,h3,h4,h5,h6')
+  for (let i = 0; i < headings.length; i++) {
+    const heading = headings[i]
+    const rect = heading.getBoundingClientRect()
+    if (rect.top <= 50 && rect.bottom >= 50) {
+      activeSlug.value = heading.getAttribute('id')
+      break
+    }
+  }
   if (staticToc.value && fixedToc.value) {
     const staticTocRect = staticToc.value.getBoundingClientRect()
 
