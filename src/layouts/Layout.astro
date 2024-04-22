@@ -51,6 +51,6 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
         </script>
       )
     }
-    {!isLocalhost && <MessengerAffiliateVue client:only />}
+    {!isLocalhost && <MessengerAffiliateVue client:only="vue" />}
   </body>
 </html>

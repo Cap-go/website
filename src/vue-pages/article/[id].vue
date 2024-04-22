@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Blog from '../../components/Blog.vue'
 import { formatTime } from '../../config/app'
-import { ref, onMounted, onUnmounted, type Ref } from 'vue'
+import { ref, onMounted, type Ref } from 'vue'
 
 const props = defineProps<{
   Content?: any
@@ -25,14 +25,10 @@ const staticToc: Ref<HTMLElement | null> = ref(null)
 const fixedToc: Ref<HTMLElement | null> = ref(null)
 const article: Ref<HTMLElement | null> = ref(null)
 const isFixedTocVisible = ref(false)
-const activeSlug = ref('')
+const activeSlug = ref<boolean|string>(false)
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
 })
 
 function handleScroll() {
@@ -49,9 +45,12 @@ function observeArticleTitles() {
     const heading = headings[i]
     const rect = heading.getBoundingClientRect()
     if (rect.top <= 50 && rect.bottom >= 50) {
-      activeSlug.value = heading.getAttribute('id')
-      history.replaceState(null, null, '#'+heading.getAttribute('id'));
-      break
+      const tmp = heading.getAttribute('id')
+      if (tmp) {
+        activeSlug.value = tmp
+        history.replaceState(null, null, `#${tmp}`);
+        break
+      }
     }
   }
 }
@@ -63,8 +62,8 @@ function observeArticleTitles() {
         <div class="bg-white/10 p-5 rounded w-[280px]">
           <ul v-if="toc?.length" class="list-none flex flex-col text-left">
             <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
-            <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200" :class="{ 'text-white': activeSlug === item.slug }">
-              <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)}`" :href="`#${item.slug}`">
+            <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+              <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
               </a>
             </li>
@@ -104,8 +103,8 @@ function observeArticleTitles() {
         <div class="bg-white/10 p-5 rounded w-[280px]">
           <ul v-if="toc?.length" class="list-none flex flex-col text-left">
             <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
-            <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200" :class="{ 'text-white': activeSlug === item.slug }">
-              <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)}`" :href="`#${item.slug}`">
+            <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+              <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
               </a>
             </li>
