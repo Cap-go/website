@@ -18,17 +18,17 @@ function shortNumber(number: number) {
 }
 
 const stats = reactive({
-  apps: shortNumber(750),
-  updates: shortNumber(23500638),
-  stars: shortNumber(358),
+  apps: shortNumber(850),
+  updates: shortNumber(14593631),
+  stars: shortNumber(455),
 })
 
 fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
-      stats.apps = shortNumber(data.apps)
-      stats.updates = shortNumber(data.updates)
-      stats.stars = shortNumber(data.stars)
+      stats.apps = shortNumber(data.apps ?? shortNumber(850))
+      stats.updates = shortNumber(data.updates ?? shortNumber(14593631))
+      stats.stars = shortNumber(data.stars ?? shortNumber(455))
     })
   }
 })
@@ -42,7 +42,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">Made by Developers, for Developers</p>
           <h1 class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">Instant updates for Capacitor</h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Ship updates, fixes, changes, and features<br /><span class="font-bold">within minutes</span>
+            Ship updates, fixes, changes, and features
+            <br /><span class="font-bold">within minutes</span><br />
           </h2>
 
           <div class="relative inline-flex mt-10 group">
@@ -101,7 +102,18 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <p class="mt-3 text-sm text-gray-400">Only your users can decrypt your updates, no one else.</p>
           </div>
         </div>
+        <h3 class="hidden md:block max-w-xl mx-auto mt-12 text-xl leading-7 text-gray-400 font-inter">
+            <span class="font-bold">👋 No more wait</span>
+            for Apple and Google app updates distribution
+          </h3>
+          <h3 class="block md:hidden max-w-sm mx-auto mt-12 text-center text-xl leading-7 text-gray-400 font-inter">
+            <span class="font-bold">👋 No more wait</span>
+          </h3>
+          <h3 class="block md:hidden max-w-sm mx-auto text-center text-xl leading-7 text-gray-400 font-inter">
+            for Apple and Google app updates distribution
+          </h3>
       </div>
+      
     </section>
     <section class="relative py-12 overflow-hidden sm:py-16 lg:py-20 xl:py-32 bg-white">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
