@@ -19,77 +19,70 @@ npm install @capgo/capacitor-updater
 
 This will download and install the package in your project.
 
-## Setup
+### Install the plugin
 
-Once the package is installed, you need to sync your Capacitor project to update the configuration.
+You should end up with this code added to your app :
 
+`npm i @capgo/capacitor-updater && npx cap sync`
+To install the plugin into your Capacitor app.
+
+And then add to your app this code to notify the native plugin that the JS bundle is healthy (if you don't do this, the native plugin will rollback to the previous version):
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
 ```
-npx cap sync
-```
 
-## Auto-update Setup
+This will tell the native plugin the installation as succeeded.
 
-To enable auto-updates in your app, you need to follow these steps:
+Then do a `npm run build && npx cap copy` to update your app.
 
-1. Create an account on [capgo.app](https://capgo.app/) and obtain your API key.
+### Login to Capgo CLOUD
 
-2. Login to the CLI using the API key:
+First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
-   ```
-   npx @capgo/cli@latest init API_KEY
-   ```
+`npx @capgo/cli@latest login YOU_KEY`
 
-   Replace `API_KEY` with your actual API key.
+### Add your first app
 
-3. Follow the steps provided by the CLI to complete the setup.
+Let's get started by first creating an app in Capgo Cloud with the CLI.
 
-For detailed instructions on the auto-update setup, refer to the [Auto update documentation](https://capgo.app/docs/plugin/cloud-mode/getting-started/).
+`npx @capgo/cli@latest app add`
 
-## Manual Setup
+This command will use all variables defined in the Capacitor config file to create the app.
 
-If you prefer to manually control the update process, follow these steps:
+### Upload your first version
 
-1. Open your `capacitor.config.json` file and set `"autoUpdate"` to `false`:
+Run the command to build your code and send it to Capgo with:
+`npx @capgo/cli@latest bundle upload`
 
-   ```json
-   // capacitor.config.json
-   {
-      "appId": "**.***.**",
-      "appName": "Name",
-      "plugins": {
-         "CapacitorUpdater": {
-            "autoUpdate": false
-         }
-      }
-   }
-   ```
+By default, the version name will be the one in your `package.json` file.
 
-2. In your main code file, import `CapacitorUpdater` from `@capgo/capacitor-updater`:
+Check in [Capgo](https://web.capgo.app/) if the build is present.
 
-   ```javascript
-   import { CapacitorUpdater } from '@capgo/capacitor-updater'
-   ```
+You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
 
-3. Call the `notifyAppReady` method to inform Capacitor Updater that the current update bundle has loaded successfully:
+### Make channel default
 
-   ```javascript
-   CapacitorUpdater.notifyAppReady()
-   ```
+After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
 
-4. Add the following code to download and set the new version of your app:
+`npx @capgo/cli@latest channel set production -s default`
 
-   ```javascript
-   const version = await CapacitorUpdater.download({
-      url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
-   })
-   await CapacitorUpdater.set(version)
-   ```
+## Receive a Live Update on a Device
 
-   Replace the `url` with the URL of your updated distribution zip file.
+For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
 
-5. Failed updates will automatically roll back to the last successful version.
+    npx cap run [ios | android]
 
-For more details on using the manual setup, refer to the provided code examples and comments in the documentation.
+Open the app, put it in the background and open it again, you should see in the logs the app did the update.
+
+Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/plugin/cloud-mode/getting-started/).
+
+
+> If you need to stop receive in local the update run this command
+`npx @capgo/cli@latest channel set`
+
 
 ## Conclusion
 

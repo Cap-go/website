@@ -45,9 +45,7 @@ Even native app cannot update this part.
 
 But you can set up your CI/CD to handle this part, I made a tutorial on how to do it [here for IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and [here for Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
 
-## Let's get started 🚀
-
-### Capgo Configuration
+## Auto Capgo Configuration
 
 It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
 
@@ -57,7 +55,6 @@ Once you’re logged into Capgo, You will have an onboarding page
 
 Follow the steps on the onboarding page to add your first app.
 
-
 ### Follow the CLI guidance
 
 From a command line, directly into the root of your Capacitor app, run:
@@ -66,6 +63,8 @@ From a command line, directly into the root of your Capacitor app, run:
 To install the Capgo into your Capacitor app, the CLI will walk you through the process of setting up your app with Capgo.
 
 If you want to do it manually, you can follow the steps below.
+
+## Manual Capgo Configuration
 
 ### Install the plugin
 
@@ -84,13 +83,15 @@ CapacitorUpdater.notifyAppReady()
 
 This will tell the native plugin the installation as succeeded.
 
+Then do a `npm run build && npx cap copy` to update your app.
+
 ### Login to Capgo CLOUD
 
 First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
-## Add your first app
+### Add your first app
 
 Let's get started by first creating an app in Capgo Cloud with the CLI.
 
@@ -98,7 +99,7 @@ Let's get started by first creating an app in Capgo Cloud with the CLI.
 
 This command will use all variables defined in the Capacitor config file to create the app.
 
-## Upload your first version
+### Upload your first version
 
 Run the command to build your code and send it to Capgo with:
 `npx @capgo/cli@latest bundle upload`
@@ -115,18 +116,6 @@ After you have sent your app to Capgo, you need to make your channel `default` t
 
 `npx @capgo/cli@latest channel set production -s default`
 
-## Configure app to validate updates
-
-Add this config to your main JavaScript file.
-
-```js
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
-
-CapacitorUpdater.notifyAppReady()
-```
-
-Then do a `npm run build && npx cap copy` to update your app.
-
 ## Receive a Live Update on a Device
 
 For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
@@ -136,3 +125,7 @@ For your application to receive a live update from Deploy, you'll need to run th
 Open the app, put it in the background and open it again, you should see in the logs the app did the update.
 
 Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/plugin/cloud-mode/getting-started/).
+
+
+> If you need to stop receive in local the update run this command
+`npx @capgo/cli@latest channel set`
