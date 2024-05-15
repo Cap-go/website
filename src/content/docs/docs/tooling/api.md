@@ -102,6 +102,7 @@ Send this
 ```typescript
 interface Channel {
   channel: string
+  app_id: string
 }
 ```
 
