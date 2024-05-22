@@ -13,6 +13,7 @@ interface AppInfos {
   action: 'delete' |
           'reset' |
           'set' |
+          'get' |
           'set_fail' |
           'update_fail' |
           'download_fail' |
@@ -31,7 +32,10 @@ interface AppInfos {
           'download_70' |
           'download_80' |
           'download_90' |
-          'download_complete'
+          'download_complete' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background'
   version_build: string
   version_code: string
   version_os: string
