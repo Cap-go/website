@@ -21,7 +21,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
 
 ## Android
-<br />
+
 ### Cannot download
 
 We have seen some issues with devices in india, and got user on the call, made them try different DNS servers, and it worked.
@@ -31,6 +31,11 @@ So if you have the issue, try to use a different DNS server like Cloudflare or G
 Cloudflare: 1.1.1.1 and 1.0.0.1
 
 Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+
+<LinkCard
+	title="How to setup a preferred DNS server on Android?"
+	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
+/>
 
 ### Self Hosted
 When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, if you still want to do it, follow this guide:
