@@ -10,7 +10,7 @@ import Calculator from '../components/pricing/Calculator.vue'
 
 const config = useRuntimeConfig()
 
-const yearly = ref(false)
+const yearly = ref(true)
 const plansAll = ref<Database['public']['Tables']['plans']['Row'][]>([])
 await fetch(`${config.public.baseApiUrl}/private/plans`)
   .then((r) => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
