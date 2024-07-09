@@ -1,3 +1,10 @@
+---
+title: "Nuxt 2"
+description: "How to install the plugin in Nuxt 2"
+sidebar:
+  order: 1
+---
+
 # Install in Nuxt 2
 
 Create a plugin file `capacitor-updater.js` in `plugins` directory.
