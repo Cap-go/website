@@ -32,7 +32,9 @@ That why we made you a clear and simple table to help you compare.
 | Features | Capgo | Appflow |
 | --- | --- | --- |
 | Live updates | ✅ | ✅ |
+| Time to update | < 1min | < 10 min |
 | Updates channel | ✅ | ✅ |
+| Free trial | ✅ | ❌ |
 | Revert/change channel version | ✅ | ❌ |
 | Install Stats | ✅ | ❌ |
 | Sandbox app for test | ✅ | ❌ |
@@ -40,8 +42,8 @@ That why we made you a clear and simple table to help you compare.
 | Cordova plugin | ❌ Could be back port | ✅ |
 | Affordable pricing | ✅ Start at $14/mo | ❌ Start at $499/mo |
 | Native build | ❌ | ✅ |
-| 100% Open source | ✅ | ❌ |
 | End-to-End encryption | ✅ | ❌ only for Portal |
+| 100% Open source | ✅ | ❌ |
 | Portal | ❌ coming soon | ✅ |
 | CI/CD | ❌ Tutorial to do it in popular  | ✅ |
 
