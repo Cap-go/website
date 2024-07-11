@@ -39,7 +39,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
       <div class="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center">
-          <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">Made by Developers, for Developers</p>
+          <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">100% Open-Source</p>
           <h1 class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">Instant updates for Capacitor</h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
             Ship updates, fixes, changes, and features
