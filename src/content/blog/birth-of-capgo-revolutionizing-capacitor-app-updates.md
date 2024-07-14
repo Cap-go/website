@@ -1,6 +1,6 @@
 ---
 slug: "birth-of-capgo-my-challenging-journey-as-a-solo-maker"
-title: 'The Birth of Capgo: My Challenging Journey as a Solo Maker'
+title: 'How a GitHub Issue Evolved into Capgo: From Community Request to Solution'
 description: 'Discover the trials and triumphs behind creating Capgo, an innovative live update system for Capacitor apps, born from necessity and shaped by community feedback.'
 author: Martin Donadieu
 author_url: https://twitter.com/martindonadieu
@@ -138,7 +138,7 @@ However, staying true to the project's roots, I maintained Capgo's open-source c
 
 My journey with Capgo is a testament to the power of community-driven innovation and the unexpected paths that solo makers often find themselves on. What started as a personal frustration while working on a crossfit timer app grew into a robust, affordable, and flexible live update system for Capacitor apps.
 
-The creation of Capgo was far from easy. It required countless hours of work, the support of a generous developer community, and a willingness to pivot based on user feedback. From coding in a van in Portugal to launching a paid product, every step of this journey has been a learning experience.
+The creation of Capgo was far from easy. It required countless hours of work, the support of a generous developer community, and a willingness to pivot based on user feedback. From coding in Airbnb in Portugal to launching a paid product, every step of this journey has been a learning experience.
 
 As Capgo continues to evolve, it stands as a prime example of how identifying a gap in the market, actively working to fill it, and being responsive to community needs can lead to the creation of valuable tools that benefit the entire developer ecosystem.
 
