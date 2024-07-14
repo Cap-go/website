@@ -143,3 +143,5 @@ The creation of Capgo was far from easy. It required countless hours of work, th
 As Capgo continues to evolve, it stands as a prime example of how identifying a gap in the market, actively working to fill it, and being responsive to community needs can lead to the creation of valuable tools that benefit the entire developer ecosystem.
 
 The story of Capgo is more than just the development of a tool; it's a story of perseverance, community, and the exciting unpredictability of life as a solo maker.
+
+You can find the full story on [here](https://github.com/capacitor-community/proposals/issues/43#issuecomment-941017142).
