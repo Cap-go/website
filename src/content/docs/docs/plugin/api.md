@@ -5,8 +5,6 @@ sidebar:
   order: 2
 ---
 
-# Updater Plugin Config
-
 See the Github [Readme](https://github.com/Cap-go/capacitor-updater) for more information.
 
 <docgen-config>

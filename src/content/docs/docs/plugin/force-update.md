@@ -6,8 +6,6 @@ sidebar:
 ---
 
 
-# Options
-
 You have 3 options to force your user to update:
 
 - Direct update
