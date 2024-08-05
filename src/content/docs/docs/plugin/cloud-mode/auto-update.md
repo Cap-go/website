@@ -44,7 +44,9 @@ The server allows you to manage channels and versions and much more.
 
 `autoUpdate` will use data from `capacitor.config` to identify the Capgo server
 
-> ℹ️ You can still use Capgo Cloud without sending your code to our server. If that is not allowed by your company.
+:::note
+You can still use Capgo Cloud without sending your code to our server. If that is not allowed by your company.
+:::
 
 #### Validate version
 
