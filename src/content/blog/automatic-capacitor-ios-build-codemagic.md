@@ -104,7 +104,14 @@ Grab all three necessary information here:
 
 ### Adding the App Store Connect API key to Codemagic
 
-1.  Open your Codemagic Team settings, go to **Team integrations** > **Developer Portal** > **Manage keys**.
+1.  Open your Codemagic Team settings,
+![Select Team integrations](/select_team.webp)
+![Open team](/open_team.webp)
+Select code signing identities
+![Select code signing identities](/select_code_signing_identities.webp)
+And the upload the certificate
+![Upload the certificate](/upload_certificate.webp)
+
 2.  Click the **Add key** button.
 3.  Enter the `App Store Connect API key name`. This is a human readable name for the key that will be used to refer to the key later in application settings.
 4.  Enter the `Issuer ID` and `Key ID` values.
