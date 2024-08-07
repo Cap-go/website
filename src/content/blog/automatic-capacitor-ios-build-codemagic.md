@@ -284,31 +284,50 @@ workflows:
 
 ```
 
-This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
+This workflow should be triggered manually or after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
 
 Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
 
-> Each time you send a new commit, a release will be built in TestFlight.
+> Each time you send a new tag, a release will be built in TestFlight.
 
 Your App doesn't need to use Ionic, only Capacitor base is mandatory, it can have old Cordova module, but Capacitor JS plugin should be preferred.
 
 ## 5\. Trigger workflow
 
-**Create a Commit**
-
-Make a _commit_, you should see the active workflow in the repository.
 
 **Trigger the workflow**
 
 Push the new commits to the branch `main` or `developement` to trigger the workflow.
 
-![Started with commit](/cd_started.webp)
+![Started with commit](/build_result.webp)
 
 After a few minutes, the build should be available in your App Store Connect dashboard.
 
 ![Testflight Dashboard](/testflight_app.webp)
 
-## Can deploy from local machine?
+## Start manually
+
+You can start the workflow manually. 
+
+First select the app you want to build, then click on **Start new build**.
+
+![Select app](/select_app_codemagic.webp)
+
+Then select the branch you want to build.
+
+![Select branch](/select_branch.webp)
+
+And click on **Start new build**.
+
+Then go you the build list
+
+![Build list](/build_list.webp)
+
+And click on the build to see the result.
+
+![Build result](/build_result.webp)
+
+## Can deploy from local machine
 
 Yes, you can, and it is effortless.
 
