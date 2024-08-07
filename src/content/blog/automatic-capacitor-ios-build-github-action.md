@@ -85,7 +85,8 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect API keys create name](/gen_key.webp)
 
-6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/).
+6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). We recommend to select **App management**.
+
 
 7 — Click Generate.
 
@@ -110,6 +111,8 @@ _Now we can manage Fastlane with the App Store Connect API key, great!_
 
 ### Create certificates and provisioning profiles
 
+#### Certificates
+
 Open XCode and go to **Settings** > **Accounts** > **Apple ID** > **Teams** and select your team.
 
 ![Code signing identities](/code_signing_identities.webp)
@@ -133,6 +136,37 @@ And then right-click on the certificate and select **Export**.
 Choose the file format **Personal Information Exchange (.p12)**.
 
 That will download the certificate as a `.p12` file.
+
+#### Provisioning profiles
+
+Open [Apple Developer](https://developer.apple.com/account/resources/profiles/list) and select the right team.
+
+Then create a new profile, by clicking on **+** 
+
+![Create a new profile](/create_new_profile.webp)
+
+And select **App Store Connect**. 
+
+![Select App Store Connect](/select_app_store_connect.webp)
+
+Then you need to select the right app, be careful you cannot use wildcard otherwise signing will fail.
+
+![Select the right app](/select_app.webp)
+
+Select the right certificate you created before (look for the date of expiration it should same day and month as today) and click on **Continue**.
+
+![Select the right certificate](/select_certificate.webp)
+
+Finally enter the name of the profile and click on **Generate**. 
+
+> The name will be used to identify the profile in the code signing settings of Xcode, under the value of `APPLE_PROFILE_NAME`.
+
+![Generate the profile](/generate_profile.webp)
+
+You can download the profile as a `.mobileprovision` file.
+
+![Download the profile](/download_profile.webp)
+
 
 ### Creating GitHub secrets for your certificate and provisioning profile
 
