@@ -159,7 +159,7 @@ Select the right certificate you created before (look for the date of expiration
 
 Finally enter the name of the profile and click on **Generate**. 
 
-> The name will be used to identify the profile in the code signing settings of Xcode, under the value of `APPLE_PROFILE_NAME`.
+> The name will be used to identify the profile in Fastlane, under the value of `APPLE_PROFILE_NAME`.
 
 ![Generate the profile](/generate_profile.webp)
 

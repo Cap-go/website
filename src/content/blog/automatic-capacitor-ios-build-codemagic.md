@@ -27,7 +27,7 @@ Before continuing with the tutorial…
 
 ## Important about the price
 
-![Price GitHub Action](/price_codemagic.webp)
+![Price Codemagic Action](/price_codemagic.webp)
 
 [https://codemagic.io/pricing/](https://codemagic.io/pricing/)
 
@@ -117,26 +117,61 @@ _Now we can manage Codemagic with the App Store Connect API key, great!_
 ## 2\. Create certificates and provisioning profiles
 
 
-Got to [Apple Developer Portal](https://developer.apple.com/account/resources/certificates/list) and create a new certificate for distribution.
+#### Certificates
 
-![Create certificate](/create_certificate.webp)
+Open XCode and go to **Settings** > **Accounts** > **Apple ID** > **Teams** and select your team.
 
-Then you can download the certificate and the private key.
+![Code signing identities](/code_signing_identities.webp)
 
-![Download certificate](/download_certificate.webp)
+Click on **Manage certificates** > **+** and select **Apple Distribution**.
 
-Now you need to convert the certificate to a `.p12` file.
+![Apple Distribution](/apple_distribution.webp)
 
-With the `openssl` command, you can convert the certificate to a `.p12` file.
+Then you can create a new certificate.
 
-Convert the certificate to a `.pem` file.
-```shell
-openssl x509 -in certificate.cer -inform DER -out certificate.pem
-```
+Then you need to go to keychain to download the certificate as a `.p12` file.
 
-Finally, you need to upload the certificate to Codemagic.
+To do so, you need to go to keychain switch to the **login** keychain and then the tab **My Certificates**.
 
-![Upload certificate](/upload_certificate.webp)
+![My Certificates](/my_certificates.webp)
+
+Then you can select the certificate you want to download. (Look by the date of the certificate)
+
+And then right-click on the certificate and select **Export**.
+
+Choose the file format **Personal Information Exchange (.p12)**.
+
+That will download the certificate as a `.p12` file.
+
+#### Provisioning profiles
+
+Open [Apple Developer](https://developer.apple.com/account/resources/profiles/list) and select the right team.
+
+Then create a new profile, by clicking on **+** 
+
+![Create a new profile](/create_new_profile.webp)
+
+And select **App Store Connect**. 
+
+![Select App Store Connect](/select_app_store_connect.webp)
+
+Then you need to select the right app, be careful you cannot use wildcard otherwise signing will fail.
+
+![Select the right app](/select_app.webp)
+
+Select the right certificate you created before (look for the date of expiration it should same day and month as today) and click on **Continue**.
+
+![Select the right certificate](/select_certificate.webp)
+
+Finally enter the name of the profile and click on **Generate**. 
+
+> The name will be used to identify the profile in Codemagic.
+
+![Generate the profile](/generate_profile.webp)
+
+You can download the profile as a `.mobileprovision` file.
+
+![Download the profile](/download_profile.webp)
 
 
 ### Adding the Code signing certificate
@@ -165,33 +200,6 @@ The profile’s type, team, bundle id, and expiration date are displayed for eac
 
 Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore – it’s from your project’s secret. 🤦
 
-![Set GitHub secrets](/github_secets.webp)
-
-1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams.
-
-2\. `DEVELOPER_APP_ID` - in App Store Connect, go to the app → **App Information** → Scroll down to the `General Information` section of your app and look for `Apple ID`.
-
-3\. `DEVELOPER_APP_IDENTIFIER` - your app’s bundle identifier.
-
-4\. `DEVELOPER_PORTAL_TEAM_ID` - the ID of your Developer Portal team if you’re in multiple teams.
-
-5\. `Codemagic_APPLE_ID` - the Apple ID or developer email you use to manage the app.
-
-6\. `GIT_USERNAME` & `GIT_TOKEN` - Your git username and your personal access token.
-
-7\. `MATCH_PASSWORD` - the passphrase that you assigned when initializing match, will be used for decrypting the certificates and provisioning profiles.
-
-8\. `PROVISIONING_PROFILE_SPECIFIER` - `match AppStore <YOUR_APP_BUNDLE_IDENTIFIER>`, eg. `match AppStore com.domain.blabla.demo`.
-
-9\. `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - assign a temp keychain user and password for your workflow.
-
-10\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
-
-11\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
-
-12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/Codemagic/Codemagic/issues/18655/#issuecomment-881764901)
-<!-- markdown-link-check-disable-next-line -->
-13\. `CERTIFICATE_STORE_URL` — The repo url of your Match keys (ex: https://github.com/***/Codemagic_match.git)
 
 ## **4\. Configure Codemagic workflow file**
 
