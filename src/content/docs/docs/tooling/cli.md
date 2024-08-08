@@ -383,7 +383,43 @@ Optionally, you can give:
 
 `--key-data [privateKey]` the private key data, if you want to use inline. This command is useful if you followed the recommendation and didn't commit the key in your app, and in the config.
 
-## Ci integration
+## Bundle signing
+
+Capgo offers the ability to cryptographically sign a bundle. This prevents tampering and ensures that only the holder of the private key can send a bundle.
+This is achived by a combination of RSA (4096 key) signing and SHA512 hashing.
+It serves a different purpose than encryption and can be enabled besides it.
+It is strongly recomended to enable this feature as it greatly increases the security of capgo updates
+
+In order to do so, please run the following command
+
+`npx @capgo/cli sign create`
+
+This will create/modify the following files:
+ - `capacitor.config.ts`
+ - `.capgo_sign_key.priv`
+ - `.capgo_sign_key.pub`
+
+:::danger
+⚠️ Keep the `.capgo_sign_key.priv` a secret. DO NOT SHARE IT !!!
+:::
+
+After running this command your upload will automatically sign the bundles.
+
+## Bundle signing without capgo cloud
+
+It is possible to use this feature if you do not use capgo cloud. Please follow the steps to generate the keys.
+In order to generate the signature for a file please run:
+
+`npx @capgo/cli sign signFile ./file.zip`
+
+This will generate a `./file.zip.capgo_sign` with the signature
+
+Alternatively, you can pass the following arguments to change the output:
+
+ - `--json` - Prints the signature in the stdout in a JSON format
+ - `--stdout` - Doesn't generate the `.capgo_sign` and prints the signature in the stdout
+
+### Ci integration
 
 To automate your work, I recommend you make GitHub action do the job of pushing to our server
 
