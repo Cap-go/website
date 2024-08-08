@@ -386,9 +386,9 @@ Optionally, you can give:
 ## Bundle signing
 
 Capgo offers the ability to cryptographically sign a bundle. This prevents tampering and ensures that only the holder of the private key can send a bundle.
-This is achived by a combination of RSA (4096 key) signing and SHA512 hashing.
+This is achieved by a combination of RSA (4096 key) signing and SHA512 hashing.
 It serves a different purpose than encryption and can be enabled besides it.
-It is strongly recomended to enable this feature as it greatly increases the security of capgo updates
+It is strongly recommended to enable this feature as it greatly increases the security of capgo updates
 
 In order to do so, please run the following command
 
