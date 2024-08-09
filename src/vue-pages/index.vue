@@ -355,7 +355,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj md:!leading-[85px] text-center">Manage Updates Effortlessly</h3>
         <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
           <div>
-            <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_2.webp" alt="Manage app illustration" title="Manage app illustration" />
+            <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_3.webp" alt="Manage app illustration" title="Manage app illustration" />
           </div>
           <div class="md:pr-12">
             <div class="">
