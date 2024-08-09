@@ -17,7 +17,7 @@ jobs:
   google-indexing:
     runs-on: ubuntu-latest
     steps:
-      - uses: robingenz/action-google-indexing@v1.0.0
+      - uses: robingenz/action-google-indexing@v1.0.1
         with:
           siteUrl: 'capgo.app'
           gcpServiceAccountKey: ${{ secrets.GCP_SA_KEY }}
