@@ -405,7 +405,7 @@ This will create/modify the following files:
 
 After running this command your upload will automatically sign the bundles.
 
-## Bundle signing without capgo cloud
+### Bundle signing without capgo cloud
 
 It is possible to use this feature if you do not use capgo cloud. Please follow the steps to generate the keys.
 In order to generate the signature for a file please run:
@@ -419,7 +419,31 @@ Alternatively, you can pass the following arguments to change the output:
  - `--json` - Prints the signature in the stdout in a JSON format
  - `--stdout` - Doesn't generate the `.capgo_sign` and prints the signature in the stdout
 
-### Ci integration
+### Bundle signing in the CI/CD
+
+You should **NEVER** commit your private signing key. This makes it a bit difficult to use capgo in a CI/CD environment.
+After configuring signing you will very likely see the following error:
+
+<figure><img src="/ci-cd-signing-fail.webp" alt="Capgo CI/CD upload fail"></figure>
+
+It is quite easy to fix. First please export the private signing key using the following command.
+
+`npx @capgo/cli sign exportPrivateKey`
+
+Then, please copy the output and create a new CI/CD secret (`CAPGO_SIGN_PRIVATE_KEY`).
+
+After, please create a new CI/CD step (here is an example for GitHub actions).
+
+```yml
+- name: "Import capgo's private signature key"
+  env:
+    CAPGO_SIGN_PRIVATE_KEY: ${{ secrets.CAPGO_SIGN_PRIVATE_KEY }}
+  run: npx @capgo/cli sign importPrivateKey --key $CAPGO_SIGN_PRIVATE_KEY
+```
+
+After doing this, your CI/CD workflow will upload bundles to capgo successfully.
+
+## Ci integration
 
 To automate your work, I recommend you make GitHub action do the job of pushing to our server
 
