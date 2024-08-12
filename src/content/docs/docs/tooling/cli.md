@@ -112,6 +112,21 @@ Optionally, you can give:
 * `--apikey [key]` API key to link to your account.
 * `--device` with the specific device you want to debug
 
+### Setting
+
+`npx @capgo/cli app setting [path]`
+
+Edit the Capacitor config.
+
+`[path]` - path of the setting that you would like to change. For example, to change the `appId`, provide `appId`. 
+If you wish to disable auto update in the `capacitor-updater` provide `plugins.CapacitorUpdater.autoUpdate`
+
+You MUST provide either `--string` or `--bool`!
+
+Options: 
+ - `--string <string>` - sets the setting to a string
+ - `--bool <true | false>` - sets the setting to a boolean
+
 ## Bundle
 
 ### Upload
