@@ -11,6 +11,27 @@ First, let's take a look at the bundles page. You can access it by [clicking on 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
 
+## Delete a bundle
+
+They are 2 ways a bundle can be deleted:
+
+ - Normally
+ - Unsafely
+
+The Unsafe way of deleting a bundle was added into Capgo on August 12, 2024.
+
+The difference between the two ways is the ability to reuse the version number after the deletion.
+
+For example, if you delete a version `1.0.0` the normal way and later try to upload a `1.0.0` version, it will fail.
+If you delete this version via the unsafe delete, you will be able to upload a `1.0.0` version.
+
+:::danger
+Deleting a version unsafely and re-uploading it is REALLY dangerous.
+It can cause all sorts of bugs and unpredicatble behaviour in the plugin.
+It should NEVER be used for bundles that have been used in a public channel.
+It is for this reason that deleting a version unsafely requires "super_admin" privileges
+:::
+
 ## Managing a specific bundle
 
 Once you see the list of all bundles click on the one you want to manage. After you do that you should see something like this:
