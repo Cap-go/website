@@ -60,6 +60,9 @@ const navigation = {
   legal: [
     // { name: 'Claim', href: '#' },
     { name: 'Privacy', href: '/privacy/', rel: 'nofollow' },
+    { name: 'Support policy', href: '/support-policy/', rel: 'nofollow' },
+    { name: 'Service Level Agreements', href: '/sla/', rel: 'nofollow' },
+    { name: 'Acceptable Use Policy', href: '/aup/', rel: 'nofollow' },
     { name: 'Terms', href: '/tos/', rel: 'nofollow' },
     {
       name: 'Privacy Board',
