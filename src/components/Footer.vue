@@ -64,6 +64,7 @@ const navigation = {
     { name: 'Service Level Agreements', href: '/sla/', rel: 'nofollow' },
     { name: 'Acceptable Use Policy', href: '/aup/', rel: 'nofollow' },
     { name: 'Terms', href: '/tos/', rel: 'nofollow' },
+    { name: 'Security', href: '/security/', rel: 'nofollow' },
     {
       name: 'Privacy Board',
       href: 'https://www.privacyboard.co/company/capgo/',
