@@ -58,7 +58,7 @@ npx cap sync
 
 ### Intro
 
-Click on [register](https://capgo.app) to create your account if you don't have one yet.
+Click on [register](https://capgo.app) to create your account.
 
 The server allows you to manage channels and versions and much more.
 
@@ -88,7 +88,7 @@ CapacitorUpdater.notifyAppReady()
 * User continues normal flow of the app until next update cycle.
 
 :::danger
-⚠️ If you do not call `notifyAppReady()` in your app, the current version is going to be marked as invalid and we will revert to the previous valid bundle or stock.
+⚠️ Not calling `notifyAppReady()` in your app, will make the current version marked as invalid and will revert to the previous valid bundle or stock.
 :::
 
 #### Dev flow

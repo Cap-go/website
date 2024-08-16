@@ -42,7 +42,7 @@ Like App Center, [Capgo](/register/) supports apps hosted in Git repositories on
 
 ##### note
 
-If you do not have Node or NPM installed on your computer, you will need to do this before proceeding. If you need to install Node, please select the [current LTS version](https://nodejs.org/).
+Have Node and NPM installed on your computer, you need before proceeding. Always use the [current LTS version](https://nodejs.org/) Capgo do not older versions.
 
 ### Create `package.json` and Capacitor config files
 
