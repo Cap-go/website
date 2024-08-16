@@ -33,8 +33,8 @@
     "@types/marked": "^6.0.0",
     "@types/node": "^20.14.10",
     "@types/semver": "^7.5.8",
-    "@unocss/astro": "^0.59.3",
-    "@unocss/reset": "^0.59.3",
+    "@unocss/astro": "^0.62.0",
+    "@unocss/reset": "^0.62.0",
     "@vite-pwa/astro": "^0.3.1",
     "astro-font": "^0.0.81",
     "cheerio": "1.0.0-rc.12",
@@ -44,7 +44,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.0",
     "schema-dts": "^1.1.2",
-    "unocss": "^0.61.3",
+    "unocss": "^0.62.0",
     "zod": "^3.23.8"
   }
 }
