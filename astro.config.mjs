@@ -32,7 +32,7 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       favicon: '/favicon.svg',
-      // logo: { src: './logo.svg' },
+      logo: { src: './logo.svg' },
       editLink: {
 				baseUrl: 'https://github.com/Cap-go/website/edit/main/',
 			},
@@ -53,22 +53,6 @@ export default defineConfig({
         {
           label: 'General Information',
           link: '/docs/general-information/',
-        },
-        {
-          label: 'How To',
-          link: '/docs/how-to/',
-        },
-        {
-          label: 'FAQ',
-          link: '/docs/faq/',
-        },
-        {
-          label: 'Fix the doc',
-          link: 'https://github.com/Cap-go/website/tree/main/src/content/docs/docs',
-        },
-        {
-          label: 'Tech support for Capgo',
-          link: '/docs/getting-help/',
         },
         {
           label: 'Plugin',
@@ -97,16 +81,36 @@ export default defineConfig({
           ]
         },
         {
-          label: 'Tooling',
-          autogenerate: { directory: 'docs/tooling' },
+          label: 'How To',
+          link: '/docs/how-to/',
+        },
+        {
+          label: 'FAQ',
+          link: '/docs/faq/',
+        },
+        {
+          label: 'Tech support for Capgo',
+          link: '/docs/getting-help/',
         },
         {
           label: 'Web app',
           autogenerate: { directory: 'docs/webapp' },
         },
         {
+          label: 'CLI',
+          link: '/docs/cli/',
+        },
+        {
+          label: 'Public API',
+          link: '/docs/public-api/',
+        },
+        {
           label: 'Migrations',
           autogenerate: { directory: 'docs/upgrade' },
+        },
+        {
+          label: 'Tooling',
+          autogenerate: { directory: 'docs/tooling' },
         },
       ],
     }),
