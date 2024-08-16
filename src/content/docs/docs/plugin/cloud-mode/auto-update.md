@@ -11,7 +11,32 @@ This mode allows developers to use capacitor-updater with auto-update mode and p
 
 Make sure your app version uses [https://semver.org/](https://semver.org/) before using Capgo auto-update.
 
-This is the convention it uses to manage versions. This convention should be used in 3 files in your project:
+This is the convention it uses to manage versions in Capgo.
+
+There is 2 way to set version in your app:
+
+New way: Use the `version` field in your `capacitor.config.json` file.
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "disableAutoUpdateBreaking": false,
+      "version": "1.0.0"
+    }
+  }
+}
+```
+This will option in `CapacitorUpdater` will be used by the plugin to check for updates, and the CLI to upload the version.
+
+Old way:
+In 3 files in your project:
 
 * `package.json` in **version**
 * `android/app/build.gradle` in **versionName**
