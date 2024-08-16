@@ -3,6 +3,7 @@ import { onMounted, reactive } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/chatwoot'
 import Testimonials from '../components/Testimonials.vue'
+import dayjs from 'dayjs'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
@@ -219,11 +220,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">10% of Capacitor apps</h2>
+          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">Major Capacitor apps</h2>
           <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">use Capgo</h2>
-          <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">Shared transparently with you since December
+          <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">Our numbers are shared transparently since December
             2021.</p>
-          <p class="text-base mt-5 text-gray-400 text-center">Updated every day</p>
+          <p class="text-base mt-5 text-gray-400 text-center">Last update: {{dayjs().format('MMMM DD, YYYY')}}</p>
         </div>
 
         <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
@@ -528,7 +529,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </h3>
             </div>
             <div class="sm:text-center md:w-1/2">
-              <p class="text-white tracking-tight text-xl">Try risk free with a 7 days free trial</p>
+              <p class="text-white tracking-tight text-xl">Try risk free with a 15 days free trial</p>
               <a href="/register/"
                 class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
                 Get Started &RightArrow;
