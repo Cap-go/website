@@ -58,7 +58,16 @@ export default defineConfig({
           label: 'Plugin',
           items: [
             { label: 'Overview', link: '/docs/plugin/overview' },
-            { label: 'Cloud Mode', autogenerate: { directory: 'docs/plugin/cloud-mode/' }},
+            { label: 'Cloud Mode', 
+              items: [
+                { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
+                { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
+                { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
+                { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
+                { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
+              ],
+              collapsed: true,
+            },
             {
               label: 'Self Hosted', items: [
                 { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
@@ -70,7 +79,7 @@ export default defineConfig({
                 { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
                 { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true}
               ],
-              collapsed: true
+              collapsed: true,
             },
             { label: 'Plugin methods', link: '/docs/plugin/api' },
             { label: 'Known Issues', link: '/docs/plugin/known-issues' },
@@ -78,7 +87,41 @@ export default defineConfig({
             { label: 'Settings', link: '/docs/plugin/settings' },
             { label: 'Statistics', link: '/docs/plugin/statistics-api' },
             { label: 'Debugging', link: '/docs/plugin/debugging' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
           ]
+        },
+        {
+          label: 'CLI',
+          collapsed: true,
+          items: [
+            { label: 'Commands', link: '/docs/cli/commands' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
+          ]
+        },
+        {
+          label: 'Public API',
+          collapsed: true,
+          items: [
+            { label: 'Endpoints', link: '/docs/public-api/endpoints' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
+          ]
+        },
+        {
+          label: 'Web app',
+          collapsed: true,
+          autogenerate: { directory: 'docs/webapp' },
         },
         {
           label: 'How To',
@@ -89,28 +132,13 @@ export default defineConfig({
           link: '/docs/faq/',
         },
         {
-          label: 'Tech support for Capgo',
-          link: '/docs/getting-help/',
-        },
-        {
-          label: 'Web app',
-          autogenerate: { directory: 'docs/webapp' },
-        },
-        {
-          label: 'CLI',
-          link: '/docs/cli/',
-        },
-        {
-          label: 'Public API',
-          link: '/docs/public-api/',
-        },
-        {
-          label: 'Migrations',
-          autogenerate: { directory: 'docs/upgrade' },
-        },
-        {
           label: 'Tooling',
+          collapsed: true,
           autogenerate: { directory: 'docs/tooling' },
+        },
+        {
+          label: 'How to get support',
+          link: '/docs/getting-help/',
         },
       ],
     }),
