@@ -15,11 +15,12 @@ Capgo and capacitor-updater comes with a powerful channel system.
 ## Assigning devices to a channel:
 
 * Make the channel default, each time a new device asks Capgo for an update this channel will answer
-* Send the **deviceId** (with [**getId**](/docs/plugin/api#getid) method) to your backend and assign it in Capgo
-* Make the channel self-assignable (with [**setChannel**](/docs/plugin/api#setchannel) method), and let the device subscribe to the channel (with user interaction or not)
+* Send the **deviceId** (with [**getDeviceId**](/docs/plugin/api#getdeviceid) method) to your backend and assign it with Capgo public API
+* Make the channel self-assignable (with [**setChannel**](/docs/plugin/api#setchannel) method), and let the device subscribe to the channel (with user interaction or not) with method `setChannel` of the plugin.
+* Use the option `defaultChannel` in the [config](/docs/plugin/settings#defaultchannel) to set the default channel for all devices with this plugin configuration.
 
 :::note
-You can also assign a device directly to a bundle.
+You can also assign a device directly to a bundle. 
 :::
 
 ## Channel options

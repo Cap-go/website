@@ -1,19 +1,24 @@
 ---
-title: "CLI"
+title: "Commands"
 description: "Capgo CLI documentation"
 sidebar:
   order: 1
 ---
+import { LinkCard } from '@astrojs/starlight/components';
+
 
 ### Usage
 
-All command should be run in your app folder with capacitor project ignited. See below.
+All command should be run in your app folder with capacitor project ignited properly.
 
-[Capacitor: Cross-platform native runtime for web apps](https://capacitorjs.com/docs/getting-started/)
+<LinkCard
+	title="Capacitor Cross-platform native runtime for web apps"
+	href="https://capacitorjs.com/docs/getting-started/"
+/>
 
 ### **Init**
 
-`npx @capgo/cli init [apikey]`
+`npx @capgo/cli@latest init [apikey]`
 
 This method is here to onboard you step by step.
 
@@ -111,6 +116,21 @@ Optionally, you can give:
 
 * `--apikey [key]` API key to link to your account.
 * `--device` with the specific device you want to debug
+
+### Setting
+
+`npx @capgo/cli app setting [path]`
+
+Edit the Capacitor config.
+
+`[path]` - path of the setting that you would like to change. For example, to change the `appId`, provide `appId`. 
+If you wish to disable auto update in the `capacitor-updater` provide `plugins.CapacitorUpdater.autoUpdate`
+
+You MUST provide either `--string` or `--bool`!
+
+Options: 
+ - `--string <string>` - sets the setting to a string
+ - `--bool <true | false>` - sets the setting to a boolean
 
 ## Bundle
 
@@ -323,24 +343,24 @@ Here is an example of which scenarios the update is allowed or denied
 Lastly the most complicated strategy. The `metadata` strategy.\
 First you need to know that initially after you enable it the updates **WILL** fail as the channel is lacking the required metadata.\
 If the channel is lacking metadata you will see a message like this:
-<figure><img src="/fail-metadata.webp" alt="Cannot find metadata"></figure>
+<img src="/fail-metadata.webp" alt="Cannot find metadata"/>
 
 If you see something like this you know that you have to go to the current bundle for the failing channel and set the metadata.\
 First, figure out what channel is failing. You can do that by looking at the `misconfigured` column
-<figure><img src="/misconfigured-table.webp" alt="Misconfigured table"></figure>
+<img src="/misconfigured-table.webp" alt="Misconfigured table"/>
 
 Then go to the failing channel and click on `Bundle number`. This should take you to the bundle page.
-<figure><img src="/fail-channel-show.webp" alt="Locate failing channel"></figure>
+<img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
 Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver/).\
 If the value you pass is not a semver you will get an error, but if everything goes correctly you should see something like this:
-<figure><img src="/set-min-update-version.webp" alt="Set min version"></figure>
+<img src="/set-min-update-version.webp" alt="Set min version"/>
 
 Now, you likely do not want to set this data manually every time you update. Fortunately, the CLI will prevent you from sending an update without this metadata
-<figure><img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"></figure>
+<img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
 
 To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the valid semver. Something like this:
-<figure><img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"></figure>
+<img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
 
 The `--min-update-version` is not the ONLY way to do compatibility.
 There also exists the `--auto-min-update-version`. Here is how it works.
@@ -350,10 +370,10 @@ Second, if the new version is 100% compatible it reuses the `min_update_version`
 If not, then it sets the `min_update_version` to the bundle number of the newly uploaded version.
 
 You will always get an information what is the `min_update_version` when using this option. It will look something like this:
-<figure><img src="/min_update_version_info.webp" alt="Min update version"></figure>
+<img src="/min_update_version_info.webp" alt="Min update version"/>
 
 If the new version is not compatible it should look something like this
-<figure><img src="/min_update_version_not_compatible.webp" alt="Min update version not compatible"></figure>
+<img src="/min_update_version_not_compatible.webp" alt="Min update version not compatible"/>
 
 ## End-to-End encryption (Trustless)
 
@@ -363,7 +383,9 @@ The encryption system is a combination of RSA and AES, the RSA key is used to en
 
 See below for more information about the encryption system.
 
-<figure><img src="/crypto_explained.webp" alt="How crypto works"><figcaption><p>Ecryption schema</p></figcaption></figure>
+<img src="/crypto_explained.webp" alt="How crypto works"/>
+
+Ecryption schema
 
 ### Create key for your app
 

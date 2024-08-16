@@ -11,7 +11,27 @@ This mode allows developers to use capacitor-updater with auto-update mode and p
 
 Make sure your app version uses [https://semver.org/](https://semver.org/) before using Capgo auto-update.
 
-This is the convention it uses to manage versions. This convention should be used in 3 files in your project:
+This is the convention it uses to manage versions in Capgo.
+
+There is 2 way to set version in your app:
+
+New way: Use the `version` field in your `capacitor.config.json` file.
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true, // Enable auto-update, true by default
+      "appId": "com.example.app", // Used to identify the app in the server
+      "version": "1.0.0" // Used to check for updates
+    }
+  }
+}
+```
+This will option in `CapacitorUpdater` will be used by the plugin to check for updates, and the CLI to upload the version.
+
+Old way:
+In 3 files in your project:
 
 * `package.json` in **version**
 * `android/app/build.gradle` in **versionName**
@@ -38,13 +58,15 @@ npx cap sync
 
 ### Intro
 
-Click on [register](https://capgo.app) to create your account if you don't have one yet.
+Click on [register](https://capgo.app) to create your account.
 
 The server allows you to manage channels and versions and much more.
 
 `autoUpdate` will use data from `capacitor.config` to identify the Capgo server
 
-> ℹ️ You can still use Capgo Cloud without sending your code to our server. If that is not allowed by your company.
+:::note
+You can still use Capgo Cloud without sending your code to our server. If that is not allowed by your company.
+:::
 
 #### Validate version
 
@@ -68,7 +90,7 @@ CapacitorUpdater.notifyAppReady()
 * User continues normal flow of the app until next update cycle.
 
 :::danger
-⚠️ If you do not call `notifyAppReady()` in your app, the current version is going to be marked as invalid and we will revert to the previous valid bundle or stock.
+⚠️ Not calling `notifyAppReady()` in your app, will make the current version marked as invalid and will revert to the previous valid bundle or stock.
 :::
 
 #### Dev flow

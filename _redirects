@@ -7,5 +7,6 @@ docs/plugin/know-issues docs/plugin/known-issues/ 200
 /self-hosted-capgo /docs/plugin/self-hosted/getting-started/ 200
 /self-hosted-live-updates /docs/plugin/self-hosted/auto-update/ 200
 /register https://web.capgo.app/register/ 302
+/docs/getting-started/ /docs/plugin/cloud-mode/getting-started/ 302
 /sitemap-index.xml/ /sitemap-index.xml 301
 /sitemap-0.xml/ /sitemap-0.xml 301

@@ -26,7 +26,7 @@ You should end up with this code added to your app :
 `npm i @capgo/capacitor-updater && npx cap sync`
 To install the plugin into your Capacitor app.
 
-And then add to your app this code to notify the native plugin that the JS bundle is healthy (if you don't do this, the native plugin will rollback to the previous version):
+And then add to your app this code to notify the native plugin that the JS bundle is healthy, the native plugin will rollback to the previous version, if you fail to do so :
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

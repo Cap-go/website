@@ -14,6 +14,10 @@ export default defineConfig({
       status: 302,
       destination: 'https://web.capgo.app/register/',
     },
+    '/docs/getting-started/': {
+      status: 302,
+      destination: '/docs/plugin/cloud-mode/getting-started/',
+    },
   },
   integrations: [
     UnoCSS({ injectReset: true }),
@@ -28,7 +32,7 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       favicon: '/favicon.svg',
-      // logo: { src: './logo.svg' },
+      logo: { src: './logo.svg' },
       editLink: {
 				baseUrl: 'https://github.com/Cap-go/website/edit/main/',
 			},
@@ -39,30 +43,31 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Getting Started',
+          label: 'Home',
           link: '/docs/',
         },
         {
-          label: 'How To',
-          link: '/docs/how-to/',
+          label: 'Getting Started',
+          link: '/docs/plugin/cloud-mode/getting-started/',
         },
         {
-          label: 'FAQ',
-          link: '/docs/faq/',
-        },
-        {
-          label: 'Fix the doc',
-          link: 'https://github.com/Cap-go/website/tree/main/src/content/docs/docs',
-        },
-        {
-          label: 'Tech support for Capgo',
-          link: '/docs/getting-help/',
+          label: 'General Information',
+          link: '/docs/general-information/',
         },
         {
           label: 'Plugin',
           items: [
             { label: 'Overview', link: '/docs/plugin/overview' },
-            { label: 'Cloud Mode', autogenerate: { directory: 'docs/plugin/cloud-mode/' }},
+            { label: 'Cloud Mode', 
+              items: [
+                { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
+                { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
+                { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
+                { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
+                { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
+              ],
+              collapsed: true,
+            },
             {
               label: 'Self Hosted', items: [
                 { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
@@ -74,7 +79,7 @@ export default defineConfig({
                 { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
                 { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true}
               ],
-              collapsed: true
+              collapsed: true,
             },
             { label: 'Plugin methods', link: '/docs/plugin/api' },
             { label: 'Known Issues', link: '/docs/plugin/known-issues' },
@@ -82,19 +87,58 @@ export default defineConfig({
             { label: 'Settings', link: '/docs/plugin/settings' },
             { label: 'Statistics', link: '/docs/plugin/statistics-api' },
             { label: 'Debugging', link: '/docs/plugin/debugging' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
           ]
         },
         {
-          label: 'Tooling',
-          autogenerate: { directory: 'docs/tooling' },
+          label: 'CLI',
+          collapsed: true,
+          items: [
+            { label: 'Commands', link: '/docs/cli/commands' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
+          ]
+        },
+        {
+          label: 'Public API',
+          collapsed: true,
+          items: [
+            { label: 'Endpoints', link: '/docs/public-api/endpoints' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/upgrade' },
+            },
+          ]
         },
         {
           label: 'Web app',
+          collapsed: true,
           autogenerate: { directory: 'docs/webapp' },
         },
         {
-          label: 'Migrations',
-          autogenerate: { directory: 'docs/upgrade' },
+          label: 'How To',
+          link: '/docs/how-to/',
+        },
+        {
+          label: 'FAQ',
+          link: '/docs/faq/',
+        },
+        {
+          label: 'Tooling',
+          collapsed: true,
+          autogenerate: { directory: 'docs/tooling' },
+        },
+        {
+          label: 'How to get support',
+          link: '/docs/getting-help/',
         },
       ],
     }),

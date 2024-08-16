@@ -18,8 +18,6 @@ Default: `10000` (10 seconds)
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "appReadyTimeout": 1000
@@ -39,8 +37,6 @@ Default: `20` (20 second)
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "responseTimeout": 1000
@@ -60,8 +56,6 @@ Default: `true`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "autoDeleteFailed": false
@@ -81,8 +75,6 @@ Default: `true`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "autoDeletePrevious": false
@@ -102,8 +94,6 @@ Default: `true`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "autoUpdate": false
@@ -123,8 +113,6 @@ Default: `https://api.capgo.app/updates`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "updateUrl": "https://example.com/api/updates"
@@ -144,8 +132,6 @@ Default: `https://api.capgo.app/stats`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "statsUrl": "https://example.com/api/stats"
@@ -167,8 +153,6 @@ Default: `undefined`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "privateKey": "YOUR_KEY"
@@ -188,8 +172,6 @@ Default: `undefined`
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "autoUpdate": true,
@@ -213,8 +195,6 @@ To configure the plugin, use these settings:
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
   "plugins": {
     "CapacitorUpdater": {
       "autoUpdate": true,
@@ -224,18 +204,63 @@ To configure the plugin, use these settings:
 }
 ```
 
-## `version`
-Send this version to the server to identify your version at the first download. 
+## `directUpdate`
+Make the plugin directly install the update when the app what just updated/installed. Only applicable for autoUpdate mode.
 
-:::caution 
-This setting disables the plugin to read the version in your native code. 
-This is useful when you want to have a different version in your native code and in your JS code.
+:::caution
+This setting require you to hide the app from the user while the update is being installed. Otherwise the app will reset when the user is navigating.
+:::
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "directUpdate": true
+    }
+  }
+}
+```
+
+## `defaultChannel`
+Set the default channel for the app. This will override any other channel set in Capgo if the channel allows overwriting.
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "defaultChannel": "production"
+    }
+  }
+}
+```
+
+## `appId`
+Set the appId for the app. This will override any other way to get the appId. This is useful when you want to have a different appId in Capgo and in your native code.
+:::note
+This is the new way to set the appId. The old way is still and will stay supported.
 :::
 ```json
 // capacitor.config.json
 {
-  "appId": "**.***.**",
-  "appName": "Name",
+  "plugins": {
+    "CapacitorUpdater": {
+      "AppId": "com.example.app"
+    }
+  }
+}
+```
+
+## `version`
+Set the version for the app. This will override any other way to get the version. This is useful when you want to have a different version in Capgo and in your native code.
+:::note
+This is the new way to set the version. The old way is still and will stay supported.
+:::
+```json
+// capacitor.config.json
+{
   "plugins": {
     "CapacitorUpdater": {
       "version": "1.2.3"
@@ -243,4 +268,3 @@ This is useful when you want to have a different version in your native code and
   }
 }
 ```
-

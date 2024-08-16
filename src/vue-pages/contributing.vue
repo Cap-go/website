@@ -36,7 +36,7 @@
       <a href="https://github.com/Cap-go/capacitor-updater"> <code>capacitor-updater</code></a>
     </h3>
     <p>This is the main repository that provides the <code>capacitor-updater</code> Plugin.</p>
-    <p>If you want to fix a bug or add a new feature to <code>capacitor-updater</code> this is the repository you want to contribute to.</p>
+    <p>You want to fix a bug or add a new feature to <code>capacitor-updater</code> this is the repository you want to contribute to.</p>
     <p>Languages: <strong>Swift</strong>, <strong>JavaScript</strong>, <strong>Java</strong></p>
     <h3 id="-capgo-https-github-com-cap-go-capgo-">
       <a href="https://github.com/Cap-go/capgo"> <code>capgo</code></a>
@@ -71,11 +71,11 @@
         <p>Ask for help in the <a href="https://discord.com/invite/VnYRvBfgA6"> community chat room. </a></p>
       </li>
       <li>
-        <p>If you are going to work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.</p>
+        <p>When you work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.</p>
       </li>
       <li>
         <p>
-          If you are going to work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all
+          When you work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all
           contributions, but not all proposed features are getting accepted. We don&#39;t want you to spend hours working on a code that might not be accepted.
         </p>
       </li>
