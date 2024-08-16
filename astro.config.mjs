@@ -14,6 +14,10 @@ export default defineConfig({
       status: 302,
       destination: 'https://web.capgo.app/register/',
     },
+    '/docs/getting-started/': {
+      status: 302,
+      destination: '/docs/plugin/cloud-mode/getting-started/',
+    },
   },
   integrations: [
     UnoCSS({ injectReset: true }),
@@ -44,7 +48,11 @@ export default defineConfig({
         },
         {
           label: 'Getting Started',
-          link: '/docs/getting-started/',
+          link: '/docs/plugin/cloud-mode/getting-started/',
+        },
+        {
+          label: 'General Information',
+          link: '/docs/general-information/',
         },
         {
           label: 'How To',
