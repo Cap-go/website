@@ -220,7 +220,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">Major Capacitor apps</h2>
+          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">Apps with 20M+ users</h2>
           <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">use Capgo</h2>
           <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">Our numbers are shared transparently since December
             2021.</p>
