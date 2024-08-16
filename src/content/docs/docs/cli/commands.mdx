@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 import { LinkCard } from '@astrojs/starlight/components';
-
+import { YouTube } from 'astro-embed';
 
 ### Usage
 
@@ -407,6 +407,12 @@ Optionally, you can give:
 
 ## Bundle signing
 
+### Video tutorial
+
+<YouTube id="cw8zCU2uGEg" title="Capgo bundle signing" />
+
+### Text tutorial
+
 Capgo offers the ability to cryptographically sign a bundle. This prevents tampering and ensures that only the holder of the private key can send a bundle.
 This is achieved by a combination of RSA (4096 key) signing and SHA512 hashing.
 It serves a different purpose than encryption and can be enabled besides it.
@@ -446,7 +452,7 @@ Alternatively, you can pass the following arguments to change the output:
 You should **NEVER** commit your private signing key. This makes it a bit difficult to use capgo in a CI/CD environment.
 After configuring signing you will very likely see the following error:
 
-<figure><img src="/ci-cd-signing-fail.webp" alt="Capgo CI/CD upload fail"></figure>
+<figure><img src="/ci-cd-signing-fail.webp" alt="Capgo CI/CD upload fail"/></figure>
 
 It is quite easy to fix. First please export the private signing key using the following command.
 
