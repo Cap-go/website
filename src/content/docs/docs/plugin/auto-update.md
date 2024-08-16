@@ -19,14 +19,11 @@ New way: Use the `version` field in your `capacitor.config.json` file.
 
 ```json
 {
-  "appId": "com.example.app",
-  "appName": "app",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
   "plugins": {
     "CapacitorUpdater": {
-      "version": "1.0.0"
+      "autoUpdate": true, // Enable auto-update, true by default
+      "appId": "com.example.app", // Used to identify the app in the server
+      "version": "1.0.0" // Used to check for updates
     }
   }
 }
