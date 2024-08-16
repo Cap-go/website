@@ -26,8 +26,6 @@ New way: Use the `version` field in your `capacitor.config.json` file.
   "webDir": "www",
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": true,
-      "disableAutoUpdateBreaking": false,
       "version": "1.0.0"
     }
   }
