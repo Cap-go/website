@@ -13,7 +13,7 @@ All command should be run in your app folder with capacitor project ignited. See
 
 ### **Init**
 
-`npx @capgo/cli init [apikey]`
+`npx @capgo/cli@latest init [apikey]`
 
 This method is here to onboard you step by step.
 

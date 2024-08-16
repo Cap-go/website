@@ -39,8 +39,12 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Getting Started',
+          label: 'Home',
           link: '/docs/',
+        },
+        {
+          label: 'Getting Started',
+          link: '/docs/getting-started/',
         },
         {
           label: 'How To',
