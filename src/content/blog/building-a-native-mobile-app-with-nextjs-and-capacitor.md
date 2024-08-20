@@ -399,6 +399,8 @@ To take your Next.js and Capacitor app to the next level, consider exploring [Ca
 
 By following the best practices and techniques outlined in this guide, you'll be well-equipped to build stunning native mobile apps using Next.js and Capacitor.
 
+If you need expert assistance, you can [hire a Next.js developer](https://www.toptal.com/next-js) from Toptal to ensure your project is built correctly.
+
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
