@@ -384,10 +384,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 16
+      - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: npm
       - name: Install dependencies
         id: install_code

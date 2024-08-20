@@ -57,28 +57,49 @@ Fastlane
 ```ruby
 default_platform(:android)
 
-KEYSTORE_PATH = ENV["KEYSTORE_PATH"]
 KEYSTORE_KEY_ALIAS = ENV["KEYSTORE_KEY_ALIAS"]
 KEYSTORE_KEY_PASSWORD = ENV["KEYSTORE_KEY_PASSWORD"]
 KEYSTORE_STORE_PASSWORD = ENV["KEYSTORE_STORE_PASSWORD"]
-ANDROID_JSON_KEY_FILE = ENV['ANDROID_JSON_KEY_FILE']
 
 platform :android do
     desc "Deploy a beta version to the Google Play"
+    private_lane :verify_changelog_exists do |version_code: |
+      changelog_path = "android/metadata/en-US/changelogs/#{version_code}.txt"
+      UI.user_error!("Missing changelog file at #{changelog_path}") unless File.exist?(changelog_path)
+      UI.message("Changelog exists for version code #{version_code}")
+    end
+
+    private_lane :verify_upload_to_staging do |version_name: |
+      UI.message "Skipping staging verification step"
+    end
     lane :beta do
+				keystore_path = "#{Dir.tmpdir}/build_keystore.keystore"
+				File.write(keystore_path, Base64.decode64(ENV['ANDROID_KEYSTORE_FILE']))
+				json_key_data = Base64.decode64(ENV['PLAY_CONFIG_JSON'])
+				previous_build_number = google_play_track_version_codes(
+					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
+					track: "internal",
+					json_key_data: json_key_data,
+				)[0]
+
+				current_build_number = previous_build_number + 1
+				sh("export NEW_BUILD_NUMBER=#{current_build_number}")
         gradle(
           task: "clean bundleRelease",
           project_dir: 'android/',
           print_command: false,
           properties: {
-            "android.injected.signing.store.file" => "#{KEYSTORE_PATH}",
+            "android.injected.signing.store.file" => "#{keystore_path}",
             "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
             "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
             "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
+						'versionCode' => current_build_number
           })
         upload_to_play_store(
-          json_key: ANDROID_JSON_KEY_FILE,
-          track: 'beta',
+					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
+					json_key_data: json_key_data,
+          track: 'internal',
+          release_status: 'completed',
           skip_upload_metadata: true,
           skip_upload_changelogs: true,
           skip_upload_images: true,
@@ -91,7 +112,7 @@ platform :android do
         project_dir: 'android/',
         print_command: false,
         properties: {
-          "android.injected.signing.store.file" => "#{KEYSTORE_PATH}",
+          "android.injected.signing.store.file" => "#{keystore_path}",
           "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
           "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
           "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
@@ -102,7 +123,7 @@ platform :android do
 
       verify_changelog_exists(version_code: build_gradle.match(/versionCode (\d+)/)[1])
       verify_upload_to_staging(version_name: build_gradle.match(/versionName '([\d\.]+)'/)[1])
-  
+
       supply(
         track_promote_to: 'beta',
         skip_upload_apk: true,
@@ -114,12 +135,6 @@ platform :android do
       )
     end
 end
-```
-
-Appfile
-```ruby
-json_key_file(ENV["ANDROID_JSON_KEY_FILE"])
-package_name(ENV['DEVELOPER_PACKAGE_NAME'])
 ```
 
 ## Storing your secrets in GitHub encrypted secrets
@@ -219,10 +234,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 16
+      - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: npm
       - name: Install dependencies
         id: install_code
@@ -242,26 +257,18 @@ jobs:
         id: sync_code
         run: npx cap sync
       - name: Setup java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          distribution: zulu
-          java-version: '11'
-      - name: Decode Keystore File
-        uses: timheuer/base64-to-file@v1
-        id: android_keystore
+            distribution: 'zulu'
+            java-version: '17'
+      - uses: ruby/setup-ruby@v1
         with:
-          fileName: android_keystore.keystore
-          encodedString: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-      - name: Decode Google Play Confi File
-        uses: timheuer/base64-to-file@v1
-        id: service_account_json_file
-        with:
-          fileName: serviceAccount.json
-          encodedString: ${{ secrets.PLAY_CONFIG_JSON }}
-      - uses: maierj/fastlane-action@v2.3.0
+          ruby-version: '3.0'
+          bundler-cache: true
+      - uses: maierj/fastlane-action@v3.1.0
         env:
-          KEYSTORE_PATH: ${{ steps.android_keystore.outputs.filePath }}
-          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
           DEVELOPER_PACKAGE_NAME: ${{ secrets.DEVELOPER_PACKAGE_NAME }}
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
@@ -273,7 +280,7 @@ jobs:
         with:
           name: android-release
           path: ./android/app/build/outputs/bundle/release/app-release.aab
-          retention-days: 60
+          retention-days: 10
 ```
 
 This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/)

@@ -41,28 +41,49 @@ Fastlane
 ```ruby
 default_platform(:android)
 
-KEYSTORE_PATH = ENV["KEYSTORE_PATH"]
 KEYSTORE_KEY_ALIAS = ENV["KEYSTORE_KEY_ALIAS"]
 KEYSTORE_KEY_PASSWORD = ENV["KEYSTORE_KEY_PASSWORD"]
 KEYSTORE_STORE_PASSWORD = ENV["KEYSTORE_STORE_PASSWORD"]
-ANDROID_JSON_KEY_FILE = ENV['ANDROID_JSON_KEY_FILE']
 
 platform :android do
     desc "Deploy a beta version to the Google Play"
+    private_lane :verify_changelog_exists do |version_code: |
+      changelog_path = "android/metadata/en-US/changelogs/#{version_code}.txt"
+      UI.user_error!("Missing changelog file at #{changelog_path}") unless File.exist?(changelog_path)
+      UI.message("Changelog exists for version code #{version_code}")
+    end
+
+    private_lane :verify_upload_to_staging do |version_name: |
+      UI.message "Skipping staging verification step"
+    end
     lane :beta do
+				keystore_path = "#{Dir.tmpdir}/build_keystore.keystore"
+				File.write(keystore_path, Base64.decode64(ENV['ANDROID_KEYSTORE_FILE']))
+				json_key_data = Base64.decode64(ENV['PLAY_CONFIG_JSON'])
+				previous_build_number = google_play_track_version_codes(
+					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
+					track: "internal",
+					json_key_data: json_key_data,
+				)[0]
+
+				current_build_number = previous_build_number + 1
+				sh("export NEW_BUILD_NUMBER=#{current_build_number}")
         gradle(
           task: "clean bundleRelease",
           project_dir: 'android/',
           print_command: false,
           properties: {
-            "android.injected.signing.store.file" => "#{KEYSTORE_PATH}",
+            "android.injected.signing.store.file" => "#{keystore_path}",
             "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
             "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
             "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
+						'versionCode' => current_build_number
           })
         upload_to_play_store(
-          json_key: ANDROID_JSON_KEY_FILE,
-          track: 'beta',
+					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
+					json_key_data: json_key_data,
+          track: 'internal',
+          release_status: 'completed',
           skip_upload_metadata: true,
           skip_upload_changelogs: true,
           skip_upload_images: true,
@@ -75,7 +96,7 @@ platform :android do
         project_dir: 'android/',
         print_command: false,
         properties: {
-          "android.injected.signing.store.file" => "#{KEYSTORE_PATH}",
+          "android.injected.signing.store.file" => "#{keystore_path}",
           "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
           "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
           "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
@@ -86,7 +107,7 @@ platform :android do
 
       verify_changelog_exists(version_code: build_gradle.match(/versionCode (\d+)/)[1])
       verify_upload_to_staging(version_name: build_gradle.match(/versionName '([\d\.]+)'/)[1])
-  
+
       supply(
         track_promote_to: 'beta',
         skip_upload_apk: true,
@@ -98,12 +119,6 @@ platform :android do
       )
     end
 end
-```
-
-Appfile
-```ruby
-json_key_file(ENV["ANDROID_JSON_KEY_FILE"])
-package_name(ENV['DEVELOPER_PACKAGE_NAME'])
 ```
 
 ### Storing Your Secrets in GitLab CI/CD Variables
@@ -179,8 +194,6 @@ build_and_upload_android:
   script:
     - npx cap sync android
     - npx cap copy android
-    - echo $ANDROID_KEYSTORE_FILE | base64 --decode > android_keystore.keystore
-    - echo $PLAY_CONFIG_JSON | base64 --decode > serviceAccount.json
     - bundle exec fastlane android beta # We do create a tag for the build to trigger XCode cloud builds
   dependencies:
     - build

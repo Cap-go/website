@@ -91,7 +91,7 @@ Create a file at this path: `.github/workflows/build.yml`
 
 with this content:
 
-```toml
+```yml
 name: Build source code and send to Capgo
 
 on:
