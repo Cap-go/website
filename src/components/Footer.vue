@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
 import { useRuntimeConfig } from '../config/app'
-import { openMessenger } from '../services/chatwoot'
+import { openMessenger } from '../services/bento'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand

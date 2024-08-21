@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import { useRuntimeConfig } from '../config/app'
-import { chatLoader } from '../services/chatwoot'
+import { chatLoader } from '../services/bento'
 import Testimonials from '../components/Testimonials.vue'
 import dayjs from 'dayjs'
 
