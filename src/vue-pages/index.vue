@@ -2,6 +2,8 @@
 import { onMounted, reactive } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
+import { posthogLoader } from '../services/posthog'
+
 import Testimonials from '../components/Testimonials.vue'
 import dayjs from 'dayjs'
 
@@ -9,6 +11,7 @@ const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 
 onMounted(() => {
+  posthogLoader()
   chatLoader()
 })
 
@@ -19,17 +22,17 @@ function shortNumber(number: number) {
 }
 
 const stats = reactive({
-  apps: shortNumber(850),
-  updates: shortNumber(14593631),
-  stars: shortNumber(455),
+  apps: shortNumber(1400),
+  updates: shortNumber(947593631),
+  stars: shortNumber(499),
 })
 
 fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   if (res.ok) {
     res.json().then((data) => {
-      stats.apps = shortNumber(data.apps ?? shortNumber(850))
-      stats.updates = shortNumber(data.updates ?? shortNumber(14593631))
-      stats.stars = shortNumber(data.stars ?? shortNumber(455))
+      stats.apps = shortNumber(data.apps ?? shortNumber(1400))
+      stats.updates = shortNumber(data.updates ?? shortNumber(947593631))
+      stats.stars = shortNumber(data.stars ?? shortNumber(499))
     })
   }
 })
