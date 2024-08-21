@@ -6,6 +6,7 @@ import "posthog-js/dist/tracing-headers"
 import "posthog-js/dist/web-vitals"
 
 export function posthogLoader() {
+  console.log('Load posthog')
   posthog.init('phc_NXDyDajQaTQVwb25DEhIVZfxVUn4R0Y348Z7vWYHZUi', { 
     api_host: 'https://eu.i.posthog.com',
     person_profiles: 'identified_only',
