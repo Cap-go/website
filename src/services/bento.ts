@@ -1,6 +1,7 @@
 
 declare global {
   interface Window {
+    $bentoChat: any
     bentoChatSDK: any
     bento$: any
     bento: any
@@ -100,6 +101,6 @@ export function setUser(uuid: string, data: {
 
 export function reset(): void {
   chatLoader(() => {
-    // window.$chatwoot.reset()
+    window.$bentoChat.reset()
   })
 }
