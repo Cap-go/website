@@ -27,6 +27,13 @@ CapacitorScreenRecorder.stop();
 ```
 
 That's it! You can now record the screen of your device using the Capacitor Screen Recorder plugin.
+## Android
+
+Add this permissions
+```xml
+  <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+```
 
 ## Compatibility
 This plugin is compatible with Capacitor 4 and above.
