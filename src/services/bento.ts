@@ -22,7 +22,6 @@ export function bentoLoader(cb?: () => void) {
     return
   }
   localStorage.setItem('bento:loading', 'true')
-  console.log('Load bento')
   const d = document
   const t = 'script'
   const BASE_URL = 'https://app.bentonow.com/918a8522e8fff769da1bab1b3bbcbd01.js'
@@ -101,9 +100,7 @@ export function chatLoader(cb?: () => void) {
 }
 
 export function openMessenger() {
-  console.log('openMessenger')
   chatLoader(() => {
-    console.log('openChat')
     //  edit css woot--bubble-holder display (display: none !important;) attribute to remove it
     const bubbleHolder = document.querySelector('.woot--bubble-holder') as HTMLElement
     if (bubbleHolder) {
@@ -125,7 +122,6 @@ export function setUser(uuid: string, data: {
   email?: string
   avatar?: string
 }): void {
-  // console.log('setUser')
   chatLoader(() => {
     window.bento.identify(data.email)
     window.bento.updateFields({ name: data.nickname, avatar_url: data.avatar })
