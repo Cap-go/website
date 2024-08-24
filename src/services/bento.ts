@@ -106,6 +106,7 @@ export function openMessenger() {
     if (bubbleHolder) {
       bubbleHolder.style.setProperty('display', 'block')
     }
+    window.bento.showChat()
     window.bento.openChat()
   })
 }
