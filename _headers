@@ -1,7 +1,13 @@
+/assets/*
+  cache-control: max-age=31536000
+  cache-control: immutable
+
 /sitemap.xml
-    Content-Type: text/xml
+  Content-Type: text/xml
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none';
