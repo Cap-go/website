@@ -5,7 +5,7 @@ description: Using RSA + AES cryptography to encrypt updates, designed for the e
 author: Martin Donadieu
 author_url: https://x.com/martindonadieu
 created_at: 2022-11-27
-updated_at: 2023-06-29
+updated_at: 2024-08-27
 head_image: "/secure_upload.webp"
 head_image_alt: Secure upload Capgo
 tag: Solution
@@ -52,15 +52,21 @@ Here is a simple* schema to explain how it works:
 - Cypher: The encrypted data.
 - Session key: An AES key used to encrypt and decrypt data.
 
-We use AES to encrypt the update and RSA to encrypt the AES key. The AES key is encrypted with the public key of the developer. The developer’s private key is used to decrypt the AES key and decrypt the update.
+We use AES to encrypt the update and RSA to encrypt the AES key and checksum. The AES key and checksum are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the checksum and then decrypt the update with AES.
 
-We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key.
+We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and checksum.
 
-With this, Capgo cannot even read the content of your bundle, it can only verify the integrity of the bundle. This is a strong security model that is used by many enterprise customers.
+With this, Capgo cannot even read the content of your bundle. This is a strong security model that is used by many enterprise customers.
+
+Update encryption V2 2024-08-27:
+- We reverted what key is stored in the app, to prevent inferring the key from private key stored in the app.
+- We upgraded checksum from crc32 to signing with sha256 and enforced it when encryption V2 is set.
+- We now encrypt the new signing with RSA when encryption V2 is set.
+These 3 changes have been done after security analysis and are here to prevent MITM attacks during update.
 
 With end-to-end code signing, Capgo becomes a “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
 
-While web-level HTTPS is sufficient for many Ionic apps, some large companies find the extra level of security from end-to-end code signing appealing. Some of these companies make finance apps that issue high-value, permanent transactions. Other companies have CISOs who include compromised cloud infrastructure in their threat models. We built end-to-end code signing in to Capgo for these use cases and are interested in hearing more from companies with higher-level security needs.
+While web-level HTTPS is sufficient for many apps, some large companies find the extra level of security from end-to-end code signing appealing. Some of these companies make finance apps that issue high-value, permanent transactions. Other companies have CISOs who include compromised cloud infrastructure in their threat models. We built end-to-end code signing in to Capgo for these use cases and are interested in hearing more from companies with higher-level security needs.
 
 ## Getting started for enterprise customers
 
@@ -70,7 +76,7 @@ For large companies or projects who care deeply about security, we want to make 
 -   Support for code signing development servers with both Capgo and development builds
 -   Production code signing on every update
 
-Capgo code signing is available for all customers. To get started, follow the [setup instructions](/docs/tooling/cli/#end-to-end-encryption-trustless).
+Capgo code signing is available for all customers. To get started, follow the [setup instructions](/docs/cli/commands/#end-to-end-encryption-trustless).
 
 ## Credits
 
