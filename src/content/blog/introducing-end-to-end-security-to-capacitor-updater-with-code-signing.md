@@ -42,7 +42,7 @@ Capgo’s end-to-end code signing uses public-key cryptography to ensure end use
 
 Here is a simple* schema to explain how it works:
 
-![Capgo encryption schema](/ecryption_flow.webp)
+![Capgo encryption schema](/encryption_flow.webp)
 
 * Complex in practice, cryptography is hard
 

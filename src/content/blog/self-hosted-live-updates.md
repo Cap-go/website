@@ -26,7 +26,7 @@ Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://gi
 
 To ensure a safe and coordinated delivery of the latest web build artifacts to end-users, Capgo now allows the Capacitor Live Updates plugin to employ a public/private key pairing. When using Self-hosted Live Updates, an additional handshake is performed to provide reassurance that the artifacts downloaded via the plugin from the enterprise's infrastructure are unmodified.
 
-![Capgo encryption schema](/ecryption_flow.webp)
+![Capgo encryption schema](/encryption_flow.webp)
 
 The following outlines the steps to establish the key pairing and the subsequent process for delivering the updated experience to end-users.
 
