@@ -52,15 +52,15 @@ Here is a simple* schema to explain how it works:
 - Cypher: The encrypted data.
 - Session key: An AES key used to encrypt and decrypt data.
 
-We use AES to encrypt the update and RSA to encrypt the AES key and checksum. The AES key and checksum are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the checksum and then decrypt the update with AES.
+We use AES to encrypt the update and RSA to encrypt the AES key and signature. The AES key and signature are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the signature and then decrypt the update with AES.
 
-We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and checksum.
+We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and signature.
 
 With this, Capgo cannot even read the content of your bundle. This is a strong security model that is used by many enterprise customers.
 
 Update encryption V2 2024-08-27:
 - We reverted what key is stored in the app, to prevent inferring the key from private key stored in the app.
-- We upgraded checksum from crc32 to signing with sha256 and enforced it when encryption V2 is set.
+- We moved checksum from crc32 to Signing with sha256 and enforced it when encryption V2 is set.
 - We now encrypt the new signing with RSA when encryption V2 is set.
 These 3 changes have been done after security analysis and are here to prevent MITM attacks during update.
 
