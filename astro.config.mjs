@@ -111,11 +111,6 @@ export default defineConfig({
           collapsed: true,
           items: [
             { label: 'Endpoints', link: '/docs/public-api/endpoints' },
-            {
-              label: 'Migrations',
-              collapsed: true,
-              autogenerate: { directory: 'docs/upgrade' },
-            },
           ]
         },
         {
