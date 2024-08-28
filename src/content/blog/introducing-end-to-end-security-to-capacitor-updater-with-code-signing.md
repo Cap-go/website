@@ -64,6 +64,8 @@ With this, Capgo cannot even read the content of your bundle. This is a strong s
 - We now encrypt the new signing with RSA when encryption V2 is set.
 These 3 changes have been done after security analysis and are here to prevent MITM attacks during update.
 
+If you used encryption V1, migrate to V2 to benefit from the new security features. Follow the [migration instructions](/docs/cli/migrations/encryption/).
+
 With end-to-end code signing, Capgo becomes a “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
 
 While web-level HTTPS is sufficient for many apps, some large companies find the extra level of security from end-to-end code signing appealing. Some of these companies make finance apps that issue high-value, permanent transactions. Other companies have CISOs who include compromised cloud infrastructure in their threat models. We built end-to-end code signing in to Capgo for these use cases and are interested in hearing more from companies with higher-level security needs.
