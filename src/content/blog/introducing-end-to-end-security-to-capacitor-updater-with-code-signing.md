@@ -52,15 +52,15 @@ Here is a simple* schema to explain how it works:
 - Cypher: The encrypted data.
 - Session key: An AES key used to encrypt and decrypt data.
 
-We use AES to encrypt the update and RSA to encrypt the AES key and signature. The AES key and signature are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the signature and then decrypt the update with AES.
+We use the AES algorithm to encrypt the update. A random AES key is generated for every upload, then the AES key and checksum (hereafter "signature") are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the signature (converting it back to a checksum). Later, the decrypted AES key is used to decrypt the update; a checksum of the decrypted update is calculated, and it is compared with the decrypted signature.
 
 We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and signature.
 
 With this, Capgo cannot even read the content of your bundle. This is a strong security model that is used by many enterprise customers.
 
-Update encryption V2 2024-08-27:
+**Update encryption V2 2024-08-27:**
 - We reverted what key is stored in the app, to prevent inferring the key from private key stored in the app.
-- We moved checksum from crc32 to Signing with sha256 and enforced it when encryption V2 is set.
+- We switched the checksum from the CRC32 algorithm to the SHA256 algorithm. We also started [signing the checksum with an RSA key](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages). When encryption V2 is configured, an update must have a valid signature. This is strictly enforced by the plugin.
 - We now encrypt the new signing with RSA when encryption V2 is set.
 These 3 changes have been done after security analysis and are here to prevent MITM attacks during update.
 
