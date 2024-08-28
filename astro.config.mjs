@@ -102,7 +102,7 @@ export default defineConfig({
             {
               label: 'Migrations',
               collapsed: true,
-              autogenerate: { directory: 'docs/upgrade' },
+              autogenerate: { directory: 'docs/cli/migrations' },
             },
           ]
         },
