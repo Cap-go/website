@@ -51,18 +51,20 @@ Here is a simple* schema to explain how it works:
 - RSA: Rivest–Shamir–Adleman, an asymmetric encryption algorithm, two keys are used: a public key and a private key.
 - Cypher: The encrypted data.
 - Session key: An AES key used to encrypt and decrypt data.
+- Checksum: A hash calculated for a file
+- Signature: A checksum that was encrypted with a private RSA key. It can be verified with a public RSA key 
 
-We use the AES algorithm to encrypt the update. A random AES key is generated for every upload, then the AES key and checksum (hereafter "signature") are encrypted with the private key of the developer. The developer’s public key is used in the app to decrypt the AES key and the signature (converting it back to a checksum). Later, the decrypted AES key is used to decrypt the update; a checksum of the decrypted update is calculated, and it is compared with the decrypted signature.
+We use the AES algorithm to encrypt the update. A random AES key is generated for every upload, then the AES key and checksum (hereafter "signature") are encrypted with the private RSA key of the developer. The developer’s public RSA key is used in the app to decrypt the AES key and the signature (converting it back to a checksum). Later, the decrypted AES key is used to decrypt the update; a checksum of the decrypted update is calculated, and it is compared with the decrypted signature.
 
-We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and signature.
+We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and the checksum.
 
-With this, Capgo cannot even read the content of your bundle. This is a strong security model that is used by many enterprise customers.
+With this, even Capgo cannot read the content of your bundle. This is a robust security model that is used by many enterprise customers.
 
 **Update encryption V2 2024-08-27:**
-- We reverted what key is stored in the app, to prevent inferring the key from private key stored in the app.
-- We switched the checksum from the CRC32 algorithm to the SHA256 algorithm. We also started [signing the checksum with an RSA key](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages). When encryption V2 is configured, an update must have a valid signature. This is strictly enforced by the plugin.
-- We now encrypt the new signing with RSA when encryption V2 is set.
-These 3 changes have been done after security analysis and are here to prevent MITM attacks during update.
+- We switched the key type that is stored in the app. This was done in order to prevent inferring the public key (previously used for encryption) from the private key (previously used for decryption). Now, the app stores the public key (now used for decryption).
+- We switched the checksum from the CRC32 algorithm to the SHA256 algorithm. We also started [signing the bundle](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages). When encryption V2 is configured, an update must have a valid signature. This is strictly enforced by the plugin.
+- We now enforce a valid signature encryption V2 is configured.
+These 3 changes have been done after a security analysis from a member of the community. They are here to prevent cryptographic attacks during update.
 
 If you used encryption V1, migrate to V2 to benefit from the new security features. Follow the [migration instructions](/docs/cli/migrations/encryption/).
 
