@@ -7,6 +7,8 @@ sidebar:
 
 This documentation will explain how to encrypt your data with the new encryption system and remove the old one.
 
+Learn more about the new encryption system in the [blog post](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing).
+
 First create a new key pair with the following command:
 
 ```bash
