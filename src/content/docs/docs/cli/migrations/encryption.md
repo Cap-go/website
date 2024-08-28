@@ -15,7 +15,7 @@ First create a new key pair with the following command:
 npx @capgo/cli key create
 ```
 
-This command will create a new key pair in your app, and will ask you to save the private key in a safe place. It's recommended to not git commit the private and public key, and to not share it with anyone.
+This command will create a new key pair in your app, and will ask you to save the private key in a safe place. It's recommended to not git commit the private key, and to not share it with anyone.
 
 This command will also remove the old key from your app. But will not remove the old key file, we will keep them to allow you still send live update for the old apps and make it easier to migrate.
 
