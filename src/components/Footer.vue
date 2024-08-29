@@ -45,7 +45,7 @@ const navigation = {
     },
   ],
   company: [
-    // { name: 'About', href: '#' },
+    { name: 'About', href: '/about/' },
     { name: 'Imprint', href: '/imprint/' },
     { name: 'Jobs', href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: 'Contributing', href: '/contributing/' },

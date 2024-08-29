@@ -3,6 +3,8 @@ import { onMounted, reactive } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
 import { posthogLoader } from '../services/posthog'
+import Orgs from '../components/Orgs.vue'
+import CIExpert from '../components/CIExpert.vue'
 
 import Testimonials from '../components/Testimonials.vue'
 import dayjs from 'dayjs'
@@ -424,84 +426,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       </div>
     </section>
     <Testimonials />
-    <section class="bg-gray-50">
-      <div class="flex flex-col items-center justify-center min-h-screen py-12 bg-gray-50">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-sm font-semibold tracking-wider text-blue-600 uppercase">Streamlined CI/CD Setup</h2>
-          <h1 class="mt-2 text-4xl font-extrabold leading-tight text-gray-900">Optimize Your Mobile App Development <br>
-            with Expert CI/CD Configuration</h1>
-          <p class="mt-4 text-lg text-gray-600">We don't host CI/CD - we empower you to use your existing tools more
-            effectively. Our experts configure your CI/CD pipeline directly in your preferred platform, whether it's
-            GitHub Actions, GitLab CI, or others.</p>
-          <div class="flex mt-8 space-x-8">
-            <div class="flex-1">
-              <div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="w-10 h-10 text-blue-600">
-                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
-                </svg>
-                <h3 class="text-lg font-medium text-gray-900">Seamless Integration</h3>
-              </div>
-              <p class="mt-2 text-gray-600">We set up your CI/CD workflow to work seamlessly with your current
-                development process. No need to switch platforms or learn new tools.</p>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="w-10 h-10 text-blue-600">
-                  <path
-                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
-                  </path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <h3 class="text-lg font-medium text-gray-900">Tailored Configuration</h3>
-              </div>
-              <p class="mt-2 text-gray-600">Our team customizes the CI/CD setup to match your specific project
-                requirements, ensuring optimal performance and efficiency.</p>
-            </div>
-          </div>
-          <div class="flex mt-8 space-x-8">
-            <div class="flex-1">
-              <div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="w-10 h-10 text-blue-600">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                  <path d="M2 12h20"></path>
-                </svg>
-                <h3 class="text-lg font-medium text-gray-900">Platform Independence</h3>
-              </div>
-              <p class="mt-2 text-gray-600">Whether you use GitHub, GitLab, or another version control system, we adapt
-                our configuration to fit your existing infrastructure.</p>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="w-10 h-10 text-blue-600">
-                  <path
-                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
-                  </path>
-                  <path d="M9 18h6"></path>
-                  <path d="M10 22h4"></path>
-                </svg>
-                <h3 class="text-lg font-medium text-gray-900">Expert Guidance</h3>
-              </div>
-              <p class="mt-2 text-gray-600">Benefit from our deep expertise in mobile app CI/CD best practices, without
-                the need to build and maintain a complex system yourself.</p>
-            </div>
-          </div>
-          <div class="mt-8"><a href="https://cal.com/martindonadieu/mobile-ci-cd-done-for-you"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 underline-offset-4 hover:underline h-10 px-4 py-2 text-blue-600">Ready
-              to optimize your CI/CD setup? Get started now →</a></div>
-          <div class="mt-8" data-id="31">
-            <h2 class="text-lg font-semibold text-gray-900" data-id="32">Pricing</h2>
-            <p class="mt-2 text-gray-600" data-id="33">Setup fee, then running your CI/CD is 1/10th of the cost compared to AppFlow, making our
-              service an affordable and cost-effective solution for your mobile app development needs.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="relative mt-24 sm:mt-32 sm:py-16">
+    <Orgs/>
+    <CIExpert/>
+    <div class="relative mt-14 sm:mt-24 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-800 rounded-r-3xl" />
         <svg class="absolute top-8 left-1/2 -ml-3" width="404" height="392" fill="none" viewBox="0 0 404 392">
@@ -514,7 +441,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <rect width="404" height="392" fill="url(#8228f071-bcee-4ec8-905a-2a059a2cc4fb)" />
         </svg>
       </div>
-      <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="mx-auto max-w-md px-4 pb-3 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="relative rounded-2xl px-6 py-10 bg-gray-700 overflow-hidden shadow-xl sm:px-12 sm:py-20">
           <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
             <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice"

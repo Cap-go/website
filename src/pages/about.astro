@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { useRuntimeConfig } from '../config/app'
+import About from '../vue-pages/About.vue'
+
+const config = useRuntimeConfig()
+
+const brand = config.public.brand
+const description =
+  'About Capgo'
+
+const content = {
+  description,
+  title: `${brand} | About Capgo`,
+  image: `${config.public.baseUrl}/app_demo.webp`,
+}
+---
+
+<Layout content={content}><About client:load /></Layout>
