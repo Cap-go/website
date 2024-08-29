@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto py-8 px-4 md:px-0 bg-[#0f1115] text-[#a1a1aa] rounded-lg shadow-lg">
+  <div class="max-w-7xl mx-auto py-8 px-4 md:px-0 text-[#a1a1aa] rounded-lg shadow-lg">
     <div class="flex flex-col md:flex-row items-start gap-8">
       <img 
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3955-fuMcHsWcv0dSt0hQHSRwgImrrjXtGA.JPG" 
