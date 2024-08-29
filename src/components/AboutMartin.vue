@@ -4,10 +4,10 @@
       <img 
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3955-fuMcHsWcv0dSt0hQHSRwgImrrjXtGA.JPG" 
         alt="Martin Donadieu on a motorcycle with a rainbow in the background" 
-        class="w-full md:w-96 h-auto rounded-lg object-cover mx-auto md:mx-0"
+        class="w-3/4 md:w-144 h-auto rounded-lg object-cover mx-auto md:mx-0"
       />
       <div class="flex-1 space-y-4">
-        <p class="text-white"><span class="font-bold">👋 Hi there! I'm Martin Donadieu</span></p>
+        <p class="text-white text-2xl"><span class="font-bold">👋 Hi there! I'm Martin Donadieu</span></p>
 
         <p>🇫🇷 I'm a French software engineer<br/> living my best life on the beautiful island of Madeira, Portugal 🏝️. <br/>I made Capgo with passion to empower developers like you.</p>
 
