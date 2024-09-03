@@ -94,7 +94,7 @@
           href="https://cal.com/martindonadieu/mobile-ci-cd-done-for-you"
           class="inline-flex items-center justify-center px-6 py-3 mt-8 text-lg font-medium text-white bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
         >
-          Consult us now →
+          Setup CI/CD now →
         </a>
       </div>
     </div>
