@@ -309,3 +309,15 @@ The privacy rules are enforced by Apple and Google, and are not enforced by Capg
 
 Device ID will not be listed in your device list until they get they first patch installed.
 
+# Why my device number is different than my MAU?[](https://capgo.app/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
+
+Currently, the device list is not updated as often as the MAU.
+
+The device list is updated only when a device installs an update.
+
+While the MAU is updated at every app launch. This is a current limitation of the platform. Our Analytics platform do not support raw updates so we use conventional database for Devices list.
+
+To limit the number of database queries, we do update row only on app update.
+
+This limitation will be removed in the future.
+

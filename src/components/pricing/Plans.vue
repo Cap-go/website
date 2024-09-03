@@ -61,7 +61,7 @@ function descToEmoji(desc: string) {
 
 <template>
   <section id="plans">
-    <div class="grid grid-cols-1 mt-6 lg:grid-cols-3 lg:gap-8 sm:mt-8 lg:mt-10">
+    <div class="grid grid-cols-1 mt-6 lg:grid-cols-3 lg:gap-8 sm:mt-8 lg:mt-10 space-y-14 sm:space-y-0">
       <div
         v-for="plan in props.pricing"
         :key="plan.name"
@@ -69,7 +69,7 @@ function descToEmoji(desc: string) {
           'border-blue-600 divide-blue-200': plan.name === 'Maker',
           'border-gray-200 divide-gray-200': plan.name !== 'Maker',
         }"
-        class="mt-6 relative shadow-xl bg-white border divide-y divide-gray-200 rounded-2xl sm:rounded-3xl lg:mt-0"
+        class="relative shadow-xl bg-white border divide-y divide-gray-200 rounded-2xl sm:rounded-3xl"
       >
         <div v-if="plan.name === 'Maker'" class="absolute top-0 right-0 flex items-start -mt-8">
           <svg class="w-auto h-16 text-blue-600" viewBox="0 0 83 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
