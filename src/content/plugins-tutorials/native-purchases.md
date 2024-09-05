@@ -7,7 +7,7 @@ The @capgo/native-purchases package is a plugin for Capacitor that provides easy
 To install the @capgo/native-purchases package, open your terminal and run the following command:
 
 ```bash
-npm install native-purchases
+npm install @capgo/native-purchases
 npx cap sync
 ```
 
