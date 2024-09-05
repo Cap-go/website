@@ -76,7 +76,7 @@ export const actions = [
     name: '@capgo/capacitor-uploader',
     author: 'github.com/riderx',
     description: 'Background Uploader for capacitor apps',
-    href: 'https://github.com/Cap-go/uploader/',
+    href: 'https://github.com/Cap-go/capacitor-uploader/',
     title: 'Uploader',
     icon: ArrowUpOnSquareIcon,
   },
