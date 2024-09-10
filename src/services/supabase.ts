@@ -35,7 +35,6 @@ export async function getRemoteConfig() {
       return localConfig as CapgoConfig
     })
   config = data
-  console.log('getRemoteConfig', data)
   return data
 }
 
