@@ -10,7 +10,7 @@ const brand = config.public.brand
 <template>
   <section class="relative pt-12 bg-gray-900 sm:pt-16 lg:pt-20">
     <div class="absolute inset-0 overflow-hidden">
-      <img class="object-cover object-top w-full h-full transform opacity-20 -translate-y-80" src="https://cdn.rareblocks.xyz/collection/clarity/images/features/6/background-pattern.png" alt="" />
+      <img class="object-cover object-top w-full h-full transform opacity-20 -translate-y-80" src="/background-pattern.webp" alt="" />
     </div>
 
     <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

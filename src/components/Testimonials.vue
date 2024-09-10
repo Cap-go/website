@@ -14,7 +14,7 @@ const tweets = ref([
     image: '/lincoln.webp',
     name: 'Lincoln Baxter',
     handle: 'lincolnthree',
-    message: 'The community needed this and  @Capgo  is doing something really important!',
+    message: 'The community needed this and @Capgo is doing something really important!',
   },
   {
     image: '/avatar-female-1.webp',
@@ -26,7 +26,7 @@ const tweets = ref([
     image: '/LevarBerry.webp',
     name: 'LeVar Berry',
     handle: 'levarberry',
-    message: 'Just cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out',
+    message: 'Cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out',
   },
   {
     image: '/mallats.webp',
@@ -46,14 +46,14 @@ const tweets = ref([
     name: 'jaythegeek',
     handle: 'jaythegeek',
     message:
-      'Just setup @Capgo and testing out this awesome replacement for @AppFlow!\n\n Thank you for the hard work, it has been easy so far. About to release to the app stores 🤞',
+      'Did setup @Capgo and testing out this awesome replacement for @AppFlow!\n\n Thank you for the hard work, it has been easy so far. About to release to the app stores 🤞',
   },
   {
     image: '/colenso.webp',
     name: 'colenso',
     handle: 'colenso',
     message:
-      "We just rolled out Capgo OTA updates in production for our user base of approx. 5000.\n\ We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo.",
+      "We rolled out Capgo OTA updates in production for our user base of +5000.\n\ We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo.",
   },
   {
     image: '/avatar-male-2.webp',
@@ -72,7 +72,7 @@ const tweets = ref([
     name: 'SP-CMingay',
     handle: 'SP-CMingay',
     message:
-      "I've just got self hosted updates working with very little work on my part! \n\nI've proposed with my bosses that we consider @Capgo app for automated updates as well so I will begin giving that a go now too.",
+      "I've got self hosted updates working with very little work on my part! \n\nI've proposed with my bosses that we consider @Capgo app for automated updates as well so I will begin giving that a go now too.",
   },
   {
     image: '/simon.webp',

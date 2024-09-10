@@ -10,10 +10,6 @@ export default defineConfig({
   compressHTML: true,
   site: `https://${config.base_domain.prod}`,
   redirects: {
-    '/register': {
-      status: 302,
-      destination: 'https://web.capgo.app/register/',
-    },
     '/docs/getting-started/': {
       status: 302,
       destination: '/docs/plugin/cloud-mode/getting-started/',
