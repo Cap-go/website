@@ -17,7 +17,7 @@ next_blog: ""
 In this tutorial, we will integrate push notifications in an Ionic Capacitor app using Firebase. You don't need a specific service for this, but you do need to configure several things beforehand. Firebase is an excellent choice since it's required for Android, and you can easily use it to send notifications without using the database.
 
 <div class="mx-auto" style="width: 50%;">
-  <img src="/push_demo.gif" alt="ionic capacitor push">
+  <video src="/push_demo.mov" alt="ionic capacitor push" autoplay loop muted>
 </div>
 
 

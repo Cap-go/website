@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^2.45.4",
     "astro": "^4.15.4",
     "astro-embed": "^0.7.2",
+    "caniuse-lite": "^1.0.30001660",
     "faiss-node": "^0.5.1",
     "ky": "^1.7.2",
     "langchain": "^0.1.37",
