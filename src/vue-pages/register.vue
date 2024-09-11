@@ -122,7 +122,7 @@
         </div>
       </div>
     </div>
-    <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <img class="object-cover object-top w-full h-full transform opacity-20" src="/background-pattern.webp" alt="" />
     </div>
   </section>
