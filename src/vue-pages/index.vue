@@ -6,7 +6,6 @@ import { posthogLoader } from '../services/posthog'
 import Orgs from '../components/Orgs.vue'
 import CIExpert from '../components/CIExpert.vue'
 import Testimonials from '../components/Testimonials.vue'
-import Sponsors from '../components/Sponsors.vue'
 import dayjs from 'dayjs'
 
 const config = useRuntimeConfig()
@@ -50,7 +49,6 @@ const fetchSponsors = async () => {
   }
 }
 
-const sponsors = await fetchSponsors()
 </script>
 
 <template>
@@ -483,6 +481,5 @@ const sponsors = await fetchSponsors()
         </div>
       </div>
     </div>
-    <Sponsors :sponsors="sponsors" />
   </div>
 </template>
