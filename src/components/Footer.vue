@@ -43,6 +43,9 @@ const navigation = {
       execute: openMessenger,
       rel: 'nofollow',
     },
+    {
+      name: 'Sponsors', href: '/sponsor/'
+    }
   ],
   company: [
     { name: 'About', href: '/about/' },

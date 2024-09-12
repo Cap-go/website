@@ -74,9 +74,21 @@ export const GET: APIRoute = async ({ params, request }) => {
     }
 
     const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
+    console.log(allSponsors)
+    const calculateTier = (sponsorship: any) => {
+      const tier = sponsorship.tier.monthlyPriceInDollars
+      if (tier >= 100) {
+        return 'platinum'
+      } else if (tier >= 50) {
+        return 'gold'
+      } else if (tier >= 25) {
+        return 'silver'
+      } else {
+        return 'baker'
+      }
+    }
 
     const sponsors = allSponsors
-      .filter((sponsorship) => sponsorship.isActive && sponsorship.tier.monthlyPriceInDollars >= 100)
       .map((sponsorship) => {
         const sponsor = sponsorship.sponsorEntity
         return {
@@ -84,6 +96,7 @@ export const GET: APIRoute = async ({ params, request }) => {
           name: sponsor.name || sponsor.login,
           imageUrl: sponsor.avatarUrl,
           url: sponsor.url,
+          tier: calculateTier(sponsorship)
         }
       })
 
