@@ -5,8 +5,8 @@ import { chatLoader } from '../services/bento'
 import { posthogLoader } from '../services/posthog'
 import Orgs from '../components/Orgs.vue'
 import CIExpert from '../components/CIExpert.vue'
-
 import Testimonials from '../components/Testimonials.vue'
+import Sponsors from '../components/Sponsors.vue'
 import dayjs from 'dayjs'
 
 const config = useRuntimeConfig()
@@ -38,6 +38,19 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     })
   }
 })
+
+const fetchSponsors = async () => {
+  try {
+    const response = await fetch('/sponsors.json')
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error fetching sponsors:', error)
+    return []
+  }
+}
+
+const sponsors = await fetchSponsors()
 </script>
 
 <template>
@@ -470,5 +483,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         </div>
       </div>
     </div>
+    <Sponsors :sponsors="sponsors" />
   </div>
 </template>
