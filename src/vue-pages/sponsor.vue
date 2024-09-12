@@ -8,7 +8,7 @@
         has made your life easier, please consider backing us.
       </p>
       <a
-        href="https://github.com/sponsors/Cap-go"
+        href="https://github.com/sponsors/riderx"
         class="inline-block bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors duration-300 mb-16"
       >
         Become a sponsor
@@ -90,7 +90,7 @@ const platinumSponsors = ref([])
 
 onMounted(async () => {
   const sponsors = await fetchSponsors()
-  console.log(sponsors)
+  console.log('sponsors', sponsors)
   bakerSponsors.value = sponsors.filter(sponsor => sponsor.tier === 'baker')
   silverSponsors.value = sponsors.filter(sponsor => sponsor.tier === 'silver')
   goldSponsors.value = sponsors.filter(sponsor => sponsor.tier === 'gold')

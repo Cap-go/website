@@ -74,7 +74,7 @@ export const GET: APIRoute = async ({ params, request }) => {
     }
 
     const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
-    console.log(allSponsors)
+    console.log('allSponsors', allSponsors)
     const calculateTier = (sponsorship: any) => {
       const tier = sponsorship.tier.monthlyPriceInDollars
       if (tier >= 100) {
