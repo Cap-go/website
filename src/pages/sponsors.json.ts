@@ -7,7 +7,6 @@ export const GET: APIRoute = async ({ params, request }) => {
     query {
       riderx: user(login: "riderx") {
         sponsorshipsAsMaintainer(first: 100) {
-          totalCount
           nodes {
             sponsorEntity {
               ... on User {
@@ -24,12 +23,14 @@ export const GET: APIRoute = async ({ params, request }) => {
               }
             }
             isActive
+            tier {
+              monthlyPriceInDollars
+            }
           }
         }
       }
       capgo: organization(login: "Cap-go") {
         sponsorshipsAsMaintainer(first: 100) {
-          totalCount
           nodes {
             sponsorEntity {
               ... on User {
@@ -46,6 +47,9 @@ export const GET: APIRoute = async ({ params, request }) => {
               }
             }
             isActive
+            tier {
+              monthlyPriceInDollars
+            }
           }
         }
       }
@@ -72,7 +76,7 @@ export const GET: APIRoute = async ({ params, request }) => {
     const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
 
     const sponsors = allSponsors
-      .filter((sponsorship) => sponsorship.isActive)
+      .filter((sponsorship) => sponsorship.isActive && sponsorship.tier.monthlyPriceInDollars >= 100)
       .map((sponsorship) => {
         const sponsor = sponsorship.sponsorEntity
         return {
