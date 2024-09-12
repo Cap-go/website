@@ -106,15 +106,14 @@
         <div class="bg-slate-800 p-4 flex items-center">
           <blockquote class="text-white">
             <p class="text-2xl font-bold mb-4">
-              We rolled out Capgo in 
-              <span class="bg-orange-500 text-white px-2 py-1 rounded-full">production</span> 
-              for our user base of +5000!<br/> After update, all our users are up to date
-              <span class="bg-orange-500 text-white px-2 py-1 rounded-full">within minutes</span>
+              We rolled out Capgo in production
+              for our user base of +5000!<br/> After update,
+              <span class="bg-orange-500 text-white px-2 py-1 rounded-full">users are up to date within minutes</span>
             </p>
             <div class="flex items-center mb-4">
             <img src="/avatar-male-2.webp" alt="User" class="w-12 h-12 rounded-full mr-4" />
             <div>
-              <cite class="font-bold text-white">jermaine</cite>
+              <cite class="font-bold text-white">Jermaine</cite>
               <p class="text-gray-400">Capgo User since 2023</p>
             </div>
           </div>
