@@ -31,7 +31,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <a
           href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
           target="_blank"
-          class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
+          class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-indigo-300 hover:bg-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
           style="
             transition: all 0.2s ease 0s;
             text-decoration: none;
@@ -64,7 +64,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
                 <div class="">Click & Boat</div>
                 <a
                   href="#"
-                  class="inline-block mt-3 max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
+                  class="inline-block mt-3 max-w-full font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
                   style="transition: all 0.2s ease 0s; text-decoration: none"
                   ><img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block max-w-full align-middle border-0 w-1/2"
                 /></a>
@@ -82,7 +82,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="pb-10 my-0 font-sans text-6xl font-bold text-center text-slate-900">
             Code review<br class="text-6xl text-center" style="line-height: 72px" />&amp;
-            <span class="text-6xl text-center text-teal-300" style="text-decoration: none; line-height: 72px">consulting</span>
+            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">consulting</span>
           </h2>
           <p class="mt-0 mb-24 text-slate-900">When it’s good to ask for Cordova and CapacitorJS consulting services:<br class="" /><br class="" /></p>
           <div class="md:grid mt-16 text-left" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
@@ -376,13 +376,13 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <div class="flex flex-col justify-center items-center text-center" style="padding-right: 3vw; padding-left: 3vw">
           <h2 class="relative pb-10 my-0 text-6xl font-medium text-white" style="line-height: 72px">
             Hire
-            <span class="text-teal-300" style="line-height: 72px">CapacitorJS</span>
+            <span class="text-indigo-600" style="line-height: 72px">CapacitorJS</span>
             Consultants
           </h2>
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
             target="_blank"
-            class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
+            class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-indigo-300 hover:bg-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
             style="
               transition: all 0.2s ease 0s;
               text-decoration: none;
@@ -443,7 +443,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
       <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
         <h2 class="pb-10 my-0 w-full text-6xl font-medium text-white" style="line-height: 72px">
           Why work
-          <span class="text-center text-teal-300" style="line-height: 72px">with us?</span>
+          <span class="text-center text-indigo-600" style="line-height: 72px">with us?</span>
         </h2>
       </div>
       <div class="md:grid grid-flow-row gap-6 leading-8 md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
@@ -461,7 +461,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               href="https://x.com/martindonadieu"
               target="_blank"
               title=" Capgo team"
-              class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
@@ -487,7 +487,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               href="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
               title="Cordova &amp; CapacitorJS projects"
-              class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
@@ -511,7 +511,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             <a
               href="/plugins/"
               title="Open source"
-              class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
@@ -536,7 +536,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
             <a
               href="https://capacitorjs.com/"
               title="Core contributors"
-              class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
@@ -563,7 +563,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <a
           href="/podcast-react-native-show"
           title="The CapacitorJS Show podcast"
-          class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+          class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
           style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
           >The CapacitorJS Show podcast</a
         >
@@ -584,7 +584,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <a
           href="https://www.react-native.eu/"
           title="CapacitorJS EU"
-          class="font-normal text-teal-300 cursor-pointer hover:font-normal hover:text-teal-300"
+          class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
           style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
           >CapacitorJS EU</a
         >
@@ -613,7 +613,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
               <div class="">CTO &amp; Co-founder @ WAYNIUM</div>
               <a
                 href="#"
-                class="inline-block max-w-full font-normal text-teal-300 bg-transparent cursor-pointer hover:text-black"
+                class="inline-block max-w-full font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
                 style="transition: all 0.2s ease 0s; text-decoration: none"
                 ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="inline-block mt-3 max-w-full align-middle border-0"
               /></a>
@@ -646,7 +646,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
         <div class="flex flex-col">
           <h3 class="pt-2 pb-10 my-0 mr-10 w-full font-sans text-6xl font-medium text-left text-white" style="line-height: 72px">
             <strong class="text-6xl text-left" style="line-height: 72px">Let's work </strong
-            ><span class="text-6xl text-left text-teal-300" style="line-height: 72px"><strong class="font-medium" style="line-height: 72px">together!</strong></span
+            ><span class="text-6xl text-left text-indigo-600" style="line-height: 72px"><strong class="font-medium" style="line-height: 72px">together!</strong></span
             ><br class="text-6xl text-left" style="line-height: 72px" />
           </h3>
 
@@ -656,7 +656,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
             target="_blank"
-            class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-teal-300 hover:bg-teal-300 hover:bg-teal-300 sm:w-auto sm:max-w-none sm:flex-initial"
+            class="inline-block pt-4 pr-12 pb-2 pl-6 mt-8 h-12 text-xs font-bold leading-3 text-white uppercase bg-white bg-no-repeat bg-auto rounded-none border-2 border-white border-solid transition-none cursor-pointer bg-opacity-[0] hover:border-indigo-300 hover:bg-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
             style="
               transition: all 0.2s ease 0s;
               text-decoration: none;

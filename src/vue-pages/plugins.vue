@@ -7,6 +7,7 @@ import type { Action } from '../config/plugins'
 import { getSlug } from '../services/github'
 
 const plugins = ref<Action[]>(actions)
+console.log('plugins', plugins) 
 
 onMounted(() => {
   plugins.value.forEach((i) => {

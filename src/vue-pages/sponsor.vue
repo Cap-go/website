@@ -3,9 +3,8 @@
     <div class="max-w-7xl mx-auto">
       <h1 class="text-4xl font-bold mb-4">Capgo Sponsors</h1>
       <p class="text-xl text-gray-300 mb-8 max-w-3xl">
-        Capgo is an open-source framework totally free to use thanks to our
-        generous sponsors. If you use Capgo in your daily work and feel that it
-        has made your life easier, please consider backing us.
+        Capgo is an open-source framework free to use thanks to our
+        generous sponsors. If you use Capgo in your daily work and can't use our cloud service, please consider backing us.
       </p>
       <a
         href="https://github.com/sponsors/riderx"
@@ -73,23 +72,21 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import SponsorLogo from '../components/SponsorLogo.vue'
-const fetchSponsors = async () => {
-  try {
-    const response = await fetch('/sponsors.json')
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error('Error fetching sponsors:', error)
-    return []
+
+const props = defineProps({
+  sponsors: {
+    type: Array,
+    required: true
   }
-}
+})
+
 const bakerSponsors = ref([])
 const silverSponsors = ref([])
 const goldSponsors = ref([])
 const platinumSponsors = ref([])
 
 onMounted(async () => {
-  const sponsors = await fetchSponsors()
+  const sponsors = props.sponsors ?? []
   console.log('sponsors', sponsors)
   bakerSponsors.value = sponsors.filter(sponsor => sponsor.tier === 'baker')
   silverSponsors.value = sponsors.filter(sponsor => sponsor.tier === 'silver')
