@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import plugin_marketing from './plugin_marketing.vue'
 
-const randomOdd = Math.floor(Math.random() * 100) + 1
+const randomOdd = Math.random() < 0.5 ? 0 : 1
 </script>
 
 <template>
