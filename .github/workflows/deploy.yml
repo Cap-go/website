@@ -19,6 +19,8 @@ jobs:
         run: bun install
       - name: Generate static pages
         run: bun run build
+        env:
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
       - name: Copy header & redirect specific files
         run: cp _headers dist/_headers & cp _redirects dist/_redirects
       - name: Publish CF website
