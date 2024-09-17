@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import plugin_marketing from './plugin_marketing.vue'
+
 const randomOdd = Math.floor(Math.random() * 100) + 1
 </script>
 
@@ -592,6 +594,7 @@ const randomOdd = Math.floor(Math.random() * 100) + 1
     </div> -->
       </div>
     </div>
+    <plugin_marketing/>
     <div
       class="block clear-both relative flex-col items-center my-auto max-w-none font-sans font-light leading-8 text-center text-slate-900 sm:max-w-none"
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
