@@ -18,4 +18,6 @@ const sponsors = await fetchSponsors()
 
 ---
 
-<Layout><VueSponsor client:load :sponsors={sponsors} /></Layout>
+<Layout>
+  <VueSponsor client:load sponsors={sponsors} />
+</Layout>
