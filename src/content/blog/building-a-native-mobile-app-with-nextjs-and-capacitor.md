@@ -1,13 +1,13 @@
 ---
 slug: "building-a-native-mobile-app-with-nextjs-and-capacitor"
-title: "Building Native Mobile Apps with Next.js and Capacitor: A Step-by-Step Guide"
-description: Learn how to create native mobile apps using Next.js and Capacitor in this comprehensive guide. Discover the latest best practices and techniques for building high-performance, feature-rich mobile applications.
+title: "2024 Building Native Mobile Apps with Next.js 14 and Capacitor: A Step-by-Step Guide"
+description: Learn how to create native mobile apps using Next.js 14 and Capacitor in this comprehensive guide. Discover the latest best practices and techniques for building high-performance, feature-rich mobile applications.
 author: Martin Donadieu
 author_url: https://x.com/martindonadieu
 created_at: 2023-02-21
-updated_at: 2024-06-16
+updated_at: 2024-09-19
 head_image: "/next_capgo.webp"
-head_image_alt: Next.js and Capgo illustration
+head_image_alt: Next.js 14 and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
@@ -16,7 +16,7 @@ next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ## Introduction
 
-In this tutorial, we'll explore how to create native mobile apps using the powerful combination of [Next.js](https://nextjs.org/) and [Capacitor](https://capacitorjs.com/). By leveraging the latest versions of these technologies, you can build high-performance, feature-rich mobile applications with ease. We'll also demonstrate how to enhance the mobile UI using [Konsta UI](https://konstaui.com/) and Tailwind CSS, although this step is optional.
+In this tutorial, we'll explore how to create native mobile apps using the powerful combination of [Next.js](https://nextjs.org/) 14 and [Capacitor](https://capacitorjs.com/) in 2024. By leveraging the latest versions of these technologies, you can build high-performance, feature-rich mobile applications with ease. We'll also demonstrate how to enhance the mobile UI using [Konsta UI](https://konstaui.com/) and Tailwind CSS, although this step is optional.
 
 Next.js, a popular React framework, provides a solid foundation for building web applications, while Capacitor allows you to transform your Next.js app into a native mobile app without significant modifications or the need to learn new skills like React Native. This tutorial will guide you through the process, starting with setting up a new Next.js app and integrating Capacitor to create a native mobile experience.
 
@@ -52,7 +52,7 @@ To create a native mobile app, we need to generate a static export of our Next.j
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "static": "next build && next export"
+    "static": "NEXT_PUBLIC_IS_MOBILE=true next build"
   }
 }
 ```
@@ -61,7 +61,9 @@ Running the `npm run static` command may result in errors due to image optimizat
 
 ```javascript
 /** @type {import('next').NextConfig} */
+const isMobile = process.env.NEXT_PUBLIC_IS_MOBILE === 'true';
 const nextConfig = {
+    ...(isMobile ? {output: 'export'} : {}),
   reactStrictMode: true,
   images: {
     unoptimized: true,
@@ -73,7 +75,7 @@ module.exports = nextConfig;
 
 Now, running `npm run static` should work without any issues, and you will find a new `out` folder at the root of your project. This folder will be used by Capacitor in the next steps.
 
-## Adding Capacitor to Your Next.js App
+## Adding Capacitor to Your Next.js 14 App
 
 To package your Next.js app into a native mobile container, follow these steps:
 
