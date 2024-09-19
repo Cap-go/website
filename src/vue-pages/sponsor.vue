@@ -15,8 +15,9 @@
 
       <div v-if="platinumSponsors.length > 0" class="mb-16">
         <h2 class="text-2xl font-bold mb-8">Platinum</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 gap-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4 -mt-4">
           <SponsorLogo
+            size="24"
             v-for="sponsor in platinumSponsors"
             :key="sponsor.id"
             :name="sponsor.name"
@@ -28,8 +29,9 @@
 
       <div v-if="goldSponsors.length > 0">
         <h2 class="text-2xl font-bold mb-8">Gold</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-3 gap-8 gap-x-4 sm:grid-cols-4 md:grid-cols-5 -mt-4">
           <SponsorLogo
+            size="20"
             v-for="sponsor in goldSponsors"
             :key="sponsor.id"
             :name="sponsor.name"
@@ -41,8 +43,9 @@
 
       <div v-if="silverSponsors.length > 0">
         <h2 class="text-2xl font-bold mb-8">Silver</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-4 gap-8 gap-x-4 sm:grid-cols-5 md:grid-cols-6 -mt-4">
           <SponsorLogo
+            size="16"
             v-for="sponsor in siverSponsors"
             :key="sponsor.id"
             :name="sponsor.name"
@@ -54,8 +57,9 @@
 
       <div v-if="bakerSponsors.length > 0">
         <h2 class="text-2xl font-bold mb-8">Baker</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        <div class="flex flex-wrap gap-8 ml-12">
           <SponsorLogo
+            size="14"
             v-for="sponsor in bakerSponsors"
             :key="sponsor.id"
             :name="sponsor.name"
