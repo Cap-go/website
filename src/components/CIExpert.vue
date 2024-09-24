@@ -74,9 +74,9 @@
               <p class="mt-6 text-base text-gray-600 font-pj">
                 Benefit from our deep expertise in mobile app CI/CD best practices, without
                 the need to build and maintain a complex system yourself.
-                <p class="mt-6 text-base text-gray-600 font-pj">
+                <span class="mt-6 text-base text-gray-600 font-pj">
                   We already setup CI/CD for 50+ apps.
-                </p>
+                </span>
               </p>
             </div>
           </div>

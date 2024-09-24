@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref, onMounted } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { openMessenger } from '../services/bento'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const year = new Date().getFullYear()
+
+const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/status.json')
+    systemStatus.value = await response.json()
+  } catch (error) {
+    console.error('Error fetching status:', error)
+  }
+})
 
 const navigation = {
   solutions: [
@@ -36,7 +47,12 @@ const navigation = {
     },
     { name: 'Pricing', href: '/pricing/' },
     { name: 'Guides', href: '/blog/' },
-    { name: 'Status', href: 'https://status.capgo.app/', target: '_blank' },
+    {
+      name: () => systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed',
+      href: 'https://status.capgo.app/',
+      target: '_blank',
+      icon: () => systemStatus.value.indicator === 'up' ? '🟢' : '🟠',
+    },
     {
       name: 'Chat',
       href: '#support',
@@ -204,15 +220,16 @@ const navigation = {
             <div class="mt-12 md:mt-0">
               <h3 class="text-base font-medium text-gray-900">Support</h3>
               <ul role="list" class="mt-4 space-y-4">
-                <li v-for="item in navigation.support" :key="item.name">
+                <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
                   <a
                     :rel="item.rel"
                     :href="item.href"
                     :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 flex items-center"
                     @click="item.execute && item.execute()"
                   >
-                    {{ item.name }}
+                    <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
+                    {{ typeof item.name === 'function' ? item.name() : item.name }}
                   </a>
                 </li>
               </ul>
