@@ -192,7 +192,7 @@ const navigation = {
                 <div v-if="typeof item.icon === 'string'" class="h-6 w-6" aria-hidden="true" v-html="item.icon" />
                 <component :is="item.icon" v-else class="h-6 w-6" aria-hidden="true" />
                 <span
-                  class="ml-3 text-base font-bold text-gray-400 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                  class="ml-3 text-base font-bold text-gray-500 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
                 >
                   {{ item.name }}
                 </span>
