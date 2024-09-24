@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
 import { posthogLoader } from '../services/posthog'
@@ -11,9 +11,24 @@ import dayjs from 'dayjs'
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 
+// Flag to ensure the function is called only once
+const chatLoaded = ref(false);
+
+// Function to handle scroll event
+const handleScroll = () => {
+  if (!chatLoaded.value) {
+    chatLoaded.value = true;
+    chatLoader();
+    // Remove the event listener after the first scroll
+    window.removeEventListener('scroll', handleScroll);
+  }
+};
+
+// Add scroll event listener
+
 onMounted(() => {
   posthogLoader()
-  chatLoader()
+  window.addEventListener('scroll', handleScroll);
 })
 
 function shortNumber(number: number) {
