@@ -87,7 +87,7 @@ function observeArticleTitles() {
       </div>
     </div>
     <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase">
-      {{ formatTime(props?.created_at || '') }}
+      Last updated{{ formatTime(props?.updated_at || '') }}
     </span>
     <div class="relative toc-wrapper">
       <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
