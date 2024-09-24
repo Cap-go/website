@@ -267,7 +267,7 @@ const navigation = {
         </div>
       </div>
       <div class="mt-12 border-t border-gray-200 pt-8">
-        <p class="text-base text-gray-400 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. All rights reserved.</p>
+        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. All rights reserved.</p>
       </div>
     </div>
   </footer>
