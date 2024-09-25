@@ -223,7 +223,7 @@ This command will ignore bundles which are currently in use in any channel.
 
 ### **Encrypt**
 
-> **Warning**: This command is deprecated and will be removed in the next release. Please use the new encryption system.
+> **Warning**: This command is deprecated and will be removed in the next major release. Please use the new encryption system.
 `npx @capgo/cli bundle encrypt [path/to/zip]`
 
 This command is used when you use external source to store your code or for test purpose. 
@@ -262,7 +262,7 @@ Optionally, you can give:
 
 ### **Decrypt V2**
 
-`npx @capgo/cli bundle decryptV2 [path/to/zip]`
+`npx @capgo/cli bundle decryptV2 [path/to/zip]  [ivSessionKey]`
 
 Optionally, you can give:
 
@@ -331,6 +331,7 @@ Optionally, you can give:
 
 * `--bundle [1.2.3]` your app bundle already sent to the cloud, to link it to a channel.
 * `--latest` get the bundle version from `package.json:version`, cannot be used with `--bundle`.
+* `--state [ normal | default ]` set the channel state, can be `normal` or `default`. One channel needs to be `default`.
 * `--downgrade` allows the channel to send downgrade version to devices.
 * `--no-downgrade` disallows the channel to send downgrade version to devices.
 * `--upgrade` allows the channel to send upgrade (major) version to devices.
