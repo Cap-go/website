@@ -3,11 +3,9 @@ slug: "how-I-manage-semantic-rerlease-with-CapGo-CapacitorUpdater.md"
 title: How I manage Semantic Release with CapGo CapacitorUpdater
 description: This is how I set up semantic release to manage releases of my applications which use CapGo CapacitorUpdater
 author: Rupert Barrow
-author_url: https://x.com/martindonadieu
+author_url: https://linkedin.com/in/rbarrow
 created_at: 2024-09-22
 updated_at: 2024-09-22
-head_image: "/fastlane_ios.webp"
-head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
 published: true
 next_blog: "xxx"
