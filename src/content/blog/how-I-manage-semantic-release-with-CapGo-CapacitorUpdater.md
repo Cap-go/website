@@ -47,7 +47,7 @@ For every application, whether mobile, web or Salesforce :
 
 Basically, this is the Gitlab Flow :
 
-![Gitlab Flow](/public/RBW_Gitlab_Flow.png)
+![Gitlab Flow](/RBW_Gitlab_Flow.png)
 
 *Gitlab Flow - source https://faun.dev/c/stories/manuelherrera/git-branching-strategies-in-2022*
 
@@ -92,7 +92,7 @@ npx @capgo/cli bundle upload --channel $CHANNEL --apikey $CAPGO_APIKEY --bundle 
 
 Finally, how does this all fit together ?
 
-![App bundle versions built with semantic release and Github Actions](/public/RBW_CapGo_channels_and_versions.png)
+![App bundle versions built with semantic release and Github Actions](/RBW_CapGo_channels_and_versions.png)
 
 *App bundle versions built with semantic release and Github Actions*
 
@@ -241,7 +241,7 @@ Integrating all this with XCode Cloud building new versions of the application b
 - I can trigger builds on different branches to simulate the deployment for different channels. In each configuration of XCode Cloud build on a different branch, I set an environment variable manually with the value of `branch.channel` set in `releaserc.json` (yes, this is a manual duplication) and then, if I wanted to, I could deploy a different AppStore application for each custom customer application deployed from a custom release branch, as mentioned earlier.
 
 
-![Building app binaries on XCode Cloud with CapGo channels](/public/RBW_XCode_Cloud_building.png)
+![Building app binaries on XCode Cloud with CapGo channels](/RBW_XCode_Cloud_building.png)
 
 *Building app binaries on XCode Cloud with CapGo channels*
 
