@@ -271,11 +271,12 @@ const navigation = {
             <div class="mt-12 md:mt-0">
               <h3 class="text-base font-medium text-gray-900">{{ translations['support'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
-                <li v-for="item in navigation.support" :key="item.name">
+                <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
                   <a :rel="item.rel" :href="item.href" :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 flex items-center"
                     @click="item.execute && item.execute()">
-                    {{ item.name }}
+                    <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
+                    {{ typeof item.name === 'function' ? item.name() : item.name }}
                   </a>
                 </li>
               </ul>
