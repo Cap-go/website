@@ -233,10 +233,7 @@ const navigation = {
               class="absolute right-0 z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
               <div class="py-1" role="none">
-                <a :href="getRelativeLocaleUrl('fr', currentPath)" class="text-gray-700 block px-4 py-2 text-sm"
-                  role="menuitem">FR</a>
-                <a :href="getRelativeLocaleUrl('en', currentPath)" class="text-gray-700 block px-4 py-2 text-sm"
-                  role="menuitem">EN</a>
+                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{ item.toUpperCase() }}</a>
               </div>
             </div>
           </div>
