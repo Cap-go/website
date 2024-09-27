@@ -16,9 +16,23 @@ const props = defineProps<{
   locale: Locales
 }>()
 
+// Flag to ensure the function is called only once
+const chatLoaded = ref(false);
+// Function to handle scroll event
+const handleScroll = () => {
+  if (!chatLoaded.value) {
+    chatLoaded.value = true;
+    chatLoader();
+    // Remove the event listener after the first scroll
+    window.removeEventListener('scroll', handleScroll);
+  }
+};
+
+// Add scroll event listener
+
 onMounted(() => {
   posthogLoader()
-  chatLoader()
+  window.addEventListener('scroll', handleScroll);
 })
 
 function shortNumber(number: number) {
