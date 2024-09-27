@@ -6,6 +6,7 @@ import { pwaInfo } from 'virtual:pwa-info'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import MessengerAffiliateVue from '../components/MessengerAffliate.vue'
+import { defaultLocale } from '../services/locale'
 
 const { content } = Astro.props
 
@@ -20,9 +21,9 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
-      <Header client:load />
+      <Header locale={Astro.currentLocale || defaultLocale} client:load />
       <slot />
-      <Footer client:load />
+      <Footer locale={Astro.currentLocale || defaultLocale} client:load />
     </div>
     {
       !isLocalhost && (

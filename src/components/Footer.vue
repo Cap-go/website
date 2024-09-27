@@ -1,38 +1,58 @@
 <script setup lang="ts">
-import { defineComponent, h, ref, onMounted } from 'vue'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { defineComponent, ref, h, onMounted, onUnmounted } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { openMessenger } from '../services/bento'
+import { locales, translations, type Locales } from '../services/locale'
 
+const currentPath = ref("")
+const year = new Date().getFullYear()
 const config = useRuntimeConfig()
 const brand = config.public.brand
-const year = new Date().getFullYear()
+const props = defineProps<{
+  locale: Locales
+}>()
+const isOpen = ref(false)
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value
+}
 
-const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
-
-onMounted(async () => {
-  try {
-    const response = await fetch('/status.json')
-    systemStatus.value = await response.json()
-  } catch (error) {
-    console.error('Error fetching status:', error)
+const decidePath = () => {
+  if (typeof window !== 'undefined') {
+    const splitPathname = window.location.pathname.split('/').filter(i => i)
+    if (locales.includes(splitPathname[0].toLowerCase())) {
+      currentPath.value = splitPathname.join('/').substring(5)
+    }
+    else {
+      currentPath.value = splitPathname.join('/')
+    }
+    if (currentPath.value.endsWith('/')) { currentPath.value = currentPath.value.substring(0, currentPath.value.length - 1) }
   }
+}
+
+onMounted(() => {
+  decidePath()
+  window.addEventListener('hashchange', decidePath)
+})
+onUnmounted(() => {
+  window.removeEventListener('hashchange', decidePath)
 })
 
 const navigation = {
   solutions: [
-    { name: 'Register', href: '/register/', target: '_blank' },
-    { name: 'App mobile', href: '/app_mobile/' },
+    { name: translations['register'][props.locale], href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
+    { name: 'App mobile', href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
     {
-      name: 'Documentation',
-      href: '/docs/',
+      name: translations['documentation'][props.locale],
+      href: getRelativeLocaleUrl(props.locale, 'docs'),
     },
-    { name: 'Plugins', href: '/plugins/' },
+    { name: translations['plugins'][props.locale], href: getRelativeLocaleUrl(props.locale, 'plugins') },
     {
-      name: 'Awesome capacitor',
+      name: translations['awesome_capacitor'][props.locale],
       href: 'https://github.com/riderx/awesome-capacitor/',
       target: '_blank',
     },
-    { name: 'Top app by Framework', href: '/top_app/' },
+    { name: translations['top_app_by_framework'][props.locale], href: getRelativeLocaleUrl(props.locale, 'top_app') },
     // { name: 'Top cordova app', href: '/top_cordova_app/' },
     // { name: 'Top react native app', href: '/top_react_native_app/' },
     // { name: 'Top flutter app', href: '/top_flutter_app/' },
@@ -41,60 +61,57 @@ const navigation = {
   ],
   support: [
     {
-      name: 'Community',
+      name: translations['community'][props.locale],
       href: 'https://discord.com/invite/VnYRvBfgA6',
       target: '_blank',
     },
-    { name: 'Pricing', href: '/pricing/' },
-    { name: 'Guides', href: '/blog/' },
     {
-      name: () => systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed',
-      href: 'https://status.capgo.app/',
-      target: '_blank',
-      icon: () => systemStatus.value.indicator === 'up' ? '🟢' : '🟠',
+      name: translations['pricing'][props.locale], href: getRelativeLocaleUrl(props.locale, 'pricing')
     },
+    { name: translations['guides'][props.locale], href: getRelativeLocaleUrl(props.locale, 'blog') },
+    { name: translations['status'][props.locale], href: 'https://status.capgo.app/', target: '_blank' },
     {
-      name: 'Chat',
+      name: translations['chat'][props.locale],
       href: '#support',
       execute: openMessenger,
       rel: 'nofollow',
     },
     {
-      name: 'Sponsors', href: '/sponsor/'
+      name: translations['sponsor'][props.locale], href: getRelativeLocaleUrl(props.locale, 'sponsor')
     }
   ],
   company: [
-    { name: 'About', href: '/about/' },
-    { name: 'Imprint', href: '/imprint/' },
-    { name: 'Jobs', href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
-    { name: 'Contributing', href: '/contributing/' },
-    { name: 'Security', href: '/trust/' },
-    { name: 'Consulting', href: '/consulting/' },
+    { name: translations['about'][props.locale], href: getRelativeLocaleUrl(props.locale, 'about') },
+    { name: translations['imprint'][props.locale], href: getRelativeLocaleUrl(props.locale, 'imprint') },
+    { name: translations['jobs'][props.locale], href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
+    { name: translations['contributing'][props.locale], href: getRelativeLocaleUrl(props.locale, 'contributing') },
+    { name: translations['security'][props.locale], href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: translations['consulting'][props.locale], href: getRelativeLocaleUrl(props.locale, 'consulting') },
     {
-      name: 'Affiliate',
-      href: 'https://affiliates.reflio.com/invite/capgo/',
       target: '_blank',
+      name: translations['affiliate'][props.locale],
+      href: 'https://affiliates.reflio.com/invite/capgo/',
     },
   ],
   legal: [
     // { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '/privacy/', rel: 'nofollow' },
-    { name: 'Support policy', href: '/support-policy/', rel: 'nofollow' },
-    { name: 'Service Level Agreements', href: '/sla/', rel: 'nofollow' },
-    { name: 'Acceptable Use Policy', href: '/aup/', rel: 'nofollow' },
-    { name: 'Terms', href: '/tos/', rel: 'nofollow' },
-    { name: 'Security.txt', href: '/security/', rel: 'nofollow' },
+    { name: translations['privacy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
+    { name: translations['support_policy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
+    { name: translations['sla'][props.locale], href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
+    { name: translations['aup'][props.locale], href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
+    { name: translations['terms'][props.locale], href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
+    { name: translations['security_txt'][props.locale], href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
     {
-      name: 'Privacy Board',
+      name: translations['privacy'][props.locale],
       href: 'https://www.privacyboard.co/company/capgo/',
       target: '_blank',
     },
-    { name: 'Data Policy', href: '/dp/', rel: 'nofollow' },
-    { name: 'DPA', href: '/dpa/', rel: 'nofollow' },
+    { name: translations['dp'][props.locale], href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
+    { name: translations['dpa'][props.locale], href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
   ],
   hero: [
     {
-      name: '5% of revenue go to carbon removal',
+      name: translations['carbon_removal'][props.locale],
       href: 'https://climate.stripe.com/vxDf62',
       icon: defineComponent({
         render: () =>
@@ -117,7 +134,7 @@ const navigation = {
       }),
     },
     {
-      name: '100% open-source',
+      name: translations['open_source'][props.locale],
       href: 'https://github.com/Cap-go/',
       icon: `
 
@@ -129,7 +146,7 @@ const navigation = {
       `,
     },
     {
-      name: 'Built with Supabase',
+      name: translations['built_with_supabase'][props.locale],
       href: 'https://supabase.com/',
       icon: defineComponent({
         render: () =>
@@ -152,7 +169,7 @@ const navigation = {
       }),
     },
     {
-      name: 'Build in public on Twitter',
+      name: translations['build_in_public_on_twitter'][props.locale],
       href: 'https://x.com/martindonadieu/',
       icon: defineComponent({
         render: () =>
@@ -179,57 +196,72 @@ const navigation = {
 </script>
 
 <template>
-  <footer class="bg-white" aria-labelledby="footer-heading">
-    <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <footer class="bg-white" aria-labelledby="footer-heading">[
+    <h2 id="footer-heading" class="sr-only">{{ translations['footer'][props.locale] }}</h2>
     <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
           <!-- <img class="h-10" src="https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300" alt="Company name"> -->
-          <p class="text-base text-gray-500">Making the world a better place through constructing elegant apps.</p>
+          <p class="text-base text-gray-500">{{ translations['making_world_better'][props.locale] }}</p>
           <ul role="list" class="mt-4 space-y-4">
             <li v-for="item in navigation.hero" :key="item.name">
               <a :href="item.href" target="_blank" rel="noreferrer" class="flex">
                 <div v-if="typeof item.icon === 'string'" class="h-6 w-6" aria-hidden="true" v-html="item.icon" />
                 <component :is="item.icon" v-else class="h-6 w-6" aria-hidden="true" />
                 <span
-                  class="ml-3 text-base font-bold text-gray-500 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-                >
+                  class="ml-3 text-base font-bold text-gray-400 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                   {{ item.name }}
                 </span>
               </a>
             </li>
           </ul>
+          <div class="relative inline-block text-left">
+            <div>
+              <button type="button" @click="toggleDropdown"
+                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                aria-haspopup="true">
+                Language
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                  fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+            <div v-if="isOpen"
+              class="absolute right-0 z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div class="py-1" role="none">
+                <a :href="getRelativeLocaleUrl('fr', currentPath)" class="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem">FR</a>
+                <a :href="getRelativeLocaleUrl('en', currentPath)" class="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem">EN</a>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">Solutions</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ translations['solutions'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.solutions" :key="item.name">
-                  <a
-                    :href="item.href"
-                    rel="noreferrer"
-                    :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-                  >
+                  <a rel="noreferrer" :href="item.href" :target="item.target"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
                   </a>
                 </li>
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">Support</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ translations['support'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
-                <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
-                  <a
-                    :rel="item.rel"
-                    :href="item.href"
-                    :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 flex items-center"
-                    @click="item.execute && item.execute()"
-                  >
-                    <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
-                    {{ typeof item.name === 'function' ? item.name() : item.name }}
+                <li v-for="item in navigation.support" :key="item.name">
+                  <a :rel="item.rel" :href="item.href" :target="item.target"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    @click="item.execute && item.execute()">
+                    {{ item.name }}
                   </a>
                 </li>
               </ul>
@@ -237,27 +269,22 @@ const navigation = {
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">Company</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ translations['company'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
-                  <a
-                    :href="item.href"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-                  >
+                  <a :href="item.href"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
                   </a>
                 </li>
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">Legal</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ translations['legal'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
-                  <a
-                    :href="item.href"
-                    :rel="item.rel"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-                  >
+                  <a :rel="item.rel" :href="item.href"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                     {{ item.name }}
                   </a>
                 </li>
@@ -267,7 +294,8 @@ const navigation = {
         </div>
       </div>
       <div class="mt-12 border-t border-gray-200 pt-8">
-        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. All rights reserved.</p>
+        <p class="text-base text-gray-400 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{
+          translations['copyright'][props.locale] }}</p>
       </div>
     </div>
   </footer>

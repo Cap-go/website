@@ -1,34 +1,24 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import dayjs from 'dayjs'
+import { onMounted, reactive } from 'vue'
+import CIExpert from '../components/CIExpert.vue'
+import Orgs from '../components/Orgs.vue'
+import Testimonials from '../components/Testimonials.vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
+import { translations, type Locales } from '../services/locale'
 import { posthogLoader } from '../services/posthog'
-import Orgs from '../components/Orgs.vue'
-import CIExpert from '../components/CIExpert.vue'
-import Testimonials from '../components/Testimonials.vue'
-import dayjs from 'dayjs'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
-
-// Flag to ensure the function is called only once
-const chatLoaded = ref(false);
-
-// Function to handle scroll event
-const handleScroll = () => {
-  if (!chatLoaded.value) {
-    chatLoaded.value = true;
-    chatLoader();
-    // Remove the event listener after the first scroll
-    window.removeEventListener('scroll', handleScroll);
-  }
-};
-
-// Add scroll event listener
+const props = defineProps<{
+  locale: Locales
+}>()
 
 onMounted(() => {
   posthogLoader()
-  window.addEventListener('scroll', handleScroll);
+  chatLoader()
 })
 
 function shortNumber(number: number) {
@@ -38,9 +28,9 @@ function shortNumber(number: number) {
 }
 
 const stats = reactive({
+  stars: shortNumber(499),
   apps: shortNumber(1400),
   updates: shortNumber(947593631),
-  stars: shortNumber(499),
 })
 
 fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
@@ -60,22 +50,23 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
       <div class="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center">
-          <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">100% Open-Source</p>
+          <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">{{
+            translations['open_source'][props.locale] }}</p>
           <h1
             class="mt-5 font-bold leading-tight text-3xl sm:text-4xl xl:text-5xl sm:leading-tight lg:leading-tight font-pj">
-            Instant updates for Capacitor</h1>
+            {{ translations['instant_updates_for_capacitor'][props.locale] }}</h1>
           <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            Ship updates, fixes, changes, and features
-            <br /><span class="font-bold">within minutes</span><br />
+            {{ translations['ship_updates_fixes_changes_and_features'][props.locale] }}
+            <br /><span class="font-bold">{{ translations['within_minutes'][props.locale] }}</span><br />
           </h2>
 
           <div class="relative inline-flex mt-10 group">
             <div
               class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt" />
-            <a href="/register/" title="Get quote now"
+            <a :href="getRelativeLocaleUrl(props.locale, 'register')" title="Get quote now" target="_blank"
               class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               role="button">
-              Try for Free
+              {{ translations['try_for_free'][props.locale] }}
             </a>
           </div>
         </div>
@@ -92,14 +83,14 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               <path
                 d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z" />
             </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">Instant Updates</h3>
+            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ translations['instant_updates'][props.locale] }}
+            </h3>
             <p class="mt-3 text-sm text-gray-400">
-              Reach users now, not weeks later.
+              {{ translations['reach_users_now_not_weeks_later'][props.locale] }}
               <!-- Release in matter on seconds, not one week later. -->
               <!-- Reach 90% of first day deployment instead of a month. -->
             </p>
           </div>
-
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor"
               viewBox="0 0 448 512">
@@ -107,10 +98,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               <path
                 d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z" />
             </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">App Store Compliant</h3>
-            <p class="mt-3 text-sm text-gray-400">100% compliant with Apple and Android requirements.</p>
+            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ translations['app_store_compliant'][props.locale]
+              }}</h3>
+            <p class="mt-3 text-sm text-gray-400">{{
+              translations['100_compliant_with_apple_and_android_requirements'][props.locale] }}</p>
           </div>
-
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor"
               viewBox="0 0 576 512">
@@ -118,38 +110,39 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               <path
                 d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z" />
             </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">End-to-end encryption</h3>
-            <p class="mt-3 text-sm text-gray-400">Only your users can decrypt your updates, no one else.</p>
+            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{
+              translations['end_to_end_encryption'][props.locale] }}</h3>
+            <p class="mt-3 text-sm text-gray-400">{{
+              translations['only_your_users_can_decrypt_your_updates_no_one_else'][props.locale] }}</p>
           </div>
         </div>
         <h3 class="hidden md:block max-w-xl mx-auto mt-12 text-xl leading-7 text-gray-400 font-inter">
-          <span class="font-bold">👋 No more wait</span>
-          for Apple and Google app updates distribution
+          <span class="font-bold">&#128075; {{ translations['no_more_wait'][props.locale] }}</span>
+          {{ translations['for_apple_and_google_app_updates_distribution'][props.locale] }}
         </h3>
         <h3 class="block md:hidden max-w-sm mx-auto mt-12 text-center text-xl leading-7 text-gray-400 font-inter">
-          <span class="font-bold">👋 No more wait</span>
+          <span class="font-bold">&#128075; {{ translations['no_more_wait'][props.locale] }}</span>
         </h3>
         <h3 class="block md:hidden max-w-sm mx-auto text-center text-xl leading-7 text-gray-400 font-inter">
-          for Apple and Google app updates distribution
+          {{ translations['for_apple_and_google_app_updates_distribution'][props.locale] }}
         </h3>
       </div>
-
     </section>
     <section class="relative py-12 overflow-hidden sm:py-16 lg:py-20 xl:py-32 bg-white">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
           <div class="px-8 text-center xl:text-left xl:pr-16 md:max-w-2xl md:mx-auto xl:max-w-none">
-            <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">You’re in good company.</h2>
-            <p class="mt-6 text-lg font-normal text-gray-800 font-pj">Capgo enables development teams at some of the
-              most innovative companies.</p>
+            <h2 class="font-bold text-gray-900 text-3xl sm:text-4xl xl:text-5xl font-pj">{{
+              translations['youre_in_good_company'][props.locale] }}</h2>
+            <p class="mt-6 text-lg font-normal text-gray-800 font-pj">{{
+              translations['capgo_enables_development_teams_at_some_of_the_most_innovative_companies'][props.locale] }}
+            </p>
           </div>
-
           <div class="relative mt-8 sm:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mt-0">
             <div class="absolute inset-16">
               <div class="w-full h-full mx-auto rotate-180 opacity-30 rounded-3xl blur-lg filter"
                 style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)" />
             </div>
-
             <div class="relative space-y-5">
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
                 <div
@@ -157,53 +150,45 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/kick_logo.webp" alt="Kick"
                     title="Kick" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp"
                     alt="Pizza hut" title="Pizza hut" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote"
                     title="remnote" />
                 </div>
               </div>
-
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/revel_logo.svg" alt="hello revel"
                     title="hello revel" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e"
                     title="x-b-e" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/suez_logo.webp" alt="suez moneau"
                     title="suez moneau" />
                 </div>
               </div>
-
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec"
                     title="irec" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella"
                     title="vella" />
                 </div>
-
                 <div
                   class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
                   <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp"
@@ -214,7 +199,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
         </div>
       </div>
-
       <div class="absolute inset-0 bg-gradient-to-b xl:bg-gradient-to-r from-transparent via-transparent to-gray-500" />
     </section>
     <section class="relative md:my-20 py-20 bg-gray-800">
@@ -240,30 +224,31 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       </svg>
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">Apps with 20M+ users</h2>
-          <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">use Capgo</h2>
-          <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">Our numbers are shared transparently since December
-            2021.</p>
-          <p class="text-base mt-5 text-gray-400 text-center">Last update: {{dayjs().format('MMMM DD, YYYY')}}</p>
+          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">
+            {{ translations['apps_with_20m_users'][props.locale] }}</h2>
+          <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
+            {{ translations['use_capgo'][props.locale] }}</h2>
+          <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
+            {{ translations['our_numbers_are_shared_transparently_since_december_2021'][props.locale] }}</p>
+          <p class="text-base mt-5 text-gray-400 text-center">{{ translations['last_update'][props.locale] }}: {{
+            dayjs().format('MMMM DD, YYYY') }}</p>
         </div>
-
         <div class="grid grid-cols-1 gap-8 mt-10 text-center lg:mt-24 sm:gap-x-8 md:grid-cols-3">
           <div>
             <h3 class="font-bold text-7xl">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.updates
                 }}⬆</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">Updates delivered</p>
-            <p class="text-base mt-0.5 text-gray-400">All around the globe</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['updates_delivered'][props.locale] }}</p>
+            <p class="text-base mt-0.5 text-gray-400">{{ translations['all_around_the_globe'][props.locale] }}</p>
           </div>
-
           <div>
             <h3 class="font-bold text-7xl">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.apps
                 }}❤️</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">Apps</p>
-            <p class="text-base mt-0.5 text-gray-400">Using us in production</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['apps'][props.locale] }}</p>
+            <p class="text-base mt-0.5 text-gray-400">{{ translations['using_us_in_production'][props.locale] }}</p>
           </div>
 
           <div>
@@ -271,8 +256,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.stars
                 }}⭐️</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">Stars in GitHub</p>
-            <p class="text-base mt-0.5 text-gray-400">100% open source</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['stars_in_github'][props.locale] }}</p>
+            <p class="text-base mt-0.5 text-gray-400">{{ translations['open_source'][props.locale] }}</p>
           </div>
         </div>
       </div>
@@ -280,25 +265,25 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="py-10 bg-white sm:py-16 lg:py-24">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-          <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">How it work?</h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Ship your first update in less than
-            15 minutes!</p>
+          <h2 class="font-bold leading-tight text-black text-3xl sm:text-4xl xl:text-5xl">
+            {{ translations['how_it_work'][props.locale] }}</h2>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{
+            translations['ship_your_first_update_in_less_than_15_minutes'][props.locale] }}</p>
         </div>
-
         <div class="relative mt-12 lg:mt-20">
           <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
             <img loading="lazy" height="47" width="864" class="w-full"
               src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
               alt="curved dot line" title="curved dot line" />
           </div>
-
           <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
             <div>
               <div
                 class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 1 </span>
               </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Install the plugin</h3>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                {{ translations['install_the_plugin'][props.locale] }}</h3>
               <p class="mt-4 text-base text-gray-600">Run <span class="text-gray-900 font-bold">npx @capgo/cli
                   init</span> that it !</p>
             </div>
@@ -308,8 +293,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 2 </span>
               </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Send your first update</h3>
-              <p class="mt-4 text-base text-gray-600">Build your app as usual, then send with the CLI</p>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                {{ translations['send_your_first_update'][props.locale] }}</h3>
+              <p class="mt-4 text-base text-gray-600">
+                {{ translations['build_your_app_as_usual_then_send_with_the_cli'][props.locale] }}</p>
             </div>
 
             <div>
@@ -317,8 +304,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 3 </span>
               </div>
-              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Get the update</h3>
-              <p class="mt-4 text-base text-gray-600">Open the app, it update in the background</p>
+              <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                {{ translations['get_the_update'][props.locale] }}</h3>
+              <p class="mt-4 text-base text-gray-600">
+                {{ translations['open_the_app_it_update_in_the_background'][props.locale] }}</p>
             </div>
           </div>
         </div>
@@ -326,10 +315,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <div class="relative inline-flex mt-10 group">
             <div
               class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt" />
-            <a href="/register/" title="Get quote now"
+            <a :href="getRelativeLocaleUrl(props.locale, 'register')" title="Get quote now" target="_blank"
               class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               role="button">
-              Start Now
+              {{ translations['start_now'][props.locale] }}
             </a>
           </div>
         </div>
@@ -338,7 +327,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Faster Releases</h2>
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">{{ translations['faster_releases'][props.locale] }}</h2>
           <p class="text-lg lg:w-2/3">
             With {{ brand }}, you can launch multiple releases per week with an impressive 81% increase in efficiency.
             Don't miss out on this competitive advantage.
@@ -354,18 +343,17 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">Integration</h2>
           <p class="text-lg lg:w-2/3">
             Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br /><br />
-
-            It's compatible with Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub,
-            CircleCI, and many more.
+            {{ translations['its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more'][props.locale] }}
           </p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 py-10 md:py-20">
         <div class="order-last md:order-none">
-          <h2 class="text-4xl md:text-7xl font-extrabold my-10">Instant Updates</h2>
+          <h2 class="text-4xl md:text-7xl font-extrabold my-10">{{ translations[
+            'instant_updates'
+          ][props.locale] }}</h2>
           <p class="text-lg lg:w-2/3">
-            Instant Changes, Bug Fixes No need to wait for app re-downloads! With just one command, users can quickly
-            see bug fixes in action. Say goodbye to frustrating delays.
+            {{ translations['goodbye_bugs'][props.locale] }}
           </p>
         </div>
         <img width="310" height="248" loading="lazy" class="mx-auto h-full md:h-62 rounded-lg"
@@ -375,7 +363,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <h3 class="text-3xl font-bold text-gray-900 sm:text-7xl xl:text-7xl font-pj md:!leading-[85px] text-center">
-          Manage Updates Effortlessly</h3>
+          {{ translations['manage_updates_effortlessly'][props.locale] }}</h3>
         <div class="grid grid-cols-1 md:items-center gap-y-8 md:grid-cols-2 md:gap-x-16">
           <div>
             <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_3.webp"
@@ -396,9 +384,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">User Assignment</h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">Easily assign users and send the latest
-                        update to your private or public testers.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">
+                        {{ translations['user_assignment'][props.locale] }}</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">{{
+                        translations['easily_assign_users_and_send_the_latest_update_to_your_private_or_public_testers'][props.locale]
+                        }}</p>
                     </div>
                   </div>
                   <div class="flex items-start">
@@ -412,9 +402,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">Seamless Deployment Process</h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">When your update is ready, deploy it
-                        seamlessly to all your users.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">
+                        {{ translations['seamless_deployment_process'][props.locale] }}</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">{{
+                        translations['when_your_update_is_ready_deploy_it_seamlessly_to_all_your_users'][props.locale]
+                        }}</p>
                     </div>
                   </div>
                   <div class="flex items-start">
@@ -428,9 +420,13 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                     </div>
 
                     <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">Simple Configuration Management</h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">Manage all your configurations conveniently
-                        through our user-friendly web interface.</p>
+                      <h3 class="text-lg font-bold text-gray-900 font-pj">{{
+                        translations['simple_configuration_management'][props.locale] }}</h3>
+                      <p class="text-lg font-normal text-gray-600 font-pj">
+                        {{
+                          translations['manage_all_your_configurations_conveniently_through_our_user_friendly_web_interface'][props.locale]
+                        }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -440,9 +436,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <Testimonials />
-    <Orgs/>
-    <CIExpert/>
+    <Testimonials :locale="props.locale" />
+    <Orgs :locale="props.locale" />
+    <CIExpert :locale="props.locale" />
     <div class="relative mt-14 sm:mt-24 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-800 rounded-r-3xl" />
@@ -469,17 +465,17 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="relative flex flex-col md:flex-row">
             <div class="sm:text-center md:w-1/2">
-              <h3 class="text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl">
-                Push <span class="font-bold">updates</span> like your <span class="font-bold">commits</span>
-              </h3>
+              <h3 class="text-white tracking-tight text-3xl sm:text-4xl xl:text-5xl"
+                v-html="translations['push_updates_like_your_commits'][props.locale]" />
             </div>
             <div class="sm:text-center md:w-1/2">
-              <p class="text-white tracking-tight text-xl">Try risk free with a 15 days free trial</p>
-              <a href="/register/"
+              <p class="text-white tracking-tight text-xl">
+                {{ translations['try_risk_free_with_a_15_days_free_trial'][props.locale] }}</p>
+              <a :href="getRelativeLocaleUrl(props.locale, 'register')" target="_blank"
                 class="w-auto inline-block mt-5 mx-auto rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10">
-                Get Started &RightArrow;
+                {{ translations['get_started'][props.locale] }} &RightArrow;
               </a>
-              <p class="text-white tracking-tight">No credit card required</p>
+              <p class="text-white tracking-tight">{{ translations['no_credit_card_required'][props.locale] }}</p>
             </div>
           </div>
         </div>

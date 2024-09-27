@@ -1,18 +1,25 @@
+import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
 import UnoCSS from '@unocss/astro'
 import AstroPWA from '@vite-pwa/astro'
-import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
-import { pwa } from './src/config/pwa'
 import config from './configs.json'
+import { pwa } from './src/config/pwa'
+import { defaultLocale, locales } from './src/services/locale'
 
 export default defineConfig({
-  compressHTML: true,
   site: `https://${config.base_domain.prod}`,
   redirects: {
     '/docs/getting-started/': {
       status: 302,
       destination: '/docs/plugin/cloud-mode/getting-started/',
+    },
+  },
+  i18n: {
+    locales,
+    defaultLocale,
+    fallback: {
+      fr: "en",
     },
   },
   integrations: [
@@ -29,10 +36,10 @@ export default defineConfig({
       title: 'Capgo',
       favicon: '/favicon.svg',
       logo: { src: './logo.svg' },
-      editLink: {
-				baseUrl: 'https://github.com/Cap-go/website/edit/main/',
-			},
       customCss: ['./src/css/global.css'],
+      editLink: {
+        baseUrl: 'https://github.com/Cap-go/website/edit/main/',
+      },
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
         github: 'https://github.com/Cap-go/',
@@ -54,7 +61,8 @@ export default defineConfig({
           label: 'Plugin',
           items: [
             { label: 'Overview', link: '/docs/plugin/overview' },
-            { label: 'Cloud Mode', 
+            {
+              label: 'Cloud Mode',
               items: [
                 { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
                 { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
@@ -73,7 +81,7 @@ export default defineConfig({
                 { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
                 { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
                 { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
-                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true}
+                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true }
               ],
               collapsed: true,
             },
