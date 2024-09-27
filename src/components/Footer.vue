@@ -16,6 +16,7 @@ const isOpen = ref(false)
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }
+const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
 
 const decidePath = () => {
   if (typeof window !== 'undefined') {
@@ -30,8 +31,18 @@ const decidePath = () => {
   }
 }
 
+const statusChecker = async () => {
+  try {
+    const response = await fetch('/status.json')
+    systemStatus.value = await response.json()
+  } catch (error) {
+    console.error('Error fetching status:', error)
+  }
+}
+
 onMounted(() => {
   decidePath()
+  statusChecker()
   window.addEventListener('hashchange', decidePath)
 })
 onUnmounted(() => {
@@ -69,6 +80,12 @@ const navigation = {
       name: translations['pricing'][props.locale], href: getRelativeLocaleUrl(props.locale, 'pricing')
     },
     { name: translations['guides'][props.locale], href: getRelativeLocaleUrl(props.locale, 'blog') },
+    {
+      name: () => systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed',
+      href: 'https://status.capgo.app/',
+      target: '_blank',
+      icon: () => systemStatus.value.indicator === 'up' ? '🟢' : '🟠',
+    },
     { name: translations['status'][props.locale], href: 'https://status.capgo.app/', target: '_blank' },
     {
       name: translations['chat'][props.locale],
