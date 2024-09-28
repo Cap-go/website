@@ -19,7 +19,7 @@ export default defineConfig({
     locales,
     defaultLocale,
     fallback: {
-      fr: "en",
+      fr: 'en',
     },
   },
   integrations: [
@@ -73,7 +73,8 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Self Hosted', items: [
+              label: 'Self Hosted',
+              items: [
                 { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
                 { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
                 { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
@@ -81,7 +82,7 @@ export default defineConfig({
                 { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
                 { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
                 { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
-                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true }
+                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
               ],
               collapsed: true,
             },
@@ -96,7 +97,7 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: 'docs/upgrade' },
             },
-          ]
+          ],
         },
         {
           label: 'CLI',
@@ -108,14 +109,12 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: 'docs/cli/migrations' },
             },
-          ]
+          ],
         },
         {
           label: 'Public API',
           collapsed: true,
-          items: [
-            { label: 'Endpoints', link: '/docs/public-api/endpoints' },
-          ]
+          items: [{ label: 'Endpoints', link: '/docs/public-api/endpoints' }],
         },
         {
           label: 'Web app',

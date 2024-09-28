@@ -5,7 +5,7 @@ import { useRuntimeConfig } from '../config/app'
 import { openMessenger } from '../services/bento'
 import { locales, translations, type Locales } from '../services/locale'
 
-const currentPath = ref("")
+const currentPath = ref('')
 const year = new Date().getFullYear()
 const config = useRuntimeConfig()
 const brand = config.public.brand
@@ -20,14 +20,15 @@ const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
 
 const decidePath = () => {
   if (typeof window !== 'undefined') {
-    const splitPathname = window.location.pathname.split('/').filter(i => i)
+    const splitPathname = window.location.pathname.split('/').filter((i) => i)
     if (locales.includes(splitPathname[0].toLowerCase())) {
       currentPath.value = splitPathname.join('/').substring(5)
-    }
-    else {
+    } else {
       currentPath.value = splitPathname.join('/')
     }
-    if (currentPath.value.endsWith('/')) { currentPath.value = currentPath.value.substring(0, currentPath.value.length - 1) }
+    if (currentPath.value.endsWith('/')) {
+      currentPath.value = currentPath.value.substring(0, currentPath.value.length - 1)
+    }
   }
 }
 
@@ -77,14 +78,15 @@ const navigation = {
       target: '_blank',
     },
     {
-      name: translations['pricing'][props.locale], href: getRelativeLocaleUrl(props.locale, 'pricing')
+      name: translations['pricing'][props.locale],
+      href: getRelativeLocaleUrl(props.locale, 'pricing'),
     },
     { name: translations['guides'][props.locale], href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
-      name: () => systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed',
+      name: () => (systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed'),
       href: 'https://status.capgo.app/',
       target: '_blank',
-      icon: () => systemStatus.value.indicator === 'up' ? '🟢' : '🟠',
+      icon: () => (systemStatus.value.indicator === 'up' ? '🟢' : '🟠'),
     },
     { name: translations['status'][props.locale], href: 'https://status.capgo.app/', target: '_blank' },
     {
@@ -94,8 +96,9 @@ const navigation = {
       rel: 'nofollow',
     },
     {
-      name: translations['sponsor'][props.locale], href: getRelativeLocaleUrl(props.locale, 'sponsor')
-    }
+      name: translations['sponsor'][props.locale],
+      href: getRelativeLocaleUrl(props.locale, 'sponsor'),
+    },
   ],
   company: [
     { name: translations['about'][props.locale], href: getRelativeLocaleUrl(props.locale, 'about') },
@@ -213,7 +216,8 @@ const navigation = {
 </script>
 
 <template>
-  <footer class="bg-white" aria-labelledby="footer-heading">[
+  <footer class="bg-white" aria-labelledby="footer-heading">
+    [
     <h2 id="footer-heading" class="sr-only">{{ translations['footer'][props.locale] }}</h2>
     <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -226,7 +230,8 @@ const navigation = {
                 <div v-if="typeof item.icon === 'string'" class="h-6 w-6" aria-hidden="true" v-html="item.icon" />
                 <component :is="item.icon" v-else class="h-6 w-6" aria-hidden="true" />
                 <span
-                  class="ml-3 text-base font-bold text-gray-500 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  class="ml-3 text-base font-bold text-gray-500 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                >
                   {{ item.name }}
                 </span>
               </a>
@@ -234,23 +239,33 @@ const navigation = {
           </ul>
           <div class="relative inline-block text-left">
             <div>
-              <button type="button" @click="toggleDropdown"
+              <button
+                type="button"
+                @click="toggleDropdown"
                 class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                aria-haspopup="true">
+                aria-haspopup="true"
+              >
                 Language
-                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                  fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd"
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd" />
+                    clip-rule="evenodd"
+                  />
                 </svg>
               </button>
             </div>
-            <div v-if="isOpen"
+            <div
+              v-if="isOpen"
               class="absolute right-0 z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="options-menu"
+            >
               <div class="py-1" role="none">
-                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{ item.toUpperCase() }}</a>
+                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{
+                  item.toUpperCase()
+                }}</a>
               </div>
             </div>
           </div>
@@ -261,8 +276,12 @@ const navigation = {
               <h3 class="text-base font-medium text-gray-900">{{ translations['solutions'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.solutions" :key="item.name">
-                  <a rel="noreferrer" :href="item.href" :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <a
+                    rel="noreferrer"
+                    :href="item.href"
+                    :target="item.target"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                  >
                     {{ item.name }}
                   </a>
                 </li>
@@ -272,9 +291,13 @@ const navigation = {
               <h3 class="text-base font-medium text-gray-900">{{ translations['support'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
-                  <a :rel="item.rel" :href="item.href" :target="item.target"
+                  <a
+                    :rel="item.rel"
+                    :href="item.href"
+                    :target="item.target"
                     class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 flex items-center"
-                    @click="item.execute && item.execute()">
+                    @click="item.execute && item.execute()"
+                  >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
                     {{ typeof item.name === 'function' ? item.name() : item.name }}
                   </a>
@@ -287,8 +310,10 @@ const navigation = {
               <h3 class="text-base font-medium text-gray-900">{{ translations['company'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
-                  <a :href="item.href"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <a
+                    :href="item.href"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                  >
                     {{ item.name }}
                   </a>
                 </li>
@@ -298,8 +323,11 @@ const navigation = {
               <h3 class="text-base font-medium text-gray-900">{{ translations['legal'][props.locale] }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
-                  <a :rel="item.rel" :href="item.href"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
+                  <a
+                    :rel="item.rel"
+                    :href="item.href"
+                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                  >
                     {{ item.name }}
                   </a>
                 </li>
@@ -309,8 +337,7 @@ const navigation = {
         </div>
       </div>
       <div class="mt-12 border-t border-gray-200 pt-8">
-        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{
-          translations['copyright'][props.locale] }}</p>
+        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{ translations['copyright'][props.locale] }}</p>
       </div>
     </div>
   </footer>

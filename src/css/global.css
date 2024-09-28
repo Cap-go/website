@@ -39,6 +39,7 @@ html.dark {
   @apply mt-5 text-sm font-bold tracking-widest uppercase mt-0;
 }
 
-.content-panel ul, .content-panel ol {
+.content-panel ul,
+.content-panel ol {
   list-style: unset !important;
 }
