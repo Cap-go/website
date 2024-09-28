@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import CIExpert from '../components/CIExpert.vue'
 import Orgs from '../components/Orgs.vue'
 import Testimonials from '../components/Testimonials.vue'
