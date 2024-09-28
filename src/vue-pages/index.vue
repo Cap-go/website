@@ -7,7 +7,7 @@ import Orgs from '../components/Orgs.vue'
 import Testimonials from '../components/Testimonials.vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
-import { translations, type Locales } from '../services/locale'
+import { dynamicTranslations, translations, type Locales } from '../services/locale'
 import { posthogLoader } from '../services/posthog'
 
 const config = useRuntimeConfig()
@@ -343,8 +343,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="order-last md:order-none">
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">{{ translations['faster_releases'][props.locale] }}</h2>
           <p class="text-lg lg:w-2/3">
-            With {{ brand }}, you can launch multiple releases per week with an impressive 81% increase in efficiency.
-            Don't miss out on this competitive advantage.
+            {{ dynamicTranslations(brand)['launch_multiple_releases_per_week'][props.locale] }}
           </p>
         </div>
         <img width="310" height="248" loading="lazy" class="mx-auto h-full md:h-62 rounded-lg" src="/develop_illu.svg"
@@ -356,7 +355,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div>
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">Integration</h2>
           <p class="text-lg lg:w-2/3">
-            Easily combine {{ brand }} features into your current CI/CD platform with our user-friendly CLI.<br /><br />
+            {{ dynamicTranslations(brand)['easily_combine_features_ci_cd'][props.locale] }}<br /><br />
             {{ translations['its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more'][props.locale] }}
           </p>
         </div>
