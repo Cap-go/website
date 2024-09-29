@@ -13,6 +13,7 @@ head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 _Heureux que vous ayez demandé_

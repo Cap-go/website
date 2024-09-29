@@ -1,8 +1,8 @@
 ---
 slug: automatic-capacitor-ios-build-github-action-with-match
 title: >-
-  Création automatique d'IOS de condensateur avec des actions GitHub utilisant
-  match
+  Construction automatique d'IOS de condensateur avec des actions GitHub
+  utilisant match
 description: >-
   Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
   de Fastlane et des actions GitHub en 5 minutes (2022)
@@ -15,6 +15,7 @@ head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
 published: true
 next_blog: automatic-capacitor-android-build-github-action
+locale: fr
 ---
 
 ## Livraison continue pour iOS à l'aide d'actions Fastlane et GitHub à l'aide de match
@@ -269,7 +270,7 @@ Fastlane [match](https://docsfastlanetools/actions/match/) est une nouvelle appr
 
 Créez un nouveau référentiel privé nommé « certificats », par exemple sur votre compte personnel ou votre organisation GitHub.
 
-Initialisez la correspondance Fastlane pour votre application iOS
+Initialisez Fastlane Match pour votre application iOS
 
 ```shell
 fastlane match init

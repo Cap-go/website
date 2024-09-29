@@ -13,6 +13,7 @@ head_image_alt: Android TalkBack Activation
 tag: Android
 published: true
 next_blog: ''
+locale: fr
 ---
 
 TalkBack est une fonctionnalité essentielle pour les utilisateurs malvoyants, intégrée aux appareils Android. Il s'agit d'un lecteur d'écran basé sur les gestes qui vocalise le contenu de votre écran, facilitant la navigation et l'interaction avec différents éléments. Voici un guide complet sur la façon d'activer et d'utiliser TalkBack.

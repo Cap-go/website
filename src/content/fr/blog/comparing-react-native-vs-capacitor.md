@@ -14,6 +14,7 @@ head_image_alt: React Native vs Capacitor comparison illustration
 tag: Alternatives
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Ce que nous couvrirons :
@@ -182,7 +183,7 @@ export default App
 
 Dans l'exemple ci-dessus, nous importons les composants nécessaires depuis React Native, créons un composant fonctionnel et utilisons l'API `StyleSheet` pour créer des styles pour les composants.
 
-Capacitor, quant à lui, vous permet d'utiliser HTML, CSS et JavaScript pour créer votre application. Si vous êtes déjà familier avec le développement Web, la courbe d'apprentissage de Capacitor sera bien inférieure à celle de React Native.
+Capacitor, en revanche, vous permet d'utiliser HTML, CSS et JavaScript pour créer votre application. Si vous êtes déjà familier avec le développement Web, la courbe d'apprentissage de Capacitor sera bien inférieure à celle de React Native.
 
 Voici un exemple d'application simple utilisant Capacitor avec React :
 

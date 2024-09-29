@@ -13,6 +13,7 @@ head_image_alt: Capgo usage system explained
 tag: Solution
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Dans Capgo, 3 valeurs sont comptées et importantes à comprendre

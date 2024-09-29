@@ -16,6 +16,7 @@ head_image_alt: Image of a person working on a computer
 tag: Tutorial
 published: true
 next_blog: ''
+locale: fr
 ---
 
 # Comment créer un écran hors ligne dans Vue 3, Angular 14 ou React

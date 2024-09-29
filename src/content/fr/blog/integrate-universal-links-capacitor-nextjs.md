@@ -13,6 +13,7 @@ head_image_alt: Capacitor Universal Links
 tag: DeepLinking
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Les liens universels sur iOS et App Links sur Android permettent aux utilisateurs d'être redirigés directement vers votre application à partir d'un lien, en contournant le navigateur. Ceci est particulièrement utile pour améliorer l'expérience utilisateur et maintenir le contexte d'une page Web vers une application. Dans ce guide, nous' Je vais parcourir le processus de configuration de ces liens profonds pour une application Nextjs utilisant Capacitor

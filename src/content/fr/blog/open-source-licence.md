@@ -11,6 +11,7 @@ head_image_alt: Open Source Licence
 tag: Open Source
 published: true
 next_blog: ''
+locale: fr
 ---
 
 En ce qui concerne les licences de logiciels open source, il existe deux grandes catégories. Certaines licences relèvent de la catégorie des licences copyleft, tandis que d'autres sont des licences open source permissives.
@@ -97,7 +98,7 @@ GitHub vous permet de choisir entre deux licences BSD, la [Licence « simplifié
 Les licences Copyleft accordent aux utilisateurs de logiciels l'autorisation d'utiliser, de modifier et de partager le code source, mais protègent également contre les nouvelles licences via des restrictions et des termes et conditions spécifiques. Cela représente la caractéristique réciproque de cette licence qui exige que le travail des utilisateurs respecte les droits d'origine décrits dans la licence
 
 **Licences GNU**
-En ce qui concerne les licences de logiciels copyleft, la [GPL (General Public License)](https://wwwgnuorg/licenses/licensesenhtml/) est l'une des plus populaires et des plus utilisées. Cette licence open source accorde aux utilisateurs la liberté de distribuer des copies et les versions modifiées d'un programme tant qu'elles conservent certaines conditions, telles que les avis de droits d'auteur, les clauses de non-responsabilité ou toute autre licence qui a été ajoutée au programme non modifié.
+En ce qui concerne les licences de logiciels copyleft, la [GPL (General Public License)](https://wwwgnuorg/licenses/licensesenhtml/) est l'une des plus populaires et des plus utilisées. Cette licence open source accorde aux utilisateurs la liberté de distribuer des copies et les versions modifiées d'un programme à condition qu'elles conservent certaines conditions, telles que les avis de droits d'auteur, les exclusions de garantie ou toute autre licence qui a été ajoutée au programme non modifié.
 
 En rendant les logiciels disponibles avec ce type de licence, les développeurs s'assurent que d'autres ont accès à leur code source, leur permettant ainsi d'apporter des améliorations et des adaptations qui profitent à la communauté.De plus, ce concept de « copyleft » garantit que chacun peut partager de manière collaborative les mêmes libertés lorsqu'il travaille avec des logiciels libres.
 

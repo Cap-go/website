@@ -14,13 +14,14 @@ head_image_alt: TestFlight alternative illustration
 tag: alternatives
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## Préface
 
 Lorsque vous commencerez à profiter du système de mise à jour de Capgo, comme moi pour mes applications, vous commencerez à avoir le sentiment « Et si j'en veux plus ?
 
-J'ai eu le sentiment aussi, mais comme je suis le créateur de Capgo, j'ai pu y jeter un œil !
+J'ai eu le sentiment aussi, mais comme je suis le créateur de Capgo, j'ai pu y jeter un oeil !
 
 > Puisque tout est open-source, vous avez aussi ce pouvoir :)
 

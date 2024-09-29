@@ -13,6 +13,7 @@ head_image_alt: Fastlane Google play GitLab illustration
 tag: CI/CD
 published: true
 next_blog: null
+locale: fr
 ---
 
 ## Prérequis

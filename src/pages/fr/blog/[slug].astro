@@ -21,10 +21,6 @@ export async function getStaticPaths() {
         related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
       }
     }
-    related = related.map(i => {
-      i.frontmatter.locale = 'fr' 
-      return i
-    })
     return {
       params: {
         slug: post.frontmatter.slug,

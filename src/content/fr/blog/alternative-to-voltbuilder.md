@@ -14,6 +14,7 @@ head_image_alt: Voltbuilder alternative illustration
 tag: Alternatives
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Voltbuilder est une plate-forme basée sur le cloud qui permet aux développeurs de convertir leurs projets Web en applications mobiles natives pour Android et iOS à l'aide de HTML, CSS et JavaScript. Elle offre une gamme de fonctionnalités conçues pour simplifier le processus de développement d'applications, notamment une configuration facile, une application automatique. création et téléchargement, et prise en charge des plugins Apache Cordova
@@ -26,7 +27,7 @@ Capgo, un plugin Capacitor open source développé par Digital Shift OU, offre u
 
 Pour vous aider à prendre une décision éclairée, nous avons créé un tableau comparatif des fonctionnalités entre Capgo et Voltbuilder
 
-## Comparaisons de fonctionnalités
+## Comparaisons des fonctionnalités
 
 | Caractéristiques | Capgo | Constructeur de Volts |
 | --- | --- | --- |
@@ -45,7 +46,7 @@ Pour vous aider à prendre une décision éclairée, nous avons créé un tablea
 | Chiffrement de bout en bout | ✅ | ❌ |
 | 100% Open Source | ✅ | ❌ |
 | Installation facile | ✅ | ✅ |
-| Applications prêtes à être stockées | ❌ | ✅ |
+| Applications prêtes pour le magasin | ❌ | ✅ |
 
 ## Alternatives d'intégration continue
 

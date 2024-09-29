@@ -14,6 +14,7 @@ head_image_alt: capgo banner
 tag: SOLUTION
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## Aperçu

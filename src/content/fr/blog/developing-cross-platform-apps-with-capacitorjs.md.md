@@ -14,6 +14,7 @@ head_image_alt: Cross-Platform App Development
 tag: Tuto
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Dans le monde en évolution du développement d'applications mobiles, l'essor des applications Web progressives (PWA) a ouvert la voie à de nouveaux environnements d'exécution multiplateformes. Ces environnements d'exécution permettent aux applications Web d'être présentes dans les magasins d'applications sans s'appuyer uniquement sur le code natif. qui facilite cela est [**CapacitorJS**](https://capacitorjscom/), qui permet aux développeurs de déployer un site Web simple en tant qu'application sur Android, iOS et le Web à l'aide d'une seule base de code JavaScript. Cette approche réduit considérablement les coûts de développement et augmente l'efficacité du codage
@@ -168,6 +169,6 @@ Ces commandes vous permettront d'exécuter votre application dans Android Studio
 
 ## ‣ Conclusion
 
-Développer des applications multiplateformes avec CapacitorJS en utilisant du JavaScript pur est un moyen rentable et efficace de créer des applications pour plusieurs plateformes avec une seule base de code. En suivant ce guide, vous avez configuré votre projet, l'avez restructuré pour Vite et préparé votre application. pour le développement Avec cette base, vous êtes sur la bonne voie pour créer une application robuste et polyvalente
+Développer des applications multiplateformes avec CapacitorJS en utilisant du JavaScript pur est un moyen rentable et efficace de créer des applications pour plusieurs plates-formes avec une seule base de code. En suivant ce guide, vous avez configuré votre projet, l'avez restructuré pour Vite et préparé votre application. pour le développement Avec cette base, vous êtes sur la bonne voie pour créer une application robuste et polyvalente
 
 N'oubliez pas de tester minutieusement sur toutes les plates-formes et d'utiliser les plugins natifs de Capacitor pour améliorer les fonctionnalités de votre application. Bon codage !

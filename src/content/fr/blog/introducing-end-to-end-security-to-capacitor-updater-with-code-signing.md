@@ -15,6 +15,7 @@ head_image_alt: Secure upload Capgo
 tag: Solution
 published: true
 next_blog: ''
+locale: fr
 ---
 
 [Capacitor-updater](https://githubcom/Cap-go/capacitor-updater/) prend désormais en charge le cryptage du code de bout en bout. La signature du code garantit que les mises à jour exécutées par les appareils des utilisateurs finaux n'ont pas été falsifiées et fournit un niveau de protection supplémentaire supérieur à la sécurité Web standard de Capacitor-updater
@@ -31,7 +32,7 @@ Comme les meilleurs hébergeurs Web de leur catégorie, Capgo utilise HTTPS pour
 
 ## La chaîne d'approvisionnement de l'infrastructure cloud
 
-Une autre chose que Capgo et la plupart des hébergeurs Web ont en commun est qu'ils fonctionnent sur une infrastructure cloud de niveau inférieur, souvent provenant d'AWS, GCP ou d'un autre fournisseur cloud populaire. Le matériel et les logiciels exploités par ces fournisseurs cloud et Capgo ou d'autres hébergeurs Web font partie de la chaîne d'approvisionnement en nuage
+Une autre chose que Capgo et la plupart des hébergeurs Web ont en commun est qu'ils fonctionnent sur une infrastructure cloud de niveau inférieur, souvent provenant d'AWS, de GCP ou d'un autre fournisseur de cloud populaire. Le matériel et les logiciels exploités par ces fournisseurs de cloud et Capgo ou d'autres hébergeurs Web font partie du chaîne d'approvisionnement en nuage
 
 La chaîne d'approvisionnement du cloud et son modèle de sécurité fonctionnent pour un grand nombre de sites Web et d'applications. Chaque développeur Web qui utilise un fournisseur de cloud fait confiance à ce fournisseur et s'attend à ce que les fichiers qu'il télécharge soient ceux qui sont exécutés ou servis sans être falsifiés. les fournisseurs de cloud travaillent dur pour assurer la sécurité de leur infrastructure
 
@@ -65,8 +66,8 @@ Avec cela, même Capgo ne peut pas lire le contenu de votre offre groupée. Il s
 
 **Mise à jour du cryptage V2 2024-08-27 :**
 - Nous avons changé le type de clé stockée dans l'application. Cela a été fait afin d'éviter de déduire la clé publique (précédemment utilisée pour le cryptage) de la clé privée (précédemment utilisée pour le déchiffrement). Désormais, l'application stocke la clé publique (maintenant utilisée). pour le décryptage)
-- Nous avons basculé la somme de contrôle de l'algorithme CRC32 vers l'algorithme SHA256. Nous avons également commencé [la signature du bundle](https://enwikipediaorg/wiki/RSA_(cryptosystem)#Signing_messages) Lorsque le cryptage V2 est configuré, une mise à jour doit avoir une signature valide Ceci est strictement appliqué par le plugin
-- Nous appliquons désormais un cryptage de signature valide V2 configuré
+- Nous avons basculé la somme de contrôle de l'algorithme CRC32 vers l'algorithme SHA256. Nous avons également commencé [la signature du bundle](https://enwikipediaorg/wiki/RSA_(cryptosystem)#Signing_messages) Lorsque le chiffrement V2 est configuré, une mise à jour doit avoir une signature valide Ceci est strictement appliqué par le plugin
+- Nous appliquons désormais un cryptage de signature valide. V2 est configuré
 Ces 3 changements ont été effectués après une analyse de sécurité par un membre de la communauté. Ils sont là pour prévenir les attaques cryptographiques lors de la mise à jour.
 
 Si vous avez utilisé le chiffrement V1, migrez vers la V2 pour bénéficier des nouvelles fonctionnalités de sécurité. Suivez les [instructions de migration](/docs/cli/migrations/encryption/)

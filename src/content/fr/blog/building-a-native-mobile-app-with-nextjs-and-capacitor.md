@@ -15,6 +15,7 @@ head_image_alt: Next.js 14 and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 ## Introduction

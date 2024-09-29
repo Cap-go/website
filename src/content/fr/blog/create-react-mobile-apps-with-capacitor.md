@@ -13,6 +13,7 @@ head_image_alt: React and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous commencerons par une nouvelle application [React](https://reactjsorg/) et passerons au développement mobile natif à l'aide de Capacitor. En option, vous pouvez également ajouter [Konsta UI](https://konstauicom/) pour une interface utilisateur mobile améliorée avec Tailwind CSS
@@ -140,7 +141,7 @@ Mais attendez, il existe également un moyen plus rapide de le faire pendant le 
 
 ## Rechargement en direct du condensateur
 
-À présent, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
+À l'heure actuelle, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
 
 Activez l'accès à votre application hébergée localement avec le rechargement en direct **sur votre réseau** en demandant à l'application Capacitor de charger le contenu à partir de l'URL spécifique.
 
@@ -185,7 +186,7 @@ Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre p
 npx cap copy
 ```
 
-La commande `copy` est similaire à `sync`, mais elle **copiera uniquement les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif
+La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
 
 Vous pouvez maintenant déployer votre application une fois de plus via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application React, **l'application se rechargera automatiquement** et affichera les modifications !
 
@@ -195,7 +196,7 @@ Notez que vous devez utiliser l'adresse IP et le port corrects dans votre config
 
 ## Utilisation des plugins de condensateur
 
-Voyons comment utiliser en action un plugin Capacitor, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
+Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
 
 ```shell
 npm i @capacitor/share

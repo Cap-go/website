@@ -14,6 +14,7 @@ head_image_alt: Cordova to Capacitor migration illustration
 tag: Migration
 published: true
 next_blog: ''
+locale: fr
 ---
 
 # Migration d'une application Web à l'aide de Cordova vers Capacitor : un guide étape par étape

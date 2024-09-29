@@ -13,6 +13,7 @@ head_image_alt: Capgo bundle version system
 tag: Tutorial
 published: true
 next_blog: how-to-release-major-version-in-capgo
+locale: fr
 ---
 
 Capgo utilise 2 variables principales pour gérer les versions dans votre application Capacitor :

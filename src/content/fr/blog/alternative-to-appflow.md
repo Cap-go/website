@@ -14,6 +14,7 @@ head_image_alt: Appflow alternative illustration
 tag: Alternatives
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Ionic Appflow est une plate-forme de développement d'applications mobiles basée sur le cloud qui fournit aux développeurs une gamme d'outils et de services pour créer, tester et déployer rapidement des applications mobiles. Elle offre des fonctionnalités telles que l'intégration et le déploiement continus, les rapports d'erreur, permettant aux développeurs de suivre les performances de leurs applications. performances et s’assurer de son bon fonctionnement pour ses utilisateurs

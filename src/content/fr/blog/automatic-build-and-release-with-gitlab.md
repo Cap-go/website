@@ -13,6 +13,7 @@ head_image_alt: Gitlab CI illustration
 tag: CI/CD
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Ce tutoriel se concentre sur GitLab CI, mais vous pouvez l'adapter avec un petit ajustement à n'importe quelle autre plateforme CI/CD

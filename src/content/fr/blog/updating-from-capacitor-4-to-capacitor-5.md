@@ -14,6 +14,7 @@ head_image_alt: Capacitor 4 to 5 update illustration
 tag: Capacitor
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers Capacitor 5 implique des modifications minimes. Ce guide fournit des instructions étape par étape pour mettre à jour votre projet vers Capacitor 5, ainsi qu'une liste des modifications majeures pour les plugins officiels.

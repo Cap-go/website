@@ -13,6 +13,7 @@ head_image_alt: Nuxt 3 and Capgo illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous allons commencer avec une nouvelle application [Nuxt 3](https://nuxtjsorg/), nous déplacer dans notre pays natal en utilisant Capacitor et éventuellement ajouter également [Konsta UI](https://konstauicom/) pour un Tailwind amélioré. Interface utilisateur mobile CSS, bien que la dernière étape soit totalement facultative

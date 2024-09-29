@@ -4,7 +4,7 @@ title: Création d'applications mobiles avec Pure React.js et Capacitor
 description: >-
   Un guide sur la façon de transformer une application Web React.js en une
   application mobile native à l'aide de Capacitor et d'améliorer l'interface
-  utilisateur native avec Konsta UI.
+  utilisateur native avec l'interface utilisateur Konsta.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-29T00:00:00.000Z
@@ -14,6 +14,7 @@ head_image_alt: React.js and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: implementing-live-updates-in-your-react-capacitor-app
+locale: fr
 ---
 
 Ce didacticiel vous guidera dans la création d'une application mobile à l'aide de React, Capacitor et Konsta UI. À la fin, vous saurez comment transformer une application Web Reactjs en une application mobile native avec Capacitor et implémenter une interface utilisateur native à l'aide de Konsta UI.

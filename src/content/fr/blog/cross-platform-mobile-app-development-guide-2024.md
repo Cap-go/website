@@ -16,6 +16,7 @@ head_image_alt: Cross-platform mobile app development
 tag: cross-platform
 published: true
 next_blog: top-cross-platform-frameworks-compared-2024
+locale: fr
 ---
 
 ## Pourquoi le développement d'applications mobiles multiplateformes est important en 2024

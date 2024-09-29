@@ -11,6 +11,7 @@ head_image_alt: Caorodva Dev looking for update they app
 tag: Migration
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Si vous recherchez une plate-forme de développement d'applications robuste et moderne, alors Capacitor est la solution parfaite. Contrairement à Cordova, qui est une plate-forme vieillissante et obsolète, Capacitor exploite les dernières avancées en matière de plate-forme native et d'évolution du langage pour offrir la meilleure expérience utilisateur possible.
@@ -21,7 +22,7 @@ Cordova est ancienne et n'évolue plus : Cordova existe depuis un certain temps
 
 Cordova ne prend pas en charge les dernières évolutions natives de la plate-forme et du langage : Cordova ne prend pas en charge par défaut la dernière évolution de la plate-forme et du langage natifs, tels que Kotlin et Swift. Cela signifie que Cordova est incapable de fournir les dernières et meilleures expériences de développement d'applications aux utilisateurs.
 
-Condensateur : une alternative plus moderne : Capgo a adopté Capacitor comme alternative plus moderne à Cordova. Capacitor permet l'inclusion de bibliothèques externes, ce qui signifie que Capgo peut s'appuyer sur les meilleures bibliothèques et les maintenir à jour. plateforme de développement d'applications robuste et stable
+Condensateur : une alternative plus moderne : Capgo a adopté Capacitor comme alternative plus moderne à Cordova. Capacitor permet l'inclusion de bibliothèques externes, ce qui signifie que Capgo peut s'appuyer sur les meilleures bibliothèques et les maintenir à jour. Il en résulte une plus plateforme de développement d'applications robuste et stable
 
 Voici une autre raison pour laquelle Capgo ne prend pas en charge Cordova : maintenir le même niveau de qualité et de fonctionnalités que Cordova n'est pas réalisable pour une entreprise d'amorçage. Pour maintenir le produit de premier ordre, Capgo reste concentré sur l'utilisation des outils les plus modernes et les plus efficaces disponibles.
 

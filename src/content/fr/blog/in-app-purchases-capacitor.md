@@ -12,6 +12,7 @@ head_image_alt: Revenue cat in app purchases
 tag: Tutorial
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Capacitor Purchases est un plugin pour le framework Capacitor qui permet des achats intégrés sur iOS et Android. Il fournit une API simple et cohérente sur plusieurs plates-formes, permettant aux développeurs de mettre en œuvre facilement des abonnements et des achats intégrés dans leurs applications mobiles.
@@ -68,7 +69,7 @@ Nous vous recommandons d'utiliser un compte d'entreprise lors de l'inscription �
 
 ### ▶️ Créer un projet
 
-Accédez au tableau de bord RevenueCat et [ajoutez un nouveau projet](https://apprevenuecatcom/overview/) dans la liste déroulante du menu de navigation supérieur appelée _Projets_.
+Accédez au tableau de bord RevenueCat et [ajoutez un nouveau projet](https://apprevenuecatcom/overview/) à partir de la liste déroulante du menu de navigation supérieur appelée _Projets_.
 
 ![RevenueCat étape 1](/revenuecat_step1webp)
 
@@ -264,7 +265,7 @@ RevenueCat permet à vos utilisateurs de restaurer leurs achats intégrés, en r
 Si deux [ID utilisateur d'application](https://wwwrevenuecatcom/docs/user-ids/) différents restaurent les transactions à partir du même compte de magasin sous-jacent (compte Apple, Google ou Amazon)
 RevenueCat peut tenter de créer un alias entre les deux identifiants d'utilisateur de l'application et les compter comme le même utilisateur à l'avenir. Consultez le guide RevenueCat sur la [Restauration des achats] (https://wwwrevenuecatcom/docs/restoring-purchases/) pour plus d'informations sur les différents comportements de restauration configurables
 
-Étant donné que le SDK fonctionne de manière transparente sur n'importe quelle plate-forme, les modifications apportées aux informations d'achat d'un utilisateur peuvent provenir de diverses sources. Vous pouvez répondre à toute modification dans les « CustomerInfo » d'un client en vous conformant à une méthode de délégation facultative, « purchases :receivedUpdated : »
+Étant donné que le SDK fonctionne de manière transparente sur n'importe quelle plate-forme, les modifications apportées aux informations d'achat d'un utilisateur peuvent provenir de diverses sources. Vous pouvez répondre à toute modification dans les « CustomerInfo » d'un client en vous conformant à une méthode de délégation facultative, « purchases : receivedUpdated : »
 
 Cette méthode se déclenchera chaque fois que le SDK recevra un objet `CustomerInfo` mis à jour à partir d'appels à `getCustomerInfo()`, `purchase(package:)`, `purchase(product:)` ou `restorePurchases()`
 

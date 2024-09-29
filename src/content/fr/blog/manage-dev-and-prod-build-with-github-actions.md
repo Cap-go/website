@@ -14,6 +14,7 @@ head_image_alt: Channel builds illustration
 tag: CI/CD
 published: true
 next_blog: how-to-send-specific-version-to-users
+locale: fr
 ---
 
 Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec un petit ajustement à n'importe quelle autre plateforme CI/CD

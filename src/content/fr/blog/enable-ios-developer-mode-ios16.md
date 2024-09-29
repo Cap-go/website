@@ -14,6 +14,7 @@ head_image_alt: Enabling iOS Developer Mode on iPhone
 tag: iOS
 published: true
 next_blog: ''
+locale: fr
 ---
 
 # Comment activer le mode développeur sur iOS 16 pour les tests d'applications

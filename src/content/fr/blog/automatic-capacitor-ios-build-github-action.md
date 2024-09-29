@@ -15,6 +15,7 @@ head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
 published: true
 next_blog: automatic-capacitor-android-build-github-action
+locale: fr
 ---
 
 ## Livraison continue pour iOS à l'aide des actions et du certificat Fastlane et GitHub
@@ -456,7 +457,7 @@ jobs:
           retention-days: 10
 ```
 
-Ce workflow doit être déclenché après chaque _tag_ GitHub. Si vous devez automatiser la balise, veuillez d'abord vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
+Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abord
 
 Ensuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 

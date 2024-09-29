@@ -13,6 +13,7 @@ head_image_alt: Angular and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous commencerons par une nouvelle application [Angular](https://angulario/) et passerons au domaine des applications mobiles natives à l'aide de Capacitor. En option, vous pouvez également ajouter [Konsta UI](https://konstauicom/ ) pour une interface utilisateur mobile améliorée avec Tailwind CSS

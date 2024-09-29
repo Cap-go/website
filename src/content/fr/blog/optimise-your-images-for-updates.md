@@ -13,9 +13,10 @@ head_image_alt: Convert to webp illustration
 tag: Optimisation
 published: true
 next_blog: ''
+locale: fr
 ---
 
-WebP est un format d'image moderne qui peut permettre des économies significatives en termes de taille de fichier par rapport au JPEG, tout en conservant une qualité visuelle similaire ou meilleure. En convertissant vos images JPEG en WebP dans votre application mobile, vous pouvez potentiellement réduire la taille de votre application, ce qui peut entraîner pour des temps de téléchargement plus rapides et des performances améliorées pour vos utilisateurs
+WebP est un format d'image moderne qui peut permettre des économies significatives en matière de taille de fichier par rapport au JPEG, tout en conservant une qualité visuelle similaire ou meilleure. En convertissant vos images JPEG en WebP dans votre application mobile, vous pouvez potentiellement réduire la taille de votre application, ce qui peut entraîner pour des temps de téléchargement plus rapides et des performances améliorées pour vos utilisateurs
 
 WebP est bien pris en charge par la plupart des principales plates-formes et appareils mobiles, notamment Android et iOS. Contrairement à JPEG, WebP offre une qualité d'image supérieure avec une taille de fichier inférieure, ce qui se traduit par des temps de téléchargement plus rapides, une utilisation moindre des données et une meilleure expérience utilisateur. Ceci est particulièrement important pour les applications mobiles utilisées sur les réseaux cellulaires, où l'utilisation des données et les temps de téléchargement sont des préoccupations majeures.
 

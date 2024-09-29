@@ -14,6 +14,7 @@ head_image_alt: Native app look illustration
 tag: Web Development
 published: true
 next_blog: ''
+locale: fr
 ---
 
 # Configurations JS et CSS de base pour un look d'application native

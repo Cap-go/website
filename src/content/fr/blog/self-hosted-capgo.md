@@ -14,6 +14,7 @@ head_image_alt: self-hosted capgo
 tag: Solution
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Cet article fournit un guide étape par étape sur la façon d'auto-héberger Capgo, ainsi qu'une discussion sur les avantages et les défis de l'auto-hébergement.

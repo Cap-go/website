@@ -13,6 +13,7 @@ head_image_alt: CI/CD in GitLab
 tag: CI/CD
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Cet article vous expliquera comment configurer le pipeline CI/CD avec GitLab.

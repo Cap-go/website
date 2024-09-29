@@ -11,6 +11,7 @@ head_image_alt: Capgo birth illusatration
 tag: Story
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Hé, je m'appelle Martin Donadieu,

@@ -13,6 +13,7 @@ head_image_alt: Codemagic testflight illustration
 tag: CI/CD
 published: true
 next_blog: automatic-capacitor-android-build-codemagic
+locale: fr
 ---
 
 ## Livraison continue pour iOS à l'aide de Codemagic
@@ -45,7 +46,7 @@ Nous allons utiliser une machine **_macOS M1_**, vous pouvez voir sur la capture
 1 _Utilisation de l'API App Store Connect avec Codemagic_
 2 _Exigences_
 3 _Création d'une clé API App Store Connect_
-4 _Utilisation d'une clé API App Store Connect_
+4 _Utiliser une clé API App Store Connect_
 5 _Copier les fichiers Fastline_
 6 _Configurer Codemagic_
 

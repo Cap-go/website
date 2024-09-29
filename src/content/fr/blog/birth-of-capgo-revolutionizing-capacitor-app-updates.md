@@ -14,6 +14,7 @@ head_image_alt: A visual representation of Capgo's evolution from idea to produc
 tag: development
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## The Genesis : une demande de la communauté

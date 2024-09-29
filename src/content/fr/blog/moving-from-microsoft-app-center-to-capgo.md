@@ -16,6 +16,7 @@ head_image_alt: Microsoft App Center illustration
 tag: Alternatives
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Microsoft a récemment annoncé qu'il [interromprait le support des applications exécutées sur Apache Cordova](https://devblogsmicrosoftcom/appcenter/announcing-apache-cordova-retirement/) dans son produit cloud, App Center. Cela a incité les entreprises et les équipes utilisant App Centre pour rechercher des alternatives, et je suis ravi de dire que la plate-forme [Capgo](https://capgoapp/) est une option fantastique pour ceux qui recherchent une prise en charge complète des applications Capacitor.

@@ -13,6 +13,7 @@ head_image_alt: Fastlane Google play GitHub action illustration
 tag: CI/CD
 published: true
 next_blog: automatic-capacitor-ios-build-github-action
+locale: fr
 ---
 
 ## Livraison continue pour Android à l'aide des actions Fastlane et GitHub
@@ -192,7 +193,7 @@ Avec notre clé de compte de service ajoutée aux secrets du référentiel GitHu
 
 ### Stockage de votre clé de signature Android
 
-Pour [signer correctement les versions d'Android](https://developerandroidcom/studio/publish/app-signing/) dans CI, le flux de travail devra accéder soit à une clé de téléchargement Android, soit à une clé de signature d'application. Les applications créées après août 2021 utiliseront Le nouveau système de Google [Play App Signing](https://developerandroidcom/studio/publish/app-signing/#app-signing-google-play/) par défaut, dans lequel une clé de téléchargement gérée par l'utilisateur est utilisée pour signer les AAB avant télécharger, mais la clé de signature d'application est gérée par Google. Si votre équipe utilise Play App Signing de Google, tout ce dont vous aurez besoin pour le pipeline CI est la _clé de téléchargement_ de votre application, car la signature est différée jusqu'à ce que l'AAB ait été téléchargé sur la Play Console. Si vous devez encore créer une clé de téléchargement et un magasin de clés, suivez les [instructions](https://developerandroidcom/studio/publish/app-signing/#generate-key/) trouvées dans la documentation du développeur Android.
+Pour [signer correctement les versions d'Android](https://developerandroidcom/studio/publish/app-signing/) dans CI, le flux de travail devra accéder soit à une clé de téléchargement Android, soit à une clé de signature d'application. Les applications créées après août 2021 utiliseront Le nouveau système [Play App Signing](https://developerandroidcom/studio/publish/app-signing/#app-signing-google-play/) de Google par défaut, dans lequel une clé de téléchargement gérée par l'utilisateur est utilisée pour signer les AAB avant télécharger, mais la clé de signature d'application est gérée par Google. Si votre équipe utilise Play App Signing de Google, tout ce dont vous aurez besoin pour le pipeline CI est la _clé de téléchargement_ de votre application, car la signature est différée jusqu'à ce que l'AAB ait été téléchargé sur la Play Console. Si vous devez encore créer une clé de téléchargement et un magasin de clés, suivez les [instructions](https://developerandroidcom/studio/publish/app-signing/#generate-key/) trouvées dans la documentation du développeur Android.
 
 Si votre équipe n'a pas encore migré vers le système de signature d'application Play de Google, vous devrez plutôt mettre la clé _signing_ de votre application à la disposition du flux de travail CI pour signer correctement votre application avant de la télécharger.
 

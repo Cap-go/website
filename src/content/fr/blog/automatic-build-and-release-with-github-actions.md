@@ -14,6 +14,7 @@ head_image_alt: Github action illustration
 tag: CI/CD
 published: true
 next_blog: automatic-capacitor-ios-build-github-action
+locale: fr
 ---
 
 Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec peu de modifications à n'importe quelle autre plateforme CI/CD

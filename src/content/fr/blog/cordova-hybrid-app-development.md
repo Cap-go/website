@@ -15,6 +15,7 @@ head_image_alt: Diagram explaining the difference between hybrid and native apps
 tag: cordova
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## Démystifier Apache Cordova : un guide complet pour le développement d'applications hybrides

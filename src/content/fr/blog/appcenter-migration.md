@@ -13,6 +13,7 @@ head_image_alt: Capacitor JS Dev looking for alternative
 tag: Migration
 published: true
 next_blog: automatic-build-and-release-with-github-actions
+locale: fr
 ---
 
 ## Résumé de la migration

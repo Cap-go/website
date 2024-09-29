@@ -15,6 +15,7 @@ head_image_alt: Quasar and Capgo illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous commencerons par créer une nouvelle application Web à l'aide de [Quasar](https://quasardev/). Plus tard, nous apprendrons comment la transformer en application mobile à l'aide de Capacitor. Si vous souhaitez donner à votre application l'apparence mieux sur mobile

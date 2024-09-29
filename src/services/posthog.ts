@@ -25,7 +25,6 @@ export function setUser(uuid: string, data: {
   email?: string
   avatar?: string
 }): void {
-  // console.log('setUser')
 posthog.identify(
   uuid, 
   { email: data.email, name: data.nickname},

@@ -13,6 +13,7 @@ head_image_alt: SvelteKit and Capgo illustration
 tag: Tutorial
 published: true
 next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous commencerons par une nouvelle application [SvelteKit](https://kitsveltedev/) et passerons au développement mobile natif à l'aide de Capacitor. En option, vous pouvez également intégrer [Konsta UI](https://konstauicom/) pour une interface utilisateur mobile Tailwind CSS améliorée
@@ -173,7 +174,7 @@ Mais attendez, il existe également un moyen plus rapide de le faire pendant le 
 
 ## Rechargement en direct du condensateur
 
-À présent, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
+À l'heure actuelle, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
 
 Activez l'accès à votre application hébergée localement avec le rechargement en direct **sur votre réseau** en demandant à l'application Capacitor de charger le contenu à partir de l'URL spécifique.
 
@@ -218,9 +219,9 @@ Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre p
 npx cap copy
 ```
 
-La commande `copy` est similaire à `sync`, mais elle **copiera uniquement les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif
+La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
 
-Vous pouvez désormais déployer votre application une nouvelle fois via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Svelte, **l'application se rechargera automatiquement** et affichera les modifications !
+Vous pouvez maintenant déployer votre application une fois de plus via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Svelte, **l'application se rechargera automatiquement** et affichera les modifications !
 
 **Gardez à l'esprit** que si vous installez de nouveaux plugins tels que la caméra, cela nécessite toujours une reconstruction de votre projet natif. En effet, les fichiers natifs sont modifiés et cela ne peut pas être fait à la volée.
 
@@ -234,7 +235,7 @@ Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué p
 npm i @capacitor/share
 ```
 
-Il n'y a rien d'extraordinaire à propos du [plug-in de partage](https://capacitorjscom/docs/apis/share/), mais il affiche la boîte de dialogue de partage native ! Pour cela, il nous suffit maintenant d'importer le package et d'appeler la fonction `share()` depuis notre application, changeons donc le **src/routes/indexsvelte** par ceci :
+Il n'y a rien d'extraordinaire à propos du [plug-in de partage](https://capacitorjscom/docs/apis/share/), mais il affiche la boîte de dialogue de partage native ! Pour cela, il nous suffit maintenant d'importer le package et d'appeler la fonction `share()` depuis notre application, changeons donc le **src/routes/indexsvelte** par ceci :
 
 ```html
 <script>

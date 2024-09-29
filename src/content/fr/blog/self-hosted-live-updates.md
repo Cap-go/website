@@ -11,6 +11,7 @@ head_image_alt: Self hosted updates
 tag: Solution
 published: true
 next_blog: ''
+locale: fr
 ---
 
 Je suis ravi d'annoncer la sortie des mises à jour en direct auto-hébergées, qui représentent la dernière évolution des mises à jour en direct de Capgo.
@@ -23,7 +24,7 @@ Cela signifie que vous pouvez éviter les retards causés par les avis de l'Appl
 
 Le déploiement des mises à jour en direct hébergées par Capgo est un jeu d'enfant à l'aide du [SDK Capgo](https://githubcom/Cap-go/capacitor-updater/) En ce qui concerne les mises à jour en direct auto-hébergées, j'ai amélioré la CLI Capgo avec les fonctionnalités nécessaires pour activer la configuration sur votre infrastructure
 
-Pour garantir une livraison sûre et coordonnée des derniers artefacts de construction Web aux utilisateurs finaux, Capgo permet désormais au plugin Capacitor Live Updates d'utiliser une paire de clés publique/privée. Lors de l'utilisation de mises à jour en direct auto-hébergées, une poignée de main supplémentaire est effectuée pour rassurer. que les artefacts téléchargés via le plugin depuis l'infrastructure de l'entreprise ne sont pas modifiés
+Pour garantir une livraison sûre et coordonnée des derniers artefacts de build Web aux utilisateurs finaux, Capgo permet désormais au plugin Capacitor Live Updates d'utiliser une paire de clés publique/privée. Lors de l'utilisation de Live Updates auto-hébergées, une poignée de main supplémentaire est effectuée pour rassurer. que les artefacts téléchargés via le plugin depuis l'infrastructure de l'entreprise ne sont pas modifiés
 
 ![Schéma de chiffrement Capgo](/encryption_flowwebp)
 
@@ -44,7 +45,7 @@ Cette paire de clés est utilisée pour signer la mise à jour et vérifier la m
 
 ### Workflow de mises à jour en direct auto-hébergées
 
-Pour commencer à implémenter les mises à jour en direct auto-hébergées, une entreprise doit d'abord effectuer une compilation Web de ses corrections de bogues, mises à jour de contenu ou toute autre modification de code Web qu'elle souhaite apporter. Ensuite, elle doit signer l'artefact de compilation à l'aide de la clé privée obtenue. pendant le processus de configuration unique, et enfin télécharger le bundle vers leur emplacement de stockage préféré
+Pour commencer à mettre en œuvre des mises à jour en direct auto-hébergées, une entreprise doit d'abord effectuer une génération Web de ses corrections de bogues, mises à jour de contenu ou toute autre modification de code Web qu'elle souhaite apporter. Ensuite, elle doit signer l'artefact de construction à l'aide de la clé privée obtenue. pendant le processus de configuration unique, et enfin télécharger le bundle vers leur emplacement de stockage préféré
 
 Construisez d’abord votre code :
 ```shell

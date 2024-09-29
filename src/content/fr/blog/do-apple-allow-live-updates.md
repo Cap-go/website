@@ -13,6 +13,7 @@ head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 La mise à jour des applications Capacitor JS sans passer par le processus d'examen de l'App Store est possible sous certaines conditions décrites dans les directives officielles d'Apple. Cependant, il est important de noter qu'il ne s'agit pas d'un avis juridique. Afin que les mises à jour du code soient transmises directement à une application et restent conformes. avec les directives d'Apple, les conditions suivantes doivent être remplies :

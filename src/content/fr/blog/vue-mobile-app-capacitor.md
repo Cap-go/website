@@ -13,13 +13,14 @@ head_image_alt: Vue and Capacitor illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Dans ce didacticiel, nous vous guiderons tout au long du processus de conversion d'une application Web Vue en une application mobile native à l'aide de Capacitor. En option, vous pouvez également améliorer votre interface utilisateur mobile avec Konsta UI, une bibliothèque d'interface utilisateur mobile basée sur Tailwind CSS.
 
 ## À propos du condensateur
 
-Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil telles que la caméra via un script JavaScript. pont
+Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil comme la caméra via un JavaScript. pont
 
 ## Préparer votre application Vue
 

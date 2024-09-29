@@ -13,6 +13,7 @@ head_image_alt: Capgo major version system
 tag: Tutorial
 published: true
 next_blog: how-to-send-specific-version-to-users
+locale: fr
 ---
 
 ## Lors de la sortie d'une version majeure

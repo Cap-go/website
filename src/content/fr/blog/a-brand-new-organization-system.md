@@ -13,6 +13,7 @@ head_image_alt: Capgo organization system illusatration
 tag: Story
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## Introduction

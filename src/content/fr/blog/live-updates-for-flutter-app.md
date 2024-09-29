@@ -13,6 +13,7 @@ head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+locale: fr
 ---
 
 Capgo Live Update est un service qui permet aux développeurs de déployer des mises à jour sur leurs applications mobiles sans passer par le processus de soumission traditionnel de l'App Store. Cela peut être un moyen pratique de corriger rapidement des bugs ou d'effectuer de petites mises à jour d'une application sans attendre le processus de révision de l'App Store. Cependant, Capgo Live Update ne prend pas en charge la mise à jour des applications Flutter car les applications Flutter sont compilées en code natif.

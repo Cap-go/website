@@ -15,6 +15,7 @@ head_image_alt: Capacitor guide illustration
 tag: Guides
 published: true
 next_blog: ''
+locale: fr
 ---
 
 [Capacitor](https://capacitorjscom/) est un outil polyvalent qui permet aux développeurs Web de créer des applications natives iOS, Android, de bureau et Web progressives à l'aide d'une base de code Web standard unique. Développé par l'équipe derrière Ionic, Capacitor a attiré une attention considérable. ces dernières années, alors que les développeurs reconnaissent le potentiel des technologies Web sur les plates-formes mobiles. Dans ce guide complet, nous répondrons à certaines des questions les plus courantes sur Capacitor et explorerons ses capacités, ses cas d'utilisation et ses avantages.

@@ -27,6 +27,7 @@ const translateBlogFiles = async () => {
         const translatedTitle = await translateText(grayMatterJson.description, lang)
         if (translatedTitle) grayMatterJson['description'] = translatedTitle
       }
+      grayMatterJson['locale'] = lang
       appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
       const blogContent = content.substring(grayMatterEnd + 4)
       const codeBlockRegex = /```[\s\S]*?```/g;

@@ -16,6 +16,7 @@ head_image_alt: Capacitor Dev looking for alternative
 tag: Tutorial
 published: true
 next_blog: ''
+locale: fr
 ---
 
 ## Qu'est-ce que le programme de mise à jour du condensateur ?
