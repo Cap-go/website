@@ -9,8 +9,9 @@ const props = defineProps<{
   description: string
   date: string
   tag: string
+  locale?: string
 }>()
-const cannLink = computed(() => `/blog/${props.link}/`)
+const cannLink = computed(() => `${props.locale ? `/${props.locale}` : ''}/blog/${props.link}/`)
 </script>
 
 <template>

@@ -21,15 +21,9 @@ const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
 
 const decidePath = () => {
   if (typeof window !== 'undefined') {
-    const splitPathname = window.location.pathname.split('/').filter((i) => i)
-    if (locales.includes(splitPathname[0].toLowerCase())) {
-      currentPath.value = splitPathname.join('/').substring(5)
-    } else {
-      currentPath.value = splitPathname.join('/')
-    }
-    if (currentPath.value.endsWith('/')) {
-      currentPath.value = currentPath.value.substring(0, currentPath.value.length - 1)
-    }
+    const tmp = window.location.pathname
+    if (tmp.substring(0, 1) === '/' && tmp.substring(3, 4) === '/') currentPath.value = tmp.substring(3) 
+    else currentPath.value = tmp
   }
 }
 

@@ -3,12 +3,14 @@
   "name": "capgo-website",
   "scripts": {
     "astro": "astro",
-    "dev": "tsx generate_translations.tsx && astro dev",
-    "start": "tsx generate_translations.tsx && astro dev",
-    "build": "tsx generate_translations.tsx && astro build",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
-    "fmt": "prettier --write '**/*' --ignore-unknown"
+    "fmt": "prettier --write '**/*' --ignore-unknown",
+    "generate-translations": "tsx generate_translations.tsx",
+    "generate-blog-translations": "tsx generate_blog_translations.tsx"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.6",
@@ -48,6 +50,7 @@
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "eslint": "^9.11.1",
+    "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",

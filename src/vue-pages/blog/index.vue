@@ -17,7 +17,6 @@ const filteredPosts = computed(() => {
 const uniqueTags = computed(() => {
   const tags = new Set()
   for (const article of props.Content) tags.add(article.frontmatter.tag.toUpperCase())
-
   const uniqueTagsArray = Array.from(tags)
     .map((tag) => tag[0].toUpperCase() + tag.slice(1))
     .sort()
@@ -66,6 +65,7 @@ const uniqueTags = computed(() => {
           :date="article.frontmatter.created_at"
           :image="article.frontmatter.head_image"
           :description="article.frontmatter.description"
+          :locale="article.frontmatter.locale"
         />
       </div>
     </div>

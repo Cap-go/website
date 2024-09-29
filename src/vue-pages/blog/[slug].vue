@@ -140,6 +140,7 @@ function observeArticleTitles() {
             :date="article.frontmatter.created_at"
             :image="article.frontmatter.head_image"
             :description="article.frontmatter.description"
+            :locale="article.frontmatter.locale"
           />
         </div>
         <div class="mt-12 text-center">
