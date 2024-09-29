@@ -1,4 +1,4 @@
-import { appendFileSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 import { locales } from './src/services/locale'
@@ -10,6 +10,7 @@ const blogDirectory = join(contentDirectory, 'blog')
 const translateBlogFiles = async () => {
   const translationPromises = languages.map(async (lang) => {
     const langBlogDirectory = join(contentDirectory, lang, 'blog')
+    if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory)
     const blogFiles = readdirSync(blogDirectory)
     for (const file of blogFiles) {
       const filePath = join(blogDirectory, file)
