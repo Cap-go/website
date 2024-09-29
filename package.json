@@ -3,9 +3,9 @@
   "name": "capgo-website",
   "scripts": {
     "astro": "astro",
-    "dev": "tsx tr.tsx && astro dev",
-    "start": "tsx tr.tsx && astro dev",
-    "build": "tsx tr.tsx && astro build",
+    "dev": "tsx generate_translations.tsx && astro dev",
+    "start": "tsx generate_translations.tsx && astro dev",
+    "build": "tsx generate_translations.tsx && astro build",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
     "fmt": "prettier --write '**/*' --ignore-unknown"
