@@ -2,14 +2,14 @@
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import { onMounted, reactive, ref } from 'vue'
-import CIExpert from '../components/CIExpert.vue'
-import Orgs from '../components/Orgs.vue'
-import Testimonials from '../components/Testimonials.vue'
-import { useRuntimeConfig } from '../config/app'
-import { chatLoader } from '../services/bento'
-import { dynamicTranslations, type Locales } from '../services/locale'
-import { posthogLoader } from '../services/posthog'
-import translations from '../services/translations'
+import CIExpert from '@/components/CIExpert.vue'
+import Orgs from '@/components/Orgs.vue'
+import Testimonials from '@/components/Testimonials.vue'
+import { useRuntimeConfig } from '@/config/app'
+import { chatLoader } from '@/services/bento'
+import { dynamicTranslations, type Locales } from '@/services/locale'
+import { posthogLoader } from '@/services/posthog'
+import translations from '@/services/translations'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
@@ -17,19 +17,14 @@ const props = defineProps<{
   locale: Locales
 }>()
 
-// Flag to ensure the function is called only once
 const chatLoaded = ref(false)
-// Function to handle scroll event
 const handleScroll = () => {
   if (!chatLoaded.value) {
     chatLoaded.value = true
     chatLoader()
-    // Remove the event listener after the first scroll
     window.removeEventListener('scroll', handleScroll)
   }
 }
-
-// Add scroll event listener
 
 onMounted(() => {
   posthogLoader()
@@ -96,7 +91,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="grid grid-cols-1 px-16 mx-auto text-center sm:px-0 lg:max-w-4xl sm:grid-cols-3 gap-x-12 lg:gap-x-24 gap-y-8">
           <div>
             <svg class="w-auto mx-auto text-white h-14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <!-- ! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
               <path
                 d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z"
               />
@@ -104,13 +98,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ translations['instant_updates'][props.locale] }}</h3>
             <p class="mt-3 text-sm text-gray-400">
               {{ translations['reach_users_now_not_weeks_later'][props.locale] }}
-              <!-- Release in matter on seconds, not one week later. -->
-              <!-- Reach 90% of first day deployment instead of a month. -->
             </p>
           </div>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 448 512">
-              <!-- ! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
               <path
                 d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z"
               />
@@ -120,7 +111,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512">
-              <!-- ! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
               <path
                 d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"
               />

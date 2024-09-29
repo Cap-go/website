@@ -1,9 +1,9 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
-import { locales } from './src/services/locale'
+import { defaultLocale, locales } from './src/services/locale'
 
-const languages = locales.filter((lang) => lang !== 'en')
+const languages = locales.filter((lang) => lang !== defaultLocale)
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
 
@@ -59,7 +59,7 @@ const translateBlogFiles = async () => {
 const translateText = async (text: string, lang: string) => {
   const urlParams = new URLSearchParams({
     string: text,
-    from_lang: 'en',
+    from_lang: defaultLocale,
     to_lang: lang,
   })
   const response = await fetch(`https://api.datpmt.com/api/v2/dictionary/translate?${urlParams.toString()}`)

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Tweet from './Tweet.vue'
-import type { Locales } from '../services/locale'
-import translations from '../services/translations'
+import type { Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
 const props = defineProps<{
   locale: Locales

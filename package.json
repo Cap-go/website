@@ -5,7 +5,7 @@
     "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build > build_output.txt",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
     "fmt": "prettier --write '**/*' --ignore-unknown",

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Blog from '../../components/Blog.vue'
-import { formatTime } from '../../config/app'
+import Blog from '@/components/Blog.vue'
+import { formatTime } from '@/config/app'
 import { ref, onMounted, type Ref } from 'vue'
 
 const props = defineProps<{

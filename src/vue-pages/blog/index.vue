@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Blog from '../../components/Blog.vue'
-import { useRuntimeConfig } from '../../config/app'
+import Blog from '@/components/Blog.vue'
+import { useRuntimeConfig } from '@/config/app'
 
 const props = defineProps<{
   Content?: any
