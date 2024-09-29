@@ -3,7 +3,8 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import { defineComponent, ref, h, onMounted, onUnmounted } from 'vue'
 import { useRuntimeConfig } from '../config/app'
 import { openMessenger } from '../services/bento'
-import { locales, translations, type Locales } from '../services/locale'
+import { locales, type Locales } from '../services/locale'
+import translations from '../services/translations'
 
 const currentPath = ref('')
 const year = new Date().getFullYear()

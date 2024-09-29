@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { translations, type Locales } from '../services/locale'
+import type { Locales } from '../services/locale'
+import translations from '../services/translations'
 
 const props = defineProps<{
   locale: Locales

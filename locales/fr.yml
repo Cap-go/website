@@ -1,0 +1,115 @@
+home: Accueil
+pricing: Tarification
+blog: Blogue
+documentation: Documentation
+login: Se Connecter
+register: S'inscrire
+solutions: Solutions
+support: Soutien
+making_world_better: Faire du monde un meilleur endroit en construisant des applications élégantes.
+carbon_removal: 5% de nos revenus vont à la rétention du carbone.
+open_source: 100% open-source
+built_with_supabase: Construit avec Supabase
+build_in_public_on_twitter: Construire en public sur Twitter
+footer: Footer
+company: Entreprise
+legal: Légal
+copyright: Tous droits réservés.
+app_mobile: Application mobile
+plugins: Plugins
+awesome_capacitor: Awesome Capacitor
+top_app_by_framework: Top App par Framework
+community: Communauté
+guides: Guides
+status: Statut
+chat: Chat
+sponsor: Sponsorisé
+about: À propos
+imprint: Imprimé
+jobs: Jobs
+contributing: Contribueur
+security: Sécurité
+consulting: Consulting
+affiliate: Affilié
+privacy: Confidentialité
+support_policy: Politique de soutien
+sla: Contrat de niveau de service
+aup: Politique d'utilisation acceptable
+terms: Conditions d'utilisation
+security_txt: Security.txt
+dp: Politique de données
+dpa: Contrat de protection des données
+instant_updates_for_capacitor: Mises à jour instantanées pour Capacitor
+ship_updates_fixes_changes_and_features: Livraison de mises à jour, de correctifs, de modifications et de fonctionnalités
+within_minutes: Dans les minutes
+no_credit_card_required: Aucun numéro de carte bancaire requis
+try_for_free: Essayer gratuitement
+instant_updates: Mises à jour instantanées
+reach_users_now_not_weeks_later: Atteindre les utilisateurs maintenant, pas plus tard.
+app_store_compliant: Conforme à l'App Store
+100_compliant_with_apple_and_android_requirements: 100% conforme aux exigences d'Apple et d'Android
+end_to_end_encryption: Chiffrement de bout en bout
+only_your_users_can_decrypt_your_updates_no_one_else: Seulement vos utilisateurs peuvent déchiffrer vos mises à jour, personne d'autre.
+no_more_wait: Plus d'attente
+for_apple_and_google_app_updates_distribution: Pour la distribution des mises à jour des applications Apple et Google
+youre_in_good_company: Vous êtes dans une bonne compagnie.
+capgo_enables_development_teams_at_some_of_the_most_innovative_companies: Capgo permet aux équipes de développement de certaines des plus grandes entreprises innovantes.
+apps_with_20m_users: Applications avec plus de 20M d'utilisateurs
+use_capgo: Utiliser Capgo
+our_numbers_are_shared_transparently_since_december_2021: Nos chiffres sont partagés de manière transparente depuis décembre 2021.
+last_update: Dernière mise à jour
+updates_delivered: Mises à jour livrées
+all_around_the_globe: Partout dans le monde
+apps: Applications
+using_us_in_production: Utilisation dans la production
+stars_in_github: Étoiles dans GitHub
+how_it_work: Comment ça marche ?
+ship_your_first_update_in_less_than_15_minutes: Livrez votre première mise à jour en moins de 15 minutes !
+install_the_plugin: Installez le plugin
+send_your_first_update: Envoyez votre première mise à jour
+build_your_app_as_usual_then_send_with_the_cli: Construisez votre application comme d'habitude, puis envoyez avec la CLI
+get_the_update: Obtenez la mise à jour
+open_the_app_it_update_in_the_background: Ouvrez l'application, elle se met à jour en arrière-plan
+start_now: Commencez maintenant
+faster_releases: Livraisons plus rapides
+integration: Intégration
+goodbye_bugs: Changements instantanés, corrections de bugs Plus besoin d'attendre la re-téléchargement de l'application ! Avec une seule commande, les utilisateurs peuvent rapidement voir les corrections de bugs en action. Dites adieu aux retards frustrants.
+manage_updates_effortlessly: Gestion des mises à jour sans effort
+user_assignment: Affectation des utilisateurs
+easily_assign_users_and_send_the_latest_update_to_your_private_or_public_testers: Facile d'affectation des utilisateurs et de livraison de la dernière mise à jour à vos testeurs privés ou publics.
+seamless_deployment_process: Processus de déploiement sans faille
+when_your_update_is_ready_deploy_it_seamlessly_to_all_your_users: Lorsque votre mise à jour est prête, déployez-la de manière transparente à tous vos utilisateurs.
+simple_configuration_management: Gestion simple de la configuration
+manage_all_your_configurations_conveniently_through_our_user_friendly_web_interface: Gérez toutes vos configurations de manière simple via notre interface web conviviale.
+try_risk_free_with_a_15_days_free_trial: Essayez gratuitement pendant 15 jours
+get_started: Commencer
+they_love_capgo: Ils aiment Capgo.
+flexible_organization_management_for_your_team: Gestion flexible de l'organisation pour votre équipe
+create_manage_organizations_with_ease: Créez et gérez plusieurs organisations facilement, en attribuant des droits spécifiques à chaque utilisateur. Capgo fournit des outils puissants pour garder votre équipe organisée et efficace.
+multiple_organizations: Plusieurs organisations
+manage_various_teams: Gérer diverses équipes
+create_oversee_organizations_from_single_account: Créez et gérez plusieurs organisations à partir d'un seul compte, en simplifiant votre workflow et en améliorant votre productivité.
+granular_permissions: Permissions granulaires
+control_access_levels: Contrôler les niveaux d'accès
+assign_specific_rights_and_access_levels_to_each_user_within_your_organizations: Attribuez des droits et des niveaux d'accès spécifiques à chaque utilisateur dans vos organisations, en assurant la sécurité et le bon allo
+flexible_management: Gestion flexible
+adapt_as_you_grow: S'adapter à vos besoins
+easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure: Facile d'ajustement des rôles et des permissions des utilisateurs à mesure que votre équipe et vos projets évoluent, en maintenant une structure organisationnelle optimale.
+effortless_ci_cd_solutions: Solutions CI/CD sans effort
+we_configure_your_ci_cd_pipeline_directly_in_your_preferred_platform_whether_its_github_actions_gitlab_ci_or_others_we_dont_host_ci_cd_or_charge_you_to_maintain_it: Nous configurerons votre pipeline CI/CD directement dans votre plateforme préférée, que ce soit GitHub Actions, GitLab CI, ou d'autres. Nous ne hébergeons pas CI/CD et ne vous facturons pas pour le maintenir.
+seamless_integration: Intégration transparente
+we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_process_no_need_to_switch_platforms_or_learn_new_tools: Nous configurerons votre pipeline CI/CD pour fonctionner de manière transparente avec votre processus de développement actuel. Pas besoin de changer de plateforme ou d'apprendre de nouveaux outils.
+tailored_configuration: Configuration personnalisée
+our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: Notre équipe adapte la configuration de CI/CD pour répondre à vos besoins spécifiques, en garantissant des performances optimales et une efficacité maximale.
+platform_independence: Indépendance de la plateforme
+whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: Que vous utilisiez GitHub, GitLab, ou un autre système de contrôle de version, nous adaptons notre configuration à votre infrastructure existante.
+expert_guidance: Conseils expert
+benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself: Bénéficiez de notre expertise profonde en bonnes pratiques de CI/CD pour les applications mobiles, sans avoir à construire et à maintenir un système complexe vous-même.
+we_already_setup_ci_cd_for_50_apps: Nous avons déjà configuré CI/CD pour plus de 50 applications.
+running_your_ci_cd_costs_300: L'exécution de votre CI/CD coûte ~300$/mois
+appflow_6000_annually: AppFlow 6 000 $ par an.
+our_one_time_setup_fee_of_2600_combined_with_ci_cd_results_in_less_than_half_the_first_year_fee_of_appflow: Notre frais de configuration initial de 2 600 $ combiné à CI/CD, résulte en moins de la moitié du coût annuel de AppFlow.
+in_5_years_you_save_26100: En 5 ans, vous économisez 26 100 $.
+setup_ci_cd_now: Configurer CI/CD maintenant →
+push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
+its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis, Azure DevOps, GitLab, GitHub, CircleCI, et bien d'autres.

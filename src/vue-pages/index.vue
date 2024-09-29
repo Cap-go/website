@@ -7,8 +7,9 @@ import Orgs from '../components/Orgs.vue'
 import Testimonials from '../components/Testimonials.vue'
 import { useRuntimeConfig } from '../config/app'
 import { chatLoader } from '../services/bento'
-import { dynamicTranslations, translations, type Locales } from '../services/locale'
+import { dynamicTranslations, type Locales } from '../services/locale'
 import { posthogLoader } from '../services/posthog'
+import translations from '../services/translations'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''

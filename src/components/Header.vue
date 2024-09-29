@@ -2,7 +2,8 @@
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { ref } from 'vue'
 import { useRuntimeConfig } from '../config/app'
-import { translations, type Locales } from '../services/locale'
+import type { Locales } from '../services/locale'
+import translations from '../services/translations'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
