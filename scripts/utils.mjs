@@ -1,7 +1,5 @@
-import { config } from 'dotenv'
+import 'dotenv/config'
 import keys from '../configs.json' assert { type: 'json' }
-
-config()
 
 export const branch = import.meta.env.BRANCH || import.meta.env.GITHUB_HEAD_REF || 'main'
 

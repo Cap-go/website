@@ -1,17 +1,15 @@
-import { join } from 'node:path'
-import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { z } from 'zod'
-import * as dotenv from 'dotenv'
-import { Document } from 'langchain/document'
-import { PromptTemplate } from 'langchain/prompts'
+import 'dotenv/config'
 import { RetrievalQAChain } from 'langchain/chains'
-import { FaissStore } from 'langchain/vectorstores/faiss'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
+import { Document } from 'langchain/document'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { OutputFixingParser, StructuredOutputParser } from 'langchain/output_parsers'
+import { PromptTemplate } from 'langchain/prompts'
+import { FaissStore } from 'langchain/vectorstores/faiss'
+import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { z } from 'zod'
 import { actions } from './action.mjs'
-
-dotenv.config()
 
 async function loadVectorStore() {
   const directory = join(process.cwd(), 'loadedVectorStore')
