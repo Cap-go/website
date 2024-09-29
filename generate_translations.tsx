@@ -1,17 +1,17 @@
-import fs from 'fs'
-import path from 'path'
-import yaml from 'js-yaml'
+import { appendFileSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { load } from 'js-yaml'
+import { join } from 'path'
 
 const translations: { [k: string]: { en?: string; fr?: string } } = {}
 
 const loadYmlFiles = (directory: string) => {
-  const files = fs.readdirSync(directory)
+  const files = readdirSync(directory)
   files.forEach((file) => {
     const fileName = file.split('.')
     if (fileName[1] === 'yml') {
-      const filePath = path.join(directory, file)
-      const content = fs.readFileSync(filePath, 'utf8')
-      const data = yaml.load(content) as { [p: string]: string }
+      const filePath = join(directory, file)
+      const content = readFileSync(filePath, 'utf8')
+      const data = load(content) as { [p: string]: string }
       Object.keys(data).forEach((key) => {
         if (translations[key]) {
           translations[key] = {
@@ -28,11 +28,11 @@ const loadYmlFiles = (directory: string) => {
   })
 }
 
-loadYmlFiles(path.join(process.cwd(), 'locales'))
+loadYmlFiles(join(process.cwd(), 'locales'))
 
-const translationFile = path.join(process.cwd(), 'src', 'services', 'translations.ts')
+const translationFile = join(process.cwd(), 'src', 'services', 'translations.ts')
 
-fs.writeFileSync(translationFile, '', 'utf8')
-fs.appendFileSync(translationFile, 'const translations = ', { encoding: 'utf8' })
-fs.appendFileSync(translationFile, JSON.stringify(translations), { encoding: 'utf8' })
-fs.appendFileSync(translationFile, '; \nexport default translations;', { encoding: 'utf8' })
+writeFileSync(translationFile, '', { encoding: 'utf8' })
+appendFileSync(translationFile, 'const translations = ', { encoding: 'utf8' })
+appendFileSync(translationFile, JSON.stringify(translations), { encoding: 'utf8' })
+appendFileSync(translationFile, '; \nexport default translations;', { encoding: 'utf8' })
