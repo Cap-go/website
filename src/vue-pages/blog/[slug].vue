@@ -25,7 +25,7 @@ const staticToc: Ref<HTMLElement | null> = ref(null)
 const fixedToc: Ref<HTMLElement | null> = ref(null)
 const article: Ref<HTMLElement | null> = ref(null)
 const isFixedTocVisible = ref(false)
-const activeSlug = ref<boolean|string>(false)
+const activeSlug = ref<boolean | string>(false)
 
 onMounted(() => window.addEventListener('scroll', handleScroll))
 
@@ -46,7 +46,7 @@ function observeArticleTitles() {
       const tmp = heading.getAttribute('id')
       if (tmp) {
         activeSlug.value = tmp
-        history.replaceState(null, null, `#${tmp}`);
+        history.replaceState(null, null, `#${tmp}`)
         break
       }
     }
@@ -56,18 +56,22 @@ function observeArticleTitles() {
 
 <template>
   <main class="text-center text-white">
-    <div ref="fixedToc" class="hidden xl:block fixed top-20 left-10 max-h-[calc(100vh-80px)] overflow-y-auto z-10 opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': isFixedTocVisible }">
-        <div class="bg-white/10 p-5 rounded w-[280px]">
-          <ul v-if="toc?.length" class="list-none flex flex-col text-left">
-            <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
-            <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
-              <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
-                {{ item.text }}
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div
+      ref="fixedToc"
+      class="hidden xl:block fixed top-20 left-10 max-h-[calc(100vh-80px)] overflow-y-auto z-10 opacity-0 transition-opacity duration-300"
+      :class="{ 'opacity-100': isFixedTocVisible }"
+    >
+      <div class="bg-white/10 p-5 rounded w-[280px]">
+        <ul v-if="toc?.length" class="list-none flex flex-col text-left">
+          <span class="text-lg border-b pb-1 border-gray-600">Table Of Contents</span>
+          <li v-for="item in toc" :key="item.slug" class="truncate block mt-2 text-gray-400 hover:text-gray-200">
+            <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
+              {{ item.text }}
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
     <div class="relative pb-4 lg:max-w-1/2 mx-auto">
       <div class="block aspect-w-4 aspect-h-3">
         <img
@@ -86,9 +90,7 @@ function observeArticleTitles() {
         </span>
       </div>
     </div>
-    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase">
-      Last update: {{ formatTime(props?.updated_at || '') }}
-    </span>
+    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"> Last update: {{ formatTime(props?.updated_at || '') }} </span>
     <div class="relative toc-wrapper">
       <h1 class="py-5 text-3xl lg:text-4xl lg:max-w-1/2 px-4 font-800 mx-auto">
         {{ props?.title }}

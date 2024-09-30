@@ -32,8 +32,8 @@ for (const lang of newLocale) {
       newData[key] = await translateText(data[key], lang)
     }),
   )
-const newLocalePath = path.join(process.cwd(), 'locales', lang + '.yml')
+  const newLocalePath = path.join(process.cwd(), 'locales', lang + '.yml')
   fs.writeFileSync(newLocalePath, dump(newData), 'utf8')
   console.log(`Wrote ${lang}.yml to locales directory.`)
   console.log('Done.\n')
-  }
+}

@@ -22,7 +22,7 @@ const systemStatus = ref({ indicator: 'unknown', uptime: 'N/A' })
 const decidePath = () => {
   if (typeof window !== 'undefined') {
     const tmp = window.location.pathname
-    if (tmp.substring(0, 1) === '/' && tmp.substring(3, 4) === '/') currentPath.value = tmp.substring(3) 
+    if (tmp.substring(0, 1) === '/' && tmp.substring(3, 4) === '/') currentPath.value = tmp.substring(3)
     else currentPath.value = tmp
   }
 }

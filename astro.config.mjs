@@ -18,10 +18,12 @@ export default defineConfig({
   i18n: {
     locales,
     defaultLocale,
-    fallback: locales.filter(i => i !== defaultLocale).reduce((r, h) => {
-      r[h] = defaultLocale
-      return r
-    }, {}),
+    fallback: locales
+      .filter((i) => i !== defaultLocale)
+      .reduce((r, h) => {
+        r[h] = defaultLocale
+        return r
+      }, {}),
   },
   integrations: [
     UnoCSS({ injectReset: true }),

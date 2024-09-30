@@ -12,7 +12,7 @@
     "generate:locale:translations": "tsx generate_locale_translations.tsx",
     "generate:blog:translations": "tsx generate_blog_translations.tsx",
     "generate:translation.ts": "tsx generate_translation_ts_file.tsx",
-    "generate:new:locale": "tsx setup_new_locale.tsx"
+    "setup:new:locale": "tsx setup_new_locale.tsx"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.6",

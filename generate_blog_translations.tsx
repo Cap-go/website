@@ -19,7 +19,7 @@ const translateBlogFiles = async () => {
       writeFileSync(destinationPath, '', 'utf8')
       const content = readFileSync(filePath, 'utf8')
       const grayMatterEnd = content.indexOf('---', 4)
-      const { data: grayMatterJson } = matter(content);
+      const { data: grayMatterJson } = matter(content)
       if (grayMatterJson.title) {
         const translatedTitle = await translateText(grayMatterJson.title, lang)
         if (translatedTitle) grayMatterJson['title'] = translatedTitle
@@ -31,9 +31,9 @@ const translateBlogFiles = async () => {
       grayMatterJson['locale'] = lang
       appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
       const blogContent = content.substring(grayMatterEnd + 4)
-      const codeBlockRegex = /```[\s\S]*?```/g;
-      const codeBlocks = [...blogContent.matchAll(codeBlockRegex)];
-      const blogContentWithoutCodeBlocks = blogContent.replace(codeBlockRegex, '[[CODE_BLOCK]]');
+      const codeBlockRegex = /```[\s\S]*?```/g
+      const codeBlocks = [...blogContent.matchAll(codeBlockRegex)]
+      const blogContentWithoutCodeBlocks = blogContent.replace(codeBlockRegex, '[[CODE_BLOCK]]')
       const sentences = blogContentWithoutCodeBlocks.split('.')
       let currentChunk = ''
       for (const sentence of sentences) {
@@ -47,11 +47,11 @@ const translateBlogFiles = async () => {
         const tmp = await translateText(currentChunk, lang)
         if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
       }
-      let translatedContent = await readFileSync(destinationPath, 'utf8');
+      let translatedContent = await readFileSync(destinationPath, 'utf8')
       codeBlocks.forEach((match, index) => {
-        translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0]);
-      });
-      writeFileSync(destinationPath, translatedContent, 'utf8');
+        translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
+      })
+      writeFileSync(destinationPath, translatedContent, 'utf8')
     }
   })
   await Promise.all(translationPromises)
