@@ -30,7 +30,7 @@ Bien entendu, il est important que vous évaluiez soigneusement les fonctionnali
 
 C'est pourquoi nous vous avons réalisé un tableau clair et simple pour vous aider à comparer
 
-## Comparaisons des fonctionnalités
+## Comparaisons de fonctionnalités
 
 | Caractéristiques | Capgo | Génial |
 | --- | --- | --- |
@@ -58,7 +58,7 @@ Pour configurer l'intégration continue avec GitHub Actions et Capgo, vous devre
 
 Avec cette configuration en place, chaque fois que vous introduisez des modifications dans le code de votre application et que vous la transmettez au référentiel GitHub, le fichier de workflow sera déclenché et les étapes spécifiées seront exécutées. Cela vous permet de créer, tester et déployer automatiquement votre JS. application avec un minimum d'effort, tout en profitant de la commodité et de la flexibilité des mises à jour en direct
 
-Dans l'ensemble, l'utilisation de GitHub Actions et de [Capgo](/register/) peut être une solution rentable pour ceux qui souhaitent utiliser les mises à jour en direct mais ne disposent pas de leur propre configuration d'intégration continue.En tirant parti de ces outils, les clients peuvent automatiser leur processus de développement d'applications et déployer rapidement et facilement des mises à jour auprès de leurs utilisateurs.
+Dans l'ensemble, l'utilisation de GitHub Actions et de [Capgo](/register/) peut être une solution rentable pour ceux qui souhaitent utiliser les mises à jour en direct mais qui ne disposent pas de leur propre configuration d'intégration continue.En tirant parti de ces outils, les clients peuvent automatiser leur processus de développement d'applications et déployer rapidement et facilement des mises à jour auprès de leurs utilisateurs.
 
 Si vous êtes prêt à configurer votre CI/CD avec Capgo, vous pouvez suivre ce [tutoriel pour IOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) et [tutoriel pour Android](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)
 

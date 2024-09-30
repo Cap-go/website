@@ -1,6 +1,6 @@
 ---
 slug: a-brand-new-organization-system
-title: Un tout nouveau système d'organisation
+title: Un nuevo sistema de organización
 description: >-
   Une histoire sur la façon dont l'équipe capgo a ajouté un système
   d'organisation
@@ -41,9 +41,9 @@ Cela ne permettait même pas à l'utilisateur invité d'accéder aux statistique
 
 Et puis j'ai attendu que Martin examine cela, j'ai attendu et attendu, mais rien ne s'est vraiment passé 3 mois plus tard, j'ai décidé d'y revenir et de résoudre tous les conflits de fusion que j'ai également décidé de tester, ce qui s'est avéré être une excellente idée.
 Sans surprise, la solution hacky a complètement échoué. À ce moment-là, j'ai décidé de corriger tous les bugs et d'écrire un test E2E approfondi.
-J'ai dû travailler avec du code très défectueux et beaucoup de mauvaises décisions prises par mon passé, mais après 2 semaines difficiles, je l'ai finalement fait fonctionner.
+J'ai dû travailler avec un code très défectueux et beaucoup de mauvaises décisions prises par mon passé, mais après 2 semaines difficiles, je l'ai finalement fait fonctionner.
 
-Cela ne signifie cependant pas qu'il était parfait. Le propriétaire de l'organisation disposait toujours d'un accès beaucoup plus large que même l'utilisateur invité le plus élevé. L'expérience utilisateur était également assez insuffisante. L'utilisateur invité ne pouvait même pas voir les statistiques de l'application, gérer la facturation et le La CLI était limitée au téléchargement uniquement 
+Cela ne signifie toutefois pas qu'il était parfait. Le propriétaire de l'organisation disposait toujours d'un accès beaucoup plus large que même l'utilisateur invité le plus élevé. L'expérience utilisateur était également assez insuffisante. L'utilisateur invité ne pouvait même pas voir les statistiques de l'application, gérer la facturation et le La CLI était limitée au téléchargement uniquement 
 
 Malgré tous ces défis, Martin avait revu le PR, et une semaine plus tard, il a été mis en production. 
 
@@ -74,7 +74,7 @@ Même cela n'était pas suffisant. Il manquait encore un élément énorme : la 
 Jusqu'à présent, seul le propriétaire pouvait gérer la facturation. Cela a créé des problèmes intéressants lorsqu'un utilisateur achetait un forfait pensant qu'il l'achetait pour l'organisation. 
 Nous avons rapidement résolu le problème manuellement et c'est à ce stade que nous avons décidé que ce problème était inacceptable.
 
-La migration s'est plutôt bien dérouléeCela a demandé une semaine de travail mais comparé à la V1 et à la V2 ce n'était vraiment pas si dur 🚀
+La migration s’est plutôt bien dérouléeCela a demandé une semaine de travail mais comparé à la V1 et à la V2 ce n'était vraiment pas si dur 🚀
 
 ## Organisations v4 – l'avenir
 

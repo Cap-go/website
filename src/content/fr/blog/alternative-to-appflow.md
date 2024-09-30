@@ -29,7 +29,7 @@ Bien entendu, il est important que vous évaluiez soigneusement les fonctionnali
 
 C'est pourquoi nous vous avons réalisé un tableau clair et simple pour vous aider à comparer
 
-## Comparaisons des fonctionnalités
+## Comparaisons de fonctionnalités
 
 | Caractéristiques | Capgo | Flux d'applications |
 | --- | --- | --- |

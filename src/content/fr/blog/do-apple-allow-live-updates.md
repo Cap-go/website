@@ -29,4 +29,4 @@ La deuxième condition, ne fournissant pas de fonctionnalités ou de fonctionnal
 
 Google Play est moins restrictif qu'Apple en matière de mise à jour des applications. Google Play permet aux applications installées depuis leur boutique avec des bundles JavaScript d'être mises à jour par des services non Google. 
 
-Pour plus d'informations sur la façon d'installer Capgo pour contourner l'examen, veuillez vous référer à mon prochain article
+Pour plus d'informations sur la façon d'installer Capgo pour contourner la révision, veuillez vous référer à mon prochain article

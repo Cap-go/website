@@ -145,6 +145,6 @@ La création de Capgo a été loin d'être facileCela a nécessité d'innombrabl
 
 À mesure que Capgo continue d'évoluer, il constitue un excellent exemple de la manière dont l'identification d'une lacune sur le marché, le travail actif pour la combler et la réactivité aux besoins de la communauté peuvent conduire à la création d'outils précieux qui profitent à l'ensemble de l'écosystème des développeurs.
 
-L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo.
+L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo
 
 Vous pouvez trouver l'histoire complète sur [ici](https://githubcom/capacitor-community/proposals/issues/43#issuecomment-941017142)

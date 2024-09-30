@@ -51,7 +51,7 @@ Créez un fichier gitlab-ciyml à la racine de votre référentiel GitLab avec l
        - version standard du condensateur npx
        - git push origine $CI_COMMIT_REF_NAME --tags
 
-Remplacez "gitlab@yourdomaincom" et "GitLab CI/CD" par votre adresse e-mail GitLab et votre nom d'utilisateur dans la section script. Cette configuration déclenche le travail uniquement lors des push vers la branche principale et exclut les commits avec des messages commençant par "chore(release):"
+Remplacez "gitlab@yourdomaincom" et "GitLab CI/CD" par votre adresse e-mail GitLab et votre nom d'utilisateur dans la section script. Cette configuration déclenche le travail uniquement lors des poussées vers la branche principale et exclut les commits avec des messages commençant par "chore(release):"
 
 ## GitLab CI/CD pour la construction
 

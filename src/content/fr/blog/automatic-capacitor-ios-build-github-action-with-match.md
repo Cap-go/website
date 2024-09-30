@@ -25,7 +25,7 @@ locale: fr
 
 Avant de poursuivre le tutoriel…
 
-- Assurez-vous d'avoir Fastlane [installé](https://docsfastlanetools/) sur votre machine de développement
+- Assurez-vous que Fastlane est [installé](https://docsfastlanetools/) sur votre machine de développement
 - Adhésion au programme pour développeurs iOS
 - Envie de lire 😆…
 - Une équipe composée de nombreux développeurs, sinon nous recommandons d'utiliser [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) pour des flux de travail plus simples
@@ -41,7 +41,7 @@ Nous allons utiliser une machine **_macOS_**, vous pouvez voir sur la capture d'
 
 🔴 **_Une fois prévenus des besoins et des tarifs, si vous le souhaitez, on continue…_**
 
-> **_📣_ Dans le post nous supposons que nous avons l'application créée dans iTunes connect, nous avons les certificats de l'écosystème Apple, tout sera copié par Fastlane !**
+> **_📣_ Dans le post, nous supposons que nous avons l'application créée dans iTunes Connect, nous avons les certificats de l'écosystème Apple, tout sera copié par Fastlane !**
 
 ## Allons au désordre 🧑🏽💻
 
@@ -50,7 +50,7 @@ Nous allons utiliser une machine **_macOS_**, vous pouvez voir sur la capture d'
 1 _Utilisation de l'API App Store Connect avec Fastlane Match_
 2 _Exigences_
 3 _Création d'une clé API App Store Connect_
-4 _Utilisation d'une clé API App Store Connect_
+4 _Utiliser une clé API App Store Connect_
 5 _Copier les fichiers Fastline_
 6 _Configurer les matchs Fastlane_
 6 _Configurer les matchs Fastlane_
@@ -93,7 +93,7 @@ Pour générer des clés, vous devez disposer de l'autorisation d'administrateur
 
 ![Les clés API App Store Connect créent un nom](/gen_keywebp)
 
-6 — Sous Accès, sélectionnez le rôle de la clé. Les rôles qui s'appliquent aux clés sont les mêmes que ceux qui s'appliquent aux utilisateurs de votre équipe Voir [autorisations de rôle](https://helpapplecom/app-store-connect/#/deve5f9a89d7/ )
+6 — Sous Accès, sélectionnez le rôle pour la clé. Les rôles qui s'appliquent aux clés sont les mêmes que ceux qui s'appliquent aux utilisateurs de votre équipe Voir [autorisations de rôle](https://helpapplecom/app-store-connect/#/deve5f9a89d7/ )
 
 7 — Cliquez sur Générer
 
@@ -270,7 +270,7 @@ Fastlane [match](https://docsfastlanetools/actions/match/) est une nouvelle appr
 
 Créez un nouveau référentiel privé nommé « certificats », par exemple sur votre compte personnel ou votre organisation GitHub.
 
-Initialisez Fastlane Match pour votre application iOS
+Initialisez la correspondance Fastlane pour votre application iOS
 
 ```shell
 fastlane match init
@@ -370,7 +370,7 @@ Vous êtes-vous déjà demandé d'où viennent les valeurs de « ENV » ? Eh 
 
 1\ `APP_STORE_CONNECT_TEAM_ID` - l'ID de votre équipe App Store Connect si vous faites partie de plusieurs équipes
 
-2\ `DEVELOPER_APP_ID` ​​- dans App Store Connect, accédez à l'application → **Informations sur l'application** → Faites défiler jusqu'à la section `Informations générales` de votre application et recherchez `Apple ID`
+2\ `DEVELOPER_APP_ID` ​​- dans App Store Connect, accédez à l'application → **Informations sur l'application** → Faites défiler jusqu'à la section `Informations générales` de votre application et recherchez `identifiant Apple`
 
 3\ `DEVELOPER_APP_IDENTIFIER` - l'identifiant du bundle de votre application
 
@@ -471,7 +471,7 @@ jobs:
           retention-days: 60
 ```
 
-Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abord
+Ce workflow doit être déclenché après chaque _tag_ GitHub. Si vous devez automatiser la balise, veuillez d'abord vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
 
 Ensuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 

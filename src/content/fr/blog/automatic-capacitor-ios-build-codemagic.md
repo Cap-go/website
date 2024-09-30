@@ -1,6 +1,6 @@
 ---
 slug: automatic-capacitor-ios-build-codemagic
-title: Construction automatique d'IOS de condensateur avec Codemagic
+title: Création automatique d'un condensateur IOS avec Codemagic
 description: >-
   Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
   de Codemagic et Codemagic en 5 minutes (2024)
@@ -46,7 +46,7 @@ Nous allons utiliser une machine **_macOS M1_**, vous pouvez voir sur la capture
 1 _Utilisation de l'API App Store Connect avec Codemagic_
 2 _Exigences_
 3 _Création d'une clé API App Store Connect_
-4 _Utiliser une clé API App Store Connect_
+4 _Utilisation d'une clé API App Store Connect_
 5 _Copier les fichiers Fastline_
 6 _Configurer Codemagic_
 
@@ -184,7 +184,7 @@ Vous pouvez télécharger le profil sous forme de fichier « mobileprovision �
 
 ### Ajout du certificat de signature de code
 
-Codemagic vous permet de télécharger des certificats de signature de code sous forme d'archives PKCS#12 contenant à la fois le certificat et la clé privée nécessaire à son utilisation. Lors du téléchargement, Codemagic vous demandera de fournir le mot de passe du certificat (si le certificat est protégé par mot de passe) ainsi qu'un **Nom de référence** unique, qui peut ensuite être utilisé dans la configuration `codemagicyaml` pour récupérer le fichier spécifique
+Codemagic vous permet de télécharger des certificats de signature de code sous forme d'archives PKCS#12 contenant à la fois le certificat et la clé privée nécessaire pour l'utiliser. Lors du téléchargement, Codemagic vous demandera de fournir le mot de passe du certificat (si le certificat est protégé par mot de passe) ainsi qu'un **Nom de référence** unique, qui peut ensuite être utilisé dans la configuration `codemagicyaml` pour récupérer le fichier spécifique
 
 - Télécharger le certificat
 - Générer un nouveau certificat

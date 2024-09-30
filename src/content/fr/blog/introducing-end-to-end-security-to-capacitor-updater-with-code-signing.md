@@ -66,8 +66,8 @@ Avec cela, même Capgo ne peut pas lire le contenu de votre offre groupée. Il s
 
 **Mise à jour du cryptage V2 2024-08-27 :**
 - Nous avons changé le type de clé stockée dans l'application. Cela a été fait afin d'éviter de déduire la clé publique (précédemment utilisée pour le cryptage) de la clé privée (précédemment utilisée pour le déchiffrement). Désormais, l'application stocke la clé publique (maintenant utilisée). pour le décryptage)
-- Nous avons basculé la somme de contrôle de l'algorithme CRC32 vers l'algorithme SHA256. Nous avons également commencé [la signature du bundle](https://enwikipediaorg/wiki/RSA_(cryptosystem)#Signing_messages) Lorsque le chiffrement V2 est configuré, une mise à jour doit avoir une signature valide Ceci est strictement appliqué par le plugin
-- Nous appliquons désormais un cryptage de signature valide. V2 est configuré
+- Nous avons basculé la somme de contrôle de l'algorithme CRC32 vers l'algorithme SHA256. Nous avons également commencé [la signature du bundle](https://enwikipediaorg/wiki/RSA_(cryptosystem)#Signing_messages) Lorsque le cryptage V2 est configuré, une mise à jour doit avoir une signature valide Ceci est strictement appliqué par le plugin
+- Nous appliquons désormais un cryptage de signature valide V2 configuré
 Ces 3 changements ont été effectués après une analyse de sécurité par un membre de la communauté. Ils sont là pour prévenir les attaques cryptographiques lors de la mise à jour.
 
 Si vous avez utilisé le chiffrement V1, migrez vers la V2 pour bénéficier des nouvelles fonctionnalités de sécurité. Suivez les [instructions de migration](/docs/cli/migrations/encryption/)

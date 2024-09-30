@@ -20,7 +20,7 @@ Dans ce didacticiel, nous vous guiderons tout au long du processus de conversion
 
 ## À propos du condensateur
 
-Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil comme la caméra via un JavaScript. pont
+Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil telles que la caméra via un script JavaScript. pont
 
 ## Préparer votre application Vue
 

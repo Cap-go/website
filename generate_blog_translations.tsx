@@ -9,8 +9,9 @@ const blogDirectory = join(contentDirectory, 'blog')
 
 const translateBlogFiles = async () => {
   const translationPromises = languages.map(async (lang) => {
+    console.log(`Preparing the blogs for locale: ${lang}...`)
     const langBlogDirectory = join(contentDirectory, lang, 'blog')
-    if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory)
+    if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
     const blogFiles = readdirSync(blogDirectory)
     for (const file of blogFiles) {
       const filePath = join(blogDirectory, file)

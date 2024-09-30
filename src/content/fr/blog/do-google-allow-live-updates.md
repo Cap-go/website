@@ -26,4 +26,4 @@ De plus, les applications ou le code tiers qui utilisent des langages interprét
 
 En suivant ces directives et en utilisant des outils tels que le plugin Capgo Capacitor, vous pouvez vous assurer que les mises à jour de votre application sont conformes aux politiques de Google Play et que votre application reste disponible pour les utilisateurs de la plateforme. Gardez à l'esprit que c'est toujours une bonne idée de doubler- vérifiez la dernière version des politiques de Google pour vous assurer que vous les suivez correctement
 
-Pour plus d'informations sur la façon d'installer Capgo pour contourner la révision, veuillez vous référer à mon prochain article
+Pour plus d'informations sur la façon d'installer Capgo pour contourner l'examen, veuillez vous référer à mon prochain article

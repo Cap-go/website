@@ -64,7 +64,7 @@ Rendre le logiciel open source exécuté plus rapidement, plus intelligemment ou
 
 En vous lançant dans un certain projet open source, vous acquérez des connaissances précieuses sur le logiciel en question. En d'autres termes, vous n'apprenez pas seulement par la pratique, vous apprenez en interagissant avec le code d'autres développeurs.**Tirer parti de vos perspectives de carrière**
 
-En contribuant à des projets open source, vous signalez votre talent à des employeurs potentiels. Pour eux, il est facile de vérifier votre travail réel et d'évaluer si vous seriez un bon candidat pour leurs postes vacants. Selon les mots de [Frank Scheffler](https ://mediumcom/digitalfrontiers/5-reasons-why-you-should-contribute-to-open-source-projects-2f65443b4077/), "les contributions open source actives mettent en valeur votre expertise et vos connaissances, plus que les certificats seuls ne le feront jamais"
+En contribuant à des projets open source, vous signalez votre talent à des employeurs potentiels. Pour eux, il est facile de vérifier votre travail réel et d'évaluer si vous seriez un bon candidat pour leurs postes ouverts. Selon les mots de [Frank Scheffler](https ://mediumcom/digitalfrontiers/5-reasons-why-you-should-contribute-to-open-source-projects-2f65443b4077/), "les contributions open source actives mettent en valeur votre expertise et vos connaissances, plus que les certificats seuls ne le feront jamais"
 
 De plus, en contribuant à plusieurs projets, vous construisez votre réseau de contacts, ce qui ne pourra jamais nuire à votre carrière !
 

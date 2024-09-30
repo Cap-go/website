@@ -225,7 +225,7 @@ Bravo! 🎉 Vous avez déployé avec succès votre première Live Update. Ce n'e
 
 ## Utilisation des plugins de condensateur
 
-Voyons comment utiliser en action un plugin Capacitor, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
+Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
 
 ```shell
 npm i @capacitor/share

@@ -47,7 +47,7 @@ Une fois TalkBack actif, votre appareil fournira un retour auditif pendant que v
 - **Élément suivant** : faites glisser votre doigt vers la droite pour passer à l'élément suivant
 - **Élément précédent** : faites glisser votre doigt vers la gauche pour revenir à l'élément précédent
 - **Activer** : appuyez deux fois n'importe où sur l'écran pour activer l'élément sélectionné.
-- **Explorer au toucher** : faites glisser votre doigt sur l'écran pour que les éléments soient lus à haute voix lorsque vous les touchez
+- **Explorer au toucher** : faites glisser votre doigt sur l'écran pour que les éléments soient lus à voix haute lorsque vous les touchez
 - **Défilement** : utilisez deux doigts pour faire glisser votre doigt vers le haut ou vers le bas pour faire défiler les pages.
 - **Menu TalkBack** : appuyez sur l'écran avec trois doigts pour ouvrir des options TalkBack supplémentaires.
 - **Ajuster les contrôles de lecture** : modifiez les paramètres de lecture en faisant glisser votre doigt vers la gauche ou la droite avec trois doigts.
