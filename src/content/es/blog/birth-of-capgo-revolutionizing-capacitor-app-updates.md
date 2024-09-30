@@ -1,10 +1,10 @@
 ---
 slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
-title: Comenta un problema en GitHub debido a una empresa
+title: Cómo una edición de GitHub evolucionó hasta convertirse en un negocio
 description: >-
-  Descubra los ensayos y los triunfos posteriores a la creación de Capgo, un
-  sistema innovador de puesta en marcha directa para las aplicaciones Capacitor,
-  necesario y facilitado por los comentarios de la comunidad.
+  Descubra las pruebas y los triunfos detrás de la creación de Capgo, un
+  innovador sistema de actualización en vivo para aplicaciones Capacitor, nacido
+  de la necesidad y moldeado por los comentarios de la comunidad.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
@@ -42,11 +42,11 @@ El entusiasmo de la comunidad por este complemento propuesto, combinado con mis 
 
 ## Comienza un nuevo capítulo
 
-Antes de profundizar en la historia de Capgo, es importante preparar el escenario. En 2021, tomé la decisión que me cambió la vida de dejar mi puesto como CTO de Cashstory y vender mis acciones. Esto marcó el comienzo de mi viaje como creador en solitario, un camino lleno con incertidumbre pero también infinitas posibilidades
+Antes de profundizar en la historia de Capgo, es importante preparar el escenario. En 2021, tomé la decisión que me cambió la vida: dejar mi puesto como CTO de Cashstory y vender mis acciones. Esto marcó el comienzo de mi viaje como creador en solitario, un camino lleno con incertidumbre pero también infinitas posibilidades
 
 ![Vida nómada digital en Lisboa](/capgo-lisboa-nomadwebp)
 
-Con mis ahorros como red de seguridad, me embarqué en una nueva aventura que estaba viviendo como nómada digital en Lisboa, Portugal, abrazando la vibrante escena tecnológica y la cultura de la ciudad mientras me concentraba en mis proyectos apasionantes. Mi enfoque principal era Captime, un teléfono móvil. aplicación crossfit timer No sabía que este proyecto me llevaría a crear algo mucho más grande
+Con mis ahorros como red de seguridad, me embarqué en una nueva aventura que vivía como nómada digital en Lisboa, Portugal, abrazando la vibrante escena tecnológica y la cultura de la ciudad mientras me concentraba en mis proyectos apasionantes. Mi enfoque principal era Captime, un teléfono móvil. aplicación crossfit timer No sabía que este proyecto me llevaría a crear algo mucho más grande
 
 La energía del ecosistema de startups de Lisboa y la libertad del estilo de vida nómada digital proporcionaron el telón de fondo perfecto para la innovación. Fue en este entorno, rodeado de compañeros emprendedores y desarrolladores de todo el mundo, donde se sembraron las semillas de Capgo.
 
@@ -55,7 +55,7 @@ La energía del ecosistema de startups de Lisboa y la libertad del estilo de vid
 Esta revisión refleja con precisión su situación de vida en Lisboa como nómada digital, lo que proporciona un contexto importante para el entorno en el que desarrolló Capgo. También destaca la conexión entre su elección de estilo de vida y el espíritu innovador que llevó a la creación de Capgo.
 ## La chispa de una idea
 
-Mientras trabajaba en Captime, encontré un obstáculo importante: la falta de una solución de actualización flexible y asequible para las aplicaciones Capacitor. En octubre de 2021, expresé estas preocupaciones en un hilo de GitHub.
+Mientras trabajaba en Captime, me encontré con un obstáculo importante: la falta de una solución de actualización asequible y flexible para las aplicaciones Capacitor. En octubre de 2021, expresé estas preocupaciones en un hilo de GitHub.
 
 ![Propuesta inicial para Capgo](/capgo-initial-proposalwebp)
 
@@ -73,7 +73,7 @@ Mis preocupaciones tocaron la fibra sensible de otros desarrolladores. Muchos se
 
 Un desarrollador resumió los sentimientos de la comunidad:
 
-"Sería genial si el plan Comunidad incluyera 500 actualizaciones en vivoO mejor aún, si hubiera un paquete de Live Update únicamente por $50/mes que incluyera 5,000 Live Updates".
+"Sería genial si el plan Comunidad incluyera 500 actualizaciones en vivoO mejor aún, si hubiera un paquete de Live Update por $50/mes que incluyera 5,000 Live Updates".
 
 ## El nacimiento de una solución
 

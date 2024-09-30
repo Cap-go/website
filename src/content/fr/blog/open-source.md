@@ -1,9 +1,9 @@
 ---
 slug: about-open-source
-title: Découvrez ce qu’est l’open source et pourquoi c’est important !
+title: ¡Aprenda qué est le code ouvert et pour qué es important!
 description: >-
-  Au cours de votre parcours de programmation, vous avez peut-être entendu
-  parler du terme « Open Source ». Mais qu’est-ce que cela signifie réellement ?
+  Durant votre parcours de programmation, il est possible que vous ayez à
+  utiliser le terme "code ouvert". ¿Mais qu'est-ce que ça signifie vraiment?
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z

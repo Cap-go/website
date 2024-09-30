@@ -1,9 +1,9 @@
 ---
 slug: automatic-build-and-release-with-gitlab
-title: Construcción y publicación automática con Gitlab.
+title: Compilación y lanzamiento automáticos con Gitlab
 description: >-
-  Cree gratuitamente su propia canalización CI/CD con Gitlab, implemente su
-  aplicación cada vez que la pase a main.
+  Cree su propia canalización de CI/CD con Gitlab de forma gratuita, implemente
+  su aplicación cada vez que acceda a principal.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z

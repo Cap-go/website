@@ -1,10 +1,7 @@
 ---
 slug: how-to-send-specific-version-to-users
 title: Comment envoyer une mise à jour spécifique à un utilisateur ou à un groupe
-description: >-
-  Permettez à votre utilisateur d'essayer la version bêta sans avoir besoin de
-  TestFlight ou du processus bêta de Google, ajoutez simplement un bouton dans
-  votre application Ionic, et ils y sont !
+description: "Permettez à votre utilisateur de tester la version bêta si nécessaire de TestFlight ou du processus bêta de Google, il suffit de cliquer sur un bouton de votre application Ionic et de la liste\_!"
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
@@ -21,7 +18,7 @@ locale: fr
 
 Lorsque vous commencerez à profiter du système de mise à jour de Capgo, comme moi pour mes applications, vous commencerez à avoir le sentiment « Et si j'en veux plus ?
 
-J'ai eu le sentiment aussi, mais comme je suis le créateur de Capgo, j'ai pu y jeter un oeil !
+J'ai eu le sentiment aussi, mais comme je suis le créateur de Capgo, j'ai pu y jeter un œil !
 
 > Puisque tout est open-source, vous avez aussi ce pouvoir :)
 

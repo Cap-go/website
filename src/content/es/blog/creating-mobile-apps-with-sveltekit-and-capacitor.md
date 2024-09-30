@@ -2,8 +2,8 @@
 slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Creación de aplicaciones móviles con SvelteKit y Capacitor
 description: >-
-  Aprenda a crear una aplicación móvil con la ayuda de SvelteKit, Capacitor y a
-  mejorar la interfaz del usuario nativo con Konsta UI.
+  Aprenda a crear una aplicación móvil utilizando SvelteKit, Capacitor y mejore
+  la interfaz de usuario nativa con Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-04T00:00:00.000Z
@@ -24,7 +24,7 @@ Siga esta guía paso a paso para transformar su aplicación SvelteKit en una apl
 
 ## Acerca del condensador
 
-¡CapacitorJS cambia las reglas del juego! Se puede integrar sin esfuerzo en cualquier proyecto web, envolviendo su aplicación en una vista web nativa y generando proyectos nativos de Xcode y Android Studio para usted. Sus complementos brindan acceso a funciones nativas del dispositivo como la cámara a través de un puente de JavaScript.
+¡CapacitorJS cambia las reglas del juego! Se puede integrar sin esfuerzo en cualquier proyecto web, envolviendo su aplicación en una vista web nativa y generando proyectos nativos de Xcode y Android Studio para usted. Sus complementos brindan acceso a funciones nativas del dispositivo, como la cámara, a través de un puente de JavaScript.
 
 Capacitor le permite crear una aplicación móvil nativa fantástica sin ninguna configuración complicada ni curva de aprendizaje pronunciada. Su API delgada y su funcionalidad optimizada facilitan la integración en su proyecto. Se sorprenderá de lo simple que es lograr una aplicación nativa completamente funcional con ¡Condensador!
 
@@ -39,7 +39,7 @@ npm install
 npm run build
 ```
 
-Después de ejecutar el comando `build`, deberías ver una nueva carpeta `dist` en la raíz de tu proyecto.
+Después de ejecutar el comando `build`, deberías ver una nueva carpeta `dist` en la raíz de tu proyecto
 
 Capacitor utilizará esta carpeta más adelante, pero por ahora, debemos configurarla correctamente.
 

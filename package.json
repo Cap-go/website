@@ -9,8 +9,10 @@
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
     "fmt": "prettier --write '**/*' --ignore-unknown",
-    "generate-translations": "tsx generate_translations.tsx",
-    "generate-blog-translations": "tsx generate_blog_translations.tsx"
+    "generate:locale:translations": "tsx generate_locale_translations.tsx",
+    "generate:blog:translations": "tsx generate_blog_translations.tsx",
+    "generate:translation.ts": "tsx generate_translation_ts_file.tsx",
+    "generate:new:locale": "tsx setup_new_locale.tsx"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.6",

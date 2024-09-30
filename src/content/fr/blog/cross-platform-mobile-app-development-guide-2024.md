@@ -1,12 +1,12 @@
 ---
 slug: cross-platform-mobile-app-development-guide-2024
 title: >-
-  Le guide ultime du développement d'applications mobiles multiplateformes en
-  2024
+  Le guide définitif pour le développement d'applications mobiles
+  multiplateformes en 2024
 description: >-
-  Découvrez les meilleures pratiques et cadres pour le développement
-  d'applications mobiles multiplateformes en 2024. Créez des applications iOS,
-  Android et Web à partir d'une seule base de code.
+  Découvrez les meilleures pratiques et marques pour le développement
+  d'applications mobiles multiplateformes en 2024. Créez des applications Web,
+  iOS et Android à partir d'une base de code unique.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z

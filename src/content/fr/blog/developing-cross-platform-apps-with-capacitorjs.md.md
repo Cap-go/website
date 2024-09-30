@@ -1,10 +1,9 @@
 ---
 slug: developing-cross-platform-apps-with-capacitorjs
-title: "Développer des applications multiplateformes avec CapacitorJS\_: un guide étape par étape"
+title: "Développement d'applications multiplateformes avec CapacitorJS\_: un guide pas à pas"
 description: >-
-  Découvrez comment créer des applications multiplateformes à l'aide de
-  CapacitorJS avec une base de code JavaScript unique pour Android, iOS et Web
-  (PWA).
+  Apprenez à créer des applications multiplateformes en utilisant CapacitorJS
+  avec une base de code JavaScript unique pour Android, iOS et Web (PWA).
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-02T00:00:00.000Z

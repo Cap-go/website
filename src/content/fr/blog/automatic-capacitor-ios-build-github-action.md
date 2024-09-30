@@ -1,11 +1,11 @@
 ---
 slug: automatic-capacitor-ios-build-github-action
 title: >-
-  Construction automatique du condensateur IOS avec actions GitHub avec
-  certificat
+  Compilation automatique de Capacitor IOS avec des applications de GitHub
+  certifiées
 description: >-
-  Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
-  de Fastlane et des actions GitHub en 5 minutes (2024)
+  Comment configurer une canalisation de CI/CD pour votre application IOS Ionic
+  en utilisant Fastlane et GitHub Actions en 5 minutes (2024)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-08-04T00:00:00.000Z
@@ -25,7 +25,7 @@ locale: fr
 
 Avant de poursuivre le tutoriel…
 
-- Assurez-vous que Fastlane est [installé](https://docsfastlanetools/) sur votre machine de développement
+- Assurez-vous d'avoir Fastlane [installé](https://docsfastlanetools/) sur votre machine de développement
 - Adhésion au programme pour développeurs iOS
 - Envie de lire 😆…
 
@@ -40,7 +40,7 @@ Nous allons utiliser une machine **_macOS_**, vous pouvez voir sur la capture d'
 
 🔴 **_Une fois prévenus des besoins et des tarifs, si vous le souhaitez, on continue…_**
 
-> **_📣_ Dans le post, nous supposons que nous avons l'application créée dans iTunes Connect, nous avons les certificats de l'écosystème Apple, tout sera copié par Fastlane !**
+> **_📣_ Dans le post nous supposons que nous avons l'application créée dans iTunes connect, nous avons les certificats de l'écosystème Apple, tout sera copié par Fastlane !**
 
 ## Allons au désordre 🧑🏽💻
 
@@ -49,7 +49,7 @@ Nous allons utiliser une machine **_macOS_**, vous pouvez voir sur la capture d'
 1 _Utilisation de l'API App Store Connect avec Fastlane_
 2 _Exigences_
 3 _Création d'une clé API App Store Connect_
-4 _Utiliser une clé API App Store Connect_
+4 _Utilisation d'une clé API App Store Connect_
 5 _Copier les fichiers Fastline_
 6 _Configurer les actions GitHub_
 
@@ -89,7 +89,7 @@ Pour générer des clés, vous devez disposer de l'autorisation d'administrateur
 
 ![Les clés API App Store Connect créent un nom](/gen_keywebp)
 
-6 — Sous Accès, sélectionnez le rôle pour la clé. Les rôles qui s'appliquent aux clés sont les mêmes que ceux qui s'appliquent aux utilisateurs de votre équipe Voir [autorisations de rôle](https://helpapplecom/app-store-connect/#/deve5f9a89d7/ ) Nous vous recommandons de sélectionner **Gestion des applications**
+6 — Sous Accès, sélectionnez le rôle de la clé. Les rôles qui s'appliquent aux clés sont les mêmes que ceux qui s'appliquent aux utilisateurs de votre équipe Voir [autorisations de rôle](https://helpapplecom/app-store-connect/#/deve5f9a89d7/ ) Nous vous recommandons de sélectionner **Gestion des applications**
 
 
 7 — Cliquez sur Générer
@@ -197,7 +197,7 @@ Créez des secrets dans votre référentiel ou organisation pour les éléments 
     
     - Pour plus d'informations sur l'exportation de votre profil d'approvisionnement depuis Xcode, consultez la [documentation Xcode](https://helpapplecom/xcode/mac/current/#/deva899b4fe5)
         
-    - Vous devez convertir votre profil d'approvisionnement en Base64 lorsque vous l'enregistrez en tant que secret. Dans cet exemple, le secret est nommé `BUILD_PROVISION_PROFILE_BASE64`
+    - Vous devez convertir votre profil d'approvisionnement en Base64 lorsque vous l'enregistrez en tant que secret. Dans cet exemple, le secret est nommé « BUILD_PROVISION_PROFILE_BASE64 ».
         
     - Utilisez la commande suivante pour convertir votre profil d'approvisionnement en Base64 et copiez-le dans votre presse-papiers :
         
@@ -457,7 +457,7 @@ jobs:
           retention-days: 10
 ```
 
-Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abord
+Ce workflow doit être déclenché après chaque _tag_ GitHub. Si vous devez automatiser la balise, veuillez d'abord vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
 
 Ensuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 

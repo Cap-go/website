@@ -1,9 +1,9 @@
 ---
 slug: migrating-cordova-to-capacitor
-title: "Migration d'une application Web de Cordova vers Capacitor\_: un guide étape par étape"
+title: "Migration d'une application Web de Cordova vers Capacitor\_: un guide pas à pas"
 description: >-
-  Ce guide étape par étape vous aidera à migrer votre application Web de Cordova
-  vers Capacitor, couvrant toutes les sections et la rendant facile à lire et à
+  Ce guide pas à pas vous aidera à migrer votre application Web de Cordova vers
+  Capacitor, en récupérant toutes les sections et en facilitant de lire et de
   suivre.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'

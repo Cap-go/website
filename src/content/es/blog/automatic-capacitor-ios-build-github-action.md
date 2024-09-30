@@ -1,11 +1,9 @@
 ---
 slug: automatic-capacitor-ios-build-github-action
-title: >-
-  Construcción automática del condensador IOS con acciones GitHub con
-  certificado
+title: Compilación automática de Capacitor IOS con acciones de GitHub con certificado
 description: >-
-  Cómo configurar un pipeline CI/CD para tu aplicación IOS Ionic como ayuda de
-  Fastlane y acciones GitHub en 5 minutos (2024)
+  Cómo configurar una canalización de CI/CD para su aplicación IOS Ionic usando
+  fastlane y GitHub Actions en 5 minutos (2024)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-08-04T00:00:00.000Z

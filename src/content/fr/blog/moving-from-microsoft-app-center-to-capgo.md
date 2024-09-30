@@ -1,12 +1,12 @@
 ---
 slug: moving-from-microsoft-app-center-to-capgo
 title: >-
-  Passer de Microsoft App Center à Capgo pour les mises à jour d'applications en
-  direct
+  Passer de Microsoft App Center à Capgo pour la mise à jour des applications en
+  vivo
 description: >-
-  Microsoft arrête la prise en charge des applications exécutées sur Cordova.
-  Passer de Microsoft App Center à Capgo pour les mises à jour des applications
-  mobiles en direct
+  Microsoft a déjà admis les applications qui sont exécutées à Cordova. Passer
+  de Microsoft App Center à Capgo pour obtenir les mises à jour de l'application
+  Mobile Live
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-21T00:00:00.000Z

@@ -1,11 +1,9 @@
 ---
 slug: live-update-with-quasar-and-capacitor
-title: >-
-  Creación de aplicaciones móviles con puesta en marcha directa del día, Quasar
-  y Capacitor.
+title: 'Creación de Apps Móviles con actualizaciones en vivo, Quasar y Capacitor.'
 description: >-
-  Comenta crear una aplicación móvil con Quasar, Capacitor y mettre en œuvre des
-  mises à jour en direct.
+  Cómo crear una aplicación móvil con Quasar, Capacitor e implementar
+  actualizaciones en vivo.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z

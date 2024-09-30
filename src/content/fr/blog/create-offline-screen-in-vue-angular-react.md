@@ -1,12 +1,13 @@
 ---
 slug: create-offline-screen-in-vue-angular-react
 title: >-
-  Comment créer un écran hors ligne dans les applications Vue, Angular et React
-  à l'aide de l'API réseau et du condensateur
+  Comment créer un écran sans connexion avec les applications Vue, Angular et
+  React en utilisant l'API réseau et Capacitor
 description: >-
-  Découvrez comment implémenter un écran hors ligne dans les applications Vue,
-  Angular ou React à l'aide de l'API réseau et de Capacitor. Améliorez
-  l’expérience utilisateur en gérant efficacement les scénarios hors ligne.
+  Apprenez à implémenter un écran sans connexion avec les applications Vue,
+  Angular ou React en utilisant l'API réseau et Capacitor. Améliorez
+  l'expérience de l'utilisateur dans la gestion des scénarios de manière
+  efficace.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z

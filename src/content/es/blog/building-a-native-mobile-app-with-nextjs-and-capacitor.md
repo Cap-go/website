@@ -4,10 +4,9 @@ title: >-
   2024 Creación de aplicaciones móviles nativas con Next.js 14 y Capacitor: una
   guía paso a paso
 description: >-
-  Descubra cómo crear aplicaciones móviles nativas con la ayuda de Next.js 14 y
-  Capacitor en esta guía completa. Descubra las últimas buenas prácticas y
-  técnicas para crear aplicaciones móviles de alto rendimiento y riqueza en
-  funcionalidad.
+  Aprenda a crear aplicaciones móviles nativas utilizando Next.js 14 y Capacitor
+  en esta guía completa. Descubra las mejores prácticas y técnicas más recientes
+  para crear aplicaciones móviles de alto rendimiento y ricas funciones.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
@@ -397,7 +396,7 @@ Para garantizar un rendimiento óptimo de su aplicación Nextjs y Capacitor, con
 
 ## Conclusión
 
-En este tutorial, exploramos cómo crear aplicaciones móviles nativas utilizando Nextjs y Capacitor. Aprovechando el poder de estas tecnologías, puede crear aplicaciones móviles de alto rendimiento y ricas funciones con facilidad.
+En este tutorial, exploramos cómo crear aplicaciones móviles nativas usando Nextjs y Capacitor. Aprovechando el poder de estas tecnologías, puede crear aplicaciones móviles de alto rendimiento y ricas funciones con facilidad.
 
 Cubrimos los pasos para configurar una aplicación Nextjs, integrar Capacitor y crear e implementar la aplicación en dispositivos móviles. Además, analizamos el uso de complementos de Capacitor, la adición de Konsta UI para una interfaz de usuario móvil mejorada y técnicas de optimización del rendimiento.
 

@@ -2,8 +2,8 @@
 slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Création d'applications mobiles avec SvelteKit et Capacitor
 description: >-
-  Apprenez à créer une application mobile à l'aide de SvelteKit, Capacitor et à
-  améliorer l'interface utilisateur native avec Konsta UI.
+  Essayez de créer une application mobile en utilisant SvelteKit, Capacitor et
+  améliorez l'interface utilisateur native avec Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-04T00:00:00.000Z

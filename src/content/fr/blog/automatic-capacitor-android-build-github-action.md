@@ -1,9 +1,11 @@
 ---
 slug: automatic-capacitor-android-build-github-action
-title: Construction Android de condensateur automatique avec des actions GitHub
+title: >-
+  Compilation automatique de condensateurs pour Android avec des applications de
+  GitHub
 description: >-
-  Comment configurer un pipeline CI/CD pour votre application Android Ionic à
-  l'aide de Fastlane et des actions GitHub en 5 minutes (2022)
+  Comment configurer une canalisation de CI/CD pour votre application Android
+  Ionic en utilisant Fastlane et GitHub Actions en 5 minutes (2022)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z

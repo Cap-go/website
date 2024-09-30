@@ -1,10 +1,10 @@
 ---
 slug: how-to-send-specific-version-to-users
-title: Comment envoyer une mise à jour spécifique à un utilisateur ou à un groupe
+title: Cómo enviar una actualización específica a un usuario o grupo
 description: >-
-  Permita que su usuario ensaye la versión beta sin necesidad de TestFlight o el
-  proceso beta de Google, presione simplemente un botón en su aplicación Ionic,
-  ¡y eso es todo!
+  Permita que su usuario pruebe la versión beta sin la necesidad de TestFlight o
+  el proceso beta de Google, simplemente agregue un botón en su aplicación Ionic
+  y ¡listo!
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
@@ -42,7 +42,7 @@ Para solucionar este problema, creé el sistema de canales en Capgo.
 
 `npx @capgo/cli@latest carga de paquete -c producción` se actualizará para todos los usuarios (si el canal de producción está configurado como predeterminado)
 
-Si haces `npx @capgo/cli@latest bundle upload -c development` entonces la versión llega a un canal diferente, esto se puede automatizar en [GitHub action](/blog/manage-dev-and-prod-build-with -github-acciones/) 
+Si haces `npx @capgo/cli@latest bundle upload -c development` entonces la versión llega a un canal diferente, esto se puede automatizar en [Acción de GitHub](/blog/manage-dev-and-prod-build-with -github-acciones/) 
 
 Entonces tienes 2 formas de permitir que los usuarios obtengan las actualizaciones del canal.
 

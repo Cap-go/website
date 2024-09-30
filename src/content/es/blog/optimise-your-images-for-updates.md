@@ -1,10 +1,9 @@
 ---
 slug: optimise-your-images-for-updates
-title: Optimice sus imágenes para la puesta en marcha del día
+title: Optimice sus imágenes para actualizaciones
 description: >-
-  Optimizador de comentarios de imágenes para las actualizaciones del día en
-  directo y ayuda a su usuario a obtener las actualizaciones del día más
-  rápidamente.
+  Cómo optimizar sus imágenes para actualizaciones en vivo y ayudar a su usuario
+  a obtener actualizaciones más rápido.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-23T00:00:00.000Z

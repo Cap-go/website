@@ -7,7 +7,7 @@ import Orgs from '@/components/Orgs.vue'
 import Testimonials from '@/components/Testimonials.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { chatLoader } from '@/services/bento'
-import { dynamicTranslations, type Locales } from '@/services/locale'
+import { type Locales } from '@/services/locale'
 import { posthogLoader } from '@/services/posthog'
 import translations from '@/services/translations'
 
@@ -322,7 +322,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="order-last md:order-none">
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">{{ translations['faster_releases'][props.locale] }}</h2>
           <p class="text-lg lg:w-2/3">
-            {{ dynamicTranslations(brand)['launch_multiple_releases_per_week'][props.locale] }}
+            {{ translations['launch_multiple_releases_per_week'][props.locale].replaceAll('$1', brand) }}
           </p>
         </div>
         <img
@@ -348,7 +348,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div>
           <h2 class="text-4xl md:text-7xl font-extrabold my-10">Integration</h2>
           <p class="text-lg lg:w-2/3">
-            {{ dynamicTranslations(brand)['easily_combine_features_ci_cd'][props.locale] }}<br /><br />
+            {{ translations['easily_combine_features_ci_cd'][props.locale].replace('$1', brand) }}<br /><br />
             {{ translations['its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more'][props.locale] }}
           </p>
         </div>

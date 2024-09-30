@@ -1,10 +1,12 @@
 ---
 slug: enable-ios-developer-mode-ios16
-title: Comment activer le mode développeur sur iOS 16 pour les tests d'applications
+title: >-
+  Comment activer le mode de téléchargement sur iOS 16 pour les essais
+  d'applications
 description: >-
-  Guide étape par étape sur l'activation du mode développeur sur iOS 16 et
-  versions ultérieures pour exécuter des versions de distribution interne et des
-  versions de développement local sur votre appareil.
+  Guide pas à pas pour savoir comment activer le mode de téléchargement sur iOS
+  16 et les versions ultérieures pour exécuter des compilations de distribution
+  interne et des compilations de téléchargement local sur votre appareil.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z

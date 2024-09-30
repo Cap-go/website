@@ -1,9 +1,11 @@
 ---
 slug: do-apple-allow-live-updates
 title: >-
-  Apple autorise-t-il l'envoi de mises à jour en direct aux applications sans
-  l'examen de l'App Store.
-description: "Comment pouvez-vous envoyer des mises à jour de code aux applications iOS de production et être pleinement conforme aux directives d'Apple\_?"
+  Apple permet-il d'envoyer des mises à jour en vivo aux applications depuis la
+  révision de l'App Store ?
+description: >-
+  Comment pouvez-vous envoyer des mises à jour de code aux applications iOS de
+  production et les compléter pleinement avec les directives d'Apple ?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z

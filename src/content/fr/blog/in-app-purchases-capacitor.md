@@ -1,9 +1,9 @@
 ---
 slug: in-app-purchases-capacitor
-title: achats intégrés pour condensateur
+title: compras en la application para condensador
 description: >-
-  Comment mettre en œuvre des achats intégrés pour les applications de
-  condensateurs à l'aide du plugin Capacitor Purchases et de RevenueCat
+  Comment mettre en œuvre des achats dans l'application pour les applications de
+  condensateurs en utilisant le complément Capacitor Purchases et RevenueCat
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

@@ -2,8 +2,8 @@
 slug: vue-mobile-app-capacitor
 title: Creación de aplicaciones móviles con Vue y Capacitor
 description: >-
-  Apprenez à créer una aplicación móvil con la ayuda de Vue, Capacitor y,
-  eventualmente, para mejorar la interfaz del usuario con Konsta UI.
+  Aprenda a crear una aplicación móvil usando Vue, Capacitor y, opcionalmente,
+  mejore la interfaz de usuario con Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-08T00:00:00.000Z

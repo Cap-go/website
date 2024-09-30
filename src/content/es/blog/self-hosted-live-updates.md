@@ -1,7 +1,9 @@
 ---
 slug: self-hosted-live-updates
-title: Mises à jour en direct auto-hébergées
-description: "Je suis ravi d'annoncer les mises à jour en direct auto-hébergées, la prochaine itération des mises à jour en direct de Capgo\_!"
+title: Actualizaciones en vivo autohospedadas
+description: >-
+  ¡Me complace anunciar las actualizaciones en vivo autohospedadas, la próxima
+  versión de las actualizaciones en vivo de Capgo!
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-03T00:00:00.000Z
@@ -18,7 +20,7 @@ Me complace anunciar el lanzamiento de Live Updates autohospedadas, que represen
 
 Si bien muchas empresas utilizan actualmente el SDK de Live Updates para acceder a las actualizaciones más recientes de JavaScript, HTML y CSS para sus aplicaciones, algunas pueden encontrar obstáculos debido a políticas corporativas, regulaciones de la industria o restricciones geográficas. Con Live Updates autohospedadas, ahora puede Distribuya artefactos de creación web a través de su infraestructura.
 
-Esto significa que puede evitar retrasos causados ​​por las revisiones de Apple Store, solucionar errores y modificar contenido más rápidamente, y garantizar que sus usuarios siempre estén operando con la última versión de su aplicación. Además, he escuchado de numerosas grandes empresas a las que les gustaría aprovechar Live Actualizaciones, pero enfrentan desafíos debido a estrictos estándares de cumplimiento. Este problema ahora es cosa del pasado gracias a las actualizaciones en vivo autohospedadas.
+Esto significa que puede evitar retrasos causados ​​por las revisiones de Apple Store, solucionar errores y modificar contenido más rápidamente, y asegurarse de que sus usuarios siempre estén operando con la última versión de su aplicación. Además, he escuchado de numerosas grandes empresas a las que les gustaría aprovechar Live Actualizaciones, pero enfrentan desafíos debido a estrictos estándares de cumplimiento. Este problema ahora es cosa del pasado gracias a las actualizaciones en vivo autohospedadas.
 
 ## ¿Cómo funcionan las actualizaciones en vivo autohospedadas?
 
@@ -85,6 +87,6 @@ La API de la organización devuelve el paquete de actualización en vivo desde l
 
 ## Empezar
 
-Estoy encantado de ampliar el alcance de las actualizaciones en vivo a incluso más empresas que antes. Tanto las organizaciones como los usuarios de la aplicación Ionic reconocerán rápidamente las ventajas de la distribución segura de actualizaciones de aplicaciones inalámbricas de Capgo.
+Estoy encantado de ampliar el alcance de las actualizaciones en vivo a más empresas que antes. Tanto las organizaciones como los usuarios de la aplicación Ionic reconocerán rápidamente las ventajas de la distribución segura de actualizaciones de aplicaciones inalámbricas de Capgo.
 
 Para obtener más información sobre las actualizaciones en vivo autohospedadas de Capgo, puede [consulte los documentos](/docs/tooling/cli/#upload-version)¿Listo para implementar actualizaciones instantáneas de aplicaciones directamente para sus usuarios? [¡Regístrese aquí hoy!](/register/)

@@ -1,9 +1,9 @@
 ---
 slug: automatic-capacitor-android-build-github-action
-title: Construcción de condensador automático de Android con acciones GitHub
+title: Compilación automática de condensadores para Android con acciones de GitHub
 description: >-
-  Cómo configurar un pipeline CI/CD para tu aplicación Android Ionic como ayuda
-  de Fastlane y acciones GitHub en 5 minutos (2022)
+  Cómo configurar una canalización de CI/CD para su aplicación Android Ionic
+  usando fastlane y GitHub Actions en 5 minutos (2022)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
@@ -33,9 +33,9 @@ Antes de continuar con el tutorial…
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
 El servicio es '_gratuito'_ hasta el límite, dependiendo de la máquina elegida  
-Vamos a utilizar una máquina **_Linux_**, podéis ver en la captura de pantalla su precio y límites (precios a la fecha de creación del tutorial, podrían sufrir cambios en el futuro)
+Vamos a utilizar una máquina **_Linux_**, podéis ver en la captura su precio y límites (precios a la fecha de creación del tutorial, podrían sufrir cambios en el futuro)
 
-🔴 **_Una vez avisado de requisitos y precios, si quieres seguimos_**
+🔴 **_Una vez avisados ​​de requisitos y precios, si quieres seguimos_**
 
 > **_📣_ En el post asumimos que tenemos la app creada en Google Play, sí tenemos la clave de firma del ecosistema de Google**
 
@@ -175,7 +175,7 @@ Los secretos de GitHub solo aceptan valores de cadena, por lo que para ciertas c
 base64 in_file_path | pbcopy
 ```
 
-Esto copia la cadena resultante en su portapapeles, para que pueda pegarla directamente en un nuevo secreto del repositorio en GitHub.Por ejemplo:
+Esto copia la cadena resultante en su portapapeles, para que pueda pegarla directamente en un nuevo secreto de repositorio en GitHub.Por ejemplo:
 
 ```
 base64 service_account_key.json | pbcopy

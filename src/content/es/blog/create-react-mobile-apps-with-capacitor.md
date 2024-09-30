@@ -1,9 +1,9 @@
 ---
 slug: create-react-mobile-apps-with-capacitor
-title: Crear aplicaciones móviles con React y Capacitor
+title: Creación de aplicaciones móviles con React y Capacitor
 description: >-
-  Aprenda a crear una aplicación móvil con la ayuda de React, Capacitor y a
-  mejorar la interfaz del usuario nativo con Konsta UI.
+  Aprenda a crear una aplicación móvil utilizando React, Capacitor y mejore la
+  interfaz de usuario nativa con Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z

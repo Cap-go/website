@@ -1,11 +1,11 @@
 ---
 slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: >-
-  Introduction du cryptage de bout en bout dans le programme de mise à jour des
-  condensateurs avec signature de code
+  Introduction du cifrado de l'extrême à l'extrême à l'actuateur des condenseurs
+  avec la firme de code
 description: >-
-  Utilisation de la cryptographie RSA + AES pour chiffrer les mises à jour,
-  conçues pour les applications d'entreprise et de haute sécurité
+  Utilisation de cryptographie RSA + AES pour les mises à jour de chiffrement,
+  conçues pour les applications commerciales et de haute sécurité
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
@@ -32,7 +32,7 @@ Comme les meilleurs hébergeurs Web de leur catégorie, Capgo utilise HTTPS pour
 
 ## La chaîne d'approvisionnement de l'infrastructure cloud
 
-Une autre chose que Capgo et la plupart des hébergeurs Web ont en commun est qu'ils fonctionnent sur une infrastructure cloud de niveau inférieur, souvent provenant d'AWS, de GCP ou d'un autre fournisseur de cloud populaire. Le matériel et les logiciels exploités par ces fournisseurs de cloud et Capgo ou d'autres hébergeurs Web font partie du chaîne d'approvisionnement en nuage
+Une autre chose que Capgo et la plupart des hébergeurs Web ont en commun est qu'ils fonctionnent sur une infrastructure cloud de niveau inférieur, souvent provenant d'AWS, GCP ou d'un autre fournisseur cloud populaire. Le matériel et les logiciels exploités par ces fournisseurs cloud et Capgo ou d'autres hébergeurs Web font partie de la chaîne d'approvisionnement en nuage
 
 La chaîne d'approvisionnement du cloud et son modèle de sécurité fonctionnent pour un grand nombre de sites Web et d'applications. Chaque développeur Web qui utilise un fournisseur de cloud fait confiance à ce fournisseur et s'attend à ce que les fichiers qu'il télécharge soient ceux qui sont exécutés ou servis sans être falsifiés. les fournisseurs de cloud travaillent dur pour assurer la sécurité de leur infrastructure
 

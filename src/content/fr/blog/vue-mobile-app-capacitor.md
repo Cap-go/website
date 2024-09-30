@@ -2,8 +2,8 @@
 slug: vue-mobile-app-capacitor
 title: Création d'applications mobiles avec Vue et Capacitor
 description: >-
-  Apprenez à créer une application mobile à l'aide de Vue, Capacitor et,
-  éventuellement, à améliorer l'interface utilisateur avec Konsta UI.
+  Préparez-vous à créer une application mobile en utilisant Vue, Capacitor et,
+  éventuellement, en améliorant l'interface utilisateur avec Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-08T00:00:00.000Z
@@ -20,7 +20,7 @@ Dans ce didacticiel, nous vous guiderons tout au long du processus de conversion
 
 ## À propos du condensateur
 
-Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil telles que la caméra via un script JavaScript. pont
+Capacitor est un outil révolutionnaire qui vous permet de l'intégrer facilement dans n'importe quel projet Web et de convertir votre application en une application mobile native. Il génère pour vous des projets Xcode et Android Studio natifs et donne accès aux fonctionnalités natives de l'appareil comme la caméra via un JavaScript. pont
 
 ## Préparer votre application Vue
 

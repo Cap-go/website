@@ -1,11 +1,11 @@
 ---
 slug: do-apple-allow-live-updates
 title: >-
-  Apple autoriza el envío de actualizaciones del día directamente a aplicaciones
-  auxiliares sin el examen de la App Store.
+  ¿Apple permite enviar actualizaciones en vivo a las aplicaciones sin la
+  revisión de la App Store?
 description: >-
-  ¿Puedes enviar un mensaje reciente sobre el código de las aplicaciones de
-  producción de iOS y estar completamente conforme con las directivas de Apple?
+  ¿Cómo se pueden enviar actualizaciones de código a aplicaciones iOS de
+  producción y cumplir plenamente con las directrices de Apple?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z

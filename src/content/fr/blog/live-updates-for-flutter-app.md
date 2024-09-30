@@ -1,9 +1,9 @@
 ---
 slug: live-updates-for-flutter-app
-title: Mise à jour en direct de Flutter
+title: Actualisation en vivo de Flutter
 description: >-
-  Est-il possible d'envoyer une mise à jour en direct des applications Flutter
-  sans l'examen de l'App Store ?
+  Est-il possible d'envoyer des mises à jour en vivo aux applications Flutter
+  sans la révision de l'App Store ?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-16T00:00:00.000Z

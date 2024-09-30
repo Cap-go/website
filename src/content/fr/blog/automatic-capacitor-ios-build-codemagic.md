@@ -1,9 +1,9 @@
 ---
 slug: automatic-capacitor-ios-build-codemagic
-title: Création automatique d'un condensateur IOS avec Codemagic
+title: Condensateur automatique IOS construit avec Codemagic
 description: >-
-  Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
-  de Codemagic et Codemagic en 5 minutes (2024)
+  Comment configurer une canalisation de CI/CD pour votre application IOS Ionic
+  en utilisant Codemagic et Codemagic en 5 minutes (2024)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-24T00:00:00.000Z
@@ -122,7 +122,7 @@ Et télécharger le certificat
 _Maintenant, nous pouvons gérer Codemagic avec la clé API App Store Connect, super !_
 
 
-## 2\ Créer des certificats et des profils d'approvisionnement
+## 2\ Créer des certificats et des profils de provisionnement
 
 
 #### Certificats
@@ -184,7 +184,7 @@ Vous pouvez télécharger le profil sous forme de fichier « mobileprovision �
 
 ### Ajout du certificat de signature de code
 
-Codemagic vous permet de télécharger des certificats de signature de code sous forme d'archives PKCS#12 contenant à la fois le certificat et la clé privée nécessaire pour l'utiliser. Lors du téléchargement, Codemagic vous demandera de fournir le mot de passe du certificat (si le certificat est protégé par mot de passe) ainsi qu'un **Nom de référence** unique, qui peut ensuite être utilisé dans la configuration `codemagicyaml` pour récupérer le fichier spécifique
+Codemagic vous permet de télécharger des certificats de signature de code sous forme d'archives PKCS#12 contenant à la fois le certificat et la clé privée nécessaire à son utilisation. Lors du téléchargement, Codemagic vous demandera de fournir le mot de passe du certificat (si le certificat est protégé par mot de passe) ainsi qu'un **Nom de référence** unique, qui peut ensuite être utilisé dans la configuration `codemagicyaml` pour récupérer le fichier spécifique
 
 - Télécharger le certificat
 - Générer un nouveau certificat

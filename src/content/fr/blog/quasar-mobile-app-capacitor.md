@@ -1,11 +1,11 @@
 ---
 slug: live-update-with-quasar-and-capacitor
 title: >-
-  Création d'applications mobiles avec mises à jour en direct, Quasar et
+  Création d'applications mobiles avec actualisation en vivo, Quasar et
   Capacitor.
 description: >-
   Comment créer une application mobile avec Quasar, Capacitor et mettre en œuvre
-  des mises à jour en direct.
+  des mises à jour en vivo.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
@@ -61,7 +61,7 @@ Ce dossier sera utilisé par Capacitor plus tard, mais pour l'instant, nous devo
 
 Pour empaqueter n'importe quelle application Web dans un conteneur mobile natif, nous devons suivre quelques étapes initiales, mais ensuite c'est aussi simple que d'exécuter une seule commande « sync »
 
-Tout d'abord, nous pouvons installer la [Capacitor CLI](https://capacitorjscom/docs/cli/) en tant que dépendance de développement, puis la configurer dans notre projet. Lors de l'installation, vous pouvez appuyer sur « Entrée » pour accepter les valeurs par défaut. pour le nom et l'ID du paquet
+Tout d'abord, nous pouvons installer la [Capacitor CLI](https://capacitorjscom/docs/cli/) en tant que dépendance de développement, puis la configurer dans notre projet. Lors de l'installation, vous pouvez appuyer sur « entrée » pour accepter les valeurs par défaut. pour le nom et l'ID du paquet
 
 Ensuite, nous devons installer le package principal et les packages correspondants pour les plateformes iOS et Android.
 
@@ -90,7 +90,7 @@ npx cap add android
 
 Pour accéder au projet Android ultérieurement, vous devez installer [Android Studio](https://developerandroidcom/studio/) Pour iOS, vous avez besoin d'un Mac et devez installer [Xcode](https://developerapplecom/xcode/)
 
-De plus, vous devriez trouver un fichier **capacitorconfigts** dans votre projet, qui contient certains paramètres fondamentaux du condensateur utilisés lors de la synchronisation. La seule chose à laquelle vous devez prêter attention est le **webDir**, qui doit pointer vers le résultat de votre commande de build Actuellement, elle est inexacte
+De plus, vous devriez trouver un fichier **capacitorconfigts** dans votre projet, qui contient certains paramètres fondamentaux du condensateur utilisés lors de la synchronisation. La seule chose à laquelle vous devez faire attention est le **webDir**, qui doit pointer vers le résultat de votre commande de build Actuellement, elle est inexacte
 
 Pour remédier à cela, ouvrez le fichier **capacitorconfigjson** et mettez à jour le **webDir** :
 
@@ -225,7 +225,7 @@ Bravo! 🎉 Vous avez déployé avec succès votre première Live Update. Ce n'e
 
 ## Utilisation des plugins de condensateur
 
-Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
+Voyons comment utiliser en action un plugin Capacitor, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
 
 ```shell
 npm i @capacitor/share

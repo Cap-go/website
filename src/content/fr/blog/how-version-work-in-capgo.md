@@ -1,9 +1,10 @@
 ---
 slug: how-version-work-in-capgo
-title: Comment fonctionne la version dans Capgo
+title: Comment fonctionne la version sur Capgo
 description: >-
-  Comprenez comment Capgo gère les versions dans votre application Capacitor et
-  utilisez-la au mieux. Apprenez la signification des patchs majeurs, mineurs.
+  Comprend comment Capgo gère les versions de son application Capacitor et
+  l'utilise de la meilleure manière. Aprenda el significado de parche mayor,
+  menor.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-25T00:00:00.000Z

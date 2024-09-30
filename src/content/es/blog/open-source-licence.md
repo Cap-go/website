@@ -1,6 +1,6 @@
 ---
 slug: open-source-licecing
-title: Comprender las licencias de lógica de código abierto.
+title: Comprensión de las licencias de software de código abierto
 description: null
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'

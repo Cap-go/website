@@ -1,11 +1,9 @@
 ---
 slug: automatic-capacitor-ios-build-github-action-with-match
-title: >-
-  Construcción automática del condensador de IOS con acciones de GitHub
-  utilizando la coincidencia
+title: Compilación automática de Capacitor IOS con acciones de GitHub usando Match
 description: >-
-  Cómo configurar un pipeline CI/CD para tu aplicación IOS Ionic como ayuda de
-  Fastlane y acciones GitHub en 5 minutos (2022)
+  Cómo configurar una canalización de CI/CD para su aplicación IOS Ionic usando
+  fastlane y GitHub Actions en 5 minutos (2022)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-30T00:00:00.000Z
@@ -112,7 +110,7 @@ Puede obtener las tres informaciones necesarias aquí.
 
 ## Uso de una clave API de App Store Connect
 
-El archivo de clave API (archivo p8 que descarga), el ID de clave y el ID del emisor son necesarios para crear el token JWT para la autorización.Hay varias formas de ingresar esta información en Fastlane usando la nueva acción de Fastlane, `app_store_connect_api_key`. Puede aprender otras formas en la [documentación de Fastlane](https://docsfastlanetools/actions/app_store_connect_api_key/). Muestro este método porque Creo que es la forma más sencilla de trabajar con la mayoría de los CI que existen, donde se pueden establecer variables de entorno.
+El archivo de clave API (archivo p8 que descarga), el ID de clave y el ID del emisor son necesarios para crear el token JWT para la autorización.Hay varias formas en que se pueden ingresar estos datos en Fastlane usando la nueva acción de Fastlane, `app_store_connect_api_key`. Puede aprender otras formas en [Documentación de Fastlane](https://docsfastlanetools/actions/app_store_connect_api_key/). Muestro este método porque Creo que es la forma más sencilla de trabajar con la mayoría de los CI que existen, donde se pueden establecer variables de entorno.
 
 _Ahora podemos administrar Fastlane con la clave API de App Store Connect, ¡genial!_
 
@@ -323,7 +321,7 @@ Por último, abra su "proyecto" en Xcode y actualice el perfil de aprovisionamie
 
 ## FÓSFORO
 
-Para que CI/CD importe los certificados y los perfiles de aprovisionamiento, debe tener acceso al repositorio de certificados. Puede hacerlo generando un token de acceso personal (debe usarse antes) que tenga el alcance de acceder o leer repositorios privados.
+Para que CI/CD importe los certificados y los perfiles de aprovisionamiento, debe tener acceso al repositorio de certificados. Puede hacerlo generando un token de acceso personal (debe usarse antes) que tenga el alcance para acceder o leer repositorios privados.
 
 En GitHub, vaya a **Configuración** → **Configuración de desarrollador** → **Tokens de acceso personal** → haga clic en `Generar nuevo token` → marque el alcance del `repo` → luego haga clic en `Generar token`
 
@@ -503,7 +501,7 @@ Imagina que tienes un repositorio privado, y has agotado los minutos del plan gr
 
 **_Vamos a por ello_**
 
-Ok, primero necesitamos crear en la ruta **_my\_project\_path/fastlane_** un archivo llamado **_env,_** justo en la misma ruta que _Fastfile,_ para poder crear las mismas propiedades _secretas_ que se encuentran en nuestro _GitHub, como se muestra a continuación:
+Ok, primero necesitamos crear en la ruta **_my\_project\_path/fastlane_** un archivo llamado **_env,_** justo en la misma ruta que _Fastfile,_ para poder crear las mismas propiedades _secret_ que se encuentran en nuestro _GitHub, como se muestra a continuación:
 
 archivo env para implementar desde la máquina local
 

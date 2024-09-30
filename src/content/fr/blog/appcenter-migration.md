@@ -1,9 +1,9 @@
 ---
 slug: appcenter-migration
-title: Migration d'App Center vers Capgo
+title: Migración de App Center a Capgo
 description: >-
-  Dans ce guide, nous aborderons la migration complète de Capgo Live Updates,
-  une alternative à Microsoft CodePush.
+  Dans ce guide, nous passerons en revue la migration complète de Capgo Live
+  Updates, une alternative à Microsoft CodePush.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-22T00:00:00.000Z

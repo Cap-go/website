@@ -1,7 +1,9 @@
 ---
 slug: do-capgo-work-for-cordova
-title: "Pourquoi Capgo ne prend pas en charge Cordova\_: mise à niveau de votre application pour accéder aux mises à jour en direct"
-description: 'En esta guía, je vais vous partager mon expérience avec Capgo et Cordova.'
+title: >-
+  Por qué Capgo no es compatible con Cordova: actualice su aplicación para
+  acceder a actualizaciones en vivo
+description: 'En esta guía, compartiré mi experiencia con Capgo y Cordova.'
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-29T00:00:00.000Z

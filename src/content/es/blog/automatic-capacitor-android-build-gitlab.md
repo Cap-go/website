@@ -1,9 +1,9 @@
 ---
 slug: automatic-capacitor-android-build-gitlab
-title: Construcción de condensador automático Android con GitLab
+title: Compilación automática de condensadores para Android con GitLab
 description: >-
-  Comenta configurar un pipeline CI/CD para tu aplicación Android Ionic con la
-  ayuda de Fastlane y GitLab en 5 minutos
+  Cómo configurar una canalización de CI/CD para su aplicación Android Ionic
+  usando fastlane y GitLab en 5 minutos
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z

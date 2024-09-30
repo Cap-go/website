@@ -2,9 +2,9 @@
 slug: creating-mobile-apps-with-react-and-capacitor
 title: Creación de aplicaciones móviles con Pure React.js y Capacitor
 description: >-
-  Una guía sobre la función de transformador de una aplicación Web React.js y
-  una aplicación móvil nativa para ayudar a Capacitor y mejorar la interfaz del
-  usuario nativo con Konsta UI.
+  Una guía sobre cómo transformar una aplicación web React.js en una aplicación
+  móvil nativa utilizando Capacitor y mejorando la interfaz de usuario nativa
+  con Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-29T00:00:00.000Z

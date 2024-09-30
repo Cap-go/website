@@ -1,10 +1,10 @@
 ---
 slug: basic-js-css-config-for-native-app-look
-title: Configuraciones básicas JS y CSS para un aspecto nativo de la aplicación
+title: Configuraciones básicas de JS y CSS para una apariencia de aplicación nativa
 description: >-
-  Descubra la configuración de comentarios de su aplicación web con los
-  parámetros JavaScript y CSS básicos para usar la apariencia de una aplicación
-  nativa, notando que desactiva los efectos de survol.
+  Aprenda a configurar su aplicación web con configuraciones básicas de
+  JavaScript y CSS para que se vea y se sienta como una aplicación nativa,
+  incluida la desactivación de los efectos de desplazamiento.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z

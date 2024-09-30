@@ -4,9 +4,9 @@ title: >-
   La guía definitiva para el desarrollo de aplicaciones móviles multiplataforma
   en 2024
 description: >-
-  Descubra las mejores prácticas y cuadros para el desarrollo de aplicaciones
-  móviles multiplataforma en 2024. Cree aplicaciones iOS, Android y Web a partir
-  de una sola base de código.
+  Conozca las mejores prácticas y marcos para el desarrollo de aplicaciones
+  móviles multiplataforma en 2024. Cree aplicaciones web, iOS y Android a partir
+  de una única base de código.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z

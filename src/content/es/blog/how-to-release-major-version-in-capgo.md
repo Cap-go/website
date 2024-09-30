@@ -1,9 +1,9 @@
 ---
 slug: how-to-release-major-version-in-capgo
-title: Comentario publicador de una versión mayor en Capgo
+title: Cómo lanzar la versión principal en capgo
 description: >-
-  Comprender comentarios y cuando sea necesario publicar una versión mayor de su
-  aplicación sin interrumpir su usuario de la aplicación
+  Comprenda cómo y cuándo es necesario lanzar una versión principal de su
+  aplicación sin dañar la aplicación de usuario.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
@@ -58,7 +58,7 @@ Donde Capgo encuentra la versión para comparar
 #### JavaScript
   > Capgo lo utilizará para comparar con la versión nativa y encontrar una actualización importante
 
-  en JavaScript, la var se establece en su proyecto aquí `packagejson` bajo la clave `version`
+  en JavaScript, la var se configura en su proyecto aquí `packagejson` bajo la clave `version`
 ## Ejemplo
 
 Su aplicación Ionic se lanzó actualmente con la versión `123` con Capacitor 3

@@ -3,9 +3,9 @@ slug: capacitor-comprehensive-guide
 title: "Condensateur\_: un guide complet"
 description: >-
   CapacitorJS est un outil puissant qui permet aux développeurs Web de créer des
-  applications natives iOS, Android, de bureau et Web progressives avec une base
-  de code Web standard unique. Apprenez tout ce que vous devez savoir sur les
-  condensateurs dans ce guide complet.
+  applications Web natives pour iOS, Android, de rédaction et de progression
+  avec une base de code Web unique. Après tout ce que vous devez savoir sur le
+  condensateur dans ce guide complet.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-10T00:00:00.000Z
@@ -40,7 +40,7 @@ Les équipes devraient envisager Capacitor lorsqu'elles souhaitent tirer parti d
 
 Oui! Capacitor exécute les applications Web standard de manière native, permettant aux équipes de disposer d'une base de code unique pour le Web et les appareils mobiles ou de réutiliser des parties de leur application Web, telles que des composants, une logique ou des expériences spécifiques.
 
-## À quoi sert le condensateur ? Quelles sont ses limites ?
+## En quoi le condensateur est-il bon ? Quelles sont ses limites ?
 
 Capacitor excelle dans l'exécution d'applications Web standard en tant qu'applications mobiles natives et dans l'extension d'applications Web avec des fonctionnalités natives. Il est idéal pour les équipes compétentes en développement Web ou ayant des investissements Web importants. Capacitor n'est peut-être pas le meilleur choix pour les applications 3D/2D ou à forte intensité graphique, bien qu'il prend en charge les applications WebGL qui nécessitent une communication étendue entre l'application Web et la couche native. Le pont de communication Capacitor peut ajouter une surcharge en raison de la sérialisation. Cependant, les applications Capacitor peuvent toujours exécuter du code natif personnalisé en cas de besoin.
 

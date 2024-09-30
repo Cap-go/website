@@ -1,9 +1,9 @@
 ---
 slug: setup-ci-and-cd-gitlab
-title: Creación y publicación automática de una aplicación con GitLab
+title: Aplicación de compilación y lanzamiento automático con GitLab
 description: >-
-  Cree gratuitamente su propia canalización CI/CD con GitLab, implemente su
-  aplicación Ionic Capacitor JS cada vez que la presione en el menú principal.
+  Cree su propia canalización de CI/CD con GitLab de forma gratuita, implemente
+  su aplicación Ionic Capacitor JS cada vez que acceda a principal.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z

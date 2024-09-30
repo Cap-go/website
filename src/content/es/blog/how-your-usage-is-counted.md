@@ -1,9 +1,9 @@
 ---
 slug: how-your-usage-is-counted
-title: Comentar su utilización está compuesta por Capgo
+title: Cómo se cuenta su uso en Capgo
 description: >-
-  Comprenez comment Capgo compte votre utilization et utilisez-la au mieux.
-  Aprendizaje de mieux gérer votre forfait
+  Comprenda cómo Capgo cuenta su uso y utilícelo de la mejor manera. Aprende a
+  gestionar mejor tu plan
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z

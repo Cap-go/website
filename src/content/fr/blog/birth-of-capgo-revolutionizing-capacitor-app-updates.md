@@ -1,10 +1,11 @@
 ---
 slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
-title: Comment un problème GitHub est devenu une entreprise
+title: Comment une édition de GitHub a évolué jusqu'à devenir un commerce
 description: >-
-  Découvrez les essais et les triomphes derrière la création de Capgo, un
-  système innovant de mise à jour en direct pour les applications Capacitor, né
-  de la nécessité et façonné par les commentaires de la communauté.
+  Découvrez les essais et les trois résultats de la création de Capgo, un
+  système innovant d'actualisation en vivo pour les applications de
+  condensateur, né de la nécessité et moulé par les commentaires de la
+  communauté.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z

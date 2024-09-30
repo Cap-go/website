@@ -1,9 +1,7 @@
 ---
 slug: do-google-allow-live-updates
-title: >-
-  Google autorise-t-il l'envoi de mises à jour en direct aux applications sans
-  l'examen de l'App Store.
-description: "Comment pouvez-vous envoyer des mises à jour de code aux applications Android de production et être pleinement conforme aux directives de Google\_?"
+title: "Pouvez-vous permettre à Google d'envoyer des mises à jour en direct aux applications depuis la révision de l'App Store\_?"
+description: "Comment pouvez-vous envoyer des mises à jour de code aux applications de production Android et les utiliser pleinement avec les directives de Google\_?"
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z

@@ -27,7 +27,7 @@ Capgo, un plugin Capacitor open source développé par Digital Shift OU, offre u
 
 Pour vous aider à prendre une décision éclairée, nous avons créé un tableau comparatif des fonctionnalités entre Capgo et Voltbuilder
 
-## Comparaisons des fonctionnalités
+## Comparaisons de fonctionnalités
 
 | Caractéristiques | Capgo | Constructeur de Volts |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ Pour vous aider à prendre une décision éclairée, nous avons créé un tablea
 | Chiffrement de bout en bout | ✅ | ❌ |
 | 100% Open Source | ✅ | ❌ |
 | Installation facile | ✅ | ✅ |
-| Applications prêtes pour le magasin | ❌ | ✅ |
+| Applications prêtes à être stockées | ❌ | ✅ |
 
 ## Alternatives d'intégration continue
 

@@ -1,9 +1,9 @@
 ---
 slug: automatic-build-and-release-with-github-actions
-title: Creación y publicación automática de una aplicación con acciones Github
+title: Aplicación de compilación y lanzamiento automático con acciones de Github
 description: >-
-  Cree gratuitamente su propia canalización CI/CD con las acciones de Github,
-  implemente su aplicación Ionic Capacitor JS cada vez que la use en Main.
+  Cree su propia canalización de CI/CD con acciones de Github de forma gratuita,
+  implemente su aplicación Ionic Capacitor JS cada vez que acceda a principal.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z

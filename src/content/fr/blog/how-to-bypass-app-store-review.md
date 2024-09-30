@@ -1,9 +1,12 @@
 ---
 slug: how-to-bypass-app-store-review
 title: >-
-  Comment mettre à jour les applications Capacitor JS sans l'examen de l'App
+  Comment mettre à jour les applications Capacitor JS dans la révision de l'App
   Store.
-description: "Comment Capgo Feature peut-il vous permettre de diffuser des mises à jour de code vers des applications iOS Ionic en direct et d'être entièrement conforme aux directives d'Apple\_?"
+description: >-
+  Comment Capgo Feature permet-il d'envoyer des mises à jour de code aux
+  applications iOS Ionic activées et de les utiliser pleinement avec les pattes
+  d'Apple ?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z

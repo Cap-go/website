@@ -1,8 +1,8 @@
 ---
 slug: appcenter-migration
-title: Migrando desde App Center a Capgo
+title: Migración de App Center a Capgo
 description: >-
-  Con esta guía, abordamos la migración completa de Capgo Live Updates, una
+  En esta guía, analizaremos la migración completa de Capgo Live Updates, una
   alternativa a Microsoft CodePush.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
@@ -24,7 +24,7 @@ locale: es
 
 ##### Nota
 
-Si su aplicación todavía usa Cordova, es necesario [migrar a Capacitor](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/) antes de migrar a Capgo
+Si su aplicación todavía usa Cordova, es necesario [migrar a Capacitor](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/) antes de migrar a Capgo.
 
 Creado por el equipo de Ionic como sucesor espiritual de Cordova, Capacitor permite que el desarrollo se acerque a las herramientas y capacidades nativas con el objetivo de proporcionar una experiencia de usuario y un rendimiento aún mejores.
 
@@ -52,7 +52,7 @@ Antes de continuar, debe tener Node y NPM instalados en su computadora. Utilice 
 
 Antes de comenzar, recomiendo realizar cambios en una nueva rama de Git.
 
-Dado que [Capgo](/register/) se creó para automatizar aplicaciones de condensadores, requiere un archivo que su aplicación tal vez no tenga. Primero, cree un archivo `capacitorconfigjson`. La forma más sencilla de crearlo es ejecutarlo en la raíz de su aplicación:
+Dado que [Capgo](/register/) se creó para automatizar aplicaciones de condensadores, requiere un archivo que su aplicación tal vez no tenga. Primero, cree un archivo `capacitorconfigjson`. La forma más fácil de crearlo es ejecutarlo en la raíz de su aplicación:
 
 ```shell
 npm install @capacitor/core
@@ -72,7 +72,7 @@ Finalmente, confirme los nuevos archivos en su proyecto:
 
 ### Migrar el código
 
-Ahora que tiene los nuevos archivos [Capgo](/register/) requeridos en su lugar, puede centrar nuestra atención en la aplicación real. [Capgo](/register/) espera que toda la aplicación construida esté dentro de un directorio llamado `dist `
+Ahora que tiene los nuevos archivos [Capgo](/register/) requeridos en su lugar, puede centrar nuestra atención en la aplicación real. [Capgo](/register/) espera que toda la aplicación creada esté dentro de un directorio llamado `dist `
 
 Si su código compilado no está en un directorio `dist`, cambie este valor en el archivo de configuración de Capacitor
 
@@ -93,7 +93,7 @@ Desde una línea de comando, directamente en la raíz de la carpeta de la aplica
 `npm i @capgo/capacitor-updater && npx cap sync`
 Para instalar el complemento en su aplicación Capacitor
 
-Y luego agregue a su aplicación este código como reemplazo de CodePush uno:
+Y luego agregue a su aplicación este código como reemplazo de CodePush one:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -105,7 +105,7 @@ Esto le indicará al complemento nativo que la instalación se realizó correcta
 
 ## Implementación de actualizaciones en vivo (alternativa a CodePush)
 
-La función Live Update funciona utilizando el [Capgo SDK](https://githubcom/Cap-go/capacitor-updater/) instalado en su aplicación nativa para escuchar un destino de canal de implementación particular cuando se asigna una compilación web a un canal. Destino, esa actualización se implementará en los dispositivos de los usuarios que ejecutan archivos binarios configurados para escuchar el destino del canal especificado.### Inicie sesión en Capgo CLOUD
+La función Actualización en vivo funciona utilizando el [Capgo SDK](https://githubcom/Cap-go/capacitor-updater/) instalado en su aplicación nativa para escuchar un destino de canal de implementación particular cuando se asigna una compilación web a un canal. Destino, esa actualización se implementará en los dispositivos de los usuarios que ejecutan archivos binarios configurados para escuchar el destino del canal especificado.### Inicie sesión en Capgo CLOUD
 
 Primero, use `all` [apikey](https://webcapgoapp/dashboard/apikeys/) presente en su cuenta para iniciar sesión con la CLI:
 

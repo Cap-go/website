@@ -1,9 +1,9 @@
 ---
 slug: automatic-capacitor-ios-build-codemagic
-title: Creación automática de un condensador IOS con Codemagic
+title: Condensador automático IOS construido con Codemagic
 description: >-
-  Comente configurar un pipeline CI/CD para su aplicación IOS Ionic con la ayuda
-  de Codemagic y Codemagic en 5 minutos (2024)
+  Cómo configurar una canalización de CI/CD para su aplicación IOS Ionic usando
+  Codemagic y Codemagic en 5 minutos (2024)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-24T00:00:00.000Z

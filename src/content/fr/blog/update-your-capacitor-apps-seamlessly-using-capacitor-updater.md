@@ -1,12 +1,12 @@
 ---
 slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: >-
-  Mettez à jour vos applications Capacitor en toute transparence à l'aide de
+  Actualisez vos applications de Capacitor sans problèmes en utilisant
   Capacitor-updater
 description: >-
-  Salutations à la communauté Capacitor Ionic, aujourd'hui, je vais vous aider à
-  configurer le programme de mise à jour de condensateur dans votre application.
-  Pour que vous puissiez réaliser des versions transparentes.
+  Saludos Comunidad Capacitor Ionic, aujourd'hui vous aide à configurer
+  Capacitor-updater dans votre application. Pour que vous puissiez réaliser des
+  lancements sans problème.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-02-27T00:00:00.000Z

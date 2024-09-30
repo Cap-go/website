@@ -1,10 +1,9 @@
 ---
 slug: migrating-cordova-to-capacitor
-title: 'Migración de una aplicación Web de Cordova a Capacitor: una guía paso a paso'
+title: 'Migración de una aplicación web de Cordova a Capacitor: una guía paso a paso'
 description: >-
-  Esta guía es el primer paso para que le ayude a migrar su aplicación Web de
-  Cordova a Capacitor, que le permitirá acceder a todas las secciones y
-  facilitar la lectura de la lira y el éxito.
+  Esta guía paso a paso lo ayudará a migrar su aplicación web de Cordova a
+  Capacitor, cubriendo todas las secciones y haciéndola fácil de leer y seguir.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
@@ -27,7 +26,7 @@ Cordova y Capacitor son herramientas que permiten a los desarrolladores web crea
 
 ## Estrategia de migración
 
-La migración de Cordova a Capacitor se puede realizar gradualmente o como un reemplazo completo, dependiendo de la complejidad de su aplicación. Capacitor es compatible con Cordova, lo que le permite cambiar sus aplicaciones web existentes cuando esté listo.
+La migración de Cordova a Capacitor se puede realizar de forma gradual o como un reemplazo completo, dependiendo de la complejidad de su aplicación. Capacitor es compatible con versiones anteriores de Cordova, lo que le permite cambiar sus aplicaciones web existentes cuando esté listo.
 
 Para ayudar con la migración, considere usar la [Extensión de código Ionic VS](https://marketplacevisualstudiocom/items/?itemName=ionicinic) y auditar sus complementos de Cordova existentes. Puede continuar usando los complementos de Cordova si es necesario o reemplazarlos con equivalentes de Capacitor.
 
@@ -67,7 +66,7 @@ Estamos orgullosos de ofrecer Capgo, nuestra solución que permite actualizacion
 
 ### Cómo funciona nuestro servicio Capgo
 
-Capgo es un servicio basado en la nube que le permite implementar actualizaciones en vivo para sus aplicaciones Capacitor. Consiste en un panel web y un SDK nativo que puede integrar en su aplicación. El SDK busca actualizaciones al inicio o en intervalos específicos y las descarga en en segundo plano Cuando hay una actualización disponible, el SDK solicitará al usuario que la instale. Si el usuario acepta, la actualización se instalará y aplicará inmediatamente
+Capgo es un servicio basado en la nube que le permite implementar actualizaciones en vivo para sus aplicaciones Capacitor. Consiste en un panel web y un SDK nativo que puede integrar en su aplicación. El SDK busca actualizaciones al inicio o en intervalos específicos y las descarga en en segundo plano Cuando hay una actualización disponible, el SDK solicitará al usuario que la instale. Si el usuario acepta, la actualización se instalará y aplicará inmediatamente.
 
 ### Beneficios de las actualizaciones de Capgo Live
 
@@ -80,7 +79,7 @@ Capgo es un servicio basado en la nube que le permite implementar actualizacione
 
 Para implementar actualizaciones en vivo de Capgo en su proyecto Capacitor, siga estos pasos:
 - Regístrese para obtener una [cuenta Capgo] (https://webcapgoapp/)
-- Instala el SDK de Capgo en tu proyecto
+- Instale el SDK de Capgo en su proyecto
 - Configure su aplicación para buscar actualizaciones al inicio o en intervalos específicos
 - Implemente actualizaciones en su aplicación usando el panel de Capgo
 

@@ -1,9 +1,9 @@
 ---
 slug: how-to-release-major-version-in-capgo
-title: Comment publier une version majeure dans Capgo
+title: Comment lancer la version principale en capgo
 description: >-
-  Comprendre comment et quand il est nécessaire de publier une version majeure
-  de votre application sans interrompre votre application utilisateur
+  Comprendre comment et quand il est nécessaire de lancer une version principale
+  de votre application sans tomber dans l'application de l'utilisateur.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z

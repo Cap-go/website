@@ -1,12 +1,11 @@
 ---
 slug: do-google-allow-live-updates
 title: >-
-  Google autoriza el envío de actualizaciones del día directamente a
-  aplicaciones sin examen de la App Store.
+  ¿Permite Google enviar actualizaciones en vivo a las aplicaciones sin la
+  revisión de la App Store?
 description: >-
-  ¿Puedes enviar un mensaje actualizado sobre el código de las aplicaciones de
-  producción de Android y estar completamente conformes con las directivas de
-  Google?
+  ¿Cómo se pueden enviar actualizaciones de código a las aplicaciones de
+  producción de Android y cumplir plenamente con las directrices de Google?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z

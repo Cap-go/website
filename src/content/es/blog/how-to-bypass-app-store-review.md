@@ -1,10 +1,9 @@
 ---
 slug: how-to-bypass-app-store-review
-title: Comente las aplicaciones del día Capacitor JS sin el examen de la App Store.
+title: Cómo actualizar las aplicaciones Capacitor JS sin la revisión de la App Store.
 description: >-
-  Comment Capgo Feature ¿Podría permitirle difundir actualizaciones de código
-  hacia las aplicaciones iOS Ionic en directo y en todo momento conforme a las
-  directivas de Apple?
+  ¿Cómo puede Capgo Feature permitirle enviar actualizaciones de código a
+  aplicaciones iOS Ionic activas y cumplir plenamente con las pautas de Apple?
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
@@ -19,7 +18,7 @@ locale: es
 
 _Me alegro de que hayas preguntado_
 
-Mis abogados me pidieron que le hiciera saber que esto no es asesoramiento legal, pero no necesita un título en derecho para comprender el texto de las pautas oficiales de Apple. Las pautas de Apple le permiten explícitamente enviar código ejecutable directamente a su aplicación, sin pasar por la aplicación. Conservar, bajo estas tres condiciones:
+Mis abogados me pidieron que le hiciera saber que esto no es asesoramiento legal, pero no necesita un título en derecho para comprender el texto de las pautas oficiales de Apple. Las pautas de Apple le permiten explícitamente insertar código ejecutable directamente en su aplicación, sin pasar por la aplicación. Conservar, bajo estas tres condiciones:
 
 * El código se ejecuta mediante el marco WebKit integrado de Apple.
 * El código no proporciona, desbloquea ni habilita características o funcionalidades adicionales
@@ -46,7 +45,7 @@ Apple y Google tienen sus propias reglas sobre cómo actualizar aplicaciones
 Para Apple, [eche un vistazo al párrafo 332](https://developerapplecom/programs/information/Apple_Developer_Program_Information_8_12_15pdf/)
 \[…\] La única excepción a lo anterior son los scripts y el código descargados y ejecutados mediante el marco WebKit integrado de Apple o JavascriptCore \[…\] __TLDR__: debemos usar actualizaciones OTA solo para corregir errores o realizar mejoras, sin realizar cambios significativos. cambios
 
-__Google__ Play es menos restrictivo: dicen que las aplicaciones instaladas desde Google Play con paquetes de JavaScript [no están restringidas](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) para actualizar mediante los servicios de Google. solo
+__Google__ Play es menos restrictivo: dicen que las aplicaciones instaladas desde Google Play con paquetes de JavaScript [no están restringidas](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) para actualizar mediante los servicios de Google solo
 
 
 Consulte mi próximo artículo para obtener más información sobre cómo instalar Capgo para evitar la revisión.

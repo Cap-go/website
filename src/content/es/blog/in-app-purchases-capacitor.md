@@ -1,9 +1,9 @@
 ---
 slug: in-app-purchases-capacitor
-title: accesorios integrados para condensador
+title: compras en la aplicación para condensador
 description: >-
-  Comente el trabajo integrado para las aplicaciones de condensadores con la
-  ayuda del complemento Capacitor Purchases y RevenueCat.
+  Cómo implementar compras dentro de la aplicación para aplicaciones de
+  condensadores utilizando el complemento Capacitor Purchases y RevenueCat
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
@@ -85,7 +85,7 @@ Panel de proyecto para seleccionar la plataforma de la aplicación
 
 El campo **Nombre de la aplicación** es obligatorio para agregar su aplicación a RevenueCat. El resto de los campos de configuración se pueden agregar más tarde. Para realizar compras de prueba y producción, el ID del paquete (iOS) / Nombre del paquete (Android) así como el Compartido Se deben configurar las credenciales secretas (iOS)/servicio (Android)
 
-![RevenueCat paso 3](/revenuecat_step3webp)
+![RevenueCat paso 3](/revenuecat_step3web)
 
 Página de configuración de la aplicación para una aplicación Apple App Store
 
@@ -250,7 +250,7 @@ Es típico llamar a este método al decidir qué interfaz de usuario mostrarle a
 > 
 > Puede acceder a mucha más información sobre una suscripción que simplemente si está activa o no. Consulte la guía de RevenueCat en [Estado de la suscripción](https://wwwrevenuecatcom/docs/customer-info/) para saber si la suscripción está configurada para renovarse, si se detecta un problema con la tarjeta de crédito del usuario y más
 
-RevenueCat permite a sus usuarios restaurar sus compras dentro de la aplicación, reactivando cualquier contenido que hayan comprado previamente desde la **misma cuenta de tienda** (cuenta de Apple, Google o Amazon). Recomendamos que todas las aplicaciones tengan alguna forma para que los usuarios activen la método de restauración Tenga en cuenta que Apple requiere un mecanismo de restauración en caso de que un usuario pierda el acceso a sus compras (por ejemplo: desinstalar/reinstalar la aplicación, perder la información de su cuenta, etc.)
+RevenueCat permite a sus usuarios restaurar sus compras dentro de la aplicación, reactivando cualquier contenido que hayan comprado previamente en la **misma cuenta de tienda** (cuenta de Apple, Google o Amazon). Recomendamos que todas las aplicaciones tengan alguna forma para que los usuarios activen la método de restauración Tenga en cuenta que Apple requiere un mecanismo de restauración en caso de que un usuario pierda el acceso a sus compras (por ejemplo: desinstalar/reinstalar la aplicación, perder la información de su cuenta, etc.)
 
 ```javascript
   const res = await CapacitorPurchases.restoreTransactions()
@@ -283,7 +283,7 @@ CapacitorPurchases.addListener('purchasesUpdate', (data) => {
 > 
 > ¡Lo hiciste!
 > 
-> Ahora ha implementado un sistema de compra de suscripciones con todas las funciones sin tener que pasar un mes escribiendo el código del servidor. ¡Felicidades!
+> Ahora ha implementado un sistema de compra de suscripciones con todas las funciones sin pasar un mes escribiendo el código del servidor. ¡Felicidades!
 
 ### Aplicaciones de muestra
 

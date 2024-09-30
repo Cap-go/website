@@ -1,10 +1,12 @@
 ---
 slug: automatic-build-and-release-with-github-actions
-title: Création et publication automatiques d'une application avec des actions Github
+title: >-
+  Application de compilation et lancement automatique avec des applications de
+  Github
 description: >-
-  Créez gratuitement votre propre pipeline CI/CD avec les actions Github,
-  déployez votre application Ionic Capacitor JS à chaque fois que vous appuyez
-  sur main.
+  Créez votre propre canalisation de CI/CD avec des applications de Github de
+  forme gratuite, implémentez votre application Ionic Capacitor JS chaque fois
+  que vous accédez au principe.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z
@@ -71,7 +73,7 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-Cela libérera une balise pour chaque commit dans votre branche principale et ajoutera une entrée du journal des modifications pour chaque commit dans la branche principale dans `CHANGELOGmd`
+Cela libérera une balise pour chaque commit dans votre branche principale et ajoutera une entrée du journal des modifications pour chaque commit dans la branche principale dans `CHANGELOGmd`.
 
 Ne vous inquiétez pas si vous n'avez pas ce fichier, il sera créé pour vous
 

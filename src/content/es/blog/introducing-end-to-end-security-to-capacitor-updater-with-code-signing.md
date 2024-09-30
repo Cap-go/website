@@ -1,11 +1,11 @@
 ---
 slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: >-
-  Introducción al cifrado de datos en el programa de puesta en marcha del día de
-  los condensadores con firma de código
+  Introducción del cifrado de extremo a extremo al actualizador de condensadores
+  con firma de código
 description: >-
-  Utilización de la criptografía RSA + AES para guardar las actualizaciones del
-  día, conçues para las aplicaciones empresariales y de alta seguridad.
+  Uso de criptografía RSA + AES para cifrar actualizaciones, diseñado para
+  aplicaciones empresariales y de alta seguridad
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z

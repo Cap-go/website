@@ -1,10 +1,10 @@
 ---
 slug: capgo-purpose
-title: Objeto de Capgo
+title: Propósito de Capgo
 description: >-
-  El artículo del blog debe ser descrito como una guía completa destinada a los
-  desarrolladores sobre la forma de utilizar Capgo para gestionar las
-  actualizaciones del día y las pruebas de la aplicación Capacitor.
+  El artículo del blog debe describirse como una guía completa para
+  desarrolladores sobre cómo usar Capgo para administrar las actualizaciones y
+  pruebas de la aplicación Capacitor.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z

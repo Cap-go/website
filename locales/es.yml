@@ -153,3 +153,9 @@ push_updates_like_your_commits: Empuje actualizaciones como sus confirmaciones
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Es compatible con Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees, Travis,
   Azure DevOps, GitLab, GitHub, CircleCI y muchos más.
+launch_multiple_releases_per_week: >-
+  Con $1, puedes lanzar múltiples lanzamientos por semana con un impresionante
+  aumento del 81% en eficiencia. No te pierdas esta ventaja competitiva.
+easily_combine_features_ci_cd: >-
+  Combine fácilmente funciones de $1 en su plataforma CI/CD actual con nuestra
+  CLI fácil de usar.

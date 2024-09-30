@@ -1,10 +1,10 @@
 ---
 slug: self-hosted-capgo
-title: Capgo auto-hébergé
+title: Capgo autohospedado
 description: >-
-  Capgo se mantiene automáticamente y permite implementar actualizaciones
-  diarias directamente de Capacitor junto con sus usuarios sin necesidad de
-  utilizar el servicio en la nube Capgo.
+  El autohospedaje de Capgo le permite implementar actualizaciones en vivo de
+  Capacitor para sus usuarios sin tener que utilizar el servicio en la nube de
+  Capgo.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
@@ -58,7 +58,7 @@ Estas son las diferencias entre Capgo Cloud y Capgo Self-Hosted:
 | **Alojamiento** | Fácil y conveniente Tarda 2 minutos en comenzar a enviar tu primera actualización, alta disponibilidad, copias de seguridad, seguridad y mantenimiento, todo hecho por ti. Administro todo por ti para que no tengas que preocuparte por nada | Lo hace todo usted mismo Necesita obtener un servidor y administrar su infraestructura Usted es responsable de la instalación, el mantenimiento, las actualizaciones, la capacidad del servidor, el tiempo de actividad, la copia de seguridad, la seguridad, la estabilidad, la coherencia, el tiempo de carga, etc.
 | **Almacenamiento** | Todos los datos de los visitantes se procesan exclusivamente en una infraestructura de nube propiedad de la UE. Mantengo los datos de su sitio en un servidor seguro, cifrado y en Alemania. Esto garantiza que los datos de su sitio estén protegidos por las estrictas leyes de privacidad de datos de la Unión Europea y garantiza el cumplimiento del RGPD. Los datos de su sitio web nunca sale de la UE | Tienes control total y puedes alojar tu Capgo en cualquier servidor en cualquier país que desees. Hospédalo en un servidor en tu sótano o con cualquier proveedor de nube donde quieras, incluso aquellos que no cumplen con GDPR.|
 | **Datos sin procesar** | Puedes ver todas las estadísticas y métricas de tu sitio en mi panel de control moderno, fácil de usar y de carga rápida. Solo puedes ver las estadísticas agregadas en el panel | ¿Es usted analista y desea acceder a los datos sin procesar? Hospedar Capgo usted mismo le brinda esa opción. Tome los datos directamente de la base de datos e impórtelos a una herramienta de análisis de datos de su elección.
-| **Costos** | Hay un costo asociado con el suministro de un servicio de actualización, por lo que cobro una tarifa de suscripción | Solo necesita pagar por su servidor y cualquier costo asociado con el funcionamiento de un servidor. Nunca tendrá que pagarme ninguna tarifa a mí, solo a su proveedor de nube.
+| **Costos** | Hay un costo asociado con el suministro de un servicio de actualización, por lo que cobro una tarifa de suscripción | Solo necesita pagar por su servidor y cualquier costo asociado con el funcionamiento de un servidor. Nunca tendrá que pagarme ninguna tarifa a mí, solo a su proveedor de nube |
 | **Soporte Premium** | Soporte real brindado por seres humanos reales que construyen y mantienen Capgo | El soporte premium no está incluido. La versión autohospedada solo cuenta con soporte comunitario |
 | **Lanzamientos** | Desarrollado y mejorado continuamente con nuevas funciones y actualizaciones varias veces por semana | Es una versión a largo plazo que se publica dos veces al año, por lo que las funciones más recientes no estarán disponibles de inmediato, ya que primero se prueban en la nube |
 
@@ -88,7 +88,7 @@ Nota: Para obtener localSupaAnon, siga este [tutorial](https://capgoapp/docs/sel
 
 **Requisito**
 
-Clonado [capgo](https://githubcom/Cap-go/capgo/)
+Clonado [capgo] (https://githubcom/Cap-go/capgo/)
 
 Para usar el actualizador de capacitores con capgo autohospedado, edite los `capacitorconfigts` del directorio de su aplicación y configúrelo así:
 

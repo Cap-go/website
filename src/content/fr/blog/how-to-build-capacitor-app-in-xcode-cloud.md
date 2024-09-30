@@ -1,9 +1,9 @@
 ---
 slug: how-to-build-capacitor-app-in-xcode-cloud
-title: Comment créer une application Ionic Capacitor dans Xcode Cloud
+title: Comment créer une application de condensateur ionique sur Xcode Cloud
 description: >-
-  Utilisez le cloud Xcode pour créer votre application Capacitor JS et
-  contourner le besoin de MacOS.
+  Utilisez le nouveau Xcode pour créer votre application Capacitor JS et éviter
+  la nécessité de MacOS.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-09-01T00:00:00.000Z

@@ -1,10 +1,10 @@
 ---
 slug: updating-from-capacitor-4-to-capacitor-5
-title: "Mise à jour du condensateur 4 vers le condensateur 5\_: un guide étape par étape"
+title: "Mise à jour du condenseur 4 vers le condenseur 5\_: un guide étape par étape"
 description: >-
-  Découvrez comment mettre à jour votre projet de Capacitor 4 vers Capacitor 5
-  avec un minimum de modifications majeures, y compris la mise à jour des
-  plugins officiels et des outils requis.
+  Après cela, vous pourrez mettre à jour votre projet de condensateur 4 et de
+  condensateur 5 avec des modifications minimes, y compris la mise à jour des
+  compléments officiels et des outils nécessaires.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-09T00:00:00.000Z

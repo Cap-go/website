@@ -1,11 +1,11 @@
 ---
 slug: building-a-native-mobile-app-with-nextjs-and-capacitor
-title: "2024 Création d'applications mobiles natives avec Next.js 14 et Capacitor\_: un guide étape par étape"
+title: "2024 Création d'applications mobiles natives avec Next.js 14 et Capacitor\_: un guide pas à pas"
 description: >-
-  Découvrez comment créer des applications mobiles natives à l'aide de Next.js
-  14 et de Capacitor dans ce guide complet. Découvrez les dernières bonnes
-  pratiques et techniques pour créer des applications mobiles hautes
-  performances et riches en fonctionnalités.
+  Apprenez à créer des applications mobiles natives en utilisant Next.js 14 et
+  Capacitor dans ce guide complet. Découvrez les meilleures pratiques et
+  techniques les plus récentes pour créer des applications mobiles de haut rendu
+  et de nombreuses fonctions.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z

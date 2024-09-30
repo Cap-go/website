@@ -2,8 +2,8 @@
 slug: integrate-universal-links-capacitor-nextjs
 title: Comment intégrer des liens universels dans Next.js avec Capacitor
 description: >-
-  Apprenez étape par étape comment configurer des liens universels pour votre
-  application Next.js avec Capacitor sur les plateformes iOS et Android.
+  Étape 1: Comment configurer les liens universels pour votre application
+  Next.js avec Capacitor sur les plates-formes iOS et Android.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z

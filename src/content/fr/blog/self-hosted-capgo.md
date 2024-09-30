@@ -1,10 +1,10 @@
 ---
 slug: self-hosted-capgo
-title: Capgo auto-hébergé
+title: Capgo autohospedado
 description: >-
-  Capgo auto-hébergé vous permet de déployer des mises à jour en direct de
-  Capacitor auprès de vos utilisateurs sans avoir à utiliser le service cloud
-  Capgo.
+  L’autohospedaje de Capgo permet de mettre en œuvre des mises à jour en vivo de
+  Capacitor pour nos utilisateurs sans qu’ils utilisent le service sur le noyau
+  de Capgo.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
@@ -49,7 +49,7 @@ Il n'existe qu'une seule version de Capgo. Mes produits Cloud et auto-hébergés
 
 Vous obtenez le même tableau de bord, les mêmes mesures exploitables et le même engagement à [respecter la vie privée de vos visiteurs](https://capgoapp/privacy/) avec les deux
 
-J'ai commencé à développer Capgo en décembre 2018 et j'ai lancé l'activité d'abonnement SaaS en mai 2019. Le projet est bien vivant, activement développé et en croissance rapide. Il est également robuste et testé au combat.
+J'ai commencé à développer Capgo en décembre 2018 et j'ai lancé l'activité d'abonnement SaaS en mai 2019. Le projet est bien vivant, activement développé et en croissance rapide. Il est également robuste et éprouvé.
 
 Voici les différences entre Capgo Cloud et Capgo Self-Hosted :
 

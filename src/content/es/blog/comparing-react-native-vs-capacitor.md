@@ -1,10 +1,10 @@
 ---
 slug: comparing-react-native-vs-capacitor
-title: Comparación de React Native y Capacitor
+title: Comparación de React Native frente a condensador
 description: >-
   En este artículo, comparamos el desarrollo de aplicaciones móviles con React
-  Native y el uso de React y Capacitor, nuestras funciones, nuestro rendimiento,
-  nuestra comunicación, etc.
+  Native con el uso de React y Capacitor, cubriendo sus funcionalidades,
+  rendimiento, comunidad y más.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
@@ -69,7 +69,7 @@ Algunas de estas bibliotecas incluyen:
 
 - [Formulario React Hook](https://bloglogrocketcom/the-complete-guide-to-react-hook-form/) o [Formik para crear y validar formularios](https://bloglogrocketcom/building-better-react- formularios-con-formik/)
 - [React Testing Library y Jest para probar aplicaciones](https://bloglogrocketcom/testing-apps-with-jest-and-react-testing-library/)
-- [Obtener API y Axios para realizar solicitudes de red](https://bloglogrocketcom/data-fetching-react-native/)
+- [Obtenga API y Axios para realizar solicitudes de red](https://bloglogrocketcom/data-fetching-react-native/)
 
 Sin embargo, incluso con bibliotecas de terceros que pueden verse como una ventaja, estas bibliotecas a menudo quedan obsoletas. Si el soporte de la comunidad para una biblioteca en particular no es lo suficientemente sólido y no se actualiza con frecuencia, pueden surgir problemas de incompatibilidad.
 
@@ -99,13 +99,13 @@ Un problema común con herramientas como Capacitor que utilizan WebView para ren
 
 Las aplicaciones de condensadores pueden tener problemas en dispositivos de gama baja o dispositivos con hardware antiguo. Esto se debe a que, por lo general, algunos recursos deben cargarse desde la web antes de que se pueda representar la interfaz de usuario de la aplicación.
 
-Además, cuando las aplicaciones no se representan en la vista nativa de los dispositivos, no pueden aprovechar plenamente las capacidades del hardware de los dispositivos, lo que resulta en un rendimiento lento.
+Además, cuando las aplicaciones no se representan en la vista nativa de los dispositivos, no pueden aprovechar plenamente las capacidades de hardware de los dispositivos, lo que resulta en un rendimiento lento.
 
 Las pruebas son más fáciles con Capacitor, ya que permite ejecutar aplicaciones en un navegador web. Con React Native, [compilar, ejecutar y probar aplicaciones requiere instalar Xcode] (https://bloglogrocketcom/xcode-for-react-native-developers-tutorial- and-best-practices/) o Android Studio, agregando otro paso al proceso de compilación
 
 Aunque puedes [omitir el paso de Xcode/Android Studio con Expo](https://bloglogrocketcom/getting-started-with-react-native-and-expo-sdk/), Expo [no está exenta de limitaciones](https: //docsexpodev/preguntas frecuentes/)
 
-Una herramienta WebView híbrida como Capacitor le ahorra costos y mucho tiempo. Pero si el alto rendimiento es muy importante para usted, o si está creando una aplicación compleja que podría ejecutarse en dispositivos baratos y con hardware antiguo, entonces React Native podría ser una mejor opciónEs probable que las aplicaciones React Native sean más rápidas y con mayor rendimiento, ya que se convierten a los idiomas nativos de los dispositivos y funcionan directamente con las funciones nativas de esos dispositivos en lugar de ejecutarse en un WebView.
+Una herramienta WebView híbrida como Capacitor le ahorra costos y mucho tiempo. Pero si el alto rendimiento es muy importante para usted, o si está creando una aplicación compleja que podría ejecutarse en dispositivos baratos y en dispositivos con hardware antiguo, entonces React Native podría ser una mejor opciónEs probable que las aplicaciones React Native sean más rápidas y con mayor rendimiento, ya que se convierten a los idiomas nativos de los dispositivos y funcionan directamente con las funciones nativas de esos dispositivos en lugar de ejecutarse en un WebView.
 
 Con [más de 2000 contribuyentes y poco menos de 700 000 usuarios en GitHub](https://githubcom/facebook/react-native/), así como [una gran comunidad en Stack Overflow](https://stackoverflowcom/questions/tagged/ react-native/?sort=Newest), React Native tiene el soporte que los desarrolladores necesitan para aprender y crecer en el marco.
 

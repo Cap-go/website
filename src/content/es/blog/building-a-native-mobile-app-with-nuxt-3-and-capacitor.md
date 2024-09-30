@@ -2,8 +2,8 @@
 slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
 title: Creación de aplicaciones móviles con Nuxt 3 y Capacitor.
 description: >-
-  Comente cree una aplicación móvil con Nuxt 3, Capacitor e implemente un
-  usuario de interfaz nativo con Konsta UI.
+  Cómo crear una aplicación móvil con Nuxt 3, Capacitor e implementar una
+  interfaz de usuario nativa con Konsta UI.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
@@ -26,7 +26,7 @@ Este tutorial lo guiará a través del proceso, comenzando con una nueva aplicac
 
 ## Acerca del condensador
 
-¡CapacitorJS realmente cambia las reglas del juego! Puede incorporarlo sin esfuerzo a cualquier proyecto web y envolverá su aplicación en una vista web nativa, generando el proyecto nativo de Xcode y Android Studio para usted. Además, sus complementos brindan acceso a funciones nativas del dispositivo como la cámara a través de un puente JS.
+¡CapacitorJS realmente cambia las reglas del juego! Puede incorporarlo sin esfuerzo en cualquier proyecto web y envolverá su aplicación en una vista web nativa, generando el proyecto nativo de Xcode y Android Studio para usted. Además, sus complementos brindan acceso a funciones nativas del dispositivo como la cámara a través de un puente JS.
 
 Con Capacitor, obtienes una fantástica aplicación móvil nativa sin ninguna configuración complicada ni curva de aprendizaje pronunciada. Su API delgada y su funcionalidad optimizada hacen que sea muy fácil de integrar en tu proyecto. Créeme, te sorprenderá lo fácil que es lograr una aplicación móvil completa. aplicación nativa funcional con Capacitor!
 

@@ -1,7 +1,7 @@
 ---
 slug: how-capgo-is-born
-title: El comentario es né Capgo
-description: Historia de la façon dont j'ai commencé ce voyage et construit Capgo
+title: Cómo nace Capgo
+description: Historia de fondo sobre cómo comencé este viaje y construí Capgo
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-01T00:00:00.000Z

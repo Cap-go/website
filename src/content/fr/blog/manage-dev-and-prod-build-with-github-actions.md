@@ -1,10 +1,10 @@
 ---
 slug: manage-dev-and-prod-build-with-github-actions
-title: Gérer le développement et la production avec les actions GitHub
+title: Gestion du développement et de la production avec les actions de GitHub.
 description: >-
-  Utilisez Capgo pour publier votre développement sur un canal spécifique et
-  laissez votre équipe essayer votre application Capacitor Ionic, sans attendre
-  l'examen d'Apple et de Google.
+  Utilisez Capgo pour lancer votre développement de développement sur un canal
+  spécifique et permettre à votre équipement de tester votre application
+  Capacitor Ionic, sans attendre la révision d'Apple et de Google.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z

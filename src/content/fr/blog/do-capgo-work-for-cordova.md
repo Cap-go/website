@@ -1,7 +1,7 @@
 ---
 slug: do-capgo-work-for-cordova
-title: "Pourquoi Capgo ne prend pas en charge Cordova\_: mise à niveau de votre application pour accéder aux mises à jour en direct"
-description: 'Dans ce guide, je vais vous partager mon expérience avec Capgo et Cordova.'
+title: "Par conséquent, Capgo n'est pas compatible avec Cordova\_: actualisez votre application pour accéder aux mises à jour en vivo"
+description: 'Dans ce guide, comparez mon expérience avec Capgo et Cordova.'
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-29T00:00:00.000Z
@@ -22,7 +22,7 @@ Cordova est ancienne et n'évolue plus : Cordova existe depuis un certain temps
 
 Cordova ne prend pas en charge les dernières évolutions natives de la plate-forme et du langage : Cordova ne prend pas en charge par défaut la dernière évolution de la plate-forme et du langage natifs, tels que Kotlin et Swift. Cela signifie que Cordova est incapable de fournir les dernières et meilleures expériences de développement d'applications aux utilisateurs.
 
-Condensateur : une alternative plus moderne : Capgo a adopté Capacitor comme alternative plus moderne à Cordova. Capacitor permet l'inclusion de bibliothèques externes, ce qui signifie que Capgo peut s'appuyer sur les meilleures bibliothèques et les maintenir à jour. plateforme de développement d'applications robuste et stable
+Condensateur : une alternative plus moderne : Capgo a adopté Capacitor comme alternative plus moderne à Cordova. Capacitor permet l'inclusion de bibliothèques externes, ce qui signifie que Capgo peut s'appuyer sur les meilleures bibliothèques et les maintenir à jour. Il en résulte une plus plateforme de développement d'applications robuste et stable
 
 Voici une autre raison pour laquelle Capgo ne prend pas en charge Cordova : maintenir le même niveau de qualité et de fonctionnalités que Cordova n'est pas réalisable pour une entreprise d'amorçage. Pour maintenir le produit de premier ordre, Capgo reste concentré sur l'utilisation des outils les plus modernes et les plus efficaces disponibles.
 

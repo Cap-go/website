@@ -1,9 +1,9 @@
 ---
 slug: integrate-universal-links-capacitor-nextjs
-title: Cómo integrar los derechos universales en Next.js con Capacitor
+title: Cómo integrar enlaces universales en Next.js con Capacitor
 description: >-
-  Apprenez étape par étape comment configurador de gravámenes universales para
-  su aplicación Next.js con Capacitor en las plataformas iOS y Android.
+  Aprenda paso a paso cómo configurar enlaces universales para su aplicación
+  Next.js con Capacitor en plataformas iOS y Android.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z

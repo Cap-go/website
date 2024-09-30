@@ -2,10 +2,10 @@
 slug: capacitor-comprehensive-guide
 title: 'Condensador: una guía completa'
 description: >-
-  CapacitorJS es una potente herramienta que permite a los desarrolladores web
-  crear aplicaciones nativas iOS, Android, escritorio y web progresivas con una
-  base de código web estándar única. Aprenda todo lo que debe saber sobre los
-  condensadores en esta guía completa.
+  CapacitorJS es una poderosa herramienta que permite a los desarrolladores web
+  crear aplicaciones web nativas para iOS, Android, de escritorio y progresivas
+  con una única base de código web estándar. Aprenda todo lo que necesita saber
+  sobre Capacitor en esta guía completa.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-10T00:00:00.000Z
@@ -30,7 +30,7 @@ Con Capacitor, puede crear prácticamente cualquier cosa que crearía de forma n
 
 ## ¿Para quién es el condensador?
 
-Capacitor se dirige a desarrolladores web con experiencia en HTML, CSS y JavaScript. Si crea aplicaciones web o de escritorio (usando Electron o herramientas similares), Capacitor es su solución para crear aplicaciones multiplataforma con un enfoque en dispositivos móviles.
+Capacitor se dirige a desarrolladores web con experiencia en HTML, CSS y JavaScript. Si crea aplicaciones web o de escritorio (usando Electron o herramientas similares), Capacitor es su solución para crear aplicaciones multiplataforma con enfoque en dispositivos móviles.
 
 ## ¿Cuándo debería un equipo elegir Capacitor?
 
@@ -98,6 +98,6 @@ Sí, la [Extensión de código Ionic VS](https://marketplacevisualstudiocom/item
 
 ## ¿Hay disponible soporte específico para empresas?
 
-Sí, Capgo ofrece [soporte y funciones empresariales](https://capgoapp/) para Capacitor, incluido soporte dedicado, complementos nativos para actualización y autenticación en vivo, y más.## ¿Cómo empiezo con Capacitor?
+Sí, Capgo ofrece [soporte y funciones empresariales](https://capgoapp/) para Capacitor, incluido soporte dedicado, complementos nativos para actualización y autenticación en vivo, y más.## ¿Cómo empiezo a utilizar Capacitor?
 
 Visite la [documentación de Capacitor] (https://capacitorjscom/docs/) y siga las instrucciones para instalar Capacitor en su aplicación. Si desea comenzar con una aplicación de Capacitor obstinada que utilice Ionic Framework y Angular/React/Vue, siga las instrucciones de introducción. flujo en el [sitio de Ionic Framework](https://ionicframeworkcom/)

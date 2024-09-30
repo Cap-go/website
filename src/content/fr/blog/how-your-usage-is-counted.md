@@ -1,9 +1,9 @@
 ---
 slug: how-your-usage-is-counted
-title: Comment votre utilisation est comptabilisée dans Capgo
+title: Comment savoir si vous utilisez Capgo
 description: >-
-  Comprenez comment Capgo compte votre utilisation et utilisez-la au mieux.
-  Apprenez à mieux gérer votre forfait
+  Comprend comment Capgo compte sur votre utilisation et votre utilisation de la
+  meilleure manière. Apprendre à mieux gérer votre plan
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z

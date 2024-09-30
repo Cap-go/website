@@ -1,9 +1,10 @@
 ---
 slug: turn-off-android-talkback
-title: Comment désactiver et utiliser TalkBack sur les appareils Android
+title: Comment désactiver et utiliser TalkBack sur des appareils Android
 description: >-
-  Guide étape par étape sur l'activation et la navigation avec TalkBack, le
-  lecteur d'écran Android intégré pour les utilisateurs malvoyants.
+  Guide pas à pas pour savoir comment activer et naviguer avec TalkBack, le
+  lecteur d'écran intégré d'Android pour les utilisateurs avec déficience
+  visuelle.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z

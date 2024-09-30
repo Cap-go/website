@@ -1,7 +1,9 @@
 ---
 slug: self-hosted-live-updates
-title: Mises à jour en direct auto-hébergées
-description: "Je suis ravi d'annoncer les mises à jour en direct auto-hébergées, la prochaine itération des mises à jour en direct de Capgo\_!"
+title: Actualisations en vivo des autohospedadas
+description: >-
+  ¡Me complice anunciar les actualizaciones en vivo autohospedadas, la prochaine
+  version des actualizaciones en vivo de Capgo!
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-03T00:00:00.000Z

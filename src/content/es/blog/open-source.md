@@ -1,9 +1,9 @@
 ---
 slug: about-open-source
-title: ¡Descubre qué es el código abierto y por qué es importante!
+title: ¡Aprenda qué es el código abierto y por qué es importante!
 description: >-
-  En el curso de sus recorridos de programación, puede que entienda hablar del
-  término «código abierto». Mais qu’est-ce que esto signifie réellement ?
+  Durante su trayectoria en programación, es posible que haya oído hablar del
+  término "código abierto". ¿Pero qué significa eso realmente?
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z
@@ -36,7 +36,7 @@ Entonces, ¿cómo surgió el movimiento de código abierto tal como lo conocemos
 
 Hace más de veinte años, el término "software de código abierto" fue acuñado por la cofundadora del Foresight Institute, Christine Peterson. Quería acuñar este término como una forma de atraer a los recién llegados a este espacio.
 
-El nombre original iba a ser "software libre", pero hubo mucha confusión sobre lo que realmente significaba "libre". Para aclarar el problema, Peterson propuso un cambio de nombre a "software de código abierto".
+El nombre original iba a ser "software libre", pero hubo mucha confusión sobre lo que realmente significaba "libre". Para aclarar el problema, Peterson propuso un cambio de nombre a "software de código abierto" en su lugar.
 
 ## ¿Cuáles son los beneficios del software de código abierto?
 
@@ -48,7 +48,7 @@ Otro beneficio es cuánto se puede aprender usando el código de un proyecto de 
 
 El software de código abierto también se considera más seguro que el software propietario. Dado que el código está disponible gratuitamente, los desarrolladores pueden encontrar problemas, realizar actualizaciones y corregir esos errores más rápido que en el software propietario.  
 
-El código abierto también tiene una gran comunidad detrás. Como resultado, hay muchos recursos útiles para principiantes que buscan unirse a una comunidad de código abierto y comenzar a contribuir.
+El código abierto también tiene una comunidad muy grande detrás. Como resultado, hay muchos recursos útiles para principiantes que buscan unirse a una comunidad de código abierto y comenzar a contribuir.
 
 ## ¿Por qué deberías contribuir a proyectos de código abierto?
 
@@ -56,7 +56,7 @@ La naturaleza colaborativa de la comunidad de código abierto también presenta 
 
 **Mejorando el proyecto**
 
-La mayor belleza de una comunidad de código abierto es que sus miembros están impulsados ​​principalmente por su interés genuino en los proyectos en cuestión. Por lo tanto, muchas personas contribuyen a proyectos de código abierto porque, por razones altruistas, ¡quieren mejorarlos!
+La mayor belleza de una comunidad de código abierto es que sus miembros están impulsados ​​principalmente por su interés genuino en los proyectos en cuestión. Por lo tanto, muchas personas contribuyen a proyectos de código abierto por razones altruistas: ¡quieren mejorarlos!
 
 Hacer que el software de código abierto se ejecute más rápido, más inteligente o más seguro aumentará su calidad.
 

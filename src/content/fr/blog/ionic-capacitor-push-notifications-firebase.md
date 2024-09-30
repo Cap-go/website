@@ -1,10 +1,10 @@
 ---
 slug: ionic-capacitor-push-notifications-firebase
-title: "Notifications push de condensateur ionique avec Firebase\_: un guide étape par étape"
+title: "Notifications push des condensateurs ioniques avec Firebase\_: un guide pas à pas"
 description: >-
-  Découvrez comment intégrer des notifications push dans votre application Ionic
-  Capacitor à l'aide de Firebase, avec des instructions étape par étape pour les
-  plates-formes Android et iOS.
+  Apprenez à intégrer des notifications automatiques dans votre application
+  Ionic Capacitor en utilisant Firebase, avec des instructions pas à pas pour
+  les plateformes Android et iOS.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
