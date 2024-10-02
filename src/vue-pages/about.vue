@@ -29,7 +29,8 @@ const props = defineProps<{
         <div>
           <h3 class="text-2xl font-bold text-white mb-4">🚀 Welcome to Capgo</h3>
           <p class="text-gray-300 mb-6">
-            Capgo is the cutting-edge live update system designed specifically for Capacitor applications. We empower developers to push updates instantly, ensuring your users always have the latest version of your app without the hassle of app store approvals.
+            Capgo is the cutting-edge live update system designed specifically for Capacitor applications.
+            We empower developers to push updates instantly, ensuring your users always have the latest version of your app without the hassle of app store approvals.
           </p>
 
           <h3 class="text-2xl font-bold text-white mb-4">🌱 Our Story</h3>

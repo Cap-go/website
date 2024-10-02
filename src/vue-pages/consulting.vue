@@ -26,7 +26,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="my-0 mx-auto text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative pb-0 mt-0 mb-16 text-4xl md:text-6xl font-medium text-white" style="line-height: 72px">
             <strong class="" style="line-height: 72px">CapacitorJS</strong
-            ><span class="text-indigo-600" style="line-height: 72px"><strong class="" style="line-height: 72px"> Code Review and Consulting</strong></span
+            ><span class="text-indigo-600" style="line-height: 72px"><strong class="" style="line-height: 72px">Code Review and Consulting</strong></span
             ><strong class="" style="line-height: 72px"> Services</strong>
           </h1>
         </div>
