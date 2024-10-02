@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from '../config/app'
-import AboutMartin from '../components/AboutMartin.vue'
-
-const config = useRuntimeConfig()
-
-const brand = config.public.brand
+import AboutMartin from '@/components/AboutMartin.vue';
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+const props = defineProps<{
+  locale: Locales
+}>()
 </script>
 
 <template>

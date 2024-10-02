@@ -1,7 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro'
-
-import { useRuntimeConfig } from '../config/app'
+import Layout from '@/layouts/Layout.astro'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+import { useRuntimeConfig } from '@/config/app'
 
 const config = useRuntimeConfig()
 

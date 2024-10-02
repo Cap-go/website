@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import plugin_marketing from './plugin_marketing.vue'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
+const props = defineProps<{
+  locale: Locales
+}>()
 const randomOdd = Math.random() < 0.5 ? 0 : 1
 </script>
 

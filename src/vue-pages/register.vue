@@ -133,6 +133,12 @@ import { openMessenger } from '../services/bento'
 import { toast } from 'vue-sonner'
 import { useSupabase, getRemoteConfig } from '../services/supabase'
 import { navigate } from 'astro:transitions/client';
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+
+const props = defineProps<{
+  locale: Locales
+}>()
 
 const isLoading = ref(false)
 const email = ref('')

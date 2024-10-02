@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { ref } from 'vue'
-import { useRuntimeConfig } from '../config/app'
+import { useRuntimeConfig } from '@/config/app'
 import type { Locales } from '../services/locale'
 import translations from '../services/translations'
 

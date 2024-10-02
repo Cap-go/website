@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from '../config/app'
+import { useRuntimeConfig } from '@/config/app'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
+const props = defineProps<{
+  locale: Locales
+}>()
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl
 const brand = config.public.brand

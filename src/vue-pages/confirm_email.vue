@@ -2,6 +2,12 @@
 import { toast } from 'vue-sonner'
 import { ref } from 'vue'
 import { useSupabase, getRemoteConfig } from '../services/supabase'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+
+const props = defineProps<{
+  locale: Locales
+}>()
 
 const isResending = ref(false)
 getRemoteConfig()

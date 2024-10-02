@@ -1,21 +1,10 @@
 <script setup lang="ts">
-// import { useRuntimeConfig } from '../config/app'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
-// const config = useRuntimeConfig()
-// const brand = config.public.brand
-// const title = `${brand} | Contributing`
-// const description = 'How to contribute to Capgo open source'
-// useHead({
-//   title,
-//   meta: [
-//     { name: 'title', hid: 'title', content: title },
-//     { name: 'og:title', hid: 'og:title', content: title },
-//     { name: 'description', hid: 'description', content: description },
-//     { name: 'og:description', hid: 'og:description', content: description },
-//     { name: 'description', hid: 'description', content: 'Privacy Policy' },
-//     { name: 'robots', content: 'noindex, nofollow' },
-//   ],
-// })
+const props = defineProps<{
+  locale: Locales
+}>()
 </script>
 
 <template>

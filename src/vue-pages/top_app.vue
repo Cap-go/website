@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
+const props = defineProps<{
+  locale: Locales
+}>()
 const description = 'List of top 100 app using Diffrents Framworks on android store'
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>

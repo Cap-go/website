@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { defineComponent, ref, h, onMounted, onUnmounted } from 'vue'
-import { useRuntimeConfig } from '../config/app'
+import { useRuntimeConfig } from '@/config/app'
 import { openMessenger } from '../services/bento'
 import { locales, type Locales } from '../services/locale'
 import translations from '../services/translations'
