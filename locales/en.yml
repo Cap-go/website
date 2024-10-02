@@ -126,7 +126,6 @@ it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustratio
 this_inspired_me_to_create_an_affordable_efficient_alternative: This inspired me to create an affordable, efficient alternative.
 read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: Read the full story of Capgo's challenging birth as a solo maker project
 key_features: Key Features
-instant_updates: Instant Updates
 deploy_changes_in_real_time: Deploy changes in real-time
 version_control: Version Control
 manage_multiple_app_versions_effortlessly: Manage multiple app versions effortlessly
@@ -180,7 +179,7 @@ you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_
 ci_cd_setup: CI/CD Setup
 our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment: Our team helps you with configuring and managing automated builds, tests, and app deployments to app stores through fastlane and VoltBuilder in your CI/CD environment.
 why_is_it_important: Why is it important?
-code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to: Code consulting and review is more than just a bug check. It helps to:
+code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to: "Code consulting and review is more than just a bug check. It helps to:"
 minimize_mistakes_and_their_impact_on_the_project: Minimize mistakes and their impact on the project
 ensure_that_the_project_requirements_are_fulfilled: Ensure that the project requirements are fulfilled
 improve_overall_code_quality: Improve overall code quality
