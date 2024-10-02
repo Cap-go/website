@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
 import VueAppmobile from '@/vue-pages/app_mobile.vue'
+import { defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -16,4 +17,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueAppmobile client:load /></Layout>
+<Layout content={content}><VueAppmobile locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

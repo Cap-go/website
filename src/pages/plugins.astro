@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { defaultLocale } from '@/services/locale'
 import VuePlugins from '@/vue-pages/plugins.vue'
 
 const title = 'Capgo plugins'
@@ -11,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VuePlugins client:load /></Layout>
+<Layout content={content}><VuePlugins locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

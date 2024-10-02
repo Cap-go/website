@@ -2,6 +2,7 @@
 import VueTos from '@/vue-pages/tos.vue'
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
+import { defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -16,4 +17,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTos client:load /></Layout>
+<Layout content={content}><VueTos locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

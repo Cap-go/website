@@ -2,6 +2,7 @@
 import VueDpa from '@/vue-pages/dpa.vue'
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
+import { defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -16,4 +17,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueDpa client:load /></Layout>
+<Layout content={content}><VueDpa locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

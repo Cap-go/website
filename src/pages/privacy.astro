@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VuePrivacy from '@/vue-pages/privacy.vue'
 
 import { useRuntimeConfig } from '@/config/app'
+import { defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VuePrivacy client:load /></Layout>
+<Layout content={content}><VuePrivacy locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

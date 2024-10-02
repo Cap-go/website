@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { defaultLocale } from '@/services/locale'
 import VueTopreactnativeapp from '@/vue-pages/top_react_native_app.vue'
 
 const title = 'Capgo | Top React Native apps'
@@ -11,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopreactnativeapp client:load /></Layout>
+<Layout content={content}><VueTopreactnativeapp locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

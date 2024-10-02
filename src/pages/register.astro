@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { defaultLocale } from '@/services/locale'
 import VueRegister from '@/vue-pages/register.vue'
 ---
 
-<Layout><VueRegister client:load /></Layout>
+<Layout><VueRegister locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

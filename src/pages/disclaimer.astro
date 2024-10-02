@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
 import VueDisclaimer from '@/vue-pages/disclaimer.vue'
+import { defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueDisclaimer client:load /></Layout>
+<Layout content={content}><VueDisclaimer locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

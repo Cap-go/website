@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { defaultLocale } from '@/services/locale'
 import VueTopnativescriptapp from '@/vue-pages/top_native_script_app.vue'
 
 const title = 'Capgo | Top Native Script apps'
@@ -11,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopnativescriptapp client:load /></Layout>
+<Layout content={content}><VueTopnativescriptapp locale={Astro.currentLocale || defaultLocale} client:load /></Layout>

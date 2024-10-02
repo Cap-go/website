@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { defaultLocale } from '@/services/locale'
 import VueTopkotlinapp from '@/vue-pages/top_kotlin_app.vue'
 
 const title = 'Capgo | Top Kotlin apps'
@@ -11,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopkotlinapp client:load /></Layout>
+<Layout content={content}><VueTopkotlinapp locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
