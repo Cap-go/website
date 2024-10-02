@@ -75,7 +75,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import SponsorLogo from '../components/SponsorLogo.vue'
+import SponsorLogo from '@/components/SponsorLogo.vue'
 
 const props = defineProps({
   sponsors: {

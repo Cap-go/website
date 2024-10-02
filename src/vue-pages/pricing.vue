@@ -1,12 +1,12 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Faq from '../components/pricing/Faq.vue'
+import Faq from '@/components/pricing/Faq.vue'
 import { useRuntimeConfig } from '@/config/app'
-import Plans from '../components/pricing/Plans.vue'
+import Plans from '@/components/pricing/Plans.vue'
 import type { Database } from '../types/supabase.types'
-import PayAsYouGo from '../components/pricing/PayAsYouGo.vue'
-import Calculator from '../components/pricing/Calculator.vue'
+import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
+import Calculator from '@/components/pricing/Calculator.vue'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 
