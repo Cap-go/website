@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto py-8 px-4 md:px-0 text-[#a1a1aa] rounded-lg shadow-lg">
     <div class="flex flex-col md:flex-row items-start gap-8">
       <img 
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3955-fuMcHsWcv0dSt0hQHSRwgImrrjXtGA.JPG" 
+        src="/martindonadieu.webp" 
         alt="Martin Donadieu on a motorcycle with a rainbow in the background" 
         class="w-3/4 md:w-144 h-auto rounded-lg object-cover mx-auto md:mx-0"
       />
