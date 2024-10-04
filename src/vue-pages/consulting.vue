@@ -25,14 +25,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="my-0 mx-auto text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative pb-0 mt-0 mb-16 text-4xl md:text-6xl font-medium text-white" style="line-height: 72px">
-            <strong class="" style="line-height: 72px">CapacitorJS</strong
-            ><span class="text-indigo-600" style="line-height: 72px"><strong class="" style="line-height: 72px">Code Review and Consulting</strong></span
-            ><strong class="" style="line-height: 72px"> Services</strong>
+            <strong style="line-height: 72px">CapacitorJS</strong
+            ><span class="text-indigo-600" style="line-height: 72px"><strong style="line-height: 72px">{{ translations['code_review_and_consulting'][props.locale] }}</strong></span
+            ><strong style="line-height: 72px">{{ translations['services'][props.locale] }}</strong>
           </h1>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="block flex-col justify-end text-gray-100 items-center my-0 text-3xl font-medium sm:text-center" style="line-height: 42px">
-            &nbsp;Consult your Capacitor apps and review the code with us to deliver bug-free apps
+            &nbsp;{{ translations['consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps'][props.locale] }}
           </h2>
         </div>
         <a
@@ -46,7 +46,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
             background-position: 100% 50%;
           "
-          ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a
+          ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
         >
       </div>
     </main>
@@ -58,17 +58,17 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="flex flex-col items-center mx-auto text-center sm:relative sm:mx-auto" style="max-width: 100vh">
           <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
           <div class="text-slate-900">
-            <div role="list" class="">
-              <div role="listitem" class="">
+            <div role="list">
+              <div role="listitem">
                 <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
                   <p class="mt-0 mb-2 italic">
-                    Capgo not only has incredibly talented engineers, but they also share my passion for project success. Having a
+                    {{ translations['capgo_not_only_has_incredibly_talented_engineers_but_they_also_share_my_passion_for_project_success'][props.locale] }} Having a
                     <strong class="italic font-bold">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
                   </p>
                 </div>
                 <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="click an boat" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
                 <div class="text-xl font-medium leading-6">TC Nicolas</div>
-                <div class="">Click & Boat</div>
+                <div>Click & Boat</div>
                 <a
                   href="#"
                   class="inline-block mt-3 max-w-full font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
@@ -89,9 +89,9 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="pb-10 my-0 font-sans text-6xl font-bold text-center text-slate-900">
             Code review<br class="text-6xl text-center" style="line-height: 72px" />&amp;
-            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">consulting</span>
+            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">{{ translations['consulting'][props.locale] }}</span>
           </h2>
-          <p class="mt-0 mb-24 text-slate-900">When it’s good to ask for Cordova and CapacitorJS consulting services:<br class="" /><br class="" /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ translations['when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services'][props.locale] }}:<br /><br /></p>
           <div class="md:grid mt-16 text-left" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
             <div class="text-slate-900">
               <h6
@@ -102,14 +102,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 1
+                {{ translations['case_1'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col font-bold justify-center items-start mt-0 mb-2 text-3xl sm:text-slate-900" style="line-height: 42px">
-                Review before passing the code to the production
+                {{ translations['review_before_passing_the_code_to_the_production'][props.locale] }}
               </h5>
-              <p class="mt-0 mb-2">Find and fix bugs during the coding process. It’s faster, cheaper, and requires fewer developers to do it.<br class="" /><br class="" /></p>
+              <p class="mt-0 mb-2">{{ translations['find_and_fix_bugs_during_the_coding_process'][props.locale] }} {{ translations['it_s_faster_cheaper_and_requires_fewer_developers_to_do_it'][props.locale] }}<br /><br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -120,7 +120,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 2
+              {{ translations['case_2'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
@@ -129,7 +129,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               </h5>
               <p class="mt-0 mb-2">
                 When an application works too slow or gets down (even for a few minutes), it can damage users’ satisfaction and decrease the revenue. To avoid such situations,
-                review the code to find areas for improvement.<br class="" />
+                review the code to find areas for improvement.<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -141,7 +141,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 3
+              {{ translations['case_3'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
@@ -150,7 +150,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               </h5>
               <p class="mt-0 mb-2">
                 When developing a CapacitorJS app as a beginner, it’s good to have an experienced consultant by your side. Let them review your work and give your team an
-                opportunity to learn from the experts.<br class="" />
+                opportunity to learn from the experts.<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -162,14 +162,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 4
+              {{ translations['case_4'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
                 <strong class="font-bold" style="line-height: 42px">Poor app quality</strong>
               </h5>
-              <p class="mt-0 mb-2">Somebody developed an app for you but it doesn’t meet your expectations and the quality of the final product is really low.<br class="" /></p>
+              <p class="mt-0 mb-2">Somebody developed an app for you but it doesn’t meet your expectations and the quality of the final product is really low.<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -180,14 +180,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 5
+              {{ translations['case_5'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
                 <strong class="font-bold" style="line-height: 42px">Something doesn’t work but you don’t know why</strong>
               </h5>
-              <p class="mt-0 mb-2">A specific element of your app doesn’t work and you don’t know where the problem is and how to fix it.<br class="" /></p>
+              <p class="mt-0 mb-2">A specific element of your app doesn’t work and you don’t know where the problem is and how to fix it.<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -198,7 +198,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 6
+              {{ translations['case_6'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
@@ -206,7 +206,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 <strong class="font-bold" style="line-height: 42px">Plugin is missing</strong>
               </h5>
               <p class="mt-0 mb-2">
-                You need a to access to specific native API and the right plugin don't exist. We can develop it for you or support you with it.<br class="" />
+                You need a to access to specific native API and the right plugin don't exist. We can develop it for you or support you with it.<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -218,16 +218,15 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   letter-spacing: 1.7px;
                 "
               >
-                Case 7
+              {{ translations['case_7'][[props.locale]] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">CI/CD Setup</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ translations['ci_cd_setup'][props.locale] }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                Our team helps you with configuring and managing automated builds, tests, and app deployments to app stores through fastlane and VoltBuilder in your CI/CD
-                environment.<br class="" />
+                {{ translations['our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment'][props.locale] }}<br />
               </p>
             </div>
           </div>
@@ -245,7 +244,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
           </h2>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <p class="mt-0 mb-24 text-slate-900">Code consulting and review is more than just a bug check. It helps to:<br class="" /></p>
+          <p class="mt-0 mb-24 text-slate-900">Code consulting and review is more than just a bug check. It helps to:<br /></p>
         </div>
         <div class="md:grid grid-flow-row md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
           <div class="text-slate-900">
@@ -349,7 +348,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h4 class="my-2 text-xl font-medium leading-6 filter-none"><strong class="font-bold">Improved code readability</strong><br class="" /></h4>
+            <h4 class="my-2 text-xl font-medium leading-6 filter-none"><strong class="font-bold">Improved code readability</strong><br /></h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
               It’s possible that different developers will read your code in the future. Reduce unnecessary pieces of it to make it shorter and more expressive.
             </p>
@@ -438,10 +437,10 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">Opportunity for juniors to develop skills<br class="" style="line-height: 42px" /></strong>
+            <strong class="font-bold" style="line-height: 42px">Opportunity for juniors to develop skills<br style="line-height: 42px" /></strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            Help your junior developers extend their knowledge by giving them the opportunity to cooperate with more experienced developers.<br class="" />
+            Help your junior developers extend their knowledge by giving them the opportunity to cooperate with more experienced developers.<br />
           </p>
         </div>
       </div>
@@ -618,7 +617,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               </div>
               <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
               <div class="text-xl font-medium leading-6">Iannis</div>
-              <div class="">CTO &amp; Co-founder @ WAYNIUM</div>
+              <div>CTO &amp; Co-founder @ WAYNIUM</div>
               <a
                 href="#"
                 class="inline-block max-w-full font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
