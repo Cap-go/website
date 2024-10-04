@@ -22,5 +22,4 @@ pnpm-debug.log*
 
 **/*.md*
 **/*.yml
-build_output.txt
 public/
