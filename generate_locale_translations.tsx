@@ -3,7 +3,7 @@ import { dump, load } from 'js-yaml'
 import path from 'path'
 import { translateText } from './translate'
 
-const newLocale = ['es', 'fr']
+const newLocale = ['fr']
 
 const localePath = path.join(process.cwd(), 'locales', 'en.yml')
 

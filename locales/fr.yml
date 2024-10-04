@@ -155,3 +155,175 @@ launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs vers
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
+about_capgo: À propos de Capgo
+your_live_update_solution_for_capacitor_apps: Votre solution de mise à jour en direct pour les applications de condensateurs
+welcome_to_capgo: Bienvenue chez Capgo
+capgo_is_the_cutting_edge_live_update_system_designed_specifically_for_capacitor_applications: >-
+  Capgo est le système de mise à jour en direct de pointe conçu spécifiquement
+  pour les applications de condensateurs.
+we_empower_developers_to_push_updates_instantly_ensuring_your_users_always_have_the_latest_version_of_your_app_without_the_hassle_of_app_store_approvals: >-
+  Nous permettons aux développeurs de diffuser des mises à jour instantanément,
+  garantissant ainsi que vos utilisateurs disposent toujours de la dernière
+  version de votre application sans avoir à se soucier des approbations de l'App
+  Store.
+our_story: Notre histoire
+capgo_was_born_from_a_real_need_in_the_developer_community: Capgo est né d'un réel besoin de la communauté des développeurs.
+it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustration_with_the_high_costs_of_existing_solutions_like_appflow: >-
+  Tout a commencé avec un problème GitHub où de nombreux développeurs ont
+  exprimé leur frustration face aux coûts élevés des solutions existantes comme
+  Appflow.
+this_inspired_me_to_create_an_affordable_efficient_alternative: Cela m’a inspiré à créer une alternative abordable et efficace.
+read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
+  Lisez l'histoire complète de la naissance difficile de Capgo en tant que
+  projet solo
+key_features: Principales fonctionnalités
+deploy_changes_in_real_time: Déployer les changements en temps réel
+version_control: Contrôle des versions
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+rollback_capability: Capacité de restauration
+revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
+analytics: Analytique
+track_update_performance_and_user_adoption: Suivez les performances des mises à jour et l’adoption par les utilisateurs
+organization_and_app_management: Organisation et gestion des applications
+thanks_to_our_open_source_nature: Grâce à notre nature open source
+our_commitment: Notre engagement
+as_the_largest_ecosystem_of_open_source_plugins_for_capacitor_we_re_committed_to_innovation_transparency_and_community_driven_development: >-
+  En tant que plus grand écosystème de plugins open source pour Capacitor, nous
+  nous engageons en faveur de l'innovation, de la transparence et du
+  développement axé sur la communauté.
+practicing_what_we_preach: Mettre en pratique ce que nous prêchons
+we_practice_what_we_preach: Nous pratiquons ce que nous prêchons
+capgo_is_used_to_update_its_own_apps_allowing_us_to_continuously_improve_and_refine_our_product_through_real_world_usage: >-
+  Capgo est utilisé pour mettre à jour ses propres applications, ce qui nous
+  permet d'améliorer et d'affiner continuellement notre produit grâce à une
+  utilisation réelle.
+our_dedication: Notre dévouement
+since_2023_capgo_has_been_my_full_time_focus_ensuring_dedicated_development_and_support_for_our_growing_community_of_users: >-
+  Depuis 2023, Capgo est mon objectif à plein temps, assurant un développement
+  et un support dédiés à notre communauté croissante d'utilisateurs.
+hi_there_im_martin_donadieu: Salut! Je m'appelle Martin Donadieu
+run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team: >-
+  Exécutez vos projets sur votre propre appareil plus rapidement que jamais et
+  partagez ces projets avec toute votre équipe.
+test_version_in_the_sandbox_app_manage_version_and_channel: Testez la version dans l'application sandbox, gérez la version et le canal
+speed: Vitesse
+simplicity: Simplicité
+start_building_rich_experiences_with_your_device_and_your_computer: >-
+  Commencez à créer des expériences riches avec votre appareil et votre
+  ordinateur.
+confirm_email: Confirmez votre email
+please_open_your_mailbox_to_verify: Veuillez ouvrir votre boîte aux lettres pour vérifier
+didnt_receive_confirmation_email: Vous n'avez pas reçu d'e-mail de confirmation ?
+resend: Renvoyer
+resending: Renvoi
+open_mailbox: Ouvrir la boîte aux lettres
+thank_you_for_choosing_capgo: Merci d'avoir choisi Capgo !
+code_review_and_consulting: Révision du code et conseil
+consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps: >-
+  Consultez vos applications Capacitor et révisez le code avec nous pour fournir
+  des applications sans bug.
+book_a_consultation: Réservez une consultation
+capgo_not_only_has_incredibly_talented_engineers_but_they_also_share_my_passion_for_project_success: >-
+  Capgo compte non seulement des ingénieurs incroyablement talentueux, mais ils
+  partagent également ma passion pour la réussite des projets.
+having_a_true_partner_has_been_a_wonderful_experience_and_it_allows_us_to_move_much_faster_than_we_could_alone: >-
+  Avoir un véritable partenaire a été une expérience merveilleuse, et cela nous
+  permet d’avancer beaucoup plus vite que nous ne pourrions le faire seuls.
+when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: Quand il est bon de demander les services de conseil Cordova et CapacitorJS
+review_before_passing_the_code_to_the_production: Réviser avant de transmettre le code à la production
+find_and_fix_bugs_during_the_coding_process: Recherchez et corrigez les bugs pendant le processus de codage.
+it_s_faster_cheaper_and_requires_fewer_developers_to_do_it: C’est plus rapide, moins cher et nécessite moins de développeurs.
+optimization_of_the_existing_app: Optimisation de l'application existante
+when_an_application_works_too_slow_or_gets_down_even_for_a_few_minutes_it_can_damage_users_satisfaction_and_decrease_the_revenue: >-
+  Lorsqu’une application fonctionne trop lentement ou tombe en panne (même
+  pendant quelques minutes), cela peut nuire à la satisfaction des utilisateurs
+  et diminuer les revenus.
+review_the_code_to_find_areas_for_improvement: Passez en revue le code pour trouver des domaines à améliorer.
+little_experience_with_capacitorjs: Peu d'expérience avec CapacitorJS
+when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side: >-
+  Lorsque vous développez une application CapacitorJS en tant que débutant, il
+  est bon d'avoir un consultant expérimenté à vos côtés.
+let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
+  Laissez-les examiner votre travail et donnez à votre équipe l’occasion
+  d’apprendre des experts.
+poor_app_quality: Mauvaise qualité de l'application
+somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low: >-
+  Quelqu’un a développé une application pour vous, mais elle ne répond pas à vos
+  attentes et la qualité du produit final est vraiment faible.
+something_doesn_t_work_but_you_don_t_know_why: Quelque chose ne marche pas mais tu ne sais pas pourquoi
+a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it: >-
+  Un élément spécifique de votre application ne fonctionne pas et vous ne savez
+  pas où se situe le problème ni comment le résoudre.
+plugin_is_missing: Le plugin est manquant
+you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it: >-
+  Vous avez besoin d’accéder à une API native spécifique et le bon plugin
+  n’existe pas. Nous pouvons le développer pour vous ou vous accompagner dans
+  cette démarche.
+ci_cd_setup: Configuration CI/CD
+our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment: >-
+  Notre équipe vous aide à configurer et à gérer les builds, les tests et les
+  déploiements d'applications automatisés vers les magasins d'applications via
+  Fastlane et VoltBuilder dans votre environnement CI/CD.
+why_is_it_important: Pourquoi est-ce important ?
+code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to: "La consultation et la révision du code sont plus qu'une simple vérification de bogues. Cela aide à\_:"
+minimize_mistakes_and_their_impact_on_the_project: Minimiser les erreurs et leur impact sur le projet
+ensure_that_the_project_requirements_are_fulfilled: S'assurer que les exigences du projet sont remplies
+improve_overall_code_quality: Améliorer la qualité globale du code
+achieve_consistent_design_and_implementation: Parvenir à une conception et une mise en œuvre cohérentes
+technological_benefits: Avantages technologiques
+better_code_quality: Meilleure qualité de code
+let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
+  Laissez des personnes plus expérimentées examiner votre travail et donnez à
+  votre équipe l’occasion d’apprendre des experts.
+improved_code_readability: Lisibilité du code améliorée
+it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
+  Il est possible que différents développeurs lisent votre code à l’avenir.
+  Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
+bugs_reduction: Réduction des bugs
+eliminate_the_number_of_bugs_before_passing_the_code_to_production: Éliminez le nombre de bugs avant de transmettre le code à la production.
+hire_capacitorjs_consultants: Embaucher des consultants CapacitorJS
+business_benefits: Avantages commerciaux
+lower_cost_of_fixing_bugs: Coût réduit de correction des bugs
+the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it: >-
+  Plus vite vous trouvez le bug, moins vous pourrez le corriger à moindre coût.
+  Si le bug est détecté pendant le processus de développement, il est plus
+  facile et moins coûteux de le supprimer.
+opportunity_for_juniors_to_develop_skills: Possibilité pour les juniors de développer leurs compétences
+help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers: >-
+  Aidez vos développeurs juniors à approfondir leurs connaissances en leur
+  donnant la possibilité de coopérer avec des développeurs plus expérimentés.
+why_work: Pourquoi travailler
+with_us: avec nous ?
+community_trusted: Approuvé par la communauté
+cordova_and_capacitorjs_expert: Expert Cordova & CapacitorJS
+experienced_in_working_on_demanding_cordova_and_capacitorjs_projects: Expérience de travail sur des projets Cordova et CapacitorJS exigeants
+creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
+  Créateurs et mainteneurs de nombreuses bibliothèques Open Source utilisées par
+  des millions de personnes
+core_contributors_to_capacitorjs_and_ionic: Contributeurs principaux à CapacitorJS et Ionic
+need_help_with_cordova_or_capacitorjs_let_us_know: "Besoin d'aide avec Cordova ou CapacitorJS ? Faites-le-nous savoir\_!"
+im_a_french_software_engineer: Je suis un ingénieur logiciel français
+living_best_life: vivre ma meilleure vie sur la magnifique île de Madère, au Portugal
+made_capgo_with_passion: J'ai créé Capgo avec passion pour responsabiliser les développeurs comme vous.
+i_m_a_huge_believer_in_open_source: Je crois énormément à l'open source.
+capgo_proudly_stands_as_the_largest_ecosystem_of_open_source_plugins_for_capacitor: >-
+  Capgo est fier d'être le plus grand écosystème de plugins open source pour
+  Capacitor.
+we_re_committed_to_fostering_a_community_where_developers_can_learn_contribute_and_grow_together: >-
+  Nous nous engageons à favoriser une communauté où les développeurs peuvent
+  apprendre, contribuer et grandir ensemble.
+each_time_you_contact_capgo_you_re_reaching_out_to_me_directly: Chaque fois que vous contactez Capgo, vous me contactez directement.
+i_personally_handle_all_support_through_email_chat_or_discord_because_i_believe_in_real_connections: >-
+  Je gère personnellement toute l'assistance par e-mail, chat ou Discord parce
+  que je crois aux vraies connexions.
+your_challenges_are_my_challenges: Vos défis sont mes défis
+my_commitment_to_transparency_extends_to_everything_i_do: Mon engagement envers la transparence s’étend à tout ce que je fais.
+when_im_not_working_on_capgo_you_ll_find_me_scaling_climbing_walls_🧗‍♂️_dancing_to_zouk_rhythms_💃_or_exploring_madeiras_stunning_nature_🌿: >-
+  Quand je ne travaille pas sur Capgo, vous me trouverez en train d'escalader
+  des murs 🧗‍♂️, de danser sur des rythmes de zouk 💃 ou d'explorer la
+  magnifique nature de Madère 🌿.
+lets_make_app_development_amazing_together: "Rendons le développement d'applications incroyable ensemble\_!"
+martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background: Martin Donadieu sur une moto avec un arc-en-ciel en arrière-plan
+get_quote_now: Obtenez un devis maintenant
+you_can_see_my_entire_process_unfold_on_twitter: Vous pouvez voir l'ensemble de mon processus se dérouler sur Twitter
+and_hear_more_about_my_journey_on_the: et en savoir plus sur mon voyage sur le

@@ -2,16 +2,17 @@
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale } from '@/services/locale'
+import translations from '@/services/translations'
 import VueAbout from '@/vue-pages/about.vue'
 
 const config = useRuntimeConfig()
 
 const brand = config.public.brand
-const description = 'About Capgo'
+const description = translations['about_capgo'][Astro.currentLocale || defaultLocale]
 
 const content = {
   description,
-  title: `${brand} | About Capgo`,
+  title: [brand, description].join(' | '),
   image: `${config.public.baseUrl}/app_demo.webp`,
 }
 ---
