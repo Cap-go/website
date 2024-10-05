@@ -8,7 +8,8 @@ import VueAbout from '@/vue-pages/about.vue'
 const config = useRuntimeConfig()
 
 const brand = config.public.brand
-const description = translations['about_capgo'][(Astro.currentLocale || defaultLocale) as Locales]
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const description = translations['about_capgo'][pageLocale]
 
 const content = {
   description,
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueAbout locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueAbout locale={pageLocale} client:load /></Layout>
