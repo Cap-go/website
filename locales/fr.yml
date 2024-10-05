@@ -129,8 +129,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant ainsi des performances et une
-  efficacité optimales.
+  spécifiques de votre projet, garantissant des performances et une efficacité
+  optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -151,7 +151,10 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
+launch_multiple_releases_per_week: >-
+  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
+  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
+  concurrentiel.
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -179,7 +182,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -399,7 +402,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -411,3 +414,37 @@ jsdoc_documentation: >-
   <code>/**</code> avant de se terminer par un <code>*/</code>. Par exemple:
 jsdoc_example: exporter const FOO = 'foo';
 find_more_at: "Pour en savoir plus\_: <a href='https://jsdoc.app/'> https://jsdoc.app/ </a>"
+get_in_touch: Entrer en contact
+company_name: Nom de l'entreprise
+register_code: Code d'enregistrement
+address: Adresse
+hosting: Hébergement
+data_storage: Stockage des données
+data_processing: Informatique
+powerful_app_plugins: Plugins d'application puissants
+powerful_app_plugins_description: >-
+  Plugins de niveau entreprise avec une excellente documentation, des mises à
+  jour continues, des extraits de code et une assistance premium pour que vous
+  puissiez vous concentrer sur la création de votre application.
+plans_that_scale_with_your_business: Des forfaits qui évoluent avec votre entreprise
+plans_that_scale_with_your_business_description: >-
+  Cloud de niveau entreprise qui améliore la fonctionnalité et la sécurité des
+  applications Capacitor.
+calculate_your_usage: Calculez votre consommation
+monthly_plan: Forfait mensuel
+yearly_plan: Forfait annuel
+save: Sauvegarder
+we_don_t_bill_you_automatically_until_your_confirmation: Nous ne vous facturons pas automatiquement jusqu'à votre confirmation.
+we_don_t_store_or_sell_your_data_to_anyone: Nous ne stockons ni ne vendons vos données à qui que ce soit.
+top_100_app_using_different_framworks_on_android_store: >-
+  Liste des 100 meilleures applications utilisant Diffrents Framworks sur la
+  boutique Android
+top_apps_by_framework: Meilleures applications par framework
+top_100_app_using_capacitor_on_android_play_store: >-
+  Liste des 100 meilleures applications utilisant Capacitor sur le Play Store
+  Android
+top_capacitor_apps: Meilleures applications de condensateurs
+capacitor_power_aproximately_1_of_apps_on_google_play_store: "Le condensateur alimente environ 1\_% des applications sur Google Play\_Store"
+downloads: Téléchargements
+see_in_play_store: Voir dans le Play Store
+top_app_using_capgo_cloud_or_self_hosted: Liste des meilleures applications utilisant le cloud Capgo ou auto-hébergées

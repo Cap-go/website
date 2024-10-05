@@ -22,9 +22,9 @@ onMounted(() => {
 
 <template>
   <div class="z-10 mb-24 mt-24 flex w-full flex-col md:items-center">
-    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">{{ actions.length }} Powerful App Plugins</h1>
+    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">{{ actions.length }} {{ translations['powerful_app_plugins'][props.locale] }}</h1>
     <h2 class="mt-8 max-w-full px-10 text-2xl font-light md:text-center lg:max-w-[75%]">
-      Enterprise-grade plugins with great documentation, ongoing updates, code snippets and premium support so you can focus on building your app.
+      {{ translations['powerful_app_plugins_description'][props.locale] }}
     </h2>
     <div v-if="plugins" class="mt-12 flex w-full flex-col items-start px-10 sm:mt-24 sm:flex-row sm:justify-center lg:max-w-6xl xl:px-0">
       <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-0 md:grid-cols-2 xl:grid-cols-3">

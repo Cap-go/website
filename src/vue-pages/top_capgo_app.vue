@@ -9,7 +9,7 @@ const props = defineProps<{
   locale: Locales
 }>()
 const config = useRuntimeConfig()
-const description = 'List of top app using Capgo cloud or self hosted'
+const description = translations['top_app_using_capgo_cloud_or_self_hosted'][props.locale]
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 const usage = ref(7.21)
@@ -43,11 +43,13 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top Capacitor apps</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['top_capacitor_apps'][props.locale] }}</h1>
         <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">Capacitor power aproximately {{ usage }}% of apps on Google Play Store</p>
+        <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">
+          {{ translations['capacitor_power_aproximately_1_of_apps_on_google_play_store'][props.locale].replace('$1', usage) }}
+        </p>
       </div>
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <div v-for="(app, index) in apps" :key="index" class="overflow-hidden rounded bg-white shadow">
@@ -67,7 +69,9 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
                 </span>
               </div>
             </div>
-            <span class="mt-6 block text-sm font-semibold uppercase tracking-widest text-gray-500"> {{ shortNumber(app.installs) }} Downloads </span>
+            <span class="mt-6 block text-sm font-semibold uppercase tracking-widest text-gray-500">
+              {{ shortNumber(app.installs) }} {{ translations['downloads'][props.locale] }}
+            </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
@@ -78,7 +82,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
               :title="app.title"
               class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
             >
-              See in Play store
+              {{ translations['see_in_play_store'][props.locale] }}
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"
@@ -90,7 +94,6 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
           </div>
         </div>
       </div>
-      <!-- check other top list cordova, react naitve, flutter -->
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <a
           v-for="l in others"

@@ -54,11 +54,13 @@ const payg_units = computed(() =>
   <section class="bg-gray-50 py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">Plans that scale with your business</h1>
-        <p class="font-pj mt-6 text-xl font-normal text-gray-600">Enterprise-grade cloud that enhance Capacitor application functionality and security.</p>
+        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">{{ translations['plans_that_scale_with_your_business'][props.locale] }}</h1>
+        <p class="font-pj mt-6 text-xl font-normal text-gray-600">{{ translations['plans_that_scale_with_your_business_description'][props.locale] }}</p>
       </div>
       <p class="mt-5 text-center sm:mb-14">
-        <button class="border-b-1 border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" @click="scrollToId('calculator')">Calculate your usage</button>
+        <button class="border-b-1 border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" @click="scrollToId('calculator')">
+          {{ translations['calculate_your_usage'][props.locale] }}
+        </button>
       </p>
       <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
       <div class="mt-8 flex items-center justify-center space-x-6 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
@@ -70,7 +72,7 @@ const payg_units = computed(() =>
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
             :checked="!yearly"
           />
-          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> Monthly Plan </label>
+          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> {{ translations['monthly_plan'] }} </label>
         </div>
         <div class="flex items-center" @click="yearly = true">
           <input
@@ -80,8 +82,8 @@ const payg_units = computed(() =>
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
             :checked="yearly"
           />
-          <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> Yearly Plan </label>
-          <span class="ml-1 text-sm font-medium text-blue-600"> (Save 20%) </span>
+          <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> {{ translations['yearly_plan'][props.locale] }} </label>
+          <span class="ml-1 text-sm font-medium text-blue-600"> ({{ translations['save'][props.locale] }} 20%) </span>
         </div>
       </div>
       <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg" />
@@ -94,8 +96,8 @@ const payg_units = computed(() =>
         :payg-units="payg_units"
       />
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
-        We don’t bill you automatically until your confirmation.<br />
-        We don’t store or sell your data to anyone.
+        {{ translations['we_don_t_bill_you_automatically_until_your_confirmation'][props.locale] }}<br />
+        {{ translations['we_don_t_store_or_sell_your_data_to_anyone'][props.locale] }}
       </p>
     </div>
     <Faq />

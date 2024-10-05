@@ -9,19 +9,6 @@ const props = defineProps<{
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl
 const brand = config.public.brand
-// const title = `${brand} | Data Processing Agreement`
-// const description = 'Read our Data Processing Agreement'
-// useHead({
-//   title,
-//   meta: [
-//     { name: 'title', hid: 'title', content: title },
-//     { name: 'og:title', hid: 'og:title', content: title },
-//     { name: 'description', hid: 'description', content: description },
-//     { name: 'og:description', hid: 'og:description', content: description },
-//     { name: 'description', hid: 'description', content: 'Data Processing Agreement' },
-//     { name: 'robots', content: 'noindex, nofollow' },
-//   ],
-// })
 </script>
 
 <template>

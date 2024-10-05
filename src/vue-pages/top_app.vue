@@ -6,7 +6,7 @@ import translations from '@/services/translations'
 const props = defineProps<{
   locale: Locales
 }>()
-const description = 'List of top 100 app using Diffrents Framworks on android store'
+const description = translations['top_100_app_using_different_framworks_on_android_store'][props.locale]
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>
 
@@ -14,12 +14,11 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top apps by framework</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['top_apps_by_framework'][props.locale] }}</h1>
         <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
       </div>
-      <!-- check other top list cordova, react naitve, flutter -->
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <a
           v-for="l in others"
