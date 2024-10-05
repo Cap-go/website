@@ -163,8 +163,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant des performances et une efficacité
-  optimales.
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -185,10 +185,7 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: >-
-  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
-  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
-  concurrentiel.
+launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -216,7 +213,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -499,7 +496,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif
@@ -601,3 +598,122 @@ plan.team.desc: Idéal pour les moyennes entreprises
 tutorial_on: Tutoriel sur
 view_repo: Voir le dépôt
 view_npm: Voir sur NPM
+last_modified: Dernière modification
+aup_intro: >-
+  Cette politique d'utilisation acceptable (cette « Politique ») décrit les
+  utilisations interdites des services Web offerts par Capgo et ses sociétés
+  affiliées (les « Services ») et du site Web situé à l'adresse
+  https://capgo.app (le « Site Capgo »). Les exemples contenus dans cette
+  politique ne sont pas exhaustifs. Nous pouvons modifier cette politique à tout
+  moment en publiant une version révisée sur le site Capgo. En utilisant les
+  Services ou en accédant au Site Capgo, vous acceptez la dernière version de
+  cette Politique. Si vous violez la Politique ou autorisez ou aidez d'autres
+  personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
+  des Services.
+aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+illegal_activities: Activités illégales, nuisibles ou frauduleuses.
+infringing_content: Contenu contrefait.
+offensive_content: Contenu offensant.
+harmful_content: Contenu préjudiciable.
+platform_compliance: Conformité de la plateforme.
+aup_no_security_violations: Aucune violation de la sécurité
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
+unauthorized_access: Accès non autorisé.
+interception: Interception.
+falsification_of_origin: Falsification de l'origine.
+aup_no_network_abuse: Aucun abus de réseau
+aup_no_network_abuse_desc: "Vous ne pouvez pas établir de connexions réseau avec des utilisateurs, des hôtes ou des réseaux à moins d'avoir l'autorisation de communiquer avec eux. Les activités interdites comprennent\_:"
+monitoring_crawling: Surveillance ou exploration.
+denial_of_service: Déni de service (DoS).
+intentional_interference: Interférence intentionnelle.
+operation_of_network_services: Fonctionnement de certains services réseau.
+avoiding_system_restrictions: Éviter les restrictions du système.
+aup_no_email_abuse: Pas d'abus de courrier électronique ou autre message
+aup_no_email_abuse_desc: >-
+  Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
+  d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
+  ou sollicitations (comme le « spam »), y compris la publicité commerciale et
+  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
+  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
+  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
+  envoyés par un autre fournisseur de services Internet si ces messages violent
+  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
+aup_monitoring_enforcement: Notre surveillance et notre application
+aup_monitoring_enforcement_desc: >-
+  Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
+  toute violation de cette politique ou toute utilisation abusive des services
+  ou du site Capgo. Nous pouvons :
+investigate_violations: "enquêter sur les violations de cette Politique ou l'utilisation abusive des Services ou du Site Capgo\_;"
+remove_modify_content: >-
+  supprimer, désactiver l'accès ou modifier tout contenu ou ressource qui
+  enfreint cette politique ou tout autre accord que nous avons avec vous pour
+  l'utilisation des services ou du site Capgo.
+aup_reporting_violations: Signalement des violations de cette politique
+aup_reporting_violations_desc: >-
+  Si vous avez connaissance d'une violation de cette politique, vous nous en
+  informerez immédiatement et nous fournirez l'assistance, sur demande, pour
+  mettre fin ou remédier à la violation. Pour signaler toute violation de cette
+  politique, veuillez nous contacter à support@capgo.app.
+illegal_activities_desc: >-
+  Toute activité illégale, qui viole les droits d'autrui ou qui peut nuire à
+  autrui, à nos opérations ou à notre réputation, y compris la diffusion, la
+  promotion ou la facilitation de la pédopornographie, l'offre ou la diffusion
+  de biens, services, programmes ou promotions frauduleux, faire- les
+  stratagèmes d'argent rapide, les systèmes de Ponzi et pyramidaux, le phishing
+  ou le pharming.
+infringing_content_desc: >-
+  Contenu qui enfreint ou détourne la propriété intellectuelle ou les droits de
+  propriété d'autrui.
+offensive_content_desc: >-
+  Contenu diffamatoire, obscène, abusif, portant atteinte à la vie privée ou
+  autrement répréhensible, y compris le contenu qui constitue de la
+  pédopornographie, se rapporte à la bestialité ou représente des actes sexuels
+  non consensuels.
+harmful_content_desc: >-
+  Contenu ou autre technologie informatique susceptible d'endommager,
+  d'interférer, d'intercepter subrepticement ou d'exproprier tout système,
+  programme ou donnée, y compris les virus, chevaux de Troie, vers, bombes à
+  retardement ou robots d'annulation.
+platform_compliance_desc: >-
+  Toute activité jugée inacceptable par les plateformes utilisées par le Site et
+  les Services Capgo.
+unauthorized_access_desc: >-
+  Accéder ou utiliser tout système sans autorisation, y compris tenter de
+  sonder, d'analyser ou de tester la vulnérabilité d'un système ou de violer les
+  mesures de sécurité ou d'authentification utilisées par un système.
+falsification_of_origin_desc: >-
+  Forger des en-têtes de paquets TCP-IP, des en-têtes de courrier électronique
+  ou toute partie d'un message décrivant son origine ou son itinéraire.
+  L'utilisation légitime d'alias et de remailers anonymes n'est pas interdite
+  par cette disposition.
+monitoring_crawling_desc: >-
+  Surveillance ou exploration d'un système qui altère ou perturbe le système
+  surveillé ou analysé.
+denial_of_service_desc: >-
+  Inonder une cible de demandes de communication de sorte que la cible ne puisse
+  pas répondre au trafic légitime ou réponde si lentement qu'elle devient
+  inefficace.
+intentional_interference_desc: >-
+  Interférer avec le bon fonctionnement de tout système, y compris toute
+  tentative délibérée de surcharger un système par le biais de bombardements de
+  courriers électroniques, de bombardements d'informations, d'attaques de
+  diffusion ou de techniques d'inondation.
+operation_of_network_services_desc: >-
+  Utiliser ou tenter d'exploiter tout service réseau ou service qui interfère
+  avec le bon fonctionnement de tout service réseau.
+avoiding_system_restrictions_desc: >-
+  Utiliser des moyens manuels ou électroniques pour éviter toute limitation
+  d'utilisation imposée à un système, telle que des restrictions d'accès et de
+  stockage.
+report_violations_desc: >-
+  Nous pouvons signaler toute activité que nous soupçonnons de violer une loi ou
+  un règlement aux responsables de l'application des lois, aux régulateurs ou à
+  d'autres tiers appropriés.
+report_violations_desc_2: >-
+  Nos rapports peuvent inclure la divulgation d’informations clients
+  appropriées. Nous pouvons également coopérer avec les organismes d'application
+  de la loi, les régulateurs ou d'autres tiers appropriés pour faciliter les
+  enquêtes et les poursuites en cas de conduite illégale en fournissant des
+  informations sur les réseaux et les systèmes liées aux violations présumées de
+  cette politique.
