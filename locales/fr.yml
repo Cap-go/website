@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -308,7 +308,7 @@ let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_t
 improved_code_readability: Lisibilité du code améliorée
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
-  Réduisez-en les morceaux inutiles pour le rendre plus court et plus expressif.
+  Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
 bugs_reduction: Réduction des bugs
 eliminate_the_number_of_bugs_before_passing_the_code_to_production: Éliminez le nombre de bugs avant de transmettre le code à la production.
 hire_capacitorjs_consultants: Embaucher des consultants CapacitorJS
@@ -598,3 +598,6 @@ plan.free.desc: Idéal pour expérimenter sans soucis
 plan.solo.desc: Idéal pour les développeurs indépendants
 plan.maker.desc: Idéal pour les propriétaires de petites entreprises
 plan.team.desc: Idéal pour les moyennes entreprises
+tutorial_on: Tutoriel sur
+view_repo: Voir le dépôt
+view_npm: Voir sur NPM

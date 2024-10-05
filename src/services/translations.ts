@@ -258,7 +258,7 @@ export default {
   key_features: { en: 'Key Features', fr: 'Principales fonctionnalités' },
   deploy_changes_in_real_time: { en: 'Deploy changes in real-time', fr: 'Déployer les changements en temps réel' },
   version_control: { en: 'Version Control', fr: 'Contrôle des versions' },
-  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'application sans effort" },
+  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'applications sans effort" },
   rollback_capability: { en: 'Rollback Capability', fr: 'Capacité de restauration' },
   revert_to_previous_versions_if_needed: { en: 'Revert to previous versions if needed', fr: 'Revenir aux versions précédentes si nécessaire' },
   analytics: { en: 'Analytics', fr: 'Analytique' },
@@ -375,7 +375,7 @@ export default {
   improved_code_readability: { en: 'Improved code readability', fr: 'Lisibilité du code améliorée' },
   it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: {
     en: 'It’s possible that different developers will read your code in the future. Reduce unnecessary pieces of it to make it shorter and more expressive.',
-    fr: 'Il est possible que différents développeurs lisent votre code à l’avenir. Réduisez-en les morceaux inutiles pour le rendre plus court et plus expressif.',
+    fr: 'Il est possible que différents développeurs lisent votre code à l’avenir. Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.',
   },
   bugs_reduction: { en: 'Bugs reduction', fr: 'Réduction des bugs' },
   eliminate_the_number_of_bugs_before_passing_the_code_to_production: {
@@ -746,4 +746,7 @@ export default {
   'plan.solo.desc': { en: 'Best for independent developers', fr: 'Idéal pour les développeurs indépendants' },
   'plan.maker.desc': { en: 'Best for small business owners', fr: 'Idéal pour les propriétaires de petites entreprises' },
   'plan.team.desc': { en: 'Best for medium enterprises', fr: 'Idéal pour les moyennes entreprises' },
+  tutorial_on: { en: 'Tutorial on', fr: 'Tutoriel sur' },
+  view_repo: { en: 'View Repo', fr: 'Voir le dépôt' },
+  view_npm: { en: 'View on NPM', fr: 'Voir sur NPM' },
 }

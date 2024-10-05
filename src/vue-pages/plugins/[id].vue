@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Plugin } from '@/config/plugins'
 import { ref } from 'vue'
+import type { Plugin } from '@/config/plugins'
+import type { Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
 const props = defineProps<Plugin>()
-
 const showReadme = ref(1)
 </script>
 
@@ -14,10 +15,10 @@ const showReadme = ref(1)
     </div>
     <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
       <button class="px-3 py-1 text-sm" :class="showReadme !== 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 1">
-        Tutorial on {{ props.title }}
+        {{ translations['tutorial_on'][props.locale as Locales] }} {{ props.title }}
       </button>
       <button class="px-3 py-1 text-sm" :class="showReadme === 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 0">
-        About {{ props.title }}
+        {{ translations['about'][props.locale as Locales] }} {{ props.title }}
       </button>
     </div>
     <div class="mt-6 flex w-full flex-col items-center">
@@ -43,7 +44,7 @@ const showReadme = ref(1)
               :href="props.href"
               target="_blank"
             >
-              View Repo &rarr;
+              {{ translations['view_repo'][props.locale as Locales] }} &rarr;
             </a>
             <a
               v-if="props.name"
@@ -52,7 +53,7 @@ const showReadme = ref(1)
               :href="`https://www.npmjs.com/package/${props.name}`"
               target="_blank"
             >
-              View on NPM &rarr;
+              {{ translations['view_npm'][props.locale as Locales] }} &rarr;
             </a>
           </div>
           <div v-if="props.readme" id="readme" class="prose my-8" v-html="props.readme" />
@@ -62,6 +63,7 @@ const showReadme = ref(1)
     <div v-if="props.tutorial" id="tutorial" :class="showReadme !== 1 ? 'hidden' : 'block'" class="prose w-full px-10 lg:max-w-6xl xl:px-0" v-html="props.tutorial" />
   </div>
 </template>
+
 <style>
 img[src*='badge'] {
   width: auto;
