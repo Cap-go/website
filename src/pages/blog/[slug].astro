@@ -4,7 +4,7 @@ import { useRuntimeConfig } from '@/config/app'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
 
 export async function getStaticPaths() {
-  const allBlogPosts = await Astro.glob('../../content/blog/**/*.md')
+  const allBlogPosts = await Astro.glob('@/content/blog/**/*.md')
   const posts = allBlogPosts.filter((j) => j.frontmatter.published)
   return posts.map((post) => {
     let related = posts
