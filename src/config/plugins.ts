@@ -37,6 +37,7 @@ export interface Plugin extends Action {
   datePublished?: string
   dateModified?: string
   tutorial?: string
+  locale?: string
 }
 
 export const actions = [

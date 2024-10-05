@@ -3,9 +3,13 @@ import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopflutterapp from '@/vue-pages/top_flutter_app.vue'
 import translations from '@/services/translations'
+import { useRuntimeConfig } from '@/config/app'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
 
 const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = ['Capgo', translations['top_flutter_apps_title'][pageLocale]].join(' | ')
+const title = [brand, translations['top_flutter_apps_title'][pageLocale]].join(' | ')
 const description = translations['top_flutter_apps'][pageLocale]
 
 const content = {

@@ -115,19 +115,13 @@ if (!plugin || !plugin.title) {
   })
 }
 
+const { id } = Astro.params
+const config = useRuntimeConfig()
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
-if (plugin.title) {
-  content['title'] = plugin.title
-}
-
-if (plugin.description) {
-  content['description'] = plugin.description
-}
-
-const config = useRuntimeConfig()
-
-const { id } = Astro.params
+if (plugin.title) content['title'] = plugin.title
+if (plugin.description) content['description'] = plugin.description
 
 content['ldJSON'] = {
   '@context': 'https://schema.org',
@@ -149,8 +143,6 @@ content['ldJSON'] = {
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),
   ...(plugin.hasOwnProperty('dateModified') && { dateModified: plugin.dateModified }),
 }
-
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
 <Layout content={content}>

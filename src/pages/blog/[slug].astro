@@ -15,12 +15,8 @@ export async function getStaticPaths() {
     if (post.frontmatter.next_blog) {
       if (related.length > 0) {
         const next_blog = posts.find((i) => i.frontmatter.slug === post.frontmatter.next_blog)
-        if (next_blog) {
-          related[0] = next_blog
-        }
-      } else {
-        related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
-      }
+        if (next_blog) related[0] = next_blog
+      } else related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
     }
     return {
       params: {
@@ -38,26 +34,13 @@ const data = Astro.props.post
 const related = Astro.props.related
 
 const config = useRuntimeConfig()
-
 const markdown = data.compiledContent()
-
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
-if (data.frontmatter.title) {
-  content['title'] = data.frontmatter.title
-}
-
-if (data.frontmatter.description) {
-  content['description'] = data.frontmatter.description
-}
-
-if (data.frontmatter.head_image) {
-  content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
-}
-
-if (data.frontmatter.author) {
-  content['author'] = data.frontmatter.author || 'Capgo'
-}
+if (data.frontmatter.title) content['title'] = data.frontmatter.title
+if (data.frontmatter.description) content['description'] = data.frontmatter.description
+if (data.frontmatter.head_image) content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
+if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Capgo'
 
 const dateModified = new Date(data.frontmatter.updated_at).toISOString()
 const datePublished = new Date(data.frontmatter.created_at).toISOString()

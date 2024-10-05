@@ -3,9 +3,13 @@ import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopapp from '@/vue-pages/top_app.vue'
 import translations from '@/services/translations'
+import { useRuntimeConfig } from '@/config/app'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
 
 const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = ['Capgo', translations['top_apps_by_framework'][pageLocale]].join(' | ')
+const title = [brand, translations['top_apps_by_framework'][pageLocale]].join(' | ')
 const description = translations['top_100_app_using_different_framworks_on_android_store'][pageLocale]
 
 const content = {

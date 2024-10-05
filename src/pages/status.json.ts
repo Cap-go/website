@@ -1,10 +1,9 @@
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async () => {
   try {
     const response = await fetch('https://status.capgo.app/status.json')
     const data = await response.json()
-
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: {

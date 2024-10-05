@@ -64,14 +64,11 @@ export const GET: APIRoute = async ({ params, request }) => {
       },
       body: JSON.stringify({ query }),
     })
-
     const data = await response.json()
-
     if (data.errors) {
       console.error('GraphQL Errors:', data.errors)
       return new Response(JSON.stringify([]), { status: 500 })
     }
-
     const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
     console.log('allSponsors', allSponsors)
     const calculateTier = (sponsorship: any) => {
@@ -86,7 +83,6 @@ export const GET: APIRoute = async ({ params, request }) => {
         return 'baker'
       }
     }
-
     const sponsors = allSponsors.map((sponsorship) => {
       const sponsor = sponsorship.sponsorEntity
       return {
@@ -97,7 +93,6 @@ export const GET: APIRoute = async ({ params, request }) => {
         tier: calculateTier(sponsorship),
       }
     })
-
     return new Response(JSON.stringify(sponsors), {
       status: 200,
       headers: {
