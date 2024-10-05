@@ -2,9 +2,12 @@
 import { computed, ref } from 'vue'
 import Blog from '@/components/Blog.vue'
 import { useRuntimeConfig } from '@/config/app'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
 const props = defineProps<{
   Content?: any
+  locale: Locales
 }>()
 const config = useRuntimeConfig()
 const selectedTag = ref('all')
@@ -28,7 +31,7 @@ const uniqueTags = computed(() => {
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Latest from the blog</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['latest_from_the_blog'][props.locale] }}</h1>
         <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
           {{ config.public.blog_description }}
         </h2>

@@ -402,7 +402,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -430,7 +430,6 @@ plans_that_scale_with_your_business: Des forfaits qui évoluent avec votre entre
 plans_that_scale_with_your_business_description: >-
   Cloud de niveau entreprise qui améliore la fonctionnalité et la sécurité des
   applications Capacitor.
-calculate_your_usage: Calculez votre consommation
 monthly_plan: Forfait mensuel
 yearly_plan: Forfait annuel
 save: Sauvegarder
@@ -452,7 +451,7 @@ top_cordova_apps: >-
   Liste des 100 meilleures applications utilisant Cordova sur la boutique
   Android
 top_cordova_apps_title: Meilleures applications de Cordoue
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android
@@ -471,3 +470,75 @@ top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
 react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store
+table_of_contents: Table des matières
+latest_from_news: Dernières nouvelles
+capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
+  Capgo vous donne les meilleures informations dont vous avez besoin pour créer
+  une application mobile véritablement professionnelle.
+see_all_from_our_blog: Tout voir sur notre blog
+latest_from_the_blog: Dernières nouveautés du blog
+calculate_your_usage: Calculez votre consommation
+monthly_active_users: Utilisateurs actifs mensuels
+enter_your_estimated_monthly_active_users: >-
+  Entrez vos utilisateurs actifs mensuels estimés, les mises à jour par mois et
+  la taille des mises à jour pour obtenir votre coût mensuel estimé.
+updates_by_month: Mises à jour<br />par mois
+updates_size: Taille des mises à jour<br />(Mo)
+updates_total: Mises à jour<br />(Total)
+bandwidth_gb: Bande passante<br />(Go)
+storage: Stockage<br />(Go)
+yearly: Annuel
+monthly: Mensuel
+we_suggest_you_to_choose_the: Nous vous proposons de choisir le
+plan: plan
+questions_and_answers: Questions et réponses
+explore_common_questions: Explorez les questions et réponses courantes sur Capgo
+how_are_mau_counted: "Comment les utilisateurs actifs mensuels (MAU) sont-ils comptés\_?"
+mau_counting_explanation: >-
+  Nous comptons les MAU (Utilisateurs actifs mensuels) en suivant les
+  utilisateurs uniques qui ouvrent votre application sur une période de 30
+  jours. Chaque utilisateur est compté une fois, quel que soit le nombre de fois
+  où il interagit avec l'application.
+capgo_usage_explanation: >-
+  Chez Capgo, nous ne prenons pas en compte les émulateurs et les builds de
+  développement dans votre utilisation. En savoir plus à ce sujet
+here: ici.
+what_does_storage_mean: Que signifie le stockage ?
+storage_explanation: >-
+  Le stockage, en particulier le stockage périphérique, fait référence à la
+  capacité totale fournie par Capgo aux emplacements périphériques pour stocker
+  tous vos lots de mises à jour. Cela garantit que les utilisateurs reçoivent la
+  dernière version de votre application ou service rapidement et efficacement.
+how_is_bandwidth_counted: "Comment la bande passante est-elle comptée\_?"
+bandwidth_explanation: >-
+  Chez Capgo, nous mesurons la bande passante en suivant la quantité de données
+  transmises entre l'emplacement de stockage et les appareils des utilisateurs
+  via des serveurs périphériques. Cela nous aide à fournir des mises à jour en
+  temps réel.
+unsure_about_active_users: Vous n'êtes pas sûr de votre nombre d'utilisateurs actifs ?
+free_trial_explanation: >-
+  Si vous n'êtes pas sûr du nombre d'utilisateurs actifs dont vous disposez et
+  que vous craignez d'atteindre la limite de votre forfait, profitez de l'essai
+  gratuit de Capgo. C'est un excellent moyen de tester notre service, de trouver
+  le bon forfait, d'éviter des frais imprévus et de garantir que tout fonctionne
+  correctement.
+didnt_find_answer: Vous n'avez pas trouvé la réponse que vous cherchiez ?
+contact_support: Contactez notre support
+pay_as_you_go: Payez au fur et à mesure
+pay_as_you_go_description: Mises à jour en direct/mois. Aucun engagement.
+users_included: Utilisateurs inclus
+then: alors
+bandwidth: Bande passante
+TB_included: TB inclus
+per_GB: par Go
+cloud_storage: Stockage en nuage
+GB_included: Go inclus
+API_access: Accès API
+create_anything_you_want: Créez tout ce que vous voulez
+dedicated_support: Un support dédié
+get_an_answer_in_less_than_6h: Obtenez une réponse en moins de 6h
+custom_domain: Domaine personnalisé
+add_your_own_domain: Ajoutez votre propre domaine
+all_our_features_are_available_to_all_users: Toutes nos fonctionnalités sont disponibles pour tous les utilisateurs
+month: Mois
+get_started_for_free: Commencez GRATUITEMENT

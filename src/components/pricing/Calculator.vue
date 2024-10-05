@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { Database } from '../../types/supabase.types'
+import type { Database } from '@/types/supabase.types'
+import translations from '@/services/translations'
+import type { Locales } from '@/services/locale'
 
 const props = defineProps({
   pricing: {
@@ -19,6 +21,10 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  locale: {
+    type: String,
+    required: true,
+  },
 })
 
 const payg = props.pricing.find((plan) => plan.name === 'Pay as you go')!
@@ -27,7 +33,6 @@ const maker = props.pricing.find((plan) => plan.name === 'Maker')!
 const team = props.pricing.find((plan) => plan.name === 'Team')!
 
 const mau = ref(maker.mau)
-// const storage = ref(props.paygBase.storage)
 const updatesByMonth = ref(5)
 const updatesSize = ref(4)
 
@@ -49,13 +54,11 @@ const suggestion = computed(() => {
 })
 function suggestionClick() {
   if (suggestion.value === 'Pay as you go') {
-    // scroll to pay-as-you-go
     window.scrollTo({
       top: document.getElementById('pay-as-you-go')!.offsetTop,
       behavior: 'smooth',
     })
   } else {
-    // scroll to plans
     window.scrollTo({
       top: document.getElementById('plans')!.offsetTop,
       behavior: 'smooth',
@@ -82,9 +85,9 @@ function roundNumber(number: number) {
   <section id="calculator">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
-        <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">Calculate your usage<br /></h2>
+        <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">{{ translations['calculate_your_usage'][props.locale as Locales] }}<br /></h2>
         <p class="font-pj mt-6 text-sm font-normal text-gray-600">
-          Enter your estimated monthly active users, updates per month and update size to get your estimated monthly cost.
+          {{ translations['enter_your_estimated_monthly_active_users'][props.locale as Locales] }}
         </p>
       </div>
       <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
@@ -96,7 +99,9 @@ function roundNumber(number: number) {
         </div>
         <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
           <div class="flex flex-col items-center">
-            <p class="calc-label">MAU<br /><span class="text-[0.6rem]">Monthly Active Users</span></p>
+            <p class="calc-label">
+              MAU<br /><span class="text-[0.6rem]">{{ translations['monthly_active_users'][props.locale as Locales] }}</span>
+            </p>
             <input
               v-model.number="mau"
               placeholder="0"
@@ -104,7 +109,7 @@ function roundNumber(number: number) {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label">Updates<br />by month</p>
+            <p class="calc-label" v-html="translations['updates_by_month'][props.locale as Locales]" />
             <input
               v-model.number="updatesByMonth"
               placeholder="0"
@@ -112,7 +117,7 @@ function roundNumber(number: number) {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label">Updates Size<br />(MB)</p>
+            <p class="calc-label" v-html="translations['updates_size'][props.locale as Locales]" />
             <input
               v-model.number="updatesSize"
               placeholder="0"
@@ -120,32 +125,34 @@ function roundNumber(number: number) {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label">Updates<br />(Total)</p>
+            <p class="calc-label" v-html="translations['updates_total'][props.locale as Locales]" />
             <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ updates.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label">Bandwidth<br />(GB)</p>
+            <p class="calc-label" v-html="translations['bandwidth_gb'][props.locale as Locales]" />
             <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ bandwidth.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label">Storage<br />(GB)</p>
+            <p class="calc-label" v-html="translations['storage'][props.locale as Locales]" />
             <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ storage.toLocaleString() }}
             </p>
           </div>
           <div class="col-span-1 flex flex-col items-center md:col-span-3">
-            <p class="text-md font-pj mt-0 mt-5 font-bold uppercase tracking-widest text-white">{{ yearly ? 'Yearly' : 'Monthly' }} Price</p>
+            <p class="text-md font-pj mt-0 mt-5 font-bold uppercase tracking-widest text-white">
+              {{ yearly ? translations['yearly'][props.locale as Locales] : translations['monthly'][props.locale as Locales] }} Price
+            </p>
             <p class="font-pj mt-3 break-all rounded-xl bg-white p-2 text-3xl font-bold text-gray-900">{{ totalPrice }}€</p>
             <p v-show="suggestion" class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
-              We suggest you to choose the
+              {{ translations['we_suggest_you_to_choose_the'][props.locale as Locales] }}
               <button class="underline-current cursor-pointer font-bold uppercase text-red-400 underline" @click="suggestionClick">
                 {{ suggestion }}
               </button>
-              plan
+              {{ translations['plan'][props.locale as Locales] }}
             </p>
           </div>
         </div>

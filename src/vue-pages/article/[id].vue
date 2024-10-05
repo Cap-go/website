@@ -2,6 +2,9 @@
 import Blog from '@/components/Blog.vue'
 import { formatTime } from '@/config/app'
 import { ref, onMounted, type Ref } from 'vue'
+import { type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const props = defineProps<{
   Content?: any
@@ -19,6 +22,7 @@ const props = defineProps<{
   published?: boolean
   next_blog?: string
   related?: any
+  locale: Locales
 }>()
 
 const staticToc: Ref<HTMLElement | null> = ref(null)
@@ -65,7 +69,7 @@ function observeArticleTitles() {
     >
       <div class="w-[280px] rounded bg-white/10 p-5">
         <ul v-if="toc?.length" class="flex list-none flex-col text-left">
-          <span class="border-b border-gray-600 pb-1 text-lg">Table Of Contents</span>
+          <span class="border-b border-gray-600 pb-1 text-lg">{{ translations['table_of_contents'][props.locale] }}</span>
           <li v-for="item in toc" :key="item.slug" class="mt-2 block truncate text-gray-400 hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
               {{ item.text }}
@@ -106,7 +110,7 @@ function observeArticleTitles() {
       <div ref="staticToc" class="absolute left-10 top-0 hidden max-h-screen overflow-y-auto transition-opacity duration-300 xl:block" :class="{ 'opacity-0': isFixedTocVisible }">
         <div class="w-[280px] rounded bg-white/10 p-5">
           <ul v-if="toc?.length" class="flex list-none flex-col text-left">
-            <span class="border-b border-gray-600 pb-1 text-lg">Table Of Contents</span>
+            <span class="border-b border-gray-600 pb-1 text-lg">{{ translations['table_of_contents'][props.locale] }}</span>
             <li v-for="item in toc" :key="item.slug" class="mt-2 block truncate text-gray-400 hover:text-gray-200">
               <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
@@ -117,7 +121,7 @@ function observeArticleTitles() {
       </div>
       <div v-if="toc?.length" class="xl-hidden lg:max-w-1/2 mx-auto flex flex-col rounded px-4 text-left">
         <ul class="flex flex-col rounded bg-white/10 p-4">
-          <span class="border-b border-gray-600 pb-1 text-lg">Table Of Contents</span>
+          <span class="border-b border-gray-600 pb-1 text-lg">{{ translations['table_of_contents'][props.locale] }}</span>
           <div class="hidden pl-12 pl-16 pl-20 pl-4 pl-8" />
           <li v-for="item in toc" class="mt-2 block truncate text-gray-400 hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 4)}`" :href="`#${item.slug}`">
@@ -131,9 +135,9 @@ function observeArticleTitles() {
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-xl text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">Latest from news</h2>
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{{ translations['latest_from_news'][props.locale] }}</h2>
           <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
-            capgo gives you the best insights you need to create a truly professional mobile app.
+            {{ translations['capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app'][props.locale] }}
           </p>
         </div>
         <div v-if="related" class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
@@ -149,8 +153,11 @@ function observeArticleTitles() {
           />
         </div>
         <div class="mt-12 text-center">
-          <a href="/blog" title="" class="group inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline">
-            See all from our blog
+          <a
+            :href="getRelativeLocaleUrl(props.locale, 'blog')"
+            class="group inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline"
+          >
+            {{ translations['see_all_from_our_blog'][props.locale] }}
             <svg
               class="ml-1 h-5 w-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               viewBox="0 0 24 24"
@@ -169,6 +176,7 @@ function observeArticleTitles() {
     </section>
   </main>
 </template>
+
 <style scoped>
 .transition-opacity {
   transition-property: opacity;

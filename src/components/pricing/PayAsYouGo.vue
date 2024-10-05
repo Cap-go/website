@@ -1,11 +1,19 @@
 <script setup lang="ts">
-defineProps({
+import type { Locales } from '@/services/locale'
+import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const props = defineProps({
   payg: {
     type: Object,
     required: true,
   },
   yearly: {
     type: Boolean,
+    required: true,
+  },
+  locale: {
+    type: String,
     required: true,
   },
 })
@@ -19,7 +27,6 @@ function numberWithSpaces(x: number) {
 }
 
 function updateCalc(plan: any) {
-  // return aprox number of updates per month
   return plan.mau * 5
 }
 </script>
@@ -30,9 +37,11 @@ function updateCalc(plan: any) {
       <div class="text-center">
         <div class="flex items-center justify-center">
           <div class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 text-lg">🔥</div>
-          <h2 class="font-pj ml-3 text-4xl font-bold text-gray-900">Pay as you go</h2>
+          <h2 class="font-pj ml-3 text-4xl font-bold text-gray-900">{{ translations['pay_as_you_go'][props.locale as Locales] }}</h2>
         </div>
-        <p class="font-pj mt-4 text-base font-normal text-gray-600">{{ numberWithSpaces(updateCalc(payg)) }} Live Updates/mo. No commitments.</p>
+        <p class="font-pj mt-4 text-base font-normal text-gray-600">
+          {{ numberWithSpaces(updateCalc(props.payg)) }} {{ translations['pay_as_you_go_description'][props.locale as Locales] }}
+        </p>
       </div>
       <div class="relative mx-auto mt-8 max-w-sm md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">
@@ -52,10 +61,10 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">Monthly active users</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['monthly_active_users'][props.locale as Locales] }}</p>
                     <p class="font-pj mt-1 text-sm font-normal text-gray-600">
-                      <span class="font-bold">{{ payg?.mau.toLocaleString() }}</span>
-                      users included, then ${{ payg?.mau_unit }}/user
+                      <span class="font-bold">{{ props.payg?.mau.toLocaleString() }}</span>
+                      {{ translations['users_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.mau_unit }}/user
                     </p>
                   </div>
                 </div>
@@ -71,10 +80,11 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">Bandwidth</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['bandwidth'][props.locale as Locales] }}</p>
                     <p class="font-pj mt-1 text-sm font-normal text-gray-600">
-                      <span class="font-bold">{{ toTb(payg?.bandwidth) }}</span>
-                      TB included, then ${{ payg?.bandwidth_unit }} per GB
+                      <span class="font-bold">{{ toTb(props.payg?.bandwidth) }}</span>
+                      {{ translations['TB_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.bandwidth_unit }}
+                      {{ translations['per_GB'][props.locale as Locales] }}
                     </p>
                   </div>
                 </div>
@@ -90,10 +100,11 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">Cloud Storage</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['cloud_storage'][props.locale as Locales] }}</p>
                     <p class="font-pj mt-1 text-sm font-normal text-gray-600">
-                      <span class="font-bold">{{ payg?.storage.toLocaleString() }}</span>
-                      GB included, then ${{ payg?.storage_unit }} per GB
+                      <span class="font-bold">{{ props.payg?.storage.toLocaleString() }}</span>
+                      {{ translations['GB_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.storage_unit }}
+                      {{ translations['per_GB'][props.locale as Locales] }}
                     </p>
                   </div>
                 </div>
@@ -169,8 +180,8 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">API Access</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">Create anything you want</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['API_access'][props.locale as Locales] }}</p>
+                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['create_anything_you_want'][props.locale as Locales] }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
@@ -185,8 +196,8 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">Dedicated support</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">Get an answer in less than 6h</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['dedicated_support'][props.locale as Locales] }}</p>
+                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['get_an_answer_in_less_than_6h'][props.locale as Locales] }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
@@ -201,8 +212,8 @@ function updateCalc(plan: any) {
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">Custom Domain</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">Add your own domain</p>
+                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['custom_domain'][props.locale as Locales] }}</p>
+                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['add_your_own_domain'][props.locale as Locales] }}</p>
                   </div>
                 </div>
               </div>
@@ -211,22 +222,22 @@ function updateCalc(plan: any) {
         </div>
       </div>
       <div class="mt-8 text-center">
-        <p class="font-pj text-base font-medium text-gray-600">All our features are available to all users</p>
+        <p class="font-pj text-base font-medium text-gray-600">{{ translations['all_our_features_are_available_to_all_users'][props.locale as Locales] }}</p>
         <div class="mt-10 flex items-end justify-center">
           <p class="font-pj text-lg font-bold text-gray-400">$</p>
           <p class="font-pj text-6xl font-bold text-gray-900">
-            {{ yearly ? payg.price_y.toLocaleString() : payg?.price_m.toLocaleString() }}
+            {{ props.yearly ? props.payg.price_y.toLocaleString() : props.payg?.price_m.toLocaleString() }}
           </p>
-          <p class="font-pj text-lg font-bold text-gray-400">/Month</p>
+          <p class="font-pj text-lg font-bold text-gray-400">/{{ translations['month'][props.locale as Locales] }}</p>
         </div>
         <a
-          href="/register"
+          role="button"
           target="_blank"
           title="Register"
+          :href="getRelativeLocaleUrl(props.locale, 'register')"
           class="font-pj relative mt-9 inline-flex items-center justify-center rounded-xl border border-transparent bg-gray-900 px-8 py-3.5 text-base font-bold text-white transition-all duration-200 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
-          role="button"
         >
-          Get started for FREE
+          {{ translations['get_started_for_free'][props.locale as Locales] }}
         </a>
       </div>
     </div>

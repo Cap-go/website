@@ -71,7 +71,7 @@ const payg_units = computed(() =>
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
             :checked="!yearly"
           />
-          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> {{ translations['monthly_plan'] }} </label>
+          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> {{ translations['monthly_plan'][props.locale] }} </label>
         </div>
         <div class="flex items-center" @click="yearly = true">
           <input
@@ -85,8 +85,9 @@ const payg_units = computed(() =>
           <span class="ml-1 text-sm font-medium text-blue-600"> ({{ translations['save'][props.locale] }} 20%) </span>
         </div>
       </div>
-      <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg" />
+      <PayAsYouGo :locale="props.locale" v-if="payg_base" :yearly="yearly" :payg="payg" />
       <Calculator
+        :locale="props.locale"
         v-if="plansAll && payg_base"
         class="bg-gray-50 pb-6 pt-3 sm:pb-10 sm:pt-6 lg:pb-14 lg:pt-10"
         :yearly="yearly"
@@ -99,6 +100,6 @@ const payg_units = computed(() =>
         {{ translations['we_don_t_store_or_sell_your_data_to_anyone'][props.locale] }}
       </p>
     </div>
-    <Faq />
+    <Faq :locale="props.locale" />
   </section>
 </template>

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
-import { renameCat } from '@/services/misc';
+import { renameCat } from '@/services/misc'
 
 const props = defineProps<{
   locale: Locales
