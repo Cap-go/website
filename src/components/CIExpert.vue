@@ -84,9 +84,9 @@ const props = defineProps<{
               <h3 class="mt-8 text-2xl font-bold text-gray-900 sm:mt-10 font-pj">{{ translations['expert_guidance'][props.locale] }}</h3>
               <p class="mt-6 text-base text-gray-600 font-pj">
                 {{ translations['benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself'][props.locale] }}
+              </p>
               <p class="mt-6 text-base text-gray-600 font-pj">
                 {{ translations['we_already_setup_ci_cd_for_50_apps'][props.locale] }}
-              </p>
               </p>
             </div>
           </div>
