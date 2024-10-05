@@ -23,3 +23,5 @@ pnpm-debug.log*
 **/*.md*
 **/*.yml
 public/
+src/services/locale.ts
+src/services/translations.ts
