@@ -8,8 +8,7 @@ created_at: 2024-09-22
 updated_at: 2024-09-22
 tag: Case Study
 published: true
-next_blog: "xxx"
-
+next_blog: ""
 ---
 
 # How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater
@@ -98,7 +97,7 @@ Finally, how does this all fit together ?
 ### Semantic release automation with Github Actions
 
 The beauty of semantic release is that the deployment automation, in the form of a Github Action workflow, is very simple. This will look very similar on other CI/CD platforms .
-```YAML
+```yaml
 # ./github/workflows/release.yml
 
 name: Release
@@ -136,7 +135,7 @@ Update your `CAPGO_APPID` here.
 
 The behaviour of semantic release is set in its `.releaserc.json` configuration file.
 Here are my settings, explained below :
-```JSON
+```json
 // .releaserc.json
 
 {
