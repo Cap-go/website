@@ -1,0 +1,79 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { useRuntimeConfig } from '@/config/app'
+import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
+import { defaultLocale, type Locales } from '@/services/locale'
+
+export async function getStaticPaths() {
+  const allBlogPosts = await Astro.glob('@/content/fr/blog/**/*.md')
+  const posts = allBlogPosts.filter((j) => j.frontmatter.published)
+  return posts.map((post) => {
+    let related = posts
+      .filter((i) => i.frontmatter.slug !== post.frontmatter.slug)
+      .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
+      .slice(0, 3)
+    if (post.frontmatter.next_blog) {
+      if (related.length > 0) {
+        const next_blog = posts.find((i) => i.frontmatter.slug === post.frontmatter.next_blog)
+        if (next_blog) related[0] = next_blog
+      } else related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
+    }
+    return {
+      params: {
+        slug: post.frontmatter.slug,
+      },
+      props: {
+        post,
+        related,
+      },
+    }
+  })
+}
+
+const data = Astro.props.post
+const related = Astro.props.related
+
+const config = useRuntimeConfig()
+const markdown = data.compiledContent()
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
+
+if (data.frontmatter.title) content['title'] = data.frontmatter.title
+if (data.frontmatter.description) content['description'] = data.frontmatter.description
+if (data.frontmatter.head_image) content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
+if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Capgo'
+
+const dateModified = new Date(data.frontmatter.updated_at).toISOString()
+const datePublished = new Date(data.frontmatter.created_at).toISOString()
+
+content['ldJSON'] = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${config.public.baseUrl}/${data.frontmatter?.slug}`,
+  },
+  headline: data.frontmatter?.description,
+  image: [`${config.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
+  datePublished: datePublished,
+  dateModified: dateModified,
+  author: {
+    '@type': 'Person',
+    name: data.frontmatter?.author,
+    url: data.frontmatter?.author_url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Capgo',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${config.public.baseUrl}/icon.webp`,
+    },
+  },
+}
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+---
+
+<Layout content={content}>
+  <VueBlogSlug locale={pageLocale} toc={data.getHeadings()} related={related} Content={markdown} client:load {...data.frontmatter} />
+</Layout>

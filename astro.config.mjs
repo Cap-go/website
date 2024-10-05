@@ -24,6 +24,9 @@ export default defineConfig({
         r[h] = defaultLocale
         return r
       }, {}),
+    routing: {
+      redirectToDefaultLocale: true,
+    }
   },
   integrations: [
     UnoCSS({ injectReset: true }),

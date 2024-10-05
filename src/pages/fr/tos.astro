@@ -1,0 +1,21 @@
+---
+import VueTos from '@/vue-pages/tos.vue'
+import Layout from '@/layouts/Layout.astro'
+import { useRuntimeConfig } from '@/config/app'
+import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['terms'][pageLocale]].join(' | ')
+const description = translations['read_our_terms_of_service'][pageLocale]
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueTos locale={pageLocale} client:load /></Layout>

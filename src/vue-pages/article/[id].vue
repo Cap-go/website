@@ -144,6 +144,7 @@ function observeArticleTitles() {
           <Blog
             v-for="article in related"
             :key="article.frontmatter.slug"
+            :locale="article.frontmatter.locale"
             :tag="article.frontmatter.tag"
             :link="article.frontmatter.slug"
             :title="article.frontmatter.title"

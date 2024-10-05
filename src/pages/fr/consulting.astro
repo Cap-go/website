@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueConsulting from '@/vue-pages/consulting.vue'
+import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
+import { defaultLocale, type Locales } from '@/services/locale'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['consulting'][pageLocale]].join(' | ')
+const description = translations['consulting_description'][pageLocale]
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueConsulting locale={pageLocale} client:load /></Layout>

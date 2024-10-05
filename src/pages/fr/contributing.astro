@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueContributing from '@/vue-pages/contributing.vue'
+import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
+import { defaultLocale, type Locales } from '@/services/locale'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['contributing'][pageLocale]].join(' | ')
+const description = translations['contributing_description'][pageLocale]
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueContributing locale={pageLocale} client:load /></Layout>

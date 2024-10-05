@@ -1,0 +1,21 @@
+---
+import { useRuntimeConfig } from '@/config/app'
+import Layout from '@/layouts/Layout.astro'
+import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
+import VuePricing from '@/vue-pages/pricing.vue'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['pricing'][pageLocale]].join(' | ')
+const description = translations['pricing_description'][pageLocale]
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VuePricing locale={pageLocale} client:load /></Layout>

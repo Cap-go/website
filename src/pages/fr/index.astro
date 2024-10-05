@@ -1,0 +1,9 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { defaultLocale, type Locales } from '@/services/locale'
+import VueIndex from '@/vue-pages/index.vue'
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+---
+
+<Layout><VueIndex locale={pageLocale} client:load /></Layout>

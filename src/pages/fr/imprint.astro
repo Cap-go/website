@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueImprint from '@/vue-pages/imprint.vue'
+import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
+import { defaultLocale, type Locales } from '@/services/locale'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['imprint'][pageLocale]].join(' | ')
+const description = translations['imprint_description'][pageLocale].replace('$1', brand)
+
+const content = {
+  description,
+  title,
+}
+---
+
+<Layout content={content}><VueImprint locale={pageLocale} client:load /></Layout>

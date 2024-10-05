@@ -14,7 +14,7 @@ const copyDirectory = (source: string, destination: string) => {
     const destFile = path.join(destination, file)
     const destDir = path.dirname(destFile)
     if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true })
-    const modifiedDestFile = fs.readFileSync(sourceFile, 'utf8').replace('content/blog', `content/${newLocale}/blog`)
+    const modifiedDestFile = fs.readFileSync(sourceFile, 'utf8').replace('content/blog', `content/${newLocale}/blog`).replace('locale: en', `locale: ${newLocale}`)
     fs.copyFileSync(sourceFile, destFile)
     fs.writeFileSync(destFile, modifiedDestFile, 'utf8')
   })
