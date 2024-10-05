@@ -1,10 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 import VueTopkotlinapp from '@/vue-pages/top_kotlin_app.vue'
 
-const title = 'Capgo | Top Kotlin apps'
-const description = 'List of top 100 app using Kotlin on android store'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = ['Capgo', translations['top_kotlin_apps_title'][pageLocale]].join(' | ')
+const description = translations['top_kotlin_apps'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +14,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopkotlinapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTopkotlinapp locale={pageLocale} client:load /></Layout>

@@ -2,9 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcapgoapp from '@/vue-pages/top_capgo_app.vue'
+import translations from '@/services/translations'
 
-const title = 'Capgo | Top Capgo apps'
-const description = 'List of top app using Capgo'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = ['Capgo', translations['top_capgo_apps_title'][pageLocale]].join(' | ')
+const description = translations['top_capgo_apps'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +14,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopcapgoapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTopcapgoapp locale={pageLocale} client:load /></Layout>

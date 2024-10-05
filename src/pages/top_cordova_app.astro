@@ -2,9 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcordovaapp from '@/vue-pages/top_cordova_app.vue'
+import translations from '@/services/translations'
 
-const title = 'Capgo | Top Cordova apps'
-const description = 'List of top 100 app using Cordova on android store'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = ['Capgo', translations['top_cordova_apps_title'][pageLocale]].join(' | ')
+const description = translations['top_cordova_apps'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +14,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopcordovaapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTopcordovaapp locale={pageLocale} client:load /></Layout>

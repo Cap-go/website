@@ -2,9 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcapacitorapp from '@/vue-pages/top_capacitor_app.vue'
+import translations from '@/services/translations'
 
-const title = 'Capgo | Top Capacitor apps'
-const description = 'List of top 100 app using Capacitor on android play store'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = ['Capgo', translations['top_capacitor_apps'][pageLocale]].join(' | ')
+const description = translations['top_100_app_using_capacitor_on_android_play_store'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +14,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopcapacitorapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTopcapacitorapp locale={pageLocale} client:load /></Layout>

@@ -1,10 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 import VueTopreactnativeapp from '@/vue-pages/top_react_native_app.vue'
 
-const title = 'Capgo | Top React Native apps'
-const description = 'List of top 100 app using React Native on android store'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = ['Capgo', translations['top_react_native_apps_title'][pageLocale]].join(' | ')
+const description = translations['top_react_native_apps'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +14,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopreactnativeapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTopreactnativeapp locale={pageLocale} client:load /></Layout>
