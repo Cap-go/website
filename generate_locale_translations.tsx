@@ -3,7 +3,7 @@ import { dump, load } from 'js-yaml'
 import path from 'path'
 import { translateText } from './translate'
 
-const newLocale = ['fr']
+const locales = ['fr']
 
 const localePath = path.join(process.cwd(), 'locales', 'en.yml')
 
@@ -11,7 +11,7 @@ console.log('Loading data from locales/en.yml...')
 const enLocaleContent = fs.readFileSync(localePath, 'utf8')
 const data = load(enLocaleContent) as { [p: string]: string }
 
-for (const lang of newLocale) {
+for (const lang of locales) {
   const newData = { ...data }
   console.log(`Translating en.yml to ${lang}.yml...`)
   // await Promise.all(
