@@ -1,4 +1,4 @@
-import { exec } from 'child_process'
+import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
@@ -28,47 +28,6 @@ console.log(`Copying src/content/blog to src/content/${newLocale}/blog...`)
 copyDirectory(path.join(process.cwd(), 'src', 'content', 'blog'), path.join(process.cwd(), 'src', 'content', newLocale, 'blog'))
 console.log(`Done.\n`)
 
-await new Promise((resolve, reject) => {
-  exec('npm run generate:locale:translations', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error generating locale translations: ${error.message}`)
-      return reject(error)
-    }
-    if (stderr) {
-      console.error(`Error output: ${stderr}`)
-      return reject(new Error(stderr))
-    }
-    if (stdout) console.log(stdout)
-    resolve(true)
-  })
-})
-
-await new Promise((resolve, reject) => {
-  exec('npm run generate:translation.ts', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error generating translations file: ${error.message}`)
-      return reject(error)
-    }
-    if (stderr) {
-      console.error(`Error output: ${stderr}`)
-      return reject(new Error(stderr))
-    }
-    if (stdout) console.log(stdout)
-    resolve(true)
-  })
-})
-
-await new Promise((resolve, reject) => {
-  exec('npm run generate:blog:translations', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error generating blog translations: ${error.message}`)
-      return reject(error)
-    }
-    if (stderr) {
-      console.error(`Error output: ${stderr}`)
-      return reject(new Error(stderr))
-    }
-    if (stdout) console.log(stdout)
-    resolve(true)
-  })
-})
+execSync('npm run generate:locale:translations')
+execSync('npm run generate:translation.ts')
+execSync('npm run generate:blog:translations')
