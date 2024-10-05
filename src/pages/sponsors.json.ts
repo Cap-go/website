@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async ({ params, request }) => {
-  
-  // remove isActive if you also want to include past sponsors 
+  // remove isActive if you also want to include past sponsors
   const query = `
     query {
       riderx: user(login: "riderx") {
@@ -88,17 +87,16 @@ export const GET: APIRoute = async ({ params, request }) => {
       }
     }
 
-    const sponsors = allSponsors
-      .map((sponsorship) => {
-        const sponsor = sponsorship.sponsorEntity
-        return {
-          id: sponsor.login,
-          name: sponsor.name || sponsor.login,
-          imageUrl: sponsor.avatarUrl,
-          url: sponsor.url,
-          tier: calculateTier(sponsorship)
-        }
-      })
+    const sponsors = allSponsors.map((sponsorship) => {
+      const sponsor = sponsorship.sponsorEntity
+      return {
+        id: sponsor.login,
+        name: sponsor.name || sponsor.login,
+        imageUrl: sponsor.avatarUrl,
+        url: sponsor.url,
+        tier: calculateTier(sponsorship),
+      }
+    })
 
     return new Response(JSON.stringify(sponsors), {
       status: 200,

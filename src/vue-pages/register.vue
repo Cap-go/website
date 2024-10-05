@@ -1,7 +1,7 @@
 <template>
-  <section class="overflow-hidden bg-slate-900 min-h-screen flex items-center justify-center p-4">
+  <section class="flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
     <div class="relative w-full max-w-4xl">
-      <div class="absolute inset-0 transform -translate-x-4">
+      <div class="absolute inset-0 -translate-x-4 transform">
         <svg class="blur-3xl filter" style="filter: blur(64px)" width="100%" height="100%" viewBox="0 0 444 775" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             opacity="0.5"
@@ -16,8 +16,8 @@
           </defs>
         </svg>
       </div>
-      <div class="relative bg-white rounded-lg shadow-xl overflow-hidden grid md:grid-cols-2 z-10">
-        <div class="p-6 space-y-6">
+      <div class="relative z-10 grid overflow-hidden rounded-lg bg-white shadow-xl md:grid-cols-2">
+        <div class="space-y-6 p-6">
           <div>
             <h2 class="text-4xl font-bold text-gray-900">Sign up to Capgo</h2>
             <p class="text-sm text-gray-500">
@@ -33,7 +33,7 @@
                 v-model="email"
                 type="email"
                 required
-                class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 placeholder="Enter your email"
               />
             </div>
@@ -45,7 +45,7 @@
                   v-model="firstName"
                   type="text"
                   required
-                  class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                   placeholder="John"
                 />
               </div>
@@ -56,7 +56,7 @@
                   v-model="lastName"
                   type="text"
                   required
-                  class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                   placeholder="Doe"
                 />
               </div>
@@ -68,17 +68,17 @@
                 v-model="password"
                 type="password"
                 required
-                class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 placeholder="Enter your password"
               />
             </div>
             <button
               type="submit"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               :disabled="isLoading"
             >
               <template v-if="isLoading">
-                <svg class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="mr-2 h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path
                     class="opacity-75"
@@ -95,14 +95,14 @@
               <div class="w-full border-t border-gray-300"></div>
             </div>
             <div class="relative flex justify-center text-sm">
-              <span class="px-2 bg-white text-gray-500">Need help?</span>
+              <span class="bg-white px-2 text-gray-500">Need help?</span>
             </div>
           </div>
           <button
             @click="openMessenger"
-            class="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -113,15 +113,15 @@
             Open Support
           </button>
         </div>
-        <div class="bg-slate-800 p-4 flex items-center">
+        <div class="flex items-center bg-slate-800 p-4">
           <blockquote class="text-white">
-            <p class="text-2xl font-bold mb-4">
+            <p class="mb-4 text-2xl font-bold">
               We rolled out Capgo in production for our user base of +5000!<br />
               After update,
-              <span class="bg-orange-500 text-white px-2 py-1 rounded-full">users are up to date within minutes</span>
+              <span class="rounded-full bg-orange-500 px-2 py-1 text-white">users are up to date within minutes</span>
             </p>
-            <div class="flex items-center mb-4">
-              <img src="/avatar-male-2.webp" alt="User" class="w-12 h-12 rounded-full mr-4" />
+            <div class="mb-4 flex items-center">
+              <img src="/avatar-male-2.webp" alt="User" class="mr-4 h-12 w-12 rounded-full" />
               <div>
                 <cite class="font-bold text-white">Jermaine</cite>
                 <p class="text-gray-400">Capgo User since 2023</p>
@@ -131,8 +131,8 @@
         </div>
       </div>
     </div>
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <img class="object-cover object-top w-full h-full transform opacity-20" src="/background-pattern.webp" alt="" />
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <img class="h-full w-full transform object-cover object-top opacity-20" src="/background-pattern.webp" alt="" />
     </div>
   </section>
 </template>

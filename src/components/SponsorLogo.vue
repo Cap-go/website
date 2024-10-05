@@ -1,9 +1,9 @@
 <template>
-  <a :href="url" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center hover:scale-105 transition duration-300 hover:bg-gray-800 m-3 rounded-lg p-2">
-    <div :class="['bg-white rounded-full flex items-center justify-center mb-2 overflow-hidden', sizeClass]">
-      <img :src="logo" :alt="name" class="w-full h-full object-cover" />
+  <a :href="url" target="_blank" rel="noopener noreferrer" class="m-3 flex flex-col items-center rounded-lg p-2 transition duration-300 hover:scale-105 hover:bg-gray-800">
+    <div :class="['mb-2 flex items-center justify-center overflow-hidden rounded-full bg-white', sizeClass]">
+      <img :src="logo" :alt="name" class="h-full w-full object-cover" />
     </div>
-    <span class="text-sm text-center">{{ name }}</span>
+    <span class="text-center text-sm">{{ name }}</span>
   </a>
 </template>
 <script setup>

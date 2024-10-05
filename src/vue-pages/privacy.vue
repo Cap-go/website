@@ -26,7 +26,7 @@ const brand = config.public.brand
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1>Privacy Policy</h1>
     <p>Last updated: January 28, 2022</p>
     <p>

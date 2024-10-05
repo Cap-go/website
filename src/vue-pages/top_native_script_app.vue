@@ -42,33 +42,33 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
 
 <template>
   <section class="py-10 sm:py-12 lg:py-20">
-    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-      <div class="max-w-2xl mx-auto text-center">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
         <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top Native Script apps</h1>
-        <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
+        <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
-        <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">Native Script power aproximately {{ usage }}% of apps on Google Play Store</p>
+        <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">Native Script power aproximately {{ usage }}% of apps on Google Play Store</p>
       </div>
-      <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-        <div v-for="(app, index) in apps" :key="index" class="overflow-hidden bg-white rounded shadow">
+      <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
+        <div v-for="(app, index) in apps" :key="index" class="overflow-hidden rounded bg-white shadow">
           <div class="p-5">
             <div class="relative">
-              <a :href="app.url" :title="app.title" class="block aspect-w-4 aspect-h-3">
-                <img class="object-cover w-full h-full rounded-lg" :src="app.icon" :alt="`app icon ${app.title}`" />
+              <a :href="app.url" :title="app.title" class="aspect-w-4 aspect-h-3 block">
+                <img class="h-full w-full rounded-lg object-cover" :src="app.icon" :alt="`app icon ${app.title}`" />
               </a>
-              <div class="absolute top-4 left-4">
-                <span class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">
+              <div class="absolute left-4 top-4">
+                <span class="rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-900 shadow-lg">
                   {{ renameCat(app.category) }}
                 </span>
               </div>
-              <div class="absolute top-4 right-4">
-                <span class="px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-pumpkin-orange-500 rounded-full shadow-lg">
+              <div class="absolute right-4 top-4">
+                <span class="bg-pumpkin-orange-500 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-lg">
                   {{ index + 1 }}
                 </span>
               </div>
             </div>
-            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"> {{ shortNumber(app.installs) }} Downloads </span>
+            <span class="mt-6 block text-sm font-semibold uppercase tracking-widest text-gray-500"> {{ shortNumber(app.installs) }} Downloads </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
@@ -77,10 +77,10 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
             <a
               :href="app.url"
               :title="app.title"
-              class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+              class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
             >
               See in Play store
-              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -92,19 +92,19 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
         </div>
       </div>
       <!-- check other top list cordova, react naitve, flutter -->
-      <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
+      <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <a
           v-for="l in others"
           :key="l"
           :href="`/${l}/`"
-          class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
+          class="flex flex-col rounded-lg bg-gray-700 py-8 text-center transition-all duration-200 hover:bg-blue-700 focus:bg-blue-900"
         >
           <div class="relative mx-auto flex">
-            <div class="block w-full mx-4 pb-4">
-              <img class="object-cover w-full h-full rounded-lg" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`" />
+            <div class="mx-4 block w-full pb-4">
+              <img class="h-full w-full rounded-lg object-cover" :src="`/${l.replace('top_', '').replace('_app', '')}.webp`" :alt="`blog illustration ${l}`" />
             </div>
           </div>
-          <div class="px-4 pt-2 sm:pt-0 w-full">
+          <div class="w-full px-4 pt-2 sm:pt-0">
             <p class="text-lg font-bold capitalize">
               {{ l.replaceAll('_', ' ') }}
             </p>

@@ -91,14 +91,14 @@ const tweets = ref([
 
 <template>
   <section class="bg-gray-800">
-    <div class="p-0 m-0 leading-6 text-black align-baseline border-0 border-solid">
-      <div class="grid py-20 px-0 m-auto text-black align-baseline border-0 border-solid" style="row-gap: 40px; max-width: 1248px">
+    <div class="m-0 border-0 border-solid p-0 align-baseline leading-6 text-black">
+      <div class="m-auto grid border-0 border-solid px-0 py-20 align-baseline text-black" style="row-gap: 40px; max-width: 1248px">
         <h2
-          class="py-0 px-8 m-0 text-3xl font-boldSave time with auto sm:text-4xl xl:text-5xl font-pj tracking-tight text-center text-gray-200 align-baseline border-0 border-solid"
+          class="font-boldSave time with auto font-pj m-0 border-0 border-solid px-8 py-0 text-center align-baseline text-3xl tracking-tight text-gray-200 sm:text-4xl xl:text-5xl"
         >
           {{ translations['they_love_capgo'][props.locale] }}
         </h2>
-        <div class="flex p-0 m-0 align-baseline border-0 border-solid items-center md:flex-col flex-wrap md:max-h[1000px]">
+        <div class="md:max-h[1000px] m-0 flex flex-wrap items-center border-0 border-solid p-0 align-baseline md:flex-col">
           <Tweet v-for="tweet in tweets" :key="tweet.handle" :tweet="tweet" />
         </div>
       </div>

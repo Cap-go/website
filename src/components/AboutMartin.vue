@@ -7,15 +7,15 @@ const props = defineProps<{ locale: Locales }>()
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto py-8 px-4 md:px-0 text-[#a1a1aa] rounded-lg shadow-lg">
-    <div class="flex flex-col md:flex-row items-start gap-8">
+  <div class="mx-auto max-w-7xl rounded-lg px-4 py-8 text-[#a1a1aa] shadow-lg md:px-0">
+    <div class="flex flex-col items-start gap-8 md:flex-row">
       <img
         src="/martindonadieu.webp"
         :alt="translations['martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background'][props.locale]"
-        class="w-3/4 md:w-144 h-auto rounded-lg object-cover mx-auto md:mx-0"
+        class="md:w-144 mx-auto h-auto w-3/4 rounded-lg object-cover md:mx-0"
       />
       <div class="flex-1 space-y-4">
-        <p class="text-white text-2xl">
+        <p class="text-2xl text-white">
           <span class="font-bold">👋 {{ translations['hi_there_im_martin_donadieu'][props.locale] }} </span>
         </p>
         <p>
@@ -47,16 +47,16 @@ const props = defineProps<{ locale: Locales }>()
           <a href="https://twitter.com/martindonadieu" class="text-white hover:underline">@martindonadieu</a>
           {{ translations['and_hear_more_about_my_journey_on_the'][props.locale] }} <a href="https://solos.ventures" class="text-white hover:underline">solos.ventures</a> podcast.
         </p>
-        <p class="text-white font-bold">{{ translations['lets_make_app_development_amazing_together'][props.locale] }} 🤝</p>
+        <p class="font-bold text-white">{{ translations['lets_make_app_development_amazing_together'][props.locale] }} 🤝</p>
         <div class="pt-4">
-          <div class="relative inline-flex mt-10 group">
+          <div class="group relative mt-10 inline-flex">
             <div
-              class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
             />
             <a
               :href="getRelativeLocaleUrl(props.locale, 'register')"
               :title="translations['get_quote_now'][props.locale]"
-              class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              class="font-pj relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               role="button"
             >
               {{ translations['start_now'][props.locale] }}

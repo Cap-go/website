@@ -17,7 +17,7 @@ for (const lang of newLocale) {
   await Promise.all(
     Object.entries(data).map(async ([key, value]) => {
       newData[key] = await translateText(value, lang)
-    })
+    }),
   )
   // for (const key in data) {
   //   newData[key] = await translateText(data[key], lang)

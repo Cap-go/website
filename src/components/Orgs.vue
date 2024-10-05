@@ -30,26 +30,26 @@ const features = ref([
 </script>
 
 <template>
-  <section class="py-12 bg-black sm:py-16 lg:py-20 xl:py-24">
-    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-      <div class="max-w-lg mx-auto text-center lg:max-w-2xl">
+  <section class="bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-lg text-center lg:max-w-2xl">
         <h2 class="text-3xl font-normal text-white sm:mt-8 sm:text-4xl lg:text-5xl xl:text-6xl">
           {{ translations['flexible_organization_management_for_your_team'][props.locale] }}
         </h2>
         <p class="mt-6 text-lg font-normal text-gray-400">{{ translations['create_manage_organizations_with_ease'][props.locale] }}</p>
       </div>
-      <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-12 text-center lg:max-w-none lg:grid-cols-3 sm:mt-16 lg:mt-20">
-        <div v-for="feature in features" :key="feature.title" class="relative overflow-hidden bg-base-900 rounded-2xl">
-          <div class="px-6 pt-8 pb-8 sm:px-12 lg:px-8 xl:px-12 sm:pt-14">
-            <div class="flex justify-center mb-6">
-              <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-6 text-center sm:mt-16 lg:mt-20 lg:max-w-none lg:grid-cols-3">
+        <div v-for="feature in features" :key="feature.title" class="bg-base-900 relative overflow-hidden rounded-2xl">
+          <div class="px-6 pb-8 pt-8 sm:px-12 sm:pt-14 lg:px-8 xl:px-12">
+            <div class="mb-6 flex justify-center">
+              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-blue-600">
+                <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <g v-html="feature.icon"></g>
                 </svg>
               </div>
             </div>
-            <h3 class="text-sm font-normal tracking-widest uppercase">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">{{ feature.subtitle }}</span>
+            <h3 class="text-sm font-normal uppercase tracking-widest">
+              <span class="bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent">{{ feature.subtitle }}</span>
             </h3>
             <p class="mt-3 text-2xl font-normal text-white xl:text-3xl">{{ feature.title }}</p>
             <p class="mt-4 text-base font-normal text-gray-400">{{ feature.description }}</p>

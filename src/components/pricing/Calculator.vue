@@ -80,27 +80,27 @@ function roundNumber(number: number) {
 
 <template>
   <section id="calculator">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
-        <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">Calculate your usage<br /></h2>
-        <p class="mt-6 text-sm font-normal text-gray-600 font-pj">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
+        <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">Calculate your usage<br /></h2>
+        <p class="font-pj mt-6 text-sm font-normal text-gray-600">
           Enter your estimated monthly active users, updates per month and update size to get your estimated monthly cost.
         </p>
       </div>
-      <div class="relative mt-6 lg:mt-12 lg:max-w-5xl lg:mx-auto">
+      <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
         <div class="absolute -inset-2">
           <div
-            class="w-full h-full mx-auto opacity-30 blur-lg filter"
+            class="mx-auto h-full w-full opacity-30 blur-lg filter"
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-y-12 md:grid-cols-3 rounded-2xl gap-x-20">
+        <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
           <div class="flex flex-col items-center">
             <p class="calc-label">MAU<br /><span class="text-[0.6rem]">Monthly Active Users</span></p>
             <input
               v-model.number="mau"
               placeholder="0"
-              class="break-all w-full p-2 cursor-text hover:bg-gray-800 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
+              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
@@ -108,7 +108,7 @@ function roundNumber(number: number) {
             <input
               v-model.number="updatesByMonth"
               placeholder="0"
-              class="break-all w-full p-2 hover:bg-gray-800 cursor-text border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
+              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
@@ -116,33 +116,33 @@ function roundNumber(number: number) {
             <input
               v-model.number="updatesSize"
               placeholder="0"
-              class="break-all w-full p-2 cursor-text hover:bg-gray-800 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
+              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
             <p class="calc-label">Updates<br />(Total)</p>
-            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ updates.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <p class="calc-label">Bandwidth<br />(GB)</p>
-            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ bandwidth.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <p class="calc-label">Storage<br />(GB)</p>
-            <p class="break-all text-3xl font-bold text-white mt-3 font-pj">
+            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
               {{ storage.toLocaleString() }}
             </p>
           </div>
-          <div class="col-span-1 md:col-span-3 flex flex-col items-center">
-            <p class="mt-5 text-md font-bold tracking-widest text-white uppercase mt-0 font-pj">{{ yearly ? 'Yearly' : 'Monthly' }} Price</p>
-            <p class="break-all text-3xl font-bold text-gray-900 mt-3 font-pj p-2 bg-white rounded-xl">{{ totalPrice }}€</p>
-            <p v-show="suggestion" class="mt-5 text-sm font-bold tracking-widest text-white mt-0 font-pj">
+          <div class="col-span-1 flex flex-col items-center md:col-span-3">
+            <p class="text-md font-pj mt-0 mt-5 font-bold uppercase tracking-widest text-white">{{ yearly ? 'Yearly' : 'Monthly' }} Price</p>
+            <p class="font-pj mt-3 break-all rounded-xl bg-white p-2 text-3xl font-bold text-gray-900">{{ totalPrice }}€</p>
+            <p v-show="suggestion" class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
               We suggest you to choose the
-              <button class="font-bold underline underline-current text-red-400 uppercase cursor-pointer" @click="suggestionClick">
+              <button class="underline-current cursor-pointer font-bold uppercase text-red-400 underline" @click="suggestionClick">
                 {{ suggestion }}
               </button>
               plan

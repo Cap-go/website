@@ -214,7 +214,7 @@ const navigation = {
   <footer class="bg-white" aria-labelledby="footer-heading">
     [
     <h2 id="footer-heading" class="sr-only">{{ translations['footer'][props.locale] }}</h2>
-    <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
           <!-- <img class="h-10" src="https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300" alt="Company name"> -->
@@ -224,9 +224,7 @@ const navigation = {
               <a :href="item.href" target="_blank" rel="noreferrer" class="flex">
                 <div v-if="typeof item.icon === 'string'" class="h-6 w-6" aria-hidden="true" v-html="item.icon" />
                 <component :is="item.icon" v-else class="h-6 w-6" aria-hidden="true" />
-                <span
-                  class="ml-3 text-base font-bold text-gray-500 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-                >
+                <span class="ml-3 border-b-2 border-transparent text-base font-bold text-gray-500 transition-all duration-200 hover:border-blue-600 focus:border-blue-600">
                   {{ item.name }}
                 </span>
               </a>
@@ -237,7 +235,7 @@ const navigation = {
               <button
                 type="button"
                 @click="toggleDropdown"
-                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 aria-haspopup="true"
               >
                 Language
@@ -252,13 +250,13 @@ const navigation = {
             </div>
             <div
               v-if="isOpen"
-              class="absolute right-0 z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="absolute right-0 z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="options-menu"
             >
               <div class="py-1" role="none">
-                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{
+                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">{{
                   item.toUpperCase()
                 }}</a>
               </div>
@@ -275,7 +273,7 @@ const navigation = {
                     rel="noreferrer"
                     :href="item.href"
                     :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>
@@ -290,7 +288,7 @@ const navigation = {
                     :rel="item.rel"
                     :href="item.href"
                     :target="item.target"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 flex items-center"
+                    class="flex items-center border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                     @click="item.execute && item.execute()"
                   >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
@@ -307,7 +305,7 @@ const navigation = {
                 <li v-for="item in navigation.company" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>
@@ -321,7 +319,7 @@ const navigation = {
                   <a
                     :rel="item.rel"
                     :href="item.href"
-                    class="text-base text-gray-500 hover:text-gray-900 duration-200 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>

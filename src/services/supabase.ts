@@ -28,8 +28,8 @@ export async function getRemoteConfig() {
   const localConfig = await getLocalConfig()
   const data = await ky
     .get(`${runtimeConfig.public.baseApiUrl}/private/config`)
-    .then(res => res.json<CapgoConfig>())
-    .then(d => ({ ...localConfig, ...d } as CapgoConfig))
+    .then((res) => res.json<CapgoConfig>())
+    .then((d) => ({ ...localConfig, ...d }) as CapgoConfig)
     .catch(() => {
       console.log('Local config', localConfig)
       return localConfig as CapgoConfig
@@ -46,8 +46,7 @@ export function useSupabase() {
       detectSessionInUrl: false,
     },
   }
-  if (supaClient)
-    return supaClient
+  if (supaClient) return supaClient
 
   supaClient = createClient<Database>(config.supaHost, config.supaKey, options)
   return supaClient

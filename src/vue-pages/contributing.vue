@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1>We welcome and appreciate all contributions to Capgo.</h1>
     <p>This page serves as a helper to get you started on contributing.</p>
     <h2 id="projects">Projects</h2>

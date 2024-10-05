@@ -25,7 +25,7 @@ const domain = config.public.baseUrl
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1>Terms and Conditions</h1>
     <p>Last updated: January 12, 2022</p>
     <p>Please read these terms and conditions carefully before using Our Service.</p>

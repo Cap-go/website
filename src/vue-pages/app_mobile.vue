@@ -13,18 +13,18 @@ const brand = config.public.brand
 </script>
 
 <template>
-  <section class="xl:mx-auto font-fira-sans mx-4 lg:max-w-[85%]">
-    <div class="md:my-20 flex justify-between">
+  <section class="font-fira-sans mx-4 lg:max-w-[85%] xl:mx-auto">
+    <div class="flex justify-between md:my-20">
       <div class="w-full md:w-1/2">
         <div class="pr-4">
-          <h1 class="font-bold text-[2.504rem]">{{ translations['$1_app'][props.locale].replace('$1', brand) }}</h1>
-          <p class="text-lg text-gray-300 mt-8">
+          <h1 class="text-[2.504rem] font-bold">{{ translations['$1_app'][props.locale].replace('$1', brand) }}</h1>
+          <p class="mt-8 text-lg text-gray-300">
             {{ translations['run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team'][props.locale] }}
           </p>
-          <p class="text-sm text-gray-300 mt-10 mb-20">{{ translations['test_version_in_the_sandbox_app_manage_version_and_channel'][props.locale] }}</p>
+          <p class="mb-20 mt-10 text-sm text-gray-300">{{ translations['test_version_in_the_sandbox_app_manage_version_and_channel'][props.locale] }}</p>
         </div>
         <div class="flex items-center space-x-10">
-          <span class="flex items-center bg-[#EAEAEA] px-4 py-1 rounded-[1.125rem]">
+          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
             <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 7H7V13H13V7Z" />
               <path
@@ -35,7 +35,7 @@ const brand = config.public.brand
             </svg>
             <p class="pl-4 text-black">{{ translations['speed'][props.locale] }}</p>
           </span>
-          <span class="flex items-center bg-[#EAEAEA] px-4 py-1 rounded-[1.125rem]">
+          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
             <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
@@ -45,7 +45,7 @@ const brand = config.public.brand
             </svg>
             <p class="pl-4 text-black">{{ translations['security'][props.locale] }}</p>
           </span>
-          <span class="flex items-center bg-[#EAEAEA] px-4 py-1 rounded-[1.125rem]">
+          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
             <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
                 d="M256 352C293.2 352 319.2 334.5 334.4 318.1C343.3 308.4 358.5 307.7 368.3 316.7C378 325.7 378.6 340.9 369.6 350.6C347.7 374.5 309.7 400 256 400C202.3 400 164.3 374.5 142.4 350.6C133.4 340.9 133.1 325.7 143.7 316.7C153.5 307.7 168.7 308.4 177.6 318.1C192.8 334.5 218.8 352 256 352zM208.4 208C208.4 225.7 194 240 176.4 240C158.7 240 144.4 225.7 144.4 208C144.4 190.3 158.7 176 176.4 176C194 176 208.4 190.3 208.4 208zM304.4 208C304.4 190.3 318.7 176 336.4 176C354 176 368.4 190.3 368.4 208C368.4 225.7 354 240 336.4 240C318.7 240 304.4 225.7 304.4 208zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"
@@ -54,24 +54,24 @@ const brand = config.public.brand
             <p class="pl-4 text-black">{{ translations['simplicity'][props.locale] }}</p>
           </span>
         </div>
-        <div class="mt-8 mb-16">
+        <div class="mb-16 mt-8">
           <p class="text-sm text-[#bfbfbf]">{{ translations['start_building_rich_experiences_with_your_device_and_your_computer'][props.locale] }}</p>
         </div>
         <div class="flex space-x-6">
           <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
-            <img src="/play-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link" />
+            <img src="/play-store-button.webp" height="4rem;" class="boder-2 h-11 w-auto rounded border border-white sm:h-16" alt="Apple store download link" />
           </a>
           <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
-            <img src="/app-store-button.webp" height="4rem;" class="w-auto rounded h-11 sm:h-16 border boder-2 border-white" alt="Apple store download link" />
+            <img src="/app-store-button.webp" height="4rem;" class="boder-2 h-11 w-auto rounded border border-white sm:h-16" alt="Apple store download link" />
           </a>
         </div>
       </div>
-      <div class="hidden w-1/2 md:flex space-x-8 justify-end">
-        <div class="border-5 h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[1.5rem]" style="background-image: url(/seeit.webp)">
-          <span class="flex items-center mx-auto rounded-xl bg-[#d8d8d8] h-3 w-[5rem] mt-2" />
+      <div class="hidden w-1/2 justify-end space-x-8 md:flex">
+        <div class="border-5 h-[32rem] w-[18rem] rounded-[1.5rem] border-[#EAEAEA] bg-cover" style="background-image: url(/seeit.webp)">
+          <span class="mx-auto mt-2 flex h-3 w-[5rem] items-center rounded-xl bg-[#d8d8d8]" />
         </div>
-        <div class="border-5 h-[32rem] w-[18rem] border-[#EAEAEA] bg-cover rounded-[2.5rem]" style="background-image: url(/seeit.webp)">
-          <span class="flex items-center mx-auto rounded-b-lg bg-[#d8d8d8] h-3 w-[9rem]" />
+        <div class="border-5 h-[32rem] w-[18rem] rounded-[2.5rem] border-[#EAEAEA] bg-cover" style="background-image: url(/seeit.webp)">
+          <span class="mx-auto flex h-3 w-[9rem] items-center rounded-b-lg bg-[#d8d8d8]" />
         </div>
       </div>
     </div>

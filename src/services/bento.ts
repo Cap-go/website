@@ -1,4 +1,3 @@
-
 declare global {
   interface Window {
     $bentoChat: any
@@ -11,20 +10,17 @@ declare global {
 export function bentoLoader(cb?: () => void) {
   if (localStorage.getItem('bento:loading') === 'true') {
     window.addEventListener('bento:ready', () => {
-      if (cb)
-        cb()
+      if (cb) cb()
     })
     setTimeout(() => {
-      if(localStorage.getItem('bento:loading') === 'true') {
+      if (localStorage.getItem('bento:loading') === 'true') {
         localStorage.setItem('bento:loading', 'false')
         bentoLoader()
       }
-    }, 5000);
+    }, 5000)
     return
-  }
-  else if (window.bento) {
-    if (cb)
-      cb()
+  } else if (window.bento) {
+    if (cb) cb()
     return
   }
   localStorage.setItem('bento:loading', 'true')
@@ -38,11 +34,10 @@ export function bentoLoader(cb?: () => void) {
   g.async = true
   s.parentNode.insertBefore(g, s)
   window.addEventListener('bento:ready', () => {
-    if (typeof (window.bento$) != 'undefined') {
+    if (typeof window.bento$ != 'undefined') {
       window.bento$(() => {
         window.bento.view()
-        if (cb)
-          setTimeout(cb, 300)
+        if (cb) setTimeout(cb, 300)
       })
       const BASE_URL = 'https://chat.bentonow.com'
       const g = d.createElement(t) as HTMLScriptElement
@@ -63,8 +58,7 @@ export function bentoLoader(cb?: () => void) {
           const bubbleHolder = document.querySelector('.woot--bubble-holder') as HTMLElement
           if (bubbleHolder) {
             bubbleHolder.style.setProperty('display', 'none')
-          }
-          else {
+          } else {
             setTimeout(checkAndHideBubble, 100) // Check again after 100ms
           }
         }
@@ -74,10 +68,12 @@ export function bentoLoader(cb?: () => void) {
           mutations.forEach((mutation) => {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
               const target = mutation.target as Element
-              if (target.classList.contains('woot-elements--right')
-                && target.classList.contains('woot-widget-bubble')
-                && target.classList.contains('woot--close')
-                && target.classList.contains('woot--hide')) {
+              if (
+                target.classList.contains('woot-elements--right') &&
+                target.classList.contains('woot-widget-bubble') &&
+                target.classList.contains('woot--close') &&
+                target.classList.contains('woot--hide')
+              ) {
                 checkAndHideBubble()
               }
             }
@@ -89,8 +85,7 @@ export function bentoLoader(cb?: () => void) {
           attributes: true,
           attributeFilter: ['class'],
         })
-        if (cb)
-          setTimeout(cb, 300)
+        if (cb) setTimeout(cb, 300)
       }
     }
   })
@@ -98,8 +93,7 @@ export function bentoLoader(cb?: () => void) {
 
 export function chatLoader(cb?: () => void) {
   if (window.bentoChatSDK) {
-    if (cb)
-      cb()
+    if (cb) cb()
     return
   }
   bentoLoader(cb)
@@ -123,12 +117,15 @@ export function pushEvent(nameEvent: string): void {
   })
 }
 
-export function setUser(uuid: string, data: {
-  nickname?: string
-  phone?: string
-  email?: string
-  avatar?: string
-}): void {
+export function setUser(
+  uuid: string,
+  data: {
+    nickname?: string
+    phone?: string
+    email?: string
+    avatar?: string
+  },
+): void {
   chatLoader(() => {
     window.bento.identify(data.email)
     window.bento.updateFields({ name: data.nickname, avatar_url: data.avatar })

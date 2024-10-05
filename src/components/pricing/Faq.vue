@@ -3,15 +3,15 @@ import { openMessenger } from '../../services/bento'
 </script>
 
 <template>
-  <section class="py-10 bg-gray-900 sm:py-16 lg:py-24">
-    <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-      <div class="max-w-2xl mx-auto text-center">
+  <section class="bg-gray-900 py-10 sm:py-16 lg:py-24">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Questions & Answers</h2>
-        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-300">Explore the common questions and answers about Capgo</p>
+        <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-300">Explore the common questions and answers about Capgo</p>
       </div>
-      <div class="grid grid-cols-1 mt-12 md:mt-20 md:grid-cols-2 gap-y-16 gap-x-20">
+      <div class="mt-12 grid grid-cols-1 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -22,12 +22,12 @@ import { openMessenger } from '../../services/bento'
             </p>
             <p class="mt-4 text-base text-gray-400">
               At Capgo, we don't count emulators and dev builds in your usage. Learn more about this
-              <a class="border-b-2 border-blue-600 border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/"> here.</a>
+              <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" href="/blog/how-your-usage-is-counted/"> here.</a>
             </p>
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -39,7 +39,7 @@ import { openMessenger } from '../../services/bento'
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -51,7 +51,7 @@ import { openMessenger } from '../../services/bento'
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -63,11 +63,11 @@ import { openMessenger } from '../../services/bento'
           </div>
         </div>
       </div>
-      <div class="flex items-center justify-center mt-12 md:mt-20">
-        <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
+      <div class="mt-12 flex items-center justify-center md:mt-20">
+        <div class="rounded-full bg-gray-800 px-8 py-4 text-center">
           <p class="text-gray-50">
             Didn’t find the answer you were looking for?
-            <button class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 focus:text-yellow-400 hover:underline" @click="openMessenger()">
+            <button class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" @click="openMessenger()">
               Contact our support
             </button>
           </p>

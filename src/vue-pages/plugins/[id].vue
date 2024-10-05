@@ -8,20 +8,20 @@ const showReadme = ref(1)
 </script>
 
 <template>
-  <div class="w-full flex flex-col items-center">
-    <div class="w-full flex flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
+  <div class="flex w-full flex-col items-center">
+    <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
       <a aria-label="Back To Plugins" href="/plugins/" class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">← Back To Plugins</a>
     </div>
-    <div class="mt-6 w-full flex flex-row flex-wrap px-10 gap-8 lg:max-w-6xl xl:px-0">
-      <button class="text-sm px-3 py-1" :class="showReadme !== 0 ? 'border border-white rounded' : 'border rounded border-white/10'" @click="showReadme = 1">
+    <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
+      <button class="px-3 py-1 text-sm" :class="showReadme !== 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 1">
         Tutorial on {{ props.title }}
       </button>
-      <button class="text-sm px-3 py-1" :class="showReadme === 0 ? 'border border-white rounded' : 'border rounded border-white/10'" @click="showReadme = 0">
+      <button class="px-3 py-1 text-sm" :class="showReadme === 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 0">
         About {{ props.title }}
       </button>
     </div>
     <div class="mt-6 flex w-full flex-col items-center">
-      <div :class="showReadme === 1 ? 'hidden' : 'flex'" class="z-10 w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0 mb-8">
+      <div :class="showReadme === 1 ? 'hidden' : 'flex'" class="z-10 mb-8 w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0">
         <div class="flex w-full flex-col">
           <h1 class="mt-4 text-2xl font-bold md:text-4xl">
             {{ props.title }}

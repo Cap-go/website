@@ -35,7 +35,7 @@ export const translateText = async (text: string, lang: string) => {
     string: text,
     to_lang: lang,
     from_lang: 'en',
-  });
+  })
   const response = await fetch(`https://api.datpmt.com/api/v2/dictionary/translate?${params.toString()}`)
   return await response.json()
 }

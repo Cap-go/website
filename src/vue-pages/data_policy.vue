@@ -25,7 +25,7 @@ const brand = config.public.brand
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1>Data Policy</h1>
     <p>Last updated: September 21, 2023</p>
     <p>

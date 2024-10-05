@@ -18,158 +18,193 @@ const content = {
 ---
 
 <Layout content={content}>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
+    <h2>Service Level Agreements</h2>
 
-<h2>Service Level Agreements</h2>
+    <h2>Enterprise Platform Uptime SLA</h2>
 
-<h2>Enterprise Platform Uptime SLA</h2>
+    <p>
+      The following Service Level Agreement, which is incorporated into and forms part of the Subscription Agreement between Capgo ("Capgo") and Customer (the "Agreement"), will
+      apply to the Services for Enterprise Customers specified in an Order Form during the applicable Subscription Term:
+    </p>
 
-<p>The following Service Level Agreement, which is incorporated into and forms part of the Subscription Agreement between Capgo ("Capgo") and Customer (the "Agreement"), will apply to the Services for Enterprise Customers specified in an Order Form during the applicable Subscription Term:</p>
+    <h3>1. Uptime Commitment</h3>
 
-<h3>1. Uptime Commitment</h3>
+    <p>
+      Capgo will provide Actual Availability for at least ninety-nine percent (99.0%) of the total time in each calendar month during the Subscription Term, as measured by Capgo
+      (the <strong>"Uptime Commitment"</strong>).
+    </p>
 
-<p>Capgo will provide Actual Availability for at least ninety-nine percent (99.0%) of the total time in each calendar month during the Subscription Term, as measured by Capgo (the <strong>"Uptime Commitment"</strong>).</p>
+    <h3>2. Service Credits</h3>
 
-<h3>2. Service Credits</h3>
+    <p>
+      If the Uptime Commitment is not met during any particular calendar month during the Subscription Term, then Customer will be eligible for a service credit ("Service Credit"),
+      provided that Customer reports to Capgo such failure to meet the Uptime Commitment and requests such Service Credit in accordance with this Exhibit. The amount of any Service
+      Credit due hereunder shall be calculated as follows: X * Y, where X = the total fees due from Customer to Capgo for the affected Services for the relevant calendar month
+      (regardless of when billed or payable), and Y = the Credit Percentage corresponding with the Actual Availability provided (as a percentage of total time) for the relevant
+      calendar month, as set forth in the table below.
+    </p>
 
-<p>If the Uptime Commitment is not met during any particular calendar month during the Subscription Term, then Customer will be eligible for a service credit ("Service Credit"), provided that Customer reports to Capgo such failure to meet the Uptime Commitment and requests such Service Credit in accordance with this Exhibit. The amount of any Service Credit due hereunder shall be calculated as follows: X * Y, where X = the total fees due from Customer to Capgo for the affected Services for the relevant calendar month (regardless of when billed or payable), and Y = the Credit Percentage corresponding with the Actual Availability provided (as a percentage of total time) for the relevant calendar month, as set forth in the table below.</p>
+    <table>
+      <tr>
+        <th>Actual Availability</th>
+        <th>Credit Percentage</th>
+      </tr>
+      <tr>
+        <td>Less than 99.0% but greater than or equal to 98.0%</td>
+        <td>10%</td>
+      </tr>
+      <tr>
+        <td>Less than 98.0% but greater than or equal to 97.0%</td>
+        <td>15%</td>
+      </tr>
+      <tr>
+        <td>Less than 97.0% but greater than or equal to 95.0%</td>
+        <td>20%</td>
+      </tr>
+      <tr>
+        <td>Less than 95.0%</td>
+        <td>30%</td>
+      </tr>
+    </table>
 
-<table>
-  <tr>
-    <th>Actual Availability</th>
-    <th>Credit Percentage</th>
-  </tr>
-  <tr>
-    <td>Less than 99.0% but greater than or equal to 98.0%</td>
-    <td>10%</td>
-  </tr>
-  <tr>
-    <td>Less than 98.0% but greater than or equal to 97.0%</td>
-    <td>15%</td>
-  </tr>
-  <tr>
-    <td>Less than 97.0% but greater than or equal to 95.0%</td>
-    <td>20%</td>
-  </tr>
-  <tr>
-    <td>Less than 95.0%</td>
-    <td>30%</td>
-  </tr>
-</table>
+    <h3>3. Credit Requests and Payment</h3>
 
-<h3>3. Credit Requests and Payment</h3>
+    <p>
+      To request a Service Credit, Customer must send an email to Capgo at <a href="mailto:support@capgo.app">support@capgo.app</a> within thirty (30) days of the end of the month in
+      which the Uptime Commitment was not met. Customer must include either its account ID or registered email address, and the previously reported dates and times that there was no
+      Service Availability. If Capgo confirms that Customer is eligible for a Service Credit, Capgo will issue a credit to Customer's account within thirty (30) days. Service Credits
+      are not refunds, cannot be exchanged into a cash amount, and may only be used against future billing charges. Except as set forth in Section 4 below, the Service Credits shall
+      be Customer's sole and exclusive remedy, and Capgo's sole and exclusive liability, for any failure by Capgo to meet the Uptime Commitment.
+    </p>
 
-<p>To request a Service Credit, Customer must send an email to Capgo at <a href="mailto:support@capgo.app">support@capgo.app</a> within thirty (30) days of the end of the month in which the Uptime Commitment was not met. Customer must include either its account ID or registered email address, and the previously reported dates and times that there was no Service Availability. If Capgo confirms that Customer is eligible for a Service Credit, Capgo will issue a credit to Customer's account within thirty (30) days. Service Credits are not refunds, cannot be exchanged into a cash amount, and may only be used against future billing charges. Except as set forth in Section 4 below, the Service Credits shall be Customer's sole and exclusive remedy, and Capgo's sole and exclusive liability, for any failure by Capgo to meet the Uptime Commitment.</p>
+    <h3>4. Definitions</h3>
 
-<h3>4. Definitions</h3>
+    <p>All capitalized words used but not defined in this Service Level Agreement have the meaning set forth in the Agreement.</p>
 
-<p>All capitalized words used but not defined in this Service Level Agreement have the meaning set forth in the Agreement.</p>
+    <h4>4.1 Scheduled Availability</h4>
 
-<h4>4.1 Scheduled Availability</h4>
+    <p>"Scheduled Availability" means the time, in minutes, that the applicable Services are generally accessible and available to Customer's Permitted Users.</p>
 
-<p>"Scheduled Availability" means the time, in minutes, that the applicable Services are generally accessible and available to Customer's Permitted Users.</p>
+    <h4>4.2 Unscheduled Downtime</h4>
 
-<h4>4.2 Unscheduled Downtime</h4>
+    <p>
+      "Unscheduled Downtime" means the time, in minutes, that the applicable Services are not generally accessible and available to Customer's Permitted Users, excluding
+      inaccessibility or unavailability due to Customer's or Permitted Users' acts or omissions, force majeure events, scheduled maintenance disclosed with at least 24 hours'
+      notice by email, hacking or virus attacks, reasonable emergency maintenance or other product specific exclusions listed under SLA Exclusions.
+    </p>
 
-<p>"Unscheduled Downtime" means the time, in minutes, that the applicable Services are not generally accessible and available to Customer's Permitted Users, excluding inaccessibility or unavailability due to Customer's or Permitted Users' acts or omissions, force majeure events, scheduled maintenance disclosed with at least 24 hours' notice by email, hacking or virus attacks, reasonable emergency maintenance or other product specific exclusions listed under SLA Exclusions.</p>
+    <h4>4.3 Actual Availability</h4>
 
-<h4>4.3 Actual Availability</h4>
+    <p>"Actual Availability" means Scheduled Availability less Unscheduled Downtime.</p>
 
-<p>"Actual Availability" means Scheduled Availability less Unscheduled Downtime.</p>
+    <h4>4.4 Production</h4>
 
-<h4>4.4 Production</h4>
+    <p>"Production" is defined as a system serving live customer-facing or business systems with existing deployed and functional features.</p>
 
-<p>"Production" is defined as a system serving live customer-facing or business systems with existing deployed and functional features.</p>
+    <p>"Development", "Staging", "uat", "pre-production" or new feature implementation even if in a production environment, are not considered Production.</p>
 
-<p>"Development", "Staging", "uat", "pre-production" or new feature implementation even if in a production environment, are not considered Production.</p>
+    <h3>SLA Exclusions</h3>
 
-<h3>SLA Exclusions</h3>
+    <h4>General Service Exclusions</h4>
 
-<h4>General Service Exclusions</h4>
+    <ul>
+      <li>
+        (i) Caused by factors outside of our reasonable control, including but not limited to any force majeure event or Internet access, ISP provider issues, and/or related
+        problems beyond the demarcation point of Capgo.
+      </li>
+      <li>(ii) That result from any voluntary actions or inactions from you.</li>
+      <li>(iii) That result from instance class CPU and memory resource limitations.</li>
+      <li>(iv) That result from you not following the basic operational guidelines described in our <a href="https://capgo.app/docs">Docs</a>.</li>
+      <li>(v) That result in a long recovery time due to insufficient IO capacity for your workload.</li>
+      <li>(vi) That result from your equipment, software, or other technology.</li>
+      <li>(vii) Arising from our suspension and termination of your right to use Capgo in accordance with our Terms.</li>
+    </ul>
 
-<ul>
-  <li>(i) Caused by factors outside of our reasonable control, including but not limited to any force majeure event or Internet access, ISP provider issues, and/or related problems beyond the demarcation point of Capgo.</li>
-  <li>(ii) That result from any voluntary actions or inactions from you.</li>
-  <li>(iii) That result from instance class CPU and memory resource limitations.</li>
-  <li>(iv) That result from you not following the basic operational guidelines described in our <a href="https://capgo.app/docs">Docs</a>.</li>
-  <li>(v) That result in a long recovery time due to insufficient IO capacity for your workload.</li>
-  <li>(vi) That result from your equipment, software, or other technology.</li>
-  <li>(vii) Arising from our suspension and termination of your right to use Capgo in accordance with our Terms.</li>
-</ul>
+    <h4>Live Update SLA Exclusions</h4>
 
-<h4>Live Update SLA Exclusions</h4>
+    <ul>
+      <li>(i) Inappropriately provisioned compute resources related to your project for the expected load.</li>
+      <li>(ii) Outages caused by overly permissive rate-limiting configurations.</li>
+      <li>
+        (iii) Outages or issues caused by retracted versions of official Capgo libraries, frameworks, software packages or APIs, including urgent retractions due to identified
+        security vulnerabilities.
+      </li>
+      <li>(iv) Outages or issues caused by unofficial Capgo client libraries, frameworks, or API proxies, even when those libraries internally use official Capgo libraries.</li>
+      <li>
+        (v) Outages or issues that could have been resolved by upgrading to a higher minor or patch version of an official Capgo client library, framework, or software package.
+      </li>
+    </ul>
 
-<ul>
-  <li>(i) Inappropriately provisioned compute resources related to your project for the expected load.</li>
-  <li>(ii) Outages caused by overly permissive rate-limiting configurations.</li>
-  <li>(iii) Outages or issues caused by retracted versions of official Capgo libraries, frameworks, software packages or APIs, including urgent retractions due to identified security vulnerabilities.</li>
-  <li>(iv) Outages or issues caused by unofficial Capgo client libraries, frameworks, or API proxies, even when those libraries internally use official Capgo libraries.</li>
-  <li>(v) Outages or issues that could have been resolved by upgrading to a higher minor or patch version of an official Capgo client library, framework, or software package.</li>
-</ul>
+    <h2>Support</h2>
 
-<h2>Support</h2>
+    <p>Capgo provides Support Service Level Agreements for our Team and Enterprise customers.</p>
 
-<p>Capgo provides Support Service Level Agreements for our Team and Enterprise customers.</p>
+    <h3>1. Urgent</h3>
 
-<h3>1. Urgent</h3>
+    <p><strong>Critical Issue</strong></p>
 
-<p><strong>Critical Issue</strong></p>
+    <p>Defect resulting in full or partial system outage or a condition that makes Capgo unusable or unavailable in production for all of Customer's Users.</p>
 
-<p>Defect resulting in full or partial system outage or a condition that makes Capgo unusable or unavailable in production for all of Customer's Users.</p>
+    <h3>2. High</h3>
 
-<h3>2. High</h3>
+    <p><strong>Significant Business Disruption</strong></p>
 
-<p><strong>Significant Business Disruption</strong></p>
+    <p>
+      Issue resulting in a situation meaning major functionality is impacted and significant performance degradation is experienced. Issue impacts significant proportion of user
+      base and / or major Capgo functionality.
+    </p>
 
-<p>Issue resulting in a situation meaning major functionality is impacted and significant performance degradation is experienced. Issue impacts significant proportion of user base and / or major Capgo functionality.</p>
+    <h3>3. Normal</h3>
 
-<h3>3. Normal</h3>
+    <p><strong>Minor Feature or Functional Issue / General Question</strong></p>
 
-<p><strong>Minor Feature or Functional Issue / General Question</strong></p>
+    <p>
+      Issue results in a component of Capgo not performing as expected or documented. An inquiry by a Customer representative regarding a general technical issue or general
+      question.
+    </p>
 
-<p>Issue results in a component of Capgo not performing as expected or documented. An inquiry by a Customer representative regarding a general technical issue or general question.</p>
+    <h3>4. Low</h3>
 
-<h3>4. Low</h3>
+    <p><strong>Minor Issue / Feature Request</strong></p>
 
-<p><strong>Minor Issue / Feature Request</strong></p>
+    <p>An Information request about Capgo or feature request.</p>
 
-<p>An Information request about Capgo or feature request.</p>
+    <h2>Target initial response times</h2>
 
-<h2>Target initial response times</h2>
+    <table>
+      <tr>
+        <th>Severity Level</th>
+        <th>Team</th>
+        <th>Pay as you go</th>
+        <th>Priority Plus</th>
+      </tr>
+      <tr>
+        <td>1. Urgent</td>
+        <td>24 hours<br />24/7 × 365</td>
+        <td>1 hour<br />24/7 × 365</td>
+        <td>1 hour<br />24/7 × 365</td>
+      </tr>
+      <tr>
+        <td>2. High</td>
+        <td>1 business day<br />Monday - Friday</td>
+        <td>2 business hours<br />Monday - Friday</td>
+        <td>2 hours<br />24/7 × 365</td>
+      </tr>
+      <tr>
+        <td>3. Normal</td>
+        <td>1 business day<br />Monday - Friday</td>
+        <td>1 business day<br />Monday - Friday</td>
+        <td>12 hours<br />24/7 x 365</td>
+      </tr>
+      <tr>
+        <td>4. Low</td>
+        <td>2 business days<br />Monday - Friday</td>
+        <td>2 business days<br />Monday - Friday</td>
+        <td>24 hours<br />24/7 x 365</td>
+      </tr>
+    </table>
 
-<table>
-  <tr>
-    <th>Severity Level</th>
-    <th>Team</th>
-    <th>Pay as you go</th>
-    <th>Priority Plus</th>
-  </tr>
-  <tr>
-    <td>1. Urgent</td>
-    <td>24 hours<br>24/7 × 365</td>
-    <td>1 hour<br>24/7 × 365</td>
-    <td>1 hour<br>24/7 × 365</td>
-  </tr>
-  <tr>
-    <td>2. High</td>
-    <td>1 business day<br>Monday - Friday</td>
-    <td>2 business hours<br>Monday - Friday</td>
-    <td>2 hours<br>24/7 × 365</td>
-  </tr>
-  <tr>
-    <td>3. Normal</td>
-    <td>1 business day<br>Monday - Friday</td>
-    <td>1 business day<br>Monday - Friday</td>
-    <td>12 hours<br>24/7 x 365</td>
-  </tr>
-  <tr>
-    <td>4. Low</td>
-    <td>2 business days<br>Monday - Friday</td>
-    <td>2 business days<br>Monday - Friday</td>
-    <td>24 hours<br>24/7 x 365</td>
-  </tr>
-</table>
-
-<p>Business hours are from 6am to 6pm (local time), except where otherwise stated.</p>
-</div>
+    <p>Business hours are from 6am to 6pm (local time), except where otherwise stated.</p>
+  </div>
 </Layout>

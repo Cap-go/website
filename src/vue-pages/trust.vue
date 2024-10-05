@@ -26,7 +26,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1 id="capgo-security-">Capgo Security.</h1>
     <p>Move forward with confidence. We offer multiple levels of protection to keep your intellectual property and sensitive data secure.</p>
     <h2 id="product-security">Product security</h2>

@@ -12,7 +12,7 @@ const props = defineProps<{
     <div class="absolute inset-0">
       <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true" />
     </div>
-    <div class="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+    <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Get in touch</h1>
       <p class="mt-6 max-w-3xl text-xl text-indigo-100">
         Company name: Digital shift OÜ <br />
