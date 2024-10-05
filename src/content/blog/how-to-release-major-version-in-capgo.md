@@ -10,6 +10,7 @@ head_image: "/capgo-feature-image.webp"
 head_image_alt: Capgo major version system
 tag: Tutorial
 published: true
+locale: en
 next_blog: "how-to-send-specific-version-to-users"
 
 ---

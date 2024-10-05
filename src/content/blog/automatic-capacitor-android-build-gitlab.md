@@ -10,6 +10,7 @@ head_image: "/andriod_app_gitlab.webp"
 head_image_alt: Fastlane Google play GitLab illustration
 tag: CI/CD
 published: true
+locale: en
 next_blog: 
 
 ---

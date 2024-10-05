@@ -11,6 +11,7 @@ head_image: "/gitlab_ci.webp"
 head_image_alt: Gitlab CI illustration
 tag: CI/CD
 published: true
+locale: en
 next_blog: ""
 
 ---

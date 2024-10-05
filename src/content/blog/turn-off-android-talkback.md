@@ -10,6 +10,7 @@ head_image: "/android_talkback.webp"
 head_image_alt: "Android TalkBack Activation"
 tag: Android
 published: true
+locale: en
 next_blog: ""
 ---
 

@@ -10,6 +10,7 @@ head_image: "/expo_alternative.webp"
 head_image_alt: Expo alternative illustration
 tag: Alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

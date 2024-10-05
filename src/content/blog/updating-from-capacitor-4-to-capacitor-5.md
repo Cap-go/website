@@ -11,6 +11,7 @@ head_image: "/capacitor-5-update.webp"
 head_image_alt: Capacitor 4 to 5 update illustration
 tag: Capacitor
 published: true
+locale: en
 next_blog: ""
 
 ---

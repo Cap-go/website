@@ -8,6 +8,7 @@ created_at: 2024-09-22
 updated_at: 2024-09-22
 tag: Case Study
 published: true
+locale: en
 next_blog: ""
 ---
 

@@ -10,6 +10,7 @@ head_image: "/cordova.webp"
 head_image_alt: Caorodva Dev looking for update they app
 tag: Migration
 published: true
+locale: en
 next_blog: ""
 
 ---

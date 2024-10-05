@@ -10,6 +10,7 @@ head_image: "/migrating-cordova-to-capacitor.webp"
 head_image_alt: Cordova to Capacitor migration illustration
 tag: Migration
 published: true
+locale: en
 next_blog: ""
 
 ---

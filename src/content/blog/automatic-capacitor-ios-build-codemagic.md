@@ -10,6 +10,7 @@ head_image: "/Codemagic_ios.webp"
 head_image_alt: Codemagic testflight illustration
 tag: CI/CD
 published: true
+locale: en
 next_blog: "automatic-capacitor-android-build-codemagic"
 
 ---

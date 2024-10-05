@@ -11,6 +11,7 @@ head_image: "/appflow_alt.webp"
 head_image_alt: Appflow alternative illustration
 tag: Alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

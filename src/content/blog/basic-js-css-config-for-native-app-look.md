@@ -10,6 +10,7 @@ head_image: "/native_app_look.webp"
 head_image_alt: Native app look illustration
 tag: Web Development
 published: true
+locale: en
 next_blog: ""
 
 ---

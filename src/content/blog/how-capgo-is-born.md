@@ -10,6 +10,7 @@ head_image: "/capgo_birth.webp"
 head_image_alt: Capgo birth illusatration
 tag: Story
 published: true
+locale: en
 next_blog: ""
 
 ---

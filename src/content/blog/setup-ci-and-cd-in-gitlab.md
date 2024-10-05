@@ -10,6 +10,7 @@ head_image: "/CI_CD_in_Gitlab.webp"
 head_image_alt: CI/CD in GitLab
 tag: CI/CD
 published: true
+locale: en
 next_blog: ""
 
 ---

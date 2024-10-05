@@ -11,6 +11,7 @@ head_image: "/angular_capacitor.webp"
 head_image_alt: Angular and Capacitor illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---

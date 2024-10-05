@@ -10,6 +10,7 @@ head_image: "/deeplink_next_capacitor.webp"
 head_image_alt: "Capacitor Universal Links"
 tag: DeepLinking
 published: true
+locale: en
 next_blog: ""
 
 ---

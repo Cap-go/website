@@ -10,6 +10,7 @@ head_image: "/vue_angular_react.webp"
 head_image_alt: Image of a person working on a computer
 tag: Tutorial
 published: true
+locale: en
 next_blog: ""
 
 ---

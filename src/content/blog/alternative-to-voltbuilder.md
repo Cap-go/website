@@ -10,6 +10,7 @@ head_image: "/voltbuilder_alt.webp"
 head_image_alt: Voltbuilder alternative illustration
 tag: Alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

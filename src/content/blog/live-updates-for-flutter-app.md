@@ -10,6 +10,7 @@ head_image: "/bypass_illustration.webp"
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---

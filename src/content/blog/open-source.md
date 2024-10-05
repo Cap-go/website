@@ -10,6 +10,7 @@ head_image: "/open_source_main.webp"
 head_image_alt: open source
 tag: Open Source
 published: true
+locale: en
 next_blog: ""
 
 ---

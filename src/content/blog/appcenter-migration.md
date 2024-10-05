@@ -11,6 +11,7 @@ head_image: "/migrate_appcenter.webp"
 head_image_alt: Capacitor JS Dev looking for alternative
 tag: Migration
 published: true
+locale: en
 next_blog: "automatic-build-and-release-with-github-actions"
 
 ---

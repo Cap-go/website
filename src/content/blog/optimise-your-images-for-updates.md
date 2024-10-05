@@ -10,6 +10,7 @@ head_image: "/convert_webp.webp"
 head_image_alt: Convert to webp illustration
 tag: Optimisation
 published: true
+locale: en
 next_blog: ""
 
 ---

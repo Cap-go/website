@@ -10,6 +10,7 @@ head_image: "/react_native_vs_react_capacitor.webp"
 head_image_alt: React Native vs Capacitor comparison illustration
 tag: Alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

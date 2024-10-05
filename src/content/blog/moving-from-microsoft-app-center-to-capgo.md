@@ -11,6 +11,7 @@ head_image: "/app_center.webp"
 head_image_alt: Microsoft App Center illustration
 tag: Alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

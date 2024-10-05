@@ -10,6 +10,7 @@ head_image: "/open_source_licence.webp"
 head_image_alt: Open Source Licence
 tag: Open Source
 published: true
+locale: en
 next_blog: ""
 
 ---

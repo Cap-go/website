@@ -10,6 +10,7 @@ head_image: "/push_notif.webp"
 head_image_alt: "Ionic Capacitor Push Notifications with Firebase"
 tag: tutorial
 published: true
+locale: en
 next_blog: ""
 
 ---

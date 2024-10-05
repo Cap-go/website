@@ -11,6 +11,7 @@ head_image: "/github_actions.webp"
 head_image_alt: Github action illustration
 tag: CI/CD
 published: true
+locale: en
 next_blog: "automatic-capacitor-ios-build-github-action"
 
 ---

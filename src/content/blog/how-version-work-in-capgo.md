@@ -10,6 +10,7 @@ head_image: "/versionning.webp"
 head_image_alt: Capgo bundle version system
 tag: Tutorial
 published: true
+locale: en
 next_blog: "how-to-release-major-version-in-capgo"
 
 ---

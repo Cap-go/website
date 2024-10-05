@@ -10,6 +10,7 @@ head_image: "/create_app_with_js.webp"
 head_image_alt: "Cross-Platform App Development"
 tag: Tuto
 published: true
+locale: en
 next_blog: ""
 
 ---
