@@ -13,11 +13,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
   <div class="bg-white">
     <main
       class="flex justify-center items-center md:pt-24 h-screen font-light leading-8 text-center bg-scroll bg-no-repeat bg-slate-900 text-slate-900 sm:flex-col sm:items-center"
-      style="
-        background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp');
-        background-position: 50% 100%;
-        background-size: 520px;
-      "
+      style="background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp'); background-position: 50% 100%; background-size: 520px"
     >
       <div
         class="flex static flex-col justify-center items-center mb-auto md:my-auto max-w-none font-sans leading-8 text-slate-900 sm:mt-auto sm:max-w-none sm:items-center sm:justify-center"
@@ -26,7 +22,8 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="my-0 mx-auto text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative pb-0 mt-0 mb-16 text-4xl md:text-6xl font-medium text-white" style="line-height: 72px">
             <strong style="line-height: 72px">CapacitorJS</strong
-            ><span class="text-indigo-600" style="line-height: 72px"><strong style="line-height: 72px">{{ translations['code_review_and_consulting'][props.locale] }}</strong></span
+            ><span class="text-indigo-600" style="line-height: 72px"
+              ><strong style="line-height: 72px">{{ translations['code_review_and_consulting'][props.locale] }}</strong></span
             ><strong style="line-height: 72px">{{ translations['services'][props.locale] }}</strong>
           </h1>
         </div>
@@ -66,7 +63,15 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                     <strong class="italic font-bold">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
                   </p>
                 </div>
-                <img loading="lazy" width="80" height="80" src="/click_and_boat.webp" alt="click an boat" class="hidden mb-4 max-w-full align-middle border-0" style="border-radius: 100%" />
+                <img
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                  src="/click_and_boat.webp"
+                  alt="click an boat"
+                  class="hidden mb-4 max-w-full align-middle border-0"
+                  style="border-radius: 100%"
+                />
                 <div class="text-xl font-medium leading-6">TC Nicolas</div>
                 <div>Click & Boat</div>
                 <a
@@ -96,129 +101,106 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_1'][[props.locale]] }}
+                {{ translations['case_1'][props.locale] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col font-bold justify-center items-start mt-0 mb-2 text-3xl sm:text-slate-900" style="line-height: 42px">
                 {{ translations['review_before_passing_the_code_to_the_production'][props.locale] }}
               </h5>
-              <p class="mt-0 mb-2">{{ translations['find_and_fix_bugs_during_the_coding_process'][props.locale] }} {{ translations['it_s_faster_cheaper_and_requires_fewer_developers_to_do_it'][props.locale] }}<br /><br /></p>
+              <p class="mt-0 mb-2">
+                {{ translations['find_and_fix_bugs_during_the_coding_process'][props.locale] }}
+                {{ translations['it_s_faster_cheaper_and_requires_fewer_developers_to_do_it'][props.locale] }}<br /><br />
+              </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-              {{ translations['case_2'][[props.locale]] }}
+                {{ translations['case_2'][props.locale] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">Optimization of the existing app</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ translations['optimization_of_the_existing_app'][props.locale] }}</strong>
+              </h5>
+              <p class="mt-0 mb-2">{{ translations['when_down_review'][props.locale] }}<br /></p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {{ translations['case_3'][props.locale] }}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ translations['little_experience_with_capacitorjs'][props.locale] }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                When an application works too slow or gets down (even for a few minutes), it can damage users’ satisfaction and decrease the revenue. To avoid such situations,
-                review the code to find areas for improvement.<br />
+                {{ translations['when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side'][props.locale] }}
+                {{ translations['let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts'][props.locale] }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-              {{ translations['case_3'][[props.locale]] }}
+                {{ translations['case_4'][props.locale] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">Little experience with CapacitorJS</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ translations['poor_app_quality'][props.locale] }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                When developing a CapacitorJS app as a beginner, it’s good to have an experienced consultant by your side. Let them review your work and give your team an
-                opportunity to learn from the experts.<br />
+                {{ translations['somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low'][props.locale] }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-              {{ translations['case_4'][[props.locale]] }}
+                {{ translations['case_5'][props.locale] }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">Poor app quality</strong>
-              </h5>
-              <p class="mt-0 mb-2">Somebody developed an app for you but it doesn’t meet your expectations and the quality of the final product is really low.<br /></p>
-            </div>
-            <div class="text-slate-900">
-              <h6
-                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
-              >
-              {{ translations['case_5'][[props.locale]] }}
-              </h6>
-            </div>
-            <div class="text-slate-900">
-              <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">Something doesn’t work but you don’t know why</strong>
-              </h5>
-              <p class="mt-0 mb-2">A specific element of your app doesn’t work and you don’t know where the problem is and how to fix it.<br /></p>
-            </div>
-            <div class="text-slate-900">
-              <h6
-                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
-              >
-              {{ translations['case_6'][[props.locale]] }}
-              </h6>
-            </div>
-            <div class="text-slate-900">
-              <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">Plugin is missing</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ translations['something_doesn_t_work_but_you_don_t_know_why'][props.locale] }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                You need a to access to specific native API and the right plugin don't exist. We can develop it for you or support you with it.<br />
+                {{ translations['a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it'][props.locale] }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
-                style="
-                  background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-                  background-position: 0px 3px;
-                  letter-spacing: 1.7px;
-                "
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-              {{ translations['case_7'][[props.locale]] }}
+                {{ translations['case_6'][props.locale] }}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="block flex-col justify-center items-start mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ translations['plugin_is_missing'][props.locale] }}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {{ translations['you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it'][props.locale]
+                }}<br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {{ translations['case_7'][props.locale] }}
               </h6>
             </div>
             <div class="text-slate-900">
@@ -226,7 +208,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 <strong class="font-bold" style="line-height: 42px">{{ translations['ci_cd_setup'][props.locale] }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {{ translations['our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment'][props.locale] }}<br />
+                {{
+                  translations[
+                    'our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment'
+                  ][props.locale]
+                }}<br />
               </p>
             </div>
           </div>
@@ -240,11 +226,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">
-            <strong class="font-bold" style="line-height: 72px">Why is it important?</strong>
+            <strong class="font-bold" style="line-height: 72px">{{ translations['why_is_it_important'][props.locale] }}</strong>
           </h2>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <p class="mt-0 mb-24 text-slate-900">Code consulting and review is more than just a bug check. It helps to:<br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ translations['code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to'][props.locale] }}<br /></p>
         </div>
         <div class="md:grid grid-flow-row md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
           <div class="text-slate-900">
@@ -258,7 +244,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">Minimize mistakes and their impact on the project</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ translations['minimize_mistakes_and_their_impact_on_the_project'][props.locale] }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -272,7 +258,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">Ensure that the project requirements are fulfilled</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ translations['ensure_that_the_project_requirements_are_fulfilled'][props.locale] }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -286,7 +272,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">Improve overall code quality</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ translations['improve_overall_code_quality'][props.locale] }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -300,7 +286,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">Achieve consistent design and implementation</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ translations['achieve_consistent_design_and_implementation'][props.locale] }}</strong>
             </h5>
           </div>
         </div>
@@ -312,7 +298,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="my-0 mx-auto text-center sm:mx-auto" style="max-width: 950px">
-          <h2 class="relative pb-10 mt-0 mb-24 text-6xl font-medium" style="line-height: 72px">Technological Benefits</h2>
+          <h2 class="relative pb-10 mt-0 mb-24 text-6xl font-medium" style="line-height: 72px">{{ translations['technological_benefits'][props.locale] }}</h2>
         </div>
         <div class="md:grid gap-8 md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch">
           <div
@@ -329,10 +315,10 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">Better code quality</strong>
+              <strong class="font-bold">{{ translations['better_code_quality'][props.locale] }}</strong>
             </h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              Let more experienced people review your work, suggest the best programming practices and implement them into the project.
+              {{ translations['let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts'][props.locale] }}
             </p>
           </div>
           <div
@@ -348,9 +334,16 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h4 class="my-2 text-xl font-medium leading-6 filter-none"><strong class="font-bold">Improved code readability</strong><br /></h4>
+            <h4 class="my-2 text-xl font-medium leading-6 filter-none">
+              <strong class="font-bold">{{ translations['improved_code_readability'][props.locale] }}</strong
+              ><br />
+            </h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              It’s possible that different developers will read your code in the future. Reduce unnecessary pieces of it to make it shorter and more expressive.
+              {{
+                translations['it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive'][
+                  props.locale
+                ]
+              }}
             </p>
           </div>
           <div
@@ -367,9 +360,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">Bugs reduction</strong>
+              <strong class="font-bold">{{ translations['bugs_reduction'][props.locale] }}</strong>
             </h4>
-            <p class="block mt-auto mb-2 text-lg whitespace-normal">Eliminate the number of bugs before passing the code to production.<strong class="font-bold" /></p>
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">
+              {{ translations['eliminate_the_number_of_bugs_before_passing_the_code_to_production'][props.locale] }}<strong class="font-bold" />
+            </p>
           </div>
         </div>
       </div>
@@ -396,7 +391,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
           >
         </div>
       </div>
@@ -406,7 +401,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
     >
       <div class="mx-auto mt-5 leading-8 text-slate-900 sm:mx-auto" style="max-width: 754px">
-        <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">Business benefits</h2>
+        <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">{{ translations['business_benefits'][props.locale] }}</h2>
       </div>
       <div class="md:grid gap-4 items-stretch leading-8 text-slate-900 sm:text-left" style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px">
         <div>
@@ -420,10 +415,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">Lower cost of fixing bugs</strong>
+            <strong class="font-bold" style="line-height: 42px">{{ translations['lower_cost_of_fixing_bugs'][props.locale] }}</strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            The faster you find the bug, the cheaper you can fix it. If the bug is spotted during the development process, it’s easier and cheaper to remove it.
+            {{
+              translations['the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it'][
+                props.locale
+              ]
+            }}
           </p>
         </div>
         <div>
@@ -437,10 +436,13 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="block flex-col justify-center items-start mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">Opportunity for juniors to develop skills<br style="line-height: 42px" /></strong>
+            <strong class="font-bold" style="line-height: 42px"
+              >{{ translations['opportunity_for_juniors_to_develop_skills'][props.locale] }}<br style="line-height: 42px"
+            /></strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            Help your junior developers extend their knowledge by giving them the opportunity to cooperate with more experienced developers.<br />
+            {{ translations['help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers'][props.locale]
+            }}<br />
           </p>
         </div>
       </div>
@@ -454,15 +456,9 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       </div>
       <div class="md:grid grid-flow-row gap-6 leading-8 md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
         <div class="flex flex-col justify-center items-center px-5 text-left">
-          <img
-            src="/628664bc9a5b8b85917e5c1f_community.svg"
-            loading="lazy"
-            width="151"
-            alt="Community icon"
-            class="inline-block mt-0 mb-auto max-w-full align-middle border-0"
-          />
+          <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="inline-block mt-0 mb-auto max-w-full align-middle border-0" />
           <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
-            Community-trusted
+            {{ translations['community_trusted'][props.locale] }}
             <a
               href="https://x.com/martindonadieu"
               target="_blank"
@@ -598,7 +594,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
     </div> -->
       </div>
     </div>
-    <plugin_marketing/>
+    <plugin_marketing />
     <div
       class="block clear-both relative flex-col items-center my-auto max-w-none font-sans font-light leading-8 text-center text-slate-900 sm:max-w-none"
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
@@ -639,13 +635,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="flex flex-col font-sans font-light leading-8 text-left text-slate-900 w-1/3">
           <h2
             class="block justify-center items-start pt-0 pb-10 pl-16 mt-5 mb-0 text-xs font-bold leading-4 text-black uppercase bg-no-repeat bg-auto"
-            style="
-              background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg');
-              background-position: 0px 3px;
-              filter: invert(100%);
-              letter-spacing: 1.7px;
-              min-width: 3px;
-            "
+            style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
           >
             <strong class="text-left uppercase" style="letter-spacing: 1.7px">contact</strong><br class="text-left uppercase" style="letter-spacing: 1.7px" />
           </h2>
@@ -658,7 +648,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
           </h3>
 
           <p class="block mt-auto mb-2 font-sans text-lg font-light leading-8 text-left text-white whitespace-normal bg-transparent">
-            Need help with Cordova or CapacitorJS? Let us know!
+            {{ translations['need_help_with_cordova_or_capacitorjs_let_us_know'][props.locale] }}
           </p>
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
@@ -671,7 +661,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">Book a consultation</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
           >
         </div>
       </div>

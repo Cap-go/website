@@ -165,8 +165,6 @@ review_before_passing_the_code_to_the_production: Review before passing the code
 find_and_fix_bugs_during_the_coding_process: Find and fix bugs during the coding process.
 it_s_faster_cheaper_and_requires_fewer_developers_to_do_it: It’s faster, cheaper, and requires fewer developers to do it.
 optimization_of_the_existing_app: Optimization of the existing app
-when_an_application_works_too_slow_or_gets_down_even_for_a_few_minutes_it_can_damage_users_satisfaction_and_decrease_the_revenue: When an application works too slow or gets down (even for a few minutes), it can damage users’ satisfaction and decrease the revenue.
-review_the_code_to_find_areas_for_improvement: Review the code to find areas for improvement.
 little_experience_with_capacitorjs: Little experience with CapacitorJS
 when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side: When developing a CapacitorJS app as a beginner, it’s good to have an experienced consultant by your side.
 let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: Let them review your work and give your team an opportunity to learn from the experts.
@@ -231,3 +229,5 @@ case_4: Case 4
 case_5: Case 5
 case_6: Case 6
 case_7: Case 7
+email_is_required: Email is required
+when_down_review: When an application works too slow or gets down (even for a few minutes), it can damage users’ satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.

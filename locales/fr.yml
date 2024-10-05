@@ -151,10 +151,7 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: >-
-  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
-  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
-  concurrentiel.
+launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -237,11 +234,6 @@ review_before_passing_the_code_to_the_production: Réviser avant de transmettre 
 find_and_fix_bugs_during_the_coding_process: Recherchez et corrigez les bugs pendant le processus de codage.
 it_s_faster_cheaper_and_requires_fewer_developers_to_do_it: C’est plus rapide, moins cher et nécessite moins de développeurs.
 optimization_of_the_existing_app: Optimisation de l'application existante
-when_an_application_works_too_slow_or_gets_down_even_for_a_few_minutes_it_can_damage_users_satisfaction_and_decrease_the_revenue: >-
-  Lorsqu’une application fonctionne trop lentement ou tombe en panne (même
-  pendant quelques minutes), cela peut nuire à la satisfaction des utilisateurs
-  et diminuer les revenus.
-review_the_code_to_find_areas_for_improvement: Passez en revue le code pour trouver des domaines à améliorer.
 little_experience_with_capacitorjs: Peu d'expérience avec CapacitorJS
 when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side: >-
   Lorsque vous développez une application CapacitorJS en tant que débutant, il
@@ -330,3 +322,19 @@ martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background: Martin Donadie
 get_quote_now: Obtenez un devis maintenant
 you_can_see_my_entire_process_unfold_on_twitter: Vous pouvez voir l'ensemble de mon processus se dérouler sur Twitter
 and_hear_more_about_my_journey_on_the: et en savoir plus sur mon voyage sur le
+read_more: En savoir plus
+$1_app: "Application à 1\_$"
+services: Services
+case_1: Cas 1
+case_2: Cas 2
+case_3: Cas 3
+case_4: Cas 4
+case_5: Cas 5
+case_6: Cas 6
+case_7: Cas 7
+email_is_required: L'e-mail est requis
+when_down_review: >-
+  Lorsqu’une application fonctionne trop lentement ou tombe en panne (même
+  pendant quelques minutes), cela peut nuire à la satisfaction des utilisateurs
+  et diminuer les revenus. Pour éviter de telles situations, examinez le code
+  pour trouver des domaines à améliorer.
