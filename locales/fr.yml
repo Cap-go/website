@@ -18,8 +18,11 @@ footer: Pied de page
 company: Entreprise
 legal: Légal
 copyright: Tous droits réservés.
+trust: Confiance
 app_mobile: Application mobile
 plugins: Plugins
+disclaimer: Clause de non-responsabilité
+read_our_disclaimer: Lisez notre clause de non-responsabilité
 plugins_description: >-
   Capgo propose plusieurs plugins pour vous aider à créer votre application plus
   rapidement et mieux.
@@ -35,6 +38,10 @@ imprint: Imprimer
 imprint_description: Retrouvez les infos de la société à 1$ ici
 jobs: Emplois
 contributing: Contribuer
+contributing_description: Comment contribuer à l'open source Capgo
+consulting_description: >-
+  Avancez en toute confiance. Capgo offre plusieurs niveaux de protection pour
+  protéger votre propriété intellectuelle et vos données sensibles.
 security: Sécurité
 consulting: Consultant
 affiliate: Filiale
@@ -51,11 +58,18 @@ read_our_security_policy: Lisez notre politique de sécurité
 return_policy: Politique de retour
 read_our_return_policy: Lisez notre politique de retour
 aup: Politique d'utilisation acceptable
+read_our_aup: Lisez notre politique d'utilisation acceptable
+Capacitor_Sanbox_App: Application Condensateur Sanbox
+Capacitor_Sanbox_App_description: >-
+  Essayez chaque version de votre application directement dans l'application
+  sandbox en une seconde. Gérez la mise à jour OTA de votre application de
+  condensateur depuis votre poche, disponible sur IOS et Android.
 eula: Contrat de licence utilisateur final
 read_our_eula: Lisez notre contrat de licence utilisateur final
 data_processing_agreement: Accord de traitement des données
 read_our_data_processing_agreement: Lire notre accord de traitement des données
 terms: Conditions d'utilisation
+read_our_terms_of_service: Lisez nos conditions d'utilisation
 security_txt: Sécurité.txt
 dp: Politique de données
 dpa: Accord de protection des données
@@ -171,7 +185,10 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
+launch_multiple_releases_per_week: >-
+  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
+  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
+  concurrentiel.
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -199,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -419,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -482,7 +499,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif

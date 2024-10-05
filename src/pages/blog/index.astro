@@ -4,6 +4,7 @@ let posts = await Astro.glob('@/content/blog/**/*.md')
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
 import VueBlogIndex from '@/vue-pages/blog/index.vue'
+import { defaultLocale, type Locales } from '@/services/locale'
 
 posts = posts.filter((i) => i.frontmatter.published).sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
 
@@ -18,8 +19,10 @@ if (config.public.blog_title) {
 if (config.public.blog_description) {
   content['description'] = config.public.blog_description
 }
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
 <Layout content={content}>
-  <VueBlogIndex Content={posts} client:load />
+  <VueBlogIndex locale={pageLocale} Content={posts} client:load />
 </Layout>

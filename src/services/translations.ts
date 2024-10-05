@@ -22,8 +22,11 @@ export default {
   company: { en: 'Company', fr: 'Entreprise' },
   legal: { en: 'Legal', fr: 'Légal' },
   copyright: { en: 'All rights reserved.', fr: 'Tous droits réservés.' },
+  trust: { en: 'Trust', fr: 'Confiance' },
   app_mobile: { en: 'App mobile', fr: 'Application mobile' },
   plugins: { en: 'Plugins', fr: 'Plugins' },
+  disclaimer: { en: 'Disclaimer', fr: 'Clause de non-responsabilité' },
+  read_our_disclaimer: { en: 'Read our disclaimer', fr: 'Lisez notre clause de non-responsabilité' },
   plugins_description: {
     en: 'Capgo offer multiple plugins to help you build your app faster and better.',
     fr: 'Capgo propose plusieurs plugins pour vous aider à créer votre application plus rapidement et mieux.',
@@ -40,6 +43,11 @@ export default {
   imprint_description: { en: 'Find the info of $1 company here', fr: 'Retrouvez les infos de la société à 1$ ici' },
   jobs: { en: 'Jobs', fr: 'Emplois' },
   contributing: { en: 'Contributing', fr: 'Contribuer' },
+  contributing_description: { en: 'How to contribute to Capgo open source', fr: "Comment contribuer à l'open source Capgo" },
+  consulting_description: {
+    en: 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.',
+    fr: 'Avancez en toute confiance. Capgo offre plusieurs niveaux de protection pour protéger votre propriété intellectuelle et vos données sensibles.',
+  },
   security: { en: 'Security', fr: 'Sécurité' },
   consulting: { en: 'Consulting', fr: 'Consultant' },
   affiliate: { en: 'Affiliate', fr: 'Filiale' },
@@ -56,11 +64,18 @@ export default {
   return_policy: { en: 'Return Policy', fr: 'Politique de retour' },
   read_our_return_policy: { en: 'Read our Return Policy', fr: 'Lisez notre politique de retour' },
   aup: { en: 'Acceptable Use Policy', fr: "Politique d'utilisation acceptable" },
+  read_our_aup: { en: 'Read our Acceptable Use Policy', fr: "Lisez notre politique d'utilisation acceptable" },
+  Capacitor_Sanbox_App: { en: 'Capacitor Sanbox App', fr: 'Application Condensateur Sanbox' },
+  Capacitor_Sanbox_App_description: {
+    en: 'Try each version of your app directly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.',
+    fr: "Essayez chaque version de votre application directement dans l'application sandbox en une seconde. Gérez la mise à jour OTA de votre application de condensateur depuis votre poche, disponible sur IOS et Android.",
+  },
   eula: { en: 'End-User License Agreement', fr: 'Contrat de licence utilisateur final' },
   read_our_eula: { en: 'Read our End-User License Agreement', fr: 'Lisez notre contrat de licence utilisateur final' },
   data_processing_agreement: { en: 'Data Processing Agreement', fr: 'Accord de traitement des données' },
   read_our_data_processing_agreement: { en: 'Read our Data Processing Agreement', fr: 'Lire notre accord de traitement des données' },
   terms: { en: 'Terms of Service', fr: "Conditions d'utilisation" },
+  read_our_terms_of_service: { en: 'Read our Terms of Service', fr: "Lisez nos conditions d'utilisation" },
   security_txt: { en: 'Security.txt', fr: 'Sécurité.txt' },
   dp: { en: 'Data Policy', fr: 'Politique de données' },
   dpa: { en: 'Data Protection Agreement', fr: 'Accord de protection des données' },
@@ -203,7 +218,7 @@ export default {
   },
   launch_multiple_releases_per_week: {
     en: "With $1, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.",
-    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81 % de l'efficacité. Ne manquez pas cet avantage concurrentiel.",
+    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage concurrentiel.",
   },
   easily_combine_features_ci_cd: {
     en: 'Easily combine $1 features into your current CI/CD platform with our user-friendly CLI.',
@@ -243,7 +258,7 @@ export default {
   key_features: { en: 'Key Features', fr: 'Principales fonctionnalités' },
   deploy_changes_in_real_time: { en: 'Deploy changes in real-time', fr: 'Déployer les changements en temps réel' },
   version_control: { en: 'Version Control', fr: 'Contrôle des versions' },
-  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'applications sans effort" },
+  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'application sans effort" },
   rollback_capability: { en: 'Rollback Capability', fr: 'Capacité de restauration' },
   revert_to_previous_versions_if_needed: { en: 'Revert to previous versions if needed', fr: 'Revenir aux versions précédentes si nécessaire' },
   analytics: { en: 'Analytics', fr: 'Analytique' },
@@ -548,7 +563,7 @@ export default {
   documenting_apis: { en: 'Documenting APIs', fr: 'Documenter les API' },
   importance_of_documenting_apis: {
     en: 'It is important to document all public APIs and we want to do that inline with the code. This helps ensure that code and documentation are tightly coupled together.',
-    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire en cohérence avec le code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
+    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire conformément au code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
   },
   javascript_and_typescript: { en: 'JavaScript and TypeScript', fr: 'JavaScript et TypeScript' },
   jsdoc_documentation: {
@@ -623,7 +638,7 @@ export default {
   top_flutter_apps_title: { en: 'Top Flutter apps', fr: 'Meilleures applications Flutter' },
   flutter_power_aproximately_1_of_apps_on_google_play_store: {
     en: 'Flutter power aproximately $1% of apps on Google Play Store',
-    fr: 'Flutter alimente environ 1 % des applications sur le Google Play Store',
+    fr: 'Flutter alimente environ 1 % des applications sur Google Play Store',
   },
   top_kotlin_apps_title: { en: 'Top Kotlin apps', fr: 'Meilleures applications Kotlin' },
   kotlin_power_aproximately_1_of_apps_on_google_play_store: {

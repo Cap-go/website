@@ -2,14 +2,15 @@
 import VueDataPolicy from '@/vue-pages/data_policy.vue'
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
 import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | Data Policy`
-const description = 'Data Policy'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['dp'][pageLocale]].join(' | ')
+const description = translations['dp'][pageLocale]
 
 const content = {
   description,
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueDataPolicy locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueDataPolicy locale={pageLocale} client:load /></Layout>

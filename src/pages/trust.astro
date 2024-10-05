@@ -3,13 +3,14 @@ import Layout from '@/layouts/Layout.astro'
 import VueTrust from '@/vue-pages/trust.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | Trust`
-const description = 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['trust'][pageLocale]].join(' | ')
+const description = translations['consulting_description'][pageLocale]
 
 const content = {
   description,
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTrust locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueTrust locale={pageLocale} client:load /></Layout>

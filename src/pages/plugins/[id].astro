@@ -6,6 +6,7 @@ import type { Plugin } from '@/config/plugins'
 import { useRuntimeConfig } from '@/config/app'
 import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
 import { fetchWithToken, getSlug } from '@/services/github'
+import { defaultLocale, type Locales } from '@/services/locale'
 
 export async function getStaticPaths() {
   let tutMap: any = {}
@@ -148,8 +149,10 @@ content['ldJSON'] = {
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),
   ...(plugin.hasOwnProperty('dateModified') && { dateModified: plugin.dateModified }),
 }
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
 <Layout content={content}>
-  <VuePluginPDP client:load {...plugin} />
+  <VuePluginPDP locale={pageLocale} client:load {...plugin} />
 </Layout>

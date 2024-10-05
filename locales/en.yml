@@ -16,8 +16,11 @@ footer: Footer
 company: Company
 legal: Legal
 copyright: All rights reserved.
+trust: Trust
 app_mobile: App mobile
 plugins: Plugins
+disclaimer: Disclaimer
+read_our_disclaimer: Read our disclaimer
 plugins_description: Capgo offer multiple plugins to help you build your app faster and better.
 awesome_capacitor: Awesome Capacitor
 top_app_by_framework: Top App by Framework
@@ -31,6 +34,8 @@ imprint: Imprint
 imprint_description: Find the info of $1 company here
 jobs: Jobs
 contributing: Contributing
+contributing_description: How to contribute to Capgo open source
+consulting_description: Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.
 security: Security
 consulting: Consulting
 affiliate: Affiliate
@@ -47,11 +52,15 @@ read_our_security_policy: Read our Security Policy
 return_policy: Return Policy
 read_our_return_policy: Read our Return Policy
 aup: Acceptable Use Policy
+read_our_aup: Read our Acceptable Use Policy
+Capacitor_Sanbox_App: Capacitor Sanbox App
+Capacitor_Sanbox_App_description: "Try each version of your app directly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android."
 eula: End-User License Agreement
 read_our_eula: Read our End-User License Agreement
 data_processing_agreement: Data Processing Agreement
 read_our_data_processing_agreement: Read our Data Processing Agreement
 terms: Terms of Service
+read_our_terms_of_service: Read our Terms of Service
 security_txt: Security.txt
 dp: Data Policy
 dpa: Data Protection Agreement

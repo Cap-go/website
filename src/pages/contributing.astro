@@ -1,16 +1,16 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import VueContributing from '@/vue-pages/contributing.vue'
+import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
+import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | Contributing`
-
-const description = 'How to contribute to Capgo open source'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['contributing'][pageLocale]].join(' | ')
+const description = translations['contributing_description'][pageLocale]
 
 const content = {
   description,
@@ -18,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueContributing locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueContributing locale={pageLocale} client:load /></Layout>

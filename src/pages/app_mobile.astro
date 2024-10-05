@@ -1,20 +1,22 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { useRuntimeConfig } from '@/config/app'
 import VueAppmobile from '@/vue-pages/app_mobile.vue'
+import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
 import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
-const description =
-  'Try each version of your app directly into the sandbox app in a second. Manage OTA update for your capacitor app from your pocket, available in IOS and Android.'
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['Capacitor_Sanbox_App'][pageLocale]].join(' | ')
+const description = translations['Capacitor_Sanbox_App_description'][pageLocale]
 
 const content = {
   description,
-  title: `${brand} | Capacitor sanbox APP`,
+  title,
   image: `${config.public.baseUrl}/app_demo.webp`,
 }
 ---
 
-<Layout content={content}><VueAppmobile locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueAppmobile locale={pageLocale} client:load /></Layout>
