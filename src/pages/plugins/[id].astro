@@ -27,7 +27,9 @@ export async function getStaticPaths() {
     let item = processTuts[index]
     plugins[index].githubStars = 0
     plugins[index].npmDownloads = 0
-    plugins[index].readme = marked.parse(`# ${item.title}\n\n${item.description}`)
+    const tmp = marked.parse(`# ${item.title}\n\n${item.description}`)
+    if (typeof tmp !== 'string') plugins[index].readme = await tmp
+    else plugins[index].readme = tmp
     // Fetch npm package details to get npm downloads
     const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${item.name}`
     promises.push(
@@ -73,7 +75,11 @@ export async function getStaticPaths() {
       fetchWithToken(readmeApiUrl)
         .then((res) => (res.ok ? res.json() : null))
         .then((res) => {
-          if (res) plugins[index].readme = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
+          if (res) {
+            const tmp = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
+            if (typeof tmp !== 'string') tmp.then((result) => (plugins[index].readme = result))
+            else plugins[index].readme = tmp
+          }
         })
         .catch((e) => {}),
     )
@@ -97,8 +103,9 @@ const plugin = Astro.props.item
 let tutorial = Astro.props.tutorial
 
 if (tutorial) {
-  // @ts-ignore
-  plugin['tutorial'] = marked.parse(tutorial)
+  const tmp = marked.parse(tutorial)
+  if (typeof tmp !== 'string') plugin['tutorial'] = await tmp
+  else plugin['tutorial'] = tmp
 }
 
 if (!plugin || !plugin.title) {
