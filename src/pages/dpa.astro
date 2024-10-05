@@ -3,13 +3,14 @@ import VueDpa from '@/vue-pages/dpa.vue'
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'
 import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | Data Processing Agreement`
-const description = 'Data Processing Agreement'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['data_processing_agreement'][pageLocale]].join(' | ')
+const description = translations['read_our_data_processing_agreement'][pageLocale]
 
 const content = {
   description,
@@ -17,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueDpa locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueDpa locale={pageLocale} client:load /></Layout>

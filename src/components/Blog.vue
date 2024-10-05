@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { formatTime } from '@/config/app'
-import type { Locales } from '@/services/locale';
+import type { Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { computed } from 'vue'
 

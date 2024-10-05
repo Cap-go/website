@@ -1,16 +1,16 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueEula from '@/vue-pages/eula.vue'
-
 import { useRuntimeConfig } from '@/config/app'
+import translations from '@/services/translations'
 import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | End-User License Agreement`
-const description = 'Read our End-User License Agreement'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['eula'][pageLocale]].join(' | ')
+const description = translations['read_our_eula'][pageLocale]
 
 const content = {
   description,
@@ -18,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueEula locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueEula locale={pageLocale} client:load /></Layout>

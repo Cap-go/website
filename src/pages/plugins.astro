@@ -1,10 +1,16 @@
 ---
+import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale, type Locales } from '@/services/locale'
+import translations from '@/services/translations'
 import VuePlugins from '@/vue-pages/plugins.vue'
 
-const title = 'Capgo plugins'
-const description = 'Move forward with confidence. Capgo offer multiple plugins to help you build your app faster and better.'
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['plugins'][pageLocale]].join(' | ')
+const description = translations['plugins_description'][pageLocale]
 
 const content = {
   description,
@@ -12,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VuePlugins locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VuePlugins locale={pageLocale} client:load /></Layout>

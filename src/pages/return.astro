@@ -1,16 +1,16 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueReturn from '@/vue-pages/return.vue'
-
 import { useRuntimeConfig } from '@/config/app'
 import { defaultLocale, type Locales } from '@/services/locale'
-const config = useRuntimeConfig()
+import translations from '@/services/translations'
 
+const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const title = `${brand} | Return Policy`
-
-const description = 'Read our Return Policy'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['return_policy'][pageLocale]].join(' | ')
+const description = translations['read_our_return_policy'][pageLocale]
 
 const content = {
   description,
@@ -18,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueReturn locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
+<Layout content={content}><VueReturn locale={pageLocale} client:load /></Layout>

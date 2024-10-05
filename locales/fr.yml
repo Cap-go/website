@@ -1,5 +1,8 @@
 home: Maison
 pricing: Tarifs
+pricing_description: >-
+  Avancez en toute confiance. Capgo est la plateforme cloud d'entreprise pour
+  les applications de condensateurs.
 blog: Blogue
 documentation: Documentation
 login: Se connecter
@@ -17,6 +20,9 @@ legal: Légal
 copyright: Tous droits réservés.
 app_mobile: Application mobile
 plugins: Plugins
+plugins_description: >-
+  Capgo propose plusieurs plugins pour vous aider à créer votre application plus
+  rapidement et mieux.
 awesome_capacitor: Condensateur génial
 top_app_by_framework: Meilleure application par framework
 community: Communauté
@@ -26,6 +32,7 @@ chat: Chat
 sponsor: Parrainage
 about: À propos
 imprint: Imprimer
+imprint_description: Retrouvez les infos de la société à 1$ ici
 jobs: Emplois
 contributing: Contribuer
 security: Sécurité
@@ -33,8 +40,21 @@ consulting: Consultant
 affiliate: Filiale
 privacy: Confidentialité
 support_policy: Politique d'assistance
+read_our_support_policy: Lire notre politique d'assistance
+privacy_policy: politique de confidentialité
+read_our_privacy_policy: Lisez notre politique de confidentialité
 sla: Accord de niveau de service
+sla_policy: Politique SLA
+read_our_sla_policy: Lisez notre politique SLA
+security_policy: Politique de sécurité
+read_our_security_policy: Lisez notre politique de sécurité
+return_policy: Politique de retour
+read_our_return_policy: Lisez notre politique de retour
 aup: Politique d'utilisation acceptable
+eula: Contrat de licence utilisateur final
+read_our_eula: Lisez notre contrat de licence utilisateur final
+data_processing_agreement: Accord de traitement des données
+read_our_data_processing_agreement: Lire notre accord de traitement des données
 terms: Conditions d'utilisation
 security_txt: Sécurité.txt
 dp: Politique de données
@@ -129,8 +149,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant ainsi des performances et une
-  efficacité optimales.
+  spécifiques de votre projet, garantissant des performances et une efficacité
+  optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -271,7 +291,7 @@ let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_t
 improved_code_readability: Lisibilité du code améliorée
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
-  Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
+  Réduisez-en les morceaux inutiles pour le rendre plus court et plus expressif.
 bugs_reduction: Réduction des bugs
 eliminate_the_number_of_bugs_before_passing_the_code_to_production: Éliminez le nombre de bugs avant de transmettre le code à la production.
 hire_capacitorjs_consultants: Embaucher des consultants CapacitorJS
@@ -448,7 +468,9 @@ top_cordova_apps: >-
   Liste des 100 meilleures applications utilisant Cordova sur la boutique
   Android
 top_cordova_apps_title: Meilleures applications de Cordoue
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+top_capgo_apps_title: Meilleures applications Capgo
+top_capgo_apps: Liste des meilleures applications utilisant Capgo
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android

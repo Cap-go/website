@@ -1,15 +1,15 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { type Locales } from '@/services/locale'
+import { type Locales, defaultLocale } from '@/services/locale'
 import translations from '@/services/translations'
 import { useRuntimeConfig } from '@/config/app'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 
-const title = `${brand} | Security Policy`
-const description = 'Read our Security Policy'
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
+const title = [brand, translations['security_policy'][pageLocale]].join(' | ')
+const description = translations['read_our_security_policy'][pageLocale]
 
 const content = {
   description,

@@ -1,5 +1,6 @@
 home: Home
 pricing: Pricing
+pricing_description: Move forward with confidence. Capgo is the enterprise-grade cloud platform for Capacitor applications.
 blog: Blog
 documentation: Documentation
 login: Login
@@ -17,6 +18,7 @@ legal: Legal
 copyright: All rights reserved.
 app_mobile: App mobile
 plugins: Plugins
+plugins_description: Capgo offer multiple plugins to help you build your app faster and better.
 awesome_capacitor: Awesome Capacitor
 top_app_by_framework: Top App by Framework
 community: Community
@@ -26,6 +28,7 @@ chat: Chat
 sponsor: Sponsoring
 about: About
 imprint: Imprint
+imprint_description: Find the info of $1 company here
 jobs: Jobs
 contributing: Contributing
 security: Security
@@ -33,8 +36,21 @@ consulting: Consulting
 affiliate: Affiliate
 privacy: Privacy
 support_policy: Support Policy
+read_our_support_policy: Read our Support Policy
+privacy_policy: Privacy Policy
+read_our_privacy_policy: Read our Privacy Policy
 sla: Service Level Agreement
+sla_policy: SLA Policy
+read_our_sla_policy: Read our SLA Policy
+security_policy: Security Policy
+read_our_security_policy: Read our Security Policy
+return_policy: Return Policy
+read_our_return_policy: Read our Return Policy
 aup: Acceptable Use Policy
+eula: End-User License Agreement
+read_our_eula: Read our End-User License Agreement
+data_processing_agreement: Data Processing Agreement
+read_our_data_processing_agreement: Read our Data Processing Agreement
 terms: Terms of Service
 security_txt: Security.txt
 dp: Data Policy
