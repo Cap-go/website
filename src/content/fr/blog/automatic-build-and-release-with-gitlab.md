@@ -1,40 +1,41 @@
 ---
-slug: "automatic-build-and-release-with-gitlab"
-title: Automatic build and release with Gitlab
-description: Create your own CI/CD pipeline with Gitlab for free, deploy
-  your app every time you push to main.
+slug: automatic-build-and-release-with-gitlab
+title: Construction et publication automatiques avec Gitlab
+description: >-
+  Créez gratuitement votre propre pipeline CI/CD avec Gitlab, déployez votre
+  application à chaque fois que vous passez à main.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-06-16
-updated_at: 2023-06-29
-head_image: "/gitlab_ci.webp"
-head_image_alt: Gitlab CI illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-06-16T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /gitlab_ci.webp
+head_image_alt: Illustration Gitlab CI
 tag: CI/CD
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
-This tutorial focuses on the GitLab CI, but you can adapt it with a little tweak to any other CI/CD platform.
 
-## Preface 
+Ce tutoriel se concentre sur GitLab CI, mais vous pouvez l'adapter avec un petit ajustement à n'importe quelle autre plateforme CI/CD
 
-Be sure you added your app first to Capgo, this tutorial just focuses on the upload phase
+## Préface 
+
+Assurez-vous d'avoir d'abord ajouté votre application à Capgo, ce tutoriel se concentre uniquement sur la phase de téléchargement.
 
 
-## Commit convention
+## Convention de validation
 
-First you need to start following the commit convention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
+Vous devez d'abord commencer à suivre la convention de validation [commits conventionnels](https://wwwconventionalcommitsorg/en/v100/)\` cela aidera les outils à comprendre comment mettre à niveau le numéro de version, il faut 5 minutes pour l'apprendre
 
-![Conventional commits](/conventional_commits.webp)
+![Commits conventionnels](/conventional_commitswebp)
 
-## GitLab CI for tag
+## GitLab CI pour la balise
 
-Then you need to create your first GitLab to automatically build and create tag.
+Ensuite, vous devez créer votre premier GitLab pour construire et créer automatiquement une balise
 
-Create a file at this path: `.github/workflows/bump_version.yml`
+Créez un fichier à ce chemin : `github/workflows/bump_versionyml`
 
-with this content:
+avec ce contenu :
 
 ```toml
 name: Bump version
@@ -69,19 +70,19 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-This will release a tag for every commit in your main branch. And add a changelog entry for each commit in the main branch in `CHANGELOG.md`.
+Cela libérera une balise pour chaque commit dans votre branche principale et ajoutera une entrée du journal des modifications pour chaque commit dans la branche principale dans `CHANGELOGmd`
 
-Don't worry if you don't have this file, it will be created for you.
+Ne vous inquiétez pas si vous n'avez pas ce fichier, il sera créé pour vous
 
-To make this work, create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
+Pour que cela fonctionne, créez un [PERSONAL_ACCESS](https://docsgithubcom/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _it dans_ votre GitHub [secret ](https://docsgithubcom/en/actions/security-guides/encrypted-secrets "Secrets GitHub") en tant que `PERSONAL_ACCESS_TOKEN`
 
-This is necessary to let the CI commit the changelog.
+Ceci est nécessaire pour laisser le CI valider le journal des modifications
 
-When you create the token, choose expiration as `never` and the scope as `repo`.
+Lorsque vous créez le jeton, choisissez l'expiration sur « jamais » et la portée sur « repo »
 
-Lastly, to let the tool understand where your version is saved, you have to create the file `.cz.toml` at the root of your repository.
+Enfin, pour permettre à l'outil de comprendre où est enregistrée votre version, vous devez créer le fichier `cztoml` à la racine de votre référentiel
 
-And add this inside :
+Et ajoutez ceci à l'intérieur :
 
 ```toml
 [tool.commitizen]
@@ -94,17 +95,17 @@ version_files = [
 ]
 ```
 
-Set the version in this file as the same you have in your `package.json` file.
+Définissez la version de ce fichier comme celle que vous avez dans votre fichier `packagejson`
 
-This is only necessary the first time, then the tools will keep it up to date.
+Cela n'est nécessaire que la première fois, puis les outils le maintiendront à jour
 
-You can now commit this both files and see your first tag appear in GitHub!
+Vous pouvez maintenant valider ces deux fichiers et voir votre première balise apparaître dans GitHub !
 
-## GitHub actions for build
+## Actions GitHub pour la construction
 
-Create a file at this path: `.github/workflows/build.yml`
+Créez un fichier à ce chemin : `github/workflows/buildyml`
 
-with this content:
+avec ce contenu :
 
 ```toml
 name: Build source code and send to Capgo
@@ -134,18 +135,18 @@ jobs:
         run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production
 ```
 
-This will install and build your dependency before sending it to Capgo.
+Cela installera et créera votre dépendance avant de l'envoyer à Capgo
 
-If your command for build is different, you can change it in the `build_code` step.
+Si votre commande de build est différente, vous pouvez la modifier à l'étape `build_code`
 
-To make this work, you need to get your API key for Capgo, add it in the [secret of your GitHub repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) as `CAPGO_TOKEN`.
+Pour que cela fonctionne, vous devez obtenir votre clé API pour Capgo, l'ajouter dans le [secret de votre référentiel GitHub](https://docsgithubcom/en/actions/security-guides/encrypted-secrets/) en tant que `CAPGO_TOKEN`
 
-You can now commit this both files and see your first tag appear in GitHub!
+Vous pouvez maintenant valider ces deux fichiers et voir votre première balise apparaître dans GitHub !
 
-Add the commit will generate a new build for the production channel.
+Ajouter le commit générera une nouvelle version pour le canal de production
 
-You should add your test in the build step to ensure your code is working.
+Vous devez ajouter votre test à l'étape de construction pour vous assurer que votre code fonctionne
 
-Go To your Capgo dashboard and check your build who just appeared, you now have your CI/CD system.
+Allez sur votre tableau de bord Capgo et vérifiez votre build qui vient d'apparaître, vous avez maintenant votre système CI/CD
 
-If you want to let all of your users get the update whenever it's available, go to your channel and set it to `public`.
+Si vous souhaitez permettre à tous vos utilisateurs de recevoir la mise à jour dès qu'elle est disponible, accédez à votre chaîne et définissez-la sur « publique ».

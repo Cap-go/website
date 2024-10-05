@@ -28,6 +28,10 @@ for (const lang of languages) {
       const translatedTitle = await translateText(grayMatterJson.description, lang)
       if (translatedTitle) grayMatterJson['description'] = translatedTitle
     }
+    if (grayMatterJson.head_image_alt) {
+      const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
+      if (translatedHeadImageAlt) grayMatterJson['head_image_alt'] = translatedHeadImageAlt
+    }
     grayMatterJson['locale'] = lang
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
     const blogContent = content.substring(grayMatterEnd + 4)
@@ -52,6 +56,6 @@ for (const lang of languages) {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
     })
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    console.log(`Blog translated: ${file}`)
+    console.log(`Blog translated to ${lang} locale: ${file}`)
   }
 }

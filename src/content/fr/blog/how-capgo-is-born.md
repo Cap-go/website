@@ -1,53 +1,52 @@
 ---
-slug: "how-capgo-is-born"
-title: How Capgo is born
-description: Backstory on how i started this journey and builded Capgo
+slug: how-capgo-is-born
+title: Comment est né Capgo
+description: Histoire de la façon dont j'ai commencé ce voyage et construit Capgo
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-03-01
-updated_at: 2023-06-29
-head_image: "/capgo_birth.webp"
-head_image_alt: Capgo birth illusatration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-03-01T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /capgo_birth.webp
+head_image_alt: Illustration de naissance Capgo
 tag: Story
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-Hey, I'm Martin Donadieu,
+Hé, je m'appelle Martin Donadieu,
 
-In July 2021, I left [Naas](https://naas.ai/) the startup I cofounded in 2019 to build project in solo.
+En juillet 2021, j'ai quitté [Naas](https://naasai/) la startup que j'ai cofondée en 2019 pour monter des projets en solo
 
-During the first 6 months of my solo journey I focused on rebooting my project Captime, a mobile app I did 4 years earlier, who became a side business with the covid.
+Durant les 6 premiers mois de mon parcours solo je me suis concentré sur le redémarrage de mon projet Captime, une application mobile que j'ai réalisée 4 ans plus tôt, devenue une activité parallèle avec le covid.
 
 
-In December 2021, While I was rebuilding the app from zero, I got some issue with the current production version, 
+En décembre 2021, alors que je reconstruisais l'application à partir de zéro, j'ai rencontré un problème avec la version de production actuelle, 
 
-and things got messy, i had to fix it, but I wanted to avoid releasing a new version, so I searched for a solution to push code updates to my app.
+et les choses sont devenues compliquées, j'ai dû le réparer, mais je voulais éviter de publier une nouvelle version, j'ai donc cherché une solution pour envoyer des mises à jour de code à mon application
 
-At the time, Captime was making $400/month, so I was looking for an affordable solution, Ionic Appflow was out of my budget.
+A l'époque, Captime gagnait 400$/mois, donc je cherchais une solution abordable, Ionic Appflow était hors de mon budget
 
-The only other alternative was Microsoft App Center, but they shut down support for apps running on Cordova / Capacitor.
+La seule autre alternative était Microsoft App Center, mais ils ont supprimé la prise en charge des applications exécutées sur Cordova/Capacitor.
 
-If you are a solo developer like me, you will find that Ionic AppFlow is not the best Price for you.
+Si vous êtes un développeur solo comme moi, vous constaterez que Ionic AppFlow n'est pas le meilleur prix pour vous.
 
-Like you, I was complaining about it, I contacted Ionic, they understood the complaint, but there weren't open to change the pricing, i wasn't the target.
+Comme vous, je m'en plaignais, j'ai contacté Ionic, ils ont compris la plainte, mais ils n'étaient pas disposés à modifier le prix, je n'étais pas la cible
 
-So, I decided to try to fix my biggest pain in my Capacitor JS development workflow: Live updates.
+J'ai donc décidé d'essayer de résoudre mon plus gros problème dans mon flux de travail de développement Capacitor JS : les mises à jour en direct.
 
-After one month of trying, I found a way to download from one URL a zip and replace the source of the app.
+Après un mois d'essais, j'ai trouvé un moyen de télécharger à partir d'une URL un zip et de remplacer la source de l'application.
 
-I shared about it and got huge interest on GitHub.
+J'en ai parlé et j'ai suscité un énorme intérêt sur GitHub
 
-That was too manual for most teams, so they asked for a paid service, that was where I started to work on Capgo as AppFlow alternative.
+C'était trop manuel pour la plupart des équipes, alors elles ont demandé un service payant, c'est là que j'ai commencé à travailler sur Capgo comme alternative à AppFlow
 
-The goal was to provide a simple and easy to use solution to push code updates to Capacitor JavaScript apps.
+L'objectif était de fournir une solution simple et facile à utiliser pour transmettre les mises à jour du code aux applications JavaScript Capacitor.
 
-No Native build, not big toolbox like Ionic, just live updates, for the market they don't address, Us.
+Pas de build natif, pas de grosse boîte à outils comme Ionic, juste des mises à jour en direct, pour le marché auquel ils ne s'adressent pas, nous
 
-I contacted them to share with them what I was doing, and we found a business friendship agreement.
+Je les ai contactés pour partager avec eux ce que je faisais, et nous avons trouvé un accord d'amitié commerciale
 
-I build for the maker, they build for the business that need CI/CD and dedicated support :)
+Je construis pour le créateur, ils construisent pour les entreprises qui ont besoin de CI/CD et d'un support dédié :)
 
-You are welcome to join the community to build together, I use it for my projects too, and even I expect this to become my main project in the future.
+Vous êtes invités à rejoindre la communauté pour construire ensemble, je l'utilise aussi pour mes projets, et même j'espère que cela deviendra mon projet principal à l'avenir.

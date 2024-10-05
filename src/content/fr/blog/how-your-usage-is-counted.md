@@ -1,89 +1,90 @@
 ---
-slug: "how-your-usage-is-counted"
-title: How your usage is counted in Capgo
-description: Understand how Capgo count your usage, and use it at best. Learn to manage better your plan
+slug: how-your-usage-is-counted
+title: Comment votre utilisation est comptabilisée dans Capgo
+description: >-
+  Comprenez comment Capgo compte votre utilisation et utilisez-la au mieux.
+  Apprenez à mieux gérer votre forfait
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-11-25
-updated_at: 2023-06-29
-head_image: "/usage_explained.webp"
-head_image_alt: Capgo usage system explained
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-11-25T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /usage_explained.webp
+head_image_alt: Explication du système d'utilisation de Capgo
 tag: Solution
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-In Capgo, 3 values are counted and important to understand
-- User's
-- Storage
-- Bandwidth
+Dans Capgo, 3 valeurs sont comptées et importantes à comprendre
+- De l'utilisateur
+- Stockage
+- Bande passante
 
-Each one as a slight different way of being counted
-
-
-## Users
-
-Each time a user download your Capacitor JS app and opens it, it will send a request to Capgo backend to know is update is available.
-When the app does that, it sends little information, including the most important one `DeviceID`
-
-`DeviceID`: is a unique ID (UUID) defined by the OS of the device, this ID is unique by app install.
-
-Each time your account receives a new Device ID, it saved in database.
-Each time an old `DeviceID` request an update (app open), it got is record updated (updated_at in the database).
-
-This data is saved in 2 places:
-- device table with `update_at` value
-- app_stats with daily counter who represents the number of device who became active today and haven't been active this month.
-
-For plan limit the first method is used because it's 100% reliable, for displaying the chart the second one is used.
-You can see both in your account on the home page:
-- in the chart is the second method
-- in the table of apps is the first method.
-
-> Capgo don't count emulator and dev build in your usage. Keep in mind after the trial you can't have more than 3% of them, or that will lock your account, until you fix it.
-
-> Capgo is also doing some filtering for you. If you have CI/CD configured to send your version to Google PLAY, Google is running your Capacitor app each time to 20+ real device. During the 4 first hours of a new bundle, we block Google data center IP to prevent them to being counted.
-
-Each month, this data starts from zero.
+Chacun comme une manière légèrement différente d'être compté
 
 
-- Create or update a device in my database at each device request
-- Add to a daily counter the number of active device who hasn't been active this month.
+## Utilisateurs
 
-The first method returns: 900+ users
-while the second one is at 200+ users on your account
-For plan limit I use the first method, who is 100% reliable, and to display the chart I use the second one.
-You can see both on your account home page.
+Chaque fois qu'un utilisateur télécharge votre application Capacitor JS et l'ouvre, il enverra une demande au backend Capgo pour savoir si la mise à jour est disponible.
+Lorsque l'application fait cela, elle envoie peu d'informations, y compris la plus importante "DeviceID"
 
-## Storage
+`DeviceID` : est un identifiant unique (UUID) défini par le système d'exploitation de l'appareil, cet identifiant est unique par installation de l'application
 
-Each time you upload a bundle, this number is increased by the size of the upload.
+Chaque fois que votre compte reçoit un nouvel identifiant d'appareil, celui-ci est enregistré dans la base de données
+Chaque fois qu'un ancien `DeviceID` demande une mise à jour (application ouverte), son enregistrement est mis à jour (updated_at dans la base de données)
 
-This data is only related to your upload size, the better your app size is, the better you stay in your plan.
+Ces données sont enregistrées à 2 endroits :
+- table des périphériques avec la valeur `update_at`
+- app_stats avec compteur quotidien qui représente le nombre d'appareils devenus actifs aujourd'hui et qui ne l'ont pas été ce mois-ci
 
-If you reach the limit or near, you can list your bundles with the CLI:
-`npx @capgo/cli@latest bundle list`
-To see what you could clean, removing a bundle, free the storage but don't delete the stats.
+Pour la limite du plan, la première méthode est utilisée car elle est fiable à 100 %, pour l'affichage du graphique, la seconde est utilisée
+Vous pouvez voir les deux dans votre compte sur la page d'accueil :
+- dans le tableau se trouve la deuxième méthode
+- dans le tableau des applications se trouve la première méthode
 
-When you are ready for cleanup, use this command to remove many bundles:
-`npx @capgo/cli@latest bundle cleanup`
+> Capgo ne compte pas l'émulateur et le développement dans votre utilisation. Gardez à l'esprit qu'après l'essai, vous ne pouvez pas en avoir plus de 3 %, sinon cela verrouillera votre compte jusqu'à ce que vous le répariez.
 
-PS: this is good for the planet, but also for your wallet 💪.
+> Capgo effectue également un filtrage pour vous. Si vous avez configuré CI/CD pour envoyer votre version à Google PLAY, Google exécute à chaque fois votre application Capacitor sur plus de 20 appareils réels. Pendant les 4 premières heures d'un nouveau bundle, nous bloquons Google. IP du centre de données pour éviter qu'elles soient comptées
 
-> You can also use the `--external` of upload to use your storage, and not count in your plan.
+Chaque mois, ces données repartent de zéro
 
-## Bandwidth
 
-The calculation of this value is a bit more complex, but the idea is the same as the storage.
+- Créer ou mettre à jour un appareil dans ma base de données à chaque demande d'appareil
+- Ajouter à un compteur quotidien le nombre d'appareils actifs qui n'ont pas été actifs ce mois-ci
 
-Each time a user download a bundle, this number is increased by the size of the download.
+La première méthode renvoie : 900+ utilisateurs
+tandis que le second compte plus de 200 utilisateurs sur votre compte
+Pour la limite du plan j'utilise la première méthode, qui est fiable à 100%, et pour afficher le graphique j'utilise la seconde
+Vous pouvez voir les deux sur la page d'accueil de votre compte
 
-This data is only related to your download size, the better your Capacitor JS app size is, the better you stay in your plan.
+## Stockage
 
-> One important thing to note, Capgo cannot see what size is downloaded, it only sees the size of the bundle. So if you have a big bundle, and you have many users who fail to download it, you will reach the limit quickly.
+Chaque fois que vous téléchargez un bundle, ce nombre est augmenté de la taille du téléchargement.
 
-The best way to stay in your plan is to have a small bundle, and if you can't, show a download bar to your user, and let them know how much they have left to download.
+Ces données sont uniquement liées à la taille de votre téléchargement, plus la taille de votre application est élevée, mieux vous restez dans votre forfait.
 
-In the future, Capgo will improve the download system to have more chances to download the bundle at one time.
+Si vous atteignez la limite ou si vous en êtes proche, vous pouvez lister vos offres groupées avec la CLI :
+`npx @capgo/cli@dernière liste de bundles`
+Pour voir ce que vous pourriez nettoyer, en supprimant un bundle, libérez le stockage mais ne supprimez pas les statistiques
+
+Lorsque vous êtes prêt pour le nettoyage, utilisez cette commande pour supprimer de nombreux bundles :
+`npx @capgo/cli@dernier nettoyage du bundle`
+
+PS : c'est bon pour la planète, mais aussi pour votre portefeuille 💪
+
+> Vous pouvez également utiliser le `--external` de téléchargement pour utiliser votre stockage, et ne pas compter dans votre forfait
+
+## Bande passante
+
+Le calcul de cette valeur est un peu plus complexe, mais l'idée est la même que celle du stockage.
+
+Chaque fois qu'un utilisateur télécharge un bundle, ce nombre augmente de la taille du téléchargement.
+
+Ces données sont uniquement liées à la taille de votre téléchargement, plus la taille de votre application Capacitor JS est grande, mieux vous restez dans votre forfait.
+
+> Une chose importante à noter, Capgo ne peut pas voir quelle taille est téléchargée, il ne voit que la taille du bundle. Donc si vous avez un gros bundle et que de nombreux utilisateurs ne parviennent pas à le télécharger, vous atteindrez rapidement la limite.
+
+La meilleure façon de rester dans votre forfait est d'avoir un petit forfait, et si vous ne pouvez pas, d'afficher une barre de téléchargement à votre utilisateur et de lui faire savoir combien il lui reste à télécharger.
+
+À l'avenir, Capgo améliorera le système de téléchargement pour avoir plus de chances de télécharger le pack en même temps.
