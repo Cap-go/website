@@ -1,5 +1,5 @@
 ---
-let posts = await Astro.glob('../../content/blog/**/*.md')
+let posts = await Astro.glob('@/content/blog/**/*.md')
 
 import Layout from '@/layouts/Layout.astro'
 import { useRuntimeConfig } from '@/config/app'

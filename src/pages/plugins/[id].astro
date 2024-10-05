@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   let tutMap: any = {}
   const promises: any[] = []
   let processTuts: Plugin[] = []
-  let tuts = await Astro.glob('../../content/plugins-tutorials/**/*.md')
+  let tuts = await Astro.glob('@/content/plugins-tutorials/**/*.md')
   for (let i of tuts) {
     // Get the slug from the file path
     const slug = getSlug(i.file).replace('.md', '')
