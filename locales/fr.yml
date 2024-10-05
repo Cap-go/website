@@ -129,8 +129,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant des performances et une efficacité
-  optimales.
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -151,10 +151,7 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: >-
-  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
-  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
-  concurrentiel.
+launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -349,4 +346,68 @@ each_solution_represents_a_consulting_success_story_battle_tested_and_refined_fo
   peaufinée pour la communauté.
 get_your_custom_plugin_built: Créez votre plugin personnalisé
 contact: Contact
-lets_work_together: Travaillons ensemble!
+lets_work_together: Travaillons ensemble !
+we_welcome_and_appreciate_all_contributions_to_capgo: Nous accueillons et apprécions toutes les contributions à Capgo.
+this_page_serves_as_a_helper_to_get_you_started_on_contributing: Cette page vous aide à commencer à contribuer.
+projects: Projets
+there_are_numerous_repositories_in_the_capgo_organization_that_are_part_of_the_capgo: >-
+  Il existe de nombreux référentiels dans l'organisation Capgo qui font partie
+  de Capgo.
+repositories_have_different_scopes_use_different_programming_languages_and_have_varying_level_when_it_comes_to_contributions: >-
+  Les référentiels ont des portées différentes, utilisent différents langages de
+  programmation et ont différents niveaux de contribution.
+to_help_you_decide_which_repository_might_be_the_best_to_start_contributing_and_or_falls_into_your_interest_here_s_a_short_comparison_languages_in_bold_comprise_most_of_the_codebase: "Pour vous aider à décider quel référentiel pourrait être le meilleur pour commencer à contribuer (et/ou qui vous intéresse), voici une brève comparaison (les <strong> langues en gras constituent la majeure partie de la base de code </strong>)\_:"
+main_repository_that_provides_the_capacitor_updater_plugin: >-
+  Il s'agit du référentiel principal qui fournit le plugin
+  <code>capacitor-updater</code>.
+you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to: "Vous souhaitez corriger un bug ou ajouter une nouvelle fonctionnalité à <code>capacitor-updater</code>\_? Il s'agit du référentiel auquel vous souhaitez contribuer."
+the_webapp_and_serverless_functions_that_make_up_the_capgo_cloud_platform: Les fonctions Webapp et serverless qui composent la plateforme cloud Capgo.
+thare_where_you_want_to_contribute_to_fix_the_backend_of_capgo: Indiquez où vous souhaitez contribuer à la réparation du backend de Capgo.
+frontend_for_official_deno_webpage: Frontend pour la page Web officielle de Deno
+documentation_in_markdown_that_powers: Documentation dans Markdown qui alimente
+version_manager_that_power_ci_cd_to_update_apps: >-
+  Gestionnaire de versions qui alimente CI/CD pour mettre à jour les
+  applications.
+read_the_style_guide: >-
+  Lisez le <a href="https://deno.land/manual@v1.25.4/contributing/style_guide">
+  guide de style.</a>
+ask_for_help_in_the_community_chat_room: >-
+  Demandez de l'aide dans le salon de discussion communautaire <a
+  href="https://discord.com/invite/VnYRvBfgA6">. </a>
+mention_issue_before_working: >-
+  Lorsque vous travaillez sur un problème, mentionnez-le dans les commentaires
+  du problème <em>avant</em> de commencer à travailler sur le problème.
+create_an_issue_and_discuss_before_working_on_a_new_feature: "Lorsque vous travaillez sur une nouvelle fonctionnalité, créez un problème et discutez-en avec d'autres contributeurs <em>avant</em> de commencer à travailler sur la fonctionnalité\_; nous apprécions toutes les contributions, mais toutes les fonctionnalités proposées ne sont pas acceptées. Nous ne voulons pas que vous passiez des heures à travailler sur un code qui pourrait ne pas être accepté."
+please_be_professional_in_the_forums: >-
+  Soyez professionnel sur les forums. Nous suivons le <a
+  href="https://www.rust-lang.org/policies/code-of-conduct"> le code de conduite
+  de Rust</a> (CoC). Vous avez un problème ? Envoyez un e-mail à <a
+  href="mailto:ry@tinyclouds.org"> ry@tinyclouds.org.</a>
+submitting_a_pull_request: Soumettre une pull request
+before_submitting_a_pr: "Avant de soumettre un PR à l'un des dépôts, veuillez vous assurer que les points suivants sont effectués\_:"
+give_pr_a_descriptive_title: Donnez au PR un titre descriptif.
+examples_of_good_pr_title: "Exemples de bons titres de relations publiques\_:"
+examples_of_bad_pr_title: "Exemples de mauvais titres de relations publiques\_:"
+submitting_a_pr_to_capgo: >-
+  Soumettre un PR à <a
+  href='https://github.com/Cap-go/capgo'><code>Capgo</code></a>
+additionally_make_sure_that: "En plus de ce qui précède, assurez-vous que\_:"
+npm_run_lint_passes: >-
+  <code>npm run lint</code> passes - cela vérifiera le code Rust et JavaScript
+  pour les erreurs et erreurs courantes en utilisant <code>Swiftlint</code>
+  (pour Swift) et <code>eslint</code> (pour JavaScript et Java)
+documenting_apis: Documenter les API
+importance_of_documenting_apis: >-
+  Il est important de documenter toutes les API publiques et nous souhaitons le
+  faire conformément au code. Cela permet de garantir que le code et la
+  documentation sont étroitement liés.
+javascript_and_typescript: JavaScript et TypeScript
+jsdoc_documentation: >-
+  Toutes les API et tous les types exposés publiquement, le module
+  <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
+  documentation est analysée et disponible pour le compilateur TypeScript, et
+  donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
+  l'instruction à laquelle ils s'appliquent et sont désignés par un
+  <code>/**</code> avant de se terminer par un <code>*/</code>. Par exemple:
+jsdoc_example: exporter const FOO = 'foo';
+find_more_at: "Pour en savoir plus\_: <a href='https://jsdoc.app/'> https://jsdoc.app/ </a>"

@@ -72,7 +72,7 @@ const props = defineProps<{
     <h3 id="background-checks">Background checks</h3>
     <ul>
       <li>
-        Capgo don&#39;t have employees and will never, only one person, Martin Donadieu has access to production database. Freelancer or open-source contributors are not allowed to
+        Capgo don't have employees and will never, only one person, Martin Donadieu has access to production database. Freelancer or open-source contributors are not allowed to
         have access to production database.
       </li>
     </ul>
@@ -105,7 +105,7 @@ const props = defineProps<{
     <h3 id="communication">Communication</h3>
     <ul>
       <li>
-        In the event of system-wide issues, customers are notified by their email. Capgo&#39;s system status and network and security incidents are published at
+        In the event of system-wide issues, customers are notified by their email. Capgo's system status and network and security incidents are published at
         <a href="https://status.capgo.app/">https://status.capgo.app</a>.
       </li>
     </ul>

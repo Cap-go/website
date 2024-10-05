@@ -238,3 +238,35 @@ each_solution_represents_a_consulting_success_story_battle_tested_and_refined_fo
 get_your_custom_plugin_built: Get Your Custom Plugin Built
 contact: Contact
 lets_work_together: Let's work together!
+we_welcome_and_appreciate_all_contributions_to_capgo: We welcome and appreciate all contributions to Capgo.
+this_page_serves_as_a_helper_to_get_you_started_on_contributing: This page serves as a helper to get you started on contributing.
+projects: Projects
+there_are_numerous_repositories_in_the_capgo_organization_that_are_part_of_the_capgo: There are numerous repositories in the Capgo organization that are part of the Capgo.
+repositories_have_different_scopes_use_different_programming_languages_and_have_varying_level_when_it_comes_to_contributions: Repositories have different scopes, use different programming languages and have varying level when it comes to contributions.
+to_help_you_decide_which_repository_might_be_the_best_to_start_contributing_and_or_falls_into_your_interest_here_s_a_short_comparison_languages_in_bold_comprise_most_of_the_codebase: "To help you decide which repository might be the best to start contributing (and/or falls into your interest), here is a short comparison (<strong> languages in bold comprise most of the codebase </strong>):"
+main_repository_that_provides_the_capacitor_updater_plugin: This is the main repository that provides the <code>capacitor-updater</code> Plugin.
+you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to: You want to fix a bug or add a new feature to <code>capacitor-updater</code>? This is the repository you want to contribute to.
+the_webapp_and_serverless_functions_that_make_up_the_capgo_cloud_platform: The Webapp and serverless functions that make up the Capgo cloud platform.
+thare_where_you_want_to_contribute_to_fix_the_backend_of_capgo: Thare where you want to contribute to fix the backend of Capgo.
+frontend_for_official_deno_webpage: Frontend for official Deno webpage
+documentation_in_markdown_that_powers: Documentation in Markdown that powers
+version_manager_that_power_ci_cd_to_update_apps: Version manager that power CI/CD to uppdate apps.
+read_the_style_guide: Read the <a href="https://deno.land/manual@v1.25.4/contributing/style_guide"> style guide.</a>
+ask_for_help_in_the_community_chat_room: Ask for help in the <a href="https://discord.com/invite/VnYRvBfgA6"> community chat room. </a>
+mention_issue_before_working: When you work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.
+create_an_issue_and_discuss_before_working_on_a_new_feature: "When you work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all contributions, but not all proposed features are getting accepted. We don't want you to spend hours working on a code that might not be accepted."
+please_be_professional_in_the_forums: "Please be professional in the forums. We follow <a href=\"https://www.rust-lang.org/policies/code-of-conduct\"> Rust's code of conduct</a> (CoC). Have a problem? Email <a href=\"mailto:ry@tinyclouds.org\"> ry@tinyclouds.org.</a>"
+submitting_a_pull_request: Submitting a pull request
+before_submitting_a_pr: "Before submitting a PR to any of the repos, please make sure the following is done:"
+give_pr_a_descriptive_title: "Give the PR a descriptive title."
+examples_of_good_pr_title: "Examples of good PR title:"
+examples_of_bad_pr_title: "Examples of bad PR title:"
+submitting_a_pr_to_capgo: "Submitting a PR to <a href='https://github.com/Cap-go/capgo'><code>Capgo</code></a>"
+additionally_make_sure_that: "Additionally to the above make sure that:"
+npm_run_lint_passes: "<code>npm run lint</code> passes - this will check Rust and JavaScript code for common mistakes and errors using <code>Swiftlint</code> (for Swift) and <code>eslint</code> (for JavaScript and Java)"
+documenting_apis: "Documenting APIs"
+importance_of_documenting_apis: "It is important to document all public APIs and we want to do that inline with the code. This helps ensure that code and documentation are tightly coupled together."
+javascript_and_typescript: "JavaScript and TypeScript"
+jsdoc_documentation: "All publicly exposed APIs and types, the <code>capacitor-updater</code> module should have JSDoc documentation. This documentation is parsed and available to the TypeScript compiler, and therefore easy to provide further downstream. JSDoc blocks come just prior to the statement they apply to and are denoted by a leading <code>/**</code> before terminating with a <code>*/</code>. For example:"
+jsdoc_example: "export const FOO = 'foo';"
+find_more_at: "Find more at: <a href='https://jsdoc.app/'> https://jsdoc.app/ </a>"
