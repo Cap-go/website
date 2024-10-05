@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRuntimeConfig } from '@/config/app'
-import type { Database } from '../types/supabase.types'
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
 import { renameCat, shortNumber } from '@/services/misc'
+import translations from '@/services/translations'
+import type { Database } from '@/types/supabase.types'
+import { ref } from 'vue'
 
 const props = defineProps<{
   locale: Locales
@@ -82,7 +82,6 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=reactNative`).then((re
           </div>
         </div>
       </div>
-
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <a
           v-for="l in others"

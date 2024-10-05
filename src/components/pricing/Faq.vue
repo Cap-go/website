@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { openMessenger } from '@/services/bento'
 import type { Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'

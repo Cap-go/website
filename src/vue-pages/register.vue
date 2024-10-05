@@ -137,13 +137,12 @@
   </section>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { openMessenger } from '../services/bento'
-import { toast } from 'vue-sonner'
-import { useSupabase, getRemoteConfig } from '../services/supabase'
-import { navigate } from 'astro:transitions/client'
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import { navigate } from 'astro:transitions/client'
+import { ref } from 'vue'
+import { toast } from 'vue-sonner'
+import { openMessenger } from '@/services/bento'
+import { getRemoteConfig, useSupabase } from '@/services/supabase'
 
 const props = defineProps<{
   locale: Locales

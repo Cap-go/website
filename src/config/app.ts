@@ -1,6 +1,6 @@
+import { appDescription, appName } from '@/constants/index'
 import dayjs from 'dayjs'
 import keys from '../../configs.json'
-import { appDescription, appName } from '@/constants/index'
 
 function getRightKey(branch: string, keyname: 'base_domain'): string {
   if (branch === 'development') return keys[keyname].development

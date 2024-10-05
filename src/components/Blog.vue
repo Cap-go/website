@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { formatTime } from '@/config/app'
+import type { Locales } from '@/services/locale';
 import translations from '@/services/translations'
+import { computed } from 'vue'
 
 const props = defineProps<{
   link: string
@@ -10,7 +11,7 @@ const props = defineProps<{
   description: string
   date: string
   tag: string
-  locale?: string
+  locale: Locales
 }>()
 const cannLink = computed(() => `${props.locale ? `/${props.locale}` : ''}/blog/${props.link}/`)
 </script>

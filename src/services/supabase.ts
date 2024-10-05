@@ -1,8 +1,8 @@
-import ky from 'ky'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient } from '@supabase/supabase-js'
+import ky from 'ky'
+import { useRuntimeConfig } from '@/config/app'
 import type { Database } from './supabase.types'
-import { useRuntimeConfig } from '../config/app'
 
 let supaClient: SupabaseClient<Database> = null as any
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import Faq from '@/components/pricing/Faq.vue'
-import { useRuntimeConfig } from '@/config/app'
-import Plans from '@/components/pricing/Plans.vue'
-import type { Database } from '@/types/supabase.types'
-import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
 import Calculator from '@/components/pricing/Calculator.vue'
+import Faq from '@/components/pricing/Faq.vue'
+import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
+import Plans from '@/components/pricing/Plans.vue'
+import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import type { Database } from '@/types/supabase.types'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   locale: Locales

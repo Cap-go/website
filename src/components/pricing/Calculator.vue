@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import type { Database } from '@/types/supabase.types'
-import translations from '@/services/translations'
 import type { Locales } from '@/services/locale'
+import translations from '@/services/translations'
+import type { Database } from '@/types/supabase.types'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   pricing: {

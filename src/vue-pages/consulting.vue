@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PluginMarketing from './plugin_marketing.vue'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import PluginMarketing from './plugin_marketing.vue'
 
 const props = defineProps<{
   locale: Locales

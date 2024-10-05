@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { initAffiliate } from '../services/reflio'
-import { openMessenger } from '../services/bento'
+import { openMessenger } from '@/services/bento'
+import { initAffiliate } from '@/services/reflio'
 
 onMounted(() => {
   initAffiliate()

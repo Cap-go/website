@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { marked } from 'marked'
-import { onMounted, ref } from 'vue'
-import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
-import { actions } from '@/config/plugins'
 import type { Action } from '@/config/plugins'
-import { getSlug } from '../services/github'
+import { actions } from '@/config/plugins'
+import { getSlug } from '@/services/github'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
+import { marked } from 'marked'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps<{
   locale: Locales

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import Blog from '@/components/Blog.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   Content?: any
