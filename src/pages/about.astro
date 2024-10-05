@@ -6,8 +6,8 @@ import translations from '@/services/translations'
 import VueAbout from '@/vue-pages/about.vue'
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
+
 const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const description = translations['about_capgo'][pageLocale]
 

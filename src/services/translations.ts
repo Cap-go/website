@@ -190,7 +190,7 @@ export default {
   tailored_configuration: { en: 'Tailored Configuration', fr: 'Configuration sur mesure' },
   our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: {
     en: 'Our team customizes the CI/CD setup to match your specific project requirements, ensuring optimal performance and efficiency.',
-    fr: 'Notre équipe personnalise la configuration CI/CD pour répondre aux exigences spécifiques de votre projet, garantissant des performances et une efficacité optimales.',
+    fr: 'Notre équipe personnalise la configuration CI/CD pour répondre aux exigences spécifiques de votre projet, garantissant ainsi des performances et une efficacité optimales.',
   },
   platform_independence: { en: 'Platform Independence', fr: 'Indépendance de la plateforme' },
   whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: {
@@ -218,7 +218,7 @@ export default {
   },
   launch_multiple_releases_per_week: {
     en: "With $1, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.",
-    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage concurrentiel.",
+    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81 % de l'efficacité. Ne manquez pas cet avantage concurrentiel.",
   },
   easily_combine_features_ci_cd: {
     en: 'Easily combine $1 features into your current CI/CD platform with our user-friendly CLI.',
@@ -258,7 +258,7 @@ export default {
   key_features: { en: 'Key Features', fr: 'Principales fonctionnalités' },
   deploy_changes_in_real_time: { en: 'Deploy changes in real-time', fr: 'Déployer les changements en temps réel' },
   version_control: { en: 'Version Control', fr: 'Contrôle des versions' },
-  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'applications sans effort" },
+  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'application sans effort" },
   rollback_capability: { en: 'Rollback Capability', fr: 'Capacité de restauration' },
   revert_to_previous_versions_if_needed: { en: 'Revert to previous versions if needed', fr: 'Revenir aux versions précédentes si nécessaire' },
   analytics: { en: 'Analytics', fr: 'Analytique' },
@@ -563,7 +563,7 @@ export default {
   documenting_apis: { en: 'Documenting APIs', fr: 'Documenter les API' },
   importance_of_documenting_apis: {
     en: 'It is important to document all public APIs and we want to do that inline with the code. This helps ensure that code and documentation are tightly coupled together.',
-    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire conformément au code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
+    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire en cohérence avec le code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
   },
   javascript_and_typescript: { en: 'JavaScript and TypeScript', fr: 'JavaScript et TypeScript' },
   jsdoc_documentation: {
@@ -623,7 +623,7 @@ export default {
   top_capgo_apps: { en: 'List of top app using Capgo', fr: 'Liste des meilleures applications utilisant Capgo' },
   cordova_power_aproximately_1_of_apps_on_google_play_store: {
     en: 'Cordova power aproximately $1% of apps on Google Play Store',
-    fr: 'Cordova alimente environ 1 % des applications sur Google Play Store',
+    fr: 'Cordova alimente environ 1 % des applications sur le Google Play Store',
   },
   top_flutter_apps: { en: 'List of top 100 app using Flutter on android store', fr: 'Liste des 100 meilleures applications utilisant Flutter sur la boutique Android' },
   top_kotlin_apps: { en: 'List of top 100 app using Kotlin on android store', fr: 'Liste des 100 meilleures applications utilisant Kotlin sur la boutique Android' },
@@ -638,7 +638,7 @@ export default {
   top_flutter_apps_title: { en: 'Top Flutter apps', fr: 'Meilleures applications Flutter' },
   flutter_power_aproximately_1_of_apps_on_google_play_store: {
     en: 'Flutter power aproximately $1% of apps on Google Play Store',
-    fr: 'Flutter alimente environ 1 % des applications sur Google Play Store',
+    fr: 'Flutter alimente environ 1 % des applications sur le Google Play Store',
   },
   top_kotlin_apps_title: { en: 'Top Kotlin apps', fr: 'Meilleures applications Kotlin' },
   kotlin_power_aproximately_1_of_apps_on_google_play_store: {

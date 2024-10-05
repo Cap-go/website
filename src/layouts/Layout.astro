@@ -10,6 +10,7 @@ import { pwaInfo } from 'virtual:pwa-info'
 const { content } = Astro.props
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
+const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
 <!doctype html>
@@ -20,9 +21,9 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
-      <Header locale={(Astro.currentLocale || defaultLocale) as Locales} client:load />
+      <Header locale={pageLocale} client:load />
       <slot />
-      <Footer locale={(Astro.currentLocale || defaultLocale) as Locales} client:load />
+      <Footer locale={pageLocale} client:load />
     </div>
     {
       !isLocalhost && (
