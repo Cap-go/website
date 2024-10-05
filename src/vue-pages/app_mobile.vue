@@ -8,7 +8,6 @@ const props = defineProps<{
 }>()
 
 const config = useRuntimeConfig()
-
 const brand = config.public.brand
 </script>
 

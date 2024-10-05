@@ -213,7 +213,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -484,7 +484,7 @@ top_cordova_apps: >-
 top_cordova_apps_title: Meilleures applications de Cordoue
 top_capgo_apps_title: Meilleures applications Capgo
 top_capgo_apps: Liste des meilleures applications utilisant Capgo
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android

@@ -1,3 +1,67 @@
+<script setup lang="ts">
+import { type Locales } from '@/services/locale'
+import { navigate } from 'astro:transitions/client'
+import { ref } from 'vue'
+import { toast } from 'vue-sonner'
+import { openMessenger } from '@/services/bento'
+import { getRemoteConfig, useSupabase } from '@/services/supabase'
+
+const props = defineProps<{
+  locale: Locales
+}>()
+
+const isLoading = ref(false)
+const email = ref('')
+const firstName = ref('')
+const lastName = ref('')
+const password = ref('')
+
+getRemoteConfig()
+const handleSubmit = async () => {
+  console.log('Form submitted', { email: email.value, firstName: firstName.value, lastName: lastName.value })
+  if (isLoading.value) return
+  const supabase = useSupabase()
+
+  const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
+  if (errorDeleted) console.error(errorDeleted)
+  if (!deleted) {
+    toast.error('Account is in error, please contact support')
+    openMessenger()
+    return
+  }
+
+  isLoading.value = true
+  const { data: user, error } = await supabase.auth.signUp({
+    email: email.value,
+    password: password.value,
+    options: {
+      data: {
+        first_name: firstName.value,
+        last_name: lastName.value,
+        activation: {
+          formFilled: true,
+          enableNotifications: false,
+          legal: false,
+          optForNewsletters: false,
+        },
+      },
+      emailRedirectTo: 'https://web.capgo.app/onboarding/verify_email',
+    },
+  })
+  try {
+    await window.Reflio.signup(email.value)
+  } catch (error) {
+    console.error(error)
+  }
+  if (error || !user) {
+    toast.error(error?.message || 'user not found')
+    return
+  }
+  isLoading.value = false
+  navigate(`/confirm_email?email=${encodeURI(email.value)}`)
+}
+</script>
+
 <template>
   <section class="flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
     <div class="relative w-full max-w-4xl">
@@ -136,66 +200,3 @@
     </div>
   </section>
 </template>
-<script lang="ts" setup>
-import { type Locales } from '@/services/locale'
-import { navigate } from 'astro:transitions/client'
-import { ref } from 'vue'
-import { toast } from 'vue-sonner'
-import { openMessenger } from '@/services/bento'
-import { getRemoteConfig, useSupabase } from '@/services/supabase'
-
-const props = defineProps<{
-  locale: Locales
-}>()
-
-const isLoading = ref(false)
-const email = ref('')
-const firstName = ref('')
-const lastName = ref('')
-const password = ref('')
-
-getRemoteConfig()
-const handleSubmit = async () => {
-  console.log('Form submitted', { email: email.value, firstName: firstName.value, lastName: lastName.value })
-  if (isLoading.value) return
-  const supabase = useSupabase()
-
-  const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
-  if (errorDeleted) console.error(errorDeleted)
-  if (!deleted) {
-    toast.error('Account is in error, please contact support')
-    openMessenger()
-    return
-  }
-
-  isLoading.value = true
-  const { data: user, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      data: {
-        first_name: firstName.value,
-        last_name: lastName.value,
-        activation: {
-          formFilled: true,
-          enableNotifications: false,
-          legal: false,
-          optForNewsletters: false,
-        },
-      },
-      emailRedirectTo: 'https://web.capgo.app/onboarding/verify_email',
-    },
-  })
-  try {
-    await window.Reflio.signup(email.value)
-  } catch (error) {
-    console.error(error)
-  }
-  if (error || !user) {
-    toast.error(error?.message || 'user not found')
-    return
-  }
-  isLoading.value = false
-  navigate(`/confirm_email?email=${encodeURI(email.value)}`)
-}
-</script>

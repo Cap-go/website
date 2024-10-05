@@ -13,14 +13,6 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
-  paygBase: {
-    type: Object,
-    required: true,
-  },
-  paygUnits: {
-    type: Object,
-    required: true,
-  },
   locale: {
     type: String,
     required: true,

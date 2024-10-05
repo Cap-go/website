@@ -7,7 +7,6 @@ const props = defineProps<{
 }>()
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl
-const brand = config.public.brand
 </script>
 
 <template>

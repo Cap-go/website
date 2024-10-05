@@ -1,12 +1,4 @@
-<template>
-  <a :href="url" target="_blank" rel="noopener noreferrer" class="m-3 flex flex-col items-center rounded-lg p-2 transition duration-300 hover:scale-105 hover:bg-gray-800">
-    <div :class="['mb-2 flex items-center justify-center overflow-hidden rounded-full bg-white', sizeClass]">
-      <img :src="logo" :alt="name" class="h-full w-full object-cover" />
-    </div>
-    <span class="text-center text-sm">{{ name }}</span>
-  </a>
-</template>
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -23,9 +15,9 @@ const props = defineProps({
     required: true,
   },
   size: {
-    type: Number,
     default: 20,
-    validator: (value) => [24, 20, 16, 14].includes(value),
+    type: Number,
+    validator: (value: number) => [24, 20, 16, 14].includes(value),
   },
 })
 
@@ -44,3 +36,12 @@ const sizeClass = computed(() => {
   }
 })
 </script>
+
+<template>
+  <a :href="url" target="_blank" rel="noopener noreferrer" class="m-3 flex flex-col items-center rounded-lg p-2 transition duration-300 hover:scale-105 hover:bg-gray-800">
+    <div :class="['mb-2 flex items-center justify-center overflow-hidden rounded-full bg-white', sizeClass]">
+      <img :src="logo" :alt="name" class="h-full w-full object-cover" />
+    </div>
+    <span class="text-center text-sm">{{ name }}</span>
+  </a>
+</template>

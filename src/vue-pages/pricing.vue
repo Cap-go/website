@@ -61,7 +61,7 @@ const payg_units = computed(() =>
           {{ translations['calculate_your_usage'][props.locale] }}
         </button>
       </p>
-      <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" :locale="props.locale" />
+      <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :locale="props.locale" />
       <div class="mt-8 flex items-center justify-center space-x-6 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
         <div class="flex items-center" @click="yearly = false">
           <input
@@ -85,15 +85,15 @@ const payg_units = computed(() =>
           <span class="ml-1 text-sm font-medium text-blue-600"> ({{ translations['save'][props.locale] }} 20%) </span>
         </div>
       </div>
-      <PayAsYouGo :locale="props.locale" v-if="payg_base" :yearly="yearly" :payg="payg" />
+      <PayAsYouGo :locale="props.locale" v-if="payg" :yearly="yearly" :payg="payg" />
       <Calculator
-        :locale="props.locale"
-        v-if="plansAll && payg_base"
-        class="bg-gray-50 pb-6 pt-3 sm:pb-10 sm:pt-6 lg:pb-14 lg:pt-10"
         :yearly="yearly"
         :pricing="plansAll"
         :payg-base="payg_base"
+        :locale="props.locale"
         :payg-units="payg_units"
+        v-if="plansAll && payg_base && payg_units"
+        class="bg-gray-50 pb-6 pt-3 sm:pb-10 sm:pt-6 lg:pb-14 lg:pt-10"
       />
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
         {{ translations['we_don_t_bill_you_automatically_until_your_confirmation'][props.locale] }}<br />

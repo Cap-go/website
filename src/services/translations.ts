@@ -258,7 +258,7 @@ export default {
   key_features: { en: 'Key Features', fr: 'Principales fonctionnalités' },
   deploy_changes_in_real_time: { en: 'Deploy changes in real-time', fr: 'Déployer les changements en temps réel' },
   version_control: { en: 'Version Control', fr: 'Contrôle des versions' },
-  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'application sans effort" },
+  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'applications sans effort" },
   rollback_capability: { en: 'Rollback Capability', fr: 'Capacité de restauration' },
   revert_to_previous_versions_if_needed: { en: 'Revert to previous versions if needed', fr: 'Revenir aux versions précédentes si nécessaire' },
   analytics: { en: 'Analytics', fr: 'Analytique' },
@@ -623,7 +623,7 @@ export default {
   top_capgo_apps: { en: 'List of top app using Capgo', fr: 'Liste des meilleures applications utilisant Capgo' },
   cordova_power_aproximately_1_of_apps_on_google_play_store: {
     en: 'Cordova power aproximately $1% of apps on Google Play Store',
-    fr: 'Cordova alimente environ 1 % des applications sur le Google Play Store',
+    fr: 'Cordova alimente environ 1 % des applications sur Google Play Store',
   },
   top_flutter_apps: { en: 'List of top 100 app using Flutter on android store', fr: 'Liste des 100 meilleures applications utilisant Flutter sur la boutique Android' },
   top_kotlin_apps: { en: 'List of top 100 app using Kotlin on android store', fr: 'Liste des 100 meilleures applications utilisant Kotlin sur la boutique Android' },
