@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { formatTime } from '@/config/app'
-import translations from '@/services/translations';
+import translations from '@/services/translations'
 
 const props = defineProps<{
   link: string

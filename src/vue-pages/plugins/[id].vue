@@ -62,7 +62,6 @@ const showReadme = ref(1)
     <div v-if="props.tutorial" id="tutorial" :class="showReadme !== 1 ? 'hidden' : 'block'" class="prose w-full px-10 lg:max-w-6xl xl:px-0" v-html="props.tutorial" />
   </div>
 </template>
-
 <style>
 img[src*='badge'] {
   width: auto;

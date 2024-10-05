@@ -68,7 +68,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <br /><span class="font-bold">{{ translations['within_minutes'][props.locale] }}</span
             ><br />
           </h2>
-
           <div class="relative inline-flex mt-10 group">
             <div
               class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
@@ -232,7 +231,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['apps'][props.locale] }}</p>
             <p class="text-base mt-0.5 text-gray-400">{{ translations['using_us_in_production'][props.locale] }}</p>
           </div>
-
           <div>
             <h3 class="font-bold text-7xl">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF44EC] to-[#44BCFF]">{{ stats.stars }}⭐️</span>
@@ -273,7 +271,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </h3>
               <p class="mt-4 text-base text-gray-600">Run <span class="text-gray-900 font-bold">npx @capgo/cli init</span> that it !</p>
             </div>
-
             <div>
               <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 2 </span>
@@ -285,7 +282,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 {{ translations['build_your_app_as_usual_then_send_with_the_cli'][props.locale] }}
               </p>
             </div>
-
             <div>
               <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span class="text-2xl font-bold text-gray-700"> 3 </span>
@@ -390,7 +386,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                         <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 14l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                       </svg>
                     </div>
-
                     <div class="ml-5">
                       <h3 class="text-lg font-bold text-gray-900 font-pj">
                         {{ translations['user_assignment'][props.locale] }}
@@ -409,7 +404,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                         />
                       </svg>
                     </div>
-
                     <div class="ml-5">
                       <h3 class="text-lg font-bold text-gray-900 font-pj">
                         {{ translations['seamless_deployment_process'][props.locale] }}
@@ -426,7 +420,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                         />
                       </svg>
                     </div>
-
                     <div class="ml-5">
                       <h3 class="text-lg font-bold text-gray-900 font-pj">{{ translations['simple_configuration_management'][props.locale] }}</h3>
                       <p class="text-lg font-normal text-gray-600 font-pj">

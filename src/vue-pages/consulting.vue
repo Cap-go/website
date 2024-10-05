@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import plugin_marketing from './plugin_marketing.vue'
+import PluginMarketing from './plugin_marketing.vue'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 
@@ -59,7 +59,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <div role="listitem">
                 <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
                   <p class="mt-0 mb-2 italic">
-                    {{ translations['capgo_not_only_has_incredibly_talented_engineers_but_they_also_share_my_passion_for_project_success'][props.locale] }} Having a
+                    Capgo not only has incredibly talented engineers, but they also share my passion for project success. Having a
                     <strong class="italic font-bold">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
                   </p>
                 </div>
@@ -93,7 +93,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="pb-10 my-0 font-sans text-6xl font-bold text-center text-slate-900">
-            Code review<br class="text-6xl text-center" style="line-height: 72px" />&amp;
+            {{ translations['code_review'][props.locale] }}<br class="text-6xl text-center" style="line-height: 72px" />&amp;
             <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">{{ translations['consulting'][props.locale] }}</span>
           </h2>
           <p class="mt-0 mb-24 text-slate-900">{{ translations['when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services'][props.locale] }}:<br /><br /></p>
@@ -375,11 +375,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="flex flex-col justify-center items-center text-center" style="padding-right: 3vw; padding-left: 3vw">
-          <h2 class="relative pb-10 my-0 text-6xl font-medium text-white" style="line-height: 72px">
-            Hire
-            <span class="text-indigo-600" style="line-height: 72px">CapacitorJS</span>
-            Consultants
-          </h2>
+          <h2
+            v-html="translations['hire_capacitorjs_consultants'][props.locale].replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)"
+            class="relative pb-10 my-0 text-6xl font-medium text-white"
+            style="line-height: 72px"
+          />
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
             target="_blank"
@@ -450,8 +450,8 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
     <div class="block relative bg-dark flex-col items-center my-auto max-w-none font-sans font-light leading-8 text-center text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
       <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
         <h2 class="pb-10 my-0 w-full text-6xl font-medium text-white" style="line-height: 72px">
-          Why work
-          <span class="text-center text-indigo-600" style="line-height: 72px">with us?</span>
+          {{ translations['why_work'][props.locale] }}
+          <span class="text-center text-indigo-600" style="line-height: 72px">{{ translations['with_us'][props.locale] }}</span>
         </h2>
       </div>
       <div class="md:grid grid-flow-row gap-6 leading-8 md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
@@ -484,7 +484,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="inline-block mt-0 mb-auto max-w-full align-middle border-0"
           />
           <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
-            Experienced in working on demanding
+            {{ translations['experienced_in_working_on_demanding'][props.locale] }}
             <a
               href="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
@@ -496,7 +496,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   all 0.3s ease 0s;
                 text-decoration: underline;
               "
-              >Cordova &amp; CapacitorJS projects</a
+              >{{ translations['cordova_capacitorjs_projects'][props.locale] }}</a
             >
           </p>
         </div>
@@ -533,22 +533,26 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             alt="Core contributors icon"
             class="inline-block mt-0 mb-auto max-w-full align-middle border-0"
           />
-          <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
-            Core Contributors to
-            <a
-              href="https://capacitorjs.com/"
-              title="Core contributors"
-              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
-              style="
+          <p
+            v-html="
+              translations['core_contributors_to_capacitorjs_and_ionic'][props.locale].replace(
+                'CapacitorJS',
+                `<a
+              href='https://capacitorjs.com/'
+              title='Core contributors'
+              class='font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600'
+              style='
                 transition:
                   color 450ms ease 0s,
                   all 0.3s ease 0s;
                 text-decoration: underline;
-              "
+              '
               >CapacitorJS</a
-            >
-            and Ionic
-          </p>
+            >`,
+              )
+            "
+            class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal"
+          />
         </div>
         <!-- <div class="flex flex-col justify-center items-center px-5 text-left">
       <img
@@ -594,7 +598,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
     </div> -->
       </div>
     </div>
-    <plugin_marketing />
+    <PluginMarketing :locale="props.locale" />
     <div
       class="block clear-both relative flex-col items-center my-auto max-w-none font-sans font-light leading-8 text-center text-slate-900 sm:max-w-none"
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
@@ -637,16 +641,14 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="block justify-center items-start pt-0 pb-10 pl-16 mt-5 mb-0 text-xs font-bold leading-4 text-black uppercase bg-no-repeat bg-auto"
             style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
           >
-            <strong class="text-left uppercase" style="letter-spacing: 1.7px">contact</strong><br class="text-left uppercase" style="letter-spacing: 1.7px" />
+            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{{ translations['contact'][props.locale] }}</strong
+            ><br class="text-left uppercase" style="letter-spacing: 1.7px" />
           </h2>
         </div>
         <div class="flex flex-col">
           <h3 class="pt-2 pb-10 my-0 mr-10 w-full font-sans text-6xl font-medium text-left text-white" style="line-height: 72px">
-            <strong class="text-6xl text-left" style="line-height: 72px">Let's work </strong
-            ><span class="text-6xl text-left text-indigo-600" style="line-height: 72px"><strong class="font-medium" style="line-height: 72px">together!</strong></span
-            ><br class="text-6xl text-left" style="line-height: 72px" />
+            {{ translations['lets_work_together'][props.locale] }}
           </h3>
-
           <p class="block mt-auto mb-2 font-sans text-lg font-light leading-8 text-left text-white whitespace-normal bg-transparent">
             {{ translations['need_help_with_cordova_or_capacitorjs_let_us_know'][props.locale] }}
           </p>

@@ -57,14 +57,12 @@ const payg_units = computed(() =>
         <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl font-pj">Plans that scale with your business</h1>
         <p class="mt-6 text-xl font-normal text-gray-600 font-pj">Enterprise-grade cloud that enhance Capacitor application functionality and security.</p>
       </div>
-
       <p class="mt-5 sm:mb-14 text-center">
         <button class="font-medium text-black border-b-1 border-blue-600 border-blue-600 hover:text-blue-600 focus:text-blue-600" @click="scrollToId('calculator')">
           Calculate your usage
         </button>
       </p>
       <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
-
       <div class="flex items-center justify-center space-x-6 mt-8 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
         <div class="flex items-center" @click="yearly = false">
           <input
@@ -76,7 +74,6 @@ const payg_units = computed(() =>
           />
           <label for="monthly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base"> Monthly Plan </label>
         </div>
-
         <div class="flex items-center" @click="yearly = true">
           <input
             id="yearly"
@@ -89,9 +86,7 @@ const payg_units = computed(() =>
           <span class="ml-1 text-sm font-medium text-blue-600"> (Save 20%) </span>
         </div>
       </div>
-
       <PayAsYouGo v-if="payg_base" :yearly="yearly" :payg="payg" />
-
       <Calculator
         v-if="plansAll && payg_base"
         class="pb-6 bg-gray-50 sm:pb-10 lg:pb-14 pt-3 sm:pt-6 lg:pt-10"
@@ -100,7 +95,6 @@ const payg_units = computed(() =>
         :payg-base="payg_base"
         :payg-units="payg_units"
       />
-
       <p class="max-w-md mx-auto text-base text-center text-gray-500 md:mt-16 font-pj mb-8">
         We don’t bill you automatically until your confirmation.<br />
         We don’t store or sell your data to anyone.

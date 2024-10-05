@@ -129,8 +129,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant ainsi des performances et une
-  efficacité optimales.
+  spécifiques de votre projet, garantissant des performances et une efficacité
+  optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -151,7 +151,10 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
+launch_multiple_releases_per_week: >-
+  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
+  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
+  concurrentiel.
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -218,14 +221,12 @@ resend: Renvoyer
 resending: Renvoi
 open_mailbox: Ouvrir la boîte aux lettres
 thank_you_for_choosing_capgo: Merci d'avoir choisi Capgo !
+code_review: Révision du code
 code_review_and_consulting: Révision du code et conseil
 consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps: >-
   Consultez vos applications Capacitor et révisez le code avec nous pour fournir
   des applications sans bug.
 book_a_consultation: Réservez une consultation
-capgo_not_only_has_incredibly_talented_engineers_but_they_also_share_my_passion_for_project_success: >-
-  Capgo compte non seulement des ingénieurs incroyablement talentueux, mais ils
-  partagent également ma passion pour la réussite des projets.
 having_a_true_partner_has_been_a_wonderful_experience_and_it_allows_us_to_move_much_faster_than_we_could_alone: >-
   Avoir un véritable partenaire a été une expérience merveilleuse, et cela nous
   permet d’avancer beaucoup plus vite que nous ne pourrions le faire seuls.
@@ -287,11 +288,10 @@ opportunity_for_juniors_to_develop_skills: Possibilité pour les juniors de dév
 help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers: >-
   Aidez vos développeurs juniors à approfondir leurs connaissances en leur
   donnant la possibilité de coopérer avec des développeurs plus expérimentés.
-why_work: Pourquoi travailler
-with_us: avec nous ?
 community_trusted: Approuvé par la communauté
 cordova_and_capacitorjs_expert: Expert Cordova & CapacitorJS
-experienced_in_working_on_demanding_cordova_and_capacitorjs_projects: Expérience de travail sur des projets Cordova et CapacitorJS exigeants
+experienced_in_working_on_demanding: Expérience dans le travail sur des sujets exigeants
+cordova_capacitorjs_projects: Projets Cordova et CapacitorJS
 creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
   Créateurs et mainteneurs de nombreuses bibliothèques Open Source utilisées par
   des millions de personnes
@@ -338,3 +338,15 @@ when_down_review: >-
   pendant quelques minutes), cela peut nuire à la satisfaction des utilisateurs
   et diminuer les revenus. Pour éviter de telles situations, examinez le code
   pour trouver des domaines à améliorer.
+why_work: Pourquoi travailler
+with_us: avec nous ?
+consulting_forged_plugins_community_embraced: Plugins forgés par le conseil, adoptés par la communauté
+consulting_forged_plugins_community_embraced_description: >-
+  Nos plugins Capacitor, nés de véritables défis clients, responsabilisent
+  désormais les développeurs du monde entier.
+each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community: >-
+  Chaque solution représente une réussite en matière de conseil, testée et
+  peaufinée pour la communauté.
+get_your_custom_plugin_built: Créez votre plugin personnalisé
+contact: Contact
+lets_work_together: Travaillons ensemble!

@@ -14,9 +14,14 @@ const data = load(enLocaleContent) as { [p: string]: string }
 for (const lang of newLocale) {
   const newData = { ...data }
   console.log(`Translating en.yml to ${lang}.yml...`)
-  for (const key in data) {
-    newData[key] = await translateText(data[key], lang)
-  }
+  await Promise.all(
+    Object.entries(data).map(async ([key, value]) => {
+      newData[key] = await translateText(value, lang)
+    })
+  )
+  // for (const key in data) {
+  //   newData[key] = await translateText(data[key], lang)
+  // }
   const newLocalePath = path.join(process.cwd(), 'locales', lang + '.yml')
   fs.writeFileSync(newLocalePath, dump(newData), 'utf8')
   console.log(`Wrote ${lang}.yml to locales directory.`)

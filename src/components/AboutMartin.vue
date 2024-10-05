@@ -9,9 +9,9 @@ const props = defineProps<{ locale: Locales }>()
 <template>
   <div class="max-w-7xl mx-auto py-8 px-4 md:px-0 text-[#a1a1aa] rounded-lg shadow-lg">
     <div class="flex flex-col md:flex-row items-start gap-8">
-      <img 
-        src="/martindonadieu.webp" 
-        :alt="translations['martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background'][props.locale]" 
+      <img
+        src="/martindonadieu.webp"
+        :alt="translations['martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background'][props.locale]"
         class="w-3/4 md:w-144 h-auto rounded-lg object-cover mx-auto md:mx-0"
       />
       <div class="flex-1 space-y-4">

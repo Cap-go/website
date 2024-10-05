@@ -49,7 +49,6 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">Capacitor power aproximately {{ usage }}% of apps on Google Play Store</p>
       </div>
-
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
         <div v-for="(app, index) in apps" :key="index" class="overflow-hidden bg-white rounded shadow">
           <div class="p-5">
@@ -57,7 +56,6 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
               <a :href="app.url" :title="app.title" class="block aspect-w-4 aspect-h-3">
                 <img class="object-cover w-full h-full rounded-lg" :src="app.icon" :alt="`app icon ${app.title}`" />
               </a>
-
               <div class="absolute top-4 left-4">
                 <span class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">
                   {{ renameCat(app.category) }}

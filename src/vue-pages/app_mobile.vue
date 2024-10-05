@@ -18,7 +18,9 @@ const brand = config.public.brand
       <div class="w-full md:w-1/2">
         <div class="pr-4">
           <h1 class="font-bold text-[2.504rem]">{{ translations['$1_app'][props.locale].replace('$1', brand) }}</h1>
-          <p class="text-lg text-gray-300 mt-8">{{ translations['run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team'][props.locale] }}</p>
+          <p class="text-lg text-gray-300 mt-8">
+            {{ translations['run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team'][props.locale] }}
+          </p>
           <p class="text-sm text-gray-300 mt-10 mb-20">{{ translations['test_version_in_the_sandbox_app_manage_version_and_channel'][props.locale] }}</p>
         </div>
         <div class="flex items-center space-x-10">

@@ -19,7 +19,6 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
           {{ description }}
         </h2>
       </div>
-
       <!-- check other top list cordova, react naitve, flutter -->
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
         <a

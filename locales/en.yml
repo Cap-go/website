@@ -155,10 +155,10 @@ resend: Resend
 resending: Resending
 open_mailbox: Open Mailbox
 thank_you_for_choosing_capgo: Thank you for choosing Capgo!
+code_review: Code Review
 code_review_and_consulting: Code Review and Consulting
 consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps: Consult your Capacitor apps and review the code with us to deliver bug-free apps.
 book_a_consultation: Book a consultation
-capgo_not_only_has_incredibly_talented_engineers_but_they_also_share_my_passion_for_project_success: Capgo not only has incredibly talented engineers, but they also share my passion for project success.
 having_a_true_partner_has_been_a_wonderful_experience_and_it_allows_us_to_move_much_faster_than_we_could_alone: Having a true partner has been a wonderful experience, and it allows us to move much faster than we could alone.
 when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: When it’s good to ask for Cordova and CapacitorJS consulting services
 review_before_passing_the_code_to_the_production: Review before passing the code to the production
@@ -195,11 +195,10 @@ lower_cost_of_fixing_bugs: Lower cost of fixing bugs
 the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it: The faster you find the bug, the cheaper you can fix it. If the bug is spotted during the development process, it’s easier and cheaper to remove it.
 opportunity_for_juniors_to_develop_skills: Opportunity for juniors to develop skills
 help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers: Help your junior developers extend their knowledge by giving them the opportunity to cooperate with more experienced developers.
-why_work: Why work
-with_us: with us?
 community_trusted: Community-trusted
 cordova_and_capacitorjs_expert: Cordova & CapacitorJS expert
-experienced_in_working_on_demanding_cordova_and_capacitorjs_projects: Experienced in working on demanding Cordova & CapacitorJS projects
+experienced_in_working_on_demanding: Experienced in working on demanding
+cordova_capacitorjs_projects: Cordova & CapacitorJS projects
 creators_and_maintainers_of_many_open_source_libraries_used_by_millions: Creators and maintainers of many Open Source libraries used by millions
 core_contributors_to_capacitorjs_and_ionic: Core Contributors to CapacitorJS and Ionic
 need_help_with_cordova_or_capacitorjs_let_us_know: Need help with Cordova or CapacitorJS? Let us know!
@@ -231,3 +230,11 @@ case_6: Case 6
 case_7: Case 7
 email_is_required: Email is required
 when_down_review: When an application works too slow or gets down (even for a few minutes), it can damage users’ satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.
+why_work: Why work
+with_us: with us?
+consulting_forged_plugins_community_embraced: Consulting-Forged Plugins, Community Embraced
+consulting_forged_plugins_community_embraced_description: Our Capacitor plugins, born from real client challenges, now empower developers worldwide.
+each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community: Each solution represents a consulting success story, battle-tested and refined for the community.
+get_your_custom_plugin_built: Get Your Custom Plugin Built
+contact: Contact
+lets_work_together: Let's work together!

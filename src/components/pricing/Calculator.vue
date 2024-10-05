@@ -87,7 +87,6 @@ function roundNumber(number: number) {
           Enter your estimated monthly active users, updates per month and update size to get your estimated monthly cost.
         </p>
       </div>
-
       <div class="relative mt-6 lg:mt-12 lg:max-w-5xl lg:mx-auto">
         <div class="absolute -inset-2">
           <div
@@ -95,7 +94,6 @@ function roundNumber(number: number) {
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-
         <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-y-12 md:grid-cols-3 rounded-2xl gap-x-20">
           <div class="flex flex-col items-center">
             <p class="calc-label">MAU<br /><span class="text-[0.6rem]">Monthly Active Users</span></p>
@@ -105,7 +103,6 @@ function roundNumber(number: number) {
               class="break-all w-full p-2 cursor-text hover:bg-gray-800 border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
             />
           </div>
-
           <div class="flex flex-col items-center">
             <p class="calc-label">Updates<br />by month</p>
             <input
@@ -114,7 +111,6 @@ function roundNumber(number: number) {
               class="break-all w-full p-2 hover:bg-gray-800 cursor-text border-b bg-gray-900 border-gray-300 text-3xl text-center font-bold lg:mt-3"
             />
           </div>
-
           <div class="flex flex-col items-center">
             <p class="calc-label">Updates Size<br />(MB)</p>
             <input

@@ -32,9 +32,8 @@ function updateCalc(plan: any) {
           <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full w-9 h-9">🔥</div>
           <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">Pay as you go</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">{{numberWithSpaces(updateCalc(payg))}} Live Updates/mo. No commitments.</p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">{{ numberWithSpaces(updateCalc(payg)) }} Live Updates/mo. No commitments.</p>
       </div>
-
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">
           <div
@@ -42,7 +41,6 @@ function updateCalc(plan: any) {
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-
         <div class="relative overflow-hidden bg-white border border-gray-200 rounded-2xl">
           <div class="p-6 md:px-10 md:py-9">
             <div class="grid items-center grid-cols-1 md:grid-cols-7 gap-y-9 md:gap-y-0">
@@ -61,7 +59,6 @@ function updateCalc(plan: any) {
                     </p>
                   </div>
                 </div>
-
                 <div class="flex items-center">
                   <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,7 +78,6 @@ function updateCalc(plan: any) {
                     </p>
                   </div>
                 </div>
-
                 <div class="flex items-center">
                   <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,7 +98,6 @@ function updateCalc(plan: any) {
                   </div>
                 </div>
               </div>
-
               <div>
                 <div class="hidden md:block">
                   <svg class="w-4 h-auto mx-auto text-gray-300" viewBox="0 0 16 172" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +127,6 @@ function updateCalc(plan: any) {
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 144)" />
                   </svg>
                 </div>
-
                 <div class="block md:hidden">
                   <svg class="w-auto h-4 mx-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)" />
@@ -179,7 +173,6 @@ function updateCalc(plan: any) {
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Create anything you want</p>
                   </div>
                 </div>
-
                 <div class="flex items-center">
                   <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,7 +189,6 @@ function updateCalc(plan: any) {
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">Get an answer in less than 6h</p>
                   </div>
                 </div>
-
                 <div class="flex items-center">
                   <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -218,10 +210,8 @@ function updateCalc(plan: any) {
           </div>
         </div>
       </div>
-
       <div class="mt-8 text-center">
         <p class="text-base font-medium text-gray-600 font-pj">All our features are available to all users</p>
-
         <div class="flex items-end justify-center mt-10">
           <p class="text-lg font-bold text-gray-400 font-pj">$</p>
           <p class="text-6xl font-bold text-gray-900 font-pj">

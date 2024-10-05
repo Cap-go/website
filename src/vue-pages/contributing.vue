@@ -64,8 +64,8 @@ const props = defineProps<{
       </li>
       <li>
         <p>
-          When you work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all
-          contributions, but not all proposed features are getting accepted. We don&#39;t want you to spend hours working on a code that might not be accepted.
+          When you work on a new feature, create an issue and discuss with other contributors <em>before</em> you start working on the feature; we appreciate all contributions, but
+          not all proposed features are getting accepted. We don&#39;t want you to spend hours working on a code that might not be accepted.
         </p>
       </li>
       <li>

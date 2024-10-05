@@ -6,28 +6,27 @@
     <span class="text-sm text-center">{{ name }}</span>
   </a>
 </template>
-
 <script setup>
 import { computed } from 'vue'
 
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   logo: {
     type: String,
-    required: true
+    required: true,
   },
   url: {
     type: String,
-    required: true
+    required: true,
   },
   size: {
     type: Number,
     default: 20,
-    validator: value => [24, 20, 16, 14].includes(value)
-  }
+    validator: (value) => [24, 20, 16, 14].includes(value),
+  },
 })
 
 const sizeClass = computed(() => {

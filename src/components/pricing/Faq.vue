@@ -9,7 +9,6 @@ import { openMessenger } from '../../services/bento'
         <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Questions & Answers</h2>
         <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-300">Explore the common questions and answers about Capgo</p>
       </div>
-
       <div class="grid grid-cols-1 mt-12 md:mt-20 md:grid-cols-2 gap-y-16 gap-x-20">
         <div class="flex items-start">
           <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
@@ -27,7 +26,6 @@ import { openMessenger } from '../../services/bento'
             </p>
           </div>
         </div>
-
         <div class="flex items-start">
           <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
@@ -40,7 +38,6 @@ import { openMessenger } from '../../services/bento'
             </p>
           </div>
         </div>
-
         <div class="flex items-start">
           <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
@@ -53,7 +50,6 @@ import { openMessenger } from '../../services/bento'
             </p>
           </div>
         </div>
-
         <div class="flex items-start">
           <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
