@@ -1,14 +1,14 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import VueAbout from '@/vue-pages/about.vue'
 
 const config = useRuntimeConfig()
 
 const brand = config.public.brand
-const description = translations['about_capgo'][Astro.currentLocale || defaultLocale]
+const description = translations['about_capgo'][(Astro.currentLocale || defaultLocale) as Locales]
 
 const content = {
   description,
@@ -17,4 +17,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueAbout locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VueAbout locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>

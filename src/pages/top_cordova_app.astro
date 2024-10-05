@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcordovaapp from '@/vue-pages/top_cordova_app.vue'
 
 const title = 'Capgo | Top Cordova apps'
@@ -12,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopcordovaapp locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VueTopcordovaapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>

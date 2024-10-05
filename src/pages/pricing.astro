@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import VuePricing from '@/vue-pages/pricing.vue'
 
 const title = 'Capgo pricing'
@@ -12,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VuePricing locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VuePricing locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>

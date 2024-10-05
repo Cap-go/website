@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VueEula from '@/vue-pages/eula.vue'
 
 import { useRuntimeConfig } from '@/config/app'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
 
@@ -18,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueEula locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VueEula locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>

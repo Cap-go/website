@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcapacitorapp from '@/vue-pages/top_capacitor_app.vue'
 
 const title = 'Capgo | Top Capacitor apps'
@@ -12,4 +12,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueTopcapacitorapp locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VueTopcapacitorapp locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>

@@ -1,7 +1,7 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import VueContributing from '@/vue-pages/contributing.vue'
 
 const config = useRuntimeConfig()
@@ -18,4 +18,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueContributing locale={Astro.currentLocale || defaultLocale} client:load /></Layout>
+<Layout content={content}><VueContributing locale={(Astro.currentLocale || defaultLocale) as Locales} client:load /></Layout>
