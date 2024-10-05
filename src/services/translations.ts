@@ -153,7 +153,7 @@ export default {
   tailored_configuration: { en: 'Tailored Configuration', fr: 'Configuration sur mesure' },
   our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: {
     en: 'Our team customizes the CI/CD setup to match your specific project requirements, ensuring optimal performance and efficiency.',
-    fr: 'Notre équipe personnalise la configuration CI/CD pour répondre aux exigences spécifiques de votre projet, garantissant des performances et une efficacité optimales.',
+    fr: 'Notre équipe personnalise la configuration CI/CD pour répondre aux exigences spécifiques de votre projet, garantissant ainsi des performances et une efficacité optimales.',
   },
   platform_independence: { en: 'Platform Independence', fr: 'Indépendance de la plateforme' },
   whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: {
@@ -181,7 +181,7 @@ export default {
   },
   launch_multiple_releases_per_week: {
     en: "With $1, you can launch multiple releases per week with an impressive 81% increase in efficiency. Don't miss out on this competitive advantage.",
-    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage concurrentiel.",
+    fr: "Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81 % de l'efficacité. Ne manquez pas cet avantage concurrentiel.",
   },
   easily_combine_features_ci_cd: {
     en: 'Easily combine $1 features into your current CI/CD platform with our user-friendly CLI.',
@@ -221,7 +221,7 @@ export default {
   key_features: { en: 'Key Features', fr: 'Principales fonctionnalités' },
   deploy_changes_in_real_time: { en: 'Deploy changes in real-time', fr: 'Déployer les changements en temps réel' },
   version_control: { en: 'Version Control', fr: 'Contrôle des versions' },
-  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'application sans effort" },
+  manage_multiple_app_versions_effortlessly: { en: 'Manage multiple app versions effortlessly', fr: "Gérez plusieurs versions d'applications sans effort" },
   rollback_capability: { en: 'Rollback Capability', fr: 'Capacité de restauration' },
   revert_to_previous_versions_if_needed: { en: 'Revert to previous versions if needed', fr: 'Revenir aux versions précédentes si nécessaire' },
   analytics: { en: 'Analytics', fr: 'Analytique' },
@@ -526,7 +526,7 @@ export default {
   documenting_apis: { en: 'Documenting APIs', fr: 'Documenter les API' },
   importance_of_documenting_apis: {
     en: 'It is important to document all public APIs and we want to do that inline with the code. This helps ensure that code and documentation are tightly coupled together.',
-    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire conformément au code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
+    fr: 'Il est important de documenter toutes les API publiques et nous souhaitons le faire en cohérence avec le code. Cela permet de garantir que le code et la documentation sont étroitement liés.',
   },
   javascript_and_typescript: { en: 'JavaScript and TypeScript', fr: 'JavaScript et TypeScript' },
   jsdoc_documentation: {
@@ -584,7 +584,7 @@ export default {
   top_cordova_apps_title: { en: 'Top Cordova apps', fr: 'Meilleures applications de Cordoue' },
   cordova_power_aproximately_1_of_apps_on_google_play_store: {
     en: 'Cordova power aproximately $1% of apps on Google Play Store',
-    fr: 'Cordova alimente environ 1 % des applications sur Google Play Store',
+    fr: 'Cordova alimente environ 1 % des applications sur le Google Play Store',
   },
   top_flutter_apps: { en: 'List of top 100 app using Flutter on android store', fr: 'Liste des 100 meilleures applications utilisant Flutter sur la boutique Android' },
   top_kotlin_apps: { en: 'List of top 100 app using Kotlin on android store', fr: 'Liste des 100 meilleures applications utilisant Kotlin sur la boutique Android' },
@@ -686,4 +686,25 @@ export default {
   all_our_features_are_available_to_all_users: { en: 'All our features are available to all users', fr: 'Toutes nos fonctionnalités sont disponibles pour tous les utilisateurs' },
   month: { en: 'Month', fr: 'Mois' },
   get_started_for_free: { en: 'Get started for FREE', fr: 'Commencez GRATUITEMENT' },
+  most_popular: { en: 'Most popular', fr: 'Le plus populaire' },
+  '14_days_free_trial': { en: '14 days free trial', fr: "14 jours d'essai gratuit" },
+  billed_annually_at: { en: 'Billed annually at', fr: 'Facturé annuellement à' },
+  you_get: { en: 'You get', fr: 'Vous obtenez' },
+  live_updates_per_month: { en: 'Live Updates/month', fr: 'Mises à jour en direct/mois' },
+  of_bandwidth: { en: 'of Bandwidth', fr: 'de bande passante' },
+  of_storage: { en: 'of Storage', fr: 'de stockage' },
+  priority_support_for_all_capgo_plugins: {
+    en: "Priority support for all Capgo plugins <span class='font-bold'>(30+ plugins)</span>",
+    fr: "Prise en charge prioritaire de tous les plugins Capgo <span class='font-bold'>(plus de 30 plugins)</span>",
+  },
+  for_the_pay_as_you_go_plan: { en: 'for the Pay-as-you-go plan', fr: 'pour le plan Pay-as-you-go' },
+  per_added_user: { en: 'per added user', fr: 'par utilisateur ajouté' },
+  included: { en: 'included', fr: 'compris' },
+  per_added_gb: { en: 'per added GB', fr: 'par Go ajouté' },
+  updates: { en: 'Updates', fr: 'Mises à jour' },
+  updates_explanation: { en: 'Part of the Bandwidth price calculation', fr: 'Une partie du calcul du prix de la bande passante' },
+  'plan.free.desc': { en: 'Best for experimenting without worries', fr: 'Idéal pour expérimenter sans soucis' },
+  'plan.solo.desc': { en: 'Best for independent developers', fr: 'Idéal pour les développeurs indépendants' },
+  'plan.maker.desc': { en: 'Best for small business owners', fr: 'Idéal pour les propriétaires de petites entreprises' },
+  'plan.team.desc': { en: 'Best for medium enterprises', fr: 'Idéal pour les moyennes entreprises' },
 }

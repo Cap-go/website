@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import Faq from '@/components/pricing/Faq.vue'
 import { useRuntimeConfig } from '@/config/app'
 import Plans from '@/components/pricing/Plans.vue'
-import type { Database } from '../types/supabase.types'
+import type { Database } from '@/types/supabase.types'
 import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
 import Calculator from '@/components/pricing/Calculator.vue'
 import { type Locales } from '@/services/locale'
@@ -61,15 +61,15 @@ const payg_units = computed(() =>
           {{ translations['calculate_your_usage'][props.locale] }}
         </button>
       </p>
-      <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" />
+      <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :payg-base="payg_base" :payg-units="payg_units" :locale="props.locale" />
       <div class="mt-8 flex items-center justify-center space-x-6 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
         <div class="flex items-center" @click="yearly = false">
           <input
             id="monthly"
             type="radio"
             name="pricing-plans"
-            class="h-4 w-4 border border-gray-200 text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
             :checked="!yearly"
+            class="h-4 w-4 border border-gray-200 text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
           <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base"> {{ translations['monthly_plan'][props.locale] }} </label>
         </div>

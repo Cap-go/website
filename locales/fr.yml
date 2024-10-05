@@ -129,8 +129,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant des performances et une efficacité
-  optimales.
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -151,10 +151,7 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: >-
-  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
-  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
-  concurrentiel.
+launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -182,7 +179,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -402,7 +399,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -451,7 +448,7 @@ top_cordova_apps: >-
   Liste des 100 meilleures applications utilisant Cordova sur la boutique
   Android
 top_cordova_apps_title: Meilleures applications de Cordoue
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android
@@ -542,3 +539,23 @@ add_your_own_domain: Ajoutez votre propre domaine
 all_our_features_are_available_to_all_users: Toutes nos fonctionnalités sont disponibles pour tous les utilisateurs
 month: Mois
 get_started_for_free: Commencez GRATUITEMENT
+most_popular: Le plus populaire
+14_days_free_trial: 14 jours d'essai gratuit
+billed_annually_at: Facturé annuellement à
+you_get: Vous obtenez
+live_updates_per_month: Mises à jour en direct/mois
+of_bandwidth: de bande passante
+of_storage: de stockage
+priority_support_for_all_capgo_plugins: >-
+  Prise en charge prioritaire de tous les plugins Capgo <span
+  class='font-bold'>(plus de 30 plugins)</span>
+for_the_pay_as_you_go_plan: pour le plan Pay-as-you-go
+per_added_user: par utilisateur ajouté
+included: compris
+per_added_gb: par Go ajouté
+updates: Mises à jour
+updates_explanation: Une partie du calcul du prix de la bande passante
+plan.free.desc: Idéal pour expérimenter sans soucis
+plan.solo.desc: Idéal pour les développeurs indépendants
+plan.maker.desc: Idéal pour les propriétaires de petites entreprises
+plan.team.desc: Idéal pour les moyennes entreprises
