@@ -9,7 +9,7 @@ posts = posts.filter((i) => i.frontmatter.published).sort((a, b) => (new Date(a.
 
 const config = useRuntimeConfig()
 
-const content: { title?: string; description?: string; image?: string; author?: string } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (config.public.blog_title) content['title'] = config.public.blog_title
 

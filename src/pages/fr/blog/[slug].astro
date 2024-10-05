@@ -40,7 +40,7 @@ const config = useRuntimeConfig()
 
 const markdown = data.compiledContent()
 
-const content: { title?: string; description?: string; image?: string; author?: string } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
 
@@ -53,7 +53,6 @@ if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Cap
 const dateModified = new Date(data.frontmatter.updated_at).toISOString()
 const datePublished = new Date(data.frontmatter.created_at).toISOString()
 
-// @ts-ignore
 content['ldJSON'] = {
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
