@@ -1,12 +1,11 @@
 ---
-import '@/css/global.css'
-import SEO from '@/components/SEO.astro'
-// @ts-ignore
-import { pwaInfo } from 'virtual:pwa-info'
-import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
 import MessengerAffiliateVue from '@/components/MessengerAffliate.vue'
+import SEO from '@/components/SEO.astro'
+import '@/css/global.css'
 import { defaultLocale, type Locales } from '@/services/locale'
+import { pwaInfo } from 'virtual:pwa-info'
 
 const { content } = Astro.props
 
