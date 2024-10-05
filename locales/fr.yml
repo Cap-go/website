@@ -448,3 +448,26 @@ capacitor_power_aproximately_1_of_apps_on_google_play_store: "Le condensateur al
 downloads: Téléchargements
 see_in_play_store: Voir dans le Play Store
 top_app_using_capgo_cloud_or_self_hosted: Liste des meilleures applications utilisant le cloud Capgo ou auto-hébergées
+top_cordova_apps: >-
+  Liste des 100 meilleures applications utilisant Cordova sur la boutique
+  Android
+top_cordova_apps_title: Meilleures applications de Cordoue
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+top_flutter_apps: >-
+  Liste des 100 meilleures applications utilisant Flutter sur la boutique
+  Android
+top_kotlin_apps: Liste des 100 meilleures applications utilisant Kotlin sur la boutique Android
+top_native_script_apps: >-
+  Liste des 100 meilleures applications utilisant Native Script sur la boutique
+  Android
+top_react_native_apps: >-
+  Liste des 100 meilleures applications utilisant React Native sur la boutique
+  Android
+top_flutter_apps_title: Meilleures applications Flutter
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
+top_kotlin_apps_title: Meilleures applications Kotlin
+kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
+top_native_script_apps_title: Principales applications de script natif
+native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
+top_react_native_apps_title: Principales applications React Native
+react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store

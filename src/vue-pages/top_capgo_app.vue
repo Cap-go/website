@@ -4,6 +4,7 @@ import { useRuntimeConfig } from '@/config/app'
 import type { Database } from '../types/supabase.types'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { renameCat, shortNumber } from '@/services/misc'
 
 const props = defineProps<{
   locale: Locales
@@ -14,19 +15,6 @@ const description = translations['top_app_using_capgo_cloud_or_self_hosted'][pro
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 const usage = ref(7.21)
 
-function shortNumber(number: number) {
-  if (number > 1000000000) return `${(number / 1000000).toFixed(1)}B`
-
-  if (number > 1000000) return `${(number / 1000000).toFixed(1)}M`
-
-  if (number > 1000) return `${(number / 1000).toFixed(1)}k`
-
-  return `${number}`
-}
-
-function renameCat(text: string) {
-  return text.replaceAll('_', ' ')
-}
 const others = ref(['top_cordova_app', 'top_react_native_app', 'top_flutter_app', 'top_capacitor_app'])
 
 fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => {
@@ -48,7 +36,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
           {{ description }}
         </h2>
         <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">
-          {{ translations['capacitor_power_aproximately_1_of_apps_on_google_play_store'][props.locale].replace('$1', usage) }}
+          {{ translations['capacitor_power_aproximately_1_of_apps_on_google_play_store'][props.locale].replace('$1', usage.toString()) }}
         </p>
       </div>
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
@@ -108,7 +96,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`).then((res) => 
           </div>
           <div class="w-full px-4 pt-2 sm:pt-0">
             <p class="text-lg font-bold capitalize">
-              {{ l.replaceAll('_', ' ') }}
+              {{ renameCat(l) }}
             </p>
           </div>
         </a>

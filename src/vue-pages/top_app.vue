@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { renameCat } from '@/services/misc';
 
 const props = defineProps<{
   locale: Locales
@@ -33,7 +34,7 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
           </div>
           <div class="w-full px-4 pt-2 sm:pt-0">
             <p class="text-lg font-bold capitalize">
-              {{ l.replaceAll('_', ' ') }}
+              {{ renameCat(l) }}
             </p>
           </div>
         </a>

@@ -4,29 +4,16 @@ import { useRuntimeConfig } from '@/config/app'
 import type { Database } from '../types/supabase.types'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { renameCat, shortNumber } from '@/services/misc'
 
 const props = defineProps<{
   locale: Locales
 }>()
 const config = useRuntimeConfig()
-const description = 'List of top 100 app using Native Script on android store'
+const description = translations['top_native_script_apps'][props.locale]
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
 const usage = ref(0.13)
-
-function shortNumber(number: number) {
-  if (number > 1000000000) return `${(number / 1000000).toFixed(1)}B`
-
-  if (number > 1000000) return `${(number / 1000000).toFixed(1)}M`
-
-  if (number > 1000) return `${(number / 1000).toFixed(1)}k`
-
-  return `${number}`
-}
-
-function renameCat(text: string) {
-  return text.replaceAll('_', ' ')
-}
 
 const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 
@@ -44,11 +31,13 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Top Native Script apps</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['top_native_script_apps_title'][props.locale] }}</h1>
         <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">Native Script power aproximately {{ usage }}% of apps on Google Play Store</p>
+        <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-gray-200">
+          {{ translations['native_script_power_aproximately_1_of_apps_on_google_play_store'][props.locale].replace('$1', usage.toString()) }}
+        </p>
       </div>
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <div v-for="(app, index) in apps" :key="index" class="overflow-hidden rounded bg-white shadow">
@@ -68,7 +57,9 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
                 </span>
               </div>
             </div>
-            <span class="mt-6 block text-sm font-semibold uppercase tracking-widest text-gray-500"> {{ shortNumber(app.installs) }} Downloads </span>
+            <span class="mt-6 block text-sm font-semibold uppercase tracking-widest text-gray-500">
+              {{ shortNumber(app.installs) }} {{ translations['downloads'][props.locale] }}
+            </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
@@ -79,7 +70,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
               :title="app.title"
               class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
             >
-              See in Play store
+              {{ translations['see_in_play_store'][props.locale] }}
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"
@@ -91,7 +82,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
           </div>
         </div>
       </div>
-      <!-- check other top list cordova, react naitve, flutter -->
+
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <a
           v-for="l in others"
@@ -106,7 +97,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`).then((r
           </div>
           <div class="w-full px-4 pt-2 sm:pt-0">
             <p class="text-lg font-bold capitalize">
-              {{ l.replaceAll('_', ' ') }}
+              {{ renameCat(l) }}
             </p>
           </div>
         </a>

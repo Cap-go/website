@@ -10,6 +10,7 @@ import { chatLoader } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { posthogLoader } from '@/services/posthog'
 import translations from '@/services/translations'
+import { shortNumber } from '@/services/misc'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
@@ -30,12 +31,6 @@ onMounted(() => {
   posthogLoader()
   window.addEventListener('scroll', handleScroll)
 })
-
-function shortNumber(number: number) {
-  if (number > 1000000) return `${(number / 1000000).toFixed(1)}M`
-  if (number > 1000) return `${(number / 1000).toFixed(1)}k`
-  return `${number}`
-}
 
 const stats = reactive({
   stars: shortNumber(499),
