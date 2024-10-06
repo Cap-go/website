@@ -163,8 +163,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant ainsi des performances et une
-  efficacité optimales.
+  spécifiques de votre projet, garantissant des performances et une efficacité
+  optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -323,7 +323,7 @@ help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunit
   Aidez vos développeurs juniors à approfondir leurs connaissances en leur
   donnant la possibilité de coopérer avec des développeurs plus expérimentés.
 community_trusted: Approuvé par la communauté
-cordova_and_capacitorjs_expert: Expert Cordova & CapacitorJS
+cordova_and_capacitorjs_expert: Expert Cordova et CapacitorJS
 experienced_in_working_on_demanding: Expérience dans le travail sur des sujets exigeants
 cordova_capacitorjs_projects: Projets Cordova et CapacitorJS
 creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
@@ -499,7 +499,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif
@@ -971,7 +971,7 @@ support_policy_not_covered_intro: "Les services d'assistance technique de Capgo 
 support_policy_not_covered_1: Débogage général des applications utilisateur
 support_policy_not_covered_2: Réécriture du code de l'application pour la compatibilité avec Capgo
 support_policy_not_covered_3: >-
-  Modification et/ou correctif de logiciels tiers ou Open Source pour la
+  Modification et/ou correction de logiciels tiers ou Open Source pour la
   compatibilité Capgo
 support_policy_billing_support: >-
   L’assistance à la facturation et à la gestion des comptes est disponible pour
@@ -1062,9 +1062,9 @@ external_links_disclaimer_text: >-
   Société.
 external_links_no_guarantee: >-
   Veuillez noter que la Société ne garantit pas l'exactitude, la pertinence,
-  l'actualité ou l'exhaustivité des informations contenues dans ces sites Web
+  l'actualité ou l'exhaustivité des informations présentes sur ces sites Web
   externes.
-errors_and_omissions_disclaimer_title: Avis de non-responsabilité concernant les erreurs et omissions
+errors_and_omissions_disclaimer_title: Avis de non-responsabilité relatif aux erreurs et omissions
 errors_and_omissions_disclaimer_text: >-
   Les informations fournies par le Service sont uniquement à titre indicatif sur
   des questions d'intérêt. Même si la Société prend toutes les précautions pour
@@ -1131,3 +1131,68 @@ company_no_liability_for_decisions: >-
 contact_us_title: Contactez-nous
 contact_us_text: "Si vous avez des questions concernant cette clause de non-responsabilité, vous pouvez nous contacter\_:"
 contact_us_website: 'En visitant cette page du site :'
+trust_capgo_security: Capgo Sécurité.
+trust_move_forward_with_confidence: >-
+  Avancez en toute confiance. Nous offrons plusieurs niveaux de protection pour
+  assurer la sécurité de votre propriété intellectuelle et de vos données
+  sensibles.
+trust_product_security: Sécurité du produit
+trust_source_code_protection: Protection du code source
+trust_source_code_vulnerabilities: >-
+  Le code source est analysé en permanence pour détecter les vulnérabilités à
+  l’aide de Sink Inspector.
+trust_data_security: Sécurité des données
+trust_encryption_communication: Communication cryptée
+trust_data_traffic_encrypted: Tout le trafic de données est crypté via TLS et HTTPS.
+trust_source_code_encryption: Cryptage du code source
+trust_source_code_encrypted_in_transit: Le code source est toujours crypté en transit via TLS et HTTPS.
+trust_data_backup: Sauvegarde des données
+trust_data_backup_policy: >-
+  Capgo maintient une politique de sauvegarde des données qui suit les
+  meilleures pratiques de l'industrie.
+trust_network_security: Sécurité du réseau
+trust_architecture: Architecture
+trust_architecture_layers: L'architecture de Capgo se compose de plusieurs couches réseau sécurisées.
+trust_application_security: Sécurité des applications
+trust_secure_coding: Codage sécurisé
+trust_code_review: >-
+  Toute modification apportée à la production doit d’abord être examinée et
+  approuvée. La refactorisation du code doit respecter les principes de codage
+  sécurisé et les meilleures pratiques de l'industrie, telles que celles
+  définies par l'OWASP.
+trust_site_reliability: Fiabilité du site
+trust_serverless_infrastructure: "Capgo utilise une infrastructure 100\_% sans serveur, atteignant historiquement une disponibilité de 99,9\_%. Voir le statut ici"
+trust_application_penetration_testing: Tests d'intrusion des applications
+trust_third_party_testing: >-
+  Capgo est régulièrement testé par des testeurs d'intrusion tiers pour garantir
+  la sécurité de l'application.
+trust_business_security: Sécurité des entreprises
+trust_background_checks: Vérification des antécédents
+trust_access_to_production_database: >-
+  Capgo n'a pas d'employés et n'en aura jamais, une seule personne, Martin
+  Donadieu, a accès à la base de données de production. Les contributeurs
+  indépendants ou open source ne sont pas autorisés à accéder à la base de
+  données de production.
+trust_security_awareness: Sensibilisation à la sécurité
+trust_security_training: >-
+  Le fondateur de Capgo suit une formation de sensibilisation à la sécurité, aux
+  meilleures pratiques et à la réponse aux incidents.
+trust_security_coding_education: Formation au codage de sécurité
+trust_open_source_security: >-
+  Capgo étant 100% open-source, est amené à améliorer la sécurité auprès de la
+  communauté.
+trust_partner_management: Gestion des partenaires
+trust_soc2_certification: >-
+  Capgo exige que tous les fournisseurs tiers critiques obtiennent au minimum la
+  certification SOC 2 et vérifie les certifications chaque année.
+trust_incident_response: Réponse aux incidents
+trust_dedicated_incident_response: Capgo est prêt avec une personne dédiée à la réponse aux incidents.
+trust_incident_response_policy_plan: Politique et plan de réponse aux incidents
+trust_incident_response_policy: >-
+  Une politique de réponse aux incidents est maintenue et gérée par une personne
+  dédiée à la réponse aux incidents chez Capgo.
+trust_communication: Communication
+trust_system_wide_issues_notification: >-
+  En cas de problèmes à l'échelle du système, les clients sont informés par leur
+  e-mail. L'état du système de Capgo et les incidents de réseau et de sécurité
+  sont publiés sur https://status.capgo.app.
