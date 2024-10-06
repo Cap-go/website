@@ -163,8 +163,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant des performances et une efficacité
-  optimales.
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -499,7 +499,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif
@@ -637,11 +637,12 @@ aup_no_email_abuse_desc: >-
   Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
   d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
   ou sollicitations (comme le « spam »), y compris la publicité commerciale et
-  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
-  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
-  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
-  envoyés par un autre fournisseur de services Internet si ces messages violent
-  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
+  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
+  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
+  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
+  aux messages envoyés par un autre fournisseur de services Internet si ces
+  messages violent cette politique ou la politique d'utilisation acceptable de
+  ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -836,7 +837,7 @@ credit_requests_payment_desc: >-
   constitueront le seul et unique recours du client, et la seule et unique
   responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
   disponibilité.
-definitions_title: 4. Définitions
+4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
   de niveau de service ont la signification indiquée dans l'Accord.
@@ -1013,3 +1014,120 @@ support_policy_proactive_monitoring_desc: >-
   d’état pour connaître les dernières mises à jour et informations.
 support_policy_premium_support_title: Assistance Premium
 support_policy_premium_support_desc: "Pour en savoir plus sur nos options de support Premium pour les clients Team Plan et Enterprise, veuillez nous contacter en utilisant le formulaire ci-dessous\_:"
+disclaimer_title: Clause de non-responsabilité
+disclaimer_last_updated: 'Dernière mise à jour : 28 janvier 2022'
+interpretation_and_definitions_title: Interprétation et définitions
+interpretation_title: Interprétation
+interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+definitions_title: Définitions
+definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
+company_definition: >-
+  La <strong>Société</strong> (appelée « la Société », « Nous », « Notre » ou «
+  Notre » dans cette clause de non-responsabilité) fait référence à Digital
+  Shift OU, 6 sepapaja, 15510 Tallinn.
+service_definition: <strong>Service</strong> fait référence à l'Application.
+you_definition: >-
+  <strong>Vous</strong> désigne la personne accédant au Service, ou la société
+  ou autre entité juridique au nom de laquelle cette personne accède ou utilise
+  le Service, selon le cas.
+application_definition: >-
+  <strong>Application</strong> désigne le logiciel fourni par la Société
+  téléchargé par Vous sur tout appareil électronique nommé {{ marque }}.
+disclaimer_text: >-
+  Les informations contenues sur le Service sont uniquement à des fins
+  d’information générale.
+company_no_responsibility: >-
+  La Société n'assume aucune responsabilité pour les erreurs ou omissions dans
+  le contenu du Service.
+company_no_liability: >-
+  En aucun cas, la Société ne sera responsable de tout dommage spécial, direct,
+  indirect, consécutif ou accidentel ou de quelque dommage que ce soit, que ce
+  soit dans le cadre d'une action contractuelle, de négligence ou autre délit,
+  découlant de ou en relation avec l'utilisation du Service. ou le contenu du
+  Service. La Société se réserve le droit d'effectuer des ajouts, des
+  suppressions ou des modifications au contenu du Service à tout moment et sans
+  préavis. Cette clause de non-responsabilité a été créée à l'aide du <a
+  href="https://www.termsfeed.com/blog/sample-disclaimer-template/"
+  target="_blank"> modèle de clause de non-responsabilité. </a>
+no_virus_warranty: >-
+  La Société ne garantit pas que le Service est exempt de virus ou d'autres
+  composants nuisibles.
+external_links_disclaimer_title: Clause de non-responsabilité relative aux liens externes
+external_links_disclaimer_text: >-
+  Le Service peut contenir des liens vers des sites Web externes qui ne sont pas
+  fournis ou maintenus par ou affiliés de quelque manière que ce soit à la
+  Société.
+external_links_no_guarantee: >-
+  Veuillez noter que la Société ne garantit pas l'exactitude, la pertinence,
+  l'actualité ou l'exhaustivité des informations contenues dans ces sites Web
+  externes.
+errors_and_omissions_disclaimer_title: Avis de non-responsabilité concernant les erreurs et omissions
+errors_and_omissions_disclaimer_text: >-
+  Les informations fournies par le Service sont uniquement à titre indicatif sur
+  des questions d'intérêt. Même si la Société prend toutes les précautions pour
+  s'assurer que le contenu du Service est à la fois actuel et exact, des erreurs
+  peuvent survenir. De plus, étant donné la nature changeante des lois, règles
+  et réglementations, il peut y avoir des retards, des omissions ou des
+  inexactitudes dans les informations contenues sur le Service.
+company_not_responsible: >-
+  La Société n'est pas responsable des erreurs ou omissions, ni des résultats
+  obtenus grâce à l'utilisation de ces informations.
+fair_use_disclaimer_title: Avis de non-responsabilité en matière d'utilisation équitable
+fair_use_disclaimer_text: >-
+  La Société peut utiliser du matériel protégé par le droit d'auteur qui n'a pas
+  toujours été spécifiquement autorisé par le propriétaire du droit d'auteur. La
+  Société met ce matériel à disposition à des fins de critique, de commentaire,
+  de reportage, d'enseignement, d'érudition ou de recherche.
+fair_use_belief: >-
+  La Société estime que cela constitue une « utilisation équitable » de tout
+  matériel protégé par le droit d'auteur, tel que prévu à l'article 107 de la
+  loi américaine sur le droit d'auteur.
+copyright_permission: >-
+  Si vous souhaitez utiliser du matériel protégé par le droit d'auteur du
+  Service à vos propres fins qui vont au-delà d'une utilisation équitable, vous
+  devez obtenir l'autorisation du propriétaire du droit d'auteur.
+views_expressed_disclaimer_title: Opinions exprimées
+views_expressed_disclaimer_text: >-
+  Le Service peut contenir des points de vue et des opinions qui sont ceux des
+  auteurs et ne reflètent pas nécessairement la politique ou la position
+  officielle de tout autre auteur, agence, organisation, employeur ou
+  entreprise, y compris la Société.
+user_comments_responsibility: >-
+  Les commentaires publiés par les utilisateurs relèvent de leur seule
+  responsabilité et les utilisateurs assumeront l'entière responsabilité et le
+  blâme pour toute diffamation ou litige résultant de quelque chose d'écrit ou
+  résultant directement de quelque chose d'écrit dans un commentaire. La Société
+  n'est pas responsable des commentaires publiés par les utilisateurs et se
+  réserve le droit de supprimer tout commentaire pour quelque raison que ce
+  soit.
+no_responsibility_disclaimer_title: Aucune clause de non-responsabilité
+no_responsibility_disclaimer_text: >-
+  Les informations sur le Service sont fournies étant entendu que la Société
+  n'est pas engagée par les présentes à fournir des conseils et services
+  juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
+  être utilisé comme substitut à la consultation de conseillers professionnels
+  compétents en matière comptable, fiscale, juridique ou autre.
+company_no_liability_for_access: >-
+  En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
+  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
+  qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
+  ou votre incapacité à accéder ou à utiliser le Service.
+use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
+use_at_your_own_risk_disclaimer_text: >-
+  Toutes les informations contenues dans le Service sont fournies « telles
+  quelles », sans aucune garantie d'exhaustivité, d'exactitude, d'actualité ou
+  des résultats obtenus à partir de l'utilisation de ces informations, et sans
+  garantie d'aucune sorte, expresse ou implicite, y compris, mais sans s'y
+  limiter. garanties de performance, de qualité marchande et d’adéquation à un
+  usage particulier.
+company_no_liability_for_decisions: >-
+  La Société ne sera pas responsable envers vous ou quiconque de toute décision
+  prise ou action prise sur la base des informations fournies par le Service ou
+  de tout dommage consécutif, spécial ou similaire, même si elle est informée de
+  la possibilité de tels dommages.
+contact_us_title: Contactez-nous
+contact_us_text: "Si vous avez des questions concernant cette clause de non-responsabilité, vous pouvez nous contacter\_:"
+contact_us_website: 'En visitant cette page du site :'
