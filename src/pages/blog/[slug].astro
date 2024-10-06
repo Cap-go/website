@@ -4,7 +4,7 @@ import { useRuntimeConfig } from '@/config/app'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
 import { defaultLocale, type Locales } from '@/services/locale'
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{ params: { slug: string; }; props: { post: any; related: any; } }[]> {
   const allBlogPosts = await Astro.glob('@/content/blog/**/*.md')
   const posts = allBlogPosts.filter((j) => j.frontmatter.published)
   return posts.map((post) => {
