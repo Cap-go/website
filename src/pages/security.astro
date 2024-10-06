@@ -12,91 +12,76 @@ const title = [brand, translations['security_policy'][pageLocale]].join(' | ')
 const description = translations['read_our_security_policy'][pageLocale]
 
 const content = {
-  description,
   title,
+  description,
 }
 ---
 
 <Layout content={content}>
   <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>Capgo Security Policy</h1>
-
+    <h1>{translations['security_policy'][pageLocale]}</h1>
     <p>
-      Contact: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a><br />
-      Canonical: <a href="https://capgo.app/security.txt">https://capgo.app/security.txt</a>
+      {translations['contact'][pageLocale]}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a><br />
+      {translations['canonical'][pageLocale]}: <a href="https://capgo.app/security.txt">https://capgo.app/security.txt</a>
     </p>
-
     <p>
-      At Capgo, we consider the security of our systems a top priority. However, no matter how much effort we put into system security, there can still be vulnerabilities present.
+      {translations['security_intro'][pageLocale]}
     </p>
-
     <p>
-      If you discover a vulnerability, we would like to know about it so we can take steps to address it as quickly as possible. We would like to ask you to help us better protect
-      our clients and our systems.
+      {translations['security_discovery'][pageLocale]}
     </p>
-
-    <h2>Out of scope vulnerabilities:</h2>
+    <h2>{translations['security_out_of_scope_title'][pageLocale]}</h2>
     <ul>
-      <li>Clickjacking on pages with no sensitive actions.</li>
-      <li>Unauthenticated/logout/login CSRF.</li>
-      <li>Attacks requiring MITM or physical access to a user's device.</li>
-      <li>Attacks requiring social engineering.</li>
-      <li>Any activity that could lead to the disruption of our service (DoS).</li>
-      <li>Content spoofing and text injection issues without showing an attack vector/without being able to modify HTML/CSS.</li>
-      <li>Email spoofing</li>
-      <li>Missing DNSSEC, CAA, CSP headers</li>
-      <li>Lack of Secure or HTTP only flag on non-sensitive cookies</li>
-      <li>Deadlinks</li>
-      <li>User enumeration</li>
+      <li>{translations['security_out_of_scope_1'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_2'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_3'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_4'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_5'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_6'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_7'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_8'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_9'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_10'][pageLocale]}</li>
+      <li>{translations['security_out_of_scope_11'][pageLocale]}</li>
     </ul>
-
-    <h2>Testing guidelines:</h2>
+    <h2>{translations['security_testing_guidelines_title'][pageLocale]}</h2>
     <ul>
       <li>
-        Do not run automated scanners on other customer projects. Running automated scanners can run up costs for our users. Aggressively configured scanners might inadvertently
-        disrupt services, exploit vulnerabilities, lead to system instability or breaches and violate Terms of Service from our upstream providers. Our own security systems won't
-        be able to distinguish hostile reconnaissance from whitehat research. If you wish to run an automated scanner, notify us at security@capgo.app and only run it on your own
-        Capgo project. Do NOT attack projects of other customers.
+        {translations['security_testing_guidelines_1'][pageLocale]}
       </li>
       <li>
-        Do not take advantage of the vulnerability or problem you have discovered, for example by downloading more data than necessary to demonstrate the vulnerability or deleting
-        or modifying other people's data.
+        {translations['security_testing_guidelines_2'][pageLocale]}
       </li>
     </ul>
-
-    <h2>Reporting guidelines:</h2>
+    <h2>{translations['security_reporting_guidelines_title'][pageLocale]}</h2>
     <ul>
       <li>
-        Submit your findings through our GitHub Security Advisory: <a href="https://github.com/Cap-go/capgo/security/advisories/new"
+        {translations['security_reporting_guidelines_1'][pageLocale]}: <a href="https://github.com/Cap-go/capgo/security/advisories/new"
           >https://github.com/Cap-go/capgo/security/advisories/new</a
         >
       </li>
-      <li>Do provide sufficient information to reproduce the problem, so we will be able to resolve it as quickly as possible.</li>
+      <li>{translations['security_reporting_guidelines_2'][pageLocale]}</li>
     </ul>
-
-    <h2>Disclosure guidelines:</h2>
+    <h2>{translations['security_disclosure_guidelines_title'][pageLocale]}</h2>
     <ul>
-      <li>In order to protect our customers, do not reveal the problem to others until we have researched, addressed and informed our affected customers.</li>
+      <li>{translations['security_disclosure_guidelines_1'][pageLocale]}</li>
       <li>
-        If you want to publicly share your research about Capgo at a conference, in a blog or any other public forum, you should share a draft with us for review and approval at
-        least 30 days prior to the publication date. Please note that the following should not be included:
+        {translations['security_disclosure_guidelines_2'][pageLocale]}
         <ul>
-          <li>Data regarding any Capgo customer projects</li>
-          <li>Capgo customers' data</li>
-          <li>Information about Capgo employees, contractors or partners</li>
+          <li>{translations['security_disclosure_guidelines_2_1'][pageLocale]}</li>
+          <li>{translations['security_disclosure_guidelines_2_2'][pageLocale]}</li>
+          <li>{translations['security_disclosure_guidelines_2_3'][pageLocale]}</li>
         </ul>
       </li>
     </ul>
-
-    <h2>What we promise:</h2>
+    <h2>{translations['security_what_we_promise_title'][pageLocale]}</h2>
     <ul>
-      <li>We will respond to your report within 7 business days with our evaluation of the report and an expected resolution date.</li>
-      <li>If you have followed the instructions above, we will not take any legal action against you in regard to the report.</li>
-      <li>We will handle your report with strict confidentiality, and not pass on your personal details to third parties without your permission.</li>
-      <li>We will keep you informed of the progress towards resolving the problem.</li>
-      <li>In the public information concerning the problem reported, we will give your name as the discoverer of the problem (unless you desire otherwise).</li>
+      <li>{translations['security_what_we_promise_1'][pageLocale]}</li>
+      <li>{translations['security_what_we_promise_2'][pageLocale]}</li>
+      <li>{translations['security_what_we_promise_3'][pageLocale]}</li>
+      <li>{translations['security_what_we_promise_4'][pageLocale]}</li>
+      <li>{translations['security_what_we_promise_5'][pageLocale]}</li>
     </ul>
-
-    <p>We strive to resolve all problems as quickly as possible, and we would like to play an active role in the ultimate publication on the problem after it is resolved.</p>
+    <p>{translations['security_closing'][pageLocale]}</p>
   </div>
 </Layout>

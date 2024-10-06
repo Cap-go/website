@@ -185,7 +185,10 @@ push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
 its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
   Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
   Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
-launch_multiple_releases_per_week: "Avec 1\_$, vous pouvez lancer plusieurs versions par semaine avec une augmentation impressionnante de 81\_% de l'efficacité. Ne manquez pas cet avantage concurrentiel."
+launch_multiple_releases_per_week: >-
+  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
+  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
+  concurrentiel.
 easily_combine_features_ci_cd: >-
   Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
   actuelle grâce à notre CLI conviviale.
@@ -433,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -717,3 +720,78 @@ report_violations_desc_2: >-
   enquêtes et les poursuites en cas de conduite illégale en fournissant des
   informations sur les réseaux et les systèmes liées aux violations présumées de
   cette politique.
+security_policy_title: Politique de sécurité de Capgo
+canonical: Canonique
+security_intro: >-
+  Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
+  absolue. Cependant, quels que soient les efforts que nous déployons pour
+  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
+security_discovery: >-
+  Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
+  pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
+  aimerions vous demander de nous aider à mieux protéger nos clients et nos
+  systèmes.
+security_out_of_scope_title: "Vulnérabilités hors de portée\_:"
+security_out_of_scope_1: Clickjacking sur des pages sans actions sensibles.
+security_out_of_scope_2: CSRF non authentifié/déconnexion/connexion.
+security_out_of_scope_3: >-
+  Attaques nécessitant un MITM ou un accès physique à l'appareil d'un
+  utilisateur.
+security_out_of_scope_4: Attaques nécessitant de l’ingénierie sociale.
+security_out_of_scope_5: Toute activité pouvant entraîner une interruption de notre service (DoS).
+security_out_of_scope_6: >-
+  Problèmes d’usurpation de contenu et d’injection de texte sans afficher de
+  vecteur d’attaque/sans pouvoir modifier HTML/CSS.
+security_out_of_scope_7: Usurpation d'e-mail
+security_out_of_scope_8: En-têtes DNSSEC, CAA, CSP manquants
+security_out_of_scope_9: Absence d'indicateur sécurisé ou HTTP uniquement sur les cookies non sensibles
+security_out_of_scope_10: Liens morts
+security_out_of_scope_11: Énumération des utilisateurs
+security_testing_guidelines_title: "Directives de test\_:"
+security_testing_guidelines_1: >-
+  N'exécutez pas de scanners automatisés sur d'autres projets clients.
+  L’utilisation de scanners automatisés peut entraîner des coûts pour nos
+  utilisateurs. Les scanners configurés de manière agressive peuvent perturber
+  par inadvertance les services, exploiter des vulnérabilités, entraîner une
+  instabilité ou des violations du système et violer les conditions de service
+  de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
+  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
+  vous souhaitez exécuter un scanner automatisé, informez-nous à
+  security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
+  N'attaquez PAS les projets d'autres clients.
+security_testing_guidelines_2: >-
+  Ne profitez pas de la vulnérabilité ou du problème que vous avez découvert,
+  par exemple en téléchargeant plus de données que nécessaire pour démontrer la
+  vulnérabilité ou en supprimant ou en modifiant les données d'autres personnes.
+security_reporting_guidelines_title: "Lignes directrices en matière de déclaration\_:"
+security_reporting_guidelines_1: "Soumettez vos résultats via notre avis de sécurité GitHub\_:"
+security_reporting_guidelines_2: >-
+  Fournissez suffisamment d'informations pour reproduire le problème, afin que
+  nous puissions le résoudre le plus rapidement possible.
+security_disclosure_guidelines_title: "Lignes directrices en matière de divulgation\_:"
+security_disclosure_guidelines_1: >-
+  Afin de protéger nos clients, ne révélez pas le problème à d'autres jusqu'à ce
+  que nous ayons recherché, traité et informé nos clients concernés.
+security_disclosure_guidelines_2: "Si vous souhaitez partager publiquement vos recherches sur Capgo lors d'une conférence, sur un blog ou tout autre forum public, vous devez partager un brouillon avec nous pour examen et approbation au moins 30 jours avant la date de publication. Veuillez noter que les éléments suivants ne doivent pas être inclus\_:"
+security_disclosure_guidelines_2_1: Données concernant tous les projets clients Capgo
+security_disclosure_guidelines_2_2: Données des clients Capgo
+security_disclosure_guidelines_2_3: Informations sur les employés, sous-traitants ou partenaires de Capgo
+security_what_we_promise_title: "Ce que nous promettons\_:"
+security_what_we_promise_1: >-
+  Nous répondrons à votre rapport dans les 7 jours ouvrables avec notre
+  évaluation du rapport et une date de résolution prévue.
+security_what_we_promise_2: >-
+  Si vous avez suivi les instructions ci-dessus, nous n'engagerons aucune action
+  en justice contre vous concernant le rapport.
+security_what_we_promise_3: >-
+  Nous traiterons votre signalement en toute confidentialité et ne transmettrons
+  pas vos données personnelles à des tiers sans votre autorisation.
+security_what_we_promise_4: Nous vous tiendrons informés des progrès vers la résolution du problème.
+security_what_we_promise_5: >-
+  Dans les informations publiques concernant le problème signalé, nous
+  indiquerons votre nom en tant que découvreur du problème (sauf si vous le
+  souhaitez).
+security_closing: >-
+  Nous nous efforçons de résoudre tous les problèmes le plus rapidement possible
+  et nous aimerions jouer un rôle actif dans la publication finale sur le
+  problème une fois celui-ci résolu.

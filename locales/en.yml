@@ -449,3 +449,38 @@ operation_of_network_services_desc: "Operating or attempting to operate any netw
 avoiding_system_restrictions_desc: "Using manual or electronic means to avoid any use limitations placed on a System, such as access and storage restrictions."
 report_violations_desc: "We may report any activity that we suspect violates any law or regulation to appropriate law enforcement officials, regulators, or other appropriate third parties."
 report_violations_desc_2: "Our reporting may include disclosing appropriate customer information. We also may cooperate with appropriate law enforcement agencies, regulators, or other appropriate third parties to help with the investigation and prosecution of illegal conduct by providing network and systems information related to alleged violations of this Policy."
+security_policy_title: Capgo Security Policy
+canonical: Canonical
+security_intro: At Capgo, we consider the security of our systems a top priority. However, no matter how much effort we put into system security, there can still be vulnerabilities present.
+security_discovery: If you discover a vulnerability, we would like to know about it so we can take steps to address it as quickly as possible. We would like to ask you to help us better protect our clients and our systems.
+security_out_of_scope_title: "Out of scope vulnerabilities:"
+security_out_of_scope_1: Clickjacking on pages with no sensitive actions.
+security_out_of_scope_2: Unauthenticated/logout/login CSRF.
+security_out_of_scope_3: Attacks requiring MITM or physical access to a user's device.
+security_out_of_scope_4: Attacks requiring social engineering.
+security_out_of_scope_5: Any activity that could lead to the disruption of our service (DoS).
+security_out_of_scope_6: Content spoofing and text injection issues without showing an attack vector/without being able to modify HTML/CSS.
+security_out_of_scope_7: Email spoofing
+security_out_of_scope_8: Missing DNSSEC, CAA, CSP headers
+security_out_of_scope_9: Lack of Secure or HTTP only flag on non-sensitive cookies
+security_out_of_scope_10: Deadlinks
+security_out_of_scope_11: User enumeration
+security_testing_guidelines_title: "Testing guidelines:"
+security_testing_guidelines_1: Do not run automated scanners on other customer projects. Running automated scanners can run up costs for our users. Aggressively configured scanners might inadvertently disrupt services, exploit vulnerabilities, lead to system instability or breaches and violate Terms of Service from our upstream providers. Our own security systems won't be able to distinguish hostile reconnaissance from whitehat research. If you wish to run an automated scanner, notify us at security@capgo.app and only run it on your own Capgo project. Do NOT attack projects of other customers.
+security_testing_guidelines_2: Do not take advantage of the vulnerability or problem you have discovered, for example by downloading more data than necessary to demonstrate the vulnerability or deleting or modifying other people's data.
+security_reporting_guidelines_title: "Reporting guidelines:"
+security_reporting_guidelines_1: "Submit your findings through our GitHub Security Advisory:" 
+security_reporting_guidelines_2: Do provide sufficient information to reproduce the problem, so we will be able to resolve it as quickly as possible.
+security_disclosure_guidelines_title: "Disclosure guidelines:"
+security_disclosure_guidelines_1: In order to protect our customers, do not reveal the problem to others until we have researched, addressed and informed our affected customers.
+security_disclosure_guidelines_2: "If you want to publicly share your research about Capgo at a conference, in a blog or any other public forum, you should share a draft with us for review and approval at least 30 days prior to the publication date. Please note that the following should not be included:"
+security_disclosure_guidelines_2_1: Data regarding any Capgo customer projects
+security_disclosure_guidelines_2_2: Capgo customers' data
+security_disclosure_guidelines_2_3: Information about Capgo employees, contractors or partners
+security_what_we_promise_title: "What we promise:"
+security_what_we_promise_1: We will respond to your report within 7 business days with our evaluation of the report and an expected resolution date.
+security_what_we_promise_2: If you have followed the instructions above, we will not take any legal action against you in regard to the report.
+security_what_we_promise_3: We will handle your report with strict confidentiality, and not pass on your personal details to third parties without your permission.
+security_what_we_promise_4: We will keep you informed of the progress towards resolving the problem.
+security_what_we_promise_5: In the public information concerning the problem reported, we will give your name as the discoverer of the problem (unless you desire otherwise).
+security_closing: We strive to resolve all problems as quickly as possible, and we would like to play an active role in the ultimate publication on the problem after it is resolved.
