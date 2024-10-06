@@ -1,12 +1,3 @@
-declare global {
-  interface Window {
-    $bentoChat: any
-    bentoChatSDK: any
-    bento$: any
-    bento: any
-  }
-}
-
 export function bentoLoader(cb?: () => void) {
   if (localStorage.getItem('bento:loading') === 'true') {
     window.addEventListener('bento:ready', () => {
