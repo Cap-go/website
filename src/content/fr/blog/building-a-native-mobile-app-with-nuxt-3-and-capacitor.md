@@ -1,38 +1,37 @@
 ---
-slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
-title: Création d'applications mobiles avec Nuxt 3 et Capacitor.
-description: >-
-  Comment créer une application mobile avec Nuxt 3, Capacitor et implémenter une
-  interface utilisateur native avec Konsta UI.
+slug: "building-a-native-mobile-app-with-nuxt-3-and-capacitor"
+title: Creating Mobile Apps with Nuxt 3 and Capacitor.
+description: How to create a mobile app with Nuxt 3, Capacitor and implement native UI with Konsta UI.
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2023-06-03T00:00:00.000Z
-head_image: /nuxt_capgo.webp
-head_image_alt: Illustration Nuxt 3 et Capgo
+author_url: https://x.com/martindonadieu
+created_at: 2023-06-03
+updated_at: 2023-06-03
+head_image: "/nuxt_capgo.webp"
+head_image_alt: Nuxt 3 and Capgo illustration
 tag: Tutorial
 published: true
 locale: fr
-next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
+
 ---
 
-Dans ce didacticiel, nous allons commencer avec une nouvelle application [Nuxt 3](https://nuxtjsorg/), nous déplacer dans notre pays natal en utilisant Capacitor et éventuellement ajouter également [Konsta UI](https://konstauicom/) pour un Tailwind amélioré. Interface utilisateur mobile CSS, bien que la dernière étape soit totalement facultative
+In this tutorial, we will start with a new [Nuxt 3](https://nuxtjs.org/) app and move into native land using Capacitor and eventually also add [Konsta UI](https://konstaui.com/) for an improved Tailwind CSS mobile UI, although the last step is completely optional.
 
-En utilisant Capacitor, vous pouvez facilement convertir votre application Web Nuxt 3 en une application mobile native sans nécessiter de modifications importantes ni acquérir une nouvelle compétence comme React Native. 
+By using Capacitor, you can easily convert your Nuxt 3 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
 
-En quelques étapes simples, la plupart des applications Nuxt 3 peuvent être transformées en applications mobiles 
+With just a few simple steps, most Nuxt 3 applications can be transformed into mobile apps. 
 
-Ce didacticiel vous guidera tout au long du processus, en commençant par une nouvelle application Nuxt 3, puis en incorporant Capacitor pour passer au domaine des applications mobiles natives. De plus, vous pouvez éventuellement utiliser [Konsta UI](https://konstauicom/) pour améliorer votre interface utilisateur mobile avec Tailwind CSS
+This tutorial will guide you through the process, starting with a new Nuxt 3 app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
 
-## À propos du condensateur
+## About Capacitor
 
-CapacitorJS change vraiment la donne ! Vous pouvez l'incorporer sans effort dans n'importe quel projet Web, et il enveloppera votre application dans une vue Web native, générant pour vous le projet natif Xcode et Android Studio. De plus, ses plugins donnent accès aux fonctionnalités natives de l'appareil comme la caméra via un pont JS.
+CapacitorJS is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
 
-Avec Capacitor, vous obtenez une fantastique application mobile native sans configuration compliquée ni courbe d'apprentissage abrupte. Son API mince et ses fonctionnalités simplifiées facilitent l'intégration dans votre projet. Croyez-moi, vous serez étonné de voir à quel point il est facile de réaliser une application mobile native fantastique. application native fonctionnelle avec Capacitor !
+With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
 
-## Préparer votre application Nuxt 3
+## Preparing Your Nuxt 3 App
 
-Pour créer une nouvelle application Nuxt 3, exécutez la commande suivante :
+To create a new Nuxt 3 app, run the following command:
 
 ```shell
 npx nuxi init my-app
@@ -40,9 +39,9 @@ cd my-app
 npm install
 ```
 
-Choisissez "Nuxt 3" lorsque vous êtes invité à indiquer la version de Nuxt
+Choose "Nuxt 3" when prompted for the Nuxt version.
 
-Afin de créer une application mobile native, nous avons besoin d'un **export** de notre projet. Ainsi, incluons un script simple dans notre **packagejson** qui peut être utilisé pour créer et copier le projet Nuxt :
+In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Nuxt project:
 
 ```json
 {
@@ -53,19 +52,19 @@ Afin de créer une application mobile native, nous avons besoin d'un **export** 
 }
 ```
 
-Après avoir exécuté la commande « generate », vous devriez pouvoir repérer un nouveau dossier « dist » à la racine de votre projet.
+After executing the command `generate`, you should be able to spot a fresh `dist` folder at your project's root.
 
-Ce dossier sera utilisé par Capacitor plus tard, mais pour l'instant, nous devons le configurer correctement
+This folder will be used by Capacitor later on, but for now, we must set it up correctly.
 
-## Ajout d'un condensateur à votre application Nuxt 3
+## Adding Capacitor to Your Nuxt 3 App
 
-Pour empaqueter n'importe quelle application Web dans un conteneur mobile natif, nous devons suivre quelques étapes initiales, mais ensuite c'est aussi simple que d'exécuter une seule commande « sync »
+To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
 
-Tout d'abord, nous pouvons installer la [Capacitor CLI](https://capacitorjscom/docs/cli/) en tant que dépendance de développement, puis la configurer dans notre projet. Lors de l'installation, vous pouvez appuyer sur « Entrée » pour accepter les valeurs par défaut. pour le nom et l'ID du paquet
+Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
 
-Ensuite, nous devons installer le package principal et les packages correspondants pour les plateformes iOS et Android.
+Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
 
-Enfin, nous pouvons ajouter les plateformes, et Capacitor créera des dossiers pour chaque plateforme à la racine de notre projet :
+Finally, we can add the platforms, and Capacitor will create folders for each platform at the root of our project:
 
 ```shell
 # Install the Capacitor CLI locally
@@ -82,15 +81,15 @@ npx cap add ios
 npx cap add android
 ```
 
-À ce stade, vous devriez pouvoir observer les nouveaux dossiers **ios** et **android** dans votre projet Nuxt 3.
+By this point, you should be able to observe new **ios** and **android** folders in your Nuxt 3 project.
 
-**Ce sont de vrais projets natifs !**
+**Those are real native projects!**
 
-Pour accéder au projet Android ultérieurement, vous devez installer [Android Studio](https://developerandroidcom/studio/) Pour iOS, vous avez besoin d'un Mac et devez installer [Xcode](https://developerapplecom/xcode/)
+To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
 
-De plus, vous devriez trouver un fichier **capacitorconfigts** dans votre projet, qui contient certains paramètres fondamentaux du condensateur utilisés lors de la synchronisation. La seule chose à laquelle vous devez faire attention est le **webDir**, qui doit pointer vers le résultat de votre commande de build Actuellement, elle est inexacte
+Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
 
-Pour remédier à cela, ouvrez le fichier **capacitorconfigjson** et mettez à jour le **webDir** :
+To rectify this, open the **capacitor.config.json** file and update the **webDir**:
 
 ```json
 {
@@ -100,65 +99,67 @@ Pour remédier à cela, ouvrez le fichier **capacitorconfigjson** et mettez à j
 }
 ```
 
-Vous pouvez l'essayer en exécutant les commandes suivantes :
+You can try it out by executing the following commands:
 
 ```shell
 npm run generate
 npx cap sync
 ```
 
-La première commande « npm run generate » construira simplement votre projet Nuxt 3 et copiera la version statique, tandis que la deuxième commande « npx cap sync » synchronisera tout le code Web aux bons endroits des plates-formes natives afin qu'ils puissent être affichés dans une application
+The first command `npm run generate` will simply build your Nuxt 3 project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
-De plus, la commande de synchronisation peut mettre à jour les plates-formes natives et installer des plugins, donc lorsque vous installez un nouveau [plugins de condensateur](https://capacitorjscom/docs/plugins/), il est temps d'exécuter à nouveau `npx cap sync`Sans vous en rendre compte, vous avez maintenant terminé, alors voyons l'application sur un appareil !
+Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins/) it’s time to run `npx cap sync` again.
 
-## Créer et déployer des applications natives
+Without noticing, you are now actually done, so let’s see the app on a device!
 
-Pour développer des applications iOS, **Xcode** doit être installé, et pour les applications Android, vous devez avoir **Android Studio** installé. De plus, si vous envisagez de distribuer votre application sur l'App Store, vous devez vous inscrire dans le programme pour développeurs Apple pour iOS et la console Google Play pour Android
+## Build and Deploy native apps
 
-Si vous débutez dans le développement mobile natif, vous pouvez utiliser la CLI Capacitor pour ouvrir facilement les deux projets natifs :
+To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
+
+If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-Une fois que vous avez configuré vos projets natifs, déployer votre application sur un appareil connecté est simple. Dans Android Studio, il vous suffit d'attendre que tout soit prêt et vous pouvez déployer votre application sur un appareil connecté sans modifier aucun paramètre. Voici un exemple: 
+Once you've set up your native projects, deploying your app to a connected device is easy. In Android Studio, you just need to wait for everything to be ready, and you can deploy your app to a connected device without changing any settings. Here's an example: 
 
-![android-studio-run](/android-studio-runwebp)
+![android-studio-run](/android-studio-run.webp)
 
-Dans Xcode, vous devez configurer votre compte de signature pour déployer votre application sur un appareil réel au lieu de simplement sur le simulateur. Si vous ne l'avez pas encore fait, Xcode vous guide tout au long du processus (mais encore une fois, vous devez être inscrit au Programme pour développeurs) Après cela, vous pouvez simplement appuyer sur Play pour exécuter l'application sur votre appareil connecté, que vous pouvez sélectionner en haut. Voici un exemple :
+In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
 
-![xcode-run](/xcode-runwebp)
+![xcode-run](/xcode-run.webp)
 
-Félicitations! Vous avez déployé avec succès votre application Web Nuxt 3 sur un appareil mobile. Voici un exemple :
+Congratulations! You have successfully deployed your Nuxt 3 web app to a mobile device. Here's an example:
 
-<div class="mx-auto" style="largeur : 50%;">
-  <img src="/nuxtjs-mobile-appwebp" alt="nuxtjs-mobile-app">
+<div class="mx-auto" style="width: 50%;">
+  <img src="/nuxtjs-mobile-app.webp" alt="nuxtjs-mobile-app">
 </div>
 
-Mais attendez, il existe également un moyen plus rapide de le faire pendant le développement.
+But hold on, there's also a faster way to do this during development...
 
-## Rechargement en direct du condensateur
+## Capacitor Live Reload
 
-À l'heure actuelle, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
+By now, you're probably used to having hot reload with all modern frameworks, and the good news is that you can have the same functionality **on a mobile device** with minimal effort!
 
-Activez l'accès à votre application hébergée localement avec le rechargement en direct **sur votre réseau** en demandant à l'application Capacitor de charger le contenu à partir de l'URL spécifique.
+Enable access to your locally hosted application with live reload **on your network** by having the Capacitor app load the content from the specific URL.
 
-La première étape consiste à déterminer votre adresse IP locale. Si vous utilisez un Mac, vous pouvez la découvrir en exécutant la commande suivante dans le terminal :
+The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
 
 ```shell
 ipconfig getifaddr en0
 ```
 
-Sous Windows, exécutez :
+On Windows, run :
 
 ```shell
 ipconfig
 ```
 
-Recherchez ensuite l'adresse IPv4
+Then look for the IPv4 address.
 
-Nous pouvons demander à Capacitor de charger l'application directement depuis le serveur en ajoutant une autre entrée à notre fichier `capacitorconfigts` :
+We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -177,31 +178,31 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Assurez-vous d'utiliser **l'adresse IP et le port corrects**, j'ai utilisé le port Nuxt 3 par défaut dans cet exemple
+Be sure to use **the correct IP and port**, I have used the default Nuxt 3 port in this example.
 
-Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre projet natif :
+Now, we can apply these changes by copying them over to our native project:
 
 ```shell
 npx cap copy
 ```
 
-La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
+The `copy` command is similar to `sync`, but it will only **copy over the changes made to the web folder** and configuration, without updating the native project.
 
-Vous pouvez désormais déployer votre application une nouvelle fois via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Nuxt, **l'application se rechargera automatiquement** et affichera les modifications !
+You can now deploy your app one more time through Android Studio or Xcode. After that, if you change something in your Nuxt app, **the app will automatically reload** and show the changes!
 
-**Gardez à l'esprit** que si vous installez de nouveaux plugins tels que la caméra, cela nécessite toujours une reconstruction de votre projet natif. En effet, les fichiers natifs sont modifiés et cela ne peut pas être fait à la volée.
+**Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
 
-Notez que vous devez utiliser l'adresse IP et le port corrects dans votre configuration. Le bloc de code ci-dessus montre le port Nuxt 3 par défaut à des fins de démonstration.
+Note that you should use the correct IP and port in your configuration. The code block above shows the default Nuxt 3 port for demonstration purposes.
 
-## Utilisation des plugins de condensateur
+## Using Capacitor Plugins
 
-Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
+Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
 
 ```shell
 npm i @capacitor/share
 ```
 
-Il n'y a rien d'extraordinaire à propos du [plug-in de partage](https://capacitorjscom/docs/apis/share/), mais il affiche quand même la boîte de dialogue de partage native ! Pour cela, il nous suffit maintenant d'importer le package et d'appeler la fonction `share()` correspondante depuis notre application, changeons donc les **pages/indexvue** par ceci :
+There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.vue** to this:
 
 ```html
 <template>
@@ -225,23 +226,23 @@ async function share() {
 </script>
 ```
 
-Comme mentionné précédemment, lors de l'installation de nouveaux plugins, nous devons effectuer une opération de synchronisation puis redéployer l'application sur notre appareil.Pour ce faire, exécutez la commande suivante :
+As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
 
 ```
 npx cap sync
 ```
 
-Après avoir appuyé sur le bouton, vous pourrez assister à la magnifique boîte de dialogue de partage natif en action !
+After hitting the button, you can witness the beautiful native share dialog in action!
 
-## Ajout de l'interface utilisateur de Konsta
+## Adding Konsta UI
 
-Pour utiliser Konsta UI dans votre application Nuxt 3, vous devez avoir [tailwind déjà installé](https://tailwindcsscom/docs/guides/nuxtjs/) et installer le package :
+To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/nuxtjs/) and to install the package:
 
 ```shell
 npm i konsta
 ```
 
-De plus, vous devez modifier votre fichier `tailwindconfigjs` :
+Additionally, you need to modify your `tailwind.config.js` file:
 
 ```javascript
 // import konstaConfig config
@@ -264,11 +265,11 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` étendra la configuration CSS Tailwind par défaut (ou personnalisée) avec quelques variantes supplémentaires et utilitaires d'assistance requis pour l'interface utilisateur de Konsta
+`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
 
-Nous devons maintenant configurer le composant principal [App](https://konstauicom/vue/app/) afin de pouvoir définir certains paramètres globaux (comme `theme`)
+Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
 
-Nous devons envelopper l'ensemble de l'application avec `App` dans `pages/_appvue` :
+We need to wrap the whole app with `App` in the `pages/_app.vue`:
 
 ```html
 <template>
@@ -282,11 +283,11 @@ import { App } from 'konsta/vue';
 </script>
 ```
 
-### Exemple de page
+### Example Page
 
-Maintenant que tout est configuré, nous pouvons utiliser les composants Konsta UI Vue dans nos pages Nuxt 3
+Now when everything is set up, we can use Konsta UI Vue components in our Nuxt 3 pages.
 
-Par exemple, ouvrons `pages/indexvue` et modifions-le comme suit :
+For example, let's open `pages/index.vue` and change it to the following:
 
 ```html
 <template>
@@ -325,22 +326,22 @@ import {
 </script>
 ```
 
-Si le live reload est désynchronisé après avoir installé tous les composants nécessaires, essayez de tout redémarrer. Une fois cela fait, vous devriez voir une application mobile au look quelque peu natif, construite avec Nuxt 3 et Capacitor !
+If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Nuxt 3 and Capacitor!
 
-En conséquence, vous devriez voir la page suivante :
+You should see the following page as a result:
 
-<div class="mx-auto" style="largeur : 50%;">
-  <img src="/konsta-nuxtwebp" alt="konsta-nuxt">
+<div class="mx-auto" style="width: 50%;">
+  <img src="/konsta-nuxt.webp" alt="konsta-nuxt">
 </div>
 
 ## Conclusion
 
-Capacitor est une excellente option pour créer des applications natives basées sur un projet Web existant, offrant un moyen simple de partager du code et de maintenir une interface utilisateur cohérente. 
+Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 
 
-Et avec l'ajout de [Capgo](https://capgoapp/), il est encore plus facile d'ajouter des mises à jour en direct à votre application, garantissant ainsi que vos utilisateurs ont toujours accès aux dernières fonctionnalités et corrections de bugs.
+And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
-Si vous souhaitez savoir comment ajouter Capgo à votre application Nextjs, jetez un oeil à l'article suivant :
+If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
 
-## Crédits
+## Credits
 
-Merci beaucoup à Simon, cet article est basé sur [cet article](https://devdacticcom/nextjs-and-capacitor/) réécrit pour nuxt3 avec chat-gpt-4 et adapté
+Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor/) rewroted for nuxt3 with chat-gpt-4 and adapted.

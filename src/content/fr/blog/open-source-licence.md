@@ -1,143 +1,146 @@
 ---
-slug: open-source-licecing
-title: Comprendre les licences de logiciels open source
-description: null
+slug: "open-source-licecing"
+title: Understanding Open-Source Software Licenses
+description: 
 author: Anik Dhabal Babu
-author_url: 'https://x.com/anikdhabal'
-created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2023-09-18T00:00:00.000Z
-head_image: /open_source_licence.webp
-head_image_alt: "Licence Open\_Source"
+author_url: https://x.com/anikdhabal
+created_at: 2023-09-18
+updated_at: 2023-09-18
+head_image: "/open_source_licence.webp"
+head_image_alt: Open Source Licence
 tag: Open Source
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-En ce qui concerne les licences de logiciels open source, il existe deux grandes catégories. Certaines licences relèvent de la catégorie des licences copyleft, tandis que d'autres sont des licences open source permissives.
+When it comes to open-source software licenses, there are two broad categories. Some licenses fall under the copyleft license category, while others are permissive open source licenses.
 
-Dans cet article, j'expliquerai ce qu'est la délivrance de licences de logiciels Open Source et ses types.
+In this article, I will explain what Open Source Software licecing is and types.
 
 ## Introduction
 
-Une licence Open Source est un type de licence qui permet aux utilisateurs de visualiser, modifier et partager librement le matériel source du logiciel. De cette façon, les utilisateurs peuvent mettre à jour fréquemment le code source et s'appuyer sur le produit original.
+An Open Source License is a type of license that allows users to freely view, modify, and share the source material of the software. This way, users are able to frequently update the source code and build on the original product.
 
-Selon le type de licence Open Source choisi, les utilisateurs peuvent ou non être en mesure d'effectuer certaines activités avec le code, comme le vendre ou l'utiliser commercialement. De plus, il existe de nombreux types différents de licences Open Source, chacune offrant des fonctionnalités différentes. termes et conditions en fonction de la manière dont vous souhaitez utiliser le matériel source
+Depending on the Open Source License type chosen, users may or may not be able to do certain activities with the code, such as selling it or using it commercially. In addition, there are many different types of Open Source Licenses out there, each offering different terms and conditions depending on how you want to use the source material.
 
-Par conséquent, il est important de bien comprendre un type de licence Open Source avant de profiter de ses avantages, alors assurez-vous de lire plus ci-dessous avant de prendre une décision.
+Therefore, it's important to fully understand an Open Source License type before taking advantage of its benefits, so be sure to read up more below before making any decisions.
 
-## Types de licences Open Source
-
-<div class="mx-auto">
-  <img src="/types_of_oss_licencewebp" alt="type-of-oss-licence">
-</div>
-
-**Licences permissives**
-
-Une licence permissive, parfois appelée licence sans copyleft, accorde aux utilisateurs l'autorisation d'utiliser, de modifier et de partager le code source, mais les utilisateurs ont également la possibilité de modifier certains de ces termes et conditions pour la redistribution, y compris les travaux dérivés. Dans le contexte d'un logiciel, une œuvre dérivée est un morceau de logiciel basé sur un programme existant. Si l'original a été publié sous une licence permissive, un créateur peut choisir de partager son œuvre dérivée avec des conditions différentes de celles que la licence de l'œuvre originale aurait pu exiger.
-
-**Licences Copyleft**
-
-Les licences Copyleft en open source offrent à l'utilisateur du logiciel open source la liberté de l'auteur de modifier, d'utiliser et de redistribuer le logiciel. Cependant, elles obligent les utilisateurs à transmettre des droits spécifiques à d'autres utilisateurs en aval en leur accordant les mêmes droits qu'à l'origine. leur a été donné
-
-Les licences Copyleft définissent comment la redistribution et les modifications du code sont autorisées, interdisant toute tentative de le rendre propriétaire ou non ouvert. Cela garantit que les développeurs modifiant le logiciel ont accès au code source pour le mettre à jour ou même incorporer leurs propres modifications. Bien sûr, tout les modifications doivent également être mises à disposition afin que d'autres puissent bénéficier de sa disponibilité open source. Ce n'est pas un problème pour les cas d'utilisation académiques ou de recherche, mais c'est souvent un facteur décisif lors de la création de logiciels commerciaux
-
-## Pourquoi inclure une licence de logiciel Open Source ?
-
-L'inclusion d'une licence de logiciel open source est cruciale lorsque vous publiez ou partagez votre logiciel avec d'autres en tant qu'open source. Une licence répond à plusieurs objectifs importants :
-
-* **Pour promouvoir la collaboration et l'innovation** 
-
-Les licences open source permettent à quiconque d'afficher, de modifier et de distribuer le code source de votre logiciel. Cela encourage d'autres développeurs à contribuer à votre projet, à corriger des bogues et à ajouter de nouvelles fonctionnalités. Cela peut conduire à un produit logiciel plus robuste et innovant.
-* **Pour donner aux utilisateurs plus de contrôle et de flexibilité** 
-
-Les licences open source permettent généralement aux utilisateurs d'utiliser, de modifier et de distribuer le logiciel à n'importe quelle fin, y compris à des fins commerciales. Cela donne aux utilisateurs plus de contrôle sur leur expérience logicielle et réduit leur dépendance à l'égard des fournisseurs de logiciels propriétaires.
-* **Pour créer une communauté autour de votre logiciel** 
-
-Une licence open source peut vous aider à créer une communauté d'utilisateurs et de développeurs passionnés par votre logiciel. Cette communauté peut vous fournir une assistance, des commentaires et de nouvelles idées pour votre projet.
-* **Pour rendre votre logiciel plus accessible et inclusif** 
-
-Les logiciels open source sont généralement gratuits à télécharger et à utiliser, et ils sont souvent disponibles dans plusieurs langues. Cela les rend plus accessibles aux personnes du monde entier, quels que soient leurs revenus ou leurs origines.En plus de ces avantages, les licences open source peuvent également vous aider à :
-
-* **Éviter la violation du droit d'auteur** 
-
-Si vous distribuez votre logiciel sans licence, vous vous exposez potentiellement à des poursuites pour violation du droit d'auteur. Une licence open source accorde explicitement aux utilisateurs l'autorisation d'utiliser, de modifier et de distribuer votre logiciel, ce qui peut vous protéger de toute responsabilité légale.
-* **Attirer et retenir les meilleurs talents** 
-
-De nombreux développeurs de logiciels talentueux sont attirés par les projets open source. En publiant votre logiciel sous licence open source, vous pouvez rendre votre entreprise plus attractive pour les employés potentiels.
-* **Améliorez la réputation de votre marque** 
-
-Les logiciels open source sont largement respectés par la communauté technologique. En publiant votre logiciel sous une licence open source, vous pouvez démontrer votre engagement en faveur de la collaboration et de l'innovation.
+## Types Of Open Source Licenses
 
 <div class="mx-auto">
-  <img src="/oss_licence(1)webp" alt="oss_licence(1)">
+  <img src="/types_of_oss_licence.webp" alt="type-of-oss-licence">
 </div>
 
-## Licences logicielles permissives populaires
+**Permissive Licenses**
 
-Les licences logicielles permissives sont parmi les plus populaires. Essentiellement, ces licences permettent aux utilisateurs de modifier et de redistribuer le logiciel à leur guise, avec des restrictions minimales. Trois des versions les plus populaires de licences logicielles permissives sont :
+A permissive license, sometimes referred to as a non-copyleft license, grants users permission to use, modify, and share the source code, but users also have the option to change some of those terms and conditions for redistribution, including derivative work. In the context of software, a derivative work is a piece of software that is based on an existing program. If the original was released under a permissive license, a creator can choose to share their derivative work with different terms than what the original work’s license might have required.
 
-**Licence MIT**
+**Copyleft Licenses**
 
-La [Licence MIT](https://opensourceorg/license/mit/) est la licence de logiciel open source la plus populaire et la plus permissive. Elle offre aux utilisateurs des libertés notables, notamment en leur permettant de partager, modifier, utiliser et commercialiser librement le matériel si ils adhèrent à toutes les conditions énoncées dans la licence
+Copyleft licenses in open source provide the user of the open-source software with the author's freedom to modify, use, and redistribute the software. However, it requires users to pass on specific rights to other users downstream by granting them the same rights that were originally given to them.
 
-**Licence Apache 20**
+Copyleft licenses define how redistribution and changes to the code are allowed, prohibiting any attempts at making it proprietary or non-open. This ensures that developers modifying the software have access to the source code to update it or even incorporate their own changes. Of course, any modifications must also be made available so others can benefit from its open source availability. This is a non-issue for academic or research use-cases, but is often a deal breaker when building commercial software.
 
-[La licence Apache 20](https://wwwapacheorg/licenses/LICENSE-20/) est une licence logicielle permissive populaire qui permet aux utilisateurs de modifier et de redistribuer librement le logiciel tout en ayant l'assurance que les déclarations et avis de droits d'auteur qui en résultent sont conservés. forme principale Cette licence open source permet des modifications propriétaires et la redistribution et fournit des conditions de licence claires afin que chacun puisse comprendre ses droits lors de l'utilisation du logiciel.
+## Why Include an Open-Source Software License?
 
-**Licence BSD (Berkeley Software Distribution)**
+Including an open-source software license is crucial when you publish or share your software with others as open source. A license serves several important purposes:
 
-GitHub vous permet de choisir entre deux licences BSD, la [Licence « simplifiée » BSD 2-Clause](https://opensourceorg/license/bsd-2-clause/), parfois appelée licence « FreeBSD » ; et la [Licence BSD 3-Clause « Nouvelle » ou « Révisée »](https://spdxorg/licenses/BSD-3-Clausehtml/) La principale différence entre ces deux licences réside dans la 3-clause Cette clause restreint les utilisateurs de logiciels d'utiliser le nom de l'auteur, des auteurs ou des contributeurs pour approuver des produits ou des services
+* **To promote collaboration and innovation.** 
 
-**Licence logicielle Boost**
+Open source licenses allow anyone to view, modify, and distribute the source code of your software. This encourages other developers to contribute to your project, fix bugs, and add new features. This can lead to a more robust and innovative software product.
+* **To give users more control and flexibility.** 
 
-[La licence du logiciel Boost](https://wwwboostorg/LICENSE_1_0txt/), provient des bibliothèques Boost de C++ et a été approuvée par l'OSI en 2008. Cette licence est similaire aux licences MIT et BSD, sauf qu'elle ne nécessite pas d'attribution lorsque redistribuer sous forme binaire
+Open source licenses typically allow users to use, modify, and distribute the software for any purpose, including commercial use. This gives users more control over their software experience, and reduces their dependency on proprietary software vendors.
+* **To build a community around your software.** 
 
-## Licences de logiciels open source Copyleft
+An open source license can help you to build a community of users and developers who are passionate about your software. This community can provide support, feedback, and new ideas for your project.
+* **To make your software more accessible and inclusive.** 
 
-Les licences Copyleft accordent aux utilisateurs de logiciels l'autorisation d'utiliser, de modifier et de partager le code source, mais protègent également contre les nouvelles licences via des restrictions et des termes et conditions spécifiques. Cela représente la caractéristique réciproque de cette licence qui exige que le travail des utilisateurs respecte les droits d'origine décrits dans la licence
+Open source software is typically free to download and use, and it is often available in multiple languages. This makes it more accessible to people from all over the world, regardless of their income or background.
 
-**Licences GNU**
-En ce qui concerne les licences de logiciels copyleft, la [GPL (General Public License)](https://wwwgnuorg/licenses/licensesenhtml/) est l'une des plus populaires et des plus utilisées. Cette licence open source accorde aux utilisateurs la liberté de distribuer des copies et les versions modifiées d'un programme à condition qu'elles conservent certaines conditions, telles que les avis de droits d'auteur, les exclusions de garantie ou toute autre licence qui a été ajoutée au programme non modifié.
+In addition to these benefits, open source licenses can also help you to:
 
-En rendant les logiciels disponibles avec ce type de licence, les développeurs s'assurent que d'autres ont accès à leur code source, leur permettant ainsi d'apporter des améliorations et des adaptations qui profitent à la communauté.De plus, ce concept de « copyleft » garantit que chacun peut partager de manière collaborative les mêmes libertés lorsqu'il travaille avec des logiciels libres.
+* **Avoid copyright infringement.** 
 
-**Licence publique Mozilla**
+If you distribute your software without a license, you are potentially putting yourself at risk of copyright infringement lawsuits. An open source license explicitly grants users permission to use, modify, and distribute your software, which can protect you from legal liability.
+* **Attract and retain top talent.** 
 
-La [Licence publique Mozilla](https://wwwmozillaorg/en-US/MPL/20/), ou MPL, provient de la [Fondation Mozilla](https://foundationmozillaorg/en/) et est également considérée comme un copyleft faible. licence La différence avec cette licence (par rapport à la licence publique Eclipse) est qu'elle est basée sur un copyleft basé sur des fichiers, ce qui signifie que le code peut être combiné avec du code open source ou propriétaire.
+Many talented software developers are drawn to open source projects. By releasing your software under an open source license, you can make your company more attractive to potential employees.
+* **Enhance your brand reputation.** 
 
-**Licence publique Eclipse**
+Open source software is widely respected by the tech community. By releasing your software under an open source license, you can demonstrate your commitment to collaboration and innovation.
 
-La [Licence publique Eclipse](https://wwweclipseorg/legal/epl-20/) provient de la Fondation Eclipse et est considérée comme une licence copyleft faible. Une licence copyleft faible oblige les utilisateurs de logiciels à partager toutes les modifications qu'ils apportent au code. La licence a choisi d'implémenter un copyleft plus faible afin de réduire les exigences plus strictes rencontrées par les utilisateurs avec les licences publiques générales de GNU.
+<div class="mx-auto">
+  <img src="/oss_licence(1).webp" alt="oss_licence(1)">
+</div>
 
-## Comment choisir la licence adaptée à votre projet ?
+## Popular Permissive Software Licenses
 
-* Si vous publiez votre projet sous une licence open source, choisissez une licence compatible avec les projets que vous utilisez
+Permissive software licenses are among the most popular. In essence, these licenses allow users to modify and redistribute the software as they please, with minimal restrictions. Three of the most popular versions of permissive software licenses are:
 
-* Si vous souhaitez autoriser d'autres personnes à utiliser votre projet à des fins commerciales, choisissez une licence qui le permet
+**MIT License**
 
-* Si vous souhaitez autoriser d'autres personnes à modifier et distribuer votre projet, choisissez une licence qui le permet
+The [MIT License](https://opensource.org/license/mit/) is the most popular and permissive open source software licenses. It provides users with notable freedoms, including allowing them to freely share, modify, use, and commercialize the material if they adhere to all the conditions set forth in the license.
 
-* Si vous souhaitez vous assurer que votre projet reste gratuit et open source, choisissez une licence copyleft
+**Apache License 2.0**
 
-* Si vous ne savez pas quelle licence choisir, l'Open Source Initiative propose une liste de licences populaires que vous pouvez comparer.
+[The Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0/) is a popular permissive software license that enables users to freely modify and redistribute the software while having the assurance that the resulting copyright statements and notices are kept in primary form. This open-source license allows proprietary modifications and redistribution and provides clear licensing terms so anyone can understand their rights when using the software.
 
-Choisir la bonne licence pour votre projet open source est une décision importante. En examinant attentivement vos besoins et vos objectifs, vous pouvez choisir une licence qui vous aidera à atteindre les résultats souhaités.
+**BSD (Berkeley Software Distribution) License**
 
-## Capgo nouvelle licence
+GitHub lets you choose between two BSD licenses, the [BSD 2-Clause “Simplified” License](https://opensource.org/license/bsd-2-clause/), sometimes referred to as the “FreeBSD” license; and the [BSD 3-Clause “New” or “Revised” License](https://spdx.org/licenses/BSD-3-Clause.html/). The main difference between these two licenses is with the 3-clause. This clause restricts software users from using the name of the author, authors, or contributors, to endorse products or services.
 
-Comment puis-je accomplir tout cela ? En changeant de permis 
+**Boost Software License**
 
-Capgo a maintenant changé la licence du MIT pour un système de licence plus récent appelé GNU Affero General Public License V3 (AGPLv3) ou toute version ultérieure. La version de Capgo peut être [trouvée ici](https://githubcom/Cap-go/capgo/blob /main/LICENCE/)
+[The Boost Software License](https://www.boost.org/LICENSE_1_0.txt/), is from the Boost Libraries of C++ and was approved by the OSI in 2008. This license is similar to the MIT and BSD licenses, except it does not require attribution when redistributing in binary form.
 
-Capacitor-updater (le plugin) a maintenant modifié la licence de LGPLv3 vers un système de licence plus récent appelé Mozilla Public License Version 20 (MPLv2) ou toute version ultérieure. La version de Capacitor-updater peut être [trouvée ici](https://githubcom/ Cap-go/capacitor-updater/blob/main/LICENCE/)
+## Copyleft Open-Source Software Licenses
 
-Ce changement ne fait aucune différence pour ceux d'entre vous qui s'abonnent à Capgo Cloud ou qui hébergent eux-mêmes Capgo, mais il pourrait contrarier quelques entreprises qui ont essayé d'utiliser mon logiciel pour me concurrencer directement sans contribuer en retour.
+Copyleft licenses grant software users permission to use, modify, and share the source code, but also protect against relicensing through specific restrictions and terms and conditions. This represents the reciprocal characteristic of this license that requires users’ work to adhere to the original rights outlined in the license.
 
-L'AGPL est une licence avec laquelle Google a un problème, car ils ne sont pas prêts à divulguer leur code source fermé. Google s'oppose à l'AGPL et [state](https://opensourcegoogle/docs/using/agpl-policy/) : " Le code sous licence GNU Affero General Public License (AGPL) NE DOIT PAS être utilisé chez Google »
+**GNU Licenses**
+When it comes to copyleft software licenses, the [GPL (General Public License)](https://www.gnu.org/licenses/licenses.en.html/) is one of the most popular and widely used. This open-source license grants users the freedom to distribute copies and modified versions of a program as long as they retain certain conditions, such as copyright notices, warranty disclaimers, or any other licenses that have been added to the unmodified Program.
 
-L'objectif de l'AGPL est de maximiser la liberté des utilisateurs et d'encourager les entreprises à contribuer à l'open source. Je suis une application autonome destinée aux utilisateurs. Je ne suis pas une bibliothèque ou un élément d'un projet plus vaste. Je ne recherche pas les dons de Google. , nous sommes donc heureux d'avoir une licence AGPL. C'est la bonne licence pour Capgo
+By making software available with this license type, developers are ensuring that others have access to their source code, allowing them to make improvements and adaptations that benefit the community. In addition, this concept of "copyleft" ensures that anyone can collaboratively share the same freedoms when working with free software.
+
+**Mozilla Public License**
+
+The [Mozilla Public License](https://www.mozilla.org/en-US/MPL/2.0/), or MPL, is from the [Mozilla Foundation](https://foundation.mozilla.org/en/) and is also considered a weak copyleft license. The difference with this license (in comparison with the Eclipse Public License) is that it is file-based copyleft, which means code can be combined with open-source or proprietary code.
+
+**Eclipse Public License**
+
+The [Eclipse Public License](https://www.eclipse.org/legal/epl-2.0/), is from the Eclipse Foundation and is considered a weak copyleft license. A weak copyleft license requires software users to share any changes they make to the code. This license chose to implement a weaker copyleft as a way to reduce the stricter requirements users encountered with GNU’s General Public Licenses.
+
+## How Can You Choose The Correct License For Your Project?
+
+* If you're releasing your project under an open source license, choose a license compatible with the projects you're using.
+
+* If you want to allow others to use your project for commercial purposes, choose a license that permits this.
+
+* If you want to allow others to modify and distribute your project, choose a license that permits this.
+
+* If you want to ensure that your project remains free and open source, choose a copyleft license.
+
+* If you're unsure which license to choose, the Open Source Initiative has a list of popular licenses you can compare.
+
+Choosing the correct license for your open source project is an important decision. By carefully considering your needs and goals, you can choose a license that will help you to achieve your desired outcomes.
+
+## Capgo new license
+
+How do I accomplish all that? By changing my license. 
+
+Capgo has now changed the license from the MIT to a newer licensing scheme called GNU Affero General Public License V3 (AGPLv3) or any later version. Capgo version can be [found here](https://github.com/Cap-go/capgo/blob/main/LICENSE/).
+
+Capacitor-updater (the plugin) has now changed the license from the LGPLv3 to a newer licensing scheme called Mozilla Public License Version 2.0 (MPLv2) or any later version. Capacitor-updater version can be [found here](https://github.com/Cap-go/capacitor-updater/blob/main/LICENCE/).
+
+This change makes no difference to any of you who subscribe to Capgo Cloud or who self-host Capgo, but it may upset a few corporations who tried to use my software to directly compete with me without contributing back.
+
+AGPL is a license Google has a problem with, as they’re not prepared to divulge their closed source code. Google is opposed to the AGPL and [state](https://opensource.google/docs/using/agpl-policy/): “Code licensed under the GNU Affero General Public License (AGPL) MUST NOT be used at Google”.
+
+The goal of the AGPL is to maximize user freedom and to encourage companies to contribute to open-source. I'm a user facing, standalone application. I'm not a library or a piece of a bigger project. I'm not looking for Google’s donations, so we’re happy to be AGPL-licensed. It is the right license for Capgo.
 
 # Conclusion
 
-Il existe de nombreux facteurs à prendre en compte lors du choix d'une licence de logiciel open source. Pourtant, il existe certainement des choix populaires parmi la communauté des développeurs. Les licences permissives courantes incluent la licence MIT, la licence Apache et la licence BSD. Certaines licences copyleft courantes incluent la licence publique générale GNU et la licence publique Mozilla
+There are many factors to consider when choosing an open-source software license. Yet, there are certainly popular choices among the developer community. Common permissive licenses include the MIT License, Apache License, and BSD License. Some common copyleft licenses include the GNU General Public License and the Mozilla Public License.

@@ -1,64 +1,62 @@
 ---
-slug: enable-ios-developer-mode-ios16
-title: Comment activer le mode développeur sur iOS 16 pour les tests d'applications
-description: >-
-  Guide étape par étape sur l'activation du mode développeur sur iOS 16 et
-  versions ultérieures pour exécuter des versions de distribution interne et des
-  versions de développement local sur votre appareil.
+slug: "enable-ios-developer-mode-ios16"
+title: 'How to Enable Developer Mode on iOS 16 for App Testing'
+description: 'Step-by-step guide on enabling Developer Mode on iOS 16 and above to run internal distribution builds and local development builds on your device.'
 author: Martin Donadieu
-author_url: 'https://twitter.com/martindonadieu'
-created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2023-11-27T00:00:00.000Z
-head_image: /enable-ios-developer-mode-ios16.webp
-head_image_alt: Activation du mode développeur iOS sur iPhone
+author_url: https://twitter.com/martindonadieu
+created_at: 2023-11-27
+updated_at: 2023-11-27
+head_image: "/enable-ios-developer-mode-ios16.webp"
+head_image_alt: "Enabling iOS Developer Mode on iPhone"
 tag: iOS
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
 ---
 
-# Comment activer le mode développeur sur iOS 16 pour les tests d'applications
 
-Pour les développeurs et les testeurs travaillant avec iOS 16 et versions ultérieures, l'activation du mode développeur est une étape cruciale pour exécuter les builds de distribution interne et les builds de développement local directement sur un iPhone ou un iPad. Ce guide vous guidera tout au long du processus d'activation du mode développeur sur votre appareil iOS.
+# How to Enable Developer Mode on iOS 16 for App Testing
 
-## Prérequis
+For developers and testers working with iOS 16 and above, enabling Developer Mode is a crucial step for running internal distribution builds and local development builds directly on an iPhone or iPad. This guide will walk you through the process of activating Developer Mode on your iOS device.
 
-Avant de continuer, assurez-vous d'avoir installé la version de développement sur votre appareil iOS. Cette configuration n'est requise qu'une seule fois par appareil.
+## Prerequisites
 
-## Guide étape par étape pour activer le mode développeur
+Before proceeding, ensure that you have installed the development build on your iOS device. This setup is required only once per device.
 
-### Étape 1 : Déclenchez l'alerte du mode développeur
+## Step-by-Step Guide to Enable Developer Mode
 
-Après avoir installé la version sur votre appareil, appuyez sur l'icône de l'application. Une alerte apparaîtra, vous invitant à activer le mode développeur. Cliquez sur **OK** pour continuer.
+### Step 1: Trigger the Developer Mode Alert
 
-<div class="mx-auto" style="largeur : 50%;">
-  <img src="/ios-16-developer-mode-0webp" alt="Navigation vers le paramètre du mode développeur">
+After installing the build on your device, tap the app icon. An alert will pop up, prompting you to enable Developer Mode. Click **OK** to proceed.
+
+<div class="mx-auto" style="width: 50%;">
+  <img src="/ios-16-developer-mode-0.webp" alt="Navigating to Developer Mode setting">
 </div>
 
-### Étape 2 : Accéder aux paramètres du mode développeur
+### Step 2: Access Developer Mode Settings
 
-Ouvrez l'application Paramètres sur votre appareil iOS. Accédez à **Confidentialité et sécurité**, puis sélectionnez **Mode développeur**.
+Open the Settings app on your iOS device. Navigate to **Privacy & Security** and then select **Developer Mode**.
 
-![Accès au paramètre du mode développeur](/ios-16-developer-mode-1webp)
+![Navigating to Developer Mode setting](/ios-16-developer-mode-1.webp)
 
-### Étape 3 : Activez le mode développeur et redémarrez
+### Step 3: Enable Developer Mode and Restart
 
-Activez le mode développeur. iOS vous demandera de redémarrer votre appareil pour que les modifications prennent effet. Appuyez sur **Redémarrer** pour lancer le redémarrage.
+Switch on the Developer Mode toggle. iOS will prompt you to restart your device for the changes to take effect. Tap **Restart** to initiate the reboot.
 
-![Invite de redémarrage du mode développeur](/ios-16-developer-mode-2webp)
+![Developer Mode restart prompt](/ios-16-developer-mode-2.webp)
 
-### Étape 4 : finaliser l'activation
+### Step 4: Finalize the Activation
 
-Une fois votre appareil redémarré et déverrouillé, une alerte système apparaîtra. Cliquez sur ** Activer ** et entrez le code d'accès de votre appareil lorsque vous êtes invité à terminer l'activation du mode développeur.
+Once your device restarts and you unlock it, a system alert will appear. Click **Turn On** and enter your device's passcode when prompted to complete the activation of Developer Mode.
 
-![Alerte et invite de code](/ios-16-developer-mode-3webp)
+![Alert and passcode prompt](/ios-16-developer-mode-3.webp)
 
-Avec le mode développeur désormais actif, vous pouvez vous impliquer pleinement dans vos builds de distribution interne et vos builds de développement local.
+With Developer Mode now active, you can fully engage with your internal distribution builds and local development builds.
 
-N'oubliez pas que vous pouvez désactiver le mode développeur à tout moment via les mêmes paramètres. Cependant, sa réactivation vous obligera à suivre à nouveau ces étapes.
+Remember, you can disable Developer Mode at any time through the same settings. However, re-enabling it will require you to follow these steps again.
 
-## Méthode alternative pour activer le mode développeur
+## Alternative Method for Enabling Developer Mode
 
-Si vous rencontrez des problèmes avec la méthode ci-dessus et que vous avez accès à un Mac, vous pouvez activer le mode développeur en connectant votre appareil iOS à votre Mac et en suivant les instructions fournies dans la [documentation officielle d'Apple](https://developerapplecom/documentation/xcode /activation-du-mode-développeur-sur-un-appareil/)
+If you encounter issues with the above method and you have access to a Mac, you can enable Developer Mode by connecting your iOS device to your Mac and following the instructions provided in [Apple's official documentation](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
 
-En suivant ces étapes, vous serez prêt à tester et développer efficacement des applications sur votre appareil iOS exécutant iOS 16 ou une version ultérieure.
+By following these steps, you'll be ready to test and develop apps effectively on your iOS device running iOS 16 or later.

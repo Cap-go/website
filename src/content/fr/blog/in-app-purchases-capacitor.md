@@ -1,161 +1,160 @@
 ---
-slug: in-app-purchases-capacitor
-title: achats intégrés pour condensateur
-description: >-
-  Comment mettre en œuvre des achats intégrés pour les applications de
-  condensateurs à l'aide du plugin Capacitor Purchases et de RevenueCat
-author_url: 'https://x.com/martindonadieu'
-created_at: 2023-01-19T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
-head_image: /revenuecat_iap.webp
-head_image_alt: Chat de revenus dans les achats d'applications
+slug: "in-app-purchases-capacitor"
+title: in app purchases for capacitor
+description: How to implement in-app purchases for capacitor apps using the Capacitor Purchases plugin and RevenueCat
+author_url: https://x.com/martindonadieu
+created_at: 2023-01-19
+updated_at: 2023-06-29
+head_image: "/revenuecat_iap.webp"
+head_image_alt: Revenue cat in app purchases
 tag: Tutorial
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-Capacitor Purchases est un plugin pour le framework Capacitor qui permet des achats intégrés sur iOS et Android. Il fournit une API simple et cohérente sur plusieurs plates-formes, permettant aux développeurs de mettre en œuvre facilement des abonnements et des achats intégrés dans leurs applications mobiles.
+Capacitor Purchases is a plugin for the Capacitor framework that allows in-app purchases on iOS and Android. It provides a simple and consistent API across multiple platforms, making it easy for developers to implement in-app subscriptions and purchases in their mobile apps.
 
-L'une des principales caractéristiques du plugin Capacitor Purchases est qu'il s'intègre à RevenueCat, une plate-forme qui fournit des outils pour les abonnements et les achats intégrés. RevenueCat simplifie le processus de mise en œuvre des abonnements et des achats intégrés en fournissant une solution simple et cohérente. API sur plusieurs plates-formes et automatisation de tâches telles que la validation des reçus et la gestion des utilisateurs
+One of the key features of the Capacitor Purchases plugin is that it integrates with RevenueCat, a platform that provides tools for in-app subscriptions and in-app purchases. RevenueCat simplifies the process of implementing in-app subscriptions and purchases by providing a simple and consistent API across multiple platforms, and automating tasks such as receipt validation and user management.
 
-Avec RevenueCat, les développeurs peuvent facilement gérer les abonnements, suivre les revenus et effectuer d'autres tâches connexes. Certaines fonctionnalités offertes par RevenueCat incluent :
+With RevenueCat, developers can easily manage subscriptions, track revenue, and perform other related tasks. Some features offered by RevenueCat include:
 
-- Validation automatisée des reçus
-- Gestion des utilisateurs
-- Prise en charge de modèles de tarification personnalisés
-- Analyses détaillées
--Évolutivité
+- Automated receipt validation
+- User management
+- Support for custom pricing models
+- Detailed analytics
+-Scalability
 
-En utilisant le plugin Capacitor Purchases avec RevenueCat, les développeurs peuvent économiser du temps et des efforts lors de la mise en œuvre d'abonnements et d'achats intégrés dans leurs applications mobiles, et fournir des fonctionnalités supplémentaires qui peuvent aider à améliorer l'expérience utilisateur et à augmenter les revenus.
+By using the Capacitor Purchases plugin with RevenueCat, developers can save time and effort when implementing in-app subscriptions and purchases in their mobile apps, and provide additional features that can help to improve the user experience and increase revenue.
 
-Grâce au plugin Capacitor Purchases et à RevenueCat, les développeurs peuvent facilement gérer et suivre les abonnements et les achats intégrés, valider les reçus et gérer les utilisateurs sur plusieurs plates-formes. Il permet également de créer des modèles de tarification personnalisés et d'obtenir des analyses détaillées pour améliorer les performances et les revenus.
-
-
-##Installation
-
-Assurez-vous d'utiliser la dernière version de Capacitor et du plugin Capacitor Purchases. Vous pouvez vérifier la dernière version de Capacitor et du plugin Capacitor Purchases sur le site Web de Capacitor.
-
-Pour installer le plugin Capacitor Purchases, exécutez la commande suivante :
-`npm et @capgo/capacitor-purchases`
-ajoutez le plugin au code natif de votre application
-`synchronisation du plafond npx`
+Using Capacitor Purchases plugin and RevenueCat, developers can easily manage and track in-app subscriptions and purchases, validate receipts, and manage users across multiple platforms. It also allows creating custom pricing models and get detailed analytics to improve the performance and revenue.
 
 
-ajouter une fonctionnalité d'achats intégrés dans Xcode :
+## Installation
 
-![Xcode étape 1](/iap_step1webp)
-alors
-![xcode étape 2](/iap_step2webp)
+Be sure to use the latest version of Capacitor and the Capacitor Purchases plugin. You can check the latest version of Capacitor and the Capacitor Purchases plugin on the Capacitor website.
 
-## 1 Créer un compte RevenueCat
-Ce guide vous expliquera comment être opérationnel avec les abonnements et le SDK de RevenueCat avec seulement quelques lignes de code.
-
-Inscrivez-vous pour un nouveau compte RevenueCat [ici](https://apprevenuecatcom/)
-
-> ### 📘
-> 
-> 💡 Voici une astuce !
-> 
-> RevenueCat recommande de créer un compte RevenueCat distinct pour chaque application/projet que vous possédez, surtout si vous avez l'intention de vendre l'application. Cela accélérera le processus de transfert, puisque vous pouvez transférer l'intégralité du compte plutôt que d'attendre que le support RevenueCat transfère des projets individuels.
+To install the Capacitor Purchases plugin, run the following command:
+`npm i @capgo/capacitor-purchases`
+add the plugin to your app native code
+`npx cap sync`
 
 
-### Organisations/Entreprise
+add in-app purchases capability in Xcode:
 
-Nous vous recommandons d'utiliser un compte d'entreprise lors de l'inscription à RevenueCat et de la configuration de votre application dans un projet. Vous pourrez inviter le reste de votre équipe en tant que [collaborateurs](https://wwwrevenuecatcom/docs/collaborators/) à votre projet, mais **seul le propriétaire du projet peut gérer la facturation** Les collaborateurs du projet ne peuvent pas gérer les détails de facturation
+![Xcode step 1](/iap_step1.webp)
+then
+![xcode step 2](/iap_step2.webp)
 
-## 2 Configuration du projet et de l'application
+## 1. Create a RevenueCat Account
+This guide will walk you through how to get up and running with subscriptions and RevenueCat's SDK with only a few lines of code.
 
-
-### ▶️ Créer un projet
-
-Accédez au tableau de bord RevenueCat et [ajoutez un nouveau projet](https://apprevenuecatcom/overview/) dans la liste déroulante du menu de navigation supérieur appelée _Projets_.
-
-![RevenueCat étape 1](/revenuecat_step1webp)
-
-Le modal popup pour créer un nouveau projet
-
-### ▶️ Ajouter une application/plateforme
-
-Dans **Paramètres du projet > Applications** dans le menu de gauche du tableau de bord du projet, sélectionnez la plate-forme pour l'application que vous allez ajouter.
-
-![RevenueCat étape 2](/revenuecat_step2webp)
-
-Tableau de bord du projet pour sélectionner la plateforme d'application
-
-Le champ **Nom de l'application** est obligatoire pour ajouter votre application à RevenueCat. Le reste des champs de configuration peut être ajouté ultérieurement. Pour effectuer des achats de test et de production, le Bundle ID (iOS) / Package Name (Android) ainsi que le Shared Le secret (iOS) / les informations d'identification du service (Android) doivent être configurés
-
-![RevenueCat étape 3](/revenuecat_step3webp)
-
-Page de configuration d'application pour une application Apple App Store
+Sign up for a new RevenueCat account [here](https://app.revenuecat.com/).
 
 > ### 📘
 > 
-> 💡 Voici une astuce !
+> 💡 Here's a tip!
 > 
-> Après avoir enregistré votre application, RevenueCat recommande de configurer les [Notifications du serveur de plateforme](https://wwwrevenuecatcom/docs/server-notifications/). Ces notifications ne sont pas obligatoires, mais accéléreront les [webhooks](https://wwwrevenuecatcom/ docs/webhooks/) et les délais de livraison de l'intégration et réduisez le délai de mise à jour de vos abonnés
+> RevenueCat recommends creating a separate RevenueCat account for each app / project you have, especially if you ever intend on selling the app. This will speed up the transfer process, since you can transfer the entire account rather than waiting for RevenueCat Support to transfer individual projects.
+
+
+### Organizations / Enterprise
+
+We recommend using a company account when registering for RevenueCat and setting up your app within a project. You'll be able to invite the rest of your team as [collaborators](https://www.revenuecat.com/docs/collaborators/) to your project, but **only the project owner can manage billing**. Project collaborators can't manage billing details.
+
+## 2. Project and App Configuration
+
+
+### ▶️ Create a Project
+
+Navigate to the RevenueCat dashboard and [add a new project](https://app.revenuecat.com/overview/) from the dropdown in the top navigation menu called _Projects_.
+
+![RevenueCat step 1](/revenuecat_step1.webp)
+
+The popup modal for creating a new Project
+
+### ▶️ Add an App / Platform
+
+From **Project Settings > Apps** in the left menu of the project dashboard, select the platform for the app you will be adding.
+
+![RevenueCat step 2](/revenuecat_step2.webp)
+
+Project dashboard for selecting the app platform
+
+The field **App name** is required to add your app to RevenueCat. The rest of the configuration fields can be added later. To make test and production purchases, the Bundle ID (iOS) / Package Name (Android) as well as the Shared Secret (iOS) / Service Credentials (Android) must be configured.
+
+![RevenueCat step 3](/revenuecat_step3.webp)
+
+App configuration page for an Apple App Store app
 
 > ### 📘
 > 
-> Applications et utilisateurs de staging ou de production
+> 💡 Here's a tip!
 > 
-> RevenueCat lui-même n'a pas d'environnements séparés pour la préparation et la production. Les transactions sous-jacentes pour les utilisateurs sont plutôt différenciées par le bac à sable et la production.
-> 
-> N'importe quelle application RevenueCat peut effectuer à la fois des achats de sandbox et de production dans les magasins. Si vous disposez d'applications distinctes pour la préparation et la production, vous pouvez créer plusieurs projets dans RevenueCat pour refléter votre configuration.
-> 
-> De plus, les utilisateurs ne sont pas non plus séparés par environnement. Le même utilisateur peut avoir des achats actifs de bac à sable et des achats de production actifs en même temps
-
-
-### ▶️ Identifiants de service
-
-Les informations d'identification du service doivent être configurées pour que RevenueCat puisse communiquer avec les magasins d'applications en votre nom. Consultez les guides RevenueCat [App Store Connect Shared Secret](https://wwwrevenuecatcom/docs/itunesconnect-app-special-shared-secret/), [ Informations d'identification du service Play](https://wwwrevenuecatcom/docs/creating-play-service-credentials/) et [Secret partagé Amazon Appstore](https://wwwrevenuecatcom/docs/service-credentials/amazon-appstore-credentials/) pour plus d'informations
-
-Notez que les informations d'identification du service Play peuvent prendre jusqu'à 36 heures pour se propager sur les serveurs de Google.
-
-## 3 Configuration du produit
-
-### ▶️ Configuration du magasin
-
-Avant de pouvoir commencer à utiliser RevenueCat pour récupérer des produits, vous devez configurer vos produits dans les magasins respectifs. Consultez les guides suivants pour [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console]( https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) et [Stripe](https://wwwrevenuecatcom/docs/stripe- products/) pour vous aider à naviguer dans ce processus
-
-Si vous vendez des produits iOS, assurez-vous de signer votre « Contrat d'applications payantes » et de remplir vos informations bancaires et fiscales dans **App Store Connect > Accords, taxes et opérations bancaires** **Cela doit être complété avant de pouvoir tester tous les achats**
+> After registering your app, RevenueCat recommends setting up [Platform Server Notifications](https://www.revenuecat.com/docs/server-notifications/). These notifications aren't required, but will speed up [webhooks](https://www.revenuecat.com/docs/webhooks/) and integration delivery times and reduce lag time updating your subscribers.
 
 > ### 📘
 > 
-> Vous souhaitez ignorer la configuration du magasin pendant les tests ?
+> Staging vs. Production apps and users
 > 
-> Sur iOS, vous pouvez retarder la configuration des produits dans App Store Connect en testant plutôt avec les fichiers de configuration StoreKit. Ces fichiers de configuration nécessitent une configuration minimale et sont configurables directement via Xcode.
+> RevenueCat itself does not have separate environments for staging and production. Rather, the underlying transactions for users are differentiated by sandbox and production.
 > 
-> En savoir plus sur la configuration des fichiers de configuration StoreKit dans le guide RevenueCat [Sandbox Testing](https://wwwrevenuecatcom/docs/apple-app-store/#ios-14-only-testing-on-the-simulator)
+> Any RevenueCat app can make both sandbox and production purchases from the stores. If you do have separate apps for staging and production, you can create multiple projects in RevenueCat to mirror your setup.
+> 
+> Furthermore, users are not separated by environment, either. The same user can have active sandbox purchases and active production purchases at the same time.
 
-### ▶️ Configurer les produits et les droits dans RevenueCat
 
-Une fois vos produits intégrés à l'application configurés dans [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console](https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) ou [Stripe](https://wwwrevenuecatcom/docs/stripe-products/), vous devrez copier cette configuration dans le Tableau de bord RevenueCat RevenueCat utilise un système de droits pour contrôler l'accès aux fonctionnalités premium et des offres pour gérer l'ensemble des produits que vous proposez aux clients.
+### ▶️ Service Credentials
 
-Les droits sont le niveau d'accès auquel un client a « droit » après avoir acheté un produit spécifique.
-Les offres sont un moyen simple pour vous d'organiser les produits intégrés à l'application que vous souhaitez « proposer » sur votre paywall et de les configurer à distance. RevenueCat **recommande** d'utiliser ces fonctionnalités pour simplifier votre code et vous permettre de changer de produit sans publier d'application. mise à jour
+Service credentials need to be set up for RevenueCat to communicate with the app stores on your behalf. See RevenueCat guides [App Store Connect Shared Secret](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret/), [Play Service Credentials](https://www.revenuecat.com/docs/creating-play-service-credentials/), and [Amazon Appstore Shared Secret](https://www.revenuecat.com/docs/service-credentials/amazon-appstore-credentials/) for more information.
 
-Voir [Configuration des produits](https://wwwrevenuecatcom/docs/entitlements/) pour configurer vos produits, puis les organiser en offres ou droits.
+Note that play service credentials can take up to 36 hours to propagate throughout Google's servers.
 
-![RevenueCat étape 4](/revenuecat_step4webp)
+## 3. Product Configuration
 
-##4Utilisation du SDK d'achats de RevenueCat
+### ▶️ Store Setup
 
-Le SDK RevenueCat implémente de manière transparente les achats et les abonnements sur toutes les plateformes tout en synchronisant les jetons avec le serveur RevenueCat.
+Before you can start using RevenueCat to fetch products, you must configure your products in the respective stores. See the following guides for [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/), and [Stripe](https://www.revenuecat.com/docs/stripe-products/) for help to navigate through this process.
 
-Si vous rencontrez des problèmes avec le SDK, consultez [Dépannage des SDK](https://wwwrevenuecatcom/docs/troubleshooting-the-sdks/) pour obtenir des conseils.
+If you are selling iOS products, be sure to sign your 'Paid Applications Agreement' and fill out your bank and tax information in **App Store Connect > Agreements, Tax, and Banking**. **This needs to be completed before you can test any purchases**.
 
 > ### 📘
 > 
-> Utilisez uniquement votre clé SDK publique pour configurer les achats
+> Want to skip the store setup while testing?
 > 
-> Vous pouvez obtenir votre clé SDK publique dans l'onglet **Clés API** sous **Paramètres du projet** dans le tableau de bord.
+> On iOS, you can delay configuring products in App Store Connect by testing with StoreKit Configuration files instead. These config files require minimal setup and are configurable via Xcode directly.
+> 
+> Read more about setting up StoreKit Configuration files in RevenueCat [Sandbox Testing](https://www.revenuecat.com/docs/apple-app-store/#ios-14-only-testing-on-the-simulator) guide.
 
-Vous ne devez configurer l'instance partagée de _Purchases_ qu'une seule fois, généralement au lancement de l'application. Par la suite, la même instance est partagée dans toute votre application en accédant à l'instance « partagée » dans le SDK.
+### ▶️ Configure Products and Entitlements in RevenueCat
 
-Consultez le guide RevenueCat sur la [Configuration du SDK](https://docsrevenuecatcom/docs/configuring-sdk/) pour plus d'informations et les meilleures pratiques.
+Once your in-app products have been configured in [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/), or [Stripe](https://www.revenuecat.com/docs/stripe-products/), you'll need to copy that configuration into the RevenueCat dashboard. RevenueCat uses an Entitlements' system to control access to premium features, and Offerings to manage the set of products you offer to customers.
 
-Assurez-vous de configurer _Purchases_ avec votre clé SDK publique uniquement. Vous pouvez en savoir plus sur les différentes clés API disponibles dans RevenueCat [Guide d'authentification](https://wwwrevenuecatcom/docs/authentication/)
+Entitlements are the level of access that a customer is “entitled” to after purchasing a specific product.
+Offerings are a simple way for you to organize the in-app products you wish to “offer” on your paywall and configure them remotely. RevenueCat **recommends** utilizing these features to simplify your code and enable you to change products without releasing an app update.
+
+See [Configuring Products](https://www.revenuecat.com/docs/entitlements/) to set up your products and then organize them into Offerings or Entitlements.
+
+![RevenueCat step 4](/revenuecat_step4.webp)
+
+## 4. Using RevenueCat's Purchases SDK
+
+RevenueCat SDK seamlessly implements purchases and subscriptions across platforms while syncing tokens with the RevenueCat server.
+
+If you run into issues with the SDK, see [Troubleshooting the SDKs](https://www.revenuecat.com/docs/troubleshooting-the-sdks/) for guidance.
+
+> ### 📘
+> 
+> Only use your public SDK key to configure Purchases
+> 
+> You can get your public SDK key from the **API keys** tab under **Project settings** in the dashboard.
+
+You should only configure the shared instance of _Purchases_ once, usually on app launch. Subsequently, the same instance is shared throughout your app by accessing the `.shared` instance in the SDK.
+
+See RevenueCat guide on [Configuring SDK](https://docs.revenuecat.com/docs/configuring-sdk/) for more information and best practices.
+
+Make sure you configure _Purchases_ with your public SDK key only. You can read more about the different API keys available in RevenueCat [Authentication guide](https://www.revenuecat.com/docs/authentication/).
 
 
 ```javascript
@@ -170,32 +169,32 @@ if (isPlatform('ios')) {
 }
 ```
 
-En cours de développement, RevenueCat recommande d'activer des journaux de débogage plus détaillés. Pour plus d'informations sur ces journaux, consultez leur guide [Debugging](https://wwwrevenuecatcom/docs/debugging/)
+When in development, RevenueCat recommends enabling more verbose debug logs. For more information about these logs, see their [Debugging](https://www.revenuecat.com/docs/debugging/) guide.
 
-Si vous envisagez d'utiliser RevenueCat avec votre code d'achat existant, reportez-vous à leur guide sur le [Mode Observateur](https://wwwrevenuecatcom/docs/observer-mode/)
+If you're planning to use RevenueCat alongside your existing purchase code, refer to their guide on [Observer Mode](https://www.revenuecat.com/docs/observer-mode/).
 
-
-> ### 📘
-> 
-> Configuration des achats avec des identifiants utilisateur
-> 
-> Si vous disposez d'un système d'authentification utilisateur dans votre application, vous pouvez fournir un identifiant utilisateur au moment de la configuration ou à une date ultérieure en appelant `logIn()`. Pour en savoir plus, consultez le guide RevenueCat sur [Identifying Users] (https://wwwrevenuecatcom/docs/user-ids/)
-
-Le SDK récupérera automatiquement les [offres configurées](https://wwwrevenuecatcom/docs/entitlements/#offerings) et récupérera les informations sur le produit auprès d'Apple, Google ou Amazon. Ainsi, les produits disponibles seront déjà chargés lorsque les clients lanceront votre écran d'achat.
-
-Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paiement. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
-
-### ▶️ Récupérer et afficher les produits disponibles
 
 > ### 📘
 > 
-> Configuration des achats avec des identifiants utilisateur
+> Configuring Purchases with User IDs
 > 
-> Si vous disposez d'un système d'authentification utilisateur dans votre application, vous pouvez fournir un identifiant utilisateur au moment de la configuration ou à une date ultérieure en appelant `logIn()` Pour en savoir plus, consultez le guide RevenueCat sur [Identifying Users] (https://wwwrevenuecatcom/docs/user-ids/)
+> If you have a user authentication system in your app, you can provide a user identifier at the time of configuration or at a later date with a call to `.logIn()`. To learn more, check out RevenueCat guide on [Identifying Users](https://www.revenuecat.com/docs/user-ids/).
 
-Le SDK récupérera automatiquement les [offres configurées](https://wwwrevenuecatcom/docs/entitlements/#offerings) et récupérera les informations sur le produit auprès d'Apple, Google ou Amazon. Ainsi, les produits disponibles seront déjà chargés lorsque les clients lanceront votre écran d'achat.
+The SDK will automatically fetch the [configured Offerings](https://www.revenuecat.com/docs/entitlements/#offerings) and retrieve the product information from Apple, Google, or Amazon. Thus, available products will already be loaded when customers launch your purchase screen.
 
-Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paywall. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
+Below is an example of fetching Offerings. You can utilize Offerings to organize your paywall screen. See RevenueCat guide on [Displaying Products](https://www.revenuecat.com/docs/displaying-products/) for more information and best practices.
+
+### ▶️ Fetch and Display Available Products
+
+> ### 📘
+> 
+> Configuring Purchases with User IDs
+> 
+> If you have a user authentication system in your app, you can provide a user identifier at the time of configuration or at a later date with a call to `.logIn()`. To learn more, check out RevenueCat guide on [Identifying Users](https://www.revenuecat.com/docs/user-ids/).
+
+The SDK will automatically fetch the [configured Offerings](https://www.revenuecat.com/docs/entitlements/#offerings) and retrieve the product information from Apple, Google, or Amazon. Thus, available products will already be loaded when customers launch your purchase screen.
+
+Below is an example of fetching Offerings. You can utilize Offerings to organize your paywall screen. See RevenueCat guide on [Displaying Products](https://www.revenuecat.com/docs/displaying-products/) for more information and best practices.
 
 ```javascript
 const { offerings } = await CapacitorPurchases.getOfferings()
@@ -204,17 +203,17 @@ if (offerings.current !== null) {
 }
 ```
 
-Si vous récupérez vos [Offres](https://wwwrevenuecatcom/docs/entitlements/#offerings), [produits](https://wwwrevenuecatcom/docs/entitlements/#products) ou vos [packages](https://wwwrevenuecatcom /docs/entitlements/#adding-packages) sont vides, cela est dû à un problème de configuration dans le magasin respectif
+If fetching your [Offerings](https://www.revenuecat.com/docs/entitlements/#offerings), [products](https://www.revenuecat.com/docs/entitlements/#products), or available [packages](https://www.revenuecat.com/docs/entitlements/#adding-packages) are empty, it's due to some configuration issue in the respective store.
 
-Les raisons les plus courantes pour cela dans App Store Connect sont un « accord d'applications payantes » obsolète ou des produits qui ne sont pas au moins à l'état « Prêt à soumettre ». Dans GooglePlay, cela se produit généralement lorsque l'application n'est pas publiée sur une piste fermée. et un utilisateur test valide ajouté
+The most common reasons for this in App Store Connect are an out-of-date 'Paid Applications Agreement' or products not at least in the 'Ready To Submit' state. In GooglePlay this usually occurs when the app is not published on a closed track and a valid test user added.
 
-Vous pouvez trouver plus d'informations sur la résolution de ce problème dans RevenueCat [Centre d'aide](https://supportrevenuecatcom/hc/en-us/articles/360041793174/)
+You can find more info about troubleshooting this issue in RevenueCat [Help Center](https://support.revenuecat.com/hc/en-us/articles/360041793174/).
 
-### ▶️ Effectuer un achat
+### ▶️ Make a Purchase
 
-Le SDK comprend une méthode simple pour faciliter les achatsLe `purchase:package` prend un package de l'offre récupérée et traite la transaction avec la boutique d'applications respective.
+The SDK includes a simple method for facilitating purchases. The `purchase:package` takes a package from the fetched Offering and processes the transaction with the respective app store.
 
-L'exemple de code ci-dessous montre le processus d'achat d'un package et la confirmation qu'il déverrouille le contenu "votre\_droit\_id". Plus de détails sur la méthode `purchase:package` peuvent être trouvés dans le guide RevenueCat sur [Faire des achats](https:// wwwrevenuecatcom/docs/making-purchases/)
+The code sample below shows the process of purchasing a package and confirming it unlocks the "your\_entitlement\_id" content. More details about the `purchase:package` method can be found in RevenueCat guide on [Making Purchases](https://www.revenuecat.com/docs/making-purchases/).
 
 ```typescript
 const purchase = async (p: Package): Promise<PurchaserInfo | null> => {
@@ -238,19 +237,19 @@ const purchase = async (p: Package): Promise<PurchaserInfo | null> => {
 }
 ```
 
-### ▶️ Vérifier l'état de l'abonnement
+### ▶️ Check Subscription Status
 
-Vous pouvez utiliser cette méthode chaque fois que vous avez besoin d'obtenir le dernier statut, et vous pouvez l'appeler en toute sécurité à plusieurs reprises tout au long du cycle de vie de votre application. _Purchases_ met automatiquement en cache les dernières « CustomerInfo » à chaque mise à jour — donc dans la plupart des cas, cette méthode extrait du cache et il court très vite
+You can use this method whenever you need to get the latest status, and it's safe to call this repeatedly throughout the lifecycle of your app. _Purchases_ automatically caches the latest `CustomerInfo` whenever it updates — so in most cases, this method pulls from the cache and runs very fast.
 
-Il est courant d'appeler cette méthode pour décider quelle interface utilisateur afficher à l'utilisateur et chaque fois que l'utilisateur effectue une action qui nécessite un certain niveau de droit.
+It's typical to call this method when deciding which UI to show the user, and whenever the user performs an action that requires a certain entitlement level.
 
 > ### 📘
 > 
-> 💡 Voici une astuce !
+> 💡 Here's a tip!
 > 
-> Vous pouvez accéder à bien plus d'informations sur un abonnement que simplement savoir s'il est actif ou non. Consultez le guide RevenueCat sur [Statut de l'abonnement] (https://wwwrevenuecatcom/docs/customer-info/) pour savoir si l'abonnement est prêt à être renouvelé, si un problème a été détecté avec la carte de crédit de l'utilisateur, et plus encore
+> You can access a lot more information about a subscription than simply whether it's active or not. See RevenueCat guide on [Subscription Status](https://www.revenuecat.com/docs/customer-info/) to learn if subscription is set to renew, if there's an issue detected with the user's credit card, and more.
 
-RevenueCat permet à vos utilisateurs de restaurer leurs achats intégrés, en réactivant tout contenu qu'ils ont précédemment acheté sur le **même compte de magasin** (compte Apple, Google ou Amazon). Nous recommandons que toutes les applications disposent d'un moyen permettant aux utilisateurs de déclencher le méthode de restauration Notez qu'Apple exige un mécanisme de restauration dans le cas où un utilisateur perd l'accès à ses achats (par exemple : désinstallation/réinstallation de l'application, perte des informations de son compte, etc.)
+RevenueCat enables your users to restore their in-app purchases, reactivating any content that they previously purchased from the **same store account** (Apple, Google, or Amazon account). We recommend that all apps have some way for users to trigger the restore method. Note that Apple does require a restore mechanism in the event a user loses access to their purchases (e.g: uninstalling/reinstalling the app, losing their account information, etc).
 
 ```javascript
   const res = await CapacitorPurchases.restoreTransactions()
@@ -262,16 +261,16 @@ RevenueCat permet à vos utilisateurs de restaurer leurs achats intégrés, en r
 
 ```
 
-Si deux [ID utilisateur d'application](https://wwwrevenuecatcom/docs/user-ids/) différents restaurent les transactions à partir du même compte de magasin sous-jacent (compte Apple, Google ou Amazon)
-RevenueCat peut tenter de créer un alias entre les deux identifiants d'utilisateur de l'application et les compter comme le même utilisateur à l'avenir. Consultez le guide RevenueCat sur [Restaurer les achats] (https://wwwrevenuecatcom/docs/restoring-purchases/) pour plus d'informations sur les différents comportements de restauration configurables
+If two different [App User IDs](https://www.revenuecat.com/docs/user-ids/) restore transactions from the same underlying store account (Apple, Google, or Amazon account).
+RevenueCat may attempt to create an alias between the two App User IDs and count them as the same user going forward. See RevenueCat guide on [Restoring Purchases](https://www.revenuecat.com/docs/restoring-purchases/) for more information on the different configurable restore behaviors.
 
-Étant donné que le SDK fonctionne de manière transparente sur n'importe quelle plate-forme, les modifications apportées aux informations d'achat d'un utilisateur peuvent provenir de diverses sources. Vous pouvez répondre à toute modification dans les « CustomerInfo » d'un client en vous conformant à une méthode de délégation facultative, « purchases : receivedUpdated : »
+Since the SDK works seamlessly on any platform, changes to a user's purchase info may come from a variety of sources. You can respond to any changes in a customer's `CustomerInfo` by conforming to an optional delegate method, `purchases:receivedUpdated:`.
 
-Cette méthode se déclenchera chaque fois que le SDK recevra un objet `CustomerInfo` mis à jour à partir d'appels à `getCustomerInfo()`, `purchase(package:)`, `purchase(product:)` ou `restorePurchases()`
+This method will fire whenever the SDK receives an updated `CustomerInfo` object from calls to `getCustomerInfo()`, `purchase(package:)`, `purchase(product:)`, or `restorePurchases()`.
 
-Les mises à jour CustomerInfo ne sont _pas_ transmises à votre application à partir du backend RevenueCat, les mises à jour ne peuvent se produire qu'à partir d'une demande réseau sortante vers RevenueCat, comme mentionné ci-dessus
+CustomerInfo updates are _not_ pushed to your app from the RevenueCat backend, updates can only happen from an outbound network request to RevenueCat, as mentioned above.
 
-En fonction de votre application, il peut suffire d'ignorer le délégué et de simplement gérer les modifications apportées aux informations client au prochain lancement de votre application ou dans les blocs de complétion des méthodes du SDK.
+Depending on your app, it may be sufficient to ignore the delegate and simply handle changes to customer information the next time your app is launched or in the completion blocks of the SDK methods.
 
 ```javascript
 CapacitorPurchases.addListener('purchasesUpdate', (data) => {
@@ -281,33 +280,33 @@ CapacitorPurchases.addListener('purchasesUpdate', (data) => {
 
 > ### 👍
 > 
-> Vous l'avez fait !
+> You did it!
 > 
-> Vous avez désormais implémenté un système d'achat d'abonnements complet sans passer un mois à écrire du code serveur Félicitations !
+> You have now implemented a fully-featured subscription purchasing system without spending a month writing server code. Congrats!
 
-### Exemples d'applications
+### Sample Apps
 
-Pour télécharger des exemples plus complets d'intégration du SDK, rendez-vous sur les exemples de ressources d'application RevenueCat.
+To download more complete examples of integrating the SDK, head over to RevenueCat sample app resources.
 
-**[Voir des exemples](https://wwwrevenuecatcom/docs/sample-apps/)**
+**[View Samples](https://www.revenuecat.com/docs/sample-apps/)**
 
-Je publierai bientôt un exemple d'application utilisant Capacitor et Vuejs
+I will soon publish a sample app using Capacitor and Vue.js.
 
-Si vous avez besoin d'utiliser en profondeur le SDK Capacitor, consultez la documentation [ici](https://githubcom/Cap-go/capacitor-purchases/)
+If you need to move deep usage of the Capacitor SDK check the documentation [here](https://github.com/Cap-go/capacitor-purchases/).
 
-### Prochaines étapes
+### Next Steps
 \
-- Si vous ne l'avez pas déjà fait, assurez-vous que vos produits sont correctement configurés en consultant RevenueCat [guide sur les droits](https://wwwrevenuecatcom/docs/entitlements/)
-- Si vous souhaitez utiliser vos propres identifiants utilisateur, lisez la [définition des identifiants utilisateur de l'application](https://wwwrevenuecatcom/docs/user-ids/) 
-- Si vous passez à RevenueCat à partir d'un autre système, consultez le guide RevenueCat sur [la migration de vos abonnements existants](https://wwwrevenuecatcom/docs/migration-existing-subscriptions/)
-- Une fois que vous êtes prêt à tester votre intégration, vous pouvez suivre les guides RevenueCat sur [tests et débogage](https://wwwrevenuecatcom/docs/debugging/)
-- Si vous êtes admissible au programme App Store Small Business, consultez le guide RevenueCat sur [comment postuler et informer RevenueCat](https://wwwrevenuecatcom/docs/app-store-small-business-program/)
+-   If you haven't already, make sure your products are configured correctly by checking out RevenueCat [guide on entitlements](https://www.revenuecat.com/docs/entitlements/).
+-   If you want to use your own user identifiers, read about [setting app user IDs](https://www.revenuecat.com/docs/user-ids/) .
+-   If you're moving to RevenueCat from another system, see RevenueCat guide on [migrating your existing subscriptions](https://www.revenuecat.com/docs/migrating-existing-subscriptions/).
+-   Once you're ready to test your integration, you can follow RevenueCat guides on [testing and debugging](https://www.revenuecat.com/docs/debugging/).
+-   If you qualify for the App Store Small Business Program, check out RevenueCat guide on [how to apply and inform RevenueCat](https://www.revenuecat.com/docs/app-store-small-business-program/)
 
 
-Si vous avez besoin d'une mise à jour en direct dans votre application 
+If you need Live update in your app 
 
-Rejoignez l'utilisation ici 👇
+Join use here 👇
 
-## Inscrivez-vous ici pour obtenir votre compte
+## Register here to get your account
 
-[Capgo](/s'inscrire/)
+[Capgo](/register/)

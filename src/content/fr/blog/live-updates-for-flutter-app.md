@@ -1,29 +1,28 @@
 ---
-slug: live-updates-for-flutter-app
-title: Mise à jour en direct de Flutter
-description: >-
-  Est-il possible d'envoyer une mise à jour en direct des applications Flutter
-  sans l'examen de l'App Store ?
+slug: "live-updates-for-flutter-app"
+title: Flutter live update
+description: 'Do it possible to send live update to Flutter Apps without the App Store review ?'
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2022-12-16T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
-head_image: /bypass_illustration.webp
-head_image_alt: Illustration du contournement du condensateur
+author_url: https://x.com/martindonadieu
+created_at: 2022-12-16
+updated_at: 2023-06-29
+head_image: "/bypass_illustration.webp"
+head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 locale: fr
-next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
+
 ---
 
-Capgo Live Update est un service qui permet aux développeurs de déployer des mises à jour sur leurs applications mobiles sans passer par le processus de soumission traditionnel de l'App Store. Cela peut être un moyen pratique de corriger rapidement des bugs ou d'effectuer de petites mises à jour d'une application sans attendre le processus de révision de l'App Store. Cependant, Capgo Live Update ne prend pas en charge la mise à jour des applications Flutter car les applications Flutter sont compilées en code natif.
+Capgo Live Update is a service that allows developers to deploy updates to their mobile apps without going through the traditional App Store submission process. This can be a convenient way to quickly fix bugs or make small updates to an app without waiting for the App Store review process. However, Capgo Live Update does not support updating Flutter apps because Flutter apps are compiled to native code.
 
-Flutter est un framework de développement d'applications mobiles qui utilise le langage de programmation Dart. L'une des principales caractéristiques de Flutter est qu'il permet aux développeurs de créer des applications pouvant s'exécuter à la fois sur iOS et Android à l'aide d'une seule base de code. Pour y parvenir, Flutter compile le code de l'application dans code natif pour chaque plateforme. Cela signifie que l'application est essentiellement une application native, plutôt qu'une application Web ou une application hybride.
+Flutter is a mobile app development framework that uses the Dart programming language. One of the key features of Flutter is that it allows developers to create apps that can run on both iOS and Android using a single codebase. To achieve this, Flutter compiles the app's code into native code for each platform. This means that the app is essentially a native app, rather than a web-based app or a hybrid app.
 
-Étant donné que les applications Flutter sont compilées en code natif, il n'est pas possible d'utiliser Capgo Live Update pour déployer des mises à jour sur une application Flutter. Au lieu de cela, les développeurs doivent soumettre des mises à jour aux magasins d'applications comme ils le feraient avec n'importe quelle autre application native.
+Because Flutter apps are compiled to native code, it is not possible to use Capgo Live Update to deploy updates to a Flutter app. Instead, developers must submit updates to the app stores as they would with any other native app.
 
-De plus, effectuer des mises à jour du code natif est généralement contraire aux règles des magasins d'applications. L'Apple App Store et le Google Play Store ont mis en place des politiques qui interdisent aux développeurs d'introduire des modifications dans le code natif d'une application après qu'elle a été soumise pour examen. l'introduction de modifications dans le code natif peut potentiellement introduire des vulnérabilités de sécurité ou d'autres problèmes susceptibles de compromettre les performances de l'application
+Additionally, making updates to native code is generally against the rules for app stores. Both the Apple App Store and the Google Play Store have policies in place that prohibit developers from introducing changes to an app's native code after it has been submitted for review. This is because introducing changes to native code can potentially introduce security vulnerabilities or other issues that could compromise the app's performance.
 
-En résumé, bien que Capgo Live Update soit un outil utile pour déployer rapidement des mises à jour sur certains types d'applications mobiles, il ne peut pas être utilisé pour mettre à jour les applications Flutter.
+In summary, while Capgo Live Update is a useful tool for quickly deploying updates to certain types of mobile apps, it cannot be used to update Flutter apps.
 
-Cela est dû à la nature du processus de compilation de Flutter et aux règles des magasins d'applications.
+It's due to the nature of Flutter's compilation process and the rules of the app stores.

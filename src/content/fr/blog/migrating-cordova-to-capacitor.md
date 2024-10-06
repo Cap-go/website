@@ -1,89 +1,87 @@
 ---
-slug: migrating-cordova-to-capacitor
-title: "Migration d'une application Web de Cordova vers Capacitor\_: un guide étape par étape"
-description: >-
-  Ce guide étape par étape vous aidera à migrer votre application Web de Cordova
-  vers Capacitor, couvrant toutes les sections et la rendant facile à lire et à
-  suivre.
+slug: "migrating-cordova-to-capacitor"
+title: 'Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide'
+description: This step-by-step guide will help you migrate your web app from Cordova to Capacitor, covering all sections and making it easy to read and follow.
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2023-06-07T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
-head_image: /migrating-cordova-to-capacitor.webp
-head_image_alt: Illustration de la migration de Cordova vers le condensateur
+author_url: https://x.com/martindonadieu
+created_at: 2023-06-07
+updated_at: 2023-06-29
+head_image: "/migrating-cordova-to-capacitor.webp"
+head_image_alt: Cordova to Capacitor migration illustration
 tag: Migration
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-# Migration d'une application Web à l'aide de Cordova vers Capacitor : un guide étape par étape
+# Migrating a Web App Using Cordova to Capacitor: A Step-by-Step Guide
 
-Ce guide vous aidera à migrer votre application Web de Cordova vers Capacitor, ce qui la rendra facile à lire et à suivre. Nous couvrirons toutes les sections et proposerons une approche étape par étape.
+This guide will help you migrate your web app from Cordova to Capacitor, making it easy to read and follow. We'll cover all sections and provide a step-by-step approach.
 
-## Introduction à Cordova et au condensateur
+## Introduction to Cordova and Capacitor
 
-Cordova et Capacitor sont tous deux des outils qui permettent aux développeurs Web de créer des applications natives pour diverses plates-formes à l'aide de HTML, CSS et JavaScript. Bien qu'ils partagent des similitudes, il existe des différences clés dans leur approche de la gestion de projet native, de la gestion des plugins et de la gestion CLI/version.
+Cordova and Capacitor are both tools that enable web developers to create native applications for various platforms using HTML, CSS, and JavaScript. While they share similarities, there are key differences in their approach to native project management, plugin management, and CLI/version management.
 
-## Stratégie migratoire
+## Migration Strategy
 
-La migration de Cordova vers Capacitor peut être effectuée progressivement ou en remplacement complet, en fonction de la complexité de votre application. Capacitor est rétrocompatible avec Cordova, vous permettant d'y basculer vos applications Web existantes lorsque vous êtes prêt.
+Migrating from Cordova to Capacitor can be done gradually or as a complete replacement, depending on the complexity of your app. Capacitor is backward-compatible with Cordova, allowing you to switch your existing web apps to it whenever you're ready.
 
-Pour faciliter la migration, envisagez d'utiliser l'[extension de code Ionic VS](https://marketplacevisualstudiocom/items/?itemName=ionicionic) et d'auditer vos plugins Cordova existants. Vous pouvez continuer à utiliser les plugins Cordova si nécessaire, ou les remplacer par des équivalents de condensateur.
+To assist with migration, consider using the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items/?itemName=ionic.ionic) and auditing your existing Cordova plugins. You can continue to use Cordova plugins if needed, or replace them with Capacitor equivalents.
 
-## Guide de migration étape par étape
+## Step-by-Step Migration Guide
 
-Suivez ces étapes pour migrer votre application Web de Cordova vers Capacitor :
+Follow these steps to migrate your web app from Cordova to Capacitor:
 
-1 **Travailler dans une branche de code distincte** : il est recommandé de travailler dans une branche de code distincte lors de l'application de ces modifications.
+1. **Work in a separate code branch**: It's recommended to work in a separate code branch when applying these changes.
 
-2 **Initialisez votre application avec Capacitor** : ouvrez votre projet dans le terminal et suivez les guides pour [ajouter un condensateur à une application Web](https://capacitorjscom/docs/getting-started/#adding-capacitor-to- votre application) ou [ajout d'un condensateur à une application Ionic](https://capacitorjscom/docs/getting-started/with-ionic/#existing-ionic-project) Utilisez les informations de votre fichier `configxml` Cordova pour l'application nom et ID du paquet
+2. **Initialize your app with Capacitor**: Open your project in the terminal and follow the guides for [adding Capacitor to a web app](https://capacitorjs.com/docs/getting-started/#adding-capacitor-to-your-app) or [adding Capacitor to an Ionic app](https://capacitorjs.com/docs/getting-started/with-ionic/#existing-ionic-project). Use the information from your Cordova `config.xml` file for the app name and Bundle ID.
 
-3 **Créez votre application Web** : Créez votre projet Web au moins une fois avant d'ajouter des plates-formes natives. Cela garantit que le dossier `www` est correctement configuré dans le fichier de configuration de Capacitor.
+3. **Build your web app**: Build your web project at least once before adding any native platforms. This ensures that the `www` folder is properly configured in the Capacitor configuration file.
 
-4 **Ajouter des plateformes** : exécutez `npx cap add ios` et `npx cap add android` pour ajouter les plateformes iOS et Android. Celles-ci créeront des dossiers de projet natifs séparés à la racine de votre projet.
+4. **Add platforms**: Run `npx cap add ios` and `npx cap add android` to add the iOS and Android platforms. These will create separate native project folders at the root of your project.
 
-5 **Générer des icônes et des écrans de démarrage** : Si vous avez des images d'icônes et d'écran de démarrage existantes, utilisez l'outil `cordova-res` pour les générer et les copier dans les projets natifs.
+5. **Generate icons and splash screens**: If you have existing icon and splash screen images, use the `cordova-res` tool to generate and copy them into the native projects.
 
-6 **Audit et migrez les plugins Cordova existants** : examinez vos plugins Cordova existants et remplacez-les par des équivalents Capacitor si possible Supprimez tous les plugins inutiles
+6. **Audit and migrate existing Cordova plugins**: Review your existing Cordova plugins and replace them with Capacitor equivalents if possible. Remove any unnecessary plugins.
 
-7 **Supprimer le plugin Cordova** : Après avoir remplacé ou supprimé un plugin Cordova, désinstallez le plugin et exécutez `npx cap sync` pour supprimer le code du plugin du projet natif
+7. **Remove Cordova plugin**: After replacing or removing a Cordova plugin, uninstall the plugin and run `npx cap sync` to remove the plugin code from the native project.
 
-8 **Appliquer des autorisations supplémentaires** : mapper entre `pluginxml` et les paramètres requis sur iOS et Android pour appliquer les autorisations nécessaires
+8. **Apply additional permissions**: Map between `plugin.xml` and required settings on iOS and Android to apply any necessary permissions.
 
-9 **Configurer les préférences** : ajoutez manuellement les préférences de `configxml` au fichier de configuration du condensateur
+9. **Configure preferences**: Manually add preferences from `config.xml` to the Capacitor configuration file.
 
-10 **Gérer les configurations spécifiques à la plate-forme** : configurez les éléments de `configxml` pour chaque plate-forme (iOS et Android) selon vos besoins
+10. **Handle platform-specific configurations**: Configure elements from `config.xml` for each platform (iOS and Android) as needed.
 
-11 **Modifiez le schéma de diffusion du contenu** : si nécessaire, modifiez le schéma utilisé pour diffuser le contenu dans votre application afin d'éviter la perte de données.
+11. **Change the scheme for serving content**: If necessary, change the scheme used for serving content in your app to avoid data loss.
 
-12 **Testez et supprimez Cordova** : testez votre application migrée pour vous assurer que toutes les modifications ont été appliquées correctement. Une fois satisfait, vous pouvez supprimer Cordova de votre projet ou le quitter si vous envisagez de continuer à utiliser les plugins Cordova.
+12. **Test and remove Cordova**: Test your migrated app to ensure all changes have been applied correctly. Once satisfied, you can remove Cordova from your project or leave it if you plan to continue using Cordova plugins.
 
-Félicitations! Vous avez migré avec succès votre application Web de Cordova vers Capacitor. Pour en savoir plus sur l'utilisation des plugins Cordova dans un projet Capacitor ou sur le workflow de développement de Capacitor, visitez la [documentation officielle de Capacitor](https://capacitorjscom/docs/)
+Congratulations! You've successfully migrated your web app from Cordova to Capacitor. To learn more about using Cordova plugins in a Capacitor project or the Capacitor development workflow, visit the [official Capacitor documentation](https://capacitorjs.com/docs/).
 
-## Mises à jour en direct avec notre service Capgo
+## Live Updates with Our Capgo Service
 
-Nous sommes fiers de proposer Capgo, notre solution qui permet des mises à jour en direct pour vos applications de condensateurs, vous permettant ainsi de fournir des mises à jour Over-The-Air (OTA) à un prix équitable.Cette fonctionnalité est particulièrement utile pour apporter des correctifs rapides, déployer de nouvelles fonctionnalités et garantir que vos utilisateurs disposent toujours de la dernière version de votre application sans attendre l'approbation de l'App Store.
+We're proud to offer Capgo, our solution that enables live updates for your Capacitor apps, allowing you to deliver Over-The-Air (OTA) updates at a fair price. This feature is particularly useful for making quick fixes, deploying new features, and ensuring your users always have the latest version of your app without waiting for app store approval.
 
-### Comment fonctionne notre service Capgo
+### How Our Capgo Service Works
 
-Capgo est un service basé sur le cloud qui vous permet de déployer des mises à jour en direct sur vos applications Capacitor. Il se compose d'un tableau de bord Web et d'un SDK natif que vous pouvez intégrer à votre application. Le SDK vérifie les mises à jour au démarrage ou à des intervalles spécifiques et les télécharge dans l'arrière-plan Lorsqu'une mise à jour est disponible, le SDK invitera l'utilisateur à l'installer. Si l'utilisateur accepte, la mise à jour sera installée et appliquée immédiatement.
+Capgo is a cloud-based service that allows you to deploy live updates to your Capacitor apps. It consists of a web dashboard and a native SDK that you can integrate into your app. The SDK checks for updates on startup or at specific intervals and downloads them in the background. When an update is available, the SDK will prompt the user to install it. If the user accepts, the update will be installed and applied immediately.
 
-### Avantages des mises à jour Capgo Live
+### Benefits of Capgo Live Updates
 
-- **Mises à jour plus rapides :** Déployez les mises à jour instantanément sans attendre l'approbation de l'App Store
-- **Dépendance réduite à l'Apple Store :** Contourner les restrictions et limitations de l'App Store
-- **Expérience utilisateur améliorée :** Gardez les utilisateurs engagés avec les dernières fonctionnalités et corrections de bugs sans leur demander de mettre à jour manuellement l'application
+- **Faster updates:** Deploy updates instantly without waiting for app store approval.
+- **Reduced Apple Store dependence:** Bypass app store restrictions and limitations.
+- **Improved user experience:** Keep users engaged with the latest features and bug fixes without requiring them to manually update the app.
 
 
-### Comment implémenter les mises à jour Capgo Live
+### How to Implement Capgo Live Updates
 
-Pour implémenter les mises à jour en direct de Capgo dans votre projet Capacitor, suivez ces étapes :
-- Créez un [compte Capgo](https://webcapgoapp/)
-- Installez le SDK Capgo dans votre projet
-- Configurez votre application pour vérifier les mises à jour au démarrage ou à des intervalles spécifiques
-- Déployez les mises à jour de votre application à l'aide du tableau de bord Capgo
+To implement Capgo live updates in your Capacitor project, follow these steps:
+- Sign up for a [Capgo account](https://web.capgo.app/).
+- Install the Capgo SDK in your project.
+- Configure your app to check for updates on startup or at specific intervals.
+- Deploy updates to your app using the Capgo dashboard.
 
 ## Conclusion
 
-Nous espérons que ce guide vous a aidé à migrer votre application Web de Cordova vers Capacitor. Si vous avez des questions ou avez besoin d'aide pour le processus de migration, n'hésitez pas à nous contacter sur notre serveur [discord](https://discordgg/VnYRvBfgA6).
+We hope this guide has helped you migrate your web app from Cordova to Capacitor. If you have any questions or need assistance with the migration process, feel free to contact us on our [discord](https://discord.gg/VnYRvBfgA6) server.

@@ -12,7 +12,7 @@
 //       messages: [
 //         {
 //           role: 'system',
-//           content: `Only respond with the translation of the text. No other or unrelated text or characters.`,
+//           content: `Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links.`,
 //         },
 //         {
 //           role: 'user',
