@@ -25,8 +25,8 @@ for (const lang of languages) {
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
     }
     if (grayMatterJson.description) {
-      const translatedTitle = await translateText(grayMatterJson.description, lang)
-      if (translatedTitle) grayMatterJson['description'] = translatedTitle
+      const translatedDescription = await translateText(grayMatterJson.description, lang)
+      if (translatedDescription) grayMatterJson['description'] = translatedDescription
     }
     if (grayMatterJson.head_image_alt) {
       const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
@@ -36,9 +36,12 @@ for (const lang of languages) {
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
     const blogContent = content.substring(grayMatterEnd + 4)
     const codeBlockRegex = /```[\s\S]*?```/g
+    const htmlTagRegex = /<[^>]+>/g
     const codeBlocks = [...blogContent.matchAll(codeBlockRegex)]
+    const htmlTags = [...blogContent.matchAll(htmlTagRegex)]
     const blogContentWithoutCodeBlocks = blogContent.replace(codeBlockRegex, '[[CODE_BLOCK]]')
-    const sentences = blogContentWithoutCodeBlocks.split('.')
+    const blogContentWithoutHtmlTags = blogContentWithoutCodeBlocks.replace(htmlTagRegex, '[[HTML_TAG]]')
+    const sentences = blogContentWithoutHtmlTags.split('.')
     let currentChunk = ''
     for (const sentence of sentences) {
       if ((currentChunk + sentence).length > 4000) {
@@ -55,7 +58,10 @@ for (const lang of languages) {
     codeBlocks.forEach((match, _) => {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
     })
+    htmlTags.forEach((match, _) => {
+      translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
+    })
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    console.log(`Blog translated to ${lang} locale: ${file}`)
+    console.log(`Blog translated: ${file}`)
   }
 }

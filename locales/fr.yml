@@ -305,7 +305,7 @@ better_code_quality: Meilleure qualité de code
 let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
   Laissez des personnes plus expérimentées examiner votre travail et donnez à
   votre équipe l’occasion d’apprendre des experts.
-improved_code_readability: Lisibilité du code améliorée
+improved_code_readability: Lisibilité améliorée du code
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
   Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -499,7 +499,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif
@@ -726,8 +726,7 @@ canonical: Canonique
 security_intro: >-
   Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
   absolue. Cependant, quels que soient les efforts que nous déployons pour
-  assurer la sécurité du système, des vulnérabilités peuvent toujours être
-  présentes.
+  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
 security_discovery: >-
   Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
   pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
@@ -1062,7 +1061,7 @@ external_links_disclaimer_text: >-
   Société.
 external_links_no_guarantee: >-
   Veuillez noter que la Société ne garantit pas l'exactitude, la pertinence,
-  l'actualité ou l'exhaustivité des informations présentes sur ces sites Web
+  l'actualité ou l'exhaustivité des informations contenues dans ces sites Web
   externes.
 errors_and_omissions_disclaimer_title: Avis de non-responsabilité relatif aux erreurs et omissions
 errors_and_omissions_disclaimer_text: >-

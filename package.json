@@ -12,6 +12,7 @@
     "generate:locale:translations": "tsx generate_locale_translations.tsx",
     "generate:blog:translations": "tsx generate_blog_translations.tsx",
     "generate:translation.ts": "tsx generate_translation_ts_file.tsx",
+    "generate:plugin:translations": "tsx generate_plugin_translations.tsx",
     "setup:new:locale": "tsx setup_new_locale.tsx"
   },
   "dependencies": {

@@ -1,71 +1,73 @@
 ---
-slug: "alternative-to-voltbuilder"
-title: Alternative to Voltbuilder
-description: Voltbuilder offers an easy way to convert web projects into native apps, but its pricing may not suit everyone. Capgo provides a cost-effective solution for handling OTA updates with ease.
+slug: alternative-to-voltbuilder
+title: Alternative à Voltbuilder
+description: >-
+  Voltbuilder offre un moyen simple de convertir des projets Web en applications
+  natives, mais son prix peut ne pas convenir à tout le monde. Capgo fournit une
+  solution rentable pour gérer facilement les mises à jour OTA.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2024-09-09
-updated_at: 2024-09-09
-head_image: "/voltbuilder_alt.webp"
-head_image_alt: Voltbuilder alternative illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2024-09-09T00:00:00.000Z
+updated_at: 2024-09-09T00:00:00.000Z
+head_image: /voltbuilder_alt.webp
+head_image_alt: Illustration alternative de Voltbuilder
 tag: Alternatives
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-Voltbuilder is a cloud-based platform that allows developers to convert their web projects into native mobile apps for Android and iOS using HTML, CSS, and JavaScript. It offers a range of features designed to simplify the app development process, including easy setup, automatic app building and uploading, and support for Apache Cordova plugins.
+Voltbuilder est une plate-forme basée sur le cloud qui permet aux développeurs de convertir leurs projets Web en applications mobiles natives pour Android et iOS à l'aide de HTML, CSS et JavaScript. Elle offre une gamme de fonctionnalités conçues pour simplifier le processus de développement d'applications, notamment une configuration facile, une application automatique. création et téléchargement, et prise en charge des plugins Apache Cordova
 
-One of the standout features of Voltbuilder is its ability to generate store-ready apps for both Android and iOS platforms in a matter of minutes. This allows developers to quickly create and deploy their apps without the need for extensive knowledge of native app development or the complexities of app store submission processes.
+L'une des fonctionnalités les plus remarquables de Voltbuilder est sa capacité à générer des applications prêtes à être stockées pour les plates-formes Android et iOS en quelques minutes. Cela permet aux développeurs de créer et de déployer rapidement leurs applications sans avoir besoin d'une connaissance approfondie du développement d'applications natives ou des complexités. des processus de soumission de l'App Store
 
-While Voltbuilder offers a convenient solution for many developers, its pricing structure may not be suitable for all projects or budgets. If you're looking for a more affordable option that still provides powerful features, particularly in terms of live updates, you might want to consider alternatives like Capgo.
+Bien que Voltbuilder offre une solution pratique à de nombreux développeurs, sa structure tarifaire peut ne pas convenir à tous les projets ou à tous les budgets. Si vous recherchez une option plus abordable tout en offrant des fonctionnalités puissantes, notamment en termes de mises à jour en direct, vous pouvez envisager des alternatives comme Capgo
 
-Capgo, an open-source Capacitor plugin developed by Digital Shift OU, offers live update functionality similar to what you might find in more expensive platforms, but at a more accessible price point. This allows you to keep your app updated in real-time without requiring users to download new versions from app stores.
+Capgo, un plugin Capacitor open source développé par Digital Shift OU, offre une fonctionnalité de mise à jour en direct similaire à ce que vous pourriez trouver sur des plates-formes plus chères, mais à un prix plus accessible. Cela vous permet de maintenir votre application à jour en temps réel sans nécessiter de mise à jour. les utilisateurs peuvent télécharger de nouvelles versions depuis les magasins d'applications
 
-To help you make an informed decision, we've created a comparison table of features between Capgo and Voltbuilder.
+Pour vous aider à prendre une décision éclairée, nous avons créé un tableau comparatif des fonctionnalités entre Capgo et Voltbuilder
 
-## Features comparisons
+## Comparaisons de fonctionnalités
 
-| Features | Capgo | Voltbuilder |
+| Caractéristiques | Capgo | Constructeur de Volts |
 | --- | --- | --- |
-| Live updates | ✅ | ❌ |
-| Native app conversion | ❌ | ✅ |
-| Time to update | < 1min | N/A |
-| Updates channel | ✅ | ❌ |
-| Free trial | ✅ | ✅ (15 days) |
-| Revert/change channel version | ✅ | ❌ |
-| Install Stats | ✅ | ❌ |
-| Sandbox app for test | ✅ | ❌ |
-| Capacitor Plugin | ✅ | ❌ |
-| Cordova plugin support | ❌ Could be back port | ✅ |
-| Affordable pricing | ✅ Start at $14/mo | ✅ Start at $9.95/mo |
-| Native build | ❌ | ✅ |
-| End-to-End encryption | ✅ | ❌ |
-| 100% Open source | ✅ | ❌ |
-| Easy setup | ✅ | ✅ |
-| Store-ready apps | ❌ | ✅ |
+| Mises à jour en direct | ✅ | ❌ |
+| Conversion d'applications natives | ❌ | ✅ |
+| Il est temps de mettre à jour | < 1min | N/A |
+| Canal de mises à jour | ✅ | ❌ |
+| Essai gratuit | ✅ | ✅ (15 jours) |
+| Rétablir/modifier la version du canal | ✅ | ❌ |
+| Installer les statistiques | ✅ | ❌ |
+| Application Sandbox pour test | ✅ | ❌ |
+| Plugin de condensateur | ✅ | ❌ |
+| Prise en charge du plugin Cordova | ❌ Pourrait être un port arrière | ✅ |
+| Prix ​​abordables | ✅ Commencez à 14 $/mois | ✅ Commencez à 995 $/mois |
+| Construction native | ❌ | ✅ |
+| Chiffrement de bout en bout | ✅ | ❌ |
+| 100% Open Source | ✅ | ❌ |
+| Installation facile | ✅ | ✅ |
+| Applications prêtes pour le magasin | ❌ | ✅ |
 
-## Continuous integration alternatives
+## Alternatives d'intégration continue
 
-While Voltbuilder offers a streamlined process for building and deploying apps, it doesn't provide built-in continuous integration capabilities. If you're looking to implement a CI/CD pipeline alongside live updates, you might consider combining Capgo with a service like GitHub Actions.
+Bien que Voltbuilder offre un processus rationalisé pour créer et déployer des applications, il ne fournit pas de capacités d'intégration continue intégrées. Si vous souhaitez implémenter un pipeline CI/CD parallèlement aux mises à jour en direct, vous pouvez envisager de combiner Capgo avec un service tel que GitHub Actions.
 
-GitHub Actions is a free, built-in continuous integration and deployment service for GitHub repositories. By setting up a workflow with GitHub Actions and integrating Capgo for live updates, you can create a powerful, automated development pipeline.
+GitHub Actions est un service d'intégration et de déploiement continu gratuit et intégré pour les référentiels GitHub. En configurant un workflow avec GitHub Actions et en intégrant Capgo pour les mises à jour en direct, vous pouvez créer un pipeline de développement puissant et automatisé.
 
-To set this up, you would first create a GitHub repository for your app's code. Then, you can create a workflow file that defines the steps to be run whenever code is pushed to the repository. These steps might include building and testing the app, and then using Capgo to create and deploy a live update.
+Pour configurer cela, vous devez d'abord créer un référentiel GitHub pour le code de votre application. Ensuite, vous pouvez créer un fichier de workflow qui définit les étapes à exécuter chaque fois que le code est poussé vers le référentiel. Ces étapes peuvent inclure la création et le test de l'application, puis utiliser Capgo pour créer et déployer une mise à jour en direct
 
-This setup allows you to automatically build, test, and deploy your app with minimal effort, while still taking advantage of the live update capabilities offered by Capgo. For detailed instructions on setting up CI/CD with Capgo, you can refer to our tutorials for [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) and [Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+Cette configuration vous permet de créer, tester et déployer automatiquement votre application avec un minimum d'effort, tout en profitant des fonctionnalités de mise à jour en direct offertes par Capgo. Pour des instructions détaillées sur la configuration de CI/CD avec Capgo, vous pouvez vous référer à nos didacticiels pour [ iOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) et [Android](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)
 
-## Let's go further
+## Allons plus loin
 
-While Voltbuilder offers a straightforward solution for converting web projects into native apps, it may not be the best fit for all developers, especially those who prioritize live update capabilities and open-source solutions.
+Bien que Voltbuilder offre une solution simple pour convertir des projets Web en applications natives, elle n'est peut-être pas la meilleure solution pour tous les développeurs, en particulier ceux qui donnent la priorité aux fonctionnalités de mise à jour en direct et aux solutions open source.
 
-Capgo has matured into a robust platform suitable for teams of all sizes, offering a more affordable solution with a focus on live updates. If you're a larger team requiring dedicated support, don't hesitate to reach out - we're always ready to find tailored solutions.
+Capgo est devenu une plate-forme robuste adaptée aux équipes de toutes tailles, offrant une solution plus abordable axée sur les mises à jour en direct. Si vous êtes une équipe plus grande nécessitant une assistance dédiée, n'hésitez pas à nous contacter - nous sommes toujours prêts à trouver des solutions adaptées
 
-Even though Capgo is designed to be self-service, we pride ourselves on being highly responsive to our users' needs. We can assist you with configuring your build for native code, eliminating the need for more expensive solutions.
+Même si Capgo est conçu pour être en libre-service, nous sommes fiers d'être très réactifs aux besoins de nos utilisateurs.Nous pouvons vous aider à configurer votre build pour du code natif, éliminant ainsi le besoin de solutions plus coûteuses.
 
-If you appreciate open-source, self-service, community-driven tools, Capgo might be the perfect fit for your project.
+Si vous appréciez les outils open source, en libre-service et axés sur la communauté, Capgo pourrait être la solution idéale pour votre projet.
 
-## Register here to get your account
+## Inscrivez-vous ici pour obtenir votre compte
 
-[Capgo](/register/)
+[Capgo](/s'inscrire/)

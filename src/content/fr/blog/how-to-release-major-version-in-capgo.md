@@ -1,84 +1,84 @@
 ---
-slug: "how-to-release-major-version-in-capgo"
-title: How to release major version in capgo
-description: Understand how and when it's necessary to release major version for your app without breaking your user app
+slug: how-to-release-major-version-in-capgo
+title: Comment publier une version majeure dans Capgo
+description: >-
+  Comprendre comment et quand il est nécessaire de publier une version majeure
+  de votre application sans interrompre votre application utilisateur
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-08-30
-updated_at: 2023-06-29
-head_image: "/capgo-feature-image.webp"
-head_image_alt: Capgo major version system
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-08-30T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /capgo-feature-image.webp
+head_image_alt: Système de version majeure Capgo
 tag: Tutorial
 published: true
 locale: fr
-next_blog: "how-to-send-specific-version-to-users"
-
+next_blog: how-to-send-specific-version-to-users
 ---
 
-## When releasing a major version
+## Lors de la sortie d'une version majeure
 
-Versioning can be difficult to manage, usually you want to send a Major update when a major change appears for the users.
+Le versioning peut être difficile à gérer, vous souhaitez généralement envoyer une mise à jour majeure lorsqu'un changement majeur apparaît pour les utilisateurs
 
-But versioning is not made for that, the app store version is different from the Native version.
+Mais le versioning n'est pas fait pour ça, la version App Store est différente de la version Native
 
-Native version is made to manage breaking change in the *code*
+La version native est conçue pour gérer les modifications avec rupture dans le *code*
 
-In IOS, for example, iOS 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seem to use SemVer there)
+Dans IOS, par exemple, iOS 16 est la « version magasin » d'Apple, mais la version du code est « 20A5283p » (ils ne semblent pas utiliser SemVer là-bas)
 
-Now it's clear we don't mix them and use them for what they are made!
+Il est désormais clair que nous ne les mélangeons pas et que nous ne les utilisons pas pour ce qu'ils sont fabriqués !
 
-## Major release
+## Version majeure
 
-In your Capacitor app, a major release is necessary when a breaking change happens. 
-For example, a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
+Dans votre application Capacitor, une version majeure est nécessaire lorsqu'un changement radical se produit 
+Par exemple, une nouvelle cible IOS (15 à 16), ou une nouvelle version de Capacitor (3 à 4), ou un plugin (12 à 20) que vous utilisez ont été mis à jour vers une version majeure.
 
-This change means all tooling has to be aligned to handle the breaking change.
+Ce changement signifie que tous les outils doivent être alignés pour gérer le changement radical
 
-That why Capgo follows this system.
-So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.\
-This behavior can be customized. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
+C'est pourquoi Capgo suit ce système
+Donc si vous publiez une version majeure, Capgo ne l'enverra pas à un utilisateur qui ne l'a pas installée depuis le store\
+Ce comportement peut être personnalisé. Vous pouvez en savoir plus [ici](/docs/tooling/cli/#disable-updates-strategy)
 
 ### Versions
 
-Where Capgo find the version to compare
+Où Capgo trouve la version à comparer
 
-#### IOS
-  > Will be used by Capgo to compare to JavaScript version and find Major upgrade
+####IOS
+  > Sera utilisé par Capgo pour comparer la version JavaScript et trouver une mise à niveau majeure
 
- In IOS the var is set on your project here `ios/App/App/Info.plist` under the key`CFBundleShortVersionString` or `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION` if `MARKETING_VERSION` was set in your `Info.plist` file.
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
+ Dans IOS, la var est définie sur votre projet ici `ios/App/App/Infoplist` sous la clé`CFBundleShortVersionString` ou `ios/App/Appxcodeproj/projectpbxproj` sous la clé `MARKETING_VERSION` si `MARKETING_VERSION` a été défini dans votre ` Fichier Infoplist
+  > Vous pouvez remplacer ce comportement en définissant la clé de version dans le fichier `capacitorconfigjson` [docs ici](/docs/plugin/auto-update#advanced-settings/)
 
 #### Android
-  > Will be uses by Capgo to compare to JavaScript version and find Major upgrade
+  > Sera utilisé par Capgo pour comparer la version JavaScript et trouver une mise à niveau majeure
 
-  in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
+  sous Android, la var est définie sur votre projet ici `android/app/buildgradle` sous la clé `defaultConfigversionName`
+  > Vous pouvez remplacer ce comportement en définissant la clé de version dans le fichier `capacitorconfigjson` [docs ici](/docs/plugin/auto-update#advanced-settings/)
 
-#### JavaScript
-  > Will be used by Capgo to compare to Native version and find Major upgrade
+####JavaScript
+  > Sera utilisé par Capgo pour comparer à la version native et trouver une mise à niveau majeure
 
-  in JavaScript, the var is set on your project here `package.json` under the key `version`
-## Example
+  en JavaScript, la var est définie sur votre projet ici `packagejson` sous la clé `version`
+## Exemple
 
-Your Ionic app is currently released with the version `1.2.3` with Capacitor 3
+Votre application Ionic est actuellement publiée avec la version « 123 » avec Capacitor 3
 
-You are doing the upgrade to capacitor 4.
+Vous effectuez la mise à niveau vers le condensateur 4
 
-You need to upgrade your version number to `2.2.3`, then all your packages include Capgo with notice this big change.
+Vous devez mettre à niveau votre numéro de version vers « 223 », puis tous vos packages incluent Capgo avec attention à ce grand changement
 
-When you release this version to Capgo and the App Store.
+Lorsque vous publiez cette version sur Capgo et l'App Store
 
-All next live update in Capgo `2.2.4` will never be sent to user with `1.2.3` version. Only with `2.2.3` version.
+Toutes les prochaines mises à jour en direct dans Capgo `224` ne seront jamais envoyées à l'utilisateur avec la version `123` Uniquement avec la version `223`
 
-If you follow this pattern, no need to worry more, all is well handled.
+Si vous suivez ce schéma, ne vous inquiétez pas davantage, tout est bien géré.
 
 
-## If I don't follow this
+## Si je ne suis pas ça
 
-In this case, that means you have to send your new app with Capacitor 4 to Apple and Google, but don't to Capgo.
+Dans ce cas, cela signifie que vous devez envoyer votre nouvelle application avec Capacitor 4 à Apple et Google, mais pas à Capgo.
 
-Then you have to wait 100% of your users, have the app or at least 90%, it will take months, probably.
+Ensuite, vous devez attendre que 100 % de vos utilisateurs aient l'application ou au moins 90 %, cela prendra des mois, probablement
 
-While during this time you cannot send any update with Capgo, since old user cannot get the new version.
-You don't have a way to select only some users to receive the update.
-
+Pendant ce temps, vous ne pouvez envoyer aucune mise à jour avec Capgo, car l'ancien utilisateur ne peut pas obtenir la nouvelle version.
+Vous n'avez aucun moyen de sélectionner uniquement certains utilisateurs pour recevoir la mise à jour

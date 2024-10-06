@@ -1,125 +1,128 @@
 ---
-slug: "automatic-capacitor-ios-build-github-action-with-match"
-title: Automatic Capacitor IOS build with GitHub actions using match
-description: How to set up a CI/CD pipeline for your IOS Ionic app using fastlane and GitHub Actions in 5 mins (2022)
+slug: automatic-capacitor-ios-build-github-action-with-match
+title: >-
+  Construction automatique d'IOS de condensateur avec des actions GitHub
+  utilisant match
+description: >-
+  Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
+  de Fastlane et des actions GitHub en 5 minutes (2022)
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-10-30
-updated_at: 2024-08-01
-head_image: "/fastlane_ios.webp"
-head_image_alt: Fastlane testflight GitHub action illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-10-30T00:00:00.000Z
+updated_at: 2024-08-01T00:00:00.000Z
+head_image: /fastlane_ios.webp
+head_image_alt: Illustration de l'action GitHub du vol d'essai Fastlane
 tag: CI/CD
 published: true
 locale: fr
-next_blog: "automatic-capacitor-android-build-github-action"
-
+next_blog: automatic-capacitor-android-build-github-action
 ---
 
-## Continuous Delivery for iOS using Fastlane and GitHub Actions using match
+## Livraison continue pour iOS à l'aide d'actions Fastlane et GitHub à l'aide de match
 
 
-## Prerequisites
+## Prérequis
 
-Before continuing with the tutorial…
+Avant de poursuivre le tutoriel…
 
--   Make sure you have Fastlane [installed](https://docs.fastlane.tools/) on your development machine.
--   iOS developer program membership.
--   Desire to read 😆…
--   A team of many devs, otherwise we recommend to use [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) for simpler workflows.
+- Assurez-vous d'avoir Fastlane [installé](https://docsfastlanetools/) sur votre machine de développement
+- Adhésion au programme pour développeurs iOS
+- Envie de lire 😆…
+- Une équipe composée de nombreux développeurs, sinon nous recommandons d'utiliser [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) pour des flux de travail plus simples
 
-## Important about the price
+## Important concernant le prix
 
-![Price GitHub Action](/price_github_actions.webp)
+![Prix de l'action GitHub](/price_github_actionswebp)
 
-[https://github.com/features/actions](https://github.com/features/actions/)
+[https://githubcom/features/actions](https://githubcom/features/actions/)
 
-The service is ‘_free’_ up to the limit, depending on the chosen machine.  
-We are going to use a **_macOS_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
+Le service est « _gratuit »_ dans la limite, en fonction de la machine choisie  
+Nous allons utiliser une machine **_macOS_**, vous pouvez voir sur la capture d'écran son prix et ses limites (tarifs dès la création du tutoriel, ils pourraient subir des modifications dans le futur)
 
-🔴 **_Once warned of requirements and prices, if you like, we continue…_**
+🔴 **_Une fois prévenus des besoins et des tarifs, si vous le souhaitez, on continue…_**
 
-> **_📣_ In the post we assume that we have the app  created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be copied by Fastlane!**
+> **_📣_ Dans le post, nous supposons que nous avons l'application créée dans iTunes Connect, nous avons les certificats de l'écosystème Apple, tout sera copié par Fastlane !**
 
-## Let’s go to the mess 🧑🏽💻
+## Allons au désordre 🧑🏽💻
 
-**Steps to follow in the post**
+**Étapes à suivre dans le post**
 
-1.  _Using App Store Connect API with Fastlane Match_
-2.  _Requirements_
-3.  _Creating an App Store Connect API Key_
-4.  _Using an App Store Connect API Key_
-5.  _Copy Fastline files_
-6.  _Configure Fastlane matchs_
-6.  _Configure Fastlane matchs_
+1 _Utilisation de l'API App Store Connect avec Fastlane Match_
+2 _Exigences_
+3 _Création d'une clé API App Store Connect_
+4 _Utilisation d'une clé API App Store Connect_
+5 _Copier les fichiers Fastline_
+6 _Configurer les matchs Fastlane_
+6 _Configurer les matchs Fastlane_
 
-## 1\. Using App Store Connect API with Fastlane Match
+## 1\ Utilisation de l'API App Store Connect avec Fastlane Match
 
-> Starting February 2021, two-factor authentication or two-step verification is required for all users to sign in to App Store Connect. This extra layer of security for your Apple ID helps ensure that you’re the only person who can access your account.  
-> From [Apple Support](https://developer.apple.com/support/authentication/)
+> À partir de février 2021, une authentification à deux facteurs ou une vérification en deux étapes est requise pour que tous les utilisateurs puissent se connecter à App Store Connect. Cette couche de sécurité supplémentaire pour votre identifiant Apple permet de garantir que vous êtes la seule personne à pouvoir accéder à votre compte.  
+> Depuis [Assistance Apple](https://developerapplecom/support/authentication/)
 
-> Getting started with match requires you to revoke your existing certificates. But no worry, you will have the new one directly.
-
-
-## Requirements
-
-To be able to use App Store Connect API, Fastlane needs **three** things.
-
-1.  Issuer ID.
-2.  Key ID.
-3.  Key file or Key content.
-
-## Creating an App Store Connect API Key
-
-To generate keys, you must have Admin permission in App Store Connect. If you don’t have that permission, you can direct the relevant person to this article and follow the following instructions.
-
-1 — Log in to [App Store Connect](https://appstoreconnect.apple.com/).
-
-2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users/).
-
-![App Store Connect user access](/select_user_access.webp)
-
-3 — Select the API Keys tab.
-
-![App Store Connect API Keys](/user_access_keys.webp)
-
-4 — Click Generate API Key or the Add (+) button.
-
-![App Store Connect API keys create](/user_access.webp)
-
-5 — Enter a name for the key. The name is for your reference only and is not part of the key itself.
-
-![App Store Connect API keys create name](/gen_key.webp)
-
-6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/).
-
-7 — Click Generate.
-
-> **An API key’s access cannot be limited to specific apps.**
-
-The new key’s name, key ID, a download link, and other information appear on the page.
-
-![App Store Connect download keys](/download_key.webp)
-
-You can grab all three necessary information here.  
-<1> Issue ID.  
-<2> Key ID.  
-<3> Click “Download API Key” to download your API private key. The download link appears only if the private key has not yet been downloaded. Apple does not keep a copy of the private key. So, you can download it only once.
-
-> _🔴_ Store your private key in a safe place. You should never share your keys, store keys in a code repository, or include keys in client-side code.
-
-## Using an App Store Connect API Key
-
-The API Key file (p8 file that you download), the key ID, and the issuer ID are needed to create the JWT token for authorization. There are multiple ways that these pieces of information can be input into Fastlane using Fastlane’s new action, `app_store_connect_api_key`. You can learn other ways in [Fastlane documentation](https://docs.fastlane.tools/actions/app_store_connect_api_key/). I show this method because I think it is the easiest way to work with most CI out there, where you can set environment variables.
-
-_Now we can manage Fastlane with the App Store Connect API key, great!_
-
-## 2\. Copy Fastline files
-
-Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom “lanes” which bundle a series of “actions” that perform tasks that you’d normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we’ll be using only a handful of core actions.
+> La mise en route de match vous oblige à révoquer vos certificats existants. Mais pas d'inquiétude, vous aurez directement le nouveau
 
 
-Create a Fastlane folder at the root of your project and copy the following files:
-Fastfile
+## Exigences
+
+Pour pouvoir utiliser l'API App Store Connect, Fastlane a besoin de **trois** éléments
+
+1 identifiant de l'émetteur
+2 ID de clé
+3 Fichier clé ou contenu clé
+
+## Création d'une clé API App Store Connect
+
+Pour générer des clés, vous devez disposer de l'autorisation d'administrateur dans App Store Connect. Si vous ne disposez pas de cette autorisation, vous pouvez diriger la personne concernée vers cet article et suivre les instructions suivantes.
+
+1 — Connectez-vous à [App Store Connect](https://appstoreconnectapplecom/)
+
+2 — Sélectionnez [Utilisateurs et accès](https://appstoreconnectapplecom/access/users/)
+
+![Accès utilisateur App Store Connect](/select_user_accesswebp)
+
+3 — Sélectionnez l'onglet Clés API
+
+![Clés API App Store Connect](/user_access_keyswebp)
+
+4 — Cliquez sur Générer une clé API ou sur le bouton Ajouter (+)
+
+![Création de clés API App Store Connect](/user_accesswebp)
+
+5 — Entrez un nom pour la clé. Le nom est uniquement à titre de référence et ne fait pas partie de la clé elle-même.
+
+![Les clés API App Store Connect créent un nom](/gen_keywebp)
+
+6 — Sous Accès, sélectionnez le rôle pour la clé. Les rôles qui s'appliquent aux clés sont les mêmes que ceux qui s'appliquent aux utilisateurs de votre équipe Voir [autorisations de rôle](https://helpapplecom/app-store-connect/#/deve5f9a89d7/ )
+
+7 — Cliquez sur Générer
+
+> **L'accès à une clé API ne peut pas être limité à des applications spécifiques**
+
+Le nom de la nouvelle clé, l'ID de la clé, un lien de téléchargement et d'autres informations apparaissent sur la page
+
+![Clés de téléchargement App Store Connect](/download_keywebp)
+
+Vous pouvez récupérer les trois informations nécessaires ici  
+<1> ID du problème  
+<2> ID de clé  
+<3> Cliquez sur « Télécharger la clé API » pour télécharger votre clé privée API Le lien de téléchargement n'apparaît que si la clé privée n'a pas encore été téléchargée Apple ne conserve pas de copie de la clé privée Vous ne pouvez donc la télécharger qu'une seule fois
+
+> _🔴_ Stockez votre clé privée dans un endroit sûr Vous ne devez jamais partager vos clés, stocker des clés dans un référentiel de code ou inclure des clés dans le code côté client
+
+## Utilisation d'une clé API App Store Connect
+
+Le fichier de clé API (fichier p8 que vous téléchargez), l'ID de clé et l'ID d'émetteur sont nécessaires pour créer le jeton JWT pour l'autorisation.Il existe plusieurs façons de saisir ces informations dans Fastlane à l'aide de la nouvelle action de Fastlane, `app_store_connect_api_key`. Vous pouvez découvrir d'autres manières dans la [documentation Fastlane](https://docsfastlanetools/actions/app_store_connect_api_key/) Je montre cette méthode parce que je je pense que c'est le moyen le plus simple de travailler avec la plupart des CI, où vous pouvez définir des variables d'environnement
+
+_Maintenant, nous pouvons gérer Fastlane avec la clé API App Store Connect, super !_
+
+## 2\ Copier les fichiers Fastline
+
+Fastlane est une bibliothèque Ruby créée pour automatiser les tâches courantes de développement mobile. En utilisant Fastlane, vous pouvez configurer des « voies » personnalisées qui regroupent une série d'« actions » qui effectuent des tâches que vous effectueriez normalement avec Android Studio. Vous pouvez faire beaucoup de choses avec Fastlane, mais pour les besoins de ce didacticiel, nous n'utiliserons qu'une poignée d'actions principales
+
+
+Créez un dossier Fastlane à la racine de votre projet et copiez les fichiers suivants :
+Fichier rapide
 ```ruby
 default_platform(:ios)
 
@@ -253,7 +256,7 @@ platform :ios do
 end
 ```
 
-Appfile
+Fichier d'application
 ```ruby
 app_identifier(ENV["DEVELOPER_APP_IDENTIFIER"])
 apple_id(ENV["FASTLANE_APPLE_ID"])
@@ -261,75 +264,75 @@ itc_team_id(ENV["APP_STORE_CONNECT_TEAM_ID"])
 team_id(ENV["DEVELOPER_PORTAL_TEAM_ID"])
 ```
 
-## **Configure Fastlane match**
+## **Configurer la correspondance Fastlane**
 
-Fastlane [match](https://docs.fastlane.tools/actions/match/) is a new approach to iOS’s code signing. Fastlane match makes it easy for teams to manage the required certificates and provisioning profiles for your iOS apps.
+Fastlane [match](https://docsfastlanetools/actions/match/) est une nouvelle approche de la signature de code iOS. Fastlane Match permet aux équipes de gérer facilement les certificats et les profils d'approvisionnement requis pour vos applications iOS.
 
-Create a new private repository named `certificates`, for example on your GitHub personal account or organization.
+Créez un nouveau référentiel privé nommé « certificats », par exemple sur votre compte personnel ou votre organisation GitHub.
 
-Initialize Fastlane match for your iOS app.
+Initialisez la correspondance Fastlane pour votre application iOS
 
 ```shell
 fastlane match init
 ```
 
-Then select option #1 (Git Storage).
+Sélectionnez ensuite l'option n°1 (Git Storage)
 
 ```
 [01:00:00]: fastlane match supports multiple storage modes, please select the one you want to use:1. git2. google_cloud3. s3?
 ```
 
-Assign the URL of the newly created repository.
+Attribuer l'URL du référentiel nouvellement créé
 
 ```
 [01:00:00]: Please create a new, private git repository to store the certificates and profiles there[01:00:00]: URL of the Git Repo: <YOUR_CERTIFICATES_REPO_URL>
 ```
 
-> Now you have inside Fastlane folder a file named **_Matchfile_** and `_git_url_`should be set to the HTTPS URL of the certificates repository. Optionally, you can also use SSH, but it requires a different step to run.
+> Vous avez maintenant dans le dossier Fastlane un fichier nommé **_Matchfile_** et `_git_url_` doit être défini sur l'URL HTTPS du référentiel de certificats. En option, vous pouvez également utiliser SSH, mais son exécution nécessite une étape différente.
 
 ```
 # ios/Matchfilegit_url("https://github.com/gitusername/certificates")storage_mode("git")type("appstore")
 ```
 
-Next, we go to generate the certificates and enter your credentials when asked with Fastlane Match.
+Ensuite, nous allons générer les certificats et saisir vos informations d'identification lorsque cela vous est demandé avec Fastlane Match
 
-You will be prompted to enter a passphrase. Remember it correctly because it will be used later by GitHub Actions to decrypt your certificates repository.
+Vous serez invité à saisir une phrase secrète. Mémorisez-la correctement car elle sera utilisée ultérieurement par GitHub Actions pour décrypter votre référentiel de certificats.
 
 ```
 fastlane match appstore
 ```
 
-If all went well, you should see something like that:
+Si tout s'est bien passé, vous devriez voir quelque chose comme ça :
 
 ```
 [01:40:52]: All required keys, certificates and provisioning profiles are installed 🙌
 ```
 
-> If you experienced any problem with GitHub and the necessary permissions, maybe this [post](https://medium.com/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c/) will help you to generate authentication tokens for git.
+> Si vous rencontrez un problème avec GitHub et les autorisations nécessaires, peut-être que ce [post](https://mediumcom/@litoarias/token-authentication-requirements-for-git-operations-5fdd8a6f6e7c/) vous aidera à générer des jetons d'authentification pour git
 
-Generated certificates and provisioning profiles are uploaded to the certificates repository resources
+Les certificats générés et les profils de provisionnement sont téléchargés vers les ressources du référentiel de certificats
 
-![App Store Connect certificates](/certificates.webp)
+![Certificats App Store Connect](/certificateswebp)
 
 
-Lastly, open your `project` in Xcode, and update the provisioning profile for the release configuration of your app.
+Enfin, ouvrez votre « projet » dans Xcode et mettez à jour le profil d'approvisionnement pour la configuration de la version de votre application
 
-![XCode certificates](/xcode_cert.webp)
+![Certificats XCode](/xcode_certwebp)
 
-## Few things to note 💡
+## Peu de choses à noter 💡
 
-## MATCH
+## CORRESPONDRE
 
-For the CI/CD to import the certificates and provisioning profiles, it needs to have access to the certificates repository. You can do this by generating a personal access token (should be used before) that has the scope to access or read private repositories.
+Pour que le CI/CD importe les certificats et les profils d'approvisionnement, il doit avoir accès au référentiel de certificats. Vous pouvez le faire en générant un jeton d'accès personnel (doit être utilisé auparavant) qui a la possibilité d'accéder ou de lire des référentiels privés.
 
-In GitHub, go to **Settings** → **Developer Settings** → **Personal access tokens** → click `Generate New Token` → tick the `repo` scope → then click `Generate token`.
+Dans GitHub, accédez à **Paramètres** → **Paramètres du développeur** → **Jetons d'accès personnels** → cliquez sur « Générer un nouveau jeton » → cochez la portée « repo » → puis cliquez sur « Générer un jeton »
 
-![Create Personal access token](/personal_access_token.webp)
+![Créer un jeton d'accès personnel](/personal_access_tokenwebp)
 
-Have a copy of the personal access token generated. You will use it later for the environment variable `GIT_TOKEN`.
+Avoir une copie du jeton d'accès personnel généré Vous l'utiliserez plus tard pour la variable d'environnement `GIT_TOKEN`
 
-Then replace your match file generated in Fastlane folder by 
-Matchfile
+Remplacez ensuite votre fichier de correspondance généré dans le dossier Fastlane par 
+Fichier de correspondance
 ```ruby
 CERTIFICATE_STORE_URL = ENV["CERTIFICATE_STORE_URL"]
 GIT_USERNAME = ENV["GIT_USERNAME"]
@@ -342,66 +345,64 @@ type("appstore")
 git_basic_authorization(Base64.strict_encode64("#{GIT_USERNAME}:#{GIT_TOKEN}"))
 username(FASTLANE_APPLE_ID)
 ```
-This will be used by GitHub Actions to import the certificates and provisioning profiles.
-And var will be set in GitHub Secrets, instead of hard-coding them in the file.
+Ceci sera utilisé par GitHub Actions pour importer les certificats et les profils d'approvisionnement
+Et var sera défini dans GitHub Secrets, au lieu de les coder en dur dans le fichier
 
 
-## **Build Processing**
+## **Traitement de construction**
 
-In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in App Store Connect.
+Dans GitHub Actions, **vous êtes facturé en fonction des minutes** que vous avez utilisées pour exécuter votre flux de travail CI/CD. D'après l'expérience, il faut environ 10 à 15 minutes avant qu'une build puisse être traitée dans App Store Connect.
 
-For private projects, the estimated cost per build can go up to **$0.08/min x 15 mins = $1.2**, or more, depending on the configuration or dependencies of your project.
+Pour les projets privés, le coût estimé par build peut aller jusqu'à **008$/min x 15 minutes = 12$**, ou plus, selon la configuration ou les dépendances de votre projet.Si vous partagez les mêmes préoccupations concernant la tarification que moi pour les projets privés, vous pouvez garder `skip_waiting_for_build_processing` sur `true`
 
-If you share the same concerns for the pricing as I do for private projects, you can keep the `skip_waiting_for_build_processing` to `true`.
+Quel est le piège ? Vous devez mettre à jour manuellement la conformité de votre application dans App Store Connect une fois la build traitée, pour pouvoir distribuer la build à vos utilisateurs.
 
-What’s the catch? You have to manually update the compliance of your app in App Store Connect after the build has been processed, for you to distribute the build to your users.
-
-This is just an optional parameter to update if you want to save on the build minutes for private projects. For free projects, this shouldn’t be a problem at all. See [pricing](https://github.com/pricing/).
+Il s'agit simplement d'un paramètre facultatif à mettre à jour si vous souhaitez économiser sur les minutes de construction pour les projets privés. Pour les projets gratuits, cela ne devrait pas poser de problème du tout Voir [tarification](https://githubcom/pricing/)
 
 
-## 3\. Setup GitHub Actions
+## 3\ Configurer les actions GitHub
 
-**Configure GitHub secrets**
+**Configurer les secrets GitHub**
 
-Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore – it’s from your project’s secret. 🤦
+Vous êtes-vous déjà demandé d'où viennent les valeurs de « ENV » ? Eh bien, ce n’est plus un secret – cela vient du secret de votre projet 🤦
 
-![Set GitHub secrets](/github_secets.webp)
+![Définir les secrets GitHub](/github_secetswebp)
 
-1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams.
+1\ `APP_STORE_CONNECT_TEAM_ID` - l'ID de votre équipe App Store Connect si vous faites partie de plusieurs équipes
 
-2\. `DEVELOPER_APP_ID` - in App Store Connect, go to the app → **App Information** → Scroll down to the `General Information` section of your app and look for `Apple ID`.
+2\ `DEVELOPER_APP_ID` ​​- dans App Store Connect, accédez à l'application → **Informations sur l'application** → Faites défiler jusqu'à la section `Informations générales` de votre application et recherchez `identifiant Apple`
 
-3\. `DEVELOPER_APP_IDENTIFIER` - your app’s bundle identifier.
+3\ `DEVELOPER_APP_IDENTIFIER` - l'identifiant du bundle de votre application
 
-4\. `DEVELOPER_PORTAL_TEAM_ID` - the ID of your Developer Portal team if you’re in multiple teams.
+4\ `DEVELOPER_PORTAL_TEAM_ID` - l'ID de votre équipe du portail de développeur si vous faites partie de plusieurs équipes
 
-5\. `FASTLANE_APPLE_ID` - the Apple ID or developer email you use to manage the app.
+5\ `FASTLANE_APPLE_ID` - l'identifiant Apple ou l'e-mail du développeur que vous utilisez pour gérer l'application
 
-6\. `GIT_USERNAME` & `GIT_TOKEN` - Your git username and your personal access token.
+6\ `GIT_USERNAME` & `GIT_TOKEN` - Votre nom d'utilisateur git et votre jeton d'accès personnel
 
-7\. `MATCH_PASSWORD` - the passphrase that you assigned when initializing match, will be used for decrypting the certificates and provisioning profiles.
+7\ `MATCH_PASSWORD` - la phrase secrète que vous avez attribuée lors de l'initialisation de la correspondance, sera utilisée pour déchiffrer les certificats et les profils d'approvisionnement
 
-8\. `PROVISIONING_PROFILE_SPECIFIER` - `match AppStore <YOUR_APP_BUNDLE_IDENTIFIER>`, eg. `match AppStore com.domain.blabla.demo`.
+8\ `PROVISIONING_PROFILE_SPECIFIER` - `match AppStore <YOUR_CERTIFICATES_REPO_URL>`, par exemple `match AppStore comdomainblablademo`
 
-9\. `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - assign a temp keychain user and password for your workflow.
+9\ `TEMP_KEYCHAIN_USER` & `TEMP_KEYCHAIN_PASSWORD` - attribuez un utilisateur de trousseau temporaire et un mot de passe pour votre flux de travail
 
-10\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
+10\ `APPLE_KEY_ID` — Clé API App Store Connect 🔺ID de clé
 
-11\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
+11\ `APPLE_ISSUER_ID` — Clé API App Store Connect 🔺Identifiant de l'émetteur
 
-12\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key file or Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
-<!-- markdown-link-check-disable-next-line -->
-13\. `CERTIFICATE_STORE_URL` — The repo url of your Match keys (ex: https://github.com/***/fastlane_match.git)
+12\ `APPLE_KEY_CONTENT` — Clé API App Store Connect 🔺 Fichier clé ou contenu clé de _p8_, [vérifiez-le](https://githubcom/fastlane/fastlane/issues/18655/#issuecomment-881764901)
+<YOUR_APP_BUNDLE_IDENTIFIER>
+13\ `CERTIFICATE_STORE_URL` — L'URL du dépôt de vos clés de correspondance (ex : https://githubcom/***/fastlane_matchgit)
 
-## **4\. Configure GitHub workflow file**
+## **4\ Configurer le fichier de workflow GitHub**
 
-Create a GitHub workflow directory.
+Créer un répertoire de workflow GitHub
 
 ```
 cd .github/workflows
 ```
 
-Inside the `workflow` folder, create a file named `build-upload-ios.yml`and add the following.
+Dans le dossier `workflow`, créez un fichier nommé `build-upload-isyml` et ajoutez ce qui suit
 
 ```yaml
 name: Build source code on ios
@@ -470,95 +471,95 @@ jobs:
           retention-days: 60
 ```
 
-This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
+Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez d'abord vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
 
-Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
+Ensuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 
-> Each time you send a new commit, a release will be built in TestFlight.
+> Chaque fois que vous envoyez un nouveau commit, une version sera construite dans TestFlight
 
-Your App doesn't need to use Ionic, only Capacitor base is mandatory., it can have old Cordova module, but Capacitor JS plugin should be preferred.
+Votre application n'a pas besoin d'utiliser Ionic, seule la base Capacitor est obligatoire, elle peut avoir l'ancien module Cordova, mais le plugin Capacitor JS doit être préféré
 
-## 5\. Trigger workflow
+## 5\ Déclencher le workflow
 
-**Create a Commit**
+**Créer un commit**
 
-Make a _commit_, you should see the active workflow in the repository.
+Faites un _commit_, vous devriez voir le workflow actif dans le référentiel
 
-**Trigger the workflow**
+**Déclenchez le workflow**
 
-Push the new commits to the branch `main` or `developement` to trigger the workflow.
+Poussez les nouveaux commits vers la branche « main » ou « developement » pour déclencher le workflow
 
-![Started with commit](/cd_started.webp)
+![Démarré avec commit](/cd_startedwebp)
 
-After a few minutes, the build should be available in your App Store Connect dashboard.
+Après quelques minutes, la version devrait être disponible dans votre tableau de bord App Store Connect
 
-![Testflight Dashboard](/testflight_app.webp)
+![Tableau de bord Testflight](/testflight_appwebp)
 
-## Can deploy from local machine?
+## Peut-on déployer à partir d'une machine locale ?
 
-Yes, you can, and it is effortless.
+Oui, vous pouvez, et c'est sans effort
 
-Imagine that you have a private repository, and you have used up the minutes of the free plan and you do not want to pay for new releases, or maybe you prefer to submit the application manually.
+Imaginez que vous disposez d'un référentiel privé, que vous avez utilisé les minutes du plan gratuit et que vous ne souhaitez pas payer pour les nouvelles versions, ou peut-être préférez-vous soumettre la candidature manuellement.
 
-**_Let’s go for it_**
+**_C'est parti_**
 
-Ok, first we need to create in **_my\_project\_path/fastlane_** path a file called **_.env,_** just in the same path as _Fastfile,_ to be able to create the same _secret_ properties found in our _GitHub, a_s below:
+Ok, nous devons d'abord créer dans le chemin **_my\_project\_path/fastlane_** un fichier appelé **_env,_** juste dans le même chemin que _Fastfile,_ pour pouvoir créer les mêmes propriétés _secret_ trouvées dans notre _GitHub, ci-dessous :
 
-.env file for deploy from local machine
+fichier env pour le déploiement à partir de la machine locale
 
-Now, you can go to the _terminal_ and launch the _Fastlane_ from your machine:
+Maintenant, vous pouvez vous rendre sur le _terminal_ et lancer le _Fastlane_ depuis votre machine :
 
 ```
 fastlane closed_beta
 ```
 
-> **❌ Essential about the** _.env_ **file, as we would rather not expose this data, we must add it in our** _.gitignore_**, something like that: ❌**
+> **❌ L'essentiel sur le** _env_ **fichier, comme nous préférons ne pas exposer ces données, nous devons les ajouter dans notre** _gitignore_**, quelque chose comme ça : ❌**
 
 ```
 fastlane/*.env
 ```
 
-It should work the same as it happens from GitHub Actions on the remote machine but in our local machine. 🍻
+Cela devrait fonctionner de la même manière que depuis GitHub Actions sur la machine distante mais sur notre machine locale 🍻
 
-![Local Fastlane run](/local_fastlane.webp)
+![Exécution locale de Fastlane](/local_fastlanewebp)
 
-Terminal execution: $ Fastlane closed\_beta
+Exécution du terminal : $ Fastlane fermé\_beta
 
-**_If you have come this far, my congratulations, now you have a fully automated process for your iOS apps with Fastlane and GitHub Actions._**
+**_Si vous êtes arrivé jusqu'ici, mes félicitations, vous disposez désormais d'un processus entièrement automatisé pour vos applications iOS avec Fastlane et GitHub Actions_**
 
-> Each time you send a new commit, a release will be built in Google Play console, beta channel.
-I will improve this blog with your feedbacks, if you have any question or suggestion, please let me know by email martin@capgo.app
+> Chaque fois que vous envoyez un nouveau commit, une version sera créée dans la console Google Play, canal bêta
+J'améliorerai ce blog avec vos retours, si vous avez des questions ou des suggestions, n'hésitez pas à me le faire savoir par email martin@capgoapp
 
-### Build on your device
+### Créez sur votre appareil
 
-If you still need to build on your device, you need to add them manually to the provisionning.
-Connect your device to your mac and open the device menu
-![find devic ios menu](/find_ios_device.webp)
-Then copy your identifier 
-![find identifier ios](/find_ios_identifier.webp)
-And then start the command:
+Si vous avez encore besoin de développer votre appareil, vous devez les ajouter manuellement au provisionnement.
+Connectez votre appareil à votre Mac et ouvrez le menu de l'appareil
+![Trouver le menu iOS de l'appareil](/find_ios_devicewebp)
+Copiez ensuite votre identifiant 
+![trouver l'identifiant ios](/find_ios_identifierwebp)
+Et puis lancez la commande :
 `fastlane register_new_device`
-it will ask you to set a device name and the identifier:
-![set identifier ios](/set_identifier.webp)
+il vous demandera de définir un nom d'appareil et un identifiant :
+![définir l'identifiant ios](/set_identifierwebp)
 
-### if you got issues
+### si tu as des problèmes
 
-If you have issue with dev device not able to test etc that usually fix it.
+Si vous rencontrez un problème avec le périphérique de développement, vous ne pouvez pas tester, etc., cela le résout généralement
 
-There a magic command who can save you:
+Il existe une commande magique qui peut vous sauver :
 ```shell
 fastlane match nuke development
 fastlane match development
 ```
 
-Then :
-Clean the project by holding Shift(⇧)+Command(⌘)+K or selecting Product > Clean (it might be labelled "Clean Build Folder")
+Alors :
+Nettoyez le projet en maintenant Shift(⇧)+Command(⌘)+K ou en sélectionnant Produit > Nettoyer (il peut être intitulé « Clean Build Folder »).
 
-Then try to run again the app on your device.
+Essayez ensuite de réexécuter l'application sur votre appareil
 
-### Thanks
+### Merci
 
-This blog is based on the following articles:
-- [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
-- [Fastlane Documentation](https://docs.fastlane.tools/app-store-connect-api/)
-- [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)
+Ce blog est basé sur les articles suivants :
+- [Livraison continue pour IOS à l'aide des actions Fastlane et GitHub](https://litoariasmediumcom/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
+- [Documentation Fastlane](https://docsfastlanetools/app-store-connect-api/)
+- [Ce message GitHub de @mrogunlana](https://githubcom/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)

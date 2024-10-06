@@ -1,49 +1,51 @@
 ---
-slug: "how-to-bypass-app-store-review"
-title: How to update Capacitor JS Apps without the App Store review.
-description: 'How can Capgo Feature allow you to push code updates to live iOS Ionic apps and be fully compliant with Apple’s guidelines? '
+slug: how-to-bypass-app-store-review
+title: >-
+  Comment mettre à jour les applications Capacitor JS sans l'examen de l'App
+  Store.
+description: "Comment Capgo Feature peut-il vous permettre de diffuser des mises à jour de code vers des applications iOS Ionic en direct et d'être entièrement conforme aux directives d'Apple\_?"
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-01-13
-updated_at: 2022-01-13
-head_image: "/bypass_illustration.webp"
-head_image_alt: Capacitor bypass illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-01-13T00:00:00.000Z
+updated_at: 2022-01-13T00:00:00.000Z
+head_image: /bypass_illustration.webp
+head_image_alt: Illustration du contournement du condensateur
 tag: Tutorial
 published: true
 locale: fr
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-_Glad you asked._
 
-My lawyers asked me to let you know that this isn't legal advice, but you don't need a law degree to understand the wording in Apple's official guidelines. Apple’s guidelines explicitly permit you to push executable code directly to your app, bypassing the App Store, under these three conditions:
+_Heureux que vous ayez demandé_
 
-* The code is run by Apple's built-in WebKit framework
-* The code does not provide, unlock or enable additional features or functionality
-* The user doesn't see the update is happening
+Mes avocats m'ont demandé de vous faire savoir qu'il ne s'agit pas d'un avis juridique, mais que vous n'avez pas besoin d'un diplôme en droit pour comprendre le libellé des directives officielles d'Apple. Les directives d'Apple vous permettent explicitement d'envoyer du code exécutable directement dans votre application, en contournant l'application. Conserver, dans ces trois conditions :
 
-With Capgo capacitor plugin, you can only update and modify your HTML CSS and JavaScript, so we’re good on the first condition.
+* Le code est exécuté par le framework WebKit intégré d'Apple
+* Le code ne fournit, ne déverrouille ni n'active des fonctionnalités ou fonctionnalités supplémentaires
+* L'utilisateur ne voit pas que la mise à jour est en cours
 
-On a side note, the ability for apps to update themselves without the App Store has been around for a quite a while.
-Only for apps created using JavaScript frameworks such as Facebook's React Native and services such as Expo.
+Avec le plugin Capgo condensateur, vous pouvez uniquement mettre à jour et modifier votre HTML CSS et JavaScript, nous sommes donc bons sur la première condition
 
-A proof that React Native is not more Native than Capacitor 😆
+Par ailleurs, la possibilité pour les applications de se mettre à jour elles-mêmes sans l'App Store existe depuis un certain temps.
+Uniquement pour les applications créées à l'aide de frameworks JavaScript tels que React Native de Facebook et de services tels que Expo
 
-Capgo is simply the first affordable solution that provides the ability to push code-level updates to native Capacitor apps.
-The second condition, no new features or functionality, is really up to you.
+Une preuve que React Native n'est pas plus Native que Capacitor 😆
 
-Capgo isn't intended to push new features or functionality. It is meant to tweak or fix them, avoiding the minor releases needed to fix bugs, add logging or tracking, update messages, force users to upgrade, etc.
+Capgo est tout simplement la première solution abordable qui offre la possibilité d'envoyer des mises à jour au niveau du code vers les applications Capacitor natives.
+La deuxième condition, aucune nouvelle fonctionnalité ou fonctionnalité, dépend vraiment de vous
 
-For new features or functionality, you need to release through the app store. For your information, Ionic AppFlow (the alternative for big corporate) is installed on over 50 million iOS devices and there's never been an app rejected because it uses it.
+Capgo n'est pas destiné à proposer de nouvelles fonctionnalités. Il est destiné à les modifier ou à les corriger, en évitant les versions mineures nécessaires pour corriger les bogues, ajouter la journalisation ou le suivi, mettre à jour les messages, forcer les utilisateurs à effectuer une mise à niveau, etc.
 
-I'm just saying that because it's good to know that thousands of other developers are using live updates, so you're not alone.
+Pour de nouvelles fonctionnalités ou fonctionnalités, vous devez les publier via l'App Store. Pour votre information, Ionic AppFlow (l'alternative pour les grandes entreprises) est installé sur plus de 50 millions d'appareils iOS et aucune application n'a jamais été rejetée car elle l'utilise.
 
-Apple and Google have their set of own rules on how to update apps.
+Je dis simplement cela parce qu'il est bon de savoir que des milliers d'autres développeurs utilisent des mises à jour en direct, vous n'êtes donc pas seul.
 
-For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf/).
-\[…\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[…\] __TLDR__: we should use OTA updates only to fix bugs or make improvements, without making significant changes.
+Apple et Google ont leurs propres règles sur la façon de mettre à jour les applications
 
-__Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) to update by Google services only.
+Pour Apple, [jetez un œil au paragraphe 332](https://developerapplecom/programs/information/Apple_Developer_Program_Information_8_12_15pdf/)
+\[…\] La seule exception à ce qui précède concerne les scripts et le code téléchargés et exécutés par le framework WebKit intégré d'Apple ou JavascriptCore \[…\] __TLDR__ : nous devons utiliser les mises à jour OTA uniquement pour corriger des bugs ou apporter des améliorations, sans apporter de modifications significatives. changements
+
+__Google__ Play est moins restrictif : ils disent que les applications installées à partir de Google Play avec des packages JavaScript [ne sont pas restreintes](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) à mettre à jour par les services Google. seulement
 
 
-Check my next article for more information on how to install Capgo to bypass review.
+Consultez mon prochain article pour plus d'informations sur la façon d'installer Capgo pour contourner l'examen.

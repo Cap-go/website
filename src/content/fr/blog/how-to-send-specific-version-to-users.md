@@ -1,98 +1,100 @@
 ---
-slug: "how-to-send-specific-version-to-users"
-title: How to send specific update to one user or a group
-description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your Ionic app, and they are in !
+slug: how-to-send-specific-version-to-users
+title: Comment envoyer une mise à jour spécifique à un utilisateur ou à un groupe
+description: >-
+  Permettez à votre utilisateur d'essayer la version bêta sans avoir besoin de
+  TestFlight ou du processus bêta de Google, ajoutez simplement un bouton dans
+  votre application Ionic, et ils y sont !
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-06-17
-updated_at: 2023-06-29
-head_image: "/capgo_select_update.webp"
-head_image_alt: TestFlight alternative illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-06-17T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /capgo_select_update.webp
+head_image_alt: Illustration alternative de TestFlight
 tag: alternatives
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-## Preface
+## Préface
 
-When you start to enjoy the update system of Capgo, like me for my apps, you will start to get the feeling “What if I want more?”
+Lorsque vous commencerez à profiter du système de mise à jour de Capgo, comme moi pour mes applications, vous commencerez à avoir le sentiment « Et si j'en veux plus ?
 
-I got the feeling too, but since I'm the maker of Capgo, I was able to take a look!
+J'ai eu le sentiment aussi, mais comme je suis le créateur de Capgo, j'ai pu y jeter un oeil !
 
-> Since all is open-source, you have this power too :)
+> Puisque tout est open-source, vous avez aussi ce pouvoir :)
 
-The next pain I got in the Capacitor app distribution process is to make other teammates test the updates!
+La prochaine difficulté que j'ai rencontrée dans le processus de distribution de l'application Capacitor est de demander à d'autres coéquipiers de tester les mises à jour !
 
-With TestFlight, the issue is simple, bringing people into your team and making them understand how to get it is time-consuming!
+Avec TestFlight, la problématique est simple, intégrer des personnes dans votre équipe et leur faire comprendre comment l'obtenir prend du temps !
 
-And of course, each time you send to Apple you have a random review process by a bot who can take 5 min or 5 hours, you never know.
+Et bien sûr, chaque fois que vous envoyez à Apple, vous bénéficiez d'un processus d'examen aléatoire par un robot qui peut prendre 5 minutes ou 5 heures, on ne sait jamais
 
-I got many times my presentation delayed by this…
+J'ai eu plusieurs fois ma présentation retardée à cause de cela…
 
-And for Google this is even worse, the big mystery of my life, releasing a production version takes less than 2 hours, but releasing a close beta takes 1–2 days.
+Et pour Google, c'est encore pire, le grand mystère de ma vie, sortir une version de production prend moins de 2 heures, mais sortir une version bêta proche prend 1 à 2 jours
 
 
 ## Solution
 
-To fix this, I crated the Channel system in Capgo.
+Pour résoudre ce problème, j'ai créé le système de chaînes dans Capgo
 
-`npx @capgo/cli@latest bundle upload -c production` will update to all users (if production channel is set to default)
+`npx @capgo/cli@latest bundle upload -c production` sera mis à jour pour tous les utilisateurs (si le canal de production est défini par défaut)
 
-If you do `npx @capgo/cli@latest bundle upload -c development` then the version land to a different channel, this can be automatized in [GitHub action](/blog/manage-dev-and-prod-build-with-github-actions/). 
+Si vous effectuez `npx @capgo/cli@latest bundle upload -c development`, la version atterrit sur un canal différent, cela peut être automatisé dans [action GitHub](/blog/manage-dev-and-prod-build-with -github-actions/) 
 
-Then you have 2 way to let users get the updates from the channel
+Ensuite, vous avez deux façons de permettre aux utilisateurs de recevoir les mises à jour de la chaîne
 
-### Super automatic Way
+### Manière super automatique
 
-This can be useful when you don't want to create your own backend for channel set, this is fast to implement.
+Cela peut être utile lorsque vous ne souhaitez pas créer votre propre backend pour un ensemble de canaux, c'est rapide à mettre en œuvre
 
-With that one, the only thing you need to do is allow one of your channels to be self to set.
+Avec celui-là, la seule chose que vous devez faire est de permettre à l'une de vos chaînes de se régler automatiquement.
 
-![Allow set self in Capgo](/self_set.webp)
+![Autoriser la définition de soi dans Capgo](/self_setwebp)
 
-And then add this in the code of your Ionic app, for best experience, use this after the user clicks on a button like "register for beta"
+Et puis ajoutez-le dans le code de votre application Ionic, pour une meilleure expérience, utilisez-le après que l'utilisateur ait cliqué sur un bouton comme "s'inscrire à la version bêta".
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.setChannel({ channel: 'beta' })
 ```
 
-### Manual way
+### Manière manuelle
 
-This can be useful for your internal team, this is fast to implement.
-Allow users to copy their deviceID from your app and send it to you manually, this code will help you to get it:
+Cela peut être utile pour votre équipe interne, c’est rapide à mettre en œuvre
+Autorisez les utilisateurs à copier leur identifiant d'appareil depuis votre application et à vous l'envoyer manuellement, ce code vous aidera à l'obtenir :
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getDeviceId()
 ```
-Hide a button somewhere in your app, or show the button to only connected users with a `admin` role, for example.
+Masquez un bouton quelque part dans votre application ou affichez le bouton uniquement aux utilisateurs connectés avec un rôle « administrateur », par exemple
 
-Then Go to the Web app or native app Capgo, connect as app admin, select your app, click on the device list.
+Accédez ensuite à l'application Web ou à l'application native Capgo, connectez-vous en tant qu'administrateur de l'application, sélectionnez votre application, cliquez sur la liste des appareils.
 
-Then put in the search bar the deviceID click on the one found and then click on the Channel link choose the `development`, ask your teammate to open the app again, wait 30 sec and open close.
+Ensuite, mettez dans la barre de recherche l'ID de l'appareil, cliquez sur celui trouvé puis cliquez sur le lien Chaîne, choisissez le « développement », demandez à votre coéquipier d'ouvrir à nouveau l'application, attendez 30 secondes et ouvrez et fermez
 
-He should get your version.
+Il devrait avoir ta version
 
 
-### Automatic way
+### Méthode automatique
 
-This can be useful for your beta testers, this is longer to implement.
+Cela peut être utile pour vos bêta-testeurs, c'est plus long à mettre en œuvre
 
-Same as the manual way, you have to get the deviceID
+De la même manière que pour la méthode manuelle, vous devez obtenir l'ID de l'appareil
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 const deviceId = await CapacitorUpdater.getDeviceId()
 ```
 
-But this time you have to send it automatically to your backend, I let you decide how you do that.
+Mais cette fois, vous devez l'envoyer automatiquement à votre backend, je vous laisse décider comment procéder.
 
-I will just suggest you to store it in a database, that will facilitate your life later.
+Je vous proposerai juste de le stocker dans une base de données, cela vous facilitera la vie plus tard
 
-Then in your backend you have to send it to Capgo backend too. Below two code examples:
+Ensuite, dans votre backend, vous devez également l'envoyer au backend Capgo. Ci-dessous deux exemples de code :
 <details>
   <summary>NodeJS</summary>
 
@@ -151,14 +153,14 @@ async function handleRequest(request) {
   return fetch(newUrl.toString(), options)
 }
 ```
-And just send your device_id in the body of it to the deployed URL with POST to add and DELETE method to delete.
+Et envoyez simplement votre device_id dans le corps de celui-ci à l'URL déployée avec la méthode POST pour ajouter et la méthode DELETE pour supprimer
 </details>
 
-After this configured, try to add a button in your app to opt in to the channel, and check in the web app if that has been set.
+Une fois cette configuration configurée, essayez d'ajouter un bouton dans votre application pour vous inscrire à la chaîne et vérifiez dans l'application Web si cela a été défini.
 
-You can also send `null` to remove override
+Vous pouvez également envoyer « null » pour supprimer le remplacement
 
-If you need to check programmatically what override is set on a device, you can get on the same URL
+Si vous devez vérifier par programme quel remplacement est défini sur un appareil, vous pouvez accéder à la même URL
 
 ```js
 import axios from 'axios'

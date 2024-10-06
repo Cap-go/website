@@ -1,67 +1,69 @@
 ---
-slug: "self-hosted-capgo"
-title: Self hosted Capgo
-description:  Self-hosting Capgo allows you to deploy Capacitor live updates to your users without having to use the Capgo cloud service.
+slug: self-hosted-capgo
+title: Capgo auto-hébergé
+description: >-
+  Capgo auto-hébergé vous permet de déployer des mises à jour en direct de
+  Capacitor auprès de vos utilisateurs sans avoir à utiliser le service cloud
+  Capgo.
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-20
-updated_at: 2023-09-20
-head_image: "/self-hosted-capgo.webp"
-head_image_alt: self-hosted capgo
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-20T00:00:00.000Z
+updated_at: 2023-09-20T00:00:00.000Z
+head_image: /self-hosted-capgo.webp
+head_image_alt: capgo auto-hébergé
 tag: Solution
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-This article provides a step-by-step guide on how to self-host Capgo, as well as a discussion of the benefits and challenges of self-hosting.
+Cet article fournit un guide étape par étape sur la façon d'auto-héberger Capgo, ainsi qu'une discussion sur les avantages et les défis de l'auto-hébergement.
 
 # Introduction
 
-Self Hosting is a form of running your own website or application by setting up a server and network yourself. Instead of using a Platform as a Service or a Public Cloud Provider, those who choose to self-host will run their own networks and be responsible for the maintenance and uptime in addition to building their website or application.
+L'auto-hébergement est une forme de gestion de votre propre site Web ou application en configurant vous-même un serveur et un réseau. Au lieu d'utiliser une plateforme en tant que service ou un fournisseur de cloud public, ceux qui choisissent de s'auto-héberger géreront leurs propres réseaux et seront responsables de la maintenance et la disponibilité en plus de la construction de leur site Web ou de leur application
 
-The easiest way to get started with Capgo is with our [official managed service in the cloud](https://capgo.app/), but if you’re happy to manage your own, you can also self-host Capgo on your server.
+Le moyen le plus simple de démarrer avec Capgo est d'utiliser notre [service géré officiel dans le cloud](https://capgoapp/), mais si vous souhaitez gérer le vôtre, vous pouvez également auto-héberger Capgo sur votre serveur.
 
-## What is self hosting?
+## Qu'est-ce que l'auto-hébergement ?
 
-Self-hosting, in the context of the digital realm, refers to the practice of running your own servers or hosting infrastructure to manage and control your online presence and services. Instead of relying on third-party hosting providers, individuals and organizations choose to set up and manage their servers, websites, applications, and data storage on their terms.
+L'auto-hébergement, dans le contexte du domaine numérique, fait référence à la pratique consistant à gérer vos propres serveurs ou infrastructures d'hébergement pour gérer et contrôler votre présence et vos services en ligne. Au lieu de compter sur des fournisseurs d'hébergement tiers, les individus et les organisations choisissent de mettre en place et gérer leurs serveurs, sites Web, applications et stockage de données selon leurs conditions
 
-## Why do you choose self-hosting?
+## Pourquoi choisissez-vous l'auto-hébergement ?
 
-There are many reasons why people choose to self-host. Some of the most common benefits include:
+Il existe de nombreuses raisons pour lesquelles les gens choisissent de s'auto-héberger. Certains des avantages les plus courants incluent :
 
-* **Privacy and control:** Self-hosting gives you complete control over your data and privacy. You don't have to worry about third-party providers tracking your activity or selling your data.
+* **Confidentialité et contrôle :** L'auto-hébergement vous donne un contrôle total sur vos données et votre confidentialité. Vous n'avez pas à vous soucier des fournisseurs tiers qui suivent votre activité ou vendent vos données.
 
-* **Cost savings:** Self-hosting can be more cost-effective in the long run, especially if you're using a lot of resources or running multiple services.
+* **Économies :** L'auto-hébergement peut être plus rentable à long terme, surtout si vous utilisez beaucoup de ressources ou si vous exécutez plusieurs services.
 
-* **Customization:** Self-hosting gives you the flexibility to customize your applications and services to meet your specific needs.
+* **Personnalisation :** L'auto-hébergement vous offre la flexibilité de personnaliser vos applications et services pour répondre à vos besoins spécifiques.
 
-* **Learning and experimentation:** Self-hosting can be a great way to learn about Linux, system administration, and other technical topics. It can also be a fun way to experiment with new software and services.
+* **Apprentissage et expérimentation :** L'auto-hébergement peut être un excellent moyen d'en apprendre davantage sur Linux, l'administration système et d'autres sujets techniques. Il peut également être un moyen amusant d'expérimenter de nouveaux logiciels et services.
 
-* **Independence:** Self-hosting reduces your dependency on external providers. You're not at the mercy of their terms of service, pricing changes, or potential service disruptions. This independence can be crucial for businesses and individuals who rely on their online presence for critical functions.
+* **Indépendance :** L'auto-hébergement réduit votre dépendance à l'égard des fournisseurs externes. Vous n'êtes pas à la merci de leurs conditions de service, de leurs changements de prix ou de potentielles interruptions de service. Cette indépendance peut être cruciale pour les entreprises et les particuliers qui dépendent de leur service en ligne. présence pour les fonctions critiques
 
-## What’s the difference between Capgo Cloud and Capgo Self-Hosted?
+## Quelle est la différence entre Capgo Cloud et Capgo Self-Hosted ?
 
-There is only one version of Capgo. Both my Cloud and my Self-Hosted products are completely equal. There’s no premium and exclusive commercial version with a better or more complete feature set.
+Il n'existe qu'une seule version de Capgo. Mes produits Cloud et auto-hébergés sont complètement égaux. Il n'existe pas de version commerciale premium et exclusive avec un ensemble de fonctionnalités meilleur ou plus complet.
 
-You get the same dashboard, same actionable metrics and same commitment to [respecting the privacy of your visitors](https://capgo.app/privacy/) with both.
+Vous obtenez le même tableau de bord, les mêmes mesures exploitables et le même engagement à [respecter la vie privée de vos visiteurs](https://capgoapp/privacy/) avec les deux
 
-I started developing Capgo in December 2018, and I launched the SaaS subscription business in May 2019. The project is very much alive, actively developed and fast-growing. It is robust and battle-tested too.
+J'ai commencé à développer Capgo en décembre 2018 et j'ai lancé l'activité d'abonnement SaaS en mai 2019. Le projet est bien vivant, activement développé et en croissance rapide. Il est également robuste et testé au combat.
 
-Here are the differences between Capgo Cloud and Capgo Self-Hosted:
+Voici les différences entre Capgo Cloud et Capgo Self-Hosted :
 
-|   | Cloud | Self-hosted |
+|   | Nuage | Auto-hébergé |
 | --- | --- | --- |
-| **Hosting** | Easy and convenient. It takes 2 minutes to start sending your first update, high availability, backups, security, and maintenance all done for you by me. I manage everything for you so you don’t have to worry about anything. | You do it all yourself. You need to get a server, and you need to manage your infrastructure. You are responsible for installation, maintenance, upgrades, server capacity, uptime, backup, security, stability, consistency, loading time and so on. |
-| **Storage** | All visitor data is exclusively processed on EU-owned cloud infrastructure. I keep your site data on a secure, encrypted and server in Germany. This ensures that your site data is protected by the strict European Union data privacy laws and ensures compliance with GDPR. Your website data never leaves the EU. | You have full control and can host your Capgo on any server in any country that you wish. Host it on a server in your basement or host it with any cloud provider wherever you want, even those that are not GDPR compliant. |
-| **Raw data** | You see all your site stats and metrics on my modern-looking, simple to use and fast loading dashboard. You can only see the stats aggregated in the dashboard. | Are you an analyst and want access to the raw data? Hosting Capgo yourself gives you that option. Take the data directly from the database and import it to a data analysis tool of your choice. |
-| **Costs** | There’s a cost associated with providing an updater service, so I charge a subscription fee. | You only need to pay for your server and whatever cost there is associated with running a server. You never have to pay any fees to me, only to your cloud provider. |
-| **Premium Support** | Real support delivered by real human beings who build and maintain Capgo. | Premium support is not included. Self-hosted release is community supported only. |
-| **Releases** | Continuously developed and improved with new features and updates multiple times per week. | It’s a long term release published twice per year, so the latest features won’t be immediately available as they’re battled-tested in the cloud first. |
+| **Hébergement** | Facile et pratique Il faut 2 minutes pour commencer à envoyer votre première mise à jour, haute disponibilité, sauvegardes, sécurité et maintenance, tout est fait pour vous par moi. Je gère tout pour vous afin que vous n'ayez à vous soucier de rien | Vous faites tout vous-même Vous avez besoin d'un serveur et vous devez gérer votre infrastructure Vous êtes responsable de l'installation, de la maintenance, des mises à niveau, de la capacité du serveur, de la disponibilité, de la sauvegarde, de la sécurité, de la stabilité, de la cohérence, du temps de chargement, etc. |
+| **Stockage** | Toutes les données des visiteurs sont exclusivement traitées sur une infrastructure cloud appartenant à l'UE. Je conserve les données de votre site sur un serveur sécurisé et crypté en Allemagne. Cela garantit que les données de votre site sont protégées par les lois strictes de l'Union européenne sur la confidentialité des données et garantit la conformité au RGPD. Les données de votre site Web ne quitte jamais l'UE | Vous avez le contrôle total et pouvez héberger votre Capgo sur n'importe quel serveur dans n'importe quel pays de votre choix. Hébergez-le sur un serveur dans votre sous-sol ou hébergez-le chez n'importe quel fournisseur de cloud où vous le souhaitez, même ceux qui ne sont pas conformes au RGPD.|
+| **Données brutes** | Vous voyez toutes les statistiques et mesures de votre site sur mon tableau de bord moderne, simple à utiliser et à chargement rapide. Vous ne pouvez voir que les statistiques agrégées dans le tableau de bord | Vous êtes analyste et souhaitez accéder aux données brutes ? Héberger Capgo vous-même vous offre cette option. Récupérez les données directement de la base de données et importez-les dans un outil d'analyse de données de votre choix |
+| **Coûts** | Il y a un coût associé à la fourniture d'un service de mise à jour, je facture donc des frais d'abonnement | Vous n'avez qu'à payer pour votre serveur et quel que soit le coût associé à l'exploitation d'un serveur. Vous n'avez jamais à me payer de frais, uniquement à votre fournisseur de cloud |
+| **Assistance Premium** | Un véritable support fourni par de vrais êtres humains qui construisent et entretiennent Capgo | Le support Premium n'est pas inclus. La version auto-hébergée est uniquement prise en charge par la communauté |
+| **Communiqués** | Développé et amélioré en permanence avec de nouvelles fonctionnalités et mises à jour plusieurs fois par semaine | Il s’agit d’une version à long terme publiée deux fois par an, donc les dernières fonctionnalités ne seront pas immédiatement disponibles car elles sont d’abord testées dans le cloud |
 
-# Using the CLI with self-hosted capgo
-To use the CLI with self-hosted capgo edit the capacitor.config.ts from your app directory and set it like this:
+# Utilisation de la CLI avec capgo auto-hébergé
+Pour utiliser la CLI avec capgo auto-hébergé, modifiez les configurations de condensateur à partir du répertoire de votre application et définissez-le comme ceci :
 
 ```ts
 const config: CapacitorConfig = {
@@ -80,15 +82,15 @@ const config: CapacitorConfig = {
 };
 ```
 
-Note: To get localSupaAnon please follow this [tutorial](https://capgo.app/docs/self-hosted/local-dev/getting-started/) and copy the anon key into localSupaAnon
+Remarque : Pour obtenir localSupaAnon, veuillez suivre ce [tutoriel](https://capgoapp/docs/self-hosted/local-dev/getting-started/) et copiez la clé anon dans localSupaAnon.
 
-# Using the capacitor updater with self-hosted capgo
+# Utilisation du programme de mise à jour du condensateur avec capgo auto-hébergé
 
-**Requirement**
+**Exigence**
 
-Cloned [capgo](https://github.com/Cap-go/capgo/)
+Cloné [capgo](https://githubcom/Cap-go/capgo/)
 
-To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+Pour utiliser le programme de mise à jour des condensateurs avec capgo auto-hébergé, modifiez les « condensateurconfigts » depuis le répertoire de votre application et définissez-le comme ceci :
 
 ```ts
 const config: CapacitorConfig = {
@@ -106,11 +108,10 @@ const config: CapacitorConfig = {
 };
 ```
 
-This will enable you to use local capgo in development. However, by default, this is not enough.
+Cela vous permettra d'utiliser capgo local en développement. Cependant, par défaut, cela ne suffit pas
 
 # Conclusion
 
-In conclusion, self-hosting Capgo can be a good option for organizations that have the resources and expertise to do so. It offers a number of benefits, including control over the update process, security, and compliance. However, it is important to carefully weigh the benefits and challenges before deciding whether to self-host.
+En conclusion, l'auto-hébergement Capgo peut être une bonne option pour les organisations qui disposent des ressources et de l'expertise nécessaires. Il offre un certain nombre d'avantages, notamment le contrôle du processus de mise à jour, la sécurité et la conformité. Cependant, il est important de peser soigneusement les avantages et défis avant de décider d’auto-héberger
 
-If you are considering self-hosting Capgo, I recommend that you start by reading the Capgo [self-hosting documentation](https://capgo.app/docs/self-hosted/getting-started/). This will give you a good understanding of the requirements and risks of self-hosting. 
-
+Si vous envisagez d'auto-héberger Capgo, je vous recommande de commencer par lire la [documentation d'auto-hébergement](https://capgoapp/docs/self-hosted/getting-started/) de Capgo. Cela vous donnera une bonne compréhension de les exigences et les risques de l’auto-hébergement
