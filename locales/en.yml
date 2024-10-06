@@ -484,3 +484,80 @@ security_what_we_promise_3: We will handle your report with strict confidentiali
 security_what_we_promise_4: We will keep you informed of the progress towards resolving the problem.
 security_what_we_promise_5: In the public information concerning the problem reported, we will give your name as the discoverer of the problem (unless you desire otherwise).
 security_closing: We strive to resolve all problems as quickly as possible, and we would like to play an active role in the ultimate publication on the problem after it is resolved.
+sla_title: Service Level Agreements
+enterprise_platform_uptime_sla: Enterprise Platform Uptime SLA
+sla_intro: "The following Service Level Agreement, which is incorporated into and forms part of the Subscription Agreement between Capgo (\"Capgo\") and Customer (the \"Agreement\"), will apply to the Services for Enterprise Customers specified in an Order Form during the applicable Subscription Term:"
+uptime_commitment_title: 1. Uptime Commitment
+uptime_commitment_desc: "Capgo will provide Actual Availability for at least ninety-nine percent (99.0%) of the total time in each calendar month during the Subscription Term, as measured by Capgo (the \"Uptime Commitment\")."
+service_credits_title: 2. Service Credits
+service_credits_desc: "If the Uptime Commitment is not met during any particular calendar month during the Subscription Term, then Customer will be eligible for a service credit (\"Service Credit\"), provided that Customer reports to Capgo such failure to meet the Uptime Commitment and requests such Service Credit in accordance with this Exhibit. The amount of any Service Credit due hereunder shall be calculated as follows: X * Y, where X = the total fees due from Customer to Capgo for the affected Services for the relevant calendar month (regardless of when billed or payable), and Y = the Credit Percentage corresponding with the Actual Availability provided (as a percentage of total time) for the relevant calendar month, as set forth in the table below."
+actual_availability: Actual Availability
+credit_percentage: Credit Percentage
+availability_99_98: Less than 99.0% but greater than or equal to 98.0%
+credit_10_percent: 10%
+availability_98_97: Less than 98.0% but greater than or equal to 97.0%
+credit_15_percent: 15%
+availability_97_95: Less than 97.0% but greater than or equal to 95.0%
+credit_20_percent: 20%
+availability_below_95: Less than 95.0%
+credit_30_percent: 30%
+credit_requests_payment_title: 3. Credit Requests and Payment
+credit_requests_payment_desc: To request a Service Credit, Customer must send an email to Capgo at support@capgo.app within thirty (30) days of the end of the month in which the Uptime Commitment was not met. Customer must include either its account ID or registered email address, and the previously reported dates and times that there was no Service Availability. If Capgo confirms that Customer is eligible for a Service Credit, Capgo will issue a credit to Customer's account within thirty (30) days. Service Credits are not refunds, cannot be exchanged into a cash amount, and may only be used against future billing charges. Except as set forth in Section 4 below, the Service Credits shall be Customer's sole and exclusive remedy, and Capgo's sole and exclusive liability, for any failure by Capgo to meet the Uptime Commitment.
+definitions_title: 4. Definitions
+definitions_desc: All capitalized words used but not defined in this Service Level Agreement have the meaning set forth in the Agreement.
+scheduled_availability_title: 4.1 Scheduled Availability
+scheduled_availability_desc: "\"Scheduled Availability\" means the time, in minutes, that the applicable Services are generally accessible and available to Customer's Permitted Users."
+unscheduled_downtime_title: 4.2 Unscheduled Downtime
+unscheduled_downtime_desc: "\"Unscheduled Downtime\" means the time, in minutes, that the applicable Services are not generally accessible and available to Customer's Permitted Users, excluding inaccessibility or unavailability due to Customer's or Permitted Users' acts or omissions, force majeure events, scheduled maintenance disclosed with at least 24 hours' notice by email, hacking or virus attacks, reasonable emergency maintenance or other product specific exclusions listed under SLA Exclusions."
+actual_availability_title: 4.3 Actual Availability
+actual_availability_desc: "\"Actual Availability\" means Scheduled Availability less Unscheduled Downtime."
+production_title: 4.4 Production
+production_desc: "\"Production\" is defined as a system serving live customer-facing or business systems with existing deployed and functional features."
+non_production_desc: "\"Development\", \"Staging\", \"uat\", \"pre-production\" or new feature implementation even if in a production environment, are not considered Production."
+sla_exclusions_title: SLA Exclusions
+general_service_exclusions_title: General Service Exclusions
+general_service_exclusion_1: (i) Caused by factors outside of our reasonable control, including but not limited to any force majeure event or Internet access, ISP provider issues, and/or related problems beyond the demarcation point of Capgo.
+general_service_exclusion_2: (ii) That result from any voluntary actions or inactions from you.
+general_service_exclusion_3: (iii) That result from instance class CPU and memory resource limitations.
+general_service_exclusion_4: (iv) That result from you not following the basic operational guidelines described in our Docs.
+general_service_exclusion_5: (v) That result in a long recovery time due to insufficient IO capacity for your workload.
+general_service_exclusion_6: (vi) That result from your equipment, software, or other technology.
+general_service_exclusion_7: (vii) Arising from our suspension and termination of your right to use Capgo in accordance with our Terms.
+live_update_sla_exclusions_title: Live Update SLA Exclusions
+live_update_exclusion_1: (i) Inappropriately provisioned compute resources related to your project for the expected load.
+live_update_exclusion_2: (ii) Outages caused by overly permissive rate-limiting configurations.
+live_update_exclusion_3: (iii) Outages or issues caused by retracted versions of official Capgo libraries, frameworks, software packages or APIs, including urgent retractions due to identified security vulnerabilities.
+live_update_exclusion_4: (iv) Outages or issues caused by unofficial Capgo client libraries, frameworks, or API proxies, even when those libraries internally use official Capgo libraries.
+live_update_exclusion_5: (v) Outages or issues that could have been resolved by upgrading to a higher minor or patch version of an official Capgo client library, framework, or software package.
+support_title: Support
+support_desc: Capgo provides Support Service Level Agreements for our Team and Enterprise customers.
+urgent_support_title: 1. Urgent
+urgent_support_subtitle: Critical Issue
+urgent_support_desc: Defect resulting in full or partial system outage or a condition that makes Capgo unusable or unavailable in production for all of Customer's Users.
+high_support_title: 2. High
+high_support_subtitle: Significant Business Disruption
+high_support_desc: Issue resulting in a situation meaning major functionality is impacted and significant performance degradation is experienced. Issue impacts significant proportion of user base and / or major Capgo functionality.
+normal_support_title: 3. Normal
+normal_support_subtitle: Minor Feature or Functional Issue / General Question
+normal_support_desc: Issue results in a component of Capgo not performing as expected or documented. An inquiry by a Customer representative regarding a general technical issue or general question.
+low_support_title: 4. Low
+low_support_subtitle: Minor Issue / Feature Request
+low_support_desc: An Information request about Capgo or feature request.
+target_initial_response_times_title: Target initial response times
+severity_level: Severity Level
+team_plan: Team
+pay_as_you_go_plan: Pay as you go
+priority_plus_plan: Priority Plus
+urgent_team_response: "24 hours<br />24/7 × 365"
+urgent_payg_response: "1 hour<br />24/7 × 365"
+urgent_priority_response: "1 hour<br />24/7 × 365"
+high_team_response: "1 business day<br />Monday - Friday"
+high_payg_response: "2 business hours<br />Monday - Friday"
+high_priority_response: "2 hours<br />24/7 × 365"
+normal_team_response: "1 business day<br />Monday - Friday"
+normal_payg_response: "1 business day<br />Monday - Friday"
+normal_priority_response: "12 hours<br />24/7 x 365"
+low_team_response: "2 business days<br />Monday - Friday"
+low_payg_response: "2 business days<br />Monday - Friday"
+low_priority_response: "24 hours<br />24/7 x 365"
+business_hours_note: "Business hours are from 6am to 6pm (local time), except where otherwise stated."

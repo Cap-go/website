@@ -6,7 +6,7 @@ const fetchSponsors = async () => {
   try {
     const siteUrl = import.meta.env.SITE
     const response = await fetch(`${siteUrl}/sponsors.json`)
-    const data = await response.json<any[]>()
+    const data = await response.json()
     // console.log('data', data)
     return data
   } catch (error) {
@@ -14,6 +14,7 @@ const fetchSponsors = async () => {
     return []
   }
 }
+
 const sponsors = await fetchSponsors()
 ---
 

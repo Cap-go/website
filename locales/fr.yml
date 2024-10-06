@@ -163,8 +163,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant ainsi des performances et une
-  efficacité optimales.
+  spécifiques de votre projet, garantissant des performances et une efficacité
+  optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -305,7 +305,7 @@ better_code_quality: Meilleure qualité de code
 let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
   Laissez des personnes plus expérimentées examiner votre travail et donnez à
   votre équipe l’occasion d’apprendre des experts.
-improved_code_readability: Lisibilité du code améliorée
+improved_code_readability: Lisibilité améliorée du code
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
   Réduisez-en les morceaux inutiles pour le rendre plus court et plus expressif.
@@ -323,7 +323,7 @@ help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunit
   Aidez vos développeurs juniors à approfondir leurs connaissances en leur
   donnant la possibilité de coopérer avec des développeurs plus expérimentés.
 community_trusted: Approuvé par la communauté
-cordova_and_capacitorjs_expert: Expert Cordova & CapacitorJS
+cordova_and_capacitorjs_expert: Expert Cordova et CapacitorJS
 experienced_in_working_on_demanding: Expérience dans le travail sur des sujets exigeants
 cordova_capacitorjs_projects: Projets Cordova et CapacitorJS
 creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
@@ -499,7 +499,7 @@ top_react_native_apps: >-
   Liste des 100 meilleures applications utilisant React Native sur la boutique
   Android
 top_flutter_apps_title: Meilleures applications Flutter
-flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur Google Play Store"
 top_kotlin_apps_title: Meilleures applications Kotlin
 kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
 top_native_script_apps_title: Principales applications de script natif
@@ -795,3 +795,153 @@ security_closing: >-
   Nous nous efforçons de résoudre tous les problèmes le plus rapidement possible
   et nous aimerions jouer un rôle actif dans la publication finale sur le
   problème une fois celui-ci résolu.
+sla_title: Accords de niveau de service
+enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
+sla_intro: >-
+  L'accord de niveau de service suivant, qui est incorporé et fait partie de
+  l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
+  s'appliquera aux services destinés aux clients entreprises spécifiés dans un
+  formulaire de commande pendant l'abonnement applicable. Terme:
+uptime_commitment_title: 1. Engagement de disponibilité
+uptime_commitment_desc: >-
+  Capgo fournira la disponibilité réelle pendant au moins quatre-vingt-dix-neuf
+  pour cent (99,0 %) de la durée totale de chaque mois civil pendant la durée de
+  l'abonnement, telle que mesurée par Capgo (l'« engagement de disponibilité »).
+service_credits_title: 2. Crédits de service
+service_credits_desc: "Si l'engagement de disponibilité n'est pas respecté au cours d'un mois civil particulier pendant la durée de l'abonnement, le client sera alors éligible à un crédit de service (« crédit de service »), à condition que le client signale à Capgo ce non-respect de l'engagement de disponibilité et demande un tel service. Crédit conformément à cette pièce. Le montant de tout crédit de service dû en vertu des présentes sera calculé comme suit\_: X * Y, où X = le total des frais dus par le client à Capgo pour les services concernés pour le mois civil concerné (quel que soit le moment de facturation ou de paiement), et Y = le pourcentage de crédit correspondant à la disponibilité réelle fournie (en pourcentage du temps total) pour le mois civil concerné, comme indiqué dans le tableau ci-dessous."
+actual_availability: Disponibilité réelle
+credit_percentage: Pourcentage de crédit
+availability_99_98: Inférieur à 99,0 % mais supérieur ou égal à 98,0 %
+credit_10_percent: 10%
+availability_98_97: Inférieur à 98,0 % mais supérieur ou égal à 97,0 %
+credit_15_percent: 15%
+availability_97_95: Inférieur à 97,0 % mais supérieur ou égal à 95,0 %
+credit_20_percent: 20%
+availability_below_95: "Moins de 95,0\_%"
+credit_30_percent: 30%
+credit_requests_payment_title: 3. Demandes de crédit et paiement
+credit_requests_payment_desc: >-
+  Pour demander un crédit de service, le client doit envoyer un e-mail à Capgo à
+  support@capgo.app dans les trente (30) jours suivant la fin du mois au cours
+  duquel l'engagement de disponibilité n'a pas été respecté. Le client doit
+  inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
+  les dates et heures précédemment signalées auxquelles le service n'était pas
+  disponible. Si Capgo confirme que le client est éligible à un crédit de
+  service, Capgo émettra un crédit sur le compte du client dans un délai de
+  trente (30) jours. Les crédits de service ne constituent pas des
+  remboursements, ne peuvent pas être échangés contre un montant en espèces et
+  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
+  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
+  constitueront le seul et unique recours du client, et la seule et unique
+  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
+  disponibilité.
+definitions_title: 4. Définitions
+definitions_desc: >-
+  Tous les mots en majuscules utilisés mais non définis dans le présent Accord
+  de niveau de service ont la signification indiquée dans l'Accord.
+scheduled_availability_title: 4.1 Disponibilité programmée
+scheduled_availability_desc: "«\_Disponibilité programmée\_» désigne la durée, en minutes, pendant laquelle les services applicables sont généralement accessibles et disponibles pour les utilisateurs autorisés du client."
+unscheduled_downtime_title: 4.2 Temps d'arrêt imprévu
+unscheduled_downtime_desc: >-
+  « Temps d'arrêt non programmé » désigne la durée, en minutes, pendant laquelle
+  les services applicables ne sont généralement pas accessibles et disponibles
+  pour les utilisateurs autorisés du client, à l'exclusion de l'inaccessibilité
+  ou de l'indisponibilité due aux actes ou omissions du client ou des
+  utilisateurs autorisés, des événements de force majeure, de la maintenance
+  planifiée divulguée avec au préavis d'au moins 24 heures par e-mail, piratage
+  informatique ou attaques de virus, maintenance d'urgence raisonnable ou autres
+  exclusions spécifiques au produit répertoriées dans les exclusions SLA.
+actual_availability_title: 4.3 Disponibilité réelle
+actual_availability_desc: "«\_Disponibilité réelle\_» désigne la disponibilité planifiée moins les temps d'arrêt non planifiés."
+production_title: 4.4 Production
+production_desc: "La «\_production\_» est définie comme un système servant des systèmes en direct destinés aux clients ou aux entreprises avec des fonctionnalités déployées et fonctionnelles existantes."
+non_production_desc: >-
+  Le « développement », la « mise en scène », « l'uat », la « pré-production »
+  ou la mise en œuvre de nouvelles fonctionnalités, même dans un environnement
+  de production, ne sont pas considérés comme de la production.
+sla_exclusions_title: Exclusions de SLA
+general_service_exclusions_title: Exclusions de services généraux
+general_service_exclusion_1: >-
+  (i) Causés par des facteurs échappant à notre contrôle raisonnable, y compris,
+  mais sans s'y limiter, tout événement de force majeure ou accès à Internet,
+  problèmes de fournisseur d'accès Internet et/ou problèmes connexes au-delà du
+  point de démarcation de Capgo.
+general_service_exclusion_2: (ii) Qui résultent de toute action ou inaction volontaire de votre part.
+general_service_exclusion_3: >-
+  (iii) Cela résulte des limitations du processeur et des ressources mémoire de
+  la classe d'instance.
+general_service_exclusion_4: >-
+  (iv) Cela résulte du fait que vous ne suivez pas les directives
+  opérationnelles de base décrites dans nos documents.
+general_service_exclusion_5: >-
+  (v) Cela entraîne un long temps de récupération en raison d'une capacité d'E/S
+  insuffisante pour votre charge de travail.
+general_service_exclusion_6: (vi) Cela résulte de votre équipement, logiciel ou autre technologie.
+general_service_exclusion_7: >-
+  (vii) Découlant de notre suspension et de la résiliation de votre droit
+  d'utiliser Capgo conformément à nos Conditions.
+live_update_sla_exclusions_title: Exclusions de SLA de mise à jour en direct
+live_update_exclusion_1: >-
+  (i) Ressources de calcul mal provisionnées liées à votre projet pour la charge
+  attendue.
+live_update_exclusion_2: >-
+  (ii) Pannes causées par des configurations de limitation de débit trop
+  permissives.
+live_update_exclusion_3: >-
+  (iii) Pannes ou problèmes causés par des versions rétractées des
+  bibliothèques, frameworks, progiciels ou API officiels Capgo, y compris les
+  rétractations urgentes en raison de vulnérabilités de sécurité identifiées.
+live_update_exclusion_4: >-
+  (iv) Pannes ou problèmes causés par des bibliothèques clientes Capgo non
+  officielles, des frameworks ou des proxys API, même lorsque ces bibliothèques
+  utilisent en interne les bibliothèques Capgo officielles.
+live_update_exclusion_5: >-
+  (v) Pannes ou problèmes qui auraient pu être résolus par la mise à niveau vers
+  une version mineure ou un correctif supérieur d'une bibliothèque client, d'un
+  framework ou d'un progiciel officiel Capgo.
+support_title: Soutien
+support_desc: >-
+  Capgo propose des accords de niveau de service d'assistance pour nos clients
+  Team et Enterprise.
+urgent_support_title: 1. Urgent
+urgent_support_subtitle: Problème critique
+urgent_support_desc: >-
+  Défaut entraînant une panne totale ou partielle du système ou une condition
+  rendant Capgo inutilisable ou indisponible en production pour l'ensemble des
+  Utilisateurs du Client.
+high_support_title: 2. Élevé
+high_support_subtitle: Perturbation importante des activités
+high_support_desc: >-
+  Problème entraînant une situation dans laquelle des fonctionnalités majeures
+  sont affectées et une dégradation significative des performances est
+  constatée. Le problème affecte une proportion importante de la base
+  d’utilisateurs et/ou des fonctionnalités majeures de Capgo.
+normal_support_title: 3. Normale
+normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
+normal_support_desc: >-
+  Le problème entraîne qu'un composant de Capgo ne fonctionne pas comme prévu ou
+  documenté. Une demande d'un représentant du client concernant un problème
+  technique général ou une question générale.
+low_support_title: 4. Faible
+low_support_subtitle: Problème mineur/demande de fonctionnalité
+low_support_desc: Une demande d'informations sur Capgo ou une demande de fonctionnalité.
+target_initial_response_times_title: Cibler les délais de réponse initiaux
+severity_level: Niveau de gravité
+team_plan: Équipe
+pay_as_you_go_plan: Payez au fur et à mesure
+priority_plus_plan: Priorité Plus
+urgent_team_response: 24 heures<br />24h/24, 7j/7 × 365
+urgent_payg_response: 1 heure<br />24h/24, 7j/7 × 365
+urgent_priority_response: 1 heure<br />24h/24, 7j/7 × 365
+high_team_response: 1 jour ouvrable<br />Du lundi au vendredi
+high_payg_response: 2 heures ouvrables<br />Du lundi au vendredi
+high_priority_response: 2 heures<br />24h/24, 7j/7 × 365
+normal_team_response: 1 jour ouvrable<br />Du lundi au vendredi
+normal_payg_response: 1 jour ouvrable<br />Du lundi au vendredi
+normal_priority_response: 12 heures<br />24h/24 et 7j/7 x 365
+low_team_response: 2 jours ouvrables<br />Du lundi au vendredi
+low_payg_response: 2 jours ouvrables<br />Du lundi au vendredi
+low_priority_response: 24 heures<br />24 heures sur 24, 7 jours sur 7, 365 jours par an
+business_hours_note: >-
+  Les heures d'ouverture sont de 6h00 à 18h00 (heure locale), sauf indication
+  contraire.
