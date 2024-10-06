@@ -561,3 +561,38 @@ low_team_response: "2 business days<br />Monday - Friday"
 low_payg_response: "2 business days<br />Monday - Friday"
 low_priority_response: "24 hours<br />24/7 x 365"
 business_hours_note: "Business hours are from 6am to 6pm (local time), except where otherwise stated."
+support_policy_title: Capgo Customer Support
+support_policy_intro: Capgo is committed to delivering an outstanding customer experience. As part of this commitment, we offer limited technical support for all paid projects using our Capgo platform. Our technical support is defined by the following scope, hours, contacts, and channels.
+support_policy_scope_title: Scope
+support_policy_scope_intro: "Capgo's support offering is available only for technologies supported by the Capgo Platform and is limited to:"
+support_policy_configuration_issues_title: Configuration Issues
+support_policy_configuration_issues_1: Setup of live updates
+support_policy_configuration_issues_2: Best practices for app configuration
+support_policy_configuration_issues_3: General questions about the Capgo stack
+support_policy_troubleshooting_title: Troubleshooting
+support_policy_troubleshooting_1: Providing workarounds or solutions for known issues
+support_policy_troubleshooting_2: Answering general how-to questions and directing to documentation
+support_policy_troubleshooting_3: Troubleshooting supported features (Live Updates, App Management, Analytics) showing unexpected behavior on Capgo, independent of the user's application code
+support_policy_not_covered_title: Not Covered
+support_policy_not_covered_intro: "Capgo technical support services do not include:"
+support_policy_not_covered_1: General debugging of user applications
+support_policy_not_covered_2: Rewriting application code for compatibility with Capgo
+support_policy_not_covered_3: Modifying and/or patching third-party or Open Source software for Capgo compatibility
+support_policy_billing_support: Billing and account management support is available to all customers.
+support_policy_limited_support_intro: "Limited technical support is available for Capgo customers using paid Capgo resources and/or paid Capgo Add-Ons. Support requests will only be processed if:"
+support_policy_limited_support_1: The request is made through one of our official support channels
+support_policy_limited_support_2: The request comes from a registered Capgo account email address
+support_policy_limited_support_3: The requester has Developer or higher access to any specific Capgo projects related to the request
+support_policy_official_channels_title: Official Support Channels
+support_policy_official_channels_1: "Web and Dashboard: Support is available exclusively through the Capgo help feature in the dashboard or our website"
+support_policy_official_channels_2: "Email: If you can't access the dashboard or ticket system, contact support by emailing support@capgo.app from a registered Capgo account email address"
+support_policy_official_channels_note: Capgo support staff will only address requests received through these official channels. Community channels may exist for peer-to-peer support and discussions, provided by volunteers contributing to the Capgo community.
+support_policy_code_debugging: For code debugging questions, we recommend reaching out on GitHub Issues or Discord. The community includes experienced developers who may offer guidance on code-related issues.
+support_policy_community_response: To get the most helpful community response, provide precise and detailed information about your problem and any error messages. Include relevant code snippets explaining how to reproduce the issue in your message.
+support_policy_team_participation: Note that Capgo team members may participate in community channels at their discretion, but there's no guarantee of response unless submitted through official channels.
+support_policy_sla_title: Service Level Agreement
+support_policy_sla_desc: "Service Level Agreements are only available to Enterprise customers. You can find SLA details, including support response times, on our dedicated SLA page:"
+support_policy_proactive_monitoring_title: Proactive Monitoring
+support_policy_proactive_monitoring_desc: In case of a platform issue, we'll post a notice on our status site at status.capgo.app to quickly communicate the impact and status. You don't need to submit a support ticket for ongoing platform issues. Instead, monitor the status page for the latest updates and information.
+support_policy_premium_support_title: Premium Support
+support_policy_premium_support_desc: "To learn about our Premium Support options for Team Plan and Enterprise customers, please contact us using the form below:"

@@ -305,10 +305,10 @@ better_code_quality: Meilleure qualité de code
 let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
   Laissez des personnes plus expérimentées examiner votre travail et donnez à
   votre équipe l’occasion d’apprendre des experts.
-improved_code_readability: Lisibilité améliorée du code
+improved_code_readability: Lisibilité du code améliorée
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
-  Réduisez-en les morceaux inutiles pour le rendre plus court et plus expressif.
+  Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
 bugs_reduction: Réduction des bugs
 eliminate_the_number_of_bugs_before_passing_the_code_to_production: Éliminez le nombre de bugs avant de transmettre le code à la production.
 hire_capacitorjs_consultants: Embaucher des consultants CapacitorJS
@@ -323,7 +323,7 @@ help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunit
   Aidez vos développeurs juniors à approfondir leurs connaissances en leur
   donnant la possibilité de coopérer avec des développeurs plus expérimentés.
 community_trusted: Approuvé par la communauté
-cordova_and_capacitorjs_expert: Expert Cordova et CapacitorJS
+cordova_and_capacitorjs_expert: Expert Cordova & CapacitorJS
 experienced_in_working_on_demanding: Expérience dans le travail sur des sujets exigeants
 cordova_capacitorjs_projects: Projets Cordova et CapacitorJS
 creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -487,7 +487,7 @@ top_cordova_apps: >-
 top_cordova_apps_title: Meilleures applications de Cordoue
 top_capgo_apps_title: Meilleures applications Capgo
 top_capgo_apps: Liste des meilleures applications utilisant Capgo
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android
@@ -725,7 +725,8 @@ canonical: Canonique
 security_intro: >-
   Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
   absolue. Cependant, quels que soient les efforts que nous déployons pour
-  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
+  assurer la sécurité du système, des vulnérabilités peuvent toujours être
+  présentes.
 security_discovery: >-
   Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
   pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
@@ -824,11 +825,11 @@ credit_requests_payment_desc: >-
   Pour demander un crédit de service, le client doit envoyer un e-mail à Capgo à
   support@capgo.app dans les trente (30) jours suivant la fin du mois au cours
   duquel l'engagement de disponibilité n'a pas été respecté. Le client doit
-  inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
-  les dates et heures précédemment signalées auxquelles le service n'était pas
-  disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans un délai de
-  trente (30) jours. Les crédits de service ne constituent pas des
+  inclure soit son identifiant de compte, soit son adresse e-mail enregistrée,
+  ainsi que les dates et heures précédemment signalées auxquelles le service
+  n'était pas disponible. Si Capgo confirme que le client est éligible à un
+  crédit de service, Capgo émettra un crédit sur le compte du client dans un
+  délai de trente (30) jours. Les crédits de service ne constituent pas des
   remboursements, ne peuvent pas être échangés contre un montant en espèces et
   ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
   Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
@@ -945,3 +946,70 @@ low_priority_response: 24 heures<br />24 heures sur 24, 7 jours sur 7, 365 jours
 business_hours_note: >-
   Les heures d'ouverture sont de 6h00 à 18h00 (heure locale), sauf indication
   contraire.
+support_policy_title: Service client Capgo
+support_policy_intro: >-
+  Capgo s'engage à offrir une expérience client exceptionnelle. Dans le cadre de
+  cet engagement, nous proposons un support technique limité pour tous les
+  projets payants utilisant notre plateforme Capgo. Notre support technique est
+  défini par la portée, les horaires, les contacts et les canaux suivants.
+support_policy_scope_title: Portée
+support_policy_scope_intro: "L'offre de support de Capgo est disponible uniquement pour les technologies prises en charge par la plateforme Capgo et est limitée à\_:"
+support_policy_configuration_issues_title: Problèmes de configuration
+support_policy_configuration_issues_1: Configuration des mises à jour en direct
+support_policy_configuration_issues_2: Bonnes pratiques pour la configuration des applications
+support_policy_configuration_issues_3: Questions générales sur la pile Capgo
+support_policy_troubleshooting_title: Dépannage
+support_policy_troubleshooting_1: Fournir des solutions de contournement ou des solutions aux problèmes connus
+support_policy_troubleshooting_2: Répondre aux questions générales et diriger vers la documentation
+support_policy_troubleshooting_3: >-
+  Dépannage des fonctionnalités prises en charge (mises à jour en direct,
+  gestion des applications, analyses) affichant un comportement inattendu sur
+  Capgo, indépendant du code d'application de l'utilisateur
+support_policy_not_covered_title: Non couvert
+support_policy_not_covered_intro: "Les services d'assistance technique de Capgo n'incluent pas\_:"
+support_policy_not_covered_1: Débogage général des applications utilisateur
+support_policy_not_covered_2: Réécriture du code de l'application pour la compatibilité avec Capgo
+support_policy_not_covered_3: >-
+  Modification et/ou correctif de logiciels tiers ou Open Source pour la
+  compatibilité Capgo
+support_policy_billing_support: >-
+  L’assistance à la facturation et à la gestion des comptes est disponible pour
+  tous les clients.
+support_policy_limited_support_intro: "Une assistance technique limitée est disponible pour les clients Capgo utilisant des ressources Capgo payantes et/ou des modules complémentaires Capgo payants. Les demandes d'assistance ne seront traitées que si\_:"
+support_policy_limited_support_1: La demande est faite via l'un de nos canaux d'assistance officiels
+support_policy_limited_support_2: La demande provient d'une adresse e-mail de compte Capgo enregistrée
+support_policy_limited_support_3: >-
+  Le demandeur dispose d'un accès développeur ou supérieur à tous les projets
+  Capgo spécifiques liés à la demande.
+support_policy_official_channels_title: Canaux d'assistance officiels
+support_policy_official_channels_1: "Web et tableau de bord\_: l'assistance est disponible exclusivement via la fonction d'aide Capgo dans le tableau de bord ou sur notre site Web."
+support_policy_official_channels_2: "E-mail\_: si vous ne parvenez pas à accéder au tableau de bord ou au système de tickets, contactez l'assistance en envoyant un e-mail à support@capgo.app à partir d'une adresse e-mail de compte Capgo enregistrée."
+support_policy_official_channels_note: >-
+  Le personnel d'assistance de Capgo traitera uniquement les demandes reçues via
+  ces canaux officiels. Des canaux communautaires peuvent exister pour le
+  soutien et les discussions entre pairs, fournis par des bénévoles contribuant
+  à la communauté Capgo.
+support_policy_code_debugging: >-
+  Pour les questions de débogage de code, nous vous recommandons de contacter
+  GitHub Issues ou Discord. La communauté comprend des développeurs expérimentés
+  qui peuvent offrir des conseils sur les problèmes liés au code.
+support_policy_community_response: >-
+  Pour obtenir la réponse la plus utile de la communauté, fournissez des
+  informations précises et détaillées sur votre problème et les éventuels
+  messages d'erreur. Incluez des extraits de code pertinents expliquant comment
+  reproduire le problème dans votre message.
+support_policy_team_participation: >-
+  Notez que les membres de l'équipe Capgo peuvent participer aux chaînes
+  communautaires à leur discrétion, mais il n'y a aucune garantie de réponse à
+  moins d'être soumis via les canaux officiels.
+support_policy_sla_title: Accord de niveau de service
+support_policy_sla_desc: "Les accords de niveau de service ne sont disponibles que pour les clients Entreprise. Vous pouvez trouver les détails du SLA, y compris les délais de réponse du support, sur notre page SLA dédiée\_:"
+support_policy_proactive_monitoring_title: Surveillance proactive
+support_policy_proactive_monitoring_desc: >-
+  En cas de problème de plate-forme, nous publierons un avis sur notre site de
+  statut à l'adresse status.capgo.app pour communiquer rapidement l'impact et le
+  statut. Vous n'avez pas besoin de soumettre un ticket d'assistance pour les
+  problèmes persistants de la plateforme. Au lieu de cela, surveillez la page
+  d’état pour connaître les dernières mises à jour et informations.
+support_policy_premium_support_title: Assistance Premium
+support_policy_premium_support_desc: "Pour en savoir plus sur nos options de support Premium pour les clients Team Plan et Enterprise, veuillez nous contacter en utilisant le formulaire ci-dessous\_:"

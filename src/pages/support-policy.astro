@@ -19,91 +19,64 @@ const content = {
 
 <Layout content={content}>
   <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>Capgo Customer Support</h1>
-
+    <h1>{translations['support_policy_title'][pageLocale]}</h1>
     <p>
-      Capgo is committed to delivering an outstanding customer experience. As part of this commitment, we offer limited technical support for all paid projects using our Capgo
-      platform. Our technical support is defined by the following scope, hours, contacts, and channels.
+      {translations['support_policy_intro'][pageLocale]}
     </p>
-
-    <h2>Scope</h2>
-
-    <p>Capgo's support offering is available only for technologies supported by the Capgo Platform and is limited to:</p>
-
-    <h3>Configuration Issues</h3>
+    <h2>{translations['support_policy_scope_title'][pageLocale]}</h2>
+    <p>{translations['support_policy_scope_intro'][pageLocale]}</p>
+    <h3>{translations['support_policy_configuration_issues_title'][pageLocale]}</h3>
     <ul>
-      <li>Setup of live updates</li>
-      <li>Best practices for app configuration</li>
-      <li>General questions about the Capgo stack</li>
+      <li>{translations['support_policy_configuration_issues_1'][pageLocale]}</li>
+      <li>{translations['support_policy_configuration_issues_2'][pageLocale]}</li>
+      <li>{translations['support_policy_configuration_issues_3'][pageLocale]}</li>
     </ul>
-
-    <h3>Troubleshooting</h3>
+    <h3>{translations['support_policy_troubleshooting_title'][pageLocale]}</h3>
     <ul>
-      <li>Providing workarounds or solutions for known issues</li>
-      <li>Answering general how-to questions and directing to documentation</li>
-      <li>Troubleshooting supported features (Live Updates, App Management, Analytics) showing unexpected behavior on Capgo, independent of the user's application code</li>
+      <li>{translations['support_policy_troubleshooting_1'][pageLocale]}</li>
+      <li>{translations['support_policy_troubleshooting_2'][pageLocale]}</li>
+      <li>{translations['support_policy_troubleshooting_3'][pageLocale]}</li>
     </ul>
-
-    <h3>Not Covered</h3>
-    <p>Capgo technical support services do not include:</p>
+    <h3>{translations['support_policy_not_covered_title'][pageLocale]}</h3>
+    <p>{translations['support_policy_not_covered_intro'][pageLocale]}</p>
     <ul>
-      <li>General debugging of user applications</li>
-      <li>Rewriting application code for compatibility with Capgo</li>
-      <li>Modifying and/or patching third-party or Open Source software for Capgo compatibility</li>
+      <li>{translations['support_policy_not_covered_1'][pageLocale]}</li>
+      <li>{translations['support_policy_not_covered_2'][pageLocale]}</li>
+      <li>{translations['support_policy_not_covered_3'][pageLocale]}</li>
     </ul>
-
-    <p>Billing and account management support is available to all customers.</p>
-
-    <p>Limited technical support is available for Capgo customers using paid Capgo resources and/or paid Capgo Add-Ons. Support requests will only be processed if:</p>
+    <p>{translations['support_policy_billing_support'][pageLocale]}</p>
+    <p>{translations['support_policy_limited_support_intro'][pageLocale]}</p>
     <ul>
-      <li>The request is made through one of our official support channels</li>
-      <li>The request comes from a registered Capgo account email address</li>
-      <li>The requester has Developer or higher access to any specific Capgo projects related to the request</li>
+      <li>{translations['support_policy_limited_support_1'][pageLocale]}</li>
+      <li>{translations['support_policy_limited_support_2'][pageLocale]}</li>
+      <li>{translations['support_policy_limited_support_3'][pageLocale]}</li>
     </ul>
-
-    <h2>Official Support Channels</h2>
+    <h2>{translations['support_policy_official_channels_title'][pageLocale]}</h2>
     <ul>
-      <li>Web and Dashboard: Support is available exclusively through the Capgo help feature in the dashboard or our website</li>
-      <li>Email: If you can't access the dashboard or ticket system, contact support by emailing support@capgo.app from a registered Capgo account email address</li>
+      <li>{translations['support_policy_official_channels_1'][pageLocale]}</li>
+      <li>{translations['support_policy_official_channels_2'][pageLocale]}</li>
     </ul>
-
     <p>
-      Capgo support staff will only address requests received through these official channels. Community channels may exist for peer-to-peer support and discussions, provided by
-      volunteers contributing to the Capgo community.
+      {translations['support_policy_official_channels_note'][pageLocale]}
     </p>
-
     <p>
-      For code debugging questions, we recommend reaching out on <a href="https://github.com/Cap-go/capgo/issues">GitHub Issues</a> or <a
-        href="https://discord.com/invite/VnYRvBfgA6">Discord</a
-      >. The community includes experienced developers who may offer guidance on code-related issues.
+      {translations['support_policy_code_debugging'][pageLocale]}
     </p>
-
     <p>
-      To get the most helpful community response, provide precise and detailed information about your problem and any error messages. Include relevant code snippets explaining how
-      to reproduce the issue in your message.
+      {translations['support_policy_community_response'][pageLocale]}
     </p>
-
-    <p>Note that Capgo team members may participate in community channels at their discretion, but there's no guarantee of response unless submitted through official channels.</p>
-
-    <h2>Service Level Agreement</h2>
-
+    <p>{translations['support_policy_team_participation'][pageLocale]}</p>
+    <h2>{translations['support_policy_sla_title'][pageLocale]}</h2>
     <p>
-      Service Level Agreements are only available to Enterprise customers. You can find SLA details, including support response times, on our dedicated SLA page: <a
-        href="https://capgo.app/sla">https://capgo.app/sla</a
-      >
+      {translations['support_policy_sla_desc'][pageLocale]}
+      <a href="https://capgo.app/sla">https://capgo.app/sla</a>
     </p>
-
-    <h2>Proactive Monitoring</h2>
-
+    <h2>{translations['support_policy_proactive_monitoring_title'][pageLocale]}</h2>
     <p>
-      In case of a platform issue, we'll post a notice on our status site at <a href="https://status.capgo.app/">status.capgo.app</a> to quickly communicate the impact and status. You
-      don't need to submit a support ticket for ongoing platform issues. Instead, monitor the status page for the latest updates and information.
+      {translations['support_policy_proactive_monitoring_desc'][pageLocale]}
     </p>
-
-    <h2>Premium Support</h2>
-
-    <p>To learn about our Premium Support options for Team Plan and Enterprise customers, please contact us using the form below:</p>
-
+    <h2>{translations['support_policy_premium_support_title'][pageLocale]}</h2>
+    <p>{translations['support_policy_premium_support_desc'][pageLocale]}</p>
     <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
   </div>
 </Layout>
