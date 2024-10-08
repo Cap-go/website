@@ -12,10 +12,7 @@ const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const title = [brand, translations['top_flutter_apps_title'][pageLocale]].join(' | ')
 const description = translations['top_flutter_apps'][pageLocale]
 
-const content = {
-  title,
-  description,
-}
+const content = { title, description }
 ---
 
 <Layout content={content}><VueTopflutterapp locale={pageLocale} client:load /></Layout>

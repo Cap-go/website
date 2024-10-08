@@ -12,10 +12,7 @@ const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const title = [brand, translations['top_apps_by_framework'][pageLocale]].join(' | ')
 const description = translations['top_100_app_using_different_framworks_on_android_store'][pageLocale]
 
-const content = {
-  title,
-  description,
-}
+const content = { title, description }
 ---
 
 <Layout content={content}><VueTopapp locale={pageLocale} client:load /></Layout>

@@ -12,10 +12,7 @@ const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const title = [brand, translations['trust'][pageLocale]].join(' | ')
 const description = translations['consulting_description'][pageLocale]
 
-const content = {
-  title,
-  description,
-}
+const content = { title, description }
 ---
 
 <Layout content={content}><VueTrust locale={pageLocale} client:load /></Layout>

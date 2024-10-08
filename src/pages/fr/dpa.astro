@@ -12,10 +12,7 @@ const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const title = [brand, translations['data_processing_agreement'][pageLocale]].join(' | ')
 const description = translations['read_our_data_processing_agreement'][pageLocale]
 
-const content = {
-  title,
-  description,
-}
+const content = { title, description }
 ---
 
 <Layout content={content}><VueDpa locale={pageLocale} client:load /></Layout>
