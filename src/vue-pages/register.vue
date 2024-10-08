@@ -69,6 +69,22 @@
                 placeholder="Enter your password"
               />
             </div>
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-700">Captcha</label>
+              <div
+                v-if="hasCaptcha !== false"
+                class="cf-turnstile"
+                :data-sitekey="CLOUDFLARE_TURNSTILE_SITE_KEY"
+                data-size="flexible"
+              ></div>
+              <div v-if="hasCaptcha === false" class="flex items-start mt-4">
+                <img class="h-[65px] min-w-[300px] ml-0" src="/please_no_adblock.svg" />
+              </div>
+              <svg v-else-if="hasCaptcha !== true" class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
             <button
               type="submit"
               class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -128,17 +144,49 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { openMessenger } from '../services/bento'
 import { toast } from 'vue-sonner'
 import { useSupabase, getRemoteConfig } from '../services/supabase'
 import { navigate } from 'astro:transitions/client';
 
+const CLOUDFLARE_TURNSTILE_SITE_KEY = "3x00000000000000000000FF"
+
 const isLoading = ref(false)
+const hasCaptcha = ref<boolean | null>(null)
 const email = ref('')
 const firstName = ref('')
 const lastName = ref('')
 const password = ref('')
+
+onMounted(() => {
+  let i = 0
+
+  function checkCaptcha() {
+    if (i > 500) {
+      hasCaptcha.value = false
+      return
+    }
+    i++
+
+    if (!!(window as any).turnstile) {
+      hasCaptcha.value = true
+      return
+    }
+
+    setTimeout(checkCaptcha, 10)
+  }
+
+  checkCaptcha()
+})
+
+function getCaptchaId() {
+  if (!!(window as any).turnstile) {
+    return undefined
+  }
+
+  return (window as any).turnstile.getResponse() as string
+}
 
 getRemoteConfig()
 const handleSubmit = async () => {
@@ -163,6 +211,7 @@ const handleSubmit = async () => {
       email: email.value,
       password: password.value,
       options: {
+        captchaToken: getCaptchaId(),
         data: {
           first_name: firstName.value,
           last_name: lastName.value,
