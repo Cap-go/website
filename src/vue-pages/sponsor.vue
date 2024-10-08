@@ -14,8 +14,8 @@ const bakerSponsors = ref<any[]>([])
 const silverSponsors = ref<any[]>([])
 const platinumSponsors = ref<any[]>([])
 
-onMounted(async () => {
-  const sponsors = props.sponsors ?? []
+onMounted(() => {
+  const sponsors = (props.sponsors || []) as { tier?: string }[]
   // console.log('sponsors', sponsors)
   bakerSponsors.value = sponsors.filter((sponsor) => sponsor.tier === 'baker')
   silverSponsors.value = sponsors.filter((sponsor) => sponsor.tier === 'silver')
