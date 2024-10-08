@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import VueTopcapacitorapp from '@/vue-pages/top_capacitor_app.vue'
 import translations from '@/services/translations'
 import { useRuntimeConfig } from '@/config/app'
@@ -8,11 +7,10 @@ import { useRuntimeConfig } from '@/config/app'
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['top_capacitor_apps'][pageLocale]].join(' | ')
-const description = translations['top_100_app_using_capacitor_on_android_play_store'][pageLocale]
+const title = [brand, translations['top_capacitor_apps'][Astro.locals.locale]].join(' | ')
+const description = translations['top_100_app_using_capacitor_on_android_play_store'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
-<Layout content={content}><VueTopcapacitorapp locale={pageLocale} client:load /></Layout>
+<Layout content={content}><VueTopcapacitorapp locale={Astro.locals.locale} client:load /></Layout>

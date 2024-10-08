@@ -2,17 +2,15 @@
 import Layout from '@/layouts/Layout.astro'
 import VuePrivacy from '@/vue-pages/privacy.vue'
 import { useRuntimeConfig } from '@/config/app'
-import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['privacy_policy'][pageLocale]].join(' | ')
-const description = translations['read_our_privacy_policy'][pageLocale]
+const title = [brand, translations['privacy_policy'][Astro.locals.locale]].join(' | ')
+const description = translations['read_our_privacy_policy'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
-<Layout content={content}><VuePrivacy locale={pageLocale} client:load /></Layout>
+<Layout content={content}><VuePrivacy locale={Astro.locals.locale} client:load /></Layout>

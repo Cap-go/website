@@ -1,9 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import VueConfirmEmail from '@/vue-pages/confirm_email.vue'
-
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
-<Layout><VueConfirmEmail locale={pageLocale} client:load /></Layout>
+<Layout><VueConfirmEmail locale={Astro.locals.locale} client:load /></Layout>

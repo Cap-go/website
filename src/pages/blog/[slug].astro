@@ -1,7 +1,6 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
 import type { GetStaticPaths, MarkdownInstance } from 'astro'
 
@@ -71,10 +70,8 @@ content['ldJSON'] = {
     },
   },
 }
-
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 ---
 
 <Layout content={content}>
-  <VueBlogSlug locale={pageLocale} toc={data.getHeadings()} related={related} Content={markdown} client:load {...data.frontmatter} />
+  <VueBlogSlug locale={Astro.locals.locale} toc={data.getHeadings()} related={related} Content={markdown} client:load {...data.frontmatter} />
 </Layout>

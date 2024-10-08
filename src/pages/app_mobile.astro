@@ -3,14 +3,12 @@ import Layout from '@/layouts/Layout.astro'
 import VueAppmobile from '@/vue-pages/app_mobile.vue'
 import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
-import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['Capacitor_Sanbox_App'][pageLocale]].join(' | ')
-const description = translations['Capacitor_Sanbox_App_description'][pageLocale]
+const title = [brand, translations['Capacitor_Sanbox_App'][Astro.locals.locale]].join(' | ')
+const description = translations['Capacitor_Sanbox_App_description'][Astro.locals.locale]
 
 const content = {
   title,
@@ -19,4 +17,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueAppmobile locale={pageLocale} client:load /></Layout>
+<Layout content={content}><VueAppmobile locale={Astro.locals.locale} client:load /></Layout>

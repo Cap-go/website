@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Plugin } from '@/config/plugins'
-import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { ref } from 'vue'

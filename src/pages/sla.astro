@@ -1,129 +1,127 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { useRuntimeConfig } from '@/config/app'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['sla_policy'][pageLocale]].join(' | ')
-const description = translations['read_our_sla_policy'][pageLocale]
+const title = [brand, translations['sla_policy'][Astro.locals.locale]].join(' | ')
+const description = translations['read_our_sla_policy'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
   <div class="prose prose-sm m-auto px-3 text-left">
-    <h2>{translations['sla_title'][pageLocale]}</h2>
-    <h2>{translations['enterprise_platform_uptime_sla'][pageLocale]}</h2>
-    <p>{translations['sla_intro'][pageLocale]}</p>
-    <h3>{translations['uptime_commitment_title'][pageLocale]}</h3>
-    <p>{translations['uptime_commitment_desc'][pageLocale]}</p>
-    <h3>{translations['service_credits_title'][pageLocale]}</h3>
-    <p>{translations['service_credits_desc'][pageLocale]}</p>
+    <h2>{translations['sla_title'][Astro.locals.locale]}</h2>
+    <h2>{translations['enterprise_platform_uptime_sla'][Astro.locals.locale]}</h2>
+    <p>{translations['sla_intro'][Astro.locals.locale]}</p>
+    <h3>{translations['uptime_commitment_title'][Astro.locals.locale]}</h3>
+    <p>{translations['uptime_commitment_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['service_credits_title'][Astro.locals.locale]}</h3>
+    <p>{translations['service_credits_desc'][Astro.locals.locale]}</p>
     <table>
       <tr>
-        <th>{translations['actual_availability'][pageLocale]}</th>
-        <th>{translations['credit_percentage'][pageLocale]}</th>
+        <th>{translations['actual_availability'][Astro.locals.locale]}</th>
+        <th>{translations['credit_percentage'][Astro.locals.locale]}</th>
       </tr>
       <tr>
-        <td>{translations['availability_99_98'][pageLocale]}</td>
-        <td>{translations['credit_10_percent'][pageLocale]}</td>
+        <td>{translations['availability_99_98'][Astro.locals.locale]}</td>
+        <td>{translations['credit_10_percent'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['availability_98_97'][pageLocale]}</td>
-        <td>{translations['credit_15_percent'][pageLocale]}</td>
+        <td>{translations['availability_98_97'][Astro.locals.locale]}</td>
+        <td>{translations['credit_15_percent'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['availability_97_95'][pageLocale]}</td>
-        <td>{translations['credit_20_percent'][pageLocale]}</td>
+        <td>{translations['availability_97_95'][Astro.locals.locale]}</td>
+        <td>{translations['credit_20_percent'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['availability_below_95'][pageLocale]}</td>
-        <td>{translations['credit_30_percent'][pageLocale]}</td>
+        <td>{translations['availability_below_95'][Astro.locals.locale]}</td>
+        <td>{translations['credit_30_percent'][Astro.locals.locale]}</td>
       </tr>
     </table>
-    <h3>{translations['credit_requests_payment_title'][pageLocale]}</h3>
-    <p>{translations['credit_requests_payment_desc'][pageLocale]}</p>
-    <h3>{translations['4_definitions_title'][pageLocale]}</h3>
-    <p>{translations['definitions_desc'][pageLocale]}</p>
-    <h4>{translations['scheduled_availability_title'][pageLocale]}</h4>
-    <p>{translations['scheduled_availability_desc'][pageLocale]}</p>
-    <h4>{translations['unscheduled_downtime_title'][pageLocale]}</h4>
-    <p>{translations['unscheduled_downtime_desc'][pageLocale]}</p>
-    <h4>{translations['actual_availability_title'][pageLocale]}</h4>
-    <p>{translations['actual_availability_desc'][pageLocale]}</p>
-    <h4>{translations['production_title'][pageLocale]}</h4>
-    <p>{translations['production_desc'][pageLocale]}</p>
-    <p>{translations['non_production_desc'][pageLocale]}</p>
-    <h3>{translations['sla_exclusions_title'][pageLocale]}</h3>
-    <h4>{translations['general_service_exclusions_title'][pageLocale]}</h4>
+    <h3>{translations['credit_requests_payment_title'][Astro.locals.locale]}</h3>
+    <p>{translations['credit_requests_payment_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['4_definitions_title'][Astro.locals.locale]}</h3>
+    <p>{translations['definitions_desc'][Astro.locals.locale]}</p>
+    <h4>{translations['scheduled_availability_title'][Astro.locals.locale]}</h4>
+    <p>{translations['scheduled_availability_desc'][Astro.locals.locale]}</p>
+    <h4>{translations['unscheduled_downtime_title'][Astro.locals.locale]}</h4>
+    <p>{translations['unscheduled_downtime_desc'][Astro.locals.locale]}</p>
+    <h4>{translations['actual_availability_title'][Astro.locals.locale]}</h4>
+    <p>{translations['actual_availability_desc'][Astro.locals.locale]}</p>
+    <h4>{translations['production_title'][Astro.locals.locale]}</h4>
+    <p>{translations['production_desc'][Astro.locals.locale]}</p>
+    <p>{translations['non_production_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['sla_exclusions_title'][Astro.locals.locale]}</h3>
+    <h4>{translations['general_service_exclusions_title'][Astro.locals.locale]}</h4>
     <ul>
-      <li>{translations['general_service_exclusion_1'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_2'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_3'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_4'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_5'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_6'][pageLocale]}</li>
-      <li>{translations['general_service_exclusion_7'][pageLocale]}</li>
+      <li>{translations['general_service_exclusion_1'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_2'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_3'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_4'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_5'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_6'][Astro.locals.locale]}</li>
+      <li>{translations['general_service_exclusion_7'][Astro.locals.locale]}</li>
     </ul>
-    <h4>{translations['live_update_sla_exclusions_title'][pageLocale]}</h4>
+    <h4>{translations['live_update_sla_exclusions_title'][Astro.locals.locale]}</h4>
     <ul>
-      <li>{translations['live_update_exclusion_1'][pageLocale]}</li>
-      <li>{translations['live_update_exclusion_2'][pageLocale]}</li>
-      <li>{translations['live_update_exclusion_3'][pageLocale]}</li>
-      <li>{translations['live_update_exclusion_4'][pageLocale]}</li>
-      <li>{translations['live_update_exclusion_5'][pageLocale]}</li>
+      <li>{translations['live_update_exclusion_1'][Astro.locals.locale]}</li>
+      <li>{translations['live_update_exclusion_2'][Astro.locals.locale]}</li>
+      <li>{translations['live_update_exclusion_3'][Astro.locals.locale]}</li>
+      <li>{translations['live_update_exclusion_4'][Astro.locals.locale]}</li>
+      <li>{translations['live_update_exclusion_5'][Astro.locals.locale]}</li>
     </ul>
-    <h2>{translations['support_title'][pageLocale]}</h2>
-    <p>{translations['support_desc'][pageLocale]}</p>
-    <h3>{translations['urgent_support_title'][pageLocale]}</h3>
-    <p><strong>{translations['urgent_support_subtitle'][pageLocale]}</strong></p>
-    <p>{translations['urgent_support_desc'][pageLocale]}</p>
-    <h3>{translations['high_support_title'][pageLocale]}</h3>
-    <p><strong>{translations['high_support_subtitle'][pageLocale]}</strong></p>
-    <p>{translations['high_support_desc'][pageLocale]}</p>
-    <h3>{translations['normal_support_title'][pageLocale]}</h3>
-    <p><strong>{translations['normal_support_subtitle'][pageLocale]}</strong></p>
-    <p>{translations['normal_support_desc'][pageLocale]}</p>
-    <h3>{translations['low_support_title'][pageLocale]}</h3>
-    <p><strong>{translations['low_support_subtitle'][pageLocale]}</strong></p>
-    <p>{translations['low_support_desc'][pageLocale]}</p>
-    <h2>{translations['target_initial_response_times_title'][pageLocale]}</h2>
+    <h2>{translations['support_title'][Astro.locals.locale]}</h2>
+    <p>{translations['support_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['urgent_support_title'][Astro.locals.locale]}</h3>
+    <p><strong>{translations['urgent_support_subtitle'][Astro.locals.locale]}</strong></p>
+    <p>{translations['urgent_support_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['high_support_title'][Astro.locals.locale]}</h3>
+    <p><strong>{translations['high_support_subtitle'][Astro.locals.locale]}</strong></p>
+    <p>{translations['high_support_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['normal_support_title'][Astro.locals.locale]}</h3>
+    <p><strong>{translations['normal_support_subtitle'][Astro.locals.locale]}</strong></p>
+    <p>{translations['normal_support_desc'][Astro.locals.locale]}</p>
+    <h3>{translations['low_support_title'][Astro.locals.locale]}</h3>
+    <p><strong>{translations['low_support_subtitle'][Astro.locals.locale]}</strong></p>
+    <p>{translations['low_support_desc'][Astro.locals.locale]}</p>
+    <h2>{translations['target_initial_response_times_title'][Astro.locals.locale]}</h2>
     <table>
       <tr>
-        <th>{translations['severity_level'][pageLocale]}</th>
-        <th>{translations['team_plan'][pageLocale]}</th>
-        <th>{translations['pay_as_you_go_plan'][pageLocale]}</th>
-        <th>{translations['priority_plus_plan'][pageLocale]}</th>
+        <th>{translations['severity_level'][Astro.locals.locale]}</th>
+        <th>{translations['team_plan'][Astro.locals.locale]}</th>
+        <th>{translations['pay_as_you_go_plan'][Astro.locals.locale]}</th>
+        <th>{translations['priority_plus_plan'][Astro.locals.locale]}</th>
       </tr>
       <tr>
-        <td>{translations['urgent_support_title'][pageLocale]}</td>
-        <td>{translations['urgent_team_response'][pageLocale]}</td>
-        <td>{translations['urgent_payg_response'][pageLocale]}</td>
-        <td>{translations['urgent_priority_response'][pageLocale]}</td>
+        <td>{translations['urgent_support_title'][Astro.locals.locale]}</td>
+        <td>{translations['urgent_team_response'][Astro.locals.locale]}</td>
+        <td>{translations['urgent_payg_response'][Astro.locals.locale]}</td>
+        <td>{translations['urgent_priority_response'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['high_support_title'][pageLocale]}</td>
-        <td>{translations['high_team_response'][pageLocale]}</td>
-        <td>{translations['high_payg_response'][pageLocale]}</td>
-        <td>{translations['high_priority_response'][pageLocale]}</td>
+        <td>{translations['high_support_title'][Astro.locals.locale]}</td>
+        <td>{translations['high_team_response'][Astro.locals.locale]}</td>
+        <td>{translations['high_payg_response'][Astro.locals.locale]}</td>
+        <td>{translations['high_priority_response'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['normal_support_title'][pageLocale]}</td>
-        <td>{translations['normal_team_response'][pageLocale]}</td>
-        <td>{translations['normal_payg_response'][pageLocale]}</td>
-        <td>{translations['normal_priority_response'][pageLocale]}</td>
+        <td>{translations['normal_support_title'][Astro.locals.locale]}</td>
+        <td>{translations['normal_team_response'][Astro.locals.locale]}</td>
+        <td>{translations['normal_payg_response'][Astro.locals.locale]}</td>
+        <td>{translations['normal_priority_response'][Astro.locals.locale]}</td>
       </tr>
       <tr>
-        <td>{translations['low_support_title'][pageLocale]}</td>
-        <td>{translations['low_team_response'][pageLocale]}</td>
-        <td>{translations['low_payg_response'][pageLocale]}</td>
-        <td>{translations['low_priority_response'][pageLocale]}</td>
+        <td>{translations['low_support_title'][Astro.locals.locale]}</td>
+        <td>{translations['low_team_response'][Astro.locals.locale]}</td>
+        <td>{translations['low_payg_response'][Astro.locals.locale]}</td>
+        <td>{translations['low_priority_response'][Astro.locals.locale]}</td>
       </tr>
     </table>
-    <p>{translations['business_hours_note'][pageLocale]}</p>
+    <p>{translations['business_hours_note'][Astro.locals.locale]}</p>
   </div>
 </Layout>

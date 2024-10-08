@@ -3,16 +3,14 @@ import Layout from '@/layouts/Layout.astro'
 import VueDisclaimer from '@/vue-pages/disclaimer.vue'
 import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
-import { defaultLocale, type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['disclaimer'][pageLocale]].join(' | ')
-const description = translations['read_our_disclaimer'][pageLocale]
+const title = [brand, translations['disclaimer'][Astro.locals.locale]].join(' | ')
+const description = translations['read_our_disclaimer'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
-<Layout content={content}><VueDisclaimer locale={pageLocale} client:load /></Layout>
+<Layout content={content}><VueDisclaimer locale={Astro.locals.locale} client:load /></Layout>

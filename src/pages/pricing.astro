@@ -1,18 +1,16 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import VuePricing from '@/vue-pages/pricing.vue'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
-const title = [brand, translations['pricing'][pageLocale]].join(' | ')
-const description = translations['pricing_description'][pageLocale]
+const title = [brand, translations['pricing'][Astro.locals.locale]].join(' | ')
+const description = translations['pricing_description'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
-<Layout content={content}><VuePricing locale={pageLocale} client:load /></Layout>
+<Layout content={content}><VuePricing locale={Astro.locals.locale} client:load /></Layout>

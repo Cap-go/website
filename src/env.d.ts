@@ -10,3 +10,9 @@ interface Window {
   $bentoChat: any
   bentoChatSDK: any
 }
+
+declare namespace App {
+  interface Locals {
+    locale: import('./services/locale').Locales
+  }
+}

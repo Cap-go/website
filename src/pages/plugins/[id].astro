@@ -4,7 +4,6 @@ import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { fetchWithToken, getSlug } from '@/services/github'
-import { defaultLocale, type Locales } from '@/services/locale'
 import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
 import type { GetStaticPaths } from 'astro'
 import { marked } from 'marked'
@@ -114,7 +113,6 @@ if (!plugin || !plugin.title) return new Response(null, { status: 404 })
 
 const { id } = Astro.params
 const config = useRuntimeConfig()
-const pageLocale = (Astro.currentLocale || defaultLocale) as Locales
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (plugin.title) content['title'] = plugin.title
@@ -143,5 +141,5 @@ content['ldJSON'] = {
 ---
 
 <Layout content={content}>
-  <VuePluginPDP locale={pageLocale} client:load {...plugin} />
+  <VuePluginPDP locale={Astro.locals.locale} client:load {...plugin} />
 </Layout>
