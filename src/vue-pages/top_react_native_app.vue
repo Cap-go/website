@@ -9,11 +9,11 @@ import { ref } from 'vue'
 const props = defineProps<{
   locale: Locales
 }>()
+const usage = ref(5.22)
 const config = useRuntimeConfig()
 const description = translations['top_react_native_apps'][props.locale]
 
 const apps = ref<Database['public']['Tables']['store_apps']['Row'][]>([])
-const usage = ref(5.22)
 
 const others = ref(['top_capacitor_app', 'top_flutter_app', 'top_cordova_app'])
 
