@@ -39,7 +39,7 @@ export async function getStaticPaths() {
         .then((res) => {
           if (res) plugins[index].npmDownloads = res.downloads
         })
-        .catch((e) => {}),
+        .catch(() => {}),
     )
     // Fetch npm package details to get npm modified
     const registryNpmApiUrl = `https://registry.npmjs.org/${item.name}`
@@ -52,7 +52,7 @@ export async function getStaticPaths() {
             plugins[index].dateModified = res.time.modified
           }
         })
-        .catch((e) => {}),
+        .catch(() => {}),
     )
     // Extract the GitHub repository owner and name from the URL
     const githubUrlParts = item.href.split('/')
@@ -68,7 +68,7 @@ export async function getStaticPaths() {
             plugins[index].githubStars = res.stargazers_count
           }
         })
-        .catch((e) => {}),
+        .catch(() => {}),
     )
     // Update the item with fetched data
     const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
@@ -82,7 +82,7 @@ export async function getStaticPaths() {
             else plugins[index].readme = tmp
           }
         })
-        .catch((e) => {}),
+        .catch(() => {}),
     )
   }
   await Promise.all(promises)

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async () => {
   // remove isActive if you also want to include past sponsors
   const query = `
     query {

@@ -109,7 +109,7 @@ export function pushEvent(nameEvent: string): void {
 }
 
 export function setUser(
-  uuid: string,
+  _: string,
   data: {
     nickname?: string
     phone?: string

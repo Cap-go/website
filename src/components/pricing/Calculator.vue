@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
+import { roundNumber } from '@/services/misc'
 import translations from '@/services/translations'
 import type { Database } from '@/types/supabase.types'
 import { computed, ref } from 'vue'
@@ -27,31 +28,27 @@ const props = defineProps({
   },
 })
 
-const payg = props.pricing.find((plan) => plan.name === 'Pay as you go')!
 const solo = props.pricing.find((plan) => plan.name === 'Solo')!
-const maker = props.pricing.find((plan) => plan.name === 'Maker')!
 const team = props.pricing.find((plan) => plan.name === 'Team')!
+const maker = props.pricing.find((plan) => plan.name === 'Maker')!
+const payg = props.pricing.find((plan) => plan.name === 'Pay as you go')!
+const basePrice = payg.price_m
 
 const mau = ref(maker.mau)
-const updatesByMonth = ref(5)
 const updatesSize = ref(4)
+const updatesByMonth = ref(5)
 
-const updates = computed(() => {
-  return mau.value * updatesByMonth.value
-})
-const storage = computed(() => {
-  return (updatesByMonth.value * updatesSize.value * 12) / 1000
-})
-const bandwidth = computed(() => {
-  return (updates.value * updatesSize.value) / 1000
-})
+const updates = computed(() => mau.value * updatesByMonth.value)
+const bandwidth = computed(() => (updates.value * updatesSize.value) / 1000)
+const storage = computed(() => (updatesByMonth.value * updatesSize.value * 12) / 1000)
 
 const suggestion = computed(() => {
   if (mau.value <= solo.mau && storage.value <= solo.storage && bandwidth.value <= solo.bandwidth) return 'Solo'
   else if (mau.value <= maker.mau && storage.value <= maker.storage && bandwidth.value <= maker.bandwidth) return 'Maker'
   else if (mau.value <= team.mau && storage.value <= team.storage && bandwidth.value <= team.bandwidth) return 'Team'
-  else return 'Pay as you go'
+  return 'Pay as you go'
 })
+
 function suggestionClick() {
   if (suggestion.value === 'Pay as you go') {
     window.scrollTo({
@@ -65,7 +62,6 @@ function suggestionClick() {
     })
   }
 }
-const basePrice = payg.price_m
 
 const totalPrice = computed(() => {
   const mauPrice = mau.value > props.paygBase.mau ? (mau.value - props.paygBase.mau) * props.paygUnits.mau : 0
@@ -73,12 +69,8 @@ const totalPrice = computed(() => {
   const bandwidthPrice = bandwidth.value > props.paygBase.bandwidth ? (bandwidth.value - props.paygBase.bandwidth) * props.paygUnits.bandwidth : 0
   const sum = mauPrice + storagePrice + bandwidthPrice
   if (sum > 0) return roundNumber(basePrice + sum) * (props.yearly ? 12 : 1)
-  else return (suggestion.value ? roundNumber(props.pricing.find((plan) => plan.name === suggestion.value)!.price_m) : basePrice) * (props.yearly ? 12 : 1)
+  return (suggestion.value ? roundNumber(props.pricing.find((plan) => plan.name === suggestion.value)!.price_m) : basePrice) * (props.yearly ? 12 : 1)
 })
-
-function roundNumber(number: number) {
-  return Math.round(number * 100) / 100
-}
 </script>
 
 <template>

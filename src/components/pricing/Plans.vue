@@ -3,6 +3,7 @@ import type { Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import type { Database } from '@/types/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { numberWithSpaces, updateCalc } from '@/services/misc'
 
 const props = defineProps({
   pricing: {
@@ -19,15 +20,6 @@ const props = defineProps({
   },
 })
 
-function numberWithSpaces(x: number) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-}
-
-function updateCalc(plan: Database['public']['Tables']['plans']['Row']) {
-  // return aprox number of updates per month
-  return plan.mau * 5
-}
-
 function descToText(desc: string) {
   switch (desc) {
     case 'plan.free.desc':
@@ -42,6 +34,7 @@ function descToText(desc: string) {
       return desc
   }
 }
+
 function descToEmoji(desc: string) {
   switch (desc) {
     case 'plan.free.desc':

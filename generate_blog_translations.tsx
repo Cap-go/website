@@ -54,7 +54,7 @@ for (const lang of languages) {
       const tmp = await translateText(currentChunk, lang)
       if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
     }
-    let translatedContent = await readFileSync(destinationPath, 'utf8')
+    let translatedContent = readFileSync(destinationPath, 'utf8')
     codeBlocks.forEach((match, _) => {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
     })

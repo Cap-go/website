@@ -9,21 +9,22 @@ const props = defineProps<{
   Content?: any
   locale: Locales
 }>()
-const config = useRuntimeConfig()
 const selectedTag = ref('all')
+const config = useRuntimeConfig()
 
 const filteredPosts = computed(() => {
   if (selectedTag.value === 'all') return props.Content
-  else return props.Content.filter((article) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
+  return props.Content.filter((article) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
 })
 
 const uniqueTags = computed(() => {
-  const tags = new Set()
-  for (const article of props.Content) tags.add(article.frontmatter.tag.toUpperCase())
-  const uniqueTagsArray = Array.from(tags)
-    .map((tag) => tag[0].toUpperCase() + tag.slice(1))
+  const tags = new Set<string[]>()
+  props.Content.forEach((article) => {
+    tags.add(article.frontmatter.tag.toUpperCase())
+  })
+  return Array.from(tags)
+    .map((tag) => tag[0].toUpperCase() + tag.slice(1).toLowerCase())
     .sort()
-  return uniqueTagsArray
 })
 </script>
 
@@ -40,18 +41,18 @@ const uniqueTags = computed(() => {
         <div class="mb-4">
           <div class="mt-5 flex flex-wrap justify-center gap-2">
             <button
+              @click="selectedTag = 'all'"
               :class="{ 'bg-gray-500': selectedTag === 'all', 'border border-gray-300 bg-transparent': selectedTag !== 'all' }"
               class="rounded-md px-3 py-2 text-base font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
-              @click="selectedTag = 'all'"
             >
-              ALL
+              All
             </button>
             <button
               v-for="(tag, index) in uniqueTags"
               :key="index"
+              @click="selectedTag = tag"
               :class="{ 'bg-gray-500': selectedTag === tag, 'border border-gray-300 bg-transparent': selectedTag !== tag }"
               class="rounded-md px-3 py-2 text-base font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
-              @click="selectedTag = tag"
             >
               {{ tag }}
             </button>

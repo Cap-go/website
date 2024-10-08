@@ -511,9 +511,9 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
           <p class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white">
             Creators and maintainers of many
             <a
-              href="/plugins/"
               title="Open source"
               class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              :href="getRelativeLocaleUrl(props.locale, 'plugins')"
               style="
                 transition:
                   color 450ms ease 0s,

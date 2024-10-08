@@ -11,7 +11,9 @@ const showReadme = ref(1)
 <template>
   <div class="flex w-full flex-col items-center">
     <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
-      <a aria-label="Back To Plugins" href="/plugins/" class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">← Back To Plugins</a>
+      <a aria-label="Back To Plugins" :href="getRelativeLocaleUrl(props.locale, 'plugins')" class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">
+        ← Back To Plugins
+      </a>
     </div>
     <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
       <button class="px-3 py-1 text-sm" :class="showReadme !== 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 1">

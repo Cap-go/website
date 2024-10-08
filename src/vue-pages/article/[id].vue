@@ -7,43 +7,31 @@ import { onMounted, ref, type Ref } from 'vue'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const props = defineProps<{
-  Content?: any
   toc?: any[]
+  tag?: string
   slug?: string
+  related?: any
+  Content?: any
   title?: string
-  description?: string
   author?: string
+  locale: Locales
+  next_blog?: string
+  published?: boolean
   author_url?: string
   created_at?: string
   updated_at?: string
   head_image?: string
+  description?: string
   head_image_alt?: string
-  tag?: string
-  published?: boolean
-  next_blog?: string
-  related?: any
-  locale: Locales
 }>()
 
-const staticToc: Ref<HTMLElement | null> = ref(null)
-const fixedToc: Ref<HTMLElement | null> = ref(null)
-const article: Ref<HTMLElement | null> = ref(null)
 const isFixedTocVisible = ref(false)
 const activeSlug = ref<boolean | string>(false)
+const article: Ref<HTMLElement | null> = ref(null)
+const fixedToc: Ref<HTMLElement | null> = ref(null)
+const staticToc: Ref<HTMLElement | null> = ref(null)
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-function handleScroll() {
-  if (staticToc.value && fixedToc.value) {
-    const staticTocRect = staticToc.value.getBoundingClientRect()
-    isFixedTocVisible.value = staticTocRect.top <= 80
-  }
-  observeArticleTitles()
-}
-
-function observeArticleTitles() {
+const observeArticleTitles = () => {
   const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
   for (let i = 0; i < headings.length; i++) {
     const heading = headings[i]
@@ -58,6 +46,17 @@ function observeArticleTitles() {
     }
   }
 }
+
+const handleScroll = () => {
+  if (staticToc.value && fixedToc.value) {
+    const staticTocRect = staticToc.value.getBoundingClientRect()
+    // const articleRect = article.value.getBoundingClientRect()
+    isFixedTocVisible.value = staticTocRect.top <= 80
+  }
+  observeArticleTitles()
+}
+
+onMounted(() => window.addEventListener('scroll', handleScroll))
 </script>
 
 <template>

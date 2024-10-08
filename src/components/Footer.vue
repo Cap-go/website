@@ -6,14 +6,14 @@ import { openMessenger } from '@/services/bento'
 import { locales, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 
+const isOpen = ref(false)
 const currentPath = ref('')
-const year = new Date().getFullYear()
 const config = useRuntimeConfig()
 const brand = config.public.brand
+const year = new Date().getFullYear()
 const props = defineProps<{
   locale: Locales
 }>()
-const isOpen = ref(false)
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }
@@ -32,7 +32,8 @@ const statusChecker = async () => {
     const response = await fetch('/status.json')
     systemStatus.value = await response.json()
   } catch (error) {
-    console.error('Error fetching status:', error)
+    console.error('Error fetching Capgo status:')
+    console.log(error)
   }
 }
 
@@ -41,9 +42,8 @@ onMounted(() => {
   statusChecker()
   window.addEventListener('hashchange', decidePath)
 })
-onUnmounted(() => {
-  window.removeEventListener('hashchange', decidePath)
-})
+
+onUnmounted(() => window.removeEventListener('hashchange', decidePath))
 
 const navigation = {
   solutions: [
@@ -60,11 +60,6 @@ const navigation = {
       target: '_blank',
     },
     { name: translations['top_app_by_framework'][props.locale], href: getRelativeLocaleUrl(props.locale, 'top_app') },
-    // { name: 'Top cordova app', href: '/top_cordova_app/' },
-    // { name: 'Top react native app', href: '/top_react_native_app/' },
-    // { name: 'Top flutter app', href: '/top_flutter_app/' },
-    // { name: 'Top kotlin app', href: '/top_kotlin_app/' },
-    // { name: 'Insights', href: '#' },
   ],
   support: [
     {
@@ -109,7 +104,6 @@ const navigation = {
     },
   ],
   legal: [
-    // { name: 'Claim', href: '#' },
     { name: translations['privacy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
     { name: translations['support_policy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
     { name: translations['sla'][props.locale], href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },

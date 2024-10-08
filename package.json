@@ -16,6 +16,7 @@
     "setup:new:locale": "tsx setup_new_locale.tsx"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/starlight": "^0.27.1",
     "@astrojs/vue": "^4.5.1",
@@ -32,6 +33,7 @@
     "posthog-js": "^1.165.0",
     "sharp": "^0.33.5",
     "sitemap": "^8.0.0",
+    "typescript": "^5.6.2",
     "vue": "^3.5.10",
     "vue-sonner": "^1.2.1"
   },

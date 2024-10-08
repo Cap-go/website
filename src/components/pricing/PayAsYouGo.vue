@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
+import { numberWithSpaces, toTb, updateCalc } from '@/services/misc'
 import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -17,18 +18,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-function toTb(value: number) {
-  return (value / 1000).toFixed(2).toLocaleString()
-}
-
-function numberWithSpaces(x: number) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-}
-
-function updateCalc(plan: any) {
-  return plan.mau * 5
-}
 </script>
 
 <template>
