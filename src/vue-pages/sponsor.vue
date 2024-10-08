@@ -9,14 +9,14 @@ const props = defineProps({
   },
 })
 
+const goldSponsors = ref<any[]>([])
 const bakerSponsors = ref<any[]>([])
 const silverSponsors = ref<any[]>([])
-const goldSponsors = ref<any[]>([])
 const platinumSponsors = ref<any[]>([])
 
 onMounted(async () => {
   const sponsors = props.sponsors ?? []
-  console.log('sponsors', sponsors)
+  // console.log('sponsors', sponsors)
   bakerSponsors.value = sponsors.filter((sponsor) => sponsor.tier === 'baker')
   silverSponsors.value = sponsors.filter((sponsor) => sponsor.tier === 'silver')
   goldSponsors.value = sponsors.filter((sponsor) => sponsor.tier === 'gold')

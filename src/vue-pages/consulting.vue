@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import PluginMarketing from './plugin_marketing.vue'
 
 const props = defineProps<{
@@ -554,48 +555,6 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white"
           />
         </div>
-        <!-- <div class="flex flex-col justify-center items-center px-5 text-left">
-      <img
-        src="/628665a5ba01e30ef2b73d6e_podcats.svg"
-        loading="lazy"
-        width="151"
-        alt="Podcast icon"
-        class="inline-block mt-0 mb-auto max-w-full align-middle border-0"
-      />
-      <p
-        class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
-      >
-        Host of
-        <a
-          href="/podcast-react-native-show"
-          title="The CapacitorJS Show podcast"
-          class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
-          style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-          >The CapacitorJS Show podcast</a
-        >
-      </p>
-    </div>
-    <div class="flex flex-col justify-center items-center px-5 text-left">
-      <img
-        src="/6286660c09b3981a1294914e_rneu.webp"
-        loading="lazy"
-        width="151"
-        alt="RNEU icon"
-        class="inline-block mt-0 mb-auto max-w-full align-middle border-0"
-      />
-      <p
-        class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal "
-      >
-        Organizers of the biggest CapacitorJS conference -
-        <a
-          href="https://www.react-native.eu/"
-          title="CapacitorJS EU"
-          class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
-          style="transition: color 450ms ease 0s, all 0.3s ease 0s; text-decoration: underline;"
-          >CapacitorJS EU</a
-        >
-      </p>
-    </div> -->
       </div>
     </div>
     <PluginMarketing :locale="props.locale" />

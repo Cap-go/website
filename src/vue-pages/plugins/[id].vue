@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { Plugin } from '@/config/plugins'
-import type { Locales } from '@/services/locale'
+import { defaultLocale, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { ref } from 'vue'
 
 const props = defineProps<Plugin>()
 const showReadme = ref(1)
@@ -11,7 +12,11 @@ const showReadme = ref(1)
 <template>
   <div class="flex w-full flex-col items-center">
     <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
-      <a aria-label="Back To Plugins" :href="getRelativeLocaleUrl(props.locale, 'plugins')" class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">
+      <a
+        aria-label="Back To Plugins"
+        :href="getRelativeLocaleUrl(props.locale || defaultLocale, 'plugins')"
+        class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white"
+      >
         ← Back To Plugins
       </a>
     </div>
