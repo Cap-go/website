@@ -36,6 +36,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
 function handleScroll() {
   if (staticToc.value && fixedToc.value) {
     const staticTocRect = staticToc.value.getBoundingClientRect()
+    // const articleRect = article.value.getBoundingClientRect()
     isFixedTocVisible.value = staticTocRect.top <= 80
   }
   observeArticleTitles()
