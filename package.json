@@ -17,7 +17,7 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
     "@supabase/supabase-js": "^2.45.4",
-    "astro": "4.15.9",
+    "astro": "4.15.12",
     "astro-embed": "^0.7.2",
     "caniuse-lite": "^1.0.30001660",
     "faiss-node": "^0.5.1",
