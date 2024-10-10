@@ -150,7 +150,7 @@ import { toast } from 'vue-sonner'
 import { useSupabase, getRemoteConfig } from '../services/supabase'
 import { navigate } from 'astro:transitions/client';
 
-const CLOUDFLARE_TURNSTILE_SITE_KEY = "3x00000000000000000000FF"
+const CLOUDFLARE_TURNSTILE_SITE_KEY = "0x4AAAAAAAxDbvW2bw7mcEZs"
 
 const isLoading = ref(false)
 const hasCaptcha = ref<boolean | null>(null)
@@ -181,7 +181,7 @@ onMounted(() => {
 })
 
 function getCaptchaId() {
-  if (!!(window as any).turnstile) {
+  if (!(window as any).turnstile) {
     return undefined
   }
 
@@ -226,6 +226,11 @@ const handleSubmit = async () => {
       },
     },
   )
+  if (error) {
+    console.error(error)
+    isLoading.value = false
+    return
+  }
   try {
     await window.Reflio.signup(email.value)
   }
@@ -233,10 +238,15 @@ const handleSubmit = async () => {
     console.error(error)
   }
   if (error || !user) {
-    toast.error(error?.message || 'user not found')
+    isLoading.value = false
     return
   }
-  isLoading.value = false
-  navigate(`/confirm_email?email=${encodeURI(email.value)}`)
+  const session = await supabase.auth.getSession()
+  if (session.error) {
+    console.error(session.error)
+    isLoading.value = false
+    return
+  }
+  window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}`
 }
 </script>
