@@ -1,16 +1,16 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
-import { defaultLocale, locales } from './src/services/locale'
+import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
 
 const languages = locales.filter((lang) => lang !== defaultLocale)
 const contentDirectory = join(process.cwd(), 'src', 'content')
-const blogDirectory = join(contentDirectory, 'blog')
+const blogDirectory = join(contentDirectory, 'plugins-tutorials')
 
 for (const lang of languages) {
-  console.log(`Preparing the blogs for locale: ${lang}...`)
-  const langBlogDirectory = join(contentDirectory, lang, 'blog')
+  console.log(`Preparing the plugins-tutorials for locale: ${lang}...`)
+  const langBlogDirectory = join(contentDirectory, lang, 'plugins-tutorials')
   if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
   const blogFiles = readdirSync(blogDirectory)
   for (const file of blogFiles) {
@@ -25,8 +25,8 @@ for (const lang of languages) {
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
     }
     if (grayMatterJson.description) {
-      const translatedDescription = await translateText(grayMatterJson.description, lang)
-      if (translatedDescription) grayMatterJson['description'] = translatedDescription
+      const translatedTitle = await translateText(grayMatterJson.description, lang)
+      if (translatedTitle) grayMatterJson['description'] = translatedTitle
     }
     if (grayMatterJson.head_image_alt) {
       const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
@@ -62,6 +62,6 @@ for (const lang of languages) {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    console.log(`Blog translated: ${file}`)
+    console.log(`plugins-tutorials translated to ${lang} locale: ${file}`)
   }
 }

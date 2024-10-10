@@ -9,11 +9,11 @@
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
     "fmt": "prettier --write '**/*' --ignore-unknown",
-    "generate:locale:translations": "tsx generate_locale_translations.tsx",
-    "generate:blog:translations": "tsx generate_blog_translations.tsx",
-    "generate:translation.ts": "tsx generate_translation_ts_file.tsx",
-    "generate:plugin:translations": "tsx generate_plugin_translations.tsx",
-    "setup:new:locale": "tsx setup_new_locale.tsx"
+    "generate:locale:translations": "tsx scripts/generate_locale_translations.tsx",
+    "generate:blog:translations": "tsx scripts/generate_blog_translations.tsx",
+    "generate:translation.ts": "tsx scripts/generate_translation_ts_file.tsx",
+    "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
+    "setup:new:locale": "tsx scripts/setup_new_locale.tsx"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.0",

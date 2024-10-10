@@ -1,4 +1,4 @@
-import { locales } from '@/services/locale'
+import { locales } from '../src/services/locale'
 import { execSync } from 'child_process'
 import fg from 'fast-glob'
 import fs from 'fs'
