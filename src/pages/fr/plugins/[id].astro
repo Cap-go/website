@@ -3,7 +3,6 @@ import { marked } from 'marked'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import type { Plugin } from '@/config/plugins'
-import { useRuntimeConfig } from '@/config/app'
 import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
 import { fetchWithToken, getSlug } from '@/services/github'
 
@@ -115,7 +114,7 @@ if (!plugin || !plugin.title) {
 }
 
 const { id } = Astro.params
-const config = useRuntimeConfig()
+
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (plugin.title) content['title'] = plugin.title
@@ -126,16 +125,16 @@ content['ldJSON'] = {
   '@type': 'WebPage',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${config.public.baseUrl}/plugins/${id}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/plugins/${id}`,
   },
   headline: plugin.description,
-  image: [`${config.public.baseUrl}/capgo_banner.webp`],
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.webp`],
   publisher: {
     '@type': 'Organization',
     name: 'Capgo',
     logo: {
       '@type': 'ImageObject',
-      url: `${config.public.baseUrl}/icon.webp`,
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),

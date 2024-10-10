@@ -1,5 +1,4 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
@@ -112,7 +111,7 @@ if (tutorial && typeof tutorial === 'string') {
 if (!plugin || !plugin.title) return new Response(null, { status: 404 })
 
 const { id } = Astro.params
-const config = useRuntimeConfig()
+
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (plugin.title) content['title'] = plugin.title
@@ -123,16 +122,16 @@ content['ldJSON'] = {
   '@type': 'WebPage',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${config.public.baseUrl}/plugins/${id}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/plugins/${id}`,
   },
   headline: plugin.description,
-  image: [`${config.public.baseUrl}/capgo_banner.webp`],
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.webp`],
   publisher: {
     '@type': 'Organization',
     name: 'Capgo',
     logo: {
       '@type': 'ImageObject',
-      url: `${config.public.baseUrl}/icon.webp`,
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),

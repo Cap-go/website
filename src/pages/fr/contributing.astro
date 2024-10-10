@@ -1,11 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueContributing from '@/vue-pages/contributing.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['contributing'][Astro.locals.locale]].join(' | ')
 const description = translations['contributing_description'][Astro.locals.locale]

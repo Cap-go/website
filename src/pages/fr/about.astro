@@ -1,18 +1,16 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import translations from '@/services/translations'
 import VueAbout from '@/vue-pages/about.vue'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const description = translations['about_capgo'][Astro.locals.locale]
 
 const content = {
   description,
   title: [brand, description].join(' | '),
-  image: `${config.public.baseUrl}/app_demo.webp`,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
 }
 ---
 

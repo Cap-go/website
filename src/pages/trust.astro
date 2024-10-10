@@ -1,13 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueTrust from '@/vue-pages/trust.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
-
-const title = [brand, translations['trust'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['trust'][Astro.locals.locale]].join(' | ')
 const description = translations['consulting_description'][Astro.locals.locale]
 
 const content = { title, description }

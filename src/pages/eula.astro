@@ -1,13 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueEula from '@/vue-pages/eula.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
-
-const title = [brand, translations['eula'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['eula'][Astro.locals.locale]].join(' | ')
 const description = translations['read_our_eula'][Astro.locals.locale]
 
 const content = { title, description }

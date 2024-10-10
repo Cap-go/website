@@ -1,13 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueDisclaimer from '@/vue-pages/disclaimer.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
-
-const title = [brand, translations['disclaimer'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['disclaimer'][Astro.locals.locale]].join(' | ')
 const description = translations['read_our_disclaimer'][Astro.locals.locale]
 
 const content = { title, description }

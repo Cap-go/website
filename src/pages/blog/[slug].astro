@@ -1,5 +1,4 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
 import type { GetStaticPaths, MarkdownInstance } from 'astro'
@@ -33,13 +32,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const data = Astro.props.post as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
-const config = useRuntimeConfig()
 const markdown = data.compiledContent()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
 if (data.frontmatter.description) content['description'] = data.frontmatter.description
-if (data.frontmatter.head_image) content['image'] = `${config.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
+if (data.frontmatter.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
 if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Capgo'
 
 const dateModified = new Date(data.frontmatter.updated_at).toISOString()
@@ -50,10 +48,10 @@ content['ldJSON'] = {
   '@type': 'NewsArticle',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${config.public.baseUrl}/${data.frontmatter?.slug}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${data.frontmatter?.slug}`,
   },
   headline: data.frontmatter?.description,
-  image: [`${config.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
   datePublished: datePublished,
   dateModified: dateModified,
   author: {
@@ -66,7 +64,7 @@ content['ldJSON'] = {
     name: 'Capgo',
     logo: {
       '@type': 'ImageObject',
-      url: `${config.public.baseUrl}/icon.webp`,
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
 }

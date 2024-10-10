@@ -1,11 +1,9 @@
 ---
 import VueDataPolicy from '@/vue-pages/data_policy.vue'
 import Layout from '@/layouts/Layout.astro'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['dp'][Astro.locals.locale]].join(' | ')
 const description = translations['dp'][Astro.locals.locale]

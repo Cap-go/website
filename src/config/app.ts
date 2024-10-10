@@ -35,7 +35,17 @@ export function formatTime(s: string) {
   return d.format('MMMM DD, YYYY')
 }
 
-export function useRuntimeConfig() {
+export interface RuntimeConfig {
+  public: {
+    brand: string
+    blog_title: string
+    blog_description: string
+    baseUrl: string
+    baseApiUrl: string
+  }
+}
+
+export function useRuntimeConfig(): RuntimeConfig {
   return {
     public: {
       brand,

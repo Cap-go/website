@@ -2,10 +2,8 @@
 import Layout from '@/layouts/Layout.astro'
 import VueTopcordovaapp from '@/vue-pages/top_cordova_app.vue'
 import translations from '@/services/translations'
-import { useRuntimeConfig } from '@/config/app'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['top_cordova_apps_title'][Astro.locals.locale]].join(' | ')
 const description = translations['top_cordova_apps'][Astro.locals.locale]

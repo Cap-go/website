@@ -2,10 +2,8 @@
 import Layout from '@/layouts/Layout.astro'
 import translations from '@/services/translations'
 import VueTopreactnativeapp from '@/vue-pages/top_react_native_app.vue'
-import { useRuntimeConfig } from '@/config/app'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['top_react_native_apps_title'][Astro.locals.locale]].join(' | ')
 const description = translations['top_react_native_apps'][Astro.locals.locale]

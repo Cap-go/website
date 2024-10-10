@@ -1,16 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { useRuntimeConfig } from '@/config/app'
 import VueBlogIndex from '@/vue-pages/blog/index.vue'
 
-const config = useRuntimeConfig()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 const posts = (await Astro.glob('@/content/fr/blog/**/*.md'))
   .filter((i) => i.frontmatter.published)
   .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
 
-if (config.public.blog_title) content['title'] = config.public.blog_title
-if (config.public.blog_description) content['description'] = config.public.blog_description
+if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title
+if (Astro.locals.runtimeConfig.public.blog_description) content['description'] = Astro.locals.runtimeConfig.public.blog_description
 ---
 
 <Layout content={content}>

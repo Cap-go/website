@@ -14,5 +14,6 @@ interface Window {
 declare namespace App {
   interface Locals {
     locale: import('./services/locale').Locales
+    runtimeConfig: import('./config/app').RuntimeConfig
   }
 }

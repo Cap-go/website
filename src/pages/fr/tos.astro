@@ -1,11 +1,9 @@
 ---
 import VueTos from '@/vue-pages/tos.vue'
 import Layout from '@/layouts/Layout.astro'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['terms'][Astro.locals.locale]].join(' | ')
 const description = translations['read_our_terms_of_service'][Astro.locals.locale]

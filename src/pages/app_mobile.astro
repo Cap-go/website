@@ -1,19 +1,15 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueAppmobile from '@/vue-pages/app_mobile.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
-
-const title = [brand, translations['Capacitor_Sanbox_App'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['Capacitor_Sanbox_App'][Astro.locals.locale]].join(' | ')
 const description = translations['Capacitor_Sanbox_App_description'][Astro.locals.locale]
 
 const content = {
   title,
   description,
-  image: `${config.public.baseUrl}/app_demo.webp`,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
 }
 ---
 

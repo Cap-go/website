@@ -1,11 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueImprint from '@/vue-pages/imprint.vue'
-import { useRuntimeConfig } from '@/config/app'
 import translations from '@/services/translations'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = [brand, translations['imprint'][Astro.locals.locale]].join(' | ')
 const description = translations['imprint_description'][Astro.locals.locale].replace('$1', brand)
