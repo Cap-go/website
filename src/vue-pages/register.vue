@@ -78,7 +78,7 @@
                 data-size="flexible"
               ></div>
               <div v-if="hasCaptcha === false" class="flex items-start mt-4">
-                <img class="h-[65px] min-w-[300px] ml-0" src="/please_no_adblock.svg" />
+                Please turn off your adblock!
               </div>
               <svg v-else-if="hasCaptcha !== true" class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
