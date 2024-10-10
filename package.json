@@ -57,6 +57,7 @@
     "langchain": "^0.1.37",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "schema-dts": "^1.1.2",
     "tsx": "^4.19.1",
