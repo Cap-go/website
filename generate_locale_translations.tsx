@@ -19,12 +19,12 @@ for (const lang of locales) {
   const keys = Object.keys(data)
   for (let i = 0; i < keys.length; i += batchSize) {
     const batchKeys = keys.slice(i, i + batchSize)
-    const translations = await Promise.all(batchKeys.map(key => translateText(data[key], lang)))
+    const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang)))
     for (let j = 0; j < batchKeys.length; j++) {
       const tmp = { [batchKeys[j]]: translations[j] }
       fs.appendFileSync(newLocalePath, dump(tmp), 'utf8')
     }
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
   }
   console.log(`Wrote ${lang}.yml to locales directory.`)
   console.log('Done.\n')
