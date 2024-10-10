@@ -219,7 +219,7 @@ Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre p
 npx cap copy
 ```
 
-La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
+La commande `copy` est similaire à `sync`, mais elle **copiera uniquement les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif
 
 Vous pouvez maintenant déployer votre application une fois de plus via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Svelte, **l'application se rechargera automatiquement** et affichera les modifications !
 

@@ -97,7 +97,7 @@ Contrairement aux applications hybrides qui utilisent WebViews, les applications
 
 Un problème courant avec les outils comme Capacitor qui utilisent WebView pour restituer des applications est la difficulté de rendu des animations, des effets CSS et des mises en page complexes avec des dégradés - tout ce qui est complexe ou lourd. L'affichage d'une vidéo peut également être un problème.
 
-Les applications de condensateur peuvent avoir des difficultés sur les appareils bas de gamme ou sur les appareils dotés d'un matériel ancien. En effet, certaines ressources doivent généralement être chargées à partir du Web avant que l'interface utilisateur de l'application puisse être restituée.
+Les applications de condensateur peuvent avoir des difficultés sur les appareils bas de gamme ou sur les appareils dotés d'un ancien matériel. En effet, certaines ressources doivent généralement être chargées à partir du Web avant que l'interface utilisateur de l'application puisse être restituée.
 
 De plus, lorsque les applications ne sont pas affichées dans la vue native des appareils, elles ne peuvent pas exploiter pleinement les capacités matérielles des appareils, ce qui entraîne une baisse des performances.
 
@@ -144,7 +144,7 @@ React Native utilise JSX comme langage de création de modèles. Plutôt que de 
 
 Cette approche orientée composants permet aux développeurs de créer des composants une seule fois et de les réutiliser autant de fois que nécessaire en combinant le balisage, le style et la logique.
 
-JSX simplifie la création de ces composants et, comme il est typé de manière statique, les développeurs peuvent détecter les erreurs plus tôt, améliorant ainsi la qualité du débogage et du développement.
+JSX simplifie la création de ces composants et, comme il est typé statiquement, les développeurs peuvent détecter les erreurs plus tôt, améliorant ainsi la qualité du débogage et du développement.
 
 Il optimise également le code lors de la compilation, de sorte que le code JavaScript généré par JSX s'exécute plus rapidement que l'équivalent écrit directement en JavaScript.
 
@@ -224,7 +224,7 @@ Dans cet exemple, nous utilisons les standards HTML et CSS pour créer et stylis
 
 React Native existe depuis plus longtemps et est utilisé par de nombreuses grandes entreprises, ce qui en fait une compétence plus demandée sur le marché du travail. Selon [Indeed](https://wwwindeedcom/jobs/?q=react+native&l=), il existe des milliers d'offres d'emploi pour les développeurs React Native
 
-Capacitor, étant une technologie plus récente et moins populaire, offre moins d'offres d'emploi. Cependant, à mesure que de plus en plus d'entreprises adoptent Capacitor pour le développement de leurs applications mobiles, la demande de développeurs de condensateurs pourrait augmenter.
+Le condensateur, étant une technologie plus récente et moins populaire, offre moins d'offres d'emploi. Cependant, à mesure que de plus en plus d'entreprises adoptent le condensateur pour le développement de leurs applications mobiles, la demande de développeurs de condensateurs pourrait augmenter.
 
 Si vous cherchez à maximiser vos opportunités d'emploi, apprendre React Native pourrait être un meilleur choix. Cependant, si vous souhaitez travailler avec une technologie plus récente et potentiellement être à l'avant-garde de sa croissance, Capacitor pourrait être une option intéressante.
 

@@ -1,6 +1,6 @@
 ---
 slug: alternative-to-expo
-title: Alternative à la mise à jour Expo Live
+title: Alternative à la mise à jour en direct d'Expo
 description: "Vous recherchez une plate-forme de développement d'applications mobiles offrant la commodité des mises à jour en direct d'Expo sans la limitation d'être liée à React Native\_? Découvrez Capgo."
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
@@ -51,6 +51,6 @@ Dans l'ensemble, [Capgo](/register/) est une alternative puissante et flexible �
 
 ## Conclusion
 
-Expo est un excellent outil pour les développeurs React Native, mais ce n'est pas la seule option disponible. Si vous recherchez une alternative à Expo, [Capgo](/register/) vaut sans aucun doute la peine d'être considéré. [Capgo](/register/) est un excellent outil pour les développeurs React Native. plate-forme de développement d'applications mobiles basée sur le cloud qui offre bon nombre des mêmes outils et services que [Expo](https://expodev/), y compris des mises à jour en direct, mais avec une différence clé : [Capgo](/register/) peut être utilisé avec n'importe quel framework JavaScript, tandis qu'Expo est limité aux applications créées à l'aide de React Native
+Expo est un excellent outil pour les développeurs React Native, mais ce n'est pas la seule option disponible. Si vous recherchez une alternative à Expo, [Capgo](/register/) vaut sans aucun doute la peine d'être considéré. [Capgo](/register/) est un plate-forme de développement d'applications mobiles basée sur le cloud qui offre bon nombre des mêmes outils et services que [Expo](https://expodev/), y compris des mises à jour en direct, mais avec une différence clé : [Capgo](/register/) peut être utilisé avec n'importe quel framework JavaScript, tandis qu'Expo est limité aux applications créées à l'aide de React Native
 
 Découvrez comment Capgo peut vous aider à créer de meilleures applications plus rapidement, [créez un compte gratuit](/register/) dès aujourd'hui

@@ -107,7 +107,7 @@ npm run generate
 npx cap sync
 ```
 
-La première commande « npm run generate » construira simplement votre projet Nuxt 3 et copiera la version statique, tandis que la deuxième commande « npx cap sync » synchronisera tout le code Web aux bons endroits des plates-formes natives afin qu'ils puissent être affichés dans une application
+La première commande « npm run generate » construira simplement votre projet Nuxt 3 et copiera la version statique, tandis que la deuxième commande « npx cap sync » synchronisera tout le code Web aux bons endroits des plates-formes natives afin qu'il puisse être affiché dans une application
 
 De plus, la commande de synchronisation peut mettre à jour les plates-formes natives et installer des plugins, donc lorsque vous installez un nouveau [plugins de condensateur](https://capacitorjscom/docs/plugins/), il est temps d'exécuter à nouveau `npx cap sync`Sans vous en rendre compte, vous avez maintenant terminé, alors voyons l'application sur un appareil !
 
@@ -185,7 +185,7 @@ Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre p
 npx cap copy
 ```
 
-La commande `copy` est similaire à `sync`, mais elle **copiera uniquement les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif
+La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
 
 Vous pouvez désormais déployer votre application une nouvelle fois via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Nuxt, **l'application se rechargera automatiquement** et affichera les modifications !
 

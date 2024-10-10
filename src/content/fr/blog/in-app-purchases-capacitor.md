@@ -179,11 +179,11 @@ Si vous envisagez d'utiliser RevenueCat avec votre code d'achat existant, report
 > 
 > Configuration des achats avec des identifiants utilisateur
 > 
-> Si vous disposez d'un système d'authentification utilisateur dans votre application, vous pouvez fournir un identifiant utilisateur au moment de la configuration ou à une date ultérieure en appelant `logIn()` Pour en savoir plus, consultez le guide RevenueCat sur [Identifying Users] (https://wwwrevenuecatcom/docs/user-ids/)
+> Si vous disposez d'un système d'authentification utilisateur dans votre application, vous pouvez fournir un identifiant utilisateur au moment de la configuration ou à une date ultérieure en appelant `logIn()`. Pour en savoir plus, consultez le guide RevenueCat sur [Identifying Users] (https://wwwrevenuecatcom/docs/user-ids/)
 
 Le SDK récupérera automatiquement les [offres configurées](https://wwwrevenuecatcom/docs/entitlements/#offerings) et récupérera les informations sur le produit auprès d'Apple, Google ou Amazon. Ainsi, les produits disponibles seront déjà chargés lorsque les clients lanceront votre écran d'achat.
 
-Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paiement. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
+Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paywall. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
 
 ### ▶️ Récupérer et afficher les produits disponibles
 
@@ -195,7 +195,7 @@ Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez uti
 
 Le SDK récupérera automatiquement les [offres configurées](https://wwwrevenuecatcom/docs/entitlements/#offerings) et récupérera les informations sur le produit auprès d'Apple, Google ou Amazon. Ainsi, les produits disponibles seront déjà chargés lorsque les clients lanceront votre écran d'achat.
 
-Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paiement. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
+Vous trouverez ci-dessous un exemple de récupération d'offres. Vous pouvez utiliser les offres pour organiser votre écran de paywall. Consultez le guide RevenueCat sur [Affichage des produits] (https://wwwrevenuecatcom/docs/displaying-products/) pour plus d'informations et les meilleures pratiques.
 
 ```javascript
 const { offerings } = await CapacitorPurchases.getOfferings()

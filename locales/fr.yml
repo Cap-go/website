@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -440,7 +440,7 @@ importance_of_documenting_apis: >-
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
-  Toutes les API et tous les types exposés publiquement, le module
+  Toutes les API et types exposés publiquement, le module
   <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
   documentation est analysée et disponible pour le compilateur TypeScript, et
   donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
@@ -505,7 +505,7 @@ kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente enviro
 top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
-react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store
+react_native_power_aproximately_1_of_apps_on_google_play_store: "React Native alimente environ 1\_% des applications sur Google Play Store"
 table_of_contents: Table des matières
 latest_from_news: Dernières nouvelles
 capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
@@ -621,7 +621,7 @@ offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -757,7 +757,7 @@ security_testing_guidelines_1: >-
   par inadvertance les services, exploiter des vulnérabilités, entraîner une
   instabilité ou des violations du système et violer les conditions de service
   de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
-  capables de distinguer la reconnaissance hostile de la recherche blanche. Si
+  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
   vous souhaitez exécuter un scanner automatisé, informez-nous à
   security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
   N'attaquez PAS les projets d'autres clients.
@@ -800,7 +800,7 @@ security_closing: >-
 sla_title: Accords de niveau de service
 enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
 sla_intro: >-
-  L'accord de niveau de service suivant, qui est intégré et fait partie de
+  L'accord de niveau de service suivant, qui est incorporé et fait partie de
   l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
   s'appliquera aux services destinés aux clients entreprises spécifiés dans un
   formulaire de commande pendant l'abonnement applicable. Terme:
@@ -829,14 +829,13 @@ credit_requests_payment_desc: >-
   inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
   les dates et heures précédemment signalées auxquelles le service n'était pas
   disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans un délai de
-  trente (30) jours. Les crédits de service ne constituent pas des
-  remboursements, ne peuvent pas être échangés contre un montant en espèces et
-  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
-  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
-  constitueront le seul et unique recours du client, et la seule et unique
-  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
-  disponibilité.
+  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
+  jours. Les crédits de service ne constituent pas des remboursements, ne
+  peuvent pas être échangés contre un montant en espèces et ne peuvent être
+  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
+  contraire dans la section 4 ci-dessous, les crédits de service constitueront
+  le seul et unique recours du client, et la seule et unique responsabilité de
+  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -917,7 +916,7 @@ high_support_desc: >-
   Problème entraînant une situation dans laquelle des fonctionnalités majeures
   sont affectées et une dégradation significative des performances est
   constatée. Le problème affecte une proportion importante de la base
-  d’utilisateurs et/ou des fonctionnalités majeures de Capgo.
+  d'utilisateurs et/ou des fonctionnalités majeures de Capgo.
 normal_support_title: 3. Normale
 normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
 normal_support_desc: >-
@@ -1208,7 +1207,7 @@ tos_interpretation_text: >-
   définies dans les conditions suivantes. Les définitions suivantes auront la
   même signification qu’elles apparaissent au singulier ou au pluriel.
 tos_definitions_subtitle: Définitions
-tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
+tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
 tos_definition_application: >-
   Application désigne le logiciel fourni par la Société téléchargé par Vous sur
   tout appareil électronique, nommé $1
@@ -1258,7 +1257,7 @@ tos_definition_you: >-
 tos_acknowledgment_title: Reconnaissance
 tos_acknowledgment_text_1: >-
   Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
-  l'accord qui s'applique entre Vous et la Société. Les présentes Conditions
+  l'accord qui opère entre Vous et la Société. Les présentes Conditions
   générales définissent les droits et obligations de tous les utilisateurs
   concernant l'utilisation du Service.
 tos_acknowledgment_text_2: >-
@@ -1640,7 +1639,7 @@ right_to_refuse: >-
   répondant pas aux conditions de retour ci-dessus, à notre seule discrétion.
 sale_items_policy: >-
   Seules les marchandises à prix régulier peuvent être remboursées.
-  Malheureusement, les marchandises en vente ne peuvent être remboursées. Cette
+  Malheureusement, les produits en vente ne peuvent être remboursés. Cette
   exclusion peut ne pas s'appliquer à vous si elle n'est pas autorisée par la
   loi applicable.
 returning_goods: Retour de marchandises
@@ -1652,7 +1651,7 @@ return_address: |-
 return_shipping_disclaimer: >-
   Nous ne pouvons être tenus responsables des marchandises endommagées ou
   perdues lors du retour. Par conséquent, nous recommandons un service de
-  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
   remboursement sans réception effective des marchandises ou sans preuve de
   livraison de retour reçue.
 gifts: Cadeaux
@@ -1908,7 +1907,7 @@ eula_limitation_of_liability_text_1: >-
 eula_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2296,7 +2295,7 @@ data_policy_legal_basis_legal_obligations: >-
 data_policy_legal_basis_vital_interests: >-
   Intérêts vitaux : Le traitement des Données personnelles est nécessaire afin
   de protéger Vos intérêts vitaux ou ceux d’une autre personne physique.
-data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investie la Société."
+data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
 data_policy_legal_basis_legitimate_interests: >-
   Intérêts légitimes : Le traitement des Données Personnelles est nécessaire aux
   finalités des intérêts légitimes poursuivis par la Société.
@@ -2425,7 +2424,7 @@ data_policy_ccpa_info_sources_title: >-
   n'incluent pas les informations accessibles au public provenant des dossiers
   gouvernementaux, les informations anonymisées ou agrégées sur les
   consommateurs, ou les informations exclues du champ d'application du CCPA.
-data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_info_source_1: >-
   Directement de votre part. Par exemple, à partir des formulaires que vous
   remplissez sur notre Service, des préférences que vous exprimez ou fournissez
@@ -2479,10 +2478,10 @@ data_policy_ccpa_info_sharing_5: >-
   vous fournissons
 data_policy_ccpa_sale_of_info_title: Vente de renseignements personnels
 data_policy_ccpa_sale_of_info_definition: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
-  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
-  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
-  autres, les informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
+  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
+  le transfert ou toute autre communication orale, écrite ou électronique ou
+  autre, des informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.

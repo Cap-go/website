@@ -389,7 +389,7 @@ Pour garantir des performances optimales de votre application Nextjs et Capacito
 
 - Réduisez la taille de l'application en supprimant les dépendances et les actifs inutilisés
 - Optimiser les images et autres fichiers multimédias pour réduire les temps de chargement
-- Implémenter un chargement paresseux pour les composants et les pages afin d'améliorer les performances de chargement initial
+- Implémenter un chargement différé pour les composants et les pages afin d'améliorer les performances de chargement initial
 - Utilisez le rendu côté serveur (SSR) avec Nextjs pour améliorer la vitesse de chargement de l'application et l'optimisation des moteurs de recherche (SEO)
 - Tirez parti des optimisations intégrées de Capacitor, telles que la mise en cache de la vue Web et le regroupement d'applications
 

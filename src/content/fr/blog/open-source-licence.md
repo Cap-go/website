@@ -89,7 +89,7 @@ La [Licence MIT](https://opensourceorg/license/mit/) est la licence de logiciel 
 
 **Licence BSD (Berkeley Software Distribution)**
 
-GitHub vous permet de choisir entre deux licences BSD, la [Licence « simplifiée » BSD 2-Clause](https://opensourceorg/license/bsd-2-clause/), parfois appelée licence « FreeBSD » ; et la [Licence BSD 3-Clause « Nouvelle » ou « Révisée »](https://spdxorg/licenses/BSD-3-Clausehtml/) La principale différence entre ces deux licences réside dans la 3-clause Cette clause restreint les utilisateurs de logiciels d'utiliser le nom de l'auteur, des auteurs ou des contributeurs, pour approuver des produits ou des services
+GitHub vous permet de choisir entre deux licences BSD, la [Licence « simplifiée » BSD 2-Clause](https://opensourceorg/license/bsd-2-clause/), parfois appelée licence « FreeBSD » ; et la [Licence BSD 3-Clause « Nouvelle » ou « Révisée »](https://spdxorg/licenses/BSD-3-Clausehtml/) La principale différence entre ces deux licences réside dans la 3-clause Cette clause restreint les utilisateurs de logiciels d'utiliser le nom de l'auteur, des auteurs ou des contributeurs pour approuver des produits ou des services
 
 **Licence logicielle Boost**
 

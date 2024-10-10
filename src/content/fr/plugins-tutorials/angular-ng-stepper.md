@@ -69,7 +69,7 @@ Le package `@capgo/angular-ng-stepper` fournit plusieurs méthodes et options AP
 
 #### Méthodes
 
-- `goToStep(index: number)` : passer par programme à une étape spécifique en fournissant son index en paramètre
+- `goToStep(index: number)` : passer par programme à une étape spécifique en fournissant son index en tant que paramètre
 - `next()` : Passer à l'étape suivante
 - `previous()` : Passer à l'étape précédente
 - `reset()` : Réinitialise le stepper à l'état initial

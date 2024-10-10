@@ -1,7 +1,7 @@
 ---
 slug: automatic-capacitor-ios-build-github-action
 title: >-
-  Construction automatique d'IOS de condensateur avec des actions GitHub avec
+  Construction automatique du condensateur IOS avec actions GitHub avec
   certificat
 description: >-
   Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide

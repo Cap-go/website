@@ -84,7 +84,7 @@ Pour générer des clés, vous devez disposer de l'autorisation d'administrateur
 
 ![Création de clés API App Store Connect](/user_accesswebp)
 
-5 — Entrez le nom de la clé et sélectionnez un niveau d'accès. Nous vous recommandons de choisir les droits d'accès « App Manager », en savoir plus sur les autorisations de rôle du programme pour développeurs Apple [ici] (https://helpapplecom/app-store-connect/#/deve5f9a89d7 )
+5 — Entrez le nom de la clé et sélectionnez un niveau d'accès. Nous vous recommandons de choisir les droits d'accès « App Manager », en savoir plus sur les autorisations de rôle du programme pour développeurs Apple [ici](https://helpapplecom/app-store-connect/#/deve5f9a89d7 )
 
 ![Les clés API App Store Connect créent un nom](/gen_keywebp)
 

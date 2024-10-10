@@ -60,7 +60,7 @@ Capgo s'intègre à la mise à jour en direct CapacitorJS et Ionic pour fournir 
 
  **Cas d'utilisation réels :**
  
-  La polyvalence de Capgo brille dans les scénarios pratiques. Il améliore l'expérience utilisateur et les performances dans le commerce électronique, les outils collaboratifs, l'intégration des médias sociaux, les agrégateurs de nouvelles et les plateformes d'apprentissage en ligne. Les mises à jour en temps réel maintiennent l'engagement et la satisfaction des utilisateurs.
+  La polyvalence de Capgo brille dans les scénarios pratiques. Il améliore l'expérience utilisateur et les performances dans le commerce électronique, les outils collaboratifs, l'intégration des médias sociaux, les agrégateurs d'actualités et les plateformes d'apprentissage en ligne. Les mises à jour en temps réel maintiennent l'engagement et la satisfaction des utilisateurs.
 
   **Adopter le développement agile :** 
   

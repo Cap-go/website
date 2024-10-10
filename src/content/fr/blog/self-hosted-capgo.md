@@ -90,7 +90,7 @@ Remarque : Pour obtenir localSupaAnon, veuillez suivre ce [tutoriel](https://ca
 
 Cloné [capgo](https://githubcom/Cap-go/capgo/)
 
-Pour utiliser le programme de mise à jour des condensateurs avec capgo auto-hébergé, modifiez les « capacitorconfigts » depuis le répertoire de votre application et définissez-le comme ceci :
+Pour utiliser le programme de mise à jour des condensateurs avec capgo auto-hébergé, modifiez les « capacitorconfigts » dans le répertoire de votre application et définissez-le comme ceci :
 
 ```ts
 const config: CapacitorConfig = {

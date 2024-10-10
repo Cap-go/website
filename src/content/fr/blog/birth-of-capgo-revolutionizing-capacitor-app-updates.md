@@ -135,16 +135,16 @@ Le 11 juin 2022, j'ai annoncé que Capgo commencerait à facturer l'utilisation 
 
 ![Annonce des prix Capgo](/capgo-pricing-announcementwebp)
 
-Cependant, restant fidèle aux racines du projet, j'ai conservé le noyau open source de Capgo en autorisant l'utilisation gratuite du plugin en mode manuel ou avec un serveur personnalisé.
+Cependant, restant fidèle aux racines du projet, j'ai conservé le noyau open source de Capgo en permettant une utilisation gratuite du plugin en mode manuel ou avec un serveur personnalisé.
 
 ## Conclusion
 
-Mon parcours avec Capgo témoigne de la puissance de l'innovation communautaire et des chemins inattendus sur lesquels les créateurs solo se retrouvent souvent. Ce qui a commencé comme une frustration personnelle alors qu'il travaillait sur une application de minuterie crossfit s'est transformé en une mise à jour en direct robuste, abordable et flexible. système pour les applications de condensateur
+Mon parcours avec Capgo témoigne de la puissance de l'innovation communautaire et des chemins inattendus sur lesquels se retrouvent souvent les créateurs solo. Ce qui a commencé comme une frustration personnelle alors qu'il travaillait sur une application de minuterie crossfit s'est transformé en une mise à jour en direct robuste, abordable et flexible. système pour les applications de condensateur
 
 La création de Capgo a été loin d'être facileCela a nécessité d'innombrables heures de travail, le soutien d'une généreuse communauté de développeurs et une volonté de s'adapter en fonction des commentaires des utilisateurs. Du codage sur Airbnb au Portugal jusqu'au lancement d'un produit payant, chaque étape de ce voyage a été une expérience d'apprentissage.
 
 À mesure que Capgo continue d'évoluer, il constitue un excellent exemple de la manière dont l'identification d'une lacune sur le marché, le travail actif pour la combler et la réactivité aux besoins de la communauté peuvent conduire à la création d'outils précieux qui profitent à l'ensemble de l'écosystème des développeurs.
 
-L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo.
+L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo
 
 Vous pouvez trouver l'histoire complète sur [ici](https://githubcom/capacitor-community/proposals/issues/43#issuecomment-941017142)

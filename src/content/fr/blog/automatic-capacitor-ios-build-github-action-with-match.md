@@ -471,7 +471,7 @@ jobs:
           retention-days: 60
 ```
 
-Ce workflow doit être déclenché après chaque _tag_ GitHub. Si vous devez automatiser la balise, veuillez d'abord vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
+Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abord
 
 Ensuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 
@@ -499,7 +499,7 @@ Après quelques minutes, la version devrait être disponible dans votre tableau 
 
 Oui, vous pouvez, et c'est sans effort
 
-Imaginez que vous disposez d'un référentiel privé, que vous avez utilisé les minutes du plan gratuit et que vous ne souhaitez pas payer pour les nouvelles versions, ou peut-être préférez-vous soumettre la candidature manuellement.
+Imaginez que vous disposez d'un référentiel privé, que vous avez épuisé les minutes du plan gratuit et que vous ne souhaitez pas payer pour les nouvelles versions, ou peut-être préférez-vous soumettre la candidature manuellement.
 
 **_C'est parti_**
 

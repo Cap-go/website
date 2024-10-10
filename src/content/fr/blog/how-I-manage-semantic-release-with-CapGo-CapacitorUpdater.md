@@ -73,7 +73,7 @@ C'est donc génial, et c'est un soulagement pour moi car j'utilise beaucoup la �
 
 Comme mentionné ci-dessus, je dois déployer des versions préliminaires à partir de branches telles que "alpha", "beta", "nightly", etc., mais également des versions spécifiques au client sur des branches telles que "production-customer-jones", "production-customer- biche, etc.
 
-CapGo fournit la fonctionnalité "canaux" qui est exactement ce que la version sémantique prend également en charge, je suis donc ravi de les faire fonctionner ensemble. Celles-ci s'intègrent également dans les différentes versions de branche gérées par XCode Cloud (en savoir plus à ce sujet ci-dessous)
+CapGo fournit la fonctionnalité "canaux" qui est exactement ce que la version sémantique prend également en charge, je suis donc ravi de les faire fonctionner ensemble. Celles-ci s'intègrent également dans les différentes versions de branche gérées par XCode Cloud (voir plus à ce sujet ci-dessous)
 
 Les numéros de version Semver générés par la version sémantique sur les versions préliminaires ressemblent à « 100-alpha1 ». Les builds successifs sur cette branche incrémenteront le numéro de build à « 100-alpha2 », etc. Bien que cela ne soit pas documenté explicitement, ces numéros de version sont pris en charge par CapGo, ce qui est génial news pour moi : j'utiliserai les canaux de publication sémantiques et les avant-premières pour générer des versions de mon application avec les canaux Capgo 
 

@@ -27,7 +27,7 @@ Cordova et Capacitor sont tous deux des outils qui permettent aux développeurs 
 
 ## Stratégie migratoire
 
-La migration de Cordova vers Capacitor peut être effectuée progressivement ou en remplacement complet, en fonction de la complexité de votre application. Capacitor est rétrocompatible avec Cordova, vous permettant de basculer vos applications Web existantes vers celui-ci chaque fois que vous êtes prêt.
+La migration de Cordova vers Capacitor peut être effectuée progressivement ou en remplacement complet, en fonction de la complexité de votre application. Capacitor est rétrocompatible avec Cordova, vous permettant d'y basculer vos applications Web existantes lorsque vous êtes prêt.
 
 Pour faciliter la migration, envisagez d'utiliser l'[extension de code Ionic VS](https://marketplacevisualstudiocom/items/?itemName=ionicionic) et d'auditer vos plugins Cordova existants. Vous pouvez continuer à utiliser les plugins Cordova si nécessaire, ou les remplacer par des équivalents de condensateur.
 
@@ -45,7 +45,7 @@ Suivez ces étapes pour migrer votre application Web de Cordova vers Capacitor 
 
 5 **Générer des icônes et des écrans de démarrage** : Si vous avez des images d'icônes et d'écran de démarrage existantes, utilisez l'outil `cordova-res` pour les générer et les copier dans les projets natifs.
 
-6 **Audit et migrez les plugins Cordova existants** : examinez vos plugins Cordova existants et remplacez-les par des équivalents Capacitor si possible Supprimez tous les plugins inutiles
+6 **Audit et migrez les plugins Cordova existants** : examinez vos plugins Cordova existants et remplacez-les par des équivalents de condensateur si possible Supprimez tous les plugins inutiles
 
 7 **Supprimer le plugin Cordova** : Après avoir remplacé ou supprimé un plugin Cordova, désinstallez le plugin et exécutez `npx cap sync` pour supprimer le code du plugin du projet natif
 

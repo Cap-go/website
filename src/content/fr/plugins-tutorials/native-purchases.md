@@ -19,7 +19,7 @@ Cela installera le package et synchronisera les fichiers natifs avec votre proje
 
 ### Configuration Android
 
-Si vous utilisez Android, vous devez ajouter une configuration à votre fichier AndroidManifestxml. Ouvrez le fichier situé dans « android/app/src/main/AndroidManifestxml » et ajoutez le code suivant :
+Si vous utilisez Android, vous devez ajouter une configuration à votre fichier AndroidManifestxml. Ouvrez le fichier situé dans `android/app/src/main/AndroidManifestxml` et ajoutez le code suivant :
 
 ```xml
 <!-- Add any necessary configuration here -->

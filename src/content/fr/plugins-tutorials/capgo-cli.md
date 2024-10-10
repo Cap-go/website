@@ -36,7 +36,7 @@ Pour ajouter une nouvelle application au Capgo Cloud, utilisez la commande suiva
 npx @capgo/cli add [appId]
 ```
 
-Remplacez `[appId]` par votre identifiant d'application au format `comtestapp`. Vous pouvez également utiliser les indicateurs `--icon`, `--name` et `--apikey` pour personnaliser l'icône, le nom et la clé API. pour l'application
+Remplacez « [appId] » par l'ID de votre application au format « comtestapp ». Vous pouvez également utiliser les indicateurs « --icon », « --name » et « --apikey » pour personnaliser l'icône, le nom et la clé API. pour l'application
 
 ### Étape 5 : Télécharger une version sur Capgo Cloud
 

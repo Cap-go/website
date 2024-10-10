@@ -18,13 +18,13 @@ Je suis ravi d'annoncer la sortie des mises à jour en direct auto-hébergées, 
 
 Alors que de nombreuses entreprises utilisent actuellement le SDK Live Updates pour accéder aux mises à jour JavaScript, HTML et CSS les plus récentes pour leurs applications, certaines peuvent rencontrer des obstacles dus aux politiques de l'entreprise, aux réglementations du secteur ou aux restrictions géographiques. Avec les mises à jour en direct auto-hébergées, vous pouvez désormais distribuer des artefacts de build Web via votre infrastructure
 
-Cela signifie que vous pouvez éviter les retards causés par les avis de l'Apple Store, résoudre les bugs et modifier le contenu plus rapidement, et garantir que vos utilisateurs utilisent toujours la dernière version de votre application. De plus, j'ai entendu de nombreuses grandes entreprises souhaiter tirer parti de Live. Mises à jour mais confrontées à des défis en raison de normes de conformité strictes. Ce problème appartient désormais au passé grâce aux mises à jour en direct auto-hébergées.
+Cela signifie que vous pouvez éviter les retards causés par les avis sur l'Apple Store, résoudre les bugs et modifier le contenu plus rapidement, et garantir que vos utilisateurs utilisent toujours la dernière version de votre application. De plus, j'ai entendu de nombreuses grandes entreprises souhaiter tirer parti de Live. Mises à jour mais confrontées à des défis en raison de normes de conformité strictes. Ce problème appartient désormais au passé grâce aux mises à jour en direct auto-hébergées.
 
 ## Comment fonctionnent les mises à jour en direct auto-hébergées ?
 
 Le déploiement des mises à jour en direct hébergées par Capgo est un jeu d'enfant à l'aide du [SDK Capgo](https://githubcom/Cap-go/capacitor-updater/) En ce qui concerne les mises à jour en direct auto-hébergées, j'ai amélioré la CLI Capgo avec les fonctionnalités nécessaires pour activer la configuration sur votre infrastructure
 
-Pour garantir une livraison sûre et coordonnée des derniers artefacts de construction Web aux utilisateurs finaux, Capgo permet désormais au plugin Capacitor Live Updates d'utiliser une paire de clés publique/privée. Lors de l'utilisation de mises à jour en direct auto-hébergées, une poignée de main supplémentaire est effectuée pour rassurer. que les artefacts téléchargés via le plugin depuis l'infrastructure de l'entreprise ne sont pas modifiés
+Pour garantir une livraison sûre et coordonnée des derniers artefacts de build Web aux utilisateurs finaux, Capgo permet désormais au plugin Capacitor Live Updates d'utiliser une paire de clés publique/privée. Lors de l'utilisation de Live Updates auto-hébergées, une poignée de main supplémentaire est effectuée pour rassurer. que les artefacts téléchargés via le plugin depuis l'infrastructure de l'entreprise ne sont pas modifiés
 
 ![Schéma de chiffrement Capgo](/encryption_flowwebp)
 
@@ -45,7 +45,7 @@ Cette paire de clés est utilisée pour signer la mise à jour et vérifier la m
 
 ### Workflow de mises à jour en direct auto-hébergées
 
-Pour commencer à mettre en œuvre des mises à jour en direct auto-hébergées, une entreprise doit d'abord effectuer une génération Web de ses corrections de bogues, mises à jour de contenu ou toute autre modification de code Web qu'elle souhaite apporter. Ensuite, elle doit signer l'artefact de construction à l'aide de la clé privée obtenue. pendant le processus de configuration unique, et enfin télécharger le bundle vers leur emplacement de stockage préféré
+Pour commencer à implémenter les mises à jour en direct auto-hébergées, une entreprise doit d'abord effectuer une compilation Web de ses corrections de bogues, mises à jour de contenu ou toute autre modification de code Web qu'elle souhaite apporter. Ensuite, elle doit signer l'artefact de compilation à l'aide de la clé privée obtenue. pendant le processus de configuration unique, et enfin télécharger le bundle vers leur emplacement de stockage préféré
 
 Construisez d’abord votre code :
 ```shell
@@ -85,6 +85,6 @@ L'API de l'organisation renvoie le package Live Update depuis l'emplacement, et 
 
 ## Commencer
 
-Je suis ravi d'étendre la portée des mises à jour en direct à encore plus d'entreprises qu'auparavant. Les organisations et les utilisateurs de l'application Ionic reconnaîtront rapidement les avantages de la distribution sécurisée par Capgo des mises à jour d'applications en direct.
+Je suis ravi d'étendre la portée des mises à jour en direct à encore plus d'entreprises qu'auparavant. Les organisations et les utilisateurs de l'application Ionic reconnaîtront rapidement les avantages de la distribution sécurisée de Capgo des mises à jour d'applications en direct.
 
 Pour plus d'informations sur les mises à jour en direct auto-hébergées par Capgo, vous pouvez [consulter la documentation](/docs/tooling/cli/#upload-version)Prêt à déployer des mises à jour instantanées d'applications directement auprès de vos utilisateurs ? [Inscrivez-vous ici aujourd'hui !](/register/)

@@ -136,7 +136,7 @@ GitLab fournit un moyen de stocker des variables CI/CD chiffrées, similaire aux
 - KEYSTORE_KEY_ALIAS : l'alias du magasin de clés
 - KEYSTORE_STORE_PASSWORD : le mot de passe de la clé privée
 - DEVELOPER_PACKAGE_NAME : votre identifiant d'application Android comme comexampleapp
-- PLAY_CONFIG_JSON : clé JSON du compte de service codé en base64
+- PLAY_CONFIG_JSON : la clé JSON du compte de service codée en base64
 
 ## Configurez votre pipeline GitLab CI/CD
 
