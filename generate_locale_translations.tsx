@@ -3,7 +3,7 @@ import { dump, load } from 'js-yaml'
 import path from 'path'
 import { translateText } from './translate'
 
-const batchSize = 100
+const batchSize = 200
 const locales = ['fr']
 
 const localePath = path.join(process.cwd(), 'locales', 'en.yml')

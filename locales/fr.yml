@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -614,14 +614,14 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -1108,7 +1108,7 @@ no_responsibility_disclaimer_text: >-
   n'est pas engagée par les présentes à fournir des conseils et services
   juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
   être utilisé comme substitut à la consultation de conseillers professionnels
-  compétents en matière comptable, fiscale, juridique ou autre.
+  comptables, fiscaux, juridiques ou autres conseillers compétents.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
   responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
@@ -1389,7 +1389,7 @@ data_policy_ccpa_categories_note: >-
   fournies directement.
 data_policy_ccpa_category_a: "<strong>Catégorie A\_: Identifiants.</strong> Exemples\_: Un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou tout autre élément similaire. identifiants. Collecté : Oui."
 data_policy_ccpa_category_b: "<strong>Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e)).</strong> Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse. , numéro de téléphone, numéro de passeport, numéro de permis de conduire ou de carte d'identité d'État, numéro de police d'assurance, éducation, emploi, antécédents professionnels, numéro de compte bancaire, numéro de carte de crédit, numéro de carte de débit ou toute autre information financière, information médicale ou assurance maladie. information. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories. Collecté : Oui."
-data_policy_ccpa_category_c: "<strong>Catégorie C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
+data_policy_ccpa_category_c: "<strong>Catégorie\_C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
 data_policy_ccpa_category_d: "<strong>Catégorie D\_: Informations commerciales.</strong> Exemples\_:\_Documents et historique des produits ou services achetés ou envisagés. Collecté : Oui."
 data_policy_ccpa_category_e: "<strong>Catégorie\_E\_: informations biométriques.</strong> Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou un autre identifiant ou des informations d'identification, telles que des empreintes digitales, des empreintes faciales et des empreintes vocales. scans de l'iris ou de la rétine, frappe au clavier, démarche ou autres modèles physiques, ainsi que données sur le sommeil, la santé ou l'exercice. Collecté : Non."
 data_policy_ccpa_category_f: "<strong>Catégorie F\_: Internet ou autre activité de réseau similaire.</strong> Exemples\_: Interaction avec notre Service ou publicité. Collecté : Oui."
@@ -1413,7 +1413,7 @@ data_policy_ccpa_exclusion_financial: >-
   Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
   Act (FIPA) et le Driver's Privacy Protection Act de 1994.
 data_policy_ccpa_sources_title: Sources de renseignements personnels
-data_policy_ccpa_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_sources_direct: >-
   <strong>Directement de votre part</strong>. Par exemple, à partir des
   formulaires que vous remplissez sur notre Service, des préférences que vous
@@ -1486,15 +1486,15 @@ data_policy_ccpa_disclosure_note: >-
   divulguées.
 data_policy_ccpa_disclosure_contract: >-
   Lorsque nous divulguons des informations personnelles à des fins commerciales,
-  nous concluons un contrat qui décrit le but et exige que le destinataire garde
-  ces informations personnelles confidentielles et ne les utilise pas à d'autres
-  fins que l'exécution du contrat.
+  nous concluons un contrat qui décrit le but et oblige le destinataire à garder
+  ces informations personnelles confidentielles et à ne pas les utiliser à
+  d'autres fins que l'exécution du contrat.
 data_policy_ccpa_sale_title: Vente de renseignements personnels
 data_policy_ccpa_sale_intro: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
-  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
-  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
-  autres, les informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
+  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
+  le transfert ou toute autre communication orale, écrite ou électronique ou
+  autre, des informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.
@@ -1504,7 +1504,7 @@ data_policy_ccpa_sale_note: >-
   d'informations personnelles ont en fait été vendus, mais reflète notre
   conviction de bonne foi, au meilleur de nos connaissances, que certaines de
   ces informations de la catégorie applicable peuvent être et ont pu être
-  partagées en échange de valeur. .
+  partagées contre valeur en retour. .
 data_policy_ccpa_sale_categories: "Nous pouvons vendre et avoir vendu au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes\_: Catégorie A\_: Identifiants, Catégorie B\_: Catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e). )), Catégorie D : Informations commerciales, Catégorie F : Internet ou autre activité de réseau similaire"
 data_policy_ccpa_share_title: Partage d’informations personnelles
 data_policy_ccpa_share_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
@@ -1645,7 +1645,7 @@ tos_interpretation_text: >-
   définies dans les conditions suivantes. Les définitions suivantes auront la
   même signification qu’elles apparaissent au singulier ou au pluriel.
 tos_definitions_subtitle: Définitions
-tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
+tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
 tos_definition_application: >-
   Application désigne le logiciel fourni par la Société téléchargé par Vous sur
   tout appareil électronique, nommé $1
@@ -1653,7 +1653,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1695,7 +1695,7 @@ tos_definition_you: >-
 tos_acknowledgment_title: Reconnaissance
 tos_acknowledgment_text_1: >-
   Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
-  l'accord qui s'applique entre Vous et la Société. Les présentes Conditions
+  l'accord qui opère entre Vous et la Société. Les présentes Conditions
   générales définissent les droits et obligations de tous les utilisateurs
   concernant l'utilisation du Service.
 tos_acknowledgment_text_2: >-
@@ -1850,7 +1850,7 @@ tos_user_accounts_text_2: >-
 tos_user_accounts_text_3: >-
   Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
   devez nous informer immédiatement dès que vous avez connaissance de toute
-  violation de la sécurité ou utilisation non autorisée de votre compte.
+  violation de sécurité ou utilisation non autorisée de votre compte.
 tos_user_accounts_text_4: >-
   Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
   personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
@@ -1913,7 +1913,7 @@ tos_limitation_of_liability_text_1: >-
 tos_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2052,7 +2052,7 @@ cancellation_link: 'En visitant cette page de notre site Internet :'
 reimbursement_policy: >-
   Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
   recevons les marchandises retournées. Nous utiliserons le même moyen de
-  paiement que celui que Vous avez utilisé pour la Commande, et Vous n’aurez à
+  paiement que celui que vous avez utilisé pour la Commande, et vous n'aurez à
   payer aucun frais pour ce remboursement.
 conditions_for_returns: Conditions de retour
 return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
@@ -2077,7 +2077,7 @@ right_to_refuse: >-
   répondant pas aux conditions de retour ci-dessus, à notre seule discrétion.
 sale_items_policy: >-
   Seules les marchandises à prix régulier peuvent être remboursées.
-  Malheureusement, les marchandises en vente ne peuvent être remboursées. Cette
+  Malheureusement, les produits en vente ne peuvent être remboursés. Cette
   exclusion peut ne pas s'appliquer à vous si elle n'est pas autorisée par la
   loi applicable.
 returning_goods: Retour de marchandises
@@ -2089,7 +2089,7 @@ return_address: |-
 return_shipping_disclaimer: >-
   Nous ne pouvons être tenus responsables des marchandises endommagées ou
   perdues lors du retour. Par conséquent, nous recommandons un service de
-  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
   remboursement sans réception effective des marchandises ou sans preuve de
   livraison de retour reçue.
 gifts: Cadeaux
@@ -2105,3 +2105,20 @@ non_gift_return_policy: >-
 contact_us: Contactez-nous
 questions_about_policy: "Si vous avez des questions concernant notre politique de retours et de remboursements, veuillez nous contacter\_:"
 contact_link: 'En visitant cette page du site :'
+register_title: S'inscrire à Capgo
+already_have_account: Vous avez déjà un compte ?
+sign_in: Se connecter
+email_label: E-mail
+email_placeholder: Entrez votre email
+first_name_label: Prénom
+first_name_placeholder: John
+last_name_label: Nom de famille
+last_name_placeholder: Biche
+password_label: Mot de passe
+password_placeholder: Entrez votre mot de passe
+sign_up_button: S'inscrire
+need_help: Besoin d'aide ?
+open_support: Assistance ouverte
+testimonial_title: "Nous avons déployé Capgo en production pour notre base d'utilisateurs de +5000\_!"
+testimonial_highlight: les utilisateurs sont à jour en quelques minutes
+testimonial_description: Utilisateur Capgo depuis 2023
