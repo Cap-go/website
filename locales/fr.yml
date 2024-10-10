@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -436,11 +436,11 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire en cohérence avec le code. Cela permet de garantir que le code et la
+  faire conformément au code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
-  Toutes les API et tous les types exposés publiquement, le module
+  Toutes les API et types exposés publiquement, le module
   <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
   documentation est analysée et disponible pour le compilateur TypeScript, et
   donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
@@ -505,7 +505,7 @@ kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente enviro
 top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
-react_native_power_aproximately_1_of_apps_on_google_play_store: "React Native alimente environ 1\_% des applications sur Google Play Store"
+react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store
 table_of_contents: Table des matières
 latest_from_news: Dernières nouvelles
 capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
@@ -614,14 +614,14 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -756,7 +756,7 @@ security_testing_guidelines_1: >-
   par inadvertance les services, exploiter des vulnérabilités, entraîner une
   instabilité ou des violations du système et violer les conditions de service
   de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
-  capables de distinguer la reconnaissance hostile de la recherche blanche. Si
+  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
   vous souhaitez exécuter un scanner automatisé, informez-nous à
   security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
   N'attaquez PAS les projets d'autres clients.
@@ -799,7 +799,7 @@ security_closing: >-
 sla_title: Accords de niveau de service
 enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
 sla_intro: >-
-  L'accord de niveau de service suivant, qui est incorporé et fait partie de
+  L'accord de niveau de service suivant, qui est intégré et fait partie de
   l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
   s'appliquera aux services destinés aux clients entreprises spécifiés dans un
   formulaire de commande pendant l'abonnement applicable. Terme:
@@ -828,14 +828,13 @@ credit_requests_payment_desc: >-
   inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
   les dates et heures précédemment signalées auxquelles le service n'était pas
   disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans un délai de
-  trente (30) jours. Les crédits de service ne constituent pas des
-  remboursements, ne peuvent pas être échangés contre un montant en espèces et
-  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
-  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
-  constitueront le seul et unique recours du client, et la seule et unique
-  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
-  disponibilité.
+  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
+  jours. Les crédits de service ne constituent pas des remboursements, ne
+  peuvent pas être échangés contre un montant en espèces et ne peuvent être
+  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
+  contraire dans la section 4 ci-dessous, les crédits de service constitueront
+  le seul et unique recours du client, et la seule et unique responsabilité de
+  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -1413,11 +1412,12 @@ data_policy_ccpa_exclusion_financial: >-
   Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
   Act (FIPA) et le Driver's Privacy Protection Act de 1994.
 data_policy_ccpa_sources_title: Sources de renseignements personnels
-data_policy_ccpa_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_sources_direct: >-
   <strong>Directement de votre part</strong>. Par exemple, à partir des
   formulaires que vous remplissez sur notre Service, des préférences que vous
-  exprimez ou fournissez via notre Service, ou de vos achats sur notre Service.
+  exprimez ou fournissez via notre Service, ou à partir de vos achats sur notre
+  Service.
 data_policy_ccpa_sources_indirect: >-
   <strong>Indirectement de votre part</strong>. Par exemple, en observant Votre
   activité sur notre Service.
@@ -1485,9 +1485,9 @@ data_policy_ccpa_disclosure_note: >-
   divulguées.
 data_policy_ccpa_disclosure_contract: >-
   Lorsque nous divulguons des informations personnelles à des fins commerciales,
-  nous concluons un contrat qui décrit le but et exige que le destinataire garde
-  ces informations personnelles confidentielles et ne les utilise pas à d'autres
-  fins que l'exécution du contrat.
+  nous concluons un contrat qui décrit le but et oblige le destinataire à garder
+  ces informations personnelles confidentielles et à ne pas les utiliser à
+  d'autres fins que l'exécution du contrat.
 data_policy_ccpa_sale_title: Vente de renseignements personnels
 data_policy_ccpa_sale_intro: >-
   Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
@@ -1558,7 +1558,7 @@ data_policy_ccpa_rights_opt_out: >-
   veuillez nous contacter.
 data_policy_ccpa_rights_delete: "<strong>Le droit de supprimer vos données personnelles.</strong> Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
 data_policy_ccpa_rights_delete_transaction: >-
-  Terminer la transaction pour laquelle nous avons collecté les informations
+  Compléter la transaction pour laquelle nous avons collecté les informations
   personnelles, fournir un bien ou un service que vous avez demandé, prendre des
   mesures raisonnablement prévues dans le contexte de notre relation commerciale
   en cours avec vous, ou exécuter autrement notre contrat avec vous.
@@ -1631,7 +1631,7 @@ data_policy_ccpa_exercising_rights_portability: >-
   Pour les demandes de portabilité des données, nous sélectionnerons un format
   pour fournir vos informations personnelles qui soit facilement utilisable et
   devrait vous permettre de transmettre les informations d'une entité à une
-  autre sans entrave.
+  autre entité sans entrave.
 tos_title: Termes et conditions
 tos_last_updated: 'Dernière mise à jour : 12 janvier 2022'
 tos_please_read: >-
@@ -1652,7 +1652,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1694,7 +1694,7 @@ tos_definition_you: >-
 tos_acknowledgment_title: Reconnaissance
 tos_acknowledgment_text_1: >-
   Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
-  l'accord qui opère entre Vous et la Société. Les présentes Conditions
+  l'accord qui s'applique entre Vous et la Société. Les présentes Conditions
   générales définissent les droits et obligations de tous les utilisateurs
   concernant l'utilisation du Service.
 tos_acknowledgment_text_2: >-
@@ -1849,7 +1849,7 @@ tos_user_accounts_text_2: >-
 tos_user_accounts_text_3: >-
   Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
   devez nous informer immédiatement dès que vous avez connaissance de toute
-  violation de sécurité ou utilisation non autorisée de votre compte.
+  violation de la sécurité ou utilisation non autorisée de votre compte.
 tos_user_accounts_text_4: >-
   Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
   personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
@@ -1912,7 +1912,7 @@ tos_limitation_of_liability_text_1: >-
 tos_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2088,7 +2088,7 @@ return_address: |-
 return_shipping_disclaimer: >-
   Nous ne pouvons être tenus responsables des marchandises endommagées ou
   perdues lors du retour. Par conséquent, nous recommandons un service de
-  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
   remboursement sans réception effective des marchandises ou sans preuve de
   livraison de retour reçue.
 gifts: Cadeaux
@@ -2344,7 +2344,7 @@ eula_limitation_of_liability_text_1: >-
 eula_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2421,3 +2421,201 @@ eula_entire_agreement_text_2: >-
 eula_contact_us_title: Contactez-nous
 eula_contact_us_text: "Si vous avez des questions concernant cet accord, vous pouvez nous contacter\_:"
 eula_contact_us_link: 'En visitant cette page du site : $1'
+dpa_title: Accord de traitement des données
+dpa_last_updated: 'Dernière mise à jour : 20 septembre 2023'
+dpa_definitions_title: Définitions
+dpa_definitions_1: >-
+  Dans le cadre de la fourniture du service Capgo à l'utilisateur conformément à
+  l'accord, Capgo peut traiter les données des visiteurs au nom de
+  l'utilisateur.
+dpa_definitions_2: >-
+  Dans le présent Accord de traitement des données (« DPA »), « Législation sur
+  la protection des données » désigne le Règlement général sur la protection des
+  données (Règlement (UE) 2016/279) et toutes les autres lois applicables
+  relatives au traitement des données des visiteurs et à la confidentialité qui
+  peuvent exister dans n'importe quel pays. juridiction compétente.
+dpa_definitions_3: >-
+  « responsable du traitement », « sous-traitant », « personne concernée », «
+  données personnelles » et « traitement » doivent être interprétés conformément
+  à la législation applicable en matière de protection des données.
+dpa_definitions_4: >-
+  Les parties conviennent que l'utilisateur est le responsable du traitement des
+  données et que Capgo est son sous-traitant en ce qui concerne les données des
+  visiteurs traitées dans le cadre de la fourniture du service.
+dpa_privacy_security_title: Confidentialité et sécurité de vos données de visiteurs
+dpa_privacy_security_1: >-
+  Nous prenons de nombreuses mesures pour protéger et sécuriser vos données
+  grâce à des sauvegardes, des redondances et du cryptage. Lorsque vous utilisez
+  notre service pour mesurer les statistiques de votre site Web, Capgo
+  collectera des informations sur vos visiteurs.
+dpa_privacy_security_2: >-
+  Vous nous confiez les données de votre site et nous prenons cette confiance à
+  cœur. Vous acceptez que Capgo puisse traiter vos données comme décrit dans
+  notre politique de données et à aucune autre fin. Nous faisons de notre mieux
+  pour mériter cette confiance en étant ouverts sur qui nous sommes, comment
+  nous travaillons et en gardant la porte ouverte à vos commentaires.
+dpa_privacy_security_3: >-
+  Vous possédez tous les droits, titres et intérêts sur les données de votre
+  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
+  site Web. Nous ne collectons ni n'analysons les informations personnelles des
+  utilisateurs Web et utilisons ces informations comportementales pour vendre
+  des publicités. Lorsque vous utilisez Capgo, vous possédez et contrôlez à 100
+  % toutes les données de votre site Web. Nous ne vendons ni ne partageons les
+  données de votre site à des tiers et nous n'abusons pas de la confidentialité
+  de vos visiteurs.
+dpa_privacy_security_4: >-
+  Le but de Capgo est de mettre à jour le condensateur, cela peut toujours être
+  fait sans suivre, collecter ou stocker des données personnelles ou des
+  informations personnellement identifiables (PII), sans utiliser de cookies et
+  tout en respectant la vie privée des visiteurs de votre site Web.
+dpa_privacy_security_5: >-
+  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
+  absolument anonyme. Nous minimisons la collecte de données en général. Nous
+  mesurons uniquement les points de données les plus essentiels et rien d'autre.
+  Toutes les mesures que nous collectons tiennent sur une seule page.
+dpa_privacy_security_6: >-
+  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
+  ils sont considérés comme des données personnelles au sens du RGPD. Nous
+  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
+  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
+  visiteurs. Les données que nous traitons ne peuvent pas être utilisées pour
+  identifier un individu en particulier.
+dpa_privacy_security_7: >-
+  Le groupe de personnes concernées par le traitement de leurs données dans le
+  cadre du présent accord comprend les utilisateurs finaux des sites Internet du
+  responsable du traitement qui utilisent le service fourni par le
+  sous-traitant.
+dpa_privacy_security_8: >-
+  Vous pouvez trouver plus d'informations sur notre traitement des données de
+  vos visiteurs et sur les types/catégories de données que nous collectons en
+  votre nom dans notre politique de données accessible au public.
+dpa_security_measures_title: Mesures de sécurité organisationnelles et techniques
+dpa_security_measures_1: >-
+  Pour le cryptage, nous utilisons https en transit et le processus de hachage
+  au repos. Notre processus de hachage est bien plus puissant que le cryptage.
+  Le cryptage implique qu'il existe une clé capable de déchiffrer et de révéler
+  les données brutes. Dans notre base de données, l'adresse IP brute et l'agent
+  utilisateur sont rendus totalement inaccessibles à quiconque, y compris
+  nous-mêmes. En plus de cela, nous utilisons des règles de pare-feu strictes et
+  un réseau privé crypté. Nous conservons des sauvegardes hors site avec
+  réplication, y compris des mots de passe bcrypt forts.
+dpa_security_measures_2: >-
+  Capgo est un logiciel entièrement open source, ce qui signifie que notre code
+  source est disponible et accessible sur GitHub afin que tout le monde puisse
+  le consulter et l'auditer. Vous pouvez le lire, l'inspecter et le réviser pour
+  comprendre son fonctionnement et vous assurer qu'il préserve la
+  confidentialité et la sécurité des données. Cela vous donne, ainsi qu'à tous
+  les autres, une transparence totale sur la manière dont nous traitons les
+  données de trafic du site Web.
+dpa_security_measures_3: >-
+  Avec plus de 500 étoiles GitHub, de nombreux regards sont rivés sur notre code
+  et c'est cette transparence et cette ouverture qui signifie que les produits
+  open source peuvent être plus fiables que les produits propriétaires et
+  fermés. Notre logiciel est mis à jour plusieurs fois par semaine et sur notre
+  page GitHub, nous proposons également un moyen permettant aux utilisateurs de
+  signaler toute vulnérabilité de sécurité.
+dpa_processor_obligations_title: Obligations du sous-traitant à l'égard du responsable du traitement
+dpa_processor_obligations_1: "Capgo traitera les données des visiteurs uniquement conformément aux instructions du client via les paramètres du service, c'est-à-dire (a) pour exploiter, entretenir et prendre en charge l'infrastructure utilisée pour fournir le service\_; (b) se conformer aux instructions du client et aux instructions de traitement dans son utilisation, sa gestion et son administration du service\_; (c) comme indiqué autrement dans les paramètres du service. Capgo ne traitera les données des visiteurs que conformément à l'accord."
+dpa_processor_obligations_2: >-
+  Capgo informera le client sans délai injustifié si, de l'avis de Capgo, une
+  instruction relative au traitement des données des visiteurs donnée par le
+  client enfreint la législation applicable en matière de protection des
+  données.
+dpa_processor_obligations_3: >-
+  Capgo garantit la confidentialité des données des visiteurs traitées dans le
+  cadre des présentes.
+dpa_processor_obligations_4: >-
+  En tant qu'humains, nous pouvons accéder à vos données pour vous aider avec
+  les demandes d'assistance que vous faites et pour maintenir et protéger Capgo
+  afin d'assurer la sécurité de vos données et du service dans son ensemble.
+  Capgo veillera à ce que tout le personnel Capgo requis pour accéder aux
+  données des visiteurs soit formé au RGPD et à la confidentialité des données,
+  informé de la nature confidentielle des données et se conforme aux obligations
+  énoncées dans le présent accord.
+dpa_processor_obligations_5: >-
+  Capgo mettra en œuvre et maintiendra des mesures de sécurité techniques et
+  organisationnelles appropriées conçues pour protéger les données des visiteurs
+  contre tout traitement non autorisé ou illégal et contre la perte, la
+  destruction, les dommages, le vol, l'altération ou la divulgation accidentels.
+  Ces mesures seront adaptées aux dommages qui pourraient résulter de tout
+  traitement non autorisé ou illicite, de la perte accidentelle, de la
+  destruction, de l'endommagement ou du vol des données des visiteurs et compte
+  tenu de la nature des données des visiteurs qui doivent être protégées.
+dpa_processor_obligations_6: >-
+  Nous travaillons avec des sous-traitants. Avec chaque fournisseur, nous
+  évaluons leur engagement en matière de confidentialité et nous signons avec
+  eux un accord de traitement des données qui comprend les clauses
+  contractuelles types contrôleur-sous-traitant. Ces sous-traitants seront
+  autorisés à traiter les données uniquement pour fournir les services pour
+  lesquels Capgo les a retenus, et il leur sera interdit d'utiliser les données
+  à toute autre fin. Capgo informera le responsable du traitement lors de la
+  modification de la liste des sous-traitants ultérieurs à l'aide de nos
+  notifications dans l'application, de notre courrier électronique et/ou de
+  notre blog. Le responsable du traitement peut légitimement s'y opposer et peut
+  résilier le contrat.
+dpa_processor_obligations_7: >-
+  Si Capgo a connaissance d'une violation de sécurité, d'une destruction, d'une
+  perte, d'une altération ou d'une divulgation accidentelle, non autorisée ou
+  illégale des données personnelles traitées par Capgo dans le cadre de la
+  fourniture du service, elle devra, sans retard injustifié (au plus tard 48
+  heures après en avoir pris connaissance), informer le client par email et lui
+  fournir une description de l'incident ainsi que des mises à jour périodiques
+  des informations sur l'incident, y compris son impact sur le contenu du
+  client. Capgo prendra en outre des mesures pour enquêter sur l'incident et
+  raisonnablement prévenir ou atténuer les effets de l'incident.
+dpa_processor_obligations_8: >-
+  Capgo ne rectifiera pas, de sa propre autorité, n'effacera ou ne limitera pas
+  le traitement des données des visiteurs qui sont traitées pour le compte du
+  responsable du traitement (sauf si cela est requis par la loi ou les
+  conditions de service du processeur), mais ne le fera que sur instructions
+  documentées de du responsable du traitement et conformément aux règles de
+  conservation des données associées à la formule d'abonnement du responsable du
+  traitement.
+dpa_processor_obligations_9: >-
+  Capgo assistera le responsable du traitement dans le respect des obligations
+  concernant la sécurité des données personnelles. Plausible fournira également
+  une assistance au responsable du traitement pour les DPIA. Lorsqu'une personne
+  concernée fait valoir ses droits en tant que personne concernée, cette demande
+  sera transmise sans délai au responsable du traitement.
+dpa_customer_undertakings_title: Engagements clients et assistance Capgo
+dpa_customer_undertakings_1: >-
+  Le Client garantit qu'il dispose de tous les droits nécessaires pour fournir à
+  Capgo les données des visiteurs pour un traitement dans le cadre de la
+  fourniture des Services Capgo.
+dpa_customer_undertakings_2: >-
+  Le Client doit se conformer à tout moment aux législations sur la protection
+  des données en ce qui concerne toutes les données des visiteurs qu'il a
+  fournies à Capgo conformément à l'Accord.
+dpa_customer_undertakings_3: "Le client comprend, en tant que responsable du traitement, qu'il est responsable (entre le client et Capgo) de\_:"
+dpa_customer_undertakings_4: "déterminer la licéité de tout traitement, effectuer toutes les évaluations d’impact requises en matière de protection des données et rendre compte aux régulateurs et aux individus, si nécessaire\_;"
+dpa_customer_undertakings_5: "fournir des avis de confidentialité pertinents aux personnes concernées, comme cela peut être requis dans votre juridiction\_;"
+dpa_customer_undertakings_6: "mettre en œuvre vos propres mesures techniques et organisationnelles appropriées pour garantir et démontrer le traitement conformément au présent DPA\_;"
+dpa_customer_undertakings_7: >-
+  informer les régulateurs ou autorités concernés de tout incident, comme cela
+  peut être requis par la loi dans votre juridiction.
+dpa_liability_indemnity_title: Responsabilité et indemnisation
+dpa_liability_indemnity_1: >-
+  Chaque partie indemnise l'autre et la dégage de toute responsabilité contre
+  toutes réclamations, actions, réclamations de tiers, pertes, dommages et
+  dépenses encourus par la partie indemnisée et découlant directement ou
+  indirectement de ou en relation avec une violation du présent DPA.
+dpa_signing_required_title: "Les clients sont-ils tenus de signer le DPA Capgo\_?"
+dpa_signing_required_1: >-
+  Afin d'utiliser nos produits et services, vous devez accepter notre DPA. En
+  utilisant notre produit, vous acceptez nos conditions de service, vous
+  acceptez automatiquement notre DPA et vous n'avez pas besoin de signer un
+  document séparé. Nous offrons les mêmes droits de confidentialité et la même
+  protection à tous les clients.
+dpa_sharing_title: "Un client peut-il partager le Capgo DPA avec ses clients\_?"
+dpa_sharing_1: >-
+  Oui. Le DPA est un document accessible au public et les clients qui souhaitent
+  le partager avec leurs clients pour confirmer nos mesures de sécurité et
+  d'autres conditions peuvent se sentir libres de le faire.
+dpa_notification_title: "Les clients doivent-ils informer quelqu'un lorsqu'ils acceptent notre DPA\_?"
+dpa_notification_1: >-
+  Non. Vous n'êtes pas tenu de nous informer, ni de nous informer d'un tiers,
+  lorsque vous acceptez notre DPA, mais comme mentionné ci-dessus, vous êtes
+  libre de le faire.
+dpa_contact_title: Contactez-nous
+dpa_contact_1: "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter\_:"
+dpa_contact_2: 'En visitant cette page du site :'
