@@ -8,9 +8,9 @@ import { type Locales } from '@/services/locale'
 import { shortNumber } from '@/services/misc'
 import { posthogLoader } from '@/services/posthog'
 import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import { onMounted, reactive, ref } from 'vue'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''

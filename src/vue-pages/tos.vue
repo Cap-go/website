@@ -186,7 +186,7 @@ const domain = config.public.baseUrl
     <p>
       {{ translations['tos_in_app_purchases_text_5'][props.locale] }}
     </p>
-    <p>If you have any payment related issues with In-app Purchases, then you need to contact the Application Store directly.</p>
+    <p>{{ translations['tos_in_app_purchases_text_6'][props.locale] }}</p>
     <h2>{{ translations['tos_user_accounts_title'][props.locale] }}</h2>
     <p>
       {{ translations['tos_user_accounts_text_1'][props.locale] }}

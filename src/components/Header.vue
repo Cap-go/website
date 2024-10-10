@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
-import { ref } from 'vue'
 import type { Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { ref } from 'vue'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand

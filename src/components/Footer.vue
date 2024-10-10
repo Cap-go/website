@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
-import { getRelativeLocaleUrl } from 'astro:i18n'
-import { defineComponent, h, onMounted, onUnmounted, ref } from 'vue'
 import { openMessenger } from '@/services/bento'
 import { locales, type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { defineComponent, h, onMounted, onUnmounted, ref } from 'vue'
 
 const isOpen = ref(false)
 const currentPath = ref('')

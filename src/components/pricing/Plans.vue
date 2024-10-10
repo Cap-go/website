@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
+import { numberWithSpaces, updateCalc } from '@/services/misc'
 import translations from '@/services/translations'
 import type { Database } from '@/types/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { numberWithSpaces, updateCalc } from '@/services/misc'
 
 const props = defineProps({
   pricing: {

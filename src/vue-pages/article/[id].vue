@@ -3,8 +3,8 @@ import Blog from '@/components/Blog.vue'
 import { formatTime } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
-import { onMounted, ref, type Ref } from 'vue'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { onMounted, ref, type Ref } from 'vue'
 
 const props = defineProps<{
   toc?: any[]
