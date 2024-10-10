@@ -1,80 +1,83 @@
 ---
-slug: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-title: Update your Capacitor apps seamlessly using Capacitor-updater
-description: Greetings Capacitor Ionic Community, today I'll be helping you setup Capacitor-updater
-  into your app. So that you can do seamless releases.
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+title: >-
+  Mettez à jour vos applications Capacitor en toute transparence à l'aide de
+  Capacitor-updater
+description: >-
+  Salutations à la communauté Capacitor Ionic, aujourd'hui, je vais vous aider à
+  configurer le programme de mise à jour de condensateur dans votre application.
+  Pour que vous puissiez réaliser des versions transparentes.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-02-27
-updated_at: 2023-06-29
-head_image: "/update_flow.webp"
-head_image_alt: Capacitor Dev looking for alternative
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-02-27T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /update_flow.webp
+head_image_alt: Un développeur de condensateurs à la recherche d'une alternative
 tag: Tutorial
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-## What is Capacitor-updater?
+## Qu'est-ce que le programme de mise à jour du condensateur ?
 
-Capacitor-updater, a technology that helps in the delivery of app updates and improvements to the end users instantly.
+Capacitor-updater, une technologie qui permet de fournir instantanément des mises à jour et des améliorations d'applications aux utilisateurs finaux.
 
-This is especially great if you want to do critical bug fixes and deliver instantly without going through the App Store reviews.
+Ceci est particulièrement utile si vous souhaitez corriger des bugs critiques et livrer instantanément sans passer par les critiques de l'App Store.
 
-You can think of it as "web-like" agility of side-loading updates as soon as they are available.
+Vous pouvez y voir une agilité « semblable à celle du Web » consistant à charger latéralement les mises à jour dès qu'elles sont disponibles.
 
-Moreover, it provides rollbacks if the new update crashes the app
+De plus, il propose des restaurations si la nouvelle mise à jour plante l'application.
 
-## How does it work?
+## Comment ça marche ?
 
-Capgo keeps your app's JavaScript bundle in sync with the Capgo server, and every time the user opens the app, it checks with the Capgo server if a new update is available to the bundle. And of course, it comes with tons of awesome configurations which can help you fine-tune your user's experience.
+Capgo maintient le bundle JavaScript de votre application synchronisé avec le serveur Capgo, et chaque fois que l'utilisateur ouvre l'application, il vérifie auprès du serveur Capgo si une nouvelle mise à jour est disponible pour le bundle. Et bien sûr, il est livré avec des tonnes de configurations impressionnantes qui peuvent vous aider à affiner l'expérience de votre utilisateur
 
-I use Capgo in all my projects I build. That allows me to put less time in the App Store review process.
+J'utilise Capgo dans tous mes projets que je construis. Cela me permet de consacrer moins de temps au processus de révision de l'App Store.
 
-You can read more about it [here](https://capgo.app/).
+Vous pouvez en savoir plus à ce sujet [ici](https://capgoapp/)
 
-## Are there any limitations?
+## Y a-t-il des limites ?
 
-As good as it may sound, there are a few things that we need to keep in mind.
-The first thing is that OTA updates __only work with web bundles__. 
-You may think that this isn’t really a big limitation because, in Capacitor JS, we write almost all code in JS CSS and HTML.
-While this may be true, there still are native modules that we install to our app.
-If a module changes your android or iOS directories, you can’t use OTA to update your app.
-That’s because these directories’ contents are used to compile Native binaries, which OTA can’t update.
-Even native app cannot update this part.
+Aussi bon que cela puisse paraître, il y a quelques points que nous devons garder à l'esprit.
+La première chose est que les mises à jour OTA __ne fonctionnent qu'avec les bundles Web__ 
+Vous pensez peut-être que ce n’est pas vraiment une grosse limitation car, dans Capacitor JS, nous écrivons presque tout le code en JS CSS et HTML.
+Même si cela peut être vrai, il existe toujours des modules natifs que nous installons sur notre application.
+Si un module modifie vos répertoires Android ou iOS, vous ne pouvez pas utiliser OTA pour mettre à jour votre application
+En effet, le contenu de ces répertoires est utilisé pour compiler des binaires natifs, qu'OTA ne peut pas mettre à jour.
+Même l'application native ne peut pas mettre à jour cette partie
 
-But you can set up your CI/CD to handle this part, I made a tutorial on how to do it [here for IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and [here for Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+Mais vous pouvez configurer votre CI/CD pour gérer cette partie, j'ai fait un tutoriel sur la façon de le faire [ici pour IOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) , et [ici pour Android](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)
 
-## Auto Capgo Configuration
+## Configuration automatique du Capgo
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
+Il est temps de vous inscrire et d'obtenir votre clé API pour télécharger votre première version ! Commencez par [créer un compte Capgo](/register/)
 
-Once you’re logged into Capgo, You will have an onboarding page 
+Une fois connecté à Capgo, vous aurez une page d'intégration 
 
-![Onboarding page](/onboarding_1_new.webp)
+![Page d'intégration](/onboarding_1_newwebp)
 
-Follow the steps on the onboarding page to add your first app.
+Suivez les étapes sur la page d'intégration pour ajouter votre première application
 
-### Follow the CLI guidance
+### Suivez les instructions de la CLI
 
-From a command line, directly into the root of your Capacitor app, run:
+Depuis une ligne de commande, directement à la racine de votre application Capacitor, exécutez :
 
 `npx @capgo/cli@latest init`
-To install the Capgo into your Capacitor app, the CLI will walk you through the process of setting up your app with Capgo.
+Pour installer Capgo dans votre application Capacitor, la CLI vous guidera tout au long du processus de configuration de votre application avec Capgo.
 
-If you want to do it manually, you can follow the steps below.
+Si vous souhaitez le faire manuellement, vous pouvez suivre les étapes ci-dessous
 
-## Manual Capgo Configuration
+## Configuration manuelle de Capgo
 
-### Install the plugin
+### Installer le plugin
 
-You should end up with this code added to your app :
+Vous devriez vous retrouver avec ce code ajouté à votre application :
 
 `npm i @capgo/capacitor-updater && npx cap sync`
-To install the plugin into your Capacitor app.
+Pour installer le plugin dans votre application Capacitor
 
-And then add to your app this code to notify the native plugin that the JS bundle is healthy (if you don't do this, the native plugin will rollback to the previous version):
+Et puis ajoutez à votre application ce code pour informer le plugin natif que le bundle JS est sain (si vous ne le faites pas, le plugin natif reviendra à la version précédente) :
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -82,51 +85,49 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-This will tell the native plugin the installation as succeeded.
+Cela indiquera au plugin natif que l'installation a réussi
 
-Then do a `npm run build && npx cap copy` to update your app.
+Ensuite, effectuez une « npm run build && npx cap copy » pour mettre à jour votre application
 
-### Login to Capgo CLOUD
+### Connectez-vous à Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
+Tout d'abord, utilisez le `all` [apikey](https://webcapgoapp/dashboard/apikeys/) présent dans votre compte pour vous connecter avec la CLI :
 
-`npx @capgo/cli@latest login YOU_KEY`
+`npx @capgo/cli@dernière connexion YOU_KEY`
 
-### Add your first app
+### Ajoutez votre première application
 
-Let's get started by first creating an app in Capgo Cloud with the CLI.
+Commençons par créer une application dans Capgo Cloud avec la CLI
 
-`npx @capgo/cli@latest app add`
+`npx @capgo/cli@dernier ajout d'application`
 
-This command will use all variables defined in the Capacitor config file to create the app.
+Cette commande utilisera toutes les variables définies dans le fichier de configuration Capacitor pour créer l'application
 
-### Upload your first version
+### Téléchargez votre première version
 
-Run the command to build your code and send it to Capgo with:
-`npx @capgo/cli@latest bundle upload`
+Exécutez la commande pour construire votre code et envoyez-le à Capgo avec :
+`npx @capgo/cli@dernier téléchargement du bundle`
 
-By default, the version name will be the one in your `package.json` file.
+Par défaut, le nom de la version sera celui de votre fichier `packagejson`
 
-Check in [Capgo](https://web.capgo.app/) if the build is present.
+Enregistrez dans [Capgo](https://webcapgoapp/) si la build est présente
 
-You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
+Vous pouvez même le tester avec mon [application sandbox mobile](https://capgoapp/app_mobile/)
 
-### Make channel default
+### Définir la chaîne par défaut
 
-After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
+Après avoir envoyé votre application à Capgo, vous devez définir votre chaîne par défaut pour permettre aux applications de recevoir des mises à jour de Capgo.`npx @capgo/cli@dernière production de l'ensemble de canaux -s par défaut`
 
-`npx @capgo/cli@latest channel set production -s default`
+## Recevoir une mise à jour en direct sur un appareil
 
-## Receive a Live Update on a Device
+Pour que votre application reçoive une mise à jour en direct de Deploy, vous devrez exécuter l'application sur un appareil ou un émulateur. Le moyen le plus simple de procéder consiste simplement à utiliser la commande suivante pour lancer votre application locale dans un émulateur ou un appareil connecté. à votre ordinateur
 
-For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
+    exécution du plafond npx [ios | androïde]
 
-    npx cap run [ios | android]
+Ouvrez l'application, mettez-la en arrière-plan et ouvrez-la à nouveau, vous devriez voir dans les journaux que l'application a effectué la mise à jour
 
-Open the app, put it in the background and open it again, you should see in the logs the app did the update.
-
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/plugin/cloud-mode/getting-started/).
+Bravo! 🎉 Vous avez déployé avec succès votre première Live Update. Ce n'est que le début de ce que vous pouvez faire avec Live Updates. Pour en savoir plus, consultez la [documentation complète Live Updates](/docs/plugin/cloud-mode/getting-started/)
 
 
-> If you need to stop receive in local the update run this command
-`npx @capgo/cli@latest channel set`
+> Si vous devez arrêter la réception en local, la mise à jour exécute cette commande
+`npx @capgo/cli@dernier ensemble de canaux`

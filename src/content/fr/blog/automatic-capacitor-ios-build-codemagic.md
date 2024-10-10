@@ -1,217 +1,217 @@
 ---
-slug: "automatic-capacitor-ios-build-codemagic"
-title: Automatic Capacitor IOS build with Codemagic
-description: How to set up a CI/CD pipeline for your IOS Ionic app using Codemagic and Codemagic in 5 mins (2024)
+slug: automatic-capacitor-ios-build-codemagic
+title: Construction automatique d'IOS de condensateur avec Codemagic
+description: >-
+  Comment configurer un pipeline CI/CD pour votre application IOS Ionic à l'aide
+  de Codemagic et Codemagic en 5 minutes (2024)
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2024-07-24
-updated_at: 2024-07-24
-head_image: "/Codemagic_ios.webp"
-head_image_alt: Codemagic testflight illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2024-07-24T00:00:00.000Z
+updated_at: 2024-07-24T00:00:00.000Z
+head_image: /Codemagic_ios.webp
+head_image_alt: Illustration du vol d'essai Codemagic
 tag: CI/CD
 published: true
 locale: fr
-next_blog: "automatic-capacitor-android-build-codemagic"
-
+next_blog: automatic-capacitor-android-build-codemagic
 ---
 
+## Livraison continue pour iOS à l'aide de Codemagic
 
-## Continuous Delivery for iOS using Codemagic
 
+## Prérequis
 
-## Prerequisites
+Avant de poursuivre le tutoriel…
 
-Before continuing with the tutorial…
+- Adhésion au programme pour développeurs iOS
+- Envie de lire 😆…
 
--   iOS developer program membership.
--   Desire to read 😆…
+## Important concernant le prix
 
-## Important about the price
+![Prix Codemagic Action](/price_codemagicwebp)
 
-![Price Codemagic Action](/price_codemagic.webp)
+[https://codemagicio/pricing/](https://codemagicio/pricing/)
 
-[https://codemagic.io/pricing/](https://codemagic.io/pricing/)
+Le service est « _gratuit »_ jusqu’à 500 minutes macOS M1/mois, selon la machine choisie  
+Nous allons utiliser une machine **_macOS M1_**, vous pouvez voir sur la capture d'écran son prix et ses limites (tarifs dès la création du tutoriel, ils pourraient subir des modifications dans le futur)
 
-The service is ‘_free’_ up to 500 macOS M1 minutes / month, depending on the chosen machine.  
-We are going to use a **_macOS M1_** machine, you can see in the screenshot its price and limits (prices as of the creation of the tutorial, they could undergo changes in the future)
+🔴 **_Une fois prévenus des besoins et des tarifs, si vous le souhaitez, on continue…_**
 
-🔴 **_Once warned of requirements and prices, if you like, we continue…_**
+> **_📣_ Dans le post, nous supposons que nous avons l'application créée dans iTunes Connect, nous avons les certificats de l'écosystème Apple, tout sera configuré par Codemagic !**
 
-> **_📣_ In the post we assume that we have the app created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be setup by Codemagic!**
+## Allons au désordre 🧑🏽💻
 
-## Let’s go to the mess 🧑🏽💻
+**Étapes à suivre dans le post**
 
-**Steps to follow in the post**
+1 _Utilisation de l'API App Store Connect avec Codemagic_
+2 _Exigences_
+3 _Création d'une clé API App Store Connect_
+4 _Utilisation d'une clé API App Store Connect_
+5 _Copier les fichiers Fastline_
+6 _Configurer Codemagic_
 
-1.  _Using App Store Connect API with Codemagic_
-2.  _Requirements_
-3.  _Creating an App Store Connect API Key_
-4.  _Using an App Store Connect API Key_
-5.  _Copy Fastline files_
-6.  _Configure Codemagic_
+## 1\ Utilisation de l'API App Store Connect avec Codemagic
 
-## 1\. Using App Store Connect API with Codemagic
+> À partir de février 2021, une authentification à deux facteurs ou une vérification en deux étapes est requise pour que tous les utilisateurs puissent se connecter à App Store Connect. Cette couche de sécurité supplémentaire pour votre identifiant Apple permet de garantir que vous êtes la seule personne à pouvoir accéder à votre compte.  
+> Depuis [Assistance Apple](https://developerapplecom/support/authentication/)
 
-> Starting February 2021, two-factor authentication or two-step verification is required for all users to sign in to App Store Connect. This extra layer of security for your Apple ID helps ensure that you’re the only person who can access your account.  
-> From [Apple Support](https://developer.apple.com/support/authentication/)
+> La mise en route de match vous oblige à révoquer vos certificats existants. Mais pas d'inquiétude, vous aurez directement le nouveau
 
-> Getting started with match requires you to revoke your existing certificates. But no worry, you will have the new one directly.
 
+### Exigences
 
-### Requirements
+Pour pouvoir utiliser l'API App Store Connect, Codemagic a besoin de **trois** éléments
 
-To be able to use App Store Connect API, Codemagic needs **three** things.
+1 identifiant de l'émetteur
+2 ID de clé
+3 Fichier clé ou contenu clé
 
-1.  Issuer ID.
-2.  Key ID.
-3.  Key file or Key content.
+### Création d'une clé API App Store Connect
 
-### Creating an App Store Connect API Key
+Pour générer des clés, vous devez disposer de l'autorisation d'administrateur dans App Store Connect. Si vous ne disposez pas de cette autorisation, vous pouvez diriger la personne concernée vers cet article et suivre les instructions suivantes.
 
-To generate keys, you must have Admin permission in App Store Connect. If you don’t have that permission, you can direct the relevant person to this article and follow the following instructions.
+1 — Connectez-vous à [App Store Connect](https://appstoreconnectapplecom/)
 
-1 — Log in to [App Store Connect](https://appstoreconnect.apple.com/).
+2 — Sélectionnez [Utilisateurs et accès](https://appstoreconnectapplecom/access/users/)
 
-2 — Select [Users and Access](https://appstoreconnect.apple.com/access/users/).
+![Accès utilisateur App Store Connect](/select_user_accesswebp)
 
-![App Store Connect user access](/select_user_access.webp)
+3 — Sélectionnez l'onglet Clés API
 
-3 — Select the API Keys tab.
+![Clés API App Store Connect](/user_access_keyswebp)
 
-![App Store Connect API Keys](/user_access_keys.webp)
+4 — Cliquez sur Générer une clé API ou sur le bouton Ajouter (+)
 
-4 — Click Generate API Key or the Add (+) button.
+![Création de clés API App Store Connect](/user_accesswebp)
 
-![App Store Connect API keys create](/user_access.webp)
+5 — Entrez le nom de la clé et sélectionnez un niveau d'accès. Nous vous recommandons de choisir les droits d'accès « App Manager », en savoir plus sur les autorisations de rôle du programme pour développeurs Apple [ici] (https://helpapplecom/app-store-connect/#/deve5f9a89d7 )
 
-5 —  Enter the name for the key and select an access level. We recommend choosing `App Manager` access rights, read more about Apple Developer Program role permissions [here](https://help.apple.com/app-store-connect/#/deve5f9a89d7)
+![Les clés API App Store Connect créent un nom](/gen_keywebp)
 
-![App Store Connect API keys create name](/gen_key.webp)
+6 — Cliquez sur Générer
 
-6 — Click Generate.
+> **L'accès à une clé API ne peut pas être limité à des applications spécifiques**
 
-> **An API key’s access cannot be limited to specific apps.**
+Le nom de la nouvelle clé, l'ID de la clé, un lien de téléchargement et d'autres informations apparaissent sur la page
 
-The new key’s name, key ID, a download link, and other information appear on the page.
+![Clés de téléchargement App Store Connect](/download_keywebp)
 
-![App Store Connect download keys](/download_key.webp)
+Récupérez les trois informations nécessaires ici :
+<1> ID du problème  
+<2> ID de clé  
+<3> Cliquez sur « Télécharger la clé API » pour télécharger votre clé privée API Le lien de téléchargement n'apparaît que si la clé privée n'a pas encore été téléchargée Apple ne conserve pas de copie de la clé privée Vous ne pouvez donc la télécharger qu'une seule fois
 
-Grab all three necessary information here:
-<1> Issue ID.  
-<2> Key ID.  
-<3> Click “Download API Key” to download your API private key. The download link appears only if the private key has not yet been downloaded. Apple does not keep a copy of the private key. So, you can download it only once.
+> _🔴_ Stockez votre clé privée dans un endroit sûr Vous ne devez jamais partager vos clés, stocker des clés dans un référentiel de code ou inclure des clés dans le code côté client
 
-> _🔴_ Store your private key in a safe place. You should never share your keys, store keys in a code repository, or include keys in client-side code.
+### Ajout de la clé API App Store Connect à Codemagic
 
-### Adding the App Store Connect API key to Codemagic
+1 Ouvrez les paramètres de votre équipe Codemagic,
+![Sélectionner les intégrations d'équipe](/select_teamwebp)
+![Ouvrir l'équipe](/open_teamwebp)
+Sélectionnez les identités de signature de code
+![Sélectionnez les identités de signature de code](/select_code_signing_identitieswebp)
+Et télécharger le certificat
+![Télécharger le certificat](/upload_certificatewebp)
 
-1.  Open your Codemagic Team settings,
-![Select Team integrations](/select_team.webp)
-![Open team](/open_team.webp)
-Select code signing identities
-![Select code signing identities](/select_code_signing_identities.webp)
-And the upload the certificate
-![Upload the certificate](/upload_certificate.webp)
+2 Cliquez sur le bouton **Ajouter une clé**
+3 Saisissez le « Nom de la clé API App Store Connect ». Il s'agit d'un nom lisible par l'homme pour la clé qui sera utilisé pour faire référence à la clé ultérieurement dans les paramètres de l'application.
+4 Saisissez les valeurs « Issuer ID » et « Key ID »
+5 Cliquez sur **Choisissez unp8** ou faites glisser le fichier pour télécharger la clé API App Store Connect téléchargée précédemment
+6 Cliquez sur **Enregistrer**
 
-2.  Click the **Add key** button.
-3.  Enter the `App Store Connect API key name`. This is a human readable name for the key that will be used to refer to the key later in application settings.
-4.  Enter the `Issuer ID` and `Key ID` values.
-5.  Click on **Choose a .p8 file** or drag the file to upload the App Store Connect API key downloaded earlier.
-6.  Click **Save**.
+_Maintenant, nous pouvons gérer Codemagic avec la clé API App Store Connect, super !_
 
-_Now we can manage Codemagic with the App Store Connect API key, great!_
 
+## 2\ Créer des certificats et des profils de provisionnement
 
-## 2\. Create certificates and provisioning profiles
 
+#### Certificats
 
-#### Certificates
+Ouvrez XCode et accédez à **Paramètres** > **Comptes** > **Identifiant Apple** > **Équipes** et sélectionnez votre équipe.
 
-Open XCode and go to **Settings** > **Accounts** > **Apple ID** > **Teams** and select your team.
+![Identités de signature de code](/code_signing_identitieswebp)
 
-![Code signing identities](/code_signing_identities.webp)
+Cliquez sur **Gérer les certificats** > **+** et sélectionnez **Apple Distribution**
 
-Click on **Manage certificates** > **+** and select **Apple Distribution**.
+![Distribution Apple](/apple_distributionwebp)
 
-![Apple Distribution](/apple_distribution.webp)
+Ensuite, vous pouvez créer un nouveau certificat
 
-Then you can create a new certificate.
+Ensuite, vous devez accéder au trousseau pour télécharger le certificat sous forme de fichier « p12 »
 
-Then you need to go to keychain to download the certificate as a `.p12` file.
+Pour ce faire, vous devez accéder au trousseau, passer au trousseau **login**, puis à l'onglet **Mes certificats**.
 
-To do so, you need to go to keychain switch to the **login** keychain and then the tab **My Certificates**.
+![Mes certificats](/my_certificateswebp)
 
-![My Certificates](/my_certificates.webp)
+Ensuite, vous pouvez sélectionner le certificat que vous souhaitez télécharger (Regardez par la date du certificat)
 
-Then you can select the certificate you want to download. (Look by the date of the certificate)
+Ensuite, faites un clic droit sur le certificat et sélectionnez **Exporter**
 
-And then right-click on the certificate and select **Export**.
+Choisissez le format de fichier **Échange d'informations personnelles (p12)**
 
-Choose the file format **Personal Information Exchange (.p12)**.
+Cela téléchargera le certificat sous forme de fichier « p12 »
 
-That will download the certificate as a `.p12` file.
+#### Profils de provisionnement
 
-#### Provisioning profiles
+Ouvrez [Apple Developer](https://developerapplecom/account/resources/profiles/list) et sélectionnez la bonne équipe
 
-Open [Apple Developer](https://developer.apple.com/account/resources/profiles/list) and select the right team.
+Créez ensuite un nouveau profil, en cliquant sur **++** 
 
-Then create a new profile, by clicking on **+** 
+![Créer un nouveau profil](/create_new_profilewebp)
 
-![Create a new profile](/create_new_profile.webp)
+Et sélectionnez **App Store Connect** 
 
-And select **App Store Connect**. 
+![Sélectionnez App Store Connect](/select_app_store_connectwebp)
 
-![Select App Store Connect](/select_app_store_connect.webp)
+Ensuite, vous devez sélectionner la bonne application. Attention, vous ne pouvez pas utiliser de caractère générique, sinon la signature échouera.
 
-Then you need to select the right app, be careful you cannot use wildcard otherwise signing will fail.
+![Sélectionnez la bonne application](/select_appwebp)
 
-![Select the right app](/select_app.webp)
+Sélectionnez le bon certificat que vous avez créé auparavant (recherchez la date d'expiration, elle devrait être le même jour et le même mois qu'aujourd'hui) et cliquez sur **Continuer**
 
-Select the right certificate you created before (look for the date of expiration it should same day and month as today) and click on **Continue**.
+![Sélectionnez le bon certificat](/select_certificatewebp)
 
-![Select the right certificate](/select_certificate.webp)
+Entrez enfin le nom du profil et cliquez sur **Générer** 
 
-Finally enter the name of the profile and click on **Generate**. 
+> Le nom sera utilisé pour identifier le profil dans Codemagic
 
-> The name will be used to identify the profile in Codemagic.
+![Générer le profil](/generate_profilewebp)
 
-![Generate the profile](/generate_profile.webp)
+Vous pouvez télécharger le profil sous forme de fichier « mobileprovision »
 
-You can download the profile as a `.mobileprovision` file.
+![Télécharger le profil](/download_profilewebp)
 
-![Download the profile](/download_profile.webp)
 
+### Ajout du certificat de signature de code
 
-### Adding the Code signing certificate
+Codemagic vous permet de télécharger des certificats de signature de code sous forme d'archives PKCS#12 contenant à la fois le certificat et la clé privée nécessaire à son utilisation. Lors du téléchargement, Codemagic vous demandera de fournir le mot de passe du certificat (si le certificat est protégé par mot de passe) ainsi qu'un **Nom de référence** unique, qui peut ensuite être utilisé dans la configuration `codemagicyaml` pour récupérer le fichier spécifique
 
-Codemagic lets you upload code signing certificates as PKCS#12 archives containing both the certificate and the private key which is needed to use it. When uploading, Codemagic will ask you to provide the certificate password (if the certificate is password-protected) along with a unique **Reference name**, which can then be used in the `codemagic.yaml` configuration to fetch the specific file.
+- Télécharger le certificat
+- Générer un nouveau certificat
+- Récupérer depuis le portail des développeurs
 
--   Upload certificate
--   Generate new certificate
--   Fetch from Developer Portal
+1 Ouvrez les paramètres de votre équipe Codemagic, accédez à **paramètres codemagicyaml** > **Identités de signature de code**
+2 Ouvrez l'onglet **Certificats iOS**
+3 Téléchargez le fichier de certificat en cliquant sur **Choisissez un fichier p12 ou pem** ou en le faisant glisser dans le cadre indiqué
+4 Saisissez le **Mot de passe du certificat** et choisissez un **Nom de référence**.
+5 Cliquez sur **Ajouter un certificat**
 
-1.  Open your Codemagic Team settings, go to **codemagic.yaml settings** > **Code signing identities**.
-2.  Open **iOS certificates** tab.
-3.  Upload the certificate file by clicking on **Choose a .p12 or .pem file** or by dragging it into the indicated frame.
-4.  Enter the **Certificate password** and choose a **Reference name**.
-5.  Click **Add certificate**
+### Ajout du profil de provisionnement
 
-### Adding the provisioning profile
+Codemagic vous permet de télécharger un profil d'approvisionnement à utiliser pour l'application ou de récupérer un profil sur le portail des développeurs Apple.
 
-Codemagic allows you to upload a provisioning profile to be used for the application or to fetch a profile from the Apple Developer Portal.
+Le type de profil, l'équipe, l'identifiant du bundle et la date d'expiration sont affichés pour chaque profil ajouté aux identités de signature de code. De plus, Codemagic vous indiquera si un certificat de signature de code correspondant est disponible dans Identités de signature de code (une coche verte dans la zone **Certificat). ** champ) ou pas
 
-The profile’s type, team, bundle id, and expiration date are displayed for each profile added to Code signing identities. Furthermore, Codemagic will let you know whether a matching code signing certificate is available in Code signing identities (a green checkmark in the **Certificate** field) or not.
+## 3\ Configurer Codemagic
 
-## 3\. Setup Codemagic
+**Configurer les secrets Codemagic**
 
-**Configure Codemagic secrets**
+Vous êtes-vous déjà demandé d'où viennent les valeurs de « ENV » ? Eh bien, ce n’est plus un secret – cela vient du secret de votre projet 🤦
 
-Ever wonder where the values of the `ENV` are coming from? Well, it’s not a secret anymore – it’s from your project’s secret. 🤦
 
+## **4\ Configurer le fichier de workflow Codemagic**
 
-## **4\. Configure Codemagic workflow file**
-
-Create a file named `codemagic.yml` at the root of your project and add the following.
+Créez un fichier nommé `codemagicyml` à la racine de votre projet et ajoutez ce qui suit
 
 ```yaml
 workflows:
@@ -285,58 +285,56 @@ workflows:
 
 ```
 
-This workflow should be triggered manually or after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
+Ce workflow doit être déclenché manuellement ou après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abordEnsuite, ce workflow extraira vos dépôts NodeJS, les installera et créera votre application JavaScript.
 
-Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
+> Chaque fois que vous envoyez un nouveau tag, une release sera construite dans TestFlight
 
-> Each time you send a new tag, a release will be built in TestFlight.
+Votre application n'a pas besoin d'utiliser Ionic, seule la base Capacitor est obligatoire, elle peut avoir l'ancien module Cordova, mais le plugin Capacitor JS doit être préféré
 
-Your App doesn't need to use Ionic, only Capacitor base is mandatory, it can have old Cordova module, but Capacitor JS plugin should be preferred.
-
-## 5\. Trigger workflow
+## 5\ Déclencher le workflow
 
 
-**Trigger the workflow**
+**Déclenchez le workflow**
 
-Push the new commits to the branch `main` or `developement` to trigger the workflow.
+Poussez les nouveaux commits vers la branche « main » ou « developement » pour déclencher le workflow
 
-![Started with commit](/build_result.webp)
+![Démarré avec commit](/build_resultwebp)
 
-After a few minutes, the build should be available in your App Store Connect dashboard.
+Après quelques minutes, la version devrait être disponible dans votre tableau de bord App Store Connect
 
-![Testflight Dashboard](/testflight_app.webp)
+![Tableau de bord Testflight](/testflight_appwebp)
 
-## Start manually
+## Démarrer manuellement
 
-You can start the workflow manually. 
+Vous pouvez démarrer le workflow manuellement 
 
-First select the app you want to build, then click on **Start new build**.
+Sélectionnez d'abord l'application que vous souhaitez créer, puis cliquez sur **Démarrer une nouvelle version**
 
-![Select app](/select_app_codemagic.webp)
+![Sélectionner l'application](/select_app_codemagicwebp)
 
-Then select the branch you want to build.
+Sélectionnez ensuite la branche que vous souhaitez créer
 
-![Select branch](/select_branch.webp)
+![Sélectionner une branche](/select_branchwebp)
 
-And click on **Start new build**.
+Et cliquez sur **Démarrer une nouvelle build**
 
-Then go you the build list
+Alors allez-y, la liste de construction
 
-![Build list](/build_list.webp)
+![Construire la liste](/build_listwebp)
 
-And click on the build to see the result.
+Et cliquez sur le build pour voir le résultat
 
-![Build result](/build_result.webp)
+![Résultat de construction](/build_resultwebp)
 
-## Can deploy from local machine
+## Peut être déployé à partir d'une machine locale
 
-Yes, you can, and it is effortless.
+Oui, vous pouvez, et c'est sans effort
 
-You can use Xcode to build and sign your app, as always.
+Vous pouvez utiliser Xcode pour créer et signer votre application, comme toujours
 
-### Thanks
+### Merci
 
-This blog is based on the following articles:
-- [Continuous delivery for IOS using Codemagic and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-Codemagic-and-github-actions-edf62ee68ecc/)
-- [Codemagic Documentation](https://docs.Codemagic.tools/app-store-connect-api/)
-- [This GitHub message from @mrogunlana](https://github.com/Codemagic-community/Codemagic-plugin-ionic/issues/63/#issuecomment-1074328057)
+Ce blog est basé sur les articles suivants :
+- [Livraison continue pour IOS à l'aide des actions Codemagic et GitHub](https://litoariasmediumcom/continuous-delivery-for-ios-using-Codemagic-and-github-actions-edf62ee68ecc/)
+- [Documentation Codemagic](https://docsCodemagictools/app-store-connect-api/)
+- [Ce message GitHub de @mrogunlana](https://githubcom/Codemagic-community/Codemagic-plugin-ionic/issues/63/#issuecomment-1074328057)

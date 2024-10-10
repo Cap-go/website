@@ -1,88 +1,91 @@
 ---
-slug: "introducing-end-to-end-security-to-capacitor-updater-with-code-signing"
-title: Introducing end to end encryption to capacitor-updater with code signing
-description: Using RSA + AES cryptography to encrypt updates, designed for the enterprise and high security apps
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
+title: >-
+  Introduction du cryptage de bout en bout dans le programme de mise à jour des
+  condensateurs avec signature de code
+description: >-
+  Utilisation de la cryptographie RSA + AES pour chiffrer les mises à jour,
+  conçues pour les applications d'entreprise et de haute sécurité
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-11-27
-updated_at: 2024-08-27
-head_image: "/secure_upload.webp"
-head_image_alt: Secure upload Capgo
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-11-27T00:00:00.000Z
+updated_at: 2024-08-27T00:00:00.000Z
+head_image: /secure_upload.webp
+head_image_alt: Téléchargement sécurisé Capgo
 tag: Solution
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-[Capacitor-updater](https://github.com/Cap-go/capacitor-updater/) now supports end-to-end code encryption. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.
+[Capacitor-updater](https://githubcom/Cap-go/capacitor-updater/) prend désormais en charge le cryptage du code de bout en bout. La signature du code garantit que les mises à jour exécutées par les appareils des utilisateurs finaux n'ont pas été falsifiées et fournit un niveau de protection supplémentaire supérieur à la sécurité Web standard de Capacitor-updater
 
-## The default security of Capacitor-updater
+## La sécurité par défaut de Capacitor-updater
 
-By default, Capgo’s security model is similar to that of web hosting providers. Capgo stores updates [encrypted at rest](https://cloud.google.com/docs/security/encryption/default-encryption/) and serves them over HTTPS using modern ciphers. Similarly, publishing an update from a developer’s computer always uses HTTPS.
+Par défaut, le modèle de sécurité de Capgo est similaire à celui des fournisseurs d'hébergement Web. Capgo stocke les mises à jour [chiffrées au repos](https://cloudgooglecom/docs/security/encryption/default-encryption/) et les diffuse via HTTPS à l'aide de chiffrements modernes. De même, la publication d'une mise à jour depuis l'ordinateur d'un développeur utilise toujours HTTPS
 
-![Capgo scores an A+ on SSL Labs’ HTTPS test](/ssllabs_report.webp)
+![Capgo obtient un A+ au test HTTPS de SSL Labs](/ssllabs_reportwebp)
 
-Capgo’s default security scores an A+ on SSL Labs’ HTTPS test (https://www.ssllabs.com, November 2022)
+La sécurité par défaut de Capgo obtient un A+ au test HTTPS de SSL Labs (https://wwwssllabscom, novembre 2022)
 
-Like best-in-class web hosts, Capgo uses HTTPS to protect the privacy and integrity of network connections between the server and end users’ devices. This is an excellent level of security that works well both for the web and Ionic apps that use Capgo.
+Comme les meilleurs hébergeurs Web de leur catégorie, Capgo utilise HTTPS pour protéger la confidentialité et l'intégrité des connexions réseau entre le serveur et les appareils des utilisateurs finaux. Il s'agit d'un excellent niveau de sécurité qui fonctionne bien à la fois pour le Web et les applications Ionic qui utilisent Capgo.
 
-## The cloud infrastructure supply chain
+## La chaîne d'approvisionnement de l'infrastructure cloud
 
-Another thing Capgo and most web hosts have in common is they run on lower-level cloud infrastructure, often from AWS, GCP, or another popular cloud provider. The hardware and software operated by these cloud providers and Capgo or other web hosts are part of the cloud supply chain.
+Une autre chose que Capgo et la plupart des hébergeurs Web ont en commun est qu'ils fonctionnent sur une infrastructure cloud de niveau inférieur, souvent provenant d'AWS, de GCP ou d'un autre fournisseur de cloud populaire. Le matériel et les logiciels exploités par ces fournisseurs de cloud et Capgo ou d'autres hébergeurs Web font partie du chaîne d'approvisionnement en nuage
 
-The cloud supply chain and its security model work for a vast number of websites and apps. Every web developer who uses a cloud provider puts trust in that provider and expects the files they upload to be the files that are run or served without being tampered with. And cloud providers work hard at keeping their infrastructure secure.
+La chaîne d'approvisionnement du cloud et son modèle de sécurité fonctionnent pour un grand nombre de sites Web et d'applications. Chaque développeur Web qui utilise un fournisseur de cloud fait confiance à ce fournisseur et s'attend à ce que les fichiers qu'il télécharge soient ceux qui sont exécutés ou servis sans être falsifiés. les fournisseurs de cloud travaillent dur pour assurer la sécurité de leur infrastructure
 
-But obviously, hardware and software vulnerabilities get discovered. Cloud providers patch vulnerabilities on timely schedules, proactively prevent malicious software(e.g. [Google’s SLSA](https://security.googleblog.com/2021/06/introducing-slsa-end-to-end-framework.html/)), and build layers of defense in depth, and in practice, cloud infrastructure has shown to meet most websites and apps’ security needs. However, some Ionic apps include compromised cloud infrastructure in their threat models. For these Capacitor JS apps with the highest security requirements above the web, we built end-to-end code signing in to Capgo and the [Capgo Updates standard protocol](/docs/self-hosted/auto-update/update-endpoint/).
+Mais évidemment, les vulnérabilités matérielles et logicielles sont découvertes. Les fournisseurs de cloud corrigent les vulnérabilités en temps opportun et préviennent de manière proactive les logiciels malveillants (par exemple [SLSA de Google](https://securitygoogleblogcom/2021/06/introducing-slsa-end-to-end-frameworkhtml/ )), et construisons des couches de défense en profondeur, et dans la pratique, l'infrastructure cloud s'est avérée répondre aux besoins de sécurité de la plupart des sites Web et des applications. Cependant, certaines applications Ionic incluent une infrastructure cloud compromise dans leurs modèles de menace. Pour ces applications Capacitor JS avec la plus haute sécurité exigences au-dessus du Web, nous avons créé un code de bout en bout pour la connexion à Capgo et au [protocole standard Capgo Updates](/docs/self-hosted/auto-update/update-endpoint/)
 
-## End-to-end code signing with Capgo
+## Signature de code de bout en bout avec Capgo
 
-Capgo’s end-to-end code signing uses public-key cryptography to ensure end users’ devices run only unmodified, original updates from the Capacitor app developer.
+La signature de code de bout en bout de Capgo utilise la cryptographie à clé publique pour garantir que les appareils des utilisateurs finaux exécutent uniquement les mises à jour originales non modifiées du développeur de l'application Capacitor.
 
-“End-to-end” means this security covers the flow from the time a developer publishes an update to the time an end user’s device receives and runs the update. “Code signing” is using cryptography and a secret private key to “sign” code, and later using a trusted public key to verify the signature.
+« De bout en bout » signifie que cette sécurité couvre le flux depuis le moment où un développeur publie une mise à jour jusqu'au moment où l'appareil d'un utilisateur final reçoit et exécute la mise à jour. La « signature de code » utilise la cryptographie et une clé privée secrète pour « signer » le code. , puis en utilisant une clé publique de confiance pour vérifier la signature
 
-Here is a simple* schema to explain how it works:
+Voici un schéma simple* pour expliquer son fonctionnement :
 
-![Capgo encryption schema](/encryption_flow.webp)
+![Schéma de chiffrement Capgo](/encryption_flowwebp)
 
-* Complex in practice, cryptography is hard
+* Complexe en pratique, la cryptographie est difficile
 
-*Definition*:
-- AES: Advanced Encryption Standard, a symmetric encryption algorithm, one key for encryption and decryption.
-- RSA: Rivest–Shamir–Adleman, an asymmetric encryption algorithm, two keys are used: a public key and a private key.
-- Cypher: The encrypted data.
-- Session key: An AES key used to encrypt and decrypt data.
-- Checksum: A hash calculated for a file
-- Signature: A checksum that was encrypted with a private RSA key. It can be verified with a public RSA key 
+*Définition*:
+- AES : Advanced Encryption Standard, un algorithme de chiffrement symétrique, une clé pour le chiffrement et le déchiffrement
+- RSA : Rivest–Shamir–Adleman, un algorithme de chiffrement asymétrique, deux clés sont utilisées : une clé publique et une clé privée
+- Cypher : Les données cryptées
+- Clé de session : une clé AES utilisée pour crypter et déchiffrer les données
+- Somme de contrôle : un hachage calculé pour un fichier
+- Signature : une somme de contrôle chiffrée avec une clé RSA privée. Elle peut être vérifiée avec une clé RSA publique. 
 
-We use the AES algorithm to encrypt the update. A random AES key is generated for every upload, then the AES key and checksum (hereafter "signature") are encrypted with the private RSA key of the developer. The developer’s public RSA key is used in the app to decrypt the AES key and the signature (converting it back to a checksum). Later, the decrypted AES key is used to decrypt the update; a checksum of the decrypted update is calculated, and it is compared with the decrypted signature.
+Nous utilisons l'algorithme AES pour crypter la mise à jour. Une clé AES aléatoire est générée pour chaque téléchargement, puis la clé AES et la somme de contrôle (ci-après « signature ») sont cryptées avec la clé RSA privée du développeur. La clé RSA publique du développeur est utilisée dans le application pour déchiffrer la clé AES et la signature (en la reconvertissant en somme de contrôle)Plus tard, la clé AES déchiffrée est utilisée pour déchiffrer la mise à jour ; une somme de contrôle de la mise à jour déchiffrée est calculée et comparée à la signature déchiffrée
 
-We use two different encryption algorithms because RSA cannot be used to encrypt large amounts of data. AES is used to encrypt the update and RSA is used to encrypt the AES key and the checksum.
+Nous utilisons deux algorithmes de chiffrement différents car RSA ne peut pas être utilisé pour chiffrer de grandes quantités de données. AES est utilisé pour chiffrer la mise à jour et RSA est utilisé pour chiffrer la clé AES et la somme de contrôle.
 
-With this, even Capgo cannot read the content of your bundle. This is a robust security model that is used by many enterprise customers.
+Avec cela, même Capgo ne peut pas lire le contenu de votre offre groupée. Il s'agit d'un modèle de sécurité robuste utilisé par de nombreuses entreprises clientes.
 
-**Update encryption V2 2024-08-27:**
-- We switched the key type that is stored in the app. This was done in order to prevent inferring the public key (previously used for encryption) from the private key (previously used for decryption). Now, the app stores the public key (now used for decryption).
-- We switched the checksum from the CRC32 algorithm to the SHA256 algorithm. We also started [signing the bundle](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages). When encryption V2 is configured, an update must have a valid signature. This is strictly enforced by the plugin.
-- We now enforce a valid signature encryption V2 is configured.
-These 3 changes have been done after a security analysis from a member of the community. They are here to prevent cryptographic attacks during update.
+**Mise à jour du cryptage V2 2024-08-27 :**
+- Nous avons changé le type de clé stockée dans l'application. Cela a été fait afin d'éviter de déduire la clé publique (précédemment utilisée pour le cryptage) de la clé privée (précédemment utilisée pour le déchiffrement). Désormais, l'application stocke la clé publique (maintenant utilisée). pour le décryptage)
+- Nous avons basculé la somme de contrôle de l'algorithme CRC32 vers l'algorithme SHA256. Nous avons également commencé [la signature du bundle](https://enwikipediaorg/wiki/RSA_(cryptosystem)#Signing_messages) Lorsque le cryptage V2 est configuré, une mise à jour doit avoir une signature valide Ceci est strictement appliqué par le plugin
+- Nous appliquons désormais un cryptage de signature valide V2 configuré
+Ces 3 changements ont été effectués après une analyse de sécurité par un membre de la communauté. Ils sont là pour prévenir les attaques cryptographiques lors de la mise à jour.
 
-If you used encryption V1, migrate to V2 to benefit from the new security features. Follow the [migration instructions](/docs/cli/migrations/encryption/).
+Si vous avez utilisé le chiffrement V1, migrez vers la V2 pour bénéficier des nouvelles fonctionnalités de sécurité. Suivez les [instructions de migration](/docs/cli/migrations/encryption/)
 
-With end-to-end code signing, Capgo becomes a “trustless” cloud infrastructure. If one of Capgo’s cloud providers or even Capgo itself were to modify a code-signed update, end users’ devices would reject that update and run the previous, trusted update that’s already on the device.
+Avec la signature de code de bout en bout, Capgo devient une infrastructure cloud « sans confiance ». Si l'un des fournisseurs de cloud de Capgo ou même Capgo lui-même modifiait une mise à jour signée par code, les appareils des utilisateurs finaux rejetteraient cette mise à jour et exécuteraient la précédente mise à jour fiable. mise à jour déjà présente sur l'appareil
 
-While web-level HTTPS is sufficient for many apps, some large companies find the extra level of security from end-to-end code signing appealing. Some of these companies make finance apps that issue high-value, permanent transactions. Other companies have CISOs who include compromised cloud infrastructure in their threat models. We built end-to-end code signing in to Capgo for these use cases and are interested in hearing more from companies with higher-level security needs.
+Bien que HTTPS au niveau du Web soit suffisant pour de nombreuses applications, certaines grandes entreprises trouvent attrayant le niveau de sécurité supplémentaire offert par la signature de code de bout en bout. Certaines de ces entreprises créent des applications financières qui émettent des transactions permanentes de grande valeur. D'autres entreprises ont des RSSI qui incluent infrastructure cloud compromise dans leurs modèles de menace. Nous avons créé un code de connexion de bout en bout à Capgo pour ces cas d'utilisation et souhaitons en savoir plus sur les entreprises ayant des besoins de sécurité de niveau supérieur.
 
-## Getting started for enterprise customers
+## Premiers pas pour les entreprises clientes
 
-For large companies or projects who care deeply about security, we want to make code signing easy to set up and maintain. To that end, we now provide the following features:
+Pour les grandes entreprises ou les projets profondément soucieux de la sécurité, nous souhaitons rendre la signature de code facile à configurer et à maintenir. À cette fin, nous proposons désormais les fonctionnalités suivantes :
 
--   Quick certificate setup and configuration
--   Support for code signing development servers with both Capgo and development builds
--   Production code signing on every update
+- Installation et configuration rapides du certificat
+- Prise en charge des serveurs de développement de signature de code avec Capgo et les versions de développement
+- Signature du code de production à chaque mise à jour
 
-Capgo code signing is available for all customers. To get started, follow the [setup instructions](/docs/cli/commands/#end-to-end-encryption-trustless).
+La signature de code Capgo est disponible pour tous les clients. Pour commencer, suivez les [instructions de configuration](/docs/cli/commands/#end-to-end-encryption-trustless)
 
-## Credits
+## Crédits
 
-Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example/) rewrote with chat-gpt-3 and adapted.
+Merci beaucoup à [Ionic](https://ioniccom/), cet article est basé sur [cet article](https://ionicio/blog/introducing-the-ionic-end-to-end-testing-reference- exemple/) réécrit avec chat-gpt-3 et adapté

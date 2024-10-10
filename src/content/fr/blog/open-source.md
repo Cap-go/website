@@ -1,140 +1,142 @@
 ---
-slug: "about-open-source"
-title: Learn about what open source is and why it’s important!
-description: During your programming journey, you might have heard of the term "Open Source". But what does that actually mean?
+slug: about-open-source
+title: Découvrez ce qu’est l’open source et pourquoi c’est important !
+description: >-
+  Au cours de votre parcours de programmation, vous avez peut-être entendu
+  parler du terme « Open Source ». Mais qu’est-ce que cela signifie concrètement
+  ?
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-16
-updated_at: 2023-09-16
-head_image: "/open_source_main.webp"
-head_image_alt: open source
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-16T00:00:00.000Z
+updated_at: 2023-09-16T00:00:00.000Z
+head_image: /open_source_main.webp
+head_image_alt: source ouverte
 tag: Open Source
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-In this article, I will explain what Open Source Software is and talk about how it differs from other types of software. I'll also discuss the positives of Open Source Software and how to start contributing to projects.
+Dans cet article, j'expliquerai ce qu'est un logiciel Open Source et expliquerai en quoi il diffère des autres types de logiciels. Je discuterai également des avantages des logiciels Open Source et de la manière de commencer à contribuer à des projets.
 
-## Overview
+## Aperçu
 
-Open source is a term that originally referred to open source software (OSS). Open source software is code that is designed to be publicly accessible—anyone can see, modify, and distribute the code as they see fit.
+Open source est un terme qui faisait initialement référence aux logiciels open source (OSS). Un logiciel open source est un code conçu pour être accessible au public : tout le monde peut voir, modifier et distribuer le code comme bon lui semble.
 
-[Source code](https://github.com/cap-go/capacitor-updater/) is the part of software that most computer users don't ever see; it's the code computer programmers can manipulate to change how a piece of software—a "program" or "application"—works. Programmers who have access to a computer program's source code can improve that program by adding features to it or fixing parts that don't always work correctly.
+[Code source](https://githubcom/cap-go/capacitor-updater/) est la partie du logiciel que la plupart des utilisateurs d'ordinateurs ne voient jamais ; c'est le code que les programmeurs informatiques peuvent manipuler pour modifier le fonctionnement d'un logiciel (un « programme » ou une « application »). Les programmeurs qui ont accès au code source d'un programme informatique peuvent améliorer ce programme en y ajoutant des fonctionnalités ou en corrigeant les parties qui n'en ont pas. ne fonctionne pas toujours correctement
 
-Every active open source software project has one or more maintainers. These are the people who steward the project and make sure it remains free from bugs or other problems. In other words, they “maintain” the project! While they may spend their time writing code for the project, their main priority is to review and organize contributions from others. The people who make those contributions are aptly called contributors. These are people who submit new code, documentation, or even bug reports to open source projects.
+Chaque projet de logiciel open source actif a un ou plusieurs responsables. Ce sont les personnes qui gèrent le projet et s'assurent qu'il reste exempt de bugs ou d'autres problèmes. En d'autres termes, ils « maintiennent » le projet ! Bien qu'ils puissent passer leur temps à écrire du code pour le projet, leur principale priorité est d'examiner et d'organiser les contributions des autres. Les personnes qui apportent ces contributions sont appelées à juste titre contributeurs. Ce sont des personnes qui soumettent du nouveau code, de la documentation ou même des rapports de bogues à l'open source. projets
 
 <div class="mx-auto">
   <img src="/open-source_(1).webp" alt="open-source-(1)">
 </div>
 
-So, how did the open source movement as we know it come to be?
+Alors, comment est né le mouvement open source tel que nous le connaissons ?
 
-## Where Does the Term "Open Source" Come From?
+## D'où vient le terme « Open Source » ?
 
-Over twenty years ago, the term "open source software" was coined by Foresight Institute's co founder Christine Peterson. She wanted to coin this term as a way to attract newcomers into this space.
+Il y a plus de vingt ans, le terme « logiciel open source » a été inventé par Christine Peterson, cofondatrice du Foresight Institute. Elle souhaitait inventer ce terme comme un moyen d'attirer de nouveaux arrivants dans cet espace.
 
-The original name was going to be "free software" but there was a lot of confusion about what "free" actually meant. In order to clarify the issue, Peterson proposed a name change to "open source software" instead.
+Le nom original devait être « logiciel libre », mais il y avait beaucoup de confusion sur ce que « libre » signifiait réellement. Afin de clarifier le problème, Peterson a proposé de changer le nom en « logiciel open source » à la place.
 
-## What Are the Benefits of Open Source Software?
+## Quels sont les avantages des logiciels Open Source ?
 
-There are many benefits of using and working with open source software. One of the benefits is how much control you have over the code you decide to use.
+Il existe de nombreux avantages à utiliser et à travailler avec des logiciels open source. L'un des avantages est le degré de contrôle que vous avez sur le code que vous décidez d'utiliser.
 
-Programmers can look at the code and decide which parts of the code they want to change. Regular users can use this software however they like without someone telling them to use it in a specific manner.
+Les programmeurs peuvent examiner le code et décider quelles parties du code ils souhaitent modifier. Les utilisateurs réguliers peuvent utiliser ce logiciel comme ils le souhaitent sans que personne ne leur dise de l'utiliser d'une manière spécifique.
 
-Another benefit is how much you can learn from using code from an open source project. Developers from all backgrounds can study the code of open source projects as well as share their work with others.
+Un autre avantage est tout ce que vous pouvez apprendre en utilisant le code d'un projet open source. Les développeurs de tous horizons peuvent étudier le code des projets open source et partager leur travail avec d'autres.
 
-Open source software is also seen as being more secure than proprietary software. Since the code is freely available, developers can find issues, make updates, and fix those bugs quicker than in proprietary software.  
+Les logiciels open source sont également considérés comme plus sécurisés que les logiciels propriétaires. Puisque le code est disponible gratuitement, les développeurs peuvent détecter les problèmes, effectuer des mises à jour et corriger ces bogues plus rapidement que dans les logiciels propriétaires.  
 
-Open source also has a very large community behind it. As a result, there are a lot of helpful resources for beginners looking to join an open source community and start contributing.
+L'Open Source a également une très grande communauté derrière lui. En conséquence, il existe de nombreuses ressources utiles pour les débutants qui cherchent à rejoindre une communauté Open Source et à commencer à contribuer.
 
-## Why should you contribute to open-source projects?
+## Pourquoi devriez-vous contribuer à des projets open source ?
 
-The collaborative nature of the open source community also presents important opportunities for developers. Here are the most important reasons why it’s a good idea.
+La nature collaborative de la communauté open source présente également d'importantes opportunités pour les développeurs. Voici les principales raisons pour lesquelles c'est une bonne idée
 
-**Improving the project**
+**Améliorer le projet**
 
-The greatest beauty of an open-source community is that its members are primarily driven by their genuine interest in the projects at hand. Therefore, a lot of people contribute to open-source projects because out of altruistic reasons - they want to improve it!
+La plus grande beauté d'une communauté open source est que ses membres sont principalement motivés par leur véritable intérêt pour les projets en cours. Par conséquent, beaucoup de gens contribuent à des projets open source parce que, pour des raisons altruistes, ils veulent les améliorer !
 
-Making the open-source software run faster, smarter, or making it more secure will add to its quality.
+Rendre le logiciel open source exécuté plus rapidement, plus intelligemment ou le rendre plus sécurisé ajoutera à sa qualité
 
-**Gaining valuable knowledge**
+**Acquérir des connaissances précieuses**
 
-By emerging yourself into a certain open-source project, you’re getting valuable knowledge about the software at hand. In other words, you’re not just learning by doing - you’re learning by interacting with other developers’ code.
+En vous lançant dans un certain projet open source, vous acquérez des connaissances précieuses sur le logiciel en question. En d'autres termes, vous n'apprenez pas seulement par la pratique, vous apprenez en interagissant avec le code d'autres développeurs.
 
-**Leveraging your career prospects**
+**Tirer parti de vos perspectives de carrière**
 
-By contributing to open-source projects, you are signaling your talent to potential employers. For them, it’s easy to check your actual work and evaluate if you’d be a good fit for their open roles. In the words of [Frank Scheffler](https://medium.com/digitalfrontiers/5-reasons-why-you-should-contribute-to-open-source-projects-2f65443b4077/), "active open source contributions emphasize your expertise and knowledge, more than certificates alone will ever do”.
+En contribuant à des projets open source, vous signalez votre talent à des employeurs potentielsPour eux, il est facile de vérifier votre travail réel et d'évaluer si vous seriez un bon candidat pour leurs rôles ouverts. Selon les mots de [Frank Scheffler](https://mediumcom/digitalfrontiers/5-reasons-why-you-should -contribute-to-open-source-projects-2f65443b4077/), "les contributions open source actives mettent en valeur votre expertise et vos connaissances, plus que les certificats seuls ne le feront jamais"
 
-Moreover, by contributing to multiple projects, you’re building your network of contacts, which can never hurt your career!
+De plus, en contribuant à plusieurs projets, vous construisez votre réseau de contacts, ce qui ne pourra jamais nuire à votre carrière !
 
-## How to Start Contributing to Open Source Projects?
+## Comment commencer à contribuer à des projets Open Source ?
 
-Contributing to open source projects can be a rewarding way to gain experience, collaborate with others, and give back to the community. Here's a step-by-step guide to help you get started:
+Contribuer à des projets open source peut être une façon enrichissante d'acquérir de l'expérience, de collaborer avec d'autres et de redonner à la communauté. Voici un guide étape par étape pour vous aider à démarrer :
 
-1. **Choose a Project**:
-   - Start by identifying open source projects that align with your interests and skill level. You can use platforms like GitHub, GitLab, or Bitbucket to discover projects.
+1 **Choisissez un projet** :
+   - Commencez par identifier les projets open source qui correspondent à vos intérêts et à votre niveau de compétence. Vous pouvez utiliser des plateformes comme GitHub, GitLab ou Bitbucket pour découvrir des projets.
 
 <div class="mx-auto">
   <img src="/open-source_(2).webp" alt="open-source-(2)">
 </div>
 
-2. **Understand the Project**:
-   - Read the project's documentation, README file, and any contributing guidelines to understand its purpose, goals, and coding standards.
+2 **Comprendre le projet** :
+   - Lisez la documentation du projet, le fichier README et toutes les directives de contribution pour comprendre son objectif, ses objectifs et ses normes de codage
 
 <div class="mx-auto">
   <img src="/open-source_(3).webp" alt="open-source-(3)">
 </div>
 
-3. **Set Up Your Development Environment**:
-   - Install the necessary tools and dependencies required to work on the project. This might include programming languages, libraries, and version control systems like Git.
+3 **Configurez votre environnement de développement** :
+   - Installer les outils et dépendances nécessaires pour travailler sur le projet. Cela peut inclure des langages de programmation, des bibliothèques et des systèmes de contrôle de version comme Git.
 
-4. **Start Small**:
-   - For beginners, it's a good idea to start with simple and well-defined tasks such as fixing typos, documentation improvements, or small bug fixes. This will help you get familiar with the project's workflow and community.
+4 **Commencez petit** :
+   - Pour les débutants, c'est une bonne idée de commencer par des tâches simples et bien définies telles que la correction de fautes de frappe, l'amélioration de la documentation ou la correction de petits bugs. Cela vous aidera à vous familiariser avec le flux de travail et la communauté du projet.
 
-5. **Familiarize Yourself with Version Control**:
-   - Learn how to use Git for version control. Fork the project's repository, clone it to your local machine, and create a new branch for your changes.
+5 **Familiarisez-vous avec le contrôle de version** :
+   - Apprenez à utiliser Git pour le contrôle de version. Forkez le référentiel du projet, clonez-le sur votre machine locale et créez une nouvelle branche pour vos modifications.
 
-6. **Contribute Code**:
-   - Make your code changes following the project's coding guidelines. Ensure that your changes are clear, well-documented, and address an existing issue or need.
+6 **Code de contribution** :
+   - Apportez vos modifications à votre code en suivant les directives de codage du projet. Assurez-vous que vos modifications sont claires, bien documentées et répondent à un problème ou à un besoin existant.
 
-7. **Testing**:
-   - Before submitting your code, test it thoroughly to make sure it works as intended. Projects often require you to write tests for your code changes.
+7 **Tests** :
+   - Avant de soumettre votre code, testez-le minutieusement pour vous assurer qu'il fonctionne comme prévu. Les projets nécessitent souvent que vous écriviez des tests pour les modifications de votre code.
 
-8. **Create a Pull Request (PR)**:
-   - Push your changes to your forked repository and then create a PR to propose your changes to the main project. Be sure to provide a clear and concise description of your changes.
+8 **Créer une Pull Request (PR)** :
+   - Poussez vos modifications vers votre référentiel forké, puis créez un PR pour proposer vos modifications au projet principal. Assurez-vous de fournir une description claire et concise de vos modifications
 
-9. **Engage with the Community**:
-   - Participate in discussions, forums, or mailing lists related to the project. Be open to feedback and willing to make improvements based on the feedback you receive.
+9 **Engagez-vous avec la communauté** :
+   - Participer à des discussions, des forums ou des listes de diffusion liés au projet. Être ouvert aux commentaires et disposé à apporter des améliorations en fonction des commentaires que vous recevez.
 
-10. **Be Patient and Persistent**:
-    - It may take some time for your PR to be reviewed and accepted. Be patient and, if necessary, follow up on your PR politely.
+10 **Soyez patient et persévérant** :
+    - L'examen et l'acceptation de votre PR peuvent prendre un certain temps. Soyez patient et, si nécessaire, donnez un suivi poli à votre PR.
 
-11. **Learn and Grow**:
-    - Use the experience to learn from others and improve your coding skills. You can also contribute more substantial features or improvements as you become more comfortable with the project.
+11 **Apprendre et grandir** :
+    - Utilisez l'expérience pour apprendre des autres et améliorer vos compétences en codage. Vous pouvez également apporter des fonctionnalités ou des améliorations plus substantielles à mesure que vous vous sentez plus à l'aise avec le projet.
 
-12. **Maintain Open Source Etiquette**:
-    - Respect the project's maintainers and community members. Be polite, follow their guidelines, and be a helpful and constructive contributor.
+12 **Maintenir l'étiquette Open Source** :
+    - Respecter les responsables du projet et les membres de la communauté. Soyez poli, suivez leurs directives et soyez un contributeur utile et constructif.
 
-13. **Stay Consistent**:
-    - If you want to continue contributing, try to make regular contributions. This helps you build a presence within the project community.
+13 **Restez cohérent** :
+    - Si vous souhaitez continuer à contribuer, essayez de contribuer régulièrement. Cela vous aide à établir une présence au sein de la communauté du projet.
 
-14. **Recognize Licensing and Ownership**:
-    - Respect the project's license and copyright. Understand the terms under which you are contributing.
+14 **Reconnaître les licences et la propriété** :
+    - Respecter la licence et le droit d'auteur du projet Comprendre les conditions dans lesquelles vous contribuez
 
-15. **Document Your Work**:
-    - Keep track of your contributions for your own reference. This can also be useful when building your developer portfolio.
+15 **Documentez votre travail** :
+    - Gardez une trace de vos contributions pour votre propre référence. Cela peut également être utile lors de la constitution de votre portefeuille de développeurs.
 
-Remember that contributing to open source is not just about code. You can also help with documentation, design, testing, and project management. The key is to find a way to contribute that aligns with your skills and interests.
+N'oubliez pas que contribuer à l'Open Source ne se limite pas au code. Vous pouvez également contribuer à la documentation, à la conception, aux tests et à la gestion de projet. La clé est de trouver un moyen de contribuer qui correspond à vos compétences et à vos intérêts.
 
-## Leverage the open-source technology behind Capgo
+## Tirez parti de la technologie open source derrière Capgo
 
-As you know, open-source technologies have multiple advantages. They are available at a portion of the price of proprietary software. They are also flexible and more secure due to frequent code revisions by the open-source community.
+Comme vous le savez, les technologies open source présentent de multiples avantagesIls sont disponibles à une partie du prix des logiciels propriétaires. Ils sont également flexibles et plus sécurisés grâce aux révisions fréquentes du code par la communauté open source.
 
-These are all principles we adhere to in Capgo! We're an open source live update system for Capacitor apps whose mission is to live update the Capacitor apps. We allows you to deploy updates to your users without the need to re-install the app. We're a cloud-based service, but you can also self-host it.
+Ce sont tous des principes auxquels nous adhérons chez Capgo ! Nous sommes un système de mise à jour en direct open source pour les applications Capacitor dont la mission est de mettre à jour en direct les applications Capacitor. Nous vous permettons de déployer des mises à jour pour vos utilisateurs sans avoir besoin de réinstaller l'application. Nous sommes un service basé sur le cloud, mais vous peut également l'auto-héberger
 
-Why not try it for yourself? [Try our free version](https://web.capgo.app/register/) and [contribute to our ever-evolving open-source project](https://github.com/Cap-go/) - we’d be happy to have you on board!
+Pourquoi ne pas l'essayer par vous-même ? [Essayez notre version gratuite](https://webcapgoapp/register/) et [contribuez à notre projet open source en constante évolution](https://githubcom/Cap-go/) - nous serions heureux de vous avoir à bord !
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">
@@ -142,6 +144,6 @@ Why not try it for yourself? [Try our free version](https://web.capgo.app/regist
 
 ## Conclusion
 
-Open Source Software is code that is publicly available for people to view, modify, and share. The term "open source software" was coined by Foresight Institute's co-founder Christine Peterson.
+Un logiciel open source est un code accessible au public que les utilisateurs peuvent consulter, modifier et partager. Le terme « logiciel open source » a été inventé par la cofondatrice du Foresight Institute, Christine Peterson.
 
-Open source software has many benefits including large community support, helpful guides to get started contributing, learning by studying people's code, and gaining experience working with other developers.
+Les logiciels open source présentent de nombreux avantages, notamment un large soutien communautaire, des guides utiles pour commencer à contribuer, l'apprentissage en étudiant le code des gens et l'acquisition d'une expérience de travail avec d'autres développeurs.

@@ -46,7 +46,7 @@ Pour télécharger une version de votre application sur Capgo Cloud, exécutez l
 npx @capgo/cli upload [appId]
 ```
 
-Remplacez `[appId]` par votre identifiant d'application. Vous pouvez utiliser `--apikey`, `--path`, `--channel`, `--external`, `--key`, `--key-data Indicateurs `, `--no-key`, `--bundle` et `--iv-session-key` pour personnaliser les options de téléchargement
+Remplacez `[appId]` par votre identifiant d'application. Vous pouvez utiliser `--apikey`, `--path`, `--channel`, `--external`, `--key`, `--key-data `, `--no-key`, `--bundle` et `--iv-session-key` pour personnaliser les options de téléchargement
 
 ### Étape 6 : Gérer les canaux
 

@@ -1,91 +1,90 @@
 ---
-slug: "self-hosted-live-updates"
-title: Self-hosted Live Updates
-description: I'm excited to announce Self-hosted Live Updates, the next iteration of Capgo’s Live Updates!
+slug: self-hosted-live-updates
+title: Mises à jour en direct auto-hébergées
+description: "Je suis ravi d'annoncer les mises à jour en direct auto-hébergées, la prochaine itération des mises à jour en direct de Capgo\_!"
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-12-03
-updated_at: 2023-06-29
-head_image: "/self_hosted.webp"
-head_image_alt: Self hosted updates
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-12-03T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /self_hosted.webp
+head_image_alt: Mises à jour auto-hébergées
 tag: Solution
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-I am delighted to announce the release of Self-hosted Live Updates, which represents the latest evolution of Capgo's Live Updates.
+Je suis ravi d'annoncer la sortie des mises à jour en direct auto-hébergées, qui représentent la dernière évolution des mises à jour en direct de Capgo.
 
-While many enterprises currently utilize the Live Updates SDK to access the most recent JavaScript, HTML, and CSS updates for their applications, some may encounter hindrances due to corporate policies, industry regulations, or geographical restrictions. With Self-hosted Live Updates, you can now distribute web build artifacts via your infrastructure.
+Alors que de nombreuses entreprises utilisent actuellement le SDK Live Updates pour accéder aux mises à jour JavaScript, HTML et CSS les plus récentes pour leurs applications, certaines peuvent rencontrer des obstacles dus aux politiques de l'entreprise, aux réglementations du secteur ou aux restrictions géographiques. Avec les mises à jour en direct auto-hébergées, vous pouvez désormais distribuer des artefacts de build Web via votre infrastructure
 
-This means you can avoid delays caused by Apple Store reviews, address bugs and modify content more rapidly, and ensure that your users are always operating on the latest version of your app. Additionally, I have heard from numerous large enterprises who would like to leverage Live Updates but face challenges due to strict compliance standards. This issue is now a thing of the past thanks to Self-hosted Live Updates.
+Cela signifie que vous pouvez éviter les retards causés par les avis de l'Apple Store, résoudre les bugs et modifier le contenu plus rapidement, et garantir que vos utilisateurs utilisent toujours la dernière version de votre application. De plus, j'ai entendu de nombreuses grandes entreprises souhaiter tirer parti de Live. Mises à jour mais confrontées à des défis en raison de normes de conformité strictes. Ce problème appartient désormais au passé grâce aux mises à jour en direct auto-hébergées.
 
-## How do self-hosted live updates work?
+## Comment fonctionnent les mises à jour en direct auto-hébergées ?
 
-Deploying Capgo-hosted Live Updates is a breeze using the [Capgo SDK](https://github.com/Cap-go/capacitor-updater/). As for Self-hosted Live Updates, I have enhanced the Capgo CLI with the necessary functionalities to enable configuration on your infrastructure.
+Le déploiement des mises à jour en direct hébergées par Capgo est un jeu d'enfant à l'aide du [SDK Capgo](https://githubcom/Cap-go/capacitor-updater/) En ce qui concerne les mises à jour en direct auto-hébergées, j'ai amélioré la CLI Capgo avec les fonctionnalités nécessaires pour activer la configuration sur votre infrastructure
 
-To ensure a safe and coordinated delivery of the latest web build artifacts to end-users, Capgo now allows the Capacitor Live Updates plugin to employ a public/private key pairing. When using Self-hosted Live Updates, an additional handshake is performed to provide reassurance that the artifacts downloaded via the plugin from the enterprise's infrastructure are unmodified.
+Pour garantir une livraison sûre et coordonnée des derniers artefacts de construction Web aux utilisateurs finaux, Capgo permet désormais au plugin Capacitor Live Updates d'utiliser une paire de clés publique/privée. Lors de l'utilisation de mises à jour en direct auto-hébergées, une poignée de main supplémentaire est effectuée pour rassurer. que les artefacts téléchargés via le plugin depuis l'infrastructure de l'entreprise ne sont pas modifiés
 
-![Capgo encryption schema](/encryption_flow.webp)
+![Schéma de chiffrement Capgo](/encryption_flowwebp)
 
-The following outlines the steps to establish the key pairing and the subsequent process for delivering the updated experience to end-users.
+Ce qui suit décrit les étapes pour établir l'appariement de clés et le processus ultérieur pour fournir l'expérience mise à jour aux utilisateurs finaux.
 
-### One-time key pair setup
+### Configuration d'une paire de clés unique
 
-To generate a public/private key pair, enterprises can utilize the following Capgo Cloud CLI command:
+Pour générer une paire de clés publique/privée, les entreprises peuvent utiliser la commande Capgo Cloud CLI suivante :
 
 ```shell
 npx @capgo/cli@latest key create
 ```
 
-This command will set `CapacitorUpdater.privateKey` properties in your config file.
-And generate 2 key files, `capgo_key.pub` and `capgo_key` in your project root directory.
+Cette commande définira les propriétés `CapacitorUpdaterprivateKey` dans votre fichier de configuration
+Et générez 2 fichiers clés, `capgo_keypub` et `capgo_key` dans le répertoire racine de votre projet
 
-This key pair is used to sign the update and verify the update on the app side.
+Cette paire de clés est utilisée pour signer la mise à jour et vérifier la mise à jour côté application
 
-### Self-hosted live updates workflow
+### Workflow de mises à jour en direct auto-hébergées
 
-To start implementing Self-hosted Live Updates, an enterprise must first perform a web build of their bug fixes, content updates, or any other web-based code changes they wish to make. Next, they must sign the build artifact using the private key obtained during the one-time setup process, and finally upload the bundle to their preferred storage location.
+Pour commencer à mettre en œuvre des mises à jour en direct auto-hébergées, une entreprise doit d'abord effectuer une génération Web de ses corrections de bogues, mises à jour de contenu ou toute autre modification de code Web qu'elle souhaite apporter. Ensuite, elle doit signer l'artefact de construction à l'aide de la clé privée obtenue. pendant le processus de configuration unique, et enfin télécharger le bundle vers leur emplacement de stockage préféré
 
-First build your code:
+Construisez d’abord votre code :
 ```shell
 npm run build
 ```
 
-Then Zip your build:
+Zippez ensuite votre build :
 ```shell
 npx @capgo/cli/latest bundle zip
 ```
 
-Then encrypt your zip:
+Chiffrez ensuite votre zip :
 
 ```shell
 npx @capgo/cli@latest bundle encrypt abc123.zip”
 ```
 
-This command will print you an ivSessionKey, you need to save it for the next step.
+Cette commande vous imprimera une ivSessionKey, vous devrez la sauvegarder pour l'étape suivante
 
-Now upload your encrypted zip to your enterprise storage and get the URL of the zip file.
+Téléchargez maintenant votre zip crypté sur le stockage de votre entreprise et obtenez l'URL du fichier zip.
 
-Capgo must then be informed of a new Live Update that is ready for consumption. This is done via another CLI command:
+Capgo doit alors être informé d'un nouveau Live Update prêt à être consommé. Cela se fait via une autre commande CLI :
 
 ```shell
 npx @capgo/cli@latest bundle upload --external=https://abc.com/app/updates/abc123.zip --iv-session-key=YourKey
 ```
 
-Once the command is run, Capgo is aware of a new update ready to be distributed to the app’s users. Now, when the app is started, the Live Updates plugin checks with Capgo to see if any changes need to be brought down.
+Une fois la commande exécutée, Capgo est au courant d'une nouvelle mise à jour prête à être distribuée aux utilisateurs de l'application. Désormais, lorsque l'application est démarrée, le plugin Live Updates vérifie auprès de Capgo si des modifications doivent être apportées.
 
-Capgo responds back to the plugin with “Yes, an update is available” and the Live Updates plugin downloads the new live update using the URL location provided from the \`register\` CLI command:
+Capgo répond au plugin par « Oui, une mise à jour est disponible » et le plugin Live Updates télécharge la nouvelle mise à jour en direct en utilisant l'emplacement URL fourni à partir de la commande CLI \`register\` :
 
 ```shell
 https://abc.com/app/updates/abc123.zip
 ```
 
-The organization’s API returns the Live Update bundle from the location, and the app decrypts the zip and applies the live update. Voilà!
+L'API de l'organisation renvoie le package Live Update depuis l'emplacement, et l'application déchiffre le zip et applique la mise à jour en direct Voilà!
 
-## Get started
+## Commencer
 
-I am thrilled to extend the reach of Live Updates to even more enterprises than before. Both organizations and Ionic app users will quickly recognize the advantages of Capgo's secure distribution of over-the-air app updates.
+Je suis ravi d'étendre la portée des mises à jour en direct à encore plus d'entreprises qu'auparavant. Les organisations et les utilisateurs de l'application Ionic reconnaîtront rapidement les avantages de la distribution sécurisée par Capgo des mises à jour d'applications en direct.
 
-For more information on Self-hosted Live Updates by Capgo, you can [check out the docs](/docs/tooling/cli/#upload-version). Ready to deploy instant app updates directly to your users? [Register here today!](/register/)
+Pour plus d'informations sur les mises à jour en direct auto-hébergées par Capgo, vous pouvez [consulter la documentation](/docs/tooling/cli/#upload-version)Prêt à déployer des mises à jour instantanées d'applications directement auprès de vos utilisateurs ? [Inscrivez-vous ici aujourd'hui !](/register/)

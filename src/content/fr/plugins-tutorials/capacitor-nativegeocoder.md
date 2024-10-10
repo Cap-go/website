@@ -65,7 +65,7 @@ const coordinates = NativeGeocoder.forwardGeocode(forwardOptions);
 console.log(coordinates);
 ```
 
-La méthode `forwardGeocode` prend un objet avec la propriété d'adresse Elle renvoie les coordonnées en conséquence
+La méthode `forwardGeocode` prend un objet avec la propriété address Elle renvoie les coordonnées en conséquence
 
 ### Conclusion
 

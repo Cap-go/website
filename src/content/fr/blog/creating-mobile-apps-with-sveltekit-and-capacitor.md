@@ -1,36 +1,36 @@
 ---
-
-slug: "creating-mobile-apps-with-sveltekit-and-capacitor"
-title: Building Mobile Apps with SvelteKit and Capacitor
-description: Learn how to build a mobile app using SvelteKit, Capacitor, and enhance the native UI with Konsta UI.
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
+title: Création d'applications mobiles avec SvelteKit et Capacitor
+description: >-
+  Apprenez à créer une application mobile à l'aide de SvelteKit, Capacitor et à
+  améliorer l'interface utilisateur native avec Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-04
-updated_at: 2023-06-04
-head_image: "/sveltekit_capacitor.webp"
-head_image_alt: SvelteKit and Capgo illustration
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-04T00:00:00.000Z
+updated_at: 2023-06-04T00:00:00.000Z
+head_image: /sveltekit_capacitor.webp
+head_image_alt: Illustration SvelteKit et Capgo
 tag: Tutorial
 published: true
 locale: fr
-next_blog: "updating-your-capacitor-apps-seamlessly-with-capacitor-updater"
-
+next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
 ---
 
-In this tutorial, we'll begin with a new [SvelteKit](https://kit.svelte.dev/) app and transition to native mobile development using Capacitor. Optionally, you can also integrate [Konsta UI](https://konstaui.com/) for an enhanced Tailwind CSS mobile UI.
+Dans ce didacticiel, nous commencerons par une nouvelle application [SvelteKit](https://kitsveltedev/) et passerons au développement mobile natif à l'aide de Capacitor. En option, vous pouvez également intégrer [Konsta UI](https://konstauicom/) pour une interface utilisateur mobile Tailwind CSS améliorée
 
-Capacitor allows you to easily convert your SvelteKit web application into a native mobile app without the need for significant modifications or learning a new skill like React Native.
+Capacitor vous permet de convertir facilement votre application Web SvelteKit en une application mobile native sans avoir besoin de modifications importantes ni d'acquérir une nouvelle compétence comme React Native.
 
-Follow this step-by-step guide to transform your SvelteKit app into a mobile app using Capacitor and, if desired, enhance your mobile UI with Konsta UI.
+Suivez ce guide étape par étape pour transformer votre application SvelteKit en application mobile à l'aide de Capacitor et, si vous le souhaitez, améliorez votre interface utilisateur mobile avec Konsta UI.
 
-## About Capacitor
+## À propos du condensateur
 
-CapacitorJS is a game-changer! It can be effortlessly integrated into any web project, wrapping your application in a native webview and generating native Xcode and Android Studio projects for you. Its plugins provide access to native device features like the camera via a JavaScript bridge.
+CapacitorJS change la donne ! Il peut être intégré sans effort dans n'importe quel projet Web, en encapsulant votre application dans une vue Web native et en générant pour vous des projets Xcode et Android Studio natifs. Ses plugins donnent accès aux fonctionnalités natives de l'appareil comme la caméra via un pont JavaScript.
 
-Capacitor enables you to create a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it easy to integrate into your project. You'll be amazed at how simple it is to achieve a fully functional native app with Capacitor!
+Capacitor vous permet de créer une fantastique application mobile native sans configuration compliquée ni courbe d'apprentissage abrupte. Son API mince et ses fonctionnalités simplifiées facilitent l'intégration dans votre projet. Vous serez étonné de voir à quel point il est simple de réaliser une application native entièrement fonctionnelle avec Condensateur!
 
-## Preparing Your SvelteKit App
+## Préparation de votre application SvelteKit
 
-To create a new SvelteKit app, run the following command:
+Pour créer une nouvelle application SvelteKit, exécutez la commande suivante :
 
 ```shell
 npm create svelte@latest my-app
@@ -39,19 +39,19 @@ npm install
 npm run build
 ```
 
-After running the `build` command, you should see a new `dist` folder at the root of your project.
+Après avoir exécuté la commande `build`, vous devriez voir un nouveau dossier `dist` à la racine de votre projet
 
-This folder will be used by Capacitor later, but for now, we need to set it up correctly.
+Ce dossier sera utilisé par Capacitor plus tard, mais pour l'instant, nous devons le configurer correctement
 
-## Adding Capacitor to Your SvelteKit App
+## Ajout d'un condensateur à votre application SvelteKit
 
-To package any web app into a native mobile container, we need to follow a few initial steps. Afterward, it's as simple as running a single `sync` command.
+Pour empaqueter n'importe quelle application Web dans un conteneur mobile natif, nous devons suivre quelques étapes initiales. Ensuite, c'est aussi simple que d'exécuter une seule commande « sync »
 
-First, install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency and set it up within your project. During the setup, you can press "enter" to accept the default values for name and bundle ID.
+Tout d'abord, installez la [Capacitor CLI](https://capacitorjscom/docs/cli/) en tant que dépendance de développement et configurez-la dans votre projet. Pendant l'installation, vous pouvez appuyer sur "Entrée" pour accepter les valeurs par défaut pour le nom et le bundle. IDENTIFIANT
 
-Next, install the core package and the relevant packages for the iOS and Android platforms.
+Ensuite, installez le package principal et les packages correspondants pour les plateformes iOS et Android.
 
-Finally, add the platforms, and Capacitor will create folders for each platform at the root of your project:
+Enfin, ajoutez les plateformes, et Capacitor créera des dossiers pour chaque plateforme à la racine de votre projet :
 
 ```shell
 # Install the Capacitor CLI locally
@@ -68,15 +68,15 @@ npx cap add ios
 npx cap add android
 ```
 
-At this point, you should see new **ios** and **android** folders in your SvelteKit project.
+À ce stade, vous devriez voir les nouveaux dossiers **ios** et **android** dans votre projet SvelteKit.
 
-**These are real native projects!**
+**Ce sont de vrais projets natifs !**
 
-To access the Android project later, you need to install [Android Studio](https://developer.android.com/studio/). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
+Pour accéder au projet Android ultérieurement, vous devez installer [Android Studio](https://developerandroidcom/studio/) Pour iOS, vous avez besoin d'un Mac et devez installer [Xcode](https://developerapplecom/xcode/)
 
-Additionally, you should find a **capacitor.config.ts** file in your project, which contains some basic Capacitor settings used during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is incorrect.
+De plus, vous devriez trouver un fichier **capacitorconfigts** dans votre projet, qui contient certains paramètres de base du condensateur utilisés lors de la synchronisation. La seule chose à laquelle vous devez faire attention est le **webDir**, qui doit pointer vers le résultat de votre commande de build Actuellement, elle est incorrecte
 
-To fix this, open the **capacitor.config.ts** file and update the **webDir**:
+Pour résoudre ce problème, ouvrez le fichier **capacitorconfigts** et mettez à jour le **webDir** :
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli'
@@ -89,13 +89,13 @@ const config: CapacitorConfig = {
 
 export default config
 ```
-ow that we’ve updated our Capacitor settings, let’s change out Sveltekit project to a static application by downloading the proper static adapter package:
+Maintenant que nous avons mis à jour nos paramètres de condensateur, transformons le projet Sveltekit en une application statique en téléchargeant le package d'adaptateur statique approprié :
 
 ```shell
 npm i -D @sveltejs/adapter-static
 ```
 
-After the package is installed, we’ll need to alter _svelte.config.js_ file from the auto-adapter to static:
+Une fois le package installé, nous devrons modifier le fichier _svelteconfigjs_ de l'adaptateur automatique en statique :
 
 ```ts
 import adapter from '@sveltejs/adapter-static'
@@ -126,75 +126,73 @@ const config = {
 export default config
 ```
 
-With the _svelte.config.js_ updated, we’ll need to add a _prerender_ option by creating a _+layout.js_ page to _src/routes_ and just add the following export to _+layout.js_:
+Avec _svelteconfigjs_ mis à jour, nous devrons ajouter une option _prerender_ en créant une page _+layoutjs_ dans _src/routes_ et ajouter simplement l'exportation suivante vers _+layoutjs_ :
 
 ```ts
 export const prerender = true
 ```
 
-After adding and updating the _+layout.js_ page, we’ll need to add our mobile platforms, re-build our project to create the _build_ folder
+Après avoir ajouté et mis à jour la page _+layoutjs_, nous devrons ajouter nos plateformes mobiles, reconstruire notre projet pour créer le dossier _build_
 
-You can do it by running the following commands:
+Vous pouvez le faire en exécutant les commandes suivantes :
 
 ```shell
 npm run build
 npx cap sync
 ```
 
-The first command `npm run build` will build your SvelteKit project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+La première commande « npm run build » construira votre projet SvelteKit et copiera la version statique, tandis que la deuxième commande « npx cap sync » synchronisera tout le code Web aux bons endroits des plates-formes natives afin qu'ils puissent être affichés dans une application.
 
-Additionally, the sync command might update the native platforms and install plugins, so when you install new [Capacitor plugins](https://capacitorjs.com/docs/plugins/), it's time to run `npx cap sync` again.
+De plus, la commande sync peut mettre à jour les plates-formes natives et installer des plugins, donc lorsque vous installez de nouveaux [plugins Capacitor](https://capacitorjscom/docs/plugins/), il est temps d'exécuter à nouveau `npx cap sync`Sans vous en rendre compte, vous avez maintenant terminé le processus, alors voyons l'application sur un appareil !
 
-Without realizing it, you've now completed the process, so let's see the app on a device!
+## Créer et déployer des applications natives
 
-## Build and Deploy Native Apps
+Pour développer des applications iOS, **Xcode** doit être installé, et pour les applications Android, vous devez avoir **Android Studio** installé. De plus, si vous envisagez de distribuer votre application sur l'App Store, vous devez vous inscrire dans le programme pour développeurs Apple pour iOS et la console Google Play pour Android
 
-To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
-
-If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
+Si vous débutez dans le développement mobile natif, vous pouvez utiliser la CLI Capacitor pour ouvrir facilement les deux projets natifs :
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-Once you've set up your native projects, deploying your app to a connected device is easy. In Android Studio, you just need to wait for everything to be ready, and you can deploy your app to a connected device without changing any settings. Here's an example:
+Une fois que vous avez configuré vos projets natifs, déployer votre application sur un appareil connecté est simple. Dans Android Studio, il vous suffit d'attendre que tout soit prêt et vous pouvez déployer votre application sur un appareil connecté sans modifier aucun paramètre. Voici un exemple:
 
-![android-studio-run](/android-studio-run.webp)
+![android-studio-run](/android-studio-runwebp)
 
-In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
+Dans Xcode, vous devez configurer votre compte de signature pour déployer votre application sur un appareil réel au lieu de simplement sur le simulateur. Si vous ne l'avez pas encore fait, Xcode vous guide tout au long du processus (mais encore une fois, vous devez être inscrit au Programme pour développeurs) Après cela, vous pouvez simplement appuyer sur Play pour exécuter l'application sur votre appareil connecté, que vous pouvez sélectionner en haut. Voici un exemple :
 
-![xcode-run](/xcode-run.webp)
+![xcode-run](/xcode-runwebp)
 
-Congratulations! You have successfully deployed your SvelteKit web app to a mobile device. Here's an example:
+Félicitations! Vous avez déployé avec succès votre application Web SvelteKit sur un appareil mobile. Voici un exemple :
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/sveltekit-mobile-app.webp" alt="sveltekit-mobile-app">
 </div>
 
-But wait, there's also a faster way to do this during development...
+Mais attendez, il existe également un moyen plus rapide de le faire pendant le développement.
 
-## Capacitor Live Reload
+## Rechargement en direct du condensateur
 
-By now, you're probably used to having hot reload with all modern frameworks, and the good news is that you can have the same functionality **on a mobile device** with minimal effort!
+À présent, vous êtes probablement habitué au rechargement à chaud avec tous les frameworks modernes, et la bonne nouvelle est que vous pouvez avoir les mêmes fonctionnalités **sur un appareil mobile** avec un minimum d'effort !
 
-Enable access to your locally hosted application with live reload **on your network** by having the Capacitor app load the content from the specific URL.
+Activez l'accès à votre application hébergée localement avec le rechargement en direct **sur votre réseau** en demandant à l'application Capacitor de charger le contenu à partir de l'URL spécifique.
 
-The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
+La première étape consiste à déterminer votre adresse IP locale. Si vous utilisez un Mac, vous pouvez la découvrir en exécutant la commande suivante dans le terminal :
 
 ```shell
 ipconfig getifaddr en0
 ```
 
-On Windows, run:
+Sous Windows, exécutez :
 
 ```shell
 ipconfig
 ```
 
-Then look for the IPv4 address.
+Recherchez ensuite l'adresse IPv4
 
-We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
+Nous pouvons demander à Capacitor de charger l'application directement depuis le serveur en ajoutant une autre entrée à notre fichier `capacitorconfigts` :
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -213,31 +211,31 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Be sure to use **the correct IP and port**, as shown in the example above.
+Assurez-vous d'utiliser **l'adresse IP et le port corrects**, comme indiqué dans l'exemple ci-dessus.
 
-Now, we can apply these changes by copying them over to our native project:
+Maintenant, nous pouvons appliquer ces modifications en les copiant dans notre projet natif :
 
 ```shell
 npx cap copy
 ```
 
-The `copy` command is similar to `sync`, but it will only **copy over the changes made to the web folder** and configuration, without updating the native project.
+La commande `copy` est similaire à `sync`, mais elle ne fera que **copier les modifications apportées au dossier Web** et à la configuration, sans mettre à jour le projet natif.
 
-You can now deploy your app one more time through Android Studio or Xcode. After that, if you change something in your Svelte app, **the app will automatically reload** and show the changes!
+Vous pouvez maintenant déployer votre application une fois de plus via Android Studio ou Xcode. Après cela, si vous modifiez quelque chose dans votre application Svelte, **l'application se rechargera automatiquement** et affichera les modifications !
 
-**Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
+**Gardez à l'esprit** que si vous installez de nouveaux plugins tels que la caméra, cela nécessite toujours une reconstruction de votre projet natif. En effet, les fichiers natifs sont modifiés et cela ne peut pas être fait à la volée.
 
-Note that you should use the correct IP and port in your configuration. The code block above shows the default SvelteKit port for demonstration purposes.
+Notez que vous devez utiliser l'adresse IP et le port corrects dans votre configuration. Le bloc de code ci-dessus montre le port SvelteKit par défaut à des fins de démonstration.
 
-## Using Capacitor Plugins
+## Utilisation des plugins de condensateur
 
-Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a simple plugin by running:
+Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin simple en exécutant :
 
 ```shell
 npm i @capacitor/share
 ```
 
-There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it brings up the native share dialog! For this, we now only need to import the package and call the `share()` function from our app, so let’s change the **src/routes/index.svelte** to this:
+Il n'y a rien d'extraordinaire à propos du [plug-in de partage](https://capacitorjscom/docs/apis/share/), mais il affiche la boîte de dialogue de partage native ! Pour cela, il nous suffit maintenant d'importer le package et d'appeler la fonction `share()` depuis notre application, changeons donc le **src/routes/indexsvelte** par ceci :
 
 ```html
 <script>
@@ -257,23 +255,23 @@ There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/ap
 <button on:click={share}>Share now!</button>
 ```
 
-As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
+Comme mentionné précédemment, lors de l'installation de nouveaux plugins, nous devons effectuer une opération de synchronisation puis redéployer l'application sur notre appareil. Pour ce faire, exécutez la commande suivante :
 
 ```
 npx cap sync
 ```
 
-After hitting the button, you can witness the beautiful native share dialog in action!
+Après avoir appuyé sur le bouton, vous pourrez assister à la magnifique boîte de dialogue de partage natif en action !
 
-## Adding Konsta UI
+## Ajout de l'interface utilisateur de Konsta
 
-To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/sveltekit/) and to install the package:
+Pour utiliser Konsta UI dans votre application Nuxt 3, vous devez avoir [tailwind déjà installé](https://tailwindcsscom/docs/guides/sveltekit/) et pour installer le package :
 
 ```shell
 npm i konsta
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file:
+De plus, vous devez modifier votre fichier `tailwindconfigjs` :
 
 ```javascript
 // import konstaConfig config
@@ -296,11 +294,11 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
+`konstaConfig` étendra la configuration CSS Tailwind par défaut (ou personnalisée) avec quelques variantes supplémentaires et utilitaires d'assistance requis pour l'interface utilisateur de Konsta
 
-Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
+Nous devons maintenant configurer le composant principal [App](https://konstauicom/vue/app/) afin de pouvoir définir certains paramètres globaux (comme `theme`)
 
-We need to wrap the whole app with `App` in the `src/routes/+layout.svelte`:
+Nous devons envelopper l'ensemble de l'application avec `App` dans `src/routes/+layoutsvelte` :
 
 ```html
 <script>
@@ -312,11 +310,11 @@ We need to wrap the whole app with `App` in the `src/routes/+layout.svelte`:
 </App>
 ```
 
-### Example Page
+### Exemple de page
 
-Now when everything is set up, we can use Konsta UI Svelte components in our SvelteKit pages.
+Maintenant que tout est configuré, nous pouvons utiliser les composants Konsta UI Svelte dans nos pages SvelteKit
 
-For example, let's open `src/routes/index.svelte` and change it to the following:
+Par exemple, ouvrons `src/routes/indexsvelte` et modifions-le comme suit :
 
 ```html
 <script>
@@ -353,20 +351,20 @@ For example, let's open `src/routes/index.svelte` and change it to the following
 </Page>
 ```
 
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with SvelteKit and Capacitor!
+Si le rechargement en direct n'est pas synchronisé après l'installation de tous les composants nécessaires, essayez de tout redémarrer. Une fois cela fait, vous devriez voir une application mobile avec un look quelque peu natif, construite avec SvelteKit et Capacitor !
 
-You should see the following page as a result:
+En conséquence, vous devriez voir la page suivante :
 
-<div class="mx-auto" style="width: 50%;">
-  <img src="/konsta-sveltekit.webp" alt="konsta-sveltekit">
-</div>
+<script>
+  </script>
+<h1>
 
 ## Conclusion
 
-Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI.
+Capacitor est une excellente option pour créer des applications natives basées sur un projet Web existant, offrant un moyen simple de partager du code et de maintenir une interface utilisateur cohérente.
 
-And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+Et avec l'ajout de [Capgo](https://capgoapp/), il est encore plus facile d'ajouter des mises à jour en direct à votre application, garantissant ainsi que vos utilisateurs ont toujours accès aux dernières fonctionnalités et corrections de bugs.
 
-If you would like to learn how to add Capgo to your SvelteKit app, take a look at the next article:
+Si vous souhaitez savoir comment ajouter Capgo à votre application SvelteKit, jetez un œil à l'article suivant :
 
-Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+Découvrez comment Capgo peut vous aider à créer de meilleures applications plus rapidement, [créez un compte gratuit](/register/) dès aujourd'hui

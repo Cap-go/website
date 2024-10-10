@@ -56,6 +56,7 @@
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "langchain": "^0.1.37",
+    "nanospinner": "^1.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.1.0",

@@ -3,23 +3,26 @@ import matter from 'gray-matter'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
+import { createSpinner } from 'nanospinner'
 
-const languages = locales.filter((lang) => lang !== defaultLocale)
+const batchSize = 20
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
+const languages = locales.filter((lang) => lang !== defaultLocale)
 
 for (const lang of languages) {
   console.log(`Preparing the blogs for locale: ${lang}...`)
   const langBlogDirectory = join(contentDirectory, lang, 'blog')
   if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
   const blogFiles = readdirSync(blogDirectory)
-  for (const file of blogFiles) {
+  const processFile = async (file: string) => {
     const filePath = join(blogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
     const { data: grayMatterJson } = matter(content)
+    const spinner = createSpinner(`Translating ${file}...`).start()
     if (grayMatterJson.title) {
       const translatedTitle = await translateText(grayMatterJson.title, lang)
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
@@ -62,6 +65,13 @@ for (const lang of languages) {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    console.log(`Blog translated: ${file}`)
+    spinner.success({ text: `Blog translated: ${file}` })
+  }
+  for (let i = 0; i < blogFiles.length; i += batchSize) {
+    const batch = blogFiles.slice(i, i + batchSize)
+    const promises = []
+    promises.push(...batch.map(file => processFile(file)))
+    await Promise.all(promises)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
   }
 }

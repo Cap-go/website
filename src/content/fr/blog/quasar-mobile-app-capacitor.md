@@ -1,44 +1,48 @@
 ---
-slug: "live-update-with-quasar-and-capacitor"
-title: Creating Mobile Apps with live updates, Quasar and Capacitor.
-description: How to create a mobile app with Quasar, Capacitor and implement live updates.
+slug: live-update-with-quasar-and-capacitor
+title: >-
+  Création d'applications mobiles avec mises à jour en direct, Quasar et
+  Capacitor.
+description: >-
+  Comment créer une application mobile avec Quasar, Capacitor et mettre en œuvre
+  des mises à jour en direct.
 author: Anik Dhabal Babu
-author_url: https://x.com/anikDhabal
-created_at: 2023-09-14
-updated_at: 2023-09-14
-head_image: "/quasar_capgo.webp"
-head_image_alt: Quasar and Capgo illustration
+author_url: 'https://x.com/anikDhabal'
+created_at: 2023-09-14T00:00:00.000Z
+updated_at: 2023-09-14T00:00:00.000Z
+head_image: /quasar_capgo.webp
+head_image_alt: Illustration Quasar et Capgo
 tag: Tutorial
 published: true
 locale: fr
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-In this tutorial, we will begin with creating a new web app using [Quasar](https://quasar.dev/). Later on, we'll learn how to turn it into a mobile app using Capacitor. If you want to make your app look better on mobile.
 
-With Capacitor, you can change your Quasar web app into a mobile app without needing to do lots of hard things or learn a completely new way of making apps like you would with something called React Native. 
+Dans ce didacticiel, nous commencerons par créer une nouvelle application Web à l'aide de [Quasar](https://quasardev/). Plus tard, nous apprendrons comment la transformer en application mobile à l'aide de Capacitor. Si vous souhaitez donner à votre application l'apparence mieux sur mobile
 
-This tutorial will guide you through the process, starting with a new Quasar app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you will use [Capgo](https://capgo.app/) to send live update to your app in seconds.
+Avec Capacitor, vous pouvez transformer votre application Web Quasar en application mobile sans avoir à faire beaucoup de choses difficiles ou apprendre une toute nouvelle façon de créer des applications comme vous le feriez avec quelque chose appelé React Native. 
 
-## About Capacitor
+Ce didacticiel vous guidera tout au long du processus, en commençant par une nouvelle application Quasar, puis en incorporant Capacitor pour passer au domaine des applications mobiles natives. De plus, vous utiliserez [Capgo](https://capgoapp/) pour envoyer une mise à jour en direct à votre application en quelques secondes
 
-CapacitorJS is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
+## À propos du condensateur
 
-With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
+CapacitorJS change vraiment la donne ! Vous pouvez l'incorporer sans effort dans n'importe quel projet Web, et il enveloppera votre application dans une vue Web native, générant pour vous le projet natif Xcode et Android Studio. De plus, ses plugins donnent accès aux fonctionnalités natives de l'appareil comme la caméra via un pont JS.
 
-## Preparing Your Quasar App
+Avec Capacitor, vous obtenez une fantastique application mobile native sans configuration compliquée ni courbe d'apprentissage abrupte. Son API mince et ses fonctionnalités simplifiées facilitent l'intégration dans votre projet. Croyez-moi, vous serez étonné de voir à quel point il est facile de réaliser une application mobile native fantastique. application native fonctionnelle avec Capacitor !
 
-To create a new Quasar app, run the following command:
+## Préparer votre application Quasar
+
+Pour créer une nouvelle application Quasar, exécutez la commande suivante :
 
 ```shell
 npm init quasar
 ```
 
-![Quasar Project Setup](/quasar-setup.webp)
+![Configuration du projet Quasar](/quasar-setupwebp)
 
-Pick the "App with Quasar CLI" option then "Quasar v2".
+Choisissez l'option "Application avec Quasar CLI" puis "Quasar v2"
 
-In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Quasar project:
+Afin de créer une application mobile native, nous avons besoin d'un **export** de notre projet. Ainsi, incluons un script simple dans notre **packagejson** qui peut être utilisé pour créer et copier le projet Quasar :
 
 ```json
 {
@@ -49,19 +53,19 @@ In order to create a native mobile app, we require an **export** of our project.
 }
 ```
 
-After executing the command `generate`, you should be able to spot a fresh `dist` folder at your project's root.
+Après avoir exécuté la commande « generate », vous devriez pouvoir repérer un nouveau dossier « dist » à la racine de votre projet.
 
-This folder will be used by Capacitor later on, but for now, we must set it up correctly.
+Ce dossier sera utilisé par Capacitor plus tard, mais pour l'instant, nous devons le configurer correctement
 
-## Adding Capacitor to Your Quasar App
+## Ajout d'un condensateur à votre application Quasar
 
-To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
+Pour empaqueter n'importe quelle application Web dans un conteneur mobile natif, nous devons suivre quelques étapes initiales, mais ensuite c'est aussi simple que d'exécuter une seule commande « sync »
 
-Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
+Tout d'abord, nous pouvons installer la [Capacitor CLI](https://capacitorjscom/docs/cli/) en tant que dépendance de développement, puis la configurer dans notre projet. Lors de l'installation, vous pouvez appuyer sur « Entrée » pour accepter les valeurs par défaut. pour le nom et l'ID du paquet
 
-Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
+Ensuite, nous devons installer le package principal et les packages correspondants pour les plateformes iOS et Android.
 
-Finally, we can add the platforms, and Capacitor will create folders for each platform at the root of our project:
+Enfin, nous pouvons ajouter les plateformes, et Capacitor créera des dossiers pour chaque plateforme à la racine de notre projet :
 
 ```shell
 # Install the Capacitor CLI locally
@@ -78,17 +82,17 @@ npx cap add ios
 npx cap add android
 ```
 
-![Initialize Capacitor](/capacitor-init.webp)
+![Initialiser le condensateur](/capacitor-initwebp)
 
-By this point, you should be able to observe new **ios** and **android** folders in your Quasar project.
+À ce stade, vous devriez pouvoir observer les nouveaux dossiers **ios** et **android** dans votre projet Quasar.
 
-**Those are real native projects!**
+**Ce sont de vrais projets natifs !**
 
-To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
+Pour accéder au projet Android ultérieurement, vous devez installer [Android Studio](https://developerandroidcom/studio/) Pour iOS, vous avez besoin d'un Mac et devez installer [Xcode](https://developerapplecom/xcode/)
 
-Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
+De plus, vous devriez trouver un fichier **capacitorconfigts** dans votre projet, qui contient certains paramètres fondamentaux du condensateur utilisés lors de la synchronisation. La seule chose à laquelle vous devez prêter attention est le **webDir**, qui doit pointer vers le résultat de votre commande de build Actuellement, elle est inexacte
 
-To rectify this, open the **capacitor.config.json** file and update the **webDir**:
+Pour remédier à cela, ouvrez le fichier **capacitorconfigjson** et mettez à jour le **webDir** :
 
 ```json
 {
@@ -98,63 +102,61 @@ To rectify this, open the **capacitor.config.json** file and update the **webDir
 }
 ```
 
-You can try it out by executing the following commands:
+Vous pouvez l'essayer en exécutant les commandes suivantes :
 
 ```shell
 npm run generate
 npx cap sync
 ```
 
-The first command `npm run generate` will simply build your Quasar project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+La première commande « npm run generate » construira simplement votre projet Quasar et copiera la version statique, tandis que la deuxième commande « npx cap sync » synchronisera tout le code Web aux bons endroits des plates-formes natives afin qu'ils puissent être affichés dans un application
 
-Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins/) it’s time to run `npx cap sync` again.
+De plus, la commande de synchronisation peut mettre à jour les plates-formes natives et installer des plugins, donc lorsque vous installez un nouveau [plugins de condensateur](https://capacitorjscom/docs/plugins/), il est temps d'exécuter à nouveau `npx cap sync`Sans vous en rendre compte, vous avez maintenant terminé, alors voyons l'application sur un appareil !
 
-Without noticing, you are now actually done, so let’s see the app on a device!
+## Créer et déployer des applications natives
 
-## Build and Deploy native apps
+Pour développer des applications iOS, **Xcode** doit être installé, et pour les applications Android, vous devez avoir **Android Studio** installé. De plus, si vous envisagez de distribuer votre application sur l'App Store, vous devez vous inscrire dans le programme pour développeurs Apple pour iOS et la console Google Play pour Android
 
-To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
-
-If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
+Si vous débutez dans le développement mobile natif, vous pouvez utiliser la CLI Capacitor pour ouvrir facilement les deux projets natifs :
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-Once you've set up your native projects, deploying your app to a connected device is easy. In Android Studio, you just need to wait for everything to be ready, and you can deploy your app to a connected device without changing any settings. Here's an example: 
+Une fois que vous avez configuré vos projets natifs, déployer votre application sur un appareil connecté est simple. Dans Android Studio, il vous suffit d'attendre que tout soit prêt et vous pouvez déployer votre application sur un appareil connecté sans modifier aucun paramètre. Voici un exemple: 
 
-![android-studio-run](/android-studio-run.webp)
+![android-studio-run](/android-studio-runwebp)
 
-In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
+Dans Xcode, vous devez configurer votre compte de signature pour déployer votre application sur un appareil réel au lieu de simplement sur le simulateur. Si vous ne l'avez pas encore fait, Xcode vous guide tout au long du processus (mais encore une fois, vous devez être inscrit au Programme pour développeurs) Après cela, vous pouvez simplement appuyer sur Play pour exécuter l'application sur votre appareil connecté, que vous pouvez sélectionner en haut. Voici un exemple :
 
-![xcode-run](/xcode-run.webp)
+![xcode-run](/xcode-runwebp)
 
-Congratulations! You have successfully deployed your Quasar web app to a mobile device. Here's an example:
+Félicitations! Vous avez déployé avec succès votre application Web Quasar sur un appareil mobile. Voici un exemple :
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/Quasar-mobile.webp" alt="quasar-mobile-app">
 </div>
 
-But hold on, there's also a faster way to do this during development...
+Mais attendez, il existe également un moyen plus rapide de le faire pendant le développement.
 
-## Capgo Live Update
+## Mise à jour en direct de Capgo
 
-Capgo Live Update is a service that allows developers to deploy updates to their mobile apps without going through the traditional App Store submission process. This can be a convenient way to quickly fix bugs or make small updates to an app without waiting for the App Store review process.
+Capgo Live Update est un service qui permet aux développeurs de déployer des mises à jour sur leurs applications mobiles sans passer par le processus de soumission traditionnel de l'App Store. Cela peut être un moyen pratique de corriger rapidement des bugs ou d'effectuer de petites mises à jour d'une application sans attendre le processus de révision de l'App Store.
 
-Integrating Capgo into your Quasar app is a straightforward process that empowers you to harness the power of real-time live updates. This step-by-step guide will walk you through the integration and implementation of Capgo Live Update, enabling you to deliver seamless updates.
+L'intégration de Capgo dans votre application Quasar est un processus simple qui vous permet d'exploiter la puissance des mises à jour en direct en temps réel. Ce guide étape par étape vous guidera tout au long de l'intégration et de la mise en œuvre de Capgo Live Update, vous permettant de fournir des mises à jour transparentes.
 
-**Sign Up and Access the Capgo Dashboard**:
+**Inscrivez-vous et accédez au tableau de bord Capgo** :
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://web.capgo.app/register/).
+Il est temps de vous inscrire et d'obtenir votre clé API pour télécharger votre première version ! Commencez par [créer un compte Capgo](https://webcapgoapp/register/)
 
-**Install the Capgo SDK**:
+**Installez le SDK Capgo** :
 
-From a command line, directly into the root of your Capacitor app, run:
+Depuis une ligne de commande, directement à la racine de votre application Capacitor, exécutez :
 
-`npm i @capgo/capacitor-updater && npx cap sync` To install the plugin into your Capacitor app.
+`npm i @capgo/capacitor-updater && npx cap sync` Pour installer le plugin dans votre application Capacitor
 
-And then add to your app this code as a replacement of CodePush one:
+Et puis ajoutez à votre application ce code en remplacement de celui de CodePush :
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -162,46 +164,46 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-This will tell the native plugin the installation as succeeded. 
+Cela indiquera au plugin natif que l'installation a réussi 
 
-**Login to Capgo CLOUD**:
+**Connectez-vous à Capgo CLOUD** :
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
+Tout d'abord, utilisez le `all` [apikey](https://webcapgoapp/dashboard/apikeys/) présent dans votre compte pour vous connecter avec la CLI :
 
-    `npx @capgo/cli@latest login YOU_KEY`
+    `npx @capgo/cli@dernière connexion YOU_KEY`
 
-**Add your first App**:
+**Ajoutez votre première application** :
 
-Let’s get started by first creating an app in Capgo Cloud with the CLI.
+Commençons par créer une application dans Capgo Cloud avec la CLI
 
 ```shell
     npx @capgo/cli@latest app add
 ```
-This command will use all variables defined in the Capacitor config file to create the app.
+Cette commande utilisera toutes les variables définies dans le fichier de configuration Capacitor pour créer l'application
 
-**Upload your first version**:
+**Téléchargez votre première version** :
 
-Run the command to build your code and send it to Capgo with: 
+Exécutez la commande pour construire votre code et envoyez-le à Capgo avec : 
 
 ```shell
 npx @capgo/cli@latest bundle upload`
 ```
 
-By default, the version name will be the one in your package.json file.
+Par défaut, le nom de la version sera celui de votre fichier packagejson
 
-Check in [Capgo](https://web.capgo.app/login/) if the build is present.
+Vérifiez dans [Capgo](https://webcapgoapp/login/) si la build est présente
 
-You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
+Vous pouvez même le tester avec mon [application sandbox mobile](https://capgoapp/app_mobile/)
 
-**Make channel default**:
+**Définir la chaîne par défaut** :
 
-After you have sent your app to Capgo, you need to make your channel default to let apps receive updates from Capgo.
+Après avoir envoyé votre application à Capgo, vous devez définir votre chaîne par défaut pour permettre aux applications de recevoir des mises à jour de Capgo.
 
-`npx @capgo/cli@latest channel set production -s default`
+`npx @capgo/cli@dernière production de l'ensemble de canaux -s par défaut`
 
-**Configure app to validate updates**:
+**Configurez l'application pour valider les mises à jour** :
 
-Add this config to your main JavaScript file.
+Ajoutez cette configuration à votre fichier JavaScript principal
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -209,27 +211,25 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-Then do a `npm run build && npx cap copy` to update your app.
+Ensuite, effectuez une « npm run build && npx cap copy » pour mettre à jour votre application
 
-**Receive a Live Update**:
+**Recevez une mise à jour en direct** :
 
-For your application to receive a live update from Deploy, you’ll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
+Pour que votre application reçoive une mise à jour en direct de Deploy, vous devrez exécuter l'application sur un appareil ou un émulateur. Le moyen le plus simple de procéder consiste simplement à utiliser la commande suivante pour lancer votre application locale dans un émulateur ou un appareil connecté. à votre ordinateurexécution du plafond npx [ios | androïde]
 
-      npx cap run [ios | android]
+Ouvrez l'application, mettez-la en arrière-plan et ouvrez-la à nouveau, vous devriez voir dans les journaux que l'application a effectué la mise à jour
 
-Open the app, put it in the background and open it again, you should see in the logs the app did the update.
+Bravo! 🎉 Vous avez déployé avec succès votre première Live Update. Ce n'est que le début de ce que vous pouvez faire avec Live Updates. Pour en savoir plus, consultez la [documentation complète Live Updates](https://capgoapp/docs/plugin/cloud-mode/getting -commencé/)
 
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](https://capgo.app/docs/plugin/cloud-mode/getting-started/).
+## Utilisation des plugins de condensateur
 
-## Using Capacitor Plugins
-
-Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
+Voyons comment utiliser un plugin Capacitor en action, que nous avons évoqué plusieurs fois auparavant. Pour ce faire, nous pouvons installer un plugin assez simple en exécutant :
 
 ```shell
 npm i @capacitor/share
 ```
 
-There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.vue** to this:
+Il n'y a rien d'extraordinaire à propos du [plug-in de partage](https://capacitorjscom/docs/apis/share/), mais il affiche quand même la boîte de dialogue de partage native ! Pour cela, il nous suffit maintenant d'importer le package et d'appeler la fonction `share()` correspondante depuis notre application, changeons donc les **pages/indexvue** par ceci :
 
 ```html
 <template>
@@ -253,23 +253,23 @@ async function share() {
 </script>
 ```
 
-As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
+Comme mentionné précédemment, lors de l'installation de nouveaux plugins, nous devons effectuer une opération de synchronisation puis redéployer l'application sur notre appareil. Pour ce faire, exécutez la commande suivante :
 
 ```
 npx cap sync
 ```
 
-After hitting the button, you can witness the beautiful native share dialog in action!
+Après avoir appuyé sur le bouton, vous pourrez assister à la magnifique boîte de dialogue de partage natif en action !
 
-## Optionally Adding Konsta UI
+## Ajout optionnel de l'interface utilisateur de Konsta
 
-To use Konsta UI in your Quasar app, you need to have [tailwind already install](https://tailwindcss.com/docs/installation/) and to install the package:
+Pour utiliser Konsta UI dans votre application Quasar, vous devez avoir [tailwind déjà installé](https://tailwindcsscom/docs/installation/) et installer le package :
 
 ```shell
 npm i konsta
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file:
+De plus, vous devez modifier votre fichier `tailwindconfigjs` :
 
 ```javascript
 // import konstaConfig config
@@ -292,11 +292,11 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
+`konstaConfig` étendra la configuration CSS Tailwind par défaut (ou personnalisée) avec quelques variantes supplémentaires et utilitaires d'assistance requis pour l'interface utilisateur de Konsta
 
-Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
+Nous devons maintenant configurer le composant principal [App](https://konstauicom/vue/app/) afin de pouvoir définir certains paramètres globaux (comme `theme`)
 
-We need to wrap the whole app with `App` in the `pages/_app.vue`:
+Nous devons envelopper l'ensemble de l'application avec `App` dans `pages/_appvue` :
 
 ```html
 <template>
@@ -310,11 +310,11 @@ import { App } from 'konsta/vue';
 </script>
 ```
 
-### Example Page
+### Exemple de page
 
-Now when everything is set up, we can use Konsta UI Vue components in our Quasar pages.
+Maintenant que tout est configuré, nous pouvons utiliser les composants Konsta UI Vue dans nos pages Quasar
 
-For example, let's open `pages/index.vue` and change it to the following:
+Par exemple, ouvrons `pages/indexvue` et modifions-le comme suit :
 
 ```html
 <template>
@@ -353,13 +353,13 @@ import {
 </script>
 ```
 
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Quasar and Capacitor!
+Si le live reload est désynchronisé après avoir installé tous les composants nécessaires, essayez de tout redémarrer. Une fois cela fait, vous devriez voir une application mobile au look quelque peu natif, construite avec Quasar et Capacitor !
 
 
 ## Conclusion
 
-Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 
+Capacitor est une excellente option pour créer des applications natives basées sur un projet Web existant, offrant un moyen simple de partager du code et de maintenir une interface utilisateur cohérente. 
 
-And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+Et avec l'ajout de [Capgo](https://capgoapp/), il est encore plus facile d'ajouter des mises à jour en direct à votre application, garantissant ainsi que vos utilisateurs ont toujours accès aux dernières fonctionnalités et corrections de bugs.
 
-If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
+Si vous souhaitez savoir comment ajouter Capgo à votre application Nextjs, jetez un oeil à l'article suivant :

@@ -24,7 +24,7 @@ Une fois le package installé, vous pouvez l'importer dans votre code en utilisa
 import { findPackageManagerType } from '@capgo/find-package-manager'
 ```
 
-## Trouver le type de gestionnaire de packages
+## Rechercher le type de gestionnaire de packages
 
 Pour trouver le type de gestionnaire de packages dans un chemin donné, vous pouvez utiliser la fonction `findPackageManagerType`. Voici un exemple :
 

@@ -3,7 +3,9 @@ import matter from 'gray-matter'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
+import { createSpinner } from 'nanospinner'
 
+const batchSize = 20
 const languages = locales.filter((lang) => lang !== defaultLocale)
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'plugins-tutorials')
@@ -13,13 +15,14 @@ for (const lang of languages) {
   const langBlogDirectory = join(contentDirectory, lang, 'plugins-tutorials')
   if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
   const blogFiles = readdirSync(blogDirectory)
-  for (const file of blogFiles) {
+  const processFile = async (file: string) => {
     const filePath = join(blogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
     const { data: grayMatterJson } = matter(content)
+    const spinner = createSpinner(`Translating ${file}...`).start()
     if (grayMatterJson.title) {
       const translatedTitle = await translateText(grayMatterJson.title, lang)
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
@@ -62,6 +65,13 @@ for (const lang of languages) {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    console.log(`plugins-tutorials translated to ${lang} locale: ${file}`)
+    spinner.success({ text: `plugins-tutorials/${file} translated to ${lang} locale` })
+  }
+  for (let i = 0; i < blogFiles.length; i += batchSize) {
+    const batch = blogFiles.slice(i, i + batchSize)
+    const promises = []
+    promises.push(...batch.map(file => processFile(file)))
+    await Promise.all(promises)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
   }
 }

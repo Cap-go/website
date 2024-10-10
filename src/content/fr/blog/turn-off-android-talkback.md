@@ -1,57 +1,59 @@
 ---
-slug: "turn-off-android-talkback"
-title: 'How to Turn off and Use TalkBack on Android Devices'
-description: 'Step-by-step guide on enabling and navigating with TalkBack, the built-in Android screen reader for visually impaired users.'
+slug: turn-off-android-talkback
+title: Comment désactiver et utiliser TalkBack sur les appareils Android
+description: >-
+  Guide étape par étape sur l'activation et la navigation avec TalkBack, le
+  lecteur d'écran Android intégré pour les utilisateurs malvoyants.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-11-27
-updated_at: 2023-11-27
-head_image: "/android_talkback.webp"
-head_image_alt: "Android TalkBack Activation"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-11-27T00:00:00.000Z
+updated_at: 2023-11-27T00:00:00.000Z
+head_image: /android_talkback.webp
+head_image_alt: Activation d'Android TalkBack
 tag: Android
 published: true
 locale: fr
-next_blog: ""
+next_blog: ''
 ---
 
-TalkBack is an essential feature for visually impaired users, integrated into Android devices. It's a gesture-based screen reader that vocalizes the content of your screen, assisting in navigation and interaction with different elements. Here's a comprehensive guide on how to enable and use TalkBack.
+TalkBack est une fonctionnalité essentielle pour les utilisateurs malvoyants, intégrée aux appareils Android. Il s'agit d'un lecteur d'écran basé sur les gestes qui vocalise le contenu de votre écran, facilitant la navigation et l'interaction avec différents éléments. Voici un guide complet sur la façon d'activer et d'utiliser TalkBack.
 
-## How to Turn On TalkBack
+## Comment activer TalkBack
 
-There are several methods to activate TalkBack on your Android device:
+Il existe plusieurs méthodes pour activer TalkBack sur votre appareil Android :
 
-### Using Volume Keys
+### Utilisation des touches de volume
 
-1. Locate the volume keys on the side of your device.
-2. Press and hold both volume keys simultaneously for 3 seconds.
-3. You'll hear a spoken prompt to confirm the action. Press and hold the volume keys for another 3 seconds to confirm.
+1 Localisez les touches de volume sur le côté de votre appareil
+2 Appuyez simultanément sur les deux touches de volume et maintenez-les enfoncées pendant 3 secondes
+3 Vous entendrez une invite vocale pour confirmer l'action. Appuyez et maintenez les touches de volume pendant encore 3 secondes pour confirmer.
 
-### Via Google Assistant
+### Via l'Assistant Google
 
-1. Activate Google Assistant by saying, "Hey Google."
-2. Simply command, "Turn on TalkBack," or "Turn off TalkBack," depending on your need.
+1 Activez l'Assistant Google en disant « Hey Google »
+2 Commandez simplement « Activer TalkBack » ou « Désactiver TalkBack », selon vos besoins.
 
-### Through Device Settings
+### Via les paramètres de l'appareil
 
-1. Open the `Settings` app on your device.
-2. Scroll down and select `Accessibility`.
-3. Tap on `TalkBack`.
-4. Toggle the `Use TalkBack` switch to turn it on or off.
+1 Ouvrez l'application « Paramètres » sur votre appareil
+2 Faites défiler vers le bas et sélectionnez « Accessibilité »
+3 Appuyez sur « TalkBack »
+4 Basculez le commutateur « Utiliser TalkBack » pour l'activer ou le désactiver.
 
-## Navigating with TalkBack
+## Naviguer avec TalkBack
 
-Once TalkBack is active, your device will provide auditory feedback as you navigate. Here's how to interact with your device using TalkBack:
+Une fois TalkBack actif, votre appareil fournira un retour auditif pendant que vous naviguez. Voici comment interagir avec votre appareil à l'aide de TalkBack :
 
-- **Next Item**: Swipe right to move to the next item.
-- **Previous Item**: Swipe left to go back to the previous item.
-- **Activate**: Double-tap anywhere on the screen to activate the selected item.
-- **Explore by Touch**: Drag your finger across the screen to have items read out loud as you touch them.
-- **Scroll**: Use two fingers to swipe up or down to scroll through pages.
-- **TalkBack Menu**: Tap the screen with three fingers to open additional TalkBack options.
-- **Adjust Reading Controls**: Change reading settings by swiping left or right with three fingers.
+- **Élément suivant** : faites glisser votre doigt vers la droite pour passer à l'élément suivant
+- **Élément précédent** : faites glisser votre doigt vers la gauche pour revenir à l'élément précédent
+- **Activer** : appuyez deux fois n'importe où sur l'écran pour activer l'élément sélectionné.
+- **Explorer au toucher** : faites glisser votre doigt sur l'écran pour que les éléments soient lus à haute voix lorsque vous les touchez
+- **Défilement** : utilisez deux doigts pour faire glisser votre doigt vers le haut ou vers le bas pour faire défiler les pages.
+- **Menu TalkBack** : appuyez sur l'écran avec trois doigts pour ouvrir des options TalkBack supplémentaires.
+- **Ajuster les contrôles de lecture** : modifiez les paramètres de lecture en faisant glisser votre doigt vers la gauche ou la droite avec trois doigts.
 
-## Turning Off TalkBack
+## Désactiver TalkBack
 
-If you need to disable TalkBack, you can use any of the methods mentioned above. The volume key shortcut is particularly useful when you cannot see the screen.
+Si vous devez désactiver TalkBack, vous pouvez utiliser l'une des méthodes mentionnées ci-dessus. Le raccourci des touches de volume est particulièrement utile lorsque vous ne pouvez pas voir l'écran.
 
-Remember, mastering TalkBack takes practice. Don't hesitate to explore the settings and customize the experience to your preferences. With these steps, you can confidently navigate your Android device using TalkBack.
+N'oubliez pas que maîtriser TalkBack demande de la pratique. N'hésitez pas à explorer les paramètres et à personnaliser l'expérience selon vos préférences. Grâce à ces étapes, vous pouvez naviguer en toute confiance sur votre appareil Android à l'aide de TalkBack.

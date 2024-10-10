@@ -94,7 +94,7 @@ Définit l'opacité de la caméra
 
 Arrête d'enregistrer une vidéo
 
-### startRecordVideo (options : CameraPreviewOptions)
+### startRecordVideo (options : CameraPreviewOptions)
 
 Commence à enregistrer une vidéo
 

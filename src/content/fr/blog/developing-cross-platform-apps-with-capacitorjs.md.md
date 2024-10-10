@@ -1,44 +1,46 @@
 ---
-slug: "developing-cross-platform-apps-with-capacitorjs"
-title: 'Developing Cross-Platform Apps with CapacitorJS: A Step-by-Step Guide'
-description: 'Learn how to create cross-platform applications using CapacitorJS with a single JavaScript codebase for Android, iOS, and web (PWA).'
+slug: developing-cross-platform-apps-with-capacitorjs
+title: "Développer des applications multiplateformes avec CapacitorJS\_: un guide étape par étape"
+description: >-
+  Découvrez comment créer des applications multiplateformes à l'aide de
+  CapacitorJS avec une base de code JavaScript unique pour Android, iOS et Web
+  (PWA).
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-12-02
-updated_at: 2023-12-14
-head_image: "/create_app_with_js.webp"
-head_image_alt: "Cross-Platform App Development"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-12-02T00:00:00.000Z
+updated_at: 2023-12-14T00:00:00.000Z
+head_image: /create_app_with_js.webp
+head_image_alt: Développement d'applications multiplateformes
 tag: Tuto
 published: true
 locale: fr
-next_blog: ""
-
+next_blog: ''
 ---
 
-In the evolving world of mobile application development, the rise of Progressive Web Applications (PWAs) has paved the way for new cross-platform runtimes. These runtimes enable web-based applications to be present in app stores without relying solely on native code. One such technology that facilitates this is [**CapacitorJS**](https://capacitorjs.com/), which allows developers to deploy a simple website as an application across Android, iOS, and the web using a single JavaScript codebase. This approach significantly reduces development costs and increases coding efficiency.
+Dans le monde en évolution du développement d'applications mobiles, l'essor des applications Web progressives (PWA) a ouvert la voie à de nouveaux environnements d'exécution multiplateformes. Ces environnements d'exécution permettent aux applications Web d'être présentes dans les magasins d'applications sans s'appuyer uniquement sur le code natif. qui facilite cela est [**CapacitorJS**](https://capacitorjscom/), qui permet aux développeurs de déployer un site Web simple en tant qu'application sur Android, iOS et le Web à l'aide d'une seule base de code JavaScript. Cette approche réduit considérablement les coûts de développement et augmente l'efficacité du codage
 
-This guide will focus on creating an application using pure JavaScript without any additional frameworks. Despite the challenges of finding resources for pure JavaScript app development in 2021, we're here to provide you with a comprehensive tutorial on building your application and utilizing native plugins with CapacitorJS.
+Ce guide se concentrera sur la création d'une application utilisant du JavaScript pur sans aucun framework supplémentaire. Malgré les défis liés à la recherche de ressources pour le développement d'applications purement JavaScript en 2021, nous sommes là pour vous fournir un didacticiel complet sur la création de votre application et l'utilisation de plugins natifs avec CapacitorJS.
 
-## ‣ Prerequisites
+## ‣ Prérequis
 
-Before we begin, ensure you have the following tools installed:
+Avant de commencer, assurez-vous que les outils suivants sont installés :
 
-- [**Node.js**](https://nodejs.org/en/) **(v14.16.1)** or higher
-- **NPM (v7.6.2)** or higher
-- [**Android Studio**](https://developer.android.com/studio/) for Android app development
-- [**Xcode**](https://apps.apple.com/de/app/xcode/id497799835/?mt=12) for iOS app development (macOS only)
+- [**Nodejs**](https://nodejsorg/en/) **(v14161)** ou supérieur
+- **NPM (v762)** ou supérieur
+- [**Android Studio**](https://developerandroidcom/studio/) pour le développement d'applications Android
+- [**Xcode**](https://appsapplecom/de/app/xcode/id497799835/?mt=12) pour le développement d'applications iOS (macOS uniquement)
 
-> **Note**: iOS app development is only possible on a macOS device.
+> **Remarque** : le développement d'applications iOS n'est possible que sur un appareil macOS
 
-## ‣ Setting Up Your Capacitor Project
+## ‣ Configurer votre projet de condensateur
 
-To create a Capacitor application, navigate to your desired folder and execute the following command in your terminal:
+Pour créer une application Capacitor, accédez au dossier souhaité et exécutez la commande suivante dans votre terminal :
 
 ```
 npm init @capacitor/app
 ```
 
-Follow the prompts to install the package and set up your project. With Capacitor v3, your project directory should look like this:
+Suivez les invites pour installer le package et configurer votre projet. Avec Capacitor v3, votre répertoire de projet devrait ressembler à ceci :
 
 ```
 www/
@@ -54,18 +56,18 @@ package.json
 README.md
 ```
 
-With the initial setup complete, you're ready to proceed.
+Une fois la configuration initiale terminée, vous êtes prêt à continuer
 
-## ‣ Project Restructuring
+## ‣ Restructuration de projet
 
-We'll be using Vite to bundle our JavaScript files, so let's restructure our project accordingly:
+Nous utiliserons Vite pour regrouper nos fichiers JavaScript, restructurons donc notre projet en conséquence :
 
-- **Create** a new folder `src` in the main directory.
-- **Create** a new script file `index.js` in `src/`.
-- **Create** the Vite config file `vite.config.js` in the main directory.
-- **Remove** the `capacitor-welcome.js` file from `www/js/`.
+- **Créez** un nouveau dossier `src` dans le répertoire principal
+- **Créer** un nouveau fichier script `indexjs` dans `src/`
+- **Créez** le fichier de configuration Vite `viteconfigjs` dans le répertoire principal
+- **Supprimez** le fichier `capacitor-welcomejs` de `www/js/`
 
-Your new folder structure should resemble:
+Votre nouvelle structure de dossiers devrait ressembler à :
 
 ```
 src/
@@ -83,28 +85,28 @@ README.md
 vite.config.js
 ```
 
-## ‣ Adapting to Pure JavaScript
+## ‣ Adaptation au JavaScript pur
 
-Let's modify some files to work with pure JavaScript:
+Modifions quelques fichiers pour qu'ils fonctionnent avec du JavaScript pur :
 
-## www/index.html
+## www/indexhtml
 
-1. Remove the script imports for [**Ionic PWA Elements**](https://capacitorjs.com/docs/web/pwa-elements/) if you're not releasing the app as a PWA:
+1 Supprimez les importations de script pour [**Ionic PWA Elements**](https://capacitorjscom/docs/web/pwa-elements/) si vous ne publiez pas l'application en tant que PWA :
 
 ```
 <script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"></script>
 <script nomodule src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
 ```
 
-2. Delete the `<capacitor-welcome>` HTML element from the body.
+2 Supprimez l'élément HTML `<script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js">` du corps
 
-3. Update the script import from `capacitor.js` to `js/main.js`. This will be our bundled JavaScript file.
+3 Mettez à jour l'importation du script de `capacitorjs` vers `js/mainjs` Ce sera notre fichier JavaScript fourni
 
-4. Remove the `js/capacitor-welcome.js` import. Your `index.html` is now ready.
+4 Supprimez l'import `js/capacitor-welcomejs` Votre `indexhtml` est maintenant prêt
 
-## vite.config.js
+## viteconfigjs
 
-To bundle our Node.js modules with [**Vite**](https://vitejs.dev/), we need a config file specifying the output destination for our bundled script. The following configuration will take the file `src/index.js` and bundle it for production as `www/js/main.js`:
+Pour regrouper nos modules Nodejs avec [**Vite**](https://vitejsdev/), nous avons besoin d'un fichier de configuration spécifiant la destination de sortie de notre script fourni. La configuration suivante prendra le fichier `src/indexjs` et le regroupera pour la production en tant que `www/js/mainjs` :
 
 ```javascript
 import { defineConfig } from 'vite';
@@ -124,49 +126,49 @@ export default defineConfig({
 });
 ```
 
-## capacitor.config.json
+## condensateurconfigjson
 
-In the `capacitor.config.json` file, locate the `"bundledWebRuntime": true` property and change it to `false`. This adjustment ensures that Capacitor does not bundle the files, allowing us to use Vite for that purpose instead.
+Dans le fichier `capacitorconfigjson`, localisez la propriété `"bundledWebRuntime": true` et remplacez-la par `false`. Cet ajustement garantit que Capacitor ne regroupe pas les fichiers, nous permettant d'utiliser Vite à cette fin.
 
-With these changes, your Capacitor application's basic setup is complete, and you're ready to start developing your app with pure JavaScript.
+Avec ces modifications, la configuration de base de votre application Capacitor est terminée et vous êtes prêt à commencer à développer votre application avec du JavaScript pur.
 
-## ‣ Developing Your App
+## ‣ Développer votre application
 
-Now that the groundwork is laid, you can begin writing your application logic in the `src/index.js` file. Here, you can import any necessary Node.js modules, define your app's functionality, and interact with Capacitor's native plugins.
+Maintenant que les bases sont posées, vous pouvez commencer à écrire la logique de votre application dans le fichier `src/indexjs`. Ici, vous pouvez importer tous les modules Nodejs nécessaires, définir les fonctionnalités de votre application et interagir avec les plugins natifs de Capacitor.
 
-Remember to run Vite's build command to bundle your JavaScript files whenever you make changes:
+N'oubliez pas d'exécuter la commande build de Vite pour regrouper vos fichiers JavaScript chaque fois que vous apportez des modifications :
 
 ```bash
 vite build
 ```
 
-This command will generate the `main.js` file in your `www/js` directory, which your `index.html` file will reference.
+Cette commande générera le fichier `mainjs` dans votre répertoire `www/js`, auquel votre fichier `indexhtml` fera référence
 
-## ‣ Testing and Debugging
+## ‣ Test et débogage
 
-Capacitor provides a convenient way to test your application on various platforms. Use the following commands to open your app in the respective platform's development environment:
+Le condensateur offre un moyen pratique de tester votre application sur diverses plates-formesUtilisez les commandes suivantes pour ouvrir votre application dans l'environnement de développement de la plateforme respective :
 
-For Android:
+Pour Android :
 ```bash
 npx cap add android
 npx cap open android
 ```
 
-For iOS (macOS only):
+Pour iOS (macOS uniquement) :
 ```bash
 npx cap add ios
 npx cap open ios
 ```
 
-For Web/PWA:
+Pour le Web/PWA :
 ```bash
 npx cap serve
 ```
 
-These commands will allow you to run your application in Android Studio, Xcode, or your web browser, where you can test and debug as needed.
+Ces commandes vous permettront d'exécuter votre application dans Android Studio, Xcode ou votre navigateur Web, où vous pourrez tester et déboguer selon vos besoins.
 
 ## ‣ Conclusion
 
-Developing cross-platform applications with CapacitorJS using pure JavaScript is a cost-effective and efficient way to create apps for multiple platforms with a single codebase. By following this guide, you've set up your project, restructured it for Vite, and prepared your app for development. With this foundation, you're well on your way to building a robust and versatile application.
+Développer des applications multiplateformes avec CapacitorJS en utilisant du JavaScript pur est un moyen rentable et efficace de créer des applications pour plusieurs plates-formes avec une seule base de code. En suivant ce guide, vous avez configuré votre projet, l'avez restructuré pour Vite et préparé votre application. pour le développement Avec cette base, vous êtes sur la bonne voie pour créer une application robuste et polyvalente
 
-Remember to test thoroughly on all platforms and make use of Capacitor's native plugins to enhance your app's functionality. Happy coding!
+N'oubliez pas de tester minutieusement sur toutes les plates-formes et d'utiliser les plugins natifs de Capacitor pour améliorer les fonctionnalités de votre application. Bon codage !

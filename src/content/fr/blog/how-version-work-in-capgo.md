@@ -1,116 +1,117 @@
 ---
-slug: "how-version-work-in-capgo"
-title: How version work in Capgo
-description: Understand how Capgo manage versions in your Capacitor app, and use it at best. Learn the meaning of major, minor, patch.
+slug: how-version-work-in-capgo
+title: Comment fonctionne la version dans Capgo
+description: >-
+  Comprenez comment Capgo gère les versions dans votre application Capacitor et
+  utilisez-la au mieux. Apprenez la signification des patchs majeurs, mineurs.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-08-25
-updated_at: 2023-06-29
-head_image: "/versionning.webp"
-head_image_alt: Capgo bundle version system
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-08-25T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /versionning.webp
+head_image_alt: Système de version du bundle Capgo
 tag: Tutorial
 published: true
 locale: fr
-next_blog: "how-to-release-major-version-in-capgo"
-
+next_blog: how-to-release-major-version-in-capgo
 ---
 
-Capgo uses 2 main variables to manage versions in your Capacitor app:
-  - Native version
-  - JavaScript versions
+Capgo utilise 2 variables principales pour gérer les versions dans votre application Capacitor :
+  -Version native
+  - Versions Javascript
 
 
 <div class="mx-auto" style="width:100%;">
   <img src="/graph_capgo.webp" alt="Capacitor update system">
 </div>
 
-All versions choices are decided server side by Capgo.
+Tous les choix de versions sont décidés côté serveur par Capgo
 
-## Versioning system
+## Système de gestion des versions
 
-To manage version Capgo use the SemVer system, read more about it [here](https://semver.org/).
+Pour gérer la version Capgo, utilisez le système SemVer, en savoir plus [ici](https://semverorg/)
 ### Versions
 
-Where Capgo find the version to compare
+Où Capgo trouve la version à comparer
 
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/settings/#version)
-  > The native version will be ignored for all platforms.
+  > Vous pouvez remplacer ce comportement en définissant la clé de version dans le fichier `capacitorconfigjson` [docs ici](/docs/plugin/settings/#version)
+  > La version native sera ignorée pour toutes les plateformes
 
-#### IOS
+####IOS
 
- In IOS the var is set on your project here `ios/App/App/Info.plist` under the key`CFBundleShortVersionString` or `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION` if `MARKETING_VERSION` was set in your `Info.plist` file.
+ Dans IOS, la var est définie sur votre projet ici `ios/App/App/Infoplist` sous la clé`CFBundleShortVersionString` ou `ios/App/Appxcodeproj/projectpbxproj` sous la clé `MARKETING_VERSION` si `MARKETING_VERSION` a été défini dans votre ` Fichier Infoplist
 
 #### Android
 
-  In Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
+  Sous Android, la variable est définie sur votre projet ici `android/app/buildgradle` sous la clé `defaultConfigversionName`
 
-#### JavaScript ( Capgo bundle version )
+#### JavaScript (version du pack Capgo)
 
-  In JavaScript, the var can be set in your `package.json` under the key `version`
-  Otherwise you need to provide it in the upload command.
+  En JavaScript, la var peut être définie dans votre `packagejson` sous la clé `version`
+  Sinon, vous devez le fournir dans la commande de téléchargement
 
-## Default behavior
+## Comportement par défaut
 
-This is how Capgo channel will behave if you didn't change any settings.
+Voici comment la chaîne Capgo se comportera si vous n'avez modifié aucun paramètre
 
-> This behavior will be based on the unique channel you made default.
+> Ce comportement sera basé sur le canal unique que vous avez défini par défaut
 
-### When Fresh installation of your Capacitor app
-When user did download your Ionic app for the first time and opens the app it contacts Capgo server.
+### Lors de la nouvelle installation de votre application Capacitor
+Lorsque l'utilisateur télécharge votre application Ionic pour la première fois et ouvre l'application, il contacte le serveur Capgo.
 
-Currently, 4 outputs can happen:
-  - The native bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo sends his bundle to the user.
-  - The native bundle version (1.2.3) is equal to Capgo bundle version (1.2.3), Capgo send “no need to update”.
-  - The native bundle version (1.2.4) is higher than Capgo bundle version (1.2.3), Capgo send “no need to update”.
-  - The native bundle version (1.2.3) is MAJOR lower than Capgo bundle version (2.2.3), Capgo send “no need to update”.
+Actuellement, 4 sorties peuvent se produire :
+  - La version native du bundle (123) est inférieure à la version du bundle Capgo (124), Capgo envoie son bundle à l'utilisateur
+  - La version native du bundle (123) est égale à la version du bundle Capgo (123), Capgo envoie « pas besoin de mettre à jour »
+  - La version native du bundle (124) est supérieure à la version du bundle Capgo (123), Capgo envoie « pas besoin de mettre à jour »
+  - La version native du bundle (123) est MAJEURE inférieure à la version du bundle Capgo (223), Capgo envoie « pas besoin de mettre à jour »
 
-### Other settings
+### Autres paramètres
 
-#### Disable auto-downgrade under native
+#### Désactiver la rétrogradation automatique en mode natif
 
-If you change this setting to false, Capgo will consider is always the trustable source of the version.
-Then the behavior become :
-- The native version (1.2.4) is higher than Capgo version (1.2.3)
+Si vous modifiez ce paramètre sur false, Capgo considérera qu'elle est toujours la source fiable de la version.
+Alors le comportement devient :
+- La version native (124) est supérieure à la version Capgo (123)
 
-> Capgo sends his version to the user.
+> Capgo envoie sa version à l'utilisateur
 
-#### Disable auto-upgrade strategy
+#### Désactiver la stratégie de mise à niveau automatique
 
-There are a couple of stategies you can chose from. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
+Vous pouvez choisir parmi plusieurs stratégies. Vous pouvez en savoir plus à ce sujet [ici](/docs/tooling/cli/#disable-updates-strategy)
 
-## JavaScript bundle version
+## Version du package JavaScript
 
-The JavaScript bundle version is the one you send when doing `npx @capgo/cli@latest bundle upload --channel production`
+La version du bundle JavaScript est celle que vous envoyez lors de l'exécution de `npx @capgo/cli@latest bundle upload --channel production`
 
-If you didn't use the option `--bundle 1.2.3`, Capgo will get the bundle version from your `package.json` file (in the version key).
+Si vous n'avez pas utilisé l'option `--bundle 123`, Capgo obtiendra la version du bundle à partir de votre fichier `packagejson` (dans la clé de version)
 
-After Your Ionic app has installed one version from Capgo, this is this version who will be compared for:
-  - Their JavaScript bundle version (1.2.3) is lower than Capgo bundle version (1.2.4), Capgo send his bundle to the user.
+Une fois que votre application Ionic a installé une version de Capgo, c'est cette version qui sera comparée pour :
+  - Leur version du bundle JavaScript (123) est inférieure à la version du bundle Capgo (124), Capgo envoie son bundle à l'utilisateur
 
-With some guard conditions:
-  - If native bundle version is higher than Capgo version, the `Disable auto downgrade under native` condition is applied.
-  - If native bundle version is MAJOR lower than Capgo version, the `Disable auto upgrade above major` condition is applied.
+Avec quelques conditions de garde :
+  - Si la version native du bundle est supérieure à la version Capgo, la condition « Désactiver la rétrogradation automatique en mode natif » est appliquée
+  - Si la version native du bundle est MAJEURE inférieure à la version Capgo, la condition « Désactiver la mise à niveau automatique au-dessus de la version majeure » ​​est appliquée
 
-## App store update
+## Mise à jour de l'App Store
 
-When you publish your Capacitor JS app on the App Store, what happens is simple.
+Lorsque vous publiez votre application Capacitor JS sur l'App Store, ce qui se passe est simple
 
-Your user will get the new version from the store and remove all local updates in their app by default.
+Votre utilisateur obtiendra la nouvelle version du magasin et supprimera par défaut toutes les mises à jour locales de son application.
 
-If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugin/api#settings)
+Si vous souhaitez modifier ce comportement, vous devez définir le paramètre « resetWhenUpdate ». En savoir plus à ce sujet [ici](/docs/plugin/api#settings)
 
-This can only be changed on the app side, not from the cloud like other settings.
+Cela ne peut être modifié que du côté de l'application, et non depuis le cloud comme les autres paramètres.
 
-### Other settings
+### Autres paramètres
 
-After all this behavior, you can have above that some specific one liked to the deviceID.
+Après tout ce comportement, vous pouvez avoir au-dessus de cela un comportement spécifique apprécié par l'ID de périphérique.
 
-In Capgo, you can decide to override the behavior for each deviceID.
+Dans Capgo, vous pouvez décider de remplacer le comportement de chaque ID d'appareil
 
-Yon can link one deviceID to:
-  - a specific bundle version
-  - a specific channel
+Vous pouvez associer un identifiant d'appareil à :
+  - une version bundle spécifique
+  - un canal spécifique
 
-This will bypass all the settings done above.
+Cela contournera tous les paramètres effectués ci-dessus
 
-Learn more about it in the article below.
+Apprenez-en plus à ce sujet dans l’article ci-dessous

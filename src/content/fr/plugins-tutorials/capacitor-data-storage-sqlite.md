@@ -183,6 +183,6 @@ dataStorageExample();
 
 Vous avez maintenant appris à utiliser le package `@capgo/capacitor-data-storage-sqlite` pour implémenter un système de stockage clé-valeur dans votre application Ionic Capacitor. Ce plugin fournit un moyen simple de stocker et de récupérer des données de chaîne sur différentes plates-formes. , y compris iOS, Android, Electron et Web
 
-N'oubliez pas de gérer les erreurs de manière appropriée et de fermer le magasin lorsque vous avez fini de l'utiliser. Pour une utilisation plus avancée, notamment l'utilisation de bases de données cryptées, de tables multiples et l'importation/exportation JSON, reportez-vous à la documentation complète de l'API du plugin.
+N'oubliez pas de gérer les erreurs de manière appropriée et de fermer le magasin lorsque vous avez fini de l'utiliser. Pour une utilisation plus avancée, notamment l'utilisation de bases de données chiffrées, de tables multiples et l'importation/exportation JSON, reportez-vous à la documentation complète de l'API du plugin.
 
 Pour des informations plus détaillées sur l'API et les options disponibles, reportez-vous au README ou à la documentation du package.

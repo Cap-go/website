@@ -49,9 +49,9 @@ Le package `@capgo/inappbrowser` fournit les méthodes API suivantes :
 - `close()` : ferme la fenêtre du navigateur dans l'application
 - `openWebView(options : OpenWebViewOptions)` : Ouvrir une URL dans une nouvelle vue Web avec des barres d'outils Prend un objet `OpenWebViewOptions` comme paramètre
 - `setUrl(options: { url: string; })` : définit l'URL du navigateur intégré à l'application. Prend un objet avec une propriété `url` comme paramètre
-- `addListener('urlChangeEvent', ListenerFunc: UrlChangeListener)` : écoute les événements de changement d'URL Prend une fonction `UrlChangeListener` comme paramètre
-- `addListener('closeEvent', ListenerFunc: UrlChangeListener)` : écoute les événements de fermeture Prend une fonction `UrlChangeListener` comme paramètre
-- `addListener('confirmBtnClicked', ListenerFunc: UrlChangeListener)` : écoute les événements de clic sur le bouton de confirmation Prend une fonction `UrlChangeListener` comme paramètre
+- `addListener('urlChangeEvent', listeningFunc: UrlChangeListener)` : écoute les événements de changement d'URL Prend une fonction `UrlChangeListener` comme paramètre
+- `addListener('closeEvent', listeningFunc: UrlChangeListener)` : écoute les événements de fermeture Prend une fonction `UrlChangeListener` comme paramètre
+- `addListener('confirmBtnClicked', listeningFunc: UrlChangeListener)` : écoute les événements de clic sur le bouton de confirmation Prend une fonction `UrlChangeListener` comme paramètre
 - `removeAllListeners()` : Supprime tous les écouteurs d'événements
 
 Pour plus d'informations sur les paramètres et les valeurs de retour de ces méthodes, reportez-vous à la documentation du package
