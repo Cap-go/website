@@ -35,7 +35,7 @@ chat: Chat
 sponsor: Parrainage
 about: À propos
 imprint: Imprimer
-imprint_description: Retrouvez les infos de la société à 1$ ici
+imprint_description: Retrouvez les infos de la société à $1 ici
 jobs: Emplois
 contributing: Contribuer
 contributing_description: Comment contribuer à l'open source Capgo
@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -516,8 +516,8 @@ latest_from_the_blog: Dernières nouveautés du blog
 calculate_your_usage: Calculez votre consommation
 monthly_active_users: Utilisateurs actifs mensuels
 enter_your_estimated_monthly_active_users: >-
-  Entrez vos utilisateurs actifs mensuels estimés, vos mises à jour mensuelles
-  et la taille des mises à jour pour obtenir votre coût mensuel estimé.
+  Entrez vos utilisateurs actifs mensuels estimés, les mises à jour par mois et
+  la taille des mises à jour pour obtenir votre coût mensuel estimé.
 updates_by_month: Mises à jour<br />par mois
 updates_size: Taille des mises à jour<br />(Mo)
 updates_total: Mises à jour<br />(Total)
@@ -614,7 +614,7 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
@@ -756,7 +756,7 @@ security_testing_guidelines_1: >-
   par inadvertance les services, exploiter des vulnérabilités, entraîner une
   instabilité ou des violations du système et violer les conditions de service
   de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
-  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
+  capables de distinguer la reconnaissance hostile de la recherche blanche. Si
   vous souhaitez exécuter un scanner automatisé, informez-nous à
   security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
   N'attaquez PAS les projets d'autres clients.
@@ -799,7 +799,7 @@ security_closing: >-
 sla_title: Accords de niveau de service
 enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
 sla_intro: >-
-  L'accord de niveau de service suivant, qui est intégré et fait partie de
+  L'accord de niveau de service suivant, qui est incorporé et fait partie de
   l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
   s'appliquera aux services destinés aux clients entreprises spécifiés dans un
   formulaire de commande pendant l'abonnement applicable. Terme:
@@ -828,13 +828,14 @@ credit_requests_payment_desc: >-
   inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
   les dates et heures précédemment signalées auxquelles le service n'était pas
   disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
-  jours. Les crédits de service ne constituent pas des remboursements, ne
-  peuvent pas être échangés contre un montant en espèces et ne peuvent être
-  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
-  contraire dans la section 4 ci-dessous, les crédits de service constitueront
-  le seul et unique recours du client, et la seule et unique responsabilité de
-  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
+  service, Capgo émettra un crédit sur le compte du client dans un délai de
+  trente (30) jours. Les crédits de service ne constituent pas des
+  remboursements, ne peuvent pas être échangés contre un montant en espèces et
+  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
+  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
+  constitueront le seul et unique recours du client, et la seule et unique
+  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
+  disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -1110,9 +1111,9 @@ no_responsibility_disclaimer_text: >-
   comptables, fiscaux, juridiques ou autres conseillers compétents.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
-  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
+  responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
   qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
-  ou votre incapacité à accéder ou à utiliser le Service.
+  ou votre incapacité d'accéder ou d'utiliser le Service.
 use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
 use_at_your_own_risk_disclaimer_text: >-
   Toutes les informations contenues dans le Service sont fournies « telles
@@ -1328,10 +1329,10 @@ data_policy_gdpr_rights_object: >-
   <strong>S'opposer au traitement de vos données personnelles.</strong> Ce droit
   existe lorsque nous nous appuyons sur un intérêt légitime comme base juridique
   pour notre traitement et qu'il y a quelque chose dans votre situation
-  particulière qui vous incite à vous opposer à notre traitement. traitement de
-  Vos Données Personnelles pour ce motif. Vous avez également le droit de vous
-  opposer lorsque nous traitons vos données personnelles à des fins de marketing
-  direct.
+  particulière qui vous incite à vouloir vous opposer à notre traitement.
+  traitement de Vos Données Personnelles pour ce motif. Vous avez également le
+  droit de vous opposer lorsque nous traitons vos données personnelles à des
+  fins de marketing direct.
 data_policy_gdpr_rights_erasure: >-
   <strong>Demander l'effacement de vos données personnelles.</strong> Vous avez
   le droit de nous demander de supprimer ou de supprimer des données
@@ -1489,10 +1490,10 @@ data_policy_ccpa_disclosure_contract: >-
   fins que l'exécution du contrat.
 data_policy_ccpa_sale_title: Vente de renseignements personnels
 data_policy_ccpa_sale_intro: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
-  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
-  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
-  autres, les informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
+  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
+  le transfert ou toute autre communication orale, écrite ou électronique ou
+  autre, des informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.
@@ -1502,7 +1503,7 @@ data_policy_ccpa_sale_note: >-
   d'informations personnelles ont en fait été vendus, mais reflète notre
   conviction de bonne foi, au meilleur de nos connaissances, que certaines de
   ces informations de la catégorie applicable peuvent être et ont pu être
-  partagées contre valeur en retour. .
+  partagées en échange de valeur. .
 data_policy_ccpa_sale_categories: "Nous pouvons vendre et avoir vendu au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes\_: Catégorie A\_: Identifiants, Catégorie B\_: Catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e). )), Catégorie D : Informations commerciales, Catégorie F : Internet ou autre activité de réseau similaire"
 data_policy_ccpa_share_title: Partage d’informations personnelles
 data_policy_ccpa_share_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
@@ -1643,7 +1644,7 @@ tos_interpretation_text: >-
   définies dans les conditions suivantes. Les définitions suivantes auront la
   même signification qu’elles apparaissent au singulier ou au pluriel.
 tos_definitions_subtitle: Définitions
-tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
+tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
 tos_definition_application: >-
   Application désigne le logiciel fourni par la Société téléchargé par Vous sur
   tout appareil électronique, nommé $1
@@ -1651,7 +1652,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1848,7 +1849,7 @@ tos_user_accounts_text_2: >-
 tos_user_accounts_text_3: >-
   Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
   devez nous informer immédiatement dès que vous avez connaissance de toute
-  violation de la sécurité ou utilisation non autorisée de votre compte.
+  violation de sécurité ou utilisation non autorisée de votre compte.
 tos_user_accounts_text_4: >-
   Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
   personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
@@ -2009,7 +2010,7 @@ tos_contact_us_text: "Si vous avez des questions concernant ces conditions gén�
 tos_contact_us_website: 'En visitant cette page du site :'
 return_policy_title: Politique de retour et de remboursement
 last_updated: 'Dernière mise à jour : 28 janvier 2022'
-thank_you_for_shopping: Merci d'avoir magasiné à 1$.
+thank_you_for_shopping: Merci d'avoir magasiné à $1.
 not_satisfied_policy: >-
   Si, pour une raison quelconque, vous n'êtes pas entièrement satisfait d'un
   achat, nous vous invitons à consulter notre politique de remboursement et de
@@ -2050,7 +2051,7 @@ cancellation_link: 'En visitant cette page de notre site Internet :'
 reimbursement_policy: >-
   Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
   recevons les marchandises retournées. Nous utiliserons le même moyen de
-  paiement que celui que vous avez utilisé pour la Commande, et vous n'aurez à
+  paiement que celui que Vous avez utilisé pour la Commande, et Vous n’aurez à
   payer aucun frais pour ce remboursement.
 conditions_for_returns: Conditions de retour
 return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
@@ -2236,8 +2237,8 @@ eula_your_suggestions_text_1: >-
   de la Société.
 eula_your_suggestions_text_2: >-
   La Société sera libre d'utiliser, de copier, de modifier, de publier ou de
-  redistribuer les Suggestions à toutes fins et de quelque manière que ce soit,
-  sans aucun crédit ni aucune compensation pour vous.
+  redistribuer les Suggestions à quelque fin que ce soit et de quelque manière
+  que ce soit, sans aucun crédit ni aucune compensation pour vous.
 eula_modifications_title: Modifications de la demande
 eula_modifications_text: >-
   La Société se réserve le droit de modifier, suspendre ou interrompre,
@@ -2343,7 +2344,7 @@ eula_limitation_of_liability_text_1: >-
 eula_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2419,4 +2420,4 @@ eula_entire_agreement_text_2: >-
   achat.
 eula_contact_us_title: Contactez-nous
 eula_contact_us_text: "Si vous avez des questions concernant cet accord, vous pouvez nous contacter\_:"
-eula_contact_us_link: 'En visitant cette page du site : 1$'
+eula_contact_us_link: 'En visitant cette page du site : $1'

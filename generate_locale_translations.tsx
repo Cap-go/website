@@ -22,7 +22,7 @@ for (const lang of locales) {
     const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang)))
     for (let j = 0; j < batchKeys.length; j++) {
       const tmp = { [batchKeys[j]]: translations[j] }
-      fs.appendFileSync(newLocalePath, dump(tmp), 'utf8')
+      fs.appendFileSync(newLocalePath, dump(tmp).replaceAll('1$', '$1'), 'utf8')
     }
     await new Promise((resolve) => setTimeout(resolve, 1000))
   }

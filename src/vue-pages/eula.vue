@@ -127,11 +127,10 @@ const domain = config.public.baseUrl
     <p>{{ translations['eula_entire_agreement_text_2'][props.locale] }}</p>
     <h2>{{ translations['eula_contact_us_title'][props.locale] }}</h2>
     <p>{{ translations['eula_contact_us_text'][props.locale] }}</p>
-    <ul>
-      <li>
-        {{ translations['eula_contact_us_link'][props.locale].replace('$1', `<a href="${domain}/#support" rel="external nofollow noopener" target="_blank">${domain}/#support</a>`)
-        }}
-      </li>
-    </ul>
+    <p
+      v-html="
+        translations['eula_contact_us_link'][props.locale].replace('$1', `<a href='${domain}/#support' rel='external nofollow noopener' target='_blank'>${domain}/#support</a>`)
+      "
+    />
   </div>
 </template>
