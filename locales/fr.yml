@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -505,7 +505,7 @@ kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente enviro
 top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
-react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store
+react_native_power_aproximately_1_of_apps_on_google_play_store: "React Native alimente environ 1\_% des applications sur Google Play Store"
 table_of_contents: Table des matières
 latest_from_news: Dernières nouvelles
 capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
@@ -614,7 +614,7 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
@@ -637,12 +637,11 @@ aup_no_email_abuse_desc: >-
   Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
   d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
   ou sollicitations (comme le « spam »), y compris la publicité commerciale et
-  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
-  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
-  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
-  aux messages envoyés par un autre fournisseur de services Internet si ces
-  messages enfreignent cette politique ou la politique d'utilisation acceptable
-  de ce fournisseur.
+  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
+  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
+  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
+  envoyés par un autre fournisseur de services Internet si ces messages violent
+  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -800,7 +799,7 @@ security_closing: >-
 sla_title: Accords de niveau de service
 enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
 sla_intro: >-
-  L'accord de niveau de service suivant, qui est incorporé et fait partie de
+  L'accord de niveau de service suivant, qui est intégré et fait partie de
   l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
   s'appliquera aux services destinés aux clients entreprises spécifiés dans un
   formulaire de commande pendant l'abonnement applicable. Terme:
@@ -916,7 +915,7 @@ high_support_desc: >-
   Problème entraînant une situation dans laquelle des fonctionnalités majeures
   sont affectées et une dégradation significative des performances est
   constatée. Le problème affecte une proportion importante de la base
-  d’utilisateurs et/ou des fonctionnalités majeures de Capgo.
+  d'utilisateurs et/ou des fonctionnalités majeures de Capgo.
 normal_support_title: 3. Normale
 normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
 normal_support_desc: >-
@@ -1111,9 +1110,9 @@ no_responsibility_disclaimer_text: >-
   comptables, fiscaux, juridiques ou autres conseillers compétents.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
-  responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
+  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
   qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
-  ou votre incapacité d'accéder ou d'utiliser le Service.
+  ou votre incapacité à accéder ou à utiliser le Service.
 use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
 use_at_your_own_risk_disclaimer_text: >-
   Toutes les informations contenues dans le Service sont fournies « telles
@@ -1329,10 +1328,10 @@ data_policy_gdpr_rights_object: >-
   <strong>S'opposer au traitement de vos données personnelles.</strong> Ce droit
   existe lorsque nous nous appuyons sur un intérêt légitime comme base juridique
   pour notre traitement et qu'il y a quelque chose dans votre situation
-  particulière qui vous incite à vouloir vous opposer à notre traitement.
-  traitement de Vos Données Personnelles pour ce motif. Vous avez également le
-  droit de vous opposer lorsque nous traitons vos données personnelles à des
-  fins de marketing direct.
+  particulière qui vous incite à vous opposer à notre traitement. traitement de
+  Vos Données Personnelles pour ce motif. Vous avez également le droit de vous
+  opposer lorsque nous traitons vos données personnelles à des fins de marketing
+  direct.
 data_policy_gdpr_rights_erasure: >-
   <strong>Demander l'effacement de vos données personnelles.</strong> Vous avez
   le droit de nous demander de supprimer ou de supprimer des données
@@ -1389,7 +1388,7 @@ data_policy_ccpa_categories_note: >-
   fournies directement.
 data_policy_ccpa_category_a: "<strong>Catégorie A\_: Identifiants.</strong> Exemples\_: Un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou tout autre élément similaire. identifiants. Collecté : Oui."
 data_policy_ccpa_category_b: "<strong>Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e)).</strong> Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse. , numéro de téléphone, numéro de passeport, numéro de permis de conduire ou de carte d'identité d'État, numéro de police d'assurance, éducation, emploi, antécédents professionnels, numéro de compte bancaire, numéro de carte de crédit, numéro de carte de débit ou toute autre information financière, information médicale ou assurance maladie. information. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories. Collecté : Oui."
-data_policy_ccpa_category_c: "<strong>Catégorie\_C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
+data_policy_ccpa_category_c: "<strong>Catégorie C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
 data_policy_ccpa_category_d: "<strong>Catégorie D\_: Informations commerciales.</strong> Exemples\_:\_Documents et historique des produits ou services achetés ou envisagés. Collecté : Oui."
 data_policy_ccpa_category_e: "<strong>Catégorie\_E\_: informations biométriques.</strong> Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou un autre identifiant ou des informations d'identification, telles que des empreintes digitales, des empreintes faciales et des empreintes vocales. scans de l'iris ou de la rétine, frappe au clavier, démarche ou autres modèles physiques, ainsi que données sur le sommeil, la santé ou l'exercice. Collecté : Non."
 data_policy_ccpa_category_f: "<strong>Catégorie F\_: Internet ou autre activité de réseau similaire.</strong> Exemples\_: Interaction avec notre Service ou publicité. Collecté : Oui."
@@ -1413,12 +1412,11 @@ data_policy_ccpa_exclusion_financial: >-
   Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
   Act (FIPA) et le Driver's Privacy Protection Act de 1994.
 data_policy_ccpa_sources_title: Sources de renseignements personnels
-data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_sources_direct: >-
   <strong>Directement de votre part</strong>. Par exemple, à partir des
   formulaires que vous remplissez sur notre Service, des préférences que vous
-  exprimez ou fournissez via notre Service, ou à partir de vos achats sur notre
-  Service.
+  exprimez ou fournissez via notre Service, ou de vos achats sur notre Service.
 data_policy_ccpa_sources_indirect: >-
   <strong>Indirectement de votre part</strong>. Par exemple, en observant Votre
   activité sur notre Service.
@@ -1486,15 +1484,15 @@ data_policy_ccpa_disclosure_note: >-
   divulguées.
 data_policy_ccpa_disclosure_contract: >-
   Lorsque nous divulguons des informations personnelles à des fins commerciales,
-  nous concluons un contrat qui décrit le but et oblige le destinataire à garder
-  ces informations personnelles confidentielles et à ne pas les utiliser à
-  d'autres fins que l'exécution du contrat.
+  nous concluons un contrat qui décrit le but et exige que le destinataire garde
+  ces informations personnelles confidentielles et ne les utilise pas à d'autres
+  fins que l'exécution du contrat.
 data_policy_ccpa_sale_title: Vente de renseignements personnels
 data_policy_ccpa_sale_intro: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
-  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
-  le transfert ou toute autre communication orale, écrite ou électronique ou
-  autre, des informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
+  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
+  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
+  autres, les informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.
@@ -1559,7 +1557,7 @@ data_policy_ccpa_rights_opt_out: >-
   veuillez nous contacter.
 data_policy_ccpa_rights_delete: "<strong>Le droit de supprimer vos données personnelles.</strong> Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
 data_policy_ccpa_rights_delete_transaction: >-
-  Compléter la transaction pour laquelle nous avons collecté les informations
+  Terminer la transaction pour laquelle nous avons collecté les informations
   personnelles, fournir un bien ou un service que vous avez demandé, prendre des
   mesures raisonnablement prévues dans le contexte de notre relation commerciale
   en cours avec vous, ou exécuter autrement notre contrat avec vous.
@@ -1645,7 +1643,7 @@ tos_interpretation_text: >-
   définies dans les conditions suivantes. Les définitions suivantes auront la
   même signification qu’elles apparaissent au singulier ou au pluriel.
 tos_definitions_subtitle: Définitions
-tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
+tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
 tos_definition_application: >-
   Application désigne le logiciel fourni par la Société téléchargé par Vous sur
   tout appareil électronique, nommé $1
@@ -1653,7 +1651,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1804,7 +1802,7 @@ tos_in_app_purchases_text_1: >-
   L'Application peut inclure des achats intégrés qui vous permettent d'acheter
   des produits, des services ou des abonnements.
 tos_in_app_purchases_text_2: >-
-  De plus amples informations sur la manière dont vous pouvez gérer les achats
+  De plus amples informations sur la façon dont vous pouvez gérer les achats
   intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
   générales de l'Application Store ou dans les paramètres d'aide de votre
   appareil.
@@ -1850,7 +1848,7 @@ tos_user_accounts_text_2: >-
 tos_user_accounts_text_3: >-
   Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
   devez nous informer immédiatement dès que vous avez connaissance de toute
-  violation de sécurité ou utilisation non autorisée de votre compte.
+  violation de la sécurité ou utilisation non autorisée de votre compte.
 tos_user_accounts_text_4: >-
   Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
   personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
@@ -2089,7 +2087,7 @@ return_address: |-
 return_shipping_disclaimer: >-
   Nous ne pouvons être tenus responsables des marchandises endommagées ou
   perdues lors du retour. Par conséquent, nous recommandons un service de
-  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
   remboursement sans réception effective des marchandises ou sans preuve de
   livraison de retour reçue.
 gifts: Cadeaux
@@ -2122,3 +2120,303 @@ open_support: Assistance ouverte
 testimonial_title: "Nous avons déployé Capgo en production pour notre base d'utilisateurs de +5000\_!"
 testimonial_highlight: les utilisateurs sont à jour en quelques minutes
 testimonial_description: Utilisateur Capgo depuis 2023
+eula_title: Contrat de licence d'utilisateur final (« Contrat »)
+eula_last_updated: 'Dernière mise à jour : 28 janvier 2022'
+eula_read_carefully: "Veuillez lire attentivement cet accord de licence d'utilisateur final avant de cliquer sur le bouton «\_J'accepte\_», de télécharger ou d'utiliser 1\_$."
+eula_interpretation_title: Interprétation et définitions
+eula_interpretation_subtitle: Interprétation
+eula_interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+eula_definitions_subtitle: Définitions
+eula_definitions_intro: "Aux fins du présent Contrat de licence d’utilisateur final\_:"
+eula_definition_agreement: >-
+  **Contrat** désigne le présent Contrat de licence d'utilisateur final qui
+  constitue l'intégralité de l'accord entre Vous et la Société concernant
+  l'utilisation de l'Application.
+eula_definition_application: >-
+  **Application** désigne le logiciel fourni par la Société que vous avez
+  téléchargé via un compte d'un magasin d'applications sur un appareil, nommé
+  $1.
+eula_definition_application_store: >-
+  **Application Store** désigne le service de distribution numérique exploité et
+  développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
+  par lequel l'Application a été téléchargée sur votre appareil.
+eula_definition_company: >-
+  **Société** (désignée par « la Société », « Nous », « Notre » ou « Notre »
+  dans le présent Accord) fait référence à Digital Shift OU, 6 sepapaja 15510
+  Tallinn.
+eula_definition_content: >-
+  **Contenu** fait référence au contenu tel que du texte, des images ou d'autres
+  informations qui peuvent être publiées, téléchargées, liées ou autrement
+  rendues disponibles par vous, quelle que soit la forme de ce contenu.
+eula_definition_country: "**Pays** fait référence à\_: Estonie"
+eula_definition_device: >-
+  **Appareil** désigne tout appareil pouvant accéder à l'Application tel qu'un
+  ordinateur, un téléphone portable ou une tablette numérique.
+eula_definition_family_sharing: >-
+  **Partage familial/Groupe familial** vous permet de partager des applications
+  téléchargées via la boutique d'applications avec d'autres membres de la
+  famille en leur permettant de visualiser et de télécharger les applications
+  éligibles des autres sur leurs appareils associés.
+eula_definition_third_party_services: >-
+  **Services tiers** désigne tout service ou contenu (y compris les données,
+  informations, applications et autres services de produits) fourni par un tiers
+  qui peut être affiché, inclus ou mis à disposition par l'Application.
+eula_definition_you: >-
+  **Vous** désigne la personne accédant ou utilisant l'Application ou la société
+  ou autre entité juridique au nom de laquelle cette personne accède ou utilise
+  l'Application, le cas échéant.
+eula_acknowledgment_title: Reconnaissance
+eula_acknowledgment_text_1: "En cliquant sur le bouton «\_J'accepte\_», en téléchargeant ou en utilisant l'application, vous acceptez d'être lié par les termes et conditions du présent accord. Si vous n'acceptez pas les termes du présent Contrat, ne cliquez pas sur le bouton « J'accepte », ne téléchargez pas ou n'utilisez pas l'Application."
+eula_acknowledgment_text_2: >-
+  Le présent Accord est un document juridique entre Vous et la Société et il
+  régit votre utilisation de l'Application mise à votre disposition par la
+  Société.
+eula_acknowledgment_text_3: >-
+  Cet accord est conclu entre vous et la société uniquement et non avec
+  l'Application Store. La Société est donc seule responsable de l’Application et
+  de son contenu. Bien que l'Application Store ne soit pas partie au présent
+  Contrat, il a le droit de l'opposer à Vous en tant que tiers bénéficiaire
+  concernant votre utilisation de l'Application.
+eula_acknowledgment_text_4: >-
+  Étant donné que l'Application peut être consultée et utilisée par d'autres
+  utilisateurs via, par exemple, le partage familial/groupe familial ou l'achat
+  en volume, l'utilisation de l'Application par ces utilisateurs est
+  expressément soumise au présent Contrat.
+eula_acknowledgment_text_5: >-
+  L'Application vous est concédée sous licence, et non vendue, par la Société
+  pour une utilisation strictement conforme aux termes du présent Contrat.
+eula_license_title: Licence
+eula_license_scope_subtitle: Portée de la licence
+eula_license_scope_text_1: >-
+  La Société vous accorde une licence révocable, non exclusive, non transférable
+  et limitée pour télécharger, installer et utiliser l'Application en stricte
+  conformité avec les termes du présent Accord.
+eula_license_scope_text_2: >-
+  Vous ne pouvez utiliser l'Application que sur un appareil que vous possédez ou
+  contrôlez et dans la mesure permise par les termes et conditions de
+  l'Application Store.
+eula_license_scope_text_3: >-
+  La licence qui vous est accordée par la Société est uniquement destinée à vos
+  fins personnelles et non commerciales, en stricte conformité avec les termes
+  du présent Contrat.
+eula_license_restrictions_subtitle: Restrictions de licence
+eula_license_restrictions_intro: "Vous acceptez de ne pas et vous ne permettrez pas à d’autres de\_:"
+eula_license_restrictions_1: >-
+  Licence, vendre, louer, céder, distribuer, transmettre, héberger,
+  sous-traiter, divulguer ou exploiter commercialement de toute autre manière
+  l'Application ou mettre l'Application à la disposition de tout tiers.
+eula_license_restrictions_2: "Copiez ou utilisez l'Application à toute fin autre que celle autorisée dans la section «\_Licence\_» ci-dessus."
+eula_license_restrictions_3: >-
+  Modifier, créer des œuvres dérivées, désassembler, déchiffrer, compiler ou
+  procéder à l'ingénierie inverse de toute partie de l'Application.
+eula_license_restrictions_4: >-
+  Supprimer, modifier ou masquer tout avis de propriété (y compris tout avis de
+  droit d'auteur ou de marque) de la Société ou de ses sociétés affiliées,
+  partenaires, fournisseurs ou concédants de licence de l'Application.
+eula_intellectual_property_title: Propriété intellectuelle
+eula_intellectual_property_text_1: >-
+  L'Application, y compris, sans limitation, tous les droits d'auteur, brevets,
+  marques, secrets commerciaux et autres droits de propriété intellectuelle,
+  sont et resteront la propriété unique et exclusive de la Société.
+eula_intellectual_property_text_2: >-
+  La Société ne sera pas tenue de vous indemniser ou de vous défendre en cas de
+  réclamation d'un tiers découlant de ou liée à l'Application. Dans la mesure où
+  la Société est tenue de fournir une indemnisation par la loi applicable, la
+  Société, et non la boutique d'applications, sera seule responsable de
+  l'enquête, de la défense, du règlement et de l'acquittement de toute
+  réclamation selon laquelle l'Application ou votre utilisation de celle-ci
+  enfreint un tiers. droits de propriété intellectuelle.
+eula_your_suggestions_title: Vos suggestions
+eula_your_suggestions_text_1: >-
+  Tous commentaires, idées, améliorations ou suggestions que vous fournissez à
+  la Société concernant l'Application resteront la propriété unique et exclusive
+  de la Société.
+eula_your_suggestions_text_2: >-
+  La Société sera libre d'utiliser, de copier, de modifier, de publier ou de
+  redistribuer les Suggestions à toutes fins et de quelque manière que ce soit,
+  sans aucun crédit ni aucune compensation pour vous.
+eula_modifications_title: Modifications de la demande
+eula_modifications_text: >-
+  La Société se réserve le droit de modifier, suspendre ou interrompre,
+  temporairement ou définitivement, l'Application ou tout service auquel elle se
+  connecte, avec ou sans préavis et sans responsabilité envers Vous.
+eula_updates_subtitle: Mises à jour de l'application
+eula_updates_text_1: >-
+  La Société peut de temps à autre fournir des améliorations ou des
+  améliorations aux caractéristiques/fonctionnalités de l'Application, qui
+  peuvent inclure des correctifs, des corrections de bogues, des mises à jour,
+  des mises à niveau et d'autres modifications.
+eula_updates_text_2: >-
+  Les mises à jour sont susceptibles de modifier ou supprimer certaines
+  fonctionnalités et/ou fonctionnalités de l’Application. Vous acceptez que la
+  Société n'a aucune obligation de (i) fournir des mises à jour, ou (ii) de
+  continuer à vous fournir ou à activer des caractéristiques et/ou
+  fonctionnalités particulières de l'Application.
+eula_updates_text_3: >-
+  Vous acceptez en outre que toutes les mises à jour ou toute autre modification
+  seront (i) considérées comme faisant partie intégrante de l'Application, et
+  (ii) soumises aux termes et conditions du présent Accord.
+eula_maintenance_subtitle: Entretien et assistance
+eula_maintenance_text: >-
+  La Société ne fournit aucune maintenance ni support pour le téléchargement et
+  l'utilisation de l'Application. Dans la mesure où une maintenance ou une
+  assistance est requise par la loi applicable, la Société, et non la boutique
+  d'applications, sera tenue de fournir une telle maintenance ou une telle
+  assistance.
+eula_third_party_services_title: Services tiers
+eula_third_party_services_text_1: >-
+  L'Application peut afficher, inclure ou rendre disponible du contenu tiers (y
+  compris des données, informations, applications et autres produits, services)
+  ou fournir des liens vers des sites Web ou des services tiers.
+eula_third_party_services_text_2: >-
+  Vous reconnaissez et acceptez que la Société ne sera pas responsable des
+  services tiers, y compris de leur exactitude, exhaustivité, actualité,
+  validité, respect des droits d'auteur, légalité, décence, qualité ou tout
+  autre aspect de ceux-ci. La Société n'assume et n'aura aucune responsabilité
+  envers vous ou toute autre personne ou entité pour tout service tiers.
+eula_third_party_services_text_3: >-
+  Vous devez vous conformer aux conditions d’accord des tiers applicables
+  lorsque vous utilisez l’application. Les services tiers et les liens vers
+  ceux-ci sont fournis uniquement à titre de commodité pour vous et vous y
+  accédez et les utilisez entièrement à vos propres risques et sous réserve des
+  conditions générales de ces tiers.
+eula_term_and_termination_title: Durée et résiliation
+eula_term_and_termination_text_1: >-
+  Le présent Contrat restera en vigueur jusqu'à sa résiliation par Vous ou la
+  Société. La Société peut, à sa seule discrétion, à tout moment et pour quelque
+  raison que ce soit, suspendre ou résilier le présent Contrat avec ou sans
+  préavis.
+eula_term_and_termination_text_2: >-
+  Le présent Contrat sera résilié immédiatement, sans préavis de la Société,
+  dans le cas où vous ne respectez pas l'une des dispositions du présent
+  Contrat. Vous pouvez également résilier le présent Contrat en supprimant
+  l'Application et toutes ses copies de votre appareil ou de votre ordinateur.
+eula_term_and_termination_text_3: >-
+  À la résiliation du présent Contrat, vous cesserez toute utilisation de
+  l’Application et supprimerez toutes les copies de l’Application de votre
+  appareil.
+eula_term_and_termination_text_4: >-
+  La résiliation du présent Contrat ne limitera aucun des droits ou recours de
+  la Société en droit ou en équité en cas de violation par Vous (pendant la
+  durée du présent Contrat) de l'une de vos obligations en vertu du présent
+  Contrat.
+eula_indemnification_title: Indemnité
+eula_indemnification_text: "Vous acceptez d'indemniser et de dégager la Société et ses sociétés mères, filiales, sociétés affiliées, dirigeants, employés, agents, partenaires et concédants de licence (le cas échéant) de toute réclamation ou demande, y compris les honoraires d'avocat raisonnables, dus à ou découlant de votre\_: (a) l’utilisation de l’Application\_; (b) violation du présent Accord ou de toute loi ou réglementation\_; ou (c) violation de tout droit d'un tiers."
+eula_no_warranties_title: Aucune garantie
+eula_no_warranties_text_1: >-
+  L'Application vous est fournie « EN L'ÉTAT » et « TEL QUE DISPONIBLE » et avec
+  tous les défauts et défauts sans garantie d'aucune sorte. Dans la mesure
+  permise par la loi applicable, la Société, en son propre nom et au nom de ses
+  sociétés affiliées et de ses concédants de licence et prestataires de services
+  respectifs, décline expressément toute garantie, qu'elle soit expresse,
+  implicite, légale ou autre, en ce qui concerne le Application, y compris
+  toutes les garanties implicites de qualité marchande, d'adéquation à un usage
+  particulier, de titre et de non-contrefaçon, ainsi que les garanties pouvant
+  découler du cours de la transaction, du cours de l'exécution, de l'utilisation
+  ou des pratiques commerciales. Sans limitation de ce qui précède, la Société
+  ne fournit aucune garantie ni engagement et ne fait aucune déclaration de
+  quelque nature que ce soit selon laquelle l'Application répondra à vos
+  exigences, atteindra les résultats escomptés, sera compatible ou fonctionnera
+  avec tout autre logiciel, application, système ou service, fonctionnera sans
+  interruption, répondre à toutes les normes de performance ou de fiabilité ou
+  être exempt d'erreurs ou que toute erreur ou défaut peut ou sera corrigé.
+eula_no_warranties_text_2: "Sans limiter ce qui précède, ni la Société ni aucun de ses fournisseurs ne font aucune déclaration ou garantie de quelque nature que ce soit, expresse ou implicite\_: (i) quant au fonctionnement ou à la disponibilité de l'Application, ou aux informations, au contenu et aux matériaux ou produits. inclus dessus; (ii) que l'Application sera ininterrompue ou exempte d'erreurs\_; (iii) quant à l'exactitude, la fiabilité ou l'actualité de toute information ou contenu fourni via l'Application\_; ou (iv) que l'Application, ses serveurs, le contenu ou les e-mails envoyés depuis ou au nom de la Société sont exempts de virus, scripts, chevaux de Troie, vers, logiciels malveillants, bombes à retardement ou autres composants nuisibles."
+eula_no_warranties_text_3: >-
+  Certaines juridictions n'autorisent pas l'exclusion de certains types de
+  garanties ou de limitations sur les droits statutaires applicables d'un
+  consommateur, de sorte que tout ou partie des exclusions et limitations
+  ci-dessus peuvent ne pas s'appliquer à vous. Mais dans un tel cas, les
+  exclusions et limitations énoncées dans cette section seront appliquées dans
+  toute la mesure applicable en vertu de la loi applicable. Dans la mesure où
+  une garantie existe en vertu de la loi et ne peut être refusée, la Société, et
+  non l'Application Store, sera seule responsable de cette garantie.
+eula_limitation_of_liability_title: Limitation de responsabilité
+eula_limitation_of_liability_text_1: >-
+  Nonobstant tout dommage que vous pourriez subir, l'entière responsabilité de
+  la Société et de l'un de ses fournisseurs en vertu de toute disposition du
+  présent Contrat et votre recours exclusif pour tout ce qui précède seront
+  limités au montant effectivement payé par Vous pour l'Application ou via le
+  Application ou 100 USD si vous n’avez rien acheté via l’application.
+eula_limitation_of_liability_text_2: >-
+  Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
+  ne pourront en aucun cas être tenus responsables de tout dommage spécial,
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  limiter, les dommages pour perte de profits, perte de données ou d'autres
+  informations, en cas d'interruption des activités, de blessures corporelles,
+  de perte de confidentialité découlant de ou liées de quelque manière que ce
+  soit à l'utilisation ou à l'impossibilité d'utiliser l'Application, les
+  logiciels tiers et/ou le matériel tiers utilisés avec l'Application, ou
+  autrement en relation avec toute disposition du présent Contrat), même si la
+  Société ou tout fournisseur a été informé de la possibilité de tels dommages
+  et même si le recours n'atteint pas son objectif essentiel.
+eula_limitation_of_liability_text_3: >-
+  Certains États/juridictions n'autorisent pas l'exclusion ou la limitation des
+  dommages accessoires ou consécutifs, de sorte que la limitation ou l'exclusion
+  ci-dessus peut ne pas s'appliquer à vous.
+eula_limitation_of_liability_text_4: >-
+  Vous comprenez et acceptez expressément que l'Application Store, ses filiales
+  et sociétés affiliées, ainsi que ses concédants de licence ne seront pas
+  responsables envers vous en vertu d'une quelconque théorie de responsabilité
+  pour tout dommage direct, indirect, accidentel, spécial consécutif ou
+  exemplaire qui pourrait être subi par vous, y compris toute perte de données,
+  que l'Application Store ou ses représentants aient ou non été informés ou
+  auraient dû être conscients de la possibilité que de telles pertes
+  surviennent.
+eula_severability_and_waiver_title: Divisibilité et renonciation
+eula_severability_subtitle: Divisibilité
+eula_severability_text: >-
+  Si une disposition du présent Accord est jugée inapplicable ou invalide, cette
+  disposition sera modifiée et interprétée pour atteindre les objectifs de cette
+  disposition dans la plus grande mesure possible en vertu de la loi applicable
+  et les dispositions restantes resteront pleinement en vigueur.
+eula_waiver_subtitle: Renoncer
+eula_waiver_text: >-
+  Sauf dans les cas prévus aux présentes, le fait de ne pas exercer un droit ou
+  d'exiger l'exécution d'une obligation en vertu du présent Accord n'affectera
+  pas la capacité d'une partie à exercer ce droit ou à exiger une telle
+  exécution à tout moment par la suite et la renonciation à une violation ne
+  constituera pas une renonciation à tout manquement ultérieur.
+eula_product_claims_title: Allégations du produit
+eula_product_claims_text: "La Société n'offre aucune garantie concernant l'Application. Dans la mesure où vous avez une réclamation découlant de ou liée à votre utilisation de l'application, la Société, et non la boutique d'applications, est responsable du traitement de ces réclamations, qui peuvent inclure, mais sans s'y limiter\_: (i) toute réclamation en matière de responsabilité du fait des produits. ; (ii) toute réclamation selon laquelle la demande ne se conforme pas à toute exigence légale ou réglementaire applicable\_; et (iii) toute réclamation découlant de la protection des consommateurs ou d'une législation similaire."
+eula_us_legal_compliance_title: Conformité juridique aux États-Unis
+eula_us_legal_compliance_text: >-
+  Vous déclarez et garantissez que (i) vous n'êtes pas situé dans un pays soumis
+  à l'embargo du gouvernement des États-Unis ou qui a été désigné par le
+  gouvernement des États-Unis comme un pays « soutenant le terrorisme », et (ii)
+  vous n'êtes pas répertorié sur n’importe quelle liste du gouvernement des
+  États-Unis de parties interdites ou restreintes.
+eula_changes_title: Modifications apportées à cet accord
+eula_changes_text_1: >-
+  La Société se réserve le droit, à sa seule discrétion, de modifier ou de
+  remplacer le présent Contrat à tout moment. Si une révision est importante,
+  nous fournirons un préavis d'au moins 30 jours avant que les nouvelles
+  conditions n'entrent en vigueur. Ce qui constitue un changement important sera
+  déterminé à la seule discrétion de la Société.
+eula_changes_text_2: >-
+  En continuant à accéder ou à utiliser l'Application après l'entrée en vigueur
+  des révisions, vous acceptez d'être lié par les conditions révisées. Si vous
+  n'acceptez pas les nouvelles conditions, vous n'êtes plus autorisé à utiliser
+  l'application.
+eula_governing_law_title: Loi applicable
+eula_governing_law_text: >-
+  Les lois du pays, à l'exclusion de ses règles de conflits de lois, régissent
+  le présent accord et votre utilisation de l'application. Votre utilisation de
+  l’Application peut également être soumise à d’autres lois locales, étatiques,
+  nationales ou internationales.
+eula_entire_agreement_title: Intégralité de l'accord
+eula_entire_agreement_text_1: >-
+  L'accord constitue l'intégralité de l'accord entre vous et la société
+  concernant votre utilisation de l'application et remplace tous les accords
+  écrits ou oraux antérieurs et contemporains entre vous ou les accords oraux
+  entre vous et la société.
+eula_entire_agreement_text_2: >-
+  Vous pouvez être soumis à des conditions générales supplémentaires qui
+  s'appliquent lorsque vous utilisez ou achetez les services d'autres sociétés,
+  que la société vous fournira au moment d'une telle utilisation ou d'un tel
+  achat.
+eula_contact_us_title: Contactez-nous
+eula_contact_us_text: "Si vous avez des questions concernant cet accord, vous pouvez nous contacter\_:"
+eula_contact_us_link: 'En visitant cette page du site : 1$'

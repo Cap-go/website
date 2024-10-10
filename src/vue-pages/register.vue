@@ -2,10 +2,10 @@
 import { openMessenger } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
+import translations from '@/services/translations'
 import { navigate } from 'astro:transitions/client'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
-import translations from '@/services/translations'
 
 const props = defineProps<{
   locale: Locales
