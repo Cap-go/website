@@ -1,115 +1,88 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
-
-const config = useRuntimeConfig()
-const brand = config.public.brand
-const domain = config.public.baseUrl
+import translations from '@/services/translations'
 
 const props = defineProps<{
   locale: Locales
 }>()
+const config = useRuntimeConfig()
+const brand = config.public.brand
+const domain = config.public.baseUrl
 </script>
 
 <template>
   <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>Return and Refund Policy</h1>
-    <p>Last updated: January 28, 2022</p>
-    <p>Thank you for shopping at {{ brand }}.</p>
+    <h1>{{ translations['return_policy_title'][props.locale] }}</h1>
+    <p>{{ translations['last_updated'][props.locale] }}</p>
+    <p>{{ translations['thank_you_for_shopping'][props.locale].replace('$1', brand) }}</p>
     <p>
-      If, for any reason, You are not completely satisfied with a purchase We invite You to review our policy on refunds and returns. This Return and Refund Policy has been created
-      with the help of the <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank"> Return and Refund Policy Generator</a>.
+      {{ translations['not_satisfied_policy'][props.locale] }}
+      <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">{{ translations['policy_generator'][props.locale] }}</a
+      >.
     </p>
-    <p>The following terms are applicable for any products that You purchased with Us.</p>
-    <h2>Interpretation and Definitions</h2>
-    <h3>Interpretation</h3>
-    <p>
-      The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of
-      whether they appear in singular or in plural.
-    </p>
-    <h3>Definitions</h3>
-    <p>For the purposes of this Return and Refund Policy:</p>
+    <p>{{ translations['terms_applicable'][props.locale] }}</p>
+    <h2>{{ translations['interpretation_and_definitions'][props.locale] }}</h2>
+    <h3>{{ translations['interpretation'][props.locale] }}</h3>
+    <p>{{ translations['interpretation_description'][props.locale] }}</p>
+    <h3>{{ translations['definitions'][props.locale] }}</h3>
+    <p>{{ translations['definitions_purpose_refund'][props.locale] }}</p>
     <ul>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named {{ brand }}</p>
+        <p><strong>Application</strong> {{ translations['application_definition_refund'][props.locale].replace('$1', brand) }}</p>
       </li>
       <li>
-        <p>
-          <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Digital Shift OU,
-          6 sepapaja 15510 Tallinn.
-        </p>
+        <p><strong>Company</strong> {{ translations['company_definition'][props.locale] }}</p>
       </li>
       <li>
-        <p><strong>Goods</strong> refer to the items offered for sale on the Service.</p>
+        <p><strong>Goods</strong> {{ translations['goods_definition'][props.locale] }}</p>
       </li>
       <li>
-        <p><strong>Orders</strong> mean a request by You to purchase Goods from Us.</p>
+        <p><strong>Orders</strong> {{ translations['orders_definition'][props.locale] }}</p>
       </li>
       <li>
-        <p><strong>Service</strong> refers to the Application.</p>
+        <p><strong>Service</strong> {{ translations['service_definition'][props.locale] }}</p>
       </li>
       <li>
-        <p>
-          <strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using
-          the Service, as applicable.
-        </p>
+        <p><strong>You</strong> {{ translations['you_definition'][props.locale] }}</p>
       </li>
     </ul>
-    <h2>Your Order Cancellation Rights</h2>
-    <p>You are entitled to cancel Your Order within 14 days without giving any reason for doing so.</p>
-    <p>
-      The deadline for cancelling an Order is 14 days from the date on which You received the Goods or on which a third party you have appointed, who is not the carrier, takes
-      possession of the product delivered.
-    </p>
-    <p>In order to exercise Your right of cancellation, You must inform Us of your decision by means of a clear statement. You can inform us of your decision by:</p>
+    <h2>{{ translations['order_cancellation_rights'][props.locale] }}</h2>
+    <p>{{ translations['cancellation_period'][props.locale] }}</p>
+    <p>{{ translations['cancellation_deadline'][props.locale] }}</p>
+    <p>{{ translations['how_to_cancel'][props.locale] }}</p>
     <ul>
       <li>
-        By visiting this page on our website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
+        {{ translations['cancellation_link'][props.locale] }} <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
-    <p>
-      We will reimburse You no later than 14 days from the day on which We receive the returned Goods. We will use the same means of payment as You used for the Order, and You will
-      not incur any fees for such reimbursement.
-    </p>
-    <h2>Conditions for Returns</h2>
-    <p>In order for the Goods to be eligible for a return, please make sure that:</p>
+    <p>{{ translations['reimbursement_policy'][props.locale] }}</p>
+    <h2>{{ translations['conditions_for_returns'][props.locale] }}</h2>
+    <p>{{ translations['return_eligibility'][props.locale] }}</p>
     <ul>
-      <li>The Goods were purchased in the last 14 days</li>
+      <li>{{ translations['purchase_timeframe'][props.locale] }}</li>
     </ul>
-    <p>The following Goods cannot be returned:</p>
+    <p>{{ translations['non_returnable_goods'][props.locale] }}</p>
     <ul>
-      <li>The supply of Goods made to Your specifications or clearly personalized.</li>
-      <li>The supply of Goods which according to their nature are not suitable to be returned, deteriorate rapidly or where the date of expiry is over.</li>
-      <li>The supply of Goods which are not suitable for return due to health protection or hygiene reasons and were unsealed after delivery.</li>
-      <li>The supply of Goods which are, after delivery, according to their nature, inseparably mixed with other items.</li>
+      <li>{{ translations['custom_goods'][props.locale] }}</li>
+      <li>{{ translations['perishable_goods'][props.locale] }}</li>
+      <li>{{ translations['unsealed_goods'][props.locale] }}</li>
+      <li>{{ translations['inseparable_goods'][props.locale] }}</li>
     </ul>
-    <p>We reserve the right to refuse returns of any merchandise that does not meet the above return conditions in our sole discretion.</p>
-    <p>Only regular priced Goods may be refunded. Unfortunately, Goods on sale cannot be refunded. This exclusion may not apply to You if it is not permitted by applicable law.</p>
-    <h2>Returning Goods</h2>
-    <p>You are responsible for the cost and risk of returning the Goods to Us. You should send the Goods at the following address:</p>
-    <p>
-      6 sepapaja<br />
-      Tallinn, 15510<br />
-      Estonia
-    </p>
-    <p>
-      We cannot be held responsible for Goods damaged or lost in return shipment. Therefore, We recommend an insured and trackable mail service. We are unable to issue a refund
-      without actual receipt of the Goods or proof of received return delivery.
-    </p>
-    <h2>Gifts</h2>
-    <p>
-      If the Goods were marked as a gift when purchased and then shipped directly to you, You'll receive a gift credit for the value of your return. Once the returned product is
-      received, a gift certificate will be mailed to You.
-    </p>
-    <p>
-      If the Goods weren't marked as a gift when purchased, or the gift giver had the Order shipped to themselves to give it to You later, We will send the refund to the gift
-      giver.
-    </p>
-    <h3>Contact Us</h3>
-    <p>If you have any questions about our Returns and Refunds Policy, please contact us:</p>
+    <p>{{ translations['right_to_refuse'][props.locale] }}</p>
+    <p>{{ translations['sale_items_policy'][props.locale] }}</p>
+    <h2>{{ translations['returning_goods'][props.locale] }}</h2>
+    <p>{{ translations['return_responsibility'][props.locale] }}</p>
+    <p>{{ translations['return_address'][props.locale] }}</p>
+    <p>{{ translations['return_shipping_disclaimer'][props.locale] }}</p>
+    <h2>{{ translations['gifts'][props.locale] }}</h2>
+    <p>{{ translations['gift_return_policy'][props.locale] }}</p>
+    <p>{{ translations['non_gift_return_policy'][props.locale] }}</p>
+    <h3>{{ translations['contact_us'][props.locale] }}</h3>
+    <p>{{ translations['questions_about_policy'][props.locale] }}</p>
     <ul>
       <li>
-        By visiting this page on the website: <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
+        {{ translations['contact_link'][props.locale] }} <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
   </div>

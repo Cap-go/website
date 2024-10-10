@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -436,7 +436,7 @@ npm_run_lint_passes: >-
 documenting_apis: Documenter les API
 importance_of_documenting_apis: >-
   Il est important de documenter toutes les API publiques et nous souhaitons le
-  faire conformément au code. Cela permet de garantir que le code et la
+  faire en cohérence avec le code. Cela permet de garantir que le code et la
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
@@ -614,7 +614,7 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
@@ -637,11 +637,12 @@ aup_no_email_abuse_desc: >-
   Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
   d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
   ou sollicitations (comme le « spam »), y compris la publicité commerciale et
-  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
-  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
-  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
-  envoyés par un autre fournisseur de services Internet si ces messages violent
-  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
+  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
+  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
+  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
+  aux messages envoyés par un autre fournisseur de services Internet si ces
+  messages enfreignent cette politique ou la politique d'utilisation acceptable
+  de ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -828,14 +829,13 @@ credit_requests_payment_desc: >-
   inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
   les dates et heures précédemment signalées auxquelles le service n'était pas
   disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans un délai de
-  trente (30) jours. Les crédits de service ne constituent pas des
-  remboursements, ne peuvent pas être échangés contre un montant en espèces et
-  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
-  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
-  constitueront le seul et unique recours du client, et la seule et unique
-  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
-  disponibilité.
+  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
+  jours. Les crédits de service ne constituent pas des remboursements, ne
+  peuvent pas être échangés contre un montant en espèces et ne peuvent être
+  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
+  contraire dans la section 4 ci-dessous, les crédits de service constitueront
+  le seul et unique recours du client, et la seule et unique responsabilité de
+  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -1024,9 +1024,9 @@ interpretation_text: >-
 definitions_title: Définitions
 definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
 company_definition: >-
-  La <strong>Société</strong> (désignée par « la Société », « Nous », « Notre »
-  ou « Notre » dans le présent Avis de non-responsabilité) fait référence à
-  Digital Shift OU, 6 sepapaja, 15510 Tallinn.
+  La <strong>Société</strong> (appelée « la Société », « Nous », « Notre » ou «
+  Notre » dans cette clause de non-responsabilité) fait référence à Digital
+  Shift OU, 6 sepapaja, 15510 Tallinn.
 service_definition: <strong>Service</strong> fait référence à l'Application.
 you_definition: >-
   <strong>Vous</strong> désigne la personne accédant au Service, ou la société
@@ -1108,7 +1108,7 @@ no_responsibility_disclaimer_text: >-
   n'est pas engagée par les présentes à fournir des conseils et services
   juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
   être utilisé comme substitut à la consultation de conseillers professionnels
-  comptables, fiscaux, juridiques ou autres conseillers compétents.
+  compétents en matière comptable, fiscale, juridique ou autre.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
   responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
@@ -1389,7 +1389,7 @@ data_policy_ccpa_categories_note: >-
   fournies directement.
 data_policy_ccpa_category_a: "<strong>Catégorie A\_: Identifiants.</strong> Exemples\_: Un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou tout autre élément similaire. identifiants. Collecté : Oui."
 data_policy_ccpa_category_b: "<strong>Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e)).</strong> Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse. , numéro de téléphone, numéro de passeport, numéro de permis de conduire ou de carte d'identité d'État, numéro de police d'assurance, éducation, emploi, antécédents professionnels, numéro de compte bancaire, numéro de carte de crédit, numéro de carte de débit ou toute autre information financière, information médicale ou assurance maladie. information. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories. Collecté : Oui."
-data_policy_ccpa_category_c: "<strong>Catégorie\_C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
+data_policy_ccpa_category_c: "<strong>Catégorie C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
 data_policy_ccpa_category_d: "<strong>Catégorie D\_: Informations commerciales.</strong> Exemples\_:\_Documents et historique des produits ou services achetés ou envisagés. Collecté : Oui."
 data_policy_ccpa_category_e: "<strong>Catégorie\_E\_: informations biométriques.</strong> Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou un autre identifiant ou des informations d'identification, telles que des empreintes digitales, des empreintes faciales et des empreintes vocales. scans de l'iris ou de la rétine, frappe au clavier, démarche ou autres modèles physiques, ainsi que données sur le sommeil, la santé ou l'exercice. Collecté : Non."
 data_policy_ccpa_category_f: "<strong>Catégorie F\_: Internet ou autre activité de réseau similaire.</strong> Exemples\_: Interaction avec notre Service ou publicité. Collecté : Oui."
@@ -1413,11 +1413,12 @@ data_policy_ccpa_exclusion_financial: >-
   Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
   Act (FIPA) et le Driver's Privacy Protection Act de 1994.
 data_policy_ccpa_sources_title: Sources de renseignements personnels
-data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_sources_direct: >-
   <strong>Directement de votre part</strong>. Par exemple, à partir des
   formulaires que vous remplissez sur notre Service, des préférences que vous
-  exprimez ou fournissez via notre Service, ou de vos achats sur notre Service.
+  exprimez ou fournissez via notre Service, ou à partir de vos achats sur notre
+  Service.
 data_policy_ccpa_sources_indirect: >-
   <strong>Indirectement de votre part</strong>. Par exemple, en observant Votre
   activité sur notre Service.
@@ -1470,7 +1471,7 @@ data_policy_ccpa_use_update: >-
 data_policy_ccpa_disclosure_title: >-
   Divulgation de renseignements personnels à des fins commerciales ou à des fins
   commerciales
-data_policy_ccpa_disclosure_intro: "Nous pouvons utiliser ou divulguer et avoir utilisé ou divulgué au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes à des fins professionnelles ou commerciales\_:"
+data_policy_ccpa_disclosure_intro: "Nous pouvons utiliser ou divulguer et pouvons avoir utilisé ou divulgué au cours des douze (12) derniers mois les catégories suivantes de renseignements personnels à des fins professionnelles ou commerciales\_:"
 data_policy_ccpa_disclosure_categories: >-
   Catégorie A : Identifiants, Catégorie B : Catégories d'informations
   personnelles répertoriées dans la loi californienne sur les dossiers clients
@@ -1490,10 +1491,10 @@ data_policy_ccpa_disclosure_contract: >-
   fins que l'exécution du contrat.
 data_policy_ccpa_sale_title: Vente de renseignements personnels
 data_policy_ccpa_sale_intro: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
-  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
-  le transfert ou toute autre communication orale, écrite ou électronique ou
-  autre, des informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
+  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
+  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
+  autres, les informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.
@@ -1503,7 +1504,7 @@ data_policy_ccpa_sale_note: >-
   d'informations personnelles ont en fait été vendus, mais reflète notre
   conviction de bonne foi, au meilleur de nos connaissances, que certaines de
   ces informations de la catégorie applicable peuvent être et ont pu être
-  partagées contre valeur en retour. .
+  partagées en échange de valeur. .
 data_policy_ccpa_sale_categories: "Nous pouvons vendre et avoir vendu au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes\_: Catégorie A\_: Identifiants, Catégorie B\_: Catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e). )), Catégorie D : Informations commerciales, Catégorie F : Internet ou autre activité de réseau similaire"
 data_policy_ccpa_share_title: Partage d’informations personnelles
 data_policy_ccpa_share_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
@@ -1558,7 +1559,7 @@ data_policy_ccpa_rights_opt_out: >-
   veuillez nous contacter.
 data_policy_ccpa_rights_delete: "<strong>Le droit de supprimer vos données personnelles.</strong> Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
 data_policy_ccpa_rights_delete_transaction: >-
-  Terminer la transaction pour laquelle nous avons collecté les informations
+  Compléter la transaction pour laquelle nous avons collecté les informations
   personnelles, fournir un bien ou un service que vous avez demandé, prendre des
   mesures raisonnablement prévues dans le contexte de notre relation commerciale
   en cours avec vous, ou exécuter autrement notre contrat avec vous.
@@ -1631,7 +1632,7 @@ data_policy_ccpa_exercising_rights_portability: >-
   Pour les demandes de portabilité des données, nous sélectionnerons un format
   pour fournir vos informations personnelles qui soit facilement utilisable et
   devrait vous permettre de transmettre les informations d'une entité à une
-  autre entité sans entrave.
+  autre sans entrave.
 tos_title: Termes et conditions
 tos_last_updated: 'Dernière mise à jour : 12 janvier 2022'
 tos_please_read: >-
@@ -1644,7 +1645,7 @@ tos_interpretation_text: >-
   définies dans les conditions suivantes. Les définitions suivantes auront la
   même signification qu’elles apparaissent au singulier ou au pluriel.
 tos_definitions_subtitle: Définitions
-tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
+tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
 tos_definition_application: >-
   Application désigne le logiciel fourni par la Société téléchargé par Vous sur
   tout appareil électronique, nommé $1
@@ -1803,7 +1804,7 @@ tos_in_app_purchases_text_1: >-
   L'Application peut inclure des achats intégrés qui vous permettent d'acheter
   des produits, des services ou des abonnements.
 tos_in_app_purchases_text_2: >-
-  De plus amples informations sur la façon dont vous pouvez gérer les achats
+  De plus amples informations sur la manière dont vous pouvez gérer les achats
   intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
   générales de l'Application Store ou dans les paramètres d'aide de votre
   appareil.
@@ -2008,3 +2009,99 @@ tos_changes_text_2: >-
 tos_contact_us_title: Contactez-nous
 tos_contact_us_text: "Si vous avez des questions concernant ces conditions générales, vous pouvez nous contacter\_:"
 tos_contact_us_website: 'En visitant cette page du site :'
+return_policy_title: Politique de retour et de remboursement
+last_updated: 'Dernière mise à jour : 28 janvier 2022'
+thank_you_for_shopping: Merci d'avoir magasiné à 1$.
+not_satisfied_policy: >-
+  Si, pour une raison quelconque, vous n'êtes pas entièrement satisfait d'un
+  achat, nous vous invitons à consulter notre politique de remboursement et de
+  retour. Cette politique de retour et de remboursement a été créée avec l'aide
+  du
+policy_generator: Générateur de politique de retour et de remboursement
+terms_applicable: >-
+  Les conditions suivantes s'appliquent à tous les produits que vous avez
+  achetés auprès de nous.
+interpretation_and_definitions: Interprétation et définitions
+interpretation: Interprétation
+interpretation_description: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+definitions: Définitions
+definitions_purpose_refund: "Aux fins de cette politique de retour et de remboursement\_:"
+application_definition_refund: >-
+  Application désigne le logiciel fourni par la Société téléchargé par Vous sur
+  tout appareil électronique, nommé $1
+goods_definition: Les Biens désignent les articles proposés à la vente sur le Service.
+orders_definition: >-
+  Les commandes désignent une demande de votre part d’acheter des marchandises
+  chez nous.
+order_cancellation_rights: Vos droits d'annulation de commande
+cancellation_period: >-
+  Vous avez le droit d'annuler votre commande dans un délai de 14 jours sans
+  donner de raison.
+cancellation_deadline: >-
+  Le délai d'annulation d'une Commande est de 14 jours à compter de la date à
+  laquelle Vous avez reçu la Marchandise ou à laquelle un tiers que vous aurez
+  désigné, autre que le transporteur, prend possession du produit livré.
+how_to_cancel: >-
+  Afin d'exercer Votre droit de rétractation, Vous devez Nous informer de votre
+  décision au moyen d'une déclaration claire. Vous pouvez nous informer de votre
+  décision par :
+cancellation_link: 'En visitant cette page de notre site Internet :'
+reimbursement_policy: >-
+  Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
+  recevons les marchandises retournées. Nous utiliserons le même moyen de
+  paiement que celui que Vous avez utilisé pour la Commande, et Vous n’aurez à
+  payer aucun frais pour ce remboursement.
+conditions_for_returns: Conditions de retour
+return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
+purchase_timeframe: Les marchandises ont été achetées au cours des 14 derniers jours
+non_returnable_goods: "Les marchandises suivantes ne peuvent pas être retournées\_:"
+custom_goods: >-
+  La fourniture de Biens confectionnés selon Vos spécifications ou nettement
+  personnalisés.
+perishable_goods: >-
+  La fourniture de Biens qui, en raison de leur nature, ne sont pas aptes à être
+  retournés, se détériorent rapidement ou dont la date de péremption est
+  dépassée.
+unsealed_goods: >-
+  La fourniture de marchandises qui ne peuvent pas être retournées pour des
+  raisons de protection de la santé ou d'hygiène et qui ont été descellées après
+  la livraison.
+inseparable_goods: >-
+  La fourniture de Biens qui, après livraison, selon leur nature, sont
+  indissociablement mélangés à d'autres articles.
+right_to_refuse: >-
+  Nous nous réservons le droit de refuser le retour de toute marchandise ne
+  répondant pas aux conditions de retour ci-dessus, à notre seule discrétion.
+sale_items_policy: >-
+  Seules les marchandises à prix régulier peuvent être remboursées.
+  Malheureusement, les marchandises en vente ne peuvent être remboursées. Cette
+  exclusion peut ne pas s'appliquer à vous si elle n'est pas autorisée par la
+  loi applicable.
+returning_goods: Retour de marchandises
+return_responsibility: "Vous êtes responsable du coût et du risque liés au retour des marchandises. Vous devez envoyer les marchandises à l'adresse suivante\_:"
+return_address: |-
+  6 septembre
+  Tallinn, 15510
+  Estonie
+return_shipping_disclaimer: >-
+  Nous ne pouvons être tenus responsables des marchandises endommagées ou
+  perdues lors du retour. Par conséquent, nous recommandons un service de
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
+  remboursement sans réception effective des marchandises ou sans preuve de
+  livraison de retour reçue.
+gifts: Cadeaux
+gift_return_policy: >-
+  Si les marchandises ont été marquées comme cadeau lors de l'achat et vous ont
+  ensuite été expédiées directement, vous recevrez un crédit cadeau
+  correspondant à la valeur de votre retour. Une fois le produit retourné reçu,
+  un chèque-cadeau vous sera envoyé par courrier.
+non_gift_return_policy: >-
+  Si les marchandises n'ont pas été marquées comme un cadeau lors de l'achat, ou
+  si le donateur du cadeau s'est fait expédier la commande pour vous l'offrir
+  plus tard, nous enverrons le remboursement au donateur du cadeau.
+contact_us: Contactez-nous
+questions_about_policy: "Si vous avez des questions concernant notre politique de retours et de remboursements, veuillez nous contacter\_:"
+contact_link: 'En visitant cette page du site :'
