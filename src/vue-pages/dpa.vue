@@ -31,7 +31,8 @@ const domain = config.public.baseUrl
     <p>{{ translations['dpa_privacy_security_7'][props.locale] }}</p>
     <p>
       {{ translations['dpa_privacy_security_8'][props.locale] }}
-      <a href="https://www.apple.com/legal/privacy/en-ww/" rel="external nofollow noopener" target="_blank">{{ translations['data_policy'][props.locale] }}</a>.
+      <a href="https://www.apple.com/legal/privacy/en-ww/" rel="external nofollow noopener" target="_blank">{{ translations['data_policy_title'][props.locale] }}</a
+      >.
     </p>
     <h2>{{ translations['dpa_security_measures_title'][props.locale] }}</h2>
     <p>{{ translations['dpa_security_measures_1'][props.locale] }}</p>
@@ -75,7 +76,7 @@ const domain = config.public.baseUrl
     <p>{{ translations['dpa_contact_1'][props.locale] }}</p>
     <ul>
       <li>
-        {{ translations['dpa_contact_2'][props.locale] }} 
+        {{ translations['dpa_contact_2'][props.locale] }}
         <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
