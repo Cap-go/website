@@ -1,8 +1,8 @@
+import { webJson } from '@/services/responses'
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async ({ params, request }) => {
-  
-  // remove isActive if you also want to include past sponsors 
+export const GET: APIRoute = async () => {
+  // remove isActive if you also want to include past sponsors
   const query = `
     query {
       riderx: user(login: "riderx") {
@@ -65,16 +65,13 @@ export const GET: APIRoute = async ({ params, request }) => {
       },
       body: JSON.stringify({ query }),
     })
-
     const data = await response.json()
-
     if (data.errors) {
       console.error('GraphQL Errors:', data.errors)
-      return new Response(JSON.stringify([]), { status: 500 })
+      return webJson([], 500)
     }
-
     const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
-    console.log('allSponsors', allSponsors)
+    // console.log('allSponsors', allSponsors)
     const calculateTier = (sponsorship: any) => {
       const tier = sponsorship.tier.monthlyPriceInDollars
       if (tier >= 100) {
@@ -87,27 +84,19 @@ export const GET: APIRoute = async ({ params, request }) => {
         return 'baker'
       }
     }
-
-    const sponsors = allSponsors
-      .map((sponsorship) => {
-        const sponsor = sponsorship.sponsorEntity
-        return {
-          id: sponsor.login,
-          name: sponsor.name || sponsor.login,
-          imageUrl: sponsor.avatarUrl,
-          url: sponsor.url,
-          tier: calculateTier(sponsorship)
-        }
-      })
-
-    return new Response(JSON.stringify(sponsors), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const sponsors = allSponsors.map((sponsorship) => {
+      const sponsor = sponsorship.sponsorEntity
+      return {
+        id: sponsor.login,
+        name: sponsor.name || sponsor.login,
+        imageUrl: sponsor.avatarUrl,
+        url: sponsor.url,
+        tier: calculateTier(sponsorship),
+      }
     })
+    return webJson(sponsors)
   } catch (error) {
     console.error('Error fetching sponsors:', error)
-    return new Response(JSON.stringify([]), { status: 500 })
+    return webJson([], 500)
   }
 }

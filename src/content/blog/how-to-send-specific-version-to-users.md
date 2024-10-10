@@ -10,6 +10,7 @@ head_image: "/capgo_select_update.webp"
 head_image_alt: TestFlight alternative illustration
 tag: alternatives
 published: true
+locale: en
 next_blog: ""
 
 ---

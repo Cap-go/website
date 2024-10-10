@@ -10,6 +10,7 @@ head_image: "/cross-platform-app-dev-2024.webp"
 head_image_alt: Cross-platform mobile app development 
 tag: cross-platform
 published: true
+locale: en
 next_blog: "top-cross-platform-frameworks-compared-2024"
 
 ---

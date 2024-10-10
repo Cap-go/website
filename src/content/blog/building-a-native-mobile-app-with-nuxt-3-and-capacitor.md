@@ -10,6 +10,7 @@ head_image: "/nuxt_capgo.webp"
 head_image_alt: Nuxt 3 and Capgo illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---

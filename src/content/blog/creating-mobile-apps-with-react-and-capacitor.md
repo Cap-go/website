@@ -10,6 +10,7 @@ head_image: "/react_capacitor.webp"
 head_image_alt: React.js and Capacitor illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "implementing-live-updates-in-your-react-capacitor-app"
 
 ---

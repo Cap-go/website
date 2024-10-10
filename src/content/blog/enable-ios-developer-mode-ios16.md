@@ -10,6 +10,7 @@ head_image: "/enable-ios-developer-mode-ios16.webp"
 head_image_alt: "Enabling iOS Developer Mode on iPhone"
 tag: iOS
 published: true
+locale: en
 next_blog: ""
 ---
 

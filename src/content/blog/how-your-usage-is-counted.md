@@ -10,6 +10,7 @@ head_image: "/usage_explained.webp"
 head_image_alt: Capgo usage system explained
 tag: Solution
 published: true
+locale: en
 next_blog: ""
 
 ---

@@ -10,6 +10,7 @@ head_image: "/capgo-birth-story.webp"
 head_image_alt: "A visual representation of Capgo's evolution from idea to product"
 tag: development
 published: true
+locale: en
 next_blog: ""
 
 ---

@@ -10,6 +10,7 @@ head_image: "/quasar_capgo.webp"
 head_image_alt: Quasar and Capgo illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
 
 ---

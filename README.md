@@ -1,6 +1,6 @@
 # Capgo website
 
- <a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
+<a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
 [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.com/invite/VnYRvBfgA6)
 <a href="https://discord.com/invite/VnYRvBfgA6"><img src="https://img.shields.io/discord/912707985829163099?color=%237289DA&label=Discord" alt="Discord">
 [![npm](https://img.shields.io/npm/dm/@capgo/website)](https://www.npmjs.com/package/@capgo/website)
@@ -18,7 +18,7 @@
 
 <h2><a href="https://capgo.app/consulting/">Hire a Capacitor consultant</a></h2>
 
-This is the source code for the Capgo website. It is built using [Astro](https://astro.build/), a new static site generator.
+This is the source code for the Capgo website, built with [Astro](https://astro.build/).
 
 ## Development
 
@@ -36,20 +36,6 @@ The website is deployed to [Cloudflare Pages](https://pages.cloudflare.com/). Th
 ## License
 
 The source code is licensed under the GNU AFFERO GENERAL PUBLIC license. See the [LICENSE](LICENSE) file for details.
-
-# Astro Starter Kit: Basics
-
-```
-npm create astro@latest -- --template basics
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg/)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics/)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg/)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics/)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg/)](https://codespaces.new/withastro/astro/?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554/)
 
 ## 🚀 Project Structure
 
@@ -87,7 +73,3 @@ All commands are run from the root of the project, from a terminal:
 | `bun run preview`         | Preview your build locally, before deploying     |
 | `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `bun run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build/) or jump into our [Discord server](https://astro.build/chat/).

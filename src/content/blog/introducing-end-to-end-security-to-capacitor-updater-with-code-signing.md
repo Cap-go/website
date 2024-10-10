@@ -10,6 +10,7 @@ head_image: "/secure_upload.webp"
 head_image_alt: Secure upload Capgo
 tag: Solution
 published: true
+locale: en
 next_blog: ""
 
 ---

@@ -9,6 +9,7 @@ head_image: "/revenuecat_iap.webp"
 head_image_alt: Revenue cat in app purchases
 tag: Tutorial
 published: true
+locale: en
 next_blog: ""
 
 ---

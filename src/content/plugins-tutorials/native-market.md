@@ -1,5 +1,6 @@
 ---
 published: true
+locale: en
 ---
 
 # @capgo/native-market Package Tutorial

@@ -11,6 +11,7 @@ head_image: "/sveltekit_capacitor.webp"
 head_image_alt: SvelteKit and Capgo illustration
 tag: Tutorial
 published: true
+locale: en
 next_blog: "updating-your-capacitor-apps-seamlessly-with-capacitor-updater"
 
 ---

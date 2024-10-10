@@ -10,6 +10,7 @@ head_image: "/what-is-cordova-phone-gap.webp"
 head_image_alt: "Diagram explaining the difference between hybrid and native apps."
 tag: cordova
 published: true
+locale: en
 next_blog: ""
 ---
 

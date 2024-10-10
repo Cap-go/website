@@ -10,6 +10,7 @@ head_image: "/capgo_banner.webp"
 head_image_alt: capgo banner
 tag: SOLUTION
 published: true
+locale: en
 next_blog: ""
 
 ---

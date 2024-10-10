@@ -10,6 +10,7 @@ head_image: "/appflow_alt.webp"
 head_image_alt: Capawesome Cloud alternative illustration
 tag: Alternatives
 published: false
+locale: en
 next_blog: ""
 
 ---

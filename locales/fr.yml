@@ -1,0 +1,2629 @@
+home: Maison
+pricing: Tarifs
+pricing_description: >-
+  Avancez en toute confiance. Capgo est la plateforme cloud d'entreprise pour
+  les applications de condensateurs.
+blog: Blogue
+documentation: Documentation
+login: Se connecter
+register: Registre
+solutions: Solutions
+support: Soutien
+making_world_better: Rendre le monde meilleur en créant des applications élégantes.
+carbon_removal: 5 % de nos revenus sont consacrés à l'élimination du carbone.
+open_source: 100% open source
+built_with_supabase: Construit avec Supabase
+build_in_public_on_twitter: Construire en public sur Twitter
+footer: Pied de page
+company: Entreprise
+legal: Légal
+copyright: Tous droits réservés.
+trust: Confiance
+app_mobile: Application mobile
+plugins: Plugins
+disclaimer: Clause de non-responsabilité
+read_our_disclaimer: Lisez notre clause de non-responsabilité
+plugins_description: >-
+  Capgo propose plusieurs plugins pour vous aider à créer votre application plus
+  rapidement et mieux.
+awesome_capacitor: Condensateur génial
+top_app_by_framework: Meilleure application par framework
+community: Communauté
+guides: Guides
+status: Statut
+chat: Chat
+sponsor: Parrainage
+about: À propos
+imprint: Imprimer
+imprint_description: Retrouvez les infos de la société à $1 ici
+jobs: Emplois
+contributing: Contribuer
+contributing_description: Comment contribuer à l'open source Capgo
+consulting_description: >-
+  Avancez en toute confiance. Capgo offre plusieurs niveaux de protection pour
+  protéger votre propriété intellectuelle et vos données sensibles.
+security: Sécurité
+consulting: Consultant
+affiliate: Filiale
+privacy: Confidentialité
+support_policy: Politique d'assistance
+read_our_support_policy: Lire notre politique d'assistance
+privacy_policy: politique de confidentialité
+read_our_privacy_policy: Lisez notre politique de confidentialité
+sla: Accord de niveau de service
+sla_policy: Politique SLA
+read_our_sla_policy: Lisez notre politique SLA
+security_policy: Politique de sécurité
+read_our_security_policy: Lisez notre politique de sécurité
+return_policy: Politique de retour
+read_our_return_policy: Lisez notre politique de retour
+aup: Politique d'utilisation acceptable
+read_our_aup: Lisez notre politique d'utilisation acceptable
+Capacitor_Sanbox_App: Application Condensateur Sanbox
+Capacitor_Sanbox_App_description: >-
+  Essayez chaque version de votre application directement dans l'application
+  sandbox en une seconde. Gérez la mise à jour OTA de votre application de
+  condensateur depuis votre poche, disponible sur IOS et Android.
+eula: Contrat de licence utilisateur final
+read_our_eula: Lisez notre contrat de licence utilisateur final
+data_processing_agreement: Accord de traitement des données
+read_our_data_processing_agreement: Lire notre accord de traitement des données
+terms: Conditions d'utilisation
+read_our_terms_of_service: Lisez nos conditions d'utilisation
+security_txt: Sécurité.txt
+dp: Politique de données
+dpa: Accord de protection des données
+instant_updates_for_capacitor: Mises à jour instantanées pour le condensateur
+ship_updates_fixes_changes_and_features: >-
+  Expédier des mises à jour, des correctifs, des modifications et des
+  fonctionnalités
+within_minutes: En quelques minutes
+no_credit_card_required: Aucune carte de crédit requise
+try_for_free: Essayez gratuitement
+instant_updates: Mises à jour instantanées
+reach_users_now_not_weeks_later: Atteignez les utilisateurs maintenant, pas des semaines plus tard.
+app_store_compliant: Conforme à l'App Store
+100_compliant_with_apple_and_android_requirements: "100\_% conforme aux exigences Apple et Android"
+end_to_end_encryption: Chiffrement de bout en bout
+only_your_users_can_decrypt_your_updates_no_one_else: Seuls vos utilisateurs peuvent décrypter vos mises à jour, personne d'autre.
+no_more_wait: Plus besoin d'attendre
+for_apple_and_google_app_updates_distribution: Pour la distribution des mises à jour des applications Apple et Google
+youre_in_good_company: Vous êtes en bonne compagnie.
+capgo_enables_development_teams_at_some_of_the_most_innovative_companies: >-
+  Capgo permet aux équipes de développement de certaines des entreprises les
+  plus innovantes.
+apps_with_20m_users: "Applications avec plus de 20\_millions d'utilisateurs"
+use_capgo: Utiliser Capgo
+our_numbers_are_shared_transparently_since_december_2021: Nos chiffres sont partagés en toute transparence depuis décembre 2021.
+last_update: Dernière mise à jour
+updates_delivered: Mises à jour livrées
+all_around_the_globe: Partout dans le monde
+apps: Applications
+using_us_in_production: Nous utiliser en production
+stars_in_github: Étoiles dans GitHub
+how_it_work: Comment ça marche ?
+ship_your_first_update_in_less_than_15_minutes: "Expédiez votre première mise à jour en moins de 15 minutes\_!"
+install_the_plugin: Installez le plug-in
+send_your_first_update: Envoyez votre première mise à jour
+build_your_app_as_usual_then_send_with_the_cli: Créez votre application comme d'habitude, puis envoyez-la avec la CLI
+get_the_update: Obtenez la mise à jour
+open_the_app_it_update_in_the_background: Ouvrez l'application, elle se met à jour en arrière-plan
+start_now: Commencez maintenant
+faster_releases: Des versions plus rapides
+integration: Intégration
+goodbye_bugs: "Modifications instantanées, corrections de bugs Pas besoin d'attendre les retéléchargements d'applications\_! Avec une seule commande, les utilisateurs peuvent rapidement voir les corrections de bugs en action. Dites adieu aux retards frustrants."
+manage_updates_effortlessly: Gérez les mises à jour sans effort
+user_assignment: Affectation des utilisateurs
+easily_assign_users_and_send_the_latest_update_to_your_private_or_public_testers: >-
+  Attribuez facilement des utilisateurs et envoyez la dernière mise à jour à vos
+  testeurs privés ou publics.
+seamless_deployment_process: Processus de déploiement transparent
+when_your_update_is_ready_deploy_it_seamlessly_to_all_your_users: >-
+  Lorsque votre mise à jour est prête, déployez-la de manière transparente
+  auprès de tous vos utilisateurs.
+simple_configuration_management: Gestion simple des configurations
+manage_all_your_configurations_conveniently_through_our_user_friendly_web_interface: >-
+  Gérez facilement toutes vos configurations grâce à notre interface Web
+  conviviale.
+try_risk_free_with_a_15_days_free_trial: Essayez sans risque avec un essai gratuit de 15 jours
+get_started: Commencer
+they_love_capgo: Ils adorent Capgo.
+flexible_organization_management_for_your_team: Gestion organisationnelle flexible pour votre équipe
+create_manage_organizations_with_ease: >-
+  Créez et gérez facilement plusieurs organisations, en attribuant des droits
+  spécifiques à chaque utilisateur. Capgo fournit des outils puissants pour
+  garder votre équipe organisée et efficace.
+multiple_organizations: Plusieurs organisations
+manage_various_teams: Gérer diverses équipes
+create_oversee_organizations_from_single_account: >-
+  Créez et supervisez plusieurs organisations à partir d'un seul compte, en
+  rationalisant votre flux de travail et en améliorant la productivité.
+granular_permissions: Autorisations granulaires
+control_access_levels: Contrôler les niveaux d'accès
+assign_specific_rights_and_access_levels_to_each_user_within_your_organizations: >-
+  Attribuez des droits et des niveaux d'accès spécifiques à chaque utilisateur
+  au sein de vos organisations, garantissant ainsi la sécurité et une allocation
+  appropriée des ressources.
+flexible_management: Gestion flexible
+adapt_as_you_grow: Adaptez-vous à mesure que vous grandissez
+easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure: >-
+  Ajustez facilement les rôles et les autorisations des utilisateurs à mesure
+  que votre équipe et vos projets évoluent, en maintenant une structure
+  organisationnelle optimale.
+effortless_ci_cd_solutions: Solutions CI/CD sans effort
+we_configure_your_ci_cd_pipeline_directly_in_your_preferred_platform_whether_its_github_actions_gitlab_ci_or_others_we_dont_host_ci_cd_or_charge_you_to_maintain_it: >-
+  Nous configurons votre pipeline CI/CD directement dans votre plateforme
+  préférée, qu'il s'agisse de GitHub Actions, GitLab CI ou autres. Nous
+  n'hébergeons pas de CI/CD et ne vous facturons pas sa maintenance.
+seamless_integration: Intégration transparente
+we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_process_no_need_to_switch_platforms_or_learn_new_tools: >-
+  Nous configurons votre flux de travail CI/CD pour qu'il fonctionne de manière
+  transparente avec votre processus de développement actuel. Pas besoin de
+  changer de plateforme ou d'apprendre de nouveaux outils.
+tailored_configuration: Configuration sur mesure
+our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
+  Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
+platform_independence: Indépendance de la plateforme
+whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
+  Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
+  nous adaptons notre configuration pour l'adapter à votre infrastructure
+  existante.
+expert_guidance: Conseils d'experts
+benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself: >-
+  Bénéficiez de notre expertise approfondie dans les meilleures pratiques CI/CD
+  pour applications mobiles, sans avoir besoin de créer et de maintenir
+  vous-même un système complexe.
+we_already_setup_ci_cd_for_50_apps: Nous avons déjà configuré CI/CD pour plus de 50 applications.
+running_your_ci_cd_costs_300: "L’exécution de votre CI/CD coûte environ 300\_$/mois"
+appflow_6000_annually: "AppFlow 6\_000\_$ par an."
+our_one_time_setup_fee_of_2600_combined_with_ci_cd_results_in_less_than_half_the_first_year_fee_of_appflow: "Nos frais d'installation uniques de 2\_600 $, combinés à CI/CD, représentent moins de la moitié des frais de première année d'AppFlow."
+in_5_years_you_save_26100: En 5 ans, vous économisez 26 100 $.
+setup_ci_cd_now: Configurer CI/CD maintenant →
+push_updates_like_your_commits: Envoyez des mises à jour comme vos commits
+its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more: >-
+  Il est compatible avec Azure DevOps, GitLab, GitHub, Jenkins, Cloudbees,
+  Travis, Azure DevOps, GitLab, GitHub, CircleCI et bien d'autres.
+launch_multiple_releases_per_week: >-
+  Avec 1 $, vous pouvez lancer plusieurs versions par semaine avec une
+  augmentation impressionnante d'efficacité de 81 %. Ne manquez pas cet avantage
+  concurrentiel.
+easily_combine_features_ci_cd: >-
+  Combinez facilement des fonctionnalités à 1 $ dans votre plate-forme CI/CD
+  actuelle grâce à notre CLI conviviale.
+about_capgo: À propos de Capgo
+your_live_update_solution_for_capacitor_apps: Votre solution de mise à jour en direct pour les applications de condensateurs
+welcome_to_capgo: Bienvenue chez Capgo
+capgo_is_the_cutting_edge_live_update_system_designed_specifically_for_capacitor_applications: >-
+  Capgo est le système de mise à jour en direct de pointe conçu spécifiquement
+  pour les applications de condensateurs.
+we_empower_developers_to_push_updates_instantly_ensuring_your_users_always_have_the_latest_version_of_your_app_without_the_hassle_of_app_store_approvals: >-
+  Nous permettons aux développeurs de diffuser des mises à jour instantanément,
+  garantissant ainsi que vos utilisateurs disposent toujours de la dernière
+  version de votre application sans avoir à se soucier des approbations de l'App
+  Store.
+our_story: Notre histoire
+capgo_was_born_from_a_real_need_in_the_developer_community: Capgo est né d'un réel besoin de la communauté des développeurs.
+it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustration_with_the_high_costs_of_existing_solutions_like_appflow: >-
+  Tout a commencé avec un problème GitHub où de nombreux développeurs ont
+  exprimé leur frustration face aux coûts élevés des solutions existantes comme
+  Appflow.
+this_inspired_me_to_create_an_affordable_efficient_alternative: Cela m’a inspiré à créer une alternative abordable et efficace.
+read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
+  Lisez l'histoire complète de la naissance difficile de Capgo en tant que
+  projet solo
+key_features: Principales fonctionnalités
+deploy_changes_in_real_time: Déployer les changements en temps réel
+version_control: Contrôle des versions
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+rollback_capability: Capacité de restauration
+revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
+analytics: Analytique
+track_update_performance_and_user_adoption: Suivez les performances des mises à jour et l’adoption par les utilisateurs
+organization_and_app_management: Organisation et gestion des applications
+thanks_to_our_open_source_nature: Grâce à notre nature open source
+our_commitment: Notre engagement
+as_the_largest_ecosystem_of_open_source_plugins_for_capacitor_we_re_committed_to_innovation_transparency_and_community_driven_development: >-
+  En tant que plus grand écosystème de plugins open source pour Capacitor, nous
+  nous engageons en faveur de l'innovation, de la transparence et du
+  développement axé sur la communauté.
+practicing_what_we_preach: Mettre en pratique ce que nous prêchons
+we_practice_what_we_preach: Nous pratiquons ce que nous prêchons
+capgo_is_used_to_update_its_own_apps_allowing_us_to_continuously_improve_and_refine_our_product_through_real_world_usage: >-
+  Capgo est utilisé pour mettre à jour ses propres applications, ce qui nous
+  permet d'améliorer et d'affiner continuellement notre produit grâce à une
+  utilisation réelle.
+our_dedication: Notre dévouement
+since_2023_capgo_has_been_my_full_time_focus_ensuring_dedicated_development_and_support_for_our_growing_community_of_users: >-
+  Depuis 2023, Capgo est mon objectif à plein temps, assurant un développement
+  et un support dédiés à notre communauté croissante d'utilisateurs.
+hi_there_im_martin_donadieu: Salut! Je m'appelle Martin Donadieu
+run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team: >-
+  Exécutez vos projets sur votre propre appareil plus rapidement que jamais et
+  partagez ces projets avec toute votre équipe.
+test_version_in_the_sandbox_app_manage_version_and_channel: Testez la version dans l'application sandbox, gérez la version et le canal
+speed: Vitesse
+simplicity: Simplicité
+start_building_rich_experiences_with_your_device_and_your_computer: >-
+  Commencez à créer des expériences riches avec votre appareil et votre
+  ordinateur.
+confirm_email: Confirmez votre email
+please_open_your_mailbox_to_verify: Veuillez ouvrir votre boîte aux lettres pour vérifier
+didnt_receive_confirmation_email: Vous n'avez pas reçu d'e-mail de confirmation ?
+resend: Renvoyer
+resending: Renvoi
+open_mailbox: Ouvrir la boîte aux lettres
+thank_you_for_choosing_capgo: Merci d'avoir choisi Capgo !
+code_review: Révision du code
+code_review_and_consulting: Révision du code et conseil
+consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps: >-
+  Consultez vos applications Capacitor et révisez le code avec nous pour fournir
+  des applications sans bug.
+book_a_consultation: Réservez une consultation
+having_a_true_partner_has_been_a_wonderful_experience_and_it_allows_us_to_move_much_faster_than_we_could_alone: >-
+  Avoir un véritable partenaire a été une expérience merveilleuse, et cela nous
+  permet d’avancer beaucoup plus vite que nous ne pourrions le faire seuls.
+when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: Quand il est bon de demander les services de conseil Cordova et CapacitorJS
+review_before_passing_the_code_to_the_production: Réviser avant de transmettre le code à la production
+find_and_fix_bugs_during_the_coding_process: Recherchez et corrigez les bugs pendant le processus de codage.
+it_s_faster_cheaper_and_requires_fewer_developers_to_do_it: C’est plus rapide, moins cher et nécessite moins de développeurs.
+optimization_of_the_existing_app: Optimisation de l'application existante
+little_experience_with_capacitorjs: Peu d'expérience avec CapacitorJS
+when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side: >-
+  Lorsque vous développez une application CapacitorJS en tant que débutant, il
+  est bon d'avoir un consultant expérimenté à vos côtés.
+let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
+  Laissez-les examiner votre travail et donnez à votre équipe l’occasion
+  d’apprendre des experts.
+poor_app_quality: Mauvaise qualité de l'application
+somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low: >-
+  Quelqu’un a développé une application pour vous, mais elle ne répond pas à vos
+  attentes et la qualité du produit final est vraiment faible.
+something_doesn_t_work_but_you_don_t_know_why: Quelque chose ne marche pas mais tu ne sais pas pourquoi
+a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it: >-
+  Un élément spécifique de votre application ne fonctionne pas et vous ne savez
+  pas où se situe le problème ni comment le résoudre.
+plugin_is_missing: Le plugin est manquant
+you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it: >-
+  Vous avez besoin d’accéder à une API native spécifique et le bon plugin
+  n’existe pas. Nous pouvons le développer pour vous ou vous accompagner dans
+  cette démarche.
+ci_cd_setup: Configuration CI/CD
+our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment: >-
+  Notre équipe vous aide à configurer et à gérer les builds, les tests et les
+  déploiements d'applications automatisés vers les magasins d'applications via
+  Fastlane et VoltBuilder dans votre environnement CI/CD.
+why_is_it_important: Pourquoi est-ce important ?
+code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to: "La consultation et la révision du code sont plus qu'une simple vérification de bogues. Cela aide à\_:"
+minimize_mistakes_and_their_impact_on_the_project: Minimiser les erreurs et leur impact sur le projet
+ensure_that_the_project_requirements_are_fulfilled: S'assurer que les exigences du projet sont remplies
+improve_overall_code_quality: Améliorer la qualité globale du code
+achieve_consistent_design_and_implementation: Parvenir à une conception et une mise en œuvre cohérentes
+technological_benefits: Avantages technologiques
+better_code_quality: Meilleure qualité de code
+let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
+  Laissez des personnes plus expérimentées examiner votre travail et donnez à
+  votre équipe l’occasion d’apprendre des experts.
+improved_code_readability: Lisibilité du code améliorée
+it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
+  Il est possible que différents développeurs lisent votre code à l’avenir.
+  Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
+bugs_reduction: Réduction des bugs
+eliminate_the_number_of_bugs_before_passing_the_code_to_production: Éliminez le nombre de bugs avant de transmettre le code à la production.
+hire_capacitorjs_consultants: Embaucher des consultants CapacitorJS
+business_benefits: Avantages commerciaux
+lower_cost_of_fixing_bugs: Coût réduit de correction des bugs
+the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it: >-
+  Plus vite vous trouvez le bug, moins vous pourrez le corriger à moindre coût.
+  Si le bug est détecté pendant le processus de développement, il est plus
+  facile et moins coûteux de le supprimer.
+opportunity_for_juniors_to_develop_skills: Possibilité pour les juniors de développer leurs compétences
+help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers: >-
+  Aidez vos développeurs juniors à approfondir leurs connaissances en leur
+  donnant la possibilité de coopérer avec des développeurs plus expérimentés.
+community_trusted: Approuvé par la communauté
+cordova_and_capacitorjs_expert: Expert Cordova et CapacitorJS
+experienced_in_working_on_demanding: Expérience dans le travail sur des sujets exigeants
+cordova_capacitorjs_projects: Projets Cordova et CapacitorJS
+creators_and_maintainers_of_many_open_source_libraries_used_by_millions: >-
+  Créateurs et mainteneurs de nombreuses bibliothèques Open Source utilisées par
+  des millions de personnes
+core_contributors_to_capacitorjs_and_ionic: Contributeurs principaux à CapacitorJS et Ionic
+need_help_with_cordova_or_capacitorjs_let_us_know: "Besoin d'aide avec Cordova ou CapacitorJS ? Faites-le-nous savoir\_!"
+im_a_french_software_engineer: Je suis un ingénieur logiciel français
+living_best_life: vivre ma meilleure vie sur la magnifique île de Madère, au Portugal
+made_capgo_with_passion: J'ai créé Capgo avec passion pour responsabiliser les développeurs comme vous.
+i_m_a_huge_believer_in_open_source: Je crois énormément à l'open source.
+capgo_proudly_stands_as_the_largest_ecosystem_of_open_source_plugins_for_capacitor: >-
+  Capgo est fier d'être le plus grand écosystème de plugins open source pour
+  Capacitor.
+we_re_committed_to_fostering_a_community_where_developers_can_learn_contribute_and_grow_together: >-
+  Nous nous engageons à favoriser une communauté où les développeurs peuvent
+  apprendre, contribuer et grandir ensemble.
+each_time_you_contact_capgo_you_re_reaching_out_to_me_directly: Chaque fois que vous contactez Capgo, vous me contactez directement.
+i_personally_handle_all_support_through_email_chat_or_discord_because_i_believe_in_real_connections: >-
+  Je gère personnellement toute l'assistance par e-mail, chat ou Discord parce
+  que je crois aux vraies connexions.
+your_challenges_are_my_challenges: Vos défis sont mes défis
+my_commitment_to_transparency_extends_to_everything_i_do: Mon engagement envers la transparence s’étend à tout ce que je fais.
+when_im_not_working_on_capgo_you_ll_find_me_scaling_climbing_walls_🧗‍♂️_dancing_to_zouk_rhythms_💃_or_exploring_madeiras_stunning_nature_🌿: >-
+  Quand je ne travaille pas sur Capgo, vous me trouverez en train d'escalader
+  des murs 🧗‍♂️, de danser sur des rythmes de zouk 💃 ou d'explorer la
+  magnifique nature de Madère 🌿.
+lets_make_app_development_amazing_together: "Rendons le développement d'applications incroyable ensemble\_!"
+martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background: Martin Donadieu sur une moto avec un arc-en-ciel en arrière-plan
+get_quote_now: Obtenez un devis maintenant
+you_can_see_my_entire_process_unfold_on_twitter: Vous pouvez voir l'ensemble de mon processus se dérouler sur Twitter
+and_hear_more_about_my_journey_on_the: et en savoir plus sur mon voyage sur le
+read_more: En savoir plus
+$1_app: "Application à 1\_$"
+services: Services
+case_1: Cas 1
+case_2: Cas 2
+case_3: Cas 3
+case_4: Cas 4
+case_5: Cas 5
+case_6: Cas 6
+case_7: Cas 7
+email_is_required: L'e-mail est requis
+when_down_review: >-
+  Lorsqu’une application fonctionne trop lentement ou tombe en panne (même
+  pendant quelques minutes), cela peut nuire à la satisfaction des utilisateurs
+  et diminuer les revenus. Pour éviter de telles situations, examinez le code
+  pour trouver des domaines à améliorer.
+why_work: Pourquoi travailler
+with_us: avec nous ?
+consulting_forged_plugins_community_embraced: Plugins forgés par le conseil, adoptés par la communauté
+consulting_forged_plugins_community_embraced_description: >-
+  Nos plugins Capacitor, nés de véritables défis clients, responsabilisent
+  désormais les développeurs du monde entier.
+each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community: >-
+  Chaque solution représente une réussite en matière de conseil, testée et
+  peaufinée pour la communauté.
+get_your_custom_plugin_built: Créez votre plugin personnalisé
+contact: Contact
+lets_work_together: Travaillons ensemble !
+we_welcome_and_appreciate_all_contributions_to_capgo: Nous accueillons et apprécions toutes les contributions à Capgo.
+this_page_serves_as_a_helper_to_get_you_started_on_contributing: Cette page vous aide à commencer à contribuer.
+projects: Projets
+there_are_numerous_repositories_in_the_capgo_organization_that_are_part_of_the_capgo: >-
+  Il existe de nombreux référentiels dans l'organisation Capgo qui font partie
+  de Capgo.
+repositories_have_different_scopes_use_different_programming_languages_and_have_varying_level_when_it_comes_to_contributions: >-
+  Les référentiels ont des portées différentes, utilisent différents langages de
+  programmation et ont différents niveaux de contribution.
+to_help_you_decide_which_repository_might_be_the_best_to_start_contributing_and_or_falls_into_your_interest_here_s_a_short_comparison_languages_in_bold_comprise_most_of_the_codebase: "Pour vous aider à décider quel référentiel pourrait être le meilleur pour commencer à contribuer (et/ou qui vous intéresse), voici une brève comparaison (les <strong> langues en gras constituent la majeure partie de la base de code </strong>)\_:"
+main_repository_that_provides_the_capacitor_updater_plugin: >-
+  Il s'agit du référentiel principal qui fournit le plugin
+  <code>capacitor-updater</code>.
+you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to: "Vous souhaitez corriger un bug ou ajouter une nouvelle fonctionnalité à <code>capacitor-updater</code>\_? Il s'agit du référentiel auquel vous souhaitez contribuer."
+the_webapp_and_serverless_functions_that_make_up_the_capgo_cloud_platform: Les fonctions Webapp et serverless qui composent la plateforme cloud Capgo.
+thare_where_you_want_to_contribute_to_fix_the_backend_of_capgo: Indiquez où vous souhaitez contribuer à la réparation du backend de Capgo.
+frontend_for_official_deno_webpage: Frontend pour la page Web officielle de Deno
+documentation_in_markdown_that_powers: Documentation dans Markdown qui alimente
+version_manager_that_power_ci_cd_to_update_apps: >-
+  Gestionnaire de versions qui alimente CI/CD pour mettre à jour les
+  applications.
+read_the_style_guide: >-
+  Lisez le <a href="https://deno.land/manual@v1.25.4/contributing/style_guide">
+  guide de style.</a>
+ask_for_help_in_the_community_chat_room: >-
+  Demandez de l'aide dans le salon de discussion communautaire <a
+  href="https://discord.com/invite/VnYRvBfgA6">. </a>
+mention_issue_before_working: >-
+  Lorsque vous travaillez sur un problème, mentionnez-le dans les commentaires
+  du problème <em>avant</em> de commencer à travailler sur le problème.
+create_an_issue_and_discuss_before_working_on_a_new_feature: "Lorsque vous travaillez sur une nouvelle fonctionnalité, créez un problème et discutez-en avec d'autres contributeurs <em>avant</em> de commencer à travailler sur la fonctionnalité\_; nous apprécions toutes les contributions, mais toutes les fonctionnalités proposées ne sont pas acceptées. Nous ne voulons pas que vous passiez des heures à travailler sur un code qui pourrait ne pas être accepté."
+please_be_professional_in_the_forums: >-
+  Soyez professionnel sur les forums. Nous suivons le <a
+  href="https://www.rust-lang.org/policies/code-of-conduct"> le code de conduite
+  de Rust</a> (CoC). Vous avez un problème ? Envoyez un e-mail à <a
+  href="mailto:ry@tinyclouds.org"> ry@tinyclouds.org.</a>
+submitting_a_pull_request: Soumettre une pull request
+before_submitting_a_pr: "Avant de soumettre un PR à l'un des dépôts, veuillez vous assurer que les points suivants sont effectués\_:"
+give_pr_a_descriptive_title: Donnez au PR un titre descriptif.
+examples_of_good_pr_title: "Exemples de bons titres de relations publiques\_:"
+examples_of_bad_pr_title: "Exemples de mauvais titres de relations publiques\_:"
+submitting_a_pr_to_capgo: >-
+  Soumettre un PR à <a
+  href='https://github.com/Cap-go/capgo'><code>Capgo</code></a>
+additionally_make_sure_that: "En plus de ce qui précède, assurez-vous que\_:"
+npm_run_lint_passes: >-
+  <code>npm run lint</code> passes - cela vérifiera le code Rust et JavaScript
+  pour les erreurs et erreurs courantes en utilisant <code>Swiftlint</code>
+  (pour Swift) et <code>eslint</code> (pour JavaScript et Java)
+documenting_apis: Documenter les API
+importance_of_documenting_apis: >-
+  Il est important de documenter toutes les API publiques et nous souhaitons le
+  faire conformément au code. Cela permet de garantir que le code et la
+  documentation sont étroitement liés.
+javascript_and_typescript: JavaScript et TypeScript
+jsdoc_documentation: >-
+  Toutes les API et types exposés publiquement, le module
+  <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
+  documentation est analysée et disponible pour le compilateur TypeScript, et
+  donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
+  l'instruction à laquelle ils s'appliquent et sont désignés par un
+  <code>/**</code> avant de se terminer par un <code>*/</code>. Par exemple:
+jsdoc_example: exporter const FOO = 'foo';
+find_more_at: "Pour en savoir plus\_: <a href='https://jsdoc.app/'> https://jsdoc.app/ </a>"
+get_in_touch: Entrer en contact
+company_name: Nom de l'entreprise
+register_code: Code d'enregistrement
+address: Adresse
+hosting: Hébergement
+data_storage: Stockage des données
+data_processing: Informatique
+powerful_app_plugins: Plugins d'application puissants
+powerful_app_plugins_description: >-
+  Plugins de niveau entreprise avec une excellente documentation, des mises à
+  jour continues, des extraits de code et une assistance premium pour que vous
+  puissiez vous concentrer sur la création de votre application.
+plans_that_scale_with_your_business: Des forfaits qui évoluent avec votre entreprise
+plans_that_scale_with_your_business_description: >-
+  Cloud de niveau entreprise qui améliore la fonctionnalité et la sécurité des
+  applications Capacitor.
+monthly_plan: Forfait mensuel
+yearly_plan: Forfait annuel
+save: Sauvegarder
+we_don_t_bill_you_automatically_until_your_confirmation: Nous ne vous facturons pas automatiquement jusqu'à votre confirmation.
+we_don_t_store_or_sell_your_data_to_anyone: Nous ne stockons ni ne vendons vos données à qui que ce soit.
+top_100_app_using_different_framworks_on_android_store: >-
+  Liste des 100 meilleures applications utilisant Diffrents Framworks sur la
+  boutique Android
+top_apps_by_framework: Meilleures applications par framework
+top_100_app_using_capacitor_on_android_play_store: >-
+  Liste des 100 meilleures applications utilisant Capacitor sur le Play Store
+  Android
+top_capacitor_apps: Meilleures applications de condensateurs
+capacitor_power_aproximately_1_of_apps_on_google_play_store: "Le condensateur alimente environ 1\_% des applications sur Google Play\_Store"
+downloads: Téléchargements
+see_in_play_store: Voir dans le Play Store
+top_app_using_capgo_cloud_or_self_hosted: Liste des meilleures applications utilisant le cloud Capgo ou auto-hébergées
+top_cordova_apps: >-
+  Liste des 100 meilleures applications utilisant Cordova sur la boutique
+  Android
+top_cordova_apps_title: Meilleures applications de Cordoue
+top_capgo_apps_title: Meilleures applications Capgo
+top_capgo_apps: Liste des meilleures applications utilisant Capgo
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
+top_flutter_apps: >-
+  Liste des 100 meilleures applications utilisant Flutter sur la boutique
+  Android
+top_kotlin_apps: Liste des 100 meilleures applications utilisant Kotlin sur la boutique Android
+top_native_script_apps: >-
+  Liste des 100 meilleures applications utilisant Native Script sur la boutique
+  Android
+top_react_native_apps: >-
+  Liste des 100 meilleures applications utilisant React Native sur la boutique
+  Android
+top_flutter_apps_title: Meilleures applications Flutter
+flutter_power_aproximately_1_of_apps_on_google_play_store: "Flutter alimente environ 1\_% des applications sur le Google Play Store"
+top_kotlin_apps_title: Meilleures applications Kotlin
+kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente environ 1 % des applications sur le Google Play Store
+top_native_script_apps_title: Principales applications de script natif
+native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
+top_react_native_apps_title: Principales applications React Native
+react_native_power_aproximately_1_of_apps_on_google_play_store: "React Native alimente environ 1\_% des applications sur Google Play Store"
+table_of_contents: Table des matières
+latest_from_news: Dernières nouvelles
+capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
+  Capgo vous donne les meilleures informations dont vous avez besoin pour créer
+  une application mobile véritablement professionnelle.
+see_all_from_our_blog: Tout voir sur notre blog
+latest_from_the_blog: Dernières nouveautés du blog
+calculate_your_usage: Calculez votre consommation
+monthly_active_users: Utilisateurs actifs mensuels
+enter_your_estimated_monthly_active_users: >-
+  Entrez vos utilisateurs actifs mensuels estimés, vos mises à jour mensuelles
+  et la taille des mises à jour pour obtenir votre coût mensuel estimé.
+updates_by_month: Mises à jour<br />par mois
+updates_size: Taille des mises à jour<br />(Mo)
+updates_total: Mises à jour<br />(Total)
+bandwidth_gb: Bande passante<br />(Go)
+storage: Stockage<br />(Go)
+yearly: Annuel
+monthly: Mensuel
+we_suggest_you_to_choose_the: Nous vous proposons de choisir le
+plan: plan
+questions_and_answers: Questions et réponses
+explore_common_questions: Explorez les questions et réponses courantes sur Capgo
+how_are_mau_counted: "Comment les utilisateurs actifs mensuels (MAU) sont-ils comptés\_?"
+mau_counting_explanation: >-
+  Nous comptons les MAU (Utilisateurs actifs mensuels) en suivant les
+  utilisateurs uniques qui ouvrent votre application sur une période de 30
+  jours. Chaque utilisateur est compté une fois, quel que soit le nombre de fois
+  où il interagit avec l'application.
+capgo_usage_explanation: >-
+  Chez Capgo, nous ne prenons pas en compte les émulateurs et les builds de
+  développement dans votre utilisation. En savoir plus à ce sujet
+here: ici.
+what_does_storage_mean: Que signifie le stockage ?
+storage_explanation: >-
+  Le stockage, en particulier le stockage périphérique, fait référence à la
+  capacité totale fournie par Capgo aux emplacements périphériques pour stocker
+  tous vos lots de mises à jour. Cela garantit que les utilisateurs reçoivent la
+  dernière version de votre application ou service rapidement et efficacement.
+how_is_bandwidth_counted: "Comment la bande passante est-elle comptée\_?"
+bandwidth_explanation: >-
+  Chez Capgo, nous mesurons la bande passante en suivant la quantité de données
+  transmises entre l'emplacement de stockage et les appareils des utilisateurs
+  via des serveurs périphériques. Cela nous aide à fournir des mises à jour en
+  temps réel.
+unsure_about_active_users: Vous n'êtes pas sûr de votre nombre d'utilisateurs actifs ?
+free_trial_explanation: >-
+  Si vous n'êtes pas sûr du nombre d'utilisateurs actifs dont vous disposez et
+  que vous craignez d'atteindre la limite de votre forfait, profitez de l'essai
+  gratuit de Capgo. C'est un excellent moyen de tester notre service, de trouver
+  le bon forfait, d'éviter des frais imprévus et de garantir que tout fonctionne
+  correctement.
+didnt_find_answer: Vous n'avez pas trouvé la réponse que vous cherchiez ?
+contact_support: Contactez notre support
+pay_as_you_go: Payez au fur et à mesure
+pay_as_you_go_description: Mises à jour en direct/mois. Aucun engagement.
+users_included: Utilisateurs inclus
+then: alors
+bandwidth: Bande passante
+TB_included: TB inclus
+per_GB: par Go
+cloud_storage: Stockage en nuage
+GB_included: Go inclus
+API_access: Accès API
+create_anything_you_want: Créez tout ce que vous voulez
+dedicated_support: Un support dédié
+get_an_answer_in_less_than_6h: Obtenez une réponse en moins de 6h
+custom_domain: Domaine personnalisé
+add_your_own_domain: Ajoutez votre propre domaine
+all_our_features_are_available_to_all_users: Toutes nos fonctionnalités sont disponibles pour tous les utilisateurs
+month: Mois
+get_started_for_free: Commencez GRATUITEMENT
+most_popular: Le plus populaire
+14_days_free_trial: 14 jours d'essai gratuit
+billed_annually_at: Facturé annuellement à
+you_get: Vous obtenez
+live_updates_per_month: Mises à jour en direct/mois
+of_bandwidth: de bande passante
+of_storage: de stockage
+priority_support_for_all_capgo_plugins: >-
+  Prise en charge prioritaire de tous les plugins Capgo <span
+  class='font-bold'>(plus de 30 plugins)</span>
+for_the_pay_as_you_go_plan: pour le plan Pay-as-you-go
+per_added_user: par utilisateur ajouté
+included: compris
+per_added_gb: par Go ajouté
+updates: Mises à jour
+updates_explanation: Une partie du calcul du prix de la bande passante
+plan.free.desc: Idéal pour expérimenter sans soucis
+plan.solo.desc: Idéal pour les développeurs indépendants
+plan.maker.desc: Idéal pour les propriétaires de petites entreprises
+plan.team.desc: Idéal pour les moyennes entreprises
+tutorial_on: Tutoriel sur
+view_repo: Voir le dépôt
+view_npm: Voir sur NPM
+last_modified: Dernière modification
+aup_intro: >-
+  Cette politique d'utilisation acceptable (cette « Politique ») décrit les
+  utilisations interdites des services Web offerts par Capgo et ses sociétés
+  affiliées (les « Services ») et du site Web situé à l'adresse
+  https://capgo.app (le « Site Capgo »). Les exemples contenus dans cette
+  politique ne sont pas exhaustifs. Nous pouvons modifier cette politique à tout
+  moment en publiant une version révisée sur le site Capgo. En utilisant les
+  Services ou en accédant au Site Capgo, vous acceptez la dernière version de
+  cette Politique. Si vous violez la Politique ou autorisez ou aidez d'autres
+  personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
+  des Services.
+aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+illegal_activities: Activités illégales, nuisibles ou frauduleuses.
+infringing_content: Contenu contrefait.
+offensive_content: Contenu offensant.
+harmful_content: Contenu préjudiciable.
+platform_compliance: Conformité de la plateforme.
+aup_no_security_violations: Aucune violation de la sécurité
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
+unauthorized_access: Accès non autorisé.
+interception: Interception.
+falsification_of_origin: Falsification de l'origine.
+aup_no_network_abuse: Aucun abus de réseau
+aup_no_network_abuse_desc: "Vous ne pouvez pas établir de connexions réseau avec des utilisateurs, des hôtes ou des réseaux à moins d'avoir l'autorisation de communiquer avec eux. Les activités interdites comprennent\_:"
+monitoring_crawling: Surveillance ou exploration.
+denial_of_service: Déni de service (DoS).
+intentional_interference: Interférence intentionnelle.
+operation_of_network_services: Fonctionnement de certains services réseau.
+avoiding_system_restrictions: Éviter les restrictions du système.
+aup_no_email_abuse: Pas d'abus de courrier électronique ou autre message
+aup_no_email_abuse_desc: >-
+  Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
+  d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
+  ou sollicitations (comme le « spam »), y compris la publicité commerciale et
+  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
+  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
+  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
+  aux messages envoyés par un autre fournisseur de services Internet si ces
+  messages enfreignent cette politique ou la politique d'utilisation acceptable
+  de ce fournisseur.
+aup_monitoring_enforcement: Notre surveillance et notre application
+aup_monitoring_enforcement_desc: >-
+  Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
+  toute violation de cette politique ou toute utilisation abusive des services
+  ou du site Capgo. Nous pouvons :
+investigate_violations: "enquêter sur les violations de cette Politique ou l'utilisation abusive des Services ou du Site Capgo\_;"
+remove_modify_content: >-
+  supprimer, désactiver l'accès ou modifier tout contenu ou ressource qui
+  enfreint cette politique ou tout autre accord que nous avons avec vous pour
+  l'utilisation des services ou du site Capgo.
+aup_reporting_violations: Signalement des violations de cette politique
+aup_reporting_violations_desc: >-
+  Si vous avez connaissance d'une violation de cette politique, vous nous en
+  informerez immédiatement et nous fournirez l'assistance, sur demande, pour
+  mettre fin ou remédier à la violation. Pour signaler toute violation de cette
+  politique, veuillez nous contacter à support@capgo.app.
+illegal_activities_desc: >-
+  Toute activité illégale, qui viole les droits d'autrui ou qui peut nuire à
+  autrui, à nos opérations ou à notre réputation, y compris la diffusion, la
+  promotion ou la facilitation de la pédopornographie, l'offre ou la diffusion
+  de biens, services, programmes ou promotions frauduleux, faire- les
+  stratagèmes d'argent rapide, les systèmes de Ponzi et pyramidaux, le phishing
+  ou le pharming.
+infringing_content_desc: >-
+  Contenu qui enfreint ou détourne la propriété intellectuelle ou les droits de
+  propriété d'autrui.
+offensive_content_desc: >-
+  Contenu diffamatoire, obscène, abusif, portant atteinte à la vie privée ou
+  autrement répréhensible, y compris le contenu qui constitue de la
+  pédopornographie, se rapporte à la bestialité ou représente des actes sexuels
+  non consensuels.
+harmful_content_desc: >-
+  Contenu ou autre technologie informatique susceptible d'endommager,
+  d'interférer, d'intercepter subrepticement ou d'exproprier tout système,
+  programme ou donnée, y compris les virus, chevaux de Troie, vers, bombes à
+  retardement ou robots d'annulation.
+platform_compliance_desc: >-
+  Toute activité jugée inacceptable par les plateformes utilisées par le Site et
+  les Services Capgo.
+unauthorized_access_desc: >-
+  Accéder ou utiliser un système sans autorisation, y compris tenter de sonder,
+  d'analyser ou de tester la vulnérabilité d'un système ou de violer toute
+  mesure de sécurité ou d'authentification utilisée par un système.
+falsification_of_origin_desc: >-
+  Forger des en-têtes de paquets TCP-IP, des en-têtes de courrier électronique
+  ou toute partie d'un message décrivant son origine ou son itinéraire.
+  L'utilisation légitime d'alias et de remailers anonymes n'est pas interdite
+  par cette disposition.
+monitoring_crawling_desc: >-
+  Surveillance ou exploration d'un système qui altère ou perturbe le système
+  surveillé ou analysé.
+denial_of_service_desc: >-
+  Inonder une cible de demandes de communication de sorte que la cible ne puisse
+  pas répondre au trafic légitime ou réponde si lentement qu'elle devient
+  inefficace.
+intentional_interference_desc: >-
+  Interférer avec le bon fonctionnement de tout système, y compris toute
+  tentative délibérée de surcharger un système par le biais de bombardements de
+  courriers électroniques, de bombardements d'informations, d'attaques de
+  diffusion ou de techniques d'inondation.
+operation_of_network_services_desc: >-
+  Utiliser ou tenter d'exploiter tout service réseau ou service qui interfère
+  avec le bon fonctionnement de tout service réseau.
+avoiding_system_restrictions_desc: >-
+  Utiliser des moyens manuels ou électroniques pour éviter toute limitation
+  d'utilisation imposée à un système, telle que des restrictions d'accès et de
+  stockage.
+report_violations_desc: >-
+  Nous pouvons signaler toute activité que nous soupçonnons de violer une loi ou
+  un règlement aux responsables de l'application des lois, aux régulateurs ou à
+  d'autres tiers appropriés.
+report_violations_desc_2: >-
+  Nos rapports peuvent inclure la divulgation d’informations clients
+  appropriées. Nous pouvons également coopérer avec les organismes d'application
+  de la loi, les régulateurs ou d'autres tiers appropriés pour faciliter les
+  enquêtes et les poursuites en cas de conduite illégale en fournissant des
+  informations sur les réseaux et les systèmes liées aux violations présumées de
+  cette politique.
+security_policy_title: Politique de sécurité de Capgo
+canonical: Canonique
+security_intro: >-
+  Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
+  absolue. Cependant, quels que soient les efforts que nous déployons pour
+  assurer la sécurité du système, des vulnérabilités peuvent toujours être
+  présentes.
+security_discovery: >-
+  Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
+  pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
+  aimerions vous demander de nous aider à mieux protéger nos clients et nos
+  systèmes.
+security_out_of_scope_title: "Vulnérabilités hors de portée\_:"
+security_out_of_scope_1: Clickjacking sur des pages sans actions sensibles.
+security_out_of_scope_2: CSRF non authentifié/déconnexion/connexion.
+security_out_of_scope_3: >-
+  Attaques nécessitant un MITM ou un accès physique à l'appareil d'un
+  utilisateur.
+security_out_of_scope_4: Attaques nécessitant de l’ingénierie sociale.
+security_out_of_scope_5: Toute activité pouvant entraîner une interruption de notre service (DoS).
+security_out_of_scope_6: >-
+  Problèmes d’usurpation de contenu et d’injection de texte sans afficher de
+  vecteur d’attaque/sans pouvoir modifier HTML/CSS.
+security_out_of_scope_7: Usurpation d'e-mail
+security_out_of_scope_8: En-têtes DNSSEC, CAA, CSP manquants
+security_out_of_scope_9: Absence d'indicateur sécurisé ou HTTP uniquement sur les cookies non sensibles
+security_out_of_scope_10: Liens morts
+security_out_of_scope_11: Énumération des utilisateurs
+security_testing_guidelines_title: "Directives de test\_:"
+security_testing_guidelines_1: >-
+  N'exécutez pas de scanners automatisés sur d'autres projets clients.
+  L’utilisation de scanners automatisés peut entraîner des coûts pour nos
+  utilisateurs. Les scanners configurés de manière agressive peuvent perturber
+  par inadvertance les services, exploiter des vulnérabilités, entraîner une
+  instabilité ou des violations du système et violer les conditions de service
+  de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
+  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
+  vous souhaitez exécuter un scanner automatisé, informez-nous à
+  security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
+  N'attaquez PAS les projets d'autres clients.
+security_testing_guidelines_2: >-
+  Ne profitez pas de la vulnérabilité ou du problème que vous avez découvert,
+  par exemple en téléchargeant plus de données que nécessaire pour démontrer la
+  vulnérabilité ou en supprimant ou en modifiant les données d'autres personnes.
+security_reporting_guidelines_title: "Lignes directrices en matière de déclaration\_:"
+security_reporting_guidelines_1: "Soumettez vos résultats via notre avis de sécurité GitHub\_:"
+security_reporting_guidelines_2: >-
+  Fournissez suffisamment d'informations pour reproduire le problème, afin que
+  nous puissions le résoudre le plus rapidement possible.
+security_disclosure_guidelines_title: "Lignes directrices en matière de divulgation\_:"
+security_disclosure_guidelines_1: >-
+  Afin de protéger nos clients, ne révélez pas le problème à d'autres jusqu'à ce
+  que nous ayons recherché, traité et informé nos clients concernés.
+security_disclosure_guidelines_2: "Si vous souhaitez partager publiquement vos recherches sur Capgo lors d'une conférence, sur un blog ou tout autre forum public, vous devez partager un brouillon avec nous pour examen et approbation au moins 30 jours avant la date de publication. Veuillez noter que les éléments suivants ne doivent pas être inclus\_:"
+security_disclosure_guidelines_2_1: Données concernant tous les projets clients Capgo
+security_disclosure_guidelines_2_2: Données des clients Capgo
+security_disclosure_guidelines_2_3: Informations sur les employés, sous-traitants ou partenaires de Capgo
+security_what_we_promise_title: "Ce que nous promettons\_:"
+security_what_we_promise_1: >-
+  Nous répondrons à votre rapport dans les 7 jours ouvrables avec notre
+  évaluation du rapport et une date de résolution prévue.
+security_what_we_promise_2: >-
+  Si vous avez suivi les instructions ci-dessus, nous n'engagerons aucune action
+  en justice contre vous concernant le rapport.
+security_what_we_promise_3: >-
+  Nous traiterons votre signalement en toute confidentialité et ne transmettrons
+  pas vos données personnelles à des tiers sans votre autorisation.
+security_what_we_promise_4: Nous vous tiendrons informés des progrès vers la résolution du problème.
+security_what_we_promise_5: >-
+  Dans les informations publiques concernant le problème signalé, nous
+  indiquerons votre nom en tant que découvreur du problème (sauf si vous le
+  souhaitez).
+security_closing: >-
+  Nous nous efforçons de résoudre tous les problèmes le plus rapidement possible
+  et nous aimerions jouer un rôle actif dans la publication finale sur le
+  problème une fois celui-ci résolu.
+sla_title: Accords de niveau de service
+enterprise_platform_uptime_sla: SLA de disponibilité de la plateforme d'entreprise
+sla_intro: >-
+  L'accord de niveau de service suivant, qui est incorporé et fait partie de
+  l'accord d'abonnement entre Capgo ("Capgo") et le client (l'"accord"),
+  s'appliquera aux services destinés aux clients entreprises spécifiés dans un
+  formulaire de commande pendant l'abonnement applicable. Terme:
+uptime_commitment_title: 1. Engagement de disponibilité
+uptime_commitment_desc: >-
+  Capgo fournira la disponibilité réelle pendant au moins quatre-vingt-dix-neuf
+  pour cent (99,0 %) de la durée totale de chaque mois civil pendant la durée de
+  l'abonnement, telle que mesurée par Capgo (l'« engagement de disponibilité »).
+service_credits_title: 2. Crédits de service
+service_credits_desc: "Si l'engagement de disponibilité n'est pas respecté au cours d'un mois civil particulier pendant la durée de l'abonnement, le client sera alors éligible à un crédit de service (« crédit de service »), à condition que le client signale à Capgo ce non-respect de l'engagement de disponibilité et demande un tel service. Crédit conformément à cette pièce. Le montant de tout crédit de service dû en vertu des présentes sera calculé comme suit\_: X * Y, où X = le total des frais dus par le client à Capgo pour les services concernés pour le mois civil concerné (quel que soit le moment de facturation ou de paiement), et Y = le pourcentage de crédit correspondant à la disponibilité réelle fournie (en pourcentage du temps total) pour le mois civil concerné, comme indiqué dans le tableau ci-dessous."
+actual_availability: Disponibilité réelle
+credit_percentage: Pourcentage de crédit
+availability_99_98: Inférieur à 99,0 % mais supérieur ou égal à 98,0 %
+credit_10_percent: 10%
+availability_98_97: Inférieur à 98,0 % mais supérieur ou égal à 97,0 %
+credit_15_percent: 15%
+availability_97_95: Inférieur à 97,0 % mais supérieur ou égal à 95,0 %
+credit_20_percent: 20%
+availability_below_95: "Moins de 95,0\_%"
+credit_30_percent: 30%
+credit_requests_payment_title: 3. Demandes de crédit et paiement
+credit_requests_payment_desc: >-
+  Pour demander un crédit de service, le client doit envoyer un e-mail à Capgo à
+  support@capgo.app dans les trente (30) jours suivant la fin du mois au cours
+  duquel l'engagement de disponibilité n'a pas été respecté. Le client doit
+  inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
+  les dates et heures précédemment signalées auxquelles le service n'était pas
+  disponible. Si Capgo confirme que le client est éligible à un crédit de
+  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
+  jours. Les crédits de service ne constituent pas des remboursements, ne
+  peuvent pas être échangés contre un montant en espèces et ne peuvent être
+  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
+  contraire dans la section 4 ci-dessous, les crédits de service constitueront
+  le seul et unique recours du client, et la seule et unique responsabilité de
+  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
+4_definitions_title: 4. Définitions
+definitions_desc: >-
+  Tous les mots en majuscules utilisés mais non définis dans le présent Accord
+  de niveau de service ont la signification indiquée dans l'Accord.
+scheduled_availability_title: 4.1 Disponibilité programmée
+scheduled_availability_desc: "«\_Disponibilité programmée\_» désigne la durée, en minutes, pendant laquelle les services applicables sont généralement accessibles et disponibles pour les utilisateurs autorisés du client."
+unscheduled_downtime_title: 4.2 Temps d'arrêt imprévu
+unscheduled_downtime_desc: >-
+  « Temps d'arrêt non programmé » désigne la durée, en minutes, pendant laquelle
+  les services applicables ne sont généralement pas accessibles et disponibles
+  pour les utilisateurs autorisés du client, à l'exclusion de l'inaccessibilité
+  ou de l'indisponibilité due aux actes ou omissions du client ou des
+  utilisateurs autorisés, des événements de force majeure, de la maintenance
+  planifiée divulguée avec au préavis d'au moins 24 heures par e-mail, piratage
+  informatique ou attaques de virus, maintenance d'urgence raisonnable ou autres
+  exclusions spécifiques au produit répertoriées dans les exclusions SLA.
+actual_availability_title: 4.3 Disponibilité réelle
+actual_availability_desc: "«\_Disponibilité réelle\_» désigne la disponibilité planifiée moins les temps d'arrêt non planifiés."
+production_title: 4.4 Production
+production_desc: "La «\_production\_» est définie comme un système servant des systèmes opérationnels ou orientés client en direct avec des fonctionnalités déployées et fonctionnelles existantes."
+non_production_desc: >-
+  Le « développement », la « mise en scène », « l'uat », la « pré-production »
+  ou la mise en œuvre de nouvelles fonctionnalités, même dans un environnement
+  de production, ne sont pas considérés comme de la production.
+sla_exclusions_title: Exclusions des SLA
+general_service_exclusions_title: Exclusions des services généraux
+general_service_exclusion_1: >-
+  (i) Causés par des facteurs échappant à notre contrôle raisonnable, y compris,
+  mais sans s'y limiter, tout événement de force majeure ou accès à Internet,
+  problèmes de fournisseur d'accès Internet et/ou problèmes connexes au-delà du
+  point de démarcation de Capgo.
+general_service_exclusion_2: (ii) Qui résultent de toute action ou inaction volontaire de votre part.
+general_service_exclusion_3: >-
+  (iii) Cela résulte des limitations du processeur et des ressources mémoire de
+  la classe d'instance.
+general_service_exclusion_4: >-
+  (iv) Cela résulte du fait que vous ne suivez pas les directives
+  opérationnelles de base décrites dans nos documents.
+general_service_exclusion_5: >-
+  (v) Cela entraîne un long temps de récupération en raison d'une capacité d'E/S
+  insuffisante pour votre charge de travail.
+general_service_exclusion_6: (vi) Cela résulte de votre équipement, logiciel ou autre technologie.
+general_service_exclusion_7: >-
+  (vii) Découlant de notre suspension et de la résiliation de votre droit
+  d'utiliser Capgo conformément à nos Conditions.
+live_update_sla_exclusions_title: Exclusions de SLA de mise à jour en direct
+live_update_exclusion_1: >-
+  (i) Ressources de calcul mal provisionnées liées à votre projet pour la charge
+  attendue.
+live_update_exclusion_2: >-
+  (ii) Pannes causées par des configurations de limitation de débit trop
+  permissives.
+live_update_exclusion_3: >-
+  (iii) Pannes ou problèmes causés par des versions rétractées des
+  bibliothèques, frameworks, progiciels ou API officiels Capgo, y compris les
+  rétractations urgentes en raison de vulnérabilités de sécurité identifiées.
+live_update_exclusion_4: >-
+  (iv) Pannes ou problèmes causés par des bibliothèques clientes Capgo non
+  officielles, des frameworks ou des proxys API, même lorsque ces bibliothèques
+  utilisent en interne les bibliothèques Capgo officielles.
+live_update_exclusion_5: >-
+  (v) Pannes ou problèmes qui auraient pu être résolus par la mise à niveau vers
+  une version mineure ou un correctif supérieur d'une bibliothèque client, d'un
+  framework ou d'un progiciel officiel Capgo.
+support_title: Soutien
+support_desc: >-
+  Capgo propose des accords de niveau de service d'assistance pour nos clients
+  Team et Enterprise.
+urgent_support_title: 1. Urgent
+urgent_support_subtitle: Problème critique
+urgent_support_desc: >-
+  Défaut entraînant une panne totale ou partielle du système ou une condition
+  rendant Capgo inutilisable ou indisponible en production pour l'ensemble des
+  Utilisateurs du Client.
+high_support_title: 2. Élevé
+high_support_subtitle: Perturbation importante des activités
+high_support_desc: >-
+  Problème entraînant une situation dans laquelle des fonctionnalités majeures
+  sont affectées et une dégradation significative des performances est
+  constatée. Le problème affecte une proportion importante de la base
+  d'utilisateurs et/ou des fonctionnalités majeures de Capgo.
+normal_support_title: 3. Normale
+normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
+normal_support_desc: >-
+  Le problème entraîne qu'un composant de Capgo ne fonctionne pas comme prévu ou
+  documenté. Une demande d'un représentant du client concernant un problème
+  technique général ou une question générale.
+low_support_title: 4. Faible
+low_support_subtitle: Problème mineur/demande de fonctionnalité
+low_support_desc: Une demande d'informations sur Capgo ou une demande de fonctionnalité.
+target_initial_response_times_title: Cibler les délais de réponse initiaux
+severity_level: Niveau de gravité
+team_plan: Équipe
+pay_as_you_go_plan: Payez au fur et à mesure
+priority_plus_plan: Priorité Plus
+urgent_team_response: 24 heures<br />24h/24, 7j/7 × 365
+urgent_payg_response: 1 heure<br />24h/24, 7j/7 × 365
+urgent_priority_response: 1 heure<br />24h/24, 7j/7 × 365
+high_team_response: 1 jour ouvrable<br />Du lundi au vendredi
+high_payg_response: 2 heures ouvrables<br />Du lundi au vendredi
+high_priority_response: 2 heures<br />24h/24, 7j/7 × 365
+normal_team_response: 1 jour ouvrable<br />Du lundi au vendredi
+normal_payg_response: 1 jour ouvrable<br />Du lundi au vendredi
+normal_priority_response: 12 heures<br />24h/24 et 7j/7 x 365
+low_team_response: 2 jours ouvrables<br />Du lundi au vendredi
+low_payg_response: 2 jours ouvrables<br />Du lundi au vendredi
+low_priority_response: 24 heures<br />24 heures sur 24, 7 jours sur 7, 365 jours par an
+business_hours_note: >-
+  Les heures d'ouverture sont de 6h00 à 18h00 (heure locale), sauf indication
+  contraire.
+support_policy_title: Service client Capgo
+support_policy_intro: >-
+  Capgo s'engage à offrir une expérience client exceptionnelle. Dans le cadre de
+  cet engagement, nous proposons un support technique limité pour tous les
+  projets payants utilisant notre plateforme Capgo. Notre support technique est
+  défini par la portée, les horaires, les contacts et les canaux suivants.
+support_policy_scope_title: Portée
+support_policy_scope_intro: "L'offre de support de Capgo est disponible uniquement pour les technologies prises en charge par la plateforme Capgo et est limitée à\_:"
+support_policy_configuration_issues_title: Problèmes de configuration
+support_policy_configuration_issues_1: Configuration des mises à jour en direct
+support_policy_configuration_issues_2: Bonnes pratiques pour la configuration des applications
+support_policy_configuration_issues_3: Questions générales sur la pile Capgo
+support_policy_troubleshooting_title: Dépannage
+support_policy_troubleshooting_1: Fournir des solutions de contournement ou des solutions aux problèmes connus
+support_policy_troubleshooting_2: Répondre aux questions générales et diriger vers la documentation
+support_policy_troubleshooting_3: >-
+  Dépannage des fonctionnalités prises en charge (mises à jour en direct,
+  gestion des applications, analyses) affichant un comportement inattendu sur
+  Capgo, indépendant du code d'application de l'utilisateur
+support_policy_not_covered_title: Non couvert
+support_policy_not_covered_intro: "Les services d'assistance technique de Capgo n'incluent pas\_:"
+support_policy_not_covered_1: Débogage général des applications utilisateur
+support_policy_not_covered_2: Réécriture du code de l'application pour la compatibilité avec Capgo
+support_policy_not_covered_3: >-
+  Modification et/ou correctif de logiciels tiers ou Open Source pour la
+  compatibilité Capgo
+support_policy_billing_support: >-
+  L’assistance à la facturation et à la gestion des comptes est disponible pour
+  tous les clients.
+support_policy_limited_support_intro: "Une assistance technique limitée est disponible pour les clients Capgo utilisant des ressources Capgo payantes et/ou des modules complémentaires Capgo payants. Les demandes d'assistance ne seront traitées que si\_:"
+support_policy_limited_support_1: La demande est faite via l'un de nos canaux d'assistance officiels
+support_policy_limited_support_2: La demande provient d'une adresse e-mail de compte Capgo enregistrée
+support_policy_limited_support_3: >-
+  Le demandeur dispose d'un accès développeur ou supérieur à tous les projets
+  Capgo spécifiques liés à la demande.
+support_policy_official_channels_title: Canaux d'assistance officiels
+support_policy_official_channels_1: "Web et tableau de bord\_: l'assistance est disponible exclusivement via la fonction d'aide Capgo dans le tableau de bord ou sur notre site Web."
+support_policy_official_channels_2: "E-mail\_: si vous ne parvenez pas à accéder au tableau de bord ou au système de tickets, contactez l'assistance en envoyant un e-mail à support@capgo.app à partir d'une adresse e-mail de compte Capgo enregistrée."
+support_policy_official_channels_note: >-
+  Le personnel d'assistance de Capgo traitera uniquement les demandes reçues via
+  ces canaux officiels. Des canaux communautaires peuvent exister pour le
+  soutien et les discussions entre pairs, fournis par des bénévoles contribuant
+  à la communauté Capgo.
+support_policy_code_debugging: >-
+  Pour les questions de débogage de code, nous vous recommandons de contacter
+  GitHub Issues ou Discord. La communauté comprend des développeurs expérimentés
+  qui peuvent offrir des conseils sur les problèmes liés au code.
+support_policy_community_response: >-
+  Pour obtenir la réponse la plus utile de la communauté, fournissez des
+  informations précises et détaillées sur votre problème et les éventuels
+  messages d'erreur. Incluez des extraits de code pertinents expliquant comment
+  reproduire le problème dans votre message.
+support_policy_team_participation: >-
+  Notez que les membres de l'équipe Capgo peuvent participer aux chaînes
+  communautaires à leur discrétion, mais il n'y a aucune garantie de réponse à
+  moins d'être soumis via les canaux officiels.
+support_policy_sla_title: Accord de niveau de service
+support_policy_sla_desc: "Les accords de niveau de service ne sont disponibles que pour les clients Entreprise. Vous pouvez trouver les détails du SLA, y compris les délais de réponse du support, sur notre page SLA dédiée\_:"
+support_policy_proactive_monitoring_title: Surveillance proactive
+support_policy_proactive_monitoring_desc: >-
+  En cas de problème de plate-forme, nous publierons un avis sur notre site de
+  statut à l'adresse status.capgo.app pour communiquer rapidement l'impact et le
+  statut. Vous n'avez pas besoin de soumettre un ticket d'assistance pour les
+  problèmes persistants de la plateforme. Surveillez plutôt la page d’état pour
+  connaître les dernières mises à jour et informations.
+support_policy_premium_support_title: Assistance Premium
+support_policy_premium_support_desc: "Pour en savoir plus sur nos options de support Premium pour les clients Team Plan et Enterprise, veuillez nous contacter en utilisant le formulaire ci-dessous\_:"
+disclaimer_title: Clause de non-responsabilité
+disclaimer_last_updated: 'Dernière mise à jour : 28 janvier 2022'
+interpretation_and_definitions_title: Interprétation et définitions
+interpretation_title: Interprétation
+interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+definitions_title: Définitions
+definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
+company_definition: >-
+  La <strong>Société</strong> (désignée par « la Société », « Nous », « Notre »
+  ou « Notre » dans le présent Avis de non-responsabilité) fait référence à
+  Digital Shift OU, 6 sepapaja, 15510 Tallinn.
+service_definition: <strong>Service</strong> fait référence à l'Application.
+you_definition: >-
+  <strong>Vous</strong> désigne la personne accédant au Service, ou la société
+  ou autre entité juridique au nom de laquelle cette personne accède ou utilise
+  le Service, selon le cas.
+application_definition: >-
+  <strong>Application</strong> désigne le logiciel fourni par la Société
+  téléchargé par Vous sur tout appareil électronique nommé {{ marque }}.
+disclaimer_text: >-
+  Les informations contenues sur le Service sont uniquement à des fins
+  d’information générale.
+company_no_responsibility: >-
+  La Société n'assume aucune responsabilité pour les erreurs ou omissions dans
+  le contenu du Service.
+company_no_liability: >-
+  En aucun cas, la Société ne sera responsable de tout dommage spécial, direct,
+  indirect, consécutif ou accidentel ou de quelque dommage que ce soit, que ce
+  soit dans le cadre d'une action contractuelle, de négligence ou autre délit,
+  découlant de ou en relation avec l'utilisation du Service. ou le contenu du
+  Service. La Société se réserve le droit d'effectuer des ajouts, des
+  suppressions ou des modifications au contenu du Service à tout moment et sans
+  préavis. Cette clause de non-responsabilité a été créée à l'aide du <a
+  href="https://www.termsfeed.com/blog/sample-disclaimer-template/"
+  target="_blank"> modèle de clause de non-responsabilité. </a>
+no_virus_warranty: >-
+  La Société ne garantit pas que le Service est exempt de virus ou d'autres
+  composants nuisibles.
+external_links_disclaimer_title: Clause de non-responsabilité relative aux liens externes
+external_links_disclaimer_text: >-
+  Le Service peut contenir des liens vers des sites Web externes qui ne sont pas
+  fournis ou maintenus par ou affiliés de quelque manière que ce soit à la
+  Société.
+external_links_no_guarantee: >-
+  Veuillez noter que la Société ne garantit pas l'exactitude, la pertinence,
+  l'actualité ou l'exhaustivité des informations présentes sur ces sites Web
+  externes.
+errors_and_omissions_disclaimer_title: Avis de non-responsabilité concernant les erreurs et omissions
+errors_and_omissions_disclaimer_text: >-
+  Les informations fournies par le Service sont uniquement à titre indicatif sur
+  des questions d'intérêt. Même si la Société prend toutes les précautions pour
+  s'assurer que le contenu du Service est à la fois actuel et exact, des erreurs
+  peuvent survenir. De plus, étant donné la nature changeante des lois, règles
+  et réglementations, il peut y avoir des retards, des omissions ou des
+  inexactitudes dans les informations contenues sur le Service.
+company_not_responsible: >-
+  La Société n'est pas responsable des erreurs ou omissions, ni des résultats
+  obtenus grâce à l'utilisation de ces informations.
+fair_use_disclaimer_title: Avis de non-responsabilité en matière d'utilisation équitable
+fair_use_disclaimer_text: >-
+  La Société peut utiliser du matériel protégé par le droit d'auteur qui n'a pas
+  toujours été spécifiquement autorisé par le propriétaire du droit d'auteur. La
+  Société met ce matériel à disposition à des fins de critique, de commentaire,
+  de reportage, d'enseignement, d'érudition ou de recherche.
+fair_use_belief: >-
+  La Société estime que cela constitue une « utilisation équitable » de tout
+  matériel protégé par le droit d'auteur, tel que prévu à l'article 107 de la
+  loi américaine sur le droit d'auteur.
+copyright_permission: >-
+  Si vous souhaitez utiliser du matériel protégé par le droit d'auteur du
+  Service à vos propres fins qui vont au-delà d'une utilisation équitable, vous
+  devez obtenir l'autorisation du propriétaire du droit d'auteur.
+views_expressed_disclaimer_title: Opinions exprimées
+views_expressed_disclaimer_text: >-
+  Le Service peut contenir des points de vue et des opinions qui sont ceux des
+  auteurs et ne reflètent pas nécessairement la politique ou la position
+  officielle de tout autre auteur, agence, organisation, employeur ou
+  entreprise, y compris la Société.
+user_comments_responsibility: >-
+  Les commentaires publiés par les utilisateurs relèvent de leur seule
+  responsabilité et les utilisateurs assumeront l'entière responsabilité et le
+  blâme pour toute diffamation ou litige résultant de quelque chose d'écrit ou
+  résultant directement de quelque chose d'écrit dans un commentaire. La Société
+  n'est pas responsable des commentaires publiés par les utilisateurs et se
+  réserve le droit de supprimer tout commentaire pour quelque raison que ce
+  soit.
+no_responsibility_disclaimer_title: Aucune clause de non-responsabilité
+no_responsibility_disclaimer_text: >-
+  Les informations sur le Service sont fournies étant entendu que la Société
+  n'est pas engagée par les présentes à fournir des conseils et services
+  juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
+  être utilisé comme substitut à la consultation de conseillers professionnels
+  compétents en matière comptable, fiscale, juridique ou autre.
+company_no_liability_for_access: >-
+  En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
+  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
+  qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
+  ou votre incapacité à accéder ou à utiliser le Service.
+use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
+use_at_your_own_risk_disclaimer_text: >-
+  Toutes les informations contenues dans le Service sont fournies « telles
+  quelles », sans aucune garantie d'exhaustivité, d'exactitude, d'actualité ou
+  des résultats obtenus à partir de l'utilisation de ces informations, et sans
+  garantie d'aucune sorte, expresse ou implicite, y compris, mais sans s'y
+  limiter. garanties de performance, de qualité marchande et d’adéquation à un
+  usage particulier.
+company_no_liability_for_decisions: >-
+  La Société ne sera pas responsable envers vous ou quiconque de toute décision
+  prise ou action prise sur la base des informations fournies par le Service ou
+  de tout dommage consécutif, spécial ou similaire, même si elle est informée de
+  la possibilité de tels dommages.
+contact_us_title: Contactez-nous
+contact_us_text: "Si vous avez des questions concernant cette clause de non-responsabilité, vous pouvez nous contacter\_:"
+contact_us_website: 'En visitant cette page du site :'
+trust_capgo_security: Capgo Sécurité.
+trust_move_forward_with_confidence: >-
+  Avancez en toute confiance. Nous offrons plusieurs niveaux de protection pour
+  assurer la sécurité de votre propriété intellectuelle et de vos données
+  sensibles.
+trust_product_security: Sécurité du produit
+trust_source_code_protection: Protection du code source
+trust_source_code_vulnerabilities: >-
+  Le code source est analysé en permanence pour détecter les vulnérabilités à
+  l’aide de Sink Inspector.
+trust_data_security: Sécurité des données
+trust_encryption_communication: Communication cryptée
+trust_data_traffic_encrypted: Tout le trafic de données est crypté via TLS et HTTPS.
+trust_source_code_encryption: Cryptage du code source
+trust_source_code_encrypted_in_transit: Le code source est toujours crypté en transit via TLS et HTTPS.
+trust_data_backup: Sauvegarde des données
+trust_data_backup_policy: >-
+  Capgo maintient une politique de sauvegarde des données qui suit les
+  meilleures pratiques de l'industrie.
+trust_network_security: Sécurité du réseau
+trust_architecture: Architecture
+trust_architecture_layers: L'architecture de Capgo se compose de plusieurs couches réseau sécurisées.
+trust_application_security: Sécurité des applications
+trust_secure_coding: Codage sécurisé
+trust_code_review: >-
+  Tout changement apporté à la production doit d’abord être examiné et approuvé.
+  La refactorisation du code doit respecter les principes de codage sécurisé et
+  les meilleures pratiques de l'industrie, telles que celles définies par
+  l'OWASP.
+trust_site_reliability: Fiabilité du site
+trust_serverless_infrastructure: "Capgo utilise une infrastructure 100\_% sans serveur, atteignant historiquement une disponibilité de 99,9\_%. Voir le statut ici"
+trust_application_penetration_testing: Tests d'intrusion des applications
+trust_third_party_testing: >-
+  Capgo est régulièrement testé par des testeurs d'intrusion tiers pour garantir
+  la sécurité de l'application.
+trust_business_security: Sécurité des entreprises
+trust_background_checks: Vérification des antécédents
+trust_access_to_production_database: >-
+  Capgo n'a pas d'employés et n'en aura jamais, une seule personne, Martin
+  Donadieu, a accès à la base de données de production. Les contributeurs
+  indépendants ou open source ne sont pas autorisés à accéder à la base de
+  données de production.
+trust_security_awareness: Sensibilisation à la sécurité
+trust_security_training: >-
+  Le fondateur de Capgo suit une formation de sensibilisation à la sécurité, aux
+  meilleures pratiques et à la réponse aux incidents.
+trust_security_coding_education: Formation au codage de sécurité
+trust_open_source_security: >-
+  Capgo étant 100% open-source, est amené à améliorer la sécurité auprès de la
+  communauté.
+trust_partner_management: Gestion des partenaires
+trust_soc2_certification: >-
+  Capgo exige que tous les fournisseurs tiers critiques obtiennent au minimum la
+  certification SOC 2 et vérifie les certifications chaque année.
+trust_incident_response: Réponse aux incidents
+trust_dedicated_incident_response: Capgo est prêt avec une personne dédiée à la réponse aux incidents.
+trust_incident_response_policy_plan: Politique et plan de réponse aux incidents
+trust_incident_response_policy: >-
+  Une politique de réponse aux incidents est maintenue et gérée par une personne
+  dédiée à la réponse aux incidents chez Capgo.
+trust_communication: Communication
+trust_system_wide_issues_notification: >-
+  En cas de problèmes à l'échelle du système, les clients sont informés par leur
+  e-mail. L'état du système de Capgo et les incidents de réseau et de sécurité
+  sont publiés sur https://status.capgo.app.
+tos_title: Termes et conditions
+tos_last_updated: 'Dernière mise à jour : 12 janvier 2022'
+tos_please_read: >-
+  Veuillez lire attentivement ces termes et conditions avant d'utiliser notre
+  service.
+tos_interpretation_title: Interprétation et définitions
+tos_interpretation_subtitle: Interprétation
+tos_interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+tos_definitions_subtitle: Définitions
+tos_definitions_intro: "Aux fins des présentes Conditions Générales\_:"
+tos_definition_application: >-
+  Application désigne le logiciel fourni par la Société téléchargé par Vous sur
+  tout appareil électronique, nommé $1
+tos_definition_application_store: >-
+  Application Store désigne le service de distribution numérique exploité et
+  développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
+  dans lequel l'Application a été téléchargée.
+tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_account: >-
+  Compte désigne un compte unique créé pour vous permettre d'accéder à notre
+  service ou à des parties de notre service.
+tos_definition_country: "Le pays fait référence à\_:\_Estonie"
+tos_definition_company: >-
+  La Société (désignée par « la Société », « Nous », « Notre » ou « Notre » dans
+  le présent Accord) fait référence à Digital Shift OU, Sepapaja 6, 15551,
+  Tallinn, Estonie.
+tos_definition_device: >-
+  Appareil désigne tout appareil pouvant accéder au Service tel qu'un
+  ordinateur, un téléphone portable ou une tablette numérique.
+tos_definition_feedback: >-
+  Les commentaires désignent les commentaires, innovations ou suggestions
+  envoyés par vous concernant les attributs, les performances ou les
+  fonctionnalités de notre service.
+tos_definition_free_trial: >-
+  L'essai gratuit fait référence à une période de temps limitée qui peut être
+  gratuite lors de l'achat d'un abonnement.
+tos_definition_in_app_purchase: >-
+  L'achat intégré fait référence à l'achat d'un produit, d'un article, d'un
+  service ou d'un abonnement effectué via l'application et soumis aux présentes
+  conditions générales et/ou aux propres conditions générales de l'App Store.
+tos_definition_service: Service fait référence à l’Application.
+tos_definition_subscriptions: >-
+  Les abonnements font référence aux services ou à l'accès au Service qui vous
+  sont proposés sous forme d'abonnement par la Société.
+tos_definition_terms: >-
+  Les Conditions générales (également appelées « Conditions ») désignent les
+  présentes Conditions générales qui constituent l'intégralité de l'accord entre
+  Vous et la Société concernant l'utilisation du Service.
+tos_definition_third_party_social_media: >-
+  Service de médias sociaux tiers désigne tout service ou contenu (y compris les
+  données, informations, produits ou services) fourni par un tiers qui peut être
+  affiché, inclus ou mis à disposition par le Service.
+tos_definition_you: >-
+  Vous désignez la personne qui accède ou utilise le Service, ou la société ou
+  autre entité juridique au nom de laquelle cette personne accède ou utilise le
+  Service, selon le cas.
+tos_acknowledgment_title: Reconnaissance
+tos_acknowledgment_text_1: >-
+  Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
+  l'accord qui opère entre Vous et la Société. Les présentes Conditions
+  générales définissent les droits et obligations de tous les utilisateurs
+  concernant l'utilisation du Service.
+tos_acknowledgment_text_2: >-
+  Votre accès et votre utilisation du Service sont conditionnés à votre
+  acceptation et à votre respect des présentes Conditions générales. Ces
+  Conditions générales s'appliquent à tous les visiteurs, utilisateurs et autres
+  personnes qui accèdent ou utilisent le Service.
+tos_acknowledgment_text_3: >-
+  En accédant ou en utilisant le Service, vous acceptez d'être lié par les
+  présentes Conditions générales. Si vous n'êtes pas d'accord avec une partie de
+  ces conditions générales, vous ne pouvez pas accéder au service.
+tos_acknowledgment_text_4: >-
+  Vous déclarez que vous avez plus de 18 ans. La Société n'autorise pas les
+  personnes de moins de 18 ans à utiliser le Service.
+tos_acknowledgment_text_5: >-
+  Votre accès et votre utilisation du Service sont également conditionnés à
+  votre acceptation et à votre respect de la politique de confidentialité de la
+  Société. Notre politique de confidentialité décrit nos politiques et
+  procédures relatives à la collecte, à l'utilisation et à la divulgation de vos
+  informations personnelles lorsque vous utilisez l'application ou le site Web
+  et vous informe de vos droits à la vie privée et de la manière dont la loi
+  vous protège. Veuillez lire attentivement notre politique de confidentialité
+  avant d'utiliser notre service.
+tos_subscriptions_title: Abonnements
+tos_subscriptions_period_subtitle: Période d'abonnement
+tos_subscriptions_period_text_1: >-
+  Le Service ou certaines parties du Service sont disponibles uniquement avec un
+  Abonnement payant. Vous serez facturé à l'avance sur une base récurrente et
+  périodique (telle que quotidienne, hebdomadaire, mensuelle ou annuelle), en
+  fonction du type de plan d'abonnement que vous sélectionnez lors de l'achat de
+  l'abonnement.
+tos_subscriptions_period_text_2: >-
+  A la fin de chaque période, Votre Abonnement sera automatiquement renouvelé
+  dans exactement les mêmes conditions sauf si Vous l'annulez ou si la Société
+  l'annule.
+tos_subscriptions_cancellations_subtitle: Annulations d'abonnement
+tos_subscriptions_cancellations_text_1: >-
+  Vous pouvez annuler le renouvellement de votre abonnement soit via la page des
+  paramètres de votre compte, soit en contactant la Société. Vous ne recevrez
+  pas de remboursement pour les frais que vous avez déjà payés pour votre
+  période d'abonnement en cours et vous pourrez accéder au Service jusqu'à la
+  fin de votre période d'abonnement en cours.
+tos_subscriptions_cancellations_text_2: >-
+  Si l'abonnement a été souscrit via un achat intégré, vous pouvez annuler le
+  renouvellement de votre abonnement auprès de l'Application Store.
+tos_subscriptions_billing_subtitle: Facturation
+tos_subscriptions_billing_text_1: >-
+  Vous devez fournir à la Société des informations de facturation précises et
+  complètes, notamment votre nom complet, votre adresse, votre état, votre code
+  postal, votre numéro de téléphone et des informations sur un mode de paiement
+  valide.
+tos_subscriptions_billing_text_2: >-
+  Si la facturation automatique ne s'effectue pas pour quelque raison que ce
+  soit, la Société émettra une facture électronique indiquant que vous devrez
+  procéder manuellement, dans un certain délai, au paiement intégral
+  correspondant à la période de facturation indiquée sur la facture.
+tos_subscriptions_billing_text_3: >-
+  Si l'abonnement a été effectué via un achat intégré, toute la facturation est
+  gérée par l'Application Store et est régie par les propres termes et
+  conditions de l'Application Store.
+tos_subscriptions_fee_changes_subtitle: Modifications des frais
+tos_subscriptions_fee_changes_text_1: >-
+  La Société, à sa seule discrétion et à tout moment, peut modifier les frais
+  d'abonnement. Toute modification des frais d’abonnement entrera en vigueur à
+  la fin de la période d’abonnement alors en cours.
+tos_subscriptions_fee_changes_text_2: >-
+  La Société vous fournira un préavis raisonnable de toute modification des
+  frais d'abonnement afin de vous donner la possibilité de résilier votre
+  abonnement avant qu'une telle modification n'entre en vigueur.
+tos_subscriptions_fee_changes_text_3: >-
+  Votre utilisation continue du Service après l'entrée en vigueur de la
+  modification des frais d'abonnement constitue votre accord de payer le montant
+  des frais d'abonnement modifié.
+tos_subscriptions_refunds_subtitle: Remboursements
+tos_subscriptions_refunds_text_1: >-
+  Sauf lorsque la loi l’exige, les frais d’abonnement payés ne sont pas
+  remboursables.
+tos_subscriptions_refunds_text_2: >-
+  Certaines demandes de remboursement d'Abonnements peuvent être examinées par
+  la Société au cas par cas et accordées à la seule discrétion de la Société.
+tos_subscriptions_refunds_text_3: >-
+  Si l'abonnement a été effectué via un achat In-app, la politique de
+  remboursement de l'Application Store s'appliquera. Si vous souhaitez demander
+  un remboursement, vous pouvez le faire en contactant directement l'Application
+  Store.
+tos_subscriptions_free_trial_subtitle: Essai gratuit
+tos_subscriptions_free_trial_text_1: >-
+  La Société peut, à sa seule discrétion, proposer un abonnement avec un essai
+  gratuit pour une durée limitée.
+tos_subscriptions_free_trial_text_2: >-
+  Vous devrez peut-être saisir vos informations de facturation afin de vous
+  inscrire à l'essai gratuit.
+tos_subscriptions_free_trial_text_3: >-
+  Si vous saisissez vos informations de facturation lors de votre inscription à
+  un essai gratuit, vous ne serez pas facturé par la société jusqu'à
+  l'expiration de l'essai gratuit. Le dernier jour de la période d'essai
+  gratuit, à moins que vous n'annuliez votre abonnement, les frais d'abonnement
+  applicables vous seront automatiquement facturés pour le type d'abonnement que
+  vous avez sélectionné.
+tos_subscriptions_free_trial_text_4: >-
+  À tout moment et sans préavis, la Société se réserve le droit de (i) modifier
+  les termes et conditions de l'offre d'essai gratuit, ou (ii) d'annuler cette
+  offre d'essai gratuit.
+tos_in_app_purchases_title: Achats intégrés
+tos_in_app_purchases_text_1: >-
+  L'Application peut inclure des achats intégrés qui vous permettent d'acheter
+  des produits, des services ou des abonnements.
+tos_in_app_purchases_text_2: >-
+  De plus amples informations sur la manière dont vous pouvez gérer les achats
+  intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
+  générales de l'Application Store ou dans les paramètres d'aide de votre
+  appareil.
+tos_in_app_purchases_text_3: >-
+  Les achats intégrés ne peuvent être consommés qu'au sein de l'application. Si
+  vous effectuez un achat intégré, cet achat intégré ne peut pas être annulé une
+  fois que vous avez lancé son téléchargement. Les achats intégrés ne peuvent
+  pas être échangés contre de l'argent ou une autre contrepartie, ni transférés
+  d'une autre manière.
+tos_in_app_purchases_text_4: >-
+  Si un achat intégré n'est pas téléchargé avec succès ou ne fonctionne pas une
+  fois qu'il a été téléchargé avec succès, nous, après avoir pris connaissance
+  du défaut ou avoir été informés du défaut par vous, enquêterons sur la raison
+  du défaut. Nous agirons de manière raisonnable pour décider si nous devons
+  vous fournir un achat intégré de remplacement ou vous fournir un correctif
+  pour réparer le défaut. En aucun cas nous ne vous facturerons le remplacement
+  ou la réparation de l'achat intégré. Dans le cas peu probable où nous ne
+  serions pas en mesure de remplacer ou de réparer l'achat intégré concerné ou
+  si nous ne sommes pas en mesure de le faire dans un délai raisonnable et sans
+  inconvénient majeur pour vous, nous autoriserons l'Application Store à vous
+  rembourser un montant pouvant aller jusqu'à le coût de l’achat intégré
+  concerné. Alternativement, si vous souhaitez demander un remboursement, vous
+  pouvez le faire en contactant directement l'Application Store.
+tos_in_app_purchases_text_5: >-
+  Vous reconnaissez et acceptez que tous les processus de facturation et de
+  transaction sont gérés par la boutique d'applications à partir de laquelle
+  vous avez téléchargé l'application et sont régis par les conditions générales
+  de cette boutique d'applications.
+tos_in_app_purchases_text_6: >-
+  Si vous rencontrez des problèmes liés au paiement avec les achats intégrés,
+  vous devez contacter directement l'Application Store.
+tos_user_accounts_title: Comptes d'utilisateurs
+tos_user_accounts_text_1: >-
+  Lorsque vous créez un compte chez Nous, vous devez nous fournir des
+  informations exactes, complètes et à jour à tout moment. Ne pas le faire
+  constitue une violation des Conditions, pouvant entraîner la résiliation
+  immédiate de votre compte sur notre service.
+tos_user_accounts_text_2: >-
+  Vous êtes responsable de la protection du mot de passe que vous utilisez pour
+  accéder au Service et de toute activité ou action effectuée sous votre mot de
+  passe, que votre mot de passe soit associé à notre service ou à un service de
+  médias sociaux tiers.
+tos_user_accounts_text_3: >-
+  Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
+  devez nous informer immédiatement dès que vous avez connaissance de toute
+  violation de la sécurité ou utilisation non autorisée de votre compte.
+tos_user_accounts_text_4: >-
+  Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
+  personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
+  nom ou une marque qui est soumis à des droits d'une autre personne ou entité
+  autre que Vous sans autorisation appropriée, ou un nom qui est autrement
+  offensant, vulgaire ou obscène.
+tos_intellectual_property_title: Propriété intellectuelle
+tos_intellectual_property_text_1: >-
+  Le Service et son contenu original (à l'exclusion du Contenu fourni par Vous
+  ou d'autres utilisateurs), ses caractéristiques et fonctionnalités sont et
+  resteront la propriété exclusive de la Société et de ses concédants de
+  licence.
+tos_intellectual_property_text_2: >-
+  Le Service est protégé par les droits d'auteur, les marques commerciales et
+  d'autres lois du pays et des pays étrangers.
+tos_intellectual_property_text_3: >-
+  Nos marques commerciales et présentations commerciales ne peuvent pas être
+  utilisées en relation avec un produit ou un service sans le consentement écrit
+  préalable de la Société.
+tos_your_feedback_title: Vos commentaires
+tos_your_feedback_text: >-
+  Vous cédez tous les droits, titres et intérêts liés aux commentaires que vous
+  fournissez à la société. Si, pour une raison quelconque, une telle cession est
+  inefficace, vous acceptez d'accorder à la Société un droit et une licence non
+  exclusifs, perpétuels, irrévocables, libres de droits et mondiaux pour
+  utiliser, reproduire, divulguer, sous-licencier, distribuer, modifier et
+  exploiter ces commentaires sans restriction.
+tos_links_to_other_websites_title: Liens vers d'autres sites Web
+tos_links_to_other_websites_text_1: >-
+  Notre Service peut contenir des liens vers des sites Web ou des services tiers
+  qui ne sont ni détenus ni contrôlés par la Société.
+tos_links_to_other_websites_text_2: >-
+  La Société n'a aucun contrôle et n'assume aucune responsabilité quant au
+  contenu, aux politiques de confidentialité ou aux pratiques de tout site Web
+  ou service tiers. Vous reconnaissez et acceptez en outre que la Société ne
+  sera pas responsable, directement ou indirectement, de tout dommage ou perte
+  causé ou prétendument causé par ou en relation avec l'utilisation ou la
+  confiance accordée à un tel contenu, biens ou services disponibles sur ou via
+  l'un de ces sites ou services Web.
+tos_links_to_other_websites_text_3: >-
+  Nous vous conseillons fortement de lire les termes et conditions et les
+  politiques de confidentialité de tout site Web ou service tiers que vous
+  visitez.
+tos_termination_title: Terminaison
+tos_termination_text_1: >-
+  Nous pouvons résilier ou suspendre votre compte immédiatement, sans préavis ni
+  responsabilité, pour quelque raison que ce soit, y compris, sans limitation,
+  si vous violez les présentes conditions générales.
+tos_termination_text_2: >-
+  En cas de résiliation, votre droit d'utiliser le service cessera
+  immédiatement. Si vous souhaitez résilier votre compte, vous pouvez simplement
+  cesser d'utiliser le service.
+tos_limitation_of_liability_title: Limitation de responsabilité
+tos_limitation_of_liability_text_1: >-
+  Nonobstant tout dommage que vous pourriez subir, l'entière responsabilité de
+  la Société et de l'un de ses fournisseurs en vertu de toute disposition des
+  présentes Conditions et votre recours exclusif pour tout ce qui précède sera
+  limité au montant effectivement payé par vous via le Service ou 100 USD. si
+  vous n'avez rien acheté via le service.
+tos_limitation_of_liability_text_2: >-
+  Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
+  ne pourront en aucun cas être tenus responsables de tout dommage spécial,
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  limiter, les dommages pour perte de profits, perte de données ou d'autres
+  informations, en cas d'interruption des activités, de blessures corporelles,
+  de perte de confidentialité découlant de ou liées de quelque manière que ce
+  soit à l'utilisation ou à l'incapacité d'utiliser le Service, aux logiciels
+  tiers et/ou au matériel tiers utilisés avec le Service, ou autrement en
+  relation avec toute disposition des présentes Conditions), même si la Société
+  ou tout fournisseur a été informé de la possibilité de tels dommages et même
+  si le recours n'atteint pas son objectif essentiel.
+tos_limitation_of_liability_text_3: >-
+  Certains États n'autorisent pas l'exclusion des garanties implicites ou la
+  limitation de responsabilité pour les dommages accidentels ou consécutifs, ce
+  qui signifie que certaines des limitations ci-dessus peuvent ne pas
+  s'appliquer. Dans ces États, la responsabilité de chaque partie sera limitée
+  dans toute la mesure permise par la loi.
+tos_disclaimer_title: Avis de non-responsabilité « TEL QUEL » et « TEL QUE DISPONIBLE »
+tos_disclaimer_text_1: >-
+  Le Service vous est fourni « TEL QUEL » et « TEL QUE DISPONIBLE » et avec tous
+  les défauts et défauts sans garantie d'aucune sorte. Dans la mesure permise
+  par la loi applicable, la Société, en son propre nom et au nom de ses sociétés
+  affiliées et de ses concédants de licence et prestataires de services
+  respectifs, décline expressément toute garantie, qu'elle soit expresse,
+  implicite, légale ou autre, en ce qui concerne le Service, y compris toutes
+  les garanties implicites de qualité marchande, d'adéquation à un usage
+  particulier, de titre et de
+tos_disclaimer_text_2: "Sans limiter ce qui précède, ni la Société ni aucun de ses fournisseurs ne font aucune déclaration ou garantie de quelque nature que ce soit, expresse ou implicite\_: (i) quant au fonctionnement ou à la disponibilité du Service, ou aux informations, au contenu et aux matériaux ou produits. inclus dessus; (ii) que le Service sera ininterrompu ou sans erreur\_; (iii) quant à l'exactitude, la fiabilité ou l'actualité de toute information ou contenu fourni via le Service\_; ou (iv) que le Service, ses serveurs, le contenu ou les e-mails envoyés depuis ou au nom de la Société sont exempts de virus, scripts, chevaux de Troie, vers, logiciels malveillants, bombes à retardement ou autres composants nuisibles."
+tos_disclaimer_text_3: >-
+  Certaines juridictions n'autorisent pas l'exclusion de certains types de
+  garanties ou de limitations sur les droits statutaires applicables d'un
+  consommateur, de sorte que tout ou partie des exclusions et limitations
+  ci-dessus peuvent ne pas s'appliquer à vous. Mais dans un tel cas, les
+  exclusions et limitations énoncées dans cette section seront appliquées dans
+  toute la mesure applicable en vertu de la loi applicable.
+tos_governing_law_title: Loi applicable
+tos_governing_law_text: >-
+  Les lois du pays, à l'exclusion de ses règles de conflits de lois, régissent
+  les présentes conditions et votre utilisation du service. Votre utilisation de
+  l’Application peut également être soumise à d’autres lois locales, étatiques,
+  nationales ou internationales.
+tos_disputes_resolution_title: Résolution des litiges
+tos_disputes_resolution_text: >-
+  Si vous avez des préoccupations ou un litige concernant le Service, vous
+  acceptez d'essayer d'abord de résoudre le litige de manière informelle en
+  contactant la Société.
+tos_eu_users_title: Pour les utilisateurs de l’Union européenne (UE)
+tos_eu_users_text: >-
+  Si Vous êtes un consommateur de l’Union Européenne, vous bénéficierez de
+  toutes les dispositions impératives de la loi du pays dans lequel vous
+  résidez.
+tos_us_federal_government_title: Dispositions d'utilisation finale du gouvernement fédéral des États-Unis
+tos_us_federal_government_text: >-
+  Si vous êtes un utilisateur final du gouvernement fédéral américain, notre
+  service est un « article commercial » tel que ce terme est défini dans 48
+  C.F.R. §2.101.
+tos_us_legal_compliance_title: Conformité juridique aux États-Unis
+tos_us_legal_compliance_text: >-
+  Vous déclarez et garantissez que (i) vous n'êtes pas situé dans un pays soumis
+  à l'embargo du gouvernement des États-Unis ou qui a été désigné par le
+  gouvernement des États-Unis comme un pays « soutenant le terrorisme », et (ii)
+  vous n'êtes pas répertorié sur n’importe quelle liste du gouvernement des
+  États-Unis de parties interdites ou restreintes.
+tos_severability_waiver_title: Divisibilité et renonciation
+tos_severability_subtitle: Divisibilité
+tos_severability_text: >-
+  Si une disposition des présentes Conditions est jugée inapplicable ou
+  invalide, cette disposition sera modifiée et interprétée pour atteindre les
+  objectifs de cette disposition dans la plus grande mesure possible en vertu de
+  la loi applicable et les dispositions restantes resteront pleinement en
+  vigueur.
+tos_waiver_subtitle: Renoncer
+tos_waiver_text: >-
+  Sauf dans les cas prévus aux présentes, le fait de ne pas exercer un droit ou
+  d'exiger l'exécution d'une obligation en vertu des présentes Conditions
+  n'affectera pas la capacité d'une partie à exercer ce droit ou à exiger une
+  telle exécution à tout moment par la suite et la renonciation à une violation
+  ne constituera pas une renonciation à tout manquement ultérieur.
+tos_translation_title: Traduction Interprétation
+tos_translation_text: >-
+  Ces Conditions Générales peuvent avoir été traduites si Nous les avons mises à
+  votre disposition sur notre Service. Vous acceptez que le texte anglais
+  original prévaudra en cas de litige.
+tos_changes_title: Modifications de ces termes et conditions
+tos_changes_text_1: >-
+  Nous nous réservons le droit, à notre seule discrétion, de modifier ou de
+  remplacer ces conditions à tout moment. Si une révision est importante, nous
+  ferons des efforts raisonnables pour fournir un préavis d'au moins 30 jours
+  avant l'entrée en vigueur de toute nouvelle condition. Ce qui constitue un
+  changement important sera déterminé à notre seule discrétion.
+tos_changes_text_2: >-
+  En continuant à accéder ou à utiliser notre service après l'entrée en vigueur
+  de ces révisions, vous acceptez d'être lié par les conditions révisées. Si
+  vous n'acceptez pas les nouvelles conditions, en tout ou en partie, veuillez
+  cesser d'utiliser le site Web et le Service.
+tos_contact_us_title: Contactez-nous
+tos_contact_us_text: "Si vous avez des questions concernant ces conditions générales, vous pouvez nous contacter\_:"
+tos_contact_us_website: 'En visitant cette page du site :'
+return_policy_title: Politique de retour et de remboursement
+last_updated: 'Dernière mise à jour : 28 janvier 2022'
+thank_you_for_shopping: Merci d'avoir magasiné à $1.
+not_satisfied_policy: >-
+  Si, pour une raison quelconque, vous n'êtes pas entièrement satisfait d'un
+  achat, nous vous invitons à consulter notre politique de remboursement et de
+  retour. Cette politique de retour et de remboursement a été créée avec l'aide
+  du
+policy_generator: Générateur de politique de retour et de remboursement
+terms_applicable: >-
+  Les conditions suivantes s'appliquent à tous les produits que vous avez
+  achetés auprès de nous.
+interpretation_and_definitions: Interprétation et définitions
+interpretation: Interprétation
+interpretation_description: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+definitions: Définitions
+definitions_purpose_refund: "Aux fins de cette politique de retour et de remboursement\_:"
+application_definition_refund: >-
+  Application désigne le logiciel fourni par la Société téléchargé par Vous sur
+  tout appareil électronique, nommé $1
+goods_definition: Les Biens désignent les articles proposés à la vente sur le Service.
+orders_definition: >-
+  Les commandes désignent une demande de votre part d’acheter des marchandises
+  chez nous.
+order_cancellation_rights: Vos droits d'annulation de commande
+cancellation_period: >-
+  Vous avez le droit d'annuler votre commande dans un délai de 14 jours sans
+  donner de raison.
+cancellation_deadline: >-
+  Le délai d'annulation d'une Commande est de 14 jours à compter de la date à
+  laquelle Vous avez reçu la Marchandise ou à laquelle un tiers que vous aurez
+  désigné, autre que le transporteur, prend possession du produit livré.
+how_to_cancel: >-
+  Afin d'exercer Votre droit de rétractation, Vous devez Nous informer de votre
+  décision au moyen d'une déclaration claire. Vous pouvez nous informer de votre
+  décision par :
+cancellation_link: 'En visitant cette page de notre site Internet :'
+reimbursement_policy: >-
+  Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
+  recevons les marchandises retournées. Nous utiliserons le même moyen de
+  paiement que celui que vous avez utilisé pour la Commande, et vous n'aurez à
+  payer aucun frais pour ce remboursement.
+conditions_for_returns: Conditions de retour
+return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
+purchase_timeframe: Les marchandises ont été achetées au cours des 14 derniers jours
+non_returnable_goods: "Les marchandises suivantes ne peuvent pas être retournées\_:"
+custom_goods: >-
+  La fourniture de Biens confectionnés selon Vos spécifications ou nettement
+  personnalisés.
+perishable_goods: >-
+  La fourniture de Biens qui, en raison de leur nature, ne sont pas aptes à être
+  retournés, se détériorent rapidement ou dont la date de péremption est
+  dépassée.
+unsealed_goods: >-
+  La fourniture de marchandises qui ne peuvent pas être retournées pour des
+  raisons de protection de la santé ou d'hygiène et qui ont été descellées après
+  la livraison.
+inseparable_goods: >-
+  La fourniture de Biens qui, après livraison, selon leur nature, sont
+  indissociablement mélangés à d'autres articles.
+right_to_refuse: >-
+  Nous nous réservons le droit de refuser le retour de toute marchandise ne
+  répondant pas aux conditions de retour ci-dessus, à notre seule discrétion.
+sale_items_policy: >-
+  Seules les marchandises à prix régulier peuvent être remboursées.
+  Malheureusement, les produits en vente ne peuvent être remboursés. Cette
+  exclusion peut ne pas s'appliquer à vous si elle n'est pas autorisée par la
+  loi applicable.
+returning_goods: Retour de marchandises
+return_responsibility: "Vous êtes responsable du coût et du risque liés au retour des marchandises. Vous devez envoyer les marchandises à l'adresse suivante\_:"
+return_address: |-
+  6 septembre
+  Tallinn, 15510
+  Estonie
+return_shipping_disclaimer: >-
+  Nous ne pouvons être tenus responsables des marchandises endommagées ou
+  perdues lors du retour. Par conséquent, nous recommandons un service de
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
+  remboursement sans réception effective des marchandises ou sans preuve de
+  livraison de retour reçue.
+gifts: Cadeaux
+gift_return_policy: >-
+  Si les marchandises ont été marquées comme cadeau lors de l'achat et vous ont
+  ensuite été expédiées directement, vous recevrez un crédit cadeau
+  correspondant à la valeur de votre retour. Une fois le produit retourné reçu,
+  un chèque-cadeau vous sera envoyé par courrier.
+non_gift_return_policy: >-
+  Si les marchandises n'ont pas été marquées comme un cadeau lors de l'achat, ou
+  si le donateur du cadeau s'est fait expédier la commande pour vous l'offrir
+  plus tard, nous enverrons le remboursement au donateur du cadeau.
+contact_us: Contactez-nous
+questions_about_policy: "Si vous avez des questions concernant notre politique de retours et de remboursements, veuillez nous contacter\_:"
+contact_link: 'En visitant cette page du site :'
+register_title: S'inscrire à Capgo
+already_have_account: Vous avez déjà un compte ?
+sign_in: Se connecter
+email_label: E-mail
+email_placeholder: Entrez votre email
+first_name_label: Prénom
+first_name_placeholder: John
+last_name_label: Nom de famille
+last_name_placeholder: Biche
+password_label: Mot de passe
+password_placeholder: Entrez votre mot de passe
+sign_up_button: S'inscrire
+need_help: Besoin d'aide ?
+open_support: Assistance ouverte
+testimonial_title: "Nous avons déployé Capgo en production pour notre base d'utilisateurs de +5000\_!"
+testimonial_highlight: les utilisateurs sont à jour en quelques minutes
+testimonial_description: Utilisateur Capgo depuis 2023
+eula_title: Contrat de licence d'utilisateur final (« Contrat »)
+eula_last_updated: 'Dernière mise à jour : 28 janvier 2022'
+eula_read_carefully: "Veuillez lire attentivement cet accord de licence d'utilisateur final avant de cliquer sur le bouton «\_J'accepte\_», de télécharger ou d'utiliser 1\_$."
+eula_interpretation_title: Interprétation et définitions
+eula_interpretation_subtitle: Interprétation
+eula_interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+eula_definitions_subtitle: Définitions
+eula_definitions_intro: "Aux fins du présent Contrat de licence d’utilisateur final\_:"
+eula_definition_agreement: >-
+  **Contrat** désigne le présent Contrat de licence d'utilisateur final qui
+  constitue l'intégralité de l'accord entre Vous et la Société concernant
+  l'utilisation de l'Application.
+eula_definition_application: >-
+  **Application** désigne le logiciel fourni par la Société que vous avez
+  téléchargé via un compte d'un magasin d'applications sur un appareil, nommé
+  $1.
+eula_definition_application_store: >-
+  **Application Store** désigne le service de distribution numérique exploité et
+  développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
+  par lequel l'Application a été téléchargée sur votre appareil.
+eula_definition_company: >-
+  **Société** (désignée par « la Société », « Nous », « Notre » ou « Notre »
+  dans le présent Accord) fait référence à Digital Shift OU, 6 sepapaja 15510
+  Tallinn.
+eula_definition_content: >-
+  **Contenu** fait référence au contenu tel que du texte, des images ou d'autres
+  informations qui peuvent être publiées, téléchargées, liées ou autrement
+  rendues disponibles par vous, quelle que soit la forme de ce contenu.
+eula_definition_country: "**Pays** fait référence à\_: Estonie"
+eula_definition_device: >-
+  **Appareil** désigne tout appareil pouvant accéder à l'Application tel qu'un
+  ordinateur, un téléphone portable ou une tablette numérique.
+eula_definition_family_sharing: >-
+  **Partage familial/Groupe familial** vous permet de partager des applications
+  téléchargées via la boutique d'applications avec d'autres membres de la
+  famille en leur permettant de visualiser et de télécharger les applications
+  éligibles des autres sur leurs appareils associés.
+eula_definition_third_party_services: >-
+  **Services tiers** désigne tout service ou contenu (y compris les données,
+  informations, applications et autres services de produits) fourni par un tiers
+  qui peut être affiché, inclus ou mis à disposition par l'Application.
+eula_definition_you: >-
+  **Vous** désigne la personne accédant ou utilisant l'Application ou la société
+  ou autre entité juridique au nom de laquelle cette personne accède ou utilise
+  l'Application, le cas échéant.
+eula_acknowledgment_title: Reconnaissance
+eula_acknowledgment_text_1: "En cliquant sur le bouton «\_J'accepte\_», en téléchargeant ou en utilisant l'application, vous acceptez d'être lié par les termes et conditions du présent accord. Si vous n'acceptez pas les termes du présent Contrat, ne cliquez pas sur le bouton « J'accepte », ne téléchargez pas ou n'utilisez pas l'Application."
+eula_acknowledgment_text_2: >-
+  Le présent Accord est un document juridique entre Vous et la Société et il
+  régit votre utilisation de l'Application mise à votre disposition par la
+  Société.
+eula_acknowledgment_text_3: >-
+  Cet accord est conclu entre vous et la société uniquement et non avec
+  l'Application Store. La Société est donc seule responsable de l’Application et
+  de son contenu. Bien que l'Application Store ne soit pas partie au présent
+  Contrat, il a le droit de l'opposer à Vous en tant que tiers bénéficiaire
+  concernant votre utilisation de l'Application.
+eula_acknowledgment_text_4: >-
+  Étant donné que l'Application peut être consultée et utilisée par d'autres
+  utilisateurs via, par exemple, le partage familial/groupe familial ou l'achat
+  en volume, l'utilisation de l'Application par ces utilisateurs est
+  expressément soumise au présent Contrat.
+eula_acknowledgment_text_5: >-
+  L'Application vous est concédée sous licence, et non vendue, par la Société
+  pour une utilisation strictement conforme aux termes du présent Contrat.
+eula_license_title: Licence
+eula_license_scope_subtitle: Portée de la licence
+eula_license_scope_text_1: >-
+  La Société vous accorde une licence révocable, non exclusive, non transférable
+  et limitée pour télécharger, installer et utiliser l'Application en stricte
+  conformité avec les termes du présent Accord.
+eula_license_scope_text_2: >-
+  Vous ne pouvez utiliser l'Application que sur un appareil que vous possédez ou
+  contrôlez et dans la mesure permise par les termes et conditions de
+  l'Application Store.
+eula_license_scope_text_3: >-
+  La licence qui vous est accordée par la Société est uniquement destinée à vos
+  fins personnelles et non commerciales, en stricte conformité avec les termes
+  du présent Contrat.
+eula_license_restrictions_subtitle: Restrictions de licence
+eula_license_restrictions_intro: "Vous acceptez de ne pas et vous ne permettrez pas à d’autres de\_:"
+eula_license_restrictions_1: >-
+  Licence, vendre, louer, céder, distribuer, transmettre, héberger,
+  sous-traiter, divulguer ou exploiter commercialement de toute autre manière
+  l'Application ou mettre l'Application à la disposition de tout tiers.
+eula_license_restrictions_2: "Copiez ou utilisez l'Application à toute fin autre que celle autorisée dans la section «\_Licence\_» ci-dessus."
+eula_license_restrictions_3: >-
+  Modifier, créer des œuvres dérivées, désassembler, déchiffrer, compiler ou
+  procéder à l'ingénierie inverse de toute partie de l'Application.
+eula_license_restrictions_4: >-
+  Supprimer, modifier ou masquer tout avis de propriété (y compris tout avis de
+  droit d'auteur ou de marque) de la Société ou de ses sociétés affiliées,
+  partenaires, fournisseurs ou concédants de licence de l'Application.
+eula_intellectual_property_title: Propriété intellectuelle
+eula_intellectual_property_text_1: >-
+  L'Application, y compris, sans limitation, tous les droits d'auteur, brevets,
+  marques, secrets commerciaux et autres droits de propriété intellectuelle,
+  sont et resteront la propriété unique et exclusive de la Société.
+eula_intellectual_property_text_2: >-
+  La Société ne sera pas tenue de vous indemniser ou de vous défendre en cas de
+  réclamation d'un tiers découlant de ou liée à l'Application. Dans la mesure où
+  la Société est tenue de fournir une indemnisation par la loi applicable, la
+  Société, et non la boutique d'applications, sera seule responsable de
+  l'enquête, de la défense, du règlement et de l'acquittement de toute
+  réclamation selon laquelle l'Application ou votre utilisation de celle-ci
+  enfreint un tiers. droits de propriété intellectuelle.
+eula_your_suggestions_title: Vos suggestions
+eula_your_suggestions_text_1: >-
+  Tous commentaires, idées, améliorations ou suggestions que vous fournissez à
+  la Société concernant l'Application resteront la propriété unique et exclusive
+  de la Société.
+eula_your_suggestions_text_2: >-
+  La Société sera libre d'utiliser, de copier, de modifier, de publier ou de
+  redistribuer les Suggestions à toutes fins et de quelque manière que ce soit,
+  sans aucun crédit ni aucune compensation pour vous.
+eula_modifications_title: Modifications de la demande
+eula_modifications_text: >-
+  La Société se réserve le droit de modifier, suspendre ou interrompre,
+  temporairement ou définitivement, l'Application ou tout service auquel elle se
+  connecte, avec ou sans préavis et sans responsabilité envers Vous.
+eula_updates_subtitle: Mises à jour de l'application
+eula_updates_text_1: >-
+  La Société peut de temps à autre fournir des améliorations ou des
+  améliorations aux caractéristiques/fonctionnalités de l'Application, qui
+  peuvent inclure des correctifs, des corrections de bogues, des mises à jour,
+  des mises à niveau et d'autres modifications.
+eula_updates_text_2: >-
+  Les mises à jour sont susceptibles de modifier ou supprimer certaines
+  fonctionnalités et/ou fonctionnalités de l’Application. Vous acceptez que la
+  Société n'a aucune obligation de (i) fournir des mises à jour, ou (ii) de
+  continuer à vous fournir ou à activer des caractéristiques et/ou
+  fonctionnalités particulières de l'Application.
+eula_updates_text_3: >-
+  Vous acceptez en outre que toutes les mises à jour ou toute autre modification
+  seront (i) considérées comme faisant partie intégrante de l'Application, et
+  (ii) soumises aux termes et conditions du présent Accord.
+eula_maintenance_subtitle: Entretien et assistance
+eula_maintenance_text: >-
+  La Société ne fournit aucune maintenance ni support pour le téléchargement et
+  l'utilisation de l'Application. Dans la mesure où une maintenance ou une
+  assistance est requise par la loi applicable, la Société, et non la boutique
+  d'applications, sera tenue de fournir une telle maintenance ou une telle
+  assistance.
+eula_third_party_services_title: Services tiers
+eula_third_party_services_text_1: >-
+  L'Application peut afficher, inclure ou rendre disponible du contenu tiers (y
+  compris des données, informations, applications et autres produits, services)
+  ou fournir des liens vers des sites Web ou des services tiers.
+eula_third_party_services_text_2: >-
+  Vous reconnaissez et acceptez que la Société ne sera pas responsable des
+  services tiers, y compris de leur exactitude, exhaustivité, actualité,
+  validité, respect des droits d'auteur, légalité, décence, qualité ou tout
+  autre aspect de ceux-ci. La Société n'assume et n'aura aucune responsabilité
+  envers vous ou toute autre personne ou entité pour tout service tiers.
+eula_third_party_services_text_3: >-
+  Vous devez vous conformer aux conditions d’accord des tiers applicables
+  lorsque vous utilisez l’application. Les services tiers et les liens vers
+  ceux-ci sont fournis uniquement à titre de commodité pour vous et vous y
+  accédez et les utilisez entièrement à vos propres risques et sous réserve des
+  conditions générales de ces tiers.
+eula_term_and_termination_title: Durée et résiliation
+eula_term_and_termination_text_1: >-
+  Le présent Contrat restera en vigueur jusqu'à sa résiliation par Vous ou la
+  Société. La Société peut, à sa seule discrétion, à tout moment et pour quelque
+  raison que ce soit, suspendre ou résilier le présent Contrat avec ou sans
+  préavis.
+eula_term_and_termination_text_2: >-
+  Le présent Contrat sera résilié immédiatement, sans préavis de la Société,
+  dans le cas où vous ne respectez pas l'une des dispositions du présent
+  Contrat. Vous pouvez également résilier le présent Contrat en supprimant
+  l'Application et toutes ses copies de votre appareil ou de votre ordinateur.
+eula_term_and_termination_text_3: >-
+  À la résiliation du présent Contrat, vous cesserez toute utilisation de
+  l’Application et supprimerez toutes les copies de l’Application de votre
+  appareil.
+eula_term_and_termination_text_4: >-
+  La résiliation du présent Contrat ne limitera aucun des droits ou recours de
+  la Société en droit ou en équité en cas de violation par Vous (pendant la
+  durée du présent Contrat) de l'une de vos obligations en vertu du présent
+  Contrat.
+eula_indemnification_title: Indemnité
+eula_indemnification_text: "Vous acceptez d'indemniser et de dégager la Société et ses sociétés mères, filiales, sociétés affiliées, dirigeants, employés, agents, partenaires et concédants de licence (le cas échéant) de toute réclamation ou demande, y compris les honoraires d'avocat raisonnables, dus à ou découlant de votre\_: (a) l’utilisation de l’Application\_; (b) violation du présent Accord ou de toute loi ou réglementation\_; ou (c) violation de tout droit d'un tiers."
+eula_no_warranties_title: Aucune garantie
+eula_no_warranties_text_1: >-
+  L'Application vous est fournie « EN L'ÉTAT » et « TEL QUE DISPONIBLE » et avec
+  tous les défauts et défauts sans garantie d'aucune sorte. Dans la mesure
+  permise par la loi applicable, la Société, en son propre nom et au nom de ses
+  sociétés affiliées et de ses concédants de licence et prestataires de services
+  respectifs, décline expressément toute garantie, qu'elle soit expresse,
+  implicite, légale ou autre, en ce qui concerne le Application, y compris
+  toutes les garanties implicites de qualité marchande, d'adéquation à un usage
+  particulier, de titre et de non-contrefaçon, ainsi que les garanties pouvant
+  découler du cours de la transaction, du cours de l'exécution, de l'utilisation
+  ou des pratiques commerciales. Sans limitation de ce qui précède, la Société
+  ne fournit aucune garantie ni engagement et ne fait aucune déclaration de
+  quelque nature que ce soit selon laquelle l'Application répondra à vos
+  exigences, atteindra les résultats escomptés, sera compatible ou fonctionnera
+  avec tout autre logiciel, application, système ou service, fonctionnera sans
+  interruption, répondre à toutes les normes de performance ou de fiabilité ou
+  être exempt d'erreurs ou que toute erreur ou défaut peut ou sera corrigé.
+eula_no_warranties_text_2: "Sans limiter ce qui précède, ni la Société ni aucun de ses fournisseurs ne font aucune déclaration ou garantie de quelque nature que ce soit, expresse ou implicite\_: (i) quant au fonctionnement ou à la disponibilité de l'Application, ou aux informations, au contenu et aux matériaux ou produits. inclus dessus; (ii) que l'Application sera ininterrompue ou exempte d'erreurs\_; (iii) quant à l'exactitude, la fiabilité ou l'actualité de toute information ou contenu fourni via l'Application\_; ou (iv) que l'Application, ses serveurs, le contenu ou les e-mails envoyés depuis ou au nom de la Société sont exempts de virus, scripts, chevaux de Troie, vers, logiciels malveillants, bombes à retardement ou autres composants nuisibles."
+eula_no_warranties_text_3: >-
+  Certaines juridictions n'autorisent pas l'exclusion de certains types de
+  garanties ou de limitations sur les droits statutaires applicables d'un
+  consommateur, de sorte que tout ou partie des exclusions et limitations
+  ci-dessus peuvent ne pas s'appliquer à vous. Mais dans un tel cas, les
+  exclusions et limitations énoncées dans cette section seront appliquées dans
+  toute la mesure applicable en vertu de la loi applicable. Dans la mesure où
+  une garantie existe en vertu de la loi et ne peut être refusée, la Société, et
+  non l'Application Store, sera seule responsable de cette garantie.
+eula_limitation_of_liability_title: Limitation de responsabilité
+eula_limitation_of_liability_text_1: >-
+  Nonobstant tout dommage que vous pourriez subir, l'entière responsabilité de
+  la Société et de l'un de ses fournisseurs en vertu de toute disposition du
+  présent Contrat et votre recours exclusif pour tout ce qui précède seront
+  limités au montant effectivement payé par Vous pour l'Application ou via le
+  Application ou 100 USD si vous n’avez rien acheté via l’application.
+eula_limitation_of_liability_text_2: >-
+  Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
+  ne pourront en aucun cas être tenus responsables de tout dommage spécial,
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  limiter, les dommages pour perte de profits, perte de données ou d'autres
+  informations, en cas d'interruption des activités, de blessures corporelles,
+  de perte de confidentialité découlant de ou liées de quelque manière que ce
+  soit à l'utilisation ou à l'impossibilité d'utiliser l'Application, les
+  logiciels tiers et/ou le matériel tiers utilisés avec l'Application, ou
+  autrement en relation avec toute disposition du présent Contrat), même si la
+  Société ou tout fournisseur a été informé de la possibilité de tels dommages
+  et même si le recours n'atteint pas son objectif essentiel.
+eula_limitation_of_liability_text_3: >-
+  Certains États/juridictions n'autorisent pas l'exclusion ou la limitation des
+  dommages accessoires ou consécutifs, de sorte que la limitation ou l'exclusion
+  ci-dessus peut ne pas s'appliquer à vous.
+eula_limitation_of_liability_text_4: >-
+  Vous comprenez et acceptez expressément que l'Application Store, ses filiales
+  et sociétés affiliées, ainsi que ses concédants de licence ne seront pas
+  responsables envers vous en vertu d'une quelconque théorie de responsabilité
+  pour tout dommage direct, indirect, accidentel, spécial consécutif ou
+  exemplaire qui pourrait être subi par vous, y compris toute perte de données,
+  que l'Application Store ou ses représentants aient ou non été informés ou
+  auraient dû être conscients de la possibilité que de telles pertes
+  surviennent.
+eula_severability_and_waiver_title: Divisibilité et renonciation
+eula_severability_subtitle: Divisibilité
+eula_severability_text: >-
+  Si une disposition du présent Accord est jugée inapplicable ou invalide, cette
+  disposition sera modifiée et interprétée pour atteindre les objectifs de cette
+  disposition dans la plus grande mesure possible en vertu de la loi applicable
+  et les dispositions restantes resteront pleinement en vigueur.
+eula_waiver_subtitle: Renoncer
+eula_waiver_text: >-
+  Sauf dans les cas prévus aux présentes, le fait de ne pas exercer un droit ou
+  d'exiger l'exécution d'une obligation en vertu du présent Accord n'affectera
+  pas la capacité d'une partie à exercer ce droit ou à exiger une telle
+  exécution à tout moment par la suite et la renonciation à une violation ne
+  constituera pas une renonciation à tout manquement ultérieur.
+eula_product_claims_title: Allégations du produit
+eula_product_claims_text: "La Société n'offre aucune garantie concernant l'Application. Dans la mesure où vous avez une réclamation découlant de ou liée à votre utilisation de l'application, la Société, et non la boutique d'applications, est responsable du traitement de ces réclamations, qui peuvent inclure, mais sans s'y limiter\_: (i) toute réclamation en matière de responsabilité du fait des produits. ; (ii) toute réclamation selon laquelle la demande ne se conforme pas à toute exigence légale ou réglementaire applicable\_; et (iii) toute réclamation découlant de la protection des consommateurs ou d'une législation similaire."
+eula_us_legal_compliance_title: Conformité juridique aux États-Unis
+eula_us_legal_compliance_text: >-
+  Vous déclarez et garantissez que (i) vous n'êtes pas situé dans un pays soumis
+  à l'embargo du gouvernement des États-Unis ou qui a été désigné par le
+  gouvernement des États-Unis comme un pays « soutenant le terrorisme », et (ii)
+  vous n'êtes pas répertorié sur n’importe quelle liste du gouvernement des
+  États-Unis de parties interdites ou restreintes.
+eula_changes_title: Modifications apportées à cet accord
+eula_changes_text_1: >-
+  La Société se réserve le droit, à sa seule discrétion, de modifier ou de
+  remplacer le présent Contrat à tout moment. Si une révision est importante,
+  nous fournirons un préavis d'au moins 30 jours avant que les nouvelles
+  conditions n'entrent en vigueur. Ce qui constitue un changement important sera
+  déterminé à la seule discrétion de la Société.
+eula_changes_text_2: >-
+  En continuant à accéder ou à utiliser l'Application après l'entrée en vigueur
+  des révisions, vous acceptez d'être lié par les conditions révisées. Si vous
+  n'acceptez pas les nouvelles conditions, vous n'êtes plus autorisé à utiliser
+  l'application.
+eula_governing_law_title: Loi applicable
+eula_governing_law_text: >-
+  Les lois du pays, à l'exclusion de ses règles de conflits de lois, régissent
+  le présent accord et votre utilisation de l'application. Votre utilisation de
+  l’Application peut également être soumise à d’autres lois locales, étatiques,
+  nationales ou internationales.
+eula_entire_agreement_title: Intégralité de l'accord
+eula_entire_agreement_text_1: >-
+  L'accord constitue l'intégralité de l'accord entre vous et la société
+  concernant votre utilisation de l'application et remplace tous les accords
+  écrits ou oraux antérieurs et contemporains entre vous ou les accords oraux
+  entre vous et la société.
+eula_entire_agreement_text_2: >-
+  Vous pouvez être soumis à des conditions générales supplémentaires qui
+  s'appliquent lorsque vous utilisez ou achetez les services d'autres sociétés,
+  que la société vous fournira au moment d'une telle utilisation ou d'un tel
+  achat.
+eula_contact_us_title: Contactez-nous
+eula_contact_us_text: "Si vous avez des questions concernant cet accord, vous pouvez nous contacter\_:"
+eula_contact_us_link: 'En visitant cette page du site : $1'
+dpa_title: Accord de traitement des données
+dpa_last_updated: 'Dernière mise à jour : 20 septembre 2023'
+dpa_definitions_title: Définitions
+dpa_definitions_1: >-
+  Dans le cadre de la fourniture du service Capgo à l'utilisateur conformément à
+  l'accord, Capgo peut traiter les données des visiteurs au nom de
+  l'utilisateur.
+dpa_definitions_2: >-
+  Dans le présent Accord de traitement des données (« DPA »), « Législation sur
+  la protection des données » désigne le Règlement général sur la protection des
+  données (Règlement (UE) 2016/279) et toutes les autres lois applicables
+  relatives au traitement des données des visiteurs et à la confidentialité qui
+  peuvent exister dans n'importe quel pays. juridiction compétente.
+dpa_definitions_3: >-
+  « responsable du traitement », « sous-traitant », « personne concernée », «
+  données personnelles » et « traitement » doivent être interprétés conformément
+  à la législation applicable en matière de protection des données.
+dpa_definitions_4: >-
+  Les parties conviennent que l'utilisateur est le responsable du traitement des
+  données et que Capgo est son sous-traitant en ce qui concerne les données des
+  visiteurs traitées dans le cadre de la fourniture du service.
+dpa_privacy_security_title: Confidentialité et sécurité de vos données de visiteurs
+dpa_privacy_security_1: >-
+  Nous prenons de nombreuses mesures pour protéger et sécuriser vos données
+  grâce à des sauvegardes, des redondances et du cryptage. Lorsque vous utilisez
+  notre service pour mesurer les statistiques de votre site Web, Capgo
+  collectera des informations sur vos visiteurs.
+dpa_privacy_security_2: >-
+  Vous nous confiez les données de votre site et nous prenons cette confiance à
+  cœur. Vous acceptez que Capgo puisse traiter vos données comme décrit dans
+  notre politique de données et à aucune autre fin. Nous faisons de notre mieux
+  pour mériter cette confiance en étant ouverts sur qui nous sommes, comment
+  nous travaillons et en gardant la porte ouverte à vos commentaires.
+dpa_privacy_security_3: >-
+  Vous possédez tous les droits, titres et intérêts sur les données de votre
+  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
+  site Web. Nous ne collectons ni n'analysons les informations personnelles des
+  utilisateurs Web et utilisons ces informations comportementales pour vendre
+  des publicités. Lorsque vous utilisez Capgo, vous possédez et contrôlez à 100
+  % toutes les données de votre site Web. Nous ne vendons ni ne partageons les
+  données de votre site à des tiers et nous n'abusons pas de la confidentialité
+  de vos visiteurs.
+dpa_privacy_security_4: >-
+  Le but de Capgo est de mettre à jour le condensateur, cela peut toujours être
+  fait sans suivre, collecter ou stocker des données personnelles ou des
+  informations personnellement identifiables (PII), sans utiliser de cookies et
+  tout en respectant la vie privée des visiteurs de votre site Web.
+dpa_privacy_security_5: >-
+  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
+  absolument anonyme. Nous minimisons la collecte de données en général. Nous
+  mesurons uniquement les points de données les plus essentiels et rien d'autre.
+  Toutes les mesures que nous collectons tiennent sur une seule page.
+dpa_privacy_security_6: >-
+  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
+  ils sont considérés comme des données personnelles au sens du RGPD. Nous
+  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
+  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
+  visiteurs. Les données que nous traitons ne peuvent pas être utilisées pour
+  identifier un individu en particulier.
+dpa_privacy_security_7: >-
+  Le groupe de personnes concernées par le traitement de leurs données dans le
+  cadre du présent accord comprend les utilisateurs finaux des sites Internet du
+  responsable du traitement qui utilisent le service fourni par le
+  sous-traitant.
+dpa_privacy_security_8: >-
+  Vous pouvez trouver plus d'informations sur notre traitement des données de
+  vos visiteurs et sur les types/catégories de données que nous collectons en
+  votre nom dans notre politique de données accessible au public.
+dpa_security_measures_title: Mesures de sécurité organisationnelles et techniques
+dpa_security_measures_1: >-
+  Pour le cryptage, nous utilisons https en transit et le processus de hachage
+  au repos. Notre processus de hachage est bien plus puissant que le cryptage.
+  Le cryptage implique qu'il existe une clé capable de déchiffrer et de révéler
+  les données brutes. Dans notre base de données, l'adresse IP brute et l'agent
+  utilisateur sont rendus totalement inaccessibles à quiconque, y compris
+  nous-mêmes. En plus de cela, nous utilisons des règles de pare-feu strictes et
+  un réseau privé crypté. Nous conservons des sauvegardes hors site avec
+  réplication, y compris des mots de passe bcrypt forts.
+dpa_security_measures_2: >-
+  Capgo est un logiciel entièrement open source, ce qui signifie que notre code
+  source est disponible et accessible sur GitHub afin que tout le monde puisse
+  le consulter et l'auditer. Vous pouvez le lire, l'inspecter et le réviser pour
+  comprendre son fonctionnement et vous assurer qu'il préserve la
+  confidentialité et la sécurité des données. Cela vous donne, ainsi qu'à tous
+  les autres, une transparence totale sur la manière dont nous traitons les
+  données de trafic du site Web.
+dpa_security_measures_3: >-
+  Avec plus de 500 étoiles GitHub, de nombreux regards sont rivés sur notre code
+  et c'est cette transparence et cette ouverture qui signifie que les produits
+  open source peuvent être plus fiables que les produits propriétaires et
+  fermés. Notre logiciel est mis à jour plusieurs fois par semaine et sur notre
+  page GitHub, nous proposons également un moyen permettant aux utilisateurs de
+  signaler toute vulnérabilité de sécurité.
+dpa_processor_obligations_title: Obligations du sous-traitant à l'égard du responsable du traitement
+dpa_processor_obligations_1: "Capgo traitera les données des visiteurs uniquement conformément aux instructions du client via les paramètres du service, c'est-à-dire (a) pour exploiter, entretenir et prendre en charge l'infrastructure utilisée pour fournir le service\_; (b) se conformer aux instructions du client et aux instructions de traitement dans son utilisation, sa gestion et son administration du service\_; (c) comme indiqué autrement dans les paramètres du service. Capgo ne traitera les données des visiteurs que conformément à l'accord."
+dpa_processor_obligations_2: >-
+  Capgo informera le client sans délai injustifié si, de l'avis de Capgo, une
+  instruction relative au traitement des données des visiteurs donnée par le
+  client enfreint la législation applicable en matière de protection des
+  données.
+dpa_processor_obligations_3: >-
+  Capgo garantit la confidentialité des données des visiteurs traitées dans le
+  cadre des présentes.
+dpa_processor_obligations_4: >-
+  En tant qu'humains, nous pouvons accéder à vos données pour vous aider avec
+  les demandes d'assistance que vous faites et pour maintenir et protéger Capgo
+  afin d'assurer la sécurité de vos données et du service dans son ensemble.
+  Capgo veillera à ce que tout le personnel Capgo requis pour accéder aux
+  données des visiteurs soit formé au RGPD et à la confidentialité des données,
+  informé de la nature confidentielle des données et se conforme aux obligations
+  énoncées dans le présent accord.
+dpa_processor_obligations_5: >-
+  Capgo mettra en œuvre et maintiendra des mesures de sécurité techniques et
+  organisationnelles appropriées conçues pour protéger les données des visiteurs
+  contre tout traitement non autorisé ou illégal et contre la perte, la
+  destruction, les dommages, le vol, l'altération ou la divulgation accidentels.
+  Ces mesures seront adaptées aux dommages qui pourraient résulter de tout
+  traitement non autorisé ou illicite, de la perte accidentelle, de la
+  destruction, de l'endommagement ou du vol des données des visiteurs et compte
+  tenu de la nature des données des visiteurs qui doivent être protégées.
+dpa_processor_obligations_6: >-
+  Nous travaillons avec des sous-traitants. Avec chaque fournisseur, nous
+  évaluons leur engagement en matière de confidentialité et nous signons avec
+  eux un accord de traitement des données qui comprend les clauses
+  contractuelles types contrôleur-sous-traitant. Ces sous-traitants seront
+  autorisés à traiter les données uniquement pour fournir les services pour
+  lesquels Capgo les a retenus, et il leur sera interdit d'utiliser les données
+  à toute autre fin. Capgo informera le responsable du traitement lors de la
+  modification de la liste des sous-traitants ultérieurs à l'aide de nos
+  notifications dans l'application, de notre courrier électronique et/ou de
+  notre blog. Le responsable du traitement peut légitimement s'y opposer et peut
+  résilier le contrat.
+dpa_processor_obligations_7: >-
+  Si Capgo a connaissance d'une violation de sécurité, d'une destruction, d'une
+  perte, d'une altération ou d'une divulgation accidentelle, non autorisée ou
+  illégale des données personnelles traitées par Capgo dans le cadre de la
+  fourniture du service, elle devra, sans retard injustifié (au plus tard 48
+  heures après en avoir pris connaissance), informer le client par courrier
+  électronique et lui fournir une description de l'incident ainsi que des mises
+  à jour périodiques des informations sur l'incident, y compris son impact sur
+  le contenu du client. Capgo prendra en outre des mesures pour enquêter sur
+  l'incident et raisonnablement prévenir ou atténuer les effets de l'incident.
+dpa_processor_obligations_8: >-
+  Capgo ne rectifiera pas, de sa propre autorité, n'effacera ou ne limitera pas
+  le traitement des données des visiteurs qui sont traitées pour le compte du
+  responsable du traitement (sauf si cela est requis par la loi ou les
+  conditions de service du processeur), mais ne le fera que sur instructions
+  documentées de du responsable du traitement et conformément aux règles de
+  conservation des données associées à la formule d'abonnement du responsable du
+  traitement.
+dpa_processor_obligations_9: >-
+  Capgo assistera le responsable du traitement dans le respect des obligations
+  concernant la sécurité des données personnelles. Plausible fournira également
+  une assistance au responsable du traitement pour les DPIA. Lorsqu'une personne
+  concernée fait valoir ses droits en tant que personne concernée, cette demande
+  sera transmise sans délai au responsable du traitement.
+dpa_customer_undertakings_title: Engagements clients et assistance Capgo
+dpa_customer_undertakings_1: >-
+  Le Client garantit qu'il dispose de tous les droits nécessaires pour fournir à
+  Capgo les données des visiteurs pour un traitement dans le cadre de la
+  fourniture des Services Capgo.
+dpa_customer_undertakings_2: >-
+  Le Client doit se conformer à tout moment aux législations sur la protection
+  des données en ce qui concerne toutes les données des visiteurs qu'il a
+  fournies à Capgo conformément à l'Accord.
+dpa_customer_undertakings_3: "Le client comprend, en tant que responsable du traitement, qu'il est responsable (entre le client et Capgo) de\_:"
+dpa_customer_undertakings_4: "déterminer la licéité de tout traitement, effectuer toutes les évaluations d’impact requises en matière de protection des données et rendre compte aux régulateurs et aux individus, si nécessaire\_;"
+dpa_customer_undertakings_5: "fournir des avis de confidentialité pertinents aux personnes concernées, comme cela peut être requis dans votre juridiction\_;"
+dpa_customer_undertakings_6: "mettre en œuvre vos propres mesures techniques et organisationnelles appropriées pour garantir et démontrer le traitement conformément au présent DPA\_;"
+dpa_customer_undertakings_7: >-
+  informer les régulateurs ou autorités concernés de tout incident, comme cela
+  peut être requis par la loi dans votre juridiction.
+dpa_liability_indemnity_title: Responsabilité et indemnisation
+dpa_liability_indemnity_1: >-
+  Chaque partie indemnise l'autre et la dégage de toute responsabilité contre
+  toutes réclamations, actions, réclamations de tiers, pertes, dommages et
+  dépenses encourus par la partie indemnisée et découlant directement ou
+  indirectement de ou en relation avec une violation du présent DPA.
+dpa_signing_required_title: "Les clients sont-ils tenus de signer le DPA Capgo\_?"
+dpa_signing_required_1: >-
+  Afin d'utiliser nos produits et services, vous devez accepter notre DPA. En
+  utilisant notre produit, vous acceptez nos conditions de service, vous
+  acceptez automatiquement notre DPA et vous n'avez pas besoin de signer un
+  document séparé. Nous offrons les mêmes droits de confidentialité et la même
+  protection à tous les clients.
+dpa_sharing_title: "Un client peut-il partager le Capgo DPA avec ses clients\_?"
+dpa_sharing_1: >-
+  Oui. Le DPA est un document accessible au public et les clients qui souhaitent
+  le partager avec leurs clients pour confirmer nos mesures de sécurité et
+  d'autres conditions peuvent se sentir libres de le faire.
+dpa_notification_title: "Les clients doivent-ils informer quelqu'un lorsqu'ils acceptent notre DPA\_?"
+dpa_notification_1: >-
+  Non. Vous n'êtes pas tenu de nous informer, ni de nous informer d'un tiers,
+  lorsque vous acceptez notre DPA, mais comme mentionné ci-dessus, vous êtes
+  libre de le faire.
+dpa_contact_title: Contactez-nous
+dpa_contact_1: "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter\_:"
+dpa_contact_2: 'En visitant cette page du site :'
+data_policy_title: Politique de données
+data_policy_last_updated: 'Dernière mise à jour : 21 septembre 2023'
+data_policy_intro: >-
+  Une politique de données contient un ensemble de règles, de principes et de
+  lignes directrices qui fournissent un cadre pour différents domaines de
+  gestion des données dans l'ensemble de l'entreprise, y compris, mais sans s'y
+  limiter, la gouvernance des données, la qualité des données et l'architecture
+  des données.
+data_policy_what_we_collect_title: Ce que nous collectons et à quoi nous l’utilisons
+data_policy_no_tracking: >-
+  Nous ne suivons pas les personnes sur leurs appareils ni sur les sites Web et
+  applications qu’elles visitent. Toutes les données sont isolées sur une seule
+  journée, un seul site Web et un seul appareil. Il n'existe aucun moyen de
+  savoir si la même personne visite un site à partir de plusieurs appareils ou
+  si elle visite un autre site Web.
+data_policy_goal: >-
+  L'objectif de Capgo est de suivre les tendances globales du trafic de votre
+  site Web, il ne s'agit pas de suivre les visiteurs individuels. Nous
+  n'utilisons pas de cookies, nous ne générons aucun identifiant persistant et
+  nous ne collectons ni ne stockons aucune donnée personnelle ou identifiable.
+  Toutes les données sont uniquement des données agrégées et ne contiennent
+  aucune information personnelle.
+data_policy_anonymous_measurement: >-
+  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
+  absolument anonyme. Nous mesurons uniquement les points de données les plus
+  essentiels et rien d'autre. Toutes les mesures que nous collectons tiennent
+  sur une seule page.
+data_policy_unique_users_title: Comment nous comptons les utilisateurs uniques sans cookies
+data_policy_unique_users_intro: >-
+  Compter les visiteurs uniques fait partie intégrante de l’analyse Web. Capgo
+  tente de trouver un équilibre raisonnable entre la déduplication des pages
+  vues et le respect de la vie privée des visiteurs.
+data_policy_no_persistent_identifier: >-
+  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
+  ils sont considérés comme des données personnelles au sens du RGPD. Nous
+  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
+  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
+  visiteurs.
+data_policy_ip_user_agent: >-
+  Chaque requête HTTP envoie l'adresse IP et l'agent utilisateur au serveur,
+  c'est donc ce que nous utilisons. Nous générons un identifiant changeant
+  quotidiennement en utilisant l'adresse IP et l'agent utilisateur du visiteur.
+data_policy_ip_accuracy: >-
+  Lors de nos tests, l'utilisation des adresses IP pour compter les visiteurs
+  est remarquablement précise par rapport à l'utilisation d'un cookie. Dans
+  certains cas, cela peut même être plus précis que l'utilisation d'un cookie,
+  car certains visiteurs bloquent complètement les cookies.
+data_policy_compliance_info: >-
+  Nous sommes heureux de vous fournir des informations sur la façon dont Capgo
+  est conçu pour vous aider à vous conformer aux différentes réglementations en
+  matière de confidentialité. Nous vous encourageons à discuter de questions
+  spécifiques avec votre avocat pour vous aider à décider si notre service vous
+  permet de remplir les exigences légales qui s'appliquent à vous.
+data_policy_ownership_title: Propriété des données de votre site Web
+data_policy_ownership_intro: >-
+  Lorsque vous utilisez notre service, Capgo collectera des informations sur vos
+  visiteurs. Vous nous confiez les données de votre site et nous prenons cette
+  confiance à cœur. La confidentialité des données de votre site — et ce sont
+  vos données, pas les nôtres ! - c'est un gros problème pour nous.
+data_policy_ownership_statement: >-
+  En utilisant Capgo, vous conservez la propriété à 100% des données de votre
+  site Web. Bien que lorsque vous utilisez notre service hébergé, les analyses
+  de votre site soient stockées sur notre serveur dans le cloud, vous restez
+  totalement maître des données de votre site et vous possédez également
+  l'entièreté de toutes vos données.
+data_policy_ownership_rights: >-
+  Vous possédez tous les droits, titres et intérêts sur les données de votre
+  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
+  site Web. Nous ne vendrons ni ne partagerons jamais les données de votre site
+  à des tiers.
+data_policy_data_protection_1: >-
+  Les données de votre site Web ne sont pas partagées avec des sociétés de
+  publicité ou toute autre société en général.
+data_policy_data_protection_2: Les données de votre site Web ne sont en aucun cas envoyées à des tiers.
+data_policy_data_protection_3: >-
+  Les données de votre site Web ne sont ni extraites ni récoltées à des fins de
+  tendances personnelles et comportementales.
+data_policy_data_protection_4: Les données de votre site Web ne sont pas monétisées.
+data_policy_account_deletion: >-
+  Vous pouvez choisir de supprimer votre compte et de supprimer les statistiques
+  de votre site à tout moment. Nous fournissons des liens de suppression
+  simples, sans poser de questions.
+data_policy_permanent_deletion: >-
+  Toutes vos statistiques seront définitivement supprimées immédiatement lorsque
+  vous supprimez votre compte Capgo ou lorsque vous supprimez les statistiques
+  de votre site. Nous ne pouvons pas récupérer ces informations une fois
+  qu'elles ont été définitivement supprimées.
+data_policy_trust_title: Pourquoi devrais-je te faire confiance ?
+data_policy_trust_open_source: >-
+  Capgo est 100% open source. Notre code source est disponible et accessible sur
+  GitHub afin que vous puissiez le lire et le réviser pour vous assurer que
+  notre code fait ce que nous disons.
+data_policy_trust_transparency: >-
+  Nous ne sommes pas une boîte noire. Tout est à découvert. Tout le monde peut
+  visualiser, examiner et inspecter le code que nous exécutons pour vérifier que
+  nous mettons en pratique ce que nous prêchons.
+data_policy_trust_importance: >-
+  Ceci est essentiel sur le marché des logiciels de confidentialité. On ne peut
+  pas toujours faire confiance aux entreprises et aux logiciels propriétaires
+  lorsque les données sont en question. La seule façon de prouver votre
+  confiance est de permettre à des experts d’examiner votre code et de vérifier
+  que vous faites réellement ce que vous dites faire.
+data_policy_gdpr_title: Confidentialité RGPD
+data_policy_legal_basis_title: Base juridique du traitement des données personnelles dans le cadre du RGPD
+data_policy_legal_basis_intro: 'Nous pouvons traiter les données personnelles dans les conditions suivantes :'
+data_policy_legal_basis_consent: "Consentement\_: Vous avez donné votre consentement au traitement des données personnelles pour une ou plusieurs finalités spécifiques."
+data_policy_legal_basis_contract: "Exécution d'un contrat\_: la fourniture de données personnelles est nécessaire à l'exécution d'un accord avec vous et/ou à toute obligation précontractuelle de celui-ci."
+data_policy_legal_basis_legal_obligations: >-
+  Obligations légales : Le traitement des Données Personnelles est nécessaire au
+  respect d'une obligation légale à laquelle la Société est soumise.
+data_policy_legal_basis_vital_interests: >-
+  Intérêts vitaux : Le traitement des Données personnelles est nécessaire afin
+  de protéger Vos intérêts vitaux ou ceux d’une autre personne physique.
+data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
+data_policy_legal_basis_legitimate_interests: >-
+  Intérêts légitimes : Le traitement des Données Personnelles est nécessaire aux
+  finalités des intérêts légitimes poursuivis par la Société.
+data_policy_legal_basis_clarification: >-
+  Dans tous les cas, la Société se fera un plaisir de contribuer à clarifier la
+  base juridique spécifique qui s'applique au traitement, et notamment si la
+  fourniture de Données Personnelles est une exigence légale ou contractuelle,
+  ou une exigence nécessaire à la conclusion d'un contrat.
+data_policy_gdpr_rights_title: Vos droits en vertu du RGPD
+data_policy_gdpr_rights_intro: >-
+  La Société s'engage à respecter la confidentialité de Vos Données Personnelles
+  et à Vous garantir l'exercice de Vos droits.
+data_policy_gdpr_rights_list_intro: "Vous avez le droit, en vertu de cette politique de confidentialité, et par la loi si vous résidez dans l'UE, de\_:"
+data_policy_gdpr_right_access: >-
+  Demandez l’accès à vos données personnelles. Le droit d’accéder, de mettre à
+  jour ou de supprimer les informations que nous détenons sur vous. Dans la
+  mesure du possible, vous pouvez accéder, mettre à jour ou demander la
+  suppression de vos données personnelles directement dans la section des
+  paramètres de votre compte. Si vous ne parvenez pas à effectuer ces actions
+  vous-même, veuillez nous contacter pour vous aider. Cela vous permet également
+  de recevoir une copie des données personnelles que nous détenons à votre
+  sujet.
+data_policy_gdpr_right_correction: >-
+  Demander la correction des données personnelles que nous détenons à votre
+  sujet. Vous avez le droit de faire corriger toute information incomplète ou
+  inexacte que nous détenons à votre sujet.
+data_policy_gdpr_right_object: >-
+  S'opposer au traitement de vos données personnelles. Ce droit existe lorsque
+  nous nous appuyons sur un intérêt légitime comme base juridique pour notre
+  traitement et qu'il y a quelque chose dans votre situation particulière qui
+  vous incite à vous opposer à notre traitement de vos données personnelles pour
+  ce motif. Vous avez également le droit de vous opposer lorsque nous traitons
+  vos données personnelles à des fins de marketing direct.
+data_policy_gdpr_right_erasure: >-
+  Demander la suppression de vos données personnelles. Vous avez le droit de
+  nous demander de supprimer ou de supprimer des données personnelles lorsqu'il
+  n'y a aucune bonne raison pour que nous continuions à les traiter.
+data_policy_gdpr_right_transfer: >-
+  Demander le transfert de vos données personnelles. Nous vous fournirons, ou à
+  un tiers que vous aurez choisi, vos données personnelles dans un format
+  structuré, couramment utilisé et lisible par machine. Veuillez noter que ce
+  droit s'applique uniquement aux informations automatisées que vous avez
+  initialement consenties à ce que nous utilisions ou lorsque nous avons utilisé
+  ces informations pour exécuter un contrat avec vous.
+data_policy_gdpr_right_withdraw_consent: >-
+  Retirez votre consentement. Vous avez le droit de retirer votre consentement
+  concernant l'utilisation de vos données personnelles. Si vous retirez votre
+  consentement, nous pourrions ne pas être en mesure de vous fournir l'accès à
+  certaines fonctionnalités spécifiques du Service.
+data_policy_gdpr_exercising_rights_title: Exercice de vos droits en matière de protection des données RGPD
+data_policy_gdpr_exercising_rights_contact: >-
+  Vous pouvez exercer vos droits d'accès, de rectification, d'annulation et
+  d'opposition en nous contactant. Veuillez noter que nous pouvons vous demander
+  de vérifier votre identité avant de répondre à de telles demandes. Si vous
+  faites une demande, nous ferons de notre mieux pour vous répondre dans les
+  plus brefs délais.
+data_policy_gdpr_complaint_right: >-
+  Vous avez le droit de porter plainte auprès d'une autorité de protection des
+  données concernant notre collecte et notre utilisation de vos données
+  personnelles. Pour plus d'informations, si vous résidez dans l'Espace
+  économique européen (EEE), veuillez contacter votre autorité locale de
+  protection des données dans l'EEE.
+data_policy_ccpa_title: Confidentialité CCPA
+data_policy_ccpa_intro: >-
+  Cette section d'avis de confidentialité destinée aux résidents de Californie
+  complète les informations contenues dans notre politique de confidentialité et
+  s'applique uniquement à tous les visiteurs, utilisateurs et autres personnes
+  résidant dans l'État de Californie.
+data_policy_ccpa_categories_title: Catégories de renseignements personnels collectés
+data_policy_ccpa_categories_intro: >-
+  Nous collectons des informations qui identifient, se rapportent, décrivent,
+  font référence, sont susceptibles d'être associées ou pourraient
+  raisonnablement être liées, directement ou indirectement, à un consommateur ou
+  à un appareil particulier. Ce qui suit est une liste des catégories
+  d'informations personnelles que nous pouvons collecter ou qui ont pu être
+  collectées auprès de résidents de Californie au cours des douze (12) derniers
+  mois.
+data_policy_ccpa_categories_note: >-
+  Veuillez noter que les catégories et exemples fournis dans la liste ci-dessous
+  sont ceux définis dans le CCPA. Cela ne signifie pas que tous les exemples de
+  cette catégorie d'informations personnelles ont en fait été collectés par
+  Nous, mais reflète notre conviction de bonne foi, au meilleur de nos
+  connaissances, que certaines de ces informations de la catégorie applicable
+  peuvent être et ont pu être collectées. Par exemple, certaines catégories
+  d’informations personnelles ne seront collectées que si vous nous les avez
+  fournies directement.
+data_policy_ccpa_category_a: 'Catégorie A : Identifiants.'
+data_policy_ccpa_category_a_examples: "Exemples\_: un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou d'autres identifiants similaires."
+data_policy_ccpa_category_a_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_b: "Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e))."
+data_policy_ccpa_category_b_examples: "Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse, un numéro de téléphone, un numéro de passeport, un numéro de permis de conduire ou de carte d'identité, un numéro de police d'assurance, une formation, un emploi, des antécédents professionnels, un numéro de compte bancaire, un numéro de carte de crédit. , numéro de carte de débit ou toute autre information financière, information médicale ou information d'assurance maladie. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories."
+data_policy_ccpa_category_b_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_c: "Catégorie C\_:\_Caractéristiques de classification protégées en vertu de la loi californienne ou fédérale."
+data_policy_ccpa_category_c_examples: "Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement). et conditions médicales associées), l'orientation sexuelle, le statut d'ancien combattant ou de militaire, les informations génétiques (y compris les informations génétiques familiales)."
+data_policy_ccpa_category_c_collected: 'Collecté : Non.'
+data_policy_ccpa_category_d: 'Catégorie D : Informations commerciales.'
+data_policy_ccpa_category_d_examples: "Exemples\_: enregistrements et historique des produits ou services achetés ou envisagés."
+data_policy_ccpa_category_d_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_e: 'Catégorie E : Informations biométriques.'
+data_policy_ccpa_category_e_examples: "Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou d'autres identifiants ou informations d'identification, tels que les empreintes digitales, les empreintes faciales et les empreintes vocales, les scans de l'iris ou de la rétine, la frappe au clavier, la démarche ou d'autres modèles physiques. , et des données sur le sommeil, la santé ou l’exercice."
+data_policy_ccpa_category_e_collected: 'Collecté : Non.'
+data_policy_ccpa_category_f: 'Catégorie F : Internet ou autre activité réseau similaire.'
+data_policy_ccpa_category_f_examples: "Exemples\_: Interaction avec notre service ou publicité."
+data_policy_ccpa_category_f_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_g: 'Catégorie G : Données de géolocalisation.'
+data_policy_ccpa_category_g_examples: "Exemples\_: emplacement physique approximatif."
+data_policy_ccpa_category_g_collected: 'Collecté : Non.'
+data_policy_ccpa_category_h: 'Catégorie H : Données sensorielles.'
+data_policy_ccpa_category_h_examples: "Exemples\_: informations audio, électroniques, visuelles, thermiques, olfactives ou similaires."
+data_policy_ccpa_category_h_collected: 'Collecté : Non.'
+data_policy_ccpa_category_i: 'Catégorie I : Informations professionnelles ou liées à l''emploi.'
+data_policy_ccpa_category_i_examples: "Exemples\_: antécédents professionnels actuels ou passés ou évaluations de performances."
+data_policy_ccpa_category_i_collected: 'Collecté : Non.'
+data_policy_ccpa_category_j: "Catégorie J\_: Informations éducatives non publiques (conformément à la Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99))."
+data_policy_ccpa_category_j_examples: "Exemples\_: dossiers scolaires directement liés à un étudiant conservés par un établissement d'enseignement ou une partie agissant en son nom, tels que les notes, les relevés de notes, les listes de cours, les horaires des étudiants, les codes d'identification des étudiants, les informations financières des étudiants ou les dossiers disciplinaires des étudiants."
+data_policy_ccpa_category_j_collected: 'Collecté : Non.'
+data_policy_ccpa_category_k: "Catégorie K\_:\_Inférences tirées d’autres informations personnelles."
+data_policy_ccpa_category_k_examples: "Exemples\_: Profil reflétant les préférences, les caractéristiques, les tendances psychologiques, les prédispositions, le comportement, les attitudes, l'intelligence, les capacités et les aptitudes d'une personne."
+data_policy_ccpa_category_k_collected: 'Collecté : Non.'
+data_policy_ccpa_info_sources_title: >-
+  En vertu du CCPA, les informations personnelles doivent être interprétées au
+  sens large comme des informations qui identifient, se rapportent, décrivent,
+  font référence, sont raisonnablement susceptibles d'être associées ou
+  pourraient raisonnablement être liées, directement ou indirectement, à un
+  consommateur ou à un appareil particulier. Les informations personnelles
+  n'incluent pas les informations accessibles au public provenant des dossiers
+  gouvernementaux, les informations anonymisées ou agrégées sur les
+  consommateurs, ou les informations exclues du champ d'application du CCPA.
+data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_info_source_1: >-
+  Directement de votre part. Par exemple, à partir des formulaires que vous
+  remplissez sur notre Service, des préférences que vous exprimez ou fournissez
+  via notre Service, ou à partir de vos achats sur notre Service.
+data_policy_ccpa_info_source_2: >-
+  Indirectement de Toi. Par exemple, en observant Votre activité sur notre
+  Service.
+data_policy_ccpa_info_source_3: >-
+  Automatiquement de votre part. Par exemple, via les cookies que nous ou nos
+  fournisseurs de services installons sur votre appareil lorsque vous naviguez
+  dans notre service.
+data_policy_ccpa_info_source_4: >-
+  Des fournisseurs de services. Par exemple, des fournisseurs tiers pour le
+  traitement des paiements, ou d'autres fournisseurs tiers que nous utilisons
+  pour vous fournir le Service.
+data_policy_ccpa_use_of_info_title: >-
+  Utilisation des informations personnelles à des fins commerciales ou à des
+  fins commerciales
+data_policy_ccpa_use_of_info_intro: "Nous pouvons utiliser ou divulguer les informations personnelles que nous collectons à des «\_fins commerciales\_» ou des «\_fins commerciales\_» (telles que définies dans le CCPA), qui peuvent inclure les exemples suivants\_:"
+data_policy_ccpa_use_of_info_1: Pour exploiter notre service et vous fournir notre service.
+data_policy_ccpa_use_of_info_2: >-
+  Pour vous fournir une assistance et répondre à vos demandes, notamment pour
+  enquêter et répondre à vos préoccupations et surveiller et améliorer notre
+  service.
+data_policy_ccpa_use_of_info_3: >-
+  Pour remplir ou répondre à la raison pour laquelle vous avez fourni les
+  informations. Par exemple, si vous partagez vos coordonnées pour poser une
+  question sur notre service, nous utiliserons ces informations personnelles
+  pour répondre à votre demande.
+data_policy_ccpa_use_of_info_4: >-
+  Pour répondre aux demandes des forces de l'ordre et comme l'exige la loi
+  applicable, une ordonnance du tribunal ou des réglementations
+  gouvernementales.
+data_policy_ccpa_use_of_info_5: >-
+  Comme cela vous est décrit lors de la collecte de vos informations
+  personnelles ou comme indiqué autrement dans le CCPA.
+data_policy_ccpa_use_of_info_6: À des fins d’administration et d’audit internes.
+data_policy_ccpa_use_of_info_7: >-
+  Détecter les incidents de sécurité et se protéger contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, y compris, si
+  nécessaire, poursuivre les responsables de ces activités.
+data_policy_ccpa_info_sharing_title: Partage d’informations personnelles
+data_policy_ccpa_info_sharing_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
+data_policy_ccpa_info_sharing_1: Fournisseurs de services
+data_policy_ccpa_info_sharing_2: Processeurs de paiement
+data_policy_ccpa_info_sharing_3: Nos affiliés
+data_policy_ccpa_info_sharing_4: Nos partenaires commerciaux
+data_policy_ccpa_info_sharing_5: >-
+  Fournisseurs tiers auxquels vous ou vos agents nous autorisez à divulguer vos
+  informations personnelles en relation avec les produits ou services que nous
+  vous fournissons
+data_policy_ccpa_sale_of_info_title: Vente de renseignements personnels
+data_policy_ccpa_sale_of_info_definition: >-
+  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
+  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
+  le transfert ou toute autre communication orale, écrite ou électronique ou
+  autre, des informations personnelles d'un consommateur par le affaires à un
+  tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
+  avoir reçu une sorte d'avantage en échange du partage d'informations
+  personnelles, mais pas nécessairement un avantage monétaire.
+data_policy_ccpa_sale_of_info_note: >-
+  Veuillez noter que les catégories énumérées ci-dessous sont celles définies
+  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
+  d'informations personnelles ont en fait été vendus, mais reflète notre
+  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
+  ces informations de la catégorie applicable peuvent être et ont pu être
+  partagées contre valeur en retour. .
+data_policy_ccpa_sale_of_info_statement: "Nous pouvons vendre et avons pu vendre au cours des douze (12) derniers mois les catégories d’informations personnelles suivantes\_:"
+data_policy_ccpa_sale_of_info_categories: "Catégorie A\_: Identifiants\nCatégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e))\nCatégorie D : Informations commerciales\nCatégorie F\_:\_Internet ou autre activité réseau similaire"
+data_policy_ccpa_share_of_info_title: Partage d’informations personnelles
+data_policy_ccpa_share_of_info_statement: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
+data_policy_ccpa_share_of_info_categories: >-
+  Fournisseurs de services
+
+  Processeurs de paiement
+
+  Nos affiliés
+
+  Nos partenaires commerciaux
+
+  Fournisseurs tiers auxquels vous ou vos agents nous autorisez à divulguer vos
+  informations personnelles en relation avec les produits ou services que nous
+  vous fournissons
+data_policy_ccpa_sale_of_minors_info_title: Vente de renseignements personnels de mineurs de moins de 16 ans
+data_policy_ccpa_sale_of_minors_info_statement: >-
+  Nous ne collectons pas sciemment d'informations personnelles auprès de mineurs
+  de moins de 16 ans via notre Service, bien que certains sites Web tiers vers
+  lesquels nous établissons des liens puissent le faire. Ces sites Web tiers ont
+  leurs propres conditions d'utilisation et politiques de confidentialité et
+  nous encourageons les parents et tuteurs légaux à surveiller l'utilisation
+  d'Internet par leurs enfants et à leur demander de ne jamais fournir
+  d'informations sur d'autres sites Web sans leur autorisation.
+data_policy_ccpa_sale_of_minors_info_policy: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils ont moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
+data_policy_ccpa_sale_of_minors_info_request: >-
+  Si vous avez des raisons de croire qu'un enfant de moins de 13 (ou 16 ans)
+  nous a fourni des informations personnelles, veuillez nous contacter avec
+  suffisamment de détails pour nous permettre de supprimer ces informations.
+data_policy_ccpa_your_rights_title: Vos droits en vertu du CCPA
+data_policy_ccpa_your_rights_intro: "Le CCPA accorde aux résidents californiens des droits spécifiques concernant leurs informations personnelles. Si vous résidez en Californie, vous disposez des droits suivants\_:"
+data_policy_ccpa_right_to_notice: >-
+  Le droit de préavis. Vous avez le droit d'être informé des catégories de
+  données personnelles collectées et des finalités pour lesquelles les données
+  personnelles sont utilisées.
+data_policy_ccpa_right_to_request: "Le droit de demander. En vertu du CCPA, vous avez le droit de demander que nous vous divulguions des informations sur notre collecte, notre utilisation, notre vente, notre divulgation à des fins commerciales et notre partage d'informations personnelles. Une fois que nous aurons reçu et confirmé votre demande, nous vous divulguerons\_:"
+data_policy_ccpa_right_to_request_1: >-
+  Les catégories d'informations personnelles que nous avons collectées à votre
+  sujet
+data_policy_ccpa_right_to_request_2: >-
+  Les catégories de sources des informations personnelles que nous avons
+  collectées à votre sujet
+data_policy_ccpa_right_to_request_3: >-
+  Notre objectif professionnel ou commercial pour la collecte ou la vente de ces
+  informations personnelles
+data_policy_ccpa_right_to_request_4: >-
+  Les catégories de tiers avec lesquels nous partageons ces informations
+  personnelles
+data_policy_ccpa_right_to_request_5: >-
+  Les informations personnelles spécifiques que nous avons collectées à votre
+  sujet
+data_policy_ccpa_right_to_request_6: "Si nous vendons vos informations personnelles ou divulguons vos informations personnelles à des fins commerciales, nous vous divulguerons\_:"
+data_policy_ccpa_right_to_request_6_1: Les catégories de catégories d'informations personnelles vendues
+data_policy_ccpa_right_to_request_6_2: Les catégories de catégories de renseignements personnels divulguées
+data_policy_ccpa_right_to_opt_out: >-
+  Le droit de dire non à la vente de données personnelles (opt-out). Vous avez
+  le droit de nous demander de ne pas vendre vos informations personnelles. Pour
+  soumettre une demande de désinscription, veuillez nous contacter.
+data_policy_ccpa_right_to_delete: "Le droit de supprimer les données personnelles. Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
+data_policy_ccpa_right_to_delete_1: >-
+  Terminer la transaction pour laquelle nous avons collecté les informations
+  personnelles, fournir un bien ou un service que vous avez demandé, prendre des
+  mesures raisonnablement prévues dans le contexte de notre relation commerciale
+  en cours avec vous, ou exécuter autrement notre contrat avec vous.
+data_policy_ccpa_right_to_delete_2: >-
+  Détectez les incidents de sécurité, protégez-vous contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, ou poursuivez les
+  responsables de ces activités.
+data_policy_ccpa_right_to_delete_3: >-
+  Déboguez les produits pour identifier et réparer les erreurs qui altèrent les
+  fonctionnalités prévues existantes.
+data_policy_ccpa_right_to_delete_4: >-
+  Exercer la liberté d'expression, garantir le droit d'un autre consommateur
+  d'exercer ses droits à la liberté d'expression ou exercer un autre droit prévu
+  par la loi.
+data_policy_ccpa_right_to_delete_5: >-
+  Se conformer à la loi californienne sur la confidentialité des communications
+  électroniques (Cal. Penal Code § 1546 et suivants).
+data_policy_ccpa_right_to_delete_6: >-
+  Participer à des recherches scientifiques, historiques ou statistiques
+  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
+  toutes les autres lois applicables en matière d'éthique et de confidentialité,
+  lorsque la suppression des informations est susceptible de rendre impossible
+  ou de nuire sérieusement aux résultats de la recherche, si vous avez
+  préalablement fourni votre consentement éclairé. .
+data_policy_ccpa_right_to_delete_7: >-
+  Autorisez uniquement des utilisations internes raisonnablement alignées sur
+  les attentes des consommateurs en fonction de votre relation avec nous.
+data_policy_ccpa_right_to_delete_8: Se conformer à une obligation légale.
+data_policy_ccpa_right_to_delete_9: >-
+  Faire d'autres utilisations internes et licites de ces informations qui sont
+  compatibles avec le contexte dans lequel vous les avez fournies.
+data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas être victime de discrimination dans l'exercice de l'un de vos droits de consommateur, notamment par\_:"
+data_policy_ccpa_right_to_non_discrimination_1: Vous refuser des biens ou des services
+data_policy_ccpa_right_to_non_discrimination_2: >-
+  Facturer des prix ou des tarifs différents pour des biens ou des services, y
+  compris le recours à des remises ou d'autres avantages ou l'imposition de
+  pénalités
+data_policy_ccpa_right_to_non_discrimination_3: Vous fournir un niveau ou une qualité différente de biens ou de services
+data_policy_ccpa_right_to_non_discrimination_4: >-
+  Suggérant que vous recevrez un prix ou un taux différent pour des biens ou des
+  services ou un niveau ou une qualité différent de biens ou de services
+data_policy_ccpa_exercising_rights_title: Exercice de vos droits en matière de protection des données CCPA
+data_policy_ccpa_exercising_rights_contact: "Afin d'exercer l'un de vos droits en vertu du CCPA, et si vous résidez en Californie, vous pouvez nous contacter\_:"
+data_policy_ccpa_exercising_rights_website: 'En visitant cette page de notre site Internet : $1/#support'
+data_policy_ccpa_exercising_rights_authorized_agent: >-
+  Seul vous, ou une personne enregistrée auprès du secrétaire d'État de
+  Californie que vous autorisez à agir en votre nom, pouvez faire une demande
+  vérifiable concernant vos informations personnelles.
+data_policy_ccpa_exercising_rights_request_must: "Votre demande auprès de Nous doit\_:"
+data_policy_ccpa_exercising_rights_request_must_1: >-
+  Fournissez des informations suffisantes qui nous permettent de vérifier
+  raisonnablement que vous êtes la personne au sujet de laquelle nous avons
+  collecté des informations personnelles ou un représentant autorisé.
+data_policy_ccpa_exercising_rights_request_must_2: >-
+  Décrivez votre demande avec suffisamment de détails pour nous permettre de la
+  comprendre, de l'évaluer et d'y répondre correctement.
+data_policy_ccpa_exercising_rights_cannot_respond: "Nous ne pouvons pas répondre à votre demande ni vous fournir les informations requises si nous ne pouvons pas\_:"
+data_policy_ccpa_exercising_rights_cannot_respond_1: Vérifiez votre identité ou votre autorité pour faire la demande
+data_policy_ccpa_exercising_rights_cannot_respond_2: Et confirmez que les informations personnelles vous concernent
+data_policy_ccpa_exercising_rights_disclosure: >-
+  Nous divulguerons et fournirons les informations requises gratuitement dans
+  les 45 jours suivant la réception de votre demande vérifiable. Le délai pour
+  fournir les informations requises peut être prolongé une fois de 45 jours
+  supplémentaires lorsque cela est raisonnablement nécessaire et avec un
+  préavis.
+data_policy_ccpa_exercising_rights_disclosure_period: >-
+  Toute divulgation que nous fournissons ne couvrira que la période de 12 mois
+  précédant la réception de la demande vérifiable.
+data_policy_ccpa_exercising_rights_data_portability: >-
+  Pour les demandes de portabilité des données, nous sélectionnerons un format
+  pour fournir vos informations personnelles qui soit facilement utilisable et
+  devrait vous permettre de transmettre les informations d'une entité à une
+  autre sans entrave.

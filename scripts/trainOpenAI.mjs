@@ -1,16 +1,14 @@
-import { join } from 'node:path'
-import { existsSync } from 'node:fs'
-import * as dotenv from 'dotenv'
+import 'dotenv/config'
 import { Document } from 'langchain/document'
-import { FaissStore } from 'langchain/vectorstores/faiss'
+import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
-import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio'
+import { FaissStore } from 'langchain/vectorstores/faiss'
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { actions } from './action.mjs'
 
 const appDir = process.cwd()
-
-dotenv.config()
 
 async function loadVectorStore() {
   const directory = join(appDir, 'loadedVectorStore')

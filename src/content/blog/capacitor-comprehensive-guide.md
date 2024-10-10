@@ -10,6 +10,7 @@ head_image: "/capacitor-guide.webp"
 head_image_alt: Capacitor guide illustration
 tag: Guides
 published: true
+locale: en
 next_blog: ""
 
 ---

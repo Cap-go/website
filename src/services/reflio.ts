@@ -1,8 +1,3 @@
-declare global {
-  interface Window {
-    Reflio: any
-  }
-}
 export function initAffiliate() {
   if (window.Reflio) return
   const d = document

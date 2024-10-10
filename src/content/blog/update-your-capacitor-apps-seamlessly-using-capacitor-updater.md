@@ -11,6 +11,7 @@ head_image: "/update_flow.webp"
 head_image_alt: Capacitor Dev looking for alternative
 tag: Tutorial
 published: true
+locale: en
 next_blog: ""
 
 ---

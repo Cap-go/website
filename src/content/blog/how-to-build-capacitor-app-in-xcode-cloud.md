@@ -10,6 +10,7 @@ head_image: "/xcode_cloud.webp"
 head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
 published: true
+locale: en
 
 ---
 

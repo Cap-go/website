@@ -10,8 +10,8 @@ head_image: "/organization_system_blog.webp"
 head_image_alt: Capgo organization system illusatration
 tag: Story
 published: true
+locale: en
 next_blog: ""
-
 ---
 
 ## Introduction

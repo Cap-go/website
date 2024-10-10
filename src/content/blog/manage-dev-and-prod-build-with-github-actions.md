@@ -10,6 +10,7 @@ head_image: "/capgo_ci-cd-illustration.webp"
 head_image_alt: Channel builds illustration
 tag: CI/CD
 published: true
+locale: en
 next_blog: "how-to-send-specific-version-to-users"
 
 ---

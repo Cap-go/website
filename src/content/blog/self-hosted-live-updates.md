@@ -10,6 +10,7 @@ head_image: "/self_hosted.webp"
 head_image_alt: Self hosted updates
 tag: Solution
 published: true
+locale: en
 next_blog: ""
 
 ---

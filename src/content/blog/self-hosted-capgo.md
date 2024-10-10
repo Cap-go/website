@@ -10,6 +10,7 @@ head_image: "/self-hosted-capgo.webp"
 head_image_alt: self-hosted capgo
 tag: Solution
 published: true
+locale: en
 next_blog: ""
 
 ---

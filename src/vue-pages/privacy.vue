@@ -1,27 +1,18 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from '../config/app'
+import { useRuntimeConfig } from '@/config/app'
+import { type Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
-
 const domain = config.public.baseUrl
 const brand = config.public.brand
-// const title = `${brand} | Privacy Policy`
-// const description = 'Read our Privacy Policy'
-// useHead({
-//   title,
-//   meta: [
-//     { name: 'title', hid: 'title', content: title },
-//     { name: 'og:title', hid: 'og:title', content: title },
-//     { name: 'description', hid: 'description', content: description },
-//     { name: 'og:description', hid: 'og:description', content: description },
-//     { name: 'description', hid: 'description', content: 'Privacy Policy' },
-//     { name: 'robots', content: 'noindex, nofollow' },
-//   ],
-// })
+
+const props = defineProps<{
+  locale: Locales
+}>()
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto text-left px-3">
+  <div class="prose prose-sm m-auto px-3 text-left">
     <h1>Privacy Policy</h1>
     <p>Last updated: January 28, 2022</p>
     <p>
