@@ -8,7 +8,7 @@ const newLocale = 'fr'
 
 const copyDirectory = (source: string, destination: string) => {
   if (!fs.existsSync(destination)) fs.mkdirSync(destination, { recursive: true })
-  const files = fg.globSync(['**/*'], { dot: true, cwd: source }).filter((file) => !locales.includes(file.split('/')[0]))
+  const files = fg.globSync(['**/*'], { dot: true, cwd: source }).filter((file) => !locales.includes(file.split('/')[0]) && !file.includes('.json.ts'))
   files.forEach((file) => {
     const sourceFile = path.join(source, file)
     const destFile = path.join(destination, file)
