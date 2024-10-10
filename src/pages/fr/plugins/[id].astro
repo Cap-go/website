@@ -1,12 +1,13 @@
 ---
-import { marked } from 'marked'
+import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
-import type { Plugin } from '@/config/plugins'
-import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
 import { fetchWithToken, getSlug } from '@/services/github'
+import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
+import type { GetStaticPaths } from 'astro'
+import { marked } from 'marked'
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   let tutMap: any = {}
   const promises: any[] = []
   let processTuts: Plugin[] = []
@@ -98,20 +99,16 @@ export async function getStaticPaths() {
   })
 }
 
-const plugin = Astro.props.item
+const plugin = Astro.props.item as Plugin
 let tutorial = Astro.props.tutorial
 
-if (tutorial) {
+if (tutorial && typeof tutorial === 'string') {
   const tmp = marked.parse(tutorial)
   if (typeof tmp !== 'string') plugin['tutorial'] = await tmp
   else plugin['tutorial'] = tmp
 }
 
-if (!plugin || !plugin.title) {
-  return new Response(null, {
-    status: 404,
-  })
-}
+if (!plugin || !plugin.title) return new Response(null, { status: 404 })
 
 const { id } = Astro.params
 

@@ -1,37 +1,38 @@
 ---
-slug: do-capgo-work-for-cordova
-title: "Pourquoi Capgo ne prend pas en charge Cordova\_: mise à niveau de votre application pour accéder aux mises à jour en direct"
-description: 'Dans ce guide, je vais vous partager mon expérience avec Capgo et Cordova.'
+slug: "do-capgo-work-for-cordova"
+title: "Why Capgo Doesn't Support Cordova: Upgrading Your App to access live Updates"
+description: In this guide, i will share you my experience with Capgo and Cordova.
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2023-01-29T00:00:00.000Z
-updated_at: 2023-01-29T00:00:00.000Z
-head_image: /cordova.webp
-head_image_alt: Caorodva Dev recherche une mise à jour de son application
+author_url: https://x.com/martindonadieu
+created_at: 2023-01-29
+updated_at: 2023-01-29
+head_image: "/cordova.webp"
+head_image_alt: Caorodva Dev looking for update they app
 tag: Migration
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-Si vous recherchez une plate-forme de développement d'applications robuste et moderne, alors Capacitor est la solution parfaite. Contrairement à Cordova, qui est une plate-forme vieillissante et obsolète, Capacitor exploite les dernières avancées en matière de plate-forme native et d'évolution du langage pour offrir la meilleure expérience utilisateur possible.
+If you're looking for a robust and modern app development platform, then Capacitor is the perfect solution. Unlike Cordova, which is an aging and outdated platform, Capacitor leverages the latest in native platform and language evolution to deliver the best possible user experience.
 
-Voici quelques raisons pour lesquelles Capgo ne prend pas en charge Cordova :
+Here are a few reasons why Capgo doesn't support Cordova:
 
-Cordova est ancienne et n'évolue plus : Cordova existe depuis un certain temps et, même si elle était autrefois une excellente plate-forme, elle a depuis cessé d'évoluer. Cela signifie que Cordova n'est plus capable de suivre les derniers développements de la plate-forme et du langage natifs. évolution
+Cordova is Old and No Longer Evolves: Cordova has been around for a while, and while it was once a great platform, it has since stopped evolving. This means that Cordova is no longer capable of keeping up with the latest developments in native platform and language evolution.
 
-Cordova ne prend pas en charge les dernières évolutions natives de la plate-forme et du langage : Cordova ne prend pas en charge par défaut la dernière évolution de la plate-forme et du langage natifs, tels que Kotlin et Swift. Cela signifie que Cordova est incapable de fournir les dernières et meilleures expériences de développement d'applications aux utilisateurs.
+Cordova Doesn't Support Latest Native Platform and Language Evolutions: Cordova doesn't support the latest evolution of native platform and language by default, such as Kotlin and Swift. This means that Cordova is incapable of providing the latest and greatest app development experiences for users.
 
-Condensateur : une alternative plus moderne : Capgo a adopté Capacitor comme alternative plus moderne à Cordova. Capacitor permet l'inclusion de bibliothèques externes, ce qui signifie que Capgo peut s'appuyer sur les meilleures bibliothèques et les maintenir à jour. Il en résulte une plus plateforme de développement d'applications robuste et stable
+Capacitor: A More Modern Alternative: Capgo has adopted Capacitor as a more modern alternative to Cordova. Capacitor allows for the inclusion of external libraries, which means that Capgo can rely on the best libraries and keep them up-to-date. This results in a more robust and stable app development platform.
 
-Voici une autre raison pour laquelle Capgo ne prend pas en charge Cordova : maintenir le même niveau de qualité et de fonctionnalités que Cordova n'est pas réalisable pour une entreprise d'amorçage. Pour maintenir le produit de premier ordre, Capgo reste concentré sur l'utilisation des outils les plus modernes et les plus efficaces disponibles.
+Here's another reason why Capgo doesn't support Cordova: maintaining the same level of quality and features as Cordova is not feasible for a bootstrapping company. To keep the product top-notch, Capgo stays focused on utilizing the most modern and efficient tools available.
 
-Si vous souhaitez obtenir des mises à jour en direct à un bon prix, votre meilleur choix est de passer à Capacitor. Cela améliorera non seulement les performances et l'expérience utilisateur de votre application, mais la rendra également évolutive.
+If you're looking to get live updates for a good price, your best choice is to upgrade to Capacitor. This will not only improve the performance and user experience of your app, but it will also make it future-proof.
 
-Ne manquez pas les avantages du développement d'applications modernes. Passez dès aujourd'hui à Capacitor pour des mises à jour en direct et un avenir radieux pour votre application.
+Don't miss out on the benefits of modern app development. Upgrade to Capacitor today for live updates and a bright future for your app.
 
-Cependant, passer à Capgo peut sembler intimidant. Le didacticiel officiel de migration de Capacitor peut vous prendre une semaine et être difficile à comprendre si vous n'avez aucune expérience préalable en matière de codage dans Capacitor natif. Il nécessite une solide compréhension des bases de la plate-forme native, ce qui peut être écrasant pour certains
+However, making the switch to Capgo may seem daunting. The official Capacitor tutorial for migration may take you a week and be difficult to understand if you have no prior experience with coding in native. Capacitor requires a solid understanding of the basics of native platform, which can be overwhelming for some.
 
-Mais n’ayez crainte ! Vous disposez d'une option plus efficace et sans stress. En [m'embauchant](https://calcom/martindonadieu/convert-your-cordova-app-to-capacitor/), le créateur de Capgo, vous pouvez mettre à niveau votre application en juste une semaine Non seulement je m'occuperai de la migration, mais j'enseignerai également à votre équipe les bases de la plateforme native afin que vous puissiez continuer à développer et maintenir votre application en toute simplicité.
+But fear not! You have a more efficient and stress-free option. By [hiring me](https://cal.com/martindonadieu/convert-your-cordova-app-to-capacitor/), the creator of Capgo, you can have your app upgraded in just a week. Not only will I handle the migration, but I'll also teach your team the basics of native platform so that you can continue to develop and maintain your app with ease.
 
-En conclusion, mettre à niveau votre application avec Capgo est le moyen simple et efficace de vous assurer que vous utilisez la meilleure et la plus moderne des plateformes de développement d'applications. En [m'embaucher](https://calcom/martindonadieu/convert-your-cordova-app -to-capacitor/), vous gagnerez du temps, éviterez la frustration et repartirez avec une compréhension plus approfondie de la plateforme native"
+In conclusion, upgrading your app with Capgo is the easy and efficient way to ensure that you're using the best and most modern app development platform. By [hiring me](https://cal.com/martindonadieu/convert-your-cordova-app-to-capacitor/), you'll save time, avoid frustration, and come away with a more profound understanding of native platform."

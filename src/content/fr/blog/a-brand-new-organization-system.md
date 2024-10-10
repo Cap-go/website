@@ -1,90 +1,88 @@
 ---
-slug: a-brand-new-organization-system
-title: Un tout nouveau système d'organisation
-description: >-
-  Une histoire sur la façon dont l'équipe capgo a ajouté un système
-  d'organisation
+slug: "a-brand-new-organization-system"
+title: A brand new organization system
+description: A backstory on how the capgo team added a organization system
 author: WcaleNieWolny
-author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
-created_at: 2024-04-15T00:00:00.000Z
-updated_at: 2024-04-15T00:00:00.000Z
-head_image: /organization_system_blog.webp
-head_image_alt: Illustration du système d'organisation Capgo
+author_url: https://github.com/WcaleNieWolny/WcaleNieWolny
+created_at: 2024-04-15
+updated_at: 2024-04-15
+head_image: "/organization_system_blog.webp"
+head_image_alt: Capgo organization system illusatration
 tag: Story
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
 ---
 
 ## Introduction
 
-Hé, je suis [WcaleNieWolny](https://githubcom/WcaleNieWolny/WcaleNieWolny) - ingénieur logiciel principal de Capgo
+Hey, I am [WcaleNieWolny](https://github.com/WcaleNieWolny/WcaleNieWolny) - Capgo's lead software engineer.
 
-Au cours des 8 derniers mois, j'ai développé le [système d'organisation](/docs/webapp/organization-system/), et depuis le 14 avril, je suis heureux d'annoncer que le système est terminé 🎉 🎊
+Over the past 8 months, I have been developing the [organization system](/docs/webapp/organization-system/), and as of April 14, I am happy to announce that the system has been completed 🎉 🎊
 
-Enfin, après 8 mois, chaque partie de Capgo est accessible aux membres de l'organisation. Cela inclut :
- - applications
- - statistiques
- - facturation
- - prise en charge complète de la CLI
- - et bien plus encore !
+Finally, after 8 months, every single part of Capgo is accessible to org members. This includes:
+ - apps
+ - statistics
+ - billing
+ - full CLI support
+ - and so much more!
 
-Cela n'a pas été facile d'arriver ici ; il y a eu 3 révisions majeures des systèmes
+It has not been easy to get here; there have been 3 major revisions of the systems.
 
-## Organisations v1
+## Organizations v1
 
-Les débuts ont été difficiles. Au départ, j'ai commencé à travailler là-dessus 2 semaines après avoir rejoint le projet. 
-À l'époque, j'avais peu ou pas de connaissances sur la base de code ni sur la façon de l'implémenter.
+The beginnings were rough... Initially, I started working on this 2 weeks after joining the project. 
+At the time, I had little to no knowledge about the codebase or any bigger idea on how to implement this.
 
-Cela a conduit à la mise en œuvre de la solution la plus hackée qui ne prenait en charge que l'accès aux applications, aux chaînes et aux versions.
-Cela ne permettait même pas à l'utilisateur invité d'accéder aux statistiques
+This led to implementing the most hacky solution that only supported accessing the apps, channels, and versions.
+It did not even allow for the invited user to access stats.
 
-Et puis j'ai attendu que Martin examine cela, j'ai attendu et attendu, mais rien ne s'est vraiment passé 3 mois plus tard, j'ai décidé d'y revenir et de résoudre tous les conflits de fusion que j'ai également décidé de tester, ce qui s'est avéré être une excellente idée.
-Sans surprise, la solution hacky a complètement échoué. À ce moment-là, j'ai décidé de corriger tous les bugs et d'écrire un test E2E approfondi.
-J'ai dû travailler avec du code très défectueux et beaucoup de mauvaises décisions prises par mon passé, mais après 2 semaines difficiles, je l'ai finalement fait fonctionner.
+And then I waited for Martin to review this. I waited and waited, but nothing really happened. 3 months later, I decided to come back to this and fix all the merge conflicts. I also decided to test, which turned out to be a great idea.
+To no surprise, the hacky solution completely failed. At that moment, I decided to fix all bugs and write an extensive E2E test.
+I had to work with very broken code and a lot of bad decisions made by the past me, but after 2 hard weeks, I finally got it to function.
 
-Cela ne signifie cependant pas qu'il était parfait. Le propriétaire de l'organisation disposait toujours d'un accès beaucoup plus large que même l'utilisateur invité le plus élevé. L'expérience utilisateur était également assez insuffisante. L'utilisateur invité ne pouvait même pas voir les statistiques de l'application, gérer la facturation et le La CLI était limitée au téléchargement uniquement 
+That does not, however, mean that it was perfect. The owner of the organization still had a lot more access than even the highest invited user. User experience also was quite lacking. The invited user could not even see the application statistics, manage billing, and the CLI was limited to upload only. 
 
-Malgré tous ces défis, Martin avait revu le PR, et une semaine plus tard, il a été mis en production. 
+Despite all of those challenges, Martin had reviewed the PR, and a week later, it got pushed into prod. 
 
-## Organisations v2
+## Organizations v2
 
-Le système d'organisation fonctionnait plutôt bien malgré tous les défis que les utilisateurs l'utilisaient, et cela a vraiment fait avancer l'ensemble du projet. Cependant, il me restait à :
- - réparer le désordre créé dans [sécurité au niveau des lignes](https://supabasecom/docs/guides/auth/row-level-security)
- - ajouter la prise en charge de l'ensemble de la CLI
- - s'assurer que les utilisateurs administrateurs ont le même accès que le propriétaire
+The organization system was working rather well despite all of the challenges. Users were using it, and it really pushed the entire project forward. However, I still had to:
+ - fix the mess made in [row level security](https://supabase.com/docs/guides/auth/row-level-security)
+ - add support for the entire CLI
+ - ensure that admin users have the same access as the owner
 
-Après [de nombreuses discussions](https://githubcom/Cap-go/capgo/issues/564) avec Martin, nous avons décidé que la meilleure façon d'avancer était de réécrire l'intégralité des règles de sécurité et de déplacer toute la propriété des ressources aux organisations et non aux utilisateurs
-Cela permettrait une intégration plus facile avec le nouveau système d'organisation et supprimerait également une grande partie du code existant.
+After [a lot of discussions](https://github.com/Cap-go/capgo/issues/564) with Martin, we decided that the best way to move forward was to rewrite the entire security rules and to move all the resource ownership to organizations and not users.
+This would allow for easier integration with the new organization system, and it would also remove a lot of legacy code.
 
-L'écriture du nouveau code RLS était très fastidieuse, mais après une semaine et demie, toute la migration était prête
+Writing the new RLS code was very tedious, but after a week and a half, the entire migration was ready.
 
-Cette fois, cependant, nous avons décidé de ne pas écrire le test E2E, ce qui signifiait que nous devions le tester manuellement. Après 3 appels très approfondis ensemble, Martin et moi avons finalement décidé de passer à la production et espérons que tout se passerait bien 🙏
+This time, however, we decided against writing the E2E test, which meant that we had to test it manually. After 3 very extensive calls together, Martin and I finally decided to push to production and hope it would go well 🙏
 
-Ce n'est pas le cas. Il s'avère que j'ai rompu l'enregistrement des utilisateurs et que les nouveaux utilisateurs n'ont pas pu créer de compte 😅
+It didn't... It turns out that I broke user registration, and new users could not create an account 😅
 
-Après un rapide appel de panique, j'ai rapidement poussé quelques modifications en production et je me suis couché. Malheureusement, mes modifications n'ont fait que créer davantage de problèmes 😰
+After a quick panic call, I quickly pushed some changes into prod and went to bed. Unfortunately, my changes only created more problems 😰
 
-Après m'être réveillé, j'ai découvert que les utilisateurs avaient beaucoup d'organisations vides. Cela n'est pas censé se produire car une seule organisation devrait être autorisée par utilisateur. Il a fallu un certain temps de réflexion pour supprimer toutes les organisations vides et dupliquées, mais à part ça , les changements se sont plutôt bien déroulés
+After I woke up, I discovered that users had a lot of empty organizations. This is not supposed to happen as only 1 organization should be allowed per user. It took some time of brainstorming to remove all of the duplicated, empty orgs, but aside from that, the changes went rather smoothly.
 
-## Organisations v3
+## Organizations v3
 
-Même cela n'était pas suffisant. Il manquait encore un élément énorme : la facturation.
+Even this was not enough. There was still a huge component missing - billing.
 
-Jusqu'à présent, seul le propriétaire pouvait gérer la facturation. Cela a créé des problèmes intéressants lorsqu'un utilisateur achetait un forfait pensant qu'il l'achetait pour l'organisation. 
-Nous avons rapidement résolu le problème manuellement et c'est à ce stade que nous avons décidé que ce problème était inacceptable.
+So far only the owner could manage the billing. This has created some interesting issues where a user purchased a plan thinking he was buying it for the organization. 
+We quickly fixed the issue manually and it was at this point that we decided that this issue was unacceptable
 
-La migration s'est plutôt bien dérouléeCela a demandé une semaine de travail mais comparé à la V1 et à la V2 ce n'était vraiment pas si dur 🚀
+The migration was rather smooth. It took a week of work but compared to V1 and V2 it really was not that hard 🚀
 
-## Organisations v4 – l'avenir
+## Organizations v4 - the future
 
-Après tout ce travail acharné, je pense qu'il est temps de se concentrer sur autre chose pour le moment 😎
+After all of this hard work I think it's time to focus on something else for now 😎
 
-Ce n'était pas facile mais j'ai beaucoup appris et capgo a reçu une fonctionnalité très intéressante et importante
-Je dois encore supprimer les fonctions héritées, améliorer l'expérience utilisateur de l'application Web, surveiller les bugs, 
-mais il ne devrait pas y avoir de changements majeurs à ce système
+It was not easy but I learned a lot and capgo has recived a very nice and important feature
+I still have to deperecate the legacy functions, improve the webapp user experiance, monitor for bugs, 
+but there should not be any major changes to this system.
 
 
 <br>
 
-Merci d'avoir lu 🚀
+Thank you for reading 🚀

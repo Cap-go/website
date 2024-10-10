@@ -1,29 +1,28 @@
 ---
-slug: do-google-allow-live-updates
-title: >-
-  Google autorise-t-il l'envoi de mises à jour en direct aux applications sans
-  l'examen de l'App Store.
-description: "Comment pouvez-vous envoyer des mises à jour de code aux applications Android de production et être pleinement conforme aux directives de Google\_?"
+slug: "do-google-allow-live-updates"
+title: Do Google allow to send live update to Apps without the App Store review.
+description: 'How can you push code updates to production Android apps and be fully compliant with Google’s guidelines? '
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
-head_image: /playstore.webp
-head_image_alt: Illustration du contournement du condensateur
+author_url: https://x.com/martindonadieu
+created_at: 2022-01-13
+updated_at: 2023-06-29
+head_image: "/playstore.webp"
+head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 locale: fr
-next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
+
 ---
 
-Google Play est moins restrictif qu'Apple en matière de mise à jour des applications
+Google Play is less restrictive than Apple when it comes to updating apps.
 
-La mise à jour de vos applications distribuées via Google Play peut être une tâche délicate, mais il est important de suivre les directives de Google pour rester conforme. Selon les directives de Google Play, les applications ne doivent pas se modifier, remplacer ou se mettre à jour en utilisant une méthode autre que le propre mécanisme de mise à jour de Google Play. signifie que le téléchargement de code exécutable, tel que des fichiers dex, JAR ou autres, à partir d'une source autre que Google Play n'est pas autorisé
+Updating your apps distributed via Google Play can be a tricky task, but it is important to follow Google's guidelines to remain compliant. According to Google Play's guidelines, apps must not modify, replace or update themselves using any method apart from Google Play's own update mechanism. This means that downloading executable code, such as dex, JAR, or .so files, from a source apart from Google Play is not permitted.
 
-Toutefois, cette restriction ne s'applique pas au code qui s'exécute dans une machine virtuelle ou à un interpréteur qui fournit un accès indirect aux API Android, comme JavaScript dans une vue Web ou un navigateur. Cela signifie que vous pouvez utiliser des langages interprétés, tels que JavaScript, Python, Lua. , etc., pour mettre à jour votre application sans passer par le processus de révision de Google Play. Un outil qui peut vous aider dans ce processus est le plugin Capgo Capacitor. Ce plugin permet aux développeurs de mettre à jour leur code HTML, CSS et JavaScript et d'envoyer des mises à jour à leurs applications sans avoir besoin de mettre à jour leur application. pour examen
+However, this restriction does not apply to code that runs in a virtual machine or an interpreter that provides indirect access to Android APIs, such as JavaScript in a webview or browser. This means that you can use interpreted languages, such as JavaScript, Python, Lua, etc., to update your app without going through Google Play's review process. One tool that can help with this process is the Capgo Capacitor plugin. This plugin allows developers to update their HTML, CSS, and JavaScript code and send updates to their apps without the need for review.
 
-De plus, les applications ou le code tiers qui utilisent des langages interprétés, tels que JavaScript, Python, Lua, etc., chargés au moment de l'exécution, ne doivent pas autoriser de violations potentielles des politiques de Google Play. Il est important de noter que ce code interprété ne doit pas être empaqueté. avec l'application
+Additionally, apps or third-party code that utilize interpreted languages, such as JavaScript, Python, Lua, etc., which are loaded at runtime, must not allow potential violations of Google Play's policies. It is important to note that this interpreted code should not packaged with the app.
 
-En suivant ces directives et en utilisant des outils tels que le plugin Capgo Capacitor, vous pouvez vous assurer que les mises à jour de votre application sont conformes aux politiques de Google Play et que votre application reste disponible pour les utilisateurs de la plateforme. Gardez à l'esprit que c'est toujours une bonne idée de doubler- vérifiez la dernière version des politiques de Google pour vous assurer que vous les suivez correctement
+By following these guidelines and using tools like the Capgo Capacitor plugin, you can ensure that your app updates are compliant with Google Play's policies, and that your app remains available to users on the platform. Keep in mind that it's always a good idea to double-check the latest version of Google's policies to make sure you're following them correctly.
 
-Pour plus d'informations sur la façon d'installer Capgo pour contourner la révision, veuillez vous référer à mon prochain article
+For more information on how to install Capgo to bypass review, please refer to my next article.

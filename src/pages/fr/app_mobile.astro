@@ -3,9 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VueAppmobile from '@/vue-pages/app_mobile.vue'
 import translations from '@/services/translations'
 
-const brand = Astro.locals.runtimeConfig.public.brand
-
-const title = [brand, translations['Capacitor_Sanbox_App'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['Capacitor_Sanbox_App'][Astro.locals.locale]].join(' | ')
 const description = translations['Capacitor_Sanbox_App_description'][Astro.locals.locale]
 
 const content = {

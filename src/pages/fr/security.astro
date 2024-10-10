@@ -1,11 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { type Locales, defaultLocale } from '@/services/locale'
 import translations from '@/services/translations'
 
-const brand = Astro.locals.runtimeConfig.public.brand
-
-const title = [brand, translations['security_policy'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['security_policy'][Astro.locals.locale]].join(' | ')
 const description = translations['read_our_security_policy'][Astro.locals.locale]
 
 const content = { title, description }

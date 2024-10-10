@@ -3,9 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VueContributing from '@/vue-pages/contributing.vue'
 import translations from '@/services/translations'
 
-const brand = Astro.locals.runtimeConfig.public.brand
-
-const title = [brand, translations['contributing'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['contributing'][Astro.locals.locale]].join(' | ')
 const description = translations['contributing_description'][Astro.locals.locale]
 
 const content = { title, description }

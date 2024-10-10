@@ -1,29 +1,29 @@
 ---
-slug: optimise-your-images-for-updates
-title: Optimisez vos images pour les mises à jour
-description: >-
-  Comment optimiser vos images pour les mises à jour en direct et aider votre
-  utilisateur à obtenir des mises à jour plus rapidement.
+slug: "optimise-your-images-for-updates"
+title: Optimise your images for updates
+description: How to optimise your images for live updates and help your user get updates faster.
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2023-01-23T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
-head_image: /convert_webp.webp
-head_image_alt: Convertir en illustration Webp
+author_url: https://x.com/martindonadieu
+created_at: 2023-01-23
+updated_at: 2023-06-29
+head_image: "/convert_webp.webp"
+head_image_alt: Convert to webp illustration
 tag: Optimisation
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-WebP est un format d'image moderne qui peut permettre des économies significatives en termes de taille de fichier par rapport au JPEG, tout en conservant une qualité visuelle similaire ou meilleure. En convertissant vos images JPEG en WebP dans votre application mobile, vous pouvez potentiellement réduire la taille de votre application, ce qui peut entraîner pour des temps de téléchargement plus rapides et des performances améliorées pour vos utilisateurs
+WebP is a modern image format that can provide significant savings in file size compared to JPEG, while maintaining similar or better visual quality. By converting your JPEG images to WebP in your mobile app, you can potentially reduce the size of your app, which can lead to faster download times and improved performance for your users.
 
-WebP est bien pris en charge par la plupart des principales plates-formes et appareils mobiles, notamment Android et iOS. Contrairement à JPEG, WebP offre une qualité d'image supérieure avec une taille de fichier inférieure, ce qui se traduit par des temps de téléchargement plus rapides, une utilisation moindre des données et une meilleure expérience utilisateur. Ceci est particulièrement important pour les applications mobiles utilisées sur les réseaux cellulaires, où l'utilisation des données et les temps de téléchargement sont des préoccupations majeures.
+WebP is well-supported by most of the major mobile platforms and devices, including Android and iOS. Unlike JPEG, WebP provides a superior image quality at a lower file size, which results in faster download times, fewer data usage, and a better user experience. This is especially important for mobile apps that are used on cellular networks, where data usage and download times are major concerns.
 
-Lorsqu'il s'agit de convertir vos images en WebP, quelques options sont disponibles. Une option populaire consiste à utiliser un outil de ligne de commande tel que « cwebp », qui peut être facilement intégré au processus de création de votre application. Une autre option consiste à convertir vos images en WebP. WebP dans [Android Studio](https://sitesgooglecom/a/androidcom/tools/tech-docs/webp/), qui peut être utilisé pour convertir manuellement vos images. Vous pouvez également utiliser un plugin pour votre système de gestion de contenu (CMS) ou un service automatisé comme Krakenio
+When it comes to converting your images to WebP, there are a few options available. One popular option is to use a command-line tool like `cwebp`, which can be easily integrated into your app's build process. Another option is to convert your images to WebP in [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/webp/), which can be used to manually convert your images. You can also use a plugin for your content management system (CMS) or an automated service like Kraken.io.
 
-Une fois que vous avez converti vos images en WebP, il est important de tester les performances de votre application pour voir s'il y a une amélioration. Vous pouvez utiliser des outils tels que [le plugin Firebase Performance Monitoring](https://githubcom/capawesome-team/capacitor- firebase/tree/main/packages/performance/) ou d'autres outils de test de performances pour mesurer les performances de l'application. Vous devriez également envisager de tester l'application sur différents appareils et réseaux pour obtenir une image plus précise de la façon dont la conversion vers WebP affectera les performances de l'application.
+Once you've converted your images to WebP, it's significant to test the performance of your app to see if there's any improvement. You can use tools like [the Firebase Performance Monitoring plugin](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/performance/) or other performance testing tools to measure the app's performance. You should also consider testing the app on different devices and networks to get a more accurate picture of how the conversion to WebP will affect the app's performance.
 
-En plus d'améliorer les performances de votre application, la conversion de vos images en WebP peut également avoir un impact positif sur l'expérience utilisateur globale de votre application. Avec des temps de téléchargement plus rapides et une utilisation moindre des données, les utilisateurs sont plus susceptibles d'avoir une expérience positive avec votre application, ce qui peut conduire à un engagement et une rétention accrus
+In addition to improving the performance of your app, converting your images to WebP can also have a positive impact on your app's overall user experience. With faster download times and fewer data usage, users are more likely to have a positive experience with your app, which can lead to increased engagement and retention.
 
-Dans l'ensemble, la conversion de vos images en WebP peut être un moyen efficace d'optimiser les ressources de votre application mobile et d'améliorer les performances de votre application. Il s'agit d'un processus simple et direct qui peut avoir un impact important sur l'expérience utilisateur globale de votre application. En prenant le temps de convertissez vos images en WebP, vous serez en mesure d'offrir une meilleure expérience à vos utilisateurs et potentiellement d'augmenter l'engagement et la rétention
+Overall, converting your images to WebP can be an effective way to optimize your mobile app's assets and improve the performance of your app. It's a simple and straightforward process that can have a big impact on the overall user experience of your app. By taking the time to convert your images to WebP, you'll be able to provide a better experience for your users and potentially increase engagement and retention.
+

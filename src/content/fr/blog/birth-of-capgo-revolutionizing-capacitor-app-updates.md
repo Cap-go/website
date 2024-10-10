@@ -1,150 +1,148 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
-title: Comment un problème GitHub est devenu une entreprise
-description: >-
-  Découvrez les essais et les triomphes derrière la création de Capgo, un
-  système innovant de mise à jour en direct pour les applications Capacitor, né
-  de la nécessité et façonné par les commentaires de la communauté.
+slug: "birth-of-capgo-my-challenging-journey-as-a-solo-maker"
+title: 'How a GitHub Issue Evolved into a business'
+description: 'Discover the trials and triumphs behind creating Capgo, an innovative live update system for Capacitor apps, born from necessity and shaped by community feedback.'
 author: Martin Donadieu
-author_url: 'https://twitter.com/martindonadieu'
-created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2024-07-13T00:00:00.000Z
-head_image: /capgo-birth-story.webp
-head_image_alt: Une représentation visuelle de l'évolution de Capgo de l'idée au produit
+author_url: https://twitter.com/martindonadieu
+created_at: 2024-07-13
+updated_at: 2024-07-13
+head_image: "/capgo-birth-story.webp"
+head_image_alt: "A visual representation of Capgo's evolution from idea to product"
 tag: development
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-## The Genesis : une demande de la communauté
+## The Genesis: A Community Request
 
-Les graines de Capgo ont été plantées bien avant que je commence mon parcours en tant que créateur solo. Le 8 juillet 2020, un membre de la communauté nommé alexcroox a soumis une demande de plugin qui allait éventuellement devenir le modèle de Capgo.
+The seeds of Capgo were actually planted long before I began my journey as a solo maker. On July 8, 2020, a community member named alexcroox submitted a plugin request that would eventually become the blueprint for Capgo.
 
-![Demande initiale de plugin](/capgo-initial-requestwebp)
+![Initial plugin request](/capgo-initial-request.webp)
 
-Cette demande soulignait la nécessité d'un plugin « Capacitor Hot Code Push » avec les points clés suivants :
+This request outlined the need for a "Capacitor Hot Code Push" plugin with the following key points:
 
-1 **Plateformes** : prise en charge d'Android et d'iOS
-2 **Solutions existantes** : elle a mis en évidence les limites des options actuelles telles que MS Code Push (qui ne prenait pas en charge Capacitor) et App Flow (qui était cher et peu flexible)
-3 **Description** : La possibilité de mettre à jour le js/css/html d'une application en temps réel sans passer par le processus de révision de l'App Store.
-4 **Principales caractéristiques** : 
-   - Faciliter les mises à jour en direct à partir d'un serveur/point de terminaison choisi par le développeur
-   - Téléchargez un fichier zip du dossier dist mis à jour, extrayez-le et dites à Capacitor de se lancer à partir de ce nouveau répertoire
-   - Fonctionnalités supplémentaires telles que la vérification des mises à jour, le calendrier d'installation et le téléchargement sélectif des mises à jour
+1. **Platforms**: Support for both Android and iOS.
+2. **Existing Solutions**: It highlighted the limitations of current options like MS Code Push (which lacked Capacitor support) and App Flow (which was expensive and inflexible).
+3. **Description**: The ability to update js/css/html of an app in real-time without going through the app store review process.
+4. **Key Features**: 
+   - Facilitate over-the-air updates from a server/endpoint of the developer's choosing.
+   - Download a zip file of the updated dist folder, extract it, and tell Capacitor to launch from this new directory.
+   - Additional features like update verification, installation timing, and selective downloading of updates.
 
-Cette demande complète a recueilli un soutien important de la communauté, avec 65 likes et 25 réactions cardiaques. Elle démontre clairement une forte demande pour une telle solution dans l'écosystème des condensateurs.
+This comprehensive request garnered significant community support, with 65 likes and 25 heart reactions. It clearly demonstrated a strong demand for such a solution in the Capacitor ecosystem.
 
-Lorsque je suis tombé sur cette demande plus d'un an plus tard, elle a profondément résonné avec les défis auxquels je faisais face dans mes propres projets. Elle a servi à la fois de validation de la nécessité d'un tel outil et de feuille de route pour ce qui allait devenir Capgo.
+When I came across this request over a year later, it resonated deeply with the challenges I was facing in my own projects. It served as both validation of the need for such a tool and a roadmap for what would become Capgo.
 
-L'enthousiasme de la communauté pour ce plugin proposé, combiné à mes expériences personnelles, est devenu la force motrice derrière le développement de Capgo. C'est un exemple parfait de la façon dont les communautés open source peuvent identifier les besoins et inspirer des solutions, même si le délai entre l'idée et la mise en œuvre s'étend sur plus d'un an.
+The community's enthusiasm for this proposed plugin, combined with my personal experiences, became the driving force behind Capgo's development. It's a perfect example of how open-source communities can identify needs and inspire solutions, even if the timeline from idea to implementation spans over a year.
 
 
-## Un nouveau chapitre commence
+## A New Chapter Begins
 
-Avant de plonger dans l'histoire de Capgo, il est important de préparer le terrain. En 2021, j'ai pris la décision qui a changé ma vie de quitter mon rôle de CTO de Cashstory et de vendre mes actions. Cela a marqué le début de mon parcours en tant que créateur solo, un chemin rempli avec de l'incertitude mais aussi des possibilités infinies
+Before diving into the Capgo story, it's important to set the stage. In 2021, I made a life-changing decision to quit my role as CTO of Cashstory and sell my shares. This marked the beginning of my journey as a solo maker, a path filled with uncertainty but also endless possibilities.
 
-![La vie des nomades numériques à Lisbonne](/capgo-lisbon-nomadwebp)
+![Lisbon digital nomad life](/capgo-lisbon-nomad.webp)
 
-Avec mes économies comme filet de sécurité, je me suis lancé dans une nouvelle aventure. Je vivais en tant que nomade numérique à Lisbonne, au Portugal, embrassant la scène technologique dynamique et la culture de la ville tout en me concentrant sur mes projets passionnés. Mon objectif principal était Captime, une entreprise mobile. app crossfit timer Je ne savais pas que ce projet m'amènerait à créer quelque chose de beaucoup plus grand
+With my savings as a safety net, I embarked on a new adventure. I was living as a digital nomad in Lisbon, Portugal, embracing the vibrant tech scene and culture of the city while focusing on my passion projects. My primary focus was Captime, a mobile app crossfit timer. Little did I know that this project would lead me to create something much bigger.
 
-L'énergie de l'écosystème des startups de Lisbonne et la liberté du mode de vie nomade numérique ont fourni le cadre idéal pour l'innovation. C'est dans cet environnement, entouré d'entrepreneurs et de développeurs du monde entier, que les graines de Capgo ont été semées.
+The energy of Lisbon's startup ecosystem and the freedom of the digital nomad lifestyle provided the perfect backdrop for innovation. It was in this environment, surrounded by fellow entrepreneurs and developers from around the world, that the seeds of Capgo were sown.
 
-[Continuer avec le reste de l'article]
+[Continue with the rest of the article...]
 
-Cette révision reflète fidèlement votre situation de vie à Lisbonne en tant que nomade numérique, ce qui fournit un contexte important pour l'environnement dans lequel vous avez développé Capgo. Elle met également en évidence le lien entre votre choix de style de vie et l'esprit d'innovation qui a conduit à la création de Capgo.
-## L'étincelle d'une idée
+This revision accurately reflects your living situation in Lisbon as a digital nomad, which provides important context for the environment in which you developed Capgo. It also highlights the connection between your lifestyle choice and the innovative spirit that led to Capgo's creation.
+## The Spark of an Idea
 
-En travaillant sur Captime, j'ai rencontré un obstacle important : l'absence d'une solution de mise à jour abordable et flexible pour les applications Capacitor. En octobre 2021, j'ai exprimé ces préoccupations sur un fil de discussion GitHub.
+While working on Captime, I encountered a significant hurdle - the lack of an affordable and flexible update solution for Capacitor apps. In October 2021, I voiced these concerns on a GitHub thread.
 
-![Proposition initiale pour Capgo](/capgo-initial-proposalwebp)
+![Initial proposal for Capgo](/capgo-initial-proposal.webp)
 
-Les principaux points douloureux que j’ai identifiés étaient :
+The main pain points I identified were:
 
-1 Coûts élevés pour les petits développeurs
-2 Manque de mises à jour en direct (OTA) dans les forfaits abordables
-3 Fonctionnalités inutiles pour les développeurs solo
+1. High costs for small-scale developers
+2. Lack of over-the-air (OTA) updates in affordable plans
+3. Unnecessary features for solo developers
 
-## La communauté résonne
+## The Community Resonates
 
-Mes préoccupations ont touché une corde sensible chez d'autres développeurs. Beaucoup ont fait écho au sentiment selon lequel les solutions existantes étaient trop chères pour les développeurs indépendants et les petites équipes.
+My concerns struck a chord with other developers. Many echoed the sentiment that existing solutions were overpriced for indie developers and small teams.
 
-![Commentaires de la communauté](/capgo-community-feedbackwebp)
+![Community feedback](/capgo-community-feedback.webp)
 
-Un développeur a résumé les sentiments de la communauté :
+One developer summarized the community's feelings:
 
-"Ce serait génial si le plan communautaire incluait 500 mises à jour en directOu mieux encore, s'il existait un package Live Update uniquement pour 50 $/mois comprenant 5 000 mises à jour Live »
+"It would be brilliant if the Community plan included 500 live updates. Or better yet, if there was a Live Update only package for $50/month that included 5,000 Live Updates."
 
-## La naissance d'une solution
+## The Birth of a Solution
 
-Motivé par la réponse de la communauté, j'ai décidé de prendre les choses en main. Le 24 octobre 2021, j'ai annoncé mon projet de créer un module qui permettrait aux développeurs de télécharger des mises à jour à partir d'une URL donnée.
+Motivated by the community's response, I decided to take matters into my own hands. On October 24, 2021, I announced my plan to build a module that would allow developers to download updates from a given URL.
 
-![Extrait de code initial](/capgo-initial-codewebp)
+![Initial code snippet](/capgo-initial-code.webp)
 
-Les objectifs initiaux étaient simples :
-- Télécharger des données à partir d'une URL
-- Décompressez les données
-- Remplacez le code actuel par le nouveau
+The initial goals were simple:
+- Download data from a URL
+- Unzip the data
+- Replace the current code with the new one
 
-Cependant, transformer cette idée simple en réalité s’est avéré bien plus difficile que ce à quoi je m’attendais initialement.
+However, turning this simple idea into reality proved to be far more challenging than I initially anticipated.
 
-## La lutte dans les coulisses
+## The Struggle Behind the Scenes
 
-Ce qui ne ressort pas du fil de discussion GitHub, c'est la complexité de la tâche que j'avais entreprise. Le code requis pour implémenter cette fonctionnalité était obscur et difficile à comprendre. Je me suis retrouvé aux prises avec des détails complexes sur la façon dont les applications Capacitor gèrent les mises à jour et les systèmes de fichiers.
+What isn't apparent from the GitHub thread is the sheer complexity of the task I had undertaken. The code required to implement this functionality was obscure and hard to understand. I found myself grappling with intricate details of how Capacitor apps handle updates and file systems.
 
-De nombreuses nuits ont été passées dans ma camionnette, à étudier la documentation et à expérimenter différentes approches. Les progrès étaient lents et il y avait des moments où je me demandais si j'avais les yeux plus gros que le ventre.
+Many nights were spent in my van, poring over documentation and experimenting with different approaches. Progress was slow, and there were times when I questioned whether I had bitten off more than I could chew.
 
-## La communauté à la rescousse
+## Community to the Rescue
 
-Heureusement, je n'étais pas seul dans ce voyage. La communauté des développeurs, en particulier sur Discord, s'est avérée être une ressource inestimable. Les autres développeurs ont offert leurs idées, aidé à déboguer les problèmes et fourni des encouragements lorsque les choses se sont compliquées.
+Fortunately, I wasn't alone in this journey. The developer community, particularly on Discord, proved to be an invaluable resource. Fellow developers offered their insights, helped debug issues, and provided encouragement when the going got tough.
 
-![Support de la communauté Discord](/capgo-discord-supportwebp)
+![Discord community support](/capgo-discord-support.webp)
 
-Cet effort de collaboration a été crucial pour surmonter les obstacles techniques. Il a renforcé ma croyance dans la puissance de l'open source et du développement communautaire.
+This collaborative effort was crucial in overcoming the technical hurdles. It reinforced my belief in the power of open source and community-driven development.
 
-## Développement rapide et capacités d'expansion
+## Rapid Development and Expanding Capabilities
 
-Avec l'aide de la communauté, le développement a commencé à s'accélérer. Le 22 novembre 2021, j'avais une version fonctionnelle pour iOS et j'améliorais l'expérience du développeur.
+With the help of the community, development began to accelerate. By November 22, 2021, I had a working version for iOS and was improving the developer experience.
 
-![Extrait de code amélioré](/capgo-improved-codewebp)
+![Improved code snippet](/capgo-improved-code.webp)
 
-Au fur et à mesure du développement, j'ai ajouté plus de fonctionnalités :
-- Prise en charge d'Android
-- Persistance entre les suppressions d'applications
-- La possibilité de revenir à la version originale de l'application
+As development progressed, I added more features:
+- Android support
+- Persistence between app kills
+- The ability to revert to the original app version
 
-![Annonce des nouvelles fonctionnalités](/capgo-new-featureswebp)
+![New features announcement](/capgo-new-features.webp)
 
-Chaque nouvelle fonctionnalité apportait son propre ensemble de défis, mais aussi un sentiment d'accomplissement à mesure que le projet dépassait sa portée initiale.
+Each new feature brought its own set of challenges, but also a sense of accomplishment as the project grew beyond its initial scope.
 
-## Le lancement de Capgo
+## The Launch of Capgo
 
-En mars 2022, le projet était devenu un produit à part entière : Capgo I a annoncé la sortie d'un mode de mise à jour automatique, permettant aux développeurs de se connecter à leur propre backend ou d'utiliser le service backend de Capgo.
+By March 2022, the project had evolved into a full-fledged product: Capgo. I announced the release of an auto-update mode, allowing developers to connect to their own backend or use Capgo's backend service.
 
-![Annonce de lancement de Capgo](/capgo-launch-announcementwebp)
+![Capgo launch announcement](/capgo-launch-announcement.webp)
 
-La réponse de la communauté a été extrêmement positive, les développeurs faisant l'éloge de cette solution indispensable.
+The community's response was overwhelmingly positive, with developers praising this much-needed solution.
 
-## Le pivot vers un produit payant
+## The Pivot to a Paid Product
 
-Au départ, je n'avais pas l'intention de monétiser Capgo. Mon objectif était simplement de créer un outil qui résoudrait un problème auquel moi et d'autres développeurs étions confrontés. Cependant, les retours sur GitHub m'ont fait reconsidérer cette position.
+Initially, I had no plans to monetize Capgo. My goal was simply to create a tool that would solve a problem I and other developers were facing. However, the feedback on GitHub made me reconsider this stance.
 
-Les développeurs exprimaient leur volonté de payer pour une solution répondant à leurs besoins à un prix équitable. Ces commentaires, combinés à la prise de conscience des coûts permanents et des efforts nécessaires pour maintenir et améliorer Capgo, ont conduit à une décision cruciale.
+Developers were expressing a willingness to pay for a solution that met their needs at a fair price point. This feedback, combined with the realization of the ongoing costs and effort required to maintain and improve Capgo, led to a pivotal decision.
 
-Le 11 juin 2022, j'ai annoncé que Capgo commencerait à facturer l'utilisation dans 15 jours, marquant ainsi sa transition d'un projet communautaire à une entreprise durable.
+On June 11, 2022, I announced that Capgo would start charging for usage in 15 days, marking its transition from a community project to a sustainable business.
 
-![Annonce des prix Capgo](/capgo-pricing-announcementwebp)
+![Capgo pricing announcement](/capgo-pricing-announcement.webp)
 
-Cependant, restant fidèle aux racines du projet, j'ai conservé le noyau open source de Capgo en permettant une utilisation gratuite du plugin en mode manuel ou avec un serveur personnalisé.
+However, staying true to the project's roots, I maintained Capgo's open-source core by allowing free use of the plugin in manual mode or with a custom server.
 
 ## Conclusion
 
-Mon parcours avec Capgo témoigne de la puissance de l'innovation communautaire et des chemins inattendus sur lesquels se retrouvent souvent les créateurs solo. Ce qui a commencé comme une frustration personnelle alors qu'il travaillait sur une application de minuterie crossfit s'est transformé en une mise à jour en direct robuste, abordable et flexible. système pour les applications de condensateur
+My journey with Capgo is a testament to the power of community-driven innovation and the unexpected paths that solo makers often find themselves on. What started as a personal frustration while working on a crossfit timer app grew into a robust, affordable, and flexible live update system for Capacitor apps.
 
-La création de Capgo a été loin d'être facileCela a nécessité d'innombrables heures de travail, le soutien d'une généreuse communauté de développeurs et une volonté de s'adapter en fonction des commentaires des utilisateurs. Du codage sur Airbnb au Portugal jusqu'au lancement d'un produit payant, chaque étape de ce voyage a été une expérience d'apprentissage.
+The creation of Capgo was far from easy. It required countless hours of work, the support of a generous developer community, and a willingness to pivot based on user feedback. From coding in Airbnb in Portugal to launching a paid product, every step of this journey has been a learning experience.
 
-À mesure que Capgo continue d'évoluer, il constitue un excellent exemple de la manière dont l'identification d'une lacune sur le marché, le travail actif pour la combler et la réactivité aux besoins de la communauté peuvent conduire à la création d'outils précieux qui profitent à l'ensemble de l'écosystème des développeurs.
+As Capgo continues to evolve, it stands as a prime example of how identifying a gap in the market, actively working to fill it, and being responsive to community needs can lead to the creation of valuable tools that benefit the entire developer ecosystem.
 
-L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo
+The story of Capgo is more than just the development of a tool; it's a story of perseverance, community, and the exciting unpredictability of life as a solo maker.
 
-Vous pouvez trouver l'histoire complète sur [ici](https://githubcom/capacitor-community/proposals/issues/43#issuecomment-941017142)
+You can find the full story on [here](https://github.com/capacitor-community/proposals/issues/43#issuecomment-941017142).

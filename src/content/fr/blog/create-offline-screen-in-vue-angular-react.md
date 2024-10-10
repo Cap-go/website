@@ -1,100 +1,96 @@
 ---
-slug: create-offline-screen-in-vue-angular-react
-title: >-
-  Comment créer un écran hors ligne dans les applications Vue, Angular et React
-  à l'aide de l'API réseau et du condensateur
-description: >-
-  Découvrez comment implémenter un écran hors ligne dans les applications Vue,
-  Angular ou React à l'aide de l'API réseau et de Capacitor. Améliorez
-  l’expérience utilisateur en gérant efficacement les scénarios hors ligne.
+slug: "create-offline-screen-in-vue-angular-react"
+title: "How to Create an Offline Screen in Vue, Angular, and React Applications using the Network API and Capacitor"
+description: "Learn how to implement an offline screen in Vue, Angular, or React applications using the Network API and Capacitor. Improve the user experience by handling offline scenarios effectively."
 author: Martin Donadieu
-author_url: 'https://x.com/martindonadieu'
-created_at: 2022-06-21T00:00:00.000Z
-updated_at: 2022-06-21T00:00:00.000Z
-head_image: /vue_angular_react.webp
-head_image_alt: Image d'une personne travaillant sur un ordinateur
+author_url: https://x.com/martindonadieu
+created_at: 2022-06-21
+updated_at: 2022-06-21
+head_image: "/vue_angular_react.webp"
+head_image_alt: Image of a person working on a computer
 tag: Tutorial
 published: true
 locale: fr
-next_blog: ''
+next_blog: ""
+
 ---
 
-# Comment créer un écran hors ligne dans Vue 3, Angular 14 ou React
+# How to Create an Offline Screen in Vue 3, Angular 14, or React
 
-Dans ce didacticiel, nous apprendrons comment créer un écran hors ligne dans les applications Vue 3, Angular 14 et React à l'aide de l'API réseau. L'API réseau fournit des informations sur le réseau et la connectivité, nous permettant de gérer des scénarios hors ligne et d'offrir une meilleure expérience utilisateur.
+In this tutorial, we will learn how to create an offline screen in Vue 3, Angular 14, and React applications using the Network API. The Network API provides network and connectivity information, allowing us to handle offline scenarios and provide a better user experience.
 
-## Prérequis
+## Prerequisites
 
-Avant de commencer, assurez-vous que les éléments suivants sont installés :
+Before we begin, make sure you have the following installed:
 
-- [Nodejs](https://nodejsorg/) (version 14 ou supérieure)
-- [Vue CLI](https://clivuejsorg/)
-- [CLI angulaire](https://cliangulario/)
-- [Créer une application React](https://create-react-appdev/)
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [Vue CLI](https://cli.vuejs.org/)
+- [Angular CLI](https://cli.angular.io/)
+- [Create React App](https://create-react-app.dev/)
 
-## Configuration du projet
+## Setting Up the Project
 
-Tout d'abord, créons un nouveau projet en utilisant l'outil d'échafaudage respectif pour chaque framework.
+First, let's create a new project using the respective scaffolding tool for each framework.
 
 ### Vue 3
 
-Ouvrez votre terminal et exécutez la commande suivante pour créer un nouveau projet Vue 3 :
+Open your terminal and run the following command to create a new Vue 3 project:
 
 ```shell
 vue create offline-screen-vue3
 ```
 
-Choisissez le préréglage par défaut et attendez que le projet soit créé
+Choose the default preset and wait for the project to be created.
 
-### Angulaire 14
+### Angular 14
 
-Ouvrez votre terminal et exécutez la commande suivante pour créer un nouveau projet Angular 14 :
+Open your terminal and run the following command to create a new Angular 14 project:
 
 ```shell
 ng new offline-screen-angular14
 ```
 
-Suivez les invites et lorsque des fonctionnalités supplémentaires vous sont demandées, sélectionnez « Routage » en appuyant sur la touche **barre d'espace**. Attendez que le projet soit créé.
+Follow the prompts, and when asked for additional features, select "Routing" by pressing the **spacebar** key. Wait for the project to be created.
 
-### Réagir
+### React
 
-Ouvrez votre terminal et exécutez la commande suivante pour créer un nouveau projet React :
+Open your terminal and run the following command to create a new React project:
 
 ```shell
 npx create-react-app offline-screen-react
 ```
 
-Attendez que le projet soit créé
+Wait for the project to be created.
 
-## Installation de l'API réseau
+## Installing the Network API
 
-Maintenant, installons le package `@capacitor/network`, qui fournit l'API réseau
+Now, let's install the `@capacitor/network` package, which provides the Network API.
 
-Ouvrez votre terminal et accédez au répertoire de votre projet. Ensuite, exécutez la commande suivante pour installer le package :
+Open your terminal and navigate to your project directory. Then, run the following command to install the package:
 
 ```shell
 npm install @capacitor/network
 ```
 
-Pour les projets Capacitor, exécutez également la commande suivante pour synchroniser les fichiers de projet natifs :
+For Capacitor projects, also run the following command to sync the native project files:
 
 ```shell
 npx cap sync
 ```
 
-Assurez-vous que la CLI Capacitor est installée globalement en exécutant :
+Make sure you have the Capacitor CLI installed globally by running:
 
 ```shell
 npm install -g @capacitor/cli
 ```
 
-## Implémentation de l'écran hors ligne
+## Implementing the Offline Screen
 
-Ensuite, nous implémenterons la fonctionnalité d'écran hors ligne dans chaque framework. Nous afficherons un message simple lorsque l'utilisateur se déconnectera.
+Next, we will implement the offline screen functionality in each framework. We will display a simple message when the user goes offline.
 
 ### Vue 3
 
-Dans votre projet Vue 3, ouvrez le fichier `src/mainjs` et importez le module `Network` depuis `@capacitor/network` :
+In your Vue 3 project, open the `src/main.js` file and import the `Network` module from `@capacitor/network`:
 
 ```javascript
 import { createApp } from 'vue';
@@ -124,7 +120,7 @@ const logCurrentNetworkStatus = async () => {
 };
 ```
 
-Dans votre modèle d'application (`Appvue`), ajoutez un élément `<div>` avec un identifiant `offline-screen` pour afficher le message d'écran hors ligne :
+In your application template (`App.vue`), add a `<div>` element with an id of `offline-screen` to display the offline screen message:
 
 ```html
 <template>
@@ -155,11 +151,11 @@ Dans votre modèle d'application (`Appvue`), ajoutez un élément `<div>` avec u
 </style>
 ```
 
-Désormais, lorsque l'utilisateur se déconnecte, l'écran hors ligne sera affiché. Lorsque l'utilisateur reviendra en ligne, l'écran hors ligne sera masqué.
+Now, when the user goes offline, the offline screen will be displayed. When the user comes back online, the offline screen will be hidden.
 
-### Angulaire 14
+### Angular 14
 
-Dans votre projet Angular 14, ouvrez le fichier `src/app/appcomponentts` et importez le module `Network` depuis `@capacitor/network` :
+In your Angular 14 project, open the `src/app/app.component.ts` file and import the `Network` module from `@capacitor/network`:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -194,7 +190,7 @@ export class AppComponent {
 }
 ```
 
-Dans votre modèle d'application (`appcomponenthtml`), ajoutez un élément `<template>` avec un identifiant `offline-screen` pour afficher le message d'écran hors ligne :
+In your application template (`app.component.html`), add a `<div>` element with an id of `offline-screen` to display the offline screen message:
 
 ```html
 <div id="offline-screen">
@@ -205,7 +201,7 @@ Dans votre modèle d'application (`appcomponenthtml`), ajoutez un élément `<te
 <!-- Your application content -->
 ```
 
-Ajoutez les styles suivants au fichier `appcomponentcss` :
+Add the following styles to the `app.component.css` file:
 
 ```css
 #offline-screen {
@@ -224,11 +220,11 @@ Ajoutez les styles suivants au fichier `appcomponentcss` :
 }
 ```
 
-Désormais, lorsque l'utilisateur se déconnecte, l'écran hors ligne sera affiché. Lorsque l'utilisateur reviendra en ligne, l'écran hors ligne sera masqué.
+Now, when the user goes offline, the offline screen will be displayed. When the user comes back online, the offline screen will be hidden.
 
-### Réagir
+### React
 
-Dans votre projet React, ouvrez le fichier `src/Appjs` et importez le module `Network` depuis `@capacitor/network` :
+In your React project, open the `src/App.js` file and import the `Network` module from `@capacitor/network`:
 
 ```jsx
 import React, { useEffect } from 'react'
@@ -271,7 +267,7 @@ function App() {
 export default App
 ```
 
-Ajoutez les styles suivants au fichier `Appcss` :
+Add the following styles to the `App.css` file:
 
 ```css
 #offline-screen {
@@ -290,12 +286,12 @@ Ajoutez les styles suivants au fichier `Appcss` :
 }
 ```
 
-Désormais, lorsque l'utilisateur se déconnecte, l'écran hors ligne sera affiché. Lorsque l'utilisateur reviendra en ligne, l'écran hors ligne sera masqué.
+Now, when the user goes offline, the offline screen will be displayed. When the user comes back online, the offline screen will be hidden.
 
-## Méthodes et interfaces de support
+## Supporting Methods and Interfaces
 
-L'API réseau fournit plusieurs méthodes et interfaces pour vous aider à gérer la connexion réseau. Voici quelques-unes des principales :
+The Network API provides several methods and interfaces to help you handle the network connection. Here are some of the key ones:
 
-- [`getStatus()`](https://capacitorjscom/docs/apis/network/#getstatus) : requête sur l'état actuel de la connexion réseau
-- [`addListener('networkStatusChange', )`](https://capacitorjscom/docs/apis/network/#addlistenernetworkstatuschange) : écoutez les changements dans la connexion réseau
+- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Query the current status of the network connection.
+- [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Listen for changes in the network connection.
 -

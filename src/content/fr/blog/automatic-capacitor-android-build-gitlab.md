@@ -1,45 +1,44 @@
 ---
-slug: automatic-capacitor-android-build-gitlab
-title: Construction Android de condensateur automatique avec GitLab
-description: >-
-  Comment configurer un pipeline CI/CD pour votre application Android Ionic à
-  l'aide de Fastlane et GitLab en 5 minutes
+slug: "automatic-capacitor-android-build-gitlab"
+title: Automatic Capacitor Android build with GitLab
+description: How to set up a CI/CD pipeline for your Android Ionic app using fastlane and GitLab in 5 mins
 author: Anik Dhabal Babu
-author_url: 'https://x.com/anikdhabal'
-created_at: 2023-09-27T00:00:00.000Z
-updated_at: 2023-09-27T00:00:00.000Z
-head_image: /andriod_app_gitlab.webp
-head_image_alt: "Illustration GitLab de Fastlane Google\_Play"
+author_url: https://x.com/anikdhabal
+created_at: 2023-09-27
+updated_at: 2023-09-27
+head_image: "/andriod_app_gitlab.webp"
+head_image_alt: Fastlane Google play GitLab illustration
 tag: CI/CD
 published: true
 locale: fr
-next_blog: null
+next_blog: 
+
 ---
 
-## Prérequis
+## Prerequisites
 
-Avant de poursuivre le tutoriel…
+Before continuing with the tutorial…
 
-- Assurez-vous d'utiliser GitLab
-- Votre application est déjà déployée sur Google Play Store
-- Envie de lire 😆…
+-   Make sure you use GitLab
+-   Your app is already deployed on Google Play store
+-   Desire to read 😆…
 
-**Étapes à suivre dans le post**
+**Steps to follow in the post**
 
-1 _Copier les fichiers Fastline_
-2 _Stocker vos secrets dans les secrets chiffrés GitLab_
-3 _Création et stockage de votre clé de compte de service Google Play_
-4 _Stockage de votre clé de signature Android_
-5 _Configurez votre fichier yml de workflow GitLab_
-
-
-## 1\ Copier les fichiers Fastline
-
-Fastlane est une bibliothèque Ruby créée pour automatiser les tâches courantes de développement mobile. En utilisant Fastlane, vous pouvez configurer des « voies » personnalisées qui regroupent une série d'« actions » qui effectuent des tâches que vous effectueriez normalement avec Android Studio. Vous pouvez faire beaucoup de choses avec Fastlane, mais pour les besoins de ce didacticiel, nous n'utiliserons qu'une poignée d'actions principales
+1.  _Copy Fastline files_
+2.  _Storing your secrets in GitLab encrypted secrets_
+3.  _Creating & storing your Google Play service account key_
+4.  _Storing your Android signing key_
+5.  _Set up your GitLab workflow .yml file_
 
 
-Créez un dossier Fastlane à la racine de votre projet et copiez les fichiers suivants :
-Voie rapide
+## 1\. Copy Fastline files
+
+Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom “lanes” which bundle a series of “actions” that perform tasks that you’d normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we’ll be using only a handful of core actions.
+
+
+Create a Fastlane folder at the root of your project and copy the following files:
+Fastlane
 ```ruby
 default_platform(:android)
 
@@ -123,24 +122,24 @@ platform :android do
 end
 ```
 
-### Stockage de vos secrets dans les variables GitLab CI/CD
+### Storing Your Secrets in GitLab CI/CD Variables
 
-GitLab fournit un moyen de stocker des variables CI/CD chiffrées, similaire aux secrets du référentiel GitHub. Pour stocker vos informations sensibles en toute sécurité
+GitLab provides a way to store encrypted CI/CD variables, similar to GitHub's repository secrets. To store your sensitive information securely.
 
-1 Accédez aux paramètres de votre projet GitLab
-2 Accédez à CI/CD > Variables
-3 Ajoutez les variables suivantes :
+1. Go to your GitLab project's Settings.
+2. Navigate to CI/CD > Variables
+3. Add the following variables:
 
-- ANDROID_KEYSTORE_FILE : le fichier "jks" ou "keystore" encodé en base64 utilisé pour signer vos versions Android. Il s'agira soit du fichier de clés associé à votre clé d'importation (si vous utilisez la signature d'application Play), soit de votre clé de signature d'application.
-- KEYSTORE_KEY_PASSWORD : le mot de passe associé au fichier keystore
-- KEYSTORE_KEY_ALIAS : l'alias du magasin de clés
-- KEYSTORE_STORE_PASSWORD : le mot de passe de la clé privée
-- DEVELOPER_PACKAGE_NAME : votre identifiant d'application Android comme comexampleapp
-- PLAY_CONFIG_JSON : clé JSON du compte de service codé en base64
+-   ANDROID_KEYSTORE_FILE:  the base64-encoded `.jks` or `.keystore` file used to sign your Android builds. This will either be the keystore file associated with your upload key (if using Play App Signing), or your app signing key.
+-   KEYSTORE_KEY_PASSWORD: the password associated with the keystore file
+-   KEYSTORE_KEY_ALIAS: the key store alias
+-   KEYSTORE_STORE_PASSWORD: the private key password
+-   DEVELOPER_PACKAGE_NAME: your android app ID like com.example.app
+-   PLAY_CONFIG_JSON: The base64-encoded service account key JSON.
 
-## Configurez votre pipeline GitLab CI/CD
+## Set Up Your GitLab CI/CD Pipeline
 
-Créez un fichier gitlab-ciyml à la racine de votre projet pour définir votre pipeline CI/CD. Vous trouverez ci-dessous un exemple de la façon dont vous pouvez structurer votre pipeline :
+Create a .gitlab-ci.yml file at the root of your project to define your CI/CD pipeline. Below is an example of how you can structure your pipeline:
 
 ```yaml
 
@@ -205,12 +204,12 @@ build_and_upload_android:
 
 ```
 
-## Déclenchez le pipeline
+## Trigger the Pipeline
 
-Chaque fois que vous transférez une nouvelle balise vers votre référentiel GitLab, GitLab CI/CD déclenchera automatiquement le pipeline défini, qui créera et déploiera votre application Android à l'aide de Fastlane.
+Whenever you push a new tag to your GitLab repository, GitLab CI/CD will automatically trigger the defined pipeline, which will build and deploy your Android app using Fastlane.
 
-Assurez-vous d'ajuster les chemins et les dépendances en fonction de la structure et des exigences de votre projet. Cette configuration vous aidera à automatiser le déploiement de votre application Android sur GitLab CI/CD
+Make sure to adjust the paths and dependencies according to your project's structure and requirements. This setup will help you automate the deployment of your Android app on GitLab CI/CD.
 
 ## Conclusion
 
-En configurant GitLab CI/CD avec l'image Docker mingc/android-build-box, vous pouvez automatiser le processus de création d'applications Android, rendant ainsi votre flux de travail de développement plus efficace et plus fiable. Cette automatisation vous libère du temps pour vous concentrer sur les aspects essentiels du développement d'applications. , vous aidant ainsi à fournir plus efficacement des applications Android de haute qualité
+By configuring GitLab CI/CD with the mingc/android-build-box Docker image, you can automate the Android app build process, making your development workflow more efficient and reliable. This automation frees up your time to focus on the core aspects of app development, ultimately helping you deliver high-quality Android apps more efficiently.

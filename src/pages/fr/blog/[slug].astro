@@ -1,8 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
+import type { GetStaticPaths, MarkdownInstance } from 'astro'
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allBlogPosts = await Astro.glob('@/content/fr/blog/**/*.md')
   const posts = allBlogPosts.filter((j) => j.frontmatter.published)
   return posts.map((post) => {
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
   })
 }
 
-const data = Astro.props.post
+const data = Astro.props.post as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
 const markdown = data.compiledContent()

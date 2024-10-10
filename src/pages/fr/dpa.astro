@@ -3,9 +3,7 @@ import VueDpa from '@/vue-pages/dpa.vue'
 import Layout from '@/layouts/Layout.astro'
 import translations from '@/services/translations'
 
-const brand = Astro.locals.runtimeConfig.public.brand
-
-const title = [brand, translations['data_processing_agreement'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['data_processing_agreement'][Astro.locals.locale]].join(' | ')
 const description = translations['read_our_data_processing_agreement'][Astro.locals.locale]
 
 const content = { title, description }

@@ -3,9 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VueTopapp from '@/vue-pages/top_app.vue'
 import translations from '@/services/translations'
 
-const brand = Astro.locals.runtimeConfig.public.brand
-
-const title = [brand, translations['top_apps_by_framework'][Astro.locals.locale]].join(' | ')
+const title = [Astro.locals.runtimeConfig.public.brand, translations['top_apps_by_framework'][Astro.locals.locale]].join(' | ')
 const description = translations['top_100_app_using_different_framworks_on_android_store'][Astro.locals.locale]
 
 const content = { title, description }
