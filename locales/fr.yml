@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -440,7 +440,7 @@ importance_of_documenting_apis: >-
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
-  Toutes les API et types exposés publiquement, le module
+  Toutes les API et tous les types exposés publiquement, le module
   <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
   documentation est analysée et disponible pour le compilateur TypeScript, et
   donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
@@ -516,8 +516,8 @@ latest_from_the_blog: Dernières nouveautés du blog
 calculate_your_usage: Calculez votre consommation
 monthly_active_users: Utilisateurs actifs mensuels
 enter_your_estimated_monthly_active_users: >-
-  Entrez vos utilisateurs actifs mensuels estimés, les mises à jour par mois et
-  la taille des mises à jour pour obtenir votre coût mensuel estimé.
+  Entrez vos utilisateurs actifs mensuels estimés, vos mises à jour mensuelles
+  et la taille des mises à jour pour obtenir votre coût mensuel estimé.
 updates_by_month: Mises à jour<br />par mois
 updates_size: Taille des mises à jour<br />(Mo)
 updates_total: Mises à jour<br />(Total)
@@ -621,7 +621,7 @@ offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -637,11 +637,12 @@ aup_no_email_abuse_desc: >-
   Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
   d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
   ou sollicitations (comme le « spam »), y compris la publicité commerciale et
-  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
-  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
-  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
-  envoyés par un autre fournisseur de services Internet si ces messages violent
-  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
+  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
+  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
+  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
+  aux messages envoyés par un autre fournisseur de services Internet si ces
+  messages enfreignent cette politique ou la politique d'utilisation acceptable
+  de ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -756,7 +757,7 @@ security_testing_guidelines_1: >-
   par inadvertance les services, exploiter des vulnérabilités, entraîner une
   instabilité ou des violations du système et violer les conditions de service
   de nos fournisseurs en amont. Nos propres systèmes de sécurité ne seront pas
-  capables de distinguer la reconnaissance hostile des recherches Whitehat. Si
+  capables de distinguer la reconnaissance hostile de la recherche blanche. Si
   vous souhaitez exécuter un scanner automatisé, informez-nous à
   security@capgo.app et exécutez-le uniquement sur votre propre projet Capgo.
   N'attaquez PAS les projets d'autres clients.
@@ -828,13 +829,14 @@ credit_requests_payment_desc: >-
   inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
   les dates et heures précédemment signalées auxquelles le service n'était pas
   disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
-  jours. Les crédits de service ne constituent pas des remboursements, ne
-  peuvent pas être échangés contre un montant en espèces et ne peuvent être
-  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
-  contraire dans la section 4 ci-dessous, les crédits de service constitueront
-  le seul et unique recours du client, et la seule et unique responsabilité de
-  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
+  service, Capgo émettra un crédit sur le compte du client dans un délai de
+  trente (30) jours. Les crédits de service ne constituent pas des
+  remboursements, ne peuvent pas être échangés contre un montant en espèces et
+  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
+  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
+  constitueront le seul et unique recours du client, et la seule et unique
+  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
+  disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -915,7 +917,7 @@ high_support_desc: >-
   Problème entraînant une situation dans laquelle des fonctionnalités majeures
   sont affectées et une dégradation significative des performances est
   constatée. Le problème affecte une proportion importante de la base
-  d'utilisateurs et/ou des fonctionnalités majeures de Capgo.
+  d’utilisateurs et/ou des fonctionnalités majeures de Capgo.
 normal_support_title: 3. Normale
 normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
 normal_support_desc: >-
@@ -1023,9 +1025,9 @@ interpretation_text: >-
 definitions_title: Définitions
 definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
 company_definition: >-
-  La <strong>Société</strong> (appelée « la Société », « Nous », « Notre » ou «
-  Notre » dans cette clause de non-responsabilité) fait référence à Digital
-  Shift OU, 6 sepapaja, 15510 Tallinn.
+  La <strong>Société</strong> (désignée par « la Société », « Nous », « Notre »
+  ou « Notre » dans le présent Avis de non-responsabilité) fait référence à
+  Digital Shift OU, 6 sepapaja, 15510 Tallinn.
 service_definition: <strong>Service</strong> fait référence à l'Application.
 you_definition: >-
   <strong>Vous</strong> désigne la personne accédant au Service, ou la société
@@ -1107,12 +1109,12 @@ no_responsibility_disclaimer_text: >-
   n'est pas engagée par les présentes à fournir des conseils et services
   juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
   être utilisé comme substitut à la consultation de conseillers professionnels
-  comptables, fiscaux, juridiques ou autres conseillers compétents.
+  compétents en matière comptable, fiscale, juridique ou autre.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
-  responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
+  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
   qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
-  ou votre incapacité d'accéder ou d'utiliser le Service.
+  ou votre incapacité à accéder ou à utiliser le Service.
 use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
 use_at_your_own_risk_disclaimer_text: >-
   Toutes les informations contenues dans le Service sont fournies « telles
@@ -1194,444 +1196,6 @@ trust_system_wide_issues_notification: >-
   En cas de problèmes à l'échelle du système, les clients sont informés par leur
   e-mail. L'état du système de Capgo et les incidents de réseau et de sécurité
   sont publiés sur https://status.capgo.app.
-data_policy_title: Politique de données
-data_policy_last_updated: 'Dernière mise à jour : 21 septembre 2023'
-data_policy_intro: >-
-  Une politique de données contient un ensemble de règles, de principes et de
-  lignes directrices qui fournissent un cadre pour différents domaines de
-  gestion des données dans l'ensemble de l'entreprise, y compris, mais sans s'y
-  limiter, la gouvernance des données, la qualité des données et l'architecture
-  des données.
-data_policy_what_we_collect_title: Ce que nous collectons et à quoi nous l’utilisons
-data_policy_what_we_collect_description: >-
-  Nous ne suivons pas les personnes sur leurs appareils ni sur les sites Web et
-  applications qu’elles visitent. Toutes les données sont isolées sur une seule
-  journée, un seul site Web et un seul appareil. Il n’existe aucun moyen de
-  savoir si la même personne visite un site à partir de plusieurs appareils ou
-  si elle visite un autre site Web.
-data_policy_goal_of_capgo: >-
-  L'objectif de Capgo est de suivre les tendances globales du trafic de votre
-  site Web, il ne s'agit pas de suivre les visiteurs individuels. Nous
-  n’utilisons pas de cookies, nous ne générons aucun identifiant persistant et
-  nous ne collectons ni ne stockons aucune donnée personnelle ou identifiable.
-  Toutes les données sont uniquement des données agrégées et ne contiennent
-  aucune information personnelle.
-data_policy_anonymous_measurement: >-
-  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
-  absolument anonyme. Nous mesurons uniquement les points de données les plus
-  essentiels et rien d'autre. Toutes les mesures que nous collectons tiennent
-  sur une seule page.
-data_policy_unique_users_title: Comment nous comptons les utilisateurs uniques sans cookies
-data_policy_unique_users_description: >-
-  Compter les visiteurs uniques fait partie intégrante de l’analyse Web. Capgo
-  tente de trouver un équilibre raisonnable entre la déduplication des pages
-  vues et le respect de la vie privée des visiteurs.
-data_policy_no_persistent_identifiers: >-
-  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
-  ils sont considérés comme des données personnelles au sens du RGPD. Nous
-  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
-  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
-  visiteurs.
-data_policy_http_request_usage: >-
-  Chaque requête HTTP envoie l'adresse IP et l'agent utilisateur au serveur,
-  c'est donc ce que nous utilisons. Nous générons un identifiant changeant
-  quotidiennement en utilisant l’adresse IP et l’agent utilisateur du visiteur.
-data_policy_ip_accuracy: >-
-  Lors de nos tests, l'utilisation des adresses IP pour compter les visiteurs
-  est remarquablement précise par rapport à l'utilisation d'un cookie. Dans
-  certains cas, cela peut même être plus précis que l'utilisation d'un cookie,
-  car certains visiteurs bloquent complètement les cookies.
-data_policy_privacy_compliance: >-
-  Nous sommes heureux de vous fournir des informations sur la manière dont Capgo
-  est conçu pour vous aider à vous conformer aux différentes réglementations en
-  matière de confidentialité. Nous vous encourageons à discuter de questions
-  spécifiques avec votre avocat pour vous aider à décider si notre service vous
-  permet de remplir les exigences légales qui s'appliquent à vous.
-data_policy_data_ownership_title: Propriété des données de votre site Web
-data_policy_data_ownership_description: >-
-  Lorsque vous utilisez notre service, Capgo collectera des informations sur vos
-  visiteurs. Vous nous confiez les données de votre site et nous prenons cette
-  confiance à cœur. La confidentialité des données de votre site — et ce sont
-  vos données, pas les nôtres ! - c'est un gros problème pour nous.
-data_policy_ownership_rights: >-
-  En utilisant Capgo, vous conservez la propriété à 100% des données de votre
-  site Web. Bien que lorsque vous utilisez notre service hébergé, les analyses
-  de votre site soient stockées sur notre serveur dans le cloud, vous restez
-  totalement maître des données de votre site et vous possédez également
-  l'entièreté de toutes vos données.
-data_policy_no_rights_obtained: >-
-  Vous possédez tous les droits, titres et intérêts sur les données de votre
-  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
-  site Web. Nous ne vendrons ni ne partagerons jamais les données de votre site
-  à des tiers.
-data_policy_no_sharing: >-
-  Les données de votre site Web ne sont pas partagées avec des sociétés de
-  publicité ou toute autre société en général.
-data_policy_no_third_party: Les données de votre site Web ne sont en aucun cas envoyées à des tiers.
-data_policy_no_mining: >-
-  Les données de votre site Web ne sont ni extraites ni récoltées à des fins de
-  tendances personnelles et comportementales.
-data_policy_no_monetization: Les données de votre site Web ne sont pas monétisées.
-data_policy_deletion_rights: >-
-  Vous pouvez choisir de supprimer votre compte et de supprimer les statistiques
-  de votre site à tout moment. Nous fournissons des liens de suppression
-  simples, sans poser de questions.
-data_policy_permanent_deletion: >-
-  Toutes vos statistiques seront définitivement supprimées immédiatement lorsque
-  vous supprimez votre compte Capgo ou lorsque vous supprimez les statistiques
-  de votre site. Nous ne pouvons pas récupérer ces informations une fois
-  qu'elles ont été définitivement supprimées.
-data_policy_trust_title: Pourquoi devrais-je te faire confiance ?
-data_policy_trust_description: "<a :href=\"`${domain}/`\" rel=\"external nofollow noopener\" target=\"_blank\">Capgo</a> est 100\_% open source. Notre code source est disponible et accessible sur GitHub afin que vous puissiez le lire et le réviser pour vous assurer que notre code fait ce que nous disons."
-data_policy_transparency: >-
-  Nous ne sommes pas une boîte noire. Tout est à découvert. Tout le monde peut
-  visualiser, examiner et inspecter le code que nous exécutons pour vérifier que
-  nous mettons en pratique ce que nous prêchons.
-data_policy_privacy_software_importance: >-
-  Ceci est essentiel sur le marché des logiciels de confidentialité. On ne peut
-  pas toujours faire confiance aux entreprises et aux logiciels propriétaires
-  lorsque les données sont en question. La seule façon de prouver votre
-  confiance est de permettre à des experts d’examiner votre code et de vérifier
-  que vous faites réellement ce que vous dites faire.
-data_policy_gdpr_privacy_title: Confidentialité RGPD
-data_policy_legal_basis_title: Base juridique du traitement des données personnelles dans le cadre du RGPD
-data_policy_legal_basis_intro: 'Nous pouvons traiter les données personnelles dans les conditions suivantes :'
-data_policy_legal_basis_consent: "<strong>Consentement\_:</strong> Vous avez donné votre consentement au traitement des données personnelles pour une ou plusieurs finalités spécifiques."
-data_policy_legal_basis_contract: "<strong>Exécution d'un contrat\_:</strong> La fourniture de données personnelles est nécessaire à l'exécution d'un accord avec vous et/ou à toute obligation précontractuelle de celui-ci."
-data_policy_legal_basis_legal_obligations: "<strong>Obligations légales\_:</strong> Le traitement des Données Personnelles est nécessaire au respect d'une obligation légale à laquelle la Société est soumise."
-data_policy_legal_basis_vital_interests: "<strong>Intérêts vitaux\_:</strong> Le traitement des Données personnelles est nécessaire afin de protéger Vos intérêts vitaux ou ceux d'une autre personne physique."
-data_policy_legal_basis_public_interests: "<strong>Intérêts publics\_:</strong> Le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
-data_policy_legal_basis_legitimate_interests: "<strong>Intérêts légitimes\_:</strong> Le traitement des Données personnelles est nécessaire aux fins des intérêts légitimes poursuivis par la Société."
-data_policy_legal_basis_clarification: >-
-  Dans tous les cas, la Société se fera un plaisir de contribuer à clarifier la
-  base juridique spécifique qui s'applique au traitement, et notamment si la
-  fourniture de Données Personnelles est une exigence légale ou contractuelle,
-  ou une exigence nécessaire à la conclusion d'un contrat.
-data_policy_gdpr_rights_title: Vos droits en vertu du RGPD
-data_policy_gdpr_rights_intro: >-
-  La Société s'engage à respecter la confidentialité de Vos Données Personnelles
-  et à Vous garantir l'exercice de Vos droits.
-data_policy_gdpr_rights_access: >-
-  <strong>Demander l'accès à vos données personnelles.</strong> Le droit
-  d'accéder, de mettre à jour ou de supprimer les informations que nous détenons
-  sur vous. Dans la mesure du possible, vous pouvez accéder, mettre à jour ou
-  demander la suppression de vos données personnelles directement dans la
-  section des paramètres de votre compte. Si vous ne parvenez pas à effectuer
-  ces actions vous-même, veuillez nous contacter pour vous aider. Cela vous
-  permet également de recevoir une copie des données personnelles que nous
-  détenons à votre sujet.
-data_policy_gdpr_rights_correction: >-
-  <strong>Demander la correction des données personnelles que nous détenons à
-  votre sujet.</strong> Vous avez le droit de faire corriger toute information
-  incomplète ou inexacte que nous détenons à votre sujet.
-data_policy_gdpr_rights_object: >-
-  <strong>S'opposer au traitement de vos données personnelles.</strong> Ce droit
-  existe lorsque nous nous appuyons sur un intérêt légitime comme base juridique
-  pour notre traitement et qu'il y a quelque chose dans votre situation
-  particulière qui vous incite à vouloir vous opposer à notre traitement.
-  traitement de Vos Données Personnelles pour ce motif. Vous avez également le
-  droit de vous opposer lorsque nous traitons vos données personnelles à des
-  fins de marketing direct.
-data_policy_gdpr_rights_erasure: >-
-  <strong>Demander l'effacement de vos données personnelles.</strong> Vous avez
-  le droit de nous demander de supprimer ou de supprimer des données
-  personnelles lorsqu'il n'y a aucune bonne raison pour que nous continuions à
-  les traiter.
-data_policy_gdpr_rights_transfer: >-
-  <strong>Demandez le transfert de vos données personnelles.</strong> Nous vous
-  fournirons, ou à un tiers que vous aurez choisi, vos données personnelles dans
-  un format structuré, couramment utilisé et lisible par machine. Veuillez noter
-  que ce droit s'applique uniquement aux informations automatisées que vous avez
-  initialement consenties à ce que nous utilisions ou lorsque nous avons utilisé
-  ces informations pour exécuter un contrat avec vous.
-data_policy_gdpr_rights_withdraw_consent: >-
-  <strong>Retirez votre consentement.</strong> Vous avez le droit de retirer
-  votre consentement concernant l'utilisation de vos données personnelles. Si
-  vous retirez votre consentement, nous pourrions ne pas être en mesure de vous
-  fournir l'accès à certaines fonctionnalités spécifiques du Service.
-data_policy_gdpr_exercising_rights_title: Exercice de vos droits en matière de protection des données RGPD
-data_policy_gdpr_exercising_rights_intro: >-
-  Vous pouvez exercer vos droits d'accès, de rectification, d'annulation et
-  d'opposition en nous contactant. Veuillez noter que nous pouvons vous demander
-  de vérifier votre identité avant de répondre à de telles demandes. Si vous
-  faites une demande, nous ferons de notre mieux pour vous répondre dans les
-  plus brefs délais.
-data_policy_gdpr_complaint: >-
-  Vous avez le droit de porter plainte auprès d'une autorité de protection des
-  données concernant notre collecte et notre utilisation de vos données
-  personnelles. Pour plus d'informations, si vous résidez dans l'Espace
-  économique européen (EEE), veuillez contacter votre autorité locale de
-  protection des données dans l'EEE.
-data_policy_ccpa_privacy_title: Confidentialité CCPA
-data_policy_ccpa_privacy_intro: >-
-  Cette section d'avis de confidentialité destinée aux résidents de Californie
-  complète les informations contenues dans notre politique de confidentialité et
-  s'applique uniquement à tous les visiteurs, utilisateurs et autres personnes
-  résidant dans l'État de Californie.
-data_policy_ccpa_categories_title: Catégories de renseignements personnels collectés
-data_policy_ccpa_categories_intro: >-
-  Nous collectons des informations qui identifient, se rapportent, décrivent,
-  font référence, sont susceptibles d'être associées ou pourraient
-  raisonnablement être liées, directement ou indirectement, à un consommateur ou
-  à un appareil particulier. Ce qui suit est une liste des catégories
-  d'informations personnelles que nous pouvons collecter ou qui ont pu être
-  collectées auprès de résidents de Californie au cours des douze (12) derniers
-  mois.
-data_policy_ccpa_categories_note: >-
-  Veuillez noter que les catégories et exemples fournis dans la liste ci-dessous
-  sont ceux définis dans le CCPA. Cela ne signifie pas que tous les exemples de
-  cette catégorie d'informations personnelles ont en fait été collectés par
-  Nous, mais reflète notre conviction de bonne foi, au meilleur de nos
-  connaissances, que certaines de ces informations de la catégorie applicable
-  peuvent être et ont pu être collectées. Par exemple, certaines catégories
-  d’informations personnelles ne seront collectées que si vous nous les avez
-  fournies directement.
-data_policy_ccpa_category_a: "<strong>Catégorie A\_: Identifiants.</strong> Exemples\_: Un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou tout autre élément similaire. identifiants. Collecté : Oui."
-data_policy_ccpa_category_b: "<strong>Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e)).</strong> Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse. , numéro de téléphone, numéro de passeport, numéro de permis de conduire ou de carte d'identité d'État, numéro de police d'assurance, éducation, emploi, antécédents professionnels, numéro de compte bancaire, numéro de carte de crédit, numéro de carte de débit ou toute autre information financière, information médicale ou assurance maladie. information. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories. Collecté : Oui."
-data_policy_ccpa_category_c: "<strong>Catégorie C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
-data_policy_ccpa_category_d: "<strong>Catégorie D\_: Informations commerciales.</strong> Exemples\_:\_Documents et historique des produits ou services achetés ou envisagés. Collecté : Oui."
-data_policy_ccpa_category_e: "<strong>Catégorie\_E\_: informations biométriques.</strong> Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou un autre identifiant ou des informations d'identification, telles que des empreintes digitales, des empreintes faciales et des empreintes vocales. scans de l'iris ou de la rétine, frappe au clavier, démarche ou autres modèles physiques, ainsi que données sur le sommeil, la santé ou l'exercice. Collecté : Non."
-data_policy_ccpa_category_f: "<strong>Catégorie F\_: Internet ou autre activité de réseau similaire.</strong> Exemples\_: Interaction avec notre Service ou publicité. Collecté : Oui."
-data_policy_ccpa_category_g: "<strong>Catégorie\_G\_: données de géolocalisation.</strong> Exemples\_: emplacement physique approximatif. Collecté : Non."
-data_policy_ccpa_category_h: "<strong>Catégorie H\_: données sensorielles.</strong> Exemples\_: informations audio, électroniques, visuelles, thermiques, olfactives ou similaires. Collecté : Non."
-data_policy_ccpa_category_i: "<strong>Catégorie I\_: informations professionnelles ou liées à l'emploi.</strong> Exemples\_: antécédents professionnels actuels ou passés ou évaluations de performances. Collecté : Non."
-data_policy_ccpa_category_j: "<strong>Catégorie\_J\_:\_informations non publiques sur l'éducation (conformément à la Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).</strong> Exemples\_:\_dossiers scolaires directement liés à un élève conservés par un établissement d'enseignement. établissement ou partie agissant en son nom, comme les notes, les relevés de notes, les listes de cours, les horaires des étudiants, les codes d'identification des étudiants, les informations financières des étudiants ou les dossiers disciplinaires des étudiants. Collecté : Non."
-data_policy_ccpa_category_k: "<strong>Catégorie K\_:\_inférences tirées d'autres informations personnelles.</strong> Exemples\_: profil reflétant les préférences, les caractéristiques, les tendances psychologiques, les prédispositions, le comportement, les attitudes, l'intelligence, les capacités et les aptitudes d'une personne. Collecté : Non."
-data_policy_ccpa_exclusions: "En vertu du CCPA, les informations personnelles n’incluent pas\_:"
-data_policy_ccpa_exclusion_public: Informations accessibles au public provenant des archives gouvernementales
-data_policy_ccpa_exclusion_deidentified: Informations sur les consommateurs anonymisées ou agrégées
-data_policy_ccpa_exclusion_scope: "Informations exclues du champ d’application du CCPA, telles que\_:"
-data_policy_ccpa_exclusion_health: >-
-  Informations de santé ou médicales couvertes par la Health Insurance
-  Portability and Accountability Act de 1996 (HIPAA) et la California
-  Confidentiality of Medical Information Act (CMIA) ou données d'essais
-  cliniques
-data_policy_ccpa_exclusion_financial: >-
-  Informations personnelles couvertes par certaines lois sur la confidentialité
-  spécifiques au secteur, notamment le Fair Credit Reporting Act (FRCA), le
-  Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
-  Act (FIPA) et le Driver's Privacy Protection Act de 1994.
-data_policy_ccpa_sources_title: Sources de renseignements personnels
-data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
-data_policy_ccpa_sources_direct: >-
-  <strong>Directement de votre part</strong>. Par exemple, à partir des
-  formulaires que vous remplissez sur notre Service, des préférences que vous
-  exprimez ou fournissez via notre Service, ou à partir de vos achats sur notre
-  Service.
-data_policy_ccpa_sources_indirect: >-
-  <strong>Indirectement de votre part</strong>. Par exemple, en observant Votre
-  activité sur notre Service.
-data_policy_ccpa_sources_automatic: >-
-  <strong>Automatiquement de votre part</strong>. Par exemple, via les cookies
-  que nous ou nos fournisseurs de services installons sur votre appareil lorsque
-  vous naviguez dans notre service.
-data_policy_ccpa_sources_providers: >-
-  <strong>Des fournisseurs de services</strong>. Par exemple, des fournisseurs
-  tiers pour le traitement des paiements, ou d'autres fournisseurs tiers que
-  nous utilisons pour vous fournir le Service.
-data_policy_ccpa_use_title: >-
-  Utilisation des informations personnelles à des fins commerciales ou à des
-  fins commerciales
-data_policy_ccpa_use_intro: "Nous pouvons utiliser ou divulguer les informations personnelles que nous collectons à des «\_fins commerciales\_» ou des «\_fins commerciales\_» (telles que définies dans le CCPA), qui peuvent inclure les exemples suivants\_:"
-data_policy_ccpa_use_operate: Pour exploiter notre service et vous fournir notre service.
-data_policy_ccpa_use_support: >-
-  Pour vous fournir une assistance et répondre à vos demandes, notamment pour
-  enquêter et répondre à vos préoccupations et surveiller et améliorer notre
-  service.
-data_policy_ccpa_use_fulfill: >-
-  Pour remplir ou répondre à la raison pour laquelle vous avez fourni les
-  informations. Par exemple, si vous partagez vos coordonnées pour poser une
-  question sur notre service, nous utiliserons ces informations personnelles
-  pour répondre à votre demande. Si vous fournissez vos informations
-  personnelles pour acheter un produit ou un service, nous utiliserons ces
-  informations pour traiter votre paiement et faciliter la livraison.
-data_policy_ccpa_use_law: >-
-  Pour répondre aux demandes des forces de l'ordre et comme l'exige la loi
-  applicable, une ordonnance du tribunal ou des réglementations
-  gouvernementales.
-data_policy_ccpa_use_description: >-
-  Comme cela vous est décrit lors de la collecte de vos informations
-  personnelles ou comme indiqué autrement dans le CCPA.
-data_policy_ccpa_use_internal: À des fins d’administration et d’audit internes.
-data_policy_ccpa_use_security: >-
-  Détecter les incidents de sécurité et se protéger contre les activités
-  malveillantes, trompeuses, frauduleuses ou illégales, y compris, si
-  nécessaire, poursuivre les responsables de ces activités.
-data_policy_ccpa_use_note: >-
-  Veuillez noter que les exemples fournis ci-dessus sont illustratifs et ne
-  prétendent pas être exhaustifs. Pour plus de détails sur la manière dont nous
-  utilisons ces informations, veuillez vous référer à la section « Utilisation
-  de vos données personnelles ».
-data_policy_ccpa_use_update: >-
-  Si nous décidons de collecter des catégories supplémentaires d'informations
-  personnelles ou d'utiliser les informations personnelles que nous avons
-  collectées à des fins matériellement différentes, sans rapport ou
-  incompatibles, nous mettrons à jour cette politique de confidentialité.
-data_policy_ccpa_disclosure_title: >-
-  Divulgation de renseignements personnels à des fins commerciales ou à des fins
-  commerciales
-data_policy_ccpa_disclosure_intro: "Nous pouvons utiliser ou divulguer et pouvons avoir utilisé ou divulgué au cours des douze (12) derniers mois les catégories suivantes de renseignements personnels à des fins professionnelles ou commerciales\_:"
-data_policy_ccpa_disclosure_categories: >-
-  Catégorie A : Identifiants, Catégorie B : Catégories d'informations
-  personnelles répertoriées dans la loi californienne sur les dossiers clients
-  (Cal. Civ. Code § 1798.80(e)), Catégorie D : Informations commerciales,
-  Catégorie F : Internet ou autre activité de réseau similaire.
-data_policy_ccpa_disclosure_note: >-
-  Veuillez noter que les catégories énumérées ci-dessus sont celles définies
-  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
-  d'informations personnelles ont en fait été divulgués, mais reflète notre
-  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
-  ces informations de la catégorie applicable peuvent être et ont pu être
-  divulguées.
-data_policy_ccpa_disclosure_contract: >-
-  Lorsque nous divulguons des informations personnelles à des fins commerciales,
-  nous concluons un contrat qui décrit le but et oblige le destinataire à garder
-  ces informations personnelles confidentielles et à ne pas les utiliser à
-  d'autres fins que l'exécution du contrat.
-data_policy_ccpa_sale_title: Vente de renseignements personnels
-data_policy_ccpa_sale_intro: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
-  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
-  le transfert ou toute autre communication orale, écrite ou électronique ou
-  autre, des informations personnelles d'un consommateur par le affaires à un
-  tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
-  avoir reçu une sorte d'avantage en échange du partage d'informations
-  personnelles, mais pas nécessairement un avantage monétaire.
-data_policy_ccpa_sale_note: >-
-  Veuillez noter que les catégories énumérées ci-dessous sont celles définies
-  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
-  d'informations personnelles ont en fait été vendus, mais reflète notre
-  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
-  ces informations de la catégorie applicable peuvent être et ont pu être
-  partagées en échange de valeur. .
-data_policy_ccpa_sale_categories: "Nous pouvons vendre et avoir vendu au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes\_: Catégorie A\_: Identifiants, Catégorie B\_: Catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e). )), Catégorie D : Informations commerciales, Catégorie F : Internet ou autre activité de réseau similaire"
-data_policy_ccpa_share_title: Partage d’informations personnelles
-data_policy_ccpa_share_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
-data_policy_ccpa_share_providers: >-
-  Fournisseurs de services, processeurs de paiement, nos sociétés affiliées, nos
-  partenaires commerciaux, fournisseurs tiers auxquels vous ou vos agents nous
-  autorisez à divulguer vos informations personnelles en relation avec les
-  produits ou services que nous vous fournissons.
-data_policy_ccpa_minors_title: Vente de renseignements personnels de mineurs de moins de 16 ans
-data_policy_ccpa_minors_intro: >-
-  Nous ne collectons pas sciemment d'informations personnelles auprès de mineurs
-  de moins de 16 ans via notre Service, bien que certains sites Web tiers vers
-  lesquels nous établissons des liens puissent le faire. Ces sites Web tiers ont
-  leurs propres conditions d'utilisation et politiques de confidentialité et
-  nous encourageons les parents et tuteurs légaux à surveiller l'utilisation
-  d'Internet par leurs enfants et à leur demander de ne jamais fournir
-  d'informations sur d'autres sites Web sans leur autorisation.
-data_policy_ccpa_minors_sale: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils ont moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
-data_policy_ccpa_minors_contact: >-
-  Si vous avez des raisons de croire qu'un enfant de moins de 13 (ou 16 ans)
-  nous a fourni des informations personnelles, veuillez nous contacter avec
-  suffisamment de détails pour nous permettre de supprimer ces informations.
-data_policy_ccpa_rights_title: Vos droits en vertu du CCPA
-data_policy_ccpa_rights_intro: "Le CCPA accorde aux résidents californiens des droits spécifiques concernant leurs informations personnelles. Si vous résidez en Californie, vous disposez des droits suivants\_:"
-data_policy_ccpa_rights_notice: >-
-  <strong>Le droit d'être informé.</strong> Vous avez le droit d'être informé
-  des catégories de données personnelles qui sont collectées et des finalités
-  pour lesquelles les données personnelles sont utilisées.
-data_policy_ccpa_rights_request: "<strong>Le droit de demander.</strong> En vertu du CCPA, vous avez le droit de demander que nous vous divulguions des informations sur notre collecte, notre utilisation, notre vente, notre divulgation à des fins commerciales et notre partage d'informations personnelles. Une fois que nous aurons reçu et confirmé votre demande, nous vous divulguerons\_:"
-data_policy_ccpa_rights_request_categories: >-
-  Les catégories d'informations personnelles que nous avons collectées à votre
-  sujet
-data_policy_ccpa_rights_request_sources: >-
-  Les catégories de sources des informations personnelles que nous avons
-  collectées à votre sujet
-data_policy_ccpa_rights_request_purpose: >-
-  Notre objectif professionnel ou commercial pour la collecte ou la vente de ces
-  informations personnelles
-data_policy_ccpa_rights_request_third_parties: >-
-  Les catégories de tiers avec lesquels nous partageons ces informations
-  personnelles
-data_policy_ccpa_rights_request_specific: >-
-  Les informations personnelles spécifiques que nous avons collectées à votre
-  sujet
-data_policy_ccpa_rights_request_sold: "Si nous vendons vos informations personnelles ou divulguons vos informations personnelles à des fins commerciales, nous vous divulguerons\_:"
-data_policy_ccpa_rights_request_sold_categories: Les catégories de catégories d'informations personnelles vendues
-data_policy_ccpa_rights_request_disclosed_categories: Les catégories de catégories de renseignements personnels divulguées
-data_policy_ccpa_rights_opt_out: >-
-  <strong>Le droit de dire non à la vente de données personnelles
-  (opt-out).</strong> Vous avez le droit de nous demander de ne pas vendre vos
-  informations personnelles. Pour soumettre une demande de désinscription,
-  veuillez nous contacter.
-data_policy_ccpa_rights_delete: "<strong>Le droit de supprimer vos données personnelles.</strong> Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
-data_policy_ccpa_rights_delete_transaction: >-
-  Compléter la transaction pour laquelle nous avons collecté les informations
-  personnelles, fournir un bien ou un service que vous avez demandé, prendre des
-  mesures raisonnablement prévues dans le contexte de notre relation commerciale
-  en cours avec vous, ou exécuter autrement notre contrat avec vous.
-data_policy_ccpa_rights_delete_security: >-
-  Détectez les incidents de sécurité, protégez-vous contre les activités
-  malveillantes, trompeuses, frauduleuses ou illégales, ou poursuivez les
-  responsables de ces activités.
-data_policy_ccpa_rights_delete_debug: >-
-  Déboguez les produits pour identifier et réparer les erreurs qui altèrent les
-  fonctionnalités prévues existantes.
-data_policy_ccpa_rights_delete_speech: >-
-  Exercer la liberté d'expression, garantir le droit d'un autre consommateur
-  d'exercer ses droits à la liberté d'expression ou exercer un autre droit prévu
-  par la loi.
-data_policy_ccpa_rights_delete_compliance: >-
-  Se conformer à la loi californienne sur la confidentialité des communications
-  électroniques (Cal. Penal Code § 1546 et suivants).
-data_policy_ccpa_rights_delete_research: >-
-  Participer à des recherches scientifiques, historiques ou statistiques
-  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
-  toutes les autres lois applicables en matière d'éthique et de confidentialité,
-  lorsque la suppression des informations est susceptible de rendre impossible
-  ou de nuire sérieusement aux résultats de la recherche, si vous avez
-  préalablement fourni votre consentement éclairé. .
-data_policy_ccpa_rights_delete_internal: >-
-  Autorisez uniquement des utilisations internes raisonnablement alignées sur
-  les attentes des consommateurs en fonction de votre relation avec nous.
-data_policy_ccpa_rights_delete_legal: Se conformer à une obligation légale.
-data_policy_ccpa_rights_delete_compatible: >-
-  Faire d'autres utilisations internes et licites de ces informations qui sont
-  compatibles avec le contexte dans lequel vous les avez fournies.
-data_policy_ccpa_rights_no_discrimination: "<strong>Le droit de ne pas être victime de discrimination.</strong> Vous avez le droit de ne pas être victime de discrimination pour l'exercice de l'un de vos droits de consommateur, notamment\_:"
-data_policy_ccpa_rights_no_discrimination_deny: Vous refuser des biens ou des services
-data_policy_ccpa_rights_no_discrimination_charging: >-
-  Facturer des prix ou des tarifs différents pour des biens ou des services, y
-  compris le recours à des remises ou d'autres avantages ou l'imposition de
-  pénalités
-data_policy_ccpa_rights_no_discrimination_quality: Vous fournir un niveau ou une qualité différente de biens ou de services
-data_policy_ccpa_rights_no_discrimination_suggestion: >-
-  Suggérant que vous recevrez un prix ou un taux différent pour des biens ou des
-  services ou un niveau ou une qualité différent de biens ou de services
-data_policy_ccpa_exercising_rights_title: Exercice de vos droits en matière de protection des données CCPA
-data_policy_ccpa_exercising_rights_intro: "Afin d'exercer l'un de vos droits en vertu du CCPA, et si vous résidez en Californie, vous pouvez nous contacter\_:"
-data_policy_ccpa_exercising_rights_website: "En visitant cette page sur notre site Web\_: <a :href=\"`${domain}/#support`\" rel=\"external nofollow noopener\" target=\"_blank\">{{ domain }}/#support</a>"
-data_policy_ccpa_exercising_rights_note: >-
-  Seul vous, ou une personne enregistrée auprès du secrétaire d'État de
-  Californie que vous autorisez à agir en votre nom, pouvez faire une demande
-  vérifiable concernant vos informations personnelles.
-data_policy_ccpa_exercising_rights_request: "Votre demande auprès de Nous doit\_:"
-data_policy_ccpa_exercising_rights_request_info: >-
-  Fournissez des informations suffisantes qui nous permettent de vérifier
-  raisonnablement que vous êtes la personne au sujet de laquelle nous avons
-  collecté des informations personnelles ou un représentant autorisé.
-data_policy_ccpa_exercising_rights_request_detail: >-
-  Décrivez votre demande avec suffisamment de détails pour nous permettre de la
-  comprendre, de l'évaluer et d'y répondre correctement.
-data_policy_ccpa_exercising_rights_response: "Nous ne pouvons pas répondre à votre demande ni vous fournir les informations requises si nous ne pouvons pas\_:"
-data_policy_ccpa_exercising_rights_response_verify: Vérifiez votre identité ou votre autorité pour faire la demande
-data_policy_ccpa_exercising_rights_response_confirm: Et confirmez que les informations personnelles vous concernent
-data_policy_ccpa_exercising_rights_disclosure: >-
-  Nous divulguerons et fournirons les informations requises gratuitement dans
-  les 45 jours suivant la réception de votre demande vérifiable. Le délai pour
-  fournir les informations requises peut être prolongé une fois de 45 jours
-  supplémentaires lorsque cela est raisonnablement nécessaire et avec un
-  préavis.
-data_policy_ccpa_exercising_rights_disclosure_period: >-
-  Toute divulgation que nous fournissons ne couvrira que la période de 12 mois
-  précédant la réception de la demande vérifiable.
-data_policy_ccpa_exercising_rights_portability: >-
-  Pour les demandes de portabilité des données, nous sélectionnerons un format
-  pour fournir vos informations personnelles qui soit facilement utilisable et
-  devrait vous permettre de transmettre les informations d'une entité à une
-  autre entité sans entrave.
 tos_title: Termes et conditions
 tos_last_updated: 'Dernière mise à jour : 12 janvier 2022'
 tos_please_read: >-
@@ -1803,7 +1367,7 @@ tos_in_app_purchases_text_1: >-
   L'Application peut inclure des achats intégrés qui vous permettent d'acheter
   des produits, des services ou des abonnements.
 tos_in_app_purchases_text_2: >-
-  De plus amples informations sur la façon dont vous pouvez gérer les achats
+  De plus amples informations sur la manière dont vous pouvez gérer les achats
   intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
   générales de l'Application Store ou dans les paramètres d'aide de votre
   appareil.
@@ -1912,7 +1476,7 @@ tos_limitation_of_liability_text_1: >-
 tos_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2051,7 +1615,7 @@ cancellation_link: 'En visitant cette page de notre site Internet :'
 reimbursement_policy: >-
   Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
   recevons les marchandises retournées. Nous utiliserons le même moyen de
-  paiement que celui que Vous avez utilisé pour la Commande, et Vous n’aurez à
+  paiement que celui que vous avez utilisé pour la Commande, et vous n'aurez à
   payer aucun frais pour ce remboursement.
 conditions_for_returns: Conditions de retour
 return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
@@ -2076,7 +1640,7 @@ right_to_refuse: >-
   répondant pas aux conditions de retour ci-dessus, à notre seule discrétion.
 sale_items_policy: >-
   Seules les marchandises à prix régulier peuvent être remboursées.
-  Malheureusement, les produits en vente ne peuvent être remboursés. Cette
+  Malheureusement, les marchandises en vente ne peuvent être remboursées. Cette
   exclusion peut ne pas s'appliquer à vous si elle n'est pas autorisée par la
   loi applicable.
 returning_goods: Retour de marchandises
@@ -2088,7 +1652,7 @@ return_address: |-
 return_shipping_disclaimer: >-
   Nous ne pouvons être tenus responsables des marchandises endommagées ou
   perdues lors du retour. Par conséquent, nous recommandons un service de
-  courrier assuré et traçable. Nous ne sommes pas en mesure d'émettre un
+  courrier assuré et traçable. Nous ne sommes pas en mesure d'effectuer un
   remboursement sans réception effective des marchandises ou sans preuve de
   livraison de retour reçue.
 gifts: Cadeaux
@@ -2237,8 +1801,8 @@ eula_your_suggestions_text_1: >-
   de la Société.
 eula_your_suggestions_text_2: >-
   La Société sera libre d'utiliser, de copier, de modifier, de publier ou de
-  redistribuer les Suggestions à quelque fin que ce soit et de quelque manière
-  que ce soit, sans aucun crédit ni aucune compensation pour vous.
+  redistribuer les Suggestions à toutes fins et de quelque manière que ce soit,
+  sans aucun crédit ni aucune compensation pour vous.
 eula_modifications_title: Modifications de la demande
 eula_modifications_text: >-
   La Société se réserve le droit de modifier, suspendre ou interrompre,
@@ -2344,7 +1908,7 @@ eula_limitation_of_liability_text_1: >-
 eula_limitation_of_liability_text_2: >-
   Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
   ne pourront en aucun cas être tenus responsables de tout dommage spécial,
-  accessoire, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
   limiter, les dommages pour perte de profits, perte de données ou d'autres
   informations, en cas d'interruption des activités, de blessures corporelles,
   de perte de confidentialité découlant de ou liées de quelque manière que ce
@@ -2558,11 +2122,11 @@ dpa_processor_obligations_7: >-
   perte, d'une altération ou d'une divulgation accidentelle, non autorisée ou
   illégale des données personnelles traitées par Capgo dans le cadre de la
   fourniture du service, elle devra, sans retard injustifié (au plus tard 48
-  heures après en avoir pris connaissance), informer le client par email et lui
-  fournir une description de l'incident ainsi que des mises à jour périodiques
-  des informations sur l'incident, y compris son impact sur le contenu du
-  client. Capgo prendra en outre des mesures pour enquêter sur l'incident et
-  raisonnablement prévenir ou atténuer les effets de l'incident.
+  heures après en avoir pris connaissance), informer le client par courrier
+  électronique et lui fournir une description de l'incident ainsi que des mises
+  à jour périodiques des informations sur l'incident, y compris son impact sur
+  le contenu du client. Capgo prendra en outre des mesures pour enquêter sur
+  l'incident et raisonnablement prévenir ou atténuer les effets de l'incident.
 dpa_processor_obligations_8: >-
   Capgo ne rectifiera pas, de sa propre autorité, n'effacera ou ne limitera pas
   le traitement des données des visiteurs qui sont traitées pour le compte du
@@ -2619,3 +2183,448 @@ dpa_notification_1: >-
 dpa_contact_title: Contactez-nous
 dpa_contact_1: "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter\_:"
 dpa_contact_2: 'En visitant cette page du site :'
+data_policy_title: Politique de données
+data_policy_last_updated: 'Dernière mise à jour : 21 septembre 2023'
+data_policy_intro: >-
+  Une politique de données contient un ensemble de règles, de principes et de
+  lignes directrices qui fournissent un cadre pour différents domaines de
+  gestion des données dans l'ensemble de l'entreprise, y compris, mais sans s'y
+  limiter, la gouvernance des données, la qualité des données et l'architecture
+  des données.
+data_policy_what_we_collect_title: Ce que nous collectons et à quoi nous l’utilisons
+data_policy_no_tracking: >-
+  Nous ne suivons pas les personnes sur leurs appareils ni sur les sites Web et
+  applications qu’elles visitent. Toutes les données sont isolées sur une seule
+  journée, un seul site Web et un seul appareil. Il n'existe aucun moyen de
+  savoir si la même personne visite un site à partir de plusieurs appareils ou
+  si elle visite un autre site Web.
+data_policy_goal: >-
+  L'objectif de Capgo est de suivre les tendances globales du trafic de votre
+  site Web, il ne s'agit pas de suivre les visiteurs individuels. Nous
+  n'utilisons pas de cookies, nous ne générons aucun identifiant persistant et
+  nous ne collectons ni ne stockons aucune donnée personnelle ou identifiable.
+  Toutes les données sont uniquement des données agrégées et ne contiennent
+  aucune information personnelle.
+data_policy_anonymous_measurement: >-
+  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
+  absolument anonyme. Nous mesurons uniquement les points de données les plus
+  essentiels et rien d'autre. Toutes les mesures que nous collectons tiennent
+  sur une seule page.
+data_policy_unique_users_title: Comment nous comptons les utilisateurs uniques sans cookies
+data_policy_unique_users_intro: >-
+  Compter les visiteurs uniques fait partie intégrante de l’analyse Web. Capgo
+  tente de trouver un équilibre raisonnable entre la déduplication des pages
+  vues et le respect de la vie privée des visiteurs.
+data_policy_no_persistent_identifier: >-
+  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
+  ils sont considérés comme des données personnelles au sens du RGPD. Nous
+  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
+  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
+  visiteurs.
+data_policy_ip_user_agent: >-
+  Chaque requête HTTP envoie l'adresse IP et l'agent utilisateur au serveur,
+  c'est donc ce que nous utilisons. Nous générons un identifiant changeant
+  quotidiennement en utilisant l'adresse IP et l'agent utilisateur du visiteur.
+data_policy_ip_accuracy: >-
+  Lors de nos tests, l'utilisation des adresses IP pour compter les visiteurs
+  est remarquablement précise par rapport à l'utilisation d'un cookie. Dans
+  certains cas, cela peut même être plus précis que l'utilisation d'un cookie,
+  car certains visiteurs bloquent complètement les cookies.
+data_policy_compliance_info: >-
+  Nous sommes heureux de vous fournir des informations sur la façon dont Capgo
+  est conçu pour vous aider à vous conformer aux différentes réglementations en
+  matière de confidentialité. Nous vous encourageons à discuter de questions
+  spécifiques avec votre avocat pour vous aider à décider si notre service vous
+  permet de remplir les exigences légales qui s'appliquent à vous.
+data_policy_ownership_title: Propriété des données de votre site Web
+data_policy_ownership_intro: >-
+  Lorsque vous utilisez notre service, Capgo collectera des informations sur vos
+  visiteurs. Vous nous confiez les données de votre site et nous prenons cette
+  confiance à cœur. La confidentialité des données de votre site — et ce sont
+  vos données, pas les nôtres ! - c'est un gros problème pour nous.
+data_policy_ownership_statement: >-
+  En utilisant Capgo, vous conservez la propriété à 100% des données de votre
+  site Web. Bien que lorsque vous utilisez notre service hébergé, les analyses
+  de votre site soient stockées sur notre serveur dans le cloud, vous restez
+  totalement maître des données de votre site et vous possédez également
+  l'entièreté de toutes vos données.
+data_policy_ownership_rights: >-
+  Vous possédez tous les droits, titres et intérêts sur les données de votre
+  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
+  site Web. Nous ne vendrons ni ne partagerons jamais les données de votre site
+  à des tiers.
+data_policy_data_protection_1: >-
+  Les données de votre site Web ne sont pas partagées avec des sociétés de
+  publicité ou toute autre société en général.
+data_policy_data_protection_2: Les données de votre site Web ne sont en aucun cas envoyées à des tiers.
+data_policy_data_protection_3: >-
+  Les données de votre site Web ne sont ni extraites ni récoltées à des fins de
+  tendances personnelles et comportementales.
+data_policy_data_protection_4: Les données de votre site Web ne sont pas monétisées.
+data_policy_account_deletion: >-
+  Vous pouvez choisir de supprimer votre compte et de supprimer les statistiques
+  de votre site à tout moment. Nous fournissons des liens de suppression
+  simples, sans poser de questions.
+data_policy_permanent_deletion: >-
+  Toutes vos statistiques seront définitivement supprimées immédiatement lorsque
+  vous supprimez votre compte Capgo ou lorsque vous supprimez les statistiques
+  de votre site. Nous ne pouvons pas récupérer ces informations une fois
+  qu'elles ont été définitivement supprimées.
+data_policy_trust_title: Pourquoi devrais-je te faire confiance ?
+data_policy_trust_open_source: >-
+  Capgo est 100% open source. Notre code source est disponible et accessible sur
+  GitHub afin que vous puissiez le lire et le réviser pour vous assurer que
+  notre code fait ce que nous disons.
+data_policy_trust_transparency: >-
+  Nous ne sommes pas une boîte noire. Tout est à découvert. Tout le monde peut
+  visualiser, examiner et inspecter le code que nous exécutons pour vérifier que
+  nous mettons en pratique ce que nous prêchons.
+data_policy_trust_importance: >-
+  Ceci est essentiel sur le marché des logiciels de confidentialité. On ne peut
+  pas toujours faire confiance aux entreprises et aux logiciels propriétaires
+  lorsque les données sont en question. La seule façon de prouver votre
+  confiance est de permettre à des experts d’examiner votre code et de vérifier
+  que vous faites réellement ce que vous dites faire.
+data_policy_gdpr_title: Confidentialité RGPD
+data_policy_legal_basis_title: Base juridique du traitement des données personnelles dans le cadre du RGPD
+data_policy_legal_basis_intro: 'Nous pouvons traiter les données personnelles dans les conditions suivantes :'
+data_policy_legal_basis_consent: "Consentement\_: Vous avez donné votre consentement au traitement des données personnelles pour une ou plusieurs finalités spécifiques."
+data_policy_legal_basis_contract: "Exécution d'un contrat\_: la fourniture de données personnelles est nécessaire à l'exécution d'un accord avec vous et/ou à toute obligation précontractuelle de celui-ci."
+data_policy_legal_basis_legal_obligations: >-
+  Obligations légales : Le traitement des Données Personnelles est nécessaire au
+  respect d'une obligation légale à laquelle la Société est soumise.
+data_policy_legal_basis_vital_interests: >-
+  Intérêts vitaux : Le traitement des Données personnelles est nécessaire afin
+  de protéger Vos intérêts vitaux ou ceux d’une autre personne physique.
+data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investie la Société."
+data_policy_legal_basis_legitimate_interests: >-
+  Intérêts légitimes : Le traitement des Données Personnelles est nécessaire aux
+  finalités des intérêts légitimes poursuivis par la Société.
+data_policy_legal_basis_clarification: >-
+  Dans tous les cas, la Société se fera un plaisir de contribuer à clarifier la
+  base juridique spécifique qui s'applique au traitement, et notamment si la
+  fourniture de Données Personnelles est une exigence légale ou contractuelle,
+  ou une exigence nécessaire à la conclusion d'un contrat.
+data_policy_gdpr_rights_title: Vos droits en vertu du RGPD
+data_policy_gdpr_rights_intro: >-
+  La Société s'engage à respecter la confidentialité de Vos Données Personnelles
+  et à Vous garantir l'exercice de Vos droits.
+data_policy_gdpr_rights_list_intro: "Vous avez le droit, en vertu de cette politique de confidentialité, et par la loi si vous résidez dans l'UE, de\_:"
+data_policy_gdpr_right_access: >-
+  Demandez l’accès à vos données personnelles. Le droit d’accéder, de mettre à
+  jour ou de supprimer les informations que nous détenons sur vous. Dans la
+  mesure du possible, vous pouvez accéder, mettre à jour ou demander la
+  suppression de vos données personnelles directement dans la section des
+  paramètres de votre compte. Si vous ne parvenez pas à effectuer ces actions
+  vous-même, veuillez nous contacter pour vous aider. Cela vous permet également
+  de recevoir une copie des données personnelles que nous détenons à votre
+  sujet.
+data_policy_gdpr_right_correction: >-
+  Demander la correction des données personnelles que nous détenons à votre
+  sujet. Vous avez le droit de faire corriger toute information incomplète ou
+  inexacte que nous détenons à votre sujet.
+data_policy_gdpr_right_object: >-
+  S'opposer au traitement de vos données personnelles. Ce droit existe lorsque
+  nous nous appuyons sur un intérêt légitime comme base juridique pour notre
+  traitement et qu'il y a quelque chose dans votre situation particulière qui
+  vous incite à vous opposer à notre traitement de vos données personnelles pour
+  ce motif. Vous avez également le droit de vous opposer lorsque nous traitons
+  vos données personnelles à des fins de marketing direct.
+data_policy_gdpr_right_erasure: >-
+  Demander la suppression de vos données personnelles. Vous avez le droit de
+  nous demander de supprimer ou de supprimer des données personnelles lorsqu'il
+  n'y a aucune bonne raison pour que nous continuions à les traiter.
+data_policy_gdpr_right_transfer: >-
+  Demander le transfert de vos données personnelles. Nous vous fournirons, ou à
+  un tiers que vous aurez choisi, vos données personnelles dans un format
+  structuré, couramment utilisé et lisible par machine. Veuillez noter que ce
+  droit s'applique uniquement aux informations automatisées que vous avez
+  initialement consenties à ce que nous utilisions ou lorsque nous avons utilisé
+  ces informations pour exécuter un contrat avec vous.
+data_policy_gdpr_right_withdraw_consent: >-
+  Retirez votre consentement. Vous avez le droit de retirer votre consentement
+  concernant l'utilisation de vos données personnelles. Si vous retirez votre
+  consentement, nous pourrions ne pas être en mesure de vous fournir l'accès à
+  certaines fonctionnalités spécifiques du Service.
+data_policy_gdpr_exercising_rights_title: Exercice de vos droits en matière de protection des données RGPD
+data_policy_gdpr_exercising_rights_contact: >-
+  Vous pouvez exercer vos droits d'accès, de rectification, d'annulation et
+  d'opposition en nous contactant. Veuillez noter que nous pouvons vous demander
+  de vérifier votre identité avant de répondre à de telles demandes. Si vous
+  faites une demande, nous ferons de notre mieux pour vous répondre dans les
+  plus brefs délais.
+data_policy_gdpr_complaint_right: >-
+  Vous avez le droit de porter plainte auprès d'une autorité de protection des
+  données concernant notre collecte et notre utilisation de vos données
+  personnelles. Pour plus d'informations, si vous résidez dans l'Espace
+  économique européen (EEE), veuillez contacter votre autorité locale de
+  protection des données dans l'EEE.
+data_policy_ccpa_title: Confidentialité CCPA
+data_policy_ccpa_intro: >-
+  Cette section d'avis de confidentialité destinée aux résidents de Californie
+  complète les informations contenues dans notre politique de confidentialité et
+  s'applique uniquement à tous les visiteurs, utilisateurs et autres personnes
+  résidant dans l'État de Californie.
+data_policy_ccpa_categories_title: Catégories de renseignements personnels collectés
+data_policy_ccpa_categories_intro: >-
+  Nous collectons des informations qui identifient, se rapportent, décrivent,
+  font référence, sont susceptibles d'être associées ou pourraient
+  raisonnablement être liées, directement ou indirectement, à un consommateur ou
+  à un appareil particulier. Ce qui suit est une liste des catégories
+  d'informations personnelles que nous pouvons collecter ou qui ont pu être
+  collectées auprès de résidents de Californie au cours des douze (12) derniers
+  mois.
+data_policy_ccpa_categories_note: >-
+  Veuillez noter que les catégories et exemples fournis dans la liste ci-dessous
+  sont ceux définis dans le CCPA. Cela ne signifie pas que tous les exemples de
+  cette catégorie d'informations personnelles ont en fait été collectés par
+  Nous, mais reflète notre conviction de bonne foi, au meilleur de nos
+  connaissances, que certaines de ces informations de la catégorie applicable
+  peuvent être et ont pu être collectées. Par exemple, certaines catégories
+  d’informations personnelles ne seront collectées que si vous nous les avez
+  fournies directement.
+data_policy_ccpa_category_a: 'Catégorie A : Identifiants.'
+data_policy_ccpa_category_a_examples: "Exemples\_: un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou d'autres identifiants similaires."
+data_policy_ccpa_category_a_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_b: "Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e))."
+data_policy_ccpa_category_b_examples: "Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse, un numéro de téléphone, un numéro de passeport, un numéro de permis de conduire ou de carte d'identité, un numéro de police d'assurance, une formation, un emploi, des antécédents professionnels, un numéro de compte bancaire, un numéro de carte de crédit. , numéro de carte de débit ou toute autre information financière, information médicale ou information d'assurance maladie. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories."
+data_policy_ccpa_category_b_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_c: "Catégorie C\_:\_Caractéristiques de classification protégées en vertu de la loi californienne ou fédérale."
+data_policy_ccpa_category_c_examples: "Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement). et conditions médicales associées), l'orientation sexuelle, le statut d'ancien combattant ou de militaire, les informations génétiques (y compris les informations génétiques familiales)."
+data_policy_ccpa_category_c_collected: 'Collecté : Non.'
+data_policy_ccpa_category_d: 'Catégorie D : Informations commerciales.'
+data_policy_ccpa_category_d_examples: "Exemples\_: enregistrements et historique des produits ou services achetés ou envisagés."
+data_policy_ccpa_category_d_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_e: 'Catégorie E : Informations biométriques.'
+data_policy_ccpa_category_e_examples: "Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou d'autres identifiants ou informations d'identification, tels que les empreintes digitales, les empreintes faciales et les empreintes vocales, les scans de l'iris ou de la rétine, la frappe au clavier, la démarche ou d'autres modèles physiques. , et des données sur le sommeil, la santé ou l’exercice."
+data_policy_ccpa_category_e_collected: 'Collecté : Non.'
+data_policy_ccpa_category_f: 'Catégorie F : Internet ou autre activité réseau similaire.'
+data_policy_ccpa_category_f_examples: "Exemples\_: Interaction avec notre service ou publicité."
+data_policy_ccpa_category_f_collected: 'Collecté : Oui.'
+data_policy_ccpa_category_g: 'Catégorie G : Données de géolocalisation.'
+data_policy_ccpa_category_g_examples: "Exemples\_: emplacement physique approximatif."
+data_policy_ccpa_category_g_collected: 'Collecté : Non.'
+data_policy_ccpa_category_h: 'Catégorie H : Données sensorielles.'
+data_policy_ccpa_category_h_examples: "Exemples\_: informations audio, électroniques, visuelles, thermiques, olfactives ou similaires."
+data_policy_ccpa_category_h_collected: 'Collecté : Non.'
+data_policy_ccpa_category_i: 'Catégorie I : Informations professionnelles ou liées à l''emploi.'
+data_policy_ccpa_category_i_examples: "Exemples\_: antécédents professionnels actuels ou passés ou évaluations de performances."
+data_policy_ccpa_category_i_collected: 'Collecté : Non.'
+data_policy_ccpa_category_j: "Catégorie J\_: Informations éducatives non publiques (conformément à la Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99))."
+data_policy_ccpa_category_j_examples: "Exemples\_: dossiers scolaires directement liés à un étudiant conservés par un établissement d'enseignement ou une partie agissant en son nom, tels que les notes, les relevés de notes, les listes de cours, les horaires des étudiants, les codes d'identification des étudiants, les informations financières des étudiants ou les dossiers disciplinaires des étudiants."
+data_policy_ccpa_category_j_collected: 'Collecté : Non.'
+data_policy_ccpa_category_k: "Catégorie K\_:\_Inférences tirées d’autres informations personnelles."
+data_policy_ccpa_category_k_examples: "Exemples\_: Profil reflétant les préférences, les caractéristiques, les tendances psychologiques, les prédispositions, le comportement, les attitudes, l'intelligence, les capacités et les aptitudes d'une personne."
+data_policy_ccpa_category_k_collected: 'Collecté : Non.'
+data_policy_ccpa_info_sources_title: >-
+  En vertu du CCPA, les informations personnelles doivent être interprétées au
+  sens large comme des informations qui identifient, se rapportent, décrivent,
+  font référence, sont raisonnablement susceptibles d'être associées ou
+  pourraient raisonnablement être liées, directement ou indirectement, à un
+  consommateur ou à un appareil particulier. Les informations personnelles
+  n'incluent pas les informations accessibles au public provenant des dossiers
+  gouvernementaux, les informations anonymisées ou agrégées sur les
+  consommateurs, ou les informations exclues du champ d'application du CCPA.
+data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_info_source_1: >-
+  Directement de votre part. Par exemple, à partir des formulaires que vous
+  remplissez sur notre Service, des préférences que vous exprimez ou fournissez
+  via notre Service, ou à partir de vos achats sur notre Service.
+data_policy_ccpa_info_source_2: >-
+  Indirectement de Toi. Par exemple, en observant Votre activité sur notre
+  Service.
+data_policy_ccpa_info_source_3: >-
+  Automatiquement de votre part. Par exemple, via les cookies que nous ou nos
+  fournisseurs de services installons sur votre appareil lorsque vous naviguez
+  dans notre service.
+data_policy_ccpa_info_source_4: >-
+  Des fournisseurs de services. Par exemple, des fournisseurs tiers pour le
+  traitement des paiements, ou d'autres fournisseurs tiers que nous utilisons
+  pour vous fournir le Service.
+data_policy_ccpa_use_of_info_title: >-
+  Utilisation des informations personnelles à des fins commerciales ou à des
+  fins commerciales
+data_policy_ccpa_use_of_info_intro: "Nous pouvons utiliser ou divulguer les informations personnelles que nous collectons à des «\_fins commerciales\_» ou des «\_fins commerciales\_» (telles que définies dans le CCPA), qui peuvent inclure les exemples suivants\_:"
+data_policy_ccpa_use_of_info_1: Pour exploiter notre service et vous fournir notre service.
+data_policy_ccpa_use_of_info_2: >-
+  Pour vous fournir une assistance et répondre à vos demandes, notamment pour
+  enquêter et répondre à vos préoccupations et surveiller et améliorer notre
+  service.
+data_policy_ccpa_use_of_info_3: >-
+  Pour remplir ou répondre à la raison pour laquelle vous avez fourni les
+  informations. Par exemple, si vous partagez vos coordonnées pour poser une
+  question sur notre service, nous utiliserons ces informations personnelles
+  pour répondre à votre demande.
+data_policy_ccpa_use_of_info_4: >-
+  Pour répondre aux demandes des forces de l'ordre et comme l'exige la loi
+  applicable, une ordonnance du tribunal ou des réglementations
+  gouvernementales.
+data_policy_ccpa_use_of_info_5: >-
+  Comme cela vous est décrit lors de la collecte de vos informations
+  personnelles ou comme indiqué autrement dans le CCPA.
+data_policy_ccpa_use_of_info_6: À des fins d’administration et d’audit internes.
+data_policy_ccpa_use_of_info_7: >-
+  Détecter les incidents de sécurité et se protéger contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, y compris, si
+  nécessaire, poursuivre les responsables de ces activités.
+data_policy_ccpa_info_sharing_title: Partage d’informations personnelles
+data_policy_ccpa_info_sharing_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
+data_policy_ccpa_info_sharing_1: Fournisseurs de services
+data_policy_ccpa_info_sharing_2: Processeurs de paiement
+data_policy_ccpa_info_sharing_3: Nos affiliés
+data_policy_ccpa_info_sharing_4: Nos partenaires commerciaux
+data_policy_ccpa_info_sharing_5: >-
+  Fournisseurs tiers auxquels vous ou vos agents nous autorisez à divulguer vos
+  informations personnelles en relation avec les produits ou services que nous
+  vous fournissons
+data_policy_ccpa_sale_of_info_title: Vente de renseignements personnels
+data_policy_ccpa_sale_of_info_definition: >-
+  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
+  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
+  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
+  autres, les informations personnelles d'un consommateur par le affaires à un
+  tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
+  avoir reçu une sorte d'avantage en échange du partage d'informations
+  personnelles, mais pas nécessairement un avantage monétaire.
+data_policy_ccpa_sale_of_info_note: >-
+  Veuillez noter que les catégories énumérées ci-dessous sont celles définies
+  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
+  d'informations personnelles ont en fait été vendus, mais reflète notre
+  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
+  ces informations de la catégorie applicable peuvent être et ont pu être
+  partagées contre valeur en retour. .
+data_policy_ccpa_sale_of_info_statement: "Nous pouvons vendre et avons pu vendre au cours des douze (12) derniers mois les catégories d’informations personnelles suivantes\_:"
+data_policy_ccpa_sale_of_info_categories: "Catégorie A\_: Identifiants\nCatégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e))\nCatégorie D : Informations commerciales\nCatégorie F\_:\_Internet ou autre activité réseau similaire"
+data_policy_ccpa_share_of_info_title: Partage d’informations personnelles
+data_policy_ccpa_share_of_info_statement: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
+data_policy_ccpa_share_of_info_categories: >-
+  Fournisseurs de services
+
+  Processeurs de paiement
+
+  Nos affiliés
+
+  Nos partenaires commerciaux
+
+  Fournisseurs tiers auxquels vous ou vos agents nous autorisez à divulguer vos
+  informations personnelles en relation avec les produits ou services que nous
+  vous fournissons
+data_policy_ccpa_sale_of_minors_info_title: Vente de renseignements personnels de mineurs de moins de 16 ans
+data_policy_ccpa_sale_of_minors_info_statement: >-
+  Nous ne collectons pas sciemment d'informations personnelles auprès de mineurs
+  de moins de 16 ans via notre Service, bien que certains sites Web tiers vers
+  lesquels nous établissons des liens puissent le faire. Ces sites Web tiers ont
+  leurs propres conditions d'utilisation et politiques de confidentialité et
+  nous encourageons les parents et tuteurs légaux à surveiller l'utilisation
+  d'Internet par leurs enfants et à leur demander de ne jamais fournir
+  d'informations sur d'autres sites Web sans leur autorisation.
+data_policy_ccpa_sale_of_minors_info_policy: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils ont moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
+data_policy_ccpa_sale_of_minors_info_request: >-
+  Si vous avez des raisons de croire qu'un enfant de moins de 13 (ou 16 ans)
+  nous a fourni des informations personnelles, veuillez nous contacter avec
+  suffisamment de détails pour nous permettre de supprimer ces informations.
+data_policy_ccpa_your_rights_title: Vos droits en vertu du CCPA
+data_policy_ccpa_your_rights_intro: "Le CCPA accorde aux résidents californiens des droits spécifiques concernant leurs informations personnelles. Si vous résidez en Californie, vous disposez des droits suivants\_:"
+data_policy_ccpa_right_to_notice: >-
+  Le droit de préavis. Vous avez le droit d'être informé des catégories de
+  données personnelles collectées et des finalités pour lesquelles les données
+  personnelles sont utilisées.
+data_policy_ccpa_right_to_request: "Le droit de demander. En vertu du CCPA, vous avez le droit de demander que nous vous divulguions des informations sur notre collecte, notre utilisation, notre vente, notre divulgation à des fins commerciales et notre partage d'informations personnelles. Une fois que nous aurons reçu et confirmé votre demande, nous vous divulguerons\_:"
+data_policy_ccpa_right_to_request_1: >-
+  Les catégories d'informations personnelles que nous avons collectées à votre
+  sujet
+data_policy_ccpa_right_to_request_2: >-
+  Les catégories de sources des informations personnelles que nous avons
+  collectées à votre sujet
+data_policy_ccpa_right_to_request_3: >-
+  Notre objectif professionnel ou commercial pour la collecte ou la vente de ces
+  informations personnelles
+data_policy_ccpa_right_to_request_4: >-
+  Les catégories de tiers avec lesquels nous partageons ces informations
+  personnelles
+data_policy_ccpa_right_to_request_5: >-
+  Les informations personnelles spécifiques que nous avons collectées à votre
+  sujet
+data_policy_ccpa_right_to_request_6: "Si nous vendons vos informations personnelles ou divulguons vos informations personnelles à des fins commerciales, nous vous divulguerons\_:"
+data_policy_ccpa_right_to_request_6_1: Les catégories de catégories d'informations personnelles vendues
+data_policy_ccpa_right_to_request_6_2: Les catégories de catégories de renseignements personnels divulguées
+data_policy_ccpa_right_to_opt_out: >-
+  Le droit de dire non à la vente de données personnelles (opt-out). Vous avez
+  le droit de nous demander de ne pas vendre vos informations personnelles. Pour
+  soumettre une demande de désinscription, veuillez nous contacter.
+data_policy_ccpa_right_to_delete: "Le droit de supprimer les données personnelles. Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
+data_policy_ccpa_right_to_delete_1: >-
+  Terminer la transaction pour laquelle nous avons collecté les informations
+  personnelles, fournir un bien ou un service que vous avez demandé, prendre des
+  mesures raisonnablement prévues dans le contexte de notre relation commerciale
+  en cours avec vous, ou exécuter autrement notre contrat avec vous.
+data_policy_ccpa_right_to_delete_2: >-
+  Détectez les incidents de sécurité, protégez-vous contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, ou poursuivez les
+  responsables de ces activités.
+data_policy_ccpa_right_to_delete_3: >-
+  Déboguez les produits pour identifier et réparer les erreurs qui altèrent les
+  fonctionnalités prévues existantes.
+data_policy_ccpa_right_to_delete_4: >-
+  Exercer la liberté d'expression, garantir le droit d'un autre consommateur
+  d'exercer ses droits à la liberté d'expression ou exercer un autre droit prévu
+  par la loi.
+data_policy_ccpa_right_to_delete_5: >-
+  Se conformer à la loi californienne sur la confidentialité des communications
+  électroniques (Cal. Penal Code § 1546 et suivants).
+data_policy_ccpa_right_to_delete_6: >-
+  Participer à des recherches scientifiques, historiques ou statistiques
+  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
+  toutes les autres lois applicables en matière d'éthique et de confidentialité,
+  lorsque la suppression des informations est susceptible de rendre impossible
+  ou de nuire sérieusement aux résultats de la recherche, si vous avez
+  préalablement fourni votre consentement éclairé. .
+data_policy_ccpa_right_to_delete_7: >-
+  Autorisez uniquement des utilisations internes raisonnablement alignées sur
+  les attentes des consommateurs en fonction de votre relation avec nous.
+data_policy_ccpa_right_to_delete_8: Se conformer à une obligation légale.
+data_policy_ccpa_right_to_delete_9: >-
+  Faire d'autres utilisations internes et licites de ces informations qui sont
+  compatibles avec le contexte dans lequel vous les avez fournies.
+data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas être victime de discrimination dans l'exercice de l'un de vos droits de consommateur, notamment par\_:"
+data_policy_ccpa_right_to_non_discrimination_1: Vous refuser des biens ou des services
+data_policy_ccpa_right_to_non_discrimination_2: >-
+  Facturer des prix ou des tarifs différents pour des biens ou des services, y
+  compris le recours à des remises ou d'autres avantages ou l'imposition de
+  pénalités
+data_policy_ccpa_right_to_non_discrimination_3: Vous fournir un niveau ou une qualité différente de biens ou de services
+data_policy_ccpa_right_to_non_discrimination_4: >-
+  Suggérant que vous recevrez un prix ou un taux différent pour des biens ou des
+  services ou un niveau ou une qualité différent de biens ou de services
+data_policy_ccpa_exercising_rights_title: Exercice de vos droits en matière de protection des données CCPA
+data_policy_ccpa_exercising_rights_contact: "Afin d'exercer l'un de vos droits en vertu du CCPA, et si vous résidez en Californie, vous pouvez nous contacter\_:"
+data_policy_ccpa_exercising_rights_website: 'En visitant cette page de notre site Internet : $1/#support'
+data_policy_ccpa_exercising_rights_authorized_agent: >-
+  Seul vous, ou une personne enregistrée auprès du secrétaire d'État de
+  Californie que vous autorisez à agir en votre nom, pouvez faire une demande
+  vérifiable concernant vos informations personnelles.
+data_policy_ccpa_exercising_rights_request_must: "Votre demande auprès de Nous doit\_:"
+data_policy_ccpa_exercising_rights_request_must_1: >-
+  Fournissez des informations suffisantes qui nous permettent de vérifier
+  raisonnablement que vous êtes la personne au sujet de laquelle nous avons
+  collecté des informations personnelles ou un représentant autorisé.
+data_policy_ccpa_exercising_rights_request_must_2: >-
+  Décrivez votre demande avec suffisamment de détails pour nous permettre de la
+  comprendre, de l'évaluer et d'y répondre correctement.
+data_policy_ccpa_exercising_rights_cannot_respond: "Nous ne pouvons pas répondre à votre demande ni vous fournir les informations requises si nous ne pouvons pas\_:"
+data_policy_ccpa_exercising_rights_cannot_respond_1: Vérifiez votre identité ou votre autorité pour faire la demande
+data_policy_ccpa_exercising_rights_cannot_respond_2: Et confirmez que les informations personnelles vous concernent
+data_policy_ccpa_exercising_rights_disclosure: >-
+  Nous divulguerons et fournirons les informations requises gratuitement dans
+  les 45 jours suivant la réception de votre demande vérifiable. Le délai pour
+  fournir les informations requises peut être prolongé une fois de 45 jours
+  supplémentaires lorsque cela est raisonnablement nécessaire et avec un
+  préavis.
+data_policy_ccpa_exercising_rights_disclosure_period: >-
+  Toute divulgation que nous fournissons ne couvrira que la période de 12 mois
+  précédant la réception de la demande vérifiable.
+data_policy_ccpa_exercising_rights_data_portability: >-
+  Pour les demandes de portabilité des données, nous sélectionnerons un format
+  pour fournir vos informations personnelles qui soit facilement utilisable et
+  devrait vous permettre de transmettre les informations d'une entité à une
+  autre sans entrave.

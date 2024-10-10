@@ -8,7 +8,7 @@ const locales = ['fr']
 
 const localePath = path.join(process.cwd(), 'locales', 'en.yml')
 
-console.log('Loading data from locales/en.yml...')
+console.log(`Loading data from ${localePath}...`)
 const enLocaleContent = fs.readFileSync(localePath, 'utf8')
 const data = load(enLocaleContent) as { [p: string]: string }
 
