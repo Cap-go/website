@@ -150,7 +150,7 @@ import { toast } from 'vue-sonner'
 import { useSupabase, getRemoteConfig } from '../services/supabase'
 import { navigate } from 'astro:transitions/client';
 
-const CLOUDFLARE_TURNSTILE_SITE_KEY = "0x4AAAAAAAxDbvW2bw7mcEZs"
+const CLOUDFLARE_TURNSTILE_SITE_KEY = "0x4AAAAAAAxItBa5rCQ3Vvhl"
 
 const isLoading = ref(false)
 const hasCaptcha = ref<boolean | null>(null)
