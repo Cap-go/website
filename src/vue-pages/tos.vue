@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
+import translations from '@/services/translations';
 
 const props = defineProps<{
   locale: Locales
@@ -25,7 +26,7 @@ const domain = config.public.baseUrl
     <p>For the purposes of these Terms and Conditions:</p>
     <ul>
       <li>
-        <p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named {{ brand }}</p>
+        <p>{{ translations['tos_definition_application'][props.locale].replace('$1', brand) }}</p>
       </li>
       <li>
         <p>

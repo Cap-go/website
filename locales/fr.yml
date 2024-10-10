@@ -163,8 +163,8 @@ we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_p
 tailored_configuration: Configuration sur mesure
 our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency: >-
   Notre équipe personnalise la configuration CI/CD pour répondre aux exigences
-  spécifiques de votre projet, garantissant des performances et une efficacité
-  optimales.
+  spécifiques de votre projet, garantissant ainsi des performances et une
+  efficacité optimales.
 platform_independence: Indépendance de la plateforme
 whether_you_use_github_gitlab_or_another_version_control_system_we_adapt_our_configuration_to_fit_your_existing_infrastructure: >-
   Que vous utilisiez GitHub, GitLab ou un autre système de contrôle de version,
@@ -305,7 +305,7 @@ better_code_quality: Meilleure qualité de code
 let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts: >-
   Laissez des personnes plus expérimentées examiner votre travail et donnez à
   votre équipe l’occasion d’apprendre des experts.
-improved_code_readability: Lisibilité améliorée du code
+improved_code_readability: Lisibilité du code améliorée
 it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive: >-
   Il est possible que différents développeurs lisent votre code à l’avenir.
   Réduisez les morceaux inutiles pour le rendre plus court et plus expressif.
@@ -487,7 +487,7 @@ top_cordova_apps: >-
 top_cordova_apps_title: Meilleures applications de Cordoue
 top_capgo_apps_title: Meilleures applications Capgo
 top_capgo_apps: Liste des meilleures applications utilisant Capgo
-cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur Google Play\_Store"
+cordova_power_aproximately_1_of_apps_on_google_play_store: "Cordova alimente environ 1\_% des applications sur le Google Play Store"
 top_flutter_apps: >-
   Liste des 100 meilleures applications utilisant Flutter sur la boutique
   Android
@@ -516,8 +516,8 @@ latest_from_the_blog: Dernières nouveautés du blog
 calculate_your_usage: Calculez votre consommation
 monthly_active_users: Utilisateurs actifs mensuels
 enter_your_estimated_monthly_active_users: >-
-  Entrez vos utilisateurs actifs mensuels estimés, les mises à jour par mois et
-  la taille des mises à jour pour obtenir votre coût mensuel estimé.
+  Entrez vos utilisateurs actifs mensuels estimés, vos mises à jour mensuelles
+  et la taille des mises à jour pour obtenir votre coût mensuel estimé.
 updates_by_month: Mises à jour<br />par mois
 updates_size: Taille des mises à jour<br />(Mo)
 updates_total: Mises à jour<br />(Total)
@@ -621,7 +621,7 @@ offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -637,12 +637,11 @@ aup_no_email_abuse_desc: >-
   Vous ne distribuerez, publierez, n'enverrez ni ne faciliterez l'envoi
   d'e-mails de masse non sollicités ou d'autres messages, promotions, publicités
   ou sollicitations (comme le « spam »), y compris la publicité commerciale et
-  les annonces d'information. Vous ne modifierez pas ou ne masquerez pas les
-  en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
-  l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
-  aux messages envoyés par un autre fournisseur de services Internet si ces
-  messages violent cette politique ou la politique d'utilisation acceptable de
-  ce fournisseur.
+  les annonces d'information. Vous ne modifierez ni ne masquerez les en-têtes de
+  courrier ni n'assumerez l'identité d'un expéditeur sans l'autorisation
+  explicite de l'expéditeur. Vous ne collecterez pas de réponses aux messages
+  envoyés par un autre fournisseur de services Internet si ces messages violent
+  cette politique ou la politique d'utilisation acceptable de ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -683,9 +682,9 @@ platform_compliance_desc: >-
   Toute activité jugée inacceptable par les plateformes utilisées par le Site et
   les Services Capgo.
 unauthorized_access_desc: >-
-  Accéder ou utiliser tout système sans autorisation, y compris tenter de
-  sonder, d'analyser ou de tester la vulnérabilité d'un système ou de violer les
-  mesures de sécurité ou d'authentification utilisées par un système.
+  Accéder ou utiliser un système sans autorisation, y compris tenter de sonder,
+  d'analyser ou de tester la vulnérabilité d'un système ou de violer toute
+  mesure de sécurité ou d'authentification utilisée par un système.
 falsification_of_origin_desc: >-
   Forger des en-têtes de paquets TCP-IP, des en-têtes de courrier électronique
   ou toute partie d'un message décrivant son origine ou son itinéraire.
@@ -726,7 +725,8 @@ canonical: Canonique
 security_intro: >-
   Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
   absolue. Cependant, quels que soient les efforts que nous déployons pour
-  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
+  assurer la sécurité du système, des vulnérabilités peuvent toujours être
+  présentes.
 security_discovery: >-
   Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
   pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
@@ -825,11 +825,11 @@ credit_requests_payment_desc: >-
   Pour demander un crédit de service, le client doit envoyer un e-mail à Capgo à
   support@capgo.app dans les trente (30) jours suivant la fin du mois au cours
   duquel l'engagement de disponibilité n'a pas été respecté. Le client doit
-  inclure soit son identifiant de compte, soit son adresse e-mail enregistrée,
-  ainsi que les dates et heures précédemment signalées auxquelles le service
-  n'était pas disponible. Si Capgo confirme que le client est éligible à un
-  crédit de service, Capgo émettra un crédit sur le compte du client dans un
-  délai de trente (30) jours. Les crédits de service ne constituent pas des
+  inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
+  les dates et heures précédemment signalées auxquelles le service n'était pas
+  disponible. Si Capgo confirme que le client est éligible à un crédit de
+  service, Capgo émettra un crédit sur le compte du client dans un délai de
+  trente (30) jours. Les crédits de service ne constituent pas des
   remboursements, ne peuvent pas être échangés contre un montant en espèces et
   ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
   Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
@@ -855,13 +855,13 @@ unscheduled_downtime_desc: >-
 actual_availability_title: 4.3 Disponibilité réelle
 actual_availability_desc: "«\_Disponibilité réelle\_» désigne la disponibilité planifiée moins les temps d'arrêt non planifiés."
 production_title: 4.4 Production
-production_desc: "La «\_production\_» est définie comme un système servant des systèmes en direct destinés aux clients ou aux entreprises avec des fonctionnalités déployées et fonctionnelles existantes."
+production_desc: "La «\_production\_» est définie comme un système servant des systèmes opérationnels ou orientés client en direct avec des fonctionnalités déployées et fonctionnelles existantes."
 non_production_desc: >-
   Le « développement », la « mise en scène », « l'uat », la « pré-production »
   ou la mise en œuvre de nouvelles fonctionnalités, même dans un environnement
   de production, ne sont pas considérés comme de la production.
-sla_exclusions_title: Exclusions de SLA
-general_service_exclusions_title: Exclusions de services généraux
+sla_exclusions_title: Exclusions des SLA
+general_service_exclusions_title: Exclusions des services généraux
 general_service_exclusion_1: >-
   (i) Causés par des facteurs échappant à notre contrôle raisonnable, y compris,
   mais sans s'y limiter, tout événement de force majeure ou accès à Internet,
@@ -970,7 +970,7 @@ support_policy_not_covered_intro: "Les services d'assistance technique de Capgo 
 support_policy_not_covered_1: Débogage général des applications utilisateur
 support_policy_not_covered_2: Réécriture du code de l'application pour la compatibilité avec Capgo
 support_policy_not_covered_3: >-
-  Modification et/ou correction de logiciels tiers ou Open Source pour la
+  Modification et/ou correctif de logiciels tiers ou Open Source pour la
   compatibilité Capgo
 support_policy_billing_support: >-
   L’assistance à la facturation et à la gestion des comptes est disponible pour
@@ -1009,8 +1009,8 @@ support_policy_proactive_monitoring_desc: >-
   En cas de problème de plate-forme, nous publierons un avis sur notre site de
   statut à l'adresse status.capgo.app pour communiquer rapidement l'impact et le
   statut. Vous n'avez pas besoin de soumettre un ticket d'assistance pour les
-  problèmes persistants de la plateforme. Au lieu de cela, surveillez la page
-  d’état pour connaître les dernières mises à jour et informations.
+  problèmes persistants de la plateforme. Surveillez plutôt la page d’état pour
+  connaître les dernières mises à jour et informations.
 support_policy_premium_support_title: Assistance Premium
 support_policy_premium_support_desc: "Pour en savoir plus sur nos options de support Premium pour les clients Team Plan et Enterprise, veuillez nous contacter en utilisant le formulaire ci-dessous\_:"
 disclaimer_title: Clause de non-responsabilité
@@ -1024,9 +1024,9 @@ interpretation_text: >-
 definitions_title: Définitions
 definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
 company_definition: >-
-  La <strong>Société</strong> (appelée « la Société », « Nous », « Notre » ou «
-  Notre » dans cette clause de non-responsabilité) fait référence à Digital
-  Shift OU, 6 sepapaja, 15510 Tallinn.
+  La <strong>Société</strong> (désignée par « la Société », « Nous », « Notre »
+  ou « Notre » dans le présent Avis de non-responsabilité) fait référence à
+  Digital Shift OU, 6 sepapaja, 15510 Tallinn.
 service_definition: <strong>Service</strong> fait référence à l'Application.
 you_definition: >-
   <strong>Vous</strong> désigne la personne accédant au Service, ou la société
@@ -1061,9 +1061,9 @@ external_links_disclaimer_text: >-
   Société.
 external_links_no_guarantee: >-
   Veuillez noter que la Société ne garantit pas l'exactitude, la pertinence,
-  l'actualité ou l'exhaustivité des informations contenues dans ces sites Web
+  l'actualité ou l'exhaustivité des informations présentes sur ces sites Web
   externes.
-errors_and_omissions_disclaimer_title: Avis de non-responsabilité relatif aux erreurs et omissions
+errors_and_omissions_disclaimer_title: Avis de non-responsabilité concernant les erreurs et omissions
 errors_and_omissions_disclaimer_text: >-
   Les informations fournies par le Service sont uniquement à titre indicatif sur
   des questions d'intérêt. Même si la Société prend toutes les précautions pour
@@ -1108,12 +1108,12 @@ no_responsibility_disclaimer_text: >-
   n'est pas engagée par les présentes à fournir des conseils et services
   juridiques, comptables, fiscaux ou autres. En tant que tel, il ne doit pas
   être utilisé comme substitut à la consultation de conseillers professionnels
-  compétents en matière comptable, fiscale, juridique ou autre.
+  comptables, fiscaux, juridiques ou autres conseillers compétents.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
-  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
+  responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
   qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
-  ou votre incapacité à accéder ou à utiliser le Service.
+  ou votre incapacité d'accéder ou d'utiliser le Service.
 use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
 use_at_your_own_risk_disclaimer_text: >-
   Toutes les informations contenues dans le Service sont fournies « telles
@@ -1155,10 +1155,10 @@ trust_architecture_layers: L'architecture de Capgo se compose de plusieurs couch
 trust_application_security: Sécurité des applications
 trust_secure_coding: Codage sécurisé
 trust_code_review: >-
-  Toute modification apportée à la production doit d’abord être examinée et
-  approuvée. La refactorisation du code doit respecter les principes de codage
-  sécurisé et les meilleures pratiques de l'industrie, telles que celles
-  définies par l'OWASP.
+  Tout changement apporté à la production doit d’abord être examiné et approuvé.
+  La refactorisation du code doit respecter les principes de codage sécurisé et
+  les meilleures pratiques de l'industrie, telles que celles définies par
+  l'OWASP.
 trust_site_reliability: Fiabilité du site
 trust_serverless_infrastructure: "Capgo utilise une infrastructure 100\_% sans serveur, atteignant historiquement une disponibilité de 99,9\_%. Voir le statut ici"
 trust_application_penetration_testing: Tests d'intrusion des applications
@@ -1195,3 +1195,816 @@ trust_system_wide_issues_notification: >-
   En cas de problèmes à l'échelle du système, les clients sont informés par leur
   e-mail. L'état du système de Capgo et les incidents de réseau et de sécurité
   sont publiés sur https://status.capgo.app.
+data_policy_title: Politique de données
+data_policy_last_updated: 'Dernière mise à jour : 21 septembre 2023'
+data_policy_intro: >-
+  Une politique de données contient un ensemble de règles, de principes et de
+  lignes directrices qui fournissent un cadre pour différents domaines de
+  gestion des données dans l'ensemble de l'entreprise, y compris, mais sans s'y
+  limiter, la gouvernance des données, la qualité des données et l'architecture
+  des données.
+data_policy_what_we_collect_title: Ce que nous collectons et à quoi nous l’utilisons
+data_policy_what_we_collect_description: >-
+  Nous ne suivons pas les personnes sur leurs appareils ni sur les sites Web et
+  applications qu’elles visitent. Toutes les données sont isolées sur une seule
+  journée, un seul site Web et un seul appareil. Il n’existe aucun moyen de
+  savoir si la même personne visite un site à partir de plusieurs appareils ou
+  si elle visite un autre site Web.
+data_policy_goal_of_capgo: >-
+  L'objectif de Capgo est de suivre les tendances globales du trafic de votre
+  site Web, il ne s'agit pas de suivre les visiteurs individuels. Nous
+  n’utilisons pas de cookies, nous ne générons aucun identifiant persistant et
+  nous ne collectons ni ne stockons aucune donnée personnelle ou identifiable.
+  Toutes les données sont uniquement des données agrégées et ne contiennent
+  aucune information personnelle.
+data_policy_anonymous_measurement: >-
+  En utilisant Capgo, toutes les mesures du site sont effectuées de manière
+  absolument anonyme. Nous mesurons uniquement les points de données les plus
+  essentiels et rien d'autre. Toutes les mesures que nous collectons tiennent
+  sur une seule page.
+data_policy_unique_users_title: Comment nous comptons les utilisateurs uniques sans cookies
+data_policy_unique_users_description: >-
+  Compter les visiteurs uniques fait partie intégrante de l’analyse Web. Capgo
+  tente de trouver un équilibre raisonnable entre la déduplication des pages
+  vues et le respect de la vie privée des visiteurs.
+data_policy_no_persistent_identifiers: >-
+  Nous n'essayons pas de générer un identifiant persistant sur l'appareil, car
+  ils sont considérés comme des données personnelles au sens du RGPD. Nous
+  n'utilisons pas de cookies, de cache de navigateur ni de stockage local. Nous
+  ne stockons, ne récupérons ni n’extrayons quoi que ce soit des appareils des
+  visiteurs.
+data_policy_http_request_usage: >-
+  Chaque requête HTTP envoie l'adresse IP et l'agent utilisateur au serveur,
+  c'est donc ce que nous utilisons. Nous générons un identifiant changeant
+  quotidiennement en utilisant l’adresse IP et l’agent utilisateur du visiteur.
+data_policy_ip_accuracy: >-
+  Lors de nos tests, l'utilisation des adresses IP pour compter les visiteurs
+  est remarquablement précise par rapport à l'utilisation d'un cookie. Dans
+  certains cas, cela peut même être plus précis que l'utilisation d'un cookie,
+  car certains visiteurs bloquent complètement les cookies.
+data_policy_privacy_compliance: >-
+  Nous sommes heureux de vous fournir des informations sur la manière dont Capgo
+  est conçu pour vous aider à vous conformer aux différentes réglementations en
+  matière de confidentialité. Nous vous encourageons à discuter de questions
+  spécifiques avec votre avocat pour vous aider à décider si notre service vous
+  permet de remplir les exigences légales qui s'appliquent à vous.
+data_policy_data_ownership_title: Propriété des données de votre site Web
+data_policy_data_ownership_description: >-
+  Lorsque vous utilisez notre service, Capgo collectera des informations sur vos
+  visiteurs. Vous nous confiez les données de votre site et nous prenons cette
+  confiance à cœur. La confidentialité des données de votre site — et ce sont
+  vos données, pas les nôtres ! - c'est un gros problème pour nous.
+data_policy_ownership_rights: >-
+  En utilisant Capgo, vous conservez la propriété à 100% des données de votre
+  site Web. Bien que lorsque vous utilisez notre service hébergé, les analyses
+  de votre site soient stockées sur notre serveur dans le cloud, vous restez
+  totalement maître des données de votre site et vous possédez également
+  l'entièreté de toutes vos données.
+data_policy_no_rights_obtained: >-
+  Vous possédez tous les droits, titres et intérêts sur les données de votre
+  site Web. Nous n’obtenons aucun droit de votre part sur les données de votre
+  site Web. Nous ne vendrons ni ne partagerons jamais les données de votre site
+  à des tiers.
+data_policy_no_sharing: >-
+  Les données de votre site Web ne sont pas partagées avec des sociétés de
+  publicité ou toute autre société en général.
+data_policy_no_third_party: Les données de votre site Web ne sont en aucun cas envoyées à des tiers.
+data_policy_no_mining: >-
+  Les données de votre site Web ne sont ni extraites ni récoltées à des fins de
+  tendances personnelles et comportementales.
+data_policy_no_monetization: Les données de votre site Web ne sont pas monétisées.
+data_policy_deletion_rights: >-
+  Vous pouvez choisir de supprimer votre compte et de supprimer les statistiques
+  de votre site à tout moment. Nous fournissons des liens de suppression
+  simples, sans poser de questions.
+data_policy_permanent_deletion: >-
+  Toutes vos statistiques seront définitivement supprimées immédiatement lorsque
+  vous supprimez votre compte Capgo ou lorsque vous supprimez les statistiques
+  de votre site. Nous ne pouvons pas récupérer ces informations une fois
+  qu'elles ont été définitivement supprimées.
+data_policy_trust_title: Pourquoi devrais-je te faire confiance ?
+data_policy_trust_description: "<a :href=\"`${domain}/`\" rel=\"external nofollow noopener\" target=\"_blank\">Capgo</a> est 100\_% open source. Notre code source est disponible et accessible sur GitHub afin que vous puissiez le lire et le réviser pour vous assurer que notre code fait ce que nous disons."
+data_policy_transparency: >-
+  Nous ne sommes pas une boîte noire. Tout est à découvert. Tout le monde peut
+  visualiser, examiner et inspecter le code que nous exécutons pour vérifier que
+  nous mettons en pratique ce que nous prêchons.
+data_policy_privacy_software_importance: >-
+  Ceci est essentiel sur le marché des logiciels de confidentialité. On ne peut
+  pas toujours faire confiance aux entreprises et aux logiciels propriétaires
+  lorsque les données sont en question. La seule façon de prouver votre
+  confiance est de permettre à des experts d’examiner votre code et de vérifier
+  que vous faites réellement ce que vous dites faire.
+data_policy_gdpr_privacy_title: Confidentialité RGPD
+data_policy_legal_basis_title: Base juridique du traitement des données personnelles dans le cadre du RGPD
+data_policy_legal_basis_intro: 'Nous pouvons traiter les données personnelles dans les conditions suivantes :'
+data_policy_legal_basis_consent: "<strong>Consentement\_:</strong> Vous avez donné votre consentement au traitement des données personnelles pour une ou plusieurs finalités spécifiques."
+data_policy_legal_basis_contract: "<strong>Exécution d'un contrat\_:</strong> La fourniture de données personnelles est nécessaire à l'exécution d'un accord avec vous et/ou à toute obligation précontractuelle de celui-ci."
+data_policy_legal_basis_legal_obligations: "<strong>Obligations légales\_:</strong> Le traitement des Données Personnelles est nécessaire au respect d'une obligation légale à laquelle la Société est soumise."
+data_policy_legal_basis_vital_interests: "<strong>Intérêts vitaux\_:</strong> Le traitement des Données personnelles est nécessaire afin de protéger Vos intérêts vitaux ou ceux d'une autre personne physique."
+data_policy_legal_basis_public_interests: "<strong>Intérêts publics\_:</strong> Le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
+data_policy_legal_basis_legitimate_interests: "<strong>Intérêts légitimes\_:</strong> Le traitement des Données personnelles est nécessaire aux fins des intérêts légitimes poursuivis par la Société."
+data_policy_legal_basis_clarification: >-
+  Dans tous les cas, la Société se fera un plaisir de contribuer à clarifier la
+  base juridique spécifique qui s'applique au traitement, et notamment si la
+  fourniture de Données Personnelles est une exigence légale ou contractuelle,
+  ou une exigence nécessaire à la conclusion d'un contrat.
+data_policy_gdpr_rights_title: Vos droits en vertu du RGPD
+data_policy_gdpr_rights_intro: >-
+  La Société s'engage à respecter la confidentialité de Vos Données Personnelles
+  et à Vous garantir l'exercice de Vos droits.
+data_policy_gdpr_rights_access: >-
+  <strong>Demander l'accès à vos données personnelles.</strong> Le droit
+  d'accéder, de mettre à jour ou de supprimer les informations que nous détenons
+  sur vous. Dans la mesure du possible, vous pouvez accéder, mettre à jour ou
+  demander la suppression de vos données personnelles directement dans la
+  section des paramètres de votre compte. Si vous ne parvenez pas à effectuer
+  ces actions vous-même, veuillez nous contacter pour vous aider. Cela vous
+  permet également de recevoir une copie des données personnelles que nous
+  détenons à votre sujet.
+data_policy_gdpr_rights_correction: >-
+  <strong>Demander la correction des données personnelles que nous détenons à
+  votre sujet.</strong> Vous avez le droit de faire corriger toute information
+  incomplète ou inexacte que nous détenons à votre sujet.
+data_policy_gdpr_rights_object: >-
+  <strong>S'opposer au traitement de vos données personnelles.</strong> Ce droit
+  existe lorsque nous nous appuyons sur un intérêt légitime comme base juridique
+  pour notre traitement et qu'il y a quelque chose dans votre situation
+  particulière qui vous incite à vouloir vous opposer à notre traitement.
+  traitement de Vos Données Personnelles pour ce motif. Vous avez également le
+  droit de vous opposer lorsque nous traitons vos données personnelles à des
+  fins de marketing direct.
+data_policy_gdpr_rights_erasure: >-
+  <strong>Demander l'effacement de vos données personnelles.</strong> Vous avez
+  le droit de nous demander de supprimer ou de supprimer des données
+  personnelles lorsqu'il n'y a aucune bonne raison pour que nous continuions à
+  les traiter.
+data_policy_gdpr_rights_transfer: >-
+  <strong>Demandez le transfert de vos données personnelles.</strong> Nous vous
+  fournirons, ou à un tiers que vous aurez choisi, vos données personnelles dans
+  un format structuré, couramment utilisé et lisible par machine. Veuillez noter
+  que ce droit s'applique uniquement aux informations automatisées que vous avez
+  initialement consenties à ce que nous utilisions ou lorsque nous avons utilisé
+  ces informations pour exécuter un contrat avec vous.
+data_policy_gdpr_rights_withdraw_consent: >-
+  <strong>Retirez votre consentement.</strong> Vous avez le droit de retirer
+  votre consentement concernant l'utilisation de vos données personnelles. Si
+  vous retirez votre consentement, nous pourrions ne pas être en mesure de vous
+  fournir l'accès à certaines fonctionnalités spécifiques du Service.
+data_policy_gdpr_exercising_rights_title: Exercice de vos droits en matière de protection des données RGPD
+data_policy_gdpr_exercising_rights_intro: >-
+  Vous pouvez exercer vos droits d'accès, de rectification, d'annulation et
+  d'opposition en nous contactant. Veuillez noter que nous pouvons vous demander
+  de vérifier votre identité avant de répondre à de telles demandes. Si vous
+  faites une demande, nous ferons de notre mieux pour vous répondre dans les
+  plus brefs délais.
+data_policy_gdpr_complaint: >-
+  Vous avez le droit de porter plainte auprès d'une autorité de protection des
+  données concernant notre collecte et notre utilisation de vos données
+  personnelles. Pour plus d'informations, si vous résidez dans l'Espace
+  économique européen (EEE), veuillez contacter votre autorité locale de
+  protection des données dans l'EEE.
+data_policy_ccpa_privacy_title: Confidentialité CCPA
+data_policy_ccpa_privacy_intro: >-
+  Cette section d'avis de confidentialité destinée aux résidents de Californie
+  complète les informations contenues dans notre politique de confidentialité et
+  s'applique uniquement à tous les visiteurs, utilisateurs et autres personnes
+  résidant dans l'État de Californie.
+data_policy_ccpa_categories_title: Catégories de renseignements personnels collectés
+data_policy_ccpa_categories_intro: >-
+  Nous collectons des informations qui identifient, se rapportent, décrivent,
+  font référence, sont susceptibles d'être associées ou pourraient
+  raisonnablement être liées, directement ou indirectement, à un consommateur ou
+  à un appareil particulier. Ce qui suit est une liste des catégories
+  d'informations personnelles que nous pouvons collecter ou qui ont pu être
+  collectées auprès de résidents de Californie au cours des douze (12) derniers
+  mois.
+data_policy_ccpa_categories_note: >-
+  Veuillez noter que les catégories et exemples fournis dans la liste ci-dessous
+  sont ceux définis dans le CCPA. Cela ne signifie pas que tous les exemples de
+  cette catégorie d'informations personnelles ont en fait été collectés par
+  Nous, mais reflète notre conviction de bonne foi, au meilleur de nos
+  connaissances, que certaines de ces informations de la catégorie applicable
+  peuvent être et ont pu être collectées. Par exemple, certaines catégories
+  d’informations personnelles ne seront collectées que si vous nous les avez
+  fournies directement.
+data_policy_ccpa_category_a: "<strong>Catégorie A\_: Identifiants.</strong> Exemples\_: Un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou tout autre élément similaire. identifiants. Collecté : Oui."
+data_policy_ccpa_category_b: "<strong>Catégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e)).</strong> Exemples\_: un nom, une signature, un numéro de sécurité sociale, des caractéristiques physiques ou une description, une adresse. , numéro de téléphone, numéro de passeport, numéro de permis de conduire ou de carte d'identité d'État, numéro de police d'assurance, éducation, emploi, antécédents professionnels, numéro de compte bancaire, numéro de carte de crédit, numéro de carte de débit ou toute autre information financière, information médicale ou assurance maladie. information. Certaines informations personnelles incluses dans cette catégorie peuvent chevaucher d'autres catégories. Collecté : Oui."
+data_policy_ccpa_category_c: "<strong>Catégorie\_C\_: caractéristiques de classification protégées en vertu de la loi californienne ou fédérale.</strong> Exemples\_: âge (40\_ans ou plus), race, couleur, ascendance, origine nationale, citoyenneté, religion ou croyance, état civil, état de santé, handicap physique ou mental, sexe (y compris le genre, l'identité de genre, l'expression de genre, la grossesse ou l'accouchement et les conditions médicales associées), orientation sexuelle, statut d'ancien combattant ou militaire, informations génétiques (y compris les informations génétiques familiales). Collecté : Non."
+data_policy_ccpa_category_d: "<strong>Catégorie D\_: Informations commerciales.</strong> Exemples\_:\_Documents et historique des produits ou services achetés ou envisagés. Collecté : Oui."
+data_policy_ccpa_category_e: "<strong>Catégorie\_E\_: informations biométriques.</strong> Exemples\_: caractéristiques génétiques, physiologiques, comportementales et biologiques, ou modèles d'activité utilisés pour extraire un modèle ou un autre identifiant ou des informations d'identification, telles que des empreintes digitales, des empreintes faciales et des empreintes vocales. scans de l'iris ou de la rétine, frappe au clavier, démarche ou autres modèles physiques, ainsi que données sur le sommeil, la santé ou l'exercice. Collecté : Non."
+data_policy_ccpa_category_f: "<strong>Catégorie F\_: Internet ou autre activité de réseau similaire.</strong> Exemples\_: Interaction avec notre Service ou publicité. Collecté : Oui."
+data_policy_ccpa_category_g: "<strong>Catégorie\_G\_: données de géolocalisation.</strong> Exemples\_: emplacement physique approximatif. Collecté : Non."
+data_policy_ccpa_category_h: "<strong>Catégorie H\_: données sensorielles.</strong> Exemples\_: informations audio, électroniques, visuelles, thermiques, olfactives ou similaires. Collecté : Non."
+data_policy_ccpa_category_i: "<strong>Catégorie I\_: informations professionnelles ou liées à l'emploi.</strong> Exemples\_: antécédents professionnels actuels ou passés ou évaluations de performances. Collecté : Non."
+data_policy_ccpa_category_j: "<strong>Catégorie\_J\_:\_informations non publiques sur l'éducation (conformément à la Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).</strong> Exemples\_:\_dossiers scolaires directement liés à un élève conservés par un établissement d'enseignement. établissement ou partie agissant en son nom, comme les notes, les relevés de notes, les listes de cours, les horaires des étudiants, les codes d'identification des étudiants, les informations financières des étudiants ou les dossiers disciplinaires des étudiants. Collecté : Non."
+data_policy_ccpa_category_k: "<strong>Catégorie K\_:\_inférences tirées d'autres informations personnelles.</strong> Exemples\_: profil reflétant les préférences, les caractéristiques, les tendances psychologiques, les prédispositions, le comportement, les attitudes, l'intelligence, les capacités et les aptitudes d'une personne. Collecté : Non."
+data_policy_ccpa_exclusions: "En vertu du CCPA, les informations personnelles n’incluent pas\_:"
+data_policy_ccpa_exclusion_public: Informations accessibles au public provenant des archives gouvernementales
+data_policy_ccpa_exclusion_deidentified: Informations sur les consommateurs anonymisées ou agrégées
+data_policy_ccpa_exclusion_scope: "Informations exclues du champ d’application du CCPA, telles que\_:"
+data_policy_ccpa_exclusion_health: >-
+  Informations de santé ou médicales couvertes par la Health Insurance
+  Portability and Accountability Act de 1996 (HIPAA) et la California
+  Confidentiality of Medical Information Act (CMIA) ou données d'essais
+  cliniques
+data_policy_ccpa_exclusion_financial: >-
+  Informations personnelles couvertes par certaines lois sur la confidentialité
+  spécifiques au secteur, notamment le Fair Credit Reporting Act (FRCA), le
+  Gramm-Leach-Bliley Act (GLBA) ou le California Financial Information Privacy
+  Act (FIPA) et le Driver's Privacy Protection Act de 1994.
+data_policy_ccpa_sources_title: Sources de renseignements personnels
+data_policy_ccpa_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_sources_direct: >-
+  <strong>Directement de votre part</strong>. Par exemple, à partir des
+  formulaires que vous remplissez sur notre Service, des préférences que vous
+  exprimez ou fournissez via notre Service, ou de vos achats sur notre Service.
+data_policy_ccpa_sources_indirect: >-
+  <strong>Indirectement de votre part</strong>. Par exemple, en observant Votre
+  activité sur notre Service.
+data_policy_ccpa_sources_automatic: >-
+  <strong>Automatiquement de votre part</strong>. Par exemple, via les cookies
+  que nous ou nos fournisseurs de services installons sur votre appareil lorsque
+  vous naviguez dans notre service.
+data_policy_ccpa_sources_providers: >-
+  <strong>Des fournisseurs de services</strong>. Par exemple, des fournisseurs
+  tiers pour le traitement des paiements, ou d'autres fournisseurs tiers que
+  nous utilisons pour vous fournir le Service.
+data_policy_ccpa_use_title: >-
+  Utilisation des informations personnelles à des fins commerciales ou à des
+  fins commerciales
+data_policy_ccpa_use_intro: "Nous pouvons utiliser ou divulguer les informations personnelles que nous collectons à des «\_fins commerciales\_» ou des «\_fins commerciales\_» (telles que définies dans le CCPA), qui peuvent inclure les exemples suivants\_:"
+data_policy_ccpa_use_operate: Pour exploiter notre service et vous fournir notre service.
+data_policy_ccpa_use_support: >-
+  Pour vous fournir une assistance et répondre à vos demandes, notamment pour
+  enquêter et répondre à vos préoccupations et surveiller et améliorer notre
+  service.
+data_policy_ccpa_use_fulfill: >-
+  Pour remplir ou répondre à la raison pour laquelle vous avez fourni les
+  informations. Par exemple, si vous partagez vos coordonnées pour poser une
+  question sur notre service, nous utiliserons ces informations personnelles
+  pour répondre à votre demande. Si vous fournissez vos informations
+  personnelles pour acheter un produit ou un service, nous utiliserons ces
+  informations pour traiter votre paiement et faciliter la livraison.
+data_policy_ccpa_use_law: >-
+  Pour répondre aux demandes des forces de l'ordre et comme l'exige la loi
+  applicable, une ordonnance du tribunal ou des réglementations
+  gouvernementales.
+data_policy_ccpa_use_description: >-
+  Comme cela vous est décrit lors de la collecte de vos informations
+  personnelles ou comme indiqué autrement dans le CCPA.
+data_policy_ccpa_use_internal: À des fins d’administration et d’audit internes.
+data_policy_ccpa_use_security: >-
+  Détecter les incidents de sécurité et se protéger contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, y compris, si
+  nécessaire, poursuivre les responsables de ces activités.
+data_policy_ccpa_use_note: >-
+  Veuillez noter que les exemples fournis ci-dessus sont illustratifs et ne
+  prétendent pas être exhaustifs. Pour plus de détails sur la manière dont nous
+  utilisons ces informations, veuillez vous référer à la section « Utilisation
+  de vos données personnelles ».
+data_policy_ccpa_use_update: >-
+  Si nous décidons de collecter des catégories supplémentaires d'informations
+  personnelles ou d'utiliser les informations personnelles que nous avons
+  collectées à des fins matériellement différentes, sans rapport ou
+  incompatibles, nous mettrons à jour cette politique de confidentialité.
+data_policy_ccpa_disclosure_title: >-
+  Divulgation de renseignements personnels à des fins commerciales ou à des fins
+  commerciales
+data_policy_ccpa_disclosure_intro: "Nous pouvons utiliser ou divulguer et avoir utilisé ou divulgué au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes à des fins professionnelles ou commerciales\_:"
+data_policy_ccpa_disclosure_categories: >-
+  Catégorie A : Identifiants, Catégorie B : Catégories d'informations
+  personnelles répertoriées dans la loi californienne sur les dossiers clients
+  (Cal. Civ. Code § 1798.80(e)), Catégorie D : Informations commerciales,
+  Catégorie F : Internet ou autre activité de réseau similaire.
+data_policy_ccpa_disclosure_note: >-
+  Veuillez noter que les catégories énumérées ci-dessus sont celles définies
+  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
+  d'informations personnelles ont en fait été divulgués, mais reflète notre
+  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
+  ces informations de la catégorie applicable peuvent être et ont pu être
+  divulguées.
+data_policy_ccpa_disclosure_contract: >-
+  Lorsque nous divulguons des informations personnelles à des fins commerciales,
+  nous concluons un contrat qui décrit le but et exige que le destinataire garde
+  ces informations personnelles confidentielles et ne les utilise pas à d'autres
+  fins que l'exécution du contrat.
+data_policy_ccpa_sale_title: Vente de renseignements personnels
+data_policy_ccpa_sale_intro: >-
+  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
+  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
+  le transfert ou toute autre communication orale, écrite ou électronique ou
+  autre, des informations personnelles d'un consommateur par le affaires à un
+  tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
+  avoir reçu une sorte d'avantage en échange du partage d'informations
+  personnelles, mais pas nécessairement un avantage monétaire.
+data_policy_ccpa_sale_note: >-
+  Veuillez noter que les catégories énumérées ci-dessous sont celles définies
+  dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
+  d'informations personnelles ont en fait été vendus, mais reflète notre
+  conviction de bonne foi, au meilleur de nos connaissances, que certaines de
+  ces informations de la catégorie applicable peuvent être et ont pu être
+  partagées contre valeur en retour. .
+data_policy_ccpa_sale_categories: "Nous pouvons vendre et avoir vendu au cours des douze (12) derniers mois les catégories d'informations personnelles suivantes\_: Catégorie A\_: Identifiants, Catégorie B\_: Catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e). )), Catégorie D : Informations commerciales, Catégorie F : Internet ou autre activité de réseau similaire"
+data_policy_ccpa_share_title: Partage d’informations personnelles
+data_policy_ccpa_share_intro: "Nous pouvons partager vos informations personnelles identifiées dans les catégories ci-dessus avec les catégories de tiers suivantes\_:"
+data_policy_ccpa_share_providers: >-
+  Fournisseurs de services, processeurs de paiement, nos sociétés affiliées, nos
+  partenaires commerciaux, fournisseurs tiers auxquels vous ou vos agents nous
+  autorisez à divulguer vos informations personnelles en relation avec les
+  produits ou services que nous vous fournissons.
+data_policy_ccpa_minors_title: Vente de renseignements personnels de mineurs de moins de 16 ans
+data_policy_ccpa_minors_intro: >-
+  Nous ne collectons pas sciemment d'informations personnelles auprès de mineurs
+  de moins de 16 ans via notre Service, bien que certains sites Web tiers vers
+  lesquels nous établissons des liens puissent le faire. Ces sites Web tiers ont
+  leurs propres conditions d'utilisation et politiques de confidentialité et
+  nous encourageons les parents et tuteurs légaux à surveiller l'utilisation
+  d'Internet par leurs enfants et à leur demander de ne jamais fournir
+  d'informations sur d'autres sites Web sans leur autorisation.
+data_policy_ccpa_minors_sale: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils ont moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
+data_policy_ccpa_minors_contact: >-
+  Si vous avez des raisons de croire qu'un enfant de moins de 13 (ou 16 ans)
+  nous a fourni des informations personnelles, veuillez nous contacter avec
+  suffisamment de détails pour nous permettre de supprimer ces informations.
+data_policy_ccpa_rights_title: Vos droits en vertu du CCPA
+data_policy_ccpa_rights_intro: "Le CCPA accorde aux résidents californiens des droits spécifiques concernant leurs informations personnelles. Si vous résidez en Californie, vous disposez des droits suivants\_:"
+data_policy_ccpa_rights_notice: >-
+  <strong>Le droit d'être informé.</strong> Vous avez le droit d'être informé
+  des catégories de données personnelles qui sont collectées et des finalités
+  pour lesquelles les données personnelles sont utilisées.
+data_policy_ccpa_rights_request: "<strong>Le droit de demander.</strong> En vertu du CCPA, vous avez le droit de demander que nous vous divulguions des informations sur notre collecte, notre utilisation, notre vente, notre divulgation à des fins commerciales et notre partage d'informations personnelles. Une fois que nous aurons reçu et confirmé votre demande, nous vous divulguerons\_:"
+data_policy_ccpa_rights_request_categories: >-
+  Les catégories d'informations personnelles que nous avons collectées à votre
+  sujet
+data_policy_ccpa_rights_request_sources: >-
+  Les catégories de sources des informations personnelles que nous avons
+  collectées à votre sujet
+data_policy_ccpa_rights_request_purpose: >-
+  Notre objectif professionnel ou commercial pour la collecte ou la vente de ces
+  informations personnelles
+data_policy_ccpa_rights_request_third_parties: >-
+  Les catégories de tiers avec lesquels nous partageons ces informations
+  personnelles
+data_policy_ccpa_rights_request_specific: >-
+  Les informations personnelles spécifiques que nous avons collectées à votre
+  sujet
+data_policy_ccpa_rights_request_sold: "Si nous vendons vos informations personnelles ou divulguons vos informations personnelles à des fins commerciales, nous vous divulguerons\_:"
+data_policy_ccpa_rights_request_sold_categories: Les catégories de catégories d'informations personnelles vendues
+data_policy_ccpa_rights_request_disclosed_categories: Les catégories de catégories de renseignements personnels divulguées
+data_policy_ccpa_rights_opt_out: >-
+  <strong>Le droit de dire non à la vente de données personnelles
+  (opt-out).</strong> Vous avez le droit de nous demander de ne pas vendre vos
+  informations personnelles. Pour soumettre une demande de désinscription,
+  veuillez nous contacter.
+data_policy_ccpa_rights_delete: "<strong>Le droit de supprimer vos données personnelles.</strong> Vous avez le droit de demander la suppression de vos données personnelles, sous réserve de certaines exceptions. Une fois que nous aurons reçu et confirmé votre demande, nous supprimerons (et demanderons à nos fournisseurs de services de supprimer) vos informations personnelles de nos dossiers, sauf exception. Nous pouvons refuser votre demande de suppression si la conservation des informations est nécessaire pour nous ou nos fournisseurs de services pour\_:"
+data_policy_ccpa_rights_delete_transaction: >-
+  Terminer la transaction pour laquelle nous avons collecté les informations
+  personnelles, fournir un bien ou un service que vous avez demandé, prendre des
+  mesures raisonnablement prévues dans le contexte de notre relation commerciale
+  en cours avec vous, ou exécuter autrement notre contrat avec vous.
+data_policy_ccpa_rights_delete_security: >-
+  Détectez les incidents de sécurité, protégez-vous contre les activités
+  malveillantes, trompeuses, frauduleuses ou illégales, ou poursuivez les
+  responsables de ces activités.
+data_policy_ccpa_rights_delete_debug: >-
+  Déboguez les produits pour identifier et réparer les erreurs qui altèrent les
+  fonctionnalités prévues existantes.
+data_policy_ccpa_rights_delete_speech: >-
+  Exercer la liberté d'expression, garantir le droit d'un autre consommateur
+  d'exercer ses droits à la liberté d'expression ou exercer un autre droit prévu
+  par la loi.
+data_policy_ccpa_rights_delete_compliance: >-
+  Se conformer à la loi californienne sur la confidentialité des communications
+  électroniques (Cal. Penal Code § 1546 et suivants).
+data_policy_ccpa_rights_delete_research: >-
+  Participer à des recherches scientifiques, historiques ou statistiques
+  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
+  toutes les autres lois applicables en matière d'éthique et de confidentialité,
+  lorsque la suppression des informations est susceptible de rendre impossible
+  ou de nuire sérieusement aux résultats de la recherche, si vous avez
+  préalablement fourni votre consentement éclairé. .
+data_policy_ccpa_rights_delete_internal: >-
+  Autorisez uniquement des utilisations internes raisonnablement alignées sur
+  les attentes des consommateurs en fonction de votre relation avec nous.
+data_policy_ccpa_rights_delete_legal: Se conformer à une obligation légale.
+data_policy_ccpa_rights_delete_compatible: >-
+  Faire d'autres utilisations internes et licites de ces informations qui sont
+  compatibles avec le contexte dans lequel vous les avez fournies.
+data_policy_ccpa_rights_no_discrimination: "<strong>Le droit de ne pas être victime de discrimination.</strong> Vous avez le droit de ne pas être victime de discrimination pour l'exercice de l'un de vos droits de consommateur, notamment\_:"
+data_policy_ccpa_rights_no_discrimination_deny: Vous refuser des biens ou des services
+data_policy_ccpa_rights_no_discrimination_charging: >-
+  Facturer des prix ou des tarifs différents pour des biens ou des services, y
+  compris le recours à des remises ou d'autres avantages ou l'imposition de
+  pénalités
+data_policy_ccpa_rights_no_discrimination_quality: Vous fournir un niveau ou une qualité différente de biens ou de services
+data_policy_ccpa_rights_no_discrimination_suggestion: >-
+  Suggérant que vous recevrez un prix ou un taux différent pour des biens ou des
+  services ou un niveau ou une qualité différent de biens ou de services
+data_policy_ccpa_exercising_rights_title: Exercice de vos droits en matière de protection des données CCPA
+data_policy_ccpa_exercising_rights_intro: "Afin d'exercer l'un de vos droits en vertu du CCPA, et si vous résidez en Californie, vous pouvez nous contacter\_:"
+data_policy_ccpa_exercising_rights_website: "En visitant cette page sur notre site Web\_: <a :href=\"`${domain}/#support`\" rel=\"external nofollow noopener\" target=\"_blank\">{{ domain }}/#support</a>"
+data_policy_ccpa_exercising_rights_note: >-
+  Seul vous, ou une personne enregistrée auprès du secrétaire d'État de
+  Californie que vous autorisez à agir en votre nom, pouvez faire une demande
+  vérifiable concernant vos informations personnelles.
+data_policy_ccpa_exercising_rights_request: "Votre demande auprès de Nous doit\_:"
+data_policy_ccpa_exercising_rights_request_info: >-
+  Fournissez des informations suffisantes qui nous permettent de vérifier
+  raisonnablement que vous êtes la personne au sujet de laquelle nous avons
+  collecté des informations personnelles ou un représentant autorisé.
+data_policy_ccpa_exercising_rights_request_detail: >-
+  Décrivez votre demande avec suffisamment de détails pour nous permettre de la
+  comprendre, de l'évaluer et d'y répondre correctement.
+data_policy_ccpa_exercising_rights_response: "Nous ne pouvons pas répondre à votre demande ni vous fournir les informations requises si nous ne pouvons pas\_:"
+data_policy_ccpa_exercising_rights_response_verify: Vérifiez votre identité ou votre autorité pour faire la demande
+data_policy_ccpa_exercising_rights_response_confirm: Et confirmez que les informations personnelles vous concernent
+data_policy_ccpa_exercising_rights_disclosure: >-
+  Nous divulguerons et fournirons les informations requises gratuitement dans
+  les 45 jours suivant la réception de votre demande vérifiable. Le délai pour
+  fournir les informations requises peut être prolongé une fois de 45 jours
+  supplémentaires lorsque cela est raisonnablement nécessaire et avec un
+  préavis.
+data_policy_ccpa_exercising_rights_disclosure_period: >-
+  Toute divulgation que nous fournissons ne couvrira que la période de 12 mois
+  précédant la réception de la demande vérifiable.
+data_policy_ccpa_exercising_rights_portability: >-
+  Pour les demandes de portabilité des données, nous sélectionnerons un format
+  pour fournir vos informations personnelles qui soit facilement utilisable et
+  devrait vous permettre de transmettre les informations d'une entité à une
+  autre entité sans entrave.
+tos_title: Termes et conditions
+tos_last_updated: 'Dernière mise à jour : 12 janvier 2022'
+tos_please_read: >-
+  Veuillez lire attentivement ces termes et conditions avant d'utiliser notre
+  service.
+tos_interpretation_title: Interprétation et définitions
+tos_interpretation_subtitle: Interprétation
+tos_interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+tos_definitions_subtitle: Définitions
+tos_definitions_intro: "Aux fins des présentes Conditions générales\_:"
+tos_definition_application: >-
+  Application désigne le logiciel fourni par la Société téléchargé par Vous sur
+  tout appareil électronique, nommé $1
+tos_definition_application_store: >-
+  Application Store désigne le service de distribution numérique exploité et
+  développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
+  dans lequel l'Application a été téléchargée.
+tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_account: >-
+  Compte désigne un compte unique créé pour vous permettre d'accéder à notre
+  service ou à des parties de notre service.
+tos_definition_country: "Le pays fait référence à\_:\_Estonie"
+tos_definition_company: >-
+  La Société (désignée par « la Société », « Nous », « Notre » ou « Notre » dans
+  le présent Accord) fait référence à Digital Shift OU, Sepapaja 6, 15551,
+  Tallinn, Estonie.
+tos_definition_device: >-
+  Appareil désigne tout appareil pouvant accéder au Service tel qu'un
+  ordinateur, un téléphone portable ou une tablette numérique.
+tos_definition_feedback: >-
+  Les commentaires désignent les commentaires, innovations ou suggestions
+  envoyés par vous concernant les attributs, les performances ou les
+  fonctionnalités de notre service.
+tos_definition_free_trial: >-
+  L'essai gratuit fait référence à une période de temps limitée qui peut être
+  gratuite lors de l'achat d'un abonnement.
+tos_definition_in_app_purchase: >-
+  L'achat intégré fait référence à l'achat d'un produit, d'un article, d'un
+  service ou d'un abonnement effectué via l'application et soumis aux présentes
+  conditions générales et/ou aux propres conditions générales de l'App Store.
+tos_definition_service: Service fait référence à l’Application.
+tos_definition_subscriptions: >-
+  Les abonnements font référence aux services ou à l'accès au Service qui vous
+  sont proposés sous forme d'abonnement par la Société.
+tos_definition_terms: >-
+  Les Conditions générales (également appelées « Conditions ») désignent les
+  présentes Conditions générales qui constituent l'intégralité de l'accord entre
+  Vous et la Société concernant l'utilisation du Service.
+tos_definition_third_party_social_media: >-
+  Service de médias sociaux tiers désigne tout service ou contenu (y compris les
+  données, informations, produits ou services) fourni par un tiers qui peut être
+  affiché, inclus ou mis à disposition par le Service.
+tos_definition_you: >-
+  Vous désignez la personne qui accède ou utilise le Service, ou la société ou
+  autre entité juridique au nom de laquelle cette personne accède ou utilise le
+  Service, selon le cas.
+tos_acknowledgment_title: Reconnaissance
+tos_acknowledgment_text_1: >-
+  Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
+  l'accord qui s'applique entre Vous et la Société. Les présentes Conditions
+  générales définissent les droits et obligations de tous les utilisateurs
+  concernant l'utilisation du Service.
+tos_acknowledgment_text_2: >-
+  Votre accès et votre utilisation du Service sont conditionnés à votre
+  acceptation et à votre respect des présentes Conditions générales. Ces
+  Conditions générales s'appliquent à tous les visiteurs, utilisateurs et autres
+  personnes qui accèdent ou utilisent le Service.
+tos_acknowledgment_text_3: >-
+  En accédant ou en utilisant le Service, vous acceptez d'être lié par les
+  présentes Conditions générales. Si vous n'êtes pas d'accord avec une partie de
+  ces conditions générales, vous ne pouvez pas accéder au service.
+tos_acknowledgment_text_4: >-
+  Vous déclarez que vous avez plus de 18 ans. La Société n'autorise pas les
+  personnes de moins de 18 ans à utiliser le Service.
+tos_acknowledgment_text_5: >-
+  Votre accès et votre utilisation du Service sont également conditionnés à
+  votre acceptation et à votre respect de la politique de confidentialité de la
+  Société. Notre politique de confidentialité décrit nos politiques et
+  procédures relatives à la collecte, à l'utilisation et à la divulgation de vos
+  informations personnelles lorsque vous utilisez l'application ou le site Web
+  et vous informe de vos droits à la vie privée et de la manière dont la loi
+  vous protège. Veuillez lire attentivement notre politique de confidentialité
+  avant d'utiliser notre service.
+tos_subscriptions_title: Abonnements
+tos_subscriptions_period_subtitle: Période d'abonnement
+tos_subscriptions_period_text_1: >-
+  Le Service ou certaines parties du Service sont disponibles uniquement avec un
+  Abonnement payant. Vous serez facturé à l'avance sur une base récurrente et
+  périodique (telle que quotidienne, hebdomadaire, mensuelle ou annuelle), en
+  fonction du type de plan d'abonnement que vous sélectionnez lors de l'achat de
+  l'abonnement.
+tos_subscriptions_period_text_2: >-
+  A la fin de chaque période, Votre Abonnement sera automatiquement renouvelé
+  dans exactement les mêmes conditions sauf si Vous l'annulez ou si la Société
+  l'annule.
+tos_subscriptions_cancellations_subtitle: Annulations d'abonnement
+tos_subscriptions_cancellations_text_1: >-
+  Vous pouvez annuler le renouvellement de votre abonnement soit via la page des
+  paramètres de votre compte, soit en contactant la Société. Vous ne recevrez
+  pas de remboursement pour les frais que vous avez déjà payés pour votre
+  période d'abonnement en cours et vous pourrez accéder au Service jusqu'à la
+  fin de votre période d'abonnement en cours.
+tos_subscriptions_cancellations_text_2: >-
+  Si l'abonnement a été souscrit via un achat intégré, vous pouvez annuler le
+  renouvellement de votre abonnement auprès de l'Application Store.
+tos_subscriptions_billing_subtitle: Facturation
+tos_subscriptions_billing_text_1: >-
+  Vous devez fournir à la Société des informations de facturation précises et
+  complètes, notamment votre nom complet, votre adresse, votre état, votre code
+  postal, votre numéro de téléphone et des informations sur un mode de paiement
+  valide.
+tos_subscriptions_billing_text_2: >-
+  Si la facturation automatique ne s'effectue pas pour quelque raison que ce
+  soit, la Société émettra une facture électronique indiquant que vous devrez
+  procéder manuellement, dans un certain délai, au paiement intégral
+  correspondant à la période de facturation indiquée sur la facture.
+tos_subscriptions_billing_text_3: >-
+  Si l'abonnement a été effectué via un achat intégré, toute la facturation est
+  gérée par l'Application Store et est régie par les propres termes et
+  conditions de l'Application Store.
+tos_subscriptions_fee_changes_subtitle: Modifications des frais
+tos_subscriptions_fee_changes_text_1: >-
+  La Société, à sa seule discrétion et à tout moment, peut modifier les frais
+  d'abonnement. Toute modification des frais d’abonnement entrera en vigueur à
+  la fin de la période d’abonnement alors en cours.
+tos_subscriptions_fee_changes_text_2: >-
+  La Société vous fournira un préavis raisonnable de toute modification des
+  frais d'abonnement afin de vous donner la possibilité de résilier votre
+  abonnement avant qu'une telle modification n'entre en vigueur.
+tos_subscriptions_fee_changes_text_3: >-
+  Votre utilisation continue du Service après l'entrée en vigueur de la
+  modification des frais d'abonnement constitue votre accord de payer le montant
+  des frais d'abonnement modifié.
+tos_subscriptions_refunds_subtitle: Remboursements
+tos_subscriptions_refunds_text_1: >-
+  Sauf lorsque la loi l’exige, les frais d’abonnement payés ne sont pas
+  remboursables.
+tos_subscriptions_refunds_text_2: >-
+  Certaines demandes de remboursement d'Abonnements peuvent être examinées par
+  la Société au cas par cas et accordées à la seule discrétion de la Société.
+tos_subscriptions_refunds_text_3: >-
+  Si l'abonnement a été effectué via un achat In-app, la politique de
+  remboursement de l'Application Store s'appliquera. Si vous souhaitez demander
+  un remboursement, vous pouvez le faire en contactant directement l'Application
+  Store.
+tos_subscriptions_free_trial_subtitle: Essai gratuit
+tos_subscriptions_free_trial_text_1: >-
+  La Société peut, à sa seule discrétion, proposer un abonnement avec un essai
+  gratuit pour une durée limitée.
+tos_subscriptions_free_trial_text_2: >-
+  Vous devrez peut-être saisir vos informations de facturation afin de vous
+  inscrire à l'essai gratuit.
+tos_subscriptions_free_trial_text_3: >-
+  Si vous saisissez vos informations de facturation lors de votre inscription à
+  un essai gratuit, vous ne serez pas facturé par la société jusqu'à
+  l'expiration de l'essai gratuit. Le dernier jour de la période d'essai
+  gratuit, à moins que vous n'annuliez votre abonnement, les frais d'abonnement
+  applicables vous seront automatiquement facturés pour le type d'abonnement que
+  vous avez sélectionné.
+tos_subscriptions_free_trial_text_4: >-
+  À tout moment et sans préavis, la Société se réserve le droit de (i) modifier
+  les termes et conditions de l'offre d'essai gratuit, ou (ii) d'annuler cette
+  offre d'essai gratuit.
+tos_in_app_purchases_title: Achats intégrés
+tos_in_app_purchases_text_1: >-
+  L'Application peut inclure des achats intégrés qui vous permettent d'acheter
+  des produits, des services ou des abonnements.
+tos_in_app_purchases_text_2: >-
+  De plus amples informations sur la façon dont vous pouvez gérer les achats
+  intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
+  générales de l'Application Store ou dans les paramètres d'aide de votre
+  appareil.
+tos_in_app_purchases_text_3: >-
+  Les achats intégrés ne peuvent être consommés qu'au sein de l'application. Si
+  vous effectuez un achat intégré, cet achat intégré ne peut pas être annulé une
+  fois que vous avez lancé son téléchargement. Les achats intégrés ne peuvent
+  pas être échangés contre de l'argent ou une autre contrepartie, ni transférés
+  d'une autre manière.
+tos_in_app_purchases_text_4: >-
+  Si un achat intégré n'est pas téléchargé avec succès ou ne fonctionne pas une
+  fois qu'il a été téléchargé avec succès, nous, après avoir pris connaissance
+  du défaut ou avoir été informés du défaut par vous, enquêterons sur la raison
+  du défaut. Nous agirons de manière raisonnable pour décider si nous devons
+  vous fournir un achat intégré de remplacement ou vous fournir un correctif
+  pour réparer le défaut. En aucun cas nous ne vous facturerons le remplacement
+  ou la réparation de l'achat intégré. Dans le cas peu probable où nous ne
+  serions pas en mesure de remplacer ou de réparer l'achat intégré concerné ou
+  si nous ne sommes pas en mesure de le faire dans un délai raisonnable et sans
+  inconvénient majeur pour vous, nous autoriserons l'Application Store à vous
+  rembourser un montant pouvant aller jusqu'à le coût de l’achat intégré
+  concerné. Alternativement, si vous souhaitez demander un remboursement, vous
+  pouvez le faire en contactant directement l'Application Store.
+tos_in_app_purchases_text_5: >-
+  Vous reconnaissez et acceptez que tous les processus de facturation et de
+  transaction sont gérés par la boutique d'applications à partir de laquelle
+  vous avez téléchargé l'application et sont régis par les conditions générales
+  de cette boutique d'applications.
+tos_in_app_purchases_text_6: >-
+  Si vous rencontrez des problèmes liés au paiement avec les achats intégrés,
+  vous devez contacter directement l'Application Store.
+tos_user_accounts_title: Comptes d'utilisateurs
+tos_user_accounts_text_1: >-
+  Lorsque vous créez un compte chez Nous, vous devez nous fournir des
+  informations exactes, complètes et à jour à tout moment. Ne pas le faire
+  constitue une violation des Conditions, pouvant entraîner la résiliation
+  immédiate de votre compte sur notre service.
+tos_user_accounts_text_2: >-
+  Vous êtes responsable de la protection du mot de passe que vous utilisez pour
+  accéder au Service et de toute activité ou action effectuée sous votre mot de
+  passe, que votre mot de passe soit associé à notre service ou à un service de
+  médias sociaux tiers.
+tos_user_accounts_text_3: >-
+  Vous vous engagez à ne pas divulguer votre mot de passe à des tiers. Vous
+  devez nous informer immédiatement dès que vous avez connaissance de toute
+  violation de la sécurité ou utilisation non autorisée de votre compte.
+tos_user_accounts_text_4: >-
+  Vous ne pouvez pas utiliser comme nom d'utilisateur le nom d'une autre
+  personne ou entité ou qui n'est pas légalement disponible pour utilisation, un
+  nom ou une marque qui est soumis à des droits d'une autre personne ou entité
+  autre que Vous sans autorisation appropriée, ou un nom qui est autrement
+  offensant, vulgaire ou obscène.
+tos_intellectual_property_title: Propriété intellectuelle
+tos_intellectual_property_text_1: >-
+  Le Service et son contenu original (à l'exclusion du Contenu fourni par Vous
+  ou d'autres utilisateurs), ses caractéristiques et fonctionnalités sont et
+  resteront la propriété exclusive de la Société et de ses concédants de
+  licence.
+tos_intellectual_property_text_2: >-
+  Le Service est protégé par les droits d'auteur, les marques commerciales et
+  d'autres lois du pays et des pays étrangers.
+tos_intellectual_property_text_3: >-
+  Nos marques commerciales et présentations commerciales ne peuvent pas être
+  utilisées en relation avec un produit ou un service sans le consentement écrit
+  préalable de la Société.
+tos_your_feedback_title: Vos commentaires
+tos_your_feedback_text: >-
+  Vous cédez tous les droits, titres et intérêts liés aux commentaires que vous
+  fournissez à la société. Si, pour une raison quelconque, une telle cession est
+  inefficace, vous acceptez d'accorder à la Société un droit et une licence non
+  exclusifs, perpétuels, irrévocables, libres de droits et mondiaux pour
+  utiliser, reproduire, divulguer, sous-licencier, distribuer, modifier et
+  exploiter ces commentaires sans restriction.
+tos_links_to_other_websites_title: Liens vers d'autres sites Web
+tos_links_to_other_websites_text_1: >-
+  Notre Service peut contenir des liens vers des sites Web ou des services tiers
+  qui ne sont ni détenus ni contrôlés par la Société.
+tos_links_to_other_websites_text_2: >-
+  La Société n'a aucun contrôle et n'assume aucune responsabilité quant au
+  contenu, aux politiques de confidentialité ou aux pratiques de tout site Web
+  ou service tiers. Vous reconnaissez et acceptez en outre que la Société ne
+  sera pas responsable, directement ou indirectement, de tout dommage ou perte
+  causé ou prétendument causé par ou en relation avec l'utilisation ou la
+  confiance accordée à un tel contenu, biens ou services disponibles sur ou via
+  l'un de ces sites ou services Web.
+tos_links_to_other_websites_text_3: >-
+  Nous vous conseillons fortement de lire les termes et conditions et les
+  politiques de confidentialité de tout site Web ou service tiers que vous
+  visitez.
+tos_termination_title: Terminaison
+tos_termination_text_1: >-
+  Nous pouvons résilier ou suspendre votre compte immédiatement, sans préavis ni
+  responsabilité, pour quelque raison que ce soit, y compris, sans limitation,
+  si vous violez les présentes conditions générales.
+tos_termination_text_2: >-
+  En cas de résiliation, votre droit d'utiliser le service cessera
+  immédiatement. Si vous souhaitez résilier votre compte, vous pouvez simplement
+  cesser d'utiliser le service.
+tos_limitation_of_liability_title: Limitation de responsabilité
+tos_limitation_of_liability_text_1: >-
+  Nonobstant tout dommage que vous pourriez subir, l'entière responsabilité de
+  la Société et de l'un de ses fournisseurs en vertu de toute disposition des
+  présentes Conditions et votre recours exclusif pour tout ce qui précède sera
+  limité au montant effectivement payé par vous via le Service ou 100 USD. si
+  vous n'avez rien acheté via le service.
+tos_limitation_of_liability_text_2: >-
+  Dans la mesure permise par la loi applicable, la Société ou ses fournisseurs
+  ne pourront en aucun cas être tenus responsables de tout dommage spécial,
+  accidentel, indirect ou consécutif, quel qu'il soit (y compris, mais sans s'y
+  limiter, les dommages pour perte de profits, perte de données ou d'autres
+  informations, en cas d'interruption des activités, de blessures corporelles,
+  de perte de confidentialité découlant de ou liées de quelque manière que ce
+  soit à l'utilisation ou à l'incapacité d'utiliser le Service, aux logiciels
+  tiers et/ou au matériel tiers utilisés avec le Service, ou autrement en
+  relation avec toute disposition des présentes Conditions), même si la Société
+  ou tout fournisseur a été informé de la possibilité de tels dommages et même
+  si le recours n'atteint pas son objectif essentiel.
+tos_limitation_of_liability_text_3: >-
+  Certains États n'autorisent pas l'exclusion des garanties implicites ou la
+  limitation de responsabilité pour les dommages accidentels ou consécutifs, ce
+  qui signifie que certaines des limitations ci-dessus peuvent ne pas
+  s'appliquer. Dans ces États, la responsabilité de chaque partie sera limitée
+  dans toute la mesure permise par la loi.
+tos_disclaimer_title: Avis de non-responsabilité « TEL QUEL » et « TEL QUE DISPONIBLE »
+tos_disclaimer_text_1: >-
+  Le Service vous est fourni « TEL QUEL » et « TEL QUE DISPONIBLE » et avec tous
+  les défauts et défauts sans garantie d'aucune sorte. Dans la mesure permise
+  par la loi applicable, la Société, en son propre nom et au nom de ses sociétés
+  affiliées et de ses concédants de licence et prestataires de services
+  respectifs, décline expressément toute garantie, qu'elle soit expresse,
+  implicite, légale ou autre, en ce qui concerne le Service, y compris toutes
+  les garanties implicites de qualité marchande, d'adéquation à un usage
+  particulier, de titre et de
+tos_disclaimer_text_2: "Sans limiter ce qui précède, ni la Société ni aucun de ses fournisseurs ne font aucune déclaration ou garantie de quelque nature que ce soit, expresse ou implicite\_: (i) quant au fonctionnement ou à la disponibilité du Service, ou aux informations, au contenu et aux matériaux ou produits. inclus dessus; (ii) que le Service sera ininterrompu ou sans erreur\_; (iii) quant à l'exactitude, la fiabilité ou l'actualité de toute information ou contenu fourni via le Service\_; ou (iv) que le Service, ses serveurs, le contenu ou les e-mails envoyés depuis ou au nom de la Société sont exempts de virus, scripts, chevaux de Troie, vers, logiciels malveillants, bombes à retardement ou autres composants nuisibles."
+tos_disclaimer_text_3: >-
+  Certaines juridictions n'autorisent pas l'exclusion de certains types de
+  garanties ou de limitations sur les droits statutaires applicables d'un
+  consommateur, de sorte que tout ou partie des exclusions et limitations
+  ci-dessus peuvent ne pas s'appliquer à vous. Mais dans un tel cas, les
+  exclusions et limitations énoncées dans cette section seront appliquées dans
+  toute la mesure applicable en vertu de la loi applicable.
+tos_governing_law_title: Loi applicable
+tos_governing_law_text: >-
+  Les lois du pays, à l'exclusion de ses règles de conflits de lois, régissent
+  les présentes conditions et votre utilisation du service. Votre utilisation de
+  l’Application peut également être soumise à d’autres lois locales, étatiques,
+  nationales ou internationales.
+tos_disputes_resolution_title: Résolution des litiges
+tos_disputes_resolution_text: >-
+  Si vous avez des préoccupations ou un litige concernant le Service, vous
+  acceptez d'essayer d'abord de résoudre le litige de manière informelle en
+  contactant la Société.
+tos_eu_users_title: Pour les utilisateurs de l’Union européenne (UE)
+tos_eu_users_text: >-
+  Si Vous êtes un consommateur de l’Union Européenne, vous bénéficierez de
+  toutes les dispositions impératives de la loi du pays dans lequel vous
+  résidez.
+tos_us_federal_government_title: Dispositions d'utilisation finale du gouvernement fédéral des États-Unis
+tos_us_federal_government_text: >-
+  Si vous êtes un utilisateur final du gouvernement fédéral américain, notre
+  service est un « article commercial » tel que ce terme est défini dans 48
+  C.F.R. §2.101.
+tos_us_legal_compliance_title: Conformité juridique aux États-Unis
+tos_us_legal_compliance_text: >-
+  Vous déclarez et garantissez que (i) vous n'êtes pas situé dans un pays soumis
+  à l'embargo du gouvernement des États-Unis ou qui a été désigné par le
+  gouvernement des États-Unis comme un pays « soutenant le terrorisme », et (ii)
+  vous n'êtes pas répertorié sur n’importe quelle liste du gouvernement des
+  États-Unis de parties interdites ou restreintes.
+tos_severability_waiver_title: Divisibilité et renonciation
+tos_severability_subtitle: Divisibilité
+tos_severability_text: >-
+  Si une disposition des présentes Conditions est jugée inapplicable ou
+  invalide, cette disposition sera modifiée et interprétée pour atteindre les
+  objectifs de cette disposition dans la plus grande mesure possible en vertu de
+  la loi applicable et les dispositions restantes resteront pleinement en
+  vigueur.
+tos_waiver_subtitle: Renoncer
+tos_waiver_text: >-
+  Sauf dans les cas prévus aux présentes, le fait de ne pas exercer un droit ou
+  d'exiger l'exécution d'une obligation en vertu des présentes Conditions
+  n'affectera pas la capacité d'une partie à exercer ce droit ou à exiger une
+  telle exécution à tout moment par la suite et la renonciation à une violation
+  ne constituera pas une renonciation à tout manquement ultérieur.
+tos_translation_title: Traduction Interprétation
+tos_translation_text: >-
+  Ces Conditions Générales peuvent avoir été traduites si Nous les avons mises à
+  votre disposition sur notre Service. Vous acceptez que le texte anglais
+  original prévaudra en cas de litige.
+tos_changes_title: Modifications de ces termes et conditions
+tos_changes_text_1: >-
+  Nous nous réservons le droit, à notre seule discrétion, de modifier ou de
+  remplacer ces conditions à tout moment. Si une révision est importante, nous
+  ferons des efforts raisonnables pour fournir un préavis d'au moins 30 jours
+  avant l'entrée en vigueur de toute nouvelle condition. Ce qui constitue un
+  changement important sera déterminé à notre seule discrétion.
+tos_changes_text_2: >-
+  En continuant à accéder ou à utiliser notre service après l'entrée en vigueur
+  de ces révisions, vous acceptez d'être lié par les conditions révisées. Si
+  vous n'acceptez pas les nouvelles conditions, en tout ou en partie, veuillez
+  cesser d'utiliser le site Web et le Service.
+tos_contact_us_title: Contactez-nous
+tos_contact_us_text: "Si vous avez des questions concernant ces conditions générales, vous pouvez nous contacter\_:"
+tos_contact_us_website: 'En visitant cette page du site :'
