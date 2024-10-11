@@ -7,9 +7,7 @@ import { ref } from 'vue'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const menuMobile = ref(false)
 </script>

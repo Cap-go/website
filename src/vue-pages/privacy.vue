@@ -6,9 +6,7 @@ const config = useRuntimeConfig()
 const domain = config.public.baseUrl
 const brand = config.public.brand
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 </script>
 
 <template>

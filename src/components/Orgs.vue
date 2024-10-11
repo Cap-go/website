@@ -3,9 +3,7 @@ import type { Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { ref } from 'vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const features = ref([
   {

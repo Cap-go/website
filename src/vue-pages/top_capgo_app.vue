@@ -6,9 +6,7 @@ import translations from '@/services/translations'
 import type { Database } from '@/types/supabase.types'
 import { ref } from 'vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
 const description = translations['top_app_using_capgo_cloud_or_self_hosted'][props.locale]
 

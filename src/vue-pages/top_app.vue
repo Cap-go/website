@@ -4,9 +4,7 @@ import { renameCat } from '@/services/misc'
 import translations from '@/services/translations'
 import { ref } from 'vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const description = translations['top_100_app_using_different_framworks_on_android_store'][props.locale]
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>

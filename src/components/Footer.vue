@@ -11,9 +11,7 @@ const currentPath = ref('')
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const year = new Date().getFullYear()
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }

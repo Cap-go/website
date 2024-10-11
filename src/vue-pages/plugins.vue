@@ -8,9 +8,7 @@ import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
 import { marked } from 'marked'
 import { onMounted, ref } from 'vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const plugins = ref<Action[]>(actions)
 
 onMounted(() => {

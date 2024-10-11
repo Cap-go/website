@@ -5,9 +5,7 @@ import translations from '@/services/translations'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const isResending = ref(false)
 getRemoteConfig()

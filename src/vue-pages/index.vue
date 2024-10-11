@@ -14,9 +14,7 @@ import { onMounted, reactive, ref } from 'vue'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const chatLoaded = ref(false)
 const handleScroll = () => {

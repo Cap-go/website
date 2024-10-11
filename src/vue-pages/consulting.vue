@@ -4,9 +4,7 @@ import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import PluginMarketing from './plugin_marketing.vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const randomOdd = Math.random() < 0.5 ? 0 : 1
 </script>
 

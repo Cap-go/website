@@ -3,9 +3,7 @@ import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const domain = config.public.baseUrl

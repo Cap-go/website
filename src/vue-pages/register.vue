@@ -7,9 +7,7 @@ import { navigate } from 'astro:transitions/client'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const isLoading = ref(false)
 const email = ref('')

@@ -4,9 +4,7 @@ import translations from '@/services/translations'
 import { ref } from 'vue'
 import Tweet from './Tweet.vue'
 
-const props = defineProps<{
-  locale: Locales
-}>()
+const props = defineProps<{ locale: Locales }>()
 
 const tweets = ref([
   {
