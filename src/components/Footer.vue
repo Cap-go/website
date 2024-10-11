@@ -30,7 +30,8 @@ const decidePath = () => {
 const statusChecker = async () => {
   try {
     const response = await fetch('/status.json')
-    systemStatus.value = await response.json()
+    if (response.ok) systemStatus.value = await response.json()
+    else console.error('Error fetching Capgo status:', response.statusText)
   } catch (error) {
     console.error('Error fetching Capgo status:')
     console.log(error)
