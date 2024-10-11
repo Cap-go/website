@@ -102,7 +102,7 @@ const props = defineProps<{ locale: Locales }>()
         <p class="mt-4 text-lg text-gray-600">
           <span class="font-bold">{{ translations['running_your_ci_cd_costs_300'][props.locale] }}</span
           >, {{ translations['appflow_6000_annually'][props.locale] }}<br />
-          {{ translations['our_one_time_setup_fee_of_2600_combined_with_ci_cd_results_in_less_than_half_the_first_year_fee_of_appflow'] }}<br />
+          {{ translations['our_one_time_setup_fee_of_2600_combined_with_ci_cd_results_in_less_than_half_the_first_year_fee_of_appflow'][props.locale] }}<br />
           <span class="font-bold"> {{ translations['in_5_years_you_save_26100'][props.locale] }}</span>
         </p>
         <a
