@@ -20,8 +20,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative mb-16 mt-0 pb-0 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
-            <strong style="line-height: 72px">CapacitorJS</strong
-            >&nbsp;<span class="text-indigo-600" style="line-height: 72px"
+            <strong style="line-height: 72px">CapacitorJS</strong>&nbsp;<span class="text-indigo-600" style="line-height: 72px"
               ><strong style="line-height: 72px">{{ translations['code_review_and_consulting'][props.locale] }}</strong></span
             >&nbsp;<strong style="line-height: 72px">{{ translations['services'][props.locale] }}</strong>
           </h1>
