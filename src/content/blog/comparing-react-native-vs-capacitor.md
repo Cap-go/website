@@ -1,18 +1,20 @@
 ---
-slug: "comparing-react-native-vs-capacitor"
+slug: comparing-react-native-vs-capacitor
 title: Comparing React Native vs Capacitor
-description: In this article, we compare mobile app development with React Native to using React and Capacitor, covering their functionalities, performance, community, and more.
+description: >-
+  In this article, we compare mobile app development with React Native to using
+  React and Capacitor, covering their functionalities, performance, community,
+  and more.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-11
-updated_at: 2023-06-11
-head_image: "/react_native_vs_react_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-11T00:00:00.000Z
+updated_at: 2023-06-11T00:00:00.000Z
+head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: React Native vs Capacitor comparison illustration
 tag: Alternatives
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 What we will cover:

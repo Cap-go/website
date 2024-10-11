@@ -1,18 +1,22 @@
 ---
-slug: "building-a-native-mobile-app-with-nextjs-and-capacitor"
-title: "2024 Building Native Mobile Apps with Next.js 14 and Capacitor: A Step-by-Step Guide"
-description: Learn how to create native mobile apps using Next.js 14 and Capacitor in this comprehensive guide. Discover the latest best practices and techniques for building high-performance, feature-rich mobile applications.
+slug: building-a-native-mobile-app-with-nextjs-and-capacitor
+title: >-
+  2024 Building Native Mobile Apps with Next.js 14 and Capacitor: A Step-by-Step
+  Guide
+description: >-
+  Learn how to create native mobile apps using Next.js 14 and Capacitor in this
+  comprehensive guide. Discover the latest best practices and techniques for
+  building high-performance, feature-rich mobile applications.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-02-21
-updated_at: 2024-09-19
-head_image: "/next_capgo.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-02-21T00:00:00.000Z
+updated_at: 2024-09-19T00:00:00.000Z
+head_image: /next_capgo.webp
 head_image_alt: Next.js 14 and Capacitor illustration
 tag: Tutorial
 published: true
 locale: en
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 ## Introduction

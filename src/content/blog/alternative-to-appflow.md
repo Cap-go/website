@@ -1,19 +1,20 @@
 ---
-slug: "alternative-to-appflow"
+slug: alternative-to-appflow
 title: Alternative to Ionic Appflow
-description: Ionic Appflow is a big machinery for your app, sadly they
-  price is not made for all, Capgo is here to let you handle OTA update with ease and at fair price.
+description: >-
+  Ionic Appflow is a big machinery for your app, sadly they price is not made
+  for all, Capgo is here to let you handle OTA update with ease and at fair
+  price.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-03-02
-updated_at: 2023-06-29
-head_image: "/appflow_alt.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-03-02T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /appflow_alt.webp
 head_image_alt: Appflow alternative illustration
 tag: Alternatives
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 Ionic Appflow is a cloud-based mobile app development platform that provides developers with a range of tools and services for building, testing, and deploying mobile apps quickly. It offers features such as continuous integration and deployment, crash reporting, allowing developers to track their app's performance and ensure that it is running smoothly for their users.

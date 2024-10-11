@@ -1,18 +1,20 @@
 ---
-slug: "birth-of-capgo-my-challenging-journey-as-a-solo-maker"
-title: 'How a GitHub Issue Evolved into a business'
-description: 'Discover the trials and triumphs behind creating Capgo, an innovative live update system for Capacitor apps, born from necessity and shaped by community feedback.'
+slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+title: How a GitHub Issue Evolved into a business
+description: >-
+  Discover the trials and triumphs behind creating Capgo, an innovative live
+  update system for Capacitor apps, born from necessity and shaped by community
+  feedback.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2024-07-13
-updated_at: 2024-07-13
-head_image: "/capgo-birth-story.webp"
-head_image_alt: "A visual representation of Capgo's evolution from idea to product"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2024-07-13T00:00:00.000Z
+updated_at: 2024-07-13T00:00:00.000Z
+head_image: /capgo-birth-story.webp
+head_image_alt: A visual representation of Capgo's evolution from idea to product
 tag: development
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 ## The Genesis: A Community Request

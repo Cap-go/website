@@ -1,19 +1,19 @@
 ---
-slug: "appcenter-migration"
+slug: appcenter-migration
 title: Migrating from App Center to Capgo
-description: In this guide, we’ll walk through the complete migration for Capgo Live Updates a Microsoft CodePush
-  alternative.
+description: >-
+  In this guide, we’ll walk through the complete migration for Capgo Live
+  Updates a Microsoft CodePush alternative.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-03-22
-updated_at: 2023-06-29
-head_image: "/migrate_appcenter.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-03-22T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /migrate_appcenter.webp
 head_image_alt: Capacitor JS Dev looking for alternative
 tag: Migration
 published: true
 locale: en
-next_blog: "automatic-build-and-release-with-github-actions"
-
+next_blog: automatic-build-and-release-with-github-actions
 ---
 ## Migration Summary
 

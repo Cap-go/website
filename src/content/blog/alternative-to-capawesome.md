@@ -1,18 +1,19 @@
 ---
-slug: "alternative-to-capawesome"
+slug: alternative-to-capawesome
 title: Alternative to Capawesome
-description: Capawesome has been done inspired by Capgo system, the system is less complete than Capgo, but it's still a good alternative.
+description: >-
+  Capawesome has been done inspired by Capgo system, the system is less complete
+  than Capgo, but it's still a good alternative.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2024-07-11
-updated_at: 2024-07-11
-head_image: "/appflow_alt.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2024-07-11T00:00:00.000Z
+updated_at: 2024-07-11T00:00:00.000Z
+head_image: /appflow_alt.webp
 head_image_alt: Capawesome Cloud alternative illustration
 tag: Alternatives
 published: false
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 Capawesome Cloud is an alternative solution of Capgo, let say it's his little brother made by 

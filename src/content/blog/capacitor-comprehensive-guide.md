@@ -1,18 +1,21 @@
 ---
-slug: "capacitor-comprehensive-guide"
+slug: capacitor-comprehensive-guide
 title: 'Capacitor: A Comprehensive Guide'
-description: CapacitorJS is a powerful tool that enables web developers to build native iOS, Android, Desktop, and Progressive Web Apps with a single standard web codebase. Learn everything you need to know about Capacitor in this comprehensive guide.
+description: >-
+  CapacitorJS is a powerful tool that enables web developers to build native
+  iOS, Android, Desktop, and Progressive Web Apps with a single standard web
+  codebase. Learn everything you need to know about Capacitor in this
+  comprehensive guide.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-10
-updated_at: 2023-06-10
-head_image: "/capacitor-guide.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-10T00:00:00.000Z
+updated_at: 2023-06-10T00:00:00.000Z
+head_image: /capacitor-guide.webp
 head_image_alt: Capacitor guide illustration
 tag: Guides
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 [Capacitor](https://capacitorjs.com/) is a versatile tool that allows web developers to create native iOS, Android, Desktop, and Progressive Web Apps using a single standard web codebase. Developed by the team behind Ionic, Capacitor has gained significant attention in recent years as developers recognize the potential of web technologies on mobile platforms. In this comprehensive guide, we'll answer some of the most common questions about Capacitor and explore its capabilities, use cases, and benefits.

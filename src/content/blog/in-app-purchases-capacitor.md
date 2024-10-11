@@ -1,17 +1,18 @@
 ---
-slug: "in-app-purchases-capacitor"
+slug: in-app-purchases-capacitor
 title: in app purchases for capacitor
-description: How to implement in-app purchases for capacitor apps using the Capacitor Purchases plugin and RevenueCat
-author_url: https://x.com/martindonadieu
-created_at: 2023-01-19
-updated_at: 2023-06-29
-head_image: "/revenuecat_iap.webp"
+description: >-
+  How to implement in-app purchases for capacitor apps using the Capacitor
+  Purchases plugin and RevenueCat
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-01-19T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /revenuecat_iap.webp
 head_image_alt: Revenue cat in app purchases
 tag: Tutorial
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 Capacitor Purchases is a plugin for the Capacitor framework that allows in-app purchases on iOS and Android. It provides a simple and consistent API across multiple platforms, making it easy for developers to implement in-app subscriptions and purchases in their mobile apps.

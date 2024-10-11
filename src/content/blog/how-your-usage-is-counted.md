@@ -1,18 +1,19 @@
 ---
-slug: "how-your-usage-is-counted"
+slug: how-your-usage-is-counted
 title: How your usage is counted in Capgo
-description: Understand how Capgo count your usage, and use it at best. Learn to manage better your plan
+description: >-
+  Understand how Capgo count your usage, and use it at best. Learn to manage
+  better your plan
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-11-25
-updated_at: 2023-06-29
-head_image: "/usage_explained.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-11-25T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /usage_explained.webp
 head_image_alt: Capgo usage system explained
 tag: Solution
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 In Capgo, 3 values are counted and important to understand

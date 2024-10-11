@@ -1,15 +1,17 @@
 ---
-slug: "how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater"
+slug: how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater
 title: How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater
-description: This is how I set up semantic release to manage releases of my applications which use CapGo CapacitorUpdater
+description: >-
+  This is how I set up semantic release to manage releases of my applications
+  which use CapGo CapacitorUpdater
 author: Rupert Barrow
-author_url: https://linkedin.com/in/rbarrow
-created_at: 2024-09-22
-updated_at: 2024-09-22
+author_url: 'https://linkedin.com/in/rbarrow'
+created_at: 2024-09-22T00:00:00.000Z
+updated_at: 2024-09-22T00:00:00.000Z
 tag: Case Study
 published: true
 locale: en
-next_blog: ""
+next_blog: ''
 ---
 
 # How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater

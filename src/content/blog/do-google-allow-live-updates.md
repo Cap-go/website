@@ -1,18 +1,19 @@
 ---
-slug: "do-google-allow-live-updates"
+slug: do-google-allow-live-updates
 title: Do Google allow to send live update to Apps without the App Store review.
-description: 'How can you push code updates to production Android apps and be fully compliant with Google’s guidelines? '
+description: >-
+  How can you push code updates to production Android apps and be fully
+  compliant with Google’s guidelines? 
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-01-13
-updated_at: 2023-06-29
-head_image: "/playstore.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-01-13T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /playstore.webp
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
 locale: en
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 Google Play is less restrictive than Apple when it comes to updating apps.

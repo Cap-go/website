@@ -1,18 +1,19 @@
 ---
-slug: "integrate-universal-links-capacitor-nextjs"
-title: 'How to Integrate Universal Links in Next.js with Capacitor'
-description: 'Learn step by step how to set up universal links for your Next.js app with Capacitor on both iOS and Android platforms.'
+slug: integrate-universal-links-capacitor-nextjs
+title: How to Integrate Universal Links in Next.js with Capacitor
+description: >-
+  Learn step by step how to set up universal links for your Next.js app with
+  Capacitor on both iOS and Android platforms.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-12-14
-updated_at: 2023-12-14
-head_image: "/deeplink_next_capacitor.webp"
-head_image_alt: "Capacitor Universal Links"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-12-14T00:00:00.000Z
+updated_at: 2023-12-14T00:00:00.000Z
+head_image: /deeplink_next_capacitor.webp
+head_image_alt: Capacitor Universal Links
 tag: DeepLinking
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 Universal links on iOS and App Links on Android allow users to be taken directly into your app from a link, bypassing the browser. This is particularly useful for improving user experience and maintaining the context from a web page to an app. In this guide, we'll walk through the process of setting up these deep links for a Next.js app using Capacitor.

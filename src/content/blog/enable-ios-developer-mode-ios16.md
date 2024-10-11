@@ -1,17 +1,19 @@
 ---
-slug: "enable-ios-developer-mode-ios16"
-title: 'How to Enable Developer Mode on iOS 16 for App Testing'
-description: 'Step-by-step guide on enabling Developer Mode on iOS 16 and above to run internal distribution builds and local development builds on your device.'
+slug: enable-ios-developer-mode-ios16
+title: How to Enable Developer Mode on iOS 16 for App Testing
+description: >-
+  Step-by-step guide on enabling Developer Mode on iOS 16 and above to run
+  internal distribution builds and local development builds on your device.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-11-27
-updated_at: 2023-11-27
-head_image: "/enable-ios-developer-mode-ios16.webp"
-head_image_alt: "Enabling iOS Developer Mode on iPhone"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-11-27T00:00:00.000Z
+updated_at: 2023-11-27T00:00:00.000Z
+head_image: /enable-ios-developer-mode-ios16.webp
+head_image_alt: Enabling iOS Developer Mode on iPhone
 tag: iOS
 published: true
 locale: en
-next_blog: ""
+next_blog: ''
 ---
 
 

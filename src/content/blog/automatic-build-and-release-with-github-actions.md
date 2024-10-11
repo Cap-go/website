@@ -1,19 +1,19 @@
 ---
-slug: "automatic-build-and-release-with-github-actions"
+slug: automatic-build-and-release-with-github-actions
 title: Automatic build and release app with Github actions
-description: Create your own CI/CD pipeline with Github actions for free, deploy
-  your Ionic Capacitor JS app every time you push to main.
+description: >-
+  Create your own CI/CD pipeline with Github actions for free, deploy your Ionic
+  Capacitor JS app every time you push to main.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-03-23
-updated_at: 2023-06-29
-head_image: "/github_actions.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-03-23T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /github_actions.webp
 head_image_alt: Github action illustration
 tag: CI/CD
 published: true
 locale: en
-next_blog: "automatic-capacitor-ios-build-github-action"
-
+next_blog: automatic-capacitor-ios-build-github-action
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.
 

@@ -1,18 +1,19 @@
 ---
-slug: "developing-cross-platform-apps-with-capacitorjs"
+slug: developing-cross-platform-apps-with-capacitorjs
 title: 'Developing Cross-Platform Apps with CapacitorJS: A Step-by-Step Guide'
-description: 'Learn how to create cross-platform applications using CapacitorJS with a single JavaScript codebase for Android, iOS, and web (PWA).'
+description: >-
+  Learn how to create cross-platform applications using CapacitorJS with a
+  single JavaScript codebase for Android, iOS, and web (PWA).
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-12-02
-updated_at: 2023-12-14
-head_image: "/create_app_with_js.webp"
-head_image_alt: "Cross-Platform App Development"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-12-02T00:00:00.000Z
+updated_at: 2023-12-14T00:00:00.000Z
+head_image: /create_app_with_js.webp
+head_image_alt: Cross-Platform App Development
 tag: Tuto
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 In the evolving world of mobile application development, the rise of Progressive Web Applications (PWAs) has paved the way for new cross-platform runtimes. These runtimes enable web-based applications to be present in app stores without relying solely on native code. One such technology that facilitates this is [**CapacitorJS**](https://capacitorjs.com/), which allows developers to deploy a simple website as an application across Android, iOS, and the web using a single JavaScript codebase. This approach significantly reduces development costs and increases coding efficiency.

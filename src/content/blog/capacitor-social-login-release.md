@@ -1,15 +1,16 @@
 ---
-slug: "Release-of-a-brand-new-capacitor-social-login"
+slug: Release-of-a-brand-new-capacitor-social-login
 title: Release of a brand new Capacitor Social Login plugin
 author: WcaleNieWolny
-author_url: https://github.com/WcaleNieWolny/WcaleNieWolny
-created_at: 2024-10-08
-updated_at: 2024-10-08
-head_image: "/social_login_plugin_blog.webp"
+author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
+created_at: 2024-10-08T00:00:00.000Z
+updated_at: 2024-10-08T00:00:00.000Z
+head_image: /social_login_plugin_blog.webp
 head_image_alt: Capgo organization system illusatration
 tag: Capacitor
 published: true
-next_blog: ""
+next_blog: ''
+locale: en
 ---
 
 # Introduction
