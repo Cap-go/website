@@ -1,4 +1,4 @@
-import { appendFileSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 
