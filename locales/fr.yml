@@ -512,7 +512,7 @@ kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente enviro
 top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
-react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur Google Play Store
+react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur le Google Play Store
 table_of_contents: Table des matières
 latest_from_news: Dernières nouvelles
 capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
@@ -733,7 +733,8 @@ canonical: Canonique
 security_intro: >-
   Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
   absolue. Cependant, quels que soient les efforts que nous déployons pour
-  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
+  assurer la sécurité du système, des vulnérabilités peuvent toujours être
+  présentes.
 security_discovery: >-
   Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
   pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
@@ -835,8 +836,8 @@ credit_requests_payment_desc: >-
   inclure soit son identifiant de compte, soit son adresse e-mail enregistrée,
   ainsi que les dates et heures précédemment signalées auxquelles le service
   n'était pas disponible. Si Capgo confirme que le client est éligible à un
-  crédit de service, Capgo émettra un crédit sur le compte du client dans un
-  délai de trente (30) jours. Les crédits de service ne constituent pas des
+  crédit de service, Capgo émettra un crédit sur le compte du client dans les
+  trente (30) jours. Les crédits de service ne constituent pas des
   remboursements, ne peuvent pas être échangés contre un montant en espèces et
   ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
   Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
@@ -1031,9 +1032,9 @@ interpretation_text: >-
 definitions_title: Définitions
 definitions_purpose: "Aux fins de cette clause de non-responsabilité\_:"
 company_definition: >-
-  La <strong>Société</strong> (désignée par « la Société », « Nous », « Notre »
-  ou « Notre » dans le présent Avis de non-responsabilité) fait référence à
-  Digital Shift OU, 6 sepapaja, 15510 Tallinn.
+  La <strong>Société</strong> (appelée « la Société », « Nous », « Notre » ou «
+  Notre » dans cette clause de non-responsabilité) fait référence à Digital
+  Shift OU, 6 sepapaja, 15510 Tallinn.
 service_definition: <strong>Service</strong> fait référence à l'Application.
 you_definition: >-
   <strong>Vous</strong> désigne la personne accédant au Service, ou la société
@@ -1118,9 +1119,9 @@ no_responsibility_disclaimer_text: >-
   compétents en matière comptable, fiscale, juridique ou autre.
 company_no_liability_for_access: >-
   En aucun cas, la Société ou ses fournisseurs ne pourront être tenus
-  responsables de tout dommage spécial, accessoire, indirect ou consécutif, quel
+  responsables de tout dommage spécial, accidentel, indirect ou consécutif, quel
   qu'il soit, découlant de ou en relation avec votre accès ou votre utilisation
-  ou votre incapacité à accéder ou à utiliser le Service.
+  ou votre incapacité d'accéder ou d'utiliser le Service.
 use_at_your_own_risk_disclaimer_title: Avis de non-responsabilité « Utilisation à vos propres risques »
 use_at_your_own_risk_disclaimer_text: >-
   Toutes les informations contenues dans le Service sont fournies « telles
@@ -1222,7 +1223,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, des participations ou d'autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1237,7 +1238,7 @@ tos_definition_device: >-
 tos_definition_feedback: >-
   Les commentaires désignent les commentaires, innovations ou suggestions
   envoyés par vous concernant les attributs, les performances ou les
-  fonctionnalités de notre service.
+  fonctionnalités de notre Service.
 tos_definition_free_trial: >-
   L'essai gratuit fait référence à une période de temps limitée qui peut être
   gratuite lors de l'achat d'un abonnement.
@@ -1259,8 +1260,8 @@ tos_definition_third_party_social_media: >-
   affiché, inclus ou mis à disposition par le Service.
 tos_definition_you: >-
   Vous désignez la personne qui accède ou utilise le Service, ou la société ou
-  autre entité juridique au nom de laquelle cette personne accède ou utilise le
-  Service, selon le cas.
+  toute autre entité juridique au nom de laquelle cette personne accède ou
+  utilise le Service, selon le cas.
 tos_acknowledgment_title: Reconnaissance
 tos_acknowledgment_text_1: >-
   Il s'agit des Conditions générales régissant l'utilisation de ce Service et de
@@ -1373,7 +1374,7 @@ tos_in_app_purchases_text_1: >-
   L'Application peut inclure des achats intégrés qui vous permettent d'acheter
   des produits, des services ou des abonnements.
 tos_in_app_purchases_text_2: >-
-  De plus amples informations sur la façon dont vous pouvez gérer les achats
+  De plus amples informations sur la manière dont vous pouvez gérer les achats
   intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
   générales de l'Application Store ou dans les paramètres d'aide de votre
   appareil.
@@ -1381,7 +1382,7 @@ tos_in_app_purchases_text_3: >-
   Les achats intégrés ne peuvent être consommés qu'au sein de l'application. Si
   vous effectuez un achat intégré, cet achat intégré ne peut pas être annulé une
   fois que vous avez lancé son téléchargement. Les achats intégrés ne peuvent
-  pas être échangés contre de l'argent ou toute autre contrepartie, ni autrement
+  pas être échangés contre de l'argent ou une autre contrepartie, ni autrement
   transférés.
 tos_in_app_purchases_text_4: >-
   Si un achat intégré n'est pas téléchargé avec succès ou ne fonctionne pas une
@@ -1506,7 +1507,7 @@ tos_disclaimer_text_1: >-
   respectifs, décline expressément toute garantie, qu'elle soit expresse,
   implicite, légale ou autre, en ce qui concerne le Service, y compris toutes
   les garanties implicites de qualité marchande, d'adéquation à un usage
-  particulier, de titre et de
+  particulier, de titre et
 tos_disclaimer_text_2: "Sans limiter ce qui précède, ni la Société ni aucun de ses fournisseurs ne font aucune déclaration ou garantie de quelque nature que ce soit, expresse ou implicite\_: (i) quant au fonctionnement ou à la disponibilité du Service, ou aux informations, au contenu et aux matériaux ou produits. inclus dessus; (ii) que le Service sera ininterrompu ou sans erreur\_; (iii) quant à l'exactitude, la fiabilité ou l'actualité de toute information ou contenu fourni via le Service\_; ou (iv) que le Service, ses serveurs, le contenu ou les e-mails envoyés depuis ou au nom de la Société sont exempts de virus, scripts, chevaux de Troie, vers, logiciels malveillants, bombes à retardement ou autres composants nuisibles."
 tos_disclaimer_text_3: >-
   Certaines juridictions n'autorisent pas l'exclusion de certains types de
@@ -1763,8 +1764,8 @@ eula_license_title: Licence
 eula_license_scope_subtitle: Portée de la licence
 eula_license_scope_text_1: >-
   La Société vous accorde une licence révocable, non exclusive, non transférable
-  et limitée pour télécharger, installer et utiliser l'Application en stricte
-  conformité avec les termes du présent Accord.
+  et limitée pour télécharger, installer et utiliser l'application en stricte
+  conformité avec les termes du présent accord.
 eula_license_scope_text_2: >-
   Vous ne pouvez utiliser l'Application que sur un appareil que vous possédez ou
   contrôlez et dans la mesure permise par les termes et conditions de
@@ -1776,9 +1777,9 @@ eula_license_scope_text_3: >-
 eula_license_restrictions_subtitle: Restrictions de licence
 eula_license_restrictions_intro: "Vous acceptez de ne pas et vous ne permettrez pas à d’autres de\_:"
 eula_license_restrictions_1: >-
-  Concéder sous licence, vendre, louer, céder, distribuer, transmettre,
-  héberger, sous-traiter, divulguer ou exploiter commercialement de toute autre
-  manière l'Application ou mettre l'Application à la disposition de tout tiers.
+  Licence, vendre, louer, céder, distribuer, transmettre, héberger,
+  sous-traiter, divulguer ou exploiter commercialement de toute autre manière
+  l'Application ou mettre l'Application à la disposition de tout tiers.
 eula_license_restrictions_2: "Copiez ou utilisez l'Application à toute fin autre que celle autorisée dans la section «\_Licence\_» ci-dessus."
 eula_license_restrictions_3: >-
   Modifier, créer des œuvres dérivées, désassembler, déchiffrer, compiler ou
@@ -2128,11 +2129,11 @@ dpa_processor_obligations_7: >-
   perte, d'une altération ou d'une divulgation accidentelle, non autorisée ou
   illégale des données personnelles traitées par Capgo dans le cadre de la
   fourniture du service, elle devra, sans retard injustifié (au plus tard 48
-  heures après en avoir pris connaissance), informer le client par email et lui
-  fournir une description de l'incident ainsi que des mises à jour périodiques
-  des informations sur l'incident, y compris son impact sur le contenu du
-  client. Capgo prendra en outre des mesures pour enquêter sur l'incident et
-  raisonnablement prévenir ou atténuer les effets de l'incident.
+  heures après en avoir pris connaissance), informer le client par courrier
+  électronique et lui fournir une description de l'incident ainsi que des mises
+  à jour périodiques des informations sur l'incident, y compris son impact sur
+  le contenu du client. Capgo prendra en outre des mesures pour enquêter sur
+  l'incident et raisonnablement prévenir ou atténuer les effets de l'incident.
 dpa_processor_obligations_8: >-
   Capgo ne rectifiera pas, n'effacera pas ou ne limitera pas, de sa propre
   autorité, le traitement des données des visiteurs qui sont traitées pour le
@@ -2302,7 +2303,7 @@ data_policy_legal_basis_legal_obligations: >-
 data_policy_legal_basis_vital_interests: >-
   Intérêts vitaux : Le traitement des Données personnelles est nécessaire afin
   de protéger Vos intérêts vitaux ou ceux d’une autre personne physique.
-data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investie la Société."
+data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
 data_policy_legal_basis_legitimate_interests: >-
   Intérêts légitimes : Le traitement des Données Personnelles est nécessaire aux
   finalités des intérêts légitimes poursuivis par la Société.
@@ -2338,7 +2339,7 @@ data_policy_gdpr_right_object: >-
   vos données personnelles à des fins de marketing direct.
 data_policy_gdpr_right_erasure: >-
   Demander la suppression de vos données personnelles. Vous avez le droit de
-  nous demander de supprimer ou de supprimer des données personnelles lorsqu'il
+  nous demander de supprimer ou de retirer des données personnelles lorsqu'il
   n'y a aucune bonne raison pour que nous continuions à les traiter.
 data_policy_gdpr_right_transfer: >-
   Demander le transfert de vos données personnelles. Nous vous fournirons, ou à
@@ -2387,7 +2388,7 @@ data_policy_ccpa_categories_note: >-
   Nous, mais reflète notre conviction de bonne foi, au meilleur de nos
   connaissances, que certaines de ces informations de la catégorie applicable
   peuvent être et ont pu être collectées. Par exemple, certaines catégories
-  d’informations personnelles ne seront collectées que si vous nous les avez
+  d'informations personnelles ne seront collectées que si vous nous les avez
   fournies directement.
 data_policy_ccpa_category_a: 'Catégorie A : Identifiants.'
 data_policy_ccpa_category_a_examples: "Exemples\_: un vrai nom, un pseudonyme, une adresse postale, un identifiant personnel unique, un identifiant en ligne, une adresse de protocole Internet, une adresse e-mail, un nom de compte, un numéro de permis de conduire, un numéro de passeport ou d'autres identifiants similaires."
@@ -2435,7 +2436,7 @@ data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories d’informat
 data_policy_ccpa_info_source_1: >-
   Directement de votre part. Par exemple, à partir des formulaires que vous
   remplissez sur notre Service, des préférences que vous exprimez ou fournissez
-  via notre Service, ou à partir de vos achats sur notre Service.
+  via notre Service, ou de vos achats sur notre Service.
 data_policy_ccpa_info_source_2: >-
   Indirectement de Toi. Par exemple, en observant Votre activité sur notre
   Service.
@@ -2580,11 +2581,11 @@ data_policy_ccpa_right_to_delete_5: >-
   électroniques (Cal. Penal Code § 1546 et suivants).
 data_policy_ccpa_right_to_delete_6: >-
   Participer à des recherches scientifiques, historiques ou statistiques
-  publiques ou évaluées par des pairs dans l'intérêt public et dans le respect
-  de toutes les autres lois applicables en matière d'éthique et de
-  confidentialité, lorsque la suppression des informations est susceptible de
-  rendre impossible ou de nuire gravement aux résultats de la recherche, si vous
-  avez préalablement fourni votre consentement éclairé. .
+  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
+  toutes les autres lois applicables en matière d'éthique et de confidentialité,
+  lorsque la suppression des informations est susceptible de rendre impossible
+  ou de nuire sérieusement aux résultats de la recherche, si vous avez
+  préalablement fourni votre consentement éclairé. .
 data_policy_ccpa_right_to_delete_7: >-
   Autorisez uniquement des utilisations internes raisonnablement alignées sur
   les attentes des consommateurs en fonction de votre relation avec nous.
@@ -2592,7 +2593,7 @@ data_policy_ccpa_right_to_delete_8: Se conformer à une obligation légale.
 data_policy_ccpa_right_to_delete_9: >-
   Faire d'autres utilisations internes et licites de ces informations qui sont
   compatibles avec le contexte dans lequel vous les avez fournies.
-data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas faire l’objet de discrimination dans l’exercice de l’un de vos droits de consommateur, notamment par\_:"
+data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas être victime de discrimination dans l'exercice de l'un de vos droits de consommateur, notamment par\_:"
 data_policy_ccpa_right_to_non_discrimination_1: Vous refuser des biens ou des services
 data_policy_ccpa_right_to_non_discrimination_2: >-
   Facturer des prix ou des tarifs différents pour des biens ou des services, y
@@ -2634,3 +2635,259 @@ data_policy_ccpa_exercising_rights_data_portability: >-
   pour fournir vos informations personnelles qui soit facilement utilisable et
   devrait vous permettre de transmettre les informations d'une entité à une
   autre sans entrave.
+privacy_title: politique de confidentialité
+privacy_last_updated: 'Dernière mise à jour : 28 janvier 2022'
+privacy_description: >-
+  Cette politique de confidentialité décrit nos politiques et procédures
+  relatives à la collecte, à l'utilisation et à la divulgation de vos
+  informations lorsque vous utilisez le service et vous informe de vos droits en
+  matière de confidentialité et de la manière dont la loi vous protège.
+privacy_agreement: >-
+  Nous utilisons vos données personnelles pour fournir et améliorer le service.
+  En utilisant le Service, vous acceptez la collecte et l'utilisation
+  d'informations conformément à la présente politique de confidentialité.
+privacy_interpretation_title: Interprétation et définitions
+privacy_interpretation_subtitle: Interprétation
+privacy_interpretation_text: >-
+  Les mots dont la lettre initiale est en majuscule ont des significations
+  définies dans les conditions suivantes. Les définitions suivantes auront la
+  même signification qu’elles apparaissent au singulier ou au pluriel.
+privacy_definitions_subtitle: Définitions
+privacy_definitions_intro: "Aux fins de cette politique de confidentialité\_:"
+privacy_definition_account: >-
+  **Compte** désigne un compte unique créé pour vous permettre d'accéder à notre
+  service ou à des parties de notre service.
+privacy_definition_affiliate: "**Affilié** désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, des participations ou d'autres titres donnant droit à voter pour l'élection des administrateurs. ou une autre autorité de gestion."
+privacy_definition_application: >-
+  **Application** désigne le logiciel fourni par la Société téléchargé par Vous
+  sur tout appareil électronique, nommé $1
+privacy_definition_business: >-
+  **Entreprise**, aux fins de la CCPA (California Consumer Privacy Act), fait
+  référence à la Société en tant qu'entité juridique qui collecte les
+  informations personnelles des Consommateurs et détermine les finalités et les
+  moyens du traitement des informations personnelles des Consommateurs, ou sur
+  pour le compte de laquelle ces informations sont collectées et qui, seule ou
+  conjointement avec d'autres, détermine les finalités et les moyens du
+  traitement des informations personnelles des consommateurs, qui exercent leurs
+  activités dans l'État de Californie.
+privacy_definition_company: >-
+  **Société** (désignée par « la Société », « Nous », « Notre » ou « Notre »
+  dans le présent Accord) fait référence à Digital Shift OU, 6 sepapaja 15510
+  Tallinn.
+privacy_definition_company_gdpr: Aux fins du RGPD, la Société est le Responsable du traitement des données.
+privacy_definition_consumer: >-
+  **Consommateur**, aux fins de la CCPA (California Consumer Privacy Act),
+  désigne une personne physique résidant en Californie. Un résident, tel que
+  défini dans la loi, comprend (1) toute personne physique qui se trouve aux
+  États-Unis pour une raison autre que temporaire ou transitoire, et (2) toute
+  personne domiciliée aux États-Unis qui se trouve en dehors des États-Unis pour
+  une raison temporaire ou transitoire. finalité transitoire.
+privacy_definition_country: "**Pays** fait référence à\_: Estonie"
+privacy_definition_data_controller: >-
+  **Titulaire de traitement**, au sens du RGPD (Règlement Général sur la
+  Protection des Données), désigne la Société comme la personne morale qui,
+  seule ou conjointement avec d'autres, détermine les finalités et les moyens du
+  traitement des Données Personnelles.
+privacy_definition_device: >-
+  **Appareil** désigne tout appareil pouvant accéder au Service tel qu'un
+  ordinateur, un téléphone portable ou une tablette numérique.
+privacy_definition_do_not_track: >-
+  **Do Not Track** (DNT) est un concept qui a été promu par les autorités de
+  régulation américaines, en particulier la Federal Trade Commission (FTC) des
+  États-Unis, pour que l'industrie de l'Internet développe et mette en œuvre un
+  mécanisme permettant aux utilisateurs d'Internet de contrôler le trafic
+  Internet. suivi de leurs activités en ligne sur des sites Web.
+privacy_definition_personal_data: >-
+  **Les données personnelles** désignent toute information relative à une
+  personne identifiée ou identifiable.
+privacy_definition_personal_data_gdpr: >-
+  Aux fins du RGPD, les Données Personnelles désignent toute information vous
+  concernant telle qu'un nom, un numéro d'identification, des données de
+  localisation, un identifiant en ligne ou à un ou plusieurs facteurs
+  spécifiques à l'état physique, physiologique, génétique, mental, économique,
+  culturel ou social. identité.
+privacy_definition_personal_data_ccpa: >-
+  Aux fins du CCPA, les données personnelles désignent toute information qui
+  vous identifie, se rapporte à, décrit ou est susceptible d'être associée à, ou
+  pourrait raisonnablement être liée, directement ou indirectement, à vous.
+privacy_definition_sale: >-
+  **Vente**, aux fins de la CCPA (California Consumer Privacy Act), signifie
+  vendre, louer, libérer, divulguer, diffuser, mettre à disposition, transférer
+  ou autrement communiquer oralement, par écrit ou par des moyens électroniques
+  ou autres, les informations personnelles d'un consommateur à une autre
+  entreprise ou à un tiers contre rémunération monétaire ou autre contrepartie
+  de valeur.
+privacy_definition_service: '**Service** fait référence à l''Application.'
+privacy_definition_service_provider: >-
+  **Prestataire de services** désigne toute personne physique ou morale qui
+  traite les données pour le compte de la Société. Il fait référence à des
+  sociétés tierces ou à des personnes employées par la Société pour faciliter le
+  Service, pour fournir le Service au nom de la Société, pour exécuter des
+  services liés au Service ou pour aider la Société à analyser la manière dont
+  le Service est utilisé. Aux fins du RGPD, les prestataires de services sont
+  considérés comme des sous-traitants.
+privacy_definition_usage_data: >-
+  **Données d'utilisation** fait référence aux données collectées
+  automatiquement, soit générées par l'utilisation du Service, soit à partir de
+  l'infrastructure du Service elle-même (par exemple, la durée d'une visite
+  d'une page).
+privacy_definition_you: >-
+  **Vous** désigne la personne accédant ou utilisant le Service, ou la société
+  ou autre entité juridique au nom de laquelle cette personne accède ou utilise
+  le Service, selon le cas.
+privacy_definition_you_gdpr: >-
+  En vertu du RGPD (Règlement Général sur la Protection des Données), Vous
+  pouvez être appelé la Personne Concernée ou l'Utilisateur car vous êtes la
+  personne physique utilisant le Service.
+privacy_collecting_data_title: Collecte et utilisation de vos données personnelles
+privacy_types_of_data_title: Types de données collectées
+privacy_personal_data_title: Données personnelles
+privacy_personal_data_description: "Lors de l'utilisation de notre service, nous pouvons vous demander de nous fournir certaines informations personnelles identifiables qui peuvent être utilisées pour vous contacter ou vous identifier. Les informations personnelles identifiables peuvent inclure, sans s’y limiter\_:"
+privacy_personal_data_usage: Données d'utilisation
+privacy_usage_data_title: Données d'utilisation
+privacy_usage_data_description: >-
+  Les données d'utilisation sont collectées automatiquement lors de
+  l'utilisation du service.
+privacy_usage_data_details: >-
+  Les données d'utilisation peuvent inclure des informations telles que
+  l'adresse de protocole Internet de votre appareil (par exemple, l'adresse IP),
+  le type de navigateur, la version du navigateur, les pages de notre service
+  que vous visitez, l'heure et la date de votre visite, le temps passé sur ces
+  pages, l'appareil unique. identifiants et autres données de diagnostic.
+privacy_usage_data_mobile: >-
+  Lorsque vous accédez au Service via ou via un appareil mobile, nous pouvons
+  collecter automatiquement certaines informations, notamment, mais sans s'y
+  limiter, le type d'appareil mobile que vous utilisez, l'identifiant unique de
+  votre appareil mobile, l'adresse IP de votre appareil mobile, votre système
+  d'exploitation, le type de navigateur Internet mobile que vous utilisez, les
+  identifiants uniques de l'appareil et d'autres données de diagnostic.
+privacy_usage_data_browser: >-
+  Nous pouvons également collecter des informations que votre navigateur envoie
+  chaque fois que vous visitez notre service ou lorsque vous accédez au service
+  via ou via un appareil mobile.
+privacy_use_of_data_title: Utilisation de vos données personnelles
+privacy_use_of_data_intro: 'La Société peut utiliser les Données Personnelles aux fins suivantes :'
+privacy_use_of_data_provide_service: >-
+  **Pour fournir et maintenir notre service**, y compris pour surveiller
+  l'utilisation de notre service.
+privacy_use_of_data_manage_account: "**Pour gérer votre compte\_:** pour gérer votre inscription en tant qu'utilisateur du Service. Les Données Personnelles que Vous fournissez peuvent Vous donner accès à différentes fonctionnalités du Service qui Vous sont accessibles en tant qu'utilisateur enregistré."
+privacy_use_of_data_performance: "**Pour l'exécution d'un contrat\_:** l'élaboration, le respect et la conclusion du contrat d'achat des produits, articles ou services que vous avez achetés ou de tout autre contrat avec nous via le Service."
+privacy_use_of_data_contact: "**Pour vous contacter\_:** Pour vous contacter par e-mail, appels téléphoniques, SMS ou autres formes de communication électronique équivalentes, telles que les notifications push d'une application mobile concernant les mises à jour ou les communications informatives liées aux fonctionnalités, produits ou services sous contrat, y compris les mises à jour de sécurité, lorsque cela est nécessaire ou raisonnable pour leur mise en œuvre."
+privacy_use_of_data_offers: >-
+  **Pour vous fournir** des actualités, des offres spéciales et des informations
+  générales sur d'autres biens, services et événements que nous proposons et
+  similaires à ceux que vous avez déjà achetés ou sur lesquels vous avez demandé
+  des informations, à moins que vous n'ayez choisi de ne pas recevoir de telles
+  informations.
+privacy_use_of_data_requests: "**Pour gérer vos demandes\_:** Pour répondre et gérer vos demandes auprès de nous."
+privacy_use_of_data_business_transfers: "**Pour les transferts d'entreprise\_:** Nous pouvons utiliser vos informations pour évaluer ou procéder à une fusion, une cession, une restructuration, une réorganisation, une dissolution ou toute autre vente ou transfert de tout ou partie de nos actifs, que ce soit dans le cadre d'une entreprise en activité ou dans le cadre d'une faillite, liquidation ou procédure similaire, dans laquelle les données personnelles que nous détenons sur les utilisateurs de nos services font partie des actifs transférés."
+privacy_use_of_data_other_purposes: "**À d'autres fins**\_: Nous pouvons utiliser vos informations à d'autres fins, telles que l'analyse de données, l'identification des tendances d'utilisation, la détermination de l'efficacité de nos campagnes promotionnelles et pour évaluer et améliorer notre service, nos produits, nos services, notre marketing et votre expérience."
+privacy_share_of_data_intro: "Nous pouvons partager vos informations personnelles dans les situations suivantes\_:"
+privacy_share_of_data_service_providers: "**Avec les fournisseurs de services\_:** Nous pouvons partager vos informations personnelles avec des fournisseurs de services pour surveiller et analyser l'utilisation de notre service et pour vous contacter."
+privacy_share_of_data_business_transfers: "**Pour les transferts d'entreprise\_:** Nous pouvons partager ou transférer vos informations personnelles dans le cadre ou pendant les négociations de toute fusion, vente des actifs de la société, financement ou acquisition de tout ou partie de notre entreprise à une autre société."
+privacy_share_of_data_affiliates: "**Avec les affiliés\_:** Nous pouvons partager vos informations avec nos affiliés, auquel cas nous exigerons de ces affiliés qu'ils respectent cette politique de confidentialité. Les sociétés affiliées comprennent notre société mère et toutes autres filiales, partenaires de coentreprise ou autres sociétés que nous contrôlons ou qui sont sous contrôle commun avec nous."
+privacy_share_of_data_business_partners: "**Avec des partenaires commerciaux\_:** Nous pouvons partager vos informations avec nos partenaires commerciaux pour vous proposer certains produits, services ou promotions."
+privacy_share_of_data_other_users: "**Avec d'autres utilisateurs\_:** lorsque vous partagez des informations personnelles ou interagissez de toute autre manière dans les espaces publics avec d'autres utilisateurs, ces informations peuvent être consultées par tous les utilisateurs et peuvent être distribuées publiquement à l'extérieur."
+privacy_share_of_data_consent: "**Avec votre consentement**\_: Nous pouvons divulguer vos informations personnelles à toute autre fin avec votre consentement."
+privacy_retention_of_data_title: Conservation de vos données personnelles
+privacy_retention_of_data_description: >-
+  La Société conservera vos données personnelles uniquement aussi longtemps que
+  nécessaire aux fins énoncées dans la présente politique de confidentialité.
+  Nous conserverons et utiliserons vos données personnelles dans la mesure
+  nécessaire pour nous conformer à nos obligations légales (par exemple, si nous
+  sommes tenus de conserver vos données pour nous conformer aux lois
+  applicables), résoudre les litiges et faire respecter nos accords et
+  politiques juridiques.
+privacy_retention_of_usage_data: >-
+  La Société conservera également les données d'utilisation à des fins d'analyse
+  interne. Les données d'utilisation sont généralement conservées pendant une
+  période plus courte, sauf lorsque ces données sont utilisées pour renforcer la
+  sécurité ou pour améliorer la fonctionnalité de notre service, ou lorsque nous
+  sommes légalement tenus de conserver ces données pendant des périodes plus
+  longues.
+privacy_transfer_of_data_title: Transfert de vos données personnelles
+privacy_transfer_of_data_description: >-
+  Vos informations, y compris vos données personnelles, sont traitées dans les
+  bureaux opérationnels de la Société et dans tout autre endroit où se trouvent
+  les parties impliquées dans le traitement. Cela signifie que ces informations
+  peuvent être transférées et conservées sur des ordinateurs situés en dehors de
+  votre état, province, pays ou autre juridiction gouvernementale où les lois
+  sur la protection des données peuvent différer de celles de votre juridiction.
+privacy_transfer_of_data_consent: >-
+  Votre consentement à cette politique de confidentialité suivi de votre
+  soumission de ces informations représente votre accord à ce transfert.
+privacy_transfer_of_data_safeguards: >-
+  La Société prendra toutes les mesures raisonnablement nécessaires pour
+  garantir que vos données sont traitées de manière sécurisée et conformément à
+  la présente politique de confidentialité et aucun transfert de vos données
+  personnelles n'aura lieu vers une organisation ou un pays à moins que des
+  contrôles adéquats ne soient en place, y compris la sécurité de Vos données et
+  autres informations personnelles.
+privacy_disclosure_of_data_title: Divulgation de vos données personnelles
+privacy_disclosure_business_transactions_title: Transactions commerciales
+privacy_disclosure_business_transactions_description: >-
+  Si la Société est impliquée dans une fusion, une acquisition ou une vente
+  d'actifs, vos données personnelles peuvent être transférées. Nous vous
+  informerons avant que vos données personnelles ne soient transférées et ne
+  soient soumises à une politique de confidentialité différente.
+privacy_disclosure_law_enforcement_title: Application de la loi
+privacy_disclosure_law_enforcement_description: >-
+  Dans certaines circonstances, la Société peut être tenue de divulguer vos
+  données personnelles si la loi l'exige ou en réponse à des demandes valables
+  des autorités publiques (par exemple un tribunal ou un organisme
+  gouvernemental).
+privacy_disclosure_other_legal_requirements_title: Autres exigences légales
+privacy_disclosure_other_legal_requirements_description: "La Société peut divulguer vos données personnelles en croyant de bonne foi qu'une telle action est nécessaire pour\_:"
+privacy_disclosure_other_legal_requirements_comply: Se conformer à une obligation légale
+privacy_disclosure_other_legal_requirements_protect: Protéger et défendre les droits ou les biens de la Société
+privacy_disclosure_other_legal_requirements_prevent: >-
+  Prévenir ou enquêter sur d'éventuels actes répréhensibles en relation avec le
+  Service
+privacy_disclosure_other_legal_requirements_protect_personal: Protéger la sécurité personnelle des Utilisateurs du Service ou du public
+privacy_disclosure_other_legal_requirements_protect_legal: Se protéger contre la responsabilité légale
+privacy_security_of_data_title: Sécurité de vos données personnelles
+privacy_security_of_data_description: >-
+  La sécurité de vos données personnelles est importante pour nous, mais
+  n'oubliez pas qu'aucune méthode de transmission sur Internet ni aucune méthode
+  de stockage électronique n'est sécurisée à 100 %. Bien que nous nous
+  efforcions d'utiliser des moyens commercialement acceptables pour protéger vos
+  données personnelles, nous ne pouvons garantir leur sécurité absolue.
+privacy_children_privacy_title: Confidentialité des enfants
+privacy_children_privacy_description: >-
+  Notre service ne s'adresse pas aux personnes de moins de 13 ans. Nous ne
+  collectons sciemment aucune information personnelle identifiable auprès de
+  toute personne de moins de 13 ans. Si vous êtes un parent ou un tuteur et que
+  vous savez que votre enfant nous a fourni des données personnelles, veuillez
+  Contactez-nous. Si nous apprenons que nous avons collecté des données
+  personnelles auprès d'une personne de moins de 13 ans sans vérification du
+  consentement parental, nous prenons des mesures pour supprimer ces
+  informations de nos serveurs.
+privacy_children_privacy_consent: >-
+  Si nous devons nous appuyer sur le consentement comme base légale pour traiter
+  vos informations et que votre pays exige le consentement d'un parent, nous
+  pouvons exiger le consentement de votre parent avant de collecter et
+  d'utiliser ces informations.
+privacy_links_to_other_websites_title: Liens vers d'autres sites Web
+privacy_links_to_other_websites_description: >-
+  Notre Service peut contenir des liens vers d'autres sites Web qui ne sont pas
+  exploités par Nous. Si vous cliquez sur un lien tiers, vous serez dirigé vers
+  le site de ce tiers. Nous vous conseillons fortement de consulter la politique
+  de confidentialité de chaque site que vous visitez.
+privacy_links_to_other_websites_control: >-
+  Nous n'avons aucun contrôle et n'assumons aucune responsabilité quant au
+  contenu, aux politiques de confidentialité ou aux pratiques de tout site ou
+  service tiers.
+privacy_changes_to_policy_title: Modifications de cette politique de confidentialité
+privacy_changes_to_policy_description: >-
+  Nous pouvons mettre à jour notre politique de confidentialité de temps à
+  autre. Nous vous informerons de tout changement en publiant la nouvelle
+  politique de confidentialité sur cette page.
+privacy_changes_to_policy_notification: "Nous vous en informerons par e-mail et/ou par un avis bien visible sur notre service, avant que le changement n'entre en vigueur et mettrons à jour la date de «\_Dernière mise à jour\_» en haut de cette politique de confidentialité."
+privacy_changes_to_policy_review: >-
+  Il vous est conseillé de consulter périodiquement cette politique de
+  confidentialité pour tout changement. Les modifications apportées à cette
+  politique de confidentialité entrent en vigueur dès leur publication sur cette
+  page.
+privacy_contact_us_title: Contactez-nous
+privacy_contact_us_description: "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter\_:"
+privacy_contact_us_website: 'En visitant cette page de notre site Internet : $1'
