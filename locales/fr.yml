@@ -111,7 +111,7 @@ open_the_app_it_update_in_the_background: Ouvrez l'application, elle se met à j
 start_now: Commencez maintenant
 faster_releases: Des versions plus rapides
 integration: Intégration
-goodbye_bugs: "Modifications instantanées, corrections de bugs Pas besoin d'attendre les retéléchargements d'applications\_! Avec une seule commande, les utilisateurs peuvent rapidement voir les corrections de bugs en action. Dites adieu aux retards frustrants."
+goodbye_bugs: "Modifications instantanées, corrections de bugs Pas besoin d'attendre les retéléchargements de l'application\_! Avec une seule commande, les utilisateurs peuvent rapidement voir les corrections de bugs en action. Dites adieu aux retards frustrants."
 manage_updates_effortlessly: Gérez les mises à jour sans effort
 user_assignment: Affectation des utilisateurs
 easily_assign_users_and_send_the_latest_update_to_your_private_or_public_testers: >-
@@ -216,7 +216,7 @@ read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project: >-
 key_features: Principales fonctionnalités
 deploy_changes_in_real_time: Déployer les changements en temps réel
 version_control: Contrôle des versions
-manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'applications sans effort
+manage_multiple_app_versions_effortlessly: Gérez plusieurs versions d'application sans effort
 rollback_capability: Capacité de restauration
 revert_to_previous_versions_if_needed: Revenir aux versions précédentes si nécessaire
 analytics: Analytique
@@ -261,9 +261,16 @@ consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps
   Consultez vos applications Capacitor et révisez le code avec nous pour fournir
   des applications sans bug.
 book_a_consultation: Réservez une consultation
-having_a_true_partner_has_been_a_wonderful_experience_and_it_allows_us_to_move_much_faster_than_we_could_alone: >-
-  Avoir un véritable partenaire a été une expérience merveilleuse, et cela nous
-  permet d’avancer beaucoup plus vite que nous ne pourrions le faire seuls.
+testimonial_consulting: >-
+  Capgo compte non seulement des ingénieurs incroyablement talentueux, mais ils
+  partagent également ma passion pour la réussite des projets. Avoir un <strong
+  class='font-bold italic'>véritable partenaire</strong> a été une expérience
+  merveilleuse, et cela nous permet d'avancer beaucoup plus vite que nous ne
+  pourrions le faire seuls.
+testimonial_consulting_2: >-
+  Je n'aurais <strong class='font-bold italic'>aucune hésitation à recommander
+  Capgo</strong> à d'autres, pour fournir une solution flexible à une
+  main-d'œuvre existante ou à plus long terme au sein d'une équipe distante.
 when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: Quand il est bon de demander les services de conseil Cordova et CapacitorJS
 review_before_passing_the_code_to_the_production: Réviser avant de transmettre le code à la production
 find_and_fix_bugs_during_the_coding_process: Recherchez et corrigez les bugs pendant le processus de codage.
@@ -440,7 +447,7 @@ importance_of_documenting_apis: >-
   documentation sont étroitement liés.
 javascript_and_typescript: JavaScript et TypeScript
 jsdoc_documentation: >-
-  Toutes les API et types exposés publiquement, le module
+  Toutes les API et tous les types exposés publiquement, le module
   <code>capacitor-updater</code> doit avoir une documentation JSDoc. Cette
   documentation est analysée et disponible pour le compilateur TypeScript, et
   donc facile à fournir plus en aval. Les blocs JSDoc viennent juste avant
@@ -505,7 +512,7 @@ kotlin_power_aproximately_1_of_apps_on_google_play_store: Kotlin alimente enviro
 top_native_script_apps_title: Principales applications de script natif
 native_script_power_aproximately_1_of_apps_on_google_play_store: "Le script natif alimente environ 1\_% des applications sur le Google Play Store"
 top_react_native_apps_title: Principales applications React Native
-react_native_power_aproximately_1_of_apps_on_google_play_store: "React Native alimente environ 1\_% des applications sur Google Play Store"
+react_native_power_aproximately_1_of_apps_on_google_play_store: React Native alimente environ 1 % des applications sur Google Play Store
 table_of_contents: Table des matières
 latest_from_news: Dernières nouvelles
 capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: >-
@@ -516,8 +523,8 @@ latest_from_the_blog: Dernières nouveautés du blog
 calculate_your_usage: Calculez votre consommation
 monthly_active_users: Utilisateurs actifs mensuels
 enter_your_estimated_monthly_active_users: >-
-  Entrez vos utilisateurs actifs mensuels estimés, vos mises à jour mensuelles
-  et la taille des mises à jour pour obtenir votre coût mensuel estimé.
+  Entrez vos utilisateurs actifs mensuels estimés, les mises à jour par mois et
+  la taille des mises à jour pour obtenir votre coût mensuel estimé.
 updates_by_month: Mises à jour<br />par mois
 updates_size: Taille des mises à jour<br />(Mo)
 updates_total: Mises à jour<br />(Total)
@@ -614,14 +621,14 @@ aup_intro: >-
   personnes à le faire, nous pouvons suspendre ou mettre fin à votre utilisation
   des Services.
 aup_no_illegal_use: Aucune utilisation ou contenu illégal, nuisible ou offensant
-aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaisante ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
+aup_no_illegal_use_desc: "Vous ne pouvez pas utiliser, ni encourager, promouvoir, faciliter ou demander à d'autres d'utiliser les Services ou le Site Capgo pour toute utilisation illégale, nuisible, frauduleuse, contrefaite ou offensante, ou pour transmettre, stocker, afficher, distribuer ou rendre disponible de toute autre manière du contenu qui est illégal, nuisible, frauduleux, contrefait ou offensant. Les activités ou contenus interdits comprennent\_:"
 illegal_activities: Activités illégales, nuisibles ou frauduleuses.
 infringing_content: Contenu contrefait.
 offensive_content: Contenu offensant.
 harmful_content: Contenu préjudiciable.
 platform_compliance: Conformité de la plateforme.
 aup_no_security_violations: Aucune violation de la sécurité
-aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun, un «\_Système\_»). Les activités interdites comprennent\_:"
+aup_no_security_violations_desc: "Vous ne pouvez pas utiliser les Services pour violer la sécurité ou l'intégrité d'un réseau, d'un ordinateur ou d'un système de communication, d'une application logicielle ou d'un réseau ou d'un appareil informatique (chacun étant un «\_Système\_»). Les activités interdites comprennent\_:"
 unauthorized_access: Accès non autorisé.
 interception: Interception.
 falsification_of_origin: Falsification de l'origine.
@@ -641,8 +648,8 @@ aup_no_email_abuse_desc: >-
   en-têtes des messages, ni n'assumerez l'identité d'un expéditeur sans
   l'autorisation explicite de l'expéditeur. Vous ne collecterez pas de réponses
   aux messages envoyés par un autre fournisseur de services Internet si ces
-  messages enfreignent cette politique ou la politique d'utilisation acceptable
-  de ce fournisseur.
+  messages violent cette politique ou la politique d'utilisation acceptable de
+  ce fournisseur.
 aup_monitoring_enforcement: Notre surveillance et notre application
 aup_monitoring_enforcement_desc: >-
   Nous nous réservons le droit, mais n'assumons pas l'obligation, d'enquêter sur
@@ -726,8 +733,7 @@ canonical: Canonique
 security_intro: >-
   Chez Capgo, nous considérons la sécurité de nos systèmes comme une priorité
   absolue. Cependant, quels que soient les efforts que nous déployons pour
-  assurer la sécurité du système, des vulnérabilités peuvent toujours être
-  présentes.
+  assurer la sécurité du système, des vulnérabilités peuvent toujours subsister.
 security_discovery: >-
   Si vous découvrez une vulnérabilité, nous aimerions en être informés afin de
   pouvoir prendre des mesures pour y remédier le plus rapidement possible. Nous
@@ -752,7 +758,7 @@ security_out_of_scope_11: Énumération des utilisateurs
 security_testing_guidelines_title: "Directives de test\_:"
 security_testing_guidelines_1: >-
   N'exécutez pas de scanners automatisés sur d'autres projets clients.
-  L’utilisation de scanners automatisés peut entraîner des coûts pour nos
+  L’exécution de scanners automatisés peut entraîner des coûts pour nos
   utilisateurs. Les scanners configurés de manière agressive peuvent perturber
   par inadvertance les services, exploiter des vulnérabilités, entraîner une
   instabilité ou des violations du système et violer les conditions de service
@@ -826,16 +832,17 @@ credit_requests_payment_desc: >-
   Pour demander un crédit de service, le client doit envoyer un e-mail à Capgo à
   support@capgo.app dans les trente (30) jours suivant la fin du mois au cours
   duquel l'engagement de disponibilité n'a pas été respecté. Le client doit
-  inclure son identifiant de compte ou son adresse e-mail enregistrée, ainsi que
-  les dates et heures précédemment signalées auxquelles le service n'était pas
-  disponible. Si Capgo confirme que le client est éligible à un crédit de
-  service, Capgo émettra un crédit sur le compte du client dans les trente (30)
-  jours. Les crédits de service ne constituent pas des remboursements, ne
-  peuvent pas être échangés contre un montant en espèces et ne peuvent être
-  utilisés que pour couvrir des frais de facturation futurs. Sauf indication
-  contraire dans la section 4 ci-dessous, les crédits de service constitueront
-  le seul et unique recours du client, et la seule et unique responsabilité de
-  Capgo, en cas de non-respect par Capgo de son engagement de disponibilité.
+  inclure soit son identifiant de compte, soit son adresse e-mail enregistrée,
+  ainsi que les dates et heures précédemment signalées auxquelles le service
+  n'était pas disponible. Si Capgo confirme que le client est éligible à un
+  crédit de service, Capgo émettra un crédit sur le compte du client dans un
+  délai de trente (30) jours. Les crédits de service ne constituent pas des
+  remboursements, ne peuvent pas être échangés contre un montant en espèces et
+  ne peuvent être utilisés que pour couvrir des frais de facturation futurs.
+  Sauf indication contraire dans la section 4 ci-dessous, les crédits de service
+  constitueront le seul et unique recours du client, et la seule et unique
+  responsabilité de Capgo, en cas de non-respect par Capgo de son engagement de
+  disponibilité.
 4_definitions_title: 4. Définitions
 definitions_desc: >-
   Tous les mots en majuscules utilisés mais non définis dans le présent Accord
@@ -855,13 +862,13 @@ unscheduled_downtime_desc: >-
 actual_availability_title: 4.3 Disponibilité réelle
 actual_availability_desc: "«\_Disponibilité réelle\_» désigne la disponibilité planifiée moins les temps d'arrêt non planifiés."
 production_title: 4.4 Production
-production_desc: "La «\_production\_» est définie comme un système servant des systèmes opérationnels ou orientés client en direct avec des fonctionnalités déployées et fonctionnelles existantes."
+production_desc: "La «\_production\_» est définie comme un système servant des systèmes en direct destinés aux clients ou aux entreprises avec des fonctionnalités déployées et fonctionnelles existantes."
 non_production_desc: >-
   Le « développement », la « mise en scène », « l'uat », la « pré-production »
   ou la mise en œuvre de nouvelles fonctionnalités, même dans un environnement
   de production, ne sont pas considérés comme de la production.
 sla_exclusions_title: Exclusions des SLA
-general_service_exclusions_title: Exclusions des services généraux
+general_service_exclusions_title: Exclusions de services généraux
 general_service_exclusion_1: >-
   (i) Causés par des facteurs échappant à notre contrôle raisonnable, y compris,
   mais sans s'y limiter, tout événement de force majeure ou accès à Internet,
@@ -916,7 +923,7 @@ high_support_desc: >-
   Problème entraînant une situation dans laquelle des fonctionnalités majeures
   sont affectées et une dégradation significative des performances est
   constatée. Le problème affecte une proportion importante de la base
-  d'utilisateurs et/ou des fonctionnalités majeures de Capgo.
+  d’utilisateurs et/ou des fonctionnalités majeures de Capgo.
 normal_support_title: 3. Normale
 normal_support_subtitle: Fonctionnalité mineure ou problème fonctionnel / Question générale
 normal_support_desc: >-
@@ -1009,8 +1016,8 @@ support_policy_proactive_monitoring_desc: >-
   En cas de problème de plate-forme, nous publierons un avis sur notre site de
   statut à l'adresse status.capgo.app pour communiquer rapidement l'impact et le
   statut. Vous n'avez pas besoin de soumettre un ticket d'assistance pour les
-  problèmes persistants de la plateforme. Surveillez plutôt la page d’état pour
-  connaître les dernières mises à jour et informations.
+  problèmes persistants de la plateforme. Au lieu de cela, surveillez la page
+  d’état pour connaître les dernières mises à jour et informations.
 support_policy_premium_support_title: Assistance Premium
 support_policy_premium_support_desc: "Pour en savoir plus sur nos options de support Premium pour les clients Team Plan et Enterprise, veuillez nous contacter en utilisant le formulaire ci-dessous\_:"
 disclaimer_title: Clause de non-responsabilité
@@ -1086,7 +1093,7 @@ fair_use_belief: >-
   loi américaine sur le droit d'auteur.
 copyright_permission: >-
   Si vous souhaitez utiliser du matériel protégé par le droit d'auteur du
-  Service à vos propres fins qui vont au-delà d'une utilisation équitable, vous
+  Service à vos propres fins qui vont au-delà de l'utilisation équitable, vous
   devez obtenir l'autorisation du propriétaire du droit d'auteur.
 views_expressed_disclaimer_title: Opinions exprimées
 views_expressed_disclaimer_text: >-
@@ -1215,7 +1222,7 @@ tos_definition_application_store: >-
   Application Store désigne le service de distribution numérique exploité et
   développé par Apple Inc. (Apple App Store) ou Google Inc. (Google Play Store)
   dans lequel l'Application a été téléchargée.
-tos_definition_affiliate: "Société affiliée désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
+tos_definition_affiliate: "Filiale désigne une entité qui contrôle, est contrôlée par ou est sous contrôle commun avec un parti, où «\_contrôle\_» désigne la propriété de 50\_% ou plus des actions, participations ou autres titres donnant droit à voter pour l'élection d'administrateurs ou d'autres autorités de gestion. ."
 tos_definition_account: >-
   Compte désigne un compte unique créé pour vous permettre d'accéder à notre
   service ou à des parties de notre service.
@@ -1348,8 +1355,8 @@ tos_subscriptions_free_trial_text_1: >-
   La Société peut, à sa seule discrétion, proposer un abonnement avec un essai
   gratuit pour une durée limitée.
 tos_subscriptions_free_trial_text_2: >-
-  Vous devrez peut-être saisir vos informations de facturation afin de vous
-  inscrire à l'essai gratuit.
+  Il vous sera peut-être demandé de saisir vos informations de facturation afin
+  de vous inscrire à l'essai gratuit.
 tos_subscriptions_free_trial_text_3: >-
   Si vous saisissez vos informations de facturation lors de votre inscription à
   un essai gratuit, vous ne serez pas facturé par la société jusqu'à
@@ -1366,7 +1373,7 @@ tos_in_app_purchases_text_1: >-
   L'Application peut inclure des achats intégrés qui vous permettent d'acheter
   des produits, des services ou des abonnements.
 tos_in_app_purchases_text_2: >-
-  De plus amples informations sur la manière dont vous pouvez gérer les achats
+  De plus amples informations sur la façon dont vous pouvez gérer les achats
   intégrés à l'aide de votre appareil peuvent être fournies dans les conditions
   générales de l'Application Store ou dans les paramètres d'aide de votre
   appareil.
@@ -1374,8 +1381,8 @@ tos_in_app_purchases_text_3: >-
   Les achats intégrés ne peuvent être consommés qu'au sein de l'application. Si
   vous effectuez un achat intégré, cet achat intégré ne peut pas être annulé une
   fois que vous avez lancé son téléchargement. Les achats intégrés ne peuvent
-  pas être échangés contre de l'argent ou une autre contrepartie, ni transférés
-  d'une autre manière.
+  pas être échangés contre de l'argent ou toute autre contrepartie, ni autrement
+  transférés.
 tos_in_app_purchases_text_4: >-
   Si un achat intégré n'est pas téléchargé avec succès ou ne fonctionne pas une
   fois qu'il a été téléchargé avec succès, nous, après avoir pris connaissance
@@ -1386,8 +1393,8 @@ tos_in_app_purchases_text_4: >-
   ou la réparation de l'achat intégré. Dans le cas peu probable où nous ne
   serions pas en mesure de remplacer ou de réparer l'achat intégré concerné ou
   si nous ne sommes pas en mesure de le faire dans un délai raisonnable et sans
-  inconvénient majeur pour vous, nous autoriserons l'Application Store à vous
-  rembourser un montant pouvant aller jusqu'à le coût de l’achat intégré
+  inconvénient majeur pour vous, nous autoriserons la boutique d'applications à
+  vous rembourser un montant pouvant aller jusqu'à le coût de l’achat intégré
   concerné. Alternativement, si vous souhaitez demander un remboursement, vous
   pouvez le faire en contactant directement l'Application Store.
 tos_in_app_purchases_text_5: >-
@@ -1435,10 +1442,10 @@ tos_intellectual_property_text_3: >-
 tos_your_feedback_title: Vos commentaires
 tos_your_feedback_text: >-
   Vous cédez tous les droits, titres et intérêts liés aux commentaires que vous
-  fournissez à la société. Si, pour une raison quelconque, une telle cession est
-  inefficace, vous acceptez d'accorder à la Société un droit et une licence non
-  exclusifs, perpétuels, irrévocables, libres de droits et mondiaux pour
-  utiliser, reproduire, divulguer, sous-licencier, distribuer, modifier et
+  fournissez à la société. Si, pour une raison quelconque, une telle cession
+  s'avère inefficace, vous acceptez d'accorder à la Société un droit et une
+  licence non exclusifs, perpétuels, irrévocables, libres de droits et mondiaux
+  pour utiliser, reproduire, divulguer, sous-licencier, distribuer, modifier et
   exploiter ces commentaires sans restriction.
 tos_links_to_other_websites_title: Liens vers d'autres sites Web
 tos_links_to_other_websites_text_1: >-
@@ -1614,7 +1621,7 @@ cancellation_link: 'En visitant cette page de notre site Internet :'
 reimbursement_policy: >-
   Nous vous rembourserons au plus tard 14 jours à compter du jour où nous
   recevons les marchandises retournées. Nous utiliserons le même moyen de
-  paiement que celui que vous avez utilisé pour la Commande, et vous n'aurez à
+  paiement que celui que Vous avez utilisé pour la Commande, et Vous n’aurez à
   payer aucun frais pour ce remboursement.
 conditions_for_returns: Conditions de retour
 return_eligibility: "Pour que les marchandises puissent faire l'objet d'un retour, veuillez vous assurer que\_:"
@@ -1769,9 +1776,9 @@ eula_license_scope_text_3: >-
 eula_license_restrictions_subtitle: Restrictions de licence
 eula_license_restrictions_intro: "Vous acceptez de ne pas et vous ne permettrez pas à d’autres de\_:"
 eula_license_restrictions_1: >-
-  Licence, vendre, louer, céder, distribuer, transmettre, héberger,
-  sous-traiter, divulguer ou exploiter commercialement de toute autre manière
-  l'Application ou mettre l'Application à la disposition de tout tiers.
+  Concéder sous licence, vendre, louer, céder, distribuer, transmettre,
+  héberger, sous-traiter, divulguer ou exploiter commercialement de toute autre
+  manière l'Application ou mettre l'Application à la disposition de tout tiers.
 eula_license_restrictions_2: "Copiez ou utilisez l'Application à toute fin autre que celle autorisée dans la section «\_Licence\_» ci-dessus."
 eula_license_restrictions_3: >-
   Modifier, créer des œuvres dérivées, désassembler, déchiffrer, compiler ou
@@ -1800,8 +1807,8 @@ eula_your_suggestions_text_1: >-
   de la Société.
 eula_your_suggestions_text_2: >-
   La Société sera libre d'utiliser, de copier, de modifier, de publier ou de
-  redistribuer les Suggestions à toutes fins et de quelque manière que ce soit,
-  sans aucun crédit ni aucune compensation pour vous.
+  redistribuer les Suggestions à quelque fin que ce soit et de quelque manière
+  que ce soit, sans aucun crédit ni aucune compensation pour vous.
 eula_modifications_title: Modifications de la demande
 eula_modifications_text: >-
   La Société se réserve le droit de modifier, suspendre ou interrompre,
@@ -1832,9 +1839,9 @@ eula_maintenance_text: >-
   assistance.
 eula_third_party_services_title: Services tiers
 eula_third_party_services_text_1: >-
-  L'Application peut afficher, inclure ou rendre disponible du contenu tiers (y
-  compris des données, informations, applications et autres produits, services)
-  ou fournir des liens vers des sites Web ou des services tiers.
+  L'Application peut afficher, inclure ou mettre à disposition du contenu tiers
+  (y compris des données, informations, applications et autres produits,
+  services) ou fournir des liens vers des sites Web ou des services tiers.
 eula_third_party_services_text_2: >-
   Vous reconnaissez et acceptez que la Société ne sera pas responsable des
   services tiers, y compris de leur exactitude, exhaustivité, actualité,
@@ -2121,15 +2128,15 @@ dpa_processor_obligations_7: >-
   perte, d'une altération ou d'une divulgation accidentelle, non autorisée ou
   illégale des données personnelles traitées par Capgo dans le cadre de la
   fourniture du service, elle devra, sans retard injustifié (au plus tard 48
-  heures après en avoir pris connaissance), informer le client par courrier
-  électronique et lui fournir une description de l'incident ainsi que des mises
-  à jour périodiques des informations sur l'incident, y compris son impact sur
-  le contenu du client. Capgo prendra en outre des mesures pour enquêter sur
-  l'incident et raisonnablement prévenir ou atténuer les effets de l'incident.
+  heures après en avoir pris connaissance), informer le client par email et lui
+  fournir une description de l'incident ainsi que des mises à jour périodiques
+  des informations sur l'incident, y compris son impact sur le contenu du
+  client. Capgo prendra en outre des mesures pour enquêter sur l'incident et
+  raisonnablement prévenir ou atténuer les effets de l'incident.
 dpa_processor_obligations_8: >-
-  Capgo ne rectifiera pas, de sa propre autorité, n'effacera ou ne limitera pas
-  le traitement des données des visiteurs qui sont traitées pour le compte du
-  responsable du traitement (sauf si cela est requis par la loi ou les
+  Capgo ne rectifiera pas, n'effacera pas ou ne limitera pas, de sa propre
+  autorité, le traitement des données des visiteurs qui sont traitées pour le
+  compte du responsable du traitement (sauf si cela est requis par la loi ou les
   conditions de service du processeur), mais ne le fera que sur instructions
   documentées de du responsable du traitement et conformément aux règles de
   conservation des données associées à la formule d'abonnement du responsable du
@@ -2295,7 +2302,7 @@ data_policy_legal_basis_legal_obligations: >-
 data_policy_legal_basis_vital_interests: >-
   Intérêts vitaux : Le traitement des Données personnelles est nécessaire afin
   de protéger Vos intérêts vitaux ou ceux d’une autre personne physique.
-data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investi la Société."
+data_policy_legal_basis_public_interests: "Intérêt public\_: le traitement des données personnelles est lié à une mission effectuée dans l'intérêt public ou dans l'exercice de l'autorité publique dont est investie la Société."
 data_policy_legal_basis_legitimate_interests: >-
   Intérêts légitimes : Le traitement des Données Personnelles est nécessaire aux
   finalités des intérêts légitimes poursuivis par la Société.
@@ -2424,7 +2431,7 @@ data_policy_ccpa_info_sources_title: >-
   n'incluent pas les informations accessibles au public provenant des dossiers
   gouvernementaux, les informations anonymisées ou agrégées sur les
   consommateurs, ou les informations exclues du champ d'application du CCPA.
-data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories de renseignements personnels énumérées ci-dessus à partir des catégories de sources suivantes\_:"
+data_policy_ccpa_info_sources_intro: "Nous obtenons les catégories d’informations personnelles énumérées ci-dessus à partir des catégories de sources suivantes\_:"
 data_policy_ccpa_info_source_1: >-
   Directement de votre part. Par exemple, à partir des formulaires que vous
   remplissez sur notre Service, des préférences que vous exprimez ou fournissez
@@ -2478,20 +2485,20 @@ data_policy_ccpa_info_sharing_5: >-
   vous fournissons
 data_policy_ccpa_sale_of_info_title: Vente de renseignements personnels
 data_policy_ccpa_sale_of_info_definition: >-
-  Tel que défini dans la CCPA, « vendre » et « vendre » désignent la vente, la
-  location, la divulgation, la divulgation, la diffusion, la mise à disposition,
-  le transfert ou toute autre communication orale, écrite ou électronique ou
-  autre, des informations personnelles d'un consommateur par le affaires à un
+  Tel que défini dans la CCPA, « vendre » et « vendre » signifient vendre,
+  louer, divulguer, divulguer, diffuser, mettre à disposition, transférer ou
+  autrement communiquer oralement, par écrit ou par des moyens électroniques ou
+  autres, les informations personnelles d'un consommateur par le affaires à un
   tiers moyennant une contrepartie précieuse. Cela signifie que nous pouvons
   avoir reçu une sorte d'avantage en échange du partage d'informations
   personnelles, mais pas nécessairement un avantage monétaire.
 data_policy_ccpa_sale_of_info_note: >-
   Veuillez noter que les catégories énumérées ci-dessous sont celles définies
   dans le CCPA. Cela ne signifie pas que tous les exemples de cette catégorie
-  d'informations personnelles ont en fait été vendus, mais reflète notre
+  d'informations personnelles ont été effectivement vendus, mais reflète notre
   conviction de bonne foi, au meilleur de nos connaissances, que certaines de
   ces informations de la catégorie applicable peuvent être et ont pu être
-  partagées contre valeur en retour. .
+  partagées en échange d'une valeur en retour. .
 data_policy_ccpa_sale_of_info_statement: "Nous pouvons vendre et avons pu vendre au cours des douze (12) derniers mois les catégories d’informations personnelles suivantes\_:"
 data_policy_ccpa_sale_of_info_categories: "Catégorie A\_: Identifiants\nCatégorie B\_: catégories d'informations personnelles répertoriées dans la loi californienne sur les dossiers clients (Cal. Civ. Code § 1798.80(e))\nCatégorie D : Informations commerciales\nCatégorie F\_:\_Internet ou autre activité réseau similaire"
 data_policy_ccpa_share_of_info_title: Partage d’informations personnelles
@@ -2517,7 +2524,7 @@ data_policy_ccpa_sale_of_minors_info_statement: >-
   nous encourageons les parents et tuteurs légaux à surveiller l'utilisation
   d'Internet par leurs enfants et à leur demander de ne jamais fournir
   d'informations sur d'autres sites Web sans leur autorisation.
-data_policy_ccpa_sale_of_minors_info_policy: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils ont moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
+data_policy_ccpa_sale_of_minors_info_policy: "Nous ne vendons pas les informations personnelles des consommateurs dont nous savons qu'ils sont âgés de moins de 16 ans, à moins que nous recevions une autorisation positive (le «\_droit d'adhésion\_») soit du consommateur âgé de 13 à 16 ans, soit le parent ou tuteur d'un consommateur de moins de 13 ans. Les consommateurs qui acceptent la vente de leurs informations personnelles peuvent à tout moment se désinscrire des ventes futures. Pour exercer votre droit de retrait, vous (ou votre représentant autorisé) pouvez nous soumettre une demande en nous contactant."
 data_policy_ccpa_sale_of_minors_info_request: >-
   Si vous avez des raisons de croire qu'un enfant de moins de 13 (ou 16 ans)
   nous a fourni des informations personnelles, veuillez nous contacter avec
@@ -2573,11 +2580,11 @@ data_policy_ccpa_right_to_delete_5: >-
   électroniques (Cal. Penal Code § 1546 et suivants).
 data_policy_ccpa_right_to_delete_6: >-
   Participer à des recherches scientifiques, historiques ou statistiques
-  publiques ou évaluées par des pairs dans l'intérêt public, dans le respect de
-  toutes les autres lois applicables en matière d'éthique et de confidentialité,
-  lorsque la suppression des informations est susceptible de rendre impossible
-  ou de nuire sérieusement aux résultats de la recherche, si vous avez
-  préalablement fourni votre consentement éclairé. .
+  publiques ou évaluées par des pairs dans l'intérêt public et dans le respect
+  de toutes les autres lois applicables en matière d'éthique et de
+  confidentialité, lorsque la suppression des informations est susceptible de
+  rendre impossible ou de nuire gravement aux résultats de la recherche, si vous
+  avez préalablement fourni votre consentement éclairé. .
 data_policy_ccpa_right_to_delete_7: >-
   Autorisez uniquement des utilisations internes raisonnablement alignées sur
   les attentes des consommateurs en fonction de votre relation avec nous.
@@ -2585,7 +2592,7 @@ data_policy_ccpa_right_to_delete_8: Se conformer à une obligation légale.
 data_policy_ccpa_right_to_delete_9: >-
   Faire d'autres utilisations internes et licites de ces informations qui sont
   compatibles avec le contexte dans lequel vous les avez fournies.
-data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas être victime de discrimination dans l'exercice de l'un de vos droits de consommateur, notamment par\_:"
+data_policy_ccpa_right_to_non_discrimination: "Le droit de ne pas être victime de discrimination. Vous avez le droit de ne pas faire l’objet de discrimination dans l’exercice de l’un de vos droits de consommateur, notamment par\_:"
 data_policy_ccpa_right_to_non_discrimination_1: Vous refuser des biens ou des services
 data_policy_ccpa_right_to_non_discrimination_2: >-
   Facturer des prix ou des tarifs différents pour des biens ou des services, y

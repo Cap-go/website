@@ -57,8 +57,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <div role="listitem">
                 <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
                   <p class="mb-2 mt-0 italic">
-                    Capgo not only has incredibly talented engineers, but they also share my passion for project success. Having a
-                    <strong class="font-bold italic">true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.
+                    <span v-html="translations['testimonial_consulting'][props.locale]" />
                   </p>
                 </div>
                 <img
@@ -566,9 +565,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <p class="mb-2 mt-0 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
               <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
                 <p class="mb-2 mt-0 italic">
-                  I would have
-                  <strong class="font-bold italic">no hesitation in recommending Capgo</strong>
-                  to others, to provide a flexible solution to an existing workforce or on a longer-term basis as part of a remote team
+                  <span v-html="translations['testimonial_consulting_2'][props.locale]" />
                 </p>
               </div>
               <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="mb-4 hidden max-w-full border-0 align-middle" style="border-radius: 100%" />
