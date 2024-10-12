@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Locales } from '@/services/locale'
+import { type Locales, defaultLocale } from '@/services/locale'
 import translations from '@/services/translations'
 
 const props = defineProps<{ locale: Locales }>()
@@ -7,6 +7,9 @@ const props = defineProps<{ locale: Locales }>()
 
 <template>
   <div class="prose prose-sm m-auto px-3 text-left">
+    <span class="text-xs" v-if="props.locale !== defaultLocale">
+      Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
+    </span>
     <h1 id="capgo-security-">{{ translations.trust_capgo_security[props.locale] }}</h1>
     <p>{{ translations.trust_move_forward_with_confidence[props.locale] }}</p>
     <h2 id="product-security">{{ translations.trust_product_security[props.locale] }}</h2>

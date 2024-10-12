@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
-import { type Locales } from '@/services/locale'
+import { type Locales, defaultLocale } from '@/services/locale'
 
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl
@@ -11,6 +11,9 @@ const props = defineProps<{ locale: Locales }>()
 
 <template>
   <div class="prose prose-sm m-auto px-3 text-left">
+    <span class="text-xs" v-if="props.locale !== defaultLocale">
+      Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
+    </span>
     <h1>Privacy Policy</h1>
     <p>Last updated: January 28, 2022</p>
     <p>

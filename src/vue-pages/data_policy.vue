@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
-import { type Locales } from '@/services/locale'
+import { type Locales, defaultLocale } from '@/services/locale'
 import translations from '@/services/translations'
 
 const props = defineProps<{ locale: Locales }>()
@@ -10,6 +10,9 @@ const domain = config.public.baseUrl
 
 <template>
   <div class="prose prose-sm m-auto px-3 text-left">
+    <span class="text-xs" v-if="props.locale !== defaultLocale">
+      Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
+    </span>
     <h1>{{ translations['data_policy_title'][props.locale] }}</h1>
     <p>{{ translations['data_policy_last_updated'][props.locale] }}</p>
     <p>{{ translations['data_policy_intro'][props.locale] }}</p>
