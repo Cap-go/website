@@ -160,12 +160,6 @@ const props = defineProps<{ locale: Locales }>()
     <p>{{ translations['privacy_changes_to_policy_review'][props.locale] }}</p>
     <h2>{{ translations['privacy_contact_us_title'][props.locale] }}</h2>
     <p>{{ translations['privacy_contact_us_description'][props.locale] }}</p>
-    <ul>
-      <li>
-        {{ translations['privacy_contact_us_website'][props.locale].replace('$1', `<a href="${domain}/#support" rel="external nofollow noopener" target="_blank"
-          >${domain}/#support</a
-        >`) }}
-      </li>
-    </ul>
+    <p v-html="translations['privacy_contact_us_website'][props.locale].replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
   </div>
 </template>
