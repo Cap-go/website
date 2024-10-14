@@ -281,7 +281,7 @@ const navigation = {
                     :rel="item.rel"
                     :href="item.href"
                     :target="item.target"
-                    class="flex items-center border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
+                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                     @click="item.execute && item.execute()"
                   >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
