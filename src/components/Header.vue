@@ -51,7 +51,7 @@ const menuMobile = ref(false)
             {{ translations['documentation'][props.locale] }}
           </a>
           <a
-            :href="getRelativeLocaleUrl(props.locale, 'login')"
+            href="https://web.capgo.app/login/"
             title="Login"
             target="_blank"
             class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
