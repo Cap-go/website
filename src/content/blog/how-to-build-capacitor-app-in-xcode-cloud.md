@@ -1,16 +1,16 @@
 ---
-slug: "how-to-build-capacitor-app-in-xcode-cloud"
+slug: how-to-build-capacitor-app-in-xcode-cloud
 title: How to build Ionic Capacitor app in Xcode Cloud
 description: Use Xcode cloud to build your Capacitor JS app and bypass the need of MacOS.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-09-01
-updated_at: 2023-06-29
-head_image: "/xcode_cloud.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-09-01T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /xcode_cloud.webp
 head_image_alt: Capacitor Xcode cloud build
 tag: Tutorial
 published: true
-
+locale: en
 ---
 
 ## Prerequisites

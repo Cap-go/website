@@ -1,17 +1,19 @@
 ---
-slug: "introducing-end-to-end-security-to-capacitor-updater-with-code-signing"
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: Introducing end to end encryption to capacitor-updater with code signing
-description: Using RSA + AES cryptography to encrypt updates, designed for the enterprise and high security apps
+description: >-
+  Using RSA + AES cryptography to encrypt updates, designed for the enterprise
+  and high security apps
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-11-27
-updated_at: 2024-08-27
-head_image: "/secure_upload.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-11-27T00:00:00.000Z
+updated_at: 2024-08-27T00:00:00.000Z
+head_image: /secure_upload.webp
 head_image_alt: Secure upload Capgo
 tag: Solution
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 [Capacitor-updater](https://github.com/Cap-go/capacitor-updater/) now supports end-to-end code encryption. Code signing makes sure the updates run by end users’ devices have not been tampered with and provides an extra level of protection above Capacitor-updater’s standard web-grade security.

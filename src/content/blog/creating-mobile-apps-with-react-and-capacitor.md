@@ -1,17 +1,19 @@
 ---
-slug: "creating-mobile-apps-with-react-and-capacitor"
-title: 'Building Mobile Apps with Pure React.js and Capacitor'
-description: 'A guide on how to transform a React.js web application into a native mobile app utilizing Capacitor, and enhancing the native UI with Konsta UI.'
+slug: creating-mobile-apps-with-react-and-capacitor
+title: Building Mobile Apps with Pure React.js and Capacitor
+description: >-
+  A guide on how to transform a React.js web application into a native mobile
+  app utilizing Capacitor, and enhancing the native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-29
-updated_at: 2023-06-29
-head_image: "/react_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-29T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /react_capacitor.webp
 head_image_alt: React.js and Capacitor illustration
 tag: Tutorial
 published: true
-next_blog: "implementing-live-updates-in-your-react-capacitor-app"
-
+locale: en
+next_blog: implementing-live-updates-in-your-react-capacitor-app
 ---
 
 This tutorial will walk you through crafting a mobile application using React, Capacitor, and Konsta UI. By the end, you’ll know how to morph a React.js web app into a native mobile application with Capacitor, and implement a native UI using Konsta UI.

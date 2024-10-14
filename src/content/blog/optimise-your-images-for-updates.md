@@ -1,17 +1,19 @@
 ---
-slug: "optimise-your-images-for-updates"
+slug: optimise-your-images-for-updates
 title: Optimise your images for updates
-description: How to optimise your images for live updates and help your user get updates faster.
+description: >-
+  How to optimise your images for live updates and help your user get updates
+  faster.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-01-23
-updated_at: 2023-06-29
-head_image: "/convert_webp.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-01-23T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /convert_webp.webp
 head_image_alt: Convert to webp illustration
 tag: Optimisation
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 WebP is a modern image format that can provide significant savings in file size compared to JPEG, while maintaining similar or better visual quality. By converting your JPEG images to WebP in your mobile app, you can potentially reduce the size of your app, which can lead to faster download times and improved performance for your users.

@@ -1,17 +1,19 @@
 ---
-slug: "automatic-capacitor-ios-build-github-action-with-match"
+slug: automatic-capacitor-ios-build-github-action-with-match
 title: Automatic Capacitor IOS build with GitHub actions using match
-description: How to set up a CI/CD pipeline for your IOS Ionic app using fastlane and GitHub Actions in 5 mins (2022)
+description: >-
+  How to set up a CI/CD pipeline for your IOS Ionic app using fastlane and
+  GitHub Actions in 5 mins (2022)
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-10-30
-updated_at: 2024-08-01
-head_image: "/fastlane_ios.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-10-30T00:00:00.000Z
+updated_at: 2024-08-01T00:00:00.000Z
+head_image: /fastlane_ios.webp
 head_image_alt: Fastlane testflight GitHub action illustration
 tag: CI/CD
 published: true
-next_blog: "automatic-capacitor-android-build-github-action"
-
+locale: en
+next_blog: automatic-capacitor-android-build-github-action
 ---
 
 ## Continuous Delivery for iOS using Fastlane and GitHub Actions using match

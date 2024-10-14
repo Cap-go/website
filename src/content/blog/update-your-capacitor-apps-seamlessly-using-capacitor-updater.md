@@ -1,18 +1,19 @@
 ---
-slug: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: Update your Capacitor apps seamlessly using Capacitor-updater
-description: Greetings Capacitor Ionic Community, today I'll be helping you setup Capacitor-updater
-  into your app. So that you can do seamless releases.
+description: >-
+  Greetings Capacitor Ionic Community, today I'll be helping you setup
+  Capacitor-updater into your app. So that you can do seamless releases.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-02-27
-updated_at: 2023-06-29
-head_image: "/update_flow.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-02-27T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /update_flow.webp
 head_image_alt: Capacitor Dev looking for alternative
 tag: Tutorial
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 ## What is Capacitor-updater?

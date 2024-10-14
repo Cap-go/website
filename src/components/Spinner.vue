@@ -10,7 +10,6 @@
     <div />
   </div>
 </template>
-
 <style scoped>
 .lds-roller {
   width: 80px;

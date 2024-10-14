@@ -1,11 +1,10 @@
 ---
-import '../css/global.css'
-import SEO from '../components/SEO.astro'
-// @ts-ignore
+import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
+import MessengerAffiliateVue from '@/components/MessengerAffliate.vue'
+import SEO from '@/components/SEO.astro'
+import '@/css/global.css'
 import { pwaInfo } from 'virtual:pwa-info'
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
-import MessengerAffiliateVue from '../components/MessengerAffliate.vue'
 
 const { content } = Astro.props
 
@@ -13,16 +12,16 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.locals.locale.toLowerCase()}>
   <head>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <SEO {...content} />
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
-      <Header client:load />
+      <Header locale={Astro.locals.locale} client:load />
       <slot />
-      <Footer client:load />
+      <Footer locale={Astro.locals.locale} client:load />
     </div>
     {
       !isLocalhost && (
@@ -36,7 +35,7 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
         />
       )
     }
-    <script defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js"></script>
+    <script is:inline defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js"></script>
     {
       !isLocalhost && (
         <script>

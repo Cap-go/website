@@ -1,18 +1,19 @@
 ---
-
-slug: "creating-mobile-apps-with-sveltekit-and-capacitor"
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Building Mobile Apps with SvelteKit and Capacitor
-description: Learn how to build a mobile app using SvelteKit, Capacitor, and enhance the native UI with Konsta UI.
+description: >-
+  Learn how to build a mobile app using SvelteKit, Capacitor, and enhance the
+  native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-04
-updated_at: 2023-06-04
-head_image: "/sveltekit_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-04T00:00:00.000Z
+updated_at: 2023-06-04T00:00:00.000Z
+head_image: /sveltekit_capacitor.webp
 head_image_alt: SvelteKit and Capgo illustration
 tag: Tutorial
 published: true
-next_blog: "updating-your-capacitor-apps-seamlessly-with-capacitor-updater"
-
+locale: en
+next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
 ---
 
 In this tutorial, we'll begin with a new [SvelteKit](https://kit.svelte.dev/) app and transition to native mobile development using Capacitor. Optionally, you can also integrate [Konsta UI](https://konstaui.com/) for an enhanced Tailwind CSS mobile UI.

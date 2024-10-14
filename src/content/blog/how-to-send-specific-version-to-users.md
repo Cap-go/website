@@ -1,17 +1,19 @@
 ---
-slug: "how-to-send-specific-version-to-users"
+slug: how-to-send-specific-version-to-users
 title: How to send specific update to one user or a group
-description: Allow you user to try beta version without the need of TestFlight, or google beta process, just add a button in your Ionic app, and they are in !
+description: >-
+  Allow you user to try beta version without the need of TestFlight, or google
+  beta process, just add a button in your Ionic app, and they are in !
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-06-17
-updated_at: 2023-06-29
-head_image: "/capgo_select_update.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-06-17T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /capgo_select_update.webp
 head_image_alt: TestFlight alternative illustration
 tag: alternatives
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 ## Preface

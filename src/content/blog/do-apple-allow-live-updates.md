@@ -1,17 +1,19 @@
 ---
-slug: "do-apple-allow-live-updates"
+slug: do-apple-allow-live-updates
 title: Do apple allow to send live update to Apps without the App Store review.
-description: 'How can you push code updates to production iOS apps and be fully compliant with Apple’s guidelines? '
+description: >-
+  How can you push code updates to production iOS apps and be fully compliant
+  with Apple’s guidelines? 
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-01-13
-updated_at: 2022-01-13
-head_image: "/apple_appstore.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-01-13T00:00:00.000Z
+updated_at: 2022-01-13T00:00:00.000Z
+head_image: /apple_appstore.webp
 head_image_alt: Capacitor bypass illustration
 tag: Tutorial
 published: true
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+locale: en
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 Updating Capacitor JS apps without going through the App Store review process is possible under certain conditions outlined in Apple's official guidelines. However, it is important to note that this is not legal advice. In order for code updates to be pushed directly to an app and remain compliant with Apple's guidelines, the following conditions must be met:

@@ -1,17 +1,19 @@
 ---
-slug: "setup-ci-and-cd-gitlab"
+slug: setup-ci-and-cd-gitlab
 title: Automatic build and release app with GitLab
-description: Create your own CI/CD pipeline with GitLab for free, deploy your Ionic Capacitor JS app every time you push to main.
+description: >-
+  Create your own CI/CD pipeline with GitLab for free, deploy your Ionic
+  Capacitor JS app every time you push to main.
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-14
-updated_at: 2023-09-14
-head_image: "/CI_CD_in_Gitlab.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-14T00:00:00.000Z
+updated_at: 2023-09-14T00:00:00.000Z
+head_image: /CI_CD_in_Gitlab.webp
 head_image_alt: CI/CD in GitLab
 tag: CI/CD
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 This article will guide you on how to do CI/CD pipeline setup with GitLab.

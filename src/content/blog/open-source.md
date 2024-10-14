@@ -1,17 +1,19 @@
 ---
-slug: "about-open-source"
+slug: about-open-source
 title: Learn about what open source is and why it’s important!
-description: During your programming journey, you might have heard of the term "Open Source". But what does that actually mean?
+description: >-
+  During your programming journey, you might have heard of the term "Open
+  Source". But what does that actually mean?
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-16
-updated_at: 2023-09-16
-head_image: "/open_source_main.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-16T00:00:00.000Z
+updated_at: 2023-09-16T00:00:00.000Z
+head_image: /open_source_main.webp
 head_image_alt: open source
 tag: Open Source
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 In this article, I will explain what Open Source Software is and talk about how it differs from other types of software. I'll also discuss the positives of Open Source Software and how to start contributing to projects.

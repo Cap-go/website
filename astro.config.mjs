@@ -1,18 +1,31 @@
+import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
 import UnoCSS from '@unocss/astro'
 import AstroPWA from '@vite-pwa/astro'
-import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
-import { pwa } from './src/config/pwa'
 import config from './configs.json'
+import { pwa } from './src/config/pwa'
+import { defaultLocale, locales } from './src/services/locale'
 
 export default defineConfig({
-  compressHTML: true,
   site: `https://${config.base_domain.prod}`,
   redirects: {
     '/docs/getting-started/': {
       status: 302,
       destination: '/docs/plugin/cloud-mode/getting-started/',
+    },
+  },
+  i18n: {
+    locales,
+    defaultLocale,
+    fallback: locales
+      .filter((i) => i !== defaultLocale)
+      .reduce((r, h) => {
+        r[h] = defaultLocale
+        return r
+      }, {}),
+    routing: {
+      redirectToDefaultLocale: true,
     },
   },
   integrations: [
@@ -29,10 +42,13 @@ export default defineConfig({
       title: 'Capgo',
       favicon: '/favicon.svg',
       logo: { src: './logo.svg' },
-      editLink: {
-				baseUrl: 'https://github.com/Cap-go/website/edit/main/',
-			},
       customCss: ['./src/css/global.css'],
+      components: {
+        LanguageSelect: './src/components/LanguageSelect.astro',
+      },
+      editLink: {
+        baseUrl: 'https://github.com/Cap-go/website/edit/main/',
+      },
       social: {
         discord: 'https://discord.com/invite/VnYRvBfgA6',
         github: 'https://github.com/Cap-go/',
@@ -54,7 +70,8 @@ export default defineConfig({
           label: 'Plugin',
           items: [
             { label: 'Overview', link: '/docs/plugin/overview' },
-            { label: 'Cloud Mode', 
+            {
+              label: 'Cloud Mode',
               items: [
                 { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
                 { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
@@ -65,7 +82,8 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Self Hosted', items: [
+              label: 'Self Hosted',
+              items: [
                 { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
                 { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
                 { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
@@ -73,7 +91,7 @@ export default defineConfig({
                 { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
                 { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
                 { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
-                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true}
+                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
               ],
               collapsed: true,
             },
@@ -88,7 +106,7 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: 'docs/upgrade' },
             },
-          ]
+          ],
         },
         {
           label: 'CLI',
@@ -100,14 +118,12 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: 'docs/cli/migrations' },
             },
-          ]
+          ],
         },
         {
           label: 'Public API',
           collapsed: true,
-          items: [
-            { label: 'Endpoints', link: '/docs/public-api/endpoints' },
-          ]
+          items: [{ label: 'Endpoints', link: '/docs/public-api/endpoints' }],
         },
         {
           label: 'Web app',
@@ -134,4 +150,14 @@ export default defineConfig({
       ],
     }),
   ],
+  server: {
+    port: 3000,
+    open: true,
+    host: '0.0.0.0',
+  },
+  preview: {
+    port: 3000,
+    open: true,
+    host: '0.0.0.0',
+  },
 })

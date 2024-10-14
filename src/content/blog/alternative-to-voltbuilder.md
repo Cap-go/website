@@ -1,17 +1,20 @@
 ---
-slug: "alternative-to-voltbuilder"
+slug: alternative-to-voltbuilder
 title: Alternative to Voltbuilder
-description: Voltbuilder offers an easy way to convert web projects into native apps, but its pricing may not suit everyone. Capgo provides a cost-effective solution for handling OTA updates with ease.
+description: >-
+  Voltbuilder offers an easy way to convert web projects into native apps, but
+  its pricing may not suit everyone. Capgo provides a cost-effective solution
+  for handling OTA updates with ease.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2024-09-09
-updated_at: 2024-09-09
-head_image: "/voltbuilder_alt.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2024-09-09T00:00:00.000Z
+updated_at: 2024-09-09T00:00:00.000Z
+head_image: /voltbuilder_alt.webp
 head_image_alt: Voltbuilder alternative illustration
 tag: Alternatives
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 Voltbuilder is a cloud-based platform that allows developers to convert their web projects into native mobile apps for Android and iOS using HTML, CSS, and JavaScript. It offers a range of features designed to simplify the app development process, including easy setup, automatic app building and uploading, and support for Apache Cordova plugins.

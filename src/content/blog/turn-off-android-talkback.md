@@ -1,16 +1,19 @@
 ---
-slug: "turn-off-android-talkback"
-title: 'How to Turn off and Use TalkBack on Android Devices'
-description: 'Step-by-step guide on enabling and navigating with TalkBack, the built-in Android screen reader for visually impaired users.'
+slug: turn-off-android-talkback
+title: How to Turn off and Use TalkBack on Android Devices
+description: >-
+  Step-by-step guide on enabling and navigating with TalkBack, the built-in
+  Android screen reader for visually impaired users.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2023-11-27
-updated_at: 2023-11-27
-head_image: "/android_talkback.webp"
-head_image_alt: "Android TalkBack Activation"
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2023-11-27T00:00:00.000Z
+updated_at: 2023-11-27T00:00:00.000Z
+head_image: /android_talkback.webp
+head_image_alt: Android TalkBack Activation
 tag: Android
 published: true
-next_blog: ""
+locale: en
+next_blog: ''
 ---
 
 TalkBack is an essential feature for visually impaired users, integrated into Android devices. It's a gesture-based screen reader that vocalizes the content of your screen, assisting in navigation and interaction with different elements. Here's a comprehensive guide on how to enable and use TalkBack.

@@ -1,17 +1,19 @@
 ---
-slug: "ionic-capacitor-push-notifications-firebase"
+slug: ionic-capacitor-push-notifications-firebase
 title: 'Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide'
-description: 'Learn how to integrate push notifications in your Ionic Capacitor app using Firebase, with step-by-step instructions for both Android and iOS platforms.'
+description: >-
+  Learn how to integrate push notifications in your Ionic Capacitor app using
+  Firebase, with step-by-step instructions for both Android and iOS platforms.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-12-14
-updated_at: 2023-06-29
-head_image: "/push_notif.webp"
-head_image_alt: "Ionic Capacitor Push Notifications with Firebase"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-12-14T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /push_notif.webp
+head_image_alt: Ionic Capacitor Push Notifications with Firebase
 tag: tutorial
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 In this tutorial, we will integrate push notifications in an Ionic Capacitor app using Firebase. You don't need a specific service for this, but you do need to configure several things beforehand. Firebase is an excellent choice since it's required for Android, and you can easily use it to send notifications without using the database.

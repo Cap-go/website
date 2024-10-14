@@ -1,18 +1,19 @@
 ---
-
-slug: "create-react-mobile-apps-with-capacitor"
+slug: create-react-mobile-apps-with-capacitor
 title: Building Mobile Apps with React and Capacitor
-description: Learn how to build a mobile app using React, Capacitor, and enhance the native UI with Konsta UI.
+description: >-
+  Learn how to build a mobile app using React, Capacitor, and enhance the native
+  UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-02-21
-updated_at: 2023-03-10
-head_image: "/react_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-02-21T00:00:00.000Z
+updated_at: 2023-03-10T00:00:00.000Z
+head_image: /react_capacitor.webp
 head_image_alt: React and Capacitor illustration
 tag: Tutorial
 published: true
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+locale: en
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 In this tutorial, we'll begin with a new [React](https://reactjs.org/) app and transition to native mobile development using Capacitor. Optionally, you can also add [Konsta UI](https://konstaui.com/) for an improved mobile UI with Tailwind CSS.
