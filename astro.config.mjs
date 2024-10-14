@@ -43,6 +43,9 @@ export default defineConfig({
       favicon: '/favicon.svg',
       logo: { src: './logo.svg' },
       customCss: ['./src/css/global.css'],
+      components: {
+        LanguageSelect: './src/components/LanguageSelect.astro',
+      },
       editLink: {
         baseUrl: 'https://github.com/Cap-go/website/edit/main/',
       },
