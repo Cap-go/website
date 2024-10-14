@@ -66,7 +66,9 @@ const showReadme = ref(1)
         </div>
       </div>
     </div>
-    <div v-if="props.tutorial" id="tutorial" :class="showReadme !== 1 ? 'hidden' : 'block'" class="prose w-full px-10 lg:max-w-6xl xl:px-0" v-html="props.tutorial" />
+    <div :class="showReadme !== 1 ? 'hidden' : 'block'" id="tutorial" v-if="props.tutorial">
+      <div class="prose w-full px-10 lg:max-w-6xl xl:px-0" v-html="props.tutorial" />
+    </div>
   </div>
 </template>
 
