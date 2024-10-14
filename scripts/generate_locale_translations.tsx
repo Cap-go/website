@@ -20,11 +20,11 @@ for (const lang of locales) {
   const failedTranslations: { [key: string]: string } = {}
   for (let i = 0; i < keys.length; i += batchSize) {
     const batchKeys = keys.slice(i, i + batchSize)
-    const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang).catch(() => null)))
+    const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang)))
     for (let j = 0; j < batchKeys.length; j++) {
-      if (translations[j] === null) {
+      if (translations[j] === null) 
         failedTranslations[batchKeys[j]] = data[batchKeys[j]]
-      } else {
+       else {
         const tmp = { [batchKeys[j]]: translations[j] }
         fs.appendFileSync(newLocalePath, dump(tmp).replaceAll('1$', '$1'), 'utf8')
       }
@@ -36,7 +36,7 @@ for (const lang of locales) {
     console.log(`Retrying failed translations for ${lang}.yml...`)
     for (let i = 0; i < failedKeys.length; i += batchSize) {
       const batchKeys = failedKeys.slice(i, i + batchSize)
-      const translations = await Promise.all(batchKeys.map((key) => translateText(failedTranslations[key], lang).catch(() => null)))
+      const translations = await Promise.all(batchKeys.map((key) => translateText(failedTranslations[key], lang)))
       for (let j = 0; j < batchKeys.length; j++) {
         if (translations[j] !== null) {
           const tmp = { [batchKeys[j]]: translations[j] }
