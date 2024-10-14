@@ -1,8 +1,8 @@
-import { locales } from '../src/services/locale'
 import { execSync } from 'child_process'
 import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
+import { locales } from '../src/services/locale'
 
 const newLocale = 'fr'
 

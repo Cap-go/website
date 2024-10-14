@@ -1,18 +1,19 @@
 ---
-slug: "self-hosted-live-updates"
+slug: self-hosted-live-updates
 title: Self-hosted Live Updates
-description: I'm excited to announce Self-hosted Live Updates, the next iteration of Capgo’s Live Updates!
+description: >-
+  I'm excited to announce Self-hosted Live Updates, the next iteration of
+  Capgo’s Live Updates!
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-12-03
-updated_at: 2023-06-29
-head_image: "/self_hosted.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-12-03T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /self_hosted.webp
 head_image_alt: Self hosted updates
 tag: Solution
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 I am delighted to announce the release of Self-hosted Live Updates, which represents the latest evolution of Capgo's Live Updates.

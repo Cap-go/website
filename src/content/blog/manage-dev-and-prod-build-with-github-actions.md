@@ -1,18 +1,19 @@
 ---
-slug: "manage-dev-and-prod-build-with-github-actions"
+slug: manage-dev-and-prod-build-with-github-actions
 title: Manage development and production build with GitHub actions
-description: Use Capgo to release your devbuild to specific channel, and let your team try your Capacitor Ionic app, without waiting Apple and Google review 
+description: >-
+  Use Capgo to release your devbuild to specific channel, and let your team try
+  your Capacitor Ionic app, without waiting Apple and Google review
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-06-16
-updated_at: 2023-06-29
-head_image: "/capgo_ci-cd-illustration.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-06-16T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Channel builds illustration
 tag: CI/CD
 published: true
 locale: en
-next_blog: "how-to-send-specific-version-to-users"
-
+next_blog: how-to-send-specific-version-to-users
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with a little tweak to any other CI/CD platform.
 

@@ -1,19 +1,19 @@
 ---
-
-slug: "vue-mobile-app-capacitor"
+slug: vue-mobile-app-capacitor
 title: Building Mobile Apps with Vue and Capacitor
-description: Learn how to create a mobile app using Vue, Capacitor, and optionally enhance the UI with Konsta UI.
+description: >-
+  Learn how to create a mobile app using Vue, Capacitor, and optionally enhance
+  the UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-08
-updated_at: 2023-06-29
-head_image: "/vue_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-08T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /vue_capacitor.webp
 head_image_alt: Vue and Capacitor illustration
 tag: Tutorial
 published: true
 locale: en
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 In this tutorial, we'll guide you through the process of converting a Vue web application into a native mobile app using Capacitor. Optionally, you can also enhance your mobile UI with Konsta UI, a Tailwind CSS-based mobile UI library.

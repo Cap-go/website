@@ -1,9 +1,9 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
+import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
-import { createSpinner } from 'nanospinner'
 
 const batchSize = 20
 const contentDirectory = join(process.cwd(), 'src', 'content')
@@ -70,7 +70,7 @@ for (const lang of languages) {
   for (let i = 0; i < blogFiles.length; i += batchSize) {
     const batch = blogFiles.slice(i, i + batchSize)
     const promises = []
-    promises.push(...batch.map(file => processFile(file)))
+    promises.push(...batch.map((file) => processFile(file)))
     await Promise.all(promises)
     await new Promise((resolve) => setTimeout(resolve, 1000))
   }

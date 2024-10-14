@@ -1,18 +1,19 @@
 ---
-slug: "automatic-capacitor-android-build-gitlab"
+slug: automatic-capacitor-android-build-gitlab
 title: Automatic Capacitor Android build with GitLab
-description: How to set up a CI/CD pipeline for your Android Ionic app using fastlane and GitLab in 5 mins
+description: >-
+  How to set up a CI/CD pipeline for your Android Ionic app using fastlane and
+  GitLab in 5 mins
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-27
-updated_at: 2023-09-27
-head_image: "/andriod_app_gitlab.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-27T00:00:00.000Z
+updated_at: 2023-09-27T00:00:00.000Z
+head_image: /andriod_app_gitlab.webp
 head_image_alt: Fastlane Google play GitLab illustration
 tag: CI/CD
 published: true
 locale: en
-next_blog: 
-
+next_blog: null
 ---
 
 ## Prerequisites

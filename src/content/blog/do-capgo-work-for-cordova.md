@@ -1,18 +1,17 @@
 ---
-slug: "do-capgo-work-for-cordova"
-title: "Why Capgo Doesn't Support Cordova: Upgrading Your App to access live Updates"
-description: In this guide, i will share you my experience with Capgo and Cordova.
+slug: do-capgo-work-for-cordova
+title: 'Why Capgo Doesn''t Support Cordova: Upgrading Your App to access live Updates'
+description: 'In this guide, i will share you my experience with Capgo and Cordova.'
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-01-29
-updated_at: 2023-01-29
-head_image: "/cordova.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-01-29T00:00:00.000Z
+updated_at: 2023-01-29T00:00:00.000Z
+head_image: /cordova.webp
 head_image_alt: Caorodva Dev looking for update they app
 tag: Migration
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 If you're looking for a robust and modern app development platform, then Capacitor is the perfect solution. Unlike Cordova, which is an aging and outdated platform, Capacitor leverages the latest in native platform and language evolution to deliver the best possible user experience.

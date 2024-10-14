@@ -1,18 +1,17 @@
 ---
-slug: "open-source-licecing"
+slug: open-source-licecing
 title: Understanding Open-Source Software Licenses
-description: 
+description: null
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-18
-updated_at: 2023-09-18
-head_image: "/open_source_licence.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-18T00:00:00.000Z
+updated_at: 2023-09-18T00:00:00.000Z
+head_image: /open_source_licence.webp
 head_image_alt: Open Source Licence
 tag: Open Source
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 When it comes to open-source software licenses, there are two broad categories. Some licenses fall under the copyleft license category, while others are permissive open source licenses.

@@ -5,6 +5,7 @@ import { getSlug } from '@/services/github'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 import { onMounted, ref } from 'vue'
 
@@ -29,7 +30,7 @@ onMounted(() => {
         <a
           v-for="item in plugins"
           :key="item.href"
-          :href="item.href !== 'N/A' ? `/plugins/${getSlug(item.href)}/` : '#'"
+          :href="item.href !== 'N/A' ? getRelativeLocaleUrl(props.locale, `plugins/${getSlug(item.href)}`) : '#'"
           class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
         >
           <div class="flex flex-col px-5 py-3">

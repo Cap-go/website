@@ -1,17 +1,21 @@
 ---
-slug: "cordova-hybrid-app-development"
+slug: cordova-hybrid-app-development
 title: 'Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy'
-description: 'Dive deep into the world of Apache Cordova. Learn how Cordova empowers developers to build cross-platform mobile apps using web technologies like HTML, CSS, and JavaScript. Explore its history, benefits, and compare it with alternatives like Capacitor.'
+description: >-
+  Dive deep into the world of Apache Cordova. Learn how Cordova empowers
+  developers to build cross-platform mobile apps using web technologies like
+  HTML, CSS, and JavaScript. Explore its history, benefits, and compare it with
+  alternatives like Capacitor.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2024-06-02
-updated_at: 2024-06-14
-head_image: "/what-is-cordova-phone-gap.webp"
-head_image_alt: "Diagram explaining the difference between hybrid and native apps."
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2024-06-02T00:00:00.000Z
+updated_at: 2024-06-14T00:00:00.000Z
+head_image: /what-is-cordova-phone-gap.webp
+head_image_alt: Diagram explaining the difference between hybrid and native apps.
 tag: cordova
 published: true
 locale: en
-next_blog: ""
+next_blog: ''
 ---
 
 ## Demystifying Apache Cordova: A Comprehensive Guide for Hybrid App Development

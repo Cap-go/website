@@ -25,7 +25,10 @@ this will trigger the update cycle as usual without the user interaction.
 	"plugins": {
 		"CapacitorUpdater": {
 			"directUpdate": true,
-		}
+		},
+    "SplashScreen": {
+      "launchAutoHide": false,
+    }
 	}
 }
 ```

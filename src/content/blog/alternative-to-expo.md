@@ -1,18 +1,20 @@
 ---
-slug: "alternative-to-expo"
+slug: alternative-to-expo
 title: Alternative to Expo Live Update
-description: Looking for a mobile app development platform that offers the convenience of Expo's live updates without the limitation of being tied to React Native? Check out Capgo.
+description: >-
+  Looking for a mobile app development platform that offers the convenience of
+  Expo's live updates without the limitation of being tied to React Native?
+  Check out Capgo.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-12-14
-updated_at: 2023-06-29
-head_image: "/expo_alternative.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-12-14T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /expo_alternative.webp
 head_image_alt: Expo alternative illustration
 tag: Alternatives
 published: true
 locale: en
-next_blog: ""
-
+next_blog: ''
 ---
 
 Expo Live Update is a feature of the Expo platform that allows developers to deploy updates to their app in real-time, without requiring users to download a new version of the app. This is similar to the live update feature of Capgo, which allows developers to quickly and easily update their app's content and functionality without forcing users to go through the process of downloading and installing an update.

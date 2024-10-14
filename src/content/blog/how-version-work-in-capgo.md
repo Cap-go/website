@@ -1,18 +1,19 @@
 ---
-slug: "how-version-work-in-capgo"
+slug: how-version-work-in-capgo
 title: How version work in Capgo
-description: Understand how Capgo manage versions in your Capacitor app, and use it at best. Learn the meaning of major, minor, patch.
+description: >-
+  Understand how Capgo manage versions in your Capacitor app, and use it at
+  best. Learn the meaning of major, minor, patch.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-08-25
-updated_at: 2023-06-29
-head_image: "/versionning.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-08-25T00:00:00.000Z
+updated_at: 2023-06-29T00:00:00.000Z
+head_image: /versionning.webp
 head_image_alt: Capgo bundle version system
 tag: Tutorial
 published: true
 locale: en
-next_blog: "how-to-release-major-version-in-capgo"
-
+next_blog: how-to-release-major-version-in-capgo
 ---
 
 Capgo uses 2 main variables to manage versions in your Capacitor app:
