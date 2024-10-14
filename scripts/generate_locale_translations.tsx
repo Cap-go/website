@@ -19,7 +19,7 @@ for (const lang of locales) {
   const keys = Object.keys(data)
   const failedTranslations: { [key: string]: string } = {}
   for (let i = 0; i < keys.length; i += batchSize) {
-    const batchKeys = keys.slice(i, i + batchSize)
+    const batchKeys = keys.slice(i, Math.min(i + batchSize, keys.length))
     const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang)))
     for (let j = 0; j < batchKeys.length; j++) {
       if (translations[j] === null) failedTranslations[batchKeys[j]] = data[batchKeys[j]]
@@ -34,7 +34,7 @@ for (const lang of locales) {
   if (failedKeys.length > 0) {
     console.log(`Retrying failed translations for ${lang}.yml...`)
     for (let i = 0; i < failedKeys.length; i += batchSize) {
-      const batchKeys = failedKeys.slice(i, i + batchSize)
+      const batchKeys = failedKeys.slice(i, Math.min(i + batchSize, failedKeys.length))
       const translations = await Promise.all(batchKeys.map((key) => translateText(failedTranslations[key], lang)))
       for (let j = 0; j < batchKeys.length; j++) {
         if (translations[j] !== null) {
