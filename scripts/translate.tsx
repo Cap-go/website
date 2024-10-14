@@ -24,7 +24,7 @@ export const translateText = async (text: string, lang: string) => {
   })
   if (response.status !== 200) {
     console.error(response.statusText)
-    process.exit(1)
+    return null
   }
   const data = await response.json()
   return data.choices[0].message.content.trim()

@@ -36,21 +36,6 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
       )
     }
     <script is:inline defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js"></script>
-    {
-      !isLocalhost && (
-        <script>
-          if ('serviceWorker' in navigator)
-          {navigator.serviceWorker
-            .register('/sw.js')
-            .then(function (registration) {
-              console.log('SW registration succeeded with scope:', registration.scope)
-            })
-            .catch(function (e) {
-              console.log('SW registration failed with error:', e)
-            })}
-        </script>
-      )
-    }
     {!isLocalhost && <MessengerAffiliateVue client:only="vue" />}
   </body>
 </html>
