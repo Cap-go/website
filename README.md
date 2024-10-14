@@ -82,7 +82,7 @@ The [translations.tsx](./scripts/translations.tsx) script is used to translate t
 
 Now, let's say that you want to update translations or add a new locale, `fr`.
 
-First, make sure to update the files `scripts/setup_new_locale.tsx` and `scripts/generate_translation_ts_file.tsx` to have the latest locale values as the following respectively.
+First, make sure to update the files `scripts/setup_new_locale.tsx` and `scripts/generate_locale_translations.tsx` to have the latest locale values as the following respectively.
 
 ```tsx
 const newLocale = 'fr'
