@@ -1227,3 +1227,5 @@ privacy_changes_to_policy_review: "You are advised to review this Privacy Policy
 privacy_contact_us_title: "Contact Us"
 privacy_contact_us_description: "If you have any questions about this Privacy Policy, You can contact us:"
 privacy_contact_us_website: "By visiting this page on our website: $1"
+website_title: Capgo - Capacitor Live update
+website_description: "Send and manage updates in realtime for your capacitor app without store hassle, 5 min to install Over-the-Air (OTA) updates. Use channels to send to specific groups."
