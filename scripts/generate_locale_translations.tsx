@@ -22,9 +22,8 @@ for (const lang of locales) {
     const batchKeys = keys.slice(i, i + batchSize)
     const translations = await Promise.all(batchKeys.map((key) => translateText(data[key], lang)))
     for (let j = 0; j < batchKeys.length; j++) {
-      if (translations[j] === null) 
-        failedTranslations[batchKeys[j]] = data[batchKeys[j]]
-       else {
+      if (translations[j] === null) failedTranslations[batchKeys[j]] = data[batchKeys[j]]
+      else {
         const tmp = { [batchKeys[j]]: translations[j] }
         fs.appendFileSync(newLocalePath, dump(tmp).replaceAll('1$', '$1'), 'utf8')
       }
