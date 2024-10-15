@@ -249,9 +249,14 @@ const navigation = {
               aria-labelledby="options-menu"
             >
               <div class="py-1" role="none">
-                <a v-for="item in locales" :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{{
-                  item.toUpperCase()
-                }}</a>
+                <a
+                  v-for="item in locales"
+                  :href="getRelativeLocaleUrl(item.toLowerCase(), currentPath)"
+                  role="menuitem"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  {{ item.toUpperCase() }}
+                </a>
               </div>
             </div>
           </div>
