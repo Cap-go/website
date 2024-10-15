@@ -1,17 +1,17 @@
 ---
-slug: "a-brand-new-organization-system"
+slug: a-brand-new-organization-system
 title: A brand new organization system
 description: A backstory on how the capgo team added a organization system
 author: WcaleNieWolny
-author_url: https://github.com/WcaleNieWolny/WcaleNieWolny
-created_at: 2024-04-15
-updated_at: 2024-04-15
-head_image: "/organization_system_blog.webp"
+author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
+created_at: 2024-04-15T00:00:00.000Z
+updated_at: 2024-04-15T00:00:00.000Z
+head_image: /organization_system_blog.webp
 head_image_alt: Capgo organization system illusatration
 tag: Story
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 ## Introduction

@@ -101,6 +101,5 @@ export function createMeta(title: string, description: string, image: string | n
       },
     )
   }
-  // console.log('base', base)
   return base
 }

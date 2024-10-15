@@ -1,17 +1,19 @@
 ---
-slug: "automatic-capacitor-android-build-github-action"
+slug: automatic-capacitor-android-build-github-action
 title: Automatic Capacitor Android build with GitHub actions
-description: How to set up a CI/CD pipeline for your Android Ionic app using fastlane and GitHub Actions in 5 mins (2022)
+description: >-
+  How to set up a CI/CD pipeline for your Android Ionic app using fastlane and
+  GitHub Actions in 5 mins (2022)
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2022-10-27
-updated_at: 2022-10-27
-head_image: "/fastlane_android.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2022-10-27T00:00:00.000Z
+updated_at: 2022-10-27T00:00:00.000Z
+head_image: /fastlane_android.webp
 head_image_alt: Fastlane Google play GitHub action illustration
 tag: CI/CD
 published: true
-next_blog: "automatic-capacitor-ios-build-github-action"
-
+locale: en
+next_blog: automatic-capacitor-ios-build-github-action
 ---
 
 ## Continuous Delivery for Android using Fastlane and GitHub Actions

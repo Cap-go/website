@@ -1,17 +1,19 @@
 ---
-slug: "basic-js-css-config-for-native-app-look"
+slug: basic-js-css-config-for-native-app-look
 title: Basic JS and CSS Configurations for a Native App Look
-description: Learn how to configure your web app with basic JavaScript and CSS settings to make it look and feel like a native app, including disabling hover effects.
+description: >-
+  Learn how to configure your web app with basic JavaScript and CSS settings to
+  make it look and feel like a native app, including disabling hover effects.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-05
-updated_at: 2023-06-05
-head_image: "/native_app_look.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-05T00:00:00.000Z
+updated_at: 2023-06-05T00:00:00.000Z
+head_image: /native_app_look.webp
 head_image_alt: Native app look illustration
 tag: Web Development
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 # Basic JS and CSS Configurations for a Native App Look

@@ -1,17 +1,19 @@
 ---
-slug: "cross-platform-mobile-app-development-guide-2024" 
-title: 'The Ultimate Guide to Cross-Platform Mobile App Development in 2024'
-description: 'Learn the best practices and frameworks for cross-platform mobile app development in 2024. Build iOS, Android and web apps from a single codebase.'
+slug: cross-platform-mobile-app-development-guide-2024
+title: The Ultimate Guide to Cross-Platform Mobile App Development in 2024
+description: >-
+  Learn the best practices and frameworks for cross-platform mobile app
+  development in 2024. Build iOS, Android and web apps from a single codebase.
 author: Martin Donadieu
-author_url: https://twitter.com/martindonadieu
-created_at: 2024-06-15 
-updated_at: 2024-06-15
-head_image: "/cross-platform-app-dev-2024.webp"
-head_image_alt: Cross-platform mobile app development 
+author_url: 'https://twitter.com/martindonadieu'
+created_at: 2024-06-15T00:00:00.000Z
+updated_at: 2024-06-15T00:00:00.000Z
+head_image: /cross-platform-app-dev-2024.webp
+head_image_alt: Cross-platform mobile app development
 tag: cross-platform
 published: true
-next_blog: "top-cross-platform-frameworks-compared-2024"
-
+locale: en
+next_blog: top-cross-platform-frameworks-compared-2024
 ---
 
 ## Why Cross-Platform Mobile App Development Matters in 2024

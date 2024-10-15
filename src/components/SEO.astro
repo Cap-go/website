@@ -1,16 +1,16 @@
 ---
-import { join } from 'node:path'
+import { baseDomain, structuredData } from '@/config/app'
+import { appName } from '@/constants'
+import translations from '@/services/translations'
 import { AstroFont } from 'astro-font'
-import { structuredData } from '../config/app'
-import { appDescription, appName } from '../constants'
-import { baseDomain, useRuntimeConfig } from '../config/app'
+import { join } from 'node:path'
 
 const {
   ldJSON = structuredData,
-  title = appName,
-  description = appDescription,
+  title = translations['website_title'][Astro.locals.locale],
+  description = translations['website_description'][Astro.locals.locale],
   url = Astro.url,
-  image = `${useRuntimeConfig().public.baseUrl}/capgo_banner.png`,
+  image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
   audio = null,
@@ -20,9 +20,7 @@ let displayDescription = description
 
 const descSize = 170
 
-if (description.length > descSize) {
-  displayDescription = `${description.substring(0, descSize - 3)}...`
-}
+if (description.length > descSize) displayDescription = `${description.substring(0, descSize - 3)}...`
 
 const image_unsecure = image.replace('https://', 'http://')
 const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
@@ -124,12 +122,12 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="twitter:title" content={title} />
 <meta property="twitter:image" content={image} />
 <meta property="twitter:app:id:iphone" content={appName} />
-<meta property="twitter:app:name:iphone" content={appName} />
+<meta property="twitter:app:name:iphone" content="1602316563" />
 <meta property="twitter:creator" content="@martindonadieu" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:description" content={displayDescription} />
 <meta property="twitter:app:id:googleplay" content="ee.forgr.capgo" />
-<meta property="twitter:app:name:googleplay" content="ee.forgr.capgo" />
+<meta property="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-<script hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />
+<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />

@@ -1,17 +1,19 @@
 ---
-slug: "self-hosted-capgo"
+slug: self-hosted-capgo
 title: Self hosted Capgo
-description:  Self-hosting Capgo allows you to deploy Capacitor live updates to your users without having to use the Capgo cloud service.
+description: >-
+  Self-hosting Capgo allows you to deploy Capacitor live updates to your users
+  without having to use the Capgo cloud service.
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-20
-updated_at: 2023-09-20
-head_image: "/self-hosted-capgo.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-20T00:00:00.000Z
+updated_at: 2023-09-20T00:00:00.000Z
+head_image: /self-hosted-capgo.webp
 head_image_alt: self-hosted capgo
 tag: Solution
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 This article provides a step-by-step guide on how to self-host Capgo, as well as a discussion of the benefits and challenges of self-hosting.

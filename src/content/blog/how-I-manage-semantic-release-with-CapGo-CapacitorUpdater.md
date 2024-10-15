@@ -1,15 +1,17 @@
 ---
-slug: "how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater"
+slug: how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater
 title: How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater
-description: This is how I set up semantic release to manage releases of my applications which use CapGo CapacitorUpdater
+description: >-
+  This is how I set up semantic release to manage releases of my applications
+  which use CapGo CapacitorUpdater
 author: Rupert Barrow
-author_url: https://linkedin.com/in/rbarrow
-created_at: 2024-09-22
-updated_at: 2024-09-22
+author_url: 'https://linkedin.com/in/rbarrow'
+created_at: 2024-09-22T00:00:00.000Z
+updated_at: 2024-09-22T00:00:00.000Z
 tag: Case Study
 published: true
-next_blog: "xxx"
-
+locale: en
+next_blog: ''
 ---
 
 # How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater
@@ -98,7 +100,7 @@ Finally, how does this all fit together ?
 ### Semantic release automation with Github Actions
 
 The beauty of semantic release is that the deployment automation, in the form of a Github Action workflow, is very simple. This will look very similar on other CI/CD platforms .
-```YAML
+```yaml
 # ./github/workflows/release.yml
 
 name: Release
@@ -136,7 +138,7 @@ Update your `CAPGO_APPID` here.
 
 The behaviour of semantic release is set in its `.releaserc.json` configuration file.
 Here are my settings, explained below :
-```JSON
+```json
 // .releaserc.json
 
 {

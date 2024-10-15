@@ -1,18 +1,19 @@
 ---
-
-slug: "angular-mobile-app-capacitor"
+slug: angular-mobile-app-capacitor
 title: Building Mobile Apps with Angular and Capacitor
-description: Learn how to create a mobile app with Angular, Capacitor, and enhance the native UI with Konsta UI.
+description: >-
+  Learn how to create a mobile app with Angular, Capacitor, and enhance the
+  native UI with Konsta UI.
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2023-06-06
-updated_at: 2023-06-06
-head_image: "/angular_capacitor.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2023-06-06T00:00:00.000Z
+updated_at: 2023-06-06T00:00:00.000Z
+head_image: /angular_capacitor.webp
 head_image_alt: Angular and Capacitor illustration
 tag: Tutorial
 published: true
-next_blog: "update-your-capacitor-apps-seamlessly-using-capacitor-updater"
-
+locale: en
+next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
 In this tutorial, we'll begin with a new [Angular](https://angular.io/) app and transition into the native mobile app realm using Capacitor. Optionally, you can also add [Konsta UI](https://konstaui.com/) for an improved mobile UI with Tailwind CSS.

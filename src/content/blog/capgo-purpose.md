@@ -1,17 +1,19 @@
 ---
-slug: "capgo-purpose"
+slug: capgo-purpose
 title: Purpose of Capgo
-description: The blog article should be described as a comprehensive guide for developers on how to use Capgo to manage Capacitor app updates and tests
+description: >-
+  The blog article should be described as a comprehensive guide for developers
+  on how to use Capgo to manage Capacitor app updates and tests
 author: Anik Dhabal Babu
-author_url: https://x.com/anikdhabal
-created_at: 2023-09-10
-updated_at: 2023-09-10
-head_image: "/capgo_banner.webp"
+author_url: 'https://x.com/anikdhabal'
+created_at: 2023-09-10T00:00:00.000Z
+updated_at: 2023-09-10T00:00:00.000Z
+head_image: /capgo_banner.webp
 head_image_alt: capgo banner
 tag: SOLUTION
 published: true
-next_blog: ""
-
+locale: en
+next_blog: ''
 ---
 
 ## Overview

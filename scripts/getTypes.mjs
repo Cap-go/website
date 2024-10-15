@@ -1,6 +1,6 @@
+import { exec as execCb } from 'child_process'
 import util from 'util'
 import { supa_url } from './utils.mjs'
-import { exec as execCb } from 'child_process'
 
 const exec = util.promisify(execCb)
 const supaId = supa_url.split('//')[1].split('.')[0]

@@ -1,17 +1,19 @@
 ---
-slug: "automatic-capacitor-ios-build-codemagic"
+slug: automatic-capacitor-ios-build-codemagic
 title: Automatic Capacitor IOS build with Codemagic
-description: How to set up a CI/CD pipeline for your IOS Ionic app using Codemagic and Codemagic in 5 mins (2024)
+description: >-
+  How to set up a CI/CD pipeline for your IOS Ionic app using Codemagic and
+  Codemagic in 5 mins (2024)
 author: Martin Donadieu
-author_url: https://x.com/martindonadieu
-created_at: 2024-07-24
-updated_at: 2024-07-24
-head_image: "/Codemagic_ios.webp"
+author_url: 'https://x.com/martindonadieu'
+created_at: 2024-07-24T00:00:00.000Z
+updated_at: 2024-07-24T00:00:00.000Z
+head_image: /Codemagic_ios.webp
 head_image_alt: Codemagic testflight illustration
 tag: CI/CD
 published: true
-next_blog: "automatic-capacitor-android-build-codemagic"
-
+locale: en
+next_blog: automatic-capacitor-android-build-codemagic
 ---
 
 
