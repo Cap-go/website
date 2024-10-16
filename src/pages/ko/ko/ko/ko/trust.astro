@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueTrust from '@/vue-pages/trust.vue'
+import translations from '@/services/translations'
+
+const title = [Astro.locals.runtimeConfig.public.brand, translations['trust'][Astro.locals.locale]].join(' | ')
+const description = translations['consulting_description'][Astro.locals.locale]
+
+const content = { title, description }
+---
+
+<Layout content={content}><VueTrust locale={Astro.locals.locale} client:load /></Layout>

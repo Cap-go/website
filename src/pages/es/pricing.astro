@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import translations from '@/services/translations'
+import VuePricing from '@/vue-pages/pricing.vue'
+
+const title = [Astro.locals.runtimeConfig.public.brand, translations['pricing'][Astro.locals.locale]].join(' | ')
+const description = translations['pricing_description'][Astro.locals.locale]
+
+const content = { title, description }
+---
+
+<Layout content={content}><VuePricing locale={Astro.locals.locale} client:load /></Layout>

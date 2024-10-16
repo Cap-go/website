@@ -1,0 +1,144 @@
+---
+import type { Plugin } from '@/config/plugins'
+import { actions } from '@/config/plugins'
+import Layout from '@/layouts/Layout.astro'
+import { fetchWithToken, getSlug } from '@/services/github'
+import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
+import type { GetStaticPaths } from 'astro'
+import { marked } from 'marked'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  let tutMap: any = {}
+  const promises: any[] = []
+  let processTuts: Plugin[] = []
+  let tuts = await Astro.glob('@/content/ko/plugins-tutorials/**/*.md')
+  for (let i of tuts) {
+    // Get the slug from the file path
+    const slug = getSlug(i.file).replace('.md', '')
+    // Get the content of the file
+    tutMap[slug] = i.rawContent()
+    // Get the tut from the actions set
+    const findTut = actions.find((item) => getSlug(item.href) === slug)
+    // If found, push it the parent array
+    if (findTut && i.frontmatter['published'] !== false) processTuts.push(findTut)
+  }
+  let plugins: Plugin[] = processTuts
+  for (let index = 0; index < processTuts.length; index++) {
+    let item = processTuts[index]
+    plugins[index].githubStars = 0
+    plugins[index].npmDownloads = 0
+    const tmp = marked.parse(`# ${item.title}\n\n${item.description}`)
+    if (typeof tmp !== 'string') plugins[index].readme = await tmp
+    else plugins[index].readme = tmp
+    // Fetch npm package details to get npm downloads
+    const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${item.name}`
+    promises.push(
+      fetch(npmApiUrl)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((res) => {
+          if (res) plugins[index].npmDownloads = res.downloads
+        })
+        .catch(() => {}),
+    )
+    // Fetch npm package details to get npm modified
+    const registryNpmApiUrl = `https://registry.npmjs.org/${item.name}`
+    promises.push(
+      fetch(registryNpmApiUrl)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((res) => {
+          if (res) {
+            plugins[index].datePublished = res.time.created
+            plugins[index].dateModified = res.time.modified
+          }
+        })
+        .catch(() => {}),
+    )
+    // Extract the GitHub repository owner and name from the URL
+    const githubUrlParts = item.href.split('/')
+    const githubOwner = githubUrlParts[3]
+    const githubRepo = githubUrlParts[4]
+    // Fetch GitHub repository details to get GitHub stars
+    const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
+    promises.push(
+      fetch(githubApiUrl)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((res) => {
+          if (res) {
+            plugins[index].githubStars = res.stargazers_count
+          }
+        })
+        .catch(() => {}),
+    )
+    // Update the item with fetched data
+    const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
+    promises.push(
+      fetchWithToken(readmeApiUrl)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((res) => {
+          if (res) {
+            const tmp = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
+            if (typeof tmp !== 'string') tmp.then((result) => (plugins[index].readme = result))
+            else plugins[index].readme = tmp
+          }
+        })
+        .catch(() => {}),
+    )
+  }
+  await Promise.all(promises)
+  return plugins.map((item) => {
+    let slug = getSlug(item.href)
+    return {
+      params: {
+        id: slug,
+      },
+      props: {
+        item,
+        tutorial: tutMap[slug],
+      },
+    }
+  })
+}
+
+const plugin = Astro.props.item as Plugin
+let tutorial = Astro.props.tutorial
+
+if (tutorial && typeof tutorial === 'string') {
+  const tmp = marked.parse(tutorial)
+  if (typeof tmp !== 'string') plugin['tutorial'] = await tmp
+  else plugin['tutorial'] = tmp
+}
+
+if (!plugin || !plugin.title) return new Response(null, { status: 404 })
+
+const { id } = Astro.params
+
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
+
+if (plugin.title) content['title'] = plugin.title
+if (plugin.description) content['description'] = plugin.description
+
+content['ldJSON'] = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/plugins/${id}`,
+  },
+  headline: plugin.description,
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.webp`],
+  publisher: {
+    '@type': 'Organization',
+    name: 'Capgo',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
+    },
+  },
+  ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),
+  ...(plugin.hasOwnProperty('dateModified') && { dateModified: plugin.dateModified }),
+}
+---
+
+<Layout content={content}>
+  <VuePluginPDP locale={Astro.locals.locale} client:load {...plugin} />
+</Layout>

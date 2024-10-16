@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import translations from '@/services/translations'
+import VueTopkotlinapp from '@/vue-pages/top_kotlin_app.vue'
+
+const title = [Astro.locals.runtimeConfig.public.brand, translations['top_kotlin_apps_title'][Astro.locals.locale]].join(' | ')
+const description = translations['top_kotlin_apps'][Astro.locals.locale]
+
+const content = { title, description }
+---
+
+<Layout content={content}><VueTopkotlinapp locale={Astro.locals.locale} client:load /></Layout>

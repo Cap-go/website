@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import translations from '@/services/translations'
+import VueAbout from '@/vue-pages/about.vue'
+
+const title = [Astro.locals.runtimeConfig.public.brand, translations['about_capgo'][Astro.locals.locale]].join(' | ')
+const description = translations['about_capgo'][Astro.locals.locale]
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
+}
+---
+
+<Layout content={content}><VueAbout locale={Astro.locals.locale} client:load /></Layout>
