@@ -15,6 +15,7 @@ for (const lang of languages) {
   const langBlogDirectory = join(contentDirectory, lang, 'blog')
   if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
   const blogFiles = readdirSync(blogDirectory)
+  const failedTranslations: { [file: string]: boolean } = {}
   const processFile = async (file: string) => {
     const filePath = join(blogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
@@ -26,14 +27,17 @@ for (const lang of languages) {
     if (grayMatterJson.title) {
       const translatedTitle = await translateText(grayMatterJson.title, lang)
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
+      else failedTranslations[file] = true
     }
     if (grayMatterJson.description) {
       const translatedDescription = await translateText(grayMatterJson.description, lang)
       if (translatedDescription) grayMatterJson['description'] = translatedDescription
+      else failedTranslations[file] = true
     }
     if (grayMatterJson.head_image_alt) {
       const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
       if (translatedHeadImageAlt) grayMatterJson['head_image_alt'] = translatedHeadImageAlt
+      else failedTranslations[file] = true
     }
     grayMatterJson['locale'] = lang
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
@@ -50,12 +54,14 @@ for (const lang of languages) {
       if ((currentChunk + sentence).length > 4000) {
         const tmp = await translateText(currentChunk, lang)
         if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+        else failedTranslations[file] = true
         currentChunk = sentence
       } else currentChunk += sentence
     }
     if (currentChunk) {
       const tmp = await translateText(currentChunk, lang)
       if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+      else failedTranslations[file] = true
     }
     let translatedContent = readFileSync(destinationPath, 'utf8')
     codeBlocks.forEach((match, _) => {
@@ -73,5 +79,12 @@ for (const lang of languages) {
     promises.push(...batch.map((file) => processFile(file)))
     await Promise.all(promises)
     await new Promise((resolve) => setTimeout(resolve, 1000))
+  }
+  const failedFiles = Object.keys(failedTranslations)
+  if (failedFiles.length > 0) {
+    console.log(`Retrying failed translations for ${lang}...`)
+    for (const file of failedFiles) {
+      await processFile(file)
+    }
   }
 }
