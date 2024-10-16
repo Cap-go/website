@@ -131,5 +131,10 @@ export const translateTextDatpmt = async (text: string, lang: string) => {
   return await response.json()
 }
 
-export const translateText = translateTextAnthropic
+export const translateText = (text: string, lang: string) => {
+  if (process.env.ANTHROPIC_API_KEY) return translateTextAnthropic(text, lang)
+  if (process.env.OPENAI_API_KEY) return translateTextOpenAI(text, lang)
+  return translateTextDatpmt(text, lang)
+}
+
 export const translateTexts = translateTextsAnthropic
