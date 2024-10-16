@@ -4,7 +4,9 @@ import path from 'path'
 import { translateText } from './translate'
 
 const batchSize = 200
-const locales = ['fr']
+
+const localeArgIndex = process.argv.findIndex(arg => arg.startsWith('--locale='))
+const locales = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : ['fr']
 
 const localePath = path.join(process.cwd(), 'locales', 'en.yml')
 

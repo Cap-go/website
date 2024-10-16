@@ -41,7 +41,6 @@ const makeAnthropicRequest = async (body: any) => {
       },
       body: JSON.stringify(body),
     })
-
     if (response.status === 429) {
       const retryAfter = response.headers.get('Retry-After')
       console.log('Rate limit exceeded. Retrying after:', retryAfter)
@@ -51,12 +50,10 @@ const makeAnthropicRequest = async (body: any) => {
         return makeRequest()
       }
     }
-
     if (response.status !== 200) {
       console.error('Error Claude:', response.statusText, await response.json())
       return null
     }
-
     return response.json()
   }
 
@@ -96,11 +93,9 @@ export const translateTextsAnthropic = async (texts: string[], lang: string) => 
     })
     return data ? JSON.parse(data.content[0].text) as string[] : null
   }
-
   const results: string[] = []
   let currentBatch: string[] = []
   let currentTokens = 0
-
   for (const text of texts) {
     const textTokens = Math.ceil(text.length * TOKENS_PER_CHAR)
     if (currentTokens + textTokens > MAX_TOKENS) {
@@ -112,12 +107,10 @@ export const translateTextsAnthropic = async (texts: string[], lang: string) => 
     currentBatch.push(text)
     currentTokens += textTokens
   }
-
   if (currentBatch.length > 0) {
     const batchResult = await translateBatch(currentBatch)
     if (batchResult) results.push(...batchResult)
   }
-
   return results
 }
 
