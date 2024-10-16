@@ -23,7 +23,7 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
     }),
   })
   if (response.status !== 200) {
-    console.error(response.statusText)
+    console.error('Error Open AI:', response.statusText, await response.json())
     return null
   }
   const data = await response.json()
@@ -53,7 +53,7 @@ const makeAnthropicRequest = async (body: any) => {
     }
 
     if (response.status !== 200) {
-      console.error('Error:', response.statusText, await response.json())
+      console.error('Error Claude:', response.statusText, await response.json())
       return null
     }
 
@@ -67,7 +67,7 @@ export const translateTextAnthropic = async (text: string, lang: string) => {
   const data = await makeAnthropicRequest({
     max_tokens: 4000,
     model: 'claude-3-5-sonnet-20240620',
-    system: `Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links. when Capacitor is used it refers to the CapacitorJs so do not translate that.`,
+    system: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
     messages: [
       {
         role: 'user',

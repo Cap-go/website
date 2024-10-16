@@ -2,51 +2,41 @@
 locale: fr
 ---
 
-chantez @capgo/find-package-manager
+Chantez @capgo/find-package-manager
 
-Le package `@capgo/find-package-manager` est un outil utile pour déterminer quel gestionnaire de packages est utilisé dans un chemin donné. Cela peut être utile lorsque vous travaillez avec des projets qui utilisent différents gestionnaires de packages.
+Le package `@capgo/find-package-manager` est un outil pratique pour déterminer quel gestionnaire de paquets est utilisé dans un chemin donné. Cela peut être utile lors du travail avec des projets utilisant différents gestionnaires de paquets.
 
-Voici un tutoriel étape par étape sur la façon d'utiliser ce package :
+Voici un tutoriel étape par étape sur comment utiliser ce package :
 
-##Installation
+## Installation
 
-Tout d'abord, assurez-vous que Nodejs et npm sont installés sur votre machine. Ensuite, ouvrez votre terminal et exécutez la commande suivante pour installer le package `@capgo/find-package-manager` :
+Tout d'abord, assurez-vous d'avoir Nodejs et npm installés sur votre machine. Ensuite, ouvrez votre terminal et exécutez la commande suivante pour installer le package `@capgo/find-package-manager` :
 
-```
-npm install @capgo/find-package-manager
-```
+[[BLOC_DE_CODE]]
 
 ## Importer le package
 
 Une fois le package installé, vous pouvez l'importer dans votre code en utilisant la ligne suivante :
 
-```typescript
-import { findPackageManagerType } from '@capgo/find-package-manager'
-```
+[[BLOC_DE_CODE]]
 
-## Rechercher le type de gestionnaire de packages
+## Trouver le type de gestionnaire de paquets
 
-Pour trouver le type de gestionnaire de packages dans un chemin donné, vous pouvez utiliser la fonction `findPackageManagerType`. Voici un exemple :
+Pour trouver le type de gestionnaire de paquets dans un chemin donné, vous pouvez utiliser la fonction `findPackageManagerType`. Voici un exemple :
 
-```typescript
-console.log(findPackageManagerType())
-```
+[[BLOC_DE_CODE]]
 
-La fonction `findPackageManagerType` renvoie une valeur de chaîne indiquant le type de gestionnaire de packages utilisé. Elle peut renvoyer l'une des valeurs suivantes :
+La fonction `findPackageManagerType` retourne une valeur de chaîne indiquant le type de gestionnaire de paquets utilisé. Elle peut retourner l'une des valeurs suivantes :
 
-- `npm` : si npm est utilisé
-- `yarn` : si du fil est utilisé
-- `pnpm` : si pnpm est utilisé
-- `inconnu` : si le type du gestionnaire de packages ne peut pas être déterminé
+- `npm` : si npm est utilisé
+- `yarn` : si yarn est utilisé
+- `pnpm` : si pnpm est utilisé
+- `unknown` : si le type de gestionnaire de paquets ne peut pas être déterminé
 
-## Rassembler tout cela
+## Mettre le tout ensemble
 
-Voici un exemple complet d'utilisation du package `@capgo/find-package-manager` :
+Voici un exemple complet de comment utiliser le package `@capgo/find-package-manager` :
 
-```typescript
-import { findPackageManagerType } from '@capgo/find-package-manager'
+[[BLOC_DE_CODE]]
 
-console.log(findPackageManagerType()) // npm | yarn | pnpm | unknown
-```
-
-C'est ça! Vous pouvez maintenant utiliser le package `@capgo/find-package-manager` pour déterminer le type de gestionnaire de packages dans un chemin donné
+C'est tout ! Vous pouvez maintenant utiliser le package `@capgo/find-package-manager` pour déterminer le type de gestionnaire de paquets dans un chemin donné.

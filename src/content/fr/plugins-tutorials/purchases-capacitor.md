@@ -2,175 +2,92 @@
 locale: fr
 ---
 
-Tutoriel revenuecat/purchas-capacitor
+Tutoriel revenuecat/purchases-capacitor
 
-Ce didacticiel vous guidera tout au long du processus de mise en œuvre des achats et des abonnements intégrés dans votre application Ionic Capacitor à l'aide du package `@revenuecat/purchases-capacitor`.
+Ce tutoriel vous guidera à travers le processus de mise en œuvre des achats intégrés et des abonnements dans votre application Ionic Capacitor en utilisant le package `@revenuecat/purchases-capacitor`.
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir les éléments suivants :
+Avant de commencer, assurez-vous d'avoir ce qui suit :
 
-- Mise en place d'un projet Ionic Capacitor
+- Un projet Ionic Capacitor configuré
 - Un compte RevenueCat (inscrivez-vous sur https://apprevenuecatcom/signup)
-- Produits ou abonnements intégrés à l'application configurés dans vos comptes App Store (Apple App Store et/ou Google Play Store)
+- Des produits ou abonnements intégrés configurés dans vos comptes d'app store (Apple App Store et/ou Google Play Store)
 
-##Installation
+## Installation
 
-1 Ouvrez votre terminal ou votre invite de commande et accédez au répertoire de votre projet
+1 Ouvrez votre terminal ou invite de commande et naviguez jusqu'au répertoire de votre projet
 
-2 Exécutez la commande suivante pour installer le package :
+2 Exécutez la commande suivante pour installer le package :
 
-```bash
-npm install @revenuecat/purchases-capacitor
-```
+[[BLOC_DE_CODE]]
 
-3 Après l'installation, synchronisez votre projet Capacitor :
+3 Après l'installation, synchronisez votre projet Capacitor :
 
-```bash
-npx cap sync
-```
+[[BLOC_DE_CODE]]
 
-##Configuration
+## Configuration
 
-1 Importez le module Achats dans le fichier TypeScript principal de votre application (par exemple, `appcomponentts`) :
+1 Importez le module Purchases dans le fichier TypeScript principal de votre application (ex. : `appcomponentts`) :
 
-```typescript
-import { Purchases } from '@revenuecat/purchases-capacitor';
-```
+[[BLOC_DE_CODE]]
 
-2 Configurez le SDK avec votre clé API RevenueCat :
+2 Configurez le SDK avec votre clé API RevenueCat :
 
-```typescript
-async function initializePurchases() {
-  await Purchases.configure({
-    apiKey: 'YOUR_REVENUECAT_API_KEY',
-  });
-}
-```
+[[BLOC_DE_CODE]]
 
-Appelez cette fonction au démarrage de votre application, par exemple dans la méthode `ngOnInit()` de votre composant principal
+Appelez cette fonction lorsque votre application démarre, par exemple dans la méthode `ngOnInit()` de votre composant principal.
 
 ## Utilisation de base
 
-### Récupération des produits disponibles
+### Récupérer les produits disponibles
 
 Pour obtenir la liste des produits disponibles :
 
-```typescript
-async function getProducts() {
-  try {
-    const offerings = await Purchases.getOfferings();
-    if (offerings.current !== null) {
-      const products = offerings.current.availablePackages;
-      console.log('Available products:', products);
-    }
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
 ### Effectuer un achat
 
-Pour lancer un achat :
+Pour initier un achat :
 
-```typescript
-async function purchasePackage(package: PurchasesPackage) {
-  try {
-    const { customerInfo, productIdentifier } = await Purchases.purchasePackage({ aPackage: package });
-    console.log('Purchase successful:', productIdentifier);
-    console.log('Customer Info:', customerInfo);
-  } catch (error) {
-    console.error('Error making purchase:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
-### Vérification de l'état de l'abonnement
+### Vérifier l'état de l'abonnement
 
-Pour vérifier l'état actuel de l'abonnement de l'utilisateur :
+Pour vérifier l'état actuel de l'abonnement d'un utilisateur :
 
-```typescript
-async function checkSubscriptionStatus() {
-  try {
-    const { customerInfo } = await Purchases.getCustomerInfo();
-    const activeSubscriptions = customerInfo.activeSubscriptions;
-    console.log('Active subscriptions:', activeSubscriptions);
-  } catch (error) {
-    console.error('Error checking subscription status:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
-### Restauration des achats
+### Restaurer les achats
 
-Pour restaurer les achats précédents d'un utilisateur :
+Pour restaurer les achats précédents d'un utilisateur :
 
-```typescript
-async function restorePurchases() {
-  try {
-    const { customerInfo } = await Purchases.restorePurchases();
-    console.log('Purchases restored:', customerInfo);
-  } catch (error) {
-    console.error('Error restoring purchases:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
 ## Fonctionnalités avancées
 
-### Identification des utilisateurs
+### Identifier les utilisateurs
 
-Si vous disposez de votre propre système d'identification utilisateur, vous pouvez identifier les utilisateurs sur RevenueCat :
+Si vous avez votre propre système d'identification d'utilisateur, vous pouvez identifier les utilisateurs auprès de RevenueCat :
 
-```typescript
-async function identifyUser(userId: string) {
-  try {
-    const { customerInfo } = await Purchases.logIn({ appUserID: userId });
-    console.log('User identified:', customerInfo);
-  } catch (error) {
-    console.error('Error identifying user:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
-### Vérification de l'éligibilité au prix de lancement
+### Vérifier l'éligibilité au prix d'introduction
 
-Pour vérifier si un utilisateur est éligible à un prix de lancement :
+Pour vérifier si un utilisateur est éligible à un prix d'introduction :
 
-```typescript
-async function checkIntroEligibility(productIdentifiers: string[]) {
-  try {
-    const eligibility = await Purchases.checkTrialOrIntroductoryPriceEligibility({ productIdentifiers });
-    console.log('Introductory price eligibility:', eligibility);
-  } catch (error) {
-    console.error('Error checking eligibility:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
-### Définition des attributs
+### Définir des attributs
 
-Vous pouvez définir des attributs personnalisés pour les utilisateurs :
+Vous pouvez définir des attributs personnalisés pour les utilisateurs :
 
-```typescript
-async function setUserAttributes() {
-  try {
-    await Purchases.setAttributes({
-      'user_level': '5',
-      'user_type': 'premium'
-    });
-    console.log('Attributes set successfully');
-  } catch (error) {
-    console.error('Error setting attributes:', error);
-  }
-}
-```
+[[BLOC_DE_CODE]]
 
 ## Conclusion
 
-Ce didacticiel a couvert les bases de la mise en œuvre des achats et des abonnements intégrés à l'aide du package `@revenuecat/purchases-capacitor`. N'oubliez pas de gérer les erreurs de manière appropriée et de tester minutieusement votre implémentation.
+Ce tutoriel a couvert les bases de la mise en œuvre des achats intégrés et des abonnements en utilisant le package `@revenuecat/purchases-capacitor`. N'oubliez pas de gérer les erreurs de manière appropriée et de tester votre implémentation de manière approfondie.
 
-Pour une utilisation plus avancée et une documentation détaillée de l'API, reportez-vous à la documentation RevenueCat sur https://docsrevenuecatcom/
+Pour une utilisation plus avancée et une documentation API détaillée, consultez la documentation RevenueCat sur https://docsrevenuecatcom/.
 
-N'oubliez pas de configurer vos produits dans le tableau de bord RevenueCat et de les lier aux produits de votre boutique d'applications. Assurez-vous également de tester votre implémentation dans un environnement sandbox avant de la mettre en production.
+N'oubliez pas de configurer vos produits dans le tableau de bord RevenueCat et de les lier à vos produits d'app store. Assurez-vous également de tester votre implémentation dans un environnement sandbox avant de la publier en production.

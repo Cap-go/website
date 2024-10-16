@@ -1,62 +1,62 @@
 ---
 slug: updating-from-capacitor-4-to-capacitor-5
-title: "Mise à jour du condensateur 4 vers le condensateur 5\_: un guide étape par étape"
+title: 'Mise à jour de Capacitor 4 vers Capacitor 5 : Un guide étape par étape'
 description: >-
-  Découvrez comment mettre à jour votre projet de Capacitor 4 vers Capacitor 5
-  avec un minimum de modifications majeures, y compris la mise à jour des
-  plugins officiels et des outils requis.
+  Apprenez comment mettre à jour votre projet Capacitor 4 vers Capacitor 5 avec
+  un minimum de changements perturbateurs, y compris la mise à jour des plugins
+  officiels et des outils nécessaires.
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-09T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capacitor-5-update.webp
-head_image_alt: Illustration de mise à jour du condensateur 4 à 5
+head_image_alt: Illustration de mise à jour de Capacitor 4 vers 5
 tag: Capacitor
 published: true
 locale: fr
 next_blog: ''
 ---
 
-Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers Capacitor 5 implique des modifications minimes. Ce guide fournit des instructions étape par étape pour mettre à jour votre projet vers Capacitor 5, ainsi qu'une liste des modifications majeures pour les plugins officiels.
+Par rapport aux mises à jour précédentes, la transition de Capacitor 4 à Capacitor 5 implique des changements minimes. Ce guide fournit des instructions étape par étape pour mettre à jour votre projet vers Capacitor 5, ainsi qu'une liste des changements importants pour les plugins officiels.
 
-**Remarque** : Le condensateur 5 nécessite NodeJS 16 ou supérieur, car le nœud 12 a atteint la fin de vie et le nœud 14 atteindra sa fin de vie le 30 avril 2023. Il est recommandé d'utiliser la dernière version LTS de NodeJS.
+**Note** : Capacitor 5 nécessite NodeJS 16 ou supérieur, car Node 12 a atteint sa fin de vie et Node 14 atteindra sa fin de vie le 30 avril 2023. Il est recommandé d'utiliser la dernière version LTS de NodeJS.
 
-1 Installez la « dernière » version de la CLI Capacitor dans votre projet :
+1. Installez la version `latest` du CLI Capacitor dans votre projet :
 
    ```
    npm i -D @capacitor/cli@latest
    ```
 
-2 Exécutez la commande suivante pour laisser la CLI gérer la migration :
+2. Exécutez la commande suivante pour laisser le CLI gérer la migration :
 
    ```
    npx cap migrate
    ```
 
-   Si des étapes de migration ne peuvent pas être réalisées, des informations supplémentaires seront fournies dans la sortie du terminal. Les étapes de migration manuelle sont répertoriées ci-dessous.
+   Si certaines étapes de migration ne peuvent pas être réalisées, des informations supplémentaires seront fournies dans la sortie du terminal. Les étapes de migration manuelle sont listées ci-dessous.
 
-3 Si l'extension VS Code est installée, consultez la section recommandations de l'extension pour trouver l'option permettant de migrer votre projet vers Capacitor 5.
+3. Si vous avez l'extension VS Code installée, vérifiez la section des recommandations de l'extension pour trouver l'option de migration de votre projet vers Capacitor 5.
 
 ### Mise à niveau du projet iOS Capacitor 4 vers Capacitor 5
 
-1 **Mise à niveau Xcode** : le condensateur 5 nécessite Xcode 141+
+1. **Mise à niveau de Xcode** : Capacitor 5 nécessite Xcode 14.1+.
 
-2 **Mettre à jour gitignore** : apportez les modifications suivantes à votre fichier `gitignore` :
+2. **Mise à jour du gitignore** : Effectuez les modifications suivantes dans votre fichier `gitignore` :
 
    ```
    - App/Podfile.lock
    + App/output
    ```
 
-3 **Mettre à jour les actifs pour utiliser une seule icône d'application** : Xcode 14 prend en charge une seule icône d'application de 1024 x 1024. Nettoyez votre AppIconappiconset en supprimant toutes les tailles inutiles.
+3. **Mise à jour des ressources pour utiliser une seule icône d'application** : Xcode 14 prend en charge une seule icône d'application de 1024x1024. Nettoyez votre AppIcon.appiconset en supprimant toutes les tailles inutiles.
 
 ### Mise à niveau du projet Android Capacitor 4 vers Capacitor 5
 
-1 **Mettre à niveau Android Studio** : Capacitor 5 nécessite Android Studio Flamingo | 202221 ou version ultérieure en raison de l'utilisation de Gradle 8, qui nécessite Java JDK 17. Java 17 est livré avec Android Studio Flamingo, aucun téléchargement supplémentaire n'est donc nécessaire.
+1. **Mise à niveau d'Android Studio** : Capacitor 5 nécessite Android Studio Flamingo | 2022.2.1 ou plus récent en raison de l'utilisation de Gradle 8, qui nécessite Java JDK 17. Java 17 est livré avec Android Studio Flamingo, donc aucun téléchargement supplémentaire n'est nécessaire.
 
-2 **Exécutez l'assistant de mise à niveau AGP** : Android Studio peut vous aider avec certaines mises à jour liées à Gradle et le déplacement de packages dans des fichiers de construction. Pour commencer, exécutez « Outils -> Assistant de mise à niveau AGP »
+2. **Exécution de l'Assistant de mise à niveau AGP** : Android Studio peut aider avec certaines mises à jour liées à Gradle et au déplacement des packages dans les fichiers de build. Pour commencer, exécutez `Tools -> AGP Upgrade Assistant`.
 
-3 **Mettre à jour les variables du projet Android** : Dans votre fichier `variablesgradle`, mettez à jour vos valeurs avec les nouveaux minimums suivants :
+3. **Mise à jour des variables du projet Android** : Dans votre fichier `variables.gradle`, mettez à jour vos valeurs aux nouveaux minimums suivants :
 
    ```
    minSdkVersion = 22
@@ -75,7 +75,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    cordovaAndroidVersion = '10.1.1'
    ```
 
-4 **Mettre à jour les services Google** :
+4. **Mise à jour des services Google** :
 
    ```
    # build.gradle
@@ -85,7 +85,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    }
    ```
 
-5 **Mettre à jour le plugin Gradle vers 800** :
+5. **Mise à jour du plugin Gradle vers 8.0.0** :
 
    ```
    # build.gradle
@@ -95,7 +95,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    }
    ```
 
-6 **Mettre à jour le wrapper Gradle vers 802** :
+6. **Mise à jour du wrapper Gradle vers 8.0.2** :
 
    ```
    # gradle-wrapper.properties
@@ -107,7 +107,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    zipStorePath=wrapper/dists
    ```
 
-7 **Désactiver Jetifier** :
+7. **Désactivation de Jetifier** :
 
    ```
    # gradle.properties
@@ -115,7 +115,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    - android.enableJetifier=true
    ```
 
-8 **Déplacer le package vers `buildgradle`** :
+8. **Déplacement du package vers `build.gradle`** :
 
    ```
    # AndroidManifest.xml
@@ -132,7 +132,7 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
          compileSdkVersion rootProject.ext.compileSdkVersion
    ```
 
-9 **Mettre à jour androidScheme** : dans Capacitor 6, `https` sera le paramètre par défaut pour `androidScheme` pour les applications existantes afin de mieux permettre aux applications Capacitor d'utiliser la fonction de remplissage automatique du système. Pour éviter la perte de données à la suite de ce changement, définissez le schéma sur `http` maintenant, même si c'est la valeur par défaut actuelle
+9. **Mise à jour de androidScheme** : Dans Capacitor 6, `https` sera le paramètre par défaut pour `androidScheme` pour les applications existantes afin de mieux permettre aux applications Capacitor d'utiliser la fonction Autofill du système. Pour éviter la perte de données suite à ce changement, définissez le schéma sur `http` maintenant, même si c'est la valeur par défaut actuelle.
 
    ```
    {
@@ -142,65 +142,65 @@ Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers C
    }
    ```
 
-10 **Mettre à jour la version de Kotlin** : Si votre projet utilise Kotlin, mettez à jour la variable `kotlin_version` en ``1820'`
+10. **Mise à jour de la version Kotlin** : Si votre projet utilise Kotlin, mettez à jour la variable `kotlin_version` à `'1.8.20'`.
 
-### Modifications des fonctionnalités du plugin
+### Changements de fonctionnalité des plugins
 
-La fonctionnalité du plugin suivante a été modifiée ou supprimée. Mettez à jour votre code en conséquence :
+Les fonctionnalités suivantes des plugins ont été modifiées ou supprimées. Mettez à jour votre code en conséquence :
 
-- Feuille d'action
-- Navigateur
-- Caméra
-- Appareil
-- Géolocalisation
+- Action Sheet
+- Browser
+- Camera
+- Device
+- Geolocation
 - Google Maps
-- Notifications locales
-- Notifications poussées
-- Barre d'état
+- Local Notifications
+- Push Notifications
+- Status Bar
 
-### Feuille d'action
+### Action Sheet
 
-- Mettre à jour la variable `androidxMaterialVersion` à `180`
+- Mettez à jour la variable `androidxMaterialVersion` à `1.8.0`.
 
-### Navigateur
+### Browser
 
-- Mettre à jour la variable `androidxBrowserVersion` à `150`
+- Mettez à jour la variable `androidxBrowserVersion` à `1.5.0`.
 
-### Caméra
+### Camera
 
-- Pour Android 13, ajoutez l'autorisation de lecture des images multimédias (`<?xml version="1.0" encoding="utf-8"?>`) dans `AndroidManifestxml`
-- Mettre à jour la variable `androidxMaterialVersion` à `180`
-- Mettre à jour la variable `androidxExifInterfaceVersion` en `136`
+- Pour Android 13, ajoutez la permission de lecture des images médias (`<?xml version="1.0" encoding="utf-8"?>`) dans `AndroidManifest.xml`.
+- Mettez à jour la variable `androidxMaterialVersion` à `1.8.0`.
+- Mettez à jour la variable `androidxExifInterfaceVersion` à `1.3.6`.
 
-### Appareil
+### Device
 
-- Remplacez `DeviceIduuid` par `DeviceIdidentifier`
-- Sur iOS 16+, `DeviceInfoname` renverra un nom de périphérique générique sauf si vous ajoutez les [droits] appropriés (https://developerapplecom/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name/)
+- Changez `Device.id.uuid` en `Device.id.identifier`.
+- Sur iOS 16+, `Device.info.name` renverra un nom d'appareil générique, sauf si vous ajoutez les [droits](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name/) appropriés.
 
-### Géolocalisation
+### Geolocation
 
-- Mettre à jour `playServicesLocationVersion` vers `2101`
+- Mettez à jour `playServicesLocationVersion` à `21.0.1`.
 
-### Google Maps
+### Google Maps
 
-- Mettez à jour les variables suivantes :
-  - `googleMapsPlayServicesVersion` à `1810`
-  - `googleMapsUtilsVersion` à `340`
-  - `googleMapsKtxVersion` à `340`
-  - `googleMapsUtilsKtxVersion` à `340`
-  - `kotlinxCoroutinesVersion` à `164`
-  - `androidxCoreKTXVersion` à `1100`
-  - `kotlin_version` à `1820`### Notifications locales
+- Mettez à jour les variables suivantes :
+  - `googleMapsPlayServicesVersion` à `18.1.0`
+  - `googleMapsUtilsVersion` à `3.4.0`
+  - `googleMapsKtxVersion` à `3.4.0`
+  - `googleMapsUtilsKtxVersion` à `3.4.0`
+  - `kotlinxCoroutinesVersion` à `1.6.4`
+  - `androidxCoreKTXVersion` à `1.10.0`
+  - `kotlin_version` à `1.8.20`### Notifications locales
 
-- Pour Android 13, une nouvelle vérification des autorisations d'exécution est requise pour planifier des notifications locales lors du ciblage du SDK 33. Appelez `checkPermissions()` et `requestPermissions()` en conséquence
+- Pour Android 13, une nouvelle vérification d'autorisation d'exécution est nécessaire pour planifier des notifications locales lors du ciblage du SDK 33. Appelez `checkPermissions()` et `requestPermissions()` en conséquence.
 
-### Notifications poussées
+### Notifications push
 
-- Pour Android 13, une nouvelle vérification des autorisations d'exécution est requise pour recevoir des notifications push lors du ciblage du SDK 33. Appelez `checkPermissions()` et `requestPermissions()` en conséquence
-- Mettre à jour la variable `firebaseMessagingVersion` en `2312`
+- Pour Android 13, une nouvelle vérification d'autorisation d'exécution est nécessaire pour recevoir des notifications push lors du ciblage du SDK 33. Appelez `checkPermissions()` et `requestPermissions()` en conséquence.
+- Mettez à jour la variable `firebaseMessagingVersion` à `23.1.2`.
 
 ### Barre d'état
 
-- Sur iOS, l'animation de la barre d'état par défaut a été modifiée en « FADE »
+- Sur iOS, l'animation par défaut de la barre d'état a été modifiée pour `FADE`.
 
-En suivant ces étapes et en mettant à jour votre code en conséquence, vous devriez maintenant avoir mis à jour avec succès votre projet de Capacitor 4 vers Capacitor 5. Assurez-vous de tester minutieusement votre application pour vous assurer que toutes les fonctionnalités et tous les plugins fonctionnent comme prévu.
+En suivant ces étapes et en mettant à jour votre code en conséquence, vous devriez maintenant avoir réussi à mettre à jour votre projet de Capacitor 4 vers Capacitor 5. Assurez-vous de tester votre application de manière approfondie pour vous assurer que toutes les fonctionnalités et les plugins fonctionnent comme prévu.

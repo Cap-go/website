@@ -2,58 +2,48 @@
 locale: fr
 ---
 
-sing @capgo/standard-version Tutoriel du package
+## Tutoriel sur le paquet @capgo/standard-version
 
-Dans ce didacticiel, nous apprendrons comment utiliser le package `@capgo/standard-version` pour gérer les numéros de version dans votre projet. Le package `@capgo/standard-version` est un outil qui automatise le versionnement de votre projet sur la base du [conventionnel spécification de validation](https://wwwconventionalcommitsorg/)
+Dans ce tutoriel, nous allons apprendre à utiliser le paquet `@capgo/standard-version` pour gérer les numéros de version dans votre projet. Le paquet `@capgo/standard-version` est un outil qui automatise la gestion des versions de votre projet en fonction de la [spécification des engagements conventionnels](https://wwwconventionalcommitsorg/).
 
-Commençons !
+Commençons !
 
 ## Étape 1 : Installation
 
-Pour installer le package `@capgo/standard-version`, exécutez la commande suivante dans votre terminal :
+Pour installer le paquet `@capgo/standard-version`, exécutez la commande suivante dans votre terminal :
 
-```bash
-npm install @capgo/standard-version --save-dev
-```
+[[BLOC_DE_CODE]]
 
-Cela ajoutera le package en tant que dépendance de développement dans votre projet
+Cela ajoutera le paquet comme dépendance de développement dans votre projet.
 
-## Étape 2 : Configuration
+## Étape 2 : Configuration
 
-Pour configurer le package `@capgo/standard-version`, créez un fichier `releaseconfigjs` dans le répertoire racine de votre projet avec le contenu suivant :
+Pour configurer le paquet `@capgo/standard-version`, créez un fichier `releaseconfigjs` dans le répertoire racine de votre projet avec le contenu suivant :
 
-```javascript
-module.exports = {
-  preset: 'capgo',
-};
-```
+[[BLOC_DE_CODE]]
 
-Cette configuration spécifie le préréglage à utiliser pour le versioning. Dans ce cas, nous utilisons le préréglage `capgo` qui est un préréglage personnalisé pour le package `@capgo/standard-version`
+Cette configuration spécifie le préréglage à utiliser pour la gestion des versions. Dans ce cas, nous utilisons le préréglage `capgo`, qui est un préréglage personnalisé pour le paquet `@capgo/standard-version`.
 
-## Étape 3 : Gestion des versions
+## Étape 3 : Gestion des versions
 
-Pour créer une nouvelle version de votre projet, exécutez la commande suivante :
+Pour créer une nouvelle version de votre projet, exécutez la commande suivante :
 
-```bash
-npx standard-version
-```
+[[BLOC_DE_CODE]]
 
-Cela analysera votre historique de validation et générera automatiquement un nouveau numéro de version pour votre projet basé sur les validations conventionnelles. Cela mettra également à jour le fichier `CHANGELOGmd` avec les dernières modifications.
+Cela analysera votre historique de commits et générera automatiquement un nouveau numéro de version pour votre projet en fonction des commits conventionnels. Cela mettra également à jour le fichier `CHANGELOGmd` avec les dernières modifications.
 
-## Étape 4 : Libérer
+## Étape 4 : Publication
 
-Pour créer une version, exécutez la commande suivante :
+Pour créer une publication, exécutez la commande suivante :
 
-```bash
-npx standard-version --release-as 1.0.0
-```
+[[BLOC_DE_CODE]]
 
-Remplacez « 100 » par le numéro de version souhaité pour votre version. Cette commande mettra à jour le numéro de version dans votre fichier packagejson, créera une balise git pour la version et mettra à jour le fichier « CHANGELOGmd »
+Remplacez `100` par le numéro de version souhaité pour votre publication. Cette commande mettra à jour le numéro de version dans votre fichier packagejson, créera un tag git pour la publication et mettra à jour le fichier `CHANGELOGmd`.
 
 ## Conclusion
 
-Félicitations! Vous avez appris avec succès comment utiliser le package `@capgo/standard-version` pour gérer les numéros de version dans votre projet. Ce package automatise le processus de gestion des versions et facilite le suivi des modifications dans votre projet.
+Félicitations ! Vous avez appris avec succès à utiliser le paquet `@capgo/standard-version` pour gérer les numéros de version dans votre projet. Ce paquet automatise le processus de gestion des versions et facilite le suivi des modifications dans votre projet.
 
-Pour plus d'informations, vous pouvez vous référer à la documentation du package `@capgo/standard-version`
+Pour plus d'informations, vous pouvez consulter la documentation du paquet `@capgo/standard-version`.
 
-Bon versionnage !
+Bonne gestion des versions !

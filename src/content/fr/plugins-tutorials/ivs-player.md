@@ -2,153 +2,150 @@
 locale: fr
 ---
 
-chante @capgo/ivs-player
+chanter @capgo/ivs-player
 
-##Installation
+## Installation
 
-Pour installer le package @capgo/ivs-player, vous devez exécuter la commande suivante :
+Pour installer le package @capgo/ivs-player, vous devez exécuter la commande suivante :
 
-```bash
-npm install @capgo/ivs-player
-npx cap sync
-```
+[[BLOC_DE_CODE]]
 
-##API
+## API
 
-Le package @capgo/ivs-player fournit l'API suivante :
+Le package @capgo/ivs-player fournit l'API suivante :
 
-### create(options : { url : chaîne ; pip ? : booléen ; titre ? : chaîne ; sous-titre ? : chaîne ; couverture ? : chaîne ; lecture automatique ? : booléen ; toBack ? : booléen ; x ? : numéro ; y ? : nombre; largeur?: nombre; hauteur?: nombre }) => Promesse;
+### create(options: { url: string; pip?: boolean; title?: string; subtitle?: string; cover?: string; autoPlay?: boolean; toBack?: boolean; x?: number; y?: number; width?: number; height?: number; }) => Promise
 
-Cette méthode crée une instance du lecteur IVS. Elle prend un objet d'options comme paramètre, qui contient diverses propriétés telles que l'URL de la vidéo, l'activation ou non du mode image dans l'image, le titre et le sous-titre de la vidéo, etc. Il renvoie une promesse qui se résout à l'instance créée
+Cette méthode crée une instance du lecteur IVS. Elle prend un objet d'options comme paramètre, qui contient diverses propriétés telles que l'URL de la vidéo, la possibilité d'activer le mode image dans l'image, le titre et le sous-titre de la vidéo, et plus encore. Elle retourne une promesse qui se résout avec l'instance créée.
 
-### start() => Promesse
+### start() => Promise
 
-Cette méthode démarre la lecture de la vidéo dans le lecteur IVS. Elle renvoie une promesse
+Cette méthode commence la lecture de la vidéo dans le lecteur IVS. Elle retourne une promesse.
 
-### cast() => Promesse
+### cast() => Promise
 
-Cette méthode diffuse la vidéo sur un appareil connecté. Elle renvoie une promesse
+Cette méthode diffuse la vidéo sur un appareil connecté. Elle retourne une promesse.
 
-### getCastStatus() => Promesse<{ isActive: boolean; }>
+### getCastStatus() => Promise<{ isActive: boolean; }>
 
-Cette méthode récupère l'état de la fonctionnalité de diffusion. Elle renvoie une promesse qui se résout en un objet contenant la propriété isActive, qui indique si la diffusion est active.
+Cette méthode récupère l'état de la fonction de diffusion. Elle retourne une promesse qui se résout avec un objet contenant la propriété isActive, qui indique si la diffusion est active.
 
-### pause() => Promesse
+### pause() => Promise
 
-Cette méthode met en pause la lecture vidéo. Elle renvoie une promesse
+Cette méthode met en pause la lecture de la vidéo. Elle retourne une promesse.
 
-### delete() => Promesse
+### delete() => Promise
 
-Cette méthode supprime l'instance du lecteur IVS. Elle renvoie une promesse
+Cette méthode supprime l'instance du lecteur IVS. Elle retourne une promesse.
 
-### getUrl() => Promesse
+### getUrl() => Promise
 
-Cette méthode récupère l'URL de la vidéo en cours de lecture. Elle renvoie une promesse
+Cette méthode récupère l'URL de la vidéo actuellement en cours de lecture. Elle retourne une promesse.
 
-### getState() => Promesse
+### getState() => Promise
 
-Cette méthode récupère l'état actuel du lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère l'état actuel du lecteur IVS. Elle retourne une promesse.
 
-### setPlayerPosition() => Promesse
+### setPlayerPosition() => Promise
 
-Cette méthode définit la position du lecteur IVS sur l'écran. Elle prend les coordonnées x et y comme paramètres et renvoie une promesse.
+Cette méthode définit la position du lecteur IVS à l'écran. Elle prend les coordonnées x et y comme paramètres et retourne une promesse.
 
-### getPlayerPosition() => Promesse
+### getPlayerPosition() => Promise
 
-Cette méthode récupère la position actuelle du lecteur IVS sur l'écran. Elle renvoie une promesse
+Cette méthode récupère la position actuelle du lecteur IVS à l'écran. Elle retourne une promesse.
 
-### setAutoQuality() => Promesse
+### setAutoQuality() => Promise
 
-Cette méthode définit le mode de qualité automatique du lecteur IVS. Elle prend une valeur booléenne comme paramètre et renvoie une promesse.
+Cette méthode définit le mode de qualité automatique du lecteur IVS. Elle prend une valeur booléenne comme paramètre et retourne une promesse.
 
-### getAutoQuality() => Promesse
+### getAutoQuality() => Promise
 
-Cette méthode récupère le mode de qualité automatique actuel du lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère le mode de qualité automatique actuel du lecteur IVS. Elle retourne une promesse.
 
-### setPip() => Promesse
+### setPip() => Promise
 
-Cette méthode définit le mode image dans l'image du lecteur IVS. Elle prend une valeur booléenne comme paramètre et renvoie une promesse.
+Cette méthode définit le mode image dans l'image du lecteur IVS. Elle prend une valeur booléenne comme paramètre et retourne une promesse.
 
-### getPip() => Promesse
+### getPip() => Promise
 
-Cette méthode récupère le mode image dans l'image actuel du lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère le mode image dans l'image actuel du lecteur IVS. Elle retourne une promesse.
 
-### setFrame() => Promesse
+### setFrame() => Promise
 
-Cette méthode définit le cadre du lecteur IVS. Elle prend une valeur numérique comme paramètre et renvoie une promesse.
+Cette méthode définit la valeur de cadre du lecteur IVS. Elle prend une valeur numérique comme paramètre et retourne une promesse.
 
-### getFrame() => Promesse
+### getFrame() => Promise
 
-Cette méthode récupère la frame actuelle du lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère le cadre actuel du lecteur IVS. Elle retourne une promesse.
 
-### setMute() => Promesse
+### setMute() => Promise
 
-Cette méthode définit le mode muet du lecteur IVS. Elle prend une valeur booléenne comme paramètre et renvoie une promesse.
+Cette méthode définit le mode sourd du lecteur IVS. Elle prend une valeur booléenne comme paramètre et retourne une promesse.
 
-### getMute() => Promesse
+### getMute() => Promise
 
-Cette méthode récupère le mode muet actuel du lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère le mode sourd actuel du lecteur IVS. Elle retourne une promesse.
 
-### setQuality() => Promesse
+### setQuality() => Promise
 
-Cette méthode définit la qualité de la vidéo dans le lecteur IVS. Elle prend une valeur de chaîne comme paramètre et renvoie une promesse.
+Cette méthode définit la qualité de la vidéo dans le lecteur IVS. Elle prend une valeur string comme paramètre et retourne une promesse.
 
-### getQuality() => Promesse
+### getQuality() => Promise
 
-Cette méthode récupère la qualité actuelle de la vidéo dans le lecteur IVS. Elle renvoie une promesse
+Cette méthode récupère la qualité actuelle de la vidéo dans le lecteur IVS. Elle retourne une promesse.
 
-### getQualities() => Promesse
+### getQualities() => Promise
 
-Cette méthode récupère les qualités disponibles de la vidéo dans le lecteur IVS. Elle renvoie une Promesse
+Cette méthode récupère les qualités disponibles de la vidéo dans le lecteur IVS. Elle retourne une promesse.
 
-### addListener('expandPip', ) => vide
+### addListener('expandPip', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement expandPip. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement expandPip. Elle prend une fonction de rappel comme paramètre et retourne void.
 
-### addListener('closePip', ) => vide
+### addListener('closePip', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement closePip. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement closePip. Elle prend une fonction de rappel comme paramètre et retourne void.
 
-### addListener('onState', ) => vide
+### addListener('onState', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onState. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onState. Elle prend une fonction de rappel comme paramètre et retourne void.
 
-### addListener('onCues', ) => vide
+### addListener('onCues', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onCues. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onCues. Elle prend une fonction de rappel comme paramètre et retourne void.
 
-### addListener('onDuration', ) => vide
+### addListener('onDuration', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onDurationIl prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onDuration.Il prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onError', ) => vide
+### addListener('onError', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onError. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onError. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onRebuffering', ) => vide
+### addListener('onRebuffering', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onRebuffering. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onRebuffering. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onSeekCompleted', ) => vide
+### addListener('onSeekCompleted', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onSeekCompleted. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onSeekCompleted. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onVideoSize', ) => vide
+### addListener('onVideoSize', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onVideoSize. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onVideoSize. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onQuality', ) => vide
+### addListener('onQuality', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onQuality. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onQuality. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### addListener('onCastStatus', ) => vide
+### addListener('onCastStatus', ) => void
 
-Cette méthode ajoute un écouteur pour l'événement onCastStatus. Elle prend une fonction de rappel comme paramètre et renvoie void
+Cette méthode ajoute un écouteur pour l'événement onCastStatus. Elle prend une fonction de rappel comme paramètre et retourne void
 
-### RemoveAllListeners() => vide
+### removeAllListeners() => void
 
-Cette méthode supprime tous les écouteurs d'événements ajoutés. Elle renvoie void
+Cette méthode supprime tous les écouteurs d'événements ajoutés. Elle retourne void
 
 ## Conclusion
 
-Le package @capgo/ivs-player fournit une API complète pour intégrer un lecteur IVS dans votre application Capacitor. En suivant les étapes d'installation et en référençant la documentation de l'API, vous pouvez facilement commencer à lire des vidéos dans votre application à l'aide du lecteur IVS.
+Le package @capgo/ivs-player offre une API complète pour intégrer un lecteur IVS dans votre application Capacitor. En suivant les étapes d'installation et en consultant la documentation de l'API, vous pouvez facilement commencer à lire des vidéos dans votre application en utilisant le lecteur IVS.

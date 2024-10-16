@@ -2,49 +2,51 @@
 locale: fr
 ---
 
-chanter @capgo/capacitor-callkit-voip
+### Traduire le texte suivant en locale fr :
 
-Le package `@capgo/capacitor-callkit-voip` fournit la fonctionnalité PushKit à Ionic Capacitor. Il est conçu pour être utilisé avec l'application BetterCall, mais peut également être utilisé dans d'autres projets.
+**Chanter @capgo/capacitor-callkit-voip Package**
 
-##Installation
+Le package `@capgo/capacitor-callkit-voip` fournit des fonctionnalités PushKit à Ionic Capacitor. Il est conçu pour être utilisé avec l'application BetterCall, mais peut également être utilisé dans d'autres projets.
 
-Pour installer le package, vous pouvez exécuter la commande suivante :
+## Installation
+
+Pour installer le package, vous pouvez exécuter la commande suivante :
 
 ```bash
 npm install @capgo/capacitor-callkit-voip
 ionic cap sync
 ```
 
-Veuillez vous assurer que Xcode est installé sur votre ordinateur avant de procéder à l'installation.
+Veuillez vous assurer d'avoir Xcode installé sur votre ordinateur avant de procéder à l'installation.
 
 ## Configuration du projet iOS
 
-Pour configurer votre projet iOS pour utiliser le package, procédez comme suit :
+Pour configurer votre projet iOS afin d'utiliser le package, suivez ces étapes :
 
-1 Ouvrez votre projet Xcode et accédez au volet Capacités
-2 Activez la fonctionnalité « Voix sur IP » en cochant la case
-3 Enregistrez votre certificat sur le site Web des développeurs Apple. Vous pouvez trouver des instructions détaillées dans le lien fourni.
-4 Téléchargez le certificat et ouvrez-le pour l'importer dans l'application Keychain Access
-5 Exportez les certificats comme indiqué dans l'image fournie
-6 Accédez au dossier dans lequel vous avez exporté le fichier et exécutez la commande suivante dans le terminal :
+1. Ouvrez votre projet Xcode et accédez au panneau Capacités.
+2. Activez la capacité "Voix sur IP" en sélectionnant la case à cocher.
+3. Enregistrez votre certificat sur le site Web des développeurs Apple. Vous pouvez trouver des instructions détaillées dans le lien fourni.
+4. Téléchargez le certificat et ouvrez-le pour l'importer dans l'application Accès au Trousseau.
+5. Exporte les certificats comme indiqué dans l'image fournie.
+6. Accédez au dossier où vous avez exporté le fichier et exécutez la commande suivante dans le terminal :
 
 ```bash
 openssl pkcs12 -in YOUR_CERTIFICATES.p12 -out app.pem -nodes -clcerts
 ```
 
-Cela générera un fichier de certificat « apppem » qui pourra être utilisé pour envoyer des notifications VOIP
+Cela générera un fichier de certificat `apppem` qui peut être utilisé pour envoyer des notifications VOIP.
 
 ## Utilisation
 
-Une fois le package installé et le projet iOS configuré, vous pouvez commencer à l'utiliser dans votre code
+Une fois le package installé et le projet iOS configuré, vous pouvez commencer à l'utiliser dans votre code.
 
-Tout d'abord, importez le module `CallKitVoip` :
+Tout d'abord, importez le module `CallKitVoip` :
 
 ```typescript
 import { CallKitVoip } from "@capgo/capacitor-callkit-voip";
 ```
 
-Ensuite, vous devez appeler la méthode `register()` pour démarrer l'enregistrement des notifications VOIP :
+Ensuite, vous devez appeler la méthode `register()` pour commencer l'enregistrement des notifications VOIP :
 
 ```typescript
 async function registerVoipNotification() {
@@ -64,7 +66,7 @@ async function registerVoipNotification() {
 }
 ```
 
-Pour envoyer une notification VOIP, vous pouvez utiliser le script « sendVoipsh » fourni :
+Pour envoyer une notification VOIP, vous pouvez utiliser le script `sendVoipsh` fourni :
 
 ```shell
 #!/bin/bash
@@ -89,4 +91,4 @@ main $@
 
 ## Conclusion
 
-Le package `@capgo/capacitor-callkit-voip` vous permet d'ajouter la fonctionnalité PushKit à votre projet Ionic Capacitor. En suivant les instructions d'installation et d'utilisation, vous pourrez envoyer et recevoir des notifications VOIP dans votre application.
+Le package `@capgo/capacitor-callkit-voip` vous permet d'ajouter des fonctionnalités PushKit à votre projet Ionic Capacitor. En suivant les instructions d'installation et d'utilisation, vous pourrez envoyer et recevoir des notifications VOIP dans votre application.
