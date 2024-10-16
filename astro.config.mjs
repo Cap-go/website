@@ -16,9 +16,10 @@ export default defineConfig({
     },
   },
   i18n: {
-    locales,
+    locales: locales.map((i) => i === 'jp' ? 'ja' : i),
     defaultLocale,
     fallback: locales
+      .map((i) => i === 'jp' ? 'ja' : i)
       .filter((i) => i !== defaultLocale)
       .reduce((r, h) => {
         r[h] = defaultLocale
