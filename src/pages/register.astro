@@ -2,5 +2,5 @@
 import Layout from '@/layouts/Layout.astro'
 import VueRegister from '@/vue-pages/register.vue'
 ---
-
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
 <Layout><VueRegister locale={Astro.locals.locale} client:load /></Layout>
