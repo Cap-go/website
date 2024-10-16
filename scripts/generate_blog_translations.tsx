@@ -8,7 +8,7 @@ import { translateText } from './translate'
 const batchSize = 20
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
-const languages = locales.filter((lang) => lang !== defaultLocale)
+const languages = process.argv.includes('--locale') ? [process.argv[process.argv.indexOf('--locale') + 1]] : locales.filter((lang) => lang !== defaultLocale)
 
 for (const lang of languages) {
   console.log(`Preparing the blogs for locale: ${lang}...`)

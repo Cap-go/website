@@ -6,7 +6,7 @@ import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
 
 const batchSize = 20
-const languages = locales.filter((lang) => lang !== defaultLocale)
+const languages = process.argv.includes('--locale') ? [process.argv[process.argv.indexOf('--locale') + 1]] : locales.filter((lang) => lang !== defaultLocale)
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'plugins-tutorials')
 
