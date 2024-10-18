@@ -3,7 +3,6 @@ import { openMessenger } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import translations from '@/services/translations'
-import { navigate } from 'astro:transitions/client'
 import { onMounted, ref } from 'vue'
 import { toast } from 'vue-sonner'
 
@@ -13,32 +12,10 @@ const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_
 
 const isLoading = ref(false)
 const enableCaptcha = ref(!!CLOUDFLARE_TURNSTILE_SITE_KEY)
-const hasCaptcha = ref<boolean | null>(null)
 const email = ref('')
 const firstName = ref('')
 const lastName = ref('')
 const password = ref('')
-
-onMounted(() => {
-  let i = 0
-
-  function checkCaptcha() {
-    if (i > 500) {
-      hasCaptcha.value = false
-      return
-    }
-    i++
-
-    if (!!(window as any).turnstile) {
-      hasCaptcha.value = true
-      return
-    }
-
-    setTimeout(checkCaptcha, 10)
-  }
-
-  checkCaptcha()
-})
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -182,18 +159,10 @@ const handleSubmit = async () => {
             <div v-if="enableCaptcha">
               <label class="block text-sm font-medium text-gray-700">Captcha</label>
               <div
-                v-if="hasCaptcha !== false"
                 class="cf-turnstile"
                 :data-sitekey="CLOUDFLARE_TURNSTILE_SITE_KEY"
                 data-size="flexible"
               ></div>
-              <div v-if="hasCaptcha === false" class="flex items-start mt-4">
-                {{ translations['turn_off_adblock'][props.locale] }}
-              </div>
-              <svg v-else-if="hasCaptcha !== true" class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
             </div>
             <button
               type="submit"
