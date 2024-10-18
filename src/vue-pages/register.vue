@@ -4,16 +4,49 @@ import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import translations from '@/services/translations'
 import { navigate } from 'astro:transitions/client'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { toast } from 'vue-sonner'
 
 const props = defineProps<{ locale: Locales }>()
 
+const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
+
 const isLoading = ref(false)
+const enableCaptcha = ref(!!CLOUDFLARE_TURNSTILE_SITE_KEY)
+const hasCaptcha = ref<boolean | null>(null)
 const email = ref('')
 const firstName = ref('')
 const lastName = ref('')
 const password = ref('')
+
+onMounted(() => {
+  let i = 0
+
+  function checkCaptcha() {
+    if (i > 500) {
+      hasCaptcha.value = false
+      return
+    }
+    i++
+
+    if (!!(window as any).turnstile) {
+      hasCaptcha.value = true
+      return
+    }
+
+    setTimeout(checkCaptcha, 10)
+  }
+
+  checkCaptcha()
+})
+
+function getCaptchaId() {
+  if (!(window as any).turnstile) {
+    return undefined
+  }
+
+  return (window as any).turnstile.getResponse() as string
+}
 
 getRemoteConfig()
 const handleSubmit = async () => {
@@ -34,6 +67,7 @@ const handleSubmit = async () => {
     email: email.value,
     password: password.value,
     options: {
+      captchaToken: getCaptchaId(),
       data: {
         first_name: firstName.value,
         last_name: lastName.value,
@@ -47,17 +81,27 @@ const handleSubmit = async () => {
       emailRedirectTo: 'https://web.capgo.app/onboarding/verify_email',
     },
   })
+  if (error) {
+    console.error(error)
+    isLoading.value = false
+    return
+  }
   try {
     await window.Reflio.signup(email.value)
   } catch (error) {
     console.error(error)
   }
   if (error || !user) {
-    toast.error(error?.message || 'user not found')
+    isLoading.value = false
     return
   }
-  isLoading.value = false
-  navigate(`/confirm_email?email=${encodeURI(email.value)}`)
+  const session = await supabase.auth.getSession()
+  if (session.error) {
+    console.error(session.error)
+    isLoading.value = false
+    return
+  }
+  window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}`
 }
 </script>
 
@@ -134,6 +178,22 @@ const handleSubmit = async () => {
                 class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 :placeholder="translations['password_placeholder'][props.locale]"
               />
+            </div>
+            <div v-if="enableCaptcha">
+              <label class="block text-sm font-medium text-gray-700">Captcha</label>
+              <div
+                v-if="hasCaptcha !== false"
+                class="cf-turnstile"
+                :data-sitekey="CLOUDFLARE_TURNSTILE_SITE_KEY"
+                data-size="flexible"
+              ></div>
+              <div v-if="hasCaptcha === false" class="flex items-start mt-4">
+                {{ translations['turn_off_adblock'][props.locale] }}
+              </div>
+              <svg v-else-if="hasCaptcha !== true" class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
             </div>
             <button
               type="submit"
