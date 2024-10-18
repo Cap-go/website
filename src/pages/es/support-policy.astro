@@ -1,73 +1,72 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import translations from '@/services/translations'
 
-const title = [Astro.locals.runtimeConfig.public.brand, translations['support_policy'][Astro.locals.locale]].join(' | ')
-const description = translations['read_our_support_policy'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['support_policy'][Astro.locals.locale]].join(' | ')
+const description = Astro.locals.translations['read_our_support_policy'][Astro.locals.locale]
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
   <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>{translations['support_policy_title'][Astro.locals.locale]}</h1>
+    <h1>{Astro.locals.translations['support_policy_title'][Astro.locals.locale]}</h1>
     <p>
-      {translations['support_policy_intro'][Astro.locals.locale]}
+      {Astro.locals.translations['support_policy_intro'][Astro.locals.locale]}
     </p>
-    <h2>{translations['support_policy_scope_title'][Astro.locals.locale]}</h2>
-    <p>{translations['support_policy_scope_intro'][Astro.locals.locale]}</p>
-    <h3>{translations['support_policy_configuration_issues_title'][Astro.locals.locale]}</h3>
+    <h2>{Astro.locals.translations['support_policy_scope_title'][Astro.locals.locale]}</h2>
+    <p>{Astro.locals.translations['support_policy_scope_intro'][Astro.locals.locale]}</p>
+    <h3>{Astro.locals.translations['support_policy_configuration_issues_title'][Astro.locals.locale]}</h3>
     <ul>
-      <li>{translations['support_policy_configuration_issues_1'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_configuration_issues_2'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_configuration_issues_3'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_configuration_issues_1'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_configuration_issues_2'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_configuration_issues_3'][Astro.locals.locale]}</li>
     </ul>
-    <h3>{translations['support_policy_troubleshooting_title'][Astro.locals.locale]}</h3>
+    <h3>{Astro.locals.translations['support_policy_troubleshooting_title'][Astro.locals.locale]}</h3>
     <ul>
-      <li>{translations['support_policy_troubleshooting_1'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_troubleshooting_2'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_troubleshooting_3'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_troubleshooting_1'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_troubleshooting_2'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_troubleshooting_3'][Astro.locals.locale]}</li>
     </ul>
-    <h3>{translations['support_policy_not_covered_title'][Astro.locals.locale]}</h3>
-    <p>{translations['support_policy_not_covered_intro'][Astro.locals.locale]}</p>
+    <h3>{Astro.locals.translations['support_policy_not_covered_title'][Astro.locals.locale]}</h3>
+    <p>{Astro.locals.translations['support_policy_not_covered_intro'][Astro.locals.locale]}</p>
     <ul>
-      <li>{translations['support_policy_not_covered_1'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_not_covered_2'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_not_covered_3'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_not_covered_1'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_not_covered_2'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_not_covered_3'][Astro.locals.locale]}</li>
     </ul>
-    <p>{translations['support_policy_billing_support'][Astro.locals.locale]}</p>
-    <p>{translations['support_policy_limited_support_intro'][Astro.locals.locale]}</p>
+    <p>{Astro.locals.translations['support_policy_billing_support'][Astro.locals.locale]}</p>
+    <p>{Astro.locals.translations['support_policy_limited_support_intro'][Astro.locals.locale]}</p>
     <ul>
-      <li>{translations['support_policy_limited_support_1'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_limited_support_2'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_limited_support_3'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_limited_support_1'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_limited_support_2'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_limited_support_3'][Astro.locals.locale]}</li>
     </ul>
-    <h2>{translations['support_policy_official_channels_title'][Astro.locals.locale]}</h2>
+    <h2>{Astro.locals.translations['support_policy_official_channels_title'][Astro.locals.locale]}</h2>
     <ul>
-      <li>{translations['support_policy_official_channels_1'][Astro.locals.locale]}</li>
-      <li>{translations['support_policy_official_channels_2'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_official_channels_1'][Astro.locals.locale]}</li>
+      <li>{Astro.locals.translations['support_policy_official_channels_2'][Astro.locals.locale]}</li>
     </ul>
     <p>
-      {translations['support_policy_official_channels_note'][Astro.locals.locale]}
-    </p>
-    <p>
-      {translations['support_policy_code_debugging'][Astro.locals.locale]}
+      {Astro.locals.translations['support_policy_official_channels_note'][Astro.locals.locale]}
     </p>
     <p>
-      {translations['support_policy_community_response'][Astro.locals.locale]}
+      {Astro.locals.translations['support_policy_code_debugging'][Astro.locals.locale]}
     </p>
-    <p>{translations['support_policy_team_participation'][Astro.locals.locale]}</p>
-    <h2>{translations['support_policy_sla_title'][Astro.locals.locale]}</h2>
     <p>
-      {translations['support_policy_sla_desc'][Astro.locals.locale]}
+      {Astro.locals.translations['support_policy_community_response'][Astro.locals.locale]}
+    </p>
+    <p>{Astro.locals.translations['support_policy_team_participation'][Astro.locals.locale]}</p>
+    <h2>{Astro.locals.translations['support_policy_sla_title'][Astro.locals.locale]}</h2>
+    <p>
+      {Astro.locals.translations['support_policy_sla_desc'][Astro.locals.locale]}
       <a href="https://capgo.app/sla">https://capgo.app/sla</a>
     </p>
-    <h2>{translations['support_policy_proactive_monitoring_title'][Astro.locals.locale]}</h2>
+    <h2>{Astro.locals.translations['support_policy_proactive_monitoring_title'][Astro.locals.locale]}</h2>
     <p>
-      {translations['support_policy_proactive_monitoring_desc'][Astro.locals.locale]}
+      {Astro.locals.translations['support_policy_proactive_monitoring_desc'][Astro.locals.locale]}
     </p>
-    <h2>{translations['support_policy_premium_support_title'][Astro.locals.locale]}</h2>
-    <p>{translations['support_policy_premium_support_desc'][Astro.locals.locale]}</p>
+    <h2>{Astro.locals.translations['support_policy_premium_support_title'][Astro.locals.locale]}</h2>
+    <p>{Astro.locals.translations['support_policy_premium_support_desc'][Astro.locals.locale]}</p>
     <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
   </div>
 </Layout>

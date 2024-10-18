@@ -46,7 +46,7 @@ const makeAnthropicRequest = async (body: any) => {
       console.log('Rate limit exceeded. Retrying after:', retryAfter)
       if (retryAfter) {
         const waitTime = parseInt(retryAfter, 10) * 1000
-        await new Promise(resolve => setTimeout(resolve, waitTime))
+        await new Promise((resolve) => setTimeout(resolve, waitTime))
         return makeRequest()
       }
     }
@@ -64,7 +64,8 @@ export const translateTextAnthropic = async (text: string, lang: string) => {
   const data = await makeAnthropicRequest({
     max_tokens: 4000,
     model: 'claude-3-5-sonnet-20240620',
-    system: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
+    system:
+      'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
     messages: [
       {
         role: 'user',
@@ -91,7 +92,7 @@ export const translateTextsAnthropic = async (texts: string[], lang: string) => 
         },
       ],
     })
-    return data ? JSON.parse(data.content[0].text) as string[] : null
+    return data ? (JSON.parse(data.content[0].text) as string[]) : null
   }
   const results: string[] = []
   let currentBatch: string[] = []

@@ -8,7 +8,7 @@ import { translateText } from './translate'
 const batchSize = 20
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
-const localeArgIndex = process.argv.findIndex(arg => arg.startsWith('--locale='))
+const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
 
 for (const lang of languages) {
