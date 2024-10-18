@@ -1,14 +1,13 @@
 ---
 import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
-import translations from '@/services/translations'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
 
 const {
   ldJSON = structuredData,
-  title = translations['website_title'][Astro.locals.locale],
-  description = translations['website_description'][Astro.locals.locale],
+  title = Astro.locals.translations['website_title'][Astro.locals.locale],
+  description = Astro.locals.translations['website_description'][Astro.locals.locale],
   url = Astro.url,
   image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
