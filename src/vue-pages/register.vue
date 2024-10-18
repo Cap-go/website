@@ -12,6 +12,7 @@ const props = defineProps<{ locale: Locales }>()
 const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 
 const isLoading = ref(false)
+const enableCaptcha = ref(!!CLOUDFLARE_TURNSTILE_SITE_KEY)
 const hasCaptcha = ref<boolean | null>(null)
 const email = ref('')
 const firstName = ref('')
@@ -178,8 +179,8 @@ const handleSubmit = async () => {
                 :placeholder="translations['password_placeholder'][props.locale]"
               />
             </div>
-            <div>
-              <label for="password" class="block text-sm font-medium text-gray-700">Captcha</label>
+            <div v-if="enableCaptcha">
+              <label class="block text-sm font-medium text-gray-700">Captcha</label>
               <div
                 v-if="hasCaptcha !== false"
                 class="cf-turnstile"
