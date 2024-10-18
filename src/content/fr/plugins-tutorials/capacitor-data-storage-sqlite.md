@@ -2,41 +2,41 @@
 locale: fr
 ---
 
-Tutoriel capgo/capacitor-data-storage-sqlite
+capgo/capacitor-data-storage-sqlite Tutoriel
 
-Ce didacticiel vous guidera tout au long du processus d'utilisation du package `@capgo/capacitor-data-storage-sqlite` pour implémenter un magasin permanent de valeurs-clés pour les données de chaîne simples dans votre application Ionic Capacitor.
+Ce tutoriel vous guidera à travers le processus d'utilisation du package `@capgo/capacitor-data-storage-sqlite` pour implémenter un stockage permanent clé-valeur pour des données simples de chaînes dans votre application Ionic Capacitor.
 
 ## Prérequis
 
-Avant de commencer, assurez-vous que les éléments suivants sont installés :
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 - Nodejs
 - npm
-- Projet de condensateur ionique
+- Projet Ionic Capacitor
 
-##Installation
+## Installation
 
-1 Ouvrez votre terminal ou votre invite de commande et accédez au répertoire de votre projet
+1 Ouvrez votre terminal ou invite de commandes et accédez à votre répertoire de projet.
 
-2 Exécutez la commande suivante pour installer le package :
+2 Exécutez la commande suivante pour installer le package :
 
 ```bash
 npm install --save @capgo/capacitor-data-storage-sqlite
 ```
 
-3 Après l'installation, synchronisez votre projet Capacitor :
+3 Après l'installation, synchronisez votre projet Capacitor :
 
 ```bash
 npx cap sync
 ```
 
-4 Pour la plateforme Web, installez localforage :
+4 Pour la plateforme Web, installez localforage :
 
 ```bash
 npm install --save localforage
 ```
 
-5 Pour la plateforme Electron, suivez ces étapes supplémentaires :
+5 Pour la plateforme Electron, suivez ces étapes supplémentaires :
 
 ```bash
 npm install --save @capacitor-community/electron
@@ -51,18 +51,18 @@ npx cap sync @capacitor-community/electron
 
 ## Utilisation
 
-Maintenant que nous avons installé le package, voyons comment l'utiliser dans votre application
+Maintenant que nous avons installé le package, voyons comment l'utiliser dans votre application.
 
-### Importation du plugin
+### Importer le Plugin
 
-Tout d’abord, importez le plugin dans votre fichier TypeScript :
+Tout d'abord, importez le plugin dans votre fichier TypeScript :
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
 import { CapacitorDataStorageSqlite, capDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 ```
 
-### Ouvrir un magasin
+### Ouvrir un Magasin
 
 Pour commencer à utiliser le stockage, vous devez ouvrir un magasin :
 
@@ -74,9 +74,9 @@ async function openStore() {
 }
 ```
 
-### Définition d'une valeur
+### Définir une Valeur
 
-Pour définir une valeur dans le magasin :
+Pour définir une valeur dans le magasin :
 
 ```typescript
 async function setValue(store, key: string, value: string) {
@@ -84,9 +84,9 @@ async function setValue(store, key: string, value: string) {
 }
 ```
 
-### Obtenir une valeur
+### Obtenir une Valeur
 
-Pour récupérer une valeur du magasin :
+Pour récupérer une valeur du magasin :
 
 ```typescript
 async function getValue(store, key: string) {
@@ -95,9 +95,9 @@ async function getValue(store, key: string) {
 }
 ```
 
-### Vérifier si une clé existe
+### Vérifier si une Clé Existe
 
-Pour vérifier si une clé existe dans le magasin :
+Pour vérifier si une clé existe dans le magasin :
 
 ```typescript
 async function isKeyExists(store, key: string) {
@@ -106,9 +106,9 @@ async function isKeyExists(store, key: string) {
 }
 ```
 
-### Supprimer une clé
+### Supprimer une Clé
 
-Pour supprimer une clé du magasin :
+Pour supprimer une clé du magasin :
 
 ```typescript
 async function removeKey(store, key: string) {
@@ -116,9 +116,9 @@ async function removeKey(store, key: string) {
 }
 ```
 
-### Vider le magasin
+### Effacer le Magasin
 
-Pour effacer toutes les données du magasin :
+Pour effacer toutes les données du magasin :
 
 ```typescript
 async function clearStore(store) {
@@ -126,9 +126,9 @@ async function clearStore(store) {
 }
 ```
 
-### Fermeture du magasin
+### Fermer le Magasin
 
-Lorsque vous avez fini d'utiliser la boutique, il est conseillé de la fermer :
+Lorsque vous avez terminé d'utiliser le magasin, il est bon de le fermer :
 
 ```typescript
 async function closeStore(store) {
@@ -136,9 +136,9 @@ async function closeStore(store) {
 }
 ```
 
-## Exemple d'utilisation
+## Exemple d'Utilisation
 
-Voici un exemple complet d'utilisation du plugin :
+Voici un exemple complet de la façon d'utiliser le plugin :
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -181,8 +181,8 @@ dataStorageExample();
 
 ## Conclusion
 
-Vous avez maintenant appris à utiliser le package `@capgo/capacitor-data-storage-sqlite` pour implémenter un système de stockage clé-valeur dans votre application Ionic Capacitor. Ce plugin fournit un moyen simple de stocker et de récupérer des données de chaîne sur différentes plates-formes. , y compris iOS, Android, Electron et Web
+Vous avez maintenant appris à utiliser le package `@capgo/capacitor-data-storage-sqlite` pour implémenter un système de stockage clé-valeur dans votre application Ionic Capacitor. Ce plugin offre un moyen simple de stocker et de récupérer des données de chaînes sur différentes plateformes, y compris iOS, Android, Electron et Web.
 
-N'oubliez pas de gérer les erreurs de manière appropriée et de fermer le magasin lorsque vous avez fini de l'utiliser. Pour une utilisation plus avancée, notamment l'utilisation de bases de données chiffrées, de tables multiples et l'importation/exportation JSON, reportez-vous à la documentation complète de l'API du plugin.
+N'oubliez pas de gérer les erreurs de manière appropriée et de fermer le magasin lorsque vous avez terminé de l'utiliser. Pour une utilisation plus avancée, y compris le travail avec des bases de données cryptées, plusieurs tables et l'import/export JSON, consultez la documentation complète de l'API du plugin.
 
-Pour des informations plus détaillées sur l'API et les options disponibles, reportez-vous au README ou à la documentation du package.
+Pour des informations plus détaillées sur l'API et les options disponibles, consultez le README ou la documentation du package.

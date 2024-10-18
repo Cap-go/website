@@ -1,61 +1,60 @@
 ---
 slug: automatic-capacitor-android-build-github-action
-title: Construction Android de condensateur automatique avec des actions GitHub
+title: Compilation automatique de Capacitor Android avec GitHub Actions
 description: >-
-  Comment configurer un pipeline CI/CD pour votre application Android Ionic à
-  l'aide de Fastlane et des actions GitHub en 5 minutes (2022)
+  Comment configurer un pipeline CI/CD pour votre application Android Ionic avec
+  fastlane et GitHub Actions en 5 minutes (2022)
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
 updated_at: 2022-10-27T00:00:00.000Z
 head_image: /fastlane_android.webp
-head_image_alt: Illustration de l'action Fastlane Google Play GitHub
+head_image_alt: Illustration de l'Action GitHub de Fastlane Google Play
 tag: CI/CD
 published: true
 locale: fr
 next_blog: automatic-capacitor-ios-build-github-action
 ---
 
-## Livraison continue pour Android à l'aide des actions Fastlane et GitHub
+## Livraison continue pour Android en utilisant Fastlane et GitHub Actions
 
 ## Prérequis
 
 Avant de poursuivre le tutoriel…
 
 - Assurez-vous d'utiliser GitHub
-- Votre application est déjà déployée sur Google Play Store
+- Votre application est déjà déployée sur le Google Play Store
 - Envie de lire 😆…
 
 ## Important concernant le prix
 
-![Prix de l'action GitHub](/price_github_actionswebp)
+![Prix GitHub Action](/price_github_actionswebp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
-Le service est « _gratuit »_ dans la limite, en fonction de la machine choisie  
-Nous allons utiliser une machine **_Linux_**, vous pouvez voir sur la capture d'écran son prix et ses limites (tarifs dès la création du tutoriel, ils pourraient subir des modifications dans le futur)
+Le service est « gratuit » jusqu'à la limite, selon la machine choisie
+Nous allons utiliser une machine **_Linux_**, vous pouvez voir sur la capture d'écran son prix et ses limites (prix à la date de création du tutoriel, ils pourraient subir des changements à l'avenir)
 
-🔴 **_Une fois prévenus des exigences et des tarifs, si vous le souhaitez, on continue_**
+🔴 **_Une fois avertis des exigences et des prix, si vous le souhaitez, nous continuons_**
 
-> **_📣_ Dans le post, nous supposons que nous avons l'application créée dans Google Play, nous avons la clé de signature de l'écosystème Google**
+> **_📣_ Dans cet article, nous supposons que nous avons l'application créée sur Google Play, nous avons la clé de signature de l'écosystème Google**
 
-## Allons au désordre 🧑🏽💻
+## Passons aux choses sérieuses 🧑🏽💻
 
-**Étapes à suivre dans le post**
+**Étapes à suivre dans l'article**
 
-1 _Copier les fichiers Fastline_
-2 _Stocker vos secrets dans les secrets cryptés GitHub_
-3 _Création et stockage de votre clé de compte de service Google Play_
-4 _Stockage de votre clé de signature Android_
-5 _Configurez votre fichier yml de workflow GitHub Actions_
+1. _Copier les fichiers Fastlane_
+2. _Stocker vos secrets dans les secrets cryptés de GitHub_
+3. _Créer et stocker votre clé de compte de service Google Play_
+4. _Stocker votre clé de signature Android_
+5. _Configurer votre fichier de workflow GitHub Actions yml_
 
-## 1\ Copier les fichiers Fastline
+## 1. Copier les fichiers Fastlane
 
-Fastlane est une bibliothèque Ruby créée pour automatiser les tâches courantes de développement mobile. En utilisant Fastlane, vous pouvez configurer des « voies » personnalisées qui regroupent une série d'« actions » qui effectuent des tâches que vous effectueriez normalement avec Android Studio. Vous pouvez faire beaucoup de choses avec Fastlane, mais pour les besoins de ce didacticiel, nous n'utiliserons qu'une poignée d'actions principales
+Fastlane est une bibliothèque Ruby créée pour automatiser les tâches courantes de développement mobile. En utilisant Fastlane, vous pouvez configurer des « lanes » personnalisées qui regroupent une série d'« actions » effectuant des tâches que vous effectueriez normalement à l'aide d'Android Studio. Vous pouvez faire beaucoup avec Fastlane, mais pour les besoins de ce tutoriel, nous n'utiliserons qu'une poignée d'actions de base.
 
-
-Créez un dossier Fastlane à la racine de votre projet et copiez les fichiers suivants :
-Voie rapide
+Créez un dossier Fastlane à la racine de votre projet et copiez les fichiers suivants :
+Fastlane
 ```ruby
 default_platform(:android)
 
@@ -139,87 +138,89 @@ platform :android do
 end
 ```
 
-## Stocker vos secrets dans les secrets cryptés GitHub
+## Stocker vos secrets dans les secrets cryptés de GitHub
 
-Pour nous authentifier auprès de l'API Google Play Developer, nous aurons besoin d'une clé de compte de service. Le fichier de clé de compte de service est considéré comme sensible, ce qui signifie que nous devrons le stocker en toute sécurité, mais dans un endroit où il est accessible par nos actions GitHub. workflows et notre Fastfile si nécessaire Entrez les secrets cryptés de GitHub : nous stockerons toutes nos clés sensibles dans les secrets du référentiel, les conservant en toute sécurité tout en les rendant automatiquement accessibles aux workflows GitHub Actions dans le référentiel
+Pour s'authentifier auprès de l'API Google Play Developer, nous aurons besoin d'une clé de compte de service. Le fichier de clé de compte de service est considéré comme sensible, ce qui signifie que nous devrons le stocker en toute sécurité, mais dans un endroit où il peut être accessible par nos workflows GitHub Actions et notre Fastfile lorsque nécessaire. Entrez les secrets cryptés de GitHub : nous stockerons toutes nos clés sensibles dans les secrets du dépôt, les conservant en sécurité tout en les rendant automatiquement accessibles aux workflows GitHub Actions dans le dépôt.
 
-### Création et stockage de votre clé de compte de service Google Play
+### Créer et stocker votre clé de compte de service Google Play
 
-Si vous devez créer une nouvelle clé de compte de service, [suivez les étapes décrites ici](https://docsrunwayteam/integrations/app-stores/google-play-console/#service-account-api-key-setup). ayez le fichier JSON de clé de votre compte de service, ajoutons-le aux secrets cryptés de votre référentiel GitHub
+Si vous devez créer une nouvelle clé de compte de service, [suivez les étapes décrites ici](https://docsrunwayteam/integrations/app-stores/google-play-console/#service-account-api-key-setup). Une fois que vous avez votre fichier JSON de clé de compte de service, ajoutons-le aux secrets cryptés de votre dépôt GitHub.
 
-Pour ajouter un nouveau secret aux secrets chiffrés de GitHub, accédez d'abord au dépôt Android auquel vous allez ajouter le workflow GitHub Actions. À l'extrême droite, cliquez sur « Paramètres ».
+Pour ajouter un nouveau secret aux secrets cryptés de GitHub, naviguez d'abord vers le dépôt Android auquel vous ajouterez le workflow GitHub Actions. Sur la droite, cliquez sur "Settings".
 
 ![Paramètres dans le dépôt GitHub](/github_project_settingswebp)
 
-Ensuite, cliquez sur « Secrets », 
+Ensuite, cliquez sur "Secrets",
 
-![Secrets dans le dépôt GitHub, depuis Paramètres](/github_project_settings_secretswebp)
+![Secrets dans le dépôt GitHub, depuis les Paramètres](/github_project_settings_secretswebp)
 
-puis « Actions » dans la liste du menu de gauche
+puis "Actions" dans la liste du menu de gauche.
 
 ![Actions sous Secrets dans le dépôt GitHub](/github_project_settings_secrets_actionswebp)
 
-Ce sont les variables d'environnement secrètes chiffrées pour le référentiel. Tous les workflows configurés sur le référentiel auront accès à ces secrets du référentiel.
+Ce sont les variables d'environnement secrètes cryptées pour le dépôt. Tous les workflows configurés sur le dépôt auront accès à ces secrets du dépôt.
 
-À partir de là, cliquez sur « Nouveau secret du référentiel » pour ajouter un nouveau secret :
+À partir de là, cliquez sur "New repository secret" pour ajouter un nouveau secret :
 
-![Nouvelle action secrète du référentiel dans GitHub](/github_project_settings_secrets_actions_newwebp)
+![Action Nouveau secret de dépôt dans GitHub](/github_project_settings_secrets_actions_newwebp)
 
-Lorsque vous cliquez sur « Nouveau secret du référentiel », vous verrez un formulaire qui vous demandera de saisir un nom pour votre nouveau secret et sa valeur.
+Lorsque vous cliquez sur "New repository secret", vous verrez un formulaire qui vous demandera d'entrer un nom pour votre nouveau secret, et sa valeur.
 
-![Ajout du nom et de la valeur du nouveau secret dans GitHub](/github_project_settings_secrets_actions_new_addwebp)
+![Ajout du nom et de la valeur pour un nouveau secret dans GitHub](/github_project_settings_secrets_actions_new_addwebp)
 
-Les secrets GitHub n'acceptent que les valeurs de chaîne, donc pour certaines informations d'identification (tous les fichiers jks ou json par exemple), vous devrez d'abord convertir le fichier en chaîne codée en base64 avant de l'ajouter aux secrets GitHub. Vous pouvez le faire à partir de la ligne de commande. :
+Les secrets GitHub n'acceptent que des valeurs de type chaîne, donc pour certaines informations d'identification (tous les fichiers jks ou json par exemple), vous devrez d'abord convertir le fichier en une chaîne encodée en base64 avant de l'ajouter aux secrets GitHub. Vous pouvez le faire depuis la ligne de commande :
 
 ```
 base64 in_file_path | pbcopy
 ```
 
-Cela copie la chaîne résultante dans votre presse-papiers, afin que vous puissiez la coller directement dans un nouveau secret de référentiel sur GitHub.Par exemple:
+Cela copie la chaîne résultante dans votre presse-papiers, vous pouvez donc la coller directement dans un nouveau secret de dépôt sur GitHub.Voici la traduction en français :
+
+Par exemple :
 
 ```
 base64 service_account_key.json | pbcopy
 ```
 
-Créons un nouveau secret de référentiel comme suit :
+Créons un nouveau secret de dépôt comme suit :
 
-- PLAY_CONFIG_JSON : la clé JSON du compte de service encodée en base64
+- PLAY_CONFIG_JSON : la clé JSON du compte de service encodée en base64
 
-_Veuillez noter que vous devez stocker une copie de sauvegarde de vos secrets en toute sécurité dans un autre emplacement (quelque part qui n'est pas des secrets cryptés par GitHub), car vous ne pourrez plus exporter ou accéder aux informations d'identification depuis GitHub après les avoir ajoutées_
+_Veuillez noter que vous devez stocker une copie de sauvegarde de vos secrets en lieu sûr (ailleurs que dans les secrets chiffrés de GitHub), car vous ne pourrez plus exporter ou accéder aux identifiants depuis GitHub après les avoir ajoutés_
 
-Avec notre clé de compte de service ajoutée aux secrets du référentiel GitHub, nous pouvons désormais nous authentifier auprès de l'API de développement Google Play à partir de n'importe quel flux de travail GitHub Actions ajouté au référentiel.
+Avec notre clé de compte de service ajoutée aux secrets du dépôt GitHub, nous pouvons maintenant nous authentifier auprès de l'API Google Play Developer depuis n'importe quel workflow GitHub Actions ajouté au dépôt
 
 ![Nouveau secret ajouté avec succès dans GitHub](/github_project_settings_secrets_addedwebp)
 
-### Stockage de votre clé de signature Android
+### Stocker votre clé de signature Android
 
-Pour [signer correctement les versions d'Android](https://developerandroidcom/studio/publish/app-signing/) dans CI, le flux de travail devra accéder soit à une clé de téléchargement Android, soit à une clé de signature d'application. Les applications créées après août 2021 utiliseront Le nouveau système [Play App Signing](https://developerandroidcom/studio/publish/app-signing/#app-signing-google-play/) de Google par défaut, dans lequel une clé de téléchargement gérée par l'utilisateur est utilisée pour signer les AAB avant télécharger, mais la clé de signature d'application est gérée par Google. Si votre équipe utilise Play App Signing de Google, tout ce dont vous aurez besoin pour le pipeline CI est la _clé de téléchargement_ de votre application, car la signature est différée jusqu'à ce que l'AAB ait été téléchargé sur la Play Console. Si vous devez encore créer une clé de téléchargement et un magasin de clés, suivez les [instructions](https://developerandroidcom/studio/publish/app-signing/#generate-key/) trouvées dans la documentation du développeur Android.
+Pour correctement [signer les builds Android de production](https://developerandroidcom/studio/publish/app-signing/) en CI, le workflow aura besoin d'accéder soit à une clé de téléchargement Android, soit à une clé de signature d'application. Les applications créées après août 2021 utiliseront par défaut le nouveau système [Play App Signing](https://developerandroidcom/studio/publish/app-signing/#app-signing-google-play/) de Google, dans lequel une clé de téléchargement gérée par l'utilisateur est utilisée pour signer les AAB avant le téléchargement, mais la clé de signature de l'application est gérée par Google. Si votre équipe utilise Play App Signing de Google, alors vous n'aurez besoin que de la _clé de téléchargement_ de votre application pour le pipeline CI, car la signature est différée jusqu'après que l'AAB ait été téléchargé sur la Play Console. Si vous devez encore créer une clé de téléchargement et un keystore, suivez les [instructions](https://developerandroidcom/studio/publish/app-signing/#generate-key/) trouvées dans la documentation pour développeurs Android.
 
-Si votre équipe n'a pas encore migré vers le système de signature d'application Play de Google, vous devrez plutôt mettre la clé _signing_ de votre application à la disposition du flux de travail CI pour signer correctement votre application avant de la télécharger.
+Si votre équipe n'a pas encore migré vers le système Play App Signing de Google, vous devrez alors rendre votre clé de _signature_ d'application disponible pour le workflow CI afin de signer correctement votre application avant le téléchargement.
 
-Ajoutez les éléments suivants en tant que secrets du référentiel :
+Ajoutez les éléments suivants en tant que secrets du dépôt :
 
-
-- ANDROID_KEYSTORE_FILE : le fichier "jks" ou "keystore" encodé en base64 utilisé pour signer vos versions Android. Il s'agira soit du fichier de clés associé à votre clé d'importation (si vous utilisez la signature d'application Play), soit de votre clé de signature d'application.
+- ANDROID_KEYSTORE_FILE : le fichier `jks` ou `keystore` encodé en base64 utilisé pour signer vos builds Android. Il s'agira soit du fichier keystore associé à votre clé de téléchargement (si vous utilisez Play App Signing), soit de votre clé de signature d'application.
 - KEYSTORE_KEY_PASSWORD : le mot de passe associé au fichier keystore
-- KEYSTORE_KEY_ALIAS : l'alias du magasin de clés
+- KEYSTORE_KEY_ALIAS : l'alias du keystore
 - KEYSTORE_STORE_PASSWORD : le mot de passe de la clé privée
-- DEVELOPER_PACKAGE_NAME : votre identifiant d'application Android comme comexampleapp
-Avec ces secrets ajoutés aux secrets du référentiel GitHub, nous sommes prêts à configurer notre workflow GitHub Actions pour exécuter nos builds.
+- DEVELOPER_PACKAGE_NAME : l'ID de votre application Android comme comexampleapp
+
+Avec ces secrets ajoutés aux secrets du dépôt GitHub, nous sommes prêts à configurer notre workflow GitHub Actions pour exécuter nos builds.
 
 ![Plusieurs secrets ajoutés avec succès dans GitHub](/github_project_settings_multi_secrets_addedwebp)
 
-## Configurez votre fichier yml de workflow GitHub Actions
+## Configurer votre fichier yml de workflow GitHub Actions
 
-Maintenant, configurons notre fichier yml de workflow Android GitHub Actions – il définira les étapes que nous exécuterons dans le cadre de notre workflow. Au cours de ces étapes, nous appellerons nos voies Fastlane.
+Maintenant, configurons notre fichier yml de workflow GitHub Actions pour Android - il définira les étapes que nous exécuterons dans le cadre de notre workflow. Dans ces étapes, nous appellerons nos lanes Fastlane.
 
-Commençons par créer les dossiers nécessaires. Depuis le répertoire racine de votre projet, appelez :
+Tout d'abord, créons les dossiers nécessaires. Depuis le répertoire racine de votre projet, exécutez :
 
 ```
 mkdir .github && cd .github && mkdir workflows && cd workflows && touch build-upload-android.yml
 ```
 
-Ensuite, collez le code suivant dans votre fichier `build-upload-androidyml` nouvellement créé :
+Ensuite, collez le code suivant dans votre fichier `build-upload-androidyml` nouvellement créé :
 
 ```yaml
 name: Build source code on android
@@ -283,30 +284,30 @@ jobs:
           retention-days: 10
 ```
 
-Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser la balise, veuillez vous référer à [Création et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/)
+Ce workflow devrait être déclenché après chaque _tag_ GitHub, si vous avez besoin d'automatiser le tag, veuillez vous référer à [Construction et publication automatiques avec GitHub actions](/blog/automatic-build-and-release-with-github-actions/)
 
-Ensuite, ce workflow extraira vos dépôts Nodejs, les installera et créera votre application JavaScript.
+Ensuite, ce workflow récupérera vos dépendances Nodejs, les installera et construira votre application JavaScript.
 
-Votre application n'a pas besoin d'utiliser Ionic, seule la base Capacitor est obligatoire, elle peut avoir l'ancien module Cordova, mais le plugin Capacitor JS doit être préféré
+Votre application n'a pas besoin d'utiliser Ionic, seule la base Capacitor est obligatoire, elle peut avoir d'anciens modules Cordova, mais les plugins JS Capacitor devraient être préférés.
 
-> Chaque fois que vous envoyez un nouveau commit, une version sera créée dans la console Google Play, canal bêta
+> Chaque fois que vous envoyez un nouveau commit, une version sera construite dans la console Google Play, canal bêta.
 
-J'améliorerai ce blog avec vos retours, si vous avez des questions ou des suggestions, n'hésitez pas à me le faire savoir par email martin@capgoapp
+J'améliorerai ce blog avec vos commentaires, si vous avez des questions ou des suggestions, n'hésitez pas à me le faire savoir par email martin@capgoapp
 
-## **Traitement de construction**
+## **Traitement des builds**
 
-Dans GitHub Actions, **vous êtes facturé en fonction des minutes** que vous avez utilisées pour exécuter votre flux de travail CI/CD. Par expérience, il faut environ 3 à 5 minutes avant qu'une build puisse être traitée dans Google Play Store.
+Dans GitHub Actions, **vous êtes facturé en fonction des minutes** que vous avez utilisées pour exécuter votre workflow CI/CD. D'après l'expérience, il faut environ 3 à 5 minutes avant qu'un build puisse être traité dans le Google Play Store.
 
-Pour les projets privés, le coût estimé par construction peut aller jusqu'à **0 008 $/min x 5 minutes = 0 $4**, ou plus, selon la configuration ou les dépendances de votre projet
+Pour les projets privés, le coût estimé par build peut aller jusqu'à **0,008 $/min x 5 min = 0,04 $4**, ou plus, selon la configuration ou les dépendances de votre projet
 
-Pour les projets Open source, cela ne devrait pas poser de problème du tout Voir [tarification](https://githubcom/pricing/)
+Pour les projets open-source, cela ne devrait pas du tout poser problème. Voir [tarification](https://githubcom/pricing/)
 
 ### Merci
 
 Ce blog est basé sur les articles suivants :
-- [Automatisez la publication de l'application sur le Google Play Store avec GitHub Actions⚡+ Fastlane🏃](https://mediumcom/scalereal/automate-publishing-app-to-the-google-play-store-with-github-actions-fastlane -ac9104712486/)
-- [Démarrage du projet CI/CD pour Android (Partie - 3— Actions GitHub)](https://proandroiddevcom/getting-started-ci-cd-for-android-project-part-3-github-actions-157857224cb1/ )
--[Intégration continue Android à l'aide de Fastlane et CircleCI 20 — Partie III](https://mediumcom/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5 /)
-- [Comment configurer un pipeline CI/CD pour votre application Android à l'aide de Fastlane et GitHub Actions](https://wwwrunwayteam/blog/ci-cd-pipeline-android-app-fastlane-github-actions/)
+- [Automatiser la publication d'applications sur le Google Play Store avec GitHub Actions⚡+ Fastlane🏃](https://mediumcom/scalereal/automate-publishing-app-to-the-google-play-store-with-github-actions-fastlane-ac9104712486/)
+- [Mise en place de CI/CD pour un projet Android (Partie 3 - GitHub Actions)](https://proandroiddevcom/getting-started-ci-cd-for-android-project-part-3-github-actions-157857224cb1/)
+- [Intégration continue Android avec Fastlane et CircleCI 20 — Partie III](https://mediumcom/pink-room-club/android-continuous-integration-using-fastlane-and-circleci-2-0-part-iii-ccdf5b83d8f5/)
+- [Comment mettre en place un pipeline CI/CD pour votre application Android en utilisant Fastlane et GitHub Actions](https://wwwrunwayteam/blog/ci-cd-pipeline-android-app-fastlane-github-actions/)
 - [Documentation Fastlane](https://docsfastlanetools/getting-started/android/beta-deployment/)
 - [Ce message GitHub de @mrogunlana](https://githubcom/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)

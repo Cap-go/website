@@ -2,13 +2,13 @@
 locale: fr
 ---
 
-chantez @capgo/capacitor-fingerprint Package
+Chantez le paquet @capgo/capacitor-fingerprint
 
-Le package `@capgo/capacitor-fingerprint` est un client Capacitor pour Fingerprint PRO. Il fournit une identification précise à 100 % de l'appareil pour la détection des fraudes. Dans ce didacticiel, nous aborderons le processus d'installation et comment utiliser l'API du package.
+Le paquet `@capgo/capacitor-fingerprint` est un client Capacitor pour Fingerprint PRO. Il fournit une identification de dispositif précise à 100 % pour la détection de fraude. Dans ce tutoriel, nous allons couvrir le processus d'installation et comment utiliser l'API du paquet.
 
-##Installation
+## Installation
 
-Pour installer le package `@capgo/capacitor-fingerprint`, exécutez la commande suivante :
+Pour installer le paquet `@capgo/capacitor-fingerprint`, exécutez la commande suivante :
 
 ```bash
 npm install @capgo/capacitor-fingerprint
@@ -19,7 +19,7 @@ npx cap sync
 
 ### Charger
 
-Pour charger le plugin `@capgo/capacitor-fingerprint`, utilisez la fonction `load`. Voici un exemple d'utilisation :
+Pour charger le plugin `@capgo/capacitor-fingerprint`, utilisez la fonction `load`. Voici un exemple de comment l'utiliser :
 
 ```typescript
 import { Plugins } from '@capacitor/core';
@@ -42,7 +42,7 @@ loadFingerprintPlugin();
 
 ### Obtenir l'ID du visiteur
 
-Pour obtenir l'identifiant du visiteur, utilisez la fonction `getVisitorId`. Voici un exemple d'utilisation :
+Pour obtenir l'ID du visiteur, utilisez la fonction `getVisitorId`. Voici un exemple de comment l'utiliser :
 
 ```typescript
 import { Plugins } from '@capacitor/core';
@@ -62,9 +62,9 @@ async function getVisitorId() {
 getVisitorId();
 ```
 
-### Obtenez les données des visiteurs
+### Obtenir les données du visiteur
 
-Pour obtenir les données des visiteurs, utilisez la fonction `getVisitorData`. Voici un exemple d'utilisation :
+Pour obtenir les données du visiteur, utilisez la fonction `getVisitorData`. Voici un exemple de comment l'utiliser :
 
 ```typescript
 import { Plugins } from '@capacitor/core';
@@ -86,4 +86,4 @@ getVisitorData();
 
 ## Conclusion
 
-Dans ce tutoriel, nous avons couvert le processus d'installation du package `@capgo/capacitor-fingerprint` et comment utiliser son API. Vous pouvez désormais intégrer l'identification des appareils et la détection des fraudes dans votre application Capacitor à l'aide du service Fingerprint PRO. Pour plus de détails, reportez-vous à la documentation du package et explorer les fonctionnalités supplémentaires qu'il fournit
+Dans ce tutoriel, nous avons couvert le processus d'installation du paquet `@capgo/capacitor-fingerprint` et comment utiliser son API. Vous pouvez maintenant intégrer l'identification de dispositif et la détection de fraude dans votre application Capacitor en utilisant le service Fingerprint PRO. Pour plus de détails, référez-vous à la documentation du paquet et explorez les fonctionnalités supplémentaires qu'il propose.

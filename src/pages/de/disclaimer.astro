@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueDisclaimer from '@/vue-pages/disclaimer.vue'
+import translations from '@/services/translations'
+
+const title = [Astro.locals.runtimeConfig.public.brand, translations['disclaimer'][Astro.locals.locale]].join(' | ')
+const description = translations['read_our_disclaimer'][Astro.locals.locale]
+
+const content = { title, description }
+---
+
+<Layout content={content}><VueDisclaimer locale={Astro.locals.locale} client:load /></Layout>

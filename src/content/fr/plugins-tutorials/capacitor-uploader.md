@@ -4,37 +4,37 @@ locale: fr
 
 Tutoriel capgo/capacitor-uploader
 
-Ce didacticiel vous guidera tout au long du processus d'utilisation du package `@capgo/capacitor-uploader` pour télécharger des fichiers de manière native dans votre application Ionic Capacitor.
+Ce tutoriel vous guidera à travers le processus d'utilisation du paquet `@capgo/capacitor-uploader` pour télécharger des fichiers de manière native dans votre application Ionic Capacitor.
 
 ## Prérequis
 
-Avant de commencer, assurez-vous que les éléments suivants sont installés :
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 - Nodejs
 - npm
-- Projet de condensateur ionique
+- Projet Ionic Capacitor
 
-##Installation
+## Installation
 
-1 Ouvrez votre terminal ou votre invite de commande et accédez au répertoire de votre projet
+1 Ouvrez votre terminal ou invite de commande et naviguez vers votre répertoire de projet.
 
-2 Exécutez la commande suivante pour installer le package :
+2 Exécutez la commande suivante pour installer le paquet :
 
 ```bash
 npm install @capgo/capacitor-uploader
 ```
 
-3 Après l'installation, synchronisez votre projet Capacitor :
+3 Après l'installation, synchronisez votre projet Capacitor :
 
 ```bash
 npx cap sync
 ```
 
-##Configuration
+## Configuration
 
-###Configuration Android
+### Configuration Android
 
-Pour Android, vous devez ajouter des autorisations à votre fichier `AndroidManifestxml`. Ouvrez le fichier situé dans `android/app/src/main/AndroidManifestxml` et ajoutez les autorisations suivantes dans la balise `<manifest>` :
+Pour Android, vous devez ajouter certaines autorisations à votre fichier `AndroidManifest.xml`. Ouvrez le fichier situé à `android/app/src/main/AndroidManifest.xml` et ajoutez les autorisations suivantes à l'intérieur de la balise `<manifest>` :
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -44,19 +44,19 @@ Pour Android, vous devez ajouter des autorisations à votre fichier `AndroidMani
 
 ## Utilisation
 
-Maintenant que nous avons installé et configuré le package, voyons comment l'utiliser dans votre application
+Maintenant que nous avons installé et configuré le paquet, voyons comment l'utiliser dans votre application.
 
-### Importation du téléchargeur
+### Importer l'Uploader
 
-Tout d’abord, importez le Uploader dans votre fichier TypeScript :
+Tout d'abord, importez l'Uploader dans votre fichier TypeScript :
 
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
 ```
 
-### Téléchargement sur S3
+### Téléchargement vers S3
 
-Voici un exemple de la façon de télécharger un fichier sur S3 à l'aide d'une URL prédéfinie :
+Voici un exemple de la façon de télécharger un fichier vers S3 en utilisant une URL pré-signée :
 
 ```typescript
 async function uploadToS3(filePath: string, presignedUrl: string, fields: Record<string, string>) {
@@ -87,9 +87,9 @@ async function uploadToS3(filePath: string, presignedUrl: string, fields: Record
 }
 ```
 
-### Téléchargement sur un serveur personnalisé
+### Téléchargement vers un Serveur Personnalisé
 
-Voici un exemple de la façon de télécharger un fichier sur un serveur personnalisé :
+Voici un exemple de la façon de télécharger un fichier vers un serveur personnalisé :
 
 ```typescript
 async function uploadToCustomServer(filePath: string, serverUrl: string) {
@@ -132,9 +132,9 @@ async function uploadToCustomServer(filePath: string, serverUrl: string) {
 }
 ```
 
-### Utilisation avec l'aperçu de la caméra à condensateur
+### Utilisation avec le Preview de la Caméra Capacitor
 
-Si vous utilisez le plugin Capacitor Camera Preview, vous pouvez le combiner avec Uploader pour capturer et télécharger des vidéos. Voici un exemple :
+Si vous utilisez le plugin Capacitor Camera Preview, vous pouvez le combiner avec l'Uploader pour capturer et télécharger des vidéos. Voici un exemple :
 
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview'
@@ -185,8 +185,8 @@ async function uploadVideo(filePath: string) {
 
 ## Conclusion
 
-Vous avez maintenant appris à utiliser le package `@capgo/capacitor-uploader` pour télécharger des fichiers de manière native dans votre application Ionic Capacitor. Ce plugin offre un moyen flexible de télécharger des fichiers sur divers serveurs, y compris S3 avec des URL présignées, et peut être utilisé en combinaison avec d'autres plugins comme Capacitor Camera Preview
+Vous avez maintenant appris à utiliser le paquet `@capgo/capacitor-uploader` pour télécharger des fichiers de manière native dans votre application Ionic Capacitor. Ce plugin offre un moyen flexible de télécharger des fichiers vers divers serveurs, y compris S3 avec des URL pré-signées, et peut être utilisé en combinaison avec d'autres plugins comme le Capacitor Camera Preview.
 
-N'oubliez pas de gérer les erreurs de manière appropriée et de gérer les événements de téléchargement pour fournir des commentaires à vos utilisateurs sur la progression et l'état du téléchargement.
+N'oubliez pas de gérer les erreurs de manière appropriée et de gérer les événements de téléchargement pour fournir des rétroactions à vos utilisateurs sur la progression et le statut du téléchargement.
 
-Pour des informations plus détaillées sur l'API et les options disponibles, reportez-vous au README ou à la documentation du package.
+Pour des informations plus détaillées sur l'API et les options disponibles, consultez le README ou la documentation du paquet.

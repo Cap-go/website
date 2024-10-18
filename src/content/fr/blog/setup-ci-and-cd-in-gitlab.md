@@ -1,9 +1,9 @@
 ---
 slug: setup-ci-and-cd-gitlab
-title: Création et publication automatiques d'une application avec GitLab
+title: Construction et déploiement automatiques de l'application avec GitLab
 description: >-
-  Créez gratuitement votre propre pipeline CI/CD avec GitLab, déployez votre
-  application Ionic Capacitor JS à chaque fois que vous appuyez sur main.
+  Créez votre propre pipeline CI/CD avec GitLab gratuitement et déployez votre
+  application Ionic Capacitor JS à chaque push sur la branche principale.
 author: Anik Dhabal Babu
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
@@ -16,69 +16,68 @@ locale: fr
 next_blog: ''
 ---
 
-Cet article vous expliquera comment configurer le pipeline CI/CD avec GitLab.
+Cet article vous guidera sur la configuration d'un pipeline CI/CD avec GitLab
 
 ## Préface
 
-Assurez-vous d'avoir d'abord ajouté votre application Capacitor à Capgo, ce tutoriel se concentre uniquement sur la phase de téléchargement. Si vous devez ajouter votre application à Capgo, vous pouvez suivre ce [Tutoriel](https://capgoapp/blog/update-your- condensateur-apps-utilisation-transparente-de-capacitor-updater/)
+Assurez-vous d'avoir d'abord ajouté votre application Capacitor à Capgo, ce tutoriel se concentre uniquement sur la phase de téléchargement. Si vous devez ajouter votre application à Capgo, vous pouvez suivre ce [Tutoriel](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)
 
-## Convention de validation
+## Convention de commit
 
-Vous devez d'abord commencer à suivre la convention de validation [commits conventionnels](https://wwwconventionalcommitsorg/en/v100/)\` cela aidera les outils à comprendre comment mettre à niveau le numéro de version, il faut 5 minutes pour l'apprendre
+Tout d'abord, vous devez commencer à suivre la convention de commit [conventional commits](https://wwwconventionalcommitsorg/en/v100/). Cela aidera les outils à comprendre comment mettre à jour le numéro de version, c'est 5 minutes à apprendre.
 
-![Commits conventionnels](/conventional_commitswebp)
+![Conventional commits](/conventional_commitswebp)
 
-## GitLab CI/CD pour la balise
+## GitLab CI/CD pour le Tag
 
-Créez un fichier gitlab-ciyml à la racine de votre référentiel GitLab avec le contenu suivant
+Créez un fichier gitlab-ci.yml à la racine de votre dépôt GitLab avec le contenu suivant :
 
-      
-     étapes:
-          - étiqueter
+     stages:
+          - tag
 
-     version_bump :
-       étape : balise
-       seulement:
-         - principal
-      sauf:
-        variables :
+     bump_version:
+       stage: tag
+       only:
+         - main
+      except:
+        variables:
       - $CI_COMMIT_MESSAGE =~ /^chore\(release\):/
-      scénario:
-       - git config --global useremail "gitlab@votredomainecom"
-       - git config --nom d'utilisateur global "GitLab CI/CD"
+      script:
+       - git config --global user.email "gitlab@votredomaine.com"
+       - git config --global user.name "GitLab CI/CD"
        - git checkout $CI_COMMIT_REF_NAME
-       - git pull origine $CI_COMMIT_REF_NAME
-       - version standard du condensateur npx
-       - git push origine $CI_COMMIT_REF_NAME --tags
+       - git pull origin $CI_COMMIT_REF_NAME
+       - npx capacitor-standard-version
+       - git push origin $CI_COMMIT_REF_NAME --tags
 
-Remplacez "gitlab@yourdomaincom" et "GitLab CI/CD" par votre adresse e-mail GitLab et votre nom d'utilisateur dans la section script. Cette configuration déclenche le travail uniquement lors des push vers la branche principale et exclut les commits avec des messages commençant par "chore(release):"
+Remplacez "gitlab@votredomaine.com" et "GitLab CI/CD" par votre email et nom d'utilisateur GitLab dans la section script. Cette configuration déclenche le job uniquement lors des push sur la branche principale et exclut les commits dont les messages commencent par "chore(release):".
 
-## GitLab CI/CD pour la construction
+## GitLab CI/CD pour la Build
 
-Ajoutez une autre étape à votre fichier gitlab-ciyml pour la build :
+Ajoutez une autre étape à votre fichier gitlab-ci.yml pour la build :
 
-        étapes:
-          - déployer
+        stages:
+          - deploy
 
-       déployer:
-         étape : déployer
-         seulement:
-           - tags # Ce travail ne s'exécutera que pour les poussées de tags
-         scénario:
+       deploy:
+         stage: deploy
+         only:
+           - tags  # Ce job ne s'exécutera que pour les push de tags
+         script:
            - apt-get update -qy && apt-get install -y nodejs npm
            - npm install -g @capgo/cli
            - npm ci
-           - npm exécuter la construction
+           - npm run build
            - npx @capgo/cli bundle upload -a $CAPGO_TOKEN -c production
-         variables :
-           FIREBASE_CONFIG : $FIREBASE_CONFIG # Définissez ceci dans les paramètres de votre projet GitLab
-         environnement:
-           nom : production
+         variables:
+           FIREBASE_CONFIG: $FIREBASE_CONFIG  # Définissez ceci dans les paramètres de votre projet GitLab
+         environment:
+           name: production
 
-Assurez-vous que votre clé API Capgo (CAPGO_TOKEN) est ajoutée en tant que variable CI/CD dans votre projet GitLab. Accédez à votre projet dans GitLab, accédez à Paramètres > CI/CD > Variables et ajoutez une variable nommée CAPGO_TOKEN avec la valeur de votre clé API.
+Assurez-vous d'avoir ajouté votre clé API Capgo (CAPGO_TOKEN) comme variable CI/CD dans votre projet GitLab. Allez dans votre projet sur GitLab, naviguez vers Paramètres > CI/CD > Variables, et ajoutez une variable nommée CAPGO_TOKEN avec la valeur de votre clé API.
 
-Personnalisez le script de build pour qu'il corresponde au processus de build spécifique de votre projet, par exemple en modifiant la commande npm run build
+Personnalisez le script de build pour correspondre au processus de build spécifique de votre projet, comme changer la commande npm run build.
 
 ## Conclusion
 
-Nous y sommes ! Nous avons franchi une étape supplémentaire dans notre parcours technologique. Dans le développement de logiciels modernes, le CICD est un facteur essentiel à prendre en compte. J'espère donc que cette directive aura du sens pour tout le monde.
+Voilà ! Nous avons franchi une étape supplémentaire dans notre parcours technologique. Dans le développement logiciel moderne, la CI/CD est un facteur essentiel à prendre en compte. J'espère donc que ce guide est compréhensible pour tout le monde.

@@ -2,71 +2,50 @@
 locale: fr
 ---
 
-Utilisation de @capgo/nativegeocoder pour le géocodage
+Utilisation de @capgo/nativegeocoder pour la géocodage
 
-Le package `@capgo/nativegeocoder` est un plugin Capacitor qui fournit des fonctionnalités natives de géocodage direct et inverse. Le géocodage est le processus de conversion d'adresses en coordonnées géographiques (latitude et longitude) et vice versa.
+Le paquet `@capgo/nativegeocoder` est un plugin Capacitor qui fournit des fonctionnalités de géocodage et de géocodage inverse. Le géocodage est le processus de conversion d'adresses en coordonnées géographiques (latitude et longitude) et vice versa.
 
-Pour utiliser le package `@capgo/nativegeocoder`, suivez les étapes ci-dessous :
+Pour utiliser le paquet `@capgo/nativegeocoder`, suivez les étapes ci-dessous :
 
-### Étape 1 : Installer le package
+### Étape 1 : Installer le paquet
 
-Installez le package à l'aide de npm :
+Installez le paquet en utilisant npm :
 
-```bash
-npm install @capgo/nativegeocoder
-```
+[[BLOC_DE_CODE]]
 
-### Étape 2 : Synchronisez votre projet
+### Étape 2 : Synchroniser votre projet
 
-Exécutez la commande suivante pour synchroniser votre projet :
+Exécutez la commande suivante pour synchroniser votre projet :
 
-```bash
-npx cap sync
-```
+[[BLOC_DE_CODE]]
 
-### Étape 3 : Importer le plugin
+### Étape 3 : Importer le plugin
 
-Dans votre code, importez le `NativeGeocoder` depuis `@capgo/nativegeocoder` :
+Dans votre code, importez `NativeGeocoder` depuis `@capgo/nativegeocoder` :
 
-```javascript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
-```
+[[BLOC_DE_CODE]]
 
-### Étape 4 : Implémenter la fonctionnalité de géocodage
+### Étape 4 : Mettre en œuvre la fonctionnalité de géocodage
 
-Le plugin `@capgo/nativegeocoder` propose deux méthodes principales de géocodage :
+Le plugin `@capgo/nativegeocoder` fournit deux méthodes principales pour le géocodage :
 
-#### Géocodage inversé
+#### Géocodage inverse
 
-Le géocodage inversé est le processus de conversion de coordonnées géographiques (latitude et longitude) en adresse
+Le géocodage inverse est le processus de conversion de coordonnées géographiques (latitude et longitude) en une adresse.
 
-```typescript
-const reverseOptions = {
-  latitude: 37.7749,
-  longitude: -122.4194,
-};
+[[BLOC_DE_CODE]]
 
-const address = NativeGeocoder.reverseGeocode(reverseOptions);
-console.log(address);
-```
+La méthode `reverseGeocode` prend un objet avec les propriétés latitude et longitude. Elle retourne l'adresse comme résultat.
 
-La méthode `reverseGeocode` prend un objet avec les propriétés de latitude et de longitude. Elle renvoie l'adresse en conséquence
+#### Géocodage direct
 
-#### Transférer le géocodage
+Le géocodage direct est le processus de conversion d'une adresse en coordonnées géographiques (latitude et longitude).
 
-Le géocodage direct est le processus de conversion d'une adresse en coordonnées géographiques (latitude et longitude)
+[[BLOC_DE_CODE]]
 
-```typescript
-const forwardOptions = {
-  address: '1600 Amphitheatre Parkway, Mountain View, CA',
-};
-
-const coordinates = NativeGeocoder.forwardGeocode(forwardOptions);
-console.log(coordinates);
-```
-
-La méthode `forwardGeocode` prend un objet avec la propriété address Elle renvoie les coordonnées en conséquence
+La méthode `forwardGeocode` prend un objet avec la propriété adresse. Elle retourne les coordonnées comme résultat.
 
 ### Conclusion
 
-Le package `@capgo/nativegeocoder` fournit un moyen simple et efficace d'effectuer le géocodage dans votre projet Capacitor. En suivant les étapes décrites dans ce tutoriel, vous pouvez facilement intégrer la fonctionnalité de géocodage dans votre application.
+Le paquet `@capgo/nativegeocoder` fournit un moyen simple et efficace d'effectuer du géocodage dans votre projet Capacitor. En suivant les étapes décrites dans ce tutoriel, vous pouvez facilement intégrer la fonctionnalité de géocodage dans votre application.

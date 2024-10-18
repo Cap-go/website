@@ -78,7 +78,7 @@ All commands are run from the root of the project, from a terminal:
 
 The website aims at having an automatic i18n done via various scripts in the `scripts` directory.
 
-The [translations.tsx](./scripts/translations.tsx) script is used to translate the website content into the desired language. It has two methods to create translations, via `OpenAI API`, and the other via `api.datpmt.com`. To use the OpenAI API method, make sure you have an `OPENAI_API_KEY` as the environment variable set. To use the other API, just un-comment the `translateText` function call using it.
+The [translations.tsx](./scripts/translations.tsx) script is used to translate the website content into the desired language. It has two methods to create translations, via `OpenAI API` or `Anthropic API`, and the other via `api.datpmt.com`. To use the OpenAI API method, make sure you have an `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` as the environment variable set. To use the other API, just un-comment the `translateText` function call using it.
 
 Now, let's say that you want to update translations or add a new locale, `fr`.
 

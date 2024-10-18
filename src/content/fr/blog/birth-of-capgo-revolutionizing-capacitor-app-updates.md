@@ -2,149 +2,149 @@
 slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
 title: Comment un problème GitHub est devenu une entreprise
 description: >-
-  Découvrez les essais et les triomphes derrière la création de Capgo, un
-  système innovant de mise à jour en direct pour les applications Capacitor, né
-  de la nécessité et façonné par les commentaires de la communauté.
+  Découvrez les défis et les succès dans le développement de Capgo, un système
+  innovant de mises à jour en direct pour les applications Capacitor, né d'un
+  besoin et façonné par les retours de la communauté.
 author: Martin Donadieu
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
 updated_at: 2024-07-13T00:00:00.000Z
 head_image: /capgo-birth-story.webp
-head_image_alt: Une représentation visuelle de l'évolution de Capgo de l'idée au produit
+head_image_alt: Une représentation visuelle du développement de Capgo de l'idée au produit
 tag: development
 published: true
 locale: fr
 next_blog: ''
 ---
 
-## The Genesis : une demande de la communauté
+Voici la traduction en français :
 
-Les graines de Capgo ont été plantées bien avant que je commence mon parcours en tant que créateur solo. Le 8 juillet 2020, un membre de la communauté nommé alexcroox a soumis une demande de plugin qui allait éventuellement devenir le modèle de Capgo.
+## La Genèse : Une Demande de la Communauté
+
+Les graines de Capgo ont en réalité été plantées bien avant que je ne commence mon parcours en tant que créateur indépendant. Le 8 juillet 2020, un membre de la communauté nommé alexcroox a soumis une demande de plugin qui deviendrait finalement le plan directeur de Capgo.
 
 ![Demande initiale de plugin](/capgo-initial-requestwebp)
 
-Cette demande soulignait la nécessité d'un plugin « Capacitor Hot Code Push » avec les points clés suivants :
+Cette demande soulignait le besoin d'un plugin "Capacitor Hot Code Push" avec les points clés suivants :
 
-1 **Plateformes** : prise en charge d'Android et d'iOS
-2 **Solutions existantes** : elle a mis en évidence les limites des options actuelles telles que MS Code Push (qui ne prenait pas en charge Capacitor) et App Flow (qui était cher et peu flexible)
-3 **Description** : La possibilité de mettre à jour le js/css/html d'une application en temps réel sans passer par le processus de révision de l'App Store.
-4 **Principales caractéristiques** : 
-   - Faciliter les mises à jour en direct à partir d'un serveur/point de terminaison choisi par le développeur
-   - Téléchargez un fichier zip du dossier dist mis à jour, extrayez-le et dites à Capacitor de se lancer à partir de ce nouveau répertoire
-   - Fonctionnalités supplémentaires telles que la vérification des mises à jour, le calendrier d'installation et le téléchargement sélectif des mises à jour
+1. **Plateformes** : Prise en charge d'Android et iOS
+2. **Solutions existantes** : Elle mettait en évidence les limites des options actuelles comme MS Code Push (qui manquait de support pour Capacitor) et App Flow (qui était coûteux et peu flexible)
+3. **Description** : La capacité de mettre à jour le js/css/html d'une application en temps réel sans passer par le processus d'examen de l'app store
+4. **Fonctionnalités clés** :
+   - Faciliter les mises à jour par voie aérienne depuis un serveur/point de terminaison choisi par le développeur
+   - Télécharger un fichier zip du dossier dist mis à jour, l'extraire, et dire à Capacitor de lancer à partir de ce nouveau répertoire
+   - Fonctionnalités supplémentaires comme la vérification des mises à jour, le timing d'installation, et le téléchargement sélectif des mises à jour
 
-Cette demande complète a recueilli un soutien important de la communauté, avec 65 likes et 25 réactions cardiaques. Elle démontre clairement une forte demande pour une telle solution dans l'écosystème des condensateurs.
+Cette demande complète a suscité un soutien important de la communauté, avec 65 likes et 25 réactions cœur. Elle démontrait clairement une forte demande pour une telle solution dans l'écosystème Capacitor.
 
-Lorsque je suis tombé sur cette demande plus d'un an plus tard, elle a profondément résonné avec les défis auxquels je faisais face dans mes propres projets. Elle a servi à la fois de validation de la nécessité d'un tel outil et de feuille de route pour ce qui allait devenir Capgo.
+Lorsque je suis tombé sur cette demande plus d'un an plus tard, elle résonnait profondément avec les défis auxquels je faisais face dans mes propres projets. Elle a servi à la fois de validation du besoin d'un tel outil et de feuille de route pour ce qui allait devenir Capgo.
 
-L'enthousiasme de la communauté pour ce plugin proposé, combiné à mes expériences personnelles, est devenu la force motrice derrière le développement de Capgo. C'est un exemple parfait de la façon dont les communautés open source peuvent identifier les besoins et inspirer des solutions, même si le délai entre l'idée et la mise en œuvre s'étend sur plus d'un an.
+L'enthousiasme de la communauté pour ce plugin proposé, combiné à mes expériences personnelles, est devenu la force motrice derrière le développement de Capgo. C'est un exemple parfait de comment les communautés open-source peuvent identifier des besoins et inspirer des solutions, même si le délai entre l'idée et la mise en œuvre s'étend sur plus d'un an.
 
+## Un Nouveau Chapitre Commence
 
-## Un nouveau chapitre commence
+Avant de plonger dans l'histoire de Capgo, il est important de planter le décor. En 2021, j'ai pris la décision qui a changé ma vie de quitter mon rôle de CTO de Cashstory et de vendre mes parts. Cela a marqué le début de mon parcours en tant que créateur indépendant, un chemin rempli d'incertitude mais aussi de possibilités infinies.
 
-Avant de plonger dans l'histoire de Capgo, il est important de préparer le terrain. En 2021, j'ai pris la décision qui a changé ma vie de quitter mon rôle de CTO de Cashstory et de vendre mes actions. Cela a marqué le début de mon parcours en tant que créateur solo, un chemin rempli avec de l'incertitude mais aussi des possibilités infinies
+![Vie de nomade numérique à Lisbonne](/capgo-lisbon-nomadwebp)
 
-![La vie des nomades numériques à Lisbonne](/capgo-lisbon-nomadwebp)
+Avec mes économies comme filet de sécurité, je me suis lancé dans une nouvelle aventure. Je vivais comme un nomade numérique à Lisbonne, au Portugal, embrassant la scène technologique vibrante et la culture de la ville tout en me concentrant sur mes projets passionnels. Mon objectif principal était Captime, une application mobile de minuteur crossfit. Je ne savais pas encore que ce projet me mènerait à créer quelque chose de bien plus grand.
 
-Avec mes économies comme filet de sécurité, je me suis lancé dans une nouvelle aventure. Je vivais en tant que nomade numérique à Lisbonne, au Portugal, embrassant la scène technologique dynamique et la culture de la ville tout en me concentrant sur mes projets passionnés. Mon objectif principal était Captime, une entreprise mobile. app crossfit timer Je ne savais pas que ce projet m'amènerait à créer quelque chose de beaucoup plus grand
-
-L'énergie de l'écosystème des startups de Lisbonne et la liberté du mode de vie nomade numérique ont fourni le cadre idéal pour l'innovation. C'est dans cet environnement, entouré d'entrepreneurs et de développeurs du monde entier, que les graines de Capgo ont été semées.
+L'énergie de l'écosystème des startups de Lisbonne et la liberté du style de vie nomade numérique ont fourni le cadre parfait pour l'innovation. C'est dans cet environnement, entouré d'entrepreneurs et de développeurs du monde entier, que les graines de Capgo ont été semées.
 
 [Continuer avec le reste de l'article]
 
-Cette révision reflète fidèlement votre situation de vie à Lisbonne en tant que nomade numérique, ce qui fournit un contexte important pour l'environnement dans lequel vous avez développé Capgo. Elle met également en évidence le lien entre votre choix de style de vie et l'esprit d'innovation qui a conduit à la création de Capgo.
-## L'étincelle d'une idée
+## L'Étincelle d'une Idée
 
-En travaillant sur Captime, j'ai rencontré un obstacle important : l'absence d'une solution de mise à jour abordable et flexible pour les applications Capacitor. En octobre 2021, j'ai exprimé ces préoccupations sur un fil de discussion GitHub.
+En travaillant sur Captime, j'ai rencontré un obstacle majeur - le manque d'une solution de mise à jour abordable et flexible pour les applications Capacitor. En octobre 2021, j'ai exprimé ces préoccupations sur un fil GitHub.
 
 ![Proposition initiale pour Capgo](/capgo-initial-proposalwebp)
 
-Les principaux points douloureux que j’ai identifiés étaient :
+Les principaux points de douleur que j'ai identifiés étaient :
 
-1 Coûts élevés pour les petits développeurs
-2 Manque de mises à jour en direct (OTA) dans les forfaits abordables
-3 Fonctionnalités inutiles pour les développeurs solo
+1. Coûts élevés pour les développeurs à petite échelle
+2. Manque de mises à jour over-the-air (OTA) dans les plans abordables
+3. Fonctionnalités inutiles pour les développeurs indépendants
 
-## La communauté résonne
+## La Communauté Résonne
 
-Mes préoccupations ont touché une corde sensible chez d'autres développeurs. Beaucoup ont fait écho au sentiment selon lequel les solutions existantes étaient trop chères pour les développeurs indépendants et les petites équipes.
+Mes préoccupations ont trouvé un écho chez d'autres développeurs. Beaucoup ont fait écho au sentiment que les solutions existantes étaient trop chères pour les développeurs indépendants et les petites équipes.
 
-![Commentaires de la communauté](/capgo-community-feedbackwebp)
+![Retour de la communauté](/capgo-community-feedbackwebp)
 
-Un développeur a résumé les sentiments de la communauté :
+Un développeur a résumé les sentiments de la communauté :
 
-"Ce serait génial si le plan communautaire incluait 500 mises à jour en directOu mieux encore, s'il existait un package Live Update uniquement pour 50 $/mois comprenant 5 000 mises à jour Live »
+"Ce serait brillant si le plan Community incluait 500 mises à jour en directOu mieux encore, s'il y avait un forfait uniquement Live Update pour 50 $/mois qui incluait 5 000 mises à jour en direct"
 
 ## La naissance d'une solution
 
-Motivé par la réponse de la communauté, j'ai décidé de prendre les choses en main. Le 24 octobre 2021, j'ai annoncé mon projet de créer un module qui permettrait aux développeurs de télécharger des mises à jour à partir d'une URL donnée.
+Motivé par la réponse de la communauté, j'ai décidé de prendre les choses en main. Le 24 octobre 2021, j'ai annoncé mon plan de construire un module qui permettrait aux développeurs de télécharger des mises à jour à partir d'une URL donnée.
 
 ![Extrait de code initial](/capgo-initial-codewebp)
 
 Les objectifs initiaux étaient simples :
-- Télécharger des données à partir d'une URL
-- Décompressez les données
-- Remplacez le code actuel par le nouveau
+- Télécharger des données depuis une URL
+- Décompresser les données
+- Remplacer le code actuel par le nouveau
 
-Cependant, transformer cette idée simple en réalité s’est avéré bien plus difficile que ce à quoi je m’attendais initialement.
+Cependant, transformer cette idée simple en réalité s'est avéré bien plus difficile que je ne l'avais initialement prévu.
 
-## La lutte dans les coulisses
+## La lutte en coulisses
 
-Ce qui ne ressort pas du fil de discussion GitHub, c'est la complexité de la tâche que j'avais entreprise. Le code requis pour implémenter cette fonctionnalité était obscur et difficile à comprendre. Je me suis retrouvé aux prises avec des détails complexes sur la façon dont les applications Capacitor gèrent les mises à jour et les systèmes de fichiers.
+Ce qui n'apparaît pas dans le fil GitHub, c'est la complexité pure de la tâche que j'avais entreprise. Le code nécessaire pour implémenter cette fonctionnalité était obscur et difficile à comprendre. Je me suis retrouvé aux prises avec les détails complexes de la façon dont les applications Capacitor gèrent les mises à jour et les systèmes de fichiers.
 
-De nombreuses nuits ont été passées dans ma camionnette, à étudier la documentation et à expérimenter différentes approches. Les progrès étaient lents et il y avait des moments où je me demandais si j'avais les yeux plus gros que le ventre.
+J'ai passé de nombreuses nuits dans mon van, à éplucher la documentation et à expérimenter différentes approches. Les progrès étaient lents, et il y a eu des moments où je me suis demandé si je n'avais pas vu trop grand.
 
 ## La communauté à la rescousse
 
-Heureusement, je n'étais pas seul dans ce voyage. La communauté des développeurs, en particulier sur Discord, s'est avérée être une ressource inestimable. Les autres développeurs ont offert leurs idées, aidé à déboguer les problèmes et fourni des encouragements lorsque les choses se sont compliquées.
+Heureusement, je n'étais pas seul dans ce voyage. La communauté des développeurs, en particulier sur Discord, s'est avérée être une ressource inestimable. D'autres développeurs ont offert leurs idées, aidé à déboguer les problèmes et apporté des encouragements quand ça devenait difficile.
 
-![Support de la communauté Discord](/capgo-discord-supportwebp)
+![Soutien de la communauté Discord](/capgo-discord-supportwebp)
 
-Cet effort de collaboration a été crucial pour surmonter les obstacles techniques. Il a renforcé ma croyance dans la puissance de l'open source et du développement communautaire.
+Cet effort collaboratif a été crucial pour surmonter les obstacles techniques. Cela a renforcé ma croyance en la puissance de l'open source et du développement communautaire.
 
-## Développement rapide et capacités d'expansion
+## Développement rapide et expansion des capacités
 
-Avec l'aide de la communauté, le développement a commencé à s'accélérer. Le 22 novembre 2021, j'avais une version fonctionnelle pour iOS et j'améliorais l'expérience du développeur.
+Avec l'aide de la communauté, le développement a commencé à s'accélérer. Le 22 novembre 2021, j'avais une version fonctionnelle pour iOS et j'améliorais l'expérience des développeurs.
 
 ![Extrait de code amélioré](/capgo-improved-codewebp)
 
-Au fur et à mesure du développement, j'ai ajouté plus de fonctionnalités :
-- Prise en charge d'Android
-- Persistance entre les suppressions d'applications
-- La possibilité de revenir à la version originale de l'application
+Au fur et à mesure que le développement progressait, j'ai ajouté plus de fonctionnalités :
+- Support Android
+- Persistance entre les fermetures de l'application
+- La capacité de revenir à la version originale de l'application
 
-![Annonce des nouvelles fonctionnalités](/capgo-new-featureswebp)
+![Annonce de nouvelles fonctionnalités](/capgo-new-featureswebp)
 
-Chaque nouvelle fonctionnalité apportait son propre ensemble de défis, mais aussi un sentiment d'accomplissement à mesure que le projet dépassait sa portée initiale.
+Chaque nouvelle fonctionnalité apportait son lot de défis, mais aussi un sentiment d'accomplissement à mesure que le projet dépassait sa portée initiale.
 
 ## Le lancement de Capgo
 
-En mars 2022, le projet était devenu un produit à part entière : Capgo I a annoncé la sortie d'un mode de mise à jour automatique, permettant aux développeurs de se connecter à leur propre backend ou d'utiliser le service backend de Capgo.
+En mars 2022, le projet avait évolué en un produit à part entière : Capgo. J'ai annoncé la sortie d'un mode de mise à jour automatique, permettant aux développeurs de se connecter à leur propre backend ou d'utiliser le service backend de Capgo.
 
-![Annonce de lancement de Capgo](/capgo-launch-announcementwebp)
+![Annonce du lancement de Capgo](/capgo-launch-announcementwebp)
 
-La réponse de la communauté a été extrêmement positive, les développeurs faisant l'éloge de cette solution indispensable.
+La réponse de la communauté a été extrêmement positive, les développeurs saluant cette solution tant attendue.
 
 ## Le pivot vers un produit payant
 
-Au départ, je n'avais pas l'intention de monétiser Capgo. Mon objectif était simplement de créer un outil qui résoudrait un problème auquel moi et d'autres développeurs étions confrontés. Cependant, les retours sur GitHub m'ont fait reconsidérer cette position.
+Au départ, je n'avais pas l'intention de monétiser Capgo. Mon but était simplement de créer un outil qui résoudrait un problème auquel moi et d'autres développeurs étions confrontés. Cependant, les retours sur GitHub m'ont fait reconsidérer cette position.
 
-Les développeurs exprimaient leur volonté de payer pour une solution répondant à leurs besoins à un prix équitable. Ces commentaires, combinés à la prise de conscience des coûts permanents et des efforts nécessaires pour maintenir et améliorer Capgo, ont conduit à une décision cruciale.
+Les développeurs exprimaient une volonté de payer pour une solution qui répondait à leurs besoins à un prix équitable. Ces retours, combinés à la prise de conscience des coûts et des efforts continus nécessaires pour maintenir et améliorer Capgo, ont conduit à une décision cruciale.
 
-Le 11 juin 2022, j'ai annoncé que Capgo commencerait à facturer l'utilisation dans 15 jours, marquant ainsi sa transition d'un projet communautaire à une entreprise durable.
+Le 11 juin 2022, j'ai annoncé que Capgo commencerait à facturer l'utilisation dans 15 jours, marquant sa transition d'un projet communautaire à une entreprise durable.
 
-![Annonce des prix Capgo](/capgo-pricing-announcementwebp)
+![Annonce de la tarification de Capgo](/capgo-pricing-announcementwebp)
 
-Cependant, restant fidèle aux racines du projet, j'ai conservé le noyau open source de Capgo en permettant une utilisation gratuite du plugin en mode manuel ou avec un serveur personnalisé.
+Cependant, restant fidèle aux racines du projet, j'ai maintenu le cœur open-source de Capgo en permettant l'utilisation gratuite du plugin en mode manuel ou avec un serveur personnalisé.
 
 ## Conclusion
 
-Mon parcours avec Capgo témoigne de la puissance de l'innovation communautaire et des chemins inattendus sur lesquels se retrouvent souvent les créateurs solo. Ce qui a commencé comme une frustration personnelle alors qu'il travaillait sur une application de minuterie crossfit s'est transformé en une mise à jour en direct robuste, abordable et flexible. système pour les applications de condensateur
+Mon parcours avec Capgo est un témoignage de la puissance de l'innovation communautaire et des chemins inattendus que les créateurs solitaires empruntent souvent. Ce qui a commencé comme une frustration personnelle en travaillant sur une application de minuterie crossfit s'est transformé en un système de mise à jour en direct robuste, abordable et flexible pour les applications Capacitor.
 
-La création de Capgo a été loin d'être facileCela a nécessité d'innombrables heures de travail, le soutien d'une généreuse communauté de développeurs et une volonté de s'adapter en fonction des commentaires des utilisateurs. Du codage sur Airbnb au Portugal jusqu'au lancement d'un produit payant, chaque étape de ce voyage a été une expérience d'apprentissage.
+La création de Capgo était loin d'être facile.Il a fallu d'innombrables heures de travail, le soutien d'une généreuse communauté de développeurs, et une volonté de s'adapter en fonction des retours des utilisateurs. De la programmation dans un Airbnb au Portugal jusqu'au lancement d'un produit payant, chaque étape de ce parcours a été une expérience d'apprentissage.
 
-À mesure que Capgo continue d'évoluer, il constitue un excellent exemple de la manière dont l'identification d'une lacune sur le marché, le travail actif pour la combler et la réactivité aux besoins de la communauté peuvent conduire à la création d'outils précieux qui profitent à l'ensemble de l'écosystème des développeurs.
+Alors que Capgo continue d'évoluer, il représente un excellent exemple de la façon dont l'identification d'un besoin sur le marché, le travail actif pour le combler, et la réactivité aux besoins de la communauté peuvent mener à la création d'outils précieux qui profitent à tout l'écosystème des développeurs.
 
-L'histoire de Capgo est bien plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté et de l'imprévisibilité passionnante de la vie de créateur solo
+L'histoire de Capgo est plus que le simple développement d'un outil ; c'est une histoire de persévérance, de communauté, et de l'imprévisibilité passionnante de la vie en tant que créateur indépendant.
 
-Vous pouvez trouver l'histoire complète sur [ici](https://githubcom/capacitor-community/proposals/issues/43#issuecomment-941017142)
+Vous pouvez trouver l'histoire complète [ici](https://githubcom/capacitor-community/proposals/issues/43#issuecomment-941017142)

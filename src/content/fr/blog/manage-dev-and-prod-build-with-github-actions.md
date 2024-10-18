@@ -1,39 +1,39 @@
 ---
 slug: manage-dev-and-prod-build-with-github-actions
-title: Gérer le développement et la production avec les actions GitHub
+title: Gérer le développement et la compilation de production avec GitHub Actions
 description: >-
-  Utilisez Capgo pour publier votre développement sur un canal spécifique et
-  laissez votre équipe essayer votre application Capacitor Ionic, sans attendre
-  l'examen d'Apple et de Google.
+  Utilisez Capgo pour publier votre build de développement sur un canal
+  spécifique et permettez à votre équipe de tester votre application Capacitor
+  Ionic sans attendre la révision d'Apple et Google
 author: Martin Donadieu
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo_ci-cd-illustration.webp
-head_image_alt: Illustration des builds de chaîne
+head_image_alt: Illustration des Compilations de Canaux
 tag: CI/CD
 published: true
 locale: fr
 next_blog: how-to-send-specific-version-to-users
 ---
 
-Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec un petit ajustement à n'importe quelle autre plateforme CI/CD
+Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec quelques modifications à toute autre plateforme CI/CD
 
-## Préface 
+## Préface
 
-Assurez-vous d'avoir d'abord ajouté votre application Capacitor à Capgo, ce tutoriel se concentre uniquement sur la phase de téléchargement.
+Assurez-vous d'avoir d'abord ajouté votre application Capacitor à Capgo, ce tutoriel se concentre uniquement sur la phase de téléchargement
 
-## Convention de validation
+## Convention de commit
 
-Vous devez d'abord commencer à suivre la convention de validation [commits conventionnels](https://wwwconventionalcommitsorg/en/v100/)\` cela aidera les outils à comprendre comment mettre à niveau le numéro de version, il faut 5 minutes pour l'apprendre
+Tout d'abord, vous devez commencer à suivre la convention de commit [conventional commits](https://wwwconventionalcommitsorg/en/v100/)\` cela aidera l'outil à comprendre comment mettre à jour le numéro de version, c'est 5 minutes à apprendre
 
-![Commits conventionnels](/conventional_commitswebp)
+![Conventional commits](/conventional_commitswebp)
 
-## Actions GitHub pour la balise
+## Actions GitHub pour les tags
 
-Ensuite, vous devez créer votre première action GitHub pour créer et créer automatiquement des balises
+Ensuite, vous devez créer votre première action GitHub pour automatiquement construire et créer des tags
 
-Créez un fichier à ce chemin : `github/workflows/bump_versionyml`
+Créez un fichier à ce chemin : `github/workflows/bump_versionyml`
 
 avec ce contenu :
 
@@ -76,29 +76,27 @@ jobs:
 
 ```
 
-Cela publiera une balise pour chaque commit dans votre branche principale et une version « alpha » pour « development », et enfin une entrée du journal des modifications pour chaque commit dans « CHANGELOGmd ».
+Cela créera un tag pour chaque commit dans votre branche principale Et une version `alpha` pour `development`, et enfin une entrée de changelog pour chaque commit dans `CHANGELOGmd`
 
 Ne vous inquiétez pas si vous n'avez pas ce fichier, il sera créé pour vous
 
-Pour que cela fonctionne, vous devez créer un [ACCÈS PERSONNEL](https://docsgithubcom/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _it in_ votre GitHub [secret](https://docsgithubcom/en/actions/security-guides/encrypted-secrets "GitHub secrets") en tant que `PERSONAL_ACCESS_TOKEN`
+Pour que cela fonctionne, vous devez créer un [PERSONAL ACCESS](https://docsgithubcom/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _le dans_ votre [secret](https://docsgithubcom/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub comme `PERSONAL_ACCESS_TOKEN`
 
-Ceci est nécessaire pour permettre au CI de valider le journal des modifications et le changement de version.
+C'est nécessaire pour permettre au CI de commiter le changelog et la mise à jour de version
 
-Lorsque vous créez le jeton, choisissez l'expiration sur « jamais » et la portée sur « repo »
+Lorsque vous créez le token, choisissez l'expiration comme `never` et la portée comme `repo`
 
+Définissez la clé `version` dans votre fichier `packagejson` Utilisez pour cela la dernière version publiée dans le store
 
-Définissez la clé `version` dans votre fichier `packagejson`. Utilisez pour cela la dernière version publiée dans le store
+C'est seulement nécessaire la première fois, ensuite les outils le garderont à jour
 
-Cela n'est nécessaire que la première fois, puis les outils le maintiendront à jour
+Vous pouvez maintenant commiter ces deux fichiers et voir votre premier tag apparaître sur GitHub !
 
-Vous pouvez maintenant valider ces deux fichiers et voir votre première balise apparaître dans GitHub !
-
-`capacitor-standard-version` est le package qui fait la magie, par défaut, il met également à jour votre numéro de version sous Android et IOS
-
+`capacitor-standard-version` est le package qui fait la magie, par défaut, il met également à jour votre numéro de version sur Android et iOS
 
 ## Actions GitHub pour la construction
 
-Créez un fichier à ce chemin : `github/workflows/buildyml`
+Créez un fichier à ce chemin : `github/workflows/buildyml`
 
 avec ce contenu :
 
@@ -135,18 +133,18 @@ jobs:
         run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production
 ```
 
-Cela installera et créera votre dépendance avant de l'envoyer à Capgo
+Cela installera et construira vos dépendances avant de les envoyer à Capgo
 
-Si votre commande de build est différente, vous pouvez la modifier à l'étape `build_code`
+Si votre commande de construction est différente, vous pouvez la modifier dans l'étape `build_code`
 
 Si vous avez besoin d'une variable d'environnement, utilisez `MY_ENV_VAR` et définissez le `secret` dans les paramètres de votre projet GitHub, puis secret puis GitHub Action
 
-Pour que le téléchargement Capgo fonctionne, vous devez obtenir votre clé API pour Capgo, l'ajouter dans le [secret de votre référentiel GitHub](https://docsgithubcom/en/actions/security-guides/encrypted-secrets/) en tant que `CAPGO_TOKEN `
+Pour que le téléchargement Capgo fonctionne, vous devez obtenir votre clé API pour Capgo, ajoutez-la dans le [secret de votre dépôt GitHub](https://docsgithubcom/en/actions/security-guides/encrypted-secrets/) comme `CAPGO_TOKEN`
 
-Vous pouvez maintenant valider ces deux fichiers et voir votre première version apparaître dans Capgo !
+Vous pouvez maintenant commiter ces deux fichiers et voir votre première version apparaître dans Capgo !
 
-Ajouter le commit générera une nouvelle version de condensateur pour le canal de production et de développement
+Ajouter le commit générera une nouvelle construction Capacitor pour les canaux de production et de développement
 
-Vous devez ajouter votre test à l'étape de construction Ionic pour être certain que votre code fonctionne
+Vous devriez ajouter vos tests dans l'étape de construction Ionic pour être certain que votre code fonctionne
 
-Allez sur votre tableau de bord Capgo et vérifiez votre build qui vient d'apparaître, vous avez maintenant votre système CI/CD
+Allez sur votre tableau de bord Capgo et vérifiez votre construction qui vient d'apparaître, vous avez maintenant votre système CI/CD

@@ -2,30 +2,30 @@
 locale: fr
 ---
 
-chanter @capgo/capacitor-purchases package tutoriel
+chanter le tutoriel du package @capgo/capacitor-purchases
 
-Ce didacticiel vous guidera tout au long du processus d'utilisation du package @capgo/capacitor-purchases pour les achats intégrés dans Capacitor.
+Ce tutoriel vous guidera à travers le processus d'utilisation du package @capgo/capacitor-purchases pour les achats intégrés dans Capacitor.
 
-## Étape 1 : Installer le package
+## Étape 1 : Installer le package
 
-Pour installer le package @capgo/capacitor-purchases, ouvrez votre terminal et exécutez la commande suivante :
+Pour installer le package @capgo/capacitor-purchases, ouvrez votre terminal et exécutez la commande suivante :
 
 ```bash
 npm install @capgo/capacitor-purchases
 npx cap sync
 ```
 
-## Étape 2 : Configurer la plateforme Android
+## Étape 2 : Configurer la plateforme Android
 
-Si vous ciblez la plate-forme Android, vous devez ajouter une configuration au fichier android/app/src/main/AndroidManifestxml. Ouvrez le fichier et ajoutez l'extrait de code suivant :
+Si vous visez la plateforme Android, vous devez ajouter certaines configurations au fichier android/app/src/main/AndroidManifest.xml. Ouvrez le fichier et ajoutez le code suivant :
 
 ```xml
 <!-- Add your configuration here -->
 ```
 
-## Étape 3 : Configurer le package
+## Étape 3 : Configurer le package
 
-Pour configurer le package @capgo/capacitor-purchases, utilisez la méthode `setup` avec votre clé API et un ID utilisateur d'application facultatif. Voici un exemple :
+Pour configurer le package @capgo/capacitor-purchases, utilisez la méthode `setup` avec votre clé API et un ID utilisateur d'application optionnel. Voici un exemple :
 
 ```typescript
 import { Plugins } from "@capacitor/core";
@@ -42,9 +42,9 @@ const setupPurchases = async () => {
 setupPurchases();
 ```
 
-## Étape 4 : Gérer l'événement de mise à jour des achats
+## Étape 4 : Gérer l'événement de mise à jour des achats
 
-Vous pouvez écouter l'événement « PurchasesUpdate » pour être averti en cas de modification des achats de l'utilisateur. Voici un exemple de la façon d'ajouter un auditeur pour l'événement :
+Vous pouvez écouter l'événement "purchasesUpdate" pour être informé lorsqu'il y a un changement dans les achats de l'utilisateur. Voici un exemple de la façon d'ajouter un écouteur pour l'événement :
 
 ```typescript
 import { Plugins, PluginListenerHandle } from "@capacitor/core";
@@ -63,9 +63,9 @@ const addPurchasesUpdateListener = (): PluginListenerHandle => {
 const purchasesUpdateListener = addPurchasesUpdateListener();
 ```
 
-## Étape 5 : Récupérer les offres disponibles
+## Étape 5 : Récupérer les offres disponibles
 
-Vous pouvez utiliser la méthode `getOfferings` pour récupérer les offres disponibles pour l'utilisateur. Voici un exemple :
+Vous pouvez utiliser la méthode `getOfferings` pour récupérer les offres disponibles pour l'utilisateur. Voici un exemple :
 
 ```typescript
 import { Plugins } from "@capacitor/core";
@@ -80,9 +80,9 @@ const getOfferings = async () => {
 getOfferings();
 ```
 
-## Étape 6 : Acheter un forfait
+## Étape 6 : Acheter un package
 
-Pour effectuer un achat, utilisez la méthode `purchasePackage` avec l'ID du package. Voici un exemple :
+Pour faire un achat, utilisez la méthode `purchasePackage` avec l'ID du package. Voici un exemple :
 
 ```typescript
 import { Plugins } from "@capacitor/core";
@@ -96,9 +96,9 @@ const purchasePackage = async (packageId: string) => {
 purchasePackage("PACKAGE_ID");
 ```
 
-## Étape 7 : Restaurer les achats
+## Étape 7 : Restaurer les achats
 
-Si vous souhaitez restaurer les achats de l'utilisateur, utilisez la méthode `restorePurchases`. Voici un exemple :
+Si vous souhaitez restaurer les achats de l'utilisateur, utilisez la méthode `restorePurchases`. Voici un exemple :
 
 ```typescript
 import { Plugins } from "@capacitor/core";
@@ -112,6 +112,6 @@ const restorePurchases = async () => {
 restorePurchases();
 ```
 
-## C'est ça!
+## C'est tout !
 
-Vous avez appris avec succès comment utiliser le package @capgo/capacitor-purchases pour les achats intégrés dans Capacitor Happy coding !
+Vous avez réussi à apprendre à utiliser le package @capgo/capacitor-purchases pour les achats intégrés dans Capacitor. Bonne programmation !

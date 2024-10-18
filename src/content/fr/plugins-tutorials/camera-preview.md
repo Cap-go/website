@@ -2,13 +2,13 @@
 locale: fr
 ---
 
-Tutoriel sur le package capgo/camera-preview
+Tutoriel du package capgo/camera-preview
 
-Dans ce tutoriel, nous allons parcourir les étapes pour utiliser le package `@capgo/camera-preview` dans votre projet Capacitor. Ce package vous permet d'interagir avec la caméra à partir de votre code JavaScript et HTML.
+Dans ce tutoriel, nous allons passer en revue les étapes pour utiliser le package `@capgo/camera-preview` dans votre projet Capacitor. Ce package vous permet d'interagir avec la caméra depuis votre code JavaScript et HTML.
 
-##Installation
+## Installation
 
-Pour installer le package `@capgo/camera-preview`, ouvrez votre terminal et exécutez l'une des commandes suivantes :
+Pour installer le package `@capgo/camera-preview`, ouvrez votre terminal et exécutez l'une des commandes suivantes :
 
 ```bash
 yarn add @capgo/camera-preview
@@ -20,86 +20,86 @@ ou
 npm install @capgo/camera-preview
 ```
 
-Une fois l'installation terminée, exécutez la commande suivante pour synchroniser votre projet Capacitor :
+Une fois l'installation terminée, exécutez la commande suivante pour synchroniser votre projet Capacitor :
 
 ```bash
 npx cap sync
 ```
 
-### Étapes d'installation supplémentaires d'Android
+### Étapes d'installation supplémentaires pour Android
 
-Si vous utilisez Android, vous devez apporter quelques modifications supplémentaires à votre projet. Ouvrez le fichier `android/app/src/main/AndroidManifestxml` et ajoutez la ligne suivante au-dessus de la balise de fermeture `</application>` pour demander la CAMÉRA. autorisation:
+Si vous utilisez Android, vous devez effectuer quelques modifications supplémentaires dans votre projet. Ouvrez le fichier `android/app/src/main/AndroidManifest.xml` et ajoutez la ligne suivante au-dessus de la balise `</application>` de fermeture pour demander la permission CAMERA :
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-Pour plus d'aide, reportez-vous à la [documentation sur les condensateurs](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)
+Pour plus d'aide, consultez la [documentation de Capacitor](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/).
 
-### Étapes d'installation iOS supplémentaires
+### Étapes d'installation supplémentaires pour iOS
 
-Si vous utilisez iOS, vous devez ajouter deux autorisations à votre fichier `Infoplist`. Suivez la [documentation Capacitor](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist) et ajoutez `NSCameraUsageDescription` et ` Autorisations NSMicrophoneUsageDescription` L'autorisation `NSMicrophoneUsageDescription` n'est requise que si vous utilisez l'audio. Si vous n'avez pas besoin d'audio, vous pouvez définir l'option `disableAudio` sur `true` pour désactiver la demande d'autorisation du microphone.
+Si vous utilisez iOS, vous devez ajouter deux permissions à votre fichier `Info.plist`. Suivez la [documentation de Capacitor](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist) et ajoutez les permissions `NSCameraUsageDescription` et `NSMicrophoneUsageDescription`. La permission `NSMicrophoneUsageDescription` n'est requise que si vous allez utiliser l'audio. Si vous n'avez pas besoin d'audio, vous pouvez définir l'option `disableAudio` sur `true` pour désactiver la demande de permission du microphone.
 
-### Étapes d'installation Web supplémentaires
+### Étapes d'installation supplémentaires pour le Web
 
-Si vous utilisez la plateforme web avec Ionic, ajoutez la ligne suivante à votre script d'entrée dans `appmodulets` :
+Si vous utilisez la plateforme web avec Ionic, ajoutez la ligne suivante à votre script d'entrée dans `app.module.ts` :
 
 ```typescript
 import '@capgo/camera-preview';
 ```
 
-Cela permettra à Capacitor d'enregistrer la plateforme Web à partir du plugin
+Cela permettra à Capacitor d'enregistrer la plateforme web à partir du plugin.
 
-##API
+## API
 
-Le package `@capgo/camera-preview` fournit les méthodes API suivantes :
+Le package `@capgo/camera-preview` fournit les méthodes API suivantes :
 
-### début (options : CameraPreviewOptions)
+### start(options: CameraPreviewOptions)
 
-Démarre l'instance d'aperçu de la caméra
+Démarre l'instance d'aperçu de caméra.
 
-### arrêt()
+### stop()
 
-Arrête l'instance d'aperçu de la caméra
+Arrête l'instance d'aperçu de caméra.
 
-### capture (options : CameraPreviewPictureOptions)
+### capture(options: CameraPreviewPictureOptions)
 
-Capture une image de l'appareil photo
+Capture une image de la caméra.
 
-### captureSample (options : CameraSampleOptions)
+### captureSample(options: CameraSampleOptions)
 
-Capture un exemple d’image
+Capture une image d'échantillon.
 
-###getSupportedFlashModes()
+### getSupportedFlashModes()
 
-Obtient les modes flash pris en charge
+Obtient les modes de flash pris en charge.
 
-###getHorizontalFov()
+### getHorizontalFov()
 
-Obtient le champ de vision horizontal
+Obtient le champ de vision horizontal.
 
-### setFlashMode(options : { flashMode : CameraPreviewFlashMode | string; })
+### setFlashMode(options: { flashMode: CameraPreviewFlashMode | string; })
 
-Règle le mode flash
+Définit le mode de flash.
 
-### retourner()
+### flip()
 
-Retourne la caméra
+Inverse la caméra.
 
-### setOpacity(options : CameraOpacityOptions)
+### setOpacity(options: CameraOpacityOptions)
 
-Définit l'opacité de la caméra
+Définit l'opacité de la caméra.
 
 ### stopRecordVideo()
 
-Arrête d'enregistrer une vidéo
+Arrête l'enregistrement d'une vidéo.
 
-### startRecordVideo (options : CameraPreviewOptions)
+### startRecordVideo(options: CameraPreviewOptions)
 
-Commence à enregistrer une vidéo
+Commence l'enregistrement d'une vidéo.
 
-Pour plus de détails sur les paramètres et les valeurs de retour de ces méthodes, reportez-vous à la documentation du package `@capgo/camera-preview`
+Pour plus de détails sur les paramètres et les valeurs de retour de ces méthodes, consultez la documentation du package `@capgo/camera-preview`.
 
 ## Conclusion
 
-Dans ce didacticiel, nous avons appris à installer et à utiliser le package `@capgo/camera-preview` dans un projet Capacitor. Nous avons exploré les méthodes API disponibles et leur utilisation. Vous pouvez désormais intégrer la fonctionnalité de caméra dans votre application à l'aide de ce package.
+Dans ce tutoriel, nous avons appris comment installer et utiliser le package `@capgo/camera-preview` dans un projet Capacitor. Nous avons exploré les méthodes API disponibles et leur utilisation. Vous pouvez maintenant intégrer la fonctionnalité de caméra dans votre application en utilisant ce package.
