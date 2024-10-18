@@ -20,6 +20,7 @@ jobs:
         run: bun run build
         env:
           BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - name: Copy header & redirect specific files
         run: cp _headers dist/_headers & cp _redirects dist/_redirects
       - name: Publish CF website

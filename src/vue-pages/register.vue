@@ -9,7 +9,7 @@ import { toast } from 'vue-sonner'
 
 const props = defineProps<{ locale: Locales }>()
 
-const CLOUDFLARE_TURNSTILE_SITE_KEY = "0x4AAAAAAAxItBa5rCQ3Vvhl"
+const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 
 const isLoading = ref(false)
 const hasCaptcha = ref<boolean | null>(null)
