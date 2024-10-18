@@ -3,12 +3,16 @@ import { openMessenger } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import translations from '@/services/translations'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 
-const props = defineProps<{ locale: Locales }>()
+const props = defineProps<{ 
+  locale: Locales,
+  captchaKey: string
+}>()
 
-const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
+const CLOUDFLARE_TURNSTILE_SITE_KEY = props.captchaKey
+
 
 const isLoading = ref(false)
 const enableCaptcha = ref(!!CLOUDFLARE_TURNSTILE_SITE_KEY)
