@@ -4,6 +4,7 @@ title: 2024年のクロスプラットフォームモバイルアプリケーシ
 description: >-
   2024年のクロスプラットフォームモバイルアプリケーション開発に関するベストプラクティスやフレームワークを学びましょう。単一のコードベースからiOS、Android、ウェブアプリケーションを構築します。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
 updated_at: 2024-06-15T00:00:00.000Z

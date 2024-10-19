@@ -5,6 +5,7 @@ description: >-
   Verstehen Sie, wie und wann es notwendig ist, eine Hauptversion Ihrer App zu
   veröffentlichen, ohne die Benutzer-App zu beschädigen
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

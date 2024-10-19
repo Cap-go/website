@@ -5,6 +5,7 @@ description: >-
   Créez votre propre pipeline CI/CD avec GitLab gratuitement et déployez votre
   application Ionic Capacitor JS à chaque push sur la branche principale.
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2023-09-14T00:00:00.000Z

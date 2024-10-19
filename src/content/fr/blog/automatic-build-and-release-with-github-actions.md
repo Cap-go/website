@@ -5,6 +5,7 @@ description: >-
   Créez votre propre pipeline CI/CD avec Github Actions gratuitement et déployez
   votre application Ionic Capacitor JS à chaque push sur main.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

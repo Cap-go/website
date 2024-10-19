@@ -6,6 +6,7 @@ description: >-
   JavaScript et CSS de base pour qu'elle ressemble et se comporte comme une
   application native, y compris la désactivation des effets de survol.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z

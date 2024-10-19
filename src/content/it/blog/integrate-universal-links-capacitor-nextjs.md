@@ -5,6 +5,7 @@ description: >-
   Impara passo dopo passo come configurare i collegamenti universali per la tua
   applicazione Next.js con Capacitor sulle piattaforme iOS e Android.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z

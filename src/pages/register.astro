@@ -4,5 +4,6 @@ import VueRegister from '@/vue-pages/register.vue'
 
 const capchatKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 ---
-<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <Layout><VueRegister locale={Astro.locals.locale} client:load captchaKey={capchatKey} /></Layout>

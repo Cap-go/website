@@ -6,6 +6,7 @@ description: >-
   específico y permita que su equipo pruebe su aplicación Capacitor Ionic sin
   tener que esperar la revisión de Apple y Google
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

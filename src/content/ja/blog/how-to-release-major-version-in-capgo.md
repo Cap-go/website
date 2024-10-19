@@ -3,6 +3,7 @@ slug: how-to-release-major-version-in-capgo
 title: Capgoでメインバージョンを公開する方法
 description: ユーザーアプリケーションに影響を与えずに、アプリのメインバージョンをいつどのようにリリースするかを理解すること。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

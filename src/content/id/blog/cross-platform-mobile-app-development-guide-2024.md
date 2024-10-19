@@ -6,6 +6,7 @@ description: >-
   lintas platform di tahun 2024. Buat aplikasi untuk iOS, Android, dan web dari
   satu basis kode.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
 updated_at: 2024-06-15T00:00:00.000Z

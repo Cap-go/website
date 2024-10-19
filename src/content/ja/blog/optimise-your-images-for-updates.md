@@ -3,6 +3,7 @@ slug: optimise-your-images-for-updates
 title: 画像を更新のために最適化してください。
 description: ライブアップデートのために画像を最適化し、ユーザーがより速く更新を受け取れるようにする方法。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

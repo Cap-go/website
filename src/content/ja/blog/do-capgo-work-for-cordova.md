@@ -3,6 +3,7 @@ slug: do-capgo-work-for-cordova
 title: CapgoがCordovaをサポートしない理由：ライブアップデートにアクセスするためにアプリを更新してください。
 description: このマニュアルでは、CapgoとCordovaに関する私の経験を共有します。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-29T00:00:00.000Z
 updated_at: 2023-01-29T00:00:00.000Z

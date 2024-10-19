@@ -3,6 +3,7 @@ slug: live-update-with-quasar-and-capacitor
 title: ライブアップデート、Quasar、Capacitorを使用してモバイルアプリケーションを作成する。
 description: QuasarとCapacitorを使用してモバイルアプリケーションを作成し、ライブアップデートを実装する方法。
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2023-09-14T00:00:00.000Z

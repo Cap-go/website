@@ -6,6 +6,7 @@ description: >-
   natives, mais son prix peut ne pas convenir à tous. Capgo propose une solution
   économique pour gérer facilement les mises à jour OTA.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-09-09T00:00:00.000Z
 updated_at: 2024-09-09T00:00:00.000Z

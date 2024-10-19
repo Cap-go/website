@@ -9,6 +9,7 @@ description: >-
   wie HTML, CSS und JavaScript zu erstellen. Erkunden Sie seine Geschichte,
   Vorteile und vergleichen Sie es mit Alternativen wie Capacitor.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
 updated_at: 2024-06-14T00:00:00.000Z

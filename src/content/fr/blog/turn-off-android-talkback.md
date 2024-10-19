@@ -5,6 +5,7 @@ description: >-
   Guide étape par étape pour activer et naviguer avec TalkBack, le lecteur
   d'écran intégré d'Android pour les utilisateurs malvoyants.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

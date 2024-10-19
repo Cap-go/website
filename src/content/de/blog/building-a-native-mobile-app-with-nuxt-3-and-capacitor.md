@@ -5,6 +5,7 @@ description: >-
   Wie man eine mobile App mit Nuxt 3, Capacitor erstellt und native
   Benutzeroberfläche mit Konsta UI implementiert.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
 updated_at: 2023-06-03T00:00:00.000Z

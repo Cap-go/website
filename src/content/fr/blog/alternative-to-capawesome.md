@@ -5,6 +5,7 @@ description: >-
   Capawesome a été inspiré par le système Capgo. Le système est moins étendu que
   Capgo, mais il représente néanmoins une bonne alternative.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-11T00:00:00.000Z
 updated_at: 2024-07-11T00:00:00.000Z

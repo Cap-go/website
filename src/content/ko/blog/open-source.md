@@ -5,6 +5,7 @@ description: >-
   During your programming journey, you might have heard of the term "Open
   Source". But what does that actually mean?
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z
 updated_at: 2023-09-16T00:00:00.000Z

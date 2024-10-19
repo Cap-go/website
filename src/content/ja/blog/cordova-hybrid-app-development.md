@@ -5,6 +5,7 @@ description: >-
   Apache
   Cordovaの世界を深く探求しましょう。Cordovaがどのように開発者にHTML、CSS、JavaScriptなどのウェブ技術を使用してクロスプラットフォームのモバイルアプリケーションを作成することを可能にするかを発見してください。その歴史や利点について学び、Capacitorなどの代替手段との比較を行いましょう。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
 updated_at: 2024-06-14T00:00:00.000Z

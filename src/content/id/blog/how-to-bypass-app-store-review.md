@@ -5,6 +5,7 @@ description: >-
   Bagaimana fitur Capgo dapat memungkinkan Anda mengirim pembaruan kode langsung
   untuk aplikasi Ionic iOS sambil sepenuhnya mematuhi pedoman Apple?
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2022-01-13T00:00:00.000Z

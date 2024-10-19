@@ -4,6 +4,8 @@ title: In-App-Käufe für Capacitor
 description: >-
   Wie man In-App-Käufe für Capacitor-Apps mithilfe des Capacitor
   Purchases-Plugins und RevenueCat implementiert
+author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

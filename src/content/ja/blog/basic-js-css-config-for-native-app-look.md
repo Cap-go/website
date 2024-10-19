@@ -4,6 +4,7 @@ title: ネイティブアプリケーションの外観のための基本的なJ
 description: >-
   ウェブアプリケーションを基本的なJavaScriptとCSSの設定で構成し、ホバー効果の無効化を含め、ネイティブアプリケーションのように見せ、振る舞わせる方法を学びましょう。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z

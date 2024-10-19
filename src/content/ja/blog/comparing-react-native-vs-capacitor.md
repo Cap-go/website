@@ -5,6 +5,7 @@ description: >-
   この記事では、React
   Nativeを使用したモバイルアプリケーション開発を、ReactとCapacitorを使った開発と比較し、機能、パフォーマンス、コミュニティなどについて議論します。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
 updated_at: 2023-06-11T00:00:00.000Z

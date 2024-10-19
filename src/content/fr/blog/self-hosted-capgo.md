@@ -6,6 +6,7 @@ description: >-
   direct de Capacitor à vos utilisateurs sans avoir à utiliser le service cloud
   de Capgo.
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
 updated_at: 2023-09-20T00:00:00.000Z

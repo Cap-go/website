@@ -3,6 +3,7 @@ slug: turn-off-android-talkback
 title: このようにして、AndroidデバイスでTalkBackを無効にし、使用しました。
 description: 視覚障害のあるAndroidユーザー向けに、内蔵スクリーンリーダーであるTalkBackを有効にし、操作するためのステップバイステップガイド。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

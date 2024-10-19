@@ -5,6 +5,7 @@ description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi IOS Ionic Anda dengan Codemagic
   dalam 5 Menit (2024)
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-24T00:00:00.000Z
 updated_at: 2024-07-24T00:00:00.000Z

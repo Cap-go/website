@@ -6,6 +6,7 @@ description: >-
   React Native dengan penggunaan React dan Capacitor, dengan membahas
   karakteristik, kinerja, komunitas, dan lainnya.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
 updated_at: 2023-06-11T00:00:00.000Z

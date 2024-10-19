@@ -5,6 +5,7 @@ description: >-
   Pelajari langkah demi langkah cara mengonfigurasi tautan universal untuk
   aplikasi Next.js Anda dengan Capacitor di platform iOS dan Android.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z

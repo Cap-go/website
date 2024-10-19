@@ -5,6 +5,7 @@ description: >-
   Comment configurer un pipeline CI/CD pour votre application Android Ionic avec
   fastlane et GitHub Actions en 5 minutes (2022)
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
 updated_at: 2022-10-27T00:00:00.000Z

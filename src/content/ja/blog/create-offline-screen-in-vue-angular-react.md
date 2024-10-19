@@ -5,6 +5,7 @@ description: >-
   Vue、Angular、またはReactアプリケーションで、Network
   APIとCapacitorを使用してオフライン画面を実装する方法を学びましょう。オフラインシナリオを効果的に管理することで、ユーザー体験を向上させましょう。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
 updated_at: 2022-06-21T00:00:00.000Z

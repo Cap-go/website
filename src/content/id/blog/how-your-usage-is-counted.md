@@ -5,6 +5,7 @@ description: >-
   Pahami bagaimana Capgo menghitung penggunaan Anda dan manfaatkan
   sebaik-baiknya. Pelajari cara mengelola paket Anda dengan lebih baik
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

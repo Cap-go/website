@@ -6,6 +6,7 @@ description: >-
   successive, per poter eseguire versioni di distribuzione interna e versioni di
   sviluppo locali sul tuo dispositivo.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

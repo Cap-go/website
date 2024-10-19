@@ -5,6 +5,7 @@ description: >-
   Comment configurer un pipeline CI/CD pour votre application iOS Ionic avec
   fastlane et GitHub Actions en 5 minutes (2024)
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-08-04T00:00:00.000Z
 updated_at: 2024-08-04T00:00:00.000Z
