@@ -8,6 +8,7 @@ import { pwa } from './src/config/pwa'
 import { defaultLocale, locales } from './src/services/locale'
 
 export default defineConfig({
+  build: { concurrency: 2 },
   site: `https://${config.base_domain.prod}`,
   redirects: {
     '/docs/getting-started/': {
