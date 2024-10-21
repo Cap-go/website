@@ -3,6 +3,7 @@ slug: enable-ios-developer-mode-ios16
 title: iOS 16でアプリテストのために開発者モードを有効にする方法は次のとおりです。
 description: iOS 16以降でデベロッパーモードを有効にし、デバイス上で内部配布およびローカル開発ビルドを実行するためのステップバイステップガイド。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

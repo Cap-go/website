@@ -3,6 +3,7 @@ slug: automatic-capacitor-android-build-github-action
 title: GitHub Actions を使用した Capacitor Android の自動ビルド
 description: 5分で Ionic Android アプリの CI/CD パイプラインを fastlane と GitHub Actions で構築する方法 (2022年)
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
 updated_at: 2022-10-27T00:00:00.000Z

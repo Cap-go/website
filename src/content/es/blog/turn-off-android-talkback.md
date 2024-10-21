@@ -5,6 +5,7 @@ description: >-
   Guía paso a paso para activar y navegar con TalkBack, el lector de pantalla
   integrado de Android para usuarios con discapacidad visual.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

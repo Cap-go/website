@@ -3,6 +3,7 @@ slug: how-your-usage-is-counted
 title: Capgoでの使用方法の計算方法
 description: Capgoがどのように使用量を計算し、それを最適に利用するかを理解します。プランをより良く管理する方法を学びましょう。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

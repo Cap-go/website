@@ -4,6 +4,7 @@ title: Capgoにおけるバージョンの仕組み
 description: >-
   CapgoがあなたのCapacitorアプリでバージョンを管理する方法を理解し、それを最適に使用します。メジャー、マイナー、パッチの重要性について学びましょう。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-25T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

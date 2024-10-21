@@ -9,6 +9,7 @@ description: >-
   Practices und Techniken für die Entwicklung leistungsstarker und
   funktionsreicher mobiler Anwendungen.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2024-09-19T00:00:00.000Z

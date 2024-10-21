@@ -23,6 +23,7 @@ const props = defineProps<{
   head_image?: string
   description?: string
   head_image_alt?: string
+  author_image_url?: string
 }>()
 
 const isFixedTocVisible = ref(false)
@@ -128,6 +129,16 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </ul>
       </div>
       <article ref="article" v-if="props" class="prose lg:max-w-1/2 mx-auto px-4 pb-4 text-left text-white md:rounded-lg" v-html="props.Content" />
+      <div class="lg:max-w-1/2 mx-auto px-4 flex flex-row items-center">
+        <div class="min-w-max min-h-[1px]">Authored By</div>
+        <div class="ml-3 h-[1px] w-full bg-white/30" />
+      </div>
+      <div class="mt-5 lg:max-w-1/2 mx-auto px-4 flex items-center">
+        <img :src="props?.author_image_url" class="size-8 rounded-full object-cover" :alt="`author image ${props?.author}`" :title="`author image ${props?.author}`" />
+        <a :href="props?.author_url" class="ml-3 text-lg font-medium" target="_blank" rel="noopener noreferrer">
+          {{ props?.author }}
+        </a>
+      </div>
     </div>
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

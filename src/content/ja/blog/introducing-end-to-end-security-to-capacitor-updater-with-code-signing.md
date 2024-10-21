@@ -3,6 +3,7 @@ slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: エンドツーエンドの暗号化によるキャパシタの更新とコード署名。
 description: RSA + AES暗号化を使用してアップデートを暗号化し、高いセキュリティを必要とする企業やアプリケーション向けに開発されました。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
 updated_at: 2024-08-27T00:00:00.000Z

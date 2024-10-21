@@ -8,6 +8,7 @@ description: >-
   multiplateforme d'applications mobiles en 2024. Créez des applications pour
   iOS, Android et web à partir d'une seule base de code.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
 updated_at: 2024-06-15T00:00:00.000Z

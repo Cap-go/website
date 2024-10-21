@@ -5,6 +5,7 @@ description: >-
   The blog article should be described as a comprehensive guide for developers
   on how to use Capgo to manage Capacitor app updates and tests
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
 updated_at: 2023-09-10T00:00:00.000Z

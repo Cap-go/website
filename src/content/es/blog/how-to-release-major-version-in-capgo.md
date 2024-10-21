@@ -5,6 +5,7 @@ description: >-
   Comprenda cómo y cuándo es necesario publicar una versión principal de su
   aplicación sin dañar la aplicación del usuario
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

@@ -6,6 +6,7 @@ description: >-
   TestFlight ou du processus bêta de Google. Ajoutez simplement un bouton dans
   votre application Ionic, et c'est parti !
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

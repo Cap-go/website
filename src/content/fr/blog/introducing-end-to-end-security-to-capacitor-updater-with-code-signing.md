@@ -7,6 +7,7 @@ description: >-
   Utilisation du chiffrement RSA + AES pour crypter les mises à jour, conçu pour
   les entreprises et les applications avec des exigences de sécurité élevées
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
 updated_at: 2024-08-27T00:00:00.000Z

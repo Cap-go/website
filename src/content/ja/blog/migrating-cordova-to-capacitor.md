@@ -4,6 +4,7 @@ title: CordovaからCapacitorへのWebアプリケーション移行：ステッ
 description: >-
   このステップバイステップガイドは、CordovaからCapacitorへのWebアプリケーションの移行を支援します。すべての部分をカバーしており、読みやすく、従いやすい内容です。
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

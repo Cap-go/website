@@ -5,6 +5,7 @@ description: >-
   Erfahren Sie, wie Sie eine mobile App mit React und Capacitor erstellen und
   die native Benutzeroberfläche mit Konsta UI verbessern.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2023-03-10T00:00:00.000Z

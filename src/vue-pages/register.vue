@@ -6,13 +6,12 @@ import translations from '@/services/translations'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 
-const props = defineProps<{ 
-  locale: Locales,
+const props = defineProps<{
+  locale: Locales
   captchaKey: string
 }>()
 
 const CLOUDFLARE_TURNSTILE_SITE_KEY = props.captchaKey
-
 
 const isLoading = ref(false)
 const enableCaptcha = ref(!!CLOUDFLARE_TURNSTILE_SITE_KEY)
@@ -162,11 +161,7 @@ const handleSubmit = async () => {
             </div>
             <div v-if="enableCaptcha">
               <label class="block text-sm font-medium text-gray-700">Captcha</label>
-              <div
-                class="cf-turnstile"
-                :data-sitekey="CLOUDFLARE_TURNSTILE_SITE_KEY"
-                data-size="flexible"
-              ></div>
+              <div class="cf-turnstile" :data-sitekey="CLOUDFLARE_TURNSTILE_SITE_KEY" data-size="flexible"></div>
             </div>
             <button
               type="submit"

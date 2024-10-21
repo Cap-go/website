@@ -5,6 +5,7 @@ description: >-
   How can you push code updates to production iOS apps and be fully compliant
   with Apple’s guidelines? 
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2022-01-13T00:00:00.000Z

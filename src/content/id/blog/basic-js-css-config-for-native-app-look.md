@@ -6,6 +6,7 @@ description: >-
   CSS dasar agar terlihat dan berperilaku seperti aplikasi asli, termasuk
   menonaktifkan efek hover.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z

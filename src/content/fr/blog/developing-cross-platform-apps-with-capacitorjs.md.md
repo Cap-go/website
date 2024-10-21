@@ -7,6 +7,7 @@ description: >-
   Découvrez comment créer des applications multiplateformes avec Capacitor et
   une seule base de code JavaScript pour Android, iOS et Web (PWA).
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-02T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z

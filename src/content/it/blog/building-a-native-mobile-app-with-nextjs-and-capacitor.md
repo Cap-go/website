@@ -8,6 +8,7 @@ description: >-
   Next.js 14 e Capacitor. Esplora le migliori pratiche e le tecniche più recenti
   per sviluppare applicazioni mobili potenti e ricche di funzionalità.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2024-09-19T00:00:00.000Z

@@ -7,6 +7,7 @@ description: >-
   progresif menggunakan satu basis kode web yang terstandarisasi. Temukan semua
   yang perlu Anda ketahui tentang Capacitor dalam panduan komprehensif ini.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-10T00:00:00.000Z
 updated_at: 2023-06-10T00:00:00.000Z

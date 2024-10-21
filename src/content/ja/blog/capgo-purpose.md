@@ -4,6 +4,7 @@ title: Capgoの目標
 description: >-
   ブログ記事は、Capgoを使用してCapacitorアプリケーションの更新とテストを管理する方法について、開発者のための包括的なガイドとして説明されるべきです。
 author: Anik Dhabal Babu
+author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
 updated_at: 2023-09-10T00:00:00.000Z

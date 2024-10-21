@@ -5,6 +5,7 @@ description: >-
   Une histoire de fond sur la façon dont l'équipe de Capgo a ajouté un système
   d'organisation
 author: WcaleNieWolny
+author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-04-15T00:00:00.000Z
 updated_at: 2024-04-15T00:00:00.000Z

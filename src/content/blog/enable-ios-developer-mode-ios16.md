@@ -5,6 +5,7 @@ description: >-
   Step-by-step guide on enabling Developer Mode on iOS 16 and above to run
   internal distribution builds and local development builds on your device.
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z

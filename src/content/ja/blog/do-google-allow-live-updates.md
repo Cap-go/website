@@ -3,6 +3,7 @@ slug: do-google-allow-live-updates
 title: Googleはアプリストアでレビューされることなく、アプリに直接アップデートを送信することを許可していますか？
 description: AndroidアプリケーションでGoogleのポリシーを完全に遵守しながら、コードの更新を実装する方法は？
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z

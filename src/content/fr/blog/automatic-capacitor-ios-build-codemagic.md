@@ -5,6 +5,7 @@ description: >-
   Comment configurer un pipeline CI/CD pour votre application IOS Ionic avec
   Codemagic en 5 minutes (2024)
 author: Martin Donadieu
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-24T00:00:00.000Z
 updated_at: 2024-07-24T00:00:00.000Z
