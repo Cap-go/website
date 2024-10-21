@@ -38,7 +38,7 @@ This change means all tooling has to be aligned to handle the breaking change.
 
 That why Capgo follows this system.
 So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.\
-This behavior can be customized. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
+This behavior can be customized. You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
 ### Versions
 

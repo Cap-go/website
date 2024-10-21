@@ -1,5 +1,30 @@
 {
   "i18n-ally.keystyle": "nested",
   "i18n-ally.localesPaths": "locales",
-  "i18n-ally.sortKeys": true
+  "i18n-ally.sortKeys": true,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/src/content/de": true,
+    "**/public": true,
+    "**/dist": true,
+    "**/src/content/es": true,
+    "**/src/content/fr": true,
+    "**/src/content/id": true,
+    "**/src/content/it": true,
+    "**/src/content/ja": true,
+    "**/src/content/ko": true,
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/public": true,
+    "**/dist": true,
+    "**/folderToIgnore1": true,
+    "**/src/content/de": true,
+    "**/src/content/es": true,
+    "**/src/content/fr": true,
+    "**/src/content/id": true,
+    "**/src/content/it": true,
+    "**/src/content/ja": true,
+    "**/src/content/ko": true,
+  }
 }
