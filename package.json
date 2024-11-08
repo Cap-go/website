@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/starlight": "^0.27.1",
+    "@astrojs/starlight": "^0.29.0",
     "@astrojs/vue": "^4.5.2",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
