@@ -62,14 +62,16 @@ const handleSubmit = async () => {
     },
   })
   if (error) {
-    console.error(error)
+    console.error('Supabase signup error', error)
+    toast.error(error.message)
+    openMessenger()
     isLoading.value = false
     return
   }
   try {
     await window.Reflio.signup(email.value)
   } catch (error) {
-    console.error(error)
+    console.error('Reflio signup error', error)
   }
   if (error || !user) {
     isLoading.value = false
@@ -77,7 +79,9 @@ const handleSubmit = async () => {
   }
   const session = await supabase.auth.getSession()
   if (session.error) {
-    console.error(session.error)
+    console.error('Supabase session error', session.error)
+    toast.error(session.error.message)
+    openMessenger()
     isLoading.value = false
     return
   }
