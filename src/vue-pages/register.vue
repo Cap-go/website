@@ -4,7 +4,7 @@ import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import translations from '@/services/translations'
 import { ref } from 'vue'
-import { toast } from 'vue-sonner'
+import { toast, Toaster } from 'vue-sonner'
 
 const props = defineProps<{
   locale: Locales
@@ -86,9 +86,9 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section class="flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
+  <section class="flex items-center justify-center min-h-screen p-4 overflow-hidden bg-slate-900">
     <div class="relative w-full max-w-4xl">
-      <div class="absolute inset-0 -translate-x-4 transform">
+      <div class="absolute inset-0 transform -translate-x-4">
         <svg class="blur-3xl filter" style="filter: blur(64px)" width="100%" height="100%" viewBox="0 0 444 775" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             opacity="0.5"
@@ -103,8 +103,8 @@ const handleSubmit = async () => {
           </defs>
         </svg>
       </div>
-      <div class="relative z-10 grid overflow-hidden rounded-lg bg-white shadow-xl md:grid-cols-2">
-        <div class="space-y-6 p-6">
+      <div class="relative z-10 grid overflow-hidden bg-white rounded-lg shadow-xl md:grid-cols-2">
+        <div class="p-6 space-y-6">
           <div>
             <h2 class="text-4xl font-bold text-gray-900">{{ translations['register_title'][props.locale] }}</h2>
             <p class="text-sm text-gray-500">
@@ -120,7 +120,7 @@ const handleSubmit = async () => {
                 v-model="email"
                 type="email"
                 required
-                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 :placeholder="translations['email_placeholder'][props.locale]"
               />
             </div>
@@ -132,7 +132,7 @@ const handleSubmit = async () => {
                   v-model="firstName"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                   :placeholder="translations['first_name_placeholder'][props.locale]"
                 />
               </div>
@@ -143,7 +143,7 @@ const handleSubmit = async () => {
                   v-model="lastName"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                   :placeholder="translations['last_name_placeholder'][props.locale]"
                 />
               </div>
@@ -155,7 +155,7 @@ const handleSubmit = async () => {
                 v-model="password"
                 type="password"
                 required
-                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 :placeholder="translations['password_placeholder'][props.locale]"
               />
             </div>
@@ -165,11 +165,11 @@ const handleSubmit = async () => {
             </div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               :disabled="isLoading"
             >
               <template v-if="isLoading">
-                <svg class="mr-2 h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path
                     class="opacity-75"
@@ -186,14 +186,14 @@ const handleSubmit = async () => {
               <div class="w-full border-t border-gray-300"></div>
             </div>
             <div class="relative flex justify-center text-sm">
-              <span class="bg-white px-2 text-gray-500">{{ translations['need_help'][props.locale] }}</span>
+              <span class="px-2 text-gray-500 bg-white">{{ translations['need_help'][props.locale] }}</span>
             </div>
           </div>
           <button
             @click="openMessenger"
-            class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -204,15 +204,15 @@ const handleSubmit = async () => {
             {{ translations['open_support'][props.locale] }}
           </button>
         </div>
-        <div class="flex items-center bg-slate-800 p-4">
+        <div class="flex items-center p-4 bg-slate-800">
           <blockquote class="text-white">
             <p class="mb-4 text-2xl font-bold">
               {{ translations['testimonial_title'][props.locale] }}<br />
               After update,
-              <span class="rounded-full bg-orange-500 px-2 py-1 text-white">{{ translations['testimonial_highlight'][props.locale] }}</span>
+              <span class="px-2 py-1 text-white bg-orange-500 rounded-full">{{ translations['testimonial_highlight'][props.locale] }}</span>
             </p>
-            <div class="mb-4 flex items-center">
-              <img src="/avatar-male-2.webp" alt="User" class="mr-4 h-12 w-12 rounded-full" />
+            <div class="flex items-center mb-4">
+              <img src="/avatar-male-2.webp" alt="User" class="w-12 h-12 mr-4 rounded-full" />
               <div>
                 <cite class="font-bold text-white">Jermaine</cite>
                 <p class="text-gray-400">{{ translations['testimonial_description'][props.locale] }}</p>
@@ -222,8 +222,9 @@ const handleSubmit = async () => {
         </div>
       </div>
     </div>
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-      <img class="h-full w-full transform object-cover object-top opacity-20" src="/background-pattern.webp" alt="" />
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <img class="object-cover object-top w-full h-full transform opacity-20" src="/background-pattern.webp" alt="" />
     </div>
+    <Toaster rich-colors close-button position="top-right" />
   </section>
 </template>
