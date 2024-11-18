@@ -89,7 +89,7 @@ function descToEmoji(desc: string) {
         <div class="px-4 py-5 sm:p-6">
           <div class="flex items-end">
             <p class="text-5xl font-semibold text-gray-900">${{ yearly ? (plan.price_y / 12).toFixed() : plan.price_m }}</p>
-            <p class="py-1 text-sm font-normal text-gray-500">/month</p>
+            <p class="py-1 text-sm font-normal text-gray-500">/{{ translations['month'][props.locale as Locales] }}</p>
           </div>
           <div class="mt-6">
             <a
@@ -140,7 +140,7 @@ function descToEmoji(desc: string) {
                 />
               </svg>
               <span
-                ><span class="font-bold">{{ numberWithSpaces(plan.bandwidth) }}</span> GB/mo {{ translations['of_bandwidth'][props.locale as Locales] }}</span
+                ><span class="font-bold">{{ numberWithSpaces(plan.bandwidth) }}</span> GB/{{ translations['month'][props.locale as Locales] }} {{ translations['of_bandwidth'][props.locale as Locales] }}</span
               >
             </li>
             <li class="flex items-center">
