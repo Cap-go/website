@@ -262,11 +262,11 @@ book_a_consultation: Prenota una consulenza
 testimonial_consulting: >-
   Capgo não apenas tem engenheiros incrivelmente talentosos, mas eles também
   compartilham minha paixão pelo sucesso do projeto. Ter um <strong
-  class='font-bold italic'>verdadeiro parceiro</strong> tem sido uma experiência
+  class='italic font-bold'>verdadeiro parceiro</strong> tem sido uma experiência
   maravilhosa, e isso nos permite avançar muito mais rápido do que poderíamos
   sozinhos.
 testimonial_consulting_2: >-
-  Non avrei <strong class='font-bold italic'>alcun dubbio nel consigliare
+  Non avrei <strong class='italic font-bold'>alcun dubbio nel consigliare
   Capgo</strong> ad altri, per fornire una soluzione flessibile a una forza
   lavoro esistente o su base a lungo termine come parte di un team remoto.
 when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: Quando è opportuno richiedere servizi di consulenza su Cordova e CapacitorJS
@@ -592,9 +592,10 @@ get_an_answer_in_less_than_6h: Ricevi una risposta in meno di 6 ore
 custom_domain: Domínio Personalizado
 add_your_own_domain: Aggiungi il tuo dominio
 all_our_features_are_available_to_all_users: Tutti i nostri servizi sono disponibili per tutti gli utenti.
-month: Mês
+month: Mese
+user: Utente
 get_started_for_free: Inizia gratis
-most_popular: Más popular
+most_popular: Più popolare
 14_days_free_trial: 14 дней бесплатного пробного периода
 billed_annually_at: Facturé annuellement à
 you_get: Tu obtiens

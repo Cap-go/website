@@ -263,12 +263,11 @@ consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps
 book_a_consultation: Pesan konsultasi
 testimonial_consulting: >-
   Capgo tidak hanya memiliki insinyur yang sangat berbakat, tetapi mereka juga
-  berbagi hasrat saya untuk kesuksesan proyek. Memiliki <strong class='font-bold
-  italic'>mitra sejati</strong> telah menjadi pengalaman yang luar biasa, dan
+  berbagi hasrat saya untuk kesuksesan proyek. Memiliki <strong class='italic font-bold'>mitra sejati</strong> telah menjadi pengalaman yang luar biasa, dan
   itu memungkinkan kami bergerak jauh lebih cepat daripada yang bisa kami
   lakukan sendiri.
 testimonial_consulting_2: >-
-  Saya tidak akan <strong class='font-bold italic'>ragu untuk merekomendasikan
+  Saya tidak akan <strong class='italic font-bold'>ragu untuk merekomendasikan
   Capgo</strong> kepada orang lain, untuk menyediakan solusi fleksibel bagi
   tenaga kerja yang ada atau dalam jangka panjang sebagai bagian dari tim jarak
   jauh.
@@ -590,6 +589,7 @@ custom_domain: Domain Kustom
 add_your_own_domain: Tambahkan domain Anda sendiri
 all_our_features_are_available_to_all_users: Semua fitur kami tersedia untuk semua pengguna.
 month: Bulan
+user: Pengguna
 get_started_for_free: Mulai secara GRATIS
 most_popular: Paling populer
 14_days_free_trial: 14 hari percobaan gratis

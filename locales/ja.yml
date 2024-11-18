@@ -195,10 +195,9 @@ consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps
 book_a_consultation: 相談の予約をする
 testimonial_consulting: >-
   Capgoは才能あふれるエンジニアを揃えているだけでなく、プロジェクトの成功に対する私の情熱を共有しています。<strong
-  class='font-bold
-  italic'>真のパートナー</strong>を持つことは素晴らしい経験であり、私たちは一人ではできないほど速く進むことができます。
+  class='italic font-bold'>真のパートナー</strong>を持つことは素晴らしい経験であり、私たちは一人ではできないほど速く進むことができます。
 testimonial_consulting_2: >-
-  私は<strong class='font-bold italic'>Capgoを他の人に推薦することに何の
+  私は<strong class='italic font-bold'>Capgoを他の人に推薦することに何の
   hesitationも感じません</strong>。既存の労働力に柔軟なソリューションを提供するため、あるいはリモートチームの一部として長期的に利用するために。
 when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: CordovaおよびCapacitorJSのコンサルティングサービスを依頼するのが良いタイミング
 review_before_passing_the_code_to_the_production: コードを本番環境に渡す前にレビューしてください。
@@ -419,6 +418,7 @@ custom_domain: カスタムドメイン
 add_your_own_domain: 独自のドメインを追加する
 all_our_features_are_available_to_all_users: すべての機能はすべてのユーザーに利用可能です
 month: 月
+user: ユーザー
 get_started_for_free: 無料で始める
 most_popular: 最も人気のある
 14_days_free_trial: 14日間の無料トライアル

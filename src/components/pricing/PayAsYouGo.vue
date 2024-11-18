@@ -21,45 +21,45 @@ const props = defineProps({
 </script>
 
 <template>
-  <section id="pay-as-you-go" class="bg-gray-50 py-12 sm:py-16 lg:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <section id="pay-as-you-go" class="py-12 bg-gray-50 sm:py-16 lg:py-20">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
         <div class="flex items-center justify-center">
-          <div class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 text-lg">🔥</div>
-          <h2 class="font-pj ml-3 text-4xl font-bold text-gray-900">{{ translations['pay_as_you_go'][props.locale as Locales] }}</h2>
+          <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full h-9 w-9">🔥</div>
+          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">{{ translations['pay_as_you_go'][props.locale as Locales] }}</h2>
         </div>
-        <p class="font-pj mt-4 text-base font-normal text-gray-600">
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">
           {{ numberWithSpaces(updateCalc(props.payg)) }} {{ translations['pay_as_you_go_description'][props.locale as Locales] }}
         </p>
       </div>
-      <div class="relative mx-auto mt-8 max-w-sm md:mt-12 md:max-w-3xl">
+      <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">
           <div
-            class="mx-auto h-full w-full opacity-30 blur-lg filter"
+            class="w-full h-full mx-auto opacity-30 blur-lg filter"
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-        <div class="relative overflow-hidden rounded-2xl border border-gray-200 bg-white">
+        <div class="relative overflow-hidden bg-white border border-gray-200 rounded-2xl">
           <div class="p-6 md:px-10 md:py-9">
-            <div class="grid grid-cols-1 items-center gap-y-9 md:grid-cols-7 md:gap-y-0">
+            <div class="grid items-center grid-cols-1 gap-y-9 md:grid-cols-7 md:gap-y-0">
               <div class="space-y-9 md:col-span-3 xl:pr-2">
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['monthly_active_users'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['monthly_active_users'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.mau.toLocaleString() }}</span>
-                      {{ translations['users_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.mau_unit }}/user
+                      {{ translations['users_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.mau_unit }}/{{ translations['user'][props.locale as Locales] }}
                     </p>
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -69,8 +69,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['bandwidth'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['bandwidth'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(props.payg?.bandwidth) }}</span>
                       {{ translations['TB_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.bandwidth_unit }}
                       {{ translations['per_GB'][props.locale as Locales] }}
@@ -78,8 +78,8 @@ const props = defineProps({
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -89,8 +89,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['cloud_storage'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['cloud_storage'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.storage.toLocaleString() }}</span>
                       {{ translations['GB_included'][props.locale as Locales] }}, {{ translations['then'][props.locale as Locales] }} ${{ props.payg?.storage_unit }}
                       {{ translations['per_GB'][props.locale as Locales] }}
@@ -100,7 +100,7 @@ const props = defineProps({
               </div>
               <div>
                 <div class="hidden md:block">
-                  <svg class="mx-auto h-auto w-4 text-gray-300" viewBox="0 0 16 172" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-4 h-auto mx-auto text-gray-300" viewBox="0 0 16 172" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 11)" />
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 46)" />
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 81)" />
@@ -128,7 +128,7 @@ const props = defineProps({
                   </svg>
                 </div>
                 <div class="block md:hidden">
-                  <svg class="mx-auto h-4 w-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-auto h-4 mx-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)" />
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)" />
                     <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)" />
@@ -158,8 +158,8 @@ const props = defineProps({
               </div>
               <div class="space-y-9 md:col-span-3 xl:pr-2">
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -169,13 +169,13 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['API_access'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['create_anything_you_want'][props.locale as Locales] }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['API_access'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ translations['create_anything_you_want'][props.locale as Locales] }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -185,13 +185,13 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['dedicated_support'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['get_an_answer_in_less_than_6h'][props.locale as Locales] }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['dedicated_support'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ translations['get_an_answer_in_less_than_6h'][props.locale as Locales] }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
-                    <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                    <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -201,8 +201,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="font-pj text-lg font-bold text-gray-900">{{ translations['custom_domain'][props.locale as Locales] }}</p>
-                    <p class="font-pj mt-1 text-sm font-normal text-gray-600">{{ translations['add_your_own_domain'][props.locale as Locales] }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ translations['custom_domain'][props.locale as Locales] }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ translations['add_your_own_domain'][props.locale as Locales] }}</p>
                   </div>
                 </div>
               </div>
@@ -211,13 +211,13 @@ const props = defineProps({
         </div>
       </div>
       <div class="mt-8 text-center">
-        <p class="font-pj text-base font-medium text-gray-600">{{ translations['all_our_features_are_available_to_all_users'][props.locale as Locales] }}</p>
-        <div class="mt-10 flex items-end justify-center">
-          <p class="font-pj text-lg font-bold text-gray-400">$</p>
-          <p class="font-pj text-6xl font-bold text-gray-900">
+        <p class="text-base font-medium text-gray-600 font-pj">{{ translations['all_our_features_are_available_to_all_users'][props.locale as Locales] }}</p>
+        <div class="flex items-end justify-center mt-10">
+          <p class="text-lg font-bold text-gray-400 font-pj">$</p>
+          <p class="text-6xl font-bold text-gray-900 font-pj">
             {{ props.yearly ? props.payg.price_y.toLocaleString() : props.payg?.price_m.toLocaleString() }}
           </p>
-          <p class="font-pj text-lg font-bold text-gray-400">/{{ translations['month'][props.locale as Locales] }}</p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/{{ translations['month'][props.locale as Locales] }}</p>
         </div>
         <a
           role="button"
