@@ -57,7 +57,7 @@ npm run build
 
 Then Zip your build:
 ```shell
-npx @capgo/cli/latest bundle zip
+npx @capgo/cli@latest bundle zip
 ```
 
 Then encrypt your zip:
