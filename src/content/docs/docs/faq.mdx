@@ -321,3 +321,13 @@ To limit the number of database queries, we do update row only on app update.
 
 This limitation will be removed in the future.
 
+# How to have different update by platform?[](https://capgo.app/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
+
+You can create a channel for each platform. and disable platform specific updates in each channel. 
+
+On ios channel disable android updates and on android channel disable ios updates.
+
+Then upload a bundle to each channel to have different update for each platform.
+
+If you need to have the same update for both platform, you can link one bundle to multiple channels. No need to duplicate the bundle.
+
