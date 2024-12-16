@@ -23,7 +23,7 @@
     "@heroicons/vue": "^2.1.5",
     "@supabase/supabase-js": "^2.45.4",
     "astro": "^4.16.0",
-    "astro-embed": "^0.7.4",
+    "astro-embed": "^0.9.0",
     "ky": "^1.7.2",
     "marked": "^14.1.2",
     "openai": "^4.67.3",
