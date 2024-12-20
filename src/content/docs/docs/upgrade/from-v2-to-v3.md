@@ -45,7 +45,7 @@ to only let this:
 
 All configurations become server-side for auto-update, to give you more control on how you send an update to users.
 
-That allows us to revert, AB test, partial deploy or even deploy just to one user! These settings are added back to the web interface:
+That allows us to revert, even deploy just to one user with channels! These settings are added back to the web interface:
 
 * disable revert under native
 * disable update above major
@@ -97,7 +97,7 @@ npx capgo upload
 
 ## Future evolution
 
-For now only the first public channel is in use, in the future, public will change to something related to AB test, if more than one is set.
+For now only the first public channel is in use, in the future, public will change for multi public channels, if more than one is set.
 
 ## Common problems:
 

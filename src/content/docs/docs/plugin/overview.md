@@ -7,7 +7,7 @@ sidebar:
 
 
 ### Cloud Mode (Recommended)
-Cloud Mode is our recommended choice for hassle-free update management. Capgo's backend takes care of all the update logic, making decisions about updates server-side for better security and control. This mode is all about ease of use: once set up, it runs smoothly on its own, offering advanced features like statistics, groups and AB testing. It can also be set-up in a manual mode so it gives you more control, allowing you to decide when to update using your JavaScript code. The backend still manages what gets updated. This mode shares many benefits with the Auto Mode, especially in security and advanced features, but adds the flexibility of timing updates yourself.
+Cloud Mode is our recommended choice for hassle-free update management. Capgo's backend takes care of all the update logic, making decisions about updates server-side for better security and control. This mode is all about ease of use: once set up, it runs smoothly on its own, offering advanced features like statistics, and channels. It can also be set-up in a manual mode so it gives you more control, allowing you to decide when to update using your JavaScript code. The backend still manages what gets updated. This mode shares many benefits with the Auto Mode, especially in security and advanced features, but adds the flexibility of timing updates yourself.
 
 
 ### Self Hosted Mode

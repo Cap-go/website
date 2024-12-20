@@ -21,7 +21,7 @@
     "bandwidth": 2000,
     "price": 299,
     "description": "Best for medium enterprises",
-    "features": ["Advanced Reporting", "Progressive Deployment", "AB testing"]
+    "features": ["Advanced Reporting"]
   },
   "pay-as-you-go": {
     "mau": {
@@ -38,6 +38,6 @@
     },
     "price": 999,
     "description": "Best for scalling enterprises",
-    "features": ["Advanced Reporting", "Progressive Deployment", "AB testing"]
+    "features": ["Advanced Reporting"]
   }
 }

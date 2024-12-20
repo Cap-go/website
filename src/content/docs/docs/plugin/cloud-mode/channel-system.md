@@ -9,7 +9,7 @@ Capgo and capacitor-updater comes with a powerful channel system.
 
 ## What you can do with channels:
 
-* Associate devices to channel for development, beta test, or AB testing
+* Associate devices to channel for development, beta test
 * Use one channel by dev branch and let your team self-assign from the phone to test
 
 ## Assigning devices to a channel:
