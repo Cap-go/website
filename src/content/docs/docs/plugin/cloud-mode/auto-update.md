@@ -13,7 +13,7 @@ Make sure your app version uses [https://semver.org/](https://semver.org/) befor
 
 This is the convention it uses to manage versions in Capgo.
 
-There is 2 way to set version in your app:
+There are two ways to set the version in your app:
 
 New way: Use the `version` field in your `capacitor.config.json` file.
 
