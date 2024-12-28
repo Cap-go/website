@@ -28,7 +28,7 @@ New way: Use the `version` field in your `capacitor.config.json` file.
   }
 }
 ```
-This will option in `CapacitorUpdater` will be used by the plugin to check for updates, and the CLI to upload the version.
+These options will be used by the plugin to check for updates, and the CLI to upload the version.
 
 Old way:
 In 3 files in your project:
