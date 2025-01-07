@@ -1,6 +1,9 @@
 ---
 slug: release-of-a-brand-new-capacitor-social-login
 title: Release of a brand new Capacitor Social Login plugin
+description: >-
+  The Capacitor Social Login plugin is a plugin that allows you to login with
+  Google, Facebook and Apple on iOS, Android and Web.
 author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'

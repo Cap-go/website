@@ -1,7 +1,10 @@
 ---
 slug: open-source-licecing
 title: Understanding Open-Source Software Licenses
-description: null
+description: >-
+  When it comes to open-source software licenses, there are two broad categories.
+  Some licenses fall under the copyleft license category, while others are
+  permissive open source licenses.
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
