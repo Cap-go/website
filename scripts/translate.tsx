@@ -12,7 +12,7 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
       messages: [
         {
           role: 'system',
-          content: `Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links.`,
+          content: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
         },
         {
           role: 'user',
@@ -43,9 +43,9 @@ const makeAnthropicRequest = async (body: any) => {
     })
     if (response.status === 429) {
       const retryAfter = response.headers.get('Retry-After')
-      console.log('Rate limit exceeded. Retrying after:', retryAfter)
+      // console.log('Rate limit exceeded. Retrying after:', retryAfter)
       if (retryAfter) {
-        const waitTime = parseInt(retryAfter, 10) * 1000
+        const waitTime = parseInt(retryAfter, 10) * 1000 * 2
         await new Promise((resolve) => setTimeout(resolve, waitTime))
         return makeRequest()
       }
@@ -63,9 +63,9 @@ const makeAnthropicRequest = async (body: any) => {
 export const translateTextAnthropic = async (text: string, lang: string) => {
   const data = await makeAnthropicRequest({
     max_tokens: 4000,
-    model: 'claude-3-5-sonnet-20240620',
+    model: 'claude-3-5-sonnet-20241022',
     system:
-      'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to avoid translating links, HTML tags, code blocks, image links. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
+      'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
     messages: [
       {
         role: 'user',

@@ -11,35 +11,68 @@ const blogDirectory = join(contentDirectory, 'blog')
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
 
-for (const lang of languages) {
-  console.log(`Preparing the blogs for locale: ${lang}...`)
-  const langBlogDirectory = join(contentDirectory, lang, 'blog')
-  if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
+const totalFiles = readdirSync(blogDirectory).length
+const progress: { [lang: string]: number } = {}
+
+// Process all languages in parallel
+const processAllLanguages = async () => {
   const blogFiles = readdirSync(blogDirectory)
-  const failedTranslations: { [file: string]: boolean } = {}
-  const processFile = async (file: string) => {
+  console.log(`Starting translation of ${totalFiles} files for ${languages.length} languages`)
+  
+  const languagePromises = languages.map(async (lang) => {
+    console.log(`Preparing the blogs for locale: ${lang}...`)
+    progress[lang] = 0
+    const langBlogDirectory = join(contentDirectory, lang, 'blog')
+    if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
+    
+    const failedTranslations: { [file: string]: boolean } = {}
+    
+    await Promise.allSettled(blogFiles.map((file) => processFile(file, lang, langBlogDirectory, failedTranslations)))
+    
+    progress[lang] += blogFiles.length
+    const totalProgress = Object.values(progress).reduce((a, b) => a + b, 0)
+    console.log(`Progress: ${totalProgress}/${totalFiles * languages.length} (${Math.round(totalProgress / (totalFiles * languages.length) * 100)}%)`)
+
+    const failedFiles = Object.keys(failedTranslations)
+    if (failedFiles.length > 0) {
+      console.log(`Retrying failed translations for ${lang}...`)
+      for (const file of failedFiles) {
+        await processFile(file, lang, langBlogDirectory, failedTranslations)
+      }
+    }
+  })
+
+  await Promise.all(languagePromises)
+}
+
+const processFile = async (file: string, lang: string, langBlogDirectory: string, failedTranslations: { [file: string]: boolean }): Promise<void> => {
+  const spinner = createSpinner(`Translating ${file}...`).start()
+  try {
     const filePath = join(blogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
     const { data: grayMatterJson } = matter(content)
-    const spinner = createSpinner(`Translating ${file}...`).start()
+    
     if (grayMatterJson.title) {
       const translatedTitle = await translateText(grayMatterJson.title, lang)
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
       else failedTranslations[file] = true
     }
+    
     if (grayMatterJson.description) {
       const translatedDescription = await translateText(grayMatterJson.description, lang)
       if (translatedDescription) grayMatterJson['description'] = translatedDescription
       else failedTranslations[file] = true
     }
+    
     if (grayMatterJson.head_image_alt) {
       const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
       if (translatedHeadImageAlt) grayMatterJson['head_image_alt'] = translatedHeadImageAlt
       else failedTranslations[file] = true
     }
+    
     grayMatterJson['locale'] = lang
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
     const blogContent = content.substring(grayMatterEnd + 4)
@@ -51,6 +84,7 @@ for (const lang of languages) {
     const blogContentWithoutHtmlTags = blogContentWithoutCodeBlocks.replace(htmlTagRegex, '[[HTML_TAG]]')
     const sentences = blogContentWithoutHtmlTags.split('.')
     let currentChunk = ''
+    
     for (const sentence of sentences) {
       if ((currentChunk + sentence).length > 4000) {
         const tmp = await translateText(currentChunk, lang)
@@ -59,33 +93,28 @@ for (const lang of languages) {
         currentChunk = sentence
       } else currentChunk += sentence
     }
+    
     if (currentChunk) {
       const tmp = await translateText(currentChunk, lang)
       if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
       else failedTranslations[file] = true
     }
+    
     let translatedContent = readFileSync(destinationPath, 'utf8')
-    codeBlocks.forEach((match, _) => {
+    codeBlocks.forEach((match) => {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
     })
-    htmlTags.forEach((match, _) => {
+    htmlTags.forEach((match) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
+    
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    spinner.success({ text: `Blog translated: ${file}` })
-  }
-  for (let i = 0; i < blogFiles.length; i += batchSize) {
-    const batch = blogFiles.slice(i, i + batchSize)
-    const promises = []
-    promises.push(...batch.map((file) => processFile(file)))
-    await Promise.all(promises)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-  }
-  const failedFiles = Object.keys(failedTranslations)
-  if (failedFiles.length > 0) {
-    console.log(`Retrying failed translations for ${lang}...`)
-    for (const file of failedFiles) {
-      await processFile(file)
-    }
+    spinner.success({ text: `Blog translated in ${lang}: ${file}` })
+  } catch (error) {
+    spinner.error({ text: `Failed to translate ${file} to ${lang}: ${error}` })
+    failedTranslations[file] = true
   }
 }
+
+// Start the process
+processAllLanguages()
