@@ -16,6 +16,268 @@ To access, add in the headers your API key as `authorization`.
 	href="https://web.capgo.app/dashboard/apikeys/"
 />
 
+## Organizations
+
+This endpoint allows you to manage organizations and their members.
+
+### GET
+
+`https://api.capgo.app/organizations`
+
+Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
+
+```typescript
+interface Organization {
+  id: string
+  created_by: string
+  created_at: string
+  updated_at: string
+  logo: string | null
+  name: string
+  management_email: string
+  customer_id: string | null
+}
+```
+
+Returns:
+```typescript
+return Organization[] | Organization
+```
+
+### POST
+
+`https://api.capgo.app/organizations`
+
+Update an existing organization. Requires admin role.
+
+```typescript
+interface OrganizationUpdate {
+  orgId: string
+  logo?: string
+  name?: string
+  management_email?: string
+}
+```
+
+Requires a request body of type `OrganizationUpdate`.
+
+On success, returns the following:
+
+```typescript
+return { status: 'Organization updated', data: Organization }
+```
+
+### PUT
+
+`https://api.capgo.app/organizations`
+
+Create a new organization.
+
+```typescript
+interface OrganizationCreate {
+  name: string
+}
+```
+
+Requires a request body of type `OrganizationCreate`.
+
+On success, returns the following:
+
+```typescript
+return { status: 'Organization created', id: string }
+```
+
+## API Keys
+
+This endpoint allows you to manage API keys for accessing the Capgo API.
+
+### GET
+
+`https://api.capgo.app/apikey`
+
+Retrieve API keys for your account. Returns all accessible API keys.
+
+```typescript
+interface ApiKey {
+  created_at: string | null
+  id: number
+  key: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  name: string
+  updated_at: string | null
+  user_id: string
+}
+```
+
+Returns:
+```typescript
+return ApiKey[]
+```
+
+### POST
+
+`https://api.capgo.app/apikey`
+
+Create a new API key for a specific organization.
+
+Query Parameters:
+```typescript
+interface ApiKeyCreate {
+  org_id: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+}
+```
+
+Returns:
+```typescript
+return { apikey: ApiKey }
+```
+
+### DELETE
+
+`https://api.capgo.app/apikey/:id`
+
+Delete an existing API key.
+
+Parameters:
+- `id`: The API key to delete
+
+On success, returns:
+```typescript
+return { success: true }
+```
+
+On failure, returns:
+```typescript
+return { error: string, supabaseError?: any }
+```
+
+## Members (/organizations/members)
+
+### GET 
+
+Retrieve organization members.
+
+Requires a request body (query parameters) of type `{ orgId: string }`.
+
+On success, returns the following:
+```typescript
+interface Member {
+  uid: string;
+  email: string;
+  image_url: string;
+  role: "invite_read" | "invite_upload" | "invite_write" | "invite_admin" | "invite_super_admin" | "read" | "upload" | "write" | "admin" | "super_admin";
+}
+return Member[]
+```
+
+### DELETE
+
+`https://api.capgo.app/organizations/members`
+
+Delete an organization member.
+
+```typescript
+interface MemberDelete {
+  orgId: string
+  email: string
+}
+```
+
+Requires a request body (query parameters) of type `MemberDelete`.
+
+On success, returns the following:
+
+```typescript
+return { status: 'OK' }
+```
+
+On failure, returns the following:
+
+```typescript
+return { error: string, status: 'KO' }
+```
+
+## Statistics
+
+This endpoint allows you to retrieve various statistics about your apps and organizations.
+
+### GET /statistics/app/:app_id
+
+Retrieve statistics for a specific app.
+
+Query Parameters:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Returns:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monthly Active Users
+  storage: number  // Storage usage in bytes
+  bandwidth: number // Bandwidth usage in bytes
+}
+```
+
+If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
+
+### GET /statistics/user
+
+Retrieve aggregated statistics across all organizations the user has access to.
+
+Query Parameters:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Returns:
+If `graph` is not provided:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monthly Active Users
+  storage: number  // Storage usage in bytes
+  bandwidth: number // Bandwidth usage in bytes
+}[]
+```
+
+If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
+
+### GET /statistics/org/:org_id
+
+Retrieve statistics for a specific organization.
+
+Query Parameters:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Returns:
+If `graph` is not provided:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monthly Active Users
+  storage: number  // Storage usage in bytes
+  bandwidth: number // Bandwidth usage in bytes
+}[]
+```
+
+If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
 
 ## Channels
 
