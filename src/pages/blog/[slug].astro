@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const data = Astro.props.post as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
-const markdown = data.compiledContent()
+const markdown = await data.compiledContent()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
