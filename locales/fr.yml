@@ -1708,3 +1708,8 @@ order_cancellation_rights: Vos droits d'annulation de commande
 cancellation_period: >-
   Vous avez le droit d'annuler votre commande dans un délai de 14 jours sans
   avoir à justifier votre décision.
+website_title: Capgo - Capacitor Live Update
+website_description: >-
+  Envoyez et gérez des mises à jour en direct pour votre application Capacitor,
+  sans les problèmes du magasin, 5 minutes pour installer des mises à jour
+  sur-the-air (OTA), utilisez les canaux pour envoyer à des groupes spécifiques.
