@@ -1,15 +1,21 @@
 import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
+import { i18n, filterSitemapByDefaultLocale } from "astro-i18n-aut/integration";
 import UnoCSS from '@unocss/astro'
 import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
 import config from './configs.json'
 import { pwa } from './src/config/pwa'
-import { defaultLocale, locales } from './src/services/locale'
+import { defaultLocale, locales, localeNames } from './src/services/locale'
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  build: { concurrency: 2 },
   site: `https://${config.base_domain.prod}`,
+  trailingSlash: "always",
+  build: {
+    format: "directory",
+    concurrency: 2
+  },
   redirects: {
     '/docs/getting-started/': {
       status: 302,
@@ -29,7 +35,13 @@ export default defineConfig({
       redirectToDefaultLocale: true,
     },
   },
-  integrations: [
+  integrations: [    
+    i18n({
+      locales: localeNames,
+      defaultLocale,
+      redirectDefaultLocale: true,
+      exclude: ["pages/**/*.json.ts"]
+    }),
     UnoCSS({ injectReset: true }),
     vue({
       template: {
@@ -37,6 +49,13 @@ export default defineConfig({
           includeAbsolute: false,
         },
       },
+    }),
+    sitemap({
+      i18n: {
+        locales,
+        defaultLocale,
+      },
+      filter: filterSitemapByDefaultLocale({ defaultLocale }),
     }),
     AstroPWA(pwa),
     starlight({

@@ -22,8 +22,6 @@ const props = defineProps({
 
 function descToText(desc: string) {
   switch (desc) {
-    case 'plan.free.desc':
-      return translations['plan.free.desc'][props.locale as Locales]
     case 'plan.solo.desc':
       return translations['plan.solo.desc'][props.locale as Locales]
     case 'plan.maker.desc':
@@ -37,8 +35,6 @@ function descToText(desc: string) {
 
 function descToEmoji(desc: string) {
   switch (desc) {
-    case 'plan.free.desc':
-      return '👋'
     case 'plan.solo.desc':
       return '🤘'
     case 'plan.maker.desc':
@@ -91,6 +87,9 @@ function descToEmoji(desc: string) {
             <p class="text-5xl font-semibold text-gray-900">${{ yearly ? (plan.price_y / 12).toFixed() : plan.price_m }}</p>
             <p class="py-1 text-sm font-normal text-gray-500">/{{ translations['month'][props.locale as Locales] }}</p>
           </div>
+          <p v-if="yearly" class="mt-8">
+            <span class="text-gray-900 dark:text-white">{{ translations['billed_annually_at'][props.locale as Locales] }} ${{ plan.price_y }}</span>
+          </p>
           <div class="mt-6">
             <a
               :href="getRelativeLocaleUrl(props.locale, 'register')"
@@ -106,10 +105,6 @@ function descToEmoji(desc: string) {
               {{ translations['14_days_free_trial'][props.locale as Locales] }}
             </a>
           </div>
-          <p v-if="yearly" class="mt-8">
-            <span class="text-gray-900 dark:text-white">{{ translations['billed_annually_at'][props.locale as Locales] }} ${{ plan.price_y }}</span>
-          </p>
-          <p class="mt-8 text-xs font-semibold tracking-widest text-gray-500 uppercase">{{ translations['you_get'][props.locale as Locales] }}</p>
           <ul class="mt-8 space-y-4 text-black">
             <li class="flex items-center">
               <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0 fill-blue-600" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor" viewBox="0 0 448 512">
