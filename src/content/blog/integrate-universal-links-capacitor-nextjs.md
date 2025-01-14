@@ -11,6 +11,7 @@ created_at: 2023-12-14T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z
 head_image: /deeplink_next_capacitor.webp
 head_image_alt: Capacitor Universal Links
+keywords: Capacitor, Universal Links, Next.js, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: DeepLinking
 published: true
 locale: en

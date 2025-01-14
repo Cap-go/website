@@ -33,13 +33,13 @@ const data = Astro.props.post as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
 const markdown = await data.compiledContent()
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[] } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
 if (data.frontmatter.description) content['description'] = data.frontmatter.description
 if (data.frontmatter.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
 if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Capgo'
-
+if (data.frontmatter.keywords) content['keywords'] = data.frontmatter.keywords || []
 const dateModified = new Date(data.frontmatter.updated_at).toISOString()
 const datePublished = new Date(data.frontmatter.created_at).toISOString()
 
@@ -53,6 +53,7 @@ content['ldJSON'] = {
   headline: data.frontmatter?.description,
   image: [`${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
   datePublished: datePublished,
+  inLanguage: Astro.locals.locale,
   dateModified: dateModified,
   author: {
     '@type': 'Person',
@@ -67,6 +68,9 @@ content['ldJSON'] = {
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
+  keywords: data.frontmatter?.keywords || [],
+  articleSection: data.frontmatter?.tag || [],
+  articleBody: markdown,
 }
 ---
 

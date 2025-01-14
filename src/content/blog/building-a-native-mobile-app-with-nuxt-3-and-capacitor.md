@@ -11,6 +11,7 @@ created_at: 2023-06-03T00:00:00.000Z
 updated_at: 2023-06-03T00:00:00.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: Nuxt 3 and Capgo illustration
+keywords: Nuxt 3, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

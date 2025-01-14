@@ -11,6 +11,7 @@ created_at: 2022-06-17T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo_select_update.webp
 head_image_alt: TestFlight alternative illustration
+keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: alternatives
 published: true
 locale: en

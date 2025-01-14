@@ -11,6 +11,7 @@ created_at: 2024-10-08T00:00:00.000Z
 updated_at: 2024-10-08T00:00:00.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Capgo organization system illusatration
+keywords: Oauth, social login, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Capacitor
 published: true
 next_blog: ''

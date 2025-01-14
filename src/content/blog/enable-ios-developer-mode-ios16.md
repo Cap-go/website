@@ -11,6 +11,7 @@ created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: Enabling iOS Developer Mode on iPhone
+keywords: iOS, Developer Mode, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: iOS
 published: true
 locale: en

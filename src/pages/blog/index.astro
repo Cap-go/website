@@ -2,13 +2,14 @@
 import Layout from '@/layouts/Layout.astro'
 import VueBlogIndex from '@/vue-pages/blog/index.vue'
 
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object, keywords?: string } = {}
 const posts = (await Astro.glob('@/content/blog/**/*.md'))
   .filter((i) => i.frontmatter.published)
   .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
 
 if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title
 if (Astro.locals.runtimeConfig.public.blog_description) content['description'] = Astro.locals.runtimeConfig.public.blog_description
+if (Astro.locals.runtimeConfig.public.blog_keywords) content['keywords'] = Astro.locals.runtimeConfig.public.blog_keywords
 ---
 
 <Layout content={content}>

@@ -11,6 +11,7 @@ created_at: 2022-03-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /github_actions.webp
 head_image_alt: Github action illustration
+keywords: Github actions, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true
 locale: en

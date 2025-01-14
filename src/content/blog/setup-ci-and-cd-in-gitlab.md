@@ -11,6 +11,7 @@ created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2023-09-14T00:00:00.000Z
 head_image: /CI_CD_in_Gitlab.webp
 head_image_alt: CI/CD in GitLab
+keywords: GitLab, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true
 locale: en

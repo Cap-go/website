@@ -11,6 +11,7 @@ created_at: 2023-09-20T00:00:00.000Z
 updated_at: 2023-09-20T00:00:00.000Z
 head_image: /self-hosted-capgo.webp
 head_image_alt: self-hosted capgo
+keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Solution
 published: true
 locale: en

@@ -11,6 +11,7 @@ created_at: 2024-06-15T00:00:00.000Z
 updated_at: 2024-06-15T00:00:00.000Z
 head_image: /cross-platform-app-dev-2024.webp
 head_image_alt: Cross-platform mobile app development
+keywords: cross-platform, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: cross-platform
 published: true
 locale: en

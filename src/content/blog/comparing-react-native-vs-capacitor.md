@@ -12,6 +12,7 @@ created_at: 2023-06-11T00:00:00.000Z
 updated_at: 2023-06-11T00:00:00.000Z
 head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: React Native vs Capacitor comparison illustration
+keywords: React Native, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true
 locale: en

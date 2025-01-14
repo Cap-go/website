@@ -9,6 +9,7 @@ created_at: 2022-09-01T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /xcode_cloud.webp
 head_image_alt: Capacitor Xcode cloud build
+keywords: Xcode Cloud, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

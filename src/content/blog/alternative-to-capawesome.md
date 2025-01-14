@@ -11,6 +11,7 @@ created_at: 2024-07-11T00:00:00.000Z
 updated_at: 2024-07-11T00:00:00.000Z
 head_image: /appflow_alt.webp
 head_image_alt: Capawesome Cloud alternative illustration
+keywords: Capawesome Cloud, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: false
 locale: en

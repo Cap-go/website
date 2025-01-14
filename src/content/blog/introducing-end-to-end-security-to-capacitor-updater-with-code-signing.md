@@ -11,6 +11,7 @@ created_at: 2022-11-27T00:00:00.000Z
 updated_at: 2024-08-27T00:00:00.000Z
 head_image: /secure_upload.webp
 head_image_alt: Secure upload Capgo
+keywords: E2E, code signing, RSA, AES, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Solution
 published: true
 locale: en

@@ -40,6 +40,7 @@ export interface RuntimeConfig {
     brand: string
     blog_title: string
     blog_description: string
+    blog_keywords: string
     baseUrl: string
     baseApiUrl: string
   }
@@ -51,6 +52,7 @@ export function useRuntimeConfig(): RuntimeConfig {
       brand,
       blog_title: blogTitle,
       blog_description: blogDescription,
+      blog_keywords: 'Learning Capacitor, Capacitor updates, OTA updates, mobile app development, update strategy, developer tools',
       baseUrl: getUrl(import.meta.env.BRANCH),
       baseApiUrl: getApiUrl(import.meta.env.BRANCH),
     },

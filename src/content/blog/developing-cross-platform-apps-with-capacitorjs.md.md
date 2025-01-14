@@ -11,6 +11,7 @@ created_at: 2023-12-02T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z
 head_image: /create_app_with_js.webp
 head_image_alt: Cross-Platform App Development
+keywords: Capacitor, cross-platform, PWA, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tuto
 published: true
 locale: en

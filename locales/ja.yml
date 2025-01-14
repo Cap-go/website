@@ -1565,3 +1565,4 @@ privacy_contact_us_website: 'このページにアクセスすることで: $1'
 website_title: Capgo - コンデンサーライブアップデート
 website_description: >-
   ストアの手間なしで、キャパシタアプリのリアルタイム更新を送信および管理します。オーバー・ザ・エア（OTA）更新のインストールは5分です。特定のグループに送信するためにチャンネルを使用します。
+website_keywords: "Capacitor, updater, OTA, autoupdate, capgo"

@@ -9,6 +9,7 @@ created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2023-09-14T00:00:00.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: Quasar and Capgo illustration
+keywords: Quasar, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

@@ -12,6 +12,7 @@ created_at: 2024-07-13T00:00:00.000Z
 updated_at: 2024-07-13T00:00:00.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: A visual representation of Capgo's evolution from idea to product
+keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: development
 published: true
 locale: en

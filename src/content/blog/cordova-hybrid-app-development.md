@@ -13,6 +13,7 @@ created_at: 2024-06-02T00:00:00.000Z
 updated_at: 2024-06-14T00:00:00.000Z
 head_image: /what-is-cordova-phone-gap.webp
 head_image_alt: Diagram explaining the difference between hybrid and native apps.
+keywords: Cordova, hybrid app development, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: cordova
 published: true
 locale: en

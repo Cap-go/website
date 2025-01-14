@@ -11,6 +11,7 @@ created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z
 head_image: /native_app_look.webp
 head_image_alt: Native app look illustration
+keywords: tailwind css, css, mobile design, mobile app development
 tag: Web Development
 published: true
 locale: en

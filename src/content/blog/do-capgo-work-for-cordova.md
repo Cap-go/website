@@ -9,6 +9,7 @@ created_at: 2023-01-29T00:00:00.000Z
 updated_at: 2023-01-29T00:00:00.000Z
 head_image: /cordova.webp
 head_image_alt: Caorodva Dev looking for update they app
+keywords: Cordova, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Migration
 published: true
 locale: en

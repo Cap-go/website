@@ -12,8 +12,18 @@ const {
   image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
+  keywords = Astro.locals.translations['website_keywords'][Astro.locals.locale],
   audio = null,
 } = Astro.props
+
+const localeName_to_OGP = {
+  en: 'en_EN',
+  es: 'es_ES',
+  id: 'id_ID',
+  it: 'it_IT',
+  ja: 'ja_JP',
+  ko: 'ko_KR',
+}
 
 let displayDescription = description
 
@@ -84,7 +94,7 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="apple-mobile-web-app-title" content={baseDomain()} />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta property="keywords" content="Capacitor, updater, OTA, autoupdate, capgo" />
+<meta property="keywords" content={keywords} />
 
 <link rel="canonical" href={canonical} />
 <link rel="apple-touch-icon" href="/capgo.webp" />
@@ -103,7 +113,7 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="og:title" content={title} />
 <meta property="og:audio" content={audio} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="en_EN" />
+<meta property="og:locale" content={localeName_to_OGP[Astro.locals.locale]} />
 <meta property="og:type" content="website" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="627" />

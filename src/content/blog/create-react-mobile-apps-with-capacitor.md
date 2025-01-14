@@ -11,6 +11,7 @@ created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2023-03-10T00:00:00.000Z
 head_image: /react_capacitor.webp
 head_image_alt: React and Capacitor illustration
+keywords: React, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

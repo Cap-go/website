@@ -11,6 +11,7 @@ created_at: 2022-03-21T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /app_center.webp
 head_image_alt: Microsoft App Center illustration
+keywords: Microsoft, App Center, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true
 locale: en

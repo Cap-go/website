@@ -11,6 +11,7 @@ created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /playstore.webp
 head_image_alt: Capacitor bypass illustration
+keywords: Google, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

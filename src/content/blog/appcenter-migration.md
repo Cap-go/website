@@ -11,6 +11,7 @@ created_at: 2022-03-22T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /migrate_appcenter.webp
 head_image_alt: Capacitor JS Dev looking for alternative
+keywords: App Center, migration, live updates, OTA updates, continuous integration, mobile app updates
 tag: Migration
 published: true
 locale: en

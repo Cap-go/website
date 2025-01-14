@@ -11,6 +11,7 @@ created_at: 2022-12-03T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /self_hosted.webp
 head_image_alt: Self hosted updates
+keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Solution
 published: true
 locale: en

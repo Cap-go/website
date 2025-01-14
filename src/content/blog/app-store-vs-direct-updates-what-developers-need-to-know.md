@@ -9,6 +9,7 @@ created_at: 2025-01-15T00:00:00.000Z
 updated_at: 2025-01-15T00:00:00.000Z
 head_image: /app_store_or_live_update.webp
 head_image_alt: App Store vs Direct Updates
+keywords: App Store updates, OTA updates, mobile app development, update strategy, developer tools
 tag: Updates
 published: true
 locale: en

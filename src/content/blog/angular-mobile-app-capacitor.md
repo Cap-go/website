@@ -11,6 +11,7 @@ created_at: 2023-06-06T00:00:00.000Z
 updated_at: 2023-06-06T00:00:00.000Z
 head_image: /angular_capacitor.webp
 head_image_alt: Angular and Capacitor illustration
+keywords: Angular, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en

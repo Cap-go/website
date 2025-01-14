@@ -11,11 +11,14 @@ created_at: 2023-01-19T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /revenuecat_iap.webp
 head_image_alt: Revenue cat in app purchases
+keywords: Capacitor, in-app purchases, RevenueCat, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
 next_blog: ''
 ---
+
+>> This plugin is now transferred to RevenueCat official repository. Please look at the [official documentation](https://www.revenuecat.com/docs/getting-started/installation/capacitor) for more information.
 
 Capacitor Purchases is a plugin for the Capacitor framework that allows in-app purchases on iOS and Android. It provides a simple and consistent API across multiple platforms, making it easy for developers to implement in-app subscriptions and purchases in their mobile apps.
 

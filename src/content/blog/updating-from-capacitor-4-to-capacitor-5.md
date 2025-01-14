@@ -11,6 +11,7 @@ created_at: 2023-06-09T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capacitor-5-update.webp
 head_image_alt: Capacitor 4 to 5 update illustration
+keywords: Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Capacitor
 published: true
 locale: en

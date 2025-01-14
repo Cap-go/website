@@ -11,6 +11,7 @@ created_at: 2023-09-10T00:00:00.000Z
 updated_at: 2023-09-10T00:00:00.000Z
 head_image: /capgo_banner.webp
 head_image_alt: capgo banner
+keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: SOLUTION
 published: true
 locale: en

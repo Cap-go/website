@@ -12,6 +12,7 @@ created_at: 2022-12-14T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /expo_alternative.webp
 head_image_alt: Expo alternative illustration
+keywords: Expo, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true
 locale: en

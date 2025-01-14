@@ -9,6 +9,7 @@ created_at: 2025-01-14T00:00:00.000Z
 updated_at: 2025-01-14T00:00:00.000Z
 head_image: /5-security-best-practices-for-mobile-app-live-updates.webp
 head_image_alt: 5 Security Best Practices for Mobile App Live Updates
+keywords: mobile app security, live updates, data integrity, OTA updates, encryption, security testing
 tag: Security
 published: true
 locale: en

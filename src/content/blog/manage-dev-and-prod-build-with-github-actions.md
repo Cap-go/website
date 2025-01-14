@@ -11,6 +11,7 @@ created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Channel builds illustration
+keywords: GitHub Actions, CI/CD, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: CI/CD
 published: true
 locale: en

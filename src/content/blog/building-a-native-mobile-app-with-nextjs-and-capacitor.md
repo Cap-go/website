@@ -14,6 +14,7 @@ created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2024-09-19T00:00:00.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 14 and Capacitor illustration
+keywords: Next.js 14, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
