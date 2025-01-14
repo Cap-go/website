@@ -5,7 +5,7 @@
     "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro build",
     "preview": "astro preview",
     "types": "node ./scripts/getTypes.mjs",
     "fmt": "prettier --write '**/*' --ignore-unknown",
@@ -13,7 +13,8 @@
     "generate:blog:translations": "tsx scripts/generate_blog_translations.tsx",
     "generate:translation.ts": "tsx scripts/generate_translation_ts_file.tsx",
     "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
-    "setup:new:locale": "tsx scripts/setup_new_locale.tsx"
+    "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
@@ -21,6 +22,7 @@
     "@astrojs/vue": "5.0.4",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@inlang/paraglide-astro": "^0.3.5",
     "@supabase/supabase-js": "^2.47.11",
     "astro": "5.1.6",
     "astro-embed": "^0.9.0",
@@ -66,6 +68,7 @@
     "typescript": "^5.7.3",
     "unocss": "^65.4.0",
     "vue-tsc": "^2.2.0",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "@inlang/paraglide-js": "1.11.8"
   }
 }

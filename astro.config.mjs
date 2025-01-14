@@ -8,6 +8,7 @@ import config from './configs.json'
 import { pwa } from './src/config/pwa'
 import { defaultLocale, locales, localeNames } from './src/services/locale'
 import sitemap from "@astrojs/sitemap";
+import paraglide from "@inlang/paraglide-astro"
 
 export default defineConfig({
   site: `https://${config.base_domain.prod}`,
@@ -36,6 +37,11 @@ export default defineConfig({
     },
   },
   integrations: [    
+    paraglide({
+			// recommended settings
+			project: "./project.inlang",
+			outdir: "./src/paraglide", //where your files should be
+		}),
     i18n({
       locales: localeNames,
       defaultLocale,
