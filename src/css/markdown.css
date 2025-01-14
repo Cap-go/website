@@ -18,3 +18,10 @@
 .prose blockquote {
   color: theme('colors.pumpkinOrange.300') !important;
 }
+
+.prose
+th,
+td {
+  border: 1px solid theme('colors.white') !important;
+  border-collapse: collapse;
+}
