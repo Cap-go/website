@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import PluginMarketing from './plugin_marketing.vue'
 
@@ -11,23 +11,23 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
 <template>
   <div class="bg-white">
     <main
-      class="flex h-screen items-center justify-center bg-slate-900 bg-scroll bg-no-repeat text-center font-light leading-8 text-slate-900 sm:flex-col sm:items-center md:pt-24"
+      class="flex items-center justify-center h-screen font-light leading-8 text-center bg-scroll bg-no-repeat bg-slate-900 text-slate-900 sm:flex-col sm:items-center md:pt-24"
       style="background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp'); background-position: 50% 100%; background-size: 520px"
     >
       <div
-        class="static mb-auto flex max-w-none flex-col items-center justify-center font-sans leading-8 text-slate-900 sm:mt-auto sm:max-w-none sm:items-center sm:justify-center md:my-auto"
+        class="static flex flex-col items-center justify-center mb-auto font-sans leading-8 max-w-none text-slate-900 sm:mt-auto sm:max-w-none sm:items-center sm:justify-center md:my-auto"
         style="padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
-          <h1 class="relative mb-16 mt-0 pb-0 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
+          <h1 class="relative pb-0 mt-0 mb-16 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
             <strong style="line-height: 72px">CapacitorJS</strong>&nbsp;<span class="text-indigo-600" style="line-height: 72px"
-              ><strong style="line-height: 72px">{{ translations['code_review_and_consulting'][props.locale] }}</strong></span
-            >&nbsp;<strong style="line-height: 72px">{{ translations['services'][props.locale] }}</strong>
+              ><strong style="line-height: 72px">{{ m.code_review_and_consulting() }}</strong></span
+            >&nbsp;<strong style="line-height: 72px">{{ m.services() }}</strong>
           </h1>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <h2 class="my-0 block flex-col items-center justify-end text-3xl font-medium text-gray-100 sm:text-center" style="line-height: 42px">
-            &nbsp;{{ translations['consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps'][props.locale] }}
+          <h2 class="flex-col items-center justify-end block my-0 text-3xl font-medium text-gray-100 sm:text-center" style="line-height: 42px">
+            &nbsp;{{ m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps() }}
           </h2>
         </div>
         <a
@@ -41,23 +41,23 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
             background-position: 100% 50%;
           "
-          ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
+          ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
         >
       </div>
     </main>
-    <section class="mt-0 block pt-16 text-center font-light leading-8 text-slate-900 sm:my-0 sm:pt-24">
+    <section class="block pt-16 mt-0 font-light leading-8 text-center text-slate-900 sm:my-0 sm:pt-24">
       <div
-        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-slate-900 sm:max-w-none"
+        class="relative flex-col items-center block clear-both my-auto font-sans leading-8 max-w-none text-slate-900 sm:max-w-none"
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
-        <div class="mx-auto flex flex-col items-center text-center sm:relative sm:mx-auto" style="max-width: 100vh">
-          <p class="mb-2 mt-0 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
+        <div class="flex flex-col items-center mx-auto text-center sm:relative sm:mx-auto" style="max-width: 100vh">
+          <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
           <div class="text-slate-900">
             <div role="list">
               <div role="listitem">
-                <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
-                  <p class="mb-2 mt-0 italic">
-                    <span v-html="translations['testimonial_consulting'][props.locale]" />
+                <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
+                  <p class="mt-0 mb-2 italic">
+                    <span v-html="m.testimonial_consulting()" />
                   </p>
                 </div>
                 <img
@@ -66,16 +66,16 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   height="80"
                   src="/click_and_boat.webp"
                   alt="click an boat"
-                  class="mb-4 hidden max-w-full border-0 align-middle"
+                  class="hidden max-w-full mb-4 align-middle border-0"
                   style="border-radius: 100%"
                 />
                 <div class="text-xl font-medium leading-6">TC Nicolas</div>
                 <div>Click & Boat</div>
                 <a
                   href="#"
-                  class="mt-3 inline-block max-w-full cursor-pointer bg-transparent font-normal text-indigo-600 hover:text-black"
+                  class="inline-block max-w-full mt-3 font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
                   style="transition: all 0.2s ease 0s; text-decoration: none"
-                  ><img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block w-1/2 max-w-full border-0 align-middle"
+                  ><img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block w-1/2 max-w-full align-middle border-0"
                 /></a>
               </div>
             </div>
@@ -83,132 +83,130 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         </div>
       </div>
     </section>
-    <section class="block pt-20 text-left font-light leading-8 text-slate-900">
+    <section class="block pt-20 font-light leading-8 text-left text-slate-900">
       <div
-        class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 sm:max-w-none"
+        class="relative flex-col items-center block clear-both my-auto font-sans leading-8 text-center max-w-none sm:max-w-none"
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <h2 class="my-0 pb-10 text-center font-sans text-6xl font-bold text-slate-900">
-            {{ translations['code_review'][props.locale] }}<br class="text-center text-6xl" style="line-height: 72px" />&amp;
-            <span class="text-center text-6xl text-indigo-600" style="text-decoration: none; line-height: 72px">{{ translations['consulting'][props.locale] }}</span>
+          <h2 class="pb-10 my-0 font-sans text-6xl font-bold text-center text-slate-900">
+            {{ m.code_review() }}<br class="text-6xl text-center" style="line-height: 72px" />&amp;
+            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">{{ m.consulting() }}</span>
           </h2>
-          <p class="mb-24 mt-0 text-slate-900">{{ translations['when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services'][props.locale] }}:<br /><br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services() }}:<br /><br /></p>
           <div class="mt-16 text-left md:grid" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_1'][props.locale] }}
+                {{ m.case_1() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-bold sm:text-slate-900" style="line-height: 42px">
-                {{ translations['review_before_passing_the_code_to_the_production'][props.locale] }}
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-bold sm:text-slate-900" style="line-height: 42px">
+                {{ m.review_before_passing_the_code_to_the_production() }}
               </h5>
-              <p class="mb-2 mt-0">
-                {{ translations['find_and_fix_bugs_during_the_coding_process'][props.locale] }}
-                {{ translations['it_s_faster_cheaper_and_requires_fewer_developers_to_do_it'][props.locale] }}<br /><br />
+              <p class="mt-0 mb-2">
+                {{ m.find_and_fix_bugs_during_the_coding_process() }}
+                {{ m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it() }}<br /><br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_2'][props.locale] }}
+                {{ m.case_2() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['optimization_of_the_existing_app'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.optimization_of_the_existing_app() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">{{ translations['when_down_review'][props.locale] }}<br /></p>
+              <p class="mt-0 mb-2">{{ m.when_down_review() }}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_3'][props.locale] }}
+                {{ m.case_3() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['little_experience_with_capacitorjs'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.little_experience_with_capacitorjs() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">
-                {{ translations['when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side'][props.locale] }}
-                {{ translations['let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts'][props.locale] }}<br />
+              <p class="mt-0 mb-2">
+                {{ m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side() }}
+                {{ m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts() }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_4'][props.locale] }}
+                {{ m.case_4() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['poor_app_quality'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.poor_app_quality() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">
-                {{ translations['somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low'][props.locale] }}<br />
+              <p class="mt-0 mb-2">
+                {{ m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low() }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_5'][props.locale] }}
+                {{ m.case_5() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['something_doesn_t_work_but_you_don_t_know_why'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.something_doesn_t_work_but_you_don_t_know_why() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">
-                {{ translations['a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it'][props.locale] }}<br />
+              <p class="mt-0 mb-2">
+                {{ m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it() }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_6'][props.locale] }}
+                {{ m.case_6() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['plugin_is_missing'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.plugin_is_missing() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">
-                {{ translations['you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it'][props.locale]
+              <p class="mt-0 mb-2">
+                {{ m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it()
                 }}<br />
               </p>
             </div>
             <div class="text-slate-900">
               <h6
-                class="my-2 bg-auto bg-no-repeat pl-16 text-xs font-bold uppercase leading-3 text-black"
+                class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ translations['case_7'][props.locale] }}
+                {{ m.case_7() }}
               </h6>
             </div>
             <div class="text-slate-900">
-              <h5 class="mb-2 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ translations['ci_cd_setup'][props.locale] }}</strong>
+              <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{{ m.ci_cd_setup() }}</strong>
               </h5>
-              <p class="mb-2 mt-0">
+              <p class="mt-0 mb-2">
                 {{
-                  translations[
-                    'our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment'
-                  ][props.locale]
+                  m.our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment()
                 }}<br />
               </p>
             </div>
@@ -216,130 +214,128 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         </div>
       </div>
     </section>
-    <section class="py-32 text-center font-light leading-8 text-slate-900">
+    <section class="py-32 font-light leading-8 text-center text-slate-900">
       <div
-        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-slate-900 sm:max-w-none"
+        class="relative flex-col items-center block clear-both my-auto font-sans leading-8 max-w-none text-slate-900 sm:max-w-none"
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <h2 class="mb-5 mt-0 py-10 text-6xl font-medium" style="line-height: 72px">
-            <strong class="font-bold" style="line-height: 72px">{{ translations['why_is_it_important'][props.locale] }}</strong>
+          <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">
+            <strong class="font-bold" style="line-height: 72px">{{ m.why_is_it_important() }}</strong>
           </h2>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <p class="mb-24 mt-0 text-slate-900">{{ translations['code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to'][props.locale] }}<br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to() }}<br /></p>
         </div>
         <div class="grid-flow-row md:grid md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
           <div class="text-slate-900">
-            <div class="mb-6 h-20">
+            <div class="h-20 mb-6">
               <img
                 src="/5fa52311f7e41c2d850aa66a_icon-code-consulting-01.svg"
                 loading="lazy"
                 height="80"
                 alt="Icon consulting"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ translations['minimize_mistakes_and_their_impact_on_the_project'][props.locale] }}</strong>
+            <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{{ m.minimize_mistakes_and_their_impact_on_the_project() }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
-            <div class="mb-6 h-20">
+            <div class="h-20 mb-6">
               <img
                 src="/5fa523110b6488629923d270_icon-code-consulting-02.svg"
                 loading="lazy"
                 height="80"
                 alt="icon consulting 2"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ translations['ensure_that_the_project_requirements_are_fulfilled'][props.locale] }}</strong>
+            <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{{ m.ensure_that_the_project_requirements_are_fulfilled() }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
-            <div class="mb-6 h-20">
+            <div class="h-20 mb-6">
               <img
                 src="/5fa5231016002724c966c3ce_icon-code-consulting-03.svg"
                 loading="lazy"
                 height="80"
                 alt="icon consulting 3"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ translations['improve_overall_code_quality'][props.locale] }}</strong>
+            <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{{ m.improve_overall_code_quality() }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
-            <div class="mb-6 h-20">
+            <div class="h-20 mb-6">
               <img
                 src="/5fa5231166c750849eb12738_icon-code-consulting-04.svg"
                 loading="lazy"
                 height="80"
                 alt="icon consulting 4"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
-            <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ translations['achieve_consistent_design_and_implementation'][props.locale] }}</strong>
+            <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{{ m.achieve_consistent_design_and_implementation() }}</strong>
             </h5>
           </div>
         </div>
       </div>
     </section>
-    <section class="block bg-indigo-600 py-0 text-center font-light leading-8 text-white sm:pt-32">
+    <section class="block py-0 font-light leading-8 text-center text-white bg-indigo-600 sm:pt-32">
       <div
-        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-white sm:max-w-none"
+        class="relative flex-col items-center block clear-both my-auto font-sans leading-8 text-white max-w-none sm:max-w-none"
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
-          <h2 class="relative mb-24 mt-0 pb-10 text-6xl font-medium" style="line-height: 72px">{{ translations['technological_benefits'][props.locale] }}</h2>
+          <h2 class="relative pb-10 mt-0 mb-24 text-6xl font-medium" style="line-height: 72px">{{ m.technological_benefits() }}</h2>
         </div>
         <div class="gap-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch">
           <div
             class="text-white opacity-100"
             style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
           >
-            <div class="mb-6 h-12">
+            <div class="h-12 mb-6">
               <img
                 src="/5faa754a59f4a273466af44c_icon-cc-special-01.svg"
                 loading="lazy"
                 height="50"
                 alt="icon consulting special"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ translations['better_code_quality'][props.locale] }}</strong>
+              <strong class="font-bold">{{ m.better_code_quality() }}</strong>
             </h4>
-            <p class="mb-2 mt-auto block whitespace-normal text-lg">
-              {{ translations['let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts'][props.locale] }}
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">
+              {{ m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts() }}
             </p>
           </div>
           <div
             class="text-white opacity-100"
             style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
           >
-            <div class="mb-6 h-12">
+            <div class="h-12 mb-6">
               <img
                 src="/5faa754aded9d51509ed1e5e_icon-cc-special-02.svg"
                 loading="lazy"
                 height="50"
                 alt="icon consulting special 2"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ translations['improved_code_readability'][props.locale] }}</strong
+              <strong class="font-bold">{{ m.improved_code_readability() }}</strong
               ><br />
             </h4>
-            <p class="mb-2 mt-auto block whitespace-normal text-lg">
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">
               {{
-                translations['it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive'][
-                  props.locale
-                ]
+                m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive()
               }}
             </p>
           </div>
@@ -347,34 +343,34 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="text-white opacity-100"
             style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
           >
-            <div class="mb-6 h-12">
+            <div class="h-12 mb-6">
               <img
                 src="/5faa754a1644d1e0529a915c_icon-cc-special-03.svg"
                 loading="lazy"
                 height="50"
                 alt="icon consulting special 3"
-                class="inline-block max-w-full border-0 align-middle"
+                class="inline-block max-w-full align-middle border-0"
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ translations['bugs_reduction'][props.locale] }}</strong>
+              <strong class="font-bold">{{ m.bugs_reduction() }}</strong>
             </h4>
-            <p class="mb-2 mt-auto block whitespace-normal text-lg">
-              {{ translations['eliminate_the_number_of_bugs_before_passing_the_code_to_production'][props.locale] }}<strong class="font-bold" />
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">
+              {{ m.eliminate_the_number_of_bugs_before_passing_the_code_to_production() }}<strong class="font-bold" />
             </p>
           </div>
         </div>
       </div>
     </section>
-    <section class="block bg-slate-900 text-left font-light leading-8 text-slate-900" style="padding-top: 5vh; padding-bottom: 5vh">
+    <section class="block font-light leading-8 text-left bg-slate-900 text-slate-900" style="padding-top: 5vh; padding-bottom: 5vh">
       <div
-        class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 sm:max-w-none"
+        class="relative flex-col items-center block clear-both my-auto font-sans leading-8 text-center max-w-none sm:max-w-none"
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="flex flex-col items-center justify-center text-center" style="padding-right: 3vw; padding-left: 3vw">
           <h2
-            v-html="translations['hire_capacitorjs_consultants'][props.locale].replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)"
-            class="relative my-0 pb-10 text-6xl font-medium text-white"
+            v-html="m.hire_capacitorjs_consultants().replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)"
+            class="relative pb-10 my-0 text-6xl font-medium text-white"
             style="line-height: 72px"
           />
           <a
@@ -388,79 +384,77 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
           >
         </div>
       </div>
     </section>
     <div
-      class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans font-light leading-8 text-slate-900 sm:max-w-none"
+      class="relative flex-col items-center block clear-both my-auto font-sans font-light leading-8 text-center max-w-none text-slate-900 sm:max-w-none"
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
     >
       <div class="mx-auto mt-5 leading-8 text-slate-900 sm:mx-auto" style="max-width: 754px">
-        <h2 class="mb-5 mt-0 py-10 text-6xl font-medium" style="line-height: 72px">{{ translations['business_benefits'][props.locale] }}</h2>
+        <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">{{ m.business_benefits() }}</h2>
       </div>
       <div class="items-stretch gap-4 leading-8 text-slate-900 sm:text-left md:grid" style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px">
         <div>
-          <div class="mb-6 h-20 text-slate-900">
+          <div class="h-20 mb-6 text-slate-900">
             <img
               src="/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
               loading="lazy"
               height="80"
               alt="icon consulting 5"
-              class="inline-block max-w-full border-0 align-middle"
+              class="inline-block max-w-full align-middle border-0"
             />
           </div>
-          <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">{{ translations['lower_cost_of_fixing_bugs'][props.locale] }}</strong>
+          <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+            <strong class="font-bold" style="line-height: 42px">{{ m.lower_cost_of_fixing_bugs() }}</strong>
           </h5>
-          <p class="mb-2 mt-0 text-slate-900">
+          <p class="mt-0 mb-2 text-slate-900">
             {{
-              translations['the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it'][
-                props.locale
-              ]
+              m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it()
             }}
           </p>
         </div>
         <div>
-          <div class="mb-6 h-20 text-slate-900">
+          <div class="h-20 mb-6 text-slate-900">
             <img
               src="/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
               loading="lazy"
               height="80"
               alt="icon consulting 6"
-              class="inline-block max-w-full border-0 align-middle"
+              class="inline-block max-w-full align-middle border-0"
             />
           </div>
-          <h5 class="mb-6 mt-0 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+          <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
             <strong class="font-bold" style="line-height: 42px"
-              >{{ translations['opportunity_for_juniors_to_develop_skills'][props.locale] }}<br style="line-height: 42px"
+              >{{ m.opportunity_for_juniors_to_develop_skills() }}<br style="line-height: 42px"
             /></strong>
           </h5>
-          <p class="mb-2 mt-0 text-slate-900">
-            {{ translations['help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers'][props.locale]
+          <p class="mt-0 mb-2 text-slate-900">
+            {{ m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers()
             }}<br />
           </p>
         </div>
       </div>
     </div>
-    <div class="bg-dark relative my-auto block max-w-none flex-col items-center text-center font-sans font-light leading-8 text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
+    <div class="relative flex-col items-center block my-auto font-sans font-light leading-8 text-center bg-dark max-w-none text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
       <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
-        <h2 class="my-0 w-full pb-10 text-6xl font-medium text-white" style="line-height: 72px">
-          {{ translations['why_work'][props.locale] }}
-          <span class="text-center text-indigo-600" style="line-height: 72px">{{ translations['with_us'][props.locale] }}</span>
+        <h2 class="w-full pb-10 my-0 text-6xl font-medium text-white" style="line-height: 72px">
+          {{ m.why_work() }}
+          <span class="text-center text-indigo-600" style="line-height: 72px">{{ m.with_us() }}</span>
         </h2>
       </div>
       <div class="grid-flow-row gap-6 leading-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
         <div class="flex flex-col items-center justify-center px-5 text-left">
-          <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="mb-auto mt-0 inline-block max-w-full border-0 align-middle" />
-          <p class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white">
-            {{ translations['community_trusted'][props.locale] }}
+          <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="inline-block max-w-full mt-0 mb-auto align-middle border-0" />
+          <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
+            {{ m.community_trusted() }}
             <a
               href="https://x.com/martindonadieu"
               target="_blank"
               title=" Capgo team"
-              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
@@ -478,22 +472,22 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             loading="lazy"
             width="151"
             alt="RN projects icon"
-            class="mb-auto mt-0 inline-block max-w-full border-0 align-middle"
+            class="inline-block max-w-full mt-0 mb-auto align-middle border-0"
           />
-          <p class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white">
-            {{ translations['experienced_in_working_on_demanding'][props.locale] }}
+          <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
+            {{ m.experienced_in_working_on_demanding() }}
             <a
               href="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
               title="Cordova &amp; CapacitorJS projects"
-              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               style="
                 transition:
                   color 450ms ease 0s,
                   all 0.3s ease 0s;
                 text-decoration: underline;
               "
-              >{{ translations['cordova_capacitorjs_projects'][props.locale] }}</a
+              >{{ m.cordova_capacitorjs_projects() }}</a
             >
           </p>
         </div>
@@ -503,13 +497,13 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             loading="lazy"
             width="151"
             alt="Open source icon"
-            class="mb-auto mt-0 inline-block max-w-full border-0 align-middle"
+            class="inline-block max-w-full mt-0 mb-auto align-middle border-0"
           />
-          <p class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white">
+          <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
             Creators and maintainers of many
             <a
               title="Open source"
-              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              class="font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600"
               :href="getRelativeLocaleUrl(props.locale, 'plugins')"
               style="
                 transition:
@@ -528,11 +522,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             loading="lazy"
             width="151"
             alt="Core contributors icon"
-            class="mb-auto mt-0 inline-block max-w-full border-0 align-middle"
+            class="inline-block max-w-full mt-0 mb-auto align-middle border-0"
           />
           <p
             v-html="
-              translations['core_contributors_to_capacitorjs_and_ionic'][props.locale].replace(
+              m.core_contributors_to_capacitorjs_and_ionic().replace(
                 'CapacitorJS',
                 `<a
               href='https://capacitorjs.com/'
@@ -548,34 +542,34 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             >`,
               )
             "
-            class="mb-auto mt-0 block whitespace-normal text-center text-lg text-white"
+            class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal"
           />
         </div>
       </div>
     </div>
     <PluginMarketing :locale="props.locale" />
     <div
-      class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans font-light leading-8 text-slate-900 sm:max-w-none"
+      class="relative flex-col items-center block clear-both my-auto font-sans font-light leading-8 text-center max-w-none text-slate-900 sm:max-w-none"
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
     >
       <div class="leading-8 text-slate-900">
         <div role="list" class="text-center">
           <div role="listitem" class="text-slate-900">
-            <div class="mx-auto flex flex-col items-center sm:relative sm:mx-auto" style="max-width: 100vh">
-              <p class="mb-2 mt-0 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
-              <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
-                <p class="mb-2 mt-0 italic">
-                  <span v-html="translations['testimonial_consulting_2'][props.locale]" />
+            <div class="flex flex-col items-center mx-auto sm:relative sm:mx-auto" style="max-width: 100vh">
+              <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
+              <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
+                <p class="mt-0 mb-2 italic">
+                  <span v-html="m.testimonial_consulting_2()" />
                 </p>
               </div>
-              <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="mb-4 hidden max-w-full border-0 align-middle" style="border-radius: 100%" />
+              <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="hidden max-w-full mb-4 align-middle border-0" style="border-radius: 100%" />
               <div class="text-xl font-medium leading-6">Iannis</div>
               <div>CTO &amp; Co-founder @ WAYNIUM</div>
               <a
                 href="#"
-                class="inline-block max-w-full cursor-pointer bg-transparent font-normal text-indigo-600 hover:text-black"
+                class="inline-block max-w-full font-normal text-indigo-600 bg-transparent cursor-pointer hover:text-black"
                 style="transition: all 0.2s ease 0s; text-decoration: none"
-                ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="mt-3 inline-block max-w-full border-0 align-middle"
+                ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="inline-block max-w-full mt-3 align-middle border-0"
               /></a>
             </div>
           </div>
@@ -585,25 +579,25 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
     </div>
     <section
       id="contact-hireus"
-      class="relative my-auto block max-w-none flex-col items-center bg-slate-900 text-center font-sans font-light leading-8 text-slate-900 sm:max-w-none"
+      class="relative flex-col items-center block my-auto font-sans font-light leading-8 text-center max-w-none bg-slate-900 text-slate-900 sm:max-w-none"
       style="padding: 10vh 5vw"
     >
-      <div class="flex w-full flex-col md:flex-row">
-        <div class="flex w-1/3 flex-col text-left font-sans font-light leading-8 text-slate-900">
+      <div class="flex flex-col w-full md:flex-row">
+        <div class="flex flex-col w-1/3 font-sans font-light leading-8 text-left text-slate-900">
           <h2
-            class="mb-0 mt-5 block items-start justify-center bg-auto bg-no-repeat pb-10 pl-16 pt-0 text-xs font-bold uppercase leading-4 text-black"
+            class="items-start justify-center block pt-0 pb-10 pl-16 mt-5 mb-0 text-xs font-bold leading-4 text-black uppercase bg-no-repeat bg-auto"
             style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
           >
-            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{{ translations['contact'][props.locale] }}</strong
+            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{{ m.contact() }}</strong
             ><br class="text-left uppercase" style="letter-spacing: 1.7px" />
           </h2>
         </div>
         <div class="flex flex-col">
-          <h3 class="my-0 mr-10 w-full pb-10 pt-2 text-left font-sans text-6xl font-medium text-white" style="line-height: 72px">
-            {{ translations['lets_work_together'][props.locale] }}
+          <h3 class="w-full pt-2 pb-10 my-0 mr-10 font-sans text-6xl font-medium text-left text-white" style="line-height: 72px">
+            {{ m.lets_work_together() }}
           </h3>
-          <p class="mb-2 mt-auto block whitespace-normal bg-transparent text-left font-sans text-lg font-light leading-8 text-white">
-            {{ translations['need_help_with_cordova_or_capacitorjs_let_us_know'][props.locale] }}
+          <p class="block mt-auto mb-2 font-sans text-lg font-light leading-8 text-left text-white whitespace-normal bg-transparent">
+            {{ m.need_help_with_cordova_or_capacitorjs_let_us_know() }}
           </p>
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
@@ -616,7 +610,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">{{ translations['book_a_consultation'][props.locale] }}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
           >
         </div>
       </div>

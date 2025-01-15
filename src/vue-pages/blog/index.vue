@@ -2,7 +2,7 @@
 import Blog from '@/components/Blog.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../../paraglide/messages.js"
 import { computed, ref } from 'vue'
 
 const props = defineProps<{
@@ -18,7 +18,7 @@ const filteredPosts = computed(() => {
 })
 
 const uniqueTags = computed(() => {
-  const tags = new Set<string[]>()
+  const tags = new Set<string>()
   props.Content.forEach((article: any) => {
     tags.add(article.frontmatter.tag.toUpperCase())
   })
@@ -32,7 +32,7 @@ const uniqueTags = computed(() => {
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['latest_from_the_blog'][props.locale] }}</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.latest_from_the_blog() }}</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ config.public.blog_description }}
         </h2>

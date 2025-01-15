@@ -1,9 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueEula from '@/vue-pages/eula.vue'
+import * as m from "../paraglide/messages.js"
 
-const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['eula'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['read_our_eula'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, m.eula()].join(' | ')
+const description = m.read_our_eula()
 
 const content = { title, description }
 ---

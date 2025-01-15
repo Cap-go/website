@@ -7,11 +7,10 @@
     "start": "astro dev",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro build",
     "preview": "astro preview",
-    "types": "node ./scripts/getTypes.mjs",
+    "types": "npx --yes supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
     "generate:locale:translations": "tsx scripts/generate_locale_translations.tsx",
     "generate:blog:translations": "tsx scripts/generate_blog_translations.tsx",
-    "generate:translation.ts": "tsx scripts/generate_translation_ts_file.tsx",
     "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
     "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"

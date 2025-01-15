@@ -3,16 +3,17 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
+import * as m from "../paraglide/messages.js"
 
 const {
   ldJSON = structuredData,
-  title = Astro.locals.translations['website_title'][Astro.locals.locale],
-  description = Astro.locals.translations['website_description'][Astro.locals.locale],
+  title = m.website_title(),
+  description = m.website_description(),
   url = Astro.url,
   image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
-  keywords = Astro.locals.translations['website_keywords'][Astro.locals.locale],
+  keywords = m.website_keywords(),
   audio = null,
 } = Astro.props
 
@@ -24,6 +25,8 @@ const localeName_to_OGP = {
   ja: 'ja_JP',
   ko: 'ko_KR',
 }
+
+const localeOGP = localeName_to_OGP[Astro.locals.locale.toLowerCase() as keyof typeof localeName_to_OGP]
 
 let displayDescription = description
 
@@ -113,7 +116,7 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="og:title" content={title} />
 <meta property="og:audio" content={audio} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content={localeName_to_OGP[Astro.locals.locale]} />
+<meta property="og:locale" content={localeOGP} />
 <meta property="og:type" content="website" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="627" />

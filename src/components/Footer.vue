@@ -2,7 +2,7 @@
 import { useRuntimeConfig } from '@/config/app'
 import { openMessenger } from '@/services/bento'
 import { locales, type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { defineComponent, h, onMounted, onUnmounted, ref } from 'vue'
 
@@ -44,82 +44,91 @@ onMounted(() => {
 
 onUnmounted(() => window.removeEventListener('hashchange', decidePath))
 
-const navigation = {
+interface NavigationItem {
+  name: (() => string)
+  href: string
+  target?: string
+  rel?: string
+  icon?: string | (() => void) | ReturnType<typeof defineComponent>
+  execute?: () => void
+}
+
+const navigation: Record<string, NavigationItem[]> = {
   solutions: [
-    { name: translations['register'][props.locale], href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
-    { name: 'App mobile', href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
+    { name: () => m.register(), href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
+    { name: () => 'App mobile', href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
     {
-      name: translations['documentation'][props.locale],
+      name: () => m.documentation(),
       href: getRelativeLocaleUrl(props.locale, 'docs'),
     },
-    { name: translations['plugins'][props.locale], href: getRelativeLocaleUrl(props.locale, 'plugins') },
+    { name: () => m.plugins(), href: getRelativeLocaleUrl(props.locale, 'plugins') },
     {
-      name: translations['awesome_capacitor'][props.locale],
+      name: () => m.awesome_capacitor(),
       href: 'https://github.com/riderx/awesome-capacitor/',
       target: '_blank',
     },
-    { name: translations['top_app_by_framework'][props.locale], href: getRelativeLocaleUrl(props.locale, 'top_app') },
+    { name: () => m.top_app_by_framework(), href: getRelativeLocaleUrl(props.locale, 'top_app') },
   ],
   support: [
     {
-      name: translations['community'][props.locale],
+      name: () => m.community(),
       href: 'https://discord.com/invite/VnYRvBfgA6',
       target: '_blank',
     },
     {
-      name: translations['pricing'][props.locale],
+      name: () => m.pricing(),
       href: getRelativeLocaleUrl(props.locale, 'pricing'),
     },
-    { name: translations['guides'][props.locale], href: getRelativeLocaleUrl(props.locale, 'blog') },
+    { name: () => m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
       name: () => (systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed'),
       href: 'https://status.capgo.app/',
       target: '_blank',
       icon: () => (systemStatus.value.indicator === 'up' ? '🟢' : '🟠'),
     },
-    { name: translations['status'][props.locale], href: 'https://status.capgo.app/', target: '_blank' },
+    { name: () => m.status(), href: 'https://status.capgo.app/', target: '_blank' },
     {
-      name: translations['chat'][props.locale],
+      name: () => m.chat(),
       href: '#support',
       execute: openMessenger,
       rel: 'nofollow',
     },
     {
-      name: translations['sponsor'][props.locale],
+      name: () => m.sponsor(),
       href: getRelativeLocaleUrl(props.locale, 'sponsor'),
     },
   ],
   company: [
-    { name: translations['about'][props.locale], href: getRelativeLocaleUrl(props.locale, 'about') },
-    { name: translations['imprint'][props.locale], href: getRelativeLocaleUrl(props.locale, 'imprint') },
-    { name: translations['jobs'][props.locale], href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
-    { name: translations['contributing'][props.locale], href: getRelativeLocaleUrl(props.locale, 'contributing') },
-    { name: translations['security'][props.locale], href: getRelativeLocaleUrl(props.locale, 'trust') },
-    { name: translations['consulting'][props.locale], href: getRelativeLocaleUrl(props.locale, 'consulting') },
+    { name: () => m.about(), href: getRelativeLocaleUrl(props.locale, 'about') },
+    { name: () => m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
+    { name: () => m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
+    { name: () => m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
+    { name: () => m.security(), href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: () => m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
     {
       target: '_blank',
-      name: translations['affiliate'][props.locale],
+      name: () => m.affiliate(),
       href: 'https://affiliates.reflio.com/invite/capgo/',
     },
   ],
   legal: [
-    { name: translations['privacy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
-    { name: translations['support_policy'][props.locale], href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
-    { name: translations['sla'][props.locale], href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
-    { name: translations['aup'][props.locale], href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
-    { name: translations['terms'][props.locale], href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
-    { name: translations['security_txt'][props.locale], href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
+    { name: () => m.privacy(), href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
+    { name: () => m.support_policy(), href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
+    { name: () => m.sla(), href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
+    { name: () => m.aup(), href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
+    { name: () => m.terms(), href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
+    { name: () => m.security_txt(), href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
     {
-      name: translations['privacy'][props.locale],
+      name: () => m.privacy(),
       href: 'https://www.privacyboard.co/company/capgo/',
       target: '_blank',
     },
-    { name: translations['dp'][props.locale], href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
-    { name: translations['dpa'][props.locale], href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
+    { name: () => m.dp(), href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
+    { name: () => m.dpa(), href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
   ],
   hero: [
     {
-      name: translations['carbon_removal'][props.locale],
+      name: () => m.carbon_removal(),
       href: 'https://climate.stripe.com/vxDf62',
       icon: defineComponent({
         render: () =>
@@ -142,7 +151,7 @@ const navigation = {
       }),
     },
     {
-      name: translations['open_source'][props.locale],
+      name: () => m.open_source(),
       href: 'https://github.com/Cap-go/',
       icon: `
 
@@ -154,7 +163,7 @@ const navigation = {
       `,
     },
     {
-      name: translations['built_with_supabase'][props.locale],
+      name: () => m.built_with_supabase(),
       href: 'https://supabase.com/',
       icon: defineComponent({
         render: () =>
@@ -177,7 +186,7 @@ const navigation = {
       }),
     },
     {
-      name: translations['build_in_public_on_twitter'][props.locale],
+      name: () => m.build_in_public_on_twitter(),
       href: 'https://x.com/martindonadieu/',
       icon: defineComponent({
         render: () =>
@@ -206,18 +215,18 @@ const navigation = {
 <template>
   <footer class="bg-white" aria-labelledby="footer-heading">
     [
-    <h2 id="footer-heading" class="sr-only">{{ translations['footer'][props.locale] }}</h2>
-    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <h2 id="footer-heading" class="sr-only">{{ m.footer() }}</h2>
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-16">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
           <!-- <img class="h-10" src="https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300" alt="Company name"> -->
-          <p class="text-base text-gray-500">{{ translations['making_world_better'][props.locale] }}</p>
+          <p class="text-base text-gray-500">{{ m.making_world_better() }}</p>
           <ul role="list" class="mt-4 space-y-4">
             <li v-for="item in navigation.hero" :key="item.name">
               <a :href="item.href" target="_blank" rel="noreferrer" class="flex">
-                <div v-if="typeof item.icon === 'string'" class="h-6 w-6" aria-hidden="true" v-html="item.icon" />
-                <component :is="item.icon" v-else class="h-6 w-6" aria-hidden="true" />
-                <span class="ml-3 border-b-2 border-transparent text-base font-bold text-gray-500 transition-all duration-200 hover:border-blue-600 focus:border-blue-600">
+                <div v-if="typeof item.icon === 'string'" class="w-6 h-6" aria-hidden="true" v-html="item.icon" />
+                <component :is="item.icon" v-else class="w-6 h-6" aria-hidden="true" />
+                <span class="ml-3 text-base font-bold text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                   {{ item.name }}
                 </span>
               </a>
@@ -228,11 +237,11 @@ const navigation = {
               <button
                 type="button"
                 @click="toggleDropdown"
-                class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 aria-haspopup="true"
               >
                 {{ props.locale.toUpperCase() }}
-                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path
                     fill-rule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -243,7 +252,7 @@ const navigation = {
             </div>
             <div
               v-if="isOpen"
-              class="absolute right-0 z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="absolute right-0 z-10 w-56 mt-2 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="options-menu"
@@ -261,17 +270,17 @@ const navigation = {
             </div>
           </div>
         </div>
-        <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+        <div class="grid grid-cols-2 gap-8 mt-12 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">{{ translations['solutions'][props.locale] }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.solutions() }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.solutions" :key="item.name">
                   <a
                     rel="noreferrer"
                     :href="item.href"
                     :target="item.target"
-                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
+                    class="text-base text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>
@@ -279,14 +288,14 @@ const navigation = {
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">{{ translations['support'][props.locale] }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.support() }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
                   <a
                     :rel="item.rel"
                     :href="item.href"
                     :target="item.target"
-                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
+                    class="text-base text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                     @click="item.execute && item.execute()"
                   >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
@@ -298,12 +307,12 @@ const navigation = {
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">{{ translations['company'][props.locale] }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.company() }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
                   <a
                     :href="item.href"
-                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
+                    class="text-base text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>
@@ -311,13 +320,13 @@ const navigation = {
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">{{ translations['legal'][props.locale] }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.legal() }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
                   <a
                     :rel="item.rel"
                     :href="item.href"
-                    class="border-b-2 border-transparent text-base text-gray-500 transition-all duration-200 hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
+                    class="text-base text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 hover:text-gray-900 focus:border-blue-600"
                   >
                     {{ item.name }}
                   </a>
@@ -327,8 +336,8 @@ const navigation = {
           </div>
         </div>
       </div>
-      <div class="mt-12 border-t border-gray-200 pt-8">
-        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{ translations['copyright'][props.locale] }}</p>
+      <div class="pt-8 mt-12 border-t border-gray-200">
+        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{ m.copyright() }}</p>
       </div>
     </div>
   </footer>

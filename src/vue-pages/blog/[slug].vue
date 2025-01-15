@@ -2,7 +2,7 @@
 import Blog from '@/components/Blog.vue'
 import { formatTime } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { onMounted, ref, type Ref } from 'vue'
 
@@ -41,7 +41,7 @@ const observeArticleTitles = () => {
       const tmp = heading.getAttribute('id')
       if (tmp) {
         activeSlug.value = tmp
-        history.replaceState(null, null, `#${tmp}`)
+        history.replaceState(null, '', `#${tmp}`)
         break
       }
     }
@@ -68,7 +68,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
     >
       <div class="w-[280px] rounded bg-gray-700 p-5">
         <ul v-if="toc?.length" class="flex flex-col text-left list-none">
-          <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
+          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
           <li v-for="item in toc" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
               {{ item.text }}
@@ -107,7 +107,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       <div ref="staticToc" class="absolute top-0 hidden max-h-screen overflow-y-auto transition-opacity duration-300 left-10 xl:block" :class="{ 'opacity-0': isFixedTocVisible }">
         <div class="w-[280px] rounded bg-white/10 p-5">
           <ul v-if="toc?.length" class="flex flex-col text-left list-none">
-            <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
+            <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
             <li v-for="item in toc" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
               <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
@@ -118,7 +118,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       </div>
       <div v-if="toc?.length" class="flex flex-col px-4 mx-auto text-left rounded xl-hidden lg:max-w-1/2">
         <ul class="flex flex-col p-4 rounded bg-white/10">
-          <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
+          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
           <div class="hidden pl-20" />
           <li v-for="item in toc" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 4)}`" :href="`#${item.slug}`">
@@ -142,9 +142,9 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-xl mx-auto text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{{ translations['latest_from_news'][props.locale] }}</h2>
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{{ m.latest_from_news() }}</h2>
           <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
-            {{ translations['capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app'][props.locale] }}
+            {{ m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app() }}
           </p>
         </div>
         <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
@@ -165,7 +165,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
             :href="getRelativeLocaleUrl(props.locale, 'blog')"
             class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline"
           >
-            {{ translations['see_all_from_our_blog'][props.locale] }}
+            {{ m.see_all_from_our_blog() }}
             <svg
               class="ml-1 h-5 w-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               viewBox="0 0 24 24"

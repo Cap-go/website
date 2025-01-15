@@ -1,63 +1,63 @@
 <script setup lang="ts">
 import sampleData from '@/lib/sample-data/pricing.json'
 import type { Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../../paraglide/messages.js"
 
 const pricing = sampleData['pay-as-you-go']
 const props = defineProps<{ locale: Locales }>()
 </script>
 
 <template>
-  <section id="calculator" class="bg-gray-50 py-12 sm:py-16 lg:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
-        <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
-          {{ translations['calculate_your_usage'][props.locale] }}<br />
-          <span class="text-xl sm:text-2xl xl:text-3xl">{{ translations['for_the_pay_as_you_go_plan'][props.locale] }}</span>
+  <section id="calculator" class="py-12 bg-gray-50 sm:py-16 lg:py-20">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
+        <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">
+          {{ m.calculate_your_usage() }}<br />
+          <span class="text-xl sm:text-2xl xl:text-3xl">{{ m.for_the_pay_as_you_go_plan() }}</span>
         </h2>
       </div>
       <div class="relative mt-12 lg:mx-auto lg:mt-20 lg:max-w-5xl">
         <div class="absolute -inset-2">
           <div
-            class="mx-auto h-full w-full opacity-30 blur-lg filter"
+            class="w-full h-full mx-auto opacity-30 blur-lg filter"
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-        <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white sm:grid-cols-2 lg:grid-cols-4">
+        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-x-20 gap-y-12 rounded-2xl sm:grid-cols-2 lg:grid-cols-4">
           <div class="flex flex-col items-center">
             <h3 class="calc-label">
-              MAU<br /><span class="text-[0.6rem]">{{ translations['monthly_active_users'][props.locale] }}</span>
+              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users() }}</span>
             </h3>
-            <p class="font-pj mt-3 text-lg text-white">
-              {{ pricing.mau.base }} {{ translations['included'][props.locale] }}<br />
-              {{ pricing.mau['price-per-unit'] }} {{ translations['per_added_user'][props.locale] }}
+            <p class="mt-3 text-lg text-white font-pj">
+              {{ pricing.mau.base }} {{ m.included() }}<br />
+              {{ pricing.mau['price-per-unit'] }} {{ m.per_added_user() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <h3 class="calc-label">Storage<br />(GB)</h3>
-            <p class="font-pj mt-3 text-lg text-white">
-              {{ pricing.storage.base }} {{ translations['included'][props.locale] }}<br />
-              {{ pricing.storage['price-per-unit'] }} {{ translations['per_added_gb'][props.locale] }}
+            <p class="mt-3 text-lg text-white font-pj">
+              {{ pricing.storage.base }} {{ m.included() }}<br />
+              {{ pricing.storage['price-per-unit'] }} {{ m.per_added_gb() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <h3 class="calc-label" v-html="translations['updates_by_month'][props.locale]" />
-            <p class="font-pj mt-3 text-lg text-white">{{ translations['updates_explanation'][props.locale] }}</p>
+            <h3 class="calc-label" v-html="m.updates_by_month()" />
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
           </div>
           <div class="flex flex-col items-center">
-            <h3 class="calc-label" v-html="translations['updates_size'][props.locale]" />
-            <p class="font-pj mt-3 text-lg text-white">{{ translations['updates_explanation'][props.locale] }}</p>
+            <h3 class="calc-label" v-html="m.updates_size()" />
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
           </div>
           <div class="flex flex-col items-center lg:col-span-2">
-            <h3 class="calc-label">{{ translations['bandwidth'][props.locale] }}</h3>
-            <p class="font-pj mt-3 text-lg text-white">
-              {{ pricing.bandwidth.base }} {{ translations['included'][props.locale] }}<br />
-              {{ pricing.bandwidth['price-per-unit'] }} {{ translations['per_added_gb'][props.locale] }}
+            <h3 class="calc-label">{{ m.bandwidth() }}</h3>
+            <p class="mt-3 text-lg text-white font-pj">
+              {{ pricing.bandwidth.base }} {{ m.included() }}<br />
+              {{ pricing.bandwidth['price-per-unit'] }} {{ m.per_added_gb() }}
             </p>
           </div>
           <div class="flex flex-col items-center lg:col-span-2">
-            <h3 class="calc-label">{{ translations['updates'][props.locale] }}</h3>
-            <p class="font-pj mt-3 text-lg text-white">{{ translations['updates_explanation'][props.locale] }}</p>
+            <h3 class="calc-label">{{ m.updates() }}</h3>
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
           </div>
         </div>
       </div>

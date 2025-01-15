@@ -1,9 +1,10 @@
 ---
 import VueTos from '@/vue-pages/tos.vue'
 import Layout from '@/layouts/Layout.astro'
+import * as m from "../paraglide/messages.js"
 
-const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['terms'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['read_our_terms_of_service'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, m.terms()].join(' | ')
+const description = m.read_our_terms_of_service()
 
 const content = { title, description }
 ---

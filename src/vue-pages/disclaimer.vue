@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales, defaultLocale } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
@@ -9,60 +9,60 @@ const domain = config.public.baseUrl
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto px-3 text-left">
+  <div class="px-3 m-auto prose-sm prose text-left">
     <span class="text-xs" v-if="props.locale !== defaultLocale">
       Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
     </span>
-    <h1>{{ translations.disclaimer_title[props.locale] }}</h1>
-    <p>{{ translations.disclaimer_last_updated[props.locale] }}</p>
-    <h2>{{ translations.interpretation_and_definitions_title[props.locale] }}</h2>
-    <h3>{{ translations.interpretation_title[props.locale] }}</h3>
-    <p>{{ translations.interpretation_text[props.locale] }}</p>
-    <h3>{{ translations.definitions_title[props.locale] }}</h3>
-    <p>{{ translations.definitions_purpose[props.locale] }}</p>
+    <h1>{{ m.disclaimer_title() }}</h1>
+    <p>{{ m.disclaimer_last_updated() }}</p>
+    <h2>{{ m.interpretation_and_definitions_title() }}</h2>
+    <h3>{{ m.interpretation_title() }}</h3>
+    <p>{{ m.interpretation_text() }}</p>
+    <h3>{{ m.definitions_title() }}</h3>
+    <p>{{ m.definitions_purpose() }}</p>
     <ul>
       <li>
-        <p v-html="translations.company_definition"></p>
+        <p v-html="m.company_definition"></p>()
       </li>
       <li>
-        <p v-html="translations.service_definition"></p>
+        <p v-html="m.service_definition"></p>()
       </li>
       <li>
-        <p v-html="translations.you_definition"></p>
+        <p v-html="m.you_definition"></p>()
       </li>
       <li>
-        <p v-html="translations.application_definition"></p>
+        <p v-html="m.application_definition"></p>()
       </li>
     </ul>
-    <h2>{{ translations.disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.company_no_responsibility[props.locale] }}</p>
-    <p v-html="translations.company_no_liability"></p>
-    <p>{{ translations.no_virus_warranty[props.locale] }}</p>
-    <h2>{{ translations.external_links_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.external_links_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.external_links_no_guarantee[props.locale] }}</p>
-    <h2>{{ translations.errors_and_omissions_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.errors_and_omissions_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.company_not_responsible[props.locale] }}</p>
-    <h2>{{ translations.fair_use_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.fair_use_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.fair_use_belief[props.locale] }}</p>
-    <p>{{ translations.copyright_permission[props.locale] }}</p>
-    <h2>{{ translations.views_expressed_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.views_expressed_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.user_comments_responsibility[props.locale] }}</p>
-    <h2>{{ translations.no_responsibility_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.no_responsibility_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.company_no_liability_for_access[props.locale] }}</p>
-    <h2>{{ translations.use_at_your_own_risk_disclaimer_title[props.locale] }}</h2>
-    <p>{{ translations.use_at_your_own_risk_disclaimer_text[props.locale] }}</p>
-    <p>{{ translations.company_no_liability_for_decisions[props.locale] }}</p>
-    <h2>{{ translations.contact_us_title[props.locale] }}</h2>
-    <p>{{ translations.contact_us_text[props.locale] }}</p>
+    <h2>{{ m.disclaimer_title() }}</h2>
+    <p>{{ m.disclaimer_text() }}</p>
+    <p>{{ m.company_no_responsibility() }}</p>
+    <p v-html="m.company_no_liability()"></p>()
+    <p>{{ m.no_virus_warranty() }}</p>
+    <h2>{{ m.external_links_disclaimer_title() }}</h2>
+    <p>{{ m.external_links_disclaimer_text() }}</p>
+    <p>{{ m.external_links_no_guarantee() }}</p>
+    <h2>{{ m.errors_and_omissions_disclaimer_title() }}</h2>
+    <p>{{ m.errors_and_omissions_disclaimer_text() }}</p>
+    <p>{{ m.company_not_responsible() }}</p>
+    <h2>{{ m.fair_use_disclaimer_title() }}</h2>
+    <p>{{ m.fair_use_disclaimer_text() }}</p>
+    <p>{{ m.fair_use_belief() }}</p>
+    <p>{{ m.copyright_permission() }}</p>
+    <h2>{{ m.views_expressed_disclaimer_title() }}</h2>
+    <p>{{ m.views_expressed_disclaimer_text() }}</p>
+    <p>{{ m.user_comments_responsibility() }}</p>
+    <h2>{{ m.no_responsibility_disclaimer_title() }}</h2>
+    <p>{{ m.no_responsibility_disclaimer_text() }}</p>
+    <p>{{ m.company_no_liability_for_access() }}</p>
+    <h2>{{ m.use_at_your_own_risk_disclaimer_title() }}</h2>
+    <p>{{ m.use_at_your_own_risk_disclaimer_text() }}</p>
+    <p>{{ m.company_no_liability_for_decisions() }}</p>
+    <h2>{{ m.contact_us_title() }}</h2>
+    <p>{{ m.contact_us_text() }}</p>
     <ul>
       <li>
-        {{ translations['contact_us_website'][props.locale] }}: <a :href="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
+        {{ m.contact_us_website() }}: <a :href="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
       </li>
     </ul>
   </div>
