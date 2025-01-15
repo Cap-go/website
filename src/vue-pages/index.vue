@@ -10,7 +10,9 @@ import { posthogLoader } from '@/services/posthog'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import { onMounted, reactive, ref } from 'vue'
+// UNCOMMENT THIS TO make the bug appear with PARAGLIDE
 // import * as m from "$paraglide/messages.js"
+// if you remove most of translations, the bug will disappear
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
