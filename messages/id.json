@@ -1,6 +1,5 @@
 {
-  "$1_app": "Aplikasi $1",
-  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "one_doll_app": "Aplikasi $1",
   "API_access": "Akses API",
   "Capacitor_Sanbox_App": "Aplikasi Sanbox Kapasitor",
   "Capacitor_Sanbox_App_description": "Cobalah setiap versi aplikasi Anda langsung di aplikasi sandbox dalam satu detik. Kelola pembaruan OTA untuk aplikasi kapasitor Anda dari saku Anda, tersedia di IOS dan Android.",

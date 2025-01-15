@@ -16,6 +16,7 @@
     "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
   },
   "dependencies": {
+    "@astrojs/node": "^9.0.1",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/starlight": "^0.31.0",
     "@astrojs/vue": "5.0.4",
@@ -25,6 +26,7 @@
     "@supabase/supabase-js": "^2.47.11",
     "astro": "5.1.6",
     "astro-embed": "^0.9.0",
+    "astro-i18n": "^2.2.4",
     "astro-i18n-aut": "^0.7.3",
     "ky": "^1.7.4",
     "marked": "^15.0.6",

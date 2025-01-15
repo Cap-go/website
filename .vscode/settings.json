@@ -13,7 +13,7 @@
     "src/content/id": true,
     "src/content/it": true,
     "src/content/ja": true,
-    "src/content/ko": true,
+    "src/content/ko": true
   },
   "search.exclude": {
     "node_modules": true,
@@ -25,6 +25,6 @@
     "src/content/id": true,
     "src/content/it": true,
     "src/content/ja": true,
-    "src/content/ko": true,
+    "src/content/ko": true
   }
 }

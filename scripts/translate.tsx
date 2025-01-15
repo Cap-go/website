@@ -12,7 +12,8 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
       messages: [
         {
           role: 'system',
-          content: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
+          content:
+            'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
         },
         {
           role: 'user',

@@ -3,17 +3,17 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
-import * as m from "../paraglide/messages.js"
+// import * as m from "../paraglide/messages.js"
 
 const {
   ldJSON = structuredData,
-  title = m.website_title(),
-  description = m.website_description(),
+  title = 'website_title',
+  description = 'website_description',
   url = Astro.url,
   image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
-  keywords = m.website_keywords(),
+  keywords = 'website_keywords',
   audio = null,
 } = Astro.props
 

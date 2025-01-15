@@ -1,6 +1,5 @@
 {
-  "$1_app": "$1 アプリ",
-  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "one_doll_app": "$1 アプリ",
   "API_access": "APIアクセス",
   "Capacitor_Sanbox_App": "キャパシタサンドボックスアプリ",
   "Capacitor_Sanbox_App_description": "サンドボックスアプリでアプリの各バージョンをすぐに試せます。ポケットからキャパシタアプリのOTAアップデートを管理でき、iOSとAndroidで利用可能です。",

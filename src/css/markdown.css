@@ -19,8 +19,7 @@
   color: theme('colors.pumpkinOrange.300') !important;
 }
 
-.prose
-th,
+.prose th,
 td {
   border: 1px solid theme('colors.white') !important;
   border-collapse: collapse;

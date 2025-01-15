@@ -2,9 +2,14 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "preserve",
-    "baseUrl": ".",
+    "strictNullChecks": true,
+		"allowJs": true,
+		"checkJs": true,
+		"moduleResolution": "Bundler",
+		"baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "$paraglide/*": ["./src/paraglide/*"]
     }
   }
 }

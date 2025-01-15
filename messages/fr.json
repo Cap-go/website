@@ -1,6 +1,5 @@
 {
-  "$1_app": "Application $1",
-  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "one_doll_app": "Application $1",
   "API_access": "Accès à l'API",
   "Capacitor_Sanbox_App": "Application Sandbox Capacitor",
   "Capacitor_Sanbox_App_description": "Testez chaque version de votre application directement dans l'application sandbox en une seconde. Gérez les mises à jour OTA de votre application Capacitor depuis votre poche, disponible sur IOS et Android.",
