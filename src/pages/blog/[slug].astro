@@ -33,6 +33,7 @@ const data = Astro.props.post as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
 const markdown = await data.compiledContent()
+const markdownRaw = await data.rawContent()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[] } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
@@ -70,7 +71,7 @@ content['ldJSON'] = {
   },
   keywords: data.frontmatter?.keywords || [],
   articleSection: data.frontmatter?.tag || [],
-  articleBody: markdown,
+  articleBody: markdownRaw,
 }
 ---
 
