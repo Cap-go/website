@@ -65,6 +65,7 @@ export default defineConfig({
     }),
     AstroPWA(pwa),
     starlight({
+      disable404Route: true,
       title: 'Capgo',
       favicon: '/favicon.svg',
       logo: { src: './logo.svg' },
