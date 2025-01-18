@@ -3,6 +3,7 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
+import { JSDOM } from 'jsdom'
 
 const {
   ldJSON = structuredData,
@@ -15,6 +16,20 @@ const {
   keywords = Astro.locals.translations['website_keywords'][Astro.locals.locale],
   audio = null,
 } = Astro.props
+
+const stripArticleBody = (json: any): any => {
+  if (typeof json !== 'object' || json === null) return json
+  if (Array.isArray(json)) return json.map(stripArticleBody)
+  
+  const newObj = { ...json }
+  const dom = new JSDOM(newObj.articleBody)
+  const text = dom.window.document.body.textContent || ''
+  delete newObj.articleBody
+  newObj.articleBody = text
+  return newObj
+}
+
+const cleanLdJSON = stripArticleBody(ldJSON)
 
 const localeName_to_OGP = {
   en: 'en_EN',
@@ -139,4 +154,4 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />
+<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(cleanLdJSON)} />
