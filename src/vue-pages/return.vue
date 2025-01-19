@@ -51,7 +51,7 @@ const domain = config.public.baseUrl
     <p>{{ translations['how_to_cancel'][props.locale] }}</p>
     <ul>
       <li>
-        {{ translations['cancellation_link'][props.locale] }} <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
+        {{ translations['cancellation_link'][props.locale] }} <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
     <p>{{ translations['reimbursement_policy'][props.locale] }}</p>
@@ -80,7 +80,7 @@ const domain = config.public.baseUrl
     <p>{{ translations['questions_about_policy'][props.locale] }}</p>
     <ul>
       <li>
-        {{ translations['contact_link'][props.locale] }} <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
+        {{ translations['contact_link'][props.locale] }} <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
   </div>

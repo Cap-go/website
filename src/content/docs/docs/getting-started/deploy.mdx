@@ -3,7 +3,7 @@ title: Deploy a Live Update
 sidebar:
   order: 3
 ---
-import { Steps } from '@astrojs/starlight/components';
+import { Steps, LinkCard } from '@astrojs/starlight/components';
 
 Use Capgo's Live Updates feature to update the UI and business logic of your app remotely, in real-time. Push JS bundle updates directly to your users without going through the app store to instantly fix bugs and ship new features.
 
@@ -20,6 +20,8 @@ This guide assumes you've completed the [Capgo Quickstart](/docs/getting-started
 </Steps>
 
 If you haven't done those steps yet, please go back and complete the quickstart first.
+
+<LinkCard href="/docs/getting-started/add-an-app/" title="Add an app" description="Add an app to your Capgo account, and install the plugin in your app" />
 
 ## Uploading a Bundle
 
@@ -43,7 +45,7 @@ If your upload fails, double check:
 - You're running the upload command from the root of your Capacitor project
 - Your web assets are built and up to date
 
-If you're still having trouble, try running with the `--tus` flag if you have low internet connection or big bundles, or reach out to Capgo support.
+If you're still having trouble, go to the [Troubleshooting](/docs/getting-started/troubleshooting/) section.
 
 ## Receiving an Update on a Device
 

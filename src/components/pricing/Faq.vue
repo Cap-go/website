@@ -7,17 +7,17 @@ const props = defineProps<{ locale: Locales }>()
 </script>
 
 <template>
-  <section class="bg-gray-900 py-10 sm:py-16 lg:py-24">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center">
+  <section class="py-10 bg-gray-900 sm:py-16 lg:py-24">
+    <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
           {{ translations['questions_and_answers'][props.locale] }}
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-300">{{ translations['explore_common_questions'][props.locale] }}</p>
+        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ translations['explore_common_questions'][props.locale] }}</p>
       </div>
-      <div class="mt-12 grid grid-cols-1 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
+      <div class="grid grid-cols-1 mt-12 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
         <div class="flex items-start">
-          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -34,7 +34,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -45,7 +45,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -56,7 +56,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -67,13 +67,13 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
       </div>
-      <div class="mt-12 flex items-center justify-center md:mt-20">
-        <div class="rounded-full bg-gray-800 px-8 py-4 text-center">
+      <div class="flex items-center justify-center mt-12 md:mt-20">
+        <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
             {{ translations['didnt_find_answer'][props.locale] }}
-            <button class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" @click="openMessenger()">
+            <a class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" href="mailto:support@capgo.app">
               {{ translations['contact_support'][props.locale] }}
-            </button>
+            </a>
           </p>
         </div>
       </div>

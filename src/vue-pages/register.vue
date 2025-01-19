@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { openMessenger } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import translations from '@/services/translations'
@@ -37,8 +36,7 @@ const handleSubmit = async () => {
   const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
   if (errorDeleted) console.error(errorDeleted)
   if (!deleted) {
-    toast.error('Account is in error, please contact support')
-    openMessenger()
+    toast.error('Account is in error, please contact support at support@capgo.app')
     return
   }
 
@@ -64,14 +62,8 @@ const handleSubmit = async () => {
   if (error) {
     console.error('Supabase signup error', error)
     toast.error(error.message)
-    openMessenger()
     isLoading.value = false
     return
-  }
-  try {
-    await window.Reflio.signup(email.value)
-  } catch (error) {
-    console.error('Reflio signup error', error)
   }
   if (error || !user) {
     isLoading.value = false
@@ -81,7 +73,6 @@ const handleSubmit = async () => {
   if (session.error) {
     console.error('Supabase session error', session.error)
     toast.error(session.error.message)
-    openMessenger()
     isLoading.value = false
     return
   }
@@ -193,8 +184,8 @@ const handleSubmit = async () => {
               <span class="px-2 text-gray-500 bg-white">{{ translations['need_help'][props.locale] }}</span>
             </div>
           </div>
-          <button
-            @click="openMessenger"
+          <a
+            href="mailto:support@capgo.app"
             class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -206,7 +197,7 @@ const handleSubmit = async () => {
               />
             </svg>
             {{ translations['open_support'][props.locale] }}
-          </button>
+          </a>
         </div>
         <div class="flex items-center p-4 bg-slate-800">
           <blockquote class="text-white">

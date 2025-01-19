@@ -9,7 +9,7 @@ const domain = config.public.baseUrl
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto px-3 text-left">
+  <div class="px-3 m-auto prose-sm prose text-left">
     <span class="text-xs" v-if="props.locale !== defaultLocale">
       Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
     </span>
@@ -62,7 +62,7 @@ const domain = config.public.baseUrl
     <p>{{ translations.contact_us_text[props.locale] }}</p>
     <ul>
       <li>
-        {{ translations['contact_us_website'][props.locale] }}: <a :href="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
+        {{ translations['contact_us_website'][props.locale] }}: <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
       </li>
     </ul>
   </div>

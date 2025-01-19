@@ -3,33 +3,18 @@ import CIExpert from '@/components/CIExpert.vue'
 import Orgs from '@/components/Orgs.vue'
 import Testimonials from '@/components/Testimonials.vue'
 import { useRuntimeConfig } from '@/config/app'
-import { chatLoader } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { shortNumber } from '@/services/misc'
-import { posthogLoader } from '@/services/posthog'
 import translations from '@/services/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
-import { onMounted, reactive, ref } from 'vue'
-import * as m from "../paraglide/messages.js";
+import { reactive } from 'vue'
+// import * as m from "../paraglide/messages.js";
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 const props = defineProps<{ locale: Locales }>()
 
-const chatLoaded = ref(false)
-const handleScroll = () => {
-  if (!chatLoaded.value) {
-    chatLoaded.value = true
-    chatLoader()
-    window.removeEventListener('scroll', handleScroll)
-  }
-}
-
-onMounted(() => {
-  posthogLoader()
-  window.addEventListener('scroll', handleScroll)
-})
 
 const stats = reactive({
   stars: shortNumber(499),
