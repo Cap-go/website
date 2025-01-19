@@ -11,7 +11,6 @@ const props = defineProps<{
   tag?: string
   slug?: string
   related?: any
-  Content?: any
   title?: string
   author?: string
   locale: Locales
@@ -105,7 +104,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       </p>
       <div class="hidden pl-10" />
       <div ref="staticToc" class="absolute top-0 hidden max-h-screen overflow-y-auto transition-opacity duration-300 left-10 xl:block" :class="{ 'opacity-0': isFixedTocVisible }">
-        <div class="w-[280px] rounded bg-white/10 p-5">
+        <div class="w-[280px] rounded bg-gray-700 p-5">
           <ul v-if="toc?.length" class="flex flex-col text-left list-none">
             <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
             <li v-for="item in toc" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
@@ -117,17 +116,19 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </div>
       </div>
       <div v-if="toc?.length" class="flex flex-col px-4 mx-auto text-left rounded xl-hidden lg:max-w-1/2">
-        <ul class="flex flex-col p-4 rounded bg-white/10">
+        <ul class="flex flex-col p-4 bg-gray-700 rounded">
           <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
           <div class="hidden pl-20" />
           <li v-for="item in toc" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
-            <a :class="`pl-${Math.max(0, (item.depth - 2) * 4)}`" :href="`#${item.slug}`">
-              {{ item.text }}
+            <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
+                {{ item.text }}
             </a>
           </li>
         </ul>
       </div>
-      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left lg:max-w-1/2 md:rounded-lg" v-html="props.Content" />
+      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left lg:max-w-1/2 md:rounded-lg" >
+        <slot />
+      </article>
       <div class="flex flex-row items-center px-4 mx-auto lg:max-w-1/2">
         <div class="min-w-max min-h-[1px]">Authored By</div>
         <div class="ml-3 h-[1px] w-full bg-white/30" />

@@ -32,8 +32,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const data = Astro.props.languagePosts.find(i => i.frontmatter.locale === Astro.locals.locale) as MarkdownInstance<Record<string, any>>
 const related = Astro.props.related
 
-const markdown = await data.compiledContent()
-const markdownRaw = await data.rawContent()
+const markdownRaw = data.rawContent()
+const Content = data.Content
+
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[] } = {}
 
 if (data.frontmatter.title) content['title'] = data.frontmatter.title
@@ -76,5 +77,7 @@ content['ldJSON'] = {
 ---
 
 <Layout content={content}>
-  <VueBlogSlug locale={Astro.locals.locale} toc={data.getHeadings()} related={related} Content={markdown} client:load {...data.frontmatter} />
+  <VueBlogSlug locale={Astro.locals.locale} toc={data.getHeadings()} related={related} client:load {...data.frontmatter} >
+    <Content />
+  </VueBlogSlug>
 </Layout>
