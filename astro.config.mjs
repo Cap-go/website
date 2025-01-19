@@ -22,6 +22,10 @@ export default defineConfig({
       status: 302,
       destination: '/docs/plugin/cloud-mode/getting-started/',
     },
+    '/docs/plugin/cloud-mode/getting-started/': {
+      status: 302,
+      destination: '/docs/getting-started/quickstart',
+    },
   },
   i18n: {
     locales,
@@ -82,12 +86,30 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Home',
+          label: 'Welcome to Capgo',
           link: '/docs/',
         },
         {
-          label: 'Getting Started',
-          link: '/docs/plugin/cloud-mode/getting-started/',
+          label: 'Quickstart',
+          collapsed: false,
+          autogenerate: { directory: 'docs/getting-started' },
+        },
+        {
+          label: 'Capgo CLI',
+          collapsed: true,
+          items: [
+            { label: 'Commands', link: '/docs/cli/commands' },
+            {
+              label: 'Migrations',
+              collapsed: true,
+              autogenerate: { directory: 'docs/cli/migrations' },
+            },
+          ],
+        },
+        {
+          label: 'Live Updates',
+          collapsed: true,
+          autogenerate: { directory: 'docs/live-updates' },
         },
         {
           label: 'General Information',
@@ -95,6 +117,7 @@ export default defineConfig({
         },
         {
           label: 'Plugin',
+          collapsed: true,
           items: [
             { label: 'Overview', link: '/docs/plugin/overview' },
             {
@@ -132,18 +155,6 @@ export default defineConfig({
               label: 'Migrations',
               collapsed: true,
               autogenerate: { directory: 'docs/upgrade' },
-            },
-          ],
-        },
-        {
-          label: 'CLI',
-          collapsed: true,
-          items: [
-            { label: 'Commands', link: '/docs/cli/commands' },
-            {
-              label: 'Migrations',
-              collapsed: true,
-              autogenerate: { directory: 'docs/cli/migrations' },
             },
           ],
         },

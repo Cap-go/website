@@ -10,3 +10,4 @@ docs/plugin/know-issues docs/plugin/known-issues/ 200
 /sitemap.xml /sitemap-index.xml 301
 /sitemap-index.xml/ /sitemap-index.xml 301
 /sitemap-0.xml/ /sitemap-0.xml 301
+/docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 302

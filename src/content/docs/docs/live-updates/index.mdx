@@ -1,0 +1,77 @@
+---
+title: Overview
+sidebar:
+  order: 1
+prev: false
+draft: true
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users without going through the app store review process to instantly fix bugs and ship new features.
+
+<Aside>
+
+Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new native binary build to the app stores.
+
+</Aside>
+
+## How Live Updates Work
+
+Capgo's Live Update system has two key components:
+
+1. The Capgo SDK, which you install in your app. The SDK checks for available updates and downloads them in the background.
+
+2. Channels, which let you target updates to specific groups of users. You can use channels to manage different release tracks, such as `Production`, `Staging`, and `Dev`.
+
+When you upload a new JS bundle to Capgo and assign it to a channel, the Capgo SDK in apps configured for that channel will detect the update and download it. The next time the app restarts, the new bundle will be loaded.
+
+## Getting Started
+
+To start using Live Updates, follow these steps:
+
+<Steps>
+
+1. Complete the [Capgo Quickstart](/docs/getting-started/quickstart) to set up your app in Capgo and install the Capgo SDK.
+
+2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
+
+3. Build your JS bundle and upload it to Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4. Open your app and wait for the update to download. You can check the status with:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Once the update is downloaded, close and reopen your app to load the new bundle.
+
+</Steps>
+
+See the [Deploying Live Updates](/docs/getting-started/deploy) guide for more details.
+
+
+## Next Steps
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Channels" icon="bars">
+      Learn how to use channels to manage different release tracks and target updates to specific users.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollbacks" icon="left-arrow">
+      Discover how to roll back to a previous JS bundle version if an update causes issues.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Update Behavior" icon="setting">
+      Customize how and when updates are downloaded and applied in your app.  
+    </Card>
+  </a>
+</CardGrid>

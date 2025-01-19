@@ -1,0 +1,83 @@
+---
+title: Deploy a Live Update
+sidebar:
+  order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+Use Capgo's Live Updates feature to update the UI and business logic of your app remotely, in real-time. Push JS bundle updates directly to your users without going through the app store to instantly fix bugs and ship new features.
+
+This guide assumes you've completed the [Capgo Quickstart](/docs/getting-started/quickstart) and have already:
+
+<Steps>
+
+1. Installed the `@capgo/capacitor-updater` SDK in your Capacitor app 
+
+2. Configured your app ID and update channel in `capacitor.config.ts`
+
+3. Added in your code the `CapacitorUpdater.notifyAppReady()` method
+
+</Steps>
+
+If you haven't done those steps yet, please go back and complete the quickstart first.
+
+## Uploading a Bundle
+
+With the Capgo SDK installed and configured, you're ready to upload your first live update bundle:
+
+1. Build your web assets:
+   ```shell
+   npm run build
+   ```
+
+2. Upload the bundle to Capgo:
+   ```shell
+   npx @capgo/cli@latest upload --channel=Production
+   ```
+   This will upload a new bundle version to the channel specified in the command.
+
+### Troubleshooting Uploads
+
+If your upload fails, double check:
+- Your app ID in `capacitor.config.ts` matches your app in the Capgo dashboard
+- You're running the upload command from the root of your Capacitor project
+- Your web assets are built and up to date
+
+If you're still having trouble, try running with the `--tus` flag if you have low internet connection or big bundles, or reach out to Capgo support.
+
+## Receiving an Update on a Device
+
+Once your bundle is uploaded, you can test the live update on a device:
+
+1. Sync your app to the device:
+   ```shell
+   npx cap sync ios
+   ```
+
+2. Open another terminal and run the following command to check the update status:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+3. Run your app locally:
+   ```shell
+   npx cap run ios
+   ``` 
+   Or open the iOS/Android project in Xcode/Android Studio and do a native run.
+
+4. Keep the app open for about 30 seconds to allow the update to download in the background. 
+
+5. The logs will take a few seconds to update and show the update status.
+
+6. Close and reopen the app. You should see your live update applied!
+
+Refer back to the [Capgo Quickstart](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) for more details on testing live updates.
+
+## Next Steps
+
+Congrats on deploying your first live update with Capgo! 🎉 
+
+To learn more, review the rest of the [Capgo Live Updates documentation](/docs/live-updates). Some key topics to check out next:
+- [Targeting Updates with Channels](/docs/live-updates/channels)
+- [Customizing Update Behavior](/docs/live-updates/update-behavior)
+- [Live Update Rollbacks](/docs/live-updates/rollbacks)
