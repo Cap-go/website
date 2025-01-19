@@ -3,7 +3,7 @@ title: Deploy a Live Update
 sidebar:
   order: 3
 ---
-import { Steps, LinkCard } from '@astrojs/starlight/components';
+import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Use Capgo's Live Updates feature to update the UI and business logic of your app remotely, in real-time. Push JS bundle updates directly to your users without going through the app store to instantly fix bugs and ship new features.
 
@@ -33,9 +33,45 @@ With the Capgo SDK installed and configured, you're ready to upload your first l
    ```
 
 2. Upload the bundle to Capgo:
-   ```shell
-   npx @capgo/cli@latest upload --channel=Production
-   ```
+    <Tabs>
+      <TabItem label="Console">
+        ```shell
+      npx @capgo/cli@latest upload --channel=Production
+      ```
+      </TabItem>
+      <TabItem label="Github Actions">
+      ```yml
+    name: Build source code and send to Capgo
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      deploy_to_capgo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - uses: actions/setup-node@v4
+            with:
+              node-version: 18
+          - name: Install dependencies
+            run: npm install
+          - name: Build
+            run: npm run build
+          - name: Deploy to Capgo
+            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            env:
+              CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      ```
+      </TabItem>
+    </Tabs>
    This will upload a new bundle version to the channel specified in the command.
 
 ### Troubleshooting Uploads
