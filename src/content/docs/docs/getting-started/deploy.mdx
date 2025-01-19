@@ -41,6 +41,7 @@ With the Capgo SDK installed and configured, you're ready to upload your first l
       </TabItem>
       <TabItem label="Github Actions">
       ```yml
+      // .github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
 
     concurrency:
@@ -69,6 +70,33 @@ With the Capgo SDK installed and configured, you're ready to upload your first l
             run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
             env:
               CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      ```
+      </TabItem>
+      <TabItem label="Gitlab">
+      ```yml
+      // .gitlab-ci.yml
+      stages:
+        - build
+
+      build:
+        stage: build
+        image: node:18
+        cache:
+          - key:
+              files:
+                - package-lock.json
+            paths:
+              - .node_modules/
+        script:
+          - npm install
+          - npm run build
+          - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN --channel $CAPGO_CHANNEL
+        artifacts:
+          paths:
+            - node_modules/
+            - dist/
+        only:
+          - master
       ```
       </TabItem>
     </Tabs>
