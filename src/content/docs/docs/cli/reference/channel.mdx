@@ -1,0 +1,81 @@
+---
+title: channel
+sidebar_label: channel
+sidebar:
+  order: 6
+---
+
+The `channel` command lets you manage your release channels.
+
+### add
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+Creates a new channel for an app.
+
+Options:
+
+- `-d, --default`: Set the new channel as the default channel
+- `-a, --apikey <apikey>`: API key to link to your account
+
+### delete
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+Deletes a channel from an app.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+- `--delete-bundle`: Delete the bundle associated with the channel
+
+### list
+
+`npx @capgo/cli channel list [appId]`
+
+Lists all channels for an app.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+
+### currentBundle
+
+`npx @capgo/cli channel currentBundle [channel] [appId]`
+
+Gets the current bundle for a specific channel.
+
+Options:
+
+- `-c, --channel <channel>`: Channel to get the current bundle from
+- `-a, --apikey <apikey>`: API key to link to your account
+- `--quiet`: Only print the bundle version
+
+### set
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+Sets the properties of a channel.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+- `-b, --bundle <bundle>`: Bundle version number to set for the channel
+- `-s, --state <state>`: Set the state of the channel (`default` or `normal`)
+- `--latest`: Use the latest version from `package.json` as the bundle version
+- `--downgrade`: Allow downgrades to versions below the native version
+- `--no-downgrade`: Disable downgrades to versions below the native version
+- `--upgrade`: Allow upgrades to versions above the native version
+- `--no-upgrade`: Disable upgrades to versions above the native version
+- `--ios`: Allow sending updates to iOS devices
+- `--no-ios`: Disable sending updates to iOS devices
+- `--android`: Allow sending updates to Android devices
+- `--no-android`: Disable sending updates to Android devices
+- `--self-assign`: Allow devices to self-assign to this channel
+- `--no-self-assign`: Disable device self-assignment to this channel
+- `--disable-auto-update <disableAutoUpdate>`: Disable auto-update strategy for this channel (options: `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev`: Allow sending updates to development devices
+- `--no-dev`: Disable sending updates to development devices
+- `--emulator`: Allow sending updates to emulator devices
+- `--no-emulator`: Disable sending updates to emulator devices
+- `--package-json <packageJson>`: Comma-separated list of paths to `package.json` files (useful for monorepos) 

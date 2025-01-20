@@ -1,0 +1,164 @@
+---
+title: bundle
+sidebar_label: bundle
+sidebar:
+  order: 5
+---
+
+The `bundle` command lets you manage your app bundles.
+
+### upload
+
+`npx @capgo/cli bundle upload [appId]`
+
+Uploads a new bundle for an app.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+- `-p, --path <path>`: Path to the folder to upload (defaults to the `webDir` in `capacitor.config`)
+- `-c, --channel <channel>`: Channel to link the bundle to
+- `-e, --external <url>`: Link to an external URL instead of uploading to Capgo Cloud
+- `--iv-session-key <key>`: Set the IV and session key for an external bundle URL
+- `--s3-region <region>`: Region for your S3 bucket
+- `--s3-apikey <apikey>`: API key for your S3 endpoint
+- `--s3-apisecret <apisecret>`: API secret for your S3 endpoint
+- `--s3-endpoint <s3Endpoint>`: URL of the S3 endpoint
+- `--s3-bucket-name <bucketName>`: Name of your S3 bucket
+- `--s3-port <port>`: Port for your S3 endpoint
+- `--no-s3-ssl`: Disable SSL for S3 uploads
+- `--key <key>`: Custom path for the public signing key (v1 system)
+- `--key-data <keyData>`: Public signing key data (v1 system)
+- `--key-v2 <key>`: Custom path for the private signing key (v2 system)
+- `--key-data-v2 <keyDataV2>`: Private signing key data (v2 system)
+- `--bundle-url`: Print the bundle URL to stdout
+- `--no-key`: Ignore the signing key and send an unsigned update
+- `--no-code-check`: Skip checking for `notifyAppReady()` in the source code and `index.html` in the root folder
+- `--display-iv-session`: Display the IV and session key used to encrypt the update
+- `-b, --bundle <bundle>`: Bundle version number to upload
+- `--min-update-version <minUpdateVersion>`: Minimum app version required to apply this update (only used if auto-update is disabled via metadata)
+- `--auto-min-update-version`: Automatically set the minimum update version based on native package versions
+- `--ignore-metadata-check`: Ignore the metadata (node_modules) check when uploading
+- `--ignore-checksum-check`: Ignore the checksum check when uploading
+- `--timeout <timeout>`: Timeout for the upload process in seconds
+- `--multipart`: Use the multipart protocol to upload data to S3 (deprecated, use `--tus` instead)
+- `--tus`: Upload the bundle using the tus protocol
+- `--tus-chunk-size <tusChunkSize>`: Chunk size for the tus upload
+- `--partial`: Upload only changed files to Capgo Cloud
+- `--partial-only`: Upload only partial files to Capgo Cloud, skipping the zipped file (useful for large bundles)
+- `--encrypted-checksum <encryptedChecksum>`: Encrypted checksum (signature) for an external bundle
+- `--auto-set-bundle`: Automatically set the bundle version in `capacitor.config.json`
+- `--dry-upload`: Perform a dry run of the upload process without actually uploading files (useful for testing)
+- `--package-json <packageJson>`: Comma-separated list of paths to `package.json` files (useful for monorepos)
+- `--node-modules <nodeModules>`: Comma-separated list of paths to `node_modules` directories (useful for monorepos)
+- `--encrypt-partial`: Encrypt the partial update files
+- `--delete-linked-bundle-on-upload`: Delete the currently linked bundle in the target channel before uploading
+
+### compatibility
+
+`npx @capgo/cli bundle compatibility [appId]`
+
+Checks the compatibility of a bundle with a specific channel.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+- `-c, --channel <channel>`: Channel to check compatibility with
+- `--text`: Output results as text instead of emoji
+- `--package-json <packageJson>`: Comma-separated list of paths to `package.json` files (useful for monorepos)
+- `--node-modules <nodeModules>`: Comma-separated list of paths to `node_modules` directories (useful for monorepos)
+
+### delete
+
+`npx @capgo/cli bundle delete [bundleId] [appId]`
+
+Deletes a bundle from an app.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+
+### list
+
+`npx @capgo/cli bundle list [appId]`
+
+Lists all bundles for an app.
+
+Options:
+
+- `-a, --apikey <apikey>`: API key to link to your account
+
+### cleanup
+
+`npx @capgo/cli bundle cleanup [appId]`
+
+Cleans up old bundles for a major version, keeping the specified number of most recent bundles.
+
+Options:
+
+- `-b, --bundle <bundle>`: Major version number to clean up
+- `-a, --apikey <apikey>`: API key to link to your account
+- `-k, --keep <keep>`: Number of bundles to keep (default: 4)
+- `-f, --force`: Force removal without confirmation
+
+### decrypt
+
+`npx @capgo/cli bundle decrypt [zipPath] [sessionKey]`
+
+Decrypts a signed zip bundle.
+
+Options:
+
+- `--key <key>`: Custom path for the private signing key
+- `--key-data <keyData>`: Private signing key data
+
+### encrypt
+
+`npx @capgo/cli bundle encrypt [zipPath]`
+
+Encrypts a zip bundle.
+
+Options:
+
+- `--key <key>`: Custom path for the private signing key
+- `--key-data <keyData>`: Private signing key data
+
+### encryptV2
+
+`npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
+
+Encrypts a zip bundle using the new encryption method.
+
+Options:
+
+- `--key <key>`: Custom path for the private signing key
+- `--key-data <keyData>`: Private signing key data
+- `-j, --json`: Output results as JSON
+
+### decryptV2
+
+`npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
+
+Decrypts a zip bundle using the new encryption method.
+
+Options:
+
+- `--key <key>`: Custom path for the private signing key
+- `--key-data <keyData>`: Private signing key data
+- `--checksum <checksum>`: Checksum of the bundle to verify integrity
+
+### zip
+
+`npx @capgo/cli bundle zip [appId]`
+
+Generates a zip file for a bundle.
+
+Options:
+
+- `-p, --path <path>`: Path to the folder to zip (defaults to the `webDir` in `capacitor.config`)
+- `-b, --bundle <bundle>`: Bundle version number to use in the filename
+- `-n, --name <name>`: Custom filename for the zip
+- `-j, --json`: Output results as JSON
+- `--no-code-check`: Skip checking for `notifyAppReady()` in the source code and `index.html` in the root folder
+- `--key-v2`: Use the new encryption method (v2)
+- `--package-json <packageJson>`: Comma-separated list of paths to `package.json` files (useful for monorepos) 

@@ -97,7 +97,12 @@ export default defineConfig({
           label: 'Capgo CLI',
           collapsed: true,
           items: [
-            { label: 'Commands', link: '/docs/cli/commands' },
+            { label: 'Overview', link: '/docs/cli/overview' },
+            {
+              label: 'Command reference',
+              collapsed: false,
+              autogenerate: { directory: 'docs/cli/reference' },
+            },
             {
               label: 'Migrations',
               collapsed: true,
@@ -109,10 +114,6 @@ export default defineConfig({
           label: 'Live Updates',
           collapsed: true,
           autogenerate: { directory: 'docs/live-updates' },
-        },
-        {
-          label: 'General Information',
-          link: '/docs/general-information/',
         },
         {
           label: 'Plugin',
@@ -174,11 +175,6 @@ export default defineConfig({
         {
           label: 'FAQ',
           link: '/docs/faq/',
-        },
-        {
-          label: 'Tooling',
-          collapsed: true,
-          autogenerate: { directory: 'docs/tooling' },
         },
         {
           label: 'How to get support',

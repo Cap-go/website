@@ -126,7 +126,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           </li>
         </ul>
       </div>
-      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left lg:max-w-1/2 md:rounded-lg" >
+      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left blog lg:max-w-1/2 md:rounded-lg" >
         <slot />
       </article>
       <div class="flex flex-row items-center px-4 mx-auto lg:max-w-1/2">

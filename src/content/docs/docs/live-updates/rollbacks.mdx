@@ -1,6 +1,89 @@
 ---
 title: Rollbacks
-draft: true
+sidebar:
+  order: 5
 ---
 
-Rollbacks
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+While Capgo's live updates allow you to quickly deliver improvements and fixes to your users, there may be situations where you need to roll back to a previous version of your app. Perhaps a new update introduced an unexpected critical issue, or maybe you want to revert a specific change while you work on a fix.
+
+Capgo provides several ways to manage a channel's builds and control the version of your app that users receive.
+
+## Rolling Back to a Previous Bundle
+
+Every time you upload a new build and assign it to a channel, Capgo keeps a history of those builds. If you need to revert a specific update, you can select one of these previous builds to redeploy to the channel.
+
+To roll back to a previous build:
+
+<Steps>
+
+1. Log in to the [Capgo Dashboard](https://app.capgo.io).
+
+2. Navigate to the "Channels" section.
+
+3. Click the name of the channel you want to roll back.
+
+4. Find the build you want to revert to in the channel's build history.
+
+5. Click the crown icon next to that build to make it the active build for the channel.
+   ![Channel management options](/select_bundle.webp)
+
+6. Confirm that you want to roll back to this build.
+
+</Steps>
+
+<Aside type="note">
+Rolling back to a previous build only affects the selected channel. If you have multiple channels (e.g. Production, Staging, etc.), you'll need to repeat the rollback process for each affected channel.
+</Aside>
+
+After rolling back, devices configured to listen to the updated channel will receive the previous build the next time they check for an update. The rolled-back build will be treated as a new update, so the usual update flow and conditions apply.
+
+## Unlinking a Channel
+
+If you want to temporarily halt updates on a channel while you investigate an issue, you can unlink the channel from its current build. 
+
+To unlink a channel:
+
+1. Navigate to the channel in the Capgo Dashboard.
+
+2. Click the "Unlink" button next to the current build.
+
+3. Confirm that you want to unlink the channel.
+
+Once a channel is unlinked, it will not distribute any new updates. Devices configured to that channel will stay on their current build until the channel is linked to a build again.
+
+This is useful if you've identified a problem with an update but aren't yet sure which build you want to roll back to. Unlinking the channel gives you time to investigate without pushing out further updates.
+
+## Forcing the Built-In Bundle
+
+In more severe situations, you may want to revert all devices on a channel back to the web build that was originally packaged with your app's native binary. This is known as the "built-in bundle".
+
+To force the built-in bundle on a channel:
+
+1. Navigate to the channel in the Capgo Dashboard.
+
+2. Click the "Built-in Bundle" button.
+
+3. Confirm that you want to force the built-in bundle.
+
+When you force the built-in bundle, all devices configured to that channel will revert back to the original packaged web build on their next update check. This happens regardless of what build they're currently on.
+
+This is a more aggressive rollback option than reverting to a specific previous build, as it discards all live updates released since the app was last published to the app stores.
+
+<Aside type="caution">
+Be cautious when forcing the built-in bundle, as it will affect all devices on the channel. Make sure you've considered the impact and have a plan to move forward before taking this action.
+</Aside>
+
+## Monitoring and Responding to Issues
+
+To catch issues quickly and minimize the impact of problematic updates, it's important to have a plan for monitoring your releases and responding to problems.
+
+Some strategies include:
+
+- Monitoring crash reports and user feedback immediately after releasing an update
+- Using phased rollouts or a staged channel system to test updates on a smaller group before wide release
+- Having a clear decision process for when to roll back, unlink, or force the built-in bundle, and who has the authority to do so
+- Communicating to users about the issue and the resolution, if appropriate
+
+By combining careful monitoring with the ability to quickly manage problematic updates, you can deliver a continuously improving app experience while minimizing disruptions for your users.
