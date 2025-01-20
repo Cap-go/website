@@ -4,9 +4,10 @@ import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
 import { computed, ref } from 'vue'
+import type { CollectionEntry } from 'astro:content';
 
 const props = defineProps<{
-  Content?: any
+  Content: CollectionEntry<'blog'>[]
   locale: Locales
 }>()
 const selectedTag = ref('all')
@@ -14,16 +15,14 @@ const config = useRuntimeConfig()
 
 const filteredPosts = computed(() => {
   if (selectedTag.value === 'all') return props.Content
-  return props.Content.filter((article: any) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
+  return props.Content.filter((article) => article.data.tag.toUpperCase() === selectedTag.value.toUpperCase())
 })
 
 const uniqueTags = computed(() => {
-  const tags = new Set<string[]>()
-  props.Content.forEach((article: any) => {
-    tags.add(article.frontmatter.tag.toUpperCase())
-  })
+  const tags = new Set<string>()
+  props.Content.forEach((article) => tags.add(article.data.tag.toUpperCase()))
   return Array.from(tags)
-    .map((tag) => tag[0].toUpperCase() + tag.slice(1).toLowerCase())
+    .map((tag) => tag[0].toUpperCase() + tag.substring(1, tag.length).toLowerCase())
     .sort()
 })
 </script>
@@ -62,14 +61,13 @@ const uniqueTags = computed(() => {
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <Blog
           v-for="article in filteredPosts"
-          :tag="article.frontmatter.tag"
-          :key="article.frontmatter.slug"
-          :link="article.frontmatter.slug"
-          :title="article.frontmatter.title"
-          :locale="article.frontmatter.locale"
-          :date="article.frontmatter.created_at"
-          :image="article.frontmatter.head_image"
-          :description="article.frontmatter.description"
+          :tag="article.data.tag"
+          :key="article.data.slug"
+          :link="article.data.slug"
+          :title="article.data.title"
+          :locale="article.data.locale"
+          :date="article.data.created_at"
+          :image="article.data.head_image"
         />
       </div>
     </div>

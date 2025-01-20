@@ -142,14 +142,14 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         <div v-if="related" class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
           <Blog
             v-for="article in related"
-            :tag="article.frontmatter.tag"
-            :key="article.frontmatter.slug"
-            :link="article.frontmatter.slug"
-            :title="article.frontmatter.title"
-            :locale="article.frontmatter.locale"
-            :date="article.frontmatter.created_at"
-            :image="article.frontmatter.head_image"
-            :description="article.frontmatter.description"
+            :tag="article.data.tag"
+            :key="article.data.slug"
+            :link="article.data.slug"
+            :title="article.data.title"
+            :locale="article.data.locale"
+            :date="article.data.created_at"
+            :image="article.data.head_image"
+            :description="article.data.description"
           />
         </div>
         <div class="mt-12 text-center">

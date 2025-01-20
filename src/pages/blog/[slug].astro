@@ -1,66 +1,70 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
-import type { GetStaticPaths, MarkdownInstance } from 'astro'
+import type { GetStaticPaths } from 'astro'
+import { getCollection, render } from 'astro:content'
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allBlogPosts = await Astro.glob('@/content/**/blog/**/*.md')
-  const posts = allBlogPosts.filter((j) => j.frontmatter.published)
-  return posts.map((post) => {
-    let related = posts
-      .filter((i) => (i.frontmatter.slug !== post.frontmatter.slug) && post.frontmatter.locale === i.frontmatter.locale)
-      .sort((a, b) => (new Date(a.frontmatter.created_at) > new Date(b.frontmatter.created_at) ? -1 : 1))
-      .slice(0, 3)
-    if (post.frontmatter.next_blog) {
-      if (related.length > 0) {
-        const next_blog = posts.find((i) => i.frontmatter.slug === post.frontmatter.next_blog)
-        if (next_blog) related[0] = next_blog
-      } else related = posts.filter((i) => i.frontmatter.slug === post.frontmatter.next_blog)
-    }
+  const blogs = await getCollection('blog')
+  const entries = blogs.filter((j) => j.data.published !== false)
+  return entries.map((post) => {
     return {
       params: {
-        slug: post.frontmatter.slug,
-      },
-      props: {
-        related,
-        languagePosts: posts.filter(i => i.frontmatter.slug === post.frontmatter.slug)
+        slug: post.data.slug,
       },
     }
   })
 }
 
-const data = Astro.props.languagePosts.find(i => i.frontmatter.locale === Astro.locals.locale) as MarkdownInstance<Record<string, any>>
-const related = Astro.props.related
+if (!Astro.params.slug) {
+  console.log(`Astro.params.slug is invalid for: ${Astro.url.pathname}`)
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not found'
+  });
+}
 
-const markdownRaw = data.rawContent()
-const Content = data.Content
+const blogs = await getCollection('blog')
+const entry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === Astro.locals.locale)
+const related = blogs.filter((j) => j.data.published !== false && j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
+
+if (!entry) {
+  console.log(`entry is not found for: ${Astro.url.pathname}`)
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not found'
+  });
+}
+
+const { Content, headings } = await render(entry)
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[] } = {}
 
-if (data.frontmatter.title) content['title'] = data.frontmatter.title
-if (data.frontmatter.description) content['description'] = data.frontmatter.description
-if (data.frontmatter.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter.head_image || '/capgo_banner.webp'}`
-if (data.frontmatter.author) content['author'] = data.frontmatter.author || 'Capgo'
-if (data.frontmatter.keywords) content['keywords'] = data.frontmatter.keywords || []
-const dateModified = new Date(data.frontmatter.updated_at).toISOString()
-const datePublished = new Date(data.frontmatter.created_at).toISOString()
+if (entry.data.title) content['title'] = entry.data.title
+if (entry.data.description) content['description'] = entry.data.description
+if (entry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${entry.data.head_image || '/capgo_banner.webp'}`
+if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
+if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
+
+const dateModified = entry.data.updated_at
+const datePublished = entry.data.created_at
 
 content['ldJSON'] = {
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${data.frontmatter?.slug}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
   },
-  headline: data.frontmatter?.description,
-  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${data.frontmatter?.head_image || '/capgo_banner.webp'}`],
+  headline: entry.data?.description,
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${entry.data?.head_image || '/capgo_banner.webp'}`],
   datePublished: datePublished,
   inLanguage: Astro.locals.locale,
   dateModified: dateModified,
   author: {
     '@type': 'Person',
-    name: data.frontmatter?.author,
-    url: data.frontmatter?.author_url,
+    name: entry.data?.author,
+    url: entry.data?.author_url,
   },
   publisher: {
     '@type': 'Organization',
@@ -70,14 +74,32 @@ content['ldJSON'] = {
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
-  keywords: data.frontmatter?.keywords || [],
-  articleSection: data.frontmatter?.tag || [],
-  articleBody: markdownRaw,
+  keywords: entry.data?.keywords || [],
+  articleSection: entry.data?.tag || [],
+  articleBody: entry.body,
 }
 ---
 
 <Layout content={content}>
-  <VueBlogSlug locale={Astro.locals.locale} toc={data.getHeadings()} related={related} client:load {...data.frontmatter} >
+  <VueBlogSlug
+    client:load
+    toc={headings}
+    related={related}
+    tag={entry.data.tag}
+    slug={entry.data.slug}
+    title={entry.data.title}
+    author={entry.data.author}
+    locale={entry.data.locale}
+    next_blog={entry.data.slug}
+    published={entry.data.published}
+    author_url={entry.data.author_url}
+    created_at={entry.data.created_at}
+    updated_at={entry.data.updated_at}
+    head_image={entry.data.head_image}
+    description={entry.data.description}
+    head_image_alt={entry.data.head_image_alt}
+    author_image_url={entry.data.author_image_url}
+  >
     <Content />
   </VueBlogSlug>
 </Layout>

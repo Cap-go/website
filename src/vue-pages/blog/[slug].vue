@@ -3,11 +3,12 @@ import Blog from '@/components/Blog.vue'
 import { formatTime } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import translations from '@/services/translations'
+import type { MarkdownHeading } from 'astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { onMounted, ref, type Ref } from 'vue'
 
 const props = defineProps<{
-  toc?: any[]
+  toc?: MarkdownHeading[]
   tag?: string
   slug?: string
   related?: any
@@ -20,7 +21,7 @@ const props = defineProps<{
   created_at?: string
   updated_at?: string
   head_image?: string
-  description?: string
+  description?: string | null
   head_image_alt?: string
   author_image_url?: string
 }>()
@@ -151,14 +152,14 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
           <Blog
             v-for="article in related"
-            :tag="article.frontmatter.tag"
-            :key="article.frontmatter.slug"
-            :link="article.frontmatter.slug"
-            :title="article.frontmatter.title"
-            :locale="article.frontmatter.locale"
-            :date="article.frontmatter.created_at"
-            :image="article.frontmatter.head_image"
-            :description="article.frontmatter.description"
+            :tag="article.data.tag"
+            :key="article.data.slug"
+            :link="article.data.slug"
+            :title="article.data.title"
+            :locale="article.data.locale"
+            :date="article.data.created_at"
+            :image="article.data.head_image"
+            :description="article.data.description"
           />
         </div>
         <div class="mt-12 text-center">
