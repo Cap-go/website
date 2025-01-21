@@ -18,10 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 if (!Astro.params.slug) {
   console.log(`Astro.params.slug is invalid for: ${Astro.url.pathname}`)
-  return new Response(null, {
-    status: 404,
-    statusText: 'Not found'
-  });
+  return new Response(null, { status: 404 })
 }
 
 const blogs = await getCollection('blog')
@@ -30,10 +27,7 @@ const related = blogs.filter((j) => j.data.published !== false && j.data.slug !=
 
 if (!entry) {
   console.log(`entry is not found for: ${Astro.url.pathname}`)
-  return new Response(null, {
-    status: 404,
-    statusText: 'Not found'
-  });
+  return new Response(null, { status: 404 })
 }
 
 const { Content, headings } = await render(entry)
