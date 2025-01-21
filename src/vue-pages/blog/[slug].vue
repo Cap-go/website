@@ -8,22 +8,22 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import { onMounted, ref, type Ref } from 'vue'
 
 const props = defineProps<{
-  toc?: MarkdownHeading[]
-  tag?: string
-  slug?: string
+  tag: string
+  slug: string
   related?: any
-  title?: string
-  author?: string
+  title: string
+  author: string
   locale: Locales
-  next_blog?: string
+  author_url: string
+  created_at: string
+  updated_at: string
   published?: boolean
-  author_url?: string
-  created_at?: string
-  updated_at?: string
   head_image?: string
-  description?: string | null
   head_image_alt?: string
-  author_image_url?: string
+  author_image_url: string
+  next_blog?: string | null
+  description?: string | null
+  headings?: MarkdownHeading[]
 }>()
 
 const isFixedTocVisible = ref(false)
@@ -41,7 +41,7 @@ const observeArticleTitles = () => {
       const tmp = heading.getAttribute('id')
       if (tmp) {
         activeSlug.value = tmp
-        history.replaceState(null, null, `#${tmp}`)
+        history.replaceState(null, '', `#${tmp}`)
         break
       }
     }
@@ -67,9 +67,9 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       :class="{ 'opacity-100': isFixedTocVisible }"
     >
       <div class="w-[280px] rounded bg-gray-700 p-5">
-        <ul v-if="toc?.length" class="flex flex-col text-left list-none">
+        <ul v-if="headings?.length" class="flex flex-col text-left list-none">
           <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
-          <li v-for="item in toc" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
+          <li v-for="item in headings" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
               {{ item.text }}
             </a>
@@ -106,9 +106,9 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       <div class="hidden pl-10" />
       <div ref="staticToc" class="absolute top-0 hidden max-h-screen overflow-y-auto transition-opacity duration-300 left-10 xl:block" :class="{ 'opacity-0': isFixedTocVisible }">
         <div class="w-[280px] rounded bg-gray-700 p-5">
-          <ul v-if="toc?.length" class="flex flex-col text-left list-none">
+          <ul v-if="headings?.length" class="flex flex-col text-left list-none">
             <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
-            <li v-for="item in toc" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
+            <li v-for="item in headings" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
               <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
               </a>
@@ -116,11 +116,11 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           </ul>
         </div>
       </div>
-      <div v-if="toc?.length" class="flex flex-col px-4 mx-auto text-left rounded xl-hidden lg:max-w-1/2">
+      <div v-if="headings?.length" class="flex flex-col px-4 mx-auto text-left rounded xl-hidden lg:max-w-1/2">
         <ul class="flex flex-col p-4 bg-gray-700 rounded">
           <span class="pb-1 text-lg border-b border-gray-600">{{ translations['table_of_contents'][props.locale] }}</span>
           <div class="hidden pl-20" />
-          <li v-for="item in toc" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
+          <li v-for="item in headings" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
             </a>

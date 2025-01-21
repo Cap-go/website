@@ -14,6 +14,6 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
 if (Astro.locals.runtimeConfig.public.blog_keywords) content['keywords'] = Astro.locals.runtimeConfig.public.blog_keywords
 ---
 
-<Layout content={content}>
+<Layout {content}>
   <VueBlogIndex locale={Astro.locals.locale} Content={posts} client:load />
 </Layout>

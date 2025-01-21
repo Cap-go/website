@@ -50,55 +50,42 @@ const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
 
 content['ldJSON'] = {
-  '@context': 'https://schema.org',
   '@type': 'NewsArticle',
+  '@context': 'https://schema.org',
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
   },
-  headline: entry.data?.description,
-  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${entry.data?.head_image || '/capgo_banner.webp'}`],
+  dateModified: dateModified,
   datePublished: datePublished,
   inLanguage: Astro.locals.locale,
-  dateModified: dateModified,
+  headline: entry.data?.description,
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${entry.data?.head_image || '/capgo_banner.webp'}`],
   author: {
     '@type': 'Person',
     name: entry.data?.author,
     url: entry.data?.author_url,
   },
   publisher: {
-    '@type': 'Organization',
     name: 'Capgo',
+    '@type': 'Organization',
     logo: {
       '@type': 'ImageObject',
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
+  articleBody: entry.body,
   keywords: entry.data?.keywords || [],
   articleSection: entry.data?.tag || [],
-  articleBody: entry.body,
 }
 ---
 
 <Layout content={content}>
   <VueBlogSlug
     client:load
-    toc={headings}
-    related={related}
-    tag={entry.data.tag}
-    slug={entry.data.slug}
-    title={entry.data.title}
-    author={entry.data.author}
-    locale={entry.data.locale}
-    next_blog={entry.data.slug}
-    published={entry.data.published}
-    author_url={entry.data.author_url}
-    created_at={entry.data.created_at}
-    updated_at={entry.data.updated_at}
-    head_image={entry.data.head_image}
-    description={entry.data.description}
-    head_image_alt={entry.data.head_image_alt}
-    author_image_url={entry.data.author_image_url}
+    {related}
+    {headings}
+    {...entry.data}
   >
     <Content />
   </VueBlogSlug>

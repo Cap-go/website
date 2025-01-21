@@ -7,8 +7,8 @@ import { computed, ref } from 'vue'
 import type { CollectionEntry } from 'astro:content';
 
 const props = defineProps<{
-  Content: CollectionEntry<'blog'>[]
   locale: Locales
+  Content: CollectionEntry<'blog'>[]
 }>()
 const selectedTag = ref('all')
 const config = useRuntimeConfig()
