@@ -95,7 +95,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </span>
       </div>
     </div>
-    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"> Last update: {{ formatTime(props?.updated_at || '') }} </span>
+    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"> {{ translations['last_update'][props.locale] }}: {{ formatTime(props?.updated_at || '') }} </span>
     <div class="relative toc-wrapper">
       <h1 class="px-4 py-5 mx-auto text-3xl lg:max-w-1/2 font-800 lg:text-4xl">
         {{ props?.title }}

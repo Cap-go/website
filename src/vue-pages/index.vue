@@ -199,21 +199,21 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-3 lg:mt-24">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}⬆</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['updates_delivered'][props.locale] }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ translations['all_around_the_globe'][props.locale] }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}❤️</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['apps'][props.locale] }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ translations['using_us_in_production'][props.locale] }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}⭐️</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}★</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ translations['stars_in_github'][props.locale] }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ translations['open_source'][props.locale] }}</p>
