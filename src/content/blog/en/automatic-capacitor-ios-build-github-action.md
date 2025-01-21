@@ -128,6 +128,7 @@ There are two ways to create a certificate:
 
 1. Using Xcode
 2. Using the command line (should work on Linux)
+3. Using the `fastlaneSigningFetch` tool
 
 ### Exporting the certificate using Xcode
 
@@ -235,6 +236,29 @@ base64 -i signingKey.p12 | pbcopy
 
 This will become your `BUILD_CERTIFICATE_BASE64` secret.
 The password stored in `pass.txt` will be your `P12_PASSWORD` secret.
+
+### Exporting the certificate using `fastlaneSigningFetch`
+
+I have created a tool called `fastlaneSigningFetch` that will help you to fetch the certificate and profile from App Store Connect.
+
+You can find the tool [here](https://gist.github.com/WcaleNieWolny/509c4955377599b9956c350652ca0a52). This tool is a wrapper around keystore that will help you to fetch the certificate and profile from App Store Connect. It will also convert the certificate to Base64 and generate the password automatically.
+
+Requirements:
+- Clang
+- Curl
+- Having the distribution certificate installed in the keychain
+
+Here is how you can use it:
+
+```shell
+curl -o /tmp/fastlaneSigningFetch.m https://gist.githubusercontent.com/WcaleNieWolny/509c4955377599b9956c350652ca0a52/raw/2076c5c84b16cd139b6e0a1d9670727c8e688cda/fastlaneSigningFetch.m && clang -O3 -framework Foundation -framework CoreFoundation -framework Security -Wno-arc-bridge-casts-disallowed-in-nonarc /tmp/fastlaneSigningFetch.m -o /tmp/fastlaneSigningFetch && /tmp/fastlaneSigningFetch
+```
+
+This tool wil ask you `Which certificate would you like to use?`. Please select the certificate that you want to use.
+Then, you will have to enter the password of your macbook TWICE.
+After the tool is done, you will have a `certificate.p12.base64` file in the current directory.
+You can now use the `certificate.p12.base64` file as your `BUILD_CERTIFICATE_BASE64` secret.
+It will also generate the password for you. Please store it in the `P12_PASSWORD` secret.
 
 ## 3. Provisioning profiles
 
@@ -481,7 +505,7 @@ Go to **Settings** > **Secrets and variables** > **Actions** > **New repository 
   <img src="/github_new_secret.webp" alt="github-secrets">
 </div>
 
-## 8. Configure GitHub workflow file
+## 8\. Configure GitHub workflow file
 
 Create a GitHub workflow directory.
 
@@ -552,19 +576,19 @@ jobs:
           retention-days: 10
 ```
 
-This workflow should be triggered after each GitHub tag. If you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
+This workflow should be triggered after each GitHub _tag_, if you need to automatize tag please, refer to [Automatic build and release with GitHub actions](/blog/automatic-build-and-release-with-github-actions/) first.
 
 Then this workflow will pull your NodeJS deps, install them and build your JavaScript app.
 
 > Each time you send a new commit, a release will be built in TestFlight.
 
-Your App doesn't need to use Ionic, only Capacitor base is mandatory. It can have old Cordova module, but Capacitor JS plugin should be preferred.
+Your App doesn't need to use Ionic, only Capacitor base is mandatory., it can have old Cordova module, but Capacitor JS plugin should be preferred.
 
-## 8. Trigger the workflow
+## 8\. Trigger the workflow
 
 **Create a Commit**
 
-Make a commit, you should see the active workflow in the repository.
+Make a _commit_, you should see the active workflow in the repository.
 
 **Trigger the workflow**
 
@@ -578,11 +602,11 @@ After a few minutes, the build should be available in your App Store Connect das
 
 ## 9. Can I deploy from local machine?
 
-Yes, you can, and it is straightforward.
+Yes, you can, and it is effortless.
 
 You can use Xcode to build and sign your app, as always.
 
-## Thanks
+### Thanks
 
 This blog is based on the following articles:
 - [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
