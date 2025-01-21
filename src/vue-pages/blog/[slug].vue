@@ -23,6 +23,9 @@ const props = defineProps<{
   description?: string
   head_image_alt?: string
   author_image_url?: string
+  coauthored_by?: string
+  coauthor_image_url?: string
+  coauthor_url?: string
 }>()
 
 const isFixedTocVisible = ref(false)
@@ -139,6 +142,18 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           {{ props?.author }}
         </a>
       </div>
+      <template v-if="props?.coauthored_by">
+        <div class="flex flex-row items-center px-4 mx-auto mt-5 lg:max-w-1/2">
+          <div class="min-w-max min-h-[1px]">Co-authored By</div>
+          <div class="ml-3 h-[1px] w-full bg-white/30" />
+        </div>
+        <div class="flex items-center px-4 mx-auto mt-5 lg:max-w-1/2">
+          <img :src="props?.coauthor_image_url" class="object-cover rounded-full size-8" :alt="`author image ${props?.coauthored_by}`" :title="`author image ${props?.coauthored_by}`" />
+          <a :href="props?.coauthor_url" class="ml-3 text-lg font-medium" target="_blank" rel="noopener noreferrer">
+            {{ props?.coauthored_by }}
+          </a>
+        </div>
+      </template>
     </div>
     <section class="py-12 sm:py-16 lg:py-20 xl:py-24">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
