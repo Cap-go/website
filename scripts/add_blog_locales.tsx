@@ -2,9 +2,9 @@ import { readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 
-const contentDirectory = join(process.cwd(), 'src', 'content')
-const blogDirectory = join(contentDirectory, 'blog')
 const lang = 'en'
+const contentDirectory = join(process.cwd(), 'src', 'content')
+const blogDirectory = join(contentDirectory, 'blog', lang)
 
 const blogFiles = readdirSync(blogDirectory)
 const batchSize = blogFiles.length
