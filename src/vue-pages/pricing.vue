@@ -97,6 +97,7 @@ const payg_units = computed(() =>
             </div>
             <a 
               href="https://cal.com/martindonadieu/capgo-enterprise-inquiry" 
+              target="_blank"
               class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[#0A0B2C] hover:bg-[#1A1B4C] rounded-full transition-colors duration-200"
             >
               Contact sales →
