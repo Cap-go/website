@@ -127,36 +127,36 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </div>
             <div class="relative space-y-5">
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/kick_logo.webp" alt="Kick" title="Kick" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/kick_logo.webp" alt="Kick" title="Kick" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/remnote_logo.svg" alt="remnote" title="remnote" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/remnote_logo.svg" alt="remnote" title="remnote" />
                 </div>
               </div>
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/revel_logo.svg" alt="hello revel" title="hello revel" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/revel_logo.svg" alt="hello revel" title="hello revel" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/suez_logo.webp" alt="suez moneau" title="suez moneau" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/suez_logo.webp" alt="suez moneau" title="suez moneau" />
                 </div>
               </div>
               <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/irec_logo.webp" alt="irec" title="irec" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/irec_logo.webp" alt="irec" title="irec" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/vella_logo.svg" alt="vella" title="vella" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/vella_logo.svg" alt="vella" title="vella" />
                 </div>
-                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white border-2 border-black rounded-lg shadow-lg w-44 md:w-full">
-                  <img loading="lazy" height="64" width="189" class="w-auto h-8" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
+                <div class="flex items-center justify-center px-6 py-4 mx-auto overflow-hidden bg-white rounded-lg shadow-lg w-44 md:w-full">
+                  <img loading="lazy" class="w-auto h-auto max-h-20" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
                 </div>
               </div>
             </div>
