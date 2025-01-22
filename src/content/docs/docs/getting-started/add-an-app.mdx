@@ -1,0 +1,48 @@
+---
+title: "Add an App"
+description: "Add an app to your Capgo account, and install the plugin in your app"
+sidebar:
+  order: 2
+prev: false
+next: false
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Introduction to Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Live updates are 3 step away
+
+
+### Guided setup
+
+<Steps>
+
+1. Create your account at [https://capgo.app/register](https://capgo.app/register).
+![signup screenshot](/signup.webp "signup screenshot")
+
+2. Use the Init commands to get started <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> You will be presented with a series of questions. Provide the necessary answers to complete the automated setup.<Aside type="tip">By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is [here to help](mailto:support@capgo.app). Happy onboarding!</Aside>
+
+3. Deploy a live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
+
+</Steps>
+
+### Manual setup
+
+In case the init command doesn't work for you, you can manually add an app.
+
+<Steps>
+
+1. Connect the CLI to your account: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Add the app to your account with this command: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Install the plugin in your app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Call the init method as early as possible in your app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+5. Deploy a live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
+
+</Steps>

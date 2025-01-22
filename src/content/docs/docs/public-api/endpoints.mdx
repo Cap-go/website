@@ -22,7 +22,7 @@ This endpoint allows you to manage organizations and their members.
 
 ### GET
 
-`https://api.capgo.app/organizations`
+`https://api.capgo.app/organization`
 
 Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
 
@@ -46,7 +46,7 @@ return Organization[] | Organization
 
 ### POST
 
-`https://api.capgo.app/organizations`
+`https://api.capgo.app/organization`
 
 Update an existing organization. Requires admin role.
 
@@ -69,7 +69,7 @@ return { status: 'Organization updated', data: Organization }
 
 ### PUT
 
-`https://api.capgo.app/organizations`
+`https://api.capgo.app/organization`
 
 Create a new organization.
 
@@ -152,7 +152,7 @@ On failure, returns:
 return { error: string, supabaseError?: any }
 ```
 
-## Members (/organizations/members)
+## Members (/organization/members)
 
 ### GET 
 
@@ -173,7 +173,7 @@ return Member[]
 
 ### DELETE
 
-`https://api.capgo.app/organizations/members`
+`https://api.capgo.app/organization/members`
 
 Delete an organization member.
 

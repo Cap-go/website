@@ -78,7 +78,7 @@ const domain = config.public.baseUrl
     <ul>
       <li>
         {{ m.dpa_contact_2() }}
-        <a :href="`${domain}/#support`" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
+        <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{{ domain }}/#support</a>
       </li>
     </ul>
   </div>

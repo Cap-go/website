@@ -6,12 +6,11 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import { computed } from 'vue'
 
 const props = defineProps<{
-  link: string
-  title: string
-  image: string
-  description: string
-  date: string
   tag: string
+  link: string
+  date: string
+  title: string
+  image?: string
   locale: Locales
 }>()
 

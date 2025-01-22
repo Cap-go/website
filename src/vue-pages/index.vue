@@ -3,32 +3,18 @@ import CIExpert from '@/components/CIExpert.vue'
 import Orgs from '@/components/Orgs.vue'
 import Testimonials from '@/components/Testimonials.vue'
 import { useRuntimeConfig } from '@/config/app'
-import { chatLoader } from '@/services/bento'
 import { type Locales } from '@/services/locale'
 import { shortNumber } from '@/services/misc'
-import { posthogLoader } from '@/services/posthog'
+import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
-import { onMounted, reactive, ref } from 'vue'
-import * as m from "../paraglide/messages.js"
+import { reactive } from 'vue'
+
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 const props = defineProps<{ locale: Locales }>()
 
-const chatLoaded = ref(false)
-const handleScroll = () => {
-  if (!chatLoaded.value) {
-    chatLoaded.value = true
-    chatLoader()
-    window.removeEventListener('scroll', handleScroll)
-  }
-}
-
-onMounted(() => {
-  posthogLoader()
-  window.addEventListener('scroll', handleScroll)
-})
 
 const stats = reactive({
   stars: shortNumber(499),
@@ -212,21 +198,21 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-3 lg:mt-24">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}⬆</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.updates_delivered() }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.all_around_the_globe() }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}❤️</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.apps() }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.using_us_in_production() }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}⭐️</span>
+              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}★</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.stars_in_github() }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.open_source() }}</p>

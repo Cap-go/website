@@ -1,0 +1,36 @@
+---
+title: key
+sidebar_label: key
+sidebar:
+  order: 7
+---
+
+The `key` command lets you manage your app signing keys.
+
+### save
+
+`npx @capgo/cli key save`
+
+Saves a base64-encoded encryption key to the Capacitor config (useful for CI).
+
+Options:
+
+- `-f, --force`: Force generation of a new key
+- `--key`: Path to the key file to save in the Capacitor config
+- `--key-data`: Key data to save directly in the Capacitor config
+
+### create
+
+`npx @capgo/cli key create`
+
+Creates a new encryption key.
+
+Options:
+
+- `-f, --force`: Force generation of a new key
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+Deletes the old encryption key. 

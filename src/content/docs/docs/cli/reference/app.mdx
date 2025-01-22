@@ -1,0 +1,83 @@
+---
+title: app
+sidebar_label: app
+sidebar:
+  order: 4
+---
+
+The `app` command lets you manage your Capgo apps.
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Adds a new app to your Capgo account.
+
+`[appId]` is your app ID in the format `com.example.app`. See the [Capacitor docs](https://capacitorjs.com/docs/cli/commands/init/) for more info.
+
+> 💡 All options will be guessed from your `capacitor.config.json` if not provided.
+
+Options:
+
+- `--icon [path]`: Path to a custom icon to display in the Capgo web app
+- `--name [name]`: Custom name to display in the app list
+- `--apikey [key]`: API key to link to your account
+- `--retention [days]`: Retention period for app bundles in days (default: 0 = infinite)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Updates an existing app in your Capgo account.
+
+Options:
+
+- `--icon [path]`: Path to a custom icon to display in the Capgo web app
+- `--name [name]`: Custom name to display in the app list
+- `--retention [days]`: Retention period for app bundles in days (default: 0 = infinite)
+- `--apikey [key]`: API key to link to your account
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Lists all apps in your Capgo account.
+
+Options:
+
+- `--apikey [key]`: API key to link to your account
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Deletes an app from your Capgo account.
+
+Options:
+
+- `--apikey [key]`: API key to link to your account
+- `--bundle`: Delete only a specific bundle version
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+Displays debug information for an app.
+
+Options:
+
+- `--apikey [key]`: API key to link to your account
+- `--device`: Debug a specific device
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+Edits the Capacitor config for an app.
+
+`[path]` is the path to the setting you want to change (e.g., `appId` or `plugins.CapacitorUpdater.autoUpdate`).
+
+You must provide either `--string` or `--bool`:
+
+- `--string <value>`: Set the setting to a string value
+- `--bool <true|false>`: Set the setting to a boolean value 

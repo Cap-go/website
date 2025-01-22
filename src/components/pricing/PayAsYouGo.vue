@@ -52,7 +52,7 @@ const props = defineProps({
                     <p class="text-lg font-bold text-gray-900 font-pj">{{ m.monthly_active_users() }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.mau.toLocaleString() }}</span>
-                      {{ m.users_included() }}, {{ m.then() }} ${{ props.payg?.mau_unit }}/{{ m.user() }}
+                      {{ m.users_included() }}, {{ m.tr_then() }} ${{ props.payg?.mau_unit }}/{{ m.user() }}
                     </p>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ const props = defineProps({
                     <p class="text-lg font-bold text-gray-900 font-pj">{{ m.bandwidth() }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(props.payg?.bandwidth) }}</span>
-                      {{ m.TB_included() }}, {{ m.then() }} ${{ props.payg?.bandwidth_unit }}
+                      {{ m.TB_included() }}, {{ m.tr_then() }} ${{ props.payg?.bandwidth_unit }}
                       {{ m.per_GB() }}
                     </p>
                   </div>
@@ -91,7 +91,7 @@ const props = defineProps({
                     <p class="text-lg font-bold text-gray-900 font-pj">{{ m.cloud_storage() }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.storage.toLocaleString() }}</span>
-                      {{ m.GB_included() }}, {{ m.then() }} ${{ props.payg?.storage_unit }}
+                      {{ m.GB_included() }}, {{ m.tr_then() }} ${{ props.payg?.storage_unit }}
                       {{ m.per_GB() }}
                     </p>
                   </div>

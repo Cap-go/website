@@ -2,7 +2,6 @@
 import type { Locales } from '@/services/locale'
 import * as m from "../../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { openMessenger } from '@/services/bento'
 
 const props = defineProps<{ locale: Locales }>()
 </script>
@@ -72,9 +71,9 @@ const props = defineProps<{ locale: Locales }>()
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
             {{ m.didnt_find_answer() }}
-            <button class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" @click="openMessenger()">
+            <a class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" href="mailto:support@capgo.app">
               {{ m.contact_support() }}
-            </button>
+            </a>
           </p>
         </div>
       </div>

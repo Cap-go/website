@@ -376,19 +376,17 @@ Ever wonder where the values of the `ENV` are coming from? Well, it’s not a se
 
 1\. `APP_STORE_CONNECT_TEAM_ID` - the ID of your App Store Connect team in you’re in multiple teams.
 
-2\. `PROVISIONING_PROFILE_SPECIFIER` - `match AppStore <YOUR_APP_BUNDLE_IDENTIFIER>`, eg. `match AppStore com.domain.blabla.demo`.
+2\. `BUILD_CERTIFICATE_BASE64` - Base64 encoded certificate.
 
-3\. `BUILD_CERTIFICATE_BASE64` - Base64 encoded certificate.
+3\. `BUILD_PROVISION_PROFILE_BASE64` - Base64 encoded provisioning profile.
 
-4\. `BUILD_PROVISION_PROFILE_BASE64` - Base64 encoded provisioning profile.
+4\. `BUNDLE_IDENTIFIER` - your app’s bundle identifier.
 
-5\. `BUNDLE_IDENTIFIER` - your app’s bundle identifier.
+5\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
 
-6\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
+6\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
 
-7\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
-
-8\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
+7\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
 
 ## **4\. Configure GitHub workflow file**
 

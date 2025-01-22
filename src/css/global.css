@@ -17,24 +17,7 @@ html.dark {
   background: #121212;
 }
 
-.btn {
-  @apply inline-block cursor-pointer rounded bg-teal-600 px-4 py-1 text-white hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
-}
-
-.icon-btn {
-  @apply inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:text-teal-600 hover:opacity-100;
-  font-size: 0.9em;
-}
-
-.calc-input {
-  @apply w-full break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold lg:mt-3;
-}
 
 .calc-label {
   @apply mt-0 mt-5 text-sm font-bold uppercase tracking-widest;
-}
-
-.content-panel ul,
-.content-panel ol {
-  list-style: unset !important;
 }

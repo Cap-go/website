@@ -1,0 +1,153 @@
+---
+title: Update Behavior
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+When you release an update to your Capgo app, you probably want your users to receive that update as soon as possible. But you also don't want to disrupt their experience by forcing them to wait for a download or restart the app in the middle of a session.
+
+Capgo's update behavior is designed to strike a balance between delivering updates quickly and minimizing disruption to your users.
+
+## Default Update Flow
+
+By default, here's how Capgo handles app updates:
+
+<Steps>
+
+1. On app launch, the Capgo plugin checks to see if a new update is available.
+
+2. If an update is found, it's downloaded in the background while the user continues using the current version of the app.
+
+3. Once the download completes, Capgo waits for the user to either background the app or kill it entirely.
+
+4. When the user next launches the app, they'll be running the updated version.
+
+</Steps>
+
+This flow ensures that users are always running the latest version of your app, without ever being interrupted by update prompts or forced to wait for downloads.
+
+<Aside type="tip">
+Capgo also checks for updates when the app resumes from the background, so users will receive updates even if they don't fully quit the app.
+</Aside>
+
+## Why This Approach?
+
+Applying updates on a background or kill event has a few key benefits for user experience:
+
+- Users aren't interrupted by update prompts or forced to wait for downloads in the middle of a session.
+
+- Updates are applied seamlessly in between sessions, so the experience of launching the app is always fresh.
+
+- You can deliver updates frequently without worrying about disrupting active users.
+
+The main downside is that if a user backgrounds and quickly resumes your app, they may lose any unsaved state since the update was applied in between those actions. 
+
+To mitigate this, we recommend:
+
+- Saving state frequently and restoring it gracefully when the app resumes.
+
+- Avoiding very frequent updates that modify large parts of the app state.
+
+- Considering customizing the update behavior for sensitive flows (see below).
+
+## Customizing When Updates Are Applied
+
+In some cases, you may want more control over exactly when an update is applied. For example, you might want to ensure a user completes an in-progress flow before updating, or coordinate an app update with a server-side change.
+
+Capgo provides a `setDelay` function that lets you specify conditions that must be met before an update is installed:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+This example would delay installing an update until after June 1, 2023 AND the app has been backgrounded for at least 60 seconds.
+
+The available delay conditions are:
+
+- `date`: Wait until after a specific date/time to apply the update.
+- `background`: Wait a minimum duration after the app is backgrounded to apply the update.
+- `nativeVersion`: Wait for a native binary with a minimum version to be installed before applying the update.
+- `kill`: Wait until the next app kill event to apply the update.
+
+You can mix and match these conditions to precisely control when an update is installed.
+
+<Aside type="danger">
+Note that the `kill` condition currently triggers the update after the first kill event, not the next background event like the other conditions. This inconsistency will be fixed in a future release.
+</Aside>
+
+## Applying Updates Immediately
+
+For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `directUpdate` configuration option.
+
+`directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: true,
+    },
+  },
+  keepUrlPathAfterReload: true,
+};
+
+export default config;
+```
+
+With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes, even if the user is actively using the app.
+
+Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
+
+When using `directUpdate`, you need to listen for the `appReady` event and hide your app's splash screen in response:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Hide splash screen
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+The `appReady` event fires once the app has finished initializing and applying any pending updates. This is the point at which it's safe to show your app's UI, as it ensures the user will see the latest version.
+
+In addition to handling the `appReady` event, we recommend setting the `keepUrlPathAfterReload` configuration option to `true` when using `directUpdate`. This preserves the current URL path when the app is reloaded due to an update, helping maintain the user's location in the app and reducing disorientation.
+
+If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when using `directUpdate`, the user may briefly see a stale version of the app, be taken back to the initial route, or see a flicker as the update is applied.
+
+Using `directUpdate` can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
+
+- The user may see a brief flicker or loading state as the update is applied if you don't properly handle the `appReady` event.
+- If the update modifies the app state or UI, the user may see a disruptive change in the middle of a session.
+- The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
+- You'll need to carefully handle saving and restoring state to ensure a smooth transition.
+
+If you do enable `directUpdate`, we recommend:
+
+- Handling the `appReady` event to control when your app's UI is shown.
+- Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.
+- Saving and restoring the app state as needed to avoid losing user progress.
+- Thoroughly testing your app's update behavior to ensure there are no jarring transitions, lost state, or disorienting location changes.
+
+In most cases, the default update behavior provides the best balance of delivering updates quickly and minimizing disruption. But for apps with specific needs, Capgo provides the flexibility to customize when and how updates are applied.

@@ -301,7 +301,7 @@ const domain = config.public.baseUrl
     <ul>
       <li>
         {{ m.tos_contact_us_website() }}
-        <a :href="`${domain}#support`" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
+        <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{{ domain }}#support</a>
       </li>
     </ul>
   </div>

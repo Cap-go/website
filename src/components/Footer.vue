@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
-import { openMessenger } from '@/services/bento'
 import { locales, type Locales } from '@/services/locale'
 import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -45,7 +44,7 @@ onMounted(() => {
 onUnmounted(() => window.removeEventListener('hashchange', decidePath))
 
 interface NavigationItem {
-  name: (() => string)
+  name: string
   href: string
   target?: string
   rel?: string
@@ -55,80 +54,74 @@ interface NavigationItem {
 
 const navigation: Record<string, NavigationItem[]> = {
   solutions: [
-    { name: () => m.register(), href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
-    { name: () => 'App mobile', href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
+    { name: m.register(), href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
+    { name: m.app_mobile(), href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
     {
-      name: () => m.documentation(),
+      name: m.documentation(),
       href: getRelativeLocaleUrl(props.locale, 'docs'),
     },
-    { name: () => m.plugins(), href: getRelativeLocaleUrl(props.locale, 'plugins') },
+    { name: m.plugins(), href: getRelativeLocaleUrl(props.locale, 'plugins') },
     {
-      name: () => m.awesome_capacitor(),
+      name: m.awesome_capacitor(),
       href: 'https://github.com/riderx/awesome-capacitor/',
       target: '_blank',
     },
-    { name: () => m.top_app_by_framework(), href: getRelativeLocaleUrl(props.locale, 'top_app') },
+    { name: m.top_app_by_framework(), href: getRelativeLocaleUrl(props.locale, 'top_app') },
   ],
   support: [
     {
-      name: () => m.community(),
+      name: m.community(),
       href: 'https://discord.com/invite/VnYRvBfgA6',
       target: '_blank',
     },
     {
-      name: () => m.pricing(),
+      name: m.pricing(),
       href: getRelativeLocaleUrl(props.locale, 'pricing'),
     },
-    { name: () => m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
+    { name: m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
-      name: () => (systemStatus.value.indicator === 'up' ? 'All systems normal' : 'Systems are disturbed'),
+      name: systemStatus.value.indicator === 'up' ? m.all_systems_normal() : m.systems_are_disturbed(),
       href: 'https://status.capgo.app/',
       target: '_blank',
       icon: () => (systemStatus.value.indicator === 'up' ? '🟢' : '🟠'),
     },
-    { name: () => m.status(), href: 'https://status.capgo.app/', target: '_blank' },
+    { name: m.status(), href: 'https://status.capgo.app/', target: '_blank' },
     {
-      name: () => m.chat(),
-      href: '#support',
-      execute: openMessenger,
+      name: m.chat(),
+      href: 'mailto:support@capgo.app',
       rel: 'nofollow',
     },
     {
-      name: () => m.sponsor(),
+      name: m.sponsor(),
       href: getRelativeLocaleUrl(props.locale, 'sponsor'),
     },
   ],
   company: [
-    { name: () => m.about(), href: getRelativeLocaleUrl(props.locale, 'about') },
-    { name: () => m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
-    { name: () => m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
-    { name: () => m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
-    { name: () => m.security(), href: getRelativeLocaleUrl(props.locale, 'trust') },
-    { name: () => m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
-    {
-      target: '_blank',
-      name: () => m.affiliate(),
-      href: 'https://affiliates.reflio.com/invite/capgo/',
-    },
+    { name: m.about(), href: getRelativeLocaleUrl(props.locale, 'about') },
+    { name: m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
+    { name: m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
+    { name: m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
+    { name: m.security(), href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
   ],
   legal: [
-    { name: () => m.privacy(), href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
-    { name: () => m.support_policy(), href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
-    { name: () => m.sla(), href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
-    { name: () => m.aup(), href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
-    { name: () => m.terms(), href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
-    { name: () => m.security_txt(), href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
+    { name: m.privacy(), href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
+    { name: m.support_policy(), href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
+    { name: m.sla(), href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
+    { name: m.aup(), href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
+    { name: m.terms(), href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
+    { name: m.security_txt(), href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
     {
-      name: () => m.privacy(),
+      name: m.privacy(),
       href: 'https://www.privacyboard.co/company/capgo/',
       target: '_blank',
     },
-    { name: () => m.dp(), href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
-    { name: () => m.dpa(), href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
+    { name: m.dp(), href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
+    { name: m.dpa(), href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
   ],
   hero: [
     {
-      name: () => m.carbon_removal(),
+      name: m.carbon_removal(),
       href: 'https://climate.stripe.com/vxDf62',
       icon: defineComponent({
         render: () =>
@@ -151,7 +144,7 @@ const navigation: Record<string, NavigationItem[]> = {
       }),
     },
     {
-      name: () => m.open_source(),
+      name: m.open_source(),
       href: 'https://github.com/Cap-go/',
       icon: `
 
@@ -163,7 +156,7 @@ const navigation: Record<string, NavigationItem[]> = {
       `,
     },
     {
-      name: () => m.built_with_supabase(),
+      name: m.built_with_supabase(),
       href: 'https://supabase.com/',
       icon: defineComponent({
         render: () =>
@@ -186,7 +179,7 @@ const navigation: Record<string, NavigationItem[]> = {
       }),
     },
     {
-      name: () => m.build_in_public_on_twitter(),
+      name: m.build_in_public_on_twitter(),
       href: 'https://x.com/martindonadieu/',
       icon: defineComponent({
         render: () =>
@@ -290,7 +283,7 @@ const navigation: Record<string, NavigationItem[]> = {
             <div class="mt-12 md:mt-0">
               <h3 class="text-base font-medium text-gray-900">{{ m.support() }}</h3>
               <ul role="list" class="mt-4 space-y-4">
-                <li v-for="item in navigation.support" :key="typeof item.name === 'function' ? item.name() : item.name">
+                <li v-for="item in navigation.support" :key="item.name">
                   <a
                     :rel="item.rel"
                     :href="item.href"
@@ -299,7 +292,7 @@ const navigation: Record<string, NavigationItem[]> = {
                     @click="item.execute && item.execute()"
                   >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
-                    {{ typeof item.name === 'function' ? item.name() : item.name }}
+                    {{ item.name }}
                   </a>
                 </li>
               </ul>

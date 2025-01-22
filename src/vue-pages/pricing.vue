@@ -18,6 +18,7 @@ await fetch(`${config.public.baseApiUrl}/private/plans`)
   .then((r) => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
   .then((res) => plansAll.value.push(...res))
 
+  // https://cal.com/martindonadieu/capgo-enterprise-inquiry
 const plans = computed(() => (plansAll.value.length ? plansAll.value.filter((p) => p.name !== 'Pay as you go' && p.name !== 'Free') : []))
 const payg = computed(() => (plansAll.value.length ? plansAll.value.filter((p) => p.name === 'Pay as you go')[0] : undefined))
 
@@ -48,7 +49,7 @@ const payg_units = computed(() =>
 </script>
 
 <template>
-  <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
+  <section class="py-12 bg-gray-50 sm:py-16">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
         <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.plans_that_scale_with_your_business() }}</h1>
@@ -60,7 +61,7 @@ const payg_units = computed(() =>
         </button>
       </p>
       <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :locale="props.locale" />
-      <div class="flex items-center justify-center pb-12 mt-8 space-x-6 sm:pb-16 lg:pb-20 xl:pb-24">
+      <div class="flex items-center justify-center pb-12 mt-8 space-x-6 sm:pb-16">
         <div class="flex items-center" @click="yearly = false">
           <input
             id="monthly"
@@ -83,6 +84,26 @@ const payg_units = computed(() =>
           <span class="ml-1 text-sm font-medium text-blue-600"> ({{ m.save() }} 20%) </span>
         </div>
       </div>
+      <section class="px-4 pb-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
+          <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+            <div class="max-w-2xl space-y-4">
+              <h2 class="text-4xl font-bold text-gray-900">
+                Enterprise
+              </h2>
+              <p class="text-xl leading-relaxed text-gray-600">
+                For enterprise teams building mission-critical apps looking for a specialized mobile DevOps package, paired with expert support and advisory services.
+              </p>
+            </div>
+            <a 
+              href="/contact" 
+              class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[#0A0B2C] hover:bg-[#1A1B4C] rounded-full transition-colors duration-200"
+            >
+              Contact sales →
+            </a>
+          </div>
+        </div>
+      </section>
       <PayAsYouGo :locale="props.locale" v-if="payg" :yearly="yearly" :payg="payg" />
       <Calculator
         :yearly="yearly"
