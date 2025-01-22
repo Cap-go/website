@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "types": "npx --yes supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
-    "generate:locale:translations": "tsx scripts/generate_locale_translations.tsx",
+    "generate:locale:translations": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
     "generate:blog:translations": "tsx scripts/generate_blog_translations.tsx",
     "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
