@@ -1,0 +1,81 @@
+---
+title: Kanäle
+description: >-
+  Kanäle sind eine Möglichkeit, die Updates Ihrer App zu verwalten. Sie können
+  mehrere Kanäle haben und jeder Kanal kann mehrere Versionen haben. Dies
+  ermöglicht es Ihnen, mehrere Versionen Ihrer App gleichzeitig in der
+  Produktion zu haben.
+sidebar:
+  order: 6
+locale: de
+---
+
+## Kanäle verwalten
+
+Zuerst werfen wir einen Blick auf die Kanäle-Seite. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Reiter "Kanäle" klicken](/docs/webapp/main-app-page).
+
+<figure><img src="/channelswebp" alt="Kanalübersicht" /><figcaption></figcaption></figure>
+
+## Einen Kanal erstellen
+
+Wie Sie sehen können, gibt es in der unteren rechten Ecke einen Plus-Button (`1` im Bild). Das Klicken darauf öffnet ein Modal, in dem Sie einen neuen Kanal erstellen können.
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modalwebp" alt="neuer Kanal" /><figcaption></figcaption></figure>
+
+Nachdem Sie dann auf `Hinzufügen` geklickt haben, sollte ein neuer Kanal in der Liste erscheinen.
+<figure><img src="/post-channel-createwebp" alt="nach Kanal erstellen" /><figcaption></figcaption></figure>
+
+## Was bedeutet falsch konfiguriert?
+Manchmal ist die Konfiguration eines Kanals ungültig. In diesem Fall erhalten Sie eine große Warnung und die Spalte `Falsch konfiguriert` zeigt `Ja` für einen oder mehrere der Kanäle an.
+Sie können mehr darüber [hier](/docs/cli/commands/#disable-updates-strategy) erfahren.
+
+## Einen Kanal löschen
+
+Das Löschen eines Kanals ist einfach. Klicken Sie einfach auf das Papierkorbsymbol und bestätigen Sie die Löschung (`2` im Bild).
+
+## Einen Kanal verwalten
+
+Das Klicken auf den Kanalnamen öffnet ein Modal, in dem Sie den Kanal verwalten können (`3` im Bild).
+Diese Seite sollte etwa so aussehen:
+
+<figure><img src="/manage_channel_mainwebp" alt="Kanal verwalten" /><figcaption></figcaption></figure>
+
+Lassen Sie uns die verschiedenen Abschnitte durchgehen.
+
+Zuerst die `Bundle-Nummer` (`1` im Bild). Dies ist die aktuelle Version für diesen Kanal. Wenn ein Update angefordert wird, wird dieser Kanal stets versuchen, mit dieser Version zu antworten* [^1].
+Ein Klick darauf sollte Sie zur [Bundle](/docs/webapp/bundles/) Seite führen.
+
+Zweitens die Seite `Geteilt mit` (`2` im Bild). Ich empfehle, dies niemals zu verwenden. Ein neues und besseres System befindet sich in Arbeit.
+
+Jetzt die erzwungenen Geräte (`3` im Bild). Dies ist eine Liste von Geräten, die immer Updates von diesem Kanal erhalten. Dies ist nützlich für Testzwecke. Sie können ein Gerät von der [Geräte](/docs/webapp/devices/) Seite zu einem Kanal hinzufügen.
+
+Zuletzt die Einstellungen (`4` im Bild). Hier können Sie verwalten, wie die Kanäle funktionieren.
+Nachdem Sie darauf geklickt haben, sollten Sie etwas wie folgt sehen:
+
+<figure><img src="/channel_settingswebp" alt="Einstellungen des Kanals" /><figcaption></figcaption></figure>
+
+Die Liste der Einstellungen ist lang, aber ich werde mein Bestes tun, um sie alle zu erklären.
+
+---
+Zuerst der `Standardkanal` **DAS IST WAHRSCHENLICH DER WICHTIGSTE**\
+Wenn ein Kanal als Standard gekennzeichnet ist, wird er als Standardkanal für alle neuen Geräte verwendet.\
+Anders gesagt: Wenn Sie einen neuen Benutzer haben, wird Capgo versuchen, ihm die neueste Version dieses Standardkanals bereitzustellen.
+Es kann jeweils nur 1 Kanal als Standard festgelegt werden. Wenn Sie versuchen, diese Regel zu brechen, werden Sie aufgefordert, Ihre Aktion zu bestätigen.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-defaultwebp" alt="Änderung bestätigen" /><figcaption></figcaption></figure>
+
+Nachdem Sie bestätigt haben, wird der alte Standardkanal nicht mehr als Standard ausgezeichnet und der neue wird als Standard markiert.
+
+---
+Zweitens die `IOS`-Einstellung. Dies ist relativ einfach. Wenn dies falsch ist, erhalten IOS-Geräte keine Updates von diesem Kanal.
+
+Drittens die `Android`-Einstellung. Dies ist ähnlich wie `IOS`. Wenn dies falsch ist, erhalten Android-Geräte keine Updates von diesem Kanal.
+
+Viertens die Einstellung `Automatisches Downgrade unter nativer Umgebung deaktivieren`. Wenn dies wahr ist, wird es unmöglich sein, von einer nativen Version herunterzustufen. Das bedeutet, wenn Sie eine Version `120` im App Store oder Play Store hochgeladen haben und versuchen, die Kanalversion auf `110` festzulegen, wird das Update (Downgrade) fehlschlagen.
+
+Fünftens die Einstellung `Automatische Updates deaktivieren`. Diese Einstellung ist recht komplex, und Sie können mehr darüber [hier](/docs/cli/commands/#disable-updates-strategy) erfahren.
+
+Was die `Erlauben von Entwicklungs-Builds` betrifft: Wenn dies wahr ist, dürfen Entwicklungs-Builds Updates von diesem Kanal herunterladen. Andernfalls wird jede Update-Anfrage, die `prod` auf falsch setzt, abgelehnt. Dies ist hauptsächlich für Testzwecke nützlich.
+
+Siebtens die Einstellung `Emulatoren erlauben`. Wenn dies falsch ist, wird Capgo jede Update-Anfrage, die von einem Emulator kommt, ablehnen. Dies ist hauptsächlich für Testzwecke nützlich.
+
+Achtens die Einstellung `Geräte zur Selbstzuordnung erlauben`. Wenn dies wahr ist, wird die [setChannel](docs/plugin/api/#setchannel) Methode verfügbar sein. Wenn dies auf falsch gesetzt ist und Sie versuchen, die [setChannel](docs/plugin/api/#setchannel) Methode mit diesem Kanal aufzurufen, wird der Aufruf fehlschlagen.

@@ -1,0 +1,165 @@
+---
+title: bündeln
+sidebar_label: bundle
+sidebar:
+  order: 5
+locale: de
+---
+
+Der `bundle`-Befehl erlaubt es Ihnen, Ihre App-Bundles zu verwalten.
+
+### hochladen
+
+`npx @capgo/cli bundle upload [appId]`
+
+Lädt ein neues Bundle für eine App hoch.
+
+Optionen:
+
+- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-p, --path <path>`: Pfad zum Ordner zum Hochladen (Standard ist das `webDir` in `capacitorconfig`)
+- `-c, --channel <channel>`: Kanal, um das Bundle zu verknüpfen
+- `-e, --external <url>`: Link zu einer externen URL anstelle des Hochladens in die Capgo Cloud
+- `--iv-session-key <key>`: Setzen Sie den IV und den Sitzungsschlüssel für eine externe Bundle-URL
+- `--s3-region <region>`: Region für Ihren S3-Bucket
+- `--s3-apikey <apikey>`: API-Schlüssel für Ihren S3-Endpunkt
+- `--s3-apisecret <apisecret>`: API-Geheimnis für Ihren S3-Endpunkt
+- `--s3-endpoint <s3Endpoint>`: URL des S3-Endpunkts
+- `--s3-bucket-name <bucketName>`: Name Ihres S3-Buckets
+- `--s3-port <port>`: Port für Ihren S3-Endpunkt
+- `--no-s3-ssl`: Deaktivieren Sie SSL für S3-Uploads
+- `--key <key>`: Benutzerdefinierter Pfad für den öffentlichen Signaturschlüssel (v1-System)
+- `--key-data <keyData>`: Daten des öffentlichen Signaturschlüssels (v1-System)
+- `--key-v2 <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel (v2-System)
+- `--key-data-v2 <keyDataV2>`: Daten des privaten Signaturschlüssels (v2-System)
+- `--bundle-url`: Drucken Sie die Bundle-URL auf stdout
+- `--no-key`: Ignorieren Sie den Signaturschlüssel und senden Sie ein nicht signiertes Update
+- `--no-code-check`: Überprüfen Sie nicht `notifyAppReady()` im Quellcode und `indexhtml` im Stammverzeichnis
+- `--display-iv-session`: Zeigen Sie den IV und den Sitzungsschlüssel an, die zum Verschlüsseln des Updates verwendet wurden
+- `-b, --bundle <bundle>`: Versionsnummer des Bundles, das hochgeladen werden soll
+- `--min-update-version <minUpdateVersion>`: Minimale App-Version, die erforderlich ist, um dieses Update anzuwenden (nur verwendet, wenn das automatische Update über die Metadaten deaktiviert ist)
+- `--auto-min-update-version`: Automatisch die minimale Update-Version basierend auf den nativen Paketversionen festlegen
+- `--ignore-metadata-check`: Ignorieren Sie die Metadatenüberprüfung (node_modules) beim Hochladen
+- `--ignore-checksum-check`: Ignorieren Sie die Prüfzifferprüfung beim Hochladen
+- `--timeout <timeout>`: Timeout für den Upload-Prozess in Sekunden
+- `--multipart`: Verwenden Sie das Multipart-Protokoll, um Daten in S3 hochzuladen (veraltet, verwenden Sie stattdessen `--tus`)
+- `--tus`: Laden Sie das Bundle mit dem Tus-Protokoll hoch
+- `--tus-chunk-size <tusChunkSize>`: Chunk-Größe für den Tus-Upload
+- `--partial`: Laden Sie nur geänderte Dateien in die Capgo Cloud hoch
+- `--partial-only`: Laden Sie nur partielle Dateien in die Capgo Cloud hoch, überspringen Sie die gezippte Datei (nützlich für große Bundles)
+- `--encrypted-checksum <encryptedChecksum>`: Verschlüsselte Prüfziffer (Signatur) für ein externes Bundle
+- `--auto-set-bundle`: Automatisch die Bundle-Version in `capacitorconfigjson` festlegen
+- `--dry-upload`: Führen Sie einen Trockentest des Upload-Prozesses durch, ohne tatsächlich Dateien hochzuladen (nützlich für Tests)
+- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `--node-modules <nodeModules>`: Komma-getrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
+- `--encrypt-partial`: Verschlüsseln Sie die partiellen Update-Dateien
+- `--delete-linked-bundle-on-upload`: Löschen Sie das aktuell verlinkte Bundle im Zielkanal vor dem Hochladen
+
+### Kompatibilität
+
+`npx @capgo/cli bundle compatibility [appId]`
+
+Überprüft die Kompatibilität eines Bundles mit einem bestimmten Kanal.
+
+Optionen:
+
+- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-c, --channel <channel>`: Kanal, um die Kompatibilität zu überprüfen
+- `--text`: Ergebnisse als Text anstelle von Emojis ausgeben
+- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `--node-modules <nodeModules>`: Komma-getrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
+
+### löschen
+
+`npx @capgo/cli bundle delete [bundleId] [appId]`
+
+Löscht ein Bundle aus einer App.
+
+Optionen:
+
+- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+
+### auflisten
+
+`npx @capgo/cli bundle list [appId]`
+
+Listet alle Bundles für eine App auf.
+
+Optionen:
+
+- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+
+### bereinigen
+
+`npx @capgo/cli bundle cleanup [appId]`
+
+Bereinigt alte Bundles für eine Hauptversion und behält die angegebene Anzahl der aktuellsten Bundles.
+
+Optionen:
+
+- `-b, --bundle <bundle>`: Hauptversionsnummer, die bereinigt werden soll
+- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-k, --keep <keep>`: Anzahl der zu behaltenden Bundles (Standard: 4)
+- `-f, --force`: Zwingen Sie die Entfernung ohne Bestätigung
+
+### entschlüsseln
+
+`npx @capgo/cli bundle decrypt [zipPath] [sessionKey]`
+
+Entschlüsselt ein signiertes ZIP-Bundle.
+
+Optionen:
+
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+
+### verschlüsseln
+
+`npx @capgo/cli bundle encrypt [zipPath]`
+
+Verschlüsselt ein ZIP-Bundle.
+
+Optionen:
+
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+
+### verschlüsselnV2
+
+`npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
+
+Verschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode.
+
+Optionen:
+
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+- `-j, --json`: Ergebnisse als JSON ausgeben
+
+### entschlüsselnV2
+
+`npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
+
+Entschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode.
+
+Optionen:
+
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+- `--checksum <checksum>`: Prüfziffer des Bundles zur Überprüfung der Integrität
+
+### zip
+
+`npx @capgo/cli bundle zip [appId]`
+
+Generiert eine ZIP-Datei für ein Bundle.
+
+Optionen:
+
+- `-p, --path <path>`: Pfad zum Ordner, der gezippt werden soll (Standard ist das `webDir` in `capacitorconfig`)
+- `-b, --bundle <bundle>`: Versionsnummer des Bundles, die im Dateinamen verwendet werden soll
+- `-n, --name <name>`: Benutzerdefinierter Dateiname für die ZIP-Datei
+- `-j, --json`: Ergebnisse als JSON ausgeben
+- `--no-code-check`: Überspringen Sie die Überprüfung von `notifyAppReady()` im Quellcode und `indexhtml` im Stammverzeichnis
+- `--key-v2`: Verwenden Sie die neue Verschlüsselungsmethode (v2)
+- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)

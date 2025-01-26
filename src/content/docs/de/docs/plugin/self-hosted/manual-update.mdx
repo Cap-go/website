@@ -1,0 +1,66 @@
+---
+title: Manuelle Aktualisierung
+description: Wie man das manuelle Update-Plugin im selbstgehosteten Modus verwendet
+sidebar:
+  order: 4
+locale: de
+---
+
+## Konfiguration
+
+Fügen Sie dies zu Ihrer ``capacitorconfigjson`` hinzu, um die automatische Aktualisierung zu deaktivieren
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Verwendung
+
+Sie können dieses Beispiel verwenden oder die Logik in Ihrer App neu erstellen
+
+:::caution
+Wir zwingen den Benutzer, die App mit einer statischen Version zu aktualisieren, die im Code deklariert ist. Dies wird nicht empfohlen, Sie sollten eine dynamische Version von Ihrem Server verwenden.
+:::
+
+:::danger
+Wir führen in diesem Beispiel keine Versionsüberprüfung, Entschlüsselung oder Prüfziffernvalidierung durch. Sie sollten das selbst erledigen.
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Führen Sie den Download während der aktiven App-Zeit des Benutzers durch, um fehlgeschlagene Downloads zu vermeiden
+       data = await CapacitorUpdater.download({
+       version: '004',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // für den Fall, dass das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
+       }
+     }
+ })
+```
+
+:::note
+Wenn das nach viel Arbeit aussieht, ziehen Sie in Betracht, [Capgo-Testversion](https://capgoapp/register/) auszuprobieren. Es kümmert sich um all dies für Sie.
+:::

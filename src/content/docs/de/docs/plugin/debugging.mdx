@@ -1,0 +1,141 @@
+---
+title: Fehlerbehebung
+description: Wie man seine App debuggt
+sidebar:
+  order: 6
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Verständnis von Cloud-Logs:
+
+### Vom Backend gesendet
+
+| code                          | Beschreibung                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | Der Benutzer befindet sich in einem Google-Rechenzentrum und das Update ist weniger als 4 Stunden alt. Dies geschieht, um zu verhindern, dass die Geräte von Google-Bots als Geräte in Ihrem Konto gezählt werden. |
+| **needPlanUpgrade** (früher **needUpgrade**) | Zeigt an, dass Sie das Limit Ihres Plans erreicht haben und das Gerät keine Updates erhält, bis Sie ein Upgrade durchführen oder bis zum nächsten Monat.                                  |
+| **noNew**                                        | Das Gerät hat die neueste verfügbare Version.                                                                                                                                |
+| **disablePlatformIos**                           | Das Gerät befindet sich auf der iOS-Plattform, ist aber in den Kanal-Einstellungen deaktiviert.                                                                                            |
+| **disablePlatformAndroid**                       | Das Gerät befindet sich auf der Android-Plattform, ist aber in den Kanal-Einstellungen deaktiviert.                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | Das Gerät hat die Version (`123`), und der Kanal hat ein Update (`122`) unter der Geräteversion, das gesendet werden soll, ist aber in den Kanal-Einstellungen deaktiviert.                   |
+| **disableDevBuild**                              | Das Gerät hat einen Dev-Build, ist aber in den Kanal-Einstellungen deaktiviert.                                                                                                   |
+| **disableEmulator**                              | Das Gerät ist ein Emulator, ist aber in den Kanal-Einstellungen deaktiviert.                                                                                                    |
+
+### Vom Gerät gesendet
+
+| code  | Beschreibung                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | Informationen zum Herunterladen der neuen Version wurden an das Gerät gesendet.                 |
+| **delete**            | Ein Bundle wurde auf dem Gerät gelöscht.                                        |
+| **set**               | Ein Bundle wurde auf dem Gerät festgelegt.                                              |
+| **set_fail**          | Das Bundle konnte nicht festgelegt werden.                                                         |
+| **reset**             | Das Gerät hat auf das `builtin`-Bundle zurückgesetzt.                                         |
+| **download_XX**       | Ein neues Bundle wurde heruntergeladen - Fortschritt wird mit XX% angezeigt (Inkremente von 10%). |
+| **download_complete** | Das neue Bundle wurde vollständig heruntergeladen.                                          |
+| **download_fail**     | Das neue Bundle konnte nicht heruntergeladen werden.                                                |
+| **update_fail**       | Das neue Bundle wurde installiert, konnte aber `notifyAppReady` nicht aufrufen.            |
+| **checksum_fail**     | Das neue Bundle konnte die Prüfziffer nicht validieren.                                   |
+| **windows_path_fail** | Die Zip-Datei enthält Dateien mit ungültigen Windows-Pfaden.                        |
+| **canonical_path_fail** | Der Pfad der Dateien ist nicht kanonisch.                                              |
+| **directory_path_fail** | Es gibt einen Fehler im Pfad der Zip-Dateien.                                         |
+| **unzip_fail**          | Das Entpacken ist fehlgeschlagen.                                                                   |
+| **low_mem_fail** | Der Download ist aufgrund von zu wenig Speicher im Gerät fehlgeschlagen.                                    |
+
+### Bundle-Status
+
+* `SUCCESS`: Bundle-Installation abgeschlossen
+* `ERROR`: Installation oder Download fehlgeschlagen
+* `PENDING`: Download abgeschlossen, Freigabe ausstehend
+* `DELETED`: Bundle gelöscht, weiterhin für Statistiken angezeigt
+* `DOWNLOADING`: Derzeit ein Bundle herunterladen
+
+## Verständnis der Geräteprotokolle:
+
+### Debug-Befehl:
+
+Es gibt einen Debug-Befehl für Capgo-Cloud-Benutzer
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+Dies ermöglicht Ihnen, alle Ereignisse in der App zu überprüfen und eine Lösung zu finden, wenn keine Updates erfolgen.
+
+### IOS
+
+Um Ihre Protokolle auf Xcode zu finden
+
+<LinkCard
+    title="Gerätelogg in Xcode erhalten"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android:
+
+Um Ihre Protokolle im Android Studio zu finden
+
+<LinkCard
+    title="Logs mit Logcat anzeigen"
+    href="https://developerandroidcom/studio/debug/am-logcat"
+/>
+
+### Erklärungen zu Logs
+
+* `Failed to download from` **=>** dasselbe wie **download_fail**
+* `notifyAppReady was not called, roll back current bundle` => dasselbe wie **update_fail**
+
+## Finden des heruntergeladenen Bundles auf Ihrem Gerät
+
+### iOS
+
+Um auf iOS zu debuggen, müssen Sie die App auf Ihrem Computer dumpen. Sie können dies wie folgt tun:
+
+Xcode hat eine integrierte Funktion zum Überprüfen des Dateisystems von entwicklerinstallierten Apps auf einem iOS-Gerät.
+
+Um dies zu erreichen:
+
+* Schließen Sie Ihr Gerät an Ihren Mac an und wählen Sie im Xcode-Menü Fenster > Geräte.
+* Wählen Sie Ihr Gerät im linken Bereich unter dem Abschnitt Geräte aus.
+* Dies zeigt eine Liste von entwicklerinstallierten Apps für dieses Gerät an.
+* Wählen Sie die App aus, die Sie überprüfen möchten, und wählen Sie dann das Zahnrad-Symbol unten auf dem Bildschirm aus.
+* Hier können Sie das aktuelle Dateisystem anzeigen, indem Sie "Container anzeigen" auswählen oder einen Snapshot davon herunterladen.
+
+Die Auswahl von "Container herunterladen" lädt einen Snapshot des Dateisystems als xcappdata-Datei herunter, die Sie durchblättern können.
+
+Klicken Sie mit der rechten Maustaste auf diese Datei und wählen Sie "Paketinhalt anzeigen", um den Ordner zu öffnen.
+
+Öffnen Sie den Ordner "App-Daten", und Sie sollten nun einige Ordner wie "Dokumente", "Bibliothek", "tmp" usw. sehen.
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243ewebp/)
+
+Dann finden Sie eine Version in 2 Ordnern:
+
+`library/NoCloud/ionic_built_snapshots` ist notwendig nach dem Neustart der App.
+
+und `documents/versions` für Hot Reload.
+
+### Android
+
+Um auf Android zu debuggen, müssen Sie auf das Gerät aus dem Android Studio zugreifen:
+
+* Klicken Sie auf Ansicht > Toolfenster > Geräte-Dateiexplorer oder klicken Sie auf die Schaltfläche Geräte-Dateiexplorer in der Werkzeugfensterleiste, um den Geräte-Dateiexplorer zu öffnen.
+* Wählen Sie ein Gerät aus der Dropdown-Liste aus.
+* Öffnen Sie den Pfad **data/data/APP\_NAME/**, wobei **APP\_NAME Ihre App-ID ist**.
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
+
+Dann finden Sie den Ordner `versions`, um alle Versionen zu sehen.
+
+:::tip[Wusstest du das?]
+Auf Android werden alle Versionen in einem Ordner gespeichert, im Gegensatz zu iOS, wo sie an zwei Orten dupliziert werden müssen.
+:::
+
+## Verständnis von iOS-Produktabsturzprotokollen
+
+<LinkCard
+    title="So überprüfen Sie die Absturzprotokolle Ihrer App"
+    href="https://developerapplecom/news/?id=nra79npr"
+/>

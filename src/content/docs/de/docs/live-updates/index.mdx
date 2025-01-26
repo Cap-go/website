@@ -1,0 +1,82 @@
+---
+title: Übersicht
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: de
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Verwenden Sie die Live-Updates-Funktion von Capgo, um die JavaScript-Bundles Ihrer App aus der Ferne und in Echtzeit zu aktualisieren. Pushen Sie JS-Updates direkt an Ihre Benutzer, ohne den Überprüfungsprozess des App-Stores durchlaufen zu müssen, um Bugs sofort zu beheben und neue Funktionen bereitzustellen.
+
+<Aside>
+
+Live-Updates sind auf Änderungen von JavaScript-Bundles beschränkt. Wenn Sie nativen Code aktualisieren müssen, z. B. einen Plugin hinzufügen oder entfernen oder die native Projektkonfiguration ändern, müssen Sie ein neues natives Binär-Build in die App-Stores einreichen.
+
+</Aside>
+
+## So funktionieren Live-Updates
+
+Das Live-Update-System von Capgo hat zwei wichtige Komponenten:
+
+1. Das Capgo SDK, das Sie in Ihrer App installieren. Das SDK prüft auf verfügbare Updates und lädt sie im Hintergrund herunter.
+
+2. Kanäle, die es Ihnen ermöglichen, Updates an spezifische Benutzergruppen zu richten. Sie können Kanäle verwenden, um verschiedene Release-Tracks zu verwalten, wie z. B. `Production`, `Staging` und `Dev`.
+
+Wenn Sie ein neues JS-Bundle zu Capgo hochladen und es einem Kanal zuweisen, erkennt das Capgo SDK in Apps, die für diesen Kanal konfiguriert sind, das Update und lädt es herunter. Beim nächsten Neustart der App wird das neue Bundle geladen.
+
+## Erste Schritte
+
+Um Live-Updates zu verwenden, folgen Sie diesen Schritten:
+
+<Steps>
+
+1. Schließen Sie das [Capgo Quickstart](/docs/getting-started/quickstart) ab, um Ihre App in Capgo einzurichten und das Capgo SDK zu installieren.
+
+2. Rufen Sie in Ihrem App-Code `CapacitorUpdaternotifyAppReady()` auf, nachdem Ihre App mit der Initialisierung abgeschlossen ist. Dies teilt dem Capgo SDK mit, dass Ihre App bereit ist, Updates zu empfangen.
+
+3. Erstellen Sie Ihr JS-Bundle und laden Sie es zu Capgo hoch:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4. Öffnen Sie Ihre App und warten Sie, bis das Update heruntergeladen wurde. Sie können den Status mit folgendem Befehl überprüfen:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Sobald das Update heruntergeladen ist, schließen Sie Ihre App und öffnen Sie sie erneut, um das neue Bundle zu laden.
+
+</Steps>
+
+Siehe den Leitfaden [Deploying Live Updates](/docs/getting-started/deploy) für weitere Details.
+
+## Nächste Schritte
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Kanäle" icon="bars">
+      Erfahren Sie, wie Sie Kanäle verwenden, um verschiedene Release-Tracks zu verwalten und Updates an spezifische Benutzer zu richten.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollback" icon="left-arrow">
+      Entdecken Sie, wie Sie zu einer vorherigen JS-Bundle-Version zurückkehren können, wenn ein Update Probleme verursacht.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Update-Verhalten" icon="setting">
+      Passen Sie an, wie und wann Updates in Ihrer App heruntergeladen und angewendet werden.
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="Schnelle Updates" icon="starlight">
+      Erfahren Sie, wie Sie schnelle Updates verwenden können, um den Aktualisierungsprozess zu beschleunigen.
+    </Card>
+  </a>
+</CardGrid>

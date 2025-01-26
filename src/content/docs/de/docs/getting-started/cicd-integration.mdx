@@ -1,0 +1,111 @@
+---
+title: CI/CD-Integration
+locale: de
+---
+
+import { Steps, Code } from '@astrojs/starlight/components';
+
+Die Integration von Capgo in Ihre CI/CD-Pipeline ermöglicht es Ihnen, den Prozess des Erstellens und Bereitstellens von Updates für Ihre App vollständig zu automatisieren. Durch die Nutzung der Capgo CLI und von semantic-release können Sie konsistente, zuverlässige Bereitstellungen sicherstellen und schnelle Iterationen ermöglichen.
+
+## Vorteile der CI/CD-Integration
+
+- **Automatisierung**: Keine manuellen Schritte oder Raum für menschliches Versagen. Ihr gesamter Build-, Test- und Bereitstellungsprozess kann von Anfang bis Ende automatisiert werden.
+
+- **Konsistenz**: Jede Bereitstellung folgt dem gleichen Satz von Schritten, was einen vorhersehbaren und wiederholbaren Prozess gewährleistet. Dies ist besonders wertvoll, wenn mehrere Teammitglieder Code beitragen.
+
+- **Schnellere Iterationen**: Mit automatisierten Bereitstellungen können Sie Updates häufiger und mit Vertrauen versenden. Kein Warten mehr auf manuelle QA oder Freigabe- Genehmigungen.
+
+## Capgo CLI
+
+Die Capgo CLI ist der Schlüssel zur Integration von Capgo in Ihren CI/CD-Workflow. Sie bietet Befehle zum Pushen neuer Bundle-Versionen, Verwalten von Kanälen und mehr.
+
+Der wichtigste Befehl für die CI/CD-Integration ist `upload`:
+
+```shell
+npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
+```
+
+Dieser Befehl lädt den aktuellen Web-Build in den angegebenen Kanal hoch. Typischerweise führen Sie dies als letzten Schritt in Ihrer CI/CD-Pipeline aus, nachdem Ihr Web-Build erfolgreich abgeschlossen wurde.
+
+## Einrichten von Capgo in Ihrer CI/CD-Pipeline
+
+Während die genauen Schritte je nach Ihrer bevorzugten CI/CD-Toolvarianten variieren, sieht der allgemeine Prozess für die Integration von Capgo so aus:
+
+<Steps>
+1. **Generieren Sie einen API-Schlüssel**: Melden Sie sich beim Capgo-Dashboard an und erstellen Sie einen neuen API-Schlüssel. Dieser Schlüssel wird verwendet, um die CLI in Ihrer CI/CD-Umgebung zu authentifizieren. Halten Sie ihn geheim und verpflichten Sie ihn nie in Ihrem Repository!
+
+2. **Konfigurieren Sie den `upload`-Befehl**: Fügen Sie einen Schritt zu Ihrer CI/CD-Konfiguration hinzu, der den `upload`-Befehl mit den entsprechenden Argumenten ausführt: <Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} /> Ersetzen Sie `Production` durch den Kanal, in den Sie bereitstellen möchten, und `${{ secretsCAPGO_API_KEY }}` durch die Umgebungsvariable, die Ihren API-Schlüssel enthält.
+
+3. **Fügen Sie den `upload`-Schritt nach Ihrem Web-Build hinzu**: Stellen Sie sicher, dass der `upload`-Schritt nach dem erfolgreichen Abschluss Ihres Web-Builds kommt. Dies stellt sicher, dass Sie immer Ihren neuesten Code bereitstellen. Hier ist ein Beispiel für eine Konfiguration für GitHub Actions: <Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
+
+</Steps>
+
+## Semantic-release-Integration
+
+Semantic-release ist ein leistungsstarkes Tool zur Automatisierung des Versionsmanagements und zur Erstellung von Veröffentlichungshinweisen. Durch die Integration von semantic-release mit Capgo können Sie automatisch die Versionsnummer Ihrer App erhöhen und mit jeder Bereitstellung Änderungsprotokolle generieren.
+
+Hier ist eine Beispielkonfiguration für die `releaserc`-Datei für semantic-release:
+
+```json
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextReleasechannel} --apikey=YOUR_API_KEY --partial"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOGmd", "packagejson"],
+        "message": "chore(release): ${nextReleaseversion} [skip ci]\n\n${nextReleasenotes}"
+      }
+    ]
+  ]
+}
+```
+
+Diese Konfiguration macht Folgendes:
+
+1. Analysiert Commit-Nachrichten, um die nächste Versionsnummer zu bestimmen, gemäß der Spezifikation der konventionellen Commits.
+2. Generiert Veröffentlichungshinweise basierend auf den Commits seit der letzten Veröffentlichung.
+3. Aktualisiert die Datei `CHANGELOGmd` mit den neuen Veröffentlichungshinweisen.
+4. Führt den Capgo CLI-Befehl `upload` aus, übergibt die neue Versionsnummer und verwendet die `--partial`-Option für differenzielle Updates.
+5. Commitet die aktualisierte `CHANGELOGmd`, `packagejson` und alle anderen geänderten Dateien zurück ins Repository.
+
+Um semantic-release mit Capgo zu verwenden, fügen Sie einfach einen Schritt zu Ihrer CI/CD-Konfiguration hinzu, der `npx semantic-release` ausführt. Stellen Sie sicher, dass dieser Schritt nach Ihrem Web-Build und vor dem Capgo `upload`-Schritt ausgeführt wird.
+
+## Fehlersuche
+
+Wenn Sie auf Probleme mit Ihrer Capgo CI/CD-Integration stoßen, sind hier einige Dinge, die Sie überprüfen sollten:
+
+- **API-Schlüssel**: Stellen Sie sicher, dass Ihr API-Schlüssel gültig ist und die erforderlichen Berechtigungen hat. Wenn Sie eine Umgebungsvariable verwenden, überprüfen Sie, ob sie korrekt gesetzt ist.
+
+- **CLI-Version**: Stellen Sie sicher, dass Sie die neueste Version der Capgo CLI verwenden. Ältere Versionen können Kompatibilitätsprobleme verursachen oder bestimmte Funktionen fehlen.
+
+- **Build-Artefakte**: Bestätigen Sie, dass Ihr Web-Build die erwarteten Ausgabedateien generiert. Die Capgo CLI benötigt einen gültigen Web-Build, um ein Bundle zu erstellen.
+
+- **Netzwerkverbindung**: Überprüfen Sie, ob Ihre CI/CD-Umgebung Netzwerkkonferenz zu den Capgo-Servern hat. Firewall- oder Proxy-Probleme können manchmal den Befehl `upload` beeinträchtigen.
+
+Wenn Sie weiterhin Probleme haben, wenden Sie sich an den Capgo-Support, um Hilfe zu erhalten. Sie können Ihnen helfen, Probleme mit Ihrer spezifischen Einrichtung zu beheben.
+
+## Fazit
+
+Die Integration von Capgo in Ihre CI/CD-Pipeline und die Nutzung von semantic-release für das Versionsmanagement können Ihren Entwicklungsworkflow erheblich straffen. Durch die Automatisierung Ihrer Bereitstellungen und der Versionierung können Sie schneller und mit mehr Vertrauen Updates versenden.
+
+Die Capgo CLI und semantic-release bieten eine leistungsstarke Kombination für vollständig automatisierte Releases von Ende zu Ende. Mit ein wenig Konfiguration können Sie einen robusten und zuverlässigen Bereitstellungsprozess haben, der es Ihnen ermöglicht, sich auf die Entwicklung großartiger Funktionen zu konzentrieren, anstatt sich um manuelle Veröffentlichungsschritte zu kümmern.
+
+Für weitere Einzelheiten zu den Capgo CLI-Befehlen und -Optionen, werfen Sie einen Blick in die [CLI-Referenz](/docs/cli/overview). Und für einen tieferen Einblick in die Konfiguration von semantic-release, siehe die [semantic-release-Dokumentation](https://githubcom/semantic-release/semantic-release).
+
+Viel Erfolg beim Bereitstellen!

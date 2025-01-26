@@ -1,0 +1,535 @@
+---
+title: Endpunkte
+description: Capgo Cloud öffentliche API-Dokumentation
+sidebar:
+  order: 2
+locale: de
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Dies ist die Dokumentation der öffentlichen API von Capgo Cloud.
+
+Um auf die API zuzugreifen, fügen Sie in den Headern Ihren API-Schlüssel als `authorization` hinzu.
+
+<LinkCard
+	title="API-Schlüssel erhalten"
+	href="https://webcapgoapp/dashboard/apikeys/"
+/>
+
+## Organisationen
+
+Dieser Endpunkt ermöglicht es Ihnen, Organisationen und deren Mitglieder zu verwalten.
+
+### GET
+
+`https://apicapgoapp/organization`
+
+Ruft Informationen zur Organisation ab. Wenn `orgId` in den Parametern angegeben ist, wird eine einzelne Organisation zurückgegeben. Andernfalls werden alle zugänglichen Organisationen zurückgegeben.
+
+```typescript
+interface Organization {
+  id: string
+  created_by: string
+  created_at: string
+  updated_at: string
+  logo: string | null
+  name: string
+  management_email: string
+  customer_id: string | null
+}
+```
+
+Gibt zurück:
+```typescript
+return Organization[] | Organization
+```
+
+### POST
+
+`https://apicapgoapp/organization`
+
+Aktualisiert eine bestehende Organisation. Erfordert Admin-Rolle.
+
+```typescript
+interface OrganizationUpdate {
+  orgId: string
+  logo?: string
+  name?: string
+  management_email?: string
+}
+```
+
+Erfordert einen Anfragekörper des Typs `OrganizationUpdate`.
+
+Bei Erfolg werden die folgenden Daten zurückgegeben:
+
+```typescript
+return { status: 'Organisation aktualisiert', data: Organization }
+```
+
+### PUT
+
+`https://apicapgoapp/organization`
+
+Erstellt eine neue Organisation.
+
+```typescript
+interface OrganizationCreate {
+  name: string
+}
+```
+
+Erfordert einen Anfragekörper des Typs `OrganizationCreate`.
+
+Bei Erfolg werden die folgenden Daten zurückgegeben:
+
+```typescript
+return { status: 'Organisation erstellt', id: string }
+```
+
+## API-Schlüssel
+
+Dieser Endpunkt ermöglicht es Ihnen, API-Schlüssel für den Zugriff auf die Capgo API zu verwalten.
+
+### GET
+
+`https://apicapgoapp/apikey`
+
+Ruft API-Schlüssel für Ihr Konto ab. Gibt alle zugänglichen API-Schlüssel zurück.
+
+```typescript
+interface ApiKey {
+  created_at: string | null
+  id: number
+  key: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  name: string
+  updated_at: string | null
+  user_id: string
+}
+```
+
+Gibt zurück:
+```typescript
+return ApiKey[]
+```
+
+### POST
+
+`https://apicapgoapp/apikey`
+
+Erstellt einen neuen API-Schlüssel für eine spezifische Organisation.
+
+Abfrageparameter:
+```typescript
+interface ApiKeyCreate {
+  org_id: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+}
+```
+
+Gibt zurück:
+```typescript
+return { apikey: ApiKey }
+```
+
+### DELETE
+
+`https://apicapgoapp/apikey/:id`
+
+Delete einen bestehenden API-Schlüssel.
+
+Parameter:
+- `id`: Der zu löschende API-Schlüssel.
+
+Bei Erfolg gibt es zurück:
+```typescript
+return { success: true }
+```
+
+Bei Fehlschlag gibt es zurück:
+```typescript
+return { error: string, supabaseError?: any }
+```
+
+## Mitglieder (/organization/members)
+
+### GET 
+
+Ruft die Mitglieder der Organisation ab.
+
+Erfordert einen Anfragekörper (Abfrageparameter) des Typs `{ orgId: string }`.
+
+Bei Erfolg gibt es zurück:
+```typescript
+interface Member {
+  uid: string;
+  email: string;
+  image_url: string;
+  role: "invite_read" | "invite_upload" | "invite_write" | "invite_admin" | "invite_super_admin" | "read" | "upload" | "write" | "admin" | "super_admin";
+}
+return Member[]
+```
+
+### DELETE
+
+`https://apicapgoapp/organization/members`
+
+Löscht ein Mitglied der Organisation.
+
+```typescript
+interface MemberDelete {
+  orgId: string
+  email: string
+}
+```
+
+Erfordert einen Anfragekörper (Abfrageparameter) des Typs `MemberDelete`.
+
+Bei Erfolg gibt es zurück:
+
+```typescript
+return { status: 'OK' }
+```
+
+Bei Fehlschlag gibt es zurück:
+
+```typescript
+return { error: string, status: 'KO' }
+```
+
+## Statistiken
+
+Dieser Endpunkt ermöglicht es Ihnen, verschiedene Statistiken über Ihre Apps und Organisationen abzurufen.
+
+### GET /statistics/app/:app_id
+
+Ruft die Statistiken für eine spezifische App ab.
+
+Abfrageparameter:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Gibt zurück:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monatlich aktive Nutzer
+  storage: number  // Speicherverbrauch in Bytes
+  bandwidth: number // Bandbreitennutzung in Bytes
+}
+```
+
+Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der angeforderten Kennzahl zurückgegeben.
+
+### GET /statistics/user
+
+Ruft aggregierte Statistiken für alle Organisationen ab, auf die der Benutzer Zugriff hat.
+
+Abfrageparameter:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Gibt zurück:
+Wenn `graph` nicht angegeben ist:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monatlich aktive Nutzer
+  storage: number  // Speicherverbrauch in Bytes
+  bandwidth: number // Bandbreitennutzung in Bytes
+}[]
+```
+
+Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der angeforderten Kennzahl zurückgegeben.
+
+### GET /statistics/org/:org_id
+
+Ruft die Statistiken für eine spezifische Organisation ab.
+
+Abfrageparameter:
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+  graph?: 'mau' | 'storage' | 'bandwidth'
+}
+```
+
+Gibt zurück:
+Wenn `graph` nicht angegeben ist:
+```typescript
+interface Stats {
+  date: string
+  mau: number      // Monatlich aktive Nutzer
+  storage: number  // Speicherverbrauch in Bytes
+  bandwidth: number // Bandbreitennutzung in Bytes
+}[]
+```
+
+Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der angeforderten Kennzahl zurückgegeben.
+
+## Kanäle
+
+Dieser Endpunkt ermöglicht es Ihnen, alle verfügbaren Kanäle Ihrer App zu überprüfen und zu ändern.
+
+### POST
+
+`https://apicapgoapp/channel`
+
+Senden Sie dies, um einen Kanal zu erstellen oder zu aktualisieren.
+
+```typescript
+type disable_update = "major" | "minor" | "version_number" | "none"
+interface ChannelSet {
+  app_id: string
+  channel: string
+  version?: string
+  public?: boolean
+  disableAutoUpdateUnderNative?: boolean
+  disableAutoUpdate?: disable_update
+  ios?: boolean
+  android?: boolean
+  allow_device_self_set?: boolean
+  allow_emulator?: boolean
+  allow_dev?: boolean
+}
+```
+
+Erhalten Sie dies:
+
+```json
+{ "status": "ok" }
+```
+
+### GET
+
+`https://apicapgoapp/channel`
+
+Senden Sie `app_id` als URL-Parameter und erhalten Sie eine Liste der ersten 50 Kanäle.\
+Sie können den nächsten erhalten, indem Sie `page=1` senden.
+
+```typescript
+interface Channel {
+    id: number;
+    created_at: string;
+    name: string;
+    app_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    created_by: string;
+    updated_at: string;
+    public: boolean; // standardmäßig oder nicht
+    disableAutoUpdateUnderNative: boolean;
+    disableAutoUpdate: boolean;
+    allow_emulator: boolean;
+    allow_dev: boolean;
+}[]
+```
+
+und optional den `channel`-Namen als URL-Parameter senden, um einen zu erhalten:
+
+```typescript
+interface Channel {
+    id: number;
+    created_at: string;
+    name: string;
+    app_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    created_by: string;
+    updated_at: string;
+    public: boolean; // standardmäßig oder nicht
+    disableAutoUpdateUnderNative: boolean;
+    disableAutoUpdate: boolean;
+    allow_emulator: boolean;
+    allow_dev: boolean;
+}
+```
+
+### DELETE
+
+`https://apicapgoapp/channel`
+
+Senden Sie dies als Abfrageparameter.
+
+```typescript
+interface Channel {
+  channel: string
+  app_id: string
+}
+```
+
+Erhalten Sie dies:
+
+```json
+{ "status": "ok" }
+```
+
+## Geräte
+
+Dieser Endpunkt ermöglicht es Ihnen, alle Geräte, die mit Ihrer App verknüpft sind, zu überprüfen und zu ändern.
+
+### POST
+
+`https://apicapgoapp/device`
+
+Senden Sie dies.
+
+```typescript
+interface DeviceLink {
+  app_id: string
+  device_id: string
+  version_id?: string // Versionsbezeichnung (wird auf besseren Namen geändert)
+  channel?: string // Kanalname
+}
+```
+
+Erhalten Sie dies:
+
+```json
+{ "status": "ok" }
+```
+
+### GET
+
+`https://apicapgoapp/device`
+
+Senden Sie `app_id` als URL-Parameter und erhalten Sie eine Liste der ersten 50 Geräte.Sie können die nächste erhalten, indem Sie `page=1` senden
+
+```typescript
+interface Device{
+    created_at?: string | undefined;
+    updated_at?: string | undefined;
+    device_id: string;
+    custom_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    app_id: string;
+    platform?: "ios" | "android" | undefined;
+    plugin_version: string;
+    os_version?: string | undefined;
+    version_build: string;
+    is_prod: boolean;
+    is_emulator: boolean;
+}[]       
+```
+
+und optional den `device_id` Namen als URL-Parameter hinzufügen, um einen zu erhalten:
+
+```typescript
+interface Device {
+    created_at?: string | undefined;
+    updated_at?: string | undefined;
+    device_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    app_id: string;
+    platform?: "ios" | "android" | undefined;
+    plugin_version: string;
+    os_version?: string | undefined;
+}
+```
+
+### LÖSCHEN
+
+Dieser Endpunkt dient zum Trennen von Kanal und Version. Sie können ein Gerät von Capgo nicht löschen.
+
+`https://apicapgoapp/device`
+
+Senden Sie dies als Abfrageparameter
+
+```typescript
+interface Device {
+  device_id: string
+  app_id: string
+}
+```
+
+erhalten Sie dies:
+
+```json
+{ "status": "ok" }
+```
+
+## Pakete&#x20;
+
+Dieser Endpunkt ermöglicht es Ihnen, alle Pakete zu überprüfen und zu löschen, die mit Ihrer App verlinkt sind.
+
+### GET
+
+`https://apicapgoapp/bundle`
+
+Senden Sie `app_id` als URL-Parameter und erhalten Sie ein Array der ersten 50 Pakete\
+Sie können die nächste erhalten, indem Sie `page=1` senden
+
+```typescript
+interface Bundle {
+  app_id: string
+  bucket_id: string | null
+  checksum: string | null
+  created_at: string | null
+  deleted: boolean
+  external_url: string | null
+  id: number
+  minUpdateVersion: string | null
+  name: string
+  native_packages: Json[] | null
+  owner_org: string
+  r2_path: string | null
+  session_key: string | null
+  storage_provider: string
+  updated_at: string | null
+  user_id: string | null
+}[]
+```
+
+### LÖSCHEN
+
+Löschen Sie ein Paket in der Cloud
+
+`https://apicapgoapp/bundle`
+
+Senden Sie dies als Abfrageparameter
+
+```typescript
+interface Bundle {
+  app_id: string
+  version: string
+}
+```
+
+erhalten Sie dies:
+
+```json
+{ "status": "ok" }
+```
+
+Alternativ können Sie senden&#x20;
+
+```typescript
+interface Bundle {
+  app_id: string
+}
+```
+
+Um alle Pakete zu löschen
