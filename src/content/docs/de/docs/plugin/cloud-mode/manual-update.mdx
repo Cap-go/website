@@ -1,0 +1,88 @@
+---
+title: Manuelle Aktualisierung
+description: Wie man sich selbst aktualisiert verwaltet
+sidebar:
+  order: 5
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Wenn Sie selbst verwalten möchten, wenn ein Update angewendet wird, verwenden Sie den manuellen Modus mit Capgo Cloud.
+
+Hier ist, was Sie tun müssen, richten Sie Ihr Konto ein, wie in "Erste Schritte" erklärt.
+
+<LinkCard
+	titel="Erste Schritte"
+	href="/docs/plugin/cloud-mode/getting-started"
+/>
+
+
+#### Konfiguration
+Deaktivieren Sie die automatische Aktualisierung in Ihrer ```capacitorconfgjson```
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false
+		}
+	}
+}
+```
+
+Fügen Sie dann die Logik hinzu, um die Updates selbst zu verwalten.\
+Hier ist ein Beispiel, wie Sie es tun können:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import type { BundleInfo } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+
+CapacitorUpdaternotifyAppReady()
+
+let data: BundleInfo | null = null
+
+AppaddListener('appStateChange', async (state: any) => {
+  consolelog('appStateChange', state)
+  if (stateisActive) {
+    consolelog('getLatest')
+    // Führen Sie den Download während der aktiven App-Zeit des Benutzers durch, um fehlgeschlagene Downloads zu verhindern
+    const latest = await CapacitorUpdatergetLatest()
+    consolelog('latest', latest)
+    if (latesturl) {
+      data = await CapacitorUpdaterdownload({
+        url: latesturl,
+        version: latestversion,
+      })
+      consolelog('download', data)
+    }
+  }
+  if (!stateisActive && data) {
+    consolelog('set')
+    // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt oder wann Sie möchten
+    SplashScreenshow()
+    try {
+      await CapacitorUpdaterset({ id: dataid })
+    }
+    catch (err) {
+      consolelog(err)
+      SplashScreenhide() // für den Fall, dass das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
+    }
+  }
+})
+```
+
+Dokumentation aller verfügbaren APIs im Plugin:
+
+<LinkCard
+	titel="Methoden"
+	href="/docs/plugin/api/"
+/>
+
+Es gibt einige Anwendungsfälle, bei denen Sie Benutzern erlauben können, sich für Kanäle anzumelden und verschiedene Versionen auszuprobieren:\
+[https://capgoapp/blog/how-to-send-specific-version-to-users/](https://capgoapp/blog/how-to-send-specific-version-to-users/)

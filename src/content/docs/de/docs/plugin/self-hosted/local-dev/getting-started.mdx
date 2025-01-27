@@ -1,0 +1,80 @@
+---
+title: Loslegen
+description: >-
+  Dieses Tutorial zeigt, wie man Supabase von Grund auf neu startet und
+  Edge-Funktionen startet.
+sidebar:
+  order: 1
+locale: de
+---
+
+## Was dieses Tutorial abdecken wird?
+
+Dieses Tutorial zeigt, wie man Supabase von Grund auf neu startet und Edge-Funktionen startet.
+
+## Anforderungen
+1. Klon [capgo](https://githubcom/Cap-go/capgo)  
+2. [supabase](https://supabasecom/)
+
+## Erste Schritte
+
+Um zu beginnen, führen Sie aus
+```bash
+supabase start
+```
+
+Als Nächstes sollten Sie etwas wie dies sehen:
+```js
+Gestartete lokale Entwicklungsumgebung von Supabase
+
+         API-URL: http://localhost:54321
+     GraphQL-URL: http://localhost:54321/graphql/v1
+          DB-URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio-URL: http://localhost:54323
+    Inbucket-URL: http://localhost:54324
+      JWT-Geheimnis: [gekürzt]
+        anonymen Schlüssel: supa_key_anon
+service_role Schlüssel: supa_key_admin
+```
+
+Öffnen Sie als Nächstes `configsjson` und setzen Sie die folgenden Werte:
+```json
+{
+  "base_domain": {
+    "prod": "webcapgoapp",
+    "development": "developmentwebcapgoapp",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+wobei `supa_key_anon` der Wert aus dem vorherigen Schritt ist.
+
+:::danger
+⚠️ Fügen Sie `configsjson` nicht in das entfernte Repository ein.
+:::
+
+Überprüfen Sie als Nächstes, ob Sie zu [localhost:54323](http://localhost:54323/projects) gehen können und dass die Tabelle `users` wie folgt aussieht:
+
+<figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
+
+Wenn ja, starten Sie die Edge-Funktionen, indem Sie Folgendes ausführen:
+
+```bash
+supabase functions serve
+```
+
+und starten Sie das Frontend, indem Sie Folgendes ausführen:
+```bash
+bun run serve
+```

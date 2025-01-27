@@ -1,0 +1,126 @@
+---
+title: Bekannte Probleme
+description: Bekannte Probleme mit Capacitor und CapGo
+sidebar:
+  order: 7
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionic Live Reload
+
+* Wenn Sie entwickeln und die Ionic Live Reload-Funktion der CLI verwenden, wird das Plugin überschrieben, sodass Sie Ihr Update niemals sehen werden.
+
+## Quasar Live Reload
+
+* Es verwendet das gleiche System wie Ionic im Hintergrund, daher werden Sie Ihre Updates nicht sehen.
+
+## Updates fehlgeschlagen
+
+* Dies geschieht normalerweise, wenn große Updates (> 20 MB) bereitgestellt werden; ein großer Prozentsatz der Benutzer erhält nicht die letzte Version. In der Vergangenheit mussten die Benutzer die App geöffnet halten, bis der Download abgeschlossen war; jetzt verwenden wir den Hintergrunddownload, aber er ist weiterhin auf einige Sekunden beschränkt.
+
+## Android
+
+### Download nicht möglich
+
+Wir haben einige Probleme mit Geräten in Indien gesehen und einen Benutzer im Gespräch, haben ihn verschiedene DNS-Server ausprobieren lassen und es hat funktioniert.
+
+Wenn Sie das Problem haben, versuchen Sie, einen anderen DNS-Server wie Cloudflare oder Google DNS zu verwenden.
+
+Cloudflare: 1111 und 1001
+
+Google DNS: 8888 und 8844 oder dnsgoogle
+
+<LinkCard
+	title="Wie richtet man einen bevorzugten DNS-Server auf Android ein?"
+	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Selbstgehostet
+Wenn Sie ein selbstgehostetes Update bereitstellen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Wenn Sie es dennoch tun möchten, befolgen Sie diese Anleitung:
+
+<LinkCard
+	title="Wie erlaubt man alle Netzwerkverbindungstypen HTTP und HTTPS in Android (9) Pie?"
+	href="https://stackoverflowcom/a/51902630/5511370"
+/>
+
+### Entpacken
+
+Entpacken-Problem: DEFLATED-Einträge können einen EXT-Descriptor haben.
+
+Wenn Sie Ihr Bundle mit etwas anderem als der CLI gezippt haben, könnte das Format oder Ihr ZIP falsch sein. Bitte verwenden Sie den CLI-Befehl `npx @capgo/cli zip BUNDLE_FOLDER`.
+
+Dies ist ein bekanntes Problem von Java:
+
+<LinkCard
+	title="Entpacken-Problem: DEFLATED-Einträge können einen EXT-Descriptor haben"
+	href="https://bugsopenjdkorg/browse/JDK-8143613"
+/>
+
+### Clearfix-Problem
+
+* Wenn Sie Probleme mit usesCleartextTraffic haben, liegt das daran, dass das Plugin die guten Praktiken befolgt, die von Sonar Cloud empfohlen werden. In 90 % der Fälle wird es gut funktionieren, jedoch mit einigen Plugins kann es Probleme verursachen.
+
+Um dies zu beheben, fügen Sie in `android/app/src/main/AndroidManifestxml` im `<application>`-Schlüssel Folgendes hinzu:
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemasandroidcom/tools"
+```
+
+## iOS
+
+### Datenschutz-Manifest
+
+Fügen Sie den `NSPrivacyAccessedAPICategoryUserDefaults`-Schlüssel zum [Datenschutz-Manifest](https://capacitorjscom/docs/ios/privacy-manifest) hinzu (normalerweise `ios/App/PrivacyInfoxcprivacy`):
+
+```xml
+<?xml version="10" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 10//EN" "http://wwwapplecom/DTDs/PropertyList-10dtd">
+<plist version="10">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Fügen Sie diesen Eintrag zum Array hinzu, wenn die Datei bereits existiert -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA921</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+Wir empfehlen, [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) als Grund für den Zugriff auf die [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) API zu deklarieren.
+
+### Netzwerkberechtigungen
+
+Wenn Sie einen lokalen Server zum Testen eines Updates verwenden, wird die App um Netzwerkberechtigung bitten; das ist ein normales Verhalten. Bei der Verwendung eines Remote-Servers ist dies nicht der Fall.
+
+## Beide Betriebssysteme
+
+Bei manuellen Updates sind einige Ereignisse nicht einfach zu erfassen, zum Beispiel wird der Updatefehler direkt vor dem Neuladen Ihres JS-Codes ausgelöst, sodass Sie ihn nicht erfassen können.
+
+Eine Alternative besteht darin, die Bundles aufzulisten und die Fehlerstatistiken zu überprüfen, um zu wissen, ob das Update fehlgeschlagen ist.
+
+Wir müssen in Zukunft einen besseren Weg finden, dies zu handhaben, aber es ist keine Priorität, da der Automatikmodus der empfohlene Weg für Updates ist.
+
+PRs sind willkommen, um uns dabei zu helfen, dies zu verbessern.
+
+## CLI
+
+Wenn Ihre CLI Probleme hat, irgendetwas zu tun,
+
+Überprüfen Sie, ob **appId** und **appName** in Ihrer **capacitorconfigts** vorhanden sind.
+
+Befolgen Sie die Anleitung der offiziellen Dokumentation:
+
+<LinkCard
+	title="Capacitor-Konfiguration"
+	href="https://capacitorjscom/docs/config"
+/>

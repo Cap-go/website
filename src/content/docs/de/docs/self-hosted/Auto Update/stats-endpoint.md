@@ -1,0 +1,95 @@
+---
+title: Stats-Endpunkt
+description: Wie man einen selbstgehosteten Statistik-Endpunkt erstellt
+sidebar:
+  order: 2
+locale: de
+---
+
+Hier ist ein Beispiel für Code in JavaScript, um die Statistiken des Plugins zu speichern
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'update_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSONparse(eventbody || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  consolelog('update asked', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Speichern Sie es in Ihrer Datenbank
+  return { status: 'ok' }
+}
+```
+
+Dieser Endpunkt sollte ein JSON zurückgeben:
+
+```json
+{ "status": "ok" }
+```
+
+## Aktionen:
+
+* **delete** : wenn ein Bundle lokal gelöscht wird
+* **reset** : wenn die App auf das integrierte Bundle zurückgesetzt wird
+* **set** : wenn die App ein neues Bundle setzt
+* **set\_fail** : wenn die App die ID des festgelegten Bundles nicht finden konnte
+* **update\_fail** : wird nach der Verzögerung gesendet und `notifyAppReady` wurde nie aufgerufen
+* **download\_fail** : wenn der Download nie abgeschlossen wurde
+* **download\_complete:** Wenn der Download abgeschlossen ist
+* **download\_xx:** Senden Sie alle 10 % des Downloads, z.B.: download\_20, download\_70
+* **update\_fail:** wenn das Bundle fehlschlägt, `notifyAppReady` im Zeitrahmen durchzuführen

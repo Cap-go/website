@@ -1,0 +1,61 @@
+---
+title: Statistik-API
+description: Wie man das Auto-Update-Plugin im selbstgehosteten Modus verwendet
+sidebar:
+  order: 8
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Statistik-API
+
+Ab Version 130 ist das Update-System in der Lage, Statistiken zu senden!
+
+Standardmäßig werden alle Statistiken an unseren Server gesendet, um die Nutzung zu verstehen und Forschungen durchzuführen.
+
+:::note
+Es werden keine privaten Daten für Statistiken gesendet, nur zufällige UUID, Versionsupdate, native App-Version, Plattform, Aktion und App-ID.
+:::
+
+Wenn Sie diese Daten stattdessen an Ihren Server senden möchten, ändern Sie die Konfiguration unten:
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+Was Ihr Server erhalten wird, ist:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // kann gesetzt, gelöscht, set_fail, zurückgesetzt, revert sein
+	// Dann sind es die gleichen Informationen wie beim Update
+	"app_id": "*******", // App-Identifikator im Store
+	"device_id": "*******", // eindeutige ID pro App-Installation
+	"platform": "ios", // oder android
+	"custom_id": "user_1", // repräsentiert Ihren Benutzer
+        "version_name": "123", // Version des Web-Builds
+        "version_build": "120", // Version des nativen Builds
+        "version_code": "120", // Build-Nummer des nativen Builds
+	"version_os": "16", // OS-Version des Geräts
+        "plugin_version": "400", // um Ihre API unterschiedlich mit verschiedenen Plugins agieren zu lassen
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+Sie können es auch vollständig deaktivieren, indem Sie einen leeren String verwenden. Denken Sie daran, Statistiken sind privatfreundlich und helfen mir zu verstehen, wie Menschen das Plugin verwenden, um Probleme zu beheben und es zu verbessern.
+
+<LinkCard
+	title="Updates verwalten"
+	href="/docs/plugin/self-hosted/handling-updates"
+/>

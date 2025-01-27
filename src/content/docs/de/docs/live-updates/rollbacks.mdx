@@ -1,0 +1,90 @@
+---
+title: Rollbacks
+sidebar:
+  order: 5
+locale: de
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Während die Live-Updates von Capgo es Ihnen ermöglichen, Verbesserungen und Fehlerbehebungen schnell an Ihre Benutzer auszuliefern, kann es Situationen geben, in denen Sie zu einer vorherigen Version Ihrer App zurückkehren müssen. Vielleicht hat ein neues Update ein unerwartetes kritisches Problem eingeführt, oder Sie möchten eine bestimmte Änderung rückgängig machen, während Sie an einer Fehlerbehebung arbeiten.
+
+Capgo bietet mehrere Möglichkeiten zur Verwaltung der Builds eines Kanals und zur Kontrolle der Version Ihrer App, die die Benutzer erhalten.
+
+## Zurücksetzen auf ein vorheriges Bundle
+
+Jedes Mal, wenn Sie ein neues Build hochladen und es einem Kanal zuweisen, speichert Capgo eine Historie dieser Builds. Wenn Sie ein bestimmtes Update zurücksetzen müssen, können Sie eines dieser vorherigen Builds auswählen, um es erneut auf den Kanal bereitzustellen.
+
+Um auf ein vorheriges Build zurückzusetzen:
+
+<Steps>
+
+1. Melden Sie sich im [Capgo Dashboard](https://appcapgoio) an.
+
+2. Navigieren Sie zum Abschnitt "Kanäle".
+
+3. Klicken Sie auf den Namen des Kanals, den Sie zurücksetzen möchten.
+
+4. Finden Sie das Build, auf das Sie im Verlauf der Builds des Kanals zurücksetzen möchten.
+
+5. Klicken Sie auf das Kronensymbol neben diesem Build, um es zum aktiven Build für den Kanal zu machen.
+   ![Channel management options](/select_bundlewebp)
+
+6. Bestätigen Sie, dass Sie zu diesem Build zurückkehren möchten.
+
+</Steps>
+
+<Aside type="note">
+Das Zurücksetzen auf ein vorheriges Build betrifft nur den ausgewählten Kanal. Wenn Sie mehrere Kanäle haben (z. B. Produktion, Staging usw.), müssen Sie den Rollback-Prozess für jeden betroffenen Kanal wiederholen.
+</Aside>
+
+Nach dem Zurücksetzen erhalten Geräte, die so konfiguriert sind, dass sie auf den aktualisierten Kanal hören, beim nächsten Überprüfen auf Updates das vorherige Build. Das zurückgesetzte Build wird als neues Update behandelt, sodass der übliche Updatefluss und die Bedingungen gelten.
+
+## Trennen eines Kanals
+
+Wenn Sie vorübergehend die Updates eines Kanals anhalten möchten, während Sie ein Problem untersuchen, können Sie den Kanal von seinem aktuellen Build trennen.
+
+Um einen Kanal zu trennen:
+
+1. Navigieren Sie zum Kanal im Capgo Dashboard.
+
+2. Klicken Sie auf die Schaltfläche "Trennen" neben dem aktuellen Build.
+
+3. Bestätigen Sie, dass Sie den Kanal trennen möchten.
+
+Sobald ein Kanal getrennt ist, verteilt er keine neuen Updates mehr. Geräte, die auf diesen Kanal konfiguriert sind, bleiben auf ihrem aktuellen Build, bis der Kanal wieder mit einem Build verknüpft ist.
+
+Dies ist nützlich, wenn Sie ein Problem mit einem Update identifiziert haben, aber noch nicht sicher sind, zu welchem Build Sie zurückkehren möchten. Das Trennen des Kanals gibt Ihnen Zeit, um zu untersuchen, ohne weitere Updates zu veröffentlichen.
+
+## Erzwingen des integrierten Bundles
+
+In schwerwiegenderen Situationen möchten Sie möglicherweise alle Geräte auf einem Kanal zurücksetzen auf das Web-Build, das ursprünglich mit der nativen Binary Ihrer App verpackt wurde. Dies ist als das "integrierte Bundle" bekannt.
+
+Um das integrierte Bundle auf einem Kanal zu erzwingen:
+
+1. Navigieren Sie zum Kanal im Capgo Dashboard.
+
+2. Klicken Sie auf die Schaltfläche "Integriertes Bundle".
+
+3. Bestätigen Sie, dass Sie das integrierte Bundle erzwingen möchten.
+
+Wenn Sie das integrierte Bundle erzwingen, kehren alle Geräte, die auf diesen Kanal konfiguriert sind, beim nächsten Update-Check zum ursprünglich verpackten Web-Build zurück. Dies geschieht unabhängig davon, auf welchem Build sie sich derzeit befinden.
+
+Dies ist eine aggressivere Rollback-Option als das Zurücksetzen auf ein bestimmtes vorheriges Build, da es alle Live-Updates verwirft, die seit der letzten Veröffentlichung der App in den App-Stores veröffentlicht wurden.
+
+<Aside type="caution">
+Seien Sie vorsichtig, wenn Sie das integrierte Bundle erzwingen, da es alle Geräte auf dem Kanal betrifft. Stellen Sie sicher, dass Sie die Auswirkungen berücksichtigt haben und einen Plan zur Weiterverfolgung haben, bevor Sie diese Maßnahme ergreifen.
+</Aside>
+
+## Überwachung und Reaktion auf Probleme
+
+Um Probleme schnell zu erkennen und die Auswirkungen problematischer Updates zu minimieren, ist es wichtig, einen Plan zur Überwachung Ihrer Veröffentlichungen und zur Reaktion auf Probleme zu haben.
+
+Einige Strategien umfassen:
+
+- Überwachung von Absturzberichten und Benutzerfeedback sofort nach der Veröffentlichung eines Updates.
+- Verwendung von schrittweisen Rollouts oder einem gestuften Kanalsystem, um Updates an einer kleineren Gruppe zu testen, bevor sie weitläufig veröffentlicht werden.
+- Vorhandensein eines klaren Entscheidungsprozesses, wann ein Rollback, Trennen oder Erzwingen des integrierten Bundles vorgenommen werden soll, und wer die Autorität dazu hat.
+- Kommunikation mit den Benutzern über das Problem und die Lösung, falls angebracht.
+
+Durch die Kombination einer sorgfältigen Überwachung mit der Fähigkeit, problematische Updates schnell zu verwalten, können Sie ein kontinuierlich verbesserungsfähiges App-Erlebnis bereitstellen und gleichzeitig Störungen für Ihre Benutzer minimieren.

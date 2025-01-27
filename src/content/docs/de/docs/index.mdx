@@ -1,0 +1,43 @@
+---
+title: Willkommen bei Capgo
+description: >-
+  Capgo ist eine Open-Source-Plattform für Live-Updates für Capacitor und mobile
+  Entwicklungsteams, die es Ihnen ermöglicht, Live-Updates innerhalb von Minuten
+  an Ihre Benutzer zu liefern, statt in Tagen.
+template: splash
+next: false
+hero:
+  tagline: >-
+    Capgo ist eine Open-Source-Plattform für Live-Updates für Capacitor und
+    mobile Entwicklungsteams, die es Ihnen ermöglicht, Ihren Benutzern
+    Live-Updates in Minuten statt in Tagen bereitzustellen.
+  image:
+    file: /logo.svg
+  actions:
+    - text: Loslegen
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: 'https://github.com/Cap-go/Capgo/'
+      icon: external
+      variant: minimal
+locale: de
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Die Kraft von Live-Updates" icon="rocket">
+    Nahtlos Live-App-Updates, kritische Fehlerbehebungen, Inhaltsänderungen, Beta-Funktionen und mehr bereitstellen, um Ihren Benutzern die bestmögliche Erfahrung zu bieten
+  </Card>
+  <Card title="Einfach zu integrieren" icon="pencil">
+    Das Plugin benötigt 3 Schritte, um in Ihren Code zu integrieren, und ermöglicht es Ihnen, Updates in wenigen Minuten an Ihre Benutzer zu senden, anstatt Tage zu warten!
+  </Card>
+  <Card title="Installieren" icon="setting">
+    Führen Sie `npx @capgo/cli@latest init [APIKEY]` aus, um loszulegen
+  </Card>
+  <Card title="Umfangreiche Dokumentation" icon="open-book">
+    Erfahren Sie in der [Dokumentation](/docs/plugin/cloud-mode/getting-started/), wie Sie das Plugin in 5 Minuten mit unserem Onboarding-Video meistern
+  </Card>
+</CardGrid>

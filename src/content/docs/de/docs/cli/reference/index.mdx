@@ -1,0 +1,67 @@
+---
+title: Übersicht
+description: Detaillierte Dokumentation für die Capgo CLI-Befehle
+sidebar:
+  order: 1
+locale: de
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+Die Capgo CLI bietet eine Reihe von Befehlen zur Verwaltung Ihrer Capgo-Apps und -Bereitstellungen. Diese Referenz bietet detaillierte Informationen zu jedem verfügbaren Befehl, einschließlich seiner Optionen und Anwendungsbeispiele.
+
+## Befehle
+
+<CardGrid stagger>
+  <a href="/init/">
+    <Card title="init" icon="rocket">
+      Eine neue Capgo-App initialisieren
+    </Card>
+  </a>
+
+  <a href="/login/">
+    <Card title="login" icon="approve-check">
+      Mit dem Capgo-Dienst authentifizieren
+    </Card>
+  </a>
+
+  <a href="/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      Überprüfen Sie Ihre Capgo-Konfiguration auf potenzielle Probleme
+    </Card>
+  </a>
+
+  <a href="/app/">
+    <Card title="app" icon="seti:default">
+      Verwalten Sie Ihre Capgo-Apps
+    </Card>
+  </a>
+
+  <a href="/bundle/">
+    <Card title="bundle" icon="seti:html">
+      Verwalten Sie Ihre App-Bündel
+    </Card>
+  </a>
+
+  <a href="/channel/">
+    <Card title="channel" icon="seti:git">
+      Verwalten Sie Ihre Release-Kanäle
+    </Card>
+  </a>
+
+  <a href="/key/">
+    <Card title="key" icon="seti:lock">
+      Verwalten Sie Ihre App-Signierungsschlüssel
+    </Card>
+  </a>
+</CardGrid>
+
+## CI-Integration
+
+Um Ihre Arbeit zu automatisieren, empfehlen wir die Verwendung von GitHub Actions, um Ihre Updates an Capgo zu übertragen. Schauen Sie sich unser [GitHub Actions-Tutorial](https://capgoapp/blog/automatic-build-and-release-with-github-actions/) für weitere Informationen an.
+
+Vergessen Sie nicht, Ihre CI-Umgebungsvariablen mit Ihrem Capgo-API-Schlüssel zu konfigurieren.
+
+## Demo-App
+
+Für ein komplettes Beispiel einer Capgo-App mit CI-Integration, schauen Sie sich unsere [Demo-App auf GitHub](https://githubcom/Cap-go/demo-app/) an.

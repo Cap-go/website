@@ -1,0 +1,105 @@
+---
+title: Loslegen
+description: Wie man seinen eigenen Auto-Update-Server einrichtet
+sidebar:
+  order: 1
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Diese Dokumentation erklärt, wie Sie Ihren eigenen Auto-Update-Server betreiben können
+
+## Einführung
+
+Wenn Sie diese Arbeit hilfreich finden, denken Sie bitte darüber nach, meine Arbeit zu unterstützen, indem Sie [Github-Sponsor](https://githubcom/sponsors/riderx) werden.
+
+Ich habe gewettet, all den Code, den ich hier erstellt habe, Open Source zugänglich zu machen, anstatt ihn hinter einer Bezahlschranke zu verstecken. Durch das Offenlegen, anstatt zu kämpfen und zu verbergen, glaube ich, dass wir die Welt zu einem besseren Ort machen können.
+
+Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und es zu einem offenen und transparenten Geschäft machen.
+
+Um das zu ermöglichen, ist es notwendig, dass jeder von uns seinen Teil beiträgt, einschließlich Ihnen 🥹
+
+Wenn Capgo nicht zu Ihnen passt, zahlen Sie Ihren eigenen Preis und [unterstützen Sie einen bootstrapped Maker](https://githubcom/sponsors/riderx) zu Ihren Bedingungen.
+
+<LinkCard title="Überlegen Sie, beizutragen" href="/docs/plugin/self-hosted/contributing/"/>
+## Funktionenparität
+
+Wenn Sie sich entscheiden, mit Ihrem eigenen Server zu arbeiten, verlieren Sie den 5-minütigen Einrichtungsablauf.\
+Sie müssen all diese Funktionen selbst implementieren.
+
+| Funktionen               | Capgo | Selbstgehostet |
+| ------------------------ | ----- | -------------- |
+| Updates                  | ✅     | 🚧            |
+| Automatisches Zurücksetzen| ✅     | 🚧            |
+| E-Mail-Benachrichtigungen bei Fehler| ✅     | 🚧            |
+| Kanäle                   | ✅     | 🚧            |
+| Kanäle Überschreiben     | ✅     | 🚧            |
+| Geräteüberschreibung     | ✅     | 🚧            |
+| Kanäleinstellungen       | ✅     | 🚧            |
+| Geräteeinstellungen      | ✅     | 🚧            |
+| Benutzerdefinierte ID    | ✅     | 🚧            |
+| Automatisches Setzen von Kanälen| ✅     | 🚧            |
+| API-Kanäle              | ✅     | 🚧            |
+| Update-Statistik        | ✅     | 🚧            |
+| Statistik der fehlgeschlagenen Downloads| ✅     | 🚧            |
+| App-Nutzungsstatistik   | ✅     | 🚧            |
+| Update-Verschlüsselung   | ✅     | 🚧            |
+
+:::danger
+Wenn Sie ein schlechtes Update an Ihre Benutzer senden, können und werden Sie deren App beschädigen.
+:::
+
+> Bitte beachten Sie, dass Sie die Capgo-Cloud und Ihren Server nicht zur gleichen Zeit verwenden können.
+
+:::danger
+Die Over-the-Air (OTA)-Update-Funktion ist nur für Änderungen an HTML-, CSS- und JavaScript-Dateien anwendbar.
+
+Wenn Sie Änderungen am nativen Code vornehmen, wie z. B. Updates von Capacitor-Plugins, ist es zwingend erforderlich, die Anwendung erneut im App Store zur Genehmigung einzureichen.
+:::
+
+## Wählen Sie zwischen Auto und Manual
+Im Automatikmodus wird ein Teil der Logik vom nativen Code verarbeitet, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht feingranulare Updates, teilweise Bereitstellung auf einem Gerät oder in einer Gruppe und mehr.
+
+Im manuellen Modus wird die gesamte Logik vom JS verarbeitet.
+
+<LinkCard
+	title="Automatisches Update"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuell"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Installieren Sie den Capacitor-Updater
+
+```bash title="Installieren Sie den Capacitor-Updater"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## Bereiten Sie Ihr Paket vor
+
+Um Updates an Ihre App zu senden, müssen Sie sie zippen. 
+Der beste Weg, um sicherzustellen, dass Ihr Zip gut ist, besteht darin, die Capgo-CLI zum Zippen zu verwenden.
+```bash title="Erstellen Sie ein Paket mit Ihren Dateien, das von Ihrem Server bereitgestellt werden soll"
+npx @capgo/cli@latest bundle zip
+```
+
+Sie müssen dieses Zip von Ihrem Server aus bereitstellen.
+
+<LinkCard
+	title="Automatisches Update"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuell"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+:::note
+Wenn dies viel Arbeit zu sein scheint, probieren Sie die Testversion von Capgo Cloud aus.
+:::

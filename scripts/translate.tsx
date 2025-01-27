@@ -12,7 +12,7 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
       messages: [
         {
           role: 'system',
-          content: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that.',
+          content: 'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that. Re-verify your output to not have additional code block or declaration. Make sure to have the list items in <Steps> component have decimal, such as "1" should be modified to keep "1." in every kind of output. If you see imports but no code block declaration, do not add them by yourself un-necessarily.',
         },
         {
           role: 'user',

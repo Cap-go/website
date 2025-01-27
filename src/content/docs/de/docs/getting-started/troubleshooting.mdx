@@ -1,0 +1,140 @@
+---
+title: Fehlerbehebung
+sidebar:
+  order: 5
+next: false
+prev: false
+locale: de
+---
+
+Hier sind einige häufige Probleme, auf die Sie beim Verwenden von Capgo stoßen könnten, und wie Sie diese beheben können
+
+### Upload-Fehler
+
+Wenn Ihr Bundle-Upload fehlschlägt, überprüfen Sie Folgendes:
+- Ihre App-ID in `capacitorconfigts` stimmt mit Ihrer App im Capgo-Dashboard überein
+- Sie führen den Upload-Befehl vom Stammverzeichnis Ihres Capacitor-Projekts aus
+- Ihre Web-Ressourcen sind gebaut und auf dem neuesten Stand
+
+#### Erweiterte Upload-Optionen
+
+Die Capgo-CLI bietet einige zusätzliche Flags, um bei häufigen Upload-Problemen zu helfen:
+
+- `--tus`: Verwendet das [tus wiederaufnehmbare Upload-Protokoll](https://tusio/) für zuverlässigere Uploads großer Bundles oder bei schlechten Netzwerkverbindungen. Wenn Ihr Bundle über 10 MB groß ist oder Sie sich in einer instabilen Verbindung befinden, ziehen Sie in Betracht, `--tus` zu verwenden:
+  ```shell
+  npx @capgo/cli@latest upload --tus
+  ```
+
+- `--package-json` und `--node-modules`: Sagt Capgo, wo es Ihre Root-`packagejson` und `node_modules` finden kann, wenn Ihre App eine nicht standardmäßige Struktur wie ein Monorepo oder npm-Arbeitsbereich verwendet. Übergeben Sie den Pfad zur Root-`packagejson` und den `--node_modules`-Pfad:
+  ```shell
+  npx @capgo/cli@latest upload --package-json=path/to/packagejson --node_modules=path/to/node_modules
+  ```
+  Capgo benötigt diese Informationen, um die Abhängigkeiten Ihrer App korrekt zu bündeln.
+
+Sie können diese Flags nach Bedarf mit anderen Optionen wie `--channel` kombinieren. Siehe die [Capgo CLI-Dokumentation](/docs/cli) für vollständige Details zu den verfügbaren Upload-Optionen.
+
+Wenn Sie weiterhin Probleme mit Uploads haben, wenden Sie sich an den [Capgo-Support](mailto:support@capgoapp) für weitere Unterstützung.
+
+### Fehlerbehebung bei Updates
+
+Wenn Sie Probleme mit Live-Updates haben, ist der Capgo-Debug-Befehl ein hilfreiches Werkzeug zur Fehlersuche. Um ihn zu verwenden:
+
+1. Führen Sie den folgenden Befehl in Ihrem Projektverzeichnis aus:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2. Starten Sie Ihre App auf einem Gerät oder Emulator und führen Sie die Aktion aus, die ein Update auslösen sollte (z.B. die App nach dem Hochladen eines neuen Bundles erneut öffnen).
+
+3. Beobachten Sie die Ausgabe des Debug-Befehls. Es protokolliert Informationen über den Update-Prozess, einschließlich:
+   - Wann die App nach einem Update sucht
+   - Wenn ein Update gefunden wird und welche Version es ist
+   - Download- und Installationsfortschritt für das Update
+   - Alle Fehler, die während des Update-Prozesses auftreten
+
+4. Verwenden Sie die Debug-Protokolle, um festzustellen, wo das Problem auftritt. Zum Beispiel:
+   - Wenn kein Update gefunden wird, überprüfen Sie, ob Ihr Bundle erfolgreich hochgeladen wurde und die App so konfiguriert ist, dass sie den richtigen Kanal verwendet.
+   - Wenn das Update heruntergeladen, aber nicht installiert wird, stellen Sie sicher, dass Sie `CapacitorUpdaternotifyAppReady()` aufgerufen haben und dass die App vollständig geschlossen und wieder geöffnet wurde.
+   - Wenn Sie eine Fehlermeldung sehen, suchen Sie diesen speziellen Fehler in den Capgo-Dokumenten oder wenden Sie sich an den Support.
+
+Der Debug-Befehl ist besonders nützlich, um Probleme mit dem Download und der Installation von Updates zu identifizieren. Wenn die Protokolle zeigen, dass die erwartete Update-Version gefunden wurde, aber letztendlich nicht angewendet wurde, konzentrieren Sie Ihre Fehlersuche auf die Schritte nach dem Download.
+
+### Fehlersuche mit nativen Protokollen
+
+Zusätzlich zum Capgo-Debug-Befehl können die nativen Protokolle auf Android und iOS wertvolle Informationen zur Fehlersuche bereitstellen, insbesondere bei Problemen auf der nativen Seite des Update-Prozesses.
+
+#### Android-Protokolle
+
+Um auf die Android-Protokolle zuzugreifen:
+
+1. Verbinden Sie Ihr Gerät oder starten Sie Ihren Emulator.
+2. Öffnen Sie Android Studio und wählen Sie "Anzeige > Tool-Fenster > Logcat".
+3. Filtern Sie im Logcat-Fenster die Protokolle auf den Prozess Ihrer App, indem Sie ihn aus dem Dropdown-Menü oben auswählen.
+4. Suchen Sie nach Zeilen, die `Capgo` enthalten, um die SDK-Protokolle zu finden.
+
+Alternativ können Sie den Befehl `adb logcat` verwenden und nach `Capgo` filtern, um die Protokolle zu filtern.
+
+Das Capgo SDK protokolliert wichtige Ereignisse während des Update-Prozesses, wie z.B.:
+- Wann eine Update-Prüfung eingeleitet wird
+- Ob ein Update gefunden wird und welche Version es ist
+- Wann der Download des Updates beginnt und abgeschlossen wird
+- Wann die Installation des Updates ausgelöst wird
+- Alle Fehler, die während der nativen Update-Schritte auftreten
+
+Häufige Android-spezifische Probleme, die Sie in den Protokollen sehen könnten, umfassen:
+- Probleme mit der Netzwerkverbindung, die den Update-Download verhindern
+- Fehler bei Dateiberechtigungen beim Speichern oder Lesen des Update-Bundles
+- Mangel an Speicherplatz für das Update-Bundle
+- Fehler beim Neustarten der App nach der Installation des Updates
+
+#### iOS-Protokolle
+
+Um auf die iOS-Protokolle zuzugreifen:
+
+1. Verbinden Sie Ihr Gerät oder starten Sie Ihren Simulator.
+2. Öffnen Sie Xcode und gehen Sie zu "Fenster > Geräte und Simulatoren".
+3. Wählen Sie Ihr Gerät aus und klicken Sie auf "Konsole Öffnen".
+4. Suchen Sie in der Konsolenausgabe nach Zeilen, die `Capgo` enthalten, um die SDK-Protokolle zu finden.
+
+Sie können auch den Befehl `log stream` im Terminal verwenden und nach `Capgo` filtern, um die Protokolle zu filtern.
+
+Ähnlich wie bei Android protokolliert das Capgo SDK wichtige iOS-seitige Ereignisse:
+- Einleitung und Ergebnis der Update-Prüfung
+- Download-Start, Fortschritt und Abschluss
+- Auslösen und Ergebnis der Installation
+- Alle Fehler während des nativen Update-Prozesses
+
+iOS-spezifische Probleme, die Sie in den Protokollen identifizieren könnten, umfassen:
+- SSL-Zertifikatsprobleme beim Herunterladen des Updates
+- App-Transport-Sicherheit blockiert den Update-Download
+- Unzureichender Speicherplatz für das Update-Bundle
+- Fehler beim ordnungsgemäßen Extrahieren oder Anwenden des Update-Bundles
+
+Auf beiden Plattformen bieten die nativen Protokolle eine detailliertere Sicht auf den Update-Prozess, mit mehr Details zur nativen Implementierung. Sie sind besonders nützlich, um Probleme zu identifizieren, die außerhalb der Capgo-JavaScript-Schicht auftreten.
+
+Bei der Fehlersuche bei einem schwierigen Live-Update-Problem ist es eine gute Idee, sowohl die Capgo-Debug-Protokolle als auch die nativen Protokolle zu erfassen, um ein umfassendes Bild davon zu erhalten, was passiert. Die beiden Protokolle zusammen geben Ihnen die beste Chance, das Problem zu identifizieren und zu beheben.
+
+### Updates werden nicht angewendet
+
+Wenn Sie ein Bundle hochgeladen haben, aber die Änderungen auf Ihrem Gerät nicht sehen:
+- Stellen Sie sicher, dass Sie `CapacitorUpdaternotifyAppReady()` in Ihrem App-Code aufgerufen haben, wie im [Schnellstart](/docs/getting-started/quickstart) gezeigt.
+- Überprüfen Sie, ob Ihr Gerät mit dem Internet verbunden ist und die Capgo-Debug-Protokolle zeigen, dass das Update heruntergeladen wurde.
+- Versuchen Sie, die App vollständig zu schließen und erneut zu öffnen, da Updates nur bei einem neuen Start angewendet werden.
+- Suchen Sie nach Fehlern in den nativen Protokollen, die auf ein Problem beim Anwenden des Updates hinweisen könnten.
+
+Lesen Sie den Leitfaden [Live-Updates bereitstellen](/docs/getting-started/deploy) für weitere Details zum Update-Prozess. Wenn Sie weiterhin feststecken, verwenden Sie den Befehl `npx @capgo/cli@latest app debug` und die nativen Protokolle, um mehr Einblick in das Geschehen zu erhalten.
+
+## SDK-Installation
+
+Wenn Sie Probleme bei der Installation des Capgo SDK haben, stellen Sie sicher, dass:
+- Ihre App eine unterstützte Version von Capacitor verwendet (40 oder neuer)
+- Sie die Schritte im [Schnellstart](/docs/getting-started/quickstart) in der richtigen Reihenfolge befolgt haben, einschließlich des Synchronisierens Ihrer App nach der Installation des SDK.
+
+## CI/CD-Integration
+
+Für Probleme mit dem Auslösen von Capgo-Uploads aus Ihrem CI/CD-Pipeline:
+- Überprüfen Sie, ob Ihr Capgo-Authentifizierungstoken korrekt eingerichtet ist.
+- Stellen Sie sicher, dass Sie den Upload-Befehl nach dem Erstellen Ihrer Web-Ressourcen ausführen.
+- Überprüfen Sie, ob der Upload-Befehl den korrekten Kanalnamen für Ihre Zielumgebung verwendet.
+
+Siehe die [CI/CD-Integrationsdokumentation](/docs/cicd-integration) für weitere Tipps zur Fehlersuche. Sie können auch den Befehl `npx @capgo/cli@latest app debug` verwenden, um zu bestätigen, ob Ihre CI/CD-aktivierten Updates von der App empfangen werden.

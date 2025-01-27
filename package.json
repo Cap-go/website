@@ -11,6 +11,7 @@
     "fmt": "prettier --write '**/*' --ignore-unknown",
     "generate:locale:translations": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
     "generate:blog:translations": "tsx scripts/generate_blog_translations.tsx",
+    "generate:docs:translations": "tsx scripts/generate_docs_translations.tsx",
     "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
     "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
