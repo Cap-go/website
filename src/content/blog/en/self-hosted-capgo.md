@@ -63,6 +63,10 @@ Here are the differences between Capgo Cloud and Capgo Self-Hosted:
 | **Premium Support** | Real support delivered by real human beings who build and maintain Capgo. | Premium support is not included. Self-hosted release is community supported only. |
 | **Releases** | Continuously developed and improved with new features and updates multiple times per week. | It’s a long term release published twice per year, so the latest features won’t be immediately available as they’re battled-tested in the cloud first. |
 
+# How to self-host Capgo
+
+We mainly use Supabase in Capgo, to self host you just need to follow the [Supabase self-hosting documentation](https://supabase.com/docs/guides/self-hosting/docker).
+
 # Using the CLI with self-hosted capgo
 To use the CLI with self-hosted capgo edit the capacitor.config.ts from your app directory and set it like this:
 

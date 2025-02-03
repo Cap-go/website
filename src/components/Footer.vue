@@ -44,7 +44,7 @@ onMounted(() => {
 onUnmounted(() => window.removeEventListener('hashchange', decidePath))
 
 interface NavigationItem {
-  name: string
+  name: string | (() => void) | ReturnType<typeof defineComponent>
   href: string
   target?: string
   rel?: string
@@ -80,7 +80,7 @@ const navigation: Record<string, NavigationItem[]> = {
     },
     { name: m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
-      name: systemStatus.value.indicator === 'up' ? m.all_systems_normal() : m.systems_are_disturbed(),
+      name: () => (systemStatus.value.indicator === 'up' ? m.all_systems_normal() : m.systems_are_disturbed()),
       href: 'https://status.capgo.app/',
       target: '_blank',
       icon: () => (systemStatus.value.indicator === 'up' ? '🟢' : '🟠'),
@@ -101,7 +101,7 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
     { name: m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
-    { name: m.security(), href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: m.trust(), href: getRelativeLocaleUrl(props.locale, 'trust') },
     { name: m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
   ],
   legal: [
@@ -212,7 +212,6 @@ const navigation: Record<string, NavigationItem[]> = {
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-16">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
-          <!-- <img class="h-10" src="https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300" alt="Company name"> -->
           <p class="text-base text-gray-500">{{ m.making_world_better() }}</p>
           <ul role="list" class="mt-4 space-y-4">
             <li v-for="item in navigation.hero" :key="item.name">
@@ -292,7 +291,7 @@ const navigation: Record<string, NavigationItem[]> = {
                     @click="item.execute && item.execute()"
                   >
                     <span v-if="item.icon" class="mr-2">{{ typeof item.icon === 'function' ? item.icon() : item.icon }}</span>
-                    {{ item.name }}
+                    {{ typeof item.name === 'function' ? item.name() : item.name }}
                   </a>
                 </li>
               </ul>
