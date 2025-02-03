@@ -1,6 +1,6 @@
 ---
-title: Loslegen
-description: Wie man seinen eigenen Auto-Update-Server einrichtet
+title: 시작하기
+description: Eigenen automatischen Update-Server betreiben
 sidebar:
   order: 1
 locale: de
@@ -12,59 +12,60 @@ Diese Dokumentation erklärt, wie Sie Ihren eigenen Auto-Update-Server betreiben
 
 ## Einführung
 
-Wenn Sie diese Arbeit hilfreich finden, denken Sie bitte darüber nach, meine Arbeit zu unterstützen, indem Sie [Github-Sponsor](https://githubcom/sponsors/riderx) werden.
+Wenn Sie diese Arbeit hilfreich finden, erwägen Sie bitte meine Arbeit zu unterstützen, indem Sie [Github Sponsor](https://githubcom/sponsors/riderx) werden
 
-Ich habe gewettet, all den Code, den ich hier erstellt habe, Open Source zugänglich zu machen, anstatt ihn hinter einer Bezahlschranke zu verstecken. Durch das Offenlegen, anstatt zu kämpfen und zu verbergen, glaube ich, dass wir die Welt zu einem besseren Ort machen können.
+Ich habe darauf gesetzt, den gesamten Code, den ich hier erstellt habe, Open Source zu machen, anstatt ihn kostenpflichtig zu machen. Durch die Öffnung anstelle von Kampf und Verstecken glaube ich, dass wir die Welt zu einem besseren Ort machen können
 
-Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und es zu einem offenen und transparenten Geschäft machen.
+Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
 
-Um das zu ermöglichen, ist es notwendig, dass jeder von uns seinen Teil beiträgt, einschließlich Ihnen 🥹
+Aber um dies zu ermöglichen, ist es notwendig, dass wir alle, einschließlich Ihnen, unseren Teil dazu beitragen 🥹
 
-Wenn Capgo nicht zu Ihnen passt, zahlen Sie Ihren eigenen Preis und [unterstützen Sie einen bootstrapped Maker](https://githubcom/sponsors/riderx) zu Ihren Bedingungen.
+Wenn Capgo nicht zu Ihnen passt, dann zahlen Sie Ihren eigenen Preis und [unterstützen Sie einen bootstrapped Maker](https://githubcom/sponsors/riderx) zu Ihren Bedingungen
 
-<LinkCard title="Überlegen Sie, beizutragen" href="/docs/plugin/self-hosted/contributing/"/>
-## Funktionenparität
+<LinkCard title="Erwägen Sie einen Beitrag" href="/docs/plugin/self-hosted/contributing/"/>
+## Funktionsparität
 
-Wenn Sie sich entscheiden, mit Ihrem eigenen Server zu arbeiten, verlieren Sie den 5-minütigen Einrichtungsablauf.\
-Sie müssen all diese Funktionen selbst implementieren.
+Wenn Sie sich für Ihren eigenen Server entscheiden, verlieren Sie den 5-Minuten-Einrichtungsablauf\
+Sie müssen alle diese Funktionen selbst implementieren
 
-| Funktionen               | Capgo | Selbstgehostet |
-| ------------------------ | ----- | -------------- |
-| Updates                  | ✅     | 🚧            |
-| Automatisches Zurücksetzen| ✅     | 🚧            |
-| E-Mail-Benachrichtigungen bei Fehler| ✅     | 🚧            |
-| Kanäle                   | ✅     | 🚧            |
-| Kanäle Überschreiben     | ✅     | 🚧            |
-| Geräteüberschreibung     | ✅     | 🚧            |
-| Kanäleinstellungen       | ✅     | 🚧            |
-| Geräteeinstellungen      | ✅     | 🚧            |
-| Benutzerdefinierte ID    | ✅     | 🚧            |
-| Automatisches Setzen von Kanälen| ✅     | 🚧            |
-| API-Kanäle              | ✅     | 🚧            |
-| Update-Statistik        | ✅     | 🚧            |
-| Statistik der fehlgeschlagenen Downloads| ✅     | 🚧            |
-| App-Nutzungsstatistik   | ✅     | 🚧            |
-| Update-Verschlüsselung   | ✅     | 🚧            |
 
-:::danger
-Wenn Sie ein schlechtes Update an Ihre Benutzer senden, können und werden Sie deren App beschädigen.
-:::
-
-> Bitte beachten Sie, dass Sie die Capgo-Cloud und Ihren Server nicht zur gleichen Zeit verwenden können.
+| Funktionen               | Capgo | Selbst gehostet |
+| ------------------------ | ----- | --------------- |
+| Updates                  | ✅     | 🚧             |
+| Auto-Rücksetzung         | ✅     | 🚧             |
+| E-Mail-Warnungen bei Fehlern | ✅  | 🚧             |
+| Kanäle                   | ✅     | 🚧             |
+| Kanal-Überschreibungen   | ✅     | 🚧             |
+| Geräte-Überschreibungen  | ✅     | 🚧             |
+| Kanal-Einstellungen      | ✅     | 🚧             |
+| Geräte-Einstellungen     | ✅     | 🚧             |
+| Benutzerdefinierte ID    | ✅     | 🚧             |
+| Auto-Set-Kanäle          | ✅     | 🚧             |
+| API-Kanäle               | ✅     | 🚧             |
+| Update-Statistiken       | ✅     | 🚧             |
+| Download-Fehlerstatistiken | ✅   | 🚧             |
+| App-Nutzungsstatistiken  | ✅     | 🚧             |
+| Update-Verschlüsselung   | ✅     | 🚧             |
 
 :::danger
-Die Over-the-Air (OTA)-Update-Funktion ist nur für Änderungen an HTML-, CSS- und JavaScript-Dateien anwendbar.
-
-Wenn Sie Änderungen am nativen Code vornehmen, wie z. B. Updates von Capacitor-Plugins, ist es zwingend erforderlich, die Anwendung erneut im App Store zur Genehmigung einzureichen.
+Wenn Sie ein fehlerhaftes Update an Ihre Benutzer senden, können und werden Sie ihre App beschädigen
 :::
 
-## Wählen Sie zwischen Auto und Manual
-Im Automatikmodus wird ein Teil der Logik vom nativen Code verarbeitet, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht feingranulare Updates, teilweise Bereitstellung auf einem Gerät oder in einer Gruppe und mehr.
+> Beachten Sie, dass Sie nicht gleichzeitig die Capgo-Cloud und Ihren eigenen Server nutzen können
 
-Im manuellen Modus wird die gesamte Logik vom JS verarbeitet.
+:::danger
+Die Over-the-Air (OTA) Update-Funktion gilt nur für Änderungen an HTML-, CSS- und JavaScript-Dateien
+
+Wenn Sie Änderungen am nativen Code vornehmen, wie z.B. Updates von Capacitor-Plugins, müssen Sie die Anwendung erneut im App Store zur Genehmigung einreichen
+:::
+
+## Wählen Sie zwischen Auto und Manuell
+Im Auto-Modus wird ein Teil der Logik vom nativen Code übernommen, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht fein abgestimmte Updates, teilweise Bereitstellung für ein Gerät oder eine Gruppe und mehr
+
+Im manuellen Modus wird die gesamte Logik von JS übernommen
 
 <LinkCard
-	title="Automatisches Update"
+	title="Auto Update"
 	href="/docs/plugin/self-hosted/auto-update/"
 />
 
@@ -73,25 +74,25 @@ Im manuellen Modus wird die gesamte Logik vom JS verarbeitet.
 	href="/docs/plugin/self-hosted/manual-update/"
 />
 
-## Installieren Sie den Capacitor-Updater
+## Capacitor Updater installieren
 
-```bash title="Installieren Sie den Capacitor-Updater"
+```bash title="Installieren Sie den Capacitor Updater"
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-## Bereiten Sie Ihr Paket vor
+## Vorbereiten Ihres Bundles
 
-Um Updates an Ihre App zu senden, müssen Sie sie zippen. 
-Der beste Weg, um sicherzustellen, dass Ihr Zip gut ist, besteht darin, die Capgo-CLI zum Zippen zu verwenden.
-```bash title="Erstellen Sie ein Paket mit Ihren Dateien, das von Ihrem Server bereitgestellt werden soll"
+Um Updates an Ihre App zu senden, müssen Sie sie zippen
+Der beste Weg, um sicherzustellen, dass Ihr Zip gut ist, ist die Verwendung der Capgo CLI zum Zippen
+```bash title="Erstellen Sie ein Bundle mit Ihren Dateien zum Bereitstellen von Ihrem Server"
 npx @capgo/cli@latest bundle zip
 ```
 
-Sie müssen dieses Zip von Ihrem Server aus bereitstellen.
+Sie müssen diesen Zip von Ihrem Server aus selbst bereitstellen
 
 <LinkCard
-	title="Automatisches Update"
+	title="Auto Update"
 	href="/docs/plugin/self-hosted/auto-update/"
 />
 
@@ -101,5 +102,5 @@ Sie müssen dieses Zip von Ihrem Server aus bereitstellen.
 />
 
 :::note
-Wenn dies viel Arbeit zu sein scheint, probieren Sie die Testversion von Capgo Cloud aus.
+Wenn Ihnen das wie zu viel Arbeit erscheint, probieren Sie die Capgo Cloud Testversion
 :::

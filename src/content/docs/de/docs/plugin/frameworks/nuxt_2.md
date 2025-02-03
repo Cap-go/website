@@ -1,6 +1,6 @@
 ---
 title: Nuxt 2
-description: Wie man das Plugin in Nuxt 2 installiert
+description: So installierst du das Plugin in Nuxt 2
 sidebar:
   order: 1
 locale: de
@@ -8,7 +8,7 @@ locale: de
 
 # Installation in Nuxt 2
 
-Erstellen Sie eine Plugin-Datei `capacitor-updaterjs` im Verzeichnis `plugins`
+Erstellen Sie eine Plugin-Datei `capacitor-updaterjs` im `plugins` Verzeichnis
 
 ```js
 
@@ -23,4 +23,4 @@ export default ({ app }) => {
 }
 ```
 
-Dies wird das Plugin auf der Client-Seite laden und die App benachrichtigen, dass sie bereit ist, Updates zu empfangen.
+Dies lädt das Plugin auf der Client-Seite und informiert die App, dass sie bereit ist, Updates zu empfangen

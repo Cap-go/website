@@ -1,84 +1,84 @@
 ---
-title: Anwendung
+title: App
 sidebar_label: app
 sidebar:
   order: 4
 locale: de
 ---
 
-Der `app` Befehl ermöglicht es Ihnen, Ihre Capgo-Apps zu verwalten.
+Der `app`-Befehl ermöglicht die Verwaltung Ihrer Capgo-Apps
 
-### hinzufügen
+### add
 
 `npx @capgo/cli app add [appId]`
 
-Fügt eine neue App zu Ihrem Capgo-Konto hinzu.
+Fügt eine neue App zu Ihrem Capgo-Konto hinzu
 
-`[appId]` ist Ihre App-ID im Format `comexampleapp`. Siehe die [Capacitor-Dokumentation](https://capacitorjscom/docs/cli/commands/init/) für weitere Informationen.
+`[appId]` ist Ihre App-ID im Format `com.example.app`. Weitere Informationen finden Sie in der [Capacitor-Dokumentation](https://capacitorjs.com/docs/cli/commands/init/)
 
-> 💡 Alle Optionen werden aus Ihrer `capacitorconfigjson` erraten, wenn sie nicht angegeben werden.
+> 💡 Alle Optionen werden aus Ihrer `capacitor.config.json` ermittelt, falls nicht angegeben
 
 Optionen:
 
-- `--icon [path]`: Pfad zu einem benutzerdefinierten Symbol, das in der Capgo-Web-App angezeigt werden soll.
-- `--name [name]`: Benutzerdefinierter Name, der in der App-Liste angezeigt werden soll.
-- `--apikey [key]`: API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-- `--retention [days]`: Aufbewahrungsdauer für App-Pakete in Tagen (Standard: 0 = unendlich).
+- `--icon [path]`: Pfad zu einem benutzerdefinierten Symbol für die Anzeige in der Capgo Web-App
+- `--name [name]`: Benutzerdefinierter Name für die Anzeige in der App-Liste
+- `--apikey [key]`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `--retention [days]`: Aufbewahrungszeitraum für App-Bundles in Tagen (Standard: 0 = unbegrenzt)
 
-### festlegen
+### set
 
 `npx @capgo/cli app set [appId]`
 
-Aktualisiert eine vorhandene App in Ihrem Capgo-Konto.
+Aktualisiert eine bestehende App in Ihrem Capgo-Konto
 
 Optionen:
 
-- `--icon [path]`: Pfad zu einem benutzerdefinierten Symbol, das in der Capgo-Web-App angezeigt werden soll.
-- `--name [name]`: Benutzerdefinierter Name, der in der App-Liste angezeigt werden soll.
-- `--retention [days]`: Aufbewahrungsdauer für App-Pakete in Tagen (Standard: 0 = unendlich).
-- `--apikey [key]`: API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+- `--icon [path]`: Pfad zu einem benutzerdefinierten Symbol für die Anzeige in der Capgo Web-App
+- `--name [name]`: Benutzerdefinierter Name für die Anzeige in der App-Liste
+- `--retention [days]`: Aufbewahrungszeitraum für App-Bundles in Tagen (Standard: 0 = unbegrenzt)
+- `--apikey [key]`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### liste
+### list
 
 `npx @capgo/cli app list [appId]`
 
-Listet alle Apps in Ihrem Capgo-Konto auf.
+Listet alle Apps in Ihrem Capgo-Konto auf
 
 Optionen:
 
-- `--apikey [key]`: API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+- `--apikey [key]`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### löschen
+### delete
 
 `npx @capgo/cli app delete [appId]`
 
-Löscht eine App aus Ihrem Capgo-Konto.
+Löscht eine App aus Ihrem Capgo-Konto
 
 Optionen:
 
-- `--apikey [key]`: API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-- `--bundle`: Löscht nur eine spezifische Bundle-Version.
+- `--apikey [key]`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `--bundle`: Löscht nur eine bestimmte Bundle-Version
 
-### debuggen
+### debug
 
 `npx @capgo/cli app debug [appId]`
 
-Zeigt Debug-Informationen für eine App an.
+Zeigt Debug-Informationen für eine App an
 
 Optionen:
 
-- `--apikey [key]`: API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-- `--device`: Debuggen eines spezifischen Geräts.
+- `--apikey [key]`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `--device`: Debug eines bestimmten Geräts
 
-### einstellung
+### setting
 
 `npx @capgo/cli app setting [path]`
 
-Bearbeitet die Capacitor-Konfiguration für eine App.
+Bearbeitet die Capacitor-Konfiguration für eine App
 
-`[path]` ist der Pfad zu der Einstellung, die Sie ändern möchten (z.B. `appId` oder `pluginsCapacitorUpdaterautoUpdate`).
+`[path]` ist der Pfad zur Einstellung, die Sie ändern möchten (z.B. `appId` oder `plugins.CapacitorUpdater.autoUpdate`)
 
 Sie müssen entweder `--string` oder `--bool` angeben:
 
-- `--string <value>`: Setzt die Einstellung auf einen String-Wert.
-- `--bool <true|false>`: Setzt die Einstellung auf einen booleschen Wert.
+- `--string <value>`: Setzt die Einstellung auf einen String-Wert
+- `--bool <true|false>`: Setzt die Einstellung auf einen booleschen Wert

@@ -1,12 +1,12 @@
 ---
-title: Stats-Endpunkt
-description: Wie man einen selbstgehosteten Statistik-Endpunkt erstellt
+title: Statistik-Endpunkt
+description: Erstellen eines selbst gehosteten Statistik-Endpunkts
 sidebar:
   order: 2
 locale: de
 ---
 
-Hier ist ein Beispiel für Code in JavaScript, um die Statistiken des Plugins zu speichern
+Hier ist ein Beispiel für JavaScript-Code zum Speichern der Plugin-Statistiken
 
 ```typescript
 interface AppInfos {
@@ -84,12 +84,12 @@ Dieser Endpunkt sollte ein JSON zurückgeben:
 
 ## Aktionen:
 
-* **delete** : wenn ein Bundle lokal gelöscht wird
-* **reset** : wenn die App auf das integrierte Bundle zurückgesetzt wird
-* **set** : wenn die App ein neues Bundle setzt
-* **set\_fail** : wenn die App die ID des festgelegten Bundles nicht finden konnte
-* **update\_fail** : wird nach der Verzögerung gesendet und `notifyAppReady` wurde nie aufgerufen
-* **download\_fail** : wenn der Download nie abgeschlossen wurde
+* **delete**: wenn ein Bundle lokal gelöscht wird
+* **reset**: wenn die App zum eingebauten Bundle zurückkehrt
+* **set**: wenn die App ein neues Bundle setzt
+* **set\_fail**: wenn die App die ID des gesetzten Bundles nicht finden konnte
+* **update\_fail**: wird nach der Verzögerung gesendet und `notifyAppReady` wurde nie aufgerufen
+* **download\_fail**: wenn der Download nie abgeschlossen wurde
 * **download\_complete:** Wenn der Download abgeschlossen ist
-* **download\_xx:** Senden Sie alle 10 % des Downloads, z.B.: download\_20, download\_70
-* **update\_fail:** wenn das Bundle fehlschlägt, `notifyAppReady` im Zeitrahmen durchzuführen
+* **download\_xx:** Wird alle 10% des Downloads gesendet, z.B.: download\_20, download\_70
+* **update\_fail:** wenn das Bundle `notifyAppReady` nicht im vorgegebenen Zeitrahmen ausführt

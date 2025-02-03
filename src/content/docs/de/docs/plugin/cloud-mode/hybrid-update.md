@@ -1,20 +1,22 @@
 ---
-title: Hybrides Update
-description: Methoden für automatische Updates aktualisieren
+title: Aggiornamento ibrido
+description: Auto-Update-Methoden
 sidebar:
   order: 3
 locale: de
 ---
 
-Wenn Sie Updates an Ihre Benutzer pushen, haben Sie einige Möglichkeiten, mit dem Aktualisierungszyklus umzugehen, wie es Ihnen am besten passt, bevor Sie sie anwenden.
+Beim Pushen von Updates an Ihre Benutzer haben Sie mehrere Möglichkeiten, den Update-Zyklus nach Ihren Wünschen zu gestalten, bevor Sie sie anwenden
 
 - Stilles Update
-- Auf das Ereignis ```updateAvailable``` hören
-- Ein modales Fenster anzeigen oder Updates verzögern
+- Auf ```updateAvailable```-Event hören
+- Ein Modal-Fenster anzeigen oder Updates verzögern
+
 
 ## Stilles Update
 
-Sie können einen Aktualisierungszyklus auslösen, der bei jedem Start der App stattfindet, indem Sie `directUpdate` auf `true` setzen. Dadurch wird der Aktualisierungszyklus wie gewohnt ohne Benutzerinteraktion ausgelöst.
+Sie können einen Update-Zyklus bei jedem App-Start erzwingen, indem Sie `directUpdate` auf `true` setzen.
+Dies löst den Update-Zyklus wie gewohnt ohne Benutzerinteraktion aus
 
 ```tsx
 // capacitorconfigjson
@@ -32,23 +34,23 @@ Sie können einen Aktualisierungszyklus auslösen, der bei jedem Start der App s
 }
 ```
 
-Und dann sollten Sie in Ihrer App den Splashscreen ausblenden, wenn Sie das Ereignis `appReady` erhalten:
+In Ihrer App sollten Sie dann den Splash-Screen ausblenden, wenn Sie das Event `appReady` empfangen:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 
 CapacitorUpdateraddListener('appReady', () => {
-  // Splash ausblenden
+  // Hide splash
   SplashScreenhide()
 })
 
 CapacitorUpdaternotifyAppReady()
 ```
 
-## Zwangsupdate
+## Erzwungenes Update
 
-Fügen Sie einen Listener für das Ereignis `updateAvailable` hinzu und zeigen Sie dann ein Alert an, um den Benutzer darüber zu informieren, dass die App aktualisiert wird:
+Fügen Sie einen Listener für das Event `updateAvailable` hinzu und zeigen Sie dann eine Benachrichtigung an, um den Benutzer über das Update zu informieren:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -58,7 +60,7 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   try {
     await Dialogalert({
       title: 'Update verfügbar',
-      message: `Version ${resbundleversion} ist verfügbar. Die App wird jetzt aktualisiert.`,
+      message: `Version ${resbundleversion} ist verfügbar. Die App wird jetzt aktualisiert`,
     })
     CapacitorUpdaterset(resbundle)
   }
@@ -70,9 +72,9 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
 CapacitorUpdaternotifyAppReady()
 ```
 
-## Modalupdate
+## Modal Update
 
-Sie können auch den Benutzer entscheiden lassen, indem Sie einen Dialog anzeigen, um ihn zu fragen, ob er aktualisieren möchte:
+Sie können den Benutzer auch entscheiden lassen, indem Sie einen Dialog anzeigen:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

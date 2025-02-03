@@ -1,22 +1,22 @@
 ---
-title: Verwendung des Capacitor-Updaters mit selbstgehostetem Capgo
-description: Wie man den Capacitor Updater mit selbstgehostetem Capgo verwendet
+title: Nutzung des Capacitor-Updater mit selbst gehosteter Capgo-Instanz
+description: Wie man den Capacitor Updater mit selbst-gehostetem Capgo verwendet
 sidebar:
   order: 2
 locale: de
 ---
 
-## Was dieses Tutorial abdecken wird?
+## Was dieses Tutorial behandelt?
 
-Dieses Tutorial zeigt, wie man den Capacitor Updater in einer Entwicklungsumgebung mit selbst gehostetem Capgo verwendet.
+Dieses Tutorial zeigt, wie man Capacitor Updater in einer Entwicklungsumgebung mit selbst gehostetem Capgo verwendet.
 
 ## Voraussetzungen
 
-1. [Klonen Sie Capgo](https://githubcom/Cap-go/capgo/)
+1. [Geklontes Capgo](https://githubcom/Cap-go/capgo/)
 
 ## Erste Schritte
 
-Um den Capacitor Updater mit selbst-gehostetem Capgo zu verwenden, bearbeiten Sie die `capacitorconfigts` in Ihrem Anwendungsverzeichnis und setzen Sie sie wie folgt:
+Um den Capacitor Updater mit selbst gehostetem Capgo zu verwenden, bearbeiten Sie die `capacitorconfigts` aus Ihrem App-Verzeichnis und stellen Sie sie wie folgt ein:
 
 ```ts
 const config: CapacitorConfig = {
@@ -34,21 +34,26 @@ const config: CapacitorConfig = {
 };
 ```
 
-Damit können Sie Capgo lokal in der Entwicklung verwenden. Allerdings ist dies standardmäßig nicht genug.
+Dies ermöglicht Ihnen die Verwendung von lokalem Capgo in der Entwicklung. Allerdings ist dies standardmäßig nicht ausreichend.
 
-In Android ist es erforderlich, [klare Kommunikation](https://developerandroidcom/topic/security/risks/cleartext/) zu aktivieren, da SSL standardmäßig lokal deaktiviert ist. Dies kann erreicht werden, indem Sie [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml/) ändern und `android:usesCleartextTraffic="true"` im `application`-Tag hinzufügen. Ein vollständiges Beispiel für diese Änderung finden Sie [hier](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/).
+Unter Android ist die Aktivierung von [Klartext-Kommunikation](https://developerandroidcom/topic/security/risks/cleartext/) erforderlich, da SSL standardmäßig lokal deaktiviert ist.
+Dies kann durch Ändern der [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml/) und Hinzufügen von `android:usesCleartextTraffic="true"` im `application`-Tag erreicht werden.
+Ein vollständiges Beispiel dieser Änderung finden Sie [hier](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/)
 
-Da Android standardmäßig keine `http`-Verbindungen erlaubt, hat Capgo eine Überprüfung für `http` [hier](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts/#L396) implementiert. Dieser Code könnte nicht immer vorhanden sein, aber vorerst ist eine Änderung zu dieser Zeile erforderlich, um die Updates zum Laufen zu bringen. Diese Zeile sollte ungefähr so aussehen:
+Da Android standardmäßig kein `http` erlaubt, hat Capgo eine Überprüfung für http [hier](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts/#L396) implementiert.
+Dieser Code ist möglicherweise nicht immer hier, aber momentan ist eine Änderung dieser Zeile erforderlich, damit Updates funktionieren.
+Diese Zeile sollte etwa so aussehen:
 ```ts
     if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
 ```
 
 :::danger
-⚠️ Kommittieren Sie `supabase/functions/updates/indexts` nicht in das entfernte Repository\
-Dieser Code ist [absichtlich hier](https://githubcom/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354).
+⚠️ Übertragen Sie `supabase/functions/updates/indexts` nicht in das Remote-Repository\
+Dieser Code ist [absichtlich](https://githubcom/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354) hier
 :::
 
-Es könnte auch ein Problem geben, das die Android-App daran hindert, sich zu verbinden. Wenn Sie keine Anfragen an die Edge-Funktionen sehen, führen Sie aus:
+Es könnte auch ein Problem geben, das die Android-App daran hindert, sich zu verbinden. Wenn Sie keine Anfragen sehen, die an Edge-Funktionen gesendet werden, führen Sie
 ```bash
 adb reverse tcp:54321 tcp:54321
 ```
+aus.

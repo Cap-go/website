@@ -1,82 +1,82 @@
 ---
-title: kanal
+title: Kanal
 sidebar_label: channel
 sidebar:
   order: 6
 locale: de
 ---
 
-Der Befehl `channel` ermöglicht es Ihnen, Ihre Release-Kanäle zu verwalten.
+Der Befehl `channel` ermöglicht die Verwaltung Ihrer Release-Kanäle
 
-### hinzufügen
+### add
 
 `npx @capgo/cli channel add [channelId] [appId]`
 
-Erstellt einen neuen Kanal für eine App.
+Erstellt einen neuen Kanal für eine App
 
 Optionen:
 
-- `-d, --default`: Setzen Sie den neuen Kanal als Standardkanal
-- `-a, --apikey <apikey>`: API-Schlüssel, um ihn mit Ihrem Konto zu verknüpfen
+- `-d, --default`: Setzt den neuen Kanal als Standardkanal
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### löschen
+### delete
 
 `npx @capgo/cli channel delete [channelId] [appId]`
 
-Löscht einen Kanal von einer App.
+Löscht einen Kanal aus einer App
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um ihn mit Ihrem Konto zu verknüpfen
-- `--delete-bundle`: Löschen Sie das mit dem Kanal verbundene Bundle
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `--delete-bundle`: Löscht das mit dem Kanal verbundene Bundle
 
-### auflisten
+### list
 
 `npx @capgo/cli channel list [appId]`
 
-Listet alle Kanäle für eine App auf.
+Listet alle Kanäle einer App auf
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um ihn mit Ihrem Konto zu verknüpfen
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### aktuellesBundle
+### currentBundle
 
 `npx @capgo/cli channel currentBundle [channel] [appId]`
 
-Erhalten Sie das aktuelle Bundle für einen bestimmten Kanal.
+Ruft das aktuelle Bundle für einen bestimmten Kanal ab
 
 Optionen:
 
 - `-c, --channel <channel>`: Kanal, von dem das aktuelle Bundle abgerufen werden soll
-- `-a, --apikey <apikey>`: API-Schlüssel, um ihn mit Ihrem Konto zu verknüpfen
-- `--quiet`: Nur die Bundle-Version drucken
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `--quiet`: Gibt nur die Bundle-Version aus
 
-### festlegen
+### set
 
 `npx @capgo/cli channel set [channelId] [appId]`
 
-Setzt die Eigenschaften eines Kanals.
+Legt die Eigenschaften eines Kanals fest
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um ihn mit Ihrem Konto zu verknüpfen
-- `-b, --bundle <bundle>`: Bundle-Version, die für den Kanal festgelegt werden soll
-- `-s, --state <state>`: Setzen Sie den Status des Kanals (`default` oder `normal`)
-- `--latest`: Verwenden Sie die neueste Version aus `packagejson` als Bundle-Version
-- `--downgrade`: Erlauben Sie Downgrades auf Versionen unter der nativen Version
-- `--no-downgrade`: Deaktivieren Sie Downgrades auf Versionen unter der nativen Version
-- `--upgrade`: Erlauben Sie Upgrades auf Versionen über der nativen Version
-- `--no-upgrade`: Deaktivieren Sie Upgrades auf Versionen über der nativen Version
-- `--ios`: Erlauben Sie das Senden von Updates an iOS-Geräte
-- `--no-ios`: Deaktivieren Sie das Senden von Updates an iOS-Geräte
-- `--android`: Erlauben Sie das Senden von Updates an Android-Geräte
-- `--no-android`: Deaktivieren Sie das Senden von Updates an Android-Geräte
-- `--self-assign`: Erlauben Sie Geräten, sich selbst diesem Kanal zuzuweisen
-- `--no-self-assign`: Deaktivieren Sie die Selbstzuweisung von Geräten zu diesem Kanal
-- `--disable-auto-update <disableAutoUpdate>`: Deaktivieren Sie die Strategie zur automatischen Aktualisierung für diesen Kanal (Optionen: `major`, `minor`, `metadata`, `patch`, `none`)
-- `--dev`: Erlauben Sie das Senden von Updates an Entwicklungsgeräte
-- `--no-dev`: Deaktivieren Sie das Senden von Updates an Entwicklungsgeräte
-- `--emulator`: Erlauben Sie das Senden von Updates an Emulatorgeräte
-- `--no-emulator`: Deaktivieren Sie das Senden von Updates an Emulatorgeräte
-- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `-b, --bundle <bundle>`: Bundle-Versionsnummer für den Kanal festlegen
+- `-s, --state <state>`: Legt den Status des Kanals fest (`default` oder `normal`)
+- `--latest`: Verwendet die neueste Version aus `packagejson` als Bundle-Version
+- `--downgrade`: Erlaubt Downgrades auf Versionen unter der nativen Version
+- `--no-downgrade`: Deaktiviert Downgrades auf Versionen unter der nativen Version
+- `--upgrade`: Erlaubt Upgrades auf Versionen über der nativen Version
+- `--no-upgrade`: Deaktiviert Upgrades auf Versionen über der nativen Version
+- `--ios`: Erlaubt das Senden von Updates an iOS-Geräte
+- `--no-ios`: Deaktiviert das Senden von Updates an iOS-Geräte
+- `--android`: Erlaubt das Senden von Updates an Android-Geräte
+- `--no-android`: Deaktiviert das Senden von Updates an Android-Geräte
+- `--self-assign`: Erlaubt Geräten die Selbstzuweisung zu diesem Kanal
+- `--no-self-assign`: Deaktiviert die Selbstzuweisung von Geräten zu diesem Kanal
+- `--disable-auto-update <disableAutoUpdate>`: Deaktiviert die automatische Update-Strategie für diesen Kanal (Optionen: `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev`: Erlaubt das Senden von Updates an Entwicklungsgeräte
+- `--no-dev`: Deaktiviert das Senden von Updates an Entwicklungsgeräte
+- `--emulator`: Erlaubt das Senden von Updates an Emulator-Geräte
+- `--no-emulator`: Deaktiviert das Senden von Updates an Emulator-Geräte
+- `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)

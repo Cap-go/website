@@ -1,33 +1,33 @@
 ---
-title: Self-Hosting S3
-description: 'Wie man Minio einrichtet, um mit Capgo zu arbeiten'
+title: S3セルフホスティング
+description: So richten Sie mingio in Capgo ein
 sidebar:
   order: 2
 locale: de
 ---
 
-## Was dieses Tutorial abdecken wird?
+## Was behandelt dieses Tutorial?
 
-Dieses Tutorial zeigt, wie man [minio](https://minio/) einrichtet, um mit capgo zu arbeiten.
+Dieses Tutorial zeigt, wie man [minio](https://minio/) für die Verwendung mit capgo einrichtet
 
-Dies ist technisch nicht erforderlich, um capgo auszuführen.
+Dies ist technisch gesehen nicht erforderlich, um capgo auszuführen
 
-Die Einstellung von S3 ermöglicht das Hochladen von Bündeln über die [CLI](/docs/cli/commands/).
+Die Einrichtung von S3 ermöglicht das Hochladen von Bundles über die [CLI](/docs/cli/commands/)
 
 :::danger
-⚠️ Dieses Tutorial soll nicht in der Produktion verwendet werden\
+⚠️ Dieses Tutorial ist nicht für den Produktiveinsatz gedacht\
 Verwenden Sie dies nur in der lokalen Entwicklung
 :::
 
-## Anforderungen
+## Voraussetzungen
 
- 1. [Docker](https://wwwdockercom/)
+1 [Docker](https://wwwdockercom/)
 
 ## Erste Schritte
 
-Zuerst, erstellen Sie ein neues Verzeichnis.
+Erstellen Sie zunächst ein neues Verzeichnis
 
-Erstellen Sie dann einen Ordner mit dem Namen `data` darin.
+Erstellen Sie dann einen Ordner namens `data` darin
 
 Führen Sie dann den folgenden Befehl aus:
 ```bash
@@ -42,24 +42,24 @@ docker run \
    quayio/minio/minio server /data --console-address ":9090"
 ```
 
-Wenn Sie das Konsolenfenster mit diesem Container jemals schließen, können Sie es mit folgendem Befehl neu starten:
+Wenn Sie das Konsolenfenster mit diesem Container jemals schließen, können Sie ihn mit folgendem Befehl starten:
 ```bash
 docker start minio1
 ```
 
-Wenn Sie die Konfiguration von minio ändern müssen, können Sie den Container mit folgendem Befehl entfernen:
+Wenn Sie die Konfiguration von minio ändern müssen, können Sie den Container entfernen, indem Sie Folgendes ausführen:
 ```bash
 docker rm minio1
 ```
-⚠️ Dieser Befehl entfernt die minio-Daten nicht.
+⚠️ Dieser Befehl entfernt keine minio-Daten
 
-## Einrichtung von Edge-Funktionen
+## Edge-Funktionen einrichten
 
-Jetzt, wo wir einen S3-Server betreiben, müssen wir die Edge-Funktionen von capgo einrichten, um unseren S3-Server zu nutzen.
+Nachdem wir einen S3-Server ausführen, müssen wir die capgo Edge-Funktionen einrichten, um unseren S3-Server zu verwenden
 
-Dazu müssen wir eine ENV-Datei in `capgo/supabase` mit dem Namen `envlocal` erstellen.
+Dazu müssen wir eine ENV-Datei in `capgo/supabase` mit dem Namen `envlocal` erstellen
 
-Diese Datei sollte wie folgt aussehen:
+Diese Datei sollte so aussehen:
 ```bash
 STRIPE_WEBHOOK_SECRET=test
 STRIPE_SECRET_KEY=test
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# Unten ist die tatsächlich wichtige Konfiguration für S3
+# Nachfolgend ist die tatsächlich wichtige Einrichtung für S3
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -76,16 +76,16 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-Die IP `hostdockerinternal` ist eine Docker-IP, die nur intern von Docker erreicht werden kann, aber wir ersetzen sie im Code durch `0000`, damit minio von localhost erreicht werden kann.
+Die IP `hostdockerinternal` ist eine Docker-IP, die nur intern von Docker erreicht werden kann, aber wir ersetzen sie im Code durch `0000`, damit minio von localhost aus erreichbar ist
 
-Um Edge-Funktionen mit unserer neuen ENV-Datei auszuführen, verwenden Sie:
+Um Edge-Funktionen mit unserer neuen env-Datei auszuführen, verwenden Sie
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```
 
-## Einrichtung der CLI zur Verwendung von S3
+## CLI für die Verwendung von S3 einrichten
 
-Die CLI funktioniert standardmäßig nicht mit minio. Die folgende Änderung in `capacitorconfigts`[^1] ist erforderlich:
+Die CLI funktioniert standardmäßig nicht mit minio. Die folgende Änderung an `capacitorconfigts`[^1] ist erforderlich
 ```ts
 const config: CapacitorConfig = {
   appId: 'comdemoapp',
@@ -101,4 +101,4 @@ const config: CapacitorConfig = {
 };
 ```
 
-[^1]: Die Datei befindet sich in Ihrem Anwendungsverzeichnis.
+[^1]: Die Datei befindet sich in Ihrem App-Verzeichnis

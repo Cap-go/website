@@ -1,6 +1,6 @@
 ---
-title: Von V3 zu V4
-description: Wie man von V3 auf V4 aktualisiert
+title: V3 から V4 へ
+description: So aktualisieren Sie von V3 auf V4
 sidebar:
   order: 3
 locale: de
@@ -8,35 +8,35 @@ locale: de
 
 ## Warum dieses Upgrade
 
-Nach vielen Gesprächen in der Discord-Community mit euch habe ich entdeckt, dass der manuelle Modus viel zu manuell und nicht sicher zu verwenden war. Zum Beispiel war ein automatisches Zurücksetzen nicht möglich, sodass der Benutzer, wenn das Update im manuellen Modus fehlschlägt, die App entfernen und erneut installieren muss, was eine schreckliche Benutzererfahrung ist.
+Nach vielen Gesprächen mit Ihnen in der Discord-Community habe ich festgestellt, dass der manuelle Modus zu manuell und nicht sicher in der Verwendung war. Zum Beispiel war ein automatisches Zurücksetzen nicht möglich, sodass der Benutzer bei einem fehlgeschlagenen Update die App entfernen und neu installieren musste, was eine schreckliche Benutzererfahrung ist.
 
-In der Zwischenzeit habe ich dies als Gelegenheit genutzt, euch mehr Freiheit zu geben und allen schlechten Code zu entfernen, den ich gemacht habe.
+Währenddessen nutzte ich dies als Gelegenheit, Ihnen mehr Freiheit zu geben und den schlechten Code zu entfernen, den ich geschrieben hatte.
 
 ## Installation
 
 `npm i @capgo/capacitor-updater@4`
 
-## Automatisches Update in der Cloud
+## Auto-Update Cloud
 
-Wenn du das Basisbeispiel in deiner App verwendest, bist du sicher, auf die neue Version umzusteigen, viel Spaß!
+Wenn Sie das Basis-Beispiel in Ihrer App verwenden, können Sie sicher auf die neue Version migrieren. Viel Spaß!
 
-## Automatisches Update selbst gehostet
+## Auto-Update Self-Hosted
 
-Für dich bleibt es einfach, die Änderungen sind:
+Für Sie ist es weiterhin einfach, die Änderungen sind:
 
-1. Der Name der Einstellung von `autoUpdateUrl` in `updateUrl`
-2. Die Endpoint-Methode wurde von `GET` auf POST geändert
+* Der Name der Einstellung von `autoUpdateUrl` zu `updateUrl`
+* Die Endpoint-Methode wurde von `GET` zu `POST` geändert
 
 ## Manuelle Benutzer
 
-Für dich ist dies die bedeutendste Änderung, aber zum Besten! Du erhältst tonnenweise Verbesserungen. Lies sorgfältig.
+Für Sie ist dies die bedeutendste Änderung, aber zum Besten! Sie erhalten zahlreiche Verbesserungen. Lesen Sie sorgfältig
 
 ## Änderungen
 
-1. `autoUpdateUrl` wird zu `updateUrl`, da diese Einstellung jetzt auch im manuellen Modus verwendet werden kann
-2. Löschen von `cancelDelay` und `delayUpdate` zugunsten von `setDelay`
-3. Kein `versionName` mehr in set
-4. Ändere den `version`-Schlüssel, der in den meisten Funktionen an das Objekt `BundleInfo` zurückgegeben wurde
+* `autoUpdateUrl` wird zu `updateUrl`, da diese Einstellung jetzt auch im manuellen Modus verwendet werden kann
+* Löschung von `cancelDelay` und `delayUpdate` zugunsten von `setDelay`
+* Kein `versionName` mehr in set
+* Änderung des `version`-Schlüssels, der in den meisten Funktionen zum Objekt `BundleInfo` zurückgegeben wurde
 
 ```typescript
 interface BundleInfo {
@@ -47,26 +47,26 @@ interface BundleInfo {
 }
 ```
 
-5. Umbenennung von irreführenden Namen jetzt (sogar um es zu erklären, kann es nicht klar sein, aber bei der Verwendung ist es einfach zu verstehen):
-   1. Was als `version` bezeichnet wurde, bezieht sich jetzt auf ein `bundle`
-   2. `id` bezieht sich auf die alte `version`, die eine zufällige Zeichenfolge von 10 Zeichen war. Diese `id` ist der einzige vertrauenswürdige und eindeutige Weg, um auf deine Bundles zuzugreifen, Beispiel `7Dfcd2RedN`
-   3. `version` bezieht sich jetzt auf den `versionName`, den du für ein Bundle auswählst, Beispiel `100`
-6. `updateUrl` wechselt von `get` zu `post`, da benutzerdefinierte Header für einige von euch ein Problem darstellt und POST logischer ist. Alle vorherigen Header gehen in den Body, und das Präfix `cap_` entfällt.
-7. Die Methode `versionName` wurde gelöscht, zugunsten von `getId`
-8. Die Liste gibt jetzt eine Liste von `BundleInfo` zurück
-9. Umbenennen von `getId` in `getDeviceId`
-10. `autoUpdate` wird standardmäßig auf true gesetzt. Wenn du den manuellen Modus verwendest, setze ihn auf false.
+* Umbenennung irreführender Namen (selbst zur Erklärung kann es nicht klar sein, aber bei der Verwendung ist der neue leicht zu verstehen):
+  * was als `version` bezeichnet wurde, bezieht sich jetzt auf ein `bundle`
+  * `id` bezieht sich auf die alte `version`, die eine zufällige Zeichenfolge von 10 Zeichen war, diese `id` ist die einzige vertrauenswürdige und eindeutige Möglichkeit, auf Ihre Bundles zuzugreifen, Beispiel `7Dfcd2RedN`
+  * `version` bezieht sich jetzt auf den `versionName`, den Sie für ein Bundle wählen, Beispiel `100`
+* `updateUrl` wechselt von `get` zu `post`, da benutzerdefinierte Header für einige von Ihnen ein Problem waren und post logischer ist, alle vorherigen Header gehen in den Body und das Präfix `cap_` verschwindet
+* `versionName`-Methode wird gelöscht, zugunsten von `getId`
+* list gibt jetzt eine Liste von `BundleInfo` zurück
+* Umbenennung von `getId` in `getDeviceId`
+* `autoUpdate` wird standardmäßig auf true gesetzt, wenn Sie den manuellen Modus verwenden, setzen Sie es auf false
 
 ## Neuigkeiten
 
-1. Methode `getLatest`, diese Methode ermöglicht es dir, von deinem Server, der mit `updateUrl` gesetzt ist, die letzte verfügbare Version abzurufen
-2. Methode `setDelay`, die `{`kind`:` "background" | "kill" | "nativeVersion" | "date", value? : string`}` als Argument annimmt, um Verzögerungen für verschiedene Modi einzustellen
-3. Methode `next`, um die Version im nächsten Hintergrundmodus festzulegen, im Gegensatz zu `set`, das es sofort macht
-4. Methode `isAutoUpdateEnabled`, um dir mitzuteilen, ob du dich im automatischen Update-Kontext befindest
-5. Ereignis `downloadComplete`, wenn der Download 100 % erreicht
-6. Hinzufügen des Pflichtfelds `version` in der Download-Methode
-7. `notifyAppReady` wird auch im manuellen Modus obligatorisch. Wenn nicht innerhalb von 10 Sekunden aufgerufen, kehrt die App zur vorherigen Version zurück.
+* Methode `getLatest`, diese Methode ermöglicht es Ihnen, von Ihrem Server, der mit `updateUrl` eingestellt wurde, die letzte verfügbare Version zu erhalten
+* Methode `setDelay`, die `{kind: "background" | "kill" | "nativeVersion" | "date", value?: string}` als Argument nimmt, um Verzögerungen für verschiedene Modi einzustellen
+* Methode `next`, um die Version im nächsten Hintergrund festzulegen, im Gegensatz zu `set`, das es sofort macht
+* Methode `isAutoUpdateEnabled`, um Sie wissen zu lassen, ob Sie sich im Auto-Update-Kontext befinden
+* Event `downloadComplete`, wenn der Download 100% erreicht
+* Hinzugefügtes Pflichtfeld `version` in der Download-Methode
+* `notifyAppReady` wird auch im manuellen Modus obligatorisch, wenn nicht nach 10 Sekunden aufgerufen, kehrt die App zur vorherigen Version zurück
 
 ## Mitwirkende
 
-[@lincolnthree](https://githubcom/lincolnthree/) Vielen Dank, dass du diese Arbeit begonnen hast. Es war unmöglich, dieses Update ohne dich zum Laufen zu bringen.
+[@lincolnthree](https://githubcom/lincolnthree/) Vielen Dank, dass Sie diese Arbeit begonnen haben, es war unmöglich, dieses Update ohne Sie zum Laufen zu bringen

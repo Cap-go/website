@@ -1,6 +1,6 @@
 ---
 title: Einführung - Automatische Aktualisierung
-description: Wie man das Auto-Update-Plugin im selbst-gehosteten Modus verwendet
+description: Verwendung des Auto-Update-Plugins im Self-Hosting-Modus
 sidebar:
   order: 1
 locale: de
@@ -10,23 +10,23 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server ausführen können
 
-## Vor dem Start
+## Bevor Sie beginnen
 
-Wenn Sie an dieser Arbeit selbstständig arbeiten, kann ich nicht mehr empfehlen, meine Arbeit über [dies](https://githubcom/sponsors/riderx/) zu unterstützen
+Wenn Sie diese Arbeit selbst nutzen, kann ich nur empfehlen, meine Arbeit über [this](https://githubcom/sponsors/riderx/) zu unterstützen
 
-Ich habe eine große Wette darauf abgeschlossen, allen wertvollen Code, den ich hier erstellt habe, als Open Source bereitzustellen
+Ich habe eine große Wette abgeschlossen, indem ich den wertvollen Code, den ich hier erstellt habe, als Open Source zur Verfügung stelle
 
-Ich hätte es für mich behalten und einen hohen Ticketpreis verlangen können
+Ich hätte es für mich behalten und einen hohen Preis verlangen können
 
-Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und es zu einem offenen und transparenten Geschäft machen
+Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
 
-Ebenso denke ich, dass es unsere Welt zu einem besseren Ort machen würde, indem wir öffnen, anstatt zu kämpfen und uns zu verstecken
+Ebenso denke ich, dass es unsere Welt durch Öffnung statt Kampf und Verstecken besser machen würde
 
-Aber um das möglich zu machen, müssen wir alle unseren Teil dazu beitragen, einschließlich Ihnen 🥹
+Aber um dies zu ermöglichen, müssen wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
-Wenn die Angebote von Capgo Ihnen nicht zusagen, dann nennen Sie Ihren Preis und unterstützen Sie einen bootstrap-finanzierten Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
+Wenn die Capgo-Angebote nicht zu Ihnen passen, dann setzen Sie Ihren Preis fest und unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
 
-## Schnelle Installationen
+## Schnellinstallation
 
 ```
 npm install @capgo/capacitor-updater
@@ -35,23 +35,23 @@ npx cap sync
 
 ### Konfiguration
 
-Sie müssen das Plugin so konfigurieren, dass es Ihre URL verwendet:
+Sie müssen das Plugin konfigurieren, um Ihre URL wie folgt zu verwenden:
 
 ```json
 {
 	"plugins": {
 		"CapacitorUpdater": {
-			"updateUrl": "https://YOURURL",
+			"updateUrl": "https://IHREURL",
 		}
 	}
 }
 ```
 
-> 🚧 Bei Android ist es nicht erlaubt, HTTP-Anfragen zu stellen. Zu Testzwecken [erlauben Sie es](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 Unter Android sind HTTP-Anfragen nicht erlaubt. Zu Testzwecken [erlauben Sie es](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
-### Update-API
+### Update API
 
-Das Plugin wird bei jedem Öffnen der App einen POST-Call an Ihre API durchführen, mit diesem Body:
+Das Plugin führt bei jedem App-Start einen POST-Aufruf an Ihre API mit diesem Body durch:
 
 ```typescript
 interface AppInfos {
@@ -62,14 +62,14 @@ interface AppInfos {
     "plugin_version": "PLUGIN_VERSION",
     "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
     "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
-    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
     "version_os": "VERSION_OF_SYSYEM_OS",
     "is_emulator": boolean,
     "is_prod": boolean,
 }
 ```
 
-Die Server-API sollte mit diesen Daten in JSON auf das capacitor-updater-Plugin antworten, wenn ein Update erforderlich ist:
+Der Server-API sollte in JSON dem Capacitor-Updater-Plugin mit diesen Daten antworten, wenn ein Update erforderlich ist:
 
 ```json
 {
@@ -78,13 +78,14 @@ Die Server-API sollte mit diesen Daten in JSON auf das capacitor-updater-Plugin 
 }
 ```
 
-Bei der automatischen Aktualisierung sollte der Server die Arbeit des Vergleichens der Version übernehmen und die richtige zurückgeben. Wenn der URL-Schlüssel vorhanden ist, beginnt das Plugin mit dem Downloadprozess.
+Bei Auto-Update sollte der Server die Versionsvergleichsarbeit durchführen und die richtige Version zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
 
-Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt und die Nachricht wird anstelle dessen in den Protokollen angezeigt.
+Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt und die Nachricht wird stattdessen in den Logs angezeigt
 
-Der `version`-Schlüssel sollte im [`semver`](https://semverorg/) Format sein.
+Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein
 
-Die Zip-Datei sollte `indexhtml` als Datei im Stammordner oder nur einen Ordner im Stammordner mit `indexhtml` darin haben.
+Die ZIP-Datei sollte `indexhtml` als Datei im Root-Verzeichnis haben oder nur einen Ordner im Root mit `indexhtml` darin
+
 
 Sie können den Befehl der CLI verwenden, um Ihr Bundle zu zippen:
 
@@ -93,36 +94,37 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
 
 <LinkCard
-	title="Update-Endpunkt"
+	title="Update Endppint"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
-#### End-to-End-Verschlüsselung
+#### Ende-zu-Ende-Verschlüsselung
 
-Ab Version 4150 ermöglicht das Plugin, verschlüsselte Updates zu senden.
+Ab Version 4150 ermöglicht das Plugin das Senden verschlüsselter Updates
 
-Sie können diese Funktion nutzen, indem Sie einen privaten Schlüssel erstellen ``npx @capgo/cli key create``.
+Sie können diese Funktion nutzen, indem Sie einen privaten Schlüssel erstellen ``npx @capgo/cli key create``
 
-Dann verschlüsseln Sie Ihre Zip-Datei mit ``npx @capgo/cli encrypt [path/to/zip]``.
+Dann verschlüsseln Sie Ihre ZIP-Datei mit ``npx @capgo/cli encrypt [path/to/zip]``
 
-Der Befehl gibt Ihnen einen `ivSessionKey` aus, der zusammen mit Ihrem Update-Payload im Schlüssel `session_key` gesendet werden muss. Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` zum Entschlüsseln des Updates zu verwenden.
+Der Befehl gibt Ihnen einen `ivSessionKey` aus, der mit Ihrer Update-Payload im Schlüssel `session_key` gesendet werden muss\
+Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` zur Entschlüsselung des Updates nutzen
 
-Erfahren Sie hier mehr:
+Erfahren Sie mehr darüber hier:
 
 <LinkCard
-	title="Selbstgehostete Live-Updates"
+	title="Self-hosted Live Updates"
 	href="https://capgoapp/blog/self-hosted-live-updates/"
 />
 
 ### Statistik-API
 
-Ab Version 130 sendet das Updatesystem Statistiken!
+Ab Version 130 sendet das Update-System Statistiken!
 
-Standardmäßig werden alle Statistiken an unseren Server gesendet, um die Nutzung zu verstehen.
+Standardmäßig werden alle Statistiken an unseren Server gesendet, um die Nutzung zu verstehen
 
-> 💡 Es werden keine privaten Daten für Statistiken gesendet, nur zufällige UUID, Versionsaktualisierung, Version der nativen App, Plattform, Aktion und App-ID.
+> 💡 Für Statistiken werden keine privaten Daten gesendet, nur zufällige UUID, Versions-Update, Version der nativen App, Plattform, Aktion und App-ID
 
-Wenn Sie stattdessen Daten an Ihren Server senden möchten, ändern Sie die Konfiguration unten:
+Wenn Sie die Daten stattdessen an Ihren Server senden möchten, ändern Sie die Konfiguration wie folgt:
 
 ```tsx
 // capacitorconfigjson
@@ -131,39 +133,39 @@ Wenn Sie stattdessen Daten an Ihren Server senden möchten, ändern Sie die Konf
 	"appName": "Name",
 	"plugins": {
 		"CapacitorUpdater": {
-			"statsUrl": "YOUR_URL"
+			"statsUrl": "IHRE_URL"
 		}
 	}
 }
 ```
 
-Was Ihr Server erhalten wird, ist:
+Was Ihr Server empfängt:
 
 ```tsx
 interface AppInfosStats {
-	"action": "set", // kann festgelegt, gelöscht, set_fail, zurückgesetzt, zurückgekehrt werden
-	// Dann sind es die gleichen Informationen wie bei der Aktualisierung
-	"app_id": "*******", // App-Identifikator im Store
+	"action": "set", // kann set, delete, set_fail, reset, revert sein
+	// Dann sind es die gleichen Infos wie beim Update
+	"app_id": "*******", // App-Identifier im Store
 	"device_id": "*******", // eindeutige ID pro App-Installation
-	"platform": "ios", // oder Android
+	"platform": "ios", // oder android
 	"custom_id": "user_1", // repräsentiert Ihren Benutzer
-	"version_name": "123", // Version des Web-Builds
-	"version_build": "120", // Version des nativen Builds
-	"version_code": "120", // Build-Nummer des nativen Builds
+        "version_name": "123", // Version des Web-Builds
+        "version_build": "120", // Version des nativen Builds
+        "version_code": "120", // Build-Nummer des nativen Builds
 	"version_os": "16", // OS-Version des Geräts
-	"plugin_version": "400", // damit Ihre API sich unterschiedlich mit verschiedenen Plugins verhält
-	"is_emulator": false,
-	"is_prod": false,
+        "plugin_version": "400"// um Ihre API bei verschiedenen Plugins unterschiedlich zu verhalten
+        "is_emulator": false,
+    	"is_prod": false,
 }
 ```
 
-Sie können es auch vollständig deaktivieren, indem Sie einen leeren String verwenden. Beachten Sie, dass Statistiken benutzerfreundlich gemacht werden und mir helfen, zu verstehen, wie Menschen das Plugin nutzen, Probleme zu beheben und es zu verbessern.
+Sie können es auch komplett deaktivieren, mit einem leeren String. Bedenken Sie, dass Statistiken datenschutzfreundlich gestaltet sind und mir helfen zu verstehen, wie Menschen das Plugin nutzen, um Probleme zu lösen und es zu verbessern
 
 <LinkCard
-	title="Stats-Endpunkt"
+	title="Stats Endpoint"
 	href="/docs/self-hosted/auto-update/stats-endpoint"
 />
 
-### Kanal-API
+### Channel API
 
-Zu dokumentieren.
+Noch zu dokumentieren

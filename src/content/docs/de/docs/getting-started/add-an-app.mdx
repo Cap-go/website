@@ -1,8 +1,8 @@
 ---
-title: Eine App hinzufügen
+title: App hinzufügen
 description: >-
   Fügen Sie eine App zu Ihrem Capgo-Konto hinzu und installieren Sie das Plugin
-  in Ihrer App.
+  in Ihrer App
 sidebar:
   order: 2
 prev: false
@@ -22,29 +22,29 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 <Steps>
 
-1. Erstellen Sie Ihr Konto unter [https://capgoapp/register](https://capgoapp/register)
-![Anmelde-Screenshot](/signupwebp "Anmelde-Screenshot")
+1 Erstellen Sie Ihr Konto unter [https://capgoapp/register](https://capgoapp/register)
+![signup screenshot](/signupwebp "signup screenshot")
 
-2. Verwenden Sie die Init-Befehle, um loszulegen <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Sie werden mit einer Reihe von Fragen konfrontiert. Geben Sie die erforderlichen Antworten ein, um die automatische Einrichtung abzuschließen<Aside type="tip">Wenn Sie diese Schritte befolgen, sind Sie im Handumdrehen bereit. Wenn Sie während des Prozesses weitere Unterstützung benötigen, ist unser Support-Team [hier, um zu helfen](mailto:support@capgoapp). Viel Erfolg beim Onboarding!</Aside>
+2 Verwenden Sie den Init-Befehl, um zu beginnen <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Es werden Ihnen eine Reihe von Fragen gestellt. Beantworten Sie diese, um die automatische Einrichtung abzuschließen<Aside type="tip">Wenn Sie diese Schritte befolgen, sind Sie im Handumdrehen einsatzbereit. Falls Sie während des Prozesses weitere Unterstützung benötigen, ist unser Support-Team [hier, um zu helfen](mailto:support@capgoapp) Viel Spaß beim Einrichten!</Aside>
 
-3. Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Stellen Sie ein Live-Update bereit" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+3 Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Live-Update bereitstellen" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
 
 </Steps>
 
 ### Manuelle Einrichtung
 
-Falls der init-Befehl für Sie nicht funktioniert, können Sie eine App manuell hinzufügen
+Falls der Init-Befehl für Sie nicht funktioniert, können Sie eine App manuell hinzufügen
 
 <Steps>
 
-1. Verbinden Sie die CLI mit Ihrem Konto: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+1 Verbinden Sie die CLI mit Ihrem Konto: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
-2. Fügen Sie die App mit diesem Befehl zu Ihrem Konto hinzu: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+2 Fügen Sie die App Ihrem Konto mit diesem Befehl hinzu: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3 Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4 Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
 
-5. Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Stellen Sie ein Live-Update bereit" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+5 Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Live-Update bereitstellen" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
 
 </Steps>

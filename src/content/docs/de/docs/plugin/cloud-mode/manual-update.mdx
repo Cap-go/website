@@ -1,6 +1,6 @@
 ---
 title: Manuelle Aktualisierung
-description: Wie man sich selbst aktualisiert verwaltet
+description: Aktualisierungsverwaltung
 sidebar:
   order: 5
 locale: de
@@ -8,21 +8,20 @@ locale: de
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Wenn Sie selbst verwalten möchten, wenn ein Update angewendet wird, verwenden Sie den manuellen Modus mit Capgo Cloud.
+Wenn Sie selbst verwalten möchten, wann Updates angewendet werden, verwenden Sie den manuellen Modus mit Capgo Cloud
 
-Hier ist, was Sie tun müssen, richten Sie Ihr Konto ein, wie in "Erste Schritte" erklärt.
+Hier ist, was Sie tun müssen: Richten Sie Ihr Konto wie in "Erste Schritte" beschrieben ein
 
 <LinkCard
-	titel="Erste Schritte"
+	title="Erste Schritte"
 	href="/docs/plugin/cloud-mode/getting-started"
 />
 
-
 #### Konfiguration
-Deaktivieren Sie die automatische Aktualisierung in Ihrer ```capacitorconfgjson```
+Deaktivieren Sie das automatische Update in Ihrer ```capacitor.config.json```
 
 ```tsx
-// capacitorconfigjson
+// capacitor.config.json
 {
 	"appId": "*******",
 	"appName": "Name",
@@ -34,8 +33,8 @@ Deaktivieren Sie die automatische Aktualisierung in Ihrer ```capacitorconfgjson`
 }
 ```
 
-Fügen Sie dann die Logik hinzu, um die Updates selbst zu verwalten.\
-Hier ist ein Beispiel, wie Sie es tun können:
+Fügen Sie dann Logik hinzu, um Updates selbst zu verwalten\
+Hier ist ein Beispiel, wie Sie dies tun können:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -43,35 +42,35 @@ import type { BundleInfo } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 
 let data: BundleInfo | null = null
 
-AppaddListener('appStateChange', async (state: any) => {
-  consolelog('appStateChange', state)
-  if (stateisActive) {
-    consolelog('getLatest')
+App.addListener('appStateChange', async (state: any) => {
+  console.log('appStateChange', state)
+  if (state.isActive) {
+    console.log('getLatest')
     // Führen Sie den Download während der aktiven App-Zeit des Benutzers durch, um fehlgeschlagene Downloads zu verhindern
-    const latest = await CapacitorUpdatergetLatest()
-    consolelog('latest', latest)
-    if (latesturl) {
-      data = await CapacitorUpdaterdownload({
-        url: latesturl,
-        version: latestversion,
+    const latest = await CapacitorUpdater.getLatest()
+    console.log('latest', latest)
+    if (latest.url) {
+      data = await CapacitorUpdater.download({
+        url: latest.url,
+        version: latest.version,
       })
-      consolelog('download', data)
+      console.log('download', data)
     }
   }
-  if (!stateisActive && data) {
-    consolelog('set')
-    // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt oder wann Sie möchten
-    SplashScreenshow()
+  if (!state.isActive && data) {
+    console.log('set')
+    // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt oder wenn Sie es möchten
+    SplashScreen.show()
     try {
-      await CapacitorUpdaterset({ id: dataid })
+      await CapacitorUpdater.set({ id: data.id })
     }
     catch (err) {
-      consolelog(err)
-      SplashScreenhide() // für den Fall, dass das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
+      console.log(err)
+      SplashScreen.hide() // falls das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
     }
   }
 })
@@ -80,9 +79,9 @@ AppaddListener('appStateChange', async (state: any) => {
 Dokumentation aller verfügbaren APIs im Plugin:
 
 <LinkCard
-	titel="Methoden"
+	title="Methoden"
 	href="/docs/plugin/api/"
 />
 
-Es gibt einige Anwendungsfälle, bei denen Sie Benutzern erlauben können, sich für Kanäle anzumelden und verschiedene Versionen auszuprobieren:\
-[https://capgoapp/blog/how-to-send-specific-version-to-users/](https://capgoapp/blog/how-to-send-specific-version-to-users/)
+Es gibt einige Anwendungsfälle, bei denen Sie Benutzern erlauben können, Kanäle zu abonnieren und verschiedene Versionen zu testen:\
+[https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

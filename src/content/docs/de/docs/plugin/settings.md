@@ -1,6 +1,6 @@
 ---
-title: Einstellungen
-description: Alle verfügbaren Einstellungen für Capacitor Updater
+title: Pengaturan
+description: Verfügbare Parameter für Capacitor Updater
 sidebar:
   order: 8
 locale: de
@@ -10,7 +10,7 @@ Um eine feinere Kontrolle über das Update-System zu haben, können Sie es mit d
 
 ## `appReadyTimeout`
 
-> Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten soll, bevor es ein Update als 'fehlgeschlagen' betrachtet.
+> Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten soll, bevor ein Update als 'fehlgeschlagen' eingestuft wird
 
 Nur verfügbar für Android und iOS
 
@@ -29,7 +29,7 @@ Standard: `10000` (10 Sekunden)
 
 ## `responseTimeout`
 
-> Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten soll, bevor es einen API-Timeout berücksichtigt.
+> Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten soll, bevor ein API-Timeout eintritt
 
 Nur verfügbar für Android und iOS
 
@@ -48,7 +48,7 @@ Standard: `20` (20 Sekunden)
 
 ## `autoDeleteFailed`
 
-> Konfigurieren Sie, ob das Plugin fehlgeschlagene Bundles automatisch löschen soll.
+> Konfigurieren Sie, ob das Plugin fehlgeschlagene Bundles automatisch löschen soll
 
 Nur verfügbar für Android und iOS
 
@@ -67,7 +67,7 @@ Standard: `true`
 
 ## `autoDeletePrevious`
 
-> Konfigurieren Sie, ob das Plugin vorherige Bundles nach einem erfolgreichen Update automatisch löschen soll.
+> Konfigurieren Sie, ob das Plugin vorherige Bundles nach einem erfolgreichen Update automatisch löschen soll
 
 Nur verfügbar für Android und iOS
 
@@ -86,7 +86,7 @@ Standard: `true`
 
 ## `autoUpdate`
 
-> Konfigurieren Sie, ob das Plugin Auto Update über einen Update-Server verwenden soll.
+> Konfigurieren Sie, ob das Plugin Auto-Update über einen Update-Server verwenden soll
 
 Nur verfügbar für Android und iOS
 
@@ -105,7 +105,7 @@ Standard: `true`
 
 ## `updateUrl`
 
-> Konfigurieren Sie die URL / den Endpunkt, an den Update-Prüfungen gesendet werden.
+> Konfigurieren Sie die URL / den Endpunkt, an den Update-Prüfungen gesendet werden
 
 Nur verfügbar für Android und iOS
 
@@ -124,9 +124,9 @@ Standard: `https://apicapgoapp/updates`
 
 ## `statsUrl`
 
-> Konfigurieren Sie die URL / den Endpunkt, an den Update-Statistiken gesendet werden.
+> Konfigurieren Sie die URL / den Endpunkt, an den Update-Statistiken gesendet werden
 
-Nur verfügbar für Android und iOS. Setzen Sie auf "" um die Statistikenberichterstattung zu deaktivieren.
+Nur verfügbar für Android und iOS. Auf "" setzen, um die Statistikübermittlung zu deaktivieren
 
 Standard: `https://apicapgoapp/stats`
 
@@ -143,11 +143,11 @@ Standard: `https://apicapgoapp/stats`
 
 ## `privateKey`
 
-> Konfigurieren Sie den privaten Schlüssel für die Ende-zu-Ende-Verschlüsselung von Live-Updates.
+> Konfigurieren Sie den privaten Schlüssel für die Ende-zu-Ende-Verschlüsselung von Live-Updates
 
-Nur verfügbar für Android und iOS.
+Nur verfügbar für Android und iOS
 
-Erstellen Sie den privaten Schlüssel mit dem Befehl `npx @capgo/cli key create`.
+Erstellen Sie den privaten Schlüssel mit dem Befehl `npx @capgo/cli key create`
 
 Standard: `undefined`
 
@@ -164,9 +164,9 @@ Standard: `undefined`
 
 ## `directUpdate`
 
-> Lassen Sie das Plugin das Update direkt installieren, wenn die App gerade aktualisiert/installiert wurde. Nur anwendbar im AutoUpdate-Modus.
+> Das Plugin installiert das Update direkt, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
 
-Nur verfügbar für Android und iOS.
+Nur verfügbar für Android und iOS
 
 Standard: `undefined`
 
@@ -185,10 +185,11 @@ Standard: `undefined`
 ## `resetWhenUpdate`
 
 :::note
-Wenn ein Update des Stores erfolgt, deaktivieren Sie den erzwungenen Reset auf die native Version.
+Wenn ein Store-Update erfolgt, wird das erzwungene Zurücksetzen auf die native Version deaktiviert
 :::
 
-Es gibt viele weitere Einstellungen, die nur in der [Webanwendung](https://webcapgoapp/login) verfügbar sind.
+Es gibt noch viele weitere Einstellungen, die nur in der [Web-App](https://webcapgoapp/login) verfügbar sind
+
 
 Um das Plugin zu konfigurieren, verwenden Sie diese Einstellungen:
 
@@ -205,10 +206,10 @@ Um das Plugin zu konfigurieren, verwenden Sie diese Einstellungen:
 ```
 
 ## `directUpdate`
-Lassen Sie das Plugin das Update direkt installieren, wenn die App gerade aktualisiert/installiert wurde. Nur anwendbar im AutoUpdate-Modus.
+Das Plugin installiert das Update direkt, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
 
 :::caution
-Diese Einstellung erfordert, dass Sie die App vom Benutzer ausblenden, während das Update installiert wird. Andernfalls wird die App zurückgesetzt, wenn der Benutzer navigiert.
+Diese Einstellung erfordert, dass Sie die App vor dem Benutzer verbergen, während das Update installiert wird. Andernfalls wird die App zurückgesetzt, während der Benutzer navigiert
 :::
 
 ```json
@@ -224,7 +225,7 @@ Diese Einstellung erfordert, dass Sie die App vom Benutzer ausblenden, während 
 ```
 
 ## `defaultChannel`
-Setzen Sie den Standardkanal für die App. Dies überschreibt jeden anderen Kanal, der in Capgo festgelegt ist, wenn der Kanal das Überschreiben zulässt.
+Legt den Standard-Kanal für die App fest. Dies überschreibt jeden anderen in Capgo eingestellten Kanal, wenn der Kanal das Überschreiben erlaubt
 
 ```json
 // capacitorconfigjson
@@ -238,10 +239,9 @@ Setzen Sie den Standardkanal für die App. Dies überschreibt jeden anderen Kana
 ```
 
 ## `appId`
-Setzen Sie die appId für die App. Dies überschreibt jede andere Möglichkeit, die appId zu erhalten. Dies ist nützlich, wenn Sie eine andere appId in Capgo und in Ihrem nativen Code haben möchten.
-
+Legt die appId für die App fest. Dies überschreibt jede andere Methode, die appId zu erhalten. Dies ist nützlich, wenn Sie eine andere appId in Capgo und in Ihrem nativen Code haben möchten
 :::note
-Dies ist der neue Weg, um die appId festzulegen. Der alte Weg wird weiterhin unterstützt.
+Dies ist die neue Methode, um die appId festzulegen. Die alte Methode wird weiterhin unterstützt
 :::
 ```json
 // capacitorconfigjson
@@ -255,10 +255,9 @@ Dies ist der neue Weg, um die appId festzulegen. Der alte Weg wird weiterhin unt
 ```
 
 ## `version`
-Setzen Sie die Version für die App. Dies überschreibt jede andere Möglichkeit, die Version zu erhalten. Dies ist nützlich, wenn Sie eine andere Version in Capgo und in Ihrem nativen Code haben möchten.
-
+Legt die Version für die App fest. Dies überschreibt jede andere Methode, die Version zu erhalten. Dies ist nützlich, wenn Sie eine andere Version in Capgo und in Ihrem nativen Code haben möchten
 :::note
-Dies ist der neue Weg, um die Version festzulegen. Der alte Weg wird weiterhin unterstützt.
+Dies ist die neue Methode, um die Version festzulegen. Die alte Methode wird weiterhin unterstützt
 :::
 ```json
 // capacitorconfigjson

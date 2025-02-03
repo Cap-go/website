@@ -1,6 +1,6 @@
 ---
-title: Pakete
-description: 'Lernen Sie, wie Sie Bundles verwalten.'
+title: Bundles
+description: 'Erfahren Sie, wie Sie Bundles verwalten'
 sidebar:
   order: 7
 locale: de
@@ -8,57 +8,57 @@ locale: de
 
 ## Alle Bundles anzeigen
 
-Zuerst werfen wir einen Blick auf die Bundles-Seite. Du kannst sie erreichen, indem du [auf deine App klickst](/docs/webapp/main-page) und dann [auf den Bundles-Tab klickst](/docs/webapp/main-app-page).
+Werfen wir zunächst einen Blick auf die Bundles-Seite. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Bundles-Tab klicken](/docs/webapp/main-app-page)
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundleswebp" alt="Bundle-Liste" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundleswebp" alt="bundle list" /><figcaption></figcaption></figure>
 
 ## Ein Bundle löschen
 
 Es gibt zwei Möglichkeiten, ein Bundle zu löschen:
 
-1. Normalerweise
-2. Unsicher
+ - Normal
+ - Unsicher
 
-Die unsichere Methode zum Löschen eines Bundles wurde am 12. August 2024 in Capgo hinzugefügt.
+Die unsichere Art der Bundle-Löschung wurde am 12. August 2024 in Capgo eingeführt
 
-Der Unterschied zwischen den beiden Methoden liegt in der Möglichkeit, die Versionsnummer nach dem Löschen wiederzuverwenden.
+Der Unterschied zwischen den beiden Methoden liegt in der Möglichkeit, die Versionsnummer nach dem Löschen wiederzuverwenden
 
-Wenn du beispielsweise eine Version `100` auf die normale Weise löschst und später versuchst, eine Version `100` hochzuladen, wird dies fehlschlagen. 
-Wenn du diese Version über das unsichere Löschen löschst, kannst du eine Version `100` hochladen.
+Wenn Sie zum Beispiel eine Version `100` auf normale Weise löschen und später versuchen, eine Version `100` hochzuladen, wird dies fehlschlagen
+Wenn Sie diese Version über die unsichere Löschung entfernen, können Sie eine Version `100` hochladen
 
 :::danger
-Das unsichere Löschen einer Version und das anschließende Hochladen ist SEHR gefährlich. 
-Es kann zu allen Arten von Fehlern und unvorhersehbarem Verhalten im Plugin führen. 
-Es sollte NIE für Bundles verwendet werden, die in einem öffentlichen Kanal verwendet wurden. 
-Aus diesem Grund erfordert das unsichere Löschen einer Version "super_admin"-Berechtigungen.
+Das unsichere Löschen einer Version und erneutes Hochladen ist WIRKLICH gefährlich
+Es kann alle möglichen Fehler und unvorhersehbares Verhalten im Plugin verursachen
+Es sollte NIEMALS für Bundles verwendet werden, die in einem öffentlichen Kanal verwendet wurden
+Aus diesem Grund erfordert das unsichere Löschen einer Version "super_admin"-Berechtigungen
 :::
 
-## Verwalten eines bestimmten Bundles
+## Ein bestimmtes Bundle verwalten
 
-Sobald du die Liste aller Bundles siehst, klicke auf das, das du verwalten möchtest. Danach solltest du etwas Ähnliches sehen:
+Sobald Sie die Liste aller Bundles sehen, klicken Sie auf das Bundle, das Sie verwalten möchten. Danach sollten Sie etwa Folgendes sehen:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-infowebp" alt="Bundle-Info" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-infowebp" alt="bundle info" /><figcaption></figcaption></figure>
 
-Lass uns alle Elemente auf dieser Seite durchgehen.
-
----
-
-Zuerst siehst du einen `Channel`. Das zeigt dir, für welchen Kanal dieses Bundle gedacht ist. Du kannst den Kanal ändern, indem du darauf klickst. 
-Sobald du darauf klickst, solltest du etwas Ähnliches sehen:
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-changewebp" alt="Bundle ändern" /><figcaption></figcaption></figure>
-
-`Bundle auf Kanal setzen` ermöglicht es dir, dieses Bundle als Standard für jeden Kanal zu verknüpfen.\
-`Kanal öffnen` öffnet die Kanalseite für den Kanal, für den dieses Bundle gedacht ist.\
-`Bundle vom Kanal trennen` wird dieses Bundle vom Kanal, für den es gedacht ist, trennen.
-(**WARNUNG**: Wenn das Bundle mit mehr als 1 Kanal verknüpft ist, erhältst du keine Option, welchen Kanal du trennen möchtest.)
+Gehen wir alle Elemente auf dieser Seite durch
 
 ---
 
-Als Nächstes siehst du die `Größe`. Wenn du darauf klickst, kannst du dieses Bundle herunterladen.
-Es sollte ungefähr so aussehen:
-<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundlewebp" alt="Bundle herunterladen" /><figcaption></figcaption></figure>
+Zuerst sehen Sie einen `Channel`. Dieser zeigt Ihnen, für welchen Kanal dieses Bundle bestimmt ist. Sie können den Kanal durch Anklicken ändern
+Nach dem Klick sollten Sie etwa Folgendes sehen:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-changewebp" alt="bundle change" /><figcaption></figcaption></figure>
+
+`Set bundle to channel` ermöglicht es Ihnen, dieses Bundle als Standard für jeden Kanal zu verknüpfen\
+`Open channel` öffnet die Kanalseite für den Kanal, für den dieses Bundle bestimmt ist\
+`Unlink bundle from channel` hebt die Verknüpfung dieses Bundles mit dem zugehörigen Kanal auf
+(**WARNUNG**: Wenn das Bundle mit mehr als einem Kanal verknüpft ist, haben Sie keine Auswahlmöglichkeit, welcher Kanal getrennt werden soll)
 
 ---
 
-Zu guter Letzt gibt es den Abschnitt `Geräte`. Dort kannst du alle Geräte sehen, die diese Version verwenden.
+Als Nächstes sehen Sie die `Size`. Wenn Sie darauf klicken, können Sie dieses Bundle herunterladen
+Es sollte etwa so aussehen:
+<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundlewebp" alt="download bundle" /><figcaption></figcaption></figure>
+
+---
+
+Zuletzt gibt es den Bereich `Devices`. Dort sehen Sie alle Geräte, die diese Version verwenden

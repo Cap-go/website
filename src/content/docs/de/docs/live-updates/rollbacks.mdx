@@ -1,5 +1,5 @@
 ---
-title: Rollbacks
+title: Zurücksetzungen
 sidebar:
   order: 5
 locale: de
@@ -7,84 +7,84 @@ locale: de
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Während die Live-Updates von Capgo es Ihnen ermöglichen, Verbesserungen und Fehlerbehebungen schnell an Ihre Benutzer auszuliefern, kann es Situationen geben, in denen Sie zu einer vorherigen Version Ihrer App zurückkehren müssen. Vielleicht hat ein neues Update ein unerwartetes kritisches Problem eingeführt, oder Sie möchten eine bestimmte Änderung rückgängig machen, während Sie an einer Fehlerbehebung arbeiten.
+Während die Live-Updates von Capgo es Ihnen ermöglichen, schnell Verbesserungen und Fehlerkorrekturen an Ihre Nutzer zu liefern, kann es Situationen geben, in denen Sie zu einer vorherigen Version Ihrer App zurückkehren müssen. Vielleicht hat ein neues Update ein unerwartetes kritisches Problem verursacht, oder Sie möchten eine bestimmte Änderung rückgängig machen, während Sie an einer Lösung arbeiten.
 
-Capgo bietet mehrere Möglichkeiten zur Verwaltung der Builds eines Kanals und zur Kontrolle der Version Ihrer App, die die Benutzer erhalten.
+Capgo bietet verschiedene Möglichkeiten, die Builds eines Kanals zu verwalten und die Version Ihrer App zu kontrollieren, die Nutzer erhalten.
 
 ## Zurücksetzen auf ein vorheriges Bundle
 
-Jedes Mal, wenn Sie ein neues Build hochladen und es einem Kanal zuweisen, speichert Capgo eine Historie dieser Builds. Wenn Sie ein bestimmtes Update zurücksetzen müssen, können Sie eines dieser vorherigen Builds auswählen, um es erneut auf den Kanal bereitzustellen.
+Jedes Mal, wenn Sie einen neuen Build hochladen und einem Kanal zuweisen, behält Capgo einen Verlauf dieser Builds bei. Wenn Sie ein bestimmtes Update rückgängig machen müssen, können Sie einen dieser vorherigen Builds auswählen, um ihn erneut im Kanal bereitzustellen.
 
-Um auf ein vorheriges Build zurückzusetzen:
+So setzen Sie auf einen vorherigen Build zurück:
 
 <Steps>
 
-1. Melden Sie sich im [Capgo Dashboard](https://appcapgoio) an.
+1. Melden Sie sich beim [Capgo Dashboard](https://app.capgo.io) an
 
-2. Navigieren Sie zum Abschnitt "Kanäle".
+2. Navigieren Sie zum Bereich "Channels"
 
-3. Klicken Sie auf den Namen des Kanals, den Sie zurücksetzen möchten.
+3. Klicken Sie auf den Namen des Kanals, den Sie zurücksetzen möchten
 
-4. Finden Sie das Build, auf das Sie im Verlauf der Builds des Kanals zurücksetzen möchten.
+4. Suchen Sie den Build, zu dem Sie zurückkehren möchten, in der Build-Historie des Kanals
 
-5. Klicken Sie auf das Kronensymbol neben diesem Build, um es zum aktiven Build für den Kanal zu machen.
-   ![Channel management options](/select_bundlewebp)
+5. Klicken Sie auf das Kronen-Symbol neben diesem Build, um ihn zum aktiven Build für den Kanal zu machen
+   ![Channel management options](/select_bundle.webp)
 
-6. Bestätigen Sie, dass Sie zu diesem Build zurückkehren möchten.
+6. Bestätigen Sie, dass Sie zu diesem Build zurückkehren möchten
 
 </Steps>
 
 <Aside type="note">
-Das Zurücksetzen auf ein vorheriges Build betrifft nur den ausgewählten Kanal. Wenn Sie mehrere Kanäle haben (z. B. Produktion, Staging usw.), müssen Sie den Rollback-Prozess für jeden betroffenen Kanal wiederholen.
+Das Zurücksetzen auf einen vorherigen Build betrifft nur den ausgewählten Kanal. Wenn Sie mehrere Kanäle haben (z.B. Production, Staging, etc.), müssen Sie den Rollback-Prozess für jeden betroffenen Kanal wiederholen.
 </Aside>
 
-Nach dem Zurücksetzen erhalten Geräte, die so konfiguriert sind, dass sie auf den aktualisierten Kanal hören, beim nächsten Überprüfen auf Updates das vorherige Build. Das zurückgesetzte Build wird als neues Update behandelt, sodass der übliche Updatefluss und die Bedingungen gelten.
+Nach dem Zurücksetzen erhalten Geräte, die für den aktualisierten Kanal konfiguriert sind, den vorherigen Build bei der nächsten Updateprüfung. Der zurückgesetzte Build wird als neues Update behandelt, sodass der übliche Update-Ablauf und die Bedingungen gelten.
 
 ## Trennen eines Kanals
 
-Wenn Sie vorübergehend die Updates eines Kanals anhalten möchten, während Sie ein Problem untersuchen, können Sie den Kanal von seinem aktuellen Build trennen.
+Wenn Sie Updates in einem Kanal vorübergehend stoppen möchten, während Sie ein Problem untersuchen, können Sie den Kanal von seinem aktuellen Build trennen.
 
-Um einen Kanal zu trennen:
+So trennen Sie einen Kanal:
 
-1. Navigieren Sie zum Kanal im Capgo Dashboard.
+1. Navigieren Sie zum Kanal im Capgo Dashboard
 
-2. Klicken Sie auf die Schaltfläche "Trennen" neben dem aktuellen Build.
+2. Klicken Sie auf die Schaltfläche "Unlink" neben dem aktuellen Build
 
-3. Bestätigen Sie, dass Sie den Kanal trennen möchten.
+3. Bestätigen Sie, dass Sie den Kanal trennen möchten
 
-Sobald ein Kanal getrennt ist, verteilt er keine neuen Updates mehr. Geräte, die auf diesen Kanal konfiguriert sind, bleiben auf ihrem aktuellen Build, bis der Kanal wieder mit einem Build verknüpft ist.
+Sobald ein Kanal getrennt ist, verteilt er keine neuen Updates mehr. Geräte, die für diesen Kanal konfiguriert sind, bleiben bei ihrem aktuellen Build, bis der Kanal wieder mit einem Build verknüpft wird.
 
-Dies ist nützlich, wenn Sie ein Problem mit einem Update identifiziert haben, aber noch nicht sicher sind, zu welchem Build Sie zurückkehren möchten. Das Trennen des Kanals gibt Ihnen Zeit, um zu untersuchen, ohne weitere Updates zu veröffentlichen.
+Dies ist nützlich, wenn Sie ein Problem mit einem Update identifiziert haben, aber noch nicht sicher sind, zu welchem Build Sie zurückkehren möchten. Das Trennen des Kanals gibt Ihnen Zeit zur Untersuchung, ohne weitere Updates zu verteilen.
 
-## Erzwingen des integrierten Bundles
+## Erzwingen des eingebauten Bundles
 
-In schwerwiegenderen Situationen möchten Sie möglicherweise alle Geräte auf einem Kanal zurücksetzen auf das Web-Build, das ursprünglich mit der nativen Binary Ihrer App verpackt wurde. Dies ist als das "integrierte Bundle" bekannt.
+In schwerwiegenderen Situationen möchten Sie möglicherweise alle Geräte in einem Kanal auf den Web-Build zurücksetzen, der ursprünglich mit dem nativen Binary Ihrer App ausgeliefert wurde. Dies ist als "eingebautes Bundle" bekannt.
 
-Um das integrierte Bundle auf einem Kanal zu erzwingen:
+So erzwingen Sie das eingebaute Bundle in einem Kanal:
 
-1. Navigieren Sie zum Kanal im Capgo Dashboard.
+1. Navigieren Sie zum Kanal im Capgo Dashboard
 
-2. Klicken Sie auf die Schaltfläche "Integriertes Bundle".
+2. Klicken Sie auf die Schaltfläche "Built-in Bundle"
 
-3. Bestätigen Sie, dass Sie das integrierte Bundle erzwingen möchten.
+3. Bestätigen Sie, dass Sie das eingebaute Bundle erzwingen möchten
 
-Wenn Sie das integrierte Bundle erzwingen, kehren alle Geräte, die auf diesen Kanal konfiguriert sind, beim nächsten Update-Check zum ursprünglich verpackten Web-Build zurück. Dies geschieht unabhängig davon, auf welchem Build sie sich derzeit befinden.
+Wenn Sie das eingebaute Bundle erzwingen, kehren alle Geräte, die für diesen Kanal konfiguriert sind, bei der nächsten Updateprüfung zum ursprünglich gepackten Web-Build zurück. Dies geschieht unabhängig davon, welchen Build sie derzeit verwenden.
 
-Dies ist eine aggressivere Rollback-Option als das Zurücksetzen auf ein bestimmtes vorheriges Build, da es alle Live-Updates verwirft, die seit der letzten Veröffentlichung der App in den App-Stores veröffentlicht wurden.
+Dies ist eine aggressivere Rollback-Option als das Zurücksetzen auf einen bestimmten vorherigen Build, da es alle Live-Updates verwirft, die seit der letzten Veröffentlichung der App in den App Stores veröffentlicht wurden.
 
 <Aside type="caution">
-Seien Sie vorsichtig, wenn Sie das integrierte Bundle erzwingen, da es alle Geräte auf dem Kanal betrifft. Stellen Sie sicher, dass Sie die Auswirkungen berücksichtigt haben und einen Plan zur Weiterverfolgung haben, bevor Sie diese Maßnahme ergreifen.
+Seien Sie vorsichtig beim Erzwingen des eingebauten Bundles, da es alle Geräte im Kanal betrifft. Stellen Sie sicher, dass Sie die Auswirkungen berücksichtigt haben und einen Plan für das weitere Vorgehen haben, bevor Sie diese Aktion durchführen.
 </Aside>
 
 ## Überwachung und Reaktion auf Probleme
 
-Um Probleme schnell zu erkennen und die Auswirkungen problematischer Updates zu minimieren, ist es wichtig, einen Plan zur Überwachung Ihrer Veröffentlichungen und zur Reaktion auf Probleme zu haben.
+Um Probleme schnell zu erkennen und die Auswirkungen problematischer Updates zu minimieren, ist es wichtig, einen Plan für die Überwachung Ihrer Releases und die Reaktion auf Probleme zu haben.
 
 Einige Strategien umfassen:
 
-- Überwachung von Absturzberichten und Benutzerfeedback sofort nach der Veröffentlichung eines Updates.
-- Verwendung von schrittweisen Rollouts oder einem gestuften Kanalsystem, um Updates an einer kleineren Gruppe zu testen, bevor sie weitläufig veröffentlicht werden.
-- Vorhandensein eines klaren Entscheidungsprozesses, wann ein Rollback, Trennen oder Erzwingen des integrierten Bundles vorgenommen werden soll, und wer die Autorität dazu hat.
-- Kommunikation mit den Benutzern über das Problem und die Lösung, falls angebracht.
+- Überwachung von Absturzberichten und Nutzerfeedback unmittelbar nach der Veröffentlichung eines Updates
+- Verwendung von schrittweisen Rollouts oder einem gestaffelten Kanalsystem, um Updates an einer kleineren Gruppe zu testen, bevor sie breit veröffentlicht werden
+- Einen klaren Entscheidungsprozess haben, wann zurückgesetzt, getrennt oder das eingebaute Bundle erzwungen werden soll, und wer dazu befugt ist
+- Gegebenenfalls Kommunikation mit den Nutzern über das Problem und die Lösung
 
-Durch die Kombination einer sorgfältigen Überwachung mit der Fähigkeit, problematische Updates schnell zu verwalten, können Sie ein kontinuierlich verbesserungsfähiges App-Erlebnis bereitstellen und gleichzeitig Störungen für Ihre Benutzer minimieren.
+Durch die Kombination sorgfältiger Überwachung mit der Fähigkeit, problematische Updates schnell zu verwalten, können Sie eine sich kontinuierlich verbessernde App-Erfahrung bieten und gleichzeitig Störungen für Ihre Nutzer minimieren.

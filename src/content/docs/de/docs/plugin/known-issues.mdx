@@ -8,61 +8,62 @@ locale: de
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionic Live Reload
+## Ionic Live-Reload
 
-* Wenn Sie entwickeln und die Ionic Live Reload-Funktion der CLI verwenden, wird das Plugin überschrieben, sodass Sie Ihr Update niemals sehen werden.
+* Wenn Sie während der Entwicklung die Ionic Live-Reload-Funktion der CLI verwenden, überschreibt diese das Plugin, sodass Sie Ihre Aktualisierungen nie sehen werden
 
-## Quasar Live Reload
+## Quasar Live-Reload
 
-* Es verwendet das gleiche System wie Ionic im Hintergrund, daher werden Sie Ihre Updates nicht sehen.
+* Es verwendet intern das gleiche System wie Ionic, daher werden Sie Ihre Aktualisierungen nicht sehen
 
-## Updates fehlgeschlagen
+## Fehlgeschlagene Updates
 
-* Dies geschieht normalerweise, wenn große Updates (> 20 MB) bereitgestellt werden; ein großer Prozentsatz der Benutzer erhält nicht die letzte Version. In der Vergangenheit mussten die Benutzer die App geöffnet halten, bis der Download abgeschlossen war; jetzt verwenden wir den Hintergrunddownload, aber er ist weiterhin auf einige Sekunden beschränkt.
+* Dies passiert üblicherweise bei großen Updates (> 20MB), ein großer Prozentsatz der Nutzer wird die letzte Version nicht erhalten
+Früher mussten Nutzer die App geöffnet halten bis der Download abgeschlossen war. Jetzt verwenden wir Hintergrund-Downloads, aber dies ist immer noch auf wenige Sekunden begrenzt
 
 ## Android
 
 ### Download nicht möglich
 
-Wir haben einige Probleme mit Geräten in Indien gesehen und einen Benutzer im Gespräch, haben ihn verschiedene DNS-Server ausprobieren lassen und es hat funktioniert.
+Wir haben einige Probleme mit Geräten in Indien festgestellt und mit Nutzern telefoniert. Nach dem Testen verschiedener DNS-Server hat es funktioniert
 
-Wenn Sie das Problem haben, versuchen Sie, einen anderen DNS-Server wie Cloudflare oder Google DNS zu verwenden.
+Wenn Sie also das Problem haben, versuchen Sie einen anderen DNS-Server wie Cloudflare oder Google DNS zu verwenden
 
 Cloudflare: 1111 und 1001
 
 Google DNS: 8888 und 8844 oder dnsgoogle
 
 <LinkCard
-	title="Wie richtet man einen bevorzugten DNS-Server auf Android ein?"
+	title="How to setup a preferred DNS server on Android?"
 	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
 />
 
-### Selbstgehostet
-Wenn Sie ein selbstgehostetes Update bereitstellen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Wenn Sie es dennoch tun möchten, befolgen Sie diese Anleitung:
+### Self Hosted
+Wenn Sie ein selbst gehostetes Update pushen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Wenn Sie es trotzdem tun möchten, folgen Sie dieser Anleitung:
 
 <LinkCard
-	title="Wie erlaubt man alle Netzwerkverbindungstypen HTTP und HTTPS in Android (9) Pie?"
+	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
 	href="https://stackoverflowcom/a/51902630/5511370"
 />
 
-### Entpacken
+### Unzip 
 
-Entpacken-Problem: DEFLATED-Einträge können einen EXT-Descriptor haben.
+Unzip-Problem: DEFLATED-Einträge können EXT-Deskriptor haben
 
-Wenn Sie Ihr Bundle mit etwas anderem als der CLI gezippt haben, könnte das Format oder Ihr ZIP falsch sein. Bitte verwenden Sie den CLI-Befehl `npx @capgo/cli zip BUNDLE_FOLDER`.
+Wenn Sie Ihr Bundle mit etwas anderem als der CLI gepackt haben, könnte das Format Ihrer ZIP-Datei falsch sein. Bitte verwenden Sie den CLI-Befehl `npx @capgo/cli zip BUNDLE_FOLDER`
 
 Dies ist ein bekanntes Problem von Java:
 
 <LinkCard
-	title="Entpacken-Problem: DEFLATED-Einträge können einen EXT-Descriptor haben"
+	title="Unzip issue: DEFLATED entries can have EXT descriptor"
 	href="https://bugsopenjdkorg/browse/JDK-8143613"
 />
 
-### Clearfix-Problem
+### Cleartext-Problem
 
-* Wenn Sie Probleme mit usesCleartextTraffic haben, liegt das daran, dass das Plugin die guten Praktiken befolgt, die von Sonar Cloud empfohlen werden. In 90 % der Fälle wird es gut funktionieren, jedoch mit einigen Plugins kann es Probleme verursachen.
+* Wenn Sie Probleme mit usesCleartextTraffic haben, liegt das daran, dass das Plugin den von Sonar Cloud empfohlenen Best Practices folgt. In 90% der Fälle funktioniert dies einwandfrei, aber bei einigen Plugins verursacht es Probleme
 
-Um dies zu beheben, fügen Sie in `android/app/src/main/AndroidManifestxml` im `<application>`-Schlüssel Folgendes hinzu:
+Um dies zu beheben, fügen Sie in `android/app/src/main/AndroidManifestxml` im `<application>`-Schlüssel hinzu:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
@@ -71,9 +72,9 @@ xmlns:tools="http://schemasandroidcom/tools"
 
 ## iOS
 
-### Datenschutz-Manifest
+### Privacy Manifest
 
-Fügen Sie den `NSPrivacyAccessedAPICategoryUserDefaults`-Schlüssel zum [Datenschutz-Manifest](https://capacitorjscom/docs/ios/privacy-manifest) hinzu (normalerweise `ios/App/PrivacyInfoxcprivacy`):
+Fügen Sie den Dictionary-Schlüssel `NSPrivacyAccessedAPICategoryUserDefaults` zu Ihrem [Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest) hinzu (normalerweise `ios/App/PrivacyInfoxcprivacy`):
 
 ```xml
 <?xml version="10" encoding="UTF-8"?>
@@ -82,7 +83,7 @@ Fügen Sie den `NSPrivacyAccessedAPICategoryUserDefaults`-Schlüssel zum [Datens
   <dict>
     <key>NSPrivacyAccessedAPITypes</key>
     <array>
-      <!-- Fügen Sie diesen Eintrag zum Array hinzu, wenn die Datei bereits existiert -->
+      <!-- Fügen Sie diesen dict-Eintrag zum Array hinzu, wenn die Datei bereits existiert -->
       <dict>
         <key>NSPrivacyAccessedAPIType</key>
         <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
@@ -96,31 +97,31 @@ Fügen Sie den `NSPrivacyAccessedAPICategoryUserDefaults`-Schlüssel zum [Datens
 </plist>
 ```
 
-Wir empfehlen, [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) als Grund für den Zugriff auf die [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) API zu deklarieren.
+Wir empfehlen, [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) als Grund für den Zugriff auf die [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) API anzugeben
 
 ### Netzwerkberechtigungen
 
-Wenn Sie einen lokalen Server zum Testen eines Updates verwenden, wird die App um Netzwerkberechtigung bitten; das ist ein normales Verhalten. Bei der Verwendung eines Remote-Servers ist dies nicht der Fall.
+Bei der Verwendung eines lokalen Servers zum Testen von Updates wird die App nach Netzwerkberechtigungen fragen. Dies ist ein normales Verhalten und tritt nicht auf, wenn Sie einen Remote-Server verwenden
 
 ## Beide Betriebssysteme
 
-Bei manuellen Updates sind einige Ereignisse nicht einfach zu erfassen, zum Beispiel wird der Updatefehler direkt vor dem Neuladen Ihres JS-Codes ausgelöst, sodass Sie ihn nicht erfassen können.
+Bei manuellen Update-Modi sind einige Events schwer abzufangen. Zum Beispiel wird der Update-Fehler kurz vor dem Neuladen Ihres JS-Codes ausgelöst, sodass Sie ihn nicht abfangen können
 
-Eine Alternative besteht darin, die Bundles aufzulisten und die Fehlerstatistiken zu überprüfen, um zu wissen, ob das Update fehlgeschlagen ist.
+Eine Alternative ist es, die Bundles aufzulisten und die Fehlerstatistiken zu überprüfen, um zu erfahren, ob das Update fehlgeschlagen ist
 
-Wir müssen in Zukunft einen besseren Weg finden, dies zu handhaben, aber es ist keine Priorität, da der Automatikmodus der empfohlene Weg für Updates ist.
+Wir müssen in Zukunft einen besseren Weg finden, damit umzugehen, aber es ist keine Priorität, da der Auto-Modus der empfohlene Weg für Updates ist
 
-PRs sind willkommen, um uns dabei zu helfen, dies zu verbessern.
+PRs sind willkommen, um uns bei der Verbesserung zu helfen
 
 ## CLI
 
-Wenn Ihre CLI Probleme hat, irgendetwas zu tun,
+Wenn Ihre CLI Probleme bei der Ausführung hat,
 
-Überprüfen Sie, ob **appId** und **appName** in Ihrer **capacitorconfigts** vorhanden sind.
+Prüfen Sie, ob **appId** und **appName** in Ihrer **capacitorconfigts** vorhanden sind
 
-Befolgen Sie die Anleitung der offiziellen Dokumentation:
+Folgen Sie der Anleitung der offiziellen Dokumentation:
 
 <LinkCard
-	title="Capacitor-Konfiguration"
+	title="Capacitor Configuration"
 	href="https://capacitorjscom/docs/config"
 />

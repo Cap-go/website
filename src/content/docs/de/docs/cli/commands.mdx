@@ -1,6 +1,6 @@
 ---
-title: Befehle
-description: Capgo CLI-Dokumentation
+title: 명령어
+description: Capgo CLI Dokumentation
 sidebar:
   order: 2
 locale: de
@@ -11,10 +11,10 @@ import { YouTube } from 'astro-embed';
 
 ### Verwendung
 
-Alle Befehle sollten in Ihrem App-Ordner ausgeführt werden, nachdem das Capacitor-Projekt ordnungsgemäß gestartet wurde.
+Alle Befehle sollten in Ihrem App-Ordner mit ordnungsgemäß initialisiertem Capacitor-Projekt ausgeführt werden
 
 <LinkCard
-	title="Capacitor Plattformübergreifende native Laufzeit für Web-Apps"
+	title="Capacitor Cross-platform native runtime for web apps"
 	href="https://capacitorjscom/docs/getting-started/"
 />
 
@@ -22,50 +22,50 @@ Alle Befehle sollten in Ihrem App-Ordner ausgeführt werden, nachdem das Capacit
 
 `npx @capgo/cli@latest init [apikey]`
 
-Mit dieser Methode werden Sie Schritt für Schritt eingeführt.
+Diese Methode führt Sie Schritt für Schritt durch den Onboarding-Prozess
 
-Es wird Ihre App zu Capgo hinzufügen, den Code zu Ihrer App hinzufügen, um das Update zu validieren. Ebenso wird Ihre App gebaut. Darüber hinaus wird Ihre App zu Capgo hochgeladen und es wird Ihnen helfen zu überprüfen, ob das Update funktioniert.
+Sie fügt Ihre App zu Capgo hinzu und implementiert den Code zur Validierung der Aktualisierung. Außerdem wird Ihre App erstellt, zu Capgo hochgeladen und hilft Ihnen zu überprüfen, ob die Aktualisierung funktioniert
 
-### **Anmelden**
+### **Login**
 
 `npx @capgo/cli login [apikey]`
 
-Mit dieser Methode wird der `apikey` für Sie gespeichert.
+Diese Methode speichert den `apikey` für Sie
 
 :::note
-verwenden Sie `--apikey=********` in jedem Befehl, um ihn zu überschreiben.
+Verwenden Sie `--apikey=********` in jedem Befehl, um ihn zu überschreiben
 :::
 
-**Optional können Sie geben:**
+**Optional können Sie angeben:**
 
-`--local` Dies speichert Ihren **apikey** im lokalen Repository und ignoriert ihn in Git.
+`--local` Dies speichert Ihren **apikey** im lokalen Repository und ignoriert ihn in Git
 
 ## **Doctor**
 
 `npx @capgo/cli doctor`
 
-Befehl, um zu überprüfen, ob Sie mit den Capgo-Paketen auf dem neuesten Stand sind.
+Befehl zur Überprüfung, ob Ihre Capgo-Pakete aktuell sind
 
-Dieser Befehl wird auch nützlich für Bugmeldungen sein.
+Dieser Befehl ist auch nützlich für Fehlerberichte
 
 ## App
 
-### **Hinzufügen**
+### **Add**
 
 `npx @capgo/cli app add [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-> 💡 Alle Optionen werden in Ihrer Konfiguration erraten, wenn sie nicht bereitgestellt werden.
+> 💡 Alle Optionen werden aus Ihrer Konfiguration ermittelt, wenn nicht angegeben
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--icon [/path/to/my/icon]` um ein benutzerdefiniertes Icon in der Capgo-Web-App anzuzeigen.
-* `--name [test]` um einen benutzerdefinierten Namen in der Liste anzuzeigen.
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--retention [retention]` Aufbewahrungszeitraum des App-Bundles in Tagen, standardmäßig 0 = unendlich.
+* `--icon [/path/to/my/icon]` für ein benutzerdefiniertes Icon in der Capgo Web-App
+* `--name [test]` für einen benutzerdefinierten Namen in der Liste
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--retention [retention]` Aufbewahrungszeitraum des App-Bundles in Tagen, 0 standardmäßig = unendlich
 
-Beispiel für `capacitorconfigjson` für appId und AppName, das Icon wird im Ressourcenordner erraten.
+Beispiel einer `capacitorconfigjson` für appId und AppName, das Icon wird im resources-Ordner gesucht
 
 ```json
 {
@@ -75,117 +75,117 @@ Beispiel für `capacitorconfigjson` für appId und AppName, das Icon wird im Res
 }
 ```
 
-### **Setzen**
+### **Set**
 
 `npx @capgo/cli app set [appId]`
 
-`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--icon [/path/to/my/icon]` um ein benutzerdefiniertes Icon in der Capgo-Web-App anzuzeigen.
-* `--name [test]` um einen benutzerdefinierten Namen in der Liste anzuzeigen.
-* `--retention [retention]` Aufbewahrungszeitraum des App-Bundles in Tagen, standardmäßig 0 = unendlich.
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+* `--icon [/path/to/my/icon]` für ein benutzerdefiniertes Icon in der Capgo Web-App
+* `--name [test]` für einen benutzerdefinierten Namen in der Liste
+* `--retention [retention]` Aufbewahrungszeitraum des App-Bundles in Tagen, 0 standardmäßig = unendlich
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### **Liste**
+### **List**
 
 `npx @capgo/cli app list [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### **Löschen**
+### **Delete**
 
 `npx @capgo/cli app delete [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--bundle` mit der Versionsnummer wird nur diese Version löschen.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--bundle` mit der Versionsnummer löscht nur diese Version
 
 ### Debug
 
 `npx @capgo/cli app debug [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--device` mit dem spezifischen Gerät, das Sie debuggen möchten.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--device` mit dem spezifischen Gerät, das Sie debuggen möchten
 
-### Einstellungen
+### Setting
 
 `npx @capgo/cli app setting [path]`
 
-Bearbeiten Sie die Capacitor-Konfiguration.
+Bearbeitet die Capacitor-Konfiguration
 
-`[path]` - Pfad der Einstellung, die Sie ändern möchten. Beispielsweise, um die `appId` zu ändern, geben Sie `appId` an. 
-Wenn Sie das automatische Update im `capacitor-updater` deaktivieren möchten, geben Sie `pluginsCapacitorUpdaterautoUpdate` an.
+`[path]` - Pfad der Einstellung, die Sie ändern möchten. Zum Beispiel, um die `appId` zu ändern, geben Sie `appId` an
+Wenn Sie das automatische Update in `capacitor-updater` deaktivieren möchten, geben Sie `pluginsCapacitorUpdaterautoUpdate` an
 
 Sie MÜSSEN entweder `--string` oder `--bool` angeben!
 
-Optionen: 
- - `--string <string>` - setzt die Einstellung auf einen String.
- - `--bool <true | false>` - setzt die Einstellung auf einen Booleschen Wert.
+Optionen:
+ - `--string <string>` - setzt die Einstellung auf einen String
+ - `--bool <true | false>` - setzt die Einstellung auf einen Boolean
 
 ## Bundle
 
-### Hochladen
+### Upload
 
 `npx @capgo/cli bundle upload [appId]`
 
-`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey <apikey>` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--path <path>` Pfad des Ordners, der hochgeladen werden soll.
-* `--channel <channel>` Kanal, um zu verknüpfen.
-* `--external <url>` Link zu einer externen URL anstelle eines Uploads in die Capgo-Cloud.
-* `--iv-session-key <key>` Setzen Sie den IV- und Sitzungsschlüssel für die Bundle-URLs extern.
-* `--s3-endpoint <s3Endpoint>` URL des S3-Endpunkts. Funktioniert nicht mit Teil-Uploads oder externen Optionen.
-* `--s3-region <region>` Region für Ihren S3-Bucket.
-* `--s3-apikey <apikey>` API-Schlüssel für Ihren S3-Endpunkt.
-* `--s3-apisecret <apisecret>` API-Geheimnis für Ihren S3-Endpunkt.
-* `--s3-bucket-name <bucketName>` Name für Ihren AWS S3-Bucket.
-* `--s3-port <port>` Port für Ihren S3-Endpunkt.
-* `--no-s3-ssl` SSL für den S3-Upload deaktivieren.
-* `--key <key>` Benutzerdefinierter Pfad für den öffentlichen Signierschlüssel (v1-System).
-* `--key-data <keyData>` Öffentlicher Signierschlüssel (v1-System).
-* `--key-v2 <key>` Benutzerdefinierter Pfad für den privaten Signierschlüssel (v2-System).
-* `--key-data-v2 <keyData>` Privater Signierschlüssel (v2-System).
-* `--bundle-url` Druckt die Bundle-URL in stdout.
-* `--no-key` Ignoriere den Signierschlüssel und sende ein klares Update.
-* `--no-code-check` Ignoriere die Überprüfung, ob notifyAppReady() im Quellcode aufgerufen wird, und ob der Index im Stammverzeichnis vorhanden ist.
-* `--display-iv-session` Zeigt in der Konsole den IV- und Sitzungsschlüssel an, der zur Verschlüsselung des Updates verwendet wird.
-* `--bundle <bundle>` Bundle-Versionsnummer des Bundles, das hochgeladen werden soll.
-* `--min-update-version <minUpdateVersion>` Minimale Version, die erforderlich ist, um auf diese Version zu aktualisieren. Wird nur verwendet, wenn das automatische Update in den Metadaten im Kanal deaktiviert ist.
-* `--auto-min-update-version` Setzt die min. Update-Version basierend auf nativen Paketen.
-* `--ignore-metadata-check` Ignoriert die Überprüfung von Metadaten (node_modules) beim Hochladen.
-* `--ignore-checksum-check` Ignoriert die Überprüfung der Checksumme beim Hochladen.
-* `--timeout <timeout>` Timeout für den Upload-Prozess in Sekunden.
-* `--partial` Lädt keine Teil-Dateien in die Capgo-Cloud hoch.
-* `--tus` Lädt das Bundle unter Verwendung des TUS-Protokolls hoch.
-* `--multipart` Verwendet das Multipart-Protokoll zum Hochladen von Daten nach S3, veraltet, verwenden Sie stattdessen TUS.
-* `--encrypted-checksum <encryptedChecksum>` Eine verschlüsselte Checksumme (Signatur). Wird nur beim Hochladen eines externen Bundles verwendet.
-* `--package-json <packageJson>` Ein Pfad zu packagejson. Nützlich für Monorepos.
-* `--auto-set-bundle` Setzt das Bundle in capacitorconfigjson.
-* `--node-modules <nodeModules>` Eine Liste von Pfaden zu node_modules. Nützlich für Monorepos (durch Kommas getrennt, z. B. //node_modules,/node_modules).
+* `--apikey <apikey>` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--path <path>` Pfad des hochzuladenden Ordners
+* `--channel <channel>` Zu verknüpfender Kanal
+* `--external <url>` Link zu externer URL statt Upload zur Capgo Cloud
+* `--iv-session-key <key>` IV und Session-Key für Bundle-URL extern setzen
+* `--s3-endpoint <s3Endpoint>` URL des S3-Endpunkts Funktioniert nicht mit Partial Upload oder externer Option
+* `--s3-region <region>` Region für Ihren S3-Bucket
+* `--s3-apikey <apikey>` API-Schlüssel für Ihren S3-Endpunkt
+* `--s3-apisecret <apisecret>` API-Geheimnis für Ihren S3-Endpunkt
+* `--s3-bucket-name <bucketName>` Name für Ihren AWS S3-Bucket
+* `--s3-port <port>` Port für Ihren S3-Endpunkt
+* `--no-s3-ssl` SSL für S3-Upload deaktivieren
+* `--key <key>` Benutzerdefinierter Pfad für öffentlichen Signierungsschlüssel (v1-System)
+* `--key-data <keyData>` Öffentlicher Signierungsschlüssel (v1-System)
+* `--key-v2 <key>` Benutzerdefinierter Pfad für privaten Signierungsschlüssel (v2-System)
+* `--key-data-v2 <keyData>` Privater Signierungsschlüssel (v2-System)
+* `--bundle-url` Gibt Bundle-URL in stdout aus
+* `--no-key` Ignoriert Signierungsschlüssel und sendet klares Update
+* `--no-code-check` Ignoriert die Überprüfung, ob notifyAppReady() im Quellcode aufgerufen wird und index im Root-Ordner vorhanden ist
+* `--display-iv-session` Zeigt in der Konsole den verwendeten IV und Session-Key für die Verschlüsselung
+* `--bundle <bundle>` Bundle-Versionsnummer des hochzuladenden Bundles
+* `--min-update-version <minUpdateVersion>` Minimal erforderliche Version für das Update auf diese Version Wird nur verwendet, wenn auto update auf metadata im Kanal gesetzt ist
+* `--auto-min-update-version` Setzt die minimale Update-Version basierend auf nativen Paketen
+* `--ignore-metadata-check` Ignoriert die Metadata-Prüfung (node_modules) beim Upload
+* `--ignore-checksum-check` Ignoriert die Checksum-Prüfung beim Upload
+* `--timeout <timeout>` Timeout für den Upload-Prozess in Sekunden
+* `--partial` Lädt keine Teiledateien zur Capgo Cloud hoch
+* `--tus` Lädt das Bundle über das tus-Protokoll hoch
+* `--multipart` Verwendet Multipart-Protokoll für den Upload zu S3, Veraltet, verwenden Sie stattdessen TUS
+* `--encrypted-checksum <encryptedChecksum>` Eine verschlüsselte Prüfsumme (Signatur) Nur verwendet beim Upload eines externen Bundles
+* `--package-json <packageJson>` Ein Pfad zur packagejson Nützlich für Monorepos
+* `--auto-set-bundle` Setzt das Bundle in capacitorconfigjson
+* `--node-modules <nodeModules>` Eine Liste von Pfaden zu node_modules Nützlich für Monorepos (kommagetrennt z.B.: //node_modules,/node_modules)
 
-> ⭐️ Externe Optionen helfen, zwei Fälle zu lösen: Unternehmen mit Datenschutzbedenken, die den Code nicht an Dritte senden möchten, und Apps, die größer als 200 MB sind. Mit dieser Einstellung speichert Capgo nur den Link zur ZIP-Datei und sendet den Link an alle Apps.
+> ⭐️ Die externe Option hilft bei 2 Fällen: Unternehmen mit Datenschutzbedenken, die keinen Code an Dritte senden möchten, und Apps größer als 200 MB. Mit dieser Einstellung speichert Capgo nur den Link zur ZIP-Datei und sendet den Link an alle Apps
 
-> 👀 Capgo-Cloud betrachtet niemals, was im Link (für externe Optionen) oder im Code gespeichert ist.
+> 👀 Capgo Cloud schaut nie, was sich im Link (für externe Option) oder im Code befindet, wenn gespeichert
 
-> 🔑 Sie können eine zweite Sicherheitsebene durch Verschlüsselung hinzufügen; dann kann Capgo nichts ansehen oder ändern, es wird „vertrauenslos“.
+> 🔑 Sie können eine zweite Sicherheitsebene durch Verschlüsselung hinzufügen, dann kann Capgo nichts einsehen oder modifizieren, es wird "vertrauenslos"
 
-Beispiel für `packagejson` für die Version
+Beispiel einer `packagejson` für Version
 
 ```json
 {
@@ -193,250 +193,249 @@ Beispiel für `packagejson` für die Version
 }
 ```
 
-> ⛔ Die Version sollte größer als „000“ sein.
+> ⛔ Version sollte größer als "000" sein
 
-> 💡 Vergessen Sie nicht, die Versionsnummer jedes Mal zu aktualisieren, wenn Sie eine senden. Die Versionsnummer kann aus Sicherheitsgründen nicht überschrieben oder nach der Löschung wiederverwendet werden.
+> 💡 Vergessen Sie nicht, die Versionsnummer bei jedem Senden zu aktualisieren, Versionsnummern können aus Sicherheitsgründen nicht überschrieben oder nach dem Löschen wiederverwendet werden
 
-### **Liste**
+### **List**
 
 `npx @capgo/cli bundle list [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### **Löschen**
+### **Delete**
 
 `npx @capgo/cli bundle delete [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-Optional können Sie geben:
+Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--bundle` mit der Versionsnummer wird nur diese Version löschen.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--bundle` mit der Versionsnummer löscht nur diese Version
 
-### Bereinigung
+### Cleanup
 
-in einem SemVer-Bereich für eine Hauptversion in die Cloud
+in einem SemVer-Bereich für eine Major-Version zur Cloud
 
 `npx @capgo/cli bundle cleanup [appId] --bundle=[majorVersion] --keep=[numberToKeep]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
-
-Optional können Sie geben:
-
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
-* `--bundle [majorVersion]` eine Version, für die Sie frühere Pakete entfernen möchten. Es wird die letzte Version + `numberToKeep` behalten.* `--keep [numberToKeep]` die Anzahl der Pakete, die Sie behalten möchten (Standard 4)
-
-Zum Beispiel: Wenn Sie 10 Versionen von 1001 bis 10011 haben und `npx @capgo/cli cleanup [appId] --bundle=1000` verwenden, werden 1001 bis 1006 1007 bis 10011 behalten.
-
-Wenn Sie insgesamt 20 Versionen haben und Ihnen keine Bundlenummer zur Verfügung steht, wie z. B.: `npx @capgo/cli cleanup [appId] --keep=2`, werden 18 Versionen entfernt und die letzten 2 behalten.
-
-> Dieser Befehl wird um Bestätigung bitten und zeigt eine Tabelle an, was beibehalten und entfernt wird.
-
-:::note
-Dieser Befehl ignoriert Bundles, die derzeit in einem Kanal verwendet werden.
-:::
-
-### **Verschlüsseln**
-
-> **Warnung**: Dieser Befehl ist veraltet und wird in der nächsten Hauptversion entfernt. Bitte verwenden Sie das neue Verschlüsselungssystem.
-`npx @capgo/cli bundle encrypt [path/to/zip]`
-
-Dieser Befehl wird verwendet, wenn Sie eine externe Quelle verwenden, um Ihren Code zu speichern oder zu Testzwecken.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
 Optional können Sie angeben:
 
-`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel.  
-`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie Inline verwenden möchten.  
-Der Befehl gibt Ihren `ivSessionKey` aus und erstellt eine verschlüsselte Zip-Datei, um sie mit dem Upload-Befehl oder dem Entschlüsselungsbefehl zu verwenden.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--bundle [majorVersion]` eine Version, für die Sie vorherige Pakete entfernen möchten, es wird die letzte + `numberToKeep` behalten* `--keep [numberToKeep]` die Anzahl der Pakete, die Sie behalten möchten (Standard 4)
 
-### **Verschlüsseln V2**
+Zum Beispiel: Wenn Sie 10 Versionen von 1001 bis 10011 haben und Sie `npx @capgo/cli cleanup [appId] --bundle=1000` verwenden, werden 1001 bis 1006 entfernt und 1007 bis 10011 werden behalten
+
+Wenn Sie insgesamt 20 Versionen haben und keine Bundle-Nummer angeben, wie hier: `npx @capgo/cli cleanup [appId] --keep=2` werden 18 Versionen entfernt und die letzten 2 behalten
+
+> Dieser Befehl wird um Bestätigung bitten und zeigt eine Tabelle mit den zu behaltenden und zu entfernenden Versionen
+
+:::note
+Dieser Befehl ignoriert Bundles, die derzeit in einem Kanal verwendet werden
+:::
+
+### **Encrypt**
+
+> **Warnung**: Dieser Befehl ist veraltet und wird in der nächsten Hauptversion entfernt. Bitte verwenden Sie das neue Verschlüsselungssystem
+`npx @capgo/cli bundle encrypt [path/to/zip]`
+
+Dieser Befehl wird verwendet, wenn Sie externe Quellen zum Speichern Ihres Codes verwenden oder zu Testzwecken
+
+Optional können Sie angeben:
+
+`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel
+`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten
+Der Befehl gibt Ihren `ivSessionKey` aus und generiert eine verschlüsselte ZIP-Datei zur Verwendung mit dem Upload- oder Decrypt-Befehl
+
+### **Encrypt V2**
 
 `npx @capgo/cli bundle encryptV2 [path/to/zip] [checksum]`
 
-Dieser Befehl wird verwendet, wenn Sie eine externe Quelle verwenden, um Ihren Code zu speichern oder zu Testzwecken.  
-Die Prüfziffer ist der sha256 des Bundles (erzeugt durch --key-v2), sie wird verwendet, um die Integrität der Datei nach der Entschlüsselung zu überprüfen.  
-Sie wird mit dem privaten Schlüssel verschlüsselt und zusammen mit dem Bundle gesendet.  
-In der Verschlüsselung v2 wird die Prüfziffer auf eine "Signatur" des Bundles aktualisiert.
+Dieser Befehl wird verwendet, wenn Sie externe Quellen zum Speichern Ihres Codes verwenden oder zu Testzwecken
+Die Prüfsumme ist der SHA256 des Bundles (generiert durch --key-v2) und wird verwendet, um die Integrität der Datei nach der Entschlüsselung zu überprüfen
+Sie wird mit dem privaten Schlüssel verschlüsselt und zusammen mit dem Bundle gesendet
+In Verschlüsselung V2 wird die Prüfsumme zu einer "Signatur" des Bundles aufgewertet
 
 Optional können Sie angeben:
 
-`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel.  
-`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie Inline verwenden möchten.  
-`--json` um Infos im JSON-Format auszugeben.  
-Der Befehl gibt Ihren `ivSessionKey` aus und erstellt eine verschlüsselte Zip-Datei, um sie mit dem Upload-Befehl oder dem Entschlüsselungsbefehl zu verwenden.
+`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel
+`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten
+`--json` um Informationen als JSON auszugeben
+Der Befehl gibt Ihren `ivSessionKey` aus und generiert eine verschlüsselte ZIP-Datei zur Verwendung mit dem Upload- oder Decrypt-Befehl
 
-### **Entschlüsseln**
+### **Decrypt**
 
 `npx @capgo/cli bundle decrypt [path/to/zip] [ivSessionKey]`
 
 Optional können Sie angeben:
 
-`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel.  
-`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie Inline verwenden möchten.  
-Dieser Befehl wird hauptsächlich zu Testzwecken verwendet, er entschlüsselt die Zip-Datei und gibt den base64-entschlüsselten Sitzungsschlüssel in der Konsole aus.
+`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel
 
-### **Entschlüsseln V2**
+`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten. Dieser Befehl wird hauptsächlich zu Testzwecken verwendet, er entschlüsselt die ZIP-Datei und gibt den base64-decodierten Sitzungsschlüssel in der Konsole aus
 
-`npx @capgo/cli bundle decryptV2 [path/to/zip]  [ivSessionKey]`
+### **Decrypt V2**
+
+`npx @capgo/cli bundle decryptV2 [path/to/zip] [ivSessionKey]`
 
 Optional können Sie angeben:
 
-`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel.  
-`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie Inline verwenden möchten.  
-Dieser Befehl wird hauptsächlich zu Testzwecken verwendet, er entschlüsselt die Zip-Datei und gibt den base64-entschlüsselten Sitzungsschlüssel in der Konsole aus.  
-`--checksum [checksum]` die Prüfziffer der Datei, sie wird nach der Entschlüsselung überprüft.
+`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel
+`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten. Dieser Befehl wird hauptsächlich zu Testzwecken verwendet, er entschlüsselt die ZIP-Datei und gibt den base64-decodierten Sitzungsschlüssel in der Konsole aus
+`--checksum [checksum]` die Prüfsumme der Datei, sie wird nach der Entschlüsselung überprüft
 
 ### **Zip**
 
 `npx @capgo/cli bundle zip [appId]`
 
-`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
 Optional können Sie angeben:
 
-* `--path [/path/to/my/bundle]` um einen bestimmten Ordner hochzuladen.  
-* `--bundle [100]` um die Bundle-Version des Dateinamens festzulegen.  
-* `--name [myapp]` um den Dateinamen zu überschreiben.  
-* `--json` um Infos im JSON-Format auszugeben.  
-* `--no-code-check` um die Codeüberprüfung zu ignorieren und das Bundle trotzdem zu senden.  
-* `--key-v2` um das neue Verschlüsselungssystem zu verwenden. Dies ist erforderlich, da das neue Verschlüsselungssystem bessere Prüfziffern verwendet, um die Integrität der Datei zu überprüfen.
+* `--path [/path/to/my/bundle]` um einen bestimmten Ordner hochzuladen
+* `--bundle [100]` um die Bundle-Versionsnummer des Dateinamens festzulegen
+* `--name [myapp]` um den Dateinamen zu überschreiben
+* `--json` um Informationen als JSON auszugeben
+* `--no-code-check` um die Code-Prüfung zu ignorieren und das Bundle trotzdem zu senden
+* `--key-v2` um das neue Verschlüsselungssystem zu verwenden. Dies ist erforderlich, da das neue Verschlüsselungssystem bessere Prüfsummen zur Überprüfung der Dateiintegrität verwendet
 
-### **Kompatibilität**
+### **Compatibility**
 
 `npx @capgo/cli bundle compatibility [appId] -c [channelId]`
 
-`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.  
-`[channelId]` der Name Ihres neuen Kanals.
+`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
+`[channelId]` der Name Ihres neuen Kanals
 
 Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.  
-* `--text` Text anstelle von Emojis in der Tabelle verwenden.  
-* `--channel [channel]` den Kanal, um die Kompatibilität zu überprüfen.  
-* `--package-json <packageJson>` Ein Pfad zu packagejson, nützlich für Monorepos.  
-* `--node-modules <nodeModules>` Eine Liste von Pfaden zu node_modules, nützlich für Monorepos (kommagetrennt z. B.: //node_modules,/node_modules).
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
+* `--text` Text statt Emojis in der Tabelle verwenden
+* `--channel [channel]` der Kanal, dessen Kompatibilität überprüft werden soll
+* `--package-json <packageJson>` Ein Pfad zur packagejson. Nützlich für Monorepos
+* `--node-modules <nodeModules>` Eine Liste von Pfaden zu node_modules. Nützlich für Monorepos (kommagetrennt z.B.: //node_modules,/node_modules)
 
-## Kanal
+## Channel
 
-### **Hinzufügen**
+### **Add**
 
 `npx @capgo/cli channel add [channelId] [appId]`
 
-`[channelId]` der Name Ihres neuen Kanals. `[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[channelId]` der Name Ihres neuen Kanals `[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-### **Löschen**
+### **Delete**
 
 `npx @capgo/cli channel delete [channelId] [appId]`
 
-`[channelId]` der Name Ihres Kanals, den Sie löschen möchten. `[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[channelId]` der Name des Kanals, den Sie löschen möchten `[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
-### **Liste**
+### **List**
 
 `npx @capgo/cli channel list [appId]`
 
-`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` Ihre App-ID, das Format `comtestapp` wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
 Optional können Sie angeben:
 
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### **Setzen**
+### **Set**
 
 `npx @capgo/cli channel set [channelId] [appId]`
 
-`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt.
+`[appId]` ist Ihre App-ID, das Format wird [hier](https://capacitorjscom/docs/cli/commands/init/) erklärt
 
 Optional können Sie angeben:
 
-* `--bundle [123]` Ihr App-Bundle, das bereits in die Cloud gesendet wurde, um es mit einem Kanal zu verknüpfen.  
-* `--latest` um die Bundle-Version von `packagejson:version` abzurufen, kann nicht mit `--bundle` verwendet werden.  
-* `--state [ normal | default ]` um den Kanalstatus festzulegen, kann `normal` oder `default` sein. Ein Kanal muss `default` sein.  
-* `--downgrade` ermöglicht es dem Kanal, Downgrade-Versionen an Geräte zu senden.  
-* `--no-downgrade` verbietet dem Kanal, Downgrade-Versionen an Geräte zu senden.  
-* `--upgrade` ermöglicht es dem Kanal, Upgrade (major) Versionen an Geräte zu senden.  
-* `--no-upgrade` verbietet dem Kanal, Upgrade (major) Versionen an Geräte zu senden.  
-* `--ios` ermöglicht es dem Kanal, Versionen an iOS-Geräte zu senden.  
-* `--no-ios` verbietet dem Kanal, Versionen an iOS-Geräte zu senden.  
-* `--android` ermöglicht es dem Kanal, Versionen an Android-Geräte zu senden.  
-* `--no-android` verbietet dem Kanal, Versionen an Android-Geräte zu senden.  
-* `--self-assign` erlaubt es Geräten, sich diesem Kanal selbst zuzuweisen.  
-* `--no-self-assign` verbietet es Geräten, sich diesem Kanal selbst zuzuweisen.  
-* `--disable-auto-update STRATEGIE` Deaktivieren der automatischen Aktualisierungsstrategie für diesen Kanal. Die möglichen Optionen sind: major, minor, metadata, none.  
-* `--apikey [key]` API-Schlüssel, um mit Ihrem Konto zu verknüpfen.
+* `--bundle [123]` Ihr bereits in die Cloud hochgeladenes App-Bundle, um es mit einem Kanal zu verknüpfen
+* `--latest` holt die Bundle-Version aus `packagejson:version`, kann nicht mit `--bundle` verwendet werden
+* `--state [ normal | default ]` setzt den Kanalstatus, kann `normal` oder `default` sein. Ein Kanal muss `default` sein
+* `--downgrade` erlaubt dem Kanal, Downgrade-Versionen an Geräte zu senden
+* `--no-downgrade` verbietet dem Kanal, Downgrade-Versionen an Geräte zu senden
+* `--upgrade` erlaubt dem Kanal, Upgrade (Major) Versionen an Geräte zu senden
+* `--no-upgrade` verbietet dem Kanal, Upgrade (Major) Versionen an Geräte zu senden
+* `--ios` erlaubt dem Kanal, Versionen an iOS-Geräte zu senden
+* `--no-ios` verbietet dem Kanal, Versionen an iOS-Geräte zu senden
+* `--android` erlaubt dem Kanal, Versionen an Android-Geräte zu senden
+* `--no-android` verbietet dem Kanal, Versionen an Android-Geräte zu senden
+* `--self-assign` erlaubt Geräten, sich selbst diesem Kanal zuzuweisen
+* `--no-self-assign` verbietet Geräten, sich selbst diesem Kanal zuzuweisen
+* `--disable-auto-update STRATEGY` Deaktiviert die Auto-Update-Strategie für diesen Kanal. Die möglichen Optionen sind: major, minor, metadata, none
+* `--apikey [key]` API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-## Aktualisierungsstrategie deaktivieren
+## Deaktivieren der Update-Strategie
 
-Es gibt einige Möglichkeiten, Updates für zu alte Versionen zu deaktivieren.  
-Capgo kann den nativen Code nicht aktualisieren; daher sollte ein Update von einer Version mit altem nativen Code auf eine Version mit aktualisiertem nativen Code nicht möglich sein.  
-Es gibt mehrere Möglichkeiten, dies zu erreichen.
+Es gibt mehrere Möglichkeiten, Updates für zu alte Versionen zu deaktivieren\
+Capgo kann nativen Code nicht aktualisieren, daher sollte ein Update von einer Version mit altem nativen Code zu einer Version mit aktualisiertem nativen Code nicht möglich sein
+Es gibt mehrere Möglichkeiten, dies zu erreichen
 
-Zuerst die `major`-Strategie. Sie verhindert ein Update von `000` -> `100`. Die Hauptversion ist die hervorgehobene Zahl (**1**00 und **0**00).  
-Zweitens die `minor`-Strategie. Sie verhindert ein Update von `000` -> `110` oder ein Update von `110` auf `120`.  
-**SEIEN SIE VORSICHTIG**, diese Strategie verhindert kein Update von `010` -> `110`.
+Erstens die `major` Strategie. Sie verhindert ein Update von `000` -> `100`. Die Major-Version ist die hervorgehobene Zahl (**1**00 und **0**00)\
+Zweitens die `minor` Strategie. Sie verhindert ein Update von `000` -> `110` oder ein Update von `110` auf `120`
+**ACHTUNG** diese Strategie verhindert kein Update von `010` -> `110`
 
-Drittens die `patch`-Strategie. Sie wurde in Capgo als sehr strikter Modus hinzugefügt. Es wird nicht empfohlen, sie zu verwenden, es sei denn, Sie verstehen voll und ganz, wie sie funktioniert.  
-Damit ein Update akzeptiert wird, müssen die folgenden Bedingungen erfüllt sein:  
- - Die Hauptversion ist zwischen der neuen und der alten Version identisch.  
- - Die Nebenversion ist zwischen der neuen und der alten Version identisch.  
- - Der Patch der neuen Version ist größer als der Patch der alten Version.
+Drittens die `patch` Strategie. Sie wurde in Capgo als sehr strenger Modus hinzugefügt. Es wird nicht empfohlen, sie zu verwenden, es sei denn, Sie verstehen vollständig, wie sie funktioniert
+Damit ein Update akzeptiert wird, müssen folgende Bedingungen erfüllt sein:
+ - Die Major-Version ist zwischen der neuen und alten Version gleich
+ - Die Minor-Version ist zwischen der neuen und alten Version gleich
+ - Die Patch-Version der neuen Version ist größer als die Patch-Version der alten Version
 
-Hier ist ein Beispiel für die Szenarien, in denen das Update erlaubt oder abgelehnt wird:
+Hier ein Beispiel, in welchen Szenarien das Update erlaubt oder verweigert wird:
 
- - 00311 -> 00314 ✅  
- - 000 -> 00314 ✅  
- - 00316 -> 00314 ❌  
- - 01312 -> 00314 ❌  
- - 10312 -> 00314 ❌  
+ - 00311 -> 00314 ✅
+ - 000 -> 00314 ✅
+ - 00316 -> 00314 ❌
+ - 01312 -> 00314 ❌
+ - 10312 -> 00314 ❌
 
-Zuletzt die komplizierteste Strategie, die `metadata`-Strategie.  
-Zuerst müssen Sie wissen, dass die Updates **WILL** fehlschlagen, nachdem Sie sie aktiviert haben, da der Kanal die erforderlichen Metadaten nicht hat.  
-Wenn der Kanal keine Metadaten hat, sehen Sie eine Nachricht wie diese:  
-<img src="/fail-metadatawebp" alt="Kann Metadaten nicht finden"/>  
+Zuletzt die komplizierteste Strategie: Die `metadata` Strategie\
+Zunächst müssen Sie wissen, dass die Updates nach der Aktivierung zunächst **FEHLSCHLAGEN** werden, da dem Kanal die erforderlichen Metadaten fehlen\
+Wenn dem Kanal Metadaten fehlen, sehen Sie eine Nachricht wie diese:
+<img src="/fail-metadatawebp" alt="Cannot find metadata"/>
 
-Wenn Sie etwas in dieser Art sehen, wissen Sie, dass Sie zum aktuellen Bundle für den fehlgeschlagenen Kanal gehen und die Metadaten festlegen müssen.  
-Zuerst müssen Sie herausfinden, welcher Kanal fehlschlägt. Sie können dies tun, indem Sie die Spalte `misconfigured` betrachten.  
-<img src="/misconfigured-tablewebp" alt="Falsch konfiguriert Tabelle"/>
+Wenn Sie so etwas sehen, wissen Sie, dass Sie zum aktuellen Bundle für den fehlschlagenden Kanal gehen und die Metadaten setzen müssen\
+Finden Sie zunächst heraus, welcher Kanal fehlschlägt. Sie können das in der Spalte `misconfigured` sehen
+<img src="/misconfigured-table"/>webp" alt="Misconfigured table"/>
 
-Gehen Sie dann zum fehlgeschlagenen Kanal und klicken Sie auf `Bundle-Nummer` Dies sollte Sie zur Bundle-Seite führen
-<img src="/fail-channel-showwebp" alt="Fehlgeschlagenen Kanal lokalisieren"/>
+Gehen Sie dann zum fehlerhaften Kanal und klicken Sie auf `Bundle number`. Dies sollte Sie zur Bundle-Seite führen.
+<img src="/fail-channel-showwebp" alt="Locate failing channel"/>
 
-Füllen Sie dort das Feld `Minimale Update-Version` aus Dies sollte eine [semver](https://devhintsio/semver/) sein\
-Wenn der Wert, den Sie übergeben, keine semver ist, erhalten Sie einen Fehler, aber wenn alles korrekt läuft, sollten Sie etwas sehen wie dies:
-<img src="/set-min-update-versionwebp" alt="Minimale Version festlegen"/>
+Füllen Sie dort das Feld `Minimal update version` aus. Dies sollte ein [semver](https://devhints.io/semver/) sein.\
+Wenn der eingegebene Wert kein semver ist, erhalten Sie einen Fehler. Bei korrekter Eingabe sollten Sie etwa Folgendes sehen:
+<img src="/set-min-update-versionwebp" alt="Set min version"/>
 
-Jetzt möchten Sie wahrscheinlich nicht, dass diese Daten jedes Mal manuell festgelegt werden, wenn Sie aktualisieren. Glücklicherweise wird das CLI Sie daran hindern, ein Update ohne diese Metadaten zu senden
-<img src="/cli-fail-no-metadatawebp" alt="CLI-Fehler keine Metadaten"/>
+Sie möchten diese Daten wahrscheinlich nicht bei jedem Update manuell eingeben. Glücklicherweise verhindert die CLI das Senden eines Updates ohne diese Metadaten.
+<img src="/cli-fail-no-metadatawebp" alt="CLI fail no metadata"/>
 
-Um ein Bundle ordnungsgemäß hochzuladen, wenn Sie die `metadata`-Option verwenden, müssen Sie `--min-update-version` mit der gültigen semver übergeben. Etwas wie dies:
-<img src="/cli-upload-with-metadatawebp" alt="CLI-Upload mit Metadaten"/>
+Um ein Bundle mit der Option `metadata` korrekt hochzuladen, müssen Sie `--min-update-version` mit einem gültigen semver übergeben. Etwa so:
+<img src="/cli-upload-with-metadatawebp" alt="CLI upload with metadata"/>
 
-Die `--min-update-version` ist nicht der EINZIGE Weg, um Kompatibilität zu gewährleisten
-Es gibt auch die `--auto-min-update-version`. So funktioniert es
+Die `--min-update-version` ist nicht der EINZIGE Weg für Kompatibilität.
+Es gibt auch `--auto-min-update-version`. So funktioniert es:
 
-1. Zuerst wird der aktuell in den Kanal hochgeladene Versionstyp überprüft. Es überprüft die Kompatibilität genau wie der Befehl `bundle compatibility` es tun würde
-2. Zweitens, wenn die neue Version zu 100 % kompatibel ist, wird die `min_update_version` von der neuesten Version im Kanal wiederverwendet
-3. Wenn nicht, wird die `min_update_version` auf die Bundle-Nummer der neu hochgeladenen Version gesetzt
+Zunächst wird die aktuell im Kanal hochgeladene Version überprüft. Die Kompatibilität wird wie beim Befehl `bundle compatibility` geprüft.
+Zweitens, wenn die neue Version 100% kompatibel ist, wird die `min_update_version` der neuesten Version im Kanal wiederverwendet.
+Wenn nicht, wird die `min_update_version` auf die Bundle-Nummer der neu hochgeladenen Version gesetzt.
 
-Sie erhalten immer Informationen dazu, was die `min_update_version` ist, wenn Sie diese Option verwenden. Es wird etwa so aussehen:
-<img src="/min_update_version_infowebp" alt="Minimale Update-Version"/>
+Sie erhalten bei Verwendung dieser Option immer eine Information über die `min_update_version`. Es wird etwa so aussehen:
+<img src="/min_update_version_infowebp" alt="Min update version"/>
 
 Wenn die neue Version nicht kompatibel ist, sollte es etwa so aussehen:
-<img src="/min_update_version_not_compatiblewebp" alt="Minimale Update-Version nicht kompatibel"/>
+<img src="/min_update_version_not_compatiblewebp" alt="Min update version not compatible"/>
 
-## Ende-zu-Ende-Verschlüsselung (Vertrauensunwürdig)
+## Ende-zu-Ende-Verschlüsselung (Vertrauenslos)
 
-Capgo unterstützt die Ende-zu-Ende-Verschlüsselung, das bedeutet, dass Ihr Bundle (Code) verschlüsselt wird, bevor es in die Cloud gesendet und auf dem Gerät entschlüsselt wird. Dazu müssen Sie ein RSA-Schlüsselpaar generieren. Sie können den folgenden Befehl verwenden, um es zu generieren
+Capgo unterstützt Ende-zu-Ende-Verschlüsselung, das bedeutet, dass Ihr Bundle (Code) vor dem Senden in die Cloud verschlüsselt und auf dem Gerät entschlüsselt wird. Dafür müssen Sie ein RSA-Schlüsselpaar generieren, Sie können den folgenden Befehl verwenden, um es zu generieren.
 
-Das Verschlüsselungssystem ist eine Kombination aus RSA und AES. Der RSA-Schlüssel wird verwendet, um den AES-Schlüssel zu verschlüsseln, und der AES-Schlüssel wird verwendet, um die Datei zu verschlüsseln
+Das Verschlüsselungssystem ist eine Kombination aus RSA und AES, der RSA-Schlüssel wird verwendet, um den AES-Schlüssel zu verschlüsseln, und der AES-Schlüssel wird verwendet, um die Datei zu verschlüsseln.
 
-Siehe unten für weitere Informationen über das Verschlüsselungssystem
+Weitere Informationen zum Verschlüsselungssystem finden Sie unten
 
-<img src="/crypto_explainedwebp" alt="Wie Kryptographie funktioniert"/>
+<img src="/crypto_explainedwebp" alt="How crypto works"/>
 
 Verschlüsselungsschema
 
@@ -444,9 +443,9 @@ Verschlüsselungsschema
 
 `npx @capgo/cli key create`
 
-Optionale können Sie `--force` angeben, um den bestehenden Schlüssel zu überschreiben. Dieser Befehl erstellt ein Schlüsselpaar in Ihrer App und fordert Sie auf, den privaten Schlüssel an einem sicheren Ort zu speichern. Es wird empfohlen, den privaten Schlüssel nicht mit git zu committen und ihn mit niemandem zu teilen
+Optional können Sie `--force` verwenden, um den vorhandenen Schlüssel zu überschreiben. Dieser Befehl erstellt ein Schlüsselpaar in Ihrer App und fordert Sie auf, den privaten Schlüssel an einem sicheren Ort zu speichern. Es wird empfohlen, den privaten Schlüssel nicht in Git zu committen und mit niemandem zu teilen.
 
-> Entfernen Sie nach Ihrem lokalen Test den Schlüssel aus der Konfigurationsdatei und fügen Sie ihn im CI-Schritt mit `key save` hinzu.
+> Nach Ihrem lokalen Test entfernen Sie den Schlüssel aus der Konfigurationsdatei und fügen Sie ihn im CI-Schritt mit `key save` hinzu.
 
 ### Schlüssel in Ihrer App-Konfiguration speichern
 
@@ -454,18 +453,18 @@ Optionale können Sie `--force` angeben, um den bestehenden Schlüssel zu übers
 
 Optional können Sie angeben:
 
-`--key [/path/to/my/private_key]` den Pfad Ihres privaten Schlüssels
+`--key [/path/to/my/private_key]` der Pfad zu Ihrem privaten Schlüssel
 
-`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten. Dieser Befehl ist nützlich, wenn Sie die Empfehlung befolgt und den Schlüssel nicht in Ihrer App oder in der Konfiguration eingegeben haben.
+`--key-data [privateKey]` die privaten Schlüsseldaten, wenn Sie sie inline verwenden möchten. Dieser Befehl ist nützlich, wenn Sie der Empfehlung gefolgt sind und den Schlüssel nicht in Ihrer App und in der Konfiguration committet haben.
 
 ## CI-Integration
 
-Um Ihre Arbeit zu automatisieren, empfehle ich, dass Sie die GitHub-Aktion die Arbeit des Pushens auf unseren Server erledigen lassen
+Um Ihre Arbeit zu automatisieren, empfehle ich, GitHub Actions die Aufgabe des Pushens zu unserem Server zu überlassen.
 
-[GitHub-Aktion Tutorial](https://capgoapp/blog/automatic-build-and-release-with-github-actions/)
+[GitHub Action Tutorial](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
 
 ## Unsere Demo-App
 
-[GitHub - Cap-go/demo-app](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app/)
 
-Vergessen Sie nicht, die CI-Umgebungsvariable mit Ihrem API-Schlüssel zu konfigurieren.
+Vergessen Sie nicht, die CI-Umgebungsvariable mit Ihrem API-Schlüssel zu konfigurieren

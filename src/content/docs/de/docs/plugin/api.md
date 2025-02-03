@@ -1,46 +1,46 @@
 ---
-title: Funktionen und Einstellungen
+title: Fungsi dan pengaturan
 description: Alle verfügbaren Methoden und Einstellungen des Plugins
 sidebar:
   order: 2
 locale: de
 ---
 
-# Updater Plugin-Konfiguration
+# Updater Plugin Konfiguration
 
-Siehe das Github [Readme](https://githubcom/Cap-go/capacitor-updater) für weitere Informationen
+Weitere Informationen finden Sie im Github [Readme](https://githubcom/Cap-go/capacitor-updater)
 
 <docgen-config>
-<!--Aktualisieren Sie die JSDoc-Kommentare der Quelldatei und führen Sie docgen erneut aus, um die untenstehenden Dokumentationen zu aktualisieren-->
+<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-CapacitorUpdater kann mit diesen Optionen konfiguriert werden:
+CapacitorUpdater kann mit folgenden Optionen konfiguriert werden:
 
-| Prop                         | Typ                  | Beschreibung                                                                                                                                                                                     | Standard                                        | Seit    |
-| ---------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------- |
-| **`appReadyTimeout`**        | <code>number</code>  | Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten sollte, bevor es ein Update als 'fehlgeschlagen' betrachtet. Nur verfügbar für Android und iOS                 | <code>10000 // (10 Sekunden)</code>             |         |
-| **`responseTimeout`**        | <code>number</code>  | Konfigurieren Sie die Anzahl der Millisekunden, die das native Plugin warten sollte, bevor es einen API-Timeout betrachtet. Nur verfügbar für Android und iOS                                 | <code>20 // (20 Sekunden)</code>                 |         |
-| **`autoDeleteFailed`**       | <code>boolean</code> | Konfigurieren Sie, ob das Plugin fehlgeschlagene Bündel automatisch löschen soll. Nur verfügbar für Android und iOS                                                                            | <code>true</code>                                |         |
-| **`autoDeletePrevious`**     | <code>boolean</code> | Konfigurieren Sie, ob das Plugin vorherige Bündel nach einem erfolgreichen Update automatisch löschen soll. Nur verfügbar für Android und iOS                                                  | <code>true</code>                                |         |
-| **`autoUpdate`**             | <code>boolean</code> | Konfigurieren Sie, ob das Plugin Autos-Updates über einen Update-Server verwenden soll. Nur verfügbar für Android und iOS                                                                    | <code>true</code>                                |         |
-| **`resetWhenUpdate`**        | <code>boolean</code> | Vorher heruntergeladene Bündel automatisch löschen, wenn ein neueres natives App-Bündel auf dem Gerät installiert wird. Nur verfügbar für Android und iOS                                    | <code>true</code>                                |         |
-| **`updateUrl`**              | <code>string</code>  | Konfigurieren Sie die URL / den Endpunkt, an den die Update-Überprüfungen gesendet werden. Nur verfügbar für Android und iOS                                                                  | <code>https://plugincapgoapp/updates</code>    |         |
-| **`channelUrl`**             | <code>string</code>  | Konfigurieren Sie die URL / den Endpunkt für Kanaloperationen. Nur verfügbar für Android und iOS                                                                                             | <code>https://plugincapgoapp/channel_self</code> |         |
-| **`statsUrl`**               | <code>string</code>  | Konfigurieren Sie die URL / den Endpunkt, an den die Update-Statistiken gesendet werden. Nur verfügbar für Android und iOS. Setzen Sie auf "" zur Deaktivierung der Statistikanzeige       | <code>https://plugincapgoapp/stats</code>      |         |
-| **`privateKey`**             | <code>string</code>  | Konfigurieren Sie den privaten Schlüssel für die Ende-zu-Ende-Live-Update-Verschlüsselung. Nur verfügbar für Android und iOS. Ab Version 620 veraltet, wird in Version 700 entfernt.      | <code>undefined</code>                           |         |
-| **`publicKey`**              | <code>string</code>  | Konfigurieren Sie den öffentlichen Schlüssel für die Ende-zu-Ende-Live-Update-Verschlüsselung. Version 2. Nur verfügbar für Android und iOS                                                 | <code>undefined</code>                           | 620     |
-| **`version`**                | <code>string</code>  | Konfigurieren Sie die aktuelle Version der App. Dies wird für die erste Update-Anfrage verwendet. Wenn nicht festgelegt, erhält das Plugin die Version aus dem nativen Code. Nur verfügbar für Android und iOS                                                   | <code>undefined</code>                           | 41748   |
-| **`directUpdate`**           | <code>boolean</code> | Lassen Sie das Plugin das Update direkt installieren, wenn die App, die gerade aktualisiert/installiert wurde. Nur für den AutoUpdate-Modus. Nur verfügbar für Android und iOS              | <code>undefined</code>                           | 510     |
-| **`periodCheckDelay`**       | <code>number</code>  | Konfigurieren Sie den Verzögerungszeitraum für die periodische Update-Überprüfung; die Einheit ist in Sekunden. Nur verfügbar für Android und iOS. Darf nicht weniger als 600 Sekunden (10 Minuten) sein. | <code>600 // (10 Minuten)</code>                 |         |
-| **`localS3`**                | <code>boolean</code> | Konfigurieren Sie die CLI, um einen lokalen Server für Tests oder einen selbstgehosteten Update-Server zu verwenden.                                                                             | <code>undefined</code>                           | 41748   |
-| **`localHost`**              | <code>string</code>  | Konfigurieren Sie die CLI, um einen lokalen Server für Tests oder einen selbstgehosteten Update-Server zu verwenden.                                                                             | <code>undefined</code>                           | 41748   |
-| **`localWebHost`**           | <code>string</code>  | Konfigurieren Sie die CLI, um einen lokalen Server für Tests oder einen selbstgehosteten Update-Server zu verwenden.                                                                             | <code>undefined</code>                           | 41748   |
-| **`localSupa`**              | <code>string</code>  | Konfigurieren Sie die CLI, um einen lokalen Server für Tests oder einen selbstgehosteten Update-Server zu verwenden.                                                                             | <code>undefined</code>                           | 41748   |
-| **`localSupaAnon`**          | <code>string</code>  | Konfigurieren Sie die CLI, um einen lokalen Server für Tests zu verwenden.                                                                                                                    | <code>undefined</code>                           | 41748   |
-| **`localApi`**               | <code>string</code>  | Konfigurieren Sie die CLI, um eine lokale API für Tests zu verwenden.                                                                                                                        | <code>undefined</code>                           | 633     |
-| **`localApiFiles`**          | <code>string</code>  | Konfigurieren Sie die CLI, um eine lokale Datei-API für Tests zu verwenden.                                                                                                                  | <code>undefined</code>                           | 633     |
-| **`allowModifyUrl`**         | <code>boolean</code> | Erlauben Sie dem Plugin, die updateUrl, statsUrl und channelUrl dynamisch von der JavaScript-Seite zu ändern.                                                                                  | <code>false</code>                               | 540     |
-| **`defaultChannel`**         | <code>string</code>  | Setzen Sie den Standardkanal für die App in der Konfiguration.| **`appId`**                  | <code>string</code>  | Konfigurieren Sie die App-ID für die App in der Konfiguration                                                                                                                                                 | <code>undefined</code>                             | 600   |
-| **`keepUrlPathAfterReload`** | <code>boolean</code> | Konfigurieren Sie das Plugin so, dass der URL-Pfad nach einem Neuladen beibehalten wird WARNUNG: Wenn ein Neuladen ausgelöst wird, wird 'window.history' gelöscht                                                                | <code>false</code>                                 | 680   |
+| Eigenschaft                  | Typ                  | Beschreibung                                                                                                                                                                                   | Standard                                           | Seit    |
+| ---------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------- |
+| **`appReadyTimeout`**        | <code>number</code>  | Konfiguriert die Anzahl der Millisekunden, die das native Plugin warten soll, bevor ein Update als 'fehlgeschlagen' gilt. Nur verfügbar für Android und iOS                                    | <code>10000 // (10 Sekunden)</code>                |         |
+| **`responseTimeout`**        | <code>number</code>  | Konfiguriert die Anzahl der Millisekunden, die das native Plugin warten soll, bevor API-Timeout eintritt. Nur verfügbar für Android und iOS                                                    | <code>20 // (20 Sekunden)</code>                   |         |
+| **`autoDeleteFailed`**       | <code>boolean</code> | Konfiguriert, ob das Plugin fehlgeschlagene Bundles automatisch löschen soll. Nur verfügbar für Android und iOS                                                                                | <code>true</code>                                  |         |
+| **`autoDeletePrevious`**     | <code>boolean</code> | Konfiguriert, ob das Plugin vorherige Bundles nach einem erfolgreichen Update automatisch löschen soll. Nur verfügbar für Android und iOS                                                      | <code>true</code>                                  |         |
+| **`autoUpdate`**             | <code>boolean</code> | Konfiguriert, ob das Plugin Auto-Update über einen Update-Server verwenden soll. Nur verfügbar für Android und iOS                                                                             | <code>true</code>                                  |         |
+| **`resetWhenUpdate`**        | <code>boolean</code> | Löscht automatisch zuvor heruntergeladene Bundles, wenn ein neueres natives App-Bundle auf dem Gerät installiert wird. Nur verfügbar für Android und iOS                                       | <code>true</code>                                  |         |
+| **`updateUrl`**              | <code>string</code>  | Konfiguriert die URL/den Endpunkt, an den Update-Prüfungen gesendet werden. Nur verfügbar für Android und iOS                                                                                  | <code>https://plugincapgoapp/updates</code>      |         |
+| **`channelUrl`**             | <code>string</code>  | Konfiguriert die URL/den Endpunkt für Kanal-Operationen. Nur verfügbar für Android und iOS                                                                                                     | <code>https://plugincapgoapp/channel_self</code> |         |
+| **`statsUrl`**               | <code>string</code>  | Konfiguriert die URL/den Endpunkt, an den Update-Statistiken gesendet werden. Nur verfügbar für Android und iOS. Auf "" setzen, um Statistik-Reporting zu deaktivieren                         | <code>https://plugincapgoapp/stats</code>        |         |
+| **`privateKey`**             | <code>string</code>  | Konfiguriert den privaten Schlüssel für Ende-zu-Ende Live-Update-Verschlüsselung. Nur verfügbar für Android und iOS. Veraltet in Version 620, wird in Version 700 entfernt                    | <code>undefined</code>                             |         |
+| **`publicKey`**              | <code>string</code>  | Konfiguriert den öffentlichen Schlüssel für Ende-zu-Ende Live-Update-Verschlüsselung Version 2. Nur verfügbar für Android und iOS                                                              | <code>undefined</code>                             | 620   |
+| **`version`**                | <code>string</code>  | Konfiguriert die aktuelle Version der App. Dies wird für die erste Update-Anfrage verwendet. Wenn nicht gesetzt, holt das Plugin die Version aus dem nativen Code. Nur für Android und iOS     | <code>undefined</code>                             | 41748 |
+| **`directUpdate`**           | <code>boolean</code> | Lässt das Plugin Updates direkt installieren, wenn die App gerade aktualisiert/installiert wurde. Nur für autoUpdate-Modus. Nur verfügbar für Android und iOS                                  | <code>undefined</code>                             | 510   |
+| **`periodCheckDelay`**       | <code>number</code>  | Konfiguriert die Verzögerungszeit für periodische Update-Prüfungen in Sekunden. Nur verfügbar für Android und iOS. Kann nicht weniger als 600 Sekunden (10 Minuten) sein                      | <code>600 // (10 Minuten)</code>                   |         |
+| **`localS3`**                | <code>boolean</code> | Konfiguriert die CLI zur Verwendung eines lokalen Servers für Tests oder selbst gehosteten Update-Server                                                                                        | <code>undefined</code>                             | 41748 |
+| **`localHost`**              | <code>string</code>  | Konfiguriert die CLI zur Verwendung eines lokalen Servers für Tests oder selbst gehosteten Update-Server                                                                                        | <code>undefined</code>                             | 41748 |
+| **`localWebHost`**           | <code>string</code>  | Konfiguriert die CLI zur Verwendung eines lokalen Servers für Tests oder selbst gehosteten Update-Server                                                                                        | <code>undefined</code>                             | 41748 |
+| **`localSupa`**              | <code>string</code>  | Konfiguriert die CLI zur Verwendung eines lokalen Servers für Tests oder selbst gehosteten Update-Server                                                                                        | <code>undefined</code>                             | 41748 |
+| **`localSupaAnon`**          | <code>string</code>  | Konfiguriert die CLI zur Verwendung eines lokalen Servers für Tests                                                                                                                             | <code>undefined</code>                             | 41748 |
+| **`localApi`**               | <code>string</code>  | Konfiguriert die CLI zur Verwendung einer lokalen API für Tests                                                                                                                                 | <code>undefined</code>                             | 633   |
+| **`localApiFiles`**          | <code>string</code>  | Konfiguriert die CLI zur Verwendung einer lokalen Datei-API für Tests                                                                                                                          | <code>undefined</code>                             | 633   |
+| **`allowModifyUrl`**         | <code>boolean</code> | Erlaubt dem Plugin, updateUrl, statsUrl und channelUrl dynamisch von der JavaScript-Seite zu ändern                                                                                             | <code>false</code>                                 | 540   |
+| **`defaultChannel`**         | <code>string</code>  | Setzt den Standard-Kanal für die App in der Konfiguration                                                                                                                                      | <code>undefined</code>                             | 41748 || **`appId`**                  | <code>string</code>  | Konfigurieren Sie die App-ID für die App in der Konfiguration                                                                                                                                                 | <code>undefined</code>                             | 600   |
+| **`keepUrlPathAfterReload`** | <code>boolean</code> | Konfigurieren Sie das Plugin, um den URL-Pfad nach einem Neuladen beizubehalten. WARNUNG: Wenn ein Neuladen ausgelöst wird, wird 'windowhistory' gelöscht                                                                | <code>false</code>                                 | 680   |
 
 ## Beispiele
 
@@ -91,7 +91,7 @@ const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
       appReadyTimeout: 1000 // (1 Sekunde),
-      responseTimeout: 10 // (10 Sekunden),
+      responseTimeout: 10 // (10 Sekunden), 
       autoDeleteFailed: false,
       autoDeletePrevious: false,
       autoUpdate: false,
@@ -120,154 +120,13 @@ const config: CapacitorConfig = {
 };
 
 export default config;
-```
-
-</docgen-config>
-
-<docgen-index>
-
-* [`notifyAppReady()`](#notifyappready)
-* [`setUpdateUrl()`](#setupdateurl)
-* [`setStatsUrl()`](#setstatsurl)
-* [`setChannelUrl()`](#setchannelurl)
-* [`download()`](#download)
-* [`next()`](#next)
-* [`set()`](#set)
-* [`delete()`](#delete)
-* [`list()`](#list)
-* [`reset()`](#reset)
-* [`current()`](#current)
-* [`reload()`](#reload)
-* [`setMultiDelay()`](#setmultidelay)
-* [`cancelDelay()`](#canceldelay)
-* [`getLatest()`](#getlatest)
-* [`setChannel()`](#setchannel)
-* [`unsetChannel()`](#unsetchannel)
-* [`getChannel()`](#getchannel)
-* [`setCustomId()`](#setcustomid)
-* [`getBuiltinVersion()`](#getbuiltinversion)
-* [`getDeviceId()`](#getdeviceid)
-* [`getPluginVersion()`](#getpluginversion)
-* [`isAutoUpdateEnabled()`](#isautoupdateenabled)
-* [`removeAllListeners()`](#removealllisteners)
-* [`addListener('download', )`](#addlistenerdownload-)
-* [`addListener('noNeedUpdate', )`](#addlistenernoneedupdate-)
-* [`addListener('updateAvailable', )`](#addlistenerupdateavailable-)
-* [`addListener('downloadComplete', )`](#addlistenerdownloadcomplete-)
-* [`addListener('majorAvailable', )`](#addlistenermajoravailable-)
-* [`addListener('updateFailed', )`](#addlistenerupdatefailed-)
-* [`addListener('downloadFailed', )`](#addlistenerdownloadfailed-)
-* [`addListener('appReloaded', )`](#addlistenerappreloaded-)
-* [`addListener('appReady', )`](#addlistenerappready-)
-* [`isAutoUpdateAvailable()`](#isautoupdateavailable)
-* [`getNextBundle()`](#getnextbundle)
-* [Interfaces](#interfaces)
-* [Typalias](#type-aliases)
-
-</docgen-index>
-
-# Methoden
-
-<docgen-api>
-<!--Aktualisieren Sie die JSDoc-Kommentare der Quelldatei und führen Sie docgen erneut aus, um die unten stehenden Dokumente zu aktualisieren-->
-
-## notifyAppReady()
-
-```typescript
-notifyAppReady() => Promise<AppReadyResult>
-```
-
-Benachrichtigen Sie den Capacitor Updater, dass das aktuelle Bundle funktioniert (ein Rollback tritt ein, wenn diese Methode bei jedem App-Start nicht aufgerufen wird)
-Standardmäßig sollte diese Methode in den ersten 10 Sekunden nach dem Start der App aufgerufen werden, andernfalls tritt ein Rollback ein
-Ändern Sie dieses Verhalten mit {@link appReadyTimeout}
-
-**Gibt zurück:** <code>Promise&lt;<a href="#appreadyresult">AppReadyResult</a>&gt;</code>
-
---------------------
-
-
-## setUpdateUrl()
-
-```typescript
-setUpdateUrl(options: UpdateUrl) => Promise<void>
-```
-
-Setzen Sie die updateUrl für die App, dies wird verwendet, um nach Updates zu suchen
-
-| Parameter     | Typ                                            | Beschreibung                                       |
-| ------------- | ----------------------------------------------- | ------------------------------------------------- |
-| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> | enthält die URL, die für die Überprüfung auf Updates verwendet wird |
-
-**Seit:** 540
-
---------------------
-
-
-## setStatsUrl()
-
-```typescript
-setStatsUrl(options: StatsUrl) => Promise<void>
-```
-
-Setzen Sie die statsUrl für die App, dies wird verwendet, um Statistiken zu senden. Das Übergeben einer leeren Zeichenfolge deaktiviert die Erfassung von Statistiken
-
-| Parameter     | Typ                                          | Beschreibung                                     |
-| ------------- | --------------------------------------------- | ----------------------------------------------- |
-| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | enthält die URL, die verwendet wird, um Statistiken zu senden |
-
-**Seit:** 540
-
---------------------
-
-
-## setChannelUrl()
-
-```typescript
-setChannelUrl(options: ChannelUrl) => Promise<void>
-```
-
-Setzen Sie die channelUrl für die App, dies wird verwendet, um den Kanal festzulegen
-
-| Parameter     | Typ                                              | Beschreibung                                      |
-| ------------- | ------------------------------------------------- | ------------------------------------------------ |
-| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> | enthält die URL, die verwendet wird, um den Kanal festzulegen |
-
-**Seit:** 540
-
---------------------
-
-
-## download()
-
-```typescript
-download(options: DownloadOptions) => Promise<BundleInfo>
-```
-
-Laden Sie ein neues Bundle von der angegebenen URL herunter, es sollte sich um eine ZIP-Datei handeln, mit Dateien darin oder mit einer eindeutigen ID darin, die all Ihre Dateien enthält
-
-| Parameter     | Typ                                                        | Beschreibung                                                                                  |
-| ------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#downloadoptions">DownloadOptions</a></code> | Die {@link <a href="#downloadoptions">DownloadOptions</a>} für den Download eines neuen Bundle-Zip |
+```| Parameter | Typ | Beschreibung |
+| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Enthält die ID des nächsten Bundles, das beim nächsten App-Start gesetzt werden soll {@link <a href="#bundleinfo">BundleInfoid</a>} |
 
 **Gibt zurück:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
 
 --------------------
-
-
-## next()
-
-```typescript
-next(options: BundleId) => Promise<BundleInfo>
-```
-
-Setzen Sie das nächste Bundle, das verwendet werden soll, wenn die App neu geladen wird| Parameter     | Typ                                           | Beschreibung                                                                                                      |
-| ------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Enthält die ID des nächsten Bundles, das beim nächsten Start der App gesetzt werden soll {@link <a href="#bundleinfo">BundleInfoid</a>} |
-
-**Gibt zurück:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
-
---------------------
-
 
 ## set()
 
@@ -277,12 +136,11 @@ set(options: BundleId) => Promise<void>
 
 Setzt das aktuelle Bundle und lädt die App sofort neu
 
-| Parameter     | Typ                                           | Beschreibung                                                                                       |
+| Parameter | Typ | Beschreibung |
 | ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Ein {@link <a href="#bundleid">BundleId</a>}-Objekt, das die neue Bundle-ID enthält, die als aktuell gesetzt werden soll |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Ein {@link <a href="#bundleid">BundleId</a>} Objekt mit der neuen Bundle-ID, die als aktuell gesetzt werden soll |
 
 --------------------
-
 
 ## delete()
 
@@ -290,14 +148,13 @@ Setzt das aktuelle Bundle und lädt die App sofort neu
 delete(options: BundleId) => Promise<void>
 ```
 
-Löscht das angegebene Bundle aus dem nativen App-Speicher. Verwenden Sie {@link list}, um die gespeicherten Bundle-IDs zu erhalten
+Löscht das angegebene Bundle aus dem nativen App-Speicher. Verwenden Sie es zusammen mit {@link list}, um die gespeicherten Bundle-IDs zu erhalten
 
-| Parameter     | Typ                                           | Beschreibung                                                                                                                                                                      |
-| ------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Ein {@link <a href="#bundleid">BundleId</a>} -Objekt, das die ID eines zu löschenden Bundles enthält (Hinweis, dies ist die Bundle-ID, NICHT der Versionsname) |
+| Parameter | Typ | Beschreibung |
+| ------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Ein {@link <a href="#bundleid">BundleId</a>} Objekt, das die ID eines zu löschenden Bundles enthält (beachten Sie, dies ist die Bundle-ID, NICHT der Versionsname) |
 
 --------------------
-
 
 ## list()
 
@@ -305,16 +162,15 @@ Löscht das angegebene Bundle aus dem nativen App-Speicher. Verwenden Sie {@link
 list(options?: ListOptions | undefined) => Promise<BundleListResult>
 ```
 
-Erhält alle lokal heruntergeladenen Bundles in Ihrer App
+Erhalte alle lokal heruntergeladenen Bundles in deiner App
 
-| Parameter     | Typ                                                | Beschreibung                                                            |
+| Parameter | Typ | Beschreibung |
 | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
-| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | Die {@link <a href="#listoptions">ListOptions</a>} zum Auflisten der Bundles |
+| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | Die {@link <a href="#listoptions">ListOptions</a>} für das Auflisten von Bundles |
 
 **Gibt zurück:** <code>Promise&lt;<a href="#bundlelistresult">BundleListResult</a>&gt;</code>
 
 --------------------
-
 
 ## reset()
 
@@ -322,14 +178,13 @@ Erhält alle lokal heruntergeladenen Bundles in Ihrer App
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-Setzt die App auf das `builtin` Bundle zurück (das, das an den Apple App Store / Google Play Store gesendet wurde) oder auf das zuletzt erfolgreich geladene Bundle
+Setzt die App auf das 'builtin'-Bundle zurück (das an den Apple App Store / Google Play Store gesendet wurde) oder auf das zuletzt erfolgreich geladene Bundle
 
-| Parameter     | Typ                                                  | Beschreibung                                                                                                                                                                      |
+| Parameter | Typ | Beschreibung |
 | ------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | Enthält {@link <a href="#resetoptions">ResetOptionstoLastSuccessful</a>}, `true` setzt auf das integrierte Bundle zurück und `false` setzt auf das zuletzt erfolgreich geladene Bundle zurück |
+| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | Enthält {@link <a href="#resetoptions">ResetOptionstoLastSuccessful</a>}, `true` setzt auf das builtin-Bundle zurück und `false` setzt auf das zuletzt erfolgreich geladene Bundle zurück |
 
 --------------------
-
 
 ## current()
 
@@ -337,12 +192,11 @@ Setzt die App auf das `builtin` Bundle zurück (das, das an den Apple App Store 
 current() => Promise<CurrentBundleResult>
 ```
 
-Erhält das aktuelle Bundle, wenn keines gesetzt ist, wird `builtin` zurückgegeben. currentNative ist das originale Bundle, das auf dem Gerät installiert ist
+Gibt das aktuelle Bundle zurück, wenn keines gesetzt ist, wird 'builtin' zurückgegeben. currentNative ist das ursprünglich auf dem Gerät installierte Bundle
 
 **Gibt zurück:** <code>Promise&lt;<a href="#currentbundleresult">CurrentBundleResult</a>&gt;</code>
 
 --------------------
-
 
 ## reload()
 
@@ -354,23 +208,27 @@ Lädt die Ansicht neu
 
 --------------------
 
-
 ## setMultiDelay()
 
 ```typescript
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-Setzt ein {@link <a href="#delaycondition">DelayCondition</a>} Array, das Bedingungen enthält, die das Plugin verwenden wird, um das Update hinauszuzögern. Nach Erfüllung aller Bedingungen wird der Update-Prozess erneut wie gewohnt gestartet, sodass das Update nach einem Hintergrundbetrieb oder dem Schließen der App installiert wird. Für die `date`-Art sollte der Wert ein iso8601-Datums-String sein. Für die `background`-Art sollte der Wert eine Zahl in Millisekunden sein. Für die `nativeVersion`-Art sollte der Wert die Versionsnummer sein. Für die `kill`-Art wird der Wert nicht verwendet. Die Funktion hat inkonsequentes Verhalten, die Option kill löst das Update nach dem ersten Kill aus und nicht nach dem nächsten Hintergrund wie andere Optionen. Dies wird in einer zukünftigen Hauptversion behoben.
+Setzt ein {@link <a href="#delaycondition">DelayCondition</a>} Array mit Bedingungen, die das Plugin verwendet, um das Update zu verzögern
+Nachdem alle Bedingungen erfüllt sind, wird der Update-Prozess wie gewohnt wieder gestartet, sodass das Update nach dem Hintergrundwechsel oder Beenden der App installiert wird
+Für die Art 'date' sollte der Wert ein iso8601-Datums-String sein
+Für die Art 'background' sollte der Wert eine Zahl in Millisekunden sein
+Für die Art 'nativeVersion' sollte der Wert die Versionsnummer sein
+Für die Art 'kill' wird der Wert nicht verwendet
+Die Funktion hat ein inkonsistentes Verhalten: Die Option 'kill' löst das Update nach dem ersten Beenden aus und nicht nach dem nächsten Hintergrundwechsel wie andere Optionen. Dies wird in einem zukünftigen Major Release behoben
 
-| Parameter     | Typ                                                                  | Beschreibung                                                                                                 |
-| ------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | Enthält das {@link <a href="#multidelayconditions">MultiDelayConditions</a>} Array von Bedingungen, die gesetzt werden sollen |
+| Parameter | Typ | Beschreibung |
+| ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | Enthält das {@link <a href="#multidelayconditions">MultiDelayConditions</a>} Array von zu setzenden Bedingungen |
 
 **Seit:** 430
 
 --------------------
-
 
 ## cancelDelay()
 
@@ -378,12 +236,11 @@ Setzt ein {@link <a href="#delaycondition">DelayCondition</a>} Array, das Beding
 cancelDelay() => Promise<void>
 ```
 
-Hebt eine {@link <a href="#delaycondition">DelayCondition</a>} auf, um ein Update sofort zu verarbeiten
+Bricht eine {@link <a href="#delaycondition">DelayCondition</a>} ab, um ein Update sofort zu verarbeiten
 
 **Seit:** 400
 
 --------------------
-
 
 ## getLatest()
 
@@ -391,9 +248,9 @@ Hebt eine {@link <a href="#delaycondition">DelayCondition</a>} auf, um ein Updat
 getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 ```
 
-Holt das neueste Bundle verfügbar von der Update-URL
+Erhalte das neueste verfügbare Bundle von der Update-URL
 
-| Parameter     | Typ                                                          |
+| Parameter | Typ |
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#getlatestoptions">GetLatestOptions</a></code> |
 
@@ -403,18 +260,20 @@ Holt das neueste Bundle verfügbar von der Update-URL
 
 --------------------
 
-
 ## setChannel()
 
 ```typescript
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Setzt den Kanal für dieses Gerät. Der Kanal muss eine Selbstzuweisung ermöglichen, damit dies funktioniert. Verwenden Sie diese Methode nicht, um den Kanal beim Start festzulegen, wenn `autoUpdate` in den {@link PluginsConfig} aktiviert ist. Diese Methode dient dazu, den Kanal nach dem Start der App festzulegen. Diese Methode sendet an das Capgo-Backend eine Anfrage, um die Geräte-ID mit dem Kanal zu verknüpfen. Capgo kann je nach Einstellung Ihres Kanals akzeptieren oder ablehnen.
+Setzt den Kanal für dieses Gerät. Der Kanal muss Selbstzuweisung erlauben, damit dies funktioniert
+Verwenden Sie diese Methode nicht, um den Kanal beim Start zu setzen, wenn `autoUpdate` in der {@link PluginsConfig} aktiviert ist
+Diese Methode ist zum Setzen des Kanals, nachdem die App bereit ist
+Diese Methode sendet eine Anfrage an den Capgo-Backend, um die Geräte-ID mit dem Kanal zu verknüpfen. Capgo kann je nach Einstellung Ihres Kanals akzeptieren oder ablehnen
 
-| Parameter     | Typ                                                            | Beschreibung                                                                      |
+| Parameter | Typ | Beschreibung |
 | ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | Ist die {@link <a href="#setchanneloptions">SetChannelOptions</a>} Kanal, der gesetzt werden soll |
+| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | Ist die {@link <a href="#setchanneloptions">SetChannelOptions</a>} Kanal zu setzen |
 
 **Gibt zurück:** <code>Promise&lt;<a href="#channelres">ChannelRes</a>&gt;</code>
 
@@ -422,16 +281,15 @@ Setzt den Kanal für dieses Gerät. Der Kanal muss eine Selbstzuweisung ermögli
 
 --------------------
 
-
 ## unsetChannel()
 
 ```typescript
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Setzt den Kanal für dieses Gerät zurückDas Gerät kehrt dann zum Standardkanal zurück
+Hebt die Kanaleinstellung für dieses Gerät aufDas Gerät kehrt dann zum Standardkanal zurück
 
-| Param         | Typ                                                                |
+| Param | Type |
 | ------------- | ------------------------------------------------------------------- |
 | **`options`** | <code><a href="#unsetchanneloptions">UnsetChannelOptions</a></code> |
 
@@ -439,21 +297,19 @@ Setzt den Kanal für dieses Gerät zurückDas Gerät kehrt dann zum Standardkana
 
 --------------------
 
-
 ## getChannel()
 
 ```typescript
 getChannel() => Promise<GetChannelRes>
 ```
 
-Holen Sie sich den Kanal für dieses Gerät
+Den Kanal für dieses Gerät abrufen
 
-**Gibt zurück:** <code>Promise&lt;<a href="#getchannelres">GetChannelRes</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#getchannelres">GetChannelRes</a>&gt;</code>
 
 **Seit:** 480
 
 --------------------
-
 
 ## setCustomId()
 
@@ -461,16 +317,15 @@ Holen Sie sich den Kanal für dieses Gerät
 setCustomId(options: SetCustomIdOptions) => Promise<void>
 ```
 
-Setzen Sie eine benutzerdefinierte ID für dieses Gerät
+Eine benutzerdefinierte ID für dieses Gerät festlegen
 
-| Param         | Typ                                                              | Beschreibung                                                                         |
+| Param | Type | Description |
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | ist die {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} customId, die gesetzt werden soll |
+| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | ist die {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} customId zum Setzen |
 
 **Seit:** 490
 
 --------------------
-
 
 ## getBuiltinVersion()
 
@@ -478,14 +333,13 @@ Setzen Sie eine benutzerdefinierte ID für dieses Gerät
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-Holen Sie sich die native App-Version oder die integrierte Version, wenn sie in der Konfiguration festgelegt ist
+Die native App-Version oder die in der Konfiguration festgelegte integrierte Version abrufen
 
-**Gibt zurück:** <code>Promise&lt;<a href="#builtinversion">BuiltinVersion</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#builtinversion">BuiltinVersion</a>&gt;</code>
 
 **Seit:** 520
 
 --------------------
-
 
 ## getDeviceId()
 
@@ -493,12 +347,11 @@ Holen Sie sich die native App-Version oder die integrierte Version, wenn sie in 
 getDeviceId() => Promise<DeviceId>
 ```
 
-Holen Sie sich die eindeutige ID, die zur Identifizierung des Geräts verwendet wird (an den Auto-Update-Server gesendet)
+Eindeutige ID abrufen, die zur Identifizierung des Geräts verwendet wird (an den Auto-Update-Server gesendet)
 
-**Gibt zurück:** <code>Promise&lt;<a href="#deviceid">DeviceId</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#deviceid">DeviceId</a>&gt;</code>
 
 --------------------
-
 
 ## getPluginVersion()
 
@@ -506,12 +359,11 @@ Holen Sie sich die eindeutige ID, die zur Identifizierung des Geräts verwendet 
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-Holen Sie sich die native Capacitor Updater-Plugin-Version (an den Auto-Update-Server gesendet)
+Die native Capacitor Updater Plugin-Version abrufen (an den Auto-Update-Server gesendet)
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginversion">PluginVersion</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginversion">PluginVersion</a>&gt;</code>
 
 --------------------
-
 
 ## isAutoUpdateEnabled()
 
@@ -519,12 +371,11 @@ Holen Sie sich die native Capacitor Updater-Plugin-Version (an den Auto-Update-S
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-Holen Sie sich den Status der Auto-Update-Konfiguration
+Den Status der Auto-Update-Konfiguration abrufen
 
-**Gibt zurück:** <code>Promise&lt;<a href="#autoupdateenabled">AutoUpdateEnabled</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#autoupdateenabled">AutoUpdateEnabled</a>&gt;</code>
 
 --------------------
-
 
 ## removeAllListeners()
 
@@ -532,12 +383,11 @@ Holen Sie sich den Status der Auto-Update-Konfiguration
 removeAllListeners() => Promise<void>
 ```
 
-Entfernen Sie alle Listener für dieses Plugin
+Alle Listener für dieses Plugin entfernen
 
 **Seit:** 100
 
 --------------------
-
 
 ## addListener('download', )
 
@@ -545,19 +395,18 @@ Entfernen Sie alle Listener für dieses Plugin
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Bundle-Download-Ereignis in der App, das einmal ausgelöst wird, sobald ein Download gestartet wurde, während des Downloads und nach Abschluss
+Auf Bundle-Download-Events in der App lauschen. Wird ausgelöst, wenn ein Download startet, während des Downloads und wenn er beendet ist
 
-| Param              | Typ                                                                        |
+| Param | Type | 
 | ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'download'</code>                                                     |
+| **`eventName`** | <code>'download'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#downloadevent">DownloadEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 2011
 
 --------------------
-
 
 ## addListener('noNeedUpdate', )
 
@@ -565,19 +414,18 @@ Hören Sie auf das Bundle-Download-Ereignis in der App, das einmal ausgelöst wi
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "Nicht nötig zu aktualisieren", nützlich, wenn Sie bei jedem Start der App eine Überprüfung erzwingen möchten
+Auf Events lauschen, wenn kein Update erforderlich ist, nützlich wenn Sie bei jedem App-Start eine Überprüfung erzwingen möchten
 
-| Param              | Typ                                                                    |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------- |
-| **`eventName`**    | <code>'noNeedUpdate'</code>                                             |
+| **`eventName`** | <code>'noNeedUpdate'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#noneedevent">NoNeedEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 400
 
 --------------------
-
 
 ## addListener('updateAvailable', )
 
@@ -585,19 +433,18 @@ Hören Sie auf das Ereignis "Nicht nötig zu aktualisieren", nützlich, wenn Sie
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis verfügbarer Updates, nützlich, wenn Sie bei jedem Start der App eine Überprüfung erzwingen möchten
+Auf verfügbare Update-Events lauschen, nützlich wenn Sie bei jedem App-Start eine Überprüfung erzwingen möchten
 
-| Param              | Typ                                                                                      |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateAvailable'</code>                                                            |
+| **`eventName`** | <code>'updateAvailable'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#updateavailableevent">UpdateAvailableEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 400
 
 --------------------
-
 
 ## addListener('downloadComplete', )
 
@@ -605,19 +452,18 @@ Hören Sie auf das Ereignis verfügbarer Updates, nützlich, wenn Sie bei jedem 
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis downloadComplete
+Auf downloadComplete-Events lauschen
 
-| Param              | Typ                                                                                        |
+| Param | Type |
 | ------------------ | ------------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadComplete'</code>                                                             |
+| **`eventName`** | <code>'downloadComplete'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 400
 
 --------------------
-
 
 ## addListener('majorAvailable', )
 
@@ -625,19 +471,18 @@ Hören Sie auf das Ereignis downloadComplete
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "Major Update" in der App, das Sie informiert, wenn ein großes Update durch das Setzen von disableAutoUpdateBreaking blockiert wird
+Auf Major-Update-Events in der App lauschen, informiert Sie wenn ein Major-Update durch disableAutoUpdateBreaking blockiert wird
 
-| Param              | Typ                                                                                    |
+| Param | Type |
 | ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'majorAvailable'</code>                                                           |
+| **`eventName`** | <code>'majorAvailable'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#majoravailableevent">MajorAvailableEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 230
 
 --------------------
-
 
 ## addListener('updateFailed', )
 
@@ -645,31 +490,28 @@ Hören Sie auf das Ereignis "Major Update" in der App, das Sie informiert, wenn 
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "Update fehlgeschlagen" in der App, das Sie informiert, wenn das Update beim nächsten Start der App nicht installiert werden konnte
+Auf Update-Fehler-Events in der App lauschen, informiert Sie wenn ein Update beim nächsten App-Start nicht installiert werden konnte
 
-| Param              | Typ                                                                                |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateFailed'</code>                                                         |
+| **`eventName`** | <code>'updateFailed'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#updatefailedevent">UpdateFailedEvent</a>) =&gt; void</code> |
 
-**Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 **Seit:** 230
 
 --------------------
 
-
-## addListener('downloadFailed',)
-
-```typescript
+## addListener('downloadFailed',```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "Download fehlgeschlagen" in der App, um zu erfahren, wann ein Bündeldownload fehlgeschlagen ist.
+Hört auf Download-Fehler-Events in der App und informiert Sie, wenn ein Bundle-Download fehlgeschlagen ist
 
-| Param              | Typ                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadFailed'</code>                                                           |
+| Parameter          | Typ                                                                     |
+| ------------------ | ----------------------------------------------------------------------- |
+| **`eventName`**    | <code>'downloadFailed'</code>                                            |
 | **`listenerFunc`** | <code>(state: <a href="#downloadfailedevent">DownloadFailedEvent</a>) =&gt; void</code> |
 
 **Gibt zurück:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -685,9 +527,9 @@ Hören Sie auf das Ereignis "Download fehlgeschlagen" in der App, um zu erfahren
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "Neu geladen" in der App, um zu erfahren, wann ein Neuladen stattgefunden hat.
+Hört auf Reload-Events in der App und informiert Sie, wenn ein Reload stattgefunden hat
 
-| Param              | Typ                       |
+| Parameter          | Typ                       |
 | ------------------ | -------------------------- |
 | **`eventName`**    | <code>'appReloaded'</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code> |
@@ -705,9 +547,9 @@ Hören Sie auf das Ereignis "Neu geladen" in der App, um zu erfahren, wann ein N
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Hören Sie auf das Ereignis "App bereit" in der App, um zu erfahren, wann die App betriebsbereit ist.
+Hört auf App-Ready-Events in der App und informiert Sie, wenn die App bereit zur Verwendung ist
 
-| Param              | Typ                                                                        |
+| Parameter          | Typ                                                                        |
 | ------------------ | --------------------------------------------------------------------------- |
 | **`eventName`**    | <code>'appReady'</code>                                                     |
 | **`listenerFunc`** | <code>(state: <a href="#appreadyevent">AppReadyEvent</a>) =&gt; void</code> |
@@ -725,7 +567,7 @@ Hören Sie auf das Ereignis "App bereit" in der App, um zu erfahren, wann die Ap
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-Erhalten Sie, ob eine automatische Aktualisierung verfügbar ist (nicht vom serverUrl deaktiviert).
+Prüft, ob automatische Updates verfügbar sind (nicht durch serverUrl deaktiviert)
 
 **Gibt zurück:** <code>Promise&lt;<a href="#autoupdateavailable">AutoUpdateAvailable</a>&gt;</code>
 
@@ -738,7 +580,8 @@ Erhalten Sie, ob eine automatische Aktualisierung verfügbar ist (nicht vom serv
 getNextBundle() => Promise<BundleInfo | null>
 ```
 
-Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen wird. Gibt null zurück, wenn kein nächstes Bündel festgelegt ist.
+Ruft das nächste Bundle ab, das beim App-Reload verwendet wird
+Gibt null zurück, wenn kein nächstes Bundle festgelegt ist
 
 **Gibt zurück:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a> | null&gt;</code>
 
@@ -747,19 +590,19 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 --------------------
 
 
-## Schnittstellen
+## Interfaces
 
 
 ### AppReadyResult
 
-| Prop         | Typ                                              |
+| Eigenschaft   | Typ                                              |
 | ------------ | ------------------------------------------------- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
 
 
 ### BundleInfo
 
-| Prop             | Typ                                                  |
+| Eigenschaft       | Typ                                                  |
 | ---------------- | ----------------------------------------------------- |
 | **`id`**         | <code>string</code>                                   |
 | **`version`**    | <code>string</code>                                   |
@@ -770,66 +613,66 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### UpdateUrl
 
-| Prop      | Typ                |
+| Eigenschaft | Typ                |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
 ### StatsUrl
 
-| Prop      | Typ                |
+| Eigenschaft | Typ                |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### ChannelUrl
+### ChannelUrl 
 
-| Prop      | Typ                |
+| Eigenschaft | Typ                |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
 ### DownloadOptions
 
-| Prop             | Typ                | Beschreibung                                                                                                                                                      | Standard                | Seit |
-| ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`url`**        | <code>string</code> | Die URL der Bündel-Zip-Datei (z. B.: distzip), die heruntergeladen werden soll (dies kann jede URL sein, z. B.: Amazon S3, ein GitHub-Tag oder ein anderer Ort, an dem Sie Ihr Bündel gehostet haben) |                        |       |
-| **`version`**    | <code>string</code> | Der Versionscode/-name dieses Bündels/Diese Version                                                                                                                     |                        |       |
-| **`sessionKey`** | <code>string</code> | Der Sitzungsschlüssel für die Aktualisierung                                                                                                                                   | <code>undefined</code> | 400 |
-| **`checksum`**   | <code>string</code> | Die Prüfziffer für die Aktualisierung                                                                                                                                      | <code>undefined</code> | 400 |
+| Eigenschaft       | Typ                | Beschreibung                                                                                                                                                   | Standard               | Seit |
+| ---------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ----- |
+| **`url`**        | <code>string</code> | Die URL der Bundle-ZIP-Datei (z.B. distzip), die heruntergeladen werden soll (Dies kann eine beliebige URL sein, z.B. Amazon S3, ein GitHub-Tag oder ein anderer Ort, an dem Sie Ihr Bundle gehostet haben) |                       |       |
+| **`version`**    | <code>string</code> | Der Versionscode/-name dieses Bundles/dieser Version                                                                                                           |                       |       |
+| **`sessionKey`** | <code>string</code> | Der Sitzungsschlüssel für das Update                                                                                                                           | <code>undefined</code> | 400   |
+| **`checksum`**   | <code>string</code> | Die Prüfsumme für das Update                                                                                                                                   | <code>undefined</code> | 400   |
 
 
 ### BundleId
 
-| Prop     | Typ                |
-| -------- | ------------------- |
-| **`id`** | <code>string</code> |
+| Eigenschaft | Typ                |
+| --------- | ------------------- |
+| **`id`**  | <code>string</code> |
 
 
 ### BundleListResult
 
-| Prop          | Typ                      |
+| Eigenschaft    | Typ                      |
 | ------------- | ------------------------- |
 | **`bundles`** | <code>BundleInfo[]</code> |
 
 
 ### ListOptions
 
-| Prop      | Typ                 | Beschreibung                                                                                                                                    | Standard            | Seit  |
-| --------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ | ------ |
-| **`raw`** | <code>boolean</code> | Ob die rohen Bündelliste oder das Manifest zurückgegeben werden sollen. Wenn true, wird die Liste versuchen, die interne Datenbank statt der Dateien auf der Festplatte auszulesen | <code>false</code> | 6140 |
+| Eigenschaft | Typ                 | Beschreibung                                                                                                                                      | Standard           | Seit  |
+| ---------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------ |
+| **`raw`**  | <code>boolean</code> | Ob die rohe Bundle-Liste oder das Manifest zurückgegeben werden soll. Wenn true, wird versucht, die interne Datenbank anstelle von Dateien auf der Festplatte zu lesen | <code>false</code> | 6140   |
 
 
 ### ResetOptions
 
-| Prop                   | Typ                 |
+| Eigenschaft             | Typ                 |
 | ---------------------- | -------------------- |
 | **`toLastSuccessful`** | <code>boolean</code> |
 
 
 ### CurrentBundleResult
 
-| Prop         | Typ                                              |
+| Eigenschaft   | Typ                                              |
 | ------------ | ------------------------------------------------- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
 | **`native`** | <code>string</code>                               |
@@ -837,14 +680,14 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### MultiDelayConditions
 
-| Prop                  | Typ                          |
-| --------------------- | ----------------------------- |
+| Eigenschaft           | Typ                          |
+| -------------------- | ----------------------------- |
 | **`delayConditions`** | <code>DelayCondition[]</code> |
 
 
 ### DelayCondition
 
-| Prop        | Typ                                                      | Beschreibung                              |
+| Eigenschaft  | Typ                                                      | Beschreibung                              |
 | ----------- | --------------------------------------------------------- | ---------------------------------------- |
 | **`kind`**  | <code><a href="#delayuntilnext">DelayUntilNext</a></code> | Verzögerungsbedingungen in setMultiDelay einrichten |
 | **`value`** | <code>string</code>                                       |                                          |
@@ -852,7 +695,7 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### LatestVersion
 
-| Prop             | Typ                         | Beschreibung                | Seit |
+| Eigenschaft      | Typ                         | Beschreibung                | Seit |
 | ---------------- | ---------------------------- | -------------------------- | ----- |
 | **`version`**    | <code>string</code>          | Ergebnis der getLatest-Methode | 400 |
 | **`checksum`**   | <code>string</code>          |                            | 6     |
@@ -867,7 +710,7 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### ManifestEntry
 
-| Prop               | Type                        |
+| Eigenschaft         | Typ                        |
 | ------------------ | --------------------------- |
 | **`file_name`**    | <code>string \| null</code> |
 | **`file_hash`**    | <code>string \| null</code> |
@@ -876,23 +719,23 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### GetLatestOptions
 
-| Prop          | Type                | Beschreibung                                                                                     | Standard                | Seit |
+| Eigenschaft    | Typ                | Beschreibung                                                                                    | Standard               | Seit |
 | ------------- | ------------------- | ----------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`channel`** | <code>string</code> | Der Kanal, um die neueste Version zu erhalten. Der Kanal muss 'self_assign' zulassen, damit dies funktioniert | <code>undefined</code> | 680 |
+| **`channel`** | <code>string</code> | Der Kanal, für den die neueste Version abgerufen werden soll. Der Kanal muss 'self_assign' erlauben, damit dies funktioniert | <code>undefined</code> | 680 |
 
 
 ### ChannelRes
 
-| Prop          | Type                | Beschreibung                   | Seit |
-| ------------- | ------------------- | ----------------------------- | ----- |
+| Eigenschaft    | Typ                | Beschreibung                | Seit |
+| ------------- | ------------------- | --------------------------- | ----- |
 | **`status`**  | <code>string</code> | Aktueller Status des festgelegten Kanals | 470 |
-| **`error`**   | <code>string</code> |                               |       |
-| **`message`** | <code>string</code> |                               |       |
+| **`error`**   | <code>string</code> |                            |       |
+| **`message`** | <code>string</code> |                            |       |
 
 
 ### SetChannelOptions
 
-| Prop                    | Type                 |
+| Eigenschaft              | Typ                 |
 | ----------------------- | -------------------- |
 | **`channel`**           | <code>string</code>  |
 | **`triggerAutoUpdate`** | <code>boolean</code> |
@@ -900,130 +743,130 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 
 ### UnsetChannelOptions
 
-| Prop                    | Type                 |
+| Eigenschaft              | Typ                 |
 | ----------------------- | -------------------- |
 | **`triggerAutoUpdate`** | <code>boolean</code> |
 
 
 ### GetChannelRes
 
-| Prop           | Type                 | Beschreibung                   | Seit |
-| -------------- | -------------------- | ----------------------------- | ----- |
-| **`channel`**  | <code>string</code>  | Aktueller Status des Empfangskanals | 480 |
-| **`error`**    | <code>string</code>  |                               |       |
-| **`message`**  | <code>string</code>  |                               |       |
-| **`status`**   | <code>string</code>  |                               |       |
-| **`allowSet`** | <code>boolean</code> |                               |       |
+| Eigenschaft     | Typ                 | Beschreibung                | Seit |
+| -------------- | -------------------- | --------------------------- | ----- |
+| **`channel`**  | <code>string</code>  | Aktueller Status des abgerufenen Kanals | 480 |
+| **`error`**    | <code>string</code>  |                            |       |
+| **`message`**  | <code>string</code>  |                            |       |
+| **`status`**   | <code>string</code>  |                            |       |
+| **`allowSet`** | <code>boolean</code> |                            |       |
 
 
 ### SetCustomIdOptions
 
-| Prop           | Type                |
+| Eigenschaft     | Typ                |
 | -------------- | ------------------- |
 | **`customId`** | <code>string</code> |
 
 
 ### BuiltinVersion
 
-| Prop          | Type                |
+| Eigenschaft    | Typ                |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
 ### DeviceId
 
-| Prop           | Type                |
+| Eigenschaft     | Typ                |
 | -------------- | ------------------- |
 | **`deviceId`** | <code>string</code> |
 
 
 ### PluginVersion
 
-| Prop          | Type                |
+| Eigenschaft    | Typ                |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
 ### AutoUpdateEnabled
 
-| Prop          | Type                 |
+| Eigenschaft    | Typ                 |
 | ------------- | -------------------- |
 | **`enabled`** | <code>boolean</code> |
 
 
 ### PluginListenerHandle
 
-| Prop         | Type                                      |
+| Eigenschaft   | Typ                                      |
 | ------------ | ----------------------------------------- |
 | **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
 ### DownloadEvent
 
-| Prop          | Type                                              | Beschreibung                                    | Seit |
-| ------------- | ------------------------------------------------- | ---------------------------------------------- | ----- |
+| Eigenschaft    | Typ                                              | Beschreibung                                 | Seit |
+| ------------- | ------------------------------------------------- | ------------------------------------------- | ----- |
 | **`percent`** | <code>number</code>                               | Aktueller Status des Downloads, zwischen 0 und 100 | 400 |
-| **`bundle`**  | <code><a href="#bundleinfo">BundleInfo</a></code> |                                                |       |
+| **`bundle`**  | <code><a href="#bundleinfo">BundleInfo</a></code> |                                             |       |
 
 
 ### NoNeedEvent
 
-| Prop         | Type                                              | Beschreibung                                    | Seit |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
+| Eigenschaft   | Typ                                              | Beschreibung                                 | Seit |
+| ------------ | ------------------------------------------------- | ------------------------------------------- | ----- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Aktueller Status des Downloads, zwischen 0 und 100 | 400 |
 
 
 ### UpdateAvailableEvent
 
-| Prop         | Type                                              | Beschreibung                                    | Seit |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
+| Eigenschaft   | Typ                                              | Beschreibung                                 | Seit |
+| ------------ | ------------------------------------------------- | ------------------------------------------- | ----- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Aktueller Status des Downloads, zwischen 0 und 100 | 400 |
 
 
 ### DownloadCompleteEvent
 
-| Prop         | Type                                              | Beschreibung                          | Seit |
+| Eigenschaft   | Typ                                              | Beschreibung                         | Seit |
 | ------------ | ------------------------------------------------- | ------------------------------------ | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird emittiert, wenn ein neues Update verfügbar ist | 400 |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird ausgelöst, wenn ein neues Update verfügbar ist | 400 |
 
 
 ### MajorAvailableEvent
 
-| Prop          | Type                | Beschreibung                                | Seit |
-| ------------- | ------------------- | ------------------------------------------ | ----- |
-| **`version`** | <code>string</code> | Wird emittiert, wenn ein neues Major-Bundle verfügbar ist | 400 |
+| Eigenschaft    | Typ                | Beschreibung                                      | Seit |
+| ------------- | ------------------- | ------------------------------------------------ | ----- |
+| **`version`** | <code>string</code> | Wird ausgelöst, wenn ein neues Major-Bundle verfügbar ist | 400 |
 
 
 ### UpdateFailedEvent
 
-| Prop         | Type                                              | Beschreibung                           | Seit |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird emittiert, wenn ein Update nicht installiert werden konnte | 400 |
+| Eigenschaft   | Typ                                              | Beschreibung                                | Seit |
+| ------------ | ------------------------------------------------- | ------------------------------------------ | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird ausgelöst, wenn ein Update fehlschlägt | 400 |
 
 
 ### DownloadFailedEvent
 
-| Prop          | Type                | Beschreibung                | Seit |
-| ------------- | ------------------- | -------------------------- | ----- |
-| **`version`** | <code>string</code> | Wird emittiert, wenn ein Download fehlschlägt | 400 |
+| Eigenschaft    | Typ                | Beschreibung                              | Seit |
+| ------------- | ------------------- | ---------------------------------------- | ----- |
+| **`version`** | <code>string</code> | Wird ausgelöst, wenn ein Download fehlschlägt | 400 |
 
 
 ### AppReadyEvent
 
-| Prop         | Type                                              | Beschreibung                           | Seit |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird emittiert, wenn die App bereit zur Verwendung ist | 520 |
-| **`status`** | <code>string</code>                               |                                       |       |
+| Eigenschaft   | Typ                                              | Beschreibung                                | Seit |
+| ------------ | ------------------------------------------------- | ------------------------------------------ | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Wird ausgelöst, wenn die App bereit zur Nutzung ist | 520 |
+| **`status`** | <code>string</code>                               |                                            |       |
 
 
 ### AutoUpdateAvailable
 
-| Prop            | Type                 |
+| Eigenschaft      | Typ                 |
 | --------------- | -------------------- |
 | **`available`** | <code>boolean</code> |
 
 
-## Typ-Aliase
+## Type Aliases
 
 
 ### BundleStatus
@@ -1034,3 +877,5 @@ Erhalten Sie das nächste Bündel, das verwendet wird, wenn die App neu geladen 
 ### DelayUntilNext
 
 <code>'background' | 'kill' | 'nativeVersion' | 'date'</code>
+
+</docgen-api>

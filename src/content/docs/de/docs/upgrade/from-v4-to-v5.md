@@ -1,6 +1,6 @@
 ---
 title: Von V4 zu V5
-description: Wie man von V4 auf V5 aktualisiert
+description: Migration von V4 auf V5
 sidebar:
   order: 2
 locale: de
@@ -8,9 +8,9 @@ locale: de
 
 ## Warum dieses Upgrade
 
-Diese Hauptversion ist hier, um der Hauptversion von Capacitor zu folgen.
+Diese Hauptversion folgt der Capacitor Hauptversion
 
-Zuerst folge dem Migrationshandbuch von Capacitor:
+Folgen Sie zunächst der Migrationsanleitung von Capacitor:
 
 [https://capacitorjscom/docs/updating/5-0](https://capacitorjscom/docs/updating/5-0/)
 
@@ -18,14 +18,14 @@ Zuerst folge dem Migrationshandbuch von Capacitor:
 
 `npm i @capgo/capacitor-updater@5`
 
-`Dann synchronisiere das Update des nativen Codes:`
+`Dann synchronisieren Sie das native Code-Update:`
 
 `npx cap sync`
 
-Das war's! Ganz einfach!
+Das war's! Ziemlich einfach!
 
 ## Manueller Modus
 
-Wenn du dir das Update mit getLatest geholt hast, gibt es eine kleine Änderung.  
-Jetzt, wenn du bereits auf dem neuesten Stand bist, wird es in den Catch gehen.  
-Alle Antworten, die anders als "Update verfügbar" sind, werden das tun.
+Wenn Sie das Update bisher selbst mit getLatest geholt haben, gibt es eine kleine Änderung
+Wenn Sie bereits auf dem neuesten Stand sind, wird es in den catch-Block gehen
+Jede Antwort, die nicht "Update verfügbar" lautet, wird dies tun

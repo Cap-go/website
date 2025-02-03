@@ -1,29 +1,29 @@
 ---
 title: Erste Schritte
 description: >-
-  Dieses Tutorial zeigt, wie man Supabase von Grund auf neu startet und
-  Edge-Funktionen aktiviert.
+  Dieses Tutorial zeigt, wie man mit Supabase von Grund auf beginnt und Edge
+  Functions startet
 sidebar:
   order: 3
 locale: de
 ---
 
-## Was dieser Leitfaden behandelt?
+## Was behandelt dieses Tutorial?
 
-Dieser Leitfaden zeigt, wie man Supabase von Grund auf neu startet und wie man Edge-Funktionen startet.
+Dieses Tutorial zeigt, wie man Supabase von Grund auf startet und Edge-Funktionen einrichtet
 
-## Anforderungen
-1. Geklontes [capgo](https://githubcom/Cap-go/capgo/)
-2. [supabase](https://supabasecom/)
+## Voraussetzungen
+ 1 Geklontes [capgo](https://githubcom/Cap-go/capgo/)
+ 3 [supabase](https://supabasecom/)
 
 ## Erste Schritte
 
-Um zu starten, führen Sie aus:
+Zum Starten führen Sie aus:
 ```bash
 supabase start
 ```
 
-Als Nächstes sollten Sie etwas wie das Folgende sehen:
+Als Nächstes sollten Sie etwa Folgendes sehen:
 ```js
 Started supabase local development setup
 
@@ -58,23 +58,23 @@ service_role key: supa_key_admin
 }
 ```
 
-wobei `supa_key_anon` der Wert aus dem vorherigen Schritt ist.
+wobei `supa_key_anon` der Wert aus dem vorherigen Schritt ist
 
 :::danger
-⚠️ Fügen Sie `configsjson` nicht in das entfernte Repository ein.
+⚠️ Committen Sie `configsjson` nicht in das Remote-Repository
 :::
 
-Überprüfen Sie als Nächstes, ob Sie zu [localhost:54323](http://localhost:54323/projects/) navigieren können und dass die Tabelle `users` etwa so aussieht:
+Überprüfen Sie als Nächstes, ob Sie auf [localhost:54323](http://localhost:54323/projects/) zugreifen können und ob die Tabelle `users` etwa so aussieht
 
 <figure><img src="/supabasewebp" alt="supabase" /><figcaption></figcaption></figure>
 
-Falls ja, starten Sie Edge-Funktionen, indem Sie Folgendes ausführen:
+Wenn ja, starten Sie Edge-Funktionen mit:
 
 ```bash
 supabase functions serve
 ```
 
-und starten Sie das Frontend, indem Sie Folgendes ausführen:
+und starten Sie das Frontend mit:
 ```bash
 bun run serve
 ```

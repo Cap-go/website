@@ -7,28 +7,28 @@ locale: de
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Ein Live Update-Kanal zeigt auf ein bestimmtes JS-Bundle-Build Ihrer App, das mit allen Geräten geteilt wird, die so konfiguriert sind, dass sie diesem Kanal für Updates lauschen. Wenn Sie das [Capgo Live Updates SDK](/docs/getting-started/quickstart/) in Ihrer App installieren, überprüft jedes native Binary, das auf diesen Kanal konfiguriert ist, bei jedem Start der App, ob Updates verfügbar sind. Sie können das Build, auf das ein Kanal zeigt, jederzeit ändern und können auch auf frühere Builds zurückrollen, wenn nötig.
+Ein Live-Update-Kanal verweist auf einen bestimmten JS-Bundle-Build Ihrer App, der mit allen Geräten geteilt wird, die für Updates auf diesen Kanal eingestellt sind. Wenn Sie das [Capgo Live Updates SDK](/docs/getting-started/quickstart/) in Ihrer App installieren, prüft jede native Binärdatei, die für diesen Kanal konfiguriert ist, beim Start der App auf verfügbare Updates. Sie können den Build, auf den ein Kanal verweist, jederzeit ändern und bei Bedarf auch auf frühere Builds zurücksetzen.
 
-## Einen Kanal einrichten
+## Einrichten eines Kanals
 
-Jede App hat einen standardmäßigen Kanal mit dem Namen "Produktion", der nicht gelöscht werden kann. Um neue Kanäle hinzuzufügen:
+Jede App verfügt über einen Standardkanal namens "Production", der nicht gelöscht werden kann. So fügen Sie neue Kanäle hinzu:
 
-1. Gehen Sie zum Abschnitt "Kanäle" im Capgo-Dashboard. 
-2. Klicken Sie auf die Schaltfläche "Neuer Kanal".
-3. Geben Sie einen Namen für den Kanal ein und klicken Sie auf "Erstellen".
+1. Gehen Sie zum Bereich "Channels" im Capgo Dashboard
+2. Klicken Sie auf die Schaltfläche "New Channel"
+3. Geben Sie einen Namen für den Kanal ein und klicken Sie auf "Create"
 
-Kanalnamen können beliebig gewählt werden. Eine gängige Strategie ist, die Kanäle auf die Entwicklungsphasen abzustimmen, wie zum Beispiel:
+Kanalnamen können beliebig sein. Eine gängige Strategie ist es, Kanäle Ihren Entwicklungsphasen zuzuordnen, wie zum Beispiel:
 
-- `Entwicklung` - für das Testen von Live-Updates auf lokalen Geräten oder Emulatoren.
-- `QA` - für Ihr QA-Team, um Updates vor einer breiteren Veröffentlichung zu überprüfen.
-- `Staging` - für abschließende Tests in einer produktionsähnlichen Umgebung.
-- `Produktion` - für die Version Ihrer App, die Endbenutzer aus den App-Stores erhalten.
+- `Development` - zum Testen von Live-Updates auf lokalen Geräten oder Emulatoren
+- `QA` - für Ihr QA-Team zur Überprüfung von Updates vor der breiteren Veröffentlichung
+- `Staging` - für abschließende Tests in einer produktionsähnlichen Umgebung
+- `Production` - für die Version Ihrer App, die Endbenutzer aus den App Stores erhalten
 
-## Den Kanal in Ihrer App konfigurieren
+## Konfigurieren des Kanals in Ihrer App
 
-Nachdem Sie Ihre Kanäle erstellt haben, müssen Sie Ihre App konfigurieren, um den entsprechenden Kanal abzuhören. In diesem Beispiel verwenden wir den `Entwicklung`-Kanal.
+Nachdem Sie Ihre Kanäle erstellt haben, müssen Sie Ihre App so konfigurieren, dass sie auf den entsprechenden Kanal hört. In diesem Beispiel verwenden wir den `Development`-Kanal.
 
-Öffnen Sie Ihre `capacitorconfig.ts` (oder `capacitorconfig.json`) Datei. Unter dem Abschnitt `plugins` setzen Sie die `channel`-Eigenschaft des `CapacitorUpdater`-Plugins auf den Namen Ihres gewünschten Kanals:
+Öffnen Sie Ihre `capacitor.config.ts` (oder `capacitor.config.json`) Datei. Setzen Sie unter dem Abschnitt `plugins` die `channel`-Eigenschaft des `CapacitorUpdater`-Plugins auf den Namen Ihres gewünschten Kanals:
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,82 +36,81 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      defaultChannel: 'Entwicklung',
+      defaultChannel: 'Development',
     },
   },
 };
 ```
 
-Bauen Sie als Nächstes Ihre Web-App und führen Sie `npx cap sync` aus, um die aktualisierte Konfigurationsdatei in Ihre iOS- und Android-Projekte zu kopieren. Wenn Sie diesen Synchronisierungsschritt überspringen, verwenden Ihre nativen Projekte weiterhin den Kanal, für den sie zuvor konfiguriert waren.
+Bauen Sie als Nächstes Ihre Web-App und führen Sie `npx cap sync` aus, um die aktualisierte Konfigurationsdatei in Ihre iOS- und Android-Projekte zu kopieren. Wenn Sie diesen Synchronisationsschritt überspringen, verwenden Ihre nativen Projekte weiterhin den Kanal, für den sie zuvor konfiguriert waren.
 
 <Aside type="caution">
 
-Die `defaultChannel`-Eigenschaft überschreibt immer den standardmäßigen Cloud-Kanal, aber Sie können die deviceId dennoch auf einen Kanal in der Cloud zwingen.
+Die `defaultChannel`-Eigenschaft überschreibt immer den Cloud-Standardkanal. Sie können die Geräte-ID jedoch trotzdem in der Cloud einem Kanal zuweisen.
 
 </Aside>
 
+## Zuweisen eines Bundles zu einem Kanal
 
-## Ein Bundle einem Kanal zuweisen
-
-Um ein Live-Update bereitzustellen, müssen Sie ein neues JS-Bundle-Build hochladen und es einem Kanal zuweisen. Dies können Sie in einem Schritt mit der Capgo CLI tun:
+Um ein Live-Update bereitzustellen, müssen Sie einen neuen JS-Bundle-Build hochladen und einem Kanal zuweisen. Dies können Sie in einem Schritt mit der Capgo CLI tun:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Entwicklung
+npx @capgo/cli@latest upload --channel=Development
 ```
 
-Dies lädt Ihre gebauten Webressourcen hoch und setzt das neue Bundle als aktives Build für den `Entwicklung`-Kanal. Alle Apps, die konfiguriert sind, diesen Kanal abzuhören, erhalten das Update beim nächsten Check.
+Dadurch werden Ihre gebauten Web-Assets hochgeladen und der neue Bundle als aktiver Build für den `Development`-Kanal festgelegt. Alle Apps, die für diesen Kanal konfiguriert sind, erhalten das Update beim nächsten Überprüfen.
 
-Sie können Builds auch aus dem Abschnitt "Bundles" des Capgo-Dashboards Kanälen zuweisen. Klicken Sie auf das Menüsymbol neben einem Build und wählen Sie "Kanal zuweisen", um den Kanal für dieses Build auszuwählen.
+Sie können Builds auch über den Bereich "Bundles" des Capgo Dashboards Kanälen zuweisen. Klicken Sie auf das Menüsymbol neben einem Build und wählen Sie "Assign to Channel", um den Kanal für diesen Build auszuwählen.
 
 ## Bundle-Versionierung und Kanäle
 
-Es ist wichtig zu beachten, dass Bundles in Capgo global für Ihre App sind, nicht spezifisch für einzelne Kanäle. Dasselbe Bundle kann mehreren Kanälen zugewiesen werden.
+Es ist wichtig zu beachten, dass Bundles in Capgo global für Ihre App sind und nicht spezifisch für einzelne Kanäle. Dasselbe Bundle kann mehreren Kanälen zugewiesen werden.
 
-Bei der Versionierung Ihrer Bundles empfehlen wir die Verwendung von semantischer Versionierung [semver](https://semverorg/) mit Pre-Release-Identifikatoren für kanalspezifische Builds. Zum Beispiel könnte ein Beta-Release als `123-beta1` versioniert werden.
+Bei der Versionierung Ihrer Bundles empfehlen wir die Verwendung von semantischer Versionierung [semver](https://semver.org/) mit Pre-Release-Kennungen für kanalspezifische Builds. Beispielsweise könnte eine Beta-Version als `1.2.3-beta.1` versioniert sein.
 
 Dieser Ansatz hat mehrere Vorteile:
 
-- Er kommuniziert klar die Beziehung zwischen den Builds. `123-beta1` ist offensichtlich eine Vorabversion von `123`.
-- Er ermöglicht die Wiederverwendung von Versionsnummern über Kanäle hinweg, was Verwirrung reduziert.
-- Er ermöglicht klare Rückrollpfade. Wenn Sie von `123` zurückrollen müssen, wissen Sie, dass `122` die vorherige stabile Version ist.
+- Er kommuniziert klar die Beziehung zwischen Builds. `1.2.3-beta.1` ist offensichtlich eine Vorabversion von `1.2.3`
+- Er ermöglicht die Wiederverwendung von Versionsnummern über Kanäle hinweg und reduziert Verwirrung
+- Er ermöglicht klare Rollback-Pfade. Wenn Sie von `1.2.3` zurückrollen müssen, wissen Sie, dass `1.2.2` die vorherige stabile Version ist
 
-Hier ist ein Beispiel, wie Sie Ihre Bundle-Versionen mit einem typischen Kanal-Setup in Einklang bringen könnten:
+Hier ist ein Beispiel, wie Sie Ihre Bundle-Versionen mit einer typischen Kanal-Einrichtung abstimmen könnten:
 
-- `Entwicklung`-Kanal: `123-dev1`, `123-dev2`, usw.
-- `QA`-Kanal: `123-qa1`, `123-qa2`, usw.
-- `Staging`-Kanal: `123-rc1`, `123-rc2`, usw.
-- `Produktion`-Kanal: `123`, `124`, usw.
+- `Development` Kanal: `1.2.3-dev.1`, `1.2.3-dev.2`, usw.
+- `QA` Kanal: `1.2.3-qa.1`, `1.2.3-qa.2`, usw.
+- `Staging` Kanal: `1.2.3-rc.1`, `1.2.3-rc.2`, usw.
+- `Production` Kanal: `1.2.3`, `1.2.4`, usw.
 
-Die Verwendung von semver mit Pre-Release-Identifikatoren ist ein empfohlener Ansatz, aber nicht unbedingt erforderlich. Der Schlüssel ist, ein Versionierungsschema zu finden, das die Beziehungen zwischen Ihren Builds klar kommuniziert und mit dem Entwicklungsprozess Ihres Teams in Einklang steht.
+Die Verwendung von semver mit Pre-Release-Kennungen ist ein empfohlener Ansatz, aber nicht zwingend erforderlich. Der Schlüssel ist, ein Versionierungsschema zu finden, das die Beziehungen zwischen Ihren Builds klar kommuniziert und mit dem Entwicklungsprozess Ihres Teams übereinstimmt.
 
-## Ein Live-Update zurückrollen
+## Zurücksetzen eines Live-Updates
 
-Wenn Sie ein Live-Update bereitstellen, das einen Fehler einführt oder anderweitig zurückgesetzt werden muss, können Sie ganz einfach auf ein vorheriges Build zurückrollen. Gehen Sie dazu zum Abschnitt "Kanäle" des Dashboards:
+Wenn Sie ein Live-Update bereitstellen, das einen Fehler einführt oder anderweitig zurückgesetzt werden muss, können Sie einfach zu einem vorherigen Build zurückkehren. Im Bereich "Channels" des Dashboards:
 
 <Steps>
 
-1. Klicken Sie auf den Namen des Kanals, den Sie zurückrollen möchten.
-2. Finden Sie das Build, auf das Sie zurücksetzen möchten, und klicken Sie auf das Kronensymbol.
-![Rollback-Build](/select_bundlewebp)
-3. Bestätigen Sie die Aktion.
+1. Klicken Sie auf den Namen des Kanals, den Sie zurücksetzen möchten
+2. Finden Sie den Build, zu dem Sie zurückkehren möchten, und klicken Sie auf das Kronen-Symbol
+![Rollback build](/select_bundle.webp)
+3. Bestätigen Sie die Aktion
 
 </Steps>
 
-Das ausgewählte Build wird sofort wieder das aktive Build für diesen Kanal. Apps erhalten die zurückgerollte Version beim nächsten Check auf ein Update.
+Der ausgewählte Build wird sofort wieder zum aktiven Build für diesen Kanal. Apps erhalten die zurückgesetzte Version beim nächsten Update-Check.
 
 ## Automatisierung von Bereitstellungen
 
-Für fortgeschrittenere Workflows können Sie Ihre Live-Update-Bereitstellungen als Teil Ihrer CI/CD-Pipeline automatisieren. Durch die Integration von Capgo in Ihren Build-Prozess können Sie neue Bundles automatisch hochladen und ihnen Kanäle zuweisen, wann immer Sie in bestimmte Branches pushen oder neue Releases erstellen.
+Für fortgeschrittenere Workflows können Sie Ihre Live-Update-Bereitstellungen als Teil Ihrer CI/CD-Pipeline automatisieren. Durch die Integration von Capgo in Ihren Build-Prozess können Sie automatisch neue Bundles hochladen und sie Kanälen zuweisen, wenn Sie zu bestimmten Branches pushen oder neue Releases erstellen.
 
-Siehe die [CI/CD-Integration](/docs/cicd-integration/) Dokumentation, um mehr über die Automatisierung von Capgo-Live-Updates zu erfahren.
+Schauen Sie sich die [CI/CD Integration](/docs/cicd-integration/) Dokumentation an, um mehr über die Automatisierung von Capgo Live-Updates zu erfahren.
 
 ## Bereitstellung auf einem Gerät
 
-Jetzt, da Sie die Kanäle verstanden haben, sind Sie bereit, Live-Updates auf echten Geräten bereitzustellen. Der grundlegende Prozess ist:
+Nachdem Sie nun Kanäle verstehen, sind Sie bereit, Live-Updates auf echten Geräten bereitzustellen. Der grundlegende Prozess ist:
 
-1. Installieren Sie das Capgo SDK in Ihrer App.
-2. Konfigurieren Sie die App, um auf Ihren gewünschten Kanal zu hören.
-3. Laden Sie ein Build hoch und weisen Sie es diesem Kanal zu.
+1. Installieren Sie das Capgo SDK in Ihrer App
+2. Konfigurieren Sie die App für den gewünschten Kanal
+3. Laden Sie einen Build hoch und weisen Sie ihn diesem Kanal zu
 4. Starten Sie die App und warten Sie auf das Update!
 
-Für eine detailliertere Anleitung sehen Sie sich den [Bereitstellung von Live-Updates](/docs/getting-started/deploy/) Leitfaden an. Viel Spaß beim Aktualisieren!
+Für eine detailliertere Anleitung, siehe den [Deploying Live Updates](/docs/getting-started/deploy/) Guide. Viel Spaß beim Aktualisieren!

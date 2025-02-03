@@ -1,165 +1,165 @@
 ---
-title: bündeln
+title: Bündel
 sidebar_label: bundle
 sidebar:
   order: 5
 locale: de
 ---
 
-Der `bundle`-Befehl erlaubt es Ihnen, Ihre App-Bundles zu verwalten.
+Der `bundle`-Befehl ermöglicht die Verwaltung Ihrer App-Bundles
 
-### hochladen
+### upload
 
 `npx @capgo/cli bundle upload [appId]`
 
-Lädt ein neues Bundle für eine App hoch.
+Lädt ein neues Bundle für eine App hoch
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
-- `-p, --path <path>`: Pfad zum Ordner zum Hochladen (Standard ist das `webDir` in `capacitorconfig`)
-- `-c, --channel <channel>`: Kanal, um das Bundle zu verknüpfen
-- `-e, --external <url>`: Link zu einer externen URL anstelle des Hochladens in die Capgo Cloud
-- `--iv-session-key <key>`: Setzen Sie den IV und den Sitzungsschlüssel für eine externe Bundle-URL
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `-p, --path <path>`: Pfad zum hochzuladenden Ordner (standardmäßig der `webDir` in `capacitorconfig`)
+- `-c, --channel <channel>`: Kanal, mit dem das Bundle verknüpft werden soll
+- `-e, --external <url>`: Link zu einer externen URL statt Upload zu Capgo Cloud
+- `--iv-session-key <key>`: IV und Session-Schlüssel für externe Bundle-URL festlegen
 - `--s3-region <region>`: Region für Ihren S3-Bucket
 - `--s3-apikey <apikey>`: API-Schlüssel für Ihren S3-Endpunkt
 - `--s3-apisecret <apisecret>`: API-Geheimnis für Ihren S3-Endpunkt
 - `--s3-endpoint <s3Endpoint>`: URL des S3-Endpunkts
 - `--s3-bucket-name <bucketName>`: Name Ihres S3-Buckets
 - `--s3-port <port>`: Port für Ihren S3-Endpunkt
-- `--no-s3-ssl`: Deaktivieren Sie SSL für S3-Uploads
-- `--key <key>`: Benutzerdefinierter Pfad für den öffentlichen Signaturschlüssel (v1-System)
-- `--key-data <keyData>`: Daten des öffentlichen Signaturschlüssels (v1-System)
-- `--key-v2 <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel (v2-System)
-- `--key-data-v2 <keyDataV2>`: Daten des privaten Signaturschlüssels (v2-System)
-- `--bundle-url`: Drucken Sie die Bundle-URL auf stdout
-- `--no-key`: Ignorieren Sie den Signaturschlüssel und senden Sie ein nicht signiertes Update
-- `--no-code-check`: Überprüfen Sie nicht `notifyAppReady()` im Quellcode und `indexhtml` im Stammverzeichnis
-- `--display-iv-session`: Zeigen Sie den IV und den Sitzungsschlüssel an, die zum Verschlüsseln des Updates verwendet wurden
-- `-b, --bundle <bundle>`: Versionsnummer des Bundles, das hochgeladen werden soll
-- `--min-update-version <minUpdateVersion>`: Minimale App-Version, die erforderlich ist, um dieses Update anzuwenden (nur verwendet, wenn das automatische Update über die Metadaten deaktiviert ist)
-- `--auto-min-update-version`: Automatisch die minimale Update-Version basierend auf den nativen Paketversionen festlegen
-- `--ignore-metadata-check`: Ignorieren Sie die Metadatenüberprüfung (node_modules) beim Hochladen
-- `--ignore-checksum-check`: Ignorieren Sie die Prüfzifferprüfung beim Hochladen
+- `--no-s3-ssl`: SSL für S3-Uploads deaktivieren
+- `--key <key>`: Benutzerdefinierter Pfad für den öffentlichen Signierungsschlüssel (v1-System)
+- `--key-data <keyData>`: Öffentliche Signierungsschlüsseldaten (v1-System)
+- `--key-v2 <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel (v2-System)
+- `--key-data-v2 <keyDataV2>`: Private Signierungsschlüsseldaten (v2-System)
+- `--bundle-url`: Bundle-URL in stdout ausgeben
+- `--no-key`: Signierungsschlüssel ignorieren und unsigniertes Update senden
+- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Ordner überspringen
+- `--display-iv-session`: IV und Session-Schlüssel zur Verschlüsselung des Updates anzeigen
+- `-b, --bundle <bundle>`: Zu hochladende Bundle-Versionsnummer
+- `--min-update-version <minUpdateVersion>`: Mindestversion der App für dieses Update (nur verwendet wenn Auto-Update über Metadaten deaktiviert ist)
+- `--auto-min-update-version`: Automatisch die minimale Update-Version basierend auf nativen Paketversionen setzen
+- `--ignore-metadata-check`: Metadaten-Check (node_modules) beim Hochladen ignorieren
+- `--ignore-checksum-check`: Prüfsummen-Check beim Hochladen ignorieren
 - `--timeout <timeout>`: Timeout für den Upload-Prozess in Sekunden
-- `--multipart`: Verwenden Sie das Multipart-Protokoll, um Daten in S3 hochzuladen (veraltet, verwenden Sie stattdessen `--tus`)
-- `--tus`: Laden Sie das Bundle mit dem Tus-Protokoll hoch
-- `--tus-chunk-size <tusChunkSize>`: Chunk-Größe für den Tus-Upload
-- `--partial`: Laden Sie nur geänderte Dateien in die Capgo Cloud hoch
-- `--partial-only`: Laden Sie nur partielle Dateien in die Capgo Cloud hoch, überspringen Sie die gezippte Datei (nützlich für große Bundles)
-- `--encrypted-checksum <encryptedChecksum>`: Verschlüsselte Prüfziffer (Signatur) für ein externes Bundle
-- `--auto-set-bundle`: Automatisch die Bundle-Version in `capacitorconfigjson` festlegen
-- `--dry-upload`: Führen Sie einen Trockentest des Upload-Prozesses durch, ohne tatsächlich Dateien hochzuladen (nützlich für Tests)
-- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
-- `--node-modules <nodeModules>`: Komma-getrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
-- `--encrypt-partial`: Verschlüsseln Sie die partiellen Update-Dateien
-- `--delete-linked-bundle-on-upload`: Löschen Sie das aktuell verlinkte Bundle im Zielkanal vor dem Hochladen
+- `--multipart`: Multipart-Protokoll für S3-Upload verwenden (veraltet, verwenden Sie stattdessen `--tus`)
+- `--tus`: Bundle über das tus-Protokoll hochladen
+- `--tus-chunk-size <tusChunkSize>`: Chunk-Größe für tus-Upload
+- `--partial`: Nur geänderte Dateien zu Capgo Cloud hochladen
+- `--partial-only`: Nur partielle Dateien zu Capgo Cloud hochladen, ZIP-Datei überspringen (nützlich für große Bundles)
+- `--encrypted-checksum <encryptedChecksum>`: Verschlüsselte Prüfsumme (Signatur) für externes Bundle
+- `--auto-set-bundle`: Bundle-Version automatisch in `capacitorconfigjson` setzen
+- `--dry-upload`: Testlauf des Upload-Prozesses ohne tatsächlichen Datei-Upload (nützlich zum Testen)
+- `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `--node-modules <nodeModules>`: Kommagetrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
+- `--encrypt-partial`: Partielle Update-Dateien verschlüsseln
+- `--delete-linked-bundle-on-upload`: Aktuell verknüpftes Bundle im Zielkanal vor dem Upload löschen
 
-### Kompatibilität
+### compatibility
 
 `npx @capgo/cli bundle compatibility [appId]`
 
-Überprüft die Kompatibilität eines Bundles mit einem bestimmten Kanal.
+Prüft die Kompatibilität eines Bundles mit einem bestimmten Kanal
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
-- `-c, --channel <channel>`: Kanal, um die Kompatibilität zu überprüfen
-- `--text`: Ergebnisse als Text anstelle von Emojis ausgeben
-- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
-- `--node-modules <nodeModules>`: Komma-getrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
+- `-c, --channel <channel>`: Zu prüfender Kanal
+- `--text`: Ergebnisse als Text statt Emoji ausgeben
+- `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `--node-modules <nodeModules>`: Kommagetrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
 
-### löschen
+### delete
 
 `npx @capgo/cli bundle delete [bundleId] [appId]`
 
-Löscht ein Bundle aus einer App.
+Löscht ein Bundle aus einer App
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### auflisten
+### list
 
 `npx @capgo/cli bundle list [appId]`
 
-Listet alle Bundles für eine App auf.
+Listet alle Bundles einer App auf
 
 Optionen:
 
-- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 
-### bereinigen
+### cleanup
 
 `npx @capgo/cli bundle cleanup [appId]`
 
-Bereinigt alte Bundles für eine Hauptversion und behält die angegebene Anzahl der aktuellsten Bundles.
+Bereinigt alte Bundles einer Hauptversion und behält die angegebene Anzahl der neuesten Bundles
 
 Optionen:
 
-- `-b, --bundle <bundle>`: Hauptversionsnummer, die bereinigt werden soll
-- `-a, --apikey <apikey>`: API-Schlüssel, um Ihr Konto zu verknüpfen
+- `-b, --bundle <bundle>`: Zu bereinigende Hauptversionsnummer
+- `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 - `-k, --keep <keep>`: Anzahl der zu behaltenden Bundles (Standard: 4)
-- `-f, --force`: Zwingen Sie die Entfernung ohne Bestätigung
+- `-f, --force`: Entfernung ohne Bestätigung erzwingen
 
-### entschlüsseln
+### decrypt
 
 `npx @capgo/cli bundle decrypt [zipPath] [sessionKey]`
 
-Entschlüsselt ein signiertes ZIP-Bundle.
+Entschlüsselt ein signiertes ZIP-Bundle
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
-- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
+- `--key-data <keyData>`: Private Signierungsschlüsseldaten
 
-### verschlüsseln
+### encrypt
 
 `npx @capgo/cli bundle encrypt [zipPath]`
 
-Verschlüsselt ein ZIP-Bundle.
+Verschlüsselt ein ZIP-Bundle
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
-- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
+- `--key-data <keyData>`: Private Signierungsschlüsseldaten
 
-### verschlüsselnV2
+### encryptV2
 
 `npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
 
-Verschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode.
+Verschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
-- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
+- `--key-data <keyData>`: Private Signierungsschlüsseldaten
 - `-j, --json`: Ergebnisse als JSON ausgeben
 
-### entschlüsselnV2
+### decryptV2
 
 `npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
 
-Entschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode.
+Entschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
-- `--key-data <keyData>`: Daten des privaten Signaturschlüssels
-- `--checksum <checksum>`: Prüfziffer des Bundles zur Überprüfung der Integrität
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
+- `--key-data <keyData>`: Private Signierungsschlüsseldaten
+- `--checksum <checksum>`: Prüfsumme des Bundles zur Integritätsprüfung
 
 ### zip
 
 `npx @capgo/cli bundle zip [appId]`
 
-Generiert eine ZIP-Datei für ein Bundle.
+Erstellt eine ZIP-Datei für ein Bundle
 
 Optionen:
 
-- `-p, --path <path>`: Pfad zum Ordner, der gezippt werden soll (Standard ist das `webDir` in `capacitorconfig`)
-- `-b, --bundle <bundle>`: Versionsnummer des Bundles, die im Dateinamen verwendet werden soll
+- `-p, --path <path>`: Pfad zum zu zippenden Ordner (standardmäßig der `webDir` in `capacitorconfig`)
+- `-b, --bundle <bundle>`: Bundle-Versionsnummer für den Dateinamen
 - `-n, --name <name>`: Benutzerdefinierter Dateiname für die ZIP-Datei
 - `-j, --json`: Ergebnisse als JSON ausgeben
-- `--no-code-check`: Überspringen Sie die Überprüfung von `notifyAppReady()` im Quellcode und `indexhtml` im Stammverzeichnis
-- `--key-v2`: Verwenden Sie die neue Verschlüsselungsmethode (v2)
-- `--package-json <packageJson>`: Komma-getrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
+- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Ordner überspringen
+- `--key-v2`: Neue Verschlüsselungsmethode (v2) verwenden
+- `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)

@@ -1,6 +1,6 @@
 ---
-title: Aktualisieren Sie den Endpunkt
-description: Wie man einen selbstgehosteten Update-Endpunkt erstellt
+title: Endpunkt aktualisieren
+description: So erstellen Sie einen selbst gehosteten Update-Endpoint
 sidebar:
   order: 1
 locale: de
@@ -33,7 +33,7 @@ export const handler: Handler = async (event) => {
     version_build,
     plugin_version,
   } = body
-  consolelog('Update angefragt', platform,
+  consolelog('update asked', platform,
     app_id,
     version_os,
     device_id,
@@ -54,7 +54,7 @@ export const handler: Handler = async (event) => {
   }
   else {
     return {
-      message: 'Fehler: Version nicht gefunden',
+      message: 'Error version not found',
       version: '',
       url: '',
     }
@@ -76,7 +76,7 @@ Und wenn kein Update oder Fehler vorliegt, fügen Sie den `message`-Schlüssel u
 ```json
 {
   "message": "Version nicht gefunden",
-  "error": "Der Backend-Service ist abgestürzt",
+  "error": "Das Backend ist abgestürzt",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

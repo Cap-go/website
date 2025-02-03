@@ -1,33 +1,33 @@
 ---
-title: Self-Hosting S3
-description: 'Wie man Minio einrichtet, um mit Capgo zu arbeiten'
+title: S3 selbst hosten
+description: So richten Sie Minio für die Verwendung mit Capgo ein
 sidebar:
   order: 2
 locale: de
 ---
 
-## Was dieses Tutorial behandeln wird?
+## Was dieses Tutorial behandelt
 
-Dieses Tutorial zeigt, wie man [minio](https://minio/) einrichtet, um mit capgo zu arbeiten.
+Dieses Tutorial zeigt, wie man [minio](https://minio/) für die Verwendung mit capgo einrichtet
 
-Dies ist technisch nicht erforderlich, um capgo auszuführen.
+Dies ist technisch nicht erforderlich, um capgo auszuführen
 
-Die Einrichtung von S3 ermöglicht das Hochladen von Bundles über die [CLI](/docs/cli/commands/).
+Die S3-Einrichtung ermöglicht das Hochladen von Bundles über die [CLI](/docs/cli/commands/)
 
 :::danger
-⚠️ Dieses Tutorial sollte nicht in der Produktion verwendet werden\
+⚠️ Dieses Tutorial ist nicht für den Produktiveinsatz gedacht\
 Verwenden Sie dies nur in der lokalen Entwicklung
 :::
 
-## Anforderungen
+## Voraussetzungen
 
-1. [Docker](https://wwwdockercom/)
+1 [Docker](https://wwwdockercom/)
 
 ## Erste Schritte
 
-Zuerst erstellen Sie ein neues Verzeichnis.
+Erstellen Sie zunächst ein neues Verzeichnis
 
-Dann erstellen Sie einen Ordner namens `data` darin.
+Erstellen Sie dann einen Ordner namens `data` darin
 
 Führen Sie dann den folgenden Befehl aus:
 ```bash
@@ -42,22 +42,22 @@ docker run \
    quayio/minio/minio server /data --console-address ":9090"
 ```
 
-Wenn Sie das Konsolenfenster mit diesem Container jemals schließen, können Sie es mit folgendem Befehl starten:
+Wenn Sie das Konsolenfenster mit diesem Container jemals schließen, können Sie ihn mit folgendem Befehl starten:
 ```bash
 docker start minio1
 ```
 
-Wenn Sie die Konfiguration von minio ändern müssen, können Sie den Container mit folgendem Befehl entfernen:
+Wenn Sie die Konfiguration von minio ändern müssen, können Sie den Container entfernen, indem Sie ausführen:
 ```bash
 docker rm minio1
 ```
-⚠️ Dieser Befehl entfernt keine minio-Daten.
+⚠️ Dieser Befehl entfernt keine minio-Daten
 
-## Einrichtung von Edge-Funktionen
+## Edge Functions einrichten
 
-Jetzt, da wir einen S3-Server ausführen, müssen wir die capgo Edge-Funktionen einrichten, um unseren S3-Server zu verwenden.
+Nachdem wir einen S3-Server ausführen, müssen wir die capgo Edge Functions einrichten, um unseren S3-Server zu verwenden
 
-Um das zu tun, müssen wir eine ENV-Datei in `capgo/supabase` mit dem Namen `envlocal` erstellen.
+Dazu müssen wir eine ENV-Datei in `capgo/supabase` namens `envlocal` erstellen
 
 Diese Datei sollte so aussehen:
 ```bash
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# Unten ist die tatsächlich wichtige Konfiguration für S3
+# Nachfolgend ist die tatsächlich wichtige Einrichtung für S3
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -76,29 +76,29 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-Die IP `hostdockerinternal` ist eine Docker-IP, die nur von Docker intern erreicht werden kann, aber wir ersetzen sie im Code durch `0000`, damit minio von localhost erreicht werden kann.
+Die IP `hostdockerinternal` ist eine Docker-IP, die nur intern von Docker erreicht werden kann, aber wir ersetzen sie im Code durch `0000`, damit minio von localhost aus erreichbar ist
 
-Um Edge-Funktionen mit unserer neuen env-Datei auszuführen, verwenden Sie:
+Um Edge Functions mit unserer neuen env-Datei auszuführen, verwenden Sie
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```
 
 ## CLI für die Verwendung von S3 einrichten
 
-Die CLI funktioniert standardmäßig nicht mit minio. Die folgende Änderung an `capacitorconfigts`[^1] ist erforderlich:
+Die CLI funktioniert standardmäßig nicht mit minio. Die folgende Änderung an `capacitor.config.ts`[^1] ist erforderlich
 ```ts
 const config: CapacitorConfig = {
-  appId: 'comdemoapp',
+  appId: 'com.demo.app',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      // Ohne dieses localS3 schlägt der Upload-Befehl fehl
+      // Ohne dieses localS3 wird der Upload-Befehl fehlschlagen
       localS3: true
     },
   },
 };
 ```
 
-[^1]: Die Datei befindet sich in Ihrem Anwendungsverzeichnis.
+[^1]: Die Datei befindet sich in Ihrem App-Verzeichnis
