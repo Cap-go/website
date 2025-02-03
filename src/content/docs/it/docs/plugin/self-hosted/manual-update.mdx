@@ -1,0 +1,66 @@
+---
+title: Mise à jour manuelle
+description: Come utilizzare il plugin di aggiornamento manuale in modalità self-hosted
+sidebar:
+  order: 4
+locale: it
+---
+
+## Configurazione
+
+Aggiungi questo al tuo ``capacitorconfigjson``, per disabilitare l'aggiornamento automatico
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Utilizzo
+
+Puoi utilizzare questo esempio o ricreare la logica nella tua app
+
+:::caution
+Stiamo forzando l'utente ad aggiornare l'app con una versione statica dichiarata nel codice. Questo non è raccomandato, dovresti utilizzare una versione dinamica dal tuo server
+:::
+
+:::danger
+In questo esempio non stiamo facendo alcun controllo di versione, decrittografia o validazione del checksum. Dovresti farlo autonomamente
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Esegui il download durante il tempo di attività dell'app per prevenire download falliti
+       data = await CapacitorUpdater.download({
+       version: '004',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Esegui lo switch quando l'utente lascia l'app
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // in caso di fallimento del set, altrimenti la nuova app dovrà nasconderlo
+       }
+     }
+ })
+```
+
+:::note
+Se questo sembra troppo lavoro, considera di provare [Capgo trial](https://capgo.app/register/) che gestirà tutto questo per te
+:::

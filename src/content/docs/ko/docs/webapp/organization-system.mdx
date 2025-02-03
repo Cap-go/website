@@ -1,0 +1,79 @@
+---
+title: 組織システム
+description: Capgo 계정에서 조직 관리하기.
+sidebar:
+  order: 11
+locale: ko
+---
+
+## 조직 시스템이란 무엇인가요?
+
+조직 시스템은 capgo에서 팀 멤버들과 앱을 안전하게 공유할 수 있게 해주는 시스템입니다.
+
+### Q: 내 조직의 정보에 어떻게 접근할 수 있나요?
+
+조직 정보에 접근하려면 [설정](/docs/webapp/settings/#how-to-get-to-the-settings-page)으로 이동한 다음 `조직 설정`을 클릭하세요.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settingswebp" alt="Org settings" /><figcaption></figcaption></figure>
+
+### Q: 보고 있는 조직을 어떻게 변경할 수 있나요?
+
+다른 조직의 설정을 보려면 이름 근처의 조직 선택기를 클릭하세요.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-selectorwebp" alt="Org selector" /><figcaption></figcaption></figure>
+
+이것이 보이지 않는다면 설정 페이지에 있지 않을 가능성이 있습니다.
+
+### Q: 조직의 멤버들을 어떻게 볼 수 있나요?
+
+`멤버`를 클릭하세요.
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-memberswebp" alt="Org Show members" /><figcaption></figcaption></figure>
+
+### Q: 조직에 사용자를 어떻게 초대할 수 있나요?
+
+`멤버 추가`를 클릭하세요.
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-memberwebp" alt="Org add member" /><figcaption></figcaption></figure>
+
+팝업이 나타나면 사용자의 이메일 주소를 입력하세요.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enterwebp" alt="Invite to org" /><figcaption></figcaption></figure>
+
+그런 다음 `초대`를 클릭하세요. 다른 팝업이 나타나며 초대된 사용자에게 부여할 권한을 묻습니다.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgswebp" alt="Select perm for org" /><figcaption></figcaption></figure>
+
+모든 권한에 대한 설명입니다:
+
+| 권한                             | 읽기 | 업로드 | 쓰기 | 관리자 | 최고 관리자 |
+|-----------------------------------|------|--------|-------|-------|-------------|
+| 앱 통계 보기                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 앱 채널 보기                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 기기 보기                       |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 로그 보기                       |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 번들 보기                       |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 앱 삭제                         |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| 채널 삭제                       |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| 버전 삭제                       |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 조직 설정 변경                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| 조직 사용자 관리                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| 채널 설정 수정                  |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 새 버전 업로드                  |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
+| 기기 수정                       |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 채널의 현재 버전 변경          |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 새 채널 생성                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| 버전 수정 (메타데이터)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 결제 관리                       |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| 버전 안전하지 않게 삭제        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+
+### Q: 조직 내에서 결제는 어떻게 이루어지나요?
+
+**최고 관리자** 권한을 가진 사람만이 해당 조직의 결제를 관리할 수 있습니다.
+요금제는 개인 계정이 아닌 조직에 연결됩니다.
+
+:::danger
+⚠️ 요금제 구매는 현재 선택한 조직에만 영향을 미칩니다.
+:::
+
+### Q: 하나 이상의 조직을 만들 수 있나요?
+
+아니요, 아직은 불가능합니다.

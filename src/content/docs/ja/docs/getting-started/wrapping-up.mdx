@@ -1,0 +1,53 @@
+---
+title: まとめ
+sidebar:
+  order: 4
+next: false
+prev: false
+draft: true
+locale: ja
+---
+
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
+
+クイックスタートガイドを完了したことで、Capgoの主要な概念について基本的な理解が得られたはずです。このガイドで学んだ主要な概念は以下の通りです：
+
+<Steps>
+1 Capgoアカウントへのアプリの追加
+
+2 CI/CDパイプラインとCapgoの統合 
+
+3 新しいコミットでCapgoへのバンドルアップロードをトリガー
+
+4 Capgo SDKでライブアップデートを有効にするためのアプリの設定
+
+5 Capgoダッシュボードからアプリへのライブアップデートのデプロイ
+</Steps>
+
+しかし、Capgoについてはまだまだ学ぶことがあります！ドキュメントの探索を続けるか、以下の主要なトピックをチェックしてください：
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/cicd-integration/">
+    <Card title="CI/CD 統合" icon="gitlab">
+      既にCI/CDパイプラインをお持ちですか？既存のワークフローにCapgoを組み込む方法を学びましょう
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/">
+    <Card title="ライブアップデート" icon="cloud-download">
+      Capgoのライブアップデート機能とベストプラクティスについて深く掘り下げましょう
+    </Card>
+  </a>
+
+  <a href="/docs/faq/">  
+    <Card title="よくある質問" icon="open-book">
+      Capgoに関するよくある質問の回答を見つけましょう
+    </Card>
+  </a>
+
+  <a href="/docs/troubleshooting/">
+    <Card title="トラブルシューティング" icon="error">
+      Capgo使用時に発生する可能性のある一般的な問題に関するヘルプを得ましょう
+    </Card>
+  </a>
+</CardGrid>

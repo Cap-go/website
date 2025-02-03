@@ -1,0 +1,78 @@
+---
+title: 시작하기
+description: このチュートリアルでは、supabaseをゼロから始める方法とエッジ関数を開始する方法を説明します
+sidebar:
+  order: 1
+locale: ja
+---
+
+## このチュートリアルの内容
+
+このチュートリアルでは、supabaseを最初から始める方法とエッジ関数を開始する方法を説明します
+
+## 必要条件
+1 [capgo](https://githubcom/Cap-go/capgo)のクローン
+3 [supabase](https://supabasecom/)
+
+## 始め方
+
+開始するには以下を実行します
+```bash
+supabase start
+```
+
+次に以下のような表示が出るはずです：
+```js
+Started supabase local development setup
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [truncated]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+次に`configsjson`を開き、以下の値を設定します：
+```json
+{
+  "base_domain": {
+    "prod": "webcapgoapp",
+    "development": "developmentwebcapgoapp",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+ここで`supa_key_anon`は前のステップで表示された値です
+
+:::danger
+⚠️ `configsjson`をリモートリポジトリにコミットしないでください
+:::
+
+次に、[localhost:54323](http://localhost:54323/projects)にアクセスでき、`users`テーブルが以下のように表示されることを確認します
+
+<figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
+
+表示されたら、以下を実行してエッジ関数を開始します：
+
+```bash
+supabase functions serve
+```
+
+そしてフロントエンドを以下で開始します：
+```bash
+bun run serve
+```

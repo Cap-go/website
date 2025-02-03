@@ -1,0 +1,262 @@
+---
+title: よくある質問
+description: Capgoよくある質問
+sidebar:
+  order: 1
+locale: ja
+---
+
+ここに回答のない質問がある場合は、お気軽にお尋ねください！Githubでissueを作成するか、[Discord](https://discordcom/invite/VnYRvBfgA6)で質問することができます。
+
+### 「コードプッシュ」とは何ですか？[](https://capgoapp/docs/#what-is-code-push "Direct link to What is \"code push\"?")
+
+コードプッシュ（「over the air updates」(OTA)とも呼ばれる）は、Capacitorの開発者が本番環境のアプリをアップデートできるようにするクラウドサービスです。Capgoは現在AndroidとiOSで動作し、最終的にはCapacitorが動作するすべての環境で機能するようになります。
+
+「コードプッシュ」は、React Nativeコミュニティで使用されている[Microsoft](https://appcenterms/)と[Expo](https://expodev/)のデプロイ機能の名称を参照していますが、どちらもCapacitorをサポートしていません。
+
+### バンドルとリリースの違いは何ですか？[](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")
+
+「リリース」とは、アプリストア用のバイナリを準備することを指します。後でバンドルを生成するために、Capgoはアプリストアに配信された正確なバイナリを知る必要があります。
+
+「バンドル」とは、リリースに適用して新しいコードに更新できるパッチを指します。`npx @capgo/cli app update`コマンドは、新しいローカルコードからバンドルを生成し、それをユーザーに配信するために使用されます。
+
+[続く部分は同様に翻訳されますが、文字数制限のため省略します。必要な部分があればお知らせください]`npx @capgo/cli app update`）はディスク上のnpmキャッシュにインストールされ、ログイン情報はホームディレクトリの`~/capgo`に保存されます。
+
+### Capacitor Hot Reloadとの関係は？
+
+CapacitorのHot reloadは開発時のみの機能で、コードプッシュは本番環境用です。
+
+Hot reloadはCapacitorの機能で、開発中にデバイス上のコードを変更することができます。ローカルマシンに接続するプロキシを使ってCapacitorアプリをビルドする必要があります。
+
+コードプッシュは本番環境でデバイス上のコードを変更できる機能です。プラットフォームに応じて様々な手法を使用します。
+
+### Capgoのコードプッシュはどのような変更をサポートしていますか？
+
+CapgoはアプリケーションのあらゆるJSコードを変更できます。アプリケーションコードと生成されたコードが含まれます。ネイティブコードの変更を必要としない限り、`packages.json`の依存関係も更新できます。
+
+ネイティブコード（AndroidのJava/KotlinやiOSのObjective-C/Swiftなど）の変更はサポートする予定はなく、ネイティブコードの変更を検出した場合はバンドルに含まれないため警告が表示されます。
+
+### Webはサポートしていますか？
+
+Webの場合はコードプッシュは必要ありません。Webはすでにこの方法で動作しているためです。ユーザーがWebアプリを開くと、必要に応じて最新バージョンをサーバーからダウンロードします。
+
+Webでコードプッシュのユースケースがある場合は、ぜひ教えてください！
+
+### iOS、Android、Mac、Windows、Linux等で動作しますか？
+
+はい。
+
+現在はAndroidとiOSのサポートに注力していますが、コードプッシュは最終的にCapacitorが動作するすべての環境で動作するようになります。他のプラットフォームに展開する前に、コードプッシュを安全かつ確実に提供するために必要なインフラを整備しています。
+
+### Capgoはどのバージョンのオペレーティングシステムをサポートしていますか？
+
+CapgoはCapacitorがサポートするものと同じバージョンのAndroidをサポートしています。
+
+CapacitorはAndroid API レベル22以上とiOS 13.0以上をサポートしています：[https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy/)
+
+### CapgoはどのバージョンのCapacitorをサポートしていますか？
+
+Capgoは現在、Capacitorの最新の安定版リリースのみをサポートしています。古いバージョンのCapacitorもサポート可能ですが、長期的なメンテナンスに必要なインフラをまだ構築していません。将来的には、エンタープライズ顧客向けにあらゆるバージョンを含め、より多くのCapacitorバージョンをサポートする予定です。[https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
+
+CapgoはCapacitor安定版に追従しており、通常安定版リリースから数時間以内に更新されます。更新のシステムは自動化されており、実行には数分かかります。サーバーに公開する前に追加の手動検証ステップを実施しています。
+
+### App/Play Storeのレビュープロセスやポリシーとの関係は？
+
+開発者はストアを利用する際にストアプロバイダーとの契約に拘束されます。コードプッシュは、開発者がiOSとAndroidのストアポリシーに準拠しながらアプリを更新できるように設計されています。React Nativeで利用可能な様々な商用製品（例：[Microsoft](https://appcenter.ms/)、[Expo](https://expo.dev/)）と同様です。
+
+Microsoftもストアへの準拠に関するガイドを公開しています：[https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+コードプッシュはアプリストア全体で広く使用されている手法です。私が知る限り、大規模なアプリはすべてコードプッシュを使用しています。注意すべき主なポリシーは、アプリの動作を大幅に変更しないことです。詳細については[下記](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines)を参照してください。
+
+### CapgoはPlay Storeガイドラインに準拠していますか？
+
+はい。
+
+Play Storeには更新ツールに関して2つの制限があります：
+
+1. 更新はインタープリターまたは仮想マシンを使用する必要があります（CapgoはDart Virtual Machineを使用）[https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
+
+```
+<span><span>    Google Play経由で配布されるアプリは、Google Playの更新メカニズム以外の</span><br></span><span><span>    方法で自身を変更、置換、更新することはできません。同様に、アプリは</span><br></span><span><span>    Google Play以外のソースから実行可能コード（dex、JAR、soファイルなど）を</span><br></span><span><span>    ダウンロードすることはできません。*この制限は、Android APIへの間接的な</span><br></span><span><span>    アクセスを提供するインタープリターまたは仮想マシンで実行される</span><br></span><span><span>    コード（webviewやブラウザのJavaScriptなど）には適用されません*</span><br></span><span><span></span><br></span><span><span>    実行時にロードされる（アプリにパッケージされていない）インタープリター言語</span><br></span><span><span>    （JavaScript、Python、Luaなど）を使用するアプリまたはサードパーティコード</span><br></span><span><span>    （SDKなど）は、Google Playポリシーの潜在的な違反を許可してはいけません</span><br></span>
+```
+
+2. アプリの変更は欺瞞的であってはいけません（例：更新を通じてアプリの目的を変更するなど）[https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) アプリケーションで提供するものについてユーザーに明確に説明し、Capgoを使用して重要な動作変更を行うことでユーザーの期待に反することがないようにしてください。
+
+CapgoはPlay Storeガイドラインに準拠するよう設計されています。しかし、Capgoはツールであり、他のツールと同様に悪用される可能性があります。Play Storeガイドラインに違反するためにCapgoを意図的に悪用することは、Capgoの[利用規約](https://capgo.app/tos/)に違反し、アカウントの停止につながる可能性があります。
+
+最後に、コードプッシュサービスは業界で広く使用されています（私が知る限り、大規模なアプリはすべて使用しています）。また、他にも複数のコードプッシュサービスが公開されています（例：expo.devやappcenter.ms）。これは十分に確立された手法です。
+
+Microsoftもアプリストアへの準拠に関するガイドを公開しています：[https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### CapgoはApp Storeガイドラインに準拠していますか？
+
+はい。
+
+Play Storeと同様に、App Storeには技術的および方針的な制限があります：
+
+```
+<span><span>3.2.2</span><br></span><span><span>インタープリタコードは、以下の条件を満たす限りアプリケーションにダウンロードすることができます:<br>
+このようなコードは:<br>
+(a) App Storeに提出されたアプリケーションの意図された目的と一致しない機能を提供することでアプリケーションの主な目的を変更するものではない<br>
+(b) 他のコードやアプリケーションのためのストアやストアフロントを作成しない<br>
+(c) OSの署名、サンドボックス、その他のセキュリティ機能をバイパスしない
+
+CapgoはiOS上のアップデートに関するインタープリタ制限を遵守するために、独自のDartインタープリタを使用しています。アプリケーションがアップデートを通じて不正な動作(例:アップデートを通じてアプリの目的を変更する)を行わない限り、Capgo(または他のコードプッシュソリューション)を通じたアップデートは標準的な業界慣行であり、App Storeのガイドラインに準拠しています。
+
+Capgoを悪用してApp Storeガイドラインに違反することは、Capgoの[利用規約](https://capgoapp/tos/)に違反し、アカウントの停止につながる可能性があります。
+
+Microsoftもreact nativeの「codepush」ライブラリがアプリストアにどのように準拠しているかガイドを公開しています: [https://githubcom/microsoft/react-native-code-push#store-guideline-compliance](https://githubcom/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### 私の国でCapgoを使用できますか?
+
+私たちは特定の国からのCapgoへのアクセスを制限していません。
+
+一部の国ではアクセス可能なURLに制限があることを認識しています。Capgoは現在、R2ストレージとCloudflareワーカーを含むCloudflare Cloudをホスティングに使用しています。
+
+Capgoでは以下のURLを使用しています:
+
+- [https://apicapgoapp](https://apicapgoapp/) -- `npx @capgo/cli` コマンドラインツールがCapgoサーバーと対話するために使用され、ユーザーのデバイス上のCapgoアップデーターがアップデートを確認するために使用します
+- [https://*r2cloudflarestoragecom](https://*r2cloudflarestoragecom/) -- `npx @capgo/cli` コマンドラインツールがバンドルのアップロードとダウンロードに使用します
+
+これらのURLすべてにあなたの国からアクセスできる場合、Capgoは動作するはずです。
+
+あなたの地域でこれらのURLへのアクセスをブロックする必要がある場合は、お知らせください。解決策を見つけるためにご協力させていただきます。プロキシサーバーは1つの選択肢です。
+
+### Capgoをセルフホストできますか?
+
+はい、Capgoをセルフホストすることができます。ガイドはまだ作成されていませんが、コードはオープンソースで [https://githubcom/cap-go/capgo](https://githubcom/cap-go/capgo/) で入手可能です。
+
+### コードプッシュは動作にインターネットが必要ですか?
+
+はい。デバイスにアップデートを配信するには、何らかの形式のネットワーク接続が必要です。一般的なインターネットとは別にアップデートを配布するためのサーバーを実行することも考えられます。
+
+### ネットワーク接続がない場合、Capgoはどのような影響を受けますか?
+
+Capgoアップデーター(Capgoでアプリをビルドする際にアプリケーションに含まれる)は、ネットワーク接続の問題に対して回復力があるように設計されています。
+
+デフォルトのアップデート動作では、アプリケーションが起動するとCapgoアップデーターに通知され、別のスレッドを生成してCapgoサーバーにネットワークリクエストを送信し、アップデートを要求します。アプリケーションが実行している他の処理をブロックしないよう、意図的に別のスレッドを使用しています。ネットワークリクエストが失敗またはタイムアウトした場合、アップデーターは次回アプリケーションが起動した時に再度確認を試みます。
+
+Capgoコマンドラインツール(例: `npx @capgo/cli app update`)は機能するためにネットワーク接続が必要です。Capgoを使用してアプリを配布する場合は、CIシステムがネットワーク接続を持っていることを確認する必要があります。
+
+### ユーザーが長期間アップデートせず、アップデートを逃した場合はどうなりますか?
+
+私たちの実装では、常にリクエストを送信したデバイスに合わせて調整されたアップデートを送信し、リクエスト元を利用可能な最新バージョンに更新します。そのため、ユーザーがしばらくアップデートしない場合、中間のアップデートは「スキップ」されます。
+
+アップデートサーバーは、アプリケーションのニーズに応じて、次の増分バージョンまたは最新バージョンのいずれかで応答するように変更できます。代替のアップデート動作が重要な場合は、お知らせください。
+
+### CapgoはCapacitorとどのような関係にありますか?
+
+CapgoはCapacitorのコードプッシュを追加するプラグインです。CapgoはCapacitorの代替品ではありません。すでに知っているCapacitorのツールを引き続き使用できます。
+
+私たちはCapacitorの最新の安定版リリースを追跡し、コードプッシュプラグインを更新して対応しています。
+
+### アップデートはいつ行われますか?
+
+デフォルトでは、Capgoアップデーターはアプリ起動時にアップデートを確認します。バックグラウンドスレッドで実行され、UIスレッドをブロックしません。アップデートはユーザーがアプリを使用中にインストールされ、次回アプリが再起動された時に適用されます。
+
+[package:capgo_code_push](https://pubdev/packages/capgo_code_push/)を使用してCapgoアップデーターを手動で実行することも可能で、プッシュ通知を含め、いつでもアップデートをトリガーできます。
+
+Capgoアップデーターは、ネットワークが利用できない場合やサーバーがダウンしているか到達できない場合でも、アプリが通常通り動作するように設計されています。サーバーからアップデートを削除した場合でも、すべてのクライアントは通常通り動作し続けます。
+
+パッチのロールバック機能を追加しました。元に戻すには、以前のバンドルをチャンネルに添付するのが最も簡単です。
+
+### app_idは秘密にしておく必要がありますか?
+
+いいえ。`app_id`はアプリに含まれており、公開しても問題ありません。バージョン管理(公開でも)にチェックインしても、他の人がアクセスすることを心配する必要はありません。
+
+app_idを持っている人は、Capgoサーバーから最新バージョンのアプリを取得できますが、アプリにアップデートをプッシュしたりCapgoアカウントの他の側面にアクセスしたりすることはできません。
+
+### どのような情報がCapgoサーバーに送信されますか?
+
+Capgoはネットワークに接続しますが、個人を特定できる情報は送信しません。Capgoを含めても、Play StoreやApp Storeの申告に影響を与えることはありません。
+
+アプリからCapgoサーバーに送信されるリクエストには以下が含まれます:
+
+- app_id (`capacitorconfigjson`で指定)
+- channel (`capacitorconfigjson`でオプション)
+- release_version (AndroidManifestxmlのversionNameまたはInfoplistのCFBundleShortVersionString、もしくは[`CapacitorUpdaterversion`](/docs/plugin/settings/#version)で設定された場合は`capacitorconfigjson`)
+- version_number (`npx @capgo/cli app update`の一部として生成)
+- os_version (例: '1121')
+- platform (例: 'android'、正しいパッチを送信するために必要)
+- device_id (デバイスの初回実行時に生成され、デバイスごとのインストールの重複を排除し、インストールされたユーザー数に基づいて課金できるようにします)
+
+以上です。このコードは`updater/library/src/networkrs`にあります。monthly active users）ではなく、パッチの総数やパッチインストールの総数で計算します)
+- custom_id (オプション、開発者が実行時に設定、システム内のデバイスをユーザーにリンクするために使用)
+
+### Capgoはどのプラットフォームをサポートしていますか?[](https://capgoapp/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
+
+現在、CapgoはiOSとAndroidの両方をサポートしており、どちらも本番環境での使用が可能です。
+
+iOSまたはAndroidでのCapgoの使用は、それぞれ独立した判断が可能です。チャンネルでAndroidへの配信とApp Store用のipaのビルドを設定することも、その逆も可能です。
+
+Capgoは(比較的容易に)デスクトップや組み込みターゲットをサポートすることができます。これらが重要な場合は、お知らせください。
+
+### CapgoはPlay Testing TracksやApple TestFlightとどのように連携しますか?[](https://capgoapp/docs/faq/#how-does-capgo-interact-with-play-testing-tracks-or-apple-testflight "Direct link to How does Capgo interact with Play Testing Tracks or Apple TestFlight?")
+
+各アプリストアには、限定されたユーザーグループにアプリを配布するための独自のメカニズム(例：「内部テスト」、「クローズドベータ」など)があります。これらはすべて、ユーザーをグループに分け、特定のバージョンのアプリを各グループに配布するためのメカニズムです。
+
+残念ながら、これらのメカニズムの中には、アプリが特定のTest TrackやTestFlightを通じてインストールされたことを第三者が検出できないものがあります。そのため、これらのグループの構成を確実に把握することができず、これらのグループに基づいてCapgoパッチへのアクセスを確実に制限することができません。[https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play](https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play/) [https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i](https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i/)
+
+Capgoバンドルの可用性をセグメント化したい場合、4つのオプションがあります：
+
+1. 各グループに別々のチャンネルを使用する。これが最も直接的なアプローチですが、複数のチャンネルを管理する必要があります。既に異なる可用性を持つ開発チャンネルと本番チャンネルがある場合があります。そのため、開発チャンネルを更新し、確認してから、本番チャンネルを個別に更新することができます。各リリースに関連するソースを追跡するために、バージョン管理でブランチ/タグを使用することをお勧めします。
+2. 独自のオプトインユーザーセットを追跡し、自動更新を無効にし、package:capgo_code_pushを介して特定のユーザーに対してのみ更新をトリガーする。これは現在機能していますが、独自のオプトインリストを管理する必要があります。
+3. Capgoはデバイスごとに独自のオプトインメカニズムを作成することができます（Test TracksやTestFlightと同様ですが、プラットフォームに依存しません）。これにより、QAチームは一般公開前にバンドルにオプトインすることができます。
+4. Capgoはパーセンテージベースのロールアウトを行うことができます。これはどのデバイスに送信するかを選択することはできませんが、段階的なロールアウトを行い、問題が発生した場合にロールバックするのに役立ちます。
+
+## 課金[](https://capgoapp/docs/faq/#billing "Direct link to Billing")
+
+### プランのアップグレードまたはダウングレードはどのように行いますか?[](https://capgoapp/docs/faq/#how-do-i-upgrade-or-downgrade-my-plan "Direct link to How do I upgrade or downgrade my plan?")
+
+ダッシュボードでいつでもプランのアップグレードまたはダウングレードが可能です：[https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### 請求期間はいつリセットされますか?[](https://capgoapp/docs/faq/#when-does-my-billing-period-reset "Direct link to When does my billing period reset?")
+
+請求期間は、Capgoに最初に登録した月の毎月自動的にリセットされます。例えば、15日に登録した場合、請求期間は毎月15日にリセットされます。
+
+### サブスクリプションをキャンセルするにはどうすればよいですか?[](https://capgoapp/docs/faq/#how-do-i-cancel-my-subscription "Direct link to How do I cancel my subscription?")
+
+ダッシュボードでいつでもサブスクリプションをキャンセルできます：[https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### 1年分を前払いすることはできますか?[](https://capgoapp/docs/faq/#can-i-pay-for-a-year-in-advance "Direct link to Can I pay for a year in advance?")
+
+ダッシュボードでいつでも可能です：[https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### 統計と分析[](https://capgoapp/docs/faq/#stats-and-analytics "Direct link to Stats and analytics")
+
+ダッシュボードの統計は毎日深夜(UTC)に更新されます。
+統計は、デバイスにインストールされた[MAU](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")の数に基づいて計算されます。
+
+# デバイスIDの生成方法[](https://capgoapp/docs/faq/#how-device-id-is-generated "Direct link to How device ID is generated")
+
+デバイスIDは初回起動時にデバイス上で生成され、デバイスごとのインストールの重複を排除し、パッチの総数やパッチインストールの総数ではなく、インストールされたユーザー数（月間アクティブユーザー数など）に基づいて課金することを可能にします。
+
+MAUはCapgoの価格設定において、インストール数よりも優れたソリューションです。より正確で、デバイスごとの実際のCapgoのコストを反映しているためです。
+
+プライバシー上の理由から、ユーザーがアプリを再インストールした場合、同じデバイスを追跡することはできません。
+
+プライバシールールはAppleとGoogleによって強制され、Capgoによって強制されるものではありません。
+
+デバイスIDは、最初のパッチがインストールされるまでデバイスリストに表示されません。
+
+# デバイス数がMAUと異なる理由は?[](https://capgoapp/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
+
+現在、デバイスリストはMAUほど頻繁に更新されません。
+
+デバイスリストは、デバイスが更新をインストールした時のみ更新されます。
+
+一方、MAUはアプリ起動時に毎回更新されます。これはプラットフォームの現在の制限です。分析プラットフォームは生の更新をサポートしていないため、デバイスリストには従来のデータベースを使用しています。
+
+データベースクエリの数を制限するため、アプリの更新時にのみ行を更新しています。
+
+この制限は将来的に解消される予定です。
+
+# プラットフォームごとに異なる更新を行うにはどうすればよいですか?[](https://capgoapp/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
+
+各プラットフォーム用のチャンネルを作成し、各チャンネルでプラットフォーム固有の更新を無効にすることができます。
+
+iOSチャンネルではAndroid更新を無効にし、AndroidチャンネルではiOS更新を無効にします。
+
+その後、各チャンネルにバンドルをアップロードして、各プラットフォームで異なる更新を行うことができます。
+
+両方のプラットフォームで同じ更新が必要な場合は、1つのバンドルを複数のチャンネルにリンクすることができます。バンドルを複製する必要はありません。

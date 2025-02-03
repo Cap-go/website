@@ -1,0 +1,87 @@
+---
+title: 수동 업데이트
+description: アップデートの管理方法
+sidebar:
+  order: 5
+locale: ja
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Capgo cloudで手動モードを使用して、更新の適用タイミングを自分で管理したい場合
+
+必要な手順は、Getting Startedで説明されているようにアカウントを設定することです
+
+<LinkCard
+	title="Getting Started"
+	href="/docs/plugin/cloud-mode/getting-started"
+/>
+
+#### 設定
+```capacitorconfig.json```で自動更新を無効にします
+
+```tsx
+// capacitorconfig.json
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false
+		}
+	}
+}
+```
+
+その後、更新を自分で処理するロジックを追加します\
+以下は実装例です：
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import type { BundleInfo } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+
+CapacitorUpdater.notifyAppReady()
+
+let data: BundleInfo | null = null
+
+App.addListener('appStateChange', async (state: any) => {
+  console.log('appStateChange', state)
+  if (state.isActive) {
+    console.log('getLatest')
+    // ダウンロードの失敗を防ぐため、アプリがアクティブな時間中にダウンロードを実行します
+    const latest = await CapacitorUpdater.getLatest()
+    console.log('latest', latest)
+    if (latest.url) {
+      data = await CapacitorUpdater.download({
+        url: latest.url,
+        version: latest.version,
+      })
+      console.log('download', data)
+    }
+  }
+  if (!state.isActive && data) {
+    console.log('set')
+    // ユーザーがアプリを離れたとき、または任意のタイミングで切り替えを実行します
+    SplashScreen.show()
+    try {
+      await CapacitorUpdater.set({ id: data.id })
+    }
+    catch (err) {
+      console.log(err)
+      SplashScreen.hide() // セットが失敗した場合、そうでなければ新しいアプリが非表示にする必要があります
+    }
+  }
+})
+```
+
+プラグインで利用可能なすべてのAPIのドキュメント：
+
+<LinkCard
+	title="Methods"
+	href="/docs/plugin/api/"
+/>
+
+ユーザーがチャンネルを購読して異なるバージョンを試せるようにするユースケースがあります：\
+[https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

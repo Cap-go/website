@@ -1,0 +1,58 @@
+---
+title: Usando el actualizador de Capacitor con capgo auto-alojado
+description: Capacitor アップデーターを自己ホストされた capgo で使用する方法
+sidebar:
+  order: 4
+locale: ja
+---
+
+## このチュートリアルの内容は?
+
+このチュートリアルでは、自己ホスト型capgoを使用した開発環境でcapacitor updaterを使用する方法を説明します。
+
+## 必要条件
+
+1. [Capgoをクローン](https://githubcom/Cap-go/capgo)
+
+## はじめに
+
+自己ホスト型capgoでcapacitor updaterを使用するには、アプリディレクトリの`capacitorconfigts`を編集して以下のように設定します:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'comdemoapp',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      statsUrl: "http://localhost:54321/functions/v1/stats",
+      channelUrl: "http://localhost:54321/functions/v1/channel_self",
+      updateUrl: "http://localhost:54321/functions/v1/updates"
+    },
+  },
+};
+```
+
+これにより開発環境でローカルのcapgoを使用できるようになりますが、デフォルトではこれだけでは不十分です。
+
+Androidではデフォルトでローカル環境のSSLが無効になっているため、[プレーンテキスト通信](https://developerandroidcom/topic/security/risks/cleartext)を有効にする必要があります。
+これは[AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml)を変更し、`application`タグに`android:usesCleartextTraffic="true"`を追加することで実現できます。
+この変更の完全な例は[こちら](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)で確認できます。
+
+デフォルトでAndroidは`http`を許可しないため、capgoは[ここ](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)でhttpのチェックを実装しています。
+このコードは常にここにあるとは限りませんが、現時点ではアップデートを動作させるためにこの行の変更が必要です。
+この行は以下のようになるはずです:
+```ts
+    if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
+```
+
+:::danger
+⚠️ `supabase/functions/updates/indexts`をリモートリポジトリにコミットしないでください。\
+このコードは[意図的に](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)ここにあります。
+:::
+
+Androidアプリの接続を妨げる問題が発生する可能性もあります。エッジ関数へのリクエストが送信されていないのが確認できる場合は、以下を実行してください:
+```bash
+adb reverse tcp:54321 tcp:54321
+```

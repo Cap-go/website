@@ -1,0 +1,116 @@
+---
+title: Información general
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: es
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Utiliza la función de Actualizaciones en Vivo de Capgo para actualizar los paquetes JavaScript de tu aplicación de forma remota y en tiempo real. Envía actualizaciones JS directamente a tus usuarios sin pasar por el proceso de revisión de la tienda de aplicaciones para corregir errores y distribuir nuevas funcionalidades instantáneamente.
+
+<Aside>
+
+Las Actualizaciones en Vivo están limitadas a cambios en el paquete JavaScript. Si necesitas actualizar código nativo, como agregar o eliminar un plugin o cambiar la configuración del proyecto nativo, deberás enviar una nueva compilación binaria nativa a las tiendas de aplicaciones.
+
+</Aside>
+
+## Cómo funcionan las Actualizaciones en Vivo
+
+El sistema de Actualización en Vivo de Capgo tiene dos componentes clave:
+
+1. El SDK de Capgo, que instalas en tu aplicación. El SDK verifica las actualizaciones disponibles y las descarga en segundo plano.
+
+2. Canales, que te permiten dirigir actualizaciones a grupos específicos de usuarios. Puedes usar canales para gestionar diferentes pistas de lanzamiento, como `Production`, `Staging` y `Dev`.
+
+Cuando subes un nuevo paquete JS a Capgo y lo asignas a un canal, el SDK de Capgo en las aplicaciones configuradas para ese canal detectará la actualización y la descargará. La próxima vez que la aplicación se reinicie, se cargará el nuevo paquete.
+
+## Primeros pasos
+
+Para comenzar a usar las Actualizaciones en Vivo, sigue estos pasos:
+
+<Steps>
+
+1. Completa el [Inicio rápido de Capgo](/docs/getting-started/quickstart) para configurar tu aplicación en Capgo e instalar el SDK de Capgo.
+
+2. En el código de tu aplicación, llama a `CapacitorUpdater.notifyAppReady()` después de que tu aplicación haya terminado de inicializarse. Esto le indica al SDK de Capgo que tu aplicación está lista para recibir actualizaciones.
+
+3. Construye tu paquete JS y súbelo a Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4. Abre tu aplicación y espera a que se descargue la actualización. Puedes verificar el estado con:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Una vez que se descargue la actualización, cierra y vuelve a abrir tu aplicación para cargar el nuevo paquete.
+
+</Steps>
+
+Consulta la guía de [Implementación de Actualizaciones en Vivo](/docs/getting-started/deploy) para más detalles.
+
+## La CLI de Capgo
+
+La CLI de Capgo es una herramienta poderosa que permite a los desarrolladores interactuar con los servicios de Capgo desde sus propios pipelines de CI/CD. Con la CLI, tienes control granular sobre cuándo se producen y despliegan las compilaciones, permitiéndote integrar Capgo en tus flujos de trabajo empresariales existentes.
+
+### ¿Para qué sirve la CLI de Capgo?
+
+La CLI de Capgo está diseñada para desarrolladores y equipos que necesitan más control y flexibilidad en sus flujos de trabajo de actualización en vivo. Al usar la CLI en tus pipelines de CI/CD, puedes:
+
+- Decidir exactamente cuándo construir y desplegar actualizaciones, en lugar de depender de la automatización integrada de Capgo
+- Insertar tus propios procesos, como firma de código, pruebas de QA o aprobaciones de gerentes, entre los pasos de construcción y despliegue
+- Integrar Capgo en tus herramientas y flujos de trabajo de DevOps existentes
+
+### Autenticación
+
+Para usar la CLI de Capgo, necesitarás autenticarte con tu clave API. Puedes generar una clave API en la configuración de tu cuenta de Capgo.
+
+Para iniciar sesión y almacenar de forma segura tu clave API, ejecuta:
+
+```shell
+npx @capgo/cli@latest login [API_KEY]
+```
+
+Este comando se guardará para uso futuro. No necesitarás proporcionar tu clave API con cada comando después de iniciar sesión.
+
+### Diferencias clave con otras herramientas CLI
+
+Si estás familiarizado con otras herramientas CLI de actualización en vivo, hay algunos puntos clave a tener en cuenta sobre la CLI de Capgo:
+
+- Capgo utiliza una única CLI tanto para desarrollo como para casos de uso de CI/CD, ya que Capgo está enfocado únicamente en el conjunto de características de actualización en vivo
+
+- La CLI de Capgo no requiere un paso de instalación separado. Viene incluida con el paquete `@capgo/cli` y se puede ejecutar directamente usando `npx`
+
+- La CLI de Capgo está diseñada específicamente para el flujo de trabajo de actualización en vivo, por lo que puede no incluir algunas características o comandos que se encuentran en herramientas CLI de propósito más general
+
+## Siguientes pasos
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Canales" icon="bars">
+      Aprende a usar canales para gestionar diferentes pistas de lanzamiento y dirigir actualizaciones a usuarios específicos
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Reversiones" icon="left-arrow">
+      Descubre cómo revertir a una versión anterior del paquete JS si una actualización causa problemas
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Comportamiento de actualización" icon="setting">
+      Personaliza cómo y cuándo se descargan y aplican las actualizaciones en tu aplicación
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="Actualizaciones rápidas" icon="starlight">
+      Aprende a usar actualizaciones rápidas para acelerar el proceso de actualización
+    </Card>
+  </a>
+</CardGrid>

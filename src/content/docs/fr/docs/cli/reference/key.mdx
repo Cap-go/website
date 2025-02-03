@@ -1,0 +1,37 @@
+---
+title: clé
+sidebar_label: key
+sidebar:
+  order: 7
+locale: fr
+---
+
+La commande `key` vous permet de gérer les clés de signature de votre application
+
+### save
+
+`npx @capgo/cli key save`
+
+Sauvegarde une clé de chiffrement encodée en base64 dans la configuration Capacitor (utile pour l'intégration continue)
+
+Options :
+
+- `-f, --force` : Force la génération d'une nouvelle clé
+- `--key` : Chemin vers le fichier de clé à sauvegarder dans la configuration Capacitor
+- `--key-data` : Données de clé à sauvegarder directement dans la configuration Capacitor
+
+### create
+
+`npx @capgo/cli key create`
+
+Crée une nouvelle clé de chiffrement
+
+Options :
+
+- `-f, --force` : Force la génération d'une nouvelle clé
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+Supprime l'ancienne clé de chiffrement

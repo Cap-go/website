@@ -1,0 +1,140 @@
+---
+title: Risoluzione dei problemi
+sidebar:
+  order: 5
+next: false
+prev: false
+locale: it
+---
+
+Ecco alcuni problemi comuni che potresti incontrare durante l'utilizzo di Capgo e come risolverli
+
+### Errori di caricamento
+
+Se il caricamento del bundle fallisce, controlla:
+- L'ID della tua app in `capacitorconfigts` corrisponde alla tua app nel dashboard di Capgo
+- Stai eseguendo il comando di caricamento dalla root del tuo progetto Capacitor
+- I tuoi asset web sono compilati e aggiornati
+
+#### Opzioni avanzate di caricamento
+
+La CLI di Capgo fornisce alcuni flag aggiuntivi per aiutare con problemi comuni di caricamento:
+
+- `--tus`: Usa il [protocollo di caricamento riprendibile tus](https://tusio/) per caricamenti più affidabili di bundle grandi o con connessioni di rete scadenti. Se il tuo bundle supera i 10MB o hai una connessione instabile, considera di usare `--tus`:
+  ```shell
+  npx @capgo/cli@latest upload --tus
+  ```
+
+- `--package-json` e `--node-modules`: Indica a Capgo dove trovare il tuo `packagejson` root e `node_modules` se la tua app usa una struttura non standard come un monorepo o workspace npm. Passa il percorso al `packagejson` root e il percorso `--node_modules`:
+  ```shell
+  npx @capgo/cli@latest upload --package-json=path/to/packagejson --node_modules=path/to/node_modules
+  ```
+  Capgo ha bisogno di queste informazioni per impacchettare correttamente le dipendenze della tua app
+
+Puoi combinare questi flag con altre opzioni come `--channel` secondo necessità. Vedi la [documentazione CLI di Capgo](/docs/cli) per i dettagli completi sulle opzioni di caricamento disponibili
+
+Se hai ancora problemi con i caricamenti, contatta il [supporto Capgo](mailto:support@capgoapp) per ulteriore assistenza
+
+### Debug degli aggiornamenti
+
+Se riscontri problemi con gli aggiornamenti live, il comando debug di Capgo è uno strumento utile per il troubleshooting. Per usarlo:
+
+1 Esegui il seguente comando nella directory del tuo progetto:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2 Avvia la tua app su un dispositivo o emulatore ed esegui l'azione che dovrebbe attivare un aggiornamento (es. riaprire l'app dopo aver caricato un nuovo bundle)
+
+3 Osserva l'output del comando debug. Registrerà informazioni sul processo di aggiornamento, tra cui:
+   - Quando l'app controlla la presenza di un aggiornamento
+   - Se viene trovato un aggiornamento e quale versione è
+   - Progresso di download e installazione dell'aggiornamento
+   - Eventuali errori che si verificano durante il processo di aggiornamento
+
+4 Usa i log di debug per identificare dove si verifica il problema. Per esempio:
+   - Se non viene trovato alcun aggiornamento, ricontrolla che il bundle sia stato caricato con successo e che l'app sia configurata per utilizzare il canale corretto
+   - Se l'aggiornamento viene scaricato ma non installato, assicurati di aver chiamato `CapacitorUpdater.notifyAppReady()` e che l'app sia stata completamente chiusa e riaperta
+   - Se vedi un messaggio di errore, cerca quell'errore specifico nella documentazione Capgo o contatta il supporto per aiuto
+
+Il comando debug è particolarmente utile per identificare problemi con il processo di download e installazione dell'aggiornamento. Se i log mostrano che la versione di aggiornamento prevista è stata trovata ma non applicata definitivamente, concentra il troubleshooting sui passaggi successivi al download.
+
+### Debug con Log Nativi
+
+Oltre al comando debug di Capgo, i log nativi su Android e iOS possono fornire preziose informazioni di troubleshooting, specialmente per problemi sul lato nativo del processo di aggiornamento
+
+#### Log Android
+
+Per accedere ai log Android:
+
+1 Connetti il tuo dispositivo o avvia il tuo emulatore
+2 Apri Android Studio e seleziona "View > Tool Windows > Logcat"
+3 Nella finestra Logcat, filtra i log solo per il processo della tua app selezionandolo dal menu a tendina in alto
+4 Cerca eventuali righe che includono `Capgo` per trovare i log SDK
+
+In alternativa, puoi usare il comando `adb logcat` e grep per `Capgo` per filtrare i log
+
+L'SDK Capgo registrerà eventi chiave durante il processo di aggiornamento, come:
+- Quando viene avviato un controllo aggiornamenti
+- Se viene trovato un aggiornamento e quale versione è
+- Quando inizia e termina il download dell'aggiornamento
+- Quando viene attivata l'installazione dell'aggiornamento
+- Eventuali errori che si verificano durante i passaggi di aggiornamento nativi
+
+Problemi specifici di Android che potresti vedere nei log includono:
+- Problemi di connettività di rete che impediscono il download dell'aggiornamento
+- Errori di permessi file durante il salvataggio o la lettura del bundle di aggiornamento
+- Spazio di archiviazione insufficiente per il bundle di aggiornamento
+- Impossibilità di riavviare l'app dopo l'installazione dell'aggiornamento
+
+#### Log iOS
+
+Per accedere ai log iOS:
+
+1 Connetti il tuo dispositivo o avvia il simulatore
+2 Apri Xcode e vai su "Window > Devices and Simulators"
+3 Seleziona il tuo dispositivo e clicca su "Open Console"
+4 Nell'output della console, cerca eventuali righe che includono `Capgo` per trovare i log SDK
+
+Puoi anche usare il comando `log stream` nel terminale e grep per `Capgo` per filtrare i log
+
+Similmente ad Android, l'SDK Capgo registrerà eventi chiave lato iOS:
+- Inizio e risultato del controllo aggiornamenti
+- Inizio, progresso e completamento del download
+- Trigger e risultato dell'installazione
+- Eventuali errori durante il processo di aggiornamento nativo
+
+Problemi specifici di iOS che potresti identificare nei log includono:
+- Problemi con certificati SSL durante il download dell'aggiornamento
+- App transport security che blocca il download dell'aggiornamento
+- Spazio di archiviazione insufficiente per il bundle di aggiornamento
+- Impossibilità di estrarre o applicare correttamente il bundle di aggiornamento
+
+Su entrambe le piattaforme, i log nativi forniscono una vista di livello inferiore nel processo di aggiornamento, con più dettagli sull'implementazione nativa. Sono particolarmente utili per identificare problemi che si verificano al di fuori del layer JavaScript di Capgo
+
+Quando si fa troubleshooting di un problema complesso di aggiornamento live, è una buona idea catturare sia i log di debug Capgo che i log nativi per avere un quadro completo di ciò che sta accadendo. I due log insieme ti daranno la migliore possibilità di identificare e risolvere il problema
+
+### Aggiornamenti non applicati
+
+Se hai caricato un bundle ma non vedi i cambiamenti sul tuo dispositivo:
+- Assicurati di aver chiamato `CapacitorUpdater.notifyAppReady()` nel codice della tua app come mostrato nel [quickstart](/docs/getting-started/quickstart)
+- Controlla che il tuo dispositivo sia connesso a internet e che i log di debug Capgo mostrino che l'aggiornamento è stato scaricato
+- Prova a chiudere completamente e riaprire l'app, poiché gli aggiornamenti vengono applicati solo all'avvio
+- Cerca eventuali errori nei log nativi che potrebbero indicare un problema nell'applicazione dell'aggiornamento
+
+Fai riferimento alla guida [deploying live updates](/docs/getting-started/deploy) per maggiori dettagli sul processo di aggiornamento. Se sei ancora bloccato, usa il comando `npx @capgo/cli@latest app debug` e i log nativi per avere più visibilità su ciò che sta accadendo
+
+## Installazione SDK
+
+Se hai problemi con l'installazione dell'SDK Capgo, assicurati che:
+- La tua app stia utilizzando una versione supportata di Capacitor (4.0 o più recente)
+- Hai seguito i passaggi del [quickstart](/docs/getting-started/quickstart) in ordine, inclusa la sincronizzazione della tua app dopo l'installazione dell'SDK
+
+## Integrazione CI/CD
+
+Per problemi con l'attivazione dei caricamenti Capgo dalla tua pipeline CI/CD:
+- Ricontrolla che il tuo token di autenticazione Capgo sia configurato correttamente
+- Assicurati di eseguire il comando di caricamento dopo che i tuoi asset web sono stati compilati
+- Controlla che il comando di caricamento stia usando il nome del canale corretto per il tuo ambiente target
+
+Vedi la documentazione [CI/CD integration](/docs/cicd-integration) per altri suggerimenti di troubleshooting. Puoi anche usare il comando `npx @capgo/cli@latest app debug` per confermare se i tuoi aggiornamenti attivati da CI/CD vengono ricevuti dall'app

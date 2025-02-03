@@ -1,0 +1,67 @@
+---
+title: Resumen
+description: Manual detallado de comandos de Capgo CLI
+sidebar:
+  order: 1
+locale: es
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+La CLI de Capgo proporciona un conjunto de comandos para gestionar tus aplicaciones y despliegues de Capgo. Esta referencia proporciona información detallada sobre cada comando disponible, incluyendo sus opciones y ejemplos de uso.
+
+## Comandos
+
+<CardGrid stagger>
+  <a href="/init/">
+    <Card title="init" icon="rocket">
+      Inicializar una nueva aplicación Capgo
+    </Card>
+  </a>
+
+  <a href="/login/">
+    <Card title="login" icon="approve-check">
+      Autenticarse con el servicio Capgo
+    </Card>
+  </a>
+
+  <a href="/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      Verificar tu configuración de Capgo en busca de posibles problemas
+    </Card>
+  </a>
+
+  <a href="/app/">
+    <Card title="app" icon="seti:default">
+      Gestionar tus aplicaciones Capgo
+    </Card>
+  </a>
+
+  <a href="/bundle/">
+    <Card title="bundle" icon="seti:html">
+      Gestionar tus paquetes de aplicación
+    </Card>
+  </a>
+
+  <a href="/channel/">
+    <Card title="channel" icon="seti:git">
+      Gestionar tus canales de lanzamiento
+    </Card>
+  </a>
+
+  <a href="/key/">
+    <Card title="key" icon="seti:lock">
+      Gestionar tus claves de firma de aplicación
+    </Card>
+  </a>
+</CardGrid>
+
+## Integración CI
+
+Para automatizar tu trabajo, recomendamos usar GitHub Actions para enviar tus actualizaciones a Capgo. Consulta nuestro [tutorial de GitHub Actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions/) para más información.
+
+No olvides configurar las variables de entorno de tu CI con tu clave API de Capgo.
+
+## Aplicación Demo
+
+Para un ejemplo completo de una aplicación Capgo con integración CI, consulta nuestra [aplicación demo en GitHub](https://githubcom/Cap-go/demo-app/)

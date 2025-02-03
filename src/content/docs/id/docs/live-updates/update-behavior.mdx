@@ -1,0 +1,154 @@
+---
+title: Perilaku Pembaruan
+sidebar:
+  order: 3
+locale: id
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Ketika Anda merilis pembaruan untuk aplikasi Capgo, Anda mungkin ingin pengguna menerima pembaruan tersebut secepat mungkin. Tetapi Anda juga tidak ingin mengganggu pengalaman mereka dengan memaksa mereka menunggu unduhan atau memulai ulang aplikasi di tengah sesi.
+
+Perilaku pembaruan Capgo dirancang untuk menyeimbangkan antara memberikan pembaruan dengan cepat dan meminimalkan gangguan bagi pengguna Anda.
+
+## Alur Pembaruan Default
+
+Secara default, beginilah cara Capgo menangani pembaruan aplikasi:
+
+<Steps>
+
+1. Saat aplikasi diluncurkan, plugin Capgo memeriksa apakah ada pembaruan baru yang tersedia
+
+2. Jika pembaruan ditemukan, pembaruan tersebut diunduh di latar belakang sementara pengguna terus menggunakan versi aplikasi saat ini
+
+3. Setelah unduhan selesai, Capgo menunggu pengguna menempatkan aplikasi di latar belakang atau menutupnya sepenuhnya
+
+4. Ketika pengguna meluncurkan aplikasi berikutnya, mereka akan menjalankan versi yang diperbarui
+
+</Steps>
+
+Alur ini memastikan pengguna selalu menjalankan versi terbaru aplikasi Anda, tanpa pernah terganggu oleh prompt pembaruan atau dipaksa menunggu unduhan.
+
+<Aside type="tip">
+Capgo juga memeriksa pembaruan ketika aplikasi dilanjutkan dari latar belakang, sehingga pengguna akan menerima pembaruan bahkan jika mereka tidak sepenuhnya keluar dari aplikasi
+</Aside>
+
+## Mengapa Pendekatan Ini?
+
+Menerapkan pembaruan pada event latar belakang atau penutupan memiliki beberapa manfaat utama untuk pengalaman pengguna:
+
+- Pengguna tidak terganggu oleh prompt pembaruan atau dipaksa menunggu unduhan di tengah sesi
+
+- Pembaruan diterapkan dengan mulus di antara sesi, sehingga pengalaman meluncurkan aplikasi selalu baru
+
+- Anda dapat memberikan pembaruan secara teratur tanpa khawatir mengganggu pengguna aktif
+
+Kerugian utamanya adalah jika pengguna menempatkan aplikasi di latar belakang dan dengan cepat melanjutkannya, mereka mungkin kehilangan status yang belum disimpan karena pembaruan diterapkan di antara tindakan tersebut.
+
+Untuk mengurangi hal ini, kami merekomendasikan:
+
+- Menyimpan status secara teratur dan memulihkannya dengan baik ketika aplikasi dilanjutkan 
+
+- Menghindari pembaruan yang sangat sering yang memodifikasi sebagian besar status aplikasi
+
+- Mempertimbangkan untuk menyesuaikan perilaku pembaruan untuk alur yang sensitif (lihat di bawah)
+
+## Menyesuaikan Kapan Pembaruan Diterapkan
+
+Dalam beberapa kasus, Anda mungkin ingin lebih mengontrol kapan tepatnya pembaruan diterapkan. Misalnya, Anda mungkin ingin memastikan pengguna menyelesaikan alur yang sedang berlangsung sebelum memperbarui, atau mengoordinasikan pembaruan aplikasi dengan perubahan sisi server.
+
+Capgo menyediakan fungsi `setDelay` yang memungkinkan Anda menentukan kondisi yang harus dipenuhi sebelum pembaruan diinstal:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+Contoh ini akan menunda penginstalan pembaruan hingga setelah 1 Juni 2023 DAN aplikasi telah berada di latar belakang selama minimal 60 detik.
+
+Kondisi penundaan yang tersedia adalah:
+
+- `date`: Tunggu hingga setelah tanggal/waktu tertentu untuk menerapkan pembaruan
+- `background`: Tunggu durasi minimum setelah aplikasi berada di latar belakang untuk menerapkan pembaruan
+- `nativeVersion`: Tunggu hingga binary native dengan versi minimum diinstal sebelum menerapkan pembaruan
+- `kill`: Tunggu hingga event penutupan aplikasi berikutnya untuk menerapkan pembaruan
+
+Anda dapat menggabungkan kondisi-kondisi ini untuk mengontrol secara tepat kapan pembaruan diinstal.
+
+<Aside type="danger">
+Perhatikan bahwa kondisi `kill` saat ini memicu pembaruan setelah event penutupan pertama, bukan event latar belakang berikutnya seperti kondisi lainnya. Inkonsistensi ini akan diperbaiki dalam rilis mendatang
+</Aside>
+
+## Menerapkan Pembaruan Segera
+
+Untuk pembaruan kritis atau aplikasi dengan status yang sangat sederhana, Anda mungkin ingin menerapkan pembaruan segera setelah diunduh, tanpa menunggu event latar belakang atau penutupan. Capgo mendukung ini melalui opsi konfigurasi `directUpdate`.
+
+`directUpdate` diatur dalam file `capacitor.config.ts` Anda, bukan dalam kode JavaScript:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: true,
+    },
+  },
+  keepUrlPathAfterReload: true,
+};
+
+export default config;
+```
+
+Dengan `directUpdate` diaktifkan, Capgo akan segera menerapkan pembaruan begitu unduhan selesai, bahkan jika pengguna sedang aktif menggunakan aplikasi.
+
+Perhatikan bahwa karena `directUpdate` adalah konfigurasi native, diperlukan penanganan tambahan dalam kode JavaScript Anda.
+
+Ketika menggunakan `directUpdate`, Anda perlu mendengarkan event `appReady` dan menyembunyikan splash screen aplikasi Anda sebagai respons:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Hide splash screen
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+Event `appReady` terpicu setelah aplikasi selesai menginisialisasi dan menerapkan pembaruan yang tertunda. Ini adalah saat yang tepat untuk menampilkan UI aplikasi Anda, karena memastikan pengguna akan melihat versi terbaru.
+
+Selain menangani event `appReady`, kami merekomendasikan untuk mengatur opsi konfigurasi `keepUrlPathAfterReload` ke `true` ketika menggunakan `directUpdate`. Ini mempertahankan path URL saat ini ketika aplikasi dimuat ulang karena pembaruan, membantu mempertahankan lokasi pengguna di aplikasi dan mengurangi disorientasi.
+
+Jika Anda tidak menangani event `appReady` dan mengatur `keepUrlPathAfterReload` saat menggunakan `directUpdate`, pengguna mungkin sekilas melihat versi aplikasi yang usang, dibawa kembali ke rute awal, atau melihat kedipan saat pembaruan diterapkan.
+
+Menggunakan `directUpdate` dapat berguna untuk memberikan perbaikan bug kritis atau patch keamanan, tetapi memiliki beberapa pertimbangan:
+
+- Pengguna mungkin melihat kedipan atau status loading singkat saat pembaruan diterapkan jika Anda tidak menangani event `appReady` dengan benar
+- Jika pembaruan memodifikasi status atau UI aplikasi, pengguna mungkin melihat perubahan yang mengganggu di tengah sesi
+- Lokasi pengguna di aplikasi mungkin hilang jika `keepUrlPathAfterReload` tidak diatur, berpotensi membingungkan mereka
+- Anda perlu berhati-hati dalam menangani penyimpanan dan pemulihan status untuk memastikan transisi yang mulus
+
+Jika Anda mengaktifkan `directUpdate`, kami merekomendasikan:
+
+- Menangani event `appReady` untuk mengontrol kapan UI aplikasi Anda ditampilkan
+- Mengatur `keepUrlPathAfterReload` ke `true` untuk mempertahankan lokasi pengguna di aplikasi
+- Menyimpan dan memulihkan status aplikasi sesuai kebutuhan untuk menghindari kehilangan progres pengguna
+- Menguji perilaku pembaruan aplikasi Anda secara menyeluruh untuk memastikan tidak ada transisi yang mengganggu, status yang hilang, atau perubahan lokasi yang membingungkan
+
+Dalam kebanyakan kasus, perilaku pembaruan default memberikan keseimbangan terbaik antara memberikan pembaruan dengan cepat dan meminimalkan gangguan. Tetapi untuk aplikasi dengan kebutuhan khusus, Capgo menyediakan fleksibilitas untuk menyesuaikan kapan dan bagaimana pembaruan diterapkan.

@@ -1,0 +1,78 @@
+---
+title: Actualizaciones rápidas
+sidebar:
+  order: 4
+locale: es
+---
+
+El sistema de actualización en vivo de Capgo puede entregar actualizaciones más rápido y de manera más eficiente al enviar solo los archivos modificados, en lugar de todo el paquete JS
+
+Esto es especialmente beneficioso para usuarios con conexiones de red más lentas o limitadas, ya que minimiza la cantidad de datos que necesitan ser descargados
+
+Un segundo beneficio es cuando la aplicación tiene recursos grandes que cambian raramente, como imágenes o videos, en comparación con archivos JS comprimidos, se descargarán solo una vez
+
+## Cómo funcionan las actualizaciones diferenciales
+
+Las actualizaciones diferenciales en Capgo son manejadas por el plugin de Capgo instalado en tu aplicación. Cuando subes una nueva versión de tu aplicación usando la bandera `--partial`, Capgo hace lo siguiente:
+
+1. Cada archivo en tu compilación se sube individualmente
+2. Se generan checksums para cada archivo
+3. Se crea un nuevo manifiesto json, listando todos los archivos y sus checksums
+4. Este manifiesto se sube a la base de datos de Capgo
+
+Cuando un dispositivo ejecutando tu aplicación busca una actualización, el plugin de Capgo recibe el nuevo manifiesto del servidor. Compara este manifiesto con el que tiene actualmente, identificando qué archivos han cambiado basándose en los checksums y rutas de archivos
+
+El plugin entonces descarga solo los archivos modificados, en lugar de todo el paquete JS. Reconstruye la nueva versión de la aplicación combinando estos archivos descargados con los archivos sin cambios que ya tiene
+
+<Aside title="Manifiesto">
+
+En caso de actualizaciones diferenciales, el dispositivo almacena todos los archivos descargados en una caché común, Capgo nunca la limpiará pero el sistema operativo puede hacerlo en cualquier momento
+
+</Aside>
+
+## Habilitando actualizaciones diferenciales
+
+Para habilitar actualizaciones diferenciales para tu aplicación Capgo, simplemente usa la bandera `--partial` cuando subas una nueva versión:
+
+## Forzando actualizaciones diferenciales
+
+Si quieres asegurarte de que todas las subidas sean actualizaciones diferenciales y prevenir cualquier subida accidental del paquete completo, puedes usar la bandera `--partial-only`:
+
+```shell
+npx @capgo/cli@latest upload --partial-only
+```
+
+Cuando se usa `--partial-only`, Capgo solo subirá archivos individuales y generará un manifiesto. Cualquier dispositivo que no soporte parcial no podrá descargar la actualización
+
+Podrías querer usar `--partial-only` si:
+
+- Siempre quieres usar actualizaciones diferenciales y nunca quieres permitir subidas de paquetes completos
+- Estás configurando un pipeline CI/CD y quieres asegurar que todas las subidas automatizadas sean diferenciales
+- Tu aplicación es grande y el ancho de banda está limitado, por lo que necesitas minimizar los tamaños de subida/descarga
+
+Si necesitas hacer una subida de paquete completo mientras `--partial-only` está configurado, simplemente ejecuta el comando de subida sin `--partial-only`. Esto anulará la configuración para esa única subida, permitiéndote enviar un paquete completo cuando sea necesario
+
+## Solución de problemas
+
+Si las actualizaciones diferenciales no parecen estar funcionando (es decir, los dispositivos siempre están descargando el paquete JS completo incluso para cambios pequeños), verifica que:
+
+- Estés usando la bandera `--partial` cada vez que subas una nueva versión
+- Si usas `--partial-only`, asegúrate de no haber omitido accidentalmente la bandera `--partial`
+- Tu dispositivo esté ejecutando la última versión del plugin de Capgo
+- Tu dispositivo tenga una conexión de red estable y pueda alcanzar los servidores de Capgo
+
+También puedes usar la aplicación web de Capgo para verificar los detalles de tu última subida:
+<Steps>
+1. Ve a la [webapp](https://app.capgo.io)
+2. Haz clic en tu aplicación
+3. Haz clic en el número de paquetes de la barra de estadísticas
+4. Selecciona el último paquete
+5. Verifica el campo `Partial`
+  ![bundle type](/bundle_type.webp)
+</Steps>
+
+Si continúas teniendo problemas, por favor contacta al soporte de Capgo para más ayuda. Ellos pueden revisar los registros del servidor para confirmar que tus subidas parciales están siendo procesadas correctamente y que los dispositivos están recibiendo los manifiestos actualizados
+
+¡Eso es todo! La bandera `--partial` le dice a Capgo que realice las subidas de archivos individuales y la generación de manifiestos necesarios para las actualizaciones diferenciales
+
+Ten en cuenta que necesitas usar `--partial` cada vez que subas una nueva versión que quieras que sea entregada como una actualización diferencial. Si omites la bandera, Capgo subirá todo el paquete JS como un solo archivo, y los dispositivos descargarán todo el paquete incluso si solo una pequeña parte ha cambiado

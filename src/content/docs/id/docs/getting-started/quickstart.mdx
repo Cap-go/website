@@ -1,0 +1,122 @@
+---
+title: Ikhtisar
+sidebar:
+  order: 1
+next: false
+prev: false
+locale: id
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+Tutorial quickstart akan memandu Anda melalui konsep utama Capgo! Konsep yang akan dibahas meliputi:
+
+<Steps>
+
+1 Menambahkan aplikasi ke akun Capgo Anda
+
+2 Mengintegrasikan Capgo dengan CI/CD Anda
+
+3 Memicu unggahan bundle di Capgo dengan mendorong commit
+
+4 Mengonfigurasi dan menyesuaikan penerbitan bundle Capgo
+
+5 Menyiapkan aplikasi Anda untuk mengaktifkan pembaruan langsung melalui Capgo
+
+6 Menerapkan pembaruan langsung ke aplikasi Anda dari Capgo
+
+</Steps>
+
+Cukup ikuti panduan langkah demi langkah, atau navigasi langsung ke dokumentasi untuk komponen yang menarik bagi Anda
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="Mulai Tutorial" icon="rocket" >
+    Ikuti tutorial quickstart dan mulai menggunakan Capgo dalam waktu singkat!
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="Mudah diintegrasikan" icon="pencil">
+    Integrasikan Capgo dengan CI/CD Anda dan picu unggahan bundle di Capgo dengan mendorong commit
+  </Card></a>
+  <a href="/docs/getting-started/live-updates"><Card title="Dokumentasi Pembaruan Langsung" icon="setting">
+    Perbarui aplikasi Anda dari jarak jauh secara real-time tanpa penundaan app store
+  </Card></a>
+  <a href="/docs/getting-started/trouble-shooting"><Card title="Pemecahan Masalah" icon="open-book">
+    Masalah umum dan cara mengatasinya
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+Fitur pembaruan Over-the-Air (OTA) hanya berlaku untuk modifikasi yang dilakukan pada file HTML, CSS, dan JavaScript
+
+Jika Anda membuat perubahan pada kode native, seperti pembaruan plugin Capacitor, wajib mengirimkan ulang aplikasi ke app store untuk persetujuan
+</Aside>
+
+## Bergabung dengan Komunitas Discord
+
+[Bergabung dengan Server Discord Capacitor-updater!](https://discordcom/invite/VnYRvBfgA6)
+
+## Pemeliharaan
+
+| Versi Plugin | Kompatibilitas Capacitor | Dipelihara        |
+| -------------- | ----------------------- | ----------------- |
+| v6\*\*       | v6\*\*                | ✅                 |
+| v5\*\*       | v5\*\*                | Hanya bug kritis |
+| v4\*\*       | v4\*\*                | ⚠️ Tidak digunakan lagi |
+| v3\*\*       | v3\*\*                | ⚠️ Tidak digunakan lagi     |
+| > 7            | v4\*\*                | ⚠️ Tidak digunakan lagi, CI kami menjadi kacau dan terlalu banyak menaikkan versi     |
+
+## Kepatuhan Pedoman Toko
+
+Android Google Play dan iOS App Store memiliki pedoman terkait yang memiliki aturan yang harus Anda ketahui sebelum mengintegrasikan solusi Capacitor-updater dalam aplikasi Anda
+
+### Google play
+
+Paragraf ketiga dari topik [Penyalahgunaan Perangkat dan Jaringan](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) menjelaskan bahwa memperbarui kode sumber dengan metode selain mekanisme pembaruan Google Play dibatasi Tetapi pembatasan ini tidak berlaku untuk memperbarui bundle javascript
+> Pembatasan ini tidak berlaku untuk kode yang berjalan di mesin virtual dan memiliki akses terbatas ke API Android (seperti JavaScript di webview atau browser)
+
+Itu sepenuhnya mengizinkan Capacitor-updater karena hanya memperbarui bundle JS dan tidak akan memperbarui kode native
+
+### App Store
+
+Paragraf **332**, sejak 2015 [Perjanjian Lisensi Program Pengembang Apple](https://developerapplecom/programs/ios/information/) sepenuhnya mengizinkan melakukan pembaruan over-the-air untuk JavaScript dan aset - dan dalam versi terbarunya (20170605) [dapat diunduh di sini](https://developerapplecom/terms/) aturan ini bahkan lebih luas:
+
+> Kode yang diinterpretasikan dapat diunduh ke Aplikasi tetapi hanya selama kode tersebut: (a) tidak mengubah tujuan utama Aplikasi dengan menyediakan fitur atau fungsionalitas yang tidak konsisten dengan tujuan yang dimaksudkan dan diiklankan dari Aplikasi sebagaimana yang diserahkan ke App Store, (b) tidak membuat toko atau storefront untuk kode atau aplikasi lain, dan (c) tidak memotong penandatanganan, sandbox, atau fitur keamanan lain dari OS
+
+Capacitor-updater memungkinkan Anda mengikuti aturan-aturan ini dengan kepatuhan penuh selama pembaruan yang Anda dorong tidak secara signifikan menyimpang dari tujuan awal produk Anda yang disetujui App Store
+
+Untuk tetap mematuhi pedoman Apple, kami menyarankan agar aplikasi yang didistribusikan App Store tidak mengaktifkan skenario `Pembaruan paksa`, karena dalam [Pedoman Peninjauan App Store](https://developerapplecom/app-store/review/guidelines/) menyatakan bahwa:
+
+> Aplikasi tidak boleh memaksa pengguna untuk menilai aplikasi, mengulas aplikasi, mengunduh aplikasi lain, atau tindakan serupa untuk mengakses fungsionalitas, konten, atau penggunaan aplikasi
+
+Ini bukan masalah untuk perilaku default pembaruan latar belakang, karena tidak akan memaksa pengguna untuk menerapkan versi baru sampai mereka menutup aplikasi berikutnya, tetapi setidaknya Anda harus menyadari peran itu jika Anda memutuskan untuk menampilkannya
+
+## Open source
+
+Plugin ini berada di bawah Lisensi LGPL-30 dan back-end berada di bawah Lisensi AGPL-30
+
+> 💡 LGPL-30 berarti jika seseorang memodifikasi kode plugin, wajib mempublikasikannya, dalam open-source dengan lisensi yang sama. Jika Anda menggunakan kode tanpa modifikasi, itu tidak menyangkut Anda. Lihat masalah di bawah untuk detail lebih lanjut, periksa tautan 👇
+
+<LinkCard
+	title="Lisensi?"
+	href="https://githubcom/Cap-go/capacitor-updater/issues/7"
+/>
+
+<LinkCard
+	title="Coba GPTS Capgo untuk Mendapatkan bantuan daripada membaca dokumen"
+	href="https://chatopenaicom/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+> Anda dapat menyertakannya dalam aplikasi Anda tanpa khawatir
+
+## Catatan Akhir
+
+Jika Anda self-host dan menemukan alat ini berguna, silakan pertimbangkan untuk mendukung pekerjaan saya dengan menjadi [sponsor GitHub](https://githubcom/sponsors/riderx/)
+
+Saya membuat taruhan untuk membuka sumber semua kode yang saya bangun di sini alih-alih membatasinya dengan paywall. Dengan membukanya alih-alih melawan dan menyembunyikan, saya percaya kita bisa membuat dunia menjadi tempat yang lebih baik
+
+Untuk mewujudkan ini, perlu bagi kita semua untuk melakukan bagian kita, termasuk Anda 🥹 Jika Capgo cloud tidak memenuhi kebutuhan Anda, Anda dapat mendukung Maker bootstrapped [di sini](https://githubcom/sponsors/riderx/) dengan syarat Anda sendiri
+
+## Matematika Sederhana
+
+Harga paket dasar: $14*12 = $168 setahun
+Sementara rata-rata dev/jam = $60
+Itu berarti 3 jam terbuang dari waktu dev untuk self-host memungkinkan Anda membayar selama setahun penuh, jika Anda menghabiskan lebih dari 3 jam Anda kehilangan uang ^^

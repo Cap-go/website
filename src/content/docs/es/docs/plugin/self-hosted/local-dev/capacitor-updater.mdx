@@ -1,0 +1,58 @@
+---
+title: Usando el actualizador de Capacitor con capgo auto-alojado
+description: Cómo usar Capacitor Updater con CapGo auto alojado
+sidebar:
+  order: 4
+locale: es
+---
+
+## ¿Qué cubrirá este tutorial?
+
+Este tutorial mostrará cómo usar capacitor updater en un entorno de desarrollo con capgo auto-alojado
+
+## Requisitos
+
+1. [Clonar capgo](https://githubcom/Cap-go/capgo)
+
+## Comenzando
+
+Para usar capacitor updater con capgo auto-alojado, edita el `capacitorconfigts` desde el directorio de tu aplicación y configúralo así:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'comdemoapp',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      statsUrl: "http://localhost:54321/functions/v1/stats",
+      channelUrl: "http://localhost:54321/functions/v1/channel_self",
+      updateUrl: "http://localhost:54321/functions/v1/updates"
+    },
+  },
+};
+```
+
+Esto te permitirá usar capgo local en desarrollo. Sin embargo, por defecto, esto no es suficiente.
+
+En Android, es necesario habilitar la [comunicación en texto plano](https://developerandroidcom/topic/security/risks/cleartext) ya que por defecto SSL está deshabilitado en local.
+Esto se puede lograr modificando [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) y añadiendo `android:usesCleartextTraffic="true"` en la etiqueta `application`
+Puedes ver un ejemplo completo de este cambio [aquí](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+
+Como por defecto Android no permite `http`, capgo ha implementado una verificación para http [aquí](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)
+Este código puede no estar siempre aquí, pero por ahora es necesario un cambio en esta línea para que funcionen las actualizaciones
+Esta línea debería verse algo así:
+```ts
+    if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
+```
+
+:::danger
+⚠️ No subas `supabase/functions/updates/indexts` al repositorio remoto\
+Este código está aquí [con un propósito](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
+:::
+
+También podría haber un problema que impida que la aplicación de Android se conecte. Si no ves ninguna solicitud enviada a las funciones edge, ejecuta
+```bash
+adb reverse tcp:54321 tcp:54321
+```

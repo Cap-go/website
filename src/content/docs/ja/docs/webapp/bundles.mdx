@@ -1,0 +1,64 @@
+---
+title: バンドル
+description: バンドルの管理方法を学ぶ
+sidebar:
+  order: 7
+locale: ja
+---
+
+## バンドルの一覧表示
+
+まず、バンドルページを見てみましょう。[アプリをクリックして](/docs/webapp/main-page)、[バンドルタブをクリック](/docs/webapp/main-app-page)することでアクセスできます。
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundleswebp" alt="bundle list" /><figcaption></figcaption></figure>
+
+## バンドルの削除
+
+バンドルを削除する方法は2つあります:
+
+ - 通常の削除
+ - 安全でない削除
+
+安全でない削除方法は2024年8月12日にCapgoに追加されました。
+
+2つの方法の違いは、削除後にバージョン番号を再利用できるかどうかです。
+
+例えば、バージョン`100`を通常の方法で削除した後に`100`バージョンをアップロードしようとすると失敗します。
+安全でない削除で削除した場合は、`100`バージョンをアップロードすることが可能になります。
+
+:::danger
+バージョンを安全でない方法で削除して再アップロードすることは非常に危険です。
+プラグインでさまざまなバグや予期せぬ動作を引き起こす可能性があります。
+公開チャンネルで使用されたバンドルに対しては決して使用すべきではありません。
+このため、安全でない削除には「super_admin」権限が必要です。
+:::
+
+## 特定のバンドルの管理
+
+バンドルの一覧から管理したいものをクリックします。クリックすると、以下のような画面が表示されます：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-infowebp" alt="bundle info" /><figcaption></figcaption></figure>
+
+このページの要素を見ていきましょう。
+
+---
+
+まず`Channel`が表示されます。このバンドルがどのチャンネル用かを示しています。クリックすることでチャンネルを変更できます。
+クリックすると以下のような表示が出ます：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-changewebp" alt="bundle change" /><figcaption></figcaption></figure>
+
+`Set bundle to channel`で任意のチャンネルのデフォルトとしてこのバンドルをリンクできます。\
+`Open channel`でこのバンドルが属するチャンネルのページを開きます。\
+`Unlink bundle from channel`でこのバンドルをチャンネルからリンク解除します。
+(**注意**: バンドルが複数のチャンネルにリンクされている場合、どのチャンネルをリンク解除するかの選択肢は表示されません)
+
+---
+
+次に`Size`が表示されます。クリックするとこのバンドルをダウンロードできます。
+以下のような表示になります：
+<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundlewebp" alt="download bundle" /><figcaption></figcaption></figure>
+
+---
+
+最後に`Devices`セクションがあります。このバージョンを使用している全てのデバイスを確認できます。

@@ -1,0 +1,78 @@
+---
+title: Aggiornamento Automatico
+description: Come utilizzare il plugin di aggiornamento automatico in modalità self-hosting
+sidebar:
+  order: 3
+locale: it
+---
+
+Questa documentazione spiegherà come eseguire il tuo server di auto-aggiornamento
+
+## Servire il bundle
+Assicurati che il tuo bundle sia servito tramite HTTPS e che il server abbia i giusti header CORS per permettere all'app di scaricare l'aggiornamento
+es ```https://myservercom/app/updates/updatesjson```
+
+Se non hai familiarità con il servire un bundle, ti consigliamo di provare Capgo Cloud o vedere un esempio qui:
+<LinkCard
+	title="Serving a Bundle"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Configurazione
+Aggiungi un ``updateUrl`` al tuo ``capacitorconfigjson``
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myservercom/app/updates/updatesjson",
+		}
+	}
+}
+```
+:::caution
+Quando stai pubblicando un aggiornamento self-hosted, tieni presente che non puoi utilizzare endpoint "HTTP" poiché è contro le politiche di sicurezza delle app Android, per scopi di test puoi [permetterlo](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+:::
+
+## API di Aggiornamento
+
+Il plugin farà una chiamata POST alla tua API ogni volta che l'app viene aperta, con questo corpo:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+Il server API dovrebbe rispondere, in JSON, al plugin capacitor-updater con questi dati se è necessario un aggiornamento:
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip"
+}
+```
+
+In modalità Auto-update il server dovrebbe confrontare le versioni e restituire quella giusta, se la chiave URL è presente, il plugin avvia il processo di download
+
+Se aggiungi le chiavi "message" ed "error", la versione non verrà impostata e il messaggio verrà visualizzato nei log
+
+La chiave `version` dovrebbe essere nel formato [`semver`](https://semverorg/)
+
+Lo zip dovrebbe avere `indexhtml` come file nella root, o una sola cartella nella root con `indexhtml` all'interno
+
+Puoi utilizzare il comando della CLI per comprimere il tuo bundle:
+
+```bash title="Crea un bundle con i tuoi file da servire dal tuo server"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

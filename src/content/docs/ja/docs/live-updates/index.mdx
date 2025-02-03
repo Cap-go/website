@@ -1,0 +1,82 @@
+---
+title: 概要
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: ja
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Capgoのライブアップデート機能を使用して、アプリのJavaScriptバンドルをリモートでリアルタイムに更新し、アプリストアのレビュープロセスを経ることなく、バグの修正や新機能の提供を直接ユーザーにプッシュすることができます
+
+<Aside>
+
+ライブアップデートはJavaScriptバンドルの変更に限定されます。プラグインの追加や削除、ネイティブプロジェクトの設定変更などのネイティブコードを更新する必要がある場合は、新しいネイティブバイナリビルドをアプリストアに提出する必要があります
+
+</Aside>
+
+## ライブアップデートの仕組み
+
+Capgoのライブアップデートシステムには2つの主要なコンポーネントがあります：
+
+1 アプリにインストールするCapgo SDK。SDKは利用可能なアップデートを確認し、バックグラウンドでダウンロードします
+
+2 特定のユーザーグループにアップデートを配信できるチャンネル。チャンネルを使用して、`Production`、`Staging`、`Dev`などの異なるリリーストラックを管理できます
+
+新しいJSバンドルをCapgoにアップロードしチャンネルに割り当てると、そのチャンネル用に設定されたアプリ内のCapgo SDKがアップデートを検知してダウンロードします。アプリが次回再起動する際に、新しいバンドルが読み込まれます
+
+## 使い始める
+
+ライブアップデートを使用開始するには、以下の手順に従ってください：
+
+<Steps>
+
+1 [Capgoクイックスタート](/docs/getting-started/quickstart)を完了して、CapgoでアプリをセットアップしCapgo SDKをインストールします
+
+2 アプリコードで、アプリの初期化が完了した後に`CapacitorUpdaternotifyAppReady()`を呼び出します。これによりCapgo SDKにアプリがアップデートを受信する準備ができたことを通知します
+
+3 JSバンドルをビルドしCapgoにアップロードします：
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4 アプリを開き、アップデートのダウンロードを待ちます。ステータスは以下のコマンドで確認できます：
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5 アップデートのダウンロードが完了したら、アプリを閉じて再度開き、新しいバンドルを読み込みます
+
+</Steps>
+
+詳細については[ライブアップデートのデプロイ](/docs/getting-started/deploy)ガイドを参照してください
+
+## 次のステップ
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="チャンネル" icon="bars">
+      チャンネルを使用して異なるリリーストラックを管理し、特定のユーザーにアップデートを配信する方法を学びます
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="ロールバック" icon="left-arrow">
+      アップデートに問題が発生した場合に、以前のJSバンドルバージョンにロールバックする方法を確認します
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="アップデートの動作" icon="setting">
+      アプリでのアップデートのダウンロードと適用のタイミングと方法をカスタマイズします
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="高速アップデート" icon="starlight">
+      高速アップデートを使用してアップデートプロセスを迅速化する方法を学びます
+    </Card>
+  </a>
+</CardGrid>

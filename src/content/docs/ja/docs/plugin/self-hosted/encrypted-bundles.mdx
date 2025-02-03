@@ -1,0 +1,40 @@
+---
+title: Paquetes encriptados
+description: 自己ホストモードで手動更新プラグインを使用する方法
+sidebar:
+  order: 5
+locale: ja
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## エンドツーエンド暗号化
+
+バージョン4150以降、プラグインで暗号化された更新を送信できるようになりました。
+まずは秘密鍵を作成することから始めましょう
+```bash title='秘密鍵の作成'
+npx @capgo/cli key create
+```
+
+次にzipファイルを暗号化します
+```bash title="バンドルされたzipの暗号化"
+npx @capgo/cli encrypt [path/to/zip]
+```
+
+このコマンドは`ivSessionKey`を出力します。これを更新ペイロードの`session_key`キーと共に送信する必要があります
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip",
+"session_key": "encrypted_session_key",
+}
+```
+その後、アプリは秘密鍵を使用して`session_key`を復号化し、復号化された`session_key`を使用して更新を復号化することができます
+
+詳細はこちらをご覧ください：
+
+<LinkCard
+	title="セルフホスト型ライブアップデート"
+	href="https://capgoapp/blog/self-hosted-live-updates/"
+/>

@@ -1,0 +1,90 @@
+---
+title: Rollback
+sidebar:
+  order: 5
+locale: id
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Meskipun pembaruan langsung Capgo memungkinkan Anda untuk dengan cepat memberikan peningkatan dan perbaikan kepada pengguna, mungkin ada situasi di mana Anda perlu kembali ke versi aplikasi sebelumnya. Mungkin pembaruan baru memunculkan masalah kritis yang tidak terduga, atau mungkin Anda ingin mengembalikan perubahan tertentu saat Anda mengerjakan perbaikan.
+
+Capgo menyediakan beberapa cara untuk mengelola build channel dan mengontrol versi aplikasi yang diterima pengguna.
+
+## Kembali ke Bundle Sebelumnya
+
+Setiap kali Anda mengunggah build baru dan menetapkannya ke channel, Capgo menyimpan riwayat build tersebut. Jika Anda perlu mengembalikan pembaruan tertentu, Anda dapat memilih salah satu build sebelumnya untuk dideploy ulang ke channel.
+
+Untuk kembali ke build sebelumnya:
+
+<Steps>
+
+1. Masuk ke [Capgo Dashboard](https://app.capgo.io)
+
+2. Buka bagian "Channels"
+
+3. Klik nama channel yang ingin Anda kembalikan
+
+4. Temukan build yang ingin Anda kembalikan di riwayat build channel
+
+5. Klik ikon mahkota di sebelah build tersebut untuk menjadikannya build aktif untuk channel
+   ![Channel management options](/select_bundle.webp)
+
+6. Konfirmasi bahwa Anda ingin kembali ke build ini
+
+</Steps>
+
+<Aside type="note">
+Kembali ke build sebelumnya hanya mempengaruhi channel yang dipilih. Jika Anda memiliki beberapa channel (misalnya Production, Staging, dll), Anda perlu mengulangi proses pengembalian untuk setiap channel yang terpengaruh.
+</Aside>
+
+Setelah kembali, perangkat yang dikonfigurasi untuk mendengarkan channel yang diperbarui akan menerima build sebelumnya saat mereka memeriksa pembaruan berikutnya. Build yang dikembalikan akan diperlakukan sebagai pembaruan baru, sehingga alur dan kondisi pembaruan biasa berlaku.
+
+## Memutuskan Tautan Channel
+
+Jika Anda ingin menghentikan sementara pembaruan pada channel saat menyelidiki masalah, Anda dapat memutuskan tautan channel dari build saat ini.
+
+Untuk memutuskan tautan channel:
+
+1. Buka channel di Capgo Dashboard
+
+2. Klik tombol "Unlink" di sebelah build saat ini
+
+3. Konfirmasi bahwa Anda ingin memutuskan tautan channel
+
+Setelah channel diputus tautannya, tidak akan mendistribusikan pembaruan baru. Perangkat yang dikonfigurasi ke channel tersebut akan tetap pada build mereka saat ini sampai channel ditautkan ke build lagi.
+
+Ini berguna jika Anda telah mengidentifikasi masalah dengan pembaruan tetapi belum yakin build mana yang ingin Anda kembalikan. Memutuskan tautan channel memberi Anda waktu untuk menyelidiki tanpa mengeluarkan pembaruan lebih lanjut.
+
+## Memaksakan Bundle Bawaan
+
+Dalam situasi yang lebih serius, Anda mungkin ingin mengembalikan semua perangkat pada channel kembali ke build web yang awalnya dikemas dengan binary native aplikasi Anda. Ini dikenal sebagai "bundle bawaan".
+
+Untuk memaksakan bundle bawaan pada channel:
+
+1. Buka channel di Capgo Dashboard
+
+2. Klik tombol "Built-in Bundle"
+
+3. Konfirmasi bahwa Anda ingin memaksakan bundle bawaan
+
+Ketika Anda memaksakan bundle bawaan, semua perangkat yang dikonfigurasi ke channel tersebut akan kembali ke build web kemasan asli pada pemeriksaan pembaruan berikutnya. Ini terjadi terlepas dari build apa yang sedang mereka gunakan.
+
+Ini adalah opsi pengembalian yang lebih agresif daripada kembali ke build sebelumnya tertentu, karena menghapus semua pembaruan langsung yang dirilis sejak aplikasi terakhir dipublikasikan ke app store.
+
+<Aside type="caution">
+Berhati-hatilah saat memaksakan bundle bawaan, karena akan mempengaruhi semua perangkat pada channel. Pastikan Anda telah mempertimbangkan dampaknya dan memiliki rencana untuk melanjutkan sebelum mengambil tindakan ini.
+</Aside>
+
+## Memantau dan Menanggapi Masalah
+
+Untuk menangkap masalah dengan cepat dan meminimalkan dampak dari pembaruan bermasalah, penting untuk memiliki rencana pemantauan rilis dan menanggapi masalah.
+
+Beberapa strategi meliputi:
+
+- Memantau laporan crash dan umpan balik pengguna segera setelah merilis pembaruan
+- Menggunakan peluncuran bertahap atau sistem channel bertahap untuk menguji pembaruan pada kelompok yang lebih kecil sebelum rilis luas
+- Memiliki proses keputusan yang jelas untuk kapan harus kembali, memutuskan tautan, atau memaksakan bundle bawaan, dan siapa yang memiliki wewenang untuk melakukannya
+- Berkomunikasi dengan pengguna tentang masalah dan penyelesaiannya, jika sesuai
+
+Dengan menggabungkan pemantauan yang cermat dengan kemampuan untuk dengan cepat mengelola pembaruan bermasalah, Anda dapat memberikan pengalaman aplikasi yang terus meningkat sambil meminimalkan gangguan bagi pengguna Anda.

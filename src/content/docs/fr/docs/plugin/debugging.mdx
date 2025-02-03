@@ -1,0 +1,141 @@
+---
+title: Débogage
+description: Comment déboguer votre application
+sidebar:
+  order: 6
+locale: fr
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Comprendre les journaux cloud :
+
+### Envoyé depuis le backend
+
+| code                          | Description                                                                                                                                                                    |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **InvalidIp**                                    | L'utilisateur se trouve dans un centre de données Google et la mise à jour date de moins de 4 heures. Ceci est fait pour empêcher les appareils des robots Google d'être comptés comme des appareils dans votre compte |
+| **needPlanUpgrade** (précédemment **needUpgrade**) | Indique que vous avez atteint la limite de votre forfait, et l'appareil ne recevra pas de mises à jour jusqu'à ce que vous mettiez à niveau ou jusqu'au mois prochain                                  |
+| **noNew**                                        | L'appareil dispose de la dernière version disponible                                                                                                                                |
+| **disablePlatformIos**                           | L'appareil est sur la plateforme iOS, mais celle-ci est désactivée dans les paramètres du canal                                                                                            |
+| **disablePlatformAndroid**                       | L'appareil est sur la plateforme Android, mais celle-ci est désactivée dans les paramètres du canal                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | L'appareil a la version (`123`), et le canal a une mise à jour (`122`) sous la version de l'appareil à envoyer, mais cela est désactivé dans les paramètres du canal                   |
+| **disableDevBuild**                              | L'appareil a une version de développement, mais celle-ci est désactivée dans les paramètres du canal                                                                                                   |
+| **disableEmulator**                              | L'appareil est un émulateur, mais celui-ci est désactivé dans les paramètres du canal                                                                                                    |
+
+### Envoyé depuis l'appareil
+
+| code  | Description                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | Les informations pour télécharger la nouvelle version ont été envoyées à l'appareil                 |
+| **delete**            | Un bundle a été supprimé sur l'appareil                                        |
+| **set**               | Un bundle a été défini sur l'appareil                                              |
+| **set_fail**          | Le bundle n'a pas réussi à se définir                                                         |
+| **reset**             | L'appareil est revenu au bundle `builtin`                                         |
+| **download_XX**       | Un nouveau bundle a été téléchargé - progression indiquée par XX% (incréments de 10%) |
+| **download_complete** | Le nouveau bundle a terminé le téléchargement                                          |
+| **download_fail**     | Le nouveau bundle n'a pas réussi à télécharger                                                |
+| **update_fail**       | Le nouveau bundle a été installé mais n'a pas réussi à appeler `notifyAppReady`            |
+| **checksum_fail**     | Le nouveau bundle n'a pas réussi à valider la somme de contrôle                                   |
+| **windows_path_fail** | Le zip contient des fichiers avec des chemins Windows qui sont illégaux                        |
+| **canonical_path_fail** | Le chemin des fichiers n'est pas canonique                                              |
+| **directory_path_fail** | Il y a une erreur dans le chemin des fichiers zip                                         |
+| **unzip_fail**          | La décompression a échoué                                                                   |
+| **low_mem_fail** | Le téléchargement a échoué en raison d'une mémoire insuffisante dans l'appareil                                    |
+
+### Statut du bundle
+
+* `SUCCESS` : installation du bundle terminée
+* `ERROR` : installation ou téléchargement échoué
+* `PENDING` : Téléchargement terminé, en attente de publication
+* `DELETED` : Bundle supprimé, toujours présent pour les statistiques
+* `DOWNLOADING` : Téléchargement d'un bundle en cours
+
+## Comprendre les journaux des appareils :
+
+### Commande de débogage :
+
+Il existe une commande de débogage pour les utilisateurs de Capgo cloud
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+Cela vous permettra de vérifier tous les événements se produisant dans l'application et de trouver une solution si les mises à jour ne se produisent pas
+
+### IOS
+
+pour trouver vos journaux sur Xcode
+
+<LinkCard
+    title="Getting the Device Log in Xcode"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android :
+
+pour trouver vos journaux sur Android studio
+
+<LinkCard
+    title="View logs with Logcat"
+    href="https://developerandroidcom/studio/debug/am-logcat"
+/>
+
+### Explications des journaux
+
+* `Failed to download from` **=>** identique à **download_fail**
+* `notifyAppReady was not called, roll back current bundle` => identique à **update_fail**
+
+## Trouver le bundle téléchargé dans votre appareil
+
+### iOS
+
+Pour déboguer sur iOS, vous devez extraire l'application sur votre ordinateur, vous pouvez le faire comme ceci :
+
+Xcode dispose d'une fonction intégrée pour inspecter le système de fichiers des applications installées par les développeurs sur un appareil iOS
+
+Pour ce faire :
+
+* Connectez votre appareil à votre Mac et sélectionnez Fenêtre > Appareils dans la barre de menu Xcode
+* Sélectionnez votre appareil dans le volet gauche sous la section Appareils
+* Cela affichera une liste des applications installées par les développeurs pour cet appareil
+* Sélectionnez l'application que vous souhaitez inspecter puis sélectionnez l'icône d'engrenage près du bas de l'écran
+* Ici, vous pouvez voir le système de fichiers actuel en sélectionnant Show Container ou télécharger un instantané de celui-ci
+
+Sélectionner Download Container téléchargera et exportera un instantané du système de fichiers sous forme de fichier xcappdata que vous pourrez parcourir
+
+Faites un clic droit sur ce fichier et sélectionnez Show Package Contents pour ouvrir le dossier
+
+Ouvrez le dossier App Data, et vous devriez maintenant voir quelques dossiers comme Documents, Library, tmp, etc
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243ewebp/)
+
+Ensuite, vous trouverez une version dans 2 dossiers :
+
+`library/NoCloud/ionic_built_snapshots` est nécessaire après le redémarrage de l'application
+
+et `documents/versions` pour le rechargement à chaud
+
+### Android
+
+Pour déboguer sur Android, vous devez accéder à l'appareil depuis Android Studio :
+
+* Cliquez sur View > Tool Windows > Device File Explorer ou cliquez sur le bouton Device File Explorer dans la barre d'outils pour ouvrir l'explorateur de fichiers de l'appareil
+* Sélectionnez un appareil dans la liste déroulante
+* Ouvrez le chemin **data/data/APP_NAME/** où **APP_NAME est l'ID de votre application**
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
+
+Puis trouvez le dossier `versions` pour voir toutes les versions
+
+:::tip[Le saviez-vous ?]
+Sur Android, toutes les versions sont stockées dans un seul dossier, contrairement à iOS où elles doivent être dupliquées à deux endroits
+:::
+
+## Comprendre les journaux de crash iOS en production
+
+<LinkCard
+    title="How to review your app's crash logs"
+    href="https://developerapplecom/news/?id=nra79npr"
+/>

@@ -1,0 +1,478 @@
+---
+title: コマンド
+description: Capgo CLI ドキュメント
+sidebar:
+  order: 2
+locale: ja
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+### 使用方法
+
+すべてのコマンドは、Capacitorプロジェクトが適切に設定されたアプリフォルダで実行する必要があります
+
+<LinkCard
+	title="Capacitor Cross-platform native runtime for web apps"
+	href="https://capacitorjscom/docs/getting-started/"
+/>
+
+### **初期化**
+
+`npx @capgo/cli@latest init [apikey]`
+
+このメソッドは、ステップバイステップでオンボーディングを行います
+
+アプリをCapgoに追加します
+アプリにアップデートを検証するコードを追加します
+同様に、アプリをビルドします
+さらに、アプリをCapgoにアップロードします
+そして、アップデートが機能するかどうかの確認を支援します
+
+### **ログイン**
+
+`npx @capgo/cli login [apikey]`
+
+このメソッドは、`apikey`を記憶するためのものです
+
+:::note
+任意のコマンドで`--apikey=********`を使用してオーバーライドできます
+:::
+
+**オプションで以下を指定できます:**
+
+`--local` これにより**apikey**をローカルリポジトリに保存し、gitで無視されます
+
+## **Doctor**
+
+`npx @capgo/cli doctor`
+
+Capgoパッケージが最新かどうかを確認するコマンド
+
+このコマンドはバグレポートにも役立ちます
+
+## アプリ
+
+### **追加**
+
+`npx @capgo/cli app add [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+> 💡 提供されない場合、すべてのオプションは設定から推測されます
+
+オプションで以下を指定できます:
+
+* `--icon [/path/to/my/icon]` Capgo webアプリに表示されるカスタムアイコン
+* `--name [test]` リストでのカスタム名
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--retention [retention]` アプリバンドルの保持期間（日数）、デフォルトは0 = 無制限
+
+appIdとAppNameの`capacitorconfigjson`の例、アイコンはリソースフォルダから推測されます
+
+```json
+{
+  "appId": "eeforgrcapacitor_go",
+  "appName": "Capgo",
+  "webDir": "dist"
+}
+```
+
+### **設定**
+
+`npx @capgo/cli app set [appId]`
+
+`[appId]` アプリID、フォーマットについては[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--icon [/path/to/my/icon]` Capgo webアプリに表示されるカスタムアイコン
+* `--name [test]` リストでのカスタム名
+* `--retention [retention]` アプリバンドルの保持期間（日数）、デフォルトは0 = 無制限
+* `--apikey [key]` アカウントにリンクするAPIキー
+
+### **一覧表示**
+
+`npx @capgo/cli app list [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+
+### **削除**
+
+`npx @capgo/cli app delete [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--bundle` バージョン番号を指定してそのバージョンのみを削除
+
+### デバッグ
+
+`npx @capgo/cli app debug [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--device` デバッグしたい特定のデバイス
+
+### 設定
+
+`npx @capgo/cli app setting [path]`
+
+Capacitor設定を編集します
+
+`[path]` - 変更したい設定のパス
+例えば、`appId`を変更するには、`appId`を指定します
+`capacitor-updater`の自動アップデートを無効にする場合は、`pluginsCapacitorUpdaterautoUpdate`を指定します
+
+`--string`または`--bool`のいずれかを指定する必要があります！
+
+オプション:
+ - `--string <string>` - 設定を文字列に設定
+ - `--bool <true | false>` - 設定をブール値に設定
+
+## バンドル
+
+### アップロード
+
+`npx @capgo/cli bundle upload [appId]`
+
+`[appId]` アプリID、フォーマットについては[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey <apikey>` アカウントにリンクするAPIキー
+* `--path <path>` アップロードするフォルダのパス
+* `--channel <channel>` リンクするチャンネル
+* `--external <url>` Capgo Cloudにアップロードする代わりに外部URLにリンク
+* `--iv-session-key <key>` バンドルURL外部用のIVとセッションキーを設定
+* `--s3-endpoint <s3Endpoint>` S3エンドポイントのURL 部分アップロードまたは外部オプションでは動作しません
+* `--s3-region <region>` S3バケットのリージョン
+* `--s3-apikey <apikey>` S3エンドポイント用のAPIキー
+* `--s3-apisecret <apisecret>` S3エンドポイント用のAPIシークレット
+* `--s3-bucket-name <bucketName>` AWS S3バケットの名前
+* `--s3-port <port>` S3エンドポイントのポート
+* `--no-s3-ssl` S3アップロード用のSSLを無効化
+* `--key <key>` 公開署名キーのカスタムパス（v1システム）
+* `--key-data <keyData>` 公開署名キー（v1システム）
+* `--key-v2 <key>` 秘密署名キーのカスタムパス（v2システム）
+* `--key-data-v2 <keyData>` 秘密署名キー（v2システム）
+* `--bundle-url` バンドルURLをstdoutに出力
+* `--no-key` 署名キーを無視してクリアアップデートを送信
+* `--no-code-check` ソースコードでnotifyAppReady()が呼び出されているかとルートフォルダにindexが存在するかのチェックを無視
+* `--display-iv-session` アップデートの暗号化に使用されたIVとセッションキーをコンソールに表示
+* `--bundle <bundle>` アップロードするバンドルのバージョン番号
+* `--min-update-version <minUpdateVersion>` このバージョンにアップデートするために必要な最小バージョン チャンネルで自動アップデートがメタデータに設定されている場合のみ使用
+* `--auto-min-update-version` ネイティブパッケージに基づいて最小アップデートバージョンを設定
+* `--ignore-metadata-check` アップロード時のメタデータ（node_modules）チェックを無視
+* `--ignore-checksum-check` アップロード時のチェックサムチェックを無視
+* `--timeout <timeout>` アップロードプロセスのタイムアウト（秒）
+* `--partial` 部分ファイルをCapgoクラウドにアップロードしない
+* `--tus` tusプロトコルを使用してバンドルをアップロード
+* `--multipart` S3へのデータアップロードにマルチパートプロトコルを使用、非推奨、代わりにTUSを使用
+* `--encrypted-checksum <encryptedChecksum>` 暗号化されたチェックサム（署名） 外部バンドルをアップロードする場合のみ使用
+* `--package-json <packageJson>` packagejsonへのパス モノレポに便利
+* `--auto-set-bundle` capacitorconfigjsonでバンドルを設定
+* `--node-modules <nodeModules>` node_modulesへのパスのリスト モノレポに便利（カンマ区切り 例：//node_modules,/node_modules）
+
+> ⭐️ 外部オプションは2つのケースを解決するのに役立ちます：プライバシーを懸念する企業、コードをサードパーティに送信しない、および200 MBを超えるアプリ この設定では、Capgoはzipへのリンクのみを保存し、すべてのアプリにリンクを送信します
+
+> 👀 Capgoクラウドは、リンク内（外部オプション用）または保存されたコード内の内容を一切確認しません
+
+> 🔑 暗号化を使用して2層目のセキュリティを追加できます。そうすると、Capgoは何も見たり修正したりできなくなり、「トラストレス」になります
+
+バージョンの`packagejson`の例
+
+```json
+{
+  "version": "102"
+}
+```
+
+> ⛔ バージョンは"000"より大きくなければなりません
+
+> 💡 セキュリティ上の理由から、バージョン番号は削除後に上書きまたは再利用できないため、送信するたびにバージョン番号を更新することを忘れないでください
+
+### **一覧表示**
+
+`npx @capgo/cli bundle list [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+
+### **削除**
+
+`npx @capgo/cli bundle delete [appId]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--bundle` バージョン番号を指定してそのバージョンのみを削除
+
+### クリーンアップ
+
+メジャーバージョンのSemVer範囲をクラウドに対して
+
+`npx @capgo/cli bundle cleanup [appId] --bundle=[majorVersion] --keep=[numberToKeep]`
+
+`[appId]` アプリIDのフォーマット`comtestapp`については[こちら](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--bundle [majorVersion]` 以前のパッケージを削除したいバージョン、最後のもの + `numberToKeep`を保持します* `--keep [numberToKeep]` 保持したいパッケージの数(デフォルト4)
+
+例: バージョン1001から10011まで10個のバージョンがあり、`npx @capgo/cli cleanup [appId] --bundle=1000`を使用すると、1001から1006が削除され、1007から10011が保持されます
+
+合計20バージョンがあり、バンドル番号を指定しない場合:`npx @capgo/cli cleanup [appId] --keep=2`は18バージョンを削除し、最後の2つを保持します
+
+> このコマンドは確認を求め、保持および削除されるものの表を表示します
+
+:::note
+このコマンドは、どのチャンネルでも現在使用中のバンドルは無視します
+:::
+
+### **Encrypt**
+
+> **警告**: このコマンドは非推奨で、次のメジャーリリースで削除されます。新しい暗号化システムを使用してください
+`npx @capgo/cli bundle encrypt [path/to/zip]`
+
+このコマンドは、コードを外部ソースに保存する場合やテスト目的で使用します
+
+オプションで以下を指定できます:
+
+`--key [/path/to/my/private_key]` 秘密鍵のパス
+`--key-data [privateKey]` インラインで使用する場合の秘密鍵データ
+コマンドは`ivSessionKey`を表示し、アップロードコマンドまたは復号コマンドで使用する暗号化されたzipを生成します
+
+### **Encrypt V2**
+
+`npx @capgo/cli bundle encryptV2 [path/to/zip] [checksum]`
+
+このコマンドは、コードを外部ソースに保存する場合やテスト目的で使用します
+チェックサムはバンドルのsha256(--key-v2で生成)で、復号後のファイルの整合性を確認するために使用されます
+秘密鍵で暗号化され、バンドルと共に送信されます
+暗号化v2ではチェックサムがバンドルの「署名」にアップグレードされます
+
+オプションで以下を指定できます:
+
+`--key [/path/to/my/private_key]` 秘密鍵のパス
+`--key-data [privateKey]` インラインで使用する場合の秘密鍵データ
+`--json` 情報をJSONとして出力
+コマンドは`ivSessionKey`を表示し、アップロードコマンドまたは復号コマンドで使用する暗号化されたzipを生成します
+
+### **Decrypt**
+
+`npx @capgo/cli bundle decrypt [path/to/zip] [ivSessionKey]`
+
+オプションで以下を指定できます:
+
+`--key [/path/to/my/private_key]` 秘密鍵のパス
+
+`--key-data [privateKey]` インラインで使用する場合の秘密鍵データ
+このコマンドは主にテスト目的で使用され、zipを復号化してコンソールにBase64でデコードされたセッションキーを表示します
+
+### **Decrypt V2**
+
+`npx @capgo/cli bundle decryptV2 [path/to/zip] [ivSessionKey]`
+
+オプションで以下を指定できます:
+
+`--key [/path/to/my/private_key]` 秘密鍵のパス
+`--key-data [privateKey]` インラインで使用する場合の秘密鍵データ
+このコマンドは主にテスト目的で使用され、zipを復号化してコンソールにBase64でデコードされたセッションキーを表示します
+`--checksum [checksum]` ファイルのチェックサム、復号後にチェックサムを検証します
+
+### **Zip**
+
+`npx @capgo/cli bundle zip [appId]`
+
+`[appId]`はアプリIDで、フォーマットは[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--path [/path/to/my/bundle]` 特定のフォルダをアップロード
+* `--bundle [100]` ファイル名のバンドルバージョン番号を設定
+* `--name [myapp]` ファイル名を上書き
+* `--json` 情報をJSONとして出力
+* `--no-code-check` コードチェックを無視してバンドルを送信
+* `--key-v2` 新しい暗号化システムを使用 これは新しい暗号化システムがファイルの整合性を確認するためのより良いチェックサムを使用するために必要です
+
+### **Compatibility**
+
+`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+
+`[appId]`はアプリIDで、フォーマットは[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+`[channelId]`は新しいチャンネルの名前
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+* `--text` 表で絵文字の代わりにテキストを使用
+* `--channel [channel]` 互換性をチェックするチャンネル
+* `--package-json <packageJson>` packagejsonへのパス モノレポに便利
+* `--node_modules <nodeModules>` node_modulesへのパスのリスト モノレポに便利(カンマ区切り 例: //node_modules,/node_modules)
+
+## Channel
+
+### **Add**
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+`[channelId]`は新しいチャンネルの名前、`[appId]`はアプリIDで、フォーマット`comtestapp`は[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+### **Delete**
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+`[channelId]`は削除したいチャンネルの名前、`[appId]`はアプリIDで、フォーマット`comtestapp`は[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+### **List**
+
+`npx @capgo/cli channel list [appId]`
+
+`[appId]`はアプリIDで、フォーマット`comtestapp`は[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--apikey [key]` アカウントにリンクするAPIキー
+
+### **Set**
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+`[appId]`はアプリIDで、フォーマットは[ここ](https://capacitorjscom/docs/cli/commands/init/)で説明されています
+
+オプションで以下を指定できます:
+
+* `--bundle [123]` クラウドに既に送信されたアプリバンドルをチャンネルにリンク
+* `--latest` `packagejson:version`からバンドルバージョンを取得、`--bundle`と同時に使用不可
+* `--state [ normal | default ]` チャンネルの状態を設定、`normal`または`default`が可能 1つのチャンネルは`default`である必要があります
+* `--downgrade` チャンネルがデバイスにダウングレードバージョンを送信することを許可
+* `--no-downgrade` チャンネルがデバイスにダウングレードバージョンを送信することを禁止
+* `--upgrade` チャンネルがデバイスにアップグレード(メジャー)バージョンを送信することを許可
+* `--no-upgrade` チャンネルがデバイスにアップグレード(メジャー)バージョンを送信することを禁止
+* `--ios` チャンネルがiOSデバイスにバージョンを送信することを許可
+* `--no-ios` チャンネルがiOSデバイスにバージョンを送信することを禁止
+* `--android` チャンネルがAndroidデバイスにバージョンを送信することを許可
+* `--no-android` チャンネルがAndroidデバイスにバージョンを送信することを禁止
+* `--self-assign` デバイスがこのチャンネルに自己割り当てすることを許可
+* `--no-self-assign` デバイスがこのチャンネルに自己割り当てすることを禁止
+* `--disable-auto-update STRATEGY` このチャンネルの自動更新戦略を無効化 可能なオプション: major, minor, metadata, none
+* `--apikey [key]` アカウントにリンクするAPIキー
+
+## アップデート無効化戦略
+
+古いバージョンのアップデートを無効にする方法がいくつかあります\
+Capgoはネイティブコードを更新できないため、古いネイティブコードのバージョンから更新されたネイティブコードのバージョンへの更新はできないはずです
+これを実現するには複数の方法があります
+
+まず、`major`戦略です `000` -> `100`へのアップデートを防ぎます メジャーは強調表示された数字です(**1**00と**0**00)\
+次に`minor`戦略です `000` -> `110`または`110`から`120`へのアップデートを防ぎます
+**注意**この戦略は`010` -> `110`へのアップデートは防げません
+
+3つ目は`patch`戦略です 非常に厳格なモードとしてcapgoに追加されました
+完全に理解していない限り使用は推奨されません
+アップデートを許可するには以下の条件を満たす必要があります:
+ - 新旧バージョン間でメジャーが同じ
+ - 新旧バージョン間でマイナーが同じ
+ - 新バージョンのパッチが古いバージョンのパッチより大きい
+
+アップデートが許可または拒否されるシナリオの例:
+
+ - 00311 -> 00314 ✅
+ - 000 -> 00314 ✅
+ - 00316 -> 00314 ❌
+ - 01312 -> 00314 ❌
+ - 10312 -> 00314 ❌
+
+最後に最も複雑な戦略である`metadata`戦略です\
+まず、有効にした直後はチャンネルに必要なメタデータがないためアップデートは**失敗**することを知っておく必要があります\
+チャンネルにメタデータがない場合、このようなメッセージが表示されます:
+<img src="/fail-metadatawebp" alt="Cannot find metadata"/>
+
+このような表示を見た場合、失敗しているチャンネルの現在のバンドルにメタデータを設定する必要があることがわかります\
+まず、どのチャンネルが失敗しているかを特定します `misconfigured`列を見ることでわかります
+<img src="/misconfigured-tablewebp" alt="Misconfigured table"/>
+
+失敗しているチャンネルに移動し、`Bundle number`をクリックしてください。これでバンドルページに移動します。
+<img src="/fail-channel-showwebp" alt="Locate failing channel"/>
+
+そこで、`Minimal update version`フィールドに入力してください。これは[semver](https://devhints.io/semver/)である必要があります。\
+入力した値がsemverでない場合はエラーが表示されますが、すべてが正しく行われた場合は次のように表示されます：
+<img src="/set-min-update-versionwebp" alt="Set min version"/>
+
+更新するたびにこのデータを手動で設定したくないかもしれません。幸い、CLIはこのメタデータなしでの更新を防止します。
+<img src="/cli-fail-no-metadatawebp" alt="CLI fail no metadata"/>
+
+`metadata`オプションを使用してバンドルを適切にアップロードするには、有効なsemverで`--min-update-version`を渡す必要があります。次のようになります：
+<img src="/cli-upload-with-metadatawebp" alt="CLI upload with metadata"/>
+
+`--min-update-version`は互換性を設定する唯一の方法ではありません。
+`--auto-min-update-version`も存在します。その仕組みは次の通りです：
+
+まず、チャンネルに現在アップロードされているバージョンを確認します。`bundle compatibility`コマンドと同じように互換性をチェックします。
+次に、新しいバージョンが100%互換性がある場合、チャンネル内の最新バージョンの`min_update_version`を再利用します。
+互換性がない場合は、新しくアップロードされたバージョンのバンドル番号を`min_update_version`として設定します。
+
+このオプションを使用する際は、常に`min_update_version`の情報が表示されます。次のようになります：
+<img src="/min_update_version_infowebp" alt="Min update version"/>
+
+新しいバージョンに互換性がない場合は、次のように表示されます：
+<img src="/min_update_version_not_compatiblewebp" alt="Min update version not compatible"/>
+
+## エンドツーエンド暗号化（トラストレス）
+
+Capgoはエンドツーエンド暗号化をサポートしています。これは、バンドル（コード）がクラウドに送信される前に暗号化され、デバイス上で復号化されることを意味します。そのために、RSAキーペアを生成する必要があります。以下のコマンドでそれを生成できます。
+
+暗号化システムはRSAとAESの組み合わせです。RSAキーはAESキーの暗号化に使用され、AESキーはファイルの暗号化に使用されます。
+
+暗号化システムについての詳細は以下をご覧ください：
+
+<img src="/crypto_explainedwebp" alt="How crypto works"/>
+
+暗号化スキーマ
+
+### アプリ用のキーを作成する
+
+`npx @capgo/cli key create`
+
+オプションで`--force`を指定すると、既存のキーを上書きできます。このコマンドはアプリにキーペアを作成し、プライベートキーを安全な場所に保存するよう求めます。プライベートキーをgitにコミットせず、誰とも共有しないことを推奨します。
+
+> ローカルでのテスト後、設定ファイルからキーを削除し、`key save`でCIステップに追加してください。
+
+### アプリ設定にキーを保存する
+
+`npx @capgo/cli key save`
+
+オプションで以下を指定できます：
+
+`--key [/path/to/my/private_key]` プライベートキーのパス
+
+`--key-data [privateKey]` インラインで使用する場合のプライベートキーデータ。このコマンドは、推奨に従ってアプリと設定にキーをコミットしなかった場合に便利です。
+
+## CI統合
+
+作業を自動化するために、GitHub actionを使用して私たちのサーバーにプッシュすることをお勧めします。
+
+[GitHub action チュートリアル](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
+
+## デモアプリ
+
+[GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app/)
+
+APIキーでCI環境変数を設定することを忘れないでください。

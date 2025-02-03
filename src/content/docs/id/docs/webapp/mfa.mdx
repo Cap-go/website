@@ -1,0 +1,101 @@
+---
+title: Autentikasi dua faktor
+description: >-
+  Kelola autentikasi dua faktor untuk melindungi akun Capgo Anda dengan lebih
+  baik.
+sidebar:
+  order: 9
+locale: id
+---
+
+## Apa itu 2FA?
+
+2FA adalah langkah keamanan yang dirancang untuk mencegah pihak yang tidak bertanggung jawab mengambil alih akun capgo Anda\
+Ini dicapai dengan meminta kode tambahan. Kode ini disimpan di ponsel Anda atau kunci perangkat keras 2FA. Kode berubah setiap 30 detik, sehingga tidak mungkin untuk ditebak
+
+## Persyaratan untuk panduan ini
+ - Ponsel Android atau IOS
+ - Koneksi internet
+
+## Apa yang akan dibahas dalam panduan ini?
+
+Panduan ini akan menunjukkan cara mengatur 2FA menggunakan `Google Authenticator`. Aplikasi lain ada untuk tujuan serupa, namun saya tidak dapat membahas seluruh topik 2FA dalam panduan ini
+
+## Bagaimana cara mengatur 2FA?
+
+Pertama unduh aplikasi `Google Authenticator`. Jika Anda menggunakan Android, Anda dapat mengunduhnya dari [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2). Di IOS Anda dapat mengunduhnya dari [App store](https://appsapplecom/us/app/google-authenticator/id388497605/)
+
+Kedua, silakan pergi ke [pengaturan akun capgo](https://webcapgoapp/dashboard/settings/account/). Di sana Anda akan melihat tombol hijau yang seharusnya terlihat seperti ini
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
+
+Klik, dan setelah Anda melakukannya, kode QR akan muncul
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfawebp" alt="Enable MFA" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ Catatan Penting: \
+Jangan pernah membagikan kode QR ini dengan siapa pun, atau Anda bisa keluar dari akun Anda
+:::
+
+Selanjutnya, buka `Google Authenticator` di ponsel Anda. Setelah itu, ikuti langkah-langkah berikut:
+
+Klik tombol plus
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-auth-pluswebp" alt="MFA auth plus" /><figcaption></figcaption></figure>
+
+Setelah itu, silakan klik tombol kamera
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-scan-qrwebp" alt="MFA scan QR" /><figcaption></figcaption></figure>
+
+Itu akan membuka pratinjau kamera. Silakan pindai kode QR yang ditampilkan di PC Anda. Setelah Anda melakukannya, Anda akan melihat sesuatu seperti ini:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-codewebp" alt="MFA final code" /><figcaption></figcaption></figure>
+
+Kemudian silakan kembali ke PC dan klik tombol verifikasi
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verifywebp" alt="Verify MFA" /><figcaption></figcaption></figure>
+
+Ini akan membuka jendela untuk mengetikkan kode 2FA kita. Dalam kasus saya, kode ini adalah `095101` tapi akan berbeda untuk Anda\
+Setelah Anda mengetikkan kode ini, silakan klik tombol `verify`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-codewebp" alt="MFA verify code final" /><figcaption></figcaption></figure>
+
+Jika Anda memasukkan kode yang benar dan menekan `verify` Anda akan melihat pop-up seperti ini
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabledwebp" alt="MFA enabled" /><figcaption></figcaption></figure>
+
+Selamat!\
+Anda telah mengaktifkan autentikasi 2FA 🎉
+
+## Cara login menggunakan 2FA
+
+Saat berikutnya Anda masuk ke akun Anda, Anda akan melihat jendela seperti ini
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-requiredwebp" alt="MFA required" /><figcaption></figcaption></figure>
+
+Silakan buka authenticator dan salin kode auth Anda
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-loginwebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ Catatan Penting: \
+Tekan `verify` sebelum kode diperbarui, jika tidak kode akan berubah, dan kode lama tidak akan berlaku lagi
+:::
+
+Kemudian masukkan kode tersebut ke dalam formulir login dan tekan `verify`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verifywebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+Jika Anda memasukkan kode yang benar, Anda akan melihat dashboard capgo
+
+## Cara menonaktifkan 2FA
+
+Untuk menonaktifkan 2FA silakan pergi ke [pengaturan akun capgo](https://webcapgoapp/dashboard/settings/account/). Di sana Anda akan melihat tombol merah yang seharusnya terlihat seperti ini:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-buttonwebp" alt="MFA disable button" /><figcaption></figcaption></figure>
+
+Klik, dan Anda akan melihat layar seperti ini
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2webp" alt="MFA disabled" /><figcaption></figcaption></figure>
+
+Cukup tekan tombol `disable`, dan selesai

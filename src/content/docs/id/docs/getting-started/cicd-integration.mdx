@@ -1,0 +1,111 @@
+---
+title: Integrasi CI/CD
+locale: id
+---
+
+import { Steps, Code } from '@astrojs/starlight/components';
+
+Mengintegrasikan Capgo ke dalam pipeline CI/CD Anda memungkinkan untuk mengotomatisasi sepenuhnya proses pembangunan dan penerapan pembaruan ke aplikasi Anda. Dengan memanfaatkan CLI Capgo dan semantic-release, Anda dapat memastikan penerapan yang konsisten, dapat diandalkan dan memungkinkan iterasi yang cepat.
+
+## Manfaat Integrasi CI/CD
+
+- **Otomatisasi**: Tidak ada lagi langkah manual atau ruang untuk kesalahan manusia. Seluruh proses build, pengujian, dan penerapan dapat diotomatisasi dari awal hingga akhir.
+
+- **Konsistensi**: Setiap penerapan mengikuti langkah-langkah yang sama, memastikan proses yang dapat diprediksi dan dapat diulang. Ini sangat berharga ketika Anda memiliki beberapa anggota tim yang berkontribusi pada kode.
+
+- **Iterasi lebih cepat**: Dengan penerapan otomatis, Anda dapat mengirimkan pembaruan lebih sering dan dengan percaya diri. Tidak perlu lagi menunggu QA manual atau persetujuan rilis.
+
+## CLI Capgo
+
+CLI Capgo adalah kunci untuk mengintegrasikan Capgo ke dalam alur kerja CI/CD Anda. Ini menyediakan perintah untuk mendorong versi bundle baru, mengelola saluran, dan lainnya.
+
+Perintah yang paling penting untuk integrasi CI/CD adalah `upload`:
+
+```shell
+npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
+```
+
+Perintah ini mengunggah build web saat ini ke saluran yang ditentukan. Anda biasanya akan menjalankan ini sebagai langkah terakhir dalam pipeline CI/CD Anda, setelah build web Anda selesai dengan sukses.
+
+## Menyiapkan Capgo dalam Pipeline CI/CD Anda
+
+Meskipun langkah-langkah pastinya akan bervariasi tergantung pada pilihan alat CI/CD Anda, proses umum untuk mengintegrasikan Capgo terlihat seperti ini:
+
+<Steps>
+1. **Menghasilkan API key**: Masuk ke dashboard Capgo dan buat API key baru. Kunci ini akan digunakan untuk mengautentikasi CLI di lingkungan CI/CD Anda. Jaga kerahasiaannya dan jangan pernah menyertakannya ke repositori Anda!
+
+3. **Mengkonfigurasi perintah `upload`**: Tambahkan langkah ke konfigurasi CI/CD Anda yang menjalankan perintah `upload` dengan argumen yang sesuai: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Ganti `Production` dengan saluran yang ingin Anda terapkan, dan `${{ secrets.CAPGO_API_KEY }}` dengan variabel lingkungan yang menyimpan API key Anda.
+
+4. **Tambahkan langkah `upload` setelah build web Anda**: Pastikan bahwa langkah `upload` datang setelah build web Anda selesai dengan sukses. Ini memastikan Anda selalu menerapkan kode terbaru Anda.\n  Berikut contoh konfigurasi untuk GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+
+</Steps>
+
+## Integrasi Semantic-release
+
+Semantic-release adalah alat yang kuat untuk mengotomatisasi manajemen versi dan menghasilkan catatan rilis. Dengan mengintegrasikan semantic-release dengan Capgo, Anda dapat secara otomatis menambah versi aplikasi Anda dan menghasilkan changelog dengan setiap penerapan.
+
+Berikut contoh file konfigurasi `releaserc` untuk semantic-release:
+
+```json
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "package.json"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
+```
+
+Konfigurasi ini melakukan hal berikut:
+
+1. Menganalisis pesan commit untuk menentukan nomor versi berikutnya, mengikuti spesifikasi Conventional Commits
+2. Menghasilkan catatan rilis berdasarkan commit sejak rilis terakhir
+3. Memperbarui file `CHANGELOG.md` dengan catatan rilis baru
+4. Menjalankan perintah `upload` CLI Capgo, meneruskan nomor versi baru dan menggunakan flag `--partial` untuk pembaruan diferensial
+5. Melakukan commit pada `CHANGELOG.md`, `package.json`, dan file lain yang berubah kembali ke repositori
+
+Untuk menggunakan semantic-release dengan Capgo, cukup tambahkan langkah ke konfigurasi CI/CD Anda yang menjalankan `npx semantic-release`. Pastikan langkah ini datang setelah build web Anda dan sebelum langkah `upload` Capgo.
+
+## Pemecahan Masalah
+
+Jika Anda mengalami masalah dengan integrasi CI/CD Capgo Anda, berikut beberapa hal yang perlu diperiksa:
+
+- **API key**: Pastikan API key Anda valid dan memiliki izin yang diperlukan. Jika menggunakan variabel lingkungan, periksa kembali bahwa itu diatur dengan benar.
+
+- **Versi CLI**: Pastikan Anda menggunakan versi terbaru dari CLI Capgo. Versi lama mungkin memiliki masalah kompatibilitas atau kurang fitur tertentu.
+
+- **Artefak build**: Konfirmasi bahwa build web Anda menghasilkan file output yang diharapkan. CLI Capgo membutuhkan build web yang valid untuk membuat bundle.
+
+- **Konektivitas jaringan**: Periksa bahwa lingkungan CI/CD Anda memiliki akses jaringan ke server Capgo. Masalah firewall atau proxy terkadang dapat mengganggu perintah `upload`.
+
+Jika Anda masih mengalami masalah, hubungi dukungan Capgo untuk bantuan. Mereka dapat membantu memecahkan masalah dengan pengaturan spesifik Anda.
+
+## Kesimpulan
+
+Mengintegrasikan Capgo ke dalam pipeline CI/CD Anda dan memanfaatkan semantic-release untuk manajemen versi dapat sangat memperlancar alur kerja pengembangan Anda. Dengan mengotomatisasi penerapan dan versi, Anda dapat mengirimkan pembaruan lebih cepat dan dengan lebih percaya diri.
+
+CLI Capgo dan semantic-release memberikan kombinasi yang kuat untuk mencapai rilis otomatis sepenuhnya, end-to-end. Dengan sedikit konfigurasi, Anda dapat memiliki proses penerapan yang kuat dan dapat diandalkan yang memungkinkan Anda fokus pada membangun fitur hebat daripada mengkhawatirkan langkah-langkah rilis manual.
+
+Untuk lebih detail tentang perintah dan opsi CLI Capgo, lihat [referensi CLI](/docs/cli/overview). Dan untuk pendalaman konfigurasi semantic-release, lihat [dokumentasi semantic-release](https://github.com/semantic-release/semantic-release).
+
+Selamat menerapkan!

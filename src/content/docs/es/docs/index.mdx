@@ -1,0 +1,43 @@
+---
+title: Selamat datang di Capgo
+description: >-
+  Capgo adalah platform sumber terbuka untuk pembaruan langsung untuk Capacitor
+  dan tim pengembangan seluler, yang memungkinkan Anda mengirimkan pembaruan
+  langsung kepada pengguna dalam hitungan menit, bukan hari.
+template: splash
+next: false
+hero:
+  tagline: >-
+    Capgo adalah platform open source untuk pembaruan real-time untuk Capacitor
+    dan tim pengembangan mobile yang memungkinkan tim mengirimkan pembaruan
+    kepada pengguna dalam hitungan menit, bukan hari
+  image:
+    file: /logo.svg
+  actions:
+    - text: Empecemos
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: 'https://github.com/Cap-go/Capgo/'
+      icon: external
+      variant: minimal
+locale: es
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="El poder de Live Update" icon="rocket">
+    Entrega actualizaciones de aplicaciones en vivo, correcciones de errores críticos, cambios de contenido, funciones beta y más para brindar a tus usuarios la mejor experiencia posible
+  </Card>
+  <Card title="Fácil de integrar" icon="pencil">
+    El plugin toma 3 pasos para integrarse en tu código y te permite enviar actualizaciones a tus usuarios en minutos en lugar de días
+  </Card>
+  <Card title="Instalación" icon="setting">
+    Ejecuta `npx @capgo/cli@latest init [APIKEY]` para comenzar
+  </Card>
+  <Card title="Documentación extensa" icon="open-book">
+    Aprende en la [Documentación](/docs/plugin/cloud-mode/getting-started/) cómo dominar el plugin en 5 minutos con nuestro video de introducción
+  </Card>
+</CardGrid>

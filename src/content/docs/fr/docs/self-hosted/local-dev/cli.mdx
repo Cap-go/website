@@ -1,0 +1,34 @@
+---
+title: Menggunakan CLI dengan capgo yang dihosting sendiri
+description: Comment utiliser la CLI avec capgo auto-hébergé
+sidebar:
+  order: 2
+locale: fr
+---
+
+## Que couvre ce tutoriel ?
+
+Ce tutoriel montrera comment utiliser la CLI dans un environnement de développement avec capgo auto-hébergé
+
+## Pour commencer
+
+Pour utiliser la CLI avec capgo auto-hébergé, modifiez le `capacitorconfigts` depuis le répertoire de votre application et configurez-le comme ceci :
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'comdemoapp',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      localHost: "http://localhost:5173",
+      localWebHost: "http://localhost:5173",
+      localSupa: "http://localhost:54321",
+      localSupaAnon: "see_notes",
+    },
+  },
+};
+```
+
+Note : Pour obtenir `localSupaAnon`, veuillez suivre [ce tutoriel](/docs/self-hosted/local-dev/getting-started/) et copiez la `clé anon` dans `localSupaAnon`

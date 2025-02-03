@@ -1,0 +1,78 @@
+---
+title: 自動更新
+description: 自己ホストモードでの自動更新プラグインの使い方
+sidebar:
+  order: 3
+locale: ja
+---
+
+このドキュメントでは、自動更新サーバーの実行方法について説明します
+
+## バンドルの配信
+バンドルがHTTPS経由で配信され、アプリが更新をダウンロードできるように適切なCORSヘッダーがサーバーに設定されていることを確認してください
+例：```https://myservercom/app/updates/updatesjson```
+
+バンドルの配信に不慣れな場合は、Capgo Cloudを試すか、以下の例を参照することをお勧めします：
+<LinkCard
+	title="バンドルの配信"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## 設定
+``capacitorconfigjson``に``updateUrl``を追加します
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myservercom/app/updates/updatesjson",
+		}
+	}
+}
+```
+:::caution
+セルフホスト更新をプッシュする場合、Androidアプリのセキュリティポリシーに反するため、"HTTP"エンドポイントは使用できません。テスト目的で使用する場合は[許可する](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)ことができます
+:::
+
+## 更新API
+
+プラグインは、アプリが開かれるたびに以下のボディでAPIにPOSTリクエストを送信します：
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+更新が必要な場合、サーバーAPIはcapacitor-updaterプラグインに以下のようなJSONデータで応答する必要があります：
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip"
+}
+```
+
+自動更新モードでは、サーバーはバージョンを比較して適切なものを返す必要があります。URLキーが存在する場合、プラグインはダウンロードプロセスを開始します
+
+"message"と"error"キーを追加すると、バージョンは設定されず、代わりにメッセージがログに表示されます
+
+`version`キーは[`semver`](https://semverorg/)形式である必要があります
+
+zipファイルはルートに`indexhtml`ファイルを持つか、ルートに`indexhtml`を含む1つのフォルダのみを持つ必要があります
+
+CLIのコマンドを使用してバンドルをzip化できます：
+
+```bash title="サーバーから配信するファイルのバンドルを作成"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

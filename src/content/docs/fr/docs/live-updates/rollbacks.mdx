@@ -1,0 +1,90 @@
+---
+title: Retours en arrière
+sidebar:
+  order: 5
+locale: fr
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Bien que les mises à jour en direct de Capgo vous permettent de fournir rapidement des améliorations et des correctifs à vos utilisateurs, il peut y avoir des situations où vous devez revenir à une version précédente de votre application. Peut-être qu'une nouvelle mise à jour a introduit un problème critique inattendu, ou peut-être que vous souhaitez annuler une modification spécifique pendant que vous travaillez sur un correctif.
+
+Capgo propose plusieurs façons de gérer les builds d'un canal et de contrôler la version de votre application que les utilisateurs reçoivent.
+
+## Revenir à un Bundle précédent
+
+Chaque fois que vous téléchargez un nouveau build et l'assignez à un canal, Capgo conserve un historique de ces builds. Si vous devez annuler une mise à jour spécifique, vous pouvez sélectionner l'un de ces builds précédents pour le redéployer sur le canal.
+
+Pour revenir à un build précédent :
+
+<Steps>
+
+1. Connectez-vous au [Tableau de bord Capgo](https://app.capgo.io)
+
+2. Accédez à la section "Canaux"
+
+3. Cliquez sur le nom du canal que vous souhaitez restaurer
+
+4. Trouvez le build auquel vous souhaitez revenir dans l'historique des builds du canal
+
+5. Cliquez sur l'icône de couronne à côté de ce build pour en faire le build actif du canal
+   ![Options de gestion des canaux](/select_bundle.webp)
+
+6. Confirmez que vous souhaitez revenir à ce build
+
+</Steps>
+
+<Aside type="note">
+Le retour à un build précédent n'affecte que le canal sélectionné. Si vous avez plusieurs canaux (par exemple Production, Staging, etc.), vous devrez répéter le processus de restauration pour chaque canal concerné.
+</Aside>
+
+Après le retour en arrière, les appareils configurés pour écouter le canal mis à jour recevront le build précédent la prochaine fois qu'ils vérifieront les mises à jour. Le build restauré sera traité comme une nouvelle mise à jour, donc les conditions et le flux de mise à jour habituels s'appliquent.
+
+## Délier un Canal
+
+Si vous souhaitez arrêter temporairement les mises à jour sur un canal pendant que vous enquêtez sur un problème, vous pouvez délier le canal de son build actuel.
+
+Pour délier un canal :
+
+1. Accédez au canal dans le Tableau de bord Capgo
+
+2. Cliquez sur le bouton "Délier" à côté du build actuel
+
+3. Confirmez que vous souhaitez délier le canal
+
+Une fois qu'un canal est délié, il ne distribuera plus de nouvelles mises à jour. Les appareils configurés sur ce canal resteront sur leur build actuel jusqu'à ce que le canal soit à nouveau lié à un build.
+
+C'est utile si vous avez identifié un problème avec une mise à jour mais n'êtes pas encore sûr du build auquel vous souhaitez revenir. Délier le canal vous donne le temps d'enquêter sans pousser d'autres mises à jour.
+
+## Forcer le Bundle Intégré
+
+Dans des situations plus graves, vous pouvez vouloir ramener tous les appareils d'un canal au build web qui était initialement packagé avec le binaire natif de votre application. C'est ce qu'on appelle le "bundle intégré".
+
+Pour forcer le bundle intégré sur un canal :
+
+1. Accédez au canal dans le Tableau de bord Capgo
+
+2. Cliquez sur le bouton "Bundle Intégré"
+
+3. Confirmez que vous voulez forcer le bundle intégré
+
+Lorsque vous forcez le bundle intégré, tous les appareils configurés sur ce canal reviendront au build web d'origine packagé lors de leur prochaine vérification de mise à jour. Cela se produit indépendamment du build sur lequel ils se trouvent actuellement.
+
+C'est une option de restauration plus agressive que de revenir à un build précédent spécifique, car elle annule toutes les mises à jour en direct publiées depuis la dernière publication de l'application sur les stores.
+
+<Aside type="caution">
+Soyez prudent lorsque vous forcez le bundle intégré, car cela affectera tous les appareils du canal. Assurez-vous d'avoir considéré l'impact et d'avoir un plan pour avancer avant de prendre cette action.
+</Aside>
+
+## Surveillance et Réponse aux Problèmes
+
+Pour détecter rapidement les problèmes et minimiser l'impact des mises à jour problématiques, il est important d'avoir un plan de surveillance de vos versions et de réponse aux problèmes.
+
+Quelques stratégies incluent :
+
+- Surveiller les rapports de crash et les retours utilisateurs immédiatement après la publication d'une mise à jour
+- Utiliser des déploiements progressifs ou un système de canaux échelonnés pour tester les mises à jour sur un groupe plus restreint avant une diffusion large
+- Avoir un processus de décision clair sur quand revenir en arrière, délier ou forcer le bundle intégré, et qui a l'autorité pour le faire
+- Communiquer aux utilisateurs sur le problème et la résolution, si approprié
+
+En combinant une surveillance attentive avec la capacité de gérer rapidement les mises à jour problématiques, vous pouvez fournir une expérience d'application en amélioration continue tout en minimisant les perturbations pour vos utilisateurs.

@@ -1,0 +1,83 @@
+---
+title: Perbarui endpoint
+description: セルフホスティングされた更新エンドポイントの作成方法
+sidebar:
+  order: 1
+locale: ja
+---
+
+プラグインにアップデートを送信するJavaScriptのコード例です。
+
+```typescript
+interface AppInfos {
+  version_name: string
+  version_build: string
+  version_os: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSONparse(eventbody || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  consolelog('update asked', platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  if (version_name === '100') {
+    return {
+      version: '101',
+      url: 'https://apiurlcom/mybuild_101zip',
+    }
+  }
+  else if (version_name === '101') {
+    return {
+      version: '102',
+      url: 'https://apiurlcom/mybuild_102zip',
+    }
+  }
+  else {
+    return {
+      message: 'Error version not found',
+      version: '',
+      url: '',
+    }
+  }
+}
+```
+
+このエンドポイントは以下のようなJSONを返します：
+
+```json
+{
+  "version": "102",
+  "url": "https://apiurlcom/mybuild_102zip"
+}
+```
+
+アップデートがない場合やエラーの場合は、`message`キーと、オプションで`error`を追加します：
+
+```json
+{
+  "message": "Version not found",
+  "error": "The backend crashed",
+  "version": "102",
+  "url": "https://apiurlcom/mybuild_102zip"
+}
+```

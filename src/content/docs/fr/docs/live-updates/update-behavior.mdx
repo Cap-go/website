@@ -1,0 +1,154 @@
+---
+title: Comportement de la mise à jour
+sidebar:
+  order: 3
+locale: fr
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Lorsque vous publiez une mise à jour de votre application Capgo, vous souhaitez probablement que vos utilisateurs la reçoivent le plus rapidement possible. Mais vous ne voulez pas perturber leur expérience en les forçant à attendre un téléchargement ou à redémarrer l'application au milieu d'une session.
+
+Le comportement de mise à jour de Capgo est conçu pour trouver un équilibre entre la livraison rapide des mises à jour et la minimisation des perturbations pour vos utilisateurs.
+
+## Flux de mise à jour par défaut
+
+Par défaut, voici comment Capgo gère les mises à jour d'applications :
+
+<Steps>
+
+1. Au lancement de l'application, le plugin Capgo vérifie si une nouvelle mise à jour est disponible
+
+2. Si une mise à jour est trouvée, elle est téléchargée en arrière-plan pendant que l'utilisateur continue d'utiliser la version actuelle de l'application
+
+3. Une fois le téléchargement terminé, Capgo attend que l'utilisateur mette l'application en arrière-plan ou la ferme complètement
+
+4. Lorsque l'utilisateur lance à nouveau l'application, il utilisera la version mise à jour
+
+</Steps>
+
+Ce flux garantit que les utilisateurs utilisent toujours la dernière version de votre application, sans jamais être interrompus par des invites de mise à jour ou forcés d'attendre des téléchargements.
+
+<Aside type="tip">
+Capgo vérifie également les mises à jour lorsque l'application reprend depuis l'arrière-plan, ainsi les utilisateurs recevront des mises à jour même s'ils ne quittent pas complètement l'application
+</Aside>
+
+## Pourquoi cette approche ?
+
+L'application des mises à jour lors d'un événement d'arrière-plan ou de fermeture présente plusieurs avantages clés pour l'expérience utilisateur :
+
+- Les utilisateurs ne sont pas interrompus par des invites de mise à jour ou forcés d'attendre des téléchargements au milieu d'une session
+
+- Les mises à jour sont appliquées de manière transparente entre les sessions, ainsi l'expérience de lancement de l'application est toujours fraîche
+
+- Vous pouvez livrer des mises à jour fréquemment sans vous soucier de perturber les utilisateurs actifs
+
+Le principal inconvénient est que si un utilisateur met en arrière-plan et reprend rapidement votre application, il peut perdre tout état non sauvegardé puisque la mise à jour a été appliquée entre ces actions.
+
+Pour atténuer cela, nous recommandons :
+
+- Sauvegarder l'état fréquemment et le restaurer gracieusement lorsque l'application reprend
+
+- Éviter les mises à jour très fréquentes qui modifient de grandes parties de l'état de l'application
+
+- Envisager de personnaliser le comportement de mise à jour pour les flux sensibles (voir ci-dessous)
+
+## Personnalisation du moment d'application des mises à jour
+
+Dans certains cas, vous pouvez souhaiter plus de contrôle sur le moment exact où une mise à jour est appliquée. Par exemple, vous pourriez vouloir vous assurer qu'un utilisateur termine un flux en cours avant la mise à jour, ou coordonner une mise à jour d'application avec un changement côté serveur.
+
+Capgo fournit une fonction `setDelay` qui vous permet de spécifier les conditions qui doivent être remplies avant qu'une mise à jour ne soit installée :
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+Cet exemple retarderait l'installation d'une mise à jour jusqu'après le 1er juin 2023 ET que l'application ait été en arrière-plan pendant au moins 60 secondes.
+
+Les conditions de délai disponibles sont :
+
+- `date` : Attendre jusqu'après une date/heure spécifique pour appliquer la mise à jour
+- `background` : Attendre une durée minimale après la mise en arrière-plan de l'application pour appliquer la mise à jour
+- `nativeVersion` : Attendre qu'un binaire natif avec une version minimale soit installé avant d'appliquer la mise à jour
+- `kill` : Attendre jusqu'au prochain événement de fermeture de l'application pour appliquer la mise à jour
+
+Vous pouvez combiner ces conditions pour contrôler précisément quand une mise à jour est installée.
+
+<Aside type="danger">
+Notez que la condition `kill` déclenche actuellement la mise à jour après le premier événement de fermeture, et non le prochain événement d'arrière-plan comme les autres conditions. Cette incohérence sera corrigée dans une future version
+</Aside>
+
+## Application immédiate des mises à jour
+
+Pour les mises à jour critiques ou les applications avec un état très simple, vous pourriez vouloir appliquer une mise à jour dès qu'elle est téléchargée, sans attendre un événement d'arrière-plan ou de fermeture. Capgo prend en charge cela via l'option de configuration `directUpdate`.
+
+`directUpdate` est défini dans votre fichier `capacitor.config.ts`, pas dans le code JavaScript :
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: true,
+    },
+  },
+  keepUrlPathAfterReload: true,
+};
+
+export default config;
+```
+
+Avec `directUpdate` activé, Capgo appliquera immédiatement une mise à jour dès que le téléchargement est terminé, même si l'utilisateur utilise activement l'application.
+
+Notez que comme `directUpdate` est une configuration native, elle nécessite une gestion supplémentaire dans votre code JavaScript.
+
+Lors de l'utilisation de `directUpdate`, vous devez écouter l'événement `appReady` et masquer l'écran de démarrage de votre application en réponse :
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Masquer l'écran de démarrage
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+L'événement `appReady` se déclenche une fois que l'application a terminé l'initialisation et appliqué toutes les mises à jour en attente. C'est le moment où il est sûr d'afficher l'interface utilisateur de votre application, car cela garantit que l'utilisateur verra la dernière version.
+
+En plus de gérer l'événement `appReady`, nous recommandons de définir l'option de configuration `keepUrlPathAfterReload` sur `true` lors de l'utilisation de `directUpdate`. Cela préserve le chemin URL actuel lorsque l'application est rechargée en raison d'une mise à jour, aidant à maintenir la position de l'utilisateur dans l'application et réduisant la désorientation.
+
+Si vous ne gérez pas l'événement `appReady` et ne définissez pas `keepUrlPathAfterReload` lors de l'utilisation de `directUpdate`, l'utilisateur pourrait brièvement voir une version obsolète de l'application, être renvoyé à la route initiale, ou voir un scintillement lors de l'application de la mise à jour.
+
+L'utilisation de `directUpdate` peut être utile pour livrer des corrections de bugs critiques ou des correctifs de sécurité, mais elle présente certains compromis :
+
+- L'utilisateur peut voir un bref scintillement ou état de chargement lors de l'application de la mise à jour si vous ne gérez pas correctement l'événement `appReady`
+- Si la mise à jour modifie l'état ou l'interface utilisateur de l'application, l'utilisateur peut voir un changement perturbateur au milieu d'une session
+- La position de l'utilisateur dans l'application peut être perdue si `keepUrlPathAfterReload` n'est pas défini, ce qui peut le désorienter
+- Vous devrez gérer soigneusement la sauvegarde et la restauration de l'état pour assurer une transition fluide
+
+Si vous activez `directUpdate`, nous recommandons :
+
+- Gérer l'événement `appReady` pour contrôler quand l'interface utilisateur de votre application est affichée
+- Définir `keepUrlPathAfterReload` sur `true` pour préserver la position de l'utilisateur dans l'application
+- Sauvegarder et restaurer l'état de l'application selon les besoins pour éviter de perdre la progression de l'utilisateur
+- Tester minutieusement le comportement de mise à jour de votre application pour s'assurer qu'il n'y a pas de transitions brusques, d'états perdus ou de changements de position désorientants
+
+Dans la plupart des cas, le comportement de mise à jour par défaut offre le meilleur équilibre entre la livraison rapide des mises à jour et la minimisation des perturbations. Mais pour les applications ayant des besoins spécifiques, Capgo offre la flexibilité de personnaliser quand et comment les mises à jour sont appliquées.

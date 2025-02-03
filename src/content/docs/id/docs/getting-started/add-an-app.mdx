@@ -1,0 +1,49 @@
+---
+title: Tambahkan Aplikasi
+description: Tambahkan aplikasi ke akun Capgo Anda dan instal plugin pada aplikasi Anda
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: id
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Pengenalan Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Pembaruan langsung hanya 3 langkah lagi
+
+
+### Pengaturan terpandu
+
+<Steps>
+
+1 Buat akun Anda di [https://capgoapp/register](https://capgoapp/register)
+![signup screenshot](/signupwebp "signup screenshot")
+
+2 Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan dihadapkan dengan serangkaian pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan pengaturan otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap dalam waktu singkat. Jika Anda membutuhkan bantuan lebih lanjut selama proses, tim dukungan kami [siap membantu](mailto:support@capgoapp) Selamat bergabung!</Aside>
+
+3 Lakukan deploy pembaruan langsung <LinkCard href="/docs/getting-started/deploy/" title="Deploy pembaruan langsung" description="Pelajari cara melakukan deploy pembaruan langsung ke aplikasi Anda" />
+
+</Steps>
+
+### Pengaturan manual
+
+Jika perintah init tidak bekerja untuk Anda, Anda dapat menambahkan aplikasi secara manual
+
+<Steps>
+
+1 Hubungkan CLI ke akun Anda: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2 Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3 Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4 Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5 Lakukan deploy pembaruan langsung <LinkCard href="/docs/getting-started/deploy/" title="Deploy pembaruan langsung" description="Pelajari cara melakukan deploy pembaruan langsung ke aplikasi Anda" />
+
+</Steps>

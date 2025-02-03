@@ -1,0 +1,84 @@
+---
+title: 앱
+sidebar_label: app
+sidebar:
+  order: 4
+locale: ko
+---
+
+`app` 명령을 사용하면 Capgo 앱을 관리할 수 있습니다
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Capgo 계정에 새 앱을 추가합니다
+
+`[appId]`는 `comexampleapp` 형식의 앱 ID입니다. 자세한 내용은 [Capacitor docs](https://capacitorjscom/docs/cli/commands/init/)를 참조하세요
+
+> 💡 제공되지 않은 경우 모든 옵션은 `capacitorconfigjson`에서 추측됩니다
+
+옵션:
+
+- `--icon [path]`: Capgo 웹 앱에 표시할 사용자 지정 아이콘 경로
+- `--name [name]`: 앱 목록에 표시할 사용자 지정 이름
+- `--apikey [key]`: 계정에 연결할 API 키
+- `--retention [days]`: 앱 번들의 보관 기간(일) (기본값: 0 = 무제한)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Capgo 계정의 기존 앱을 업데이트합니다
+
+옵션:
+
+- `--icon [path]`: Capgo 웹 앱에 표시할 사용자 지정 아이콘 경로
+- `--name [name]`: 앱 목록에 표시할 사용자 지정 이름
+- `--retention [days]`: 앱 번들의 보관 기간(일) (기본값: 0 = 무제한)
+- `--apikey [key]`: 계정에 연결할 API 키
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Capgo 계정의 모든 앱을 나열합니다
+
+옵션:
+
+- `--apikey [key]`: 계정에 연결할 API 키
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Capgo 계정에서 앱을 삭제합니다
+
+옵션:
+
+- `--apikey [key]`: 계정에 연결할 API 키
+- `--bundle`: 특정 번들 버전만 삭제
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+앱의 디버그 정보를 표시합니다
+
+옵션:
+
+- `--apikey [key]`: 계정에 연결할 API 키
+- `--device`: 특정 기기 디버그
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+앱의 Capacitor 구성을 편집합니다
+
+`[path]`는 변경하려는 설정의 경로입니다(예: `appId` 또는 `pluginsCapacitorUpdaterautoUpdate`)
+
+`--string` 또는 `--bool` 중 하나를 제공해야 합니다:
+
+- `--string <value>`: 설정을 문자열 값으로 설정
+- `--bool <true|false>`: 설정을 불리언 값으로 설정

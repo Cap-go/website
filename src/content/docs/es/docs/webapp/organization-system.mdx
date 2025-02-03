@@ -1,0 +1,79 @@
+---
+title: Sistem organisasi
+description: Administrar organizaciones en tu cuenta de Capgo
+sidebar:
+  order: 11
+locale: es
+---
+
+## ¿Qué es el sistema de organización?
+
+El sistema de organización es un sistema en capgo que te permite compartir tus aplicaciones de forma segura con los miembros de tu equipo
+
+### P: ¿Cómo puedo acceder a la información de mi organización?
+
+Para acceder a la información de tu organización, ve a [ajustes](/docs/webapp/settings/#how-to-get-to-the-settings-page) y luego haz clic en `Ajustes de la organización`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settingswebp" alt="Org settings" /><figcaption></figcaption></figure>
+
+### P: ¿Cómo puedo cambiar la organización que estoy viendo?
+
+Para ver los ajustes de una organización diferente, haz clic en el selector de organización cerca de tu nombre
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-selectorwebp" alt="Org selector" /><figcaption></figcaption></figure>
+
+Si no puedes ver esto, probablemente no estés en la página de ajustes
+
+### P: ¿Cómo puedo ver los miembros de mi organización?
+
+Haz clic en `miembros`
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-memberswebp" alt="Org Show members" /><figcaption></figcaption></figure>
+
+### P: ¿Cómo puedo invitar a un usuario a una organización?
+
+Haz clic en `Añadir miembro`
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-memberwebp" alt="Org add member" /><figcaption></figcaption></figure>
+
+Entonces aparecerá una ventana emergente - por favor ingresa la dirección de correo electrónico del usuario
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enterwebp" alt="Invite to org" /><figcaption></figcaption></figure>
+
+Luego haz clic en `invitar`. Aparecerá otra ventana emergente, esta vez preguntando sobre los permisos que debería tener el usuario invitado
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgswebp" alt="Select perm for org" /><figcaption></figcaption></figure>
+
+Aquí hay un desglose de todos los permisos:
+
+| Permiso                          | Lectura | Subir | Escritura | Admin | Super Admin |
+|----------------------------------|---------|-------|-----------|--------|-------------|
+| Ver estadísticas de app          |   ✅    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Ver canales de app               |   ✅    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Ver dispositivos                 |   ✅    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Ver registros                    |   ✅    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Ver paquetes                     |   ✅    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Eliminar app                     |   ❌    |   ❌   |    ❌     |   ❌    |     ✅     |
+| Eliminar canal                   |   ❌    |   ❌   |    ❌     |   ✅    |     ✅     |
+| Eliminar versión                 |   ❌    |   ❌   |    ✅     |   ✅    |     ✅     |
+| Cambiar ajustes de org           |   ❌    |   ❌   |    ❌     |   ✅    |     ✅     |
+| Gestionar usuarios de org        |   ❌    |   ❌   |    ❌     |   ✅    |     ✅     |
+| Modificar ajustes de canal       |   ❌    |   ❌   |    ✅     |   ✅    |     ✅     |
+| Subir nueva versión              |   ❌    |   ✅   |    ✅     |   ✅    |     ✅     |
+| Modificar dispositivos           |   ❌    |   ❌   |    ✅     |   ✅    |     ✅     |
+| Cambiar versión actual del canal |   ❌    |   ❌   |    ✅     |   ✅    |     ✅     |
+| Crear nuevo canal                |   ❌    |   ❌   |    ❌     |   ✅    |     ✅     |
+| Modificar versión (metadatos)    |   ❌    |   ❌   |    ✅     |   ✅    |     ✅     |
+| Gestionar facturación            |   ❌    |   ❌   |    ❌     |   ❌    |     ✅     |
+| Eliminar versión inseguramente   |   ❌    |   ❌   |    ❌     |   ❌    |     ✅     |
+
+### P: ¿Cómo se maneja la facturación dentro de las organizaciones?
+
+Cualquier persona con permiso de **super admin** puede gestionar la facturación de una organización determinada
+Los planes están vinculados a una organización y no a tu cuenta personal
+
+:::danger
+⚠️ Comprar un plan SOLO afectará a las organizaciones que tienes seleccionadas actualmente
+:::
+
+### P: ¿Puedo crear más de una organización?
+
+No, aún no

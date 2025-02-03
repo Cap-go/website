@@ -1,0 +1,61 @@
+---
+title: API de statistiques
+description: Comment utiliser le plugin de mise à jour automatique en mode auto-hébergé
+sidebar:
+  order: 8
+locale: fr
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## API de Statistiques
+
+À partir de la version 130, le système de mise à jour peut envoyer des statistiques !
+
+Par défaut, toutes les statistiques sont envoyées à notre serveur, pour comprendre l'utilisation et la recherche
+
+:::note
+Aucune donnée privée n'est envoyée pour les statistiques, uniquement un UUID aléatoire, la mise à jour de version, la version de l'application native, la plateforme, l'action et l'ID de l'application
+:::
+
+Si vous souhaitez envoyer ces données à votre serveur à la place, modifiez la configuration ci-dessous :
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "VOTRE_URL"
+		}
+	}
+}
+```
+
+Ce que votre serveur recevra est :
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // peut être set, delete, set_fail, reset, revert
+	// Ensuite, ce sont les mêmes informations que la mise à jour
+	"app_id": "*******", // identifiant de l'application dans le store
+	"device_id": "*******", // id unique par installation d'application
+	"platform": "ios", // ou android
+	"custom_id": "user_1", // représente votre utilisateur
+        "version_name": "123", // version du build web
+        "version_build": "120", // version du build natif
+        "version_code": "120", // numéro de build de la version native
+	"version_os": "16", // version OS de l'appareil
+        "plugin_version": "400"// pour faire réagir votre api différemment selon les plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+Vous pouvez aussi totalement le désactiver, avec une chaîne vide. Gardez à l'esprit que les statistiques sont conçues de manière respectueuse de la vie privée et m'aident à comprendre comment les gens utilisent le plugin, pour résoudre les problèmes et l'améliorer
+
+<LinkCard
+	title="Gestion des Mises à jour"
+	href="/docs/plugin/self-hosted/handling-updates"
+/>

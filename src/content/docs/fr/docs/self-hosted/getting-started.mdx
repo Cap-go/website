@@ -1,0 +1,84 @@
+---
+title: Come iniziare
+description: Comment exécuter votre propre serveur de mise à jour automatique
+sidebar:
+  order: 1
+locale: fr
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Cette documentation expliquera comment exécuter votre propre serveur de mise à jour automatique
+
+## Avant de commencer
+
+Si vous utilisez ce travail par vous-même, je ne peux que vous suggérer de soutenir mon travail via [Github support](https://githubcom/sponsors/riderx/)
+
+J'ai fait un grand pari en open sourcant tout le précieux code que j'ai construit ici
+
+J'aurais pu le garder pour moi et fixer un prix élevé
+
+De plus, je veux me concentrer sur les outils Capgo, et en faire une entreprise ouverte et transparente
+
+De même, je pense que cela rendrait notre monde meilleur en s'ouvrant plutôt qu'en se battant et en se cachant
+
+Mais pour que cela soit possible, il est nécessaire que chacun d'entre nous fasse sa part, y compris vous 🥹
+
+Si l'offre Capgo ne vous convient pas, fixez votre prix et soutenez un créateur bootstrappé [ICI](https://githubcom/sponsors/riderx/) selon vos conditions
+
+## Parité des fonctionnalités
+
+Si vous choisissez d'utiliser votre propre serveur, vous perdez le flux d'installation en 5 minutes\
+Vous devez implémenter vous-même toutes les fonctionnalités\
+\
+Voici la liste :
+
+| Fonctionnalités          | Capgo | Auto-hébergé |
+| ------------------------ | ----- | ------------ |
+| Mises à jour            | ✅     | 🚧           |
+| Retour automatique      | ✅     | 🚧           |
+| Alerte email en cas d'échec | ✅     | 🚧           |
+| Canal                    | ✅     | 🚧           |
+| Remplacement de canal    | ✅     | 🚧           |
+| Remplacement d'appareil  | ✅     | 🚧           |
+| Paramètres de canal     | ✅     | 🚧           |
+| Paramètres d'appareil   | ✅     | 🚧           |
+| ID personnalisé         | ✅     | 🚧           |
+| Canal automatique       | ✅     | 🚧           |
+| API Canaux              | ✅     | 🚧           |
+| Statistiques des mises à jour | ✅     | 🚧           |
+| Statistiques des échecs de téléchargement | ✅     | 🚧           |
+| Statistiques d'utilisation | ✅     | 🚧           |
+| Chiffrement des mises à jour | ✅     | 🚧           |
+
+> Si vous envoyez une mauvaise mise à jour à vos utilisateurs, vous pouvez casser leur application
+
+> Gardez à l'esprit que vous ne pouvez pas utiliser le cloud Capgo et votre serveur en même temps
+
+## Choisir entre Auto et Manuel
+
+:::danger
+⚠️ La mise à jour OTA (Over the Air) ne fonctionne que sur les changements HTML, CSS, JS\
+Lorsque vous mettez à jour du code natif (plugin Capacitor), vous devez le soumettre à nouveau à l'app store
+:::
+
+En mode auto, une partie de la logique est gérée par le code natif, les mises à jour sont décidées côté serveur, c'est plus sécurisé et permet des mises à jour précises, un déploiement partiel sur un appareil ou un groupe et plus encore
+
+En mode manuel, toute la logique est gérée par le JS, il y a du bon et du mauvais dans les deux scénarios
+
+### Préparer votre bundle
+
+Pour envoyer des mises à jour à votre application, vous devez la zipper
+La meilleure façon d'être certain que votre zip est bon est d'utiliser le CLI Capgo pour le zipping
+
+`npx @capgo/cli@latest bundle zip` créera votre zip prêt à être téléchargé dans votre backend
+
+<LinkCard
+	title="Mise à jour automatique"
+	href="/docs/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuel"
+	href="/docs/self-hosted/manual/"
+/>

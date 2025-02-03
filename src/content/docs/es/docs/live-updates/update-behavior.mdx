@@ -1,0 +1,154 @@
+---
+title: Comportamiento de Actualización
+sidebar:
+  order: 3
+locale: es
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Cuando publicas una actualización de tu aplicación Capgo, probablemente quieras que tus usuarios reciban esa actualización lo antes posible. Pero tampoco quieres interrumpir su experiencia forzándolos a esperar una descarga o reiniciar la aplicación en medio de una sesión.
+
+El comportamiento de actualización de Capgo está diseñado para encontrar un equilibrio entre entregar actualizaciones rápidamente y minimizar la interrupción para tus usuarios.
+
+## Flujo de Actualización Predeterminado
+
+Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
+
+<Steps>
+
+1. Al iniciar la aplicación, el plugin de Capgo verifica si hay una nueva actualización disponible
+
+2. Si se encuentra una actualización, se descarga en segundo plano mientras el usuario continúa usando la versión actual de la aplicación
+
+3. Una vez que se completa la descarga, Capgo espera a que el usuario envíe la aplicación a segundo plano o la cierre por completo
+
+4. Cuando el usuario vuelva a iniciar la aplicación, ejecutará la versión actualizada
+
+</Steps>
+
+Este flujo asegura que los usuarios siempre ejecuten la última versión de tu aplicación, sin ser interrumpidos por avisos de actualización ni verse obligados a esperar descargas.
+
+<Aside type="tip">
+Capgo también busca actualizaciones cuando la aplicación se reanuda desde segundo plano, por lo que los usuarios recibirán actualizaciones incluso si no cierran completamente la aplicación
+</Aside>
+
+## ¿Por qué Este Enfoque?
+
+Aplicar actualizaciones en segundo plano o al cerrar tiene varios beneficios clave para la experiencia del usuario:
+
+- Los usuarios no son interrumpidos por avisos de actualización ni forzados a esperar descargas en medio de una sesión
+
+- Las actualizaciones se aplican sin problemas entre sesiones, por lo que la experiencia de iniciar la aplicación siempre es nueva
+
+- Puedes entregar actualizaciones frecuentemente sin preocuparte por interrumpir a los usuarios activos
+
+La principal desventaja es que si un usuario envía a segundo plano y rápidamente reanuda tu aplicación, pueden perder cualquier estado no guardado ya que la actualización se aplicó entre esas acciones.
+
+Para mitigar esto, recomendamos:
+
+- Guardar el estado frecuentemente y restaurarlo correctamente cuando la aplicación se reanude
+
+- Evitar actualizaciones muy frecuentes que modifiquen grandes partes del estado de la aplicación
+
+- Considerar personalizar el comportamiento de actualización para flujos sensibles (ver más abajo)
+
+## Personalizando Cuándo se Aplican las Actualizaciones
+
+En algunos casos, es posible que desees más control sobre exactamente cuándo se aplica una actualización. Por ejemplo, podrías querer asegurarte de que un usuario complete un flujo en progreso antes de actualizar, o coordinar una actualización de la aplicación con un cambio del lado del servidor.
+
+Capgo proporciona una función `setDelay` que te permite especificar condiciones que deben cumplirse antes de que se instale una actualización:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+Este ejemplo retrasaría la instalación de una actualización hasta después del 1 de junio de 2023 Y que la aplicación haya estado en segundo plano durante al menos 60 segundos.
+
+Las condiciones de retraso disponibles son:
+
+- `date`: Esperar hasta después de una fecha/hora específica para aplicar la actualización
+- `background`: Esperar una duración mínima después de que la aplicación esté en segundo plano para aplicar la actualización
+- `nativeVersion`: Esperar a que se instale un binario nativo con una versión mínima antes de aplicar la actualización
+- `kill`: Esperar hasta el próximo evento de cierre de la aplicación para aplicar la actualización
+
+Puedes combinar estas condiciones para controlar con precisión cuándo se instala una actualización.
+
+<Aside type="danger">
+Ten en cuenta que la condición `kill` actualmente activa la actualización después del primer evento de cierre, no del próximo evento en segundo plano como las otras condiciones. Esta inconsistencia se corregirá en una versión futura
+</Aside>
+
+## Aplicando Actualizaciones Inmediatamente
+
+Para actualizaciones críticas o aplicaciones con estado muy simple, es posible que desees aplicar una actualización tan pronto como se descargue, sin esperar un evento de segundo plano o cierre. Capgo admite esto a través de la opción de configuración `directUpdate`.
+
+`directUpdate` se establece en tu archivo `capacitor.config.ts`, no en código JavaScript:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: true,
+    },
+  },
+  keepUrlPathAfterReload: true,
+};
+
+export default config;
+```
+
+Con `directUpdate` habilitado, Capgo aplicará inmediatamente una actualización tan pronto como se complete la descarga, incluso si el usuario está usando activamente la aplicación.
+
+Ten en cuenta que debido a que `directUpdate` es una configuración nativa, requiere un manejo adicional en tu código JavaScript.
+
+Cuando uses `directUpdate`, necesitas escuchar el evento `appReady` y ocultar la pantalla de inicio de tu aplicación en respuesta:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Ocultar pantalla de inicio
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+El evento `appReady` se dispara una vez que la aplicación ha terminado de inicializarse y aplicar cualquier actualización pendiente. Este es el punto en el que es seguro mostrar la interfaz de usuario de tu aplicación, ya que asegura que el usuario verá la última versión.
+
+Además de manejar el evento `appReady`, recomendamos establecer la opción de configuración `keepUrlPathAfterReload` en `true` cuando se use `directUpdate`. Esto preserva la ruta URL actual cuando la aplicación se recarga debido a una actualización, ayudando a mantener la ubicación del usuario en la aplicación y reduciendo la desorientación.
+
+Si no manejas el evento `appReady` y estableces `keepUrlPathAfterReload` cuando uses `directUpdate`, el usuario podría ver brevemente una versión desactualizada de la aplicación, ser llevado de vuelta a la ruta inicial, o ver un parpadeo mientras se aplica la actualización.
+
+Usar `directUpdate` puede ser útil para entregar correcciones críticas de errores o parches de seguridad, pero viene con algunas compensaciones:
+
+- El usuario puede ver un breve parpadeo o estado de carga mientras se aplica la actualización si no manejas correctamente el evento `appReady`
+- Si la actualización modifica el estado o la interfaz de usuario de la aplicación, el usuario puede ver un cambio disruptivo en medio de una sesión
+- La ubicación del usuario en la aplicación puede perderse si no se establece `keepUrlPathAfterReload`, potencialmente desorientándolo
+- Necesitarás manejar cuidadosamente el guardado y restauración del estado para asegurar una transición suave
+
+Si habilitas `directUpdate`, recomendamos:
+
+- Manejar el evento `appReady` para controlar cuándo se muestra la interfaz de usuario de tu aplicación
+- Establecer `keepUrlPathAfterReload` en `true` para preservar la ubicación del usuario en la aplicación
+- Guardar y restaurar el estado de la aplicación según sea necesario para evitar perder el progreso del usuario
+- Probar exhaustivamente el comportamiento de actualización de tu aplicación para asegurar que no haya transiciones bruscas, pérdida de estado o cambios de ubicación desorientadores
+
+En la mayoría de los casos, el comportamiento de actualización predeterminado proporciona el mejor equilibrio entre entregar actualizaciones rápidamente y minimizar la interrupción. Pero para aplicaciones con necesidades específicas, Capgo proporciona la flexibilidad para personalizar cuándo y cómo se aplican las actualizaciones.

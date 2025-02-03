@@ -1,0 +1,116 @@
+---
+title: 개요
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: ko
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Capgo의 실시간 업데이트 기능을 사용하여 앱의 JavaScript 번들을 원격으로 실시간으로 업데이트하세요. 앱 스토어 검토 과정 없이 사용자에게 직접 JS 업데이트를 푸시하여 즉시 버그를 수정하고 새로운 기능을 제공할 수 있습니다.
+
+<Aside>
+
+실시간 업데이트는 JavaScript 번들 변경으로 제한됩니다. 플러그인 추가/제거 또는 네이티브 프로젝트 구성 변경과 같은 네이티브 코드를 업데이트해야 하는 경우 새로운 네이티브 바이너리 빌드를 앱 스토어에 제출해야 합니다.
+
+</Aside>
+
+## 실시간 업데이트 작동 방식
+
+Capgo의 실시간 업데이트 시스템은 두 가지 주요 구성 요소가 있습니다:
+
+1 앱에 설치하는 Capgo SDK. SDK는 사용 가능한 업데이트를 확인하고 백그라운드에서 다운로드합니다.
+
+2 특정 사용자 그룹에 업데이트를 타겟팅할 수 있는 채널. 채널을 사용하여 `Production`, `Staging`, `Dev`와 같은 다양한 릴리스 트랙을 관리할 수 있습니다.
+
+새로운 JS 번들을 Capgo에 업로드하고 채널에 할당하면, 해당 채널로 구성된 앱의 Capgo SDK가 업데이트를 감지하고 다운로드합니다. 다음 앱 재시작 시 새로운 번들이 로드됩니다.
+
+## 시작하기
+
+실시간 업데이트 사용을 시작하려면 다음 단계를 따르세요:
+
+<Steps>
+
+1 [Capgo 퀵스타트](/docs/getting-started/quickstart)를 완료하여 Capgo에서 앱을 설정하고 Capgo SDK를 설치하세요.
+
+2 앱 코드에서 앱 초기화가 완료된 후 `CapacitorUpdaternotifyAppReady()`를 호출하세요. 이는 Capgo SDK에 앱이 업데이트를 받을 준비가 되었음을 알립니다.
+
+3 JS 번들을 빌드하고 Capgo에 업로드하세요:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4 앱을 열고 업데이트가 다운로드될 때까지 기다리세요. 상태를 다음과 같이 확인할 수 있습니다:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5 업데이트가 다운로드되면 앱을 종료하고 다시 열어 새 번들을 로드하세요.
+
+</Steps>
+
+자세한 내용은 [실시간 업데이트 배포](/docs/getting-started/deploy) 가이드를 참조하세요.
+
+## Capgo CLI
+
+Capgo CLI는 개발자가 자체 CI/CD 파이프라인에서 Capgo의 서비스와 상호 작용할 수 있게 해주는 강력한 도구입니다. CLI를 사용하면 빌드가 생성되고 배포되는 시기를 세밀하게 제어할 수 있어 기존 엔터프라이즈 워크플로우에 Capgo를 통합할 수 있습니다.
+
+### Capgo CLI의 용도는 무엇인가요?
+
+Capgo CLI는 실시간 업데이트 워크플로우에서 더 많은 제어와 유연성이 필요한 개발자와 팀을 위해 설계되었습니다. CI/CD 파이프라인에서 CLI를 사용하면 다음과 같은 작업을 수행할 수 있습니다:
+
+- Capgo의 내장 자동화에 의존하지 않고 업데이트를 정확히 언제 빌드하고 배포할지 결정할 수 있습니다
+- 빌드와 배포 단계 사이에 코드 서명, QA 테스트 또는 관리자 승인과 같은 자체 프로세스를 삽입할 수 있습니다
+- Capgo를 기존 DevOps 도구 및 워크플로우에 통합할 수 있습니다
+
+### 인증
+
+Capgo CLI를 사용하려면 API 키로 인증해야 합니다. Capgo 계정 설정에서 API 키를 생성할 수 있습니다.
+
+로그인하고 API 키를 안전하게 저장하려면 다음을 실행하세요:
+
+```shell
+npx @capgo/cli@latest login [API_KEY]
+```
+
+이 명령은 이후 사용을 위해 저장됩니다. 로그인 후에는 각 명령마다 API 키를 제공할 필요가 없습니다.
+
+### 다른 CLI 도구와의 주요 차이점
+
+다른 실시간 업데이트 CLI 도구를 사용해 본 적이 있다면, Capgo CLI에 대해 알아야 할 몇 가지 주요 사항이 있습니다:
+
+- Capgo는 실시간 업데이트 기능 세트에만 중점을 두고 있으므로 개발과 CI/CD 사용 사례 모두에 단일 CLI를 사용합니다
+
+- Capgo CLI는 별도의 설치 단계가 필요하지 않습니다. `@capgo/cli` 패키지에 번들로 제공되며 `npx`를 사용하여 직접 실행할 수 있습니다
+
+- Capgo의 CLI는 실시간 업데이트 워크플로우에 특화되어 설계되었으므로 더 일반적인 용도의 CLI 도구에서 찾을 수 있는 일부 기능이나 명령이 포함되어 있지 않을 수 있습니다
+
+## 다음 단계
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="채널" icon="bars">
+      채널을 사용하여 다양한 릴리스 트랙을 관리하고 특정 사용자에게 업데이트를 타겟팅하는 방법을 알아보세요
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="롤백" icon="left-arrow">
+      업데이트에 문제가 발생할 경우 이전 JS 번들 버전으로 롤백하는 방법을 알아보세요
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="업데이트 동작" icon="setting">
+      앱에서 업데이트가 다운로드되고 적용되는 방식과 시기를 사용자 지정하세요
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="빠른 업데이트" icon="starlight">
+      업데이트 프로세스를 가속화하기 위해 빠른 업데이트를 사용하는 방법을 알아보세요
+    </Card>
+  </a>
+</CardGrid>

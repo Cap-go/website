@@ -1,0 +1,127 @@
+---
+title: Masalah yang diketahui
+description: Problemas conocidos de Capacitor y CapGo
+sidebar:
+  order: 7
+locale: es
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Recarga en vivo de Ionic
+
+* Cuando desarrollas, si utilizas la función de recarga en vivo de Ionic desde la CLI, anulará el plugin, por lo que nunca verás tus actualizaciones
+
+## Recarga en vivo de Quasar
+
+* Utiliza el mismo sistema que Ionic internamente, por lo que no verás tus actualizaciones
+
+## Fallos en las actualizaciones
+
+* Esto suele ocurrir cuando se envían actualizaciones grandes (> 20mb), un gran porcentaje de usuarios no obtendrá la última versión
+Anteriormente, los usuarios necesitaban mantener la aplicación abierta hasta que la descarga se completara, ahora utilizamos descarga en segundo plano, pero aún está limitada a unos pocos segundos
+
+## Android
+
+### No se puede descargar
+
+Hemos visto algunos problemas con dispositivos en India, y al hablar con usuarios, les hicimos probar diferentes servidores DNS, y funcionó
+
+Entonces, si tienes el problema, intenta usar un servidor DNS diferente como Cloudflare o Google DNS
+
+Cloudflare: 1111 y 1001
+
+Google DNS: 8888 y 8844 o dnsgoogle
+
+<LinkCard
+	title="¿Cómo configurar un servidor DNS preferido en Android?"
+	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Auto-alojado
+Cuando estás implementando una actualización auto-alojada, ten en cuenta que no puedes usar endpoints "HTTP" ya que va en contra de las políticas de seguridad de las aplicaciones Android, si aún quieres hacerlo, sigue esta guía:
+
+<LinkCard
+	title="¿Cómo permitir todos los tipos de conexión de red HTTP y HTTPS en Android (9) Pie?"
+	href="https://stackoverflowcom/a/51902630/5511370"
+/>
+
+### Descompresión 
+
+Problema de descompresión: Las entradas DEFLATED pueden tener descriptor EXT
+
+Si comprimiste tu paquete con algo diferente a la CLI, el formato de tu zip podría ser incorrecto, por favor usa el comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`
+
+Este es un problema conocido de Java:
+
+<LinkCard
+	title="Problema de descompresión: Las entradas DEFLATED pueden tener descriptor EXT"
+	href="https://bugsopenjdkorg/browse/JDK-8143613"
+/>
+
+### Problema de Clearfix
+
+* Si tienes problemas con usesCleartextTraffic, es porque el plugin sigue las buenas prácticas recomendadas por sonar cloud, en el 90% de los casos funcionará bien, pero con algunos plugins causa problemas
+
+Para solucionarlo, agrega en `android/app/src/main/AndroidManifestxml` en la clave `<application>`:
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemasandroidcom/tools"
+```
+
+## iOS
+
+### Manifiesto de privacidad
+
+Agrega la clave de diccionario `NSPrivacyAccessedAPICategoryUserDefaults` a tu [Manifiesto de Privacidad](https://capacitorjscom/docs/ios/privacy-manifest) (normalmente `ios/App/PrivacyInfoxcprivacy`):
+
+```xml
+<?xml version="10" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 10//EN" "http://wwwapplecom/DTDs/PropertyList-10dtd">
+<plist version="10">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Agrega esta entrada dict al array si el archivo ya existe -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA921</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+Recomendamos declarar [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) como la razón para acceder a la API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
+
+### Permisos de red
+
+Cuando uses un servidor local para probar actualizaciones, la aplicación pedirá permisos de red, es un comportamiento normal, no ocurre cuando usas un servidor remoto
+
+## Ambos sistemas operativos
+
+Cuando se realizan actualizaciones en modo manual, algunos eventos no son fáciles de capturar, por ejemplo, el fallo de actualización se dispara justo antes de que tu código JS se recargue, por lo que no podrás capturarlo
+
+Una alternativa es listar los paquetes y verificar las estadísticas de error para saber si la actualización falló
+
+Necesitamos encontrar una mejor manera de manejar esto en el futuro, pero no es una prioridad, ya que el modo automático es la forma recomendada de hacer actualizaciones
+
+Los PRs son bienvenidos para ayudarnos a mejorar esto
+
+## CLI
+
+si tu CLI tiene problemas para hacer cualquier cosa,
+
+Verifica si **appId** y **appName** están presentes en tu **capacitorconfigts**
+
+Sigue la guía de la documentación oficial:
+
+<LinkCard
+	title="Configuración de Capacitor"
+	href="https://capacitorjscom/docs/config"
+/>

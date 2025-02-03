@@ -1,0 +1,43 @@
+---
+title: Selamat datang di Capgo
+description: >-
+  Capgo adalah platform sumber terbuka untuk pembaruan langsung untuk Capacitor
+  dan tim pengembangan seluler, yang memungkinkan Anda mengirimkan pembaruan
+  langsung kepada pengguna dalam hitungan menit, bukan hari.
+template: splash
+next: false
+hero:
+  tagline: >-
+    Capgo adalah platform open source untuk pembaruan real-time untuk Capacitor
+    dan tim pengembangan mobile yang memungkinkan tim mengirimkan pembaruan
+    kepada pengguna dalam hitungan menit, bukan hari
+  image:
+    file: /logo.svg
+  actions:
+    - text: はじめましょう
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: 'https://github.com/Cap-go/Capgo/'
+      icon: external
+      variant: minimal
+locale: ko
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="실시간 업데이트의 힘" icon="rocket">
+    실시간 앱 업데이트, 중요한 버그 수정, 콘텐츠 변경, 베타 기능 등을 원활하게 제공하여 사용자에게 최상의 경험을 제공할 수 있습니다
+  </Card>
+  <Card title="쉬운 통합" icon="pencil">
+    이 플러그인은 코드베이스에 3단계로 통합되며 며칠이 아닌 몇 분 만에 사용자에게 업데이트를 보낼 수 있습니다!
+  </Card>
+  <Card title="설치" icon="setting">
+    Run `npx @capgo/cli@latest init [APIKEY]` to get started
+  </Card>
+  <Card title="광범위한 문서" icon="open-book">
+    온보딩 비디오를 통해 5분 만에 플러그인을 마스터하는 방법을 [문서](/docs/plugin/cloud-mode/getting-started/)에서 알아보세요
+  </Card>
+</CardGrid>

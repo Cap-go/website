@@ -1,0 +1,61 @@
+---
+title: API Statistik
+description: Cómo usar el plugin de actualización automática en modo auto-alojado
+sidebar:
+  order: 8
+locale: es
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## API de Estadísticas
+
+¡A partir de la versión 130, el sistema de actualización es capaz de enviar estadísticas!
+
+Por defecto, todas las estadísticas se envían a nuestro servidor, para comprender el uso e investigar
+
+:::note
+No se envían datos privados para las estadísticas, solo UUID aleatorio, actualización de versión, versión de aplicación nativa, plataforma, acción e ID de aplicación
+:::
+
+Si deseas enviar estos datos a tu servidor en su lugar, cambia la configuración a continuación:
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "TU_URL"
+		}
+	}
+}
+```
+
+Lo que tu servidor recibirá es:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // puede ser set, delete, set_fail, reset, revert
+	// Luego es la misma información que la actualización
+	"app_id": "*******", // identificador de la aplicación en la tienda
+	"device_id": "*******", // id único por instalación de aplicación
+	"platform": "ios", // o android
+	"custom_id": "user_1", // representa a tu usuario
+        "version_name": "123", // versión de la compilación web
+        "version_build": "120", // versión de la compilación nativa
+        "version_code": "120", // número de compilación de la versión nativa
+	"version_os": "16", // versión del SO del dispositivo
+        "plugin_version": "400"// para que tu api se comporte diferente con diferentes plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+También puedes deshabilitarlo completamente con una cadena vacía. Ten en cuenta que las estadísticas se hacen respetando la privacidad y me ayudan a entender cómo la gente usa el plugin, para resolver problemas y mejorarlo
+
+<LinkCard
+	title="Manejo de Actualizaciones"
+	href="/docs/plugin/self-hosted/handling-updates"
+/>

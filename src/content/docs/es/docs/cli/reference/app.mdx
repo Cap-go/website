@@ -1,0 +1,84 @@
+---
+title: aplicación
+sidebar_label: app
+sidebar:
+  order: 4
+locale: es
+---
+
+El comando `app` te permite administrar tus aplicaciones de Capgo
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Agrega una nueva aplicación a tu cuenta de Capgo
+
+`[appId]` es el ID de tu aplicación en el formato `comexampleapp`. Consulta la [documentación de Capacitor](https://capacitorjscom/docs/cli/commands/init/) para más información
+
+> 💡 Todas las opciones se obtendrán de tu `capacitorconfigjson` si no se proporcionan
+
+Opciones:
+
+- `--icon [path]`: Ruta a un ícono personalizado para mostrar en la aplicación web de Capgo
+- `--name [name]`: Nombre personalizado para mostrar en la lista de aplicaciones
+- `--apikey [key]`: Clave API para vincular a tu cuenta
+- `--retention [days]`: Período de retención para paquetes de la aplicación en días (predeterminado: 0 = infinito)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Actualiza una aplicación existente en tu cuenta de Capgo
+
+Opciones:
+
+- `--icon [path]`: Ruta a un ícono personalizado para mostrar en la aplicación web de Capgo
+- `--name [name]`: Nombre personalizado para mostrar en la lista de aplicaciones
+- `--retention [days]`: Período de retención para paquetes de la aplicación en días (predeterminado: 0 = infinito)
+- `--apikey [key]`: Clave API para vincular a tu cuenta
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Lista todas las aplicaciones en tu cuenta de Capgo
+
+Opciones:
+
+- `--apikey [key]`: Clave API para vincular a tu cuenta
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Elimina una aplicación de tu cuenta de Capgo
+
+Opciones:
+
+- `--apikey [key]`: Clave API para vincular a tu cuenta
+- `--bundle`: Eliminar solo una versión específica del paquete
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+Muestra información de depuración para una aplicación
+
+Opciones:
+
+- `--apikey [key]`: Clave API para vincular a tu cuenta
+- `--device`: Depurar un dispositivo específico
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+Edita la configuración de Capacitor para una aplicación
+
+`[path]` es la ruta al ajuste que deseas cambiar (por ejemplo, `appId` o `pluginsCapacitorUpdaterautoUpdate`)
+
+Debes proporcionar ya sea `--string` o `--bool`:
+
+- `--string <value>`: Establece el ajuste a un valor de cadena
+- `--bool <true|false>`: Establece el ajuste a un valor booleano

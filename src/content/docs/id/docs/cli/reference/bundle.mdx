@@ -1,0 +1,165 @@
+---
+title: paket
+sidebar_label: bundle
+sidebar:
+  order: 5
+locale: id
+---
+
+Perintah `bundle` memungkinkan Anda mengelola bundel aplikasi Anda
+
+### upload
+
+`npx @capgo/cli bundle upload [appId]`
+
+Mengunggah bundel baru untuk aplikasi
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `-p, --path <path>`: Path ke folder yang akan diunggah (standarnya adalah `webDir` di `capacitorconfig`)
+- `-c, --channel <channel>`: Channel untuk menghubungkan bundel
+- `-e, --external <url>`: Link ke URL eksternal alih-alih mengunggah ke Capgo Cloud
+- `--iv-session-key <key>`: Mengatur IV dan kunci sesi untuk URL bundel eksternal
+- `--s3-region <region>`: Region untuk bucket S3 Anda
+- `--s3-apikey <apikey>`: Kunci API untuk endpoint S3 Anda
+- `--s3-apisecret <apisecret>`: API secret untuk endpoint S3 Anda
+- `--s3-endpoint <s3Endpoint>`: URL endpoint S3
+- `--s3-bucket-name <bucketName>`: Nama bucket S3 Anda
+- `--s3-port <port>`: Port untuk endpoint S3 Anda
+- `--no-s3-ssl`: Menonaktifkan SSL untuk unggahan S3
+- `--key <key>`: Path kustom untuk kunci penandatanganan publik (sistem v1)
+- `--key-data <keyData>`: Data kunci penandatanganan publik (sistem v1)
+- `--key-v2 <key>`: Path kustom untuk kunci penandatanganan privat (sistem v2)
+- `--key-data-v2 <keyDataV2>`: Data kunci penandatanganan privat (sistem v2)
+- `--bundle-url`: Mencetak URL bundel ke stdout
+- `--no-key`: Mengabaikan kunci penandatanganan dan mengirim pembaruan tanpa tanda tangan
+- `--no-code-check`: Melewati pemeriksaan `notifyAppReady()` dalam kode sumber dan `indexhtml` di folder root
+- `--display-iv-session`: Menampilkan IV dan kunci sesi yang digunakan untuk mengenkripsi pembaruan
+- `-b, --bundle <bundle>`: Nomor versi bundel yang akan diunggah
+- `--min-update-version <minUpdateVersion>`: Versi aplikasi minimum yang diperlukan untuk menerapkan pembaruan ini (hanya digunakan jika pembaruan otomatis dinonaktifkan melalui metadata)
+- `--auto-min-update-version`: Secara otomatis mengatur versi pembaruan minimum berdasarkan versi paket native
+- `--ignore-metadata-check`: Mengabaikan pemeriksaan metadata (node_modules) saat mengunggah
+- `--ignore-checksum-check`: Mengabaikan pemeriksaan checksum saat mengunggah
+- `--timeout <timeout>`: Batas waktu proses unggah dalam detik
+- `--multipart`: Menggunakan protokol multipart untuk mengunggah data ke S3 (tidak direkomendasikan, gunakan `--tus` sebagai gantinya)
+- `--tus`: Mengunggah bundel menggunakan protokol tus
+- `--tus-chunk-size <tusChunkSize>`: Ukuran chunk untuk unggahan tus
+- `--partial`: Hanya mengunggah file yang berubah ke Capgo Cloud
+- `--partial-only`: Hanya mengunggah file parsial ke Capgo Cloud, melewati file zip (berguna untuk bundel besar)
+- `--encrypted-checksum <encryptedChecksum>`: Checksum terenkripsi (tanda tangan) untuk bundel eksternal
+- `--auto-set-bundle`: Secara otomatis mengatur versi bundel di `capacitorconfigjson`
+- `--dry-upload`: Melakukan simulasi proses unggah tanpa benar-benar mengunggah file (berguna untuk pengujian)
+- `--package-json <packageJson>`: Daftar path ke file `packagejson` dipisahkan koma (berguna untuk monorepo)
+- `--node-modules <nodeModules>`: Daftar path ke direktori `node_modules` dipisahkan koma (berguna untuk monorepo)
+- `--encrypt-partial`: Mengenkripsi file pembaruan parsial
+- `--delete-linked-bundle-on-upload`: Menghapus bundel yang saat ini terhubung di channel target sebelum mengunggah
+
+### compatibility
+
+`npx @capgo/cli bundle compatibility [appId]`
+
+Memeriksa kompatibilitas bundel dengan channel tertentu
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `-c, --channel <channel>`: Channel untuk memeriksa kompatibilitas
+- `--text`: Menampilkan hasil sebagai teks alih-alih emoji
+- `--package-json <packageJson>`: Daftar path ke file `packagejson` dipisahkan koma (berguna untuk monorepo)
+- `--node-modules <nodeModules>`: Daftar path ke direktori `node_modules` dipisahkan koma (berguna untuk monorepo)
+
+### delete
+
+`npx @capgo/cli bundle delete [bundleId] [appId]`
+
+Menghapus bundel dari aplikasi
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+
+### list
+
+`npx @capgo/cli bundle list [appId]`
+
+Menampilkan semua bundel untuk aplikasi
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+
+### cleanup
+
+`npx @capgo/cli bundle cleanup [appId]`
+
+Membersihkan bundel lama untuk versi major, menyimpan jumlah bundel terbaru yang ditentukan
+
+Opsi:
+
+- `-b, --bundle <bundle>`: Nomor versi major untuk dibersihkan
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `-k, --keep <keep>`: Jumlah bundel yang akan disimpan (standar: 4)
+- `-f, --force`: Memaksa penghapusan tanpa konfirmasi
+
+### decrypt
+
+`npx @capgo/cli bundle decrypt [zipPath] [sessionKey]`
+
+Mendekripsi bundel zip yang ditandatangani
+
+Opsi:
+
+- `--key <key>`: Path kustom untuk kunci penandatanganan privat
+- `--key-data <keyData>`: Data kunci penandatanganan privat
+
+### encrypt
+
+`npx @capgo/cli bundle encrypt [zipPath]`
+
+Mengenkripsi bundel zip
+
+Opsi:
+
+- `--key <key>`: Path kustom untuk kunci penandatanganan privat
+- `--key-data <keyData>`: Data kunci penandatanganan privat
+
+### encryptV2
+
+`npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
+
+Mengenkripsi bundel zip menggunakan metode enkripsi baru
+
+Opsi:
+
+- `--key <key>`: Path kustom untuk kunci penandatanganan privat
+- `--key-data <keyData>`: Data kunci penandatanganan privat
+- `-j, --json`: Menampilkan hasil sebagai JSON
+
+### decryptV2
+
+`npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
+
+Mendekripsi bundel zip menggunakan metode dekripsi baru
+
+Opsi:
+
+- `--key <key>`: Path kustom untuk kunci penandatanganan privat
+- `--key-data <keyData>`: Data kunci penandatanganan privat
+- `--checksum <checksum>`: Checksum bundel untuk memverifikasi integritas
+
+### zip
+
+`npx @capgo/cli bundle zip [appId]`
+
+Menghasilkan file zip untuk bundel
+
+Opsi:
+
+- `-p, --path <path>`: Path ke folder yang akan di-zip (standarnya adalah `webDir` di `capacitorconfig`)
+- `-b, --bundle <bundle>`: Nomor versi bundel untuk digunakan dalam nama file
+- `-n, --name <name>`: Nama file kustom untuk zip
+- `-j, --json`: Menampilkan hasil sebagai JSON
+- `--no-code-check`: Melewati pemeriksaan `notifyAppReady()` dalam kode sumber dan `indexhtml` di folder root
+- `--key-v2`: Menggunakan metode enkripsi baru (v2)
+- `--package-json <packageJson>`: Daftar path ke file `packagejson` dipisahkan koma (berguna untuk monorepo)

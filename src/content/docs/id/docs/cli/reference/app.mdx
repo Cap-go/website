@@ -1,0 +1,84 @@
+---
+title: aplikasi
+sidebar_label: app
+sidebar:
+  order: 4
+locale: id
+---
+
+Perintah `app` memungkinkan Anda mengelola aplikasi Capgo Anda
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Menambahkan aplikasi baru ke akun Capgo Anda
+
+`[appId]` adalah ID aplikasi Anda dalam format `com.example.app`. Lihat [dokumentasi Capacitor](https://capacitorjs.com/docs/cli/commands/init/) untuk informasi lebih lanjut
+
+> 💡 Semua opsi akan ditebak dari `capacitor.config.json` jika tidak disediakan
+
+Opsi:
+
+- `--icon [path]`: Path ke ikon kustom untuk ditampilkan di aplikasi web Capgo
+- `--name [name]`: Nama kustom untuk ditampilkan dalam daftar aplikasi
+- `--apikey [key]`: Kunci API untuk menghubungkan ke akun Anda
+- `--retention [days]`: Periode penyimpanan untuk bundle aplikasi dalam hari (default: 0 = tak terbatas)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Memperbarui aplikasi yang ada di akun Capgo Anda
+
+Opsi:
+
+- `--icon [path]`: Path ke ikon kustom untuk ditampilkan di aplikasi web Capgo
+- `--name [name]`: Nama kustom untuk ditampilkan dalam daftar aplikasi
+- `--retention [days]`: Periode penyimpanan untuk bundle aplikasi dalam hari (default: 0 = tak terbatas)
+- `--apikey [key]`: Kunci API untuk menghubungkan ke akun Anda
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Menampilkan semua aplikasi di akun Capgo Anda
+
+Opsi:
+
+- `--apikey [key]`: Kunci API untuk menghubungkan ke akun Anda
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Menghapus aplikasi dari akun Capgo Anda
+
+Opsi:
+
+- `--apikey [key]`: Kunci API untuk menghubungkan ke akun Anda
+- `--bundle`: Hapus hanya versi bundle tertentu
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+Menampilkan informasi debug untuk sebuah aplikasi
+
+Opsi:
+
+- `--apikey [key]`: Kunci API untuk menghubungkan ke akun Anda
+- `--device`: Debug perangkat tertentu
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+Mengedit konfigurasi Capacitor untuk sebuah aplikasi
+
+`[path]` adalah path ke pengaturan yang ingin Anda ubah (misalnya, `appId` atau `plugins.CapacitorUpdater.autoUpdate`)
+
+Anda harus menyediakan `--string` atau `--bool`:
+
+- `--string <value>`: Atur pengaturan ke nilai string
+- `--bool <true|false>`: Atur pengaturan ke nilai boolean

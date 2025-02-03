@@ -1,0 +1,122 @@
+---
+title: 概要
+sidebar:
+  order: 1
+next: false
+prev: false
+locale: ja
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+クイックスタートチュートリアルでは、Capgoの主要な概念について説明します。以下の概念について説明します：
+
+<Steps>
+
+1 Capgoアカウントにアプリを追加する
+
+2 CI/CDにCapgoを統合する
+
+3 コミットをプッシュしてCapgoでバンドルのアップロードをトリガーする
+
+4 Capgoバンドルの公開を設定およびカスタマイズする
+
+5 Capgoを介したライブアップデートを有効にするようにアプリを設定する
+
+6 Capgoからアプリにライブアップデートをデプロイする
+
+</Steps>
+
+ガイドに順を追って従うか、興味のあるコンポーネントのドキュメントに直接移動してください。
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="チュートリアルを開始" icon="rocket" >
+    クイックスタートチュートリアルに従って、すぐにCapgoを使い始めましょう！
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="簡単に統合" icon="pencil">
+    CI/CDにCapgoを統合し、コミットをプッシュしてCapgoでバンドルのアップロードをトリガーします
+  </Card></a>
+  <a href="/docs/getting-started/live-updates"><Card title="ライブアップデートのドキュメント" icon="setting">
+    アプリストアの遅延なしでリアルタイムにリモートでアプリを更新
+  </Card></a>
+  <a href="/docs/getting-started/trouble-shooting"><Card title="トラブルシューティング" icon="open-book">
+    一般的な問題とその解決方法
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+Over-the-Air（OTA）アップデート機能は、HTML、CSS、JavaScriptファイルに加えられた変更にのみ適用されます
+
+Capacitorプラグインの更新などネイティブコードに変更を加える場合は、アプリストアに再提出して承認を得る必要があります
+</Aside>
+
+## Discordコミュニティに参加
+
+[Capacitor-updater Discordサーバーに参加しましょう！](https://discordcom/invite/VnYRvBfgA6)
+
+## メンテナンス
+
+| プラグインバージョン | Capacitor互換性 | メンテナンス状況 |
+| -------------- | ----------------------- | ----------------- |
+| v6\*\* | v6\*\* | ✅ |
+| v5\*\* | v5\*\* | 重大なバグのみ |
+| v4\*\* | v4\*\* | ⚠️ 非推奨 |
+| v3\*\* | v3\*\* | ⚠️ 非推奨 |
+| > 7 | v4\*\* | ⚠️ 非推奨、CIが暴走してバージョンが上がりすぎました |
+
+## ストアガイドラインの遵守
+
+Android Google PlayとiOS App Storeには、アプリケーション内にCapacitor-updaterソリューションを統合する前に知っておくべきルールがあります
+
+### Google play
+
+[デバイスとネットワークの悪用](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en)トピックの3段落目では、Google Playのアップデートメカニズム以外の方法でソースコードを更新することは制限されていますが、この制限はjavascriptバンドルの更新には適用されません
+> この制限は、仮想マシンで実行され、AndroidAPIへのアクセスが制限されているコード（WebViewやブラウザ内のJavaScriptなど）には適用されません
+
+これはJSバンドルのみを更新し、ネイティブコードは更新しないCapacitor-updaterを完全に許可しています
+
+### App Store
+
+2015年の[Apple Developer Program License Agreement](https://developerapplecom/programs/ios/information/)のパラグラフ**332**以降、JavaScriptとアセットのOver-the-Airアップデートが完全に許可されており、最新バージョン(20170605)[こちらからダウンロード可能](https://developerapplecom/terms/)ではこの規定はさらに広範になっています：
+
+> インタープリタされたコードはアプリケーションにダウンロードできますが、そのコードは以下の条件を満たす必要があります：(a) App Storeに提出されたアプリケーションの意図された広告目的と一致しない機能や機能性を提供することによって、アプリケーションの主要な目的を変更しない、(b) 他のコードやアプリケーションのストアやストアフロントを作成しない、(c) OSの署名、サンドボックス、その他のセキュリティ機能をバイパスしない
+
+Capacitor-updaterを使用すると、プッシュするアップデートが元のApp Store承認された意図から大きく逸脱しない限り、これらのルールを完全に遵守できます
+
+Appleのガイドラインをさらに遵守するため、[App Store審査ガイドライン](https://developerapplecom/app-store/review/guidelines/)には以下のように記載されているため、App Store配信アプリでは「強制アップデート」シナリオを有効にしないことを推奨します：
+
+> アプリは、機能、コンテンツ、またはアプリの使用にアクセスするために、ユーザーにアプリの評価、レビュー、他のアプリのダウンロード、または同様のアクションを強制してはいけません
+
+これは、ユーザーが次回アプリを閉じるまで新バージョンの適用を強制しないバックグラウンドアップデートのデフォルトの動作には問題ありませんが、表示することを決めた場合はその役割を少なくとも認識しておく必要があります
+
+## オープンソース
+
+このプラグインはLGPL-3.0ライセンス、バックエンドはAGPL-3.0ライセンスの下にあります
+
+> 💡 LGPL-3.0は、プラグインのコードを修正した場合、同じライセンスでオープンソースとして公開することが必須であることを意味します。コードを修正せずに使用する場合は、これは該当しません。詳細は以下のリンクの問題をご確認ください 👇
+
+<LinkCard
+	title="ライセンスについて?"
+	href="https://githubcom/Cap-go/capacitor-updater/issues/7"
+/>
+
+<LinkCard
+	title="ドキュメントを読む代わりにGPTS Capgoを使用してヘルプを得る"
+	href="https://chatopenaicom/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+> アプリに心配なく含めることができます
+
+## 最後に
+
+セルフホストを利用していて、このツールが役立つと感じる場合は、[GitHubスポンサー](https://githubcom/sponsors/riderx/)になって私の仕事をサポートすることをご検討ください
+
+私はここで構築したすべてのコードを、有料化する代わりにオープンソース化することを選びました。戦って隠すのではなく、オープンにすることで、より良い世界を作ることができると信じています
+
+これを可能にするには、あなたを含む私たち全員が各自の役割を果たす必要があります🥹 Capgo cloudがニーズを満たさない場合は、[ここ](https://githubcom/sponsors/riderx/)であなたの条件でブートストラップされたメーカーをバックアップできます
+
+## 簡単な計算
+
+基本プランの価格：$14*12 = 年間$168
+平均的な開発者の時給 = $60
+つまり、セルフホストで3時間無駄にすると1年分の費用を支払うことができ、3時間以上費やすとお金を失うことになります^^

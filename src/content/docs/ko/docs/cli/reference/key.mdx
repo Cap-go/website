@@ -1,0 +1,37 @@
+---
+title: 키
+sidebar_label: key
+sidebar:
+  order: 7
+locale: ko
+---
+
+`key` 명령을 사용하여 앱 서명 키를 관리할 수 있습니다
+
+### save
+
+`npx @capgo/cli key save`
+
+base64로 인코딩된 암호화 키를 Capacitor 구성에 저장합니다(CI에 유용)
+
+옵션:
+
+- `-f, --force`: 새 키 생성 강제 실행
+- `--key`: Capacitor 구성에 저장할 키 파일 경로
+- `--key-data`: Capacitor 구성에 직접 저장할 키 데이터
+
+### create
+
+`npx @capgo/cli key create`
+
+새 암호화 키를 생성합니다
+
+옵션:
+
+- `-f, --force`: 새 키 생성 강제 실행
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+이전 암호화 키를 삭제합니다

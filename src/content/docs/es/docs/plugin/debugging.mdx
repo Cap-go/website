@@ -1,0 +1,141 @@
+---
+title: デバッグ
+description: Cómo depurar tu aplicación
+sidebar:
+  order: 6
+locale: es
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Entendiendo los registros en la nube:
+
+### Enviados desde el backend
+
+| código                          | Descripción                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | El usuario está ubicado en un centro de datos de Google y la actualización tiene menos de 4 horas. Esto se hace para evitar que los dispositivos de los bots de Google cuenten como dispositivos en tu cuenta |
+| **needPlanUpgrade** (anteriormente **needUpgrade**) | Indica que has alcanzado el límite de tu plan, y el dispositivo no recibirá actualizaciones hasta que actualices o hasta el próximo mes                                  |
+| **noNew**                                        | El dispositivo tiene la última versión disponible                                                                                                                                |
+| **disablePlatformIos**                           | El dispositivo está en la plataforma iOS, pero está desactivada en la configuración del canal                                                                                            |
+| **disablePlatformAndroid**                       | El dispositivo está en la plataforma Android, pero está desactivada en la configuración del canal                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | El dispositivo tiene la versión (`123`), y el canal tiene una actualización (`122`) por debajo de la versión del dispositivo para enviar, pero está desactivado en la configuración del canal                   |
+| **disableDevBuild**                              | El dispositivo tiene una compilación de desarrollo, pero está desactivada en la configuración del canal                                                                                                   |
+| **disableEmulator**                              | El dispositivo es un emulador, pero está desactivado en la configuración del canal                                                                                                    |
+
+### Enviados desde el dispositivo
+
+| código  | Descripción                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | La información para descargar la nueva versión ha sido enviada al dispositivo                 |
+| **delete**            | Un paquete ha sido eliminado en el dispositivo                                        |
+| **set**               | Un paquete ha sido establecido en el dispositivo                                              |
+| **set_fail**          | El paquete falló al establecerse                                                         |
+| **reset**             | El dispositivo se reinició al paquete `builtin`                                         |
+| **download_XX**       | Un nuevo paquete ha sido descargado - progreso indicado por XX% (incrementos de 10%) |
+| **download_complete** | La descarga del nuevo paquete ha finalizado                                          |
+| **download_fail**     | El nuevo paquete falló al descargar                                                |
+| **update_fail**       | El nuevo paquete ha sido instalado pero falló al llamar `notifyAppReady`            |
+| **checksum_fail**     | El nuevo paquete falló al validar el checksum                                   |
+| **windows_path_fail** | El zip tiene archivos que contienen rutas de Windows que son ilegales                        |
+| **canonical_path_fail** | La ruta de los archivos no es canónica                                              |
+| **directory_path_fail** | Hay un error en la ruta de los archivos zip                                         |
+| **unzip_fail**          | La descompresión falló                                                                   |
+| **low_mem_fail** | La descarga falló debido a memoria baja en el dispositivo                                    |
+
+### Estado del paquete
+
+* `SUCCESS`: Instalación del paquete completada
+* `ERROR`: Instalación o descarga fallida
+* `PENDING`: Descarga completada, pendiente de lanzamiento
+* `DELETED`: Paquete eliminado, aún presentado para estadísticas
+* `DOWNLOADING`: Actualmente descargando un paquete
+
+## Entendiendo los registros del dispositivo:
+
+### Comando de depuración:
+
+Hay un comando de depuración para usuarios de Capgo cloud
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+Esto te permitirá verificar todos los eventos que ocurren en la aplicación y encontrar una solución si las actualizaciones no ocurren
+
+### IOS
+
+para encontrar tus registros en Xcode
+
+<LinkCard
+    title="Getting the Device Log in Xcode"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android:
+
+para encontrar tus registros en Android Studio
+
+<LinkCard
+    title="View logs with Logcat"
+    href="https://developerandroidcom/studio/debug/am-logcat"
+/>
+
+### Explicaciones de Registros
+
+* `Failed to download from` **=>** igual que **download_fail**
+* `notifyAppReady was not called, roll back current bundle` => igual que **update_fail**
+
+## Encontrar el paquete descargado en tu dispositivo
+
+### iOS
+
+Para depurar en iOS, necesitas volcar la aplicación en tu computadora, puedes hacerlo así:
+
+Xcode tiene una función integrada para inspeccionar el sistema de archivos de aplicaciones instaladas por desarrolladores en un dispositivo iOS
+
+Para lograr esto:
+
+* Conecta tu dispositivo a tu Mac y selecciona Window > Devices en la barra de menú de Xcode
+* Selecciona tu dispositivo en el panel izquierdo bajo la sección Devices
+* Esto mostrará una lista de aplicaciones instaladas por desarrolladores para ese dispositivo
+* Selecciona la aplicación que deseas inspeccionar y luego selecciona el ícono de engranaje cerca de la parte inferior de la pantalla
+* Aquí puedes ver el sistema de archivos actual seleccionando Show Container o descargar una instantánea del mismo
+
+Seleccionar Download Container descargará y exportará una instantánea del sistema de archivos como un archivo xcappdata que puedes explorar
+
+Haz clic derecho en este archivo y selecciona Show Package Contents para abrir la carpeta
+
+Abre la carpeta App Data, y ahora deberías ver algunas carpetas como Documents, Library, tmp, etc
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243ewebp/)
+
+Luego encontrarás una versión en 2 carpetas:
+
+`library/NoCloud/ionic_built_snapshots` es necesario después del reinicio de la aplicación
+
+y `documents/versions` para recarga en caliente
+
+### Android
+
+Para depurar en Android, necesitas acceder al dispositivo desde Android Studio:
+
+* Haz clic en View > Tool Windows > Device File Explorer o haz clic en el botón Device File Explorer en la barra de herramientas para abrir el Device File Explorer
+* Selecciona un dispositivo de la lista desplegable
+* Abre la ruta **data/data/APP_NAME/** donde **APP_NAME es el ID de tu aplicación**
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
+
+Luego encuentra la carpeta `versions` para ver todas las versiones
+
+:::tip[¿Sabías qué?]
+En Android, todas las versiones se almacenan en una carpeta, a diferencia de iOS donde tiene que duplicarse en dos ubicaciones
+:::
+
+## Entendiendo los registros de fallos en producción de iOS
+
+<LinkCard
+    title="How to review your app's crash logs"
+    href="https://developerapplecom/news/?id=nra79npr"
+/>

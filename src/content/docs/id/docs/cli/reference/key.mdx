@@ -1,0 +1,37 @@
+---
+title: kunci
+sidebar_label: key
+sidebar:
+  order: 7
+locale: id
+---
+
+Perintah `key` memungkinkan Anda mengelola kunci penandatanganan aplikasi Anda
+
+### save
+
+`npx @capgo/cli key save`
+
+Menyimpan kunci enkripsi yang dikodekan base64 ke konfigurasi Capacitor (berguna untuk CI)
+
+Opsi:
+
+- `-f, --force`: Paksa pembuatan kunci baru
+- `--key`: Path ke file kunci yang akan disimpan dalam konfigurasi Capacitor
+- `--key-data`: Data kunci yang akan disimpan langsung dalam konfigurasi Capacitor
+
+### create
+
+`npx @capgo/cli key create`
+
+Membuat kunci enkripsi baru
+
+Opsi:
+
+- `-f, --force`: Paksa pembuatan kunci baru
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+Menghapus kunci enkripsi lama

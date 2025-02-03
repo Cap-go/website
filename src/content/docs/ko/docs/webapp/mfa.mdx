@@ -1,0 +1,99 @@
+---
+title: Autenticazione a due fattori
+description: Capgo 계정을 더 잘 보호하기 위한 2단계 인증 관리.
+sidebar:
+  order: 9
+locale: ko
+---
+
+## 2FA란 무엇인가요?
+
+2FA는 악의적인 사용자가 귀하의 capgo 계정을 탈취하는 것을 방지하기 위해 설계된 보안 조치입니다\
+이는 추가 코드를 요구함으로써 달성됩니다. 이 코드는 휴대폰이나 하드웨어 2FA 키에 저장되며 30초마다 변경되어 추측이 불가능합니다
+
+## 이 가이드의 요구사항
+ - Android 또는 iOS 휴대폰
+ - 인터넷 연결
+
+## 이 가이드에서 다룰 내용은?
+
+이 가이드는 `Google Authenticator`를 사용하여 2FA를 설정하는 방법을 보여줍니다. 비슷한 용도로 사용할 수 있는 다른 앱들도 있지만, 이 가이드에서는 2FA의 모든 측면을 다룰 수는 없습니다
+
+## 2FA 설정 방법
+
+먼저 `Google Authenticator` 앱을 다운로드하세요. Android를 사용하시는 경우 [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2)에서 다운로드할 수 있습니다. iOS의 경우 [App store](https://appsapplecom/us/app/google-authenticator/id388497605/)에서 다운로드할 수 있습니다
+
+두 번째로, [capgo의 계정 설정](https://webcapgoapp/dashboard/settings/account/)으로 이동하세요. 다음과 같은 초록색 버튼이 보일 것입니다
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
+
+클릭하면 QR 코드가 나타날 것입니다
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfawebp" alt="Enable MFA" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ 중요 안내: \
+이 QR 코드를 절대 타인과 공유하지 마세요. 계정에서 로그아웃될 수 있습니다
+:::
+
+다음으로, 휴대폰에서 `Google Authenticator`를 열어주세요. 다음 단계를 따라주세요:
+
+플러스 버튼을 클릭하세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-auth-pluswebp" alt="MFA auth plus" /><figcaption></figcaption></figure>
+
+그 다음, 카메라 버튼을 클릭하세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-scan-qrwebp" alt="MFA scan QR" /><figcaption></figcaption></figure>
+
+카메라 미리보기가 열립니다. PC에 표시된 QR 코드를 스캔하세요. 스캔 후에는 다음과 같은 화면이 보일 것입니다:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-codewebp" alt="MFA final code" /><figcaption></figcaption></figure>
+
+그런 다음 PC로 돌아가서 확인 버튼을 클릭하세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verifywebp" alt="Verify MFA" /><figcaption></figcaption></figure>
+
+2FA 코드를 입력하는 창이 열립니다. 제 경우에는 코드가 `095101`이지만 귀하의 코드는 다를 것입니다\
+이 코드를 입력한 후 `verify` 버튼을 클릭하세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-codewebp" alt="MFA verify code final" /><figcaption></figcaption></figure>
+
+올바른 코드를 입력하고 `verify`를 누르면 다음과 같은 팝업이 표시됩니다
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabledwebp" alt="MFA enabled" /><figcaption></figcaption></figure>
+
+축하합니다!\
+2FA 인증을 활성화했습니다 🎉
+
+## 2FA를 사용한 로그인 방법
+
+다음 로그인 시에는 다음과 같은 창이 표시됩니다
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-requiredwebp" alt="MFA required" /><figcaption></figcaption></figure>
+
+인증기를 열고 인증 코드를 복사하세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-loginwebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ 중요 안내: \
+코드가 갱신되기 전에 `verify`를 누르세요. 그렇지 않으면 코드가 변경되어 이전 코드는 더 이상 유효하지 않습니다
+:::
+
+그런 다음 로그인 양식에 코드를 입력하고 `verify`를 누르세요
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verifywebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+올바른 코드를 입력하면 capgo 대시보드가 표시됩니다
+
+## 2FA 비활성화 방법
+
+2FA를 비활성화하려면 [capgo의 계정 설정](https://webcapgoapp/dashboard/settings/account/)으로 이동하세요. 다음과 같은 빨간색 버튼이 보일 것입니다:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-buttonwebp" alt="MFA disable button" /><figcaption></figcaption></figure>
+
+클릭하면 다음과 같은 화면이 표시됩니다
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2webp" alt="MFA disabled" /><figcaption></figcaption></figure>
+
+`disable` 버튼을 누르면 완료됩니다

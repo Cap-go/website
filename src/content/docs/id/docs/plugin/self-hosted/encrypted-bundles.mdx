@@ -1,0 +1,42 @@
+---
+title: Bundel Terenkripsi
+description: Cara menggunakan plugin pembaruan manual dalam mode self-hosted
+sidebar:
+  order: 5
+locale: id
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Enkripsi End-to-end
+
+Mulai dari versi 4150 plugin ini memungkinkan Anda untuk mengirim pembaruan terenkripsi
+Untuk memulai, buat kunci privat terlebih dahulu
+```bash title='Create a private key'
+npx @capgo/cli key create
+```
+
+Kemudian enkripsi zip Anda
+```bash title="Encrypt bundled zip"
+npx @capgo/cli encrypt [path/to/zip]
+```
+
+Perintah tersebut akan mencetak `ivSessionKey` yang harus dikirim dengan payload pembaruan Anda dalam kunci `session_key`
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip",
+"session_key": "encrypted_session_key",
+}
+```
+Kemudian aplikasi Anda akan dapat menggunakan kunci privat untuk mendekripsi `session_key` dan menggunakan `session_key` yang telah didekripsi untuk mendekripsi pembaruan
+
+
+
+Pelajari lebih lanjut di sini:
+
+<LinkCard
+	title="Self-hosted Live Updates"
+	href="https://capgoapp/blog/self-hosted-live-updates/"
+/>
