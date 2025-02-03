@@ -101,7 +101,7 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
     { name: m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
-    { name: m.security(), href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: m.trust(), href: getRelativeLocaleUrl(props.locale, 'trust') },
     { name: m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
   ],
   legal: [
