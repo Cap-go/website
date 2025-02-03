@@ -46,7 +46,7 @@
     "@unocss/astro": "^65.4.0",
     "@unocss/reset": "^65.4.0",
     "@vite-pwa/astro": "^0.5.0",
-    "astro-font": "^0.1.81",
+    "astro-font": "^1.0.0",
     "cheerio": "1.0.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
