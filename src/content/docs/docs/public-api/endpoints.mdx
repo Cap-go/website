@@ -211,7 +211,6 @@ Query Parameters:
 interface StatsQuery {
   from: Date
   to: Date
-  graph?: 'mau' | 'storage' | 'bandwidth'
 }
 ```
 
@@ -224,8 +223,6 @@ interface Stats {
   bandwidth: number // Bandwidth usage in bytes
 }
 ```
-
-If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
 
 ### GET /statistics/user
 
@@ -236,12 +233,10 @@ Query Parameters:
 interface StatsQuery {
   from: Date
   to: Date
-  graph?: 'mau' | 'storage' | 'bandwidth'
 }
 ```
 
 Returns:
-If `graph` is not provided:
 ```typescript
 interface Stats {
   date: string
@@ -250,8 +245,6 @@ interface Stats {
   bandwidth: number // Bandwidth usage in bytes
 }[]
 ```
-
-If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
 
 ### GET /statistics/org/:org_id
 
@@ -262,12 +255,10 @@ Query Parameters:
 interface StatsQuery {
   from: Date
   to: Date
-  graph?: 'mau' | 'storage' | 'bandwidth'
 }
 ```
 
 Returns:
-If `graph` is not provided:
 ```typescript
 interface Stats {
   date: string
@@ -277,7 +268,6 @@ interface Stats {
 }[]
 ```
 
-If `graph` parameter is provided, returns an SVG image visualization of the requested metric.
 
 ## Channels
 
