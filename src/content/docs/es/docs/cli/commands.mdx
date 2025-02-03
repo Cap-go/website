@@ -400,24 +400,24 @@ Aquí hay un ejemplo de en qué escenarios se permite o deniega la actualizació
 Por último, la estrategia más complicada La estrategia `metadata`\
 Primero debe saber que inicialmente después de habilitarla las actualizaciones **FALLARÁN** ya que el canal carece de los metadatos requeridos\
 Si el canal carece de metadatos verá un mensaje como este:
-<img src="/fail-metadatawebp" alt="Cannot find metadata"/>
+<img src="/fail-metadata.webp" alt="Cannot find metadata"/>
 
 Si ve algo así, sabrá que tiene que ir al bundle actual del canal que está fallando y establecer los metadatos\
 Primero, determine qué canal está fallando Puede hacerlo mirando la columna `misconfigured`
-<img src="/misconfigured-table"/>webp" alt="Tabla mal configurada"/>
+<img src="/misconfigured-table.webp" alt="Tabla mal configurada"/>
 
 Luego ve al canal fallido y haz clic en `Bundle number`. Esto te llevará a la página del paquete
-<img src="/fail-channel-showwebp" alt="Localizar canal fallido"/>
+<img src="/fail-channel-show.webp" alt="Localizar canal fallido"/>
 
 Una vez allí, completa el campo `Minimal update version`. Esto debe ser un [semver](https://devhintsio/semver/)\
 Si el valor que ingresas no es un semver recibirás un error, pero si todo va correctamente deberías ver algo como esto:
-<img src="/set-min-update-versionwebp" alt="Establecer versión mínima"/>
+<img src="/set-min-update-version.webp" alt="Establecer versión mínima"/>
 
 Ahora, probablemente no quieras establecer estos datos manualmente cada vez que actualices. Afortunadamente, la CLI evitará que envíes una actualización sin estos metadatos
-<img src="/cli-fail-no-metadatawebp" alt="CLI falla sin metadatos"/>
+<img src="/cli-fail-no-metadata.webp" alt="CLI falla sin metadatos"/>
 
 Para subir correctamente un paquete cuando usas la opción `metadata`, necesitas pasar el `--min-update-version` con el semver válido. Algo como esto:
-<img src="/cli-upload-with-metadatawebp" alt="CLI subida con metadatos"/>
+<img src="/cli-upload-with-metadata.webp" alt="CLI subida con metadatos"/>
 
 El `--min-update-version` no es la ÚNICA forma de hacer compatibilidad
 También existe el `--auto-min-update-version`. Así es como funciona
@@ -427,10 +427,10 @@ También existe el `--auto-min-update-version`. Así es como funciona
 Si no, entonces establece el `min_update_version` al número de paquete de la versión recién subida
 
 Siempre obtendrás información sobre cuál es el `min_update_version` cuando uses esta opción. Se verá algo como esto:
-<img src="/min_update_version_infowebp" alt="Versión mínima de actualización"/>
+<img src="/min_update_version_info.webp" alt="Versión mínima de actualización"/>
 
 Si la nueva versión no es compatible, debería verse algo como esto
-<img src="/min_update_version_not_compatiblewebp" alt="Versión mínima de actualización no compatible"/>
+<img src="/min_update_version_not_compatible.webp" alt="Versión mínima de actualización no compatible"/>
 
 ## Cifrado de extremo a extremo (Sin confianza)
 
@@ -440,7 +440,7 @@ El sistema de cifrado es una combinación de RSA y AES, la clave RSA se usa para
 
 Ver más abajo para más información sobre el sistema de cifrado
 
-<img src="/crypto_explainedwebp" alt="Cómo funciona el cifrado"/>
+<img src="/crypto_explained.webp" alt="Cómo funciona el cifrado"/>
 
 Esquema de cifrado
 

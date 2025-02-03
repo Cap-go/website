@@ -399,14 +399,14 @@ Berikut contoh skenario di mana pembaruan diizinkan atau ditolak
 Terakhir strategi yang paling rumit Strategi `metadata`\
 Pertama Anda perlu tahu bahwa awalnya setelah Anda mengaktifkannya pembaruan **AKAN** gagal karena channel tidak memiliki metadata yang diperlukan\
 Jika channel tidak memiliki metadata Anda akan melihat pesan seperti ini:
-<img src="/fail-metadatawebp" alt="Cannot find metadata"/>
+<img src="/fail-metadata.webp" alt="Cannot find metadata"/>
 
 Jika Anda melihat sesuatu seperti ini, Anda tahu bahwa Anda harus pergi ke bundle saat ini untuk channel yang gagal dan mengatur metadata\
 Pertama, cari tahu channel mana yang gagal Anda dapat melakukannya dengan melihat kolom `misconfigured`
-<img src="/misconfigured-tablewebp" alt="Misconfigured table"/>
+<img src="/misconfigured-table.webp" alt="Misconfigured table"/>
 
 Kemudian pergi ke channel yang gagal dan klik pada `Bundle number`. Ini akan membawa Anda ke halaman bundle
-<img src="/fail-channel-showwebp" alt="Locate failing channel"/>
+<img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
 Setelah itu isi field `Minimal update version`. Ini harus berupa [semver](https://devhints.io/semver/)\
 Jika nilai yang Anda masukkan bukan semver, Anda akan mendapat error, tetapi jika semua berjalan dengan benar Anda akan melihat sesuatu seperti ini:

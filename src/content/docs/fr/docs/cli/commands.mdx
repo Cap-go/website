@@ -398,24 +398,24 @@ Voici un exemple des scénarios où la mise à jour est autorisée ou refusée
 Enfin, la stratégie la plus complexe La stratégie `metadata`\
 D'abord, vous devez savoir qu'initialement après l'avoir activée, les mises à jour **ÉCHOUERONT** car le canal manque des métadonnées requises\
 Si le canal manque de métadonnées, vous verrez un message comme celui-ci :
-<img src="/fail-metadatawebp" alt="Impossible de trouver les métadonnées"/>
+<img src="/fail-metadata.webp" alt="Impossible de trouver les métadonnées"/>
 
 Si vous voyez quelque chose comme ceci, vous savez que vous devez aller au bundle actuel pour le canal défaillant et définir les métadonnées\
 Tout d'abord, déterminez quel canal échoue Vous pouvez le faire en regardant la colonne `misconfigured`
-<img src="/misconfigured-table"webp" alt="Misconfigured table"/>
+<img src="/misconfigured-table.webp" alt="Misconfigured table"/>
 
 Ensuite, allez dans le canal défaillant et cliquez sur `Bundle number`. Cela devrait vous amener à la page du bundle.
-<img src="/fail-channel-showwebp" alt="Locate failing channel"/>
+<img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
 Une fois là, remplissez le champ `Minimal update version`. Ce doit être un [semver](https://devhintsio/semver/)\
 Si la valeur que vous passez n'est pas un semver, vous obtiendrez une erreur, mais si tout se passe correctement, vous devriez voir quelque chose comme ceci :
-<img src="/set-min-update-versionwebp" alt="Set min version"/>
+<img src="/set-min-update-version.webp" alt="Set min version"/>
 
 Maintenant, vous ne voulez probablement pas définir ces données manuellement à chaque mise à jour. Heureusement, le CLI vous empêchera d'envoyer une mise à jour sans ces métadonnées.
-<img src="/cli-fail-no-metadatawebp" alt="CLI fail no metadata"/>
+<img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
 
 Pour télécharger correctement un bundle en utilisant l'option `metadata`, vous devez passer le `--min-update-version` avec un semver valide. Quelque chose comme ceci :
-<img src="/cli-upload-with-metadatawebp" alt="CLI upload with metadata"/>
+<img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
 
 Le `--min-update-version` n'est pas la SEULE façon de gérer la compatibilité.
 Il existe aussi le `--auto-min-update-version`. Voici comment il fonctionne :
@@ -425,10 +425,10 @@ Il existe aussi le `--auto-min-update-version`. Voici comment il fonctionne :
 Si non, il définit le `min_update_version` sur le numéro de bundle de la version nouvellement téléchargée.
 
 Vous obtiendrez toujours une information sur le `min_update_version` lors de l'utilisation de cette option. Cela ressemblera à quelque chose comme ceci :
-<img src="/min_update_version_infowebp" alt="Min update version"/>
+<img src="/min_update_version_info.webp" alt="Min update version"/>
 
 Si la nouvelle version n'est pas compatible, cela devrait ressembler à ceci :
-<img src="/min_update_version_not_compatiblewebp" alt="Min update version not compatible"/>
+<img src="/min_update_version_not_compatible.webp" alt="Min update version not compatible"/>
 
 ## Chiffrement de bout en bout (Sans confiance)
 
@@ -438,7 +438,7 @@ Le système de chiffrement est une combinaison de RSA et AES, la clé RSA est ut
 
 Voir ci-dessous pour plus d'informations sur le système de chiffrement
 
-<img src="/crypto_explainedwebp" alt="How crypto works"/>
+<img src="/crypto_explained.webp" alt="How crypto works"/>
 
 Schéma de chiffrement
 

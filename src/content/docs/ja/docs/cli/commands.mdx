@@ -395,24 +395,24 @@ Capgoはネイティブコードを更新できないため、古いネイティ
 最後に最も複雑な戦略である`metadata`戦略\
 まず知っておく必要があるのは、有効化した直後は必要なメタデータがチャンネルにないため更新は**失敗する**ということです\
 チャンネルにメタデータがない場合、このようなメッセージが表示されます:
-<img src="/fail-metadatawebp" alt="Cannot find metadata"/>
+<img src="/fail-metadata.webp" alt="Cannot find metadata"/>
 
 このように表示された場合、失敗しているチャンネルの現在のバンドルにメタデータを設定する必要があることがわかります\
 まず、どのチャンネルが失敗しているかを特定します。`misconfigured`列を確認することでわかります
-<img src="/misconfigured-tablewebp" alt="Misconfigured table"/>
+<img src="/misconfigured-table.webp" alt="Misconfigured table"/>
 
 失敗しているチャンネルに移動し、`Bundle number`をクリックしてください。これでバンドルページに移動します。
-<img src="/fail-channel-showwebp" alt="Locate failing channel"/>
+<img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
 そこで`Minimal update version`フィールドに入力します。これは[semver](https://devhints.io/semver/)である必要があります。\
 入力値がsemverでない場合はエラーが表示されますが、すべて正しければ次のように表示されるはずです：
-<img src="/set-min-update-versionwebp" alt="Set min version"/>
+<img src="/set-min-update-version.webp" alt="Set min version"/>
 
 更新するたびにこのデータを手動で設定したくないかもしれません。幸いなことに、CLIはこのメタデータなしでの更新を防止します。
-<img src="/cli-fail-no-metadatawebp" alt="CLI fail no metadata"/>
+<img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
 
 `metadata`オプションを使用する際にバンドルを正しくアップロードするには、有効なsemverで`--min-update-version`を渡す必要があります。このようになります：
-<img src="/cli-upload-with-metadatawebp" alt="CLI upload with metadata"/>
+<img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
 
 `--min-update-version`は互換性を確保する唯一の方法ではありません。
 `--auto-min-update-version`も存在します。これは次のように動作します：
@@ -422,10 +422,10 @@ Capgoはネイティブコードを更新できないため、古いネイティ
 そうでない場合、新しくアップロードされたバージョンのバンドル番号を`min_update_version`として設定します。
 
 このオプションを使用する際は、常に`min_update_version`の情報が表示されます。このように表示されます：
-<img src="/min_update_version_infowebp" alt="Min update version"/>
+<img src="/min_update_version_info.webp" alt="Min update version"/>
 
 新しいバージョンに互換性がない場合は、このように表示されます：
-<img src="/min_update_version_not_compatiblewebp" alt="Min update version not compatible"/>
+<img src="/min_update_version_not_compatible.webp" alt="Min update version not compatible"/>
 
 ## エンドツーエンド暗号化（トラストレス）
 
@@ -435,7 +435,7 @@ Capgoはエンドツーエンド暗号化をサポートしています。これ
 
 暗号化システムの詳細については以下をご覧ください：
 
-<img src="/crypto_explainedwebp" alt="How crypto works"/>
+<img src="/crypto_explained.webp" alt="How crypto works"/>
 
 暗号化スキーマ
 
