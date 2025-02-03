@@ -1,6 +1,6 @@
 ---
-title: Endpoint delle statistiche
-description: Come creare un endpoint di statistiche self-hosted
+title: Stats 엔드포인트
+description: Come creare un endpoint statistico self-hosted
 sidebar:
   order: 2
 locale: it
@@ -85,11 +85,11 @@ Questo endpoint dovrebbe restituire un JSON:
 ## Azioni:
 
 * **delete**: quando un bundle viene eliminato localmente
-* **reset**: quando l'app ripristina il bundle incorporato
+* **reset**: quando l'app viene ripristinata al bundle incorporato
 * **set**: quando l'app imposta un nuovo bundle
-* **set\_fail**: quando l'app non riesce a trovare l'ID del bundle impostato
-* **update\_fail**: inviato dopo il ritardo e `notifyAppReady` mai chiamato
-* **download\_fail**: quando il download non viene mai completato
-* **download\_complete:** Quando il download è completato
-* **download\_xx:** Inviato ogni 10% di download es: download\_20, download\_70
-* **update\_fail:** quando il bundle non riesce a eseguire `notifyAppReady` nel periodo di tempo
+* **set_fail**: quando l'app non riesce a trovare l'ID del bundle impostato
+* **update_fail**: inviato dopo il ritardo e `notifyAppReady` non è mai stato chiamato
+* **download_fail**: quando il download non è mai stato completato
+* **download_complete:** Quando il download è completato
+* **download_xx:** Inviato ogni 10% del download es: download_20, download_70
+* **update_fail:** quando il bundle non riesce a eseguire `notifyAppReady` nel periodo di tempo stabilito

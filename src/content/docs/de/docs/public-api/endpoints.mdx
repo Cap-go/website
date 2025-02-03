@@ -1,17 +1,19 @@
 ---
-title: 엔드포인트
-description: Capgo Cloud öffentliche API-Dokumentation
+title: Endpunkte
+description: Öffentliche API-Dokumentation von Capgo Cloud
 sidebar:
   order: 2
 locale: de
 ---
 
+import { LinkCard } from '@astrojs/starlight/components';
+
 Dies ist die Dokumentation der öffentlichen API von Capgo Cloud
 
-Um darauf zuzugreifen, fügen Sie in den Headers Ihren API-Schlüssel als `authorization` hinzu
+Fügen Sie in den Headers Ihren API-Schlüssel als `authorization` hinzu
 
 <LinkCard
-	title="API-Schlüssel abrufen" 
+	title="API-Schlüssel erhalten"
 	href="https://webcapgoapp/dashboard/apikeys/"
 />
 
@@ -38,7 +40,7 @@ interface Organization {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 ```typescript
 return Organization[] | Organization
 ```
@@ -47,7 +49,7 @@ return Organization[] | Organization
 
 `https://apicapgoapp/organization`
 
-Aktualisiert eine bestehende Organisation. Benötigt Admin-Rolle
+Aktualisiert eine bestehende Organisation. Erfordert Admin-Rolle
 
 ```typescript
 interface OrganizationUpdate {
@@ -108,7 +110,7 @@ interface ApiKey {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 ```typescript
 return ApiKey[]
 ```
@@ -119,7 +121,7 @@ return ApiKey[]
 
 Erstellt einen neuen API-Schlüssel für eine bestimmte Organisation
 
-Query-Parameter:
+Abfrageparameter:
 ```typescript
 interface ApiKeyCreate {
   org_id: string
@@ -127,7 +129,7 @@ interface ApiKeyCreate {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 ```typescript
 return { apikey: ApiKey }
 ```
@@ -153,11 +155,11 @@ return { error: string, supabaseError?: any }
 
 ## Mitglieder (/organization/members)
 
-### GET
+### GET 
 
 Ruft Organisationsmitglieder ab
 
-Erfordert einen Request-Body (Query-Parameter) vom Typ `{ orgId: string }`
+Erfordert einen Request-Body (Abfrageparameter) vom Typ `{ orgId: string }`
 
 Bei Erfolg wird Folgendes zurückgegeben:
 ```typescript
@@ -183,7 +185,7 @@ interface MemberDelete {
 }
 ```
 
-Erfordert einen Request-Body (Query-Parameter) vom Typ `MemberDelete`
+Erfordert einen Request-Body (Abfrageparameter) vom Typ `MemberDelete`
 
 Bei Erfolg wird Folgendes zurückgegeben:
 
@@ -199,13 +201,13 @@ return { error: string, status: 'KO' }
 
 ## Statistiken
 
-Dieser Endpunkt ermöglicht das Abrufen verschiedener Statistiken über Ihre Apps und Organisationen
+Dieser Endpunkt ermöglicht es Ihnen, verschiedene Statistiken über Ihre Apps und Organisationen abzurufen
 
 ### GET /statistics/app/:app_id
 
 Ruft Statistiken für eine bestimmte App ab
 
-Query-Parameter:
+Abfrageparameter:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -214,11 +216,11 @@ interface StatsQuery {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 ```typescript
 interface Stats {
   date: string
-  mau: number      // Monatlich aktive Nutzer
+  mau: number      // Monatlich aktive Benutzer
   storage: number  // Speichernutzung in Bytes
   bandwidth: number // Bandbreitennutzung in Bytes
 }
@@ -230,7 +232,7 @@ Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der a
 
 Ruft aggregierte Statistiken über alle Organisationen ab, auf die der Benutzer Zugriff hat
 
-Query-Parameter:
+Abfrageparameter:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -239,12 +241,12 @@ interface StatsQuery {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 Wenn `graph` nicht angegeben ist:
 ```typescript
 interface Stats {
   date: string
-  mau: number      // Monatlich aktive Nutzer
+  mau: number      // Monatlich aktive Benutzer
   storage: number  // Speichernutzung in Bytes
   bandwidth: number // Bandbreitennutzung in Bytes
 }[]
@@ -256,7 +258,7 @@ Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der a
 
 Ruft Statistiken für eine bestimmte Organisation ab
 
-Query-Parameter:
+Abfrageparameter:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -265,12 +267,12 @@ interface StatsQuery {
 }
 ```
 
-Gibt zurück:
+Rückgabe:
 Wenn `graph` nicht angegeben ist:
 ```typescript
 interface Stats {
   date: string
-  mau: number      // Monatlich aktive Nutzer
+  mau: number      // Monatlich aktive Benutzer
   storage: number  // Speichernutzung in Bytes
   bandwidth: number // Bandbreitennutzung in Bytes
 }[]
@@ -280,7 +282,7 @@ Wenn der `graph`-Parameter angegeben ist, wird eine SVG-Bildvisualisierung der a
 
 ## Kanäle
 
-Dieser Endpunkt ermöglicht es Ihnen, alle verfügbaren Kanäle Ihrer App zu überprüfen und zu modifizieren
+Dieser Endpunkt ermöglicht es Ihnen, alle verfügbaren Kanäle Ihrer App zu überprüfen und zu ändern
 
 ### POST
 
@@ -305,7 +307,7 @@ interface ChannelSet {
 }
 ```
 
-erhalten Sie dies:
+Empfangen Sie dies:
 
 ```json
 { "status": "ok" }
@@ -315,7 +317,7 @@ erhalten Sie dies:
 
 `https://apicapgoapp/channel`
 
-Senden Sie `app_id` als URL-Parameter und erhalten Sie ein Array der ersten 50 Kanäle\
+Senden Sie `app_id` als URL-Parameter und empfangen Sie ein Array der ersten 50 Kanäle\
 Sie können die nächsten erhalten, indem Sie `page=1` senden
 
 ```typescript
@@ -338,7 +340,7 @@ interface Channel {
 }[]
 ```
 
-und optional `channel` Name als URL-Parameter, um einen zu erhalten:
+und optional `channel` Name als URL-Parameter, um einen zu empfangen:
 
 ```typescript
 interface Channel {
@@ -364,7 +366,7 @@ interface Channel {
 
 `https://apicapgoapp/channel`
 
-Senden Sie dies als Query-Parameter
+Senden Sie dies als Abfrageparameter
 
 ```typescript
 interface Channel {
@@ -373,7 +375,7 @@ interface Channel {
 }
 ```
 
-erhalten Sie dies:
+Empfangen Sie dies:
 
 ```json
 { "status": "ok" }
@@ -381,9 +383,9 @@ erhalten Sie dies:
 
 ## Geräte
 
-Dieser Endpunkt ermöglicht es Ihnen, alle mit Ihrer App verbundenen Geräte zu überprüfen und zu modifizieren
+Dieser Endpunkt ermöglicht es Ihnen, alle mit Ihrer App verknüpften Geräte zu überprüfen und zu ändern
 
-### POST
+### POST&#x20;
 
 `https://apicapgoapp/device`
 
@@ -398,7 +400,7 @@ interface DeviceLink {
 }
 ```
 
-erhalten Sie dies:
+Empfangen Sie dies:
 
 ```json
 { "status": "ok" }
@@ -408,8 +410,7 @@ erhalten Sie dies:
 
 `https://apicapgoapp/device`
 
-Senden Sie `app_id` als URL-Parameter und erhalten Sie ein Array der ersten 50 Geräte\
-Sie können den nächsten erhalten, indem Sie `page=1` senden
+Senden Sie `app_id` als URL-Parameter und empfangen Sie ein Array der ersten 50 GeräteSie können den nächsten erhalten, indem Sie `page=1` senden
 
 ```typescript
 interface Device{
@@ -431,7 +432,7 @@ interface Device{
 }[]       
 ```
 
-und optional `device_id` Name als URL-Parameter, um einen zu erhalten:
+und optional den `device_id` Namen als URL-Parameter, um einen zu erhalten:
 
 ```typescript
 interface Device {
@@ -451,11 +452,11 @@ interface Device {
 
 ### DELETE
 
-Dieser Endpunkt dient zum Aufheben der Verknüpfung von Kanal und Versionsüberschreibung. Sie können ein Gerät nicht aus Capgo löschen
+Dieser Endpunkt dient zum Trennen des Kanals und der Versionsüberschreibung. Sie können ein Gerät nicht von Capgo löschen
 
 `https://apicapgoapp/device`
 
-Senden Sie dies als Abfrageparameter
+Senden Sie dies als Query-Parameter
 
 ```typescript
 interface Device {
@@ -478,7 +479,7 @@ Dieser Endpunkt ermöglicht es Ihnen, alle mit Ihrer App verknüpften Bundles zu
 
 `https://apicapgoapp/bundle`
 
-Senden Sie `app_id` als URL-Parameter und erhalten Sie ein Array der ersten 50 Bundles\
+Senden Sie `app_id` als URL-Parameter und erhalten Sie ein Array der ersten 50 Bundles
 Sie können die nächsten erhalten, indem Sie `page=1` senden
 
 ```typescript
@@ -508,7 +509,7 @@ Löscht ein Bundle in der Cloud
 
 `https://apicapgoapp/bundle`
 
-Senden Sie dies als Abfrageparameter
+Senden Sie dies als Query-Parameter
 
 ```typescript
 interface Bundle {

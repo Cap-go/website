@@ -1,6 +1,6 @@
 ---
-title: Da V5 a V6
-description: Cara Upgrade dari V5 ke V6
+title: De V5 à V6
+description: Bagaimana cara memperbarui dari V5 ke V6
 sidebar:
   order: 1
 locale: id
@@ -8,7 +8,7 @@ locale: id
 
 ## Mengapa upgrade ini
 
-Versi major ini hadir untuk mengikuti versi major Capacitor
+Versi mayor ini hadir untuk mengikuti versi mayor Capacitor
 
 Pertama ikuti panduan migrasi Capacitor:
 

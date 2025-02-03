@@ -1,6 +1,6 @@
 ---
-title: Mise à jour manuelle
-description: Bagaimana cara mengelola pembaruan sendiri
+title: Aggiornamento Manuale
+description: Cara Mengelola Pembaruan Aplikasi
 sidebar:
   order: 5
 locale: id
@@ -13,7 +13,7 @@ Jika Anda ingin mengatur sendiri kapan pembaruan diterapkan, gunakan mode manual
 Berikut yang perlu Anda lakukan, siapkan akun Anda seperti yang dijelaskan di Memulai
 
 <LinkCard
-	title="Getting Started"
+	title="Memulai"
 	href="/docs/plugin/cloud-mode/getting-started"
 />
 
@@ -34,7 +34,7 @@ Nonaktifkan pembaruan otomatis di ```capacitor.config.json``` Anda
 ```
 
 Kemudian tambahkan logika untuk menangani pembaruan sendiri\
-Berikut contoh bagaimana Anda dapat melakukannya:
+Berikut contoh cara melakukannya:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -50,7 +50,7 @@ App.addListener('appStateChange', async (state: any) => {
   console.log('appStateChange', state)
   if (state.isActive) {
     console.log('getLatest')
-    // Lakukan pengunduhan saat waktu aktif aplikasi pengguna untuk mencegah kegagalan unduhan
+    // Lakukan pengunduhan saat waktu aplikasi aktif pengguna untuk mencegah kegagalan unduhan
     const latest = await CapacitorUpdater.getLatest()
     console.log('latest', latest)
     if (latest.url) {
@@ -63,14 +63,14 @@ App.addListener('appStateChange', async (state: any) => {
   }
   if (!state.isActive && data) {
     console.log('set')
-    // Lakukan pergantian saat pengguna meninggalkan aplikasi atau kapan pun Anda mau
+    // Lakukan pengalihan ketika pengguna meninggalkan aplikasi atau kapan pun Anda mau
     SplashScreen.show()
     try {
       await CapacitorUpdater.set({ id: data.id })
     }
     catch (err) {
       console.log(err)
-      SplashScreen.hide() // jika set gagal, jika tidak aplikasi baru harus menyembunyikannya
+      SplashScreen.hide() // jika pengaturan gagal, jika tidak aplikasi baru harus menyembunyikannya
     }
   }
 })
@@ -79,9 +79,9 @@ App.addListener('appStateChange', async (state: any) => {
 Dokumentasi semua API yang Tersedia dalam plugin:
 
 <LinkCard
-	title="Methods"
+	title="Metode"
 	href="/docs/plugin/api/"
 />
 
-Ada beberapa kasus penggunaan di mana Anda dapat mengizinkan pengguna untuk berlangganan ke saluran dan mencoba versi berbeda:\
+Ada beberapa kasus penggunaan di mana Anda dapat mengizinkan pengguna untuk berlangganan ke saluran dan mencoba versi yang berbeda:\
 [https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

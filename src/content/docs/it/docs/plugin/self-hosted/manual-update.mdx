@@ -1,5 +1,5 @@
 ---
-title: Mise à jour manuelle
+title: Aggiornamento Manuale
 description: Come utilizzare il plugin di aggiornamento manuale in modalità self-hosted
 sidebar:
   order: 4
@@ -31,7 +31,7 @@ Stiamo forzando l'utente ad aggiornare l'app con una versione statica dichiarata
 :::
 
 :::danger
-In questo esempio non stiamo facendo alcun controllo di versione, decrittografia o validazione del checksum. Dovresti farlo autonomamente
+In questo esempio non stiamo eseguendo alcun controllo della versione, decrittografia o validazione del checksum. Dovresti farlo per conto tuo
 :::
 
 ```tsx
@@ -42,7 +42,7 @@ let data = {version: ""}
 CapacitorUpdater.notifyAppReady()
 App.addListener('appStateChange', async(state) => {
      if (state.isActive) {
-       // Esegui il download durante il tempo di attività dell'app per prevenire download falliti
+       // Esegui il download durante il tempo di attività dell'app dell'utente per evitare download falliti
        data = await CapacitorUpdater.download({
        version: '004',
        url: 'https://github.com/Cap-go/demo-app/releases/download/004/dist.zip',
@@ -55,12 +55,12 @@ App.addListener('appStateChange', async(state) => {
          await CapacitorUpdater.set(data)
        } catch (err) {
          console.log(err)
-         SplashScreen.hide() // in caso di fallimento del set, altrimenti la nuova app dovrà nasconderlo
+         SplashScreen.hide() // in caso il set fallisca, altrimenti la nuova app dovrà nasconderlo
        }
      }
  })
 ```
 
 :::note
-Se questo sembra troppo lavoro, considera di provare [Capgo trial](https://capgo.app/register/) che gestirà tutto questo per te
+Se questo sembra troppo lavoro, considera di provare [Capgo trial](https://capgo.app/register/). Gestirà tutto questo per te
 :::

@@ -1,6 +1,6 @@
 ---
-title: Masalah yang diketahui
-description: Problemas conocidos de Capacitor y CapGo
+title: Problemas conocidos
+description: Problemas conocidos con Capacitor y CapGo
 sidebar:
   order: 7
 locale: es
@@ -10,24 +10,24 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Recarga en vivo de Ionic
 
-* Cuando desarrollas, si utilizas la función de recarga en vivo de Ionic desde la CLI, anulará el plugin, por lo que nunca verás tus actualizaciones
+* Cuando desarrolles, si usas la función de recarga en vivo de Ionic desde la CLI, anulará el plugin, por lo que nunca verás tu actualización
 
 ## Recarga en vivo de Quasar
 
 * Utiliza el mismo sistema que Ionic internamente, por lo que no verás tus actualizaciones
 
-## Fallos en las actualizaciones
+## Fallos en actualizaciones
 
-* Esto suele ocurrir cuando se envían actualizaciones grandes (> 20mb), un gran porcentaje de usuarios no obtendrá la última versión
-Anteriormente, los usuarios necesitaban mantener la aplicación abierta hasta que la descarga se completara, ahora utilizamos descarga en segundo plano, pero aún está limitada a unos pocos segundos
+* Esto suele ocurrir cuando se envían grandes actualizaciones (> 20mb), un gran porcentaje de usuarios no obtendrá la última versión
+En el pasado, los usuarios necesitaban mantener la aplicación abierta hasta que la descarga se completara, ahora usamos descarga en segundo plano, pero aún está limitada a unos pocos segundos
 
 ## Android
 
 ### No se puede descargar
 
-Hemos visto algunos problemas con dispositivos en India, y al hablar con usuarios, les hicimos probar diferentes servidores DNS, y funcionó
+Hemos visto algunos problemas con dispositivos en India, y al contactar con usuarios, les hicimos probar diferentes servidores DNS, y funcionó
 
-Entonces, si tienes el problema, intenta usar un servidor DNS diferente como Cloudflare o Google DNS
+Así que si tienes el problema, intenta usar un servidor DNS diferente como Cloudflare o Google DNS
 
 Cloudflare: 1111 y 1001
 
@@ -39,14 +39,14 @@ Google DNS: 8888 y 8844 o dnsgoogle
 />
 
 ### Auto-alojado
-Cuando estás implementando una actualización auto-alojada, ten en cuenta que no puedes usar endpoints "HTTP" ya que va en contra de las políticas de seguridad de las aplicaciones Android, si aún quieres hacerlo, sigue esta guía:
+Cuando estás enviando una actualización auto-alojada, ten en cuenta que no puedes usar endpoints "HTTP" ya que va contra las políticas de seguridad de las aplicaciones Android, si aún quieres hacerlo, sigue esta guía:
 
 <LinkCard
 	title="¿Cómo permitir todos los tipos de conexión de red HTTP y HTTPS en Android (9) Pie?"
 	href="https://stackoverflowcom/a/51902630/5511370"
 />
 
-### Descompresión 
+### Descompresión
 
 Problema de descompresión: Las entradas DEFLATED pueden tener descriptor EXT
 
@@ -97,11 +97,11 @@ Agrega la clave de diccionario `NSPrivacyAccessedAPICategoryUserDefaults` a tu [
 </plist>
 ```
 
-Recomendamos declarar [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) como la razón para acceder a la API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
+Recomendamos declarar [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) como razón para acceder a la API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
 
 ### Permisos de red
 
-Cuando uses un servidor local para probar actualizaciones, la aplicación pedirá permisos de red, es un comportamiento normal, no ocurre cuando usas un servidor remoto
+Cuando uses un servidor local para probar actualizaciones, la aplicación pedirá permisos de red, es un comportamiento normal, no sucede cuando usas un servidor remoto
 
 ## Ambos sistemas operativos
 
@@ -115,7 +115,7 @@ Los PRs son bienvenidos para ayudarnos a mejorar esto
 
 ## CLI
 
-si tu CLI tiene problemas para hacer cualquier cosa,
+si tu CLI tiene problemas haciendo cualquier cosa,
 
 Verifica si **appId** y **appName** están presentes en tu **capacitorconfigts**
 

@@ -1,278 +1,278 @@
 ---
-title: FAQ
+title: Häufig gestellte Fragen
 description: Häufig gestellte Fragen zu Capgo
 sidebar:
   order: 1
 locale: de
 ---
 
-Wenn Sie hier keine Antworten auf Ihre Fragen finden, fragen Sie bitte! Sie können sowohl ein Issue erstellen als auch in [Discord](https://discordcom/invite/VnYRvBfgA6) fragen.
+Wenn Sie hier nicht beantwortete Fragen haben, fragen Sie bitte! Sowohl das Erstellen eines Issues als auch das Fragen auf [Discord](https://discordcom/invite/VnYRvBfgA6) funktionieren.
 
-### Was ist "Code Push"?[](https://capgoapp/docs/#what-is-code-push "Direct link to What is \"code push\"?")
+### Was ist "Code Push"?
 
-Code Push, auch bekannt als "Over-the-Air-Updates" (OTA), ist ein Cloud-Service, der es Capacitor-Entwicklern ermöglicht, Updates für ihre Apps in der Produktion bereitzustellen. Capgo funktioniert derzeit auf Android und iOS und wird zukünftig überall dort funktionieren, wo Capacitor läuft.
+Code Push, auch bekannt als "Over the Air Updates" (OTA), ist ein Cloud-Service, der es Capacitor-Entwicklern ermöglicht, Updates für ihre Apps in der Produktion bereitzustellen. Capgo funktioniert derzeit auf Android und iOS und wird letztendlich überall dort funktionieren, wo Capacitor funktioniert.
 
-"Code Push" bezieht sich auf den Namen einer Deploy-Funktion, die von der React Native Community von [Microsoft](https://appcenterms/) und [Expo](https://expodev/) verwendet wird, die beide Capacitor nicht unterstützen.
+"Code Push" ist eine Referenz auf den Namen einer Deploy-Funktion, die von der React Native Community von [Microsoft](https://appcenterms/) und [Expo](https://expodev/) verwendet wird, die beide Capacitor nicht unterstützen.
 
-### Was ist der Unterschied zwischen einem Bundle und einem Release?[](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")
+### Was ist der Unterschied zwischen einem Bundle und einem Release?
 
 Wir verwenden den Begriff "Release" für die Vorbereitung einer Binärdatei für die App Stores. Um später ein Bundle generieren zu können, muss Capgo die exakte Binärdatei kennen, die an die App Stores gesendet wurde.
 
-Wir verwenden den Begriff "Bundle" für ein Patch, das auf ein Release angewendet werden kann, um es auf neuen Code zu aktualisieren. Der Befehl `npx @capgo/cli app update` wird verwendet, um aus Ihrem neuen lokalen Code ein Bundle zu generieren, das dann an Ihre Nutzer verteilt wird.
+Wir verwenden den Begriff "Bundle" für ein Patch, das auf ein Release angewendet werden kann, um es mit neuem Code zu aktualisieren. Der Befehl `npx @capgo/cli app update` wird verwendet, um aus Ihrem neuen lokalen Code ein Bundle zu generieren, das dann an Ihre Nutzer ausgeliefert wird.
 
-### Was ist die Roadmap?[](https://capgoapp/docs/faq/#what-is-the-roadmap "Direct link to What is the roadmap?")
+### Wie sieht die Roadmap aus?
 
 Unsere Projekt-Boards sind öffentlich und zu finden unter: [https://githubcom/orgs/Cap-go/projects](https://githubcom/orgs/Cap-go/projects/)
 
-Unser Team arbeitet ebenfalls öffentlich, sodass Sie jederzeit sehen können, woran wir arbeiten. Wir beantworten gerne alle Fragen zu unserer Roadmap oder Prioritäten über Github Issues oder [Discord](https://discordcom/invite/VnYRvBfgA6).
+Unser Team arbeitet auch öffentlich, sodass Sie jederzeit sehen können, woran wir arbeiten. Wir beantworten gerne Ihre Fragen zu unserer Roadmap oder Prioritäten über Github Issues oder [Discord](https://discordcom/invite/VnYRvBfgA6).
 
-### Kann ich Capgo mit meinem Team nutzen?[](https://capgoapp/docs/faq/#can-i-use-capgo-with-my-team "Direct link to Can I use Capgo with my team?")
+### Kann ich Capgo mit meinem Team nutzen?
 
-Ja! Alle Pläne unterstützen unbegrenzte Entwickler. Wir begrenzen nur App-Metriken (MAU, Speicher und Bandbreite) für jede Organisation.
+Ja! Alle Pläne unterstützen unbegrenzte Entwickler. Wir beschränken nur App-Metriken (MAU, Speicher und Bandbreite) für jede Organisation.
 
-Siehe [Teams](https://capgoapp/pricing/) für weitere Informationen.
+Weitere Informationen finden Sie unter [Teams](https://capgoapp/pricing/).
 
-### Speichert Capgo meinen Quellcode?[](https://capgoapp/docs/faq/#does-capgo-store-my-source-code "Direct link to Does Capgo store my source code?")
+### Speichert Capgo meinen Quellcode?
 
-Nein. Capgo-Server sehen niemals Ihren Quellcode. Wenn Sie `npx @capgo/cli app update` ausführen, lädt das `npx @capgo/cli` Tool nur den kompilierten Code hoch, den Sie auch an die App Stores senden. Für zusätzliche Sicherheit können Sie Ende-zu-Ende-Verschlüsselung verwenden, um Ihr Bundle vor dem Hochladen auf Capgo-Server zu verschlüsseln.
+Nein. Capgo-Server sehen niemals Ihren Quellcode. Wenn Sie `npx @capgo/cli app update` ausführen, lädt das `npx @capgo/cli`-Tool nur den kompilierten Code hoch, den Sie auch an die App Stores senden. Wenn Sie zusätzliche Sicherheit wünschen, können Sie Ende-zu-Ende-Verschlüsselung verwenden, um Ihr Bundle vor dem Upload auf Capgo-Server zu verschlüsseln.
 
-Siehe auch unsere Datenschutzerklärung: [https://capgoapp/privacy](https://capgoapp/privacy/)
+Siehe auch unsere Datenschutzrichtlinie: [https://capgoapp/privacy](https://capgoapp/privacy/)
 
-### Kann ich Capgo von meinem CI-System aus nutzen?[](https://capgoapp/docs/faq/#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
+### Kann ich Capgo von meinem CI-System aus nutzen?
 
-Ja. Capgo ist für die Nutzung in CI-Systemen gedacht. Wir haben Anleitungen für [Android und Github Actions](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) und [IOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) sowie für [Gitlab](https://capgoapp/blog/setup-ci-and-cd-gitlab/) veröffentlicht. Andere CI-Systeme sollten ähnlich sein.
+Ja. Capgo ist für die Verwendung in CI-Systemen gedacht. Wir haben eine Anleitung für [Android und Github Actions](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) und [IOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) sowie für [Gitlab](https://capgoapp/blog/setup-ci-and-cd-gitlab/) veröffentlicht, andere CI-Systeme sollten ähnlich sein.
 
-Zögern Sie nicht, sich bei Problemen über GitHub Issues oder Discord an uns zu wenden.
+Zögern Sie nicht, sich bei Problemen über GitHub Issues oder Discord zu melden.
 
-### Wie verhält sich dies zu Firebase Remote Config oder Launch Darkly?[](https://capgoapp/docs/faq/#how-does-this-relate-to-firebase-remote-config-or-launch-darkly "Direct link to How does this relate to Firebase Remote Config or Launch Darkly?")
+### Wie verhält sich das zu Firebase Remote Config oder Launch Darkly?
 
-Code Push ermöglicht das Hinzufügen neuen Codes bzw. das Ersetzen von Code auf dem Gerät. Firebase Remote Config und Launch Darkly sind Konfigurationssysteme. Sie ermöglichen es Ihnen, die Konfiguration Ihrer App zu ändern, ohne eine neue Version ausliefern zu müssen. Sie sind nicht dafür gedacht, Code zu ersetzen.
+Code Push ermöglicht das Hinzufügen neuen Codes/Ersetzen von Code auf dem Gerät. Firebase Remote Config und Launch Darkly sind beides Konfigurationssysteme. Sie ermöglichen es Ihnen, die Konfiguration Ihrer App zu ändern, ohne eine neue Version ausliefern zu müssen. Sie sind nicht dafür gedacht, Code zu ersetzen.
 
-### Wie groß ist der Abhängigkeits-Footprint?[](https://capgoapp/docs/faq/#how-big-of-a-dependency-footprint-does-this-add "Direct link to How big of a dependency footprint does this add?")
+### Wie groß ist der Dependency-Footprint?
 
-Ich habe es kürzlich nicht gemessen, aber ich erwarte, dass die Code-Push-Bibliothek weniger als ein Megabyte zu Capacitor-Apps hinzufügt. Wir kennen Wege, dies kleiner zu machen, wenn es Priorität wird. Wenn die Größe für Sie ein Hindernis ist, lassen Sie es uns wissen!
+Ich habe es kürzlich nicht gemessen, aber ich erwarte, dass die Code-Push-Bibliothek weniger als ein Megabyte zu Capacitor-Apps hinzufügt. Wir kennen Möglichkeiten, dies kleiner zu machen, wenn es Priorität wird. Wenn die Größe ein Blocker für Sie ist, lassen Sie es uns wissen!
 
-### Funktioniert Code Push mit großen Anwendungen?[](https://capgoapp/docs/faq/#does-code-push-work-with-large-applications "Direct link to Does code push work with large applications?")
+### Funktioniert Code Push mit großen Anwendungen?
 
-Ja. Es gibt keine Beschränkung für die Größe der Anwendung, die mit Code Push aktualisiert werden kann. Wie [unten](https://capgoapp/docs/faq/#what-types-of-changes-does-capgo-code-push-support) erwähnt, kann Capgo jeden JS-Code in Ihrer Anwendung unabhängig von der Größe ändern.
+Ja. Es gibt keine Begrenzung für die Größe der Anwendung, die mit Code Push aktualisiert werden kann. Wie [unten](https://capgoapp/docs/faq/#what-types-of-changes-does-capgo-code-push-support) erwähnt, kann Capgo jeden JS-Code in Ihrer Anwendung ändern, unabhängig von der Größe.
 
-Hinweis: Eine größere Größe erschwert es Benutzern, Updates herunterzuladen. Wir empfehlen, Ihre App so klein wie möglich zu halten.
+Zu beachten: Eine größere Größe erschwert es Benutzern, Updates herunterzuladen. Wir empfehlen, Ihre App so klein wie möglich zu halten.
 
-### Wofür kann ich Capgo Code Push verwenden?[](https://capgoapp/docs/faq/#what-can-i-use-capgo-code-push-for "Direct link to What can I use Capgo code push for?")
+### Wofür kann ich Capgo Code Push verwenden?
 
 Wir haben verschiedene Anwendungsfälle gesehen, darunter:
 
-- Notfall-Fixes für Produktions-Apps
-- Bereitstellung von Fehlerbehebungen für Benutzer älterer Versionen Ihrer App
-- Kontinuierliche Bereitstellung (z.B. stündlich)
+-   Notfall-Fixes für Produktions-Apps
+-   Auslieferung von Fehlerbehebungen an Benutzer älterer Versionen Ihrer App
+-   Kontinuierliche Auslieferung (z.B. stündlich)
 
-Beachten Sie, dass die meisten App Stores das Ausliefern von Code verbieten, der das Verhalten der App wesentlich verändert. Weitere Informationen finden Sie [unten](https://capgoapp/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies).
+Beachten Sie, dass die meisten App Stores das Ausliefern von Code verbieten, der das Verhalten der App wesentlich ändert. Weitere Informationen finden Sie [unten](https://capgoapp/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies).
 
-### Was zählt als "MAU" für Capgo?[](https://capgoapp/docs/faq/#what-counts-as-a-mau-for-capgo "Direct link to What counts as a \"MAU\" for Capgo?")
+### Was zählt als "MAU" für Capgo?
 
-Ein MAU ist ein "Monthly Active User" (Monatlich aktiver Benutzer). Wir zählen einen MAU als jedes Gerät, das in den letzten 30 Tagen unsere Server kontaktiert hat. Wir zählen keine Geräte, die unsere Server in den letzten 30 Tagen nicht kontaktiert haben.
+Ein MAU ist ein "Monthly Active User". Wir zählen einen MAU als jedes Gerät, das in den letzten 30 Tagen unsere Server kontaktiert hat. Wir zählen keine Geräte, die unsere Server in den letzten 30 Tagen nicht kontaktiert haben.
 
-Jedes Mal, wenn ein Gerät Ihre App neu installiert, wird ein neuer MAU gezählt. Dies geschieht aufgrund von Apple Store Einschränkungen bezüglich der Privatsphäre. Wir können dasselbe Gerät nicht verfolgen, wenn der Benutzer die App neu installiert.
+Jedes Mal, wenn ein Gerät Ihre App neu installiert, wird ein neuer MAU gezählt, dies geschieht aufgrund von Apple Store-Einschränkungen bezüglich der Privatsphäre. Wir können dasselbe Gerät nicht verfolgen, wenn der Benutzer die App neu installiert.
 
 Während der Entwicklung wird bei jeder Neuinstallation der App ein neuer MAU gezählt.
 
 Dasselbe gilt für Testflight-Downloads oder Kanalwechsel in Android. Das Aktualisieren der App erstellt keine neue Geräte-ID.
 
-> Wir empfehlen nach der ersten Einrichtung, Entwicklungsgeräte und Emulatoren zu deaktivieren, um die Anzahl doppelter Geräte zu reduzieren.
+> Wir empfehlen nach dem ersten Setup, Entwicklungsgeräte und Emulatoren zu deaktivieren, um die Anzahl doppelter Geräte zu reduzieren.
 
-### Wofür können wir Capgo Code Push nicht verwenden?[](https://capgoapp/docs/faq/#what-cant-we-use-capgo-code-push-for "Direct link to What can't we use Capgo code push for?")
+### Wofür können wir Capgo Code Push nicht verwenden?
 
 Wie oben erwähnt, sollte Capgo nicht verwendet werden, um gegen App Store-Richtlinien zu verstoßen. Weitere Informationen finden Sie [unten](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines).
 
 Außerdem unterstützt Capgo keine Änderungen am nativen Code (z.B. Java/Kotlin auf Android oder Objective-C/Swift auf iOS). Das Tool warnt Sie während eines Aktualisierungsversuchs, wenn Sie nativen Code geändert haben.
 
-### Reicht Capgo die Apps für mich bei den Stores ein?[](https://capgoapp/docs/faq/#does-capgo-submit-to-the-stores-for-me "Direct link to Does Capgo submit to the stores for me?")
+### Reicht Capgo die Apps für mich bei den Stores ein?
 
-Capgo unterstützt derzeit nicht das Einreichen in die App Stores in Ihrem Namen. Wir planen, dies in Zukunft hinzuzufügen, aber im Moment müssen Sie weiterhin Ihre bestehenden Prozesse für die Einreichung in die App Stores verwenden.
+Capgo unterstützt derzeit nicht das Einreichen bei den App Stores in Ihrem Namen. Wir planen, dies in Zukunft hinzuzufügen, aber vorerst müssen Sie weiterhin Ihre bestehenden Prozesse für die Einreichung bei den App Stores verwenden.
 
 Sie können unseren [CI-Leitfaden für Android](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) und [CI-Leitfaden für iOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/) verwenden, um diesen Prozess zu automatisieren.
 
-### Was speichert Capgo auf der Festplatte und wo?[](https://capgoapp/docs/faq/#what-does-capgo-store-on-disk-and-where "Direct link to What does Capgo store on disk and where?")
+### Was speichert Capgo auf der Festplatte und wo?
 
-Der Capgo-Updater (der in Ihrer Anwendung enthalten ist, wenn Sie Ihre App erstellen) speichert das zuletzt heruntergeladene Bundle im einzigen Verzeichnis, das Capacitor zum Laden von Code erlaubt. Auf Android befindet sich dies in `/data/user/0/comexampleapp/code_cache/capgo_updater`, wobei der Basis-Pfad vom Android-System bereitgestellt wird und sich zur Laufzeit dynamisch ändern kann. Auf iOS-Geräten werden Daten unter `Library/Application Support/capgo` gespeichert.
+Der Capgo-Updater (der in Ihrer Anwendung enthalten ist, wenn Sie Ihre App erstellen) speichert das zuletzt heruntergeladene Bundle im einzigen Verzeichnis, das Capacitor zum Laden von Code erlaubt. Auf Android befindet sich dies in `/data/user/0/comexampleapp/code_cache/capgo_updater`, wobei der Basispfad vom Android-System bereitgestellt wird und sich zur Laufzeit dynamisch ändern kann. Auf iOS-Geräten werden Daten unter `Library/Application Support/capgo` gespeichert.
 
 Die Capgo-Kommandozeilentools (z.B.`npx @capgo/cli app update`) werden auf der Festplatte in npm-Caches installiert, Ihre Anmeldedaten werden in Ihrem Home-Verzeichnis in `~/capgo` gespeichert
 
-### Wie verhält sich das zum Capacitor Hot Reload?[](https://capgoapp/docs/faq/#how-does-this-relate-to-capacitor-hot-reload "Direkter Link zu Wie verhält sich das zum Capacitor Hot Reload?")
+### Wie verhält sich das zum Capacitor Hot Reload?
 
-Capacitors Hot Reload ist eine Funktion nur für die Entwicklungszeit. Code Push ist für die Produktion.
+Capacitor Hot Reload ist ein Feature ausschließlich für die Entwicklungszeit. Code Push ist für die Produktion.
 
-Hot Reload ist eine Funktion von Capacitor, die es ermöglicht, Code während der Entwicklung auf dem Gerät zu ändern. Dies erfordert das Erstellen der Capacitor-App mit einem Proxy zur Verbindung mit Ihrem lokalen Computer.
+Hot Reload ist eine Funktion von Capacitor, die es ermöglicht, Code während der Entwicklung auf dem Gerät zu ändern. Dies erfordert das Erstellen der Capacitor-App mit einem Proxy zur Verbindung mit Ihrem lokalen Rechner.
 
 Code Push ist eine Funktion, die es ermöglicht, Code auf dem Gerät in der Produktion zu ändern. Wir verwenden verschiedene Techniken, um dies je nach Plattform zu ermöglichen.
 
-### Welche Arten von Änderungen unterstützt Capgo Code Push?[](https://capgoapp/docs/faq/#what-types-of-changes-does-capgo-code-push-support "Direkter Link zu Welche Arten von Änderungen unterstützt Capgo Code Push?")
+### Welche Arten von Änderungen unterstützt Capgo Code Push?
 
-Capgo kann jeden JS-Code in Ihrer Anwendung ändern. Dies umfasst App-Code und generierten Code. Sie können auch Abhängigkeiten in `package.json` aktualisieren, solange sie keine nativen Code-Änderungen erfordern.
+Capgo kann jeden JS-Code in Ihrer Anwendung ändern. Dies umfasst App-Code und generierten Code. Sie können auch Abhängigkeiten in `package.json` aktualisieren, solange diese keine nativen Code-Änderungen erfordern.
 
-Wir planen nicht, Änderungen an nativem Code zu unterstützen (z.B. Java/Kotlin für Android oder Objective-C/Swift für iOS), und das Tool wird Sie warnen, wenn es feststellt, dass Sie nativen Code geändert haben, da dieser nicht im Bundle enthalten sein wird.
+Wir haben nicht vor, Änderungen am nativen Code zu unterstützen (z.B. Java/Kotlin auf Android oder Objective-C/Swift auf iOS), und das Tool wird Sie warnen, wenn es erkennt, dass Sie nativen Code geändert haben, da dieser nicht im Bundle enthalten sein wird.
 
-### Wird Web unterstützt?[](https://capgoapp/docs/faq/#does-this-support-web "Direkter Link zu Wird Web unterstützt?")
+### Unterstützt dies Web?
 
 Code Push wird für Web nicht benötigt, da Web bereits so funktioniert. Wenn ein Benutzer eine Web-App öffnet, lädt sie bei Bedarf die neueste Version vom Server herunter.
 
-Wenn Sie einen Anwendungsfall für Code Push mit Web haben, würden wir das gerne erfahren!
+Wenn Sie einen Anwendungsfall für Code Push mit Web haben, würden wir das gerne wissen!
 
-### Funktioniert dies auf iOS, Android, Mac, Windows, Linux, etc.?[](https://capgoapp/docs/faq/#will-this-work-on-ios-android-mac-windows-linux-etc "Direkter Link zu Funktioniert dies auf iOS, Android, Mac, Windows, Linux, etc.?")
+### Wird dies auf iOS, Android, Mac, Windows, Linux usw. funktionieren?
 
 Ja.
 
-Bisher haben wir uns auf die Unterstützung von Android und iOS konzentriert, aber Code Push wird letztendlich überall dort funktionieren, wo Capacitor funktioniert. Wir stellen sicher, dass wir zuerst die gesamte erforderliche Infrastruktur aufbauen, um Code Push zuverlässig und sicher bereitzustellen, bevor wir auf weitere Plattformen erweitern.
+Bisher haben wir uns auf die Android- und iOS-Unterstützung konzentriert, aber Code Push wird letztendlich überall funktionieren, wo Capacitor funktioniert. Wir stellen sicher, dass wir zuerst die gesamte Infrastruktur aufbauen, die benötigt wird, um Code Push zuverlässig und sicher bereitzustellen, bevor wir auf weitere Plattformen expandieren.
 
-### Welche OS-Versionen unterstützt Capgo?[](https://capgoapp/docs/faq/#what-os-versions-does-capgo-support "Direkter Link zu Welche OS-Versionen unterstützt Capgo?")
+### Welche Betriebssystemversionen unterstützt Capgo?
 
-Capgo unterstützt die gleichen Android-Versionen wie Capacitor.
+Capgo unterstützt die gleichen Android-Versionen, die auch Capacitor unterstützt.
 
 Capacitor unterstützt derzeit Android API Level 22+ und iOS 13.0+: [https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy/)
 
-### Welche Versionen von Capacitor unterstützt Capgo?[](https://capgoapp/docs/faq/#what-versions-of-flutter-does-capgo-support "Direkter Link zu Welche Versionen von Capacitor unterstützt Capgo?")
+### Welche Versionen von Capacitor unterstützt Capgo?
 
-Capgo unterstützt derzeit nur aktuelle stabile Versionen von Capacitor. Wir könnten auch ältere Versionen von Capacitor unterstützen, haben aber noch nicht die nötige Infrastruktur aufgebaut, um diese über die Zeit zu pflegen. Wir beabsichtigen, in Zukunft mehr Versionen von Capacitor zu unterstützen, einschließlich aller Versionen für unsere Enterprise-Kunden. [https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
+Capgo unterstützt derzeit nur aktuelle stabile Versionen von Capacitor. Wir könnten auch ältere Versionen von Capacitor unterstützen, haben aber noch nicht die nötige Infrastruktur aufgebaut, um diese über die Zeit zu pflegen. Wir beabsichtigen, in Zukunft mehr Versionen von Capacitor zu unterstützen, einschließlich jeder Version für unsere Enterprise-Kunden [https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
 
-Capgo folgt Flutter Stable und aktualisiert in der Regel innerhalb weniger Stunden nach jeder stabilen Veröffentlichung. Unser System für diese Aktualisierungen ist automatisiert und benötigt nur wenige Minuten. Danach führen wir einen zusätzlichen manuellen Überprüfungsschritt durch, bevor wir auf unseren Servern veröffentlichen.
+Capgo verfolgt die stabilen Versionen und aktualisiert in der Regel innerhalb weniger Stunden nach einer stabilen Veröffentlichung. Unser System für diese Aktualisierungen ist automatisiert und benötigt nur wenige Minuten. Danach führen wir einen zusätzlichen manuellen Verifizierungsschritt durch, bevor wir auf unsere Server veröffentlichen.
 
-### Wie verhält sich das zum App/Play Store Überprüfungsprozess oder deren Richtlinien?[](https://capgoapp/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies "Direkter Link zu Wie verhält sich das zum App/Play Store Überprüfungsprozess oder deren Richtlinien?")
+### Wie verhält sich dies zum App/Play Store Überprüfungsprozess oder deren Richtlinien?
 
-Entwickler sind an ihre Vereinbarungen mit Store-Anbietern gebunden, wenn sie diese Stores nutzen. Code Push ist so konzipiert, dass Entwickler ihre Apps aktualisieren und dabei die Store-Richtlinien für iOS und Android einhalten können. Ähnlich wie bei den verschiedenen kommerziellen Produkten für React Native (z.B. [Microsoft](https://appcenter.ms/), [Expo](https://expo.dev/))
+Entwickler sind an ihre Vereinbarungen mit Store-Anbietern gebunden, wenn sie diese Stores nutzen. Code Push ist so konzipiert, dass Entwickler ihre Apps aktualisieren und dabei die Store-Richtlinien auf iOS und Android einhalten können. Ähnlich wie bei den verschiedenen kommerziellen Produkten, die für React Native verfügbar sind (z.B. [Microsoft](https://appcenter.ms/), [Expo](https://expo.dev/))
 
-Microsoft veröffentlicht auch einen Leitfaden, wie ihre Lösung die App Store-Richtlinien einhält: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+Microsoft veröffentlicht auch einen Leitfaden darüber, wie ihre Lösung die App Store-Richtlinien erfüllt: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
 
-Code Push ist eine weit verbreitete Technik in den App Stores. Alle großen Apps, die ich kenne, nutzen Code Push. Die wichtigste Richtlinie ist, das Verhalten der App nicht wesentlich zu ändern. Weitere Informationen finden Sie [unten](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines).
+Code Push ist eine weit verbreitete Technik in den App Stores. Alle großen Apps, die ich kenne, verwenden Code Push. Die wichtigste Richtlinie ist, das Verhalten der App nicht wesentlich zu ändern. Weitere Informationen finden Sie [unten](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines).
 
-### Erfüllt Capgo die Play Store Richtlinien?[](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines "Direkter Link zu Erfüllt Capgo die Play Store Richtlinien?")
+### Erfüllt Capgo die Play Store-Richtlinien?
 
 Ja.
 
-Der Play Store hat zwei Einschränkungen bezüglich Update-Tools:
+Der Play Store bietet zwei Einschränkungen in Bezug auf Update-Tools:
 
 1. Updates müssen einen Interpreter oder eine virtuelle Maschine verwenden (Capgo verwendet die Dart Virtual Machine) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    Eine über Google Play vertriebene App darf sich nicht selbst modifizieren, ersetzen</span><br></span><span><span>    oder aktualisieren durch andere Methoden als den Google Play Update-Mechanismus.</span><br></span><span><span>    Ebenso darf eine App keinen ausführbaren Code (wie dex, JAR, so Dateien) von einer</span><br></span><span><span>    anderen Quelle als Google Play herunterladen. *Diese Einschränkung gilt nicht für Code,</span><br></span><span><span>    der in einer virtuellen Maschine oder einem Interpreter läuft*, wo einer von beiden</span><br></span><span><span>    indirekten Zugriff auf Android APIs bietet (wie JavaScript in einer Webview oder</span><br></span><span><span>    Browser)</span><br></span><span><span></span><br></span><span><span>    Apps oder Drittanbieter-Code wie SDKs mit interpretierten Sprachen (JavaScript,</span><br></span><span><span>    Python, Lua, etc.), die zur Laufzeit geladen werden (also nicht mit der</span><br></span><span><span>    App gebündelt), dürfen keine potenziellen Verstöße gegen Google Play Richtlinien ermöglichen</span><br></span>
+<span><span>    Eine über Google Play verteilte App darf sich nicht selbst modifizieren, ersetzen oder aktualisieren</span><br></span><span><span>    mit anderen Methoden als dem Update-Mechanismus von Google Play. Ebenso darf eine App</span><br></span><span><span>    keinen ausführbaren Code (wie dex-, JAR-, .so-Dateien) von einer</span><br></span><span><span>    anderen Quelle als Google Play herunterladen. *Diese Einschränkung gilt nicht für Code,</span><br></span><span><span>    der in einer virtuellen Maschine oder einem Interpreter läuft*, wo entweder</span><br></span><span><span>    indirekten Zugriff auf Android-APIs bietet (wie JavaScript in einer WebView oder</span><br></span><span><span>    Browser)</span><br></span><span><span></span><br></span><span><span>    Apps oder Drittanbieter-Code, wie SDKs, mit interpretierten Sprachen (JavaScript,</span><br></span><span><span>    Python, Lua, etc.), die zur Laufzeit geladen werden (zum Beispiel nicht mit der</span><br></span><span><span>    App gebündelt), dürfen keine potenziellen Verstöße gegen Google Play-Richtlinien ermöglichen</span><br></span>
 ```
 
-2. Änderungen an der App dürfen nicht irreführend sein (z.B. Ändern des Zwecks der App durch Update) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/). Bitte seien Sie klar gegenüber Ihren Nutzern, was Sie mit Ihrer Anwendung bereitstellen und verletzen Sie nicht ihre Erwartungen durch wesentliche Verhaltensänderungen durch die Verwendung von Capgo.
+2. Änderungen an der App dürfen nicht täuschend sein (z.B. Ändern des Zwecks der App durch ein Update) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Bitte seien Sie transparent gegenüber Ihren Benutzern bezüglich dessen, was Sie mit Ihrer Anwendung bereitstellen, und verletzen Sie nicht ihre Erwartungen durch wesentliche Verhaltensänderungen durch die Verwendung von Capgo.
 
-Capgo ist so konzipiert, dass es mit den Play Store Richtlinien kompatibel ist. Allerdings ist Capgo ein Werkzeug und kann wie jedes Werkzeug missbraucht werden. Vorsätzlicher Missbrauch von Capgo zur Verletzung der Play Store Richtlinien verstößt gegen die Capgo [Nutzungsbedingungen](https://capgoapp/tos/) und kann zur Kündigung Ihres Kontos führen.
+Capgo ist so konzipiert, dass es mit den Play Store-Richtlinien kompatibel ist. Allerdings ist Capgo ein Werkzeug und kann wie jedes Werkzeug missbraucht werden. Die absichtliche missbräuchliche Verwendung von Capgo zur Verletzung der Play Store-Richtlinien verstößt gegen die Capgo [Nutzungsbedingungen](https://capgoapp/tos/) und kann zur Kündigung Ihres Kontos führen.
 
-Schließlich sind Code Push Dienste in der Branche weit verbreitet (alle großen Apps, die ich kenne, nutzen sie) und es gibt mehrere andere öffentlich verfügbare Code Push Dienste (z.B. expo.dev & appcenter.ms). Dies ist ein gut erprobter Weg.
+Schließlich werden Code Push-Dienste in der Branche weit verbreitet eingesetzt (alle großen Apps, die ich kenne, verwenden sie) und es gibt mehrere andere öffentlich verfügbare Code Push-Dienste (z.B. expo.dev & appcenter.ms). Dies ist ein gut ausgetretener Pfad.
 
-Microsoft veröffentlicht auch einen Leitfaden, wie ihre React Native "codepush" Bibliothek die App Store Richtlinien erfüllt: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+Microsoft veröffentlicht auch einen Leitfaden darüber, wie ihre React Native "codepush"-Bibliothek die App Store-Richtlinien erfüllt: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
 
-### Erfüllt Capgo die App Store Richtlinien?[](https://capgoapp/docs/faq/#does-capgo-comply-with-app-store-guidelines "Direkter Link zu Erfüllt Capgo die App Store Richtlinien?")
+### Erfüllt Capgo die App Store-Richtlinien?
 
 Ja.
 
-Ähnlich wie der Play Store hat der App Store sowohl technische als auch Policy-Einschränkungen.
+Ähnlich wie der Play Store bietet der App Store sowohl technische als auch Richtlinien-Einschränkungen.
 
 ```
-<span><span>3.2.2</span><br></span><span><span>interpretierter Code kann in eine Anwendung heruntergeladen werden, jedoch nur solange</span><br></span><span><span>dieser Code:</span><br></span><span><span>(a) nicht den primären Zweck der Anwendung ändert, indem er</span><br></span><span><span>Funktionen oder Funktionalitäten bereitstellt, die nicht mit dem beabsichtigten und</span><br></span><span><span>beworbenen Zweck der Anwendung, wie sie im App Store eingereicht wurde, übereinstimmen,</span><br></span><span><span>(b) keinen Store oder Storefront für anderen Code oder Anwendungen erstellt, und</span><br></span><span><span>(c) keine Signierung, Sandbox oder andere Sicherheitsfunktionen des Betriebssystems umgeht</span><br></span>
+<span><span>3.2.2</span><br></span><span><span>interpretierter Code kann in eine Anwendung heruntergeladen werden, jedoch nur solange</span><br></span><span><span>dieser Code:</span><br></span><span><span>(a) den primären Zweck der Anwendung nicht durch Bereitstellung von</span><br></span><span><span>Funktionen oder Funktionalität ändert, die nicht mit dem beabsichtigten und</span><br></span><span><span>beworbenen Zweck der Anwendung, wie sie im App Store eingereicht wurde, übereinstimmen,</span><br></span><span><span>(b) keinen Store oder Storefront für anderen Code oder Anwendungen erstellt, und</span><br></span><span><span>(c) keine Signierung, Sandbox oder andere Sicherheitsfunktionen des Betriebssystems umgeht</span><br></span>
 
-Capgo verwendet einen benutzerdefinierten Dart-Interpreter, um die Nur-Interpreter-Beschränkung für Updates auf iOS einzuhalten. Solange Ihre Anwendung kein irreführendes Verhalten durch Updates zeigt (z.B. Änderung des App-Zwecks durch Updates), ist das Aktualisieren über Capgo (oder andere Code-Push-Lösungen) gängige Branchenpraxis und entspricht den App Store-Richtlinien.
+Capgo verwendet einen benutzerdefinierten Dart-Interpreter, um die Interpreter-Only-Beschränkung für Updates auf iOS einzuhalten. Solange Ihre Anwendung kein täuschendes Verhalten durch Updates zeigt (z.B. Änderung des App-Zwecks durch Update), ist das Aktualisieren über Capgo (oder eine andere Code-Push-Lösung) gängige Branchenpraxis und entspricht den App Store-Richtlinien.
 
 Der absichtliche Missbrauch von Capgo zur Verletzung der App Store-Richtlinien verstößt gegen die [Nutzungsbedingungen](https://capgoapp/tos/) von Capgo und kann zur Kündigung Ihres Kontos führen.
 
-Microsoft veröffentlicht auch einen Leitfaden darüber, wie ihre React Native "CodePush"-Bibliothek die App Store-Richtlinien einhält: [https://githubcom/microsoft/react-native-code-push#store-guideline-compliance](https://githubcom/microsoft/react-native-code-push/#store-guideline-compliance)
+Microsoft veröffentlicht auch einen Leitfaden, wie ihre React Native "CodePush"-Bibliothek die App Store-Richtlinien einhält: [https://githubcom/microsoft/react-native-code-push#store-guideline-compliance](https://githubcom/microsoft/react-native-code-push/#store-guideline-compliance)
 
 ### Kann ich Capgo in meinem Land nutzen?[](https://capgoapp/docs/faq/#can-i-use-capgo-in-my-country "Direct link to Can I use Capgo in my country?")
 
-Wir haben den Zugang zu Capgo aus keinem Land eingeschränkt.
+Wir haben den Zugriff auf Capgo aus keinem Land eingeschränkt.
 
-Wir wissen, dass einige Länder Einschränkungen haben, welche URLs innerhalb des Landes zugänglich sind. Capgo nutzt derzeit Cloudflare Cloud für das Hosting, einschließlich R2 Storage und Cloudflare Workers.
+Wir erkennen an, dass einige Länder Einschränkungen haben, welche URLs innerhalb des Landes aufgerufen werden können. Capgo verwendet derzeit Cloudflare Cloud für das Hosting, einschließlich R2 Storage und Cloudflare Workers.
 
 Folgende URLs werden von Capgo verwendet:
 
--   [https://apicapgoapp](https://apicapgoapp/) -- wird von den `npx @capgo/cli` Kommandozeilen-Tools für die Interaktion mit den Capgo-Servern sowie vom Capgo-Updater auf den Benutzergeräten zur Überprüfung von Updates verwendet
--   [https://*r2cloudflarestoragecom](https://*r2cloudflarestoragecom/) -- wird vom `npx @capgo/cli` Kommandozeilen-Tool zum Hoch- und Herunterladen von Bundles verwendet
+-   [https://apicapgoapp](https://apicapgoapp/) -- verwendet von den `npx @capgo/cli` Command Line Tools für die Interaktion mit den Capgo-Servern sowie vom Capgo-Updater auf den Geräten der Benutzer zur Überprüfung von Updates
+-   [https://*r2cloudflarestoragecom](https://*r2cloudflarestoragecom/) -- verwendet vom `npx @capgo/cli` Command Line Tool zum Hoch- und Herunterladen von Bundles
 
-Wenn all diese URLs in Ihrem Land zugänglich sind, sollte Capgo funktionieren.
+Wenn all diese URLs aus Ihrem Land erreichbar sind, sollte Capgo funktionieren.
 
-Wenn Ihre Region den Zugriff auf eine dieser URLs blockieren muss, lassen Sie es uns bitte wissen und wir können mit Ihnen an einer Lösung arbeiten. Proxy-Server sind eine Option.
+Wenn Ihre Region den Zugriff auf eine dieser URLs blockieren muss, lassen Sie es uns wissen und wir können mit Ihnen an einer Lösung arbeiten. Proxy-Server sind eine Option.
 
 ### Kann ich Capgo selbst hosten?[](https://capgoapp/docs/faq/#can-i-self-host-capgo "Direct link to Can I self-host Capgo?")
 
 Ja, Sie können Capgo selbst hosten. Die Anleitung ist noch nicht geschrieben, aber der Code ist Open Source und verfügbar unter [https://githubcom/cap-go/capgo](https://githubcom/cap-go/capgo/)
 
-### Benötigt Code Push Internet um zu funktionieren?[](https://capgoapp/docs/faq/#does-code-push-require-the-internet-to-work "Direct link to Does code push require the internet to work?")
+### Benötigt Code Push Internet zum Funktionieren?[](https://capgoapp/docs/faq/#does-code-push-require-the-internet-to-work "Direct link to Does code push require the internet to work?")
 
-Ja. Man könnte sich vorstellen, einen Server zu betreiben, um die Updates getrennt vom allgemeinen Internet zu verteilen, aber irgendeine Form von Netzwerkverbindung ist erforderlich, um Updates zu den Geräten zu transportieren.
+Ja. Man könnte sich vorstellen, einen Server zu betreiben, um die Updates getrennt vom allgemeinen Internet zu verteilen, aber irgendeine Form von Netzwerkverbindung ist erforderlich, um Updates auf die Geräte zu übertragen.
 
 ### Wie wird Capgo von fehlender Netzwerkverbindung beeinflusst?[](https://capgoapp/docs/faq/#how-is-capgo-affected-by-lack-of-network-connectivity "Direct link to How is Capgo affected by lack of network connectivity?")
 
-Der Capgo-Updater (der in Ihrer Anwendung enthalten ist, wenn Sie Ihre App mit Capgo erstellen) ist darauf ausgelegt, widerstandsfähig gegen Netzwerkverbindungsprobleme zu sein.
+Der Capgo-Updater (der in Ihrer Anwendung enthalten ist, wenn Sie Ihre App mit Capgo erstellen) ist darauf ausgelegt, resistent gegen Netzwerkverbindungsprobleme zu sein.
 
-Im Standard-Update-Verhalten benachrichtigt die Anwendung beim Start den Capgo-Updater, der einen separaten Thread startet, um eine Netzwerkanfrage an die Capgo-Server zu stellen und nach einem Update zu fragen. Wir verwenden absichtlich einen separaten Thread, um nichts anderes zu blockieren, was die Anwendung tun könnte. Wenn die Netzwerkanfrage fehlschlägt oder eine Zeitüberschreitung auftritt, wird der Updater beim nächsten Start der Anwendung erneut versuchen zu prüfen.
+Im Standard-Update-Verhalten benachrichtigt die Anwendung beim Start den Capgo-Updater, der einen separaten Thread startet, um eine Netzwerkanfrage an die Capgo-Server zu stellen und nach einem Update zu fragen. Wir verwenden absichtlich einen separaten Thread, um andere Aktivitäten der Anwendung nicht zu blockieren. Wenn die Netzwerkanfrage fehlschlägt oder eine Zeitüberschreitung auftritt, wird der Updater beim nächsten Start der Anwendung erneut prüfen.
 
-Capgo Kommandozeilen-Tools (z.B. `npx @capgo/cli app update`) benötigen eine Netzwerkverbindung, um zu funktionieren. Wenn Sie Capgo zur Verteilung Ihrer App verwenden, sollten Sie sicherstellen, dass Ihr CI-System über eine Netzwerkverbindung verfügt.
+Capgo Command Line Tools (z.B. `npx @capgo/cli app update`) benötigen eine Netzwerkverbindung zum Funktionieren. Wenn Sie Capgo zur Verteilung Ihrer App verwenden, sollten Sie sicherstellen, dass Ihr CI-System eine Netzwerkverbindung hat.
 
 ### Was passiert, wenn ein Benutzer lange Zeit nicht aktualisiert und ein Update verpasst?[](https://capgoapp/docs/faq/#what-happens-if-a-user-doesnt-update-for-a-long-time-and-misses-an-update "Direct link to What happens if a user doesn't update for a long time and misses an update?")
 
-Unsere Implementierung sendet immer ein Update, das speziell für das anfragende Gerät zugeschnitten ist, und aktualisiert den Anfragenden immer auf die neueste verfügbare Version. Wenn ein Benutzer also eine Weile nicht aktualisiert, wird er Zwischenversionen "verpassen".
+Unsere Implementierung sendet immer ein speziell auf das anfragende Gerät zugeschnittenes Update, das den Anfrager immer auf die neueste verfügbare Version aktualisiert. Wenn ein Benutzer also eine Weile nicht aktualisiert, wird er Zwischenupdates "verpassen".
 
-Der Update-Server könnte geändert werden, um je nach Bedarf Ihrer Anwendung entweder mit der nächsten inkrementellen Version oder der neuesten Version zu antworten. Bitte lassen Sie uns wissen, wenn alternative Update-Verhaltensweisen für Sie wichtig sind.
+Der Update-Server könnte geändert werden, um je nach Bedarf Ihrer Anwendung entweder die nächste inkrementelle Version oder die neueste Version zu unterstützen. Bitte lassen Sie uns wissen, wenn alternative Update-Verhaltensweisen für Sie wichtig sind.
 
 ### Wie verhält sich Capgo zu Capacitor?[](https://capgoapp/docs/faq/#how-does-capgo-relate-to-capacitor "Direct link to How does Capgo relate to Capacitor?")
 
 Capgo ist ein Plugin für Capacitor, das Code Push hinzufügt. Capgo ist kein Ersatz für Capacitor. Sie können weiterhin die Capacitor-Tools verwenden, die Sie bereits kennen und schätzen.
 
-Wir verfolgen die neueste stabile Version von Capacitor und aktualisieren unser Code-Push-Plugin entsprechend.
+Wir verfolgen die neueste stabile Version von Capacitor und aktualisieren unser Code Push Plugin entsprechend.
 
 ### Wann finden Updates statt?[](https://capgoapp/docs/faq/#when-do-updates-happen "Direct link to When do updates happen?")
 
 Standardmäßig prüft der Capgo-Updater beim App-Start auf Updates. Er läuft in einem Hintergrund-Thread und blockiert nicht den UI-Thread. Updates werden installiert, während der Benutzer die App verwendet, und beim nächsten Neustart der App angewendet.
 
-Es ist auch möglich, den Capgo-Updater manuell über [package:capgo\_code\_push](https://pubdev/packages/capgo_code_push/) auszuführen, wodurch Updates jederzeit ausgelöst werden können, auch über Push-Benachrichtigungen.
+Es ist auch möglich, den Capgo-Updater manuell mit [package:capgo_code_push](https://pubdev/packages/capgo_code_push/) auszuführen, wodurch Updates jederzeit ausgelöst werden können, auch über Push-Benachrichtigungen.
 
 Der Capgo-Updater ist so konzipiert, dass die App normal weiterläuft, wenn das Netzwerk nicht verfügbar ist oder der Server nicht erreichbar ist. Sollten Sie sich jemals entscheiden, ein Update von unseren Servern zu löschen, werden alle Ihre Clients normal weiterlaufen.
 
-Wir haben die Möglichkeit hinzugefügt, Patches rückgängig zu machen. Am einfachsten ist es, einfach ein vorheriges Bundle an Ihren Kanal anzuhängen, um dies rückgängig zu machen.
+Wir haben die Möglichkeit hinzugefügt, Patches zurückzurollen. Am einfachsten ist es, einfach ein vorheriges Bundle an Ihren Kanal anzuhängen, um dies rückgängig zu machen.
 
-### Muss ich meine app\_id geheim halten?[](https://capgoapp/docs/faq/#do-i-need-to-keep-my-app_id-secret "Direct link to Do I need to keep my app_id secret?")
+### Muss ich meine app_id geheim halten?[](https://capgoapp/docs/faq/#do-i-need-to-keep-my-app_id-secret "Direct link to Do I need to keep my app_id secret?")
 
 Nein. Die `app_id` ist in Ihrer App enthalten und kann öffentlich sein. Sie können sie in die Versionskontrolle einchecken (auch öffentlich) und müssen sich keine Sorgen machen, dass jemand anderes darauf zugreift.
 
-Jemand, der Ihre `app_id` hat, kann die neueste Version Ihrer App von Capgo-Servern abrufen, aber keine Updates für Ihre App pushen oder auf andere Aspekte Ihres Capgo-Kontos zugreifen.
+Jemand mit Ihrer `app_id` kann die neueste Version Ihrer App von Capgo-Servern abrufen, kann aber keine Updates für Ihre App pushen oder auf andere Aspekte Ihres Capgo-Kontos zugreifen.
 
 ### Welche Informationen werden an Capgo-Server gesendet?[](https://capgoapp/docs/faq/#what-information-is-sent-to-capgo-servers "Direct link to What information is sent to Capgo servers?")
 
-Obwohl Capgo eine Netzwerkverbindung herstellt, werden keine personenbezogenen Daten gesendet. Das Einbinden von Capgo sollte Ihre Erklärungen für den Play Store oder App Store nicht beeinflussen.
+Obwohl Capgo sich mit dem Netzwerk verbindet, werden keine personenbezogenen Daten gesendet. Das Einbinden von Capgo sollte Ihre Erklärungen für den Play Store oder App Store nicht beeinflussen.
 
 Anfragen, die von der App an Capgo-Server gesendet werden, enthalten:
 
--   app\_id (spezifiziert in `capacitorconfigjson`)
+-   app_id (angegeben in `capacitorconfigjson`)
 -   channel (optional in `capacitorconfigjson`)
--   release\_version (versionName aus AndroidManifestxml oder CFBundleShortVersionString aus Infoplist oder `capacitorconfigjson` wenn in [`CapacitorUpdaterversion`](/docs/plugin/settings/#version) gesetzt)
--   version\_number (generiert als Teil von `npx @capgo/cli app update`)
+-   release_version (versionName aus AndroidManifestxml oder CFBundleShortVersionString aus Infoplist oder `capacitorconfigjson` wenn in [`CapacitorUpdaterversion`](/docs/plugin/settings/#version) gesetzt)
+-   version_number (generiert als Teil von `npx @capgo/cli app update`)
 -   os_version (z.B. '1121')
--   platform (z.B. 'android', wird benötigt um den richtigen Patch zu senden) Das ist alles. Der Code dafür befindet sich in `updater/library/src/networkrs`
--   device\_id (beim ersten Start auf dem Gerät generiert, wird verwendet um Installationen pro Gerät zu deduplizieren und ermöglicht uns, basierend auf installierten Benutzern abzurechnen)monatlich aktive Nutzer), anstelle von Gesamtaktualisierungen oder Gesamtaktualisierungsinstallationen)
--   custom_id (optional, zur Laufzeit vom Entwickler festgelegt, wird verwendet, um ein Gerät mit einem Benutzer in Ihrem System zu verknüpfen)
+-   platform (z.B. 'android', notwendig um den richtigen Patch zu senden) Das wars. Der Code dafür ist in `updater/library/src/networkrs`
+-   device_id (beim ersten Start auf dem Gerät generiert, wird verwendet um Geräte-spezifische Installationen zu deduplizieren und ermöglicht uns die Abrechnung basierend auf installierten Benutzern)monatlich aktive Nutzer), anstatt der Gesamtanzahl der Patches oder Patch-Installationen)
+- custom_id (optional, zur Laufzeit vom Entwickler festgelegt, um ein Gerät mit einem Benutzer in Ihrem System zu verknüpfen)
 
 ### Welche Plattformen unterstützt Capgo?[](https://capgoapp/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
 
 Derzeit unterstützt Capgo iOS und Android. Beide sind produktionsreif.
 
-Die Nutzung von Capgo für iOS oder Android kann unabhängig voneinander entschieden werden. Sie können in Ihrem Kanal festlegen, ob Sie für Android oder eine im App Store erstellte IPA bereitstellen möchten oder umgekehrt.
+Die Nutzung von Capgo für iOS oder Android kann unabhängig voneinander entschieden werden. Sie können in Ihrem Kanal festlegen, ob Sie an Android oder eine in den App Store gebaute IPA ausliefern möchten oder umgekehrt.
 
-Capgo kann (relativ einfach) für Desktop- oder eingebettete Ziele erweitert werden. Wenn diese für Sie wichtig sind, lassen Sie es uns bitte wissen.
+Capgo kann (relativ einfach) für Desktop- oder Embedded-Ziele erweitert werden. Wenn diese für Sie wichtig sind, lassen Sie es uns bitte wissen.
 
 ### Wie interagiert Capgo mit Play Testing Tracks oder Apple TestFlight?[](https://capgoapp/docs/faq/#how-does-capgo-interact-with-play-testing-tracks-or-apple-testflight "Direct link to How does Capgo interact with Play Testing Tracks or Apple TestFlight?")
 
-Jeder App Store hat eigene Mechanismen zur Verteilung von Apps an begrenzte Benutzergruppen (z.B. "internes Testen", "geschlossene Beta" usw.). Dies sind alles Mechanismen zur Segmentierung Ihrer Benutzer in Gruppen und zur Verteilung spezifischer Versionen Ihrer Apps an diese.
+Jeder App Store hat eigene Mechanismen zur Verteilung von Apps an begrenzte Benutzergruppen (z.B. "internes Testen", "geschlossene Beta" usw.). Dies sind alles Mechanismen zur Segmentierung Ihrer Benutzer in Gruppen und zur Verteilung spezifischer App-Versionen.
 
 Leider erlauben nicht alle diese Mechanismen Drittanbietern zu erkennen, wenn Apps in einem bestimmten Test Track oder über TestFlight installiert sind. Daher haben wir keine zuverlässige Einsicht in die Zusammensetzung dieser Gruppen und können den Zugriff auf Capgo-Patches nicht zuverlässig auf Basis dieser Gruppen steuern. [https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play](https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play/) [https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i](https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i/)
 
-Wenn Sie die Verfügbarkeit des Capgo-Bundles segmentieren möchten, gibt es 4 mögliche Optionen:
+Wenn Sie die Verfügbarkeit von Capgo-Bundles segmentieren möchten, gibt es 4 mögliche Optionen:
 
-1. Verwenden Sie separate Kanäle für jede Gruppe. Dies ist der einfachste Ansatz, erfordert aber die Verwaltung mehrerer Kanäle. Möglicherweise haben Sie bereits Entwicklungskanäle und Produktionskanäle mit unterschiedlicher Verfügbarkeit. Sie können dann Ihre Entwicklungskanäle aktualisieren, überprüfen und anschließend separat Ihre Produktionskanäle aktualisieren. Wir empfehlen die Verwendung von Branches/Tags in Ihrer Versionskontrolle, um die Quellen der einzelnen Releases im Überblick zu behalten.
+1. Verwenden Sie separate Kanäle für jede Gruppe. Dies ist der einfachste Ansatz, erfordert aber die Verwaltung mehrerer Kanäle. Möglicherweise haben Sie bereits Dev-Kanäle und Prod-Kanäle mit unterschiedlicher Verfügbarkeit. Sie können also Ihre Dev-Kanäle aktualisieren, überprüfen und dann separat Ihre Prod-Kanäle aktualisieren. Wir empfehlen die Verwendung von Branches/Tags in Ihrer Versionskontrolle, um den Überblick über die Quellen der einzelnen Releases zu behalten.
 2. Verfolgen Sie Ihre eigene Liste von Opt-in-Benutzern, deaktivieren Sie automatische Updates und lösen Sie Updates nur für bestimmte Benutzer über package:capgo_code_push aus. Dies funktioniert heute, erfordert aber die Verwaltung Ihrer eigenen Opt-in-Liste.
-3. Capgo erlaubt die Erstellung eines eigenen Opt-in-Mechanismus auf Geräteebene (ähnlich wie Test Tracks oder TestFlight, nur plattformunabhängig). Dies ermöglicht es Ihrem QA-Team, sich für Bundles anzumelden, bevor sie der Öffentlichkeit zur Verfügung gestellt werden.
-4. Capgo verfügt über prozentuale Rollouts. Dies lässt Sie zwar nicht auswählen, welche Geräte Sie senden möchten, kann aber helfen, schrittweise auszurollen und bei Problemen zurückzurollen.
+3. Capgo ermöglicht einen eigenen Opt-in-Mechanismus auf Geräteebene (ähnlich wie Test Tracks oder TestFlight, nur plattformunabhängig). Dies ermöglicht Ihrem QA-Team, sich für Bundles anzumelden, bevor sie der Öffentlichkeit zur Verfügung gestellt werden.
+4. Capgo hat prozentbasierte Rollouts. Dies lässt Sie zwar nicht auswählen, an welche Geräte gesendet wird, kann aber helfen, inkrementell auszurollen und bei Problemen zurückzurollen.
 
 ## Abrechnung[](https://capgoapp/docs/faq/#billing "Direct link to Billing")
 
@@ -282,7 +282,7 @@ Sie können Ihren Plan jederzeit in Ihrem Dashboard upgraden oder downgraden: [h
 
 ### Wann wird meine Abrechnungsperiode zurückgesetzt?[](https://capgoapp/docs/faq/#when-does-my-billing-period-reset "Direct link to When does my billing period reset?")
 
-Abrechnungsperioden werden automatisch jeden Monat am Tag Ihrer ersten Capgo-Anmeldung zurückgesetzt. Wenn Sie sich beispielsweise am 15. des Monats angemeldet haben, wird Ihre Abrechnungsperiode am 15. jeden Monats zurückgesetzt.
+Abrechnungsperioden werden automatisch jeden Monat am Tag Ihrer ersten Capgo-Anmeldung zurückgesetzt. Wenn Sie sich zum Beispiel am 15. des Monats angemeldet haben, wird Ihre Abrechnungsperiode am 15. jedes Monats zurückgesetzt.
 
 ### Wie kann ich mein Abonnement kündigen?[](https://capgoapp/docs/faq/#how-do-i-cancel-my-subscription "Direct link to How do I cancel my subscription?")
 
@@ -290,16 +290,16 @@ Sie können Ihr Abonnement jederzeit in Ihrem Dashboard kündigen: [https://webc
 
 ### Kann ich für ein Jahr im Voraus bezahlen?[](https://capgoapp/docs/faq/#can-i-pay-for-a-year-in-advance "Direct link to Can I pay for a year in advance?")
 
-Ja, Sie können jederzeit in Ihrem Dashboard im Voraus bezahlen: [https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+Ja, Sie können jederzeit in Ihrem Dashboard für ein Jahr im Voraus bezahlen: [https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
 
 ### Statistiken und Analysen[](https://capgoapp/docs/faq/#stats-and-analytics "Direct link to Stats and analytics")
 
 Die Statistiken in Ihrem Dashboard werden jeden Tag um Mitternacht UTC aktualisiert.
-Die Statistiken werden basierend auf der Anzahl der [MAU](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?") berechnet, die auf Ihren Geräten installiert wurden.
+Die Statistiken basieren auf der Anzahl der [MAU](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?"), die auf Ihren Geräten installiert wurden.
 
 # Wie wird die Geräte-ID generiert[](https://capgoapp/docs/faq/#how-device-id-is-generated "Direct link to How device ID is generated")
 
-Die Geräte-ID wird beim ersten Start auf dem Gerät generiert und wird verwendet, um doppelte Installationen pro Gerät zu vermeiden und uns zu ermöglichen, basierend auf installierten Benutzern (z.B. monatlich aktive Nutzer) abzurechnen, anstelle von Gesamtaktualisierungen oder Gesamtaktualisierungsinstallationen.
+Die Geräte-ID wird beim ersten Start auf dem Gerät generiert und wird verwendet, um Installationen pro Gerät zu deduplizieren und uns zu ermöglichen, basierend auf installierten Benutzern (z.B. monatlich aktive Nutzer) abzurechnen, anstatt der Gesamtanzahl der Patches oder Patch-Installationen.
 
 MAU ist eine bessere Lösung als die Anzahl der Installationen für die Preisgestaltung von Capgo, da es genauer ist und die tatsächlichen Kosten von Capgo pro Gerät widerspiegelt.
 
@@ -307,7 +307,7 @@ Aus Datenschutzgründen können wir dasselbe Gerät nicht verfolgen, wenn der Be
 
 Die Datenschutzregeln werden von Apple und Google durchgesetzt und nicht von Capgo.
 
-Die Geräte-ID wird erst in Ihrer Geräteliste angezeigt, wenn sie ihr erstes Update erhalten haben.
+Geräte-IDs werden erst in Ihrer Geräteliste angezeigt, wenn sie ihren ersten Patch installiert haben.
 
 # Warum unterscheidet sich meine Geräteanzahl von meinen MAU?[](https://capgoapp/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
 
@@ -315,18 +315,18 @@ Derzeit wird die Geräteliste nicht so häufig aktualisiert wie die MAU.
 
 Die Geräteliste wird nur aktualisiert, wenn ein Gerät ein Update installiert.
 
-Während die MAU bei jedem App-Start aktualisiert wird. Dies ist eine aktuelle Einschränkung der Plattform. Unsere Analyseplattform unterstützt keine Rohupdates, daher verwenden wir konventionelle Datenbanken für die Geräteliste.
+Die MAU wird bei jedem App-Start aktualisiert. Dies ist eine aktuelle Einschränkung der Plattform. Unsere Analyseplattform unterstützt keine Raw-Updates, daher verwenden wir konventionelle Datenbanken für die Geräteliste.
 
 Um die Anzahl der Datenbankabfragen zu begrenzen, aktualisieren wir Zeilen nur bei App-Updates.
 
 Diese Einschränkung wird in Zukunft behoben.
 
-# Wie kann ich unterschiedliche Updates pro Plattform haben?[](https://capgoapp/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
+# Wie kann ich verschiedene Updates pro Plattform haben?[](https://capgoapp/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
 
 Sie können einen Kanal für jede Plattform erstellen und plattformspezifische Updates in jedem Kanal deaktivieren.
 
 Im iOS-Kanal Android-Updates deaktivieren und im Android-Kanal iOS-Updates deaktivieren.
 
-Dann laden Sie ein Bundle für jeden Kanal hoch, um verschiedene Updates für jede Plattform zu haben.
+Dann laden Sie ein Bundle in jeden Kanal hoch, um verschiedene Updates für jede Plattform zu haben.
 
 Wenn Sie dasselbe Update für beide Plattformen benötigen, können Sie ein Bundle mit mehreren Kanälen verknüpfen. Das Bundle muss nicht dupliziert werden.

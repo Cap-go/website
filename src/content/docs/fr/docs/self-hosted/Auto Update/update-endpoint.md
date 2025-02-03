@@ -1,6 +1,6 @@
 ---
-title: Aggiorna endpoint
-description: Comment créer un endpoint de mise à jour auto-hébergé
+title: Actualizar endpoint
+description: Comment créer un point de terminaison de mise à jour auto-hébergé
 sidebar:
   order: 1
 locale: fr
@@ -62,7 +62,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-Ce point de terminaison doit retourner un JSON :
+Ce point d'accès doit retourner un JSON :
 
 ```json
 {
@@ -71,12 +71,12 @@ Ce point de terminaison doit retourner un JSON :
 }
 ```
 
-Et si pas de mise à jour ou erreur, ajoutez la clé `message` et éventuellement une `error`
+Et s'il n'y a pas de mise à jour ou une erreur, ajoutez la clé `message` et éventuellement une `error`
 
 ```json
 {
-  "message": "Version non trouvée",
-  "error": "Le backend a planté",
+  "message": "Version not found",
+  "error": "The backend crashed",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

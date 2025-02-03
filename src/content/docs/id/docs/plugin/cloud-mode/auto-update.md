@@ -1,16 +1,16 @@
 ---
 title: Pembaruan Otomatis
-description: Cara menggunakan pembaruan otomatis dengan Capacitor-Updater
+description: Cara Pembaruan Otomatis menggunakan capacitor-updater
 sidebar:
   order: 2
 locale: id
 ---
 
-Mode ini memungkinkan pengembang untuk menggunakan capacitor-updater dengan mode pembaruan otomatis dan mengirim pembaruan melalui saluran Capgo atau yang setara
+Mode ini memungkinkan pengembang untuk menggunakan capacitor-updater dengan mode auto-update dan mengirim pembaruan melalui channel Capgo atau yang setara
 
 ### Prasyarat
 
-Pastikan versi aplikasi Anda menggunakan [https://semverorg/](https://semverorg/) sebelum menggunakan pembaruan otomatis Capgo
+Pastikan versi aplikasi Anda menggunakan [https://semverorg/](https://semverorg/) sebelum menggunakan auto-update Capgo
 
 Ini adalah konvensi yang digunakan untuk mengelola versi di Capgo
 
@@ -22,7 +22,7 @@ Cara baru: Gunakan field `version` di file `capacitorconfigjson` Anda
 {
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": true, // Aktifkan pembaruan otomatis, true secara default
+      "autoUpdate": true, // Aktifkan auto-update, true secara default
       "appId": "comexampleapp", // Digunakan untuk mengidentifikasi aplikasi di server
       "version": "100" // Digunakan untuk memeriksa pembaruan
     }
@@ -42,7 +42,7 @@ Di 3 file dalam proyek Anda:
 
 Siapkan aplikasi Anda dalam 5 menit
 
-[Perbarui aplikasi capacitor Anda dengan mulus menggunakan capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[Update aplikasi capacitor Anda dengan mulus menggunakan capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 Siapkan CI Anda dalam 5 menit
 
@@ -55,25 +55,25 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-### Pengantar
+### Pendahuluan
 
-Klik pada [register](https://capgoapp) untuk membuat akun Anda
+Klik [daftar](https://capgoapp) untuk membuat akun Anda
 
-Server memungkinkan Anda mengelola saluran dan versi dan banyak lagi
+Server memungkinkan Anda mengelola channel dan versi dan banyak lagi
 
 `autoUpdate` akan menggunakan data dari `capacitorconfig` untuk mengidentifikasi server Capgo
 
 :::note
-Anda masih dapat menggunakan Capgo Cloud tanpa mengirim kode Anda ke server kami jika itu tidak diizinkan oleh perusahaan Anda
+Anda masih dapat menggunakan Capgo Cloud tanpa mengirim kode Anda ke server kami jika hal tersebut tidak diizinkan oleh perusahaan Anda
 :::
 
 #### Validasi versi
 
-Ketika pembaruan otomatis diatur, Anda harus memberi tahu dari dalam JS bahwa aplikasi Anda hidup dan siap
+Ketika auto-update diatur, Anda harus memberi tahu dari dalam JS bahwa aplikasi Anda hidup dan siap
 
 Ini dapat dilakukan dengan memanggil `notifyAppReady` dalam aplikasi Anda
 
-Lakukan secepat mungkin
+Lakukan sesegera mungkin
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -89,24 +89,24 @@ CapacitorUpdaternotifyAppReady()
 * Pengguna melanjutkan alur normal aplikasi sampai siklus pembaruan berikutnya
 
 :::danger
-⚠️ Tidak memanggil `notifyAppReady()` dalam aplikasi Anda, akan membuat versi saat ini ditandai sebagai tidak valid dan akan kembali ke bundle atau stok yang valid sebelumnya
+⚠️ Tidak memanggil `notifyAppReady()` dalam aplikasi Anda, akan membuat versi saat ini ditandai sebagai tidak valid dan akan kembali ke bundle atau stok valid sebelumnya
 :::
 
 #### Alur pengembangan
 
-Ketika Anda mengembangkan fitur baru, pastikan untuk memblokir `autoUpdate`, karena capgo akan terus menimpa pekerjaan Anda dengan bundle pembaruan terbaru
+Saat Anda mengembangkan fitur baru, pastikan untuk memblokir `autoUpdate`, karena capgo akan terus menimpa pekerjaan Anda dengan bundle pembaruan terbaru
 Atur `autoUpdate` ke false dalam konfigurasi Anda
-Jika karena alasan tertentu Anda terjebak pada pembaruan, Anda dapat menghapus aplikasi dan menginstalnya kembali
+Jika karena suatu alasan Anda terjebak pada pembaruan, Anda dapat menghapus aplikasi dan menginstalnya kembali
 Pastikan untuk mengatur `autoUpdate` ke false dalam konfigurasi Anda sebelum melakukannya
 Dan kemudian build lagi dengan Xcode atau Android studio
 
-Untuk mengunggah versi di setiap commit, siapkan CI/CD dengan panduan ini
+Untuk mengunggah versi di setiap commit, atur CI/CD dengan panduan ini
 
 [Build dan rilis otomatis dengan GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
 
 #### Event Major Available
 
-Ketika `disableAutoUpdateBreaking` diatur ke true, Anda dapat mendengarkan event untuk mengetahui ketika aplikasi menolak untuk melakukan pembaruan major yang merusak
+Ketika `disableAutoUpdateBreaking` diatur ke true, Anda dapat mendengarkan event untuk mengetahui kapan aplikasi menolak untuk melakukan pembaruan major breaking
 
 ```jsx
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

@@ -1,6 +1,6 @@
 ---
-title: 통계 엔드포인트
-description: 自己ホスト型の統計情報エンドポイントの作成
+title: Stats 엔드포인트
+description: 自前でホストする統計エンドポイントの作成方法
 sidebar:
   order: 2
 locale: ja
@@ -76,7 +76,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-このエンドポイントは以下のJSONを返します：
+このエンドポイントは以下のようなJSONを返します：
 
 ```json
 { "status": "ok" }
@@ -87,9 +87,9 @@ export const handler: Handler = async (event) => {
 * **delete**：バンドルがローカルで削除された時
 * **reset**：アプリがビルトインバンドルにリセットされた時
 * **set**：アプリが新しいバンドルを設定した時
-* **set\_fail**：アプリが設定しようとしたバンドルのIDが見つからなかった時
-* **update\_fail**：遅延後に`notifyAppReady`が呼び出されなかった時に送信
-* **download\_fail**：ダウンロードが完了しなかった時
-* **download\_complete**：ダウンロードが完了した時
-* **download\_xx**：ダウンロードの10%ごとに送信 例：download\_20、download\_70
-* **update\_fail**：バンドルが指定時間内に`notifyAppReady`の実行に失敗した時
+* **set_fail**：アプリが設定するバンドルのIDを見つけられなかった時
+* **update_fail**：遅延後に`notifyAppReady`が呼び出されなかった時
+* **download_fail**：ダウンロードが完了しなかった時
+* **download_complete:** ダウンロードが完了した時
+* **download_xx:** ダウンロードの10%ごとに送信。例：download_20、download_70
+* **update_fail:** バンドルが指定時間内に`notifyAppReady`の実行に失敗した時

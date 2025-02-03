@@ -9,27 +9,27 @@ locale: de
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Nutzen Sie die Live-Updates-Funktion von Capgo, um die JavaScript-Bundles Ihrer App aus der Ferne in Echtzeit zu aktualisieren. Senden Sie JS-Updates direkt an Ihre Nutzer, ohne den App-Store-Überprüfungsprozess zu durchlaufen, um sofort Fehler zu beheben und neue Funktionen bereitzustellen.
+Nutzen Sie Capgos Live Updates-Funktion, um die JavaScript-Bundles Ihrer App remote in Echtzeit zu aktualisieren. Pushen Sie JS-Updates direkt an Ihre Nutzer, ohne den App Store-Überprüfungsprozess zu durchlaufen, um sofort Fehler zu beheben und neue Funktionen bereitzustellen.
 
 <Aside>
 
-Live-Updates sind auf JavaScript-Bundle-Änderungen beschränkt. Wenn Sie nativen Code aktualisieren müssen, wie das Hinzufügen oder Entfernen eines Plugins oder das Ändern der nativen Projektkonfiguration, müssen Sie einen neuen nativen Binary-Build an die App Stores übermitteln.
+Live Updates sind auf JavaScript-Bundle-Änderungen beschränkt. Wenn Sie nativen Code aktualisieren müssen, wie das Hinzufügen oder Entfernen eines Plugins oder das Ändern der nativen Projektkonfiguration, müssen Sie einen neuen nativen Binary-Build an die App Stores übermitteln.
 
 </Aside>
 
-## Wie Live-Updates funktionieren
+## Wie Live Updates funktionieren
 
-Das Live-Update-System von Capgo hat zwei Hauptkomponenten:
+Das Live Update-System von Capgo hat zwei Schlüsselkomponenten:
 
 1. Das Capgo SDK, das Sie in Ihrer App installieren. Das SDK prüft auf verfügbare Updates und lädt diese im Hintergrund herunter.
 
-2. Kanäle, mit denen Sie Updates für bestimmte Benutzergruppen bereitstellen können. Sie können Kanäle verwenden, um verschiedene Release-Tracks wie `Production`, `Staging` und `Dev` zu verwalten.
+2. Kanäle, mit denen Sie Updates an bestimmte Benutzergruppen richten können. Sie können Kanäle verwenden, um verschiedene Release-Tracks wie `Production`, `Staging` und `Dev` zu verwalten.
 
 Wenn Sie ein neues JS-Bundle zu Capgo hochladen und es einem Kanal zuweisen, erkennt das Capgo SDK in Apps, die für diesen Kanal konfiguriert sind, das Update und lädt es herunter. Beim nächsten Neustart der App wird das neue Bundle geladen.
 
 ## Erste Schritte
 
-Folgen Sie diesen Schritten, um Live-Updates zu nutzen:
+Folgen Sie diesen Schritten, um Live Updates zu verwenden:
 
 <Steps>
 
@@ -48,18 +48,18 @@ Folgen Sie diesen Schritten, um Live-Updates zu nutzen:
    npx @capgo/cli@latest app debug
    ```
 
-5. Sobald das Update heruntergeladen wurde, schließen und öffnen Sie Ihre App erneut, um das neue Bundle zu laden.
+5. Sobald das Update heruntergeladen wurde, schließen und öffnen Sie die App erneut, um das neue Bundle zu laden.
 
 </Steps>
 
-Weitere Details finden Sie im [Leitfaden zum Bereitstellen von Live-Updates](/docs/getting-started/deploy).
+Weitere Details finden Sie im [Leitfaden zum Bereitstellen von Live Updates](/docs/getting-started/deploy).
 
 ## Nächste Schritte
 
 <CardGrid stagger>
   <a href="/docs/live-updates/channels/">
     <Card title="Kanäle" icon="bars">
-      Erfahren Sie, wie Sie Kanäle verwenden, um verschiedene Release-Tracks zu verwalten und Updates für bestimmte Benutzer bereitzustellen
+      Erfahren Sie, wie Sie Kanäle verwenden, um verschiedene Release-Tracks zu verwalten und Updates an bestimmte Benutzer zu richten
     </Card>
   </a>
 

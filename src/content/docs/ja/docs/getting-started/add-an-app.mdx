@@ -1,6 +1,6 @@
 ---
-title: Ajouter une application
-description: Capgoアカウントにアプリを追加し、アプリにプラグインをインストールする
+title: アプリを追加する
+description: Capgoアカウントにアプリを追加し、プラグインをアプリにインストールする
 sidebar:
   order: 2
 prev: false
@@ -12,21 +12,20 @@ import { YouTube } from 'astro-embed';
 import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 ## Capgoの紹介
-<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+<YouTube id="NzXXKoyhTIo" title="15分でわかるCapgo" />
 
 ## ライブアップデートまであと3ステップ
-
 
 ### ガイド付きセットアップ
 
 <Steps>
 
-1 [https://capgoapp/register](https://capgoapp/register)でアカウントを作成
+1. [https://capgoapp/register](https://capgoapp/register)でアカウントを作成
 ![signup screenshot](/signupwebp "signup screenshot")
 
-2 初期化コマンドを使用して開始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 一連の質問が表示されます。自動セットアップを完了するために必要な回答を提供してください。<Aside type="tip">これらのステップに従えば、すぐに使い始めることができます。プロセス中にサポートが必要な場合は、サポートチームが[お手伝いします](mailto:support@capgoapp)。セットアップをお楽しみください！</Aside>
+2. 初期化コマンドを使用して開始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 一連の質問が表示されます。自動セットアップを完了するために必要な回答を提供してください。<Aside type="tip">これらの手順に従えば、すぐに使用開始できます。プロセス中にさらなるサポートが必要な場合は、サポートチームが[お手伝いします](mailto:support@capgoapp)。セットアップをお楽しみください！</Aside>
 
-3 ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
+3. ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
 
 </Steps>
 
@@ -36,14 +35,14 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 <Steps>
 
-1 CLIをアカウントに接続: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+1. CLIをアカウントに接続: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
-2 このコマンドでアプリをアカウントに追加: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+2. このコマンドでアプリをアカウントに追加: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3 アプリにプラグインをインストール: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. アプリにプラグインをインストール: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4 アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
 
-5 ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
+5. ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
 
 </Steps>

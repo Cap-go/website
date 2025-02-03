@@ -1,25 +1,27 @@
 ---
-title: Automatische Aktualisierung
-description: Comment utiliser le plugin d'auto-mise à jour en mode auto-hébergé
+title: Auto Update
+description: Comment utiliser le plugin auto-update en mode auto-hébergé
 sidebar:
   order: 3
 locale: fr
 ---
 
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
 Cette documentation expliquera comment exécuter votre serveur de mise à jour automatique
 
 ## Servir votre bundle
-Assurez-vous que votre bundle est servi en HTTPS, et que le serveur a les bons en-têtes CORS pour permettre à l'application de télécharger la mise à jour
+Assurez-vous que votre bundle est servi via HTTPS, et que le serveur dispose des en-têtes CORS appropriés pour permettre à l'application de télécharger la mise à jour
 par exemple ```https://myservercom/app/updates/updatesjson```
 
 Si vous n'êtes pas familier avec la distribution d'un bundle, nous vous recommandons d'essayer Capgo Cloud ou de voir un exemple ici :
 <LinkCard
-	title="Servir un Bundle"
+	title="Distribution d'un Bundle"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
 ## Configuration
-Ajoutez un ``updateUrl`` à votre ``capacitorconfigjson``
+Ajoutez une ``updateUrl`` à votre ``capacitorconfigjson``
 
 ```json
 {
@@ -31,7 +33,7 @@ Ajoutez un ``updateUrl`` à votre ``capacitorconfigjson``
 }
 ```
 :::caution
-Lorsque vous poussez une mise à jour auto-hébergée, gardez à l'esprit que vous ne pouvez pas utiliser un point de terminaison "HTTP" car cela va à l'encontre des politiques de sécurité des applications Android. Pour les tests, vous pouvez [l'autoriser](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+Lorsque vous publiez une mise à jour auto-hébergée, gardez à l'esprit que vous ne pouvez pas utiliser un point de terminaison "HTTP" car cela va à l'encontre des politiques de sécurité des applications Android. Pour les tests, vous pouvez [l'autoriser](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
 :::
 
 ## API de mise à jour
@@ -54,7 +56,7 @@ interface AppInfos {
 }
 ```
 
-L'API du serveur doit répondre, en JSON, au plugin capacitor-updater avec ces données si une mise à jour est nécessaire :
+Le serveur API doit répondre, en JSON, au plugin capacitor-updater avec ces données si une mise à jour est nécessaire :
 
 ```json
 {
@@ -63,7 +65,7 @@ L'API du serveur doit répondre, en JSON, au plugin capacitor-updater avec ces d
 }
 ```
 
-En mode mise à jour automatique, le serveur doit comparer les versions et renvoyer la bonne. Si la clé URL est présente, le plugin démarre le processus de téléchargement
+En mode de mise à jour automatique, le serveur doit comparer les versions et renvoyer la bonne. Si la clé URL est présente, le plugin commence le processus de téléchargement
 
 Si vous ajoutez les clés "message" et "error", la version ne sera pas définie, et le message sera affiché dans les logs à la place
 

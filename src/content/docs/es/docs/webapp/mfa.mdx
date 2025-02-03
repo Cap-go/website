@@ -1,8 +1,8 @@
 ---
-title: Autentikasi dua faktor
+title: 2단계 인증
 description: >-
-  Gestiona la autenticación de dos factores para proteger mejor tu cuenta de
-  Capgo.
+  Gestión de la autenticación de dos factores para proteger mejor tu cuenta de
+  capgo
 sidebar:
   order: 9
 locale: es
@@ -11,7 +11,7 @@ locale: es
 ## ¿Qué es 2FA?
 
 2FA es una medida de seguridad diseñada para evitar que un actor malicioso tome el control de tu cuenta de capgo\
-Lo logra requiriendo un código adicional. Este código se almacena en tu teléfono móvil o una llave física 2FA. Cambia cada 30 segundos, haciendo imposible adivinarlo
+Lo logra requiriendo un código adicional. Este código se almacena en tu teléfono móvil o en una llave de hardware 2FA. Cambia cada 30 segundos, haciendo imposible adivinarlo
 
 ## Requisitos para esta guía
  - Un teléfono Android o iOS
@@ -25,17 +25,17 @@ Esta guía mostrará cómo configurar 2FA usando `Google Authenticator`. Existen
 
 Primero descarga la aplicación `Google Authenticator`. Si estás en Android, puedes descargarla desde la [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2). En iOS puedes descargarla desde la [App store](https://appsapplecom/us/app/google-authenticator/id388497605/)
 
-Segundo, por favor ve a la [configuración de cuenta de capgo](https://webcapgoapp/dashboard/settings/account/). Allí deberías ver un botón verde que debería verse así
+Segundo, por favor ve a la [configuración de cuenta de capgo](https://webcapgoapp/dashboard/settings/account/). Allí deberías ver un botón verde que debería verse así:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
 
-Haz clic en él, y una vez que lo hagas, aparecerá un código QR
+Haz clic en él, y una vez que lo hagas, debería aparecer un código QR
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfawebp" alt="Enable MFA" /><figcaption></figcaption></figure>
 
 :::danger
 ⚠️ Nota Importante: \
-Nunca compartas este código QR con nadie, o podrías ser desconectado de tu cuenta
+Nunca compartas este código QR con nadie, o podrías perder el acceso a tu cuenta
 :::
 
 A continuación, abre `Google Authenticator` en tu teléfono. Una vez que lo hagas, sigue estos pasos:
@@ -79,18 +79,18 @@ Por favor abre el autenticador y copia tu código de autenticación
 
 :::danger
 ⚠️ Nota Importante: \
-Presiona `verificar` antes de que el código se actualice, de lo contrario el código cambiará y el antiguo ya no será válido
+Presiona `verificar` antes de que el código se actualice, de lo contrario el código cambiará y el anterior ya no será válido
 :::
 
 Luego ingresa el código en el formulario de inicio de sesión y presiona `verificar`
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verifywebp" alt="MFA login" /><figcaption></figcaption></figure>
 
-Si ingresaste el código correcto deberías ver el panel de control de capgo
+Si ingresaste el código correcto, deberías ver el panel de control de capgo
 
 ## Cómo deshabilitar 2FA
 
-Para deshabilitar 2FA por favor ve a la [configuración de cuenta de capgo](https://webcapgoapp/dashboard/settings/account/). Allí deberías ver un botón rojo que debería verse así:
+Para deshabilitar 2FA, por favor ve a la [configuración de cuenta de capgo](https://webcapgoapp/dashboard/settings/account/). Allí deberías ver un botón rojo que debería verse así:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-buttonwebp" alt="MFA disable button" /><figcaption></figcaption></figure>
 

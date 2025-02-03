@@ -12,18 +12,18 @@ Perintah `channel` memungkinkan Anda mengelola kanal rilis Anda
 
 `npx @capgo/cli channel add [channelId] [appId]`
 
-Membuat kanal baru untuk sebuah aplikasi
+Membuat kanal baru untuk aplikasi
 
 Opsi:
 
-- `-d, --default`: Tetapkan kanal baru sebagai kanal default
+- `-d, --default`: Atur kanal baru sebagai kanal default
 - `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
 
 ### delete
 
 `npx @capgo/cli channel delete [channelId] [appId]`
 
-Menghapus kanal dari sebuah aplikasi
+Menghapus kanal dari aplikasi
 
 Opsi:
 
@@ -34,7 +34,7 @@ Opsi:
 
 `npx @capgo/cli channel list [appId]`
 
-Menampilkan semua kanal untuk sebuah aplikasi
+Menampilkan semua kanal untuk aplikasi
 
 Opsi:
 
@@ -44,11 +44,11 @@ Opsi:
 
 `npx @capgo/cli channel currentBundle [channel] [appId]`
 
-Mendapatkan bundle terkini untuk kanal tertentu
+Mendapatkan bundle saat ini untuk kanal tertentu
 
 Opsi:
 
-- `-c, --channel <channel>`: Kanal untuk mendapatkan bundle terkini
+- `-c, --channel <channel>`: Kanal untuk mendapatkan bundle saat ini
 - `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
 - `--quiet`: Hanya menampilkan versi bundle
 
@@ -56,18 +56,18 @@ Opsi:
 
 `npx @capgo/cli channel set [channelId] [appId]`
 
-Mengatur properti sebuah kanal
+Mengatur properti kanal
 
 Opsi:
 
 - `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
-- `-b, --bundle <bundle>`: Nomor versi bundle untuk ditetapkan ke kanal
-- `-s, --state <state>`: Tetapkan status kanal (`default` atau `normal`)
+- `-b, --bundle <bundle>`: Nomor versi bundle untuk diatur ke kanal
+- `-s, --state <state>`: Atur status kanal (`default` atau `normal`)
 - `--latest`: Gunakan versi terbaru dari `packagejson` sebagai versi bundle
-- `--downgrade`: Izinkan penurunan ke versi di bawah versi native
-- `--no-downgrade`: Nonaktifkan penurunan ke versi di bawah versi native
-- `--upgrade`: Izinkan peningkatan ke versi di atas versi native
-- `--no-upgrade`: Nonaktifkan peningkatan ke versi di atas versi native
+- `--downgrade`: Izinkan penurunan versi di bawah versi asli
+- `--no-downgrade`: Nonaktifkan penurunan versi di bawah versi asli
+- `--upgrade`: Izinkan peningkatan versi di atas versi asli
+- `--no-upgrade`: Nonaktifkan peningkatan versi di atas versi asli
 - `--ios`: Izinkan pengiriman pembaruan ke perangkat iOS
 - `--no-ios`: Nonaktifkan pengiriman pembaruan ke perangkat iOS
 - `--android`: Izinkan pengiriman pembaruan ke perangkat Android
@@ -79,4 +79,4 @@ Opsi:
 - `--no-dev`: Nonaktifkan pengiriman pembaruan ke perangkat pengembangan
 - `--emulator`: Izinkan pengiriman pembaruan ke perangkat emulator
 - `--no-emulator`: Nonaktifkan pengiriman pembaruan ke perangkat emulator
-- `--package-json <packageJson>`: Daftar jalur ke berkas `packagejson` yang dipisahkan koma (berguna untuk monorepo)
+- `--package-json <packageJson>`: Daftar path ke file `packagejson` yang dipisahkan koma (berguna untuk monorepo)

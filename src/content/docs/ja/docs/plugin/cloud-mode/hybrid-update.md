@@ -1,21 +1,21 @@
 ---
-title: Hybrid-Aktualisierung
-description: 自動アップデートのための更新方法
+title: Mise à jour hybride
+description: 自動アップデートの更新方法
 sidebar:
   order: 3
 locale: ja
 ---
 
-ユーザーにアップデートを配信する際、適用前に必要に応じて以下のような方法でアップデートサイクルに対応できます：
+ユーザーへの更新を配信する際、適用前に必要に応じて以下の方法で更新サイクルに対応できます：
 
-- サイレントアップデート
+- サイレント更新
 - ```updateAvailable```イベントのリッスン
 - モーダルウィンドウの表示または更新の遅延
 
-## サイレントアップデート
+## サイレント更新
 
-`directUpdate`を`true`に設定することで、アプリ起動時に毎回アップデートサイクルを強制的に実行させることができます。
-これにより、ユーザーの操作なしで通常のアップデートサイクルが実行されます。
+`directUpdate`を`true`に設定することで、アプリ起動時ごとに強制的に更新サイクルを実行できます。
+これにより、ユーザーの操作なしで通常の更新サイクルがトリガーされます
 
 ```tsx
 // capacitorconfigjson
@@ -33,7 +33,7 @@ locale: ja
 }
 ```
 
-そして、アプリ内で`appReady`イベントを受信した際にスプラッシュスクリーンを非表示にする必要があります：
+そしてアプリ内では、`appReady`イベントを受信したときにスプラッシュスクリーンを非表示にする必要があります：
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -47,9 +47,9 @@ CapacitorUpdateraddListener('appReady', () => {
 CapacitorUpdaternotifyAppReady()
 ```
 
-## 強制アップデート
+## 強制更新
 
-`updateAvailable`イベントのリスナーを追加し、アプリがアップデートされることをユーザーに通知するアラートを表示します：
+`updateAvailable`イベントにリスナーを追加し、アプリが更新されることをユーザーに通知するアラートを表示します：
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -58,8 +58,8 @@ import { Dialog } from '@capacitor/dialog'
 CapacitorUpdateraddListener('updateAvailable', async (res) => {
   try {
     await Dialogalert({
-      title: 'アップデートが利用可能です',
-      message: `バージョン${resbundleversion}が利用可能です。アプリは今すぐ更新されます`,
+      title: '更新が利用可能です',
+      message: `バージョン${resbundleversion}が利用可能です。アプリは今更新されます`,
     })
     CapacitorUpdaterset(resbundle)
   }
@@ -71,9 +71,9 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
 CapacitorUpdaternotifyAppReady()
 ```
 
-## モーダルアップデート
+## モーダル更新
 
-ダイアログを表示してユーザーに更新の選択をさせることもできます：
+ダイアログを表示して更新するかどうかをユーザーに決定させることもできます：
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -82,7 +82,7 @@ import { Dialog } from '@capacitor/dialog'
 CapacitorUpdateraddListener('updateAvailable', async (res) => {
   try {
     const { value } = await Dialogconfirm({
-      title: 'アップデートが利用可能です',
+      title: '更新が利用可能です',
       message: `バージョン${resbundleversion}が利用可能です。今すぐ更新しますか？`,
     })
 

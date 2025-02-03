@@ -1,23 +1,23 @@
 ---
-title: Kanal-System
-description: So verwenden Sie das Kanalsystem mit capacitor-updater
+title: Kanalsystem
+description: Wie man das Kanal-System mit capacitor-updater verwendet
 sidebar:
   order: 6
 locale: de
 ---
 
-Capgo und Capacitor-Updater verfügen über ein leistungsstarkes Kanalsystem
+Capgo und capacitor-updater verfügen über ein leistungsstarkes Kanalsystem
 
 ## Was Sie mit Kanälen machen können:
 
 * Geräte einem Kanal für Entwicklung und Beta-Tests zuordnen
 * Einen Kanal pro Entwicklungszweig verwenden und Ihr Team sich selbst vom Telefon aus zuweisen lassen
 
-## Geräte einem Kanal zuordnen:
+## Geräte einem Kanal zuweisen:
 
 * Den Kanal als Standard festlegen, jedes Mal wenn ein neues Gerät Capgo nach einem Update fragt, wird dieser Kanal antworten
 * Die **deviceId** (mit der [**getDeviceId**](/docs/plugin/api#getdeviceid) Methode) an Ihr Backend senden und sie über die Capgo Public API zuweisen
-* Den Kanal selbstzuweisbar machen (mit der [**setChannel**](/docs/plugin/api#setchannel) Methode) und das Gerät den Kanal abonnieren lassen (mit oder ohne Benutzerinteraktion) mit der `setChannel` Methode des Plugins
+* Den Kanal selbst zuweisbar machen (mit der [**setChannel**](/docs/plugin/api#setchannel) Methode) und das Gerät den Kanal abonnieren lassen (mit oder ohne Benutzerinteraktion) mit der `setChannel` Methode des Plugins
 * Die Option `defaultChannel` in der [Konfiguration](/docs/plugin/settings#defaultchannel) verwenden, um den Standardkanal für alle Geräte mit dieser Plugin-Konfiguration festzulegen
 
 :::note
@@ -30,21 +30,21 @@ Sie können ein Gerät auch direkt einem Bundle zuweisen
 
 Details zu jeder Option:
 
-| Option                                           | Beschreibung                                                                                           |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| **Automatische Herabstufung unter Native deaktivieren** | Kein Update senden, wenn die Native-Version der App größer ist als die Kanalversion                    |
-| **Automatische Aktualisierung über Major deaktivieren** | Kein Update senden, wenn die Native-Version der App niedriger ist als ein Major (**1**23) der Kanalversion |
-| **Automatische Aktualisierung über Minor deaktivieren** | Kein Update senden, wenn die Native-Version der App niedriger ist als ein Minor (1**2**3) der Kanalversion |
-| **Gerät-Selbstzuweisung erlauben**               | Ein Gerät die `setChannel` Methode für diesen Kanal verwenden lassen                                  |
-| **IOS**                                          | IOS-Geräten erlauben, Updates von diesem Kanal herunterzuladen                                        |
-| **Android**                                      | Android-Geräten erlauben, Updates von diesem Kanal herunterzuladen                                    |
-| **Emulator erlauben**                            | Emulatoren erlauben, Updates von diesem Kanal zu erhalten                                             |
-| **Entwicklungs-Build erlauben**                  | Entwicklungs-Builds erlauben, Updates von diesem Kanal zu erhalten                                    |
+| Option                                     | Beschreibung                                                                                          |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| **Automatisches Downgrade unter Native deaktivieren** | Kein Update senden, wenn die native Version der App größer ist als die Kanalversion              |
+| **Automatisches Upgrade über Major deaktivieren**    | Kein Update senden, wenn die native Version der App niedriger ist als ein Major (**1**23) der Kanalversion |
+| **Automatisches Upgrade über Minor deaktivieren**    | Kein Update senden, wenn die native Version der App niedriger ist als ein Minor (1**2**3) der Kanalversion |
+| **Gerät darf sich selbst zuweisen**        | Ein Gerät darf die `setChannel` Methode für diesen Kanal verwenden                                   |
+| **iOS**                                    | iOS-Geräten erlauben, Updates von diesem Kanal herunterzuladen                                       |
+| **Android**                                | Android-Geräten erlauben, Updates von diesem Kanal herunterzuladen                                    |
+| **Emulator erlauben**                      | Emulatoren erlauben, Updates von diesem Kanal zu empfangen                                           |
+| **Entwicklungs-Build erlauben**            | Entwicklungs-Builds erlauben, Updates von diesem Kanal zu empfangen                                  |
 
 :::note
-Capgo führt für Sie automatische Filterung durch. Wenn Sie eine CI/CD konfiguriert haben, um Ihre Version an Google Play zu senden, wird Google Play Ihre App jedes Mal auf über 20 echten Geräten ausführen. Während der ersten 4 Stunden eines neuen Bundles blockieren wir Google-Rechenzentrum-IPs, um zu verhindern, dass sie in Ihren Statistiken gezählt werden
+Capgo führt automatisch einige Filterungen für Sie durch. Wenn Sie eine CI/CD konfiguriert haben, die Ihre Version an Google Play sendet, wird Google Play Ihre App jedes Mal auf über 20 echten Geräten ausführen. Während der ersten 4 Stunden eines neuen Bundles blockieren wir Google-Datencenter-IPs, um zu verhindern, dass diese in Ihren Statistiken gezählt werden
 :::
 
-:::note
-Capgo zählt Emulatoren und Entwicklungs-Builds **nicht** in Ihrer Nutzung, aber beachten Sie, dass Sie nicht mehr als 3% davon haben dürfen, sonst wird Ihr Konto gesperrt, bis Sie es beheben
+:::note 
+Capgo zählt Emulatoren und Entwicklungs-Builds **nicht** in Ihrer Nutzung, aber beachten Sie, dass Sie nicht mehr als 3% davon haben können, sonst wird Ihr Konto gesperrt, bis Sie dies beheben
 :::

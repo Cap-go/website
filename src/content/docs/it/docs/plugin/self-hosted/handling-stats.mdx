@@ -1,12 +1,12 @@
 ---
-title: Gestione delle Statistiche
-description: Come creare un endpoint di statistiche self-hosted
+title: Umgang mit Statistiken
+description: Creare un endpoint di statistiche self-hosted
 sidebar:
   order: 7
 locale: it
 ---
 
-Ecco un esempio di codice JavaScript per salvare le statistiche del plugin
+Ecco un esempio di codice in JavaScript per salvare le statistiche del plugin
 
 ```typescript
 interface AppInfos {
@@ -81,11 +81,11 @@ Questo endpoint dovrebbe restituire un JSON:
 ## Azioni:
 
 * **delete**: quando un bundle viene eliminato localmente
-* **reset**: quando l'app ripristina il bundle incorporato
+* **reset**: quando l'app ripristina il bundle integrato
 * **set**: quando l'app imposta un nuovo bundle
 * **set_fail**: quando l'app non riesce a trovare l'ID del bundle impostato
-* **update_fail**: inviato dopo il ritardo e `notifyAppReady` mai chiamato
-* **download_fail**: quando il download non è mai terminato
-* **download_complete:** Quando il download termina
+* **update_fail**: inviato dopo il ritardo e `notifyAppReady` non è mai stato chiamato
+* **download_fail**: quando il download non è mai stato completato
+* **download_complete:** Quando il download è completato
 * **download_xx:** Inviato ogni 10% di download es: download_20, download_70
-* **update_fail:** quando il bundle non riesce a eseguire `notifyAppReady` nel periodo di tempo
+* **update_fail:** quando il bundle non riesce a eseguire `notifyAppReady` nel periodo di tempo stabilito

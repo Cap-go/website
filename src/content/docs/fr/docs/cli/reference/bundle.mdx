@@ -1,26 +1,26 @@
 ---
-title: paquet
+title: lot
 sidebar_label: bundle
 sidebar:
   order: 5
 locale: fr
 ---
 
-La commande `bundle` vous permet de gérer vos paquets d'applications
+La commande `bundle` vous permet de gérer vos bundles d'application
 
 ### upload
 
 `npx @capgo/cli bundle upload [appId]`
 
-Téléverse un nouveau paquet pour une application
+Téléverse un nouveau bundle pour une application
 
 Options :
 
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
 - `-p, --path <path>` : Chemin vers le dossier à téléverser (par défaut le `webDir` dans `capacitorconfig`)
-- `-c, --channel <channel>` : Canal auquel lier le paquet
+- `-c, --channel <channel>` : Canal auquel lier le bundle
 - `-e, --external <url>` : Lien vers une URL externe au lieu de téléverser vers Capgo Cloud
-- `--iv-session-key <key>` : Définir la clé IV et de session pour une URL de paquet externe
+- `--iv-session-key <key>` : Définir la clé IV et de session pour une URL de bundle externe
 - `--s3-region <region>` : Région pour votre bucket S3
 - `--s3-apikey <apikey>` : Clé API pour votre endpoint S3
 - `--s3-apisecret <apisecret>` : Secret API pour votre endpoint S3
@@ -29,42 +29,42 @@ Options :
 - `--s3-port <port>` : Port pour votre endpoint S3
 - `--no-s3-ssl` : Désactiver SSL pour les téléversements S3
 - `--key <key>` : Chemin personnalisé pour la clé de signature publique (système v1)
-- `--key-data <keyData>` : Données de clé de signature publique (système v1)
+- `--key-data <keyData>` : Données de la clé de signature publique (système v1)
 - `--key-v2 <key>` : Chemin personnalisé pour la clé de signature privée (système v2)
-- `--key-data-v2 <keyDataV2>` : Données de clé de signature privée (système v2)
-- `--bundle-url` : Afficher l'URL du paquet sur stdout
+- `--key-data-v2 <keyDataV2>` : Données de la clé de signature privée (système v2)
+- `--bundle-url` : Afficher l'URL du bundle dans stdout
 - `--no-key` : Ignorer la clé de signature et envoyer une mise à jour non signée
 - `--no-code-check` : Ignorer la vérification de `notifyAppReady()` dans le code source et `indexhtml` dans le dossier racine
 - `--display-iv-session` : Afficher la clé IV et de session utilisée pour chiffrer la mise à jour
-- `-b, --bundle <bundle>` : Numéro de version du paquet à téléverser
-- `--min-update-version <minUpdateVersion>` : Version minimale de l'application requise pour appliquer cette mise à jour (utilisé uniquement si la mise à jour automatique est désactivée via les métadonnées)
-- `--auto-min-update-version` : Définir automatiquement la version minimale de mise à jour basée sur les versions natives des paquets
+- `-b, --bundle <bundle>` : Numéro de version du bundle à téléverser
+- `--min-update-version <minUpdateVersion>` : Version minimale de l'app requise pour appliquer cette mise à jour (utilisé uniquement si la mise à jour auto est désactivée via les métadonnées)
+- `--auto-min-update-version` : Définir automatiquement la version minimale de mise à jour basée sur les versions natives
 - `--ignore-metadata-check` : Ignorer la vérification des métadonnées (node_modules) lors du téléversement
 - `--ignore-checksum-check` : Ignorer la vérification du checksum lors du téléversement
-- `--timeout <timeout>` : Délai d'attente pour le processus de téléversement en secondes
+- `--timeout <timeout>` : Délai d'expiration du processus de téléversement en secondes
 - `--multipart` : Utiliser le protocole multipart pour téléverser les données vers S3 (déprécié, utilisez `--tus` à la place)
-- `--tus` : Téléverser le paquet en utilisant le protocole tus
-- `--tus-chunk-size <tusChunkSize>` : Taille des morceaux pour le téléversement tus
+- `--tus` : Téléverser le bundle en utilisant le protocole tus
+- `--tus-chunk-size <tusChunkSize>` : Taille des chunks pour le téléversement tus
 - `--partial` : Téléverser uniquement les fichiers modifiés vers Capgo Cloud
-- `--partial-only` : Téléverser uniquement les fichiers partiels vers Capgo Cloud, en ignorant le fichier zippé (utile pour les gros paquets)
-- `--encrypted-checksum <encryptedChecksum>` : Checksum chiffré (signature) pour un paquet externe
-- `--auto-set-bundle` : Définir automatiquement la version du paquet dans `capacitorconfigjson`
+- `--partial-only` : Téléverser uniquement les fichiers partiels vers Capgo Cloud, en ignorant le fichier zippé (utile pour les gros bundles)
+- `--encrypted-checksum <encryptedChecksum>` : Checksum chiffré (signature) pour un bundle externe
+- `--auto-set-bundle` : Définir automatiquement la version du bundle dans `capacitorconfigjson`
 - `--dry-upload` : Effectuer une simulation du processus de téléversement sans réellement téléverser les fichiers (utile pour les tests)
 - `--package-json <packageJson>` : Liste de chemins vers les fichiers `packagejson` séparés par des virgules (utile pour les monorepos)
 - `--node-modules <nodeModules>` : Liste de chemins vers les répertoires `node_modules` séparés par des virgules (utile pour les monorepos)
 - `--encrypt-partial` : Chiffrer les fichiers de mise à jour partielle
-- `--delete-linked-bundle-on-upload` : Supprimer le paquet actuellement lié dans le canal cible avant le téléversement
+- `--delete-linked-bundle-on-upload` : Supprimer le bundle actuellement lié dans le canal cible avant le téléversement
 
 ### compatibility
 
 `npx @capgo/cli bundle compatibility [appId]`
 
-Vérifie la compatibilité d'un paquet avec un canal spécifique
+Vérifie la compatibilité d'un bundle avec un canal spécifique
 
 Options :
 
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
-- `-c, --channel <channel>` : Canal pour vérifier la compatibilité
+- `-c, --channel <channel>` : Canal à vérifier pour la compatibilité
 - `--text` : Afficher les résultats en texte au lieu d'emoji
 - `--package-json <packageJson>` : Liste de chemins vers les fichiers `packagejson` séparés par des virgules (utile pour les monorepos)
 - `--node-modules <nodeModules>` : Liste de chemins vers les répertoires `node_modules` séparés par des virgules (utile pour les monorepos)
@@ -73,7 +73,7 @@ Options :
 
 `npx @capgo/cli bundle delete [bundleId] [appId]`
 
-Supprime un paquet d'une application
+Supprime un bundle d'une application
 
 Options :
 
@@ -83,7 +83,7 @@ Options :
 
 `npx @capgo/cli bundle list [appId]`
 
-Liste tous les paquets d'une application
+Liste tous les bundles d'une application
 
 Options :
 
@@ -93,73 +93,73 @@ Options :
 
 `npx @capgo/cli bundle cleanup [appId]`
 
-Nettoie les anciens paquets d'une version majeure, en gardant le nombre spécifié de paquets les plus récents
+Nettoie les anciens bundles d'une version majeure, en conservant le nombre spécifié des bundles les plus récents
 
 Options :
 
 - `-b, --bundle <bundle>` : Numéro de version majeure à nettoyer
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
-- `-k, --keep <keep>` : Nombre de paquets à conserver (par défaut : 4)
+- `-k, --keep <keep>` : Nombre de bundles à conserver (par défaut : 4)
 - `-f, --force` : Forcer la suppression sans confirmation
 
 ### decrypt
 
 `npx @capgo/cli bundle decrypt [zipPath] [sessionKey]`
 
-Déchiffre un paquet zip signé
+Déchiffre un bundle zip signé
 
 Options :
 
 - `--key <key>` : Chemin personnalisé pour la clé de signature privée
-- `--key-data <keyData>` : Données de clé de signature privée
+- `--key-data <keyData>` : Données de la clé de signature privée
 
 ### encrypt
 
 `npx @capgo/cli bundle encrypt [zipPath]`
 
-Chiffre un paquet zip
+Chiffre un bundle zip
 
 Options :
 
 - `--key <key>` : Chemin personnalisé pour la clé de signature privée
-- `--key-data <keyData>` : Données de clé de signature privée
+- `--key-data <keyData>` : Données de la clé de signature privée
 
 ### encryptV2
 
 `npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
 
-Chiffre un paquet zip en utilisant la nouvelle méthode de chiffrement
+Chiffre un bundle zip en utilisant la nouvelle méthode de chiffrement
 
 Options :
 
 - `--key <key>` : Chemin personnalisé pour la clé de signature privée
-- `--key-data <keyData>` : Données de clé de signature privée
-- `-j, --json` : Afficher les résultats au format JSON
+- `--key-data <keyData>` : Données de la clé de signature privée
+- `-j, --json` : Afficher les résultats en JSON
 
 ### decryptV2
 
 `npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
 
-Déchiffre un paquet zip en utilisant la nouvelle méthode de chiffrement
+Déchiffre un bundle zip en utilisant la nouvelle méthode de chiffrement
 
 Options :
 
 - `--key <key>` : Chemin personnalisé pour la clé de signature privée
-- `--key-data <keyData>` : Données de clé de signature privée
-- `--checksum <checksum>` : Checksum du paquet pour vérifier l'intégrité
+- `--key-data <keyData>` : Données de la clé de signature privée
+- `--checksum <checksum>` : Checksum du bundle pour vérifier l'intégrité
 
 ### zip
 
 `npx @capgo/cli bundle zip [appId]`
 
-Génère un fichier zip pour un paquet
+Génère un fichier zip pour un bundle
 
 Options :
 
 - `-p, --path <path>` : Chemin vers le dossier à zipper (par défaut le `webDir` dans `capacitorconfig`)
-- `-b, --bundle <bundle>` : Numéro de version du paquet à utiliser dans le nom de fichier
+- `-b, --bundle <bundle>` : Numéro de version du bundle à utiliser dans le nom de fichier
 - `-n, --name <name>` : Nom de fichier personnalisé pour le zip
-- `-j, --json` : Afficher les résultats au format JSON
+- `-j, --json` : Afficher les résultats en JSON
 - `--no-code-check` : Ignorer la vérification de `notifyAppReady()` dans le code source et `indexhtml` dans le dossier racine
 - `--key-v2` : Utiliser la nouvelle méthode de chiffrement (v2)
 - `--package-json <packageJson>` : Liste de chemins vers les fichiers `packagejson` séparés par des virgules (utile pour les monorepos)

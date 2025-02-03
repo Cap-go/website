@@ -1,6 +1,6 @@
 ---
-title: Usar el capacitor updater con capgo autoalojado
-description: Cómo usar el Capacitor Updater con Capgo auto alojado
+title: Usando el actualizador de Capacitor con capgo auto-alojado
+description: Cómo usar el actualizador de capacitor con capgo auto-alojado
 sidebar:
   order: 2
 locale: es
@@ -12,15 +12,15 @@ Este tutorial mostrará cómo usar capacitor updater en un entorno de desarrollo
 
 ## Requisitos
 
-1. [Capgo clonado](https://githubcom/Cap-go/capgo/)
+1. [Clonar capgo](https://githubcom/Cap-go/capgo/)
 
 ## Comenzando
 
-Para usar capacitor updater con capgo auto-alojado edita el `capacitorconfigts` desde el directorio de tu aplicación y configúralo así:
+Para usar capacitor updater con capgo auto-alojado, edita el `capacitor.config.ts` desde el directorio de tu aplicación y configúralo así:
 
 ```ts
 const config: CapacitorConfig = {
-  appId: 'comdemoapp',
+  appId: 'com.demo.app',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
@@ -34,22 +34,22 @@ const config: CapacitorConfig = {
 };
 ```
 
-Esto te permitirá usar capgo local en desarrollo. Sin embargo, por defecto, esto no es suficiente
+Esto te permitirá usar capgo local en desarrollo. Sin embargo, por defecto, esto no es suficiente.
 
-En Android es necesario habilitar la [comunicación en texto plano](https://developerandroidcom/topic/security/risks/cleartext/) ya que por defecto SSL está deshabilitado en local
-Esto se puede lograr modificando [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml/) y añadiendo `android:usesCleartextTraffic="true"` en la etiqueta `application`
-Un ejemplo completo de este cambio se puede ver [aquí](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/)
+En Android se requiere habilitar la [comunicación en texto plano](https://developer.android.com/topic/security/risks/cleartext/) ya que por defecto SSL está deshabilitado en local.
+Esto se puede lograr modificando [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml/) y agregando `android:usesCleartextTraffic="true"` en la etiqueta `application`
+Puedes ver un ejemplo completo de este cambio [aquí](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/)
 
-Dado que por defecto, Android no permite `http`, capgo ha implementado una verificación para http [aquí](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts/#L396)
-Este código puede no estar siempre aquí, pero por ahora es necesario cambiar esta línea para que las actualizaciones funcionen
+Como por defecto Android no permite `http`, capgo ha implementado una verificación para http [aquí](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/index.ts/#L396)
+Este código podría no estar siempre aquí, pero por ahora se requiere un cambio en esta línea para que las actualizaciones funcionen
 Esta línea debería verse algo así:
 ```ts
-    if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
+    if (!signedURL || (signedURL.startsWith('http://') || signedURL.startsWith('https://'))) {
 ```
 
 :::danger
-⚠️ No subas `supabase/functions/updates/indexts` al repositorio remoto\
-Este código está aquí [con propósito](https://githubcom/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354)
+⚠️ No hagas commit de `supabase/functions/updates/index.ts` en el repositorio remoto\
+Este código está aquí [con un propósito](https://github.com/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354)
 :::
 
 También podría haber un problema que impida que la aplicación de Android se conecte. Si no ves ninguna solicitud siendo enviada a las funciones edge, ejecuta

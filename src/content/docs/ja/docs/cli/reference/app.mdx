@@ -14,16 +14,16 @@ locale: ja
 
 Capgoアカウントに新しいアプリを追加します
 
-`[appId]`は`comexampleapp`形式のアプリIDです。詳細は[Capacitorドキュメント](https://capacitorjscom/docs/cli/commands/init/)をご覧ください
+`[appId]`は`comexampleapp`形式のアプリIDです。詳細は[Capacitorドキュメント](https://capacitorjscom/docs/cli/commands/init/)を参照してください
 
-> 💡 オプションを指定しない場合、`capacitorconfigjson`から推測されます
+> 💡 提供されていない場合、すべてのオプションは`capacitorconfigjson`から推測されます
 
 オプション:
 
-- `--icon [path]`: Capgoウェブアプリに表示するカスタムアイコンのパス
-- `--name [name]`: アプリ一覧に表示するカスタム名
+- `--icon [path]`: Capgoウェブアプリに表示するカスタムアイコンへのパス
+- `--name [name]`: アプリリストに表示するカスタム名
 - `--apikey [key]`: アカウントにリンクするAPIキー
-- `--retention [days]`: アプリバンドルの保持期間(日数)(デフォルト: 0 = 無期限)
+- `--retention [days]`: アプリバンドルの保持期間（日数）（デフォルト: 0 = 無制限）
 
 ### set
 
@@ -33,9 +33,9 @@ Capgoアカウントの既存のアプリを更新します
 
 オプション:
 
-- `--icon [path]`: Capgoウェブアプリに表示するカスタムアイコンのパス
-- `--name [name]`: アプリ一覧に表示するカスタム名
-- `--retention [days]`: アプリバンドルの保持期間(日数)(デフォルト: 0 = 無期限)
+- `--icon [path]`: Capgoウェブアプリに表示するカスタムアイコンへのパス
+- `--name [name]`: アプリリストに表示するカスタム名
+- `--retention [days]`: アプリバンドルの保持期間（日数）（デフォルト: 0 = 無制限）
 - `--apikey [key]`: アカウントにリンクするAPIキー
 
 ### list
@@ -76,9 +76,9 @@ Capgoアカウントからアプリを削除します
 
 アプリのCapacitor設定を編集します
 
-`[path]`は変更したい設定のパスです(例: `appId`や`pluginsCapacitorUpdaterautoUpdate`)
+`[path]`は変更したい設定へのパスです（例：`appId`や`pluginsCapacitorUpdaterautoUpdate`）
 
-`--string`か`--bool`のいずれかを指定する必要があります:
+`--string`または`--bool`のいずれかを指定する必要があります：
 
 - `--string <value>`: 設定を文字列値に設定
 - `--bool <true|false>`: 設定をブール値に設定

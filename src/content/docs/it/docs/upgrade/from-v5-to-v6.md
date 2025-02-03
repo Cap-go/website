@@ -1,6 +1,6 @@
 ---
 title: Da V5 a V6
-description: Aggiornamento da V5 a V6
+description: Come aggiornare da V5 a V6
 sidebar:
   order: 1
 locale: it
@@ -10,7 +10,7 @@ locale: it
 
 Questa versione principale è qui per seguire la versione principale di Capacitor
 
-Prima segui la guida alla migrazione di Capacitor:
+Prima segui la guida di migrazione di Capacitor:
 
 [https://capacitorjscom/docs/updating/6-0](https://capacitorjscom/docs/updating/6-0/)
 
@@ -18,8 +18,8 @@ Prima segui la guida alla migrazione di Capacitor:
 
 `npm i @capgo/capacitor-updater@6`
 
-`Poi sincronizza l'aggiornamento del codice nativo:`
+`Quindi sincronizza l'aggiornamento del codice nativo:`
 
 `npx cap sync`
 
-Questo è tutto! Molto facile!
+Tutto qui! Molto facile!

@@ -1,12 +1,12 @@
 ---
-title: Pengaturan
-description: Verfügbare Parameter für Capacitor Updater
+title: 설정
+description: Alle verfügbaren Einstellungen für Capacitor Updater
 sidebar:
   order: 8
 locale: de
 ---
 
-Um eine feinere Kontrolle über das Update-System zu haben, können Sie es mit diesen Einstellungen konfigurieren:
+Um eine detailliertere Kontrolle über das Update-System zu haben, können Sie es mit diesen Einstellungen konfigurieren:
 
 ## `appReadyTimeout`
 
@@ -105,7 +105,7 @@ Standard: `true`
 
 ## `updateUrl`
 
-> Konfigurieren Sie die URL / den Endpunkt, an den Update-Prüfungen gesendet werden
+> Konfigurieren Sie die URL / den Endpunkt, an den Update-Überprüfungen gesendet werden
 
 Nur verfügbar für Android und iOS
 
@@ -126,7 +126,7 @@ Standard: `https://apicapgoapp/updates`
 
 > Konfigurieren Sie die URL / den Endpunkt, an den Update-Statistiken gesendet werden
 
-Nur verfügbar für Android und iOS. Auf "" setzen, um die Statistikübermittlung zu deaktivieren
+Nur verfügbar für Android und iOS. Setzen Sie auf "" um die Statistikberichterstattung zu deaktivieren
 
 Standard: `https://apicapgoapp/stats`
 
@@ -164,7 +164,7 @@ Standard: `undefined`
 
 ## `directUpdate`
 
-> Das Plugin installiert das Update direkt, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
+> Lässt das Plugin das Update direkt installieren, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
 
 Nur verfügbar für Android und iOS
 
@@ -185,7 +185,7 @@ Standard: `undefined`
 ## `resetWhenUpdate`
 
 :::note
-Wenn ein Store-Update erfolgt, wird das erzwungene Zurücksetzen auf die native Version deaktiviert
+Wenn ein Store-Update erfolgt, deaktivieren Sie das erzwungene Zurücksetzen auf die native Version
 :::
 
 Es gibt noch viele weitere Einstellungen, die nur in der [Web-App](https://webcapgoapp/login) verfügbar sind
@@ -206,10 +206,10 @@ Um das Plugin zu konfigurieren, verwenden Sie diese Einstellungen:
 ```
 
 ## `directUpdate`
-Das Plugin installiert das Update direkt, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
+Lässt das Plugin das Update direkt installieren, wenn die App gerade aktualisiert/installiert wurde. Nur im autoUpdate-Modus anwendbar
 
 :::caution
-Diese Einstellung erfordert, dass Sie die App vor dem Benutzer verbergen, während das Update installiert wird. Andernfalls wird die App zurückgesetzt, während der Benutzer navigiert
+Diese Einstellung erfordert, dass Sie die App vor dem Benutzer verbergen, während das Update installiert wird. Andernfalls wird die App zurückgesetzt, wenn der Benutzer navigiert
 :::
 
 ```json
@@ -239,9 +239,9 @@ Legt den Standard-Kanal für die App fest. Dies überschreibt jeden anderen in C
 ```
 
 ## `appId`
-Legt die appId für die App fest. Dies überschreibt jede andere Methode, die appId zu erhalten. Dies ist nützlich, wenn Sie eine andere appId in Capgo und in Ihrem nativen Code haben möchten
+Legt die appId für die App fest. Dies überschreibt alle anderen Wege, die appId zu erhalten. Dies ist nützlich, wenn Sie eine andere appId in Capgo und in Ihrem nativen Code haben möchten
 :::note
-Dies ist die neue Methode, um die appId festzulegen. Die alte Methode wird weiterhin unterstützt
+Dies ist der neue Weg, die appId festzulegen. Der alte Weg wird weiterhin unterstützt
 :::
 ```json
 // capacitorconfigjson
@@ -255,9 +255,9 @@ Dies ist die neue Methode, um die appId festzulegen. Die alte Methode wird weite
 ```
 
 ## `version`
-Legt die Version für die App fest. Dies überschreibt jede andere Methode, die Version zu erhalten. Dies ist nützlich, wenn Sie eine andere Version in Capgo und in Ihrem nativen Code haben möchten
+Legt die Version für die App fest. Dies überschreibt alle anderen Wege, die Version zu erhalten. Dies ist nützlich, wenn Sie eine andere Version in Capgo und in Ihrem nativen Code haben möchten
 :::note
-Dies ist die neue Methode, um die Version festzulegen. Die alte Methode wird weiterhin unterstützt
+Dies ist der neue Weg, die Version festzulegen. Der alte Weg wird weiterhin unterstützt
 :::
 ```json
 // capacitorconfigjson

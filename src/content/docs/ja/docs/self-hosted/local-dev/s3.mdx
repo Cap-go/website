@@ -1,12 +1,12 @@
 ---
-title: S3セルフホスティング
-description: Capgoで使用するためのMinioの設定方法
+title: S3 をセルフホスティングする
+description: minioをcapgoと連携するように設定する方法
 sidebar:
   order: 2
 locale: ja
 ---
 
-## このチュートリアルの内容
+## このチュートリアルの内容は？
 
 このチュートリアルでは、capgoで動作するように[minio](https://minio/)をセットアップする方法を説明します。
 
@@ -19,7 +19,7 @@ S3を設定することで、[CLI](/docs/cli/commands/)からバンドルをア�
 ローカル開発環境でのみ使用してください
 :::
 
-## 必要条件
+## 要件
 
 1. [Docker](https://wwwdockercom/)
 
@@ -55,7 +55,7 @@ docker rm minio1
 
 ## エッジ関数の設定
 
-S3サーバーが動作したら、capgoエッジ関数がS3サーバーを使用するように設定する必要があります。
+S3サーバーが動作したので、capgoのエッジ関数が我々のS3サーバーを使用するように設定する必要があります。
 
 そのために、`capgo/supabase`に`envlocal`という名前のENVファイルを作成する必要があります。
 
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# 以下がS3の重要な設定です
+# 以下がS3の実際の重要な設定です
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -76,25 +76,25 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-`hostdockerinternal`のIPはdocker内部からのみ到達可能ですが、コード内で`0000`に置き換えることでlocalhostからminioにアクセスできるようになります。
+IPアドレス`hostdockerinternal`はDockerの内部からのみアクセス可能なIPですが、コード内でlocalhostからminioにアクセスできるように`0000`に置き換えられます。
 
-新しい環境ファイルでエッジ関数を実行するには、以下のコマンドを使用します：
+新しい環境ファイルでエッジ関数を実行するには、以下を使用します：
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```
 
 ## CLIでS3を使用するための設定
 
-CLIはデフォルトではminioでは動作しません。`capacitor.config.ts`[^1]に以下の変更が必要です：
+CLIはデフォルトではminioで動作しません。`capacitorconfigts`[^1]に以下の変更が必要です：
 ```ts
 const config: CapacitorConfig = {
-  appId: 'com.demo.app',
+  appId: 'comdemoapp',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      // このlocalS3がないとアップロードコマンドは失敗します
+      // これがないとuploadコマンドは失敗します
       localS3: true
     },
   },

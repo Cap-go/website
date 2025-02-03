@@ -1,8 +1,8 @@
 ---
-title: Pour commencer
+title: Empezando
 description: >-
-  Este tutorial muestra cómo empezar desde cero con Supabase y ejecutar Edge
-  Functions
+  Este tutorial muestra cómo empezar con Supabase desde cero y cómo comenzar con
+  las funciones edge
 sidebar:
   order: 3
 locale: es
@@ -13,12 +13,12 @@ locale: es
 Este tutorial mostrará cómo iniciar supabase desde cero así como iniciar las funciones edge
 
 ## Requisitos
- 1 Clonado [capgo](https://githubcom/Cap-go/capgo/)
- 3 [supabase](https://supabasecom/)
+1. Clonar [capgo](https://githubcom/Cap-go/capgo/)
+3. [supabase](https://supabasecom/)
 
 ## Comenzando
 
-Para comenzar ejecuta
+Para empezar ejecuta
 ```bash
 supabase start
 ```
@@ -42,7 +42,7 @@ Luego abre `configsjson` y establece los siguientes valores:
 {
   "base_domain": {
     "prod": "webcapgoapp",
-    "development": "developmentwebcapgoapp", 
+    "development": "developmentwebcapgoapp",
     "local": "localhost:3332"
   },
   "supa_anon": {
@@ -61,10 +61,10 @@ Luego abre `configsjson` y establece los siguientes valores:
 donde `supa_key_anon` es el valor del paso anterior
 
 :::danger
-⚠️ No subas `configsjson` al repositorio remoto
+⚠️ No hagas commit de `configsjson` en el repositorio remoto
 :::
 
-A continuación, verifica que puedas ir a [localhost:54323](http://localhost:54323/projects/) y que la tabla `users` se vea algo así
+A continuación, verifica que puedes ir a [localhost:54323](http://localhost:54323/projects/) y que la tabla `users` se vea algo así
 
 <figure><img src="/supabasewebp" alt="supabase" /><figcaption></figcaption></figure>
 

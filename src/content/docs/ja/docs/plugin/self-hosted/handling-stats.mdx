@@ -1,12 +1,12 @@
 ---
 title: 統計情報の処理
-description: 統計エンドポイントを自己ホストする方法
+description: セルフホステッドな統計エンドポイントの作成方法
 sidebar:
   order: 7
 locale: ja
 ---
 
-プラグインの統計情報を保存するJavaScriptのコード例です
+プラグインの統計を保存するためのJavaScriptコードの例です
 
 ```typescript
 interface AppInfos {
@@ -72,20 +72,20 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-このエンドポイントは以下のようなJSONを返す必要があります:
+このエンドポイントは次のようなJSONを返す必要があります：
 
 ```json
 { "status": "ok" }
 ```
 
-## アクション:
+## アクション：
 
-* **delete** : バンドルがローカルで削除された場合
-* **reset** : アプリが組み込みバンドルにリセットされた場合
-* **set** : アプリが新しいバンドルを設定した場合
-* **set\_fail** : アプリが設定するバンドルのIDを見つけられなかった場合
-* **update\_fail** : 遅延後に`notifyAppReady`が呼び出されなかった場合
-* **download\_fail** : ダウンロードが完了しなかった場合
-* **download\_complete:** ダウンロードが完了した場合
-* **download\_xx:** ダウンロードの10%ごとに送信 例: download\_20, download\_70
-* **update\_fail:** バンドルが指定時間内に`notifyAppReady`の実行に失敗した場合
+* **delete**：バンドルがローカルで削除された時
+* **reset**：アプリが組み込みバンドルにリセットされた時
+* **set**：アプリが新しいバンドルを設定した時
+* **set_fail**：アプリが設定されたバンドルのIDを見つけられなかった時
+* **update_fail**：遅延後に`notifyAppReady`が呼び出されなかった時
+* **download_fail**：ダウンロードが完了しなかった時
+* **download_complete**：ダウンロードが完了した時
+* **download_xx**：ダウンロードの10%ごとに送信（例：download_20、download_70）
+* **update_fail**：バンドルが指定された時間内に`notifyAppReady`の実行に失敗した時

@@ -1,6 +1,6 @@
 ---
-title: Menangani Pembaruan
-description: Cómo usar el plugin de auto-actualización en modo auto-alojado
+title: Manejo de Actualizaciones
+description: Uso del complemento Auto Update en modo autohospedado
 sidebar:
   order: 6
 locale: es
@@ -62,7 +62,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-Este endpoint debe devolver un JSON:
+Este endpoint debería devolver un JSON:
 
 ```json
 {
@@ -71,12 +71,12 @@ Este endpoint debe devolver un JSON:
 }
 ```
 
-Y si no hay actualización o hay error, agregar la clave `message` y opcionalmente un `error`
+Y si no hay actualización o hay un error, agregar la clave `message` y opcionalmente un `error`
 
 ```json
 {
-  "message": "Versión no encontrada",
-  "error": "El backend falló",
+  "message": "Version not found",
+  "error": "The backend crashed",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

@@ -17,54 +17,54 @@ Lädt ein neues Bundle für eine App hoch
 Optionen:
 
 - `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
-- `-p, --path <path>`: Pfad zum hochzuladenden Ordner (standardmäßig der `webDir` in `capacitorconfig`)
-- `-c, --channel <channel>`: Kanal, mit dem das Bundle verknüpft werden soll
+- `-p, --path <path>`: Pfad zum hochzuladenden Ordner (standardmäßig das `webDir` in `capacitorconfig`)
+- `-c, --channel <channel>`: Channel, mit dem das Bundle verknüpft werden soll
 - `-e, --external <url>`: Link zu einer externen URL statt Upload zu Capgo Cloud
 - `--iv-session-key <key>`: IV und Session-Schlüssel für externe Bundle-URL festlegen
 - `--s3-region <region>`: Region für Ihren S3-Bucket
 - `--s3-apikey <apikey>`: API-Schlüssel für Ihren S3-Endpunkt
-- `--s3-apisecret <apisecret>`: API-Geheimnis für Ihren S3-Endpunkt
+- `--s3-apisecret <apisecret>`: API-Secret für Ihren S3-Endpunkt
 - `--s3-endpoint <s3Endpoint>`: URL des S3-Endpunkts
 - `--s3-bucket-name <bucketName>`: Name Ihres S3-Buckets
 - `--s3-port <port>`: Port für Ihren S3-Endpunkt
 - `--no-s3-ssl`: SSL für S3-Uploads deaktivieren
-- `--key <key>`: Benutzerdefinierter Pfad für den öffentlichen Signierungsschlüssel (v1-System)
-- `--key-data <keyData>`: Öffentliche Signierungsschlüsseldaten (v1-System)
-- `--key-v2 <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel (v2-System)
-- `--key-data-v2 <keyDataV2>`: Private Signierungsschlüsseldaten (v2-System)
+- `--key <key>`: Benutzerdefinierter Pfad für den öffentlichen Signaturschlüssel (v1-System)
+- `--key-data <keyData>`: Öffentliche Signaturschlüsseldaten (v1-System)
+- `--key-v2 <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel (v2-System)
+- `--key-data-v2 <keyDataV2>`: Private Signaturschlüsseldaten (v2-System)
 - `--bundle-url`: Bundle-URL in stdout ausgeben
-- `--no-key`: Signierungsschlüssel ignorieren und unsigniertes Update senden
-- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Ordner überspringen
+- `--no-key`: Signaturschlüssel ignorieren und unsigniertes Update senden
+- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Verzeichnis überspringen
 - `--display-iv-session`: IV und Session-Schlüssel zur Verschlüsselung des Updates anzeigen
-- `-b, --bundle <bundle>`: Zu hochladende Bundle-Versionsnummer
+- `-b, --bundle <bundle>`: Hochzuladende Bundle-Versionsnummer
 - `--min-update-version <minUpdateVersion>`: Mindestversion der App für dieses Update (nur verwendet wenn Auto-Update über Metadaten deaktiviert ist)
-- `--auto-min-update-version`: Automatisch die minimale Update-Version basierend auf nativen Paketversionen setzen
-- `--ignore-metadata-check`: Metadaten-Check (node_modules) beim Hochladen ignorieren
-- `--ignore-checksum-check`: Prüfsummen-Check beim Hochladen ignorieren
+- `--auto-min-update-version`: Automatische Festlegung der Mindest-Update-Version basierend auf nativen Paketversionen
+- `--ignore-metadata-check`: Metadaten-Prüfung (node_modules) beim Hochladen ignorieren
+- `--ignore-checksum-check`: Prüfsummen-Prüfung beim Hochladen ignorieren
 - `--timeout <timeout>`: Timeout für den Upload-Prozess in Sekunden
-- `--multipart`: Multipart-Protokoll für S3-Upload verwenden (veraltet, verwenden Sie stattdessen `--tus`)
-- `--tus`: Bundle über das tus-Protokoll hochladen
-- `--tus-chunk-size <tusChunkSize>`: Chunk-Größe für tus-Upload
+- `--multipart`: Multipart-Protokoll für S3-Upload verwenden (veraltet, nutzen Sie stattdessen `--tus`)
+- `--tus`: Bundle mit dem tus-Protokoll hochladen
+- `--tus-chunk-size <tusChunkSize>`: Chunk-Größe für den tus-Upload
 - `--partial`: Nur geänderte Dateien zu Capgo Cloud hochladen
 - `--partial-only`: Nur partielle Dateien zu Capgo Cloud hochladen, ZIP-Datei überspringen (nützlich für große Bundles)
 - `--encrypted-checksum <encryptedChecksum>`: Verschlüsselte Prüfsumme (Signatur) für externes Bundle
 - `--auto-set-bundle`: Bundle-Version automatisch in `capacitorconfigjson` setzen
-- `--dry-upload`: Testlauf des Upload-Prozesses ohne tatsächlichen Datei-Upload (nützlich zum Testen)
+- `--dry-upload`: Testlauf des Upload-Prozesses ohne tatsächlichen Upload (nützlich zum Testen)
 - `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
 - `--node-modules <nodeModules>`: Kommagetrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
 - `--encrypt-partial`: Partielle Update-Dateien verschlüsseln
-- `--delete-linked-bundle-on-upload`: Aktuell verknüpftes Bundle im Zielkanal vor dem Upload löschen
+- `--delete-linked-bundle-on-upload`: Aktuell verknüpftes Bundle im Ziel-Channel vor dem Upload löschen
 
 ### compatibility
 
 `npx @capgo/cli bundle compatibility [appId]`
 
-Prüft die Kompatibilität eines Bundles mit einem bestimmten Kanal
+Prüft die Kompatibilität eines Bundles mit einem bestimmten Channel
 
 Optionen:
 
 - `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
-- `-c, --channel <channel>`: Zu prüfender Kanal
+- `-c, --channel <channel>`: Zu prüfender Channel
 - `--text`: Ergebnisse als Text statt Emoji ausgeben
 - `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)
 - `--node-modules <nodeModules>`: Kommagetrennte Liste von Pfaden zu `node_modules`-Verzeichnissen (nützlich für Monorepos)
@@ -100,7 +100,7 @@ Optionen:
 - `-b, --bundle <bundle>`: Zu bereinigende Hauptversionsnummer
 - `-a, --apikey <apikey>`: API-Schlüssel zur Verknüpfung mit Ihrem Konto
 - `-k, --keep <keep>`: Anzahl der zu behaltenden Bundles (Standard: 4)
-- `-f, --force`: Entfernung ohne Bestätigung erzwingen
+- `-f, --force`: Erzwungenes Entfernen ohne Bestätigung
 
 ### decrypt
 
@@ -110,8 +110,8 @@ Entschlüsselt ein signiertes ZIP-Bundle
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
-- `--key-data <keyData>`: Private Signierungsschlüsseldaten
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Private Signaturschlüsseldaten
 
 ### encrypt
 
@@ -121,8 +121,8 @@ Verschlüsselt ein ZIP-Bundle
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
-- `--key-data <keyData>`: Private Signierungsschlüsseldaten
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Private Signaturschlüsseldaten
 
 ### encryptV2
 
@@ -132,8 +132,8 @@ Verschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
-- `--key-data <keyData>`: Private Signierungsschlüsseldaten
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Private Signaturschlüsseldaten
 - `-j, --json`: Ergebnisse als JSON ausgeben
 
 ### decryptV2
@@ -144,8 +144,8 @@ Entschlüsselt ein ZIP-Bundle mit der neuen Verschlüsselungsmethode
 
 Optionen:
 
-- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signierungsschlüssel
-- `--key-data <keyData>`: Private Signierungsschlüsseldaten
+- `--key <key>`: Benutzerdefinierter Pfad für den privaten Signaturschlüssel
+- `--key-data <keyData>`: Private Signaturschlüsseldaten
 - `--checksum <checksum>`: Prüfsumme des Bundles zur Integritätsprüfung
 
 ### zip
@@ -156,10 +156,10 @@ Erstellt eine ZIP-Datei für ein Bundle
 
 Optionen:
 
-- `-p, --path <path>`: Pfad zum zu zippenden Ordner (standardmäßig der `webDir` in `capacitorconfig`)
+- `-p, --path <path>`: Pfad zum zu zippenden Ordner (standardmäßig das `webDir` in `capacitorconfig`)
 - `-b, --bundle <bundle>`: Bundle-Versionsnummer für den Dateinamen
 - `-n, --name <name>`: Benutzerdefinierter Dateiname für die ZIP-Datei
 - `-j, --json`: Ergebnisse als JSON ausgeben
-- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Ordner überspringen
+- `--no-code-check`: Überprüfung auf `notifyAppReady()` im Quellcode und `indexhtml` im Root-Verzeichnis überspringen
 - `--key-v2`: Neue Verschlüsselungsmethode (v2) verwenden
 - `--package-json <packageJson>`: Kommagetrennte Liste von Pfaden zu `packagejson`-Dateien (nützlich für Monorepos)

@@ -1,5 +1,5 @@
 ---
-title: S3 자체 호스팅
+title: Alojamiento autónomo de S3
 description: Cómo configurar minio para trabajar con capgo
 sidebar:
   order: 2
@@ -21,15 +21,15 @@ Configurar S3 permite subir paquetes desde la [CLI](/docs/cli/commands/)
 
 ## Requisitos
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
-## Primeros pasos
+## Comenzando
 
 Primero, crea un nuevo directorio
 
 Luego crea una carpeta llamada `data` dentro
 
-Después ejecuta el siguiente comando:
+Luego ejecuta el siguiente comando:
 ```bash
 docker run \
    -p 9000:9000 \
@@ -53,7 +53,7 @@ docker rm minio1
 ```
 ⚠️ Este comando no elimina los datos de minio
 
-## Configurando las funciones edge
+## Configurando funciones edge
 
 Ahora que tenemos un servidor S3 funcionando, necesitamos configurar las funciones edge de capgo para usar nuestro servidor S3
 
@@ -76,7 +76,7 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-La ip `hostdockerinternal` es una ip de docker que solo puede ser alcanzada internamente por docker, pero la reemplazamos en el código con `0000` para que minio pueda ser alcanzado desde localhost
+La IP `hostdockerinternal` es una IP de docker que solo puede ser alcanzada internamente por docker, pero la reemplazamos en el código con `0000` para que minio pueda ser alcanzado desde localhost
 
 Para ejecutar funciones edge con nuestro nuevo archivo env usa
 ```bash
@@ -94,7 +94,7 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      // Sin este localS3 el comando upload fallará
+      // Sin este localS3 el comando de carga fallará
       localS3: true
     },
   },

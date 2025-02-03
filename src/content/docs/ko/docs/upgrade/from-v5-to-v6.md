@@ -1,12 +1,12 @@
 ---
-title: De V5 à V6
-description: V5에서 V6으로 업그레이드 방법
+title: V5에서 V6으로
+description: V5에서 V6로 업데이트하는 방법
 sidebar:
   order: 1
 locale: ko
 ---
 
-## 업그레이드 이유
+## 이 업그레이드가 필요한 이유
 
 이 메이저 버전은 Capacitor 메이저 버전을 따르기 위한 것입니다
 

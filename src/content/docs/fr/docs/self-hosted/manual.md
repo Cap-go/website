@@ -1,6 +1,6 @@
 ---
-title: Handbuch
-description: Comment utiliser le Capgo updater en mode manuel
+title: Manuel
+description: Comment utiliser la mise à jour Capgo en mode manuel
 sidebar:
   order: 3
 locale: fr
@@ -13,7 +13,7 @@ Si vous utilisez cet outil gratuitement, prenez le temps de soutenir mon travail
 
 J'ai fait le pari d'ouvrir le code source de tout ce que j'ai construit ici
 
-J'aurais pu le garder pour moi et mettre un prix élevé
+J'aurais pu le garder pour moi et fixer un prix élevé
 
 Au lieu de cela, je veux en faire une entreprise ouverte et transparente
 
@@ -21,7 +21,7 @@ Je pense que cela rendrait notre monde meilleur en s'ouvrant plutôt qu'en se ba
 
 Pour que cela soit possible, il est nécessaire que chacun d'entre nous fasse sa part, y compris vous 🥹
 
-Si l'offre Capgo cloud ne vous convient pas, soutenez un créateur indépendant [ICI](https://githubcom/sponsors/riderx/) selon vos conditions
+Si l'offre cloud Capgo ne vous convient pas, soutenez un créateur bootstrapped [ICI](https://githubcom/sponsors/riderx/) selon vos conditions
 :::
 
 ## Installation rapide
@@ -48,7 +48,7 @@ Ajoutez ceci à votre configuration pour désactiver la mise à jour automatique
 }
 ```
 
-Puis ajoutez ce code à votre application pour utiliser le téléchargement manuel
+Ensuite, ajoutez ce code à votre application pour utiliser le téléchargement manuel
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -58,20 +58,20 @@ let data = {version: ""}
 CapacitorUpdaternotifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
-       // Do the download during user active app time to prevent failed download
+       // Effectuer le téléchargement pendant que l'utilisateur utilise l'application pour éviter les échecs
        data = await CapacitorUpdaterdownload({
        version: '004',
        url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
-       // Do the switch when user leave app
+       // Effectuer le changement lorsque l'utilisateur quitte l'application
        SplashScreenshow()
        try {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // in case the set fail, otherwise the new app will have to hide it
+         SplashScreenhide() // en cas d'échec, sinon la nouvelle application devra le masquer
        }
      }
  })
@@ -89,6 +89,6 @@ Consultez l'application de démonstration pour plus d'informations
 
 Quel que soit le nom que vous choisissez pour le fichier que vous téléchargez depuis l'URL de votre serveur de versions/mises à jour, le fichier zip doit contenir l'intégralité du contenu de votre dossier de sortie de build Capacitor en production, généralement `{répertoire du projet}/dist/` ou `{répertoire du projet}/www/`
 
-C'est là que se trouve `indexhtml`, et il doit également contenir tous les fichiers JavaScript, CSS et les ressources web nécessaires au fonctionnement de votre application
+C'est là que se trouvera `indexhtml`, et il doit également contenir tous les fichiers JavaScript regroupés, CSS et ressources web nécessaires au fonctionnement de votre application
 
-Ne pas protéger ce fichier par mot de passe, sinon il ne pourra pas être décompressé
+Ne chiffrez pas ce fichier avec un mot de passe, sinon il ne pourra pas être décompressé

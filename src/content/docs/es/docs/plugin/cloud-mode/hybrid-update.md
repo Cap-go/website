@@ -1,12 +1,12 @@
 ---
 title: Actualización híbrida
-description: Método de actualización para las actualizaciones automáticas
+description: Métodos de actualización para actualizaciones automáticas
 sidebar:
   order: 3
 locale: es
 ---
 
-Al enviar actualizaciones a tu usuario, tienes varias formas de manejar el ciclo de actualización según lo consideres conveniente antes de aplicarlas
+Al enviar actualizaciones a tu usuario, tienes varias formas de manejar el ciclo de actualización según consideres conveniente antes de aplicarlas:
 
 - Actualización silenciosa
 - Escuchar el evento ```updateAvailable```
@@ -14,7 +14,7 @@ Al enviar actualizaciones a tu usuario, tienes varias formas de manejar el ciclo
 
 ## Actualización silenciosa
 
-Puedes forzar que un ciclo de actualización ocurra en cada inicio de la aplicación configurando `directUpdate` como `true`,
+Puedes forzar que ocurra un ciclo de actualización en cada inicio de la aplicación configurando `directUpdate` como `true`,
 esto activará el ciclo de actualización como de costumbre sin la interacción del usuario
 
 ```tsx
@@ -73,7 +73,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Actualización modal
 
-También puedes dejar que el usuario decida mostrando un diálogo para preguntarle si desea actualizar:
+También puedes dejar que el usuario decida mostrando un diálogo para preguntarles si desean actualizar:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

@@ -1,6 +1,6 @@
 ---
-title: Von V5 zu V6
-description: Upgrade von V5 auf V6
+title: Von V5 auf V6
+description: So aktualisieren Sie von V5 auf V6
 sidebar:
   order: 1
 locale: de
@@ -8,9 +8,9 @@ locale: de
 
 ## Warum dieses Upgrade
 
-Diese Hauptversion folgt der Capacitor Hauptversion
+Diese Major-Version folgt der Capacitor Major-Version
 
-Folgen Sie zunächst der Migrationsanleitung von Capacitor:
+Befolgen Sie zunächst die Migrationsanleitung von Capacitor:
 
 [https://capacitorjscom/docs/updating/6-0](https://capacitorjscom/docs/updating/6-0/)
 

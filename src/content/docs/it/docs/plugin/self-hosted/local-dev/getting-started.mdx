@@ -1,8 +1,8 @@
 ---
-title: Empezando
+title: Iniziamo
 description: >-
-  Questo tutorial mostrerà come iniziare con supabase da zero e come iniziare
-  con le edge functions
+  Questo tutorial mostrerà come avviare supabase da zero e come avviare le edge
+  functions
 sidebar:
   order: 1
 locale: it
@@ -13,8 +13,8 @@ locale: it
 Questo tutorial mostrerà come avviare supabase da zero e come avviare le edge functions
 
 ## Requisiti
- 1 Clonato [capgo](https://githubcom/Cap-go/capgo)
- 3 [supabase](https://supabasecom/)
+ 1. [capgo](https://githubcom/Cap-go/capgo) clonato
+ 3. [supabase](https://supabasecom/)
 
 ## Per iniziare
 
@@ -23,7 +23,7 @@ Per iniziare esegui
 supabase start
 ```
 
-Successivamente dovresti vedere qualcosa del genere:
+Dovresti vedere qualcosa del genere:
 ```js
 Started supabase local development setup
 
@@ -37,7 +37,7 @@ Started supabase local development setup
 service_role key: supa_key_admin
 ```
 
-Poi apri `configsjson` e imposta i seguenti valori:
+Successivamente apri `configsjson` e imposta i seguenti valori:
 ```json
 {
   "base_domain": {
@@ -64,11 +64,11 @@ dove `supa_key_anon` è il valore del passaggio precedente
 ⚠️ Non committare `configsjson` nel repository remoto
 :::
 
-Successivamente, verifica di poter accedere a [localhost:54323](http://localhost:54323/projects) e che la tabella `users` assomigli a questo
+Successivamente, verifica di poter accedere a [localhost:54323](http://localhost:54323/projects) e che la tabella `users` appaia più o meno così
 
 <figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
 
-Se funziona, avvia le edge functions eseguendo:
+Se funziona avvia le edge functions eseguendo:
 
 ```bash
 supabase functions serve

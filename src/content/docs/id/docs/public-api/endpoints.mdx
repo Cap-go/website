@@ -1,6 +1,6 @@
 ---
-title: Titik Akhir
-description: Dokumentasi API publik Capgo cloud
+title: Endpoints
+description: Dokumentasi API Publik Capgo Cloud
 sidebar:
   order: 2
 locale: id
@@ -8,7 +8,7 @@ locale: id
 
 Ini adalah dokumentasi API publik dari Capgo cloud
 
-Untuk mengakses, tambahkan kunci API di header sebagai `authorization`
+Untuk mengakses, tambahkan kunci API Anda di header sebagai `authorization`
 
 <LinkCard
 	title="Dapatkan kunci API"
@@ -58,7 +58,7 @@ interface OrganizationUpdate {
 }
 ```
 
-Memerlukan body request bertipe `OrganizationUpdate`
+Memerlukan body permintaan bertipe `OrganizationUpdate`
 
 Jika berhasil, mengembalikan:
 
@@ -78,7 +78,7 @@ interface OrganizationCreate {
 }
 ```
 
-Memerlukan body request bertipe `OrganizationCreate`
+Memerlukan body permintaan bertipe `OrganizationCreate`
 
 Jika berhasil, mengembalikan:
 
@@ -153,11 +153,11 @@ return { error: string, supabaseError?: any }
 
 ## Anggota (/organization/members)
 
-### GET 
+### GET
 
 Mengambil anggota organisasi
 
-Memerlukan body request (parameter query) bertipe `{ orgId: string }`
+Memerlukan body permintaan (parameter query) bertipe `{ orgId: string }`
 
 Jika berhasil, mengembalikan:
 ```typescript
@@ -183,7 +183,7 @@ interface MemberDelete {
 }
 ```
 
-Memerlukan body request (parameter query) bertipe `MemberDelete`
+Memerlukan body permintaan (parameter query) bertipe `MemberDelete`
 
 Jika berhasil, mengembalikan:
 
@@ -228,7 +228,7 @@ Jika parameter `graph` disediakan, mengembalikan gambar SVG visualisasi dari met
 
 ### GET /statistics/user
 
-Mengambil statistik gabungan dari semua organisasi yang dapat diakses pengguna
+Mengambil statistik agregat dari semua organisasi yang dapat diakses pengguna
 
 Parameter Query:
 ```typescript
@@ -278,15 +278,15 @@ interface Stats {
 
 Jika parameter `graph` disediakan, mengembalikan gambar SVG visualisasi dari metrik yang diminta
 
-## Channel
+## Kanal
 
-Endpoint ini memungkinkan Anda memeriksa dan memodifikasi semua Channel yang tersedia di aplikasi Anda
+Endpoint ini memungkinkan Anda memeriksa dan memodifikasi semua Kanal yang tersedia di aplikasi Anda
 
 ### POST
 
 `https://apicapgoapp/channel`
 
-Kirim ini untuk membuat atau memperbarui channel
+Kirim ini untuk membuat atau memperbarui kanal
 
 ```typescript
 type disable_update = "major" | "minor" | "version_number" | "none"
@@ -315,7 +315,7 @@ menerima ini:
 
 `https://apicapgoapp/channel`
 
-Kirim `app_id` sebagai parameter URL dan terima array 50 channel pertama\
+Kirim `app_id` sebagai parameter URL dan terima array dari 50 kanal pertama\
 Anda bisa mendapatkan yang berikutnya dengan mengirim `page=1`
 
 ```typescript
@@ -394,7 +394,7 @@ interface DeviceLink {
   app_id: string
   device_id: string
   version_id?: string // nama versi (akan dimigrasi ke nama yang lebih baik)
-  channel?: string // nama channel
+  channel?: string // nama kanal
 }
 ```
 
@@ -408,8 +408,8 @@ menerima ini:
 
 `https://apicapgoapp/device`
 
-Kirim `app_id` sebagai parameter URL dan terima array 50 perangkat pertama\
-Anda dapat mendapatkan yang berikutnya dengan mengirim `page=1`
+Kirim `app_id` sebagai parameter URL dan terima array dari 50 perangkat pertama\
+Anda dapat mendapatkan yang berikutnya dengan mengirimkan `page=1`
 
 ```typescript
 interface Device{
@@ -451,7 +451,7 @@ interface Device {
 
 ### DELETE
 
-Endpoint ini untuk memutuskan tautan channel dan menimpa versi. Anda tidak dapat menghapus perangkat dari Capgo
+Endpoint ini untuk memutuskan channel dan mengganti versi. Anda tidak dapat menghapus perangkat dari Capgo
 
 `https://apicapgoapp/device`
 
@@ -472,14 +472,14 @@ menerima ini:
 
 ## Bundles&#x20;
 
-Endpoint ini memungkinkan Anda untuk memeriksa dan menghapus semua bundle yang terkait dengan aplikasi Anda
+Endpoint ini memungkinkan Anda untuk memeriksa dan menghapus semua bundle yang terhubung ke aplikasi Anda
 
 ### GET
 
 `https://apicapgoapp/bundle`
 
 Kirim `app_id` sebagai parameter URL dan terima array dari 50 bundle pertama\
-Anda dapat mendapatkan yang berikutnya dengan mengirim `page=1`
+Anda dapat mendapatkan yang berikutnya dengan mengirimkan `page=1`
 
 ```typescript
 interface Bundle {

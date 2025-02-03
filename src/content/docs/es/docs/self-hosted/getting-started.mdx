@@ -1,5 +1,5 @@
 ---
-title: 시작하기
+title: Comenzando
 description: Cómo ejecutar tu propio servidor de actualización automática
 sidebar:
   order: 1
@@ -14,64 +14,64 @@ Esta documentación explicará cómo ejecutar tu propio servidor de actualizaci�
 
 Si utilizas este trabajo por tu cuenta, no podría sugerirte más que apoyes mi trabajo a través de [Github support](https://githubcom/sponsors/riderx/)
 
-Hice una gran apuesta al hacer código abierto todo el valioso código que construí aquí
+Hice una gran apuesta al hacer de código abierto todo el valioso código que construí aquí
 
 Podría haberlo guardado para mí y ponerle un precio alto
 
-Además, quiero centrarme en las herramientas de Capgo y hacer que sea un negocio abierto y transparente
+Además, quiero centrarme en las herramientas de Capgo y convertirlo en un negocio abierto y transparente
 
 Asimismo, creo que haría de nuestro mundo un lugar mejor al abrir en lugar de luchar y esconder
 
 Pero para hacerlo posible, es necesario que todos hagamos nuestra parte, incluyéndote a ti 🥹
 
-Si la oferta de Capgo no te conviene, entonces pon tu precio y apoya a un creador independiente [AQUÍ](https://githubcom/sponsors/riderx/) en tus términos
+Si la oferta de Capgo no te conviene, entonces pon tu precio y apoya a un Creador bootstrapped [AQUÍ](https://githubcom/sponsors/riderx/) en tus términos
 
 ## Paridad de características
 
 Si eliges usar tu propio servidor, pierdes el flujo de configuración de 5 minutos\
-Necesitas implementar tú mismo todas las características\
+Necesitas implementar todas las características por ti mismo\
 \
 Aquí está la lista:
 
-| Características           | Capgo | Autoalojado |
-| ------------------------ | ----- | ----------- |
-| Actualizaciones          | ✅     | 🚧          |
-| Auto reversión           | ✅     | 🚧          |
-| Alerta por email al fallar| ✅     | 🚧          |
-| Canal                    | ✅     | 🚧          |
-| Anulación de Canal       | ✅     | 🚧          |
-| Anulación de Dispositivo | ✅     | 🚧          |
-| Ajustes de Canal        | ✅     | 🚧          |
-| Ajustes de Dispositivo   | ✅     | 🚧          |
-| ID Personalizado         | ✅     | 🚧          |
-| Auto configurar canal    | ✅     | 🚧          |
-| API de Canales          | ✅     | 🚧          |
-| Estadísticas de Actualizaciones | ✅     | 🚧          |
-| Estadísticas de Fallos de Descarga | ✅     | 🚧          |
-| Estadísticas de Uso de App | ✅     | 🚧          |
-| Cifrado de actualizaciones | ✅     | 🚧          |
+| Características           | Capgo | Autohospedado |
+| ------------------------ | ----- | ------------- |
+| Actualizaciones          | ✅     | 🚧            |
+| Auto reversión           | ✅     | 🚧            |
+| Alerta por email al fallar| ✅     | 🚧            |
+| Canal                    | ✅     | 🚧            |
+| Anulación de Canal       | ✅     | 🚧            |
+| Anulación de Dispositivo | ✅     | 🚧            |
+| Ajustes de Canal        | ✅     | 🚧            |
+| Ajustes de Dispositivo   | ✅     | 🚧            |
+| ID Personalizado         | ✅     | 🚧            |
+| Auto configurar canal    | ✅     | 🚧            |
+| API de Canales          | ✅     | 🚧            |
+| Estadísticas de Actualizaciones | ✅     | 🚧            |
+| Estadísticas de Descargas Fallidas | ✅     | 🚧            |
+| Estadísticas de Uso de App | ✅     | 🚧            |
+| Cifrado de actualizaciones | ✅     | 🚧            |
 
-> Si envías una actualización incorrecta a tus usuarios puedes dañar su aplicación
+> Si envías una actualización incorrecta a tus usuarios puedes romper su aplicación
 
 > Ten en cuenta que no puedes usar la nube de Capgo y tu servidor al mismo tiempo
 
 ## Elige entre Automático y Manual
 
 :::danger
-⚠️ Las actualizaciones OTA (Over the Air) solo funcionan en cambios de HTML, CSS, JS\
+⚠️ La actualización OTA(Over the Air) solo funciona en cambios de HTML, CSS, JS\
 Cuando actualizas código nativo (plugin de Capacitor), debes volver a enviar a la tienda de aplicaciones
 :::
 
-En modo automático, parte de la lógica es manejada por el código Nativo, las actualizaciones se deciden del lado del servidor, esto es más seguro y permite actualizaciones detalladas, despliegue parcial a un dispositivo o grupo y más
+En modo automático, parte de la lógica es manejada por el código Nativo, las actualizaciones se deciden del lado del servidor, esto es más seguro y permite actualizaciones de grano fino, despliegue parcial a un dispositivo o grupo y más
 
 En modo manual, toda la lógica es manejada por JS, hay cosas buenas y malas en ambos escenarios
 
 ### Prepara tu paquete
 
-Para enviar actualizaciones a tu aplicación, necesitas comprimirla
-La mejor manera de asegurarte de que tu zip es correcto es usar el CLI de Capgo para comprimir
+Para enviar actualizaciones a tu aplicación, necesitas comprimirla en zip
+La mejor manera de estar seguro de que tu zip es bueno es usar el CLI de Capgo para comprimir
 
-`npx @capgo/cli@latest bundle zip` creará tu zip listo para ser subido a tu backend
+`npx @capgo/cli@latest bundle zip` creará tu zip listo para ser subido en tu backend
 
 <LinkCard
 	title="Actualización automática"

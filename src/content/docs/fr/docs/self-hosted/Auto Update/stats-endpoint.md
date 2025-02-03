@@ -1,6 +1,6 @@
 ---
-title: Point de terminaison des statistiques
-description: Création d'un point de terminaison de statistiques auto-hébergé
+title: Stats 엔드포인트
+description: Comment créer un point de terminaison statistique auto-hébergé
 sidebar:
   order: 2
 locale: fr
@@ -76,7 +76,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-Ce point de terminaison doit retourner un JSON :
+Ce point de terminaison doit renvoyer un JSON :
 
 ```json
 { "status": "ok" }
@@ -84,12 +84,12 @@ Ce point de terminaison doit retourner un JSON :
 
 ## Actions :
 
-* **delete** : quand un bundle est supprimé localement
-* **reset** : quand l'application revient au bundle intégré
-* **set** : quand l'application définit un nouveau bundle
-* **set\_fail** : quand l'application ne trouve pas l'ID du bundle défini
+* **delete** : lorsqu'un bundle est supprimé localement
+* **reset** : lorsque l'application revient au bundle intégré
+* **set** : lorsque l'application définit un nouveau bundle
+* **set\_fail** : lorsque l'application ne trouve pas l'ID du bundle défini
 * **update\_fail** : envoyé après le délai et `notifyAppReady` jamais appelé
-* **download\_fail** : quand le téléchargement ne s'est jamais terminé
-* **download\_complete :** Quand le téléchargement se termine
+* **download\_fail** : lorsque le téléchargement ne s'est jamais terminé
+* **download\_complete :** Lorsque le téléchargement se termine
 * **download\_xx :** Envoyé tous les 10% du téléchargement ex : download\_20, download\_70
-* **update\_fail :** quand le bundle ne parvient pas à exécuter `notifyAppReady` dans le délai imparti
+* **update\_fail :** lorsque le bundle ne parvient pas à faire `notifyAppReady` dans le délai imparti

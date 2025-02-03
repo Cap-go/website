@@ -1,6 +1,6 @@
 ---
 title: Nuxt 2
-description: Cara memasang plugin di Nuxt 2
+description: Cara menginstall plugin di Nuxt 2
 sidebar:
   order: 1
 locale: id
@@ -23,4 +23,4 @@ export default ({ app }) => {
 }
 ```
 
-Ini akan memuat plugin di sisi klien dan memberi tahu aplikasi bahwa siap menerima pembaruan
+Ini akan memuat plugin di sisi klien dan memberi tahu aplikasi bahwa aplikasi siap menerima pembaruan

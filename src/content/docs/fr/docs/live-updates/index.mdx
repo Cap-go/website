@@ -1,5 +1,5 @@
 ---
-title: Aperçu
+title: Vue d'ensemble
 sidebar:
   order: 1
 prev: false
@@ -9,33 +9,33 @@ locale: fr
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Utilisez la fonctionnalité Live Updates de Capgo pour mettre à jour les bundles JavaScript de votre application à distance, en temps réel. Envoyez des mises à jour JS directement à vos utilisateurs sans passer par le processus de révision de l'app store pour corriger instantanément les bugs et déployer de nouvelles fonctionnalités.
+Utilisez la fonctionnalité Live Updates de Capgo pour mettre à jour les bundles JavaScript de votre application à distance, en temps réel. Envoyez les mises à jour JS directement à vos utilisateurs sans passer par le processus de révision de l'app store pour corriger instantanément les bugs et déployer de nouvelles fonctionnalités.
 
 <Aside>
 
-Les Live Updates sont limitées aux modifications des bundles JavaScript. Si vous devez mettre à jour du code natif, comme l'ajout ou la suppression d'un plugin ou la modification de la configuration native du projet, vous devrez soumettre une nouvelle version binaire native aux app stores.
+Les Live Updates sont limitées aux modifications des bundles JavaScript. Si vous devez mettre à jour du code natif, comme l'ajout ou la suppression d'un plugin ou la modification de la configuration du projet natif, vous devrez soumettre une nouvelle version binaire native aux app stores.
 
 </Aside>
 
 ## Comment fonctionnent les Live Updates
 
-Le système Live Update de Capgo comprend deux composants clés :
+Le système Live Update de Capgo comporte deux composants clés :
 
 1. Le SDK Capgo, que vous installez dans votre application. Le SDK vérifie les mises à jour disponibles et les télécharge en arrière-plan.
 
-2. Les canaux, qui vous permettent de cibler des mises à jour pour des groupes spécifiques d'utilisateurs. Vous pouvez utiliser les canaux pour gérer différentes versions, comme `Production`, `Staging`, et `Dev`.
+2. Les canaux, qui vous permettent de cibler des mises à jour pour des groupes spécifiques d'utilisateurs. Vous pouvez utiliser les canaux pour gérer différentes pistes de publication, comme `Production`, `Staging` et `Dev`.
 
-Lorsque vous téléchargez un nouveau bundle JS sur Capgo et l'attribuez à un canal, le SDK Capgo dans les applications configurées pour ce canal détectera la mise à jour et la téléchargera. La prochaine fois que l'application redémarrera, le nouveau bundle sera chargé.
+Lorsque vous téléchargez un nouveau bundle JS sur Capgo et l'assignez à un canal, le SDK Capgo dans les applications configurées pour ce canal détectera la mise à jour et la téléchargera. La prochaine fois que l'application redémarre, le nouveau bundle sera chargé.
 
 ## Pour commencer
 
-Pour commencer à utiliser les Live Updates, suivez ces étapes :
+Pour commencer à utiliser Live Updates, suivez ces étapes :
 
 <Steps>
 
 1. Complétez le [Démarrage rapide Capgo](/docs/getting-started/quickstart) pour configurer votre application dans Capgo et installer le SDK Capgo
 
-2. Dans votre code d'application, appelez `CapacitorUpdater.notifyAppReady()` après l'initialisation de votre application. Cela indique au SDK Capgo que votre application est prête à recevoir des mises à jour
+2. Dans votre code d'application, appelez `CapacitorUpdaternotifyAppReady()` après l'initialisation de votre application. Cela indique au SDK Capgo que votre application est prête à recevoir des mises à jour
 
 3. Construisez votre bundle JS et téléchargez-le sur Capgo :
    ```shell
@@ -59,7 +59,7 @@ Consultez le guide [Déploiement des Live Updates](/docs/getting-started/deploy)
 <CardGrid stagger>
   <a href="/docs/live-updates/channels/">
     <Card title="Canaux" icon="bars">
-      Apprenez à utiliser les canaux pour gérer différentes versions et cibler les mises à jour pour des utilisateurs spécifiques
+      Apprenez à utiliser les canaux pour gérer différentes pistes de publication et cibler les mises à jour pour des utilisateurs spécifiques
     </Card>
   </a>
 

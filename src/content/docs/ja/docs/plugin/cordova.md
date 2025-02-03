@@ -1,24 +1,41 @@
 ---
-title: コルドバ
-description: Capacitor-updater は Cordova で利用できますか？
+title: Cordova
+description: Is Capacitor-updater available for Cordova?
 sidebar:
   order: 8
 locale: ja
 ---
 
-プラグインがCordovaで利用可能になるかどうか気になっていたことと思います
+You've been wondering if this plugin will ever be available for Cordova
 
-そのためのR&D用リポジトリを作成し始めましたが、膨大な作業量となります
+このプラグインがCordovaで利用可能になるのかと疑問に思っていたかもしれません
+
+I have started a R&D repository for that, but it's a huge amount of work
+
+そのためのR&Dリポジトリを開始しましたが、作業量が膨大です
+
+## Problems
 
 ## 問題点
 
-実現可能なことは分かっていますが、実現するためにはCapacitorの時と同様に、Cordovaのコードベース全体を読んで理解する必要があります
+I know I can do it but for that, I have to read all the code of Cordova codebase as I did for Capacitor, to understand how to make it work
 
-Androidバージョンは両方ともJavaを使用しているため比較的簡単ですが、iOSはSwiftがCordovaでまだ十分にサポートされていないため、完全な書き直しが必要です
+実現可能だとは分かっていますが、その為にはCapacitorの時と同様にCordovaのコードベース全体を読んで、どのように動作させるかを理解する必要があります
+
+The Android version is easier to do since both use Java, but iOS needs a full rewrite because Swift is still not well-supported in Cordova
+
+AndroidバージョンはどちらもJavaを使用しているため比較的簡単ですが、CordovaではSwiftのサポートがまだ十分ではないため、iOSは完全な書き直しが必要です
+
+## Solution
 
 ## 解決策
 
-その間、以下のことができます:
+In the mean time heres what you can do:
 
-* GitHubで[Support me](https://githubcom/sponsors/riderx)をしていただければ、優先的に対応できます。少なくとも1ヶ月の作業が必要です
-* コンサルタントとして私を雇用してください。大手企業のCapacitorへの移行支援の経験があり、通常10-20日かかりますが、チームにとって[benefit](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development)は非常に大きいです
+当面は以下のことができます：
+
+* [Support me](https://githubcom/sponsors/riderx) on GitHub and I can prioritize that This will need at least 1 month of work
+* Hire me as a Consultant, I used to help big companies migrate to capacitor, it usually takes ~10-20 days, and the [benefit](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) is huge for the team
+
+* GitHubで[サポート](https://githubcom/sponsors/riderx)していただければ、優先的に取り組むことができます。少なくとも1ヶ月の作業が必要です
+* コンサルタントとして雇用してください。大企業のCapacitorへの移行を支援してきた経験があり、通常10-20日かかりますが、チームにとって[メリット](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development)は非常に大きいです

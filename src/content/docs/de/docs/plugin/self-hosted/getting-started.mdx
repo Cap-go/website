@@ -1,6 +1,6 @@
 ---
-title: 시작하기
-description: Eigenen automatischen Update-Server betreiben
+title: Erste Schritte
+description: Selbst-Update-Server ausführen
 sidebar:
   order: 1
 locale: de
@@ -12,17 +12,18 @@ Diese Dokumentation erklärt, wie Sie Ihren eigenen Auto-Update-Server betreiben
 
 ## Einführung
 
-Wenn Sie diese Arbeit hilfreich finden, erwägen Sie bitte meine Arbeit zu unterstützen, indem Sie [Github Sponsor](https://githubcom/sponsors/riderx) werden
+Wenn Sie diese Arbeit hilfreich finden, erwägen Sie bitte, meine Arbeit durch eine [Github-Sponsorschaft](https://githubcom/sponsors/riderx) zu unterstützen
 
-Ich habe darauf gesetzt, den gesamten Code, den ich hier erstellt habe, Open Source zu machen, anstatt ihn kostenpflichtig zu machen. Durch die Öffnung anstelle von Kampf und Verstecken glaube ich, dass wir die Welt zu einem besseren Ort machen können
+Ich habe mich entschieden, den gesamten hier entwickelten Code Open Source zu machen, anstatt ihn hinter einer Bezahlschranke zu verstecken. Ich glaube, dass wir die Welt zu einem besseren Ort machen können, wenn wir offen sind, anstatt zu kämpfen und uns zu verstecken
 
-Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
+Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Unternehmen machen
 
-Aber um dies zu ermöglichen, ist es notwendig, dass wir alle, einschließlich Ihnen, unseren Teil dazu beitragen 🥹
+Aber um dies zu ermöglichen, ist es notwendig, dass wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
 Wenn Capgo nicht zu Ihnen passt, dann zahlen Sie Ihren eigenen Preis und [unterstützen Sie einen bootstrapped Maker](https://githubcom/sponsors/riderx) zu Ihren Bedingungen
 
 <LinkCard title="Erwägen Sie einen Beitrag" href="/docs/plugin/self-hosted/contributing/"/>
+
 ## Funktionsparität
 
 Wenn Sie sich für Ihren eigenen Server entscheiden, verlieren Sie den 5-Minuten-Einrichtungsablauf\
@@ -43,15 +44,15 @@ Sie müssen alle diese Funktionen selbst implementieren
 | Auto-Set-Kanäle          | ✅     | 🚧             |
 | API-Kanäle               | ✅     | 🚧             |
 | Update-Statistiken       | ✅     | 🚧             |
-| Download-Fehlerstatistiken | ✅   | 🚧             |
+| Download-Fehlerstatistiken| ✅    | 🚧             |
 | App-Nutzungsstatistiken  | ✅     | 🚧             |
 | Update-Verschlüsselung   | ✅     | 🚧             |
 
 :::danger
-Wenn Sie ein fehlerhaftes Update an Ihre Benutzer senden, können und werden Sie ihre App beschädigen
+Wenn Sie ein fehlerhaftes Update an Ihre Benutzer senden, können und werden Sie deren App beschädigen
 :::
 
-> Beachten Sie, dass Sie nicht gleichzeitig die Capgo-Cloud und Ihren eigenen Server nutzen können
+> Beachten Sie, dass Sie nicht gleichzeitig die Capgo-Cloud und Ihren eigenen Server verwenden können
 
 :::danger
 Die Over-the-Air (OTA) Update-Funktion gilt nur für Änderungen an HTML-, CSS- und JavaScript-Dateien
@@ -60,9 +61,9 @@ Wenn Sie Änderungen am nativen Code vornehmen, wie z.B. Updates von Capacitor-P
 :::
 
 ## Wählen Sie zwischen Auto und Manuell
-Im Auto-Modus wird ein Teil der Logik vom nativen Code übernommen, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht fein abgestimmte Updates, teilweise Bereitstellung für ein Gerät oder eine Gruppe und mehr
+Im Auto-Modus wird ein Teil der Logik vom nativen Code verarbeitet, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht feinkörnige Updates, teilweise Bereitstellung auf einem Gerät oder einer Gruppe und mehr
 
-Im manuellen Modus wird die gesamte Logik von JS übernommen
+Im manuellen Modus wird die gesamte Logik von JS verarbeitet
 
 <LinkCard
 	title="Auto Update"
@@ -81,15 +82,15 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-## Vorbereiten Ihres Bundles
+## Bereiten Sie Ihr Bundle vor
 
 Um Updates an Ihre App zu senden, müssen Sie sie zippen
 Der beste Weg, um sicherzustellen, dass Ihr Zip gut ist, ist die Verwendung der Capgo CLI zum Zippen
-```bash title="Erstellen Sie ein Bundle mit Ihren Dateien zum Bereitstellen von Ihrem Server"
+```bash title="Erstellen Sie ein Bundle mit Ihren Dateien, die von Ihrem Server bereitgestellt werden sollen"
 npx @capgo/cli@latest bundle zip
 ```
 
-Sie müssen diesen Zip von Ihrem Server aus selbst bereitstellen
+Sie müssen diese Zip-Datei selbst von Ihrem Server bereitstellen
 
 <LinkCard
 	title="Auto Update"
@@ -102,5 +103,5 @@ Sie müssen diesen Zip von Ihrem Server aus selbst bereitstellen
 />
 
 :::note
-Wenn Ihnen das wie zu viel Arbeit erscheint, probieren Sie die Capgo Cloud Testversion
+Wenn Ihnen das zu viel Arbeit erscheint, probieren Sie die Capgo Cloud Testversion aus
 :::

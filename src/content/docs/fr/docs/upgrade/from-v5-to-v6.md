@@ -1,6 +1,6 @@
 ---
-title: Da V5 a V6
-description: Mise à jour de V5 vers V6
+title: De V5 à V6
+description: Comment mettre à jour de V5 à V6
 sidebar:
   order: 1
 locale: fr

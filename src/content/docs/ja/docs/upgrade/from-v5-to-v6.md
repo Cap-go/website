@@ -1,12 +1,12 @@
 ---
-title: De V5 a V6
-description: V5からV6へのアップグレード方法
+title: Da V5 a V6
+description: V5 から V6 へのアップデート方法
 sidebar:
   order: 1
 locale: ja
 ---
 
-## このアップグレードの理由
+## アップグレードの理由
 
 このメジャーバージョンは、Capacitorのメジャーバージョンに追従するためのものです
 
@@ -18,8 +18,8 @@ locale: ja
 
 `npm i @capgo/capacitor-updater@6`
 
-`その後、ネイティブコードを更新して同期します：`
+`その後、ネイティブコードの更新を同期します：`
 
 `npx cap sync`
 
-これで完了です！とても簡単です！
+これで完了です！とても簡単ですね！

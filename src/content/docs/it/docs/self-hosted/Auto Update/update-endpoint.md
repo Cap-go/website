@@ -1,12 +1,12 @@
 ---
-title: 엔드포인트 업데이트
-description: Come creare un endpoint di aggiornamento self-hosted
+title: Aggiornamento dell'endpoint
+description: How to create a self-hosted update endpoint
 sidebar:
   order: 1
 locale: it
 ---
 
-Ecco un esempio di codice JavaScript per inviare un aggiornamento al plugin
+Ecco un esempio di codice in JavaScript per inviare un aggiornamento al plugin
 
 ```typescript
 interface AppInfos {
@@ -71,7 +71,7 @@ Questo endpoint dovrebbe restituire un JSON:
 }
 ```
 
-E se non ci sono aggiornamenti o c'è un errore, aggiungere la chiave `message` e opzionalmente un `error`
+E se non ci sono aggiornamenti o si verifica un errore, aggiungere la chiave `message` e opzionalmente un `error`
 
 ```json
 {

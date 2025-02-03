@@ -1,5 +1,5 @@
 ---
-title: LiveUpdateのデプロイ
+title: ライブアップデートの配布
 sidebar:
   order: 3
 locale: ja
@@ -7,34 +7,34 @@ locale: ja
 
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Capgoのライブアップデート機能を使用して、アプリのUIとビジネスロジックをリモートからリアルタイムで更新し、アプリストアを経由せずにJSバンドルをユーザーに直接プッシュしてバグを即座に修正し、新機能を提供できます
+Capgoのライブアップデート機能を使用して、アプリのUIとビジネスロジックをリモートでリアルタイムに更新し、バグ修正や新機能の追加をアプリストアを経由せずに直接ユーザーにJSバンドルをプッシュすることができます
 
-このガイドは[Capgoクイックスタート](/docs/getting-started/quickstart)を完了し、以下をすでに実施していることを前提としています：
+このガイドは、[Capgoクイックスタート](/docs/getting-started/quickstart)を完了し、以下の作業が済んでいることを前提としています：
 
 <Steps>
 
-1 Capacitorアプリに`@capgo/capacitor-updater` SDKをインストール
+1. Capacitorアプリに`@capgo/capacitor-updater` SDKをインストール
 
-2 `capacitorconfig.ts`でアプリIDとアップデートチャンネルを設定
+2. `capacitor.config.ts`でアプリIDとアップデートチャンネルを設定
 
-3 コードに`CapacitorUpdater.notifyAppReady()`メソッドを追加
+3. コードに`CapacitorUpdater.notifyAppReady()`メソッドを追加
 
 </Steps>
 
-これらのステップをまだ完了していない場合は、先にクイックスタートを完了してください
+これらのステップがまだ完了していない場合は、先にクイックスタートに戻って完了してください
 
 <LinkCard href="/docs/getting-started/add-an-app/" title="アプリを追加" description="Capgoアカウントにアプリを追加し、アプリにプラグインをインストールする" />
 
 ## バンドルのアップロード
 
-Capgo SDKをインストールして設定したら、最初のライブアップデートバンドルをアップロードする準備が整いました：
+Capgo SDKのインストールと設定が完了したら、最初のライブアップデートバンドルをアップロードする準備が整いました：
 
-1 Webアセットをビルドします：
+1. Webアセットをビルドします：
    ```shell
    npm run build
    ```
 
-2 バンドルをCapgoにアップロードします：
+2. バンドルをCapgoにアップロードします：
     <Tabs>
       <TabItem label="Console">
         ```shell
@@ -102,50 +102,50 @@ Capgo SDKをインストールして設定したら、最初のライブアッ�
       ```
       </TabItem>
     </Tabs>
-   これにより、コマンドで指定されたチャンネルに新しいバンドルバージョンがアップロードされます
+   これにより、コマンドで指定したチャンネルに新しいバンドルバージョンがアップロードされます
 
 ### アップロードのトラブルシューティング
 
 アップロードが失敗した場合は、以下を確認してください：
 - `capacitor.config.ts`のアプリIDがCapgoダッシュボードのアプリと一致していること
 - アップロードコマンドをCapacitorプロジェクトのルートから実行していること
-- Webアセットがビルドされ最新であること
+- Webアセットがビルドされ、最新の状態であること
 
-まだ問題が解決しない場合は、[トラブルシューティング](/docs/getting-started/troubleshooting/)セクションをご確認ください
+まだ問題が解決しない場合は、[トラブルシューティング](/docs/getting-started/troubleshooting/)セクションを確認してください
 
 ## デバイスでのアップデートの受信
 
 バンドルがアップロードされたら、デバイスでライブアップデートをテストできます：
 
-1 アプリをデバイスと同期します：
+1. アプリをデバイスに同期します：
    ```shell
    npx cap sync ios
    ```
 
-2 別のターミナルを開き、以下のコマンドを実行してアップデートステータスを確認します：
+2. 別のターミナルで以下のコマンドを実行してアップデートの状態を確認します：
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3 アプリをローカルで実行します：
+3. アプリをローカルで実行します：
    ```shell
    npx cap run ios
    ```
-   またはiOS/AndroidプロジェクトをXcode/Android Studioで開いてネイティブ実行します
+   または、iOS/AndroidプロジェクトをXcode/Android Studioで開いてネイティブ実行します
 
-4 アップデートがバックグラウンドでダウンロードされるまで、アプリを約30秒間開いたままにします
+4. バックグラウンドでアップデートがダウンロードされるように、アプリを約30秒間開いたままにします
 
-5 ログが更新されてアップデートステータスが表示されるまで数秒かかります
+5. ログが更新されるまで数秒かかり、アップデートの状態が表示されます
 
-6 アプリを閉じて再度開くと、ライブアップデートが適用されているはずです！
+6. アプリを閉じて再度開きます。ライブアップデートが適用されているはずです！
 
-ライブアップデートのテストについての詳細は、[Capgoクイックスタート](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)をご参照ください
+ライブアップデートのテストについての詳細は、[Capgoクイックスタート](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)を参照してください
 
 ## 次のステップ
 
-Capgoで最初のライブアップデートのデプロイが完了しました！🎉
+Capgoで最初のライブアップデートのデプロイに成功しましたね！🎉
 
-詳細については、[Capgoライブアップデートのドキュメント](/docs/live-updates)の残りの部分をご確認ください。次に確認すべき主要なトピック：
+詳細を学ぶには、[Capgoライブアップデートのドキュメント](/docs/live-updates)の残りを確認してください。次に確認すべき重要なトピック：
 - [チャンネルを使用したアップデートのターゲティング](/docs/live-updates/channels)
 - [アップデート動作のカスタマイズ](/docs/live-updates/update-behavior)
 - [ライブアップデートのロールバック](/docs/live-updates/rollbacks)

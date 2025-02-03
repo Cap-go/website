@@ -1,6 +1,6 @@
 ---
 title: 기능 및 설정
-description: 플러그인에서 사용 가능한 모든 메소드와 구성
+description: 플러그인의 모든 사용 가능한 메서드와 구성
 sidebar:
   order: 2
 locale: ko
@@ -8,44 +8,43 @@ locale: ko
 
 # 업데이터 플러그인 설정
 
-자세한 정보는 Github [Readme](https://githubcom/Cap-go/capacitor-updater)를 참조하세요
+자세한 내용은 Github [Readme](https://githubcom/Cap-go/capacitor-updater)를 참조하세요
 
 <docgen-config>
-<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
 CapacitorUpdater는 다음 옵션으로 구성할 수 있습니다:
 
-| 속성                         | 타입                 | 설명                                                                                                                                                                                     | 기본값                                            | 버전   |
+| 속성                         | 타입                 | 설명                                                                                                                                                                                     | 기본값                                            | 버전    |
 | ---------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------- |
-| **`appReadyTimeout`**        | <code>number</code>  | 네이티브 플러그인이 업데이트를 '실패'로 간주하기 전에 대기할 시간(밀리초) 설정 Android와 iOS에서만 사용 가능                                                   | <code>10000 // (10초)</code>                 |         |
-| **`responseTimeout`**        | <code>number</code>  | 네이티브 플러그인이 API 타임아웃으로 간주하기 전에 대기할 시간(밀리초) 설정 Android와 iOS에서만 사용 가능                                                          | <code>20 // (20초)</code>                     |         |
-| **`autoDeleteFailed`**       | <code>boolean</code> | 실패한 번들을 자동으로 삭제할지 여부 설정 Android와 iOS에서만 사용 가능                                                                                | <code>true</code>                                  |         |
-| **`autoDeletePrevious`**     | <code>boolean</code> | 성공적인 업데이트 후 이전 번들을 자동으로 삭제할지 여부 설정 Android와 iOS에서만 사용 가능                                                    | <code>true</code>                                  |         |
-| **`autoUpdate`**             | <code>boolean</code> | 업데이트 서버를 통한 자동 업데이트 사용 여부 설정 Android와 iOS에서만 사용 가능                                                                                   | <code>true</code>                                  |         |
-| **`resetWhenUpdate`**        | <code>boolean</code> | 새로운 네이티브 앱 번들이 기기에 설치될 때 이전에 다운로드된 번들 자동 삭제 Android와 iOS에서만 사용 가능                                                 | <code>true</code>                                  |         |
-| **`updateUrl`**              | <code>string</code>  | 업데이트 확인 요청을 보낼 URL/엔드포인트 설정 Android와 iOS에서만 사용 가능                                                                                               | <code>https://plugincapgoapp/updates</code>      |         |
-| **`channelUrl`**             | <code>string</code>  | 채널 작업을 위한 URL/엔드포인트 설정 Android와 iOS에서만 사용 가능                                                                                                        | <code>https://plugincapgoapp/channel_self</code> |         |
-| **`statsUrl`**               | <code>string</code>  | 업데이트 통계를 보낼 URL/엔드포인트 설정 Android와 iOS에서만 사용 가능 통계 보고를 비활성화하려면 ""로 설정                                                     | <code>https://plugincapgoapp/stats</code>        |         |
-| **`privateKey`**             | <code>string</code>  | 엔드 투 엔드 라이브 업데이트 암호화를 위한 개인 키 설정 Android와 iOS에서만 사용 가능 버전 620에서 더 이상 사용되지 않으며 버전 700에서 제거 예정                             | <code>undefined</code>                             |         |
-| **`publicKey`**              | <code>string</code>  | 엔드 투 엔드 라이브 업데이트 암호화를 위한 공개 키 설정 버전 2 Android와 iOS에서만 사용 가능                                                                                    | <code>undefined</code>                             | 620   |
-| **`version`**                | <code>string</code>  | 앱의 현재 버전 설정 첫 업데이트 요청에 사용됨 설정하지 않으면 플러그인이 네이티브 코드에서 버전을 가져옴 Android와 iOS에서만 사용 가능 | <code>undefined</code>                             | 41748 |
-| **`directUpdate`**           | <code>boolean</code> | 앱이 업데이트/설치된 직후 플러그인이 업데이트를 직접 설치하도록 설정 자동 업데이트 모드에서만 사용 가능 Android와 iOS에서만 사용 가능                                               | <code>undefined</code>                             | 510   |
-| **`periodCheckDelay`**       | <code>number</code>  | 주기적 업데이트 확인 지연 시간 설정 단위는 초 Android와 iOS에서만 사용 가능 600초(10분) 미만으로 설정할 수 없음                                   | <code>600 // (10분)</code>                   |         |
-| **`localS3`**                | <code>boolean</code> | 테스트 또는 자체 호스팅 업데이트 서버를 위한 로컬 서버 사용 설정                                                                                                               | <code>undefined</code>                             | 41748 |
-| **`localHost`**              | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위한 로컬 서버 사용 설정                                                                                                               | <code>undefined</code>                             | 41748 |
-| **`localWebHost`**           | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위한 로컬 서버 사용 설정                                                                                                               | <code>undefined</code>                             | 41748 |
-| **`localSupa`**              | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위한 로컬 서버 사용 설정                                                                                                               | <code>undefined</code>                             | 41748 |
-| **`localSupaAnon`**          | <code>string</code>  | 테스트를 위한 로컬 서버 사용 설정                                                                                                                                            | <code>undefined</code>                             | 41748 |
-| **`localApi`**               | <code>string</code>  | 테스트를 위한 로컬 API 사용 설정                                                                                                                                               | <code>undefined</code>                             | 633   |
-| **`localApiFiles`**          | <code>string</code>  | 테스트를 위한 로컬 파일 API 사용 설정                                                                                                                                          | <code>undefined</code>                             | 633   |
-| **`allowModifyUrl`**         | <code>boolean</code> | JavaScript 측에서 updateUrl, statsUrl 및 channelUrl을 동적으로 수정할 수 있도록 허용                                                                                         | <code>false</code>                                 | 540   |
-| **`defaultChannel`**         | <code>string</code>  | 설정에서 앱의 기본 채널 설정| <code>undefined</code> | 550 |
-| **`appId`** | <code>string</code> | 구성에서 앱의 앱 ID를 구성 | <code>undefined</code> | 600 |
-| **`keepUrlPathAfterReload`** | <code>boolean</code> | 리로드 후 URL 경로를 유지하도록 플러그인을 구성 경고: 리로드가 트리거되면 'windowhistory'가 지워집니다 | <code>false</code> | 680 |
+| **`appReadyTimeout`**        | <code>number</code>  | 네이티브 플러그인이 업데이트를 '실패'로 간주하기 전에 대기할 밀리초 수를 설정합니다. Android와 iOS에서만 사용 가능                                                                    | <code>10000 // (10초)</code>                      |         |
+| **`responseTimeout`**        | <code>number</code>  | 네이티브 플러그인이 API 타임아웃으로 간주하기 전에 대기할 밀리초 수를 설정합니다. Android와 iOS에서만 사용 가능                                                                       | <code>20 // (20초)</code>                         |         |
+| **`autoDeleteFailed`**       | <code>boolean</code> | 플러그인이 실패한 번들을 자동으로 삭제할지 여부를 설정합니다. Android와 iOS에서만 사용 가능                                                                                           | <code>true</code>                                  |         |
+| **`autoDeletePrevious`**     | <code>boolean</code> | 성공적인 업데이트 후 플러그인이 이전 번들을 자동으로 삭제할지 여부를 설정합니다. Android와 iOS에서만 사용 가능                                                                        | <code>true</code>                                  |         |
+| **`autoUpdate`**             | <code>boolean</code> | 플러그인이 업데이트 서버를 통한 자동 업데이트를 사용할지 여부를 설정합니다. Android와 iOS에서만 사용 가능                                                                             | <code>true</code>                                  |         |
+| **`resetWhenUpdate`**        | <code>boolean</code> | 새로운 네이티브 앱 번들이 기기에 설치될 때 이전에 다운로드한 번들을 자동으로 삭제합니다. Android와 iOS에서만 사용 가능                                                               | <code>true</code>                                  |         |
+| **`updateUrl`**              | <code>string</code>  | 업데이트 확인이 전송되는 URL/엔드포인트를 설정합니다. Android와 iOS에서만 사용 가능                                                                                                    | <code>https://plugincapgoapp/updates</code>      |         |
+| **`channelUrl`**             | <code>string</code>  | 채널 작업을 위한 URL/엔드포인트를 설정합니다. Android와 iOS에서만 사용 가능                                                                                                            | <code>https://plugincapgoapp/channel_self</code> |         |
+| **`statsUrl`**               | <code>string</code>  | 업데이트 통계가 전송되는 URL/엔드포인트를 설정합니다. Android와 iOS에서만 사용 가능. 통계 보고를 비활성화하려면 ""로 설정                                                            | <code>https://plugincapgoapp/stats</code>        |         |
+| **`privateKey`**             | <code>string</code>  | 엔드-투-엔드 라이브 업데이트 암호화를 위한 개인 키를 설정합니다. Android와 iOS에서만 사용 가능. 버전 6.2.0에서 deprecated되었으며 버전 7.0.0에서 제거될 예정                         | <code>undefined</code>                             |         |
+| **`publicKey`**              | <code>string</code>  | 엔드-투-엔드 라이브 업데이트 암호화를 위한 공개 키를 설정합니다 (버전 2). Android와 iOS에서만 사용 가능                                                                               | <code>undefined</code>                             | 620   |
+| **`version`**                | <code>string</code>  | 앱의 현재 버전을 설정합니다. 첫 업데이트 요청에 사용됩니다. 설정하지 않으면 플러그인이 네이티브 코드에서 버전을 가져옵니다. Android와 iOS에서만 사용 가능                          | <code>undefined</code>                             | 41748 |
+| **`directUpdate`**           | <code>boolean</code> | 앱이 방금 업데이트/설치되었을 때 플러그인이 업데이트를 직접 설치하도록 합니다. 자동 업데이트 모드에서만 사용 가능. Android와 iOS에서만 사용 가능                                    | <code>undefined</code>                             | 510   |
+| **`periodCheckDelay`**       | <code>number</code>  | 주기적 업데이트 확인의 지연 시간을 초 단위로 설정합니다. Android와 iOS에서만 사용 가능. 600초(10분) 미만으로 설정할 수 없음                                                          | <code>600 // (10분)</code>                        |         |
+| **`localS3`**                | <code>boolean</code> | 테스트 또는 자체 호스팅 업데이트 서버를 위해 CLI가 로컬 서버를 사용하도록 설정                                                                                                         | <code>undefined</code>                             | 41748 |
+| **`localHost`**              | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위해 CLI가 로컬 서버를 사용하도록 설정                                                                                                         | <code>undefined</code>                             | 41748 |
+| **`localWebHost`**           | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위해 CLI가 로컬 서버를 사용하도록 설정                                                                                                         | <code>undefined</code>                             | 41748 |
+| **`localSupa`**              | <code>string</code>  | 테스트 또는 자체 호스팅 업데이트 서버를 위해 CLI가 로컬 서버를 사용하도록 설정                                                                                                         | <code>undefined</code>                             | 41748 |
+| **`localSupaAnon`**          | <code>string</code>  | 테스트를 위해 CLI가 로컬 서버를 사용하도록 설정                                                                                                                                         | <code>undefined</code>                             | 41748 |
+| **`localApi`**               | <code>string</code>  | 테스트를 위해 CLI가 로컬 API를 사용하도록 설정                                                                                                                                          | <code>undefined</code>                             | 633   |
+| **`localApiFiles`**          | <code>string</code>  | 테스트를 위해 CLI가 로컬 파일 API를 사용하도록 설정                                                                                                                                     | <code>undefined</code>                             | 633   |
+| **`allowModifyUrl`**         | <code>boolean</code> | 플러그인이 JavaScript 측에서 updateUrl, statsUrl 및 channelUrl을 동적으로 수정할 수 있도록 허용                                                                                         | <code>false</code>                                 | 540   |
+| **`defaultChannel`**         | <code>string</code>  | 설정에서 앱의 기본 채널 설정| <code>undefined</code>                             | 550   |
+| **`appId`**                  | <code>string</code>  | 앱의 설정에서 앱 ID를 구성합니다                                                                                                                                                 | <code>undefined</code>                             | 600   |
+| **`keepUrlPathAfterReload`** | <code>boolean</code> | 리로드 후 URL 경로를 유지하도록 플러그인을 구성합니다 경고: 리로드가 트리거되면 'windowhistory'가 지워집니다                                                                | <code>false</code>                                 | 680   |
 
 ## 예시
 
-`capacitor.config.json`에서:
+`capacitorconfigjson`에서:
 
 ```json
 {
@@ -57,9 +56,9 @@ CapacitorUpdater는 다음 옵션으로 구성할 수 있습니다:
       "autoDeletePrevious": false,
       "autoUpdate": false,
       "resetWhenUpdate": false,
-      "updateUrl": https://example.com/api/auto_update,
-      "channelUrl": https://example.com/api/channel,
-      "statsUrl": https://example.com/api/stats,
+      "updateUrl": https://examplecom/api/auto_update,
+      "channelUrl": https://examplecom/api/channel,
+      "statsUrl": https://examplecom/api/stats,
       "privateKey": undefined,
       "publicKey": undefined,
       "version": undefined,
@@ -81,7 +80,7 @@ CapacitorUpdater는 다음 옵션으로 구성할 수 있습니다:
 }
 ```
 
-`capacitor.config.ts`에서:
+`capacitorconfigts`에서:
 
 ```ts
 /// <reference types="@capgo/capacitor-updater" />
@@ -97,9 +96,9 @@ const config: CapacitorConfig = {
       autoDeletePrevious: false,
       autoUpdate: false,
       resetWhenUpdate: false,
-      updateUrl: https://example.com/api/auto_update,
-      channelUrl: https://example.com/api/channel,
-      statsUrl: https://example.com/api/stats,
+      updateUrl: https://examplecom/api/auto_update,
+      channelUrl: https://examplecom/api/channel,
+      statsUrl: https://examplecom/api/stats,
       privateKey: undefined,
       publicKey: undefined,
       version: undefined,
@@ -123,54 +122,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-</docgen-config>
-
-<docgen-index>
-
-* [`notifyAppReady()`](#notifyappready)
-* [`setUpdateUrl()`](#setupdateurl)
-* [`setStatsUrl()`](#setstatsurl)
-* [`setChannelUrl()`](#setchannelurl)
-* [`download()`](#download)
-* [`next()`](#next)
-* [`set()`](#set)
-* [`delete()`](#delete)
-* [`list()`](#list)
-* [`reset()`](#reset)
-* [`current()`](#current)
-* [`reload()`](#reload)
-* [`setMultiDelay()`](#setmultidelay)
-* [`cancelDelay()`](#canceldelay)
-* [`getLatest()`](#getlatest)
-* [`setChannel()`](#setchannel)
-* [`unsetChannel()`](#unsetchannel)
-* [`getChannel()`](#getchannel)
-* [`setCustomId()`](#setcustomid)
-* [`getBuiltinVersion()`](#getbuiltinversion)
-* [`getDeviceId()`](#getdeviceid)
-* [`getPluginVersion()`](#getpluginversion)
-* [`isAutoUpdateEnabled()`](#isautoupdateenabled)
-* [`removeAllListeners()`](#removealllisteners)
-* [`addListener('download', )`](#addlistenerdownload-)
-* [`addListener('noNeedUpdate', )`](#addlistenernoneedupdate-)
-* [`addListener('updateAvailable', )`](#addlistenerupdateavailable-)
-* [`addListener('downloadComplete', )`](#addlistenerdownloadcomplete-)
-* [`addListener('majorAvailable', )`](#addlistenermajoravailable-)
-* [`addListener('updateFailed', )`](#addlistenerupdatefailed-)
-* [`addListener('downloadFailed', )`](#addlistenerdownloadfailed-)
-* [`addListener('appReloaded', )`](#addlistenerappreloaded-)
-* [`addListener('appReady', )`](#addlistenerappready-)
-* [`isAutoUpdateAvailable()`](#isautoupdateavailable)
-* [`getNextBundle()`](#getnextbundle)
-* [인터페이스](#interfaces)
-* [타입 별칭](#type-aliases)
-
-</docgen-index>
-
 # 메서드
-
-<docgen-api>
-<!--소스 파일 JSDoc 주석을 업데이트하고 docgen을 다시 실행하여 아래 문서를 업데이트하세요-->
 
 ## notifyAppReady()
 
@@ -178,13 +130,11 @@ export default config;
 notifyAppReady() => Promise<AppReadyResult>
 ```
 
-현재 번들이 작동 중임을 Capacitor Updater에 알림(모든 앱 실행 시 이 메서드가 호출되지 않으면 롤백이 발생함)
-기본적으로 이 메서드는 앱 실행 후 처음 10초 안에 호출되어야 하며, 그렇지 않으면 롤백이 발생합니다
-{@link appReadyTimeout}로 이 동작을 변경하세요
+현재 번들이 제대로 작동하고 있다는 것을 Capacitor Updater에 알립니다 (이 메서드가 모든 앱 실행 시 호출되지 않으면 롤백이 발생합니다)
+기본적으로 이 메서드는 앱 실행 후 처음 10초 내에 호출되어야 하며, 그렇지 않으면 롤백이 발생합니다
+이 동작은 {@link appReadyTimeout}으로 변경할 수 있습니다
 
-**반환값:** <code>Promise&lt;<a href="#appreadyresult">AppReadyResult</a>&gt;</code>
-
---------------------
+**반환:** <code>Promise&lt;<a href="#appreadyresult">AppReadyResult</a>&gt;</code>
 
 ## setUpdateUrl()
 
@@ -192,15 +142,13 @@ notifyAppReady() => Promise<AppReadyResult>
 setUpdateUrl(options: UpdateUrl) => Promise<void>
 ```
 
-앱의 updateUrl을 설정하며, 이는 업데이트 확인에 사용됩니다
+앱의 업데이트 URL을 설정합니다. 이는 업데이트를 확인하는 데 사용됩니다
 
-| 파라미터 | 타입 | 설명 |
-| -------- | ---- | ---- |
-| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> | 업데이트 확인에 사용할 URL을 포함 |
+| 매개변수       | 타입                                            | 설명                                      |
+| ------------- | ----------------------------------------------- | ----------------------------------------- |
+| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> | 업데이트 확인에 사용할 URL을 포함합니다 |
 
-**Since:** 540
-
---------------------
+**버전:** 540부터
 
 ## setStatsUrl()
 
@@ -208,15 +156,13 @@ setUpdateUrl(options: UpdateUrl) => Promise<void>
 setStatsUrl(options: StatsUrl) => Promise<void>
 ```
 
-앱의 statsUrl을 설정하며, 이는 통계 전송에 사용됩니다. 빈 문자열을 전달하면 통계 수집이 비활성화됩니다
+앱의 통계 URL을 설정합니다. 이는 통계를 전송하는 데 사용됩니다. 빈 문자열을 전달하면 통계 수집이 비활성화됩니다
 
-| 파라미터 | 타입 | 설명 |
-| -------- | ---- | ---- |
-| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | 통계 전송에 사용할 URL을 포함 |
+| 매개변수       | 타입                                          | 설명                                    |
+| ------------- | --------------------------------------------- | --------------------------------------- |
+| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | 통계 전송에 사용할 URL을 포함합니다 |
 
-**Since:** 540
-
---------------------
+**버전:** 540부터
 
 ## setChannelUrl()
 
@@ -224,15 +170,13 @@ setStatsUrl(options: StatsUrl) => Promise<void>
 setChannelUrl(options: ChannelUrl) => Promise<void>
 ```
 
-앱의 channelUrl을 설정하며, 이는 채널 설정에 사용됩니다
+앱의 채널 URL을 설정합니다. 이는 채널을 설정하는 데 사용됩니다
 
-| 파라미터 | 타입 | 설명 |
-| -------- | ---- | ---- |
-| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> | 채널 설정에 사용할 URL을 포함 |
+| 매개변수       | 타입                                              | 설명                                     |
+| ------------- | ------------------------------------------------- | ---------------------------------------- |
+| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> | 채널 설정에 사용할 URL을 포함합니다 |
 
-**Since:** 540
-
---------------------
+**버전:** 540부터
 
 ## download()
 
@@ -240,15 +184,13 @@ setChannelUrl(options: ChannelUrl) => Promise<void>
 download(options: DownloadOptions) => Promise<BundleInfo>
 ```
 
-제공된 URL에서 새 번들을 다운로드합니다. 내부에 파일이 있는 ZIP 파일이거나 모든 파일이 있는 고유 ID가 있는 ZIP 파일이어야 합니다
+제공된 URL에서 새 번들을 다운로드합니다. 이는 내부에 파일이 있는 zip 파일이거나 모든 파일이 포함된 고유 ID가 있는 zip 파일이어야 합니다
 
-| 파라미터 | 타입 | 설명 |
-| -------- | ---- | ---- |
+| 매개변수       | 타입                                                        | 설명                                                                                  |
+| ------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#downloadoptions">DownloadOptions</a></code> | 새 번들 zip을 다운로드하기 위한 {@link <a href="#downloadoptions">DownloadOptions</a>} |
 
-**반환값:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
-
---------------------
+**반환:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
 
 ## next()
 
@@ -256,11 +198,11 @@ download(options: DownloadOptions) => Promise<BundleInfo>
 next(options: BundleId) => Promise<BundleInfo>
 ```
 
-앱이 리로드될 때 사용할 다음 번들을 설정| 매개변수 | 유형 | 설명 |
+앱이 리로드될 때 사용할 다음 번들을 설정합니다| Param         | Type                                          | Description                                                                                                   |
 | ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 다음 앱 실행 시 설정할 다음 번들의 ID가 포함됩니다 {@link <a href="#bundleinfo">BundleInfoid</a>} |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 다음 앱 실행 시 설정할 다음 번들의 ID를 포함합니다 {@link <a href="#bundleinfo">BundleInfoid</a>} |
 
-**반환값:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
 
 --------------------
 
@@ -270,11 +212,11 @@ next(options: BundleId) => Promise<BundleInfo>
 set(options: BundleId) => Promise<void>
 ```
 
-현재 번들을 설정하고 즉시 앱을 다시 로드합니다
+현재 번들을 설정하고 즉시 앱을 리로드합니다
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                          | Description                                                                                       |
 | ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 현재로 설정할 새 번들 ID가 포함된 {@link <a href="#bundleid">BundleId</a>} 객체 |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 현재 설정할 새 번들 ID를 포함하는 {@link <a href="#bundleid">BundleId</a>} 객체 |
 
 --------------------
 
@@ -284,11 +226,11 @@ set(options: BundleId) => Promise<void>
 delete(options: BundleId) => Promise<void>
 ```
 
-네이티브 앱 스토리지에서 지정된 번들을 삭제합니다. 저장된 번들 ID를 가져오려면 {@link list}를 사용하세요
+네이티브 앱 저장소에서 지정된 번들을 삭제합니다. {@link list}와 함께 저장된 번들 ID를 가져오는 데 사용하세요.
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                          | Description                                                                                                                                   |
 | ------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 삭제할 번들의 ID가 포함된 {@link <a href="#bundleid">BundleId</a>} 객체 (참고: 이는 버전 이름이 아닌 번들 ID입니다) |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | 삭제할 번들의 ID를 포함하는 {@link <a href="#bundleid">BundleId</a>} 객체 (참고: 이것은 버전 이름이 아닌 번들 ID입니다) |
 
 --------------------
 
@@ -300,11 +242,11 @@ list(options?: ListOptions | undefined) => Promise<BundleListResult>
 
 앱에 로컬로 다운로드된 모든 번들을 가져옵니다
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                                | Description                                                            |
 | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
-| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | 번들 나열을 위한 {@link <a href="#listoptions">ListOptions</a>} |
+| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | 번들을 나열하기 위한 {@link <a href="#listoptions">ListOptions</a>} |
 
-**반환값:** <code>Promise&lt;<a href="#bundlelistresult">BundleListResult</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#bundlelistresult">BundleListResult</a>&gt;</code>
 
 --------------------
 
@@ -314,11 +256,11 @@ list(options?: ListOptions | undefined) => Promise<BundleListResult>
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-앱을 '기본 제공' 번들(Apple App Store / Google Play Store로 전송된 번들) 또는 마지막으로 성공적으로 로드된 번들로 재설정합니다
+앱을 `builtin` 번들(Apple App Store / Google Play Store에 전송된 것) 또는 마지막으로 성공적으로 로드된 번들로 리셋합니다
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                                  | Description                                                                                                                                                                      |
 | ------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | {@link <a href="#resetoptions">ResetOptionstoLastSuccessful</a>}를 포함하며, `true`는 기본 제공 번들로 재설정하고 `false`는 마지막으로 성공적으로 로드된 번들로 재설정합니다 |
+| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | {@link <a href="#resetoptions">ResetOptionstoLastSuccessful</a>}을 포함하며, `true`는 기본 제공 번들로 리셋하고 `false`는 마지막으로 성공적으로 로드된 번들로 리셋합니다 |
 
 --------------------
 
@@ -328,9 +270,9 @@ reset(options?: ResetOptions | undefined) => Promise<void>
 current() => Promise<CurrentBundleResult>
 ```
 
-현재 번들을 가져옵니다. 설정된 번들이 없으면 'builtin'을 반환합니다. currentNative는 기기에 설치된 원본 번들입니다
+현재 번들을 가져옵니다. 설정된 것이 없으면 `builtin`을 반환합니다. currentNative는 기기에 설치된 원본 번들입니다
 
-**반환값:** <code>Promise&lt;<a href="#currentbundleresult">CurrentBundleResult</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#currentbundleresult">CurrentBundleResult</a>&gt;</code>
 
 --------------------
 
@@ -340,7 +282,7 @@ current() => Promise<CurrentBundleResult>
 reload() => Promise<void>
 ```
 
-뷰를 다시 로드합니다
+뷰를 리로드합니다
 
 --------------------
 
@@ -350,19 +292,19 @@ reload() => Promise<void>
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-플러그인이 업데이트를 지연시키는 데 사용할 {@link <a href="#delaycondition">DelayCondition</a>} 배열을 설정합니다
-모든 조건이 충족되면 업데이트 프로세스가 다시 시작되어 평소와 같이 앱을 백그라운드로 전환하거나 종료한 후에 업데이트가 설치됩니다
-'date' 유형의 경우 값은 iso8601 날짜 문자열이어야 합니다
-'background' 유형의 경우 값은 밀리초 단위의 숫자여야 합니다
-'nativeVersion' 유형의 경우 값은 버전 번호여야 합니다
-'kill' 유형의 경우 값은 사용되지 않습니다
-kill 옵션은 다른 옵션과 달리 다음 백그라운드 전환이 아닌 첫 번째 종료 후에 업데이트를 트리거하는 일관되지 않은 동작을 보입니다. 이는 향후 주요 릴리스에서 수정될 예정입니다
+플러그인이 업데이트를 지연시키는 데 사용할 조건이 포함된 {@link <a href="#delaycondition">DelayCondition</a>} 배열을 설정합니다
+모든 조건이 충족되면 업데이트 프로세스가 다시 평소대로 시작되므로 앱을 백그라운드로 전환하거나 종료한 후에 업데이트가 설치됩니다
+`date` 종류의 경우 값은 iso8601 날짜 문자열이어야 합니다
+`background` 종류의 경우 값은 밀리초 단위의 숫자여야 합니다
+`nativeVersion` 종류의 경우 값은 버전 번호여야 합니다
+`kill` 종류의 경우 값이 사용되지 않습니다
+이 함수는 kill 옵션이 다른 옵션처럼 다음 백그라운드 후가 아닌 첫 번째 종료 후에 업데이트를 트리거하는 일관되지 않은 동작을 보입니다. 이는 향후 주요 릴리스에서 수정될 예정입니다
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                                                  | Description                                                                                                |
 | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | 설정할 조건 배열이 포함된 {@link <a href="#multidelayconditions">MultiDelayConditions</a>} |
+| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | 설정할 조건 배열을 포함하는 {@link <a href="#multidelayconditions">MultiDelayConditions</a>} |
 
-**버전:** 430
+**Since:** 430
 
 --------------------
 
@@ -374,7 +316,7 @@ cancelDelay() => Promise<void>
 
 업데이트를 즉시 처리하기 위해 {@link <a href="#delaycondition">DelayCondition</a>}을 취소합니다
 
-**버전:** 400
+**Since:** 400
 
 --------------------
 
@@ -386,13 +328,13 @@ getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 
 업데이트 URL에서 사용 가능한 최신 번들을 가져옵니다
 
-| 매개변수 | 유형 |
+| Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#getlatestoptions">GetLatestOptions</a></code> |
 
-**반환값:** <code>Promise&lt;<a href="#latestversion">LatestVersion</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#latestversion">LatestVersion</a>&gt;</code>
 
-**버전:** 400
+**Since:** 400
 
 --------------------
 
@@ -402,18 +344,18 @@ getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-이 기기의 채널을 설정합니다. 이 작업이 동작하려면 채널이 자체 할당을 허용해야 합니다
-{@link PluginsConfig}에서 `autoUpdate`가 활성화되어 있을 때 부팅 시 채널을 설정하는 데 이 메서드를 사용하지 마세요
-이 메서드는 앱이 준비된 후 채널을 설정하는 데 사용됩니다
+이 기기의 채널을 설정합니다. 이 작업이 작동하려면 채널이 자체 할당을 허용해야 합니다
+`autoUpdate`가 {@link PluginsConfig}에서 활성화된 경우 부팅 시 채널을 설정하는 데 이 메서드를 사용하지 마세요
+이 메서드는 앱이 준비된 후에 채널을 설정하는 데 사용됩니다
 이 메서드는 기기 ID를 채널에 연결하는 요청을 Capgo 백엔드로 보냅니다. Capgo는 채널 설정에 따라 수락하거나 거부할 수 있습니다
 
-| 매개변수 | 유형 | 설명 |
+| Param         | Type                                                            | Description                                                                      |
 | ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | 설정할 {@link <a href="#setchanneloptions">SetChannelOptions</a>} 채널입니다 |
+| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | 설정할 채널인 {@link <a href="#setchanneloptions">SetChannelOptions</a>} |
 
-**반환값:** <code>Promise&lt;<a href="#channelres">ChannelRes</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#channelres">ChannelRes</a>&gt;</code>
 
-**버전:** 470
+**Since:** 470
 
 --------------------
 
@@ -423,9 +365,9 @@ setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-이 기기의 채널을 해제합니다기기가 기본 채널로 돌아갑니다
+이 기기의 채널 설정을 해제합니다디바이스가 기본 채널로 돌아갑니다
 
-| Param         | Type                                                                |
+| Param | Type |
 | ------------- | ------------------------------------------------------------------- |
 | **`options`** | <code><a href="#unsetchanneloptions">UnsetChannelOptions</a></code> |
 
@@ -433,14 +375,13 @@ unsetChannel(options: UnsetChannelOptions) => Promise<void>
 
 --------------------
 
-
 ## getChannel()
 
 ```typescript
 getChannel() => Promise<GetChannelRes>
 ```
 
-이 기기의 채널 가져오기
+이 디바이스의 채널을 가져옵니다
 
 **Returns:** <code>Promise&lt;<a href="#getchannelres">GetChannelRes</a>&gt;</code>
 
@@ -448,23 +389,21 @@ getChannel() => Promise<GetChannelRes>
 
 --------------------
 
-
 ## setCustomId()
 
 ```typescript
 setCustomId(options: SetCustomIdOptions) => Promise<void>
 ```
 
-이 기기에 대한 커스텀 ID 설정
+이 디바이스에 대한 커스텀 ID를 설정합니다
 
-| Param         | Type                                                              | Description                                                                         |
+| Param | Type | Description |
 | ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | 는 {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} 설정할 customId입니다 |
+| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} 설정할 customId입니다 |
 
 **Since:** 490
 
 --------------------
-
 
 ## getBuiltinVersion()
 
@@ -472,7 +411,7 @@ setCustomId(options: SetCustomIdOptions) => Promise<void>
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-네이티브 앱 버전 또는 config에 설정된 내장 버전 가져오기
+네이티브 앱 버전 또는 config에 설정된 빌트인 버전을 가져옵니다
 
 **Returns:** <code>Promise&lt;<a href="#builtinversion">BuiltinVersion</a>&gt;</code>
 
@@ -480,19 +419,17 @@ getBuiltinVersion() => Promise<BuiltinVersion>
 
 --------------------
 
-
 ## getDeviceId()
 
 ```typescript
 getDeviceId() => Promise<DeviceId>
 ```
 
-기기를 식별하는데 사용되는 고유 ID 가져오기 (자동 업데이트 서버로 전송됨)
+디바이스를 식별하는데 사용되는 고유 ID를 가져옵니다(자동 업데이트 서버로 전송됨)
 
 **Returns:** <code>Promise&lt;<a href="#deviceid">DeviceId</a>&gt;</code>
 
 --------------------
-
 
 ## getPluginVersion()
 
@@ -500,12 +437,11 @@ getDeviceId() => Promise<DeviceId>
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-네이티브 Capacitor Updater 플러그인 버전 가져오기 (자동 업데이트 서버로 전송됨)
+네이티브 Capacitor Updater 플러그인 버전을 가져옵니다(자동 업데이트 서버로 전송됨)
 
 **Returns:** <code>Promise&lt;<a href="#pluginversion">PluginVersion</a>&gt;</code>
 
 --------------------
-
 
 ## isAutoUpdateEnabled()
 
@@ -513,12 +449,11 @@ getPluginVersion() => Promise<PluginVersion>
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-자동 업데이트 설정 상태 가져오기
+자동 업데이트 설정 상태를 가져옵니다
 
 **Returns:** <code>Promise&lt;<a href="#autoupdateenabled">AutoUpdateEnabled</a>&gt;</code>
 
 --------------------
-
 
 ## removeAllListeners()
 
@@ -526,12 +461,11 @@ isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 removeAllListeners() => Promise<void>
 ```
 
-이 플러그인의 모든 리스너 제거
+이 플러그인의 모든 리스너를 제거합니다
 
 **Since:** 100
 
 --------------------
-
 
 ## addListener('download', )
 
@@ -539,11 +473,11 @@ removeAllListeners() => Promise<void>
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-앱에서 번들 다운로드 이벤트 수신 - 다운로드가 시작될 때, 다운로드 중일 때, 완료되었을 때 한 번 실행됨
+앱에서 번들 다운로드 이벤트를 수신합니다. 다운로드가 시작되고, 다운로드 중이며, 완료되었을 때 발생합니다
 
-| Param              | Type                                                                        |
+| Param | Type | 
 | ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'download'</code>                                                     |
+| **`eventName`** | <code>'download'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#downloadevent">DownloadEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -552,18 +486,17 @@ addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void)
 
 --------------------
 
-
 ## addListener('noNeedUpdate', )
 
 ```typescript
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-업데이트가 필요없는 이벤트 수신, 앱이 실행될 때마다 강제로 체크하려는 경우 유용함
+업데이트가 필요 없음 이벤트를 수신합니다. 앱이 실행될 때마다 강제로 확인하고 싶을 때 유용합니다
 
-| Param              | Type                                                                    |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------- |
-| **`eventName`**    | <code>'noNeedUpdate'</code>                                             |
+| **`eventName`** | <code>'noNeedUpdate'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#noneedevent">NoNeedEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -572,18 +505,17 @@ addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => voi
 
 --------------------
 
-
 ## addListener('updateAvailable', )
 
 ```typescript
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-업데이트 가능 이벤트 수신, 앱이 실행될 때마다 강제로 체크하려는 경우 유용함
+사용 가능한 업데이트 이벤트를 수신합니다. 앱이 실행될 때마다 강제로 확인하고 싶을 때 유용합니다
 
-| Param              | Type                                                                                      |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateAvailable'</code>                                                            |
+| **`eventName`** | <code>'updateAvailable'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#updateavailableevent">UpdateAvailableEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -592,18 +524,17 @@ addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableE
 
 --------------------
 
-
 ## addListener('downloadComplete', )
 
 ```typescript
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-다운로드 완료 이벤트 수신
+다운로드 완료 이벤트를 수신합니다
 
-| Param              | Type                                                                                        |
+| Param | Type |
 | ------------------ | ------------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadComplete'</code>                                                             |
+| **`eventName`** | <code>'downloadComplete'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -612,18 +543,17 @@ addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadComplet
 
 --------------------
 
-
 ## addListener('majorAvailable', )
 
 ```typescript
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-앱의 메이저 업데이트 이벤트 수신, disableAutoUpdateBreaking 설정에 의해 메이저 업데이트가 차단되었을 때 알려줌
+앱에서 메이저 업데이트 이벤트를 수신합니다. disableAutoUpdateBreaking 설정에 의해 메이저 업데이트가 차단된 경우를 알려줍니다
 
-| Param              | Type                                                                                    |
+| Param | Type |
 | ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'majorAvailable'</code>                                                           |
+| **`eventName`** | <code>'majorAvailable'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#majoravailableevent">MajorAvailableEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -632,18 +562,17 @@ addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEve
 
 --------------------
 
-
 ## addListener('updateFailed', )
 
 ```typescript
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-앱의 업데이트 실패 이벤트 수신, 다음 앱 시작 시 업데이트 설치가 실패했을 때 알려줌
+업데이트 실패 이벤트를 수신합니다. 다음 앱 시작 시 업데이트 설치가 실패했을 때를 알려줍니다
 
-| Param              | Type                                                                                |
+| Param | Type |
 | ------------------ | ----------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateFailed'</code>                                                         |
+| **`eventName`** | <code>'updateFailed'</code> |
 | **`listenerFunc`** | <code>(state: <a href="#updatefailedevent">UpdateFailedEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -652,16 +581,15 @@ addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) 
 
 --------------------
 
-
 ## addListener('downloadFailed',```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
 앱에서 다운로드 실패 이벤트를 수신하여 번들 다운로드가 실패했을 때 알려줍니다
 
-| Param | Type | 
-|-------|------|
-| **`eventName`** | <code>'downloadFailed'</code> |
+| Param              | Type                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **`eventName`**    | <code>'downloadFailed'</code>                                           |
 | **`listenerFunc`** | <code>(state: <a href="#downloadfailedevent">DownloadFailedEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -676,11 +604,11 @@ addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEve
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-앱에서 리로드 이벤트를 수신하여 리로드가 발생했을 때 알려줍니다
+앱의 리로드 이벤트를 수신하여 리로드가 발생했을 때 알려줍니다
 
-| Param | Type |
-|-------|------|
-| **`eventName`** | <code>'appReloaded'</code> |
+| Param              | Type                       |
+| ------------------ | -------------------------- |
+| **`eventName`**    | <code>'appReloaded'</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -695,11 +623,11 @@ addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<Plugi
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-앱에서 앱 준비 이벤트를 수신하여 앱이 사용 가능한 상태가 되었을 때 알려줍니다
+앱의 준비 완료 이벤트를 수신하여 앱을 사용할 준비가 되었을 때 알려줍니다
 
-| Param | Type |
-|-------|------|
-| **`eventName`** | <code>'appReady'</code> |
+| Param              | Type                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **`eventName`**    | <code>'appReady'</code>                                                 |
 | **`listenerFunc`** | <code>(state: <a href="#appreadyevent">AppReadyEvent</a>) =&gt; void</code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
@@ -714,7 +642,7 @@ addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void)
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-자동 업데이트가 가능한지 확인합니다 (serverUrl에 의해 비활성화되지 않음)
+자동 업데이트가 사용 가능한지 확인합니다 (serverUrl에 의해 비활성화되지 않음)
 
 **Returns:** <code>Promise&lt;<a href="#autoupdateavailable">AutoUpdateAvailable</a>&gt;</code>
 
@@ -726,7 +654,7 @@ isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 getNextBundle() => Promise<BundleInfo | null>
 ```
 
-앱이 다시 로드될 때 사용될 다음 번들을 가져옵니다
+앱이 리로드될 때 사용될 다음 번들을 가져옵니다 
 다음 번들이 설정되지 않은 경우 null을 반환합니다
 
 **Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a> | null&gt;</code>
@@ -740,110 +668,109 @@ getNextBundle() => Promise<BundleInfo | null>
 
 ### AppReadyResult
 
-| Prop | Type |
-|------|------|
+| Prop         | Type                                              |
+| ------------ | ------------------------------------------------- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
 
 
 ### BundleInfo
 
-| Prop | Type |
-|------|------|
-| **`id`** | <code>string</code> |
-| **`version`** | <code>string</code> |
-| **`downloaded`** | <code>string</code> |
-| **`checksum`** | <code>string</code> |
-| **`status`** | <code><a href="#bundlestatus">BundleStatus</a></code> |
+| Prop             | Type                                                  |
+| ---------------- | ----------------------------------------------------- |
+| **`id`**         | <code>string</code>                                   |
+| **`version`**    | <code>string</code>                                   |
+| **`downloaded`** | <code>string</code>                                   |
+| **`checksum`**   | <code>string</code>                                   |
+| **`status`**     | <code><a href="#bundlestatus">BundleStatus</a></code> |
 
 
-### UpdateUrl
+### UpdateUrl  
 
-| Prop | Type |
-|------|------|
+| Prop      | Type                |
+| --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### StatsUrl 
+### StatsUrl
 
-| Prop | Type |
-|------|------|
+| Prop      | Type                |
+| --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
 ### ChannelUrl
 
-| Prop | Type |
-|------|------|
+| Prop      | Type                |
+| --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
 ### DownloadOptions
 
-| Prop | Type | Description | Default | Since |
-|------|------|-------------|---------|-------|
-| **`url`** | <code>string</code> | 다운로드할 번들 zip 파일의 URL(distzip등) (Amazon S3, GitHub 태그, 번들을 호스팅한 다른 위치 등의 URL일 수 있음) | | |
-| **`version`** | <code>string</code> | 이 번들/버전의 버전 코드/이름 | | |
-| **`sessionKey`** | <code>string</code> | 업데이트를 위한 세션 키 | <code>undefined</code> | 400 |
-| **`checksum`** | <code>string</code> | 업데이트의 체크섬 | <code>undefined</code> | 400 |
+| Prop             | Type                | Description                                                                                                                           | Default                | Since |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
+| **`url`**        | <code>string</code> | 다운로드할 번들 zip 파일(예: distzip)의 URL(Amazon S3, GitHub 태그, 번들을 호스팅한 다른 위치 등의 URL일 수 있습니다) |                        |       |
+| **`version`**    | <code>string</code> | 이 번들/버전의 버전 코드/이름                                                                                                          |                        |       |
+| **`sessionKey`** | <code>string</code> | 업데이트를 위한 세션 키                                                                                                               | <code>undefined</code> | 400   |
+| **`checksum`**   | <code>string</code> | 업데이트를 위한 체크섬                                                                                                                | <code>undefined</code> | 400   |
 
 
 ### BundleId
 
-| Prop | Type |
-|------|------|
+| Prop     | Type                |
+| -------- | ------------------- |
 | **`id`** | <code>string</code> |
 
 
 ### BundleListResult
 
-| Prop | Type |
-|------|------|
+| Prop          | Type                      |
+| ------------- | ------------------------- |
 | **`bundles`** | <code>BundleInfo[]</code> |
 
 
 ### ListOptions
 
-| Prop | Type | Description | Default | Since |
-|------|------|-------------|---------|-------|
-| **`raw`** | <code>boolean</code> | raw 번들 목록 또는 매니페스트를 반환할지 여부입니다. true인 경우 디스크의 파일 대신 내부 데이터베이스를 읽으려고 시도합니다 | <code>false</code> | 6140 |
+| Prop      | Type                 | Description                                                                                                           | Default            | Since  |
+| --------- | -------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------ | ------ |
+| **`raw`** | <code>boolean</code> | 원시 번들 목록 또는 매니페스트를 반환할지 여부. true인 경우 디스크의 파일 대신 내부 데이터베이스를 읽으려고 시도합니다 | <code>false</code> | 6140   |
 
 
 ### ResetOptions
 
-| Prop | Type |
-|------|------|
+| Prop                   | Type                 |
+| ---------------------- | -------------------- |
 | **`toLastSuccessful`** | <code>boolean</code> |
 
 
 ### CurrentBundleResult
 
-| Prop | Type |
-|------|------|
+| Prop         | Type                                              |
+| ------------ | ------------------------------------------------- |
 | **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
-| **`native`** | <code>string</code> |
+| **`native`** | <code>string</code>                               |
 
 
 ### MultiDelayConditions
 
-| Prop | Type |
-|------|------|
+| Prop                  | Type                          |
+| --------------------- | ----------------------------- |
 | **`delayConditions`** | <code>DelayCondition[]</code> |
 
 
 ### DelayCondition
 
-| Prop | Type | Description |
-|------|------|-------------|
-| **`kind`** | <code><a href="#delayuntilnext">DelayUntilNext</a></code> | setMultiDelay에서 지연 조건 설정 |
-| **`value`** | <code>string</code> | |
+| Prop        | Type                                                      | Description                    |
+| ----------- | --------------------------------------------------------- | ------------------------------ |
+| **`kind`**  | <code><a href="#delayuntilnext">DelayUntilNext</a></code> | setMultiDelay에서 지연 조건 설정 |
+| **`value`** | <code>string</code>                                       |                                |
 
 
 ### LatestVersion
 
-| Prop | Type | Description | Since |
-|------|------|-------------|-------|
-| **`version`** | <code>string</code> | getLatest 메서드의 결과 | 400 |0 |
-| **`checksum`**   | <code>string</code>          |                            | 6     |
+| Prop             | Type                 | Description                | Since |
+| ---------------- | -------------------- | -------------------------- | ----- |
+| **`version`**    | <code>string</code>  | getLatest 메서드의 결과      | 40| **`checksum`**   | <code>string</code>          |                            | 6     |
 | **`major`**      | <code>boolean</code>         |                            |       |
 | **`message`**    | <code>string</code>          |                            |       |
 | **`sessionKey`** | <code>string</code>          |                            |       |
@@ -866,7 +793,7 @@ getNextBundle() => Promise<BundleInfo | null>
 
 | Prop          | Type                | Description                                                                                     | Default                | Since |
 | ------------- | ------------------- | ----------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`channel`** | <code>string</code> | 최신 버전을 가져올 채널입니다. 이 기능을 사용하려면 채널에서 'self_assign'을 허용해야 합니다 | <code>undefined</code> | 680 |
+| **`channel`** | <code>string</code> | 최신 버전을 받을 채널입니다. 이 작업을 위해서는 채널이 'self_assign'을 허용해야 합니다 | <code>undefined</code> | 680 |
 
 
 ### ChannelRes
@@ -972,35 +899,35 @@ getNextBundle() => Promise<BundleInfo | null>
 
 | Prop         | Type                                              | Description                          | Since |
 | ------------ | ------------------------------------------------- | ------------------------------------ | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 새 업데이트가 사용 가능할 때 발생 | 400 |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 새로운 업데이트가 가능할 때 발생 | 400 |
 
 
 ### MajorAvailableEvent
 
 | Prop          | Type                | Description                                | Since |
 | ------------- | ------------------- | ------------------------------------------ | ----- |
-| **`version`** | <code>string</code> | 새로운 메이저 번들이 사용 가능할 때 발생 | 400 |
+| **`version`** | <code>string</code> | 새로운 메이저 번들이 가능할 때 발생 | 400 |
 
 
 ### UpdateFailedEvent
 
 | Prop         | Type                                              | Description                           | Since |
 | ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 업데이트 설치 실패시 발생 | 400 |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 업데이트 설치에 실패했을 때 발생 | 400 |
 
 
 ### DownloadFailedEvent
 
 | Prop          | Type                | Description                | Since |
 | ------------- | ------------------- | -------------------------- | ----- |
-| **`version`** | <code>string</code> | 다운로드 실패시 발생 | 400 |
+| **`version`** | <code>string</code> | 다운로드 실패 시 발생 | 400 |
 
 
 ### AppReadyEvent
 
 | Prop         | Type                                              | Description                           | Since |
 | ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 앱이 사용 준비가 완료되었을 때 발생 | 520 |
+| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | 앱이 사용 준비가 되었을 때 발생 | 520 |
 | **`status`** | <code>string</code>                               |                                       |       |
 
 

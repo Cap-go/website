@@ -1,21 +1,20 @@
 ---
-title: Aggiornamento ibrido
-description: Auto-Update-Methoden
+title: Mise à jour hybride
+description: Update-Methoden für automatische Updates
 sidebar:
   order: 3
 locale: de
 ---
 
-Beim Pushen von Updates an Ihre Benutzer haben Sie mehrere Möglichkeiten, den Update-Zyklus nach Ihren Wünschen zu gestalten, bevor Sie sie anwenden
+Beim Pushen von Updates an Ihre Benutzer haben Sie mehrere Möglichkeiten, den Update-Zyklus nach Ihren Vorstellungen zu handhaben, bevor Sie sie anwenden
 
 - Stilles Update
-- Auf ```updateAvailable```-Event hören
-- Ein Modal-Fenster anzeigen oder Updates verzögern
-
+- Auf ```updateAvailable``` Event hören
+- Modalfenster anzeigen oder Updates verzögern
 
 ## Stilles Update
 
-Sie können einen Update-Zyklus bei jedem App-Start erzwingen, indem Sie `directUpdate` auf `true` setzen.
+Sie können einen Update-Zyklus bei jedem App-Start erzwingen, indem Sie `directUpdate` auf `true` setzen. 
 Dies löst den Update-Zyklus wie gewohnt ohne Benutzerinteraktion aus
 
 ```tsx
@@ -34,7 +33,7 @@ Dies löst den Update-Zyklus wie gewohnt ohne Benutzerinteraktion aus
 }
 ```
 
-In Ihrer App sollten Sie dann den Splash-Screen ausblenden, wenn Sie das Event `appReady` empfangen:
+In Ihrer App sollten Sie dann den Splash Screen ausblenden, wenn Sie das Event `appReady` empfangen:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -74,7 +73,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Modal Update
 
-Sie können den Benutzer auch entscheiden lassen, indem Sie einen Dialog anzeigen:
+Sie können den Benutzer auch entscheiden lassen, indem Sie einen Dialog anzeigen, der nach dem Update fragt:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

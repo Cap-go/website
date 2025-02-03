@@ -3,38 +3,40 @@ title: CI/CD 통합
 locale: ko
 ---
 
-CI/CD 파이프라인에 Capgo를 통합하면 앱 업데이트 빌드 및 배포 프로세스를 완전히 자동화할 수 있습니다. Capgo CLI와 semantic-release를 활용하여 일관되고 안정적인 배포를 보장하고 신속한 반복을 가능하게 할 수 있습니다.
+import { Steps, Code } from '@astrojs/starlight/components';
 
-## CI/CD 통합의 이점
+CI/CD 파이프라인에 Capgo를 통합하면 앱 업데이트의 빌드 및 배포 프로세스를 완전히 자동화할 수 있습니다. Capgo CLI와 semantic-release를 활용하여 일관되고 안정적인 배포를 보장하고 빠른 반복을 가능하게 할 수 있습니다.
 
-- **자동화**: 더 이상 수동 단계나 사람의 실수가 없습니다. 전체 빌드, 테스트 및 배포 프로세스를 처음부터 끝까지 자동화할 수 있습니다.
+## CI/CD 통합의 장점
 
-- **일관성**: 모든 배포는 동일한 단계를 따르므로 예측 가능하고 반복 가능한 프로세스를 보장합니다. 여러 팀원이 코드에 기여할 때 특히 가치가 있습니다.
+- **자동화**: 더 이상 수동 단계나 인적 오류가 발생할 여지가 없습니다. 전체 빌드, 테스트 및 배포 프로세스를 처음부터 끝까지 자동화할 수 있습니다.
 
-- **더 빠른 반복**: 자동화된 배포를 통해 더 자주 자신감 있게 업데이트를 배포할 수 있습니다. 더 이상 수동 QA나 릴리스 승인을 기다릴 필요가 없습니다.
+- **일관성**: 모든 배포가 동일한 단계를 따르므로 예측 가능하고 반복 가능한 프로세스를 보장합니다. 여러 팀원이 코드를 기여할 때 특히 가치가 있습니다.
+
+- **빠른 반복**: 자동화된 배포를 통해 더 자주 그리고 자신감 있게 업데이트를 배포할 수 있습니다. 더 이상 수동 QA나 배포 승인을 기다릴 필요가 없습니다.
 
 ## Capgo CLI
 
-Capgo CLI는 CI/CD 워크플로우에 Capgo를 통합하는 핵심입니다. 새로운 번들 버전을 푸시하고, 채널을 관리하는 등의 명령을 제공합니다.
+Capgo CLI는 CI/CD 워크플로우에 Capgo를 통합하는 핵심입니다. 새로운 번들 버전 푸시, 채널 관리 등을 위한 명령어를 제공합니다.
 
-CI/CD 통합에서 가장 중요한 명령은 `upload`입니다:
+CI/CD 통합에서 가장 중요한 명령어는 `upload`입니다:
 
 ```shell
 npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
 ```
 
-이 명령은 현재 웹 빌드를 지정된 채널에 업로드합니다. 일반적으로 웹 빌드가 성공적으로 완료된 후 CI/CD 파이프라인의 마지막 단계로 실행됩니다.
+이 명령어는 현재 웹 빌드를 지정된 채널에 업로드합니다. 일반적으로 웹 빌드가 성공적으로 완료된 후 CI/CD 파이프라인의 마지막 단계로 실행됩니다.
 
 ## CI/CD 파이프라인에서 Capgo 설정하기
 
-사용하는 CI/CD 도구에 따라 정확한 단계는 다르지만, Capgo를 통합하는 일반적인 과정은 다음과 같습니다:
+사용하는 CI/CD 도구에 따라 정확한 단계는 다르지만, Capgo를 통합하는 일반적인 프로세스는 다음과 같습니다:
 
 <Steps>
-1. **API 키 생성**: Capgo 대시보드에 로그인하고 새 API 키를 생성합니다. 이 키는 CI/CD 환경에서 CLI를 인증하는 데 사용됩니다. 비밀로 유지하고 절대 저장소에 커밋하지 마세요!
+1. **API 키 생성**: Capgo 대시보드에 로그인하여 새 API 키를 생성합니다. 이 키는 CI/CD 환경에서 CLI를 인증하는 데 사용됩니다. 비밀로 유지하고 절대 저장소에 커밋하지 마세요!
 
-3. **`upload` 명령 구성**: CI/CD 구성에 적절한 인수를 사용하여 `upload` 명령을 실행하는 단계를 추가합니다: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n `Production`을 배포하려는 채널로 바꾸고, `${{ secrets.CAPGO_API_KEY }}`를 API 키가 저장된 환경 변수로 바꾸세요.
+3. **`upload` 명령어 구성**: CI/CD 구성에 적절한 인수와 함께 `upload` 명령어를 실행하는 단계를 추가합니다: <Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />\n `Production`을 배포하려는 채널로 바꾸고, `${{ secretsCAPGO_API_KEY }}`를 API 키를 보유한 환경 변수로 바꾸세요.
 
-4. **웹 빌드 후 `upload` 단계 추가**: `upload` 단계가 웹 빌드 완료 후에 오도록 하세요. 이렇게 하면 항상 최신 코드를 배포할 수 있습니다.\n GitHub Actions 구성 예시:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+4. **웹 빌드 후 `upload` 단계 추가**: `upload` 단계가 웹 빌드가 성공적으로 완료된 후에 오도록 하세요. 이렇게 하면 항상 최신 코드를 배포할 수 있습니다.\n  GitHub Actions용 구성 예시입니다:\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
 
 </Steps>
 
@@ -60,14 +62,14 @@ Semantic-release는 버전 관리를 자동화하고 릴리스 노트를 생성�
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextReleasechannel} --apikey=YOUR_API_KEY --partial"
       }
     ],
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json"],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "assets": ["CHANGELOGmd", "packagejson"],
+        "message": "chore(release): ${nextReleaseversion} [skip ci]\n\n${nextReleasenotes}"
       }
     ]
   ]
@@ -76,13 +78,13 @@ Semantic-release는 버전 관리를 자동화하고 릴리스 노트를 생성�
 
 이 구성은 다음을 수행합니다:
 
-1. Conventional Commits 규격을 따라 다음 버전 번호를 결정하기 위해 커밋 메시지를 분석합니다.
-2. 마지막 릴리스 이후의 커밋을 기반으로 릴리스 노트를 생성합니다.
-3. 새로운 릴리스 노트로 `CHANGELOG.md` 파일을 업데이트합니다.
-4. Capgo CLI `upload` 명령을 실행하고, 새 버전 번호를 전달하며 차등 업데이트를 위해 `--partial` 플래그를 사용합니다.
-5. 업데이트된 `CHANGELOG.md`, `package.json` 및 기타 변경된 파일을 저장소에 다시 커밋합니다.
+1. Conventional Commits 명세를 따라 커밋 메시지를 분석하여 다음 버전 번호를 결정합니다
+2. 마지막 릴리스 이후의 커밋을 기반으로 릴리스 노트를 생성합니다
+3. 새로운 릴리스 노트로 `CHANGELOGmd` 파일을 업데이트합니다
+4. Capgo CLI `upload` 명령어를 실행하며, 새 버전 번호를 전달하고 차등 업데이트를 위해 `--partial` 플래그를 사용합니다
+5. 업데이트된 `CHANGELOGmd`, `packagejson` 및 기타 변경된 파일을 저장소에 다시 커밋합니다
 
-Capgo에서 semantic-release를 사용하려면 CI/CD 구성에 `npx semantic-release`를 실행하는 단계를 추가하기만 하면 됩니다. 이 단계가 웹 빌드 후에, Capgo `upload` 단계 전에 오도록 하세요.
+Capgo에서 semantic-release를 사용하려면 CI/CD 구성에 `npx semantic-release`를 실행하는 단계를 추가하기만 하면 됩니다. 이 단계가 웹 빌드 이후, Capgo `upload` 단계 이전에 오도록 하세요.
 
 ## 문제 해결
 
@@ -90,20 +92,20 @@ Capgo CI/CD 통합에서 문제가 발생하면 다음 사항을 확인하세요
 
 - **API 키**: API 키가 유효하고 필요한 권한이 있는지 확인하세요. 환경 변수를 사용하는 경우 올바르게 설정되어 있는지 다시 확인하세요.
 
-- **CLI 버전**: Capgo CLI의 최신 버전을 사용하고 있는지 확인하세요. 이전 버전은 호환성 문제가 있거나 특정 기능이 없을 수 있습니다.
+- **CLI 버전**: 최신 버전의 Capgo CLI를 사용하고 있는지 확인하세요. 이전 버전은 호환성 문제가 있거나 특정 기능이 없을 수 있습니다.
 
-- **빌드 결과물**: 웹 빌드가 예상된 출력 파일을 생성하는지 확인하세요. Capgo CLI는 번들을 만들기 위해 유효한 웹 빌드가 필요합니다.
+- **빌드 아티팩트**: 웹 빌드가 예상된 출력 파일을 생성하고 있는지 확인하세요. Capgo CLI는 번들을 만들기 위해 유효한 웹 빌드가 필요합니다.
 
-- **네트워크 연결**: CI/CD 환경이 Capgo 서버에 대한 네트워크 접근 권한이 있는지 확인하세요. 방화벽이나 프록시 문제가 `upload` 명령을 방해할 수 있습니다.
+- **네트워크 연결**: CI/CD 환경이 Capgo 서버에 네트워크 액세스할 수 있는지 확인하세요. 방화벽이나 프록시 문제가 때때로 `upload` 명령어를 방해할 수 있습니다.
 
-여전히 문제가 있다면 Capgo 지원팀에 문의하세요. 특정 설정에 대한 문제 해결을 도와드릴 수 있습니다.
+여전히 문제가 있다면 Capgo 지원팀에 연락하세요. 특정 설정과 관련된 문제를 해결하는 데 도움을 줄 수 있습니다.
 
 ## 결론
 
-CI/CD 파이프라인에 Capgo를 통합하고 버전 관리에 semantic-release를 활용하면 개발 워크플로우를 크게 간소화할 수 있습니다. 배포와 버전 관리를 자동화함으로써 더 빠르고 자신감 있게 업데이트를 배포할 수 있습니다.
+CI/CD 파이프라인에 Capgo를 통합하고 버전 관리를 위해 semantic-release를 활용하면 개발 워크플로우를 크게 간소화할 수 있습니다. 배포와 버전 관리를 자동화함으로써 더 빠르고 자신감 있게 업데이트를 배포할 수 있습니다.
 
-Capgo CLI와 semantic-release는 완전히 자동화된 엔드-투-엔드 릴리스를 위한 강력한 조합을 제공합니다. 약간의 구성만으로 수동 릴리스 단계를 걱정하는 대신 훌륭한 기능을 구축하는 데 집중할 수 있는 강력하고 신뢰할 수 있는 배포 프로세스를 갖출 수 있습니다.
+Capgo CLI와 semantic-release는 완전히 자동화된 엔드투엔드 릴리스를 위한 강력한 조합을 제공합니다. 약간의 구성만으로 수동 릴리스 단계에 대해 걱정하는 대신 훌륭한 기능을 구축하는 데 집중할 수 있는 강력하고 신뢰할 수 있는 배포 프로세스를 가질 수 있습니다.
 
-Capgo CLI 명령과 옵션에 대한 자세한 내용은 [CLI 참조](/docs/cli/overview)를 확인하세요. 그리고 semantic-release 구성에 대한 더 자세한 내용은 [semantic-release 문서](https://github.com/semantic-release/semantic-release)를 참조하세요.
+Capgo CLI 명령어와 옵션에 대한 자세한 내용은 [CLI 참조](/docs/cli/overview)를 확인하세요. 그리고 semantic-release 구성에 대한 자세한 내용은 [semantic-release 문서](https://githubcom/semantic-release/semantic-release)를 참조하세요.
 
 즐거운 배포 되세요!

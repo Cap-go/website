@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-El comando `app` te permite administrar tus aplicaciones de Capgo
+El comando `app` te permite gestionar tus aplicaciones de Capgo
 
 ### add
 
@@ -14,16 +14,16 @@ El comando `app` te permite administrar tus aplicaciones de Capgo
 
 Agrega una nueva aplicación a tu cuenta de Capgo
 
-`[appId]` es el ID de tu aplicación en el formato `comexampleapp`. Consulta la [documentación de Capacitor](https://capacitorjscom/docs/cli/commands/init/) para más información
+`[appId]` es el ID de tu aplicación en el formato `com.example.app`. Consulta la [documentación de Capacitor](https://capacitorjs.com/docs/cli/commands/init/) para más información
 
-> 💡 Todas las opciones se obtendrán de tu `capacitorconfigjson` si no se proporcionan
+> 💡 Todas las opciones se obtendrán de tu `capacitor.config.json` si no se proporcionan
 
 Opciones:
 
 - `--icon [path]`: Ruta a un ícono personalizado para mostrar en la aplicación web de Capgo
 - `--name [name]`: Nombre personalizado para mostrar en la lista de aplicaciones
 - `--apikey [key]`: Clave API para vincular a tu cuenta
-- `--retention [days]`: Período de retención para paquetes de la aplicación en días (predeterminado: 0 = infinito)
+- `--retention [days]`: Período de retención para los paquetes de la aplicación en días (predeterminado: 0 = infinito)
 
 ### set
 
@@ -35,7 +35,7 @@ Opciones:
 
 - `--icon [path]`: Ruta a un ícono personalizado para mostrar en la aplicación web de Capgo
 - `--name [name]`: Nombre personalizado para mostrar en la lista de aplicaciones
-- `--retention [days]`: Período de retención para paquetes de la aplicación en días (predeterminado: 0 = infinito)
+- `--retention [days]`: Período de retención para los paquetes de la aplicación en días (predeterminado: 0 = infinito)
 - `--apikey [key]`: Clave API para vincular a tu cuenta
 
 ### list
@@ -76,9 +76,9 @@ Opciones:
 
 Edita la configuración de Capacitor para una aplicación
 
-`[path]` es la ruta al ajuste que deseas cambiar (por ejemplo, `appId` o `pluginsCapacitorUpdaterautoUpdate`)
+`[path]` es la ruta a la configuración que deseas cambiar (por ejemplo, `appId` o `plugins.CapacitorUpdater.autoUpdate`)
 
 Debes proporcionar ya sea `--string` o `--bool`:
 
-- `--string <value>`: Establece el ajuste a un valor de cadena
-- `--bool <true|false>`: Establece el ajuste a un valor booleano
+- `--string <value>`: Establece la configuración a un valor de cadena
+- `--bool <true|false>`: Establece la configuración a un valor booleano

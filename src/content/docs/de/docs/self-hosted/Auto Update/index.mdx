@@ -1,6 +1,6 @@
 ---
-title: Einführung - Automatische Aktualisierung
-description: Verwendung des Auto-Update-Plugins im Self-Hosting-Modus
+title: 자동 업데이트
+description: So verwenden Sie das Auto-Update-Plugin im selbst gehosteten Modus
 sidebar:
   order: 1
 locale: de
@@ -8,19 +8,19 @@ locale: de
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server ausführen können
+Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server betreiben können
 
-## Bevor Sie beginnen
+## Vor dem Start
 
-Wenn Sie diese Arbeit selbst nutzen, kann ich nur empfehlen, meine Arbeit über [this](https://githubcom/sponsors/riderx/) zu unterstützen
+Wenn Sie diese Arbeit für sich selbst nutzen, kann ich nur empfehlen, meine Arbeit über [diesen Link](https://githubcom/sponsors/riderx/) zu unterstützen
 
-Ich habe eine große Wette abgeschlossen, indem ich den wertvollen Code, den ich hier erstellt habe, als Open Source zur Verfügung stelle
+Ich habe eine große Wette abgeschlossen, indem ich den gesamten wertvollen Code, den ich hier entwickelt habe, als Open Source zur Verfügung stelle
 
 Ich hätte es für mich behalten und einen hohen Preis verlangen können
 
 Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
 
-Ebenso denke ich, dass es unsere Welt durch Öffnung statt Kampf und Verstecken besser machen würde
+Ebenso denke ich, dass es unsere Welt zu einem besseren Ort macht, wenn wir öffnen statt zu kämpfen und zu verstecken
 
 Aber um dies zu ermöglichen, müssen wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
@@ -47,11 +47,11 @@ Sie müssen das Plugin konfigurieren, um Ihre URL wie folgt zu verwenden:
 }
 ```
 
-> 🚧 Unter Android sind HTTP-Anfragen nicht erlaubt. Zu Testzwecken [erlauben Sie es](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 Unter Android sind HTTP-Anfragen standardmäßig nicht erlaubt. Zu Testzwecken können Sie dies [erlauben](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
 ### Update API
 
-Das Plugin führt bei jedem App-Start einen POST-Aufruf an Ihre API mit diesem Body durch:
+Das Plugin führt bei jedem App-Start einen POST-Aufruf an Ihre API mit folgendem Body durch:
 
 ```typescript
 interface AppInfos {
@@ -69,7 +69,7 @@ interface AppInfos {
 }
 ```
 
-Der Server-API sollte in JSON dem Capacitor-Updater-Plugin mit diesen Daten antworten, wenn ein Update erforderlich ist:
+Der Server sollte in JSON mit diesen Daten antworten, wenn ein Update erforderlich ist:
 
 ```json
 {
@@ -78,16 +78,15 @@ Der Server-API sollte in JSON dem Capacitor-Updater-Plugin mit diesen Daten antw
 }
 ```
 
-Bei Auto-Update sollte der Server die Versionsvergleichsarbeit durchführen und die richtige Version zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
+Bei Auto-Update sollte der Server die Versionsvergleiche durchführen und die richtige Version zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
 
 Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt und die Nachricht wird stattdessen in den Logs angezeigt
 
 Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein
 
-Die ZIP-Datei sollte `indexhtml` als Datei im Root-Verzeichnis haben oder nur einen Ordner im Root mit `indexhtml` darin
+Die ZIP-Datei sollte eine `indexhtml`-Datei im Stammverzeichnis haben oder nur einen Ordner im Stammverzeichnis mit `indexhtml` darin
 
-
-Sie können den Befehl der CLI verwenden, um Ihr Bundle zu zippen:
+Sie können den CLI-Befehl verwenden, um Ihr Bundle zu komprimieren:
 
 ```bash
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
@@ -100,14 +99,14 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 
 #### Ende-zu-Ende-Verschlüsselung
 
-Ab Version 4150 ermöglicht das Plugin das Senden verschlüsselter Updates
+Ab Version 4.15.0 ermöglicht das Plugin das Senden verschlüsselter Updates
 
 Sie können diese Funktion nutzen, indem Sie einen privaten Schlüssel erstellen ``npx @capgo/cli key create``
 
 Dann verschlüsseln Sie Ihre ZIP-Datei mit ``npx @capgo/cli encrypt [path/to/zip]``
 
 Der Befehl gibt Ihnen einen `ivSessionKey` aus, der mit Ihrer Update-Payload im Schlüssel `session_key` gesendet werden muss\
-Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` zur Entschlüsselung des Updates nutzen
+Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` verwenden, um das Update zu entschlüsseln
 
 Erfahren Sie mehr darüber hier:
 
@@ -118,11 +117,11 @@ Erfahren Sie mehr darüber hier:
 
 ### Statistik-API
 
-Ab Version 130 sendet das Update-System Statistiken!
+Ab Version 1.3.0 sendet das Update-System Statistiken!
 
 Standardmäßig werden alle Statistiken an unseren Server gesendet, um die Nutzung zu verstehen
 
-> 💡 Für Statistiken werden keine privaten Daten gesendet, nur zufällige UUID, Versions-Update, Version der nativen App, Plattform, Aktion und App-ID
+> 💡 Für Statistiken werden keine privaten Daten gesendet, nur zufällige UUID, Update-Version, native App-Version, Plattform, Aktion und App-ID
 
 Wenn Sie die Daten stattdessen an Ihren Server senden möchten, ändern Sie die Konfiguration wie folgt:
 
@@ -139,13 +138,13 @@ Wenn Sie die Daten stattdessen an Ihren Server senden möchten, ändern Sie die 
 }
 ```
 
-Was Ihr Server empfängt:
+Ihr Server wird folgendes empfangen:
 
 ```tsx
 interface AppInfosStats {
 	"action": "set", // kann set, delete, set_fail, reset, revert sein
-	// Dann sind es die gleichen Infos wie beim Update
-	"app_id": "*******", // App-Identifier im Store
+	// Dann sind es die gleichen Informationen wie beim Update
+	"app_id": "*******", // App-Kennung im Store
 	"device_id": "*******", // eindeutige ID pro App-Installation
 	"platform": "ios", // oder android
 	"custom_id": "user_1", // repräsentiert Ihren Benutzer
@@ -153,7 +152,7 @@ interface AppInfosStats {
         "version_build": "120", // Version des nativen Builds
         "version_code": "120", // Build-Nummer des nativen Builds
 	"version_os": "16", // OS-Version des Geräts
-        "plugin_version": "400"// um Ihre API bei verschiedenen Plugins unterschiedlich zu verhalten
+        "plugin_version": "400"// um Ihre API bei verschiedenen Plugins unterschiedlich reagieren zu lassen
         "is_emulator": false,
     	"is_prod": false,
 }
@@ -168,4 +167,4 @@ Sie können es auch komplett deaktivieren, mit einem leeren String. Bedenken Sie
 
 ### Channel API
 
-Noch zu dokumentieren
+Wird noch dokumentiert

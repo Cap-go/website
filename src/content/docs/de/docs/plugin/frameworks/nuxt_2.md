@@ -8,7 +8,7 @@ locale: de
 
 # Installation in Nuxt 2
 
-Erstellen Sie eine Plugin-Datei `capacitor-updaterjs` im `plugins` Verzeichnis
+Erstelle eine Plugin-Datei `capacitor-updaterjs` im `plugins` Verzeichnis
 
 ```js
 
@@ -23,4 +23,4 @@ export default ({ app }) => {
 }
 ```
 
-Dies lädt das Plugin auf der Client-Seite und informiert die App, dass sie bereit ist, Updates zu empfangen
+Dies lädt das Plugin auf der Client-Seite und benachrichtigt die App, dass sie bereit ist, Updates zu empfangen

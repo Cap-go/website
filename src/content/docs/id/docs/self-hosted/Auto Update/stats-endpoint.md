@@ -1,12 +1,12 @@
 ---
-title: Point de terminaison des statistiques
-description: Membuat Titik Akhir Statistik Self-hosted
+title: Titik akhir statistik
+description: Cara membuat endpoint statistik yang dihosting sendiri
 sidebar:
   order: 2
 locale: id
 ---
 
-Berikut contoh kode dalam JavaScript untuk menyimpan statistik plugin
+Berikut adalah contoh kode dalam JavaScript untuk menyimpan statistik plugin
 
 ```typescript
 interface AppInfos {
@@ -76,20 +76,20 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-Endpoint ini harus mengembalikan JSON:
+Endpoint ini seharusnya mengembalikan JSON:
 
 ```json
 { "status": "ok" }
 ```
 
-## Tindakan:
+## Aksi:
 
 * **delete**: ketika bundle dihapus secara lokal
-* **reset**: ketika aplikasi diatur ulang ke bundle bawaan
+* **reset**: ketika aplikasi mereset ke bundle bawaan
 * **set**: ketika aplikasi menetapkan bundle baru
 * **set_fail**: ketika aplikasi tidak dapat menemukan ID dari bundle yang ditetapkan
 * **update_fail**: dikirim setelah penundaan dan `notifyAppReady` tidak pernah dipanggil
 * **download_fail**: ketika unduhan tidak pernah selesai
-* **download_complete**: Ketika unduhan selesai
-* **download_xx**: Dikirim setiap 10% unduhan mis: download_20, download_70
-* **update_fail**: ketika bundle gagal melakukan `notifyAppReady` dalam jangka waktu yang ditentukan
+* **download_complete:** Ketika unduhan selesai
+* **download_xx:** Dikirim setiap 10% unduhan contoh: download_20, download_70  
+* **update_fail:** ketika bundle gagal melakukan `notifyAppReady` dalam jangka waktu yang ditentukan

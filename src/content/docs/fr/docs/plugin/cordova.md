@@ -20,5 +20,5 @@ La version Android est plus facile à réaliser puisque les deux utilisent Java,
 
 En attendant, voici ce que vous pouvez faire :
 
-* [Me soutenir](https://githubcom/sponsors/riderx) sur GitHub et je peux prioriser cela. Cela nécessitera au moins 1 mois de travail
-* M'engager comme Consultant, j'ai l'habitude d'aider les grandes entreprises à migrer vers Capacitor, cela prend généralement ~10-20 jours, et les [avantages](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) sont énormes pour l'équipe
+* [Soutenez-moi](https://githubcom/sponsors/riderx) sur GitHub et je peux prioriser cela. Cela nécessitera au moins 1 mois de travail
+* Engagez-moi comme Consultant, j'ai l'habitude d'aider les grandes entreprises à migrer vers Capacitor, cela prend généralement ~10-20 jours, et le [bénéfice](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) est énorme pour l'équipe

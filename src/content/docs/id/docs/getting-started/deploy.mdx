@@ -1,5 +1,5 @@
 ---
-title: Deploy Live Update
+title: Menerapkan Live Update
 sidebar:
   order: 3
 locale: id
@@ -7,34 +7,34 @@ locale: id
 
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Gunakan fitur Live Updates Capgo untuk memperbarui UI dan logika bisnis aplikasi Anda dari jarak jauh secara real-time. Push pembaruan bundle JS langsung ke pengguna Anda tanpa melalui app store untuk segera memperbaiki bug dan merilis fitur baru.
+Gunakan fitur Live Updates Capgo untuk memperbarui UI dan logika bisnis aplikasi Anda dari jarak jauh secara real-time. Push pembaruan bundle JS langsung ke pengguna Anda tanpa melalui app store untuk segera memperbaiki bug dan mengirim fitur baru.
 
 Panduan ini mengasumsikan Anda telah menyelesaikan [Capgo Quickstart](/docs/getting-started/quickstart) dan telah:
 
 <Steps>
 
-1 Menginstal SDK `@capgo/capacitor-updater` di aplikasi Capacitor Anda
+1. Menginstal SDK `@capgo/capacitor-updater` di aplikasi Capacitor Anda
 
-2 Mengkonfigurasi ID aplikasi dan channel pembaruan di `capacitor.config.ts`
+2. Mengkonfigurasi ID aplikasi dan channel pembaruan di `capacitor.config.ts`
 
-3 Menambahkan method `CapacitorUpdater.notifyAppReady()` dalam kode Anda
+3. Menambahkan method `CapacitorUpdater.notifyAppReady()` dalam kode Anda
 
 </Steps>
 
 Jika Anda belum melakukan langkah-langkah tersebut, silakan kembali dan selesaikan quickstart terlebih dahulu
 
-<LinkCard href="/docs/getting-started/add-an-app/" title="Tambahkan aplikasi" description="Tambahkan aplikasi ke akun Capgo Anda, dan instal plugin di aplikasi Anda" />
+<LinkCard href="/docs/getting-started/add-an-app/" title="Tambah aplikasi" description="Tambahkan aplikasi ke akun Capgo Anda, dan instal plugin di aplikasi Anda" />
 
 ## Mengunggah Bundle
 
-Dengan SDK Capgo terpasang dan terkonfigurasi, Anda siap mengunggah bundle pembaruan langsung pertama Anda:
+Dengan SDK Capgo telah terinstal dan terkonfigurasi, Anda siap untuk mengunggah bundle pembaruan live pertama Anda:
 
-1 Build aset web Anda:
+1. Build aset web Anda:
    ```shell
    npm run build
    ```
 
-2 Unggah bundle ke Capgo:
+2. Unggah bundle ke Capgo:
     <Tabs>
       <TabItem label="Console">
         ```shell
@@ -43,7 +43,7 @@ Dengan SDK Capgo terpasang dan terkonfigurasi, Anda siap mengunggah bundle pemba
       </TabItem>
       <TabItem label="Github Actions">
       ```yml
-      // .github/workflows/build_and_deploy.yml
+      // github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
 
     concurrency:
@@ -76,7 +76,7 @@ Dengan SDK Capgo terpasang dan terkonfigurasi, Anda siap mengunggah bundle pemba
       </TabItem>
       <TabItem label="Gitlab">
       ```yml
-      // .gitlab-ci.yml
+      // gitlab-ci.yml
       stages:
         - build
 
@@ -109,43 +109,43 @@ Dengan SDK Capgo terpasang dan terkonfigurasi, Anda siap mengunggah bundle pemba
 Jika unggahan Anda gagal, periksa kembali:
 - ID aplikasi Anda di `capacitor.config.ts` cocok dengan aplikasi Anda di dashboard Capgo
 - Anda menjalankan perintah unggah dari root proyek Capacitor Anda
-- Aset web Anda sudah di-build dan terbaru
+- Aset web Anda telah di-build dan terbaru
 
 Jika Anda masih mengalami masalah, kunjungi bagian [Pemecahan Masalah](/docs/getting-started/troubleshooting/)
 
-## Menerima Pembaruan pada Perangkat
+## Menerima Pembaruan di Perangkat
 
-Setelah bundle Anda diunggah, Anda dapat menguji pembaruan langsung pada perangkat:
+Setelah bundle Anda diunggah, Anda dapat menguji pembaruan live di perangkat:
 
-1 Sinkronkan aplikasi Anda ke perangkat:
+1. Sinkronkan aplikasi Anda ke perangkat:
    ```shell
    npx cap sync ios
    ```
 
-2 Buka terminal lain dan jalankan perintah berikut untuk memeriksa status pembaruan:
+2. Buka terminal lain dan jalankan perintah berikut untuk memeriksa status pembaruan:
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3 Jalankan aplikasi Anda secara lokal:
+3. Jalankan aplikasi Anda secara lokal:
    ```shell
    npx cap run ios
    ```
    Atau buka proyek iOS/Android di Xcode/Android Studio dan lakukan native run
 
-4 Biarkan aplikasi terbuka sekitar 30 detik untuk memungkinkan pembaruan diunduh di latar belakang
+4. Biarkan aplikasi terbuka selama sekitar 30 detik untuk memungkinkan pembaruan diunduh di latar belakang
 
-5 Log akan membutuhkan beberapa detik untuk memperbarui dan menampilkan status pembaruan
+5. Log akan membutuhkan beberapa detik untuk memperbarui dan menampilkan status pembaruan
 
-6 Tutup dan buka kembali aplikasi. Anda seharusnya melihat pembaruan langsung Anda diterapkan!
+6. Tutup dan buka kembali aplikasi. Anda seharusnya melihat pembaruan live Anda diterapkan!
 
-Lihat kembali [Capgo Quickstart](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) untuk detail lebih lanjut tentang pengujian pembaruan langsung
+Lihat kembali [Capgo Quickstart](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) untuk detail lebih lanjut tentang pengujian pembaruan live
 
 ## Langkah Selanjutnya
 
-Selamat atas penerapan pembaruan langsung pertama Anda dengan Capgo! 🎉
+Selamat atas penerapan pembaruan live pertama Anda dengan Capgo! 🎉
 
 Untuk mempelajari lebih lanjut, tinjau dokumentasi [Capgo Live Updates](/docs/live-updates) lainnya. Beberapa topik penting untuk diperiksa selanjutnya:
 - [Menargetkan Pembaruan dengan Channel](/docs/live-updates/channels)
 - [Menyesuaikan Perilaku Pembaruan](/docs/live-updates/update-behavior)
-- [Rollback Pembaruan Langsung](/docs/live-updates/rollbacks)
+- [Rollback Pembaruan Live](/docs/live-updates/rollbacks)

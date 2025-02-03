@@ -1,6 +1,6 @@
 ---
-title: Tambahkan Aplikasi
-description: Tambahkan aplikasi ke akun Capgo Anda dan instal plugin pada aplikasi Anda
+title: Ajouter une App
+description: Tambahkan aplikasi ke akun Capgo dan instal plugin ke aplikasi tersebut
 sidebar:
   order: 2
 prev: false
@@ -12,38 +12,37 @@ import { YouTube } from 'astro-embed';
 import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 ## Pengenalan Capgo
-<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+<YouTube id="NzXXKoyhTIo" title="Capgo dalam 15 menit" />
 
-## Pembaruan langsung hanya 3 langkah lagi
+## Live update hanya 3 langkah
 
-
-### Pengaturan terpandu
+### Panduan setup
 
 <Steps>
 
-1 Buat akun Anda di [https://capgoapp/register](https://capgoapp/register)
+1. Buat akun Anda di [https://capgoapp/register](https://capgoapp/register)
 ![signup screenshot](/signupwebp "signup screenshot")
 
-2 Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan dihadapkan dengan serangkaian pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan pengaturan otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap dalam waktu singkat. Jika Anda membutuhkan bantuan lebih lanjut selama proses, tim dukungan kami [siap membantu](mailto:support@capgoapp) Selamat bergabung!</Aside>
+2. Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan diberikan beberapa pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan setup otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap menggunakan dalam waktu singkat. Jika Anda membutuhkan bantuan selama proses, tim support kami [siap membantu](mailto:support@capgoapp) Selamat mencoba!</Aside>
 
-3 Lakukan deploy pembaruan langsung <LinkCard href="/docs/getting-started/deploy/" title="Deploy pembaruan langsung" description="Pelajari cara melakukan deploy pembaruan langsung ke aplikasi Anda" />
+3. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
 
 </Steps>
 
-### Pengaturan manual
+### Setup manual
 
-Jika perintah init tidak bekerja untuk Anda, Anda dapat menambahkan aplikasi secara manual
+Jika perintah init tidak berhasil, Anda dapat menambahkan aplikasi secara manual
 
 <Steps>
 
-1 Hubungkan CLI ke akun Anda: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+1. Hubungkan CLI ke akun Anda: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
-2 Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+2. Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3 Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4 Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
 
-5 Lakukan deploy pembaruan langsung <LinkCard href="/docs/getting-started/deploy/" title="Deploy pembaruan langsung" description="Pelajari cara melakukan deploy pembaruan langsung ke aplikasi Anda" />
+5. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
 
 </Steps>

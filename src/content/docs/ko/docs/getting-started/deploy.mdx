@@ -1,5 +1,5 @@
 ---
-title: 라이브 업데이트 배포하기
+title: Live Update 배포하기
 sidebar:
   order: 3
 locale: ko
@@ -7,17 +7,17 @@ locale: ko
 
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Capgo의 실시간 업데이트 기능을 사용하여 앱의 UI와 비즈니스 로직을 원격으로 실시간 업데이트하세요. 앱 스토어를 거치지 않고 JS 번들 업데이트를 사용자에게 직접 푸시하여 즉시 버그를 수정하고 새로운 기능을 배포할 수 있습니다.
+Capgo의 실시간 업데이트 기능을 사용하여 앱의 UI와 비즈니스 로직을 원격으로 실시간 업데이트하세요. JS 번들 업데이트를 앱 스토어를 거치지 않고 사용자에게 직접 푸시하여 즉시 버그를 수정하고 새로운 기능을 배포할 수 있습니다.
 
 이 가이드는 [Capgo 퀵스타트](/docs/getting-started/quickstart)를 완료했고 다음 사항을 이미 수행했다고 가정합니다:
 
 <Steps>
 
-1 Capacitor 앱에 `@capgo/capacitor-updater` SDK 설치
+1. Capacitor 앱에 `@capgo/capacitor-updater` SDK를 설치했음
 
-2 `capacitor.config.ts`에서 앱 ID와 업데이트 채널 구성
+2. `capacitor.config.ts`에서 앱 ID와 업데이트 채널을 구성했음
 
-3 코드에 `CapacitorUpdater.notifyAppReady()` 메서드 추가
+3. 코드에 `CapacitorUpdater.notifyAppReady()` 메서드를 추가했음
 
 </Steps>
 
@@ -29,12 +29,12 @@ Capgo의 실시간 업데이트 기능을 사용하여 앱의 UI와 비즈니스
 
 Capgo SDK를 설치하고 구성했다면 첫 실시간 업데이트 번들을 업로드할 준비가 된 것입니다:
 
-1 웹 에셋을 빌드하세요:
+1. 웹 에셋을 빌드하세요:
    ```shell
    npm run build
    ```
 
-2 번들을 Capgo에 업로드하세요:
+2. 번들을 Capgo에 업로드하세요:
     <Tabs>
       <TabItem label="Console">
         ```shell
@@ -102,42 +102,42 @@ Capgo SDK를 설치하고 구성했다면 첫 실시간 업데이트 번들을 �
       ```
       </TabItem>
     </Tabs>
-   이렇게 하면 명령에 지정된 채널에 새로운 번들 버전이 업로드됩니다.
+   이것은 명령에서 지정한 채널에 새로운 번들 버전을 업로드합니다.
 
 ### 업로드 문제 해결
 
-업로드에 실패한 경우 다음 사항을 확인하세요:
+업로드가 실패하면 다음 사항을 확인하세요:
 - `capacitor.config.ts`의 앱 ID가 Capgo 대시보드의 앱과 일치하는지
 - Capacitor 프로젝트의 루트에서 업로드 명령을 실행하는지
 - 웹 에셋이 빌드되어 있고 최신 상태인지
 
-여전히 문제가 있다면 [문제 해결](/docs/getting-started/troubleshooting/) 섹션을 확인하세요.
+여전히 문제가 있다면 [문제 해결](/docs/getting-started/troubleshooting/) 섹션으로 이동하세요.
 
-## 기기에서 업데이트 받기
+## 디바이스에서 업데이트 받기
 
-번들이 업로드되면 기기에서 실시간 업데이트를 테스트할 수 있습니다:
+번들이 업로드되면 디바이스에서 실시간 업데이트를 테스트할 수 있습니다:
 
-1 앱을 기기에 동기화하세요:
+1. 앱을 디바이스와 동기화하세요:
    ```shell
    npx cap sync ios
    ```
 
-2 다른 터미널을 열고 다음 명령을 실행하여 업데이트 상태를 확인하세요:
+2. 다른 터미널을 열고 다음 명령을 실행하여 업데이트 상태를 확인하세요:
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3 앱을 로컬에서 실행하세요:
+3. 앱을 로컬에서 실행하세요:
    ```shell
    npx cap run ios
    ```
-   또는 iOS/Android 프로젝트를 Xcode/Android Studio에서 열고 네이티브 실행을 하세요.
+   또는 Xcode/Android Studio에서 iOS/Android 프로젝트를 열고 네이티브 실행을 하세요.
 
-4 업데이트가 백그라운드에서 다운로드될 수 있도록 앱을 약 30초 동안 열어두세요.
+4. 업데이트가 백그라운드에서 다운로드되도록 앱을 약 30초 동안 열어두세요.
 
-5 로그가 업데이트되어 업데이트 상태를 표시하는 데 몇 초가 걸립니다.
+5. 로그가 업데이트되어 업데이트 상태를 표시하는 데 몇 초가 걸립니다.
 
-6 앱을 닫았다가 다시 여세요. 실시간 업데이트가 적용된 것을 볼 수 있습니다!
+6. 앱을 닫았다가 다시 여세요. 실시간 업데이트가 적용된 것을 확인할 수 있습니다!
 
 실시간 업데이트 테스트에 대한 자세한 내용은 [Capgo 퀵스타트](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)를 참조하세요.
 
@@ -145,7 +145,7 @@ Capgo SDK를 설치하고 구성했다면 첫 실시간 업데이트 번들을 �
 
 Capgo로 첫 실시간 업데이트를 배포한 것을 축하합니다! 🎉
 
-자세한 내용을 알아보려면 나머지 [Capgo 실시간 업데이트 문서](/docs/live-updates)를 검토하세요. 다음에 확인할 주요 주제들:
+더 자세히 알아보려면 [Capgo 실시간 업데이트 문서](/docs/live-updates)의 나머지 부분을 검토하세요. 다음으로 살펴볼 주요 주제들:
 - [채널을 통한 업데이트 타겟팅](/docs/live-updates/channels)
-- [업데이트 동작 사용자 정의](/docs/live-updates/update-behavior) 
+- [업데이트 동작 커스터마이징](/docs/live-updates/update-behavior)
 - [실시간 업데이트 롤백](/docs/live-updates/rollbacks)

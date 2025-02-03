@@ -1,12 +1,12 @@
 ---
 title: Mise à jour automatique
-description: Comment utiliser l'auto-mise à jour avec capacitor-updater
+description: Comment utiliser la mise à jour automatique avec capacitor-updater
 sidebar:
   order: 2
 locale: fr
 ---
 
-Ce mode permet aux développeurs d'utiliser capacitor-updater en mode auto-update et de pousser des mises à jour via les canaux Capgo ou équivalents
+Ce mode permet aux développeurs d'utiliser capacitor-updater en mode auto-update et de pousser des mises à jour via les canaux Capgo ou équivalent
 
 ### Prérequis
 
@@ -14,7 +14,7 @@ Assurez-vous que la version de votre application utilise [https://semverorg/](ht
 
 C'est la convention utilisée pour gérer les versions dans Capgo
 
-Il y a deux façons de définir la version dans votre application :
+Il existe deux façons de définir la version dans votre application :
 
 Nouvelle méthode : Utilisez le champ `version` dans votre fichier `capacitorconfigjson`
 
@@ -23,13 +23,13 @@ Nouvelle méthode : Utilisez le champ `version` dans votre fichier `capacitorcon
   "plugins": {
     "CapacitorUpdater": {
       "autoUpdate": true, // Active l'auto-update, true par défaut
-      "appId": "comexampleapp", // Utilisé pour identifier l'app sur le serveur
+      "appId": "comexampleapp", // Utilisé pour identifier l'application sur le serveur
       "version": "100" // Utilisé pour vérifier les mises à jour
     }
   }
 }
 ```
-Ces options seront utilisées par le plugin pour vérifier les mises à jour, et par le CLI pour télécharger la version
+Ces options seront utilisées par le plugin pour vérifier les mises à jour et par le CLI pour télécharger la version
 
 Ancienne méthode :
 Dans 3 fichiers de votre projet :
@@ -42,11 +42,11 @@ Dans 3 fichiers de votre projet :
 
 Configurez votre application en 5 minutes
 
-[Mettez à jour vos applications Capacitor de manière transparente avec capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[Mettez à jour vos applications Capacitor en toute transparence avec capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 Configurez votre CI en 5 minutes
 
-[Build et release automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build et déploiement automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
 
 ### Installation
 
@@ -73,7 +73,7 @@ Lorsque l'auto-update est configuré, vous devez notifier depuis JS que votre ap
 
 Cela peut être fait en appelant `notifyAppReady` dans votre application
 
-Faites-le dès que possible
+Faites-le le plus tôt possible
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -82,11 +82,11 @@ CapacitorUpdaternotifyAppReady()
 ```
 
 #### Flux utilisateur
-* L'utilisateur ouvre l'application, l'application interroge le serveur pour vérifier les mises à jour, si des mises à jour sont trouvées, elles seront téléchargées en arrière-plan
-* L'utilisateur quitte l'application, la nouvelle version est définie comme active
-* L'utilisateur ouvre à nouveau l'application, nous chargeons la nouvelle version active et la définissons comme par défaut
-* Si `notifyAppReady()` est appelé, lorsque l'utilisateur quitte l'application, l'ancienne version est supprimée
-* L'utilisateur continue le flux normal de l'application jusqu'au prochain cycle de mise à jour
+1. L'utilisateur ouvre l'application, l'application interroge le serveur pour vérifier les mises à jour, si des mises à jour sont trouvées, elles seront téléchargées en arrière-plan
+2. L'utilisateur quitte l'application, la nouvelle version est définie comme active
+3. L'utilisateur ouvre à nouveau l'application, nous chargeons la nouvelle version active et la définissons par défaut
+4. Si `notifyAppReady()` est appelé, lorsque l'utilisateur quitte l'application, l'ancienne version est supprimée
+5. L'utilisateur continue le flux normal de l'application jusqu'au prochain cycle de mise à jour
 
 :::danger
 ⚠️ Ne pas appeler `notifyAppReady()` dans votre application marquera la version actuelle comme invalide et reviendra au bundle précédent valide ou d'origine
@@ -95,14 +95,14 @@ CapacitorUpdaternotifyAppReady()
 #### Flux de développement
 
 Lorsque vous développez de nouvelles fonctionnalités, assurez-vous de bloquer `autoUpdate`, car capgo écrasera constamment votre travail avec le dernier bundle de mise à jour
-Définissez `autoUpdate` sur false dans votre configuration 
+Définissez `autoUpdate` sur false dans votre configuration
 Si pour une raison quelconque vous êtes bloqué sur une mise à jour, vous pouvez supprimer l'application et la réinstaller
 Assurez-vous de définir `autoUpdate` sur false dans votre configuration avant de le faire
-Puis reconstruisez-la avec Xcode ou Android studio
+Puis reconstruisez-la avec Xcode ou Android Studio
 
 Pour télécharger la version à chaque commit, configurez CI/CD avec ce guide
 
-[Build et release automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build et déploiement automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
 
 #### Événement Major Available
 

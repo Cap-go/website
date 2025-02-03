@@ -1,5 +1,5 @@
 ---
-title: Point de terminaison des statistiques
+title: Endpoint delle statistiche
 description: Cómo crear un endpoint de estadísticas autohospedado
 sidebar:
   order: 2
@@ -84,12 +84,12 @@ Este endpoint debe devolver un JSON:
 
 ## Acciones:
 
-* **delete**: cuando un paquete es eliminado localmente
+* **delete**: cuando un paquete se elimina localmente
 * **reset**: cuando la aplicación se restablece al paquete incorporado
 * **set**: cuando la aplicación establece un nuevo paquete
 * **set\_fail**: cuando la aplicación no pudo encontrar el ID del paquete establecido
 * **update\_fail**: enviado después del retraso y `notifyAppReady` nunca fue llamado
-* **download\_fail**: cuando la descarga nunca terminó
+* **download\_fail**: cuando la descarga nunca se completó
 * **download\_complete:** Cuando la descarga finaliza
 * **download\_xx:** Enviado cada 10% de descarga ej: download\_20, download\_70
-* **update\_fail:** cuando el paquete falla al ejecutar `notifyAppReady` en el plazo establecido
+* **update\_fail:** cuando el paquete falla al ejecutar `notifyAppReady` en el marco de tiempo

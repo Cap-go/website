@@ -1,17 +1,17 @@
 ---
-title: Endpoint
-description: Documentazione API pubblica di Capgo cloud
+title: 엔드포인트
+description: Documentazione delle API pubbliche di Capgo cloud
 sidebar:
   order: 2
 locale: it
 ---
 
-Questa è la documentazione delle API pubbliche di Capgo cloud
+Questa è la documentazione dell'API pubblica di Capgo cloud
 
-Per accedere, aggiungi negli headers la tua chiave API come `authorization`
+Per accedere, aggiungi negli header la tua chiave API come `authorization`
 
 <LinkCard
-	title="Ottieni chiave API" 
+	title="Ottieni chiave API"
 	href="https://webcapgoapp/dashboard/apikeys/"
 />
 
@@ -23,7 +23,7 @@ Questo endpoint ti permette di gestire le organizzazioni e i loro membri
 
 `https://apicapgoapp/organization`
 
-Recupera le informazioni dell'organizzazione. Se `orgId` è fornito nei parametri, restituisce una singola organizzazione. Altrimenti, restituisce tutte le organizzazioni accessibili
+Recupera informazioni sull'organizzazione. Se `orgId` è fornito nei parametri, restituisce una singola organizzazione. Altrimenti, restituisce tutte le organizzazioni accessibili
 
 ```typescript
 interface Organization {
@@ -88,7 +88,7 @@ return { status: 'Organization created', id: string }
 
 ## Chiavi API
 
-Questo endpoint ti permette di gestire le chiavi API per accedere all'API di Capgo
+Questo endpoint ti permette di gestire le chiavi API per accedere all'API Capgo
 
 ### GET
 
@@ -117,7 +117,7 @@ return ApiKey[]
 
 `https://apicapgoapp/apikey`
 
-Crea una nuova chiave API per una specifica organizzazione
+Crea una nuova chiave API per un'organizzazione specifica
 
 Parametri Query:
 ```typescript
@@ -153,7 +153,7 @@ return { error: string, supabaseError?: any }
 
 ## Membri (/organization/members)
 
-### GET
+### GET 
 
 Recupera i membri dell'organizzazione
 
@@ -203,7 +203,7 @@ Questo endpoint ti permette di recuperare varie statistiche sulle tue app e orga
 
 ### GET /statistics/app/:app_id
 
-Recupera le statistiche per una specifica app
+Recupera statistiche per una specifica app
 
 Parametri Query:
 ```typescript
@@ -228,7 +228,7 @@ Se il parametro `graph` è fornito, restituisce un'immagine SVG della metrica ri
 
 ### GET /statistics/user
 
-Recupera statistiche aggregate di tutte le organizzazioni a cui l'utente ha accesso
+Recupera statistiche aggregate per tutte le organizzazioni a cui l'utente ha accesso
 
 Parametri Query:
 ```typescript
@@ -338,7 +338,7 @@ interface Channel {
 }[]
 ```
 
-e opzionalmente nome `channel` come parametro URL per riceverne uno:
+e opzionalmente il nome del `channel` come parametro URL per riceverne uno:
 
 ```typescript
 interface Channel {
@@ -383,9 +383,9 @@ ricevi questo:
 
 Questo endpoint ti permette di controllare e modificare tutti i dispositivi collegati alla tua app
 
-### POST
+### POST&#x20;
 
-`https://apicapgoapp/device` 
+`https://apicapgoapp/device`
 
 Invia questo
 
@@ -408,8 +408,7 @@ ricevi questo:
 
 `https://apicapgoapp/device`
 
-Invia `app_id` come parametro URL e ricevi array dei primi 50 dispositivi\
-È possibile ottenere il successivo inviando `page=1`
+Invia `app_id` come parametro URL e ricevi array dei primi 50 dispositiviPuoi ottenere il successivo inviando `page=1`
 
 ```typescript
 interface Device{
@@ -431,7 +430,7 @@ interface Device{
 }[]       
 ```
 
-e opzionalmente `device_id` come parametro URL per riceverne uno:
+e opzionalmente il nome `device_id` come parametro URL per riceverne uno:
 
 ```typescript
 interface Device {
@@ -478,7 +477,7 @@ Questo endpoint ti permette di controllare ed eliminare tutti i bundle collegati
 
 `https://apicapgoapp/bundle`
 
-Invia `app_id` come parametro URL e ricevi un array dei primi 50 bundle\
+Invia `app_id` come parametro URL e ricevi un array dei primi 50 bundle
 Puoi ottenere i successivi inviando `page=1`
 
 ```typescript

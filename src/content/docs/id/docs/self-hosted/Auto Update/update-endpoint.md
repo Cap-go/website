@@ -1,6 +1,6 @@
 ---
 title: Perbarui endpoint
-description: Cara membuat endpoint pembaruan self-hosted
+description: Cara membuat endpoint update yang dihosting sendiri
 sidebar:
   order: 1
 locale: id
@@ -71,7 +71,7 @@ Endpoint ini harus mengembalikan JSON:
 }
 ```
 
-Dan jika tidak ada pembaruan atau terjadi kesalahan, tambahkan kunci `message` dan opsional `error`
+Dan jika tidak ada pembaruan atau terjadi error, tambahkan kunci `message` dan opsional `error`
 
 ```json
 {

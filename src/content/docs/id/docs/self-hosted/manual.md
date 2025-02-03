@@ -1,6 +1,6 @@
 ---
-title: Manual
-description: Cara menggunakan pembaruan Capgo dalam mode manual
+title: Handbuch
+description: Cara menggunakan pembaruan Capgo secara manual
 sidebar:
   order: 3
 locale: id
@@ -11,17 +11,17 @@ locale: id
 :::tip
 Jika Anda menggunakan alat ini secara gratis, luangkan waktu untuk mendukung pekerjaan saya dengan [GitHub sponsor](https://githubcom/sponsors/riderx/)
 
-Saya membuat keputusan untuk membuka source code semua yang saya bangun di sini
+Saya membuat taruhan untuk membuka source code semua kode yang saya buat di sini
 
-Saya bisa saja menyimpannya untuk diri sendiri dan memberi harga tinggi
+Saya bisa saja menyimpannya untuk diri sendiri dan memberikan harga tinggi
 
 Sebaliknya, saya ingin menjadikannya bisnis yang terbuka dan transparan
 
-Saya pikir ini akan membuat dunia kita menjadi tempat yang lebih baik dengan keterbukaan daripada pertentangan dan penyembunyian
+Saya pikir ini akan membuat dunia kita menjadi tempat yang lebih baik dengan keterbukaan daripada bertarung dan bersembunyi
 
-Untuk mewujudkannya, kita semua perlu berpartisipasi, termasuk Anda 🥹
+Untuk mewujudkannya, kita semua perlu berperan, termasuk Anda 🥹
 
-Jika layanan Capgo cloud tidak sesuai untuk Anda, dukung Maker independen [DI SINI](https://githubcom/sponsors/riderx/) sesuai keinginan Anda
+Jika penawaran Capgo cloud tidak cocok untuk Anda, dukung Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
 :::
 
 ## Instalasi Cepat
@@ -33,7 +33,7 @@ npx cap sync
 
 #### Konfigurasi
 
-Tambahkan ini ke konfigurasi Anda untuk menonaktifkan pembaruan otomatis:
+Tambahkan ini ke konfigurasi Anda, untuk menonaktifkan pembaruan otomatis:
 
 ```tsx
 // capacitorconfigjson
@@ -58,20 +58,20 @@ let data = {version: ""}
 CapacitorUpdaternotifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
-       // Do the download during user active app time to prevent failed download
+       // Lakukan unduhan selama waktu aplikasi aktif pengguna untuk mencegah unduhan gagal
        data = await CapacitorUpdaterdownload({
        version: '004',
        url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
-       // Do the switch when user leave app
+       // Lakukan pergantian saat pengguna meninggalkan aplikasi
        SplashScreenshow()
        try {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // in case the set fail, otherwise the new app will have to hide it
+         SplashScreenhide() // jika pengaturan gagal, jika tidak aplikasi baru harus menyembunyikannya
        }
      }
  })
@@ -83,12 +83,12 @@ AppaddListener('appStateChange', async(state) => {
 
 Periksa aplikasi demo untuk informasi lebih lanjut
 
-[GitHub - Cap-go/demo-app: demo app with manual and auto mode](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: aplikasi demo dengan mode manual dan otomatis](https://githubcom/Cap-go/demo-app/)
 
 ## Paket
 
-Apapun nama file yang Anda pilih untuk diunduh dari URL server rilis/pembaruan Anda, file zip harus berisi seluruh konten folder output build Capacitor produksi Anda, biasanya `{project directory}/dist/` atau `{project directory}/www/`
+Apa pun nama file yang Anda unduh dari URL server rilis/pembaruan Anda, file zip harus berisi konten lengkap dari folder output build Capacitor produksi Anda, biasanya `{direktori proyek}/dist/` atau `{direktori proyek}/www/`
 
 Di sinilah `indexhtml` akan berada, dan juga harus berisi semua JavaScript yang dibundel, CSS, dan sumber daya web yang diperlukan agar aplikasi Anda dapat berjalan
 
-Jangan enkripsi file ini dengan kata sandi, atau file akan gagal dibongkar
+Jangan mengenkripsi file ini dengan kata sandi, atau file tersebut akan gagal dibongkar

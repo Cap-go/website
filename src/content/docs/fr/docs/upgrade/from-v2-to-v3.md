@@ -1,14 +1,14 @@
 ---
-title: De V2 a V3
-description: Comment passer de la version V2 à V3
+title: V2에서 V3로
+description: Comment passer de la V2 à la V3
 sidebar:
   order: 4
 locale: fr
 ---
 
-Cette documentation expliquera comment mettre à niveau vers la version 3 d'auto-update
+Cette documentation expliquera comment mettre à niveau vers la version 3 de l'auto-update
 
-## Commencez par migrer vers les derniers outils :
+## D'abord migrer vers les derniers outils :
 
 ```bash
 npm remove -g capgo
@@ -40,13 +40,13 @@ pour ne laisser que ceci :
 }
 ```
 
-> ⚠️ Si vous utilisiez votre serveur avec `autoUpdateURL`, je mettrai bientôt à jour ce guide pour vous. En attendant, jetez un œil à la nouvelle option de téléchargement `external` qui vous permet d'envoyer uniquement le lien de votre zip, pas le code dans Capgo cloud. Cela a été conçu pour les entreprises ayant des politiques de confidentialité strictes. En mode external, le code n'arrivera jamais sur le serveur Capgo, nous stockons uniquement l'URL et l'envoyons à l'appareil, qui le téléchargera directement. De manière standard, le code est compressé et stocké dans notre serveur, mais nous ne l'ouvrirons ni ne l'utiliserons jamais non plus.
+> ⚠️ Si vous utilisiez votre serveur avec `autoUpdateURL`, je mettrai à jour ce guide prochentiellement pour vous. En attendant, jetez un œil à la nouvelle option de téléchargement `external` qui vous permet d'envoyer uniquement le lien de votre zip, pas le code dans Capgo cloud. Cela a été conçu pour les entreprises ayant des politiques de confidentialité strictes. En mode externe, le code n'arrivera jamais sur le serveur Capgo, nous stockons uniquement l'URL et l'envoyons à l'appareil, qui le téléchargera directement. De manière standard, le code est compressé et stocké dans notre serveur, mais nous ne l'ouvrirons ni ne l'utiliserons jamais.
 
 ## Ce qui change
 
 Toutes les configurations deviennent côté serveur pour l'auto-update, pour vous donner plus de contrôle sur la façon dont vous envoyez une mise à jour aux utilisateurs
 
-Cela nous permet de revenir en arrière, et même de déployer uniquement pour un utilisateur avec des canaux ! Ces paramètres sont ajoutés à l'interface web :
+Cela nous permet de revenir en arrière, même de déployer pour un seul utilisateur avec des canaux ! Ces paramètres sont ajoutés dans l'interface web :
 
 * désactiver le retour en arrière sous la version native
 * désactiver la mise à jour au-dessus de la version majeure
@@ -80,7 +80,7 @@ import { CapacitorUpdater } from 'capacitor-updater'
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 ```
 
-Puis reconstruisez votre code `npm run build` et copiez à nouveau les assets `npx cap copy`
+Puis reconstruisez votre code `npm run build` et copiez les assets une fois de plus `npx cap copy`
 
 Vous devriez maintenant pouvoir tester le dernier système d'auto-update
 
@@ -90,7 +90,7 @@ Envoyez votre version avec :
 npx @capgo/cli@latest upload
 ```
 
-au lieu de
+au lieu de 
 
 ```
 npx capgo upload
@@ -98,7 +98,7 @@ npx capgo upload
 
 ## Évolutions futures
 
-Pour l'instant, seul le premier canal public est utilisé, à l'avenir, public changera pour des canaux publics multiples, si plus d'un est défini
+Pour l'instant, seul le premier canal public est utilisé, à l'avenir, public changera pour plusieurs canaux publics, si plus d'un est défini
 
 ## Problèmes courants :
 

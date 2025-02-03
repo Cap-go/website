@@ -1,5 +1,5 @@
 ---
-title: Self-hosting S3
+title: Auto-hospedaje de S3
 description: Cómo configurar minio para trabajar con capgo
 sidebar:
   order: 2
@@ -10,7 +10,7 @@ locale: es
 
 Este tutorial mostrará cómo configurar [minio](https://minio/) para trabajar con capgo
 
-Técnicamente esto no es necesario para ejecutar capgo
+Esto no es técnicamente necesario para ejecutar capgo
 
 Configurar S3 permite subir paquetes desde la [CLI](/docs/cli/commands/)
 
@@ -21,9 +21,9 @@ Configurar S3 permite subir paquetes desde la [CLI](/docs/cli/commands/)
 
 ## Requisitos
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
-## Comenzando
+## Empezando
 
 Primero, crea un nuevo directorio
 
@@ -53,11 +53,11 @@ docker rm minio1
 ```
 ⚠️ Este comando no elimina los datos de minio
 
-## Configurando funciones edge
+## Configurando las funciones edge
 
 Ahora que tenemos un servidor S3 ejecutándose, necesitamos configurar las funciones edge de capgo para usar nuestro servidor S3
 
-Para hacer eso necesitamos crear un archivo ENV en `capgo/supabase` llamado `envlocal`
+Para hacer esto necesitamos crear un archivo ENV en `capgo/supabase` llamado `envlocal`
 
 Este archivo debería verse así:
 ```bash
@@ -76,7 +76,7 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-La ip `hostdockerinternal` es una ip de docker que solo puede ser alcanzada internamente por docker, pero la reemplazamos en el código con `0000` para que minio pueda ser alcanzado desde localhost
+La IP `hostdockerinternal` es una IP de docker que solo puede ser alcanzada internamente por docker, pero la reemplazamos en el código con `0000` para que minio pueda ser alcanzado desde localhost
 
 Para ejecutar funciones edge con nuestro nuevo archivo env usa
 ```bash
@@ -94,7 +94,7 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      // Sin este localS3 el comando de carga fallará
+      // Sin este localS3 el comando de subida fallará
       localS3: true
     },
   },

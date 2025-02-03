@@ -1,12 +1,12 @@
 ---
-title: fascio
+title: bundle
 sidebar_label: bundle
 sidebar:
   order: 5
 locale: it
 ---
 
-Il comando `bundle` consente di gestire i bundle della tua app
+Il comando `bundle` ti permette di gestire i bundle delle tue app
 
 ### upload
 
@@ -16,18 +16,18 @@ Carica un nuovo bundle per un'app
 
 Opzioni:
 
-- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
-- `-p, --path <path>`: Percorso della cartella da caricare (predefinito è `webDir` in `capacitorconfig`)
+- `-a, --apikey <apikey>`: Chiave API per collegarsi al tuo account
+- `-p, --path <path>`: Percorso della cartella da caricare (predefinito sul `webDir` in `capacitorconfig`) 
 - `-c, --channel <channel>`: Canale a cui collegare il bundle
 - `-e, --external <url>`: Link a un URL esterno invece di caricare su Capgo Cloud
-- `--iv-session-key <key>`: Imposta la IV e la chiave di sessione per un URL di bundle esterno
-- `--s3-region <region>`: Regione per il tuo bucket S3
+- `--iv-session-key <key>`: Imposta IV e chiave di sessione per un URL bundle esterno
+- `--s3-region <region>`: Regione del tuo bucket S3
 - `--s3-apikey <apikey>`: Chiave API per il tuo endpoint S3
-- `--s3-apisecret <apisecret>`: Segreto API per il tuo endpoint S3
+- `--s3-apisecret <apisecret>`: Secret API per il tuo endpoint S3
 - `--s3-endpoint <s3Endpoint>`: URL dell'endpoint S3
 - `--s3-bucket-name <bucketName>`: Nome del tuo bucket S3
 - `--s3-port <port>`: Porta per il tuo endpoint S3
-- `--no-s3-ssl`: Disabilita SSL per i caricamenti S3
+- `--no-s3-ssl`: Disabilita SSL per gli upload S3
 - `--key <key>`: Percorso personalizzato per la chiave di firma pubblica (sistema v1)
 - `--key-data <keyData>`: Dati della chiave di firma pubblica (sistema v1)
 - `--key-v2 <key>`: Percorso personalizzato per la chiave di firma privata (sistema v2)
@@ -35,39 +35,39 @@ Opzioni:
 - `--bundle-url`: Stampa l'URL del bundle su stdout
 - `--no-key`: Ignora la chiave di firma e invia un aggiornamento non firmato
 - `--no-code-check`: Salta il controllo di `notifyAppReady()` nel codice sorgente e `indexhtml` nella cartella root
-- `--display-iv-session`: Mostra la IV e la chiave di sessione usate per criptare l'aggiornamento
-- `-b, --bundle <bundle>`: Numero di versione del bundle da caricare
-- `--min-update-version <minUpdateVersion>`: Versione minima dell'app richiesta per applicare questo aggiornamento (usato solo se l'auto-aggiornamento è disabilitato via metadata)
+- `--display-iv-session`: Visualizza IV e chiave di sessione usati per criptare l'aggiornamento
+- `-b, --bundle <bundle>`: Numero versione del bundle da caricare
+- `--min-update-version <minUpdateVersion>`: Versione minima dell'app richiesta per applicare questo aggiornamento (usato solo se l'auto-update è disabilitato via metadata)
 - `--auto-min-update-version`: Imposta automaticamente la versione minima di aggiornamento basata sulle versioni native del pacchetto
-- `--ignore-metadata-check`: Ignora il controllo dei metadata (node_modules) durante il caricamento
-- `--ignore-checksum-check`: Ignora il controllo del checksum durante il caricamento
-- `--timeout <timeout>`: Timeout per il processo di caricamento in secondi
+- `--ignore-metadata-check`: Ignora il controllo dei metadata (node_modules) durante l'upload
+- `--ignore-checksum-check`: Ignora il controllo del checksum durante l'upload
+- `--timeout <timeout>`: Timeout per il processo di upload in secondi
 - `--multipart`: Usa il protocollo multipart per caricare dati su S3 (deprecato, usa `--tus` invece)
 - `--tus`: Carica il bundle usando il protocollo tus
-- `--tus-chunk-size <tusChunkSize>`: Dimensione dei chunk per il caricamento tus
+- `--tus-chunk-size <tusChunkSize>`: Dimensione del chunk per l'upload tus
 - `--partial`: Carica solo i file modificati su Capgo Cloud
 - `--partial-only`: Carica solo file parziali su Capgo Cloud, saltando il file zippato (utile per bundle grandi)
 - `--encrypted-checksum <encryptedChecksum>`: Checksum criptato (firma) per un bundle esterno
 - `--auto-set-bundle`: Imposta automaticamente la versione del bundle in `capacitorconfigjson`
-- `--dry-upload`: Esegue una prova del processo di caricamento senza effettuare il caricamento (utile per i test)
-- `--package-json <packageJson>`: Lista separata da virgole dei percorsi ai file `packagejson` (utile per monorepo)
-- `--node-modules <nodeModules>`: Lista separata da virgole dei percorsi alle directory `node_modules` (utile per monorepo)
+- `--dry-upload`: Esegue una prova di upload senza caricare effettivamente i file (utile per test)
+- `--package-json <packageJson>`: Lista separata da virgole di percorsi ai file `packagejson` (utile per monorepos)
+- `--node-modules <nodeModules>`: Lista separata da virgole di percorsi alle directory `node_modules` (utile per monorepos)
 - `--encrypt-partial`: Cripta i file di aggiornamento parziale
-- `--delete-linked-bundle-on-upload`: Elimina il bundle attualmente collegato nel canale di destinazione prima del caricamento
+- `--delete-linked-bundle-on-upload`: Elimina il bundle attualmente collegato nel canale target prima dell'upload
 
 ### compatibility
 
 `npx @capgo/cli bundle compatibility [appId]`
 
-Controlla la compatibilità di un bundle con un canale specifico
+Verifica la compatibilità di un bundle con un canale specifico
 
 Opzioni:
 
-- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
-- `-c, --channel <channel>`: Canale con cui controllare la compatibilità
+- `-a, --apikey <apikey>`: Chiave API per collegarsi al tuo account
+- `-c, --channel <channel>`: Canale con cui verificare la compatibilità
 - `--text`: Mostra i risultati come testo invece che emoji
-- `--package-json <packageJson>`: Lista separata da virgole dei percorsi ai file `packagejson` (utile per monorepo)
-- `--node-modules <nodeModules>`: Lista separata da virgole dei percorsi alle directory `node_modules` (utile per monorepo)
+- `--package-json <packageJson>`: Lista separata da virgole di percorsi ai file `packagejson` (utile per monorepos)
+- `--node-modules <nodeModules>`: Lista separata da virgole di percorsi alle directory `node_modules` (utile per monorepos)
 
 ### delete
 
@@ -77,7 +77,7 @@ Elimina un bundle da un'app
 
 Opzioni:
 
-- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `-a, --apikey <apikey>`: Chiave API per collegarsi al tuo account
 
 ### list
 
@@ -87,7 +87,7 @@ Elenca tutti i bundle per un'app
 
 Opzioni:
 
-- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `-a, --apikey <apikey>`: Chiave API per collegarsi al tuo account
 
 ### cleanup
 
@@ -97,8 +97,8 @@ Pulisce i vecchi bundle per una versione major, mantenendo il numero specificato
 
 Opzioni:
 
-- `-b, --bundle <bundle>`: Numero di versione major da pulire
-- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `-b, --bundle <bundle>`: Numero versione major da pulire
+- `-a, --apikey <apikey>`: Chiave API per collegarsi al tuo account
 - `-k, --keep <keep>`: Numero di bundle da mantenere (predefinito: 4)
 - `-f, --force`: Forza la rimozione senza conferma
 
@@ -140,13 +140,13 @@ Opzioni:
 
 `npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
 
-Decripta un bundle zip usando il nuovo metodo di crittografia
+Decripta un bundle zip usando il nuovo metodo di decrittografia
 
 Opzioni:
 
 - `--key <key>`: Percorso personalizzato per la chiave di firma privata
 - `--key-data <keyData>`: Dati della chiave di firma privata
-- `--checksum <checksum>`: Checksum del bundle per verificare l'integrità
+- `--checksum <checksum>`: Checksum del bundle per verificarne l'integrità
 
 ### zip
 
@@ -156,10 +156,10 @@ Genera un file zip per un bundle
 
 Opzioni:
 
-- `-p, --path <path>`: Percorso della cartella da zippare (predefinito è `webDir` in `capacitorconfig`)
-- `-b, --bundle <bundle>`: Numero di versione del bundle da usare nel nome del file
-- `-n, --name <name>`: Nome personalizzato per il file zip
+- `-p, --path <path>`: Percorso della cartella da zippare (predefinito sul `webDir` in `capacitorconfig`)
+- `-b, --bundle <bundle>`: Numero versione del bundle da usare nel nome del file
+- `-n, --name <name>`: Nome file personalizzato per lo zip
 - `-j, --json`: Mostra i risultati come JSON
 - `--no-code-check`: Salta il controllo di `notifyAppReady()` nel codice sorgente e `indexhtml` nella cartella root
 - `--key-v2`: Usa il nuovo metodo di crittografia (v2)
-- `--package-json <packageJson>`: Lista separata da virgole dei percorsi ai file `packagejson` (utile per monorepo)
+- `--package-json <packageJson>`: Lista separata da virgole di percorsi ai file `packagejson` (utile per monorepos)

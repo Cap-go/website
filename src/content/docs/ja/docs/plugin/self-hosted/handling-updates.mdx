@@ -1,6 +1,6 @@
 ---
-title: Gestione degli aggiornamenti
-description: セルフホストモードでの自動更新プラグインの使用方法
+title: Manejo de Actualizaciones
+description: セルフホストモードでのAuto Updateプラグインの使用
 sidebar:
   order: 6
 locale: ja
@@ -62,7 +62,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-このエンドポイントは以下のようなJSONを返す必要があります:
+このエンドポイントは以下のようなJSONを返します：
 
 ```json
 {
@@ -71,7 +71,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-更新がない場合やエラーの場合は、`message`キーと必要に応じて`error`を追加します
+更新がない場合やエラーの場合は、`message`キーと任意で`error`を追加します
 
 ```json
 {

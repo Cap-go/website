@@ -1,6 +1,6 @@
 ---
-title: S3 Self-hosting
-description: Comment configurer minio pour fonctionner avec capgo
+title: Self-hosting S3
+description: Comment configurer minio pour travailler avec capgo
 sidebar:
   order: 2
 locale: fr
@@ -10,7 +10,7 @@ locale: fr
 
 Ce tutoriel montrera comment configurer [minio](https://minio/) pour fonctionner avec capgo
 
-Ce n'est techniquement pas requis pour exécuter capgo
+Ce n'est pas techniquement requis pour exécuter capgo
 
 La configuration de S3 permet de télécharger des bundles depuis le [CLI](/docs/cli/commands/)
 
@@ -21,7 +21,7 @@ Utilisez-le uniquement en développement local
 
 ## Prérequis
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Pour commencer
 
@@ -76,7 +76,7 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-L'IP `hostdockerinternal` est une IP docker qui ne peut être atteinte qu'en interne par docker, mais nous la remplaçons dans le code par `0000` pour que minio puisse être atteint depuis localhost
+L'ip `hostdockerinternal` est une ip docker qui ne peut être atteinte qu'en interne par docker, mais nous la remplaçons dans le code par `0000` pour que minio puisse être atteint depuis localhost
 
 Pour exécuter les fonctions edge avec notre nouveau fichier env, utilisez
 ```bash
@@ -85,7 +85,7 @@ supabase functions serve --env-file /supabase/envlocal
 
 ## Configuration du CLI pour utiliser S3
 
-Le CLI ne fonctionnera pas par défaut avec minio La modification suivante de `capacitorconfigts`[^1] est requise
+Le CLI ne fonctionnera pas par défaut avec minio. La modification suivante de `capacitorconfigts`[^1] est nécessaire
 ```ts
 const config: CapacitorConfig = {
   appId: 'comdemoapp',

@@ -1,6 +1,6 @@
 ---
-title: Primeros pasos
-description: このチュートリアルでは、Supabaseをゼロから始め、Edge Functionsを起動する方法を説明します
+title: はじめに
+description: このチュートリアルでは、Supabaseを初めから始め、Edge Functionsを設定する方法を説明します
 sidebar:
   order: 3
 locale: ja
@@ -8,11 +8,11 @@ locale: ja
 
 ## このチュートリアルの内容は？
 
-このチュートリアルでは、supabaseを一から始める方法とエッジ関数を開始する方法を説明します。
+このチュートリアルでは、supabaseを一から始める方法とエッジ関数を開始する方法を説明します
 
 ## 必要条件
- 1 [capgo](https://githubcom/Cap-go/capgo/)をクローン
- 3 [supabase](https://supabasecom/)
+1. クローンした[capgo](https://githubcom/Cap-go/capgo/)
+3. [supabase](https://supabasecom/)
 
 ## はじめに
 
@@ -56,7 +56,7 @@ service_role key: supa_key_admin
 }
 ```
 
-ここで`supa_key_anon`は前のステップで表示された値です
+ここで`supa_key_anon`は前のステップで取得した値です
 
 :::danger
 ⚠️ `configsjson`をリモートリポジトリにコミットしないでください
@@ -66,13 +66,13 @@ service_role key: supa_key_admin
 
 <figure><img src="/supabasewebp" alt="supabase" /><figcaption></figcaption></figure>
 
-確認できたら、以下を実行してエッジ関数を開始します：
+表示されたら、以下のコマンドでエッジ関数を開始します：
 
 ```bash
 supabase functions serve
 ```
 
-そしてフロントエンドを開始するには以下を実行します：
+そしてフロントエンドを以下のコマンドで開始します：
 ```bash
 bun run serve
 ```

@@ -1,6 +1,6 @@
 ---
-title: 수동 업데이트
-description: アップデートの管理方法
+title: 手動更新
+description: アプリケーションのアップデートを管理する方法
 sidebar:
   order: 5
 locale: ja
@@ -8,9 +8,9 @@ locale: ja
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Capgo cloudで手動モードを使用して、更新の適用タイミングを自分で管理したい場合
+Capgo cloudで更新がいつ適用されるかを自分で管理したい場合は、手動モードを使用してください
 
-必要な手順は、Getting Startedで説明されているようにアカウントを設定することです
+アカウントの設定は、Getting Startedで説明されているように行う必要があります
 
 <LinkCard
 	title="Getting Started"
@@ -18,10 +18,10 @@ Capgo cloudで手動モードを使用して、更新の適用タイミングを
 />
 
 #### 設定
-```capacitorconfig.json```で自動更新を無効にします
+```capacitor.config.json```で自動更新を無効にします
 
 ```tsx
-// capacitorconfig.json
+// capacitor.config.json
 {
 	"appId": "*******",
 	"appName": "Name",
@@ -50,7 +50,7 @@ App.addListener('appStateChange', async (state: any) => {
   console.log('appStateChange', state)
   if (state.isActive) {
     console.log('getLatest')
-    // ダウンロードの失敗を防ぐため、アプリがアクティブな時間中にダウンロードを実行します
+    // ダウンロードの失敗を防ぐため、アプリがアクティブな時にダウンロードを実行
     const latest = await CapacitorUpdater.getLatest()
     console.log('latest', latest)
     if (latest.url) {
@@ -63,14 +63,14 @@ App.addListener('appStateChange', async (state: any) => {
   }
   if (!state.isActive && data) {
     console.log('set')
-    // ユーザーがアプリを離れたとき、または任意のタイミングで切り替えを実行します
+    // ユーザーがアプリを離れた時、または任意のタイミングで切り替えを実行
     SplashScreen.show()
     try {
       await CapacitorUpdater.set({ id: data.id })
     }
     catch (err) {
       console.log(err)
-      SplashScreen.hide() // セットが失敗した場合、そうでなければ新しいアプリが非表示にする必要があります
+      SplashScreen.hide() // setが失敗した場合、そうでなければ新しいアプリが非表示にする必要がある
     }
   }
 })
@@ -83,5 +83,5 @@ App.addListener('appStateChange', async (state: any) => {
 	href="/docs/plugin/api/"
 />
 
-ユーザーがチャンネルを購読して異なるバージョンを試せるようにするユースケースがあります：\
+ユーザーがチャンネルを購読して異なるバージョンを試すことができるユースケースがあります：\
 [https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

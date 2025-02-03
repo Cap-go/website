@@ -1,10 +1,12 @@
 ---
-title: 자동 업데이트
+title: 自動アップデート
 description: Cara menggunakan plugin auto-update dalam mode self-hosted
 sidebar:
   order: 3
 locale: id
 ---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
 
@@ -12,9 +14,9 @@ Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
 Pastikan bundle Anda disajikan melalui HTTPS, dan server memiliki header CORS yang tepat untuk mengizinkan aplikasi mengunduh pembaruan
 contoh ```https://myservercom/app/updates/updatesjson```
 
-Jika Anda belum familiar dengan penyajian bundle, kami sarankan Anda mencoba Capgo Cloud atau lihat contoh di sini:
+Jika Anda tidak familiar dengan menyajikan bundle, kami sarankan Anda mencoba Capgo Cloud atau lihat contoh di sini:
 <LinkCard
-	title="Serving a Bundle"
+	title="Menyajikan Bundle"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
@@ -31,7 +33,7 @@ Tambahkan ``updateUrl`` ke ``capacitorconfigjson`` Anda
 }
 ```
 :::caution
-Saat Anda mengirim pembaruan yang dihosting sendiri, perhatikan bahwa Anda tidak dapat menggunakan endpoint "HTTP" karena bertentangan dengan kebijakan keamanan aplikasi Android, untuk keperluan pengujian Anda dapat [mengizinkannya](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+Ketika Anda melakukan push pembaruan yang dihosting sendiri, perhatikan bahwa Anda tidak dapat menggunakan endpoint "HTTP" karena bertentangan dengan kebijakan keamanan aplikasi Android, untuk keperluan pengujian Anda dapat [mengizinkannya](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
 :::
 
 ## API Pembaruan
@@ -54,7 +56,7 @@ interface AppInfos {
 }
 ```
 
-Server API harus merespons, dalam JSON, ke plugin capacitor-updater dengan data ini jika pembaruan diperlukan:
+API server harus merespons, dalam JSON, ke plugin capacitor-updater dengan data ini jika pembaruan diperlukan:
 
 ```json
 {
@@ -65,7 +67,7 @@ Server API harus merespons, dalam JSON, ke plugin capacitor-updater dengan data 
 
 Dalam mode Auto-update, server harus membandingkan versi dan mengembalikan yang benar, jika kunci URL ada, plugin memulai proses unduhan
 
-Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan di log sebagai gantinya
+Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan dalam log sebagai gantinya
 
 Kunci `version` harus dalam format [`semver`](https://semverorg/)
 
@@ -73,6 +75,6 @@ Zip harus memiliki `indexhtml` sebagai file di root, atau hanya satu folder di r
 
 Anda dapat menggunakan perintah CLI untuk mengzip bundle Anda:
 
-```bash title="Buat bundle dengan file Anda untuk disajikan dari server Anda"
+```bash title="Membuat bundle dengan file Anda untuk disajikan dari server Anda"
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```

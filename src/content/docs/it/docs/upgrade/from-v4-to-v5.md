@@ -22,10 +22,10 @@ Prima segui la guida di migrazione di Capacitor:
 
 `npx cap sync`
 
-È tutto! Molto facile!
+Ecco fatto! Molto semplice!
 
 ## Modalità manuale
 
 Se stavi ottenendo l'aggiornamento da solo con getLatest, c'è un piccolo cambiamento
-Ora se sei già aggiornato andrà nel catch
+Ora se sei già aggiornato entrerà nel catch
 Qualsiasi risposta diversa da aggiornamento disponibile farà questo

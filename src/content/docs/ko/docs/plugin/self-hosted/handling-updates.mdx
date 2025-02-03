@@ -1,12 +1,12 @@
 ---
-title: Menangani Pembaruan
-description: 자체 호스팅 모드에서 자동 업데이트 플러그인을 사용하는 방법
+title: 업데이트 처리
+description: 자체 호스팅 모드에서 자동 업데이트 플러그인 사용하기
 sidebar:
   order: 6
 locale: ko
 ---
 
-다음은 플러그인에 업데이트를 보내기 위한 JavaScript 코드 예시입니다.
+다음은 플러그인에 업데이트를 보내는 JavaScript 코드 예시입니다
 
 ```typescript
 interface AppInfos {
@@ -71,7 +71,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-그리고 업데이트가 없거나 오류가 있는 경우 `message` 키와 선택적으로 `error`를 추가합니다.
+그리고 업데이트가 없거나 오류가 있는 경우 `message` 키와 선택적으로 `error`를 추가합니다
 
 ```json
 {

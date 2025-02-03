@@ -1,6 +1,6 @@
 ---
 title: Nuxt 2
-description: Comment installer des plugins dans Nuxt 2
+description: Comment installer le plugin dans Nuxt 2
 sidebar:
   order: 1
 locale: fr

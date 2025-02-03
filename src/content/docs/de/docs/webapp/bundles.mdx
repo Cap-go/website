@@ -1,6 +1,6 @@
 ---
-title: Bundles
-description: 'Erfahren Sie, wie Sie Bundles verwalten'
+title: Bundle
+description: 'Entdecken Sie, wie man Bundles verwaltet'
 sidebar:
   order: 7
 locale: de
@@ -8,7 +8,7 @@ locale: de
 
 ## Alle Bundles anzeigen
 
-Werfen wir zunächst einen Blick auf die Bundles-Seite. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Bundles-Tab klicken](/docs/webapp/main-app-page)
+Schauen wir uns zunächst die Bundles-Seite an. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Bundles-Tab klicken](/docs/webapp/main-app-page)
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundleswebp" alt="bundle list" /><figcaption></figcaption></figure>
 
@@ -16,19 +16,19 @@ Werfen wir zunächst einen Blick auf die Bundles-Seite. Sie können darauf zugre
 
 Es gibt zwei Möglichkeiten, ein Bundle zu löschen:
 
- - Normal
- - Unsicher
+- Normal
+- Unsicher
 
-Die unsichere Art der Bundle-Löschung wurde am 12. August 2024 in Capgo eingeführt
+Die unsichere Möglichkeit zum Löschen eines Bundles wurde am 12. August 2024 zu Capgo hinzugefügt
 
 Der Unterschied zwischen den beiden Methoden liegt in der Möglichkeit, die Versionsnummer nach dem Löschen wiederzuverwenden
 
 Wenn Sie zum Beispiel eine Version `100` auf normale Weise löschen und später versuchen, eine Version `100` hochzuladen, wird dies fehlschlagen
-Wenn Sie diese Version über die unsichere Löschung entfernen, können Sie eine Version `100` hochladen
+Wenn Sie diese Version über das unsichere Löschen entfernen, können Sie eine Version `100` hochladen
 
 :::danger
 Das unsichere Löschen einer Version und erneutes Hochladen ist WIRKLICH gefährlich
-Es kann alle möglichen Fehler und unvorhersehbares Verhalten im Plugin verursachen
+Es kann alle Arten von Fehlern und unvorhersehbarem Verhalten im Plugin verursachen
 Es sollte NIEMALS für Bundles verwendet werden, die in einem öffentlichen Kanal verwendet wurden
 Aus diesem Grund erfordert das unsichere Löschen einer Version "super_admin"-Berechtigungen
 :::
@@ -43,14 +43,14 @@ Gehen wir alle Elemente auf dieser Seite durch
 
 ---
 
-Zuerst sehen Sie einen `Channel`. Dieser zeigt Ihnen, für welchen Kanal dieses Bundle bestimmt ist. Sie können den Kanal durch Anklicken ändern
-Nach dem Klick sollten Sie etwa Folgendes sehen:
+Zuerst sehen Sie einen `Channel`. Dieser zeigt Ihnen an, für welchen Kanal dieses Bundle bestimmt ist. Sie können den Kanal durch Anklicken ändern
+Nach dem Klicken sollten Sie etwa Folgendes sehen:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundle-changewebp" alt="bundle change" /><figcaption></figcaption></figure>
 
 `Set bundle to channel` ermöglicht es Ihnen, dieses Bundle als Standard für jeden Kanal zu verknüpfen\
 `Open channel` öffnet die Kanalseite für den Kanal, für den dieses Bundle bestimmt ist\
-`Unlink bundle from channel` hebt die Verknüpfung dieses Bundles mit dem zugehörigen Kanal auf
+`Unlink bundle from channel` trennt die Verknüpfung dieses Bundles vom zugehörigen Kanal 
 (**WARNUNG**: Wenn das Bundle mit mehr als einem Kanal verknüpft ist, haben Sie keine Auswahlmöglichkeit, welcher Kanal getrennt werden soll)
 
 ---
@@ -61,4 +61,4 @@ Es sollte etwa so aussehen:
 
 ---
 
-Zuletzt gibt es den Bereich `Devices`. Dort sehen Sie alle Geräte, die diese Version verwenden
+Zuletzt gibt es den Bereich `Devices`. Hier können Sie alle Geräte sehen, die diese Version verwenden

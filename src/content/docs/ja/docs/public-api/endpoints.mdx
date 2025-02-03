@@ -1,6 +1,6 @@
 ---
-title: Titik Akhir
-description: Capgo クラウド公開 API ドキュメント
+title: エンドポイント
+description: Capgo cloud のパブリックAPI ドキュメント
 sidebar:
   order: 2
 locale: ja
@@ -8,24 +8,24 @@ locale: ja
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-これはCapgoクラウドの公開APIのドキュメントです
+Capgo cloudのパブリックAPIに関するドキュメントです。
 
-アクセスするには、ヘッダーにAPIキーを`authorization`として追加してください
+アクセスするには、ヘッダーにAPIキーを`authorization`として追加してください。
 
 <LinkCard
-	title="APIキーを取得"
+	title="APIキーの取得"
 	href="https://webcapgoapp/dashboard/apikeys/"
 />
 
 ## 組織
 
-このエンドポイントでは、組織とそのメンバーを管理できます
+このエンドポイントでは、組織とそのメンバーを管理できます。
 
 ### GET
 
 `https://apicapgoapp/organization`
 
-組織情報を取得します。パラメータで`orgId`が提供された場合は単一の組織を返し、そうでない場合はアクセス可能なすべての組織を返します
+組織情報を取得します。パラメーターに`orgId`が指定されている場合は1つの組織を返し、それ以外の場合はアクセス可能なすべての組織を返します。
 
 ```typescript
 interface Organization {
@@ -40,7 +40,7 @@ interface Organization {
 }
 ```
 
-戻り値:
+返り値:
 ```typescript
 return Organization[] | Organization
 ```
@@ -49,7 +49,7 @@ return Organization[] | Organization
 
 `https://apicapgoapp/organization`
 
-既存の組織を更新します。管理者権限が必要です
+既存の組織を更新します。管理者権限が必要です。
 
 ```typescript
 interface OrganizationUpdate {
@@ -60,9 +60,9 @@ interface OrganizationUpdate {
 }
 ```
 
-`OrganizationUpdate`型のリクエストボディが必要です
+`OrganizationUpdate`型のリクエストボディが必要です。
 
-成功時、以下を返します：
+成功時は以下を返します:
 
 ```typescript
 return { status: 'Organization updated', data: Organization }
@@ -72,7 +72,7 @@ return { status: 'Organization updated', data: Organization }
 
 `https://apicapgoapp/organization`
 
-新しい組織を作成します
+新しい組織を作成します。
 
 ```typescript
 interface OrganizationCreate {
@@ -80,9 +80,9 @@ interface OrganizationCreate {
 }
 ```
 
-`OrganizationCreate`型のリクエストボディが必要です
+`OrganizationCreate`型のリクエストボディが必要です。
 
-成功時、以下を返します：
+成功時は以下を返します:
 
 ```typescript
 return { status: 'Organization created', id: string }
@@ -90,13 +90,13 @@ return { status: 'Organization created', id: string }
 
 ## APIキー
 
-このエンドポイントでは、Capgo APIにアクセスするためのAPIキーを管理できます
+このエンドポイントでは、Capgo APIへのアクセスに使用するAPIキーを管理できます。
 
 ### GET
 
 `https://apicapgoapp/apikey`
 
-アカウントのAPIキーを取得します。アクセス可能なすべてのAPIキーを返します
+アカウントのAPIキーを取得します。アクセス可能なすべてのAPIキーを返します。
 
 ```typescript
 interface ApiKey {
@@ -110,7 +110,7 @@ interface ApiKey {
 }
 ```
 
-戻り値:
+返り値:
 ```typescript
 return ApiKey[]
 ```
@@ -119,9 +119,9 @@ return ApiKey[]
 
 `https://apicapgoapp/apikey`
 
-特定の組織の新しいAPIキーを作成します
+特定の組織の新しいAPIキーを作成します。
 
-クエリパラメータ:
+クエリパラメーター:
 ```typescript
 interface ApiKeyCreate {
   org_id: string
@@ -129,7 +129,7 @@ interface ApiKeyCreate {
 }
 ```
 
-戻り値:
+返り値:
 ```typescript
 return { apikey: ApiKey }
 ```
@@ -138,17 +138,17 @@ return { apikey: ApiKey }
 
 `https://apicapgoapp/apikey/:id`
 
-既存のAPIキーを削除します
+既存のAPIキーを削除します。
 
-パラメータ:
+パラメーター:
 - `id`: 削除するAPIキー
 
-成功時の戻り値:
+成功時の返り値:
 ```typescript
 return { success: true }
 ```
 
-失敗時の戻り値:
+失敗時の返り値:
 ```typescript
 return { error: string, supabaseError?: any }
 ```
@@ -157,11 +157,11 @@ return { error: string, supabaseError?: any }
 
 ### GET 
 
-組織メンバーを取得します
+組織メンバーを取得します。
 
-`{ orgId: string }`型のリクエストボディ（クエリパラメータ）が必要です
+`{ orgId: string }`型のリクエストボディ（クエリパラメーター）が必要です。
 
-成功時、以下を返します:
+成功時は以下を返します:
 ```typescript
 interface Member {
   uid: string;
@@ -176,7 +176,7 @@ return Member[]
 
 `https://apicapgoapp/organization/members`
 
-組織メンバーを削除します
+組織メンバーを削除します。
 
 ```typescript
 interface MemberDelete {
@@ -185,15 +185,15 @@ interface MemberDelete {
 }
 ```
 
-`MemberDelete`型のリクエストボディ（クエリパラメータ）が必要です
+`MemberDelete`型のリクエストボディ（クエリパラメーター）が必要です。
 
-成功時、以下を返します:
+成功時は以下を返します:
 
 ```typescript
 return { status: 'OK' }
 ```
 
-失敗時、以下を返します:
+失敗時は以下を返します:
 
 ```typescript
 return { error: string, status: 'KO' }
@@ -201,13 +201,13 @@ return { error: string, status: 'KO' }
 
 ## 統計情報
 
-このエンドポイントでは、アプリと組織に関する様々な統計情報を取得できます
+このエンドポイントでは、アプリと組織に関する様々な統計情報を取得できます。
 
 ### GET /statistics/app/:app_id
 
-特定のアプリの統計情報を取得します
+特定のアプリの統計情報を取得します。
 
-クエリパラメータ:
+クエリパラメーター:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -216,7 +216,7 @@ interface StatsQuery {
 }
 ```
 
-戻り値:
+返り値:
 ```typescript
 interface Stats {
   date: string
@@ -226,13 +226,13 @@ interface Stats {
 }
 ```
 
-`graph`パラメータが提供された場合、要求された指標のSVG画像の可視化を返します
+`graph`パラメーターが指定された場合、要求された指標のSVG画像による可視化を返します。
 
 ### GET /statistics/user
 
-ユーザーがアクセスできるすべての組織の集計統計を取得します
+ユーザーがアクセスできるすべての組織の集計統計を取得します。
 
-クエリパラメータ:
+クエリパラメーター:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -241,8 +241,8 @@ interface StatsQuery {
 }
 ```
 
-戻り値:
-`graph`が提供されない場合:
+返り値:
+`graph`が指定されていない場合:
 ```typescript
 interface Stats {
   date: string
@@ -252,13 +252,13 @@ interface Stats {
 }[]
 ```
 
-`graph`パラメータが提供された場合、要求された指標のSVG画像の可視化を返します
+`graph`パラメーターが指定された場合、要求された指標のSVG画像による可視化を返します。
 
 ### GET /statistics/org/:org_id
 
-特定の組織の統計情報を取得します
+特定の組織の統計情報を取得します。
 
-クエリパラメータ:
+クエリパラメーター:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -267,8 +267,8 @@ interface StatsQuery {
 }
 ```
 
-戻り値:
-`graph`が提供されない場合:
+返り値:
+`graph`が指定されていない場合:
 ```typescript
 interface Stats {
   date: string
@@ -278,17 +278,17 @@ interface Stats {
 }[]
 ```
 
-`graph`パラメータが提供された場合、要求された指標のSVG画像の可視化を返します
+`graph`パラメーターが指定された場合、要求された指標のSVG画像による可視化を返します。
 
 ## チャンネル
 
-このエンドポイントでは、アプリの利用可能なすべてのチャンネルを確認および変更できます
+このエンドポイントでは、アプリの利用可能なすべてのチャンネルを確認および変更できます。
 
 ### POST
 
 `https://apicapgoapp/channel`
 
-チャンネルを作成または更新するために以下を送信します
+チャンネルを作成または更新するために送信します。
 
 ```typescript
 type disable_update = "major" | "minor" | "version_number" | "none"
@@ -307,7 +307,7 @@ interface ChannelSet {
 }
 ```
 
-以下を受信します:
+受け取る値:
 
 ```json
 { "status": "ok" }
@@ -317,8 +317,8 @@ interface ChannelSet {
 
 `https://apicapgoapp/channel`
 
-URLパラメータとして`app_id`を送信すると、最初の50チャンネルの配列を受信します\
-`page=1`を送信することで次のチャンネルを取得できます
+URLパラメーターとして`app_id`を送信すると、最初の50個のチャンネルの配列を受け取ります。\
+`page=1`を送信することで次の50個を取得できます。
 
 ```typescript
 interface Channel {
@@ -340,7 +340,7 @@ interface Channel {
 }[]
 ```
 
-オプションでURLパラメータとして`channel`名を送信すると、1つのチャンネルを受信します:
+オプションでURLパラメーターとして`channel`名を送信すると、1つのチャンネルを受け取ります:
 
 ```typescript
 interface Channel {
@@ -366,7 +366,7 @@ interface Channel {
 
 `https://apicapgoapp/channel`
 
-以下をクエリパラメータとして送信します
+これをクエリパラメーターとして送信します
 
 ```typescript
 interface Channel {
@@ -375,7 +375,7 @@ interface Channel {
 }
 ```
 
-以下を受信します:
+受け取る値:
 
 ```json
 { "status": "ok" }
@@ -383,13 +383,13 @@ interface Channel {
 
 ## デバイス
 
-このエンドポイントでは、アプリにリンクされたすべてのデバイスを確認および変更できます
+このエンドポイントでは、アプリにリンクされているすべてのデバイスを確認および変更できます。
 
-### POST
+### POST&#x20;
 
 `https://apicapgoapp/device`
 
-以下を送信します
+送信するデータ:
 
 ```typescript
 interface DeviceLink {
@@ -400,7 +400,7 @@ interface DeviceLink {
 }
 ```
 
-以下を受信します:
+受け取る値:
 
 ```json
 { "status": "ok" }
@@ -410,7 +410,7 @@ interface DeviceLink {
 
 `https://apicapgoapp/device`
 
-URLパラメータとして`app_id`を送信すると、最初の50デバイスの配列を受信します`page=1`を送信することで次のものを取得できます
+URLパラメーターとして`app_id`を送信すると、最初の50個のデバイスの配列を受け取ります。`page=1`を送信することで次のものを取得できます
 
 ```typescript
 interface Device{
@@ -432,7 +432,7 @@ interface Device{
 }[]       
 ```
 
-オプションでURLパラメーターとして`device_id`を送信すると、1つを受け取れます:
+オプションでURLパラメータとして`device_id`を送信すると以下を受け取ります:
 
 ```typescript
 interface Device {
@@ -452,11 +452,11 @@ interface Device {
 
 ### DELETE
 
-このエンドポイントはチャンネルとバージョンオーバーライドのリンクを解除するためのものです。Capgoからデバイスを削除することはできません
+このエンドポイントはチャネルとバージョンオーバーライドのリンクを解除するためのものです。Capgoからデバイスを削除することはできません
 
 `https://apicapgoapp/device`
 
-これをクエリパラメーターとして送信
+これをクエリパラメータとして送信
 
 ```typescript
 interface Device {
@@ -473,13 +473,13 @@ interface Device {
 
 ## バンドル
 
-このエンドポイントではアプリにリンクされているすべてのバンドルを確認・削除できます
+このエンドポイントではアプリにリンクされているすべてのバンドルを確認および削除できます
 
 ### GET
 
 `https://apicapgoapp/bundle`
 
-URLパラメーターとして`app_id`を送信すると、最初の50バンドルの配列を受信します\
+URLパラメータとして`app_id`を送信すると最初の50個のバンドルの配列を受け取ります\
 `page=1`を送信することで次のものを取得できます
 
 ```typescript
@@ -509,7 +509,7 @@ interface Bundle {
 
 `https://apicapgoapp/bundle`
 
-これをクエリパラメーターとして送信
+これをクエリパラメータとして送信
 
 ```typescript
 interface Bundle {
@@ -532,4 +532,4 @@ interface Bundle {
 }
 ```
 
-すべてのバンドルを削除するため
+すべてのバンドルを削除するには

@@ -1,6 +1,6 @@
 ---
-title: Paquetes encriptados
-description: Cómo utilizar el plugin de actualización manual en modo self-hosting
+title: Bundle crittografati
+description: Cómo usar el plugin de actualización manual en modo autohospedado
 sidebar:
   order: 5
 locale: es
@@ -10,13 +10,13 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Cifrado de extremo a extremo
 
-A partir de la versión 4150, el plugin permite enviar actualizaciones cifradas
-Para comenzar, empieza creando una clave privada
+A partir de la versión 4150, el plugin permite enviar actualizaciones cifradas.
+Para comenzar, crea una clave privada
 ```bash title='Create a private key'
 npx @capgo/cli key create
 ```
 
-Luego cifra tu zip
+Luego cifra tu archivo zip
 ```bash title="Encrypt bundled zip"
 npx @capgo/cli encrypt [path/to/zip]
 ```
@@ -35,6 +35,6 @@ Entonces tu aplicación podrá usar la clave privada para descifrar el `session_
 Aprende más sobre esto aquí:
 
 <LinkCard
-	title="Self-hosted Live Updates"
+	title="Actualizaciones en vivo auto-alojadas"
 	href="https://capgoapp/blog/self-hosted-live-updates/"
 />

@@ -1,14 +1,14 @@
 ---
 title: Nuxt 2
-description: Nuxt 2でプラグインをインストールする方法
+description: Nuxt 2 にプラグインをインストールする方法
 sidebar:
   order: 1
 locale: ja
 ---
 
-# Nuxt 2 でのインストール
+# Nuxt 2 へのインストール
 
-`plugins`ディレクトリに`capacitor-updaterjs`プラグインファイルを作成します
+プラグインファイル `capacitor-updaterjs` を `plugins` ディレクトリに作成します
 
 ```js
 
@@ -23,4 +23,4 @@ export default ({ app }) => {
 }
 ```
 
-これによりクライアントサイドでプラグインが読み込まれ、アプリがアップデートを受信する準備ができたことを通知します
+これにより、クライアントサイドでプラグインが読み込まれ、アプリがアップデートを受信する準備ができたことを通知します

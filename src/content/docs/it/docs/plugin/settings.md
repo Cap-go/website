@@ -1,6 +1,6 @@
 ---
-title: Impostazioni
-description: Parametri disponibili per Capacitor Updater
+title: 設定
+description: Tutte le configurazioni disponibili per Capacitor Updater
 sidebar:
   order: 8
 locale: it
@@ -105,7 +105,7 @@ Predefinito: `true`
 
 ## `updateUrl`
 
-> Configura l'URL / endpoint a cui vengono inviati i controlli degli aggiornamenti
+> Configura l'URL / endpoint a cui vengono inviati i controlli di aggiornamento
 
 Disponibile solo per Android e iOS
 
@@ -124,7 +124,7 @@ Predefinito: `https://apicapgoapp/updates`
 
 ## `statsUrl`
 
-> Configura l'URL / endpoint a cui vengono inviate le statistiche degli aggiornamenti
+> Configura l'URL / endpoint a cui vengono inviate le statistiche di aggiornamento
 
 Disponibile solo per Android e iOS. Impostare a "" per disabilitare il reporting delle statistiche
 
@@ -143,7 +143,7 @@ Predefinito: `https://apicapgoapp/stats`
 
 ## `privateKey`
 
-> Configura la chiave privata per la crittografia end-to-end degli aggiornamenti in tempo reale
+> Configura la chiave privata per la crittografia end-to-end degli aggiornamenti live
 
 Disponibile solo per Android e iOS
 
@@ -164,7 +164,7 @@ Predefinito: `undefined`
 
 ## `directUpdate`
 
-> Fa in modo che il plugin installi direttamente l'aggiornamento quando l'app è stata appena aggiornata/installata. Applicabile solo per la modalità autoUpdate
+> Fa sì che il plugin installi direttamente l'aggiornamento quando l'app è stata appena aggiornata/installata. Applicabile solo per la modalità autoUpdate
 
 Disponibile solo per Android e iOS
 
@@ -185,7 +185,7 @@ Predefinito: `undefined`
 ## `resetWhenUpdate`
 
 :::note
-Quando si verifica un aggiornamento del negozio, disabilita il reset forzato alla versione nativa
+Quando avviene un aggiornamento del negozio, disabilita il reset forzato alla versione nativa
 :::
 
 Ci sono molte altre impostazioni disponibili solo sulla [web app](https://webcapgoapp/login)
@@ -205,7 +205,7 @@ Per configurare il plugin, usa queste impostazioni:
 ```
 
 ## `directUpdate`
-Fa in modo che il plugin installi direttamente l'aggiornamento quando l'app è stata appena aggiornata/installata. Applicabile solo per la modalità autoUpdate
+Fa sì che il plugin installi direttamente l'aggiornamento quando l'app è stata appena aggiornata/installata. Applicabile solo per la modalità autoUpdate
 
 :::caution
 Questa impostazione richiede di nascondere l'app all'utente mentre l'aggiornamento viene installato. Altrimenti l'app si resetterà mentre l'utente sta navigando

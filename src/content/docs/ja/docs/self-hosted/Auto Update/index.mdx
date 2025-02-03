@@ -1,6 +1,6 @@
 ---
-title: Einführung - Automatische Aktualisierung
-description: セルフホストモードでのauto-updateプラグインの使用方法
+title: Auto Update の概要
+description: 自己ホストモードでのAuto-updateプラグインの使用方法
 sidebar:
   order: 1
 locale: ja
@@ -8,23 +8,23 @@ locale: ja
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-このドキュメントでは、自動更新サーバーの実行方法について説明します
+この文書では、自動更新サーバーの実行方法について説明します。
 
 ## 始める前に
 
-このツールを独自に使用する場合は、[こちら](https://githubcom/sponsors/riderx/)から私の活動をサポートすることを強くお勧めします
+このプロジェクトを独自に利用される場合は、[こちら](https://githubcom/sponsors/riderx/)から私の活動を支援していただけると幸いです。
 
-ここで構築した貴重なコードをすべてオープンソース化するという大きな賭けをしました
+私はここで構築した貴重なコードすべてをオープンソース化するという大きな賭けをしました。
 
-私はこれを自分のものとして保持し、高額な価格を設定することもできました
+これを自分のものとして保持し、高額な価格を設定することもできました。
 
-さらに、Capgoツールに焦点を当て、オープンで透明性のあるビジネスにしたいと考えています
+さらに、Capgoツールに焦点を当て、オープンで透明性のあるビジネスにしたいと考えています。
 
-同様に、対立や隠蔽ではなく、開放することで世界をより良い場所にできると考えています
+同様に、対立や隠蔽ではなく、オープン化することで世界をより良い場所にできると考えています。
 
 しかし、これを実現するためには、あなたを含む私たち全員が役割を果たす必要があります 🥹
 
-capgoのオファーがあなたに合わない場合は、あなたの条件で価格を設定し、ブートストラップされたメーカーを[こちら](https://githubcom/sponsors/riderx/)からサポートしてください
+もしcapgoのサービスがあなたに合わない場合は、[こちら](https://githubcom/sponsors/riderx/)からあなたの条件でブートストラップされた開発者を支援してください。
 
 ## クイックインストール
 
@@ -35,7 +35,7 @@ npx cap sync
 
 ### 設定
 
-以下のようにURLを設定してプラグインを構成する必要があります：
+以下のようにURLを使用するようにプラグインを設定する必要があります：
 
 ```json
 {
@@ -47,11 +47,11 @@ npx cap sync
 }
 ```
 
-> 🚧 AndroidではHTTPリクエストは許可されていません。テスト目的の場合は[許可してください](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 AndroidではHTTPリクエストが許可されていません。テスト目的の場合は[許可してください](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
-### 更新API
+### アップデートAPI
 
-プラグインは、アプリが開かれるたびに以下のボディでAPIにPOSTリクエストを送信します：
+プラグインは、アプリが開かれるたびに以下のボディでAPIにPOSTリクエストを行います：
 
 ```typescript
 interface AppInfos {
@@ -69,7 +69,7 @@ interface AppInfos {
 }
 ```
 
-更新が必要な場合、サーバーAPIはcapacitor-updaterプラグインに以下のようなJSONデータで応答する必要があります：
+サーバーAPIは、アップデートが必要な場合、capacitor-updaterプラグインに対してJSON形式で以下のデータを返す必要があります：
 
 ```json
 {
@@ -78,40 +78,40 @@ interface AppInfos {
 }
 ```
 
-自動更新では、サーバーがバージョンを比較して適切なものを返す必要があります。URLキーが存在する場合、プラグインはダウンロードプロセスを開始します
+自動更新では、サーバーがバージョンを比較して適切なものを返す必要があります。URLキーが存在する場合、プラグインはダウンロードプロセスを開始します。
 
-"message"と"error"キーを追加すると、バージョンは設定されず、代わりにメッセージがログに表示されます
+"message"と"error"キーを追加すると、バージョンは設定されず、代わりにメッセージがログに表示されます。
 
-`version`キーは[`semver`](https://semverorg/)形式である必要があります
+`version`キーは[`semver`](https://semverorg/)形式である必要があります。
 
-ZIPファイルには、ルートに`indexhtml`ファイルが含まれているか、ルートに`indexhtml`を含む1つのフォルダのみが必要です
+zipファイルはルートに`indexhtml`ファイルを持つか、ルートに`indexhtml`を含む1つのフォルダのみを持つ必要があります。
 
-CLIのコマンドを使用してバンドルをZIP化できます：
+CLIのコマンドを使用してバンドルをzip化できます：
 
 ```bash
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
 
 <LinkCard
-	title="更新エンドポイント"
+	title="アップデートエンドポイント"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
 #### エンドツーエンド暗号化
 
-バージョン4.15.0以降、プラグインは暗号化された更新の送信をサポートしています
+バージョン4.15.0以降、プラグインは暗号化されたアップデートの送信をサポートしています。
 
-この機能を使用するには、``npx @capgo/cli key create``で秘密鍵を作成します
+この機能を使用するには、`npx @capgo/cli key create`で秘密鍵を作成します。
 
-次に、``npx @capgo/cli encrypt [path/to/zip]``でZIPファイルを暗号化します
+次に、`npx @capgo/cli encrypt [path/to/zip]`でzipファイルを暗号化します。
 
-コマンドは`ivSessionKey`を出力します。これを更新ペイロードの`session_key`キーと共に送信する必要があります\
-その後、アプリは秘密鍵を使用して`session_key`を復号化し、復号化された`session_key`を使用して更新を復号化できます
+コマンドは`ivSessionKey`を出力します。これはアップデートペイロードの`session_key`キーとして送信する必要があります。\
+その後、アプリは秘密鍵を使用して`session_key`を復号化し、復号化された`session_key`を使用してアップデートを復号化できます。
 
-詳細はこちら：
+詳細はこちらをご覧ください：
 
 <LinkCard
-	title="セルフホストのライブアップデート"
+	title="セルフホスト型ライブアップデート"
 	href="https://capgoapp/blog/self-hosted-live-updates/"
 />
 
@@ -119,9 +119,9 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 
 バージョン1.3.0以降、更新システムは統計を送信します！
 
-デフォルトでは、使用状況を理解するためにすべての統計が我々のサーバーに送信されます
+デフォルトでは、使用状況を理解するためにすべての統計が当社のサーバーに送信されます。
 
-> 💡 統計には個人データは送信されません。ランダムUUID、更新バージョン、ネイティブアプリバージョン、プラットフォーム、アクション、アプリIDのみが送信されます
+> 💡 統計には個人データは送信されず、ランダムUUID、更新バージョン、ネイティブアプリバージョン、プラットフォーム、アクション、アプリIDのみが送信されます。
 
 代わりにあなたのサーバーにデータを送信したい場合は、以下の設定を変更してください：
 
@@ -138,17 +138,17 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 }
 ```
 
-サーバーが受信するデータ：
+サーバーが受信するデータは以下の通りです：
 
 ```tsx
 interface AppInfosStats {
 	"action": "set", // set, delete, set_fail, reset, revertが可能
-	// 以下は更新と同じ情報
-	"app_id": "*******", // ストアのアプリ識別子
+	// 以下はアップデートと同じ情報
+	"app_id": "*******", // ストア内のアプリ識別子
 	"device_id": "*******", // アプリインストールごとの一意のID
 	"platform": "ios", // またはandroid
-	"custom_id": "user_1", // ユーザーを表す
-        "version_name": "123", // Webビルドのバージョン
+	"custom_id": "user_1", // あなたのユーザーを表す
+        "version_name": "123", // webビルドのバージョン
         "version_build": "120", // ネイティブビルドのバージョン
         "version_code": "120", // ネイティブビルドのビルド番号
 	"version_os": "16", // デバイスのOSバージョン
@@ -158,13 +158,13 @@ interface AppInfosStats {
 }
 ```
 
-空の文字列を使用して完全に無効化することもできます。統計はプライバシーに配慮して作られており、プラグインの使用状況を理解し、問題を解決して改善するのに役立っていることを覚えておいてください
+空の文字列を使用して完全に無効化することもできます。統計はプライバシーに配慮して作られており、プラグインの使用状況を理解し、問題を解決して改善するのに役立っていることを覚えておいてください。
 
 <LinkCard
 	title="統計エンドポイント"
 	href="/docs/self-hosted/auto-update/stats-endpoint"
 />
 
-### チャンネルAPI
+### チャネルAPI
 
 ドキュメント作成予定

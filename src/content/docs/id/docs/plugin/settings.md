@@ -1,6 +1,6 @@
 ---
 title: 설정
-description: Parameter yang tersedia untuk Capacitor Updater
+description: Semua konfigurasi yang tersedia untuk Capacitor Updater
 sidebar:
   order: 8
 locale: id
@@ -126,7 +126,7 @@ Default: `https://apicapgoapp/updates`
 
 > Mengonfigurasi URL / endpoint tempat statistik pembaruan dikirim
 
-Hanya tersedia untuk Android dan iOS. Atur ke "" untuk menonaktifkan pelaporan statistik
+Hanya tersedia untuk Android dan iOS. Setel ke "" untuk menonaktifkan pelaporan statistik
 
 Default: `https://apicapgoapp/stats`
 
@@ -224,7 +224,7 @@ Pengaturan ini mengharuskan Anda menyembunyikan aplikasi dari pengguna saat pemb
 ```
 
 ## `defaultChannel`
-Mengatur saluran default untuk aplikasi. Ini akan menggantikan saluran lain yang diatur di Capgo jika saluran mengizinkan penulisan ulang
+Mengatur channel default untuk aplikasi. Ini akan menimpa channel lain yang diatur di Capgo jika channel mengizinkan penimpaan
 
 ```json
 // capacitorconfigjson
@@ -238,7 +238,7 @@ Mengatur saluran default untuk aplikasi. Ini akan menggantikan saluran lain yang
 ```
 
 ## `appId`
-Mengatur appId untuk aplikasi. Ini akan menggantikan cara lain untuk mendapatkan appId. Ini berguna ketika Anda ingin memiliki appId yang berbeda di Capgo dan di kode native Anda
+Mengatur appId untuk aplikasi. Ini akan menimpa cara lain untuk mendapatkan appId. Ini berguna ketika Anda ingin memiliki appId yang berbeda di Capgo dan di kode native Anda
 :::note
 Ini adalah cara baru untuk mengatur appId. Cara lama masih dan akan tetap didukung
 :::
@@ -254,7 +254,7 @@ Ini adalah cara baru untuk mengatur appId. Cara lama masih dan akan tetap diduku
 ```
 
 ## `version`
-Mengatur versi untuk aplikasi. Ini akan menggantikan cara lain untuk mendapatkan versi. Ini berguna ketika Anda ingin memiliki versi yang berbeda di Capgo dan di kode native Anda
+Mengatur versi untuk aplikasi. Ini akan menimpa cara lain untuk mendapatkan versi. Ini berguna ketika Anda ingin memiliki versi yang berbeda di Capgo dan di kode native Anda
 :::note
 Ini adalah cara baru untuk mengatur versi. Cara lama masih dan akan tetap didukung
 :::

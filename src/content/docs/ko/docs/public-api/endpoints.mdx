@@ -1,6 +1,6 @@
 ---
 title: 엔드포인트
-description: Capgo 클라우드의 공개 API 문서
+description: Capgo Cloud의 공개 API 문서
 sidebar:
   order: 2
 locale: ko
@@ -8,24 +8,24 @@ locale: ko
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-이것은 Capgo 클라우드의 공개 API 문서입니다.
+Capgo 클라우드의 공개 API 문서입니다.
 
 접근하려면 헤더에 API 키를 `authorization`으로 추가하세요
 
 <LinkCard
-	title="API 키 받기"
+	title="API 키 얻기"
 	href="https://webcapgoapp/dashboard/apikeys/"
 />
 
 ## 조직
 
-이 엔드포인트를 통해 조직과 구성원을 관리할 수 있습니다.
+이 엔드포인트는 조직과 구성원을 관리할 수 있게 해줍니다
 
 ### GET
 
 `https://apicapgoapp/organization`
 
-조직 정보를 검색합니다. 매개변수에 `orgId`가 제공되면 단일 조직을 반환하고, 그렇지 않으면 접근 가능한 모든 조직을 반환합니다.
+조직 정보를 검색합니다. 파라미터로 `orgId`가 제공되면 단일 조직을 반환합니다. 그렇지 않으면 접근 가능한 모든 조직을 반환합니다
 
 ```typescript
 interface Organization {
@@ -49,7 +49,7 @@ return Organization[] | Organization
 
 `https://apicapgoapp/organization`
 
-기존 조직을 업데이트합니다. 관리자 권한이 필요합니다.
+기존 조직을 업데이트합니다. 관리자 권한이 필요합니다
 
 ```typescript
 interface OrganizationUpdate {
@@ -60,19 +60,19 @@ interface OrganizationUpdate {
 }
 ```
 
-`OrganizationUpdate` 타입의 요청 본문이 필요합니다.
+`OrganizationUpdate` 타입의 요청 본문이 필요합니다
 
 성공 시 다음을 반환합니다:
 
 ```typescript
-return { status: '조직이 업데이트되었습니다', data: Organization }
+return { status: 'Organization updated', data: Organization }
 ```
 
 ### PUT
 
 `https://apicapgoapp/organization`
 
-새 조직을 생성합니다.
+새 조직을 생성합니다
 
 ```typescript
 interface OrganizationCreate {
@@ -80,23 +80,23 @@ interface OrganizationCreate {
 }
 ```
 
-`OrganizationCreate` 타입의 요청 본문이 필요합니다.
+`OrganizationCreate` 타입의 요청 본문이 필요합니다
 
 성공 시 다음을 반환합니다:
 
 ```typescript
-return { status: '조직이 생성되었습니다', id: string }
+return { status: 'Organization created', id: string }
 ```
 
 ## API 키
 
-이 엔드포인트를 통해 Capgo API 접근을 위한 API 키를 관리할 수 있습니다.
+이 엔드포인트는 Capgo API 접근을 위한 API 키를 관리할 수 있게 해줍니다
 
 ### GET
 
 `https://apicapgoapp/apikey`
 
-계정의 API 키를 검색합니다. 접근 가능한 모든 API 키를 반환합니다.
+계정의 API 키를 검색합니다. 접근 가능한 모든 API 키를 반환합니다
 
 ```typescript
 interface ApiKey {
@@ -119,9 +119,9 @@ return ApiKey[]
 
 `https://apicapgoapp/apikey`
 
-특정 조직에 대한 새 API 키를 생성합니다.
+특정 조직을 위한 새 API 키를 생성합니다
 
-쿼리 매개변수:
+쿼리 파라미터:
 ```typescript
 interface ApiKeyCreate {
   org_id: string
@@ -138,9 +138,9 @@ return { apikey: ApiKey }
 
 `https://apicapgoapp/apikey/:id`
 
-기존 API 키를 삭제합니다.
+기존 API 키를 삭제합니다
 
-매개변수:
+파라미터:
 - `id`: 삭제할 API 키
 
 성공 시 반환:
@@ -153,13 +153,13 @@ return { success: true }
 return { error: string, supabaseError?: any }
 ```
 
-## 구성원 (/organization/members)
+## 멤버 (/organization/members)
 
 ### GET 
 
-조직 구성원을 검색합니다.
+조직 멤버를 검색합니다
 
-`{ orgId: string }` 타입의 요청 본문(쿼리 매개변수)이 필요합니다.
+`{ orgId: string }` 타입의 요청 본문(쿼리 파라미터)이 필요합니다
 
 성공 시 다음을 반환합니다:
 ```typescript
@@ -176,7 +176,7 @@ return Member[]
 
 `https://apicapgoapp/organization/members`
 
-조직 구성원을 삭제합니다.
+조직 멤버를 삭제합니다
 
 ```typescript
 interface MemberDelete {
@@ -185,7 +185,7 @@ interface MemberDelete {
 }
 ```
 
-`MemberDelete` 타입의 요청 본문(쿼리 매개변수)이 필요합니다.
+`MemberDelete` 타입의 요청 본문(쿼리 파라미터)이 필요합니다
 
 성공 시 다음을 반환합니다:
 
@@ -201,13 +201,13 @@ return { error: string, status: 'KO' }
 
 ## 통계
 
-이 엔드포인트를 통해 앱과 조직에 대한 다양한 통계를 검색할 수 있습니다.
+이 엔드포인트는 앱과 조직에 대한 다양한 통계를 검색할 수 있게 해줍니다
 
 ### GET /statistics/app/:app_id
 
-특정 앱에 대한 통계를 검색합니다.
+특정 앱의 통계를 검색합니다
 
-쿼리 매개변수:
+쿼리 파라미터:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -221,18 +221,18 @@ interface StatsQuery {
 interface Stats {
   date: string
   mau: number      // 월간 활성 사용자
-  storage: number  // 스토리지 사용량(바이트)
+  storage: number  // 저장소 사용량(바이트)
   bandwidth: number // 대역폭 사용량(바이트)
 }
 ```
 
-`graph` 매개변수가 제공되면 요청된 지표의 SVG 이미지 시각화를 반환합니다.
+`graph` 파라미터가 제공되면 요청된 메트릭의 SVG 이미지 시각화를 반환합니다
 
 ### GET /statistics/user
 
-사용자가 접근할 수 있는 모든 조직의 집계된 통계를 검색합니다.
+사용자가 접근할 수 있는 모든 조직의 집계된 통계를 검색합니다
 
-쿼리 매개변수:
+쿼리 파라미터:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -247,18 +247,18 @@ interface StatsQuery {
 interface Stats {
   date: string
   mau: number      // 월간 활성 사용자
-  storage: number  // 스토리지 사용량(바이트)
+  storage: number  // 저장소 사용량(바이트)
   bandwidth: number // 대역폭 사용량(바이트)
 }[]
 ```
 
-`graph` 매개변수가 제공되면 요청된 지표의 SVG 이미지 시각화를 반환합니다.
+`graph` 파라미터가 제공되면 요청된 메트릭의 SVG 이미지 시각화를 반환합니다
 
 ### GET /statistics/org/:org_id
 
-특정 조직에 대한 통계를 검색합니다.
+특정 조직의 통계를 검색합니다
 
-쿼리 매개변수:
+쿼리 파라미터:
 ```typescript
 interface StatsQuery {
   from: Date
@@ -273,22 +273,22 @@ interface StatsQuery {
 interface Stats {
   date: string
   mau: number      // 월간 활성 사용자
-  storage: number  // 스토리지 사용량(바이트)
+  storage: number  // 저장소 사용량(바이트)
   bandwidth: number // 대역폭 사용량(바이트)
 }[]
 ```
 
-`graph` 매개변수가 제공되면 요청된 지표의 SVG 이미지 시각화를 반환합니다.
+`graph` 파라미터가 제공되면 요청된 메트릭의 SVG 이미지 시각화를 반환합니다
 
 ## 채널
 
-이 엔드포인트를 통해 앱의 모든 사용 가능한 채널을 확인하고 수정할 수 있습니다.
+이 엔드포인트는 앱의 모든 사용 가능한 채널을 확인하고 수정할 수 있게 해줍니다
 
 ### POST
 
 `https://apicapgoapp/channel`
 
-채널을 생성하거나 업데이트하려면 다음을 전송하세요.
+채널을 생성하거나 업데이트하려면 다음을 전송하세요
 
 ```typescript
 type disable_update = "major" | "minor" | "version_number" | "none"
@@ -307,7 +307,7 @@ interface ChannelSet {
 }
 ```
 
-다음을 받습니다:
+다음을 수신합니다:
 
 ```json
 { "status": "ok" }
@@ -317,8 +317,8 @@ interface ChannelSet {
 
 `https://apicapgoapp/channel`
 
-URL 매개변수로 `app_id`를 전송하면 처음 50개 채널의 배열을 받습니다.\
-`page=1`을 전송하여 다음 항목을 가져올 수 있습니다.
+URL 파라미터로 `app_id`를 보내면 처음 50개의 채널 배열을 수신합니다\
+`page=1`을 보내서 다음 것들을 얻을 수 있습니다
 
 ```typescript
 interface Channel {
@@ -340,7 +340,7 @@ interface Channel {
 }[]
 ```
 
-선택적으로 URL 매개변수로 `channel` 이름을 전송하면 하나를 받습니다:
+선택적으로 URL 파라미터로 `channel` 이름을 보내면 하나를 수신합니다:
 
 ```typescript
 interface Channel {
@@ -366,7 +366,7 @@ interface Channel {
 
 `https://apicapgoapp/channel`
 
-쿼리 매개변수로 다음을 전송하세요.
+다음을 쿼리 파라미터로 보내세요
 
 ```typescript
 interface Channel {
@@ -375,7 +375,7 @@ interface Channel {
 }
 ```
 
-다음을 받습니다:
+다음을 수신합니다:
 
 ```json
 { "status": "ok" }
@@ -383,24 +383,24 @@ interface Channel {
 
 ## 디바이스
 
-이 엔드포인트를 통해 앱에 연결된 모든 디바이스를 확인하고 수정할 수 있습니다.
+이 엔드포인트는 앱에 연결된 모든 디바이스를 확인하고 수정할 수 있게 해줍니다
 
-### POST
+### POST&#x20;
 
 `https://apicapgoapp/device`
 
-다음을 전송하세요.
+다음을 보내세요
 
 ```typescript
 interface DeviceLink {
   app_id: string
   device_id: string
-  version_id?: string // 버전 이름 (더 나은 이름으로 마이그레이션될 예정)
+  version_id?: string // 버전 이름 (더 나은 이름으로 마이그레이션 될 예정)
   channel?: string // 채널 이름
 }
 ```
 
-다음을 받습니다:
+다음을 수신합니다:
 
 ```json
 { "status": "ok" }
@@ -410,7 +410,7 @@ interface DeviceLink {
 
 `https://apicapgoapp/device`
 
-URL 매개변수로 `app_id`를 전송하면 처음 50개 디바이스의 배열을 받습니다.`page=1`을 보내서 다음 항목을 가져올 수 있습니다.
+URL 파라미터로 `app_id`를 보내면 처음 50개의 디바이스 배열을 수신합니다`page=1`을 전송하여 다음 항목을 얻을 수 있습니다
 
 ```typescript
 interface Device{
@@ -432,7 +432,7 @@ interface Device{
 }[]       
 ```
 
-선택적으로 URL 매개변수로 `device_id` 이름을 보내서 하나를 받을 수 있습니다:
+그리고 선택적으로 하나를 받기 위해 URL 매개변수로 `device_id` 이름을 전송할 수 있습니다:
 
 ```typescript
 interface Device {
@@ -452,11 +452,11 @@ interface Device {
 
 ### DELETE
 
-이 엔드포인트는 채널과 버전 재정의를 연결 해제하기 위한 것입니다. Capgo에서 기기를 삭제할 수는 없습니다.
+이 엔드포인트는 채널과 버전 오버라이드를 연결 해제하기 위한 것입니다. Capgo에서 디바이스를 삭제할 수는 없습니다
 
 `https://apicapgoapp/device`
 
-다음을 쿼리 매개변수로 보내세요
+쿼리 매개변수로 다음을 전송하세요
 
 ```typescript
 interface Device {
@@ -479,8 +479,8 @@ interface Device {
 
 `https://apicapgoapp/bundle`
 
-URL 매개변수로 `app_id`를 보내면 처음 50개의 번들 배열을 받습니다\
-`page=1`을 보내서 다음 항목을 가져올 수 있습니다
+URL 매개변수로 `app_id`를 전송하면 처음 50개 번들의 배열을 수신합니다\
+`page=1`을 전송하여 다음 항목을 얻을 수 있습니다
 
 ```typescript
 interface Bundle {
@@ -505,11 +505,11 @@ interface Bundle {
 
 ### DELETE
 
-클라우드에서 번들 하나를 삭제합니다
+클라우드에서 하나의 번들을 삭제합니다
 
 `https://apicapgoapp/bundle`
 
-다음을 쿼리 매개변수로 보내세요
+쿼리 매개변수로 다음을 전송하세요
 
 ```typescript
 interface Bundle {
@@ -524,7 +524,7 @@ interface Bundle {
 { "status": "ok" }
 ```
 
-또는 다음을 보낼 수 있습니다
+또는 다음을 전송할 수 있습니다
 
 ```typescript
 interface Bundle {
@@ -532,4 +532,4 @@ interface Bundle {
 }
 ```
 
-모든 번들을 삭제하려면
+모든 번들을 삭제하기 위해

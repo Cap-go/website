@@ -1,8 +1,6 @@
 ---
-title: 수동 업데이트
-description: >-
-  So verwenden Sie das manuelle Aktualisierungs-Plugin im selbst gehosteten
-  Modus
+title: Manuelle Aktualisierung
+description: Manuelles Update-Plugin im Self-Hosted-Modus verwenden
 sidebar:
   order: 4
 locale: de
@@ -29,11 +27,11 @@ Fügen Sie dies zu Ihrer ``capacitorconfigjson`` hinzu, um Auto-Update zu deakti
 Sie können dieses Beispiel verwenden oder die Logik in Ihrer App nachbilden
 
 :::caution
-Wir zwingen den Benutzer, die App mit einer im Code deklarierten statischen Version zu aktualisieren. Dies wird nicht empfohlen, Sie sollten eine dynamische Version von Ihrem Server verwenden
+Wir zwingen den Benutzer dazu, die App mit einer im Code deklarierten statischen Version zu aktualisieren. Dies wird nicht empfohlen, Sie sollten eine dynamische Version von Ihrem Server verwenden
 :::
 
 :::danger
-In diesem Beispiel führen wir keine Versionsprüfung, Entschlüsselung oder Prüfsummenvalidierung durch. Das sollten Sie selbst implementieren
+In diesem Beispiel führen wir keine Versionsüberprüfung, Entschlüsselung oder Prüfsummenvalidierung durch. Dies sollten Sie selbst implementieren
 :::
 
 ```tsx
@@ -64,5 +62,5 @@ AppaddListener('appStateChange', async(state) => {
 ```
 
 :::note
-Wenn Ihnen dies zu aufwändig erscheint, probieren Sie [Capgo trial](https://capgoapp/register/) aus. Es wird all dies für Sie übernehmen
+Wenn Ihnen das zu viel Arbeit erscheint, erwägen Sie [Capgo trial](https://capgoapp/register/) auszuprobieren. Es wird all dies für Sie erledigen
 :::

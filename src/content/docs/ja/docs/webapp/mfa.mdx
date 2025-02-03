@@ -1,6 +1,6 @@
 ---
-title: Autentikasi dua faktor
-description: Capgoアカウントをより良く保護するための2段階認証の管理。
+title: Authentification à deux facteurs
+description: 2段階認証を管理してcapgoアカウントをより安全に保護
 sidebar:
   order: 9
 locale: ja
@@ -8,22 +8,22 @@ locale: ja
 
 ## 2FAとは？
 
-2FAは、悪意のある人があなたのcapgoアカウントを乗っ取ることを防ぐために設計されたセキュリティ対策です\
+2FAは、悪意のある人があなたのcapgoアカウントを乗っ取るのを防ぐために設計されたセキュリティ対策です\
 追加のコードを要求することでこれを実現します。このコードはあなたのスマートフォンまたはハードウェア2FAキーに保存され、30秒ごとに変更されるため、推測することは不可能です
 
 ## このガイドの要件
- - AndroidまたはIOSスマートフォン
+ - AndroidまたはiOSスマートフォン
  - インターネット接続
 
 ## このガイドの内容
 
-このガイドでは`Google Authenticator`を使用した2FAの設定方法を説明します。同様の目的を果たす他のアプリも存在しますが、このガイドで2FAの全ての内容をカバーすることはできません
+このガイドでは、`Google認証システム`を使用して2FAを設定する方法を説明します。同様の目的を果たす他のアプリも存在しますが、このガイドで2FAの全てを網羅することはできません
 
 ## 2FAの設定方法
 
-まず、`Google Authenticator`アプリをダウンロードしてください。Androidの場合は[play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2)から、IOSの場合は[App store](https://appsapplecom/us/app/google-authenticator/id388497605/)からダウンロードできます
+まず、`Google認証システム`アプリをダウンロードしてください。Androidの場合は[Playストア](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2)から、iOSの場合は[App Store](https://appsapplecom/us/app/google-authenticator/id388497605/)からダウンロードできます
 
-次に、[capgoのアカウント設定](https://webcapgoapp/dashboard/settings/account/)に移動してください。このような緑のボタンが表示されるはずです
+次に、[capgoのアカウント設定](https://webcapgoapp/dashboard/settings/account/)に移動してください。このような緑色のボタンが表示されるはずです
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
 
@@ -33,10 +33,10 @@ locale: ja
 
 :::danger
 ⚠️ 重要な注意事項: \
-このQRコードを他人と共有しないでください。アカウントからログアウトされる可能性があります
+このQRコードは誰とも共有しないでください。アカウントからログアウトされる可能性があります
 :::
 
-次に、スマートフォンで`Google Authenticator`を開いてください。以下の手順に従ってください：
+次に、スマートフォンで`Google認証システム`を開いてください。開いたら、以下の手順に従ってください：
 
 プラスボタンをクリックします
 
@@ -54,33 +54,33 @@ PCに戻り、確認ボタンをクリックしてください
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verifywebp" alt="Verify MFA" /><figcaption></figcaption></figure>
 
-2FAコードを入力するウィンドウが開きます。私の場合、このコードは`095101`ですが、あなたの場合は異なります\
-このコードを入力したら、`verify`ボタンをクリックしてください
+2FAコードを入力するウィンドウが開きます。この例では、コードは`095101`ですが、あなたの場合は異なります\
+このコードを入力したら、`確認`ボタンをクリックしてください
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-codewebp" alt="MFA verify code final" /><figcaption></figcaption></figure>
 
-正しいコードを入力して`verify`を押すと、このようなポップアップが表示されるはずです
+正しいコードを入力して`確認`を押すと、このようなポップアップが表示されます
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabledwebp" alt="MFA enabled" /><figcaption></figcaption></figure>
 
-おめでとうございます！\
+おめでとうございます!\
 2FA認証が有効になりました 🎉
 
-## 2FAを使用したログイン方法
+## 2FAを使用してログインする方法
 
 次回アカウントにログインする際、このようなウィンドウが表示されます
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-requiredwebp" alt="MFA required" /><figcaption></figcaption></figure>
 
-認証アプリを開いて認証コードをコピーしてください
+認証システムを開いて認証コードをコピーしてください
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-loginwebp" alt="MFA login" /><figcaption></figcaption></figure>
 
 :::danger
 ⚠️ 重要な注意事項: \
-コードが更新される前に`verify`を押してください。さもないと、コードが変更され、古いコードは無効になります
+コードが更新される前に`確認`を押してください。更新されると古いコードは無効になります
 :::
 
-コードをログインフォームに入力し、`verify`を押してください
+コードをログインフォームに入力し、`確認`を押してください
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verifywebp" alt="MFA login" /><figcaption></figcaption></figure>
 
@@ -96,4 +96,4 @@ PCに戻り、確認ボタンをクリックしてください
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2webp" alt="MFA disabled" /><figcaption></figcaption></figure>
 
-`disable`ボタンを押すだけで完了です
+`無効化`ボタンを押すだけです。これで完了です

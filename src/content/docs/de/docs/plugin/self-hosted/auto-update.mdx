@@ -1,17 +1,17 @@
 ---
-title: 자동 업데이트
-description: Verwendung des Auto-Update-Plugins im Self-Hosting-Modus
+title: Pembaruan Otomatis
+description: So verwenden Sie das automatische Update-Plugin im selbst gehosteten Modus
 sidebar:
   order: 3
 locale: de
 ---
 
-```import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server betreiben.
+Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server ausführen können
 
 ## Bundle bereitstellen
-Stellen Sie sicher, dass Ihr Bundle über HTTPS bereitgestellt wird und der Server die richtigen CORS-Header hat, damit die App das Update herunterladen kann.
+Stellen Sie sicher, dass Ihr Bundle über HTTPS bereitgestellt wird und der Server die richtigen CORS-Header hat, damit die App das Update herunterladen kann
 z.B. ```https://myservercom/app/updates/updatesjson```
 
 Wenn Sie mit der Bereitstellung eines Bundles nicht vertraut sind, empfehlen wir Ihnen, Capgo Cloud zu verwenden oder hier ein Beispiel anzusehen:
@@ -33,12 +33,12 @@ Fügen Sie eine ``updateUrl`` zu Ihrer ``capacitorconfigjson`` hinzu
 }
 ```
 :::caution
-Wenn Sie ein selbst gehostetes Update pushen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Zu Testzwecken können Sie es [erlauben](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+Wenn Sie ein selbst gehostetes Update durchführen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Zu Testzwecken können Sie es [erlauben](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
 :::
 
 ## Update API
 
-Das Plugin führt bei jedem Öffnen der App einen POST-Aufruf an Ihre API mit diesem Body durch:
+Das Plugin führt bei jedem Öffnen der App einen POST-Aufruf an Ihre API durch, mit diesem Body:
 
 ```typescript
 interface AppInfos {
@@ -56,7 +56,7 @@ interface AppInfos {
 }
 ```
 
-Die Server-API sollte in JSON auf das Capacitor-Updater-Plugin mit diesen Daten antworten, wenn ein Update erforderlich ist:
+Die Server-API sollte in JSON dem Capacitor-Updater-Plugin mit diesen Daten antworten, wenn ein Update erforderlich ist:
 
 ```json
 {
@@ -65,13 +65,13 @@ Die Server-API sollte in JSON auf das Capacitor-Updater-Plugin mit diesen Daten 
 }
 ```
 
-Im Auto-Update-Modus sollte der Server die Versionen vergleichen und die richtige zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess.
+Im Auto-Update-Modus sollte der Server die Versionen vergleichen und die richtige zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
 
-Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt und die Nachricht wird stattdessen in den Logs angezeigt.
+Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt, und die Nachricht wird stattdessen in den Logs angezeigt
 
-Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein.
+Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein
 
-Die ZIP-Datei sollte `indexhtml` als Datei im Stammverzeichnis haben oder nur einen Ordner im Stammverzeichnis mit `indexhtml` darin.
+Die ZIP-Datei sollte `indexhtml` als Datei im Stammverzeichnis haben oder nur einen Ordner im Stammverzeichnis mit `indexhtml` darin
 
 Sie können den Befehl der CLI verwenden, um Ihr Bundle zu zippen:
 

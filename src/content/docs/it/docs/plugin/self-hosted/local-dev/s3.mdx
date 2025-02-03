@@ -1,27 +1,27 @@
 ---
-title: Self-hosting di S3
-description: Come configurare minio per funzionare con capgo
+title: Self-hosting S3
+description: How to configure minio for use with Capgo
 sidebar:
   order: 2
 locale: it
 ---
 
-## Cosa tratterà questo tutorial?
+## Cosa coprirà questo tutorial?
 
 Questo tutorial mostrerà come configurare [minio](https://minio/) per lavorare con capgo
 
 Tecnicamente non è necessario per eseguire capgo
 
-Configurare S3 permette di caricare i bundle dalla [CLI](/docs/cli/commands/)
+L'impostazione di S3 permette di caricare i bundle dalla [CLI](/docs/cli/commands/)
 
 :::danger
-⚠️ Questo tutorial non deve essere utilizzato in produzione\
-Utilizzalo solo nello sviluppo locale
+⚠️ Questo tutorial non è destinato all'uso in produzione\
+Usalo solo per lo sviluppo locale
 :::
 
 ## Requisiti
 
- 1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Per iniziare
 
@@ -85,7 +85,7 @@ supabase functions serve --env-file /supabase/envlocal
 
 ## Configurazione della CLI per utilizzare S3
 
-La CLI non funzionerà di default con minio È necessaria la seguente modifica a `capacitorconfigts`[^1]
+La CLI non funzionerà di default con minio. È necessaria la seguente modifica a `capacitorconfigts`[^1]
 ```ts
 const config: CapacitorConfig = {
   appId: 'comdemoapp',

@@ -1,22 +1,22 @@
 ---
-title: Mise à jour automatique
-description: Capacitor-updaterでの自動アップデートの使用方法
+title: Auto actualización
+description: capacitor-updaterを使用した自動更新の方法
 sidebar:
   order: 2
 locale: ja
 ---
 
-このモードでは、開発者は自動更新モードでcapacitor-updaterを使用し、Capgoチャンネルまたはそれに相当するものを通じて更新をプッシュできます。
+このモードにより、開発者はcapacitor-updaterを自動更新モードで使用し、Capgoチャンネルまたは同等のものを通じて更新をプッシュすることができます。
 
 ### 前提条件
 
 Capgo自動更新を使用する前に、アプリのバージョンが[https://semverorg/](https://semverorg/)を使用していることを確認してください。
 
-これはCapgoでバージョンを管理するために使用する規則です。
+これはCapgoでバージョンを管理するための規則です。
 
-アプリでバージョンを設定する方法は2つあります：
+アプリでバージョンを設定するには2つの方法があります：
 
-新しい方法：`capacitorconfigjson`ファイルの`version`フィールドを使用します
+新しい方法：`capacitorconfigjson`ファイルの`version`フィールドを使用
 
 ```json
 {
@@ -24,15 +24,16 @@ Capgo自動更新を使用する前に、アプリのバージョンが[https://
     "CapacitorUpdater": {
       "autoUpdate": true, // 自動更新を有効化、デフォルトはtrue
       "appId": "comexampleapp", // サーバーでアプリを識別するために使用
-      "version": "100" // 更新をチェックするために使用
+      "version": "100" // アップデートをチェックするために使用
     }
   }
 }
 ```
-これらのオプションは、プラグインが更新をチェックし、CLIがバージョンをアップロードする際に使用されます。
+
+これらのオプションは、プラグインがアップデートをチェックする際とCLIがバージョンをアップロードする際に使用されます。
 
 古い方法：
-プロジェクトの3つのファイルで：
+プロジェクト内の3つのファイルで：
 
 * `packagejson`の**version**
 * `android/app/buildgradle`の**versionName**
@@ -40,13 +41,13 @@ Capgo自動更新を使用する前に、アプリのバージョンが[https://
 
 ### チュートリアル
 
-5分でアプリを設定
+5分でアプリをセットアップ
 
-[capacitor updaterを使用してCapacitorアプリをシームレスに更新](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[capacitor updaterを使用してcapacitorアプリをシームレスに更新する](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
-5分でCIを設定
+5分でCIをセットアップ
 
-[GitHub actionsで自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actionsによる自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
 
 ### インストール
 
@@ -57,23 +58,23 @@ npx cap sync
 
 ### はじめに
 
-[register](https://capgoapp)をクリックしてアカウントを作成してください
+[登録](https://capgoapp)をクリックしてアカウントを作成してください。
 
-サーバーではチャンネルやバージョンなどの管理が可能です
+サーバーではチャンネルやバージョンなど、さらに多くの機能を管理できます。
 
-`autoUpdate`は`capacitorconfig`のデータを使用してCapgoサーバーを識別します
+`autoUpdate`は`capacitorconfig`のデータを使用してCapgoサーバーを識別します。
 
 :::note
-会社の規定で許可されていない場合でも、コードを当社のサーバーに送信せずにCapgo Cloudを使用できます
+会社の規定でコードをサーバーに送信できない場合でも、Capgo Cloudを使用することは可能です。
 :::
 
 #### バージョンの検証
 
-自動更新を設定する場合、アプリが正常に動作し準備ができていることをJS内から通知する必要があります
+自動更新を設定した場合、アプリが動作中で準備ができていることをJS内から通知する必要があります。
 
-これはアプリ内で`notifyAppReady`を呼び出すことで行えます
+これは、アプリ内で`notifyAppReady`を呼び出すことで実行できます。
 
-できるだけ早く実行してください
+できるだけ早く実行してください。
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -82,31 +83,31 @@ CapacitorUpdaternotifyAppReady()
 ```
 
 #### ユーザーフロー
-* ユーザーがアプリを開くと、アプリはサーバーに更新をチェックし、更新が見つかった場合はバックグラウンドでダウンロードされます
+* ユーザーがアプリを開くと、アプリはサーバーにアップデートの確認を行い、見つかった場合はバックグラウンドでダウンロードされます
 * ユーザーがアプリを終了すると、新しいバージョンがアクティブに設定されます
 * ユーザーが再度アプリを開くと、新しいアクティブバージョンを読み込み、デフォルトとして設定します
-* `notifyAppReady()`が呼び出されると、ユーザーがアプリを終了した時に以前のバージョンは削除されます
-* ユーザーは次の更新サイクルまで通常のアプリフローを継続します
+* `notifyAppReady()`が呼び出された場合、ユーザーがアプリを終了すると、過去のバージョンは削除されます
+* ユーザーは次の更新サイクルまで通常のアプリフローを続けます
 
 :::danger
-⚠️ アプリで`notifyAppReady()`を呼び出さないと、現在のバージョンは無効としてマークされ、以前の有効なバンドルまたはストックに戻ります
+⚠️ アプリで`notifyAppReady()`を呼び出さないと、現在のバージョンが無効としてマークされ、前回の有効なバンドルまたはストックに戻ります
 :::
 
 #### 開発フロー
 
-新機能を開発する際は、capgoが最新の更新バンドルで作業を上書きし続けるため、`autoUpdate`をブロックしてください
-設定で`autoUpdate`をfalseに設定してください
-何らかの理由で更新で行き詰まった場合は、アプリを削除して再インストールできます
-その前に設定で`autoUpdate`をfalseに設定してください
-そしてXcodeまたはAndroid studioで再度ビルドしてください
+新機能を開発する際は、capgoが最新の更新バンドルで作業を上書きし続けるため、`autoUpdate`をブロックしてください。
+設定で`autoUpdate`をfalseに設定してください。
+何らかの理由で更新に行き詰まった場合は、アプリを削除して再インストールできます。
+その前に必ず設定で`autoUpdate`をfalseに設定してください。
+そしてXcodeまたはAndroid studioで再度ビルドしてください。
 
-各コミットでバージョンをアップロードするためにCI/CDを設定するには、このガイドを参照してください
+各コミット時にバージョンをアップロードするようにCI/CDを設定するには、このガイドに従ってください。
 
-[GitHub actionsで自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actionsによる自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
 
-#### メジャー更新可能イベント
+#### メジャーアップデート利用可能イベント
 
-`disableAutoUpdateBreaking`がtrueに設定されている場合、アプリがメジャーな破壊的更新を拒否したことを知るためにイベントをリッスンできます
+`disableAutoUpdateBreaking`がtrueに設定されている場合、アプリがメジャーな破壊的更新を拒否したときにイベントをリッスンできます。
 
 ```jsx
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

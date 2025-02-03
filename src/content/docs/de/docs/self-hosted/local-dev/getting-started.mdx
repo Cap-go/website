@@ -1,20 +1,20 @@
 ---
-title: Erste Schritte
+title: Empezando
 description: >-
-  Dieses Tutorial zeigt, wie man mit Supabase von Grund auf beginnt und Edge
-  Functions startet
+  Dieses Tutorial zeigt, wie man Supabase von Grund auf startet und Edge
+  Functions einrichtet
 sidebar:
   order: 3
 locale: de
 ---
 
-## Was behandelt dieses Tutorial?
+## Was dieses Tutorial behandelt?
 
-Dieses Tutorial zeigt, wie man Supabase von Grund auf startet und Edge-Funktionen einrichtet
+Dieses Tutorial zeigt, wie man Supabase von Grund auf startet und Edge-Funktionen einrichtet.
 
-## Voraussetzungen
- 1 Geklontes [capgo](https://githubcom/Cap-go/capgo/)
- 3 [supabase](https://supabasecom/)
+## Anforderungen
+ 1. Geklontes [capgo](https://githubcom/Cap-go/capgo/)
+ 3. [supabase](https://supabasecom/)
 
 ## Erste Schritte
 
@@ -23,7 +23,7 @@ Zum Starten führen Sie aus:
 supabase start
 ```
 
-Als Nächstes sollten Sie etwa Folgendes sehen:
+Als nächstes sollten Sie etwa Folgendes sehen:
 ```js
 Started supabase local development setup
 
@@ -37,7 +37,7 @@ Started supabase local development setup
 service_role key: supa_key_admin
 ```
 
-Öffnen Sie als Nächstes `configsjson` und setzen Sie die folgenden Werte:
+Öffnen Sie als nächstes `configsjson` und setzen Sie die folgenden Werte:
 ```json
 {
   "base_domain": {
@@ -64,11 +64,11 @@ wobei `supa_key_anon` der Wert aus dem vorherigen Schritt ist
 ⚠️ Committen Sie `configsjson` nicht in das Remote-Repository
 :::
 
-Überprüfen Sie als Nächstes, ob Sie auf [localhost:54323](http://localhost:54323/projects/) zugreifen können und ob die Tabelle `users` etwa so aussieht
+Überprüfen Sie als nächstes, ob Sie [localhost:54323](http://localhost:54323/projects/) aufrufen können und dass die Tabelle `users` etwa so aussieht
 
 <figure><img src="/supabasewebp" alt="supabase" /><figcaption></figcaption></figure>
 
-Wenn ja, starten Sie Edge-Funktionen mit:
+Wenn ja, starten Sie die Edge-Funktionen mit:
 
 ```bash
 supabase functions serve

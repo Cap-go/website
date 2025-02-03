@@ -1,6 +1,6 @@
 ---
 title: Self-hosting S3
-description: Cara mengkonfigurasi minio untuk bekerja dengan capgo
+description: Cara mengkonfigurasi minio untuk digunakan dengan Capgo
 sidebar:
   order: 2
 locale: id
@@ -15,13 +15,13 @@ Ini secara teknis tidak diperlukan untuk menjalankan capgo
 Mengatur S3 memungkinkan untuk mengunggah bundle dari [CLI](/docs/cli/commands/)
 
 :::danger
-⚠️ Tutorial ini tidak ditujukan untuk digunakan dalam produksi\
+⚠️ Tutorial ini tidak ditujukan untuk digunakan di produksi\
 Gunakan ini hanya dalam pengembangan lokal
 :::
 
 ## Persyaratan
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Memulai
 
@@ -42,12 +42,12 @@ docker run \
    quayio/minio/minio server /data --console-address ":9090"
 ```
 
-Jika Anda menutup jendela konsol dengan container ini, Anda dapat memulainya dengan:
+Jika Anda menutup jendela konsol dengan kontainer ini, Anda dapat memulainya dengan:
 ```bash
 docker start minio1
 ```
 
-Jika Anda perlu mengubah konfigurasi minio, Anda dapat menghapus container dengan menjalankan:
+Jika Anda perlu mengubah konfigurasi minio, Anda dapat menghapus kontainer dengan menjalankan:
 ```bash
 docker rm minio1
 ```
@@ -57,7 +57,7 @@ docker rm minio1
 
 Sekarang kita memiliki server S3 yang berjalan, kita perlu menyiapkan fungsi edge capgo untuk menggunakan server S3 kita
 
-Untuk melakukannya kita perlu membuat file ENV di `capgo/supabase` bernama `envlocal`
+Untuk melakukan itu kita perlu membuat file ENV di `capgo/supabase` bernama `envlocal`
 
 File ini seharusnya terlihat seperti ini:
 ```bash
@@ -78,7 +78,7 @@ R2_SECRET_ACCESS_KEY=CHANGEME123
 
 IP `hostdockerinternal` adalah IP docker yang hanya dapat dijangkau secara internal oleh docker, tetapi kita menggantinya dalam kode dengan `0000` sehingga minio dapat dijangkau dari localhost
 
-Untuk menjalankan fungsi edge dengan file env baru kita, gunakan
+Untuk menjalankan fungsi edge dengan file env baru kita gunakan
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```

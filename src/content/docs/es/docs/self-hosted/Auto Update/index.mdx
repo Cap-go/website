@@ -1,6 +1,6 @@
 ---
-title: Introduction - Mise à jour automatique
-description: Cómo usar el complemento de actualización automática en modo autohospedado
+title: 자동 업데이트
+description: Cómo usar el plugin de actualización automática en modo autohospedado
 sidebar:
   order: 1
 locale: es
@@ -12,19 +12,19 @@ Esta documentación explicará cómo ejecutar tu servidor de actualización auto
 
 ## Antes de empezar
 
-Si utilizas este trabajo por tu cuenta, no puedo sugerir más que apoyes mi trabajo a través de [esto](https://githubcom/sponsors/riderx/)
+Si usas este trabajo por tu cuenta, no podría sugerir más que apoyes mi trabajo a través de [esto](https://githubcom/sponsors/riderx/)
 
-Hice una gran apuesta al código abierto de todo el valioso código que construí aquí
+Hice una gran apuesta al hacer de código abierto todo el valioso código que construí aquí
 
 Podría haberlo guardado para mí y ponerle un precio alto
 
-Además, quiero centrarme en las herramientas de Capgo y convertirlo en un negocio abierto y transparente
+Además, quiero centrarme en las herramientas de Capgo y hacer que sea un negocio abierto y transparente
 
-Asimismo, creo que haría de nuestro mundo un lugar mejor al abrir en lugar de luchar y esconder
+Del mismo modo, creo que haría nuestro mundo un mejor lugar al abrir en lugar de luchar y ocultar
 
 Pero para hacerlo posible, todos debemos hacer nuestra parte, incluido tú 🥹
 
-Si las ofertas de Capgo no te convienen, entonces establece tu precio y respalda a un creador independiente [AQUÍ](https://githubcom/sponsors/riderx/) en tus términos
+Si las ofertas de Capgo no te convienen, entonces pon tu precio y respalda a un Maker bootstrapped [AQUÍ](https://githubcom/sponsors/riderx/) en tus términos
 
 ## Instalación rápida
 
@@ -47,11 +47,11 @@ Tienes que configurar el plugin para usar tu URL así:
 }
 ```
 
-> 🚧 En Android no está permitido hacer peticiones HTTP, para pruebas [permítelo](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 En Android no está permitido hacer peticiones HTTP, para propósitos de prueba [permítelo](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
-### API de actualización
+### API de Actualización
 
-El plugin hará una llamada POST a tu API cada vez que se abra la aplicación, con este cuerpo:
+El plugin hará una llamada POST a tu API cada vez que la aplicación se abra, con este cuerpo:
 
 ```typescript
 interface AppInfos {
@@ -69,7 +69,7 @@ interface AppInfos {
 }
 ```
 
-El servidor API debe responder, en JSON, al plugin capacitor-updater con estos datos si es necesaria una actualización:
+El servidor API debería responder, en JSON, al plugin capacitor-updater con estos datos si una actualización es necesaria:
 
 ```json
 {
@@ -78,18 +78,18 @@ El servidor API debe responder, en JSON, al plugin capacitor-updater con estos d
 }
 ```
 
-En Auto-update el servidor debe hacer el trabajo de comparar la versión y devolver la correcta, si la clave URL está presente, el plugin inicia el proceso de descarga
+En Auto-update el servidor debería hacer el trabajo de comparar la versión y devolver la correcta, si la clave URL está presente, el plugin inicia el proceso de descarga
 
-Si agregas las claves "message" y "error", la versión no se establecerá y el mensaje se mostrará en los registros en su lugar
+Si agregas las claves "message" y "error", la versión no se establecerá, y el mensaje se mostrará en los registros en su lugar
 
-La clave `version` debe estar en formato [`semver`](https://semverorg/)
+La clave `version` debe estar en formato [`semver`](https://semver.org/)
 
-El zip debe tener `indexhtml` como archivo en la raíz, o solo una carpeta en la raíz con `indexhtml` dentro
+El zip debe tener `index.html` como archivo en la raíz, o solo una carpeta en la raíz con `index.html` dentro
 
-Puedes usar el comando de la CLI para comprimir tu paquete:
+Puedes usar el comando de la CLI para comprimir tu bundle:
 
 ```bash
-npx @capgo/cli bundle zip --path [/ruta/a/mi/paquete]
+npx @capgo/cli bundle zip --path [/ruta/a/mi/bundle]
 ```
 
 <LinkCard
@@ -99,37 +99,37 @@ npx @capgo/cli bundle zip --path [/ruta/a/mi/paquete]
 
 #### Cifrado de extremo a extremo
 
-A partir de la versión 4150 el plugin permite enviar actualizaciones cifradas
+A partir de la versión 4.15.0 el plugin permite enviar actualizaciones cifradas
 
-Puedes usar esta función creando una clave privada ``npx @capgo/cli key create``
+Puedes usar esta característica creando una clave privada ``npx @capgo/cli key create``
 
 Luego cifras tu archivo zip con ``npx @capgo/cli encrypt [ruta/al/zip]``
 
-El comando te mostrará un `ivSessionKey` que debe enviarse con tu carga útil de actualización en la clave `session_key`\
-Entonces tu aplicación podrá usar la clave privada para descifrar el `session_key` y usar el `session_key` descifrado para descifrar la actualización
+El comando te mostrará un `ivSessionKey` que debe ser enviado con tu payload de actualización en la clave `session_key`\
+Entonces tu app podrá usar la clave privada para descifrar el `session_key` y usar el `session_key` descifrado para descifrar la actualización
 
 Aprende más sobre esto aquí:
 
 <LinkCard
 	title="Actualizaciones en vivo auto-alojadas"
-	href="https://capgoapp/blog/self-hosted-live-updates/"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
 />
 
 ### API de Estadísticas
 
-¡A partir de la versión 130 el sistema de actualización envía estadísticas!
+¡A partir de la versión 1.3.0 el sistema de actualización envía estadísticas!
 
 Por defecto, todas las estadísticas se envían a nuestro servidor, para entender el uso
 
-> 💡 No se envían datos privados para las estadísticas, solo UUID aleatorio, versión de actualización, versión de la aplicación nativa, plataforma, acción y ID de la aplicación
+> 💡 No se envían datos privados para las estadísticas, solo UUID aleatorio, versión de actualización, versión de app nativa, plataforma, acción y ID de app
 
 Si quieres enviar datos a tu servidor en su lugar, cambia la configuración a continuación:
 
 ```tsx
-// capacitorconfigjson
+// capacitor.config.json
 {
 	"appId": "*******",
-	"appName": "Nombre",
+	"appName": "Name",
 	"plugins": {
 		"CapacitorUpdater": {
 			"statsUrl": "TU_URL"
@@ -144,21 +144,21 @@ Lo que tu servidor recibirá es:
 interface AppInfosStats {
 	"action": "set", // puede ser set, delete, set_fail, reset, revert
 	// Luego es la misma información que la actualización
-	"app_id": "*******", // identificador de la aplicación en la tienda
-	"device_id": "*******", // id único por instalación de la aplicación
+	"app_id": "*******", // identificador de app en la tienda
+	"device_id": "*******", // id único por instalación de app
 	"platform": "ios", // o android
-	"custom_id": "usuario_1", // representa a tu usuario
+	"custom_id": "usuario_1", // representa tu usuario
         "version_name": "123", // versión de la compilación web
         "version_build": "120", // versión de la compilación nativa
         "version_code": "120", // número de compilación de la compilación nativa
 	"version_os": "16", // versión del SO del dispositivo
-        "plugin_version": "400"// para que tu api se comporte diferente con diferentes plugins
+        "plugin_version": "4.0.0"// para hacer que tu api se comporte diferente con diferentes plugins
         "is_emulator": false,
     	"is_prod": false,
 }
 ```
 
-También puedes desactivarlo completamente, con una cadena vacía. Ten en cuenta que las estadísticas están hechas de manera amigable con la privacidad y me ayudan a entender cómo la gente usa el plugin, para resolver problemas y mejorarlo
+También puedes deshabilitarlo completamente, con una cadena vacía. Ten en cuenta que las estadísticas están hechas amigables con la privacidad y me ayudan a entender cómo la gente usa el plugin, para resolver problemas y mejorarlo
 
 <LinkCard
 	title="Endpoint de Estadísticas"

@@ -1,6 +1,6 @@
 ---
-title: 통계 API
-description: 셀프 호스팅 모드에서 자동 업데이트 플러그인을 사용하는 방법
+title: Statistics API
+description: 자체 호스팅 모드에서 자동 업데이트 플러그인 사용하기
 sidebar:
   order: 8
 locale: ko
@@ -10,15 +10,15 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## 통계 API
 
-버전 130부터 업데이트 시스템이 통계를 전송할 수 있습니다!
+버전 130부터 업데이트 시스템이 통계를 전송할 수 있게 되었습니다!
 
 기본적으로 모든 통계는 사용량 파악과 연구를 위해 우리 서버로 전송됩니다
 
 :::note
-통계에는 개인 데이터가 전송되지 않으며, 랜덤 UUID, 버전 업데이트, 네이티브 앱 버전, 플랫폼, 작업 및 앱 ID만 전송됩니다
+통계를 위해 개인 데이터는 전송되지 않으며, 임의의 UUID, 업데이트 버전, 네이티브 앱 버전, 플랫폼, 액션 및 앱 ID만 전송됩니다
 :::
 
-이 데이터를 대신 사용자의 서버로 전송하려면 아래 구성을 변경하세요:
+이 데이터를 대신 귀하의 서버로 전송하려면 아래 설정을 변경하세요:
 
 ```tsx
 // capacitorconfigjson
@@ -33,27 +33,27 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 }
 ```
 
-서버가 수신하는 내용:
+귀하의 서버가 받게 될 내용:
 
 ```tsx
 interface AppInfosStats {
 	"action": "set", // set, delete, set_fail, reset, revert 가능
 	// 그 다음은 업데이트와 동일한 정보
 	"app_id": "*******", // 스토어의 앱 식별자
-	"device_id": "*******", // 앱 설치별 고유 ID
+	"device_id": "*******", // 앱 설치당 고유 ID
 	"platform": "ios", // 또는 android
 	"custom_id": "user_1", // 사용자를 나타냄
         "version_name": "123", // 웹 빌드 버전
         "version_build": "120", // 네이티브 빌드 버전
         "version_code": "120", // 네이티브 빌드의 빌드 번호
 	"version_os": "16", // 기기의 OS 버전
-        "plugin_version": "400"// 다른 플러그인과 다른 API 동작을 위해
+        "plugin_version": "400"// 다른 플러그인과 API가 다르게 동작하도록 함
         "is_emulator": false,
     	"is_prod": false,
 }
 ```
 
-빈 문자열로 완전히 비활성화할 수도 있습니다. 통계는 개인정보 보호 친화적으로 만들어졌으며 사용자들이 플러그인을 어떻게 사용하는지 이해하고, 문제를 해결하고 개선하는데 도움이 된다는 점을 기억하세요
+빈 문자열로 완전히 비활성화할 수도 있습니다. 통계는 개인정보 보호를 위해 만들어졌으며 플러그인 사용 방식을 이해하고 문제를 해결하고 개선하는 데 도움이 된다는 점을 기억하세요
 
 <LinkCard
 	title="업데이트 처리"

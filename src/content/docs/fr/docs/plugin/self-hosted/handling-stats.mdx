@@ -1,12 +1,12 @@
 ---
 title: Gestion des statistiques
-description: Comment créer un endpoint de statistiques auto-hébergé
+description: Créer un endpoint de statistiques auto-hébergé
 sidebar:
   order: 7
 locale: fr
 ---
 
-Voici un exemple de code en JavaScript pour enregistrer les statistiques du plugin
+Voici un exemple de code en JavaScript pour sauvegarder les statistiques du plugin
 
 ```typescript
 interface AppInfos {
@@ -72,7 +72,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-Cet endpoint doit retourner un JSON :
+Ce point de terminaison doit retourner un JSON :
 
 ```json
 { "status": "ok" }
@@ -82,10 +82,10 @@ Cet endpoint doit retourner un JSON :
 
 * **delete** : quand un bundle est supprimé localement
 * **reset** : quand l'application revient au bundle intégré
-* **set** : quand l'application définit un nouveau bundle
-* **set\_fail** : quand l'application ne trouve pas l'ID du bundle défini
-* **update\_fail** : envoyé après le délai et `notifyAppReady` jamais appelé
-* **download\_fail** : quand le téléchargement ne s'est jamais terminé
+* **set** : quand l'application configure un nouveau bundle
+* **set\_fail** : quand l'application ne trouve pas l'ID du bundle configuré
+* **update\_fail** : envoyé après le délai et `notifyAppReady` n'a jamais été appelé
+* **download\_fail** : quand le téléchargement n'est jamais terminé
 * **download\_complete:** Quand le téléchargement se termine
 * **download\_xx:** Envoyé tous les 10% du téléchargement ex : download\_20, download\_70
-* **update\_fail:** quand le bundle ne parvient pas à faire `notifyAppReady` dans le délai imparti
+* **update\_fail:** quand le bundle ne parvient pas à exécuter `notifyAppReady` dans le délai imparti

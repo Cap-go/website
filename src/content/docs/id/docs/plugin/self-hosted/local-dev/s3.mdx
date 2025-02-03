@@ -1,6 +1,6 @@
 ---
-title: Hosting S3 Mandiri
-description: Cara mengkonfigurasi minio untuk digunakan dengan capgo
+title: S3 Self-hosting
+description: Cara mengkonfigurasi minio untuk bekerja dengan capgo
 sidebar:
   order: 2
 locale: id
@@ -21,7 +21,7 @@ Gunakan ini hanya dalam pengembangan lokal
 
 ## Persyaratan
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Memulai
 
@@ -42,12 +42,12 @@ docker run \
    quayio/minio/minio server /data --console-address ":9090"
 ```
 
-Jika Anda menutup jendela konsol dengan kontainer ini, Anda dapat memulainya dengan:
+Jika Anda menutup jendela konsol dengan container ini, Anda dapat memulainya dengan:
 ```bash
 docker start minio1
 ```
 
-Jika Anda perlu mengubah konfigurasi minio, Anda dapat menghapus kontainer dengan menjalankan:
+Jika Anda perlu mengubah konfigurasi minio, Anda dapat menghapus container dengan menjalankan:
 ```bash
 docker rm minio1
 ```
@@ -55,11 +55,11 @@ docker rm minio1
 
 ## Mengatur fungsi edge
 
-Sekarang setelah kita memiliki server S3 yang berjalan, kita perlu mengatur fungsi edge capgo untuk menggunakan server S3 kita
+Sekarang kita memiliki server S3 yang berjalan, kita perlu mengatur fungsi edge capgo untuk menggunakan server S3 kita
 
 Untuk melakukan itu kita perlu membuat file ENV di `capgo/supabase` bernama `envlocal`
 
-File ini harus terlihat seperti ini:
+File ini seharusnya terlihat seperti ini:
 ```bash
 STRIPE_WEBHOOK_SECRET=test
 STRIPE_SECRET_KEY=test
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# Di bawah ini adalah pengaturan penting untuk S3
+# Berikut adalah pengaturan penting untuk S3
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -78,7 +78,7 @@ R2_SECRET_ACCESS_KEY=CHANGEME123
 
 IP `hostdockerinternal` adalah IP docker yang hanya dapat dijangkau secara internal oleh docker, tetapi kita menggantinya dalam kode dengan `0000` sehingga minio dapat dijangkau dari localhost
 
-Untuk menjalankan fungsi edge dengan file env baru kita, gunakan
+Untuk menjalankan fungsi edge dengan file env baru kita gunakan
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```

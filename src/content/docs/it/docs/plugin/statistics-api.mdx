@@ -1,6 +1,6 @@
 ---
-title: 統計情報API
-description: Come utilizzare il plugin di aggiornamento automatico in modalità self-hosting
+title: API Statistik
+description: Come utilizzare il plugin di auto-aggiornamento in modalità self-hosted
 sidebar:
   order: 8
 locale: it
@@ -8,7 +8,7 @@ locale: it
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## API delle statistiche
+## API Statistiche
 
 A partire dalla versione 130 il sistema di aggiornamento è in grado di inviare statistiche!
 
@@ -39,8 +39,8 @@ Ciò che il tuo server riceverà è:
 interface AppInfosStats {
 	"action": "set", // può essere set, delete, set_fail, reset, revert
 	// Poi sono le stesse informazioni dell'aggiornamento
-	"app_id": "*******", // identificatore app nello store
-	"device_id": "*******", // id univoco per installazione app
+	"app_id": "*******", // identificatore dell'app nello store
+	"device_id": "*******", // id unico per installazione app
 	"platform": "ios", // o android
 	"custom_id": "user_1", // rappresenta il tuo utente
         "version_name": "123", // versione del build web
@@ -53,7 +53,7 @@ interface AppInfosStats {
 }
 ```
 
-Puoi anche disabilitarle completamente, con una stringa vuota. Tieni presente che le statistiche sono rese private e mi aiutano a capire come le persone utilizzano il plugin, per risolvere problemi e migliorarlo
+Puoi anche disabilitarlo completamente, con una stringa vuota. Tieni presente che le statistiche sono rese private e mi aiutano a capire come le persone utilizzano il plugin, per risolvere problemi e migliorarlo
 
 <LinkCard
 	title="Gestione degli Aggiornamenti"

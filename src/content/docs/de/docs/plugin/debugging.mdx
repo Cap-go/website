@@ -1,12 +1,12 @@
 ---
-title: デバッグ
+title: Debugging
 description: So debuggen Sie Ihre App
 sidebar:
   order: 6
 locale: de
 ---
 
-```import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Cloud-Logs verstehen:
 
@@ -15,39 +15,39 @@ locale: de
 | Code                          | Beschreibung                                                                                                                                                               |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **InvalidIp**                                    | Der Benutzer befindet sich in einem Google-Rechenzentrum und das Update ist weniger als 4 Stunden alt. Dies verhindert, dass Google-Bot-Geräte als Geräte in Ihrem Konto gezählt werden |
-| **needPlanUpgrade** (früher **needUpgrade**)     | Zeigt an, dass Sie das Limit Ihres Plans erreicht haben und das Gerät keine Updates erhält, bis Sie upgraden oder bis zum nächsten Monat                                |
-| **noNew**                                        | Das Gerät hat die neueste verfügbare Version                                                                                                                              |
-| **disablePlatformIos**                           | Das Gerät läuft auf der iOS-Plattform, aber diese ist in den Kanal-Einstellungen deaktiviert                                                                             |
-| **disablePlatformAndroid**                       | Das Gerät läuft auf der Android-Plattform, aber diese ist in den Kanal-Einstellungen deaktiviert                                                                         |
+| **needPlanUpgrade** (früher **needUpgrade**)     | Zeigt an, dass Sie das Limit Ihres Plans erreicht haben und das Gerät keine Updates erhält, bis Sie upgraden oder bis zum nächsten Monat                                    |
+| **noNew**                                        | Das Gerät hat die neueste verfügbare Version                                                                                                                                |
+| **disablePlatformIos**                           | Das Gerät läuft auf der iOS-Plattform, aber diese ist in den Kanaleinstellungen deaktiviert                                                                                |
+| **disablePlatformAndroid**                       | Das Gerät läuft auf der Android-Plattform, aber diese ist in den Kanaleinstellungen deaktiviert                                                                            |
 | **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
-| **disableAutoUpdateUnderNative**                 | Das Gerät hat Version (`123`), und der Kanal hat ein Update (`122`) unter der Geräteversion zum Senden, aber das ist in den Kanal-Einstellungen deaktiviert          |
-| **disableDevBuild**                              | Das Gerät hat einen Dev-Build, aber das ist in den Kanal-Einstellungen deaktiviert                                                                                       |
-| **disableEmulator**                              | Das Gerät ist ein Emulator, aber das ist in den Kanal-Einstellungen deaktiviert                                                                                          |
+| **disableAutoUpdateUnderNative**                 | Das Gerät hat Version (`123`), und der Kanal hat ein Update (`122`) unter der Geräteversion zum Senden, aber dies ist in den Kanaleinstellungen deaktiviert            |
+| **disableDevBuild**                              | Das Gerät hat einen Dev-Build, aber dies ist in den Kanaleinstellungen deaktiviert                                                                                         |
+| **disableEmulator**                              | Das Gerät ist ein Emulator, aber dies ist in den Kanaleinstellungen deaktiviert                                                                                            |
 
 ### Vom Gerät gesendet
 
 | Code  | Beschreibung                                                                     |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **get**               | Info zum Download der neuen Version wurde an das Gerät gesendet                  |
-| **delete**            | Ein Bundle wurde auf dem Gerät gelöscht                                          |
-| **set**               | Ein Bundle wurde auf dem Gerät gesetzt                                           |
-| **set_fail**          | Das Bundle konnte nicht gesetzt werden                                           |
-| **reset**             | Das Gerät wurde auf das `builtin` Bundle zurückgesetzt                           |
-| **download_XX**       | Ein neues Bundle wurde heruntergeladen - Fortschritt in XX% (10er-Schritte)     |
-| **download_complete** | Der Download des neuen Bundles ist abgeschlossen                                 |
-| **download_fail**     | Der Download des neuen Bundles ist fehlgeschlagen                                |
-| **update_fail**       | Das neue Bundle wurde installiert, konnte aber `notifyAppReady` nicht aufrufen   |
-| **checksum_fail**     | Das neue Bundle konnte die Prüfsumme nicht validieren                           |
-| **windows_path_fail** | Das Zip enthält Dateien mit ungültigen Windows-Pfaden                           |
-| **canonical_path_fail** | Der Dateipfad ist nicht kanonisch                                             |
-| **directory_path_fail** | Es gibt einen Fehler im Pfad der Zip-Dateien                                  |
-| **unzip_fail**          | Entpacken fehlgeschlagen                                                       |
-| **low_mem_fail** | Download wegen zu wenig Speicher auf dem Gerät fehlgeschlagen                        |
+| **get**               | Informationen zum Herunterladen der neuen Version wurden an das Gerät gesendet    |
+| **delete**            | Ein Bundle wurde auf dem Gerät gelöscht                                           |
+| **set**               | Ein Bundle wurde auf dem Gerät eingerichtet                                       |
+| **set_fail**          | Das Bundle konnte nicht eingerichtet werden                                       |
+| **reset**             | Das Gerät wurde auf das `builtin`-Bundle zurückgesetzt                           |
+| **download_XX**       | Ein neues Bundle wurde heruntergeladen - Fortschritt angezeigt durch XX% (in 10%-Schritten) |
+| **download_complete** | Das neue Bundle wurde vollständig heruntergeladen                                 |
+| **download_fail**     | Das neue Bundle konnte nicht heruntergeladen werden                               |
+| **update_fail**       | Das neue Bundle wurde installiert, konnte aber `notifyAppReady` nicht aufrufen    |
+| **checksum_fail**     | Das neue Bundle konnte die Prüfsumme nicht validieren                            |
+| **windows_path_fail** | Die ZIP-Datei enthält unzulässige Windows-Pfade                                  |
+| **canonical_path_fail** | Der Pfad der Dateien ist nicht kanonisch                                        |
+| **directory_path_fail** | Es gibt einen Fehler im Pfad der ZIP-Dateien                                    |
+| **unzip_fail**          | Entpacken fehlgeschlagen                                                        |
+| **low_mem_fail** | Download aufgrund von niedrigem Gerätespeicher fehlgeschlagen                         |
 
 ### Bundle-Status
 
-* `SUCCESS`: Bundle-Installation erfolgreich
-* `ERROR`: Installation oder Download fehlgeschlagen 
+* `SUCCESS`: Bundle-Installation abgeschlossen
+* `ERROR`: Installation oder Download fehlgeschlagen
 * `PENDING`: Download abgeschlossen, wartet auf Freigabe
 * `DELETED`: Bundle gelöscht, wird noch für Statistiken angezeigt
 * `DOWNLOADING`: Bundle wird gerade heruntergeladen
@@ -64,7 +64,7 @@ npx @capgo/cli@latest app debug
 
 Damit können Sie alle Ereignisse in der App überprüfen und eine Lösung finden, wenn Updates nicht funktionieren
 
-### IOS
+### iOS
 
 So finden Sie Ihre Logs in Xcode
 
@@ -82,7 +82,7 @@ So finden Sie Ihre Logs in Android Studio
     href="https://developerandroidcom/studio/debug/am-logcat"
 />
 
-### Erklärungen der Logs
+### Erklärungen zu den Logs
 
 * `Failed to download from` **=>** gleich wie **download_fail**
 * `notifyAppReady was not called, roll back current bundle` => gleich wie **update_fail**
@@ -91,21 +91,21 @@ So finden Sie Ihre Logs in Android Studio
 
 ### iOS
 
-Um auf iOS zu debuggen, müssen Sie die App auf Ihren Computer exportieren. Das geht so:
+Zum Debuggen unter iOS müssen Sie die App auf Ihren Computer exportieren. Das geht so:
 
-Xcode hat eine eingebaute Funktion zum Überprüfen des Dateisystems von entwicklerinstallierten Apps auf einem iOS-Gerät
+Xcode hat eine eingebaute Funktion zur Überprüfung des Dateisystems von Entwickler-installierten Apps auf einem iOS-Gerät
 
-So geht's:
+So gehen Sie vor:
 
-* Verbinden Sie Ihr Gerät mit dem Mac und wählen Sie Fenster > Geräte in der Xcode-Menüleiste
-* Wählen Sie Ihr Gerät im linken Bereich unter Geräte aus
-* Dies zeigt eine Liste der entwicklerinstallierten Apps für dieses Gerät
-* Wählen Sie die App aus, die Sie überprüfen möchten, und klicken Sie dann auf das Zahnrad-Symbol unten im Bildschirm
-* Hier können Sie das aktuelle Dateisystem durch Auswahl von Container anzeigen oder einen Snapshot davon herunterladen
+1. Verbinden Sie Ihr Gerät mit dem Mac und wählen Sie Fenster > Geräte in der Xcode-Menüleiste
+2. Wählen Sie Ihr Gerät im linken Bereich unter Geräte aus
+3. Dies zeigt eine Liste der entwicklerinstallierten Apps für dieses Gerät
+4. Wählen Sie die App aus, die Sie überprüfen möchten, und klicken Sie auf das Zahnrad-Symbol unten im Bildschirm
+5. Hier können Sie das aktuelle Dateisystem durch Auswahl von Container anzeigen oder einen Snapshot davon herunterladen
 
-Durch Auswahl von Container herunterladen wird ein Snapshot des Dateisystems als xcappdata-Datei heruntergeladen und exportiert, die Sie durchsuchen können
+Wenn Sie Container herunterladen wählen, wird ein Snapshot des Dateisystems als xcappdata-Datei heruntergeladen, die Sie durchsuchen können
 
-Rechtsklicken Sie auf diese Datei und wählen Sie Paketinhalt anzeigen, um den Ordner zu öffnen
+Klicken Sie mit der rechten Maustaste auf diese Datei und wählen Sie Paketinhalt anzeigen, um den Ordner zu öffnen
 
 Öffnen Sie den App Data-Ordner, und Sie sollten nun einige Ordner wie Documents, Library, tmp usw. sehen
 
@@ -113,30 +113,29 @@ Rechtsklicken Sie auf diese Datei und wählen Sie Paketinhalt anzeigen, um den O
 
 Dann finden Sie eine Version in 2 Ordnern:
 
-`library/NoCloud/ionic_built_snapshots` ist nach dem App-Neustart erforderlich
+`library/NoCloud/ionic_built_snapshots` wird nach dem App-Neustart benötigt
 
 und `documents/versions` für Hot Reload
 
 ### Android
 
-Um auf Android zu debuggen, müssen Sie über Android Studio auf das Gerät zugreifen:
+Zum Debuggen unter Android müssen Sie über Android Studio auf das Gerät zugreifen:
 
-* Klicken Sie auf Ansicht > Werkzeugfenster > Gerätedatei-Explorer oder klicken Sie auf die Schaltfläche Gerätedatei-Explorer in der Werkzeugleiste, um den Gerätedatei-Explorer zu öffnen
-* Wählen Sie ein Gerät aus der Dropdown-Liste
-* Öffnen Sie den Pfad **data/data/APP_NAME/**, wobei **APP_NAME Ihre App-ID ist**
+1. Klicken Sie auf Ansicht > Werkzeugfenster > Gerätedatei-Explorer oder klicken Sie auf die Schaltfläche Gerätedatei-Explorer in der Werkzeugleiste
+2. Wählen Sie ein Gerät aus der Dropdown-Liste
+3. Öffnen Sie den Pfad **data/data/APP_NAME/** wobei **APP_NAME Ihre App-ID ist**
 
 ![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
 
-Suchen Sie dann den Ordner `versions`, um alle Versionen zu sehen
+Dann finden Sie den Ordner `versions`, um alle Versionen zu sehen
 
-:::tip[Wussten Sie schon?]
-Auf Android werden alle Versionen in einem Ordner gespeichert, anders als bei iOS, wo sie an zwei Stellen dupliziert werden müssen
+:::tip[Wussten Sie?]
+Unter Android werden alle Versionen in einem Ordner gespeichert, anders als bei iOS, wo sie an zwei Stellen dupliziert werden müssen
 :::
 
-## iOS-Produktions-Absturzlogs verstehen
+## iOS Produktions-Absturzprotokolle verstehen
 
 <LinkCard
     title="How to review your app's crash logs"
     href="https://developerapplecom/news/?id=nra79npr"
 />
-```

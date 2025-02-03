@@ -1,5 +1,5 @@
 ---
-title: V3 から V4 へ
+title: Von V3 zu V4
 description: So aktualisieren Sie von V3 auf V4
 sidebar:
   order: 3
@@ -8,9 +8,9 @@ locale: de
 
 ## Warum dieses Upgrade
 
-Nach vielen Gesprächen mit Ihnen in der Discord-Community habe ich festgestellt, dass der manuelle Modus zu manuell und nicht sicher in der Verwendung war. Zum Beispiel war ein automatisches Zurücksetzen nicht möglich, sodass der Benutzer bei einem fehlgeschlagenen Update die App entfernen und neu installieren musste, was eine schreckliche Benutzererfahrung ist.
+Nach vielen Gesprächen mit Ihnen in der Discord-Community habe ich festgestellt, dass der manuelle Modus zu manuell und nicht sicher in der Anwendung war. Zum Beispiel war ein automatisches Zurücksetzen nicht möglich, sodass bei einem fehlgeschlagenen Update der Benutzer die App entfernen und neu installieren musste, was eine sehr schlechte Nutzererfahrung darstellt.
 
-Währenddessen nutzte ich dies als Gelegenheit, Ihnen mehr Freiheit zu geben und den schlechten Code zu entfernen, den ich geschrieben hatte.
+In der Zwischenzeit habe ich dies als Gelegenheit genutzt, Ihnen mehr Freiheit zu geben und den gesamten schlechten Code zu entfernen.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Währenddessen nutzte ich dies als Gelegenheit, Ihnen mehr Freiheit zu geben und
 
 ## Auto-Update Cloud
 
-Wenn Sie das Basis-Beispiel in Ihrer App verwenden, können Sie sicher auf die neue Version migrieren. Viel Spaß!
+Wenn Sie das Grundbeispiel in Ihrer App verwenden, können Sie sicher auf die neue Version migrieren. Viel Spaß!
 
 ## Auto-Update Self-Hosted
 
@@ -29,7 +29,7 @@ Für Sie ist es weiterhin einfach, die Änderungen sind:
 
 ## Manuelle Benutzer
 
-Für Sie ist dies die bedeutendste Änderung, aber zum Besten! Sie erhalten zahlreiche Verbesserungen. Lesen Sie sorgfältig
+Für Sie ist dies die bedeutendste Änderung, aber zum Besten! Sie erhalten viele Verbesserungen, lesen Sie sorgfältig.
 
 ## Änderungen
 
@@ -47,26 +47,26 @@ interface BundleInfo {
 }
 ```
 
-* Umbenennung irreführender Namen (selbst zur Erklärung kann es nicht klar sein, aber bei der Verwendung ist der neue leicht zu verstehen):
-  * was als `version` bezeichnet wurde, bezieht sich jetzt auf ein `bundle`
+* Umbenennung irreführender Namen (auch wenn die Erklärung nicht klar sein kann, ist die Verwendung der neuen Namen einfach zu verstehen):
+  * was als `version` bezeichnet wurde, wird jetzt als `bundle` bezeichnet
   * `id` bezieht sich auf die alte `version`, die eine zufällige Zeichenfolge von 10 Zeichen war, diese `id` ist die einzige vertrauenswürdige und eindeutige Möglichkeit, auf Ihre Bundles zuzugreifen, Beispiel `7Dfcd2RedN`
   * `version` bezieht sich jetzt auf den `versionName`, den Sie für ein Bundle wählen, Beispiel `100`
-* `updateUrl` wechselt von `get` zu `post`, da benutzerdefinierte Header für einige von Ihnen ein Problem waren und post logischer ist, alle vorherigen Header gehen in den Body und das Präfix `cap_` verschwindet
+* `updateUrl` wechselt von `get` zu `post`, da benutzerdefinierte Header für einige von Ihnen ein Problem darstellten und post logischer ist, alle vorherigen Header gehen in den Body und das Präfix `cap_` verschwindet
 * `versionName`-Methode wird gelöscht, zugunsten von `getId`
 * list gibt jetzt eine Liste von `BundleInfo` zurück
 * Umbenennung von `getId` in `getDeviceId`
 * `autoUpdate` wird standardmäßig auf true gesetzt, wenn Sie den manuellen Modus verwenden, setzen Sie es auf false
 
-## Neuigkeiten
+## Neuheiten
 
-* Methode `getLatest`, diese Methode ermöglicht es Ihnen, von Ihrem Server, der mit `updateUrl` eingestellt wurde, die letzte verfügbare Version zu erhalten
+* Methode `getLatest`, diese Methode ermöglicht es Ihnen, von Ihrem mit `updateUrl` eingestellten Server die letzte verfügbare Version zu erhalten
 * Methode `setDelay`, die `{kind: "background" | "kill" | "nativeVersion" | "date", value?: string}` als Argument nimmt, um Verzögerungen für verschiedene Modi einzustellen
-* Methode `next`, um die Version im nächsten Hintergrund festzulegen, im Gegensatz zu `set`, das es sofort macht
-* Methode `isAutoUpdateEnabled`, um Sie wissen zu lassen, ob Sie sich im Auto-Update-Kontext befinden
+* Methode `next`, um die Version beim nächsten Hintergrundprozess festzulegen, im Gegensatz zu `set`, das es sofort ausführt
+* Methode `isAutoUpdateEnabled`, um zu erfahren, ob Sie sich im Auto-Update-Kontext befinden
 * Event `downloadComplete`, wenn der Download 100% erreicht
 * Hinzugefügtes Pflichtfeld `version` in der Download-Methode
 * `notifyAppReady` wird auch im manuellen Modus obligatorisch, wenn nicht nach 10 Sekunden aufgerufen, kehrt die App zur vorherigen Version zurück
 
 ## Mitwirkende
 
-[@lincolnthree](https://githubcom/lincolnthree/) Vielen Dank, dass Sie diese Arbeit begonnen haben, es war unmöglich, dieses Update ohne Sie zum Laufen zu bringen
+[@lincolnthree](https://githubcom/lincolnthree/) Vielen Dank für den Start dieser Arbeit, es wäre unmöglich gewesen, dieses Update ohne Sie zum Laufen zu bringen

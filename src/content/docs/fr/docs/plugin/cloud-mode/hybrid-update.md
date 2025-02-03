@@ -6,12 +6,11 @@ sidebar:
 locale: fr
 ---
 
-Lors de la transmission des mises à jour à votre utilisateur, vous disposez de plusieurs façons de gérer le cycle de mise à jour comme vous le souhaitez avant de les appliquer
+Lors de la mise à jour de votre application, vous disposez de plusieurs façons de gérer le cycle de mise à jour comme vous le souhaitez avant de les appliquer
 
 - Mise à jour silencieuse
 - Écouter l'événement ```updateAvailable```
 - Afficher une fenêtre modale ou retarder les mises à jour
-
 
 ## Mise à jour silencieuse
 
@@ -34,7 +33,7 @@ cela déclenchera le cycle de mise à jour comme d'habitude sans l'interaction d
 }
 ```
 
-Ensuite, dans votre application, vous devez masquer l'écran de démarrage lorsque vous recevez l'événement `appReady` :
+Ensuite dans votre application, vous devez masquer l'écran de démarrage lorsque vous recevez l'événement `appReady` :
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

@@ -1,5 +1,5 @@
 ---
-title: Mise en route
+title: はじめる
 description: So führen Sie Ihren eigenen Auto-Update-Server aus
 sidebar:
   order: 1
@@ -12,19 +12,19 @@ Diese Dokumentation erklärt, wie Sie Ihren eigenen Auto-Update-Server betreiben
 
 ## Bevor Sie beginnen
 
-Wenn Sie diese Arbeit selbst nutzen, empfehle ich Ihnen dringend, meine Arbeit über [Github support](https://githubcom/sponsors/riderx/) zu unterstützen
+Wenn Sie diese Arbeit selbst nutzen, kann ich Ihnen nur empfehlen, meine Arbeit über [Github support](https://githubcom/sponsors/riderx/) zu unterstützen
 
-Ich habe eine große Wette abgeschlossen, indem ich den gesamten wertvollen Code, den ich hier entwickelt habe, als Open Source zur Verfügung stelle
+Ich habe eine große Wette eingegangen, indem ich den gesamten wertvollen Code, den ich hier erstellt habe, als Open Source zur Verfügung stelle
 
 Ich hätte es für mich behalten und einen hohen Preis verlangen können
 
 Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
 
-Ebenso denke ich, dass es unsere Welt zu einem besseren Ort macht, wenn wir offen sind, anstatt zu kämpfen und uns zu verstecken
+Ebenso denke ich, dass es unsere Welt zu einem besseren Ort macht, wenn wir uns öffnen, anstatt zu kämpfen und uns zu verstecken
 
-Aber um dies zu ermöglichen, ist es notwendig, dass wir alle unseren Teil dazu beitragen, auch Sie 🥹
+Aber um das möglich zu machen, ist es notwendig, dass wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
-Wenn das Capgo-Angebot nicht zu Ihnen passt, dann setzen Sie Ihren Preis und unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
+Wenn das Capgo-Angebot nicht zu Ihnen passt, dann setzen Sie Ihren Preis fest und unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
 
 ## Funktionsvergleich
 
@@ -37,7 +37,7 @@ Hier ist die Liste:
 | ------------------------ | ----- | --------------- |
 | Updates                  | ✅     | 🚧              |
 | Auto-Rücksetzung         | ✅     | 🚧              |
-| E-Mail-Warnungen bei Fehlern | ✅     | 🚧              |
+| E-Mail-Alarm bei Fehler  | ✅     | 🚧              |
 | Kanal                    | ✅     | 🚧              |
 | Kanal-Überschreibung     | ✅     | 🚧              |
 | Geräte-Überschreibung    | ✅     | 🚧              |
@@ -47,8 +47,8 @@ Hier ist die Liste:
 | Auto-Kanal-Einstellung   | ✅     | 🚧              |
 | API-Kanäle              | ✅     | 🚧              |
 | Update-Statistiken       | ✅     | 🚧              |
-| Download-Fehler-Statistiken | ✅     | 🚧              |
-| App-Nutzungs-Statistiken | ✅     | 🚧              |
+| Fehlgeschlagene Downloads| ✅     | 🚧              |
+| App-Nutzungsstatistiken  | ✅     | 🚧              |
 | Update-Verschlüsselung   | ✅     | 🚧              |
 
 > Wenn Sie ein falsches Update an Ihre Benutzer senden, können Sie ihre App beschädigen
@@ -62,9 +62,9 @@ Hier ist die Liste:
 Wenn Sie nativen Code (Capacitor-Plugin) aktualisieren, müssen Sie die App erneut im App Store einreichen
 :::
 
-Im automatischen Modus wird ein Teil der Logik vom nativen Code übernommen, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht feingranulare Updates, teilweise Bereitstellung für ein Gerät oder eine Gruppe und mehr
+Im automatischen Modus wird ein Teil der Logik vom nativen Code übernommen, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht feingranulare Updates, teilweise Bereitstellung auf einem Gerät oder einer Gruppe und mehr
 
-Im manuellen Modus wird die gesamte Logik von JS verarbeitet, was in beiden Szenarien Vor- und Nachteile hat
+Im manuellen Modus wird die gesamte Logik von JS übernommen, das hat in beiden Szenarien Vor- und Nachteile
 
 ### Bereiten Sie Ihr Bundle vor
 
@@ -74,7 +74,7 @@ Der beste Weg, um sicherzustellen, dass Ihre ZIP-Datei gut ist, ist die Verwendu
 `npx @capgo/cli@latest bundle zip` erstellt Ihre ZIP-Datei, die bereit ist, in Ihr Backend hochgeladen zu werden
 
 <LinkCard
-	title="Automatisches Update"
+	title="Auto-Update"
 	href="/docs/self-hosted/auto-update/"
 />
 

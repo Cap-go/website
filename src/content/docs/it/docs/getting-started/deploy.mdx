@@ -1,11 +1,9 @@
 ---
-title: Distribuisci un Live Update
+title: Implementa un Live Update
 sidebar:
   order: 3
 locale: it
 ---
-
-import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Usa la funzione Live Updates di Capgo per aggiornare l'interfaccia utente e la logica di business della tua app da remoto, in tempo reale. Invia aggiornamenti del bundle JS direttamente ai tuoi utenti senza passare attraverso l'app store per correggere bug e distribuire nuove funzionalità istantaneamente.
 
@@ -13,11 +11,11 @@ Questa guida presuppone che tu abbia completato il [Quickstart di Capgo](/docs/g
 
 <Steps>
 
-1 Installato l'SDK `@capgo/capacitor-updater` nella tua app Capacitor
+1. Installato l'SDK `@capgo/capacitor-updater` nella tua app Capacitor
 
-2 Configurato l'ID della tua app e il canale di aggiornamento in `capacitorconfig.ts`
+2. Configurato l'ID della tua app e il canale di aggiornamento in `capacitorconfigts`
 
-3 Aggiunto nel tuo codice il metodo `CapacitorUpdater.notifyAppReady()`
+3. Aggiunto nel tuo codice il metodo `CapacitorUpdaternotifyAppReady()`
 
 </Steps>
 
@@ -29,12 +27,12 @@ Se non hai ancora completato questi passaggi, torna indietro e completa prima il
 
 Con l'SDK Capgo installato e configurato, sei pronto per caricare il tuo primo bundle di aggiornamento live:
 
-1 Compila i tuoi asset web:
+1. Compila i tuoi asset web:
    ```shell
    npm run build
    ```
 
-2 Carica il bundle su Capgo:
+2. Carica il bundle su Capgo:
     <Tabs>
       <TabItem label="Console">
         ```shell
@@ -43,11 +41,11 @@ Con l'SDK Capgo installato e configurato, sei pronto per caricare il tuo primo b
       </TabItem>
       <TabItem label="Github Actions">
       ```yml
-      // github/workflows/build_and_deploy.yml
+      // github/workflows/build_and_deployyml
     name: Build source code and send to Capgo
 
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ githubworkflow }}-${{ githubref }}
       cancel-in-progress: true
 
     on:
@@ -69,14 +67,14 @@ Con l'SDK Capgo installato e configurato, sei pronto per caricare il tuo primo b
           - name: Build
             run: npm run build
           - name: Deploy to Capgo
-            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            run: bunx @capgo/cli@latest bundle upload -a ${{ secretsCAPGO_TOKEN }} --channel ${{ envCHANNEL }}
             env:
-              CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+              CAPGO_TOKEN: ${{ secretsCAPGO_TOKEN }}
       ```
       </TabItem>
       <TabItem label="Gitlab">
       ```yml
-      // gitlab-ci.yml
+      // gitlab-ciyml
       stages:
         - build
 
@@ -86,7 +84,7 @@ Con l'SDK Capgo installato e configurato, sei pronto per caricare il tuo primo b
         cache:
           - key:
               files:
-                - package-lock.json
+                - package-lockjson
             paths:
               - node_modules/
         script:
@@ -102,50 +100,50 @@ Con l'SDK Capgo installato e configurato, sei pronto per caricare il tuo primo b
       ```
       </TabItem>
     </Tabs>
-   Questo caricherà una nuova versione del bundle sul canale specificato nel comando
+   Questo caricherà una nuova versione del bundle nel canale specificato nel comando
 
-### Risoluzione dei problemi di caricamento
+### Risoluzione dei problemi durante il caricamento
 
 Se il caricamento fallisce, verifica:
-- Che l'ID della tua app in `capacitorconfig.ts` corrisponda alla tua app nella dashboard di Capgo
+- Che l'ID della tua app in `capacitorconfigts` corrisponda alla tua app nella dashboard di Capgo
 - Che stai eseguendo il comando di caricamento dalla root del tuo progetto Capacitor
 - Che i tuoi asset web siano compilati e aggiornati
 
-Se hai ancora problemi, vai alla sezione [Risoluzione dei problemi](/docs/getting-started/troubleshooting/)
+Se continui ad avere problemi, vai alla sezione [Risoluzione dei problemi](/docs/getting-started/troubleshooting/)
 
 ## Ricezione di un aggiornamento su un dispositivo
 
 Una volta caricato il bundle, puoi testare l'aggiornamento live su un dispositivo:
 
-1 Sincronizza la tua app con il dispositivo:
+1. Sincronizza la tua app con il dispositivo:
    ```shell
    npx cap sync ios
    ```
 
-2 Apri un altro terminale ed esegui il seguente comando per controllare lo stato dell'aggiornamento:
+2. Apri un altro terminale ed esegui il seguente comando per controllare lo stato dell'aggiornamento:
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3 Esegui la tua app localmente:
+3. Esegui la tua app localmente:
    ```shell
    npx cap run ios
    ```
-   Oppure apri il progetto iOS/Android in Xcode/Android Studio ed esegui in modalità nativa
+   Oppure apri il progetto iOS/Android in Xcode/Android Studio ed esegui un run nativo
 
-4 Mantieni l'app aperta per circa 30 secondi per permettere il download dell'aggiornamento in background
+4. Mantieni l'app aperta per circa 30 secondi per permettere all'aggiornamento di scaricarsi in background
 
-5 I log impiegheranno alcuni secondi per aggiornarsi e mostrare lo stato dell'aggiornamento
+5. I log impiegheranno alcuni secondi per aggiornarsi e mostrare lo stato dell'aggiornamento
 
-6 Chiudi e riapri l'app. Dovresti vedere il tuo aggiornamento live applicato!
+6. Chiudi e riapri l'app. Dovresti vedere l'aggiornamento live applicato!
 
-Fai riferimento al [Quickstart di Capgo](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) per maggiori dettagli sul test degli aggiornamenti live
+Torna al [Quickstart di Capgo](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) per maggiori dettagli sul test degli aggiornamenti live
 
 ## Prossimi passi
 
 Congratulazioni per aver distribuito il tuo primo aggiornamento live con Capgo! 🎉
 
 Per saperne di più, consulta il resto della [documentazione Live Updates di Capgo](/docs/live-updates). Alcuni argomenti chiave da controllare:
-- [Targeting degli aggiornamenti con i Canali](/docs/live-updates/channels)
+- [Targeting degli aggiornamenti con i canali](/docs/live-updates/channels)
 - [Personalizzazione del comportamento degli aggiornamenti](/docs/live-updates/update-behavior)
 - [Rollback degli aggiornamenti live](/docs/live-updates/rollbacks)

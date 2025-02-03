@@ -1,6 +1,6 @@
 ---
-title: S3セルフホスティング
-description: So richten Sie mingio in Capgo ein
+title: S3 をセルフホスティングする
+description: So richten Sie minio für die Arbeit mit capgo ein
 sidebar:
   order: 2
 locale: de
@@ -8,11 +8,11 @@ locale: de
 
 ## Was behandelt dieses Tutorial?
 
-Dieses Tutorial zeigt, wie man [minio](https://minio/) für die Verwendung mit capgo einrichtet
+Dieses Tutorial zeigt, wie man [minio](https://minio/) für die Arbeit mit capgo einrichtet
 
-Dies ist technisch gesehen nicht erforderlich, um capgo auszuführen
+Dies ist technisch nicht erforderlich, um capgo auszuführen
 
-Die Einrichtung von S3 ermöglicht das Hochladen von Bundles über die [CLI](/docs/cli/commands/)
+Das Einrichten von S3 ermöglicht das Hochladen von Bundles über die [CLI](/docs/cli/commands/)
 
 :::danger
 ⚠️ Dieses Tutorial ist nicht für den Produktiveinsatz gedacht\
@@ -21,7 +21,7 @@ Verwenden Sie dies nur in der lokalen Entwicklung
 
 ## Voraussetzungen
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Erste Schritte
 
@@ -53,9 +53,9 @@ docker rm minio1
 ```
 ⚠️ Dieser Befehl entfernt keine minio-Daten
 
-## Edge-Funktionen einrichten
+## Edge Functions einrichten
 
-Nachdem wir einen S3-Server ausführen, müssen wir die capgo Edge-Funktionen einrichten, um unseren S3-Server zu verwenden
+Nachdem wir einen S3-Server ausführen, müssen wir die capgo Edge Functions einrichten, um unseren S3-Server zu verwenden
 
 Dazu müssen wir eine ENV-Datei in `capgo/supabase` mit dem Namen `envlocal` erstellen
 
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# Nachfolgend ist die tatsächlich wichtige Einrichtung für S3
+# Nachfolgend ist die wichtige Einrichtung für S3
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -78,7 +78,7 @@ R2_SECRET_ACCESS_KEY=CHANGEME123
 
 Die IP `hostdockerinternal` ist eine Docker-IP, die nur intern von Docker erreicht werden kann, aber wir ersetzen sie im Code durch `0000`, damit minio von localhost aus erreichbar ist
 
-Um Edge-Funktionen mit unserer neuen env-Datei auszuführen, verwenden Sie
+Um Edge Functions mit unserer neuen env-Datei auszuführen, verwenden Sie
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```

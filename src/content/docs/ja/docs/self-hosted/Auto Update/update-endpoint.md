@@ -1,12 +1,12 @@
 ---
-title: Perbarui endpoint
-description: セルフホスティングされた更新エンドポイントの作成方法
+title: エンドポイントの更新
+description: セルフホスト型のアップデートエンドポイントを作成する方法
 sidebar:
   order: 1
 locale: ja
 ---
 
-プラグインにアップデートを送信するJavaScriptのコード例です。
+プラグインに更新を送信するJavaScriptのコード例です
 
 ```typescript
 interface AppInfos {
@@ -71,7 +71,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-アップデートがない場合やエラーの場合は、`message`キーと、オプションで`error`を追加します：
+更新がない場合やエラーの場合は、`message`キーと必要に応じて`error`を追加します
 
 ```json
 {

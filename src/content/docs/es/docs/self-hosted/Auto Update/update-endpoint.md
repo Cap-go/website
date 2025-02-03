@@ -1,6 +1,6 @@
 ---
-title: Perbarui endpoint
-description: Cómo crear un endpoint de actualización auto-alojado
+title: Actualizar endpoint
+description: Cómo crear un endpoint de actualización autohospedado
 sidebar:
   order: 1
 locale: es
@@ -71,12 +71,12 @@ Este endpoint debe devolver un JSON:
 }
 ```
 
-Y si no hay actualización o hay error, agregar la clave `message` y opcionalmente un `error`
+Y si no hay actualización o hay un error, agregar la clave `message` y opcionalmente un `error`
 
 ```json
 {
-  "message": "Versión no encontrada",
-  "error": "El backend falló",
+  "message": "Version not found",
+  "error": "The backend crashed",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

@@ -1,12 +1,12 @@
 ---
-title: Von V4 zu V5
-description: Bagaimana cara bermigrasi dari V4 ke V5
+title: Dari V4 ke V5
+description: Cara Update dari V4 ke V5
 sidebar:
   order: 2
 locale: id
 ---
 
-## Mengapa peningkatan ini
+## Mengapa upgrade ini
 
 Versi major ini hadir untuk mengikuti versi major Capacitor
 
@@ -22,10 +22,10 @@ Pertama ikuti panduan migrasi Capacitor:
 
 `npx cap sync`
 
-Selesai! Sangat mudah!
+Itu saja! Sangat mudah!
 
 ## Mode manual
 
 Jika Anda mendapatkan pembaruan sendiri dengan getLatest, ada sedikit perubahan
-Sekarang jika Anda sudah menggunakan versi terbaru, itu akan masuk ke catch
-Setiap respons yang berbeda dari pembaruan yang tersedia akan melakukan itu
+Sekarang jika Anda sudah memiliki versi terbaru, proses akan masuk ke catch
+Setiap respons yang berbeda dari pembaruan yang tersedia akan melakukan hal tersebut

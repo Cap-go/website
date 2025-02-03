@@ -1,6 +1,6 @@
 ---
-title: Manuelle Aktualisierung
-description: Aktualisierungsverwaltung
+title: 手動更新
+description: Wie Sie ein Update selbst durchführen
 sidebar:
   order: 5
 locale: de
@@ -8,9 +8,9 @@ locale: de
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Wenn Sie selbst verwalten möchten, wann Updates angewendet werden, verwenden Sie den manuellen Modus mit Capgo Cloud
+Wenn Sie selbst steuern möchten, wann Updates angewendet werden, verwenden Sie den manuellen Modus mit Capgo Cloud
 
-Hier ist, was Sie tun müssen: Richten Sie Ihr Konto wie in "Erste Schritte" beschrieben ein
+Hier ist, was Sie tun müssen: Richten Sie Ihr Konto ein, wie in Erste Schritte erklärt
 
 <LinkCard
 	title="Erste Schritte"
@@ -33,8 +33,8 @@ Deaktivieren Sie das automatische Update in Ihrer ```capacitor.config.json```
 }
 ```
 
-Fügen Sie dann Logik hinzu, um Updates selbst zu verwalten\
-Hier ist ein Beispiel, wie Sie dies tun können:
+Fügen Sie dann die Logik hinzu, um Updates selbst zu verwalten\
+Hier ist ein Beispiel, wie Sie das machen können:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -50,7 +50,7 @@ App.addListener('appStateChange', async (state: any) => {
   console.log('appStateChange', state)
   if (state.isActive) {
     console.log('getLatest')
-    // Führen Sie den Download während der aktiven App-Zeit des Benutzers durch, um fehlgeschlagene Downloads zu verhindern
+    // Führen Sie den Download durch, während die App aktiv genutzt wird, um fehlgeschlagene Downloads zu vermeiden
     const latest = await CapacitorUpdater.getLatest()
     console.log('latest', latest)
     if (latest.url) {

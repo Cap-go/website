@@ -1,14 +1,14 @@
 ---
-title: Usando el actualizador de Capacitor con capgo auto-alojado
-description: Comment auto-héberger Capgo pour utiliser capacitor updater
+title: capgoでセルフホストされたcapacitor updater の使用
+description: Utiliser Capacitor Updater avec auto-hébergement Capgo
 sidebar:
   order: 4
 locale: fr
 ---
 
-## Que couvre ce tutoriels ?
+## Que couvre ce tutorialiel ?
 
-Ce tutoriel montrera comment utiliser capacitor updater dans un environnement de développement avec capgo auto-hébergé.
+Ce tutorialiel montrera comment utiliser capacitor updater dans un environnement de développement avec capgo auto-hébergé
 
 ## Prérequis
 
@@ -34,25 +34,25 @@ const config: CapacitorConfig = {
 };
 ```
 
-Cela vous permettra d'utiliser capgo local en développement. Cependant, par défaut, ce n'est pas suffisant.
+Cela vous permettra d'utiliser capgo local en développement. Cependant, par défaut, cela n'est pas suffisant.
 
-Sur Android, l'activation de la [communication en texte brut](https://developerandroidcom/topic/security/risks/cleartext) est nécessaire car par défaut SSL est désactivé en local.
-Cela peut être réalisé en modifiant [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) et en ajoutant `android:usesCleartextTraffic="true"` dans la balise `application`.
+Sur Android, l'activation de la [communication en texte clair](https://developerandroidcom/topic/security/risks/cleartext) est nécessaire car par défaut SSL est désactivé en local.
+Cela peut être réalisé en modifiant [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) et en ajoutant `android:usesCleartextTraffic="true"` dans la balise `application`
 Un exemple complet de cette modification peut être vu [ici](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
 
-Comme Android n'autorise pas `http` par défaut, capgo a implémenté une vérification pour http [ici](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)
-Ce code pourrait ne pas toujours être présent, mais pour l'instant une modification de cette ligne est nécessaire pour faire fonctionner les mises à jour.
+Puisque par défaut, Android n'autorise pas `http`, capgo a implémenté une vérification pour http [ici](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)
+Ce code pourrait ne pas être toujours là, mais pour l'instant une modification de cette ligne est nécessaire pour faire fonctionner les mises à jour.  
 Cette ligne devrait ressembler à ceci :
 ```ts
     if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
 ```
 
 :::danger
-⚠️ Ne validez pas `supabase/functions/updates/indexts` dans le dépôt distant\
-Ce code est ici [intentionnellement](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
+⚠️ Ne committez pas `supabase/functions/updates/indexts` dans le dépôt distant\
+Ce code est là [pour une raison](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
 :::
 
-Il pourrait également y avoir un problème empêchant l'application Android de se connecter. Si vous ne voyez pas de requêtes envoyées aux fonctions edge, exécutez
+Il pourrait également y avoir un problème empêchant l'application Android de se connecter. Si vous ne voyez aucune requête envoyée aux fonctions edge, exécutez
 ```bash
 adb reverse tcp:54321 tcp:54321
 ```

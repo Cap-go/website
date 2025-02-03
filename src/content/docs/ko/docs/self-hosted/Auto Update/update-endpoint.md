@@ -1,12 +1,12 @@
 ---
 title: 엔드포인트 업데이트
-description: 자동 호스팅 업데이트 엔드포인트를 만드는 방법
+description: 자체 호스팅 업데이트 엔드포인트 생성 방법
 sidebar:
   order: 1
 locale: ko
 ---
 
-다음은 플러그인에 업데이트를 보내기 위한 JavaScript 코드의 예시입니다
+다음은 플러그인에 업데이트를 보내는 JavaScript 코드의 예시입니다
 
 ```typescript
 interface AppInfos {
@@ -62,7 +62,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-이 엔드포인트는 다음과 같은 JSON을 반환해야 합니다:
+이 엔드포인트는 JSON을 반환해야 합니다:
 
 ```json
 {

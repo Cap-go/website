@@ -1,24 +1,26 @@
 ---
-title: Masalah yang diketahui
-description: CapacitorとCapGoの既知の問題
+title: Problemas conocidos
+description: Capacitor と CapGo の既知の問題
 sidebar:
   order: 7
 locale: ja
 ---
 
+Here's the Japanese translation:
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionicのライブリロード
+## Ionic のライブリロード
 
-* 開発時にIonic CLIのライブリロード機能を使用すると、プラグインがオーバーライドされ、更新が反映されません
+* 開発時に、CLIからIonicのライブリロード機能を使用すると、プラグインが上書きされるため、更新が反映されません
 
-## Quasarのライブリロード
+## Quasar のライブリロード
 
-* 内部的にIonicと同じシステムを使用しているため、更新が反映されません
+* 内部でIonicと同じシステムを使用しているため、更新が反映されません
 
-## アップデートの失敗
+## 更新の失敗
 
-* 通常、大きなアップデート（20MB以上）がプッシュされた場合に発生し、多くのユーザーが最新バージョンを取得できません  
+* これは通常、大きな更新（20MB以上）がプッシュされた場合に発生し、多くのユーザーが最新バージョンを取得できません  
 以前は、ダウンロードが完了するまでアプリを開いたままにする必要がありましたが、現在はバックグラウンドダウンロードを使用していますが、数秒間に制限されています
 
 ## Android
@@ -31,26 +33,26 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 Cloudflare: 1111と1001
 
-Google DNS: 8888と8844またはdnsgoogle
+Google DNS: 8888と8844、またはdnsgoogle
 
 <LinkCard
 	title="How to setup a preferred DNS server on Android?"
 	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
 />
 
-### セルフホスト
-セルフホストのアップデートをプッシュする場合、Androidアプリのセキュリティポリシーにより「HTTP」エンドポイントは使用できません。それでも使用したい場合は、このガイドに従ってください：
+### セルフホスティング
+セルフホストの更新をプッシュする場合、Androidアププのセキュリティポリシーに反するため、"HTTP"エンドポイントは使用できないことに注意してください。それでも使用したい場合は、このガイドに従ってください：
 
 <LinkCard
 	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
 	href="https://stackoverflowcom/a/51902630/5511370"
 />
 
-### 解凍 
+### 解凍
 
-解凍の問題: DEFLATEDエントリにEXT記述子がある可能性があります
+解凍の問題：DEFLATED entriesはEXT descriptorを持つことができます
 
-CLIではなく別のツールでバンドルをzip圧縮した場合、zipの形式が正しくない可能性があります。CLIコマンド`npx @capgo/cli zip BUNDLE_FOLDER`を使用してください
+CLIとは異なるもので bundles を圧縮した場合、zipのフォーマットが正しくない可能性があります。CLIコマンド `npx @capgo/cli zip BUNDLE_FOLDER` を使用してください
 
 これはJavaの既知の問題です：
 
@@ -61,7 +63,7 @@ CLIではなく別のツールでバンドルをzip圧縮した場合、zipの�
 
 ### Clearfixの問題
 
-* usesCleartextTrafficで問題がある場合、プラグインがsonar cloudが推奨するベストプラクティスに従っているためです。90%のケースでは問題なく動作しますが、一部のプラグインで問題が発生することがあります
+* usesCleartextTrafficで問題がある場合、プラグインがsonar cloudで推奨されているグッドプラクティスに従っているためです。90%のケースでは問題なく動作しますが、一部のプラグインで問題が発生する場合があります
 
 修正するには、`android/app/src/main/AndroidManifestxml`の`<application>`キーに以下を追加してください：
 
@@ -74,7 +76,7 @@ xmlns:tools="http://schemasandroidcom/tools"
 
 ### プライバシーマニフェスト
 
-[プライバシーマニフェスト](https://capacitorjscom/docs/ios/privacy-manifest)（通常は`ios/App/PrivacyInfoxcprivacy`）に`NSPrivacyAccessedAPICategoryUserDefaults`辞書キーを追加してください：
+[Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest)（通常は`ios/App/PrivacyInfoxcprivacy`）に`NSPrivacyAccessedAPICategoryUserDefaults`ディクショナリキーを追加してください：
 
 ```xml
 <?xml version="10" encoding="UTF-8"?>
@@ -83,7 +85,7 @@ xmlns:tools="http://schemasandroidcom/tools"
   <dict>
     <key>NSPrivacyAccessedAPITypes</key>
     <array>
-      <!-- ファイルが既に存在する場合は、この辞書エントリを配列に追加 -->
+      <!-- ファイルが既に存在する場合は、この dict エントリを配列に追加してください -->
       <dict>
         <key>NSPrivacyAccessedAPIType</key>
         <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
@@ -97,27 +99,27 @@ xmlns:tools="http://schemasandroidcom/tools"
 </plist>
 ```
 
-[`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) APIにアクセスする理由として[`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401)を宣言することを推奨します
+[`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) APIへのアクセス理由として[`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401)を宣言することを推奨します
 
 ### ネットワーク権限
 
-ローカルサーバーでアップデートをテストする場合、アプリはネットワーク権限を要求します。これは正常な動作であり、リモートサーバーを使用する場合には発生しません
+ローカルサーバーを使用して更新テストを行う場合、アプリはネットワーク権限を要求します。これは正常な動作で、リモートサーバーを使用する場合は発生しません
 
 ## 両OS共通
 
-手動モードでアップデートを行う場合、一部のイベントのキャッチが困難です。例えば、アップデート失敗は、JSコードがリロードする直前にトリガーされるため、キャッチできません
+手動モードで更新を行う場合、一部のイベントのキャッチが困難です。例えば、更新失敗はJSコードがリロードする直前にトリガーされるため、キャッチできません
 
-代替案として、バンドルをリストアップしてエラー状態を確認することで、アップデートが失敗したかどうかを知ることができます
+代替手段として、bundlesをリストアップしてエラー統計を確認することで、更新が失敗したかどうかを知ることができます
 
-将来的にはより良い方法を見つける必要がありますが、自動モードが推奨される方法であるため、優先度は高くありません
+将来的にはより良い対処方法を見つける必要がありますが、自動モードが推奨される更新方法であるため、優先度は高くありません
 
-PRsを歓迎して、改善にご協力ください
+PRsを歓迎しています
 
 ## CLI
 
-CLIで問題が発生した場合、
+CLIで何か問題がある場合は、
 
-**capacitorconfigts**に**appId**と**appName**が存在するか確認してください
+**capacitorconfigts**に**appId**と**appName**が存在することを確認してください
 
 公式ドキュメントのガイドに従ってください：
 

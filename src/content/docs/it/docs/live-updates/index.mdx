@@ -9,33 +9,33 @@ locale: it
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Utilizza la funzione di Aggiornamenti Live di Capgo per aggiornare i bundle JavaScript della tua app da remoto, in tempo reale. Invia aggiornamenti JS direttamente ai tuoi utenti senza passare attraverso il processo di revisione dell'app store per correggere bug e rilasciare nuove funzionalità istantaneamente.
+Utilizza la funzione Live Updates di Capgo per aggiornare i bundle JavaScript della tua app da remoto, in tempo reale. Invia aggiornamenti JS direttamente ai tuoi utenti senza passare attraverso il processo di revisione dell'app store per correggere bug e distribuire nuove funzionalità istantaneamente
 
 <Aside>
 
-Gli Aggiornamenti Live sono limitati alle modifiche del bundle JavaScript. Se hai bisogno di aggiornare il codice nativo, come aggiungere o rimuovere un plugin o modificare la configurazione del progetto nativo, dovrai inviare una nuova build binaria nativa agli app store.
+I Live Updates sono limitati alle modifiche del bundle JavaScript. Se hai bisogno di aggiornare il codice nativo, come aggiungere o rimuovere un plugin o modificare la configurazione del progetto nativo, dovrai inviare una nuova build binaria nativa agli app store
 
 </Aside>
 
-## Come Funzionano gli Aggiornamenti Live
+## Come funzionano i Live Updates
 
-Il sistema di Aggiornamento Live di Capgo ha due componenti chiave:
+Il sistema Live Update di Capgo ha due componenti chiave:
 
-1. L'SDK Capgo, che installi nella tua app. L'SDK controlla gli aggiornamenti disponibili e li scarica in background.
+1. L'SDK Capgo, che installi nella tua app. L'SDK controlla la disponibilità di aggiornamenti e li scarica in background
 
-2. I Canali, che ti permettono di indirizzare gli aggiornamenti a specifici gruppi di utenti. Puoi utilizzare i canali per gestire diverse tracce di rilascio, come `Production`, `Staging` e `Dev`.
+2. I Canali, che ti permettono di indirizzare gli aggiornamenti a specifici gruppi di utenti. Puoi utilizzare i canali per gestire diverse tracce di rilascio, come `Production`, `Staging` e `Dev`
 
-Quando carichi un nuovo bundle JS su Capgo e lo assegni a un canale, l'SDK Capgo nelle app configurate per quel canale rileverà l'aggiornamento e lo scaricherà. Al successivo riavvio dell'app, verrà caricato il nuovo bundle.
+Quando carichi un nuovo bundle JS su Capgo e lo assegni a un canale, l'SDK Capgo nelle app configurate per quel canale rileverà l'aggiornamento e lo scaricherà. Al successivo riavvio dell'app, verrà caricato il nuovo bundle
 
-## Per Iniziare
+## Per iniziare
 
-Per iniziare a utilizzare gli Aggiornamenti Live, segui questi passaggi:
+Per iniziare a utilizzare i Live Updates, segui questi passaggi:
 
 <Steps>
 
-1. Completa la [Guida Rapida Capgo](/docs/getting-started/quickstart) per configurare la tua app in Capgo e installare l'SDK Capgo.
+1. Completa il [Quickstart di Capgo](/docs/getting-started/quickstart) per configurare la tua app in Capgo e installare l'SDK Capgo
 
-2. Nel codice della tua app, chiama `CapacitorUpdater.notifyAppReady()` dopo che la tua app ha terminato l'inizializzazione. Questo comunica all'SDK Capgo che la tua app è pronta a ricevere aggiornamenti.
+2. Nel codice della tua app, chiama `CapacitorUpdater.notifyAppReady()` dopo che la tua app ha terminato l'inizializzazione. Questo comunica all'SDK Capgo che la tua app è pronta a ricevere aggiornamenti
 
 3. Compila il tuo bundle JS e caricalo su Capgo:
    ```shell
@@ -48,13 +48,13 @@ Per iniziare a utilizzare gli Aggiornamenti Live, segui questi passaggi:
    npx @capgo/cli@latest app debug
    ```
 
-5. Una volta scaricato l'aggiornamento, chiudi e riapri l'app per caricare il nuovo bundle.
+5. Una volta scaricato l'aggiornamento, chiudi e riapri la tua app per caricare il nuovo bundle
 
 </Steps>
 
-Consulta la guida [Distribuire Aggiornamenti Live](/docs/getting-started/deploy) per maggiori dettagli.
+Consulta la guida [Deploying Live Updates](/docs/getting-started/deploy) per maggiori dettagli
 
-## Prossimi Passi
+## Prossimi passi
 
 <CardGrid stagger>
   <a href="/docs/live-updates/channels/">
@@ -70,12 +70,12 @@ Consulta la guida [Distribuire Aggiornamenti Live](/docs/getting-started/deploy)
   </a>
 
   <a href="/docs/live-updates/update-behavior/">
-    <Card title="Comportamento degli Aggiornamenti" icon="setting">
+    <Card title="Comportamento degli aggiornamenti" icon="setting">
       Personalizza come e quando gli aggiornamenti vengono scaricati e applicati nella tua app
     </Card>
   </a>
   <a href="/docs/live-updates/fast-updates/">
-    <Card title="Aggiornamenti Rapidi" icon="starlight">
+    <Card title="Aggiornamenti rapidi" icon="starlight">
       Scopri come utilizzare gli aggiornamenti rapidi per velocizzare il processo di aggiornamento
     </Card>
   </a>

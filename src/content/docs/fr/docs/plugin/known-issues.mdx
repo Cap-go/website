@@ -1,5 +1,5 @@
 ---
-title: Masalah yang diketahui
+title: Problèmes connus
 description: Problèmes connus avec Capacitor et CapGo
 sidebar:
   order: 7
@@ -10,16 +10,16 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Rechargement en direct Ionic
 
-* Lorsque vous développez, si vous utilisez la fonction de rechargement en direct d'Ionic depuis la CLI, elle remplacera le plugin, donc vous ne verrez jamais vos mises à jour
+* Lorsque vous développez, si vous utilisez la fonction de rechargement en direct d'Ionic depuis la CLI, elle remplacera le plugin, vous ne verrez donc jamais vos mises à jour
 
 ## Rechargement en direct Quasar
 
-* Il utilise le même système qu'Ionic en interne, donc vous ne verrez pas vos mises à jour
+* Il utilise le même système qu'Ionic en interne, vous ne verrez donc pas vos mises à jour
 
 ## Échecs des mises à jour
 
-* Cela se produit généralement lorsque des mises à jour volumineuses (> 20 Mo) sont poussées, un grand pourcentage d'utilisateurs ne recevra pas la dernière version  
-Par le passé, les utilisateurs devaient garder l'application ouverte jusqu'à la fin du téléchargement, maintenant nous utilisons le téléchargement en arrière-plan, mais c'est toujours limité à quelques secondes
+* Cela se produit généralement lorsque de grandes mises à jour (> 20 Mo) sont envoyées, un grand pourcentage d'utilisateurs n'obtiendra pas la dernière version
+Auparavant, les utilisateurs devaient garder l'application ouverte jusqu'à la fin du téléchargement, maintenant nous utilisons le téléchargement en arrière-plan, mais c'est toujours limité à quelques secondes
 
 ## Android
 
@@ -27,26 +27,26 @@ Par le passé, les utilisateurs devaient garder l'application ouverte jusqu'à l
 
 Nous avons constaté des problèmes avec des appareils en Inde, et après avoir contacté les utilisateurs, leur avoir fait essayer différents serveurs DNS, cela a fonctionné
 
-Donc si vous rencontrez ce problème, essayez d'utiliser un serveur DNS différent comme Cloudflare ou Google DNS
+Donc si vous rencontrez ce problème, essayez d'utiliser un autre serveur DNS comme Cloudflare ou Google DNS
 
 Cloudflare : 1111 et 1001
 
 Google DNS : 8888 et 8844 ou dnsgoogle
 
 <LinkCard
-	title="How to setup a preferred DNS server on Android?"
+	title="Comment configurer un serveur DNS préféré sur Android ?"
 	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
 />
 
 ### Auto-hébergé
-Lorsque vous poussez une mise à jour auto-hébergée, gardez à l'esprit que vous ne pouvez pas utiliser un point de terminaison "HTTP" car cela va à l'encontre des politiques de sécurité des applications Android. Si vous souhaitez quand même le faire, suivez ce guide :
+Lorsque vous poussez une mise à jour auto-hébergée, gardez à l'esprit que vous ne pouvez pas utiliser un point de terminaison "HTTP" car cela va à l'encontre des politiques de sécurité des applications Android, si vous souhaitez toujours le faire, suivez ce guide :
 
 <LinkCard
-	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	title="Comment autoriser tous les types de connexion réseau HTTP et HTTPS dans Android (9) Pie ?"
 	href="https://stackoverflowcom/a/51902630/5511370"
 />
 
-### Décompression 
+### Décompression
 
 Problème de décompression : Les entrées DEFLATED peuvent avoir un descripteur EXT
 
@@ -55,13 +55,13 @@ Si vous avez compressé votre bundle avec autre chose que la CLI, le format de v
 C'est un problème connu de Java :
 
 <LinkCard
-	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	title="Problème de décompression : Les entrées DEFLATED peuvent avoir un descripteur EXT"
 	href="https://bugsopenjdkorg/browse/JDK-8143613"
 />
 
 ### Problème Clearfix
 
-* Si vous avez des problèmes avec usesCleartextTraffic, c'est parce que le plugin suit les bonnes pratiques recommandées par sonar cloud. Dans 90% des cas, cela fonctionnera très bien, mais avec certains plugins, cela cause des problèmes
+* Si vous avez des problèmes avec usesCleartextTraffic, c'est parce que le plugin suit les bonnes pratiques recommandées par sonar cloud, dans 90% des cas cela fonctionnera très bien, mais avec certains plugins cela cause des problèmes
 
 Pour résoudre ce problème, ajoutez dans `android/app/src/main/AndroidManifestxml` dans la clé `<application>` :
 
@@ -74,7 +74,7 @@ xmlns:tools="http://schemasandroidcom/tools"
 
 ### Manifeste de confidentialité
 
-Ajoutez la clé de dictionnaire `NSPrivacyAccessedAPICategoryUserDefaults` à votre [Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest) (généralement `ios/App/PrivacyInfoxcprivacy`) :
+Ajoutez la clé de dictionnaire `NSPrivacyAccessedAPICategoryUserDefaults` à votre [Manifeste de confidentialité](https://capacitorjscom/docs/ios/privacy-manifest) (généralement `ios/App/PrivacyInfoxcprivacy`) :
 
 ```xml
 <?xml version="10" encoding="UTF-8"?>
@@ -97,31 +97,31 @@ Ajoutez la clé de dictionnaire `NSPrivacyAccessedAPICategoryUserDefaults` à vo
 </plist>
 ```
 
-Nous recommandons de déclarer [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) comme raison d'accéder à l'API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
+Nous recommandons de déclarer [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) comme raison d'accès à l'API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
 
 ### Permissions réseau
 
-Lors de l'utilisation d'un serveur local pour tester les mises à jour, l'application demandera une permission réseau, c'est un comportement normal, ce n'est pas le cas lorsque vous utilisez un serveur distant
+Lors de l'utilisation d'un serveur local pour tester la mise à jour, l'application demandera la permission réseau, c'est un comportement normal, ce n'est pas le cas lorsque vous utilisez un serveur distant
 
 ## Les deux OS
 
-En mode de mise à jour manuelle, certains événements ne sont pas faciles à capturer, par exemple l'échec de mise à jour se déclenche juste avant le rechargement de votre code JS, donc vous ne pourrez pas le capturer
+Lors des mises à jour en mode manuel, certains événements ne sont pas faciles à capturer, par exemple l'échec de mise à jour se déclenche juste avant que votre code JS ne se recharge, vous ne pourrez donc pas le capturer
 
-Une alternative est de lister les bundles et vérifier les statistiques d'erreur pour savoir si la mise à jour a échoué
+Une alternative est de lister les bundles et de vérifier les statistiques d'erreur pour savoir si la mise à jour échoue
 
-Nous devons trouver une meilleure façon de gérer cela à l'avenir, mais ce n'est pas une priorité, puisque le mode auto est la méthode recommandée pour faire les mises à jour
+Nous devons trouver une meilleure façon de gérer cela à l'avenir, mais ce n'est pas une priorité, puisque le mode auto est la façon recommandée de faire les mises à jour
 
 Les PRs sont les bienvenues pour nous aider à améliorer cela
 
 ## CLI
 
-Si votre CLI a des problèmes pour faire quoi que ce soit,
+si votre CLI a des problèmes pour faire quoi que ce soit,
 
 Vérifiez si **appId** et **appName** sont présents dans votre **capacitorconfigts**
 
 Suivez le guide de la documentation officielle :
 
 <LinkCard
-	title="Capacitor Configuration"
+	title="Configuration Capacitor"
 	href="https://capacitorjscom/docs/config"
 />

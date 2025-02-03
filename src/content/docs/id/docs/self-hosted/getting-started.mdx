@@ -1,6 +1,6 @@
 ---
-title: Come iniziare
-description: Cara menjalankan Server Pembaruan Otomatis
+title: Memulai
+description: Cara Menjalankan Server Auto-Update Kustom
 sidebar:
   order: 1
 locale: id
@@ -12,23 +12,23 @@ Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
 
 ## Sebelum memulai
 
-Jika Anda menggunakan karya ini sendiri, saya sangat menyarankan Anda untuk mendukung karya saya melalui [Github support](https://githubcom/sponsors/riderx/)
+Jika Anda menggunakan karya ini untuk keperluan sendiri, saya sangat menyarankan Anda untuk mendukung pekerjaan saya melalui [Github support](https://githubcom/sponsors/riderx/)
 
-Saya membuat keputusan besar untuk membuka sumber kode berharga yang saya bangun di sini
+Saya membuat keputusan besar untuk membuka source code berharga yang saya bangun di sini
 
-Saya bisa saja menyimpannya untuk diri sendiri dan memasang harga tinggi
+Saya bisa saja menyimpannya untuk diri sendiri dan memberikan harga tinggi
 
-Selain itu, saya ingin fokus pada perangkat Capgo, dan menjadikannya bisnis yang terbuka dan transparan
+Lebih lanjut, saya ingin fokus pada tooling Capgo, dan menjadikannya bisnis yang terbuka dan transparan
 
-Demikian pula, saya pikir hal ini akan membuat dunia kita menjadi tempat yang lebih baik dengan keterbukaan daripada pertentangan dan penyembunyian
+Demikian pula, saya pikir ini akan membuat dunia kita menjadi tempat yang lebih baik dengan keterbukaan daripada pertentangan dan penyembunyian
 
-Tetapi untuk mewujudkannya, kita semua perlu berkontribusi, termasuk Anda 🥹
+Tapi untuk mewujudkannya, kita semua perlu berperan, termasuk Anda 🥹
 
-Jika penawaran Capgo tidak cocok untuk Anda, tentukan harga Anda sendiri dan dukung Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
+Jika penawaran Capgo tidak cocok untuk Anda, tentukan harga Anda sendiri dan dukung seorang Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
 
 ## Fitur paritas
 
-Jika Anda memilih menggunakan server Anda sendiri, Anda kehilangan alur pengaturan 5 menit\
+Jika Anda memilih menggunakan server Anda sendiri, Anda kehilangan alur setup 5 menit\
 Anda perlu mengimplementasikan semua fitur sendiri\
 \
 Berikut daftarnya:
@@ -36,20 +36,20 @@ Berikut daftarnya:
 | Fitur                    | Capgo | Self hosted |
 | ------------------------ | ----- | ----------- |
 | Pembaruan               | ✅     | 🚧          |
-| Kembalikan otomatis     | ✅     | 🚧          |
+| Pengembalian otomatis    | ✅     | 🚧          |
 | Peringatan email saat gagal | ✅     | 🚧          |
-| Saluran                 | ✅     | 🚧          |
-| Override Saluran        | ✅     | 🚧          |
-| Override Perangkat      | ✅     | 🚧          |
-| Pengaturan saluran      | ✅     | 🚧          |
-| Pengaturan perangkat    | ✅     | 🚧          |
-| ID Kustom               | ✅     | 🚧          |
-| Atur saluran otomatis   | ✅     | 🚧          |
-| API Saluran             | ✅     | 🚧          |
-| Statistik Pembaruan     | ✅     | 🚧          |
-| Statistik Unduh Gagal   | ✅     | 🚧          |
+| Saluran                  | ✅     | 🚧          |
+| Override Saluran         | ✅     | 🚧          |
+| Override Perangkat       | ✅     | 🚧          |
+| Pengaturan saluran       | ✅     | 🚧          |
+| Pengaturan perangkat     | ✅     | 🚧          |
+| ID Kustom                | ✅     | 🚧          |
+| Pengaturan saluran otomatis | ✅     | 🚧          |
+| API Saluran              | ✅     | 🚧          |
+| Statistik Pembaruan      | ✅     | 🚧          |
+| Statistik Unduhan Gagal  | ✅     | 🚧          |
 | Statistik Penggunaan Aplikasi | ✅     | 🚧          |
-| Enkripsi pembaruan      | ✅     | 🚧          |
+| Enkripsi pembaruan       | ✅     | 🚧          |
 
 > Jika Anda mengirim pembaruan yang salah ke pengguna Anda, aplikasi mereka bisa rusak
 
@@ -58,18 +58,18 @@ Berikut daftarnya:
 ## Pilih antara Otomatis dan Manual
 
 :::danger
-⚠️ Pembaruan OTA(Over the Air) hanya bekerja pada perubahan HTML, CSS, JS\
-Saat Anda memperbarui kode native (plugin Capacitor), Anda harus mengirim ulang ke app store
+⚠️ Pembaruan OTA(Over the Air) hanya berfungsi pada perubahan HTML, CSS, JS\
+Ketika Anda memperbarui kode native (plugin capacitor), Anda harus mengirim ulang ke app store
 :::
 
-Dalam mode otomatis, sebagian logika ditangani oleh kode Native, pembaruan diputuskan di sisi server, ini lebih aman dan memungkinkan pembaruan yang lebih terperinci, penyebaran parsial ke satu perangkat atau grup dan lainnya
+Dalam mode otomatis, sebagian logika ditangani oleh kode Native, pembaruan diputuskan di sisi server, ini lebih aman dan memungkinkan pembaruan yang lebih detail, deploy parsial ke satu perangkat atau grup dan lainnya
 
 Dalam mode manual, semua logika ditangani oleh JS, ada hal baik dan buruk di kedua skenario
 
-### Persiapkan bundle Anda
+### Siapkan bundle Anda
 
 Untuk mengirim pembaruan ke aplikasi Anda, Anda perlu mengzipnya
-Cara terbaik untuk memastikan zip Anda baik adalah menggunakan Capgo CLI untuk kompresi
+Cara terbaik untuk memastikan zip Anda baik adalah menggunakan CLI Capgo untuk zipping
 
 `npx @capgo/cli@latest bundle zip` akan membuat zip Anda siap diunggah ke backend Anda
 

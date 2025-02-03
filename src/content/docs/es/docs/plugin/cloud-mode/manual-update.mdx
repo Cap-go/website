@@ -1,6 +1,6 @@
 ---
 title: Actualización Manual
-description: Gestión de actualizaciones
+description: Cómo gestionar las actualizaciones de aplicaciones
 sidebar:
   order: 5
 locale: es
@@ -8,12 +8,12 @@ locale: es
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Si deseas gestionar por ti mismo cuándo se aplica la actualización, utiliza el modo manual con Capgo cloud
+Si deseas gestionar por ti mismo cuándo se aplican las actualizaciones, utiliza el modo manual con Capgo cloud
 
-Esto es lo que necesitas hacer, configura tu cuenta como se explica en Comenzando
+Esto es lo que necesitas hacer, configura tu cuenta como se explica en Comenzar
 
 <LinkCard
-	title="Getting Started"
+	title="Comenzar"
 	href="/docs/plugin/cloud-mode/getting-started"
 />
 
@@ -63,7 +63,7 @@ App.addListener('appStateChange', async (state: any) => {
   }
   if (!state.isActive && data) {
     console.log('set')
-    // Realiza el cambio cuando el usuario sale de la aplicación o cuando lo desees
+    // Realiza el cambio cuando el usuario abandona la aplicación o cuando lo desees
     SplashScreen.show()
     try {
       await CapacitorUpdater.set({ id: data.id })
@@ -79,7 +79,7 @@ App.addListener('appStateChange', async (state: any) => {
 Documentación de todas las API disponibles en el plugin:
 
 <LinkCard
-	title="Methods"
+	title="Métodos"
 	href="/docs/plugin/api/"
 />
 

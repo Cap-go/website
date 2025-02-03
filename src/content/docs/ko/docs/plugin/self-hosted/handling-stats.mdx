@@ -1,12 +1,12 @@
 ---
-title: Gestione delle Statistiche
-description: 자체 호스팅된 통계 엔드포인트를 만드는 방법
+title: Umgang mit Statistiken
+description: self-hosted 통계 엔드포인트를 만드는 방법
 sidebar:
   order: 7
 locale: ko
 ---
 
-다음은 플러그인의 통계를 저장하기 위한 JavaScript 코드 예시입니다
+플러그인의 통계를 저장하기 위한 JavaScript 코드 예시입니다
 
 ```typescript
 interface AppInfos {
@@ -72,7 +72,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-이 엔드포인트는 JSON을 반환해야 합니다:
+이 엔드포인트는 다음과 같은 JSON을 반환해야 합니다:
 
 ```json
 { "status": "ok" }
@@ -80,12 +80,12 @@ export const handler: Handler = async (event) => {
 
 ## 액션:
 
-* **delete**: 번들이 로컬에서 삭제될 때
-* **reset**: 앱이 내장 번들로 초기화될 때
-* **set**: 앱이 새 번들을 설정할 때
-* **set\_fail**: 앱이 설정할 번들의 ID를 찾지 못했을 때
-* **update\_fail**: 지연 후 `notifyAppReady`가 호출되지 않았을 때
-* **download\_fail**: 다운로드가 완료되지 않았을 때
+* **delete** : 번들이 로컬에서 삭제될 때
+* **reset** : 앱이 내장 번들로 재설정될 때
+* **set** : 앱이 새로운 번들을 설정할 때
+* **set\_fail** : 앱이 설정된 번들의 ID를 찾을 수 없을 때
+* **update\_fail** : 지연 후 `notifyAppReady`가 호출되지 않았을 때 전송
+* **download\_fail** : 다운로드가 완료되지 않았을 때
 * **download\_complete:** 다운로드가 완료되었을 때
-* **download\_xx:** 다운로드 진행률 10%마다 전송 예: download\_20, download\_70
+* **download\_xx:** 다운로드 진행률 10% 마다 전송 예: download\_20, download\_70
 * **update\_fail:** 번들이 주어진 시간 내에 `notifyAppReady`를 실행하지 못했을 때

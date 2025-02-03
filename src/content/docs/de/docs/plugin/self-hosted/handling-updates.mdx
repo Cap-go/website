@@ -1,12 +1,12 @@
 ---
-title: Updates verwalten
-description: So verwenden Sie das automatische Update-Plugin im selbst gehosteten Modus
+title: Updates handhaben
+description: Verwendung des Auto Update Plugins im Self-Hosted Modus
 sidebar:
   order: 6
 locale: de
 ---
 
-Hier ist ein Beispiel für Code in JavaScript, um ein Update an das Plugin zu senden
+Hier ist ein Beispiel für JavaScript-Code zum Senden eines Updates an das Plugin
 
 ```typescript
 interface AppInfos {
@@ -71,12 +71,12 @@ Dieser Endpunkt sollte ein JSON zurückgeben:
 }
 ```
 
-Und wenn kein Update oder Fehler vorliegt, fügen Sie den `message`-Schlüssel und optional einen `error` hinzu
+Und wenn kein Update oder Fehler vorliegt, fügen Sie den Schlüssel `message` und optional einen `error` hinzu
 
 ```json
 {
-  "message": "Version nicht gefunden",
-  "error": "Das Backend ist abgestürzt",
+  "message": "Version not found",
+  "error": "The backend crashed",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

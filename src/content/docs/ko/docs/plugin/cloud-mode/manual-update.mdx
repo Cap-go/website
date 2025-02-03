@@ -1,6 +1,6 @@
 ---
-title: Actualización Manual
-description: 업데이트 자체적으로 관리하는 방법
+title: 수동 업데이트
+description: 앱 업데이트 관리 방법
 sidebar:
   order: 5
 locale: ko
@@ -8,18 +8,17 @@ locale: ko
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Capgo 클라우드에서 수동 모드를 사용하여 업데이트가 적용되는 시기를 직접 관리하고 싶다면
+Capgo 클라우드와 함께 수동 모드를 사용하여 업데이트가 적용되는 시기를 직접 관리하고 싶다면
 
-다음과 같이 해야 합니다. Getting Started에 설명된 대로 계정을 설정하세요
+다음과 같이 해야 합니다. Getting Started에 설명된 대로 계정을 설정하세요.
 
 <LinkCard
 	title="Getting Started"
 	href="/docs/plugin/cloud-mode/getting-started"
 />
 
-
 #### 설정
-```capacitor.config.json```에서 자동 업데이트를 비활성화하세요
+`capacitor.config.json`에서 자동 업데이트를 비활성화하세요
 
 ```tsx
 // capacitor.config.json
@@ -64,25 +63,25 @@ App.addListener('appStateChange', async (state: any) => {
   }
   if (!state.isActive && data) {
     console.log('set')
-    // 사용자가 앱을 종료할 때나 원하는 시점에 전환을 수행합니다
+    // 사용자가 앱을 나갈 때나 원하는 시점에 전환을 수행합니다
     SplashScreen.show()
     try {
       await CapacitorUpdater.set({ id: data.id })
     }
     catch (err) {
       console.log(err)
-      SplashScreen.hide() // set이 실패한 경우, 그렇지 않으면 새 앱에서 숨겨야 합니다
+      SplashScreen.hide() // set이 실패한 경우를 위해, 그렇지 않으면 새 앱에서 숨겨야 합니다
     }
   }
 })
 ```
 
-플러그인에서 사용 가능한 모든 API 문서:
+플러그인의 모든 사용 가능한 API 문서:
 
 <LinkCard
 	title="Methods"
 	href="/docs/plugin/api/"
 />
 
-사용자가 채널을 구독하고 다른 버전을 시도할 수 있도록 하는 몇 가지 사용 사례가 있습니다:\
+사용자가 채널을 구독하고 다른 버전을 시도할 수 있게 하는 사용 사례가 있습니다:\
 [https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

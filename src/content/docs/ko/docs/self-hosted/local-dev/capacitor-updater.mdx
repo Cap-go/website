@@ -1,6 +1,6 @@
 ---
-title: Usar el capacitor updater con capgo autoalojado
-description: Capacitor Updater를 자체 호스팅된 Capgo와 함께 사용하는 방법
+title: Capgo에서 자체 호스팅 된 capacitor updater 사용하기
+description: Capacitor 업데이터를 셀프 호스팅된 capgo와 함께 사용하는 방법
 sidebar:
   order: 2
 locale: ko
@@ -8,7 +8,7 @@ locale: ko
 
 ## 이 튜토리얼에서 다룰 내용은?
 
-이 튜토리얼은 개발 환경에서 자체 호스팅된 capgo와 함께 capacitor updater를 사용하는 방법을 보여줍니다.
+이 튜토리얼은 자체 호스팅된 capgo와 함께 개발 환경에서 capacitor updater를 사용하는 방법을 보여줍니다.
 
 ## 요구사항
 
@@ -16,11 +16,11 @@ locale: ko
 
 ## 시작하기
 
-자체 호스팅된 capgo에서 capacitor updater를 사용하려면 앱 디렉토리의 `capacitorconfigts`를 다음과 같이 수정하세요:
+자체 호스팅된 capgo와 함께 capacitor updater를 사용하려면 앱 디렉토리의 `capacitor.config.ts`를 다음과 같이 수정하세요:
 
 ```ts
 const config: CapacitorConfig = {
-  appId: 'comdemoapp',
+  appId: 'com.demo.app',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
@@ -34,22 +34,23 @@ const config: CapacitorConfig = {
 };
 ```
 
-이를 통해 개발 과정에서 로컬 capgo를 사용할 수 있습니다. 하지만 기본적으로 이것만으로는 충분하지 않습니다.
+이를 통해 개발 환경에서 로컬 capgo를 사용할 수 있습니다. 하지만 기본적으로 이것만으로는 충분하지 않습니다.
 
-Android에서는 기본적으로 SSL이 로컬에서 비활성화되어 있으므로 [일반 텍스트 통신](https://developerandroidcom/topic/security/risks/cleartext/)을 활성화해야 합니다.
-이는 [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml/)을 수정하고 `application` 태그에 `android:usesCleartextTraffic="true"`를 추가하여 달성할 수 있습니다.
-이 변경사항의 전체 예시는 [여기](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/)에서 확인할 수 있습니다.
+Android에서는 기본적으로 SSL이 로컬에서 비활성화되어 있으므로 [일반 텍스트 통신](https://developerandroid.com/topic/security/risks/cleartext/)을 활성화해야 합니다.
+이는 [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml/)을 수정하고 `application` 태그에 `android:usesCleartextTraffic="true"`를 추가하여 달성할 수 있습니다.
+이 변경의 전체 예시는 [여기](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701/)에서 확인할 수 있습니다.
 
-Android는 기본적으로 `http`를 허용하지 않기 때문에 capgo는 [여기](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts/#L396)에서 http 확인을 구현했습니다.
-이 코드가 항상 여기에 있지는 않을 수 있지만, 현재로서는 업데이트가 작동하도록 하려면 이 줄을 변경해야 합니다.
-이 줄은 다음과 같아야 합니다:
+기본적으로 Android는 `http`를 허용하지 않기 때문에 capgo는 [여기](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/index.ts/#L396)에서 http 체크를 구현했습니다.
+이 코드는 항상 존재하지 않을 수 있지만, 현재로서는 업데이트가 작동하도록 하기 위해 이 라인을 변경해야 합니다.
+이 라인은 다음과 같아야 합니다:
+
 ```ts
-    if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
+    if (!signedURL || (signedURL.startsWith('http://') || signedURL.startsWith('https://'))) {
 ```
 
 :::danger
-⚠️ `supabase/functions/updates/indexts`를 원격 저장소에 커밋하지 마세요\
-이 코드는 [의도적으로](https://githubcom/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354) 여기에 있습니다
+⚠️ `supabase/functions/updates/index.ts`를 원격 저장소에 커밋하지 마세요\
+이 코드는 [의도적으로](https://github.com/Cap-go/capacitor-updater/issues/37/#issuecomment-1684916354) 여기에 있습니다
 :::
 
 Android 앱이 연결되는 것을 방해하는 문제가 있을 수 있습니다. edge 함수로 전송되는 요청이 보이지 않는다면 다음을 실행하세요:

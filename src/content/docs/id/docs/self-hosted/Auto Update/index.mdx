@@ -1,5 +1,5 @@
 ---
-title: 소개 - 자동 업데이트
+title: Pengenalan - Pembaruan Otomatis
 description: Cara menggunakan plugin auto-update dalam mode self-hosted
 sidebar:
   order: 1
@@ -8,23 +8,23 @@ locale: id
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
+Dokumentasi ini akan menjelaskan cara menjalankan server auto-update Anda
 
 ## Sebelum memulai
 
-Jika Anda menggunakan karya ini sendiri, saya sangat menyarankan untuk mendukung pekerjaan saya melalui [ini](https://githubcom/sponsors/riderx/)
+Jika Anda menggunakan karya ini untuk keperluan sendiri, saya sangat menyarankan untuk mendukung pekerjaan saya melalui [ini](https://githubcom/sponsors/riderx/)
 
 Saya membuat keputusan besar untuk membuka source code berharga yang saya bangun di sini
 
-Saya bisa saja menyimpannya untuk diri sendiri dan menetapkan harga tinggi
+Saya bisa saja menyimpannya untuk diri sendiri dan memberikan harga tinggi
 
-Selanjutnya, saya ingin fokus pada alat Capgo dan menjadikannya bisnis yang terbuka dan transparan
+Lebih lanjut, saya ingin fokus pada Capgo tooling dan membuatnya menjadi bisnis yang terbuka dan transparan
 
-Demikian pula, saya pikir dunia kita akan menjadi tempat yang lebih baik dengan keterbukaan daripada pertentangan dan penyembunyian
+Demikian pula, saya pikir ini akan membuat dunia kita menjadi tempat yang lebih baik dengan keterbukaan daripada bertarung dan bersembunyi
 
-Tapi untuk mewujudkannya, kita semua harus berperan, termasuk Anda 🥹
+Tapi untuk membuatnya mungkin, kita semua harus berperan, termasuk Anda 🥹
 
-Jika penawaran capgo tidak cocok untuk Anda, tetapkan harga Anda dan dukung Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
+Jika penawaran capgo tidak cocok untuk Anda, tentukan harga Anda sendiri dan dukung seorang Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
 
 ## Instalasi Cepat
 
@@ -41,15 +41,15 @@ Anda harus mengkonfigurasi plugin untuk menggunakan URL Anda seperti ini:
 {
 	"plugins": {
 		"CapacitorUpdater": {
-			"updateUrl": "https://YOURURL",
+			"updateUrl": "https://URLANDA",
 		}
 	}
 }
 ```
 
-> 🚧 Di android tidak diizinkan untuk melakukan request ke HTTP, untuk keperluan testing [izinkan ini](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 Di android tidak diizinkan untuk request ke HTTP, untuk keperluan testing [izinkan ini](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
-### API Pembaruan
+### API Update
 
 Plugin akan melakukan panggilan POST ke API Anda setiap kali aplikasi dibuka, dengan body ini:
 
@@ -69,7 +69,7 @@ interface AppInfos {
 }
 ```
 
-Server API harus merespons dalam JSON ke plugin capacitor-updater dengan data ini jika pembaruan diperlukan:
+Server API harus merespons dalam JSON ke plugin capacitor-updater dengan data ini jika update diperlukan:
 
 ```json
 {
@@ -78,15 +78,15 @@ Server API harus merespons dalam JSON ke plugin capacitor-updater dengan data in
 }
 ```
 
-Dalam Pembaruan Otomatis server harus melakukan pekerjaan membandingkan versi dan mengembalikan yang benar, jika kunci URL ada, plugin memulai proses unduhan
+Dalam Auto-update server harus melakukan pekerjaan membandingkan versi dan mengembalikan yang benar, jika kunci URL ada, plugin akan memulai proses unduhan
 
-Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan di log sebagai gantinya
+Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan dalam log sebagai gantinya
 
 Kunci `version` harus dalam format [`semver`](https://semverorg/)
 
 Zip harus memiliki `indexhtml` sebagai file di root, atau hanya satu folder di root dengan `indexhtml` di dalamnya
 
-Anda dapat menggunakan perintah CLI untuk mengkompresi bundle Anda:
+Anda dapat menggunakan perintah CLI untuk mengzip bundle Anda:
 
 ```bash
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
@@ -99,14 +99,14 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 
 #### Enkripsi End-to-end
 
-Mulai dari versi 4150 plugin memungkinkan Anda mengirim pembaruan terenkripsi
+Mulai dari versi 4150 plugin memungkinkan Anda mengirim update terenkripsi
 
-Anda dapat menggunakan fitur ini dengan membuat kunci pribadi ``npx @capgo/cli key create``
+Anda dapat menggunakan fitur ini dengan membuat private key ``npx @capgo/cli key create``
 
 Kemudian enkripsi file zip Anda dengan ``npx @capgo/cli encrypt [path/to/zip]``
 
-Perintah akan mencetak `ivSessionKey` yang harus dikirim dengan payload pembaruan Anda dalam kunci `session_key`\
-Kemudian aplikasi Anda akan dapat menggunakan kunci pribadi untuk mendekripsi `session_key` dan menggunakan `session_key` yang didekripsi untuk mendekripsi pembaruan
+Perintah akan mencetak `ivSessionKey` yang harus dikirim dengan payload update Anda dalam kunci `session_key`\
+Kemudian aplikasi Anda akan dapat menggunakan private key untuk mendekripsi `session_key` dan menggunakan `session_key` terdekripsi untuk mendekripsi update
 
 Pelajari lebih lanjut tentang ini di sini:
 
@@ -117,11 +117,11 @@ Pelajari lebih lanjut tentang ini di sini:
 
 ### API Statistik
 
-Mulai dari versi 130 sistem pembaruan mengirim statistik!
+Mulai dari versi 130 sistem update mengirim statistik!
 
 Secara default, semua statistik dikirim ke server kami, untuk memahami penggunaan
 
-> 💡 Tidak ada data pribadi yang dikirim untuk statistik, hanya UUID acak, pembaruan versi, aplikasi versi asli, platform, tindakan, dan ID aplikasi
+> 💡 Tidak ada data pribadi yang dikirim untuk statistik, hanya UUID acak, versi update, versi aplikasi native, platform, tindakan, dan ID aplikasi
 
 Jika Anda ingin mengirim data ke server Anda sebagai gantinya, ubah konfigurasi di bawah ini:
 
@@ -132,7 +132,7 @@ Jika Anda ingin mengirim data ke server Anda sebagai gantinya, ubah konfigurasi 
 	"appName": "Name",
 	"plugins": {
 		"CapacitorUpdater": {
-			"statsUrl": "YOUR_URL"
+			"statsUrl": "URL_ANDA"
 		}
 	}
 }
@@ -142,15 +142,15 @@ Yang akan diterima server Anda adalah:
 
 ```tsx
 interface AppInfosStats {
-	"action": "set", // dapat berupa set, delete, set_fail, reset, revert
-	// Kemudian informasi yang sama seperti pembaruan
-	"app_id": "*******", // pengenal aplikasi di toko
+	"action": "set", // bisa set, delete, set_fail, reset, revert
+	// Kemudian informasi yang sama seperti update
+	"app_id": "*******", // pengenal aplikasi di store
 	"device_id": "*******", // id unik per instalasi aplikasi
 	"platform": "ios", // atau android
-	"custom_id": "user_1", // mewakili pengguna Anda
-        "version_name": "123", // versi build web
-        "version_build": "120", // versi build native
-        "version_code": "120", // nomor build native
+	"custom_id": "user_1", // merepresentasikan pengguna Anda
+        "version_name": "123", // versi dari web build
+        "version_build": "120", // versi dari native build
+        "version_code": "120", // nomor build dari native build
 	"version_os": "16", // versi OS perangkat
         "plugin_version": "400"// untuk membuat api Anda berperilaku berbeda dengan plugin yang berbeda
         "is_emulator": false,
@@ -158,13 +158,13 @@ interface AppInfosStats {
 }
 ```
 
-Anda juga dapat menonaktifkannya sepenuhnya, dengan string kosong. Perlu diingat, statistik dibuat ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin, untuk menyelesaikan masalah dan meningkatkannya
+Anda juga dapat menonaktifkannya sepenuhnya dengan string kosong. Perlu diingat, statistik dibuat ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin, untuk menyelesaikan masalah dan meningkatkannya
 
 <LinkCard
 	title="Stats Endpoint"
 	href="/docs/self-hosted/auto-update/stats-endpoint"
 />
 
-### API Saluran
+### API Channel
 
 Akan didokumentasikan

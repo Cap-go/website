@@ -1,6 +1,6 @@
 ---
-title: Handbuch
-description: How to use Capgo updater in manual mode
+title: Manuale
+description: Come utilizzare manualmente gli aggiornamenti di Capgo
 sidebar:
   order: 3
 locale: it
@@ -19,9 +19,9 @@ Invece, voglio renderlo un business aperto e trasparente
 
 Penso che renderebbe il nostro mondo un posto migliore aprendo invece di combattere e nascondere
 
-Per renderlo possibile, è necessario che tutti noi facciamo la nostra parte, te compreso 🥹
+Per renderlo possibile, è necessario che tutti noi facciamo la nostra parte, incluso te 🥹
 
-Se l'offerta Capgo cloud non fa per te, supporta un Maker indipendente [QUI](https://githubcom/sponsors/riderx/) alle tue condizioni
+Se l'offerta Capgo cloud non fa per te, sostieni un Maker indipendente [QUI](https://githubcom/sponsors/riderx/) alle tue condizioni
 :::
 
 ## Installazione rapida
@@ -58,7 +58,7 @@ let data = {version: ""}
 CapacitorUpdaternotifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
-       // Esegui il download durante il tempo attivo dell'app per evitare download falliti
+       // Esegui il download mentre l'app è attiva per prevenire download falliti
        data = await CapacitorUpdaterdownload({
        version: '004',
        url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
@@ -71,24 +71,24 @@ AppaddListener('appStateChange', async(state) => {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // in caso di fallimento del set, altrimenti la nuova app dovrà nasconderlo
+         SplashScreenhide() // in caso il set fallisca, altrimenti la nuova app dovrà nasconderlo
        }
      }
  })
 ```
 
-⚠️ Se invii un aggiornamento non funzionante, l'app tornerà all'ultima versione funzionante o a quella inclusa nella build nativa, se nessuna funziona
+⚠️ Se invii un aggiornamento difettoso, l'app tornerà all'ultima versione funzionante o a quella inclusa nella build nativa, se nessuna funziona
 
-## App dimostrativa
+## App demo&#x20;
 
-Controlla l'app dimostrativa per maggiori informazioni
+Controlla l'app demo per maggiori informazioni
 
 [GitHub - Cap-go/demo-app: demo app with manual and auto mode](https://githubcom/Cap-go/demo-app/)
 
 ## Pacchetto
 
-Qualunque sia il nome che scegli per il file che scarichi dal tuo server di rilascio/aggiornamento, il file zip dovrebbe contenere il contenuto completo della cartella di output della build Capacitor di produzione, solitamente `{project directory}/dist/` o `{project directory}/www/`
+Qualunque sia il nome che scegli per il file che scarichi dal tuo server di rilascio/aggiornamento URL, il file zip dovrebbe contenere il contenuto completo della cartella di output della build Capacitor di produzione, solitamente `{project directory}/dist/` o `{project directory}/www/`
 
-Qui si troverà `indexhtml`, e dovrebbe contenere anche tutto il JavaScript, CSS e le risorse web necessarie per il funzionamento della tua app
+Qui si troverà `indexhtml`, e dovrebbe contenere anche tutto il JavaScript in bundle, CSS e risorse web necessarie per il funzionamento della tua app
 
 Non proteggere questo file con password, altrimenti non riuscirà a decomprimersi

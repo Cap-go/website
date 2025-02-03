@@ -1,6 +1,6 @@
 ---
-title: De V4 à V5
-description: Comment passer de V4 à V5
+title: Dari V4 ke V5
+description: Comment passer de la V4 à la V5
 sidebar:
   order: 2
 locale: fr
@@ -10,7 +10,7 @@ locale: fr
 
 Cette version majeure est là pour suivre la version majeure de Capacitor
 
-Suivez d'abord le guide de migration de Capacitor :
+Suivez d'abord le guide de migration de Capacitor:
 
 [https://capacitorjscom/docs/updating/5-0](https://capacitorjscom/docs/updating/5-0/)
 
@@ -22,10 +22,10 @@ Suivez d'abord le guide de migration de Capacitor :
 
 `npx cap sync`
 
-C'est tout ! Assez simple !
+C'est tout ! Plutôt facile !
 
 ## Mode manuel
 
 Si vous obteniez vous-même la mise à jour avec getLatest, il y a un petit changement
-Maintenant si vous êtes déjà à jour, cela ira dans le catch
-Toute réponse différente d'une mise à jour disponible fera cela
+Maintenant, si vous êtes déjà à jour, cela ira dans le catch
+Toute réponse différente de la mise à jour disponible fera cela

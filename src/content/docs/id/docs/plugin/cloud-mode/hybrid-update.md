@@ -1,17 +1,16 @@
 ---
-title: Aggiornamento ibrido
-description: Metode Pembaruan untuk Pembaruan Otomatis
+title: Mise à jour hybride
+description: Metode pembaruan untuk pembaruan otomatis
 sidebar:
   order: 3
 locale: id
 ---
 
-Saat memberikan pembaruan kepada pengguna Anda memiliki beberapa cara untuk menangani siklus pembaruan sesuai kebutuhan sebelum menerapkannya
+Ketika mendorong pembaruan kepada pengguna Anda, ada beberapa cara untuk menangani siklus pembaruan sesuai kebutuhan sebelum menerapkannya
 
 - Pembaruan diam-diam
 - Mendengarkan event ```updateAvailable```
 - Menampilkan jendela modal atau menunda pembaruan
-
 
 ## Pembaruan diam-diam
 
@@ -34,7 +33,7 @@ ini akan memicu siklus pembaruan seperti biasa tanpa interaksi pengguna
 }
 ```
 
-Dan kemudian di aplikasi Anda, Anda harus menyembunyikan splash screen saat menerima event `appReady`:
+Dan kemudian di aplikasi Anda, Anda harus menyembunyikan splash screen ketika menerima event `appReady`:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -50,7 +49,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Pembaruan paksa
 
-Tambahkan listener ke event `updateAvailable` kemudian tampilkan alert untuk memberitahu pengguna bahwa aplikasi akan diperbarui:
+Tambahkan listener untuk event `updateAvailable` dan kemudian tampilkan peringatan untuk memberi tahu pengguna bahwa aplikasi akan diperbarui:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -74,7 +73,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Pembaruan modal
 
-Anda juga dapat membiarkan pengguna memutuskan dengan menampilkan dialog untuk meminta mereka melakukan pembaruan:
+Anda juga dapat membiarkan pengguna memutuskan dengan menampilkan dialog untuk meminta mereka memperbarui:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

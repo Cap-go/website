@@ -1,6 +1,6 @@
 ---
 title: Ajustes
-description: Parámetros disponibles para Capacitor Updater
+description: Todas las configuraciones disponibles para Capacitor Updater
 sidebar:
   order: 8
 locale: es
@@ -29,7 +29,7 @@ Predeterminado: `10000` (10 segundos)
 
 ## `responseTimeout`
 
-> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar que la API ha expirado
+> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar un tiempo de espera de la API
 
 Solo disponible para Android e iOS
 
@@ -86,7 +86,7 @@ Predeterminado: `true`
 
 ## `autoUpdate`
 
-> Configura si el plugin debe usar la Actualización Automática a través de un servidor de actualizaciones
+> Configura si el plugin debe usar la Actualización Automática a través de un servidor de actualización
 
 Solo disponible para Android e iOS
 
@@ -126,7 +126,7 @@ Predeterminado: `https://apicapgoapp/updates`
 
 > Configura la URL / endpoint al que se envían las estadísticas de actualización
 
-Solo disponible para Android e iOS. Establecer en "" para deshabilitar el reporte de estadísticas
+Solo disponible para Android e iOS. Establece como "" para deshabilitar el reporte de estadísticas
 
 Predeterminado: `https://apicapgoapp/stats`
 
@@ -164,7 +164,7 @@ Predeterminado: `undefined`
 
 ## `directUpdate`
 
-> Hace que el plugin instale directamente la actualización cuando la aplicación acaba de ser actualizada/instalada. Solo aplicable para el modo autoUpdate
+> Hace que el plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
 
 Solo disponible para Android e iOS
 
@@ -205,7 +205,7 @@ Para configurar el plugin, usa estos ajustes:
 ```
 
 ## `directUpdate`
-Hace que el plugin instale directamente la actualización cuando la aplicación acaba de ser actualizada/instalada. Solo aplicable para el modo autoUpdate
+Hace que el plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
 
 :::caution
 Esta configuración requiere que ocultes la aplicación del usuario mientras se instala la actualización. De lo contrario, la aplicación se reiniciará mientras el usuario está navegando

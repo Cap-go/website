@@ -1,7 +1,7 @@
 ---
-title: Autenticación de dos factores
+title: Authentification à deux facteurs
 description: >-
-  Gérer l'authentification à deux facteurs pour mieux protéger votre compte
+  Gérez l'authentification à deux facteurs pour mieux protéger votre compte
   Capgo.
 sidebar:
   order: 9
@@ -19,13 +19,13 @@ Elle y parvient en exigeant un code supplémentaire. Ce code est stocké sur vot
 
 ## Que couvre ce guide ?
 
-Ce guide montrera comment configurer la 2FA en utilisant `Google Authenticator`. D'autres applications existent pour servir un objectif similaire, cependant je ne peux pas couvrir l'ensemble du sujet de la 2FA dans ce guide.
+Ce guide vous montrera comment configurer la 2FA en utilisant `Google Authenticator`. D'autres applications existent pour servir un but similaire, cependant je ne peux pas couvrir l'ensemble du sujet de la 2FA dans ce guide.
 
 ## Comment configurer la 2FA ?
 
-Tout d'abord, téléchargez l'application `Google Authenticator`. Si vous êtes sur Android, vous pouvez la télécharger depuis le [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2). Sur iOS, vous pouvez la télécharger depuis l'[App store](https://appsapplecom/us/app/google-authenticator/id388497605/)
+Premièrement, téléchargez l'application `Google Authenticator`. Si vous êtes sur Android, vous pouvez la télécharger depuis le [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2). Sur iOS, vous pouvez la télécharger depuis l'[App store](https://appsapplecom/us/app/google-authenticator/id388497605/)
 
-Ensuite, rendez-vous sur les [paramètres du compte capgo](https://webcapgoapp/dashboard/settings/account/). Vous devriez y voir un bouton vert qui ressemble à ceci :
+Deuxièmement, rendez-vous sur les [paramètres du compte capgo](https://webcapgoapp/dashboard/settings/account/). Vous devriez y voir un bouton vert qui ressemble à ceci :
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
 
@@ -34,8 +34,8 @@ Cliquez dessus, et un QR code devrait apparaître
 <figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfawebp" alt="Enable MFA" /><figcaption></figcaption></figure>
 
 :::danger
-⚠️ Note importante : \
-Ne partagez jamais ce QR code avec qui que ce soit, sinon vous pourriez être déconnecté de votre compte
+⚠️ Note Importante : \
+Ne partagez jamais ce QR code avec qui que ce soit, ou vous pourriez être déconnecté de votre compte
 :::
 
 Ensuite, ouvrez `Google Authenticator` sur votre téléphone. Une fois fait, suivez ces étapes :
@@ -56,8 +56,8 @@ Ensuite, retournez sur le PC et cliquez sur le bouton vérifier
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verifywebp" alt="Verify MFA" /><figcaption></figcaption></figure>
 
-Cela ouvrira une fenêtre pour saisir notre code 2FA. Dans mon cas, ce code est `095101` mais il sera différent pour vous\
-Après avoir saisi ce code, cliquez sur le bouton `vérifier`
+Cela ouvrira une fenêtre pour taper votre code 2FA. Dans mon cas, ce code est `095101` mais il sera différent pour vous\
+Après avoir tapé ce code, cliquez sur le bouton `vérifier`
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-codewebp" alt="MFA verify code final" /><figcaption></figcaption></figure>
 
@@ -78,7 +78,7 @@ Veuillez ouvrir l'authentificateur et copier votre code d'authentification
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-loginwebp" alt="MFA login" /><figcaption></figcaption></figure>
 
 :::danger
-⚠️ Note importante : \
+⚠️ Note Importante : \
 Appuyez sur `vérifier` avant que le code ne se rafraîchisse, sinon le code changera et l'ancien ne sera plus valide
 :::
 
@@ -98,4 +98,4 @@ Cliquez dessus, et vous devriez voir un écran comme celui-ci
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2webp" alt="MFA disabled" /><figcaption></figcaption></figure>
 
-Il suffit d'appuyer sur le bouton `désactiver`, et c'est tout
+Appuyez simplement sur le bouton `désactiver`, et c'est tout

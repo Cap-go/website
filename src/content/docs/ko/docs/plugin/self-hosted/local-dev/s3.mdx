@@ -1,6 +1,6 @@
 ---
-title: Hosting S3 Mandiri
-description: capgo와 함께 작동하도록 minio 설정하는 방법
+title: Self-hosting S3
+description: minio를 capgo와 함께 사용하도록 설정하는 방법
 sidebar:
   order: 2
 locale: ko
@@ -8,11 +8,11 @@ locale: ko
 
 ## 이 튜토리얼에서 다룰 내용은?
 
-이 튜토리얼은 capgo와 함께 작동하도록 [minio](https://minio/)를 설정하는 방법을 보여줍니다.
+이 튜토리얼은 capgo와 함께 작동하도록 [minio](https://minio/)를 설정하는 방법을 보여줍니다
 
-이는 capgo를 실행하는 데 기술적으로 필요한 것은 아닙니다.
+이는 capgo를 실행하는 데 기술적으로 필수는 아닙니다
 
-S3 설정을 통해 [CLI](/docs/cli/commands/)에서 번들을 업로드할 수 있습니다.
+S3 설정을 통해 [CLI](/docs/cli/commands/)에서 번들을 업로드할 수 있습니다
 
 :::danger
 ⚠️ 이 튜토리얼은 프로덕션 환경에서 사용하기 위한 것이 아닙니다\
@@ -25,11 +25,11 @@ S3 설정을 통해 [CLI](/docs/cli/commands/)에서 번들을 업로드할 수 
 
 ## 시작하기
 
-먼저 새 디렉토리를 만듭니다.
+먼저, 새 디렉토리를 생성하세요
 
-그리고 그 안에 `data`라는 폴더를 만듭니다.
+그런 다음 내부에 `data`라는 폴더를 만드세요
 
-그런 다음 다음 명령어를 실행합니다:
+그리고 다음 명령어를 실행하세요:
 ```bash
 docker run \
    -p 9000:9000 \
@@ -42,20 +42,20 @@ docker run \
    quayio/minio/minio server /data --console-address ":9090"
 ```
 
-이 컨테이너가 있는 콘솔 창을 닫으면 다음 명령어로 다시 시작할 수 있습니다:
+콘솔 창을 닫은 경우 다음 명령어로 컨테이너를 시작할 수 있습니다:
 ```bash
 docker start minio1
 ```
 
-minio 설정을 변경해야 할 경우 다음 명령어로 컨테이너를 제거할 수 있습니다:
+minio 설정을 변경해야 하는 경우 다음 명령어로 컨테이너를 제거할 수 있습니다:
 ```bash
 docker rm minio1
 ```
-⚠️ 이 명령어는 minio 데이터를 삭제하지 않습니다
+⚠️ 이 명령어는 minio 데이터를 제거하지 않습니다
 
-## 엣지 함수 설정하기
+## edge functions 설정하기
 
-이제 S3 서버가 실행 중이므로 capgo 엣지 함수가 S3 서버를 사용하도록 설정해야 합니다
+이제 S3 서버가 실행 중이므로 capgo edge functions가 S3 서버를 사용하도록 설정해야 합니다
 
 이를 위해 `capgo/supabase`에 `envlocal`이라는 ENV 파일을 생성해야 합니다
 
@@ -76,25 +76,25 @@ R2_ACCESS_KEY_ID=ROOTUSER
 R2_SECRET_ACCESS_KEY=CHANGEME123
 ```
 
-`hostdockerinternal` IP는 도커 내부에서만 접근할 수 있는 도커 IP이지만, minio가 localhost에서 접근할 수 있도록 코드에서 `0000`으로 대체됩니다
+ip `hostdockerinternal`은 docker 내부에서만 접근할 수 있는 docker ip이지만, minio가 localhost에서 접근할 수 있도록 코드에서 `0000`으로 대체합니다
 
-새로운 env 파일로 엣지 함수를 실행하려면 다음을 사용하세요
+새로운 env 파일로 edge functions를 실행하려면 다음을 사용하세요
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```
 
 ## CLI에서 S3 사용 설정하기
 
-CLI는 기본적으로 minio와 작동하지 않습니다. `capacitor.config.ts`[^1]에 다음과 같은 변경이 필요합니다
+CLI는 기본적으로 minio와 작동하지 않습니다. `capacitorconfigts`[^1]에 다음과 같은 변경이 필요합니다
 ```ts
 const config: CapacitorConfig = {
-  appId: 'com.demo.app',
+  appId: 'comdemoapp',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      // 이 localS3가 없으면 업로드 명령이 실패합니다
+      // localS3가 없으면 upload 명령어가 실패합니다
       localS3: true
     },
   },

@@ -9,7 +9,7 @@ locale: de
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Nutzen Sie Capgos Live-Updates-Funktion, um die JavaScript-Bundles Ihrer App aus der Ferne in Echtzeit zu aktualisieren. Übertragen Sie JS-Updates direkt an Ihre Nutzer, ohne den App-Store-Prüfungsprozess zu durchlaufen, um sofort Fehler zu beheben und neue Funktionen bereitzustellen.
+Nutzen Sie Capgos Live-Updates-Funktion, um die JavaScript-Bundles Ihrer App aus der Ferne in Echtzeit zu aktualisieren. Senden Sie JS-Updates direkt an Ihre Nutzer, ohne den App-Store-Überprüfungsprozess zu durchlaufen, um sofort Fehler zu beheben und neue Funktionen bereitzustellen.
 
 <Aside>
 
@@ -19,17 +19,17 @@ Live-Updates sind auf JavaScript-Bundle-Änderungen beschränkt. Wenn Sie native
 
 ## Wie Live-Updates funktionieren
 
-Capgos Live-Update-System hat zwei Hauptkomponenten:
+Das Live-Update-System von Capgo hat zwei Schlüsselkomponenten:
 
-1. Das Capgo SDK, das Sie in Ihrer App installieren. Das SDK prüft auf verfügbare Updates und lädt diese im Hintergrund herunter.
+1. Das Capgo SDK, das Sie in Ihrer App installieren. Das SDK prüft auf verfügbare Updates und lädt sie im Hintergrund herunter.
 
 2. Kanäle, mit denen Sie Updates für bestimmte Benutzergruppen bereitstellen können. Sie können Kanäle verwenden, um verschiedene Release-Tracks wie `Production`, `Staging` und `Dev` zu verwalten.
 
-Wenn Sie ein neues JS-Bundle zu Capgo hochladen und es einem Kanal zuweisen, erkennt das Capgo SDK in Apps, die für diesen Kanal konfiguriert sind, das Update und lädt es herunter. Beim nächsten Neustart der App wird das neue Bundle geladen.
+Wenn Sie ein neues JS-Bundle auf Capgo hochladen und einem Kanal zuweisen, erkennt das Capgo SDK in Apps, die für diesen Kanal konfiguriert sind, das Update und lädt es herunter. Beim nächsten Neustart der App wird das neue Bundle geladen.
 
 ## Erste Schritte
 
-Folgen Sie diesen Schritten, um Live-Updates zu nutzen:
+Folgen Sie diesen Schritten, um mit Live-Updates zu beginnen:
 
 <Steps>
 
@@ -37,7 +37,7 @@ Folgen Sie diesen Schritten, um Live-Updates zu nutzen:
 
 2. Rufen Sie in Ihrem App-Code `CapacitorUpdaternotifyAppReady()` auf, nachdem Ihre App initialisiert wurde. Dies teilt dem Capgo SDK mit, dass Ihre App bereit ist, Updates zu empfangen.
 
-3. Erstellen Sie Ihr JS-Bundle und laden Sie es zu Capgo hoch:
+3. Erstellen Sie Ihr JS-Bundle und laden Sie es auf Capgo hoch:
    ```shell
    npm run build
    npx @capgo/cli@latest upload --channel=Production 
@@ -48,23 +48,23 @@ Folgen Sie diesen Schritten, um Live-Updates zu nutzen:
    npx @capgo/cli@latest app debug
    ```
 
-5. Sobald das Update heruntergeladen wurde, schließen und öffnen Sie Ihre App erneut, um das neue Bundle zu laden.
+5. Sobald das Update heruntergeladen ist, schließen und öffnen Sie Ihre App erneut, um das neue Bundle zu laden.
 
 </Steps>
 
-Weitere Details finden Sie im [Leitfaden zum Bereitstellen von Live-Updates](/docs/getting-started/deploy)
+Weitere Details finden Sie im [Leitfaden für Live-Updates-Bereitstellung](/docs/getting-started/deploy).
 
 ## Die Capgo CLI
 
-Die Capgo CLI ist ein leistungsstarkes Tool, das Entwicklern ermöglicht, mit Capgos Diensten aus ihren eigenen CI/CD-Pipelines heraus zu interagieren. Mit der CLI haben Sie detaillierte Kontrolle darüber, wann Builds erstellt und bereitgestellt werden, sodass Sie Capgo in Ihre bestehenden Unternehmens-Workflows integrieren können.
+Die Capgo CLI ist ein leistungsstarkes Tool, das Entwicklern ermöglicht, mit Capgos Diensten aus ihren eigenen CI/CD-Pipelines zu interagieren. Mit der CLI haben Sie detaillierte Kontrolle darüber, wann Builds erstellt und bereitgestellt werden, sodass Sie Capgo in Ihre bestehenden Enterprise-Workflows integrieren können.
 
 ### Wofür ist die Capgo CLI gedacht?
 
 Die Capgo CLI ist für Entwickler und Teams konzipiert, die mehr Kontrolle und Flexibilität in ihren Live-Update-Workflows benötigen. Durch die Verwendung der CLI in Ihren CI/CD-Pipelines können Sie:
 
-- Genau bestimmen, wann Updates erstellt und bereitgestellt werden, anstatt sich auf Capgos integrierte Automatisierung zu verlassen
+- Genau festlegen, wann Updates erstellt und bereitgestellt werden sollen, anstatt sich auf Capgos integrierte Automatisierung zu verlassen
 - Eigene Prozesse wie Code-Signierung, QA-Tests oder Manager-Genehmigungen zwischen den Build- und Bereitstellungsschritten einfügen
-- Capgo in Ihre bestehenden DevOps-Tools und Workflows integrieren
+- Capgo in Ihre bestehenden DevOps-Tools und -Workflows integrieren
 
 ### Authentifizierung
 
@@ -76,17 +76,17 @@ Um sich anzumelden und Ihren API-Schlüssel sicher zu speichern, führen Sie aus
 npx @capgo/cli@latest login [API_KEY]
 ```
 
-Dieser Befehl wird dann für die zukünftige Verwendung gespeichert. Nach der Anmeldung müssen Sie Ihren API-Schlüssel nicht bei jedem Befehl erneut angeben.
+Dieser Befehl wird dann für zukünftige Verwendungen gespeichert. Nach der Anmeldung müssen Sie Ihren API-Schlüssel nicht bei jedem Befehl erneut angeben.
 
 ### Wichtige Unterschiede zu anderen CLI-Tools
 
-Wenn Sie mit anderen Live-Update-CLI-Tools vertraut sind, gibt es einige wichtige Punkte zur Capgo CLI zu beachten:
+Wenn Sie mit anderen Live-Update-CLI-Tools vertraut sind, gibt es einige wichtige Besonderheiten der Capgo CLI zu beachten:
 
-- Capgo verwendet eine einzige CLI sowohl für Entwicklungs- als auch CI/CD-Anwendungsfälle, da Capgo sich ausschließlich auf Live-Update-Funktionen konzentriert
+- Capgo verwendet eine einzige CLI sowohl für Entwicklungs- als auch für CI/CD-Anwendungsfälle, da Capgo sich ausschließlich auf Live-Update-Funktionen konzentriert
 
 - Die Capgo CLI erfordert keinen separaten Installationsschritt. Sie ist im `@capgo/cli`-Paket enthalten und kann direkt mit `npx` ausgeführt werden
 
-- Capgos CLI ist speziell für den Live-Update-Workflow entwickelt und enthält möglicherweise nicht einige Funktionen oder Befehle, die in allgemeineren CLI-Tools zu finden sind
+- Die Capgo CLI ist speziell für den Live-Update-Workflow konzipiert und enthält möglicherweise nicht alle Funktionen oder Befehle, die in allgemeineren CLI-Tools zu finden sind
 
 ## Nächste Schritte
 

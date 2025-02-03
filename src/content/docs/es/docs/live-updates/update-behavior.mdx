@@ -7,9 +7,9 @@ locale: es
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Cuando publicas una actualización de tu aplicación Capgo, probablemente quieras que tus usuarios reciban esa actualización lo antes posible. Pero tampoco quieres interrumpir su experiencia forzándolos a esperar una descarga o reiniciar la aplicación en medio de una sesión.
+Cuando lanzas una actualización de tu aplicación Capgo, probablemente quieres que tus usuarios reciban esa actualización lo antes posible. Pero también no quieres interrumpir su experiencia forzándolos a esperar una descarga o reiniciar la aplicación en medio de una sesión.
 
-El comportamiento de actualización de Capgo está diseñado para encontrar un equilibrio entre entregar actualizaciones rápidamente y minimizar la interrupción para tus usuarios.
+El comportamiento de actualización de Capgo está diseñado para lograr un equilibrio entre entregar actualizaciones rápidamente y minimizar la interrupción para tus usuarios.
 
 ## Flujo de Actualización Predeterminado
 
@@ -23,11 +23,11 @@ Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
 
 3. Una vez que se completa la descarga, Capgo espera a que el usuario envíe la aplicación a segundo plano o la cierre por completo
 
-4. Cuando el usuario vuelva a iniciar la aplicación, ejecutará la versión actualizada
+4. Cuando el usuario vuelva a iniciar la aplicación, estará ejecutando la versión actualizada
 
 </Steps>
 
-Este flujo asegura que los usuarios siempre ejecuten la última versión de tu aplicación, sin ser interrumpidos por avisos de actualización ni verse obligados a esperar descargas.
+Este flujo asegura que los usuarios siempre estén ejecutando la última versión de tu aplicación, sin ser interrumpidos por avisos de actualización o forzados a esperar descargas.
 
 <Aside type="tip">
 Capgo también busca actualizaciones cuando la aplicación se reanuda desde segundo plano, por lo que los usuarios recibirán actualizaciones incluso si no cierran completamente la aplicación
@@ -35,7 +35,7 @@ Capgo también busca actualizaciones cuando la aplicación se reanuda desde segu
 
 ## ¿Por qué Este Enfoque?
 
-Aplicar actualizaciones en segundo plano o al cerrar tiene varios beneficios clave para la experiencia del usuario:
+Aplicar actualizaciones en un evento de segundo plano o cierre tiene varios beneficios clave para la experiencia del usuario:
 
 - Los usuarios no son interrumpidos por avisos de actualización ni forzados a esperar descargas en medio de una sesión
 
@@ -43,7 +43,7 @@ Aplicar actualizaciones en segundo plano o al cerrar tiene varios beneficios cla
 
 - Puedes entregar actualizaciones frecuentemente sin preocuparte por interrumpir a los usuarios activos
 
-La principal desventaja es que si un usuario envía a segundo plano y rápidamente reanuda tu aplicación, pueden perder cualquier estado no guardado ya que la actualización se aplicó entre esas acciones.
+La principal desventaja es que si un usuario envía a segundo plano y reanuda rápidamente tu aplicación, puede perder cualquier estado no guardado ya que la actualización se aplicó entre esas acciones.
 
 Para mitigar esto, recomendamos:
 
@@ -51,7 +51,7 @@ Para mitigar esto, recomendamos:
 
 - Evitar actualizaciones muy frecuentes que modifiquen grandes partes del estado de la aplicación
 
-- Considerar personalizar el comportamiento de actualización para flujos sensibles (ver más abajo)
+- Considerar personalizar el comportamiento de actualización para flujos sensibles (ver abajo)
 
 ## Personalizando Cuándo se Aplican las Actualizaciones
 
@@ -76,7 +76,7 @@ await CapacitorUpdater.setMultiDelay({
 });
 ```
 
-Este ejemplo retrasaría la instalación de una actualización hasta después del 1 de junio de 2023 Y que la aplicación haya estado en segundo plano durante al menos 60 segundos.
+Este ejemplo retrasaría la instalación de una actualización hasta después del 1 de junio de 2023 Y la aplicación haya estado en segundo plano durante al menos 60 segundos.
 
 Las condiciones de retraso disponibles son:
 
@@ -85,10 +85,10 @@ Las condiciones de retraso disponibles son:
 - `nativeVersion`: Esperar a que se instale un binario nativo con una versión mínima antes de aplicar la actualización
 - `kill`: Esperar hasta el próximo evento de cierre de la aplicación para aplicar la actualización
 
-Puedes combinar estas condiciones para controlar con precisión cuándo se instala una actualización.
+Puedes mezclar y combinar estas condiciones para controlar precisamente cuándo se instala una actualización.
 
 <Aside type="danger">
-Ten en cuenta que la condición `kill` actualmente activa la actualización después del primer evento de cierre, no del próximo evento en segundo plano como las otras condiciones. Esta inconsistencia se corregirá en una versión futura
+Ten en cuenta que la condición `kill` actualmente activa la actualización después del primer evento de cierre, no el próximo evento de segundo plano como las otras condiciones. Esta inconsistencia se corregirá en una versión futura
 </Aside>
 
 ## Aplicando Actualizaciones Inmediatamente
@@ -135,13 +135,13 @@ El evento `appReady` se dispara una vez que la aplicación ha terminado de inici
 
 Además de manejar el evento `appReady`, recomendamos establecer la opción de configuración `keepUrlPathAfterReload` en `true` cuando se use `directUpdate`. Esto preserva la ruta URL actual cuando la aplicación se recarga debido a una actualización, ayudando a mantener la ubicación del usuario en la aplicación y reduciendo la desorientación.
 
-Si no manejas el evento `appReady` y estableces `keepUrlPathAfterReload` cuando uses `directUpdate`, el usuario podría ver brevemente una versión desactualizada de la aplicación, ser llevado de vuelta a la ruta inicial, o ver un parpadeo mientras se aplica la actualización.
+Si no manejas el evento `appReady` y estableces `keepUrlPathAfterReload` cuando uses `directUpdate`, el usuario puede ver brevemente una versión obsoleta de la aplicación, ser llevado de vuelta a la ruta inicial, o ver un parpadeo mientras se aplica la actualización.
 
-Usar `directUpdate` puede ser útil para entregar correcciones críticas de errores o parches de seguridad, pero viene con algunas compensaciones:
+Usar `directUpdate` puede ser útil para entregar correcciones de errores críticos o parches de seguridad, pero viene con algunos compromisos:
 
 - El usuario puede ver un breve parpadeo o estado de carga mientras se aplica la actualización si no manejas correctamente el evento `appReady`
 - Si la actualización modifica el estado o la interfaz de usuario de la aplicación, el usuario puede ver un cambio disruptivo en medio de una sesión
-- La ubicación del usuario en la aplicación puede perderse si no se establece `keepUrlPathAfterReload`, potencialmente desorientándolo
+- La ubicación del usuario en la aplicación puede perderse si `keepUrlPathAfterReload` no está establecido, potencialmente desorientándolo
 - Necesitarás manejar cuidadosamente el guardado y restauración del estado para asegurar una transición suave
 
 Si habilitas `directUpdate`, recomendamos:

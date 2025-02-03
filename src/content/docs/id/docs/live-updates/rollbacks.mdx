@@ -7,7 +7,7 @@ locale: id
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Meskipun pembaruan langsung Capgo memungkinkan Anda untuk dengan cepat memberikan peningkatan dan perbaikan kepada pengguna, mungkin ada situasi di mana Anda perlu kembali ke versi aplikasi sebelumnya. Mungkin pembaruan baru memunculkan masalah kritis yang tidak terduga, atau mungkin Anda ingin mengembalikan perubahan tertentu saat Anda mengerjakan perbaikan.
+Meskipun pembaruan langsung Capgo memungkinkan Anda untuk dengan cepat memberikan peningkatan dan perbaikan kepada pengguna, mungkin ada situasi di mana Anda perlu kembali ke versi sebelumnya dari aplikasi Anda. Mungkin pembaruan baru memunculkan masalah kritis yang tidak terduga, atau mungkin Anda ingin mengembalikan perubahan tertentu sambil mengerjakan perbaikan.
 
 Capgo menyediakan beberapa cara untuk mengelola build channel dan mengontrol versi aplikasi yang diterima pengguna.
 
@@ -21,7 +21,7 @@ Untuk kembali ke build sebelumnya:
 
 1. Masuk ke [Capgo Dashboard](https://app.capgo.io)
 
-2. Buka bagian "Channels"
+2. Navigasi ke bagian "Channels"
 
 3. Klik nama channel yang ingin Anda kembalikan
 
@@ -35,7 +35,7 @@ Untuk kembali ke build sebelumnya:
 </Steps>
 
 <Aside type="note">
-Kembali ke build sebelumnya hanya mempengaruhi channel yang dipilih. Jika Anda memiliki beberapa channel (misalnya Production, Staging, dll), Anda perlu mengulangi proses pengembalian untuk setiap channel yang terpengaruh.
+Kembali ke build sebelumnya hanya mempengaruhi channel yang dipilih. Jika Anda memiliki beberapa channel (misalnya Production, Staging, dll), Anda perlu mengulangi proses pengembalian untuk setiap channel yang terdampak.
 </Aside>
 
 Setelah kembali, perangkat yang dikonfigurasi untuk mendengarkan channel yang diperbarui akan menerima build sebelumnya saat mereka memeriksa pembaruan berikutnya. Build yang dikembalikan akan diperlakukan sebagai pembaruan baru, sehingga alur dan kondisi pembaruan biasa berlaku.
@@ -46,15 +46,15 @@ Jika Anda ingin menghentikan sementara pembaruan pada channel saat menyelidiki m
 
 Untuk memutuskan tautan channel:
 
-1. Buka channel di Capgo Dashboard
+1. Navigasi ke channel di Capgo Dashboard
 
 2. Klik tombol "Unlink" di sebelah build saat ini
 
 3. Konfirmasi bahwa Anda ingin memutuskan tautan channel
 
-Setelah channel diputus tautannya, tidak akan mendistribusikan pembaruan baru. Perangkat yang dikonfigurasi ke channel tersebut akan tetap pada build mereka saat ini sampai channel ditautkan ke build lagi.
+Setelah channel diputus tautannya, tidak akan mendistribusikan pembaruan baru. Perangkat yang dikonfigurasi ke channel tersebut akan tetap pada build mereka saat ini sampai channel ditautkan kembali ke build.
 
-Ini berguna jika Anda telah mengidentifikasi masalah dengan pembaruan tetapi belum yakin build mana yang ingin Anda kembalikan. Memutuskan tautan channel memberi Anda waktu untuk menyelidiki tanpa mengeluarkan pembaruan lebih lanjut.
+Ini berguna jika Anda telah mengidentifikasi masalah dengan pembaruan tetapi belum yakin build mana yang ingin Anda kembalikan. Memutuskan tautan channel memberi Anda waktu untuk menyelidiki tanpa mengirimkan pembaruan lebih lanjut.
 
 ## Memaksakan Bundle Bawaan
 
@@ -62,15 +62,15 @@ Dalam situasi yang lebih serius, Anda mungkin ingin mengembalikan semua perangka
 
 Untuk memaksakan bundle bawaan pada channel:
 
-1. Buka channel di Capgo Dashboard
+1. Navigasi ke channel di Capgo Dashboard
 
 2. Klik tombol "Built-in Bundle"
 
 3. Konfirmasi bahwa Anda ingin memaksakan bundle bawaan
 
-Ketika Anda memaksakan bundle bawaan, semua perangkat yang dikonfigurasi ke channel tersebut akan kembali ke build web kemasan asli pada pemeriksaan pembaruan berikutnya. Ini terjadi terlepas dari build apa yang sedang mereka gunakan.
+Ketika Anda memaksakan bundle bawaan, semua perangkat yang dikonfigurasi ke channel tersebut akan kembali ke build web kemasan asli pada pemeriksaan pembaruan berikutnya. Ini terjadi terlepas dari build mana yang sedang mereka gunakan.
 
-Ini adalah opsi pengembalian yang lebih agresif daripada kembali ke build sebelumnya tertentu, karena menghapus semua pembaruan langsung yang dirilis sejak aplikasi terakhir dipublikasikan ke app store.
+Ini adalah opsi pengembalian yang lebih agresif daripada kembali ke build sebelumnya tertentu, karena menghapus semua pembaruan langsung yang dirilis sejak aplikasi terakhir diterbitkan ke app store.
 
 <Aside type="caution">
 Berhati-hatilah saat memaksakan bundle bawaan, karena akan mempengaruhi semua perangkat pada channel. Pastikan Anda telah mempertimbangkan dampaknya dan memiliki rencana untuk melanjutkan sebelum mengambil tindakan ini.
@@ -78,7 +78,7 @@ Berhati-hatilah saat memaksakan bundle bawaan, karena akan mempengaruhi semua pe
 
 ## Memantau dan Menanggapi Masalah
 
-Untuk menangkap masalah dengan cepat dan meminimalkan dampak dari pembaruan bermasalah, penting untuk memiliki rencana pemantauan rilis dan menanggapi masalah.
+Untuk menangkap masalah dengan cepat dan meminimalkan dampak pembaruan bermasalah, penting untuk memiliki rencana untuk memantau rilis Anda dan menanggapi masalah.
 
 Beberapa strategi meliputi:
 

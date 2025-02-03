@@ -1,5 +1,5 @@
 ---
-title: canal
+title: chaîne
 sidebar_label: channel
 sidebar:
   order: 6
@@ -28,7 +28,7 @@ Supprime un canal d'une application
 Options :
 
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
-- `--delete-bundle` : Supprimer le bundle associé au canal
+- `--delete-bundle` : Supprime le bundle associé au canal
 
 ### list
 
@@ -50,7 +50,7 @@ Options :
 
 - `-c, --channel <channel>` : Canal pour obtenir le bundle actuel
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
-- `--quiet` : Afficher uniquement la version du bundle
+- `--quiet` : Affiche uniquement la version du bundle
 
 ### set
 
@@ -62,21 +62,21 @@ Options :
 
 - `-a, --apikey <apikey>` : Clé API pour lier à votre compte
 - `-b, --bundle <bundle>` : Numéro de version du bundle à définir pour le canal
-- `-s, --state <state>` : Définir l'état du canal (`default` ou `normal`)
-- `--latest` : Utiliser la dernière version de `packagejson` comme version du bundle
-- `--downgrade` : Autoriser les rétrogradations vers des versions inférieures à la version native
-- `--no-downgrade` : Désactiver les rétrogradations vers des versions inférieures à la version native
-- `--upgrade` : Autoriser les mises à niveau vers des versions supérieures à la version native
-- `--no-upgrade` : Désactiver les mises à niveau vers des versions supérieures à la version native
-- `--ios` : Autoriser l'envoi de mises à jour aux appareils iOS
-- `--no-ios` : Désactiver l'envoi de mises à jour aux appareils iOS
-- `--android` : Autoriser l'envoi de mises à jour aux appareils Android
-- `--no-android` : Désactiver l'envoi de mises à jour aux appareils Android
-- `--self-assign` : Autoriser les appareils à s'auto-assigner à ce canal
-- `--no-self-assign` : Désactiver l'auto-assignation des appareils à ce canal
-- `--disable-auto-update <disableAutoUpdate>` : Désactiver la stratégie de mise à jour automatique pour ce canal (options : `major`, `minor`, `metadata`, `patch`, `none`)
-- `--dev` : Autoriser l'envoi de mises à jour aux appareils de développement
-- `--no-dev` : Désactiver l'envoi de mises à jour aux appareils de développement
-- `--emulator` : Autoriser l'envoi de mises à jour aux appareils émulateurs
-- `--no-emulator` : Désactiver l'envoi de mises à jour aux appareils émulateurs
+- `-s, --state <state>` : Définit l'état du canal (`default` ou `normal`)
+- `--latest` : Utilise la dernière version de `packagejson` comme version du bundle
+- `--downgrade` : Autorise les rétrogradations vers des versions inférieures à la version native
+- `--no-downgrade` : Désactive les rétrogradations vers des versions inférieures à la version native
+- `--upgrade` : Autorise les mises à niveau vers des versions supérieures à la version native
+- `--no-upgrade` : Désactive les mises à niveau vers des versions supérieures à la version native
+- `--ios` : Autorise l'envoi de mises à jour aux appareils iOS
+- `--no-ios` : Désactive l'envoi de mises à jour aux appareils iOS
+- `--android` : Autorise l'envoi de mises à jour aux appareils Android
+- `--no-android` : Désactive l'envoi de mises à jour aux appareils Android
+- `--self-assign` : Autorise les appareils à s'auto-assigner à ce canal
+- `--no-self-assign` : Désactive l'auto-assignation des appareils à ce canal
+- `--disable-auto-update <disableAutoUpdate>` : Désactive la stratégie de mise à jour automatique pour ce canal (options : `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev` : Autorise l'envoi de mises à jour aux appareils de développement
+- `--no-dev` : Désactive l'envoi de mises à jour aux appareils de développement
+- `--emulator` : Autorise l'envoi de mises à jour aux émulateurs
+- `--no-emulator` : Désactive l'envoi de mises à jour aux émulateurs
 - `--package-json <packageJson>` : Liste de chemins vers les fichiers `packagejson` séparés par des virgules (utile pour les monorepos)

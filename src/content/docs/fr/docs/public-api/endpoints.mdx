@@ -1,31 +1,33 @@
 ---
-title: 엔드포인트
+title: Endpoint
 description: Documentation de l'API publique de Capgo cloud
 sidebar:
   order: 2
 locale: fr
 ---
 
+Here's the French translation:
+
 import { LinkCard } from '@astrojs/starlight/components';
 
-Ceci est la documentation de l'API publique de Capgo cloud
+Voici la documentation de l'API publique de Capgo cloud
 
-Pour accéder, ajoutez dans les en-têtes votre clé API comme `authorization`
+Pour y accéder, ajoutez votre clé API dans les en-têtes comme `authorization`
 
 <LinkCard
-	title="Obtenir la clé API"
+	title="Obtenir une clé API"
 	href="https://webcapgoapp/dashboard/apikeys/"
 />
 
 ## Organisations
 
-Ce point de terminaison vous permet de gérer les organisations et leurs membres
+Ce point d'accès vous permet de gérer les organisations et leurs membres
 
 ### GET
 
 `https://apicapgoapp/organization`
 
-Récupère les informations de l'organisation. Si `orgId` est fourni dans les paramètres, renvoie une seule organisation. Sinon, renvoie toutes les organisations accessibles
+Récupère les informations d'organisation. Si `orgId` est fourni dans les paramètres, renvoie une seule organisation. Sinon, renvoie toutes les organisations accessibles.
 
 ```typescript
 interface Organization {
@@ -40,7 +42,7 @@ interface Organization {
 }
 ```
 
-Retourne:
+Renvoie :
 ```typescript
 return Organization[] | Organization
 ```
@@ -49,7 +51,7 @@ return Organization[] | Organization
 
 `https://apicapgoapp/organization`
 
-Met à jour une organisation existante. Nécessite le rôle administrateur
+Met à jour une organisation existante. Nécessite le rôle administrateur.
 
 ```typescript
 interface OrganizationUpdate {
@@ -62,7 +64,7 @@ interface OrganizationUpdate {
 
 Nécessite un corps de requête de type `OrganizationUpdate`
 
-En cas de succès, renvoie:
+En cas de succès, renvoie :
 
 ```typescript
 return { status: 'Organization updated', data: Organization }
@@ -82,7 +84,7 @@ interface OrganizationCreate {
 
 Nécessite un corps de requête de type `OrganizationCreate`
 
-En cas de succès, renvoie:
+En cas de succès, renvoie :
 
 ```typescript
 return { status: 'Organization created', id: string }
@@ -90,7 +92,7 @@ return { status: 'Organization created', id: string }
 
 ## Clés API
 
-Ce point de terminaison vous permet de gérer les clés API pour accéder à l'API Capgo
+Ce point d'accès vous permet de gérer les clés API pour accéder à l'API Capgo
 
 ### GET
 
@@ -110,7 +112,7 @@ interface ApiKey {
 }
 ```
 
-Retourne:
+Renvoie :
 ```typescript
 return ApiKey[]
 ```
@@ -121,7 +123,7 @@ return ApiKey[]
 
 Crée une nouvelle clé API pour une organisation spécifique
 
-Paramètres de requête:
+Paramètres de requête :
 ```typescript
 interface ApiKeyCreate {
   org_id: string
@@ -129,7 +131,7 @@ interface ApiKeyCreate {
 }
 ```
 
-Retourne:
+Renvoie :
 ```typescript
 return { apikey: ApiKey }
 ```
@@ -140,15 +142,15 @@ return { apikey: ApiKey }
 
 Supprime une clé API existante
 
-Paramètres:
-- `id`: La clé API à supprimer
+Paramètres :
+- `id` : La clé API à supprimer
 
-En cas de succès, renvoie:
+En cas de succès, renvoie :
 ```typescript
 return { success: true }
 ```
 
-En cas d'échec, renvoie:
+En cas d'échec, renvoie :
 ```typescript
 return { error: string, supabaseError?: any }
 ```
@@ -161,7 +163,7 @@ Récupère les membres de l'organisation
 
 Nécessite un corps de requête (paramètres de requête) de type `{ orgId: string }`
 
-En cas de succès, renvoie:
+En cas de succès, renvoie :
 ```typescript
 interface Member {
   uid: string;
@@ -187,13 +189,13 @@ interface MemberDelete {
 
 Nécessite un corps de requête (paramètres de requête) de type `MemberDelete`
 
-En cas de succès, renvoie:
+En cas de succès, renvoie :
 
 ```typescript
 return { status: 'OK' }
 ```
 
-En cas d'échec, renvoie:
+En cas d'échec, renvoie :
 
 ```typescript
 return { error: string, status: 'KO' }
@@ -201,13 +203,13 @@ return { error: string, status: 'KO' }
 
 ## Statistiques
 
-Ce point de terminaison vous permet de récupérer diverses statistiques sur vos applications et organisations
+Ce point d'accès vous permet de récupérer diverses statistiques sur vos applications et organisations
 
 ### GET /statistics/app/:app_id
 
 Récupère les statistiques pour une application spécifique
 
-Paramètres de requête:
+Paramètres de requête :
 ```typescript
 interface StatsQuery {
   from: Date
@@ -216,7 +218,7 @@ interface StatsQuery {
 }
 ```
 
-Retourne:
+Renvoie :
 ```typescript
 interface Stats {
   date: string
@@ -230,9 +232,9 @@ Si le paramètre `graph` est fourni, renvoie une image SVG de visualisation de l
 
 ### GET /statistics/user
 
-Récupère les statistiques agrégées pour toutes les organisations auxquelles l'utilisateur a accès
+Récupère les statistiques agrégées de toutes les organisations auxquelles l'utilisateur a accès
 
-Paramètres de requête:
+Paramètres de requête :
 ```typescript
 interface StatsQuery {
   from: Date
@@ -241,8 +243,8 @@ interface StatsQuery {
 }
 ```
 
-Retourne:
-Si `graph` n'est pas fourni:
+Renvoie :
+Si `graph` n'est pas fourni :
 ```typescript
 interface Stats {
   date: string
@@ -258,7 +260,7 @@ Si le paramètre `graph` est fourni, renvoie une image SVG de visualisation de l
 
 Récupère les statistiques pour une organisation spécifique
 
-Paramètres de requête:
+Paramètres de requête :
 ```typescript
 interface StatsQuery {
   from: Date
@@ -267,8 +269,8 @@ interface StatsQuery {
 }
 ```
 
-Retourne:
-Si `graph` n'est pas fourni:
+Renvoie :
+Si `graph` n'est pas fourni :
 ```typescript
 interface Stats {
   date: string
@@ -282,7 +284,7 @@ Si le paramètre `graph` est fourni, renvoie une image SVG de visualisation de l
 
 ## Canaux
 
-Ce point de terminaison vous permet de vérifier et modifier tous les canaux disponibles de votre application
+Ce point d'accès vous permet de vérifier et modifier tous les canaux disponibles de votre application
 
 ### POST
 
@@ -307,7 +309,7 @@ interface ChannelSet {
 }
 ```
 
-recevez ceci:
+recevez ceci :
 
 ```json
 { "status": "ok" }
@@ -340,7 +342,7 @@ interface Channel {
 }[]
 ```
 
-et optionnellement le nom du `channel` comme paramètre URL pour en recevoir un:
+et optionnellement le nom du `channel` comme paramètre URL pour recevoir un seul :
 
 ```typescript
 interface Channel {
@@ -375,7 +377,7 @@ interface Channel {
 }
 ```
 
-recevez ceci:
+recevez ceci :
 
 ```json
 { "status": "ok" }
@@ -383,9 +385,9 @@ recevez ceci:
 
 ## Appareils
 
-Ce point de terminaison vous permet de vérifier et modifier tous les appareils liés à votre application
+Ce point d'accès vous permet de vérifier et modifier tous les appareils liés à votre application
 
-### POST
+### POST&#x20;
 
 `https://apicapgoapp/device`
 
@@ -400,7 +402,7 @@ interface DeviceLink {
 }
 ```
 
-recevez ceci:
+recevez ceci :
 
 ```json
 { "status": "ok" }
@@ -410,8 +412,7 @@ recevez ceci:
 
 `https://apicapgoapp/device`
 
-Envoyez `app_id` comme paramètre URL et recevez un tableau des 50 premiers appareils\
-Vous pouvez obtenir le suivant en envoyant `page=1`
+Envoyez `app_id` comme paramètre URL et recevez un tableau des 50 premiers appareilsVous pouvez obtenir le suivant en envoyant `page=1`
 
 ```typescript
 interface Device{
@@ -453,7 +454,7 @@ interface Device {
 
 ### DELETE
 
-Ce point de terminaison permet de délier le canal et la version forcée. Vous ne pouvez pas supprimer un appareil de Capgo
+Ce point de terminaison permet de délier le canal et la substitution de version. Vous ne pouvez pas supprimer un appareil de Capgo
 
 `https://apicapgoapp/device`
 
@@ -480,7 +481,7 @@ Ce point de terminaison vous permet de vérifier et supprimer tous les bundles l
 
 `https://apicapgoapp/bundle`
 
-Envoyez `app_id` comme paramètre URL et recevez un tableau des 50 premiers bundles\
+Envoyez `app_id` comme paramètre URL et recevez un tableau des 50 premiers bundles
 Vous pouvez obtenir les suivants en envoyant `page=1`
 
 ```typescript
@@ -506,7 +507,7 @@ interface Bundle {
 
 ### DELETE
 
-Supprimer un bundle dans le Cloud
+Supprime un bundle dans le Cloud
 
 `https://apicapgoapp/bundle`
 

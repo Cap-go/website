@@ -1,23 +1,25 @@
 ---
-title: Ripristini
+title: Rollback
 sidebar:
   order: 5
 locale: it
 ---
 
-Mentre gli aggiornamenti in tempo reale di Capgo ti permettono di distribuire rapidamente miglioramenti e correzioni ai tuoi utenti, potrebbero esserci situazioni in cui hai bisogno di tornare a una versione precedente della tua app. Forse un nuovo aggiornamento ha introdotto un problema critico inaspettato, o magari vuoi ripristinare una modifica specifica mentre lavori a una correzione.
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Mentre gli aggiornamenti live di Capgo ti permettono di distribuire rapidamente miglioramenti e correzioni ai tuoi utenti, potrebbero esserci situazioni in cui devi tornare a una versione precedente della tua app. Forse un nuovo aggiornamento ha introdotto un problema critico inaspettato, o magari vuoi ripristinare una modifica specifica mentre lavori a una correzione.
 
 Capgo fornisce diversi modi per gestire le build di un canale e controllare la versione della tua app che gli utenti ricevono.
 
-## Ritorno a un Bundle Precedente
+## Tornare a un Bundle Precedente
 
-Ogni volta che carichi una nuova build e la assegni a un canale, Capgo mantiene una cronologia di quelle build. Se hai bisogno di ripristinare un aggiornamento specifico, puoi selezionare una di queste build precedenti per ridistribuirla sul canale.
+Ogni volta che carichi una nuova build e la assegni a un canale, Capgo mantiene una cronologia di quelle build. Se hai bisogno di ripristinare un aggiornamento specifico, puoi selezionare una di queste build precedenti da ridistribuire sul canale.
 
 Per tornare a una build precedente:
 
 <Steps>
 
-1. Accedi alla [Capgo Dashboard](https://app.capgo.io)
+1. Accedi alla [Dashboard di Capgo](https://app.capgo.io)
 
 2. Vai alla sezione "Channels"
 
@@ -26,33 +28,33 @@ Per tornare a una build precedente:
 4. Trova la build a cui vuoi tornare nella cronologia delle build del canale
 
 5. Clicca sull'icona della corona accanto a quella build per renderla la build attiva per il canale
-   ![Channel management options](/select_bundle.webp)
+   ![Opzioni di gestione del canale](/select_bundle.webp)
 
 6. Conferma di voler tornare a questa build
 
 </Steps>
 
 <Aside type="note">
-Il ritorno a una build precedente influisce solo sul canale selezionato. Se hai più canali (es. Production, Staging, ecc.), dovrai ripetere il processo di rollback per ogni canale interessato.
+Il ripristino a una build precedente influisce solo sul canale selezionato. Se hai più canali (es. Produzione, Staging, ecc.), dovrai ripetere il processo di ripristino per ogni canale interessato.
 </Aside>
 
-Dopo il rollback, i dispositivi configurati per ascoltare il canale aggiornato riceveranno la build precedente al prossimo controllo degli aggiornamenti. La build ripristinata verrà trattata come un nuovo aggiornamento, quindi si applicano le usuali condizioni e flussi di aggiornamento.
+Dopo il ripristino, i dispositivi configurati per ascoltare il canale aggiornato riceveranno la build precedente al prossimo controllo degli aggiornamenti. La build ripristinata verrà trattata come un nuovo aggiornamento, quindi si applicano le solite condizioni e flussi di aggiornamento.
 
-## Scollegamento di un Canale
+## Scollegare un Canale
 
 Se vuoi interrompere temporaneamente gli aggiornamenti su un canale mentre indaghi su un problema, puoi scollegare il canale dalla sua build corrente.
 
 Per scollegare un canale:
 
-1. Vai al canale nella Capgo Dashboard
+1. Vai al canale nella Dashboard di Capgo
 
 2. Clicca sul pulsante "Unlink" accanto alla build corrente
 
 3. Conferma di voler scollegare il canale
 
-Una volta che un canale è scollegato, non distribuirà nuovi aggiornamenti. I dispositivi configurati su quel canale rimarranno sulla loro build corrente finché il canale non viene ricollegato a una build.
+Una volta che un canale è scollegato, non distribuirà nuovi aggiornamenti. I dispositivi configurati su quel canale rimarranno sulla loro build corrente fino a quando il canale non verrà ricollegato a una build.
 
-Questo è utile se hai identificato un problema con un aggiornamento ma non sei ancora sicuro a quale build vuoi tornare. Scollegare il canale ti dà tempo per investigare senza distribuire ulteriori aggiornamenti.
+Questo è utile se hai identificato un problema con un aggiornamento ma non sei ancora sicuro a quale build vuoi tornare. Scollegare il canale ti dà tempo per indagare senza distribuire ulteriori aggiornamenti.
 
 ## Forzare il Bundle Integrato
 
@@ -60,7 +62,7 @@ In situazioni più gravi, potresti voler riportare tutti i dispositivi su un can
 
 Per forzare il bundle integrato su un canale:
 
-1. Vai al canale nella Capgo Dashboard
+1. Vai al canale nella Dashboard di Capgo
 
 2. Clicca sul pulsante "Built-in Bundle"
 
@@ -68,10 +70,10 @@ Per forzare il bundle integrato su un canale:
 
 Quando forzi il bundle integrato, tutti i dispositivi configurati su quel canale torneranno al build web originale incluso nel pacchetto al prossimo controllo degli aggiornamenti. Questo accade indipendentemente dalla build su cui si trovano attualmente.
 
-Questa è un'opzione di rollback più aggressiva rispetto al ritorno a una specifica build precedente, poiché scarta tutti gli aggiornamenti in tempo reale rilasciati da quando l'app è stata pubblicata per l'ultima volta sugli app store.
+Questa è un'opzione di ripristino più aggressiva rispetto al ritorno a una specifica build precedente, poiché scarta tutti gli aggiornamenti live rilasciati da quando l'app è stata pubblicata per l'ultima volta negli app store.
 
 <Aside type="caution">
-Sii cauto quando forzi il bundle integrato, poiché influenzerà tutti i dispositivi sul canale. Assicurati di aver considerato l'impatto e di avere un piano per procedere prima di intraprendere questa azione.
+Sii cauto quando forzi il bundle integrato, poiché influirà su tutti i dispositivi sul canale. Assicurati di aver considerato l'impatto e di avere un piano per andare avanti prima di intraprendere questa azione.
 </Aside>
 
 ## Monitoraggio e Risposta ai Problemi
@@ -81,8 +83,8 @@ Per individuare rapidamente i problemi e minimizzare l'impatto degli aggiornamen
 Alcune strategie includono:
 
 - Monitorare i report di crash e il feedback degli utenti immediatamente dopo il rilascio di un aggiornamento
-- Utilizzare rollout graduali o un sistema di canali a stadi per testare gli aggiornamenti su un gruppo più piccolo prima del rilascio generale
-- Avere un chiaro processo decisionale per quando effettuare rollback, scollegare o forzare il bundle integrato, e chi ha l'autorità per farlo
+- Utilizzare rollout graduali o un sistema di canali a fasi per testare gli aggiornamenti su un gruppo più piccolo prima del rilascio generale
+- Avere un processo decisionale chiaro per quando tornare indietro, scollegare o forzare il bundle integrato, e chi ha l'autorità per farlo
 - Comunicare agli utenti il problema e la risoluzione, se appropriato
 
-Combinando un attento monitoraggio con la capacità di gestire rapidamente gli aggiornamenti problematici, puoi fornire un'esperienza app in continuo miglioramento minimizzando le interruzioni per i tuoi utenti.
+Combinando un attento monitoraggio con la capacità di gestire rapidamente gli aggiornamenti problematici, puoi offrire un'esperienza app in continuo miglioramento minimizzando le interruzioni per i tuoi utenti.

@@ -6,54 +6,54 @@ sidebar:
 locale: ko
 ---
 
-`bundle` 명령어를 사용하여 앱 번들을 관리할 수 있습니다
+`bundle` 명령어를 사용하면 앱 번들을 관리할 수 있습니다
 
 ### upload
 
 `npx @capgo/cli bundle upload [appId]`
 
-앱의 새 번들을 업로드합니다
+앱에 대한 새 번들을 업로드합니다
 
 옵션:
 
 - `-a, --apikey <apikey>`: 계정에 연결할 API 키
 - `-p, --path <path>`: 업로드할 폴더 경로 (`capacitorconfig`의 `webDir` 기본값)
 - `-c, --channel <channel>`: 번들을 연결할 채널
-- `-e, --external <url>`: Capgo Cloud에 업로드하는 대신 외부 URL로 연결
+- `-e, --external <url>`: Capgo Cloud에 업로드하는 대신 외부 URL에 연결
 - `--iv-session-key <key>`: 외부 번들 URL의 IV 및 세션 키 설정
 - `--s3-region <region>`: S3 버킷의 리전
 - `--s3-apikey <apikey>`: S3 엔드포인트의 API 키
 - `--s3-apisecret <apisecret>`: S3 엔드포인트의 API 시크릿
 - `--s3-endpoint <s3Endpoint>`: S3 엔드포인트 URL
 - `--s3-bucket-name <bucketName>`: S3 버킷 이름
-- `--s3-port <port>`: S3 엔드포인트 포트
-- `--no-s3-ssl`: S3 업로드시 SSL 비활성화
-- `--key <key>`: 공개 서명 키의 사용자 정의 경로 (v1 시스템)
+- `--s3-port <port>`: S3 엔드포인트의 포트
+- `--no-s3-ssl`: S3 업로드에 대한 SSL 비활성화
+- `--key <key>`: 공개 서명 키의 사용자 지정 경로 (v1 시스템)
 - `--key-data <keyData>`: 공개 서명 키 데이터 (v1 시스템)
-- `--key-v2 <key>`: 개인 서명 키의 사용자 정의 경로 (v2 시스템)
+- `--key-v2 <key>`: 개인 서명 키의 사용자 지정 경로 (v2 시스템)
 - `--key-data-v2 <keyDataV2>`: 개인 서명 키 데이터 (v2 시스템)
-- `--bundle-url`: stdout에 번들 URL 출력
+- `--bundle-url`: 번들 URL을 stdout에 출력
 - `--no-key`: 서명 키를 무시하고 서명되지 않은 업데이트 전송
 - `--no-code-check`: 소스 코드의 `notifyAppReady()`와 루트 폴더의 `indexhtml` 확인 건너뛰기
 - `--display-iv-session`: 업데이트 암호화에 사용된 IV 및 세션 키 표시
 - `-b, --bundle <bundle>`: 업로드할 번들 버전 번호
-- `--min-update-version <minUpdateVersion>`: 이 업데이트를 적용하는 데 필요한 최소 앱 버전 (메타데이터를 통해 자동 업데이트가 비활성화된 경우에만 사용)
+- `--min-update-version <minUpdateVersion>`: 이 업데이트를 적용하는데 필요한 최소 앱 버전 (메타데이터를 통해 자동 업데이트가 비활성화된 경우에만 사용)
 - `--auto-min-update-version`: 네이티브 패키지 버전을 기반으로 최소 업데이트 버전 자동 설정
 - `--ignore-metadata-check`: 업로드 시 메타데이터(node_modules) 확인 무시
 - `--ignore-checksum-check`: 업로드 시 체크섬 확인 무시
-- `--timeout <timeout>`: 업로드 프로세스의 제한 시간(초)
-- `--multipart`: S3에 데이터를 업로드하기 위한 멀티파트 프로토콜 사용 (더 이상 사용되지 않음, 대신 `--tus` 사용)
+- `--timeout <timeout>`: 업로드 프로세스의 타임아웃(초)
+- `--multipart`: S3에 데이터를 업로드하기 위해 멀티파트 프로토콜 사용 (더 이상 사용되지 않음, 대신 `--tus` 사용)
 - `--tus`: tus 프로토콜을 사용하여 번들 업로드
 - `--tus-chunk-size <tusChunkSize>`: tus 업로드의 청크 크기
 - `--partial`: Capgo Cloud에 변경된 파일만 업로드
-- `--partial-only`: Capgo Cloud에 부분 파일만 업로드, 압축 파일은 건너뜀 (큰 번들에 유용)
+- `--partial-only`: Capgo Cloud에 부분 파일만 업로드하고 압축 파일은 건너뜀 (큰 번들에 유용)
 - `--encrypted-checksum <encryptedChecksum>`: 외부 번들의 암호화된 체크섬(서명)
-- `--auto-set-bundle`: `capacitorconfigjson`에 번들 버전 자동 설정
-- `--dry-upload`: 실제 파일 업로드 없이 업로드 프로세스의 드라이 런 수행 (테스트에 유용)
+- `--auto-set-bundle`: `capacitorconfigjson`에서 번들 버전 자동 설정
+- `--dry-upload`: 실제 파일을 업로드하지 않고 업로드 프로세스의 테스트 실행 (테스트에 유용)
 - `--package-json <packageJson>`: `packagejson` 파일 경로의 쉼표로 구분된 목록 (모노레포에 유용)
 - `--node-modules <nodeModules>`: `node_modules` 디렉토리 경로의 쉼표로 구분된 목록 (모노레포에 유용)
 - `--encrypt-partial`: 부분 업데이트 파일 암호화
-- `--delete-linked-bundle-on-upload`: 업로드하기 전에 대상 채널에 현재 연결된 번들 삭제
+- `--delete-linked-bundle-on-upload`: 업로드하기 전에 대상 채널에서 현재 연결된 번들 삭제
 
 ### compatibility
 
@@ -93,7 +93,7 @@ locale: ko
 
 `npx @capgo/cli bundle cleanup [appId]`
 
-주요 버전의 오래된 번들을 정리하고 지정된 수의 최신 번들을 유지합니다
+주요 버전에 대한 이전 번들을 정리하고 지정된 수의 최신 번들을 유지합니다
 
 옵션:
 
@@ -110,7 +110,7 @@ locale: ko
 
 옵션:
 
-- `--key <key>`: 개인 서명 키의 사용자 정의 경로
+- `--key <key>`: 개인 서명 키의 사용자 지정 경로
 - `--key-data <keyData>`: 개인 서명 키 데이터
 
 ### encrypt
@@ -121,18 +121,18 @@ zip 번들을 암호화합니다
 
 옵션:
 
-- `--key <key>`: 개인 서명 키의 사용자 정의 경로
+- `--key <key>`: 개인 서명 키의 사용자 지정 경로
 - `--key-data <keyData>`: 개인 서명 키 데이터
 
 ### encryptV2
 
 `npx @capgo/cli bundle encryptV2 [zipPath] [checksum]`
 
-새로운 암호화 방법을 사용하여 zip 번들을 암호화합니다
+새로운 암호화 방식을 사용하여 zip 번들을 암호화합니다
 
 옵션:
 
-- `--key <key>`: 개인 서명 키의 사용자 정의 경로
+- `--key <key>`: 개인 서명 키의 사용자 지정 경로
 - `--key-data <keyData>`: 개인 서명 키 데이터
 - `-j, --json`: 결과를 JSON으로 출력
 
@@ -140,26 +140,26 @@ zip 번들을 암호화합니다
 
 `npx @capgo/cli bundle decryptV2 [zipPath] [checksum]`
 
-새로운 암호화 방법을 사용하여 zip 번들을 복호화합니다
+새로운 암호화 방식을 사용하여 zip 번들을 복호화합니다
 
 옵션:
 
-- `--key <key>`: 개인 서명 키의 사용자 정의 경로
+- `--key <key>`: 개인 서명 키의 사용자 지정 경로
 - `--key-data <keyData>`: 개인 서명 키 데이터
-- `--checksum <checksum>`: 번들의 무결성을 확인하기 위한 체크섬
+- `--checksum <checksum>`: 무결성을 확인할 번들의 체크섬
 
 ### zip
 
 `npx @capgo/cli bundle zip [appId]`
 
-번들의 zip 파일을 생성합니다
+번들용 zip 파일을 생성합니다
 
 옵션:
 
 - `-p, --path <path>`: 압축할 폴더 경로 (`capacitorconfig`의 `webDir` 기본값)
 - `-b, --bundle <bundle>`: 파일 이름에 사용할 번들 버전 번호
-- `-n, --name <name>`: zip의 사용자 정의 파일 이름
+- `-n, --name <name>`: zip의 사용자 지정 파일 이름
 - `-j, --json`: 결과를 JSON으로 출력
 - `--no-code-check`: 소스 코드의 `notifyAppReady()`와 루트 폴더의 `indexhtml` 확인 건너뛰기
-- `--key-v2`: 새로운 암호화 방법 사용 (v2)
+- `--key-v2`: 새로운 암호화 방식 사용 (v2)
 - `--package-json <packageJson>`: `packagejson` 파일 경로의 쉼표로 구분된 목록 (모노레포에 유용)

@@ -1,6 +1,6 @@
 ---
 title: Problemi noti
-description: Known Issues with Capacitor and CapGo
+description: Problemi noti con Capacitor e CapGo
 sidebar:
   order: 7
 locale: it
@@ -8,26 +8,26 @@ locale: it
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ricarica in tempo reale di Ionic
+## Ricarica live di Ionic
 
-* Durante lo sviluppo, se utilizzi la funzione di ricarica in tempo reale di Ionic dalla CLI, questa sovrascriverà il plugin, quindi non vedrai mai i tuoi aggiornamenti
+* Quando sviluppi, se utilizzi la funzione di ricarica live di Ionic dalla CLI, sovrascriverà il plugin, quindi non vedrai mai i tuoi aggiornamenti
 
-## Ricarica in tempo reale di Quasar
+## Ricarica live di Quasar
 
 * Utilizza lo stesso sistema di Ionic sotto il cofano, quindi non vedrai i tuoi aggiornamenti
 
 ## Errori negli aggiornamenti
 
-* Questo solitamente accade quando vengono inviati aggiornamenti di grandi dimensioni (> 20mb), una grande percentuale di utenti non otterrà l'ultima versione
+* Questo di solito accade quando vengono inviati aggiornamenti di grandi dimensioni (> 20mb), una grande percentuale di utenti non riceverà l'ultima versione
 In passato, gli utenti dovevano mantenere l'app aperta fino al completamento del download, ora utilizziamo il download in background, ma è ancora limitato a pochi secondi
 
 ## Android
 
 ### Impossibile scaricare
 
-Abbiamo riscontrato alcuni problemi con dispositivi in India e, parlando con gli utenti al telefono, facendogli provare diversi server DNS, ha funzionato
+Abbiamo riscontrato alcuni problemi con dispositivi in India, e parlando con gli utenti, facendogli provare diversi server DNS, ha funzionato
 
-Quindi se hai questo problema, prova a utilizzare un server DNS diverso come Cloudflare o Google DNS
+Quindi se hai il problema, prova a utilizzare un server DNS diverso come Cloudflare o Google DNS
 
 Cloudflare: 1111 e 1001
 
@@ -50,7 +50,7 @@ Quando stai distribuendo un aggiornamento self-hosted, tieni presente che non pu
 
 Problema di unzip: le voci DEFLATED possono avere un descrittore EXT
 
-Se hai compresso il tuo bundle con qualcosa di diverso dalla CLI, il formato del tuo zip potrebbe essere scorretto, utilizza il comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`
+Se hai compresso il tuo bundle con qualcosa di diverso dalla CLI, il formato del tuo zip potrebbe essere errato, utilizza il comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`
 
 Questo è un problema noto di Java:
 
@@ -63,7 +63,7 @@ Questo è un problema noto di Java:
 
 * Se hai problemi con usesCleartextTraffic, è perché il plugin segue le buone pratiche raccomandate da sonar cloud, nel 90% dei casi funzionerà bene, ma con alcuni plugin causa problemi
 
-Per risolvere, aggiungi in `android/app/src/main/AndroidManifestxml` nella chiave `<application>`:
+Per risolverlo, aggiungi in `android/app/src/main/AndroidManifestxml` nella chiave `<application>`:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
@@ -72,7 +72,7 @@ xmlns:tools="http://schemasandroidcom/tools"
 
 ## iOS
 
-### Manifesto della privacy
+### Manifesto della Privacy
 
 Aggiungi la chiave dizionario `NSPrivacyAccessedAPICategoryUserDefaults` al tuo [Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest) (solitamente `ios/App/PrivacyInfoxcprivacy`):
 
@@ -101,15 +101,15 @@ Raccomandiamo di dichiarare [`CA921`](https://developerapplecom/documentation/bu
 
 ### Permessi di rete
 
-Quando si utilizza un server locale per testare gli aggiornamenti, l'app chiederà i permessi di rete, è un comportamento normale, non accade quando si utilizza un server remoto
+Quando si utilizza un server locale per testare gli aggiornamenti, l'app chiederà i permessi di rete, è un comportamento normale, non accade quando si usa un server remoto
 
-## Entrambi i sistemi operativi
+## Entrambi i SO
 
-Quando si eseguono aggiornamenti in modalità manuale, alcuni eventi non sono facili da catturare, ad esempio il fallimento dell'aggiornamento si attiva poco prima che il codice JS si ricarichi, quindi non sarà possibile catturarlo
+Quando si eseguono aggiornamenti in modalità manuale, alcuni eventi non sono facili da catturare, ad esempio il fallimento dell'aggiornamento si attiva poco prima che il tuo codice JS si ricarichi, quindi non sarai in grado di catturarlo
 
 Un'alternativa è elencare i bundle e controllare le statistiche degli errori per sapere se l'aggiornamento fallisce
 
-Dobbiamo trovare un modo migliore per gestire questo in futuro, ma non è una priorità, dato che la modalità automatica è il modo consigliato per fare gli aggiornamenti
+Dobbiamo trovare un modo migliore per gestire questo in futuro, ma non è una priorità, poiché la modalità auto è il modo consigliato per fare gli aggiornamenti
 
 I PR sono benvenuti per aiutarci a migliorare questo aspetto
 

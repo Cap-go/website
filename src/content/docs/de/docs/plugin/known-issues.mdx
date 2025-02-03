@@ -10,7 +10,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Ionic Live-Reload
 
-* Wenn Sie während der Entwicklung die Ionic Live-Reload-Funktion der CLI verwenden, überschreibt diese das Plugin, sodass Sie Ihre Aktualisierungen nie sehen werden
+* Wenn Sie während der Entwicklung die Ionic Live-Reload-Funktion der CLI verwenden, überschreibt diese das Plugin, sodass Sie Ihre Aktualisierungen nicht sehen werden
 
 ## Quasar Live-Reload
 
@@ -18,16 +18,16 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Fehlgeschlagene Updates
 
-* Dies passiert üblicherweise bei großen Updates (> 20MB), ein großer Prozentsatz der Nutzer wird die letzte Version nicht erhalten
-Früher mussten Nutzer die App geöffnet halten bis der Download abgeschlossen war. Jetzt verwenden wir Hintergrund-Downloads, aber dies ist immer noch auf wenige Sekunden begrenzt
+* Dies passiert üblicherweise bei großen Updates (> 20MB), ein großer Prozentsatz der Nutzer erhält dann nicht die letzte Version  
+Früher mussten Nutzer die App geöffnet halten, bis der Download abgeschlossen war. Jetzt verwenden wir Hintergrund-Downloads, aber diese sind immer noch auf wenige Sekunden begrenzt
 
 ## Android
 
 ### Download nicht möglich
 
-Wir haben einige Probleme mit Geräten in Indien festgestellt und mit Nutzern telefoniert. Nach dem Testen verschiedener DNS-Server hat es funktioniert
+Wir haben einige Probleme mit Geräten in Indien festgestellt und konnten mit Nutzern telefonisch verschiedene DNS-Server testen, was das Problem löste
 
-Wenn Sie also das Problem haben, versuchen Sie einen anderen DNS-Server wie Cloudflare oder Google DNS zu verwenden
+Wenn Sie also Probleme haben, versuchen Sie einen anderen DNS-Server wie Cloudflare oder Google DNS zu verwenden
 
 Cloudflare: 1111 und 1001
 
@@ -39,7 +39,7 @@ Google DNS: 8888 und 8844 oder dnsgoogle
 />
 
 ### Self Hosted
-Wenn Sie ein selbst gehostetes Update pushen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Wenn Sie es trotzdem tun möchten, folgen Sie dieser Anleitung:
+Wenn Sie ein selbst gehostetes Update bereitstellen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Wenn Sie es trotzdem tun möchten, folgen Sie dieser Anleitung:
 
 <LinkCard
 	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
@@ -61,9 +61,9 @@ Dies ist ein bekanntes Problem von Java:
 
 ### Cleartext-Problem
 
-* Wenn Sie Probleme mit usesCleartextTraffic haben, liegt das daran, dass das Plugin den von Sonar Cloud empfohlenen Best Practices folgt. In 90% der Fälle funktioniert dies einwandfrei, aber bei einigen Plugins verursacht es Probleme
+* Wenn Sie Probleme mit usesCleartextTraffic haben, liegt das daran, dass das Plugin den von Sonar Cloud empfohlenen Best Practices folgt. In 90% der Fälle funktioniert dies einwandfrei, aber bei einigen Plugins kann es zu Problemen führen
 
-Um dies zu beheben, fügen Sie in `android/app/src/main/AndroidManifestxml` im `<application>`-Schlüssel hinzu:
+Um dies zu beheben, fügen Sie in `android/app/src/main/AndroidManifestxml` im `<application>`-Schlüssel folgendes hinzu:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
@@ -105,13 +105,13 @@ Bei der Verwendung eines lokalen Servers zum Testen von Updates wird die App nac
 
 ## Beide Betriebssysteme
 
-Bei manuellen Update-Modi sind einige Events schwer abzufangen. Zum Beispiel wird der Update-Fehler kurz vor dem Neuladen Ihres JS-Codes ausgelöst, sodass Sie ihn nicht abfangen können
+Bei manuellen Update-Modi sind einige Events nicht einfach abzufangen. Zum Beispiel wird der Update-Fehler kurz bevor Ihr JS-Code neu geladen wird ausgelöst, sodass Sie ihn nicht abfangen können
 
 Eine Alternative ist es, die Bundles aufzulisten und die Fehlerstatistiken zu überprüfen, um zu erfahren, ob das Update fehlgeschlagen ist
 
-Wir müssen in Zukunft einen besseren Weg finden, damit umzugehen, aber es ist keine Priorität, da der Auto-Modus der empfohlene Weg für Updates ist
+Wir müssen in Zukunft einen besseren Weg finden, dies zu handhaben, aber es hat keine Priorität, da der Auto-Modus die empfohlene Update-Methode ist
 
-PRs sind willkommen, um uns bei der Verbesserung zu helfen
+PRs zur Verbesserung sind willkommen
 
 ## CLI
 

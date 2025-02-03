@@ -1,22 +1,21 @@
 ---
-title: Mise à jour hybride
-description: 자동 업데이트 방식
+title: 하이브리드 업데이트
+description: 자동 업데이트를 위한 업데이트 방법
 sidebar:
   order: 3
 locale: ko
 ---
 
-사용자에게 업데이트를 푸시할 때 적용하기 전에 필요에 따라 업데이트 주기를 처리하는 몇 가지 방법이 있습니다
+사용자에게 업데이트를 푸시할 때, 업데이트를 적용하기 전에 상황에 맞게 업데이트 주기를 처리하는 몇 가지 방법이 있습니다
 
 - 자동 업데이트
 - ```updateAvailable``` 이벤트 감지
 - 모달 창 표시 또는 업데이트 지연
 
-
 ## 자동 업데이트
 
-`directUpdate`를 `true`로 설정하여 앱 시작할 때마다 업데이트 주기가 강제로 실행되도록 할 수 있습니다.
-이렇게 하면 사용자 상호작용 없이 일반적인 업데이트 주기가 실행됩니다
+`directUpdate`를 `true`로 설정하여 앱 시작마다 업데이트 주기가 강제로 실행되도록 할 수 있습니다.
+이는 사용자 상호작용 없이 일반적인 업데이트 주기를 트리거합니다
 
 ```tsx
 // capacitorconfigjson
@@ -60,7 +59,7 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   try {
     await Dialogalert({
       title: '업데이트 가능',
-      message: `버전 ${resbundleversion}이 사용 가능합니다. 앱이 지금 업데이트됩니다`,
+      message: `버전 ${resbundleversion}이 사용 가능합니다. 지금 앱이 업데이트됩니다`,
     })
     CapacitorUpdaterset(resbundle)
   }
@@ -74,7 +73,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## 모달 업데이트
 
-또한 사용자에게 업데이트를 요청하는 대화 상자를 표시하여 사용자가 결정하도록 할 수 있습니다:
+사용자에게 업데이트 여부를 물어보는 대화상자를 표시하여 사용자가 결정하도록 할 수도 있습니다:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

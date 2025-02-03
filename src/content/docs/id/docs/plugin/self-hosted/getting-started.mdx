@@ -1,6 +1,6 @@
 ---
-title: はじめに
-description: Cara menjalankan server pembaruan otomatis Anda sendiri
+title: Memulai
+description: Cara Menjalankan Server Pembaruan Mandiri
 sidebar:
   order: 1
 locale: id
@@ -14,34 +14,34 @@ Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
 
 Jika Anda merasa pekerjaan ini bermanfaat, silakan pertimbangkan untuk mendukung pekerjaan saya dengan menjadi [sponsor Github](https://githubcom/sponsors/riderx)
 
-Saya membuat taruhan untuk membuka kode sumber semua kode yang saya buat di sini alih-alih memberi paywall. Dengan membukanya alih-alih melawan dan menyembunyikan, saya percaya kita bisa membuat dunia menjadi tempat yang lebih baik
+Saya membuat taruhan untuk membuka source code semua kode yang saya buat di sini alih-alih memasang paywall. Dengan membukanya alih-alih melawan dan menyembunyikan, saya percaya kita dapat membuat dunia menjadi tempat yang lebih baik
 
-Selanjutnya, saya ingin fokus pada peralatan Capgo, dan menjadikannya bisnis yang terbuka dan transparan
+Lebih lanjut, saya ingin fokus pada alat Capgo, dan menjadikannya bisnis yang terbuka dan transparan
 
-Tetapi untuk membuatnya mungkin, kita semua perlu melakukan bagian kita, termasuk Anda 🥹
+Tetapi untuk mewujudkannya, kita semua perlu melakukan bagian kita masing-masing, termasuk Anda 🥹
 
-Jika Capgo tidak cocok untuk Anda, maka bayar harga Anda sendiri dan [dukung Pembuat bootstrapped](https://githubcom/sponsors/riderx) sesuai keinginan Anda
+Jika Capgo tidak cocok untuk Anda, maka bayar harga Anda sendiri dan [dukung Maker bootstrapped](https://githubcom/sponsors/riderx) sesuai ketentuan Anda
 
 <LinkCard title="Pertimbangkan Untuk Berkontribusi" href="/docs/plugin/self-hosted/contributing/"/>
+
 ## Fitur paritas
 
 Jika Anda memilih untuk menggunakan server Anda sendiri, Anda akan kehilangan alur pengaturan 5 menit\
 Anda perlu mengimplementasikan semua fitur ini sendiri
-
 
 | Fitur                    | Capgo | Self hosted |
 | ------------------------ | ----- | ----------- |
 | Pembaruan               | ✅     | 🚧         |
 | Kembali otomatis        | ✅     | 🚧         |
 | Peringatan email saat gagal | ✅     | 🚧         |
-| Saluran                 | ✅     | 🚧         |
-| Override Saluran        | ✅     | 🚧         |
+| Kanal                   | ✅     | 🚧         |
+| Override Kanal          | ✅     | 🚧         |
 | Override Perangkat      | ✅     | 🚧         |
-| Pengaturan Saluran      | ✅     | 🚧         |
+| Pengaturan Kanal        | ✅     | 🚧         |
 | Pengaturan Perangkat    | ✅     | 🚧         |
 | ID Kustom               | ✅     | 🚧         |
-| Atur Saluran Otomatis   | ✅     | 🚧         |
-| API Saluran             | ✅     | 🚧         |
+| Set Kanal Otomatis      | ✅     | 🚧         |
+| API Kanal               | ✅     | 🚧         |
 | Statistik Pembaruan     | ✅     | 🚧         |
 | Statistik Unduhan Gagal | ✅     | 🚧         |
 | Statistik Penggunaan Aplikasi | ✅     | 🚧         |
@@ -51,16 +51,16 @@ Anda perlu mengimplementasikan semua fitur ini sendiri
 Jika Anda mengirim pembaruan yang buruk ke pengguna Anda, Anda dapat dan akan merusak aplikasi mereka
 :::
 
-> Perlu diingat bahwa Anda tidak dapat menggunakan Capgo cloud dan server Anda pada saat yang bersamaan
+> Perhatikan bahwa Anda tidak dapat menggunakan Capgo cloud dan server Anda secara bersamaan
 
 :::danger
 Fitur pembaruan Over-the-Air (OTA) hanya berlaku untuk modifikasi yang dilakukan pada file HTML, CSS, dan JavaScript
 
-Jika Anda membuat perubahan pada kode asli, seperti pembaruan plugin Capacitor, wajib mengirimkan ulang aplikasi ke app store untuk persetujuan
+Jika Anda membuat perubahan pada kode native, seperti pembaruan plugin Capacitor, wajib mengirimkan ulang aplikasi ke app store untuk persetujuan
 :::
 
 ## Pilih antara Otomatis dan Manual
-Dalam mode otomatis, sebagian logika ditangani oleh kode Native, pembaruan diputuskan di sisi server, ini lebih aman dan memungkinkan pembaruan yang lebih detail, pengiriman parsial ke satu perangkat atau grup dan lainnya
+Dalam mode otomatis, sebagian logika ditangani oleh kode Native, pembaruan diputuskan di sisi server, ini lebih aman dan memungkinkan pembaruan yang lebih detail, penerapan parsial ke satu perangkat atau grup dan lainnya
 
 Dalam mode manual, semua logika ditangani oleh JS
 
@@ -76,16 +76,16 @@ Dalam mode manual, semua logika ditangani oleh JS
 
 ## Pasang Capacitor updater
 
-```bash title="Pasang Capacitor updater"
+```bash title="Install the Capacitor updater"
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
 ## Siapkan bundle Anda
 
-Untuk mengirim pembaruan ke aplikasi Anda, Anda perlu mengzip-nya
-Cara terbaik untuk memastikan zip Anda baik adalah menggunakan CLI Capgo untuk zip
-```bash title="Buat bundle dengan file Anda untuk disajikan dari server Anda"
+Untuk mengirim pembaruan ke aplikasi Anda, Anda perlu mengzipnya
+Cara terbaik untuk memastikan zip Anda baik adalah menggunakan CLI Capgo untuk mengzip
+```bash title="Create a bundle with your files to serve from your server"
 npx @capgo/cli@latest bundle zip
 ```
 

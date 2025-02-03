@@ -1,5 +1,5 @@
 ---
-title: 시작하기
+title: Iniziamo
 description: このチュートリアルでは、supabaseをゼロから始める方法とエッジ関数を開始する方法を説明します
 sidebar:
   order: 1
@@ -8,20 +8,20 @@ locale: ja
 
 ## このチュートリアルの内容
 
-このチュートリアルでは、supabaseを最初から始める方法とエッジ関数を開始する方法を説明します
+このチュートリアルでは、supabaseを初めから始める方法とエッジ関数を開始する方法を説明します
 
-## 必要条件
-1 [capgo](https://githubcom/Cap-go/capgo)のクローン
-3 [supabase](https://supabasecom/)
+## 要件
+1. [capgo](https://githubcom/Cap-go/capgo)をクローン
+3. [supabase](https://supabasecom/)
 
-## 始め方
+## はじめに
 
 開始するには以下を実行します
 ```bash
 supabase start
 ```
 
-次に以下のような表示が出るはずです：
+次に、このような表示が出るはずです：
 ```js
 Started supabase local development setup
 
@@ -56,13 +56,13 @@ service_role key: supa_key_admin
 }
 ```
 
-ここで`supa_key_anon`は前のステップで表示された値です
+ここで`supa_key_anon`は前のステップで取得した値です
 
 :::danger
 ⚠️ `configsjson`をリモートリポジトリにコミットしないでください
 :::
 
-次に、[localhost:54323](http://localhost:54323/projects)にアクセスでき、`users`テーブルが以下のように表示されることを確認します
+次に、[localhost:54323](http://localhost:54323/projects)にアクセスでき、`users`テーブルが以下のように表示されることを確認してください
 
 <figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
 
@@ -72,7 +72,7 @@ service_role key: supa_key_admin
 supabase functions serve
 ```
 
-そしてフロントエンドを以下で開始します：
+そして、フロントエンドを開始するには以下を実行します：
 ```bash
 bun run serve
 ```

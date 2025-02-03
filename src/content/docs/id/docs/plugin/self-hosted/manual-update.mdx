@@ -1,6 +1,6 @@
 ---
-title: Pembaruan Manual
-description: Cara menggunakan plugin pembaruan manual dalam mode self-hosted
+title: 手動での更新
+description: Cara Menggunakan Plugin Pembaruan Manual dalam Mode Self-hosted
 sidebar:
   order: 4
 locale: id
@@ -24,14 +24,14 @@ Tambahkan ini ke ``capacitorconfigjson`` Anda, untuk menonaktifkan pembaruan oto
 
 ## Penggunaan
 
-Anda dapat menggunakan contoh ini atau membuat ulang logika di aplikasi Anda
+Anda dapat menggunakan contoh ini atau membuat ulang logikanya di aplikasi Anda
 
 :::caution
-Kami memaksa pengguna untuk memperbarui aplikasi dengan versi statis yang dideklarasikan dalam kode. Ini tidak disarankan, Anda sebaiknya menggunakan versi dinamis dari server Anda
+Kita memaksa pengguna untuk memperbarui aplikasi dengan versi statis yang dideklarasikan dalam kode. Ini tidak direkomendasikan, Anda harus menggunakan versi dinamis dari server Anda
 :::
 
 :::danger
-Kami tidak melakukan pemeriksaan versi, dekripsi atau validasi checksum dalam contoh ini. Anda harus melakukannya sendiri
+Kita tidak melakukan pengecekan versi, dekripsi atau validasi checksum dalam contoh ini. Anda harus melakukannya sendiri
 :::
 
 ```tsx
@@ -55,12 +55,12 @@ AppaddListener('appStateChange', async(state) => {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // jika pengaturan gagal, jika tidak aplikasi baru harus menyembunyikannya
+         SplashScreenhide() // jika set gagal, jika tidak aplikasi baru harus menyembunyikannya
        }
      }
  })
 ```
 
 :::note
-Jika ini terlihat seperti banyak pekerjaan, pertimbangkan untuk mencoba [uji coba Capgo](https://capgoapp/register/) Ini akan menangani semua ini untuk Anda
+Jika ini terlihat seperti banyak pekerjaan, pertimbangkan untuk mencoba [uji coba Capgo](https://capgoapp/register/) yang akan menangani semua ini untuk Anda
 :::

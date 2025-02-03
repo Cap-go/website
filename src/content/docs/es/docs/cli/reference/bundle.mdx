@@ -20,7 +20,7 @@ Opciones:
 - `-p, --path <path>`: Ruta a la carpeta a subir (por defecto el `webDir` en `capacitorconfig`)
 - `-c, --channel <channel>`: Canal al que vincular el paquete
 - `-e, --external <url>`: Enlace a una URL externa en lugar de subir a Capgo Cloud
-- `--iv-session-key <key>`: Establecer la clave IV y de sesión para una URL de paquete externo
+- `--iv-session-key <key>`: Establecer la IV y clave de sesión para una URL de paquete externo
 - `--s3-region <region>`: Región para tu bucket S3
 - `--s3-apikey <apikey>`: Clave API para tu endpoint S3
 - `--s3-apisecret <apisecret>`: Secreto API para tu endpoint S3
@@ -29,31 +29,31 @@ Opciones:
 - `--s3-port <port>`: Puerto para tu endpoint S3
 - `--no-s3-ssl`: Deshabilitar SSL para subidas S3
 - `--key <key>`: Ruta personalizada para la clave de firma pública (sistema v1)
-- `--key-data <keyData>`: Datos de clave de firma pública (sistema v1)
+- `--key-data <keyData>`: Datos de la clave de firma pública (sistema v1)
 - `--key-v2 <key>`: Ruta personalizada para la clave de firma privada (sistema v2)
-- `--key-data-v2 <keyDataV2>`: Datos de clave de firma privada (sistema v2)
+- `--key-data-v2 <keyDataV2>`: Datos de la clave de firma privada (sistema v2)
 - `--bundle-url`: Imprimir la URL del paquete en stdout
 - `--no-key`: Ignorar la clave de firma y enviar una actualización sin firmar
 - `--no-code-check`: Omitir la verificación de `notifyAppReady()` en el código fuente y `indexhtml` en la carpeta raíz
-- `--display-iv-session`: Mostrar la clave IV y de sesión usada para encriptar la actualización
+- `--display-iv-session`: Mostrar la IV y clave de sesión usada para encriptar la actualización
 - `-b, --bundle <bundle>`: Número de versión del paquete a subir
-- `--min-update-version <minUpdateVersion>`: Versión mínima de la app requerida para aplicar esta actualización (solo se usa si la actualización automática está deshabilitada vía metadata)
-- `--auto-min-update-version`: Establecer automáticamente la versión mínima de actualización basada en las versiones nativas del paquete
+- `--min-update-version <minUpdateVersion>`: Versión mínima de la app requerida para aplicar esta actualización (solo se usa si la auto-actualización está deshabilitada vía metadata)
+- `--auto-min-update-version`: Establecer automáticamente la versión mínima de actualización basada en versiones nativas del paquete
 - `--ignore-metadata-check`: Ignorar la verificación de metadata (node_modules) al subir
 - `--ignore-checksum-check`: Ignorar la verificación del checksum al subir
 - `--timeout <timeout>`: Tiempo límite para el proceso de subida en segundos
 - `--multipart`: Usar el protocolo multipart para subir datos a S3 (obsoleto, usar `--tus` en su lugar)
 - `--tus`: Subir el paquete usando el protocolo tus
-- `--tus-chunk-size <tusChunkSize>`: Tamaño del fragmento para la subida tus
+- `--tus-chunk-size <tusChunkSize>`: Tamaño del chunk para la subida tus
 - `--partial`: Subir solo archivos modificados a Capgo Cloud
 - `--partial-only`: Subir solo archivos parciales a Capgo Cloud, omitiendo el archivo comprimido (útil para paquetes grandes)
 - `--encrypted-checksum <encryptedChecksum>`: Checksum encriptado (firma) para un paquete externo
 - `--auto-set-bundle`: Establecer automáticamente la versión del paquete en `capacitorconfigjson`
-- `--dry-upload`: Realizar una simulación del proceso de subida sin subir archivos realmente (útil para pruebas)
+- `--dry-upload`: Realizar una prueba de subida sin subir realmente los archivos (útil para pruebas)
 - `--package-json <packageJson>`: Lista separada por comas de rutas a archivos `packagejson` (útil para monorepos)
 - `--node-modules <nodeModules>`: Lista separada por comas de rutas a directorios `node_modules` (útil para monorepos)
 - `--encrypt-partial`: Encriptar los archivos de actualización parcial
-- `--delete-linked-bundle-on-upload`: Eliminar el paquete actualmente vinculado en el canal objetivo antes de subir
+- `--delete-linked-bundle-on-upload`: Eliminar el paquete actualmente vinculado en el canal destino antes de subir
 
 ### compatibility
 
@@ -65,7 +65,7 @@ Opciones:
 
 - `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
 - `-c, --channel <channel>`: Canal para verificar compatibilidad
-- `--text`: Mostrar resultados como texto en lugar de emoji
+- `--text`: Mostrar resultados como texto en lugar de emojis
 - `--package-json <packageJson>`: Lista separada por comas de rutas a archivos `packagejson` (útil para monorepos)
 - `--node-modules <nodeModules>`: Lista separada por comas de rutas a directorios `node_modules` (útil para monorepos)
 
@@ -93,7 +93,7 @@ Opciones:
 
 `npx @capgo/cli bundle cleanup [appId]`
 
-Limpia paquetes antiguos de una versión mayor, manteniendo el número especificado de paquetes más recientes
+Limpia paquetes antiguos para una versión mayor, manteniendo el número especificado de paquetes más recientes
 
 Opciones:
 
@@ -111,7 +111,7 @@ Desencripta un paquete zip firmado
 Opciones:
 
 - `--key <key>`: Ruta personalizada para la clave de firma privada
-- `--key-data <keyData>`: Datos de clave de firma privada
+- `--key-data <keyData>`: Datos de la clave de firma privada
 
 ### encrypt
 
@@ -122,7 +122,7 @@ Encripta un paquete zip
 Opciones:
 
 - `--key <key>`: Ruta personalizada para la clave de firma privada
-- `--key-data <keyData>`: Datos de clave de firma privada
+- `--key-data <keyData>`: Datos de la clave de firma privada
 
 ### encryptV2
 
@@ -133,7 +133,7 @@ Encripta un paquete zip usando el nuevo método de encriptación
 Opciones:
 
 - `--key <key>`: Ruta personalizada para la clave de firma privada
-- `--key-data <keyData>`: Datos de clave de firma privada
+- `--key-data <keyData>`: Datos de la clave de firma privada
 - `-j, --json`: Mostrar resultados como JSON
 
 ### decryptV2
@@ -145,7 +145,7 @@ Desencripta un paquete zip usando el nuevo método de encriptación
 Opciones:
 
 - `--key <key>`: Ruta personalizada para la clave de firma privada
-- `--key-data <keyData>`: Datos de clave de firma privada
+- `--key-data <keyData>`: Datos de la clave de firma privada
 - `--checksum <checksum>`: Checksum del paquete para verificar integridad
 
 ### zip

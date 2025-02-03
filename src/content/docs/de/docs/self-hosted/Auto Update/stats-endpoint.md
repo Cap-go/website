@@ -1,6 +1,6 @@
 ---
-title: Statistik-Endpunkt
-description: Erstellen eines selbst gehosteten Statistik-Endpunkts
+title: Stats endpoint
+description: So erstellen Sie einen selbst gehosteten Statistik-Endpunkt
 sidebar:
   order: 2
 locale: de
@@ -71,7 +71,7 @@ export const handler: Handler = async (event) => {
     version_name,
     version_build,
     plugin_version)
-  // Speichern Sie es in Ihrer Datenbank
+  // Save it in your database
   return { status: 'ok' }
 }
 ```
@@ -85,11 +85,11 @@ Dieser Endpunkt sollte ein JSON zurückgeben:
 ## Aktionen:
 
 * **delete**: wenn ein Bundle lokal gelöscht wird
-* **reset**: wenn die App zum eingebauten Bundle zurückkehrt
-* **set**: wenn die App ein neues Bundle setzt
-* **set\_fail**: wenn die App die ID des gesetzten Bundles nicht finden konnte
-* **update\_fail**: wird nach der Verzögerung gesendet und `notifyAppReady` wurde nie aufgerufen
-* **download\_fail**: wenn der Download nie abgeschlossen wurde
-* **download\_complete:** Wenn der Download abgeschlossen ist
-* **download\_xx:** Wird alle 10% des Downloads gesendet, z.B.: download\_20, download\_70
-* **update\_fail:** wenn das Bundle `notifyAppReady` nicht im vorgegebenen Zeitrahmen ausführt
+* **reset**: wenn die App auf das eingebaute Bundle zurückgesetzt wird 
+* **set**: wenn die App ein neues Bundle festlegt
+* **set_fail**: wenn die App die ID des festgelegten Bundles nicht finden konnte
+* **update_fail**: wird nach der Verzögerung gesendet und `notifyAppReady` wurde nie aufgerufen
+* **download_fail**: wenn der Download nie abgeschlossen wurde
+* **download_complete:** Wenn der Download abgeschlossen ist
+* **download_xx:** Wird alle 10% des Downloads gesendet, z.B.: download_20, download_70
+* **update_fail:** wenn das Bundle `notifyAppReady` nicht im Zeitrahmen ausführen konnte

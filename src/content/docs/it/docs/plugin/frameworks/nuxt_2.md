@@ -1,6 +1,6 @@
 ---
 title: Nuxt 2
-description: How to install plugins in Nuxt 2
+description: Come installare il plugin in Nuxt 2
 sidebar:
   order: 1
 locale: it
@@ -11,7 +11,6 @@ locale: it
 Crea un file plugin `capacitor-updaterjs` nella directory `plugins`
 
 ```js
-
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 export default ({ app }) => {

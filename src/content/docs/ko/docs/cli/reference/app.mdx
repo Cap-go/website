@@ -14,16 +14,16 @@ locale: ko
 
 Capgo 계정에 새 앱을 추가합니다
 
-`[appId]`는 `comexampleapp` 형식의 앱 ID입니다. 자세한 내용은 [Capacitor docs](https://capacitorjscom/docs/cli/commands/init/)를 참조하세요
+`[appId]`는 `com.example.app` 형식의 앱 ID입니다. 자세한 내용은 [Capacitor 문서](https://capacitorjs.com/docs/cli/commands/init/)를 참조하세요
 
-> 💡 제공되지 않은 경우 모든 옵션은 `capacitorconfigjson`에서 추측됩니다
+> 💡 제공되지 않은 경우 모든 옵션은 `capacitor.config.json`에서 추측됩니다
 
 옵션:
 
 - `--icon [path]`: Capgo 웹 앱에 표시할 사용자 지정 아이콘 경로
 - `--name [name]`: 앱 목록에 표시할 사용자 지정 이름
 - `--apikey [key]`: 계정에 연결할 API 키
-- `--retention [days]`: 앱 번들의 보관 기간(일) (기본값: 0 = 무제한)
+- `--retention [days]`: 앱 번들의 보존 기간(일) (기본값: 0 = 무제한)
 
 ### set
 
@@ -35,7 +35,7 @@ Capgo 계정의 기존 앱을 업데이트합니다
 
 - `--icon [path]`: Capgo 웹 앱에 표시할 사용자 지정 아이콘 경로
 - `--name [name]`: 앱 목록에 표시할 사용자 지정 이름
-- `--retention [days]`: 앱 번들의 보관 기간(일) (기본값: 0 = 무제한)
+- `--retention [days]`: 앱 번들의 보존 기간(일) (기본값: 0 = 무제한)
 - `--apikey [key]`: 계정에 연결할 API 키
 
 ### list
@@ -76,9 +76,9 @@ Capgo 계정에서 앱을 삭제합니다
 
 앱의 Capacitor 구성을 편집합니다
 
-`[path]`는 변경하려는 설정의 경로입니다(예: `appId` 또는 `pluginsCapacitorUpdaterautoUpdate`)
+`[path]`는 변경하려는 설정의 경로입니다 (예: `appId` 또는 `plugins.CapacitorUpdater.autoUpdate`)
 
 `--string` 또는 `--bool` 중 하나를 제공해야 합니다:
 
 - `--string <value>`: 설정을 문자열 값으로 설정
-- `--bool <true|false>`: 설정을 불리언 값으로 설정
+- `--bool <true|false>`: 설정을 부울 값으로 설정

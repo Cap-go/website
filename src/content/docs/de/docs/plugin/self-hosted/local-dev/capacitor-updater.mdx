@@ -1,12 +1,12 @@
 ---
-title: Usando el actualizador de Capacitor con capgo auto-alojado
-description: So verwendet man den Capacitor Updater mit selbst gehostetem Capgo
+title: Verwenden des Capacitor-Updaters mit selbst gehosteten Capgo
+description: So verwenden Sie den Capacitor Updater mit selbst gehosteter Capgo
 sidebar:
   order: 4
 locale: de
 ---
 
-## Was dieses Tutorial behandelt?
+## Was dieses Tutorial behandelt
 
 Dieses Tutorial zeigt, wie man Capacitor Updater in einer Entwicklungsumgebung mit selbst gehostetem Capgo verwendet.
 
@@ -16,11 +16,11 @@ Dieses Tutorial zeigt, wie man Capacitor Updater in einer Entwicklungsumgebung m
 
 ## Erste Schritte
 
-Um den Capacitor Updater mit selbst gehostetem Capgo zu verwenden, bearbeiten Sie die `capacitorconfigts` aus Ihrem App-Verzeichnis und stellen Sie sie wie folgt ein:
+Um den Capacitor Updater mit selbst-gehostetem Capgo zu verwenden, bearbeiten Sie die `capacitor.config.ts` aus Ihrem App-Verzeichnis und stellen Sie sie wie folgt ein:
 
 ```ts
 const config: CapacitorConfig = {
-  appId: 'comdemoapp',
+  appId: 'com.demo.app',
   appName: 'demoApp',
   webDir: 'dist',
   bundledWebRuntime: false,
@@ -34,22 +34,22 @@ const config: CapacitorConfig = {
 };
 ```
 
-Dies ermöglicht die Nutzung von lokalem Capgo in der Entwicklung. Allerdings reicht das standardmäßig nicht aus.
+Dies ermöglicht die Verwendung von lokalem Capgo in der Entwicklung. Allerdings reicht das standardmäßig nicht aus.
 
-Für Android ist die Aktivierung von [Klartext-Kommunikation](https://developerandroidcom/topic/security/risks/cleartext) erforderlich, da SSL standardmäßig lokal deaktiviert ist.
-Dies kann durch Ändern der [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) und Hinzufügen von `android:usesCleartextTraffic="true"` im `application`-Tag erreicht werden.
-Ein vollständiges Beispiel dieser Änderung finden Sie [hier](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701).
+Für Android ist die Aktivierung von [Klartext-Kommunikation](https://developer.android.com/topic/security/risks/cleartext) erforderlich, da SSL standardmäßig lokal deaktiviert ist.
+Dies kann durch Ändern der [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) und Hinzufügen von `android:usesCleartextTraffic="true"` im `application`-Tag erreicht werden.
+Ein vollständiges Beispiel dieser Änderung finden Sie [hier](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701).
 
-Da Android standardmäßig `http` nicht erlaubt, hat Capgo eine Überprüfung für http [hier](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396) implementiert.
-Dieser Code ist möglicherweise nicht immer hier, aber im Moment ist eine Änderung dieser Zeile erforderlich, damit Updates funktionieren.
+Da Android standardmäßig kein `http` erlaubt, hat Capgo eine Überprüfung für http [hier](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/index.ts#L396) implementiert.
+Dieser Code ist möglicherweise nicht immer hier, aber derzeit ist eine Änderung dieser Zeile erforderlich, damit Updates funktionieren.
 Diese Zeile sollte etwa so aussehen:
 ```ts
-    if (!signedURL || (signedURLstartsWith('http://') || signedURLstartsWith('https://'))) {
+    if (!signedURL || (signedURL.startsWith('http://') || signedURL.startsWith('https://'))) {
 ```
 
 :::danger
-⚠️ Committen Sie `supabase/functions/updates/indexts` nicht in das Remote-Repository\
-Dieser Code ist [absichtlich](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354) hier
+⚠️ Committen Sie `supabase/functions/updates/index.ts` nicht in das Remote-Repository\
+Dieser Code ist [absichtlich](https://github.com/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354) hier
 :::
 
 Es könnte auch ein Problem geben, das die Android-App an der Verbindung hindert. Wenn Sie keine Anfragen sehen, die an Edge-Funktionen gesendet werden, führen Sie aus:

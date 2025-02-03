@@ -1,6 +1,6 @@
 ---
 title: Menangani Statistik
-description: Cara membuat endpoint statistik yang dihost sendiri
+description: Cara Membuat Endpoint Statistik Self-hosted
 sidebar:
   order: 7
 locale: id
@@ -67,7 +67,7 @@ export const handler: Handler = async (event) => {
     version_name,
     version_build,
     plugin_version)
-  // Simpan ke dalam database Anda
+  // Simpan di database Anda
   return { status: 'ok' }
 }
 ```
@@ -78,14 +78,14 @@ Endpoint ini harus mengembalikan JSON:
 { "status": "ok" }
 ```
 
-## Aksi:
+## Tindakan:
 
-* **delete** : ketika bundle dihapus secara lokal
-* **reset** : ketika aplikasi direset ke bundle bawaan
-* **set** : ketika aplikasi menetapkan bundle baru
-* **set\_fail** : ketika aplikasi tidak dapat menemukan ID dari bundle yang ditetapkan
-* **update\_fail** : dikirim setelah penundaan dan `notifyAppReady` tidak pernah dipanggil
-* **download\_fail** : ketika unduhan tidak pernah selesai 
-* **download\_complete:** Ketika unduhan selesai
-* **download\_xx:** Dikirim setiap 10% unduhan contoh: download\_20, download\_70
-* **update\_fail:** ketika bundle gagal melakukan `notifyAppReady` dalam jangka waktu tertentu
+* **delete**: ketika bundle dihapus secara lokal
+* **reset**: ketika aplikasi direset ke bundle bawaan
+* **set**: ketika aplikasi menetapkan bundle baru
+* **set_fail**: ketika aplikasi tidak dapat menemukan ID dari bundle yang ditetapkan
+* **update_fail**: dikirim setelah penundaan dan `notifyAppReady` tidak pernah dipanggil
+* **download_fail**: ketika unduhan tidak pernah selesai
+* **download_complete**: Ketika unduhan selesai
+* **download_xx**: Dikirim setiap 10% unduhan contoh: download_20, download_70
+* **update_fail**: ketika bundle gagal melakukan `notifyAppReady` dalam jangka waktu tertentu

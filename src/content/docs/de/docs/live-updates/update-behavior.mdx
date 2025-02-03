@@ -9,11 +9,11 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Wenn Sie ein Update für Ihre Capgo-App veröffentlichen, möchten Sie wahrscheinlich, dass Ihre Nutzer dieses Update so schnell wie möglich erhalten. Allerdings möchten Sie deren Nutzungserfahrung nicht stören, indem Sie sie zwingen, mitten in einer Sitzung auf einen Download zu warten oder die App neu zu starten.
 
-Das Update-Verhalten von Capgo wurde entwickelt, um eine Balance zwischen schneller Update-Bereitstellung und minimaler Störung der Nutzer zu gewährleisten.
+Das Update-Verhalten von Capgo wurde entwickelt, um eine Balance zwischen schneller Update-Bereitstellung und minimaler Störung der Nutzer zu finden.
 
 ## Standard Update-Ablauf
 
-Standardmäßig handhabt Capgo App-Updates wie folgt:
+Standardmäßig behandelt Capgo App-Updates wie folgt:
 
 <Steps>
 
@@ -23,37 +23,37 @@ Standardmäßig handhabt Capgo App-Updates wie folgt:
 
 3. Sobald der Download abgeschlossen ist, wartet Capgo darauf, dass der Nutzer die App entweder in den Hintergrund verschiebt oder vollständig beendet
 
-4. Wenn der Nutzer die App das nächste Mal startet, läuft die aktualisierte Version
+4. Wenn der Nutzer die App das nächste Mal startet, wird die aktualisierte Version ausgeführt
 
 </Steps>
 
-Dieser Ablauf stellt sicher, dass Nutzer immer die neueste Version Ihrer App verwenden, ohne jemals durch Update-Meldungen unterbrochen zu werden oder auf Downloads warten zu müssen.
+Dieser Ablauf stellt sicher, dass Nutzer immer die neueste Version Ihrer App verwenden, ohne jemals durch Update-Benachrichtigungen unterbrochen oder zum Warten auf Downloads gezwungen zu werden.
 
 <Aside type="tip">
-Capgo prüft auch nach Updates, wenn die App aus dem Hintergrund fortgesetzt wird, sodass Nutzer Updates erhalten, auch wenn sie die App nicht vollständig beenden
+Capgo prüft auch auf Updates, wenn die App aus dem Hintergrund fortgesetzt wird. So erhalten Nutzer Updates auch dann, wenn sie die App nicht vollständig beenden.
 </Aside>
 
 ## Warum dieser Ansatz?
 
-Das Anwenden von Updates bei Hintergrund- oder Beendigungsereignissen bietet einige wichtige Vorteile für die Benutzererfahrung:
+Das Anwenden von Updates bei Hintergrund- oder Beendigungsereignissen hat einige wichtige Vorteile für die Benutzererfahrung:
 
-- Nutzer werden nicht durch Update-Meldungen unterbrochen oder müssen mitten in einer Sitzung auf Downloads warten
+- Nutzer werden nicht durch Update-Aufforderungen unterbrochen oder müssen mitten in einer Sitzung auf Downloads warten
 
-- Updates werden nahtlos zwischen den Sitzungen angewendet, sodass das Starten der App immer aktuell ist
+- Updates werden nahtlos zwischen den Sitzungen angewendet, sodass das Starten der App immer ein frisches Erlebnis ist
 
-- Sie können häufig Updates bereitstellen, ohne sich Sorgen zu machen, aktive Nutzer zu stören
+- Sie können häufig Updates bereitstellen, ohne sich Sorgen machen zu müssen, aktive Nutzer zu stören
 
-Der Hauptnachteil ist, dass Nutzer möglicherweise nicht gespeicherte Daten verlieren können, wenn sie die App in den Hintergrund verschieben und schnell wieder aufrufen, da das Update zwischen diesen Aktionen angewendet wurde.
+Der Hauptnachteil ist, dass wenn ein Nutzer die App in den Hintergrund verschiebt und schnell wieder aufruft, könnte nicht gespeicherter Status verloren gehen, da das Update zwischen diesen Aktionen angewendet wurde.
 
-Um dies abzumildern, empfehlen wir:
+Um dies zu vermeiden, empfehlen wir:
 
-- Häufiges Speichern des Status und dessen geschmeidige Wiederherstellung beim Fortsetzen der App
+- Status häufig zu speichern und ihn beim Fortsetzen der App korrekt wiederherzustellen
 
-- Vermeidung sehr häufiger Updates, die große Teile des App-Status ändern
+- Sehr häufige Updates zu vermeiden, die große Teile des App-Status verändern
 
-- Erwägung der Anpassung des Update-Verhaltens für sensible Abläufe (siehe unten)
+- Die Anpassung des Update-Verhaltens für sensible Abläufe in Erwägung zu ziehen (siehe unten)
 
-## Anpassen des Update-Zeitpunkts
+## Anpassen wann Updates angewendet werden
 
 In manchen Fällen möchten Sie möglicherweise mehr Kontrolle darüber haben, wann genau ein Update angewendet wird. Zum Beispiel möchten Sie vielleicht sicherstellen, dass ein Nutzer einen laufenden Prozess abschließt, bevor das Update installiert wird, oder ein App-Update mit einer serverseitigen Änderung koordinieren.
 
@@ -81,21 +81,21 @@ Dieses Beispiel würde die Installation eines Updates verzögern, bis nach dem 1
 Die verfügbaren Verzögerungsbedingungen sind:
 
 - `date`: Warten bis nach einem bestimmten Datum/Uhrzeit, um das Update anzuwenden
-- `background`: Nach dem Wechsel der App in den Hintergrund eine Mindestdauer warten, bevor das Update angewendet wird
-- `nativeVersion`: Warten auf die Installation einer nativen Binary mit einer Mindestversion, bevor das Update angewendet wird
-- `kill`: Warten bis zum nächsten App-Beendigungsereignis, um das Update anzuwenden
+- `background`: Nach einer Mindestdauer warten, nachdem die App in den Hintergrund verschoben wurde
+- `nativeVersion`: Warten auf die Installation einer nativen Binary mit einer Mindestversion
+- `kill`: Warten bis zum nächsten App-Beendigungsereignis
 
 Sie können diese Bedingungen kombinieren, um präzise zu steuern, wann ein Update installiert wird.
 
 <Aside type="danger">
-Beachten Sie, dass die `kill`-Bedingung das Update derzeit nach dem ersten Beendigungsereignis auslöst und nicht nach dem nächsten Hintergrundereignis wie die anderen Bedingungen. Diese Inkonsistenz wird in einer zukünftigen Version behoben.
+Beachten Sie, dass die `kill`-Bedingung das Update derzeit nach dem ersten Beendigungsereignis auslöst, nicht nach dem nächsten Hintergrundereignis wie die anderen Bedingungen. Diese Inkonsistenz wird in einer zukünftigen Version behoben.
 </Aside>
 
 ## Sofortiges Anwenden von Updates
 
 Für kritische Updates oder Apps mit sehr einfachem Status möchten Sie möglicherweise ein Update sofort nach dem Download anwenden, ohne auf ein Hintergrund- oder Beendigungsereignis zu warten. Capgo unterstützt dies über die `directUpdate`-Konfigurationsoption.
 
-`directUpdate` wird in Ihrer `capacitor.config.ts`-Datei festgelegt, nicht im JavaScript-Code:
+`directUpdate` wird in Ihrer `capacitor.config.ts`-Datei gesetzt, nicht im JavaScript-Code:
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -115,9 +115,9 @@ export default config;
 
 Mit aktiviertem `directUpdate` wird Capgo ein Update sofort anwenden, sobald der Download abgeschlossen ist, auch wenn der Nutzer die App aktiv verwendet.
 
-Beachten Sie, dass `directUpdate` als native Konfiguration eine zusätzliche Behandlung in Ihrem JavaScript-Code erfordert.
+Beachten Sie, dass `directUpdate` als native Konfiguration zusätzliche Behandlung in Ihrem JavaScript-Code erfordert.
 
-Bei Verwendung von `directUpdate` müssen Sie auf das `appReady`-Event hören und den Splash-Screen Ihrer App als Reaktion darauf ausblenden:
+Bei Verwendung von `directUpdate` müssen Sie auf das `appReady`-Event hören und den Splash-Screen Ihrer App entsprechend ausblenden:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -131,24 +131,24 @@ CapacitorUpdater.addListener('appReady', () => {
 CapacitorUpdater.notifyAppReady();
 ```
 
-Das `appReady`-Event wird ausgelöst, sobald die App die Initialisierung abgeschlossen und alle ausstehenden Updates angewendet hat. Dies ist der Zeitpunkt, an dem es sicher ist, die Benutzeroberfläche Ihrer App anzuzeigen, da sichergestellt ist, dass der Nutzer die neueste Version sieht.
+Das `appReady`-Event wird ausgelöst, sobald die App die Initialisierung abgeschlossen und alle ausstehenden Updates angewendet hat. Ab diesem Zeitpunkt ist es sicher, die Benutzeroberfläche Ihrer App anzuzeigen, da sichergestellt ist, dass der Nutzer die neueste Version sieht.
 
-Zusätzlich zur Behandlung des `appReady`-Events empfehlen wir, die Konfigurationsoption `keepUrlPathAfterReload` bei Verwendung von `directUpdate` auf `true` zu setzen. Dies bewahrt den aktuellen URL-Pfad, wenn die App aufgrund eines Updates neu geladen wird, und hilft, die Position des Nutzers in der App beizubehalten und Desorientierung zu reduzieren.
+Zusätzlich zur Behandlung des `appReady`-Events empfehlen wir, die Konfigurationsoption `keepUrlPathAfterReload` auf `true` zu setzen, wenn Sie `directUpdate` verwenden. Dies bewahrt den aktuellen URL-Pfad, wenn die App aufgrund eines Updates neu geladen wird, und hilft dabei, den Standort des Nutzers in der App beizubehalten und Desorientierung zu reduzieren.
 
-Wenn Sie das `appReady`-Event nicht behandeln und `keepUrlPathAfterReload` bei Verwendung von `directUpdate` nicht setzen, sieht der Nutzer möglicherweise kurz eine veraltete Version der App, wird zur Anfangsroute zurückgebracht oder sieht ein Flackern, während das Update angewendet wird.
+Wenn Sie das `appReady`-Event nicht behandeln und `keepUrlPathAfterReload` nicht setzen, wenn Sie `directUpdate` verwenden, könnte der Nutzer kurzzeitig eine veraltete Version der App sehen, zur Ausgangsroute zurückgeführt werden oder ein Flackern sehen, während das Update angewendet wird.
 
-Die Verwendung von `directUpdate` kann nützlich sein, um kritische Fehlerbehebungen oder Sicherheitsupdates bereitzustellen, bringt aber einige Kompromisse mit sich:
+Die Verwendung von `directUpdate` kann nützlich sein, um kritische Fehlerbehebungen oder Sicherheitspatches bereitzustellen, bringt aber einige Kompromisse mit sich:
 
-- Der Nutzer sieht möglicherweise ein kurzes Flackern oder einen Ladezustand, während das Update angewendet wird, wenn Sie das `appReady`-Event nicht richtig behandeln
-- Wenn das Update den App-Status oder die Benutzeroberfläche ändert, sieht der Nutzer möglicherweise eine störende Änderung mitten in einer Sitzung
-- Die Position des Nutzers in der App kann verloren gehen, wenn `keepUrlPathAfterReload` nicht gesetzt ist, was möglicherweise desorientierend wirkt
+- Der Nutzer könnte ein kurzes Flackern oder einen Ladezustand sehen, während das Update angewendet wird, wenn Sie das `appReady`-Event nicht richtig behandeln
+- Wenn das Update den App-Status oder die Benutzeroberfläche ändert, könnte der Nutzer eine störende Änderung mitten in einer Sitzung sehen
+- Der Standort des Nutzers in der App könnte verloren gehen, wenn `keepUrlPathAfterReload` nicht gesetzt ist, was möglicherweise desorientierend wirkt
 - Sie müssen sorgfältig das Speichern und Wiederherstellen des Status handhaben, um einen reibungslosen Übergang zu gewährleisten
 
 Wenn Sie `directUpdate` aktivieren, empfehlen wir:
 
 - Behandlung des `appReady`-Events zur Kontrolle, wann die Benutzeroberfläche Ihrer App angezeigt wird
-- Setzen von `keepUrlPathAfterReload` auf `true`, um die Position des Nutzers in der App zu bewahren
-- Speichern und Wiederherstellen des App-Status nach Bedarf, um Nutzungsfortschritte nicht zu verlieren
-- Gründliches Testen des Update-Verhaltens Ihrer App, um sicherzustellen, dass es keine störenden Übergänge, verlorene Status oder desorientierende Positionsänderungen gibt
+- Setzen von `keepUrlPathAfterReload` auf `true`, um den Standort des Nutzers in der App zu bewahren
+- Speichern und Wiederherstellen des App-Status nach Bedarf, um Nutzerffortschritt nicht zu verlieren
+- Gründliches Testen des Update-Verhaltens Ihrer App, um sicherzustellen, dass es keine störenden Übergänge, verlorenen Status oder desorientierenden Standortänderungen gibt
 
-In den meisten Fällen bietet das Standard-Update-Verhalten die beste Balance zwischen schneller Update-Bereitstellung und minimaler Störung. Aber für Apps mit spezifischen Anforderungen bietet Capgo die Flexibilität, den Zeitpunkt und die Art der Update-Anwendung anzupassen.
+In den meisten Fällen bietet das Standard-Update-Verhalten die beste Balance zwischen schneller Update-Bereitstellung und minimaler Störung. Aber für Apps mit spezifischen Anforderungen bietet Capgo die Flexibilität, anzupassen, wann und wie Updates angewendet werden.

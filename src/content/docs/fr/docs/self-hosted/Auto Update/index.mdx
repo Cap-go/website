@@ -1,5 +1,5 @@
 ---
-title: Introduction - Mise à jour automatique
+title: Pengenalan - Pembaruan Otomatis
 description: Comment utiliser le plugin d'auto-mise à jour en mode auto-hébergé
 sidebar:
   order: 1
@@ -12,9 +12,9 @@ Cette documentation expliquera comment exécuter votre serveur de mise à jour a
 
 ## Avant de commencer
 
-Si vous utilisez ce travail par vous-même, je ne peux que vous suggérer de soutenir mon travail via [ceci](https://githubcom/sponsors/riderx/)
+Si vous utilisez ce travail pour votre propre compte, je ne peux que vous suggérer de soutenir mon travail via [ceci](https://githubcom/sponsors/riderx/)
 
-J'ai fait un grand pari d'ouvrir le code source de tout le précieux code que j'ai construit ici
+J'ai fait un grand pari en rendant open source tout le précieux code que j'ai construit ici
 
 J'aurais pu le garder pour moi et fixer un prix élevé
 
@@ -24,7 +24,7 @@ De même, je pense que cela rendrait notre monde meilleur en s'ouvrant plutôt q
 
 Mais pour que cela soit possible, nous devons tous faire notre part, y compris vous 🥹
 
-Si les offres Capgo ne vous conviennent pas, alors fixez votre prix et soutenez un créateur indépendant [ICI](https://githubcom/sponsors/riderx/) selon vos conditions
+Si les offres de Capgo ne vous conviennent pas, fixez votre prix et soutenez un créateur indépendant [ICI](https://githubcom/sponsors/riderx/) selon vos conditions
 
 ## Installation rapide
 
@@ -47,40 +47,40 @@ Vous devez configurer le plugin pour utiliser votre URL comme ceci :
 }
 ```
 
-> 🚧 Sur Android, les requêtes HTTP ne sont pas autorisées, pour les tests [permettez-le](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+> 🚧 Sur Android, les requêtes HTTP ne sont pas autorisées, pour les tests [permettez-les](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
 
 ### API de mise à jour
 
-Le plugin effectuera un appel POST vers votre API chaque fois que l'application est ouverte, avec ce corps :
+Le plugin fera un appel POST à votre API chaque fois que l'application est ouverte, avec ce corps :
 
 ```typescript
 interface AppInfos {
     "platform": "ios" | "android",
-    "device_id": "UUID_du_dispositif_unique_par_installation",
-    "app_id": "APPID_DU_CONFIG_CAPACITOR",
-    "custom_id": "votre_id_personnalise_defini_a_l_execution",
-    "plugin_version": "VERSION_DU_PLUGIN",
-    "version_build": "NUMERO_VERSION_DU_CODE_NATIF",
-    "version_code": "CODE_VERSION_DU_CODE_NATIF",
-    "version_name": "DERNIERE_VERSION_TELECHARGEE" | "builtin"
-    "version_os": "VERSION_DU_SYSTEME_OS",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
     "is_emulator": boolean,
     "is_prod": boolean,
 }
 ```
 
-L'API du serveur doit répondre, en JSON, au plugin capacitor-updater avec ces données si une mise à jour est nécessaire :
+Le serveur API doit répondre, en JSON, au plugin capacitor-updater avec ces données si une mise à jour est nécessaire :
 
 ```json
 {
 "version": "123",
-"url": "https://chemin_vers_le_fichier_zip_du_codecom"
+"url": "https://path_to_the_zip_file_of_the_codecom"
 }
 ```
 
-En mise à jour automatique, le serveur doit faire le travail de comparaison des versions et renvoyer la bonne version, si la clé URL est présente, le plugin démarre le processus de téléchargement
+En mise à jour automatique, le serveur doit faire le travail de comparaison des versions et renvoyer la bonne, si la clé URL est présente, le plugin démarre le processus de téléchargement
 
-Si vous ajoutez les clés "message" et "error", la version ne sera pas définie, et le message sera affiché dans les logs à la place
+Si vous ajoutez les clés "message" et "error", la version ne sera pas définie et le message sera affiché dans les logs à la place
 
 La clé `version` doit être au format [`semver`](https://semverorg/)
 
@@ -89,7 +89,7 @@ Le zip doit avoir `indexhtml` comme fichier à la racine, ou un seul dossier à 
 Vous pouvez utiliser la commande du CLI pour zipper votre bundle :
 
 ```bash
-npx @capgo/cli bundle zip --path [/chemin/vers/mon/bundle]
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
 
 <LinkCard
@@ -103,7 +103,7 @@ npx @capgo/cli bundle zip --path [/chemin/vers/mon/bundle]
 
 Vous pouvez utiliser cette fonctionnalité en créant une clé privée ``npx @capgo/cli key create``
 
-Ensuite, chiffrez votre fichier zip avec ``npx @capgo/cli encrypt [chemin/vers/zip]``
+Ensuite, chiffrez votre fichier zip avec ``npx @capgo/cli encrypt [path/to/zip]``
 
 La commande vous affichera une `ivSessionKey` qui doit être envoyée avec votre payload de mise à jour dans la clé `session_key`\
 Ensuite, votre application pourra utiliser la clé privée pour déchiffrer la `session_key` et utiliser la `session_key` déchiffrée pour déchiffrer la mise à jour
@@ -123,13 +123,13 @@ Par défaut, toutes les statistiques sont envoyées à notre serveur, pour compr
 
 > 💡 Aucune donnée privée n'est envoyée pour les statistiques, uniquement UUID aléatoire, version de mise à jour, version de l'application native, plateforme, action et ID d'application
 
-Si vous voulez envoyer les données à votre serveur à la place, changez la configuration ci-dessous :
+Si vous voulez envoyer les données à votre serveur à la place, modifiez la configuration ci-dessous :
 
 ```tsx
 // capacitorconfigjson
 {
 	"appId": "*******",
-	"appName": "Nom",
+	"appName": "Name",
 	"plugins": {
 		"CapacitorUpdater": {
 			"statsUrl": "VOTRE_URL"
@@ -143,22 +143,22 @@ Ce que votre serveur recevra :
 ```tsx
 interface AppInfosStats {
 	"action": "set", // peut être set, delete, set_fail, reset, revert
-	// Ensuite, ce sont les mêmes informations que la mise à jour
+	// Ensuite ce sont les mêmes infos que la mise à jour
 	"app_id": "*******", // identifiant de l'application dans le store
 	"device_id": "*******", // id unique par installation d'application
 	"platform": "ios", // ou android
-	"custom_id": "utilisateur_1", // représente votre utilisateur
+	"custom_id": "user_1", // représente votre utilisateur
         "version_name": "123", // version de la build web
         "version_build": "120", // version de la build native
         "version_code": "120", // numéro de build de la build native
 	"version_os": "16", // version OS de l'appareil
-        "plugin_version": "400"// pour que votre api se comporte différemment selon les plugins
+        "plugin_version": "400"// pour faire que votre api se comporte différemment avec différents plugins
         "is_emulator": false,
     	"is_prod": false,
 }
 ```
 
-Vous pouvez aussi totalement le désactiver, avec une chaîne vide. Gardez à l'esprit que les statistiques sont conçues pour respecter la vie privée et m'aident à comprendre comment les gens utilisent le plugin, pour résoudre les problèmes et l'améliorer
+Vous pouvez aussi totalement le désactiver, avec une chaîne vide. Gardez à l'esprit que les statistiques sont faites de manière respectueuse de la vie privée et m'aident à comprendre comment les gens utilisent le plugin, pour résoudre les problèmes et l'améliorer
 
 <LinkCard
 	title="Point de terminaison des statistiques"

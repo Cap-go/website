@@ -10,7 +10,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Crittografia end-to-end
 
-A partire dalla versione 4150 il plugin consente di inviare aggiornamenti crittografati
+A partire dalla versione 4150, il plugin consente di inviare aggiornamenti crittografati.
 Per iniziare, crea una chiave privata
 ```bash title='Create a private key'
 npx @capgo/cli key create
@@ -21,7 +21,7 @@ Quindi cripta il tuo zip
 npx @capgo/cli encrypt [path/to/zip]
 ```
 
-Il comando ti stamperà una `ivSessionKey` che deve essere inviata con il payload dell'aggiornamento nella chiave `session_key`
+Il comando ti mostrerà un `ivSessionKey` che deve essere inviato con il payload del tuo aggiornamento nella chiave `session_key`
 
 ```json
 {

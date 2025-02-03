@@ -1,6 +1,6 @@
 ---
 title: API Statistik
-description: Cara menggunakan plugin pembaruan otomatis dalam mode self-hosting
+description: Cara menggunakan plugin pembaruan otomatis dalam mode self-hosted
 sidebar:
   order: 8
 locale: id
@@ -10,9 +10,9 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## API Statistik
 
-Mulai dari versi 130 sistem pembaruan dapat mengirim statistik!
+Dimulai dari versi 130, sistem pembaruan dapat mengirim statistik!
 
-Secara default, semua statistik dikirim ke server kami, untuk memahami penggunaan dan penelitian 
+Secara default, semua statistik dikirim ke server kami untuk memahami penggunaan dan penelitian
 
 :::note
 Tidak ada data pribadi yang dikirim untuk statistik, hanya UUID acak, pembaruan versi, versi aplikasi native, platform, tindakan, dan ID aplikasi
@@ -27,7 +27,7 @@ Jika Anda ingin mengirim data ini ke server Anda, ubah konfigurasi di bawah ini:
 	"appName": "Name",
 	"plugins": {
 		"CapacitorUpdater": {
-			"statsUrl": "YOUR_URL"
+			"statsUrl": "URL_ANDA"
 		}
 	}
 }
@@ -39,8 +39,8 @@ Yang akan diterima server Anda adalah:
 interface AppInfosStats {
 	"action": "set", // bisa berupa set, delete, set_fail, reset, revert
 	// Kemudian informasi yang sama seperti pembaruan
-	"app_id": "*******", // pengidentifikasi aplikasi di toko
-	"device_id": "*******", // id unik per pemasangan aplikasi
+	"app_id": "*******", // pengenal aplikasi di toko
+	"device_id": "*******", // id unik per instalasi aplikasi
 	"platform": "ios", // atau android
 	"custom_id": "user_1", // mewakili pengguna Anda
         "version_name": "123", // versi dari web build
@@ -53,9 +53,9 @@ interface AppInfosStats {
 }
 ```
 
-Anda juga dapat menonaktifkannya sepenuhnya dengan string kosong. Perlu diingat, statistik dibuat ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin, untuk menyelesaikan masalah dan meningkatkannya
+Anda juga bisa menonaktifkannya sepenuhnya dengan string kosong. Perlu diingat, statistik dibuat ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin ini, untuk menyelesaikan masalah dan meningkatkannya
 
 <LinkCard
-	title="Handling Updates"
+	title="Menangani Pembaruan"
 	href="/docs/plugin/self-hosted/handling-updates"
 />

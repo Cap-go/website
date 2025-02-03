@@ -1,6 +1,6 @@
 ---
-title: API de statistiques
-description: Comment utiliser le plugin de mise à jour automatique en mode auto-hébergé
+title: API Statistiche
+description: Comment utiliser le plugin d'auto-mise à jour en mode auto-hébergé
 sidebar:
   order: 8
 locale: fr
@@ -12,7 +12,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 À partir de la version 130, le système de mise à jour peut envoyer des statistiques !
 
-Par défaut, toutes les statistiques sont envoyées à notre serveur, pour comprendre l'utilisation et la recherche
+Par défaut, toutes les statistiques sont envoyées à notre serveur pour comprendre l'utilisation et la recherche
 
 :::note
 Aucune donnée privée n'est envoyée pour les statistiques, uniquement un UUID aléatoire, la mise à jour de version, la version de l'application native, la plateforme, l'action et l'ID de l'application
@@ -33,7 +33,7 @@ Si vous souhaitez envoyer ces données à votre serveur à la place, modifiez la
 }
 ```
 
-Ce que votre serveur recevra est :
+Ce que votre serveur recevra :
 
 ```tsx
 interface AppInfosStats {
@@ -53,9 +53,9 @@ interface AppInfosStats {
 }
 ```
 
-Vous pouvez aussi totalement le désactiver, avec une chaîne vide. Gardez à l'esprit que les statistiques sont conçues de manière respectueuse de la vie privée et m'aident à comprendre comment les gens utilisent le plugin, pour résoudre les problèmes et l'améliorer
+Vous pouvez également le désactiver complètement avec une chaîne vide. Gardez à l'esprit que les statistiques sont conçues de manière respectueuse de la vie privée et m'aident à comprendre comment les gens utilisent le plugin, pour résoudre les problèmes et l'améliorer
 
 <LinkCard
-	title="Gestion des Mises à jour"
+	title="Gestion des Mises à Jour"
 	href="/docs/plugin/self-hosted/handling-updates"
 />

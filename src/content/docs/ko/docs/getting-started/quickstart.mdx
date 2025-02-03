@@ -9,35 +9,35 @@ locale: ko
 
 import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
 
-Capgo의 주요 개념을 안내하는 퀵스타트 튜토리얼입니다! 다음과 같은 개념들을 살펴볼 예정입니다:
+Capgo의 주요 개념을 안내하는 퀵스타트 튜토리얼입니다! 다음과 같은 개념들을 살펴볼 것입니다:
 
 <Steps>
 
-1 Capgo 계정에 앱 추가하기
+1. Capgo 계정에 앱 추가하기
 
-2 CI/CD에 Capgo 연동하기
+2. CI/CD와 Capgo 통합하기 
 
-3 커밋을 푸시하여 Capgo에 번들 업로드 트리거하기
+3. 커밋을 푸시하여 Capgo에서 번들 업로드 트리거하기
 
-4 Capgo 번들 배포 구성 및 커스터마이징
+4. Capgo 번들 배포 구성 및 커스터마이징하기
 
-5 Capgo를 통한 실시간 업데이트를 위한 앱 설정
+5. Capgo를 통한 라이브 업데이트를 활성화하도록 앱 설정하기
 
-6 Capgo에서 앱에 실시간 업데이트 배포하기
+6. Capgo에서 앱에 라이브 업데이트 배포하기
 
 </Steps>
 
-가이드를 순차적으로 따라가거나 관심 있는 컴포넌트의 문서로 바로 이동하세요.
+가이드를 순서대로 따라가거나, 관심 있는 컴포넌트의 문서로 바로 이동하세요.
 
 <CardGrid stagger>
   <a href="/docs/getting-started/add-an-app/" ><Card title="튜토리얼 시작하기" icon="rocket" >
-    퀵스타트 튜토리얼을 따라 Capgo를 빠르게 시작해보세요!
+    퀵스타트 튜토리얼을 따라 순식간에 Capgo를 시작해보세요!
   </Card></a>
   <a href="/docs/getting-started/deploy/"><Card title="쉬운 통합" icon="pencil">
-    CI/CD에 Capgo를 연동하고 커밋 푸시로 번들 업로드를 트리거하세요
+    CI/CD와 Capgo를 통합하고 커밋을 푸시하여 번들 업로드를 트리거하세요
   </Card></a>
-  <a href="/docs/getting-started/live-updates"><Card title="실시간 업데이트 문서" icon="setting">
-    앱스토어 지연 없이 원격으로 실시간 앱 업데이트
+  <a href="/docs/getting-started/live-updates"><Card title="라이브 업데이트 문서" icon="setting">
+    앱스토어 지연 없이 실시간으로 원격 앱 업데이트
   </Card></a>
   <a href="/docs/getting-started/trouble-shooting"><Card title="문제 해결" icon="open-book">
     일반적인 문제와 해결 방법
@@ -47,76 +47,76 @@ Capgo의 주요 개념을 안내하는 퀵스타트 튜토리얼입니다! 다�
 <Aside type="tip">
 무선 업데이트(OTA) 기능은 HTML, CSS, JavaScript 파일의 수정에만 적용됩니다.
 
-Capacitor 플러그인 업데이트와 같은 네이티브 코드를 변경할 경우에는 앱스토어에 반드시 재심사를 받아야 합니다.
+Capacitor 플러그인 업데이트와 같은 네이티브 코드를 변경하는 경우에는 반드시 앱스토어에 재승인을 받아야 합니다
 </Aside>
 
-## Discord 커뮤니티 참여
+## Discord 커뮤니티 참여하기
 
-[Capacitor-updater Discord 서버에 참여하세요!](https://discordcom/invite/VnYRvBfgA6)
+[Capacitor-updater Discord 서버에 참여하세요!](https://discord.com/invite/VnYRvBfgA6)
 
 ## 유지보수
 
-| 플러그인 버전 | Capacitor 호환성 | 유지보수 상태 |
-| -------------- | ----------------------- | ----------------- |
-| v6\*\*       | v6\*\*                | ✅                 |
-| v5\*\*       | v5\*\*                | 심각한 버그만 |
-| v4\*\*       | v4\*\*                | ⚠️ 지원 중단 |
-| v3\*\*       | v3\*\*                | ⚠️ 지원 중단     |
-| > 7            | v4\*\*                | ⚠️ 지원 중단, CI가 오작동하여 버전이 너무 많이 올라감     |
+| 플러그인 버전 | Capacitor 호환성 | 유지보수 상태      |
+| -------------- | --------------- | ----------------- |
+| v6\*\*       | v6\*\*        | ✅                |
+| v5\*\*       | v5\*\*        | 중요 버그만 수정    |
+| v4\*\*       | v4\*\*        | ⚠️ 지원 중단      |
+| v3\*\*       | v3\*\*        | ⚠️ 지원 중단      |
+| > 7            | v4\*\*        | ⚠️ 지원 중단, CI가 오작동하여 버전이 너무 많이 올라감 |
 
 ## 스토어 가이드라인 준수
 
-Android Google Play와 iOS App Store는 Capacitor-updater 솔루션을 앱에 통합하기 전에 알아야 할 규칙이 포함된 가이드라인이 있습니다.
+Android Google Play와 iOS App Store는 Capacitor-updater 솔루션을 애플리케이션에 통합하기 전에 알아야 할 규칙이 있는 해당 가이드라인이 있습니다
 
-### Google play
+### Google Play
 
-[기기 및 네트워크 악용](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) 주제의 세 번째 문단에서는 Google Play의 업데이트 메커니즘 이외의 방법으로 소스 코드를 업데이트하는 것을 제한하지만, 이 제한은 javascript 번들 업데이트에는 적용되지 않습니다.
-> 이 제한은 가상 머신에서 실행되고 Android API에 대한 제한된 접근 권한을 가진 코드(예: 웹뷰나 브라우저의 JavaScript)에는 적용되지 않습니다.
+[기기 및 네트워크 남용](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) 주제의 세 번째 단락에서는 Google Play의 업데이트 메커니즘 이외의 방법으로 소스 코드를 업데이트하는 것이 제한된다고 설명합니다. 하지만 이 제한은 자바스크립트 번들 업데이트에는 적용되지 않습니다
+> 이 제한은 가상 머신에서 실행되고 Android API에 대한 제한된 접근 권한을 가진 코드(예: 웹뷰나 브라우저의 JavaScript)에는 적용되지 않습니다
 
-이는 JS 번들만 업데이트하고 네이티브 코드를 업데이트하지 않는 Capacitor-updater를 완전히 허용합니다.
+이는 JS 번들만 업데이트하고 네이티브 코드는 업데이트하지 않는 Capacitor-updater를 완전히 허용합니다
 
 ### App Store
 
-2015년 [Apple Developer Program License Agreement](https://developerapplecom/programs/ios/information/)의 **332**항은 JavaScript와 자산의 무선 업데이트를 완전히 허용하며, 최신 버전(20170605) [여기서 다운로드](https://developerapplecom/terms/)에서는 이 규정이 더욱 광범위해졌습니다:
+2015년부터 [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/)의 **332**항은 JavaScript와 자산의 무선 업데이트를 완전히 허용했으며, 최신 버전(20170605)([여기서 다운로드](https://developer.apple.com/terms/))에서는 이 규정이 더 광범위해졌습니다:
 
-> 해석된 코드는 다음과 같은 조건에서만 애플리케이션에 다운로드될 수 있습니다: (a) App Store에 제출된 애플리케이션의 의도된 advertised 목적과 일치하지 않는 기능을 제공하여 애플리케이션의 주요 목적을 변경하지 않음, (b) 다른 코드나 애플리케이션을 위한 스토어나 상점을 만들지 않음, (c) OS의 서명, 샌드박스 또는 기타 보안 기능을 우회하지 않음
+> 해석된 코드는 다음과 같은 조건에서만 애플리케이션에 다운로드할 수 있습니다: (a) App Store에 제출된 애플리케이션의 의도된 광고 목적과 일치하지 않는 기능을 제공하여 애플리케이션의 주요 목적을 변경하지 않음, (b) 다른 코드나 애플리케이션을 위한 스토어나 상점을 만들지 않음, (c) OS의 서명, 샌드박스 또는 기타 보안 기능을 우회하지 않음
 
-Capacitor-updater를 사용하면 푸시하는 업데이트가 원래 App Store에서 승인된 의도에서 크게 벗어나지 않는 한 이러한 규칙을 완전히 준수할 수 있습니다.
+Capacitor-updater를 사용하면 푸시하는 업데이트가 원래 App Store에서 승인된 의도에서 크게 벗어나지 않는 한 이러한 규칙을 완전히 준수할 수 있습니다
 
-Apple의 가이드라인을 더욱 준수하기 위해, [App Store 검토 가이드라인](https://developerapplecom/app-store/review/guidelines/)에 다음과 같이 명시되어 있으므로 App Store 배포 앱에서는 '강제 업데이트' 시나리오를 활성화하지 않을 것을 제안합니다:
+Apple의 가이드라인을 더욱 준수하기 위해, [App Store 검토 가이드라인](https://developer.apple.com/app-store/review/guidelines/)에서 다음과 같이 명시하고 있으므로 App Store에 배포되는 앱은 '강제 업데이트' 시나리오를 활성화하지 않는 것이 좋습니다:
 
-> 앱은 기능, 콘텐츠에 접근하거나 앱을 사용하기 위해 사용자에게 앱 평가, 리뷰, 다른 앱 다운로드 또는 기타 유사한 작업을 강요해서는 안 됩니다.
+> 앱은 기능, 콘텐츠에 접근하거나 앱을 사용하기 위해 사용자에게 앱 평가, 앱 리뷰, 다른 앱 다운로드 또는 기타 유사한 작업을 강요해서는 안 됩니다
 
-이는 사용자가 앱을 닫을 때까지 새 버전을 적용하도록 강요하지 않는 백그라운드 업데이트의 기본 동작에는 문제가 되지 않지만, 이를 표시하기로 결정한 경우 해당 역할을 알고 있어야 합니다.
+이는 사용자가 앱을 닫을 때까지 새 버전을 적용하도록 강제하지 않는 백그라운드 업데이트의 기본 동작에는 문제가 되지 않지만, 이를 표시하기로 결정한 경우에는 해당 역할을 알고 있어야 합니다
 
-## 오픈소스
+## 오픈 소스
 
-이 플러그인은 LGPL-30 라이선스이며 백엔드는 AGPL-30 라이선스입니다.
+이 플러그인은 LGPL-3.0 라이선스이며 백엔드는 AGPL-3.0 라이선스입니다
 
-> 💡 LGPL-30은 누군가 플러그인의 코드를 수정하면 동일한 라이선스로 오픈소스로 공개해야 함을 의미합니다. 코드를 수정하지 않고 사용하는 경우에는 해당되지 않습니다. 자세한 내용은 아래 이슈를 확인하세요 👇
+> 💡 LGPL-3.0은 누군가 플러그인의 코드를 수정하면 동일한 라이선스로 오픈 소스로 공개해야 함을 의미합니다. 코드를 수정하지 않고 사용한다면 이는 해당되지 않습니다. 자세한 내용은 아래 링크를 확인하세요 👇
 
 <LinkCard
 	title="라이선스?"
-	href="https://githubcom/Cap-go/capacitor-updater/issues/7"
+	href="https://github.com/Cap-go/capacitor-updater/issues/7"
 />
 
 <LinkCard
-	title="문서를 읽는 대신 GPTS Capgo로 도움받기"
-	href="https://chatopenaicom/g/g-3dMwHbF2w-capgo-doc-gpt"
+	title="문서를 읽는 대신 GPTS Capgo를 사용하여 도움을 받으세요"
+	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
 />
 
-> 걱정 없이 앱에 포함할 수 있습니다
+> 걱정 없이 앱에 포함시킬 수 있습니다
 
-## 마지막 참고사항
+## 마지막 참고 사항
 
-셀프 호스팅하시고 이 도구가 유용하다고 생각되시면, [GitHub 후원자](https://githubcom/sponsors/riderx/)가 되어 제 작업을 지원해주시는 것을 고려해주세요.
+셀프 호스팅을 하고 이 도구가 유용하다고 생각되시면, [GitHub 스폰서](https://github.com/sponsors/riderx/)가 되어 제 작업을 지원해 주시기 바랍니다
 
-저는 이 코드를 유료화하는 대신 모두 오픈소스로 공개하기로 결정했습니다. 숨기고 싸우는 대신 공개함으로써 우리가 더 나은 세상을 만들 수 있다고 믿습니다.
+저는 여기서 구축한 모든 코드를 유료화하는 대신 오픈 소스로 공개하기로 결정했습니다. 숨기고 싸우는 대신 공개함으로써 더 나은 세상을 만들 수 있다고 믿습니다
 
-이를 가능하게 하려면 여러분을 포함한 우리 모두가 각자의 역할을 해야 합니다 🥹 Capgo 클라우드가 여러분의 요구사항을 충족시키지 못한다면, [여기서](https://githubcom/sponsors/riderx/) 자신의 조건으로 부트스트랩 메이커를 지원할 수 있습니다.
+이를 가능하게 하려면 여러분을 포함한 우리 모두가 각자의 역할을 해야 합니다 🥹 Capgo 클라우드가 요구 사항을 충족하지 못한다면, [여기서](https://github.com/sponsors/riderx/) 자신의 조건으로 부트스트랩 메이커를 지원할 수 있습니다
 
-## 간단한 계산
+## 간단한 수학
 
 기본 요금제 가격: $14*12 = 연간 $168
 평균 개발자 시급 = $60
-즉, 셀프 호스팅에 3시간을 낭비하면 1년 전체 요금을 지불할 수 있으며, 3시간 이상 소비한다면 돈을 낭비하는 것입니다 ^^
+즉, 셀프 호스팅에 3시간의 개발 시간을 낭비하면 1년 전체 요금을 지불할 수 있으며, 3시간 이상 소비한다면 돈을 잃게 됩니다 ^^

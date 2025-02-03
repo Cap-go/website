@@ -1,6 +1,6 @@
 ---
-title: API Statistik
-description: Cómo usar el plugin de actualización automática en modo auto-alojado
+title: 統計情報 API
+description: Cómo usar el plugin de actualización automática en modo auto-hospedado
 sidebar:
   order: 8
 locale: es
@@ -10,12 +10,12 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## API de Estadísticas
 
-¡A partir de la versión 130, el sistema de actualización es capaz de enviar estadísticas!
+¡A partir de la versión 130, el sistema de actualización puede enviar estadísticas!
 
-Por defecto, todas las estadísticas se envían a nuestro servidor, para comprender el uso e investigar
+Por defecto, todas las estadísticas se envían a nuestro servidor, para entender el uso e investigar
 
 :::note
-No se envían datos privados para las estadísticas, solo UUID aleatorio, actualización de versión, versión de aplicación nativa, plataforma, acción e ID de aplicación
+No se envían datos privados para las estadísticas, solo UUID aleatorio, actualización de versión, versión de la aplicación nativa, plataforma, acción e ID de la aplicación
 :::
 
 Si deseas enviar estos datos a tu servidor en su lugar, cambia la configuración a continuación:
@@ -39,13 +39,13 @@ Lo que tu servidor recibirá es:
 interface AppInfosStats {
 	"action": "set", // puede ser set, delete, set_fail, reset, revert
 	// Luego es la misma información que la actualización
-	"app_id": "*******", // identificador de la aplicación en la tienda
-	"device_id": "*******", // id único por instalación de aplicación
+	"app_id": "*******", // identificador de la app en la tienda
+	"device_id": "*******", // id único por instalación de app
 	"platform": "ios", // o android
-	"custom_id": "user_1", // representa a tu usuario
-        "version_name": "123", // versión de la compilación web
-        "version_build": "120", // versión de la compilación nativa
-        "version_code": "120", // número de compilación de la versión nativa
+	"custom_id": "user_1", // representa tu usuario
+        "version_name": "123", // versión del build web
+        "version_build": "120", // versión del build nativo
+        "version_code": "120", // número de build de la versión nativa
 	"version_os": "16", // versión del SO del dispositivo
         "plugin_version": "400"// para que tu api se comporte diferente con diferentes plugins
         "is_emulator": false,
@@ -53,7 +53,7 @@ interface AppInfosStats {
 }
 ```
 
-También puedes deshabilitarlo completamente con una cadena vacía. Ten en cuenta que las estadísticas se hacen respetando la privacidad y me ayudan a entender cómo la gente usa el plugin, para resolver problemas y mejorarlo
+También puedes desactivarlo completamente, con una cadena vacía. Ten en cuenta que las estadísticas están hechas de manera amigable con la privacidad y me ayudan a entender cómo la gente usa el plugin, para resolver problemas y mejorarlo
 
 <LinkCard
 	title="Manejo de Actualizaciones"

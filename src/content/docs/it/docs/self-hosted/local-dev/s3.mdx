@@ -1,12 +1,12 @@
 ---
 title: Self-hosting S3
-description: Come configurare minio per funzionare con capgo
+description: Come configurare minio per l'utilizzo con Capgo
 sidebar:
   order: 2
 locale: it
 ---
 
-## Cosa coprirà questo tutorial?
+## Di cosa si occupa questo tutorial?
 
 Questo tutorial mostrerà come configurare [minio](https://minio/) per farlo funzionare con capgo
 
@@ -16,12 +16,12 @@ Configurare S3 permette di caricare i bundle dalla [CLI](/docs/cli/commands/)
 
 :::danger
 ⚠️ Questo tutorial non è destinato all'uso in produzione\
-Utilizzalo solo nello sviluppo locale
+Usalo solo nello sviluppo locale
 :::
 
 ## Requisiti
 
-1 [Docker](https://wwwdockercom/)
+1. [Docker](https://wwwdockercom/)
 
 ## Per iniziare
 
@@ -53,9 +53,9 @@ docker rm minio1
 ```
 ⚠️ Questo comando non rimuove i dati di minio
 
-## Configurazione delle funzioni edge
+## Configurazione delle edge functions
 
-Ora che abbiamo un server S3 in esecuzione dobbiamo configurare le funzioni edge di capgo per utilizzare il nostro server S3
+Ora che abbiamo un server S3 in esecuzione dobbiamo configurare le edge functions di capgo per utilizzare il nostro server S3
 
 Per farlo dobbiamo creare un file ENV in `capgo/supabase` chiamato `envlocal`
 
@@ -67,7 +67,7 @@ API_SECRET=testsecret
 PLAN_MAKER=test
 PLAN_SOLO=test
 PLAN_TEAM=test
-# Di seguito la configurazione effettivamente importante per S3
+# Di seguito la configurazione effettiva per S3
 S3_ENDPOINT=hostdockerinternal
 S3_REGION=dev-region
 S3_PORT=9000
@@ -78,14 +78,14 @@ R2_SECRET_ACCESS_KEY=CHANGEME123
 
 L'ip `hostdockerinternal` è un ip docker che può essere raggiunto solo internamente da docker, ma lo sostituiamo nel codice con `0000` in modo che minio possa essere raggiunto da localhost
 
-Per eseguire le funzioni edge con il nostro nuovo file env usa
+Per eseguire le edge functions con il nostro nuovo file env usa
 ```bash
 supabase functions serve --env-file /supabase/envlocal
 ```
 
 ## Configurazione della CLI per utilizzare S3
 
-La CLI non funzionerà di default con minio È necessaria la seguente modifica a `capacitorconfigts`[^1]
+La CLI non funzionerà di default con minio. È necessaria la seguente modifica a `capacitorconfigts`[^1]
 ```ts
 const config: CapacitorConfig = {
   appId: 'comdemoapp',

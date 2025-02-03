@@ -1,12 +1,12 @@
 ---
-title: 통계 엔드포인트
-description: 셀프 호스트형 통계 엔드포인트 생성
+title: Stats 엔드포인트
+description: 자체 호스팅 통계 엔드포인트 만들기
 sidebar:
   order: 2
 locale: ko
 ---
 
-다음은 JavaScript로 작성된 플러그인 통계를 저장하는 코드 예시입니다
+JavaScript로 플러그인 통계를 저장하는 코드 예시입니다.
 
 ```typescript
 interface AppInfos {
@@ -71,7 +71,7 @@ export const handler: Handler = async (event) => {
     version_name,
     version_build,
     plugin_version)
-  // 데이터베이스에 저장하세요
+  // Save it in your database
   return { status: 'ok' }
 }
 ```
@@ -82,14 +82,14 @@ export const handler: Handler = async (event) => {
 { "status": "ok" }
 ```
 
-## 동작:
+## 액션:
 
-* **delete** : 번들이 로컬에서 삭제될 때
-* **reset** : 앱이 내장 번들로 초기화될 때
-* **set** : 앱이 새로운 번들을 설정할 때
-* **set\_fail** : 앱이 설정할 번들의 ID를 찾을 수 없을 때
-* **update\_fail** : 지연 후 `notifyAppReady`가 호출되지 않았을 때 전송
-* **download\_fail** : 다운로드가 완료되지 않았을 때
-* **download\_complete:** 다운로드가 완료되었을 때
-* **download\_xx:** 다운로드 진행률 10% 마다 전송 예: download\_20, download\_70
-* **update\_fail:** 번들이 주어진 시간 내에 `notifyAppReady`를 실행하지 못했을 때
+* **delete**: 번들이 로컬에서 삭제될 때
+* **reset**: 앱이 내장된 번들로 초기화될 때
+* **set**: 앱이 새로운 번들을 설정할 때
+* **set_fail**: 앱이 설정할 번들의 ID를 찾지 못할 때
+* **update_fail**: 지연 후 `notifyAppReady`가 호출되지 않았을 때 전송
+* **download_fail**: 다운로드가 완료되지 않았을 때
+* **download_complete:** 다운로드가 완료될 때
+* **download_xx:** 다운로드 진행률 10%마다 전송 예: download_20, download_70
+* **update_fail:** 번들이 주어진 시간 내에 `notifyAppReady`를 실행하지 못했을 때

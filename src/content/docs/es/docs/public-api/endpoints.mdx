@@ -1,14 +1,16 @@
 ---
-title: Endpoint
+title: Endpunkte
 description: Documentación de la API pública de Capgo cloud
 sidebar:
   order: 2
 locale: es
 ---
 
+import { LinkCard } from '@astrojs/starlight/components';
+
 Esta es la documentación de la API pública de Capgo cloud
 
-Para acceder, agrega en los encabezados tu clave API como `authorization`
+Para acceder, agrega en los headers tu clave API como `authorization`
 
 <LinkCard
 	title="Obtener clave API"
@@ -58,9 +60,9 @@ interface OrganizationUpdate {
 }
 ```
 
-Requiere un cuerpo de solicitud de tipo `OrganizationUpdate`
+Requiere un cuerpo de solicitud del tipo `OrganizationUpdate`
 
-Al tener éxito, devuelve lo siguiente:
+En caso de éxito, devuelve lo siguiente:
 
 ```typescript
 return { status: 'Organization updated', data: Organization }
@@ -78,9 +80,9 @@ interface OrganizationCreate {
 }
 ```
 
-Requiere un cuerpo de solicitud de tipo `OrganizationCreate`
+Requiere un cuerpo de solicitud del tipo `OrganizationCreate`
 
-Al tener éxito, devuelve lo siguiente:
+En caso de éxito, devuelve lo siguiente:
 
 ```typescript
 return { status: 'Organization created', id: string }
@@ -141,7 +143,7 @@ Elimina una clave API existente
 Parámetros:
 - `id`: La clave API a eliminar
 
-Al tener éxito, devuelve:
+En caso de éxito, devuelve:
 ```typescript
 return { success: true }
 ```
@@ -157,9 +159,9 @@ return { error: string, supabaseError?: any }
 
 Recupera los miembros de la organización
 
-Requiere un cuerpo de solicitud (parámetros de consulta) de tipo `{ orgId: string }`
+Requiere un cuerpo de solicitud (parámetros de consulta) del tipo `{ orgId: string }`
 
-Al tener éxito, devuelve lo siguiente:
+En caso de éxito, devuelve lo siguiente:
 ```typescript
 interface Member {
   uid: string;
@@ -183,9 +185,9 @@ interface MemberDelete {
 }
 ```
 
-Requiere un cuerpo de solicitud (parámetros de consulta) de tipo `MemberDelete`
+Requiere un cuerpo de solicitud (parámetros de consulta) del tipo `MemberDelete`
 
-Al tener éxito, devuelve lo siguiente:
+En caso de éxito, devuelve lo siguiente:
 
 ```typescript
 return { status: 'OK' }
@@ -224,7 +226,7 @@ interface Stats {
 }
 ```
 
-Si se proporciona el parámetro `graph`, devuelve una imagen SVG con la visualización de la métrica solicitada
+Si se proporciona el parámetro `graph`, devuelve una imagen SVG de visualización de la métrica solicitada
 
 ### GET /statistics/user
 
@@ -250,7 +252,7 @@ interface Stats {
 }[]
 ```
 
-Si se proporciona el parámetro `graph`, devuelve una imagen SVG con la visualización de la métrica solicitada
+Si se proporciona el parámetro `graph`, devuelve una imagen SVG de visualización de la métrica solicitada
 
 ### GET /statistics/org/:org_id
 
@@ -276,7 +278,7 @@ interface Stats {
 }[]
 ```
 
-Si se proporciona el parámetro `graph`, devuelve una imagen SVG con la visualización de la métrica solicitada
+Si se proporciona el parámetro `graph`, devuelve una imagen SVG de visualización de la métrica solicitada
 
 ## Canales
 
@@ -315,7 +317,7 @@ recibe esto:
 
 `https://apicapgoapp/channel`
 
-Envía `app_id` como parámetro URL y recibe un array de los primeros 50 canales\
+Envía `app_id` como parámetro URL y recibe array de los primeros 50 canales\
 Puedes obtener los siguientes enviando `page=1`
 
 ```typescript
@@ -383,7 +385,7 @@ recibe esto:
 
 Este endpoint te permite verificar y modificar todos los dispositivos vinculados a tu aplicación
 
-### POST&#x20;
+### POST
 
 `https://apicapgoapp/device`
 
@@ -408,8 +410,7 @@ recibe esto:
 
 `https://apicapgoapp/device`
 
-Envía `app_id` como parámetro URL y recibe un array de los primeros 50 dispositivos\
-Puedes obtener el siguiente enviando `page=1`
+Envía `app_id` como parámetro URL y recibe array de los primeros 50 dispositivosPuedes obtener el siguiente enviando `page=1`
 
 ```typescript
 interface Device{
@@ -431,7 +432,7 @@ interface Device{
 }[]       
 ```
 
-y opcionalmente el nombre `device_id` como parámetro URL para recibir uno:
+y opcionalmente `device_id` como parámetro URL para recibir uno:
 
 ```typescript
 interface Device {
@@ -451,7 +452,7 @@ interface Device {
 
 ### DELETE
 
-Este endpoint es para desvincular el canal y anular la versión. No puedes eliminar un dispositivo de Capgo
+Este endpoint es para desvincular el canal y la anulación de versión. No puedes eliminar un dispositivo de Capgo
 
 `https://apicapgoapp/device`
 
@@ -478,7 +479,7 @@ Este endpoint te permite verificar y eliminar todos los bundles vinculados a tu 
 
 `https://apicapgoapp/bundle`
 
-Envía `app_id` como parámetro URL y recibe un array de los primeros 50 bundles\
+Envía `app_id` como parámetro URL y recibe un array de los primeros 50 bundles
 Puedes obtener el siguiente enviando `page=1`
 
 ```typescript

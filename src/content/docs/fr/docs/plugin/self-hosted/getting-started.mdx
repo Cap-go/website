@@ -1,5 +1,5 @@
 ---
-title: 시작하기
+title: Commencer
 description: Comment exécuter votre propre serveur de mise à jour automatique
 sidebar:
   order: 1
@@ -12,22 +12,22 @@ Cette documentation expliquera comment exécuter votre propre serveur de mise à
 
 ## Introduction
 
-Si vous trouvez ce travail utile, veuillez envisager de soutenir mon travail en devenant un [sponsor Github](https://githubcom/sponsors/riderx)
+Si vous trouvez ce travail utile, merci d'envisager de soutenir mon travail en devenant un [sponsor Github](https://githubcom/sponsors/riderx)
 
-J'ai fait le pari d'ouvrir le code que j'ai construit ici au lieu de le mettre derrière un paywall. En l'ouvrant au lieu de lutter et de le cacher, je crois que nous pouvons rendre le monde meilleur
+J'ai fait le pari d'ouvrir le code source de tout ce que j'ai construit ici au lieu de le mettre derrière un paywall. En l'ouvrant au lieu de le cacher, je crois que nous pouvons rendre le monde meilleur
 
 De plus, je veux me concentrer sur les outils Capgo, et en faire une entreprise ouverte et transparente
 
-Mais pour que cela soit possible, il est nécessaire que nous fassions tous notre part, y compris vous 🥹
+Mais pour que cela soit possible, il est nécessaire que chacun d'entre nous fasse sa part, y compris vous 🥹
 
-Si Capgo ne vous convient pas, alors payez votre propre prix et [soutenez un créateur indépendant](https://githubcom/sponsors/riderx) selon vos conditions
+Si Capgo ne vous convient pas, alors fixez votre propre prix et [soutenez un créateur indépendant](https://githubcom/sponsors/riderx) selon vos conditions
 
 <LinkCard title="Envisager de Contribuer" href="/docs/plugin/self-hosted/contributing/"/>
+
 ## Parité des fonctionnalités
 
-Si vous choisissez d'utiliser votre propre serveur, vous perdrez le flux d'installation en 5 minutes\
-Vous devez implémenter toutes ces fonctionnalités vous-même
-
+Si vous choisissez d'utiliser votre propre serveur, vous perdrez le flux de configuration en 5 minutes\
+Vous devrez implémenter toutes ces fonctionnalités vous-même
 
 | Fonctionnalités          | Capgo | Auto-hébergé |
 | ------------------------ | ----- | ------------ |
@@ -44,7 +44,7 @@ Vous devez implémenter toutes ces fonctionnalités vous-même
 | API des canaux          | ✅     | 🚧          |
 | Statistiques des mises à jour | ✅     | 🚧          |
 | Statistiques des échecs de téléchargement | ✅     | 🚧          |
-| Statistiques d'utilisation des apps | ✅     | 🚧          |
+| Statistiques d'utilisation | ✅     | 🚧          |
 | Chiffrement des mises à jour | ✅     | 🚧          |
 
 :::danger
@@ -54,13 +54,13 @@ Si vous envoyez une mauvaise mise à jour à vos utilisateurs, vous pouvez et al
 > Gardez à l'esprit que vous ne pouvez pas utiliser le cloud Capgo et votre serveur en même temps
 
 :::danger
-La fonction de mise à jour en direct (OTA) ne s'applique qu'aux modifications apportées aux fichiers HTML, CSS et JavaScript
+La fonction de mise à jour Over-the-Air (OTA) ne s'applique qu'aux modifications apportées aux fichiers HTML, CSS et JavaScript
 
 Si vous apportez des modifications au code natif, comme des mises à jour des plugins Capacitor, il est obligatoire de soumettre à nouveau l'application à l'app store pour approbation
 :::
 
 ## Choisir entre Auto et Manuel
-En mode auto, une partie de la logique est gérée par le code natif, les mises à jour sont décidées côté serveur, c'est plus sécurisé et permet des mises à jour précises, un déploiement partiel sur un appareil ou un groupe et plus
+En mode auto, une partie de la logique est gérée par le code natif, les mises à jour sont décidées côté serveur, c'est plus sécurisé et permet des mises à jour précises, un déploiement partiel sur un appareil ou un groupe et plus encore
 
 En mode manuel, toute la logique est gérée par le JS
 
@@ -83,8 +83,8 @@ npx cap sync
 
 ## Préparer votre bundle
 
-Pour envoyer des mises à jour à votre application, vous devez la compresser
-La meilleure façon d'être certain que votre zip est bon est d'utiliser le CLI Capgo pour la compression
+Pour envoyer des mises à jour à votre application, vous devez la zipper
+La meilleure façon d'être certain que votre zip est bon est d'utiliser le CLI Capgo pour le zipping
 ```bash title="Créer un bundle avec vos fichiers à servir depuis votre serveur"
 npx @capgo/cli@latest bundle zip
 ```
@@ -102,5 +102,5 @@ Vous devrez servir ce zip depuis votre serveur par vos propres moyens
 />
 
 :::note
-Si cela semble être beaucoup de travail, essayez le Capgo Cloud d'essai
+Si cela semble beaucoup de travail, essayez l'essai gratuit de Capgo Cloud
 :::

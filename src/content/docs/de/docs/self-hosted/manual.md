@@ -1,6 +1,6 @@
 ---
 title: Handbuch
-description: So verwenden Sie den Capgo-Updater im manuellen Modus
+description: Verwendung des manuellen Capgo-Updates
 sidebar:
   order: 3
 locale: de
@@ -9,9 +9,9 @@ locale: de
 ## Vor dem Start
 
 :::tip
-Wenn Sie dieses Tool kostenlos nutzen, nehmen Sie sich Zeit, meine Arbeit mit [GitHub sponsor](https://githubcom/sponsors/riderx/) zu unterstützen
+Wenn Sie dieses Tool kostenlos nutzen, nehmen Sie sich Zeit, meine Arbeit über [GitHub Sponsor](https://githubcom/sponsors/riderx/) zu unterstützen
 
-Ich habe darauf gesetzt, den gesamten hier entwickelten Code open source zu machen
+Ich habe mich entschieden, den gesamten Code, den ich hier entwickelt habe, als Open Source zur Verfügung zu stellen
 
 Ich hätte es für mich behalten und einen hohen Preis verlangen können
 
@@ -21,7 +21,7 @@ Ich denke, es würde unsere Welt zu einem besseren Ort machen, wenn wir öffnen 
 
 Um dies zu ermöglichen, ist es notwendig, dass wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
-Wenn das Capgo Cloud-Angebot nicht zu Ihnen passt, unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
+Wenn das Capgo-Cloud-Angebot nicht zu Ihnen passt, unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
 :::
 
 ## Schnellinstallation
@@ -33,7 +33,7 @@ npx cap sync
 
 #### Konfiguration
 
-Fügen Sie dies zu Ihrer Konfiguration hinzu, um Auto-Update zu deaktivieren:
+Fügen Sie dies zu Ihrer Konfiguration hinzu, um automatische Updates zu deaktivieren:
 
 ```tsx
 // capacitorconfigjson
@@ -58,36 +58,36 @@ let data = {version: ""}
 CapacitorUpdaternotifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
-       // Do the download during user active app time to prevent failed download
+       // Führen Sie den Download durch, während die App aktiv ist, um fehlgeschlagene Downloads zu vermeiden
        data = await CapacitorUpdaterdownload({
        version: '004',
        url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
-       // Do the switch when user leave app
+       // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt
        SplashScreenshow()
        try {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // in case the set fail, otherwise the new app will have to hide it
+         SplashScreenhide() // falls das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
        }
      }
  })
 ```
 
-⚠️ Wenn Sie ein fehlerhaftes Update senden, wird die App auf die letzte funktionierende Version oder die im nativen Build enthaltene Version zurückgesetzt, wenn keine funktioniert
+⚠️ Wenn Sie ein fehlerhaftes Update senden, wird die App zur letzten funktionierenden Version zurückkehren oder zu der Version, die im nativen Build enthalten ist, wenn keine funktioniert
 
 ## Demo-App&#x20;
 
-Weitere Informationen finden Sie in der Demo-App
+Überprüfen Sie die Demo-App für weitere Informationen
 
-[GitHub - Cap-go/demo-app: demo app with manual and auto mode](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: Demo-App mit manuellem und automatischem Modus](https://githubcom/Cap-go/demo-app/)
 
 ## Paket
 
-Unabhängig davon, wie Sie die Datei benennen, die Sie von Ihrer Release/Update-Server-URL herunterladen, sollte die ZIP-Datei den vollständigen Inhalt Ihres Produktions-Capacitor-Build-Ausgabeordners enthalten, normalerweise `{project directory}/dist/` oder `{project directory}/www/`
+Unabhängig davon, wie Sie die Datei benennen, die Sie von Ihrer Release/Update-Server-URL herunterladen, sollte die ZIP-Datei den gesamten Inhalt Ihres Capacitor-Produktions-Build-Ausgabeordners enthalten, üblicherweise `{Projektverzeichnis}/dist/` oder `{Projektverzeichnis}/www/`
 
 Hier befindet sich `indexhtml`, und es sollte auch alle gebündelten JavaScript-, CSS- und Web-Ressourcen enthalten, die für den Betrieb Ihrer App erforderlich sind
 

@@ -1,6 +1,6 @@
 ---
-title: 시작하기
-description: 본 튜토리얼은 supabase를 처음부터 시작하는 방법과 edge functions를 시작하는 방법을 보여줄 것입니다
+title: Memulai
+description: 이 튜토리얼은 처음부터 supabase를 시작하는 방법과 edge functions를 시작하는 방법을 보여줄 것입니다
 sidebar:
   order: 1
 locale: ko
@@ -8,11 +8,11 @@ locale: ko
 
 ## 이 튜토리얼에서 다룰 내용은?
 
-이 튜토리얼은 처음부터 supabase를 시작하는 방법과 edge functions를 시작하는 방법을 보여줄 것입니다
+이 튜토리얼은 supabase를 처음부터 시작하는 방법과 edge functions를 시작하는 방법을 보여줄 것입니다
 
 ## 요구사항
- 1 클론된 [capgo](https://githubcom/Cap-go/capgo)
- 3 [supabase](https://supabasecom/)
+1. [capgo](https://githubcom/Cap-go/capgo) 클론
+3. [supabase](https://supabasecom/)
 
 ## 시작하기
 
@@ -21,7 +21,7 @@ locale: ko
 supabase start
 ```
 
-다음과 같은 내용이 표시되어야 합니다:
+다음과 같은 내용이 보일 것입니다:
 ```js
 Started supabase local development setup
 
@@ -35,7 +35,7 @@ Started supabase local development setup
 service_role key: supa_key_admin
 ```
 
-다음으로 `configsjson`를 열고 다음 값들을 설정하세요:
+다음으로 `configsjson`을 열고 다음 값들을 설정하세요:
 ```json
 {
   "base_domain": {
@@ -66,7 +66,7 @@ service_role key: supa_key_admin
 
 <figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
 
-확인이 되면 다음 명령어로 edge functions를 시작하세요:
+확인되면 다음 명령어로 edge functions를 시작하세요:
 
 ```bash
 supabase functions serve

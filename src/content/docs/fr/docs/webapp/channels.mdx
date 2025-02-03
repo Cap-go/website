@@ -1,10 +1,10 @@
 ---
-title: Canales
+title: Canaux
 description: >-
-  Il existe des canaux pour gérer les mises à jour de l'application. Vous pouvez
-  avoir plusieurs canaux, et chaque canal peut contenir plusieurs versions. Cela
-  vous permet d'exploiter plusieurs versions de l'application simultanément en
-  production.
+  Les canaux sont un moyen de gérer les mises à jour de votre application. Vous
+  pouvez avoir plusieurs canaux et chaque canal peut avoir plusieurs versions.
+  Cela vous permet d'avoir plusieurs versions de votre application en production
+  en même temps.
 sidebar:
   order: 6
 locale: fr
@@ -25,12 +25,12 @@ Ensuite, après avoir cliqué sur `Ajouter`, un nouveau canal devrait apparaîtr
 <figure><img src="/post-channel-createwebp" alt="after channel create" /><figcaption></figcaption></figure>
 
 ## Que signifie mal configuré ?
-Parfois, la configuration d'un canal n'est pas valide. Dans ce cas, vous obtiendrez un gros avertissement et la colonne `Mal configuré` indiquera `Oui` pour un ou plusieurs canaux
+Parfois, la configuration d'un canal n'est pas valide. Dans ce cas, vous obtiendrez un gros avertissement et la colonne `Mal configuré` indiquera `Oui` pour un ou plusieurs canaux.
 Vous pouvez en savoir plus à ce sujet [ici](/docs/cli/commands/#disable-updates-strategy)
 
 ## Supprimer un canal
 
-La suppression d'un canal est simple. Cliquez simplement sur l'icône de la corbeille et confirmez la suppression (`2` sur l'image)
+Supprimer un canal est simple. Cliquez simplement sur l'icône de la corbeille et confirmez la suppression (`2` sur l'image)
 
 ## Gérer un canal
 
@@ -41,14 +41,14 @@ Cette page devrait ressembler à ceci :
 
 Passons en revue les différentes sections
 
-Premièrement, le `Numéro de bundle` (`1` sur l'image). C'est la version actuelle de ce canal. Lorsqu'on lui demande de servir une mise à jour, ce canal tentera toujours de répondre avec cette version* [^1]
-En cliquant dessus, vous devriez accéder à la page des [bundles](/docs/webapp/bundles/)
+D'abord le `Numéro de bundle` (`1` sur l'image). C'est la version actuelle pour ce canal. Lorsqu'on lui demande de servir une mise à jour, ce canal tentera toujours de répondre avec cette version* [^1]
+Cliquer dessus devrait vous amener à la page des [bundles](/docs/webapp/bundles/)
 
-Deuxièmement, la page `Partagé à` (`2` sur l'image). Je déconseille de l'utiliser. Un nouveau système amélioré est en cours de développement
+Deuxièmement, la page `Partagé à` (`2` sur l'image). Je déconseille de l'utiliser. Un nouveau et meilleur système est en cours de développement
 
-Maintenant les appareils forcés (`3` sur l'image). C'est une liste d'appareils qui recevront toujours les mises à jour de ce canal. C'est utile à des fins de test. Vous pouvez forcer un appareil vers un canal depuis la page des [appareils](/docs/webapp/devices/)
+Maintenant les appareils forcés (`3` sur l'image). C'est une liste d'appareils qui recevront toujours les mises à jour de ce canal. C'est utile à des fins de test. Vous pouvez forcer un appareil à un canal depuis la page des [appareils](/docs/webapp/devices/)
 
-Enfin les paramètres (`4` sur l'image). C'est ici que vous pouvez gérer le comportement des canaux
+Enfin les paramètres (`4` sur l'image). C'est ici que vous pouvez gérer comment les canaux se comportent
 Après avoir cliqué dessus, vous devriez voir quelque chose comme ceci :
 
 <figure><img src="/channel_settingswebp" alt="setting of channel" /><figcaption></figcaption></figure>
@@ -56,26 +56,26 @@ Après avoir cliqué dessus, vous devriez voir quelque chose comme ceci :
 La liste des paramètres est longue, mais je vais faire de mon mieux pour tous les expliquer
 
 ---
-Premièrement, le `Canal par défaut` **C'EST PROBABLEMENT LE PLUS IMPORTANT**\
-Si un canal est marqué par défaut, il sera utilisé comme canal par défaut pour tous les nouveaux appareils\
+Premièrement le `Canal par défaut` **C'EST PROBABLEMENT LE PLUS IMPORTANT**\
+Si un canal est marqué comme par défaut, il sera utilisé comme canal par défaut pour tous les nouveaux appareils\
 En d'autres termes : Si vous avez un nouvel utilisateur, capgo essaiera de lui servir la dernière version de ce canal par défaut
-Un seul canal peut être défini par défaut à la fois. Si vous essayez d'enfreindre cette règle, on vous demandera de confirmer votre action
+Un seul canal peut être défini par défaut à la fois. Si vous essayez d'enfreindre cette règle, il vous sera demandé de confirmer votre action
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-defaultwebp" alt="confirm make change" /><figcaption></figcaption></figure>
 
-Après confirmation, l'ancien canal par défaut ne sera plus marqué par défaut et le nouveau sera marqué par défaut
+Après confirmation, l'ancien canal par défaut ne sera plus marqué comme par défaut et le nouveau le sera
 
 ---
-Deuxièmement, le paramètre `IOS`. C'est relativement simple. Si c'est faux, les appareils IOS ne seront pas autorisés à télécharger les mises à jour de ce canal
+Deuxièmement le paramètre `IOS`. C'est relativement simple. Si c'est faux, alors les appareils IOS ne seront pas autorisés à télécharger des mises à jour depuis ce canal
 
-Troisièmement, le paramètre `Android`. C'est similaire à `IOS`. Si c'est faux, les appareils Android ne seront pas autorisés à télécharger les mises à jour de ce canal
+Troisièmement le paramètre `Android`. C'est similaire à `IOS`. Si c'est faux, alors les appareils Android ne seront pas autorisés à télécharger des mises à jour depuis ce canal
 
-Quatrièmement, le paramètre `Désactiver la rétrogradation automatique sous la version native`. Si c'est vrai, il sera impossible de rétrograder depuis une version native. Cela signifie que si vous avez téléchargé une version `120` sur l'App Store ou le Play Store et essayez de définir la version du canal à `110`, alors la mise à jour (rétrogradation) échouera
+Quatrièmement le paramètre `Désactiver la rétrogradation automatique sous la version native`. Si c'est vrai, alors il sera impossible de rétrograder depuis une version native. Cela signifie que si vous avez téléchargé une version `120` sur l'App Store ou le Play Store et essayez de définir la version du canal à `110`, alors la mise à jour (rétrogradation) échouera
 
-Cinquièmement, `Désactiver la mise à jour automatique`. Ce paramètre est assez complexe, et vous pouvez en savoir plus à ce sujet [ici](/docs/cli/commands/#disable-updates-strategy)
+Cinquièmement `Désactiver la mise à jour automatique`. Ce paramètre est assez complexe, et vous pouvez en savoir plus à ce sujet [ici](/docs/cli/commands/#disable-updates-strategy)
 
-Quant à `Autoriser les builds de développement`, si c'est vrai, les builds de développement seront autorisés à télécharger les mises à jour de ce canal. Sinon, toute demande de mise à jour avec `prod` défini sur false sera rejetée. C'est principalement utile à des fins de test
+Quant à `Autoriser les builds de développement`. Si c'est vrai, alors les builds de développement seront autorisés à télécharger des mises à jour depuis ce canal. Sinon, toute demande de mise à jour avec `prod` défini sur faux sera rejetée. C'est principalement utile à des fins de test
 
-Septièmement, `Autoriser les émulateurs`. Si c'est faux, capgo refusera toute demande de mise à jour provenant d'un émulateur. C'est principalement utile à des fins de test
+Septièmement `Autoriser les émulateurs`. Si c'est faux, alors capgo refusera toute demande de mise à jour provenant d'un émulateur. C'est principalement utile à des fins de test
 
-Huitièmement, `Autoriser l'auto-association des appareils`. Si c'est vrai, la méthode [setChannel](docs/plugin/api/#setchannel) sera disponible. Si c'est défini sur faux et que vous essayez d'appeler la méthode [setChannel](docs/plugin/api/#setchannel) avec ce canal, l'appel échouera
+Huitièmement `Autoriser l'auto-association des appareils`. Si c'est vrai, alors la méthode [setChannel](docs/plugin/api/#setchannel) sera disponible. Si c'est défini sur faux et que vous essayez d'appeler la méthode [setChannel](docs/plugin/api/#setchannel) avec ce canal, alors l'appel échouera

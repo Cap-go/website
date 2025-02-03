@@ -1,12 +1,12 @@
 ---
-title: Endpunkt aktualisieren
+title: エンドポイントの更新
 description: So erstellen Sie einen selbst gehosteten Update-Endpoint
 sidebar:
   order: 1
 locale: de
 ---
 
-Hier ist ein Beispiel für Code in JavaScript, um ein Update an das Plugin zu senden
+Hier ist ein Beispiel für JavaScript-Code zum Senden eines Updates an das Plugin
 
 ```typescript
 interface AppInfos {
@@ -75,8 +75,8 @@ Und wenn kein Update oder Fehler vorliegt, fügen Sie den `message`-Schlüssel u
 
 ```json
 {
-  "message": "Version nicht gefunden",
-  "error": "Das Backend ist abgestürzt",
+  "message": "Version not found",
+  "error": "The backend crashed",
   "version": "102",
   "url": "https://apiurlcom/mybuild_102zip"
 }

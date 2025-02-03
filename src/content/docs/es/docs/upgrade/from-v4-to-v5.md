@@ -1,6 +1,6 @@
 ---
-title: Da V4 a V5
-description: Cómo migrar de V4 a V5
+title: Dari V4 ke V5
+description: Cómo actualizar de V4 a V5
 sidebar:
   order: 2
 locale: es

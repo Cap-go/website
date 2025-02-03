@@ -1,6 +1,6 @@
 ---
 title: Mise à jour manuelle
-description: Cómo usar el plugin de actualización manual en modo auto-alojado
+description: Cómo utilizar el plugin de actualización manual en modo autohospedado
 sidebar:
   order: 4
 locale: es
@@ -31,7 +31,7 @@ Estamos forzando al usuario a actualizar la aplicación con una versión estáti
 :::
 
 :::danger
-No estamos haciendo ninguna verificación de versión, descifrado o validación de suma de comprobación en este ejemplo. Deberías hacer esto por tu cuenta
+No estamos realizando ninguna verificación de versión, descifrado o validación de suma de comprobación en este ejemplo. Deberías hacer esto por tu cuenta
 :::
 
 ```tsx
@@ -42,20 +42,20 @@ let data = {version: ""}
 CapacitorUpdaternotifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
-       // Realizar la descarga durante el tiempo activo de la aplicación para evitar descargas fallidas
+       // Do the download during user active app time to prevent failed download
        data = await CapacitorUpdaterdownload({
        version: '004',
        url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
-       // Realizar el cambio cuando el usuario deje la aplicación
+       // Do the switch when user leave app
        SplashScreenshow()
        try {
          await CapacitorUpdaterset(data)
        } catch (err) {
          consolelog(err)
-         SplashScreenhide() // en caso de que falle el set, de lo contrario la nueva aplicación tendrá que ocultarlo
+         SplashScreenhide() // in case the set fail, otherwise the new app will have to hide it
        }
      }
  })

@@ -6,7 +6,7 @@ sidebar:
 locale: ja
 ---
 
-`bundle` コマンドでアプリバンドルを管理できます
+`bundle`コマンドでアプリバンドルを管理できます
 
 ### upload
 
@@ -16,8 +16,8 @@ locale: ja
 
 オプション:
 
-- `-a, --apikey <apikey>`: アカウントにリンクするためのAPIキー
-- `-p, --path <path>`: アップロードするフォルダのパス（デフォルトは`capacitorconfig`の`webDir`）
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+- `-p, --path <path>`: アップロードするフォルダのパス（デフォルトでは`capacitorconfig`の`webDir`）
 - `-c, --channel <channel>`: バンドルをリンクするチャンネル
 - `-e, --external <url>`: Capgo Cloudにアップロードする代わりに外部URLにリンク
 - `--iv-session-key <key>`: 外部バンドルURLのIVとセッションキーを設定
@@ -32,40 +32,40 @@ locale: ja
 - `--key-data <keyData>`: 公開署名キーデータ（v1システム）
 - `--key-v2 <key>`: 秘密署名キーのカスタムパス（v2システム）
 - `--key-data-v2 <keyDataV2>`: 秘密署名キーデータ（v2システム）
-- `--bundle-url`: バンドルURLを標準出力に表示
-- `--no-key`: 署名キーを無視して未署名の更新を送信
+- `--bundle-url`: バンドルURLを標準出力に出力
+- `--no-key`: 署名キーを無視して未署名のアップデートを送信
 - `--no-code-check`: ソースコードの`notifyAppReady()`とルートフォルダの`indexhtml`のチェックをスキップ
-- `--display-iv-session`: 更新の暗号化に使用されるIVとセッションキーを表示
+- `--display-iv-session`: アップデートの暗号化に使用されるIVとセッションキーを表示
 - `-b, --bundle <bundle>`: アップロードするバンドルのバージョン番号
-- `--min-update-version <minUpdateVersion>`: この更新を適用するために必要な最小アプリバージョン（メタデータで自動更新が無効の場合のみ使用）
-- `--auto-min-update-version`: ネイティブパッケージバージョンに基づいて最小更新バージョンを自動設定
+- `--min-update-version <minUpdateVersion>`: このアップデートを適用するために必要な最小アプリバージョン（メタデータで自動アップデートが無効化されている場合のみ使用）
+- `--auto-min-update-version`: ネイティブパッケージバージョンに基づいて最小アップデートバージョンを自動設定
 - `--ignore-metadata-check`: アップロード時のメタデータ（node_modules）チェックを無視
 - `--ignore-checksum-check`: アップロード時のチェックサムチェックを無視
 - `--timeout <timeout>`: アップロードプロセスのタイムアウト（秒）
 - `--multipart`: S3へのデータアップロードにマルチパートプロトコルを使用（非推奨、代わりに`--tus`を使用）
 - `--tus`: tusプロトコルを使用してバンドルをアップロード
 - `--tus-chunk-size <tusChunkSize>`: tusアップロードのチャンクサイズ
-- `--partial`: Capgo Cloudに変更されたファイルのみをアップロード
-- `--partial-only`: Capgo Cloudに部分ファイルのみをアップロード、圧縮ファイルをスキップ（大きなバンドルに有効）
+- `--partial`: 変更されたファイルのみをCapgo Cloudにアップロード
+- `--partial-only`: 圧縮ファイルをスキップして部分ファイルのみをCapgo Cloudにアップロード（大きなバンドルに有用）
 - `--encrypted-checksum <encryptedChecksum>`: 外部バンドルの暗号化されたチェックサム（署名）
 - `--auto-set-bundle`: `capacitorconfigjson`のバンドルバージョンを自動設定
-- `--dry-upload`: 実際のファイルアップロードなしでアップロードプロセスのドライランを実行（テスト用）
+- `--dry-upload`: 実際のファイルアップロードを行わないアップロードプロセスのドライラン（テスト用）
 - `--package-json <packageJson>`: `packagejson`ファイルへのパスのカンマ区切りリスト（モノレポ用）
 - `--node-modules <nodeModules>`: `node_modules`ディレクトリへのパスのカンマ区切りリスト（モノレポ用）
-- `--encrypt-partial`: 部分更新ファイルを暗号化
-- `--delete-linked-bundle-on-upload`: アップロード前にターゲットチャンネルにリンクされている現在のバンドルを削除
+- `--encrypt-partial`: 部分アップデートファイルを暗号化
+- `--delete-linked-bundle-on-upload`: アップロード前にターゲットチャンネルの現在リンクされているバンドルを削除
 
 ### compatibility
 
 `npx @capgo/cli bundle compatibility [appId]`
 
-特定のチャンネルとのバンドルの互換性をチェック
+特定のチャンネルとバンドルの互換性をチェック
 
 オプション:
 
-- `-a, --apikey <apikey>`: アカウントにリンクするためのAPIキー
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
 - `-c, --channel <channel>`: 互換性をチェックするチャンネル
-- `--text`: 結果を絵文字の代わりにテキストで出力
+- `--text`: 結果を絵文字ではなくテキストとして出力
 - `--package-json <packageJson>`: `packagejson`ファイルへのパスのカンマ区切りリスト（モノレポ用）
 - `--node-modules <nodeModules>`: `node_modules`ディレクトリへのパスのカンマ区切りリスト（モノレポ用）
 
@@ -77,17 +77,17 @@ locale: ja
 
 オプション:
 
-- `-a, --apikey <apikey>`: アカウントにリンクするためのAPIキー
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
 
 ### list
 
 `npx @capgo/cli bundle list [appId]`
 
-アプリの全バンドルを一覧表示
+アプリの全バンドルをリスト表示
 
 オプション:
 
-- `-a, --apikey <apikey>`: アカウントにリンクするためのAPIキー
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
 
 ### cleanup
 
@@ -98,7 +98,7 @@ locale: ja
 オプション:
 
 - `-b, --bundle <bundle>`: クリーンアップするメジャーバージョン番号
-- `-a, --apikey <apikey>`: アカウントにリンクするためのAPIキー
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
 - `-k, --keep <keep>`: 保持するバンドル数（デフォルト: 4）
 - `-f, --force`: 確認なしで強制削除
 
@@ -134,7 +134,7 @@ ZIPバンドルを暗号化
 
 - `--key <key>`: 秘密署名キーのカスタムパス
 - `--key-data <keyData>`: 秘密署名キーデータ
-- `-j, --json`: 結果をJSONで出力
+- `-j, --json`: 結果をJSONとして出力
 
 ### decryptV2
 
@@ -146,7 +146,7 @@ ZIPバンドルを暗号化
 
 - `--key <key>`: 秘密署名キーのカスタムパス
 - `--key-data <keyData>`: 秘密署名キーデータ
-- `--checksum <checksum>`: 整合性を確認するためのバンドルのチェックサム
+- `--checksum <checksum>`: 整合性を確認するバンドルのチェックサム
 
 ### zip
 
@@ -156,10 +156,10 @@ ZIPバンドルを暗号化
 
 オプション:
 
-- `-p, --path <path>`: 圧縮するフォルダのパス（デフォルトは`capacitorconfig`の`webDir`）
+- `-p, --path <path>`: ZIPするフォルダのパス（デフォルトでは`capacitorconfig`の`webDir`）
 - `-b, --bundle <bundle>`: ファイル名に使用するバンドルバージョン番号
 - `-n, --name <name>`: ZIPのカスタムファイル名
-- `-j, --json`: 結果をJSONで出力
+- `-j, --json`: 結果をJSONとして出力
 - `--no-code-check`: ソースコードの`notifyAppReady()`とルートフォルダの`indexhtml`のチェックをスキップ
 - `--key-v2`: 新しい暗号化方式（v2）を使用
 - `--package-json <packageJson>`: `packagejson`ファイルへのパスのカンマ区切りリスト（モノレポ用）

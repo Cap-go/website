@@ -1,16 +1,16 @@
 ---
-title: 하이브리드 업데이트
+title: Aggiornamento ibrido
 description: Metodo di aggiornamento per gli aggiornamenti automatici
 sidebar:
   order: 3
 locale: it
 ---
 
-Durante il push degli aggiornamenti agli utenti, hai diversi modi per gestire il ciclo di aggiornamento come ritieni opportuno prima di applicarli
+Quando si inviano aggiornamenti agli utenti, ci sono diversi modi per gestire il ciclo di aggiornamento come meglio si crede prima di applicarli
 
-- Aggiornamento silenzioso
-- Ascolta l'evento ```updateAvailable```
-- Mostra una finestra modale o ritarda gli aggiornamenti
+1. Aggiornamento silenzioso 
+2. Ascolto dell'evento ```updateAvailable```
+3. Mostrare una finestra modale o ritardare gli aggiornamenti
 
 ## Aggiornamento silenzioso
 
@@ -49,7 +49,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Forza aggiornamento
 
-Aggiungi un listener all'evento `updateAvailable` e poi mostra un avviso per informare l'utente che l'app si aggiornerà:
+Aggiungi un listener all'evento `updateAvailable` e poi mostra un avviso per far sapere all'utente che l'app si aggiornerà:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -73,7 +73,7 @@ CapacitorUpdaternotifyAppReady()
 
 ## Aggiornamento modale
 
-Puoi anche lasciare decidere all'utente mostrando una finestra di dialogo per chiedere se desidera aggiornare:
+Puoi anche lasciare decidere all'utente mostrando una finestra di dialogo per chiedere se vogliono aggiornare:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
