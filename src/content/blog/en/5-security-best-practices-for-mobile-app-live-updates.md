@@ -16,8 +16,6 @@ locale: en
 next_blog: ''
 ---
 
-# 5 Security Best Practices for Mobile App Live Updates
-
 Keeping your mobile app secure during live updates is critical to protecting user data and maintaining trust. Here's a quick summary of the top practices to safeguard your over-the-air (OTA) updates:
 
 1.  **Secure Delivery**: Use encryption (e.g., TLS), digital signatures, and [multi-factor authentication](https://capgo.app/it/docs/webapp/mfa/) to protect updates during transmission.

@@ -5,7 +5,8 @@ import { type Locales } from '@/services/locale'
 import * as m from "../../paraglide/messages.js"
 import type { MarkdownHeading } from 'astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { onMounted, ref, type Ref } from 'vue'
+import { onMounted, ref, computed, useSlots, h, render, type Ref, type VNode } from 'vue'
+import GetStarted from '@/components/GetStarted.vue'
 
 const props = defineProps<{
   tag: string
@@ -31,6 +32,46 @@ const activeSlug = ref<boolean | string>(false)
 const article: Ref<HTMLElement | null> = ref(null)
 const fixedToc: Ref<HTMLElement | null> = ref(null)
 const staticToc: Ref<HTMLElement | null> = ref(null)
+
+const slots = useSlots() as { default?: () => VNode[] }
+const articleContent = computed(() => {
+  let slotNodes = slots.default?.() || []
+  console.info('[DEBUG] Initial slotNodes length:', slotNodes.length)
+  return slotNodes
+})
+
+onMounted(() => {
+  const h3s = article.value?.querySelectorAll('h3')
+  if (h3s && h3s.length >= 3) {
+    const thirdH3 = h3s[2]
+    if (thirdH3) {
+      const wrapper = document.createElement('div')
+      thirdH3.parentNode?.insertBefore(wrapper, thirdH3)
+      render(h(GetStarted), wrapper)
+    }
+  } else {
+    const h2s = article.value?.querySelectorAll('h2')
+    if (h2s && h2s.length >= 2) {
+      const secondH2 = h2s[1]
+      if (secondH2) {
+        const wrapper = document.createElement('div')
+        secondH2.parentNode?.insertBefore(wrapper, secondH2)
+        render(h(GetStarted), wrapper)
+      }
+    } else {
+      const lists = article.value?.querySelectorAll('ul, ol')
+      if (lists && lists.length > 0) {
+        const targetIndex = Math.floor(lists.length * 0.75)
+        const list = lists[targetIndex]
+        if (list) {
+          const wrapper = document.createElement('div')
+          list.parentNode?.insertBefore(wrapper, list)
+          render(h(GetStarted), wrapper)
+        }
+      }
+    }
+  }
+})
 
 const observeArticleTitles = () => {
   const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
@@ -128,7 +169,9 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </ul>
       </div>
       <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left blog lg:max-w-1/2 md:rounded-lg" >
-        <slot />
+        <template v-for="(node, index) in articleContent" :key="index">
+          <component :is="node" />
+        </template>
       </article>
       <div class="flex flex-row items-center px-4 mx-auto lg:max-w-1/2">
         <div class="min-w-max min-h-[1px]">Authored By</div>
