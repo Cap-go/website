@@ -1254,5 +1254,8 @@
   "application_security": "Application Security",
   "secure_coding": "Any changes to Capgo's code must first be reviewed and approved by human, SonardCloud and Snyk, adhering to secure coding best practices.",
   "site_reliability": "Capgo achieves high availability and reliability by building on the Cloudflare Workers and Supabase platforms.",
-  "application_penetration_testing": "Capgo undergoes yearly penetration testing by reputable third-party security researchers to identify and resolve any vulnerabilities."
+  "application_penetration_testing": "Capgo undergoes yearly penetration testing by reputable third-party security researchers to identify and resolve any vulnerabilities.",
+  "instant_updates_for_capacitor_apps": "Instant Updates for CapacitorJS Apps",
+  "instant_updates_for_capacitor_apps_description": "Push updates, fixes, and features instantly to your CapacitorJS apps without app store delays. Experience seamless integration, end-to-end encryption, and real-time updates with Capgo.",
+  "get_started_now": "Get Started Now"
 }
