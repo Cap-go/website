@@ -75,6 +75,23 @@ Capgo offers several advantages over AppFlow:
 - More affordable pricing structure
 - Greater flexibility in CI/CD integration
 
+## Our Commitment to the Ecosystem
+
+The Ionic and Capacitor ecosystem remains strong and vibrant. At Capgo, we deeply value this ecosystem and are fully committed to its future. As a self-funded and sustainable company, we're not just providing alternatives – we're actively investing in the ecosystem's growth and stability.
+
+### Why Trust Capgo?
+We love Ionic and Capacitor, and we're here for the long haul. If any part of the ecosystem needs support, we stand ready to fork and maintain it – that's the power of open source. Our commitment isn't just words; it's backed by action:
+
+### Proven Track Record
+- **Massive Scale**: Serving over 30 million live updates daily in our cloud infrastructure, with even more in self-hosted environments
+- **Active Development**: Created and maintained over 20 plugins in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
+- **Growing Community**: Successfully helping numerous teams transition to Capgo this year
+- **Complete Solutions**: Providing comprehensive CI/CD solutions, from tutorials to full service integration
+- **Sustainable Model**: Self-funded and profitable, ensuring long-term stability for our users
+
+We're not just an alternative – we're actively building the future of mobile app development, ensuring that teams relying on these technologies have a reliable, sustainable path forward.
+
+
 ## Ready to Migrate?
 
 Don't let AppFlow's shutdown disrupt your development workflow. [Start your journey with Capgo today](/register/) and experience a more efficient, cost-effective solution for your mobile app development needs.
