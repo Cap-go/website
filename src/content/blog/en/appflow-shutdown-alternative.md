@@ -58,7 +58,7 @@ Instead of being locked into a proprietary CI/CD system, Capgo allows you to:
 
 ## Making the Switch
 
-Transitioning from AppFlow to Capgo is straightforward:
+Transitioning from AppFlow to Capgo is straightforward. Follow our [detailed migration guide](/docs/upgrade/from-appflow-to-capgo) to ensure a smooth transition:
 
 1. [Register for a Capgo account](/register/)
 2. Follow our migration guides

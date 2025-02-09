@@ -1,0 +1,129 @@
+---
+title: Migrasi dari AppFlow ke Capgo
+description: Panduan lengkap untuk migrasi aplikasi Anda dari Ionic AppFlow ke Capgo
+sidebar:
+  order: 7
+---
+
+## Referensi Konfigurasi AppFlow
+
+Sebelum migrasi, catat konfigurasi AppFlow Anda saat ini di `capacitor.config.ts`:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    LiveUpdates: {
+      appId: 'your-app-id',
+      channel: 'Production',
+      autoUpdateMethod: 'background', // atau 'always latest', 'force update'
+      maxVersions: 2
+    }
+  }
+};
+```
+
+Konfigurasi ini akan membantu Anda memetakan fitur AppFlow ke fitur yang setara di Capgo.
+
+## Mengapa Migrasi ke Capgo?
+
+Dengan pengumuman penutupan Ionic AppFlow, migrasi ke Capgo menyediakan transisi yang lancar untuk alur kerja pengembangan aplikasi seluler Anda. Capgo menawarkan fitur yang ditingkatkan, kinerja yang lebih baik, dan penghematan biaya yang signifikan sambil mempertahankan semua fungsi penting yang Anda butuhkan.
+
+### Manfaat Utama
+- Pengiriman pembaruan lebih cepat (< 1 menit vs 10 menit)
+- Harga lebih terjangkau ($14/bulan vs $499/bulan)
+- Enkripsi end-to-end termasuk dalam semua paket
+- Kontrol yang lebih baik atas saluran pembaruan
+- Opsi integrasi CI/CD yang lengkap
+
+## Langkah-langkah Migrasi
+
+### 1. Migrasi Pembaruan Langsung
+
+#### Hapus Dependensi Sebelumnya
+```bash
+npm uninstall @ionic/appflow
+# Hapus konfigurasi khusus AppFlow dari capacitor.config.json
+```
+
+#### Pasang Capgo
+```bash
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+#### Perbarui Konfigurasi
+Tambahkan konfigurasi Capgo ke `capacitor.config.json` Anda:
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+### 2. Migrasi CI/CD
+
+Capgo menawarkan opsi CI/CD yang fleksibel:
+
+#### Opsi 1: Gunakan CI/CD yang Ada
+Ikuti tutorial terperinci kami untuk menyiapkan CI/CD dengan platform populer:
+- [Pengaturan Build iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+- [Pengaturan Build Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+- [Integrasi GitHub Actions](https://capgo.app/blog/github-action-capacitor/)
+
+#### Opsi 2: CI/CD Terkelola
+Biarkan kami menangani pengaturan CI/CD Anda dengan [layanan terkelola](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you) kami.
+
+### 3. Pengaturan Saluran
+
+1. Buat saluran di dashboard Capgo:
+```bash
+npx @capgo/cli channel create production
+npx @capgo/cli channel create staging
+```
+
+2. Konfigurasi pengaturan saluran:
+```bash
+# Atur saluran produksi
+npx @capgo/cli channel update production --no-downgrade --no-upgrade
+
+# Atur saluran staging
+npx @capgo/cli channel update staging
+```
+
+### 4. Pengujian Migrasi
+
+1. **Uji Pembaruan Langsung**
+```bash
+# Buat dan unggah bundle pengujian
+npx @capgo/cli bundle create --channel staging
+```
+
+2. **Verifikasi Penerimaan Pembaruan**
+- Pasang aplikasi di perangkat pengujian
+- Periksa bahwa pembaruan diterima dengan benar
+- Verifikasi proses pemasangan pembaruan
+- Uji fungsi pemulihan
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+#### Pembaruan Tidak Diterima
+- Periksa konfigurasi saluran
+- Periksa log perangkat
+- Pastikan konektivitas jaringan memadai
+- Validasi format versi bundle
+
+## Langkah Selanjutnya
+
+1. [Buat akun Capgo](/register/)
+2. Ikuti [panduan mulai cepat](/docs/getting-started/quickstart/) kami
+3. Siapkan [integrasi CI/CD](/docs/getting-started/cicd-integration/)
+4. Konfigurasi [pembaruan langsung](/docs/live-updates/)
+
+Untuk tim perusahaan yang membutuhkan dukungan khusus selama migrasi, [jadwalkan panggilan dengan tim kami](https://cal.com/martindonadieu/capgo-enterprise-inquiry).
