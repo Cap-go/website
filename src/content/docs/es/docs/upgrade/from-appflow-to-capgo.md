@@ -3,6 +3,7 @@ title: Migrar de AppFlow a Capgo
 description: Guía completa para migrar tu aplicación de Ionic AppFlow a Capgo
 sidebar:
   order: 7
+---
 
 ## Referencia de Configuración de AppFlow
 
@@ -24,7 +25,6 @@ const config: CapacitorConfig = {
 ```
 
 Esta configuración te ayudará a mapear las características de AppFlow a sus equivalentes en Capgo.
----
 
 ## ¿Por qué migrar a Capgo?
 
