@@ -1,0 +1,127 @@
+---
+title: Migrar de AppFlow a Capgo
+description: Guía completa para migrar tu aplicación de Ionic AppFlow a Capgo
+sidebar:
+  order: 7
+---
+
+## ¿Por qué migrar a Capgo?
+
+Con el anuncio del cierre de Ionic AppFlow, migrar a Capgo ofrece una transición perfecta para tu flujo de trabajo de desarrollo de aplicaciones móviles. Capgo ofrece características mejoradas, mejor rendimiento y ahorros significativos en costos mientras mantiene toda la funcionalidad crítica que necesitas.
+
+### Beneficios Principales
+- Entrega de actualizaciones más rápida (< 1 minuto vs 10 minutos)
+- Precios más asequibles ($14/mes vs $499/mes)
+- Cifrado de extremo a extremo incluido en todos los planes
+- Mayor control sobre los canales de actualización
+- Opciones completas de integración CI/CD
+
+## Pasos de Migración
+
+### 1. Migración de Actualizaciones en Vivo
+
+#### Eliminar Dependencias Anteriores
+```bash
+npm uninstall @ionic/appflow
+# Eliminar configuraciones específicas de AppFlow de capacitor.config.json
+```
+
+#### Instalar Capgo
+```bash
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+#### Actualizar Configuración
+Agrega la configuración de Capgo a tu `capacitor.config.json`:
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+### 2. Migración CI/CD
+
+Capgo ofrece opciones flexibles de CI/CD:
+
+#### Opción 1: Usa tu CI/CD Existente
+Sigue nuestros tutoriales detallados para configurar CI/CD con plataformas populares:
+- [Configuración de Build iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+- [Configuración de Build Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+- [Integración con GitHub Actions](https://capgo.app/blog/github-action-capacitor/)
+
+#### Opción 2: CI/CD Gestionado
+Deja que nosotros manejemos tu configuración CI/CD con nuestro [servicio gestionado](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you).
+
+### 3. Configuración de Canales
+
+1. Crear canales en el dashboard de Capgo:
+```bash
+npx @capgo/cli channel create production
+npx @capgo/cli channel create staging
+```
+
+2. Configurar ajustes de canales:
+```bash
+# Configurar canal de producción
+npx @capgo/cli channel update production --no-downgrade --no-upgrade
+
+# Configurar canal de staging
+npx @capgo/cli channel update staging
+```
+
+### 4. Prueba de la Migración
+
+1. **Probar Actualizaciones en Vivo**
+```bash
+# Crear y subir un bundle de prueba
+npx @capgo/cli bundle create --channel staging
+```
+
+2. **Verificar Recepción de Actualizaciones**
+- Instalar la aplicación en un dispositivo de prueba
+- Verificar que las actualizaciones se reciben correctamente
+- Verificar el proceso de instalación de actualizaciones
+- Probar la funcionalidad de recuperación
+
+3. **Validar Pipeline CI/CD**
+- Realizar un commit de prueba
+- Verificar proceso de build
+- Comprobar despliegue automático
+- Confirmar asignación de canales
+
+## Solución de Problemas
+
+### Problemas Comunes
+
+#### Actualizaciones No Recibidas
+- Verificar configuración de canales
+- Revisar logs del dispositivo
+- Asegurar conectividad de red adecuada
+- Validar formato de versión del bundle
+
+#### Problemas de Pipeline de Build
+- Verificar configuración de GitHub Actions
+- Comprobar certificados de firma
+- Validar variables de entorno
+- Revisar logs de build
+
+#### Conflictos de Versión
+- Verificar numeración de versiones
+- Comprobar restricciones de canales
+- Revisar condiciones de actualización
+
+## Siguientes Pasos
+
+1. [Crear una cuenta Capgo](/register/)
+2. Seguir nuestra [guía de inicio rápido](/docs/getting-started/quickstart/)
+3. Configurar [integración CI/CD](/docs/getting-started/cicd-integration/)
+4. Configurar [actualizaciones en vivo](/docs/live-updates/)
+
+Para equipos empresariales que requieren soporte dedicado durante la migración, [programa una llamada con nuestro equipo](https://cal.com/martindonadieu/capgo-enterprise-inquiry).
+
+Recuerda probar exhaustivamente en un entorno de staging antes de desplegar a producción. Nuestro equipo de soporte está disponible para ayudarte si encuentras algún problema durante la migración.
