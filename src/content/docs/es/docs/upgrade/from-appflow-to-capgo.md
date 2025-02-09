@@ -3,6 +3,27 @@ title: Migrar de AppFlow a Capgo
 description: Guía completa para migrar tu aplicación de Ionic AppFlow a Capgo
 sidebar:
   order: 7
+
+## Referencia de Configuración de AppFlow
+
+Antes de migrar, anota tu configuración actual de AppFlow en `capacitor.config.ts`:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    LiveUpdates: {
+      appId: 'your-app-id',
+      channel: 'Production',
+      autoUpdateMethod: 'background', // o 'always latest', 'force update'
+      maxVersions: 2
+    }
+  }
+};
+```
+
+Esta configuración te ayudará a mapear las características de AppFlow a sus equivalentes en Capgo.
 ---
 
 ## ¿Por qué migrar a Capgo?

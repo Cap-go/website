@@ -5,6 +5,117 @@ sidebar:
   order: 7
 ---
 
+## AppFlow設定リファレンス
+
+移行前に、現在の`capacitor.config.ts`のAppFlow設定を確認してください：
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    LiveUpdates: {
+      appId: 'your-app-id',
+      channel: 'Production',
+      autoUpdateMethod: 'background', // または 'always latest'、'force update'
+      maxVersions: 2
+    }
+  }
+};
+```
+
+この設定は、AppFlowの機能をCapgoの同等の機能にマッピングする際に役立ちます。
+
+## アップデート戦略の移行
+
+### バックグラウンドアップデート（デフォルト）
+AppFlowのデフォルトのバックグラウンドアップデートを使用している場合：
+
+```typescript
+// Capgoでの同等の設定（capacitor.config.ts）
+{
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false,
+      autoDeletePrevious: true
+    }
+  }
+}
+```
+
+### 強制アップデート
+AppFlowの強制アップデート戦略を使用している場合：
+
+```typescript
+// Capgoでの同等の設定（capacitor.config.ts）
+{
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: true,
+      keepUrlPathAfterReload: true
+    }
+  }
+}
+
+// 必要なJavaScriptコード
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+### 常に最新版
+AppFlowの「always latest」戦略を使用している場合、Capgoでは以下のように実装します：
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { App } from '@capacitor/app';
+
+async function setupAlwaysLatest() {
+  App.addListener('resume', async () => {
+    const result = await CapacitorUpdater.download({
+      url: 'your-update-url'
+    });
+    if (result) {
+      await CapacitorUpdater.set({ id: result.id });
+    }
+  });
+}
+```
+
+## APIメソッドの移行
+
+| AppFlowメソッド | Capgo同等メソッド | 備考 |
+|----------------|------------------|------|
+| `sync()` | `download()` | 新しいアップデートをダウンロード |
+| `reload()` | `set()` | アップデートを即時適用 |
+| `setConfig()` | `setChannel()` | チャネル設定を更新 |
+
+### 移行例
+
+```typescript
+// AppFlowコード
+import * as LiveUpdates from '@capacitor/live-updates';
+const result = await LiveUpdates.sync();
+if (result.activeApplicationPathChanged) {
+  await LiveUpdates.reload();
+}
+
+// Capgo同等コード
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+const bundle = await CapacitorUpdater.download({
+  url: 'your-update-url'
+});
+if (bundle) {
+  await CapacitorUpdater.set({ id: bundle.id });
+}
+```
 ## Capgoへ移行する理由
 
 Ionic AppFlowのサービス終了に伴い、Capgoへの移行によってモバイルアプリ開発ワークフローをスムーズに移行できます。Capgoは、重要な機能をすべて維持しながら、機能の向上、パフォーマンスの改善、大幅なコスト削減を提供します。

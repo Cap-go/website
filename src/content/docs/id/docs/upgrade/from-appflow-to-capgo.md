@@ -5,6 +5,27 @@ sidebar:
   order: 7
 ---
 
+## Referensi Konfigurasi AppFlow
+
+Sebelum migrasi, catat konfigurasi AppFlow Anda saat ini di `capacitor.config.ts`:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    LiveUpdates: {
+      appId: 'your-app-id',
+      channel: 'Production',
+      autoUpdateMethod: 'background', // atau 'always latest', 'force update'
+      maxVersions: 2
+    }
+  }
+};
+```
+
+Konfigurasi ini akan membantu Anda memetakan fitur AppFlow ke fitur yang setara di Capgo.
+
 ## Mengapa Migrasi ke Capgo?
 
 Dengan pengumuman penutupan Ionic AppFlow, migrasi ke Capgo menyediakan transisi yang lancar untuk alur kerja pengembangan aplikasi seluler Anda. Capgo menawarkan fitur yang ditingkatkan, kinerja yang lebih baik, dan penghematan biaya yang signifikan sambil mempertahankan semua fungsi penting yang Anda butuhkan.
