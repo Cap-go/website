@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { type Locales } from '@/services/locale'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from "../paraglide/messages.js"
 import { useRuntimeConfig } from '@/config/app'
-import { getRelativeLocaleUrl } from '@/services/locale'
 import { ref } from 'vue'
 import {
   UserGroupIcon,
