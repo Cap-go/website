@@ -18,10 +18,10 @@ Integrating Capgo into your CI/CD pipeline allows you to fully automate the proc
 
 The Capgo CLI is the key to integrating Capgo into your CI/CD workflow. It provides commands for pushing new bundle versions, managing channels, and more.
 
-The most important command for CI/CD integration is `upload`:
+The most important command for CI/CD integration is `bundle upload`:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=Production --apikey=YOUR_API_KEY
 ```
 
 This command uploads the current web build to the specified channel. You'll typically run this as the last step in your CI/CD pipeline, after your web build has completed successfully.
@@ -33,9 +33,9 @@ While the exact steps will vary depending on your CI/CD tool of choice, the gene
 <Steps>
 1. **Generate an API key**: Log in to the Capgo dashboard and create a new API key. This key will be used to authenticate the CLI in your CI/CD environment. Keep it secret and never commit it to your repository!
 
-3. **Configure the `upload` command**: Add a step to your CI/CD configuration that runs the `upload` command with the appropriate arguments: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Replace `Production` with the channel you want to deploy to, and `${{ secrets.CAPGO_API_KEY }}` with the environment variable holding your API key.
+3. **Configure the `bundle upload` command**: Add a step to your CI/CD configuration that runs the `bundle upload` command with the appropriate arguments: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Replace `Production` with the channel you want to deploy to, and `${{ secrets.CAPGO_API_KEY }}` with the environment variable holding your API key.
 
-4. **Add the `upload` step after your web build**: Ensure that the `upload` step comes after your web build has completed successfully. This ensures you're always deploying your latest code.\n  Here's an example configuration for GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+4. **Add the `upload` step after your web build**: Ensure that the `upload` step comes after your web build has completed successfully. This ensures you're always deploying your latest code.\n  Here's an example configuration for GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 
 </Steps>
 
@@ -61,7 +61,7 @@ Here's a sample `.releaserc` configuration file for semantic-release:
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
       }
     ],
     [
@@ -80,7 +80,7 @@ This configuration does the following:
 1. Analyzes commit messages to determine the next version number, following the Conventional Commits spec.
 2. Generates release notes based on the commits since the last release.
 3. Updates the `CHANGELOG.md` file with the new release notes.
-4. Runs the Capgo CLI `upload` command, passing the new version number and using the `--partial` flag for differential updates.
+4. Runs the Capgo CLI `bundle upload` command, passing the new version number and using the `--partial` flag for differential updates.
 5. Commits the updated `CHANGELOG.md`, `package.json`, and any other changed files back to the repository.
 
 To use semantic-release with Capgo, simply add a step to your CI/CD configuration that runs `npx semantic-release`. Ensure this step comes after your web build and before the Capgo `upload` step.
