@@ -72,7 +72,7 @@ export const pwa = {
   writePlugin: true,
   registerWebManifestInRouteRules: true,
   devOptions: {
-    enabled: import.meta.env.VITE_PLUGIN_PWA === 'true',
+    enabled: true,
     navigateFallback: scope,
   },
 }
