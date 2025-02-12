@@ -130,5 +130,16 @@
   "billions_of_updates_served": "Serving billions of updates to apps worldwide",
   "trusted_by_developers": "Trusted by developers around the globe",
   "expert_assistance_throughout": "Expert assistance throughout your migration journey",
-
+  "security_audit": "Security Audit",
+  "assess_security_measures": "Assess and enhance your app's security measures",
+  "plugin_development": "Plugin Development",
+  "custom_plugin_development": "Custom plugin development for your specific needs",
+  "ota_updates": "OTA Updates",
+  "send_updates_without_app_store_review": "Send updates to your users without going through app store review",
+  "plugin_ecosystem": "Plugin Ecosystem",
+  "largest_capacitor_plugin_provider": "The largest provider of Capacitor plugins in the market",
+  "premium_support": "Premium Support",
+  "expert_capacitor_support": "Get expert help from the Capacitor specialists",
+  "migration_services": "Migration Services",
+  "seamless_migration_from_other_platforms": "Easily migrate from other platforms to Capgo"
 }
