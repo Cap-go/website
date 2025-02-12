@@ -17,7 +17,7 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   VideoCameraIcon,
-} from '@heroicons/vue/20/solid'
+} from '@heroicons/vue/24/solid'
 
 export interface Action {
   icon?: any

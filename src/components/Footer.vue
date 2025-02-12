@@ -61,6 +61,7 @@ const navigation: Record<string, NavigationItem[]> = {
       href: getRelativeLocaleUrl(props.locale, 'docs'),
     },
     { name: m.plugins(), href: getRelativeLocaleUrl(props.locale, 'plugins') },
+    { name: m.services(), href: getRelativeLocaleUrl(props.locale, 'services') },
     {
       name: m.awesome_capacitor(),
       href: 'https://github.com/riderx/awesome-capacitor/',
@@ -77,6 +78,14 @@ const navigation: Record<string, NavigationItem[]> = {
     {
       name: m.pricing(),
       href: getRelativeLocaleUrl(props.locale, 'pricing'),
+    },
+    {
+      name: m.premium_support(),
+      href: getRelativeLocaleUrl(props.locale, 'premium-support'),
+    },
+    {
+      name: m.appflow_transfer(),
+      href: getRelativeLocaleUrl(props.locale, 'appflow-transfer'),
     },
     { name: m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
