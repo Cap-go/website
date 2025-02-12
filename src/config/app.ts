@@ -13,20 +13,20 @@ const blogTitle = `${brand} | Capacitor Blog`
 const blogDescription = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
 
 function getUrl(branch = ''): string {
-  if (branch === 'local') return `http://${getRightKey(branch, 'base_domain')}`
-  else if (branch === 'development') return `https://${getRightKey(branch, 'base_domain')}`
-  return `https://${getRightKey('prod', 'base_domain')}`
+  if (branch === 'local') return `http://${getRightKey(branch)}`
+  else if (branch === 'development') return `https://${getRightKey(branch)}`
+  return `https://${getRightKey('prod')}`
 }
 
 function getApiUrl(branch = ''): string {
-  if (branch === 'local') return `http://api.${getRightKey(branch, 'base_domain')}`
-  else if (branch === 'development') return `https:///api.${getRightKey(branch, 'base_domain')}`
-  return `https:///api.${getRightKey('prod', 'base_domain')}`
+  if (branch === 'local') return `http://api.${getRightKey(branch)}`
+  else if (branch === 'development') return `https:///api.${getRightKey(branch)}`
+  return `https:///api.${getRightKey('prod')}`
 }
 
 export function baseDomain(branch = '') {
-  if (branch) return getRightKey(branch, 'base_domain')
-  return getRightKey('prod', 'base_domain')
+  if (branch) return getRightKey(branch)
+  return getRightKey('prod')
 }
 
 export function formatTime(s: string) {
@@ -35,16 +35,7 @@ export function formatTime(s: string) {
   return d.format('MMMM DD, YYYY')
 }
 
-export interface RuntimeConfig {
-  public: {
-    brand: string
-    blog_title: string
-    blog_description: string
-    blog_keywords: string
-    baseUrl: string
-    baseApiUrl: string
-  }
-}
+// RuntimeConfig type is imported from @/types
 
 export function useRuntimeConfig(): RuntimeConfig {
   return {
