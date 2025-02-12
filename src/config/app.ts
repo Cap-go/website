@@ -1,11 +1,11 @@
 import { appDescription, appName } from '@/constants/index'
-import dayjs from 'dayjs'
-import keys from '../../configs.json'
+import * as dayjs from 'dayjs'
+import type { RuntimeConfig } from '@/types'
 
-function getRightKey(branch: string, keyname: 'base_domain'): string {
-  if (branch === 'development') return keys[keyname].development
-  else if (branch === 'local') return keys[keyname].local
-  return keys[keyname].prod
+function getRightKey(branch: string): string {
+  if (branch === 'development') return 'dev.capgo.app'
+  else if (branch === 'local') return 'localhost:3000'
+  return 'capgo.app'
 }
 
 const brand = 'Capgo'
