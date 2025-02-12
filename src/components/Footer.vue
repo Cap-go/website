@@ -81,11 +81,11 @@ const navigation: Record<string, NavigationItem[]> = {
     },
     {
       name: m.premium_support(),
-      href: getRelativeLocaleUrl(props.locale, 'premium-support'),
+      href: getRelativeLocaleUrl(props.locale, 'premium-support/'),
     },
     {
       name: m.appflow_transfer(),
-      href: getRelativeLocaleUrl(props.locale, 'appflow-transfer'),
+      href: getRelativeLocaleUrl(props.locale, 'appflow-transfer/'),
     },
     { name: m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
