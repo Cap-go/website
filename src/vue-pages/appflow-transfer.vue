@@ -127,29 +127,27 @@ const migrationSteps = [
     icon: CheckCircleIcon,
   },
 ]
-  },
-]
 
 const benefits = [
   {
     name: m.cost_effective(),
     description: m.significant_cost_savings(),
-    icon: 'BanknotesIcon',
+    icon: BanknotesIcon,
   },
   {
     name: m.seamless_migration(),
     description: m.minimal_disruption(),
-    icon: 'ArrowsRightLeftIcon',
+    icon: ArrowsRightLeftIcon,
   },
   {
     name: m.better_performance(),
     description: m.improved_update_delivery(),
-    icon: 'BoltIcon',
+    icon: BoltIcon,
   },
   {
-    name: m.expert_support(),
-    description: m.dedicated_migration_assistance(),
-    icon: 'UserGroupIcon',
+    name: m.dedicated_migration_assistance(),
+    description: m.expert_assistance_throughout(),
+    icon: UserGroupIcon,
   },
 ]
 </script>
