@@ -2,6 +2,7 @@
 import { type Locales } from '@/services/locale'
 import * as m from "../paraglide/messages.js"
 import { useRuntimeConfig } from '@/config/app'
+import { getRelativeLocaleUrl } from '@/services/locale'
 import { ref, computed } from 'vue'
 import Testimonials from '@/components/Testimonials.vue'
 import {
