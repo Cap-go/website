@@ -135,12 +135,12 @@ return { apikey: ApiKey }
 
 ### DELETE
 
-`https://api.capgo.app/apikey/:id`
+`https://api.capgo.app/apikey/:key`
 
 Delete an existing API key.
 
 Parameters:
-- `id`: The API key to delete
+- `key`: The API key to delete (the UUID-like string)
 
 On success, returns:
 ```typescript
