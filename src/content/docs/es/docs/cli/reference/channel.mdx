@@ -1,0 +1,82 @@
+---
+title: canal
+sidebar_label: channel
+sidebar:
+  order: 6
+locale: es
+---
+
+El comando `channel` te permite gestionar tus canales de lanzamiento
+
+### add
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+Crea un nuevo canal para una aplicación
+
+Opciones:
+
+- `-d, --default`: Establece el nuevo canal como canal predeterminado
+- `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
+
+### delete
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+Elimina un canal de una aplicación
+
+Opciones:
+
+- `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
+- `--delete-bundle`: Elimina el paquete asociado al canal
+
+### list
+
+`npx @capgo/cli channel list [appId]`
+
+Lista todos los canales de una aplicación
+
+Opciones:
+
+- `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
+
+### currentBundle
+
+`npx @capgo/cli channel currentBundle [channel] [appId]`
+
+Obtiene el paquete actual para un canal específico
+
+Opciones:
+
+- `-c, --channel <channel>`: Canal del cual obtener el paquete actual
+- `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
+- `--quiet`: Solo muestra la versión del paquete
+
+### set
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+Establece las propiedades de un canal
+
+Opciones:
+
+- `-a, --apikey <apikey>`: Clave API para vincular a tu cuenta
+- `-b, --bundle <bundle>`: Número de versión del paquete a establecer para el canal
+- `-s, --state <state>`: Establece el estado del canal (`default` o `normal`)
+- `--latest`: Usa la última versión de `packagejson` como versión del paquete
+- `--downgrade`: Permite degradar a versiones inferiores a la versión nativa
+- `--no-downgrade`: Deshabilita las degradaciones a versiones inferiores a la versión nativa
+- `--upgrade`: Permite actualizaciones a versiones superiores a la versión nativa
+- `--no-upgrade`: Deshabilita las actualizaciones a versiones superiores a la versión nativa
+- `--ios`: Permite enviar actualizaciones a dispositivos iOS
+- `--no-ios`: Deshabilita el envío de actualizaciones a dispositivos iOS
+- `--android`: Permite enviar actualizaciones a dispositivos Android
+- `--no-android`: Deshabilita el envío de actualizaciones a dispositivos Android
+- `--self-assign`: Permite que los dispositivos se auto-asignen a este canal
+- `--no-self-assign`: Deshabilita la auto-asignación de dispositivos a este canal
+- `--disable-auto-update <disableAutoUpdate>`: Deshabilita la estrategia de actualización automática para este canal (opciones: `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev`: Permite enviar actualizaciones a dispositivos de desarrollo
+- `--no-dev`: Deshabilita el envío de actualizaciones a dispositivos de desarrollo
+- `--emulator`: Permite enviar actualizaciones a dispositivos emuladores
+- `--no-emulator`: Deshabilita el envío de actualizaciones a dispositivos emuladores
+- `--package-json <packageJson>`: Lista separada por comas de rutas a archivos `packagejson` (útil para monorepos)

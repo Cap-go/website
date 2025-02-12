@@ -1,0 +1,170 @@
+---
+title: 자동 업데이트
+description: So verwenden Sie das Auto-Update-Plugin im selbst gehosteten Modus
+sidebar:
+  order: 1
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server betreiben können
+
+## Vor dem Start
+
+Wenn Sie diese Arbeit für sich selbst nutzen, kann ich nur empfehlen, meine Arbeit über [diesen Link](https://githubcom/sponsors/riderx/) zu unterstützen
+
+Ich habe eine große Wette abgeschlossen, indem ich den gesamten wertvollen Code, den ich hier entwickelt habe, als Open Source zur Verfügung stelle
+
+Ich hätte es für mich behalten und einen hohen Preis verlangen können
+
+Darüber hinaus möchte ich mich auf Capgo-Tools konzentrieren und daraus ein offenes und transparentes Geschäft machen
+
+Ebenso denke ich, dass es unsere Welt zu einem besseren Ort macht, wenn wir öffnen statt zu kämpfen und zu verstecken
+
+Aber um dies zu ermöglichen, müssen wir alle unseren Teil dazu beitragen, auch Sie 🥹
+
+Wenn die Capgo-Angebote nicht zu Ihnen passen, dann setzen Sie Ihren Preis fest und unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
+
+## Schnellinstallation
+
+```
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+### Konfiguration
+
+Sie müssen das Plugin konfigurieren, um Ihre URL wie folgt zu verwenden:
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://IHREURL",
+		}
+	}
+}
+```
+
+> 🚧 Unter Android sind HTTP-Anfragen standardmäßig nicht erlaubt. Zu Testzwecken können Sie dies [erlauben](https://stackoverflowcom/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+
+### Update API
+
+Das Plugin führt bei jedem App-Start einen POST-Aufruf an Ihre API mit folgendem Body durch:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+Der Server sollte in JSON mit diesen Daten antworten, wenn ein Update erforderlich ist:
+
+```json
+{
+"version": "123",
+"url": "https://path_to_the_zip_file_of_the_codecom"
+}
+```
+
+Bei Auto-Update sollte der Server die Versionsvergleiche durchführen und die richtige Version zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
+
+Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt und die Nachricht wird stattdessen in den Logs angezeigt
+
+Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein
+
+Die ZIP-Datei sollte eine `indexhtml`-Datei im Stammverzeichnis haben oder nur einen Ordner im Stammverzeichnis mit `indexhtml` darin
+
+Sie können den CLI-Befehl verwenden, um Ihr Bundle zu komprimieren:
+
+```bash
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+<LinkCard
+	title="Update Endppint"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+#### Ende-zu-Ende-Verschlüsselung
+
+Ab Version 4.15.0 ermöglicht das Plugin das Senden verschlüsselter Updates
+
+Sie können diese Funktion nutzen, indem Sie einen privaten Schlüssel erstellen ``npx @capgo/cli key create``
+
+Dann verschlüsseln Sie Ihre ZIP-Datei mit ``npx @capgo/cli encrypt [path/to/zip]``
+
+Der Befehl gibt Ihnen einen `ivSessionKey` aus, der mit Ihrer Update-Payload im Schlüssel `session_key` gesendet werden muss\
+Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` verwenden, um das Update zu entschlüsseln
+
+Erfahren Sie mehr darüber hier:
+
+<LinkCard
+	title="Self-hosted Live Updates"
+	href="https://capgoapp/blog/self-hosted-live-updates/"
+/>
+
+### Statistik-API
+
+Ab Version 1.3.0 sendet das Update-System Statistiken!
+
+Standardmäßig werden alle Statistiken an unseren Server gesendet, um die Nutzung zu verstehen
+
+> 💡 Für Statistiken werden keine privaten Daten gesendet, nur zufällige UUID, Update-Version, native App-Version, Plattform, Aktion und App-ID
+
+Wenn Sie die Daten stattdessen an Ihren Server senden möchten, ändern Sie die Konfiguration wie folgt:
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "IHRE_URL"
+		}
+	}
+}
+```
+
+Ihr Server wird folgendes empfangen:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // kann set, delete, set_fail, reset, revert sein
+	// Dann sind es die gleichen Informationen wie beim Update
+	"app_id": "*******", // App-Kennung im Store
+	"device_id": "*******", // eindeutige ID pro App-Installation
+	"platform": "ios", // oder android
+	"custom_id": "user_1", // repräsentiert Ihren Benutzer
+        "version_name": "123", // Version des Web-Builds
+        "version_build": "120", // Version des nativen Builds
+        "version_code": "120", // Build-Nummer des nativen Builds
+	"version_os": "16", // OS-Version des Geräts
+        "plugin_version": "400"// um Ihre API bei verschiedenen Plugins unterschiedlich reagieren zu lassen
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+Sie können es auch komplett deaktivieren, mit einem leeren String. Bedenken Sie, dass Statistiken datenschutzfreundlich gestaltet sind und mir helfen zu verstehen, wie Menschen das Plugin nutzen, um Probleme zu lösen und es zu verbessern
+
+<LinkCard
+	title="Stats Endpoint"
+	href="/docs/self-hosted/auto-update/stats-endpoint"
+/>
+
+### Channel API
+
+Wird noch dokumentiert

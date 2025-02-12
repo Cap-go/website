@@ -1,0 +1,66 @@
+---
+title: 手動での更新
+description: Self-Hosted モードでマニュアルアップデートプラグインを使用する
+sidebar:
+  order: 4
+locale: ja
+---
+
+## 設定
+
+auto-updateを無効にするには、``capacitorconfigjson``に以下を追加してください。
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## 使用方法
+
+このサンプルを使用するか、アプリ内でロジックを再作成することができます。
+
+:::caution
+コードで宣言された静的バージョンでユーザーに強制的にアプリを更新させています。これは推奨されません。サーバーから動的なバージョンを使用するべきです。
+:::
+
+:::danger
+このサンプルではバージョンチェック、復号化、チェックサム検証を行っていません。これらは独自に実装する必要があります。
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdaternotifyAppReady()
+AppaddListener('appStateChange', async(state) => {
+     if (stateisActive) {
+       // ダウンロードの失敗を防ぐため、アプリがアクティブな時間中にダウンロードを実行
+       data = await CapacitorUpdaterdownload({
+       version: '004',
+       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       })
+     }
+     if (!stateisActive && dataversion !== "") {
+       // ユーザーがアプリを離れた時に切り替えを実行
+       SplashScreenshow()
+       try {
+         await CapacitorUpdaterset(data)
+       } catch (err) {
+         consolelog(err)
+         SplashScreenhide() // セットに失敗した場合、新しいアプリが非表示にする必要がある
+       }
+     }
+ })
+```
+
+:::note
+これが大変に思える場合は、[Capgo trial](https://capgoapp/register/)を試してみることをご検討ください。これらすべてを代わりに処理してくれます。
+:::

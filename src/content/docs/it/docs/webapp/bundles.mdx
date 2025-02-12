@@ -1,0 +1,64 @@
+---
+title: Bundle
+description: Scopri come gestire i bundle
+sidebar:
+  order: 7
+locale: it
+---
+
+## Mostra tutti i bundle
+
+Per prima cosa, diamo un'occhiata alla pagina dei bundle. Puoi accedervi [cliccando sulla tua app](/docs/webapp/main-page) e poi [cliccando sulla scheda bundle](/docs/webapp/main-app-page)
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundleswebp" alt="bundle list" /><figcaption></figcaption></figure>
+
+## Eliminare un bundle
+
+Ci sono due modi per eliminare un bundle:
+
+ - Normalmente
+ - In modo non sicuro
+
+Il modo non sicuro di eliminare un bundle è stato aggiunto a Capgo il 12 agosto 2024
+
+La differenza tra i due modi è la possibilità di riutilizzare il numero di versione dopo l'eliminazione
+
+Per esempio, se elimini una versione `100` nel modo normale e più tardi provi a caricare una versione `100`, fallirà
+Se elimini questa versione tramite l'eliminazione non sicura, potrai caricare una versione `100`
+
+:::danger
+Eliminare una versione in modo non sicuro e ricaricarla è MOLTO pericoloso
+Può causare ogni tipo di bug e comportamenti imprevedibili nel plugin
+Non dovrebbe MAI essere usato per bundle che sono stati utilizzati in un canale pubblico
+Per questo motivo, eliminare una versione in modo non sicuro richiede privilegi di "super_admin"
+:::
+
+## Gestire un bundle specifico
+
+Una volta che vedi la lista di tutti i bundle, clicca su quello che vuoi gestire. Dopo averlo fatto dovresti vedere qualcosa del genere:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-infowebp" alt="bundle info" /><figcaption></figcaption></figure>
+
+Analizziamo tutti gli elementi di questa pagina
+
+---
+
+Per prima cosa puoi vedere un `Channel`. Questo ti fa sapere per quale canale è questo bundle. Puoi cambiare il canale cliccandoci sopra
+Una volta cliccato dovresti vedere qualcosa del genere:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-changewebp" alt="bundle change" /><figcaption></figcaption></figure>
+
+`Set bundle to channel` ti permetterà di collegare questo bundle come predefinito per qualsiasi canale\
+`Open channel` aprirà la pagina del canale per il canale a cui questo bundle è destinato\
+`Unlink bundle from channel` scollegherà questo bundle dal canale a cui è destinato
+(**ATTENZIONE**: Se il bundle è collegato a più di 1 canale, non ti verrà data un'opzione su quale canale scollegare)
+
+---
+
+Successivamente, puoi vedere la `Size`. Se ci clicchi sopra potrai scaricare questo bundle
+Dovrebbe apparire qualcosa del genere:
+<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundlewebp" alt="download bundle" /><figcaption></figcaption></figure>
+
+---
+
+Infine, c'è la sezione `Devices`. Puoi vedere tutti i dispositivi che utilizzano questa versione lì

@@ -1,0 +1,474 @@
+---
+title: Perintah
+description: Dokumentasi Capgo CLI
+sidebar:
+  order: 2
+locale: id
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+### Penggunaan
+
+Semua perintah harus dijalankan di folder aplikasi Anda dengan proyek Capacitor yang sudah disiapkan dengan benar
+
+<LinkCard
+	title="Capacitor Cross-platform native runtime for web apps"
+	href="https://capacitorjscom/docs/getting-started/"
+/>
+
+### **Init**
+
+`npx @capgo/cli@latest init [apikey]`
+
+Metode ini ada untuk membimbing Anda langkah demi langkah
+
+Ini akan menambahkan aplikasi Anda ke Capgo
+Ini akan menambahkan kode ke aplikasi Anda untuk memvalidasi pembaruan
+Demikian juga, ini akan membangun aplikasi Anda
+Selanjutnya, ini akan mengunggah aplikasi Anda ke Capgo
+Dan ini akan membantu Anda untuk memeriksa apakah pembaruan berfungsi
+
+### **Login**
+
+`npx @capgo/cli login [apikey]`
+
+Metode ini ada untuk mengingat `apikey` untuk Anda
+
+:::note
+gunakan `--apikey=********` di perintah manapun untuk menimpanya
+:::
+
+**Secara opsional Anda dapat memberikan:**
+
+`--local` Ini akan menyimpan **apikey** Anda di repo lokal dan git akan mengabaikannya
+
+## **Doctor**
+
+`npx @capgo/cli doctor`
+
+Perintah untuk memeriksa apakah Anda sudah up-to-date dengan paket Capgo
+
+Perintah ini juga akan berguna untuk laporan bug
+
+## Aplikasi
+
+### **Add**
+
+`npx @capgo/cli app add [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+> 💡 Semua opsi akan ditebak dalam konfigurasi Anda jika tidak disediakan
+
+Secara opsional, Anda dapat memberikan:
+
+* `--icon [/path/to/my/icon]` untuk memiliki ikon khusus yang ditampilkan di aplikasi web Capgo
+* `--name [test]` untuk memiliki nama khusus dalam daftar
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--retention [retention]` periode retensi bundle aplikasi dalam hari, 0 secara default = tak terbatas
+
+Contoh `capacitorconfigjson` untuk appId dan AppName, ikon ditebak di folder resources
+
+```json
+{
+  "appId": "eeforgrcapacitor_go",
+  "appName": "Capgo",
+  "webDir": "dist"
+}
+```
+
+### **Set**
+
+`npx @capgo/cli app set [appId]`
+
+`[appId]` adalah ID aplikasi Anda, formatnya dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--icon [/path/to/my/icon]` untuk memiliki ikon khusus yang ditampilkan di aplikasi web Capgo
+* `--name [test]` untuk memiliki nama khusus dalam daftar
+* `--retention [retention]` periode retensi bundle aplikasi dalam hari, 0 secara default = tak terbatas
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+
+### **List**
+
+`npx @capgo/cli app list [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+
+### **Delete**
+
+`npx @capgo/cli app delete [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--bundle` dengan nomor versi hanya akan menghapus versi ini
+
+### Debug
+
+`npx @capgo/cli app debug [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--device` dengan perangkat spesifik yang ingin Anda debug
+
+### Setting
+
+`npx @capgo/cli app setting [path]`
+
+Edit konfigurasi Capacitor
+
+`[path]` - path dari pengaturan yang ingin Anda ubah. Misalnya, untuk mengubah `appId`, berikan `appId`
+Jika Anda ingin menonaktifkan pembaruan otomatis di `capacitor-updater` berikan `pluginsCapacitorUpdaterautoUpdate`
+
+Anda HARUS memberikan `--string` atau `--bool`!
+
+Opsi:
+ - `--string <string>` - mengatur pengaturan ke string
+ - `--bool <true | false>` - mengatur pengaturan ke boolean
+
+## Bundle
+
+### Upload
+
+`npx @capgo/cli bundle upload [appId]`
+
+`[appId]` adalah ID aplikasi Anda, formatnya dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey <apikey>` API key untuk menghubungkan ke akun Anda
+* `--path <path>` Path folder yang akan diunggah
+* `--channel <channel>` Channel yang akan dihubungkan
+* `--external <url>` Link ke URL eksternal alih-alih mengunggah ke Capgo Cloud
+* `--iv-session-key <key>` Atur IV dan kunci sesi untuk URL bundle eksternal
+* `--s3-endpoint <s3Endpoint>` URL endpoint S3 Tidak bekerja dengan unggahan Parsial, atau opsi eksternal
+* `--s3-region <region>` Region untuk bucket S3 Anda
+* `--s3-apikey <apikey>` API key untuk endpoint S3 Anda
+* `--s3-apisecret <apisecret>` API secret untuk endpoint S3 Anda
+* `--s3-bucket-name <bucketName>` Nama untuk bucket AWS S3 Anda
+* `--s3-port <port>` Port untuk endpoint S3 Anda
+* `--no-s3-ssl` Nonaktifkan SSL untuk unggahan S3
+* `--key <key>` Path kustom untuk kunci penandatanganan publik (sistem v1)
+* `--key-data <keyData>` Kunci penandatanganan publik (sistem v1)
+* `--key-v2 <key>` Path kustom untuk kunci penandatanganan privat (sistem v2)
+* `--key-data-v2 <keyData>` Kunci penandatanganan privat (sistem v2)
+* `--bundle-url` Mencetak URL bundle ke stdout
+* `--no-key` Abaikan kunci penandatanganan dan kirim pembaruan yang jelas
+* `--no-code-check` Abaikan pemeriksaan apakah notifyAppReady() dipanggil dalam kode sumber dan indeks ada di folder root
+* `--display-iv-session` Tampilkan di konsol IV dan kunci sesi yang digunakan untuk mengenkripsi pembaruan
+* `--bundle <bundle>` Nomor versi bundle yang akan diunggah
+* `--min-update-version <minUpdateVersion>` Versi minimal yang diperlukan untuk memperbarui ke versi ini Hanya digunakan jika nonaktifkan pembaruan otomatis diatur ke metadata di channel
+* `--auto-min-update-version` Atur versi pembaruan minimal berdasarkan paket native
+* `--ignore-metadata-check` Mengabaikan pemeriksaan metadata (node_modules) saat mengunggah
+* `--ignore-checksum-check` Mengabaikan pemeriksaan checksum saat mengunggah
+* `--timeout <timeout>` Batas waktu untuk proses unggah dalam detik
+* `--partial` Tidak mengunggah file parsial ke cloud Capgo
+* `--tus` Unggah bundle menggunakan protokol tus
+* `--multipart` Menggunakan protokol multipart untuk mengunggah data ke S3, Tidak direkomendasikan, gunakan TUS sebagai gantinya
+* `--encrypted-checksum <encryptedChecksum>` Checksum terenkripsi (tanda tangan) Hanya digunakan saat mengunggah bundle eksternal
+* `--package-json <packageJson>` Path ke packagejson Berguna untuk monorepos
+* `--auto-set-bundle` Atur bundle di capacitorconfigjson
+* `--node-modules <nodeModules>` Daftar path ke node_modules Berguna untuk monorepos (dipisahkan koma mis: //node_modules,/node_modules)
+
+> ⭐️ Opsi eksternal membantu membuka 2 kasus: korporat dengan masalah privasi, jangan kirim kode ke pihak ketiga dan aplikasi lebih besar dari 200 MB Dengan pengaturan ini, Capgo hanya menyimpan tautan ke zip dan mengirim tautan ke semua aplikasi
+
+> 👀 Cloud Capgo tidak pernah melihat apa yang ada di link (untuk opsi eksternal), atau di kode ketika disimpan
+
+> 🔑 Anda dapat menambahkan lapisan keamanan kedua dengan menggunakan enkripsi, maka Capgo tidak akan dapat melihat atau memodifikasi apa pun, menjadi "trustless"
+
+Contoh `packagejson` untuk versi
+
+```json
+{
+  "version": "102"
+}
+```
+
+> ⛔ Versi harus lebih besar dari "000"
+
+> 💡 Jangan lupa untuk memperbarui nomor versi setiap kali Anda mengirim, nomor versi tidak dapat ditimpa, atau digunakan kembali setelah penghapusan karena alasan keamanan
+
+### **List**
+
+`npx @capgo/cli bundle list [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+
+### **Delete**
+
+`npx @capgo/cli bundle delete [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--bundle` dengan nomor versi hanya akan menghapus versi ini
+
+### Cleanup
+
+dalam rentang SemVer untuk versi major ke Cloud
+
+`npx @capgo/cli bundle cleanup [appId] --bundle=[majorVersion] --keep=[numberToKeep]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--bundle [majorVersion]` versi yang ingin Anda hapus paket sebelumnya, ini akan menyimpan yang terakhir + `numberToKeep`* `--keep [numberToKeep]` jumlah paket yang ingin Anda simpan (default 4)
+
+Contoh: Jika Anda memiliki 10 versi dari 1001 hingga 10011, dan Anda menggunakan `npx @capgo/cli cleanup [appId] --bundle=1000` maka akan menghapus 1001 hingga 1006, 1007 sampai 10011 akan disimpan
+
+Jika Anda memiliki total 20 versi, dan Anda tidak menyertakan nomor bundle seperti ini: `npx @capgo/cli cleanup [appId] --keep=2` Ini akan menghapus 18 versi, dan menyimpan 2 yang terakhir
+
+> Perintah ini akan meminta konfirmasi, menampilkan tabel apa yang akan disimpan dan dihapus
+
+:::note
+Perintah ini akan mengabaikan bundle yang sedang digunakan di channel manapun
+:::
+
+### **Encrypt**
+
+> **Peringatan**: Perintah ini sudah usang dan akan dihapus di rilis mayor berikutnya. Silakan gunakan sistem enkripsi yang baru
+`npx @capgo/cli bundle encrypt [path/to/zip]`
+
+Perintah ini digunakan ketika Anda menggunakan sumber eksternal untuk menyimpan kode Anda atau untuk tujuan pengujian
+
+Secara opsional, Anda dapat memberikan:
+
+`--key [/path/to/my/private_key]` path dari private key Anda
+`--key-data [privateKey]` data private key, jika Anda ingin menggunakan secara inline
+Perintah akan mencetak `ivSessionKey` Anda dan menghasilkan zip terenkripsi, untuk digunakan dengan perintah upload atau decrypt
+
+### **Encrypt V2**
+
+`npx @capgo/cli bundle encryptV2 [path/to/zip] [checksum]`
+
+Perintah ini digunakan ketika Anda menggunakan sumber eksternal untuk menyimpan kode Anda atau untuk tujuan pengujian
+Checksum adalah sha256 dari bundle (dihasilkan oleh --key-v2), digunakan untuk memverifikasi integritas file setelah dekripsi
+Ini akan dienkripsi dengan private key dan dikirim bersama dengan bundle
+Dalam enkripsi v2 checksum ditingkatkan menjadi "signature" dari bundle
+
+Secara opsional, Anda dapat memberikan:
+
+`--key [/path/to/my/private_key]` path dari private key Anda
+`--key-data [privateKey]` data private key, jika Anda ingin menggunakan secara inline
+`--json` untuk menampilkan info sebagai json
+Perintah akan mencetak `ivSessionKey` Anda dan menghasilkan zip terenkripsi, untuk digunakan dengan perintah upload atau decrypt
+
+### **Decrypt**
+
+`npx @capgo/cli bundle decrypt [path/to/zip] [ivSessionKey]`
+
+Secara opsional, Anda dapat memberikan:
+
+`--key [/path/to/my/private_key]` path dari private key Anda
+
+`--key-data [privateKey]` data private key, jika Anda ingin menggunakan secara inline Perintah ini terutama digunakan untuk tujuan pengujian, akan mendekripsi zip dan mencetak session key terdekripsi base64 di konsol
+
+### **Decrypt V2**
+
+`npx @capgo/cli bundle decryptV2 [path/to/zip] [ivSessionKey]`
+
+Secara opsional, Anda dapat memberikan:
+
+`--key [/path/to/my/private_key]` path dari private key Anda
+`--key-data [privateKey]` data private key, jika Anda ingin menggunakan secara inline Perintah ini terutama digunakan untuk tujuan pengujian, akan mendekripsi zip dan mencetak session key terdekripsi base64 di konsol
+`--checksum [checksum]` checksum dari file, akan memverifikasi checksum setelah dekripsi
+
+### **Zip**
+
+`npx @capgo/cli bundle zip [appId]`
+
+`[appId]` adalah ID aplikasi Anda, formatnya dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--path [/path/to/my/bundle]` untuk mengunggah folder tertentu
+* `--bundle [100]` untuk mengatur nomor versi bundle dari nama file
+* `--name [myapp]` untuk mengganti nama file
+* `--json` untuk menampilkan info sebagai json
+* `--no-code-check` untuk mengabaikan pemeriksaan kode dan mengirim bundle
+* `--key-v2` untuk menggunakan sistem enkripsi baru Ini diperlukan karena sistem enkripsi baru menggunakan checksum yang lebih baik untuk memverifikasi integritas file
+
+### **Compatibility**
+
+`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+
+`[appId]` adalah ID aplikasi Anda, formatnya dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+`[channelId]` nama channel baru Anda
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+* `--text` gunakan teks alih-alih emoji dalam tabel
+* `--channel [channel]` channel untuk memeriksa kompatibilitas
+* `--package-json <packageJson>` Path ke packagejson Berguna untuk monorepos
+* `--node-modules <nodeModules>` Daftar path ke node_modules Berguna untuk monorepos (dipisahkan koma mis: //node_modules,/node_modules)
+
+## Channel
+
+### **Add**
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+`[channelId]` nama channel baru Anda `[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+### **Delete**
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+`[channelId]` nama channel yang ingin Anda hapus `[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+### **List**
+
+`npx @capgo/cli channel list [appId]`
+
+`[appId]` ID aplikasi Anda dengan format `comtestapp` dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+
+### **Set**
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+`[appId]` adalah ID aplikasi Anda, formatnya dijelaskan [di sini](https://capacitorjscom/docs/cli/commands/init/)
+
+Secara opsional, Anda dapat memberikan:
+
+* `--bundle [123]` bundle aplikasi Anda yang sudah dikirim ke cloud, untuk menghubungkannya ke channel
+* `--latest` mengambil versi bundle dari `packagejson:version`, tidak dapat digunakan dengan `--bundle`
+* `--state [ normal | default ]` mengatur status channel, bisa `normal` atau `default` Satu channel harus `default`
+* `--downgrade` mengizinkan channel untuk mengirim versi downgrade ke perangkat
+* `--no-downgrade` melarang channel untuk mengirim versi downgrade ke perangkat
+* `--upgrade` mengizinkan channel untuk mengirim upgrade (major) versi ke perangkat
+* `--no-upgrade` melarang channel untuk mengirim upgrade (major) versi ke perangkat
+* `--ios` mengizinkan channel untuk mengirim versi ke perangkat iOS
+* `--no-ios` melarang channel untuk mengirim versi ke perangkat iOS
+* `--android` mengizinkan channel untuk mengirim versi ke perangkat android
+* `--no-android` melarang channel untuk mengirim versi ke perangkat android
+* `--self-assign` mengizinkan perangkat untuk menetapkan diri ke channel ini
+* `--no-self-assign` melarang perangkat untuk menetapkan diri ke channel ini
+* `--disable-auto-update STRATEGY` Menonaktifkan strategi pembaruan otomatis untuk channel ini Opsi yang mungkin adalah: major, minor, metadata, none
+* `--apikey [key]` API key untuk menghubungkan ke akun Anda
+
+## Strategi menonaktifkan pembaruan
+
+Ada beberapa cara untuk menangani penonaktifan pembaruan untuk versi yang terlalu lama\
+Capgo tidak dapat memperbarui kode native sehingga pembaruan dari versi dengan kode native lama ke versi dengan kode native yang diperbarui seharusnya tidak mungkin
+Ada beberapa cara untuk mencapai itu
+
+Pertama, strategi `major` Ini mencegah pembaruan dari `000` -> `100` Major adalah angka yang disorot (**1**00 dan **0**00)\
+Kedua adalah strategi `minor` Ini mencegah pembaruan dari `000` -> `110` atau pembaruan dari `110` ke `120`
+**PERHATIAN** strategi ini tidak mencegah pembaruan dari `010` -> `110`
+
+Ketiga, strategi `patch` Ini ditambahkan ke capgo sebagai mode yang sangat ketat Tidak direkomendasikan untuk digunakan kecuali Anda benar-benar memahami cara kerjanya
+Agar dapat menerima pembaruan kondisi berikut harus dipenuhi:
+ - Major sama antara versi baru dan lama
+ - Minor sama antara versi baru dan lama
+ - Patch dari versi baru lebih besar dari patch versi lama
+
+Berikut contoh skenario di mana pembaruan diizinkan atau ditolak
+
+ - 00311 -> 00314 ✅
+ - 000 -> 00314 ✅
+ - 00316 -> 00314 ❌
+ - 01312 -> 00314 ❌
+ - 10312 -> 00314 ❌
+
+Terakhir strategi yang paling rumit Strategi `metadata`\
+Pertama Anda perlu tahu bahwa awalnya setelah Anda mengaktifkannya pembaruan **AKAN** gagal karena channel tidak memiliki metadata yang diperlukan\
+Jika channel tidak memiliki metadata Anda akan melihat pesan seperti ini:
+<img src="/fail-metadata.webp" alt="Cannot find metadata"/>
+
+Jika Anda melihat sesuatu seperti ini, Anda tahu bahwa Anda harus pergi ke bundle saat ini untuk channel yang gagal dan mengatur metadata\
+Pertama, cari tahu channel mana yang gagal Anda dapat melakukannya dengan melihat kolom `misconfigured`
+<img src="/misconfigured-table.webp" alt="Misconfigured table"/>
+
+Kemudian pergi ke channel yang gagal dan klik pada `Bundle number`. Ini akan membawa Anda ke halaman bundle
+<img src="/fail-channel-show.webp" alt="Locate failing channel"/>
+
+Setelah itu isi field `Minimal update version`. Ini harus berupa [semver](https://devhints.io/semver/)\
+Jika nilai yang Anda masukkan bukan semver, Anda akan mendapat error, tetapi jika semua berjalan dengan benar Anda akan melihat sesuatu seperti ini:
+<img src="/set-min-update-version.webp" alt="Set min version"/>
+
+Sekarang, Anda mungkin tidak ingin mengatur data ini secara manual setiap kali Anda memperbarui. Untungnya, CLI akan mencegah Anda mengirim pembaruan tanpa metadata ini
+<img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
+
+Untuk mengunggah bundle dengan benar saat menggunakan opsi `metadata`, Anda perlu memberikan `--min-update-version` dengan semver yang valid. Seperti ini:
+<img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
+
+`--min-update-version` bukan satu-satunya cara untuk melakukan kompatibilitas.
+Ada juga `--auto-min-update-version`. Berikut cara kerjanya:
+
+Pertama, melihat versi yang saat ini diunggah ke channel. Memeriksa kompatibilitas sama seperti perintah `bundle compatibility`.
+Kedua, jika versi baru 100% kompatibel, akan menggunakan kembali `min_update_version` dari versi terbaru di channel.
+Jika tidak, maka akan mengatur `min_update_version` ke nomor bundle versi yang baru diunggah.
+
+Anda akan selalu mendapatkan informasi tentang `min_update_version` saat menggunakan opsi ini. Tampilannya akan seperti ini:
+<img src="/min_update_version_info.webp" alt="Min update version"/>
+
+Jika versi baru tidak kompatibel, tampilannya akan seperti ini:
+<img src="/min_update_version_not_compatible.webp" alt="Min update version not compatible"/>
+
+## Enkripsi End-to-End (Trustless)
+
+Capgo mendukung enkripsi end-to-end, ini berarti bundle (kode) Anda dienkripsi sebelum dikirim ke cloud dan didekripsi di perangkat. Untuk itu, Anda perlu menghasilkan pasangan kunci RSA, Anda dapat menggunakan perintah berikut untuk menghasilkannya.
+
+Sistem enkripsi adalah kombinasi RSA dan AES, kunci RSA digunakan untuk mengenkripsi kunci AES, dan kunci AES digunakan untuk mengenkripsi file.
+
+Lihat di bawah untuk informasi lebih lanjut tentang sistem enkripsi.
+
+<img src="/crypto_explained.webp" alt="How crypto works"/>
+
+Skema enkripsi
+
+### Membuat kunci untuk aplikasi Anda
+
+`npx @capgo/cli key create`
+
+Secara opsional, Anda dapat memberikan: `--force` untuk menimpa kunci yang ada. Perintah ini akan membuat pasangan kunci di aplikasi Anda, dan akan meminta Anda untuk menyimpan kunci privat di tempat yang aman. Disarankan untuk tidak melakukan git commit kunci privat, dan tidak membagikannya dengan siapa pun.
+
+> Setelah pengujian lokal Anda, hapus kunci dari file konfigurasi dan tambahkan pada langkah CI dengan `key save`
+
+### Menyimpan kunci dalam konfigurasi aplikasi Anda
+
+`npx @capgo/cli key save`
+
+Secara opsional, Anda dapat memberikan:
+
+`--key [/path/to/my/private_key]` path kunci privat Anda
+
+`--key-data [privateKey]` data kunci privat, jika Anda ingin menggunakan inline. Perintah ini berguna jika Anda mengikuti rekomendasi dan tidak melakukan commit kunci di aplikasi Anda, dan dalam konfigurasi.
+
+## Integrasi CI
+
+Untuk mengotomatiskan pekerjaan Anda, saya sarankan Anda membuat GitHub action melakukan pekerjaan mengirim ke server kami.
+
+[Tutorial GitHub action](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)
+
+## Aplikasi demo kami
+
+[GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app/)
+
+Jangan lupa untuk mengkonfigurasi variabel env CI dengan API key Anda

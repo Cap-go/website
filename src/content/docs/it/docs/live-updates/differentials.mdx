@@ -1,0 +1,78 @@
+---
+title: Aggiornamenti rapidi
+sidebar:
+  order: 4
+locale: it
+---
+
+Il sistema di Live Update di Capgo può distribuire aggiornamenti più velocemente e in modo più efficiente inviando solo i file modificati, invece dell'intero bundle JS
+
+Questo è particolarmente vantaggioso per gli utenti con connessioni di rete più lente o a consumo, poiché minimizza la quantità di dati da scaricare
+
+Un secondo vantaggio si ha quando l'app ha risorse pesanti che cambiano raramente, come immagini o video, rispetto ai file JS compressi verranno scaricati solo una volta
+
+## Come Funzionano gli Aggiornamenti Differenziali
+
+Gli aggiornamenti differenziali in Capgo sono gestiti dal plugin Capgo installato nella tua app. Quando carichi una nuova versione della tua app usando il flag `--partial`, Capgo esegue quanto segue:
+
+1. Ogni file nella tua build viene caricato individualmente
+2. Vengono generati i checksum per ogni file
+3. Viene creato un nuovo manifest json, che elenca tutti i file e i loro checksum
+4. Questo manifest viene caricato nel database di Capgo
+
+Quando un dispositivo che esegue la tua app verifica la presenza di un aggiornamento, il plugin Capgo riceve il nuovo manifest dal server. Confronta questo manifest con quello che ha attualmente, identificando quali file sono cambiati in base ai checksum e ai percorsi dei file
+
+Il plugin quindi scarica solo i file modificati, invece dell'intero bundle JS. Ricostruisce la nuova versione dell'app combinando questi file scaricati con i file non modificati che ha già
+
+<Aside title="Manifest">
+
+In caso di aggiornamenti differenziali, il dispositivo memorizza tutti i file scaricati in una cache comune, Capgo non la pulirà mai ma il sistema operativo può farlo in qualsiasi momento
+
+</Aside>
+
+## Abilitare gli Aggiornamenti Differenziali
+
+Per abilitare gli aggiornamenti differenziali per la tua app Capgo, usa semplicemente il flag `--partial` quando carichi una nuova versione:
+
+## Imporre gli Aggiornamenti Differenziali
+
+Se vuoi assicurarti che tutti i caricamenti siano aggiornamenti differenziali e impedire qualsiasi caricamento accidentale del bundle completo, puoi usare il flag `--partial-only`:
+
+```shell
+npx @capgo/cli@latest upload --partial-only
+```
+
+Quando viene usato `--partial-only`, Capgo caricherà solo file individuali e genererà un manifest. Qualsiasi dispositivo che non supporta il parziale non sarà in grado di scaricare l'aggiornamento
+
+Potresti voler usare `--partial-only` se:
+
+- Vuoi sempre usare aggiornamenti differenziali e non vuoi mai permettere caricamenti di bundle completi
+- Stai configurando una pipeline CI/CD e vuoi assicurarti che tutti i caricamenti automatizzati siano differenziali
+- La tua app è grande e la banda è limitata, quindi devi minimizzare le dimensioni di upload/download
+
+Se hai bisogno di fare un caricamento del bundle completo mentre `--partial-only` è impostato, esegui semplicemente il comando di caricamento senza `--partial-only`. Questo sovrascriverà l'impostazione per quel singolo caricamento, permettendoti di inviare un bundle completo quando necessario
+
+## Risoluzione dei Problemi
+
+Se gli aggiornamenti differenziali non sembrano funzionare (cioè i dispositivi stanno sempre scaricando l'intero bundle JS anche per piccole modifiche), verifica che:
+
+- Stai usando il flag `--partial` ogni volta che carichi una nuova versione
+- Se usi `--partial-only`, assicurati di non aver omesso accidentalmente il flag `--partial`
+- Il tuo dispositivo sta eseguendo l'ultima versione del plugin Capgo
+- Il tuo dispositivo ha una connessione di rete stabile e può raggiungere i server Capgo
+
+Puoi anche usare la webapp Capgo per controllare i dettagli del tuo ultimo caricamento:
+<Steps>
+1. Vai alla [webapp](https://app.capgo.io)
+2. Clicca sulla tua app
+3. Clicca sul numero dei bundle nella barra delle statistiche
+4. Seleziona l'ultimo bundle
+5. Controlla il campo `Partial`
+  ![bundle type](/bundle_type.webp)
+</Steps>
+
+Se continui ad avere problemi, contatta il supporto Capgo per ulteriore assistenza. Possono controllare i log del server per confermare che i tuoi caricamenti parziali vengono elaborati correttamente e che i dispositivi stanno ricevendo i manifest aggiornati
+
+Ecco fatto! Il flag `--partial` dice a Capgo di eseguire i caricamenti dei file individuali e la generazione del manifest necessari per gli aggiornamenti differenziali
+
+Nota che devi usare `--partial` ogni volta che carichi una nuova versione che vuoi sia distribuita come aggiornamento differenziale. Se ometti il flag, Capgo caricherà l'intero bundle JS come un singolo file, e i dispositivi scaricheranno l'intero bundle anche se solo una piccola parte è cambiata

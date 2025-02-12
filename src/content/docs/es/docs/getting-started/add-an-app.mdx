@@ -1,0 +1,51 @@
+---
+title: Ajouter une App
+description: >-
+  Agregar una aplicación a tu cuenta de Capgo e instalar plugins en la
+  aplicación
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: es
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Introducción a Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo en 15 minutos" />
+
+## Las actualizaciones en vivo están a 3 pasos
+
+
+### Configuración guiada
+
+<Steps>
+
+1. Crea tu cuenta en [https://capgoapp/register](https://capgoapp/register)
+![captura de pantalla del registro](/signupwebp "captura de pantalla del registro")
+
+2. Usa los comandos de inicialización para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada<Aside type="tip">Siguiendo estos pasos, estarás listo en poco tiempo. Si necesitas ayuda adicional durante el proceso, nuestro equipo de soporte está [aquí para ayudarte](mailto:support@capgoapp) ¡Feliz incorporación!</Aside>
+
+3. Despliega una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Despliega una actualización en vivo" description="Aprende cómo desplegar una actualización en vivo en tu aplicación" />
+
+</Steps>
+
+### Configuración manual
+
+En caso de que el comando init no funcione para ti, puedes agregar una aplicación manualmente
+
+<Steps>
+
+1. Conecta el CLI a tu cuenta: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Agrega la aplicación a tu cuenta con este comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Instala el plugin en tu aplicación: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Llama al método init lo antes posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5. Despliega una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Despliega una actualización en vivo" description="Aprende cómo desplegar una actualización en vivo en tu aplicación" />
+
+</Steps>

@@ -1,0 +1,40 @@
+---
+title: Verschlüsselte Bundles
+description: So verwenden Sie das manuelle Update-Plugin im Self-Hosted-Modus
+sidebar:
+  order: 5
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ende-zu-Ende-Verschlüsselung
+
+Ab Version 4150 ermöglicht das Plugin das Senden verschlüsselter Updates.
+Beginnen Sie mit der Erstellung eines privaten Schlüssels
+```bash title='Create a private key'
+npx @capgo/cli key create
+```
+
+Dann verschlüsseln Sie Ihre ZIP-Datei
+```bash title="Encrypt bundled zip"
+npx @capgo/cli encrypt [path/to/zip]
+```
+
+Der Befehl gibt Ihnen einen `ivSessionKey` aus, der mit Ihrem Update-Payload im Schlüssel `session_key` gesendet werden muss
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip",
+"session_key": "encrypted_session_key",
+}
+```
+Dann kann Ihre App den privaten Schlüssel verwenden, um den `session_key` zu entschlüsseln und den entschlüsselten `session_key` verwenden, um das Update zu entschlüsseln
+
+Erfahren Sie mehr darüber hier:
+
+<LinkCard
+	title="Self-hosted Live Updates"
+	href="https://capgoapp/blog/self-hosted-live-updates/"
+/>

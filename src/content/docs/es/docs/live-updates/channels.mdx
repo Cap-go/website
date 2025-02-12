@@ -1,0 +1,116 @@
+---
+title: Canales
+sidebar:
+  order: 2
+locale: es
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Un canal de Actualización en Vivo apunta a una compilación específica del bundle JS de tu aplicación que se compartirá con cualquier dispositivo configurado para escuchar ese canal para actualizaciones. Cuando [instalas el SDK de Actualizaciones en Vivo de Capgo](/docs/getting-started/quickstart/) en tu aplicación, cualquier binario nativo configurado para ese canal verificará las actualizaciones disponibles cada vez que se inicie la aplicación. Puedes cambiar la compilación a la que apunta un canal en cualquier momento y también puedes revertir a compilaciones anteriores si es necesario.
+
+## Configurando un Canal
+
+Cada aplicación viene con un canal predeterminado llamado "Production" que no se puede eliminar. Para añadir nuevos canales:
+
+1. Ve a la sección "Channels" del panel de control de Capgo
+2. Haz clic en el botón "New Channel"
+3. Ingresa un nombre para el canal y haz clic en "Create"
+
+Los nombres de los canales pueden ser cualquier cosa que desees. Una estrategia común es hacer coincidir los canales con tus etapas de desarrollo, como:
+
+- `Development` - para probar actualizaciones en vivo en dispositivos locales o emuladores
+- `QA` - para que tu equipo de QA verifique las actualizaciones antes de un lanzamiento más amplio
+- `Staging` - para pruebas finales en un entorno similar a producción
+- `Production` - para la versión de tu aplicación que los usuarios finales reciben de las tiendas de aplicaciones
+
+## Configurando el Canal en Tu Aplicación
+
+Con tus canales creados, necesitas configurar tu aplicación para escuchar el canal apropiado. En este ejemplo, usaremos el canal `Development`
+
+Abre tu archivo `capacitor.config.ts` (o `capacitor.config.json`). En la sección `plugins`, establece la propiedad `channel` del plugin `CapacitorUpdater` con el nombre de tu canal deseado:
+
+```ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'Development',
+    },
+  },
+};
+```
+
+Luego, compila tu aplicación web y ejecuta `npx cap sync` para copiar el archivo de configuración actualizado a tus proyectos iOS y Android. Si te saltas este paso de sincronización, tus proyectos nativos continuarán usando el canal que tenían configurado previamente.
+
+<Aside type="caution">
+
+La propiedad `defaultChannel` siempre anulará el canal predeterminado en la nube. Pero aún puedes forzar el deviceId a un canal en la nube.
+
+</Aside>
+
+## Asignando un Bundle a un Canal
+
+Para desplegar una actualización en vivo, necesitas subir una nueva compilación del bundle JS y asignarla a un canal. Puedes hacer esto en un solo paso con el CLI de Capgo:
+
+```shell
+npx @capgo/cli@latest upload --channel=Development
+```
+
+Esto subirá tus activos web compilados y establecerá el nuevo bundle como la compilación activa para el canal `Development`. Cualquier aplicación configurada para escuchar ese canal recibirá la actualización la próxima vez que busque una.
+
+También puedes asignar compilaciones a canales desde la sección "Bundles" del panel de control de Capgo. Haz clic en el ícono de menú junto a una compilación y selecciona "Assign to Channel" para elegir el canal para esa compilación.
+
+## Versionado de Bundles y Canales
+
+Es importante notar que los bundles en Capgo son globales para tu aplicación, no específicos para canales individuales. El mismo bundle puede ser asignado a múltiples canales.
+
+Al versionar tus bundles, recomendamos usar versionado semántico [semver](https://semver.org/) con identificadores de prelanzamiento para compilaciones específicas de canal. Por ejemplo, una versión beta podría versionarse como `1.2.3-beta.1`.
+
+Este enfoque tiene varios beneficios:
+
+- Comunica claramente la relación entre compilaciones. `1.2.3-beta.1` es obviamente un prelanzamiento de `1.2.3`
+- Permite reutilizar números de versión entre canales, reduciendo la confusión
+- Habilita rutas claras de reversión. Si necesitas revertir desde `1.2.3`, sabes que `1.2.2` es la versión estable anterior
+
+Aquí hay un ejemplo de cómo podrías alinear tus versiones de bundle con una configuración típica de canal:
+
+- Canal `Development`: `1.2.3-dev.1`, `1.2.3-dev.2`, etc.
+- Canal `QA`: `1.2.3-qa.1`, `1.2.3-qa.2`, etc.
+- Canal `Staging`: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
+- Canal `Production`: `1.2.3`, `1.2.4`, etc.
+
+Usar semver con identificadores de prelanzamiento es un enfoque recomendado, pero no estrictamente requerido. La clave es encontrar un esquema de versionado que comunique claramente las relaciones entre tus compilaciones y se alinee con el proceso de desarrollo de tu equipo.
+
+## Revirtiendo una Actualización en Vivo
+
+Si despliegas una actualización en vivo que introduce un error o que necesita ser revertida por otros motivos, puedes fácilmente volver a una compilación anterior. Desde la sección "Channels" del panel de control:
+
+<Steps>
+
+1. Haz clic en el nombre del canal que quieres revertir
+2. Encuentra la compilación a la que quieres revertir y haz clic en el ícono de corona
+![Revertir compilación](/select_bundle.webp)
+3. Confirma la acción
+
+</Steps>
+
+La compilación seleccionada se convertirá inmediatamente en la compilación activa para ese canal nuevamente. Las aplicaciones recibirán la versión revertida la próxima vez que busquen una actualización.
+
+## Automatizando Despliegues
+
+Para flujos de trabajo más avanzados, puedes automatizar tus despliegues de actualizaciones en vivo como parte de tu pipeline CI/CD. Al integrar Capgo en tu proceso de compilación, puedes subir automáticamente nuevos bundles y asignarlos a canales cuando hagas push a ciertas ramas o crees nuevos lanzamientos.
+
+Consulta la documentación de [Integración CI/CD](/docs/cicd-integration/) para aprender más sobre la automatización de actualizaciones en vivo de Capgo.
+
+## Desplegando a un Dispositivo
+
+Ahora que entiendes los canales, estás listo para comenzar a desplegar actualizaciones en vivo a dispositivos reales. El proceso básico es:
+
+1. Instalar el SDK de Capgo en tu aplicación
+2. Configurar la aplicación para escuchar tu canal deseado
+3. Subir una compilación y asignarla a ese canal
+4. ¡Iniciar la aplicación y esperar la actualización!
+
+Para una guía más detallada, consulta la guía de [Desplegando Actualizaciones en Vivo](/docs/getting-started/deploy/). ¡Felices actualizaciones!

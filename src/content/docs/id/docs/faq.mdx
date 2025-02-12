@@ -1,0 +1,332 @@
+---
+title: FAQ (Tanya Jawab)
+description: FAQ Seputar Capgo
+sidebar:
+  order: 1
+locale: id
+---
+
+Jika Anda memiliki pertanyaan yang belum terjawab di sini, silakan bertanya! Baik dengan membuat issue atau bertanya di [Discord](https://discordcom/invite/VnYRvBfgA6)
+
+### Apa itu "code push"?[](https://capgoapp/docs/#what-is-code-push "Direct link to What is \"code push\"?")
+
+Code push, juga dikenal sebagai "over the air updates" (OTA) adalah layanan cloud yang memungkinkan pengembang Capacitor untuk menerapkan pembaruan ke aplikasi mereka dalam produksi. Capgo saat ini berfungsi di Android dan iOS dan nantinya akan berfungsi di mana pun Capacitor bekerja.
+
+"Code Push" adalah referensi untuk nama fitur deploy yang digunakan oleh komunitas React Native dari [Microsoft](https://appcenterms/) dan [Expo](https://expodev/), yang keduanya tidak mendukung Capacitor.
+
+### Apa perbedaan antara bundle dan release?[](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")
+
+Kami menggunakan istilah "release" untuk menyiapkan binary untuk app store. Agar nantinya dapat menghasilkan bundle, Capgo perlu mengetahui binary yang persis yang dikirim ke app store.
+
+Kami menggunakan istilah "bundle" untuk patch yang dapat diterapkan ke release untuk memperbarui kode baru. Perintah `npx @capgo/cli app update` digunakan untuk menghasilkan bundle dari kode lokal baru Anda yang kemudian dikirim ke pengguna Anda.
+
+### Apa roadmap-nya?[](https://capgoapp/docs/faq/#what-is-the-roadmap "Direct link to What is the roadmap?")
+
+Papan proyek kami juga bersifat publik dan dapat ditemukan di: [https://githubcom/orgs/Cap-go/projects](https://githubcom/orgs/Cap-go/projects/)
+
+Tim kami juga beroperasi secara publik, jadi Anda dapat melihat apa yang sedang kami kerjakan setiap saat. Kami senang menjawab pertanyaan apa pun yang Anda miliki tentang roadmap atau prioritas kami melalui Github issues atau [Discord](https://discordcom/invite/VnYRvBfgA6).
+
+### Bisakah saya menggunakan Capgo dengan tim saya?[](https://capgoapp/docs/faq/#can-i-use-capgo-with-my-team "Direct link to Can I use Capgo with my team?")
+
+Ya! Semua paket mendukung pengembang tanpa batas. Kami hanya membatasi metrik aplikasi (MAU, penyimpanan dan bandwidth) untuk setiap organisasi.
+
+Lihat [Teams](https://capgoapp/pricing/) untuk informasi lebih lanjut.
+
+### Apakah Capgo menyimpan kode sumber saya?[](https://capgoapp/docs/faq/#does-capgo-store-my-source-code "Direct link to Does Capgo store my source code?")
+
+Tidak. Server Capgo tidak pernah melihat kode sumber Anda. Ketika Anda menjalankan `npx @capgo/cli app update`, alat `npx @capgo/cli` hanya mengunggah kode yang sama yang dikompilasi yang Anda kirim ke app store. Jika Anda menginginkan keamanan tambahan, Anda dapat menggunakan enkripsi End to End untuk mengenkripsi bundle Anda sebelum mengunggahnya ke server Capgo.
+
+Lihat juga kebijakan privasi kami: [https://capgoapp/privacy](https://capgoapp/privacy/)
+
+### Bisakah saya menggunakan Capgo dari sistem CI saya?[](https://capgoapp/docs/faq/#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
+
+Ya. Capgo dimaksudkan untuk digunakan dari sistem CI. Kami telah menerbitkan panduan untuk [Android dan Github Actions](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) dan [IOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/), Dan untuk [Gitlab](https://capgoapp/blog/setup-ci-and-cd-gitlab/), sistem CI lainnya seharusnya serupa.
+
+Jangan ragu untuk menghubungi kami melalui GitHub issues atau Discord jika Anda mengalami masalah.
+
+### Bagaimana hubungannya dengan Firebase Remote Config atau Launch Darkly?[](https://capgoapp/docs/faq/#how-does-this-relate-to-firebase-remote-config-or-launch-darkly "Direct link to How does this relate to Firebase Remote Config or Launch Darkly?")
+
+Code push memungkinkan menambahkan kode baru / mengganti kode pada perangkat. Firebase Remote Config dan Launch Darkly keduanya adalah sistem konfigurasi. Mereka memungkinkan Anda untuk mengubah konfigurasi aplikasi Anda tanpa harus mengirim versi baru. Mereka tidak dimaksudkan untuk mengganti kode.
+
+### Seberapa besar jejak dependensi yang ditambahkannya?[](https://capgoapp/docs/faq/#how-big-of-a-dependency-footprint-does-this-add "Direct link to How big of a dependency footprint does this add?")
+
+Saya belum mengukur baru-baru ini, tetapi saya memperkirakan library code push akan menambah kurang dari satu megabyte ke aplikasi Capacitor. Kami tahu cara untuk membuatnya lebih kecil ketika itu menjadi prioritas. Jika ukuran menjadi penghalang bagi Anda, beri tahu kami!
+
+### Apakah code push bekerja dengan aplikasi besar?[](https://capgoapp/docs/faq/#does-code-push-work-with-large-applications "Direct link to Does code push work with large applications?")
+
+Ya. Tidak ada batasan ukuran aplikasi yang dapat diperbarui dengan code push. Seperti disebutkan [di bawah](https://capgoapp/docs/faq/#what-types-of-changes-does-capgo-code-push-support), Capgo dapat mengubah kode JS apa pun dalam aplikasi Anda tanpa memandang ukuran.
+
+Perlu diperhatikan: Ukuran yang lebih besar membuat lebih sulit bagi pengguna untuk mengunduh pembaruan. Kami menyarankan untuk menjaga aplikasi Anda sekecil mungkin.
+
+### Untuk apa saya bisa menggunakan Capgo code push?[](https://capgoapp/docs/faq/#what-can-i-use-capgo-code-push-for "Direct link to What can I use Capgo code push for?")
+
+Kami telah melihat berbagai penggunaan, termasuk:
+
+-   Perbaikan darurat untuk aplikasi produksi
+-   Mengirim perbaikan bug ke pengguna pada versi lama aplikasi Anda
+-   Pengiriman konstan (misalnya setiap jam)
+
+Perhatikan bahwa sebagian besar app store melarang pengiriman kode yang mengubah perilaku aplikasi secara signifikan. Silakan lihat [di bawah](https://capgoapp/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies) untuk informasi lebih lanjut.
+
+### Apa yang dihitung sebagai "MAU" untuk Capgo?[](https://capgoapp/docs/faq/#what-counts-as-a-mau-for-capgo "Direct link to What counts as a \"MAU\" for Capgo?")
+
+MAU adalah "Monthly Active User". Kami menghitung MAU sebagai perangkat yang telah menghubungi server kami dalam 30 hari terakhir. Kami tidak menghitung perangkat yang tidak menghubungi server kami dalam 30 hari terakhir.
+
+Setiap kali perangkat menginstal ulang aplikasi Anda, MAU baru dihitung, ini terjadi karena batasan privasi Apple Store. Kami tidak dapat melacak perangkat yang sama jika pengguna menginstal ulang aplikasi.
+
+Selama pengembangan, setiap kali Anda menginstal ulang aplikasi, MAU baru dihitung.
+
+Sama untuk unduhan testflight atau perpindahan channel di Android. Memperbarui aplikasi tidak membuat ID Perangkat baru.
+
+> Kami menyarankan setelah pengaturan pertama, untuk menonaktifkan perangkat dev dan emulator untuk mengurangi jumlah perangkat duplikat.
+
+### Apa yang tidak bisa kita gunakan Capgo code push untuk?[](https://capgoapp/docs/faq/#what-cant-we-use-capgo-code-push-for "Direct link to What can't we use Capgo code push for?")
+
+Seperti di atas, Capgo tidak boleh digunakan untuk melanggar kebijakan app store. Silakan lihat [di bawah](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines) untuk informasi lebih lanjut.
+
+Juga Capgo tidak mendukung perubahan kode native (misalnya Java/Kotlin di Android atau Objective-C/Swift di iOS). Alat akan memperingatkan Anda selama percobaan pembaruan jika Anda telah mengubah kode native.
+
+### Apakah Capgo mengirimkan ke store untuk saya?[](https://capgoapp/docs/faq/#does-capgo-submit-to-the-stores-for-me "Direct link to Does Capgo submit to the stores for me?")
+
+Capgo saat ini tidak mendukung pengiriman ke app store atas nama Anda. Kami memiliki rencana untuk menambahkan ini di masa depan, tetapi untuk saat ini Anda perlu terus menggunakan proses yang ada untuk mengirim ke app store.
+
+Anda dapat menggunakan [panduan CI Android](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) kami untuk mengotomatiskan proses ini dan [panduan CI iOS](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/).
+
+### Apa yang disimpan Capgo di disk dan di mana?[](https://capgoapp/docs/faq/#what-does-capgo-store-on-disk-and-where "Direct link to What does Capgo store on disk and where?")
+
+Updater Capgo (termasuk dalam aplikasi Anda ketika Anda membangun aplikasi Anda) menyimpan bundle terakhir yang diunduh dalam satu-satunya direktori yang diizinkan capacitor untuk memuat kode. Di Android, ini terletak di `/data/user/0/comexampleapp/code_cache/capgo_updater` meskipun bagian awal dari path itu disediakan oleh sistem Android dan dapat berubah secara dinamis saat runtime. Pada perangkat iOS, data disimpan di bawah `Library/Application Support/capgo`.
+
+Alat baris perintah Capgo (misalnya`npx @capgo/cli app update`) diinstal pada disk di cache npm, login Anda disimpan di direktori home Anda di `~/capgo`
+
+### Bagaimana hubungannya dengan Hot Reload Capacitor?[](https://capgoapp/docs/faq/#how-does-this-relate-to-capacitor-hot-reload "Direct link to How does this relate to Capacitor Hot Reload?")
+
+Hot reload Capacitor hanya fitur pada saat pengembangan. Code push adalah untuk produksi.
+
+Hot reload adalah fitur Capacitor yang memungkinkan Anda mengubah kode pada perangkat selama pengembangan. Ini membutuhkan build aplikasi Capacitor dengan proxy untuk terhubung ke mesin lokal Anda.
+
+Code push adalah fitur yang memungkinkan Anda mengubah kode pada perangkat dalam produksi. Kami akan menggunakan berbagai teknik berbeda untuk membuatnya mungkin tergantung platformnya.
+
+### Perubahan jenis apa yang didukung code push Capgo?[](https://capgoapp/docs/faq/#what-types-of-changes-does-capgo-code-push-support "Direct link to What types of changes does Capgo code push support?") 
+
+Capgo dapat mengubah kode JS apapun dalam aplikasi Anda. Ini termasuk kode aplikasi dan kode yang dihasilkan. Anda juga dapat memperbarui dependensi di `packages.json` selama tidak memerlukan perubahan kode native.
+
+Kami tidak berencana untuk mendukung perubahan kode native (misalnya Java/Kotlin di Android atau Objective-C/Swift di iOS), dan tool akan memperingatkan jika mendeteksi Anda telah mengubah kode native karena tidak akan dimasukkan dalam bundle.
+
+### Apakah mendukung Web?[](https://capgoapp/docs/faq/#does-this-support-web "Direct link to Does this support Flutter Web?")
+
+Code push tidak diperlukan untuk web karena web sudah bekerja dengan cara ini. Ketika pengguna membuka aplikasi web, ia mengunduh versi terbaru dari server jika dibutuhkan.
+
+Jika Anda memiliki use case untuk code push dengan web, kami ingin mengetahuinya!
+
+### Apakah akan berfungsi di iOS, Android, Mac, Windows, Linux, dll?[](https://capgoapp/docs/faq/#will-this-work-on-ios-android-mac-windows-linux-etc "Direct link to Will this work on iOS, Android, Mac, Windows, Linux, etc?")
+
+Ya.
+
+Sejauh ini kami fokus pada dukungan Android dan iOS, tapi code push pada akhirnya akan bekerja di mana saja Capacitor bekerja. Kami memastikan telah membangun semua infrastruktur yang diperlukan untuk menyediakan code push secara andal dan aman terlebih dahulu sebelum memperluas ke platform lain.
+
+### Versi OS apa yang didukung Capgo?[](https://capgoapp/docs/faq/#what-os-versions-does-capgo-support "Direct link to What OS versions does Capgo support?")
+
+Capgo mendukung versi Android yang sama dengan yang didukung Capacitor.
+
+Capacitor saat ini mendukung Android API level 22+ dan iOS 13.0+: [https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy/)
+
+### Versi Capacitor apa yang didukung Capgo?[](https://capgoapp/docs/faq/#what-versions-of-flutter-does-capgo-support "Direct link to What versions of Flutter does Capgo support?")
+
+Capgo saat ini hanya mendukung versi stabil terbaru dari Capacitor. Kami dapat mendukung versi Capacitor yang lebih lama juga, kami hanya belum membangun infrastruktur yang diperlukan untuk mempertahankannya seiring waktu. Kami bermaksud untuk mendukung lebih banyak versi Capacitor di masa depan, termasuk versi apapun untuk pelanggan enterprise kami [https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
+
+Capgo mengikuti Flutter stabil dan umumnya diperbarui dalam beberapa jam setelah rilis stabil. Sistem kami untuk melakukan pembaruan ini otomatis dan membutuhkan beberapa menit untuk dijalankan. Kami kemudian melakukan langkah verifikasi manual tambahan sebelum mempublikasikan ke server kami.
+
+### Bagaimana hubungannya dengan proses review atau kebijakan App/Play Store?[](https://capgoapp/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies "Direct link to How does this relate to the App/Play Store review process or policies?")
+
+Pengembang terikat dengan perjanjian mereka dengan penyedia toko saat memilih untuk menggunakan toko tersebut. Code push dirancang untuk memungkinkan pengembang memperbarui aplikasi mereka dan tetap mematuhi kebijakan toko di iOS dan Android. Mirip dengan berbagai produk komersial yang tersedia untuk melakukannya dengan React Native (misalnya [Microsoft](https://appcenter.ms/), [Expo](https://expo.dev/))
+
+Microsoft juga menerbitkan panduan tentang bagaimana solusi mereka mematuhi app store: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+Code push adalah teknik yang banyak digunakan di seluruh app store. Semua aplikasi besar yang saya ketahui menggunakan code push. Kebijakan utama yang perlu diperhatikan adalah tidak mengubah perilaku aplikasi secara signifikan. Silakan lihat [di bawah](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines) untuk informasi lebih lanjut.
+
+### Apakah Capgo mematuhi pedoman Play Store?[](https://capgoapp/docs/faq/#does-capgo-comply-with-play-store-guidelines "Direct link to Does Capgo comply with Play Store guidelines?")
+
+Ya.
+
+Play Store menawarkan dua pembatasan terkait alat pembaruan:
+
+1. Pembaruan harus menggunakan interpreter atau mesin virtual (Capgo menggunakan Dart Virtual Machine) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
+
+```
+<span><span>    Aplikasi yang didistribusikan melalui Google Play tidak boleh memodifikasi, mengganti, atau memperbarui dirinya sendiri</span><br></span><span><span>    menggunakan metode selain mekanisme pembaruan Google Play. Demikian juga, aplikasi</span><br></span><span><span>    tidak boleh mengunduh kode yang dapat dieksekusi (seperti file dex, JAR, so) dari</span><br></span><span><span>    sumber selain Google Play. *Pembatasan ini tidak berlaku untuk kode</span><br></span><span><span>    yang berjalan di mesin virtual atau interpreter* di mana keduanya menyediakan</span><br></span><span><span>    akses tidak langsung ke API Android (seperti JavaScript di webview atau</span><br></span><span><span>    browser)</span><br></span><span><span></span><br></span><span><span>    Aplikasi atau kode pihak ketiga, seperti SDK, dengan bahasa yang diinterpretasikan (JavaScript,</span><br></span><span><span>    Python, Lua, dll) yang dimuat saat runtime (misalnya, tidak dikemas dengan</span><br></span><span><span>    aplikasi) tidak boleh mengizinkan potensi pelanggaran kebijakan Google Play</span><br></span>
+```
+
+2. Perubahan pada aplikasi tidak boleh menipu (misalnya mengubah tujuan aplikasi melalui pembaruan) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Harap jelaskan kepada pengguna Anda tentang apa yang Anda sediakan dengan aplikasi Anda dan jangan melanggar ekspektasi mereka dengan perubahan perilaku yang signifikan melalui penggunaan Capgo.
+
+Capgo dirancang untuk kompatibel dengan pedoman Play Store. Namun Capgo adalah alat, dan seperti alat lainnya, dapat disalahgunakan. Sengaja menyalahgunakan Capgo untuk melanggar pedoman Play Store adalah pelanggaran [Ketentuan Layanan](https://capgo.app/tos/) Capgo dan dapat mengakibatkan pemutusan akun Anda.
+
+Akhirnya, layanan code push banyak digunakan di industri (semua aplikasi besar yang saya ketahui menggunakannya) dan ada beberapa layanan code push lain yang tersedia untuk umum (misalnya expo.dev & appcenter.ms). Ini adalah jalan yang sudah banyak dilalui.
+
+Microsoft juga menerbitkan panduan tentang bagaimana library "codepush" react native mereka mematuhi app store: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### Apakah Capgo mematuhi pedoman App Store?[](https://capgoapp/docs/faq/#does-capgo-comply-with-app-store-guidelines "Direct link to Does Capgo comply with App Store guidelines?")
+
+Ya.
+
+Mirip dengan Play Store, App Store menawarkan pembatasan teknis dan kebijakan
+
+```
+<span><span>3.2.2</span><br></span><span><span>kode yang diinterpretasikan dapat diunduh ke Aplikasi hanya selama</span><br></span><span><span>kode tersebut:</span><br></span><span><span>(a) tidak mengubah tujuan utama Aplikasi dengan menyediakan</span><br></span><span><span>fitur atau fungsionalitas yang tidak sesuai dengan tujuan yang dimaksudkan dan</span><br></span><span><span>diiklankan dari Aplikasi sebagaimana yang diserahkan ke App Store,</span><br></span><span><span>(b) tidak membuat toko atau storefront untuk kode atau aplikasi lain, dan</span><br></span><span><span>(c) tidak memotong signing, sandbox, atau fitur keamanan lain dari OS</span><br></span>
+
+Capgo menggunakan interpreter Dart khusus untuk mematuhi pembatasan interpreter-only untuk pembaruan di iOS. Selama aplikasi Anda tidak melakukan perilaku yang menipu melalui pembaruan (misalnya mengubah tujuan aplikasi melalui pembaruan), memperbarui melalui Capgo (atau solusi code push lainnya) adalah praktik standar industri dan mematuhi pedoman App Store.
+
+Penyalahgunaan Capgo secara sengaja untuk melanggar pedoman App Store adalah pelanggaran [Ketentuan Layanan](https://capgoapp/tos/) Capgo dan dapat mengakibatkan penutupan akun Anda.
+
+Microsoft juga menerbitkan panduan tentang bagaimana pustaka "codepush" react native mereka mematuhi app store: [https://githubcom/microsoft/react-native-code-push#store-guideline-compliance](https://githubcom/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### Bisakah saya menggunakan Capgo di negara saya?[](https://capgoapp/docs/faq/#can-i-use-capgo-in-my-country "Link langsung ke Bisakah saya menggunakan Capgo di negara saya?")
+
+Kami tidak membatasi akses ke Capgo dari negara manapun.
+
+Kami menyadari bahwa beberapa negara memiliki pembatasan URL yang dapat diakses dari dalam negara. Capgo saat ini menggunakan Cloudflare Cloud untuk hosting, termasuk R2 Storage dan Cloudflare workers.
+
+URL berikut digunakan oleh Capgo:
+
+- [https://apicapgoapp](https://apicapgoapp/) -- digunakan oleh alat baris perintah `npx @capgo/cli` untuk berinteraksi dengan server Capgo serta pembaruan Capgo pada perangkat pengguna untuk memeriksa pembaruan
+- [https://*r2cloudflarestoragecom](https://*r2cloudflarestoragecom/) -- digunakan oleh alat baris perintah `npx @capgo/cli` untuk mengunggah dan mengunduh bundle
+
+Jika semua URL tersebut dapat diakses dari negara Anda, maka Capgo seharusnya berfungsi.
+
+Jika wilayah Anda mengharuskan memblokir akses ke URL tersebut, silakan beri tahu kami dan kami dapat bekerja sama untuk menemukan solusi. Server proxy adalah salah satu pilihannya.
+
+### Bisakah saya menghosting Capgo sendiri?[](https://capgoapp/docs/faq/#can-i-self-host-capgo "Link langsung ke Bisakah saya menghosting Capgo sendiri?")
+
+Ya, Anda dapat menghosting Capgo sendiri. Panduannya belum ditulis, tetapi kodenya bersifat open source dan tersedia di [https://githubcom/cap-go/capgo](https://githubcom/cap-go/capgo/)
+
+### Apakah code push memerlukan internet untuk bekerja?[](https://capgoapp/docs/faq/#does-code-push-require-the-internet-to-work "Link langsung ke Apakah code push memerlukan internet untuk bekerja?")
+
+Ya. Seseorang bisa membayangkan menjalankan server untuk mendistribusikan pembaruan secara terpisah dari internet umum, tetapi beberapa bentuk konektivitas jaringan diperlukan untuk mentransfer pembaruan ke perangkat.
+
+### Bagaimana Capgo terpengaruh oleh kurangnya konektivitas jaringan?[](https://capgoapp/docs/faq/#how-is-capgo-affected-by-lack-of-network-connectivity "Link langsung ke Bagaimana Capgo terpengaruh oleh kurangnya konektivitas jaringan?")
+
+Pembaruan Capgo (termasuk dalam aplikasi Anda saat Anda membangun aplikasi dengan Capgo) dirancang untuk tahan terhadap masalah konektivitas jaringan.
+
+Dalam perilaku pembaruan default, ketika aplikasi diluncurkan, ia memberi tahu pembaruan Capgo, yang memunculkan thread terpisah untuk membuat permintaan jaringan ke server Capgo dan meminta pembaruan. Kami sengaja menggunakan thread terpisah untuk menghindari mempengaruhi pemblokiran hal lain yang mungkin dilakukan aplikasi. Jika permintaan jaringan gagal atau timeout, pembaruan akan mencoba memeriksa lagi saat aplikasi diluncurkan berikutnya.
+
+Alat baris perintah Capgo (misalnya `npx @capgo/cli app update`) memerlukan konektivitas jaringan untuk berfungsi. Jika Anda menggunakan Capgo untuk mendistribusikan aplikasi Anda, Anda harus memastikan bahwa sistem CI Anda memiliki konektivitas jaringan.
+
+### Apa yang terjadi jika pengguna tidak memperbarui untuk waktu yang lama dan melewatkan pembaruan?[](https://capgoapp/docs/faq/#what-happens-if-a-user-doesnt-update-for-a-long-time-and-misses-an-update "Link langsung ke Apa yang terjadi jika pengguna tidak memperbarui untuk waktu yang lama dan melewatkan pembaruan?")
+
+Implementasi kami selalu mengirim pembaruan yang disesuaikan khusus untuk perangkat yang memintanya, selalu memperbarui peminta ke versi terbaru yang tersedia. Jadi jika pengguna tidak memperbarui untuk sementara waktu, mereka akan "melewatkan" pembaruan perantara.
+
+Server pembaruan dapat diubah untuk mendukung respons baik dengan versi inkremental berikutnya atau versi terbaru tergantung pada kebutuhan aplikasi Anda. Silakan beri tahu kami jika perilaku pembaruan alternatif penting bagi Anda.
+
+### Bagaimana hubungan Capgo dengan Capacitor?[](https://capgoapp/docs/faq/#how-does-capgo-relate-to-capacitor "Link langsung ke Bagaimana hubungan Capgo dengan Capacitor?")
+
+Capgo adalah plugin untuk Capacitor yang menambahkan code push. Capgo bukan pengganti Capacitor. Anda dapat terus menggunakan alat Capacitor yang sudah Anda kenal dan sukai.
+
+Kami melacak rilis stabil terbaru dari Capacitor dan memperbarui plugin code push kami agar berfungsi dengannya.
+
+### Kapan pembaruan terjadi?[](https://capgoapp/docs/faq/#when-do-updates-happen "Link langsung ke Kapan pembaruan terjadi?")
+
+Secara default, pembaruan Capgo memeriksa pembaruan saat aplikasi dimulai. Ini berjalan di thread latar belakang dan tidak memblokir thread UI. Setiap pembaruan akan dipasang saat pengguna menggunakan aplikasi dan akan diterapkan saat aplikasi dimulai ulang berikutnya.
+
+Dimungkinkan juga untuk menjalankan pembaruan Capgo secara manual menggunakan [package:capgo_code_push](https://pubdev/packages/capgo_code_push/), yang memungkinkan untuk memicu pembaruan kapan saja, termasuk melalui notifikasi push.
+
+Pembaruan Capgo dirancang sedemikian rupa sehingga ketika jaringan tidak tersedia, atau server down atau tidak dapat dijangkau, aplikasi akan terus berjalan normal. Jika Anda memilih untuk menghapus pembaruan dari server kami, semua klien Anda akan terus berjalan normal.
+
+Kami telah menambahkan kemampuan untuk melakukan rollback patch. Hal paling sederhana adalah dengan melampirkan bundle sebelumnya ke channel Anda untuk membatalkan.
+
+### Apakah saya perlu menjaga kerahasiaan app_id saya?[](https://capgoapp/docs/faq/#do-i-need-to-keep-my-app_id-secret "Link langsung ke Apakah saya perlu menjaga kerahasiaan app_id saya?")
+
+Tidak. `app_id` disertakan dalam aplikasi Anda dan aman untuk dipublikasikan. Anda dapat memeriksakannya ke kontrol versi (bahkan secara publik) dan tidak perlu khawatir orang lain mengaksesnya.
+
+Seseorang yang memiliki `app_id` Anda dapat mengambil versi terbaru aplikasi Anda dari server Capgo, tetapi mereka tidak dapat mendorong pembaruan ke aplikasi Anda atau mengakses aspek lain dari akun Capgo Anda.
+
+### Informasi apa yang dikirim ke server Capgo?[](https://capgoapp/docs/faq/#what-information-is-sent-to-capgo-servers "Link langsung ke Informasi apa yang dikirim ke server Capgo?")
+
+Meskipun Capgo terhubung ke jaringan, ia tidak mengirimkan informasi yang dapat diidentifikasi secara pribadi. Menyertakan Capgo seharusnya tidak mempengaruhi deklarasi Anda untuk Play Store atau App Store.
+
+Permintaan yang dikirim dari aplikasi ke server Capgo mencakup:
+
+- app_id (ditentukan dalam `capacitorconfigjson`)
+- channel (opsional dalam `capacitorconfigjson`)
+- release_version (versionName dari AndroidManifestxml atau CFBundleShortVersionString dari Infoplist atau `capacitorconfigjson` jika diatur dalam [`CapacitorUpdaterversion`](/docs/plugin/settings/#version))
+- version_number (dihasilkan sebagai bagian dari `npx @capgo/cli app update`)
+- os_version (misalnya '1121')
+- platform (misalnya 'android', diperlukan untuk mengirimkan patch yang tepat) Itu saja. Kode untuk ini ada di `updater/library/src/networkrs`
+- device_id (dibuat di perangkat saat pertama kali dijalankan, digunakan untuk menghilangkan duplikasi instalasi per-perangkat dan memungkinkan kami mengenakan biaya berdasarkan pengguna yang diinstal)pengguna aktif bulanan), daripada total patch atau total instalasi patch)
+-   custom\_id (opsional, diatur saat runtime oleh pengembang, digunakan agar Anda dapat menghubungkan perangkat ke pengguna dalam sistem Anda)
+
+### Platform apa saja yang didukung Capgo?[](https://capgoapp/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
+
+Saat ini, Capgo mendukung iOS dan Android. Keduanya sudah siap untuk produksi.
+
+Penggunaan Capgo untuk iOS atau Android dapat menjadi keputusan independen. Anda dapat mengatur di channel Anda untuk mengirim ke Android dan ipa yang dibuat ke App Store atau sebaliknya.
+
+Capgo dapat (dengan relatif mudah) dibuat untuk mendukung target desktop atau embedded. Jika hal tersebut penting bagi Anda, silakan beri tahu kami.
+
+### Bagaimana Capgo berinteraksi dengan Play Testing Tracks atau Apple TestFlight?[](https://capgoapp/docs/faq/#how-does-capgo-interact-with-play-testing-tracks-or-apple-testflight "Direct link to How does Capgo interact with Play Testing Tracks or Apple TestFlight?")
+
+Masing-masing app store memiliki mekanisme terpisah untuk mendistribusikan aplikasi ke kelompok pengguna terbatas (mis. "pengujian internal", "beta tertutup", dll). Semua ini adalah mekanisme untuk membagi pengguna Anda menjadi kelompok-kelompok dan mendistribusikan versi aplikasi tertentu ke masing-masing.
+
+Sayangnya, tidak semua mekanisme ini memungkinkan pihak ke-3 mendeteksi kapan aplikasi diinstal di Test Track tertentu atau melalui TestFlight. Dengan demikian, kami tidak memiliki visibilitas yang dapat diandalkan ke komposisi kelompok-kelompok ini, dan tidak dapat membatasi akses ke patch Capgo berdasarkan kelompok-kelompok ini. [https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play](https://stackoverflowcom/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play/) [https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i](https://stackoverflowcom/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i/)
+
+Jika Anda ingin membagi ketersediaan bundle Capgo, ada 4 opsi potensial:
+
+1. Gunakan channel terpisah untuk setiap kelompok. Ini adalah pendekatan yang paling langsung, tapi memerlukan Anda mengelola beberapa channel. Anda mungkin sudah memiliki channel dev dan prod dengan ketersediaan berbeda. Anda dapat memperbarui channel dev Anda, memverifikasinya dan kemudian memperbarui channel prod Anda secara terpisah. Kami merekomendasikan menggunakan branch/tag dalam version control untuk membantu melacak sumber yang terkait dengan setiap rilis.
+2. Lacak set pengguna opt-in Anda sendiri, nonaktifkan pembaruan otomatis, dan picu pembaruan hanya untuk pengguna tertentu melalui package:capgo\_code\_push. Ini berfungsi saat ini, tapi memerlukan Anda mengelola daftar opt-in Anda sendiri.
+3. Capgo memungkinkan membuat mekanisme opt-in sendiri berdasarkan perangkat (mirip dengan Test Tracks atau TestFlight, hanya agnostik platform). Ini memungkinkan tim QA Anda untuk opt-in ke bundle sebelum dipromosikan ke publik.
+4. Capgo memiliki rollout berbasis persentase. Ini tidak membiarkan Anda memilih perangkat mana yang akan dikirim, tapi dapat membantu Anda melakukan rollout secara bertahap dan rollback saat melihat masalah.
+
+## Penagihan[](https://capgoapp/docs/faq/#billing "Direct link to Billing")
+
+### Bagaimana cara meningkatkan atau menurunkan paket saya?[](https://capgoapp/docs/faq/#how-do-i-upgrade-or-downgrade-my-plan "Direct link to How do I upgrade or downgrade my plan?")
+
+Anda dapat meningkatkan atau menurunkan paket Anda kapan saja di dashboard Anda: [https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### Kapan periode penagihan saya direset?[](https://capgoapp/docs/faq/#when-does-my-billing-period-reset "Direct link to When does my billing period reset?")
+
+Periode penagihan direset secara otomatis setiap bulan pada bulan Anda pertama kali berlangganan Capgo. Misalnya, jika Anda berlangganan pada tanggal 15 bulan ini, periode penagihan Anda akan direset pada tanggal 15 setiap bulan.
+
+### Bagaimana cara membatalkan langganan saya?[](https://capgoapp/docs/faq/#how-do-i-cancel-my-subscription "Direct link to How do I cancel my subscription?")
+
+Anda dapat membatalkan langganan Anda kapan saja di dashboard Anda: [https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### Bisakah saya membayar untuk satu tahun di muka?[](https://capgoapp/docs/faq/#can-i-pay-for-a-year-in-advance "Direct link to Can I pay for a year in advance?")
+
+Ya, Anda bisa kapan saja di dashboard Anda: [https://webcapgoapp/dashboard/settings/plans](https://webcapgoapp/dashboard/settings/plans/)
+
+### Statistik dan analitik[](https://capgoapp/docs/faq/#stats-and-analytics "Direct link to Stats and analytics")
+
+Statistik di dashboard Anda diperbarui setiap tengah malam UTC.
+Statistik dihitung berdasarkan jumlah [MAU](https://capgoapp/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?") yang telah diinstal di perangkat Anda.
+
+# Bagaimana ID perangkat dibuat[](https://capgoapp/docs/faq/#how-device-id-is-generated "Direct link to How device ID is generated")
+
+ID perangkat dibuat di perangkat pada penggunaan pertama, dan digunakan untuk menghilangkan duplikasi instalasi per-perangkat dan memungkinkan kami menagih berdasarkan pengguna yang terinstal (mis. pengguna aktif bulanan), daripada total patch atau total instalasi patch.
+
+MAU adalah solusi yang lebih baik daripada jumlah instalasi untuk harga Capgo, karena lebih akurat dan mencerminkan biaya aktual Capgo per perangkat.
+
+Untuk alasan privasi, kami tidak dapat melacak perangkat yang sama jika pengguna menginstal ulang aplikasi.
+
+Aturan privasi diberlakukan oleh Apple dan Google, dan tidak diberlakukan oleh Capgo.
+
+ID Perangkat tidak akan terdaftar dalam daftar perangkat Anda sampai mereka mendapatkan patch pertama yang diinstal.
+
+# Mengapa jumlah perangkat saya berbeda dengan MAU saya?[](https://capgoapp/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
+
+Saat ini, daftar perangkat tidak diperbarui sesering MAU.
+
+Daftar perangkat hanya diperbarui ketika perangkat menginstal pembaruan.
+
+Sementara MAU diperbarui pada setiap peluncuran aplikasi. Ini adalah keterbatasan platform saat ini. Platform Analitik kami tidak mendukung pembaruan mentah sehingga kami menggunakan database konvensional untuk daftar Perangkat.
+
+Untuk membatasi jumlah query database, kami hanya memperbarui baris saat pembaruan aplikasi.
+
+Keterbatasan ini akan dihapus di masa depan.
+
+# Bagaimana cara memiliki pembaruan berbeda berdasarkan platform?[](https://capgoapp/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
+
+Anda dapat membuat channel untuk setiap platform dan menonaktifkan pembaruan khusus platform di setiap channel.
+
+Pada channel ios nonaktifkan pembaruan android dan pada channel android nonaktifkan pembaruan ios.
+
+Kemudian unggah bundle ke setiap channel untuk memiliki pembaruan berbeda untuk setiap platform.
+
+Jika Anda perlu memiliki pembaruan yang sama untuk kedua platform, Anda dapat menghubungkan satu bundle ke beberapa channel. Tidak perlu menduplikasi bundle.

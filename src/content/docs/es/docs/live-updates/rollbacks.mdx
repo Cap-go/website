@@ -1,0 +1,90 @@
+---
+title: Rollbacks
+sidebar:
+  order: 5
+locale: es
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Si bien las actualizaciones en vivo de Capgo te permiten entregar rápidamente mejoras y correcciones a tus usuarios, puede haber situaciones donde necesites revertir a una versión anterior de tu aplicación. Quizás una nueva actualización introdujo un problema crítico inesperado, o tal vez quieras revertir un cambio específico mientras trabajas en una solución.
+
+Capgo proporciona varias formas de gestionar las compilaciones de un canal y controlar la versión de tu aplicación que reciben los usuarios.
+
+## Revertir a un Bundle Anterior
+
+Cada vez que subes una nueva compilación y la asignas a un canal, Capgo mantiene un historial de esas compilaciones. Si necesitas revertir una actualización específica, puedes seleccionar una de estas compilaciones anteriores para volver a implementarla en el canal.
+
+Para revertir a una compilación anterior:
+
+<Steps>
+
+1. Inicia sesión en el [Panel de Control de Capgo](https://app.capgo.io)
+
+2. Navega a la sección "Canales"
+
+3. Haz clic en el nombre del canal que quieres revertir
+
+4. Encuentra la compilación a la que quieres revertir en el historial de compilaciones del canal
+
+5. Haz clic en el ícono de corona junto a esa compilación para convertirla en la compilación activa del canal
+   ![Opciones de gestión de canal](/select_bundle.webp)
+
+6. Confirma que deseas revertir a esta compilación
+
+</Steps>
+
+<Aside type="note">
+Revertir a una compilación anterior solo afecta al canal seleccionado. Si tienes múltiples canales (ej. Producción, Staging, etc.), necesitarás repetir el proceso de reversión para cada canal afectado.
+</Aside>
+
+Después de revertir, los dispositivos configurados para escuchar el canal actualizado recibirán la compilación anterior la próxima vez que busquen actualizaciones. La compilación revertida será tratada como una nueva actualización, por lo que se aplicarán las condiciones y el flujo de actualización habituales.
+
+## Desvincular un Canal
+
+Si deseas detener temporalmente las actualizaciones en un canal mientras investigas un problema, puedes desvincular el canal de su compilación actual.
+
+Para desvincular un canal:
+
+1. Navega al canal en el Panel de Control de Capgo
+
+2. Haz clic en el botón "Desvincular" junto a la compilación actual
+
+3. Confirma que deseas desvincular el canal
+
+Una vez que un canal está desvinculado, no distribuirá nuevas actualizaciones. Los dispositivos configurados en ese canal permanecerán en su compilación actual hasta que el canal se vincule nuevamente a una compilación.
+
+Esto es útil si has identificado un problema con una actualización pero aún no estás seguro a qué compilación quieres revertir. Desvincular el canal te da tiempo para investigar sin enviar más actualizaciones.
+
+## Forzar el Bundle Incorporado
+
+En situaciones más graves, es posible que desees revertir todos los dispositivos en un canal a la compilación web que se incluyó originalmente en el binario nativo de tu aplicación. Esto se conoce como el "bundle incorporado".
+
+Para forzar el bundle incorporado en un canal:
+
+1. Navega al canal en el Panel de Control de Capgo
+
+2. Haz clic en el botón "Bundle Incorporado"
+
+3. Confirma que deseas forzar el bundle incorporado
+
+Cuando fuerzas el bundle incorporado, todos los dispositivos configurados en ese canal volverán a la compilación web original empaquetada en su próxima verificación de actualización. Esto sucede independientemente de la compilación en la que se encuentren actualmente.
+
+Esta es una opción de reversión más agresiva que revertir a una compilación anterior específica, ya que descarta todas las actualizaciones en vivo lanzadas desde que la aplicación se publicó por última vez en las tiendas de aplicaciones.
+
+<Aside type="caution">
+Ten cuidado al forzar el bundle incorporado, ya que afectará a todos los dispositivos en el canal. Asegúrate de haber considerado el impacto y tener un plan para avanzar antes de tomar esta acción.
+</Aside>
+
+## Monitoreo y Respuesta a Problemas
+
+Para detectar problemas rápidamente y minimizar el impacto de actualizaciones problemáticas, es importante tener un plan para monitorear tus lanzamientos y responder a los problemas.
+
+Algunas estrategias incluyen:
+
+- Monitorear reportes de fallos y retroalimentación de usuarios inmediatamente después de lanzar una actualización
+- Usar despliegues graduales o un sistema de canales escalonado para probar actualizaciones en un grupo más pequeño antes del lanzamiento general
+- Tener un proceso de decisión claro sobre cuándo revertir, desvincular o forzar el bundle incorporado, y quién tiene la autoridad para hacerlo
+- Comunicar a los usuarios sobre el problema y la resolución, cuando sea apropiado
+
+Al combinar un monitoreo cuidadoso con la capacidad de gestionar rápidamente las actualizaciones problemáticas, puedes ofrecer una experiencia de aplicación que mejora continuamente mientras minimizas las interrupciones para tus usuarios.

@@ -1,0 +1,82 @@
+---
+title: Gambaran Umum
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: id
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Gunakan fitur Live Updates Capgo untuk memperbarui bundel JavaScript aplikasi Anda secara jarak jauh dan real-time. Kirim pembaruan JS langsung ke pengguna Anda tanpa melalui proses review app store untuk segera memperbaiki bug dan mengirim fitur baru.
+
+<Aside>
+
+Live Updates terbatas pada perubahan bundel JavaScript. Jika Anda perlu memperbarui kode native, seperti menambah atau menghapus plugin atau mengubah konfigurasi proyek native, Anda perlu mengirimkan build binary native baru ke app store.
+
+</Aside>
+
+## Cara Kerja Live Updates
+
+Sistem Live Update Capgo memiliki dua komponen utama:
+
+1. SDK Capgo, yang Anda instal di aplikasi Anda. SDK memeriksa pembaruan yang tersedia dan mengunduhnya di latar belakang.
+
+2. Channel, yang memungkinkan Anda menargetkan pembaruan ke grup pengguna tertentu. Anda dapat menggunakan channel untuk mengelola jalur rilis yang berbeda, seperti `Production`, `Staging`, dan `Dev`.
+
+Ketika Anda mengunggah bundel JS baru ke Capgo dan menetapkannya ke channel, SDK Capgo di aplikasi yang dikonfigurasi untuk channel tersebut akan mendeteksi pembaruan dan mengunduhnya. Saat aplikasi dimulai ulang berikutnya, bundel baru akan dimuat.
+
+## Memulai
+
+Untuk mulai menggunakan Live Updates, ikuti langkah-langkah berikut:
+
+<Steps>
+
+1. Selesaikan [Capgo Quickstart](/docs/getting-started/quickstart) untuk menyiapkan aplikasi Anda di Capgo dan menginstal SDK Capgo
+
+2. Dalam kode aplikasi Anda, panggil `CapacitorUpdaternotifyAppReady()` setelah aplikasi Anda selesai diinisialisasi. Ini memberi tahu SDK Capgo bahwa aplikasi Anda siap menerima pembaruan
+
+3. Build bundel JS Anda dan unggah ke Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest upload --channel=Production 
+   ```
+
+4. Buka aplikasi Anda dan tunggu pembaruan diunduh. Anda dapat memeriksa statusnya dengan:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Setelah pembaruan diunduh, tutup dan buka kembali aplikasi Anda untuk memuat bundel baru
+
+</Steps>
+
+Lihat panduan [Deploying Live Updates](/docs/getting-started/deploy) untuk detail lebih lanjut
+
+## Langkah Selanjutnya
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Channel" icon="bars">
+      Pelajari cara menggunakan channel untuk mengelola jalur rilis yang berbeda dan menargetkan pembaruan ke pengguna tertentu
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollback" icon="left-arrow">
+      Temukan cara kembali ke versi bundel JS sebelumnya jika pembaruan menyebabkan masalah
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Perilaku Pembaruan" icon="setting">
+      Sesuaikan bagaimana dan kapan pembaruan diunduh dan diterapkan di aplikasi Anda
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="Pembaruan Cepat" icon="starlight">
+      Pelajari cara menggunakan pembaruan cepat untuk mempercepat proses pembaruan
+    </Card>
+  </a>
+</CardGrid>

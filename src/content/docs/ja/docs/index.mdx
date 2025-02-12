@@ -1,0 +1,39 @@
+---
+title: Capgoへようこそ
+description: >-
+  Capgoは、Capacitorとモバイル開発チーム向けのオープンソースのライブアップデートプラットフォームで、ユーザーへのライブアップデートを数日ではなく数分で配信することができます。
+template: splash
+next: false
+hero:
+  tagline: >-
+    Capgoは、Capacitorとモバイル開発チームのためのオープンソースのリアルタイムアップデートプラットフォームで、数日ではなく数分でユーザーにアップデートを提供することができます
+  image:
+    file: /logo.svg
+  actions:
+    - text: はじめに
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: 'https://github.com/Cap-go/Capgo/'
+      icon: external
+      variant: minimal
+locale: ja
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="リアルタイム更新の力" icon="rocket">
+    シームレスなアプリのライブ更新、重要なバグ修正、コンテンツの変更、ベータ機能などを提供し、ユーザーに最高の体験を提供します
+  </Card>
+  <Card title="簡単な統合" icon="pencil">
+    プラグインはコードベースへの統合が3ステップで完了し、数日ではなく数分でユーザーに更新を送信できます！
+  </Card>
+  <Card title="インストール" icon="setting">
+    `npx @capgo/cli@latest init [APIKEY]` を実行して始めましょう
+  </Card>
+  <Card title="詳細なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugin/cloud-mode/getting-started/)で、オンボーディング動画を使用して5分でプラグインをマスターする方法を学びましょう
+  </Card>
+</CardGrid>

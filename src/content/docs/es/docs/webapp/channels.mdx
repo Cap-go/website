@@ -1,0 +1,81 @@
+---
+title: 채널
+description: >-
+  Los canales son una forma de gestionar las actualizaciones de tu aplicación.
+  Puedes tener múltiples canales y cada canal puede tener múltiples versiones.
+  Esto te permite tener múltiples versiones de tu aplicación en producción al
+  mismo tiempo.
+sidebar:
+  order: 6
+locale: es
+---
+
+## Gestión de canales
+
+Primero, echemos un vistazo a la página de canales. Puedes acceder a ella [haciendo clic en tu aplicación](/docs/webapp/main-page) y luego [haciendo clic en la pestaña de canales](/docs/webapp/main-app-page)
+
+<figure><img src="/channelswebp" alt="channel list" /><figcaption></figcaption></figure>
+
+## Crear un canal
+
+Como puedes ver, existe un botón más en la esquina inferior derecha (`1` en la imagen). Al hacer clic en él se abrirá un modal donde puedes crear un nuevo canal
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modalwebp" alt="new channel" /><figcaption></figcaption></figure>
+
+Después de hacer clic en `Añadir` un nuevo canal debería aparecer en la lista
+<figure><img src="/post-channel-createwebp" alt="after channel create" /><figcaption></figcaption></figure>
+
+## ¿Qué significa mal configurado?
+A veces la configuración de un canal no es válida. En ese caso, recibirás una advertencia grande y la columna `Mal configurado` dirá `Sí` para uno o más de los canales.
+Puedes aprender más sobre esto [aquí](/docs/cli/commands/#disable-updates-strategy)
+
+## Eliminar un canal
+
+Eliminar un canal es sencillo. Solo haz clic en el ícono de la papelera y confirma la eliminación (`2` en la imagen)
+
+## Gestionar un canal
+
+Hacer clic en el nombre del canal abrirá un modal donde puedes gestionar el canal (`3` en la imagen)
+Esta página debería verse algo así:
+
+<figure><img src="/manage_channel_mainwebp" alt="manage channel" /><figcaption></figcaption></figure>
+
+Veamos las diferentes secciones
+
+Primero el `Número de paquete` (`1` en la imagen). Esta es la versión actual para ese canal. Cuando se solicite servir una actualización, este canal siempre intentará responder con esa versión* [^1]
+Al hacer clic en él deberías ir a la página de [paquetes](/docs/webapp/bundles/)
+
+Segundo la página `Compartido con` (`2` en la imagen). Recomiendo no usar esto nunca. Un sistema nuevo y mejor está en desarrollo
+
+Ahora los dispositivos forzados (`3` en la imagen). Esta es una lista de dispositivos que siempre obtendrán actualizaciones de este canal. Esto es útil para propósitos de prueba. Puedes forzar un dispositivo a un canal desde la página de [dispositivos](/docs/webapp/devices/)
+
+Por último la configuración (`4` en la imagen). Aquí es donde puedes gestionar cómo se comportan los canales
+Después de hacer clic en él deberías ver algo como esto:
+
+<figure><img src="/channel_settingswebp" alt="setting of channel" /><figcaption></figcaption></figure>
+
+La lista de configuraciones es larga, pero haré mi mejor esfuerzo para explicarlas todas
+
+---
+Primero el `Canal predeterminado` **ESTA ES PROBABLEMENTE LA MÁS IMPORTANTE**\
+Si un canal está marcado como predeterminado, entonces se usará como el canal predeterminado para todos los dispositivos nuevos\
+En otros términos: Si tienes un nuevo usuario, capgo intentará servirle la última versión de este canal predeterminado
+Solo 1 canal puede ser establecido como predeterminado a la vez. Si intentas romper esta regla se te pedirá confirmar tu acción
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-defaultwebp" alt="confirm make change" /><figcaption></figcaption></figure>
+
+Después de confirmar, el antiguo canal predeterminado se desmarcará como predeterminado y el nuevo será marcado como predeterminado
+
+---
+Segundo la configuración de `IOS`. Esto es relativamente simple. Si es falso, entonces los dispositivos IOS no podrán descargar actualizaciones de este canal
+
+Tercero es la configuración de `Android`. Esto es similar a `IOS`. Si es falso, entonces los dispositivos Android no podrán descargar actualizaciones de este canal
+
+Cuarto es la configuración `Deshabilitar auto degradación bajo nativo`. Si esto es verdadero entonces será imposible degradar desde una versión nativa. Esto significa que si has subido una versión `120` a la App Store o Play Store e intentas establecer la versión del canal a `110` entonces la actualización (degradación) fallará
+
+Quinto es `Deshabilitar auto actualización`. Esta configuración es bastante compleja, y puedes aprender más sobre ella [aquí](/docs/cli/commands/#disable-updates-strategy)
+
+En cuanto a `Permitir compilación de desarrollo`. Si esto es verdadero entonces las compilaciones de desarrollo podrán descargar actualizaciones de este canal. Si no, entonces cualquier solicitud de actualización que tenga el `prod` establecido en falso será rechazada. Esto es principalmente útil para propósitos de prueba
+
+Séptimo es `Permitir Emuladores`. Si esto es falso entonces capgo rechazará cualquier solicitud de actualización que provenga de un emulador. Esto es principalmente útil para propósitos de prueba
+
+Octavo es `Permitir que los dispositivos se auto asocien`. Si esto es verdadero entonces el método [setChannel](docs/plugin/api/#setchannel) estará disponible. Si esto está establecido en falso e intentas llamar al método [setChannel](docs/plugin/api/#setchannel) con este canal entonces la llamada fallará

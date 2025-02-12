@@ -1,0 +1,104 @@
+---
+title: Hébergement autonome S3
+description: Comment configurer minio pour travailler avec capgo
+sidebar:
+  order: 2
+locale: fr
+---
+
+## Que couvre ce tutoriel ?
+
+Ce tutoriel montrera comment configurer [minio](https://minio/) pour travailler avec capgo
+
+Ce n'est pas techniquement requis pour exécuter capgo
+
+La configuration de S3 permet de télécharger des bundles depuis le [CLI](/docs/cli/commands/)
+
+:::danger
+⚠️ Ce tutoriel n'est pas destiné à être utilisé en production\
+Utilisez-le uniquement en développement local
+:::
+
+## Prérequis
+
+1. [Docker](https://wwwdockercom/)
+
+## Pour commencer
+
+Tout d'abord, créez un nouveau répertoire
+
+Puis créez un dossier nommé `data` à l'intérieur
+
+Ensuite, exécutez la commande suivante :
+```bash
+docker run \
+   -p 9000:9000 \
+   -p 9090:9090 \
+   --user $(id -u):$(id -g) \
+   --name minio1 \
+   -e "MINIO_ROOT_USER=ROOTUSER" \
+   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
+   -v PATH_TO_DATA_FOLDER_CREATED_IN_PREVIOUS_STEP:/data \
+   quayio/minio/minio server /data --console-address ":9090"
+```
+
+Si vous fermez la fenêtre de console avec ce conteneur, vous pouvez le démarrer avec :
+```bash
+docker start minio1
+```
+
+Si vous devez modifier la configuration de minio, vous pouvez supprimer le conteneur en exécutant :
+```bash
+docker rm minio1
+```
+⚠️ Cette commande ne supprime pas les données minio
+
+## Configuration des fonctions edge
+
+Maintenant que nous avons un serveur S3 en cours d'exécution, nous devons configurer les fonctions edge de capgo pour utiliser notre serveur S3
+
+Pour cela, nous devons créer un fichier ENV dans `capgo/supabase` nommé `envlocal`
+
+Ce fichier devrait ressembler à ceci :
+```bash
+STRIPE_WEBHOOK_SECRET=test
+STRIPE_SECRET_KEY=test
+API_SECRET=testsecret
+PLAN_MAKER=test
+PLAN_SOLO=test
+PLAN_TEAM=test
+# Ci-dessous la configuration importante pour S3
+S3_ENDPOINT=hostdockerinternal
+S3_REGION=dev-region
+S3_PORT=9000
+S3_SSL=false
+R2_ACCESS_KEY_ID=ROOTUSER
+R2_SECRET_ACCESS_KEY=CHANGEME123
+```
+
+L'IP `hostdockerinternal` est une IP docker qui ne peut être atteinte qu'en interne par docker, mais nous la remplaçons dans le code par `0000` pour que minio puisse être atteint depuis localhost
+
+Pour exécuter les fonctions edge avec notre nouveau fichier env, utilisez
+```bash
+supabase functions serve --env-file /supabase/envlocal
+```
+
+## Configuration du CLI pour utiliser S3
+
+Le CLI ne fonctionnera pas par défaut avec minio. La modification suivante de `capacitorconfigts`[^1] est nécessaire
+```ts
+const config: CapacitorConfig = {
+  appId: 'comdemoapp',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      // Sans ce localS3, la commande de téléchargement échouera
+      localS3: true
+    },
+  },
+};
+```
+
+[^1]: Le fichier se trouve dans votre répertoire d'application

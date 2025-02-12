@@ -16,8 +16,6 @@ locale: en
 next_blog: ''
 ---
 
-# App Store vs Direct Updates: What Developers Need to Know
-
 **App Store updates or direct OTA updates?** The way you deliver [app updates](https://capgo.app/plugins/capacitor-updater/) can significantly impact speed, control, and user experience. Here's a quick breakdown:
 
 -   **App Store Updates**: Go through a review process, ensuring security and compliance but often delayed by hours or days. Ideal for global rollouts but limits flexibility.

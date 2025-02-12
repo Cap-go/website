@@ -1,0 +1,129 @@
+---
+title: Problemas conocidos
+description: Capacitor と CapGo の既知の問題
+sidebar:
+  order: 7
+locale: ja
+---
+
+Here's the Japanese translation:
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionic のライブリロード
+
+* 開発時に、CLIからIonicのライブリロード機能を使用すると、プラグインが上書きされるため、更新が反映されません
+
+## Quasar のライブリロード
+
+* 内部でIonicと同じシステムを使用しているため、更新が反映されません
+
+## 更新の失敗
+
+* これは通常、大きな更新（20MB以上）がプッシュされた場合に発生し、多くのユーザーが最新バージョンを取得できません  
+以前は、ダウンロードが完了するまでアプリを開いたままにする必要がありましたが、現在はバックグラウンドダウンロードを使用していますが、数秒間に制限されています
+
+## Android
+
+### ダウンロードできない
+
+インドのデバイスで問題が発生し、ユーザーと通話して異なるDNSサーバーを試してもらったところ、解決しました
+
+問題が発生した場合は、CloudflareやGoogle DNSなど、異なるDNSサーバーを試してください
+
+Cloudflare: 1111と1001
+
+Google DNS: 8888と8844、またはdnsgoogle
+
+<LinkCard
+	title="How to setup a preferred DNS server on Android?"
+	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+/>
+
+### セルフホスティング
+セルフホストの更新をプッシュする場合、Androidアププのセキュリティポリシーに反するため、"HTTP"エンドポイントは使用できないことに注意してください。それでも使用したい場合は、このガイドに従ってください：
+
+<LinkCard
+	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	href="https://stackoverflowcom/a/51902630/5511370"
+/>
+
+### 解凍
+
+解凍の問題：DEFLATED entriesはEXT descriptorを持つことができます
+
+CLIとは異なるもので bundles を圧縮した場合、zipのフォーマットが正しくない可能性があります。CLIコマンド `npx @capgo/cli zip BUNDLE_FOLDER` を使用してください
+
+これはJavaの既知の問題です：
+
+<LinkCard
+	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	href="https://bugsopenjdkorg/browse/JDK-8143613"
+/>
+
+### Clearfixの問題
+
+* usesCleartextTrafficで問題がある場合、プラグインがsonar cloudで推奨されているグッドプラクティスに従っているためです。90%のケースでは問題なく動作しますが、一部のプラグインで問題が発生する場合があります
+
+修正するには、`android/app/src/main/AndroidManifestxml`の`<application>`キーに以下を追加してください：
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemasandroidcom/tools"
+```
+
+## iOS
+
+### プライバシーマニフェスト
+
+[Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest)（通常は`ios/App/PrivacyInfoxcprivacy`）に`NSPrivacyAccessedAPICategoryUserDefaults`ディクショナリキーを追加してください：
+
+```xml
+<?xml version="10" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 10//EN" "http://wwwapplecom/DTDs/PropertyList-10dtd">
+<plist version="10">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- ファイルが既に存在する場合は、この dict エントリを配列に追加してください -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA921</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+[`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults) APIへのアクセス理由として[`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401)を宣言することを推奨します
+
+### ネットワーク権限
+
+ローカルサーバーを使用して更新テストを行う場合、アプリはネットワーク権限を要求します。これは正常な動作で、リモートサーバーを使用する場合は発生しません
+
+## 両OS共通
+
+手動モードで更新を行う場合、一部のイベントのキャッチが困難です。例えば、更新失敗はJSコードがリロードする直前にトリガーされるため、キャッチできません
+
+代替手段として、bundlesをリストアップしてエラー統計を確認することで、更新が失敗したかどうかを知ることができます
+
+将来的にはより良い対処方法を見つける必要がありますが、自動モードが推奨される更新方法であるため、優先度は高くありません
+
+PRsを歓迎しています
+
+## CLI
+
+CLIで何か問題がある場合は、
+
+**capacitorconfigts**に**appId**と**appName**が存在することを確認してください
+
+公式ドキュメントのガイドに従ってください：
+
+<LinkCard
+	title="Capacitor Configuration"
+	href="https://capacitorjscom/docs/config"
+/>

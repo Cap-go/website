@@ -1,0 +1,37 @@
+---
+title: Schlüssel
+sidebar_label: key
+sidebar:
+  order: 7
+locale: de
+---
+
+Mit dem Befehl `key` können Sie Ihre App-Signierungsschlüssel verwalten
+
+### save
+
+`npx @capgo/cli key save`
+
+Speichert einen Base64-codierten Verschlüsselungsschlüssel in der Capacitor-Konfiguration (nützlich für CI)
+
+Options:
+
+- `-f, --force`: Erzwingt die Generierung eines neuen Schlüssels
+- `--key`: Pfad zur Schlüsseldatei, die in der Capacitor-Konfiguration gespeichert werden soll
+- `--key-data`: Schlüsseldaten, die direkt in der Capacitor-Konfiguration gespeichert werden sollen
+
+### create
+
+`npx @capgo/cli key create`
+
+Erstellt einen neuen Verschlüsselungsschlüssel
+
+Options:
+
+- `-f, --force`: Erzwingt die Generierung eines neuen Schlüssels
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+Löscht den alten Verschlüsselungsschlüssel

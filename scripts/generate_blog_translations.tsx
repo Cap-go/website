@@ -5,24 +5,24 @@ import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
 
-const batchSize = 20
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
 
-const totalFiles = readdirSync(blogDirectory).length
+const defaultBlogDirectory = join(blogDirectory, defaultLocale)
+const totalFiles = readdirSync(defaultBlogDirectory).length
 const progress: { [lang: string]: number } = {}
 
 // Process all languages in parallel
 const processAllLanguages = async () => {
-  const blogFiles = readdirSync(blogDirectory)
+  const blogFiles = readdirSync(defaultBlogDirectory)
   console.log(`Starting translation of ${totalFiles} files for ${languages.length} languages`)
   
   const languagePromises = languages.map(async (lang) => {
     console.log(`Preparing the blogs for locale: ${lang}...`)
     progress[lang] = 0
-    const langBlogDirectory = join(contentDirectory, lang, 'blog')
+    const langBlogDirectory = join(blogDirectory, lang)
     if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
     
     const failedTranslations: { [file: string]: boolean } = {}
@@ -48,7 +48,7 @@ const processAllLanguages = async () => {
 const processFile = async (file: string, lang: string, langBlogDirectory: string, failedTranslations: { [file: string]: boolean }): Promise<void> => {
   const spinner = createSpinner(`Translating ${file}...`).start()
   try {
-    const filePath = join(blogDirectory, file)
+    const filePath = join(defaultBlogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')

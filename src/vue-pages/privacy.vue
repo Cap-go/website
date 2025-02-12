@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales, defaultLocale } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl
@@ -15,151 +15,151 @@ const props = defineProps<{ locale: Locales }>()
     <span class="text-xs" v-if="props.locale !== defaultLocale">
       Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
     </span>
-    <h1>{{ translations['privacy_title'][props.locale] }}</h1>
-    <p>{{ translations['privacy_last_updated'][props.locale] }}</p>
+    <h1>{{ m.privacy_title() }}</h1>
+    <p>{{ m.privacy_last_updated() }}</p>
     <p>
-      {{ translations['privacy_description'][props.locale] }}
+      {{ m.privacy_description() }}
     </p>
     <p>
-      {{ translations['privacy_agreement'][props.locale] }}
+      {{ m.privacy_agreement() }}
     </p>
-    <h2>{{ translations['privacy_interpretation_title'][props.locale] }}</h2>
-    <h3>{{ translations['privacy_interpretation_subtitle'][props.locale] }}</h3>
+    <h2>{{ m.privacy_interpretation_title() }}</h2>
+    <h3>{{ m.privacy_interpretation_subtitle() }}</h3>
     <p>
-      {{ translations['privacy_interpretation_text'][props.locale] }}
+      {{ m.privacy_interpretation_text() }}
     </p>
-    <h3>{{ translations['privacy_definitions_subtitle'][props.locale] }}</h3>
-    <p>{{ translations['privacy_definitions_intro'][props.locale] }}</p>
+    <h3>{{ m.privacy_definitions_subtitle() }}</h3>
+    <p>{{ m.privacy_definitions_intro() }}</p>
     <ul>
       <li>
-        <p>{{ translations['privacy_definition_account'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_account() }}</p>
       </li>
       <li>
         <p>
-          {{ translations['privacy_definition_affiliate'][props.locale] }}
+          {{ m.privacy_definition_affiliate() }}
         </p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_application'][props.locale].replace('$1', brand) }}</p>
+        <p>{{ m.privacy_definition_application().replace('$1', brand) }}</p>
       </li>
       <li>
         <p>
-          {{ translations['privacy_definition_business'][props.locale] }}
+          {{ m.privacy_definition_business() }}
         </p>
       </li>
       <li>
         <p>
-          {{ translations['privacy_definition_company'][props.locale] }}
+          {{ m.privacy_definition_company() }}
         </p>
-        <p>{{ translations['privacy_definition_company_gdpr'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_company_gdpr() }}</p>
       </li>
       <li>
         <p>
-          {{ translations['privacy_definition_consumer'][props.locale] }}
+          {{ m.privacy_definition_consumer() }}
         </p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_country'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_country() }}</p>
       </li>
       <li>
         <p>
-          {{ translations['privacy_definition_data_controller'][props.locale] }}
+          {{ m.privacy_definition_data_controller() }}
         </p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_device'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_device() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_do_not_track'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_do_not_track() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_personal_data'][props.locale] }}</p>
-        <p>{{ translations['privacy_definition_personal_data_gdpr'][props.locale] }}</p>
-        <p>{{ translations['privacy_definition_personal_data_ccpa'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_personal_data() }}</p>
+        <p>{{ m.privacy_definition_personal_data_gdpr() }}</p>
+        <p>{{ m.privacy_definition_personal_data_ccpa() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_sale'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_sale() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_service'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_service() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_service_provider'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_service_provider() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_usage_data'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_usage_data() }}</p>
       </li>
       <li>
-        <p>{{ translations['privacy_definition_you'][props.locale] }}</p>
-        <p>{{ translations['privacy_definition_you_gdpr'][props.locale] }}</p>
+        <p>{{ m.privacy_definition_you() }}</p>
+        <p>{{ m.privacy_definition_you_gdpr() }}</p>
       </li>
     </ul>
-    <h2>{{ translations['privacy_collecting_data_title'][props.locale] }}</h2>
-    <h3>{{ translations['privacy_types_of_data_title'][props.locale] }}</h3>
-    <h4>{{ translations['privacy_personal_data_title'][props.locale] }}</h4>
-    <p>{{ translations['privacy_personal_data_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_personal_data_usage'][props.locale] }}</p>
-    <h4>{{ translations['privacy_usage_data_title'][props.locale] }}</h4>
-    <p>{{ translations['privacy_usage_data_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_usage_data_details'][props.locale] }}</p>
-    <p>{{ translations['privacy_usage_data_mobile'][props.locale] }}</p>
-    <p>{{ translations['privacy_usage_data_browser'][props.locale] }}</p>
-    <h2>{{ translations['privacy_use_of_data_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_use_of_data_intro'][props.locale] }}</p>
+    <h2>{{ m.privacy_collecting_data_title() }}</h2>
+    <h3>{{ m.privacy_types_of_data_title() }}</h3>
+    <h4>{{ m.privacy_personal_data_title() }}</h4>
+    <p>{{ m.privacy_personal_data_description() }}</p>
+    <p>{{ m.privacy_personal_data_usage() }}</p>
+    <h4>{{ m.privacy_usage_data_title() }}</h4>
+    <p>{{ m.privacy_usage_data_description() }}</p>
+    <p>{{ m.privacy_usage_data_details() }}</p>
+    <p>{{ m.privacy_usage_data_mobile() }}</p>
+    <p>{{ m.privacy_usage_data_browser() }}</p>
+    <h2>{{ m.privacy_use_of_data_title() }}</h2>
+    <p>{{ m.privacy_use_of_data_intro() }}</p>
     <ul>
-      <li>{{ translations['privacy_use_of_data_provide_service'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_manage_account'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_performance'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_contact'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_offers'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_requests'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_business_transfers'][props.locale] }}</li>
-      <li>{{ translations['privacy_use_of_data_other_purposes'][props.locale] }}</li>
+      <li>{{ m.privacy_use_of_data_provide_service() }}</li>
+      <li>{{ m.privacy_use_of_data_manage_account() }}</li>
+      <li>{{ m.privacy_use_of_data_performance() }}</li>
+      <li>{{ m.privacy_use_of_data_contact() }}</li>
+      <li>{{ m.privacy_use_of_data_offers() }}</li>
+      <li>{{ m.privacy_use_of_data_requests() }}</li>
+      <li>{{ m.privacy_use_of_data_business_transfers() }}</li>
+      <li>{{ m.privacy_use_of_data_other_purposes() }}</li>
     </ul>
-    <p>{{ translations['privacy_share_of_data_intro'][props.locale] }}</p>
+    <p>{{ m.privacy_share_of_data_intro() }}</p>
     <ul>
-      <li>{{ translations['privacy_share_of_data_service_providers'][props.locale] }}</li>
-      <li>{{ translations['privacy_share_of_data_business_transfers'][props.locale] }}</li>
-      <li>{{ translations['privacy_share_of_data_affiliates'][props.locale] }}</li>
-      <li>{{ translations['privacy_share_of_data_business_partners'][props.locale] }}</li>
-      <li>{{ translations['privacy_share_of_data_other_users'][props.locale] }}</li>
-      <li>{{ translations['privacy_share_of_data_consent'][props.locale] }}</li>
+      <li>{{ m.privacy_share_of_data_service_providers() }}</li>
+      <li>{{ m.privacy_share_of_data_business_transfers() }}</li>
+      <li>{{ m.privacy_share_of_data_affiliates() }}</li>
+      <li>{{ m.privacy_share_of_data_business_partners() }}</li>
+      <li>{{ m.privacy_share_of_data_other_users() }}</li>
+      <li>{{ m.privacy_share_of_data_consent() }}</li>
     </ul>
-    <h2>{{ translations['privacy_retention_of_data_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_retention_of_data_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_retention_of_usage_data'][props.locale] }}</p>
-    <h2>{{ translations['privacy_transfer_of_data_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_transfer_of_data_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_transfer_of_data_consent'][props.locale] }}</p>
-    <p>{{ translations['privacy_transfer_of_data_safeguards'][props.locale] }}</p>
-    <h2>{{ translations['privacy_disclosure_of_data_title'][props.locale] }}</h2>
-    <h3>{{ translations['privacy_disclosure_business_transactions_title'][props.locale] }}</h3>
-    <p>{{ translations['privacy_disclosure_business_transactions_description'][props.locale] }}</p>
-    <h3>{{ translations['privacy_disclosure_law_enforcement_title'][props.locale] }}</h3>
-    <p>{{ translations['privacy_disclosure_law_enforcement_description'][props.locale] }}</p>
-    <h3>{{ translations['privacy_disclosure_other_legal_requirements_title'][props.locale] }}</h3>
-    <p>{{ translations['privacy_disclosure_other_legal_requirements_description'][props.locale] }}</p>
+    <h2>{{ m.privacy_retention_of_data_title() }}</h2>
+    <p>{{ m.privacy_retention_of_data_description() }}</p>
+    <p>{{ m.privacy_retention_of_usage_data() }}</p>
+    <h2>{{ m.privacy_transfer_of_data_title() }}</h2>
+    <p>{{ m.privacy_transfer_of_data_description() }}</p>
+    <p>{{ m.privacy_transfer_of_data_consent() }}</p>
+    <p>{{ m.privacy_transfer_of_data_safeguards() }}</p>
+    <h2>{{ m.privacy_disclosure_of_data_title() }}</h2>
+    <h3>{{ m.privacy_disclosure_business_transactions_title() }}</h3>
+    <p>{{ m.privacy_disclosure_business_transactions_description() }}</p>
+    <h3>{{ m.privacy_disclosure_law_enforcement_title() }}</h3>
+    <p>{{ m.privacy_disclosure_law_enforcement_description() }}</p>
+    <h3>{{ m.privacy_disclosure_other_legal_requirements_title() }}</h3>
+    <p>{{ m.privacy_disclosure_other_legal_requirements_description() }}</p>
     <ul>
-      <li>{{ translations['privacy_disclosure_other_legal_requirements_comply'][props.locale] }}</li>
-      <li>{{ translations['privacy_disclosure_other_legal_requirements_protect'][props.locale] }}</li>
-      <li>{{ translations['privacy_disclosure_other_legal_requirements_prevent'][props.locale] }}</li>
-      <li>{{ translations['privacy_disclosure_other_legal_requirements_protect_personal'][props.locale] }}</li>
-      <li>{{ translations['privacy_disclosure_other_legal_requirements_protect_legal'][props.locale] }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_comply() }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect() }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_prevent() }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_personal() }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_legal() }}</li>
     </ul>
-    <h2>{{ translations['privacy_security_of_data_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_security_of_data_description'][props.locale] }}</p>
-    <h2>{{ translations['privacy_children_privacy_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_children_privacy_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_children_privacy_consent'][props.locale] }}</p>
-    <h2>{{ translations['privacy_links_to_other_websites_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_links_to_other_websites_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_links_to_other_websites_control'][props.locale] }}</p>
-    <h2>{{ translations['privacy_changes_to_policy_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_changes_to_policy_description'][props.locale] }}</p>
-    <p>{{ translations['privacy_changes_to_policy_notification'][props.locale] }}</p>
-    <p>{{ translations['privacy_changes_to_policy_review'][props.locale] }}</p>
-    <h2>{{ translations['privacy_contact_us_title'][props.locale] }}</h2>
-    <p>{{ translations['privacy_contact_us_description'][props.locale] }}</p>
-    <p v-html="translations['privacy_contact_us_website'][props.locale].replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
+    <h2>{{ m.privacy_security_of_data_title() }}</h2>
+    <p>{{ m.privacy_security_of_data_description() }}</p>
+    <h2>{{ m.privacy_children_privacy_title() }}</h2>
+    <p>{{ m.privacy_children_privacy_description() }}</p>
+    <p>{{ m.privacy_children_privacy_consent() }}</p>
+    <h2>{{ m.privacy_links_to_other_websites_title() }}</h2>
+    <p>{{ m.privacy_links_to_other_websites_description() }}</p>
+    <p>{{ m.privacy_links_to_other_websites_control() }}</p>
+    <h2>{{ m.privacy_changes_to_policy_title() }}</h2>
+    <p>{{ m.privacy_changes_to_policy_description() }}</p>
+    <p>{{ m.privacy_changes_to_policy_notification() }}</p>
+    <p>{{ m.privacy_changes_to_policy_review() }}</p>
+    <h2>{{ m.privacy_contact_us_title() }}</h2>
+    <p>{{ m.privacy_contact_us_description() }}</p>
+    <p v-html="m.privacy_contact_us_website().replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
   </div>
 </template>

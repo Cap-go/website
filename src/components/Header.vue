@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import type { Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { ref } from 'vue'
 
@@ -14,11 +14,11 @@ const menuMobile = ref(false)
 
 <template>
   <header class="relative py-2">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between">
         <div class="flex-shrink-0">
-          <a :href="getRelativeLocaleUrl(props.locale)" title="Capgo home" aria-label="Capgo home" class="font-prompt flex items-center pr-3 text-4xl font-medium">
-            <img class="h-18 w-auto pr-1" loading="eager" height="72" width="133" :alt="`${brand} logo`" :title="`${brand} logo`" src="/capgo_logo.webp" />
+          <a :href="getRelativeLocaleUrl(props.locale)" title="Capgo home" aria-label="Capgo home" class="flex items-center pr-3 text-4xl font-medium font-prompt">
+            <img class="w-auto pr-1 h-18" loading="eager" height="72" width="133" :alt="`${brand} logo`" :title="`${brand} logo`" src="/capgo_logo.webp" />
           </a>
         </div>
         <div class="flex lg:hidden">
@@ -32,80 +32,80 @@ const menuMobile = ref(false)
           <a
             :href="getRelativeLocaleUrl(props.locale, 'pricing')"
             title="Pricing"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ translations['pricing'][props.locale] }}
+            {{ m.pricing() }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'blog')"
             title="Blog"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ translations['blog'][props.locale] }}
+            {{ m.blog() }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'docs')"
             title="Documentation"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ translations['documentation'][props.locale] }}
+            {{ m.documentation() }}
           </a>
           <a
             href="https://web.capgo.app/login/"
             title="Login"
             target="_blank"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ translations['login'][props.locale] }}
+            {{ m.login() }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'register')"
             target="_blank"
             title="Register"
-            class="font-pj rounded-xl border border-gray-300 bg-transparent px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+            class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 font-pj rounded-xl hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
             role="button"
           >
-            {{ translations['register'][props.locale] }}
+            {{ m.register() }}
           </a>
         </div>
       </div>
     </div>
     <div :class="{ hidden: !menuMobile }">
-      <div class="mt-2 space-y-1 bg-gray-700 px-2 pb-3 pt-2">
+      <div class="px-2 pt-2 pb-3 mt-2 space-y-1 bg-gray-700">
         <a
           :href="getRelativeLocaleUrl(props.locale, 'pricing')"
-          :title="translations['pricing'][props.locale]"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          :title="m.pricing()"
+          class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Pricing
         </a>
         <a
           :href="getRelativeLocaleUrl(props.locale, 'blog')"
-          :title="translations['blog'][props.locale]"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          :title="m.blog()"
+          class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Blog
         </a>
         <a
           :href="getRelativeLocaleUrl(props.locale, 'docs')"
-          :title="translations['documentation'][props.locale]"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          :title="m.documentation()"
+          class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Documentation
         </a>
         <a
           href="https://web.capgo.app/login/"
           target="_blank"
-          :title="translations['login'][props.locale]"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          :title="m.login()"
+          class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Login
         </a>
         <a
           :href="getRelativeLocaleUrl(props.locale, 'register')"
           target="_blank"
-          :title="translations['register'][props.locale]"
-          class="font-pj block rounded-md rounded-xl border border-gray-300 bg-gray-900 bg-transparent px-5 py-2 text-base font-medium font-semibold leading-7 text-gray-300 text-white transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+          :title="m.register()"
+          class="block px-5 py-2 text-base font-medium font-semibold leading-7 text-white text-gray-300 transition-all duration-200 bg-transparent bg-gray-900 border border-gray-300 rounded-md font-pj rounded-xl hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
         >
           Register
         </a>

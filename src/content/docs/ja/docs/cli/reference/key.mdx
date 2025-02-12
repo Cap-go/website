@@ -1,0 +1,37 @@
+---
+title: 鍵
+sidebar_label: key
+sidebar:
+  order: 7
+locale: ja
+---
+
+`key` コマンドでアプリの署名キーを管理できます
+
+### save
+
+`npx @capgo/cli key save`
+
+base64エンコードされた暗号化キーをCapacitorの設定に保存します（CIで便利）
+
+オプション：
+
+- `-f, --force`: 新しいキーの生成を強制
+- `--key`: Capacitorの設定に保存するキーファイルのパス 
+- `--key-data`: Capacitorの設定に直接保存するキーデータ
+
+### create
+
+`npx @capgo/cli key create` 
+
+新しい暗号化キーを作成します
+
+オプション：
+
+- `-f, --force`: 新しいキーの生成を強制
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+古い暗号化キーを削除します

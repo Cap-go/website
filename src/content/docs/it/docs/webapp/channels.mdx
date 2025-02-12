@@ -1,0 +1,80 @@
+---
+title: Canali
+description: >-
+  I canali sono un modo per gestire gli aggiornamenti della tua app. Puoi avere
+  più canali e ogni canale può avere più versioni. Questo ti permette di gestire
+  più versioni della tua app contemporaneamente in produzione.
+sidebar:
+  order: 6
+locale: it
+---
+
+## Gestione dei canali
+
+Per prima cosa, diamo un'occhiata alla pagina dei canali. Puoi accedervi [cliccando sulla tua app](/docs/webapp/main-page) e poi [cliccando sulla scheda canali](/docs/webapp/main-app-page)
+
+<figure><img src="/channelswebp" alt="channel list" /><figcaption></figcaption></figure>
+
+## Creazione di un canale
+
+Come puoi vedere, esiste un pulsante più nell'angolo in basso a destra (`1` nell'immagine). Cliccandoci si aprirà una finestra modale dove puoi creare un nuovo canale
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modalwebp" alt="new channel" /><figcaption></figcaption></figure>
+
+Dopo aver cliccato su `Aggiungi` un nuovo canale dovrebbe apparire nella lista
+<figure><img src="/post-channel-createwebp" alt="after channel create" /><figcaption></figcaption></figure>
+
+## Cosa significa mal configurato?
+A volte la configurazione di un canale non è valida. In questo caso, riceverai un grande avviso e la colonna `Mal configurato` dirà `Sì` per uno o più canali.
+Puoi saperne di più [qui](/docs/cli/commands/#disable-updates-strategy)
+
+## Eliminazione di un canale
+
+Eliminare un canale è semplice. Basta cliccare sull'icona del cestino e confermare l'eliminazione (`2` nell'immagine)
+
+## Gestione di un canale
+
+Cliccando sul nome del canale si aprirà una finestra modale dove puoi gestire il canale (`3` nell'immagine)
+Questa pagina dovrebbe apparire così:
+
+<figure><img src="/manage_channel_mainwebp" alt="manage channel" /><figcaption></figcaption></figure>
+
+Analizziamo le diverse sezioni
+
+Prima il `Numero del bundle` (`1` nell'immagine). Questa è la versione corrente per quel canale. Quando viene richiesto di servire un aggiornamento questo canale tenterà sempre di rispondere con quella versione* [^1]
+Cliccandoci sopra dovresti essere portato alla pagina dei [bundle](/docs/webapp/bundles/)
+
+Seconda la pagina `Condiviso con` (`2` nell'immagine). Sconsiglio di usarla. Un nuovo e migliore sistema è in fase di sviluppo
+
+Ora i dispositivi forzati (`3` nell'immagine). Questa è una lista di dispositivi che riceveranno sempre aggiornamenti da questo canale. Questo è utile per scopi di test. Puoi forzare un dispositivo a un canale dalla pagina dei [dispositivi](/docs/webapp/devices/)
+
+Infine le impostazioni (`4` nell'immagine). Qui puoi gestire come si comportano i canali
+Dopo aver cliccato dovresti vedere qualcosa del genere:
+
+<figure><img src="/channel_settingswebp" alt="setting of channel" /><figcaption></figcaption></figure>
+
+La lista delle impostazioni è lunga, ma farò del mio meglio per spiegarle tutte
+
+---
+Prima il `Canale predefinito` **QUESTA È PROBABILMENTE LA PIÙ IMPORTANTE**\
+Se un canale è contrassegnato come predefinito, verrà utilizzato come canale predefinito per tutti i nuovi dispositivi\
+In altri termini: Se hai un nuovo utente capgo cercherà di fornirgli l'ultima versione di questo canale predefinito
+Solo 1 canale può essere impostato come predefinito alla volta. Se provi a infrangere questa regola ti verrà chiesto di confermare la tua azione
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-defaultwebp" alt="confirm make change" /><figcaption></figcaption></figure>
+
+Dopo la conferma il vecchio canale predefinito non sarà più contrassegnato come predefinito e il nuovo sarà contrassegnato come predefinito
+
+---
+Seconda l'impostazione `IOS`. È relativamente semplice. Se è falsa allora i dispositivi IOS non potranno scaricare aggiornamenti da questo canale
+
+Terza è l'impostazione `Android`. È simile a `IOS`. Se è falsa allora i dispositivi Android non potranno scaricare aggiornamenti da questo canale
+
+Quarta è l'impostazione `Disabilita il downgrade automatico sotto la versione nativa`. Se è vera allora sarà impossibile fare il downgrade da una versione nativa. Questo significa che se hai caricato una versione `120` sull'app store o play store e provi a impostare la versione del canale a `110` allora l'aggiornamento (downgrade) fallirà
+
+Quinta è `Disabilita aggiornamento automatico`. Questa impostazione è abbastanza complessa, e puoi saperne di più [qui](/docs/cli/commands/#disable-updates-strategy)
+
+Per quanto riguarda `Permetti build di sviluppo`. Se è vera allora le build di sviluppo potranno scaricare aggiornamenti da questo canale. In caso contrario qualsiasi richiesta di aggiornamento che ha il `prod` impostato su falso sarà rifiutata. Questo è principalmente utile per scopi di test
+
+Settima è `Permetti Emulatori`. Se è falsa allora capgo rifiuterà qualsiasi richiesta di aggiornamento che proviene da un emulatore. Questo è principalmente utile per scopi di test
+
+Ottava è `Permetti ai dispositivi di auto-associarsi`. Se è vera allora il metodo [setChannel](docs/plugin/api/#setchannel) sarà disponibile. Se è impostata su falso e provi a chiamare il metodo [setChannel](docs/plugin/api/#setchannel) con questo canale allora la chiamata fallirà

@@ -1,0 +1,82 @@
+---
+title: チャネル
+sidebar_label: channel
+sidebar:
+  order: 6
+locale: ja
+---
+
+`channel`コマンドを使用してリリースチャンネルを管理できます
+
+### add
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+アプリの新しいチャンネルを作成します
+
+オプション：
+
+- `-d, --default`: 新しいチャンネルをデフォルトチャンネルとして設定
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+
+### delete
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+アプリからチャンネルを削除します
+
+オプション：
+
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+- `--delete-bundle`: チャンネルに関連付けられたバンドルを削除
+
+### list
+
+`npx @capgo/cli channel list [appId]`
+
+アプリのすべてのチャンネルを一覧表示します
+
+オプション：
+
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+
+### currentBundle
+
+`npx @capgo/cli channel currentBundle [channel] [appId]`
+
+特定のチャンネルの現在のバンドルを取得します
+
+オプション：
+
+- `-c, --channel <channel>`: 現在のバンドルを取得するチャンネル
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+- `--quiet`: バンドルバージョンのみを表示
+
+### set
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+チャンネルのプロパティを設定します
+
+オプション：
+
+- `-a, --apikey <apikey>`: アカウントにリンクするAPIキー
+- `-b, --bundle <bundle>`: チャンネルに設定するバンドルのバージョン番号
+- `-s, --state <state>`: チャンネルの状態を設定（`default`または`normal`）
+- `--latest`: バンドルバージョンとして`packagejson`の最新バージョンを使用
+- `--downgrade`: ネイティブバージョンより下のバージョンへのダウングレードを許可
+- `--no-downgrade`: ネイティブバージョンより下のバージョンへのダウングレードを無効化
+- `--upgrade`: ネイティブバージョンより上のバージョンへのアップグレードを許可
+- `--no-upgrade`: ネイティブバージョンより上のバージョンへのアップグレードを無効化
+- `--ios`: iOSデバイスへの更新送信を許可
+- `--no-ios`: iOSデバイスへの更新送信を無効化
+- `--android`: Androidデバイスへの更新送信を許可
+- `--no-android`: Androidデバイスへの更新送信を無効化
+- `--self-assign`: デバイスのこのチャンネルへの自己割り当てを許可
+- `--no-self-assign`: デバイスのこのチャンネルへの自己割り当てを無効化
+- `--disable-auto-update <disableAutoUpdate>`: このチャンネルの自動更新戦略を無効化（オプション：`major`、`minor`、`metadata`、`patch`、`none`）
+- `--dev`: 開発デバイスへの更新送信を許可
+- `--no-dev`: 開発デバイスへの更新送信を無効化
+- `--emulator`: エミュレータデバイスへの更新送信を許可
+- `--no-emulator`: エミュレータデバイスへの更新送信を無効化
+- `--package-json <packageJson>`: `packagejson`ファイルのパスをカンマ区切りで指定（モノレポの場合に便利）

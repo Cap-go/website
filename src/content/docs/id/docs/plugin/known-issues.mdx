@@ -1,0 +1,127 @@
+---
+title: 알려진 문제점
+description: Masalah yang Diketahui dengan Capacitor dan CapGo
+sidebar:
+  order: 7
+locale: id
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Live reload Ionic
+
+* Ketika Anda mengembangkan, jika Anda menggunakan fitur live reload Ionic dari CLI, itu akan menimpa plugin, sehingga Anda tidak akan pernah melihat pembaruan Anda
+
+## Live reload Quasar
+
+* Ini menggunakan sistem yang sama seperti ionic di balik layar, jadi Anda tidak akan melihat pembaruan Anda
+
+## Pembaruan gagal
+
+* Ini biasanya terjadi ketika pembaruan besar (> 20mb) dilakukan, persentase besar pengguna tidak akan mendapatkan versi terakhir
+Di masa lalu, pengguna perlu membuka aplikasi sampai unduhan selesai, sekarang kami menggunakan unduhan latar belakang, tapi masih terbatas pada beberapa detik
+
+## Android
+
+### Tidak dapat mengunduh
+
+Kami telah melihat beberapa masalah dengan perangkat di India, dan menghubungi pengguna, membuat mereka mencoba server DNS yang berbeda, dan berhasil
+
+Jadi jika Anda mengalami masalah, coba gunakan server DNS yang berbeda seperti Cloudflare atau Google DNS
+
+Cloudflare: 1111 dan 1001
+
+Google DNS: 8888 dan 8844 atau dnsgoogle
+
+<LinkCard
+	title="Bagaimana mengatur server DNS pilihan di Android?"
+	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Self Hosted
+Ketika Anda melakukan pembaruan self-hosted, perhatikan bahwa Anda tidak dapat menggunakan endpoint "HTTP" karena bertentangan dengan kebijakan keamanan aplikasi Android, jika Anda masih ingin melakukannya, ikuti panduan ini:
+
+<LinkCard
+	title="Bagaimana mengizinkan semua jenis koneksi Jaringan HTTP dan HTTPS di Android (9) Pie?"
+	href="https://stackoverflowcom/a/51902630/5511370"
+/>
+
+### Unzip 
+
+Masalah Unzip: entri DEFLATED dapat memiliki deskriptor EXT
+
+Jika Anda mengkompres bundle Anda dengan sesuatu yang berbeda dari CLI, format zip Anda bisa salah, silakan gunakan perintah CLI `npx @capgo/cli zip BUNDLE_FOLDER`
+
+Ini adalah masalah yang diketahui dari Java:
+
+<LinkCard
+	title="Masalah Unzip: entri DEFLATED dapat memiliki deskriptor EXT"
+	href="https://bugsopenjdkorg/browse/JDK-8143613"
+/>
+
+### Masalah Clearfix
+
+* Jika Anda memiliki masalah dengan usesCleartextTraffic, itu karena plugin mengikuti praktik baik yang direkomendasikan oleh sonar cloud, dalam 90% kasus akan bekerja dengan baik, tetapi dengan beberapa plugin yang menyebabkan masalah
+
+Untuk memperbaikinya, tambahkan di `android/app/src/main/AndroidManifestxml` dalam kunci `<application>` :
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemasandroidcom/tools"
+```
+
+## IOS
+
+### Manifes privasi
+
+Tambahkan kunci kamus `NSPrivacyAccessedAPICategoryUserDefaults` ke [Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest) Anda (biasanya `ios/App/PrivacyInfoxcprivacy`):
+
+```xml
+<?xml version="10" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 10//EN" "http://wwwapplecom/DTDs/PropertyList-10dtd">
+<plist version="10">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Tambahkan entri dict ini ke array jika file sudah ada -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA921</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+Kami merekomendasikan untuk mendeklarasikan [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) sebagai alasan untuk mengakses API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
+
+### Izin jaringan
+
+Ketika menggunakan server lokal untuk pengujian pembaruan, aplikasi akan meminta izin jaringan, ini adalah perilaku normal, ini tidak terjadi ketika Anda menggunakan server jarak jauh
+
+## Kedua OS
+
+Saat melakukan pembaruan mode manual, beberapa event tidak mudah ditangkap, misalnya pembaruan gagal dipicu tepat sebelum kode JS Anda dimuat ulang, jadi Anda tidak akan bisa menangkapnya
+
+Salah satu alternatifnya adalah mendaftar bundle dan memeriksa statistik kesalahan untuk mengetahui jika pembaruan gagal
+
+Kami perlu menemukan cara yang lebih baik untuk menangani ini di masa depan, tetapi ini bukan prioritas, karena mode otomatis adalah cara yang direkomendasikan untuk melakukan pembaruan
+
+PR dipersilakan untuk membantu kami meningkatkan ini
+
+## CLI
+
+jika CLI Anda mengalami masalah melakukan apa pun,
+
+Periksa apakah **appId** dan **appName** ada di **capacitorconfigts** Anda
+
+Ikuti panduan dari dokumentasi resmi:
+
+<LinkCard
+	title="Konfigurasi Capacitor"
+	href="https://capacitorjscom/docs/config"
+/>

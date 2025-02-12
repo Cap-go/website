@@ -1,0 +1,111 @@
+---
+title: CI/CD インテグレーション
+locale: ja
+---
+
+import { Steps, Code } from '@astrojs/starlight/components';
+
+CapgoをCI/CDパイプラインに統合することで、アプリのアップデートのビルドとデプロイのプロセスを完全に自動化することができます。Capgo CLIとsemantic-releaseを活用することで、一貫性のある信頼できるデプロイメントを確保し、迅速な反復を可能にします。
+
+## CI/CD統合のメリット
+
+- **自動化**：手動のステップやヒューマンエラーの余地がなくなります。ビルド、テスト、デプロイメントのプロセス全体を端から端まで自動化できます。
+
+- **一貫性**：すべてのデプロイメントが同じ手順に従い、予測可能で再現性のあるプロセスを確保します。これは特に、複数のチームメンバーがコードに貢献している場合に価値があります。
+
+- **迅速な反復**：自動化されたデプロイメントにより、より頻繁に、かつ自信を持ってアップデートをリリースできます。手動のQAやリリース承認を待つ必要がありません。
+
+## Capgo CLI
+
+Capgo CLIは、CapgoをCI/CDワークフローに統合するための鍵となります。新しいバンドルバージョンのプッシュ、チャンネルの管理などのコマンドを提供します。
+
+CI/CD統合で最も重要なコマンドは`upload`です：
+
+```shell
+npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
+```
+
+このコマンドは、現在のWebビルドを指定されたチャンネルにアップロードします。通常、Webビルドが正常に完了した後、CI/CDパイプラインの最後のステップとしてこれを実行します。
+
+## CI/CDパイプラインでのCapgoのセットアップ
+
+CI/CDツールの選択によって具体的な手順は異なりますが、Capgoを統合する一般的なプロセスは次のようになります：
+
+<Steps>
+1. **APIキーの生成**：Capgoダッシュボードにログインし、新しいAPIキーを作成します。このキーはCI/CD環境でCLIを認証するために使用されます。秘密にし、リポジトリにコミットしないでください！
+
+3. **`upload`コマンドの設定**：CI/CD設定に適切な引数で`upload`コマンドを実行するステップを追加します：<Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />\n `Production`をデプロイしたいチャンネルに、`${{ secretsCAPGO_API_KEY }}`をAPIキーを保持する環境変数に置き換えてください。
+
+4. **Webビルド後に`upload`ステップを追加**：`upload`ステップがWebビルドの完了後に実行されることを確認してください。これにより、常に最新のコードがデプロイされます。\n GitHub Actionsの設定例：\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
+
+</Steps>
+
+## Semantic-release統合
+
+Semantic-releaseは、バージョン管理の自動化とリリースノートの生成のための強力なツールです。Semantic-releaseとCapgoを統合することで、各デプロイメントでアプリのバージョンを自動的にインクリメントし、変更ログを生成できます。
+
+以下はsemantic-releaseの`releaserc`設定ファイルのサンプルです：
+
+```json
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextReleasechannel} --apikey=YOUR_API_KEY --partial"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOGmd", "packagejson"],
+        "message": "chore(release): ${nextReleaseversion} [skip ci]\n\n${nextReleasenotes}"
+      }
+    ]
+  ]
+}
+```
+
+この設定は以下のことを行います：
+
+1. Conventional Commits仕様に従って、次のバージョン番号を決定するためにコミットメッセージを分析します
+2. 最後のリリース以降のコミットに基づいてリリースノートを生成します
+3. 新しいリリースノートで`CHANGELOGmd`ファイルを更新します
+4. Capgo CLIの`upload`コマンドを実行し、新しいバージョン番号を渡し、差分更新用の`--partial`フラグを使用します
+5. 更新された`CHANGELOGmd`、`packagejson`、その他の変更されたファイルをリポジトリにコミットします
+
+Semantic-releaseをCapgoで使用するには、CI/CD設定に`npx semantic-release`を実行するステップを追加するだけです。このステップがWebビルドの後、Capgoの`upload`ステップの前に来るようにしてください。
+
+## トラブルシューティング
+
+CapgoのCI/CD統合で問題が発生した場合は、以下の点を確認してください：
+
+- **APIキー**：APIキーが有効で、必要な権限を持っていることを確認してください。環境変数を使用している場合は、正しく設定されているか再確認してください。
+
+- **CLIバージョン**：最新バージョンのCapgo CLIを使用していることを確認してください。古いバージョンには互換性の問題や特定の機能が欠けている可能性があります。
+
+- **ビルド成果物**：Webビルドが期待される出力ファイルを生成していることを確認してください。Capgo CLIはバンドルを作成するために有効なWebビルドが必要です。
+
+- **ネットワーク接続**：CI/CD環境がCapgoサーバーにネットワークアクセスできることを確認してください。ファイアウォールやプロキシの問題が`upload`コマンドを妨げることがあります。
+
+まだ問題が解決しない場合は、Capgoサポートにお問い合わせください。特定のセットアップに関する問題のトラブルシューティングをお手伝いします。
+
+## 結論
+
+CapgoをCI/CDパイプラインに統合し、バージョン管理にsemantic-releaseを活用することで、開発ワークフローを大幅に効率化できます。デプロイメントとバージョニングを自動化することで、より迅速に、より確実にアップデートをリリースできます。
+
+Capgo CLIとsemantic-releaseは、完全に自動化されたエンドツーエンドのリリースを実現するための強力な組み合わせを提供します。少しの設定で、手動のリリースステップを気にすることなく、優れた機能の構築に集中できる堅牢で信頼性の高いデプロイメントプロセスを実現できます。
+
+Capgo CLIのコマンドとオプションの詳細については、[CLIリファレンス](/docs/cli/overview)をご覧ください。また、semantic-releaseの設定について詳しく知りたい場合は、[semantic-releaseのドキュメント](https://githubcom/semantic-release/semantic-release)をご覧ください。
+
+デプロイをお楽しみください！

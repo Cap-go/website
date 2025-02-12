@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../paraglide/messages.js"
 import { ref } from 'vue'
 
-const props = defineProps<{ locale: Locales }>()
 const plugins = ref([
   {
     name: 'capacitor-updater',
@@ -51,32 +49,32 @@ const plugins = ref([
 </script>
 
 <template>
-  <section class="bg-indigo-600 px-4 py-16 sm:px-6 lg:px-8">
+  <section class="px-4 py-16 bg-indigo-600 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{{ translations['consulting_forged_plugins_community_embraced'][props.locale] }}</h2>
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{{ m.consulting_forged_plugins_community_embraced() }}</h2>
         <p class="mt-4 text-xl text-indigo-200">
-          {{ translations['consulting_forged_plugins_community_embraced_description'][props.locale] }} <br />
-          {{ translations['each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community'][props.locale] }}
+          {{ m.consulting_forged_plugins_community_embraced_description() }} <br />
+          {{ m.each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community() }}
         </p>
       </div>
       <div class="mt-12">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div v-for="plugin in plugins" :key="plugin.name" class="pt-6">
-            <div class="flow-root rounded-lg bg-indigo-500 px-6 pb-8">
+            <div class="flow-root px-6 pb-8 bg-indigo-500 rounded-lg">
               <div class="-mt-6">
                 <div>
-                  <span class="inline-flex items-center justify-center rounded-md bg-indigo-700 p-3 shadow-lg">
-                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="plugin.icon"></svg>
+                  <span class="inline-flex items-center justify-center p-3 bg-indigo-700 rounded-md shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="plugin.icon"></svg>
                   </span>
                 </div>
                 <h3 class="mt-8 text-lg font-medium tracking-tight text-white">{{ plugin.name }}</h3>
                 <p class="mt-5 text-base text-indigo-200">
                   {{ plugin.description }}
                 </p>
-                <div class="mt-4 flex items-center text-sm text-indigo-300">
+                <div class="flex items-center mt-4 text-sm text-indigo-300">
                   <span class="mr-2">{{ plugin.language }}</span>
-                  <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     />
@@ -92,10 +90,10 @@ const plugins = ref([
         <a
           href="https://cal.com/martindonadieu/get-your-custom-capacitor-plugin"
           target="_blank"
-          class="inline-flex items-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 shadow-sm hover:bg-indigo-50"
+          class="inline-flex items-center px-6 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md shadow-sm hover:bg-indigo-50"
         >
-          {{ translations['get_your_custom_plugin_built'][props.locale] }}
-          <svg class="-mr-1 ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          {{ m.get_your_custom_plugin_built() }}
+          <svg class="w-5 h-5 ml-2 -mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>

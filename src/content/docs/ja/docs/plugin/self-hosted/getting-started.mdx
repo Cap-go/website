@@ -1,0 +1,106 @@
+---
+title: はじめに
+description: セルフアップデートサーバーの実行
+sidebar:
+  order: 1
+locale: ja
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+独自の自動更新サーバーの実行方法について説明します
+
+## はじめに
+
+この作業が役立つと思われる場合は、[Githubスポンサー](https://githubcom/sponsors/riderx)になって私の活動をサポートすることをご検討ください
+
+ここで構築したコードを有料化する代わりにオープンソース化することを決めました。隠したり戦ったりする代わりにオープンにすることで、世界をより良い場所にできると信じています
+
+さらに、Capgoのツール開発に注力し、オープンで透明性のあるビジネスにしたいと考えています
+
+しかし、それを実現するためには、あなたを含む私たち全員が各自の役割を果たす必要があります 🥹
+
+Capgoが合わない場合は、ご自身で価格を決めて、[ブートストラップ開発者](https://githubcom/sponsors/riderx)を支援してください
+
+<LinkCard title="貢献を検討する" href="/docs/plugin/self-hosted/contributing/"/>
+
+## 機能の比較
+
+独自のサーバーを選択した場合、5分セットアップのフローは利用できなくなります\
+以下の機能をすべて自分で実装する必要があります
+
+| 機能                     | Capgo | セルフホスト |
+| ------------------------ | ----- | ----------- |
+| 更新                     | ✅     | 🚧         |
+| 自動ロールバック          | ✅     | 🚧         |
+| 失敗時のメールアラート    | ✅     | 🚧         |
+| チャンネル               | ✅     | 🚧         |
+| チャンネルオーバーライド  | ✅     | 🚧         |
+| デバイスオーバーライド    | ✅     | 🚧         |
+| チャンネル設定           | ✅     | 🚧         |
+| デバイス設定             | ✅     | 🚧         |
+| カスタムID               | ✅     | 🚧         |
+| 自動チャンネル設定       | ✅     | 🚧         |
+| APIチャンネル            | ✅     | 🚧         |
+| 更新統計                 | ✅     | 🚧         |
+| ダウンロード失敗統計      | ✅     | 🚧         |
+| アプリ使用統計           | ✅     | 🚧         |
+| 更新の暗号化             | ✅     | 🚧         |
+
+:::danger
+ユーザーに不正な更新を送信すると、アプリが破損する可能性があります
+:::
+
+> Capgoクラウドと独自サーバーを同時に使用することはできませんのでご注意ください
+
+:::danger
+Over-the-Air (OTA)更新機能は、HTML、CSS、JavaScriptファイルの変更にのみ適用されます
+
+Capacitorプラグインなどのネイティブコードを変更した場合は、アプリストアに再提出して承認を得る必要があります
+:::
+
+## 自動と手動の選択
+自動モードでは、ロジックの一部がネイティブコードで処理され、更新はサーバーサイドで決定されます。これはより安全で、1つのデバイスやグループへの部分的なデプロイメントなど、きめ細かい更新が可能です
+
+手動モードでは、すべてのロジックがJSで処理されます
+
+<LinkCard
+	title="自動更新"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="手動"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Capacitor updaterのインストール
+
+```bash title="Capacitor updaterのインストール"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## バンドルの準備
+
+アプリに更新を送信するには、zipファイルにする必要があります
+良好なzipファイルを確実に作成する最良の方法は、Capgo CLIを使用することです
+```bash title="サーバーから提供するファイルのバンドルを作成"
+npx @capgo/cli@latest bundle zip
+```
+
+このzipファイルは独自のサーバーから提供する必要があります
+
+<LinkCard
+	title="自動更新"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="手動"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+:::note
+これが面倒な作業に思える場合は、Capgo Cloudの試用版をお試しください
+:::

@@ -1,89 +1,74 @@
 <script setup lang="ts">
-import { type Locales, defaultLocale } from '@/services/locale'
-import translations from '@/services/translations'
+import { useRuntimeConfig } from '@/config/app'
+import { type Locales } from '@/services/locale'
+import * as m from "../paraglide/messages.js"
 
 const props = defineProps<{ locale: Locales }>()
+const config = useRuntimeConfig()
 </script>
 
 <template>
-  <div class="prose prose-sm m-auto px-3 text-left">
-    <span class="text-xs" v-if="props.locale !== defaultLocale">
-      Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
-    </span>
-    <h1 id="capgo-security-">{{ translations.trust_capgo_security[props.locale] }}</h1>
-    <p>{{ translations.trust_move_forward_with_confidence[props.locale] }}</p>
-    <h2 id="product-security">{{ translations.trust_product_security[props.locale] }}</h2>
-    <h3 id="source-code-protection">{{ translations.trust_source_code_protection[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_source_code_vulnerabilities[props.locale] }}</li>
-    </ul>
-    <h2 id="data-security">{{ translations.trust_data_security[props.locale] }}</h2>
-    <h3 id="encryption-communication">{{ translations.trust_encryption_communication[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_data_traffic_encrypted[props.locale] }}</li>
-    </ul>
-    <h3 id="source-code-encryption">{{ translations.trust_source_code_encryption[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_source_code_encrypted_in_transit[props.locale] }}</li>
-    </ul>
-    <h3 id="data-backup">{{ translations.trust_data_backup[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_data_backup_policy[props.locale] }}</li>
-    </ul>
-    <h2 id="network-security">{{ translations.trust_network_security[props.locale] }}</h2>
-    <h3 id="architecture">{{ translations.trust_architecture[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_architecture_layers[props.locale] }}</li>
-    </ul>
-    <h2 id="application-security">{{ translations.trust_application_security[props.locale] }}</h2>
-    <h3 id="secure-coding">{{ translations.trust_secure_coding[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_code_review[props.locale] }}</li>
-    </ul>
-    <h3 id="site-reliability">{{ translations.trust_site_reliability[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_serverless_infrastructure[props.locale] }}</li>
-    </ul>
-    <h3 id="application-penetration-testing">{{ translations.trust_application_penetration_testing[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_third_party_testing[props.locale] }}</li>
-    </ul>
-    <h2 id="business-security">{{ translations.trust_business_security[props.locale] }}</h2>
-    <h3 id="background-checks">{{ translations.trust_background_checks[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_access_to_production_database[props.locale] }}</li>
-    </ul>
-    <h3 id="security-awareness">{{ translations.trust_security_awareness[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_security_training[props.locale] }}</li>
-    </ul>
-    <h3 id="security-coding-education">{{ translations.trust_security_coding_education[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_open_source_security[props.locale] }}</li>
-    </ul>
-    <h3 id="partner-management">{{ translations.trust_partner_management[props.locale] }}</h3>
-    <ul>
-      <li>
-        {{ translations.trust_soc2_certification[props.locale] }}
-        <ul>
-          <li><a href="https://www.netlify.com/security/">Netlify SOC 2</a></li>
-          <li><a href="https://supabase.com/security">Supabase SOC 2</a></li>
-        </ul>
-      </li>
-    </ul>
-    <h3 id="incident-response">{{ translations.trust_incident_response[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_dedicated_incident_response[props.locale] }}</li>
-    </ul>
-    <h3 id="incident-response-policy-plan">{{ translations.trust_incident_response_policy_plan[props.locale] }}</h3>
-    <ul>
-      <li>{{ translations.trust_incident_response_policy[props.locale] }}</li>
-    </ul>
-    <h3 id="communication">{{ translations.trust_communication[props.locale] }}</h3>
-    <ul>
-      <li>
-        {{ translations.trust_system_wide_issues_notification[props.locale] }}
-      </li>
-    </ul>
-  </div>
+  <section class="py-12 bg-gray-50 sm:py-16">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="mx-auto text-center">
+        <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.trust_and_security() }}</h1>
+        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">{{ m.trust_and_security_description() }}</p>
+      </div>
+
+      <div class="mt-16 space-y-16">
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.product_security() }}</h2>
+          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
+            <li>{{ m.trust_soc2_certification() }}</li>
+            <li>
+              {{ m.source_code_protection_1() }}
+              <a href="https://github.com/Cap-go/capgo" class="text-blue-500 underline underline-current" target="_blank">GitHub</a>.
+              {{ m.source_code_protection_2() }}
+              <a href="https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main" class="text-blue-500 underline underline-current" target="_blank">SonarCloud</a>
+              {{ m.and() }}
+              <a href="https://snyk.io/test/github/Cap-go/capgo" class="text-blue-500 underline underline-current" target="_blank">Snyk</a>
+              {{ m.source_code_protection_3() }}
+            </li>
+            <li class="flex items-center gap-2">
+              SonarCloud:
+              <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
+                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating"/>
+              </a>
+              <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
+                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities"/>
+              </a>
+            </li>
+            <li>{{ m.access_control() }}</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.data_security() }}</h2>  
+          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
+            <li>{{ m.encryption_communication() }}</li>
+            <li>{{ m.source_code_encryption() }}</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.network_security() }}</h2>
+          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">  
+            <li>{{ m.vulnerability_scanning() }}</li>
+            <li>{{ m.architecture() }}</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">  
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.application_security() }}</h2>
+          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
+            <li>{{ m.secure_coding() }}</li>  
+            <li>{{ m.site_reliability() }} <a href="https://status.capgo.app/" class="text-blue-500 underline underline-current" target="_blank">Uptime Monitoring</a>.</li> 
+            <!-- link to update monitoring: https://status.capgo.app/ -->
+            <li>{{ m.application_penetration_testing() }}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>  
 </template>

@@ -1,0 +1,141 @@
+---
+title: Debugging
+description: Cara Men-debug Aplikasi Anda
+sidebar:
+  order: 6
+locale: id
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Memahami log cloud:
+
+### Dikirim dari backend
+
+| code                          | Deskripsi                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | Pengguna berada di pusat data Google dan pembaruan berusia kurang dari 4 jam. Ini dilakukan untuk mencegah perangkat bot Google terhitung sebagai perangkat di akun Anda |
+| **needPlanUpgrade** (sebelumnya **needUpgrade**) | Menunjukkan bahwa Anda telah mencapai batas paket Anda, dan perangkat tidak akan menerima pembaruan sampai Anda meningkatkan paket atau sampai bulan berikutnya                                  |
+| **noNew**                                        | Perangkat memiliki versi terbaru yang tersedia                                                                                                                                |
+| **disablePlatformIos**                           | Perangkat menggunakan platform iOS, tetapi dinonaktifkan dalam pengaturan saluran                                                                                            |
+| **disablePlatformAndroid**                       | Perangkat menggunakan platform Android, tetapi dinonaktifkan dalam pengaturan saluran                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | Perangkat memiliki versi (`123`), dan saluran memiliki pembaruan (`122`) di bawah versi perangkat untuk dikirim, tetapi dinonaktifkan dalam pengaturan saluran                   |
+| **disableDevBuild**                              | Perangkat memiliki build pengembangan, tetapi dinonaktifkan dalam pengaturan saluran                                                                                                   |
+| **disableEmulator**                              | Perangkat adalah emulator, tetapi dinonaktifkan dalam pengaturan saluran                                                                                                    |
+
+### Dikirim dari perangkat
+
+| code  | Deskripsi                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | Info untuk mengunduh versi baru telah dikirim ke perangkat                 |
+| **delete**            | Satu bundle telah dihapus dari perangkat                                        |
+| **set**               | Bundle telah diatur pada perangkat                                              |
+| **set_fail**          | Bundle gagal diatur                                                         |
+| **reset**             | Perangkat direset ke bundle `builtin`                                         |
+| **download_XX**       | Bundle baru telah diunduh - kemajuan ditunjukkan oleh XX% (kelipatan 10%) |
+| **download_complete** | Bundle baru selesai diunduh                                                  |
+| **download_fail**     | Bundle baru gagal diunduh                                                    |
+| **update_fail**       | Bundle baru telah dipasang tetapi gagal memanggil `notifyAppReady`            |
+| **checksum_fail**     | Bundle baru gagal memvalidasi checksum                                   |
+| **windows_path_fail** | Zip memiliki file yang mengandung path Windows yang ilegal                        |
+| **canonical_path_fail** | Path file tidak kanonik                                              |
+| **directory_path_fail** | Ada kesalahan dalam path file zip                                         |
+| **unzip_fail**          | unzip gagal                                                                   |
+| **low_mem_fail** | Unduhan gagal karena memori rendah di perangkat                                    |
+
+### Status Bundle
+
+* `SUCCESS`: instalasi bundle selesai
+* `ERROR`: instalasi atau unduhan gagal
+* `PENDING`: Unduhan selesai, menunggu rilis
+* `DELETED`: Bundle dihapus, masih ditampilkan untuk statistik
+* `DOWNLOADING`: Sedang mengunduh bundle
+
+## Memahami log perangkat:
+
+### Perintah debug:
+
+Ada perintah debug untuk pengguna Capgo cloud
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+Ini akan memungkinkan Anda memeriksa semua kejadian yang terjadi di aplikasi dan menemukan solusi jika pembaruan tidak terjadi
+
+### IOS
+
+untuk menemukan log Anda di Xcode
+
+<LinkCard
+    title="Getting the Device Log in Xcode"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android:
+
+untuk menemukan log Anda di Android studio
+
+<LinkCard
+    title="View logs with Logcat"
+    href="https://developerandroidcom/studio/debug/am-logcat"
+/>
+
+### Penjelasan Log
+
+* `Failed to download from` **=>** sama dengan **download_fail**
+* `notifyAppReady was not called, roll back current bundle` => sama dengan **update_fail**
+
+## Menemukan bundle yang diunduh di perangkat Anda
+
+### iOS
+
+Untuk debug di iOS, Anda perlu mengekspor aplikasi ke komputer Anda, Anda bisa melakukannya seperti ini:
+
+Xcode memiliki fitur bawaan untuk memeriksa sistem file aplikasi yang diinstal pengembang di perangkat iOS
+
+Untuk mencapainya:
+
+1. Hubungkan perangkat Anda ke Mac dan pilih Window > Devices di menubar Xcode
+2. Pilih perangkat Anda di panel kiri di bawah bagian Devices
+3. Ini akan menampilkan daftar aplikasi yang diinstal pengembang untuk perangkat tersebut
+4. Pilih aplikasi yang ingin Anda periksa lalu pilih ikon roda gigi di dekat bagian bawah layar
+5. Di sini Anda dapat melihat sistem file saat ini dengan memilih Show Container atau mengunduh snapshot
+
+Memilih Download Container akan mengunduh dan mengekspor snapshot sistem file sebagai file xcappdata yang dapat Anda telusuri
+
+Klik kanan pada file ini dan pilih Show Package Contents untuk membuka folder
+
+Buka folder App Data, dan Anda sekarang akan melihat beberapa folder seperti Documents, Library, tmp, dll
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243ewebp/)
+
+Kemudian Anda akan menemukan versi di 2 folder:
+
+`library/NoCloud/ionic_built_snapshots` diperlukan setelah aplikasi di-reboot
+
+dan `documents/versions` untuk hot reload
+
+### Android
+
+Untuk debug di Android, Anda perlu mengakses perangkat dari Android Studio:
+
+1. Klik View > Tool Windows > Device File Explorer atau klik tombol Device File Explorer di bar jendela alat untuk membuka Device File Explorer
+2. Pilih perangkat dari daftar dropdown
+3. Buka path **data/data/APP_NAME/** dimana **APP_NAME adalah ID aplikasi Anda**
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
+
+Kemudian temukan folder `versions` untuk melihat semua versi
+
+:::tip[Tahukah Anda?]
+Di Android, semua versi disimpan dalam satu folder, tidak seperti IOS di mana harus diduplikasi di dua lokasi
+:::
+
+## Memahami log crash iOS production
+
+<LinkCard
+    title="How to review your app's crash logs"
+    href="https://developerapplecom/news/?id=nra79npr"
+/>

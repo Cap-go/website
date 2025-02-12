@@ -1,0 +1,79 @@
+---
+title: Sistem organisasi
+description: capgo アカウントでの組織の管理
+sidebar:
+  order: 11
+locale: ja
+---
+
+## 組織システムとは何ですか？
+
+組織システムは、チームメンバーとアプリを安全に共有できるCapgoのシステムです
+
+### Q: 組織の情報にアクセスするにはどうすればよいですか？
+
+組織の情報にアクセスするには、[設定](/docs/webapp/settings/#how-to-get-to-the-settings-page)に移動し、`Organization settings`をクリックしてください
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settingswebp" alt="Org settings" /><figcaption></figcaption></figure>
+
+### Q: 表示する組織を変更するにはどうすればよいですか？
+
+別の組織の設定を表示するには、名前の近くにある組織セレクターをクリックしてください
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-selectorwebp" alt="Org selector" /><figcaption></figcaption></figure>
+
+これが表示されない場合は、設定ページにいない可能性があります
+
+### Q: 組織のメンバーを確認するにはどうすればよいですか？
+
+`members`をクリックしてください
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-memberswebp" alt="Org Show members" /><figcaption></figcaption></figure>
+
+### Q: ユーザーを組織に招待するにはどうすればよいですか？
+
+`Add member`をクリックしてください
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-memberwebp" alt="Org add member" /><figcaption></figcaption></figure>
+
+ポップアップが表示されます - ユーザーのメールアドレスを入力してください
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enterwebp" alt="Invite to org" /><figcaption></figcaption></figure>
+
+`invite`をクリックすると、別のポップアップが表示され、招待されたユーザーに付与する権限について尋ねられます
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgswebp" alt="Select perm for org" /><figcaption></figcaption></figure>
+
+すべての権限の内訳は以下の通りです：
+
+| 権限                          | 読取 | アップロード | 書込 | 管理者 | スーパー管理者 |
+|-----------------------------------|------|--------|-------|-------|-------------|
+| アプリ統計の表示                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| アプリチャンネルの表示                 |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| デバイスの表示                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| ログの表示                         |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| バンドルの表示                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| アプリの削除                        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| チャンネルの削除                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| バージョンの削除                    |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 組織設定の変更             |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| 組織ユーザーの管理                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| チャンネル設定の変更            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 新しいバージョンのアップロード                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
+| デバイスの変更                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| チャンネルの現在バージョンの変更 |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 新規チャンネルの作成                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| バージョンの変更（メタデータ）         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| 課金管理                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| バージョンの安全でない削除      |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+
+### Q: 組織内での課金はどのように行われますか？
+
+**スーパー管理者**権限を持つユーザーが、特定の組織の課金を管理できます
+プランは個人アカウントではなく、組織に紐付けられています
+
+:::danger
+⚠️ プランの購入は、現在選択している組織にのみ影響します
+:::
+
+### Q: 複数の組織を作成できますか？
+
+いいえ、まだできません
