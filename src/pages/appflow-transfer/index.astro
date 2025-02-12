@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VueAppflowTransfer from '@/vue-pages/appflow-transfer.vue'
+import * as m from "../../paraglide/messages.js"
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.migrate_from_appflow()].join(' | ')
+const description = m.appflow_transfer_description()
+const content = { title, description }
+---
+
+<Layout content={content}><VueAppflowTransfer locale={Astro.locals.locale} client:load /></Layout>

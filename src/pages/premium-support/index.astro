@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import VuePremiumSupport from '@/vue-pages/premium-support.vue'
+import * as m from "../../paraglide/messages.js"
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.premium_support()].join(' | ')
+const description = m.premium_support_description()
+const content = { title, description }
+---
+
+<Layout content={content}><VuePremiumSupport locale={Astro.locals.locale} client:load /></Layout>
