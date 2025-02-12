@@ -53,8 +53,8 @@ export function useRuntimeConfig(): RuntimeConfig {
       blog_title: blogTitle,
       blog_description: blogDescription,
       blog_keywords: 'Learning Capacitor, Capacitor updates, OTA updates, mobile app development, update strategy, developer tools',
-      baseUrl: getUrl(import.meta.env.BRANCH),
-      baseApiUrl: getApiUrl(import.meta.env.BRANCH),
+      baseUrl: getUrl(process.env.BRANCH || ''),
+      baseApiUrl: getApiUrl(process.env.BRANCH || ''),
     },
   }
 }
@@ -64,37 +64,37 @@ export const structuredData = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': `${getUrl(import.meta.env.BRANCH)}/#website`,
-      url: getUrl(import.meta.env.BRANCH),
+      '@id': `${getUrl(process.env.BRANCH || '')}/#website`,
+      url: getUrl(process.env.BRANCH || ''),
       name: appName,
       isPartOf: {
-        '@id': `${getUrl(import.meta.env.BRANCH)}/#website`,
+        '@id': `${getUrl(process.env.BRANCH || '')}/#website`,
       },
       datePublished: '2022-01-30T22:51:56+00:00',
       dateModified: new Date().toISOString(),
       description: appDescription,
       breadcrumb: {
-        '@id': `${getUrl(import.meta.env.BRANCH)}/#breadcrumb`,
+        '@id': `${getUrl(process.env.BRANCH || '')}/#breadcrumb`,
       },
       inLanguage: 'en-US',
       potentialAction: [
         {
           '@type': 'ReadAction',
-          target: [getUrl(import.meta.env.BRANCH)],
+          target: [getUrl(process.env.BRANCH || '')],
         },
       ],
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': `${getUrl(import.meta.env.BRANCH)}#breadcrumb`,
+      '@id': `${getUrl(process.env.BRANCH || '')}#breadcrumb`,
       itemListElement: [
         {
           '@type': 'ListItem',
           position: 1,
           item: {
             '@type': 'WebPage',
-            '@id': `${getUrl(import.meta.env.BRANCH)}/`,
-            url: `${getUrl(import.meta.env.BRANCH)}/`,
+            '@id': `${getUrl(process.env.BRANCH || '')}/`,
+            url: `${getUrl(process.env.BRANCH || '')}/`,
             name: 'Home',
           },
         },
@@ -103,8 +103,8 @@ export const structuredData = {
           position: 2,
           item: {
             '@type': 'WebPage',
-            '@id': `${getUrl(import.meta.env.BRANCH)}/blog/`,
-            url: `${getUrl(import.meta.env.BRANCH)}/blog/`,
+            '@id': `${getUrl(process.env.BRANCH || '')}/blog/`,
+            url: `${getUrl(process.env.BRANCH || '')}/blog/`,
             name: 'Blog',
           },
         },
@@ -113,8 +113,8 @@ export const structuredData = {
           position: 2,
           item: {
             '@type': 'WebPage',
-            '@id': `${getUrl(import.meta.env.BRANCH)}/app_mobile/`,
-            url: `${getUrl(import.meta.env.BRANCH)}/app_mobile/`,
+            '@id': `${getUrl(process.env.BRANCH || '')}/app_mobile/`,
+            url: `${getUrl(process.env.BRANCH || '')}/app_mobile/`,
             name: 'App',
           },
         },
@@ -123,8 +123,8 @@ export const structuredData = {
           position: 2,
           item: {
             '@type': 'WebPage',
-            '@id': `${getUrl(import.meta.env.BRANCH)}/pricing/`,
-            url: `${getUrl(import.meta.env.BRANCH)}/pricing/`,
+            '@id': `${getUrl(process.env.BRANCH || '')}/pricing/`,
+            url: `${getUrl(process.env.BRANCH || '')}/pricing/`,
             name: 'Pricing',
           },
         },
