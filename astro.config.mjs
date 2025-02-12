@@ -13,6 +13,7 @@ import { defaultLocale, localeNames, locales } from './src/services/locale'
 export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   trailingSlash: 'always',
+  output: 'static',
   build: {
     format: 'directory',
     concurrency: 2,
