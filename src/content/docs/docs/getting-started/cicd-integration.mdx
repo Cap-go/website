@@ -83,7 +83,7 @@ This configuration does the following:
 4. Runs the Capgo CLI `bundle upload` command, passing the new version number and using the `--partial` flag for differential updates.
 5. Commits the updated `CHANGELOG.md`, `package.json`, and any other changed files back to the repository.
 
-To use semantic-release with Capgo, simply add a step to your CI/CD configuration that runs `npx semantic-release`. Ensure this step comes after your web build and before the Capgo `upload` step.
+To use semantic-release with Capgo, simply add a step to your CI/CD configuration that runs `npx semantic-release`. Ensure this step comes after your web build and before the Capgo `bundle upload` step.
 
 ## Troubleshooting
 
