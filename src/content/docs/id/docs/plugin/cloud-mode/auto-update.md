@@ -42,11 +42,11 @@ Di 3 file dalam proyek Anda:
 
 Siapkan aplikasi Anda dalam 5 menit
 
-[Update aplikasi capacitor Anda dengan mulus menggunakan capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[Update aplikasi capacitor Anda dengan mulus menggunakan capacitor updater](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 Siapkan CI Anda dalam 5 menit
 
-[Build dan rilis otomatis dengan GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build dan rilis otomatis dengan GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 ### Instalasi
 
@@ -57,7 +57,7 @@ npx cap sync
 
 ### Pendahuluan
 
-Klik [daftar](https://capgoapp) untuk membuat akun Anda
+Klik [daftar](https://capgo.app) untuk membuat akun Anda
 
 Server memungkinkan Anda mengelola channel dan versi dan banyak lagi
 
@@ -102,7 +102,7 @@ Dan kemudian build lagi dengan Xcode atau Android studio
 
 Untuk mengunggah versi di setiap commit, atur CI/CD dengan panduan ini
 
-[Build dan rilis otomatis dengan GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build dan rilis otomatis dengan GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 #### Event Major Available
 

@@ -42,11 +42,11 @@ Dans 3 fichiers de votre projet :
 
 Configurez votre application en 5 minutes
 
-[Mettez à jour vos applications Capacitor en toute transparence avec capacitor updater](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[Mettez à jour vos applications Capacitor en toute transparence avec capacitor updater](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 Configurez votre CI en 5 minutes
 
-[Build et déploiement automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build et déploiement automatiques avec GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 ### Installation
 
@@ -57,7 +57,7 @@ npx cap sync
 
 ### Introduction
 
-Cliquez sur [register](https://capgoapp) pour créer votre compte
+Cliquez sur [register](https://capgo.app) pour créer votre compte
 
 Le serveur vous permet de gérer les canaux, les versions et bien plus encore
 
@@ -102,7 +102,7 @@ Puis reconstruisez-la avec Xcode ou Android Studio
 
 Pour télécharger la version à chaque commit, configurez CI/CD avec ce guide
 
-[Build et déploiement automatiques avec GitHub actions](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[Build et déploiement automatiques avec GitHub actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 #### Événement Major Available
 

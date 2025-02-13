@@ -69,4 +69,4 @@ interface BundleInfo {
 
 ## Mitwirkende
 
-[@lincolnthree](https://githubcom/lincolnthree/) Vielen Dank für den Start dieser Arbeit, es wäre unmöglich gewesen, dieses Update ohne Sie zum Laufen zu bringen
+[@lincolnthree](https://github.com/lincolnthree/) Vielen Dank für den Start dieser Arbeit, es wäre unmöglich gewesen, dieses Update ohne Sie zum Laufen zu bringen

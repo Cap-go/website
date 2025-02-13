@@ -9,7 +9,7 @@ locale: de
 ## Vor dem Start
 
 :::tip
-Wenn Sie dieses Tool kostenlos nutzen, nehmen Sie sich Zeit, meine Arbeit über [GitHub Sponsor](https://githubcom/sponsors/riderx/) zu unterstützen
+Wenn Sie dieses Tool kostenlos nutzen, nehmen Sie sich Zeit, meine Arbeit über [GitHub Sponsor](https://github.com/sponsors/riderx/) zu unterstützen
 
 Ich habe mich entschieden, den gesamten Code, den ich hier entwickelt habe, als Open Source zur Verfügung zu stellen
 
@@ -21,7 +21,7 @@ Ich denke, es würde unsere Welt zu einem besseren Ort machen, wenn wir öffnen 
 
 Um dies zu ermöglichen, ist es notwendig, dass wir alle unseren Teil dazu beitragen, auch Sie 🥹
 
-Wenn das Capgo-Cloud-Angebot nicht zu Ihnen passt, unterstützen Sie einen bootstrapped Maker [HIER](https://githubcom/sponsors/riderx/) zu Ihren Bedingungen
+Wenn das Capgo-Cloud-Angebot nicht zu Ihnen passt, unterstützen Sie einen bootstrapped Maker [HIER](https://github.com/sponsors/riderx/) zu Ihren Bedingungen
 :::
 
 ## Schnellinstallation
@@ -61,7 +61,7 @@ AppaddListener('appStateChange', async(state) => {
        // Führen Sie den Download durch, während die App aktiv ist, um fehlgeschlagene Downloads zu vermeiden
        data = await CapacitorUpdaterdownload({
        version: '004',
-       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
@@ -83,7 +83,7 @@ AppaddListener('appStateChange', async(state) => {
 
 Überprüfen Sie die Demo-App für weitere Informationen
 
-[GitHub - Cap-go/demo-app: Demo-App mit manuellem und automatischem Modus](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: Demo-App mit manuellem und automatischem Modus](https://github.com/Cap-go/demo-app/)
 
 ## Paket
 

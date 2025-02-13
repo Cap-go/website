@@ -20,5 +20,5 @@ Die Android-Version ist einfacher zu erstellen, da beide Java verwenden, aber iO
 
 In der Zwischenzeit können Sie Folgendes tun:
 
-* [Unterstützen Sie mich](https://githubcom/sponsors/riderx) auf GitHub und ich kann das priorisieren. Dies wird mindestens 1 Monat Arbeit benötigen
+* [Unterstützen Sie mich](https://github.com/sponsors/riderx) auf GitHub und ich kann das priorisieren. Dies wird mindestens 1 Monat Arbeit benötigen
 * Engagieren Sie mich als Berater, ich habe früher großen Unternehmen bei der Migration zu Capacitor geholfen, es dauert normalerweise ~10-20 Tage und der [Nutzen](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) ist enorm für das Team

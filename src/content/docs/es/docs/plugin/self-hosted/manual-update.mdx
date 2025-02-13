@@ -45,7 +45,7 @@ AppaddListener('appStateChange', async(state) => {
        // Do the download during user active app time to prevent failed download
        data = await CapacitorUpdaterdownload({
        version: '004',
-       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
@@ -62,5 +62,5 @@ AppaddListener('appStateChange', async(state) => {
 ```
 
 :::note
-Si esto parece mucho trabajo, considera probar [Capgo trial](https://capgoapp/register/) que manejará todo esto por ti
+Si esto parece mucho trabajo, considera probar [Capgo trial](https://capgo.app/register/) que manejará todo esto por ti
 :::

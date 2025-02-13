@@ -20,5 +20,5 @@ La versión de Android es más fácil de hacer ya que ambos usan Java, pero iOS 
 
 Mientras tanto, esto es lo que puedes hacer:
 
-* [Apóyame](https://githubcom/sponsors/riderx) en GitHub y puedo darle prioridad a eso. Esto necesitará al menos 1 mes de trabajo
+* [Apóyame](https://github.com/sponsors/riderx) en GitHub y puedo darle prioridad a eso. Esto necesitará al menos 1 mes de trabajo
 * Contrátame como Consultor, solía ayudar a grandes empresas a migrar a Capacitor, normalmente toma ~10-20 días, y el [beneficio](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) es enorme para el equipo

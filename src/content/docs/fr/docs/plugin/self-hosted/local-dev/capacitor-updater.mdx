@@ -12,7 +12,7 @@ Ce tutorialiel montrera comment utiliser capacitor updater dans un environnement
 
 ## Prérequis
 
-1. [Capgo cloné](https://githubcom/Cap-go/capgo)
+1. [Capgo cloné](https://github.com/Cap-go/capgo)
 
 ## Pour commencer
 
@@ -37,10 +37,10 @@ const config: CapacitorConfig = {
 Cela vous permettra d'utiliser capgo local en développement. Cependant, par défaut, cela n'est pas suffisant.
 
 Sur Android, l'activation de la [communication en texte clair](https://developerandroidcom/topic/security/risks/cleartext) est nécessaire car par défaut SSL est désactivé en local.
-Cela peut être réalisé en modifiant [AndroidManifestxml](https://githubcom/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) et en ajoutant `android:usesCleartextTraffic="true"` dans la balise `application`
+Cela peut être réalisé en modifiant [AndroidManifestxml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifestxml) et en ajoutant `android:usesCleartextTraffic="true"` dans la balise `application`
 Un exemple complet de cette modification peut être vu [ici](https://gistgithubcom/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
 
-Puisque par défaut, Android n'autorise pas `http`, capgo a implémenté une vérification pour http [ici](https://githubcom/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)
+Puisque par défaut, Android n'autorise pas `http`, capgo a implémenté une vérification pour http [ici](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/indexts#L396)
 Ce code pourrait ne pas être toujours là, mais pour l'instant une modification de cette ligne est nécessaire pour faire fonctionner les mises à jour.  
 Cette ligne devrait ressembler à ceci :
 ```ts
@@ -49,7 +49,7 @@ Cette ligne devrait ressembler à ceci :
 
 :::danger
 ⚠️ Ne committez pas `supabase/functions/updates/indexts` dans le dépôt distant\
-Ce code est là [pour une raison](https://githubcom/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
+Ce code est là [pour une raison](https://github.com/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
 :::
 
 Il pourrait également y avoir un problème empêchant l'application Android de se connecter. Si vous ne voyez aucune requête envoyée aux fonctions edge, exécutez

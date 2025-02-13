@@ -42,11 +42,11 @@ Capgo 자동 업데이트를 사용하기 전에 앱 버전이 [https://semveror
 
 5분 만에 앱 설정하기
 
-[capacitor updater를 사용하여 원활하게 capacitor 앱 업데이트하기](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[capacitor updater를 사용하여 원활하게 capacitor 앱 업데이트하기](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 5분 만에 CI 설정하기
 
-[GitHub actions를 사용한 자동 빌드 및 릴리스](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actions를 사용한 자동 빌드 및 릴리스](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 ### 설치
 
@@ -57,7 +57,7 @@ npx cap sync
 
 ### 소개
 
-[등록](https://capgoapp)을 클릭하여 계정을 만드세요
+[등록](https://capgo.app)을 클릭하여 계정을 만드세요
 
 서버에서 채널과 버전 등을 관리할 수 있습니다
 
@@ -102,7 +102,7 @@ CapacitorUpdater.notifyAppReady()
 
 각 커밋에서 버전을 업로드하려면 이 가이드로 CI/CD를 설정하세요
 
-[GitHub actions를 사용한 자동 빌드 및 릴리스](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actions를 사용한 자동 빌드 및 릴리스](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 #### Major Available 이벤트
 

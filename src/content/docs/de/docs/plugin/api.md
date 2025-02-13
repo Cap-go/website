@@ -8,7 +8,7 @@ locale: de
 
 # Updater Plugin Konfiguration
 
-Siehe Github [Readme](https://githubcom/Cap-go/capacitor-updater) für weitere Informationen
+Siehe Github [Readme](https://github.com/Cap-go/capacitor-updater) für weitere Informationen
 
 <docgen-config>
 

@@ -34,8 +34,8 @@ In the mean time heres what you can do:
 
 当面は以下のことができます：
 
-* [Support me](https://githubcom/sponsors/riderx) on GitHub and I can prioritize that This will need at least 1 month of work
+* [Support me](https://github.com/sponsors/riderx) on GitHub and I can prioritize that This will need at least 1 month of work
 * Hire me as a Consultant, I used to help big companies migrate to capacitor, it usually takes ~10-20 days, and the [benefit](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) is huge for the team
 
-* GitHubで[サポート](https://githubcom/sponsors/riderx)していただければ、優先的に取り組むことができます。少なくとも1ヶ月の作業が必要です
+* GitHubで[サポート](https://github.com/sponsors/riderx)していただければ、優先的に取り組むことができます。少なくとも1ヶ月の作業が必要です
 * コンサルタントとして雇用してください。大企業のCapacitorへの移行を支援してきた経験があり、通常10-20日かかりますが、チームにとって[メリット](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development)は非常に大きいです

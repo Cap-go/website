@@ -9,7 +9,7 @@ locale: id
 ## Sebelum memulai
 
 :::tip
-Jika Anda menggunakan alat ini secara gratis, luangkan waktu untuk mendukung pekerjaan saya dengan [GitHub sponsor](https://githubcom/sponsors/riderx/)
+Jika Anda menggunakan alat ini secara gratis, luangkan waktu untuk mendukung pekerjaan saya dengan [GitHub sponsor](https://github.com/sponsors/riderx/)
 
 Saya membuat taruhan untuk membuka source code semua kode yang saya buat di sini
 
@@ -21,7 +21,7 @@ Saya pikir ini akan membuat dunia kita menjadi tempat yang lebih baik dengan ket
 
 Untuk mewujudkannya, kita semua perlu berperan, termasuk Anda 🥹
 
-Jika penawaran Capgo cloud tidak cocok untuk Anda, dukung Maker bootstrapped [DI SINI](https://githubcom/sponsors/riderx/) sesuai ketentuan Anda
+Jika penawaran Capgo cloud tidak cocok untuk Anda, dukung Maker bootstrapped [DI SINI](https://github.com/sponsors/riderx/) sesuai ketentuan Anda
 :::
 
 ## Instalasi Cepat
@@ -61,7 +61,7 @@ AppaddListener('appStateChange', async(state) => {
        // Lakukan unduhan selama waktu aplikasi aktif pengguna untuk mencegah unduhan gagal
        data = await CapacitorUpdaterdownload({
        version: '004',
-       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
@@ -83,7 +83,7 @@ AppaddListener('appStateChange', async(state) => {
 
 Periksa aplikasi demo untuk informasi lebih lanjut
 
-[GitHub - Cap-go/demo-app: aplikasi demo dengan mode manual dan otomatis](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: aplikasi demo dengan mode manual dan otomatis](https://github.com/Cap-go/demo-app/)
 
 ## Paket
 

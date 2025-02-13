@@ -8,7 +8,7 @@ locale: es
 
 # Configuración del Plugin Updater
 
-Consulta el [Readme](https://githubcom/Cap-go/capacitor-updater) de Github para más información
+Consulta el [Readme](https://github.com/Cap-go/capacitor-updater) de Github para más información
 
 <docgen-config>
 <!--Actualiza los comentarios JSDoc del archivo fuente y vuelve a ejecutar docgen para actualizar la documentación a continuación-->

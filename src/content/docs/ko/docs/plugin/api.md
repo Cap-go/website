@@ -8,7 +8,7 @@ locale: ko
 
 # 업데이터 플러그인 설정
 
-자세한 내용은 Github [Readme](https://githubcom/Cap-go/capacitor-updater)를 참조하세요
+자세한 내용은 Github [Readme](https://github.com/Cap-go/capacitor-updater)를 참조하세요
 
 <docgen-config>
 

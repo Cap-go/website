@@ -9,7 +9,7 @@ locale: ko
 ## 시작하기 전에
 
 :::tip
-이 도구를 무료로 사용하신다면, [GitHub 후원](https://githubcom/sponsors/riderx/)을 통해 제 작업을 지원해주시기 바랍니다.
+이 도구를 무료로 사용하신다면, [GitHub 후원](https://github.com/sponsors/riderx/)을 통해 제 작업을 지원해주시기 바랍니다.
 
 여기서 제가 만든 모든 코드를 오픈소스로 제공하기로 결정했습니다.
 
@@ -21,7 +21,7 @@ locale: ko
 
 이를 가능하게 하려면 여러분을 포함한 우리 모두가 각자의 역할을 해야 합니다 🥹
 
-만약 Capgo 클라우드 제안이 적합하지 않다면, [여기서](https://githubcom/sponsors/riderx/) 부트스트랩 메이커를 여러분의 조건으로 후원해주세요.
+만약 Capgo 클라우드 제안이 적합하지 않다면, [여기서](https://github.com/sponsors/riderx/) 부트스트랩 메이커를 여러분의 조건으로 후원해주세요.
 :::
 
 ## 빠른 설치
@@ -61,7 +61,7 @@ AppaddListener('appStateChange', async(state) => {
        // 다운로드 실패를 방지하기 위해 사용자가 앱을 사용 중일 때 다운로드를 수행합니다
        data = await CapacitorUpdaterdownload({
        version: '004',
-       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
@@ -83,7 +83,7 @@ AppaddListener('appStateChange', async(state) => {
 
 더 자세한 정보는 데모 앱을 확인하세요.
 
-[GitHub - Cap-go/demo-app: 수동 및 자동 모드가 있는 데모 앱](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: 수동 및 자동 모드가 있는 데모 앱](https://github.com/Cap-go/demo-app/)
 
 ## 패키지
 

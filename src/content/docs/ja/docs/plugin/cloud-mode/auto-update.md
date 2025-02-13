@@ -43,11 +43,11 @@ Capgo自動更新を使用する前に、アプリのバージョンが[https://
 
 5分でアプリをセットアップ
 
-[capacitor updaterを使用してcapacitorアプリをシームレスに更新する](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
+[capacitor updaterを使用してcapacitorアプリをシームレスに更新する](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
 5分でCIをセットアップ
 
-[GitHub actionsによる自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actionsによる自動ビルドとリリース](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 ### インストール
 
@@ -58,7 +58,7 @@ npx cap sync
 
 ### はじめに
 
-[登録](https://capgoapp)をクリックしてアカウントを作成してください。
+[登録](https://capgo.app)をクリックしてアカウントを作成してください。
 
 サーバーではチャンネルやバージョンなど、さらに多くの機能を管理できます。
 
@@ -103,7 +103,7 @@ CapacitorUpdaternotifyAppReady()
 
 各コミット時にバージョンをアップロードするようにCI/CDを設定するには、このガイドに従ってください。
 
-[GitHub actionsによる自動ビルドとリリース](https://capgoapp/blog/automatic-build-and-release-with-github-actions)
+[GitHub actionsによる自動ビルドとリリース](https://capgo.app/blog/automatic-build-and-release-with-github-actions)
 
 #### メジャーアップデート利用可能イベント
 

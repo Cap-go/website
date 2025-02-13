@@ -8,7 +8,7 @@ locale: ja
 
 # アップデータープラグイン設定
 
-詳細については、Github の[Readme](https://githubcom/Cap-go/capacitor-updater)をご覧ください
+詳細については、Github の[Readme](https://github.com/Cap-go/capacitor-updater)をご覧ください
 
 <docgen-config>
 

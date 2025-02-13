@@ -20,5 +20,5 @@ La versione Android è più facile da realizzare poiché entrambi utilizzano Jav
 
 Nel frattempo ecco cosa puoi fare:
 
-* [Supportami](https://githubcom/sponsors/riderx) su GitHub e posso dare priorità a questo. Servirà almeno 1 mese di lavoro
+* [Supportami](https://github.com/sponsors/riderx) su GitHub e posso dare priorità a questo. Servirà almeno 1 mese di lavoro
 * Assumermi come Consulente, ero solito aiutare grandi aziende a migrare a Capacitor, di solito richiede ~10-20 giorni, e il [beneficio](https://ionicio/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) è enorme per il team

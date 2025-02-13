@@ -9,7 +9,7 @@ locale: ja
 ## 始める前に
 
 :::tip
-このツールを無料で使用する場合は、[GitHub sponsor](https://githubcom/sponsors/riderx/)で私の作業をサポートする時間を取ってください。
+このツールを無料で使用する場合は、[GitHub sponsor](https://github.com/sponsors/riderx/)で私の作業をサポートする時間を取ってください。
 
 私はここで構築したすべてのコードをオープンソース化することを決意しました。
 
@@ -21,7 +21,7 @@ locale: ja
 
 これを実現するためには、あなたを含む私たち全員が自分の役割を果たす必要があります🥹
 
-Capgo cloudのサービスが適していない場合は、あなたの条件で独立した開発者を[ここ](https://githubcom/sponsors/riderx/)でサポートしてください。
+Capgo cloudのサービスが適していない場合は、あなたの条件で独立した開発者を[ここ](https://github.com/sponsors/riderx/)でサポートしてください。
 :::
 
 ## クイックインストール
@@ -61,7 +61,7 @@ AppaddListener('appStateChange', async(state) => {
        // ダウンロードの失敗を防ぐため、アプリがアクティブな時間中にダウンロードを実行します
        data = await CapacitorUpdaterdownload({
        version: '004',
-       url: 'https://githubcom/Cap-go/demo-app/releases/download/004/distzip',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
        })
      }
      if (!stateisActive && dataversion !== "") {
@@ -83,7 +83,7 @@ AppaddListener('appStateChange', async(state) => {
 
 詳細についてはデモアプリをチェックしてください
 
-[GitHub - Cap-go/demo-app: デモアプリ（手動およびオートモード）](https://githubcom/Cap-go/demo-app/)
+[GitHub - Cap-go/demo-app: デモアプリ（手動およびオートモード）](https://github.com/Cap-go/demo-app/)
 
 ## パッケージ
 
