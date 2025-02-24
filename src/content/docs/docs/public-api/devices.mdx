@@ -1,0 +1,238 @@
+---
+title: "Devices"
+description: "Devices endpoint documentation"
+sidebar:
+  order: 7
+---
+
+Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their versions, channels, and update status.
+
+## Understanding Devices
+
+Each device has unique characteristics and states:
+- **Platform**: iOS or Android
+- **Version**: Current bundle version and native build version
+- **Environment**: Production or development, emulator or physical device
+- **Channel**: Current update channel assignment
+- **Custom ID**: Optional identifier for your own tracking purposes
+
+## Best Practices
+
+1. **Version Tracking**: Monitor device versions to ensure update adoption
+2. **Channel Management**: Assign devices to appropriate channels based on testing needs
+3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
+4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/device/`
+
+Link a device to a specific version or channel.
+
+#### Request Body
+
+```typescript
+interface DeviceLink {
+  app_id: string
+  device_id: string
+  version_id?: string // version name
+  channel?: string    // channel name
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "device_id": "device_456",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/device/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET
+
+`https://api.capgo.app/device/`
+
+Retrieve device information. Returns 50 devices per page.
+
+#### Query Parameters
+- `app_id`: Required. The ID of your app
+- `page`: Optional. Page number for pagination
+- `device_id`: Optional. Specific device ID to retrieve
+
+#### Example Requests
+
+```bash
+# Get all devices
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123"
+
+# Get specific device
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123&device_id=device_456"
+
+# Get next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123&page=1"
+```
+
+#### Response Type
+
+```typescript
+interface Device {
+    created_at?: string | undefined;
+    updated_at?: string | undefined;
+    device_id: string;
+    custom_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    app_id: string;
+    platform?: "ios" | "android" | undefined;
+    plugin_version: string;
+    os_version?: string | undefined;
+    version_build: string;
+    is_prod: boolean;
+    is_emulator: boolean;
+}
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "device_id": "device_456",
+      "custom_id": "test-device-1",
+      "version": {
+        "id": 1,
+        "name": "1.0.0"
+      },
+      "app_id": "app_123",
+      "platform": "ios",
+      "plugin_version": "5.0.0",
+      "os_version": "17.0",
+      "version_build": "1",
+      "is_prod": true,
+      "is_emulator": false,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/device/`
+
+Unlink a device from its channel and version override. This resets the device to use its default channel.
+
+#### Query Parameters
+
+```typescript
+interface Device {
+  device_id: string
+  app_id: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "device_id": "device_456"
+  }' \
+  https://api.capgo.app/device/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Device not found
+{
+  "error": "Device not found",
+  "status": "KO"
+}
+
+// Invalid version
+{
+  "error": "Version not found",
+  "status": "KO"
+}
+
+// Invalid channel
+{
+  "error": "Channel not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage devices",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Beta Device Registration**
+```typescript
+{
+  "app_id": "app_123",
+  "device_id": "device_456",
+  "channel": "beta"
+}
+```
+
+2. **Version Override**
+```typescript
+{
+  "app_id": "app_123",
+  "device_id": "device_456",
+  "version_id": "1.1.0"
+}
+```
+
+3. **Reset to Default Channel**
+```typescript
+// Use DELETE endpoint to remove overrides
+```
+
+## Tips for Device Management
+
+1. **Monitoring**: Regularly check device status and version distribution
+2. **Testing**: Use custom IDs to identify test devices easily
+3. **Troubleshooting**: Track device updates and channel assignments
+4. **Version Control**: Monitor native app versions to ensure compatibility 
