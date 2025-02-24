@@ -32,6 +32,54 @@ Organization members are users who have access to your Capgo organization. Each 
 
 ## Endpoints
 
+### POST
+
+`https://api.capgo.app/organization/members/`
+
+Add a new member to an organization or update an existing member's role. Note that you can only invite users who already have a Capgo account - the email must correspond to an existing Capgo user.
+
+#### Request Body
+
+```typescript
+interface MemberCreate {
+  orgId: string
+  email: string
+  role: "read" | "upload" | "write" | "admin" | "super_admin"
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "newmember@example.com",
+    "role": "write"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "OK",
+  "data": {
+    "uid": "user_789",
+    "email": "newmember@example.com",
+    "role": "invite_write",
+    "image_url": null
+  }
+}
+```
+
+Notes: 
+- When adding a new member, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
+- The user must already have a Capgo account before they can be invited. If they don't have an account, they should first create one at https://web.capgo.app/register/
+
 ### GET 
 
 `https://api.capgo.app/organization/members/`
@@ -155,6 +203,18 @@ Common error scenarios and their responses:
   "error": "Cannot remove the last admin from the organization",
   "status": "KO"
 }
+
+// Invalid email
+{
+  "error": "Invalid email format",
+  "status": "KO"
+}
+
+// Member already exists
+{
+  "error": "Member already exists in organization",
+  "status": "KO"
+}
 ```
 
 ## Common Use Cases
@@ -162,4 +222,4 @@ Common error scenarios and their responses:
 1. **Team Expansion**: Adding new team members with appropriate roles
 2. **Access Control**: Managing member permissions as responsibilities change
 3. **Security Audit**: Reviewing member list and roles periodically
-4. **Team Restructuring**: Updating roles during organizational changes 
+4. **Team Restructuring**: Updating roles during organizational changes
