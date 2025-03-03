@@ -41,7 +41,7 @@ Untuk mengaktifkan pembaruan diferensial untuk aplikasi Capgo Anda, cukup gunaka
 Jika Anda ingin memastikan bahwa semua unggahan adalah pembaruan diferensial dan mencegah unggahan bundle penuh yang tidak disengaja, Anda dapat menggunakan flag `--partial-only`:
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 Ketika `--partial-only` digunakan, Capgo hanya akan mengunggah file individual dan menghasilkan manifest. Perangkat yang tidak mendukung partial tidak akan dapat mengunduh pembaruan

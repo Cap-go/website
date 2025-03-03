@@ -22,12 +22,12 @@ Die Capgo CLI bietet einige zusätzliche Flags zur Lösung häufiger Upload-Prob
 
 - `--tus`: Verwendet das [tus resumable upload protocol](https://tusio/) für zuverlässigere Uploads von großen Bundles oder bei schlechten Netzwerkverbindungen. Wenn Ihr Bundle über 10MB groß ist oder Sie eine instabile Verbindung haben, erwägen Sie die Verwendung von `--tus`:
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json` und `--node-modules`: Teilt Capgo mit, wo Ihre root `packagejson` und `node_modules` zu finden sind, wenn Ihre App eine nicht-standardmäßige Struktur wie ein Monorepo oder npm Workspace verwendet. Übergeben Sie den Pfad zur root `packagejson` und den `--node-modules` Pfad:
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/packagejson --node-modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/packagejson --node-modules=path/to/node_modules
   ```
   Capgo benötigt diese Informationen, um die Abhängigkeiten Ihrer App korrekt zu bündeln
 

@@ -41,7 +41,7 @@ Para habilitar actualizaciones diferenciales para tu aplicación Capgo, simpleme
 Si deseas asegurar que todas las subidas sean actualizaciones diferenciales y prevenir cualquier subida accidental del paquete completo, puedes usar la bandera `--partial-only`:
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 Cuando se usa `--partial-only`, Capgo solo subirá archivos individuales y generará un manifiesto. Cualquier dispositivo que no soporte parcial no podrá descargar la actualización

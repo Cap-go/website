@@ -22,12 +22,12 @@ Capgo CLIには、一般的なアップロードの問題に対応するため�
 
 - `--tus`: 大きなバンドルや不安定なネットワーク接続での、より信頼性の高いアップロードのための[tus再開可能アップロードプロトコル](https://tus.io/)を使用します。バンドルが10MB以上の場合や、接続が不安定な場合は`--tus`の使用を検討してください：
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json`と`--node-modules`: モノレポやnpmワークスペースなどの非標準構造のアプリの場合、ルートの`package.json`と`node_modules`の場所をCapgoに指定します。ルートの`package.json`へのパスと`--node_modules`パスを指定してください：
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
   ```
   Capgoはアプリの依存関係を正しくバンドルするためにこの情報を必要とします。
 

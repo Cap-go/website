@@ -55,7 +55,7 @@ La propriété `defaultChannel` remplacera toujours le canal par défaut du clou
 Pour déployer une mise à jour en direct, vous devez télécharger une nouvelle build JS et l'attribuer à un canal. Vous pouvez le faire en une seule étape avec le CLI Capgo :
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 Cela téléchargera vos ressources web construites et définira le nouveau bundle comme build active pour le canal `Development`. Toutes les applications configurées pour écouter ce canal recevront la mise à jour la prochaine fois qu'elles en vérifieront une.

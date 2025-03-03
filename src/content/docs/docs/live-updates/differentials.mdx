@@ -39,7 +39,7 @@ To enable differential updates for your Capgo app, simply use the `--partial` fl
 If you want to ensure that all uploads are differential updates and prevent any accidental full bundle uploads, you can use the `--partial-only` flag:
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 When `--partial-only` is used, Capgo will only upload individual files and generate a manifest. Any device who do not support partial will not be able to download the update.

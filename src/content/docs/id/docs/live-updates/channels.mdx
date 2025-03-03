@@ -55,7 +55,7 @@ Properti `defaultChannel` akan selalu menimpa channel default cloud. Tapi Anda m
 Untuk menerapkan live update, Anda perlu mengunggah build bundle JS baru dan menetapkannya ke channel. Anda dapat melakukan ini dalam satu langkah dengan Capgo CLI:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 Ini akan mengunggah aset web yang telah di-build dan menetapkan bundle baru sebagai build aktif untuk channel `Development`. Setiap aplikasi yang dikonfigurasi untuk mendengarkan channel tersebut akan menerima pembaruan saat mereka memeriksa pembaruan berikutnya.

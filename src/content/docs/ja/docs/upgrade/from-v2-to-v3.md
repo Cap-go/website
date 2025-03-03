@@ -87,7 +87,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 バージョンの送信は以下のようになります:
 
 ```
-npx @capgo/cli@latest upload
+npx @capgo/cli@latest bundle upload
 ```
 
 以下の代わりに:

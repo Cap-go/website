@@ -41,7 +41,7 @@ Um differenzielle Updates für Ihre Capgo-App zu aktivieren, verwenden Sie einfa
 Wenn Sie sicherstellen möchten, dass alle Uploads differenzielle Updates sind und versehentliche vollständige Bundle-Uploads verhindert werden, können Sie die Flag `--partial-only` verwenden:
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 Wenn `--partial-only` verwendet wird, lädt Capgo nur einzelne Dateien hoch und generiert ein Manifest. Geräte, die keine partiellen Updates unterstützen, können das Update nicht herunterladen

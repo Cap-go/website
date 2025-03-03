@@ -20,7 +20,7 @@ La CLI di Capgo è la chiave per integrare Capgo nel tuo workflow CI/CD. Fornisc
 Il comando più importante per l'integrazione CI/CD è `upload`:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Production --apikey=YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=Production --apikey=YOUR_API_KEY
 ```
 
 Questo comando carica la build web corrente sul canale specificato. Tipicamente lo eseguirai come ultimo step nella tua pipeline CI/CD, dopo che la build web è stata completata con successo.
@@ -32,9 +32,9 @@ Mentre i passaggi esatti varieranno a seconda del tuo strumento CI/CD, il proces
 <Steps>
 1. **Generare una API key**: Accedi alla dashboard di Capgo e crea una nuova API key. Questa chiave sarà usata per autenticare la CLI nel tuo ambiente CI/CD. Mantienila segreta e non committarla mai nel tuo repository!
 
-3. **Configurare il comando `upload`**: Aggiungi uno step alla tua configurazione CI/CD che esegue il comando `upload` con gli argomenti appropriati: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Sostituisci `Production` con il canale su cui vuoi fare il deploy, e `${{ secrets.CAPGO_API_KEY }}` con la variabile d'ambiente che contiene la tua API key.
+3. **Configurare il comando `upload`**: Aggiungi uno step alla tua configurazione CI/CD che esegue il comando `upload` con gli argomenti appropriati: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Sostituisci `Production` con il canale su cui vuoi fare il deploy, e `${{ secrets.CAPGO_API_KEY }}` con la variabile d'ambiente che contiene la tua API key.
 
-4. **Aggiungere lo step `upload` dopo la build web**: Assicurati che lo step `upload` arrivi dopo che la build web è stata completata con successo. Questo garantisce che stai sempre distribuendo il tuo codice più recente.\n  Ecco un esempio di configurazione per GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+4. **Aggiungere lo step `upload` dopo la build web**: Assicurati che lo step `upload` arrivi dopo che la build web è stata completata con successo. Questo garantisce che stai sempre distribuendo il tuo codice più recente.\n  Ecco un esempio di configurazione per GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 
 </Steps>
 
@@ -60,7 +60,7 @@ Ecco un esempio di file di configurazione `releaserc` per semantic-release:
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
       }
     ],
     [

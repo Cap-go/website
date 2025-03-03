@@ -89,7 +89,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 다음 명령으로 버전을 전송하세요:
 
 ```
-npx @capgo/cli@latest upload
+npx @capgo/cli@latest bundle upload
 ```
 
 다음 대신:

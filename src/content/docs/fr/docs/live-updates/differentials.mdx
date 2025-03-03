@@ -41,7 +41,7 @@ Pour activer les mises à jour différentielles pour votre application Capgo, ut
 Si vous souhaitez vous assurer que tous les téléchargements sont des mises à jour différentielles et empêcher tout téléchargement accidentel de bundle complet, vous pouvez utiliser le flag `--partial-only` :
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 Lorsque `--partial-only` est utilisé, Capgo ne téléchargera que des fichiers individuels et générera un manifeste. Tout appareil qui ne prend pas en charge le partiel ne pourra pas télécharger la mise à jour

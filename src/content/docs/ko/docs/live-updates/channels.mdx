@@ -55,7 +55,7 @@ const config: CapacitorConfig = {
 라이브 업데이트를 배포하려면 새로운 JS 번들 빌드를 업로드하고 채널에 할당해야 합니다. Capgo CLI를 사용하여 한 번에 이 작업을 수행할 수 있습니다:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 이렇게 하면 빌드된 웹 자산을 업로드하고 새 번들을 `Development` 채널의 활성 빌드로 설정합니다. 해당 채널을 수신하도록 구성된 모든 앱은 다음 업데이트 확인 시 업데이트를 받게 됩니다.

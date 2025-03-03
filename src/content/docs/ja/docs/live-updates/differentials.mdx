@@ -41,7 +41,7 @@ Capgoアプリで差分アップデートを有効にするには、新しいバ
 すべてのアップロードを差分アップデートにし、誤って完全なバンドルがアップロードされることを防ぎたい場合は、`--partial-only`フラグを使用できます：
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 `--partial-only`を使用すると、Capgoは個別のファイルのアップロードとマニフェストの生成のみを行います。パーシャルをサポートしていないデバイスはアップデートをダウンロードできなくなります。

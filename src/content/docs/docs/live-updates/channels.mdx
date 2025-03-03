@@ -55,7 +55,7 @@ The `defaultChannel` property will always override the cloud default channel. Bu
 To deploy a live update, you need to upload a new JS bundle build and assign it to a channel. You can do this in one step with the Capgo CLI:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 This will upload your built web assets and set the new bundle as the active build for the `Development` channel. Any apps configured to listen to that channel will receive the update the next time they check for one.

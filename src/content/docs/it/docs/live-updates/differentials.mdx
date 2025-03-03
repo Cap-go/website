@@ -39,7 +39,7 @@ Per abilitare gli aggiornamenti differenziali per la tua app Capgo, usa semplice
 Se vuoi assicurarti che tutti i caricamenti siano aggiornamenti differenziali e impedire qualsiasi caricamento accidentale del bundle completo, puoi usare il flag `--partial-only`:
 
 ```shell
-npx @capgo/cli@latest upload --partial-only
+npx @capgo/cli@latest bundle upload --partial-only
 ```
 
 Quando viene usato `--partial-only`, Capgo caricherà solo file individuali e genererà un manifest. Qualsiasi dispositivo che non supporta il parziale non sarà in grado di scaricare l'aggiornamento

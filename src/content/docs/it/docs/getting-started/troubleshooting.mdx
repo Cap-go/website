@@ -22,12 +22,12 @@ La CLI di Capgo fornisce alcuni flag aggiuntivi per aiutare con i problemi comun
 
 - `--tus`: Utilizza il [protocollo di caricamento riprendibile tus](https://tus.io/) per caricamenti più affidabili di bundle grandi o su connessioni di rete scadenti. Se il tuo bundle supera i 10MB o hai una connessione instabile, considera di usare `--tus`:
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json` e `--node-modules`: Indica a Capgo dove trovare il tuo `package.json` root e `node_modules` se la tua app usa una struttura non standard come un monorepo o workspace npm. Passa il percorso al `package.json` root e il percorso `--node-modules`:
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/package.json --node-modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node-modules=path/to/node_modules
   ```
   Capgo ha bisogno di queste informazioni per impacchettare correttamente le dipendenze della tua app
 

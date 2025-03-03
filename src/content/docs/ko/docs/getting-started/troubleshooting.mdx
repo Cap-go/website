@@ -22,12 +22,12 @@ Capgo CLI는 일반적인 업로드 문제를 해결하기 위한 추가 플래�
 
 - `--tus`: 대용량 번들이나 불안정한 네트워크 연결에서 더 안정적인 업로드를 위해 [tus 재개 가능 업로드 프로토콜](https://tus.io/)을 사용합니다. 번들이 10MB 이상이거나 연결이 불안정한 경우 `--tus` 사용을 고려하세요:
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json`과 `--node-modules`: 모노레포나 npm 워크스페이스와 같은 비표준 구조를 사용하는 경우 루트 `package.json`과 `node_modules`의 위치를 Capgo에 알려줍니다. 루트 `package.json`과 `--node-modules` 경로를 전달하세요:
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/package.json --node-modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node-modules=path/to/node_modules
   ```
   Capgo는 앱의 종속성을 올바르게 번들링하기 위해 이 정보가 필요합니다
 

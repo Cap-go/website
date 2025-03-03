@@ -86,7 +86,7 @@ You should be able now to test the last auto-update system
 Send your version with:
 
 ```
-npx @capgo/cli@latest upload
+npx @capgo/cli@latest bundle upload
 ```
 
 instead of

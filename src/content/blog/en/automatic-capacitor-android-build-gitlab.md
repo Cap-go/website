@@ -178,7 +178,7 @@ upload_to_capgo:
   tags:
     - saas-linux-xlarge-amd64
   script:
-    - npx @capgo/cli@latest upload -a $CAPGO_TOKEN -c dev
+    - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN -c dev
   dependencies:
     - build
   when: manual

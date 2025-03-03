@@ -22,12 +22,12 @@ CLI Capgo menyediakan beberapa flag tambahan untuk membantu masalah upload yang 
 
 - `--tus`: Menggunakan [protokol upload yang dapat dilanjutkan tus](https://tus.io/) untuk upload bundle besar atau koneksi jaringan yang buruk yang lebih handal. Jika bundle Anda lebih dari 10MB atau Anda memiliki koneksi yang tidak stabil, pertimbangkan menggunakan `--tus`:
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json` dan `--node-modules`: Memberi tahu Capgo di mana menemukan root `package.json` dan `node_modules` jika aplikasi Anda menggunakan struktur non-standar seperti monorepo atau workspace npm. Berikan path ke root `package.json` dan path `--node_modules`:
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
   ```
   Capgo membutuhkan informasi ini untuk membundle dependensi aplikasi Anda dengan benar
 

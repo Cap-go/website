@@ -55,7 +55,7 @@ Die `defaultChannel`-Eigenschaft überschreibt immer den Cloud-Standardkanal. Si
 Um ein Live-Update bereitzustellen, müssen Sie einen neuen JS-Bundle-Build hochladen und einem Kanal zuweisen. Sie können dies in einem Schritt mit der Capgo CLI tun:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 Dies lädt Ihre gebauten Web-Assets hoch und setzt den neuen Bundle als aktiven Build für den `Development`-Kanal. Alle Apps, die für diesen Kanal konfiguriert sind, erhalten das Update beim nächsten Überprüfen.

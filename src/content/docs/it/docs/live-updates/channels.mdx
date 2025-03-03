@@ -53,7 +53,7 @@ La proprietà `defaultChannel` sovrascriverà sempre il canale predefinito del c
 Per distribuire un aggiornamento live, devi caricare una nuova build del bundle JS e assegnarla a un canale. Puoi farlo in un unico passaggio con la CLI di Capgo:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 Questo caricherà i tuoi asset web compilati e imposterà il nuovo bundle come build attiva per il canale `Development`. Qualsiasi app configurata per ascoltare quel canale riceverà l'aggiornamento la prossima volta che controllerà.

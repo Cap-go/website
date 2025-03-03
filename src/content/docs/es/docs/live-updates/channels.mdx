@@ -55,7 +55,7 @@ La propiedad `defaultChannel` siempre anulará el canal predeterminado en la nub
 Para desplegar una actualización en vivo, necesitas subir una nueva compilación del bundle JS y asignarla a un canal. Puedes hacer esto en un solo paso con el CLI de Capgo:
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 Esto subirá tus activos web compilados y establecerá el nuevo bundle como la compilación activa para el canal `Development`. Cualquier aplicación configurada para escuchar ese canal recibirá la actualización la próxima vez que busque una.

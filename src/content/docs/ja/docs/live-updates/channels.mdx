@@ -55,7 +55,7 @@ const config: CapacitorConfig = {
 ライブアップデートをデプロイするには、新しいJSバンドルビルドをアップロードし、それをチャンネルに割り当てる必要があります。Capgo CLIを使用して1つのステップでこれを行うことができます：
 
 ```shell
-npx @capgo/cli@latest upload --channel=Development
+npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
 これにより、ビルドされたWebアセットがアップロードされ、新しいバンドルが`Development`チャンネルのアクティブビルドとして設定されます。そのチャンネルを監視するように設定されているアプリは、次回のアップデートチェック時に更新を受け取ります。

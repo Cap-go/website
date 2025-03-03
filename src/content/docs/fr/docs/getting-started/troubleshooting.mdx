@@ -22,12 +22,12 @@ La CLI Capgo fournit des options supplémentaires pour aider avec les problèmes
 
 - `--tus` : Utilise le [protocole de téléchargement reprise tus](https://tus.io/) pour des téléchargements plus fiables de gros bundles ou sur des connexions réseau instables. Si votre bundle fait plus de 10 Mo ou si votre connexion est instable, envisagez d'utiliser `--tus` :
   ```shell
-  npx @capgo/cli@latest upload --tus
+  npx @capgo/cli@latest bundle upload --tus
   ```
 
 - `--package-json` et `--node-modules` : Indique à Capgo où trouver votre `package.json` racine et `node_modules` si votre application utilise une structure non standard comme un monorepo ou un espace de travail npm. Passez le chemin vers le `package.json` racine et le chemin `--node-modules` :
   ```shell
-  npx @capgo/cli@latest upload --package-json=path/to/package.json --node-modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node-modules=path/to/node_modules
   ```
   Capgo a besoin de ces informations pour regrouper correctement les dépendances de votre application
 
