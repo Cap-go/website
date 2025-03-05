@@ -223,12 +223,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <h3 class="text-2xl font-bold text-white">{{ m.update_metrics() }}</h3>
             <div class="p-4 space-y-4">
               <div>
-                <p class="text-4xl font-bold text-[#44BCFF]">82%</p>
-                <p class="text-gray-300">{{ m.worldwide_success_rate() }}</p>
+                <p class="text-4xl font-bold text-[#FF675E]">95%</p>
+                <p class="text-gray-300">{{ m.active_users_up_to_date() }}</p>
               </div>
               <div>
-                <p class="text-4xl font-bold text-[#FF675E]">99%</p>
-                <p class="text-gray-300">{{ m.active_users_up_to_date() }}</p>
+                <p class="text-4xl font-bold text-[#44BCFF]">82%</p>
+                <p class="text-gray-300">{{ m.worldwide_success_rate() }}</p>
               </div>
             </div>
           </div>
@@ -236,12 +236,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <h3 class="text-2xl font-bold text-white">{{ m.performance_metrics() }}</h3>
             <div class="p-4 space-y-4">
               <div>
-                <p class="text-4xl font-bold text-[#FF44EC]">500ms</p>
-                <p class="text-gray-300">{{ m.average_api_response_time() }}</p>
+                <p class="text-4xl font-bold text-[#00AA5E]">114ms</p>
+                <p class="text-gray-300">{{ m.download_time_globally() }}</p>
               </div>
               <div>
-                <p class="text-4xl font-bold text-[#44BCFF]">1.5s</p>
-                <p class="text-gray-300">{{ m.download_time_globally() }}</p>
+                <p class="text-4xl font-bold text-[#FF44EC]">434ms</p>
+                <p class="text-gray-300">{{ m.average_api_response_time() }}</p>
               </div>
             </div>
           </div>
