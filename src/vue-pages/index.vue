@@ -35,7 +35,35 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
 <template>
   <div>
+    <div>
+      <!-- Animated teleport lines -->
+      <div class="absolute inset-0 teleport-lines-container">
+      <div v-for="i in 20" :key="i" class="teleport-line"
+           :style="{
+             top: `${(i * 5) - 2}%`,
+             animationDelay: `${Math.random() * 3}s`,
+             height: `${Math.random() * 1 + 1}px`,
+             opacity: Math.random() * 0.5 + 0.3
+           }">
+      </div>
+    </div>
+    
+    <!-- Glowing portal effect -->
+    <div class="absolute portal-glow"></div>
+    
+    <!-- Vertical data streams -->
+    <div class="absolute inset-0 data-streams-container">
+      <div v-for="i in 10" :key="`stream-${i}`" class="data-stream"
+           :style="{
+             left: `${i * 10}%`,
+             animationDuration: `${Math.random() * 4 + 6}s`,
+             animationDelay: `${Math.random() * 2}s`,
+             opacity: Math.random() * 0.3 + 0.1
+           }">
+      </div>
+    </div>
     <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
+
       <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center">
           <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
@@ -109,6 +137,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         </h3>
       </div>
     </section>
+  </div>
     <section class="relative py-12 overflow-hidden bg-white sm:py-16 lg:py-20 xl:py-32">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
@@ -649,3 +678,122 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Teleport lines animation */
+.teleport-line {
+  position: absolute;
+  left: -100%;
+  width: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(56, 189, 248, 0.1) 10%, 
+    rgba(56, 189, 248, 0.3) 50%, 
+    rgba(56, 189, 248, 0.1) 90%, 
+    transparent 100%);
+  animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+}
+
+@keyframes teleport-line {
+  0% {
+    transform: translateX(0) scaleX(0.1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(200%) scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* Portal glow effect */
+.portal-glow {
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(56, 189, 248, 0.15) 0%,
+    rgba(56, 189, 248, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  animation: portal-pulse 8s ease-in-out infinite;
+}
+
+@keyframes portal-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+/* Vertical data streams */
+.data-stream {
+  position: absolute;
+  top: -100%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(56, 189, 248, 0.1) 10%,
+    rgba(56, 189, 248, 0.3) 50%,
+    rgba(56, 189, 248, 0.1) 90%,
+    transparent 100%
+  );
+  animation: data-stream 8s linear infinite;
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+/* Button animation */
+.teleport-button-line {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  animation: teleport-button 3s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+}
+
+@keyframes teleport-button {
+  0% {
+    transform: translateX(0) skewX(-20deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(200%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+</style>
