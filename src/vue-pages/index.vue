@@ -35,9 +35,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
 <template>
   <div>
-    <div>
+    <div class="relative">
       <!-- Animated teleport lines -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none teleport-lines-container" style="z-index: 1;">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none teleport-lines-container">
       <div v-for="i in 20" :key="i" class="teleport-line"
            :style="{
              top: `${(i * 5) - 2}%`,
@@ -49,10 +49,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     </div>
     
     <!-- Glowing portal effect -->
-    <div class="absolute pointer-events-none portal-glow" style="z-index: 1;"></div>
+    <div class="absolute pointer-events-none portal-glow"></div>
     
     <!-- Vertical data streams -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none data-streams-container" style="z-index: 1;">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none data-streams-container">
       <div v-for="i in 10" :key="`stream-${i}`" class="data-stream"
            :style="{
              left: `${i * 10}%`,
@@ -65,7 +65,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
 
       <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center">
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
           <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
           <h1 class="mt-5 text-3xl font-bold leading-tight font-pj sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
             {{ m.instant_updates_for_capacitor() }}
@@ -83,7 +83,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               :href="getRelativeLocaleUrl(props.locale, 'register')"
               title="Get quote now"
               target="_blank"
-              class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+              class="relative z-10 inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               role="button"
             >
               {{ m.try_for_free() }}
