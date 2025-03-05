@@ -468,121 +468,135 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         </div>
       </div>
     </section>
-    <section class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-2 py-10 md:grid-cols-2 md:gap-10 md:py-20">
-        <div class="order-last md:order-none">
-          <h2 class="my-10 text-4xl font-extrabold md:text-7xl">{{ m.faster_releases() }}</h2>
-          <p class="text-lg lg:w-2/3">
-            {{ m.launch_multiple_releases_per_week().replaceAll('$1', brand) }}
-          </p>
-        </div>
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="h-full mx-auto rounded-lg md:h-62"
-          src="/develop_illu.svg"
-          title="productivity illustration"
-          alt="productivity illustration"
-        />
-      </div>
-      <div class="grid grid-cols-1 gap-2 py-10 md:grid-cols-2 md:gap-10 md:py-20">
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="h-full mx-auto my-10 rounded-lg md:h-62"
-          src="/build_illustration.svg"
-          alt="build illustration"
-          title="build illustration"
-        />
-        <div>
-          <h2 class="my-10 text-4xl font-extrabold md:text-7xl">Integration</h2>
-          <p class="text-lg lg:w-2/3">
-            {{ m.easily_combine_features_ci_cd().replace('$1', brand) }}<br /><br />
-            {{ m.its_compatible_with_azure_devops_gitlab_github_jenkins_cloudbees_travis_azure_devops_gitlab_github_circleci_and_many_more() }}
-          </p>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 gap-2 py-10 md:grid-cols-2 md:gap-10 md:py-20">
-        <div class="order-last md:order-none">
-          <h2 class="my-10 text-4xl font-extrabold md:text-7xl">{{ m.instant_updates() }}</h2>
-          <p class="text-lg lg:w-2/3">
-            {{ m.goodbye_bugs() }}
-          </p>
-        </div>
-        <img
-          width="310"
-          height="248"
-          loading="lazy"
-          class="h-full mx-auto rounded-lg md:h-62"
-          src="/update_illustration.svg"
-          alt="send update illustration"
-          title="send update illustration"
-        />
-      </div>
-    </section>
-    <section class="py-12 bg-gray-50 sm:py-16 lg:py-20">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <h3 class="font-pj text-center text-3xl font-bold text-gray-900 sm:text-7xl md:!leading-[85px] xl:text-7xl">
-          {{ m.manage_updates_effortlessly() }}
-        </h3>
-        <div class="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:items-center md:gap-x-16">
-          <div>
-            <img loading="lazy" height="332" width="576" class="w-auto h-auto" src="/stats_demo_3.webp" alt="Manage app illustration" title="Manage app illustration" />
+    <section class="py-24 bg-gray-900 sm:py-32">
+      <div class="max-w-2xl px-6 mx-auto lg:max-w-7xl lg:px-8">
+        <h2 class="font-semibold text-blue-400 text-base/7">{{ m.faster_releases() }}</h2>
+        <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white text-pretty sm:text-5xl">{{ m.everything_you_need_to_ship_updates_instantly() }}</p>
+        <p class="max-w-2xl mt-4 text-lg text-gray-400">{{ m.ship_updates_fixes_changes_and_features() }}</p>
+        <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-6 lg:grid-rows-3">
+          <div class="flex p-px lg:col-span-4">
+            <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem] w-full">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
+                <svg class="w-32 h-32 text-[#44BCFF] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <h3 class="text-2xl font-bold text-white">Live Updates in Real Time</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Ship updates instantly to your users</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready.</p>
+              </div>
+            </div>
           </div>
-          <div class="md:pr-12">
-            <div class="">
-              <div class="py-8 md:py-11">
-                <div class="space-y-12">
-                  <div class="flex items-start">
-                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 14l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                      </svg>
-                    </div>
-                    <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">
-                        {{ m.user_assignment() }}
-                      </h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">
-                        {{ m.easily_assign_users_and_send_the_latest_update_to_your_private_or_public_testers() }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-start">
-                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                          fill="currentColor"
-                          d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-2.21-6H13V9c0-.55-.45-1-1-1s-1 .45-1 1v4H9.21c-.45 0-.67.54-.35.85l2.79 2.79c.2.2.51.2.71 0l2.79-2.79a.5.5 0 0 0-.36-.85z"
-                        />
-                      </svg>
-                    </div>
-                    <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">
-                        {{ m.seamless_deployment_process() }}
-                      </h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">{{ m.when_your_update_is_ready_deploy_it_seamlessly_to_all_your_users() }}</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start">
-                    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-gray-900 rounded-full">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048">
-                        <path
-                          fill="currentColor"
-                          d="M1152 512H896V256h128v128h128v128zm512 1032q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264h-512v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-392h640V891q-83-11-153-50t-122-99t-80-135t-29-159q0-93 35-174t96-143t142-96T960 0q93 0 174 35t143 96t96 142t35 175q0 83-29 158t-80 135t-121 99t-154 51v261h640v392zM640 448q0 66 25 124t68 102t102 69t125 25q66 0 124-25t101-68t69-102t26-125q0-66-25-124t-69-101t-102-69t-124-26q-66 0-124 25t-102 69t-69 102t-25 124zM448 1792q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm640 0q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm512 128q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10z"
-                        />
-                      </svg>
-                    </div>
-                    <div class="ml-5">
-                      <h3 class="text-lg font-bold text-gray-900 font-pj">{{ m.simple_configuration_management() }}</h3>
-                      <p class="text-lg font-normal text-gray-600 font-pj">
-                        {{ m.manage_all_your_configurations_conveniently_through_our_user_friendly_web_interface() }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          <div class="flex p-px lg:col-span-2">
+            <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem] w-full">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-blue-500/20 to-purple-500/20">
+                <svg class="w-24 h-24 mb-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">End User Experience</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Seamless background updates</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Updates install automatically in the background with no user interaction required</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-green-500/20 to-blue-500/20">
+                <svg class="w-24 h-24 mb-4 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Enhanced Workflow</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Streamlined deployment process</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Build and deploy updates with a single command using our CLI tool</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                <svg class="w-24 h-24 mb-4 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Broad Compatibility</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Support for Capacitor 6 & 7</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Full compatibility with latest Capacitor versions and all major platforms</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-2">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
+                <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Partial Updates</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Smart differential updates</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Only download what's changed, saving bandwidth and time</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-2">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
+                <svg class="w-24 h-24 mb-4 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Public API</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Flexible integration</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Manage Capgo from your own software and create white label experiences</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-2">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-indigo-500/20 to-blue-500/20">
+                <svg class="w-24 h-24 mb-4 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Channel System</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Advanced update distribution</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Target specific user groups with different versions using channels for beta testing and staged rollouts</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem] w-full">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-red-500/20 to-pink-500/20">
+                <svg class="w-24 h-24 mb-4 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">Flexible Hosting</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Cloud or Self-hosted</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Choose between our secure cloud or host on your own infrastructure</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-br-[2rem] w-full">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-teal-500/20 to-green-500/20">
+                <svg class="w-24 h-24 mb-4 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">CI/CD Integration</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">Seamless automation</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Works with GitHub Actions, GitLab CI, Jenkins, and more</p>
               </div>
             </div>
           </div>
@@ -627,7 +641,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               >
                 {{ m.get_started() }} &RightArrow;
               </a>
-              <p class="tracking-tight text-white">{{ m.no_credit_card_required() }}</p>
+              <p class="pt-4 tracking-tight text-white">{{ m.no_credit_card_required() }}</p>
             </div>
           </div>
         </div>

@@ -507,7 +507,7 @@
   "first_name_label": "First name",
   "first_name_placeholder": "John",
   "flexible_management": "Flexible Management",
-  "flexible_organization_management_for_your_team": "Flexible Organization Management for Your Team",
+  "flexible_organization_management_for_your_team": "Flexible Management for Your Team",
   "flutter_power_aproximately_1_of_apps_on_google_play_store": "Flutter power aproximately $1% of apps on Google Play Store",
   "footer": "Footer",
   "for_apple_and_google_app_updates_distribution": "For Apple and Google app updates distribution",
@@ -1302,5 +1302,14 @@
   "app_store_rating_bad": "\"App full of bugs\" - 1★ App Store Review",
   "app_store_rating_good": "\"Love the app!\" - 5★ App Store Review",
   "wrong_app_testing": "Test wrong app, useless back and forth between teams",
-  "test_pr_in_production": "Test PR directly from the app with channels selector"
+  "test_pr_in_production": "Test PR directly from the app with channels selector",
+  "live_updates_in_real_time": "Live Updates in Real Time",
+  "background_updates": "Background Updates",
+  "no_app_store_review": "No App Store Review",
+  "apple_compliant": "Apple Compliant",
+  "android_compliant": "Android Compliant",
+  "instant_rollback": "Instant Rollback",
+  "one_click_rollback": "One-Click Rollback",
+  "version_control": "Version Control",
+  "real_time_metrics": "Real-Time Metrics"
 }
