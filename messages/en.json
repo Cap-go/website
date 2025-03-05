@@ -1310,6 +1310,6 @@
   "android_compliant": "Android Compliant",
   "instant_rollback": "Instant Rollback",
   "one_click_rollback": "One-Click Rollback",
-  "version_control": "Version Control",
-  "real_time_metrics": "Real-Time Metrics"
+  "real_time_metrics": "Real-Time Metrics",
+  "unlimited_live_updates": "Unlimited Live Updates"
 }

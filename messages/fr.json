@@ -1228,6 +1228,7 @@
   "tutorial_on": "Didacticiel sur",
   "unauthorized_access": "Accès Non Autorisé.",
   "unauthorized_access_desc": "L'accès ou l'utilisation de tout Système sans autorisation, y compris la tentative de sonder, analyser ou tester la vulnérabilité d'un Système ou de contourner toute mesure de sécurité ou d'authentification utilisée par un Système.",
+  "unlimited_live_updates": "Mises à jour en direct illimitées",
   "unscheduled_downtime_desc": "« Temps d'arrêt non planifié » désigne la durée, en minutes, pendant laquelle les Services applicables ne sont pas généralement accessibles et disponibles pour les Utilisateurs autorisés du Client, à l'exclusion de l'inaccessibilité ou de l'indisponibilité due aux actes ou omissions du Client ou des Utilisateurs autorisés, aux cas de force majeure, aux maintenances planifiées communiquées avec un préavis d'au moins 24 heures par email, aux attaques de piratage ou de virus, aux maintenances d'urgence raisonnables ou autres exclusions spécifiques au produit énumérées dans les Exclusions SLA.",
   "unscheduled_downtime_title": "4.2 Temps d'arrêt imprévu",
   "unsealed_goods": "La fourniture de biens qui ne sont pas adaptés au retour en raison de la protection de la santé ou des raisons d'hygiène et qui ont été descellés après livraison.",

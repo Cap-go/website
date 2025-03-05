@@ -1228,6 +1228,7 @@
   "tutorial_on": "Tutorial über",
   "unauthorized_access": "Unbefugter Zugriff.",
   "unauthorized_access_desc": "Zugriff auf oder Nutzung eines Systems ohne Erlaubnis, einschließlich des Versuchs, die Schwachstellen eines Systems zu erkunden, zu scannen oder zu testen oder Sicherheits- oder Authentifizierungsmaßnahmen, die von einem System verwendet werden, zu verletzen.",
+  "unlimited_live_updates": "Unbegrenzte Live-Updates",
   "unscheduled_downtime_desc": "\"Nicht geplanter Ausfall\" bezeichnet die Zeit, in Minuten, in der die betreffenden Dienste für die zulässigen Benutzer des Kunden nicht allgemein zugänglich und verfügbar sind, ausgenommen sind die Unzugänglichkeit oder Nichtverfügbarkeit aufgrund von Handlungen oder Unterlassungen des Kunden oder der zulässigen Benutzer, höhere Gewalt, geplante Wartungsarbeiten, die mindestens 24 Stunden im Voraus per E-Mail bekannt gegeben werden, Hacking- oder Virusangriffe, angemessene Notfallwartung oder andere produktspezifische Ausschlüsse, die in den SLA-Ausschlüssen aufgeführt sind.",
   "unscheduled_downtime_title": "4.2 Ungeplanter Ausfall",
   "unsealed_goods": "Die Lieferung von Waren, die aus Gesundheits- oder Hygieneschutzgründen nicht für eine Rücksendung geeignet sind und nach der Lieferung geöffnet wurden.",

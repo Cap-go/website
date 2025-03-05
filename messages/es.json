@@ -1228,6 +1228,7 @@
   "tutorial_on": "Tutorial sobre",
   "unauthorized_access": "Acceso no autorizado.",
   "unauthorized_access_desc": "Acceder o utilizar cualquier Sistema sin permiso, incluyendo intentar sondear, escanear o probar la vulnerabilidad de un Sistema o vulnerar cualquier medida de seguridad o autenticación utilizada por un Sistema.",
+  "unlimited_live_updates": "Actualizaciones en Vivo Ilimitadas",
   "unscheduled_downtime_desc": "\"Tiempo de inactividad no programado\" significa el tiempo, en minutos, durante el cual los Servicios aplicables no son generalmente accesibles y disponibles para los Usuarios Permitidos del Cliente, excluyendo la inaccesibilidad o indisponibilidad debido a actos u omisiones del Cliente o de los Usuarios Permitidos, eventos de fuerza mayor, mantenimiento programado comunicado con al menos 24 horas de antelación por correo electrónico, ataques de hacking o virus, mantenimiento de emergencia razonable u otras exclusiones específicas del producto enumeradas bajo Exclusiones del SLA.",
   "unscheduled_downtime_title": "4.2 Tiempo de inactividad no programado",
   "unsealed_goods": "El suministro de Bienes que no son aptos para su devolución por razones de protección de la salud o higiene y que fueron desprecintados después de la entrega.",
