@@ -24,11 +24,11 @@ const props = defineProps({
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
         <div class="flex items-center justify-center">
-          <div class="inline-flex items-center justify-center text-lg bg-gray-900 rounded-full h-9 w-9">🔥</div>
+          <div class="inline-flex items-center justify-center w-24 h-24 text-8xl">❤️‍🔥</div>
           <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">{{ m.pay_as_you_go() }}</h2>
         </div>
         <p class="mt-4 text-base font-normal text-gray-600 font-pj">
-          {{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description() }}
+          +{{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description() }}
         </p>
       </div>
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">

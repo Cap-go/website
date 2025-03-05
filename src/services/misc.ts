@@ -7,7 +7,7 @@ export const shortNumber = (number: number) => {
 
 export const renameCat = (text: string) => text.replaceAll('_', ' ')
 
-export const updateCalc = (plan: any) => plan.mau * 10
+export const updateCalc = (plan: any) => plan.mau * 20
 
 export const numberWithSpaces = (x: number) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
