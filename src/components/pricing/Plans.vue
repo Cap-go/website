@@ -106,14 +106,9 @@ function descToEmoji(desc: string) {
           </div>
           <ul class="mt-8 space-y-4 text-black">
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0 fill-blue-600" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor" viewBox="0 0 448 512">
-                <path
-                  d="M99.9 192C80.1 192 64 208.1 64 227.9V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V227.9C0 172.7 44.7 128 99.9 128c26.5 0 51.9 10.5 70.6 29.3L322.7 309.5c6.7 6.7 15.9 10.5 25.4 10.5c19.8 0 35.9-16.1 35.9-35.9V192c0-17.7 14.3-32 32-32s32 14.3 32 32v92.1c0 55.2-44.7 99.9-99.9 99.9c-26.5 0-51.9-10.5-70.6-29.3L125.3 202.5c-6.7-6.7-15.9-10.5-25.4-10.5z"
-                />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-1 text-blue-600 shrink-0" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23 23c-5.656 0-7.858-6.41-7.949-6.684C15.034 16.265 13.208 11 9 11c-2.757 0-5 2.243-5 5s2.243 5 5 5c1.588 0 3.013-.732 4.237-2.176l1.526 1.293C13.164 22.003 11.172 23 9 23c-3.86 0-7-3.14-7-7s3.14-7 7-7c5.656 0 7.858 6.41 7.949 6.684C16.966 15.735 18.792 21 23 21c2.757 0 5-2.243 5-5s-2.243-5-5-5c-1.588 0-3.013.732-4.237 2.176l-1.526-1.293C18.836 9.997 20.828 9 23 9c3.86 0 7 3.14 7 7s-3.14 7-7 7"/></svg>
               <span>
-                <span class="font-bold">{{ numberWithSpaces(updateCalc(plan)) }}</span>
-                {{ m.live_updates_per_month() }}
+                Unlimited Live Updates
               </span>
             </li>
             <li class="flex items-center">
