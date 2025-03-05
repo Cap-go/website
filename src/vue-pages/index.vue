@@ -559,7 +559,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </div>
             </div>
           </div>
-          <div class="flex p-px lg:col-span-2">
+          <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
                 <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -601,7 +601,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </div>
             </div>
           </div>
-          <div class="flex p-px lg:col-span-3">
+          <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem] w-full">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-red-500/20 to-pink-500/20">
                 <svg class="w-24 h-24 mb-4 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -615,7 +615,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </div>
             </div>
           </div>
-          <div class="flex p-px lg:col-span-3">
+          <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-br-[2rem] w-full">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-teal-500/20 to-green-500/20">
                 <svg class="w-24 h-24 mb-4 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -626,6 +626,20 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">Seamless automation</p>
                 <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Works with GitHub Actions, GitLab CI, Jenkins, and more</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-2">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-emerald-500/20 to-lime-500/20">
+                <svg class="w-24 h-24 mb-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                </svg>
+                <h3 class="text-xl font-bold text-white">100% Open Source</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">No vendor lock-in</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Completely self-hostable with full access to the source code</p>
               </div>
             </div>
           </div>
