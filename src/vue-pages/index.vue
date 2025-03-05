@@ -220,12 +220,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         </div>
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-2 lg:mt-24">
           <div class="p-6 bg-gray-700 rounded-xl">
-            <h3 class="mb-4 text-2xl font-bold text-white">{{ m.update_metrics() }}</h3>
-            <div class="space-y-4">
-              <div>
-                <p class="text-4xl font-bold text-[#FF44EC]">557.3M</p>
-                <p class="text-gray-300">{{ m.updates_delivered_globally() }}</p>
-              </div>
+            <h3 class="text-2xl font-bold text-white">{{ m.update_metrics() }}</h3>
+            <div class="p-4 space-y-4">
               <div>
                 <p class="text-4xl font-bold text-[#44BCFF]">82%</p>
                 <p class="text-gray-300">{{ m.worldwide_success_rate() }}</p>
@@ -237,8 +233,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </div>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
-            <h3 class="mb-4 text-2xl font-bold text-white">{{ m.performance_metrics() }}</h3>
-            <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-white">{{ m.performance_metrics() }}</h3>
+            <div class="p-4 space-y-4">
               <div>
                 <p class="text-4xl font-bold text-[#FF44EC]">500ms</p>
                 <p class="text-gray-300">{{ m.average_api_response_time() }}</p>
@@ -320,6 +316,154 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             >
               {{ m.start_now() }}
             </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-12 bg-gray-800 sm:py-16 lg:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl xl:text-5xl">
+            {{ m.key_features_title() }}
+          </h2>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ m.key_features_subtitle() }}</p>
+        </div>
+        <div class="grid grid-cols-1 gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-blue-900 rounded-lg">
+              <svg class="w-6 h-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.instant_updates() }}</h3>
+            <p class="text-gray-300">{{ m.push_updates_to_your_users_in_seconds() }}</p>
+          </div>
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-green-900 rounded-lg">
+              <svg class="w-6 h-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.secure() }}</h3>
+            <p class="text-gray-300">{{ m.end_to_end_encryption_for_your_updates() }}</p>
+          </div>
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-purple-900 rounded-lg">
+              <svg class="w-6 h-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.analytics() }}</h3>
+            <p class="text-gray-300">{{ m.track_update_success_and_user_engagement() }}</p>
+          </div>
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-yellow-900 rounded-lg">
+              <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.rollback() }}</h3>
+            <p class="text-gray-300">{{ m.instantly_rollback_to_previous_version_if_needed() }}</p>
+          </div>
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-red-900 rounded-lg">
+              <svg class="w-6 h-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.error_tracking() }}</h3>
+            <p class="text-gray-300">{{ m.catch_and_fix_issues_before_they_affect_users() }}</p>
+          </div>
+          <div class="p-6 bg-gray-700 rounded-xl">
+            <div class="flex items-center justify-center w-12 h-12 mb-4 bg-indigo-900 rounded-lg">
+              <svg class="w-6 h-6 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.user_management() }}</h3>
+            <p class="text-gray-300">{{ m.manage_testers_and_beta_users_easily() }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-12 bg-white sm:py-16 lg:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl xl:text-5xl">
+            {{ m.with_and_without_capgo_title() }}
+          </h2>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{ m.with_and_without_capgo_subtitle() }}</p>
+        </div>
+        <div class="grid grid-cols-1 gap-8 mt-12 lg:grid-cols-2">
+          <div class="p-8 border-2 border-red-200 bg-red-50 rounded-xl">
+            <h3 class="mb-6 text-2xl font-bold text-red-900">{{ m.without_capgo() }}</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="font-medium text-red-700">{{ m.app_store_rating_bad() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="font-medium text-red-700">{{ m.users_stuck_with_bugs_for_weeks() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="font-medium text-red-700">{{ m.no_way_to_track_update_success() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="font-medium text-red-700">{{ m.high_risk_of_bad_user_experience() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="font-medium text-red-700">{{ m.wrong_app_testing() }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="p-8 transition-transform duration-200 transform border-2 border-blue-200 shadow-lg bg-gradient-to-br from-blue-50 to-green-50 rounded-xl hover:scale-105">
+            <h3 class="mb-6 text-2xl font-bold text-blue-900">{{ m.with_capgo() }}</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium text-blue-700">{{ m.app_store_rating_good() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium text-blue-700">{{ m.instant_updates_to_all_users() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium text-blue-700">{{ m.detailed_analytics_and_error_tracking() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium text-blue-700">{{ m.instant_rollback_if_something_goes_wrong() }}</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium text-blue-700">{{ m.test_pr_in_production() }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -427,7 +571,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                       <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048">
                         <path
                           fill="currentColor"
-                          d="M1152 512H896V256h128v128h128v128zm512 1032q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264h-512v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264H384v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-392h640V891q-83-11-153-50t-122-99t-80-135t-29-159q0-93 35-174t96-143t142-96T960 0q93 0 174 35t143 96t96 142t35 175q0 83-29 158t-80 135t-121 99t-154 51v261h640v392zM640 448q0 66 25 124t68 102t102 69t125 25q66 0 124-25t101-68t69-102t26-125q0-66-25-124t-69-101t-102-69t-124-26q-66 0-124 25t-102 69t-69 102t-25 124zM448 1792q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm640 0q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm512 128q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10z"
+                          d="M1152 512H896V256h128v128h128v128zm512 1032q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-264h-512v264q42 11 77 35t60 57t40 73t15 83q0 53-20 99t-55 82t-81 55t-100 20q-53 0-99-20t-82-55t-55-81t-20-100q0-43 14-83t39-73t61-57t78-35v-392h640V891q-83-11-153-50t-122-99t-80-135t-29-159q0-93 35-174t96-143t142-96T960 0q93 0 174 35t143 96t96 142t35 175q0 83-29 158t-80 135t-121 99t-154 51v261h640v392zM640 448q0 66 25 124t68 102t102 69t125 25q66 0 124-25t101-68t69-102t26-125q0-66-25-124t-69-101t-102-69t-124-26q-66 0-124 25t-102 69t-69 102t-25 124zM448 1792q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm640 0q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10q27 0 50-10t40-27t28-41t10-50zm512 128q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10z"
                         />
                       </svg>
                     </div>
