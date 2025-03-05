@@ -37,7 +37,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   <div>
     <div>
       <!-- Animated teleport lines -->
-      <div class="absolute inset-0 teleport-lines-container">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none teleport-lines-container" style="z-index: 1;">
       <div v-for="i in 20" :key="i" class="teleport-line"
            :style="{
              top: `${(i * 5) - 2}%`,
@@ -49,10 +49,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     </div>
     
     <!-- Glowing portal effect -->
-    <div class="absolute portal-glow"></div>
+    <div class="absolute pointer-events-none portal-glow" style="z-index: 1;"></div>
     
     <!-- Vertical data streams -->
-    <div class="absolute inset-0 data-streams-container">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none data-streams-container" style="z-index: 1;">
       <div v-for="i in 10" :key="`stream-${i}`" class="data-stream"
            :style="{
              left: `${i * 10}%`,
@@ -66,7 +66,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
       <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center">
-          <p class="inline-flex px-4 py-2 text-base border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
+          <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
           <h1 class="mt-5 text-3xl font-bold leading-tight font-pj sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
             {{ m.instant_updates_for_capacitor() }}
           </h1>
@@ -560,7 +560,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </div>
           </div>
           <div class="flex p-px lg:col-span-4">
-            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+            <div class="overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
                 <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
@@ -724,7 +724,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
 /* Portal glow effect */
 .portal-glow {
-  right: -10%;
+  position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 20%;
