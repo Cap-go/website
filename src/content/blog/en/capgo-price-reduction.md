@@ -3,8 +3,8 @@ slug: capgo-price-reduction
 title: "Capgo Price Reduction: Making Live Updates More Accessible"
 description: We're excited to announce significant price reductions across all Capgo plans, making live updates more accessible for developers of all sizes.
 author: Martin Donadieu
-author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
-author_url: 'https://github.com/martindonadieu'
+author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2025-03-05T00:00:00.000Z
 updated_at: 2025-03-05T00:00:00.000Z
 head_image: /capgo-feature-image.webp
