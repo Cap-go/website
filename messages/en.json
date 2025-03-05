@@ -1257,5 +1257,12 @@
   "application_penetration_testing": "Capgo undergoes yearly penetration testing by reputable third-party security researchers to identify and resolve any vulnerabilities.",
   "instant_updates_for_capacitor_apps": "Instant Updates for CapacitorJS Apps",
   "instant_updates_for_capacitor_apps_description": "Push updates, fixes, and features instantly to your CapacitorJS apps without app store delays. Experience seamless integration, end-to-end encryption, and real-time updates with Capgo.",
-  "get_started_now": "Get Started Now"
+  "get_started_now": "Get Started Now",
+  "update_metrics": "Update Metrics",
+  "updates_delivered_globally": "updates delivered globally",
+  "worldwide_success_rate": "worldwide success rate",
+  "active_users_up_to_date": "of active users up-to-date within 24 hours",
+  "performance_metrics": "Performance",
+  "average_api_response_time": "average API response time worldwide",
+  "download_time_globally": "to download a 5MB update globally"
 }
