@@ -37,8 +37,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   <div>
     <div class="relative">
       <!-- Animated teleport lines -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none teleport-lines-container">
-      <div v-for="i in 20" :key="i" class="teleport-line"
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div v-for="i in 20" :key="i" class="absolute w-full teleport-line-animation"
            :style="{
              top: `${(i * 5) - 2}%`,
              animationDelay: `${Math.random() * 3}s`,
@@ -49,11 +49,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     </div>
     
     <!-- Glowing portal effect -->
-    <div class="absolute pointer-events-none portal-glow"></div>
+    <div class="absolute right-0 w-1/5 -translate-y-1/2 pointer-events-none top-1/2 h-3/5 portal-glow-animation"></div>
     
     <!-- Vertical data streams -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none data-streams-container">
-      <div v-for="i in 10" :key="`stream-${i}`" class="data-stream"
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div v-for="i in 10" :key="`stream-${i}`" class="absolute w-px h-full data-stream-animation"
            :style="{
              left: `${i * 10}%`,
              animationDuration: `${Math.random() * 4 + 6}s`,
@@ -694,11 +694,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 </template>
 
 <style scoped>
-/* Teleport lines animation */
-.teleport-line {
-  position: absolute;
+/* Minimum required CSS for animations */
+.teleport-line-animation {
   left: -100%;
-  width: 100%;
   background: linear-gradient(90deg, 
     transparent 0%, 
     rgba(56, 189, 248, 0.1) 10%, 
@@ -723,13 +721,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 }
 
 /* Portal glow effect */
-.portal-glow {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20%;
-  height: 60%;
+.portal-glow-animation {
   background: radial-gradient(
     ellipse at center,
     rgba(56, 189, 248, 0.15) 0%,
@@ -752,11 +744,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 }
 
 /* Vertical data streams */
-.data-stream {
-  position: absolute;
+.data-stream-animation {
   top: -100%;
-  width: 1px;
-  height: 100%;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -782,13 +771,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
   }
 }
 
-/* Button animation */
-.teleport-button-line {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
+/* Button animation - If this is used elsewhere */
+.teleport-button-animation {
+  @apply absolute top-0 left-[-100%] w-full h-full;
   background: linear-gradient(
     90deg,
     transparent 0%,
