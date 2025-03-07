@@ -10,9 +10,16 @@ API keys are used to authenticate requests to the Capgo API. Each key can have d
 ## Key Modes
 
 - **read**: Can only read data, no modifications allowed
-- **write**: Can read and modify data, but cannot upload new bundles
 - **upload**: Can read, modify, and upload new bundles
+- **write**: Can read, modify data, and upload bundles
 - **all**: Full access to all operations
+
+Key modes follow a stepped/gradual schema. If you have a upload key, and then you create an write key, the write key will be able to do everything that the upload key could.
+Please take a look at the following diagram to better understand how API key work.
+
+<div class="mx-auto">
+  <img src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work"
+</div>
 
 ## Security Best Practices
 
