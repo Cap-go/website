@@ -560,7 +560,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </div>
           </div>
           <div class="flex p-px lg:col-span-4">
-            <div class="overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
+            <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
                 <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
