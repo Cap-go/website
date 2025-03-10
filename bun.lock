@@ -9,7 +9,7 @@
         "@astrojs/vue": "5.0.6",
         "@headlessui/vue": "^1.7.23",
         "@heroicons/vue": "^2.2.0",
-        "@inlang/paraglide-astro": "^0.3.5",
+        "@inlang/paraglide-astro": "^0.4.0",
         "@supabase/supabase-js": "^2.49.1",
         "astro": "5.3.0",
         "astro-embed": "^0.9.0",
@@ -485,13 +485,13 @@
 
     "@inlang/module": ["@inlang/module@1.2.14", "", { "dependencies": { "@inlang/message-lint-rule": "1.4.7", "@inlang/plugin": "2.4.14" }, "peerDependencies": { "@sinclair/typebox": "^0.31.17" } }, "sha512-Z7rRa6x3RkzjdvNA7x+KskNGdSBEO46X9c7bTl6eZmLXy0J9yGDn6s4jpYqQzyKRG8g5mEqWcRqcVqdNwzj5Gg=="],
 
-    "@inlang/paraglide-astro": ["@inlang/paraglide-astro@0.3.5", "", { "dependencies": { "@inlang/paraglide-vite": "1.3.5" }, "peerDependencies": { "astro": "^4 || ^5" } }, "sha512-echndMAG/qMz3t8Q0FvJ00r79Gy4r3F2xTv7ukOZP1dW6RTF8lxgnaOH7uPa9ZJEdPPbE6nvwRjyitNL3aZTig=="],
+    "@inlang/paraglide-astro": ["@inlang/paraglide-astro@0.4.0", "", { "dependencies": { "@inlang/paraglide-vite": "1.4.0" }, "peerDependencies": { "astro": "^4 || ^5" } }, "sha512-qW+4uoxIGN4Hu+K4u2pt5fVJIrrG+ffNOW4PmCPId8e2nSAp5SIgNEsf8KNRElC16rGUpOtJUBMdZiQEjWXp+w=="],
 
     "@inlang/paraglide-js": ["@inlang/paraglide-js@1.11.8", "", { "dependencies": { "@inlang/detect-json-formatting": "1.0.0", "@inlang/language-tag": "1.5.1", "@inlang/plugin-message-format": "2.2.0", "@inlang/recommend-ninja": "0.1.1", "@inlang/recommend-sherlock": "0.1.1", "@inlang/sdk": "0.37.0", "@lix-js/client": "2.2.1", "@lix-js/fs": "2.2.0", "commander": "11.1.0", "consola": "3.2.3", "dedent": "1.5.1", "json5": "2.2.3", "posthog-node": "^4.0.1" }, "bin": { "paraglide-js": "bin/run.js" } }, "sha512-PxzrmDP63fbMNF4/AtiLFTnUodFxVbOkLpIrOzPZvNuLg0wCWnsaBfNT87/rNjL/A7ZPzEBmuDi0P2pn8iB0Fw=="],
 
     "@inlang/paraglide-unplugin": ["@inlang/paraglide-unplugin@1.9.5", "", { "dependencies": { "@inlang/paraglide-js": "1.11.8", "@inlang/sdk": "0.37.0", "@lix-js/client": "2.2.1", "typescript": "^5.5.2", "unplugin": "^1.14.1" } }, "sha512-5KklLBvl/y+R4SccWH74USTGQNFW5IwEyMLQ3WIHX9cHX2pnnA5wGqQxYg3EcgCyErHLc3+sm7EMNB5Z0dSeTg=="],
 
-    "@inlang/paraglide-vite": ["@inlang/paraglide-vite@1.3.5", "", { "dependencies": { "@inlang/paraglide-unplugin": "1.9.5" } }, "sha512-yLa+gxA8el6RXXneeiqTnV9Od4Yh389lA+wSfiS+jDXY5vV/2j7Lpk2yuATLmxwI9i2nMP6c6yu8L0X77PA9dg=="],
+    "@inlang/paraglide-vite": ["@inlang/paraglide-vite@1.4.0", "", { "dependencies": { "@inlang/paraglide-unplugin": "1.9.5" } }, "sha512-JXfHOOhXNMlHkouO6nuYoIYL5iqM6Y6FtLNq64nIUOpVnXSQfyYCF73lHYE7ZqRMQxoCvUWnqAlyUb4MTmP2IQ=="],
 
     "@inlang/plugin": ["@inlang/plugin@2.4.14", "", { "dependencies": { "@inlang/json-types": "1.1.0", "@inlang/language-tag": "1.5.1", "@inlang/message": "2.1.0", "@inlang/project-settings": "2.4.2", "@inlang/translatable": "1.3.1", "@lix-js/fs": "2.2.0" }, "peerDependencies": { "@sinclair/typebox": "^0.31.17" } }, "sha512-HFI1t1tKs6jXqwKVl59vvt7kvMgg2Po7xA3IFijfJTZCt0tTI8txqeXCUV9jhUop29Hqj6a5zQd32BYv33Dulw=="],
 
