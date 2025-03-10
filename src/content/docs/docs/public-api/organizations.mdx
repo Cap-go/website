@@ -71,6 +71,41 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 
 `https://api.capgo.app/organization/`
 
+Create a new organization.
+
+#### Request Body
+
+```typescript
+interface OrganizationCreate {
+  name: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Organization"
+  }' \
+  https://api.capgo.app/organization/
+```
+
+#### Example Response
+
+```json
+{
+  "status": "Organization created",
+  "id": "org_456"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/organization/`
+
 Update an existing organization. Requires admin role.
 
 #### Request Body
@@ -87,7 +122,7 @@ interface OrganizationUpdate {
 #### Example Request
 
 ```bash
-curl -X POST \
+curl -X PUT \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -111,38 +146,30 @@ curl -X POST \
 }
 ```
 
-### PUT
+### DELETE
 
 `https://api.capgo.app/organization/`
 
-Create a new organization.
+Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
 
-#### Request Body
+#### Query Parameters
 
-```typescript
-interface OrganizationCreate {
-  name: string
-}
-```
+- `orgId`: The ID of the organization to delete
 
 #### Example Request
 
 ```bash
-curl -X PUT \
+curl -X DELETE \
   -H "authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "New Organization"
-  }' \
-  https://api.capgo.app/organization/
+  https://api.capgo.app/organization/?orgId=org_123
 ```
 
 #### Example Response
 
 ```json
 {
-  "status": "Organization created",
-  "id": "org_456"
+  "status": "Organization deleted",
+  "id": "org_123"
 }
 ```
 
