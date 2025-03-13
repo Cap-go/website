@@ -81,7 +81,7 @@ export async function setupUpdater() {
 
 ## 6. Cleanup (After Migration)
 
-Once all users have migrated to version 2.x:
+Once all users have migrated to version 2.x ( count 3/4 months):
 
 1. Remove `defaultChannel` from your Capacitor config
 2. Delete the v2 channel:
