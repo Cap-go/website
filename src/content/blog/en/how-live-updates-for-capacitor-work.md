@@ -5,8 +5,8 @@ description: 'Deep dive into the technical implementation of live updates in Cap
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
-created_at: 2024-03-18T06:14:25.862Z
-updated_at: 2024-03-18T15:14:16.781Z
+created_at: 2025-03-18T06:14:25.862Z
+updated_at: 2025-03-18T15:14:16.781Z
 head_image: https://assets.seobotai.com/capgo.app/live-updates-capacitor.jpg
 head_image_alt: 'Live Updates Architecture'
 keywords: 'Capgo live updates, OTA updates, Capacitor updates, mobile app development, app updates'
