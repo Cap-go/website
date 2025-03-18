@@ -3,7 +3,7 @@ import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const BLOG_DIR = 'src/content/blog/en/';
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 10;
 
 const iframe = `<iframe src="$1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>`;
 const iframeRegex = /:::\s*@iframe\s+(.*?)\s*:::/g;
@@ -25,7 +25,7 @@ async function main() {
   while (hasMore) {
     try {
       const response = await client.getArticles(page, PAGE_SIZE);
-      console.log(`Fetched ${response.articles.length} articles on page ${page}`);
+      console.log(`Fetched ${response.articles.length} articles on page ${page}, total: ${response.total}`);
       
       if (!response.articles || response.articles.length === 0) {
         hasMore = false;
@@ -36,6 +36,7 @@ async function main() {
       const fileName = `${article.slug}.md`;
       const filePath = join(BLOG_DIR, fileName);
       const articleResponse = await client.getArticle(article.slug);
+      console.log(`Fetched article ${article.slug}`);
       
       // Create frontmatter
       const frontmatter = [
