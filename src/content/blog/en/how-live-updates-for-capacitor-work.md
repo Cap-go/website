@@ -195,6 +195,53 @@ The plugin also automatically manages storage:
 - Removes failed updates if `autoDeleteFailed` is true
 - Cleans up old versions if `autoDeletePrevious` is true
 
+### Delaying Updates
+
+You can control when updates are installed using delay conditions:
+
+```typescript
+// Delay until app goes to background
+await CapacitorUpdater.setDelay({
+  kind: 'background'
+});
+
+// Delay until specific date
+await CapacitorUpdater.setDelay({
+  kind: 'date',
+  value: '2024-03-20T10:00:00.000Z'
+});
+
+// Delay until next native version
+await CapacitorUpdater.setDelay({
+  kind: 'nativeVersion'
+});
+
+// Multiple conditions
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'background'
+    },
+    {
+      kind: 'date',
+      value: '2024-03-20T10:00:00.000Z'
+    }
+  ]
+});
+```
+
+Available delay conditions:
+- **background**: Install when app goes to background
+- **date**: Install after specific date/time
+- **nativeVersion**: Install after next native update
+- **kill**: Install after app is killed
+
+This is useful for:
+- Scheduling updates during off-peak hours
+- Coordinating updates with user activity
+- Ensuring smooth update experience
+- Preventing disruption during critical tasks
+
 ### Update States
 
 During the automatic process, bundles transition through these states:
