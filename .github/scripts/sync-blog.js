@@ -7,6 +7,27 @@ const PAGE_SIZE = 10;
 
 const iframe = `<iframe src="$1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>`;
 const iframeRegex = /:::\s*@iframe\s+(.*?)\s*:::/g;
+
+const replaceFrontmatter = (text) => {
+  if (!text) return '';
+  // First clean the text
+  const cleaned = text
+    .replace(/\r/g, '') // Remove carriage returns
+    .replace(/\t/g, ' ') // Replace tabs with spaces
+    .replace(/[^\x20-\x7E]/g, '') // Remove non-printable characters
+    .trim(); // Remove leading/trailing whitespace
+
+  // If text contains any special characters, wrap it in double quotes and escape properly
+  if (/[:'"`\n]/.test(cleaned)) {
+    return `"${cleaned
+      .replace(/"/g, '\\"') // Escape double quotes
+      .replace(/\n/g, '\\n') // Escape newlines
+    }"`;
+  }
+  
+  return cleaned;
+}
+
 async function main() {
   if (!process.env.SEOBOT_API_KEY) {
     throw new Error('SEOBOT_API_KEY environment variable is required');
@@ -42,17 +63,17 @@ async function main() {
       const frontmatter = [
         '---',
         `slug: ${article.slug}`,
-        `title: '${article.headline}'`,
-        `description: '${article.metaDescription}'`,
+        `title: ${replaceFrontmatter(article.headline)}`,
+        `description: ${replaceFrontmatter(article.metaDescription)}`,
         'author: Martin Donadieu',
         'author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4',
         'author_url: https://github.com/riderx',
         `created_at: ${article.createdAt}`,
         `updated_at: ${article.updatedAt}`,
         `head_image: ${article.image}`,
-        `head_image_alt: '${article.category.title}'`,
-        `keywords: '${articleResponse.metaKeywords}'`,
-        `tag: '${article.tags.map(tag => tag.title).join(', ')}'`,
+        `head_image_alt: ${replaceFrontmatter(article.category.title)}`,
+        `keywords: ${replaceFrontmatter(articleResponse.metaKeywords)}`,
+        `tag: ${replaceFrontmatter(article.tags.map(tag => tag.title).join(', '))}`,
         'published: true',
         'locale: en',
         'next_blog: \'\'',
