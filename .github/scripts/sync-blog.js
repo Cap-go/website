@@ -62,11 +62,6 @@ async function main() {
 
       const cleanMarkdown = articleResponse.markdown.replace(`# ${article.headline}
 `, '');
-//transform=> ::: @iframe https://www.youtube-nocookie.com/embed/K7ghUiXLef8
-// :::
-//  to => <iframe src="https://www.youtube-nocookie.com/embed/K7ghUiXLef8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      // const iframeUrl = 
-      // const newIframe = iframe.replace('$1', '$1');
       const transformedMarkdown = cleanMarkdown.replace(iframeRegex, iframe);
       // Combine frontmatter with markdown content
       const content = `${frontmatter}${transformedMarkdown}`;
