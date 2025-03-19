@@ -1,16 +1,16 @@
 ---
 slug: 5-security-best-practices-for-mobile-app-live-updates
-title: '5 Security Best Practices for Mobile App Live Updates'
-description: 'Learn essential security practices for safe mobile app live updates, protecting user data and ensuring compliance with industry standards.'
+title: 5 Security Best Practices for Mobile App Live Updates
+description: Learn essential security practices for safe mobile app live updates, protecting user data and ensuring compliance with industry standards.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-01-14T02:36:08.711Z
 updated_at: 2025-01-14T15:24:46.071Z
 head_image: https://assets.seobotai.com/capgo.app/6785bb5bfc0bf469b705c62a-1736822313233.jpg
-head_image_alt: 'Technology'
-keywords: 'mobile app security, live updates, data integrity, OTA updates, encryption, security testing'
-tag: 'Development, Mobile, Updates'
+head_image_alt: Technology
+keywords: mobile app security, live updates, data integrity, OTA updates, encryption, security testing
+tag: Development, Mobile, Updates
 published: true
 locale: en
 next_blog: ''
