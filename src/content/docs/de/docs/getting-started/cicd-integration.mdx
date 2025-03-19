@@ -22,7 +22,7 @@ Die Capgo CLI ist der Schlüssel zur Integration von Capgo in Ihren CI/CD-Workfl
 Der wichtigste Befehl für die CI/CD-Integration ist `upload`:
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey=YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
 ```
 
 Dieser Befehl lädt den aktuellen Web-Build in den angegebenen Kanal hoch. Sie führen dies typischerweise als letzten Schritt in Ihrer CI/CD-Pipeline aus, nachdem Ihr Web-Build erfolgreich abgeschlossen wurde.
@@ -62,7 +62,7 @@ Hier ist eine Beispiel-`releaserc`-Konfigurationsdatei für semantic-release:
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey YOUR_API_KEY --partial"
       }
     ],
     [

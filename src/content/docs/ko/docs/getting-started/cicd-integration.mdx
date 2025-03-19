@@ -22,7 +22,7 @@ Capgo CLI는 CI/CD 워크플로우에 Capgo를 통합하는 핵심입니다. 새
 CI/CD 통합에서 가장 중요한 명령어는 `upload`입니다:
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey=YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
 ```
 
 이 명령어는 현재 웹 빌드를 지정된 채널에 업로드합니다. 일반적으로 웹 빌드가 성공적으로 완료된 후 CI/CD 파이프라인의 마지막 단계로 실행됩니다.
@@ -62,7 +62,7 @@ Semantic-release는 버전 관리를 자동화하고 릴리스 노트를 생성�
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextReleasechannel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextReleasechannel} --apikey YOUR_API_KEY --partial"
       }
     ],
     [

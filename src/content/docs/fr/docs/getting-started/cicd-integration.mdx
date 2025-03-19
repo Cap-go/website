@@ -22,7 +22,7 @@ Le CLI Capgo est la clé pour intégrer Capgo dans votre workflow CI/CD. Il four
 La commande la plus importante pour l'intégration CI/CD est `upload` :
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey=YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
 ```
 
 Cette commande télécharge la construction web actuelle vers le canal spécifié. Vous l'exécuterez généralement comme dernière étape de votre pipeline CI/CD, après que votre construction web s'est terminée avec succès.
@@ -62,7 +62,7 @@ Voici un exemple de fichier de configuration `releaserc` pour semantic-release :
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey=YOUR_API_KEY --partial"
+        "publishCmd": "npx @capgo/cli@latest bundle upload --channel=${nextRelease.channel} --apikey YOUR_API_KEY --partial"
       }
     ],
     [
