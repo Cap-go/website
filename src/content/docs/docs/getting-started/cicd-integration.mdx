@@ -117,6 +117,145 @@ If you encounter issues with your Capgo CI/CD integration, here are a few things
 
 If you're still having trouble, reach out to Capgo support for assistance. They can help troubleshoot any issues with your specific setup.
 
+## Handling Private Keys in CI/CD Environments
+
+When using encryption v2 in a CI/CD environment, you'll need to provide both your API key and private key to the CLI. Here's how to handle this securely:
+
+### Storing Private Keys as Environment Variables
+
+1. **Never commit your private key to version control**
+2. **Store the private key as a secret/environment variable:**
+   - GitHub Actions: Use repository secrets
+   - GitLab CI: Use CI/CD variables
+   - Google Cloud Build: Use substitution variables
+   - Jenkins: Use credentials
+
+### Proper Key Formatting
+
+When storing your private key as an environment variable, you must ensure it's properly formatted to avoid errors like `error:1E080110:DECODER routines::unsupported`.
+
+Here are some common issues and solutions:
+
+1. **Preserve line breaks**: Private keys in PEM format contain line breaks that must be preserved. Different CI/CD systems handle this differently:
+
+   - **GitHub Actions**: Use the built-in support for multiline secrets:
+     ```yaml
+     - name: Upload bundle
+       run: npx @capgo/cli@latest bundle upload --channel="prod" --apikey="${{ secrets.CAPGO_API_KEY }}" --key-data-v2="${{ secrets.CAPGO_PRIVATE_KEY }}" --auto-set-bundle
+       env:
+         CAPGO_PRIVATE_KEY: ${{ secrets.CAPGO_PRIVATE_KEY }}
+     ```
+
+   - **GitLab CI**: Use the `|-` YAML syntax to preserve newlines:
+     ```yaml
+     variables:
+       CAPGO_PRIVATE_KEY: |-
+         -----BEGIN PRIVATE KEY-----
+         MIIEvgIBADANBgkqhkiG9w0BAQEFAA...
+         -----END PRIVATE KEY-----
+     ```
+
+   - **Google Cloud Build**: For substitution variables, you may need to replace newlines with `\n` and then use a script to restore them:
+     ```yaml
+     steps:
+     - name: 'gcr.io/cloud-builders/npm'
+       script: |
+         echo "$_CAPGO_PRIVATE_KEY" | sed 's/\\n/\n/g' > private_key.pem
+         npx @capgo/cli@latest bundle upload --channel="prod" --apikey="${_CAPGO_API_KEY}" --key-v2="private_key.pem" --auto-set-bundle
+       env:
+         - '_CAPGO_API_KEY=${_CAPGO_API_KEY}'
+         - '_CAPGO_PRIVATE_KEY=${_CAPGO_PRIVATE_KEY}'
+     ```
+
+2. **Correct PEM format**: Ensure your private key is in the correct PEM format with proper headers and footers:
+   ```
+   -----BEGIN PRIVATE KEY-----
+   (base64-encoded key data)
+   -----END PRIVATE KEY-----
+   ```
+
+3. **No extra whitespace**: Make sure there's no extra whitespace before or after the key content.
+
+### Example CI/CD Configurations
+
+#### GitHub Actions
+
+```yaml
+name: Deploy to Capgo
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Upload to Capgo
+        run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2="${{ secrets.CAPGO_PRIVATE_KEY }}"
+```
+
+#### GitLab CI
+
+```yaml
+deploy:
+  stage: deploy
+  image: node:18
+  script:
+    - npm ci
+    - npm run build
+    - |
+      npx @capgo/cli@latest bundle upload \
+        --channel=Production \
+        --apikey=${CAPGO_API_KEY} \
+        --key-data-v2="${CAPGO_PRIVATE_KEY}"
+  only:
+    - main
+```
+
+#### Google Cloud Build
+
+```yaml
+steps:
+- name: node:18
+  entrypoint: npm
+  args: ['ci']
+- name: node:18
+  entrypoint: npm
+  args: ['run', 'build']
+- name: node:18
+  entrypoint: bash
+  args:
+    - '-c'
+    - |
+      echo "$_CAPGO_PRIVATE_KEY" | sed 's/\\n/\n/g' > private_key.pem
+      npx @capgo/cli@latest bundle upload --channel="prod" --apikey="${_CAPGO_API_KEY}" --key-v2="private_key.pem" --auto-set-bundle
+```
+
+### Troubleshooting Key Format Issues
+
+If you encounter the error `error:1E080110:DECODER routines::unsupported`, it typically means there's an issue with how your private key is formatted. Try these solutions:
+
+1. **Check for line break issues**: Ensure line breaks in your private key are properly preserved.
+2. **Verify the key format**: Make sure you're using a supported key format (PEM).
+3. **Use a file instead of inline data**: If you continue to have issues with `--key-data-v2`, try writing the key to a temporary file and using `--key-v2` instead:
+   ```bash
+   echo "$PRIVATE_KEY" > temp_key.pem
+   npx @capgo/cli@latest bundle upload --channel=Production --apikey=$CAPGO_API_KEY --key-v2=temp_key.pem
+   ```
+4. **Inspect the key format**: You can check if your key is in the correct format by examining the first few characters (without exposing the entire key):
+   ```bash
+   echo "$PRIVATE_KEY" | head -1
+   # Should output: -----BEGIN PRIVATE KEY-----
+   ```
+
 ## Conclusion
 
 Integrating Capgo into your CI/CD pipeline and leveraging semantic-release for version management can greatly streamline your development workflow. By automating your deployments and versioning, you can ship updates faster and with more confidence.
