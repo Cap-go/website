@@ -76,6 +76,9 @@ const handleSubmit = async () => {
     isLoading.value = false
     return
   }
+  if ((window as any).datafast) {
+    (window as any).datafast("signup", { email: email.value });
+  }
   window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}`
 }
 </script>
