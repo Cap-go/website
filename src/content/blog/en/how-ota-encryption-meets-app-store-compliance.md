@@ -135,7 +135,7 @@ Capgo uses advanced encryption techniques to deliver secure OTA updates while fu
 
 Capgo employs FIPS 140-2 compliant encryption to safeguard update packages at every stage. Encryption keys are managed within a secure infrastructure, ensuring they remain isolated from Capgo's servers[\[1\]](https://www.cubtale.com/pages/compliance-data-security).
 
-The [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) includes specific security measures at each stage:
+The [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) includes specific security measures at each stage:
 
 | Stage | Security Measure |
 | --- | --- |
@@ -190,15 +190,15 @@ Encryption that's integrated into the operating system usually doesn't need expo
 | HTTPS connections using URLSession | ✓   |
 | Native TLS/SSL implementations | ✓   |
 | Built-in OS cryptographic functions | ✓   |
-| [Custom encryption solutions](https://capgo.app/id/docs/cli/migrations/encryption/) | ✗   |
+| [Custom encryption solutions](https://capgo.app/docs/cli/migrations/encryption/) | ✗   |
 | Modified standard algorithms | ✗   |
 
-According to U.S. export guidelines (BIS), [encryption methods](https://capgo.app/ko/docs/cli/migrations/encryption/) with key lengths up to 128 bits are typically unrestricted for export [\[5\]](https://productlatest.com/?post=1837).
+According to U.S. export guidelines (BIS), [encryption methods](https://capgo.app/docs/cli/migrations/encryption/) with key lengths up to 128 bits are typically unrestricted for export [\[5\]](https://productlatest.com/?post=1837).
 
 For secure over-the-air (OTA) implementation:
 
 -   Use platform-native TLS and AES-256 through system APIs
 -   Keep detailed records of all encryption methods applied
--   Perform regular audits of your [encryption practices](https://capgo.app/it/docs/cli/migrations/encryption/)
+-   Perform regular audits of your [encryption practices](https://capgo.app/docs/cli/migrations/encryption/)
 
 Routine reviews of your encryption methods help ensure compliance with Apple and Google’s security requirements.

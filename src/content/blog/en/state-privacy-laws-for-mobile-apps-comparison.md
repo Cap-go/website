@@ -124,7 +124,7 @@ For those worried about vendor dependencies, Capgo’s open-source structure pro
 
 > "The only solution with true end-to-end encryption, others just sign updates" - Capgo [\[1\]](https://capgo.app/)
 
-Capgo’s effectiveness is clear: it’s trusted by 750 production apps, delivering 23.5M [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) so far [\[1\]](https://capgo.app/).
+Capgo’s effectiveness is clear: it’s trusted by 750 production apps, delivering 23.5M [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) so far [\[1\]](https://capgo.app/).
 
 Track updates in real time with analytics, error monitoring, and role-based access controls to simplify compliance across multiple states.
 
@@ -162,7 +162,7 @@ For developers, staying compliant across different jurisdictions means adopting 
 
 To tackle these challenges, developers should concentrate on three key areas:
 
--   **[Quick Update Systems](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update)**: Set up processes that allow for fast implementation of privacy updates.
+-   **[Quick Update Systems](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**: Set up processes that allow for fast implementation of privacy updates.
 -   **Strong Security Measures**: Ensure all data transfers and updates are protected with end-to-end encryption.
 -   **Thorough Testing**: Use staged rollouts and beta testing to confirm that privacy updates work as intended.
 

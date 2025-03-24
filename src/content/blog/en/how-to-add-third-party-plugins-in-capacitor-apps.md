@@ -21,11 +21,11 @@ next_blog: ''
 Here’s what you’ll learn:
 
 -   **Tools you need:** [Node.js](https://nodejs.org/en), npm, Capacitor CLI, [Xcode](https://developer.apple.com/xcode/), [Android Studio](https://developer.android.com/studio), and more.
--   **Skills checklist:** JavaScript/TypeScript, [mobile debugging](https://capgo.app/ko/docs/plugin/debugging/), and [Capacitor API knowledge](https://capgo.app/blog/capacitor-comprehensive-guide/).
--   **Finding plugins:** Use npm, [Capacitor Community Hub](https://capgo.app/ko/blog/capacitor-comprehensive-guide/), or GitHub to discover reliable options.
+-   **Skills checklist:** JavaScript/TypeScript, [mobile debugging](https://capgo.app/blog/capacitor-comprehensive-guide/).
+-   **Finding plugins:** Use npm, [Capacitor Community Hub](https://capgo.app/blog/capacitor-comprehensive-guide/), or GitHub to discover reliable options.
 -   **Installing plugins:** Install via npm and sync with `npx cap sync`.
 -   **Configuration:** Update platform-specific files like `Info.plist` (iOS) or `AndroidManifest.xml` (Android).
--   **[Debugging tips](https://capgo.app/ja/docs/plugin/debugging/):** Use tools like `npx cap doctor` and verbose logging to fix issues.
+-   **[Debugging tips](https://capgo.app/docs/plugin/debugging/):** Use tools like `npx cap doctor` and verbose logging to fix issues.
 
 **Pro Tip:** Tools like [Capgo](https://capgo.app/) make managing updates and plugin rollouts seamless, with features like encrypted updates and real-time analytics.
 
@@ -70,7 +70,7 @@ Here’s what you should be comfortable with:
 
 -   Basic iOS development (for iOS plugins)
 -   Basic Android development (for Android plugins)
--   [Mobile app debugging techniques](https://capgo.app/it/docs/plugin/debugging/)
+-   [Mobile app debugging techniques](https://capgo.app/docs/plugin/debugging/)
 
 **Framework Familiarity**:
 
@@ -139,7 +139,7 @@ Use npm to install plugins:
 npm install plugin-name
 ```
 
-For [official Capacitor plugins](https://capgo.app/fr/blog/):
+For [official Capacitor plugins](https://capgo.app/blog/):
 
 ```bash
 npm install @capacitor/plugin-name
@@ -272,7 +272,7 @@ Test plugin functionality at every stage of deployment to ensure reliability.
 
 | Plugin Testing Phase | Best Practice | Impact |
 | --- | --- | --- |
-| Development | Use [channel system](https://capgo.app/ko/docs/plugin/cloud-mode/channel-system/) | Isolate testing environments |
+| Development | Use [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Isolate testing environments |
 | Beta Testing | Leverage error tracking | Identify platform-specific issues |
 | Production | Enable automatic updates | 95% user update rate within 24 hours |
 
@@ -328,7 +328,7 @@ If multiple plugins require different Capacitor versions, check the compatibilit
 }
 ```
 
-Still stuck? Move on to [debugging steps](https://capgo.app/de/docs/plugin/debugging/) for a deeper analysis.
+Still stuck? Move on to [debugging steps](https://capgo.app/docs/plugin/debugging/) for a deeper analysis.
 
 ### Debug Steps
 
@@ -402,7 +402,7 @@ Here’s a breakdown of the integration process into key phases:
 | **Pre-Integration** | Research plugin compatibility and user reviews | Identifies potential challenges early |
 | **Installation** | Install plugins using npm and run Capacitor sync | Ensures smooth integration across platforms |
 | **Configuration** | Handle platform-specific setup requirements | Optimizes plugin performance |
-| **Maintenance** | Use [automated updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) with Capgo | 95% of users updated within 24 hours[\[1\]](https://capgo.app/) |
+| **Maintenance** | Use [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) with Capgo | 95% of users updated within 24 hours[\[1\]](https://capgo.app/) |
 
 Capgo offers tools to streamline updates. Rodrigo Mantica highlights its importance:
 

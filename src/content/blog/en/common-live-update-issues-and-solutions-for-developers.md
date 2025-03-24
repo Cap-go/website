@@ -71,7 +71,7 @@ Key features of Capgo include:
 -   **Version control integration** for better management.
 -   **Analytics** to measure update success rates.
 
-To optimize your deployment strategy, configure [update channels](https://capgo.app/ja/docs/webapp/channels/):
+To optimize your deployment strategy, configure [update channels](https://capgo.app/docs/webapp/channels/):
 
 -   **Production**: Stable releases for general users.
 -   **Beta**: Early access for feature testing.
@@ -199,7 +199,7 @@ Securing live updates requires multiple layers of protection. Here are the three
 
 Capgo's tools make securing updates easier by automating key processes:
 
--   **[Package Encryption](https://capgo.app/ja/docs/cli/migrations/encryption/)**: Automatically encrypt update bundles.
+-   **[Package Encryption](https://capgo.app/docs/cli/migrations/encryption/)**: Automatically encrypt update bundles.
 -   **Secure Transmission**: Ensure updates use HTTPS protocols.
 -   **Version Validation**: Confirm update integrity before installation.
 

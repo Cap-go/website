@@ -134,7 +134,7 @@ For features involving sensitive data or security, run tools like `npm audit` or
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
-Capgo provides a [live update plugin](https://capgo.app/de/docs/plugin/self-hosted/auto-update/) that works seamlessly with Capacitor. It allows you to deploy updates - like bug fixes or new features - directly to your app using encrypted channels, all while staying compliant with app store policies [\[3\]](https://github.com/riderx/awesome-capacitor).
+Capgo provides a [live update plugin](https://capgo.app/docs/plugin/self-hosted/auto-update/) that works seamlessly with Capacitor. It allows you to deploy updates - like bug fixes or new features - directly to your app using encrypted channels, all while staying compliant with app store policies [\[3\]](https://github.com/riderx/awesome-capacitor).
 
 ### Plugin Testing Methods
 
@@ -174,7 +174,7 @@ When upgrading major versions, follow these steps:
 
 Document any customizations or workarounds you’ve implemented.
 
-2\. **[Update Strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update)**
+2\. **[Update Strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**
 
 Develop a detailed update plan that includes:
 
@@ -221,7 +221,7 @@ Using `capacitor doctor` regularly can help catch potential problems early, ensu
 
 ## Summary
 
-Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/ko/blog/cross-platform-mobile-app-development-guide-2024/) more efficient [\[6\]](https://capacitorjs.jp/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
+Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
 
 To keep plugins running smoothly, it's important to understand their categories and how they are maintained:
 

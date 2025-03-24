@@ -16,10 +16,10 @@ locale: en
 next_blog: ''
 ---
 
-Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) apps can be tricky, but the right tools make a big difference. Whether you're managing version conflicts, ensuring [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/), or debugging across platforms, here are three tools to consider:
+Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) apps can be tricky, but the right tools make a big difference. Whether you're managing version conflicts, ensuring [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), or debugging across platforms, here are three tools to consider:
 
 -   **[Capgo](https://capgo.app/)**: Secure OTA updates with end-to-end encryption, CI/CD integration, and user-specific rollouts. Starts at $12/month.
--   **@capawesome/capacitor-live-update**: A free, simple plugin for basic OTA [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) with automatic rollback.
+-   **@capawesome/capacitor-live-update**: A free, simple plugin for basic OTA [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) with automatic rollback.
 -   **[Inspect.dev](https://inspect.dev/)**: Debug both Android and iOS apps, even on Windows, with [Chrome DevTools](https://developer.chrome.com/docs/devtools) integration. Costs $49/year.
 
 ### Quick Comparison
@@ -27,7 +27,7 @@ Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) ap
 | Feature | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
 | --- | --- | --- | --- |
 | Update Management | Advanced (encryption, CI/CD) | Basic (cloud-based) | Not applicable |
-| [Debugging Tools](https://capgo.app/ja/docs/plugin/debugging/) | Version control, rollback | Automatic rollback | Chrome DevTools |
+| [Debugging Tools](https://capgo.app/docs/plugin/debugging/) | Version control, rollback | Automatic rollback | Chrome DevTools |
 | Platform Support | Android, iOS | Android, iOS | Android, iOS (Windows support) |
 | Pricing | $12/month | Free | $49/year |
 
@@ -53,7 +53,7 @@ Once these are in place, it's time to explore OTA distribution options.
 
 | Distribution Method | Key Features | Best For |
 | --- | --- | --- |
-| [Manual Updates](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/) | Full control over the update process, supports custom URLs | Smaller apps, testing |
+| [Manual Updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Full control over the update process, supports custom URLs | Smaller apps, testing |
 | Capgo | Offers end-to-end encryption, CI/CD integration, and user assignment | Enterprise applications |
 | @capawesome/capacitor-live-update | Manages versions and provides basic update functionality | Simple apps |
 
@@ -61,7 +61,7 @@ Choose the method that best fits your app's needs and workflow.
 
 ### Development Setup
 
-Setting up your environment involves using [Capacitor CLI commands](https://capgo.app/es/docs/cli/commands/) and configuring settings correctly.
+Setting up your environment involves using [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) and configuring settings correctly.
 
 Important setup steps:
 
@@ -81,7 +81,7 @@ Keep version control organized to track changes and simplify debugging. Use Capa
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
-These tools help developers tackle specific [debugging challenges](https://capgo.app/ko/docs/plugin/debugging/) while managing OTA updates effectively.
+These tools help developers tackle specific [debugging challenges](https://capgo.app/docs/plugin/debugging/) while managing OTA updates effectively.
 
 ### [Capgo](https://capgo.app)
 
@@ -108,9 +108,9 @@ This Capacitor plugin is a no-frills option for OTA updates, ideal for smaller t
 
 #### Key Features of @capawesome/capacitor-live-update
 
-This plugin focuses on essential update features, like a [cloud-based bundle management system](https://capgo.app/de/docs/webapp/bundles/) that supports both Android and iOS. It also includes an automatic rollback feature, ensuring stability by reverting to the last working version if an update fails.
+This plugin focuses on essential update features, like a [cloud-based bundle management system](https://capgo.app/docs/webapp/bundles/) that supports both Android and iOS. It also includes an automatic rollback feature, ensuring stability by reverting to the last working version if an update fails.
 
-For a [debugging tool](https://capgo.app/de/docs/plugin/debugging/) with cross-platform capabilities, take a look at **Inspect.dev**.
+For a [debugging tool](https://capgo.app/docs/plugin/debugging/) with cross-platform capabilities, take a look at **Inspect.dev**.
 
 ### [Inspect.dev](https://inspect.dev/)
 
@@ -178,7 +178,7 @@ If you use CI/CD pipelines, **Capgo** integrates effortlessly into your workflow
 Consider your technical priorities and match them to the tool's strengths:
 
 -   For cross-platform debugging, **Inspect.dev** is a solid choice.
--   Need [automated updates](https://capgo.app/ja/docs/plugin/self-hosted/auto-update/) with added security? **Capgo** is ideal.
+-   Need [automated updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with added security? **Capgo** is ideal.
 -   For basic update management, **@capawesome/capacitor-live-update** is sufficient.
 
 **Budget**  
@@ -191,7 +191,7 @@ If security is a top priority, **Capgo** ensures updates comply with both Apple 
 
 ### How to debug a Capacitor app on Android?
 
-Debugging a [Capacitor app](https://capgo.app/de/plugins/ivs-player/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
+Debugging a [Capacitor app](https://capgo.app/plugins/ivs-player/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
 
 1.  Start your app using your IDE or [Android Studio](https://developer.android.com/studio).
 2.  Open `chrome://inspect` in Google Chrome.
@@ -201,7 +201,7 @@ Once connected, you can use Chrome's developer tools to check **console logs**, 
 
 Pay attention to the **Network** tab to track update downloads and use the **Console** to spot any errors.
 
-For additional [debugging options](https://capgo.app/it/docs/plugin/debugging/), explore these tools:
+For additional [debugging options](https://capgo.app/docs/plugin/debugging/), explore these tools:
 
 -   **Inspect.dev**: A cross-platform debugging tool.
 -   **Capgo**: Helps with live update management, along with built-in security and CI/CD features.

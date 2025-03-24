@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjs.com/) [update channels](https://capgo.app/ja/docs/webapp/channels/) let you send over-the-air (OTA) updates to specific user groups. This helps manage multiple app versions, test new features, and roll out updates gradually. Here's what you need to know:
+[Capacitor](https://capacitorjs.com/) [update channels](https://capgo.app/docs/webapp/channels/) let you send over-the-air (OTA) updates to specific user groups. This helps manage multiple app versions, test new features, and roll out updates gradually. Here's what you need to know:
 
 -   **Benefits**:
     
@@ -54,7 +54,7 @@ Make sure you have the following:
 
 -   **Capacitor CLI**: This is the core tool for handling app updates.
 -   **Node.js**: Version 14.0 or higher is required.
--   **[Capgo CLI](https://capgo.app/ko/docs/cli/commands)**: Used for setting up and managing update channels.
+-   **[Capgo CLI](https://capgo.app/docs/cli/commands)**: Used for setting up and managing update channels.
 -   **Development Environment**: Choose an IDE that supports Capacitor.
 
 To initialize Capgo CLI, run this command:
@@ -63,7 +63,7 @@ To initialize Capgo CLI, run this command:
 npx @capgo/cli init
 ```
 
-This sets up your project with the necessary configuration files and connects it to Capgo's [update service](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/).
+This sets up your project with the necessary configuration files and connects it to Capgo's [update service](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ### Configuring Access and Permissions
 
@@ -183,7 +183,7 @@ It's important to know how and when to remove unused update channels. Keeping yo
 
 ### Finding Unused Channels
 
-To spot inactive channels, use [Capgo's analytics dashboard](https://capgo.app/it/docs/webapp/) to analyze usage patterns. Focus on channels that meet these criteria:
+To spot inactive channels, use [Capgo's analytics dashboard](https://capgo.app/docs/webapp/) to analyze usage patterns. Focus on channels that meet these criteria:
 
 -   No active users in the last 30 days
 -   No recent updates deployed
@@ -251,7 +251,7 @@ Getting started with Capgo is simple and quick. Just follow these three steps:
 
 > "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/ko/docs/plugin/cloud-mode/manual-update/) while keeping everything efficient and straightforward.
+Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) while keeping everything efficient and straightforward.
 
 ## Summary
 

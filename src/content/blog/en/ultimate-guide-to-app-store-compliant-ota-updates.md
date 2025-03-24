@@ -28,7 +28,7 @@ next_blog: ''
 -   **How to Stay Compliant**:
     -   Avoid altering core app functionality.
     -   Use secure delivery methods like HTTPS and digital signatures.
-    -   Clearly communicate [update purposes](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) to users.
+    -   Clearly communicate [update purposes](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) to users.
 
 ### Quick Comparison of OTA Rules
 
@@ -133,7 +133,7 @@ Here are common pitfalls to avoid when updating apps:
 
 To stay compliant:
 
--   Regularly audit your [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) for security issues.
+-   Regularly audit your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) for security issues.
 -   Use machine learning to analyze update patterns.
 -   Clearly explain the purpose of updates to users.
 -   Avoid altering the app's core functionality through OTA updates [\[8\]](https://stackoverflow.com/questions/43951710/does-apple-allow-ota-updates-of-application).
@@ -228,7 +228,7 @@ The platform also ensures compliance and high performance with its custom Dart i
 
 Capgo maintains strict adherence to app store guidelines by:
 
--   Updating only [JavaScript bundles](https://capgo.app/de/docs/webapp/bundles/), avoiding native code changes [\[14\]](https://capgo.app/docs/getting-started/quickstart/).
+-   Updating only [JavaScript bundles](https://capgo.app/docs/getting-started/quickstart/).
 -   Ensuring updates align with the app’s original purpose, do not create new storefronts, and don’t compromise system security.
 
 > "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS."  

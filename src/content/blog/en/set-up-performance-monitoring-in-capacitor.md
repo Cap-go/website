@@ -73,7 +73,7 @@ When deciding between these tools, consider the following:
 
 ## Firebase Setup Guide
 
-Setting up Firebase Performance Monitoring in your [Capacitor app](https://capgo.app/de/plugins/ivs-player/) requires a few clear steps to ensure accurate data tracking.
+Setting up Firebase Performance Monitoring in your [Capacitor app](https://capgo.app/plugins/ivs-player/) requires a few clear steps to ensure accurate data tracking.
 
 ### Install Firebase SDK
 

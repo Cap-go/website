@@ -121,7 +121,7 @@ Start with **Azure Blob Storage** to host your update files. Pair it with **Azur
 
 For security, Azure brings several tools to the table. **Key Vault** helps manage encryption keys, **Active Directory** controls access, **Security Center** monitors threats, and **DDoS Protection** safeguards against network attacks. Together, these tools create a secure environment for OTA updates.
 
-If you need a custom OTA update solution, Azure has you covered. Use **Azure DevOps** and serverless tools like **Azure Pipelines** to [automate builds and deployments](https://capgo.app/ko/blog/automatic-build-and-release-with-gitlab/). Add **Azure Functions** to trigger update workflows, and rely on **Azure Monitor** to track performance and metrics.
+If you need a custom OTA update solution, Azure has you covered. Use **Azure DevOps** and serverless tools like **Azure Pipelines** to [automate builds and deployments](https://capgo.app/blog/automatic-build-and-release-with-gitlab/). Add **Azure Functions** to trigger update workflows, and rely on **Azure Monitor** to track performance and metrics.
 
 Azure also supports phased rollouts and automated rollback mechanisms, which are essential for meeting app store guidelines and industry standards. Its compliance features make it easier to design update strategies that align with regulatory requirements.
 
@@ -164,7 +164,7 @@ Here's a breakdown of how traditional cloud providers stack up against Capgo in 
 | Update Success Rate | Not reported | 82% worldwide[\[1\]](https://capgo.app/) |
 | Encryption | Standard update signing | End-to-end encryption[\[1\]](https://capgo.app/) |
 | CI/CD Integration | Requires custom setup | Built-in integration with GitHub, GitLab, etc.[\[1\]](https://capgo.app/) |
-| [Update Management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) | Custom implementation | Channel system included[\[1\]](https://capgo.app/) |
+| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Custom implementation | Channel system included[\[1\]](https://capgo.app/) |
 
 While traditional providers deliver reliable performance, Capgo stands out with its faster global CDN speeds, streamlined update success rates, and enhanced security. For example, Capgo achieves a 114ms delivery time for a 5MB bundle and an 82% update success rate globally - metrics that are hard to ignore.
 
@@ -201,7 +201,7 @@ Here’s a quick guide to help you match your needs with the right platform:
 | **Need** | **Best Choice** | **Why** |
 | --- | --- | --- |
 | Small Teams (<10 devs) | Capgo (Solo/Maker plans) | Affordable plans ($12–$33/month) with essential features for smaller teams |
-| Enterprise Scale | Traditional Cloud or [Capgo PAYG](https://capgo.app/ko/docs/webapp/payment/) | Customizable infrastructure and scalable solutions (Capgo PAYG starts at $249/month) |
+| Enterprise Scale | Traditional Cloud or [Capgo PAYG](https://capgo.app/docs/webapp/payment/) | Customizable infrastructure and scalable solutions (Capgo PAYG starts at $249/month) |
 | High Security | Platforms with E2E Encryption | Ensures sensitive data is protected and compliance requirements are met |
 | CI/CD Integration | Platforms with Built-in Support | Simplifies setup and reduces ongoing maintenance |
 
@@ -211,6 +211,6 @@ Costs can vary widely depending on your needs. For example, running CI/CD operat
 
 ### **Technical Requirements**
 
-When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/de/plugins/ivs-player/)** (e.g., Capacitor 6 or 7) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
+When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/ivs-player/)** (e.g., Capacitor 6 or 7) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
 
 The best platform will strike the right balance between performance, security, and cost. Take advantage of free trials - like Capgo's 15-day trial - to see if the platform aligns with your needs [\[1\]](https://capgo.app/).

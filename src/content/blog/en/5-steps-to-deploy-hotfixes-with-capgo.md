@@ -19,7 +19,7 @@ next_blog: ''
 [Capgo](https://capgo.app/) makes deploying hotfixes fast and easy, skipping app store delays while keeping updates secure and compliant with Apple and Google guidelines. Here’s a quick overview of the process:
 
 1.  **Create and Test Your Hotfix**: Write precise code changes, test thoroughly on devices, and ensure compatibility.
-2.  **[Set Up Capgo](https://capgo.app/fr/docs/webapp/)**: Install the [Capgo CLI](https://capgo.app/ko/docs/cli/commands) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
+2.  **[Set Up Capgo](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
 3.  **Upload Your Hotfix**: Use the CLI to securely upload your update, label it clearly, and prepare for deployment.
 4.  **Choose Update Settings**: Target specific users or groups, schedule rollouts, and define version requirements.
 5.  **Track Your Update**: Monitor delivery rates, update speed, and user coverage. Roll back instantly if needed.
@@ -103,7 +103,7 @@ With your project fully set up, you're ready to upload your hotfix and deploy it
 
 ### Send Files to Capgo
 
-After setting up your project, it's time to upload your hotfix using the [Capgo CLI tool](https://capgo.app/fr/docs/cli/commands/). This ensures a secure and efficient transfer of your update. Start by building your app as you normally would during development.
+After setting up your project, it's time to upload your hotfix using the [Capgo CLI tool](https://capgo.app/docs/cli/commands/). This ensures a secure and efficient transfer of your update. Start by building your app as you normally would during development.
 
 Here’s how it works:
 
@@ -123,7 +123,7 @@ Clear labeling is key for managing and tracking your hotfixes. When uploading yo
 
 Martin Donadieu, Capgo's founder, has designed a versioning system that integrates smoothly with CI/CD workflows. This system makes it easy to track updates and roll back if necessary.
 
-Capgo’s [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) also includes features like end-to-end encryption and instant deployment, ensuring your hotfixes are secure while reaching users quickly.
+Capgo’s [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) also includes features like end-to-end encryption and instant deployment, ensuring your hotfixes are secure while reaching users quickly.
 
 Once your hotfix is uploaded and labeled, move on to Step 4 to configure your update settings.
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-01T04:05:37.460Z
-updated_at: 2025-03-18T13:14:08.659Z
+updated_at: 2025-03-24T13:16:58.726Z
 head_image: https://assets.seobotai.com/capgo.app/67c2639cd8e4215290f21bf1-1740801998811.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, iOS updates, Android updates, mobile app development, security measures, update strategies
@@ -16,14 +16,18 @@ locale: en
 next_blog: ''
 ---
 
-**Want to update your [Capacitor](https://capacitorjs.com/) app instantly without app store delays?** Over-the-Air (OTA) updates let you push changes to the web layer (HTML, CSS, JavaScript) of your app without resubmitting to app stores. But iOS and Android handle these updates differently, and understanding these differences is crucial.
+**Want to update your** [**Capacitor**](https://capacitorjs.com/) **app instantly without app store delays?** Over-the-Air (OTA) updates let you push changes to the web layer (HTML, CSS, JavaScript) of your app without resubmitting to app stores. But iOS and Android handle these updates differently, and understanding these differences is crucial.
 
 ### Key Takeaways:
 
 -   **iOS**: Updates deploy immediately but follow strict rules, including file path restrictions and power/network requirements.
+    
 -   **Android**: Uses staged rollouts (1% → 100%) with flexible power/network needs and supports background updates.
+    
 -   **Security**: Both platforms enforce strong security measures - iOS relies on hardware-backed encryption, while Android uses Verified Boot and [SELinux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux).
--   **[Capgo](https://capgo.app/)**: A platform that simplifies OTA updates, delivering over **947.6 million updates** globally with tools for efficient, secure, and compliant deployments.
+    
+-   [**Capgo**](https://capgo.app/): A platform that simplifies OTA updates, delivering over **947.6 million updates** globally with tools for efficient, secure, and compliant deployments.
+    
 
 ### Quick Comparison:
 
@@ -36,7 +40,7 @@ next_blog: ''
 | **Power Requirements** | 50% battery or plugged in | Flexible |
 | **Network** | Wi-Fi required | Supports various connections |
 
-Capgo helps streamline the process, ensuring updates are secure, efficient, and compliant across both platforms. Whether you're targeting iOS or Android, understanding these differences will help you create a better OTA [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update).
+Capgo helps streamline the process, ensuring updates are secure, efficient, and compliant across both platforms. Whether you're targeting iOS or Android, understanding these differences will help you create a better OTA [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
 
 ## How iOS and Android Handle OTA Updates
 
@@ -48,7 +52,7 @@ Apple has strict guidelines for OTA updates. Devices must meet specific technica
 
 ### Google Play Store Update Rules
 
-Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) [\[8\]](https://source.android.com/docs/core/ota/ab).
+Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/docs/core/ota/ab).
 
 ### Platform Update Differences
 
@@ -70,7 +74,7 @@ When it comes to update distribution, strategies need to account for the unique 
 
 ### Device-Based Update Rules
 
-Update requirements depend heavily on the hardware and platform. For instance, iOS devices need at least 20% battery for user-initiated updates and 30% for [automatic updates](https://capgo.app/id/docs/plugin/cloud-mode/auto-update/). On Macs, the requirements differ based on the chipset - 20% battery for Apple silicon devices and 50% for Intel-based ones [\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web). Android, on the other hand, has a more flexible system but faces challenges due to ecosystem fragmentation. Manufacturers and carriers introduce delays, with security updates taking an average of 24 days and an additional 11 days for device-specific completions [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346).
+Update requirements depend heavily on the hardware and platform. For instance, iOS devices need at least 20% battery for user-initiated updates and 30% for [automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/). On Macs, the requirements differ based on the chipset - 20% battery for Apple silicon devices and 50% for Intel-based ones [\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web). Android, on the other hand, has a more flexible system but faces challenges due to ecosystem fragmentation. Manufacturers and carriers introduce delays, with security updates taking an average of 24 days and an additional 11 days for device-specific completions [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346).
 
 ### OS Version Requirements
 
@@ -86,12 +90,14 @@ For iOS, Apple uses Rapid Security Response (RSR) to deliver critical patches di
 
 ### Update Strategy Results
 
-Android's [Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html) has reduced the time required for security updates by about 7 days [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346). To manage updates effectively, it's recommended to separate development and production [update channels](https://capgo.app/ja/docs/webapp/channels/) [\[9\]](https://capgo.app/docs/faq/). Capgo simplifies the process with percentage-based deployments, allowing for controlled rollouts while staying within app store guidelines.
+Android's [Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html) has reduced the time required for security updates by about 7 days [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346). To manage updates effectively, it's recommended to separate development and production [update channels](https://capgo.app/docs/faq/). Capgo simplifies the process with percentage-based deployments, allowing for controlled rollouts while staying within app store guidelines.
 
 The updater also caches downloaded bundles in platform-specific directories for efficient and secure updates:
 
 -   **Android**: `/data/user/0/com.example.app/code_cache/capgo_updater`
+    
 -   **iOS**: `Library/Application Support/capgo`
+    
 
 This caching system ensures smooth and reliable updates [\[9\]](https://capgo.app/docs/faq/).
 
@@ -101,7 +107,7 @@ The speed and efficiency of OTA (Over-the-Air) updates play a huge role in shapi
 
 ### File Size and Network Management
 
-Keeping file sizes optimized is crucial for smooth OTA updates. For instance, Capgo's updater runs update checks in a background thread during app startup, ensuring the user interface stays responsive [\[9\]](https://capgo.app/docs/faq/). It also supports JavaScript updates while locking native code (like Java/Kotlin or Objective-C/Swift) to maintain stability [\[9\]](https://capgo.app/docs/faq/).
+Keeping file sizes optimized is crucial for smooth OTA updates. For instance, Capgo's updater runs update checks in a background thread during app startup, ensuring the user interface stays responsive [\[9\]](https://capgo.app/docs/faq/).
 
 ### Update Speed Comparison
 
@@ -149,7 +155,7 @@ By working with iOS and Android security protocols, Capgo ensures seamless OTA u
 
 ### Capgo Key Functions
 
-Capgo focuses on solving update challenges with secure, efficient, and compliant delivery. Updates are protected with **end-to-end encryption**, and decryption happens only on user devices [\[1\]](https://capgo.app/). For iOS, it uses a custom Dart interpreter to align with Apple's interpreter-only update rule [\[9\]](https://capgo.app/docs/faq/). On Android, it supports API level 22 and above, in line with Capacitor's requirements [\[9\]](https://capgo.app/docs/faq/).
+Capgo focuses on solving update challenges with secure, efficient, and compliant delivery. Updates are protected with **end-to-end encryption**, and decryption happens only on user devices [\[1\]](https://capgo.app/docs/faq/).
 
 | Feature | Implementation | Platform Support |
 | --- | --- | --- |
@@ -164,8 +170,11 @@ Capgo focuses on solving update challenges with secure, efficient, and compliant
 Capgo's channel system gives developers precise control over updates for iOS and Android. This system allows for:
 
 -   Separate update channels for iOS and Android
--   Uploading [distinct bundles](https://capgo.app/fr/docs/webapp/bundles/) with optional cross-channel linking
+    
+-   Uploading [distinct bundles](https://capgo.app/docs/webapp/bundles/) with optional cross-channel linking
+    
 -   Automatic detection of native code changes [\[9\]](https://capgo.app/docs/faq/)
+    
 
 The platform's real-world impact is clear. For example, NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team shared:
 
@@ -175,8 +184,8 @@ Capgo can adjust any JavaScript code, including app and generated code, but it s
 
 ## Conclusion
 
-OTA updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) require different approaches for iOS and Android due to platform-specific rules. For iOS, there are stricter controls, such as the file path restriction that limits server paths to "/Library/NoCloud/ionic\_built\_snapshots" [\[2\]](/blog/how-live-updates-for-capacitor-work). Meanwhile, Android allows more freedom, with fewer limitations on virtual machines and interpreters accessing APIs [\[2\]](/blog/how-live-updates-for-capacitor-work). These differences highlight the importance of creating update strategies that align with each platform's framework.
+OTA updates for [Capacitor apps](https://capgo.app/blog/how-live-updates-for-capacitor-work/). These differences highlight the importance of creating update strategies that align with each platform's framework.
 
 Data from platforms like Capgo demonstrates how effective these strategies can be. Developers have successfully delivered 947.6 million updates across 1,400 production apps, proving the scalability of well-designed update systems [\[1\]](https://capgo.app/). However, success relies heavily on meeting each platform's requirements while maintaining strong security measures.
 
-For example, Apple mandates that interpreted code must not alter an app's core functionality or compromise its security [\[2\]](/blog/how-live-updates-for-capacitor-work). This rule is a clear reminder of the platform-specific guidelines developers must follow to implement OTA updates effectively.
+For example, Apple mandates that interpreted code must not alter an app's core functionality or compromise its security [\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/). This rule is a clear reminder of the platform-specific guidelines developers must follow to implement OTA updates effectively.

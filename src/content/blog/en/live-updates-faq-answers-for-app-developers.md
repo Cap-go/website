@@ -21,7 +21,7 @@ Live updates let developers quickly push updates and fixes to users’ apps with
 ### Key Benefits of Live Updates:
 
 -   **Faster Deployments**: Updates can go live in 1-2 hours instead of 3-5 days.
--   **[Automatic Updates](https://capgo.app/id/docs/plugin/cloud-mode/auto-update/)**: Users don’t need to manually update the app.
+-   **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**: Users don’t need to manually update the app.
 -   **Partial Updates**: Only the necessary changes are updated, not the whole app.
 -   **Emergency Fixes**: Critical bugs can be resolved immediately.
 
@@ -105,7 +105,7 @@ App.addListener('resume', async () => {
 
 Capgo adds an extra layer of security with encryption and flexible deployment options. According to Martin Donadieu, Capgo's founder, these features are tailored to meet real-world developer needs and app store requirements.
 
-To refine your [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/), use **Ionic Appflow** to monitor deployment success rates and user adoption. This setup ensures your app stays responsive and current.
+To refine your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/), use **Ionic Appflow** to monitor deployment success rates and user adoption. This setup ensures your app stays responsive and current.
 
 Once live updates are in place, the next step is integrating them into a CI/CD pipeline to simplify and automate your deployment workflow.
 
@@ -135,7 +135,7 @@ Several tools work seamlessly with Capacitor's live update workflows, helping de
 | **[Bitrise](https://bitrise.io/)** | Mobile-first CI/CD | Designed for mobile testing and code signing |
 | **[Jenkins](https://www.jenkins.io/)** | Self-hosted CI/CD | Offers custom pipelines and plugins |
 
-Capgo’s API integrates with these tools, providing [secure encryption](https://capgo.app/fr/docs/cli/migrations/encryption/) for automated deployments, ensuring both efficiency and safety.
+Capgo’s API integrates with these tools, providing [secure encryption](https://capgo.app/docs/cli/migrations/encryption/) for automated deployments, ensuring both efficiency and safety.
 
 ### Building Update Pipelines
 
@@ -170,7 +170,7 @@ To monitor deployment performance, tools like Capgo’s dashboard can track succ
 
 ### Security Requirements
 
-To keep updates secure, use **HTTPS**, **digital signatures**, and **[multi-factor authentication](https://capgo.app/it/docs/webapp/mfa/)**. These measures protect data during transmission, confirm the source of updates, and stop unauthorized deployments. Encrypt update packages both during transmission and while stored to guard against potential risks.
+To keep updates secure, use **HTTPS**, **digital signatures**, and **[multi-factor authentication](https://capgo.app/docs/webapp/mfa/)**. These measures protect data during transmission, confirm the source of updates, and stop unauthorized deployments. Encrypt update packages both during transmission and while stored to guard against potential risks.
 
 After setting up these protections, it's crucial to test updates thoroughly and have recovery plans ready in case something goes wrong.
 
@@ -203,7 +203,7 @@ When notifying users, aim for clarity and relevance. Use concise changelogs to e
 
 ## Live Update Tools Guide
 
-For [Capacitor developers](https://capgo.app/ko/blog/capacitor-comprehensive-guide/), picking the right live update tool can make a big difference in app performance and user experience.
+For [Capacitor developers](https://capgo.app/blog/capacitor-comprehensive-guide/), picking the right live update tool can make a big difference in app performance and user experience.
 
 ### Tool Comparison Chart
 
@@ -225,7 +225,7 @@ Here’s a quick breakdown of popular live update tools and how they stack up:
 
 Capgo handles over 150,000 live updates monthly, proving it’s built to scale for medium-sized enterprises. Here’s what sets it apart:
 
-**[Update Management](https://capgo.app/ko/docs/plugin/cloud-mode/manual-update/)**
+**[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**
 
 -   Real-time deployment with a 99.9% success rate
 -   Smooth background updates and instant rollback options

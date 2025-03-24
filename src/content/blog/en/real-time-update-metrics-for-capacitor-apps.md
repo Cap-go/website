@@ -28,7 +28,7 @@ Want to ensure your app updates are fast, reliable, and impactful? Here's what y
     -   **User Impact:** Post-update crashes and feature usage.
 -   **Top Tools for Tracking:**
     
-    -   **Capgo:** Secure [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) with CI/CD support.
+    -   **Capgo:** Secure [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) with CI/CD support.
     -   **[Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon):** Free real-time performance insights.
     -   **[New Relic](https://newrelic.com/):** Tracks errors, network requests, and more.
 -   **Quick Setup Steps:**
@@ -81,7 +81,7 @@ These metrics will give you a clear picture of how well your updates are perform
 Fine-tune your tracking settings to collect the most relevant data. Depending on the tool you choose, here’s what you can do:
 
 -   **New Relic**: Offers features like analytics, custom logging, crash reporting, network monitoring, and HTTP response body capture [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo**: Allows you to enable encryption for [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) and assign updates to specific users for better targeting [\[1\]](https://capgo.app/).
+-   **Capgo**: Allows you to enable encryption for [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) and assign updates to specific users for better targeting [\[1\]](https://capgo.app/).
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
@@ -95,7 +95,7 @@ Tracking how users adopt updates helps you understand the speed and effectivenes
 
 -   **Adoption Rate**: Calculate it as _(New Users of Update / Total Users) × 100_. This shows how many users are switching to the updated version.
 -   **Time to First Action**: Measure how long it takes for users to engage with new features after updating.
--   **Update Success Rate**: Use _(Successful Updates / Total Update Attempts) × 100_ to gauge how smoothly the [update process](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/) is running.
+-   **Update Success Rate**: Use _(Successful Updates / Total Update Attempts) × 100_ to gauge how smoothly the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) is running.
 
 Once you have these metrics, dive deeper into how updates influence user behavior.
 

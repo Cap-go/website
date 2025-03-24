@@ -87,7 +87,7 @@ Following these steps will help ensure your app updates remain within Apple's st
 
 ## Setting Up Compliant Live Updates
 
-To implement live updates in your [Capacitor app](https://capgo.app/de/plugins/ivs-player/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
+To implement live updates in your [Capacitor app](https://capgo.app/plugins/ivs-player/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
 
 ### Project Setup Steps
 
@@ -161,7 +161,7 @@ Thorough testing before release is critical for a smooth App Store submission an
 
 ### Pre-Release Testing
 
-Capgo's user assignment feature allows you to test updates with specific user groups before rolling them out to everyone. This controlled approach ensures your [encryption and data protection](https://capgo.app/es/docs/cli/migrations/encryption/) strategies are functioning effectively.
+Capgo's user assignment feature allows you to test updates with specific user groups before rolling them out to everyone. This controlled approach ensures your [encryption and data protection](https://capgo.app/docs/cli/migrations/encryption/) strategies are functioning effectively.
 
 Here's an example of how Capgo handled a rollout for over 5,000 users:
 
@@ -226,7 +226,7 @@ Tracking these metrics isn't just about performance - it also helps you identify
 
 Using tools built with Apple's requirements in mind can simplify this process. For example, Capgo offers features like end-to-end encryption and user assignment, making it easier to stay compliant while delivering updates efficiently [\[1\]](https://capgo.app/).
 
-Regularly monitor your app's compliance through your [update management platform](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/). Staying proactive can help you catch and resolve potential issues before they affect your App Store standing, keeping your live update strategy both effective and within the rules.
+Regularly monitor your app's compliance through your [update management platform](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Staying proactive can help you catch and resolve potential issues before they affect your App Store standing, keeping your live update strategy both effective and within the rules.
 
 ## Conclusion
 

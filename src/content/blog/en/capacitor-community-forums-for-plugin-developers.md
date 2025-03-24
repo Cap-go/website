@@ -81,7 +81,7 @@ Get the most out of forums by following these best practices.
 Crafting clear and detailed questions helps you get faster, more helpful responses. Here’s how:
 
 -   **Start with a descriptive title**: Summarize your issue in a few words.
--   **Provide context**: Include your [Capacitor version](https://capgo.app/de/plugins/ivs-player/), platform (iOS/Android), and plugin versions.
+-   **Provide context**: Include your [Capacitor version](https://capgo.app/plugins/ivs-player/), platform (iOS/Android), and plugin versions.
 -   **Describe your efforts**: Share what you've already tried and any error messages you’ve encountered.
 -   **Reproduce the problem**: Offer minimal steps or code snippets to help others understand your issue.
 

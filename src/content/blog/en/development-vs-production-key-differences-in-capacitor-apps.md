@@ -29,7 +29,7 @@ next_blog: ''
 
 | **Aspect** | **Development** | **Production** |
 | --- | --- | --- |
-| **Purpose** | [Debugging and testing](https://capgo.app/de/docs/plugin/debugging/) | Stability and performance |
+| **Purpose** | [Debugging and testing](https://capgo.app/docs/plugin/debugging/) | Stability and performance |
 | **Code Optimization** | Minimal | Fully optimized |
 | **Security** | Relaxed | Tightened |
 | **Updates** | Immediate (local/hot reload) | Controlled rollouts |
@@ -47,7 +47,7 @@ Setting up the right environment is essential to ensure your app performs well a
 
 ### Setting Up Development Mode
 
-Development mode focuses on making [testing and debugging](https://capgo.app/it/docs/plugin/debugging/) as smooth and fast as possible. This setup allows developers to iterate quickly and fix issues efficiently.
+Development mode focuses on making [testing and debugging](https://capgo.app/docs/plugin/debugging/) as smooth and fast as possible. This setup allows developers to iterate quickly and fix issues efficiently.
 
 | **Development Feature** | **Purpose** | **Implementation** |
 | --- | --- | --- |
@@ -69,7 +69,7 @@ Production mode focuses on delivering a secure, high-performance app that provid
 | Code Minification | Reduce file size | Optimize during build time |
 | Security Measures | Protect app data | Enforce end-to-end encryption |
 | Build Optimization | Boost performance | Configure production build flags |
-| [Update Management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) | Streamline deployments | Set up CI/CD integration |
+| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Streamline deployments | Set up CI/CD integration |
 
 For production, automation tools like CI/CD make deployments more efficient. Platforms such as [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [GitLab](https://about.gitlab.com/solutions/devops-platform/), and [GitHub](https://github.com/) work seamlessly with Capgo to manage updates [\[1\]](https://capgo.app/).
 
@@ -83,7 +83,7 @@ Performance tuning differs significantly between development and production envi
 
 ### Development Mode Performance
 
-Development mode focuses on enabling quick iterations and [effective debugging](https://capgo.app/ko/docs/plugin/debugging/) rather than peak performance. It offers developers the tools needed to identify and fix issues efficiently.
+Development mode focuses on enabling quick iterations and [effective debugging](https://capgo.app/docs/plugin/debugging/) rather than peak performance. It offers developers the tools needed to identify and fix issues efficiently.
 
 | **Performance Aspect** | **Development Mode Approach** | **Impact on Development** |
 | --- | --- | --- |
@@ -129,7 +129,7 @@ During development, the focus is on quick iterations and effective debugging whi
 | --- | --- | --- |
 | Authentication | Simplified authentication methods | Speeds up testing cycles |
 | [API Keys](https://capgo.app/docs/webapp/api-keys/) | Use environment-specific keys | Keeps testing isolated from production |
-| [Data Storage](https://capgo.app/de/plugins/capacitor-data-storage-sqlite/) | Mock data and test databases | Prevents exposure of real data |
+| [Data Storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/) | Mock data and test databases | Prevents exposure of real data |
 | Error Logging | Detailed logs | Helps identify and fix security issues |
 
 On the other hand, production environments require far stricter security measures to protect sensitive data.
@@ -142,7 +142,7 @@ In production, the priority shifts to implementing advanced security protocols t
 | --- | --- | --- |
 | Update Security | Use end-to-end encryption | Ensures updates are accessible only to authorized users |
 | Access Control | Granular permission settings | Restricts access based on team roles |
-| Deployment Automation | Integrated CI/CD pipelines | Enables secure, [automated updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) |
+| Deployment Automation | Integrated CI/CD pipelines | Enables secure, [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
 | Compliance | Meet Apple and Google standards | Ensures app store approvals |
 
 Production setups also involve organization-specific policies, managed through unified access controls. Teams can create multiple organizations with tailored user permissions and integrate with CI/CD tools like GitHub, GitLab, and Azure DevOps for seamless, secure deployments.
@@ -151,7 +151,7 @@ These measures ensure the app is ready for secure deployment and continuous upda
 
 ## App Deployment and Update Methods
 
-Deploying a [Capacitor app](https://capgo.app/de/plugins/ivs-player/) involves different approaches depending on whether you're in development or production. Development focuses on quick testing and debugging, while production demands thorough quality checks and compliance with platform standards.
+Deploying a [Capacitor app](https://capgo.app/plugins/ivs-player/) involves different approaches depending on whether you're in development or production. Development focuses on quick testing and debugging, while production demands thorough quality checks and compliance with platform standards.
 
 ### Testing and Development Deployment
 

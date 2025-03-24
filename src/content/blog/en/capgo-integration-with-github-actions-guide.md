@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-[Capgo](https://capgo.app/) and [GitHub Actions](https://docs.github.com/actions) together simplify deploying updates for [Capacitor](https://capacitorjs.com/) apps. Here's why this integration is worth your attention:
+[Capgo](https://capgo.app/docs.github.com/actions) together simplify deploying updates for [Capacitor](https://capacitorjs.com/) apps. Here's why this integration is worth your attention:
 
 -   **Save Money**: Cut CI/CD costs by up to $26,100 over 5 years compared to [AppFlow](https://ionic.io/appflow/).
 -   **Fast Updates**: Push updates instantly with 95% of users receiving them in 24 hours.
@@ -26,8 +26,8 @@ next_blog: ''
 ### Quick Overview
 
 1.  **Requirements**: GitHub account, [Capgo account](https://capgo.app/disclaimer/) (from $12/month), Capacitor project, [Node.js](https://nodejs.org/en).
-2.  **Setup**: Install [Capgo CLI](https://capgo.app/ko/docs/cli/commands) with `npx @capgo/cli init`, configure GitHub Actions with a YAML workflow.
-3.  **Deployment**: Use commands like `npx @capgo/cli deploy` to [automate updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/).
+2.  **Setup**: Install [Capgo CLI](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure GitHub Actions with a YAML workflow.
+3.  **Deployment**: Use commands like `npx @capgo/cli deploy` to [automate updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
 4.  **Testing**: Deploy to test channels (e.g., beta, staging) before production.
 
 **Example Workflow (YAML)**:
@@ -65,7 +65,7 @@ This integration ensures fast, secure, and cost-effective app updates, making it
 
 ## Setup Requirements
 
-[Integrating Capgo](https://capgo.app/id/docs/webapp/) with GitHub Actions involves setting up the necessary tools and configurations.
+[Integrating Capgo](https://capgo.app/docs/webapp/) with GitHub Actions involves setting up the necessary tools and configurations.
 
 ### Required Tools and Accounts
 
@@ -108,7 +108,7 @@ These steps will ensure your project is ready for the GitHub Actions workflow, w
 
 ## GitHub Actions Workflow Setup
 
-Automate your [Capgo deployments](https://capgo.app/ko/docs/cli/commands/) using GitHub Actions to streamline your CI/CD process.
+Automate your [Capgo deployments](https://capgo.app/docs/cli/commands/) using GitHub Actions to streamline your CI/CD process.
 
 ### Creating the Workflow File
 
@@ -202,7 +202,7 @@ Here are the key commands to handle building, versioning, and deploying your upd
 
 | Command | Purpose | Usage Example |
 | --- | --- | --- |
-| `build` | Generates a [production-ready bundle](https://capgo.app/de/docs/webapp/bundles/) | `npx @capgo/cli build` |
+| `build` | Generates a [production-ready bundle](https://capgo.app/docs/webapp/bundles/) | `npx @capgo/cli build` |
 | `deploy` | Pushes updates to Capgo | `npx @capgo/cli deploy` |
 | `version` | Sets the version for the update | `npx @capgo/cli version 1.2.0` |
 
@@ -290,7 +290,7 @@ These features pave the way for more tailored solutions and improved performance
 To get the most out of your Capgo and GitHub Actions integration, explore these advanced tactics:
 
 -   **Custom API Workflows**: Use Capgo's public API to design deployment workflows that fit your team's specific needs. This can enable white-label experiences and seamless integration with your current tools [\[1\]](https://capgo.app/).
--   **[Channel-Based Releases](https://capgo.app/it/docs/webapp/channels/)**: Optimize your deployment process by using Capgo's channel features for staged and controlled updates.
+-   **[Channel-Based Releases](https://capgo.app/docs/webapp/channels/)**: Optimize your deployment process by using Capgo's channel features for staged and controlled updates.
 -   **Optimized Performance**: Utilize Capgo's partial updates to reduce bandwidth usage and speed up updates. With 23.5 million updates delivered across 750 production apps [\[1\]](https://capgo.app/), the system has proven its capability to handle large-scale demands.
 
 For even better results, consider using Capgo's self-hosting options or custom API setups. Check earlier sections for detailed setup and testing instructions to fully implement these strategies.

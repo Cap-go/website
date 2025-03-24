@@ -27,7 +27,7 @@ next_blog: ''
 | --- | --- | --- |
 | **Update Deployment** | Instant over-the-air delivery | Requires app store submission |
 | **Testing Scope** | Focused on specific changes | Full-system testing |
-| **User Experience** | [Automatic background updates](https://capgo.app/ko/docs/plugin/self-hosted/auto-update/) | Users manually update apps |
+| **User Experience** | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) | Users manually update apps |
 | **Risk Management** | Instant rollback capabilities | Requires new submission for fixes |
 
 Capacitor OTA updates, supported by tools like [Capgo](https://capgo.app/), provide flexibility and speed, while traditional methods ensure comprehensive quality. Both have their place depending on your app's needs.

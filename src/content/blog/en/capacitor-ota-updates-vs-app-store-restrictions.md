@@ -75,7 +75,7 @@ A plugin handles the detection and installation of updates. When developers depl
 
 ### Benefits of OTA Updates
 
-OTA updates bring more than just speed - they give developers better control over their [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/). Here's a quick breakdown:
+OTA updates bring more than just speed - they give developers better control over their [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Here's a quick breakdown:
 
 | Feature | Benefit | Key Metric |
 | --- | --- | --- |
@@ -90,7 +90,7 @@ OTA updates bring more than just speed - they give developers better control ove
 
 Capgo enhances the OTA update experience with extra tools and features. Security is a top priority, with end-to-end encryption ensuring only authorized users can access updates [\[1\]](https://capgo.app/). Key features include:
 
--   [Channel-specific updates](https://capgo.app/ko/docs/webapp/channels/) for precise targeting
+-   [Channel-specific updates](https://capgo.app/docs/webapp/channels/) for precise targeting
 -   Integration with popular CI/CD platforms
 -   Real-time analytics for tracking performance
 -   One-click rollback for quick fixes
@@ -111,7 +111,7 @@ Here's a breakdown of the key differences between app store updates and OTA upda
 | **Update Success Rate** | Depends on user action | 95% within 24 hours |
 | **Distribution Control** | Limited targeting options | Channel-based targeting |
 | **Rollback Capability** | Requires new submission | Instant rollback |
-| **User Interaction** | [Manual update approval](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/) | [Automatic background updates](https://capgo.app/ko/docs/plugin/self-hosted/auto-update/) |
+| **User Interaction** | [Manual update approval](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
 | **Analytics** | Basic install metrics | Detailed update tracking |
 | **Bandwidth Usage** | Full app download | Only changed content |
 | **Development Workflow** | Rigid release cycles | CI/CD integration enabled |

@@ -41,7 +41,7 @@ To stay compliant with App Store and [GDPR](https://en.wikipedia.org/wiki/Genera
 
 ## Security Basics for OTA Updates
 
-In 2022, researchers discovered that 78% of devices with OTA capabilities had vulnerabilities in their update processes [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update). To address this, a strong security framework is crucial, focusing on three key areas: **bundle signing**, **secure data transfer**, and **file verification**. These elements are the backbone of the [encryption methods](https://capgo.app/ko/docs/cli/migrations/encryption/) discussed later.
+In 2022, researchers discovered that 78% of devices with OTA capabilities had vulnerabilities in their update processes [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update). To address this, a strong security framework is crucial, focusing on three key areas: **bundle signing**, **secure data transfer**, and **file verification**. These elements are the backbone of the [encryption methods](https://capgo.app/docs/cli/migrations/encryption/) discussed later.
 
 ### Update Bundle Signing
 
@@ -116,7 +116,7 @@ Privacy regulations further complicate OTA update compliance. Laws like GDPR and
 | Data Collection | Minimal necessary data | Full disclosure required |
 | User Rights | Explicit consent needed | Opt-out option mandatory |
 | Security Measures | End-to-end encryption | Reasonable security |
-| Documentation | [Update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) documentation | Update process documentation |
+| Documentation | [Update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) documentation | Update process documentation |
 
 > "The key to maintaining compliance is implementing privacy by design principles from the outset", explains a European Data Protection Board guidance document. "This includes incorporating data protection considerations into every aspect of the update process." [\[8\]](https://essaypro.com/blog/article-review)
 

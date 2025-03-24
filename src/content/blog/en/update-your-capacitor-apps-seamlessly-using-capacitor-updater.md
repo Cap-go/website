@@ -46,7 +46,7 @@ If a module changes your android or iOS directories, you can’t use OTA to upda
 That’s because these directories’ contents are used to compile Native binaries, which OTA can’t update.
 Even native app cannot update this part.
 
-But you can set up your CI/CD to handle this part, I made a tutorial on how to do it [here for IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and [here for Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+But you can set up your CI/CD to handle this part, I made a tutorial on how to do it [here for IOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
 
 ## Auto Capgo Configuration
 

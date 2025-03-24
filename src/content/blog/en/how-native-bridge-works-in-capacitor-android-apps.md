@@ -99,7 +99,7 @@ Start by setting up both the native Android project and the web application laye
 
 | Setup Component | Required Configuration |
 | --- | --- |
-| **[Capacitor Version](https://capgo.app/de/plugins/ivs-player/)** | Use version 6.x or 7.x |
+| **[Capacitor Version](https://capgo.app/plugins/ivs-player/)** | Use version 6.x or 7.x |
 | **[Android Studio](https://developer.android.com/studio)** | Install the latest stable version |
 | **Gradle Dependencies** | Include the `capacitor-android` library |
 | **Project Structure** | Properly configure `AndroidManifest.xml` |
@@ -175,7 +175,7 @@ To maintain peak performance, adopt a thorough testing strategy that includes:
 -   **Error Monitoring**: Keep tabs on and analyze any bridge failures.
 -   **User Experience Metrics**: Ensure the app remains responsive during bridge operations.
 
-For more advanced optimization, try using a [channel system](https://capgo.app/ko/docs/plugin/cloud-mode/channel-system/) for update distribution. This method allows you to test updates with smaller user groups first, making it easier to monitor performance before rolling out changes to everyone.
+For more advanced optimization, try using a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) for update distribution. This method allows you to test updates with smaller user groups first, making it easier to monitor performance before rolling out changes to everyone.
 
 These strategies not only validate the bridge's performance but also help fine-tune it to meet the demands of real-world applications.
 
@@ -206,7 +206,7 @@ Keeping plugins up-to-date is critical for ensuring compatibility with the lates
 
 -   **Version Control**: Keep track of plugin versions across different app releases.
 -   **Compatibility Testing**: Test plugins with the target Android API levels to ensure proper functionality.
--   **Controlled Rollouts**: Use [channel-based update systems](https://capgo.app/es/docs/plugin/cloud-mode/channel-system/) to distribute updates to specific user groups before releasing them widely.
+-   **Controlled Rollouts**: Use [channel-based update systems](https://capgo.app/docs/plugin/cloud-mode/channel-system/) to distribute updates to specific user groups before releasing them widely.
 
 A channel-based system allows you to test updates in smaller groups, minimizing the risk of widespread issues.
 

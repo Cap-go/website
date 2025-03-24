@@ -70,7 +70,7 @@ Direct over-the-air (OTA) updates let developers bypass app store review delays,
 
 ### What Are Direct OTA Updates?
 
-With direct OTA updates, developers can push changes to JavaScript, HTML, and CSS without needing to submit a new app version to the app stores. Using Capacitor, these updates can be sent straight to users' devices, simplifying the entire [update process](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/).
+With direct OTA updates, developers can push changes to JavaScript, HTML, and CSS without needing to submit a new app version to the app stores. Using Capacitor, these updates can be sent straight to users' devices, simplifying the entire [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ### Why Use Direct OTA Updates?
 
@@ -108,7 +108,7 @@ Deciding between App Store and OTA updates directly impacts how you deploy your 
 
 For enterprise or internal apps, direct OTA updates bring clear benefits. They allow for quicker iterations and adjustments without waiting for app store reviews.
 
-When working on cross-platform apps, your [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update) becomes even more important. Enterprise developers often turn to direct OTA updates for situations like:
+When working on cross-platform apps, your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) becomes even more important. Enterprise developers often turn to direct OTA updates for situations like:
 
 -   Rapid fixes without app store delays
     

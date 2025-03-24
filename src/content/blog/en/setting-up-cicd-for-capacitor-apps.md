@@ -111,7 +111,7 @@ Properly managing keys and credentials can significantly lower the chances of ap
 
 ## Creating Your CI/CD Pipeline
 
-Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/de/plugins/ivs-player/). This pipeline should efficiently manage both web assets and native platform builds.
+Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/plugins/ivs-player/). This pipeline should efficiently manage both web assets and native platform builds.
 
 ### Installing and Updating Dependencies
 
@@ -193,7 +193,7 @@ Integrating Capgo into your workflow enhances your CI/CD process by enabling pos
 
 ### Capgo Pipeline Configuration
 
-First, install the [Capgo CLI](https://capgo.app/ko/docs/cli/commands) in your pipeline environment:
+First, install the [Capgo CLI](https://capgo.app/docs/cli/commands) in your pipeline environment:
 
 ```yaml
 steps:
@@ -204,7 +204,7 @@ steps:
       CAPGO_KEY: ${{ secrets.CAPGO_API_KEY }}
 ```
 
-This addition extends your CI/CD lifecycle by incorporating [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) into your automated build and deployment process.
+This addition extends your CI/CD lifecycle by incorporating [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) into your automated build and deployment process.
 
 Next, include the upload command after your build steps:
 
@@ -215,7 +215,7 @@ Next, include the upload command after your build steps:
     capgo deploy v${VERSION} --channel production
 ```
 
-For [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/), configure validation settings like this:
+For [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), configure validation settings like this:
 
 ```json
 {

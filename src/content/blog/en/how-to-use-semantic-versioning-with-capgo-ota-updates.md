@@ -29,13 +29,13 @@ next_blog: ''
     -   Smarter version management.
     -   Avoid dependency conflicts.
     -   Organized release planning.
--   **[Capgo Setup](https://capgo.app/fr/docs/cli/commands/) Steps:**
+-   **[Capgo Setup](https://capgo.app/docs/cli/commands/) Steps:**
     
     1.  Install Capgo's updater plugin.
     2.  Configure your app's version in `capacitor.config.json` and other files.
     3.  Initialize with your API key.
-    4.  Use [Capgo CLI](https://capgo.app/ko/docs/cli/commands) to bundle and upload updates.
--   **[Manage Versions and Channels](https://capgo.app/ko/docs/webapp/channels/):**
+    4.  Use [Capgo CLI](https://capgo.app/docs/cli/commands) to bundle and upload updates.
+-   **[Manage Versions and Channels](https://capgo.app/docs/webapp/channels/):**
     
     -   Use separate channels (e.g., "beta" for testing, "production" for stable releases).
     -   Control update policies (auto-update patches, manual approval for major changes).
@@ -62,7 +62,7 @@ Here's how to set up Capgo for managing OTA updates and version control with eas
 
 ### Initial Setup Steps
 
-Start by installing the [Capgo updater plugin](https://capgo.app/it/docs/plugin/self-hosted/manual-update/):
+Start by installing the [Capgo updater plugin](https://capgo.app/docs/plugin/self-hosted/manual-update/):
 
 ```bash
 npm install @capgo/capacitor-updater  
@@ -102,7 +102,7 @@ npx @capgo/cli@latest init YOUR_API_KEY
 
 ### Version Control Integration
 
-Capgo works well with CI/CD platforms, making [automated updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) simple. Supported platforms include:
+Capgo works well with CI/CD platforms, making [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) simple. Supported platforms include:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)
@@ -148,7 +148,7 @@ Capgo uses Semantic Versioning (SemVer) to manage app versions, formatted as **M
 -   **Minor Version (1.X.0)**: Increase the MINOR number for new features that remain compatible.
 -   **Patch Version (1.0.X)**: Increase the PATCH number for bug fixes that don't affect compatibility.
 
-| Version Type | When to Increment | [Auto-Update Behavior](https://capgo.app/id/docs/plugin/cloud-mode/auto-update/) |
+| Version Type | When to Increment | [Auto-Update Behavior](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
 | --- | --- | --- |
 | Major (X.0.0) | For breaking API changes | Requires manual approval |
 | Minor (1.X.0) | For new features | Configurable in Capgo |
@@ -160,7 +160,7 @@ By sticking to SemVer rules, you can simplify version management and ensure smoo
 
 Capgo allows you to manage deployments effectively by setting up distinct channels for different stages of your workflow.
 
--   **[Channel-Based Version Management](https://capgo.app/it/docs/webapp/channels/)**: Organize your deployment process by creating separate channels for testing and production. For example:
+-   **[Channel-Based Version Management](https://capgo.app/docs/webapp/channels/)**: Organize your deployment process by creating separate channels for testing and production. For example:
     
     -   Use a "beta" channel (e.g., 1.2.0-beta) for testing new features.
     -   Keep a "production" channel (e.g., 1.2.0) for stable releases.
@@ -200,7 +200,7 @@ Start by updating the version in **package.json** and **capacitor.config.json**.
 
 Thoroughly test your build and confirm the app communicates with the server using `notifyAppReady`.
 
-Next, decide on your [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update). You can choose from:
+Next, decide on your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). You can choose from:
 
 -   **Auto-Update**: Automatically enforce minimum version requirements.
 -   **Manual Control**: Specify exact version requirements for updates.
@@ -299,7 +299,7 @@ Even with precautions, updates can fail. If that happens, follow these recovery 
 2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/CLI).
 3.  Verify updates during app startup to ensure they work as expected.
 
-Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). Additionally, failed network requests are automatically retried during the next app launch [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.
+Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.
 
 ## Summary
 
@@ -311,6 +311,6 @@ Here’s what developers are saying:
 
 The MAJOR.MINOR.PATCH versioning system makes it easy to communicate breaking changes, new features, and bug fixes [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). This is especially helpful for teams managing several releases each week through Capgo's platform.
 
-Capgo’s [encrypted solution](https://capgo.app/fr/docs/cli/migrations/encryption/), integrated with CI/CD tools, is also budget-friendly - cutting costs by up to $26,100 over five years [\[1\]](https://capgo.app/). Its customizable channels ensure updates reach the right users at the right time.
+Capgo’s [encrypted solution](https://capgo.app/docs/cli/migrations/encryption/), integrated with CI/CD tools, is also budget-friendly - cutting costs by up to $26,100 over five years [\[1\]](https://capgo.app/). Its customizable channels ensure updates reach the right users at the right time.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)

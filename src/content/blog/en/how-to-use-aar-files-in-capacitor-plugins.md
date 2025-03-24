@@ -28,7 +28,7 @@ next_blog: ''
 ### Quick Steps:
 
 1.  **Set up your environment:** Install required tools and configure Android Studio.
-2.  **Organize your project:** Create a clear structure for your [Capacitor plugin](https://capgo.app/ko/blog/capacitor-comprehensive-guide/).
+2.  **Organize your project:** Create a clear structure for your [Capacitor plugin](https://capgo.app/blog/capacitor-comprehensive-guide/).
 3.  **Add AAR files:** Place them in `android/libs` and update Gradle dependencies.
 4.  **Write plugin code:** Link AAR functionality to JavaScript with [Capacitor’s API](https://capgo.app/blog/capacitor-comprehensive-guide/).
 5.  **Test thoroughly:** Use Android Studio’s debugger to ensure smooth integration.
@@ -417,7 +417,7 @@ public void yourMethod(PluginCall call) {
 
 Use the Debug panel in Android Studio to monitor key areas:
 
-| [Debugging Area](https://capgo.app/ko/docs/plugin/debugging/) | What to Check | Common Issues |
+| [Debugging Area](https://capgo.app/docs/plugin/debugging/) | What to Check | Common Issues |
 | --- | --- | --- |
 | Logcat | AAR initialization messages | Missing permissions or incorrect context |
 | Variables | Data type conversions | Null values or type mismatches |

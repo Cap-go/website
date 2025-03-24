@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjs.com/) plugins connect web technologies with native device features, enabling [cross-platform app development](https://capgo.app/ko/blog/cross-platform-mobile-app-development-guide-2024/). This guide helps you:
+[Capacitor](https://capacitorjs.com/) plugins connect web technologies with native device features, enabling [cross-platform app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/). This guide helps you:
 
 -   **Set Up Your Environment**: Tools like [Node.js](https://nodejs.org/en), [Xcode](https://developer.apple.com/xcode/), and [Android Studio](https://developer.android.com/studio) are essential.
 -   **Follow Code Standards**: Use [TypeScript](https://www.typescriptlang.org/), [Swift](https://developer.apple.com/swift/), and [Kotlin](https://kotlinlang.org/) with consistent naming conventions and error handling.
@@ -216,10 +216,10 @@ For plugins with complex features, simulate real-world user scenarios. For insta
 
 Capgo’s open-source tools make it easy to deploy and test updates quickly. Here’s how to use it:
 
-1.  Set up [update channels](https://capgo.app/ja/docs/webapp/channels/) like dev, staging, and production.
+1.  Set up [update channels](https://capgo.app/docs/webapp/channels/) like dev, staging, and production.
 2.  Automate deployments with CI/CD tools.
 3.  Push updates instantly.
-4.  Monitor performance and issues via the [Capgo dashboard](https://capgo.app/id/docs/webapp/).
+4.  Monitor performance and issues via the [Capgo dashboard](https://capgo.app/docs/webapp/).
 
 For phased rollouts, Capgo allows you to limit updates to a small percentage of users. For instance, you can roll out a new version to 25% of users every 24 hours:
 

@@ -243,7 +243,7 @@ Here’s an example configuration:
 **Important configurations to focus on:**
 
 -   **Security**: Ensure live updates are encrypted end-to-end.
--   **[Update Management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/)**: Set up controlled rollouts with specific [update channels](https://capgo.app/ja/docs/webapp/channels/).
+-   **[Update Management](https://capgo.app/docs/webapp/channels/).
 -   **Performance**: Fine-tune WebView settings. For example:
 
 ```json
@@ -318,7 +318,7 @@ Resolving these issues will prepare your environment for advanced features and s
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
-Once your Android environment is ready, it's time to integrate Capgo. This tool simplifies your [update process](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/) by allowing you to push updates to your Capacitor app instantly - no Play Store review needed.
+Once your Android environment is ready, it's time to integrate Capgo. This tool simplifies your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) by allowing you to push updates to your Capacitor app instantly - no Play Store review needed.
 
 ### Key Capgo Features
 
@@ -373,7 +373,7 @@ Here’s a quick breakdown of the main components:
 
 -   **Android Studio**: Use the latest stable version of this primary IDE.
 -   **Android SDK**: Ensure you have the development kit with the right API level for your app.
--   **[Capacitor Platform](https://capgo.app/ko/blog/capacitor-comprehensive-guide/)**: Check for version compatibility during integration.
+-   **[Capacitor Platform](https://capgo.app/blog/capacitor-comprehensive-guide/)**: Check for version compatibility during integration.
 -   **Optional Live Update Tools**: Tools like Capgo allow instant updates, but their integration is optional.
 
 A well-configured setup ensures efficient updates, with statistics showing 95% of active users receiving updates within 24 hours and an 82% success rate globally [\[1\]](https://capgo.app/). To confirm everything is ready:

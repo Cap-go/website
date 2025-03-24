@@ -49,7 +49,7 @@ Once you've collected the data, the next step is to group users into segments us
 
 Developers can organize users into categories like beta testers, power users, new users, or enterprise accounts. This segmentation helps in testing updates, rolling them out gradually, or tailoring features for specific groups.
 
-| **Segment Type** | **Description** | **[Update Strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update)** |
+| **Segment Type** | **Description** | **[Update Strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)** |
 | --- | --- | --- |
 | **Beta Testers** | Early adopters testing features | Get updates first |
 | **Power Users** | Highly engaged, frequent users | Prioritize performance improvements |
@@ -113,7 +113,7 @@ Send notifications that matter, when they matter. By tailoring both the message 
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
-To support these personalized interactions, effective [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) is key. Capgo’s channel system provides precise control over updates, allowing for beta testing, phased rollouts, and feature releases targeted to specific user segments. With real-time analytics and detailed permission settings, Capgo ensures compliance with app store rules - especially important for enterprise apps.
+To support these personalized interactions, effective [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) is key. Capgo’s channel system provides precise control over updates, allowing for beta testing, phased rollouts, and feature releases targeted to specific user segments. With real-time analytics and detailed permission settings, Capgo ensures compliance with app store rules - especially important for enterprise apps.
 
 ## Tracking Results and Success
 
@@ -173,7 +173,7 @@ Here’s a quick implementation breakdown:
 | Phase | Action Items | Expected Outcome |
 | --- | --- | --- |
 | Initial Setup | Install the Capgo plugin and configure it | A strong update foundation |
-| Segmentation | Define user channels and target groups | [Organized update delivery](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) |
+| Segmentation | Define user channels and target groups | [Organized update delivery](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
 | Deployment | Use the CLI to roll out updates and monitor | Fast and controlled rollout |
 | Optimization | Analyze performance and adjust targeting | Improved efficiency |
 

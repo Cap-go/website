@@ -20,7 +20,7 @@ next_blog: ''
 
 -   **Core Tools:** Use SHA-256 digital signatures, runtime checks, and encryption (AES-256) to protect code.
 -   **Platform-Specific Features:** For Android, integrate the [Play Integrity API](https://developer.android.com/google/play/integrity) for app verification and device attestation. For iOS, follow App Store Guideline 3.1.2 for OTA updates.
--   **OTA Update Security:** Implement end-to-end encryption, checksum validation, and compliance tracking to [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/).
+-   **OTA Update Security:** Implement end-to-end encryption, checksum validation, and compliance tracking to [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
 -   **Recommended Tools:** Tools like [Capgo](https://capgo.app/) simplify secure OTA updates with encryption, version control, and compliance monitoring.
 
 ### Quick Comparison of Key Tools and Features

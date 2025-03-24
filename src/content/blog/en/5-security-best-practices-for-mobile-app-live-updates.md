@@ -18,7 +18,7 @@ next_blog: ''
 
 Keeping your mobile app secure during live updates is critical to protecting user data and maintaining trust. Here's a quick summary of the top practices to safeguard your over-the-air (OTA) updates:
 
-1.  **Secure Delivery**: Use encryption (e.g., TLS), digital signatures, and [multi-factor authentication](https://capgo.app/it/docs/webapp/mfa/) to protect updates during transmission.
+1.  **Secure Delivery**: Use encryption (e.g., TLS), digital signatures, and [multi-factor authentication](https://capgo.app/docs/webapp/mfa/) to protect updates during transmission.
     
 2.  **Data Integrity**: Validate updates with checksums, package signature verification, and version control to prevent tampering.
     
@@ -196,4 +196,4 @@ These efforts also bring measurable improvements across several business areas:
 | Risk Management | Reduces security vulnerabilities |
 | Operating Costs | Cuts down expenses tied to security incidents |
 
-For those looking to implement these strategies, tools like [ProGuard](https://www.guardsquare.com/proguard) for Android and secure compilation methods for iOS offer practical solutions to enhance update security. Using HTTPS protocols and [encryption during update delivery](https://capgo.app/ko/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) ensures both the transmission process and user data remain safe.
+For those looking to implement these strategies, tools like [ProGuard](https://www.guardsquare.com/proguard) for Android and secure compilation methods for iOS offer practical solutions to enhance update security. Using HTTPS protocols and [encryption during update delivery](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) ensures both the transmission process and user data remain safe.

@@ -165,7 +165,7 @@ The best tool depends on your team's needs and how you plan to approach OTA upda
 **For smaller teams**, focus on tools that combine efficiency and integration:
 
 -   **Capgo**: Offers OTA updates paired with error tracking in one solution.
--   Look for options that support cloud or [self-hosted deployment](https://capgo.app/ko/blog/self-hosted-capgo/) with end-to-end encryption.
+-   Look for options that support cloud or [self-hosted deployment](https://capgo.app/blog/self-hosted-capgo/) with end-to-end encryption.
 -   Prioritize tools that enable quick setup and automated workflows.
 
 When deciding, weigh factors like the number of active users, budget, team size and expertise, security requirements, and how well the tool integrates with your existing systems.

@@ -102,7 +102,7 @@ Plan your rollouts for periods of low user activity to limit disruptions. Take i
 
 ### Update Management Tools
 
-Using [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) tools, such as Capgo, can help speed up adoption rates - **95% of users update within 24 hours**, with an **82% success rate** [\[1\]](https://capgo.app/). Look for tools with features like these:
+Using [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) tools, such as Capgo, can help speed up adoption rates - **95% of users update within 24 hours**, with an **82% success rate** [\[1\]](https://capgo.app/). Look for tools with features like these:
 
 | Feature | Purpose | Impact |
 | --- | --- | --- |
@@ -113,7 +113,7 @@ Using [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-upd
 
 When selecting a tool, focus on those offering automated monitoring. Tools with an average response time of **434ms globally** [\[1\]](https://capgo.app/) allow for quick action when issues arise.
 
-For even more control, consider using a [channel system](https://capgo.app/ko/docs/plugin/cloud-mode/channel-system/) for update distribution. This lets you target specific user groups with different versions, making beta testing and staged rollouts smoother. Additionally, the ability to push live code changes while staying compliant with app store rules can simplify and speed up your [update process](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/).
+For even more control, consider using a [channel system](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ## Rules and Restrictions
 

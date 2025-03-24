@@ -38,7 +38,7 @@ Automating OTA updates ensures faster delivery, fewer errors, and better app sta
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
-Setting up Capacitor for [automated over-the-air](https://capgo.app/ja/blog/open-source-licecing/) (OTA) updates involves three key steps: configuring the setup, implementing security measures, and [integrating an update system](https://capgo.app/de/docs/plugin/cloud-mode/hybrid-update). This process ensures compatibility with CI/CD automation while keeping your app secure.
+Setting up Capacitor for [automated over-the-air](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). This process ensures compatibility with CI/CD automation while keeping your app secure.
 
 ### Configuring OTA Settings in capacitor.config.json
 
@@ -133,7 +133,7 @@ jobs:
           https://api.capgo.app/deploy
 ```
 
-Make sure to store your API keys and secrets securely in your CI/CD platform's [encrypted storage](https://capgo.app/fr/docs/cli/migrations/encryption/) to protect sensitive data.
+Make sure to store your API keys and secrets securely in your CI/CD platform's [encrypted storage](https://capgo.app/docs/cli/migrations/encryption/) to protect sensitive data.
 
 ### Capgo CLI Update Commands
 
@@ -142,7 +142,7 @@ The Capgo CLI offers key commands to streamline update management within your pi
 | Stage | Command | Purpose |
 | --- | --- | --- |
 | Build | `capgo deploy --channel production` | Upload new build artifacts |
-| Testing | `capgo promote build-123 --group beta` | [Release updates to a test group](https://capgo.app/ko/blog/how-to-send-specific-version-to-users/) |
+| Testing | `capgo promote build-123 --group beta` | [Release updates to a test group](https://capgo.app/blog/how-to-send-specific-version-to-users/) |
 | Validation | `capgo metrics get --last-24h` | Check update success metrics |
 | Release | `capgo promote build-123 --channel stable` | Deploy the update to all users |
 
@@ -172,7 +172,7 @@ Staged updates let you control how updates are rolled out, ensuring a smooth exp
 
 ### Metric-Based Update Triggers
 
-[Automating updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) based on performance metrics can save time and prevent issues. By setting up monitoring webhooks, you can track important metrics and decide whether to continue or pause an update:
+[Automating updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) based on performance metrics can save time and prevent issues. By setting up monitoring webhooks, you can track important metrics and decide whether to continue or pause an update:
 
 | Metric Type | Threshold | Action |
 | --- | --- | --- |

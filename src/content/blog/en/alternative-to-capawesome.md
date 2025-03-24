@@ -62,7 +62,7 @@ With this setup in place, any time you introduce changes to your app's code and 
 
 Overall, using GitHub Actions and [Capgo](/register/) can be a cost-effective solution for those who want to use live updates but do not have their own continuous integration setup in place. By leveraging these tools, clients can automate their app development process and quickly and easily deploy updates to their users.
 
-If you are ready to set up your CI/CD with Capgo, you can follow this [tutorial for IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and [tutorial for Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+If you are ready to set up your CI/CD with Capgo, you can follow this [tutorial for IOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
 
 ## Let's go further
 

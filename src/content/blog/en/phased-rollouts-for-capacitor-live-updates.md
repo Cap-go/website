@@ -173,7 +173,7 @@ These practices not only keep your updates compliant but also allow for quick bu
 
 ## Update Management Tools
 
-Using the right [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) tools is crucial for rolling out updates securely and efficiently. These tools simplify deployment while ensuring stability, compliance, and security.
+Using the right [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) tools is crucial for rolling out updates securely and efficiently. These tools simplify deployment while ensuring stability, compliance, and security.
 
 ### Platform Comparison
 

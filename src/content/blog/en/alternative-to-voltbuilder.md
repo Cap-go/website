@@ -58,7 +58,7 @@ GitHub Actions is a free, built-in continuous integration and deployment service
 
 To set this up, you would first create a GitHub repository for your app's code. Then, you can create a workflow file that defines the steps to be run whenever code is pushed to the repository. These steps might include building and testing the app, and then using Capgo to create and deploy a live update.
 
-This setup allows you to automatically build, test, and deploy your app with minimal effort, while still taking advantage of the live update capabilities offered by Capgo. For detailed instructions on setting up CI/CD with Capgo, you can refer to our tutorials for [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) and [Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+This setup allows you to automatically build, test, and deploy your app with minimal effort, while still taking advantage of the live update capabilities offered by Capgo. For detailed instructions on setting up CI/CD with Capgo, you can refer to our tutorials for [iOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
 
 ## Let's go further
 

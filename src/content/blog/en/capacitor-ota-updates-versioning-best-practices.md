@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-26T04:29:43.897Z
-updated_at: 2025-03-18T13:14:06.456Z
+updated_at: 2025-03-24T13:13:09.127Z
 head_image: https://assets.seobotai.com/capgo.app/67be629d36a1a0b25cc0f4e3-1740544205565.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, versioning, mobile development, app updates, semantic versioning, deployment strategies
@@ -21,10 +21,15 @@ next_blog: ''
 Here’s what you’ll learn in this guide:
 
 -   **Why OTA updates save time:** Skip app store delays and boost efficiency by up to **81%**.
+    
 -   **How to manage versions:** Use Semantic Versioning (MAJOR.MINOR.PATCH) to track updates effectively.
+    
 -   **Common pitfalls to avoid:** Mismatched builds, failed configurations, and update traceability issues.
+    
 -   **Best tools for the job:** Tools like `capacitor-sync-version-cli` and [Capgo](https://capgo.app/) simplify versioning and deployment.
+    
 -   **Update strategies:** Choose between partial and complete updates, phased rollouts, and optional vs. required updates.
+    
 
 **Quick Tip:** Start with version **0.1.0**, increment MINOR for new features, and PATCH for bug fixes. Always validate builds and configurations before release.
 
@@ -56,13 +61,16 @@ Apple's guidelines for downloaded code are worth noting:
 
 ### Version Control Implementation
 
-To manage Capacitor OTA updates effectively, developers can use tools like `capacitor-set-version` and `capacitor-sync-version-cli`. These tools simplify version management by [automating updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) across platforms.
+To manage Capacitor OTA updates effectively, developers can use tools like `capacitor-set-version` and `capacitor-sync-version-cli`. These tools simplify version management by [automating updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) across platforms.
 
 Here’s how to get started:
 
 -   **Automatic Version Synchronization**: Use `capacitor-sync-version-cli` to keep version numbers aligned across all platforms.
+    
 -   **Build Verification**: Set up checks to confirm commit evidence before each build.
+    
 -   **Configuration Validation**: Automate the validation of Capacitor settings to avoid configuration errors.
+    
 
 Start at version **0.1.0**, and increment the minor version number for each new feature. Following these steps helps reduce errors, but there are still common mistakes to avoid.
 
@@ -71,8 +79,11 @@ Start at version **0.1.0**, and increment the minor version number for each new 
 Even with good practices in place, errors can happen. Tools like `capsafe` can help identify and prevent issues specific to each platform. Here’s what to watch out for:
 
 -   **Build Verification**: Automate checks for commit evidence files and ensure build synchronization across platforms.
+    
 -   **Platform-Specific Versioning**: Keep an eye on iOS and Android version codes to avoid mismatches.
+    
 -   **Update Validation**: Confirm that OTA updates don’t interfere with the app’s core functionality.
+    
 
 For iOS builds, `capsafe` ensures that the `ios/App/public/commit-evidence.json` file is present. This step is critical to avoid deploying outdated web builds [\[3\]](https://github.com/fkirc/capacitor-build-safety). Proper verification ensures updates are reliable and reduces the risk of broken releases.
 
@@ -82,7 +93,7 @@ Choosing the right delivery methods, testing strategies, and update policies is 
 
 ### Partial vs Complete Updates
 
-Deciding between partial and complete updates can affect both app performance and user experience. Partial updates focus on web assets like [JavaScript bundles](https://capgo.app/de/docs/webapp/bundles/), making them ideal for quick fixes or minor UI adjustments. On the other hand, complete updates are required when native code changes are involved, as they replace the entire app bundle.
+Deciding between partial and complete updates can affect both app performance and user experience. Partial updates focus on web assets like [JavaScript bundles](https://capgo.app/docs/webapp/bundles/), making them ideal for quick fixes or minor UI adjustments. On the other hand, complete updates are required when native code changes are involved, as they replace the entire app bundle.
 
 | Update Type | Ideal For | Benefits | Things to Keep in Mind |
 | --- | --- | --- | --- |
@@ -141,7 +152,7 @@ Here are some time-based update controls to consider:
 | --- | --- | --- |
 | Deferred Updates | Postpone updates for 1–90 days after release | Allows for controlled testing and gradual rollout |
 | Version Control | Decide which app versions receive updates | Supports staged deployment and testing |
-| [Automatic Updates](https://capgo.app/id/docs/plugin/cloud-mode/auto-update/) | Set update behavior on managed devices | Simplifies maintenance |
+| [Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) | Set update behavior on managed devices | Simplifies maintenance |
 
 To enforce deadlines, use system notifications. Research shows that consistent, well-planned updates can increase user engagement by up to 200%[\[9\]](https://moldstud.com/articles/p-update-your-app-on-google-play-best-practices-and-tips). Beyond meeting app store rules, ensuring security in your updates is just as critical.
 
@@ -189,9 +200,13 @@ Choosing the right OTA update software is more than a security measure - it's ke
 Capgo has delivered **482.9 million updates** across **1,800 apps**, improving release efficiency by an impressive **81%** [\[1\]](https://capgo.app/). Here's what makes it stand out:
 
 -   **Security**: Features like end-to-end encryption and code-signing verification ensure updates are secure.
+    
 -   **Integration**: Works seamlessly with CI/CD platforms like [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [GitLab](https://about.gitlab.com/solutions/devops-platform/), [GitHub](https://github.com/about), [Jenkins](https://www.jenkins.io/), [Cloudbees](https://www.cloudbees.com/), and [Travis](https://www.travis-ci.com/).
+    
 -   **Deployment**: Offers user assignment and phased rollouts for precise, instant distributions.
+    
 -   **Analytics**: Built-in tools to track update performance and measure user adoption.
+    
 
 A great example? [Colenso](https://www.colensobbdo.co.nz/) successfully reached nearly all of its **5,000+ user base** in just minutes [\[1\]](https://capgo.app/). As Rodrigo Mantica shared:
 
@@ -216,9 +231,13 @@ One user shared their experience:
 When selecting an OTA update tool, make sure it offers:
 
 -   **End-to-end encryption** to keep updates secure
+    
 -   **CI/CD integration** to align with your workflow
+    
 -   **User assignment** for controlled rollouts
--   **App store compliance** to avoid distribution issues [\[10\]](/blog/how-live-updates-for-capacitor-work)
+    
+-   **App store compliance** to avoid distribution issues [\[10\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)
+    
 
 Your choice of OTA update software can have a big impact on your team's efficiency and deployment success. Take time to assess your needs around security, version control, and collaboration to find the best fit for your project.
 
@@ -226,13 +245,16 @@ Your choice of OTA update software can have a big impact on your team's efficien
 
 ### Summary
 
-Balancing technical precision with user experience can improve OTA [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) efficiency by 81% [\[1\]](https://capgo.app/). This approach supports effective version control and reliable OTA deployments.
+Balancing technical precision with user experience can improve OTA [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) efficiency by 81% [\[1\]](https://capgo.app/). This approach supports effective version control and reliable OTA deployments.
 
 Here are the main points to keep in mind for successful OTA updates:
 
 -   **Security**: Use end-to-end encryption and code-signing verification to maintain update integrity [\[1\]](https://capgo.app/).
+    
 -   **User Experience**: Minimize disruptions by scheduling updates thoughtfully and keeping users informed throughout the process [\[11\]](https://withintent.com/blog/ota-updates-design/).
+    
 -   **Compliance**: Ensure updates meet the requirements set by Apple and Google [\[1\]](https://capgo.app/).
+    
 
 ### Next Steps
 

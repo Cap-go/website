@@ -46,7 +46,7 @@ You can access Capgo's documentation at [capgo.app/docs](https://capgo.app/docs)
 
 | **Section** | **Purpose** | **Key Topics** |
 | --- | --- | --- |
-| Getting Started | Initial setup | Installation steps, [API key setup](https://capgo.app/it/docs/webapp/api-keys/) |
+| Getting Started | Initial setup | Installation steps, [API key setup](https://capgo.app/docs/webapp/api-keys/) |
 | Configuration | Core settings | Plugin configuration, environment setup |
 | API Reference | Technical details | Methods, parameters, return values |
 | Security | Protection measures | Encryption setup, signature verification |
@@ -96,7 +96,7 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-Next, update your `capacitor.config.json` file with your [Capgo API key](https://capgo.app/es/docs/webapp/api-keys/):
+Next, update your `capacitor.config.json` file with your [Capgo API key](https://capgo.app/docs/webapp/api-keys/):
 
 ```json
 {
@@ -120,7 +120,7 @@ Once this is done, you can set up channels to manage different update streams.
 
 ### Update Channel Setup
 
-Organize your [update channels](https://capgo.app/ja/docs/webapp/channels/) to suit your deployment needs:
+Organize your [update channels](https://capgo.app/docs/webapp/channels/) to suit your deployment needs:
 
 | Channel Type | Purpose | Use Case |
 | --- | --- | --- |
@@ -128,7 +128,7 @@ Organize your [update channels](https://capgo.app/ja/docs/webapp/channels/) to s
 | Staging | Pre-release testing | QA team and beta testers |
 | Beta | Feature testing | Early adopters |
 
-To upload an update to a specific channel, use the [Capgo CLI](https://capgo.app/ko/docs/cli/commands):
+To upload an update to a specific channel, use the [Capgo CLI](https://capgo.app/docs/cli/commands):
 
 ```bash
 npx @capgo/cli upload -c production
@@ -138,10 +138,10 @@ npx @capgo/cli upload -c production
 
 Capgo provides two main ways to handle updates:
 
-**[Automatic Updates](https://capgo.app/id/docs/plugin/cloud-mode/auto-update/)**  
+**[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**  
 Enable automatic updates by setting `autoUpdate: true` in your configuration. This ensures updates are applied in the background with no extra effort from developers.
 
-**[Manual Updates](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/)**  
+**[Manual Updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
 For more control, you can manage updates manually. Use the following pattern to check for and apply updates:
 
 ```typescript
@@ -212,7 +212,7 @@ Key components of the bundle protection system include:
 
 | Security Feature | Description | Implementation |
 | --- | --- | --- |
-| **[Bundle Integrity](https://capgo.app/fr/docs/webapp/bundles/)** | Verifies package authenticity with cryptographic signatures | Automatically enabled with setVerifyBundles() |
+| **[Bundle Integrity](https://capgo.app/docs/webapp/bundles/)** | Verifies package authenticity with cryptographic signatures | Automatically enabled with setVerifyBundles() |
 | **Rollback Protection** | Reverts to a stable version if an update fails | Built into the update process |
 | **Access Control** | Manages updates with role-based permissions | Configured via the dashboard |
 
@@ -345,11 +345,11 @@ Using Capgo's resources, developers can implement essential features like **end-
 | --- | --- | --- |
 | **Security** | Encryption and integrity checks | _Security Features_ section |
 | **Compliance** | Meeting Apple and Android requirements | _App Store Rules_ guide |
-| **[Update Management](https://capgo.app/ko/docs/plugin/cloud-mode/manual-update/)** | Version control and rollback options | _[Update Methods](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update)_ guide |
+| **[Update Management](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ guide |
 | **Error Handling** | Logging and troubleshooting steps | _Problem Solving Guide_ |
 
 These areas form the backbone of Capgo's update management system.
 
-Capgo's CLI and analytics tools simplify [managing updates](https://capgo.app/es/docs/plugin/cloud-mode/manual-update/) throughout your app's lifecycle [\[1\]](https://github.com/Cap-go/capacitor-updater).
+Capgo's CLI and analytics tools simplify [managing updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) throughout your app's lifecycle [\[1\]](https://github.com/Cap-go/capacitor-updater).
 
 For further support, you can explore additional resources like **API documentation**, **sample projects**, and **community forums** [\[2\]](https://dev.to/arnosolo/ionic-appflow-live-update-alternative-55c3).

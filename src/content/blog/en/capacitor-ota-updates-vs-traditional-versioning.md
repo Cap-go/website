@@ -115,7 +115,7 @@ Capgo takes these benefits further by offering a streamlined platform that ensur
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08.jpg?auto=compress)
 
-Capgo is a top-tier OTA solution for Capacitor apps, offering tools to simplify [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/):
+Capgo is a top-tier OTA solution for Capacitor apps, offering tools to simplify [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/):
 
 -   **Security Features**: Updates are encrypted end-to-end, ensuring only authorized users can access them.
 -   **CI/CD Integration**: Works seamlessly with platforms like [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), and [Azure DevOps](https://azure.microsoft.com/en-us/products/devops).

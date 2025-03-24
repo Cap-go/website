@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T04:03:25.616Z
-updated_at: 2025-03-21T04:05:33.736Z
+updated_at: 2025-03-24T13:12:18.675Z
 head_image: https://assets.seobotai.com/capgo.app/67dcd7fb83b63ee70fa0b90f-1742529933736.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, mobile app updates, Capacitor, app deployment, update scheduling, performance monitoring
@@ -16,12 +16,16 @@ locale: en
 next_blog: ''
 ---
 
-**Want to update your [Capacitor](https://capacitorjs.com/) app without app store delays? Over-the-Air (OTA) updates let you push fixes, new features, and improvements directly to users in real time.** Here’s how you can schedule them effectively:
+**Want to update your** [**Capacitor**](https://capacitorjs.com/) **app without app store delays? Over-the-Air (OTA) updates let you push fixes, new features, and improvements directly to users in real time.** Here’s how you can schedule them effectively:
 
 -   **What are OTA Updates?** They allow you to deliver app changes directly to users, downloading only updated parts to save time and bandwidth.
+    
 -   **Why Schedule Updates?** To fix bugs quickly, roll out features gradually, and enhance user experience with minimal disruption.
+    
 -   **How to Get Started:** Install the [Capgo](https://capgo.app/) plugin using `npx @capgo/cli init`, integrate with your CI/CD pipeline, and configure secure connections and analytics.
+    
 -   **Best Practices:** Use phased rollouts, schedule updates during off-peak hours, and monitor performance with real-time metrics.
+    
 
 **Key Stats:** 95% of active users adopt updates within 24 hours, with an 82% global success rate. Average download speed for a 5 MB bundle is 114 ms.
 
@@ -39,9 +43,12 @@ npx @capgo/cli init
 
 This command sets up the necessary components for OTA updates, including:
 
--   **End-to-end encryption** to ensure [secure updates](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/)
+-   **End-to-end encryption** to ensure [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+    
 -   **Version control** to manage update rollouts
+    
 -   **Error tracking** to identify and address issues quickly
+    
 
 Once the core setup is complete, you can move on to integrating your OTA update platform.
 
@@ -50,9 +57,13 @@ Once the core setup is complete, you can move on to integrating your OTA update 
 Integrating an OTA platform is crucial for managing scheduled updates efficiently. Here’s how to do it:
 
 -   **Secure your connection** by setting up authentication keys and tokens.
+    
 -   **Track versions** to ensure updates are properly managed and deployed.
+    
 -   **Set up analytics** to monitor how updates perform in the field.
+    
 -   **Integrate your CI/CD pipeline** into your existing workflow for smoother operations.
+    
 
 > "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." – Capgo [\[1\]](https://capgo.app/)
 
@@ -61,16 +72,15 @@ For enterprise-level needs, Capgo supports integration with major CI/CD systems.
 Here are some performance benchmarks [\[1\]](https://capgo.app/):
 
 -   **Average download speed**: 114 ms for a 5 MB bundle
+    
 -   **API response time**: 434 ms globally
+    
 -   **Update success rate**: 82% worldwide
+    
 
-## Explore [Capgo](https://capgo.app/plugins/)'s Capacitor [Capacitor](https://capacitorjs.com/) Plugins
+## Explore [Capgo](https://capgo.app/)'s New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
 
-![Capawesome](https://mars-images.imgix.net/seobot/screenshots/capawesome.io-5dcbb99c7c66e0a1d148a9bb4683db23-2025-03-21.jpg?auto=compress)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
-## Planning Update Schedules
+**Planning Update Schedules**
 
 Once the tools are in place, the next step is deciding when and how updates will be rolled out.
 
@@ -90,7 +100,7 @@ Successfully managing scheduled OTA updates requires careful code implementation
 
 ### Update Schedule Code
 
-Here’s how you can set up [automatic background updates](https://capgo.app/ko/docs/plugin/self-hosted/auto-update/) with a simple script:
+Here’s how you can set up [automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with a simple script:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -140,8 +150,11 @@ These features help maintain app stability by seamlessly restoring previous vers
 Once error-handling mechanisms are in place, testing becomes the next critical step. Capgo provides dedicated test channels for beta deployments, allowing you to:
 
 -   Release updates to internal testers first
+    
 -   Gather performance data and feedback
+    
 -   Gradually expand to a larger audience
+    
 
 > "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
@@ -153,7 +166,7 @@ Keeping an eye on OTA update performance helps refine your schedule and ensures 
 
 ### Update Metrics
 
-Measuring key performance indicators (KPIs) is essential for assessing your [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update). Recent data from Capgo's analytics platform highlights the following benchmarks for successful OTA updates:
+Measuring key performance indicators (KPIs) is essential for assessing your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Recent data from Capgo's analytics platform highlights the following benchmarks for successful OTA updates:
 
 | Metric | Target Benchmark | Industry Average |
 | --- | --- | --- |
@@ -184,15 +197,22 @@ These KPIs provide a solid foundation for improving your update strategy.
 Timing plays a big role in update success. Deployment data suggests these scheduling practices:
 
 -   **Off-peak Hours**: Roll out updates between 1 AM and 4 AM local time.
+    
 -   **Gradual Rollout**: Begin with 10% of users and expand gradually over 24 hours.
+    
 -   **Geographic Distribution**: Spread updates across time zones for better coverage.
+    
 
 Key factors to monitor for schedule optimization include:
 
 -   Completion time for updates
+    
 -   Network performance metrics
+    
 -   Regional error rates
+    
 -   User engagement after updates
+    
 
 Real-time analytics can help you quickly address any issues. Tools like error tracking ensure a 95% success rate within the first 24 hours of deployment [\[1\]](https://capgo.app/).
 
@@ -200,8 +220,11 @@ Real-time analytics can help you quickly address any issues. Tools like error tr
 
 OTA updates can boost app performance by delivering updates quickly and securely [\[1\]](https://capgo.app/). Here are some key takeaways from our guide:
 
--   **Secure Deployment**: Use staged rollouts through dedicated [update channels](https://capgo.app/ja/docs/webapp/channels/) to ensure controlled delivery [\[1\]](https://capgo.app/).
+-   **Secure Deployment**: Use staged rollouts through dedicated [update channels](https://capgo.app/docs/webapp/channels/) to ensure controlled delivery [\[1\]](https://capgo.app/).
+    
 -   **Performance Monitoring**: Keep an eye on update success rates and essential metrics to fine-tune the process [\[1\]](https://capgo.app/).
+    
 -   **Rollback Protection**: Set up automated error tracking to enable quick rollbacks if needed [\[1\]](https://capgo.app/).
+    
 
 Since 2022, the landscape of OTA update solutions has grown significantly. For instance, Capgo has managed over 23.5 million updates across 750 production apps [\[1\]](https://capgo.app/). When combined with CI/CD integration and real-time analytics, these practices provide a solid OTA update strategy for your Capacitor app workflow.

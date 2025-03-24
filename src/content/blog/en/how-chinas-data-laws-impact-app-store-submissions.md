@@ -94,13 +94,13 @@ Capgo has proven its reliability in the Chinese market with impressive performan
 Key features include:
 
 -   **End-to-end encryption** to protect data.
--   A **[channel system](https://capgo.app/ko/docs/plugin/cloud-mode/channel-system/)** for controlled rollouts.
+-   A **[channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** for controlled rollouts.
 -   **Instant rollback** options for quick fixes.
 -   **Real-time monitoring** to track update performance.
 
 ## App Store Review Guide
 
-Submitting apps to Chinese app stores involves navigating strict technical and regulatory requirements. Developers can reduce delays by [implementing an update system](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update) designed to comply with these regulations. This approach complements earlier strategies for managing local data and ensuring efficient updates.
+Submitting apps to Chinese app stores involves navigating strict technical and regulatory requirements. Developers can reduce delays by [implementing an update system](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) designed to comply with these regulations. This approach complements earlier strategies for managing local data and ensuring efficient updates.
 
 ### Submission Tips
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-15T04:38:10.916Z
-updated_at: 2025-03-18T13:13:56.124Z
+updated_at: 2025-03-24T13:22:05.322Z
 head_image: https://assets.seobotai.com/capgo.app/67afe3423823fbac65afe97c-1739594307916.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, App Store, Play Store, compliance, JavaScript updates, security
@@ -18,16 +18,23 @@ next_blog: ''
 
 ### Key Takeaways:
 
--   **[Apple App Store](https://developer.apple.com/app-store/guidelines/)**: OTA updates are limited to JavaScript and asset files. No changes to native code or core functionality.
--   **[Google Play Store](https://developer.android.com/distribute/play-policies)**: More flexibility but still requires updates to follow security and abuse prevention policies.
+-   [**Apple App Store**](https://developer.apple.com/app-store/guidelines/): OTA updates are limited to JavaScript and asset files. No changes to native code or core functionality.
+    
+-   [**Google Play Store**](https://developer.android.com/distribute/play-policies): More flexibility but still requires updates to follow security and abuse prevention policies.
+    
 -   **Common Issues**: Apps get rejected for modifying native code, adding unreviewed features, or using unencrypted updates.
+    
 
 ### Quick Compliance Tips:
 
 -   Stick to **JavaScript and asset updates** only.
--   Use tools like **[Capgo](https://capgo.app/)** for encrypted delivery and rollback options.
--   Follow **semantic versioning ([SemVer](https://semver.org/))** for tracking and auditing updates.
+    
+-   Use tools like [**Capgo**](https://capgo.app/) for encrypted delivery and rollback options.
+    
+-   Follow **semantic versioning (**[**SemVer**](https://semver.org/)**)** for tracking and auditing updates.
+    
 -   Ensure updates are secure with **code signing and HTTPS**.
+    
 
 | Feature | Apple App Store | Google Play Store |
 | --- | --- | --- |
@@ -44,8 +51,11 @@ next_blog: ''
 Apple's guidelines, specifically §3.3.2, place strict limits on OTA updates for Capacitor applications. Updates are allowed **only** for JavaScript and assets. Key restrictions include:
 
 -   No changes to the app's core functionality or primary purpose
+    
 -   Prohibition of creating alternative app stores or code distribution platforms
+    
 -   No bypassing iOS security features like code signing
+    
 
 **Important for Capacitor Developers**: Any JavaScript updates must stay within the app's original security container and cannot alter the app's essential behavior.
 
@@ -56,10 +66,15 @@ Apple's guidelines, specifically §3.3.2, place strict limits on OTA updates for
 Google Play takes a more lenient stance on OTA updates but still enforces clear boundaries to prevent misuse. Their guidelines focus on:
 
 -   Allowing JavaScript asset updates with fewer restrictions
+    
 -   Ensuring updates comply with Device and Network Abuse policies
+    
 -   Prohibiting the introduction of malicious code or security risks
+    
 -   Requiring updates to align with the app's approved Play Store version
--   Preventing circumvention of Google Play’s billing system for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) [\[6\]](https://essaypro.com/blog/article-review)
+    
+-   Preventing circumvention of Google Play’s billing system for [Capacitor apps](https://capgo.app/blog/article-review)
+    
 
 | Feature | Apple App Store | Google Play Store |
 | --- | --- | --- |
@@ -73,8 +88,11 @@ Google Play takes a more lenient stance on OTA updates but still enforces clear 
 Common reasons apps get rejected include:
 
 -   Adding features that haven't been reviewed
+    
 -   Excessive or intrusive update prompts
+    
 -   Using unencrypted update packages
+    
 
 To avoid these issues, following Capacitor-specific implementation guidelines is crucial. Tools that offer automated compliance checks can make this process much easier. For example, Capgo’s end-to-end encryption feature secures update packages, helping meet the requirements of both app stores [\[7\]](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements).
 
@@ -87,8 +105,11 @@ To avoid these issues, following Capacitor-specific implementation guidelines is
 To avoid compliance issues, follow these steps:
 
 -   **Use semantic versioning (SemVer):** Track updates and keep a detailed changelog to stay compliant [\[8\]](https://libguides.usc.edu/writingguide/assignments/AnalyzingJournal).
+    
 -   **Restrict updates to JavaScript and assets:** Avoid modifying native code to ensure compliance [\[1\]](https://github.com/Cap-go/capacitor-updater).
+    
 -   **Verify package signatures:** Always validate signatures before installation [\[2\]](https://www.indeed.com/career-advice/career-development/how-to-write-articles).
+    
 
 | **Update Component** | **Required Action** | **Compliance Impact** |
 | --- | --- | --- |
@@ -102,18 +123,24 @@ To avoid compliance issues, follow these steps:
 Create update interfaces that are easy to use and non-disruptive:
 
 -   Show **clear and concise notifications** without interrupting the user experience [\[4\]](https://nytlicensing.com/latest/methods/getting-started-thought-leadership-content-marketing/).
+    
 -   Enable **background downloads** with progress indicators.
+    
 -   Allow users to decide when to install updates, except for critical security patches.
+    
 
-Forced updates should only be used for critical security fixes, and they must clearly communicate the urgency [\[3\]](/blog/how-live-updates-for-capacitor-work). These steps help reduce rejection risks caused by intrusive update prompts.
+Forced updates should only be used for critical security fixes, and they must clearly communicate the urgency [\[3\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/). These steps help reduce rejection risks caused by intrusive update prompts.
 
 ### Update Security Protocol
 
 Ensure secure delivery and data integrity with these practices:
 
 -   **End-to-End Encryption:** Use certificate pinning, token-based authentication, and rotate keys regularly [\[2\]](https://www.indeed.com/career-advice/career-development/how-to-write-articles).
+    
 -   **Verification System:** Combine server-side validation of update requests with client-side package integrity checks [\[2\]](https://www.indeed.com/career-advice/career-development/how-to-write-articles).
+    
 -   **Performance Monitoring:** Track key metrics like adoption rates, download times, and post-update performance [\[11\]](https://www.npmjs.com/package/@appmassive/capacitor-updater). Include automatic error reporting to quickly address issues [\[5\]](https://qwik.dev/docs/guides/capacitor/).
+    
 
 These security measures align with Apple's code signing requirements and Google's abuse prevention policies. Tools like Capgo can assist in implementing these protocols [\[9\]](https://classic.yarnpkg.com/en/package/@remnote/capacitor-updater).
 
@@ -123,15 +150,18 @@ These security measures align with Apple's code signing requirements and Google'
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
-Capgo provides a secure way to deliver and manage [Capacitor OTA updates](https://capgo.app/ja/), ensuring smooth distribution while meeting compliance standards. It also offers advanced tools for enterprise-level [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/).
+Capgo provides a secure way to deliver and manage [Capacitor OTA updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ### Key Features of Capgo
 
 Capgo's update system includes essential features like:
 
 -   **Encrypted update delivery**: Ensures updates meet app store security requirements.
+    
 -   **User segmentation**: Allows controlled rollouts to specific user groups.
+    
 -   **Instant rollback**: Quickly reverts to a previous version if needed.
+    
 
 This method ensures updates are seamless and allows developers to monitor performance effectively.
 
@@ -140,7 +170,9 @@ This method ensures updates are seamless and allows developers to monitor perfor
 Capgo's tools are designed to meet security and compliance needs:
 
 -   **Rollout Management**: Developers can release updates to small user groups - starting as low as 1% - to test changes before a broader rollout.
+    
 -   **Automatic Safeguards**: Built-in health checks confirm the integrity of updates before installation. If any issues arise, the system automatically rolls back to the last stable version, keeping the app functional and avoiding app store rejections [\[1\]](https://github.com/Cap-go/capacitor-updater).
+    
 
 ### How to Set Up Capgo
 
@@ -192,8 +224,10 @@ Technical errors during updates can lead to rejections. Here's how to avoid them
 
 -   **Error Handling**  
     Monitor update success rates and log every update attempt and outcome.
+    
 -   **User Communication**  
     Show progress indicators during updates to keep users informed.
+    
 
 Apps that provide clear and transparent interfaces have seen **30% higher retention rates** and **25% fewer negative reviews** related to updates [\[12\]](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en).
 

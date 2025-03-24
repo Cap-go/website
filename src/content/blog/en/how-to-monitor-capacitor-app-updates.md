@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-Monitoring [Capacitor](https://capacitorjs.com/) app updates is crucial for maintaining app stability and ensuring a seamless user experience. [Capacitor](https://capacitorjs.com/)'s OTA (Over-the-Air) updates simplify the process, allowing developers to [push updates](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update) without app store delays. Here's what you need to know:
+Monitoring [Capacitor](https://capacitorjs.com/) app updates is crucial for maintaining app stability and ensuring a seamless user experience. [Capacitor](https://capacitorjs.com/)'s OTA (Over-the-Air) updates simplify the process, allowing developers to [push updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) without app store delays. Here's what you need to know:
 
 -   **Why Monitor Updates?**
     
@@ -46,7 +46,7 @@ Set up a robust monitoring system to ensure updates run smoothly, improve user r
 
 ## Update Monitoring Tools
 
-Choosing the right tools to monitor updates is key to keeping Capacitor apps running smoothly. According to recent data, **78% of [Capacitor developers](https://capgo.app/blog/capacitor-comprehensive-guide/) rely on dedicated monitoring solutions** to track updates effectively [\[1\]](https://ionic.io/blog/capacitor-live-updates-sdk-is-now-ga).
+Choosing the right tools to monitor updates is key to keeping Capacitor apps running smoothly. According to recent data, **78% of [Capacitor developers](https://capgo.app/blog/capacitor-live-updates-sdk-is-now-ga).
 
 ### Tool Comparison Chart
 

@@ -156,7 +156,7 @@ Here are some essential testing practices:
 -   **Integration Testing**: Ensure your scripts work seamlessly with other parts of the system.
 -   **Performance Testing**: Measure execution times and resource usage to identify bottlenecks.
 
-Once testing is in place, [update automation](https://capgo.app/es/docs/plugin/cloud-mode/hybrid-update/) takes deployment reliability to the next level.
+Once testing is in place, [update automation](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) takes deployment reliability to the next level.
 
 ### Update Automation
 
@@ -235,7 +235,7 @@ Capgo sets a high bar, but it’s worth considering how other tools stack up in 
 | Hosting Options | Cloud-only to self-hosted | Impacts compliance flexibility |
 | Cost Structure | $300-$6,000 annually | Shapes scalability planning |
 
-Evaluating these metrics helps development teams choose a tool that fits their [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update). As noted by NASA’s [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team:
+Evaluating these metrics helps development teams choose a tool that fits their [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). As noted by NASA’s [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team:
 
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂" - NASA's OSIRIS-REx [\[1\]](https://capgo.app/)
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-14T03:00:49.720Z
-updated_at: 2025-03-18T13:14:18.928Z
+updated_at: 2025-03-24T13:14:15.818Z
 head_image: https://assets.seobotai.com/capgo.app/67d37b87bca46a2e63b4584d-1741921265630.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, version targeting, Capacitor, mobile app updates, semantic versioning, app stability, bug fixes
@@ -21,15 +21,25 @@ next_blog: ''
 Here’s what you’ll learn:
 
 -   **What OTA Updates Are**: Push changes instantly to users while staying compliant with app store rules.
+    
 -   **Version Targeting**: Send updates only to specific app versions to fix bugs, roll out features, or support legacy users.
+    
 -   **Benefits**:
+    
     -   Faster updates (minutes, not weeks).
+        
     -   Better app stability and controlled rollouts.
+        
     -   Improved user experience by avoiding unnecessary updates.
+        
 -   **How to Use It**:
+    
     -   Follow semantic versioning (**MAJOR.MINOR.PATCH**).
-    -   [Configure updates](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) in your Capacitor project.
+        
+    -   [Configure updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) in your Capacitor project.
+        
     -   Test thoroughly across targeted versions.
+        
 
 **Quick Comparison**:
 
@@ -43,13 +53,9 @@ Here’s what you’ll learn:
 
 Want to learn how to set it up and avoid common mistakes? Keep reading for a step-by-step guide.
 
-## Explore [Capgo](https://capgo.app/plugins/)'s Capacitor [Capacitor](https://capacitorjs.com/) Plugins
+## Explore [Capgo](https://capgo.app/plugins)'s Ionic [Capacitor](https://capacitorjs.com/) Live Update Plugin
 
-![Capawesome](https://mars-images.imgix.net/seobot/screenshots/capawesome.io-1374c0b85e4621707603b9b4a57465b0-2025-03-14.jpg?auto=compress)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
-## Version Targeting Technical Guide
+**Version Targeting Technical Guide**
 
 Semantic versioning is crucial for managing OTA updates effectively, ensuring compatibility and smooth transitions for users.
 
@@ -122,14 +128,20 @@ Version targeting provides clear benefits for both developers and users:
 **Better Stability**
 
 -   Minimizes crashes by ensuring updates are compatible with specific versions.
+    
 -   Allows quick rollbacks if something goes wrong.
+    
 -   Keeps app performance consistent across different versions.
+    
 
 **Streamlined Development Process**
 
 -   Gives teams precise control over how updates are distributed.
+    
 -   Speeds up bug fixes for specific versions.
+    
 -   Lowers the risks tied to launching new features.
+    
 
 **Enhanced User Experience**
 
@@ -143,7 +155,7 @@ This approach is particularly effective in enterprise settings where multiple ap
 
 ## Implementation Guidelines
 
-Now that you’ve got the technical foundation covered, it’s time to plan and execute your [update strategy](https://capgo.app/it/docs/plugin/cloud-mode/hybrid-update) effectively.
+Now that you’ve got the technical foundation covered, it’s time to plan and execute your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) effectively.
 
 ### Planning Your Update Strategy
 
@@ -178,12 +190,17 @@ Supporting older versions is just as important as rolling out new ones. Here’s
 -   **Feature Flags**
     
     -   Control which features are available in specific versions.
+        
     -   Gradually roll out updates to targeted version groups.
+        
     -   Quickly disable features if they cause problems.
+        
 -   **Version-Specific Testing**
     
     -   Set up dedicated testing environments for each supported version.
+        
     -   Verify that updates don’t interfere with existing functionality while introducing new features for compatible versions.
+        
 -   **Comprehensive Documentation**
     
     -   Maintain detailed documentation for each version, including API changes, configuration needs, and any known limitations.
@@ -244,8 +261,10 @@ This method ensures updates are sent only to compatible devices, cutting down on
 
 ### Getting Started
 
-To make the most of version targeting, a solid plan is key for maintaining app compatibility. Platforms like Capgo simplify this process with features like automated management, [secure encryption](https://capgo.app/fr/docs/cli/migrations/encryption/), and compliance with app store rules. Here are some steps to get started effectively:
+To make the most of version targeting, a solid plan is key for maintaining app compatibility. Platforms like Capgo simplify this process with features like automated management, [secure encryption](https://capgo.app/docs/cli/migrations/encryption/), and compliance with app store rules. Here are some steps to get started effectively:
 
 -   **Set Version Rules**: Define clear constraints to manage update distribution.
+    
 -   **Track Deployments**: Monitor update success rates across various app versions.
+    
 -   **Support Legacy Versions**: Keep critical older versions functional while nudging users toward updates.
