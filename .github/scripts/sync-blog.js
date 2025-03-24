@@ -83,7 +83,9 @@ async function main() {
 
       const cleanMarkdown = articleResponse.markdown.replace(`# ${article.headline}
 `, '');
-      const transformedMarkdown = cleanMarkdown.replace(iframeRegex, iframe);
+      const transformedMarkdown = cleanMarkdown
+        .replace(iframeRegex, iframe)
+        .replace(/https:\/\/capgo\.app\/(de|en|es|fr|id|it|ja|ko)\/(.*?)\//g, 'https://capgo.app/$2/');
       // Combine frontmatter with markdown content
       const content = `${frontmatter}${transformedMarkdown}`;
       

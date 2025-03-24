@@ -33,7 +33,7 @@ OTA (Over-the-Air) updates allow [Capacitor](https://capacitorjs.com/) apps to u
 
 | Feature | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
-| Update Method | Checksum comparison | In-[app updates](https://capgo.app/ja/plugins/capacitor-updater/) | JS bundle updates |
+| Update Method | Checksum comparison | In-[app updates](https://capgo.app/plugins/capacitor-updater/) | JS bundle updates |
 | Performance Impact | Minimal | Medium | Low |
 | Background Updates | No  | Yes (Android) | Yes |
 | Rollback Support | Limited | Platform-dependent | Built-in |
@@ -160,8 +160,8 @@ Here's a quick comparison of key features across popular OTA tools:
 
 | Feature | capacitor-app-updater | capacitor-app-update | Capgo |
 | --- | --- | --- | --- |
-| Update Method | Checksum comparison | [In-app updates](https://capgo.app/fr/plugins/capacitor-updater/) (Android) | JS bundle updates |
-| Performance Impact | Minimal (selective downloads) | Medium ([full app updates](https://capgo.app/es/plugins/capacitor-updater/)) | Low (background checks) |
+| Update Method | Checksum comparison | [In-app updates](https://capgo.app/plugins/capacitor-updater/) (Android) | JS bundle updates |
+| Performance Impact | Minimal (selective downloads) | Medium ([full app updates](https://capgo.app/plugins/capacitor-updater/)) | Low (background checks) |
 | Update Scope | Web content only | Full app updates | JS code and dependencies |
 | Platform Support | iOS & Android | Android-focused | iOS & Android |
 | Background Updates | No  | Yes (Android) | Yes |

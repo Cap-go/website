@@ -38,7 +38,7 @@ Automating OTA updates ensures faster delivery, fewer errors, and better app sta
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
-Setting up Capacitor for [automated over-the-air](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). This process ensures compatibility with CI/CD automation while keeping your app secure.
+Setting up Capacitor for [automated over-the-air](https://capgo.app/blog/open-source-licecing/) (OTA) updates involves three key steps: configuring the setup, implementing security measures, and [integrating an update system](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). This process ensures compatibility with CI/CD automation while keeping your app secure.
 
 ### Configuring OTA Settings in capacitor.config.json
 

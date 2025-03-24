@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Need faster [app updates](https://capgo.app/ja/plugins/capacitor-updater/) without app store delays?** [Capgo](https://capgo.app/) lets you deliver secure Over-the-Air (OTA) updates instantly to your users. Skip app store reviews and keep your app up-to-date with ease.
+**Need faster [app updates](https://capgo.app/plugins/capacitor-updater/) without app store delays?** [Capgo](https://capgo.app/) lets you deliver secure Over-the-Air (OTA) updates instantly to your users. Skip app store reviews and keep your app up-to-date with ease.
 
 ### Key Takeaways:
 
@@ -345,7 +345,7 @@ Using Capgo's resources, developers can implement essential features like **end-
 | --- | --- | --- |
 | **Security** | Encryption and integrity checks | _Security Features_ section |
 | **Compliance** | Meeting Apple and Android requirements | _App Store Rules_ guide |
-| **[Update Management](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ guide |
+| **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Version control and rollback options | _[Update Methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ guide |
 | **Error Handling** | Logging and troubleshooting steps | _Problem Solving Guide_ |
 
 These areas form the backbone of Capgo's update management system.

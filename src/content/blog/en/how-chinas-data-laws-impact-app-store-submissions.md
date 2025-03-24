@@ -18,7 +18,7 @@ next_blog: ''
 
 China's strict data laws make it challenging for app developers to enter the market. Here's what you need to know:
 
--   **Key Laws**: Developers must comply with the [Cybersecurity Law](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (2017), [Data Security Law](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (2021), and [Personal Information Protection Law](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL, 2021). These laws require [local data storage](https://capgo.app/ko/plugins/capacitor-data-storage-sqlite/), user consent, and strict controls on cross-border data transfers.
+-   **Key Laws**: Developers must comply with the [Cybersecurity Law](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (2017), [Data Security Law](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (2021), and [Personal Information Protection Law](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL, 2021). These laws require [local data storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/), user consent, and strict controls on cross-border data transfers.
 -   **App Design Adjustments**: Apps must store Chinese user data locally, disable features involving cross-border transfers, and ensure compliance from the start.
 -   **Compliance Steps**: Implement local data storage solutions, classify data by sensitivity, and secure permissions for transfers. Tools like [Capgo](https://capgo.app/) help manage updates while meeting these requirements.
 

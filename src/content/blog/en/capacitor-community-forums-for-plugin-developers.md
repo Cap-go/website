@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **Top Forums**: Use [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server) for real-time help, [GitHub Discussions](https://github.com/ionic-team/capacitor/discussions) for detailed conversations, and [Stack Overflow](https://stackoverflow.com/questions/tagged/capacitor) for technical answers.
 -   **Best Practices**: Write clear questions, share code snippets, and follow forum rules for better responses.
--   **Extra Tools**: Leverage resources like [Capgo](https://capgo.app/) for [instant app updates](https://capgo.app/fr/plugins/capacitor-updater/) and official docs for reliable guidance.
+-   **Extra Tools**: Leverage resources like [Capgo](https://capgo.app/) for [instant app updates](https://capgo.app/plugins/capacitor-updater/) and official docs for reliable guidance.
 
 ### Quick Start:
 

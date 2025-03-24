@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want faster [app updates](https://capgo.app/ja/plugins/capacitor-updater/) without waiting for app store reviews?** [Capacitor](https://capacitorjs.com/)'s Over-the-Air (OTA) updates might be the answer. Unlike traditional app store updates, which take days and require user action, OTA updates deploy changes in minutes and automatically reach users.
+**Want faster [app updates](https://capgo.app/plugins/capacitor-updater/) without waiting for app store reviews?** [Capacitor](https://capacitorjs.com/)'s Over-the-Air (OTA) updates might be the answer. Unlike traditional app store updates, which take days and require user action, OTA updates deploy changes in minutes and automatically reach users.
 
 ### Key Takeaways:
 

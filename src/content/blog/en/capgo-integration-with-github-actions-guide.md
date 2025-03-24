@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-[Capgo](https://capgo.app/docs.github.com/actions) together simplify deploying updates for [Capacitor](https://capacitorjs.com/) apps. Here's why this integration is worth your attention:
+[Capgo](https://capgo.app/) and [GitHub Actions](https://docs.github.com/actions) together simplify deploying updates for [Capacitor](https://capacitorjs.com/) apps. Here's why this integration is worth your attention:
 
 -   **Save Money**: Cut CI/CD costs by up to $26,100 over 5 years compared to [AppFlow](https://ionic.io/appflow/).
 -   **Fast Updates**: Push updates instantly with 95% of users receiving them in 24 hours.
@@ -264,7 +264,7 @@ Stick to semantic versioning and increment versions properly to prevent conflict
 
 ### Maintenance Tips
 
--   Use [Capgo analytics](https://capgo.app/ko/dp/) to monitor update success rates.
+-   Use [Capgo analytics](https://capgo.app/dp/) to monitor update success rates.
 -   Enable automatic rollbacks for updates that might cause issues.
 -   Test pull requests (PRs) using channel selectors for better control.
 -   Keep your workflow updated with the latest Capgo CLI commands.

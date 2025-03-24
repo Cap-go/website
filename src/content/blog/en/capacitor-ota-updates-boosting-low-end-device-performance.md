@@ -101,7 +101,7 @@ OTA updates use techniques like image compression, selective font loading, code 
 
 ### Data Handling Improvements
 
-Efficient data handling is essential for devices with fewer resources. Capgo provides tools that reduce server calls and make [local data storage](https://capgo.app/ko/plugins/capacitor-data-storage-sqlite/) more efficient. As one developer put it:
+Efficient data handling is essential for devices with fewer resources. Capgo provides tools that reduce server calls and make [local data storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/) more efficient. As one developer put it:
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
@@ -111,7 +111,7 @@ Capgo's OTA system was tested on 1,400 apps, delivering an impressive 947.6 mill
 
 ### Speed Test Results
 
-[Capacitor OTA updates](https://capgo.app/ja/) showed clear improvements in update delivery speed and app responsiveness. Test data highlighted consistent performance boosts, especially on low-end devices and in areas with poor connectivity [\[1\]](https://capgo.app/).
+[Capacitor OTA updates](https://capgo.app/) showed clear improvements in update delivery speed and app responsiveness. Test data highlighted consistent performance boosts, especially on low-end devices and in areas with poor connectivity [\[1\]](https://capgo.app/).
 
 ### Real-World Examples
 
@@ -139,7 +139,7 @@ These achievements pave the way for even more advancements in OTA delivery syste
 
 ### Future Development
 
-OTA updates for low-end devices continue to evolve. With **end-to-end encryption** ensuring [secure updates](https://capgo.app/docs.gitlab.com/ee/ci/) simplifying deployments, the process is becoming even smoother [\[1\]](https://capgo.app/). Cost is also a major factor: while [AppFlow](https://ionic.io/appflow/) costs $6,000 annually, Capgo's CI/CD setup is about $300 per month [\[1\]](https://capgo.app/). As NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team pointed out:
+OTA updates for low-end devices continue to evolve. With **end-to-end encryption** ensuring [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) without impacting performance and integration with CI/CD platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/) simplifying deployments, the process is becoming even smoother [\[1\]](https://capgo.app/). Cost is also a major factor: while [AppFlow](https://ionic.io/appflow/) costs $6,000 annually, Capgo's CI/CD setup is about $300 per month [\[1\]](https://capgo.app/). As NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team pointed out:
 
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow)"
 

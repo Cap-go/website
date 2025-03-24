@@ -22,7 +22,7 @@ Debugging [Capacitor](https://capacitorjs.com/) apps can be complex due to their
 
 -   **Common Challenges**: Platform-specific bugs and native plugin mismatches.
 -   **Tools You Need**:
-    -   **[Web Debugging](https://capgo.app/docs/devtools), [Safari Web Inspector](https://developer.apple.com/documentation/safari-developer-tools/web-inspector).
+    -   **[Web Debugging](https://capgo.app/docs/plugin/debugging/)**: [Chrome DevTools](https://developer.chrome.com/docs/devtools), [Safari Web Inspector](https://developer.apple.com/documentation/safari-developer-tools/web-inspector).
     -   **[Native Debugging](https://capgo.app/docs/plugin/debugging/)**: [Xcode](https://developer.apple.com/xcode/) for iOS, [Android Studio](https://developer.android.com/studio) for Android.
     -   **Capacitor CLI**: Commands like `npx cap doctor` and `npx cap sync`.
 -   **Debugging Steps**:
@@ -47,7 +47,7 @@ This guide provides everything you need to identify and fix bugs, ensuring your 
 
 ## Core Debugging Tools
 
-Debugging [Capacitor apps](https://capgo.app/docs/plugin/debugging/) every Capacitor developer should know.
+Debugging [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) effectively requires the right tools. Here’s a breakdown of the essential [debugging resources](https://capgo.app/docs/plugin/debugging/) every Capacitor developer should know.
 
 ### Web Debugging with Browser Tools
 

@@ -19,7 +19,7 @@ next_blog: ''
 [Capacitor](https://capacitorjs.com/) plugins are essential for building cross-platform apps, letting you use native device features like cameras, file systems, and notifications with minimal effort. They combine JavaScript APIs and native code for seamless integration across iOS, Android, and web platforms. Here's what you need to know:
 
 -   **Core Plugins**: Built by the [Ionic](https://ionicframework.com/) team, these cover basics like file storage (`Filesystem.writeFile`) and network checks (`Network.getStatus`).
--   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/es/plugins/native-purchases/), and live updates.
+-   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/plugins/native-purchases/), and live updates.
 -   **Custom Plugins**: Create your own for unique hardware or business needs.
 
 ### Quick Overview
@@ -221,7 +221,7 @@ Using `capacitor doctor` regularly can help catch potential problems early, ensu
 
 ## Summary
 
-Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
+Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) more efficient [\[6\]](https://capacitorjs.jp/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
 
 To keep plugins running smoothly, it's important to understand their categories and how they are maintained:
 

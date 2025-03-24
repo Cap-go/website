@@ -296,7 +296,7 @@ Once permissions are handled, you can shift focus to securing updates, especiall
 
 ## OTA Update Security
 
-To ensure data integrity during [app updates](https://capgo.app/ja/plugins/capacitor-updater/), it's crucial to use secure OTA (Over-The-Air) update processes. These updates help prevent unauthorized changes to app code, which could otherwise bypass limits on data collection.
+To ensure data integrity during [app updates](https://capgo.app/plugins/capacitor-updater/), it's crucial to use secure OTA (Over-The-Air) update processes. These updates help prevent unauthorized changes to app code, which could otherwise bypass limits on data collection.
 
 ### Update Package Signing
 

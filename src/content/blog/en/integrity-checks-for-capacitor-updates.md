@@ -126,7 +126,7 @@ Set up an automated rollback system to handle situations where integrity checks 
 | Execution | Restore previous working version | Confirm successful restoration |
 | Post-rollback | Validate app functionality | Run critical path tests |
 
-Here's how you can configure your [Capacitor updater](https://capgo.app/id/plugins/capacitor-updater/) with suitable timeout settings for smoother rollbacks:
+Here's how you can configure your [Capacitor updater](https://capgo.app/plugins/capacitor-updater/) with suitable timeout settings for smoother rollbacks:
 
 ```javascript
 {

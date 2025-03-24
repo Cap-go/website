@@ -133,7 +133,7 @@ A few key configurations in Android Studio will make it work efficiently with th
     -   **Target**: x86\_64
 5.  Adjust the AVD settings:
     -   RAM: 2048 MB
-    -   [Internal Storage](https://capgo.app/id/plugins/capacitor-data-storage-sqlite/): 2048 MB
+    -   [Internal Storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/): 2048 MB
     -   SD Card: 512 MB
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
@@ -243,7 +243,7 @@ Here’s an example configuration:
 **Important configurations to focus on:**
 
 -   **Security**: Ensure live updates are encrypted end-to-end.
--   **[Update Management](https://capgo.app/docs/webapp/channels/).
+-   **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**: Set up controlled rollouts with specific [update channels](https://capgo.app/docs/webapp/channels/).
 -   **Performance**: Fine-tune WebView settings. For example:
 
 ```json

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-08T03:39:09.600Z
-updated_at: 2025-03-24T13:06:20.746Z
+updated_at: 2025-03-24T14:54:52.471Z
 head_image: https://assets.seobotai.com/capgo.app/67a6a42ecd7a7d94bc55e8db-1738985966262.jpg
 head_image_alt: Mobile Development
 keywords: app updates, open source, proprietary solutions, security, customization, scalability, development tools
@@ -128,7 +128,7 @@ Cloud-based proprietary solutions have further expanded scalability options. How
 
 ## Direct Comparison: Open Source vs Proprietary
 
-Here's a clear breakdown of how open-source and proprietary [app update solutions](https://capgo.app/fr/plugins/capacitor-updater/) differ across key features, costs, and technical requirements.
+Here's a clear breakdown of how open-source and proprietary [app update solutions](https://capgo.app/plugins/capacitor-updater/) differ across key features, costs, and technical requirements.
 
 ### Feature Matrix
 
@@ -185,9 +185,9 @@ When deciding between open-source and proprietary tools, consider factors like y
 
 ### When Open Source Makes Sense
 
-Open-source tools are a great fit for projects that need flexibility and customization. They’re especially useful for teams looking for tailored integrations and cost-efficient options. The [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater/) is a good example of this approach. As Capawesome explains:
+Open-source tools are a great fit for projects that need flexibility and customization. They’re especially useful for teams looking for tailored integrations and cost-efficient options. The [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) is a good example of this approach. As Capawesome explains:
 
-> "One of the biggest advantages of Capacitor over other runtimes is the ability to deliver updates in real-time without having to resubmit your app to the app stores" [\[4\]](https://capawesome.io/blog/announcing-the-capacitor-live-update-plugin/).
+> "One of the biggest advantages of Capacitor over other runtimes is the ability to deliver updates in real-time without having to resubmit your app to the app stores" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 
 This option is well-suited for:
 

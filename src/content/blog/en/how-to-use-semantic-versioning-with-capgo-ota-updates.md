@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to simplify [app updates](https://capgo.app/ja/plugins/capacitor-updater/) and version control?** Semantic Versioning (SemVer) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
+**Want to simplify [app updates](https://capgo.app/plugins/capacitor-updater/) and version control?** Semantic Versioning (SemVer) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
 
 -   **Semantic Versioning Basics:** Versions use the format `MAJOR.MINOR.PATCH`:
     
@@ -299,7 +299,7 @@ Even with precautions, updates can fail. If that happens, follow these recovery 
 2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/CLI).
 3.  Verify updates during app startup to ensure they work as expected.
 
-Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.
+Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). Additionally, failed network requests are automatically retried during the next app launch [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.
 
 ## Summary
 

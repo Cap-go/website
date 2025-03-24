@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Staged rollouts on Google Play** let developers release [app updates](https://capgo.app/ja/plugins/capacitor-updater/) gradually, starting with a small percentage of users before expanding to everyone. This ensures stability, catches issues early, and minimizes risks.
+**Staged rollouts on Google Play** let developers release [app updates](https://capgo.app/plugins/capacitor-updater/) gradually, starting with a small percentage of users before expanding to everyone. This ensures stability, catches issues early, and minimizes risks.
 
 ### Key Benefits:
 
@@ -113,7 +113,7 @@ Using [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update
 
 When selecting a tool, focus on those offering automated monitoring. Tools with an average response time of **434ms globally** [\[1\]](https://capgo.app/) allow for quick action when issues arise.
 
-For even more control, consider using a [channel system](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+For even more control, consider using a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) for update distribution. This lets you target specific user groups with different versions, making beta testing and staged rollouts smoother. Additionally, the ability to push live code changes while staying compliant with app store rules can simplify and speed up your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ## Rules and Restrictions
 

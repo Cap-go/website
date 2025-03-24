@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want faster [app updates](https://capgo.app/ja/plugins/capacitor-updater/) without the wait?** Over-the-Air (OTA) updates let developers bypass app store delays and push changes directly to users within minutes. Here's why this matters:
+**Want faster [app updates](https://capgo.app/plugins/capacitor-updater/) without the wait?** Over-the-Air (OTA) updates let developers bypass app store delays and push changes directly to users within minutes. Here's why this matters:
 
 -   **Speed**: OTA updates reach 95% of users within 24 hours, compared to the 2–7 day review cycle for app store updates.
 -   **Flexibility**: Roll out targeted updates, fix bugs, or deploy features without requiring user action.
@@ -111,7 +111,7 @@ Here's a breakdown of the key differences between app store updates and OTA upda
 | **Update Success Rate** | Depends on user action | 95% within 24 hours |
 | **Distribution Control** | Limited targeting options | Channel-based targeting |
 | **Rollback Capability** | Requires new submission | Instant rollback |
-| **User Interaction** | [Manual update approval](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| **User Interaction** | [Manual update approval](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
 | **Analytics** | Basic install metrics | Detailed update tracking |
 | **Bandwidth Usage** | Full app download | Only changed content |
 | **Development Workflow** | Rigid release cycles | CI/CD integration enabled |
@@ -161,7 +161,7 @@ These examples show how well-executed OTA updates can enable fast deployments, r
 
 ### Key Takeaways
 
-[Mobile app updates](https://capgo.app/fr/plugins/capacitor-updater/) have come a long way, with OTA updates now standing as a fast and efficient alternative to traditional app store methods. For instance, Capgo updates reach **95% of active users within just 24 hours** [\[1\]](https://capgo.app/). Here's how the two approaches compare:
+[Mobile app updates](https://capgo.app/plugins/capacitor-updater/) have come a long way, with OTA updates now standing as a fast and efficient alternative to traditional app store methods. For instance, Capgo updates reach **95% of active users within just 24 hours** [\[1\]](https://capgo.app/). Here's how the two approaches compare:
 
 | Aspect | OTA Updates | Traditional App Store |
 | --- | --- | --- |

@@ -46,7 +46,7 @@ Set up a robust monitoring system to ensure updates run smoothly, improve user r
 
 ## Update Monitoring Tools
 
-Choosing the right tools to monitor updates is key to keeping Capacitor apps running smoothly. According to recent data, **78% of [Capacitor developers](https://capgo.app/blog/capacitor-live-updates-sdk-is-now-ga).
+Choosing the right tools to monitor updates is key to keeping Capacitor apps running smoothly. According to recent data, **78% of [Capacitor developers](https://capgo.app/blog/capacitor-comprehensive-guide/) rely on dedicated monitoring solutions** to track updates effectively [\[1\]](https://ionic.io/blog/capacitor-live-updates-sdk-is-now-ga).
 
 ### Tool Comparison Chart
 
@@ -92,7 +92,7 @@ Once your monitoring tools are in place, the next step is setting up technical t
 
 ## Setting Up Update Monitoring
 
-To keep [Capacitor updates](https://capgo.app/es/plugins/capacitor-updater/) running smoothly, you'll need three main elements: **update listeners**, **performance metrics**, and **CI/CD integration**.
+To keep [Capacitor updates](https://capgo.app/plugins/capacitor-updater/) running smoothly, you'll need three main elements: **update listeners**, **performance metrics**, and **CI/CD integration**.
 
 ### Configuring Update Listeners
 

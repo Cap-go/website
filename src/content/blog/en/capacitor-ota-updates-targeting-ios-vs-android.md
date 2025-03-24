@@ -52,7 +52,7 @@ Apple has strict guidelines for OTA updates. Devices must meet specific technica
 
 ### Google Play Store Update Rules
 
-Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/docs/core/ota/ab).
+Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) [\[8\]](https://source.android.com/docs/core/ota/ab).
 
 ### Platform Update Differences
 
@@ -90,7 +90,7 @@ For iOS, Apple uses Rapid Security Response (RSR) to deliver critical patches di
 
 ### Update Strategy Results
 
-Android's [Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html) has reduced the time required for security updates by about 7 days [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346). To manage updates effectively, it's recommended to separate development and production [update channels](https://capgo.app/docs/faq/). Capgo simplifies the process with percentage-based deployments, allowing for controlled rollouts while staying within app store guidelines.
+Android's [Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html) has reduced the time required for security updates by about 7 days [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346). To manage updates effectively, it's recommended to separate development and production [update channels](https://capgo.app/docs/webapp/channels/) [\[9\]](https://capgo.app/docs/faq/). Capgo simplifies the process with percentage-based deployments, allowing for controlled rollouts while staying within app store guidelines.
 
 The updater also caches downloaded bundles in platform-specific directories for efficient and secure updates:
 
@@ -107,7 +107,7 @@ The speed and efficiency of OTA (Over-the-Air) updates play a huge role in shapi
 
 ### File Size and Network Management
 
-Keeping file sizes optimized is crucial for smooth OTA updates. For instance, Capgo's updater runs update checks in a background thread during app startup, ensuring the user interface stays responsive [\[9\]](https://capgo.app/docs/faq/).
+Keeping file sizes optimized is crucial for smooth OTA updates. For instance, Capgo's updater runs update checks in a background thread during app startup, ensuring the user interface stays responsive [\[9\]](https://capgo.app/docs/faq/). It also supports JavaScript updates while locking native code (like Java/Kotlin or Objective-C/Swift) to maintain stability [\[9\]](https://capgo.app/docs/faq/).
 
 ### Update Speed Comparison
 
@@ -155,7 +155,7 @@ By working with iOS and Android security protocols, Capgo ensures seamless OTA u
 
 ### Capgo Key Functions
 
-Capgo focuses on solving update challenges with secure, efficient, and compliant delivery. Updates are protected with **end-to-end encryption**, and decryption happens only on user devices [\[1\]](https://capgo.app/docs/faq/).
+Capgo focuses on solving update challenges with secure, efficient, and compliant delivery. Updates are protected with **end-to-end encryption**, and decryption happens only on user devices [\[1\]](https://capgo.app/). For iOS, it uses a custom Dart interpreter to align with Apple's interpreter-only update rule [\[9\]](https://capgo.app/docs/faq/). On Android, it supports API level 22 and above, in line with Capacitor's requirements [\[9\]](https://capgo.app/docs/faq/).
 
 | Feature | Implementation | Platform Support |
 | --- | --- | --- |
@@ -184,7 +184,7 @@ Capgo can adjust any JavaScript code, including app and generated code, but it s
 
 ## Conclusion
 
-OTA updates for [Capacitor apps](https://capgo.app/blog/how-live-updates-for-capacitor-work/). These differences highlight the importance of creating update strategies that align with each platform's framework.
+OTA updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) require different approaches for iOS and Android due to platform-specific rules. For iOS, there are stricter controls, such as the file path restriction that limits server paths to "/Library/NoCloud/ionic\_built\_snapshots" [\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/). Meanwhile, Android allows more freedom, with fewer limitations on virtual machines and interpreters accessing APIs [\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/). These differences highlight the importance of creating update strategies that align with each platform's framework.
 
 Data from platforms like Capgo demonstrates how effective these strategies can be. Developers have successfully delivered 947.6 million updates across 1,400 production apps, proving the scalability of well-designed update systems [\[1\]](https://capgo.app/). However, success relies heavily on meeting each platform's requirements while maintaining strong security measures.
 

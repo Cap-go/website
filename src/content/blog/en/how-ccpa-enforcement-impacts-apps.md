@@ -175,7 +175,7 @@ For example, the [Flurry](https://www.flurry.com/) SDK includes an opt-out API t
 
 ## CCPA Compliance Resources
 
-To meet CCPA standards, app developers need the right tools to simplify compliance processes. Investing in data privacy not only builds trust but can also yield a return of up to $2.70 for every dollar spent [\[8\]](https://www.osano.com/solutions/ccpa-compliance-software). Below are tools designed to make compliance assessments, privacy management, and [app updates](https://capgo.app/ja/plugins/capacitor-updater/) more manageable.
+To meet CCPA standards, app developers need the right tools to simplify compliance processes. Investing in data privacy not only builds trust but can also yield a return of up to $2.70 for every dollar spent [\[8\]](https://www.osano.com/solutions/ccpa-compliance-software). Below are tools designed to make compliance assessments, privacy management, and [app updates](https://capgo.app/plugins/capacitor-updater/) more manageable.
 
 ### Compliance Assessment Tools
 

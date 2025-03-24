@@ -282,6 +282,6 @@ To make a meaningful contribution with your plugin, it's important to follow the
 
 The PR checklist highlights the need for high-quality submissions. If your plugin supports live updates, integrating with Capgo (as mentioned earlier) can help you release updates quickly without waiting for app store approvals.
 
-Once your PR is merged, stay involved by tracking issues and releasing version updates. Regular interaction with the community, consistent maintenance, and [keeping up with Capacitor updates](https://capgo.app/it/plugins/capacitor-updater/) will ensure your plugin stays useful and relevant.
+Once your PR is merged, stay involved by tracking issues and releasing version updates. Regular interaction with the community, consistent maintenance, and [keeping up with Capacitor updates](https://capgo.app/plugins/capacitor-updater/) will ensure your plugin stays useful and relevant.
 
 Pay attention to user feedback and make updates as needed. This ongoing effort helps maintain the overall quality of the ecosystem and keeps your plugin valuable for developers.

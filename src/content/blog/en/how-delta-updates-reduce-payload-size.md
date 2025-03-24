@@ -78,7 +78,7 @@ Before implementing delta updates, make sure you have the following:
 | --- | --- | --- |
 | **Capacitor Version** | Framework version | Version 6 or 7 |
 | **Development Environment** | Build tools | [Node.js](https://nodejs.org/en) and npm |
-| **[Update Service](https://capgo.app/docs/cli/commands) |
+| **[Update Service](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Delta management | [Capgo CLI](https://capgo.app/docs/cli/commands) |
 | **CI/CD Integration** | Automated deployment | GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), or Jenkins |
 
 ### Code Setup Guide

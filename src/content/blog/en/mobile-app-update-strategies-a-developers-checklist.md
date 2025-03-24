@@ -185,7 +185,7 @@ Taking a structured approach to updates can lead to clear advantages - like high
 
 ### Developer's Checklist in a Nutshell
 
-To manage [mobile app updates](https://capgo.app/fr/plugins/capacitor-updater/) effectively, developers need solid processes and the right tools. Modern practices like automated testing, phased rollouts, and constant monitoring are critical.
+To manage [mobile app updates](https://capgo.app/plugins/capacitor-updater/) effectively, developers need solid processes and the right tools. Modern practices like automated testing, phased rollouts, and constant monitoring are critical.
 
 **Key Steps for Success**:
 

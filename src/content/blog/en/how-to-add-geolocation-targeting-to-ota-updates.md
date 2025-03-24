@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to deliver [app updates](https://capgo.app/ja/plugins/capacitor-updater/) tailored to users' locations?** Geolocation targeting in Over-the-Air (OTA) updates makes this possible. Here's a quick breakdown of how you can combine geolocation with OTA updates to improve user experience and engagement:
+**Want to deliver [app updates](https://capgo.app/plugins/capacitor-updater/) tailored to users' locations?** Geolocation targeting in Over-the-Air (OTA) updates makes this possible. Here's a quick breakdown of how you can combine geolocation with OTA updates to improve user experience and engagement:
 
 -   **Why Geolocation Targeting?**
     
@@ -65,7 +65,7 @@ Your app should support both web and native functionalities to enable dynamic OT
 
 ### Setting Up Location Services
 
-To configure the [Capacitor Geolocation plugin](https://capgo.app/ja/plugins/capacitor-nativegeocoder/), follow these steps:
+To configure the [Capacitor Geolocation plugin](https://capgo.app/plugins/capacitor-nativegeocoder/), follow these steps:
 
 **For iOS:**
 

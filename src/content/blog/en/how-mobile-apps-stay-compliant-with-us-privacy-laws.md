@@ -28,7 +28,7 @@ next_blog: ''
 -   **[App Store](https://www.apple.com/app-store/) Rules**:
     
     -   Apple: Follow [App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency) (ATT) and update privacy labels.
-    -   Google: Submit a Data Safety Declaration and maintain a detailed [privacy policy](https://capgo.app/it/privacy/).
+    -   Google: Submit a Data Safety Declaration and maintain a detailed [privacy policy](https://capgo.app/privacy/).
 -   **Compliance Steps**:
     
     -   Regularly audit data collection practices.
@@ -184,7 +184,7 @@ These audits, paired with privacy management tools, help developers act quickly 
 
 ### Privacy Management Tools
 
-To handle compliance challenges efficiently, developers rely on tools for fast and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) globally [\[1\]](https://capgo.app/).
+To handle compliance challenges efficiently, developers rely on tools for fast and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Capgo is a prime example, having delivered over 947.6 million [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) globally [\[1\]](https://capgo.app/).
 
 | Feature | Privacy Benefit | Implementation Impact |
 | --- | --- | --- |

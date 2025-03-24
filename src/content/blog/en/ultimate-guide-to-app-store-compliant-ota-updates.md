@@ -228,7 +228,7 @@ The platform also ensures compliance and high performance with its custom Dart i
 
 Capgo maintains strict adherence to app store guidelines by:
 
--   Updating only [JavaScript bundles](https://capgo.app/docs/getting-started/quickstart/).
+-   Updating only [JavaScript bundles](https://capgo.app/docs/webapp/bundles/), avoiding native code changes [\[14\]](https://capgo.app/docs/getting-started/quickstart/).
 -   Ensuring updates align with the app’s original purpose, do not create new storefronts, and don’t compromise system security.
 
 > "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS."  

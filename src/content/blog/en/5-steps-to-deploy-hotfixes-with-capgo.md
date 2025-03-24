@@ -19,7 +19,7 @@ next_blog: ''
 [Capgo](https://capgo.app/) makes deploying hotfixes fast and easy, skipping app store delays while keeping updates secure and compliant with Apple and Google guidelines. Here’s a quick overview of the process:
 
 1.  **Create and Test Your Hotfix**: Write precise code changes, test thoroughly on devices, and ensure compatibility.
-2.  **[Set Up Capgo](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
+2.  **[Set Up Capgo](https://capgo.app/docs/webapp/)**: Install the [Capgo CLI](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
 3.  **Upload Your Hotfix**: Use the CLI to securely upload your update, label it clearly, and prepare for deployment.
 4.  **Choose Update Settings**: Target specific users or groups, schedule rollouts, and define version requirements.
 5.  **Track Your Update**: Monitor delivery rates, update speed, and user coverage. Roll back instantly if needed.
