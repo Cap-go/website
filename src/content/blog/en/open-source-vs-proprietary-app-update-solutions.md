@@ -63,9 +63,9 @@ These features work seamlessly with modern CI/CD workflows, making app updates m
 
 ### Common Tools and Plugins
 
-The open-source landscape offers trusted tools for app updates. **[Capgo](https://capgo.app/)** stands out as a top choice for live updates in Capacitor apps, offering end-to-end encryption, smooth CI/CD integration, and compliance with app store guidelines.
+The open-source landscape offers trusted tools for app updates. **[Capgo](https://capgo.app/)** stands out as a top choice for live updates in Capacitor apps, offering end-to-end encryption, smooth CI/CD integration, and compliance with app store guidelines. And completely open source.
 
-Another popular option is the **[Capacitor Live Update](https://www.npmjs.com/package/%40capacitor%2Flive-updates) plugin**, which simplifies the process of adding live update functionality [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update)[\[4\]](https://capawesome.io/blog/announcing-the-capacitor-live-update-plugin/).
+Another popular option is the **[Capacitor Live Update](https://www.npmjs.com/package/%40capacitor%2Flive-updates) plugin**, which simplifies the process of adding live update functionality [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update)[\[4\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), open source plugin but no backend.
 
 ### Strengths and Weaknesses
 
@@ -175,9 +175,9 @@ When deciding between open-source and proprietary tools, consider factors like y
 
 ### When Open Source Makes Sense
 
-Open-source tools are a great fit for projects that need flexibility and customization. They’re especially useful for teams looking for tailored integrations and cost-efficient options. The [Capacitor Live Update plugin](https://capgo.app/confirm_email/) is a good example of this approach. As [Capawesome.io](https://capawesome.io/) explains:
+Open-source tools are a great fit for projects that need flexibility and customization. They’re especially useful for teams looking for tailored integrations and cost-efficient options. The [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater/) is a good example of this approach. As [Capgo.app](https://capgo.app/) explains:
 
-> "One of the biggest advantages of Capacitor over other runtimes is the ability to deliver updates in real-time without having to resubmit your app to the app stores" [\[4\]](https://capawesome.io/blog/announcing-the-capacitor-live-update-plugin/).
+> "One of the biggest advantages of Capacitor over other runtimes is the ability to deliver updates in real-time without having to resubmit your app to the app stores" [\[4\]](/blog/open-source).
 
 This option is well-suited for:
 

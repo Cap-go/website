@@ -64,7 +64,7 @@ Here are some performance benchmarks [\[1\]](https://capgo.app/):
 -   **API response time**: 434 ms globally
 -   **Update success rate**: 82% worldwide
 
-## Explore [Capawesome](https://capawesome.io/)'s New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
+## Explore [Capgo](https://capgo.app/plugins/)'s Capacitor [Capacitor](https://capacitorjs.com/) Plugins
 
 ![Capawesome](https://mars-images.imgix.net/seobot/screenshots/capawesome.io-5dcbb99c7c66e0a1d148a9bb4683db23-2025-03-21.jpg?auto=compress)
 

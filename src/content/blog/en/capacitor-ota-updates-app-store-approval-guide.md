@@ -105,7 +105,7 @@ Create update interfaces that are easy to use and non-disruptive:
 -   Enable **background downloads** with progress indicators.
 -   Allow users to decide when to install updates, except for critical security patches.
 
-Forced updates should only be used for critical security fixes, and they must clearly communicate the urgency [\[3\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/). These steps help reduce rejection risks caused by intrusive update prompts.
+Forced updates should only be used for critical security fixes, and they must clearly communicate the urgency [\[3\]](/blog/how-live-updates-for-capacitor-work). These steps help reduce rejection risks caused by intrusive update prompts.
 
 ### Update Security Protocol
 

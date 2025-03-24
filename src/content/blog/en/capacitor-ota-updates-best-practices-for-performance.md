@@ -85,7 +85,7 @@ Before rolling out updates, thorough testing is essential:
 
 -   Use testing environments that closely replicate production settings.
 -   Record baseline metrics like startup time, memory usage, bandwidth, and battery consumption.
--   Verify fallback mechanisms to ensure the server path resets if an update fails [\[4\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/).
+-   Verify fallback mechanisms to ensure the server path resets if an update fails [\[4\]](/blog/how-live-updates-for-capacitor-work).
 
 Once performance is stable, check that the updates meet app store regulations.
 
@@ -95,11 +95,11 @@ To avoid issues with app store approvals, follow these platform-specific rules:
 
 **Apple App Store Requirements:**
 
-> "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[4\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/)
+> "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[4\]](/blog/how-live-updates-for-capacitor-work)
 
 **Google Play Store Guidelines:**
 
-> "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)." [\[4\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/)
+> "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)." [\[4\]](/blog/how-live-updates-for-capacitor-work)
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
@@ -185,6 +185,6 @@ This highlights the importance of creating a reliable update system that balance
 
 To maximize the efficiency of OTA updates in your Capacitor app, make sure to:
 
--   **Set up encryption**: Use digital signatures to verify updates [\[4\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/).
+-   **Set up encryption**: Use digital signatures to verify updates [\[4\]](/blog/how-live-updates-for-capacitor-work).
 -   **Streamline update delivery**: Consider tools like Capgo for smooth, background updates.
 -   **Prepare fallback systems**: Ensure the app remains functional even if an update fails [\[9\]](https://dzone.com/articles/why-device-firmware-updates-are-critical-to-produc).

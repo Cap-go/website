@@ -43,7 +43,7 @@ Here’s what you’ll learn:
 
 Want to learn how to set it up and avoid common mistakes? Keep reading for a step-by-step guide.
 
-## Explore [Capawesome](https://capawesome.io/plugins/)'s Ionic [Capacitor](https://capacitorjs.com/) Live Update Plugin
+## Explore [Capgo](https://capgo.app/plugins/)'s Capacitor [Capacitor](https://capacitorjs.com/) Plugins
 
 ![Capawesome](https://mars-images.imgix.net/seobot/screenshots/capawesome.io-1374c0b85e4621707603b9b4a57465b0-2025-03-14.jpg?auto=compress)
 

@@ -72,7 +72,7 @@ With a clear roadmap in place, it’s time to select the right tools to streamli
 
 Picking the right tools for your Continuous Integration/Continuous Deployment (CI/CD) pipeline is essential. Popular options like [GitHub Actions](https://docs.github.com/actions), [Bitrise](https://bitrise.io/), and [CircleCI](https://circleci.com/) each have unique benefits. For example, [GitHub Actions](https://docs.github.com/actions) integrates directly with your GitHub repositories, making it a convenient choice for many developers [\[2\]](https://www.poppinslabs.com/blog/mobile-app-ci-cd-pipeline).
 
-For Over-the-Air (OTA) updates, tools like Capacitor allow you to deliver changes directly to users without waiting for app store approvals [\[3\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/). When choosing an OTA solution, consider these factors:
+For Over-the-Air (OTA) updates, tools like Capacitor allow you to deliver changes directly to users without waiting for app store approvals [\[3\]](/blog/how-live-updates-for-capacitor-work). When choosing an OTA solution, consider these factors:
 
 -   **Deployment speed** to minimize downtime.
 -   **Version control** to manage updates effectively.

@@ -218,7 +218,7 @@ When selecting an OTA update tool, make sure it offers:
 -   **End-to-end encryption** to keep updates secure
 -   **CI/CD integration** to align with your workflow
 -   **User assignment** for controlled rollouts
--   **App store compliance** to avoid distribution issues [\[10\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work/)
+-   **App store compliance** to avoid distribution issues [\[10\]](/blog/how-live-updates-for-capacitor-work)
 
 Your choice of OTA update software can have a big impact on your team's efficiency and deployment success. Take time to assess your needs around security, version control, and collaboration to find the best fit for your project.
 
