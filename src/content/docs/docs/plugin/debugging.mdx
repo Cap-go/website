@@ -22,6 +22,16 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **disableAutoUpdateUnderNative**                 | The device has version (`1.2.3`), and the channel has an update (`1.2.2`) under the device version to send, but that is disabled in the channel settings.                   |
 | **disableDevBuild**                              | The device has a dev build, but that is disabled in the channel settings.                                                                                                   |
 | **disableEmulator**                              | The device is an emulator, but that is disabled in the channel settings.                                                                                                    |
+| **cannotGetBundle**                          | An error occurred while trying to retrieve the bundle information.                                                                                          |
+| **cannotUpdateViaPrivateChannel**              | Device attempted an update via a private channel it doesn't have access to.                                                                                    |
+| **channelMisconfigured**                       | The channel configuration is invalid or incomplete.                                                                                                                 |
+| **disableAutoUpdateMetadata**                  | Automatic updates based on metadata changes are disabled.                                                                                                         |
+| **disableAutoUpdateToMajor**                   | Automatic updates to major versions are disabled in channel settings.                                                                                             |
+| **disableAutoUpdateToMinor**                   | Automatic updates to minor versions are disabled in channel settings.                                                                                             |
+| **disableAutoUpdateToPatch**                   | Automatic updates to patch versions are disabled in channel settings.                                                                                             |
+| **missingBundle**                              | The requested bundle was not found on the server.                                                                                                                   |
+| **NoChannelOrOverride**                        | No channel is set for the device and no override is provided.                                                                                                     |
+
 
 ### Sent from the device
 
@@ -42,6 +52,12 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **directory_path_fail** | There is an error in the path of zip files                                         |
 | **unzip_fail**          | unzip failed                                                                   |
 | **low_mem_fail** | Download failed because of low memory in the device                                    |
+| **app_moved_to_background** | The application entered the background state.                                   |
+| **app_moved_to_foreground** | The application entered the foreground state.                                   |
+| **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
+| **getChannel**          | The current channel for the device was queried.                                   |
+| **setChannel**          | A channel was successfully set for the device.                                    |
+| **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
 
 ### Bundle status
 
@@ -135,6 +151,6 @@ On Android, all versions are stored in one folder, unlike IOS where it has to be
 ## Understanding ios production crash logs
 
 <LinkCard
-    title="How to review your app’s crash logs"
+    title="How to review your app's crash logs"
     href="https://developer.apple.com/news/?id=nra79npr"
 />
