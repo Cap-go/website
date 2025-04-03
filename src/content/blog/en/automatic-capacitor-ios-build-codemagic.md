@@ -42,7 +42,7 @@ We are going to use a **_macOS M1_** machine, you can see in the screenshot its 
 
 > **_📣_ In the post we assume that we have the app created in iTunes connect, we do have the certificates of the Apple ecosystem, everything will be setup by Codemagic!**
 
-## Let’s go to the mess 🧑🏽💻
+## Let's dive in 🤿 
 
 **Steps to follow in the post**
 

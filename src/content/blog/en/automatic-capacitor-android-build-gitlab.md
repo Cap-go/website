@@ -18,13 +18,43 @@ locale: en
 next_blog: null
 ---
 
+# Automatic Android Builds with GitLab CI
+
+Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
+
 ## Prerequisites
 
-Before continuing with the tutorial…
+Before starting, you'll need to set up:
 
--   Make sure you use GitLab
--   Your app is already deployed on Google Play store
--   Desire to read 😆…
+- A GitLab account with admin access
+- Your app already published on Google Play Store with proper signing
+- Android signing key and keystore files
+- Google Cloud Console project with Play Store API enabled
+- Service account with proper permissions
+- Understanding of GitLab CI/CD workflows
+- Knowledge of Fastlane configuration
+- Time to maintain and debug the pipeline
+
+## Professional CI/CD Setup by Capgo
+
+Skip the complexity. [Capgo](https://capgo.app/ci-cd/) configures your CI/CD pipeline directly in your preferred platform:
+
+- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
+- **Seamless Integration**: No platform switch needed, works with your current process
+- **Tailored Configuration**: Customized setup matching your project needs
+- **Expert Guidance**: We've already set up CI/CD for 50+ apps
+
+### Pricing
+- One-time setup fee: $2,600
+- Your running costs: ~$300/year
+- Compare to Other proprietary solution: $6,000/year
+- **Save $26,100 over 5 years**
+
+[Setup CI/CD Now](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+
+## Manual Setup Guide
+
+If you still want to set up everything yourself, here's what you need to do:
 
 **Steps to follow in the post**
 
@@ -34,11 +64,9 @@ Before continuing with the tutorial…
 4.  _Storing your Android signing key_
 5.  _Set up your GitLab workflow .yml file_
 
+## 1. Copy Fastline files
 
-## 1\. Copy Fastline files
-
-Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom “lanes” which bundle a series of “actions” that perform tasks that you’d normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we’ll be using only a handful of core actions.
-
+Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
 
 Create a Fastlane folder at the root of your project and copy the following files:
 Fastlane
@@ -133,12 +161,44 @@ GitLab provides a way to store encrypted CI/CD variables, similar to GitHub's re
 2. Navigate to CI/CD > Variables
 3. Add the following variables:
 
--   ANDROID_KEYSTORE_FILE:  the base64-encoded `.jks` or `.keystore` file used to sign your Android builds. This will either be the keystore file associated with your upload key (if using Play App Signing), or your app signing key.
+-   ANDROID_KEYSTORE_FILE:  the base64-encoded `.jks` or `.keystore` file used to sign your Android builds. This will either be the keystore file associated with your upload key (if using Play App Signing), or your app signing key.
 -   KEYSTORE_KEY_PASSWORD: the password associated with the keystore file
 -   KEYSTORE_KEY_ALIAS: the key store alias
 -   KEYSTORE_STORE_PASSWORD: the private key password
 -   DEVELOPER_PACKAGE_NAME: your android app ID like com.example.app
 -   PLAY_CONFIG_JSON: The base64-encoded service account key JSON.
+
+### Creating a Google Play Service Account Key
+
+To generate the `PLAY_CONFIG_JSON` secret, follow these steps:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the Google Play Android Developer API
+4. Create a service account:
+   - Go to "IAM & Admin" > "Service Accounts"
+   - Click "Create Service Account"
+   - Give it a name and description
+   - Click "Create and Continue"
+   - Skip role assignment and click "Done"
+5. Generate a JSON key:
+   - Find your service account in the list
+   - Click the three dots menu > "Manage keys"
+   - Click "Add Key" > "Create new key"
+   - Choose JSON format
+   - Click "Create"
+6. Grant the service account access to your app in the Play Console:
+   - Go to [Play Console](https://play.google.com/console)
+   - Navigate to "Users and permissions"
+   - Click "Invite new users"
+   - Enter the service account email (ends with @*.iam.gserviceaccount.com)
+   - Grant "Release to production" permission
+   - Click "Invite user"
+7. Convert the JSON key to base64:
+   ```bash
+   base64 -i path/to/your/service-account-key.json | pbcopy
+   ```
+8. Add the base64-encoded string as the `PLAY_CONFIG_JSON` variable in GitLab
 
 ## Set Up Your GitLab CI/CD Pipeline
 

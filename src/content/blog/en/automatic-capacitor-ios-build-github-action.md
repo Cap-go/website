@@ -18,6 +18,43 @@ locale: en
 next_blog: automatic-capacitor-android-build-github-action
 ---
 
+# Automatic iOS Builds with GitHub Actions using Certificates
+
+Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
+
+## Prerequisites
+
+Before starting, you'll need to set up:
+
+- A GitHub account with admin access
+- iOS developer program membership
+- App Store Connect API access with proper permissions
+- Understanding of GitHub Actions workflows
+- Knowledge of Fastlane configuration
+- Time to maintain and debug the pipeline
+- Proper certificates and provisioning profiles
+
+## Professional CI/CD Setup by Capgo
+
+Skip the complexity. [Capgo](https://capgo.app/ci-cd/) configures your CI/CD pipeline directly in your preferred platform:
+
+- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
+- **Seamless Integration**: No platform switch needed, works with your current process
+- **Tailored Configuration**: Customized setup matching your project needs
+- **Expert Guidance**: We've already set up CI/CD for 50+ apps
+
+### Pricing
+- One-time setup fee: $2,600
+- Your running costs: ~$300/year
+- Compare to Other proprietary solution: $6,000/year
+- **Save $26,100 over 5 years**
+
+[Setup CI/CD Now](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+
+## Manual Setup Guide
+
+If you still want to set up everything yourself, here's what you need to do:
+
 ## Continuous Delivery for iOS using Fastlane and GitHub Actions and certificate
 
 
@@ -404,7 +441,7 @@ Go to **Settings** > **Secrets and variables** > **Actions** > **New repository 
 
 3\. `BUILD_PROVISION_PROFILE_BASE64` - Base64 encoded provisioning profile.
 
-4\. `BUNDLE_IDENTIFIER` - your app’s bundle identifier.
+4\. `BUNDLE_IDENTIFIER` - your app's bundle identifier.
 
 5\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
 

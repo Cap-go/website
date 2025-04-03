@@ -3,16 +3,17 @@
 }
 
 .blog.prose  * {
-  line-height: 2 !important;
+  line-height: 2;
 }
 
 .blog.prose  img {
-  width: 100% !important;
+  width: 90%;
+	margin: 0 auto;
   border-radius: 0.5rem !important;
 }
 
 .blog.prose  blockquote {
-  color: theme('colors.pumpkinOrange.300') !important;
+  color: theme('colors.pumpkinOrange.300');
 }
 
 /* Table styling */
