@@ -21,7 +21,10 @@ const props = defineProps<{
   published?: boolean
   head_image?: string
   head_image_alt?: string
-  author_image_url: string
+  author_image_url?: string
+  coauthored_by?: string
+  coauthor_image_url?: string
+  coauthor_url?: string
   next_blog?: string | null
   description?: string | null
   headings?: MarkdownHeading[]
@@ -183,6 +186,18 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           {{ props?.author }}
         </a>
       </div>
+      <template v-if="props?.coauthored_by">
+        <div class="flex flex-row items-center px-4 mx-auto mt-5 lg:max-w-1/2">
+          <div class="min-w-max min-h-[1px]">Co-authored By</div>
+          <div class="ml-3 h-[1px] w-full bg-white/30" />
+        </div>
+        <div class="flex items-center px-4 mx-auto mt-5 lg:max-w-1/2">
+          <img :src="props?.coauthor_image_url" class="object-cover rounded-full size-8" :alt="`author image ${props?.coauthored_by}`" :title="`author image ${props?.coauthored_by}`" />
+          <a :href="props?.coauthor_url" class="ml-3 text-lg font-medium" target="_blank" rel="noopener noreferrer">
+            {{ props?.coauthored_by }}
+          </a>
+        </div>
+      </template>
     </div>
     <GetStarted class="mx-2" />
     <section class="py-2 sm:py-6 lg:py-10 xl:py-14">
