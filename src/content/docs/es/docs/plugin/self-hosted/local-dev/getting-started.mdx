@@ -1,0 +1,80 @@
+---
+title: Primeros pasos
+description: >-
+  Este tutorial muestra cómo empezar con Supabase desde cero y configurar Edge
+  Functions
+sidebar:
+  order: 1
+locale: es
+---
+
+## ¿Qué cubrirá este tutorial?
+
+Este tutorial mostrará cómo iniciar supabase desde cero así como iniciar las funciones edge
+
+## Requisitos
+1. [capgo](https://github.com/Cap-go/capgo) clonado
+3. [supabase](https://supabasecom/)
+
+## Empezando
+
+Para comenzar, ejecuta
+```bash
+supabase start
+```
+
+A continuación deberías ver algo como esto:
+```js
+Started supabase local development setup
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [truncated]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+Luego abre `configsjson` y establece los siguientes valores:
+```json
+{
+  "base_domain": {
+    "prod": "webcapgoapp",
+    "development": "developmentwebcapgoapp",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+donde `supa_key_anon` es el valor del paso anterior
+
+:::danger
+⚠️ No subas `configsjson` al repositorio remoto
+:::
+
+A continuación, verifica que puedes acceder a [localhost:54323](http://localhost:54323/projects) y que la tabla `users` se vea algo así
+
+<figure><img src="/supabasewebp" alt="" /><figcaption></figcaption></figure>
+
+Si es así, inicia las funciones edge ejecutando:
+
+```bash
+supabase functions serve
+```
+
+e inicia el frontend ejecutando:
+```bash
+bun run serve
+```

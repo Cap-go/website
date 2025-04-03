@@ -1,0 +1,30 @@
+---
+title: Perangkat
+description: Cara menggunakan halaman Device
+sidebar:
+  order: 7
+locale: id
+---
+
+## Tampilkan daftar semua perangkat
+Pertama, mari kita lihat halaman perangkat. Anda dapat mengaksesnya dengan [mengklik aplikasi Anda](/docs/webapp/main-page) dan kemudian [mengklik tab perangkat](/docs/webapp/main-app-page)
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/deviceswebp" alt="devices list" /><figcaption></figcaption></figure>
+
+## Tampilkan hanya perangkat pengembang
+Anda mungkin ingin menampilkan hanya perangkat yang ditimpa (Perangkat yang memiliki [channel kustom](docs/plugin/api/#setchannel) atau versi kustom)
+Untuk melakukan itu klik pada `Filters` dan kemudian pada `Override`. Tampilannya akan seperti ini:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filterwebp" alt="filter devices" /><figcaption></figcaption></figure>
+
+## Mengkonfigurasi perangkat
+
+Untuk mengkonfigurasi perangkat tertentu klik pada perangkat tersebut di tabel dan Anda akan melihat tampilan seperti ini:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specificwebp" alt="show one device" /><figcaption></figcaption></figure>
+
+Pertama `Custom ID`. Ini tidak terlalu berguna, dan saat ini tidak melakukan apa-apa. Anda dapat mengabaikannya
+
+Selanjutnya force version. Jika ini diatur maka perangkat ini akan **SELALU** menerima versi ini. Ini lebih diprioritaskan dibanding channel
+
+Terakhir channel kustom. Jika ini diatur maka perangkat ini tidak akan peduli dengan channel publik (default) dan hanya akan menggunakan channel ini

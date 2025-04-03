@@ -18,8 +18,6 @@ locale: en
 next_blog: ''
 ---
 
-# How Rapido Cloud manage Semantic Release with CapGo CapacitorUpdater
-
 ## 1. Introduction
 
 At Rapido Cloud (www.rapido.cloud), I am developing a mobile application for Salesforce clients to easily deploy their own branded mobile application without having to go through the difficult loops of using the Salesforce Mobile SDK or the Salesforce Mobile Publisher.

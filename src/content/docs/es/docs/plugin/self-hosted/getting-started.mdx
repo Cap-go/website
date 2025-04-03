@@ -1,0 +1,106 @@
+---
+title: Primeros pasos
+description: Cómo ejecutar tu propio servidor de actualización automática
+sidebar:
+  order: 1
+locale: es
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Esta documentación explicará cómo ejecutar tu propio servidor de actualización automática
+
+## Introducción
+
+Si encuentras útil este trabajo, considera apoyar mi trabajo convirtiéndote en [patrocinador de Github](https://github.com/sponsors/riderx)
+
+Aposté por hacer de código abierto todo el código que construí aquí en lugar de ponerlo detrás de un muro de pago. Al abrirlo en lugar de luchar y ocultarlo, creo que podemos hacer del mundo un mejor lugar
+
+Además, quiero centrarme en las herramientas de Capgo y hacer que sea un negocio abierto y transparente
+
+Pero para hacerlo posible, es necesario que todos hagamos nuestra parte, incluyéndote a ti 🥹
+
+Si Capgo no te conviene, entonces paga tu propio precio y [apoya a un Creador independiente](https://github.com/sponsors/riderx) en tus términos
+
+<LinkCard title="Considera Contribuir" href="/docs/plugin/self-hosted/contributing/"/>
+## Paridad de características
+
+Si eliges usar tu propio servidor, perderás el flujo de configuración de 5 minutos\
+Necesitarás implementar todas estas características por tu cuenta
+
+
+| Características          | Capgo | Auto alojado |
+| ------------------------ | ----- | ------------ |
+| Actualizaciones         | ✅     | 🚧          |
+| Auto reversión          | ✅     | 🚧          |
+| Alertas por email       | ✅     | 🚧          |
+| Canales                 | ✅     | 🚧          |
+| Anulación de canales    | ✅     | 🚧          |
+| Anulación de dispositivo| ✅     | 🚧          |
+| Ajustes de canales      | ✅     | 🚧          |
+| Ajustes de dispositivo  | ✅     | 🚧          |
+| ID personalizado        | ✅     | 🚧          |
+| Auto configurar canales | ✅     | 🚧          |
+| API de canales          | ✅     | 🚧          |
+| Estadísticas de actualiz| ✅     | 🚧          |
+| Estadísticas de fallos  | ✅     | 🚧          |
+| Estadísticas de uso     | ✅     | 🚧          |
+| Cifrado de actualización| ✅     | 🚧          |
+
+:::danger
+Si envías una actualización incorrecta a tus usuarios, puedes y romperás su aplicación
+:::
+
+> Ten en cuenta que no puedes usar la nube Capgo y tu servidor al mismo tiempo
+
+:::danger
+La función de actualización Over-the-Air (OTA) solo es aplicable para modificaciones realizadas en archivos HTML, CSS y JavaScript
+
+Si realizas cambios en el código nativo, como actualizaciones de plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación
+:::
+
+## Elige entre Auto y Manual
+En modo automático, parte de la lógica es manejada por el código nativo, las actualizaciones se deciden del lado del servidor, esto es más seguro y permite actualizaciones detalladas, despliegue parcial a un dispositivo o grupo y más
+
+En modo manual, toda la lógica es manejada por JS
+
+<LinkCard
+	title="Actualización Automática"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manual"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Instalar Capacitor updater
+
+```bash title="Instalar el actualizador de Capacitor"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## Prepara tu paquete
+
+Para enviar actualizaciones a tu aplicación, necesitas comprimirla en zip
+La mejor manera de asegurarte de que tu zip es correcto es usar el CLI de Capgo para comprimir
+```bash title="Crear un paquete con tus archivos para servir desde tu servidor"
+npx @capgo/cli@latest bundle zip
+```
+
+Tendrás que servir este zip desde tu servidor por tu cuenta
+
+<LinkCard
+	title="Actualización Automática"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manual"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+:::note
+Si esto parece mucho trabajo, prueba la versión de prueba de Capgo Cloud
+:::

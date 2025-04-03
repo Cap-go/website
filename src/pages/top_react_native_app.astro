@@ -1,9 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueTopreactnativeapp from '@/vue-pages/top_react_native_app.vue'
+import * as m from "../paraglide/messages.js"
 
-const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['top_react_native_apps_title'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['top_react_native_apps'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, m.top_react_native_apps_title()].join(' | ')
+const description = m.top_react_native_apps()
 
 const content = { title, description }
 ---

@@ -1,0 +1,101 @@
+---
+title: Authentification à deux facteurs
+description: >-
+  Gérez l'authentification à deux facteurs pour mieux protéger votre compte
+  Capgo.
+sidebar:
+  order: 9
+locale: fr
+---
+
+## Qu'est-ce que la 2FA ?
+
+La 2FA est une mesure de sécurité conçue pour empêcher un acteur malveillant de prendre le contrôle de votre compte capgo\
+Elle y parvient en exigeant un code supplémentaire. Ce code est stocké sur votre téléphone portable ou une clé matérielle 2FA. Il change toutes les 30 secondes, ce qui le rend impossible à deviner.
+
+## Prérequis pour ce guide
+ - Un téléphone Android ou iOS
+ - Une connexion Internet
+
+## Que couvre ce guide ?
+
+Ce guide vous montrera comment configurer la 2FA en utilisant `Google Authenticator`. D'autres applications existent pour servir un but similaire, cependant je ne peux pas couvrir l'ensemble du sujet de la 2FA dans ce guide.
+
+## Comment configurer la 2FA ?
+
+Premièrement, téléchargez l'application `Google Authenticator`. Si vous êtes sur Android, vous pouvez la télécharger depuis le [play store](https://playgooglecom/store/apps/details/?id=comgoogleandroidappsauthenticator2). Sur iOS, vous pouvez la télécharger depuis l'[App store](https://appsapplecom/us/app/google-authenticator/id388497605/)
+
+Deuxièmement, rendez-vous sur les [paramètres du compte capgo](https://webcapgoapp/dashboard/settings/account/). Vous devriez y voir un bouton vert qui ressemble à ceci :
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/button-mfawebp" alt="Button MFA" /><figcaption></figcaption></figure>
+
+Cliquez dessus, et un QR code devrait apparaître
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfawebp" alt="Enable MFA" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ Note Importante : \
+Ne partagez jamais ce QR code avec qui que ce soit, ou vous pourriez être déconnecté de votre compte
+:::
+
+Ensuite, ouvrez `Google Authenticator` sur votre téléphone. Une fois fait, suivez ces étapes :
+
+Cliquez sur le bouton plus
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-auth-pluswebp" alt="MFA auth plus" /><figcaption></figcaption></figure>
+
+Après cela, cliquez sur le bouton appareil photo
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-scan-qrwebp" alt="MFA scan QR" /><figcaption></figcaption></figure>
+
+Cela ouvrira l'aperçu de la caméra. Veuillez scanner le QR code affiché sur votre PC. Après l'avoir fait, vous devriez voir quelque chose comme ceci :
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-codewebp" alt="MFA final code" /><figcaption></figcaption></figure>
+
+Ensuite, retournez sur le PC et cliquez sur le bouton vérifier
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verifywebp" alt="Verify MFA" /><figcaption></figcaption></figure>
+
+Cela ouvrira une fenêtre pour taper votre code 2FA. Dans mon cas, ce code est `095101` mais il sera différent pour vous\
+Après avoir tapé ce code, cliquez sur le bouton `vérifier`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-codewebp" alt="MFA verify code final" /><figcaption></figcaption></figure>
+
+Si vous avez entré le bon code et appuyé sur `vérifier`, vous devriez voir une fenêtre comme celle-ci
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabledwebp" alt="MFA enabled" /><figcaption></figcaption></figure>
+
+Félicitations !\
+Vous avez activé l'authentification 2FA 🎉
+
+## Comment se connecter avec la 2FA
+
+La prochaine fois que vous vous connecterez à votre compte, vous verrez une fenêtre comme celle-ci
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-requiredwebp" alt="MFA required" /><figcaption></figcaption></figure>
+
+Veuillez ouvrir l'authentificateur et copier votre code d'authentification
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-loginwebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️ Note Importante : \
+Appuyez sur `vérifier` avant que le code ne se rafraîchisse, sinon le code changera et l'ancien ne sera plus valide
+:::
+
+Ensuite, saisissez le code dans le formulaire de connexion et appuyez sur `vérifier`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verifywebp" alt="MFA login" /><figcaption></figcaption></figure>
+
+Si vous avez entré le bon code, vous devriez voir le tableau de bord capgo
+
+## Comment désactiver la 2FA
+
+Pour désactiver la 2FA, rendez-vous sur les [paramètres du compte capgo](https://webcapgoapp/dashboard/settings/account/). Vous devriez y voir un bouton rouge qui ressemble à ceci :
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-buttonwebp" alt="MFA disable button" /><figcaption></figcaption></figure>
+
+Cliquez dessus, et vous devriez voir un écran comme celui-ci
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2webp" alt="MFA disabled" /><figcaption></figcaption></figure>
+
+Appuyez simplement sur le bouton `désactiver`, et c'est tout

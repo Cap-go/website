@@ -1,0 +1,87 @@
+---
+title: 手動更新
+description: Wie Sie ein Update selbst durchführen
+sidebar:
+  order: 5
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Wenn Sie selbst steuern möchten, wann Updates angewendet werden, verwenden Sie den manuellen Modus mit Capgo Cloud
+
+Hier ist, was Sie tun müssen: Richten Sie Ihr Konto ein, wie in Erste Schritte erklärt
+
+<LinkCard
+	title="Erste Schritte"
+	href="/docs/plugin/cloud-mode/getting-started"
+/>
+
+#### Konfiguration
+Deaktivieren Sie das automatische Update in Ihrer ```capacitor.config.json```
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false
+		}
+	}
+}
+```
+
+Fügen Sie dann die Logik hinzu, um Updates selbst zu verwalten\
+Hier ist ein Beispiel, wie Sie das machen können:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import type { BundleInfo } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+
+CapacitorUpdater.notifyAppReady()
+
+let data: BundleInfo | null = null
+
+App.addListener('appStateChange', async (state: any) => {
+  console.log('appStateChange', state)
+  if (state.isActive) {
+    console.log('getLatest')
+    // Führen Sie den Download durch, während die App aktiv genutzt wird, um fehlgeschlagene Downloads zu vermeiden
+    const latest = await CapacitorUpdater.getLatest()
+    console.log('latest', latest)
+    if (latest.url) {
+      data = await CapacitorUpdater.download({
+        url: latest.url,
+        version: latest.version,
+      })
+      console.log('download', data)
+    }
+  }
+  if (!state.isActive && data) {
+    console.log('set')
+    // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt oder wenn Sie es möchten
+    SplashScreen.show()
+    try {
+      await CapacitorUpdater.set({ id: data.id })
+    }
+    catch (err) {
+      console.log(err)
+      SplashScreen.hide() // falls das Setzen fehlschlägt, andernfalls muss die neue App es ausblenden
+    }
+  }
+})
+```
+
+Dokumentation aller verfügbaren APIs im Plugin:
+
+<LinkCard
+	title="Methoden"
+	href="/docs/plugin/api/"
+/>
+
+Es gibt einige Anwendungsfälle, bei denen Sie Benutzern erlauben können, Kanäle zu abonnieren und verschiedene Versionen zu testen:\
+[https://capgo.app/blog/how-to-send-specific-version-to-users/](https://capgo.app/blog/how-to-send-specific-version-to-users/)

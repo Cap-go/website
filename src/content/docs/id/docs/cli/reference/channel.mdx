@@ -1,0 +1,82 @@
+---
+title: saluran
+sidebar_label: channel
+sidebar:
+  order: 6
+locale: id
+---
+
+Perintah `channel` memungkinkan Anda mengelola kanal rilis Anda
+
+### add
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+Membuat kanal baru untuk aplikasi
+
+Opsi:
+
+- `-d, --default`: Atur kanal baru sebagai kanal default
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+
+### delete
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+Menghapus kanal dari aplikasi
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `--delete-bundle`: Hapus bundle yang terkait dengan kanal
+
+### list
+
+`npx @capgo/cli channel list [appId]`
+
+Menampilkan semua kanal untuk aplikasi
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+
+### currentBundle
+
+`npx @capgo/cli channel currentBundle [channel] [appId]`
+
+Mendapatkan bundle saat ini untuk kanal tertentu
+
+Opsi:
+
+- `-c, --channel <channel>`: Kanal untuk mendapatkan bundle saat ini
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `--quiet`: Hanya menampilkan versi bundle
+
+### set
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+Mengatur properti kanal
+
+Opsi:
+
+- `-a, --apikey <apikey>`: Kunci API untuk menghubungkan ke akun Anda
+- `-b, --bundle <bundle>`: Nomor versi bundle untuk diatur ke kanal
+- `-s, --state <state>`: Atur status kanal (`default` atau `normal`)
+- `--latest`: Gunakan versi terbaru dari `packagejson` sebagai versi bundle
+- `--downgrade`: Izinkan penurunan versi di bawah versi asli
+- `--no-downgrade`: Nonaktifkan penurunan versi di bawah versi asli
+- `--upgrade`: Izinkan peningkatan versi di atas versi asli
+- `--no-upgrade`: Nonaktifkan peningkatan versi di atas versi asli
+- `--ios`: Izinkan pengiriman pembaruan ke perangkat iOS
+- `--no-ios`: Nonaktifkan pengiriman pembaruan ke perangkat iOS
+- `--android`: Izinkan pengiriman pembaruan ke perangkat Android
+- `--no-android`: Nonaktifkan pengiriman pembaruan ke perangkat Android
+- `--self-assign`: Izinkan perangkat untuk mengatur diri sendiri ke kanal ini
+- `--no-self-assign`: Nonaktifkan pengaturan diri perangkat ke kanal ini
+- `--disable-auto-update <disableAutoUpdate>`: Nonaktifkan strategi pembaruan otomatis untuk kanal ini (opsi: `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev`: Izinkan pengiriman pembaruan ke perangkat pengembangan
+- `--no-dev`: Nonaktifkan pengiriman pembaruan ke perangkat pengembangan
+- `--emulator`: Izinkan pengiriman pembaruan ke perangkat emulator
+- `--no-emulator`: Nonaktifkan pengiriman pembaruan ke perangkat emulator
+- `--package-json <packageJson>`: Daftar path ke file `packagejson` yang dipisahkan koma (berguna untuk monorepo)

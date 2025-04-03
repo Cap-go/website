@@ -1,0 +1,151 @@
+---
+title: Déployer une mise à jour en direct
+sidebar:
+  order: 3
+locale: fr
+---
+
+import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Utilisez la fonctionnalité Live Updates de Capgo pour mettre à jour l'interface utilisateur et la logique métier de votre application à distance, en temps réel. Envoyez des mises à jour du bundle JS directement à vos utilisateurs sans passer par l'app store pour corriger instantanément les bugs et déployer de nouvelles fonctionnalités.
+
+Ce guide suppose que vous avez terminé le [Démarrage rapide Capgo](/docs/getting-started/quickstart) et que vous avez déjà :
+
+<Steps>
+
+1. Installé le SDK `@capgo/capacitor-updater` dans votre application Capacitor
+
+2. Configuré votre ID d'application et le canal de mise à jour dans `capacitor.config.ts`
+
+3. Ajouté dans votre code la méthode `CapacitorUpdater.notifyAppReady()`
+
+</Steps>
+
+Si vous n'avez pas encore effectué ces étapes, veuillez revenir en arrière et compléter d'abord le démarrage rapide.
+
+<LinkCard href="/docs/getting-started/add-an-app/" title="Ajouter une application" description="Ajoutez une application à votre compte Capgo et installez le plugin dans votre application" />
+
+## Téléversement d'un Bundle
+
+Une fois le SDK Capgo installé et configuré, vous êtes prêt à téléverser votre premier bundle de mise à jour en direct :
+
+1. Construisez vos assets web :
+   ```shell
+   npm run build
+   ```
+
+2. Téléversez le bundle vers Capgo :
+    <Tabs>
+      <TabItem label="Console">
+        ```shell
+      npx @capgo/cli@latest bundle upload --channel=Production
+      ```
+      </TabItem>
+      <TabItem label="Github Actions">
+      ```yml
+      // github/workflows/build_and_deploy.yml
+    name: Build source code and send to Capgo
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      deploy_to_capgo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - uses: actions/setup-node@v4
+            with:
+              node-version: 18
+          - name: Install dependencies
+            run: npm install
+          - name: Build
+            run: npm run build
+          - name: Deploy to Capgo
+            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            env:
+              CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      ```
+      </TabItem>
+      <TabItem label="Gitlab">
+      ```yml
+      // gitlab-ci.yml
+      stages:
+        - build
+
+      build:
+        stage: build
+        image: node:18
+        cache:
+          - key:
+              files:
+                - package-lock.json
+            paths:
+              - node_modules/
+        script:
+          - npm install
+          - npm run build
+          - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN --channel $CAPGO_CHANNEL
+        artifacts:
+          paths:
+            - node_modules/
+            - dist/
+        only:
+          - master
+      ```
+      </TabItem>
+    </Tabs>
+   Cela téléversera une nouvelle version du bundle vers le canal spécifié dans la commande.
+
+### Dépannage des téléversements
+
+Si votre téléversement échoue, vérifiez :
+- Que votre ID d'application dans `capacitor.config.ts` correspond à votre application dans le tableau de bord Capgo
+- Que vous exécutez la commande de téléversement depuis la racine de votre projet Capacitor
+- Que vos assets web sont construits et à jour
+
+Si vous rencontrez toujours des problèmes, consultez la section [Dépannage](/docs/getting-started/troubleshooting/)
+
+## Réception d'une mise à jour sur un appareil
+
+Une fois votre bundle téléversé, vous pouvez tester la mise à jour en direct sur un appareil :
+
+1. Synchronisez votre application avec l'appareil :
+   ```shell
+   npx cap sync ios
+   ```
+
+2. Ouvrez un autre terminal et exécutez la commande suivante pour vérifier l'état de la mise à jour :
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+3. Exécutez votre application localement :
+   ```shell
+   npx cap run ios
+   ```
+   Ou ouvrez le projet iOS/Android dans Xcode/Android Studio et effectuez une exécution native
+
+4. Gardez l'application ouverte pendant environ 30 secondes pour permettre à la mise à jour de se télécharger en arrière-plan
+
+5. Les logs prendront quelques secondes pour se mettre à jour et afficher l'état de la mise à jour
+
+6. Fermez et rouvrez l'application. Vous devriez voir votre mise à jour en direct appliquée !
+
+Référez-vous au [Démarrage rapide Capgo](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) pour plus de détails sur les tests des mises à jour en direct
+
+## Prochaines étapes
+
+Félicitations pour avoir déployé votre première mise à jour en direct avec Capgo ! 🎉
+
+Pour en savoir plus, consultez le reste de la [documentation Live Updates de Capgo](/docs/live-updates). Quelques sujets clés à découvrir ensuite :
+- [Ciblage des mises à jour avec les canaux](/docs/live-updates/channels)
+- [Personnalisation du comportement des mises à jour](/docs/live-updates/update-behavior)
+- [Retours en arrière des mises à jour en direct](/docs/live-updates/rollbacks)

@@ -1,0 +1,203 @@
+---
+title: "Bundles"
+description: "Bundles endpoint documentation"
+sidebar:
+  order: 8
+---
+
+Bundles are the core update packages in Capgo. Each bundle contains the web assets (HTML, CSS, JS) that make up your app's content. The Bundles API allows you to manage these update packages, including listing and deleting them.
+
+## Understanding Bundles
+
+A bundle represents a specific version of your app's web content and includes:
+- **Version**: Semantic version number of the bundle
+- **Checksum**: Unique hash to verify bundle integrity
+- **Storage Info**: Details about where and how the bundle is stored
+- **Native Requirements**: Minimum native app version requirements
+- **Metadata**: Creation time, ownership, and other tracking information
+
+## Best Practices
+
+1. **Version Management**: Use semantic versioning consistently
+2. **Storage Optimization**: Remove unused bundles periodically
+3. **Version Compatibility**: Set appropriate minimum native version requirements
+4. **Backup Strategy**: Maintain backups of critical bundle versions
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/bundle/`
+
+Retrieve bundle information. Returns 50 bundles per page.
+
+#### Query Parameters
+- `app_id`: Required. The ID of your app
+- `page`: Optional. Page number for pagination
+
+#### Response Type
+
+```typescript
+interface Bundle {
+  app_id: string
+  bucket_id: string | null
+  checksum: string | null
+  created_at: string | null
+  deleted: boolean
+  external_url: string | null
+  id: number
+  minUpdateVersion: string | null
+  name: string
+  native_packages: Json[] | null
+  owner_org: string
+  r2_path: string | null
+  session_key: string | null
+  storage_provider: string
+  updated_at: string | null
+  user_id: string | null
+}
+```
+
+#### Example Request
+
+```bash
+# Get all bundles
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/bundle/?app_id=app_123"
+
+# Get next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/bundle/?app_id=app_123&page=1"
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "app_id": "app_123",
+      "name": "1.0.0",
+      "checksum": "abc123...",
+      "minUpdateVersion": "1.0.0",
+      "storage_provider": "r2",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "deleted": false,
+      "owner_org": "org_123",
+      "user_id": "user_123"
+    }
+  ]
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/bundle/`
+
+Delete one or all bundles for an app. Use with caution as this action cannot be undone.
+
+#### Query Parameters
+
+For deleting a specific bundle:
+```typescript
+interface BundleDelete {
+  app_id: string
+  version: string
+}
+```
+
+For deleting all bundles:
+```typescript
+interface BundleDeleteAll {
+  app_id: string
+}
+```
+
+#### Example Requests
+
+```bash
+# Delete specific bundle
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version": "1.0.0"
+  }' \
+  https://api.capgo.app/bundle/
+
+# Delete all bundles
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123"
+  }' \
+  https://api.capgo.app/bundle/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Bundle not found
+{
+  "error": "Bundle not found",
+  "status": "KO"
+}
+
+// Invalid version format
+{
+  "error": "Invalid version format",
+  "status": "KO"
+}
+
+// Storage error
+{
+  "error": "Failed to delete bundle from storage",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage bundles",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Cleanup Old Versions**
+```typescript
+// Delete outdated beta versions
+{
+  "app_id": "app_123",
+  "version": "1.0.0-beta.1"
+}
+```
+
+2. **App Reset**
+```typescript
+// Remove all bundles to start fresh
+{
+  "app_id": "app_123"
+}
+```
+
+## Storage Considerations
+
+1. **Retention Policy**: Define how long to keep old bundles
+2. **Size Management**: Monitor bundle sizes and storage usage
+3. **Backup Strategy**: Consider backing up critical versions
+4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 

@@ -1,0 +1,50 @@
+---
+title: Ajouter une App
+description: >-
+  Ajoutez une application à votre compte Capgo et installez des plugins dans
+  l'application
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: fr
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Introduction à Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo en 15 minutes" />
+
+## Les mises à jour en direct en 3 étapes
+
+### Configuration guidée
+
+<Steps>
+
+1. Créez votre compte sur [https://capgo.app/register](https://capgo.app/register)
+![capture d'écran d'inscription](/signupwebp "capture d'écran d'inscription")
+
+2. Utilisez la commande Init pour commencer <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Une série de questions vous sera présentée. Fournissez les réponses nécessaires pour compléter la configuration automatisée<Aside type="tip">En suivant ces étapes, vous serez opérationnel en un rien de temps. Si vous avez besoin d'aide pendant le processus, notre équipe de support est [là pour vous aider](mailto:support@capgoapp) Bon démarrage !</Aside>
+
+3. Déployez une mise à jour en direct <LinkCard href="/docs/getting-started/deploy/" title="Déployer une mise à jour en direct" description="Apprenez comment déployer une mise à jour en direct pour votre application" />
+
+</Steps>
+
+### Configuration manuelle
+
+Si la commande init ne fonctionne pas pour vous, vous pouvez ajouter une application manuellement
+
+<Steps>
+
+1. Connectez le CLI à votre compte : <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Ajoutez l'application à votre compte avec cette commande : <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Installez le plugin dans votre application : <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Appelez la méthode init le plus tôt possible dans votre application : <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5. Déployez une mise à jour en direct <LinkCard href="/docs/getting-started/deploy/" title="Déployer une mise à jour en direct" description="Apprenez comment déployer une mise à jour en direct pour votre application" />
+
+</Steps>

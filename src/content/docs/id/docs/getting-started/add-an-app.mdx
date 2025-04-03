@@ -1,0 +1,48 @@
+---
+title: Ajouter une App
+description: Tambahkan aplikasi ke akun Capgo dan instal plugin ke aplikasi tersebut
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: id
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Pengenalan Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo dalam 15 menit" />
+
+## Live update hanya 3 langkah
+
+### Panduan setup
+
+<Steps>
+
+1. Buat akun Anda di [https://capgo.app/register](https://capgo.app/register)
+![signup screenshot](/signupwebp "signup screenshot")
+
+2. Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan diberikan beberapa pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan setup otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap menggunakan dalam waktu singkat. Jika Anda membutuhkan bantuan selama proses, tim support kami [siap membantu](mailto:support@capgoapp) Selamat mencoba!</Aside>
+
+3. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
+
+</Steps>
+
+### Setup manual
+
+Jika perintah init tidak berhasil, Anda dapat menambahkan aplikasi secara manual
+
+<Steps>
+
+1. Hubungkan CLI ke akun Anda: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
+
+</Steps>

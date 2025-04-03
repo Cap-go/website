@@ -1,0 +1,82 @@
+---
+title: 개요
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: ko
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Capgo의 실시간 업데이트 기능을 사용하여 앱의 JavaScript 번들을 원격으로 실시간으로 업데이트하세요. 앱 스토어 검토 과정 없이 사용자에게 직접 JS 업데이트를 푸시하여 즉시 버그를 수정하고 새로운 기능을 배포할 수 있습니다.
+
+<Aside>
+
+실시간 업데이트는 JavaScript 번들 변경으로 제한됩니다. 플러그인 추가 또는 제거, 네이티브 프로젝트 구성 변경과 같은 네이티브 코드를 업데이트해야 하는 경우 앱 스토어에 새로운 네이티브 바이너리 빌드를 제출해야 합니다.
+
+</Aside>
+
+## 실시간 업데이트 작동 방식
+
+Capgo의 실시간 업데이트 시스템에는 두 가지 주요 구성 요소가 있습니다:
+
+1. 앱에 설치하는 Capgo SDK. SDK는 사용 가능한 업데이트를 확인하고 백그라운드에서 다운로드합니다.
+
+2. 특정 사용자 그룹에 업데이트를 대상으로 하는 채널. 채널을 사용하여 `Production`, `Staging`, `Dev`와 같은 다양한 릴리스 트랙을 관리할 수 있습니다.
+
+Capgo에 새로운 JS 번들을 업로드하고 채널에 할당하면, 해당 채널로 구성된 앱의 Capgo SDK가 업데이트를 감지하고 다운로드합니다. 앱이 다시 시작될 때 새로운 번들이 로드됩니다.
+
+## 시작하기
+
+실시간 업데이트를 시작하려면 다음 단계를 따르세요:
+
+<Steps>
+
+1. [Capgo 퀵스타트](/docs/getting-started/quickstart)를 완료하여 Capgo에서 앱을 설정하고 Capgo SDK를 설치하세요.
+
+2. 앱 코드에서 앱 초기화가 완료된 후 `CapacitorUpdaternotifyAppReady()`를 호출하세요. 이는 Capgo SDK에게 앱이 업데이트를 받을 준비가 되었음을 알립니다.
+
+3. JS 번들을 빌드하고 Capgo에 업로드하세요:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle upload --channel=Production 
+   ```
+
+4. 앱을 열고 업데이트가 다운로드될 때까지 기다리세요. 다음으로 상태를 확인할 수 있습니다:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. 업데이트가 다운로드되면 앱을 종료하고 다시 열어 새로운 번들을 로드하세요.
+
+</Steps>
+
+자세한 내용은 [실시간 업데이트 배포](/docs/getting-started/deploy) 가이드를 참조하세요.
+
+## 다음 단계
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="채널" icon="bars">
+      채널을 사용하여 다양한 릴리스 트랙을 관리하고 특정 사용자에게 업데이트를 대상으로 하는 방법을 알아보세요.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="롤백" icon="left-arrow">
+      업데이트로 인해 문제가 발생할 경우 이전 JS 번들 버전으로 롤백하는 방법을 알아보세요.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="업데이트 동작" icon="setting">
+      앱에서 업데이트가 다운로드되고 적용되는 방법과 시기를 사용자 지정하세요.
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="빠른 업데이트" icon="starlight">
+      업데이트 프로세스를 가속화하기 위해 빠른 업데이트를 사용하는 방법을 알아보세요.
+    </Card>
+  </a>
+</CardGrid>

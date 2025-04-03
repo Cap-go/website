@@ -1,0 +1,141 @@
+---
+title: デバッグ
+description: アプリのデバッグ方法
+sidebar:
+  order: 6
+locale: ja
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## クラウドログの理解：
+
+### バックエンドから送信
+
+| コード                          | 説明                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | ユーザーがGoogleデータセンターに位置し、更新が4時間以内の場合。これはGoogleボットのデバイスがアカウントのデバイスとしてカウントされるのを防ぐためです |
+| **needPlanUpgrade** (以前は **needUpgrade**)     | プランの制限に達したことを示し、アップグレードするか次の月まで、デバイスは更新を受信しません                                  |
+| **noNew**                                        | デバイスは利用可能な最新バージョンを持っています                                                                                                                                |
+| **disablePlatformIos**                           | デバイスはiOSプラットフォーム上にありますが、チャンネル設定で無効化されています                                                                                            |
+| **disablePlatformAndroid**                       | デバイスはAndroidプラットフォーム上にありますが、チャンネル設定で無効化されています                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | デバイスのバージョン（`123`）があり、チャンネルにデバイスバージョンより低い更新（`122`）を送信しようとしていますが、チャンネル設定で無効化されています                   |
+| **disableDevBuild**                              | デバイスは開発ビルドですが、チャンネル設定で無効化されています                                                                                                   |
+| **disableEmulator**                              | デバイスはエミュレーターですが、チャンネル設定で無効化されています                                                                                                    |
+
+### デバイスから送信
+
+| コード  | 説明                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **get**               | 新バージョンのダウンロード情報がデバイスに送信されました                 |
+| **delete**            | デバイス上で1つのバンドルが削除されました                                        |
+| **set**               | バンドルがデバイスにセットされました                                              |
+| **set_fail**          | バンドルのセットに失敗しました                                                         |
+| **reset**             | デバイスが`builtin`バンドルにリセットされました                                         |
+| **download_XX**       | 新しいバンドルがダウンロードされました - XXは進捗率を示します（10%単位） |
+| **download_complete** | 新しいバンドルのダウンロードが完了しました                                                |
+| **download_fail**     | 新しいバンドルのダウンロードに失敗しました                                                |
+| **update_fail**       | 新しいバンドルはインストールされましたが、`notifyAppReady`の呼び出しに失敗しました            |
+| **checksum_fail**     | 新しいバンドルのチェックサム検証に失敗しました                                   |
+| **windows_path_fail** | ZIPファイルに不正なWindowsパスが含まれています                        |
+| **canonical_path_fail** | ファイルパスが正規形式ではありません                                              |
+| **directory_path_fail** | ZIPファイルのパスにエラーがあります                                         |
+| **unzip_fail**          | 解凍に失敗しました                                                                   |
+| **low_mem_fail** | デバイスのメモリ不足によりダウンロードに失敗しました                                    |
+
+### バンドルステータス
+
+* `SUCCESS`: バンドルのインストールが完了
+* `ERROR`: インストールまたはダウンロードに失敗
+* `PENDING`: ダウンロード完了、リリース待ち
+* `DELETED`: バンドルが削除されました（統計用に表示）
+* `DOWNLOADING`: 現在バンドルをダウンロード中
+
+## デバイスログの理解：
+
+### デバッグコマンド：
+
+Capgoクラウドユーザー向けのデバッグコマンドがあります
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+これによりアプリで発生するすべてのイベントを確認し、更新が行われない場合の解決策を見つけることができます
+
+### iOS
+
+Xcodeでログを見つけるには
+
+<LinkCard
+    title="Getting the Device Log in Xcode"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android：
+
+Android Studioでログを見つけるには
+
+<LinkCard
+    title="View logs with Logcat"
+    href="https://developerandroidcom/studio/debug/am-logcat"
+/>
+
+### ログの説明
+
+* `Failed to download from` **=>** **download_fail**と同じ
+* `notifyAppReady was not called, roll back current bundle` => **update_fail**と同じ
+
+## デバイスでダウンロードされたバンドルを見つける
+
+### iOS
+
+iOSでデバッグするには、アプリをコンピュータにダンプする必要があります：
+
+XcodeにはiOSデバイスの開発者インストールアプリのファイルシステムを検査する機能が組み込まれています
+
+手順：
+
+* デバイスをMacに接続し、Xcodeメニューバーで Window > Devices を選択
+* Devicesセクションの左ペインでデバイスを選択
+* そのデバイスの開発者インストールアプリの一覧が表示されます
+* 検査したいアプリを選択し、画面下部の歯車アイコンを選択
+* Show Containerを選択してファイルシステムを表示するか、スナップショットをダウンロードできます
+
+Download Containerを選択すると、xcappdataファイルとしてファイルシステムのスナップショットがダウンロード・エクスポートされます
+
+このファイルを右クリックしてShow Package Contentsを選択してフォルダを開きます
+
+App Dataフォルダを開くと、Documents、Library、tmpなどのフォルダが表示されます
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243ewebp/)
+
+バージョンは2つのフォルダにあります：
+
+`library/NoCloud/ionic_built_snapshots`はアプリの再起動後に必要です
+
+そして`documents/versions`はホットリロード用です
+
+### Android
+
+Androidでデバッグするには、Android Studioからデバイスにアクセスする必要があります：
+
+* View > Tool Windows > Device File Explorerをクリックするか、ツールウィンドウバーのDevice File ExplorerボタンをクリックしてDevice Explorerを開きます
+* ドロップダウンリストからデバイスを選択します
+* **data/data/APP_NAME/**のパスを開きます。**APP_NAMEはアプリのID**です
+
+![image](https://user-imagesgithubusercontentcom/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5fwebp/)
+
+`versions`フォルダを探してすべてのバージョンを確認します
+
+:::tip[ご存知ですか？]
+Androidではすべてのバージョンが1つのフォルダに保存されますが、iOSでは2つの場所に複製する必要があります
+:::
+
+## iOSの本番環境でのクラッシュログの理解
+
+<LinkCard
+    title="How to review your app's crash logs"
+    href="https://developerapplecom/news/?id=nra79npr"
+/>

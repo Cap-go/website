@@ -1,0 +1,80 @@
+---
+title: 自動アップデート
+description: Cara menggunakan plugin auto-update dalam mode self-hosted
+sidebar:
+  order: 3
+locale: id
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Dokumentasi ini akan menjelaskan cara menjalankan server pembaruan otomatis Anda
+
+## Menyajikan bundle Anda
+Pastikan bundle Anda disajikan melalui HTTPS, dan server memiliki header CORS yang tepat untuk mengizinkan aplikasi mengunduh pembaruan
+contoh ```https://myservercom/app/updates/updatesjson```
+
+Jika Anda tidak familiar dengan menyajikan bundle, kami sarankan Anda mencoba Capgo Cloud atau lihat contoh di sini:
+<LinkCard
+	title="Menyajikan Bundle"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Konfigurasi
+Tambahkan ``updateUrl`` ke ``capacitorconfigjson`` Anda
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myservercom/app/updates/updatesjson",
+		}
+	}
+}
+```
+:::caution
+Ketika Anda melakukan push pembaruan yang dihosting sendiri, perhatikan bahwa Anda tidak dapat menggunakan endpoint "HTTP" karena bertentangan dengan kebijakan keamanan aplikasi Android, untuk keperluan pengujian Anda dapat [mengizinkannya](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+:::
+
+## API Pembaruan
+
+Plugin akan melakukan panggilan POST ke API Anda setiap kali aplikasi dibuka, dengan body ini:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+API server harus merespons, dalam JSON, ke plugin capacitor-updater dengan data ini jika pembaruan diperlukan:
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip"
+}
+```
+
+Dalam mode Auto-update, server harus membandingkan versi dan mengembalikan yang benar, jika kunci URL ada, plugin memulai proses unduhan
+
+Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan dalam log sebagai gantinya
+
+Kunci `version` harus dalam format [`semver`](https://semverorg/)
+
+Zip harus memiliki `indexhtml` sebagai file di root, atau hanya satu folder di root dengan `indexhtml` di dalamnya
+
+Anda dapat menggunakan perintah CLI untuk mengzip bundle Anda:
+
+```bash title="Membuat bundle dengan file Anda untuk disajikan dari server Anda"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

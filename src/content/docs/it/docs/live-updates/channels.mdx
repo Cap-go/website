@@ -1,0 +1,112 @@
+---
+title: Canali
+sidebar:
+  order: 2
+locale: it
+---
+
+Un canale Live Update punta a una specifica build del bundle JS della tua app che sarà condivisa con qualsiasi dispositivo configurato per ascoltare quel canale per gli aggiornamenti. Quando [installi l'SDK Capgo Live Updates](/docs/getting-started/quickstart/) nella tua app, ogni binario nativo configurato su quel canale controllerà gli aggiornamenti disponibili ogni volta che l'app viene avviata. Puoi cambiare la build a cui punta un canale in qualsiasi momento e puoi anche tornare a build precedenti se necessario.
+
+## Configurare un Canale
+
+Ogni app viene fornita con un canale predefinito chiamato "Production" che non può essere eliminato. Per aggiungere nuovi canali:
+
+1. Vai alla sezione "Channels" della dashboard Capgo
+2. Clicca sul pulsante "New Channel"
+3. Inserisci un nome per il canale e clicca "Create"
+
+I nomi dei canali possono essere qualsiasi cosa tu desideri. Una strategia comune è far corrispondere i canali alle tue fasi di sviluppo, come:
+
+- `Development` - per testare gli aggiornamenti live su dispositivi locali o emulatori
+- `QA` - per il team QA per verificare gli aggiornamenti prima del rilascio più ampio
+- `Staging` - per i test finali in un ambiente simile alla produzione
+- `Production` - per la versione della tua app che gli utenti finali ricevono dagli app store
+
+## Configurare il Canale nella Tua App
+
+Con i tuoi canali creati, devi configurare la tua app per ascoltare il canale appropriato. In questo esempio, useremo il canale `Development`
+
+Apri il tuo file `capacitor.config.ts` (o `capacitor.config.json`). Nella sezione `plugins`, imposta la proprietà `channel` del plugin `CapacitorUpdater` con il nome del canale desiderato:
+
+```ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'Development',
+    },
+  },
+};
+```
+
+Successivamente, compila la tua web app ed esegui `npx cap sync` per copiare il file di configurazione aggiornato nei tuoi progetti iOS e Android. Se salti questo passaggio di sincronizzazione, i tuoi progetti nativi continueranno a utilizzare il canale per cui erano precedentemente configurati.
+
+<Aside type="caution">
+
+La proprietà `defaultChannel` sovrascriverà sempre il canale predefinito del cloud. Ma puoi ancora forzare il deviceId a un canale nel Cloud
+
+</Aside>
+
+## Assegnare un Bundle a un Canale
+
+Per distribuire un aggiornamento live, devi caricare una nuova build del bundle JS e assegnarla a un canale. Puoi farlo in un unico passaggio con la CLI di Capgo:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel=Development
+```
+
+Questo caricherà i tuoi asset web compilati e imposterà il nuovo bundle come build attiva per il canale `Development`. Qualsiasi app configurata per ascoltare quel canale riceverà l'aggiornamento la prossima volta che controllerà.
+
+Puoi anche assegnare le build ai canali dalla sezione "Bundles" della dashboard Capgo. Clicca sull'icona del menu accanto a una build e seleziona "Assign to Channel" per scegliere il canale per quella build.
+
+## Versionamento dei Bundle e Canali
+
+È importante notare che i bundle in Capgo sono globali per la tua app, non specifici per i singoli canali. Lo stesso bundle può essere assegnato a più canali.
+
+Per il versionamento dei bundle, consigliamo di utilizzare il versionamento semantico [semver](https://semver.org/) con identificatori di pre-release per le build specifiche del canale. Ad esempio, una versione beta potrebbe essere versionata come `1.2.3-beta.1`.
+
+Questo approccio ha diversi vantaggi:
+
+- Comunica chiaramente la relazione tra le build: `1.2.3-beta.1` è ovviamente una pre-release di `1.2.3`
+- Permette di riutilizzare i numeri di versione tra i canali, riducendo la confusione
+- Abilita percorsi di rollback chiari. Se devi tornare indietro da `1.2.3`, sai che `1.2.2` è la precedente versione stabile
+
+Ecco un esempio di come potresti allineare le versioni dei bundle con una tipica configurazione dei canali:
+
+- Canale `Development`: `1.2.3-dev.1`, `1.2.3-dev.2`, ecc.
+- Canale `QA`: `1.2.3-qa.1`, `1.2.3-qa.2`, ecc.
+- Canale `Staging`: `1.2.3-rc.1`, `1.2.3-rc.2`, ecc.
+- Canale `Production`: `1.2.3`, `1.2.4`, ecc.
+
+## Rollback di un Aggiornamento Live
+
+Se distribuisci un aggiornamento live che introduce un bug o che necessita di essere revocato, puoi facilmente tornare a una build precedente. Dalla sezione "Channels" della dashboard:
+
+<Steps>
+
+1. Clicca sul nome del canale che vuoi ripristinare
+2. Trova la build a cui vuoi tornare e clicca sull'icona della corona
+![Rollback build](/select_bundle.webp)
+3. Conferma l'azione
+
+</Steps>
+
+La build selezionata diventerà immediatamente la build attiva per quel canale. Le app riceveranno la versione ripristinata la prossima volta che controlleranno gli aggiornamenti.
+
+## Automatizzare i Deployment
+
+Per flussi di lavoro più avanzati, puoi automatizzare i tuoi deployment di aggiornamenti live come parte della tua pipeline CI/CD. Integrando Capgo nel tuo processo di build, puoi caricare automaticamente nuovi bundle e assegnarli ai canali ogni volta che fai push su determinati branch o crei nuove release.
+
+Consulta la documentazione [Integrazione CI/CD](/docs/cicd-integration/) per saperne di più sull'automazione degli aggiornamenti live di Capgo.
+
+## Distribuire su un Dispositivo
+
+Ora che hai compreso i canali, sei pronto per iniziare a distribuire aggiornamenti live su dispositivi reali. Il processo base è:
+
+1. Installare l'SDK Capgo nella tua app
+2. Configurare l'app per ascoltare il canale desiderato
+3. Caricare una build e assegnarla a quel canale
+4. Avviare l'app e attendere l'aggiornamento!
+
+Per una guida più dettagliata, consulta la guida [Distribuire Aggiornamenti Live](/docs/getting-started/deploy/). Buon aggiornamento!

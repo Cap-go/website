@@ -1,0 +1,84 @@
+---
+title: app
+sidebar_label: app
+sidebar:
+  order: 4
+locale: it
+---
+
+Il comando `app` ti permette di gestire le tue app Capgo
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Aggiunge una nuova app al tuo account Capgo
+
+`[appId]` è l'ID della tua app nel formato `com.example.app`. Vedi la [documentazione Capacitor](https://capacitorjs.com/docs/cli/commands/init/) per maggiori informazioni
+
+> 💡 Tutte le opzioni verranno dedotte dal tuo `capacitor.config.json` se non specificate
+
+Opzioni:
+
+- `--icon [path]`: Percorso di un'icona personalizzata da mostrare nell'app web Capgo
+- `--name [name]`: Nome personalizzato da mostrare nella lista delle app
+- `--apikey [key]`: Chiave API per collegare al tuo account
+- `--retention [days]`: Periodo di conservazione dei bundle dell'app in giorni (default: 0 = infinito)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Aggiorna un'app esistente nel tuo account Capgo
+
+Opzioni:
+
+- `--icon [path]`: Percorso di un'icona personalizzata da mostrare nell'app web Capgo
+- `--name [name]`: Nome personalizzato da mostrare nella lista delle app
+- `--retention [days]`: Periodo di conservazione dei bundle dell'app in giorni (default: 0 = infinito)
+- `--apikey [key]`: Chiave API per collegare al tuo account
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Elenca tutte le app nel tuo account Capgo
+
+Opzioni:
+
+- `--apikey [key]`: Chiave API per collegare al tuo account
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Elimina un'app dal tuo account Capgo
+
+Opzioni:
+
+- `--apikey [key]`: Chiave API per collegare al tuo account
+- `--bundle`: Elimina solo una specifica versione del bundle
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+Mostra informazioni di debug per un'app
+
+Opzioni:
+
+- `--apikey [key]`: Chiave API per collegare al tuo account
+- `--device`: Debug di un dispositivo specifico
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+Modifica la configurazione Capacitor per un'app
+
+`[path]` è il percorso dell'impostazione che vuoi modificare (es. `appId` o `plugins.CapacitorUpdater.autoUpdate`)
+
+Devi fornire o `--string` o `--bool`:
+
+- `--string <value>`: Imposta l'impostazione a un valore stringa
+- `--bool <true|false>`: Imposta l'impostazione a un valore booleano

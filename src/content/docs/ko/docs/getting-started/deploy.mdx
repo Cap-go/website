@@ -1,0 +1,151 @@
+---
+title: Live Update 배포하기
+sidebar:
+  order: 3
+locale: ko
+---
+
+import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Capgo의 실시간 업데이트 기능을 사용하여 앱의 UI와 비즈니스 로직을 원격으로 실시간 업데이트하세요. JS 번들 업데이트를 앱 스토어를 거치지 않고 사용자에게 직접 푸시하여 즉시 버그를 수정하고 새로운 기능을 배포할 수 있습니다.
+
+이 가이드는 [Capgo 퀵스타트](/docs/getting-started/quickstart)를 완료했고 다음 사항을 이미 수행했다고 가정합니다:
+
+<Steps>
+
+1. Capacitor 앱에 `@capgo/capacitor-updater` SDK를 설치했음
+
+2. `capacitor.config.ts`에서 앱 ID와 업데이트 채널을 구성했음
+
+3. 코드에 `CapacitorUpdater.notifyAppReady()` 메서드를 추가했음
+
+</Steps>
+
+아직 이러한 단계를 완료하지 않았다면, 먼저 퀵스타트로 돌아가서 완료해주세요.
+
+<LinkCard href="/docs/getting-started/add-an-app/" title="앱 추가하기" description="Capgo 계정에 앱을 추가하고 앱에 플러그인을 설치하세요" />
+
+## 번들 업로드하기
+
+Capgo SDK를 설치하고 구성했다면 첫 실시간 업데이트 번들을 업로드할 준비가 된 것입니다:
+
+1. 웹 에셋을 빌드하세요:
+   ```shell
+   npm run build
+   ```
+
+2. 번들을 Capgo에 업로드하세요:
+    <Tabs>
+      <TabItem label="Console">
+        ```shell
+      npx @capgo/cli@latest bundle upload --channel=Production
+      ```
+      </TabItem>
+      <TabItem label="Github Actions">
+      ```yml
+      // github/workflows/build_and_deploy.yml
+    name: Build source code and send to Capgo
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      deploy_to_capgo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - uses: actions/setup-node@v4
+            with:
+              node-version: 18
+          - name: Install dependencies
+            run: npm install
+          - name: Build
+            run: npm run build
+          - name: Deploy to Capgo
+            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            env:
+              CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      ```
+      </TabItem>
+      <TabItem label="Gitlab">
+      ```yml
+      // gitlab-ci.yml
+      stages:
+        - build
+
+      build:
+        stage: build
+        image: node:18
+        cache:
+          - key:
+              files:
+                - package-lock.json
+            paths:
+              - node_modules/
+        script:
+          - npm install
+          - npm run build
+          - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN --channel $CAPGO_CHANNEL
+        artifacts:
+          paths:
+            - node_modules/
+            - dist/
+        only:
+          - master
+      ```
+      </TabItem>
+    </Tabs>
+   이것은 명령에서 지정한 채널에 새로운 번들 버전을 업로드합니다.
+
+### 업로드 문제 해결
+
+업로드가 실패하면 다음 사항을 확인하세요:
+- `capacitor.config.ts`의 앱 ID가 Capgo 대시보드의 앱과 일치하는지
+- Capacitor 프로젝트의 루트에서 업로드 명령을 실행하는지
+- 웹 에셋이 빌드되어 있고 최신 상태인지
+
+여전히 문제가 있다면 [문제 해결](/docs/getting-started/troubleshooting/) 섹션으로 이동하세요.
+
+## 디바이스에서 업데이트 받기
+
+번들이 업로드되면 디바이스에서 실시간 업데이트를 테스트할 수 있습니다:
+
+1. 앱을 디바이스와 동기화하세요:
+   ```shell
+   npx cap sync ios
+   ```
+
+2. 다른 터미널을 열고 다음 명령을 실행하여 업데이트 상태를 확인하세요:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+3. 앱을 로컬에서 실행하세요:
+   ```shell
+   npx cap run ios
+   ```
+   또는 Xcode/Android Studio에서 iOS/Android 프로젝트를 열고 네이티브 실행을 하세요.
+
+4. 업데이트가 백그라운드에서 다운로드되도록 앱을 약 30초 동안 열어두세요.
+
+5. 로그가 업데이트되어 업데이트 상태를 표시하는 데 몇 초가 걸립니다.
+
+6. 앱을 닫았다가 다시 여세요. 실시간 업데이트가 적용된 것을 확인할 수 있습니다!
+
+실시간 업데이트 테스트에 대한 자세한 내용은 [Capgo 퀵스타트](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)를 참조하세요.
+
+## 다음 단계
+
+Capgo로 첫 실시간 업데이트를 배포한 것을 축하합니다! 🎉
+
+더 자세히 알아보려면 [Capgo 실시간 업데이트 문서](/docs/live-updates)의 나머지 부분을 검토하세요. 다음으로 살펴볼 주요 주제들:
+- [채널을 통한 업데이트 타겟팅](/docs/live-updates/channels)
+- [업데이트 동작 커스터마이징](/docs/live-updates/update-behavior)
+- [실시간 업데이트 롤백](/docs/live-updates/rollbacks)

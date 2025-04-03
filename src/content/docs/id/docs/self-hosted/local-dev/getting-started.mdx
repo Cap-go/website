@@ -1,0 +1,80 @@
+---
+title: Memulai
+description: >-
+  Tutorial ini akan memandu Anda melalui proses memulai Supabase dan
+  mengonfigurasi Edge Functions
+sidebar:
+  order: 3
+locale: id
+---
+
+## Apa yang akan dibahas dalam tutorial ini?
+
+Tutorial ini akan menunjukkan cara memulai supabase dari awal serta memulai edge functions
+
+## Persyaratan
+1. [capgo](https://github.com/Cap-go/capgo/) yang sudah di-clone
+3. [supabase](https://supabasecom/)
+
+## Memulai
+
+Untuk memulai jalankan
+```bash
+supabase start
+```
+
+Selanjutnya akan melihat sesuatu seperti ini:
+```js
+Started supabase local development setup
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [truncated]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+Selanjutnya buka `configsjson` dan atur nilai berikut:
+```json
+{
+  "base_domain": {
+    "prod": "webcapgoapp",
+    "development": "developmentwebcapgoapp",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+dimana `supa_key_anon` adalah nilai dari langkah sebelumnya
+
+:::danger
+⚠️ Jangan commit `configsjson` ke repo remote
+:::
+
+Selanjutnya, verifikasi bahwa Anda dapat mengakses [localhost:54323](http://localhost:54323/projects/) dan tabel `users` terlihat seperti ini
+
+<figure><img src="/supabasewebp" alt="supabase" /><figcaption></figcaption></figure>
+
+Jika sudah, mulai edge functions dengan menjalankan:
+
+```bash
+supabase functions serve
+```
+
+dan mulai frontend dengan menjalankan:
+```bash
+bun run serve
+```

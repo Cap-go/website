@@ -1,0 +1,37 @@
+---
+title: chiave
+sidebar_label: key
+sidebar:
+  order: 7
+locale: it
+---
+
+Il comando `key` ti permette di gestire le chiavi di firma della tua app
+
+### save
+
+`npx @capgo/cli key save`
+
+Salva una chiave di crittografia codificata in base64 nella configurazione di Capacitor (utile per CI)
+
+Opzioni:
+
+- `-f, --force`: Forza la generazione di una nuova chiave
+- `--key`: Percorso del file della chiave da salvare nella configurazione di Capacitor
+- `--key-data`: Dati della chiave da salvare direttamente nella configurazione di Capacitor
+
+### create
+
+`npx @capgo/cli key create`
+
+Crea una nuova chiave di crittografia
+
+Opzioni:
+
+- `-f, --force`: Forza la generazione di una nuova chiave
+
+### delete_old
+
+`npx @capgo/cli key delete_old`
+
+Elimina la vecchia chiave di crittografia

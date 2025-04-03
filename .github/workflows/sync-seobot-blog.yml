@@ -1,0 +1,38 @@
+name: Sync SEObot Blog Posts
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install seobot
+        
+      - name: Sync blog posts
+        env:
+          SEOBOT_API_KEY: ${{ secrets.SEOBOT_API_KEY }}
+        run: bun .github/scripts/sync-blog.js
+        
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/content/blog/en/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: sync blog posts from SEObot"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }} 

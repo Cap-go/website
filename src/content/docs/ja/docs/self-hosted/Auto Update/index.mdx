@@ -1,0 +1,170 @@
+---
+title: Auto Update の概要
+description: 自己ホストモードでのAuto-updateプラグインの使用方法
+sidebar:
+  order: 1
+locale: ja
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+この文書では、自動更新サーバーの実行方法について説明します。
+
+## 始める前に
+
+このプロジェクトを独自に利用される場合は、[こちら](https://github.com/sponsors/riderx/)から私の活動を支援していただけると幸いです。
+
+私はここで構築した貴重なコードすべてをオープンソース化するという大きな賭けをしました。
+
+これを自分のものとして保持し、高額な価格を設定することもできました。
+
+さらに、Capgoツールに焦点を当て、オープンで透明性のあるビジネスにしたいと考えています。
+
+同様に、対立や隠蔽ではなく、オープン化することで世界をより良い場所にできると考えています。
+
+しかし、これを実現するためには、あなたを含む私たち全員が役割を果たす必要があります 🥹
+
+もしcapgoのサービスがあなたに合わない場合は、[こちら](https://github.com/sponsors/riderx/)からあなたの条件でブートストラップされた開発者を支援してください。
+
+## クイックインストール
+
+```
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+### 設定
+
+以下のようにURLを使用するようにプラグインを設定する必要があります：
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://YOURURL",
+		}
+	}
+}
+```
+
+> 🚧 AndroidではHTTPリクエストが許可されていません。テスト目的の場合は[許可してください](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted/)
+
+### アップデートAPI
+
+プラグインは、アプリが開かれるたびに以下のボディでAPIにPOSTリクエストを行います：
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+サーバーAPIは、アップデートが必要な場合、capacitor-updaterプラグインに対してJSON形式で以下のデータを返す必要があります：
+
+```json
+{
+"version": "123",
+"url": "https://path_to_the_zip_file_of_the_codecom"
+}
+```
+
+自動更新では、サーバーがバージョンを比較して適切なものを返す必要があります。URLキーが存在する場合、プラグインはダウンロードプロセスを開始します。
+
+"message"と"error"キーを追加すると、バージョンは設定されず、代わりにメッセージがログに表示されます。
+
+`version`キーは[`semver`](https://semverorg/)形式である必要があります。
+
+zipファイルはルートに`indexhtml`ファイルを持つか、ルートに`indexhtml`を含む1つのフォルダのみを持つ必要があります。
+
+CLIのコマンドを使用してバンドルをzip化できます：
+
+```bash
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+<LinkCard
+	title="アップデートエンドポイント"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+#### エンドツーエンド暗号化
+
+バージョン4.15.0以降、プラグインは暗号化されたアップデートの送信をサポートしています。
+
+この機能を使用するには、`npx @capgo/cli key create`で秘密鍵を作成します。
+
+次に、`npx @capgo/cli encrypt [path/to/zip]`でzipファイルを暗号化します。
+
+コマンドは`ivSessionKey`を出力します。これはアップデートペイロードの`session_key`キーとして送信する必要があります。\
+その後、アプリは秘密鍵を使用して`session_key`を復号化し、復号化された`session_key`を使用してアップデートを復号化できます。
+
+詳細はこちらをご覧ください：
+
+<LinkCard
+	title="セルフホスト型ライブアップデート"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
+/>
+
+### 統計API
+
+バージョン1.3.0以降、更新システムは統計を送信します！
+
+デフォルトでは、使用状況を理解するためにすべての統計が当社のサーバーに送信されます。
+
+> 💡 統計には個人データは送信されず、ランダムUUID、更新バージョン、ネイティブアプリバージョン、プラットフォーム、アクション、アプリIDのみが送信されます。
+
+代わりにあなたのサーバーにデータを送信したい場合は、以下の設定を変更してください：
+
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+サーバーが受信するデータは以下の通りです：
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // set, delete, set_fail, reset, revertが可能
+	// 以下はアップデートと同じ情報
+	"app_id": "*******", // ストア内のアプリ識別子
+	"device_id": "*******", // アプリインストールごとの一意のID
+	"platform": "ios", // またはandroid
+	"custom_id": "user_1", // あなたのユーザーを表す
+        "version_name": "123", // webビルドのバージョン
+        "version_build": "120", // ネイティブビルドのバージョン
+        "version_code": "120", // ネイティブビルドのビルド番号
+	"version_os": "16", // デバイスのOSバージョン
+        "plugin_version": "400"// 異なるプラグインで異なる動作をさせるため
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+空の文字列を使用して完全に無効化することもできます。統計はプライバシーに配慮して作られており、プラグインの使用状況を理解し、問題を解決して改善するのに役立っていることを覚えておいてください。
+
+<LinkCard
+	title="統計エンドポイント"
+	href="/docs/self-hosted/auto-update/stats-endpoint/"
+/>
+
+### チャネルAPI
+
+ドキュメント作成予定

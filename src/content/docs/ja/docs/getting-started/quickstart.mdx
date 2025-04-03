@@ -1,0 +1,122 @@
+---
+title: 概要
+sidebar:
+  order: 1
+next: false
+prev: false
+locale: ja
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+Capgo!のクイックスタートチュートリアルでは、以下の主要な概念を説明します：
+
+<Steps>
+
+1. Capgoアカウントにアプリを追加する
+
+2. CapgoをCI/CDと統合する
+
+3. コミットをプッシュしてCapgoでバンドルアップロードをトリガーする
+
+4. Capgoバンドルの公開を設定・カスタマイズする
+
+5. Capgo経由でライブアップデートを有効にするようアプリを設定する
+
+6. Capgoからアプリにライブアップデートをデプロイする
+
+</Steps>
+
+ガイドに沿って順番に進むか、興味のあるコンポーネントのドキュメントに直接移動してください。
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="チュートリアルを始める" icon="rocket" >
+    クイックスタートチュートリアルに従って、すぐにCapgoを使い始めましょう！
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="簡単な統合" icon="pencil">
+    CapgoをCI/CDと統合し、コミットのプッシュでバンドルアップロードをトリガーします
+  </Card></a>
+  <a href="/docs/getting-started/live-updates"><Card title="ライブアップデートドキュメント" icon="setting">
+    アプリストアの遅延なしでリアルタイムにリモートでアプリを更新
+  </Card></a>
+  <a href="/docs/getting-started/trouble-shooting"><Card title="トラブルシューティング" icon="open-book">
+    一般的な問題とその解決方法
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+Over-the-Air (OTA)アップデート機能は、HTML、CSS、JavaScriptファイルの変更にのみ適用されます。
+
+Capacitorプラグインの更新などネイティブコードを変更する場合は、アプリストアに再提出して承認を得る必要があります。
+</Aside>
+
+## Discordコミュニティに参加する
+
+[Capacitor-updater Discordサーバーに参加しましょう！](https://discordcom/invite/VnYRvBfgA6)
+
+## メンテナンス
+
+| プラグインバージョン | Capacitor互換性 | メンテナンス状況 |
+| -------------- | ----------------------- | ----------------- |
+| v6\*\*       | v6\*\*                | ✅                 |
+| v5\*\*       | v5\*\*                | 重大なバグのみ |
+| v4\*\*       | v4\*\*                | ⚠️ 非推奨 |
+| v3\*\*       | v3\*\*                | ⚠️ 非推奨     |
+| > 7            | v4\*\*                | ⚠️ 非推奨、CIが暴走してバージョンを上げすぎました     |
+
+## ストアガイドラインの遵守
+
+Android Google PlayとiOS App Storeには、Capacitor-updaterソリューションをアプリケーションに統合する前に知っておくべきルールがあるガイドラインがあります。
+
+### Google play
+
+[デバイスとネットワークの悪用](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en)トピックの第3段落では、Google Playのアップデートメカニズム以外の方法でソースコードを更新することは制限されていますが、この制限はJavaScriptバンドルの更新には適用されません。
+> この制限は、仮想マシンで実行され、AndroidのAPIへのアクセスが制限されているコード（WebviewやブラウザのJavaScriptなど）には適用されません。
+
+これにより、JavaScriptバンドルのみを更新し、ネイティブコードを更新しないCapacitor-updaterは完全に許可されています。
+
+### App Store
+
+2015年の[Apple Developer Program License Agreement](https://developerapplecom/programs/ios/information/)の**332**段落以降、JavaScriptとアセットのOver-the-Airアップデートが完全に許可されており、最新バージョン(20170605) [ここからダウンロード可能](https://developerapplecom/terms/)ではこの規定はさらに広範になっています：
+
+> インタープリタされるコードはアプリケーションにダウンロードできますが、次の条件を満たす場合に限ります：(a) App Storeに提出されたアプリケーションの意図された広告目的と一致しない機能や機能性を提供することによって、アプリケーションの主要な目的を変更しない、(b) 他のコードやアプリケーションのストアやストアフロントを作成しない、(c) OSの署名、サンドボックス、その他のセキュリティ機能をバイパスしない
+
+Capacitor-updaterを使用すると、プッシュするアップデートがApp Storeで承認された元の意図から大きく逸脱しない限り、これらのルールを完全に遵守することができます。
+
+Appleのガイドラインに更に準拠するため、App Storeで配布されるアプリでは `強制アップデート` シナリオを有効にしないことを提案します。[App Store審査ガイドライン](https://developerapplecom/app-store/review/guidelines/)には以下のように記載されているためです：
+
+> アプリは、機能やコンテンツへのアクセス、またはアプリの使用のために、ユーザーにアプリの評価、レビュー、他のアプリのダウンロード、または同様のアクションを強制してはいけません。
+
+これはバックグラウンドアップデートのデフォルトの動作には問題ありません。ユーザーがアプリを閉じるまで新バージョンの適用を強制しないためですが、強制表示を決定する場合はこのルールを意識しておく必要があります。
+
+## オープンソース
+
+このプラグインはLGPL-3.0ライセンス、バックエンドはAGPL-3.0ライセンスの下にあります。
+
+> 💡 LGPL-3.0は、プラグインのコードを修正した場合、同じライセンスでオープンソースとして公開することが必須であることを意味します。コードを修正せずに使用する場合は、これは該当しません。詳細は以下のリンクの問題をご確認ください 👇
+
+<LinkCard
+	title="ライセンスについて?"
+	href="https://github.com/Cap-go/capacitor-updater/issues/7"
+/>
+
+<LinkCard
+	title="ドキュメントを読む代わりにGPTS Capgoを使って支援を受ける"
+	href="https://chatopenaicom/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+> アプリに組み込んでも心配ありません
+
+## 最後に
+
+セルフホストを利用していて、このツールが役立つと感じた場合は、[GitHubスポンサー](https://github.com/sponsors/riderx/)になって私の仕事をサポートすることをご検討ください。
+
+ここで構築したすべてのコードを有料化する代わりにオープンソース化することを選択しました。隠したり戦ったりする代わりにオープンにすることで、世界をより良い場所にできると信じています。
+
+これを実現するためには、あなたを含む私たち全員が自分の役割を果たす必要があります🥹 Capgoクラウドがニーズに合わない場合は、[ここ](https://github.com/sponsors/riderx/)で独立した開発者をあなたの条件でサポートすることができます。
+
+## 簡単な計算
+
+基本プランの価格：$14*12 = 年間$168
+平均的な開発者の時給 = $60
+つまり、セルフホストで3時間を無駄にすれば1年分の料金を支払えることになり、3時間以上費やすとお金を失うことになります^^

@@ -1,0 +1,58 @@
+---
+title: Utilisation du metteur à jour Capacitor avec Capgo auto-hébergé
+description: Como usar Capacitor Updater con Capgo auto-alojado
+sidebar:
+  order: 4
+locale: es
+---
+
+## ¿Qué cubrirá este tutorial?
+
+Este tutorial mostrará cómo usar capacitor updater en un entorno de desarrollo con capgo auto-alojado
+
+## Requisitos
+
+1. [Clonar capgo](https://github.com/Cap-go/capgo)
+
+## Comenzando
+
+Para usar capacitor updater con capgo auto-alojado, edita el `capacitor.config.ts` desde el directorio de tu aplicación y configúralo así:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'com.demo.app',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      statsUrl: "http://localhost:54321/functions/v1/stats",
+      channelUrl: "http://localhost:54321/functions/v1/channel_self",
+      updateUrl: "http://localhost:54321/functions/v1/updates"
+    },
+  },
+};
+```
+
+Esto te permitirá usar capgo local en desarrollo. Sin embargo, por defecto, esto no es suficiente.
+
+En Android es necesario habilitar la [comunicación en texto plano](https://developer.android.com/topic/security/risks/cleartext), ya que por defecto SSL está deshabilitado en local.
+Esto se puede lograr modificando [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) y añadiendo `android:usesCleartextTraffic="true"` en la etiqueta `application`.
+Puedes ver un ejemplo completo de este cambio [aquí](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+
+Como por defecto Android no permite `http`, capgo ha implementado una verificación para http [aquí](https://github.com/Cap-go/capgo/blob/4cce6c0707d745faa2afbab643e636bad927c602/supabase/functions/updates/index.ts#L396)
+Este código podría no estar siempre aquí, pero por ahora se requiere un cambio en esta línea para que las actualizaciones funcionen.
+Esta línea debería verse algo así:
+```ts
+    if (!signedURL || (signedURL.startsWith('http://') || signedURL.startsWith('https://'))) {
+```
+
+:::danger
+⚠️ No hagas commit de `supabase/functions/updates/index.ts` en el repositorio remoto\
+Este código está aquí [con un propósito](https://github.com/Cap-go/capacitor-updater/issues/37#issuecomment-1684916354)
+:::
+
+También podría haber un problema que impida que la aplicación de Android se conecte. Si no ves ninguna solicitud siendo enviada a las funciones edge, ejecuta
+```bash
+adb reverse tcp:54321 tcp:54321
+```

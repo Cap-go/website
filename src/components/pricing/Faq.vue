@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const props = defineProps<{ locale: Locales }>()
@@ -11,9 +11,9 @@ const props = defineProps<{ locale: Locales }>()
     <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-          {{ translations['questions_and_answers'][props.locale] }}
+          {{ m.questions_and_answers() }}
         </h2>
-        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ translations['explore_common_questions'][props.locale] }}</p>
+        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ m.explore_common_questions() }}</p>
       </div>
       <div class="grid grid-cols-1 mt-12 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
         <div class="flex items-start">
@@ -21,14 +21,14 @@ const props = defineProps<{ locale: Locales }>()
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">{{ translations['how_are_mau_counted'][props.locale] }}</p>
+            <p class="text-xl font-semibold text-white">{{ m.how_are_mau_counted() }}</p>
             <p class="mt-4 text-base text-gray-400">
-              {{ translations['mau_counting_explanation'][props.locale] }}
+              {{ m.mau_counting_explanation() }}
             </p>
             <p class="mt-4 text-base text-gray-400">
-              {{ translations['capgo_usage_explanation'][props.locale] }}
+              {{ m.capgo_usage_explanation() }}
               <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" :href="getRelativeLocaleUrl(props.locale, 'blog/how-your-usage-is-counted')">{{
-                translations['here'][props.locale]
+                m.here()
               }}</a>
             </p>
           </div>
@@ -38,9 +38,9 @@ const props = defineProps<{ locale: Locales }>()
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">{{ translations['what_does_storage_mean'][props.locale] }}</p>
+            <p class="text-xl font-semibold text-white">{{ m.what_does_storage_mean() }}</p>
             <p class="mt-4 text-base text-gray-400">
-              {{ translations['storage_explanation'][props.locale] }}
+              {{ m.storage_explanation() }}
             </p>
           </div>
         </div>
@@ -49,9 +49,9 @@ const props = defineProps<{ locale: Locales }>()
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">{{ translations['how_is_bandwidth_counted'][props.locale] }}</p>
+            <p class="text-xl font-semibold text-white">{{ m.how_is_bandwidth_counted() }}</p>
             <p class="mt-4 text-base text-gray-400">
-              {{ translations['bandwidth_explanation'][props.locale] }}
+              {{ m.bandwidth_explanation() }}
             </p>
           </div>
         </div>
@@ -60,9 +60,9 @@ const props = defineProps<{ locale: Locales }>()
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
-            <p class="text-xl font-semibold text-white">{{ translations['unsure_about_active_users'][props.locale] }}</p>
+            <p class="text-xl font-semibold text-white">{{ m.unsure_about_active_users() }}</p>
             <p class="mt-4 text-base text-gray-400">
-              {{ translations['free_trial_explanation'][props.locale] }}
+              {{ m.free_trial_explanation() }}
             </p>
           </div>
         </div>
@@ -70,9 +70,9 @@ const props = defineProps<{ locale: Locales }>()
       <div class="flex items-center justify-center mt-12 md:mt-20">
         <div class="px-8 py-4 text-center bg-gray-800 rounded-full">
           <p class="text-gray-50">
-            {{ translations['didnt_find_answer'][props.locale] }}
+            {{ m.didnt_find_answer() }}
             <a class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" href="mailto:support@capgo.app">
-              {{ translations['contact_support'][props.locale] }}
+              {{ m.contact_support() }}
             </a>
           </p>
         </div>

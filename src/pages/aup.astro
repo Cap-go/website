@@ -1,94 +1,95 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import * as m from "../paraglide/messages.js"
 
-const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['aup'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['read_our_aup'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, m.aup()].join(' | ')
+const description = m.read_our_aup()
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>{Astro.locals.translations['aup'][Astro.locals.locale]}</h1>
-    <p><em>{Astro.locals.translations['last_update'][Astro.locals.locale]}: 07/09/2024</em></p>
+  <div class="px-3 m-auto prose-sm prose text-left">
+    <h1>{m.aup()}</h1>
+    <p><em>{m.last_update()}: 07/09/2024</em></p>
     <p>
-      {Astro.locals.translations['aup_intro'][Astro.locals.locale]}
+      {m.aup_intro()}
     </p>
-    <h2>{Astro.locals.translations['aup_no_illegal_use'][Astro.locals.locale]}</h2>
+    <h2>{m.aup_no_illegal_use()}</h2>
     <p>
-      {Astro.locals.translations['aup_no_illegal_use_desc'][Astro.locals.locale]}
-    </p>
-    <ul>
-      <li>
-        <strong>{Astro.locals.translations['illegal_activities'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['illegal_activities_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['infringing_content'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['infringing_content_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['offensive_content'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['offensive_content_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['harmful_content'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['harmful_content_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['platform_compliance'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['platform_compliance_desc'][Astro.locals.locale]}
-      </li>
-    </ul>
-    <h2>{Astro.locals.translations['aup_no_security_violations'][Astro.locals.locale]}</h2>
-    <p>
-      {Astro.locals.translations['aup_no_security_violations_desc'][Astro.locals.locale]}
+      {m.aup_no_illegal_use_desc()}
     </p>
     <ul>
       <li>
-        <strong>{Astro.locals.translations['unauthorized_access'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['unauthorized_access_desc'][Astro.locals.locale]}
+        <strong>{m.illegal_activities()}</strong>
+        {m.illegal_activities_desc()}
       </li>
-      <li><strong>{Astro.locals.translations['interception'][Astro.locals.locale]}</strong></li>
       <li>
-        <strong>{Astro.locals.translations['falsification_of_origin'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['falsification_of_origin_desc'][Astro.locals.locale]}
+        <strong>{m.infringing_content()}</strong>
+        {m.infringing_content_desc()}
+      </li>
+      <li>
+        <strong>{m.offensive_content()}</strong>
+        {m.offensive_content_desc()}
+      </li>
+      <li>
+        <strong>{m.harmful_content()}</strong>
+        {m.harmful_content_desc()}
+      </li>
+      <li>
+        <strong>{m.platform_compliance()}</strong>
+        {m.platform_compliance_desc()}
       </li>
     </ul>
-    <h2>{Astro.locals.translations['aup_no_network_abuse'][Astro.locals.locale]}</h2>
-    <p>{Astro.locals.translations['aup_no_network_abuse_desc'][Astro.locals.locale]}</p>
+    <h2>{m.aup_no_security_violations()}</h2>
+    <p>
+      {m.aup_no_security_violations_desc()}
+    </p>
     <ul>
-      <li><strong>{Astro.locals.translations['monitoring_crawling'][Astro.locals.locale]}</strong>{Astro.locals.translations['monitoring_crawling_desc'][Astro.locals.locale]}</li>
       <li>
-        <strong>{Astro.locals.translations['denial_of_service'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['denial_of_service_desc'][Astro.locals.locale]}
+        <strong>{m.unauthorized_access()}</strong>
+        {m.unauthorized_access_desc()}
       </li>
+      <li><strong>{m.interception()}</strong></li>
       <li>
-        <strong>{Astro.locals.translations['intentional_interference'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['intentional_interference_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['operation_of_network_services'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['operation_of_network_services_desc'][Astro.locals.locale]}
-      </li>
-      <li>
-        <strong>{Astro.locals.translations['avoiding_system_restrictions'][Astro.locals.locale]}</strong>
-        {Astro.locals.translations['avoiding_system_restrictions_desc'][Astro.locals.locale]}
+        <strong>{m.falsification_of_origin()}</strong>
+        {m.falsification_of_origin_desc()}
       </li>
     </ul>
-    <h2>{Astro.locals.translations['aup_no_email_abuse'][Astro.locals.locale]}</h2>
-    <p>{Astro.locals.translations['aup_no_email_abuse_desc'][Astro.locals.locale]}</p>
-    <h2>{Astro.locals.translations['aup_monitoring_enforcement'][Astro.locals.locale]}</h2>
-    <p>{Astro.locals.translations['aup_monitoring_enforcement_desc'][Astro.locals.locale]}</p>
+    <h2>{m.aup_no_network_abuse()}</h2>
+    <p>{m.aup_no_network_abuse_desc()}</p>
     <ul>
-      <li>{Astro.locals.translations['investigate_violations'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['remove_modify_content'][Astro.locals.locale]}</li>
+      <li><strong>{m.monitoring_crawling()}</strong>{m.monitoring_crawling_desc()}</li>
+      <li>
+        <strong>{m.denial_of_service()}</strong>
+        {m.denial_of_service_desc()}
+      </li>
+      <li>
+        <strong>{m.intentional_interference()}</strong>
+        {m.intentional_interference_desc()}
+      </li>
+      <li>
+        <strong>{m.operation_of_network_services()}</strong>
+        {m.operation_of_network_services_desc()}
+      </li>
+      <li>
+        <strong>{m.avoiding_system_restrictions()}</strong>
+        {m.avoiding_system_restrictions_desc()}
+      </li>
+    </ul>
+    <h2>{m.aup_no_email_abuse()}</h2>
+    <p>{m.aup_no_email_abuse_desc()}</p>
+    <h2>{m.aup_monitoring_enforcement()}</h2>
+    <p>{m.aup_monitoring_enforcement_desc()}</p>
+    <ul>
+      <li>{m.investigate_violations()}</li>
+      <li>{m.remove_modify_content()}</li>
     </ul>
     <p>
-      {Astro.locals.translations['report_violations_desc'][Astro.locals.locale]}
-      {Astro.locals.translations['report_violations_desc_2'][Astro.locals.locale]}
+      {m.report_violations_desc()}
+      {m.report_violations_desc_2()}
     </p>
-    <h2>{Astro.locals.translations['aup_reporting_violations'][Astro.locals.locale]}</h2>
-    <p set:html={Astro.locals.translations['aup_reporting_violations_desc'][Astro.locals.locale]} />
+    <h2>{m.aup_reporting_violations()}</h2>
+    <p set:html={m.aup_reporting_violations_desc()} />
   </div>
 </Layout>

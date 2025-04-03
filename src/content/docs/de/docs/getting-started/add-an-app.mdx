@@ -1,0 +1,50 @@
+---
+title: App hinzufügen
+description: >-
+  Fügen Sie eine App zu Ihrem Capgo-Account hinzu und installieren Sie das
+  Plugin in Ihrer App
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: de
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Einführung in Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Live-Updates sind 3 Schritte entfernt
+
+### Geführtes Setup
+
+<Steps>
+
+1. Erstellen Sie Ihr Konto unter [https://capgo.app/register](https://capgo.app/register)
+![signup screenshot](/signupwebp "signup screenshot")
+
+2. Verwenden Sie die Init-Befehle, um zu beginnen <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Es werden Ihnen eine Reihe von Fragen gestellt. Beantworten Sie diese, um das automatische Setup abzuschließen<Aside type="tip">Wenn Sie diese Schritte befolgen, sind Sie in kürzester Zeit einsatzbereit. Falls Sie während des Prozesses weitere Unterstützung benötigen, ist unser Support-Team [hier um zu helfen](mailto:support@capgoapp). Viel Spaß beim Onboarding!</Aside>
+
+3. Deployment eines Live-Updates <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+
+</Steps>
+
+### Manuelles Setup
+
+Falls der Init-Befehl für Sie nicht funktioniert, können Sie eine App manuell hinzufügen
+
+<Steps>
+
+1. Verbinden Sie die CLI mit Ihrem Konto: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Fügen Sie die App mit diesem Befehl zu Ihrem Konto hinzu: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5. Deployment eines Live-Updates <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+
+</Steps>

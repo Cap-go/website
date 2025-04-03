@@ -1,0 +1,66 @@
+---
+title: 手動での更新
+description: Cara Menggunakan Plugin Pembaruan Manual dalam Mode Self-hosted
+sidebar:
+  order: 4
+locale: id
+---
+
+## Konfigurasi
+
+Tambahkan ini ke ``capacitorconfigjson`` Anda, untuk menonaktifkan pembaruan otomatis
+```tsx
+// capacitorconfigjson
+{
+	"appId": "*******",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Penggunaan
+
+Anda dapat menggunakan contoh ini atau membuat ulang logikanya di aplikasi Anda
+
+:::caution
+Kita memaksa pengguna untuk memperbarui aplikasi dengan versi statis yang dideklarasikan dalam kode. Ini tidak direkomendasikan, Anda harus menggunakan versi dinamis dari server Anda
+:::
+
+:::danger
+Kita tidak melakukan pengecekan versi, dekripsi atau validasi checksum dalam contoh ini. Anda harus melakukannya sendiri
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdaternotifyAppReady()
+AppaddListener('appStateChange', async(state) => {
+     if (stateisActive) {
+       // Lakukan unduhan selama waktu aplikasi aktif pengguna untuk mencegah unduhan gagal
+       data = await CapacitorUpdaterdownload({
+       version: '004',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/004/distzip',
+       })
+     }
+     if (!stateisActive && dataversion !== "") {
+       // Lakukan pengalihan ketika pengguna meninggalkan aplikasi
+       SplashScreenshow()
+       try {
+         await CapacitorUpdaterset(data)
+       } catch (err) {
+         consolelog(err)
+         SplashScreenhide() // jika set gagal, jika tidak aplikasi baru harus menyembunyikannya
+       }
+     }
+ })
+```
+
+:::note
+Jika ini terlihat seperti banyak pekerjaan, pertimbangkan untuk mencoba [uji coba Capgo](https://capgo.app/register/) yang akan menangani semua ini untuk Anda
+:::

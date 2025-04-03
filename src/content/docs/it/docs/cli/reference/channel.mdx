@@ -1,0 +1,82 @@
+---
+title: canale
+sidebar_label: channel
+sidebar:
+  order: 6
+locale: it
+---
+
+Il comando `channel` ti permette di gestire i tuoi canali di rilascio
+
+### add
+
+`npx @capgo/cli channel add [channelId] [appId]`
+
+Crea un nuovo canale per un'app
+
+Opzioni:
+
+- `-d, --default`: Imposta il nuovo canale come canale predefinito
+- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+
+### delete
+
+`npx @capgo/cli channel delete [channelId] [appId]`
+
+Elimina un canale da un'app
+
+Opzioni:
+
+- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `--delete-bundle`: Elimina il bundle associato al canale
+
+### list
+
+`npx @capgo/cli channel list [appId]`
+
+Elenca tutti i canali per un'app
+
+Opzioni:
+
+- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+
+### currentBundle
+
+`npx @capgo/cli channel currentBundle [channel] [appId]`
+
+Ottiene il bundle corrente per un canale specifico
+
+Opzioni:
+
+- `-c, --channel <channel>`: Canale da cui ottenere il bundle corrente
+- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `--quiet`: Mostra solo la versione del bundle
+
+### set
+
+`npx @capgo/cli channel set [channelId] [appId]`
+
+Imposta le proprietà di un canale
+
+Opzioni:
+
+- `-a, --apikey <apikey>`: Chiave API da collegare al tuo account
+- `-b, --bundle <bundle>`: Numero di versione del bundle da impostare per il canale
+- `-s, --state <state>`: Imposta lo stato del canale (`default` o `normal`)
+- `--latest`: Usa l'ultima versione da `packagejson` come versione del bundle
+- `--downgrade`: Permetti downgrade a versioni inferiori alla versione nativa
+- `--no-downgrade`: Disabilita downgrade a versioni inferiori alla versione nativa
+- `--upgrade`: Permetti upgrade a versioni superiori alla versione nativa
+- `--no-upgrade`: Disabilita upgrade a versioni superiori alla versione nativa
+- `--ios`: Permetti l'invio di aggiornamenti ai dispositivi iOS
+- `--no-ios`: Disabilita l'invio di aggiornamenti ai dispositivi iOS
+- `--android`: Permetti l'invio di aggiornamenti ai dispositivi Android
+- `--no-android`: Disabilita l'invio di aggiornamenti ai dispositivi Android
+- `--self-assign`: Permetti ai dispositivi di auto-assegnarsi a questo canale
+- `--no-self-assign`: Disabilita l'auto-assegnazione dei dispositivi a questo canale
+- `--disable-auto-update <disableAutoUpdate>`: Disabilita la strategia di auto-aggiornamento per questo canale (opzioni: `major`, `minor`, `metadata`, `patch`, `none`)
+- `--dev`: Permetti l'invio di aggiornamenti ai dispositivi di sviluppo
+- `--no-dev`: Disabilita l'invio di aggiornamenti ai dispositivi di sviluppo
+- `--emulator`: Permetti l'invio di aggiornamenti ai dispositivi emulatore
+- `--no-emulator`: Disabilita l'invio di aggiornamenti ai dispositivi emulatore
+- `--package-json <packageJson>`: Lista separata da virgole di percorsi ai file `packagejson` (utile per monorepo)

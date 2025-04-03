@@ -1,0 +1,80 @@
+---
+title: Schnelle Aktualisierungen
+sidebar:
+  order: 4
+locale: de
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgos Live-Update-System kann Updates schneller und effizienter bereitstellen, indem nur die geänderten Dateien und nicht das gesamte JS-Bundle gesendet werden
+
+Dies ist besonders vorteilhaft für Benutzer mit langsameren oder getakteten Netzwerkverbindungen, da die Menge der herunterzuladenden Daten minimiert wird
+
+Ein zweiter Vorteil ist, wenn die App große Assets enthält, die sich selten ändern, wie Bilder oder Videos - im Vergleich zu gezippten JS-Dateien werden diese nur einmal heruntergeladen
+
+## Wie Differenzielle Updates funktionieren
+
+Differenzielle Updates in Capgo werden durch das in Ihrer App installierte Capgo-Plugin verarbeitet. Wenn Sie eine neue Version Ihrer App mit der Flag `--partial` hochladen, führt Capgo Folgendes aus:
+
+1. Jede Datei in Ihrem Build wird einzeln hochgeladen
+2. Für jede Datei werden Prüfsummen generiert
+3. Ein neues JSON-Manifest wird erstellt, das alle Dateien und ihre Prüfsummen auflistet
+4. Dieses Manifest wird in die Capgo-Datenbank hochgeladen
+
+Wenn ein Gerät, auf dem Ihre App läuft, nach Updates sucht, erhält das Capgo-Plugin das neue Manifest vom Server. Es vergleicht dieses Manifest mit dem aktuellen und identifiziert anhand der Prüfsummen und Dateipfade, welche Dateien sich geändert haben
+
+Das Plugin lädt dann nur die geänderten Dateien herunter, anstatt das gesamte JS-Bundle. Es rekonstruiert die neue Version der App, indem es diese heruntergeladenen Dateien mit den unveränderten Dateien kombiniert
+
+<Aside title="Manifest">
+
+Bei differenziellen Updates speichert das Gerät alle heruntergeladenen Dateien in einem gemeinsamen Cache. Capgo wird diesen nie bereinigen, aber das Betriebssystem kann dies jederzeit tun
+
+</Aside>
+
+## Aktivierung von Differenziellen Updates
+
+Um differenzielle Updates für Ihre Capgo-App zu aktivieren, verwenden Sie einfach die Flag `--partial` beim Hochladen einer neuen Version:
+
+## Erzwingen von Differenziellen Updates
+
+Wenn Sie sicherstellen möchten, dass alle Uploads differenzielle Updates sind und versehentliche vollständige Bundle-Uploads verhindert werden, können Sie die Flag `--partial-only` verwenden:
+
+```shell
+npx @capgo/cli@latest bundle upload --partial-only
+```
+
+Wenn `--partial-only` verwendet wird, lädt Capgo nur einzelne Dateien hoch und generiert ein Manifest. Geräte, die keine partiellen Updates unterstützen, können das Update nicht herunterladen
+
+Sie möchten `--partial-only` möglicherweise verwenden, wenn:
+
+- Sie immer differenzielle Updates verwenden und nie vollständige Bundle-Uploads zulassen möchten
+- Sie eine CI/CD-Pipeline einrichten und sicherstellen möchten, dass alle automatisierten Uploads differenziell sind
+- Ihre App groß ist und die Bandbreite begrenzt ist, sodass Sie Upload-/Download-Größen minimieren müssen
+
+Wenn Sie einen vollständigen Bundle-Upload durchführen müssen, während `--partial-only` gesetzt ist, führen Sie den Upload-Befehl einfach ohne `--partial-only` aus. Dies überschreibt die Einstellung für diesen einzelnen Upload und ermöglicht es Ihnen, ein vollständiges Bundle zu pushen, wenn nötig
+
+## Fehlerbehebung
+
+Wenn differenzielle Updates nicht zu funktionieren scheinen (d.h. Geräte laden immer das vollständige JS-Bundle herunter, auch bei kleinen Änderungen), überprüfen Sie Folgendes:
+
+- Sie verwenden die Flag `--partial` bei jedem Upload einer neuen Version
+- Bei Verwendung von `--partial-only` stellen Sie sicher, dass Sie die Flag `--partial` nicht versehentlich weggelassen haben
+- Ihr Gerät läuft mit der neuesten Version des Capgo-Plugins
+- Ihr Gerät hat eine stabile Netzwerkverbindung und kann die Capgo-Server erreichen
+
+Sie können auch die Capgo-Webapp verwenden, um die Details Ihres letzten Uploads zu überprüfen:
+<Steps>
+1. Gehen Sie zur [Webapp](https://app.capgo.io)
+2. Klicken Sie auf Ihre App
+3. Klicken Sie auf die Bundles-Nummer in der Statistikleiste
+4. Wählen Sie das letzte Bundle
+5. Überprüfen Sie das `Partial`-Feld
+  ![bundle type](/bundle_type.webp)
+</Steps>
+
+Wenn Sie weiterhin Probleme haben, wenden Sie sich bitte an den Capgo-Support für weitere Unterstützung. Sie können die Server-Logs überprüfen, um zu bestätigen, dass Ihre partiellen Uploads korrekt verarbeitet werden und die Geräte die aktualisierten Manifeste erhalten
+
+Das war's! Die Flag `--partial` weist Capgo an, die einzelnen Datei-Uploads und Manifest-Generierung durchzuführen, die für differenzielle Updates benötigt werden
+
+Beachten Sie, dass Sie `--partial` jedes Mal verwenden müssen, wenn Sie eine neue Version hochladen, die als differenzielles Update bereitgestellt werden soll. Wenn Sie die Flag weglassen, lädt Capgo das gesamte JS-Bundle als einzelne Datei hoch, und Geräte werden das gesamte Bundle herunterladen, auch wenn sich nur ein kleiner Teil geändert hat

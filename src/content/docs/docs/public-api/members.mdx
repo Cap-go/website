@@ -1,0 +1,225 @@
+---
+title: "Members"
+description: "Organization members endpoint documentation"
+sidebar:
+  order: 4
+---
+
+Organization members are users who have access to your Capgo organization. Each member has a specific role that determines their permissions within the organization. Managing members effectively is crucial for maintaining security and collaboration in your team.
+
+## Member Roles
+
+### Regular Roles
+- **read**: Can view resources but cannot make changes
+- **upload**: Can upload new bundles and view resources
+- **write**: Can modify resources and upload bundles
+- **admin**: Can manage organization settings and members
+- **super_admin**: Has full control over the organization
+
+### Invite Roles
+- **invite_read**: Pending invitation for read access
+- **invite_upload**: Pending invitation for upload access
+- **invite_write**: Pending invitation for write access
+- **invite_admin**: Pending invitation for admin access
+- **invite_super_admin**: Pending invitation for super admin access
+
+## Best Practices
+
+1. **Role Assignment**: Follow the principle of least privilege when assigning roles
+2. **Regular Audits**: Periodically review member access and remove unused accounts
+3. **Onboarding**: Have a clear process for adding new members and assigning roles
+4. **Offboarding**: Promptly remove access for members who leave the organization
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/organization/members/`
+
+Add a new member to an organization or update an existing member's role. Note that you can only invite users who already have a Capgo account - the email must correspond to an existing Capgo user.
+
+#### Request Body
+
+```typescript
+interface MemberCreate {
+  orgId: string
+  email: string
+  role: "read" | "upload" | "write" | "admin" | "super_admin"
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "newmember@example.com",
+    "role": "write"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "OK",
+  "data": {
+    "uid": "user_789",
+    "email": "newmember@example.com",
+    "role": "invite_write",
+    "image_url": null
+  }
+}
+```
+
+Notes: 
+- When adding a new member, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
+- The user must already have a Capgo account before they can be invited. If they don't have an account, they should first create one at https://web.capgo.app/register/
+
+### GET 
+
+`https://api.capgo.app/organization/members/`
+
+Retrieve all members of an organization.
+
+#### Query Parameters
+
+```typescript
+interface MemberQuery {
+  orgId: string
+}
+```
+
+#### Response Type
+
+```typescript
+interface Member {
+  uid: string;
+  email: string;
+  image_url: string;
+  role: "invite_read" | "invite_upload" | "invite_write" | "invite_admin" | "invite_super_admin" | "read" | "upload" | "write" | "admin" | "super_admin";
+}
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/organization/members/?orgId=org_123"
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "uid": "user_123",
+      "email": "john@example.com",
+      "image_url": "https://example.com/avatar.png",
+      "role": "admin"
+    },
+    {
+      "uid": "user_456",
+      "email": "jane@example.com",
+      "image_url": "https://example.com/avatar2.png",
+      "role": "write"
+    },
+    {
+      "uid": "user_789",
+      "email": "bob@example.com",
+      "image_url": null,
+      "role": "invite_read"
+    }
+  ]
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/organization/members/`
+
+Remove a member from an organization. This will immediately revoke their access.
+
+#### Request Body
+
+```typescript
+interface MemberDelete {
+  orgId: string
+  email: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "user@example.com"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "OK"
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Member not found
+{
+  "error": "Member not found",
+  "status": "KO"
+}
+
+// Invalid role
+{
+  "error": "Invalid role specified",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage members",
+  "status": "KO"
+}
+
+// Cannot remove last admin
+{
+  "error": "Cannot remove the last admin from the organization",
+  "status": "KO"
+}
+
+// Invalid email
+{
+  "error": "Invalid email format",
+  "status": "KO"
+}
+
+// Member already exists
+{
+  "error": "Member already exists in organization",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Team Expansion**: Adding new team members with appropriate roles
+2. **Access Control**: Managing member permissions as responsibilities change
+3. **Security Audit**: Reviewing member list and roles periodically
+4. **Team Restructuring**: Updating roles during organizational changes

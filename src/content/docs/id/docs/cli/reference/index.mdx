@@ -1,0 +1,67 @@
+---
+title: Gambaran Umum
+description: Dokumentasi Detail untuk Perintah CLI Capgo
+sidebar:
+  order: 1
+locale: id
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+CLI Capgo menyediakan serangkaian perintah untuk mengelola aplikasi dan deployment Capgo Anda. Referensi ini memberikan informasi detail tentang setiap perintah yang tersedia, termasuk opsi dan contoh penggunaannya.
+
+## Perintah
+
+<CardGrid stagger>
+  <a href="/init/">
+    <Card title="init" icon="rocket">
+      Inisialisasi aplikasi Capgo baru
+    </Card>
+  </a>
+
+  <a href="/login/">
+    <Card title="login" icon="approve-check">
+      Autentikasi dengan layanan Capgo
+    </Card>
+  </a>
+
+  <a href="/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      Periksa pengaturan Capgo Anda untuk potensi masalah
+    </Card>
+  </a>
+
+  <a href="/app/">
+    <Card title="app" icon="seti:default">
+      Kelola aplikasi Capgo Anda
+    </Card>
+  </a>
+
+  <a href="/bundle/">
+    <Card title="bundle" icon="seti:html">
+      Kelola bundle aplikasi Anda
+    </Card>
+  </a>
+
+  <a href="/channel/">
+    <Card title="channel" icon="seti:git">
+      Kelola channel rilis Anda
+    </Card>
+  </a>
+
+  <a href="/key/">
+    <Card title="key" icon="seti:lock">
+      Kelola kunci penandatanganan aplikasi Anda
+    </Card>
+  </a>
+</CardGrid>
+
+## Integrasi CI
+
+Untuk mengotomatiskan pekerjaan Anda, kami merekomendasikan menggunakan GitHub Actions untuk mendorong pembaruan Anda ke Capgo. Lihat [tutorial GitHub Actions](https://capgo.app/blog/automatic-build-and-release-with-github-actions/) kami untuk informasi lebih lanjut.
+
+Jangan lupa untuk mengonfigurasi variabel lingkungan CI Anda dengan kunci API Capgo Anda.
+
+## Aplikasi Demo
+
+Untuk contoh lengkap aplikasi Capgo dengan integrasi CI, lihat [aplikasi demo kami di GitHub](https://github.com/Cap-go/demo-app/)

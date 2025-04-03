@@ -1,0 +1,78 @@
+---
+title: チャネル
+description: >-
+  チャネルはアプリケーションの更新を管理する方法です。複数のチャネルを持つことができ、各チャネルは複数のバージョンを持つことができます。これにより、本番環境で複数のアプリケーションバージョンを同時に実行することができます。
+sidebar:
+  order: 6
+locale: ja
+---
+
+## チャンネルの管理
+
+まず、チャンネルページを見てみましょう。[アプリをクリック](/docs/webapp/main-page)して、[チャンネルタブをクリック](/docs/webapp/main-app-page)することでアクセスできます。
+
+<figure><img src="/channelswebp" alt="channel list" /><figcaption></figcaption></figure>
+
+## チャンネルの作成
+
+右下に表示されているプラスボタン(画像の`1.`)をクリックすると、新しいチャンネルを作成できるモーダルが開きます。
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modalwebp" alt="new channel" /><figcaption></figcaption></figure>
+
+`Add`をクリックすると、リストに新しいチャンネルが表示されます。
+<figure><img src="/post-channel-createwebp" alt="after channel create" /><figcaption></figcaption></figure>
+
+## 設定ミスとは？
+チャンネルの設定が無効な場合があります。その場合、大きな警告が表示され、1つ以上のチャンネルで`Misconfigured`列に`Yes`と表示されます。
+詳細は[こちら](/docs/cli/commands/#disable-updates-strategy)をご覧ください。
+
+## チャンネルの削除
+
+チャンネルの削除は簡単です。ゴミ箱アイコン(画像の`2.`)をクリックして削除を確認するだけです。
+
+## チャンネルの管理
+
+チャンネル名をクリックすると、チャンネルを管理できるモーダルが開きます(画像の`3.`)。
+このページは以下のように表示されます：
+
+<figure><img src="/manage_channel_mainwebp" alt="manage channel" /><figcaption></figcaption></figure>
+
+各セクションを見ていきましょう。
+
+まず`Bundle number`(画像の`1.`)です。これはそのチャンネルの現在のバージョンです。アップデートを提供する際、このチャネルは常にそのバージョンを提供しようとします* [^1]。
+クリックすると[bundle](/docs/webapp/bundles/)ページに移動します。
+
+次に`Shared to`(画像の`2.`)ページです。これは使用を推奨しません。新しい、より良いシステムが開発中です。
+
+続いて強制デバイス(画像の`3.`)です。これは常にこのチャンネルからアップデートを受け取るデバイスのリストです。テスト目的で便利です。[devices](/docs/webapp/devices/)ページからデバイスをチャンネルに強制的に追加できます。
+
+最後に設定(画像の`4.`)です。ここでチャンネルの動作を管理できます。
+クリックすると以下のように表示されます：
+
+<figure><img src="/channel_settingswebp" alt="setting of channel" /><figcaption></figcaption></figure>
+
+設定リストは長いですが、すべて説明します。
+
+---
+まず`Default channel`です。**これが最も重要な設定です**\
+チャンネルがデフォルトとしてマークされている場合、すべての新しいデバイスのデフォルトチャンネルとして使用されます。\
+言い換えると：新しいユーザーがいる場合、capgoはこのデフォルトチャンネルの最新バージョンを提供しようとします。
+デフォルトに設定できるチャンネルは1つだけです。この規則を破ろうとすると、確認を求められます。
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-defaultwebp" alt="confirm make change" /><figcaption></figcaption></figure>
+
+確認後、古いデフォルトチャンネルのマークが解除され、新しいものがデフォルトとしてマークされます。
+
+---
+次に`IOS`設定です。これは単純で、falseの場合、iOSデバイスはこのチャンネルからアップデートをダウンロードできません。
+
+3番目は`Android`設定です。これは`IOS`と同様で、falseの場合、Androidデバイスはこのチャンネルからアップデートをダウンロードできません。
+
+4番目は`Disable auto downgrade under native`設定です。これがtrueの場合、ネイティブバージョンからのダウングレードは不可能になります。つまり、App StoreやPlay Storeにバージョン`120`をアップロードし、チャンネルバージョンを`110`に設定しようとすると、アップデート(ダウングレード)は失敗します。
+
+5番目は`Disable auto update`です。この設定は複雑で、詳細は[こちら](/docs/cli/commands/#disable-updates-strategy)で確認できます。
+
+`Allow develoment build`について、これがtrueの場合、開発ビルドはこのチャンネルからアップデートをダウンロードできます。falseの場合、`prod`がfalseに設定されているすべてのアップデートリクエストは拒否されます。これは主にテスト目的で役立ちます。
+
+7番目は`Allow Emulators`です。falseの場合、capgoはエミュレータからのアップデートリクエストを拒否します。これは主にテスト目的で役立ちます。
+
+8番目は`Allow devices to self associate`です。これがtrueの場合、[setChannel](docs/plugin/api/#setchannel)メソッドが利用可能になります。falseに設定されている場合にこのチャンネルで[setChannel](docs/plugin/api/#setchannel)メソッドを呼び出そうとすると、呼び出しは失敗します。

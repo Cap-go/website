@@ -79,9 +79,9 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect user access](/select_user_access.webp)
 
-3. Select the API Keys tab.
+3 — Select the Integration tab.
 
-![App Store Connect API Keys](/user_access_keys.webp)
+![App Store Connect API Integration](/user_access_keys.webp)
 
 4. Click Generate API Key or the Add (+) button.
 
@@ -91,7 +91,7 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect API keys create name](/gen_key.webp)
 
-6. Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). We recommend to select **App management**.
+6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). We recommend to select **App manager**.
 
 
 7. Click Generate.
@@ -504,6 +504,18 @@ Go to **Settings** > **Secrets and variables** > **Actions** > **New repository 
 <div class="mx-auto" style="width: 100%;">
   <img src="/github_new_secret.webp" alt="github-secrets">
 </div>
+
+2\. `BUILD_CERTIFICATE_BASE64` - Base64 encoded certificate.
+
+3\. `BUILD_PROVISION_PROFILE_BASE64` - Base64 encoded provisioning profile.
+
+4\. `BUNDLE_IDENTIFIER` - your app’s bundle identifier.
+
+5\. `APPLE_KEY_ID` — App Store Connect API Key 🔺Key ID.
+
+6\. `APPLE_ISSUER_ID` — App Store Connect API Key 🔺Issuer ID.
+
+7\. `APPLE_KEY_CONTENT` — App Store Connect API Key 🔺 Key content of _.p8_, [check it](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
 
 ## 8\. Configure GitHub workflow file
 

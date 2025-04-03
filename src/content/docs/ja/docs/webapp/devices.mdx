@@ -1,0 +1,30 @@
+---
+title: デバイス
+description: デバイスの使用方法
+sidebar:
+  order: 7
+locale: ja
+---
+
+## すべてのデバイスの一覧を表示する
+まず、デバイスページを見てみましょう。[アプリをクリックして](/docs/webapp/main-page)、[デバイスタブをクリックする](/docs/webapp/main-app-page)ことでアクセスできます。
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/deviceswebp" alt="devices list" /><figcaption></figcaption></figure>
+
+## 開発者デバイスのみを表示する
+[カスタムチャンネル](docs/plugin/api/#setchannel)やカスタムバージョンを持つ上書きされたデバイスのみを表示したい場合があります。
+それには`Filters`をクリックし、`Override`をクリックします。次のように表示されるはずです：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filterwebp" alt="filter devices" /><figcaption></figcaption></figure>
+
+## デバイスの設定
+
+特定のデバイスを設定するには、テーブル内でそのデバイスをクリックすると、次のような画面が表示されます：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specificwebp" alt="show one device" /><figcaption></figcaption></figure>
+
+まず`Custom ID`ですが、これは実際にはあまり有用ではなく、現時点では何もしません。無視して構いません。
+
+次にforce versionです。これが設定されている場合、このデバイスは**常に**このバージョンを受け取ります。これはチャンネルよりも優先されます。
+
+最後にカスタムチャンネルです。これが設定されている場合、このデバイスはパブリック（デフォルト）チャンネルを無視し、このチャンネルのみを使用します。

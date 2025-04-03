@@ -1,0 +1,40 @@
+---
+title: Paket Terenkripsi
+description: Self-Hosted 모드에서 수동 업데이트 플러그인 사용하기
+sidebar:
+  order: 5
+locale: ko
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## 엔드투엔드 암호화
+
+버전 4150부터 플러그인에서 암호화된 업데이트를 전송할 수 있습니다
+시작하려면 먼저 개인 키를 생성하세요
+```bash title='개인 키 생성'
+npx @capgo/cli key create
+```
+
+그런 다음 zip 파일을 암호화하세요
+```bash title="번들된 zip 암호화"
+npx @capgo/cli encrypt [path/to/zip]
+```
+
+명령어는 `ivSessionKey`를 출력합니다. 이는 업데이트 페이로드에서 `session_key` 키와 함께 전송되어야 합니다
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip",
+"session_key": "encrypted_session_key",
+}
+```
+그러면 앱에서 개인 키를 사용하여 `session_key`를 복호화하고 복호화된 `session_key`를 사용하여 업데이트를 복호화할 수 있습니다
+
+자세한 내용은 여기에서 확인하세요:
+
+<LinkCard
+	title="셀프 호스팅 라이브 업데이트"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
+/>

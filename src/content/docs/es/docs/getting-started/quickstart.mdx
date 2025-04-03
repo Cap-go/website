@@ -1,0 +1,122 @@
+---
+title: Descripción General
+sidebar:
+  order: 1
+next: false
+prev: false
+locale: es
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+El tutorial de inicio rápido te guiará a través de los conceptos clave de Capgo. Los conceptos que se explorarán incluyen:
+
+<Steps>
+
+1. Agregar una aplicación a tu cuenta de Capgo
+
+2. Integrar Capgo con tu CI/CD
+
+3. Activar la carga de paquetes en Capgo al enviar commits
+
+4. Configurar y personalizar la publicación de paquetes de Capgo
+
+5. Configurar tu aplicación para habilitar actualizaciones en vivo a través de Capgo
+
+6. Implementar actualizaciones en vivo en tu aplicación desde Capgo
+
+</Steps>
+
+Simplemente sigue la guía paso a paso, o navega directamente a la documentación del componente que te interese
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="Comenzar el Tutorial" icon="rocket" >
+    ¡Sigue el tutorial de inicio rápido y comienza a usar Capgo en poco tiempo!
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="Fácil de integrar" icon="pencil">
+    Integra Capgo con tu CI/CD y activa cargas de paquetes en Capgo al enviar commits
+  </Card></a>
+  <a href="/docs/getting-started/live-updates"><Card title="Documentación de Actualización en Vivo" icon="setting">
+    Actualiza tu aplicación remotamente en tiempo real sin demoras de la tienda de aplicaciones
+  </Card></a>
+  <a href="/docs/getting-started/trouble-shooting"><Card title="Solución de Problemas" icon="open-book">
+    Problemas comunes y cómo resolverlos
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+La función de actualización Over-the-Air (OTA) solo es aplicable para modificaciones realizadas en archivos HTML, CSS y JavaScript
+
+Si realizas cambios en el código nativo, como actualizaciones de plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación
+</Aside>
+
+## Únete a la Comunidad de Discord
+
+[¡Únete al Servidor de Discord de Capacitor-updater!](https://discordcom/invite/VnYRvBfgA6)
+
+## Mantenimiento
+
+| Versión del plugin | Compatibilidad con Capacitor | Mantenimiento     |
+| ----------------- | ---------------------------- | ----------------- |
+| v6\*\*          | v6\*\*                      | ✅                |
+| v5\*\*          | v5\*\*                      | Solo errores críticos |
+| v4\*\*          | v4\*\*                      | ⚠️ Obsoleto |
+| v3\*\*          | v3\*\*                      | ⚠️ Obsoleto       |
+| > 7              | v4\*\*                      | ⚠️ Obsoleto, nuestro CI se volvió loco y aumentó demasiadas versiones |
+
+## Cumplimiento de las Directrices de las Tiendas
+
+Google Play de Android y App Store de iOS tienen directrices correspondientes con reglas que debes conocer antes de integrar la solución Capacitor-updater en tu aplicación
+
+### Google Play
+
+El tercer párrafo del tema [Abuso de Dispositivos y Red](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en) describe que está restringida la actualización del código fuente por cualquier método que no sea el mecanismo de actualización de Google Play. Pero esta restricción no se aplica a la actualización de paquetes javascript
+> Esta restricción no se aplica al código que se ejecuta en una máquina virtual y tiene acceso limitado a las API de Android (como JavaScript en un webview o navegador)
+
+Esto permite completamente Capacitor-updater ya que solo actualiza los paquetes JS y no actualizará código nativo
+
+### App Store
+
+El párrafo **332**, desde 2015 en el [Acuerdo de Licencia del Programa de Desarrollador de Apple](https://developerapplecom/programs/ios/information/) permite completamente realizar actualizaciones over-the-air de JavaScript y activos - y en su última versión (20170605) [descargable aquí](https://developerapplecom/terms/) esta normativa es incluso más amplia:
+
+> El código interpretado puede descargarse en una Aplicación solo mientras dicho código: (a) no cambie el propósito principal de la Aplicación proporcionando características o funcionalidades que sean inconsistentes con el propósito previsto y anunciado de la Aplicación tal como se envió a la App Store, (b) no cree una tienda o punto de venta para otro código o aplicaciones, y (c) no eluda la firma, el sandbox u otras características de seguridad del SO
+
+Capacitor-updater te permite seguir estas reglas en total cumplimiento siempre que la actualización que envíes no se desvíe significativamente de la intención original de tu producto aprobada por la App Store
+
+Para mantener aún más el cumplimiento de las directrices de Apple, sugerimos que las aplicaciones distribuidas en la App Store no habiliten el escenario de `Actualización forzada`, ya que en las [Directrices de Revisión de la App Store](https://developerapplecom/app-store/review/guidelines/) se establece que:
+
+> Las aplicaciones no deben forzar a los usuarios a calificar la aplicación, revisar la aplicación, descargar otras aplicaciones u otras acciones similares para acceder a la funcionalidad, contenido o uso de la aplicación
+
+Esto no es un problema para el comportamiento predeterminado de actualización en segundo plano, ya que no forzará al usuario a aplicar la nueva versión hasta la próxima vez que cierre la aplicación, pero al menos debes ser consciente de ese rol si decides mostrarlo
+
+## Código abierto
+
+El plugin está bajo la Licencia LGPL-30 y el back-end está bajo la Licencia AGPL-30
+
+> 💡 LGPL-30 significa que si alguien modifica el código del plugin, es obligatorio publicarlo, en código abierto con la misma licencia. Si usas el código sin modificación, eso no te concierne. Para más detalles, consulta el problema a continuación, revisa el enlace 👇
+
+<LinkCard
+	title="¿Licenciamiento?"
+	href="https://github.com/Cap-go/capacitor-updater/issues/7"
+/>
+
+<LinkCard
+	title="Prueba GPTS Capgo para obtener ayuda en lugar de leer la documentación"
+	href="https://chatopenaicom/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+> Puedes incluirlo en tu aplicación sin preocupaciones
+
+## Notas Finales
+
+Si autohostas y encuentras útil esta herramienta, considera apoyar mi trabajo convirtiéndote en un [patrocinador de GitHub](https://github.com/sponsors/riderx/)
+
+Aposté por hacer código abierto todo el código que construí aquí en lugar de ponerlo detrás de un muro de pago. Al abrirlo en lugar de luchar y ocultarlo, creo que podemos hacer del mundo un lugar mejor
+
+Para hacer esto posible, es necesario que todos hagamos nuestra parte, incluyéndote a ti 🥹 Si Capgo cloud no satisface tus necesidades, puedes respaldar a un creador independiente [aquí](https://github.com/sponsors/riderx/) en tus propios términos
+
+## Matemáticas Simples
+
+El precio del plan básico: $14*12 = $168 al año
+Mientras que el promedio dev/hora = $60
+Eso significa que 3 horas perdidas de tiempo de desarrollo en autohospedaje te permiten pagar un año completo, si gastas más de 3 horas estás perdiendo dinero ^^

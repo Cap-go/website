@@ -1,0 +1,140 @@
+---
+title: Pemecahan Masalah
+sidebar:
+  order: 5
+next: false
+prev: false
+locale: id
+---
+
+Berikut adalah beberapa masalah umum yang mungkin Anda temui saat menggunakan Capgo dan cara mengatasinya
+
+### Kegagalan upload
+
+Jika upload bundle Anda gagal, periksa kembali:
+- ID aplikasi di `capacitor.config.ts` sesuai dengan aplikasi Anda di dashboard Capgo
+- Anda menjalankan perintah upload dari root proyek Capacitor Anda
+- Asset web Anda sudah di-build dan terbaru
+
+#### Opsi upload lanjutan
+
+CLI Capgo menyediakan beberapa flag tambahan untuk membantu masalah upload yang umum:
+
+- `--tus`: Menggunakan [protokol upload yang dapat dilanjutkan tus](https://tus.io/) untuk upload bundle besar atau koneksi jaringan yang buruk yang lebih handal. Jika bundle Anda lebih dari 10MB atau Anda memiliki koneksi yang tidak stabil, pertimbangkan menggunakan `--tus`:
+  ```shell
+  npx @capgo/cli@latest bundle upload --tus
+  ```
+
+- `--package-json` dan `--node-modules`: Memberi tahu Capgo di mana menemukan root `package.json` dan `node_modules` jika aplikasi Anda menggunakan struktur non-standar seperti monorepo atau workspace npm. Berikan path ke root `package.json` dan path `--node_modules`:
+  ```shell
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  ```
+  Capgo membutuhkan informasi ini untuk membundle dependensi aplikasi Anda dengan benar
+
+Anda dapat menggabungkan flag-flag ini dengan opsi lain seperti `--channel` sesuai kebutuhan. Lihat [dokumentasi CLI Capgo](/docs/cli) untuk detail lengkap tentang opsi upload yang tersedia
+
+Jika Anda masih mengalami masalah dengan upload, hubungi [dukungan Capgo](mailto:support@capgo.app) untuk bantuan lebih lanjut
+
+### Debug Update
+
+Jika Anda mengalami masalah dengan pembaruan langsung, perintah debug Capgo adalah alat yang membantu untuk troubleshooting. Cara menggunakannya:
+
+1. Jalankan perintah berikut di direktori proyek Anda:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2. Jalankan aplikasi Anda di perangkat atau emulator dan lakukan tindakan yang seharusnya memicu pembaruan (misal membuka kembali aplikasi setelah mengunggah bundle baru)
+
+3. Perhatikan output dari perintah debug. Ini akan mencatat informasi tentang proses pembaruan, termasuk:
+   - Ketika aplikasi memeriksa pembaruan
+   - Jika pembaruan ditemukan dan versi apa
+   - Progres unduhan dan instalasi pembaruan
+   - Kesalahan yang terjadi selama proses pembaruan
+
+4. Gunakan log debug untuk mengidentifikasi di mana masalah terjadi. Contohnya:
+   - Jika tidak ada pembaruan yang ditemukan, periksa kembali apakah bundle Anda berhasil diunggah dan aplikasi dikonfigurasi untuk menggunakan channel yang benar
+   - Jika pembaruan terunduh tapi tidak terinstal, pastikan Anda telah memanggil `CapacitorUpdater.notifyAppReady()` dan aplikasi benar-benar ditutup dan dibuka kembali
+   - Jika Anda melihat pesan error, cari error tersebut di dokumentasi Capgo atau hubungi dukungan untuk bantuan
+
+Perintah debug sangat berguna untuk mengidentifikasi masalah dengan proses unduhan dan instalasi pembaruan. Jika log menunjukkan versi pembaruan yang diharapkan ditemukan tetapi akhirnya tidak diterapkan, fokuskan troubleshooting Anda pada langkah-langkah setelah unduhan
+
+### Debug dengan Log Native
+
+Selain perintah debug Capgo, log native di Android dan iOS dapat memberikan informasi troubleshooting yang berharga, terutama untuk masalah di sisi native dari proses pembaruan
+
+#### Log Android
+
+Untuk mengakses log Android:
+
+1. Hubungkan perangkat Anda atau mulai emulator
+2. Buka Android Studio dan pilih "View > Tool Windows > Logcat"
+3. Di jendela Logcat, filter log ke proses aplikasi Anda dengan memilihnya dari dropdown di atas
+4. Cari baris yang menyertakan `Capgo` untuk menemukan log SDK
+
+Atau, Anda dapat menggunakan perintah `adb logcat` dan grep untuk `Capgo` untuk memfilter log
+
+SDK Capgo akan mencatat kejadian-kejadian penting selama proses pembaruan, seperti:
+- Ketika pemeriksaan pembaruan dimulai
+- Jika pembaruan ditemukan dan versi apa
+- Ketika unduhan pembaruan dimulai dan selesai
+- Ketika instalasi pembaruan dipicu
+- Kesalahan yang terjadi selama langkah pembaruan native
+
+Masalah khusus Android yang mungkin Anda lihat di log termasuk:
+- Masalah konektivitas jaringan yang mencegah unduhan pembaruan
+- Error izin file saat menyimpan atau membaca bundle pembaruan
+- Ruang penyimpanan tidak cukup untuk bundle pembaruan
+- Kegagalan memulai ulang aplikasi setelah pembaruan diinstal
+
+#### Log iOS
+
+Untuk mengakses log iOS:
+
+1. Hubungkan perangkat Anda atau mulai simulator
+2. Buka Xcode dan pergi ke "Window > Devices and Simulators"
+3. Pilih perangkat Anda dan klik "Open Console"
+4. Di output konsol, cari baris yang menyertakan `Capgo` untuk menemukan log SDK
+
+Anda juga dapat menggunakan perintah `log stream` di terminal dan grep untuk `Capgo` untuk memfilter log
+
+Mirip dengan Android, SDK Capgo akan mencatat kejadian-kejadian penting di sisi iOS:
+- Inisiasi dan hasil pemeriksaan pembaruan
+- Mulai, progres, dan selesainya unduhan
+- Pemicu dan hasil instalasi
+- Kesalahan selama proses pembaruan native
+
+Masalah khusus iOS yang dapat Anda identifikasi dalam log termasuk:
+- Masalah sertifikat SSL saat mengunduh pembaruan
+- App transport security memblokir unduhan pembaruan
+- Ruang penyimpanan tidak cukup untuk bundle pembaruan
+- Kegagalan untuk mengekstrak atau menerapkan bundle pembaruan dengan benar
+
+Pada kedua platform, log native memberikan tampilan proses pembaruan yang lebih detail, dengan rincian lebih lanjut tentang implementasi native. Log ini sangat berguna untuk mengidentifikasi masalah yang terjadi di luar lapisan JavaScript Capgo
+
+Saat troubleshooting masalah pembaruan langsung yang rumit, sebaiknya mengambil log debug Capgo dan log native untuk gambaran komprehensif tentang apa yang terjadi. Kedua log bersama akan memberi Anda peluang terbaik untuk mengidentifikasi dan menyelesaikan masalah
+
+### Pembaruan tidak diterapkan
+
+Jika Anda telah mengunggah bundle tetapi tidak melihat perubahan di perangkat Anda:
+- Pastikan Anda telah memanggil `CapacitorUpdater.notifyAppReady()` dalam kode aplikasi Anda seperti yang ditunjukkan di [quickstart](/docs/getting-started/quickstart)
+- Periksa bahwa perangkat Anda terhubung ke internet dan log debug Capgo menunjukkan pembaruan telah diunduh
+- Coba tutup sepenuhnya dan buka kembali aplikasi, karena pembaruan hanya diterapkan saat peluncuran baru
+- Cari error di log native yang mungkin menunjukkan masalah dalam menerapkan pembaruan
+
+Lihat panduan [menerapkan pembaruan langsung](/docs/getting-started/deploy) untuk detail lebih lanjut tentang proses pembaruan. Jika Anda masih mengalami kesulitan, gunakan perintah `npx @capgo/cli@latest app debug` dan log native untuk mendapatkan visibilitas lebih tentang apa yang terjadi
+
+## Instalasi SDK
+
+Jika Anda mengalami masalah menginstal SDK Capgo, pastikan:
+- Aplikasi Anda menggunakan versi Capacitor yang didukung (4.0 atau lebih baru)
+- Anda telah mengikuti langkah-langkah [quickstart](/docs/getting-started/quickstart) secara berurutan, termasuk sinkronisasi aplikasi Anda setelah menginstal SDK
+
+## Integrasi CI/CD
+
+Untuk masalah dengan memicu upload Capgo dari pipeline CI/CD Anda:
+- Periksa kembali token autentikasi Capgo Anda telah diatur dengan benar
+- Pastikan Anda menjalankan perintah upload setelah asset web Anda di-build
+- Periksa bahwa perintah upload menggunakan nama channel yang benar untuk environment target Anda
+
+Lihat dokumentasi [integrasi CI/CD](/docs/cicd-integration) untuk tips troubleshooting lebih lanjut. Anda juga dapat menggunakan perintah `npx @capgo/cli@latest app debug` untuk mengkonfirmasi apakah pembaruan yang dipicu CI/CD diterima oleh aplikasi

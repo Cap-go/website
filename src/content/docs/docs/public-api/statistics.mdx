@@ -1,0 +1,182 @@
+---
+title: "Statistics"
+description: "Statistics endpoint documentation"
+sidebar:
+  order: 5
+---
+
+The Statistics endpoints provide detailed analytics about your apps and organizations. You can track Monthly Active Users (MAU), storage usage, and bandwidth consumption across different time periods. This data is essential for monitoring app growth, resource usage, and planning capacity.
+
+## Understanding the Metrics
+
+- **MAU (Monthly Active Users)**: Number of unique devices that accessed your app in the last 30 days
+- **Storage**: Total size of all bundles and resources stored in bytes
+- **Bandwidth**: Total data transfer for bundle downloads in bytes
+
+## Best Practices
+
+1. **Regular Monitoring**: Check statistics periodically to track growth and usage patterns
+2. **Resource Planning**: Use storage and bandwidth metrics for capacity planning
+3. **User Engagement**: Track MAU to understand user engagement trends
+4. **Cost Management**: Monitor resource usage to optimize costs
+
+## Endpoints
+
+### GET /statistics/app/:app_id/
+
+Get statistics for a specific app. This endpoint is useful for monitoring individual app performance.
+
+#### Query Parameters
+
+```typescript
+interface StatsQuery {
+  from: Date  // Start date for the statistics
+  to: Date    // End date for the statistics
+}
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/app/app_123/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Example Response
+
+```json
+{
+  "data": {
+    "date": "2024-01-31",
+    "mau": 15000,
+    "storage": 536870912,  // 512MB in bytes
+    "bandwidth": 1073741824 // 1GB in bytes
+  }
+}
+```
+
+### GET /statistics/user/
+
+Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+
+#### Query Parameters
+
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+}
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "date": "2024-01-01",
+      "mau": 25000,
+      "storage": 1073741824,  // 1GB in bytes
+      "bandwidth": 2147483648  // 2GB in bytes
+    },
+    {
+      "date": "2024-01-02",
+      "mau": 25500,
+      "storage": 1074790400,  // 1.01GB in bytes
+      "bandwidth": 2148532224  // 2.01GB in bytes
+    }
+  ]
+}
+```
+
+### GET /statistics/org/:org_id/
+
+Get statistics for a specific organization. Useful for monitoring organization-level usage.
+
+#### Query Parameters
+
+```typescript
+interface StatsQuery {
+  from: Date
+  to: Date
+}
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/org/org_123/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "date": "2024-01-01",
+      "mau": 10000,
+      "storage": 536870912,   // 512MB in bytes
+      "bandwidth": 1073741824  // 1GB in bytes
+    },
+    {
+      "date": "2024-01-02",
+      "mau": 10200,
+      "storage": 537919488,   // 513MB in bytes
+      "bandwidth": 1074790400  // 1.01GB in bytes
+    }
+  ]
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Invalid date format
+{
+  "error": "Invalid date format. Use YYYY-MM-DD",
+  "status": "KO"
+}
+
+// Date range too large
+{
+  "error": "Date range cannot exceed 90 days",
+  "status": "KO"
+}
+
+// Resource not found
+{
+  "error": "App/Organization not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to access statistics",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Growth Tracking**: Monitor MAU growth over time
+2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
+3. **Capacity Planning**: Use trends to plan for future resource needs
+4. **Usage Reports**: Generate periodic usage reports for stakeholders
+
+## Tips for Analysis
+
+1. **Compare Periods**: Look at month-over-month or year-over-year trends
+2. **Track Ratios**: Monitor bandwidth per user or storage per app
+3. **Set Alerts**: Create alerts for unusual spikes in usage
+4. **Regular Backups**: Export statistics regularly for historical analysis 

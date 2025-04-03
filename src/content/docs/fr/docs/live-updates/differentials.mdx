@@ -1,0 +1,80 @@
+---
+title: Mises à jour rapides
+sidebar:
+  order: 4
+locale: fr
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Le système Live Update de Capgo peut livrer les mises à jour plus rapidement et plus efficacement en n'envoyant que les fichiers modifiés, plutôt que l'ensemble du bundle JS
+
+Ceci est particulièrement bénéfique pour les utilisateurs ayant des connexions réseau plus lentes ou limitées, car cela minimise la quantité de données à télécharger
+
+Un second avantage est lorsque l'application contient de gros fichiers qui changent rarement, comme des images ou des vidéos, comparé aux fichiers JS compressés, ils ne seront téléchargés qu'une seule fois
+
+## Comment fonctionnent les mises à jour différentielles
+
+Les mises à jour différentielles dans Capgo sont gérées par le plugin Capgo installé dans votre application. Lorsque vous téléchargez une nouvelle version de votre application en utilisant le flag `--partial`, Capgo effectue les actions suivantes :
+
+1. Chaque fichier de votre build est téléchargé individuellement
+2. Des sommes de contrôle sont générées pour chaque fichier
+3. Un nouveau manifeste json est créé, listant tous les fichiers et leurs sommes de contrôle
+4. Ce manifeste est téléchargé dans la base de données Capgo
+
+Lorsqu'un appareil exécutant votre application vérifie les mises à jour, le plugin Capgo reçoit le nouveau manifeste du serveur. Il compare ce manifeste à celui qu'il possède actuellement, identifiant quels fichiers ont changé en se basant sur les sommes de contrôle et les chemins des fichiers
+
+Le plugin ne télécharge ensuite que les fichiers modifiés, plutôt que l'ensemble du bundle JS. Il reconstruit la nouvelle version de l'application en combinant ces fichiers téléchargés avec les fichiers inchangés qu'il possède déjà
+
+<Aside title="Manifeste">
+
+Dans le cas des mises à jour différentielles, l'appareil stocke tous les fichiers téléchargés dans un cache commun, Capgo ne le nettoiera jamais mais le système d'exploitation peut le faire à tout moment
+
+</Aside>
+
+## Activer les mises à jour différentielles
+
+Pour activer les mises à jour différentielles pour votre application Capgo, utilisez simplement le flag `--partial` lors du téléchargement d'une nouvelle version :
+
+## Imposer les mises à jour différentielles
+
+Si vous souhaitez vous assurer que tous les téléchargements sont des mises à jour différentielles et empêcher tout téléchargement accidentel de bundle complet, vous pouvez utiliser le flag `--partial-only` :
+
+```shell
+npx @capgo/cli@latest bundle upload --partial-only
+```
+
+Lorsque `--partial-only` est utilisé, Capgo ne téléchargera que des fichiers individuels et générera un manifeste. Tout appareil qui ne prend pas en charge le partiel ne pourra pas télécharger la mise à jour
+
+Vous pourriez vouloir utiliser `--partial-only` si :
+
+- Vous voulez toujours utiliser des mises à jour différentielles et ne jamais autoriser les téléchargements de bundle complet
+- Vous configurez un pipeline CI/CD et voulez vous assurer que tous les téléchargements automatisés sont différentiels
+- Votre application est volumineuse et la bande passante est limitée, vous devez donc minimiser les tailles de téléchargement/upload
+
+Si vous devez faire un téléchargement de bundle complet alors que `--partial-only` est défini, exécutez simplement la commande de téléchargement sans `--partial-only`. Cela ignorera le paramètre pour ce téléchargement unique, vous permettant de pousser un bundle complet si nécessaire
+
+## Dépannage
+
+Si les mises à jour différentielles ne semblent pas fonctionner (c'est-à-dire que les appareils téléchargent toujours le bundle JS complet même pour de petits changements), vérifiez que :
+
+- Vous utilisez le flag `--partial` à chaque fois que vous téléchargez une nouvelle version
+- Si vous utilisez `--partial-only`, assurez-vous de ne pas avoir oublié le flag `--partial`
+- Votre appareil exécute la dernière version du plugin Capgo
+- Votre appareil a une connexion réseau stable et peut atteindre les serveurs Capgo
+
+Vous pouvez également utiliser l'application web Capgo pour vérifier les détails de votre dernier téléchargement :
+<Steps>
+1. Allez sur [webapp](https://app.capgo.io)
+2. Cliquez sur votre application
+3. Cliquez sur le nombre de bundles dans la barre de statistiques
+4. Sélectionnez le dernier bundle
+5. Vérifiez le champ `Partial`
+  ![bundle type](/bundle_type.webp)
+</Steps>
+
+Si vous continuez à avoir des problèmes, veuillez contacter le support Capgo pour une assistance supplémentaire. Ils peuvent vérifier les logs du serveur pour confirmer que vos téléchargements partiels sont traités correctement et que les appareils reçoivent les manifestes mis à jour
+
+C'est tout ! Le flag `--partial` indique à Capgo d'effectuer les téléchargements de fichiers individuels et la génération de manifeste nécessaires pour les mises à jour différentielles
+
+Notez que vous devez utiliser `--partial` chaque fois que vous téléchargez une nouvelle version que vous souhaitez livrer comme mise à jour différentielle. Si vous omettez le flag, Capgo téléchargera l'ensemble du bundle JS comme un seul fichier, et les appareils téléchargeront le bundle complet même si seule une petite partie a changé

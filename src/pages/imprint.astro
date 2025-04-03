@@ -1,11 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueImprint from '@/vue-pages/imprint.vue'
+import * as m from "../paraglide/messages.js"
 
 const brand = Astro.locals.runtimeConfig.public.brand
 
-const title = [brand, Astro.locals.translations['imprint'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['imprint_description'][Astro.locals.locale].replace('$1', brand)
+const title = [brand, m.imprint()].join(' | ')
+const description = m.imprint_description().replace('$1', brand)
 
 const content = { title, description }
 ---

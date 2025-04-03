@@ -1,0 +1,116 @@
+---
+title: Ringkasan
+sidebar:
+  order: 1
+prev: false
+next: false
+locale: id
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Gunakan fitur Live Updates Capgo untuk memperbarui bundel JavaScript aplikasi Anda secara jarak jauh dan real-time. Push pembaruan JS langsung ke pengguna Anda tanpa melalui proses review app store untuk segera memperbaiki bug dan merilis fitur baru.
+
+<Aside>
+
+Live Updates terbatas pada perubahan bundel JavaScript. Jika Anda perlu memperbarui kode native, seperti menambah atau menghapus plugin atau mengubah konfigurasi proyek native, Anda perlu mengirimkan build binary native baru ke app store.
+
+</Aside>
+
+## Cara Kerja Live Updates
+
+Sistem Live Update Capgo memiliki dua komponen utama:
+
+1. SDK Capgo, yang Anda instal di aplikasi Anda. SDK memeriksa pembaruan yang tersedia dan mengunduhnya di latar belakang.
+
+2. Channel, yang memungkinkan Anda menargetkan pembaruan ke grup pengguna tertentu. Anda dapat menggunakan channel untuk mengelola jalur rilis yang berbeda, seperti `Production`, `Staging`, dan `Dev`.
+
+Ketika Anda mengunggah bundel JS baru ke Capgo dan menetapkannya ke channel, SDK Capgo di aplikasi yang dikonfigurasi untuk channel tersebut akan mendeteksi pembaruan dan mengunduhnya. Saat aplikasi dimulai ulang berikutnya, bundel baru akan dimuat.
+
+## Memulai
+
+Untuk mulai menggunakan Live Updates, ikuti langkah-langkah berikut:
+
+<Steps>
+
+1. Selesaikan [Capgo Quickstart](/docs/getting-started/quickstart) untuk menyiapkan aplikasi Anda di Capgo dan menginstal SDK Capgo.
+
+2. Dalam kode aplikasi Anda, panggil `CapacitorUpdater.notifyAppReady()` setelah aplikasi Anda selesai menginisialisasi. Ini memberi tahu SDK Capgo bahwa aplikasi Anda siap menerima pembaruan.
+
+3. Build bundel JS Anda dan unggah ke Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle upload --channel=Production 
+   ```
+
+4. Buka aplikasi Anda dan tunggu pembaruan diunduh. Anda dapat memeriksa statusnya dengan:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Setelah pembaruan diunduh, tutup dan buka kembali aplikasi Anda untuk memuat bundel baru.
+
+</Steps>
+
+Lihat panduan [Deploying Live Updates](/docs/getting-started/deploy) untuk detail lebih lanjut.
+
+## CLI Capgo
+
+CLI Capgo adalah alat yang kuat yang memungkinkan pengembang berinteraksi dengan layanan Capgo dari pipeline CI/CD mereka sendiri. Dengan CLI, Anda memiliki kontrol detail kapan build diproduksi dan dideploy, memungkinkan Anda mengintegrasikan Capgo ke dalam alur kerja enterprise yang ada.
+
+### Untuk Apa CLI Capgo?
+
+CLI Capgo dirancang untuk pengembang dan tim yang membutuhkan lebih banyak kontrol dan fleksibilitas dalam alur kerja pembaruan langsung mereka. Dengan menggunakan CLI dalam pipeline CI/CD Anda, Anda dapat:
+
+- Menentukan kapan tepatnya untuk membangun dan mendeploy pembaruan, daripada mengandalkan otomatisasi bawaan Capgo
+- Menyisipkan proses Anda sendiri, seperti penandatanganan kode, pengujian QA, atau persetujuan manajer, antara langkah build dan deploy
+- Mengintegrasikan Capgo ke dalam alat dan alur kerja DevOps Anda yang ada
+
+### Autentikasi
+
+Untuk menggunakan CLI Capgo, Anda perlu mengautentikasi dengan kunci API Anda. Anda dapat menghasilkan kunci API di pengaturan akun Capgo Anda.
+
+Untuk masuk dan menyimpan kunci API Anda dengan aman, jalankan:
+
+```shell
+npx @capgo/cli@latest login [API_KEY]
+```
+
+Perintah ini kemudian akan disimpan untuk penggunaan di masa mendatang. Anda tidak perlu menyediakan kunci API Anda setiap kali menjalankan perintah setelah masuk.
+
+### Perbedaan Utama dari CLI Lainnya
+
+Jika Anda familiar dengan alat CLI pembaruan langsung lainnya, ada beberapa hal penting yang perlu diperhatikan tentang CLI Capgo:
+
+- Capgo menggunakan satu CLI untuk kasus penggunaan pengembangan dan CI/CD, karena Capgo hanya fokus pada fitur pembaruan langsung
+
+- CLI Capgo tidak memerlukan langkah instalasi terpisah. Ini dibundel dengan paket `@capgo/cli` dan dapat dijalankan langsung menggunakan `npx`
+
+- CLI Capgo dirancang khusus untuk alur kerja pembaruan langsung, jadi mungkin tidak menyertakan beberapa fitur atau perintah yang ditemukan di alat CLI yang lebih umum
+
+## Langkah Selanjutnya
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Channel" icon="bars">
+      Pelajari cara menggunakan channel untuk mengelola jalur rilis yang berbeda dan menargetkan pembaruan ke pengguna tertentu
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollback" icon="left-arrow">
+      Temukan cara untuk kembali ke versi bundel JS sebelumnya jika pembaruan menyebabkan masalah
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Perilaku Pembaruan" icon="setting">
+      Sesuaikan bagaimana dan kapan pembaruan diunduh dan diterapkan di aplikasi Anda
+    </Card>
+  </a>
+  <a href="/docs/live-updates/fast-updates/">
+    <Card title="Pembaruan Cepat" icon="starlight">
+      Pelajari cara menggunakan pembaruan cepat untuk mempercepat proses pembaruan
+    </Card>
+  </a>
+</CardGrid>

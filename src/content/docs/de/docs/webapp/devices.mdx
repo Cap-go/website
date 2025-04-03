@@ -1,0 +1,30 @@
+---
+title: Geräte
+description: Verwendung der Device-Seite
+sidebar:
+  order: 7
+locale: de
+---
+
+## Liste aller Geräte anzeigen
+Schauen wir uns zunächst die Geräteseite an. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Geräte-Tab klicken](/docs/webapp/main-app-page)
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/deviceswebp" alt="devices list" /><figcaption></figcaption></figure>
+
+## Nur Entwicklergeräte anzeigen
+Möglicherweise möchten Sie nur die überschriebenen Geräte anzeigen (Geräte, die einen [benutzerdefinierten Kanal](docs/plugin/api/#setchannel) oder eine benutzerdefinierte Version haben).
+Klicken Sie dazu auf `Filter` und dann auf `Überschreiben`. Es sollte etwa so aussehen:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filterwebp" alt="filter devices" /><figcaption></figcaption></figure>
+
+## Ein Gerät konfigurieren
+
+Um ein bestimmtes Gerät zu konfigurieren, klicken Sie in der Tabelle darauf. Sie sollten dann etwa Folgendes sehen:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specificwebp" alt="show one device" /><figcaption></figcaption></figure>
+
+Zunächst die `Benutzerdefinierte ID`. Diese ist nicht wirklich nützlich und macht derzeit nichts. Sie können sie ignorieren.
+
+Als Nächstes die erzwungene Version. Wenn diese eingestellt ist, wird dieses Gerät **IMMER** diese Version erhalten. Sie hat Vorrang vor dem Kanal.
+
+Zuletzt der benutzerdefinierte Kanal. Wenn dieser eingestellt ist, wird dieses Gerät sich nicht um den öffentlichen (Standard-) Kanal kümmern und stattdessen diesen verwenden.

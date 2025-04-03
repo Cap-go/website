@@ -2,28 +2,27 @@
 import Blog from '@/components/Blog.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import translations from '@/services/translations'
+import * as m from "../../paraglide/messages.js"
 import { computed, ref } from 'vue'
+import type { CollectionEntry } from 'astro:content';
 
 const props = defineProps<{
-  Content?: any
   locale: Locales
+  Content: CollectionEntry<'blog'>[]
 }>()
 const selectedTag = ref('all')
 const config = useRuntimeConfig()
 
 const filteredPosts = computed(() => {
   if (selectedTag.value === 'all') return props.Content
-  return props.Content.filter((article: any) => article.frontmatter.tag.toUpperCase() === selectedTag.value.toUpperCase())
+  return props.Content.filter((article) => article.data.tag.toUpperCase() === selectedTag.value.toUpperCase())
 })
 
 const uniqueTags = computed(() => {
-  const tags = new Set<string[]>()
-  props.Content.forEach((article: any) => {
-    tags.add(article.frontmatter.tag.toUpperCase())
-  })
+  const tags = new Set<string>()
+  props.Content.forEach((article) => tags.add(article.data.tag.toUpperCase()))
   return Array.from(tags)
-    .map((tag) => tag[0].toUpperCase() + tag.slice(1).toLowerCase())
+    .map((tag) => tag[0].toUpperCase() + tag.substring(1, tag.length).toLowerCase())
     .sort()
 })
 </script>
@@ -32,7 +31,7 @@ const uniqueTags = computed(() => {
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ translations['latest_from_the_blog'][props.locale] }}</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.latest_from_the_blog() }}</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ config.public.blog_description }}
         </h2>
@@ -62,14 +61,13 @@ const uniqueTags = computed(() => {
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         <Blog
           v-for="article in filteredPosts"
-          :tag="article.frontmatter.tag"
-          :key="article.frontmatter.slug"
-          :link="article.frontmatter.slug"
-          :title="article.frontmatter.title"
-          :locale="article.frontmatter.locale"
-          :date="article.frontmatter.created_at"
-          :image="article.frontmatter.head_image"
-          :description="article.frontmatter.description"
+          :tag="article.data.tag"
+          :key="article.data.slug"
+          :link="article.data.slug"
+          :title="article.data.title"
+          :locale="article.data.locale"
+          :date="article.data.created_at"
+          :image="article.data.head_image"
         />
       </div>
     </div>

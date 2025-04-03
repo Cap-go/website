@@ -1,72 +1,73 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import * as m from "../paraglide/messages.js"
 
-const title = [Astro.locals.runtimeConfig.public.brand, Astro.locals.translations['support_policy'][Astro.locals.locale]].join(' | ')
-const description = Astro.locals.translations['read_our_support_policy'][Astro.locals.locale]
+const title = [Astro.locals.runtimeConfig.public.brand, m.support_policy()].join(' | ')
+const description = m.read_our_support_policy()
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="prose prose-sm m-auto px-3 text-left">
-    <h1>{Astro.locals.translations['support_policy_title'][Astro.locals.locale]}</h1>
+  <div class="px-3 m-auto prose-sm prose text-left">
+    <h1>{m.support_policy_title()}</h1>
     <p>
-      {Astro.locals.translations['support_policy_intro'][Astro.locals.locale]}
+      {m.support_policy_intro()}
     </p>
-    <h2>{Astro.locals.translations['support_policy_scope_title'][Astro.locals.locale]}</h2>
-    <p>{Astro.locals.translations['support_policy_scope_intro'][Astro.locals.locale]}</p>
-    <h3>{Astro.locals.translations['support_policy_configuration_issues_title'][Astro.locals.locale]}</h3>
+    <h2>{m.support_policy_scope_title()}</h2>
+    <p>{m.support_policy_scope_intro()}</p>
+    <h3>{m.support_policy_configuration_issues_title()}</h3>
     <ul>
-      <li>{Astro.locals.translations['support_policy_configuration_issues_1'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_configuration_issues_2'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_configuration_issues_3'][Astro.locals.locale]}</li>
+      <li>{m.support_policy_configuration_issues_1()}</li>
+      <li>{m.support_policy_configuration_issues_2()}</li>
+      <li>{m.support_policy_configuration_issues_3()}</li>
     </ul>
-    <h3>{Astro.locals.translations['support_policy_troubleshooting_title'][Astro.locals.locale]}</h3>
+    <h3>{m.support_policy_troubleshooting_title()}</h3>
     <ul>
-      <li>{Astro.locals.translations['support_policy_troubleshooting_1'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_troubleshooting_2'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_troubleshooting_3'][Astro.locals.locale]}</li>
+      <li>{m.support_policy_troubleshooting_1()}</li>
+      <li>{m.support_policy_troubleshooting_2()}</li>
+      <li>{m.support_policy_troubleshooting_3()}</li>
     </ul>
-    <h3>{Astro.locals.translations['support_policy_not_covered_title'][Astro.locals.locale]}</h3>
-    <p>{Astro.locals.translations['support_policy_not_covered_intro'][Astro.locals.locale]}</p>
+    <h3>{m.support_policy_not_covered_title()}</h3>
+    <p>{m.support_policy_not_covered_intro()}</p>
     <ul>
-      <li>{Astro.locals.translations['support_policy_not_covered_1'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_not_covered_2'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_not_covered_3'][Astro.locals.locale]}</li>
+      <li>{m.support_policy_not_covered_1()}</li>
+      <li>{m.support_policy_not_covered_2()}</li>
+      <li>{m.support_policy_not_covered_3()}</li>
     </ul>
-    <p>{Astro.locals.translations['support_policy_billing_support'][Astro.locals.locale]}</p>
-    <p>{Astro.locals.translations['support_policy_limited_support_intro'][Astro.locals.locale]}</p>
+    <p>{m.support_policy_billing_support()}</p>
+    <p>{m.support_policy_limited_support_intro()}</p>
     <ul>
-      <li>{Astro.locals.translations['support_policy_limited_support_1'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_limited_support_2'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_limited_support_3'][Astro.locals.locale]}</li>
+      <li>{m.support_policy_limited_support_1()}</li>
+      <li>{m.support_policy_limited_support_2()}</li>
+      <li>{m.support_policy_limited_support_3()}</li>
     </ul>
-    <h2>{Astro.locals.translations['support_policy_official_channels_title'][Astro.locals.locale]}</h2>
+    <h2>{m.support_policy_official_channels_title()}</h2>
     <ul>
-      <li>{Astro.locals.translations['support_policy_official_channels_1'][Astro.locals.locale]}</li>
-      <li>{Astro.locals.translations['support_policy_official_channels_2'][Astro.locals.locale]}</li>
+      <li>{m.support_policy_official_channels_1()}</li>
+      <li>{m.support_policy_official_channels_2()}</li>
     </ul>
     <p>
-      {Astro.locals.translations['support_policy_official_channels_note'][Astro.locals.locale]}
-    </p>
-    <p>
-      {Astro.locals.translations['support_policy_code_debugging'][Astro.locals.locale]}
+      {m.support_policy_official_channels_note()}
     </p>
     <p>
-      {Astro.locals.translations['support_policy_community_response'][Astro.locals.locale]}
+      {m.support_policy_code_debugging()}
     </p>
-    <p>{Astro.locals.translations['support_policy_team_participation'][Astro.locals.locale]}</p>
-    <h2>{Astro.locals.translations['support_policy_sla_title'][Astro.locals.locale]}</h2>
     <p>
-      {Astro.locals.translations['support_policy_sla_desc'][Astro.locals.locale]}
+      {m.support_policy_community_response()}
+    </p>
+    <p>{m.support_policy_team_participation()}</p>
+    <h2>{m.support_policy_sla_title()}</h2>
+    <p>
+      {m.support_policy_sla_desc()}
       <a href="https://capgo.app/sla">https://capgo.app/sla</a>
     </p>
-    <h2>{Astro.locals.translations['support_policy_proactive_monitoring_title'][Astro.locals.locale]}</h2>
+    <h2>{m.support_policy_proactive_monitoring_title()}</h2>
     <p>
-      {Astro.locals.translations['support_policy_proactive_monitoring_desc'][Astro.locals.locale]}
+      {m.support_policy_proactive_monitoring_desc()}
     </p>
-    <h2>{Astro.locals.translations['support_policy_premium_support_title'][Astro.locals.locale]}</h2>
-    <p>{Astro.locals.translations['support_policy_premium_support_desc'][Astro.locals.locale]}</p>
+    <h2>{m.support_policy_premium_support_title()}</h2>
+    <p>{m.support_policy_premium_support_desc()}</p>
     <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
   </div>
 </Layout>

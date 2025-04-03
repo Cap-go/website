@@ -1,0 +1,116 @@
+---
+title: Saluran
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Channel Live Update mengarah ke build bundle JS tertentu dari aplikasi Anda yang akan dibagikan dengan perangkat yang dikonfigurasi untuk mendengarkan channel tersebut untuk pembaruan. Ketika Anda [menginstal Capgo Live Updates SDK](/docs/getting-started/quickstart/) di aplikasi Anda, setiap binary native yang dikonfigurasi ke channel tersebut akan memeriksa pembaruan yang tersedia setiap kali aplikasi diluncurkan. Anda dapat mengubah build yang ditunjuk channel kapan saja dan juga dapat kembali ke build sebelumnya jika diperlukan.
+
+## Menyiapkan Channel
+
+Setiap aplikasi dilengkapi dengan channel default bernama "Production" yang tidak dapat dihapus. Untuk menambahkan channel baru:
+
+1. Buka bagian "Channels" di dashboard Capgo
+2. Klik tombol "New Channel"
+3. Masukkan nama untuk channel dan klik "Create"
+
+Nama channel bisa apa saja yang Anda inginkan. Strategi yang umum adalah menyesuaikan channel dengan tahap pengembangan Anda, seperti:
+
+- `Development` - untuk menguji live update di perangkat lokal atau emulator
+- `QA` - untuk tim QA Anda memverifikasi pembaruan sebelum rilis yang lebih luas
+- `Staging` - untuk pengujian akhir di lingkungan seperti produksi
+- `Production` - untuk versi aplikasi Anda yang diterima pengguna akhir dari app store
+
+## Mengkonfigurasi Channel di Aplikasi Anda
+
+Dengan channel Anda yang telah dibuat, Anda perlu mengkonfigurasi aplikasi untuk mendengarkan channel yang sesuai. Dalam contoh ini, kita akan menggunakan channel `Development`
+
+Buka file `capacitor.config.ts` (atau `capacitor.config.json`) Anda. Di bagian `plugins`, atur properti `channel` dari plugin `CapacitorUpdater` ke nama channel yang Anda inginkan:
+
+```ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'Development',
+    },
+  },
+};
+```
+
+Selanjutnya, build aplikasi web Anda dan jalankan `npx cap sync` untuk menyalin file konfigurasi yang diperbarui ke proyek iOS dan Android Anda. Jika Anda melewatkan langkah sinkronisasi ini, proyek native Anda akan terus menggunakan channel yang sebelumnya dikonfigurasi.
+
+<Aside type="caution">
+
+Properti `defaultChannel` akan selalu menimpa channel default cloud. Tapi Anda masih dapat memaksa deviceId ke channel di Cloud
+
+</Aside>
+
+## Menetapkan Bundle ke Channel
+
+Untuk menerapkan live update, Anda perlu mengunggah build bundle JS baru dan menetapkannya ke channel. Anda dapat melakukan ini dalam satu langkah dengan Capgo CLI:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel=Development
+```
+
+Ini akan mengunggah aset web yang telah di-build dan menetapkan bundle baru sebagai build aktif untuk channel `Development`. Setiap aplikasi yang dikonfigurasi untuk mendengarkan channel tersebut akan menerima pembaruan saat mereka memeriksa pembaruan berikutnya.
+
+Anda juga dapat menetapkan build ke channel dari bagian "Bundles" di dashboard Capgo. Klik ikon menu di sebelah build dan pilih "Assign to Channel" untuk memilih channel untuk build tersebut.
+
+## Versi Bundle dan Channel
+
+Penting untuk dicatat bahwa bundle di Capgo bersifat global untuk aplikasi Anda, tidak spesifik untuk channel individual. Bundle yang sama dapat ditetapkan ke beberapa channel.
+
+Saat memversikan bundle Anda, kami merekomendasikan menggunakan semantic versioning [semver](https://semver.org/) dengan pengidentifikasi pre-release untuk build khusus channel. Misalnya, rilis beta mungkin diversion sebagai `123-beta1`.
+
+Pendekatan ini memiliki beberapa keuntungan:
+
+- Dengan jelas mengkomunikasikan hubungan antara build. `123-beta1` jelas merupakan pre-release dari `123`
+- Memungkinkan penggunaan kembali nomor versi di beberapa channel, mengurangi kebingungan
+- Memungkinkan jalur rollback yang jelas. Jika Anda perlu melakukan rollback dari `123`, Anda tahu `122` adalah rilis stabil sebelumnya
+
+Berikut contoh bagaimana Anda mungkin menyelaraskan versi bundle Anda dengan pengaturan channel yang umum:
+
+- Channel `Development`: `123-dev1`, `123-dev2`, dll
+- Channel `QA`: `123-qa1`, `123-qa2`, dll
+- Channel `Staging`: `123-rc1`, `123-rc2`, dll
+- Channel `Production`: `123`, `124`, dll
+
+Menggunakan semver dengan pengidentifikasi pre-release adalah pendekatan yang direkomendasikan, tetapi tidak wajib. Yang terpenting adalah menemukan skema versioning yang dengan jelas mengkomunikasikan hubungan antara build Anda dan selaras dengan proses pengembangan tim Anda.
+
+## Melakukan Rollback Live Update
+
+Jika Anda menerapkan live update yang memperkenalkan bug atau perlu dikembalikan karena alasan lain, Anda dapat dengan mudah kembali ke build sebelumnya. Dari bagian "Channels" di dashboard:
+
+<Steps>
+
+1. Klik nama channel yang ingin Anda rollback
+2. Temukan build yang ingin Anda kembalikan dan klik ikon mahkota
+![Rollback build](/select_bundle.webp)
+3. Konfirmasi tindakan
+
+</Steps>
+
+Build yang dipilih akan segera menjadi build aktif untuk channel tersebut lagi. Aplikasi akan menerima versi yang di-rollback saat mereka memeriksa pembaruan berikutnya.
+
+## Mengotomatisasi Deployment
+
+Untuk alur kerja yang lebih canggih, Anda dapat mengotomatisasi deployment live update Anda sebagai bagian dari pipeline CI/CD Anda. Dengan mengintegrasikan Capgo ke dalam proses build Anda, Anda dapat secara otomatis mengunggah bundle baru dan menetapkannya ke channel setiap kali Anda push ke branch tertentu atau membuat rilis baru.
+
+Lihat dokumen [Integrasi CI/CD](/docs/cicd-integration/) untuk mempelajari lebih lanjut tentang mengotomatisasi live update Capgo.
+
+## Menerapkan ke Perangkat
+
+Sekarang setelah Anda memahami channel, Anda siap untuk mulai menerapkan live update ke perangkat nyata. Proses dasarnya adalah:
+
+1. Instal SDK Capgo di aplikasi Anda
+2. Konfigurasi aplikasi untuk mendengarkan channel yang Anda inginkan
+3. Unggah build dan tetapkan ke channel tersebut
+4. Luncurkan aplikasi dan tunggu pembaruannya!
+
+Untuk panduan yang lebih detail, lihat panduan [Menerapkan Live Update](/docs/getting-started/deploy/). Selamat memperbarui!

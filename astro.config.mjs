@@ -161,7 +161,7 @@ export default defineConfig({
         {
           label: 'Public API',
           collapsed: true,
-          items: [{ label: 'Endpoints', link: '/docs/public-api/endpoints' }],
+          autogenerate: { directory: 'docs/public-api' },
         },
         {
           label: 'Web app',

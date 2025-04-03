@@ -81,9 +81,9 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect user access](/select_user_access.webp)
 
-3 — Select the API Keys tab.
+3 — Select the Integration tab.
 
-![App Store Connect API Keys](/user_access_keys.webp)
+![App Store Connect API Integration](/user_access_keys.webp)
 
 4 — Click Generate API Key or the Add (+) button.
 
@@ -93,7 +93,7 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 ![App Store Connect API keys create name](/gen_key.webp)
 
-6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/).
+6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). We recommend to select **App manager**.
 
 7 — Click Generate.
 

@@ -1,0 +1,49 @@
+---
+title: Ajouter une App
+description: Aggiungi un'app al tuo account Capgo e installa il plugin nella tua app
+sidebar:
+  order: 2
+prev: false
+next: false
+locale: it
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Introduzione a Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Gli aggiornamenti live sono a 3 passi di distanza
+
+
+### Configurazione guidata
+
+<Steps>
+
+1. Crea il tuo account su [https://capgo.app/register](https://capgo.app/register)
+![signup screenshot](/signupwebp "signup screenshot")
+
+2. Usa il comando Init per iniziare <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Ti verranno presentate una serie di domande. Fornisci le risposte necessarie per completare la configurazione automatica<Aside type="tip">Seguendo questi passaggi, sarai operativo in pochissimo tempo. Se hai bisogno di ulteriore assistenza durante il processo, il nostro team di supporto è [qui per aiutarti](mailto:support@capgoapp) Buon onboarding!</Aside>
+
+3. Distribuisci un aggiornamento live <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Impara come distribuire un aggiornamento live alla tua app" />
+
+</Steps>
+
+### Configurazione manuale
+
+Nel caso in cui il comando init non funzioni, puoi aggiungere manualmente un'app
+
+<Steps>
+
+1. Connetti la CLI al tuo account: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Aggiungi l'app al tuo account con questo comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Installa il plugin nella tua app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Chiama il metodo init il prima possibile nella tua app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+
+5. Distribuisci un aggiornamento live <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Impara come distribuire un aggiornamento live alla tua app" />
+
+</Steps>

@@ -1,0 +1,80 @@
+---
+title: Actualización Automática
+description: Cómo usar el plugin de actualización automática en modo auto-alojado
+sidebar:
+  order: 3
+locale: es
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Esta documentación explicará cómo ejecutar tu servidor de actualización automática
+
+## Servir tu paquete
+Asegúrate de que tu paquete se sirva a través de HTTPS, y que el servidor tenga los encabezados CORS correctos para permitir que la aplicación descargue la actualización
+ej. ```https://myservercom/app/updates/updatesjson```
+
+Si no estás familiarizado con servir un paquete, te recomendamos que pruebes Capgo Cloud o veas un ejemplo aquí:
+<LinkCard
+	title="Servir un Paquete"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Configuración
+Añade una ``updateUrl`` a tu ``capacitorconfigjson``
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myservercom/app/updates/updatesjson",
+		}
+	}
+}
+```
+:::caution
+Cuando estés publicando una actualización auto-alojada, ten en cuenta que no puedes usar endpoints "HTTP" ya que va en contra de las políticas de seguridad de las aplicaciones Android, para fines de prueba puedes [permitirlo](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+:::
+
+## API de Actualización
+
+El plugin realizará una llamada POST a tu API cada vez que se abra la aplicación, con este cuerpo:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+El servidor API debe responder, en JSON, al plugin capacitor-updater con estos datos si una actualización es necesaria:
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip"
+}
+```
+
+En modo de actualización automática, el servidor debe comparar las versiones y devolver la correcta, si la clave URL está presente, el plugin inicia el proceso de descarga
+
+Si agregas las claves "message" y "error", la versión no se establecerá y el mensaje se mostrará en los registros en su lugar
+
+La clave `version` debe estar en formato [`semver`](https://semverorg/)
+
+El zip debe tener `indexhtml` como archivo en la raíz, o solo una carpeta en la raíz con `indexhtml` dentro
+
+Puedes usar el comando de la CLI para comprimir tu paquete:
+
+```bash title="Crear un paquete con tus archivos para servir desde tu servidor"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

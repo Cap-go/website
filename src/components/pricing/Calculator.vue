@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { Locales } from '@/services/locale'
 import { roundNumber } from '@/services/misc'
-import translations from '@/services/translations'
-import type { Database } from '@/types/supabase.types'
+import type { Database } from '@/services/supabase.types'
 import { computed, ref } from 'vue'
+import * as m from "../../paraglide/messages.js"
 
 const props = defineProps({
   pricing: {
@@ -75,76 +74,76 @@ const totalPrice = computed(() => {
 
 <template>
   <section id="calculator">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
-        <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">{{ translations['calculate_your_usage'][props.locale as Locales] }}<br /></h2>
-        <p class="font-pj mt-6 text-sm font-normal text-gray-600">
-          {{ translations['enter_your_estimated_monthly_active_users'][props.locale as Locales] }}
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
+        <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">{{ m.calculate_your_usage() }}<br /></h2>
+        <p class="mt-6 text-sm font-normal text-gray-600 font-pj">
+          {{ m.enter_your_estimated_monthly_active_users() }}
         </p>
       </div>
       <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
         <div class="absolute -inset-2">
           <div
-            class="mx-auto h-full w-full opacity-30 blur-lg filter"
+            class="w-full h-full mx-auto opacity-30 blur-lg filter"
             style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
           />
         </div>
-        <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
+        <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-x-20 gap-y-12 rounded-2xl md:grid-cols-3">
           <div class="flex flex-col items-center">
             <p class="calc-label">
-              MAU<br /><span class="text-[0.6rem]">{{ translations['monthly_active_users'][props.locale as Locales] }}</span>
+              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users() }}</span>
             </p>
             <input
               v-model.number="mau"
               placeholder="0"
-              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
+              class="w-full p-2 text-3xl font-bold text-center break-all bg-gray-900 border-b border-gray-300 cursor-text hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="translations['updates_by_month'][props.locale as Locales]" />
+            <p class="calc-label" v-html="m.updates_by_month()" />
             <input
               v-model.number="updatesByMonth"
               placeholder="0"
-              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
+              class="w-full p-2 text-3xl font-bold text-center break-all bg-gray-900 border-b border-gray-300 cursor-text hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="translations['updates_size'][props.locale as Locales]" />
+            <p class="calc-label" v-html="m.updates_size()" />
             <input
               v-model.number="updatesSize"
               placeholder="0"
-              class="w-full cursor-text break-all border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold hover:bg-gray-800 lg:mt-3"
+              class="w-full p-2 text-3xl font-bold text-center break-all bg-gray-900 border-b border-gray-300 cursor-text hover:bg-gray-800 lg:mt-3"
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="translations['updates_total'][props.locale as Locales]" />
-            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
+            <p class="calc-label" v-html="m.updates_total()" />
+            <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
               {{ updates.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="translations['bandwidth_gb'][props.locale as Locales]" />
-            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
+            <p class="calc-label" v-html="m.bandwidth_gb()" />
+            <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
               {{ bandwidth.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="translations['storage'][props.locale as Locales]" />
-            <p class="font-pj mt-3 break-all text-3xl font-bold text-white">
+            <p class="calc-label" v-html="m.storage()" />
+            <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
               {{ storage.toLocaleString() }}
             </p>
           </div>
-          <div class="col-span-1 flex flex-col items-center md:col-span-3">
-            <p class="text-md font-pj mt-0 mt-5 font-bold uppercase tracking-widest text-white">
-              {{ yearly ? translations['yearly'][props.locale as Locales] : translations['monthly'][props.locale as Locales] }} Price
+          <div class="flex flex-col items-center col-span-1 md:col-span-3">
+            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">
+              {{ yearly ? m.yearly() : m.monthly() }} Price
             </p>
-            <p class="font-pj mt-3 break-all rounded-xl bg-white p-2 text-3xl font-bold text-gray-900">{{ totalPrice }}€</p>
-            <p v-show="suggestion" class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
-              {{ translations['we_suggest_you_to_choose_the'][props.locale as Locales] }}
-              <button class="underline-current cursor-pointer font-bold uppercase text-red-400 underline" @click="suggestionClick">
+            <p class="p-2 mt-3 text-3xl font-bold text-gray-900 break-all bg-white font-pj rounded-xl">{{ totalPrice }}€</p>
+            <p v-show="suggestion" class="mt-0 mt-5 text-sm font-bold tracking-widest text-white font-pj">
+              {{ m.we_suggest_you_to_choose_the() }}
+              <button class="font-bold text-red-400 underline uppercase cursor-pointer underline-current" @click="suggestionClick">
                 {{ suggestion }}
               </button>
-              {{ translations['plan'][props.locale as Locales] }}
+              {{ m.plan() }}
             </p>
           </div>
         </div>

@@ -1,0 +1,67 @@
+---
+title: 概要
+description: CapgoのCLIコマンドに関する詳細なドキュメント
+sidebar:
+  order: 1
+locale: ja
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+Capgo CLIは、Capgoアプリとデプロイメントを管理するためのコマンドセットを提供します。このリファレンスでは、各利用可能なコマンドについて、そのオプションと使用例を含む詳細な情報を提供します。
+
+## コマンド
+
+<CardGrid stagger>
+  <a href="/init/">
+    <Card title="init" icon="rocket">
+      新しいCapgoアプリを初期化
+    </Card>
+  </a>
+
+  <a href="/login/">
+    <Card title="login" icon="approve-check">
+      Capgoサービスで認証
+    </Card>
+  </a>
+
+  <a href="/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      潜在的な問題についてCapgoセットアップをチェック
+    </Card>
+  </a>
+
+  <a href="/app/">
+    <Card title="app" icon="seti:default">
+      Capgoアプリを管理
+    </Card>
+  </a>
+
+  <a href="/bundle/">
+    <Card title="bundle" icon="seti:html">
+      アプリバンドルを管理
+    </Card>
+  </a>
+
+  <a href="/channel/">
+    <Card title="channel" icon="seti:git">
+      リリースチャンネルを管理
+    </Card>
+  </a>
+
+  <a href="/key/">
+    <Card title="key" icon="seti:lock">
+      アプリ署名キーを管理
+    </Card>
+  </a>
+</CardGrid>
+
+## CI統合
+
+作業を自動化するために、GitHub Actionsを使用してCapgoに更新をプッシュすることをお勧めします。詳細については、[GitHub Actionsチュートリアル](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)をご覧ください。
+
+CI環境変数にCapgo APIキーを設定することを忘れないでください。
+
+## デモアプリ
+
+CI統合を含むCapgoアプリの完全な例については、[GitHubのデモアプリ](https://github.com/Cap-go/demo-app/)をご確認ください。

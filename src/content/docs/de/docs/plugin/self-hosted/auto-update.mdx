@@ -1,0 +1,80 @@
+---
+title: Pembaruan Otomatis
+description: So verwenden Sie das automatische Update-Plugin im selbst gehosteten Modus
+sidebar:
+  order: 3
+locale: de
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Diese Dokumentation erklärt, wie Sie Ihren Auto-Update-Server ausführen können
+
+## Bundle bereitstellen
+Stellen Sie sicher, dass Ihr Bundle über HTTPS bereitgestellt wird und der Server die richtigen CORS-Header hat, damit die App das Update herunterladen kann
+z.B. ```https://myservercom/app/updates/updatesjson```
+
+Wenn Sie mit der Bereitstellung eines Bundles nicht vertraut sind, empfehlen wir Ihnen, Capgo Cloud zu verwenden oder hier ein Beispiel anzusehen:
+<LinkCard
+	title="Bundle bereitstellen"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Konfiguration
+Fügen Sie eine ``updateUrl`` zu Ihrer ``capacitorconfigjson`` hinzu
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myservercom/app/updates/updatesjson",
+		}
+	}
+}
+```
+:::caution
+Wenn Sie ein selbst gehostetes Update durchführen, beachten Sie, dass Sie keinen "HTTP"-Endpunkt verwenden können, da dies gegen die Sicherheitsrichtlinien von Android-Apps verstößt. Zu Testzwecken können Sie es [erlauben](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+:::
+
+## Update API
+
+Das Plugin führt bei jedem Öffnen der App einen POST-Aufruf an Ihre API durch, mit diesem Body:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSYEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+Die Server-API sollte in JSON dem Capacitor-Updater-Plugin mit diesen Daten antworten, wenn ein Update erforderlich ist:
+
+```json
+{
+"version": "123",
+"url": "https://myservercom/app/updates/my-new-app-200zip"
+}
+```
+
+Im Auto-Update-Modus sollte der Server die Versionen vergleichen und die richtige zurückgeben. Wenn der URL-Schlüssel vorhanden ist, startet das Plugin den Download-Prozess
+
+Wenn Sie die Schlüssel "message" und "error" hinzufügen, wird die Version nicht gesetzt, und die Nachricht wird stattdessen in den Logs angezeigt
+
+Der `version`-Schlüssel sollte im [`semver`](https://semverorg/)-Format sein
+
+Die ZIP-Datei sollte `indexhtml` als Datei im Stammverzeichnis haben oder nur einen Ordner im Stammverzeichnis mit `indexhtml` darin
+
+Sie können den Befehl der CLI verwenden, um Ihr Bundle zu zippen:
+
+```bash title="Erstellen Sie ein Bundle mit Ihren Dateien zur Bereitstellung von Ihrem Server"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```

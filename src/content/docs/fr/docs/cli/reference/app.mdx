@@ -1,0 +1,84 @@
+---
+title: application
+sidebar_label: app
+sidebar:
+  order: 4
+locale: fr
+---
+
+La commande `app` vous permet de gérer vos applications Capgo
+
+### add
+
+`npx @capgo/cli app add [appId]`
+
+Ajoute une nouvelle application à votre compte Capgo
+
+`[appId]` est l'ID de votre application au format `comexampleapp`. Consultez la [documentation Capacitor](https://capacitorjscom/docs/cli/commands/init/) pour plus d'informations
+
+> 💡 Toutes les options seront devinées à partir de votre `capacitorconfigjson` si elles ne sont pas fournies
+
+Options :
+
+- `--icon [path]` : Chemin vers une icône personnalisée à afficher dans l'application web Capgo
+- `--name [name]` : Nom personnalisé à afficher dans la liste des applications
+- `--apikey [key]` : Clé API pour lier à votre compte
+- `--retention [days]` : Période de rétention des bundles d'applications en jours (par défaut : 0 = infini)
+
+### set
+
+`npx @capgo/cli app set [appId]`
+
+Met à jour une application existante dans votre compte Capgo
+
+Options :
+
+- `--icon [path]` : Chemin vers une icône personnalisée à afficher dans l'application web Capgo
+- `--name [name]` : Nom personnalisé à afficher dans la liste des applications
+- `--retention [days]` : Période de rétention des bundles d'applications en jours (par défaut : 0 = infini)
+- `--apikey [key]` : Clé API pour lier à votre compte
+
+### list
+
+`npx @capgo/cli app list [appId]`
+
+Liste toutes les applications de votre compte Capgo
+
+Options :
+
+- `--apikey [key]` : Clé API pour lier à votre compte
+
+### delete
+
+`npx @capgo/cli app delete [appId]`
+
+Supprime une application de votre compte Capgo
+
+Options :
+
+- `--apikey [key]` : Clé API pour lier à votre compte
+- `--bundle` : Supprime uniquement une version spécifique du bundle
+
+### debug
+
+`npx @capgo/cli app debug [appId]`
+
+Affiche les informations de débogage pour une application
+
+Options :
+
+- `--apikey [key]` : Clé API pour lier à votre compte
+- `--device` : Débogue un appareil spécifique
+
+### setting
+
+`npx @capgo/cli app setting [path]`
+
+Modifie la configuration Capacitor pour une application
+
+`[path]` est le chemin vers le paramètre que vous souhaitez modifier (par exemple, `appId` ou `pluginsCapacitorUpdaterautoUpdate`)
+
+Vous devez fournir soit `--string` soit `--bool` :
+
+- `--string <value>` : Définit le paramètre sur une valeur de type chaîne
+- `--bool <true|false>` : Définit le paramètre sur une valeur booléenne

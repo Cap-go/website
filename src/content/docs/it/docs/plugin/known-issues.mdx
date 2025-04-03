@@ -1,0 +1,127 @@
+---
+title: Problemi noti
+description: Problemi noti con Capacitor e CapGo
+sidebar:
+  order: 7
+locale: it
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ricarica live di Ionic
+
+* Quando sviluppi, se utilizzi la funzione di ricarica live di Ionic dalla CLI, sovrascriverà il plugin, quindi non vedrai mai i tuoi aggiornamenti
+
+## Ricarica live di Quasar
+
+* Utilizza lo stesso sistema di Ionic sotto il cofano, quindi non vedrai i tuoi aggiornamenti
+
+## Errori negli aggiornamenti
+
+* Questo di solito accade quando vengono inviati aggiornamenti di grandi dimensioni (> 20mb), una grande percentuale di utenti non riceverà l'ultima versione
+In passato, gli utenti dovevano mantenere l'app aperta fino al completamento del download, ora utilizziamo il download in background, ma è ancora limitato a pochi secondi
+
+## Android
+
+### Impossibile scaricare
+
+Abbiamo riscontrato alcuni problemi con dispositivi in India, e parlando con gli utenti, facendogli provare diversi server DNS, ha funzionato
+
+Quindi se hai il problema, prova a utilizzare un server DNS diverso come Cloudflare o Google DNS
+
+Cloudflare: 1111 e 1001
+
+Google DNS: 8888 e 8844 o dnsgoogle
+
+<LinkCard
+	title="Come configurare un server DNS preferito su Android?"
+	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Self Hosted
+Quando stai distribuendo un aggiornamento self-hosted, tieni presente che non puoi utilizzare endpoint "HTTP" poiché è contro le politiche di sicurezza delle app Android, se vuoi comunque farlo, segui questa guida:
+
+<LinkCard
+	title="Come consentire tutti i tipi di connessione di rete HTTP e HTTPS in Android (9) Pie?"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+### Unzip 
+
+Problema di unzip: le voci DEFLATED possono avere un descrittore EXT
+
+Se hai compresso il tuo bundle con qualcosa di diverso dalla CLI, il formato del tuo zip potrebbe essere errato, utilizza il comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`
+
+Questo è un problema noto di Java:
+
+<LinkCard
+	title="Problema di unzip: le voci DEFLATED possono avere un descrittore EXT"
+	href="https://bugsopenjdkorg/browse/JDK-8143613"
+/>
+
+### Problema Clearfix
+
+* Se hai problemi con usesCleartextTraffic, è perché il plugin segue le buone pratiche raccomandate da sonar cloud, nel 90% dei casi funzionerà bene, ma con alcuni plugin causa problemi
+
+Per risolverlo, aggiungi in `android/app/src/main/AndroidManifestxml` nella chiave `<application>`:
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemasandroidcom/tools"
+```
+
+## iOS
+
+### Manifesto della Privacy
+
+Aggiungi la chiave dizionario `NSPrivacyAccessedAPICategoryUserDefaults` al tuo [Privacy Manifest](https://capacitorjscom/docs/ios/privacy-manifest) (solitamente `ios/App/PrivacyInfoxcprivacy`):
+
+```xml
+<?xml version="10" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 10//EN" "http://wwwapplecom/DTDs/PropertyList-10dtd">
+<plist version="10">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Aggiungi questa voce dict all'array se il file esiste già -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA921</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+Raccomandiamo di dichiarare [`CA921`](https://developerapplecom/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) come motivo per accedere all'API [`UserDefaults`](https://developerapplecom/documentation/foundation/userdefaults)
+
+### Permessi di rete
+
+Quando si utilizza un server locale per testare gli aggiornamenti, l'app chiederà i permessi di rete, è un comportamento normale, non accade quando si usa un server remoto
+
+## Entrambi i SO
+
+Quando si eseguono aggiornamenti in modalità manuale, alcuni eventi non sono facili da catturare, ad esempio il fallimento dell'aggiornamento si attiva poco prima che il tuo codice JS si ricarichi, quindi non sarai in grado di catturarlo
+
+Un'alternativa è elencare i bundle e controllare le statistiche degli errori per sapere se l'aggiornamento fallisce
+
+Dobbiamo trovare un modo migliore per gestire questo in futuro, ma non è una priorità, poiché la modalità auto è il modo consigliato per fare gli aggiornamenti
+
+I PR sono benvenuti per aiutarci a migliorare questo aspetto
+
+## CLI
+
+se la tua CLI ha problemi a fare qualsiasi cosa,
+
+Controlla se **appId** e **appName** sono presenti nel tuo **capacitorconfigts**
+
+Segui la guida della documentazione ufficiale:
+
+<LinkCard
+	title="Configurazione Capacitor"
+	href="https://capacitorjscom/docs/config"
+/>
