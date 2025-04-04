@@ -70,6 +70,6 @@
     "unocss": "^66.0.0",
     "vue-tsc": "^2.2.4",
     "zod": "^3.24.2",
-    "@inlang/paraglide-js": "1.11.8"
+    "@inlang/paraglide-js": "2.0.11"
   }
 }
