@@ -20,5 +20,12 @@
     "src/content/plugins-tutorials/it": true,
     "src/content/plugins-tutorials/ja": true,
     "src/content/plugins-tutorials/ko": true,
+    "src/content/docs/de": true,
+    "src/content/docs/es": true,
+    "src/content/docs/fr": true,
+    "src/content/docs/id": true,
+    "src/content/docs/it": true,
+    "src/content/docs/ja": true,
+    "src/content/docs/ko": true
   }
 }

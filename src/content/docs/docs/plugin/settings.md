@@ -224,7 +224,9 @@ This setting require you to hide the app from the user while the update is being
 ```
 
 ## `defaultChannel`
-Set the default channel for the app. This will override any other channel set in Capgo if the channel allows overwriting.
+Set the default channel for the app. This will override any other channel set in Capgo if the channel allows overwriting. 
+
+> The channel name is case sensitive
 
 ```json
 // capacitor.config.json
