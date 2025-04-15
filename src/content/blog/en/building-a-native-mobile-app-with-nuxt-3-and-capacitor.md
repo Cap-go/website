@@ -1,9 +1,7 @@
 ---
 slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
 title: Creating Mobile Apps with Nuxt 3 and Capacitor.
-description: >-
-  How to create a mobile app with Nuxt 3, Capacitor and implement native UI with
-  Konsta UI.
+description: How to create a mobile app with Nuxt 3, Capacitor and implement native UI with Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
