@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
 import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
+import striptags from 'striptags'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const blogs = await getCollection('blog')
@@ -68,19 +69,14 @@ content['ldJSON'] = {
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
-  articleBody: entry.body,
+  articleBody: striptags(entry.rendered?.html || ''),
   keywords: entry.data?.keywords || [],
   articleSection: entry.data?.tag || [],
 }
 ---
 
 <Layout content={content}>
-  <VueBlogSlug
-    client:load
-    {related}
-    {headings}
-    {...entry.data}
-  >
+  <VueBlogSlug client:load {related} {headings} {...entry.data}>
     <Content />
   </VueBlogSlug>
 </Layout>
