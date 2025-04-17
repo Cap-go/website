@@ -2,7 +2,7 @@
 title: "Apps"
 description: "Apps endpoint documentation"
 sidebar:
-  order: 3
+  order: 7
 ---
 
 Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
@@ -36,6 +36,7 @@ Retrieve information about your apps.
 #### Query Parameters
 - `page`: Optional. Page number for pagination
 - `limit`: Optional. Number of results per page (default: 50)
+- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
 
 For getting a specific app:
 - Use the app ID in the URL path: `https://api.capgo.app/app/:id`
@@ -65,6 +66,10 @@ interface App {
 # Get all apps
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/"
+
+# Get apps from a specific organization
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/?org_id=org_123"
 
 # Get specific app
 curl -H "authorization: your-api-key" \
@@ -237,6 +242,11 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage app",
   "status": "KO"
 }
+
+// Organization access denied
+{
+  "status": "You do not have access to this organization"
+}
 ```
 
 ## Common Use Cases
@@ -263,9 +273,15 @@ Common error scenarios and their responses:
 ```typescript
 // Configure automatic bundle cleanup
 {
-  "id": "app_123",
   "retention": 30 // Keep bundles for 30 days
 }
+```
+
+4. **Get Apps by Organization**
+```bash
+# List all apps in a specific organization
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/?org_id=org_123"
 ```
 
 ## Resource Management
