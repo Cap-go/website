@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-[Appflow](https://ionic.io/appflow/) CI/CD simplifies mobile app updates with over-the-air (OTA) updates, enabling **95% of users to receive updates within 24 hours**. It offers automated tools for iOS and Android builds, app store deployments, and command-line management. However, rising costs (up to $6,000 annually) have led some teams to explore alternatives like [Capgo](https://capgo.app/), which offers faster updates and lower pricing.
+[Appflow](https://ionic.io/appflow/) CI/CD simplifies [mobile app updates](https://capgo.app/plugins/capacitor-updater/) with over-the-air (OTA) updates, enabling **95% of users to receive updates within 24 hours**. It offers automated tools for iOS and Android builds, app store deployments, and command-line management. However, rising costs (up to $6,000 annually) have led some teams to explore alternatives like [Capgo](https://capgo.app/), which offers faster updates and lower pricing.
 
 ### Key Takeaways:
 
@@ -73,7 +73,7 @@ Set up distinct environments aligned with your version control branches:
 -   **Staging**: A replica of production for final testing.
 -   **Production**: For live app releases.
 
-Store environment variables securely using Appflow's built-in encrypted storage.
+Store environment variables securely using Appflow's built-in [encrypted storage](https://capgo.app/docs/cli/migrations/encryption/).
 
 ### Automating the Build Process
 
