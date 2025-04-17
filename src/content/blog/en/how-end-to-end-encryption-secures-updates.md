@@ -31,7 +31,7 @@ next_blog: ''
 2.  Secure key exchange ensures only authorized devices can decrypt.
 3.  Devices verify authenticity and install the update safely.
 
-Capgo's solution has delivered 23.5 million updates globally, achieving a **95% adoption rate within 24 hours** and an **82% success rate worldwide**. By encrypting updates, developers can deploy faster, safer, and more reliably.
+Capgo's solution has delivered 23.5 million updates globally, achieving a **95% adoption rate within 24 hours** and an **82% success rate worldwide**. By [encrypting updates](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/), developers can deploy faster, safer, and more reliably.
 
 ## Secure OTA updates for [ESP32](https://en.wikipedia.org/wiki/ESP32) â€“ Set up code signing with ...
 
@@ -71,7 +71,7 @@ This multi-step process ensures that updates are protected from the moment theyâ
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-This section explains how to implement end-to-end encryption in Capacitor apps, building on the concepts covered earlier.
+This section explains how to implement end-to-end encryption in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), building on the concepts covered earlier.
 
 To ensure secure over-the-air (OTA) updates in Capacitor, use encryption protocols designed for high security. Capgo's platform simplifies managing encryption keys while adhering to leading security standards.
 
@@ -117,7 +117,7 @@ With end-to-end encryption, updates are protected from unauthorized access and t
 
 ### Aligning with Security Standards
 
-Encrypted OTA updates help apps meet strict security requirements set by app stores and regulatory bodies. By ensuring only end users can decrypt update packages, these updates meet the standards of platforms like Apple and Google while protecting user privacy.
+[Encrypted OTA updates](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) help apps meet strict security requirements set by app stores and regulatory bodies. By ensuring only end users can decrypt update packages, these updates meet the standards of platforms like Apple and Google while protecting user privacy.
 
 | Security Requirement | Role of Encryption |
 | --- | --- |
@@ -185,9 +185,9 @@ The benefits of secure OTA updates go beyond just security. Developers have succ
 
 Here are some key factors that contribute to successful OTA updates:
 
-| Success Factor | Role in Secure Updates |
+| Success Factor | Role in [Secure Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
 | --- | --- |
-| Encryption Implementation | Ensures only authorized users can decrypt updates |
+| [Encryption Implementation](https://capgo.app/docs/cli/migrations/encryption/) | Ensures only authorized users can decrypt updates |
 | Distribution Strategy | Manages controlled, staged rollouts |
 | Security Compliance | Keeps updates aligned with platform rules |
 | Update Verification | Confirms the integrity of each update |
