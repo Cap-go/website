@@ -5,6 +5,7 @@ import {
   Bars3Icon,
   BoltIcon,
   CameraIcon,
+  ChartBarIcon,
   ChatBubbleLeftIcon,
   CircleStackIcon,
   CurrencyDollarIcon,
@@ -17,6 +18,7 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   VideoCameraIcon,
+  UserCircleIcon,
 } from '@heroicons/vue/20/solid'
 
 export interface Action {
@@ -194,4 +196,50 @@ export const actions = [
     title: 'Data Storage',
     icon: CircleStackIcon,
   },
+  // add https://github.com/Cap-go/capacitor-android-usagestatsmanager
+  {
+    name: '@capgo/capacitor-android-usagestatsmanager',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for android usage stats manager',
+    href: 'https://github.com/Cap-go/capacitor-android-usagestatsmanager/',
+    title: 'Usage Stats Manager',
+    icon: ChartBarIcon,
+  },
+  // add https://github.com/Cap-go/capacitor-streamcall
+  {
+    name: '@capgo/capacitor-streamcall',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for streamcall',
+    href: 'https://github.com/Cap-go/capacitor-streamcall/',
+    title: 'Streamcall',
+    icon: VideoCameraIcon,
+  },
+  // add https://github.com/Cap-go/capacitor-social-login
+  {
+    name: '@capgo/capacitor-social-login',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for social login',
+    href: 'https://github.com/Cap-go/capacitor-social-login/',
+    title: 'Social Login',
+    icon: UserCircleIcon,
+  },
+  // add https://github.com/Cap-go/capacitor-jw-player
+  {
+    name: '@capgo/capacitor-jw-player',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for jw player',
+    href: 'https://github.com/Cap-go/capacitor-jw-player/',
+    title: 'JW Player',
+    icon: PlayCircleIcon,
+  },
+  // add https://github.com/Cap-go/capacitor-ricoh360-camera-plugin
+  {
+    name: '@capgo/capacitor-ricoh360-camera-plugin',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for ricoh360 camera',
+    href: 'https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/',
+    title: 'Ricoh360 Camera',
+    icon: CameraIcon,
+  },
+  // add  
 ]
