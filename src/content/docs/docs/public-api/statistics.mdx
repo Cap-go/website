@@ -30,8 +30,8 @@ Get statistics for a specific app. This endpoint is useful for monitoring indivi
 
 ```typescript
 interface StatsQuery {
-  from: Date  // Start date for the statistics
-  to: Date    // End date for the statistics
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -39,20 +39,65 @@ interface StatsQuery {
 
 ```bash
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/statistics/app/app_123/?from=2024-01-01&to=2024-02-01"
+  "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
 #### Example Response
 
 ```json
-{
-  "data": {
-    "date": "2024-01-31",
-    "mau": 15000,
+[
+  {
+    "date": "2024-01-01",
+    "mau": 1500,
     "storage": 536870912,  // 512MB in bytes
     "bandwidth": 1073741824 // 1GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 1550,
+    "storage": 537919488,  // 513MB in bytes
+    "bandwidth": 1074790400 // 1.01GB in bytes
   }
+]
+```
+
+### GET /statistics/org/:org_id/
+
+Get statistics for a specific organization. Useful for monitoring organization-level usage.
+
+#### Query Parameters
+
+```typescript
+interface StatsQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
 }
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Example Response
+
+```json
+[
+  {
+    "date": "2024-01-01",
+    "mau": 10000,
+    "storage": 536870912,   // 512MB in bytes
+    "bandwidth": 1073741824  // 1GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 10200,
+    "storage": 537919488,   // 513MB in bytes
+    "bandwidth": 1074790400  // 1.01GB in bytes
+  }
+]
 ```
 
 ### GET /statistics/user/
@@ -63,8 +108,8 @@ Get aggregated statistics across all organizations you have access to. Perfect f
 
 ```typescript
 interface StatsQuery {
-  from: Date
-  to: Date
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -78,34 +123,32 @@ curl -H "authorization: your-api-key" \
 #### Example Response
 
 ```json
-{
-  "data": [
-    {
-      "date": "2024-01-01",
-      "mau": 25000,
-      "storage": 1073741824,  // 1GB in bytes
-      "bandwidth": 2147483648  // 2GB in bytes
-    },
-    {
-      "date": "2024-01-02",
-      "mau": 25500,
-      "storage": 1074790400,  // 1.01GB in bytes
-      "bandwidth": 2148532224  // 2.01GB in bytes
-    }
-  ]
-}
+[
+  {
+    "date": "2024-01-01",
+    "mau": 25000,
+    "storage": 1073741824,  // 1GB in bytes
+    "bandwidth": 2147483648  // 2GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 25500,
+    "storage": 1074790400,  // 1.01GB in bytes
+    "bandwidth": 2148532224  // 2.01GB in bytes
+  }
+]
 ```
 
-### GET /statistics/org/:org_id/
+### GET /statistics/app/:app_id/bundle_usage
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
 
 #### Query Parameters
 
 ```typescript
-interface StatsQuery {
-  from: Date
-  to: Date
+interface BundleUsageQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -113,25 +156,22 @@ interface StatsQuery {
 
 ```bash
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/statistics/org/org_123/?from=2024-01-01&to=2024-02-01"
+  "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
 #### Example Response
 
 ```json
 {
-  "data": [
+  "labels": ["2024-01-01", "2024-01-02", "2024-01-03"],
+  "datasets": [
     {
-      "date": "2024-01-01",
-      "mau": 10000,
-      "storage": 536870912,   // 512MB in bytes
-      "bandwidth": 1073741824  // 1GB in bytes
+      "label": "1.0.0",
+      "data": [60.5, 58.2, 55.3]
     },
     {
-      "date": "2024-01-02",
-      "mau": 10200,
-      "storage": 537919488,   // 513MB in bytes
-      "bandwidth": 1074790400  // 1.01GB in bytes
+      "label": "1.0.1",
+      "data": [39.5, 41.8, 44.7]
     }
   ]
 }
@@ -142,28 +182,34 @@ curl -H "authorization: your-api-key" \
 Common error scenarios and their responses:
 
 ```json
-// Invalid date format
+// Invalid body
 {
-  "error": "Invalid date format. Use YYYY-MM-DD",
-  "status": "KO"
-}
-
-// Date range too large
-{
-  "error": "Date range cannot exceed 90 days",
-  "status": "KO"
-}
-
-// Resource not found
-{
-  "error": "App/Organization not found",
-  "status": "KO"
+  "status": "Invalid body",
+  "error": "Invalid date format or missing parameters"
 }
 
 // Permission denied
 {
-  "error": "Insufficient permissions to access statistics",
-  "status": "KO"
+  "status": "You can't access this app",
+  "error": "Insufficient permissions to access statistics"
+}
+
+// Permission denied for organization
+{
+  "status": "You can't access this organization",
+  "error": "Insufficient permissions to access organization statistics"
+}
+
+// No organizations found for user statistics
+{
+  "status": "No organizations found",
+  "error": "No organizations found"
+}
+
+// Internal server error
+{
+  "status": "Cannot get app statistics",
+  "error": "Internal server error message"
 }
 ```
 
@@ -173,10 +219,12 @@ Common error scenarios and their responses:
 2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
 3. **Capacity Planning**: Use trends to plan for future resource needs
 4. **Usage Reports**: Generate periodic usage reports for stakeholders
+5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
 
 ## Tips for Analysis
 
 1. **Compare Periods**: Look at month-over-month or year-over-year trends
 2. **Track Ratios**: Monitor bandwidth per user or storage per app
 3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis 
+4. **Regular Backups**: Export statistics regularly for historical analysis
+5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
