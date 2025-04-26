@@ -128,14 +128,14 @@ export const actions = [
     title: 'Mute',
     // icon: SpeakerXMarkIcon,
   },
-  {
-    name: '@capgo/angular-ng-stepper',
-    author: 'Giorgi Merabishvili',
-    description: 'Angular stepper',
-    href: 'https://github.com/gmerabishvili/angular-ng-stepper/',
-    title: 'Stepper',
-    // icon: EllipsisHorizontalIcon,
-  },
+  // {
+  //   name: '@capgo/angular-ng-stepper',
+  //   author: 'Giorgi Merabishvili',
+  //   description: 'Angular stepper',
+  //   href: 'https://github.com/gmerabishvili/angular-ng-stepper/',
+  //   title: 'Stepper',
+  //   // icon: EllipsisHorizontalIcon,
+  // },
   {
     name: '@capgo/native-audio',
     author: 'Martin Donadieu',
