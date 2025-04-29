@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
@@ -32,10 +32,10 @@ const config = useRuntimeConfig()
             <li class="flex items-center gap-2">
               SonarCloud:
               <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
-                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating"/>
+                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating" />
               </a>
               <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
-                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities"/>
+                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
               </a>
             </li>
             <li>{{ m.access_control() }}</li>
@@ -43,7 +43,7 @@ const config = useRuntimeConfig()
         </div>
 
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{{ m.data_security() }}</h2>  
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.data_security() }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
             <li>{{ m.encryption_communication() }}</li>
             <li>{{ m.source_code_encryption() }}</li>
@@ -52,23 +52,22 @@ const config = useRuntimeConfig()
 
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
           <h2 class="text-3xl font-bold text-gray-900">{{ m.network_security() }}</h2>
-          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">  
+          <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
             <li>{{ m.vulnerability_scanning() }}</li>
             <li>{{ m.architecture() }}</li>
           </ul>
         </div>
 
-        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">  
+        <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
           <h2 class="text-3xl font-bold text-gray-900">{{ m.application_security() }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
-            <li>{{ m.secure_coding() }}</li>  
-            <li>{{ m.site_reliability() }} <a href="https://status.capgo.app/" class="text-blue-500 underline underline-current" target="_blank">Uptime Monitoring</a>.</li> 
+            <li>{{ m.secure_coding() }}</li>
+            <li>{{ m.site_reliability() }} <a href="https://status.capgo.app/" class="text-blue-500 underline underline-current" target="_blank">Uptime Monitoring</a>.</li>
             <!-- link to update monitoring: https://status.capgo.app/ -->
             <li>{{ m.application_penetration_testing() }}</li>
           </ul>
         </div>
       </div>
-
     </div>
-  </section>  
+  </section>
 </template>

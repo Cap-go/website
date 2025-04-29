@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import * as m from "../paraglide/messages.js"
 import { ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const features = ref([
   {
@@ -31,7 +31,10 @@ const features = ref([
   <section class="relative py-12 bg-gray-900 sm:py-16 lg:py-20 xl:py-24">
     <!-- Grid background pattern -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-600/70 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]" aria-hidden="true">
+      <svg
+        class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-600/70 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
+        aria-hidden="true"
+      >
         <defs>
           <pattern id="orgs-grid-pattern" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
             <path d="M100 200V.5M.5 .5H200" fill="none" />
@@ -54,7 +57,9 @@ const features = ref([
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-12 text-center sm:mt-16 lg:mt-20 lg:max-w-none lg:grid-cols-3">
         <div v-for="feature in features" :key="feature.title" class="flex p-px overflow-hidden rounded-lg">
           <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div :class="`flex flex-col items-center justify-center h-80 bg-gradient-to-br from-${feature.color}-500/20 to-${feature.color === 'blue' ? 'purple' : feature.color === 'purple' ? 'pink' : 'blue'}-500/20`">
+            <div
+              :class="`flex flex-col items-center justify-center h-80 bg-gradient-to-br from-${feature.color}-500/20 to-${feature.color === 'blue' ? 'purple' : feature.color === 'purple' ? 'pink' : 'blue'}-500/20`"
+            >
               <div :class="`flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-${feature.color}-900`">
                 <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <g v-html="feature.icon"></g>

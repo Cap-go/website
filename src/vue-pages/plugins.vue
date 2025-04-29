@@ -3,11 +3,11 @@ import type { Action } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import { getSlug } from '@/services/github'
 import { type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 import { onMounted, ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const plugins = ref<Action[]>(actions)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 </script>
@@ -36,14 +36,10 @@ const props = defineProps<{ locale: Locales }>()
           >
         </p>
         <p>
-          {{
-            m.when_im_not_working_on_capgo_you_ll_find_me_scaling_climbing_walls_dancing_to_zouk_rhythms_or_exploring_madeiras_stunning_nature()
-          }}
+          {{ m.when_im_not_working_on_capgo_you_ll_find_me_scaling_climbing_walls_dancing_to_zouk_rhythms_or_exploring_madeiras_stunning_nature() }}
         </p>
         <p>
-          🐦 {{ m.my_commitment_to_transparency_extends_to_everything_i_do() }} <br />{{
-            m.you_can_see_my_entire_process_unfold_on_twitter()
-          }}
+          🐦 {{ m.my_commitment_to_transparency_extends_to_everything_i_do() }} <br />{{ m.you_can_see_my_entire_process_unfold_on_twitter() }}
           <a href="https://twitter.com/martindonadieu" class="text-white hover:underline">@martindonadieu</a>
           {{ m.and_hear_more_about_my_journey_on_the() }} <a href="https://solos.ventures" class="text-white hover:underline">solos.ventures</a> podcast.
         </p>

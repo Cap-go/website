@@ -27,6 +27,21 @@ const entry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.loca
 const related = blogs.filter((j) => j.data.published !== false && j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
 
 if (!entry) {
+  if (Astro.locals.locale !== 'en') {
+    const enEntry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === 'en')
+    if (enEntry)
+      return new Response(
+        `<!doctype html>
+<title>Redirecting to: /blog/${Astro.params.slug}</title>
+<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}">
+<body>
+	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}</code></a>
+</body>`,
+        { status: 302 },
+      )
+  }
   console.log(`entry is not found for: ${Astro.url.pathname}`)
   return new Response(null, { status: 404 })
 }

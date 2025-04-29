@@ -5,16 +5,14 @@ import Testimonials from '@/components/Testimonials.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
 import { shortNumber } from '@/services/misc'
-import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import { reactive } from 'vue'
-
+import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
 const props = defineProps<{ locale: Locales }>()
-
 
 const stats = reactive({
   stars: shortNumber(499),
@@ -38,106 +36,111 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     <div class="relative">
       <!-- Animated teleport lines -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div v-for="i in 20" :key="i" class="absolute w-full teleport-line-animation"
-           :style="{
-             top: `${(i * 5) - 2}%`,
-             animationDelay: `${Math.random() * 3}s`,
-             height: `${Math.random() * 1 + 1}px`,
-             opacity: Math.random() * 0.5 + 0.3
-           }">
+        <div
+          v-for="i in 20"
+          :key="i"
+          class="absolute w-full teleport-line-animation"
+          :style="{
+            top: `${i * 5 - 2}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            height: `${Math.random() * 1 + 1}px`,
+            opacity: Math.random() * 0.5 + 0.3,
+          }"
+        ></div>
       </div>
-    </div>
-    
-    <!-- Glowing portal effect -->
-    <div class="absolute right-0 w-1/5 -translate-y-1/2 pointer-events-none top-1/2 h-3/5 portal-glow-animation"></div>
-    
-    <!-- Vertical data streams -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div v-for="i in 10" :key="`stream-${i}`" class="absolute w-px h-full data-stream-animation"
-           :style="{
-             left: `${i * 10}%`,
-             animationDuration: `${Math.random() * 4 + 6}s`,
-             animationDelay: `${Math.random() * 2}s`,
-             opacity: Math.random() * 0.3 + 0.1
-           }">
-      </div>
-    </div>
-    <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
 
-      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="relative z-10 max-w-3xl mx-auto text-center">
-          <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
-          <h1 class="mt-5 text-3xl font-bold leading-tight font-pj sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
-            {{ m.instant_updates_for_capacitor() }}
-          </h1>
-          <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-            {{ m.ship_updates_fixes_changes_and_features() }}
-            <br /><span class="font-bold">{{ m.within_minutes() }}</span
-            ><br />
-          </h2>
-          <div class="relative inline-flex mt-10 group">
-            <div
-              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
-            />
-            <a
-              :href="getRelativeLocaleUrl(props.locale, 'register')"
-              title="Get quote now"
-              target="_blank"
-              class="relative z-10 inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
-              role="button"
-            >
-              {{ m.try_for_free() }}
-            </a>
+      <!-- Glowing portal effect -->
+      <div class="absolute right-0 w-1/5 -translate-y-1/2 pointer-events-none top-1/2 h-3/5 portal-glow-animation"></div>
+
+      <!-- Vertical data streams -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          v-for="i in 10"
+          :key="`stream-${i}`"
+          class="absolute w-px h-full data-stream-animation"
+          :style="{
+            left: `${i * 10}%`,
+            animationDuration: `${Math.random() * 4 + 6}s`,
+            animationDelay: `${Math.random() * 2}s`,
+            opacity: Math.random() * 0.3 + 0.1,
+          }"
+        ></div>
+      </div>
+      <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
+        <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div class="relative z-10 max-w-3xl mx-auto text-center">
+            <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
+            <h1 class="mt-5 text-3xl font-bold leading-tight font-pj sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
+              {{ m.instant_updates_for_capacitor() }}
+            </h1>
+            <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
+              {{ m.ship_updates_fixes_changes_and_features() }}
+              <br /><span class="font-bold">{{ m.within_minutes() }}</span
+              ><br />
+            </h2>
+            <div class="relative inline-flex mt-10 group">
+              <div
+                class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+              />
+              <a
+                :href="getRelativeLocaleUrl(props.locale, 'register')"
+                title="Get quote now"
+                target="_blank"
+                class="relative z-10 inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                role="button"
+              >
+                {{ m.try_for_free() }}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="py-12 bg-gray-900 sm:py-16 lg:py-20">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 px-16 mx-auto text-center gap-x-12 gap-y-8 sm:grid-cols-3 sm:px-0 lg:max-w-4xl lg:gap-x-24">
-          <div>
-            <svg class="w-auto mx-auto text-white h-14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <path
-                d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z"
-              />
-            </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.instant_updates() }}</h3>
-            <p class="mt-3 text-sm text-gray-400">
-              {{ m.reach_users_now_not_weeks_later() }}
-            </p>
+      </section>
+      <section class="py-12 bg-gray-900 sm:py-16 lg:py-20">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 px-16 mx-auto text-center gap-x-12 gap-y-8 sm:grid-cols-3 sm:px-0 lg:max-w-4xl lg:gap-x-24">
+            <div>
+              <svg class="w-auto mx-auto text-white h-14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path
+                  d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z"
+                />
+              </svg>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.instant_updates() }}</h3>
+              <p class="mt-3 text-sm text-gray-400">
+                {{ m.reach_users_now_not_weeks_later() }}
+              </p>
+            </div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 448 512">
+                <path
+                  d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z"
+                />
+              </svg>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.app_store_compliant() }}</h3>
+              <p class="mt-3 text-sm text-gray-400">{{ m.compliant_with_apple_and_android_requirements() }}</p>
+            </div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512">
+                <path
+                  d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"
+                />
+              </svg>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.end_to_end_encryption() }}</h3>
+              <p class="mt-3 text-sm text-gray-400">{{ m.only_your_users_can_decrypt_your_updates_no_one_else() }}</p>
+            </div>
           </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 448 512">
-              <path
-                d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z"
-              />
-            </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.app_store_compliant() }}</h3>
-            <p class="mt-3 text-sm text-gray-400">{{ m.compliant_with_apple_and_android_requirements() }}</p>
-          </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512">
-              <path
-                d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"
-              />
-            </svg>
-            <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.end_to_end_encryption() }}</h3>
-            <p class="mt-3 text-sm text-gray-400">{{ m.only_your_users_can_decrypt_your_updates_no_one_else() }}</p>
-          </div>
+          <h3 class="hidden max-w-xl mx-auto mt-12 text-xl leading-7 text-gray-400 font-inter md:block">
+            <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
+            {{ m.for_apple_and_google_app_updates_distribution() }}
+          </h3>
+          <h3 class="block max-w-sm mx-auto mt-12 text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
+            <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
+          </h3>
+          <h3 class="block max-w-sm mx-auto text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
+            {{ m.for_apple_and_google_app_updates_distribution() }}
+          </h3>
         </div>
-        <h3 class="hidden max-w-xl mx-auto mt-12 text-xl leading-7 text-gray-400 font-inter md:block">
-          <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
-          {{ m.for_apple_and_google_app_updates_distribution() }}
-        </h3>
-        <h3 class="block max-w-sm mx-auto mt-12 text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
-          <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
-        </h3>
-        <h3 class="block max-w-sm mx-auto text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
-          {{ m.for_apple_and_google_app_updates_distribution() }}
-        </h3>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
     <section class="relative py-12 overflow-hidden bg-white sm:py-16 lg:py-20 xl:py-32">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
@@ -370,7 +373,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-green-900 rounded-lg">
               <svg class="w-6 h-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
               </svg>
             </div>
             <h3 class="mb-2 text-xl font-bold text-white">{{ m.secure() }}</h3>
@@ -406,7 +414,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-indigo-900 rounded-lg">
               <svg class="w-6 h-6 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
               </svg>
             </div>
             <h3 class="mb-2 text-xl font-bold text-white">{{ m.user_management() }}</h3>
@@ -513,7 +526,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">Ship updates instantly to your users</p>
-                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready.</p>
+                <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+                  Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready.
+                </p>
               </div>
             </div>
           </div>
@@ -521,7 +536,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem] w-full">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-blue-500/20 to-purple-500/20">
                 <svg class="w-24 h-24 mb-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">End User Experience</h3>
               </div>
@@ -535,7 +555,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-green-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Enhanced Workflow</h3>
               </div>
@@ -549,7 +574,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
                 <svg class="w-24 h-24 mb-4 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Broad Compatibility</h3>
               </div>
@@ -563,7 +593,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
                 <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Partial Updates</h3>
               </div>
@@ -577,7 +612,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Public API</h3>
               </div>
@@ -591,7 +631,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-indigo-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Channel System</h3>
               </div>
@@ -605,7 +650,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem] w-full">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-red-500/20 to-pink-500/20">
                 <svg class="w-24 h-24 mb-4 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">Flexible Hosting</h3>
               </div>
@@ -619,7 +669,12 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-br-[2rem] w-full">
               <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-teal-500/20 to-green-500/20">
                 <svg class="w-24 h-24 mb-4 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
                 <h3 class="text-xl font-bold text-white">CI/CD Integration</h3>
               </div>
@@ -697,12 +752,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 /* Minimum required CSS for animations */
 .teleport-line-animation {
   left: -100%;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(56, 189, 248, 0.1) 10%, 
-    rgba(56, 189, 248, 0.3) 50%, 
-    rgba(56, 189, 248, 0.1) 90%, 
-    transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
   animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
 }
 
@@ -722,18 +772,14 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
 /* Portal glow effect */
 .portal-glow-animation {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(56, 189, 248, 0.15) 0%,
-    rgba(56, 189, 248, 0.05) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.05) 40%, transparent 70%);
   filter: blur(20px);
   animation: portal-pulse 8s ease-in-out infinite;
 }
 
 @keyframes portal-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: translateY(-50%) scale(1);
   }
@@ -746,14 +792,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 /* Vertical data streams */
 .data-stream-animation {
   top: -100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(56, 189, 248, 0.1) 10%,
-    rgba(56, 189, 248, 0.3) 50%,
-    rgba(56, 189, 248, 0.1) 90%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
   animation: data-stream 8s linear infinite;
 }
 
@@ -773,13 +812,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
 
 /* Button animation - If this is used elsewhere */
 .teleport-button-animation {
-  @apply absolute top-0 left-[-100%] w-full h-full;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 100%
-  );
+  @apply absolute left-[-100%] top-0 h-full w-full;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
   animation: teleport-button 3s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
 }
 

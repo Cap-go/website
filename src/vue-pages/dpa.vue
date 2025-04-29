@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales, defaultLocale } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()

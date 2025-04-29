@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import * as m from "../paraglide/messages.js"
-
+import * as m from '../paraglide/messages.js'
 </script>
 
 <template>

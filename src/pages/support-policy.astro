@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.support_policy()].join(' | ')
 const description = m.read_our_support_policy()
@@ -9,7 +9,7 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="px-3 m-auto prose-sm prose text-left">
+  <div class="prose-sm prose m-auto px-3 text-left">
     <h1>{m.support_policy_title()}</h1>
     <p>
       {m.support_policy_intro()}

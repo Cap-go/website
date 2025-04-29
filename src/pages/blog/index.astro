@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 import VueBlogIndex from '@/vue-pages/blog/index.vue'
 
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object, keywords?: string } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
 const posts = (await getCollection('blog'))
   .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale)

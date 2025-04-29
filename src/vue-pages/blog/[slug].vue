@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import Blog from '@/components/Blog.vue'
+import GetStarted from '@/components/GetStarted.vue'
 import { formatTime } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import * as m from "../../paraglide/messages.js"
 import type { MarkdownHeading } from 'astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { onMounted, ref, computed, useSlots, h, render, type Ref, type VNode } from 'vue'
-import GetStarted from '@/components/GetStarted.vue'
+import { computed, h, onMounted, ref, render, useSlots, type Ref, type VNode } from 'vue'
+import * as m from '../../paraglide/messages.js'
 
 const props = defineProps<{
   tag: string
@@ -36,7 +36,6 @@ const staticToc: Ref<HTMLElement | null> = ref(null)
 const slots = useSlots() as { default?: () => VNode[] }
 const articleContent = computed(() => {
   let slotNodes = slots.default?.() || []
-  console.info('[DEBUG] Initial slotNodes length:', slotNodes.length)
   return slotNodes
 })
 
@@ -163,12 +162,12 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           <div class="hidden pl-20" />
           <li v-for="item in headings" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
-                {{ item.text }}
+              {{ item.text }}
             </a>
           </li>
         </ul>
       </div>
-      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left blog lg:max-w-1/2 md:rounded-lg" >
+      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left blog lg:max-w-1/2 md:rounded-lg">
         <template v-for="(node, index) in articleContent" :key="index">
           <component :is="node" />
         </template>

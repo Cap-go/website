@@ -5,9 +5,9 @@ import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
 import Plans from '@/components/pricing/Plans.vue'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
 import type { Database } from '@/services/supabase.types'
 import { computed, ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
@@ -18,7 +18,7 @@ await fetch(`${config.public.baseApiUrl}/private/plans`)
   .then((r) => r.json() as Promise<Array<Database['public']['Tables']['plans']['Row']>>)
   .then((res) => plansAll.value.push(...res))
 
-  // https://cal.com/martindonadieu/capgo-enterprise-inquiry
+// https://cal.com/martindonadieu/capgo-enterprise-inquiry
 const plans = computed(() => (plansAll.value.length ? plansAll.value.filter((p) => p.name !== 'Pay as you go' && p.name !== 'Free') : []))
 const payg = computed(() => (plansAll.value.length ? plansAll.value.filter((p) => p.name === 'Pay as you go')[0] : undefined))
 
@@ -88,15 +88,13 @@ const payg_units = computed(() =>
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
           <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div class="max-w-2xl space-y-4">
-              <h2 class="text-4xl font-bold text-gray-900">
-                Enterprise
-              </h2>
+              <h2 class="text-4xl font-bold text-gray-900">Enterprise</h2>
               <p class="text-xl leading-relaxed text-gray-600">
                 For enterprise teams building mission-critical apps looking for a specialized mobile DevOps package, paired with expert support and advisory services.
               </p>
             </div>
-            <a 
-              href="https://cal.com/martindonadieu/capgo-enterprise-inquiry" 
+            <a
+              href="https://cal.com/martindonadieu/capgo-enterprise-inquiry"
               target="_blank"
               class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[#0A0B2C] hover:bg-[#1A1B4C] rounded-full transition-colors duration-200"
             >

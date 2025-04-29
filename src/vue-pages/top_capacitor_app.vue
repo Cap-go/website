@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { renameCat, shortNumber } from '@/services/misc'
-import * as m from "../paraglide/messages.js"
 import { ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
 const description = m.top_100_app_using_capacitor_on_android_play_store()
@@ -52,9 +52,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top`).then((res) => {
                 </span>
               </div>
             </div>
-            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-              {{ shortNumber(app.installs) }} {{ m.downloads() }}
-            </span>
+            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"> {{ shortNumber(app.installs) }} {{ m.downloads() }} </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}

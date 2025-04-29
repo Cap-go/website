@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
-import { ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 
@@ -117,7 +116,6 @@ const testimonials = [
       },
     ],
   ],
-
 ]
 
 // Format message to highlight Twitter handles
@@ -128,12 +126,56 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
   <section class="relative pt-24 pb-32 bg-gray-900 isolate sm:pt-32">
     <!-- Background effects -->
     <div class="absolute inset-x-0 overflow-hidden -translate-y-1/2 top-1/2 -z-10 transform-gpu opacity-30 blur-3xl" aria-hidden="true">
-      <div class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-indigo-500 to-blue-500" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+      <div
+        class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-indigo-500 to-blue-500"
+        style="
+          clip-path: polygon(
+            74.1% 44.1%,
+            100% 61.6%,
+            97.5% 26.9%,
+            85.5% 0.1%,
+            80.7% 2%,
+            72.5% 32.5%,
+            60.2% 62.4%,
+            52.4% 68.1%,
+            47.5% 58.3%,
+            45.2% 34.5%,
+            27.5% 76.7%,
+            0.1% 64.9%,
+            17.9% 100%,
+            27.6% 76.8%,
+            76.1% 97.7%,
+            74.1% 44.1%
+          );
+        "
+      />
     </div>
     <div class="absolute inset-x-0 top-0 flex pt-32 overflow-hidden opacity-25 -z-10 transform-gpu blur-3xl sm:pt-40 xl:justify-end" aria-hidden="true">
-      <div class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-indigo-500 to-blue-500 xl:ml-0 xl:mr-[calc(50%-12rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+      <div
+        class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-indigo-500 to-blue-500 xl:ml-0 xl:mr-[calc(50%-12rem)]"
+        style="
+          clip-path: polygon(
+            74.1% 44.1%,
+            100% 61.6%,
+            97.5% 26.9%,
+            85.5% 0.1%,
+            80.7% 2%,
+            72.5% 32.5%,
+            60.2% 62.4%,
+            52.4% 68.1%,
+            47.5% 58.3%,
+            45.2% 34.5%,
+            27.5% 76.7%,
+            0.1% 64.9%,
+            17.9% 100%,
+            27.6% 76.8%,
+            76.1% 97.7%,
+            74.1% 44.1%
+          );
+        "
+      />
     </div>
-    
+
     <div class="px-6 mx-auto max-w-7xl lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="font-semibold text-indigo-400 text-base/7">Testimonials</h2>
@@ -141,7 +183,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
           {{ m.they_love_capgo() }}
         </p>
       </div>
-      
+
       <div class="grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 mx-auto mt-16 text-gray-300 text-sm/6 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
         <figure class="bg-gray-800 shadow-lg rounded-2xl ring-1 ring-gray-700 sm:col-span-2 xl:col-start-2 xl:row-end-1">
           <blockquote class="p-6 tracking-tight text-white text-lg/4 sm:p-12 sm:text-xl/8">
@@ -155,14 +197,26 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
             </div>
             <div class="size-5">
               <svg viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="white"/>
+                <path
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                  fill="white"
+                />
               </svg>
             </div>
           </figcaption>
         </figure>
-        
+
         <div v-for="(columnGroup, columnGroupIdx) in testimonials" :key="columnGroupIdx" class="space-y-8 xl:contents xl:space-y-0">
-          <div v-for="(column, columnIdx) in columnGroup" :key="columnIdx" :class="[(columnGroupIdx === 0 && columnIdx === 0) || (columnGroupIdx === testimonials.length - 1 && columnIdx === columnGroup.length - 1) ? 'xl:row-span-2' : 'xl:row-start-1', 'space-y-8']">
+          <div
+            v-for="(column, columnIdx) in columnGroup"
+            :key="columnIdx"
+            :class="[
+              (columnGroupIdx === 0 && columnIdx === 0) || (columnGroupIdx === testimonials.length - 1 && columnIdx === columnGroup.length - 1)
+                ? 'xl:row-span-2'
+                : 'xl:row-start-1',
+              'space-y-8',
+            ]"
+          >
             <figure v-for="testimonial in column" :key="testimonial.author.handle" class="p-6 bg-gray-800 shadow-lg rounded-2xl ring-1 ring-gray-700">
               <blockquote class="text-white">
                 <p v-html="messageFormatter(testimonial.body)"></p>
@@ -175,7 +229,10 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
                 </div>
                 <div class="ml-auto size-4">
                   <svg viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="white"/>
+                    <path
+                      d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                      fill="white"
+                    />
                   </svg>
                 </div>
               </figcaption>

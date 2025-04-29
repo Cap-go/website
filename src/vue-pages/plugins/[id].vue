@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Plugin } from '@/config/plugins'
-import * as m from "../../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { ref } from 'vue'
+import * as m from '../../paraglide/messages.js'
 
 const props = defineProps<Plugin>()
 const showReadme = ref(1)
