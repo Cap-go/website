@@ -33,12 +33,12 @@ async function handleResend() {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 class="mb-4 text-2xl font-bold text-black">{{ m.confirm_email() }}</h2>
-        <p class="mb-4 text-gray-600">{{ m.please_open_your_mailbox_to_verify() }}</p>
+        <h2 class="mb-4 text-2xl font-bold text-black">{{ m.confirm_email({}, { locale: props.locale }) }}</h2>
+        <p class="mb-4 text-gray-600">{{ m.please_open_your_mailbox_to_verify({}, { locale: props.locale }) }}</p>
         <p class="mb-6 text-gray-600">
-          {{ m.didnt_receive_confirmation_email() }}
+          {{ m.didnt_receive_confirmation_email({}, { locale: props.locale }) }}
           <button @click="handleResend" :disabled="isResending" class="ml-1 font-semibold text-blue-600 focus:outline-none">
-            {{ isResending ? m.resending() : m.resend() }}
+            {{ isResending ? m.resending() : m.resend({}, { locale: props.locale }) }}
           </button>
         </p>
         <a
@@ -53,11 +53,11 @@ async function handleResend() {
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          {{ m.open_mailbox() }}
+          {{ m.open_mailbox({}, { locale: props.locale }) }}
         </a>
       </div>
       <div class="px-4 py-3 text-center bg-gray-50">
-        <p class="font-semibold text-blue-600">{{ m.thank_you_for_choosing_capgo() }}</p>
+        <p class="font-semibold text-blue-600">{{ m.thank_you_for_choosing_capgo({}, { locale: props.locale }) }}</p>
       </div>
     </div>
   </div>

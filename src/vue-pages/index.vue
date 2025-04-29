@@ -69,13 +69,13 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
         <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="relative z-10 max-w-3xl mx-auto text-center">
-            <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source() }}</p>
+            <p class="inline-flex px-4 py-2 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">{{ m.open_source({}, { locale: props.locale }) }}</p>
             <h1 class="mt-5 text-3xl font-bold leading-tight font-pj sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
-              {{ m.instant_updates_for_capacitor() }}
+              {{ m.instant_updates_for_capacitor({}, { locale: props.locale }) }}
             </h1>
             <h2 class="max-w-md mx-auto mt-6 text-base leading-7 text-gray-400 font-inter">
-              {{ m.ship_updates_fixes_changes_and_features() }}
-              <br /><span class="font-bold">{{ m.within_minutes() }}</span
+              {{ m.ship_updates_fixes_changes_and_features({}, { locale: props.locale }) }}
+              <br /><span class="font-bold">{{ m.within_minutes({}, { locale: props.locale }) }}</span
               ><br />
             </h2>
             <div class="relative inline-flex mt-10 group">
@@ -89,7 +89,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 class="relative z-10 inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
                 role="button"
               >
-                {{ m.try_for_free() }}
+                {{ m.try_for_free({}, { locale: props.locale }) }}
               </a>
             </div>
           </div>
@@ -104,9 +104,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                   d="M228.7 299.3C222.4 293.1 222.4 282.9 228.7 276.7C234.9 270.4 245.1 270.4 251.3 276.7L304 329.4V176C304 167.2 311.2 160 320 160C328.8 160 336 167.2 336 176V329.4L388.7 276.7C394.9 270.4 405.1 270.4 411.3 276.7C417.6 282.9 417.6 293.1 411.3 299.3L331.3 379.3C325.1 385.6 314.9 385.6 308.7 379.3L228.7 299.3zM272 32C331.5 32 384.1 61.55 416 106.8C430.5 99.87 446.8 96 464 96C525.9 96 576 146.1 576 208C576 218.7 574.5 228.1 571.7 238.8C612.3 260.2 640 302.9 640 352C640 422.7 582.7 480 512 480H144C64.47 480 0 415.5 0 336C0 273.2 40.15 219.9 96.17 200.1C100.3 106.6 177.4 32 272 32zM272 64C194.6 64 131.5 125 128.1 201.5C127.6 214.6 119.1 225.1 106.8 230.3C63.18 245.7 32 287.2 32 336C32 397.9 82.14 448 144 448H512C565 448 608 405 608 352C608 315.2 587.3 283.2 556.8 267.1C543.4 259.1 536.8 244.5 540.9 229.1C542.9 223 544 215.7 544 208C544 163.8 508.2 128 464 128C451.7 128 440.1 130.8 429.7 135.7C415.7 142.4 398.8 137.9 389.8 125.2C363.7 88.12 320.7 64 272 64V64z"
                 />
               </svg>
-              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.instant_updates() }}</h3>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.instant_updates({}, { locale: props.locale }) }}</h3>
               <p class="mt-3 text-sm text-gray-400">
-                {{ m.reach_users_now_not_weeks_later() }}
+                {{ m.reach_users_now_not_weeks_later({}, { locale: props.locale }) }}
               </p>
             </div>
             <div>
@@ -115,8 +115,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                   d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z"
                 />
               </svg>
-              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.app_store_compliant() }}</h3>
-              <p class="mt-3 text-sm text-gray-400">{{ m.compliant_with_apple_and_android_requirements() }}</p>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.app_store_compliant({}, { locale: props.locale }) }}</h3>
+              <p class="mt-3 text-sm text-gray-400">{{ m.compliant_with_apple_and_android_requirements({}, { locale: props.locale }) }}</p>
             </div>
             <div>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-auto mx-auto text-white h-14" fill="currentColor" viewBox="0 0 576 512">
@@ -124,19 +124,19 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                   d="M304 480H64c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h128v112C192 170.5 213.5 192 240 192h122.5C374.4 192 384 182.4 384 170.5c0-16.97-6.742-33.25-18.74-45.25L258.7 18.75C246.7 6.742 230.5 0 213.5 0H64C28.65 0 .0007 28.65 .0007 64l.0059 384c0 35.35 28.65 64 64 64H304c8.836 0 16-7.164 16-16C320 487.2 312.8 480 304 480zM224 34.08c4.477 1.566 8.664 3.846 12.12 7.299l106.5 106.5C346.1 151.3 348.4 155.5 349.9 160H240C231.2 160 224 152.8 224 144V34.08zM528 320L528 256c0-35.28-28.72-64-64-64s-64 28.72-64 64v64c-26.51 0-48 21.49-48 48v96c0 26.51 21.49 48 48 48h128c26.51 0 48-21.49 48-48v-96C576 341.5 554.5 320 528 320zM432 256c0-17.66 14.34-32 32-32s32 14.34 32 32v64h-64V256zM544 464c0 8.822-7.178 16-16 16h-128c-8.822 0-16-7.178-16-16v-96c0-8.822 7.178-16 16-16h128c8.822 0 16 7.178 16 16V464z"
                 />
               </svg>
-              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.end_to_end_encryption() }}</h3>
-              <p class="mt-3 text-sm text-gray-400">{{ m.only_your_users_can_decrypt_your_updates_no_one_else() }}</p>
+              <h3 class="mt-6 text-lg font-medium text-white md:mt-8">{{ m.end_to_end_encryption({}, { locale: props.locale }) }}</h3>
+              <p class="mt-3 text-sm text-gray-400">{{ m.only_your_users_can_decrypt_your_updates_no_one_else({}, { locale: props.locale }) }}</p>
             </div>
           </div>
           <h3 class="hidden max-w-xl mx-auto mt-12 text-xl leading-7 text-gray-400 font-inter md:block">
-            <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
-            {{ m.for_apple_and_google_app_updates_distribution() }}
+            <span class="font-bold">&#128075; {{ m.no_more_wait({}, { locale: props.locale }) }}</span>
+            {{ m.for_apple_and_google_app_updates_distribution({}, { locale: props.locale }) }}
           </h3>
           <h3 class="block max-w-sm mx-auto mt-12 text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
-            <span class="font-bold">&#128075; {{ m.no_more_wait() }}</span>
+            <span class="font-bold">&#128075; {{ m.no_more_wait({}, { locale: props.locale }) }}</span>
           </h3>
           <h3 class="block max-w-sm mx-auto text-xl leading-7 text-center text-gray-400 font-inter md:hidden">
-            {{ m.for_apple_and_google_app_updates_distribution() }}
+            {{ m.for_apple_and_google_app_updates_distribution({}, { locale: props.locale }) }}
           </h3>
         </div>
       </section>
@@ -145,9 +145,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center grid-cols-1 xl:grid-cols-2">
           <div class="px-8 text-center md:mx-auto md:max-w-2xl xl:max-w-none xl:pr-16 xl:text-left">
-            <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">{{ m.youre_in_good_company() }}</h2>
+            <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">{{ m.youre_in_good_company({}, { locale: props.locale }) }}</h2>
             <p class="mt-6 text-lg font-normal text-gray-800 font-pj">
-              {{ m.capgo_enables_development_teams_at_some_of_the_most_innovative_companies() }}
+              {{ m.capgo_enables_development_teams_at_some_of_the_most_innovative_companies({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="relative mt-8 sm:mt-12 lg:mx-auto lg:max-w-4xl xl:mt-0 xl:max-w-none">
@@ -217,63 +217,63 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-6xl">
-            {{ m.apps_with_20m_users() }}
+            {{ m.apps_with_20m_users({}, { locale: props.locale }) }}
           </h2>
           <h2 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
-            {{ m.use_capgo() }}
+            {{ m.use_capgo({}, { locale: props.locale }) }}
           </h2>
           <p class="mt-3 text-base leading-relaxed text-gray-300 md:mt-8">
-            {{ m.our_numbers_are_shared_transparently_since_december_2021() }}
+            {{ m.our_numbers_are_shared_transparently_since_december_2021({}, { locale: props.locale }) }}
           </p>
-          <p class="mt-5 text-base text-center text-gray-400">{{ m.last_update() }}: {{ dayjs().format('MMMM DD, YYYY') }}</p>
+          <p class="mt-5 text-base text-center text-gray-400">{{ m.last_update({}, { locale: props.locale }) }}: {{ dayjs().format('MMMM DD, YYYY') }}</p>
         </div>
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-3 lg:mt-24">
           <div>
             <h3 class="font-bold text-7xl">
               <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.updates_delivered() }}</p>
-            <p class="mt-0.5 text-base text-gray-400">{{ m.all_around_the_globe() }}</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.updates_delivered({}, { locale: props.locale }) }}</p>
+            <p class="mt-0.5 text-base text-gray-400">{{ m.all_around_the_globe({}, { locale: props.locale }) }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
               <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.apps() }}</p>
-            <p class="mt-0.5 text-base text-gray-400">{{ m.using_us_in_production() }}</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.apps({}, { locale: props.locale }) }}</p>
+            <p class="mt-0.5 text-base text-gray-400">{{ m.using_us_in_production({}, { locale: props.locale }) }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
               <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}★</span>
             </h3>
-            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.stars_in_github() }}</p>
-            <p class="mt-0.5 text-base text-gray-400">{{ m.open_source() }}</p>
+            <p class="mt-4 text-xl font-medium text-gray-300">{{ m.stars_in_github({}, { locale: props.locale }) }}</p>
+            <p class="mt-0.5 text-base text-gray-400">{{ m.open_source({}, { locale: props.locale }) }}</p>
           </div>
         </div>
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-2 lg:mt-24">
           <div class="p-6 bg-gray-700 rounded-xl">
-            <h3 class="text-2xl font-bold text-white">{{ m.update_metrics() }}</h3>
+            <h3 class="text-2xl font-bold text-white">{{ m.update_metrics({}, { locale: props.locale }) }}</h3>
             <div class="p-4 space-y-4">
               <div>
                 <p class="text-4xl font-bold text-[#FF675E]">95%</p>
-                <p class="text-gray-300">{{ m.active_users_up_to_date() }}</p>
+                <p class="text-gray-300">{{ m.active_users_up_to_date({}, { locale: props.locale }) }}</p>
               </div>
               <div>
                 <p class="text-4xl font-bold text-[#44BCFF]">82%</p>
-                <p class="text-gray-300">{{ m.worldwide_success_rate() }}</p>
+                <p class="text-gray-300">{{ m.worldwide_success_rate({}, { locale: props.locale }) }}</p>
               </div>
             </div>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
-            <h3 class="text-2xl font-bold text-white">{{ m.performance_metrics() }}</h3>
+            <h3 class="text-2xl font-bold text-white">{{ m.performance_metrics({}, { locale: props.locale }) }}</h3>
             <div class="p-4 space-y-4">
               <div>
                 <p class="text-4xl font-bold text-[#00AA5E]">114ms</p>
-                <p class="text-gray-300">{{ m.download_time_globally() }}</p>
+                <p class="text-gray-300">{{ m.download_time_globally({}, { locale: props.locale }) }}</p>
               </div>
               <div>
                 <p class="text-4xl font-bold text-[#FF44EC]">434ms</p>
-                <p class="text-gray-300">{{ m.average_api_response_time() }}</p>
+                <p class="text-gray-300">{{ m.average_api_response_time({}, { locale: props.locale }) }}</p>
               </div>
             </div>
           </div>
@@ -284,9 +284,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl xl:text-5xl">
-            {{ m.how_it_work() }}
+            {{ m.how_it_work({}, { locale: props.locale }) }}
           </h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{ m.ship_your_first_update_in_less_than_15_minutes() }}</p>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{ m.ship_your_first_update_in_less_than_15_minutes({}, { locale: props.locale }) }}</p>
         </div>
         <div class="relative mt-12 lg:mt-20">
           <div class="absolute inset-x-0 hidden top-2 md:block md:px-20 lg:px-28 xl:px-44">
@@ -306,7 +306,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <span class="text-2xl font-bold text-gray-700"> 1 </span>
               </div>
               <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                {{ m.install_the_plugin() }}
+                {{ m.install_the_plugin({}, { locale: props.locale }) }}
               </h3>
               <p class="mt-4 text-base text-gray-600">Run <span class="font-bold text-gray-900">npx @capgo/cli init</span> that it !</p>
             </div>
@@ -315,10 +315,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <span class="text-2xl font-bold text-gray-700"> 2 </span>
               </div>
               <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                {{ m.send_your_first_update() }}
+                {{ m.send_your_first_update({}, { locale: props.locale }) }}
               </h3>
               <p class="mt-4 text-base text-gray-600">
-                {{ m.build_your_app_as_usual_then_send_with_the_cli() }}
+                {{ m.build_your_app_as_usual_then_send_with_the_cli({}, { locale: props.locale }) }}
               </p>
             </div>
             <div>
@@ -326,10 +326,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <span class="text-2xl font-bold text-gray-700"> 3 </span>
               </div>
               <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                {{ m.get_the_update() }}
+                {{ m.get_the_update({}, { locale: props.locale }) }}
               </h3>
               <p class="mt-4 text-base text-gray-600">
-                {{ m.open_the_app_it_update_in_the_background() }}
+                {{ m.open_the_app_it_update_in_the_background({}, { locale: props.locale }) }}
               </p>
             </div>
           </div>
@@ -346,7 +346,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               role="button"
             >
-              {{ m.start_now() }}
+              {{ m.start_now({}, { locale: props.locale }) }}
             </a>
           </div>
         </div>
@@ -356,9 +356,9 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl xl:text-5xl">
-            {{ m.key_features_title() }}
+            {{ m.key_features_title({}, { locale: props.locale }) }}
           </h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ m.key_features_subtitle() }}</p>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-300">{{ m.key_features_subtitle({}, { locale: props.locale }) }}</p>
         </div>
         <div class="grid grid-cols-1 gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
           <div class="p-6 bg-gray-700 rounded-xl">
@@ -367,8 +367,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.instant_updates() }}</h3>
-            <p class="text-gray-300">{{ m.push_updates_to_your_users_in_seconds() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.instant_updates({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.push_updates_to_your_users_in_seconds({}, { locale: props.locale }) }}</p>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-green-900 rounded-lg">
@@ -381,8 +381,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.secure() }}</h3>
-            <p class="text-gray-300">{{ m.end_to_end_encryption_for_your_updates() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.secure({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.end_to_end_encryption_for_your_updates({}, { locale: props.locale }) }}</p>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-purple-900 rounded-lg">
@@ -390,8 +390,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.analytics() }}</h3>
-            <p class="text-gray-300">{{ m.track_update_success_and_user_engagement() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.analytics({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.track_update_success_and_user_engagement({}, { locale: props.locale }) }}</p>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-yellow-900 rounded-lg">
@@ -399,8 +399,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.rollback() }}</h3>
-            <p class="text-gray-300">{{ m.instantly_rollback_to_previous_version_if_needed() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.rollback({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.instantly_rollback_to_previous_version_if_needed({}, { locale: props.locale }) }}</p>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-red-900 rounded-lg">
@@ -408,8 +408,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.error_tracking() }}</h3>
-            <p class="text-gray-300">{{ m.catch_and_fix_issues_before_they_affect_users() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.error_tracking({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.catch_and_fix_issues_before_they_affect_users({}, { locale: props.locale }) }}</p>
           </div>
           <div class="p-6 bg-gray-700 rounded-xl">
             <div class="flex items-center justify-center w-12 h-12 mb-4 bg-indigo-900 rounded-lg">
@@ -422,8 +422,8 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 />
               </svg>
             </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{{ m.user_management() }}</h3>
-            <p class="text-gray-300">{{ m.manage_testers_and_beta_users_easily() }}</p>
+            <h3 class="mb-2 text-xl font-bold text-white">{{ m.user_management({}, { locale: props.locale }) }}</h3>
+            <p class="text-gray-300">{{ m.manage_testers_and_beta_users_easily({}, { locale: props.locale }) }}</p>
           </div>
         </div>
       </div>
@@ -432,78 +432,78 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl xl:text-5xl">
-            {{ m.with_and_without_capgo_title() }}
+            {{ m.with_and_without_capgo_title({}, { locale: props.locale }) }}
           </h2>
-          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{ m.with_and_without_capgo_subtitle() }}</p>
+          <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">{{ m.with_and_without_capgo_subtitle({}, { locale: props.locale }) }}</p>
         </div>
         <div class="grid grid-cols-1 gap-8 mt-12 lg:grid-cols-2">
           <div class="p-8 border-2 border-red-200 bg-red-50 rounded-xl">
-            <h3 class="mb-6 text-2xl font-bold text-red-900">{{ m.without_capgo() }}</h3>
+            <h3 class="mb-6 text-2xl font-bold text-red-900">{{ m.without_capgo({}, { locale: props.locale }) }}</h3>
             <ul class="space-y-4">
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span class="font-medium text-red-700">{{ m.app_store_rating_bad() }}</span>
+                <span class="font-medium text-red-700">{{ m.app_store_rating_bad({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span class="font-medium text-red-700">{{ m.users_stuck_with_bugs_for_weeks() }}</span>
+                <span class="font-medium text-red-700">{{ m.users_stuck_with_bugs_for_weeks({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span class="font-medium text-red-700">{{ m.no_way_to_track_update_success() }}</span>
+                <span class="font-medium text-red-700">{{ m.no_way_to_track_update_success({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span class="font-medium text-red-700">{{ m.high_risk_of_bad_user_experience() }}</span>
+                <span class="font-medium text-red-700">{{ m.high_risk_of_bad_user_experience({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span class="font-medium text-red-700">{{ m.wrong_app_testing() }}</span>
+                <span class="font-medium text-red-700">{{ m.wrong_app_testing({}, { locale: props.locale }) }}</span>
               </li>
             </ul>
           </div>
           <div class="p-8 transition-transform duration-200 transform border-2 border-blue-200 shadow-lg bg-gradient-to-br from-blue-50 to-green-50 rounded-xl hover:scale-105">
-            <h3 class="mb-6 text-2xl font-bold text-blue-900">{{ m.with_capgo() }}</h3>
+            <h3 class="mb-6 text-2xl font-bold text-blue-900">{{ m.with_capgo({}, { locale: props.locale }) }}</h3>
             <ul class="space-y-4">
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="font-medium text-blue-700">{{ m.app_store_rating_good() }}</span>
+                <span class="font-medium text-blue-700">{{ m.app_store_rating_good({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="font-medium text-blue-700">{{ m.instant_updates_to_all_users() }}</span>
+                <span class="font-medium text-blue-700">{{ m.instant_updates_to_all_users({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="font-medium text-blue-700">{{ m.detailed_analytics_and_error_tracking() }}</span>
+                <span class="font-medium text-blue-700">{{ m.detailed_analytics_and_error_tracking({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="font-medium text-blue-700">{{ m.instant_rollback_if_something_goes_wrong() }}</span>
+                <span class="font-medium text-blue-700">{{ m.instant_rollback_if_something_goes_wrong({}, { locale: props.locale }) }}</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="font-medium text-blue-700">{{ m.test_pr_in_production() }}</span>
+                <span class="font-medium text-blue-700">{{ m.test_pr_in_production({}, { locale: props.locale }) }}</span>
               </li>
             </ul>
           </div>
@@ -512,9 +512,11 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     </section>
     <section class="py-24 bg-gray-900 sm:py-32">
       <div class="max-w-2xl px-6 mx-auto lg:max-w-7xl lg:px-8">
-        <h2 class="font-semibold text-blue-400 text-base/7">{{ m.faster_releases() }}</h2>
-        <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white text-pretty sm:text-5xl">{{ m.everything_you_need_to_ship_updates_instantly() }}</p>
-        <p class="max-w-2xl mt-4 text-lg text-gray-400">{{ m.ship_updates_fixes_changes_and_features() }}</p>
+        <h2 class="font-semibold text-blue-400 text-base/7">{{ m.faster_releases({}, { locale: props.locale }) }}</h2>
+        <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white text-pretty sm:text-5xl">
+          {{ m.everything_you_need_to_ship_updates_instantly({}, { locale: props.locale }) }}
+        </p>
+        <p class="max-w-2xl mt-4 text-lg text-gray-400">{{ m.ship_updates_fixes_changes_and_features({}, { locale: props.locale }) }}</p>
         <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-6 lg:grid-rows-3">
           <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem] w-full">
@@ -522,10 +524,10 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <svg class="w-32 h-32 text-[#44BCFF] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <h3 class="text-2xl font-bold text-white">Live Updates in Real Time</h3>
+                <h3 class="text-2xl font-bold text-white">{{ m.live_updates_in_real_time({}, { locale: props.locale }) }}</h3>
               </div>
               <div class="p-10">
-                <p class="mt-2 text-lg font-medium tracking-tight text-white">Ship updates instantly to your users</p>
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">{{ m.everything_you_need_to_ship_updates_instantly({}, { locale: props.locale }) }}</p>
                 <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
                   Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready.
                 </p>
@@ -660,7 +662,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
                 <h3 class="text-xl font-bold text-white">Flexible Hosting</h3>
               </div>
               <div class="p-10">
-                <p class="mt-2 text-lg font-medium tracking-tight text-white">Cloud or Self-hosted</p>
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">{{ m.open_source({}, { locale: props.locale }) }}</p>
                 <p class="max-w-lg mt-2 text-gray-400 text-sm/6">Choose between our secure cloud or host on your own infrastructure</p>
               </div>
             </div>
@@ -730,16 +732,16 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </div>
             <div class="sm:text-center md:w-1/2">
               <p class="text-xl tracking-tight text-white">
-                {{ m.try_risk_free_with_a_15_days_free_trial() }}
+                {{ m.try_risk_free_with_a_15_days_free_trial({}, { locale: props.locale }) }}
               </p>
               <a
                 :href="getRelativeLocaleUrl(props.locale, 'register')"
                 target="_blank"
                 class="inline-block w-auto px-5 py-3 mx-auto mt-5 text-base font-medium text-white bg-gray-900 border border-transparent rounded-md shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
               >
-                {{ m.get_started() }} &RightArrow;
+                {{ m.get_started({}, { locale: props.locale }) }} &RightArrow;
               </a>
-              <p class="pt-4 tracking-tight text-white">{{ m.no_credit_card_required() }}</p>
+              <p class="pt-4 tracking-tight text-white">{{ m.no_credit_card_required({}, { locale: props.locale }) }}</p>
             </div>
           </div>
         </div>

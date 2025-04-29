@@ -12,8 +12,8 @@ const props = defineProps<{ locale: Locales }>()
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
         <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">
-          {{ m.calculate_your_usage() }}<br />
-          <span class="text-xl sm:text-2xl xl:text-3xl">{{ m.for_the_pay_as_you_go_plan() }}</span>
+          {{ m.calculate_your_usage({}, { locale: props.locale }) }}<br />
+          <span class="text-xl sm:text-2xl xl:text-3xl">{{ m.for_the_pay_as_you_go_plan({}, { locale: props.locale }) }}</span>
         </h2>
       </div>
       <div class="relative mt-12 lg:mx-auto lg:mt-20 lg:max-w-5xl">
@@ -26,38 +26,38 @@ const props = defineProps<{ locale: Locales }>()
         <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-x-20 gap-y-12 rounded-2xl sm:grid-cols-2 lg:grid-cols-4">
           <div class="flex flex-col items-center">
             <h3 class="calc-label">
-              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users() }}</span>
+              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users({}, { locale: props.locale }) }}</span>
             </h3>
             <p class="mt-3 text-lg text-white font-pj">
-              {{ pricing.mau.base }} {{ m.included() }}<br />
-              {{ pricing.mau['price-per-unit'] }} {{ m.per_added_user() }}
+              {{ pricing.mau.base }} {{ m.included({}, { locale: props.locale }) }}<br />
+              {{ pricing.mau['price-per-unit'] }} {{ m.per_added_user({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <h3 class="calc-label">Storage<br />(GB)</h3>
             <p class="mt-3 text-lg text-white font-pj">
-              {{ pricing.storage.base }} {{ m.included() }}<br />
-              {{ pricing.storage['price-per-unit'] }} {{ m.per_added_gb() }}
+              {{ pricing.storage.base }} {{ m.included({}, { locale: props.locale }) }}<br />
+              {{ pricing.storage['price-per-unit'] }} {{ m.per_added_gb({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <h3 class="calc-label" v-html="m.updates_by_month()" />
-            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation({}, { locale: props.locale }) }}</p>
           </div>
           <div class="flex flex-col items-center">
             <h3 class="calc-label" v-html="m.updates_size()" />
-            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation({}, { locale: props.locale }) }}</p>
           </div>
           <div class="flex flex-col items-center lg:col-span-2">
-            <h3 class="calc-label">{{ m.bandwidth() }}</h3>
+            <h3 class="calc-label">{{ m.bandwidth({}, { locale: props.locale }) }}</h3>
             <p class="mt-3 text-lg text-white font-pj">
-              {{ pricing.bandwidth.base }} {{ m.included() }}<br />
-              {{ pricing.bandwidth['price-per-unit'] }} {{ m.per_added_gb() }}
+              {{ pricing.bandwidth.base }} {{ m.included({}, { locale: props.locale }) }}<br />
+              {{ pricing.bandwidth['price-per-unit'] }} {{ m.per_added_gb({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center lg:col-span-2">
-            <h3 class="calc-label">{{ m.updates() }}</h3>
-            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation() }}</p>
+            <h3 class="calc-label">{{ m.updates({}, { locale: props.locale }) }}</h3>
+            <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation({}, { locale: props.locale }) }}</p>
           </div>
         </div>
       </div>

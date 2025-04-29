@@ -11,23 +11,23 @@ const config = useRuntimeConfig()
   <section class="py-12 bg-gray-50 sm:py-16">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.trust_and_security() }}</h1>
-        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">{{ m.trust_and_security_description() }}</p>
+        <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.trust_and_security({}, { locale: props.locale }) }}</h1>
+        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">{{ m.trust_and_security_description({}, { locale: props.locale }) }}</p>
       </div>
 
       <div class="mt-16 space-y-16">
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{{ m.product_security() }}</h2>
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.product_security({}, { locale: props.locale }) }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
-            <li>{{ m.trust_soc2_certification() }}</li>
+            <li>{{ m.trust_soc2_certification({}, { locale: props.locale }) }}</li>
             <li>
-              {{ m.source_code_protection_1() }}
+              {{ m.source_code_protection_1({}, { locale: props.locale }) }}
               <a href="https://github.com/Cap-go/capgo" class="text-blue-500 underline underline-current" target="_blank">GitHub</a>.
-              {{ m.source_code_protection_2() }}
+              {{ m.source_code_protection_2({}, { locale: props.locale }) }}
               <a href="https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main" class="text-blue-500 underline underline-current" target="_blank">SonarCloud</a>
-              {{ m.and() }}
+              {{ m.and({}, { locale: props.locale }) }}
               <a href="https://snyk.io/test/github/Cap-go/capgo" class="text-blue-500 underline underline-current" target="_blank">Snyk</a>
-              {{ m.source_code_protection_3() }}
+              {{ m.source_code_protection_3({}, { locale: props.locale }) }}
             </li>
             <li class="flex items-center gap-2">
               SonarCloud:
@@ -38,33 +38,36 @@ const config = useRuntimeConfig()
                 <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
               </a>
             </li>
-            <li>{{ m.access_control() }}</li>
+            <li>{{ m.access_control({}, { locale: props.locale }) }}</li>
           </ul>
         </div>
 
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{{ m.data_security() }}</h2>
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.data_security({}, { locale: props.locale }) }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
-            <li>{{ m.encryption_communication() }}</li>
-            <li>{{ m.source_code_encryption() }}</li>
+            <li>{{ m.encryption_communication({}, { locale: props.locale }) }}</li>
+            <li>{{ m.source_code_encryption({}, { locale: props.locale }) }}</li>
           </ul>
         </div>
 
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{{ m.network_security() }}</h2>
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.network_security({}, { locale: props.locale }) }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
-            <li>{{ m.vulnerability_scanning() }}</li>
-            <li>{{ m.architecture() }}</li>
+            <li>{{ m.vulnerability_scanning({}, { locale: props.locale }) }}</li>
+            <li>{{ m.architecture({}, { locale: props.locale }) }}</li>
           </ul>
         </div>
 
         <div class="p-8 bg-white shadow-xl rounded-3xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{{ m.application_security() }}</h2>
+          <h2 class="text-3xl font-bold text-gray-900">{{ m.application_security({}, { locale: props.locale }) }}</h2>
           <ul class="mt-8 space-y-5 text-lg text-gray-600 list-disc list-inside">
-            <li>{{ m.secure_coding() }}</li>
-            <li>{{ m.site_reliability() }} <a href="https://status.capgo.app/" class="text-blue-500 underline underline-current" target="_blank">Uptime Monitoring</a>.</li>
+            <li>{{ m.secure_coding({}, { locale: props.locale }) }}</li>
+            <li>
+              {{ m.site_reliability({}, { locale: props.locale }) }}
+              <a href="https://status.capgo.app/" class="text-blue-500 underline underline-current" target="_blank">Uptime Monitoring</a>.
+            </li>
             <!-- link to update monitoring: https://status.capgo.app/ -->
-            <li>{{ m.application_penetration_testing() }}</li>
+            <li>{{ m.application_penetration_testing({}, { locale: props.locale }) }}</li>
           </ul>
         </div>
       </div>

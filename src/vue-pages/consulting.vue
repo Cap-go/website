@@ -21,13 +21,13 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative pb-0 mt-0 mb-16 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
             <strong style="line-height: 72px">CapacitorJS</strong>&nbsp;<span class="text-indigo-600" style="line-height: 72px"
-              ><strong style="line-height: 72px">{{ m.code_review_and_consulting() }}</strong></span
-            >&nbsp;<strong style="line-height: 72px">{{ m.services() }}</strong>
+              ><strong style="line-height: 72px">{{ m.code_review_and_consulting({}, { locale: props.locale }) }}</strong></span
+            >&nbsp;<strong style="line-height: 72px">{{ m.services({}, { locale: props.locale }) }}</strong>
           </h1>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="flex-col items-center justify-end block my-0 text-3xl font-medium text-gray-100 sm:text-center" style="line-height: 42px">
-            &nbsp;{{ m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps() }}
+            &nbsp;{{ m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps({}, { locale: props.locale }) }}
           </h2>
         </div>
         <a
@@ -41,7 +41,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
             background-position: 100% 50%;
           "
-          ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
+          ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation({}, { locale: props.locale }) }}</strong></a
         >
       </div>
     </main>
@@ -90,26 +90,26 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="pb-10 my-0 font-sans text-6xl font-bold text-center text-slate-900">
-            {{ m.code_review() }}<br class="text-6xl text-center" style="line-height: 72px" />&amp;
-            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">{{ m.consulting() }}</span>
+            {{ m.code_review({}, { locale: props.locale }) }}<br class="text-6xl text-center" style="line-height: 72px" />&amp;
+            <span class="text-6xl text-center text-indigo-600" style="text-decoration: none; line-height: 72px">{{ m.consulting({}, { locale: props.locale }) }}</span>
           </h2>
-          <p class="mt-0 mb-24 text-slate-900">{{ m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services() }}:<br /><br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: props.locale }) }}:<br /><br /></p>
           <div class="mt-16 text-left md:grid" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_1() }}
+                {{ m.case_1({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-bold sm:text-slate-900" style="line-height: 42px">
-                {{ m.review_before_passing_the_code_to_the_production() }}
+                {{ m.review_before_passing_the_code_to_the_production({}, { locale: props.locale }) }}
               </h5>
               <p class="mt-0 mb-2">
-                {{ m.find_and_fix_bugs_during_the_coding_process() }}
-                {{ m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it() }}<br /><br />
+                {{ m.find_and_fix_bugs_during_the_coding_process({}, { locale: props.locale }) }}
+                {{ m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it({}, { locale: props.locale }) }}<br /><br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -117,30 +117,30 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_2() }}
+                {{ m.case_2({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.optimization_of_the_existing_app() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.optimization_of_the_existing_app({}, { locale: props.locale }) }}</strong>
               </h5>
-              <p class="mt-0 mb-2">{{ m.when_down_review() }}<br /></p>
+              <p class="mt-0 mb-2">{{ m.when_down_review({}, { locale: props.locale }) }}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_3() }}
+                {{ m.case_3({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.little_experience_with_capacitorjs() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.little_experience_with_capacitorjs({}, { locale: props.locale }) }}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {{ m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side() }}
-                {{ m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts() }}<br />
+                {{ m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side({}, { locale: props.locale }) }}
+                {{ m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: props.locale }) }}<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -148,54 +148,62 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_4() }}
+                {{ m.case_4({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.poor_app_quality() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.poor_app_quality({}, { locale: props.locale }) }}</strong>
               </h5>
-              <p class="mt-0 mb-2">{{ m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low() }}<br /></p>
+              <p class="mt-0 mb-2">
+                {{ m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low({}, { locale: props.locale })
+                }}<br />
+              </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_5() }}
+                {{ m.case_5({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.something_doesn_t_work_but_you_don_t_know_why() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.something_doesn_t_work_but_you_don_t_know_why({}, { locale: props.locale }) }}</strong>
               </h5>
-              <p class="mt-0 mb-2">{{ m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it() }}<br /></p>
+              <p class="mt-0 mb-2">
+                {{ m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it({}, { locale: props.locale }) }}<br />
+              </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_6() }}
+                {{ m.case_6({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.plugin_is_missing() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.plugin_is_missing({}, { locale: props.locale }) }}</strong>
               </h5>
-              <p class="mt-0 mb-2">{{ m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it() }}<br /></p>
+              <p class="mt-0 mb-2">
+                {{ m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it({}, { locale: props.locale })
+                }}<br />
+              </p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="pl-16 my-2 text-xs font-bold leading-3 text-black uppercase bg-no-repeat bg-auto"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {{ m.case_7() }}
+                {{ m.case_7({}, { locale: props.locale }) }}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{{ m.ci_cd_setup() }}</strong>
+                <strong class="font-bold" style="line-height: 42px">{{ m.ci_cd_setup({}, { locale: props.locale }) }}</strong>
               </h5>
               <p class="mt-0 mb-2">
                 {{
@@ -214,11 +222,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">
-            <strong class="font-bold" style="line-height: 72px">{{ m.why_is_it_important() }}</strong>
+            <strong class="font-bold" style="line-height: 72px">{{ m.why_is_it_important({}, { locale: props.locale }) }}</strong>
           </h2>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <p class="mt-0 mb-24 text-slate-900">{{ m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to() }}<br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{{ m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to({}, { locale: props.locale }) }}<br /></p>
         </div>
         <div class="grid-flow-row md:grid md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
           <div class="text-slate-900">
@@ -232,7 +240,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ m.minimize_mistakes_and_their_impact_on_the_project() }}</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ m.minimize_mistakes_and_their_impact_on_the_project({}, { locale: props.locale }) }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -246,7 +254,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ m.ensure_that_the_project_requirements_are_fulfilled() }}</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ m.ensure_that_the_project_requirements_are_fulfilled({}, { locale: props.locale }) }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -260,7 +268,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ m.improve_overall_code_quality() }}</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ m.improve_overall_code_quality({}, { locale: props.locale }) }}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -274,7 +282,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{{ m.achieve_consistent_design_and_implementation() }}</strong>
+              <strong class="font-bold" style="line-height: 42px">{{ m.achieve_consistent_design_and_implementation({}, { locale: props.locale }) }}</strong>
             </h5>
           </div>
         </div>
@@ -286,7 +294,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
-          <h2 class="relative pb-10 mt-0 mb-24 text-6xl font-medium" style="line-height: 72px">{{ m.technological_benefits() }}</h2>
+          <h2 class="relative pb-10 mt-0 mb-24 text-6xl font-medium" style="line-height: 72px">{{ m.technological_benefits({}, { locale: props.locale }) }}</h2>
         </div>
         <div class="gap-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch">
           <div
@@ -303,10 +311,10 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ m.better_code_quality() }}</strong>
+              <strong class="font-bold">{{ m.better_code_quality({}, { locale: props.locale }) }}</strong>
             </h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              {{ m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts() }}
+              {{ m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: props.locale }) }}
             </p>
           </div>
           <div
@@ -323,11 +331,16 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ m.improved_code_readability() }}</strong
+              <strong class="font-bold">{{ m.improved_code_readability({}, { locale: props.locale }) }}</strong
               ><br />
             </h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              {{ m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive() }}
+              {{
+                m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive(
+                  {},
+                  { locale: props.locale },
+                )
+              }}
             </p>
           </div>
           <div
@@ -344,9 +357,11 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               />
             </div>
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
-              <strong class="font-bold">{{ m.bugs_reduction() }}</strong>
+              <strong class="font-bold">{{ m.bugs_reduction({}, { locale: props.locale }) }}</strong>
             </h4>
-            <p class="block mt-auto mb-2 text-lg whitespace-normal">{{ m.eliminate_the_number_of_bugs_before_passing_the_code_to_production() }}<strong class="font-bold" /></p>
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">
+              {{ m.eliminate_the_number_of_bugs_before_passing_the_code_to_production({}, { locale: props.locale }) }}<strong class="font-bold" />
+            </p>
           </div>
         </div>
       </div>
@@ -373,7 +388,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation({}, { locale: props.locale }) }}</strong></a
           >
         </div>
       </div>
@@ -383,7 +398,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
     >
       <div class="mx-auto mt-5 leading-8 text-slate-900 sm:mx-auto" style="max-width: 754px">
-        <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">{{ m.business_benefits() }}</h2>
+        <h2 class="py-10 mt-0 mb-5 text-6xl font-medium" style="line-height: 72px">{{ m.business_benefits({}, { locale: props.locale }) }}</h2>
       </div>
       <div class="items-stretch gap-4 leading-8 text-slate-900 sm:text-left md:grid" style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px">
         <div>
@@ -397,10 +412,15 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">{{ m.lower_cost_of_fixing_bugs() }}</strong>
+            <strong class="font-bold" style="line-height: 42px">{{ m.lower_cost_of_fixing_bugs({}, { locale: props.locale }) }}</strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {{ m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it() }}
+            {{
+              m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it(
+                {},
+                { locale: props.locale },
+              )
+            }}
           </p>
         </div>
         <div>
@@ -414,10 +434,13 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">{{ m.opportunity_for_juniors_to_develop_skills() }}<br style="line-height: 42px" /></strong>
+            <strong class="font-bold" style="line-height: 42px"
+              >{{ m.opportunity_for_juniors_to_develop_skills({}, { locale: props.locale }) }}<br style="line-height: 42px"
+            /></strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {{ m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers() }}<br />
+            {{ m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers({}, { locale: props.locale })
+            }}<br />
           </p>
         </div>
       </div>
@@ -425,15 +448,15 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
     <div class="relative flex-col items-center block my-auto font-sans font-light leading-8 text-center bg-dark max-w-none text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
       <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
         <h2 class="w-full pb-10 my-0 text-6xl font-medium text-white" style="line-height: 72px">
-          {{ m.why_work() }}
-          <span class="text-center text-indigo-600" style="line-height: 72px">{{ m.with_us() }}</span>
+          {{ m.why_work({}, { locale: props.locale }) }}
+          <span class="text-center text-indigo-600" style="line-height: 72px">{{ m.with_us({}, { locale: props.locale }) }}</span>
         </h2>
       </div>
       <div class="grid-flow-row gap-6 leading-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
         <div class="flex flex-col items-center justify-center px-5 text-left">
           <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="inline-block max-w-full mt-0 mb-auto align-middle border-0" />
           <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
-            {{ m.community_trusted() }}
+            {{ m.community_trusted({}, { locale: props.locale }) }}
             <a
               href="https://x.com/martindonadieu"
               target="_blank"
@@ -459,7 +482,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="inline-block max-w-full mt-0 mb-auto align-middle border-0"
           />
           <p class="block mt-0 mb-auto text-lg text-center text-white whitespace-normal">
-            {{ m.experienced_in_working_on_demanding() }}
+            {{ m.experienced_in_working_on_demanding({}, { locale: props.locale }) }}
             <a
               href="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
@@ -471,7 +494,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
                   all 0.3s ease 0s;
                 text-decoration: underline;
               "
-              >{{ m.cordova_capacitorjs_projects() }}</a
+              >{{ m.cordova_capacitorjs_projects({}, { locale: props.locale }) }}</a
             >
           </p>
         </div>
@@ -572,16 +595,16 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             class="items-start justify-center block pt-0 pb-10 pl-16 mt-5 mb-0 text-xs font-bold leading-4 text-black uppercase bg-no-repeat bg-auto"
             style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
           >
-            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{{ m.contact() }}</strong
+            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{{ m.contact({}, { locale: props.locale }) }}</strong
             ><br class="text-left uppercase" style="letter-spacing: 1.7px" />
           </h2>
         </div>
         <div class="flex flex-col">
           <h3 class="w-full pt-2 pb-10 my-0 mr-10 font-sans text-6xl font-medium text-left text-white" style="line-height: 72px">
-            {{ m.lets_work_together() }}
+            {{ m.lets_work_together({}, { locale: props.locale }) }}
           </h3>
           <p class="block mt-auto mb-2 font-sans text-lg font-light leading-8 text-left text-white whitespace-normal bg-transparent">
-            {{ m.need_help_with_cordova_or_capacitorjs_let_us_know() }}
+            {{ m.need_help_with_cordova_or_capacitorjs_let_us_know({}, { locale: props.locale }) }}
           </p>
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
@@ -594,7 +617,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
               background-position: 100% 50%;
             "
-            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation() }}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{{ m.book_a_consultation({}, { locale: props.locale }) }}</strong></a
           >
         </div>
       </div>

@@ -35,7 +35,7 @@
   "app_store_rating_good": "\"アプリが大好き！\" - 5★ App Storeレビュー",
   "appflow_6000_annually": "AppFlow 年間6,000ドル。",
   "apple_compliant": "アップル準拠",
-  "application_definition": "<strong>アプリケーション</strong>とは、貴方が{{ brand }}という任意の電子機器にダウンロードした、会社が提供するソフトウェアプログラムを指します。",
+  "application_definition": "<strong>アプリケーション</strong>とは、貴方が{brand}という任意の電子機器にダウンロードした、会社が提供するソフトウェアプログラムを指します。",
   "application_definition_refund": "アプリケーションとは、あなたが任意の電子機器にダウンロードした、会社が提供するソフトウェアプログラムであり、名称は$1です。",
   "application_penetration_testing": "Capgoは、信頼性のある第三者のセキュリティ研究者による年次侵入テストを受けており、任意の脆弱性を特定し解決しています。",
   "application_security": "アプリケーションセキュリティ",

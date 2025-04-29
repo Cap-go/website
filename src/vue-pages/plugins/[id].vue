@@ -21,10 +21,10 @@ const showReadme = ref(1)
     </div>
     <div class="flex flex-row flex-wrap w-full gap-8 px-10 mt-6 lg:max-w-6xl xl:px-0">
       <button class="px-3 py-1 text-sm" :class="showReadme !== 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 1">
-        {{ m.tutorial_on() }} {{ props.title }}
+        {{ m.tutorial_on({}, { locale: props.locale }) }} {{ props.title }}
       </button>
       <button class="px-3 py-1 text-sm" :class="showReadme === 0 ? 'rounded border border-white' : 'rounded border border-white/10'" @click="showReadme = 0">
-        {{ m.about() }} {{ props.title }}
+        {{ m.about({}, { locale: props.locale }) }} {{ props.title }}
       </button>
     </div>
     <div class="flex flex-col items-center w-full mt-6">
@@ -50,7 +50,7 @@ const showReadme = ref(1)
               :href="props.href"
               target="_blank"
             >
-              {{ m.view_repo() }} &rarr;
+              {{ m.view_repo({}, { locale: props.locale }) }} &rarr;
             </a>
             <a
               v-if="props.name"
@@ -59,7 +59,7 @@ const showReadme = ref(1)
               :href="`https://www.npmjs.com/package/${props.name}`"
               target="_blank"
             >
-              {{ m.view_npm() }} &rarr;
+              {{ m.view_npm({}, { locale: props.locale }) }} &rarr;
             </a>
           </div>
           <div v-if="props.readme" id="readme" class="my-8 prose" v-html="props.readme" />

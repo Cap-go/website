@@ -180,7 +180,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="font-semibold text-indigo-400 text-base/7">Testimonials</h2>
         <p class="mt-2 text-4xl font-semibold tracking-tight text-white text-balance sm:text-5xl">
-          {{ m.they_love_capgo() }}
+          {{ m.they_love_capgo({}, { locale: props.locale }) }}
         </p>
       </div>
 

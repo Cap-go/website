@@ -54,74 +54,74 @@ interface NavigationItem {
 
 const navigation: Record<string, NavigationItem[]> = {
   solutions: [
-    { name: m.register(), href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
-    { name: m.app_mobile(), href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
+    { name: m.register({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'register'), target: '_blank' },
+    { name: m.app_mobile({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'app_mobile') },
     {
-      name: m.documentation(),
+      name: m.documentation({}, { locale: props.locale }),
       href: getRelativeLocaleUrl(props.locale, 'docs'),
     },
-    { name: m.plugins(), href: getRelativeLocaleUrl(props.locale, 'plugins') },
+    { name: m.plugins({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'plugins') },
     {
-      name: m.awesome_capacitor(),
+      name: m.awesome_capacitor({}, { locale: props.locale }),
       href: 'https://github.com/riderx/awesome-capacitor/',
       target: '_blank',
     },
-    { name: m.top_app_by_framework(), href: getRelativeLocaleUrl(props.locale, 'top_app') },
+    { name: m.top_app_by_framework({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'top_app') },
   ],
   support: [
     {
-      name: m.community(),
+      name: m.community({}, { locale: props.locale }),
       href: 'https://discord.com/invite/VnYRvBfgA6',
       target: '_blank',
     },
     {
-      name: m.pricing(),
+      name: m.pricing({}, { locale: props.locale }),
       href: getRelativeLocaleUrl(props.locale, 'pricing'),
     },
-    { name: m.guides(), href: getRelativeLocaleUrl(props.locale, 'blog') },
+    { name: m.guides({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'blog') },
     {
-      name: () => (systemStatus.value.indicator === 'up' ? m.all_systems_normal() : m.systems_are_disturbed()),
+      name: () => (systemStatus.value.indicator === 'up' ? m.all_systems_normal({}, { locale: props.locale }) : m.systems_are_disturbed({}, { locale: props.locale })),
       href: 'https://status.capgo.app/',
       target: '_blank',
       icon: () => (systemStatus.value.indicator === 'up' ? '🟢' : '🟠'),
     },
-    { name: m.status(), href: 'https://status.capgo.app/', target: '_blank' },
+    { name: m.status({}, { locale: props.locale }), href: 'https://status.capgo.app/', target: '_blank' },
     {
-      name: m.chat(),
+      name: m.chat({}, { locale: props.locale }),
       href: 'mailto:support@capgo.app',
       rel: 'nofollow',
     },
     {
-      name: m.sponsor(),
+      name: m.sponsor({}, { locale: props.locale }),
       href: getRelativeLocaleUrl(props.locale, 'sponsor'),
     },
   ],
   company: [
-    { name: m.about(), href: getRelativeLocaleUrl(props.locale, 'about') },
-    { name: m.imprint(), href: getRelativeLocaleUrl(props.locale, 'imprint') },
-    { name: m.jobs(), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
-    { name: m.contributing(), href: getRelativeLocaleUrl(props.locale, 'contributing') },
-    { name: m.trust(), href: getRelativeLocaleUrl(props.locale, 'trust') },
-    { name: m.consulting(), href: getRelativeLocaleUrl(props.locale, 'consulting') },
+    { name: m.about({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'about') },
+    { name: m.imprint({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'imprint') },
+    { name: m.jobs({}, { locale: props.locale }), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
+    { name: m.contributing({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'contributing') },
+    { name: m.trust({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'trust') },
+    { name: m.consulting({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'consulting') },
   ],
   legal: [
-    { name: m.privacy(), href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
-    { name: m.support_policy(), href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
-    { name: m.sla(), href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
-    { name: m.aup(), href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
-    { name: m.terms(), href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
-    { name: m.security_txt(), href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
+    { name: m.privacy({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'privacy'), rel: 'nofollow' },
+    { name: m.support_policy({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'support-policy'), rel: 'nofollow' },
+    { name: m.sla({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'sla'), rel: 'nofollow' },
+    { name: m.aup({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'aup'), rel: 'nofollow' },
+    { name: m.terms({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'tos'), rel: 'nofollow' },
+    { name: m.security_txt({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'security'), rel: 'nofollow' },
     {
-      name: m.privacy(),
+      name: m.privacy({}, { locale: props.locale }),
       href: 'https://www.privacyboard.co/company/capgo/',
       target: '_blank',
     },
-    { name: m.dp(), href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
-    { name: m.dpa(), href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
+    { name: m.dp({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'dp'), rel: 'nofollow' },
+    { name: m.dpa({}, { locale: props.locale }), href: getRelativeLocaleUrl(props.locale, 'dpa'), rel: 'nofollow' },
   ],
   hero: [
     {
-      name: m.carbon_removal(),
+      name: m.carbon_removal({}, { locale: props.locale }),
       href: 'https://climate.stripe.com/vxDf62',
       icon: defineComponent({
         render: () =>
@@ -144,7 +144,7 @@ const navigation: Record<string, NavigationItem[]> = {
       }),
     },
     {
-      name: m.open_source(),
+      name: m.open_source({}, { locale: props.locale }),
       href: 'https://github.com/Cap-go/',
       icon: `
 
@@ -156,7 +156,7 @@ const navigation: Record<string, NavigationItem[]> = {
       `,
     },
     {
-      name: m.built_with_supabase(),
+      name: m.built_with_supabase({}, { locale: props.locale }),
       href: 'https://supabase.com/',
       icon: defineComponent({
         render: () =>
@@ -179,7 +179,7 @@ const navigation: Record<string, NavigationItem[]> = {
       }),
     },
     {
-      name: m.build_in_public_on_twitter(),
+      name: m.build_in_public_on_twitter({}, { locale: props.locale }),
       href: 'https://x.com/martindonadieu/',
       icon: defineComponent({
         render: () =>
@@ -208,11 +208,11 @@ const navigation: Record<string, NavigationItem[]> = {
 <template>
   <footer class="bg-white" aria-labelledby="footer-heading">
     [
-    <h2 id="footer-heading" class="sr-only">{{ m.footer() }}</h2>
+    <h2 id="footer-heading" class="sr-only">{{ m.footer({}, { locale: props.locale }) }}</h2>
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-16">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
-          <p class="text-base text-gray-500">{{ m.making_world_better() }}</p>
+          <p class="text-base text-gray-500">{{ m.making_world_better({}, { locale: props.locale }) }}</p>
           <ul role="list" class="mt-4 space-y-4">
             <li v-for="item in navigation.hero" :key="item.name">
               <a :href="item.href" target="_blank" rel="noreferrer" class="flex">
@@ -265,7 +265,7 @@ const navigation: Record<string, NavigationItem[]> = {
         <div class="grid grid-cols-2 gap-8 mt-12 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">{{ m.solutions() }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.solutions({}, { locale: props.locale }) }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.solutions" :key="item.name">
                   <a
@@ -280,7 +280,7 @@ const navigation: Record<string, NavigationItem[]> = {
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">{{ m.support() }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.support({}, { locale: props.locale }) }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.support" :key="item.name">
                   <a
@@ -299,7 +299,7 @@ const navigation: Record<string, NavigationItem[]> = {
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">{{ m.company() }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.company({}, { locale: props.locale }) }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
                   <a
@@ -312,7 +312,7 @@ const navigation: Record<string, NavigationItem[]> = {
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">{{ m.legal() }}</h3>
+              <h3 class="text-base font-medium text-gray-900">{{ m.legal({}, { locale: props.locale }) }}</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
                   <a
@@ -329,7 +329,7 @@ const navigation: Record<string, NavigationItem[]> = {
         </div>
       </div>
       <div class="pt-8 mt-12 border-t border-gray-200">
-        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{ m.copyright() }}</p>
+        <p class="text-base text-gray-500 xl:text-center">&copy; {{ year }} {{ brand }}, Inc. {{ m.copyright({}, { locale: props.locale }) }}</p>
       </div>
     </div>
   </footer>

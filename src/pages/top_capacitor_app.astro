@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import VueTopcapacitorapp from '@/vue-pages/top_capacitor_app.vue'
 import * as m from '../paraglide/messages.js'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_capacitor_apps()].join(' | ')
-const description = m.top_100_app_using_capacitor_on_android_play_store()
+const title = [Astro.locals.runtimeConfig.public.brand, m.top_capacitor_apps({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.top_100_app_using_capacitor_on_android_play_store({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---

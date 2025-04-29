@@ -76,9 +76,9 @@ const totalPrice = computed(() => {
   <section id="calculator">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center xl:max-w-4xl">
-        <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">{{ m.calculate_your_usage() }}<br /></h2>
+        <h2 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-5xl">{{ m.calculate_your_usage({}, { locale: props.locale }) }}<br /></h2>
         <p class="mt-6 text-sm font-normal text-gray-600 font-pj">
-          {{ m.enter_your_estimated_monthly_active_users() }}
+          {{ m.enter_your_estimated_monthly_active_users({}, { locale: props.locale }) }}
         </p>
       </div>
       <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
@@ -91,7 +91,7 @@ const totalPrice = computed(() => {
         <div class="relative grid grid-cols-1 px-16 py-12 overflow-hidden text-center text-white bg-gray-900 gap-x-20 gap-y-12 rounded-2xl md:grid-cols-3">
           <div class="flex flex-col items-center">
             <p class="calc-label">
-              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users() }}</span>
+              MAU<br /><span class="text-[0.6rem]">{{ m.monthly_active_users({}, { locale: props.locale }) }}</span>
             </p>
             <input
               v-model.number="mau"
@@ -118,30 +118,30 @@ const totalPrice = computed(() => {
           <div class="flex flex-col items-center">
             <p class="calc-label" v-html="m.updates_total()" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ updates.toLocaleString() }}
+              {{ updates.toLocaleString({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <p class="calc-label" v-html="m.bandwidth_gb()" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ bandwidth.toLocaleString() }}
+              {{ bandwidth.toLocaleString({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center">
             <p class="calc-label" v-html="m.storage()" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ storage.toLocaleString() }}
+              {{ storage.toLocaleString({}, { locale: props.locale }) }}
             </p>
           </div>
           <div class="flex flex-col items-center col-span-1 md:col-span-3">
-            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">{{ yearly ? m.yearly() : m.monthly() }} Price</p>
+            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">{{ yearly ? m.yearly() : m.monthly({}, { locale: props.locale }) }} Price</p>
             <p class="p-2 mt-3 text-3xl font-bold text-gray-900 break-all bg-white font-pj rounded-xl">{{ totalPrice }}€</p>
             <p v-show="suggestion" class="mt-0 mt-5 text-sm font-bold tracking-widest text-white font-pj">
-              {{ m.we_suggest_you_to_choose_the() }}
+              {{ m.we_suggest_you_to_choose_the({}, { locale: props.locale }) }}
               <button class="font-bold text-red-400 underline uppercase cursor-pointer underline-current" @click="suggestionClick">
                 {{ suggestion }}
               </button>
-              {{ m.plan() }}
+              {{ m.plan({}, { locale: props.locale }) }}
             </p>
           </div>
         </div>

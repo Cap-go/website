@@ -108,7 +108,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
     >
       <div class="w-[280px] rounded bg-gray-700 p-5">
         <ul v-if="headings?.length" class="flex flex-col text-left list-none">
-          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
+          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents({}, { locale: props.locale }) }}</span>
           <li v-for="item in headings" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
               {{ item.text }}
@@ -135,7 +135,9 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </span>
       </div>
     </div>
-    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase"> {{ m.last_update() }}: {{ formatTime(props?.updated_at || '') }} </span>
+    <span class="block mt-6 text-sm font-semibold tracking-widest text-white uppercase">
+      {{ m.last_update({}, { locale: props.locale }) }}: {{ formatTime(props?.updated_at || '') }}
+    </span>
     <div class="relative toc-wrapper">
       <h1 class="px-4 py-5 mx-auto text-3xl lg:max-w-1/2 font-800 lg:text-4xl">
         {{ props?.title }}
@@ -147,7 +149,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       <div ref="staticToc" class="absolute top-0 hidden max-h-screen overflow-y-auto transition-opacity duration-300 left-10 xl:block" :class="{ 'opacity-0': isFixedTocVisible }">
         <div class="w-[280px] rounded bg-gray-700 p-5">
           <ul v-if="headings?.length" class="flex flex-col text-left list-none">
-            <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
+            <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents({}, { locale: props.locale }) }}</span>
             <li v-for="item in headings" :key="item.slug" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
               <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
                 {{ item.text }}
@@ -158,7 +160,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
       </div>
       <div v-if="headings?.length" class="flex flex-col px-4 mx-auto text-left rounded xl-hidden lg:max-w-1/2">
         <ul class="flex flex-col p-4 bg-gray-700 rounded">
-          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents() }}</span>
+          <span class="pb-1 text-lg border-b border-gray-600">{{ m.table_of_contents({}, { locale: props.locale }) }}</span>
           <div class="hidden pl-20" />
           <li v-for="item in headings" class="block mt-2 text-gray-400 truncate hover:text-gray-200">
             <a :class="`pl-${Math.max(0, (item.depth - 2) * 2)} ${activeSlug === item.slug && 'text-white'}`" :href="`#${item.slug}`">
@@ -183,13 +185,13 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
         </a>
       </div>
     </div>
-    <GetStarted class="mx-2" />
+    <GetStarted class="mx-2" :locale="props.locale" />
     <section class="py-2 sm:py-6 lg:py-10 xl:py-14">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-xl mx-auto text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{{ m.latest_from_news() }}</h2>
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{{ m.latest_from_news({}, { locale: props.locale }) }}</h2>
           <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
-            {{ m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app() }}
+            {{ m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: props.locale }) }}
           </p>
         </div>
         <div v-if="related" class="grid max-w-md grid-cols-1 gap-5 mx-auto mt-12 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
@@ -210,7 +212,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
             :href="getRelativeLocaleUrl(props.locale, 'blog')"
             class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 group hover:text-gray-200 hover:underline"
           >
-            {{ m.see_all_from_our_blog() }}
+            {{ m.see_all_from_our_blog({}, { locale: props.locale }) }}
             <svg
               class="ml-1 h-5 w-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               viewBox="0 0 24 24"

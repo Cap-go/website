@@ -33,13 +33,13 @@ if (!entry) {
       return new Response(
         `<!doctype html>
 <title>Redirecting to: /blog/${Astro.params.slug}</title>
-<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}">
+<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}/">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}">
+<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}/">
 <body>
-	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}</code></a>
+	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
 </body>`,
-        { status: 302 },
+        { status: 302, headers: { 'Content-Type': 'text/html' } },
       )
   }
   console.log(`entry is not found for: ${Astro.url.pathname}`)

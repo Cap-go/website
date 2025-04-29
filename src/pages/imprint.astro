@@ -5,8 +5,8 @@ import * as m from '../paraglide/messages.js'
 
 const brand = Astro.locals.runtimeConfig.public.brand
 
-const title = [brand, m.imprint()].join(' | ')
-const description = m.imprint_description().replace('$1', brand)
+const title = [brand, m.imprint({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.imprint_description({}, { locale: Astro.locals.locale }).replace('$1', brand)
 
 const content = { title, description }
 ---

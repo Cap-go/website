@@ -26,7 +26,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=cordova`).then((res) =
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_cordova_apps_title() }}</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_cordova_apps_title({}, { locale: props.locale }) }}</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
@@ -52,7 +52,9 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=cordova`).then((res) =
                 </span>
               </div>
             </div>
-            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"> {{ shortNumber(app.installs) }} {{ m.downloads() }} </span>
+            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+              {{ shortNumber(app.installs) }} {{ m.downloads({}, { locale: props.locale }) }}
+            </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
@@ -63,7 +65,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=cordova`).then((res) =
               :title="app.title"
               class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
             >
-              {{ m.see_in_play_store() }}
+              {{ m.see_in_play_store({}, { locale: props.locale }) }}
               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"
