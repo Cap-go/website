@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.sla_policy()].join(' | ')
 const description = m.read_our_sla_policy()
@@ -9,7 +9,7 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="px-3 m-auto prose-sm prose text-left">
+  <div class="prose-sm prose m-auto px-3 text-left">
     <h2>{m.sla_title()}</h2>
     <h2>{m.enterprise_platform_uptime_sla()}</h2>
     <p>{m.sla_intro()}</p>

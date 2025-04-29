@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import * as m from "../paraglide/messages.js"
-
+import * as m from '../paraglide/messages.js'
 </script>
 
 <template>
@@ -11,7 +10,9 @@ import * as m from "../paraglide/messages.js"
           {{ m.effortless_ci_cd_solutions() }}
         </h2>
         <p class="mt-4 text-lg text-gray-600">
-          {{ m.we_configure_your_ci_cd_pipeline_directly_in_your_preferred_platform_whether_its_github_actions_gitlab_ci_or_others_we_dont_host_ci_cd_or_charge_you_to_maintain_it() }}
+          {{
+            m.we_configure_your_ci_cd_pipeline_directly_in_your_preferred_platform_whether_its_github_actions_gitlab_ci_or_others_we_dont_host_ci_cd_or_charge_you_to_maintain_it()
+          }}
         </p>
       </div>
       <div class="grid max-w-4xl grid-cols-1 mx-auto mt-8 text-center gap-y-4 sm:mt-12 sm:grid-cols-2 sm:gap-x-8 sm:text-left lg:mt-20">
@@ -23,9 +24,7 @@ import * as m from "../paraglide/messages.js"
               </svg>
               <h3 class="mt-8 text-2xl font-bold text-gray-900 font-pj sm:mt-10">{{ m.seamless_integration() }}</h3>
               <p class="mt-6 text-base text-gray-600 font-pj">
-                {{
-                  m.we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_process_no_need_to_switch_platforms_or_learn_new_tools()
-                }}
+                {{ m.we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_process_no_need_to_switch_platforms_or_learn_new_tools() }}
               </p>
             </div>
           </div>
@@ -78,9 +77,7 @@ import * as m from "../paraglide/messages.js"
               </svg>
               <h3 class="mt-8 text-2xl font-bold text-gray-900 font-pj sm:mt-10">{{ m.expert_guidance() }}</h3>
               <p class="mt-6 text-base text-gray-600 font-pj">
-                {{
-                  m.benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself()
-                }}
+                {{ m.benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself() }}
               </p>
               <p class="mt-6 text-base text-gray-600 font-pj">
                 {{ m.we_already_setup_ci_cd_for_50_apps() }}

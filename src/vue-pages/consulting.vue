@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '../paraglide/messages.js'
 import PluginMarketing from './plugin_marketing.vue'
 
 const props = defineProps<{ locale: Locales }>()
@@ -155,9 +155,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
                 <strong class="font-bold" style="line-height: 42px">{{ m.poor_app_quality() }}</strong>
               </h5>
-              <p class="mt-0 mb-2">
-                {{ m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low() }}<br />
-              </p>
+              <p class="mt-0 mb-2">{{ m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low() }}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -171,9 +169,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
                 <strong class="font-bold" style="line-height: 42px">{{ m.something_doesn_t_work_but_you_don_t_know_why() }}</strong>
               </h5>
-              <p class="mt-0 mb-2">
-                {{ m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it() }}<br />
-              </p>
+              <p class="mt-0 mb-2">{{ m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it() }}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -187,10 +183,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <h5 class="flex-col items-start justify-center block mt-0 mb-2 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
                 <strong class="font-bold" style="line-height: 42px">{{ m.plugin_is_missing() }}</strong>
               </h5>
-              <p class="mt-0 mb-2">
-                {{ m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it()
-                }}<br />
-              </p>
+              <p class="mt-0 mb-2">{{ m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it() }}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
@@ -334,9 +327,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               ><br />
             </h4>
             <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              {{
-                m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive()
-              }}
+              {{ m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive() }}
             </p>
           </div>
           <div
@@ -355,9 +346,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             <h4 class="my-2 text-xl font-medium leading-6 filter-none">
               <strong class="font-bold">{{ m.bugs_reduction() }}</strong>
             </h4>
-            <p class="block mt-auto mb-2 text-lg whitespace-normal">
-              {{ m.eliminate_the_number_of_bugs_before_passing_the_code_to_production() }}<strong class="font-bold" />
-            </p>
+            <p class="block mt-auto mb-2 text-lg whitespace-normal">{{ m.eliminate_the_number_of_bugs_before_passing_the_code_to_production() }}<strong class="font-bold" /></p>
           </div>
         </div>
       </div>
@@ -411,9 +400,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             <strong class="font-bold" style="line-height: 42px">{{ m.lower_cost_of_fixing_bugs() }}</strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {{
-              m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it()
-            }}
+            {{ m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it() }}
           </p>
         </div>
         <div>
@@ -427,13 +414,10 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
             />
           </div>
           <h5 class="flex-col items-start justify-center block mt-0 mb-6 text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px"
-              >{{ m.opportunity_for_juniors_to_develop_skills() }}<br style="line-height: 42px"
-            /></strong>
+            <strong class="font-bold" style="line-height: 42px">{{ m.opportunity_for_juniors_to_develop_skills() }}<br style="line-height: 42px" /></strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {{ m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers()
-            }}<br />
+            {{ m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers() }}<br />
           </p>
         </div>
       </div>

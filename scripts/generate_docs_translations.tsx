@@ -1,10 +1,10 @@
 import fg from 'fast-glob'
-import { join } from 'path'
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
-import { translateText } from './translate'
+import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import { translateText } from './translate'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'docs')
@@ -28,7 +28,7 @@ const processAllLanguages = async () => {
     await Promise.allSettled(blogFiles.map((file) => processFile(file, lang, langBlogDirectory, failedTranslations)))
     progress[lang] += blogFiles.length
     const totalProgress = Object.values(progress).reduce((a, b) => a + b, 0)
-    console.log(`Progress: ${totalProgress}/${totalFiles * languages.length} (${Math.round(totalProgress / (totalFiles * languages.length) * 100)}%)`)
+    console.log(`Progress: ${totalProgress}/${totalFiles * languages.length} (${Math.round((totalProgress / (totalFiles * languages.length)) * 100)}%)`)
     const failedFiles = Object.keys(failedTranslations)
     if (failedFiles.length > 0) {
       console.log(`Retrying failed translations for ${lang}...`)
@@ -67,23 +67,26 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
       else failedTranslations[file] = true
     }
     try {
-    if (grayMatterJson.hero.tagline) {
-      const translatedHeadImageAlt = await translateText(grayMatterJson.hero.tagline, lang)
-      if (translatedHeadImageAlt) grayMatterJson['hero']['tagline'] = translatedHeadImageAlt
-      else failedTranslations[file] = true
-    } } catch (e) {}
+      if (grayMatterJson.hero.tagline) {
+        const translatedHeadImageAlt = await translateText(grayMatterJson.hero.tagline, lang)
+        if (translatedHeadImageAlt) grayMatterJson['hero']['tagline'] = translatedHeadImageAlt
+        else failedTranslations[file] = true
+      }
+    } catch (e) {}
     try {
-    if (grayMatterJson.hero.actions[0].text) {
-      const translatedHeadImageAlt = await translateText(grayMatterJson.hero.actions[0].text, lang)
-      if (translatedHeadImageAlt) grayMatterJson['hero']['actions'][0]['text'] = translatedHeadImageAlt
-      else failedTranslations[file] = true
-    } } catch (e) {}
+      if (grayMatterJson.hero.actions[0].text) {
+        const translatedHeadImageAlt = await translateText(grayMatterJson.hero.actions[0].text, lang)
+        if (translatedHeadImageAlt) grayMatterJson['hero']['actions'][0]['text'] = translatedHeadImageAlt
+        else failedTranslations[file] = true
+      }
+    } catch (e) {}
     try {
-    if (grayMatterJson.hero.actions[1].text) {
-      const translatedHeadImageAlt = await translateText(grayMatterJson.hero.actions[1].text, lang)
-      if (translatedHeadImageAlt) grayMatterJson['hero']['actions'][1]['text'] = translatedHeadImageAlt
-      else failedTranslations[file] = true
-    } } catch (e) {}
+      if (grayMatterJson.hero.actions[1].text) {
+        const translatedHeadImageAlt = await translateText(grayMatterJson.hero.actions[1].text, lang)
+        if (translatedHeadImageAlt) grayMatterJson['hero']['actions'][1]['text'] = translatedHeadImageAlt
+        else failedTranslations[file] = true
+      }
+    } catch (e) {}
     grayMatterJson['locale'] = lang
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
     const blogContent = content.substring(grayMatterEnd + 4)

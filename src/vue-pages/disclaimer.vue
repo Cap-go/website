@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales, defaultLocale } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()
@@ -22,22 +22,27 @@ const domain = config.public.baseUrl
     <p>{{ m.definitions_purpose() }}</p>
     <ul>
       <li>
-        <p v-html="m.company_definition"></p>()
+        <p v-html="m.company_definition"></p>
+        ()
       </li>
       <li>
-        <p v-html="m.service_definition"></p>()
+        <p v-html="m.service_definition"></p>
+        ()
       </li>
       <li>
-        <p v-html="m.you_definition"></p>()
+        <p v-html="m.you_definition"></p>
+        ()
       </li>
       <li>
-        <p v-html="m.application_definition"></p>()
+        <p v-html="m.application_definition"></p>
+        ()
       </li>
     </ul>
     <h2>{{ m.disclaimer_title() }}</h2>
     <p>{{ m.disclaimer_text() }}</p>
     <p>{{ m.company_no_responsibility() }}</p>
-    <p v-html="m.company_no_liability()"></p>()
+    <p v-html="m.company_no_liability()"></p>
+    ()
     <p>{{ m.no_virus_warranty() }}</p>
     <h2>{{ m.external_links_disclaimer_title() }}</h2>
     <p>{{ m.external_links_disclaimer_text() }}</p>

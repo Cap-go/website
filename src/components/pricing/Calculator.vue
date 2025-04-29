@@ -2,7 +2,7 @@
 import { roundNumber } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import { computed, ref } from 'vue'
-import * as m from "../../paraglide/messages.js"
+import * as m from '../../paraglide/messages.js'
 
 const props = defineProps({
   pricing: {
@@ -134,9 +134,7 @@ const totalPrice = computed(() => {
             </p>
           </div>
           <div class="flex flex-col items-center col-span-1 md:col-span-3">
-            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">
-              {{ yearly ? m.yearly() : m.monthly() }} Price
-            </p>
+            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">{{ yearly ? m.yearly() : m.monthly() }} Price</p>
             <p class="p-2 mt-3 text-3xl font-bold text-gray-900 break-all bg-white font-pj rounded-xl">{{ totalPrice }}€</p>
             <p v-show="suggestion" class="mt-0 mt-5 text-sm font-bold tracking-widest text-white font-pj">
               {{ m.we_suggest_you_to_choose_the() }}

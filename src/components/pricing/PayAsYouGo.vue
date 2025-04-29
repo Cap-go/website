@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { numberWithSpaces, toTb, updateCalc } from '@/services/misc'
-import * as m from "../../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '../../paraglide/messages.js'
 
 const props = defineProps({
   payg: {
@@ -27,9 +27,7 @@ const props = defineProps({
           <div class="inline-flex items-center justify-center w-24 h-24 text-8xl">❤️‍🔥</div>
           <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">{{ m.pay_as_you_go() }}</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">
-          +{{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description() }}
-        </p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">+{{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description() }}</p>
       </div>
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">

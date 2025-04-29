@@ -3,44 +3,43 @@ import { locales } from '@/services/locale'
 ---
 
 <div class="relative inline-block text-left">
-    <button
-        type="button"
-        id="language-menu-button"
-        onclick="document.getElementById('language-menu').classList.toggle('hidden');"
-        class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-    >
-        Language
-        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"
-            ></path>
-        </svg>
-    </button>
-    <div
-        role="menu"
-        tabindex="-1"
-        id="language-menu"
-        aria-orientation="vertical"
-        aria-labelledby="language-menu-button"
-        class="absolute right-0 z-10 mt-2 w-56 hidden origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-    >
-        <div class="py-1" role="none">
-            {
-                locales.map((j) => (
-                    <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">
-                        {j.toUpperCase()}
-                    </a>
-                ))
-            }
-        </div>
+  <button
+    type="button"
+    id="language-menu-button"
+    onclick="document.getElementById('language-menu').classList.toggle('hidden');"
+    class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+  >
+    Language
+    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+    </svg>
+  </button>
+  <div
+    role="menu"
+    tabindex="-1"
+    id="language-menu"
+    aria-orientation="vertical"
+    aria-labelledby="language-menu-button"
+    class="absolute right-0 z-10 mt-2 hidden w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+  >
+    <div class="py-1" role="none">
+      {
+        locales.map((j) => (
+          <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">
+            {j.toUpperCase()}
+          </a>
+        ))
+      }
     </div>
+  </div>
 </div>
 
 <script define:vars={{ locales }}>
-    locales.forEach((j) => {
-        document.getElementById(`language_${j}`).addEventListener('click', () => {
-            const tmp = new URL(window.location.href).pathname
-            if (tmp.substring(3, 4) === '/') window.location.href = tmp.replace(tmp.substring(1, 3), j)
-            else window.location.href = '/' + j + tmp
-        })
+  locales.forEach((j) => {
+    document.getElementById(`language_${j}`).addEventListener('click', () => {
+      const tmp = new URL(window.location.href).pathname
+      if (tmp.substring(3, 4) === '/') window.location.href = tmp.replace(tmp.substring(1, 3), j)
+      else window.location.href = '/' + j + tmp
     })
+  })
 </script>

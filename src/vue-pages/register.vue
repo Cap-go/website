@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { type Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
-import * as m from "../paraglide/messages.js"
 import { ref } from 'vue'
 import { toast, Toaster } from 'vue-sonner'
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{
   locale: Locales
@@ -77,7 +77,7 @@ const handleSubmit = async () => {
     return
   }
   if ((window as any).datafast) {
-    (window as any).datafast("signup", { email: email.value });
+    ;(window as any).datafast('signup', { email: email.value })
   }
   window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}`
 }

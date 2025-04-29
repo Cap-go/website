@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
 import { locales, type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { defineComponent, h, onMounted, onUnmounted, ref } from 'vue'
+import * as m from '../paraglide/messages.js'
 
 const isOpen = ref(false)
 const currentPath = ref('')

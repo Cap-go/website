@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AboutMartin from '@/components/AboutMartin.vue'
 import { type Locales } from '@/services/locale'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 </script>
@@ -26,16 +26,12 @@ const props = defineProps<{ locale: Locales }>()
           <h3 class="mb-4 text-2xl font-bold text-white">🚀 {{ m.welcome_to_capgo() }}</h3>
           <p class="mb-6 text-gray-300">
             {{ m.capgo_is_the_cutting_edge_live_update_system_designed_specifically_for_capacitor_applications() }}
-            {{
-              m.we_empower_developers_to_push_updates_instantly_ensuring_your_users_always_have_the_latest_version_of_your_app_without_the_hassle_of_app_store_approvals()
-            }}
+            {{ m.we_empower_developers_to_push_updates_instantly_ensuring_your_users_always_have_the_latest_version_of_your_app_without_the_hassle_of_app_store_approvals() }}
           </p>
           <h3 class="mb-4 text-2xl font-bold text-white">🌱 {{ m.our_story() }}</h3>
           <p class="mb-6 text-gray-300">
             {{ m.capgo_was_born_from_a_real_need_in_the_developer_community() }}
-            {{
-              m.it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustration_with_the_high_costs_of_existing_solutions_like_appflow()
-            }}
+            {{ m.it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustration_with_the_high_costs_of_existing_solutions_like_appflow() }}
             {{ m.this_inspired_me_to_create_an_affordable_efficient_alternative() }}
           </p>
           <a href="https://capgo.app/blog/birth-of-capgo-my-challenging-journey-as-a-solo-maker/" class="text-blue-400 hover:underline">{{

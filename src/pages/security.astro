@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy()].join(' | ')
 const description = m.read_our_security_policy()
@@ -9,12 +9,10 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="px-3 m-auto prose-sm prose text-left">
+  <div class="prose-sm prose m-auto px-3 text-left">
     <h1>{m.security_policy()}</h1>
     <p>
-      {m.contact()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new"
-        >https://github.com/Cap-go/capgo/security/advisories/new</a
-      ><br />
+      {m.contact()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a><br />
       {m.canonical()}: <a href="https://capgo.app/security.txt">https://capgo.app/security.txt</a>
     </p>
     <p>
@@ -49,9 +47,7 @@ const content = { title, description }
     <h2>{m.security_reporting_guidelines_title()}</h2>
     <ul>
       <li>
-        {m.security_reporting_guidelines_1()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new"
-          >https://github.com/Cap-go/capgo/security/advisories/new</a
-        >
+        {m.security_reporting_guidelines_1()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a>
       </li>
       <li>{m.security_reporting_guidelines_2()}</li>
     </ul>

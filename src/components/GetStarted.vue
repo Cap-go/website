@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 </script>
 
 <template>
@@ -12,13 +12,13 @@ import * as m from "../paraglide/messages.js"
         <h1 class="text-3xl sm:text-4xl md:text-[44px] leading-tight text-white font-normal mb-4 sm:mb-6">
           {{ m.instant_updates_for_capacitor_apps() }}
         </h1>
-        
+
         <p class="max-w-3xl mb-6 text-lg font-normal leading-relaxed text-gray-300 sm:mb-8 md:mb-12 sm:text-xl">
           {{ m.instant_updates_for_capacitor_apps_description() }}
         </p>
 
         <a
-          href="/register/" 
+          href="/register/"
           class="inline-flex items-center justify-center w-full px-6 py-3 text-lg text-white transition-colors duration-200 bg-black rounded-lg sm:w-auto sm:px-10 sm:py-4 sm:text-xl hover:bg-gray-800"
         >
           {{ m.get_started_now() }}
@@ -31,7 +31,7 @@ import * as m from "../paraglide/messages.js"
 <style scoped>
 /* Optional: Add custom font if needed */
 h1 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Add a subtle glow effect to the button */

@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VuePrivacy from '@/vue-pages/privacy.vue'
-import * as m from "../paraglide/messages.js"
+import * as m from '../paraglide/messages.js'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.privacy_policy()].join(' | ')
 const description = m.read_our_privacy_policy()
