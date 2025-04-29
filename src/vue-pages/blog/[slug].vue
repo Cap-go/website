@@ -36,7 +36,6 @@ const staticToc: Ref<HTMLElement | null> = ref(null)
 const slots = useSlots() as { default?: () => VNode[] }
 const articleContent = computed(() => {
   let slotNodes = slots.default?.() || []
-  console.info('[DEBUG] Initial slotNodes length:', slotNodes.length)
   return slotNodes
 })
 
