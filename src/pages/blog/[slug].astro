@@ -221,3 +221,39 @@ content['ldJSON'] = {
     </div>
   </div>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let fixedToc = null
+    let staticToc = null
+    let activeSlug = null
+    let isFixedTocVisible = false
+
+    const observeArticleTitles = () => {
+      const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+      for (let i = 0; i < headings.length; i++) {
+        const heading = headings[i]
+        const rect = heading.getBoundingClientRect()
+        if (rect.top <= 50 && rect.bottom >= 50) {
+          const tmp = heading.getAttribute('id')
+          if (tmp) {
+            activeSlug = tmp
+            history.replaceState(null, '', `#${tmp}`)
+            break
+          }
+        }
+      }
+    }
+
+    const handleScroll = () => {
+      if (staticToc && fixedToc) {
+        // @ts-ignore
+        const staticTocRect = staticToc.getBoundingClientRect()
+        isFixedTocVisible = staticTocRect.top <= 80
+      }
+      observeArticleTitles()
+    }
+
+    window.addEventListener('scroll', handleScroll)
+  })
+</script>
