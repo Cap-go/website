@@ -102,8 +102,12 @@ content['ldJSON'] = {
           <div class="flex items-center space-x-4">
             <span
               class="hover:/50 rounded-lg bg-white px-4 py-1.5 text-sm font-medium text-black shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.1)] backdrop-blur transition-all"
-              >{entry.data.tag}</span
-            ><time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">{formatTime(entry.data.updated_at)}</time>
+            >
+              {entry.data.tag}
+            </span>
+            <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
+              {formatTime(entry.data.updated_at)}
+            </time>
           </div>
           <h1 class="font-display mt-5 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-[1.25]">
             {entry.data.title}
@@ -115,7 +119,15 @@ content['ldJSON'] = {
     <div class="relative w-full max-w-7xl overflow-clip px-8 sm:px-10 lg:px-12">
       <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
         <div class="relative col-span-3 md:col-span-2">
-          <img alt={entry.data.title} src={entry.data.head_image} width="1536" height="1024" class="overflow-hidden rounded border border-white/5 object-cover blur-0" />
+          <img
+            loading="eager"
+            decoding="async"
+            alt={entry.data.title}
+            src={entry.data.head_image}
+            width="1536"
+            height="1024"
+            class="overflow-hidden rounded border border-white/5 object-cover blur-0"
+          />
           <article class="prose blog min-w-full">
             <Content />
           </article>
