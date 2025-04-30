@@ -26,7 +26,7 @@ const domain = config.public.baseUrl
     <p>{{ m.tos_definitions_intro({}, { locale: props.locale }) }}</p>
     <ul>
       <li>
-        <p>{{ m.tos_definition_application().replace('$1', brand) }}</p>
+        <p>{{ m.tos_definition_application({}, { locale: props.locale }).replace('$1', brand) }}</p>
       </li>
       <li>
         <p>

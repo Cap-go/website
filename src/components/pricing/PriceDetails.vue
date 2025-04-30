@@ -41,11 +41,11 @@ const props = defineProps<{ locale: Locales }>()
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <h3 class="calc-label" v-html="m.updates_by_month()" />
+            <h3 class="calc-label" v-html="m.updates_by_month({}, { locale: props.locale })" />
             <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation({}, { locale: props.locale }) }}</p>
           </div>
           <div class="flex flex-col items-center">
-            <h3 class="calc-label" v-html="m.updates_size()" />
+            <h3 class="calc-label" v-html="m.updates_size({}, { locale: props.locale })" />
             <p class="mt-3 text-lg text-white font-pj">{{ m.updates_explanation({}, { locale: props.locale }) }}</p>
           </div>
           <div class="flex flex-col items-center lg:col-span-2">

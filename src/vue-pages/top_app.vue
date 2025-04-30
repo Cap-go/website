@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { Locales } from '@/services/locale'
 import { renameCat } from '@/services/misc'
 import { ref } from 'vue'
 import * as m from '../paraglide/messages.js'
 
-const description = m.top_100_app_using_different_framworks_on_android_store()
+const props = defineProps<{ locale: Locales }>()
+
+const description = m.top_100_app_using_different_framworks_on_android_store({}, { locale: props.locale })
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>
 

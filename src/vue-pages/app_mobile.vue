@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
+import type { Locales } from '@/services/locale'
 import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
+const props = defineProps<{
+  locale: Locales
+}>()
 </script>
 
 <template>
@@ -11,7 +15,7 @@ const brand = config.public.brand
     <div class="flex justify-between md:my-20">
       <div class="w-full md:w-1/2">
         <div class="pr-4">
-          <h1 class="text-[2.504rem] font-bold">{{ m.$1_app().replace('$1', brand) }}</h1>
+          <h1 class="text-[2.504rem] font-bold">{{ m.$1_app({}, { locale: props.locale }).replace('$1', brand) }}</h1>
           <p class="mt-8 text-lg text-gray-300">
             {{ m.run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team({}, { locale: props.locale }) }}
           </p>

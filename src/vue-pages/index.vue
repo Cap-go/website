@@ -728,7 +728,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="relative flex flex-col md:flex-row">
             <div class="sm:text-center md:w-1/2">
-              <h3 class="text-3xl tracking-tight text-white sm:text-4xl xl:text-5xl" v-html="m.push_updates_like_your_commits()" />
+              <h3 class="text-3xl tracking-tight text-white sm:text-4xl xl:text-5xl" v-html="m.push_updates_like_your_commits({}, { locale: props.locale })" />
             </div>
             <div class="sm:text-center md:w-1/2">
               <p class="text-xl tracking-tight text-white">

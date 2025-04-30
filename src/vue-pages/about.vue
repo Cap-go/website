@@ -45,7 +45,7 @@ const props = defineProps<{ locale: Locales }>()
             {{ m.this_inspired_me_to_create_an_affordable_efficient_alternative({}, { locale: props.locale }) }}
           </p>
           <a href="https://capgo.app/blog/birth-of-capgo-my-challenging-journey-as-a-solo-maker/" class="text-blue-400 hover:underline">{{
-            m.read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project()
+            m.read_the_full_story_of_capgos_challenging_birth_as_a_solo_maker_project({}, { locale: props.locale })
           }}</a>
         </div>
         <div>

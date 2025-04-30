@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { Locales } from '@/services/locale'
 import * as m from '../paraglide/messages.js'
+
+const props = defineProps<{ locale: Locales }>()
 </script>
 
 <template>

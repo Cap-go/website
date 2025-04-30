@@ -22,27 +22,22 @@ const domain = config.public.baseUrl
     <p>{{ m.definitions_purpose({}, { locale: props.locale }) }}</p>
     <ul>
       <li>
-        <p v-html="m.company_definition"></p>
-        ()
+        <p v-html="m.company_definition({}, { locale: props.locale })"></p>
       </li>
       <li>
-        <p v-html="m.service_definition"></p>
-        ()
+        <p v-html="m.service_definition({}, { locale: props.locale })"></p>
       </li>
       <li>
-        <p v-html="m.you_definition"></p>
-        ()
+        <p v-html="m.you_definition({}, { locale: props.locale })"></p>
       </li>
       <li>
         <p v-html="m.application_definition({ brand: config.public.brand }, { locale: props.locale })"></p>
-        ()
       </li>
     </ul>
     <h2>{{ m.disclaimer_title({}, { locale: props.locale }) }}</h2>
     <p>{{ m.disclaimer_text({}, { locale: props.locale }) }}</p>
     <p>{{ m.company_no_responsibility({}, { locale: props.locale }) }}</p>
-    <p v-html="m.company_no_liability()"></p>
-    ()
+    <p v-html="m.company_no_liability({}, { locale: props.locale })"></p>
     <p>{{ m.no_virus_warranty({}, { locale: props.locale }) }}</p>
     <h2>{{ m.external_links_disclaimer_title({}, { locale: props.locale }) }}</h2>
     <p>{{ m.external_links_disclaimer_text({}, { locale: props.locale }) }}</p>

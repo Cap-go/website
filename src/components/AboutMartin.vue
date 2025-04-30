@@ -11,7 +11,7 @@ const props = defineProps<{ locale: Locales }>()
     <div class="flex flex-col items-start gap-8 md:flex-row">
       <img
         src="/martindonadieu.webp"
-        :alt="m.martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background()"
+        :alt="m.martin_donadieu_on_a_motorcycle_with_a_rainbow_in_the_background({}, { locale: props.locale })"
         class="object-cover w-3/4 h-auto mx-auto rounded-lg md:w-144 md:mx-0"
       />
       <div class="flex-1 space-y-4">
@@ -54,7 +54,7 @@ const props = defineProps<{ locale: Locales }>()
             />
             <a
               :href="getRelativeLocaleUrl(props.locale, 'register')"
-              :title="m.get_quote_now()"
+              :title="m.get_quote_now({}, { locale: props.locale })"
               class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               role="button"
             >

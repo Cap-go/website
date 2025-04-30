@@ -51,7 +51,7 @@ const props = defineProps({
                   <div class="ml-4">
                     <p class="text-lg font-bold text-gray-900 font-pj">{{ m.monthly_active_users({}, { locale: props.locale }) }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      <span class="font-bold">{{ props.payg?.mau.toLocaleString({}, { locale: props.locale }) }}</span>
+                      <span class="font-bold">{{ props.payg?.mau.toLocaleString() }}</span>
                       {{ m.users_included({}, { locale: props.locale }) }}, {{ m.tr_then({}, { locale: props.locale }) }} ${{ props.payg?.mau_unit }}/{{
                         m.user({}, { locale: props.locale })
                       }}
@@ -92,7 +92,7 @@ const props = defineProps({
                   <div class="ml-4">
                     <p class="text-lg font-bold text-gray-900 font-pj">{{ m.cloud_storage({}, { locale: props.locale }) }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
-                      <span class="font-bold">{{ props.payg?.storage.toLocaleString({}, { locale: props.locale }) }}</span>
+                      <span class="font-bold">{{ props.payg?.storage.toLocaleString() }}</span>
                       {{ m.GB_included({}, { locale: props.locale }) }}, {{ m.tr_then({}, { locale: props.locale }) }} ${{ props.payg?.storage_unit }}
                       {{ m.per_GB({}, { locale: props.locale }) }}
                     </p>
@@ -216,7 +216,7 @@ const props = defineProps({
         <div class="flex items-end justify-center mt-10">
           <p class="text-lg font-bold text-gray-400 font-pj">$</p>
           <p class="text-6xl font-bold text-gray-900 font-pj">
-            {{ props.yearly ? props.payg.price_y.toLocaleString() : props.payg?.price_m.toLocaleString({}, { locale: props.locale }) }}
+            {{ props.yearly ? props.payg.price_y.toLocaleString() : props.payg?.price_m.toLocaleString() }}
           </p>
           <p class="text-lg font-bold text-gray-400 font-pj">/{{ m.month({}, { locale: props.locale }) }}</p>
         </div>

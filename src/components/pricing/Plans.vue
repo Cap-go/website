@@ -22,11 +22,11 @@ const props = defineProps({
 function descToText(desc: string) {
   switch (desc) {
     case 'plan.solo.desc':
-      return m.plan_solo_desc()
+      return m.plan_solo_desc({}, { locale: props.locale })
     case 'plan.maker.desc':
-      return m.plan_maker_desc()
+      return m.plan_maker_desc({}, { locale: props.locale })
     case 'plan.team.desc':
-      return m.plan_team_desc()
+      return m.plan_team_desc({}, { locale: props.locale })
     default:
       return desc
   }
@@ -73,7 +73,7 @@ function descToEmoji(desc: string) {
             </span>
             <div class="ml-6">
               <h3 class="text-lg font-semibold text-gray-900">
-                {{ plan.name.toUpperCase({}, { locale: props.locale }) }}
+                {{ plan.name.toUpperCase() }}
               </h3>
               <p class="mt-2 text-sm font-normal text-gray-500">
                 {{ descToText(plan.description) }}
@@ -153,7 +153,7 @@ function descToEmoji(desc: string) {
                   d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
                 />
               </svg>
-              <span v-html="m.priority_support_for_all_capgo_plugins()" />
+              <span v-html="m.priority_support_for_all_capgo_plugins({}, { locale: props.locale })" />
             </li>
           </ul>
         </div>

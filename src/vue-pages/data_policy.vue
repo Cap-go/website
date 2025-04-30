@@ -272,7 +272,7 @@ const domain = config.public.baseUrl
     <p>{{ m.data_policy_ccpa_exercising_rights_contact({}, { locale: props.locale }) }}</p>
     <ul>
       <li>
-        {{ m.data_policy_ccpa_exercising_rights_website().replace('$1', domain) }}
+        {{ m.data_policy_ccpa_exercising_rights_website({}, { locale: props.locale }).replace('$1', domain) }}
       </li>
     </ul>
     <p>{{ m.data_policy_ccpa_exercising_rights_authorized_agent({}, { locale: props.locale }) }}</p>

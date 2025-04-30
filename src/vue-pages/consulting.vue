@@ -57,7 +57,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <div role="listitem">
                 <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
                   <p class="mt-0 mb-2 italic">
-                    <span v-html="m.testimonial_consulting()" />
+                    <span v-html="m.testimonial_consulting({}, { locale: props.locale })" />
                   </p>
                 </div>
                 <img
@@ -207,7 +207,10 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               </h5>
               <p class="mt-0 mb-2">
                 {{
-                  m.our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment()
+                  m.our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment(
+                    {},
+                    { locale: props.locale },
+                  )
                 }}<br />
               </p>
             </div>
@@ -373,7 +376,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
       >
         <div class="flex flex-col items-center justify-center text-center" style="padding-right: 3vw; padding-left: 3vw">
           <h2
-            v-html="m.hire_capacitorjs_consultants().replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)"
+            v-html="m.hire_capacitorjs_consultants({}, { locale: props.locale }).replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)"
             class="relative pb-10 my-0 text-6xl font-medium text-white"
             style="line-height: 72px"
           />
@@ -533,7 +536,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
           />
           <p
             v-html="
-              m.core_contributors_to_capacitorjs_and_ionic().replace(
+              m.core_contributors_to_capacitorjs_and_ionic({}, { locale: props.locale }).replace(
                 'CapacitorJS',
                 `<a
               href='https://capacitorjs.com/'
@@ -566,7 +569,7 @@ const randomOdd = Math.random() < 0.5 ? 0 : 1
               <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">“</p>
               <div class="table clear-both mb-10 text-lg italic font-normal" style="grid-area: 1 / 1 / 2 / 2">
                 <p class="mt-0 mb-2 italic">
-                  <span v-html="m.testimonial_consulting_2()" />
+                  <span v-html="m.testimonial_consulting_2({}, { locale: props.locale })" />
                 </p>
               </div>
               <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="hidden max-w-full mb-4 align-middle border-0" style="border-radius: 100%" />

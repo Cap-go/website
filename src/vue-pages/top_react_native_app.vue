@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
+import type { Locales } from '@/services/locale'
 import { renameCat, shortNumber } from '@/services/misc'
 import { ref } from 'vue'
 import * as m from '../paraglide/messages.js'
 
+const props = defineProps<{ locale: Locales }>()
+
 const usage = ref(5.22)
 const config = useRuntimeConfig()
-const description = m.top_react_native_apps()
+const description = m.top_react_native_apps({}, { locale: props.locale })
 
 const apps = ref<any[]>([])
 
@@ -31,7 +34,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top?mode=reactNative`).then((re
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          {{ m.react_native_power_aproximately_1_of_apps_on_google_play_store().replace('$1', usage.toString()) }}
+          {{ m.react_native_power_aproximately_1_of_apps_on_google_play_store({}, { locale: props.locale }).replace('$1', usage.toString()) }}
         </p>
       </div>
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:max-w-full lg:grid-cols-3">

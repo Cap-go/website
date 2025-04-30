@@ -119,7 +119,7 @@ const handleSubmit = async () => {
                 type="email"
                 required
                 class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                :placeholder="m.email_placeholder()"
+                :placeholder="m.email_placeholder({}, { locale: props.locale })"
               />
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -131,7 +131,7 @@ const handleSubmit = async () => {
                   type="text"
                   required
                   class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                  :placeholder="m.first_name_placeholder()"
+                  :placeholder="m.first_name_placeholder({}, { locale: props.locale })"
                 />
               </div>
               <div>
@@ -142,7 +142,7 @@ const handleSubmit = async () => {
                   type="text"
                   required
                   class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                  :placeholder="m.last_name_placeholder()"
+                  :placeholder="m.last_name_placeholder({}, { locale: props.locale })"
                 />
               </div>
             </div>
@@ -154,7 +154,7 @@ const handleSubmit = async () => {
                 type="password"
                 required
                 class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                :placeholder="m.password_placeholder()"
+                :placeholder="m.password_placeholder({}, { locale: props.locale })"
               />
             </div>
             <div v-if="enableCaptcha">

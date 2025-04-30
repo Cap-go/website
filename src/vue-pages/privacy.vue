@@ -40,7 +40,7 @@ const props = defineProps<{ locale: Locales }>()
         </p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_application().replace('$1', brand) }}</p>
+        <p>{{ m.privacy_definition_application({}, { locale: props.locale }).replace('$1', brand) }}</p>
       </li>
       <li>
         <p>
@@ -160,6 +160,6 @@ const props = defineProps<{ locale: Locales }>()
     <p>{{ m.privacy_changes_to_policy_review({}, { locale: props.locale }) }}</p>
     <h2>{{ m.privacy_contact_us_title({}, { locale: props.locale }) }}</h2>
     <p>{{ m.privacy_contact_us_description({}, { locale: props.locale }) }}</p>
-    <p v-html="m.privacy_contact_us_website().replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
+    <p v-html="m.privacy_contact_us_website({}, { locale: props.locale }).replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
   </div>
 </template>

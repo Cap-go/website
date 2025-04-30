@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
@@ -7,12 +8,16 @@ import * as m from '../paraglide/messages.js'
 const isResending = ref(false)
 getRemoteConfig()
 
+const props = defineProps<{
+  locale: Locales
+}>()
+
 async function handleResend() {
   const urlParams = new URLSearchParams(window.location.search)
   const email = urlParams.get('email')
   console.log('email', email)
   if (!email) {
-    toast.error(m.email_is_required())
+    toast.error(m.email_is_required({}, { locale: props.locale }))
     return
   }
   const { error } = await useSupabase().auth.resend({
@@ -38,7 +43,7 @@ async function handleResend() {
         <p class="mb-6 text-gray-600">
           {{ m.didnt_receive_confirmation_email({}, { locale: props.locale }) }}
           <button @click="handleResend" :disabled="isResending" class="ml-1 font-semibold text-blue-600 focus:outline-none">
-            {{ isResending ? m.resending() : m.resend({}, { locale: props.locale }) }}
+            {{ isResending ? m.resending({}, { locale: props.locale }) : m.resend({}, { locale: props.locale }) }}
           </button>
         </p>
         <a

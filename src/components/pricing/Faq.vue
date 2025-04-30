@@ -28,7 +28,7 @@ const props = defineProps<{ locale: Locales }>()
             <p class="mt-4 text-base text-gray-400">
               {{ m.capgo_usage_explanation({}, { locale: props.locale }) }}
               <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" :href="getRelativeLocaleUrl(props.locale, 'blog/how-your-usage-is-counted')">{{
-                m.here()
+                m.here({}, { locale: props.locale })
               }}</a>
             </p>
           </div>

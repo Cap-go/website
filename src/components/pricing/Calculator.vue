@@ -100,7 +100,7 @@ const totalPrice = computed(() => {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="m.updates_by_month()" />
+            <p class="calc-label" v-html="m.updates_by_month({}, { locale: props.locale })" />
             <input
               v-model.number="updatesByMonth"
               placeholder="0"
@@ -108,7 +108,7 @@ const totalPrice = computed(() => {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="m.updates_size()" />
+            <p class="calc-label" v-html="m.updates_size({}, { locale: props.locale })" />
             <input
               v-model.number="updatesSize"
               placeholder="0"
@@ -116,25 +116,27 @@ const totalPrice = computed(() => {
             />
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="m.updates_total()" />
+            <p class="calc-label" v-html="m.updates_total({}, { locale: props.locale })" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ updates.toLocaleString({}, { locale: props.locale }) }}
+              {{ updates.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="m.bandwidth_gb()" />
+            <p class="calc-label" v-html="m.bandwidth_gb({}, { locale: props.locale })" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ bandwidth.toLocaleString({}, { locale: props.locale }) }}
+              {{ bandwidth.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="calc-label" v-html="m.storage()" />
+            <p class="calc-label" v-html="m.storage({}, { locale: props.locale })" />
             <p class="mt-3 text-3xl font-bold text-white break-all font-pj">
-              {{ storage.toLocaleString({}, { locale: props.locale }) }}
+              {{ storage.toLocaleString() }}
             </p>
           </div>
           <div class="flex flex-col items-center col-span-1 md:col-span-3">
-            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">{{ yearly ? m.yearly() : m.monthly({}, { locale: props.locale }) }} Price</p>
+            <p class="mt-0 mt-5 font-bold tracking-widest text-white uppercase text-md font-pj">
+              {{ yearly ? m.yearly({}, { locale: props.locale }) : m.monthly({}, { locale: props.locale }) }} Price
+            </p>
             <p class="p-2 mt-3 text-3xl font-bold text-gray-900 break-all bg-white font-pj rounded-xl">{{ totalPrice }}€</p>
             <p v-show="suggestion" class="mt-0 mt-5 text-sm font-bold tracking-widest text-white font-pj">
               {{ m.we_suggest_you_to_choose_the({}, { locale: props.locale }) }}
