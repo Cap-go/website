@@ -128,7 +128,7 @@ Inspect.dev is designed to simplify debugging for both Android and iOS, includin
 
 Priced at $49/year after a 14-day trial, Inspect.dev integrates seamlessly with Chrome DevTools, making it a great choice for teams working across multiple operating systems. While it has a few limitations, its features make it a solid addition to any developer's toolbox.
 
-###### sbb-itb-f9944d2
+
 
 ## Tool Comparison Guide
 

@@ -120,6 +120,7 @@ content['ldJSON'] = {
       <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
         <div class="relative col-span-3 md:col-span-2">
           <img
+            id="blogImage"
             loading="eager"
             decoding="async"
             alt={entry.data.title}
@@ -153,7 +154,7 @@ content['ldJSON'] = {
           </div>
           {
             headings?.length > 0 && (
-              <div class="sticky top-16 pb-8 pt-4">
+              <div id="staticToc" class="sticky top-16 pb-8 pt-4">
                 <div>
                   <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-500">
                     <svg
@@ -236,10 +237,7 @@ content['ldJSON'] = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    let fixedToc = null
-    let staticToc = null
     let activeSlug = null
-    let isFixedTocVisible = false
 
     const observeArticleTitles = () => {
       const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
@@ -258,10 +256,20 @@ content['ldJSON'] = {
     }
 
     const handleScroll = () => {
-      if (staticToc && fixedToc) {
-        // @ts-ignore
+      const staticToc = document.querySelector('#staticToc')
+      const blogImage = document.querySelector('#blogImage')
+      const articleEnd = document.querySelector('article.prose')
+      if (staticToc && blogImage && articleEnd) {
+        const blogImageRect = blogImage.getBoundingClientRect()
+        const articleEndRect = articleEnd.getBoundingClientRect()
         const staticTocRect = staticToc.getBoundingClientRect()
-        isFixedTocVisible = staticTocRect.top <= 80
+        if (blogImageRect.bottom <= 0 && articleEndRect.bottom > staticTocRect.height) {
+          staticToc.classList.remove('sticky')
+          staticToc.classList.add('fixed')
+        } else {
+          staticToc.classList.add('sticky')
+          staticToc.classList.remove('fixed')
+        }
       }
       observeArticleTitles()
     }

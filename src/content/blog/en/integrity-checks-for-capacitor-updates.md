@@ -67,7 +67,7 @@ Capgo offers a streamlined and secure solution for managing OTA updates. With ov
 
 To get started, install the Capgo plugin using `npx @capgo/cli init`. This enables automatic verification of updates when the app starts. For iOS, Capgo includes a custom Dart interpreter to meet platform-specific requirements [\[3\]](https://capgo.app/docs/faq/).
 
-###### sbb-itb-f9944d2
+
 
 ## Cryptographic Security Methods
 

@@ -88,7 +88,7 @@ Key metrics to keep an eye on include:
 
 Once your monitoring tools are in place, the next step is setting up technical tracking with update listeners and performance metrics. This ensures you stay ahead of potential issues and maintain a seamless user experience.
 
-###### sbb-itb-f9944d2
+
 
 ## Setting Up Update Monitoring
 

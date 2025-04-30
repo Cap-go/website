@@ -54,7 +54,7 @@ Updating apps can be tricky due to device compatibility and app store delays. So
 3.  **Deploy Strategically**: Use phased rollouts and feature flags to minimize risks.
     
 
-###### sbb-itb-f9944d2
+
 
 ## Preparing for Live App Updates
 

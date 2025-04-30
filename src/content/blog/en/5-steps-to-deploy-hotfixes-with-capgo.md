@@ -127,7 +127,7 @@ Capgo’s [update management](https://capgo.app/docs/plugin/cloud-mode/manual-up
 
 Once your hotfix is uploaded and labeled, move on to Step 4 to configure your update settings.
 
-###### sbb-itb-f9944d2
+
 
 ## Capgo Live Update System for [Capacitor](https://capacitorjs.com/) Apps
 

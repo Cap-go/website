@@ -118,7 +118,7 @@ Even with smaller file sizes, update speed is still a major factor. iOS often ha
 
 To improve update efficiency, strategies like differential updates and leveraging native functionality are key. Capacitor, for example, shifts certain operations to the native layer. When paired with differential updates, this approach cuts down both update times and data usage [\[12\]](https://ionic.io/blog/the-future-of-live-updates-is-here-and-its-more-performant-than-ever). Considering Android's dominant market share - over 70% globally as of March 2023 [\[13\]](https://flexiple.com/compare/android-vs-ios) - delivering efficient updates is especially important to maintain consistent performance across its varied devices.
 
-###### sbb-itb-f9944d2
+
 
 ## Security Rules and Requirements
 
