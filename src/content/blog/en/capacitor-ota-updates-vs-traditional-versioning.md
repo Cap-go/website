@@ -125,7 +125,7 @@ Capgo is a top-tier OTA solution for Capacitor apps, offering tools to simplify 
 
 Capgo also offers cost savings. Businesses can save up to $26,100 over five years compared to alternatives like [AppFlow](https://ionic.io/appflow/) - all while maintaining reliable update capabilities.
 
-###### sbb-itb-f9944d2
+
 
 ## Direct Comparison: OTA vs App Store Updates
 

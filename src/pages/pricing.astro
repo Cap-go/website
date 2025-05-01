@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import VuePricing from '@/vue-pages/pricing.vue'
 import * as m from '../paraglide/messages.js'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.pricing()].join(' | ')
-const description = m.pricing_description()
+const title = [Astro.locals.runtimeConfig.public.brand, m.pricing({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.pricing_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---

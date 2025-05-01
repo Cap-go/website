@@ -21,9 +21,9 @@ onMounted(() => {
 
 <template>
   <div class="z-10 flex flex-col w-full mt-24 mb-24 md:items-center">
-    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">{{ actions.length }} {{ m.powerful_app_plugins() }}</h1>
+    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">{{ actions.length }} {{ m.powerful_app_plugins({}, { locale: props.locale }) }}</h1>
     <h2 class="mt-8 max-w-full px-10 text-2xl font-light md:text-center lg:max-w-[75%]">
-      {{ m.powerful_app_plugins_description() }}
+      {{ m.powerful_app_plugins_description({}, { locale: props.locale }) }}
     </h2>
     <div v-if="plugins" class="flex flex-col items-start w-full px-10 mt-12 sm:mt-24 sm:flex-row sm:justify-center lg:max-w-6xl xl:px-0">
       <div class="grid grid-cols-1 gap-4 mt-8 sm:mt-0 md:grid-cols-2 xl:grid-cols-3">

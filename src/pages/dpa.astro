@@ -3,8 +3,8 @@ import VueDpa from '@/vue-pages/dpa.vue'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '../paraglide/messages.js'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.data_processing_agreement()].join(' | ')
-const description = m.read_our_data_processing_agreement()
+const title = [Astro.locals.runtimeConfig.public.brand, m.data_processing_agreement({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.read_our_data_processing_agreement({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---

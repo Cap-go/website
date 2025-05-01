@@ -1,7 +1,7 @@
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
-import paraglide from '@inlang/paraglide-astro'
+import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import UnoCSS from '@unocss/astro'
 import AstroPWA from '@vite-pwa/astro'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
@@ -26,6 +26,13 @@ export default defineConfig({
       destination: '/docs/getting-started/quickstart',
     },
   },
+  plugins: [
+    paraglideVitePlugin({
+      outdir: './src/paraglide',
+      project: './project.inlang',
+      disableAsyncLocalStorage: true,
+    }),
+  ],
   i18n: {
     locales,
     defaultLocale,
@@ -40,10 +47,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    paraglide({
-      outdir: './src/paraglide',
-      project: './project.inlang',
-    }),
     i18n({
       locales: localeNames,
       defaultLocale,
@@ -67,9 +70,12 @@ export default defineConfig({
     }),
     AstroPWA(pwa),
     starlight({
-      disable404Route: true,
       title: 'Capgo',
+      disable404Route: true,
       favicon: '/favicon.svg',
+      expressiveCode: {
+        themes: ['github-dark'],
+      },
       logo: { src: './logo.svg' },
       customCss: ['./src/css/global.css'],
       components: {

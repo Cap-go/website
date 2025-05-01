@@ -34,21 +34,21 @@ const menuMobile = ref(false)
             title="Pricing"
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ m.pricing() }}
+            {{ m.pricing({}, { locale: props.locale }) }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'blog')"
             title="Blog"
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ m.blog() }}
+            {{ m.blog({}, { locale: props.locale }) }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'docs')"
             title="Documentation"
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ m.documentation() }}
+            {{ m.documentation({}, { locale: props.locale }) }}
           </a>
           <a
             href="https://web.capgo.app/login/"
@@ -56,7 +56,7 @@ const menuMobile = ref(false)
             target="_blank"
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
-            {{ m.login() }}
+            {{ m.login({}, { locale: props.locale }) }}
           </a>
           <a
             :href="getRelativeLocaleUrl(props.locale, 'register')"
@@ -65,7 +65,7 @@ const menuMobile = ref(false)
             class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 font-pj rounded-xl hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
             role="button"
           >
-            {{ m.register() }}
+            {{ m.register({}, { locale: props.locale }) }}
           </a>
         </div>
       </div>
@@ -74,21 +74,21 @@ const menuMobile = ref(false)
       <div class="px-2 pt-2 pb-3 mt-2 space-y-1 bg-gray-700">
         <a
           :href="getRelativeLocaleUrl(props.locale, 'pricing')"
-          :title="m.pricing()"
+          :title="m.pricing({}, { locale: props.locale })"
           class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Pricing
         </a>
         <a
           :href="getRelativeLocaleUrl(props.locale, 'blog')"
-          :title="m.blog()"
+          :title="m.blog({}, { locale: props.locale })"
           class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Blog
         </a>
         <a
           :href="getRelativeLocaleUrl(props.locale, 'docs')"
-          :title="m.documentation()"
+          :title="m.documentation({}, { locale: props.locale })"
           class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Documentation
@@ -96,7 +96,7 @@ const menuMobile = ref(false)
         <a
           href="https://web.capgo.app/login/"
           target="_blank"
-          :title="m.login()"
+          :title="m.login({}, { locale: props.locale })"
           class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
         >
           Login
@@ -104,7 +104,7 @@ const menuMobile = ref(false)
         <a
           :href="getRelativeLocaleUrl(props.locale, 'register')"
           target="_blank"
-          :title="m.register()"
+          :title="m.register({}, { locale: props.locale })"
           class="block px-5 py-2 text-base font-medium font-semibold leading-7 text-white text-gray-300 transition-all duration-200 bg-transparent bg-gray-900 border border-gray-300 rounded-md font-pj rounded-xl hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
         >
           Register

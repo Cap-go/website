@@ -28,7 +28,7 @@
   "app_mobile": "App mobile",
   "app_store_compliant": "App Store compliant",
   "appflow_6000_annually": "AppFlow $6,000 annually.",
-  "application_definition": "<strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device named {{ brand }}.",
+  "application_definition": "<strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device named {brand}.",
   "application_definition_refund": "Application means the software program provided by the Company downloaded by You on any electronic device, named $1",
   "apps": "Apps",
   "apps_with_20m_users": "Apps with 20M+ users",

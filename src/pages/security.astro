@@ -2,75 +2,78 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '../paraglide/messages.js'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy()].join(' | ')
-const description = m.read_our_security_policy()
+const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.read_our_security_policy({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
   <div class="prose-sm prose m-auto px-3 text-left">
-    <h1>{m.security_policy()}</h1>
+    <h1>{m.security_policy({}, { locale: Astro.locals.locale })}</h1>
     <p>
-      {m.contact()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a><br />
-      {m.canonical()}: <a href="https://capgo.app/security.txt">https://capgo.app/security.txt</a>
+      {m.contact({}, { locale: Astro.locals.locale })}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a
+      ><br />
+      {m.canonical({}, { locale: Astro.locals.locale })}: <a href="https://capgo.app/security.txt">https://capgo.app/security.txt</a>
     </p>
     <p>
-      {m.security_intro()}
+      {m.security_intro({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.security_discovery()}
+      {m.security_discovery({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.security_out_of_scope_title()}</h2>
+    <h2>{m.security_out_of_scope_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
-      <li>{m.security_out_of_scope_1()}</li>
-      <li>{m.security_out_of_scope_2()}</li>
-      <li>{m.security_out_of_scope_3()}</li>
-      <li>{m.security_out_of_scope_4()}</li>
-      <li>{m.security_out_of_scope_5()}</li>
-      <li>{m.security_out_of_scope_6()}</li>
-      <li>{m.security_out_of_scope_7()}</li>
-      <li>{m.security_out_of_scope_8()}</li>
-      <li>{m.security_out_of_scope_9()}</li>
-      <li>{m.security_out_of_scope_10()}</li>
-      <li>{m.security_out_of_scope_11()}</li>
+      <li>{m.security_out_of_scope_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_4({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_5({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_6({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_7({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_8({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_9({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_10({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_out_of_scope_11({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <h2>{m.security_testing_guidelines_title()}</h2>
+    <h2>{m.security_testing_guidelines_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
       <li>
-        {m.security_testing_guidelines_1()}
+        {m.security_testing_guidelines_1({}, { locale: Astro.locals.locale })}
       </li>
       <li>
-        {m.security_testing_guidelines_2()}
+        {m.security_testing_guidelines_2({}, { locale: Astro.locals.locale })}
       </li>
     </ul>
-    <h2>{m.security_reporting_guidelines_title()}</h2>
+    <h2>{m.security_reporting_guidelines_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
       <li>
-        {m.security_reporting_guidelines_1()}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a>
+        {m.security_reporting_guidelines_1({}, { locale: Astro.locals.locale })}: <a href="https://github.com/Cap-go/capgo/security/advisories/new"
+          >https://github.com/Cap-go/capgo/security/advisories/new</a
+        >
       </li>
-      <li>{m.security_reporting_guidelines_2()}</li>
+      <li>{m.security_reporting_guidelines_2({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <h2>{m.security_disclosure_guidelines_title()}</h2>
+    <h2>{m.security_disclosure_guidelines_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
-      <li>{m.security_disclosure_guidelines_1()}</li>
+      <li>{m.security_disclosure_guidelines_1({}, { locale: Astro.locals.locale })}</li>
       <li>
-        {m.security_disclosure_guidelines_2()}
+        {m.security_disclosure_guidelines_2({}, { locale: Astro.locals.locale })}
         <ul>
-          <li>{m.security_disclosure_guidelines_2_1()}</li>
-          <li>{m.security_disclosure_guidelines_2_2()}</li>
-          <li>{m.security_disclosure_guidelines_2_3()}</li>
+          <li>{m.security_disclosure_guidelines_2_1({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.security_disclosure_guidelines_2_2({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.security_disclosure_guidelines_2_3({}, { locale: Astro.locals.locale })}</li>
         </ul>
       </li>
     </ul>
-    <h2>{m.security_what_we_promise_title()}</h2>
+    <h2>{m.security_what_we_promise_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
-      <li>{m.security_what_we_promise_1()}</li>
-      <li>{m.security_what_we_promise_2()}</li>
-      <li>{m.security_what_we_promise_3()}</li>
-      <li>{m.security_what_we_promise_4()}</li>
-      <li>{m.security_what_we_promise_5()}</li>
+      <li>{m.security_what_we_promise_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_what_we_promise_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_what_we_promise_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_what_we_promise_4({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.security_what_we_promise_5({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <p>{m.security_closing()}</p>
+    <p>{m.security_closing({}, { locale: Astro.locals.locale })}</p>
   </div>
 </Layout>

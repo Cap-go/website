@@ -15,151 +15,151 @@ const props = defineProps<{ locale: Locales }>()
     <span class="text-xs" v-if="props.locale !== defaultLocale">
       Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English source.
     </span>
-    <h1>{{ m.privacy_title() }}</h1>
-    <p>{{ m.privacy_last_updated() }}</p>
+    <h1>{{ m.privacy_title({}, { locale: props.locale }) }}</h1>
+    <p>{{ m.privacy_last_updated({}, { locale: props.locale }) }}</p>
     <p>
-      {{ m.privacy_description() }}
+      {{ m.privacy_description({}, { locale: props.locale }) }}
     </p>
     <p>
-      {{ m.privacy_agreement() }}
+      {{ m.privacy_agreement({}, { locale: props.locale }) }}
     </p>
-    <h2>{{ m.privacy_interpretation_title() }}</h2>
-    <h3>{{ m.privacy_interpretation_subtitle() }}</h3>
+    <h2>{{ m.privacy_interpretation_title({}, { locale: props.locale }) }}</h2>
+    <h3>{{ m.privacy_interpretation_subtitle({}, { locale: props.locale }) }}</h3>
     <p>
-      {{ m.privacy_interpretation_text() }}
+      {{ m.privacy_interpretation_text({}, { locale: props.locale }) }}
     </p>
-    <h3>{{ m.privacy_definitions_subtitle() }}</h3>
-    <p>{{ m.privacy_definitions_intro() }}</p>
+    <h3>{{ m.privacy_definitions_subtitle({}, { locale: props.locale }) }}</h3>
+    <p>{{ m.privacy_definitions_intro({}, { locale: props.locale }) }}</p>
     <ul>
       <li>
-        <p>{{ m.privacy_definition_account() }}</p>
+        <p>{{ m.privacy_definition_account({}, { locale: props.locale }) }}</p>
       </li>
       <li>
         <p>
-          {{ m.privacy_definition_affiliate() }}
+          {{ m.privacy_definition_affiliate({}, { locale: props.locale }) }}
         </p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_application().replace('$1', brand) }}</p>
+        <p>{{ m.privacy_definition_application({}, { locale: props.locale }).replace('$1', brand) }}</p>
       </li>
       <li>
         <p>
-          {{ m.privacy_definition_business() }}
+          {{ m.privacy_definition_business({}, { locale: props.locale }) }}
         </p>
       </li>
       <li>
         <p>
-          {{ m.privacy_definition_company() }}
+          {{ m.privacy_definition_company({}, { locale: props.locale }) }}
         </p>
-        <p>{{ m.privacy_definition_company_gdpr() }}</p>
+        <p>{{ m.privacy_definition_company_gdpr({}, { locale: props.locale }) }}</p>
       </li>
       <li>
         <p>
-          {{ m.privacy_definition_consumer() }}
+          {{ m.privacy_definition_consumer({}, { locale: props.locale }) }}
         </p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_country() }}</p>
+        <p>{{ m.privacy_definition_country({}, { locale: props.locale }) }}</p>
       </li>
       <li>
         <p>
-          {{ m.privacy_definition_data_controller() }}
+          {{ m.privacy_definition_data_controller({}, { locale: props.locale }) }}
         </p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_device() }}</p>
+        <p>{{ m.privacy_definition_device({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_do_not_track() }}</p>
+        <p>{{ m.privacy_definition_do_not_track({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_personal_data() }}</p>
-        <p>{{ m.privacy_definition_personal_data_gdpr() }}</p>
-        <p>{{ m.privacy_definition_personal_data_ccpa() }}</p>
+        <p>{{ m.privacy_definition_personal_data({}, { locale: props.locale }) }}</p>
+        <p>{{ m.privacy_definition_personal_data_gdpr({}, { locale: props.locale }) }}</p>
+        <p>{{ m.privacy_definition_personal_data_ccpa({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_sale() }}</p>
+        <p>{{ m.privacy_definition_sale({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_service() }}</p>
+        <p>{{ m.privacy_definition_service({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_service_provider() }}</p>
+        <p>{{ m.privacy_definition_service_provider({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_usage_data() }}</p>
+        <p>{{ m.privacy_definition_usage_data({}, { locale: props.locale }) }}</p>
       </li>
       <li>
-        <p>{{ m.privacy_definition_you() }}</p>
-        <p>{{ m.privacy_definition_you_gdpr() }}</p>
+        <p>{{ m.privacy_definition_you({}, { locale: props.locale }) }}</p>
+        <p>{{ m.privacy_definition_you_gdpr({}, { locale: props.locale }) }}</p>
       </li>
     </ul>
-    <h2>{{ m.privacy_collecting_data_title() }}</h2>
-    <h3>{{ m.privacy_types_of_data_title() }}</h3>
-    <h4>{{ m.privacy_personal_data_title() }}</h4>
-    <p>{{ m.privacy_personal_data_description() }}</p>
-    <p>{{ m.privacy_personal_data_usage() }}</p>
-    <h4>{{ m.privacy_usage_data_title() }}</h4>
-    <p>{{ m.privacy_usage_data_description() }}</p>
-    <p>{{ m.privacy_usage_data_details() }}</p>
-    <p>{{ m.privacy_usage_data_mobile() }}</p>
-    <p>{{ m.privacy_usage_data_browser() }}</p>
-    <h2>{{ m.privacy_use_of_data_title() }}</h2>
-    <p>{{ m.privacy_use_of_data_intro() }}</p>
+    <h2>{{ m.privacy_collecting_data_title({}, { locale: props.locale }) }}</h2>
+    <h3>{{ m.privacy_types_of_data_title({}, { locale: props.locale }) }}</h3>
+    <h4>{{ m.privacy_personal_data_title({}, { locale: props.locale }) }}</h4>
+    <p>{{ m.privacy_personal_data_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_personal_data_usage({}, { locale: props.locale }) }}</p>
+    <h4>{{ m.privacy_usage_data_title({}, { locale: props.locale }) }}</h4>
+    <p>{{ m.privacy_usage_data_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_usage_data_details({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_usage_data_mobile({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_usage_data_browser({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_use_of_data_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_use_of_data_intro({}, { locale: props.locale }) }}</p>
     <ul>
-      <li>{{ m.privacy_use_of_data_provide_service() }}</li>
-      <li>{{ m.privacy_use_of_data_manage_account() }}</li>
-      <li>{{ m.privacy_use_of_data_performance() }}</li>
-      <li>{{ m.privacy_use_of_data_contact() }}</li>
-      <li>{{ m.privacy_use_of_data_offers() }}</li>
-      <li>{{ m.privacy_use_of_data_requests() }}</li>
-      <li>{{ m.privacy_use_of_data_business_transfers() }}</li>
-      <li>{{ m.privacy_use_of_data_other_purposes() }}</li>
+      <li>{{ m.privacy_use_of_data_provide_service({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_manage_account({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_performance({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_contact({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_offers({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_requests({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_business_transfers({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_use_of_data_other_purposes({}, { locale: props.locale }) }}</li>
     </ul>
-    <p>{{ m.privacy_share_of_data_intro() }}</p>
+    <p>{{ m.privacy_share_of_data_intro({}, { locale: props.locale }) }}</p>
     <ul>
-      <li>{{ m.privacy_share_of_data_service_providers() }}</li>
-      <li>{{ m.privacy_share_of_data_business_transfers() }}</li>
-      <li>{{ m.privacy_share_of_data_affiliates() }}</li>
-      <li>{{ m.privacy_share_of_data_business_partners() }}</li>
-      <li>{{ m.privacy_share_of_data_other_users() }}</li>
-      <li>{{ m.privacy_share_of_data_consent() }}</li>
+      <li>{{ m.privacy_share_of_data_service_providers({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_share_of_data_business_transfers({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_share_of_data_affiliates({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_share_of_data_business_partners({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_share_of_data_other_users({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_share_of_data_consent({}, { locale: props.locale }) }}</li>
     </ul>
-    <h2>{{ m.privacy_retention_of_data_title() }}</h2>
-    <p>{{ m.privacy_retention_of_data_description() }}</p>
-    <p>{{ m.privacy_retention_of_usage_data() }}</p>
-    <h2>{{ m.privacy_transfer_of_data_title() }}</h2>
-    <p>{{ m.privacy_transfer_of_data_description() }}</p>
-    <p>{{ m.privacy_transfer_of_data_consent() }}</p>
-    <p>{{ m.privacy_transfer_of_data_safeguards() }}</p>
-    <h2>{{ m.privacy_disclosure_of_data_title() }}</h2>
-    <h3>{{ m.privacy_disclosure_business_transactions_title() }}</h3>
-    <p>{{ m.privacy_disclosure_business_transactions_description() }}</p>
-    <h3>{{ m.privacy_disclosure_law_enforcement_title() }}</h3>
-    <p>{{ m.privacy_disclosure_law_enforcement_description() }}</p>
-    <h3>{{ m.privacy_disclosure_other_legal_requirements_title() }}</h3>
-    <p>{{ m.privacy_disclosure_other_legal_requirements_description() }}</p>
+    <h2>{{ m.privacy_retention_of_data_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_retention_of_data_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_retention_of_usage_data({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_transfer_of_data_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_transfer_of_data_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_transfer_of_data_consent({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_transfer_of_data_safeguards({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_disclosure_of_data_title({}, { locale: props.locale }) }}</h2>
+    <h3>{{ m.privacy_disclosure_business_transactions_title({}, { locale: props.locale }) }}</h3>
+    <p>{{ m.privacy_disclosure_business_transactions_description({}, { locale: props.locale }) }}</p>
+    <h3>{{ m.privacy_disclosure_law_enforcement_title({}, { locale: props.locale }) }}</h3>
+    <p>{{ m.privacy_disclosure_law_enforcement_description({}, { locale: props.locale }) }}</p>
+    <h3>{{ m.privacy_disclosure_other_legal_requirements_title({}, { locale: props.locale }) }}</h3>
+    <p>{{ m.privacy_disclosure_other_legal_requirements_description({}, { locale: props.locale }) }}</p>
     <ul>
-      <li>{{ m.privacy_disclosure_other_legal_requirements_comply() }}</li>
-      <li>{{ m.privacy_disclosure_other_legal_requirements_protect() }}</li>
-      <li>{{ m.privacy_disclosure_other_legal_requirements_prevent() }}</li>
-      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_personal() }}</li>
-      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_legal() }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_comply({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_prevent({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_personal({}, { locale: props.locale }) }}</li>
+      <li>{{ m.privacy_disclosure_other_legal_requirements_protect_legal({}, { locale: props.locale }) }}</li>
     </ul>
-    <h2>{{ m.privacy_security_of_data_title() }}</h2>
-    <p>{{ m.privacy_security_of_data_description() }}</p>
-    <h2>{{ m.privacy_children_privacy_title() }}</h2>
-    <p>{{ m.privacy_children_privacy_description() }}</p>
-    <p>{{ m.privacy_children_privacy_consent() }}</p>
-    <h2>{{ m.privacy_links_to_other_websites_title() }}</h2>
-    <p>{{ m.privacy_links_to_other_websites_description() }}</p>
-    <p>{{ m.privacy_links_to_other_websites_control() }}</p>
-    <h2>{{ m.privacy_changes_to_policy_title() }}</h2>
-    <p>{{ m.privacy_changes_to_policy_description() }}</p>
-    <p>{{ m.privacy_changes_to_policy_notification() }}</p>
-    <p>{{ m.privacy_changes_to_policy_review() }}</p>
-    <h2>{{ m.privacy_contact_us_title() }}</h2>
-    <p>{{ m.privacy_contact_us_description() }}</p>
-    <p v-html="m.privacy_contact_us_website().replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
+    <h2>{{ m.privacy_security_of_data_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_security_of_data_description({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_children_privacy_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_children_privacy_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_children_privacy_consent({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_links_to_other_websites_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_links_to_other_websites_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_links_to_other_websites_control({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_changes_to_policy_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_changes_to_policy_description({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_changes_to_policy_notification({}, { locale: props.locale }) }}</p>
+    <p>{{ m.privacy_changes_to_policy_review({}, { locale: props.locale }) }}</p>
+    <h2>{{ m.privacy_contact_us_title({}, { locale: props.locale }) }}</h2>
+    <p>{{ m.privacy_contact_us_description({}, { locale: props.locale }) }}</p>
+    <p v-html="m.privacy_contact_us_website({}, { locale: props.locale }).replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)" />
   </div>
 </template>

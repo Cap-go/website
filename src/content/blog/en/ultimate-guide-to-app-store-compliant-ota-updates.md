@@ -141,7 +141,7 @@ To stay compliant:
 
 Following these rules helps ensure your updates meet platform requirements while keeping users happy and informed.
 
-###### sbb-itb-f9944d2
+
 
 ## Setting Up Store-Approved Updates
 

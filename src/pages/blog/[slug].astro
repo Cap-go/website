@@ -1,9 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueBlogSlug from '@/vue-pages/blog/[slug].vue'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
+import { formatTime } from '@/config/app'
 import striptags from 'striptags'
+import GetStarted from '@/components/GetStarted.vue'
+import Blog from '@/components/Blog.vue'
+import * as m from '@/paraglide/messages.js'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const blogs = await getCollection('blog')
@@ -33,13 +37,13 @@ if (!entry) {
       return new Response(
         `<!doctype html>
 <title>Redirecting to: /blog/${Astro.params.slug}</title>
-<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}">
+<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}/">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}">
+<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}/">
 <body>
-	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}</code></a>
+	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
 </body>`,
-        { status: 302 },
+        { status: 302, headers: { 'Content-Type': 'text/html' } },
       )
   }
   console.log(`entry is not found for: ${Astro.url.pathname}`)
@@ -91,7 +95,185 @@ content['ldJSON'] = {
 ---
 
 <Layout content={content}>
-  <VueBlogSlug client:load {related} {headings} {...entry.data}>
-    <Content />
-  </VueBlogSlug>
+  <div class="flex w-full flex-col items-center">
+    <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
+      <div class="relative z-0 mx-auto pb-12 pt-16">
+        <div class="relative max-w-screen-sm">
+          <div class="flex items-center space-x-4">
+            <span
+              class="hover:/50 rounded-lg bg-white px-4 py-1.5 text-sm font-medium text-black shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.1)] backdrop-blur transition-all"
+            >
+              {entry.data.tag}
+            </span>
+            <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
+              {formatTime(entry.data.updated_at)}
+            </time>
+          </div>
+          <h1 class="font-display mt-5 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-[1.25]">
+            {entry.data.title}
+          </h1>
+          <p class="mt-5 text-gray-400 sm:text-lg">{entry.data.description}</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative w-full max-w-7xl overflow-clip px-8 sm:px-10 lg:px-12">
+      <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
+        <div class="relative col-span-3 md:col-span-2">
+          <img
+            id="blogImage"
+            loading="eager"
+            decoding="async"
+            alt={entry.data.title}
+            src={entry.data.head_image}
+            width="1536"
+            height="1024"
+            class="overflow-hidden rounded border border-white/5 object-cover blur-0"
+          />
+          <article class="prose blog min-w-full">
+            <Content />
+          </article>
+        </div>
+        <div class="right-0 hidden px-10 sm:block">
+          <div class="relative flex flex-col gap-y-4 pb-5">
+            <p class="text-sm text-gray-600">Written by</p>
+            <a class="group flex items-center space-x-3" href="/authors/arvind">
+              <img
+                width="36"
+                height="36"
+                loading="lazy"
+                decoding="async"
+                alt={entry.data.author}
+                src={entry.data.author_image_url}
+                class="rounded-full blur-0 transition-all group-hover:brightness-90"
+              />
+              <div class="flex flex-col">
+                <p class="whitespace-nowrap text-sm font-medium text-gray-400">{entry.data.author}</p>
+                <p class="text-sm text-gray-500">Content Marketer</p>
+              </div>
+            </a>
+          </div>
+          {
+            headings?.length > 0 && (
+              <div id="staticToc" class="sticky top-16 pb-8 pt-4">
+                <div>
+                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-500">
+                    <svg
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="lucide lucide-align-left h-4 w-4"
+                    >
+                      <line x1="21" x2="3" y1="6" y2="6" />
+                      <line x1="15" x2="3" y1="12" y2="12" />
+                      <line x1="17" x2="3" y1="18" y2="18" />
+                    </svg>
+                    On this page
+                  </p>
+                  <div class="mt-4 grid gap-4 border-l border-gray-600">
+                    {headings.map((k) => (
+                      <a class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
+                        {k.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </div>
+      <GetStarted locale={Astro.locals.locale} />
+      <div class="mx-auto max-w-xl text-center">
+        <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</h2>
+        <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
+          {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
+        </p>
+      </div>
+      {
+        related.length > 0 && (
+          <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
+            {related.map((article) => (
+              <Blog
+                tag={article.data.tag}
+                link={article.data.slug}
+                title={article.data.title}
+                locale={article.data.locale}
+                date={article.data.created_at}
+                image={article.data.head_image}
+              />
+            ))}
+          </div>
+        )
+      }
+      <div class="my-12 text-center">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
+          class="group inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline"
+        >
+          {m.see_all_from_our_blog({}, { locale: Astro.locals.locale })}
+          <svg
+            class="ml-1 h-5 w-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let activeSlug = null
+
+    const observeArticleTitles = () => {
+      const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+      for (let i = 0; i < headings.length; i++) {
+        const heading = headings[i]
+        const rect = heading.getBoundingClientRect()
+        if (rect.top <= 50 && rect.bottom >= 50) {
+          const tmp = heading.getAttribute('id')
+          if (tmp) {
+            activeSlug = tmp
+            history.replaceState(null, '', `#${tmp}`)
+            break
+          }
+        }
+      }
+    }
+
+    const handleScroll = () => {
+      const staticToc = document.querySelector('#staticToc')
+      const blogImage = document.querySelector('#blogImage')
+      const articleEnd = document.querySelector('article.prose')
+      if (staticToc && blogImage && articleEnd) {
+        const blogImageRect = blogImage.getBoundingClientRect()
+        const articleEndRect = articleEnd.getBoundingClientRect()
+        const staticTocRect = staticToc.getBoundingClientRect()
+        if (blogImageRect.bottom <= 0 && articleEndRect.bottom > staticTocRect.height) {
+          staticToc.classList.remove('sticky')
+          staticToc.classList.add('fixed')
+        } else {
+          staticToc.classList.add('sticky')
+          staticToc.classList.remove('fixed')
+        }
+      }
+      observeArticleTitles()
+    }
+
+    window.addEventListener('scroll', handleScroll)
+  })
+</script>

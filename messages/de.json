@@ -35,7 +35,7 @@
   "app_store_rating_good": "\"Liebe die App!\" - 5★ App Store Bewertung",
   "appflow_6000_annually": "AppFlow 6.000 $ jährlich.",
   "apple_compliant": "Apple-konform",
-  "application_definition": "<strong>Anwendung</strong> bezeichnet das von der Firma bereitgestellte Softwareprogramm, das von Ihnen auf einem elektronischen Gerät mit dem Namen {{ brand }} heruntergeladen wurde.",
+  "application_definition": "<strong>Anwendung</strong> bezeichnet das von der Firma bereitgestellte Softwareprogramm, das von Ihnen auf einem elektronischen Gerät mit dem Namen {brand} heruntergeladen wurde.",
   "application_definition_refund": "Anwendung bezeichnet das von der Gesellschaft bereitgestellte Softwareprogramm, das Sie auf einem elektronischen Gerät heruntergeladen haben, mit dem Namen $1.",
   "application_penetration_testing": "Capgo unterzieht sich jährlichen Penetrationstests durch renommierte Drittanbieter-Sicherheitsforscher, um eventuelle Schwachstellen zu identifizieren und zu beheben.",
   "application_security": "Anwendungssicherheit",

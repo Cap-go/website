@@ -195,7 +195,7 @@ When notifying users, aim for clarity and relevance. Use concise changelogs to e
 
 > "Mobile application security is an ongoing process. Ensure that security is prioritized throughout the development lifecycle and adopt a proactive approach to stay ahead of emerging threats."
 
-###### sbb-itb-f9944d2
+
 
 ## Appflow Deploy: Ship real-time updates to your Ionic app users
 

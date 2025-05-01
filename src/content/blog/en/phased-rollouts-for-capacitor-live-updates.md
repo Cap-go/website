@@ -134,7 +134,7 @@ Here’s how to configure your CI/CD pipeline for phased rollouts:
 
 Capgo's integration costs about $300 per month for ongoing CI/CD operations, offering a more affordable option compared to alternatives like AppFlow, which costs around $6,000 annually [\[1\]](https://capgo.app/).
 
-###### sbb-itb-f9944d2
+
 
 ## Rollout Management Tips
 

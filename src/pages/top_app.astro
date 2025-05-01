@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import VueTopapp from '@/vue-pages/top_app.vue'
 import * as m from '../paraglide/messages.js'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_apps_by_framework()].join(' | ')
-const description = m.top_100_app_using_different_framworks_on_android_store()
+const title = [Astro.locals.runtimeConfig.public.brand, m.top_apps_by_framework({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.top_100_app_using_different_framworks_on_android_store({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---

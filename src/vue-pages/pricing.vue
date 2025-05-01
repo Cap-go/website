@@ -52,12 +52,12 @@ const payg_units = computed(() =>
   <section class="py-12 bg-gray-50 sm:py-16">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
-        <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.plans_that_scale_with_your_business() }}</h1>
-        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">{{ m.plans_that_scale_with_your_business_description() }}</p>
+        <h1 class="text-3xl font-bold text-gray-900 font-pj sm:text-4xl xl:text-6xl">{{ m.plans_that_scale_with_your_business({}, { locale: props.locale }) }}</h1>
+        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">{{ m.plans_that_scale_with_your_business_description({}, { locale: props.locale }) }}</p>
       </div>
       <p class="mt-5 text-center sm:mb-14">
         <button class="font-medium text-black border-blue-600 border-b-1 hover:text-blue-600 focus:text-blue-600" @click="scrollToId('calculator')">
-          {{ m.calculate_your_usage() }}
+          {{ m.calculate_your_usage({}, { locale: props.locale }) }}
         </button>
       </p>
       <Plans v-if="plans && plans.length > 0" :yearly="yearly" :pricing="plans" :locale="props.locale" />
@@ -70,7 +70,7 @@ const payg_units = computed(() =>
             :checked="!yearly"
             class="w-4 h-4 text-blue-600 border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
-          <label for="monthly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base"> {{ m.monthly_plan() }} </label>
+          <label for="monthly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base"> {{ m.monthly_plan({}, { locale: props.locale }) }} </label>
         </div>
         <div class="flex items-center" @click="yearly = true">
           <input
@@ -80,8 +80,8 @@ const payg_units = computed(() =>
             class="w-4 h-4 text-blue-600 border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-600"
             :checked="yearly"
           />
-          <label for="yearly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base"> {{ m.yearly_plan() }} </label>
-          <span class="ml-1 text-sm font-medium text-blue-600"> ({{ m.save() }} 20%) </span>
+          <label for="yearly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base"> {{ m.yearly_plan({}, { locale: props.locale }) }} </label>
+          <span class="ml-1 text-sm font-medium text-blue-600"> ({{ m.save({}, { locale: props.locale }) }} 20%) </span>
         </div>
       </div>
       <section class="px-4 pb-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -114,8 +114,8 @@ const payg_units = computed(() =>
         class="pt-3 pb-6 bg-gray-50 sm:pb-10 sm:pt-6 lg:pb-14 lg:pt-10"
       />
       <p class="max-w-md mx-auto mb-8 text-base text-center text-gray-500 font-pj md:mt-16">
-        {{ m.we_don_t_bill_you_automatically_until_your_confirmation() }}<br />
-        {{ m.we_don_t_store_or_sell_your_data_to_anyone() }}
+        {{ m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: props.locale }) }}<br />
+        {{ m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: props.locale }) }}
       </p>
     </div>
     <Faq :locale="props.locale" />

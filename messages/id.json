@@ -35,7 +35,7 @@
   "app_store_rating_good": "\"Suka sekali dengan aplikasinya!\" - Ulasan 5★ di App Store",
   "appflow_6000_annually": "AppFlow $6.000 per tahun.",
   "apple_compliant": "Patuh pada Apple",
-  "application_definition": "<strong> aplikasi </strong> berarti program perangkat lunak yang disediakan oleh Perusahaan yang diunduh oleh Anda di perangkat elektronik mana pun yang bernama {{ brand }}.",
+  "application_definition": "<strong> aplikasi </strong> berarti program perangkat lunak yang disediakan oleh Perusahaan yang diunduh oleh Anda di perangkat elektronik mana pun yang bernama {brand}.",
   "application_definition_refund": "Aplikasi berarti program perangkat lunak yang disediakan oleh Perusahaan yang diunduh oleh Anda di perangkat elektronik mana pun, yang bernama $1",
   "application_penetration_testing": "Capgo menjalani pengujian penetrasi tahunan oleh peneliti keamanan pihak ketiga yang terpercaya untuk mengidentifikasi dan menyelesaikan setiap kerentanan.",
   "application_security": "Keamanan Aplikasi",

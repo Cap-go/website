@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { Locales } from '@/services/locale'
 import { renameCat } from '@/services/misc'
 import { ref } from 'vue'
 import * as m from '../paraglide/messages.js'
 
-const description = m.top_100_app_using_different_framworks_on_android_store()
+const props = defineProps<{ locale: Locales }>()
+
+const description = m.top_100_app_using_different_framworks_on_android_store({}, { locale: props.locale })
 const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', 'top_kotlin_app', 'top_react_native_app', 'top_native_script_app'])
 </script>
 
@@ -11,7 +14,7 @@ const others = ref(['top_capacitor_app', 'top_cordova_app', 'top_flutter_app', '
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_apps_by_framework() }}</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_apps_by_framework({}, { locale: props.locale }) }}</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>

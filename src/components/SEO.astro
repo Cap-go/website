@@ -7,13 +7,13 @@ import * as m from '../paraglide/messages.js'
 
 const {
   ldJSON = structuredData,
-  title = m.website_title(),
-  description = m.website_description(),
+  title = m.website_title({}, { locale: Astro.locals.locale }),
+  description = m.website_description({}, { locale: Astro.locals.locale }),
   url = Astro.url,
   image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_banner.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
-  keywords = m.website_keywords(),
+  keywords = m.website_keywords({}, { locale: Astro.locals.locale }),
   audio = null,
 } = Astro.props
 

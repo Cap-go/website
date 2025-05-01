@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
+import type { Locales } from '@/services/locale'
 import { renameCat, shortNumber } from '@/services/misc'
 import { ref } from 'vue'
 import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
-const description = m.top_100_app_using_capacitor_on_android_play_store()
+const props = defineProps<{ locale: Locales }>()
+
+const description = m.top_100_app_using_capacitor_on_android_play_store({}, { locale: props.locale })
 
 const apps = ref<any[]>([])
 const usage = ref(7.21)
@@ -26,12 +29,12 @@ fetch(`${config.public.baseApiUrl}/private/store_top`).then((res) => {
   <section class="py-10 sm:py-12 lg:py-20">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_capacitor_apps() }}</h1>
+        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{{ m.top_capacitor_apps({}, { locale: props.locale }) }}</h1>
         <h2 class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-50">
           {{ description }}
         </h2>
         <p class="max-w-xl mx-auto mt-4 text-xs leading-relaxed text-gray-200">
-          {{ m.capacitor_power_aproximately_1_of_apps_on_google_play_store().replace('$1', usage.toString()) }}
+          {{ m.capacitor_power_aproximately_1_of_apps_on_google_play_store({}, { locale: props.locale }).replace('$1', usage.toString()) }}
         </p>
       </div>
       <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:max-w-full lg:grid-cols-3">
@@ -52,7 +55,9 @@ fetch(`${config.public.baseApiUrl}/private/store_top`).then((res) => {
                 </span>
               </div>
             </div>
-            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"> {{ shortNumber(app.installs) }} {{ m.downloads() }} </span>
+            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+              {{ shortNumber(app.installs) }} {{ m.downloads({}, { locale: props.locale }) }}
+            </span>
             <p class="mt-5 text-2xl font-semibold">
               <a :href="app.url" :title="app.title" class="text-black">
                 {{ app.title }}
@@ -63,7 +68,7 @@ fetch(`${config.public.baseApiUrl}/private/store_top`).then((res) => {
               :title="app.title"
               class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
             >
-              {{ m.see_in_play_store() }}
+              {{ m.see_in_play_store({}, { locale: props.locale }) }}
               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"

@@ -25,9 +25,11 @@ const props = defineProps({
       <div class="text-center">
         <div class="flex items-center justify-center">
           <div class="inline-flex items-center justify-center w-24 h-24 text-8xl">❤️‍🔥</div>
-          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">{{ m.pay_as_you_go() }}</h2>
+          <h2 class="ml-3 text-4xl font-bold text-gray-900 font-pj">{{ m.pay_as_you_go({}, { locale: props.locale }) }}</h2>
         </div>
-        <p class="mt-4 text-base font-normal text-gray-600 font-pj">+{{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description() }}</p>
+        <p class="mt-4 text-base font-normal text-gray-600 font-pj">
+          +{{ numberWithSpaces(updateCalc(props.payg)) }} {{ m.pay_as_you_go_description({}, { locale: props.locale }) }}
+        </p>
       </div>
       <div class="relative max-w-sm mx-auto mt-8 md:mt-12 md:max-w-3xl">
         <div class="absolute -inset-4">
@@ -47,10 +49,12 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.monthly_active_users() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.monthly_active_users({}, { locale: props.locale }) }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.mau.toLocaleString() }}</span>
-                      {{ m.users_included() }}, {{ m.tr_then() }} ${{ props.payg?.mau_unit }}/{{ m.user() }}
+                      {{ m.users_included({}, { locale: props.locale }) }}, {{ m.tr_then({}, { locale: props.locale }) }} ${{ props.payg?.mau_unit }}/{{
+                        m.user({}, { locale: props.locale })
+                      }}
                     </p>
                   </div>
                 </div>
@@ -66,11 +70,11 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.bandwidth() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.bandwidth({}, { locale: props.locale }) }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ toTb(props.payg?.bandwidth) }}</span>
-                      {{ m.TB_included() }}, {{ m.tr_then() }} ${{ props.payg?.bandwidth_unit }}
-                      {{ m.per_GB() }}
+                      {{ m.TB_included({}, { locale: props.locale }) }}, {{ m.tr_then({}, { locale: props.locale }) }} ${{ props.payg?.bandwidth_unit }}
+                      {{ m.per_GB({}, { locale: props.locale }) }}
                     </p>
                   </div>
                 </div>
@@ -86,11 +90,11 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.cloud_storage() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.cloud_storage({}, { locale: props.locale }) }}</p>
                     <p class="mt-1 text-sm font-normal text-gray-600 font-pj">
                       <span class="font-bold">{{ props.payg?.storage.toLocaleString() }}</span>
-                      {{ m.GB_included() }}, {{ m.tr_then() }} ${{ props.payg?.storage_unit }}
-                      {{ m.per_GB() }}
+                      {{ m.GB_included({}, { locale: props.locale }) }}, {{ m.tr_then({}, { locale: props.locale }) }} ${{ props.payg?.storage_unit }}
+                      {{ m.per_GB({}, { locale: props.locale }) }}
                     </p>
                   </div>
                 </div>
@@ -166,8 +170,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.API_access() }}</p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.create_anything_you_want() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.API_access({}, { locale: props.locale }) }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.create_anything_you_want({}, { locale: props.locale }) }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
@@ -182,8 +186,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.dedicated_support() }}</p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.get_an_answer_in_less_than_6h() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.dedicated_support({}, { locale: props.locale }) }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.get_an_answer_in_less_than_6h({}, { locale: props.locale }) }}</p>
                   </div>
                 </div>
                 <div class="flex items-center">
@@ -198,8 +202,8 @@ const props = defineProps({
                     </svg>
                   </div>
                   <div class="ml-4">
-                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.custom_domain() }}</p>
-                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.add_your_own_domain() }}</p>
+                    <p class="text-lg font-bold text-gray-900 font-pj">{{ m.custom_domain({}, { locale: props.locale }) }}</p>
+                    <p class="mt-1 text-sm font-normal text-gray-600 font-pj">{{ m.add_your_own_domain({}, { locale: props.locale }) }}</p>
                   </div>
                 </div>
               </div>
@@ -208,13 +212,13 @@ const props = defineProps({
         </div>
       </div>
       <div class="mt-8 text-center">
-        <p class="text-base font-medium text-gray-600 font-pj">{{ m.all_our_features_are_available_to_all_users() }}</p>
+        <p class="text-base font-medium text-gray-600 font-pj">{{ m.all_our_features_are_available_to_all_users({}, { locale: props.locale }) }}</p>
         <div class="flex items-end justify-center mt-10">
           <p class="text-lg font-bold text-gray-400 font-pj">$</p>
           <p class="text-6xl font-bold text-gray-900 font-pj">
             {{ props.yearly ? props.payg.price_y.toLocaleString() : props.payg?.price_m.toLocaleString() }}
           </p>
-          <p class="text-lg font-bold text-gray-400 font-pj">/{{ m.month() }}</p>
+          <p class="text-lg font-bold text-gray-400 font-pj">/{{ m.month({}, { locale: props.locale }) }}</p>
         </div>
         <a
           role="button"
@@ -223,7 +227,7 @@ const props = defineProps({
           :href="getRelativeLocaleUrl(props.locale, 'register')"
           class="font-pj relative mt-9 inline-flex items-center justify-center rounded-xl border border-transparent bg-gray-900 px-8 py-3.5 text-base font-bold text-white transition-all duration-200 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
         >
-          {{ m.get_started_for_free() }}
+          {{ m.get_started_for_free({}, { locale: props.locale }) }}
         </a>
       </div>
     </div>

@@ -52,10 +52,10 @@ const plugins = ref([
   <section class="px-4 py-16 bg-indigo-600 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{{ m.consulting_forged_plugins_community_embraced() }}</h2>
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{{ m.consulting_forged_plugins_community_embraced({}, { locale: props.locale }) }}</h2>
         <p class="mt-4 text-xl text-indigo-200">
-          {{ m.consulting_forged_plugins_community_embraced_description() }} <br />
-          {{ m.each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community() }}
+          {{ m.consulting_forged_plugins_community_embraced_description({}, { locale: props.locale }) }} <br />
+          {{ m.each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community({}, { locale: props.locale }) }}
         </p>
       </div>
       <div class="mt-12">
@@ -92,7 +92,7 @@ const plugins = ref([
           target="_blank"
           class="inline-flex items-center px-6 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md shadow-sm hover:bg-indigo-50"
         >
-          {{ m.get_your_custom_plugin_built() }}
+          {{ m.get_your_custom_plugin_built({}, { locale: props.locale }) }}
           <svg class="w-5 h-5 ml-2 -mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
