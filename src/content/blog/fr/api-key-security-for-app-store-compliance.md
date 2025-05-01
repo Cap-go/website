@@ -49,7 +49,7 @@ L'inclusion directe des clés d'API dans le code source peut conduire à une exp
 
 Pour iOS, envisagez d'utiliser des **fichiers XCConfig** pour séparer les configurations de votre code. Sur Android, vous pouvez gérer les clés en utilisant `gradleproperties` :
 
-```gradle
+```kotlin
 # Store in ~/.gradle/gradle.properties
 API_KEY=your_key_here
 

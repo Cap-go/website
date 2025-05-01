@@ -61,7 +61,7 @@ const features = ref([
         <div v-for="feature in features" :key="feature.title" class="flex p-px overflow-hidden rounded-lg">
           <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
             <div
-              :class="`flex flex-col items-center justify-center h-80 bg-gradient-to-br from-${feature.color}-500/20 to-${feature.color === 'blue' ? 'purple' : feature.color === 'purple' ? 'pink' : 'blue'}-500/20`"
+              :class="`flex flex-col items-center justify-center h-80 bg-linear-to-br from-${feature.color}-500/20 to-${feature.color === 'blue' ? 'purple' : feature.color === 'purple' ? 'pink' : 'blue'}-500/20`"
             >
               <div :class="`flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-${feature.color}-900`">
                 <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

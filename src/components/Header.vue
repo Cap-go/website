@@ -16,7 +16,7 @@ const menuMobile = ref(false)
   <header class="relative py-2">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between">
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <a :href="getRelativeLocaleUrl(props.locale)" title="Capgo home" aria-label="Capgo home" class="flex items-center pr-3 text-4xl font-medium font-prompt">
             <img class="w-auto pr-1 h-18" loading="eager" height="72" width="133" :alt="`${brand} logo`" :title="`${brand} logo`" src="/capgo_logo.webp" />
           </a>

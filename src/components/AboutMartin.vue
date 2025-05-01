@@ -50,7 +50,7 @@ const props = defineProps<{ locale: Locales }>()
         <div class="pt-4">
           <div class="relative inline-flex mt-10 group">
             <div
-              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
             />
             <a
               :href="getRelativeLocaleUrl(props.locale, 'register')"

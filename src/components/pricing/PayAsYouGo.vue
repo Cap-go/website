@@ -43,7 +43,7 @@ const props = defineProps({
             <div class="grid items-center grid-cols-1 gap-y-9 md:grid-cols-7 md:gap-y-0">
               <div class="space-y-9 md:col-span-3 xl:pr-2">
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
@@ -59,7 +59,7 @@ const props = defineProps({
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
@@ -79,7 +79,7 @@ const props = defineProps({
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
@@ -159,7 +159,7 @@ const props = defineProps({
               </div>
               <div class="space-y-9 md:col-span-3 xl:pr-2">
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
@@ -175,7 +175,7 @@ const props = defineProps({
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
@@ -191,7 +191,7 @@ const props = defineProps({
                   </div>
                 </div>
                 <div class="flex items-center">
-                  <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
+                  <div class="inline-flex items-center justify-center shrink-0 w-10 h-10 bg-white border border-gray-200 rounded-full">
                     <svg class="w-5 h-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"

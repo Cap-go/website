@@ -2,7 +2,7 @@ import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
-import UnoCSS from '@unocss/astro'
+import tailwindcss from '@tailwindcss/vite'
 import AstroPWA from '@vite-pwa/astro'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig } from 'astro/config'
@@ -53,7 +53,6 @@ export default defineConfig({
       redirectDefaultLocale: true,
       exclude: ['pages/**/*.json.ts'],
     }),
-    UnoCSS({ injectReset: true }),
     vue({
       template: {
         transformAssetUrls: {
@@ -72,22 +71,16 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       disable404Route: true,
-      favicon: '/favicon.svg',
-      expressiveCode: {
-        themes: ['github-dark'],
-      },
       logo: { src: './logo.svg' },
+      markdown: { headingLinks: false },
       customCss: ['./src/css/global.css'],
-      components: {
-        LanguageSelect: './src/components/LanguageSelect.astro',
-      },
-      editLink: {
-        baseUrl: 'https://github.com/Cap-go/website/edit/main/',
-      },
-      social: {
-        discord: 'https://discord.com/invite/VnYRvBfgA6',
-        github: 'https://github.com/Cap-go/',
-      },
+      expressiveCode: { themes: ['github-dark'] },
+      editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
+      components: { LanguageSelect: './src/components/LanguageSelect.astro' },
+      social: [
+        { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/Cap-go/' },
+      ],
       sidebar: [
         {
           label: 'Welcome to Capgo',
@@ -197,5 +190,8 @@ export default defineConfig({
     port: 3000,
     open: true,
     host: '0.0.0.0',
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
 })

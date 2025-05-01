@@ -87,7 +87,7 @@ function descToEmoji(desc: string) {
             <p class="py-1 text-sm font-normal text-gray-500">/{{ m.month({}, { locale: props.locale }) }}</p>
           </div>
           <p v-if="yearly" class="mt-8">
-            <span class="text-gray-900 dark:text-white">{{ m.billed_annually_at({}, { locale: props.locale }) }} ${{ plan.price_y }}</span>
+            <span class="text-gray-900">{{ m.billed_annually_at({}, { locale: props.locale }) }} ${{ plan.price_y }}</span>
           </p>
           <div class="mt-6">
             <a
@@ -95,7 +95,7 @@ function descToEmoji(desc: string) {
               target="_blank"
               title="register"
               :class="{
-                'bg-gradient-to-r from-fuchsia-600 to-blue-600': plan.name === 'Maker',
+                'bg-linear-to-r from-fuchsia-600 to-blue-600': plan.name === 'Maker',
                 'bg-blue-500': plan.name !== 'Maker',
               }"
               class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white transition-all duration-200 border border-transparent rounded-xl hover:opacity-80 focus:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2"

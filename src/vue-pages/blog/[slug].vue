@@ -169,7 +169,7 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
           </li>
         </ul>
       </div>
-      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left blog lg:max-w-1/2 md:rounded-lg">
+      <article ref="article" v-if="props" class="px-4 pb-4 mx-auto prose text-left lg:max-w-1/2 md:rounded-lg">
         <template v-for="(node, index) in articleContent" :key="index">
           <component :is="node" />
         </template>

@@ -2,39 +2,48 @@
 import { locales } from '@/services/locale'
 ---
 
-<div class="relative inline-block text-left">
+<div class="relative flex flex-row items-center">
   <button
-    type="button"
     id="language-menu-button"
-    onclick="document.getElementById('language-menu').classList.toggle('hidden');"
-    class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none"
   >
     Language
     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
     </svg>
   </button>
-  <div
-    role="menu"
-    tabindex="-1"
-    id="language-menu"
-    aria-orientation="vertical"
-    aria-labelledby="language-menu-button"
-    class="absolute right-0 z-10 mt-2 hidden w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-  >
-    <div class="py-1" role="none">
-      {
-        locales.map((j) => (
-          <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">
-            {j.toUpperCase()}
-          </a>
-        ))
-      }
-    </div>
+  <div id="language-menu" class="absolute hidden w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg" style="top: 100%; right: 0;">
+    {
+      locales.map((j) => (
+        <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">
+          {j.toUpperCase()}
+        </a>
+      ))
+    }
   </div>
 </div>
 
 <script define:vars={{ locales }}>
+  let test = 0
+  const languageMenu = document.getElementById('language-menu')
+  const button = document.getElementById('language-menu-button')
+  const adjustMenuPosition = () => {
+    if (test % 2 === 0) document.getElementById('language-menu').classList.remove('hidden')
+    else document.getElementById('language-menu').classList.add('hidden')
+    test += 1
+    const rect = button.getBoundingClientRect()
+    const viewportHeight = window.innerHeight
+    const menuHeight = languageMenu.offsetHeight
+    if (rect.bottom + menuHeight > viewportHeight) {
+      languageMenu.style.top = 'auto'
+      languageMenu.style.bottom = '100%'
+    } else {
+      languageMenu.style.top = '100%'
+      languageMenu.style.bottom = 'auto'
+    }
+  }
+  window.addEventListener('resize', adjustMenuPosition)
+  button.addEventListener('click', adjustMenuPosition)
   locales.forEach((j) => {
     document.getElementById(`language_${j}`).addEventListener('click', () => {
       const tmp = new URL(window.location.href).pathname
