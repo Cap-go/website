@@ -46,7 +46,7 @@ Das direkte Einbinden von API-Schlüsseln in den Quellcode kann durch Dekompilie
 
 Für iOS sollten Sie **XCConfig-Dateien** verwenden, um Konfigurationen von Ihrem Code zu trennen. Unter Android können Sie Schlüssel mit `gradleproperties` verwalten:
 
-```gradle
+```kotlin
 # Store in ~/.gradle/gradle.properties
 API_KEY=your_key_here
 

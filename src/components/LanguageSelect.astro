@@ -12,7 +12,7 @@ import { locales } from '@/services/locale'
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
     </svg>
   </button>
-  <div id="language-menu" class="absolute w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg" style="top: 100%; right: 0;">
+  <div id="language-menu" class="absolute hidden w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg" style="top: 100%; right: 0;">
     {
       locales.map((j) => (
         <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">

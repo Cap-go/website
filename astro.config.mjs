@@ -74,7 +74,7 @@ export default defineConfig({
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
       customCss: ['./src/css/global.css'],
-      expressiveCode: { themes: ['starlight-dark'] },
+      expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: { LanguageSelect: './src/components/LanguageSelect.astro' },
       social: [
