@@ -24,6 +24,9 @@ jobs:
           SEOBOT_API_KEY: ${{ secrets.SEOBOT_API_KEY }}
         run: bun .github/scripts/sync-blog.js
         
+      - name: Generate blog translations
+        run: bun generate:blog:translations:new
+
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
