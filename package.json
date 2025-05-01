@@ -47,7 +47,7 @@
     "@types/semver": "^7.5.8",
     "@unocss/astro": "^66.0.0",
     "@unocss/reset": "^66.0.0",
-    "@vite-pwa/astro": "^0.5.0",
+    "@vite-pwa/astro": "^1.0.0",
     "astro-font": "^1.1.0",
     "cheerio": "1.0.0",
     "dayjs": "^1.11.13",
