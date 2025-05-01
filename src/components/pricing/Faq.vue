@@ -17,7 +17,7 @@ const props = defineProps<{ locale: Locales }>()
       </div>
       <div class="grid grid-cols-1 mt-12 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex items-center justify-center shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -34,7 +34,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex items-center justify-center shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -45,7 +45,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex items-center justify-center shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">
@@ -56,7 +56,7 @@ const props = defineProps<{ locale: Locales }>()
           </div>
         </div>
         <div class="flex items-start">
-          <div class="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
+          <div class="flex items-center justify-center shrink-0 w-8 h-8 bg-gray-700 rounded-full">
             <span class="text-lg font-semibold text-white">?</span>
           </div>
           <div class="ml-4">

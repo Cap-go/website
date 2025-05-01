@@ -80,7 +80,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
             </h2>
             <div class="relative inline-flex mt-10 group">
               <div
-                class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+                class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
               />
               <a
                 :href="getRelativeLocaleUrl(props.locale, 'register')"
@@ -195,7 +195,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
         </div>
       </div>
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-500 xl:bg-gradient-to-r" />
+      <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-gray-500 xl:bg-linear-to-r" />
     </section>
     <section class="relative py-20 bg-gray-800 md:my-20">
       <svg class="absolute hidden opacity-30 md:-left-1/3 md:-top-5 md:m-0 md:block lg:-left-16" width="404" height="392" fill="none" viewBox="0 0 404 392">
@@ -230,21 +230,21 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-8 mt-10 text-center sm:gap-x-8 md:grid-cols-3 lg:mt-24">
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}</span>
+              <span class="bg-linear-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.updates }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.updates_delivered({}, { locale: props.locale }) }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.all_around_the_globe({}, { locale: props.locale }) }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}</span>
+              <span class="bg-linear-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.apps }}</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.apps({}, { locale: props.locale }) }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.using_us_in_production({}, { locale: props.locale }) }}</p>
           </div>
           <div>
             <h3 class="font-bold text-7xl">
-              <span class="bg-gradient-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}★</span>
+              <span class="bg-linear-to-r from-[#FF44EC] to-[#44BCFF] bg-clip-text text-transparent">{{ stats.stars }}★</span>
             </h3>
             <p class="mt-4 text-xl font-medium text-gray-300">{{ m.stars_in_github({}, { locale: props.locale }) }}</p>
             <p class="mt-0.5 text-base text-gray-400">{{ m.open_source({}, { locale: props.locale }) }}</p>
@@ -337,7 +337,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="max-w-3xl mx-auto text-center">
           <div class="relative inline-flex mt-10 group">
             <div
-              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
             />
             <a
               :href="getRelativeLocaleUrl(props.locale, 'register')"
@@ -472,7 +472,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
               </li>
             </ul>
           </div>
-          <div class="p-8 transition-transform duration-200 transform border-2 border-blue-200 shadow-lg bg-gradient-to-br from-blue-50 to-green-50 rounded-xl hover:scale-105">
+          <div class="p-8 transition-transform duration-200 transform border-2 border-blue-200 shadow-lg bg-linear-to-br from-blue-50 to-green-50 rounded-xl hover:scale-105">
             <h3 class="mb-6 text-2xl font-bold text-blue-900">{{ m.with_capgo({}, { locale: props.locale }) }}</h3>
             <ul class="space-y-4">
               <li class="flex items-start">
@@ -520,7 +520,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
         <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-6 lg:grid-rows-3">
           <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem] w-full">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
                 <svg class="w-32 h-32 text-[#44BCFF] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -536,7 +536,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-2">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem] w-full">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-blue-500/20 to-purple-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-blue-500/20 to-purple-500/20">
                 <svg class="w-24 h-24 mb-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -555,7 +555,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-green-500/20 to-blue-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-green-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -574,7 +574,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-purple-500/20 to-pink-500/20">
                 <svg class="w-24 h-24 mb-4 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -593,7 +593,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-yellow-500/20 to-orange-500/20">
                 <svg class="w-24 h-24 mb-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -612,7 +612,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-cyan-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -631,7 +631,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-indigo-500/20 to-blue-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-indigo-500/20 to-blue-500/20">
                 <svg class="w-24 h-24 mb-4 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -650,7 +650,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem] w-full">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-red-500/20 to-pink-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-red-500/20 to-pink-500/20">
                 <svg class="w-24 h-24 mb-4 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -669,7 +669,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-4">
             <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-br-[2rem] w-full">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-teal-500/20 to-green-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-teal-500/20 to-green-500/20">
                 <svg class="w-24 h-24 mb-4 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
@@ -688,7 +688,7 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
           </div>
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-              <div class="flex flex-col items-center justify-center h-80 bg-gradient-to-br from-emerald-500/20 to-lime-500/20">
+              <div class="flex flex-col items-center justify-center h-80 bg-linear-to-br from-emerald-500/20 to-lime-500/20">
                 <svg class="w-24 h-24 mb-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                 </svg>
@@ -810,13 +810,6 @@ fetch(`${config.public.baseApiUrl}/private/website_stats`).then((res) => {
     transform: translateY(200%);
     opacity: 0;
   }
-}
-
-/* Button animation - If this is used elsewhere */
-.teleport-button-animation {
-  @apply absolute left-[-100%] top-0 h-full w-full;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
-  animation: teleport-button 3s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
 }
 
 @keyframes teleport-button {

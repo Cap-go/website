@@ -127,7 +127,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
     <!-- Background effects -->
     <div class="absolute inset-x-0 overflow-hidden -translate-y-1/2 top-1/2 -z-10 transform-gpu opacity-30 blur-3xl" aria-hidden="true">
       <div
-        class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-indigo-500 to-blue-500"
+        class="ml-[max(50%,38rem)] aspect-1313/771 w-[82.0625rem] bg-linear-to-tr from-indigo-500 to-blue-500"
         style="
           clip-path: polygon(
             74.1% 44.1%,
@@ -152,7 +152,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
     </div>
     <div class="absolute inset-x-0 top-0 flex pt-32 overflow-hidden opacity-25 -z-10 transform-gpu blur-3xl sm:pt-40 xl:justify-end" aria-hidden="true">
       <div
-        class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-indigo-500 to-blue-500 xl:ml-0 xl:mr-[calc(50%-12rem)]"
+        class="ml-[-22rem] aspect-1313/771 w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-linear-to-tr from-indigo-500 to-blue-500 xl:ml-0 xl:mr-[calc(50%-12rem)]"
         style="
           clip-path: polygon(
             74.1% 44.1%,
