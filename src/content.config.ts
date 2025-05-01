@@ -22,6 +22,7 @@ const blog = defineCollection({
     published: z.boolean().optional(),
     locale: z.string() as z.ZodType<Locales>,
     next_blog: z.string().optional().nullable(),
+    original_slug: z.string().optional(),
   }),
 })
 

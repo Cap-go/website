@@ -30,6 +30,26 @@ const blogs = await getCollection('blog')
 const entry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === Astro.locals.locale)
 const related = blogs.filter((j) => j.data.published !== false && j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
 
+// For hreflang tags - find all available translations for this article
+const alternateVersions = []
+if (entry) {
+  // Find articles with the same original_slug or if original_slug is not present, find exact slug match
+  const originalSlug = entry.data.original_slug || entry.data.slug
+  const availableTranslations = blogs.filter((j) => 
+    (j.data.original_slug && j.data.original_slug === originalSlug) || 
+    (!j.data.original_slug && j.data.slug === originalSlug)
+  )
+  
+  // Add entry for each available locale
+  for (const translation of availableTranslations) {
+    alternateVersions.push({
+      locale: translation.data.locale,
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
+      slug: translation.data.slug
+    })
+  }
+}
+
 if (!entry) {
   if (Astro.locals.locale !== 'en') {
     const enEntry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === 'en')
@@ -52,13 +72,14 @@ if (!entry) {
 
 const { Content, headings } = await render(entry)
 
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[] } = {}
+const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[]; alternateVersions?: any[] } = {}
 
 if (entry.data.title) content['title'] = entry.data.title
 if (entry.data.description) content['description'] = entry.data.description
 if (entry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${entry.data.head_image || '/capgo_banner.webp'}`
 if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
 if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
+if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
 
 const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
