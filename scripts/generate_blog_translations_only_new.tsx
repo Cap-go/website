@@ -48,6 +48,7 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
   try {
     const filePath = join(defaultBlogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
+    if (existsSync(destinationPath)) return
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
