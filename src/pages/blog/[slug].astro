@@ -177,7 +177,7 @@ content['ldJSON'] = {
                   </p>
                   <div class="mt-4 grid gap-4 border-l border-gray-600">
                     {headings.map((k) => (
-                      <a class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
+                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
                         {k.text}
                       </a>
                     ))}
@@ -237,20 +237,28 @@ content['ldJSON'] = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    let activeSlug = null
-
     const observeArticleTitles = () => {
       const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+      let activeHeading = null
+
       for (let i = 0; i < headings.length; i++) {
         const heading = headings[i]
+        const tmp = heading.getAttribute('id')
+        if (tmp) document.querySelector(`#${tmp}-link`)?.classList.remove('text-white')
+
         const rect = heading.getBoundingClientRect()
-        if (rect.top <= 50 && rect.bottom >= 50) {
-          const tmp = heading.getAttribute('id')
-          if (tmp) {
-            activeSlug = tmp
-            history.replaceState(null, '', `#${tmp}`)
-            break
-          }
+        if (rect.top <= 50) {
+          activeHeading = heading
+        } else if (rect.top > 50 && activeHeading) {
+          break
+        }
+      }
+
+      if (activeHeading) {
+        const tmp = activeHeading.getAttribute('id')
+        if (tmp) {
+          document.querySelector(`#${tmp}-link`)?.classList.add('text-white')
+          history.replaceState(null, '', `#${tmp}`)
         }
       }
     }
@@ -265,10 +273,10 @@ content['ldJSON'] = {
         const staticTocRect = staticToc.getBoundingClientRect()
         if (blogImageRect.bottom <= 0 && articleEndRect.bottom > staticTocRect.height) {
           staticToc.classList.remove('sticky')
-          staticToc.classList.add('fixed')
+          staticToc.classList.add('fixed', 'max-h-[50vh]', 'max-w-[30vw]', 'overflow-y-scroll')
         } else {
           staticToc.classList.add('sticky')
-          staticToc.classList.remove('fixed')
+          staticToc.classList.remove('fixed', 'max-h-[50vh]', 'max-w-[30vw]', 'overflow-y-scroll')
         }
       }
       observeArticleTitles()
