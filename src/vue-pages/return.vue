@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import type { Locales } from '@/services/locale'
-import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
 const domain = config.public.baseUrl

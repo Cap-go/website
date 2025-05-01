@@ -7,7 +7,7 @@ import { formatTime } from '@/config/app'
 import striptags from 'striptags'
 import GetStarted from '@/components/GetStarted.vue'
 import Blog from '@/components/Blog.vue'
-import * as m from '@/paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const blogs = await getCollection('blog')

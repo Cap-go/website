@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import type { Locales } from '@/services/locale'
 import { getRemoteConfig, useSupabase } from '@/services/supabase'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
-import * as m from '../paraglide/messages.js'
 
 const isResending = ref(false)
 getRemoteConfig()

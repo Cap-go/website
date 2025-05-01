@@ -4,10 +4,10 @@ import Faq from '@/components/pricing/Faq.vue'
 import PayAsYouGo from '@/components/pricing/PayAsYouGo.vue'
 import Plans from '@/components/pricing/Plans.vue'
 import { useRuntimeConfig } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import type { Database } from '@/services/supabase.types'
 import { computed, ref } from 'vue'
-import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 const config = useRuntimeConfig()

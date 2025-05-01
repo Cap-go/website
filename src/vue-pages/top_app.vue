@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import type { Locales } from '@/services/locale'
 import { renameCat } from '@/services/misc'
 import { ref } from 'vue'
-import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{ locale: Locales }>()
 

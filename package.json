@@ -41,6 +41,8 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.2.7",
     "@iconify-json/twemoji": "^1.2.2",
+    "@inlang/cli": "^3.0.0",
+    "@inlang/paraglide-js": "2.0.12",
     "@types/js-yaml": "^4.0.9",
     "@types/marked": "^6.0.0",
     "@types/node": "^22.13.0",
@@ -57,7 +59,6 @@
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "langchain": "^0.1.37",
-    "nanospinner": "^1.2.2",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.1.0",
@@ -67,8 +68,6 @@
     "typescript": "^5.7.3",
     "unocss": "^66.0.0",
     "vue-tsc": "^2.2.4",
-    "zod": "^3.24.2",
-    "@inlang/paraglide-js": "2.0.12",
-    "@inlang/cli": "^3.0.0"
+    "zod": "^3.24.2"
   }
 }

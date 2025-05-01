@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.support_policy({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_support_policy({}, { locale: Astro.locals.locale })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import { numberWithSpaces, toTb, updateCalc } from '@/services/misc'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps({
   payg: {

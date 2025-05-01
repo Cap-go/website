@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { formatTime } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import type { Locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { computed } from 'vue'
-import * as m from '../paraglide/messages.js'
 
 const props = defineProps<{
   tag: string

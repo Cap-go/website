@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueContributing from '@/vue-pages/contributing.vue'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.contributing({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.contributing_description({}, { locale: Astro.locals.locale })

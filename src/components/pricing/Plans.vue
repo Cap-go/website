@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import { numberWithSpaces } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps({
   pricing: {

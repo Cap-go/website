@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import { roundNumber } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import { computed, ref } from 'vue'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps({
   pricing: {

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Blog from '@/components/Blog.vue'
 import { formatTime } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { onMounted, ref, type Ref } from 'vue'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps<{
   toc?: any[]

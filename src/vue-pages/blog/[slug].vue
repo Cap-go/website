@@ -2,11 +2,11 @@
 import Blog from '@/components/Blog.vue'
 import GetStarted from '@/components/GetStarted.vue'
 import { formatTime } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import type { MarkdownHeading } from 'astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { computed, h, onMounted, ref, render, useSlots, type Ref, type VNode } from 'vue'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps<{
   tag: string

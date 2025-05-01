@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '../paraglide/messages.js'
 import PluginMarketing from './plugin_marketing.vue'
 
 const props = defineProps<{ locale: Locales }>()

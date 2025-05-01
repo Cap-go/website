@@ -1,6 +1,5 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
-import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
@@ -46,33 +45,29 @@ const processAllLanguages = async () => {
 }
 
 const processFile = async (file: string, lang: string, langBlogDirectory: string, failedTranslations: { [file: string]: boolean }): Promise<void> => {
-  const spinner = createSpinner(`Translating ${file}...`).start()
   try {
     const filePath = join(defaultBlogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
+    if (existsSync(destinationPath)) return
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
     const { data: grayMatterJson } = matter(content)
-
     if (grayMatterJson.title) {
       const translatedTitle = await translateText(grayMatterJson.title, lang)
       if (translatedTitle) grayMatterJson['title'] = translatedTitle
       else failedTranslations[file] = true
     }
-
     if (grayMatterJson.description) {
       const translatedDescription = await translateText(grayMatterJson.description, lang)
       if (translatedDescription) grayMatterJson['description'] = translatedDescription
       else failedTranslations[file] = true
     }
-
     if (grayMatterJson.head_image_alt) {
       const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
       if (translatedHeadImageAlt) grayMatterJson['head_image_alt'] = translatedHeadImageAlt
       else failedTranslations[file] = true
     }
-
     grayMatterJson['locale'] = lang
     appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
     const blogContent = content.substring(grayMatterEnd + 4)
@@ -84,7 +79,6 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     const blogContentWithoutHtmlTags = blogContentWithoutCodeBlocks.replace(htmlTagRegex, '[[HTML_TAG]]')
     const sentences = blogContentWithoutHtmlTags.split('.')
     let currentChunk = ''
-
     for (const sentence of sentences) {
       if ((currentChunk + sentence).length > 4000) {
         const tmp = await translateText(currentChunk, lang)
@@ -93,13 +87,11 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
         currentChunk = sentence
       } else currentChunk += sentence
     }
-
     if (currentChunk) {
       const tmp = await translateText(currentChunk, lang)
       if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
       else failedTranslations[file] = true
     }
-
     let translatedContent = readFileSync(destinationPath, 'utf8')
     codeBlocks.forEach((match) => {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
@@ -107,11 +99,9 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     htmlTags.forEach((match) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
-
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    spinner.success({ text: `Blog translated in ${lang}: ${file}` })
   } catch (error) {
-    spinner.error({ text: `Failed to translate ${file} to ${lang}: ${error}` })
+    console.warn(`Failed to translate ${file} to ${lang}: ${error}`)
     failedTranslations[file] = true
   }
 }

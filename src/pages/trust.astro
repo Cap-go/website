@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueTrust from '@/vue-pages/trust.vue'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.trust({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.consulting_description({}, { locale: Astro.locals.locale })

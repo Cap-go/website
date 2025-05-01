@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import VueDisclaimer from '@/vue-pages/disclaimer.vue'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.disclaimer({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_disclaimer({}, { locale: Astro.locals.locale })

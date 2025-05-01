@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import * as m from '@/paraglide/messages'
 import { ref } from 'vue'
-import * as m from '../paraglide/messages.js'
 
 const plugins = ref([
   {

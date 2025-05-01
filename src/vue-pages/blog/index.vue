@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Blog from '@/components/Blog.vue'
 import { useRuntimeConfig } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import type { CollectionEntry } from 'astro:content'
 import { computed, ref } from 'vue'
-import * as m from '../../paraglide/messages.js'
 
 const props = defineProps<{
   locale: Locales
