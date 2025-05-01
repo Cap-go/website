@@ -1,49 +1,81 @@
 ---
-slug: id__ionic-capacitor-push-notifications-firebase
-title: 'Notifikasi Push Ionic Capacitor dengan Firebase: Panduan Langkah demi Langkah'
+slug: ionic-capacitor-push-notifications-firebase
+title: 'Notifications Push Ionic Capacitor avec Firebase : Un Guide Étape par Étape'
 description: >-
-  Temukan cara mengintegrasikan notifikasi push ke dalam aplikasi Ionic
-  Capacitor Anda menggunakan Firebase, dengan petunjuk langkah demi langkah
-  untuk platform Android dan iOS.
+  Pelajari cara mengintegrasikan notifikasi push dalam aplikasi Ionic Capacitor
+  Anda menggunakan Firebase, dengan instruksi langkah demi langkah untuk
+  platform Android dan iOS.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /push_notif.webp
-head_image_alt: Notifikasi push Ionic Capacitor dengan Firebase
+head_image_alt: Notifikasi Push Ionic Capacitor dengan Firebase
+keywords: >-
+  Ionic, Capacitor, push notifications, Firebase, mobile app development, live
+  updates, OTA updates, continuous integration, mobile app updates
 tag: tutorial
 published: true
 locale: id
 next_blog: ''
 ---
 
-Dalam tutorial ini, kita akan mengintegrasikan notifikasi push dalam aplikasi Ionic Capacitor menggunakan Firebase. Anda tidak memerlukan layanan khusus untuk ini, tetapi Anda perlu mengkonfigurasi beberapa hal terlebih dahulu. Firebase adalah pilihan yang sangat baik karena diperlukan untuk Android, dan Anda dapat dengan mudah menggunakannya untuk mengirim notifikasi tanpa menggunakan database.
+Dalam tutorial ini, kita akan mengintegrasikan notifikasi push pada aplikasi Ionic Capacitor menggunakan Firebase. Anda tidak memerlukan layanan khusus untuk ini, tetapi Anda perlu mengkonfigurasi beberapa hal terlebih dahulu. Firebase adalah pilihan yang sangat baik karena dibutuhkan untuk Android, dan Anda dapat dengan mudah menggunakannya untuk mengirim notifikasi tanpa menggunakan database.
 
-Pertama, kita akan membuat aplikasi Ionic dengan Capacitor diaktifkan dan menentukan **package id** kita, yang merupakan pengidentifikasi unik untuk aplikasi Anda. Kemudian, kita akan membangun aplikasi dan menambahkan platform native.
+<Steps>
+  1. Membuat aplikasi Ionic dengan Capacitor dan konfigurasi dasar
+</Steps>
 
-Jika Anda sudah memiliki aplikasi, Anda dapat mengubah **capacitor.config.json** untuk menyertakan **appId** Anda. Namun, jika folder native Anda sudah ada, Anda perlu mengganti id di semua file tempat id tersebut muncul, karena Capacitor hanya membuat folder satu kali dan **tidak akan memperbarui id itu sendiri**. Dalam **capacitor.config.json**, Anda juga dapat menentukan opsi seperti memperbarui jumlah badge, memainkan suara saat push, dan menampilkan peringatan saat notifikasi tiba.
+Pertama, kita akan membuat aplikasi Ionic dengan Capacitor yang telah diaktifkan dan menentukan **package id** kita, yang merupakan pengidentifikasi unik untuk aplikasi Anda. Kemudian, kita akan membangun aplikasi dan menambahkan platform native.
+
+```bash
+ionic start ionic-push-notifications blank --capacitor
+cd ionic-push-notifications
+```
+
+Jika Anda sudah memiliki aplikasi, Anda dapat mengubah **capacitor.config.json** untuk menyertakan **appId** Anda. Namun, jika folder native Anda sudah ada, Anda perlu mengganti id di semua file tempat id tersebut muncul, karena Capacitor hanya membuat folder satu kali dan **tidak akan memperbarui id itu sendiri**. Di **capacitor.config.json**, Anda juga dapat menentukan opsi seperti memperbarui jumlah badge, memainkan suara saat push, dan menampilkan peringatan ketika notifikasi tiba.
+
+```json
+{
+  "appId": "com.company.app",
+  "appName": "Your App",
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}
+```
 
 Sekarang, mari konfigurasi notifikasi push di luar aplikasi.
 
 ## Konfigurasi Firebase
 
-Mulailah dengan [membuat proyek Firebase baru](https://firebase.google.com/) atau menggunakan yang sudah ada. Berikan nama dan opsi default untuk proyek baru.
+Mulai dengan [membuat proyek Firebase baru](https://firebase.google.com/) atau gunakan yang sudah ada. Berikan nama dan opsi default untuk proyek baru.
 
-Jika Anda memiliki aplikasi baru, Anda akan melihat **"Mulai dengan menambahkan Firebase ke aplikasi Anda"** di dashboard aplikasi Anda. Jika tidak, klik ikon roda gigi dan buka **pengaturan proyek** untuk menambahkan aplikasi.
+Jika Anda memiliki aplikasi baru, Anda akan melihat **"Get started by adding Firebase to your app"** di dashboard aplikasi Anda. Jika tidak, klik ikon gear dan buka **project settings** untuk menambahkan aplikasi.
 
-Dialog untuk iOS dan Android terlihat mirip, dan hal yang penting adalah menggunakan **package id** Anda untuk aplikasi.
+Dialog untuk iOS dan Android terlihat mirip, dan hal yang penting adalah menggunakan **package id** Anda untuk aplikasi tersebut.
+
+<Steps>
+  1. Pilih platform yang ingin Anda konfigurasikan (Android/iOS)
+</Steps>
 
 Setelah langkah awal, unduh file-file berikut:
 
 - File **google-services.json** untuk Android
 - File **GoogleService-Info.plist** untuk iOS
 
-Selanjutnya, konfigurasikan platform-platformnya.
+Selanjutnya, konfigurasikan platform-platform tersebut.
 
 ### Persiapan Push Android
 
 Untuk Android, pindahkan file **google-services.json** yang Anda unduh ke folder **android/app/**
+
+<Steps>
+  1. Pindahkan file google-services.json ke android/app/
+</Steps>
 
 Itu saja untuk Android. Sekarang mari konfigurasi iOS.
 
@@ -51,31 +83,72 @@ Itu saja untuk Android. Sekarang mari konfigurasi iOS.
 
 Bagian ini lebih rumit. Pertama, [buat App ID untuk aplikasi Anda dalam daftar identifiers](https://developer.apple.com/account/resources/identifiers/list/) di akun Apple Developer Anda. Pastikan Anda **memilih kemampuan Push Notifications** dari daftar tersebut.
 
+![ionic-ios-push-id](/ionic-ios-push-id.webp)
+
 **Bundle ID** harus sama dengan App ID Anda di dalam Capacitor dan Firebase.
 
-Sekarang, [buat Kunci](https://developer.apple.com/account/resources/authkeys/list/) dan aktifkan **Apple Push Notifications service (APNs)**. Jika Anda telah mencapai jumlah maksimum kunci, Anda dapat menggunakan kunci yang ada atau sertifikat sebagai gantinya, tetapi prosesnya lebih rumit.
+Sekarang, [buat Key](https://developer.apple.com/account/resources/authkeys/list/) dan aktifkan **Apple Push Notifications service (APNs)**. Jika Anda telah mencapai jumlah maksimum key, Anda dapat menggunakan key yang ada atau sertifikat sebagai gantinya, tetapi prosesnya lebih rumit.
 
-Setelah mengunduh file **p8**, unggah ke Firebase. Buka tab **Cloud Messaging** di pengaturan proyek Firebase Anda, unggah file tersebut, dan masukkan detail untuk ID Kunci dan ID Tim Anda dari iOS.
+![ios-developer-push-key](/ios-developer-push-key.webp)
+
+Setelah mengunduh file **p8**, unggah ke Firebase. Buka tab **Cloud Messaging** di pengaturan proyek Firebase Anda, unggah file tersebut, dan masukkan detail untuk Key ID dan Team ID dari iOS Anda.
+
+![firebase-upload-ios-key](/firebase-upload-ios-key.webp)
 
 Sekarang, lakukan perubahan pada proyek Xcode Anda dengan menjalankan:
+
+```bash
+npx cap open ios
+```
 
 Salin file **GoogleService-Info.plist** yang Anda unduh dari Firebase ke dalam proyek iOS Anda. Seret file tersebut ke dalam proyek Xcode di dalam folder app/app, dan pilih **Copy items if needed**.
 
 Selanjutnya, tambahkan Pod baru untuk dependensi Firebase di **ios/App/Podfile**:
 
+```ruby
+pod 'Firebase/Messaging'
+```
+
 Perbarui platform native dengan perintah ini:
 
-Ubah kode Swift native di **ios/App/App/AppDelegate.swift** untuk mendaftar dengan Firebase dan mengembalikan token yang benar ke aplikasi Anda.
+```bash
+pod install
+```
+
+Modifikasi kode Swift native di **ios/App/App/AppDelegate.swift** untuk mendaftar dengan Firebase dan mengembalikan token yang benar ke aplikasi Anda:
+
+```swift
+import UIKit
+import Capacitor
+import Firebase
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+```
 
 Terakhir, tambahkan Capability untuk Push Notifications dalam proyek Xcode Anda.
+
+![capacitor-xcode-capability](/capacitor-xcode-capability.webp)
 
 Sekarang, bangun aplikasi Anda dan integrasikan notifikasi push.
 
 ## Integrasi Notifikasi Push Ionic
 
-Buat layanan dan halaman baru dalam proyek Ionic Anda:
+Buat service dan halaman baru dalam proyek Ionic Anda:
 
-Perbarui routing di **app/app-routing.module**:ts** untuk menyertakan halaman baru dengan id dinamis:
+```bash
+ionic g service services/fcm
+ionic g page pages/notifications
+```
+
+Perbarui routing di **app/app-routing.module**ts** untuk menyertakan halaman baru dengan id dinamis:
 
 ```bash
 ionic start pushApp blank --type=angular --capacitor --package-id=com.appdactic.devpush
@@ -128,7 +201,7 @@ Tampilkan detail di **pages/details/detailspagehtml**:
 npx cap update ios
 ```
 
-Bangun aplikasi, sinkronkan perubahan Anda, dan deploy ke perangkat Anda
+Build aplikasi, sinkronkan perubahan, dan deploy ke perangkat Anda
 
 ```swift
 import UIKit
@@ -171,25 +244,25 @@ Ada beberapa cara untuk mengirim notifikasi push dengan Firebase
 
 ### Pengujian Perangkat Spesifik
 
-Setelah men-deploy aplikasi Anda ke perangkat, Anda dapat memeriksa log konsol untuk melihat token setelah pendaftaran. Gunakan token ini untuk mengirim pengujian push yang ditargetkan untuk mengkonfirmasi integrasi Anda berfungsi. Di Firebase, buka **Cloud Messaging** dan pilih **Send test message**. Tambahkan token perangkat dari log.
+Setelah men-deploy aplikasi ke perangkat, Anda dapat memeriksa log konsol untuk melihat token setelah registrasi. Gunakan token ini untuk mengirim pengujian push yang ditargetkan untuk mengkonfirmasi integrasi Anda berfungsi. Di Firebase, buka **Cloud Messaging** dan pilih **Send test message**. Tambahkan token perangkat dari log.
 
 ![firebase-test-push](/firebase-test-pushwebp)
 
-Jika semuanya diatur dengan benar, Anda seharusnya melihat notifikasi push di perangkat Anda.
+Jika semuanya diatur dengan benar, Anda seharusnya melihat notifikasi push di perangkat Anda
 
 ### Pesan Push dengan Payload
 
-Untuk menguji notifikasi push dengan informasi tambahan, ikuti wizard di halaman yang sama untuk menentukan informasi umum dan pilih platform yang ingin Anda targetkan. Tambahkan **additional options** untuk mengirim payload dengan notifikasi push Anda.
+Untuk menguji notifikasi push dengan informasi tambahan, ikuti wizard di halaman yang sama untuk menentukan informasi umum dan pilih platform yang ingin Anda targetkan. Tambahkan **additional options** untuk mengirim payload dengan notifikasi push Anda
 
 ![firebase-push-payload](/firebase-push-payloadwebp)
 
-Di bagian **Advanced options**, tambahkan pasangan kunci-nilai **Custom data**. Misalnya, Anda dapat menggunakan kunci `detailsId` dan nilai pilihan Anda. Data ini akan digunakan dalam aplikasi untuk menavigasi ke halaman detail dengan id yang ditentukan.
+Di bagian **Advanced options**, tambahkan pasangan kunci-nilai **Custom data**. Misalnya, Anda dapat menggunakan kunci `detailsId` dan nilai pilihan Anda. Data ini akan digunakan dalam aplikasi untuk menavigasi ke halaman detail dengan id yang ditentukan
 
-Setelah mengirim notifikasi push, aplikasi Anda seharusnya menerimanya dan menampilkan halaman detail dengan id yang ditentukan ketika notifikasi diketuk.
+Setelah mengirim notifikasi push, aplikasi Anda akan menerimanya dan menampilkan halaman detail dengan id yang ditentukan ketika notifikasi diketuk
 
 ### Menggunakan API Firebase
 
-Anda juga dapat mengirim notifikasi push secara programatik menggunakan API Firebase. Untuk melakukan ini, Anda perlu mendapatkan **Server key** dari pengaturan proyek Firebase Anda di bawah tab **Cloud Messaging**.
+Anda juga dapat mengirim notifikasi push secara programatik menggunakan API Firebase. Untuk melakukan ini, Anda perlu mendapatkan **Server key** dari pengaturan proyek Firebase Anda di bawah tab **Cloud Messaging**
 
 Dengan server key, Anda dapat mengirim permintaan POST ke API Firebase dengan payload yang diperlukan. Berikut contoh menggunakan Nodejs dan pustaka `request`:
 
@@ -198,6 +271,6 @@ ionic g service services/fcm
 ionic g page pages/details
 ```
 
-Ganti `YOUR_SERVER_KEY` dan `YOUR_DEVICE_TOKEN` dengan server key dan token perangkat Anda yang sebenarnya. Jalankan skrip, dan perangkat Anda seharusnya menerima notifikasi push dengan payload kustom.
+Ganti `YOUR_SERVER_KEY` dan `YOUR_DEVICE_TOKEN` dengan server key dan token perangkat Anda yang sebenarnya. Jalankan script, dan perangkat Anda seharusnya menerima notifikasi push dengan payload kustom
 
-Itu saja! Anda telah berhasil mengintegrasikan notifikasi push dalam aplikasi Ionic Capacitor Anda menggunakan Firebase. Sekarang Anda dapat mengirim notifikasi push kepada pengguna Anda baik di platform Android maupun iOS.
+Selesai! Anda telah berhasil mengintegrasikan notifikasi push di aplikasi Ionic Capacitor Anda menggunakan Firebase. Sekarang Anda dapat mengirim notifikasi push ke pengguna Anda di platform Android dan iOS

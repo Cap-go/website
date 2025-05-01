@@ -1,37 +1,38 @@
 ---
-slug: ko__setup-ci-and-cd-gitlab
-title: Automatic build and release app with GitLab
+slug: setup-ci-and-cd-gitlab
+title: GitLab으로 앱 자동 빌드 및 릴리스하기
 description: >-
-  Create your own CI/CD pipeline with GitLab for free, deploy your Ionic
-  Capacitor JS app every time you push to main.
+  Crea la tua pipeline CI/CD con GitLab gratuitamente e distribuisci la tua
+  applicazione Ionic Capacitor JS ad ogni push su main.
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2023-09-14T00:00:00.000Z
 head_image: /CI_CD_in_Gitlab.webp
-head_image_alt: CI/CD in GitLab
+head_image_alt: GitLab의 CI/CD
+keywords: 'GitLab, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
 locale: ko
 next_blog: ''
 ---
 
-This article will guide you on how to do CI/CD pipeline setup with GitLab.
+이 문서는 GitLab을 사용한 CI/CD 파이프라인 설정 방법을 안내합니다.
 
-## Preface
+## 서문
 
-Be sure you have added your Capacitor app first to Capgo, this tutorial just focuses on the upload phase. If you need to add your app to Capgo, you can follow this [Tutorial](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/).
+먼저 Capacitor 앱을 Capgo에 추가했는지 확인하세요. 이 튜토리얼은 업로드 단계에만 초점을 맞추고 있습니다. Capgo에 앱을 추가하는 방법은 이 [Tutorial](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)을 참고하세요.
 
-## Commit convention
+## 커밋 규칙
 
-First you need to start following the commit convention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)\` this will help the tooling understand how to upgrade the version number, it's 5 min to learn it.
+먼저 [conventional commits](https://wwwconventionalcommitsorg/en/v100/) 커밋 규칙을 따르기 시작해야 합니다. 이는 도구가 버전 번호를 어떻게 업그레이드할지 이해하는데 도움이 되며, 5분이면 배울 수 있습니다.
 
-![Conventional commits](/conventional_commits.webp)
+![Conventional commits](/conventional_commitswebp)
 
-## GitLab CI/CD for Tag
+## 태그를 위한 GitLab CI/CD
 
-Create a .gitlab-ci.yml file in the root of your GitLab repository with the following content
+GitLab 저장소의 루트에 다음 내용으로 gitlab-ci.yml 파일을 생성하세요.
 
       
      stages:
@@ -52,11 +53,11 @@ Create a .gitlab-ci.yml file in the root of your GitLab repository with the foll
        - npx capacitor-standard-version
        - git push origin $CI_COMMIT_REF_NAME --tags
 
-Replace "gitlab@yourdomain.com" and "GitLab CI/CD" with your GitLab email and username in the script section. This configuration triggers the job only on pushes to the main branch and excludes commits with messages starting with "chore(release):".
+스크립트 섹션에서 "gitlab@yourdomain.com"과 "GitLab CI/CD"를 귀하의 GitLab 이메일과 사용자 이름으로 바꾸세요. 이 설정은 main 브랜치에 푸시할 때만 작업을 트리거하고 "chore(release):"로 시작하는 커밋 메시지는 제외합니다.
 
-## GitLab CI/CD for Build
+## 빌드를 위한 GitLab CI/CD
 
-Add another stage to your .gitlab-ci.yml file for the build:
+gitlab-ci.yml 파일에 빌드를 위한 다른 단계를 추가하세요:
 
         stages:
           - deploy
@@ -64,7 +65,7 @@ Add another stage to your .gitlab-ci.yml file for the build:
        deploy:
          stage: deploy
          only:
-           - tags  # This job will only run for tag pushes
+           - tags  # 이 작업은 태그 푸시에서만 실행됩니다
          script:
            - apt-get update -qy && apt-get install -y nodejs npm
            - npm install -g @capgo/cli
@@ -72,14 +73,14 @@ Add another stage to your .gitlab-ci.yml file for the build:
            - npm run build
            - npx @capgo/cli bundle upload -a $CAPGO_TOKEN -c production
          variables:
-           FIREBASE_CONFIG: $FIREBASE_CONFIG  # Define this in your GitLab project settings
+           FIREBASE_CONFIG: $FIREBASE_CONFIG  # GitLab 프로젝트 설정에서 이것을 정의하세요
          environment:
            name: production
 
-Ensure you have your Capgo API key (CAPGO_TOKEN) added as a CI/CD variable in your GitLab project. Go to your project in GitLab, navigate to Settings > CI/CD > Variables, and add a variable named CAPGO_TOKEN with your API key value.
+GitLab 프로젝트의 CI/CD 변수에 Capgo API 키(CAPGO_TOKEN)가 추가되어 있는지 확인하세요. GitLab의 프로젝트로 이동하여 설정 > CI/CD > 변수로 이동한 다음, CAPGO_TOKEN이라는 이름의 변수를 API 키 값과 함께 추가하세요.
 
-Customize the build script to match your specific project's build process, such as changing the npm run build command.
+npm run build 명령을 변경하는 등 특정 프로젝트의 빌드 프로세스에 맞게 빌드 스크립트를 사용자 정의하세요.
 
-## Conclusion
+## 결론
 
-Here we are! We took an extra step in our tech journey. In modern software development, CICD is an essential factor to be considered. So that I'm hoping this guideline makes sense to everyone.
+여기까지 입니다! 우리는 기술 여정에서 한 걸음 더 나아갔습니다. 현대 소프트웨어 개발에서 CI/CD는 필수적으로 고려해야 할 요소입니다. 이 가이드라인이 모든 분들께 도움이 되길 바랍니다.

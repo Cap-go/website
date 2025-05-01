@@ -1,12 +1,10 @@
 ---
-slug: it__create-offline-screen-in-vue-angular-react
-title: >-
-  Come Creare una Schermata Offline in Applicazioni Vue, Angular e React con
-  l'API Network e Capacitor
+slug: create-offline-screen-in-vue-angular-react
+title: 'Vue, Angular 및 React 애플리케이션에서 Network API와 Capacitor를 사용하여 오프라인 화면 만들기'
 description: >-
-  Scopri come implementare schermate offline in applicazioni Vue, Angular o
-  React utilizzando l'API Network e Capacitor. Migliora l'esperienza utente
-  gestendo efficacemente gli scenari offline.
+  Aprende a implementar una pantalla sin conexión utilizando la API de Network y
+  Capacitor en aplicaciones Vue, Angular o React. Maneja los escenarios sin
+  conexión de manera efectiva para mejorar la experiencia del usuario.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -14,28 +12,32 @@ created_at: 2022-06-21T00:00:00.000Z
 updated_at: 2022-06-21T00:00:00.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: Immagine di una persona che lavora al computer
+keywords: >-
+  Vue, Angular, React, offline screen, network API, Capacitor, mobile app
+  development, live updates, OTA updates, continuous integration, mobile app
+  updates
 tag: Tutorial
 published: true
 locale: it
 next_blog: ''
 ---
 
-# Come creare una schermata offline in Vue 3, Angular 14 o React
+# Come Creare una Schermata Offline in Vue 3, Angular 14 o React
 
-In questo tutorial, impareremo come creare una schermata offline nelle applicazioni Vue 3, Angular 14 e React utilizzando l'API Network. L'API Network fornisce informazioni sulla rete e sulla connettività, consentendoci di gestire scenari offline e fornire una migliore esperienza utente.
+In questo tutorial, impareremo come creare una schermata offline nelle applicazioni Vue 3, Angular 14 e React utilizzando la Network API. La Network API fornisce informazioni sulla rete e sulla connettività, permettendoci di gestire gli scenari offline e fornire una migliore esperienza utente.
 
 ## Prerequisiti
 
 Prima di iniziare, assicurati di avere installato quanto segue:
 
-- [Node.js](https://nodejs.org/) (versione 14 o superiore)
+- [Nodejs](https://nodejs.org/) (versione 14 o superiore)
 - [Vue CLI](https://cli.vuejs.org/)
 - [Angular CLI](https://cli.angular.io/)
 - [Create React App](https://create-react-app.dev/)
 
-## Configurazione del progetto
+## Configurazione del Progetto
 
-Innanzitutto, creiamo un nuovo progetto utilizzando il rispettivo strumento di scaffolding per ciascun framework.
+Per prima cosa, creiamo un nuovo progetto utilizzando il rispettivo strumento di scaffolding per ogni framework.
 
 ### Vue 3
 
@@ -67,9 +69,9 @@ npx create-react-app offline-screen-react
 
 Attendi che il progetto venga creato.
 
-## Installazione dell'API Network
+## Installazione della Network API
 
-Ora, installiamo il pacchetto `@capacitor/network`, che fornisce l'API Network.
+Ora, installiamo il pacchetto `@capacitor/network`, che fornisce la Network API.
 
 Apri il terminale e naviga nella directory del tuo progetto. Quindi, esegui il seguente comando per installare il pacchetto:
 
@@ -83,13 +85,13 @@ Per i progetti Capacitor, esegui anche il seguente comando per sincronizzare i f
 npx cap sync
 ```
 
-Assicurati di avere installato globalmente il CLI di Capacitor eseguendo:
+Assicurati di avere Capacitor CLI installato globalmente eseguendo:
 
 ```shell
 npm install -g @capacitor/cli
 ```
 
-## Implementazione della schermata offline
+## Implementazione della Schermata Offline
 
 Successivamente, implementeremo la funzionalità della schermata offline in ciascun framework. Mostreremo un semplice messaggio quando l'utente va offline.
 
@@ -125,7 +127,7 @@ const logCurrentNetworkStatus = async () => {
 };
 ```
 
-Nel template della tua applicazione (`App.vue`), aggiungi un elemento `<div>` con un id di `offline-screen` per visualizzare il messaggio della schermata offline:
+Nel template della tua applicazione (`App.vue`), aggiungi un elemento `<div>` con un id di `offline-screen` per mostrare il messaggio della schermata offline:
 
 ```html
 <template>
@@ -195,7 +197,7 @@ export class AppComponent {
 }
 ```
 
-Nel template della tua applicazione (`app.component.html`), aggiungi un elemento `<template>` con un id di `offline-screen` per visualizzare il messaggio della schermata offline:
+Nel template della tua applicazione (`app.component.html`), aggiungi un elemento `<template>` con un id di `offline-screen` per mostrare il messaggio della schermata offline:
 
 ```html
 <div id="offline-screen">
@@ -293,9 +295,10 @@ Aggiungi i seguenti stili al file `App.css`:
 
 Ora, quando l'utente va offline, verrà visualizzata la schermata offline. Quando l'utente torna online, la schermata offline verrà nascosta.
 
-## Metodi e interfacce di supporto
+## Metodi e Interfacce di Supporto
 
-L'API Network fornisce diversi metodi e interfacce per aiutarti a gestire la connessione di rete. Ecco alcuni dei principali:
+La Network API fornisce diversi metodi e interfacce per aiutarti a gestire la connessione di rete. Ecco alcuni dei principali:
 
-- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Interroga lo stato attuale della connessione di rete.
-- [`addListener('networkStatusChange', )`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Ascolta i cambiamenti nella connessione di rete.
+- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Interroga lo stato attuale della connessione di rete
+- [`addListener('networkStatusChange', )`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Ascolta i cambiamenti nella connessione di rete
+-

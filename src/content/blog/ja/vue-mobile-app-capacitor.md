@@ -1,108 +1,191 @@
 ---
-slug: ja__vue-mobile-app-capacitor
-title: VueとCapacitorを使用したモバイルアプリケーションの作成
-description: Vue、Capacitorを使ってモバイルアプリケーションを作成する方法を学び、Konsta UIを使ってユーザーインターフェースを強化することもできます。
+slug: vue-mobile-app-capacitor
+title: Créer des Applications Mobiles avec Vue et Capacitor
+description: Vue、Capacitor、そしてオプションでKonsta UIを使用してUIを強化する方法で、モバイルアプリを作成する方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-08T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /vue_capacitor.webp
-head_image_alt: VueとCapacitorのイラスト
+head_image_alt: Vue と Capacitor の図解
+keywords: >-
+  Vue, Capacitor, mobile app development, live updates, OTA updates, continuous
+  integration, mobile app updates
 tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-このチュートリアルでは、Capacitorを使用してVueウェブアプリケーションをネイティブモバイルアプリに変換するプロセスを案内します。オプションとして、Tailwind CSSベースのモバイルUIライブラリであるKonsta UIでモバイルUIを強化することもできます。
+このチュートリアルでは、Capacitorを使用してVueウェブアプリケーションをネイティブモバイルアプリに変換するプロセスをご案内します。オプションとして、Tailwind CSSベースのモバイルUIライブラリであるKonsta UIを使用してモバイルUIを強化することもできます。
 
 ## Capacitorについて
 
-Capacitorは、ウェブプロジェクトに簡単に統合でき、アプリケーションをネイティブモバイルアプリに変換するための画期的なツールです。ネイティブXcodeおよびAndroid Studioプロジェクトを生成し、JavaScriptブリッジを通じてカメラなどのネイティブデバイス機能にアクセスできるようにします。
+Capacitorは、任意のウェブプロジェクトに簡単に統合でき、アプリケーションをネイティブモバイルアプリに変換できる画期的なツールです。XcodeとAndroid Studioのプロジェクトを自動生成し、JavaScriptブリッジを通じてカメラなどのネイティブデバイス機能へのアクセスを提供します。
 
 ## Vueアプリの準備
 
-まず、次のコマンドを実行して新しいVueアプリを作成します。
+まず、以下のコマンドを実行して新しいVueアプリを作成します：
 
-[[コードブロック]]
+```shell
+vue create my-app
+cd my-app
+npm install
+```
 
-ネイティブモバイル展開のためにVueアプリを準備するには、プロジェクトをエクスポートする必要があります。**package.json**ファイルにスクリプトを追加して、Vueプロジェクトをビルドおよびコピーします。
+Vueアプリをネイティブモバイルデプロイメント用に準備するために、プロジェクトをエクスポートする必要があります。**package.json**ファイルにVueプロジェクトをビルドしてコピーするスクリプトを追加します：
 
-[[コードブロック]]
+```json
+{
+  "scripts": {
+    // ...
+    "build": "vue-cli-service build"
+  }
+}
+```
 
-`build`コマンドを実行した後、プロジェクトのルートディレクトリに新しい`dist`フォルダーが作成されているはずです。このフォルダーは後でCapacitorで使用されます。
+`build`コマンドを実行すると、プロジェクトのルートディレクトリに新しい`dist`フォルダが作成されます。このフォルダは後でCapacitorによって使用されます。
 
-## VueアプリにCapacitorを追加
+## VueアプリにCapacitorを追加する
 
-Vueウェブアプリをネイティブモバイルコンテナに変換するには、次の手順に従ってください。
+Vueウェブアプリをネイティブモバイルコンテナに変換するには、以下の手順に従ってください：
 
-1. 開発依存関係としてCapacitor CLIをインストールし、プロジェクト内にセットアップします。セットアップ中に名前とバンドルIDのデフォルト値を受け入れます。
+1. Capacitor CLIを開発依存関係としてインストールし、プロジェクト内でセットアップします。セットアップ中は、名前とバンドルIDのデフォルト値を受け入れてください。
 
-2. コアパッケージとiOSおよびAndroidプラットフォームに関連するパッケージをインストールします。
+2. コアパッケージと、iOSおよびAndroidプラットフォーム用の関連パッケージをインストールします。
 
-3. プラットフォームを追加すると、Capacitorはプロジェクトのルートに各プラットフォーム用のフォルダーを作成します：
+3. プラットフォームを追加すると、Capacitorはプロジェクトのルートに各プラットフォーム用のフォルダを作成します：
 
-[[コードブロック]]
+```shell
+# Install the Capacitor CLI locally
+npm install -D @capacitor/cli
 
-これで、Vueプロジェクトに新しい**iOS**および**android**フォルダーが表示されるはずです。
+# Initialize Capacitor in your Vue project
+npx cap init
 
-**capacitor.config.json**ファイルを更新して、**webDir**をビルドコマンドの結果にポイントします：
+# Install the required packages
+npm install @capacitor/core @capacitor/ios @capacitor/android
 
-[[コードブロック]]
+# Add the native platforms
+npx cap add ios
+npx cap add android
+```
+
+これで、Vueプロジェクトに新しい**iOS**および**android**フォルダが表示されるはずです。
+
+**capacitor.config.json**ファイルを更新して、**webDir**をビルドコマンドの結果を指すように設定します：
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "my-app",
+  "webDir": "dist"
+}
+```
 
 これで、Vueプロジェクトをビルドし、Capacitorと同期できます：
 
-[[コードブロック]]
+```shell
+npm run build
+npx cap sync
+```
 
-## ネイティブアプリのビルドと展開
+## ネイティブアプリのビルドとデプロイ
 
-iOSアプリを開発するにはXcodeがインストールされている必要があり、AndroidアプリにはAndroid Studioが必要です。さらに、アプリをアプリストアで配布するために、iOS用のApple Developer ProgramおよびAndroid用のGoogle Play Consoleに登録する必要があります。
+iOSアプリを開発するにはXcodeが、Androidアプリを開発するにはAndroid Studioが必要です。また、アプリストアでアプリを配布するには、Apple Developer ProgramとGoogle Play Consoleへの登録が必要です。
 
 Capacitor CLIを使用して両方のネイティブプロジェクトを開きます：
 
-[[コードブロック]]
+```shell
+npx cap open ios
+npx cap open android
+```
 
-Android StudioまたはXcodeを使用して、接続されたデバイスにアプリを展開します。
+Android StudioまたはXcodeを使用して、接続されたデバイスにアプリをデプロイします。
 
 ## Capacitorライブリロード
 
-Capacitorアプリが、ネットワーク上の特定のURLからコンテンツを読み込むことで、モバイルデバイスでライブリロードを有効にします。
+モバイルデバイスでライブリロードを有効にするには、Capacitorアプリがネットワーク上の特定のURLからコンテンツを読み込むようにします。
 
-ローカルIPアドレスを見つけ、`capacitor.config.ts`ファイルを正しいIPとポートで更新します：
+ローカルIPアドレスを確認し、`capacitor.config.ts`ファイルを正しいIPとポートで更新します：
 
-[[コードブロック]]
+```javascript
+import { CapacitorConfig } from '@capacitor/cli';
 
-これらの変更を適用するために、ネイティブプロジェクトにコピーします：
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'my-app',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  server: {
+    url: 'http://192.168.x.xx:8080',
+    cleartext: true
+  }
+};
 
-[[コードブロック]]
+export default config;
+```
 
-これで、Vueアプリを更新すると、自動的にアプリがリロードされ、変更が表示されます。
+これらの変更をネイティブプロジェクトにコピーして適用します：
+
+```shell
+npx cap copy
+```
+
+これで、Vueアプリを更新すると、アプリが自動的にリロードされて変更が表示されます。
 
 ## Capacitorプラグインの使用
 
-Capacitorプラグイン（例えば、Shareプラグイン）をインストールし、Vueアプリで使用します：
+共有プラグインなどのCapacitorプラグインをインストールし、Vueアプリで使用します：
 
-[[コードブロック]]
+```shell
+npm i @capacitor/share
+```
 
 パッケージをインポートし、アプリで`share()`関数を呼び出します：
 
-[[コードブロック]]
+```html
+<template>
+  <div>
+    <h1>Welcome to Vue and Capacitor!</h1>
+    <button @click="share">Share now!</button>
+  </div>
+</template>
 
-新しいプラグインをインストールした後、`sync`コマンドを実行し、デバイスにアプリを再展開します：
+<script setup lang="ts">
+import { Share } from '@capacitor/share';
 
-[[コードブロック]]
+async function share() {
+  await Share.share({
+    title: 'Open Youtube',
+    text: 'Check new video on youtube',
+    url: 'https://www.youtube.com',
+    dialogTitle: 'Share with friends'
+  });
+}
+</script>
+```
+
+新しいプラグインをインストールした後、`sync`コマンドを実行してアプリをデバイスに再デプロイします：
+
+```
+npx cap sync
+```
 
 ## Konsta UIの追加
 
-VueアプリでKonsta UIを使用するには、[Tailwindがすでにインストールされている](https://tailwindcss.com/docs/guides/vite/#vue)ことが必要で、パッケージをインストールします。VueアプリでKonsta UIを使用するには、パッケージをインストールし、`tailwind.config.js`ファイルを修正します：
+VueアプリでKonsta UIを使用するには、[tailwindがすでにインストール](https://tailwindcss.com/docs/guides/vite/#vue)されている必要があり、パッケージをインストールする必要があります：
+VueアプリでKonsta UIを使用するには、パッケージをインストールし、`tailwind.config.js`ファイルを変更します：
 
-[[コードブロック]]
+```shell
+npm i konsta
+```
 
-アプリを`pages/_app.vue`ファイルの`App`コンポーネントでラップし、VueページでKonsta UI Vueコンポーネントを使用します。
+`pages/_app.vue`ファイルで`App`コンポーネントでアプリをラップし、VueページでKonsta UI Vueコンポーネントを使用します。
 
 ## 結論
 
-Capacitorは、既存のウェブプロジェクトに基づいたネイティブアプリケーションを構築するための優れた選択肢です。Capgoを追加することで、アプリにライブアップデートを追加することがさらに簡単になり、ユーザーは常に最新の機能とバグ修正にアクセスできます。
+Capacitorは、既存のウェブプロジェクトをベースにネイティブアプリケーションを構築するための優れたオプションです。Capgoを追加することで、アプリへのライブ更新がさらに簡単になり、ユーザーが常に最新の機能とバグ修正にアクセスできるようになります。
 
-Capgoがどのようにしてより良いアプリを迅速に構築するのに役立つかを学び、[無料アカウントにサインアップ](/register/)してください。
+Capgoがより良いアプリをより速く構築するのにどのように役立つかを学ぶために、[無料アカウントに登録](/register/)してください。

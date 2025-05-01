@@ -1,30 +1,141 @@
 ---
-slug: ko__ionic-capacitor-push-notifications-firebase
-title: 'Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide'
+slug: ionic-capacitor-push-notifications-firebase
+title: 'Notifiche Push di Ionic Capacitor con Firebase: Una Guida Passo-Passo'
 description: >-
-  Learn how to integrate push notifications in your Ionic Capacitor app using
-  Firebase, with step-by-step instructions for both Android and iOS platforms.
+  Firebase를 사용하여 Android 및 iOS 플랫폼에 대한 단계별 가이드와 함께 Ionic Capacitor 앱에서 푸시 알림을
+  통합하는 방법을 알아보세요.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /push_notif.webp
-head_image_alt: Ionic Capacitor Push Notifications with Firebase
+head_image_alt: Firebase를 사용한 Ionic Capacitor 푸시 알림
+keywords: >-
+  Ionic, Capacitor, push notifications, Firebase, mobile app development, live
+  updates, OTA updates, continuous integration, mobile app updates
 tag: tutorial
 published: true
 locale: ko
 next_blog: ''
 ---
 
-In this tutorial, we will integrate push notifications in an Ionic Capacitor app using Firebase. You don't need a specific service for this, but you do need to configure several things beforehand. Firebase is an excellent choice since it's required for Android, and you can easily use it to send notifications without using the database.
+이 튜토리얼에서는 Firebase를 사용하여 Ionic Capacitor 앱에 푸시 알림을 통합할 것입니다. 이를 위해 특별한 서비스는 필요하지 않지만, 사전에 여러 가지를 구성해야 합니다. Firebase는 Android에 필요하고 데이터베이스를 사용하지 않고도 쉽게 알림을 보낼 수 있어서 탁월한 선택입니다.
 
-<div class="mx-auto" style="width: 50%;">
-  <video src="/push_demo.mov" alt="ionic capacitor push" autoplay loop muted>
-</div>
+<Steps>
+1. Capacitor가 활성화된 Ionic 앱을 생성하고 앱의 고유 식별자인 **package id**를 지정합니다. 그런 다음 앱을 빌드하고 네이티브 플랫폼을 추가합니다.
+</Steps>
 
+```ts
+npm install @capacitor/push-notifications
+ionic start ionic-push-notifications blank --capacitor
+cd ionic-push-notifications
+```
 
-First, we will create an Ionic app with Capacitor enabled and specify our **package id**, which is the unique identifier for your app. Then, we will build the app and add the native platforms.
+이미 앱이 있다면 **capacitor.config.json**에서 **appId**를 변경할 수 있습니다. 하지만 네이티브 폴더가 이미 존재한다면, Capacitor는 폴더를 한 번만 생성하고 **ID를 자동으로 업데이트하지 않기 때문에** ID가 나타나는 모든 파일에서 수동으로 변경해야 합니다. **capacitor.config.json**에서 배지 카운트 업데이트, 푸시 알림 시 소리 재생, 알림 도착 시 알림 표시와 같은 옵션도 지정할 수 있습니다.
+
+이제 앱 외부에서 푸시 알림을 구성해 보겠습니다.
+
+## Firebase 구성
+
+먼저 [새로운 Firebase 프로젝트를 생성](https://firebase.google.com/)하거나 기존 프로젝트를 사용하세요. 새 프로젝트의 이름과 기본 옵션을 제공하세요.
+
+새 앱인 경우 앱 대시보드에서 **"Firebase를 앱에 추가하여 시작하기"**가 표시됩니다. 그렇지 않으면 톱니바퀴 아이콘을 클릭하고 **프로젝트 설정**으로 이동하여 앱을 추가하세요.
+
+iOS와 Android 모두 대화상자가 비슷하며, 중요한 점은 앱에 대한 **package id**를 사용하는 것입니다.
+
+<Steps>
+1. Android와 iOS 앱을 등록하세요.
+</Steps>
+
+초기 단계 후, 다음 파일들을 다운로드하세요:
+
+- Android용 **google-services.json** 파일
+- iOS용 **GoogleService-Info.plist** 파일
+
+다음으로 플랫폼을 구성하세요.
+
+### Android 푸시 준비
+
+Android의 경우, 다운로드한 **google-services.json** 파일을 **android/app/** 폴더로 이동하세요.
+
+<Steps>
+1. **google-services.json** 파일을 **android/app/** 폴더에 복사하세요.
+</Steps>
+
+Android는 이것으로 끝입니다. 이제 iOS를 구성해 보겠습니다.
+
+### iOS 푸시 준비
+
+이 부분은 더 복잡합니다. 먼저, Apple Developer 계정의 [식별자 목록](https://developer.apple.com/account/resources/identifiers/list/)에서 앱의 App ID를 생성하세요. 목록에서 **푸시 알림 기능**을 반드시 **선택**하세요.
+
+![ionic-ios-push-id](/ionic-ios-push-id.webp)
+
+**Bundle ID**는 Capacitor와 Firebase의 App ID와 동일해야 합니다.
+
+이제 [Key를 생성](https://developer.apple.com/account/resources/authkeys/list/)하고 **Apple Push Notifications service (APNs)**를 활성화하세요. 키 수가 최대에 도달한 경우 기존 키나 인증서를 사용할 수 있지만, 그 과정은 더 복잡합니다.
+
+![ios-developer-push-key](/ios-developer-push-key.webp)
+
+**p8** 파일을 다운로드한 후 Firebase에 업로드하세요. Firebase 프로젝트 설정의 **Cloud Messaging** 탭에서 파일을 업로드하고 Key ID와 iOS의 Team ID 세부 정보를 입력하세요.
+
+![firebase-upload-ios-key](/firebase-upload-ios-key.webp)
+
+이제 다음 명령을 실행하여 Xcode 프로젝트를 수정하세요:
+
+```bash
+npx cap open ios
+```
+
+Firebase에서 다운로드한 **GoogleService-Info.plist** 파일을 iOS 프로젝트에 복사하세요. 파일을 Xcode 프로젝트의 app/app 폴더 안으로 드래그하고 **필요한 경우 항목 복사**를 선택하세요.
+
+다음으로 **ios/App/Podfile**에 Firebase 종속성을 위한 새로운 Pod를 추가하세요:
+
+```ruby
+pod 'Firebase/Messaging'
+```
+
+다음 명령으로 네이티브 플랫폼을 업데이트하세요:
+
+```bash
+npx cap update ios
+```
+
+**ios/App/App/AppDelegate.swift**의 네이티브 Swift 코드를 수정하여 Firebase에 등록하고 앱에 올바른 토큰을 반환하도록 하세요:
+
+```swift
+import UIKit
+import Capacitor
+import Firebase
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        
+        return true
+    }
+```
+
+마지막으로 Xcode 프로젝트에서 푸시 알림에 대한 Capability를 추가하세요.
+
+![capacitor-xcode-capability](/capacitor-xcode-capability.webp)
+
+이제 앱을 빌드하고 푸시 알림을 통합하세요.
+
+## Ionic 푸시 알림 통합
+
+Ionic 프로젝트에서 서비스와 새로운 페이지를 생성하세요:
+
+```bash
+ionic g service services/fcm
+ionic g page pages/notifications
+```
+
+**app/app-routing.module**의 라우팅을 업데이트하세요:ts**에 동적 id가 있는 새 페이지를 포함하려면:
 
 ```bash
 ionic start pushApp blank --type=angular --capacitor --package-id=com.appdactic.devpush
@@ -34,7 +145,7 @@ npx cap add ios
 npx cap add android
 ```
 
-If you already have an app, you can change the **capacitor.config.json** to include your **appId**. However, if your native folders already exist, you will need to replace the id in all files where it appears, as Capacitor only creates the folder once and **won't update the id itself**. In the **capacitor.config.json**, you can also specify options like updating the badge count, playing sound on push, and showing an alert when a notification arrives.
+**services/fcmservice.ts**에서 푸시 알림을 처리하는 서비스를 생성하세요:
 
 ```json
 {
@@ -55,63 +166,13 @@ If you already have an app, you can change the **capacitor.config.json** to incl
 }
 ```
 
-Now, let's configure push notifications outside the app.
-
-## Firebase Configuration
-
-Start by [creating a new Firebase project](https://firebase.google.com/) or using an existing one. Provide a name and default options for a new project.
-
-If you have a new app, you should see **"Get started by adding Firebase to your app"** in your app's dashboard. Otherwise, click the gear icon and go to **project settings** to add an app.
-
-The dialog for both iOS and Android looks similar, and the important thing is to use your **package id** for the apps.
-
-
-<div class="mx-auto" style="width: 100%;">
-  <img src="/firebase-app-setup-ios.webp" alt="firebase-app-setup-ios">
-</div>
-
-After the initial step, download the following files:
-
-- **google-services.json** file for Android
-- **GoogleService-info.plist** file for iOS
-
-Next, configure the platforms.
-
-### Android Push Preparation
-
-For Android, move the **google-services.json** file you downloaded to the **android/app/** folder.
-
-<div class="mx-auto" style="width: 50%;">
-  <img src="/android-push-file.webp" alt="android-push-file">
-</div>
-
-That's all for Android. Now let's configure iOS.
-
-### iOS Push Preparation
-
-This part is more complicated. First, [create an App ID for your app within the identifiers list](https://developer.apple.com/account/resources/identifiers/list/) of your Apple Developer account. Make sure you **select the Push Notifications capability** from the list.
-
-![ionic-ios-push-id](/ionic-ios-push-id.webp)
-
-The **Bundle ID** should be the same as your App ID within Capacitor and Firebase.
-
-Now, [create a Key](https://developer.apple.com/account/resources/authkeys/list/) and enable the **Apple Push Notifications service (APNs)**. If you have reached the maximum number of keys, you can use an existing key or a certificate instead, but the process is more complicated.
-
-![ios-developer-push-key](/ios-developer-push-key.webp)
-
-After downloading the **.p8** file, upload it to Firebase. Open the **Cloud Messaging** tab in your Firebase project settings, upload the file, and enter the details for the Key ID and your Team ID from iOS.
-
-![firebase-upload-ios-key](/firebase-upload-ios-key.webp)
-
-Now, make changes to your Xcode project by running:
+**app/app.component.ts**에서 `initPush()` 함수를 호출하세요:
 
 ```bash
 npx cap open ios
 ```
 
-Copy the **GoogleService-Info.plist** file you downloaded from Firebase into your iOS project. Drag the file into the Xcode project inside the app/app folder, and select **Copy items if needed**.
-
-Next, add a new Pod for the Firebase dependency in the **ios/App/Podfile**:
+**pages/details/details.page.ts**에서 상세 페이지의 정보를 처리하세요:
 
 ```ruby
 target 'App' do
@@ -121,13 +182,13 @@ target 'App' do
 end
 ```
 
-Update the native platform with this command:
+**pages/details/details.page.html**에서 상세 정보를 표시하세요:
 
 ```bash
 npx cap update ios
 ```
 
-Modify the native Swift code in **ios/App/App/AppDelegate.swift** to register with Firebase and return the correct token to your app.
+앱을 빌드하고, 변경사항을 동기화한 후 기기에 배포하세요
 
 ```swift
 import UIKit
@@ -162,283 +223,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-Finally, add the Capability for Push Notifications within your Xcode project.
+이제 Firebase로 푸시 알림을 보낼 수 있습니다
 
-![capacitor-xcode-capability](/capacitor-xcode-capability.webp)
+## Firebase로 푸시 알림 보내기
 
-Now, build your app and integrate push notifications.
+Firebase로 푸시 알림을 보내는 방법에는 여러 가지가 있습니다
 
-## Ionic Push Notification Integration
+### 특정 기기 테스트
 
-Create a service and a new page in your Ionic project:
+앱을 기기에 배포한 후, 등록 후 콘솔 로그에서 토큰을 확인할 수 있습니다. 이 토큰을 사용하여 통합이 제대로 작동하는지 확인하기 위해 대상 테스트 푸시를 보내세요. Firebase에서 **Cloud Messaging**으로 이동하여 **Send test message**를 선택하세요. 로그에서 기기 토큰을 추가하세요.
+
+![firebase-test-push](/firebase-test-push.webp)
+
+모든 것이 올바르게 설정되었다면, 기기에서 푸시 알림을 볼 수 있습니다
+
+### 페이로드가 있는 푸시 메시지
+
+추가 정보가 있는 푸시 알림을 테스트하려면, 같은 페이지에서 마법사를 따라 일반 정보를 지정하고 대상으로 하는 플랫폼을 선택하세요. 푸시 알림과 함께 페이로드를 보내려면 **additional options**를 추가하세요.
+
+![firebase-push-payload](/firebase-push-payload.webp)
+
+**Advanced options** 섹션에서 **Custom data** 키-값 쌍을 추가하세요. 예를 들어, `detailsId` 키와 원하는 값을 사용할 수 있습니다. 이 데이터는 앱에서 지정된 id로 상세 페이지로 이동하는 데 사용됩니다.
+
+푸시 알림을 보낸 후, 앱이 이를 수신하고 알림을 탭했을 때 지정된 id로 상세 페이지를 표시해야 합니다
+
+### Firebase API 사용하기
+
+Firebase API를 사용하여 프로그래밍 방식으로 푸시 알림을 보낼 수도 있습니다. 이를 위해서는 Firebase 프로젝트 설정의 **Cloud Messaging** 탭에서 **Server key**를 얻어야 합니다.
+
+서버 키를 사용하여 필요한 페이로드와 함께 Firebase API에 POST 요청을 보낼 수 있습니다. 다음은 Node.js와 `request` 라이브러리를 사용한 예시입니다:
 
 ```bash
 ionic g service services/fcm
 ionic g page pages/details
 ```
 
-Update the routing in **app/app-routing.module.ts** to include the new page with a dynamic id:
+`YOUR_SERVER_KEY`와 `YOUR_DEVICE_TOKEN`을 실제 서버 키와 기기 토큰으로 교체하세요. 스크립트를 실행하면, 기기에서 사용자 정의 페이로드가 포함된 푸시 알림을 수신해야 합니다.
 
-```typescript
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home/:id',
-    loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)
-  },
-];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-```
-
-Create a service to handle push notifications in **services/fcm.service.ts**:
-
-```typescript
-import { Injectable } from '@angular/core';
-import {
-  Plugins,
-  PushNotification,
-  PushNotificationToken,
-  PushNotificationActionPerformed,
-  Capacitor
-} from '@capacitor/core';
-import { Router } from '@angular/router';
-
-const { PushNotifications } = Plugins;
-
-@Injectable({
-  providedIn: 'root'
-})
-export class FcmService {
-
-  constructor(private router: Router) { }
-
-  initPush() {
-    if (Capacitor.platform !== 'web') {
-      this.registerPush();
-    }
-  }
-
-  private registerPush() {
-    PushNotifications.requestPermission().then((permission) => {
-      if (permission.granted) {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // No permission for push granted
-      }
-    });
-
-    PushNotifications.addListener(
-      'registration',
-      (token: PushNotificationToken) => {
-        console.log('My token: ' + JSON.stringify(token));
-      }
-    );
-
-    PushNotifications.addListener('registrationError', (error: any) => {
-      console.log('Error: ' + JSON.stringify(error));
-    });
-
-    PushNotifications.addListener(
-      'pushNotificationReceived',
-      async (notification: PushNotification) => {
-        console.log('Push received: ' + JSON.stringify(notification));
-      }
-    );
-
-    PushNotifications.addListener(
-      'pushNotificationActionPerformed',
-      async (notification: PushNotificationActionPerformed) => {
-        const data = notification.notification.data;
-        console.log('Action performed: ' + JSON.stringify(notification.notification));
-        if (data.detailsId) {
-          this.router.navigateByUrl(`/home/${data.detailsId}`);
-        }
-      }
-    );
-  }
-}
-```
-
-Call the `initPush()` function in **app/app.component.ts**:
-
-```typescript
-import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { FcmService } from './services/fcm.service';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
-})
-export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private fcmService: FcmService
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-
-      // Trigger the push setup
-      this.fcmService.initPush();
-    });
-  }
-}
-```
-
-Handle the information on the details page in **pages/details/details.page.ts**:
-
-```typescript
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Plugins } from '@capacitor/core';
-const { PushNotifications } = Plugins;
-
-@Component({
-  selector: 'app-details',
-  templateUrl: './details.page.html',
-  styleUrls: ['./details.page.scss'],
-})
-export class DetailsPage implements OnInit {
-  id = null;
-
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-    });
-  }
-
-  resetBadgeCount() {
-    PushNotifications.removeAllDeliveredNotifications();
-  }
-
-}
-```
-
-Display the details in **pages/details/details.page.html**:
-
-```html
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Details</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  My Id from push: {{ id }}
-
-  <ion-button (click)="resetBadgeCount()" expand="block">
-    Reset Badge Count
-  </ion-button>
-</ion-content>
-```
-
-Build the app, sync your changes, and deploy it to your device.
-
-```bash
-ionic build
-npx cap sync
-```
-
-Now, you can send push notifications with Firebase.
-
-## Sending Push Notifications with Firebase
-
-There are several ways to send push notifications with Firebase.
-
-### Specific Device Test
-
-After deploying your app to a device, you can check the console logs to see the token after registration. Use this token to send a targeted test push to confirm your integration is working. In Firebase, go to **Cloud Messaging** and select **Send test message**. Add the device token from the logs.
-
-![firebase-test-push](/firebase-test-push.webp)
-
-If everything is set up correctly, you should see a push notification on your device.
-
-### Push Message with Payload
-
-To test a push notification with additional information, follow the wizard on the same page to specify general information and select the platform you want to target. Add **additional options** to send a payload with your push notification.
-
-![firebase-push-payload](/firebase-push-payload.webp)
-
-In the **Advanced options** section, add a **Custom data** key-value pair. For example, you can use the key `detailsId` and a value of your choice. This data will be used in the app to navigate to the details page with the specified id.
-
-After sending the push notification, your app should receive it and display the details page with the specified id when the notification is tapped.
-
-### Using Firebase API
-
-You can also send push notifications programmatically using the Firebase API. To do this, you need to obtain the **Server key** from your Firebase project settings under the **Cloud Messaging** tab.
-
-
-With the server key, you can send a POST request to the Firebase API with the required payload. Here's an example using Node.js and the `request` library:
-
-```javascript
-const request = require('request');
-
-const serverKey = 'YOUR_SERVER_KEY';
-const deviceToken = 'YOUR_DEVICE_TOKEN';
-
-const options = {
-  method: 'POST',
-  url: 'https://fcm.googleapis.com/fcm/send',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: 'key=' + serverKey
-  },
-  body: JSON.stringify({
-    to: deviceToken,
-    notification: {
-      title: 'Test Push',
-      body: 'This is a test push notification with custom data'
-    },
-    data: {
-      detailsId: '123'
-    }
-  })
-};
-
-request(options, (error, response, body) => {
-  if (error) {
-    console.error('Error sending push:', error);
-  } else {
-    console.log('Push sent successfully:', body);
-  }
-});
-```
-
-Replace `YOUR_SERVER_KEY` and `YOUR_DEVICE_TOKEN` with your actual server key and device token. Run the script, and your device should receive the push notification with the custom payload.
-
-That's it! You've successfully integrated push notifications in your Ionic Capacitor app using Firebase. Now you can send push notifications to your users on both Android and iOS platforms.
+이제 끝났습니다! Firebase를 사용하여 Ionic Capacitor 앱에 푸시 알림을 성공적으로 통합했습니다. 이제 Android와 iOS 플랫폼 모두에서 사용자에게 푸시 알림을 보낼 수 있습니다.

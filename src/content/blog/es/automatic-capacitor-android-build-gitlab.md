@@ -1,41 +1,74 @@
 ---
-slug: es__automatic-capacitor-android-build-gitlab
-title: Compilación automática de Capacitor Android con GitLab
+slug: automatic-capacitor-android-build-gitlab
+title: Compilación automática de Android con Capacitor usando GitLab
 description: >-
-  Cómo configurar un pipeline CI/CD para tu aplicación Android de Ionic con
-  fastlane y GitLab en 5 minutos
+  Configura una pipeline CI/CD para tu aplicación Android Ionic con fastlane y
+  GitLab en 5 minutos
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
 updated_at: 2023-09-27T00:00:00.000Z
 head_image: /andriod_app_gitlab.webp
-head_image_alt: Fastlane Google Play Ilustración de GitLab
+head_image_alt: Ilustración GitLab Google Play Fastlane
+keywords: >-
+  Fastlane, CI/CD, Android, automatic build, automatic release, mobile app
+  updates
 tag: CI/CD
 published: true
 locale: es
 next_blog: null
 ---
 
-## Prerrequisitos
+# Compilaciones automáticas de Android con GitLab CI
 
-Antes de continuar con el tutorial...
+Configurar CI/CD para aplicaciones Capacitor puede ser complejo y llevar mucho tiempo. Esto es lo que necesitas saber:
 
-- Asegúrate de usar GitLab
-- Tu aplicación ya está publicada en Google Play Store
-- Deseo de leer 😆...
+## Requisitos previos
+
+Antes de comenzar, necesitarás configurar:
+
+- Una cuenta de GitLab con acceso de administrador
+- Tu aplicación ya publicada en Google Play Store con la firma adecuada
+- Archivos de clave de firma y keystore de Android
+- Proyecto en Google Cloud Console con API de Play Store habilitada
+- Cuenta de servicio con los permisos adecuados
+- Comprensión de los flujos de trabajo de GitLab CI/CD
+- Conocimiento de configuración de Fastlane
+- Tiempo para mantener y depurar el pipeline
+
+## Configuración profesional de CI/CD por Capgo
+
+Evita la complejidad: [Capgo](https://capgoapp/ci-cd/) configura tu pipeline CI/CD directamente en tu plataforma preferida:
+
+- **Independencia de plataforma**: Funciona con GitHub Actions, GitLab CI u otros
+- **Integración perfecta**: No necesitas cambiar de plataforma, funciona con tu proceso actual
+- **Configuración personalizada**: Configuración adaptada a las necesidades de tu proyecto
+- **Guía experta**: Ya hemos configurado CI/CD para más de 50 aplicaciones
+
+### Precios
+- Tarifa única de configuración: $2,600
+- Tus costos operativos: ~$300/año
+- Comparado con otras soluciones propietarias: $6,000/año
+- **Ahorra $26,100 en 5 años**
+
+[Configura CI/CD ahora](https://calcom/martindonadieu/mobile-ci-cd-done-for-you/)
+
+## Guía de configuración manual
+
+Si aún deseas configurar todo por tu cuenta, esto es lo que necesitas hacer:
 
 **Pasos a seguir en la publicación**
 
-1 _Copiar archivos de Fastlane_
-2 _Almacenar tus secretos en los secretos encriptados de GitLab_
-3 _Crear y almacenar tu clave de cuenta de servicio de Google Play_
-4 _Almacenar tu clave de firma de Android_
-5 _Configurar tu archivo yml de flujo de trabajo de GitLab_
+1. _Copiar archivos de Fastlane_
+2. _Almacenar tus secretos en secretos encriptados de GitLab_
+3. _Crear y almacenar tu clave de cuenta de servicio de Google Play_
+4. _Almacenar tu clave de firma de Android_
+5. _Configurar tu archivo yml de flujo de trabajo de GitLab_
 
-## 1\ Copiar archivos de Fastlane
+## 1. Copiar archivos de Fastlane
 
-Fastlane es una biblioteca de Ruby creada para automatizar tareas comunes de desarrollo móvil. Usando Fastlane, puedes configurar "carriles" personalizados que agrupan una serie de "acciones" que realizan tareas que normalmente harías usando Android Studio. Puedes hacer mucho con Fastlane, pero para los propósitos de este tutorial, usaremos solo un puñado de acciones principales.
+Fastlane es una biblioteca Ruby creada para automatizar tareas comunes de desarrollo móvil. Usando Fastlane, puedes configurar "lanes" personalizados que agrupan una serie de "acciones" que realizan tareas que normalmente harías usando Android Studio. Puedes hacer mucho con Fastlane, pero para los propósitos de este tutorial, usaremos solo un puñado de acciones principales.
 
 Crea una carpeta Fastlane en la raíz de tu proyecto y copia los siguientes archivos:
 Fastlane
@@ -122,24 +155,56 @@ platform :android do
 end
 ```
 
-### Almacenar tus secretos en variables de CI/CD de GitLab
+### Almacenar tus secretos en variables CI/CD de GitLab
 
-GitLab proporciona una forma de almacenar variables de CI/CD encriptadas, similar a los secretos de repositorio de GitHub. Para almacenar tu información sensible de forma segura:
+GitLab proporciona una forma de almacenar variables CI/CD encriptadas, similar a los secretos de repositorio de GitHub. Para almacenar tu información sensible de forma segura:
 
-1 Ve a la Configuración de tu proyecto de GitLab
-2 Navega a CI/CD > Variables
-3 Agrega las siguientes variables:
+1. Ve a la configuración de tu proyecto de GitLab
+2. Navega a CI/CD > Variables
+3. Añade las siguientes variables:
 
-- ANDROID_KEYSTORE_FILE: el archivo `jks` o `keystore` codificado en base64 usado para firmar tus compilaciones de Android. Este será el archivo keystore asociado con tu clave de carga (si usas Play App Signing), o tu clave de firma de aplicación
+- ANDROID_KEYSTORE_FILE: el archivo `jks` o `keystore` codificado en base64 usado para firmar tus compilaciones de Android. Será el archivo keystore asociado con tu clave de carga (si usas Play App Signing), o tu clave de firma de aplicación
 - KEYSTORE_KEY_PASSWORD: la contraseña asociada con el archivo keystore
-- KEYSTORE_KEY_ALIAS: el alias del almacén de claves
+- KEYSTORE_KEY_ALIAS: el alias del keystore
 - KEYSTORE_STORE_PASSWORD: la contraseña de la clave privada
-- DEVELOPER_PACKAGE_NAME: el ID de tu aplicación de Android como com.example.app
-- PLAY_CONFIG_JSON: La clave de cuenta de servicio JSON codificada en base64
+- DEVELOPER_PACKAGE_NAME: tu ID de aplicación Android como com.example.app
+- PLAY_CONFIG_JSON: La clave JSON de cuenta de servicio codificada en base64
 
-## Configurar tu pipeline de CI/CD de GitLab
+### Crear una clave de cuenta de servicio de Google Play
 
-Crea un archivo .gitlab-ci.yml en la raíz de tu proyecto para definir tu pipeline de CI/CD. A continuación se muestra un ejemplo de cómo puedes estructurar tu pipeline:
+Para generar el secreto `PLAY_CONFIG_JSON`, sigue estos pasos:
+
+1. Ve a la [Google Cloud Console](https://console.cloud.google.com/)
+2. Crea un nuevo proyecto o selecciona uno existente
+3. Habilita la API de Google Play Android Developer
+4. Crea una cuenta de servicio:
+   - Ve a "IAM & Admin" > "Service Accounts"
+   - Haz clic en "Create Service Account"
+   - Dale un nombre y descripción
+   - Haz clic en "Create and Continue"
+   - Omite la asignación de rol y haz clic en "Done"
+5. Genera una clave JSON:
+   - Encuentra tu cuenta de servicio en la lista
+   - Haz clic en el menú de tres puntos > "Manage keys"
+   - Haz clic en "Add Key" > "Create new key"
+   - Elige formato JSON
+   - Haz clic en "Create"
+6. Otorga acceso a la cuenta de servicio a tu aplicación en Play Console:
+   - Ve a [Play Console](https://play.google.com/console)
+   - Navega a "Users and permissions"
+   - Haz clic en "Invite new users"
+   - Ingresa el email de la cuenta de servicio (termina con @*.iam.gserviceaccount.com)
+   - Otorga permiso "Release to production"
+   - Haz clic en "Invite user"
+7.Convierte la clave JSON a base64:
+   ```bash
+   base64 -i path/to/your/service-account-key.json | pbcopy
+   ```
+8. Añade la cadena codificada en base64 como variable `PLAY_CONFIG_JSON` en GitLab
+
+## Configura tu Pipeline de GitLab CI/CD
+
+Crea un archivo gitlab-ci.yml en la raíz de tu proyecto para definir tu pipeline CI/CD. A continuación se muestra un ejemplo de cómo puedes estructurar tu pipeline:
 
 ```yaml
 
@@ -175,7 +240,7 @@ upload_to_capgo:
   tags:
     - saas-linux-xlarge-amd64
   script:
-    - npx @capgo/cli@latest upload -a $CAPGO_TOKEN -c dev
+    - npx @capgo/cli@latest bundle upload -a $CAPGO_TOKEN -c dev
   dependencies:
     - build
   when: manual
@@ -204,12 +269,12 @@ build_and_upload_android:
 
 ```
 
-## Activar el pipeline
+## Activar el Pipeline
 
 Cada vez que envíes una nueva etiqueta a tu repositorio de GitLab, GitLab CI/CD activará automáticamente el pipeline definido, que compilará y desplegará tu aplicación Android usando Fastlane.
 
-Asegúrate de ajustar las rutas y dependencias de acuerdo con la estructura y requisitos de tu proyecto. Esta configuración te ayudará a automatizar el despliegue de tu aplicación Android en GitLab CI/CD.
+Asegúrate de ajustar las rutas y dependencias de acuerdo a la estructura y requisitos de tu proyecto. Esta configuración te ayudará a automatizar el despliegue de tu aplicación Android en GitLab CI/CD.
 
 ## Conclusión
 
-Al configurar GitLab CI/CD con la imagen Docker mingc/android-build-box, puedes automatizar el proceso de compilación de la aplicación Android, haciendo que tu flujo de trabajo de desarrollo sea más eficiente y confiable. Esta automatización libera tu tiempo para enfocarte en los aspectos centrales del desarrollo de aplicaciones, ayudándote en última instancia a entregar aplicaciones Android de alta calidad de manera más eficiente.
+Al configurar GitLab CI/CD con la imagen Docker mingc/android-build-box, puedes automatizar el proceso de compilación de aplicaciones Android, haciendo que tu flujo de trabajo de desarrollo sea más eficiente y confiable. Esta automatización libera tu tiempo para enfocarte en los aspectos principales del desarrollo de aplicaciones, ayudándote en última instancia a entregar aplicaciones Android de alta calidad de manera más eficiente.

@@ -1,8 +1,8 @@
 ---
-slug: de__how-to-build-capacitor-app-in-xcode-cloud
-title: Wie man eine Ionic Capacitor App in Xcode Cloud baut
+slug: how-to-build-capacitor-app-in-xcode-cloud
+title: Cómo compilar una aplicación Ionic Capacitor en Xcode Cloud
 description: >-
-  Nutze Xcode Cloud, um deine Capacitor JS-App zu erstellen und umgehe die
+  Verwende Xcode Cloud, um deine Capacitor JS App zu erstellen und umgehe die
   Notwendigkeit von MacOS.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -10,7 +10,10 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-09-01T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /xcode_cloud.webp
-head_image_alt: Capacitor Xcode-Cloud-Build
+head_image_alt: Xcode Cloud-Builds mit Capacitor
+keywords: >-
+  Xcode Cloud, Capacitor, mobile app development, live updates, OTA updates,
+  continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: de
@@ -18,25 +21,25 @@ locale: de
 
 ## Voraussetzungen
 
-Bevor Sie mit dem Tutorial fortfahren…
+Bevor Sie mit dem Tutorial fortfahren...
 
 -   Stellen Sie sicher, dass Sie GitHub verwenden
 -   Verwenden Sie Capacitor
 -   Ihre App ist bereits im Apple Store veröffentlicht
--   Lust zum Lesen 😆…
+-   Lust zum Lesen 😆...
 
-Die Verwendung von Ionic ist optional, für Cordova könnte es funktionieren, aber ich habe es nicht ausprobiert
+Die Verwendung von Ionic ist optional, für Cordova könnte es funktionieren, aber ich habe es nicht getestet
 
 ## Wichtiges zum Preis
 
-![Preis Xcode Cloud](/xcode_cloud_pricewebp)
+![Price Xcode Cloud](/xcode_cloud_pricewebp)
 
 [https://developerapplecom/xcode-cloud/](https://developerapplecom/xcode-cloud/)
 
-Der Service ist 'kostenlos' bis zur Grenze  
-Sie können im Screenshot Preise und Limits sehen (Preise zum Zeitpunkt der Erstellung des Tutorials, sie könnten sich in Zukunft ändern)
+Der Service ist '_kostenlos_' bis zum Limit  
+Sie können im Screenshot die Preise und Limits sehen (Preise zum Zeitpunkt der Erstellung des Tutorials, sie könnten sich in Zukunft ändern)
 
-🔴 **_Nachdem Sie über Anforderungen und Preise informiert wurden, wenn Sie möchten, fahren wir fort_**
+🔴 **_Nachdem Sie über die Anforderungen und Preise informiert wurden, können wir fortfahren, wenn Sie möchten_**
 
 > **_📣_ In diesem Beitrag gehen wir davon aus, dass wir die App bereits im Apple Store erstellt haben**
 
@@ -44,10 +47,10 @@ Sie können im Screenshot Preise und Limits sehen (Preise zum Zeitpunkt der Erst
 
 Damit Xcode Ihre Capacitor-App erstellen kann, müssen Sie einige Dinge einrichten
 
-## Paketvorbereitung
+## Paket-Vorbereitung
 
-Stellen Sie sicher, dass Sie Ihren Build-Befehl in Ihrem `packagejson`-Skript haben
-Fügen Sie dann den `sync:ios`-Befehl wie unten hinzu
+Stellen Sie sicher, dass Sie Ihren Build-Befehl in Ihrem `packagejson` Script haben
+Fügen Sie dann den `sync:ios` Befehl wie unten hinzu
 
 ```json
 {
@@ -57,10 +60,10 @@ Fügen Sie dann den `sync:ios`-Befehl wie unten hinzu
   }
 }
 ```
-Dieser Schritt wird dafür sorgen, dass das Post-Skript einfach funktioniert
+Dieser Schritt wird dafür sorgen, dass das Post-Script einfach funktioniert
 
-## Post-Clone-Skript
-Dieses Skript wird von Xcode Cloud nach dem Klonen ausgeführt
+## Post-Clone-Script
+Dieses Script wird von Xcode Cloud nach dem Clone-Schritt ausgeführt
 
 ```bash
 #!/usr/bin/env bash
@@ -84,44 +87,44 @@ npm run build
 npm run sync:ios
 ```
 
-Speichern Sie diese Datei im Stammverzeichnis Ihres Projekts und nennen Sie sie `ios/App/ci_scripts/ci_post_clonesh`
+Speichern Sie diese Datei im Root-Verzeichnis Ihres Projekts unter dem Namen `ios/App/ci_scripts/ci_post_clonesh`
 
-Machen Sie diese Datei dann mit diesem Befehl ausführbar: `chmod +x ios/App/ci_scripts/ci_post_clonesh`
+Machen Sie diese Datei dann ausführbar mit diesem Befehl `chmod +x ios/App/ci_scripts/ci_post_clonesh`
 
-## Erstellen eines Xcode-Workflows
+## Xcode-Workflow erstellen
 
-Öffnen Sie Xcode (ja, um Xcode zu entfernen, benötigen Sie Xcode)
+Öffnen Sie Xcode (ja, um Xcode zu entfernen, brauchen Sie Xcode)
 
 Und gehen Sie zu diesem Tab:
-![Xcode Schritt 1](/xcode_step_1webp)
+![Xcode step 1](/xcode_step_1webp)
 
-Klicken Sie auf Workflow erstellen, wählen Sie Ihre App aus, klicken Sie auf Weiter wie unten gezeigt
+Klicken Sie auf Workflow erstellen, wählen Sie Ihre App aus, klicken Sie wie unten gezeigt auf Weiter
 
-![Xcode Schritt 2](/xcode_step_2webp)
+![Xcode step 2](/xcode_step_2webp)
 
 Klicken Sie links auf Workflow bearbeiten
-![Xcode Schritt 2](/xcode_step_3webp)
+![Xcode step 2](/xcode_step_3webp)
 
-Gehen Sie zum Umgebungen-Tab und wählen Sie wie unten gezeigt Mac 124 aus und aktivieren Sie die entsprechende Option
-![Xcode Schritt 3](/xcode_step_3webp)
+Gehen Sie zum Umgebungs-Tab und wählen Sie wie unten Mac 124 und aktivieren Sie die entsprechende Option
+![Xcode step 3](/xcode_step_3webp)
 
 Wählen Sie Ihre Startbedingung
-Wenn Sie denselben Build wie wir verwenden, schlage ich vor, Tag anstelle von Branch zu verwenden, um doppelte Builds zu vermeiden
+Wenn Sie den gleichen Build wie wir verwenden, empfehle ich, Tag statt Branch zu verwenden, um Doppel-Builds zu vermeiden
 
-Legen Sie Ihre Umgebungsvariable fest
-![Xcode Schritt 4](/xcode_step_4webp)
+Legen Sie Ihre Umgebungsvariablen fest
+![Xcode step 4](/xcode_step_4webp)
 
 Verbinden Sie Ihr GitHub-Konto
-![Xcode Schritt 5](/xcode_step_5webp)
+![Xcode step 5](/xcode_step_5webp)
 
-![Xcode Schritt 6](/xcode_step_6webp)
+![Xcode step 6](/xcode_step_6webp)
 
-Aktivieren Sie dann den Workflow und committen Sie Ihre erste Änderung, Sie sollten sehen, wie Ihr Build in Xcode läuft
+Aktivieren Sie dann den Workflow und committen Sie Ihre erste Änderung, Sie sollten Ihren Build in Xcode laufen sehen
 
 ## **Build-Verarbeitung**
 
-In Xcode Cloud **werden Sie basierend auf den Minuten abgerechnet**, die Sie für die Ausführung Ihres CI/CD-Workflows verwendet haben. Aus Erfahrung dauert es etwa 10-15 Minuten, bevor ein Build im Apple Store verarbeitet werden kann
+In Xcode Cloud **werden Sie nach den Minuten abgerechnet**, die Sie für die Ausführung Ihres CI/CD-Workflows verwendet haben. Aus Erfahrung dauert es etwa 10-15 Minuten, bis ein Build im Apple Store verarbeitet werden kann
 
-Für private Projekte können die geschätzten Kosten pro Build bis zu **$0,008/Min x 5 Min = $0,4** betragen, oder mehr, abhängig von der Konfiguration oder den Abhängigkeiten Ihres Projekts
+Für private Projekte können die geschätzten Kosten pro Build bis zu **$0.008/min x 5 mins = $0.04** oder mehr betragen, abhängig von der Konfiguration oder den Abhängigkeiten Ihres Projekts
 
-Für Open-Source-Projekte sollte dies überhaupt kein Problem sein. Siehe [Preisgestaltung](https://githubcom/pricing/)
+Für Open-Source-Projekte sollte dies überhaupt kein Problem sein. Siehe [Preise](https://githubcom/pricing/)

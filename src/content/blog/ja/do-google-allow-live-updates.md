@@ -1,28 +1,29 @@
 ---
-slug: ja__do-google-allow-live-updates
-title: Googleはアプリストアでレビューされることなく、アプリに直接アップデートを送信することを許可していますか？
-description: AndroidアプリケーションでGoogleのポリシーを完全に遵守しながら、コードの更新を実装する方法は？
+slug: do-google-allow-live-updates
+title: Googleはアプリストアのレビューなしにアプリのライブアップデートを送信することを許可しているのでしょうか？
+description: Google のガイドラインを完全に遵守しながら、Android アプリのプロダクション段階でコードをプッシュアップデートするにはどうすればよいでしょうか？
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /playstore.webp
-head_image_alt: コンデンサーの導関数の表現
+head_image_alt: Capacitor バイパスの説明
+keywords: 'Google, live updates, OTA updates, continuous integration, mobile app updates'
 tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-Google Playは、アプリの更新に関してAppleよりも制限が少ないです。
+アプリのアップデートに関して、GooglePlayはAppleと比較してより制限が緩やかです
 
-Google Play経由で配布されるアプリを更新することは厄介な作業かもしれませんが、遵守するためにはGoogleのガイドラインに従うことが重要です。Google Playのガイドラインによれば、アプリはGoogle Playの独自の更新メカニズム以外の方法を使用して自分自身を修正、置き換え、または更新してはいけません。つまり、Google Play以外のソースからdex、JAR、またはsoファイルなどの実行可能なコードをダウンロードすることは許可されていません。
+GooglePlayを通じてアプリを配布する際のアップデートは複雑な作業となる場合がありますが、コンプライアンスを維持するためにGoogleのガイドラインに従うことが重要です。GooglePlayのガイドラインによると、アプリはGooglePlay独自のアップデートメカニズム以外の方法で自身を変更、置換、またはアップデートしてはいけません。つまり、GooglePlay以外のソースからdex、JAR、soファイルなどの実行可能コードをダウンロードすることは許可されていません。
 
-ただし、この制限は、仮想マシンまたはインタープリタで実行されるコードには適用されません。これは、ウェブビューやブラウザ内のJavaScriptのように、Android APIへの間接的なアクセスを提供します。つまり、JavaScript、Python、Luaなどのインタープリタ型言語を使用して、Google Playのレビュー過程を経ずにアプリを更新することができます。このプロセスを手助けするツールの一つが、Capgo Capacitorプラグインです。このプラグインを使用すると、開発者はHTML、CSS、JavaScriptコードを更新し、レビューなしでアプリにアップデートを送信することができます。
+ただし、この制限は、webviewやブラウザ内のJavaScriptのように、Android APIへの間接的なアクセスを提供する仮想マシンやインタープリタで実行されるコードには適用されません。これは、JavaScript、Python、Luaなどのインタープリタ言語を使用して、GooglePlayのレビュープロセスを経ることなくアプリをアップデートできることを意味します。この処理に役立つツールの1つがCapgo Capacitorプラグインです。このプラグインを使用することで、開発者はHTML、CSS、JavaScriptコードを更新し、レビューなしでアプリにアップデートを送信することができます。
 
-さらに、実行時に読み込まれるJavaScript、Python、Luaなどのインタープリタ型言語を利用するアプリやサードパーティのコードは、Google Playのポリシーに対する潜在的な違反を許可してはいけません。このインタープリタ型コードはアプリにパッケージ化されるべきではないことに留意してください。
+さらに、JavaScript、Python、Luaなどのインタープリタ言語を使用するアプリまたはサードパーティコードで、実行時にロードされるものは、GooglePlayのポリシーに違反する可能性を許してはいけません。このインタープリタコードはアプリにパッケージングされるべきではないことに注意することが重要です。
 
-これらのガイドラインに従い、Capgo Capacitorプラグインのようなツールを使用することで、アプリの更新がGoogle Playのポリシーに準拠していることを確認でき、アプリがプラットフォーム上のユーザーに対して利用可能であり続けることができます。Googleのポリシーの最新バージョンを再確認することは、常に良い考えであることを忘れないでください。
+これらのガイドラインに従い、Capgo Capacitorプラグインなどのツールを使用することで、アプリのアップデートがGooglePlayのポリシーに準拠し、プラットフォーム上でアプリが利用可能な状態を維持できます。常に最新版のGoogleのポリシーを確認し、正しく従っていることを確認することをお勧めします。
 
-Capgoをインストールしてレビューを回避する方法についての詳細は、次の記事を参照してください。
+Capgoをインストールしてレビューをバイパスする方法の詳細については、次の記事を参照してください。

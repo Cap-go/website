@@ -1,9 +1,9 @@
 ---
-slug: de__automatic-build-and-release-with-gitlab
-title: Automatischer Build und Release mit Gitlab
+slug: automatic-build-and-release-with-gitlab
+title: Automatischer Build und Release mit GitLab
 description: >-
-  Erstellen Sie Ihre eigene CI/CD-Pipeline mit Gitlab kostenlos und deployen Sie
-  Ihre App bei jedem Push auf den Main-Branch.
+  Erstelle kostenlos deine eigenen CI/CD-Pipelines mit GitLab und deploye deine
+  App bei jedem Push in den Main-Branch.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -11,21 +11,22 @@ created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /gitlab_ci.webp
 head_image_alt: Gitlab CI Illustration
+keywords: 'Gitlab, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
 locale: de
 next_blog: ''
 ---
 
-Dieser Tutorial konzentriert sich auf GitLab CI, aber Sie können ihn mit kleinen Anpassungen an jede andere CI/CD-Plattform anpassen.
+Diese Anleitung konzentriert sich auf GitLab CI, aber Sie können sie mit kleinen Anpassungen auf jede andere CI/CD-Plattform übertragen.
 
 ## Vorwort
 
-Stellen Sie sicher, dass Sie Ihre App zuerst zu Capgo hinzugefügt haben. Dieser Tutorial konzentriert sich nur auf die Upload-Phase.
+Stellen Sie sicher, dass Sie Ihre App zuerst zu Capgo hinzugefügt haben, diese Anleitung konzentriert sich nur auf die Upload-Phase.
 
 ## Commit-Konvention
 
-Zunächst müssen Sie damit beginnen, der Commit-Konvention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) zu folgen. Dies wird den Tools helfen zu verstehen, wie die Versionsnummer erhöht werden soll. Es dauert nur 5 Minuten, es zu lernen.
+Zunächst müssen Sie der Commit-Konvention [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) folgen. Dies hilft den Tools zu verstehen, wie die Versionsnummer erhöht werden soll. Es dauert nur 5 Minuten, dies zu lernen.
 
 ![Conventional commits](/conventional_commits.webp)
 
@@ -74,15 +75,15 @@ Dies wird für jeden Commit in Ihrem Hauptzweig einen Tag erstellen und für jed
 
 Machen Sie sich keine Sorgen, wenn Sie diese Datei nicht haben, sie wird für Sie erstellt.
 
-Um dies zum Laufen zu bringen, erstellen Sie einen [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) Token in Ihren GitHub [Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") als `PERSONAL_ACCESS_TOKEN`.
+Damit dies funktioniert, erstellen Sie einen [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) Token in Ihren GitHub [Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") als `PERSONAL_ACCESS_TOKEN`.
 
 Dies ist notwendig, damit die CI den Changelog committen kann.
 
-Wenn Sie den Token erstellen, wählen Sie als Ablaufdatum `never` und als Umfang `repo`.
+Wenn Sie den Token erstellen, wählen Sie als Ablaufdatum `never` und als Scope `repo`.
 
-Zuletzt müssen Sie, damit das Tool versteht, wo Ihre Version gespeichert ist, die Datei `cz.toml` im Wurzelverzeichnis Ihres Repositories erstellen.
+Damit das Tool schließlich versteht, wo Ihre Version gespeichert ist, müssen Sie die Datei `cz.toml` im Wurzelverzeichnis Ihres Repositories erstellen.
 
-Und fügen Sie dies hinein:
+Und fügen Sie dies hinzu:
 
 ```toml
 [tool.commitizen]
@@ -95,11 +96,11 @@ version_files = [
 ]
 ```
 
-Setzen Sie die Version in dieser Datei auf die gleiche, die Sie in Ihrer `package.json` Datei haben.
+Setzen Sie die Version in dieser Datei auf die gleiche wie in Ihrer `package.json` Datei.
 
-Dies ist nur beim ersten Mal notwendig, danach wird das Tool es aktuell halten.
+Dies ist nur beim ersten Mal notwendig, danach halten die Tools sie aktuell.
 
-Sie können jetzt diese beiden Dateien committen und Ihren ersten Tag in GitHub erscheinen sehen!
+Sie können jetzt beide Dateien committen und Ihren ersten Tag in GitHub erscheinen sehen!
 
 ## GitHub Actions für Build
 
@@ -135,18 +136,18 @@ jobs:
         run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production
 ```
 
-Dies wird Ihre Abhängigkeiten installieren und bauen, bevor es an Capgo gesendet wird.
+Dies wird Ihre Abhängigkeiten installieren und bauen, bevor sie an Capgo gesendet werden.
 
-Wenn Ihr Befehl zum Bauen anders ist, können Sie ihn im Schritt `build_code` ändern.
+Wenn Ihr Build-Befehl anders ist, können Sie ihn im Schritt `build_code` ändern.
 
-Um dies zum Laufen zu bringen, müssen Sie Ihren API-Schlüssel für Capgo holen und ihn in den [Secrets Ihres GitHub Repositories](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) als `CAPGO_TOKEN` hinzufügen.
+Damit dies funktioniert, müssen Sie Ihren API-Schlüssel für Capgo holen und ihn in den [Secrets Ihres GitHub Repositories](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) als `CAPGO_TOKEN` hinzufügen.
 
-Sie können jetzt diese beiden Dateien committen und Ihren ersten Tag in GitHub erscheinen sehen!
+Sie können jetzt beide Dateien committen und Ihren ersten Tag in GitHub erscheinen sehen!
 
-Das Hinzufügen des Commits wird einen neuen Build für den Produktionskanal generieren.
+Der Commit wird einen neuen Build für den Produktionskanal generieren.
 
 Sie sollten Ihre Tests im Build-Schritt hinzufügen, um sicherzustellen, dass Ihr Code funktioniert.
 
-Gehen Sie zu Ihrem Capgo-Dashboard und überprüfen Sie Ihren Build, der gerade erschienen ist. Sie haben jetzt Ihr CI/CD-System.
+Gehen Sie zu Ihrem Capgo Dashboard und überprüfen Sie Ihren Build, der gerade erschienen ist. Sie haben jetzt Ihr CI/CD-System.
 
 Wenn Sie möchten, dass alle Ihre Benutzer das Update erhalten, sobald es verfügbar ist, gehen Sie zu Ihrem Kanal und setzen Sie ihn auf `public`.

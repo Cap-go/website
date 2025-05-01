@@ -1,106 +1,59 @@
 ---
-slug: ko__capacitor-comprehensive-guide
-title: 'Capacitor: A Comprehensive Guide'
+slug: capacitor-comprehensive-guide
+title: 'Capacitor: 総合ガイド'
 description: >-
-  CapacitorJS is a powerful tool that enables web developers to build native
-  iOS, Android, Desktop, and Progressive Web Apps with a single standard web
-  codebase. Learn everything you need to know about Capacitor in this
-  comprehensive guide.
+  Capacitor は、開発者が単一の標準的なWebコードベースを使用して、iOS、Android、デスクトップ、Progressive Web
+  Appsのネイティブアプリを構築できる強力なツールです。この包括的なガイドで、Capacitorについて知っておくべきすべてを学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-10T00:00:00.000Z
 updated_at: 2023-06-10T00:00:00.000Z
 head_image: /capacitor-guide.webp
-head_image_alt: Capacitor guide illustration
+head_image_alt: Capacitor 가이드 삽화
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
 tag: Guides
 published: true
 locale: ko
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjs.com/) is a versatile tool that allows web developers to create native iOS, Android, Desktop, and Progressive Web Apps using a single standard web codebase. Developed by the team behind Ionic, Capacitor has gained significant attention in recent years as developers recognize the potential of web technologies on mobile platforms. In this comprehensive guide, we'll answer some of the most common questions about Capacitor and explore its capabilities, use cases, and benefits.
+[Capacitor](https://capacitorjscom/)는 웹 개발자가 단일 표준 웹 코드베이스를 사용하여 네이티브 iOS, Android, 데스크톱 및 프로그레시브 웹 앱을 만들 수 있게 해주는 다목적 도구입니다. Ionic 팀이 개발한 Capacitor는 개발자들이 모바일 플랫폼에서 웹 기술의 잠재력을 인식하면서 최근 몇 년간 큰 주목을 받았습니다. 이 종합 가이드에서는 Capacitor에 대한 가장 일반적인 질문들에 답하고 그 기능, 사용 사례 및 이점을 살펴보겠습니다.
 
-## What is Capacitor?
+## Capacitor란 무엇인가요?
 
-Capacitor is a free, open-source (MIT-licensed) platform that enables web developers to build cross-platform apps using standard web technologies that run in modern browsers. It consists of native platform SDKs (iOS and Android), a command-line tool, a plugin API, and pre-made plugins. Capacitor allows your existing web application to run as a native app on each platform, providing hooks into the native platform via JavaScript. These hooks can be built directly into the app or as standalone plugins for reuse and distribution.
+Capacitor는 웹 개발자가 현대 브라우저에서 실행되는 표준 웹 기술을 사용하여 크로스 플랫폼 앱을 구축할 수 있게 해주는 무료 오픈소스(MIT 라이선스) 플랫폼입니다. 네이티브 플랫폼 SDK(iOS 및 Android), 명령줄 도구, 플러그인 API 및 사전 제작된 플러그인으로 구성됩니다. Capacitor를 사용하면 기존 웹 애플리케이션이 각 플랫폼에서 네이티브 앱으로 실행될 수 있으며, JavaScript를 통해 네이티브 플랫폼에 대한 훅을 제공합니다. 이러한 훅은 앱에 직접 내장되거나 재사용 및 배포를 위한 독립형 플러그인으로 구축될 수 있습니다.
 
-## What can you build with Capacitor?
+## Capacitor로 무엇을 만들 수 있나요?
 
-With Capacitor, you can build virtually anything you would create natively or with other cross-platform toolkits. Capacitor apps have full access to the native platform, so most native features can be implemented. However, embedding native UI controls directly into the web app view hierarchy can be challenging and is not yet available as an abstracted technique for others to use.
+Capacitor를 사용하면 네이티브로 또는 다른 크로스 플랫폼 도구킷으로 만들 수 있는 거의 모든 것을 구축할 수 있습니다. Capacitor 앱은 네이티브 플랫폼에 완전히 액세스할 수 있으므로 대부분의 네이티브 기능을 구현할 수 있습니다. 그러나 네이티브 UI 컨트롤을 웹 앱 뷰 계층에 직접 임베딩하는 것은 어려울 수 있으며, 아직 다른 사람들이 사용할 수 있는 추상화된 기술로는 제공되지 않습니다.
 
-## Who is Capacitor for?
+## Capacitor는 누구를 위한 것인가요?
 
-Capacitor targets web developers with HTML, CSS, and JavaScript backgrounds. If you build web or desktop apps (using Electron or similar tools), Capacitor is your solution for creating cross-platform apps with a focus on mobile.
+Capacitor는 HTML, CSS 및 JavaScript 배경을 가진 웹 개발자를 대상으로 합니다. 웹이나 데스크톱 앱(Electron 또는 유사한 도구 사용)을 구축하는 경우, Capacitor는 모바일에 중점을 둔 크로스 플랫폼 앱을 만들기 위한 솔루션입니다.
 
-## When should a team choose Capacitor?
+## 팀이 언제 Capacitor를 선택해야 하나요?
 
-Teams should consider Capacitor when they want to leverage their web development skills and existing web investments to deploy native platform apps. Capacitor is ideal for data-driven apps, consumer apps, B2B/E apps, and enterprise apps. It's especially suitable for enterprise apps, as Ionic, the company behind Capacitor, offers dedicated enterprise support and features.
+팀은 웹 개발 기술과 기존 웹 투자를 활용하여 네이티브 플랫폼 앱을 배포하고자 할 때 Capacitor를 고려해야 합니다. Capacitor는 데이터 기반 앱, 소비자 앱, B2B/E 앱 및 엔터프라이즈 앱에 이상적입니다. Capacitor를 만든 회사인 Ionic이 전용 엔터프라이즈 지원과 기능을 제공하므로 특히 엔터프라이즈 앱에 적합합니다.
 
-## Can I reuse existing web code and share new code with a web app?
+## 기존 웹 코드를 재사용하고 웹 앱과 새로운 코드를 공유할 수 있나요?
 
-Yes! Capacitor runs standard web apps natively, allowing teams to have a single codebase for web and mobile or reuse parts of their web app, such as components, logic, or specific experiences.
+네! Capacitor는 표준 웹 앱을 네이티브로 실행하므로 팀이 웹과 모바일을 위한 단일 코드베이스를 가질 수 있거나 컴포넌트, 로직 또는 특정 경험과 같은 웹 앱의 일부를 재사용할 수 있습니다.
 
-## What is Capacitor good at? What are its limitations?
+## Capacitor는 어떤 점이 좋으며, 어떤 한계가 있나요?
 
-Capacitor excels at running standard web apps as native mobile apps and extending web apps with native functionality. It's ideal for teams proficient in web development or with significant web investments. Capacitor may not be the best choice for 3D/2D or graphically-intensive apps, although it does support WebGL. Apps that require extensive communication between the web app and the native layer may find the Capacitor communication bridge adds overhead due to serialization. However, Capacitor apps can always run custom native code when needed.
+Capacitor는 표준 웹 앱을 네이티브 모바일 앱으로 실행하고 네이티브 기능으로 웹 앱을 확장하는 데 탁월합니다. 웹 개발에 능숙하거나 상당한 웹 투자를 한 팀에게 이상적입니다. Capacitor는 WebGL을 지원하지만 3D/2D 또는 그래픽 집약적인 앱에는 최선의 선택이 아닐 수 있습니다. 웹 앱과 네이티브 레이어 간의 광범위한 통신이 필요한 앱은 직렬화로 인해 Capacitor 통신 브리지가 오버헤드를 추가할 수 있습니다. 그러나 필요한 경우 Capacitor 앱은 항상 사용자 정의 네이티브 코드를 실행할 수 있습니다.
 
-## Can I mix Native UI controls with Capacitor?
+## Capacitor와 네이티브 UI 컨트롤을 혼합할 수 있나요?
 
-Yes, you can display native UI controls outside the Capacitor Web View, such as modals or parent-level navigation containers. Embedding native controls into the web view experience is possible but not yet available as a technique for others to use.
+네, 모달이나 상위 레벨 네비게이션 컨테이너와 같은 네이티브 UI 컨트롤을 Capacitor 웹 뷰 외부에 표시할 수 있습니다. 웹 뷰 경험에 네이티브 컨트롤을 임베딩하는 것은 가능하지만 아직 다른 사람들이 사용할 수 있는 기술로는 제공되지 않습니다.
 
-## How are Capacitor and Electron different?
+## Capacitor와 Electron은 어떻게 다른가요?
 
-Capacitor is often described as "Electron for mobile" because it serves as a mobile-focused counterpart to Electron. However, Capacitor can target Electron as a deployment platform, as it is a higher-level abstraction. If you only need to target desktop platforms, Electron is sufficient. But if you want to build cross-platform apps for mobile, web, and desktop, Capacitor supports Electron and other platforms.
+Capacitor는 종종 "모바일용 Electron"으로 설명됩니다. Capacitor는 더 높은 수준의 추상화이므로 Electron을 배포 플랫폼으로 대상으로 할 수 있습니다. 데스크톱 플랫폼만 대상으로 하면 Electron으로 충분합니다. 하지만 모바일, 웹 및 데스크톱용 크로스 플랫폼 앱을 구축하려면 Capacitor가 Electron 및 기타 플랫폼을 지원합니다.
 
-## How are Capacitor and Ionic different?
+## Capacitor와 Ionic은 어떻게 다른가요?
 
-Ionic is the company that creates Capacitor, Ionic Framework, Stencil, Appflow, and other app development-focused products. Capacitor is the toolkit that handles the native side of the app and communication between the native app and the Web View. It is agnostic of the frameworks and technologies used in the Web View app, including Ionic Framework. Ionic Framework is a mobile UI toolkit that provides powerful UI components for web apps to look and feel native.
-
-## Do I need to use Ionic Framework with Capacitor?
-
-No, you can use Capacitor with other UI and CSS frameworks like Tailwind, Material UI, Chakra, Quasar, Framework7, or your own custom components. However, Ionic Framework is still an excellent option for creating native-like experiences with your web app.
-
-## What is Ionic's strategy with Capacitor?
-
-Ionic aims to drive Capacitor adoption, as it leads to increased use of Appflow (their mobile CI/CD service), Ionic Framework, and their enterprise solutions. Capacitor's growth is by design, as it was created to offer a more frontend-agnostic stack for web developers to build mobile apps.
-
-## Can I use Capacitor with React, Next.js, or Remix?
-
-Yes, Capacitor works well with React, Next.js, and Remix. It keeps developers closer to standard React web development than React Native, as most React libraries and add-ons work seamlessly with Capacitor.
-
-## How are Capacitor and React Native different?
-
-Capacitor and React Native share similarities in providing tooling and plugin infrastructure for cross-platform development. However, React Native uses a web-like system with JS and React to abstract away platform Native UI controls, while Capacitor provides a Web View for standard web apps. Capacitor is also less complex than React Native, as it doesn't require managing native UI controls and syncing them with the JS layer.
-
-## Is Capacitor faster than React Native?
-
-It depends on the workload. Capacitor can execute JavaScript faster than React Native due to its access to the JIT engine on iOS and Android. However, React Native may be considered "faster" or "more performant" for UI rendering since it uses native UI controls, while Capacitor apps mainly run in a Web View.
-
-## How are Capacitor and Flutter different?
-
-Capacitor and Flutter both provide tooling and plugin infrastructure for cross-platform development, but Capacitor uses JavaScript and standard web technology, while Flutter uses Dart and a custom UI and API environment. On the UI side, both Capacitor and Flutter use custom rendering engines, with Flutter drawing its components and Capacitor rendering most UI in a Web View.
-
-## Can I embed Capacitor into React Native or traditional native apps to build mobile micro frontends?
-
-Yes, you can use [Ionic Portals](https://ionic.io/portals/) to embed Capacitor into React Native or traditional native apps built with Swift/Kotlin for a mobile micro frontend approach.
-
-## What are my options for high-performance animations in Capacitor?
-
-You can use pre-baked, optimized components from Ionic Framework, Quasar, Framework7 or Konsta UI, or build custom animations using Framer Motion, Lottie, or CSS animations. Just ensure you follow performance best practices when using CSS animations.
-
-## How many plugins does Capacitor have?
-
-Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and [Capawesome](https://github.com/capawesome-team/) for community plugin resources.
-
-## Is there a VS Code Extension for Capacitor?
-
-Yes, the [Ionic VS Code Extension](https://marketplace.visualstudio.com/items/?itemName=ionic.ionic) also serves as a Capacitor extension, offering features like embedded preview, device running, external debugging, project quality linting, security analysis, and more.
-
-## Is there enterprise-specific support available?
-
-Yes, Capgo offers [Enterprise support and features](https://capgo.app/) for Capacitor, including dedicated support, native plugins for live update and authentication, and more.
-
-## How do I get started with Capacitor?
-
-Visit the [Capacitor documentation](https://capacitorjs.com/docs/) and follow the instructions to install Capacitor in your app. If you want to start with an opinionated Capacitor app using Ionic Framework and Angular/React/Vue, follow the Get Started flow on the [Ionic Framework site](https://ionicframework.com/).
+Ionic은 Capacitor, Ionic Framework, Stencil, Appflow 및 기타 앱 개발 중심 제품을 만드는 회사입니다.

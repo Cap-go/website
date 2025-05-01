@@ -1,12 +1,10 @@
 ---
-slug: fr__create-offline-screen-in-vue-angular-react
-title: >-
-  Comment créer un écran hors ligne dans les applications Vue, Angular et React
-  avec l'API Network et Capacitor
+slug: create-offline-screen-in-vue-angular-react
+title: 'Vue, Angular 및 React 애플리케이션에서 Network API와 Capacitor를 사용하여 오프라인 화면 만들기'
 description: >-
-  Apprenez à implémenter un écran hors ligne dans des applications Vue, Angular
-  ou React en utilisant l'API Network et Capacitor. Améliorez l'expérience
-  utilisateur en gérant efficacement les scénarios hors ligne.
+  Apprenez à implémenter un écran hors ligne en utilisant l'API Network et
+  Capacitor dans vos applications Vue, Angular ou React. Gérez efficacement les
+  scénarios hors ligne pour améliorer l'expérience utilisateur.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -14,6 +12,10 @@ created_at: 2022-06-21T00:00:00.000Z
 updated_at: 2022-06-21T00:00:00.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: Image d'une personne travaillant sur un ordinateur
+keywords: >-
+  Vue, Angular, React, offline screen, network API, Capacitor, mobile app
+  development, live updates, OTA updates, continuous integration, mobile app
+  updates
 tag: Tutorial
 published: true
 locale: fr
@@ -28,14 +30,14 @@ Dans ce tutoriel, nous allons apprendre à créer un écran hors ligne dans les 
 
 Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
-- [Node.js](https://nodejs.org/) (version 14 ou supérieure)
+- [Nodejs](https://nodejs.org/) (version 14 ou supérieure)
 - [Vue CLI](https://cli.vuejs.org/)
 - [Angular CLI](https://cli.angular.io/)
 - [Create React App](https://create-react-app.dev/)
 
 ## Configuration du projet
 
-Tout d'abord, créons un nouveau projet en utilisant l'outil d'échafaudage respectif pour chaque framework.
+Tout d'abord, créons un nouveau projet en utilisant l'outil de scaffolding approprié pour chaque framework.
 
 ### Vue 3
 
@@ -45,7 +47,7 @@ Ouvrez votre terminal et exécutez la commande suivante pour créer un nouveau p
 vue create offline-screen-vue3
 ```
 
-Choisissez le preset par défaut et attendez que le projet soit créé.
+Choisissez le préréglage par défaut et attendez que le projet soit créé.
 
 ### Angular 14
 
@@ -55,7 +57,7 @@ Ouvrez votre terminal et exécutez la commande suivante pour créer un nouveau p
 ng new offline-screen-angular14
 ```
 
-Suivez les instructions et lorsqu'on vous demande des fonctionnalités supplémentaires, sélectionnez "Routing" en appuyant sur la touche **espace**. Attendez que le projet soit créé.
+Suivez les invites et lorsqu'on vous demande des fonctionnalités supplémentaires, sélectionnez "Routing" en appuyant sur la touche **espace**. Attendez que le projet soit créé.
 
 ### React
 
@@ -71,7 +73,7 @@ Attendez que le projet soit créé.
 
 Maintenant, installons le package `@capacitor/network`, qui fournit l'API Network.
 
-Ouvrez votre terminal et naviguez vers le répertoire de votre projet. Ensuite, exécutez la commande suivante pour installer le package :
+Ouvrez votre terminal et accédez au répertoire de votre projet. Ensuite, exécutez la commande suivante pour installer le package :
 
 ```shell
 npm install @capacitor/network
@@ -83,7 +85,7 @@ Pour les projets Capacitor, exécutez également la commande suivante pour synch
 npx cap sync
 ```
 
-Assurez-vous d'avoir installé globalement le CLI Capacitor en exécutant :
+Assurez-vous d'avoir installé le CLI Capacitor globalement en exécutant :
 
 ```shell
 npm install -g @capacitor/cli
@@ -91,7 +93,7 @@ npm install -g @capacitor/cli
 
 ## Implémentation de l'écran hors ligne
 
-Ensuite, nous allons implémenter la fonctionnalité d'écran hors ligne dans chaque framework. Nous afficherons un simple message lorsque l'utilisateur passe hors ligne.
+Ensuite, nous allons implémenter la fonctionnalité d'écran hors ligne dans chaque framework. Nous afficherons un message simple lorsque l'utilisateur passe hors ligne.
 
 ### Vue 3
 
@@ -125,7 +127,7 @@ const logCurrentNetworkStatus = async () => {
 };
 ```
 
-Dans le template de votre application (`App.vue`), ajoutez un élément `<div>` avec un id "offline-screen" pour afficher le message d'écran hors ligne :
+Dans le template de votre application (`App.vue`), ajoutez un élément `<div>` avec un id de `offline-screen` pour afficher le message d'écran hors ligne :
 
 ```html
 <template>
@@ -195,7 +197,7 @@ export class AppComponent {
 }
 ```
 
-Dans le template de votre application (`app.component.html`), ajoutez un élément `<template>` avec un id "offline-screen" pour afficher le message d'écran hors ligne :
+Dans le template de votre application (`app.component.html`), ajoutez un élément `<template>` avec un id de `offline-screen` pour afficher le message d'écran hors ligne :
 
 ```html
 <div id="offline-screen">
@@ -295,7 +297,7 @@ Maintenant, lorsque l'utilisateur passe hors ligne, l'écran hors ligne s'affich
 
 ## Méthodes et interfaces de support
 
-L'API Network fournit plusieurs méthodes et interfaces pour vous aider à gérer la connexion réseau. Voici quelques-unes des principales :
+L'API Network fournit plusieurs méthodes et interfaces pour vous aider à gérer la connexion réseau. Voici les principales :
 
 - [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus) : Interroge l'état actuel de la connexion réseau
 - [`addListener('networkStatusChange', )`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange) : Écoute les changements dans la connexion réseau

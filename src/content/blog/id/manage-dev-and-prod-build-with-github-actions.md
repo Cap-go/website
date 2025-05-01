@@ -1,9 +1,9 @@
 ---
-slug: id__manage-dev-and-prod-build-with-github-actions
-title: Mengelola pengembangan dan kompilasi produksi dengan GitHub Actions
+slug: manage-dev-and-prod-build-with-github-actions
+title: Gestisci lo sviluppo e la build di produzione con GitHub actions
 description: >-
-  Gunakan Capgo untuk mempublikasikan build pengembangan Anda ke saluran
-  tertentu dan izinkan tim Anda menguji aplikasi Capacitor Ionic tanpa menunggu
+  Gunakan Capgo untuk mempublikasikan versi pengembangan ke saluran tertentu dan
+  biarkan tim Anda menguji aplikasi Capacitor Ionic tanpa perlu menunggu
   peninjauan dari Apple dan Google
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -11,32 +11,35 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo_ci-cd-illustration.webp
-head_image_alt: Ilustrasi Kompilasi Saluran
+head_image_alt: Channel-Builds-Illustration
+keywords: >-
+  GitHub Actions, CI/CD, mobile app development, live updates, OTA updates,
+  continuous integration, mobile app updates
 tag: CI/CD
 published: true
 locale: id
 next_blog: how-to-send-specific-version-to-users
 ---
 
-Tutorial ini berfokus pada hosting GitHub, tetapi Anda dapat menyesuaikannya dengan sedikit perubahan untuk platform CI/CD lainnya
+Tutorial ini berfokus pada hosting GitHub, tetapi Anda dapat mengadaptasinya dengan sedikit penyesuaian untuk platform CI/CD lainnya
 
 ## Pendahuluan
 
-Pastikan Anda telah menambahkan aplikasi Capacitor Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada tahap unggah
+Pastikan Anda telah menambahkan aplikasi Capacitor Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada fase upload
 
 ## Konvensi commit
 
-Pertama, Anda perlu mulai mengikuti konvensi commit [conventional commits](https://wwwconventionalcommitsorg/en/v100/) ini akan membantu perangkat memahami cara meningkatkan nomor versi, hanya butuh 5 menit untuk mempelajarinya
+Pertama Anda perlu mulai mengikuti konvensi commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) ini akan membantu peralatan memahami bagaimana meningkatkan nomor versi, hanya butuh 5 menit untuk mempelajarinya
 
-![Conventional commits](/conventional_commitswebp)
+![Conventional commits](/conventional_commits.webp)
 
 ## GitHub actions untuk tag
 
 Kemudian Anda perlu membuat GitHub action pertama Anda untuk secara otomatis membangun dan membuat tag
 
-Buat file di jalur ini: `github/workflows/bump_versionyml`
+Buat file di path ini: `.github/workflows/bump_version.yml`
 
-dengan konten berikut:
+dengan konten ini:
 
 ```toml
 name: Bump version
@@ -77,29 +80,29 @@ jobs:
 
 ```
 
-Ini akan merilis tag untuk setiap commit di branch utama Anda Dan rilis `alpha` untuk `development`, dan terakhir entri changelog untuk setiap commit di `CHANGELOGmd`
+Ini akan merilis tag untuk setiap commit di branch main Anda Dan rilis `alpha` untuk `development`, dan terakhir entri changelog untuk setiap commit di `CHANGELOG.md`
 
-Jangan khawatir jika Anda tidak memiliki file ini, file tersebut akan dibuat untuk Anda
+Jangan khawatir jika Anda tidak memiliki file ini, file akan dibuat untuk Anda
 
-Agar ini berfungsi, Anda perlu membuat [PERSONAL ACCESS](https://docsgithubcom/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _nya di_ [secret](https://docsgithubcom/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub Anda sebagai `PERSONAL_ACCESS_TOKEN`
+Untuk membuat ini berfungsi, Anda perlu membuat [PERSONAL ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) dan menyimpannya di [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub Anda sebagai `PERSONAL_ACCESS_TOKEN`
 
-Ini diperlukan untuk membiarkan CI melakukan commit changelog dan peningkatan versi
+Ini diperlukan agar CI dapat melakukan commit changelog dan pembaruan versi
 
-Saat Anda membuat token, pilih masa berlaku sebagai `never` dan cakupan sebagai `repo`
+Saat membuat token, pilih kadaluarsa sebagai `never` dan scope sebagai `repo`
 
-Atur kunci `version` di file `packagejson` Anda Gunakan versi terakhir yang dirilis di Store
+Atur kunci `version` di file `package.json` Anda. Gunakan versi terakhir yang dirilis di Store
 
-Ini hanya diperlukan pertama kali, kemudian alat akan terus memperbarui
+Ini hanya diperlukan pertama kali, kemudian tools akan memperbarui secara otomatis
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat tag pertama Anda muncul di GitHub!
 
-`capacitor-standard-version` adalah paket yang melakukan keajaiban, secara default, dia juga memperbarui nomor versi Anda di Android dan iOS
+`capacitor-standard-version` adalah paket yang melakukan keajaiban, secara default, dia juga memperbarui nomor versi di Android dan iOS
 
 ## GitHub actions untuk build
 
-Buat file di jalur ini: `github/workflows/buildyml`
+Buat file di path ini: `.github/workflows/build.yml`
 
-dengan konten berikut:
+dengan konten ini:
 
 ```toml
 name: Build source code and send to Capgo
@@ -136,15 +139,15 @@ jobs:
 
 Ini akan menginstal dan membangun dependensi Anda sebelum mengirimkannya ke Capgo
 
-Jika perintah Anda untuk build berbeda, Anda dapat mengubahnya di langkah `build_code`
+Jika perintah build Anda berbeda, Anda dapat mengubahnya di langkah `build_code`
 
 Jika Anda memerlukan variabel lingkungan, gunakan `MY_ENV_VAR` dan atur `secret` di pengaturan proyek GitHub Anda, kemudian secret lalu GitHub Action
 
-Agar unggah Capgo berfungsi, Anda perlu mendapatkan kunci API untuk Capgo, tambahkan di [secret repositori GitHub Anda](https://docsgithubcom/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`
+Untuk membuat upload Capgo berfungsi, Anda perlu mendapatkan API key untuk Capgo, tambahkan di [secret repositori GitHub Anda](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat versi pertama Anda muncul di Capgo!
 
-Menambahkan commit akan menghasilkan build Capacitor baru untuk saluran produksi dan pengembangan
+Menambahkan commit akan menghasilkan build Capacitor baru untuk channel production dan development
 
 Anda harus menambahkan tes Anda di langkah build Ionic untuk memastikan kode Anda berfungsi
 

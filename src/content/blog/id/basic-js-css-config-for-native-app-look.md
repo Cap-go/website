@@ -1,17 +1,18 @@
 ---
-slug: id__basic-js-css-config-for-native-app-look
-title: Konfigurasi JS dan CSS dasar untuk tampilan aplikasi asli
+slug: basic-js-css-config-for-native-app-look
+title: ネイティブアプリのような見た目を実現するための基本的なJSとCSS設定
 description: >-
-  Temukan cara mengonfigurasi aplikasi web Anda dengan pengaturan JavaScript dan
-  CSS dasar agar terlihat dan berperilaku seperti aplikasi asli, termasuk
-  menonaktifkan efek hover.
+  Pelajari cara mengkonfigurasi aplikasi web Anda dengan pengaturan JavaScript
+  dan CSS dasar untuk membuatnya terlihat dan terasa seperti aplikasi native,
+  termasuk menonaktifkan efek hover.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z
 head_image: /native_app_look.webp
-head_image_alt: Ilustrasi tampilan aplikasi asli
+head_image_alt: Ilustrasi tampilan aplikasi native
+keywords: 'tailwind css, css, mobile design, mobile app development'
 tag: Web Development
 published: true
 locale: id
@@ -37,7 +38,7 @@ Pada perangkat sentuh, efek hover bisa menjadi masalah karena mereka tidak memil
 }
 ```
 
-Ganti `element` dengan selektor yang sesuai untuk elemen-elemen yang ingin Anda nonaktifkan efek hovernya.
+Ganti `element` dengan selektor yang sesuai untuk elemen yang ingin Anda nonaktifkan efek hovernya.
 
 ## Menonaktifkan Pratinjau Tautan
 
@@ -74,7 +75,7 @@ Untuk menonaktifkan zoom, tambahkan meta tag berikut ke bagian head file HTML An
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 ```
 
-## Menambahkan Zone CSS Aman
+## Menambahkan Safe CSS Zone
 
 Untuk memastikan konten Anda ditampilkan dalam area aman perangkat, tambahkan kode CSS berikut ke stylesheet Anda:
 
@@ -87,7 +88,7 @@ body {
 ## Tips Tambahan
 
 - Gunakan teknik desain responsif untuk memastikan aplikasi Anda terlihat bagus di semua perangkat
-- Optimalkan kinerja aplikasi Anda dengan meminimalkan penggunaan pustaka dan kerangka kerja JavaScript yang berat
+- Optimalkan kinerja aplikasi Anda dengan meminimalkan penggunaan library dan framework JavaScript yang berat
 - Uji aplikasi Anda di berbagai perangkat dan browser untuk memastikan kompatibilitas dan pengalaman pengguna yang konsisten
 
 Dengan mengikuti konfigurasi JavaScript dan CSS dasar ini, Anda dapat membuat aplikasi web yang terlihat dan terasa seperti aplikasi native, memberikan pengalaman pengguna yang mulus dan menyenangkan.

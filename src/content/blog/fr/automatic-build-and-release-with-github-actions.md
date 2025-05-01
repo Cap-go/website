@@ -1,23 +1,24 @@
 ---
-slug: fr__automatic-build-and-release-with-github-actions
-title: Construction et déploiement automatiques de l'application avec GitHub Actions
+slug: automatic-build-and-release-with-github-actions
+title: Construire et publier automatiquement une application avec Github actions
 description: >-
   Créez votre propre pipeline CI/CD avec Github Actions gratuitement et déployez
-  votre application Ionic Capacitor JS à chaque push sur main.
+  votre application Ionic Capacitor JS à chaque push sur la branche main.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /github_actions.webp
-head_image_alt: Illustration d'Action GitHub
+head_image_alt: Illustration github action
+keywords: 'Github actions, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
 locale: fr
 next_blog: automatic-capacitor-ios-build-github-action
 ---
 
-Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec peu de modifications à toute autre plateforme CI/CD
+Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec quelques modifications à n'importe quelle autre plateforme CI/CD
 
 ## Préface
 
@@ -26,7 +27,7 @@ Si vous devez ajouter votre application à Capgo, vous pouvez suivre ce [Tutorie
 
 ## Convention de commit
 
-Tout d'abord, vous devez commencer à suivre la convention de commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) cela aidera les outils à comprendre comment mettre à jour le numéro de version, il faut 5 minutes pour l'apprendre
+Tout d'abord, vous devez commencer à suivre la convention de commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) cela aidera les outils à comprendre comment augmenter le numéro de version, c'est 5 minutes à apprendre
 
 ![Conventional commits](/conventional_commits.webp)
 
@@ -34,7 +35,7 @@ Tout d'abord, vous devez commencer à suivre la convention de commit [convention
 
 Ensuite, vous devez créer votre première action GitHub pour automatiquement construire et créer des tags
 
-Créez un fichier à ce chemin : `.github/workflows/bump_version.yml`
+Créez un fichier à ce chemin : `github/workflows/bump_version.yml`
 
 avec ce contenu :
 
@@ -71,27 +72,27 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-Cela publiera un tag pour chaque commit dans votre branche principale et ajoutera une entrée de changelog pour chaque commit dans la branche principale dans `CHANGELOG.md`
+Cela créera un tag pour chaque commit dans votre branche principale et ajoutera une entrée de changelog pour chaque commit dans la branche principale dans `CHANGELOG.md`
 
 Ne vous inquiétez pas si vous n'avez pas ce fichier, il sera créé pour vous
 
-Pour que cela fonctionne, créez un [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) dans vos [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub sous le nom `PERSONAL_ACCESS_TOKEN`
+Pour que cela fonctionne, créez un [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) dans vos [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub comme `PERSONAL_ACCESS_TOKEN`
 
 Ceci est nécessaire pour permettre à la CI de commiter le changelog
 
-Lorsque vous créez le token, choisissez l'expiration comme `never` et la portée comme `repo`
+Lors de la création du token, choisissez l'expiration comme `never` et la portée comme `repo`
 
-Enfin, définissez la version dans votre fichier `package.json`, synchronisez-la avec votre numéro de version Native, ce qui facilitera l'étape suivante
+Enfin, définissez la version dans votre fichier `package.json`, synchronisez-la avec votre numéro de version Native qui facilitera l'étape suivante
 
-Ceci n'est nécessaire que la première fois, ensuite les outils le garderont à jour
+Ceci n'est nécessaire que la première fois, ensuite les outils le maintiendront à jour
 
-Vous pouvez maintenant commiter ces deux fichiers et voir votre premier tag apparaître sur GitHub !
+Vous pouvez maintenant commiter ces deux fichiers et voir votre premier tag apparaître dans GitHub !
 
-Les plateformes native et web verront leur numéro de version augmenter après chaque commit
+Les plateformes native et web auront le numéro de version incrémenté après chaque commit
 
 ## Actions GitHub pour la construction
 
-Créez un fichier à ce chemin : `.github/workflows/build.yml`
+Créez un fichier à ce chemin : `github/workflows/build.yml`
 
 avec ce contenu :
 
@@ -127,9 +128,9 @@ Cela installera et construira vos dépendances avant de les envoyer à Capgo
 
 Si votre commande de construction est différente, vous pouvez la modifier dans l'étape `build_code`
 
-Pour que cela fonctionne, vous devez obtenir votre clé API pour Capgo, ajoutez-la dans les [secrets de votre dépôt GitHub](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) sous le nom `CAPGO_TOKEN`
+Pour que cela fonctionne, vous devez obtenir votre clé API pour Capgo, ajoutez-la dans les [secrets de votre dépôt GitHub](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) comme `CAPGO_TOKEN`
 
-Vous pouvez maintenant commiter ces deux fichiers et voir votre premier tag apparaître sur GitHub !
+Vous pouvez maintenant commiter ces deux fichiers et voir votre premier tag apparaître dans GitHub !
 
 Le commit générera une nouvelle construction pour le canal de production
 

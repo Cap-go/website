@@ -1,29 +1,30 @@
 ---
-slug: ko__integrate-universal-links-capacitor-nextjs
-title: How to Integrate Universal Links in Next.js with Capacitor
-description: >-
-  Learn step by step how to set up universal links for your Next.js app with
-  Capacitor on both iOS and Android platforms.
+slug: integrate-universal-links-capacitor-nextjs
+title: Capacitor로 Next.js에서 유니버설 링크를 통합하는 방법
+description: 'Next.js와 Capacitor를 사용하여, iOS 및 Android 플랫폼에서 앱의 유니버셜 링크를 구성하는 단계별 방법을 알아보세요.'
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z
 head_image: /deeplink_next_capacitor.webp
-head_image_alt: Capacitor Universal Links
+head_image_alt: Capacitor 유니버셜 링크
+keywords: >-
+  Capacitor, Universal Links, Next.js, mobile app development, live updates, OTA
+  updates, continuous integration, mobile app updates
 tag: DeepLinking
 published: true
 locale: ko
 next_blog: ''
 ---
 
-Universal links on iOS and App Links on Android allow users to be taken directly into your app from a link, bypassing the browser. This is particularly useful for improving user experience and maintaining the context from a web page to an app. In this guide, we'll walk through the process of setting up these deep links for a Next.js app using Capacitor.
+iOS의 유니버설 링크와 Android의 앱 링크를 사용하면 사용자가 브라우저를 거치지 않고 링크를 통해 직접 앱으로 이동할 수 있습니다. 이는 특히 사용자 경험을 개선하고 웹 페이지에서 앱으로의 컨텍스트를 유지하는 데 유용합니다. 이 가이드에서는 Capacitor를 사용하여 Nextjs 앱에서 이러한 딥 링크를 설정하는 과정을 설명하겠습니다.
 
-Setting up deep links doesn't require a lot of code, but it does involve some configuration. By the end of this guide, you'll be able to click a link like `https://www.capgo.app/details/22` and have your app open to the correct page if it's installed.
+딥 링크 설정은 많은 코드가 필요하지 않지만 일부 구성이 필요합니다. 이 가이드를 마치면 `https://www.capgo.app/details/22`와 같은 링크를 클릭하여 앱이 설치되어 있다면 올바른 페이지로 앱이 열리게 됩니다.
 
-## Next.js Deep Link Setup
+## Nextjs 딥 링크 설정
 
-First, we'll create a new Next.js app and a details page for testing:
+먼저, 새로운 Nextjs 앱과 테스트를 위한 상세 페이지를 만들어보겠습니다:
 
 ```sh
 npx create-next-app@latest capgoLinks
@@ -35,7 +36,7 @@ npx cap add ios
 npx cap add android
 ```
 
-Ensure your **bundle ID** is correctly set in the **capacitor.config.json** file, as it's crucial for the setup:
+**capacitor.config.json** 파일에서 **번들 ID**가 올바르게 설정되어 있는지 확인하세요. 이는 설정에 매우 중요합니다:
 
 ```json
 {
@@ -46,9 +47,9 @@ Ensure your **bundle ID** is correctly set in the **capacitor.config.json** file
 }
 ```
 
-For routing, Next.js uses file-based routing, so by creating a file at `pages/details/[id].js`, we've already set up our wildcard route.
+라우팅의 경우, Nextjs는 파일 기반 라우팅을 사용하므로 `pages/details/[id].js`에 파일을 생성함으로써 이미 와일드카드 라우트를 설정했습니다.
 
-In `pages/details/[id].js`, we can retrieve the ID from the URL using Next.js's built-in router:
+`pages/details/[id].js`에서는 Nextjs의 내장 라우터를 사용하여 URL에서 ID를 가져올 수 있습니다:
 
 ```jsx
 import { useRouter } from 'next/router'
@@ -67,7 +68,7 @@ function DetailsPage() {
 export default DetailsPage
 ```
 
-Now, let's handle the `appUrlOpen` event with Capacitor. This event is triggered when the app is opened via a custom URL scheme. Add a listener in the `pages/_app.js` file:
+이제 Capacitor로 `appUrlOpen` 이벤트를 처리해보겠습니다. 이 이벤트는 앱이 사용자 정의 URL 스키마를 통해 열릴 때 트리거됩니다. `pages/_app.js` 파일에 리스너를 추가하세요:
 
 ```jsx
 import { useEffect } from 'react'
@@ -89,11 +90,11 @@ function MyApp({ Component, pageProps }) {
 export default MyApp
 ```
 
-This code listens for the `appUrlOpen` event and navigates to the appropriate route within your Next.js app.
+이 코드는 `appUrlOpen` 이벤트를 수신하고 Nextjs 앱 내에서 적절한 라우트로 이동합니다.
 
-## iOS Configuration
+## iOS 구성
 
-For iOS, you'll need an app ID with Associated Domains enabled. Create an **apple-app-site-association** file with the following content, replacing `YOURTEAMID` and `com.your.bundleid` with your actual team ID and bundle ID:
+iOS의 경우, Associated Domains가 활성화된 앱 ID가 필요합니다. `YOURTEAMID`와 `com.your.bundleid`를 실제 팀 ID와 번들 ID로 대체하여 다음 내용으로 **apple-app-site-association** 파일을 만드세요:
 
 ```json
 {
@@ -109,20 +110,20 @@ For iOS, you'll need an app ID with Associated Domains enabled. Create an **appl
 }
 ```
 
-Upload this file to the `.well-known` directory on your domain, making it accessible at `https://www.capgo.app/.well-known/apple-app-site-association`.
+이 파일을 도메인의 `.well-known` 디렉토리에 업로드하여 `https://www.capgo.app/.well-known/apple-app-site-association`에서 접근할 수 있도록 하세요.
 
-In Xcode, add the domain to your app's entitlements using the format `applinks:capgo.app`.
+Xcode에서 `applinks:capgo.app` 형식을 사용하여 앱의 권한에 도메인을 추가하세요.
 
-## Android Configuration
+## Android 구성
 
-For Android App Links, follow these steps:
+Android 앱 링크를 위해 다음 단계를 따르세요:
 
-1. Generate a keystore file if you don't have one.
-2. Obtain the SHA256 fingerprint from the keystore.
-3. Create an **assetlinks.json** file with your package name and SHA256 fingerprint.
-4. Upload this file to the `.well-known` directory on your domain.
+1. 키스토어 파일이 없다면 생성하세요.
+2. 키스토어에서 SHA256 지문을 얻으세요.
+3. 패키지 이름과 SHA256 지문이 포함된 **assetlinks.json** 파일을 만드세요.
+4. 이 파일을 도메인의 `.well-known` 디렉토리에 업로드하세요.
 
-In your `AndroidManifest.xml`, add an `intent-filter` to the `activity` element that handles deep links:
+`AndroidManifest.xml`의 딥 링크를 처리하는 `activity` 요소에 `intent-filter`를 추가하세요:
 
 ```xml
 <activity ...>
@@ -135,9 +136,9 @@ In your `AndroidManifest.xml`, add an `intent-filter` to the `activity` element 
 </activity>
 ```
 
-After uploading the `assetlinks.json` file, you can verify it using Google's Digital Asset Links tool. If everything is set up correctly, you'll see a green checkmark.
+`assetlinks.json` 파일을 업로드한 후, Google의 Digital Asset Links 도구를 사용하여 확인할 수 있습니다. 모든 것이 올바르게 설정되면 녹색 체크마크가 표시됩니다.
 
-To build and sign your app, use the following commands:
+앱을 빌드하고 서명하려면 다음 명령어를 사용하세요:
 
 ```sh
 cd android
@@ -148,17 +149,17 @@ zipalign -v 4 android/app/build/outputs/apk/release/app-release-unsigned.apk cap
 adb install capgo.apk
 ```
 
-This will install the signed app on your connected Android device.
+이렇게 하면 연결된 Android 기기에 서명된 앱이 설치됩니다.
 
-## Capacitor Configure for Native Project Settings
+## 네이티브 프로젝트 설정을 위한 Capacitor 구성
 
-To automate native project settings, consider using the [Capacitor configure package](https://github.com/ionic-team/capacitor-configure/). Install it in your project:
+네이티브 프로젝트 설정을 자동화하려면 [Capacitor configure 패키지](https://github.com/ionic-team/capacitor-configure/)의 사용을 고려해보세요. 프로젝트에 설치하세요:
 
 ```sh
 npm install @capacitor/configure
 ```
 
-Create a `capacitor.config.yaml` file at the root of your project:
+프로젝트 루트에 `capacitor.config.yaml` 파일을 생성하세요:
 
 ```yaml
 vars:
@@ -175,14 +176,14 @@ platforms:
     packageName: $PACKAGE_NAME
 ```
 
-Run the configure tool with this config:
+이 구성으로 configure 도구를 실행하세요:
 
 ```sh
 npx cap-config run capacitor.config.yaml
 ```
 
-This will apply the settings specified in the YAML file to your native projects.
+이렇게 하면 YAML 파일에 지정된 설정이 네이티브 프로젝트에 적용됩니다.
 
-## Conclusion
+## 결론
 
-Setting up deep links with Capacitor for a Next.js app involves configuring your domain and project settings for both iOS and Android. While the process requires attention to detail, it's streamlined compared to older methods and doesn't require additional plugins. Ensure your domain verification files are correctly served and check them with the respective platform tools. Once set up, your app will seamlessly open from web links, providing a smooth transition for your users from web to app.
+Nextjs 앱에서 Capacitor를 사용하여 딥 링크를 설정하는 것은 iOS와 Android 모두에 대해 도메인과 프로젝트 설정을 구성하는 것을 포함합니다. 이 과정은 세심한 주의가 필요하지만, 이전 방식에 비해 간소화되었으며 추가 플러그인이 필요하지 않습니다. 도메인 확인 파일이 올바르게 제공되는지 확인하고 각 플랫폼의 도구로 확인하세요. 설정이 완료되면 앱이 웹 링크에서 원활하게 열리며, 사용자가 웹에서 앱으로 자연스럽게 전환할 수 있습니다.

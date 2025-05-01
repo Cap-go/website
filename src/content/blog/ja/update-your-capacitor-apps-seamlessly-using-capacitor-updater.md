@@ -1,16 +1,20 @@
 ---
-slug: ja__update-your-capacitor-apps-seamlessly-using-capacitor-updater
-title: Capacitor-updaterを使って、あなたのCapacitorアプリケーションを手間なく更新しましょう。
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+title: CapacitorアプリをCapacitor-updaterでシームレスにアップデート
 description: >-
-  こんにちはIonic
-  Capacitorコミュニティの皆さん、今日はアプリにCapacitor-updaterをセットアップする手助けをします。これにより、問題なくリリースを実行できます。
+  Bonjour la communauté Capacitor Ionic. Aujourd'hui, je vais vous aider à
+  configurer Capacitor-updater dans votre application pour permettre des mises à
+  jour fluides.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-02-27T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /update_flow.webp
-head_image_alt: コンデンサーの開発者は代替案を探しています。
+head_image_alt: Capacitor開発者向けの代替案を探る
+keywords: >-
+  Capacitor, mobile app development, live updates, OTA updates, continuous
+  integration, mobile app updates
 tag: Tutorial
 published: true
 locale: ja
@@ -19,63 +23,63 @@ next_blog: ''
 
 ## Capacitor-updaterとは？
 
-Capacitor-updaterは、アプリの更新や改善をエンドユーザーに即座に提供するための技術です。
+Capacitor-updaterは、アプリのアップデートや改善をエンドユーザーに即座に配信するのに役立つテクノロジーです
 
-これは、重要なバグ修正を行い、App Storeのレビューを経ずに即座に提供したい場合に特に便利です。
+App Storeのレビューを経ることなく、重要なバグ修正を即座に配信したい場合に特に有効です
 
-これは、利用可能になり次第、更新をサイドロードする「ウェブ的な」機敏さを持っていると考えることができます。
+利用可能になった時点でサイドローディングによるアップデートを「Webのような」俊敏性で行うことができます
 
-さらに、アプリがクラッシュした場合、新しい更新をロールバックする機能も提供しています。
+さらに、新しいアップデートでアプリがクラッシュした場合のロールバックも提供します
 
-## どのように機能しますか？
+## どのように機能するか？
 
-Capgoは、アプリのJavaScriptバンドルをCapgoサーバーと同期させ、ユーザーがアプリを開くたびに、新しい更新がバンドルに利用可能かどうかをCapgoサーバーに確認します。そしてもちろん、ユーザーエクスペリエンスを微調整するのに役立つ素晴らしい設定がたくさんあります。
+CapgoはアプリのJavaScriptバンドルをCapgoサーバーと同期し、ユーザーがアプリを開くたびにCapgoサーバーに新しいアップデートが利用可能かどうかを確認します。もちろん、ユーザー体験を微調整できる素晴らしい設定が多数用意されています
 
-私は、すべてのプロジェクトでCapgoを使用しています。これにより、App Storeのレビュープロセスにかける時間が減ります。
+私は構築するすべてのプロジェクトでCapgoを使用しています。それによってApp Storeのレビュープロセスにかける時間を減らすことができます
 
-詳しくは[こちら](https://capgoapp/)でお読みください。
+詳細は[こちら](https://capgoapp/)でご覧いただけます
 
-## 制限はありますか？
+## 制限事項はありますか？
 
-良さそうに聞こえますが、いくつかの注意点があります。
-最初の注意点は、OTAアップデートは__ウェブバンドルでのみ動作する__ということです。
-これが大きな制約ではないと考えるかもしれませんが、Capacitor JSではほとんどすべてのコードをJS、CSS、HTMLで記述します。
-これが真実であったとしても、アプリにインストールするネイティブモジュールはまだ存在します。
-モジュールがあなたのAndroidまたはiOSのディレクトリを変更した場合、OTAを使ってアプリを更新することはできません。
-なぜなら、これらのディレクトリの内容はネイティブバイナリをコンパイルするために使用されるため、OTAでは更新できないからです。
-ネイティブアプリでもこの部分を更新することはできません。
+良いことばかりに聞こえるかもしれませんが、いくつか注意すべき点があります
+まず、OTAアップデートは__Webバンドルでのみ機能する__ということです
+Capacitor JSではほとんどすべてのコードをJS、CSS、HTMLで書くため、大きな制限ではないと思うかもしれません
+確かにその通りですが、アプリにインストールするネイティブモジュールも存在します
+モジュールがandroidやiOSのディレクトリを変更する場合、OTAでアプリをアップデートすることはできません
+これらのディレクトリの内容はネイティブバイナリのコンパイルに使用され、OTAではアップデートできないためです
+ネイティブアプリでもこの部分はアップデートできません
 
-しかし、CI/CDを設定してこの部分を処理することができます。私は[こちらでiOS用のチュートリアル](https://capgoapp/blog/automatic-capacitor-ios-build-github-action/)を作成し、[こちらでAndroid用も](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)作成しました。
+ただし、CI/CDでこの部分を処理するように設定できます。その方法については[こちらのiOS向けチュートリアル](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)で説明しています
 
-## Auto Capgo Configuration
+## 自動Capgo設定
 
-サインアップして、最初のバージョンをアップロードするためのAPIキーを取得する時です！[Capgoアカウントにサインアップする](https://capgoapp/register/)ことから始めましょう。
+サインアップして最初のバージョンをアップロードするためのAPIキーを取得しましょう！まずは[Capgoアカウントに登録](/register/)してください
 
-Capgoにログインすると、オンボーディングページが表示されます。
+Capgoにログインすると、オンボーディングページが表示されます
 
 ![オンボーディングページ](/onboarding_1_newwebp)
 
-オンボーディングページの手順に従って最初のアプリを追加してください。
+オンボーディングページの手順に従って最初のアプリを追加してください
 
-### CLIガイダンスに従う
+### CLIのガイダンスに従う
 
-コマンドラインから、Capacitorアプリのルートに直接移動して、以下を実行します。
+コマンドラインで、Capacitorアプリのルートディレクトリから以下を実行します：
 
 `npx @capgo/cli@latest init`
-これにより、CapgoをCapacitorアプリにインストールします。CLIがCapgoでアプリを設定するプロセスを案内します。
+CapgoをCapacitorアプリにインストールするために、CLIがCapgoでアプリを設定するプロセスをガイドします
 
-手動で行いたい場合は、以下の手順に従うことができます。
+手動で行いたい場合は、以下の手順に従ってください
 
-## Manual Capgo Configuration
+## 手動Capgo設定
 
-### プラグインをインストールする
+### プラグインのインストール
 
-アプリに以下のコードを追加して終了する必要があります。
+アプリに以下のコードが追加されるはずです：
 
 `npm i @capgo/capacitor-updater && npx cap sync`
-これにより、Capacitorアプリにプラグインがインストールされます。
+プラグインをCapacitorアプリにインストールします
 
-その後、アプリに以下のコードを追加して、JSバンドルが正常であることをネイティブプラグインに通知します（これを行わないと、ネイティブプラグインは前のバージョンにロールバックします）：
+そして、JSバンドルが正常であることをネイティブプラグインに通知するために、アプリに以下のコードを追加します（これを行わないと、ネイティブプラグインは前のバージョンにロールバックします）：
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -83,48 +87,50 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-これにより、ネイティブプラグインにインストールが成功したことが通知されます。
+これによりネイティブプラグインにインストールが成功したことを通知します
 
-その後、`npm run build && npx cap copy`を実行して、アプリを更新します。
+その後、`npm run build && npx cap copy`を実行してアプリを更新します
 
 ### Capgo CLOUDにログイン
 
-まず、アカウントにある`all` [apikey](https://webcapgoapp/dashboard/apikeys/)を使用して、CLIでログインします。
+まず、アカウントにある`all` [apikey](https://webcapgoapp/dashboard/apikeys/)を使用してCLIでログインします：
 
 `npx @capgo/cli@latest login YOU_KEY`
 
-### 最初のアプリを追加する
+### 最初のアプリを追加
 
-CLIを使用して、まずCapgo Cloudでアプリを作成しましょう。
+CLIでCapgo Cloudに最初のアプリを作成しましょう
 
 `npx @capgo/cli@latest app add`
 
-このコマンドは、Capacitor構成ファイルで定義されているすべての変数を使用してアプリを作成します。
+このコマンドはCapacitor設定ファイルで定義されたすべての変数を使用してアプリを作成します
 
-### 最初のバージョンをアップロードする
+### 最初のバージョンをアップロード
 
-コードをビルドし、Capgoに送信するためのコマンドを実行します：
+コードをビルドしてCapgoに送信するコマンドを実行します：
 `npx @capgo/cli@latest bundle upload`
 
-デフォルトでは、バージョン名は`packagejson`ファイルにあるものになります。
+デフォルトでは、バージョン名は`packagejson`ファイルのものが使用されます
 
-[Capgo](https://webcapgoapp/)でビルドが存在するか確認してください。
+[Capgo](https://webcapgoapp/)でビルドが存在することを確認してください
 
-私の[モバイルサンドボックスアプリ](https://capgoapp/app_mobile/)でテストすることもできます。
+[モバイルサンドボックスアプリ](https://capgoapp/app_mobile/)でテストすることもできます
 
-### チャンネルをデフォルトにする
+### チャンネルをデフォルトに設定
 
-アプリをCapgoに送信した後、アプリがCapgoからの更新を受信するためにチャンネルを`default`にする必要があります。`npx @capgo/cli@latest channel set production -s default`
+アプリをCapgoに送信した後、アプリがCapgoからアップデートを受信できるようにチャンネル`default`を設定する必要があります
 
-## デバイスでライブアップデートを受け取る
+`npx @capgo/cli@latest channel set production -s default`
 
-アプリケーションがDeployからライブアップデートを受け取るためには、デバイスまたはエミュレーターでアプリを実行する必要があります。これを行う最も簡単な方法は、次のコマンドを使用して、エミュレーターまたはコンピュータに接続されたデバイスでローカルアプリを起動することです。
+## デバイスでライブアップデートを受信
+
+アプリケーションがDeployからライブアップデートを受信するには、デバイスまたはエミュレーターでアプリを実行する必要がありますエミュレーターまたはコンピューターに接続されたデバイスでローカルアプリを起動するには、以下のコマンドを使用するのが最も簡単な方法です
 
     npx cap run [ios | android]
 
-アプリを開き、バックグラウンドに移動させ、再び開くと、ログにアプリがアップデートを行ったことが表示されるはずです。
+アプリを開き、バックグラウンドに移動してから再度開くと、ログでアプリが更新されたことが確認できます
 
-おめでとうございます！ 🎉 あなたは初めてのライブアップデートを成功裏にデプロイしました。これは、ライブアップデートでできることのほんの始まりに過ぎません。詳しくは、完全な[ライブアップデートのドキュメント](/docs/plugin/cloud-mode/getting-started/)をご覧ください。
+おめでとうございます！🎉 最初のLive Updateの導入に成功しました。これはLive Updatesでできることの始まりに過ぎません。詳しくは、[Live Updates のドキュメント](/docs/plugin/cloud-mode/getting-started/)をご覧ください
 
-> ローカルでアップデートを受信しない必要がある場合は、このコマンドを実行してください。
+> ローカルでの更新の受信を停止する必要がある場合は、以下のコマンドを実行してください
 `npx @capgo/cli@latest channel set`

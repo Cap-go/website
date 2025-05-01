@@ -1,16 +1,20 @@
 ---
-slug: ja__create-offline-screen-in-vue-angular-react
-title: ネットワークAPIとCapacitorを使用して、Vue、Angular、Reactアプリケーションでオフラインスクリーンを作成する方法。
+slug: create-offline-screen-in-vue-angular-react
+title: Vue、Angular、React アプリケーションでネットワーク API と Capacitor を使用してオフライン画面を作成する方法
 description: >-
-  Vue、Angular、またはReactアプリケーションで、Network
-  APIとCapacitorを使用してオフライン画面を実装する方法を学びましょう。オフラインシナリオを効果的に管理することで、ユーザー体験を向上させましょう。
+  Vue、Angular、またはReactアプリケーションでNetwork
+  APIとCapacitorを使用してオフライン画面を実装する方法を学びましょう。オフラインシナリオを効果的に処理してユーザーエクスペリエンスを向上させます。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
 updated_at: 2022-06-21T00:00:00.000Z
 head_image: /vue_angular_react.webp
-head_image_alt: コンピュータで作業している人の画像。
+head_image_alt: コンピュータで作業している人の画像
+keywords: >-
+  Vue, Angular, React, offline screen, network API, Capacitor, mobile app
+  development, live updates, OTA updates, continuous integration, mobile app
+  updates
 tag: Tutorial
 published: true
 locale: ja
@@ -19,20 +23,20 @@ next_blog: ''
 
 # Vue 3、Angular 14、またはReactでオフライン画面を作成する方法
 
-このチュートリアルでは、Network APIを使用して、Vue 3、Angular 14、そしてReactアプリケーションでオフライン画面を作成する方法を学びます。Network APIはネットワークおよび接続に関する情報を提供し、オフラインシナリオを処理し、より良いユーザーエクスペリエンスを提供することができます。
+このチュートリアルでは、Network APIを使用してVue 3、Angular 14、およびReactアプリケーションでオフライン画面を作成する方法を学びます。Network APIはネットワークと接続情報を提供し、オフラインシナリオを処理してより良いユーザー体験を提供することができます。
 
 ## 前提条件
 
-始める前に、以下のものがインストールされていることを確認してください：
+始める前に、以下がインストールされていることを確認してください：
 
-- [Nodejs](https://nodejsorg/)（バージョン14以上）
-- [Vue CLI](https://clivuejsorg/)
-- [Angular CLI](https://cliangulario/)
-- [Create React App](https://create-react-appdev/)
+- [Nodejs](https://nodejs.org/) (バージョン14以上)
+- [Vue CLI](https://cli.vuejs.org/)
+- [Angular CLI](https://cli.angular.io/)
+- [Create React App](https://create-react-app.dev/)
 
 ## プロジェクトのセットアップ
 
-まず、それぞれのフレームワークに対応するスキャフォールディングツールを使用して新しいプロジェクトを作成します。
+まず、各フレームワークのスカフォールディングツールを使用して新しいプロジェクトを作成しましょう。
 
 ### Vue 3
 
@@ -42,7 +46,7 @@ next_blog: ''
 vue create offline-screen-vue3
 ```
 
-デフォルトのプリセットを選択し、プロジェクトが作成されるのを待ちます。
+デフォルトのプリセットを選択し、プロジェクトが作成されるまで待ちます。
 
 ### Angular 14
 
@@ -52,7 +56,7 @@ vue create offline-screen-vue3
 ng new offline-screen-angular14
 ```
 
-プロンプトに従い、追加機能が必要な場合は**スペースバー**キーを押して「ルーティング」を選択します。プロジェクトが作成されるのを待ちます。
+プロンプトに従い、追加機能を尋ねられたら、**スペースバー**キーを押して「Routing」を選択します。プロジェクトが作成されるまで待ちます。
 
 ### React
 
@@ -62,25 +66,25 @@ ng new offline-screen-angular14
 npx create-react-app offline-screen-react
 ```
 
-プロジェクトが作成されるのを待ちます。
+プロジェクトが作成されるまで待ちます。
 
 ## Network APIのインストール
 
-次に、Network APIを提供する`@capacitor/network`パッケージをインストールします。
+次に、Network APIを提供する`@capacitor/network`パッケージをインストールしましょう。
 
-ターミナルを開き、プロジェクトディレクトリに移動します。その後、以下のコマンドを実行してパッケージをインストールします：
+ターミナルを開き、プロジェクトディレクトリに移動します。そして、以下のコマンドを実行してパッケージをインストールします：
 
 ```shell
 npm install @capacitor/network
 ```
 
-Capacitorプロジェクトの場合、ネイティブプロジェクトファイルを同期するために以下のコマンドも実行します：
+Capacitorプロジェクトの場合、以下のコマンドも実行してネイティブプロジェクトファイルを同期します：
 
 ```shell
 npx cap sync
 ```
 
-グローバルにCapacitor CLIがインストールされていることを確認するために、以下を実行します：
+以下のコマンドを実行して、Capacitor CLIがグローバルにインストールされていることを確認してください：
 
 ```shell
 npm install -g @capacitor/cli
@@ -88,7 +92,7 @@ npm install -g @capacitor/cli
 
 ## オフライン画面の実装
 
-次に、それぞれのフレームワークでオフライン画面の機能を実装します。ユーザーがオフラインになるとシンプルなメッセージを表示します。
+次に、各フレームワークでオフライン画面の機能を実装します。ユーザーがオフラインになったときに簡単なメッセージを表示します。
 
 ### Vue 3
 
@@ -122,7 +126,7 @@ const logCurrentNetworkStatus = async () => {
 };
 ```
 
-アプリケーションのテンプレート（`App.vue`）に、オフライン画面メッセージを表示するために`<div>`要素を`offline-screen`というIDで追加します：
+アプリケーションテンプレート（`App.vue`）で、オフライン画面メッセージを表示するために`<div>`要素をid `offline-screen`で追加します：
 
 ```html
 <template>
@@ -153,7 +157,7 @@ const logCurrentNetworkStatus = async () => {
 </style>
 ```
 
-これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が隠れます。
+これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が非表示になります。
 
 ### Angular 14
 
@@ -192,7 +196,7 @@ export class AppComponent {
 }
 ```
 
-アプリケーションのテンプレート（`app.component.html`）に、オフライン画面メッセージを表示するために`<template>`要素を`offline-screen`というIDで追加します：
+アプリケーションテンプレート（`app.component.html`）で、オフライン画面メッセージを表示するために`<template>`要素をid `offline-screen`で追加します：
 
 ```html
 <div id="offline-screen">
@@ -222,7 +226,7 @@ export class AppComponent {
 }
 ```
 
-これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が隠れます。
+これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が非表示になります。
 
 ### React
 
@@ -288,11 +292,12 @@ export default App
 }
 ```
 
-これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が隠れます。
+これで、ユーザーがオフラインになるとオフライン画面が表示され、オンラインに戻るとオフライン画面が非表示になります。
 
-## サポートされているメソッドとインターフェース
+## サポートメソッドとインターフェース
 
-Network APIには、ネットワーク接続を扱うためのいくつかのメソッドとインターフェースが提供されています。以下はその主要なものです：
+Network APIは、ネットワーク接続を処理するための複数のメソッドとインターフェースを提供します。主なものは以下の通りです：
 
-- [`getStatus()`](https://capacitorjscom/docs/apis/network/#getstatus)：ネットワーク接続の現在の状態を照会する
-- [`addListener('networkStatusChange', )`](https://capacitorjscom/docs/apis/network/#addlistenernetworkstatuschange)：ネットワーク接続の変化をリッスンする
+- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus)：ネットワーク接続の現在のステータスを照会
+- [`addListener('networkStatusChange', )`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange)：ネットワーク接続の変更をリッスン
+-

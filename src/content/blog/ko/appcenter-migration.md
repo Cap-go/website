@@ -1,210 +1,102 @@
 ---
-slug: ko__appcenter-migration
-title: Migrating from App Center to Capgo
-description: >-
-  In this guide, we’ll walk through the complete migration for Capgo Live
-  Updates a Microsoft CodePush alternative.
+slug: appcenter-migration
+title: Migration von App Center zu Capgo
+description: Microsoft CodePush의 대안인 Capgo Live Updates의 전체 마이그레이션 과정을 안내해드리겠습니다.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-22T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /migrate_appcenter.webp
-head_image_alt: Capacitor JS Dev looking for alternative
+head_image_alt: Capacitor JS 데브를 위한 대안 검색
+keywords: >-
+  App Center, migration, live updates, OTA updates, continuous integration,
+  mobile app updates
 tag: Migration
 published: true
 locale: ko
 next_blog: automatic-build-and-release-with-github-actions
 ---
-## Migration Summary
 
-* [Capgo](/register/) is a service that helps development teams send live app to deployed apps.
-* Capacitor JS apps written in jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic or even your own custom solution can be migrated. **An existing Ionic app is not required.**.
-* [Colt](https://volt.build/) offers equivalent services for App Center Build (build Android/iOS apps). For Test, Diagnostics, and Analytics services.
+## 마이그레이션 요약
 
-##### Note
+* [Capgo](/register/)는 개발팀이 배포된 앱에 실시간 앱을 전송하는 것을 돕는 서비스입니다
+* jQuery Mobile, Framework 7, Sencha, KendoUI, Ionic 또는 사용자 정의 솔루션으로 작성된 Capacitor JS 앱을 마이그레이션할 수 있습니다 **기존 Ionic 앱이 필요하지 않습니다**
+* [Colt](https://voltbuild/)는 App Center Build(Android/iOS 앱 빌드)에 대한 동등한 서비스를 제공합니다 테스트, 진단 및 분석 서비스용
 
-If your app is still using Cordova, it's necessary to [migrate to Capacitor](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/) first before migrating to Capgo.
+##### 참고
 
-Built by the Ionic team as a spiritual successor to Cordova, Capacitor allows development to move close to the native tooling and capabilities with the goal of providing an even better user experience and performance.
+앱이 여전히 Cordova를 사용하고 있다면, Capgo로 마이그레이션하기 전에 먼저 [Capacitor로 마이그레이션](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/)해야 합니다
 
-Fortunately, the migration process is easy and the majority of Cordova plugins are backward compatible with Capacitor. [Start migrating here](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/).
+Ionic 팀이 Cordova의 정신적 후계자로 만든 Capacitor는 더 나은 사용자 경험과 성능을 제공하는 것을 목표로 네이티브 도구 및 기능에 가깝게 개발할 수 있게 합니다
 
-## About Capgo
+다행히도 마이그레이션 과정은 쉽고 대부분의 Cordova 플러그인이 Capacitor와 하위 호환됩니다 [여기서 마이그레이션 시작하기](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/)
 
-Capgo, handles updating apps over time. Development teams can focus completely on the unique features of their app and outsource the complicated app delivery process to Capgo.
+## Capgo 소개
 
-Capgo fills in the gaps between web delivery and mobile.
+Capgo는 시간이 지남에 따라 앱을 업데이트하는 것을 처리합니다 개발팀은 앱의 고유한 기능에 완전히 집중할 수 있으며 복잡한 앱 전달 프로세스를 Capgo에 아웃소싱할 수 있습니다
 
-## Capgo Prerequisites
+Capgo는 웹 전달과 모바일 사이의 격차를 메워줍니다
 
-Like App Center, [Capgo](/register/) supports apps hosted in Git repositories on Azure DevOps, Bitbucket, GitHub, and GitLab.
+## Capgo 전제 조건
 
-### Install Capgo CLI
+App Center와 마찬가지로, [Capgo](/register/)는 Azure DevOps, Bitbucket, GitHub 및 GitLab의 Git 저장소에 호스팅된 앱을 지원합니다
 
-##### note
+### Capgo CLI 설치
 
-Have Node and NPM installed on your computer, you need before proceeding. Always use the [current LTS version](https://nodejs.org/) Capgo do not older versions.
+##### 참고
 
-### Create `package.json` and Capacitor config files
+계속하기 전에 컴퓨터에 Node와 NPM이 설치되어 있어야 합니다 항상 [현재 LTS 버전](https://nodejsorg/)을 사용하세요 Capgo는 이전 버전을 지원하지 않습니다
 
-##### note
+### `packagejson` 및 Capacitor 구성 파일 생성
 
-Before you begin, I recommend making changes on a fresh Git branch.
+##### 참고
 
-Since [Capgo](/register/) was created to automate capacitor apps, it requires one file that your app may not have. First, create a `capacitor.config.json` file. The easiest way to create it is to run in the root of your app:
+시작하기 전에 새로운 Git 브랜치에서 변경하는 것을 권장합니다
 
-```shell
-npm install @capacitor/core
-```
+[Capgo](/register/)는 capacitor 앱을 자동화하기 위해 만들어졌기 때문에, 앱에 없을 수 있는 하나의 파일이 필요합니다 먼저 `capacitorconfigjson` 파일을 생성하세요 앱의 루트에서 실행하는 것이 가장 쉬운 방법입니다:
 
-Then, initialize Capacitor using the CLI questionnaire:
+[[CODE_BLOCK]]
 
-```shell
-npx cap init
-```
+그런 다음 CLI 설문을 사용하여 Capacitor를 초기화하세요:
 
-The CLI will ask you a few questions, starting with your app name, and the package ID you would like to use for your app.
+[[CODE_BLOCK]]
 
-Finally, commit the new files to your project:
+CLI는 앱 이름부터 시작하여 앱에 사용하고 싶은 패키지 ID 등 몇 가지 질문을 할 것입니다
 
-    git add .git commit -m "added package json and capacitor config" && git push
+마지막으로 새 파일을 프로젝트에 커밋하세요:
 
-### Migrate the Code
+    git add git commit -m "added package json and capacitor config" && git push
 
-Now that you have the new required [Capgo](/register/) files in place, you can turn our attention to the actual app itself. [Capgo](/register/) expects the entire built app to be inside a directory named `dist`.
+### 코드 마이그레이션
 
-If your built code is not in a `dist` directory, change this value in the Capacitor config file.
+이제 새로운 필수 [Capgo](/register/) 파일이 준비되었으니, 실제 앱 자체에 주목할 수 있습니다 [Capgo](/register/)는 빌드된 전체 앱이 `dist`라는 디렉토리 안에 있기를 기대합니다
 
-Here is what the app’s directory structure should look like:
+빌드된 코드가 `dist` 디렉토리에 없다면, Capacitor 구성 파일에서 이 값을 변경하세요
 
-![App Structure](/directory_looklike.webp)
+앱의 디렉토리 구조는 다음과 같아야 합니다:
 
-## Capgo Configuration
+![앱 구조](/directory_looklikewebp)
 
-With your app ready for [Capgo](https://web.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
+## Capgo 구성
 
-Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the 'write' key to copy it to your clipboard.
+앱이 [Capgo](https://webcapgoapp/) 통합을 위해 준비되었다면, 가입하고 첫 번째 버전을 업로드하기 위한 API 키를 받을 시간입니다! [Capgo 계정 가입](/register/)으로 시작하세요
 
-### Install the Capgo SDK
+Capgo에 로그인하면 계정 페이지로 이동한 다음 API 키를 클릭하고, '쓰기' 키를 클릭하여 클립보드에 복사하세요
 
-From a command line, directly into the root of your Capacitor app folder, run the following command:
+### Capgo SDK 설치
+
+명령줄에서 Capacitor 앱 폴더의 루트에 직접 다음 명령을 실행하세요:
 
 `npm i @capgo/capacitor-updater && npx cap sync`
-To install the plugin into your Capacitor app.
+플러그인을 Capacitor 앱에 설치하기 위해
 
-And then add to your app this code as replacement of CodePush one:
+그리고 CodePush 대신 앱에 다음 코드를 추가하세요:
 
-```js
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
+[[CODE_BLOCK]]
 
-CapacitorUpdater.notifyAppReady()
-```
+이는 네이티브 플러그인에 설치가 성공했음을 알려줄 것입니다
 
-This will tell the native plugin the installation as succeeded.
+## 실시간 업데이트 배포 (CodePush 대안)
 
-## Deploying Live Updates (CodePush Alternative)
-
-The Live Update feature works by using the installed [Capgo SDK](https://github.com/Cap-go/capacitor-updater/) in your native application to listen to a particular Deploy Channel Destination. When a Web build is assigned to a Channel Destination, that update will be deployed to user devices running binaries that are configured to listen to the specified Channel Destination.
-
-### Login to Capgo CLOUD
-
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
-
-```shell
-npx @capgo/cli@latest login YOURKEY
-```
-
-## Add your first app
-
-Let's get started by first creating the app in Capgo Cloud with the CLI.
-
-`npx @capgo/cli@latest app add`
-
-This command will use all variables defined in the Capacitor config file to create the app.
-
-## Upload your first bundle
-
-Run the command to build your code and send it to Capgo with:
-```shell
-npx @capgo/cli@latest bundle upload --channel production
-```
-
-By default, the version name will be the one in your `package.json` file.
-
-Check in [Capgo](https://web.capgo.app/) if the build is present.
-
-You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
-
-### Make channel default
-
-After you have sent your app to Capgo, you need to make your channel `default` to let apps receive updates from Capgo.
-
-```shell
-npx @capgo/cli@latest channel set production -s default
-```
-
-## Configure app to validate updates
-
-Add this config to your main JavaScript file.
-
-```js
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
-
-CapacitorUpdater.notifyAppReady()
-```
-
-Then do a `npm run build && npx cap copy` to update your app.
-
-### Receive a Live Update on a Device
-
-For your application to receive a live update from Deploy, you'll need to run the app on a device or an emulator. The easiest way to do this is simply to use the following command to launch your local app in an emulator or a device connected to your computer.
-
-    npx cap run [ios | android]
-
-Open the app, put it in the background and open it again, you should see in the logs the app did the update.
-
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/plugin/cloud-mode/getting-started/).
-
-## Remove App Center Dependencies
-
-Now that we've integrated Capgo's services, you should remove any references to App Center. Besides being a best practice to remove unused code/services, removing the SDK should reduce the size of your apps.
-
-First, open a terminal then uninstall the App Center plugins:
-```shell
-    cordova plugin remove cordova-plugin-appcenter-analytics cordova-plugin-appcenter-crashes cordova-plugin-code-push
-```
-
-Next, open `config.xml` and remove the following `preference` values. They will look similar to:
-```xml
-    <preference name="APP_SECRET" value="0000-0000-0000-0000-000000000000" /><preference name="CodePushDeploymentKey" value="YOUR-ANDROID-DEPLOYMENT-KEY" /><preference name="CodePushPublicKey" value="YOUR-PUBLIC-KEY" />
-```
-
-If you were using App Center Analytics in your app, remove the following `preferences` elements: `APPCENTER_ANALYTICS_ENABLE_IN_JS` and `APPCENTER_CRASHES_ALWAYS_SEND`.
-
-Remove the following `<access />` elements:
-
-```xml
-    <access origin="https://codepush.appcenter.ms" /><access origin="https://codepush.blob.core.windows.net" /><access origin="https://codepushupdates.azureedge.net" />
-```
-
-Remove the reference to CodePush in the CSP `meta` tag in the `index.html` file (`https://codepush.appcenter.ms`):
-```xml
-    <meta http-equiv="Content-Security-Policy" content="default-src https://codepush.appcenter.ms 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
-```
-
-Finally, within your app, remove any code references to App Center services, such as `codePush.sync();`.
-
-## Next Steps
-
-You've migrated from App Center to Capgo, utilizing the Live Updates. This is just the beginning of what you can use Capgo for. Explore the rest of the service includes Channel (multiple environments) and override. Cloud CLI integration, use Capgo inside your CI/CD platform of choice (such as GitHub Action, GitLab, Jenkins, and more).
-
-## Automatic send app update
-
-If your code is hosted on GitHub, you can set up automatic build and release in a few more steps, thanks to GitHub actions.
-
-I have made a second article to allow you to so.
-
-## Credits
-
-Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow/) rewrote with chat-gpt-3 and adapted.
+실시간 업데이트 기능은 네이티브 애플리케이션에 설치된 [Capgo SDK](https://githubcom/Cap-go/capacitor-updater/)를 사용하여 특정 배포 채널 대상을 수신합니다 웹 빌드가 채널 대상에 할당되면, 해당 업데이트는 지정된 채널 대상을 수신하도록 구성된 바이너리를 실행하는 사용자 기기에 배포됩니다

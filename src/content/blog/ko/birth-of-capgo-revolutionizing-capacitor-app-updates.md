@@ -1,151 +1,144 @@
 ---
-slug: ko__birth-of-capgo-my-challenging-journey-as-a-solo-maker
-title: How a GitHub Issue Evolved into a business
+slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+title: Wie aus einem GitHub Issue ein Unternehmen wurde
 description: >-
-  Discover the trials and triumphs behind creating Capgo, an innovative live
-  update system for Capacitor apps, born from necessity and shaped by community
-  feedback.
+  Découvrez les défis et les succès de la création de Capgo, un système innovant
+  de mise à jour en direct pour les applications Capacitor, né de la nécessité
+  et façonné par les retours de la communauté.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
 updated_at: 2024-07-13T00:00:00.000Z
 head_image: /capgo-birth-story.webp
-head_image_alt: A visual representation of Capgo's evolution from idea to product
+head_image_alt: Capgo의 아이디어부터 제품까지의 진화 과정을 시각적으로 표현
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
 tag: development
 published: true
 locale: ko
 next_blog: ''
 ---
 
-## The Genesis: A Community Request
+## 탄생: 커뮤니티의 요청
 
-The seeds of Capgo were actually planted long before I began my journey as a solo maker. On July 8, 2020, a community member named alexcroox submitted a plugin request that would eventually become the blueprint for Capgo.
+Capgo의 씨앗은 제가 솔로 메이커로서의 여정을 시작하기 훨씬 전인 2020년 7월 8일, alexcroox라는 커뮤니티 멤버가 제출한 플러그인 요청으로부터 시작되었습니다.
 
-![Initial plugin request](/capgo-initial-request.webp)
+![Initial plugin request](/capgo-initial-requestwebp)
 
-This request outlined the need for a "Capacitor Hot Code Push" plugin with the following key points:
+이 요청은 다음과 같은 주요 내용을 포함한 "Capacitor Hot Code Push" 플러그인의 필요성을 강조했습니다:
 
-1. **Platforms**: Support for both Android and iOS.
-2. **Existing Solutions**: It highlighted the limitations of current options like MS Code Push (which lacked Capacitor support) and App Flow (which was expensive and inflexible).
-3. **Description**: The ability to update js/css/html of an app in real-time without going through the app store review process.
-4. **Key Features**: 
-   - Facilitate over-the-air updates from a server/endpoint of the developer's choosing.
-   - Download a zip file of the updated dist folder, extract it, and tell Capacitor to launch from this new directory.
-   - Additional features like update verification, installation timing, and selective downloading of updates.
+1. **플랫폼**: Android와 iOS 모두 지원
+2. **기존 솔루션**: MS Code Push(Capacitor 지원 부족)와 App Flow(비용이 많이 들고 유연성이 부족)와 같은 현재 옵션의 한계점 강조
+3. **설명**: 앱스토어 심사 과정 없이 실시간으로 앱의 js/css/html을 업데이트하는 기능
+4. **주요 기능**: 
+   - 개발자가 선택한 서버/엔드포인트에서 무선 업데이트 지원
+   - 업데이트된 dist 폴더의 zip 파일을 다운로드하고 추출하여 Capacitor에게 이 새로운 디렉토리에서 실행하도록 지시
+   - 업데이트 검증, 설치 시점, 선택적 업데이트 다운로드와 같은 추가 기능
 
-This comprehensive request garnered significant community support, with 65 likes and 25 heart reactions. It clearly demonstrated a strong demand for such a solution in the Capacitor ecosystem.
+이 포괄적인 요청은 65개의 좋아요와 25개의 하트 반응을 받으며 커뮤니티의 큰 지지를 얻었습니다. Capacitor 생태계에서 이러한 솔루션에 대한 강한 수요가 있음을 분명히 보여주었습니다.
 
-When I came across this request over a year later, it resonated deeply with the challenges I was facing in my own projects. It served as both validation of the need for such a tool and a roadmap for what would become Capgo.
+1년 후 이 요청을 발견했을 때, 제 프로젝트에서 직면한 도전과 깊이 공감했습니다. 이는 이러한 도구의 필요성을 입증하고 Capgo가 될 것에 대한 로드맵 역할을 했습니다.
 
-The community's enthusiasm for this proposed plugin, combined with my personal experiences, became the driving force behind Capgo's development. It's a perfect example of how open-source communities can identify needs and inspire solutions, even if the timeline from idea to implementation spans over a year.
+이 제안된 플러그인에 대한 커뮤니티의 열정은 제 개인적인 경험과 결합되어 Capgo 개발의 원동력이 되었습니다. 아이디어에서 구현까지의 타임라인이 1년 이상 걸렸지만, 오픈소스 커뮤니티가 어떻게 필요성을 파악하고 해결책을 영감을 줄 수 있는지를 보여주는 완벽한 예시입니다.
 
+## 새로운 장의 시작
 
-## A New Chapter Begins
+Capgo 이야기를 시작하기 전에, 배경을 이해하는 것이 중요합니다. 2021년, 저는 Cashstory의 CTO 역할을 그만두고 주식을 매각하는 인생을 바꾸는 결정을 내렸습니다. 이는 불확실성으로 가득하지만 무한한 가능성이 있는 솔로 메이커로서의 여정의 시작을 알렸습니다.
 
-Before diving into the Capgo story, it's important to set the stage. In 2021, I made a life-changing decision to quit my role as CTO of Cashstory and sell my shares. This marked the beginning of my journey as a solo maker, a path filled with uncertainty but also endless possibilities.
+![Lisbon digital nomad life](/capgo-lisbon-nomadwebp)
 
-![Lisbon digital nomad life](/capgo-lisbon-nomad.webp)
+저축금을 안전망으로 삼아 새로운 모험을 시작했습니다. 저는 리스본의 활기찬 테크 씬과 문화를 즐기며 포르투갈 리스본에서 디지털 노마드로 살면서 제 열정 프로젝트에 집중했습니다. 주요 관심사는 모바일 앱 크로스핏 타이머인 Captime이었습니다. 이 프로젝트가 더 큰 무언가를 만들게 될 줄은 몰랐습니다.
 
-With my savings as a safety net, I embarked on a new adventure. I was living as a digital nomad in Lisbon, Portugal, embracing the vibrant tech scene and culture of the city while focusing on my passion projects. My primary focus was Captime, a mobile app crossfit timer. Little did I know that this project would lead me to create something much bigger.
+리스본의 스타트업 생태계의 에너지와 디지털 노마드 라이프스타일의 자유는 혁신을 위한 완벽한 배경을 제공했습니다. 전 세계의 기업가와 개발자들로 둘러싸인 이 환경에서 Capgo의 씨앗이 뿌려졌습니다.
 
-The energy of Lisbon's startup ecosystem and the freedom of the digital nomad lifestyle provided the perfect backdrop for innovation. It was in this environment, surrounded by fellow entrepreneurs and developers from around the world, that the seeds of Capgo were sown.
+## 아이디어의 불꽃
 
-[Continue with the rest of the article...]
+Captime 작업을 하면서 저는 중요한 장애물에 부딪혔습니다 - Capacitor 앱을 위한 저렴하고 유연한 업데이트 솔루션의 부재였습니다. 2021년 10월, 저는 GitHub 스레드에서 이러한 우려를 표명했습니다.
 
-This revision accurately reflects your living situation in Lisbon as a digital nomad, which provides important context for the environment in which you developed Capgo. It also highlights the connection between your lifestyle choice and the innovative spirit that led to Capgo's creation.
-## The Spark of an Idea
+![Initial proposal for Capgo](/capgo-initial-proposalwebp)
 
-While working on Captime, I encountered a significant hurdle - the lack of an affordable and flexible update solution for Capacitor apps. In October 2021, I voiced these concerns on a GitHub thread.
+제가 확인한 주요 문제점은 다음과 같습니다:
 
-![Initial proposal for Capgo](/capgo-initial-proposal.webp)
+1. 소규모 개발자들에게 높은 비용
+2. 저렴한 요금제에서 무선(OTA) 업데이트 부재
+3. 솔로 개발자들에게 불필요한 기능들
 
-The main pain points I identified were:
+## 커뮤니티의 공감
 
-1. High costs for small-scale developers
-2. Lack of over-the-air (OTA) updates in affordable plans
-3. Unnecessary features for solo developers
+제 우려는 다른 개발자들의 공감을 얻었습니다. 많은 사람들이 기존 솔루션이 인디 개발자와 소규모 팀에게 너무 비싸다는 의견에 동의했습니다.
 
-## The Community Resonates
+![Community feedback](/capgo-community-feedbackwebp)
 
-My concerns struck a chord with other developers. Many echoed the sentiment that existing solutions were overpriced for indie developers and small teams.
+한 개발자가 커뮤니티의 감정을 요약했습니다:
 
-![Community feedback](/capgo-community-feedback.webp)
+"커뮤니티 플랜에 500개의 실시간 업데이트가 포함된다면 정말 좋을 것 같아요아니면 차라리 월 50달러에 5,000번의 Live Update를 포함하는 Live Update 전용 패키지가 있다면 더 좋았을 것 같습니다.
 
-One developer summarized the community's feelings:
+## 해결책의 탄생
 
-"It would be brilliant if the Community plan included 500 live updates. Or better yet, if there was a Live Update only package for $50/month that included 5,000 Live Updates."
+커뮤니티의 반응에 동기부여를 받아, 저는 직접 나서기로 했습니다. 2021년 10월 24일, 개발자들이 주어진 URL에서 업데이트를 다운로드할 수 있게 해주는 모듈을 만들겠다는 계획을 발표했습니다.
 
-## The Birth of a Solution
+![초기 코드 스니펫](/capgo-initial-codewebp)
 
-Motivated by the community's response, I decided to take matters into my own hands. On October 24, 2021, I announced my plan to build a module that would allow developers to download updates from a given URL.
+초기 목표는 간단했습니다:
+1. URL에서 데이터 다운로드
+2. 데이터 압축 해제
+3. 현재 코드를 새로운 코드로 교체
 
-![Initial code snippet](/capgo-initial-code.webp)
+하지만 이 단순한 아이디어를 현실로 만드는 것은 처음 예상했던 것보다 훨씬 더 어려웠습니다.
 
-The initial goals were simple:
-- Download data from a URL
-- Unzip the data
-- Replace the current code with the new one
+## 숨겨진 고충
 
-However, turning this simple idea into reality proved to be far more challenging than I initially anticipated.
+GitHub 스레드에서는 드러나지 않았던 것은 제가 맡은 작업의 엄청난 복잡성이었습니다. 이 기능을 구현하는데 필요한 코드는 모호하고 이해하기 어려웠습니다. Capacitor 앱이 업데이트와 파일 시스템을 처리하는 방식의 복잡한 세부사항들과 씨름해야 했습니다.
 
-## The Struggle Behind the Scenes
+밤마다 제 밴에서 문서를 검토하고 다양한 접근 방식을 실험하며 시간을 보냈습니다. 진행은 더뎠고, 제가 감당할 수 있는 것보다 더 큰 일을 시작한 것은 아닌지 의문이 들 때도 있었습니다.
 
-What isn't apparent from the GitHub thread is the sheer complexity of the task I had undertaken. The code required to implement this functionality was obscure and hard to understand. I found myself grappling with intricate details of how Capacitor apps handle updates and file systems.
+## 커뮤니티의 도움
 
-Many nights were spent in my van, poring over documentation and experimenting with different approaches. Progress was slow, and there were times when I questioned whether I had bitten off more than I could chew.
+다행히도 이 여정에서 혼자가 아니었습니다. 특히 Discord의 개발자 커뮤니티는 매우 귀중한 자원이 되었습니다. 동료 개발자들은 그들의 통찰력을 공유하고, 문제 해결을 도와주었으며, 힘들 때마다 격려를 보내주었습니다.
 
-## Community to the Rescue
+![Discord 커뮤니티 지원](/capgo-discord-supportwebp)
 
-Fortunately, I wasn't alone in this journey. The developer community, particularly on Discord, proved to be an invaluable resource. Fellow developers offered their insights, helped debug issues, and provided encouragement when the going got tough.
+이러한 협력은 기술적 장애물을 극복하는데 매우 중요했습니다. 오픈소스와 커뮤니티 주도 개발의 힘에 대한 제 믿음을 더욱 강화시켰습니다.
 
-![Discord community support](/capgo-discord-support.webp)
+## 빠른 개발과 기능 확장
 
-This collaborative effort was crucial in overcoming the technical hurdles. It reinforced my belief in the power of open source and community-driven development.
+커뮤니티의 도움으로 개발 속도가 빨라지기 시작했습니다. 2021년 11월 22일까지 iOS용 작동 버전을 만들었고 개발자 경험을 개선하고 있었습니다.
 
-## Rapid Development and Expanding Capabilities
+![개선된 코드 스니펫](/capgo-improved-codewebp)
 
-With the help of the community, development began to accelerate. By November 22, 2021, I had a working version for iOS and was improving the developer experience.
+개발이 진행되면서 더 많은 기능을 추가했습니다:
+1. Android 지원
+2. 앱 종료 후에도 지속되는 기능
+3. 원래 앱 버전으로 되돌릴 수 있는 기능
 
-![Improved code snippet](/capgo-improved-code.webp)
+![새로운 기능 발표](/capgo-new-featureswebp)
 
-As development progressed, I added more features:
-- Android support
-- Persistence between app kills
-- The ability to revert to the original app version
+각각의 새로운 기능은 자체적인 과제를 가져왔지만, 프로젝트가 초기 범위를 넘어서 성장하면서 성취감도 함께 가져왔습니다.
 
-![New features announcement](/capgo-new-features.webp)
+## Capgo의 출시
 
-Each new feature brought its own set of challenges, but also a sense of accomplishment as the project grew beyond its initial scope.
+2022년 3월까지 프로젝트는 완전한 제품인 Capgo로 발전했습니다. 개발자들이 자신의 백엔드에 연결하거나 Capgo의 백엔드 서비스를 사용할 수 있는 자동 업데이트 모드의 출시를 발표했습니다.
 
-## The Launch of Capgo
+![Capgo 출시 발표](/capgo-launch-announcementwebp)
 
-By March 2022, the project had evolved into a full-fledged product: Capgo. I announced the release of an auto-update mode, allowing developers to connect to their own backend or use Capgo's backend service.
+개발자들이 이 절실히 필요했던 솔루션을 칭찬하며 커뮤니티의 반응은 매우 긍정적이었습니다.
 
-![Capgo launch announcement](/capgo-launch-announcement.webp)
+## 유료 제품으로의 전환
 
-The community's response was overwhelmingly positive, with developers praising this much-needed solution.
+처음에는 Capgo를 수익화할 계획이 전혀 없었습니다. 제 목표는 단순히 저와 다른 개발자들이 직면한 문제를 해결하는 도구를 만드는 것이었습니다. 하지만 GitHub의 피드백은 이러한 입장을 재고하게 만들었습니다.
 
-## The Pivot to a Paid Product
+개발자들은 합리적인 가격으로 그들의 요구를 충족시키는 솔루션에 기꺼이 비용을 지불할 의사를 표현했습니다. 이러한 피드백과 함께 Capgo를 유지하고 개선하는데 필요한 지속적인 비용과 노력에 대한 인식은 중요한 결정으로 이어졌습니다.
 
-Initially, I had no plans to monetize Capgo. My goal was simply to create a tool that would solve a problem I and other developers were facing. However, the feedback on GitHub made me reconsider this stance.
+2022년 6월 11일, 15일 후부터 Capgo가 사용량에 대해 과금을 시작할 것이라고 발표했고, 이는 커뮤니티 프로젝트에서 지속 가능한 비즈니스로의 전환을 의미했습니다.
 
-Developers were expressing a willingness to pay for a solution that met their needs at a fair price point. This feedback, combined with the realization of the ongoing costs and effort required to maintain and improve Capgo, led to a pivotal decision.
+![Capgo 가격 정책 발표](/capgo-pricing-announcementwebp)
 
-On June 11, 2022, I announced that Capgo would start charging for usage in 15 days, marking its transition from a community project to a sustainable business.
+하지만 프로젝트의 뿌리를 지키기 위해, 수동 모드나 커스텀 서버와 함께 플러그인을 무료로 사용할 수 있도록 Capgo의 오픈소스 코어를 유지했습니다.
 
-![Capgo pricing announcement](/capgo-pricing-announcement.webp)
+## 결론
 
-However, staying true to the project's roots, I maintained Capgo's open-source core by allowing free use of the plugin in manual mode or with a custom server.
+Capgo와 함께한 제 여정은 커뮤니티 주도 혁신의 힘과 솔로 메이커들이 종종 마주치게 되는 예상치 못한 경로를 보여주는 증거입니다. 크로스핏 타이머 앱을 작업하면서 느낀 개인적인 불만에서 시작된 것이 Capacitor 앱을 위한 강력하고, 저렴하며, 유연한 실시간 업데이트 시스템으로 성장했습니다.
 
-## Conclusion
-
-My journey with Capgo is a testament to the power of community-driven innovation and the unexpected paths that solo makers often find themselves on. What started as a personal frustration while working on a crossfit timer app grew into a robust, affordable, and flexible live update system for Capacitor apps.
-
-The creation of Capgo was far from easy. It required countless hours of work, the support of a generous developer community, and a willingness to pivot based on user feedback. From coding in Airbnb in Portugal to launching a paid product, every step of this journey has been a learning experience.
-
-As Capgo continues to evolve, it stands as a prime example of how identifying a gap in the market, actively working to fill it, and being responsive to community needs can lead to the creation of valuable tools that benefit the entire developer ecosystem.
-
-The story of Capgo is more than just the development of a tool; it's a story of perseverance, community, and the exciting unpredictability of life as a solo maker.
-
-You can find the full story on [here](https://github.com/capacitor-community/proposals/issues/43#issuecomment-941017142).
+Capgo의 제작은 결코 쉽지 않았습니다.

@@ -1,8 +1,8 @@
 ---
-slug: id__automatic-capacitor-android-build-gitlab
-title: Kompilasi Otomatis Capacitor Android dengan GitLab
+slug: automatic-capacitor-android-build-gitlab
+title: Build automatico di Capacitor Android con GitLab
 description: >-
-  Cara Menyiapkan Pipeline CI/CD untuk Aplikasi Android Ionic Anda dengan
+  Cara Menyiapkan Pipeline CI/CD untuk Aplikasi Ionic Android Menggunakan
   fastlane dan GitLab dalam 5 Menit
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
@@ -10,206 +10,109 @@ author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
 updated_at: 2023-09-27T00:00:00.000Z
 head_image: /andriod_app_gitlab.webp
-head_image_alt: Ilustrasi Fastlane Google Play dari GitLab
+head_image_alt: Ilustrasi Fastlane Google play GitLab
+keywords: >-
+  Fastlane, CI/CD, Android, automatic build, automatic release, mobile app
+  updates
 tag: CI/CD
 published: true
 locale: id
 next_blog: null
 ---
 
+# Build Android Otomatis dengan GitLab CI
+
+Menyiapkan CI/CD untuk aplikasi Capacitor bisa kompleks dan memakan waktu. Berikut yang perlu Anda ketahui:
+
 ## Prasyarat
 
-Sebelum melanjutkan tutorial ini...
+Sebelum memulai, Anda perlu menyiapkan:
 
-- Pastikan Anda menggunakan GitLab
-- Aplikasi Anda sudah di-deploy di Google Play Store
-- Keinginan untuk membaca 😆...
+- Akun GitLab dengan akses admin
+- Aplikasi Anda sudah dipublikasikan di Google Play Store dengan penandatanganan yang tepat
+- File kunci penandatanganan dan keystore Android
+- Proyek Google Cloud Console dengan API Play Store yang diaktifkan
+- Akun layanan dengan izin yang sesuai
+- Pemahaman tentang alur kerja GitLab CI/CD
+- Pengetahuan tentang konfigurasi Fastlane
+- Waktu untuk memelihara dan debug pipeline
 
-**Langkah-langkah yang akan diikuti dalam postingan ini**
+## Pengaturan CI/CD Profesional oleh Capgo
 
-1. _Menyalin file Fastline_
+Lewati kerumitannya, [Capgo](https://capgoapp/ci-cd/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
+
+- **Independen Platform**: Bekerja dengan GitHub Actions, GitLab CI, atau lainnya
+- **Integrasi Mulus**: Tidak perlu beralih platform, bekerja dengan proses Anda saat ini
+- **Konfigurasi Disesuaikan**: Pengaturan khusus sesuai kebutuhan proyek Anda
+- **Panduan Ahli**: Kami telah menyiapkan CI/CD untuk 50+ aplikasi
+
+### Harga
+- Biaya pengaturan satu kali: $2.600
+- Biaya operasional Anda: ~$300/tahun
+- Bandingkan dengan solusi proprietary lain: $6.000/tahun
+- **Hemat $26.100 selama 5 tahun**
+
+[Siapkan CI/CD Sekarang](https://calcom/martindonadieu/mobile-ci-cd-done-for-you/)
+
+## Panduan Pengaturan Manual
+
+Jika Anda tetap ingin mengatur semuanya sendiri, berikut yang perlu Anda lakukan:
+
+**Langkah-langkah yang harus diikuti dalam postingan**
+
+1. _Salin file Fastlane_
 2. _Menyimpan rahasia Anda di rahasia terenkripsi GitLab_
-3. _Membuat & menyimpan kunci akun layanan Google Play Anda_
+3. _Membuat & menyimpan kunci akun layanan Google Play_
 4. _Menyimpan kunci penandatanganan Android Anda_
 5. _Menyiapkan file yml alur kerja GitLab Anda_
 
-## 1. Menyalin file Fastline
+## 1. Salin file Fastline
 
-Fastlane adalah pustaka Ruby yang dibuat untuk mengotomatisasi tugas-tugas pengembangan seluler yang umum. Menggunakan Fastlane, Anda dapat mengonfigurasi "lane" kustom yang menggabungkan serangkaian "aksi" yang melakukan tugas-tugas yang biasanya Anda lakukan menggunakan Android Studio. Anda dapat melakukan banyak hal dengan Fastlane, tetapi untuk tujuan tutorial ini, kita hanya akan menggunakan beberapa aksi inti.
+Fastlane adalah pustaka Ruby yang dibuat untuk mengotomatisasi tugas pengembangan mobile yang umum. Dengan Fastlane, Anda dapat mengkonfigurasi "lane" khusus yang menggabungkan serangkaian "action" yang melakukan tugas yang biasanya Anda lakukan menggunakan Android studio. Anda bisa melakukan banyak hal dengan Fastlane, tapi untuk tutorial ini, kita hanya akan menggunakan beberapa action inti.
 
-Buat folder Fastlane di root proyek Anda dan salin file-file berikut:
+Buat folder Fastlane di root proyek Anda dan salin file berikut:
 Fastlane
-```ruby
-default_platform(:android)
+[[CODE_BLOCK]]
 
-KEYSTORE_KEY_ALIAS = ENV["KEYSTORE_KEY_ALIAS"]
-KEYSTORE_KEY_PASSWORD = ENV["KEYSTORE_KEY_PASSWORD"]
-KEYSTORE_STORE_PASSWORD = ENV["KEYSTORE_STORE_PASSWORD"]
-
-platform :android do
-    desc "Deploy a beta version to the Google Play"
-    private_lane :verify_changelog_exists do |version_code: |
-      changelog_path = "android/metadata/en-US/changelogs/#{version_code}.txt"
-      UI.user_error!("Missing changelog file at #{changelog_path}") unless File.exist?(changelog_path)
-      UI.message("Changelog exists for version code #{version_code}")
-    end
-
-    private_lane :verify_upload_to_staging do |version_name: |
-      UI.message "Skipping staging verification step"
-    end
-    lane :beta do
-				keystore_path = "#{Dir.tmpdir}/build_keystore.keystore"
-				File.write(keystore_path, Base64.decode64(ENV['ANDROID_KEYSTORE_FILE']))
-				json_key_data = Base64.decode64(ENV['PLAY_CONFIG_JSON'])
-				previous_build_number = google_play_track_version_codes(
-					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
-					track: "internal",
-					json_key_data: json_key_data,
-				)[0]
-
-				current_build_number = previous_build_number + 1
-				sh("export NEW_BUILD_NUMBER=#{current_build_number}")
-        gradle(
-          task: "clean bundleRelease",
-          project_dir: 'android/',
-          print_command: false,
-          properties: {
-            "android.injected.signing.store.file" => "#{keystore_path}",
-            "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
-            "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
-            "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
-						'versionCode' => current_build_number
-          })
-        upload_to_play_store(
-					package_name: ENV['DEVELOPER_PACKAGE_NAME'],
-					json_key_data: json_key_data,
-          track: 'internal',
-          release_status: 'completed',
-          skip_upload_metadata: true,
-          skip_upload_changelogs: true,
-          skip_upload_images: true,
-          skip_upload_screenshots: true,
-        )
-    end
-    lane :build do
-      gradle(
-        task: "clean bundleRelease",
-        project_dir: 'android/',
-        print_command: false,
-        properties: {
-          "android.injected.signing.store.file" => "#{keystore_path}",
-          "android.injected.signing.store.password" => "#{KEYSTORE_STORE_PASSWORD}",
-          "android.injected.signing.key.alias" => "#{KEYSTORE_KEY_ALIAS}",
-          "android.injected.signing.key.password" => "#{KEYSTORE_KEY_PASSWORD}",
-        })
-    end
-    lane :prod_release do
-      build_gradle = File.read("../android/app/build.gradle")
-
-      verify_changelog_exists(version_code: build_gradle.match(/versionCode (\d+)/)[1])
-      verify_upload_to_staging(version_name: build_gradle.match(/versionName '([\d\.]+)'/)[1])
-
-      supply(
-        track_promote_to: 'beta',
-        skip_upload_apk: true,
-        skip_upload_aab: true,
-        skip_upload_metadata: false,
-        skip_upload_changelogs: false,
-        skip_upload_images: false,
-        skip_upload_screenshots: false
-      )
-    end
-end
-```
-
-### Menyimpan Rahasia Anda di Variabel CI/CD GitLab
+### Menyimpan Rahasia Anda di Variabel GitLab CI/CD
 
 GitLab menyediakan cara untuk menyimpan variabel CI/CD terenkripsi, mirip dengan rahasia repositori GitHub. Untuk menyimpan informasi sensitif Anda dengan aman:
 
-1. Pergi ke Pengaturan proyek GitLab Anda
-2. Navigasi ke CI/CD > Variabel
+1. Buka Pengaturan proyek GitLab Anda
+2. Navigasi ke CI/CD > Variables
 3. Tambahkan variabel berikut:
 
-- ANDROID_KEYSTORE_FILE: file `jks` atau `keystore` yang dienkode base64 yang digunakan untuk menandatangani build Android Anda. Ini akan menjadi file keystore yang terkait dengan kunci unggah Anda (jika menggunakan Play App Signing), atau kunci penandatanganan aplikasi Anda
-- KEYSTORE_KEY_PASSWORD: kata sandi yang terkait dengan file keystore
-- KEYSTORE_KEY_ALIAS: alias kunci store
-- KEYSTORE_STORE_PASSWORD: kata sandi kunci pribadi
-- DEVELOPER_PACKAGE_NAME: ID aplikasi android Anda seperti com.example.app
-- PLAY_CONFIG_JSON: Kunci akun layanan JSON yang dienkode base64
+-   ANDROID_KEYSTORE_FILE: file `jks` atau `keystore` yang dienkode base64 yang digunakan untuk menandatangani build Android Anda. Ini akan menjadi file keystore yang terkait dengan kunci upload Anda (jika menggunakan Play App Signing), atau kunci penandatanganan aplikasi Anda
+-   KEYSTORE_KEY_PASSWORD: kata sandi yang terkait dengan file keystore
+-   KEYSTORE_KEY_ALIAS: alias key store
+-   KEYSTORE_STORE_PASSWORD: kata sandi kunci pribadi
+-   DEVELOPER_PACKAGE_NAME: ID aplikasi android Anda seperti com.example.app
+-   PLAY_CONFIG_JSON: Kunci akun layanan JSON yang dienkode base64
 
-## Menyiapkan Pipeline CI/CD GitLab Anda
+### Membuat Kunci Akun Layanan Google Play
 
-Buat file gitlab-ci.yml di root proyek Anda untuk mendefinisikan pipeline CI/CD Anda. Berikut adalah contoh bagaimana Anda dapat menyusun pipeline Anda:
+Untuk menghasilkan rahasia `PLAY_CONFIG_JSON`, ikuti langkah-langkah ini:
 
-```yaml
-
-image: mingc/android-build-box:latest
-
-stages:
-  - build
-  - upload_to_capgo
-  - build_and_upload_android
-
-build:
-  stage: build
-  tags:
-    - saas-linux-xlarge-amd64
-  cache:
-    - key:
-        files:
-          - bun.lockb
-      paths:
-        - .node_modules/
-  script:
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - node_modules/
-      - dist/
-  only:
-    - master
-
-upload_to_capgo:
-  stage: upload_to_capgo
-  tags:
-    - saas-linux-xlarge-amd64
-  script:
-    - npx @capgo/cli@latest upload -a $CAPGO_TOKEN -c dev
-  dependencies:
-    - build
-  when: manual
-  only:
-    - master
-
-build_and_upload_android:
-  tags:
-    - saas-linux-xlarge-amd64
-  stage:    build_and_upload_android
-  cache:
-    - key:
-        files:
-          - android/gradle/wrapper/gradle-wrapper.properties
-      paths:
-        - ~/.gradle/caches/
-  script:
-    - npx cap sync android
-    - npx cap copy android
-    - bundle exec fastlane android beta # We do create a tag for the build to trigger XCode cloud builds
-  dependencies:
-    - build
-  when: manual
-  only:
-    - master
-
-```
-
-## Memicu Pipeline
-
-Setiap kali Anda mendorong tag baru ke repositori GitLab Anda, GitLab CI/CD akan secara otomatis memicu pipeline yang telah didefinisikan, yang akan membangun dan men-deploy aplikasi Android Anda menggunakan Fastlane.
-
-Pastikan untuk menyesuaikan jalur dan dependensi sesuai dengan struktur dan kebutuhan proyek Anda. Pengaturan ini akan membantu Anda mengotomatisasi proses deployment aplikasi Android Anda di GitLab CI/CD.
-
-## Kesimpulan
-
-Dengan mengonfigurasi GitLab CI/CD dengan gambar Docker mingc/android-build-box, Anda dapat mengotomatisasi proses build aplikasi Android, membuat alur kerja pengembangan Anda lebih efisien dan andal. Otomatisasi ini membebaskan waktu Anda untuk fokus pada aspek inti pengembangan aplikasi, yang pada akhirnya membantu Anda menghasilkan aplikasi Android berkualitas tinggi dengan lebih efisien.
+1. Kunjungi [Google Cloud Console](https://console.cloud.google.com/)
+2. Buat proyek baru atau pilih yang sudah ada
+3. Aktifkan API Google Play Android Developer
+4. Buat akun layanan:
+   - Buka "IAM & Admin" > "Service Accounts"
+   - Klik "Create Service Account"
+   - Beri nama dan deskripsi
+   - Klik "Create and Continue"
+   - Lewati penugasan peran dan klik "Done"
+5. Hasilkan kunci JSON:
+   - Temukan akun layanan Anda dalam daftar
+   - Klik menu tiga titik > "Manage keys"
+   - Klik "Add Key" > "Create new key"
+   - Pilih format JSON
+   - Klik "Create"
+6. Berikan akun layanan akses ke aplikasi Anda di Play Console:
+   - Buka [Play Console](https://play.google.com/console)
+   - Navigasi ke "Users and permissions"
+   - Klik "Invite new users"
+   - Masukkan email akun layanan (berakhir dengan @*.iam.gserviceaccount.com)
+   - Berikan izin "Release to production"
+   - Klik "Invite user"
+7.

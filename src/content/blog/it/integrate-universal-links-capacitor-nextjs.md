@@ -1,29 +1,30 @@
 ---
-slug: it__integrate-universal-links-capacitor-nextjs
-title: Come Integrare i Link Universali in Next.js con Capacitor
-description: >-
-  Impara passo dopo passo come configurare i collegamenti universali per la tua
-  applicazione Next.js con Capacitor sulle piattaforme iOS e Android.
+slug: integrate-universal-links-capacitor-nextjs
+title: Capacitor로 Next.js에서 유니버설 링크를 통합하는 방법
+description: 'Next.js와 Capacitor를 사용하여, iOS 및 Android 플랫폼에서 앱의 유니버셜 링크를 구성하는 단계별 방법을 알아보세요.'
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
 updated_at: 2023-12-14T00:00:00.000Z
 head_image: /deeplink_next_capacitor.webp
-head_image_alt: Collegamenti Universali Capacitor
+head_image_alt: Link universali in Capacitor
+keywords: >-
+  Capacitor, Universal Links, Next.js, mobile app development, live updates, OTA
+  updates, continuous integration, mobile app updates
 tag: DeepLinking
 published: true
 locale: it
 next_blog: ''
 ---
 
-Universal link su iOS e App Link su Android consentono agli utenti di essere indirizzati direttamente alla tua app da un link, bypassando il browser. Questo è particolarmente utile per migliorare l'esperienza utente e mantenere il contesto da una pagina web a un'app. In questa guida, vedremo il processo di configurazione di questi deep link per un'app Nextjs utilizzando Capacitor.
+I collegamenti universali su iOS e i collegamenti dell'app su Android consentono agli utenti di essere indirizzati direttamente alla tua app da un link, bypassando il browser. Questo è particolarmente utile per migliorare l'esperienza utente e mantenere il contesto dalla pagina web all'app. In questa guida, illustreremo il processo di configurazione di questi deep link per un'app Nextjs utilizzando Capacitor.
 
-La configurazione dei deep link non richiede molto codice, ma comporta alcune configurazioni. Alla fine di questa guida, sarai in grado di cliccare un link come `https://www.capgo.app/details/22` e far aprire la tua app alla pagina corretta se è installata.
+La configurazione dei deep link non richiede molto codice, ma richiede alcune configurazioni. Alla fine di questa guida, sarai in grado di cliccare un link come `https://www.capgo.app/details/22` e far aprire la tua app nella pagina corretta se è installata.
 
-## Configurazione Deep Link per Nextjs
+## Configurazione Deep Link di Nextjs
 
-Innanzitutto, creeremo una nuova app Nextjs e una pagina dei dettagli per il test:
+Per prima cosa, creeremo una nuova app Nextjs e una pagina dei dettagli per i test:
 
 ```sh
 npx create-next-app@latest capgoLinks
@@ -35,7 +36,7 @@ npx cap add ios
 npx cap add android
 ```
 
-Assicurati che il tuo **ID bundle** sia impostato correttamente nel file **capacitor.config.json**, poiché è cruciale per la configurazione:
+Assicurati che il tuo **bundle ID** sia impostato correttamente nel file **capacitor.config.json**, poiché è cruciale per la configurazione:
 
 ```json
 {
@@ -46,7 +47,7 @@ Assicurati che il tuo **ID bundle** sia impostato correttamente nel file **capac
 }
 ```
 
-Per il routing, Nextjs utilizza il routing basato su file, quindi creando un file in `pages/details/[id].js`, abbiamo già configurato il nostro percorso con carattere jolly.
+Per il routing, Nextjs utilizza il routing basato su file, quindi creando un file in `pages/details/[id].js`, abbiamo già configurato il nostro percorso wildcard.
 
 In `pages/details/[id].js`, possiamo recuperare l'ID dall'URL utilizzando il router integrato di Nextjs:
 
@@ -93,7 +94,7 @@ Questo codice ascolta l'evento `appUrlOpen` e naviga verso il percorso appropria
 
 ## Configurazione iOS
 
-Per iOS, avrai bisogno di un ID app con Associated Domains abilitato. Crea un file **apple-app-site-association** con il seguente contenuto, sostituendo `YOURTEAMID` e `com.yourbundle.id` con il tuo ID team e ID bundle effettivi:
+Per iOS, avrai bisogno di un ID app con Domini Associati abilitati. Crea un file **apple-app-site-association** con il seguente contenuto, sostituendo `YOURTEAMID` e `com.your.bundleid` con il tuo ID team e bundle ID effettivi:
 
 ```json
 {
@@ -109,18 +110,18 @@ Per iOS, avrai bisogno di un ID app con Associated Domains abilitato. Crea un fi
 }
 ```
 
-Carica questo file nella directory `/.well-known` sul tuo dominio, rendendolo accessibile all'indirizzo `https://www.capgo.app/.well-known/apple-app-site-association`.
+Carica questo file nella directory `.well-known` del tuo dominio, rendendolo accessibile a `https://www.capgo.app/.well-known/apple-app-site-association`.
 
-In Xcode, aggiungi il dominio alle autorizzazioni della tua app utilizzando il formato `applinks:capgo.app`.
+In Xcode, aggiungi il dominio ai diritti della tua app usando il formato `applinks:capgo.app`.
 
 ## Configurazione Android
 
-Per gli App Link di Android, segui questi passaggi:
+Per i Collegamenti App Android, segui questi passaggi:
 
-1. Genera un file keystore se non ne hai uno.
-2. Ottieni l'impronta digitale SHA256 dal keystore.
-3. Crea un file **assetlinks.json** con il nome del tuo pacchetto e l'impronta digitale SHA256.
-4. Carica questo file nella directory `/.well-known` sul tuo dominio.
+1. Genera un file keystore se non ne hai uno
+2. Ottieni l'impronta digitale SHA256 dal keystore
+3. Crea un file **assetlinks.json** con il nome del tuo pacchetto e l'impronta digitale SHA256
+4. Carica questo file nella directory `.well-known` del tuo dominio
 
 Nel tuo `AndroidManifest.xml`, aggiungi un `intent-filter` all'elemento `activity` che gestisce i deep link:
 
@@ -150,7 +151,7 @@ adb install capgo.apk
 
 Questo installerà l'app firmata sul tuo dispositivo Android connesso.
 
-## Capacitor Configure per le Impostazioni del Progetto Nativo
+## Configurazione di Capacitor per le Impostazioni del Progetto Nativo
 
 Per automatizzare le impostazioni del progetto nativo, considera l'utilizzo del [pacchetto Capacitor configure](https://github.com/ionic-team/capacitor-configure/). Installalo nel tuo progetto:
 
@@ -158,7 +159,7 @@ Per automatizzare le impostazioni del progetto nativo, considera l'utilizzo del 
 npm install @capacitor/configure
 ```
 
-Crea un file `capacitor.config.yaml` alla radice del tuo progetto:
+Crea un file `capacitor.config.yaml` nella root del tuo progetto:
 
 ```yaml
 vars:
@@ -175,7 +176,7 @@ platforms:
     packageName: $PACKAGE_NAME
 ```
 
-Esegui lo strumento di configurazione con questa configurazione:
+Esegui lo strumento di configurazione con questa config:
 
 ```sh
 npx cap-config run capacitor.config.yaml
@@ -185,4 +186,4 @@ Questo applicherà le impostazioni specificate nel file YAML ai tuoi progetti na
 
 ## Conclusione
 
-La configurazione dei deep link con Capacitor per un'app Nextjs comporta la configurazione delle impostazioni del dominio e del progetto sia per iOS che per Android. Mentre il processo richiede attenzione ai dettagli, è semplificato rispetto ai metodi più vecchi e non richiede plugin aggiuntivi. Assicurati che i file di verifica del dominio siano serviti correttamente e verificali con i rispettivi strumenti della piattaforma. Una volta configurato, la tua app si aprirà senza problemi dai link web, fornendo una transizione fluida per i tuoi utenti dal web all'app.
+La configurazione dei deep link con Capacitor per un'app Nextjs richiede la configurazione delle impostazioni del dominio e del progetto sia per iOS che per Android. Mentre il processo richiede attenzione ai dettagli, è semplificato rispetto ai metodi più vecchi e non richiede plugin aggiuntivi. Assicurati che i file di verifica del dominio siano serviti correttamente e verificali con i rispettivi strumenti della piattaforma. Una volta configurato, la tua app si aprirà senza problemi dai link web, fornendo una transizione fluida per i tuoi utenti dal web all'app.

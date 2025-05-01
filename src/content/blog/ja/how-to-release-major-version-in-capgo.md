@@ -1,82 +1,86 @@
 ---
-slug: ja__how-to-release-major-version-in-capgo
-title: Capgoでメインバージョンを公開する方法
-description: ユーザーアプリケーションに影響を与えずに、アプリのメインバージョンをいつどのようにリリースするかを理解すること。
+slug: how-to-release-major-version-in-capgo
+title: Come rilasciare una versione major in capgo
+description: アプリのクリティカルバージョンをユーザーアプリを破損することなくリリースする必要がある時期と方法を理解する
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo-feature-image.webp
-head_image_alt: キャプゴメインシステム
+head_image_alt: Capgoメジャーバージョンシステム
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
 tag: Tutorial
 published: true
 locale: ja
 next_blog: how-to-send-specific-version-to-users
 ---
 
-## メジャーバージョンをリリースするとき
+## メジャーバージョンをリリースする際
 
-バージョン管理は難しい場合があります。通常、ユーザーに大きな変更が現れたときにメジャーアップデートを送信したいと思います。
+バージョニングの管理は難しい場合があります。通常、ユーザーにとって大きな変更がある場合にメジャーアップデートを送信したいと考えます
 
-しかし、バージョン管理はそのために作られたわけではありません。アプリストアのバージョンはネイティブバージョンとは異なります。
+しかし、バージョニングはそのために作られたものではありません。App Storeのバージョンは、ネイティブバージョンとは異なります
 
-ネイティブバージョンは*コード*の破壊的変更を管理するために作られています。
+ネイティブバージョンは*コード*の破壊的変更を管理するために作られています
 
-例えば、iOSでは、iOS 16がAppleの「ストアバージョン」ですが、コードバージョンは「20A5283p」です（そこではSemVerは使われていないようです）。
+例えばiOSでは、iOS 16は Appleの`ストアバージョン`ですが、コードバージョンは`20A5283p`です（彼らはそこでSemVerを使用していないようです）
 
-今では、これらを混合せず、それぞれの目的に応じて使用することが明確です！
+これらを混同せず、それぞれの目的に応じて使用することが重要です！
 
 ## メジャーリリース
 
-あなたのCapacitorアプリでは、破壊的変更が発生したときにメジャーリリースが必要です。  
-例えば、新しいiOSターゲット（15から16）、またはCapacitorの新バージョン（3から4）、または使用しているプラグイン（12から20）がメジャーバージョンに更新された場合です。
+Capacitorアプリでは、破壊的変更が発生した際にメジャーリリースが必要です
+例えば、新しいiOSターゲット（15から16）、新しいバージョンのCapacitor（3から4）、または使用しているプラグイン（12から20）がメジャーバージョンにアップデートされた場合です
 
-この変更は、すべてのツールが破壊的変更を処理するために調整されなければならないことを意味します。
+この変更は、破壊的変更に対応するためにすべてのツールを調整する必要があることを意味します
 
-だからこそ、Capgoはこのシステムに従っています。  
-もしあなたがメジャーバージョンをリリースすると、Capgoはストアからインストールされていないユーザーには送信しません。  
-この動作はカスタマイズ可能です。詳細については[こちら](/docs/tooling/cli/#disable-updates-strategy)を参照してください。
+そのためCapgoはこのシステムに従っています
+メジャーバージョンをリリースする場合、Capgoはストアからインストールしていないユーザーにはそれを送信しません\
+この動作はカスタマイズ可能です。詳細は[こちら](/docs/cli/commands/#disable-updates-strategy)で確認できます
 
 ### バージョン
 
-Capgoが比較するバージョンの取得方法
+Capgoがバージョンを比較する場所
 
 #### iOS
-> CapgoがJavaScriptバージョンと比較し、メジャーアップグレードを見つけるために使用します。
+  > JavaScriptバージョンと比較してメジャーアップグレードを見つけるためにCapgoによって使用されます
 
-iOSでは、変数はプロジェクトのここ`ios/App/App/Infoplist`内のキー `CFBundleShortVersionString`または`ios/App/Appxcodeproj/projectpbxproj`内のキー `MARKETING_VERSION`に設定されます（`MARKETING_VERSION`が`Infoplist`ファイルで設定されている場合）。  
-> この動作は`capacitorconfigjson`ファイルにバージョンキーを設定することでオーバーライドできます。[こちらのドキュメント](/docs/plugin/auto-update#advanced-settings/)を参照してください。
+ iOSでは、変数は`ios/App/App/Infoplist`の`CFBundleShortVersionString`キー、または`Infoplist`ファイルで`MARKETING_VERSION`が設定されている場合は`ios/App/Appxcodeproj/projectpbxproj`の`MARKETING_VERSION`キーで設定されます
+  > この動作は`capacitorconfigjson`ファイルでversionキーを設定することでオーバーライドできます [ドキュメントはこちら](/docs/plugin/auto-update#advanced-settings/)
 
 #### Android
-> CapgoがJavaScriptバージョンと比較し、メジャーアップグレードを見つけるために使用します。
+  > JavaScriptバージョンと比較してメジャーアップグレードを見つけるためにCapgoによって使用されます
 
-Androidでは、変数はプロジェクトのここ`android/app/buildgradle`内のキー `defaultConfigversionName`に設定されます。  
-> この動作は`capacitorconfigjson`ファイルにバージョンキーを設定することでオーバーライドできます。[こちらのドキュメント](/docs/plugin/auto-update#advanced-settings/)を参照してください。
+  Androidでは、変数は`android/app/buildgradle`の`defaultConfigversionName`キーで設定されます
+  > この動作は`capacitorconfigjson`ファイルでversionキーを設定することでオーバーライドできます [ドキュメントはこちら](/docs/plugin/auto-update#advanced-settings/)
 
 #### JavaScript
-> Capgoがネイティブバージョンと比較し、メジャーアップグレードを見つけるために使用します。
+  > ネイティブバージョンと比較してメジャーアップグレードを見つけるためにCapgoによって使用されます
 
-JavaScriptでは、変数はプロジェクトのここ`packagejson`のキー `version`に設定されます。
+  JavaScriptでは、変数は`packagejson`の`version`キーで設定されます
 
 ## 例
 
-あなたのIonicアプリは現在、バージョン`123`でCapacitor 3を使用してリリースされています。
+現在、Capacitor 3でバージョン`123`のIonicアプリがリリースされています
 
-あなたはCapacitor 4へのアップグレードを行っています。
+Capacitor 4にアップグレードする場合
 
-バージョン番号を`223`にアップグレードする必要があり、その結果、すべてのパッケージがCapgoを含め、この大きな変更を認識します。
+バージョン番号を`223`にアップグレードする必要があります。そうすることで、Capgoを含むすべてのパッケージがこの大きな変更に気付きます
 
-このバージョンをCapgoおよびApp Storeにリリースすると、  
-次の全てのライブアップデート`224`は`123`バージョンのユーザーには決して送信されず、`223`バージョンのユーザーにのみ送信されます。
+このバージョンをCapgoとApp Storeにリリースすると
 
-このパターンに従えば、もう心配する必要はありません。すべてはうまく処理されます。
+次のCapgoのライブアップデート`224`は、`123`バージョンのユーザーには送信されず、`223`バージョンのユーザーにのみ送信されます
 
-## これに従わない場合
+このパターンに従えば、心配する必要はなく、すべてが適切に処理されます
 
-この場合、それはあなたがCapacitor 4を使った新しいアプリをAppleとGoogleに送信しなければならないことを意味しますが、Capgoには送信しないということです。
+## このパターンに従わない場合
 
-次に、あなたは100%のユーザーがアプリを持つ、もしくは少なくとも90%が持つまで待たなければなりません。これは数ヶ月かかる可能性があります。
+この場合、Capacitor 4の新しいアプリをAppleとGoogleに送信する必要がありますが、Capgoには送信しません
 
-その間、旧ユーザーが新しいバージョンを取得できないため、Capgoでのアップデートを送信することができません。  
-更新を受け取るユーザーを選択する方法はありません。
+その後、ユーザーの100%、または少なくとも90%が新しいアプリを入手するのを待つ必要があります。これには数ヶ月かかる可能性があります
+
+この間、古いユーザーは新しいバージョンを取得できないため、Capgoでアップデートを送信することはできません
+アップデートを受け取るユーザーを選択する方法もありません

@@ -1,16 +1,19 @@
 ---
-slug: id__how-to-build-capacitor-app-in-xcode-cloud
-title: Cara Membuat Aplikasi Ionic Capacitor di Xcode Cloud
+slug: how-to-build-capacitor-app-in-xcode-cloud
+title: Bagaimana Cara Membangun Aplikasi Ionic Capacitor di Xcode Cloud
 description: >-
   Gunakan Xcode Cloud untuk membangun aplikasi Capacitor JS Anda dan hindari
-  kebutuhan menggunakan MacOS.
+  kebutuhan MacOS.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-09-01T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /xcode_cloud.webp
-head_image_alt: Kompilasi di Xcode Cloud untuk Capacitor
+head_image_alt: Build Xcode Cloud dengan Capacitor
+keywords: >-
+  Xcode Cloud, Capacitor, mobile app development, live updates, OTA updates,
+  continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: id
@@ -20,33 +23,33 @@ locale: id
 
 Sebelum melanjutkan tutorial...
 
-- Pastikan Anda menggunakan GitHub
-- Gunakan Capacitor
-- Aplikasi Anda sudah di-deploy di Apple Store
-- Keinginan untuk membaca 😆...
+-   Pastikan Anda menggunakan GitHub
+-   Menggunakan Capacitor
+-   Aplikasi Anda sudah di-deploy di Apple Store
+-   Keinginan untuk membaca 😆...
 
 Menggunakan Ionic adalah opsional, untuk Cordova mungkin bisa berfungsi, tapi saya belum mencobanya
 
 ## Penting tentang harga
 
-![Harga Xcode Cloud](/xcode_cloud_pricewebp)
+![Price Xcode Cloud](/xcode_cloud_pricewebp)
 
 [https://developerapplecom/xcode-cloud/](https://developerapplecom/xcode-cloud/)
 
-Layanan ini 'gratis' hingga batas tertentu
-Anda dapat melihat harga dan batas di tangkapan layar (harga pada saat pembuatan tutorial, dapat berubah di masa mendatang)
+Layanan ini '_gratis_' sampai batas tertentu  
+Anda dapat melihat harga dan batas di screenshot (harga pada saat tutorial dibuat, bisa berubah di masa mendatang)
 
-🔴 **_Setelah diperingatkan tentang persyaratan dan harga, jika Anda suka, kita lanjutkan_**
+🔴 **_Setelah diperingatkan tentang persyaratan dan harga, jika Anda berkenan, kita lanjutkan_**
 
-> **_📣_ Dalam postingan ini, kita asumsikan bahwa kita sudah memiliki aplikasi yang dibuat di Apple Store**
+> **_📣_ Dalam post ini, kita mengasumsikan bahwa kita telah membuat aplikasi di Apple Store**
 
-## Pengantar
+## Pendahuluan
 
-Agar Xcode dapat membangun aplikasi Capacitor Anda, Anda perlu menyiapkan beberapa hal
+Agar Xcode dapat membangun aplikasi Capacitor Anda, Anda perlu mengatur beberapa hal
 
-## Persiapan Paket
+## Persiapan Package
 
-Pastikan Anda memiliki perintah build dalam script `packagejson` Anda
+Pastikan Anda memiliki perintah build di script `packagejson` Anda
 Kemudian tambahkan perintah `sync:ios` seperti di bawah ini
 
 ```json
@@ -57,7 +60,7 @@ Kemudian tambahkan perintah `sync:ios` seperti di bawah ini
   }
 }
 ```
-Langkah ini akan membuat script post berfungsi dengan sederhana
+Langkah ini akan membuat post script bekerja dengan sederhana
 
 ## Script post clone
 Script ini akan dijalankan oleh Xcode cloud setelah langkah clone
@@ -88,40 +91,40 @@ Simpan file ini di root proyek Anda dan beri nama `ios/App/ci_scripts/ci_post_cl
 
 Kemudian buat file ini dapat dieksekusi dengan perintah `chmod +x ios/App/ci_scripts/ci_post_clonesh`
 
-## Membuat alur kerja Xcode
+## Membuat workflow Xcode
 
 Buka Xcode (ya, untuk menghapus Xcode Anda memerlukan Xcode)
 
 Dan pergi ke tab ini:
-![Langkah Xcode 1](/xcode_step_1webp)
+![Xcode step 1](/xcode_step_1webp)
 
-Klik buat alur kerja, pilih aplikasi Anda, klik selanjutnya seperti di bawah ini
+Klik create workflow, pilih aplikasi Anda, klik next seperti di bawah ini
 
-![Langkah Xcode 2](/xcode_step_2webp)
+![Xcode step 2](/xcode_step_2webp)
 
-Klik Edit alur kerja di sebelah kiri
-![Langkah Xcode 2](/xcode_step_3webp)
+Klik Edit workflow di sebelah kiri
+![Xcode step 2](/xcode_step_3webp)
 
-Pergi ke tab lingkungan dan pilih seperti di bawah ini Mac 124 dan centang opsi yang tepat
-![Langkah Xcode 3](/xcode_step_3webp)
+Pergi ke tab environments dan pilih seperti di bawah Mac 124 dan centang opsi yang sesuai
+![Xcode step 3](/xcode_step_3webp)
 
 Pilih kondisi mulai Anda
-Jika Anda menggunakan build yang sama seperti kami, saya sarankan menggunakan Tag daripada cabang, untuk menghindari build ganda
+Jika Anda menggunakan build yang sama seperti kami, saya sarankan menggunakan Tag daripada branch, untuk menghindari build ganda
 
-Atur variabel lingkungan Anda
-![Langkah Xcode 4](/xcode_step_4webp)
+Atur variabel env Anda
+![Xcode step 4](/xcode_step_4webp)
 
 Hubungkan akun GitHub Anda
-![Langkah Xcode 5](/xcode_step_5webp)
+![Xcode step 5](/xcode_step_5webp)
 
-![Langkah Xcode 6](/xcode_step_6webp)
+![Xcode step 6](/xcode_step_6webp)
 
-Kemudian aktifkan alur kerja dan lakukan commit perubahan pertama Anda, Anda seharusnya melihat build Anda berjalan di Xcode
+Kemudian aktifkan workflow dan commit perubahan pertama Anda, Anda seharusnya melihat build Anda berjalan di Xcode
 
 ## **Pemrosesan Build**
 
-Di Xcode Cloud, **Anda ditagih berdasarkan menit** yang Anda gunakan untuk menjalankan alur kerja CI/CD Anda Dari pengalaman, dibutuhkan sekitar 10-15 menit sebelum build dapat diproses di Apple Store
+Di Xcode Cloud, **Anda ditagih berdasarkan menit** yang Anda gunakan untuk menjalankan workflow CI/CD Anda. Dari pengalaman, diperlukan waktu sekitar 10-15 menit sebelum build dapat diproses di Apple Store
 
-Untuk proyek pribadi, perkiraan biaya per build bisa mencapai **$0008/menit x 5 menit = $04**, atau lebih, tergantung pada konfigurasi atau dependensi proyek Anda
+Untuk proyek pribadi, perkiraan biaya per build bisa mencapai **$0.008/menit x 5 menit = $0.4**, atau lebih, tergantung pada konfigurasi atau dependensi proyek Anda
 
-Untuk proyek Open-source, ini seharusnya tidak menjadi masalah sama sekali Lihat [harga](https://githubcom/pricing/)
+Untuk proyek Open-source, ini seharusnya tidak menjadi masalah sama sekali. Lihat [pricing](https://githubcom/pricing/)

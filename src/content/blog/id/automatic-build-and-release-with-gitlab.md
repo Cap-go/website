@@ -1,6 +1,6 @@
 ---
-slug: id__automatic-build-and-release-with-gitlab
-title: Kompilasi dan Penerapan Otomatis dengan Gitlab
+slug: automatic-build-and-release-with-gitlab
+title: Gitlab을 통한 자동 빌드 및 배포
 description: >-
   Buat pipeline CI/CD Anda sendiri secara gratis dengan GitLab dan deploy
   aplikasi Anda setiap kali melakukan push ke branch utama.
@@ -11,31 +11,32 @@ created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /gitlab_ci.webp
 head_image_alt: Ilustrasi Gitlab CI
+keywords: 'Gitlab, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
 locale: id
 next_blog: ''
 ---
 
-Tutorial ini berfokus pada GitLab CI, tetapi Anda dapat mengadaptasinya dengan sedikit penyesuaian untuk platform CI/CD lainnya
+Tutorial ini berfokus pada GitLab CI, tetapi Anda dapat mengadaptasinya dengan sedikit penyesuaian ke platform CI/CD lainnya
 
 ## Pendahuluan
 
-Pastikan Anda telah menambahkan aplikasi Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada tahap unggah
+Pastikan Anda telah menambahkan aplikasi Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada tahap upload
 
-## Konvensi commit
+## Konvensi Commit
 
-Pertama, Anda perlu mulai mengikuti konvensi commit [conventional commits](https://wwwconventionalcommitsorg/en/v100/) ini akan membantu alat memahami cara meningkatkan nomor versi, hanya membutuhkan 5 menit untuk mempelajarinya
+Pertama Anda perlu mulai mengikuti konvensi commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) ini akan membantu peralatan memahami bagaimana meningkatkan nomor versi, hanya butuh 5 menit untuk mempelajarinya
 
-![Conventional commits](/conventional_commitswebp)
+![Conventional commits](/conventional_commits.webp)
 
 ## GitLab CI untuk tag
 
 Kemudian Anda perlu membuat GitLab pertama Anda untuk secara otomatis membangun dan membuat tag
 
-Buat file di jalur ini: `github/workflows/bump_versionyml`
+Buat file di path ini: `github/workflows/bump_version.yml`
 
-dengan konten berikut:
+dengan konten ini:
 
 ```toml
 name: Bump version
@@ -70,17 +71,17 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-Ini akan merilis tag untuk setiap commit di cabang utama Anda Dan menambahkan entri changelog untuk setiap commit di cabang utama di `CHANGELOGmd`
+Ini akan merilis tag untuk setiap commit di branch utama Anda Dan menambahkan entri changelog untuk setiap commit di branch utama di `CHANGELOG.md`
 
 Jangan khawatir jika Anda tidak memiliki file ini, itu akan dibuat untuk Anda
 
-Untuk membuat ini berfungsi, buat [PERSONAL_ACCESS](https://docsgithubcom/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) di [secret](https://docsgithubcom/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub Anda sebagai `PERSONAL_ACCESS_TOKEN`
+Untuk membuatnya berfungsi, buat [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) di [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub Anda sebagai `PERSONAL_ACCESS_TOKEN`
 
-Ini diperlukan untuk membiarkan CI melakukan commit changelog
+Ini diperlukan untuk membiarkan CI melakukan commit pada changelog
 
-Saat Anda membuat token, pilih kedaluwarsa sebagai `never` dan cakupan sebagai `repo`
+Saat Anda membuat token, pilih expiration sebagai `never` dan scope sebagai `repo`
 
-Terakhir, untuk membiarkan alat memahami di mana versi Anda disimpan, Anda harus membuat file `cztoml` di root repositori Anda
+Terakhir, untuk membiarkan tool memahami di mana versi Anda disimpan, Anda harus membuat file `cz.toml` di root repositori Anda
 
 Dan tambahkan ini di dalamnya:
 
@@ -95,17 +96,17 @@ version_files = [
 ]
 ```
 
-Atur versi dalam file ini sama dengan yang Anda miliki di file `packagejson` Anda
+Atur versi dalam file ini sama dengan yang Anda miliki di file `package.json` Anda
 
-Ini hanya diperlukan pertama kali, kemudian alat akan terus memperbaruinya
+Ini hanya diperlukan pertama kali, kemudian tools akan tetap memperbarui
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat tag pertama Anda muncul di GitHub!
 
 ## GitHub actions untuk build
 
-Buat file di jalur ini: `github/workflows/buildyml`
+Buat file di path ini: `github/workflows/build.yml`
 
-dengan konten berikut:
+dengan konten ini:
 
 ```toml
 name: Build source code and send to Capgo
@@ -139,14 +140,14 @@ Ini akan menginstal dan membangun dependensi Anda sebelum mengirimkannya ke Capg
 
 Jika perintah Anda untuk build berbeda, Anda dapat mengubahnya di langkah `build_code`
 
-Untuk membuat ini berfungsi, Anda perlu mendapatkan kunci API untuk Capgo, tambahkan di [secret repositori GitHub Anda](https://docsgithubcom/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`
+Untuk membuatnya berfungsi, Anda perlu mendapatkan API key untuk Capgo, tambahkan di [secret repositori GitHub Anda](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat tag pertama Anda muncul di GitHub!
 
-Tambahkan commit akan menghasilkan build baru untuk saluran produksi
+Tambahkan commit akan menghasilkan build baru untuk channel produksi
 
-Anda harus menambahkan tes Anda di langkah build untuk memastikan kode Anda berfungsi
+Anda harus menambahkan test Anda di langkah build untuk memastikan kode Anda berfungsi
 
 Pergi ke dashboard Capgo Anda dan periksa build Anda yang baru saja muncul, sekarang Anda memiliki sistem CI/CD Anda
 
-Jika Anda ingin membiarkan semua pengguna Anda mendapatkan pembaruan kapan pun tersedia, pergi ke saluran Anda dan atur menjadi `public`
+Jika Anda ingin membiarkan semua pengguna Anda mendapatkan pembaruan kapan pun tersedia, pergi ke channel Anda dan atur ke `public`

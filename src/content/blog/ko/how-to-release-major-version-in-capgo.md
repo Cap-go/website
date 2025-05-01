@@ -1,86 +1,86 @@
 ---
-slug: ko__how-to-release-major-version-in-capgo
-title: How to release major version in capgo
-description: >-
-  Understand how and when it's necessary to release major version for your app
-  without breaking your user app
+slug: how-to-release-major-version-in-capgo
+title: Comment publier une version majeure dans Capgo
+description: 사용자 앱을 손상시키지 않고 앱의 주요 버전을 출시하는 것이 필요한 시기와 방법을 이해하기
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo-feature-image.webp
-head_image_alt: Capgo major version system
+head_image_alt: Capgo 주요 버전 시스템
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
 tag: Tutorial
 published: true
 locale: ko
 next_blog: how-to-send-specific-version-to-users
 ---
 
-## When releasing a major version
+## 메이저 버전 출시 시
 
-Versioning can be difficult to manage, usually you want to send a Major update when a major change appears for the users.
+버전 관리는 어려울 수 있습니다. 일반적으로 사용자에게 중요한 변경사항이 있을 때 메이저 업데이트를 보내고 싶을 것입니다.
 
-But versioning is not made for that, the app store version is different from the Native version.
+하지만 버전 관리는 그런 용도로 만들어진 것이 아닙니다. 앱스토어 버전은 네이티브 버전과 다릅니다.
 
-Native version is made to manage breaking change in the *code*
+네이티브 버전은 *코드*의 주요 변경사항을 관리하기 위한 것입니다.
 
-In IOS, for example, iOS 16 is the `store version` of Apple, but the code version is `20A5283p` (they don't seem to use SemVer there)
+예를 들어 iOS에서, iOS 16은 Apple의 `store version`이지만 코드 버전은 `20A5283p`입니다 (여기서는 SemVer를 사용하지 않는 것 같습니다)
 
-Now it's clear we don't mix them and use them for what they are made!
+이제 이들을 혼동하지 않고 각각의 용도에 맞게 사용하는 것이 명확해졌습니다!
 
-## Major release
+## 메이저 릴리스
 
-In your Capacitor app, a major release is necessary when a breaking change happens. 
-For example, a new IOS target (15 to 16), or a new version of Capacitor (3 to 4), or a plugin (1.2 to 2.0) you use have been updated to a major version.
+Capacitor 앱에서 메이저 릴리스는 주요 변경사항이 있을 때 필요합니다.
+예를 들어, 새로운 iOS 타겟(15에서 16으로), 또는 새로운 Capacitor 버전(3에서 4로), 또는 사용 중인 플러그인(12에서 20으로)이 메이저 버전으로 업데이트된 경우입니다.
 
-This change means all tooling has to be aligned to handle the breaking change.
+이러한 변경은 모든 도구가 주요 변경사항을 처리하기 위해 정렬되어야 함을 의미합니다.
 
-That why Capgo follows this system.
-So if you release a major version, Capgo will not send it to a user who doesn't have it installed from the store.\
-This behavior can be customized. You can learn more about it [here](/docs/tooling/cli/#disable-updates-strategy)
+그래서 Capgo는 이 시스템을 따릅니다.
+따라서 메이저 버전을 출시하면 Capgo는 스토어에서 설치하지 않은 사용자에게 이를 전송하지 않습니다.\
+이 동작은 사용자 정의할 수 있습니다. [여기](/docs/cli/commands/#disable-updates-strategy)에서 자세히 알아볼 수 있습니다.
 
-### Versions
+### 버전
 
-Where Capgo find the version to compare
+Capgo가 비교할 버전을 찾는 위치
 
-#### IOS
-  > Will be used by Capgo to compare to JavaScript version and find Major upgrade
+#### iOS
+  > Capgo가 JavaScript 버전과 비교하고 메이저 업그레이드를 찾는 데 사용됩니다.
 
- In IOS the var is set on your project here `ios/App/App/Info.plist` under the key`CFBundleShortVersionString` or `ios/App/App.xcodeproj/project.pbxproj` under the key `MARKETING_VERSION` if `MARKETING_VERSION` was set in your `Info.plist` file.
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
+ iOS에서 변수는 `ios/App/App/Infoplist`의 `CFBundleShortVersionString` 키 또는 `ios/App/Appxcodeproj/projectpbxproj`의 `MARKETING_VERSION` 키 아래에 설정됩니다. `Infoplist` 파일에 `MARKETING_VERSION`이 설정된 경우입니다.
+  > `capacitorconfigjson` 파일에서 version 키를 설정하여 이 동작을 재정의할 수 있습니다. [여기에서 문서 확인](/docs/plugin/auto-update#advanced-settings/)
 
 #### Android
-  > Will be uses by Capgo to compare to JavaScript version and find Major upgrade
+  > Capgo가 JavaScript 버전과 비교하고 메이저 업그레이드를 찾는 데 사용됩니다.
 
-  in Android, the var is set on your project here `android/app/build.gradle` under the key `defaultConfig.versionName`
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/auto-update#advanced-settings/)
+  Android에서 변수는 `android/app/buildgradle`의 `defaultConfigversionName` 키 아래에 설정됩니다.
+  > `capacitorconfigjson` 파일에서 version 키를 설정하여 이 동작을 재정의할 수 있습니다. [여기에서 문서 확인](/docs/plugin/auto-update#advanced-settings/)
 
 #### JavaScript
-  > Will be used by Capgo to compare to Native version and find Major upgrade
+  > Capgo가 네이티브 버전과 비교하고 메이저 업그레이드를 찾는 데 사용됩니다.
 
-  in JavaScript, the var is set on your project here `package.json` under the key `version`
-## Example
+  JavaScript에서 변수는 `packagejson`의 `version` 키 아래에 설정됩니다.
 
-Your Ionic app is currently released with the version `1.2.3` with Capacitor 3
+## 예시
 
-You are doing the upgrade to capacitor 4.
+현재 Capacitor 3으로 버전 `1.2.3`이 출시된 Ionic 앱이 있습니다.
 
-You need to upgrade your version number to `2.2.3`, then all your packages include Capgo with notice this big change.
+Capacitor 4로 업그레이드를 진행 중입니다.
 
-When you release this version to Capgo and the App Store.
+버전 번호를 `2.2.3`으로 업그레이드해야 하며, Capgo를 포함한 모든 패키지가 이 큰 변경을 알아차릴 것입니다.
 
-All next live update in Capgo `2.2.4` will never be sent to user with `1.2.3` version. Only with `2.2.3` version.
+이 버전을 Capgo와 App Store에 출시할 때
 
-If you follow this pattern, no need to worry more, all is well handled.
+Capgo의 다음 라이브 업데이트 `2.2.4`는 `1.2.3` 버전 사용자에게는 전송되지 않고 `2.2.3` 버전 사용자에게만 전송됩니다.
 
+이 패턴을 따르면 더 이상 걱정할 필요가 없으며 모든 것이 잘 처리됩니다.
 
-## If I don't follow this
+## 이를 따르지 않을 경우
 
-In this case, that means you have to send your new app with Capacitor 4 to Apple and Google, but don't to Capgo.
+이 경우, Capacitor 4가 포함된 새 앱을 Apple과 Google에 보내야 하지만 Capgo에는 보내지 않습니다.
 
-Then you have to wait 100% of your users, have the app or at least 90%, it will take months, probably.
+그런 다음 사용자의 100% 또는 최소 90%가 앱을 업데이트할 때까지 기다려야 하며, 이는 아마도 몇 달이 걸릴 것입니다.
 
-While during this time you cannot send any update with Capgo, since old user cannot get the new version.
-You don't have a way to select only some users to receive the update.
-
+이 기간 동안 이전 사용자가 새 버전을 받을 수 없기 때문에 Capgo로 어떤 업데이트도 보낼 수 없습니다.
+업데이트를 받을 사용자를 선택할 방법이 없습니다.
