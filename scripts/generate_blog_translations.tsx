@@ -1,6 +1,5 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import matter from 'gray-matter'
-import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { translateText } from './translate'
@@ -46,10 +45,10 @@ const processAllLanguages = async () => {
 }
 
 const processFile = async (file: string, lang: string, langBlogDirectory: string, failedTranslations: { [file: string]: boolean }): Promise<void> => {
-  const spinner = createSpinner(`Translating ${file}...`).start()
   try {
     const filePath = join(defaultBlogDirectory, file)
     const destinationPath = join(langBlogDirectory, file)
+    if (existsSync(destinationPath)) return
     writeFileSync(destinationPath, '', 'utf8')
     const content = readFileSync(filePath, 'utf8')
     const grayMatterEnd = content.indexOf('---', 4)
@@ -109,9 +108,7 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     })
 
     writeFileSync(destinationPath, translatedContent, 'utf8')
-    spinner.success({ text: `Blog translated in ${lang}: ${file}` })
   } catch (error) {
-    spinner.error({ text: `Failed to translate ${file} to ${lang}: ${error}` })
     failedTranslations[file] = true
   }
 }
