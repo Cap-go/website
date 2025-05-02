@@ -1,5 +1,5 @@
 ---
-slug: de__Release-of-a-brand-new-capacitor-social-login
+slug: Release-of-a-brand-new-capacitor-social-login
 title: Veröffentlichung eines brandneuen Capacitor Social Login Plugins
 author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'

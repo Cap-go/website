@@ -1,5 +1,5 @@
 ---
-slug: de__how-to-release-major-version-in-capgo
+slug: how-to-release-major-version-in-capgo
 title: So veröffentlichen Sie eine Hauptversion in Capgo
 description: >-
   Verstehen Sie, wie und wann es notwendig ist, eine Hauptversion Ihrer App zu

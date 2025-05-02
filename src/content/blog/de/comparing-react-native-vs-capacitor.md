@@ -1,5 +1,5 @@
 ---
-slug: de__comparing-react-native-vs-capacitor
+slug: comparing-react-native-vs-capacitor
 title: Vergleich von React Native und Capacitor
 description: >-
   In diesem Artikel vergleichen wir die Entwicklung mobiler Apps mit React

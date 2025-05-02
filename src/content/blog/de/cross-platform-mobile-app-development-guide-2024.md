@@ -1,5 +1,5 @@
 ---
-slug: de__cross-platform-mobile-app-development-guide-2024
+slug: cross-platform-mobile-app-development-guide-2024
 title: >-
   Der ultimative Leitfaden für plattformübergreifende Mobile-App-Entwicklung im
   Jahr 2024

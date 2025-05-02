@@ -1,5 +1,5 @@
 ---
-slug: de__cordova-hybrid-app-development
+slug: cordova-hybrid-app-development
 title: >-
   Der ultimative Leitfaden für Apache Cordova: Hybride App-Entwicklung leicht
   gemacht

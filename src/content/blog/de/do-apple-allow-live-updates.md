@@ -1,5 +1,5 @@
 ---
-slug: de__do-apple-allow-live-updates
+slug: do-apple-allow-live-updates
 title: >-
   Erlaubt Apple das Senden von Live-Updates an Apps ohne die Überprüfung durch
   den App Store?

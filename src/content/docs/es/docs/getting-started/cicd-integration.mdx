@@ -34,12 +34,11 @@ Aunque los pasos exactos variarán dependiendo de tu herramienta CI/CD elegida, 
 <Steps>
 1. **Generar una clave API**: Inicia sesión en el panel de control de Capgo y crea una nueva clave API. Esta clave se usará para autenticar la CLI en tu entorno CI/CD. ¡Mantenla secreta y nunca la comprometas en tu repositorio!
 
-3. **Configurar el comando `upload`**: Agrega un paso a tu configuración CI/CD que ejecute el comando `upload` con los argumentos apropiados: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+2. **Configurar el comando `upload`**: Agrega un paso a tu configuración CI/CD que ejecute el comando `upload` con los argumentos apropiados: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 Reemplaza `Production` con el canal al que quieres desplegar, y `${{ secrets.CAPGO_API_KEY }}` con la variable de entorno que contiene tu clave API.
 
-4. **Agregar el paso `upload` después de tu construcción web**: Asegúrate de que el paso `upload` venga después de que tu construcción web se haya completado exitosamente. Esto asegura que siempre estés desplegando tu código más reciente.
-  Aquí hay un ejemplo de configuración para GitHub Actions:
-<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+3. **Agregar el paso `upload` después de tu construcción web**: Asegúrate de que el paso `upload` venga después de que tu construcción web se haya completado exitosamente. Esto asegura que siempre estés desplegando tu código más reciente.
+  Aquí hay un ejemplo de configuración para GitHub Actions: <Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v3\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 
 </Steps>
 
