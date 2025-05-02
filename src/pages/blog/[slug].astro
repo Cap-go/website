@@ -36,7 +36,6 @@ if (entry) {
   // Find articles with the same original_slug or if original_slug is not present, find exact slug match
   const originalSlug = entry.data.original_slug || entry.data.slug
   const availableTranslations = blogs.filter((j) => (j.data.original_slug && j.data.original_slug === originalSlug) || (!j.data.original_slug && j.data.slug === originalSlug))
-
   // Add entry for each available locale
   for (const translation of availableTranslations) {
     alternateVersions.push({
