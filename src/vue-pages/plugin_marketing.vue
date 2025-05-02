@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { Locales } from '@/services/locale'
 import { ref } from 'vue'
 import * as m from '../paraglide/messages.js'
-import type { Locales } from '@/services/locale';
 
 const plugins = ref([
   {
