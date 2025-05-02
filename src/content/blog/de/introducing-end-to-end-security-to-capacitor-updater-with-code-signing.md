@@ -1,5 +1,5 @@
 ---
-slug: de__introducing-end-to-end-security-to-capacitor-updater-with-code-signing
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: >-
   Einführung von Ende-zu-Ende-Verschlüsselung für capacitor-updater mit
   Code-Signierung

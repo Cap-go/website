@@ -5,9 +5,9 @@ import { defineCollection, z } from 'astro:content'
 import type { Locales } from './services/locale'
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: 'src/content/blog' }),
+  loader: glob({ pattern: '**/*.md', base: 'src/content/blog', generateId: ({ entry }) => entry }),
   schema: z.object({
-    slug: z.string().transform((s) => (s.includes('__') ? s.split('__')[1] : s)),
+    slug: z.string(),
     title: z.string(),
     description: z.string().optional().nullable(),
     author: z.string(),

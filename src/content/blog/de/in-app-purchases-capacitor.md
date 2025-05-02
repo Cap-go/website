@@ -1,5 +1,5 @@
 ---
-slug: de__in-app-purchases-capacitor
+slug: in-app-purchases-capacitor
 title: In-App-Käufe für Capacitor
 description: >-
   Wie man In-App-Käufe für Capacitor-Apps mithilfe des Capacitor

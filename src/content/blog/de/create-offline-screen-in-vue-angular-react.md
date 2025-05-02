@@ -1,5 +1,5 @@
 ---
-slug: de__create-offline-screen-in-vue-angular-react
+slug: create-offline-screen-in-vue-angular-react
 title: >-
   Wie man einen Offline-Bildschirm in Vue-, Angular- und React-Anwendungen mit
   der Network API und Capacitor erstellt

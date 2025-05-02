@@ -1,5 +1,5 @@
 ---
-slug: de__enable-ios-developer-mode-ios16
+slug: enable-ios-developer-mode-ios16
 title: So aktivieren Sie den Entwicklermodus unter iOS 16 für App-Tests
 description: >-
   Schritt-für-Schritt-Anleitung zur Aktivierung des Entwicklermodus unter iOS 16

@@ -1,5 +1,5 @@
 ---
-slug: de__create-react-mobile-apps-with-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: Mobile Apps mit React und Capacitor entwickeln
 description: >-
   Erfahren Sie, wie Sie eine mobile App mit React und Capacitor erstellen und

@@ -1,5 +1,5 @@
 ---
-slug: de__how-capgo-is-born
+slug: how-capgo-is-born
 title: Wie Capgo entstand
 description: 'Hintergrundgeschichte darüber, wie ich diese Reise begann und Capgo aufbaute'
 author: Martin Donadieu

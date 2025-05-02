@@ -1,5 +1,5 @@
 ---
-slug: de__how-to-send-specific-version-to-users
+slug: how-to-send-specific-version-to-users
 title: Wie man spezifische Updates an einen Benutzer oder eine Gruppe sendet
 description: >-
   Ermöglichen Sie Ihren Nutzern, eine Beta-Version zu testen, ohne TestFlight
