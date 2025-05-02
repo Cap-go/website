@@ -1,5 +1,5 @@
 ---
-slug: de__capacitor-comprehensive-guide
+slug: capacitor-comprehensive-guide
 title: 'Capacitor: Ein umfassender Leitfaden'
 description: >-
   Capacitor ist ein leistungsstarkes Tool, das Webentwicklern ermöglicht, native

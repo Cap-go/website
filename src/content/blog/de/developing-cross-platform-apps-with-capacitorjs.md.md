@@ -1,5 +1,5 @@
 ---
-slug: de__developing-cross-platform-apps-with-capacitorjs
+slug: developing-cross-platform-apps-with-capacitorjs
 title: >-
   Entwicklung plattformübergreifender Apps mit CapacitorJS: Eine
   Schritt-für-Schritt-Anleitung

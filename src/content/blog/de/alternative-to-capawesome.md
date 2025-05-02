@@ -1,5 +1,5 @@
 ---
-slug: de__alternative-to-capawesome
+slug: alternative-to-capawesome
 title: Alternative zu Capawesome
 description: >-
   Capawesome wurde vom Capgo-System inspiriert. Das System ist weniger

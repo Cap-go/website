@@ -107,12 +107,16 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <link rel="icon" type="image/svg+xml" href="/safari-pinned-tab.svg" />
 
 <!-- Hreflang tags for internationalization -->
-{alternateVersions && alternateVersions.length > 0 && alternateVersions.map((version: { locale: string; url: string }) => (
-  <link rel="alternate" hreflang={version.locale} href={version.url} />
-))}
-{alternateVersions && alternateVersions.length > 0 && (
-  <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
-)}
+{
+  alternateVersions &&
+    alternateVersions.length > 0 &&
+    alternateVersions.map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)
+}
+{
+  alternateVersions && alternateVersions.length > 0 && (
+    <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
+  )
+}
 
 <!-- Primary Meta Tags -->
 <title set:html={title} />

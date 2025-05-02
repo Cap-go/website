@@ -1,5 +1,5 @@
 ---
-slug: de__ionic-capacitor-push-notifications-firebase
+slug: ionic-capacitor-push-notifications-firebase
 title: >-
   Ionic Capacitor Push-Benachrichtigungen mit Firebase: Eine
   Schritt-für-Schritt-Anleitung

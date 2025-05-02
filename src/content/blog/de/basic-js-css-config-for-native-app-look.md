@@ -1,5 +1,5 @@
 ---
-slug: de__basic-js-css-config-for-native-app-look
+slug: basic-js-css-config-for-native-app-look
 title: Grundlegende JS- und CSS-Konfigurationen für ein natives App-Aussehen
 description: >-
   Erfahren Sie, wie Sie Ihre Web-App mit grundlegenden JavaScript- und

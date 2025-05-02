@@ -1,5 +1,5 @@
 ---
-slug: de__alternative-to-expo
+slug: alternative-to-expo
 title: Alternative zu Expo Live Update
 description: >-
   Sie suchen eine Plattform für die Entwicklung mobiler Apps, die den Komfort

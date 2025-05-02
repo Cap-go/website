@@ -1,5 +1,5 @@
 ---
-slug: de__automatic-capacitor-ios-build-github-action
+slug: automatic-capacitor-ios-build-github-action
 title: Automatischer Capacitor iOS-Build mit GitHub Actions und Zertifikat
 description: >-
   Wie man in 5 Minuten eine CI/CD-Pipeline für Ihre iOS Ionic-App mit fastlane

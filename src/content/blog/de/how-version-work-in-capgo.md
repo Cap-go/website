@@ -1,5 +1,5 @@
 ---
-slug: de__how-version-work-in-capgo
+slug: how-version-work-in-capgo
 title: Wie Versionen in Capgo funktionieren
 description: >-
   Verstehen Sie, wie Capgo Versionen in Ihrer Capacitor-App verwaltet und nutzen

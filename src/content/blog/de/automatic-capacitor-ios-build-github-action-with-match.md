@@ -1,5 +1,5 @@
 ---
-slug: de__automatic-capacitor-ios-build-github-action-with-match
+slug: automatic-capacitor-ios-build-github-action-with-match
 title: >-
   Automatischer Capacitor iOS-Build mit GitHub Actions unter Verwendung von
   match

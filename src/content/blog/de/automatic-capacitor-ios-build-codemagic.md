@@ -1,5 +1,5 @@
 ---
-slug: de__automatic-capacitor-ios-build-codemagic
+slug: automatic-capacitor-ios-build-codemagic
 title: Automatischer Capacitor iOS-Build mit Codemagic
 description: >-
   So richten Sie in 5 Minuten eine CI/CD-Pipeline für Ihre IOS Ionic-App mit

@@ -1,5 +1,5 @@
 ---
-slug: de__automatic-capacitor-android-build-github-action
+slug: automatic-capacitor-android-build-github-action
 title: Automatischer Capacitor-Android-Build mit GitHub-Actions
 description: >-
   So richtest du in 5 Minuten eine CI/CD-Pipeline für deine Android-Ionic-App

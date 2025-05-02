@@ -1,5 +1,5 @@
 ---
-slug: de__creating-mobile-apps-with-sveltekit-and-capacitor
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Mobile Apps mit SvelteKit und Capacitor entwickeln
 description: >-
   Erfahren Sie, wie Sie eine mobile App mit SvelteKit und Capacitor erstellen
