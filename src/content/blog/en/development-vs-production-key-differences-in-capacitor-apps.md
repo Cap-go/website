@@ -115,7 +115,7 @@ Rodrigo Mantica (@manticarodrigo) emphasizes the importance of this approach:
 
 In short, development mode is all about speed and debugging, while production mode focuses on creating a polished, efficient experience for the end user. Each has its own purpose, and understanding these differences is crucial for effective app lifecycle management.
 
-
+###### sbb-itb-f9944d2
 
 ## Security Measures for Each Environment
 

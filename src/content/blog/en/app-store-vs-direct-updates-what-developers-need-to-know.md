@@ -98,7 +98,7 @@ Platforms such as Capgo include features like version control and rollback optio
 
 That said, developers should carefully weigh the speed and convenience of OTA updates against the thoroughness and structure of app store updates to decide what works best for their app.
 
-
+###### sbb-itb-f9944d2
 
 ## Comparing App Store and Direct OTA Updates
 

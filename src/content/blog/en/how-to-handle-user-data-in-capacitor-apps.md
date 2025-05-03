@@ -117,7 +117,7 @@ Selecting the right storage solution depends on how sensitive the data is. Here'
 
 The Secure Storage API is a solid choice for storing critical information like authentication tokens and personal user data [\[1\]](https://capacitorjs.com/docs/guides/storage)[\[4\]](https://capacitorjs.com/docs/guides/security). Its [encryption capabilities](https://capgo.app/docs/cli/migrations/encryption/) also align with retention policies, allowing controlled access to data within specified timeframes [\[2\]](https://app.studyraid.com/en/read/11146/345611/securing-data-in-capacitor-apps).
 
-
+###### sbb-itb-f9944d2
 
 ## Data Storage Time Limits
 
