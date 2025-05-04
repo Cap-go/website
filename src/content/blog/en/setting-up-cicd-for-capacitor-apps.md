@@ -183,7 +183,7 @@ Using parallel builds can significantly cut down pipeline execution time when co
 
 Once your builds are validated and packaged, you’re ready to move on to live updates with Capgo (discussed in the next section).
 
-
+###### sbb-itb-f9944d2
 
 ## Adding [Capgo](https://capgo.app/) for Live Updates
 

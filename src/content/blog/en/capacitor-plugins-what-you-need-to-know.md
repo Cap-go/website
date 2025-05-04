@@ -113,7 +113,7 @@ Developing custom plugins involves creating native implementations for iOS and A
 -   Browser-compatible functionality for web environments
 -   Uniform method signatures across all platforms [\[2\]](https://app.studyraid.com/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjs.com/docs/plugins)
 
-
+###### sbb-itb-f9944d2
 
 ## Adding Plugins to Your App
 

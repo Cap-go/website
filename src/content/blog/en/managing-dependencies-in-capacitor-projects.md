@@ -120,7 +120,7 @@ Here are some common issues you might face and how to resolve them:
 
 > "Capacitor is a cross-platform native runtime that makes it easy to build performant mobile applications that run natively on iOS, Android, and more using modern web tooling." – Capacitor Documentation [\[3\]](https://capacitorjs.com/docs)
 
-
+###### sbb-itb-f9944d2
 
 ## Dependency Management Guidelines
 

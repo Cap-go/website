@@ -158,7 +158,7 @@ async getBatteryLevel(): Promise<{ level: number }>;
 
 Well-written documentation ensures that your plugin is easy to adopt and contributes to the broader Capacitor community.
 
-
+###### sbb-itb-f9944d2
 
 ## Plugin Testing Guide
 

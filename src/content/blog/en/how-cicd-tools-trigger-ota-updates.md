@@ -162,7 +162,7 @@ This approach helped [Gunnebo Safe Storage](https://www.gunnebosafestorage.com/)
 
 For high-risk updates, consider using Capgo's staged rollout feature. It allows you to deploy updates to smaller user groups first, reducing the chance of widespread issues before a full release.
 
-
+###### sbb-itb-f9944d2
 
 ## OTA Update Methods
 

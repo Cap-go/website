@@ -71,7 +71,7 @@ Development teams today are looking for ways to speed up updates while staying c
 
 These changes in how updates are managed are part of a larger trend in the industry. Teams aim to create faster, more responsive workflows while still meeting the quality and security standards set by app stores.
 
-
+###### sbb-itb-f9944d2
 
 ## 3\. Alternative OTA Platforms
 

@@ -86,7 +86,7 @@ Breaking updates into smaller steps reduces disruptions during startup. Incremen
 
 Capgo provides built-in tools for secure, incremental updates, featuring end-to-end encryption and flexible deployment options.
 
-
+###### sbb-itb-f9944d2
 
 ## Setting Up OTA Updates in [Capacitor](https://capacitorjs.com/)
 

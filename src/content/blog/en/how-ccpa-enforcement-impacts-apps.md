@@ -108,7 +108,7 @@ Two shifts in enforcement are worth noting:
 
 These enforcement actions make it clear: mobile app developers must prioritize compliance to navigate the evolving privacy landscape while maintaining their marketing goals.
 
-
+###### sbb-itb-f9944d2
 
 ## CCPA Compliance Guide
 
