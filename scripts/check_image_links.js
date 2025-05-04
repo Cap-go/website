@@ -40,7 +40,7 @@ async function checkImagesInSrcFolder() {
       const batchPromises = batch.map(async (url) => {
         try {
           const res = await fetch(url, { method: 'HEAD' })
-          if (res.status === 404)
+          if (res.status >= 400)
             console.log(url)
         } catch (err) {
           console.log(url)
