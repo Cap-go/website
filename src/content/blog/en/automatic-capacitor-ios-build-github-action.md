@@ -404,9 +404,7 @@ The `Team ID` is the value you need to set in the `APP_STORE_CONNECT_TEAM_ID` se
 
 1. Open Xcode
 2. Double click on the `App` in the project navigator
-<div class="mx-auto" style="width: 100%;">
-  <img src="/xcode_app_click.webp" alt="bundle-identifier-xcode">
-</div>
+2. Then click on the tab `Signing and Capabilities`
 3. Copy the value of the `Bundle identifier`. This is the value you need to set in the `BUNDLE_IDENTIFIER` secret.
 <div class="mx-auto" style="width: 100%;">
   <img src="/xcode_bundle_id.webp" alt="bundle-identifier-xcode">
