@@ -15,22 +15,11 @@ async function extractImageUrlsFromDir() {
     try {
       const content = await fs.readFile(filePath, 'utf8');
       const links = linkify.match(content) || [];
+      const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.avif'];
       for (const { url } of links) {
         try {
-          const tmp = new URL(url)
-          if (tmp.pathname.endsWith('.webp'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.png'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.jpg'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.jpeg'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.gif'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.svg'))
-            allUrls.push(url);
-          if (tmp.pathname.endsWith('.ico'))
+          const tmp = new URL(url);
+          if (imageExtensions.some(ext => tmp.pathname.toLowerCase().endsWith(ext)))
             allUrls.push(url);
         } catch { }
       }
