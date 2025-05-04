@@ -24,6 +24,14 @@ async function extractImageUrlsFromDir() {
             allUrls.push(url);
           if (tmp.pathname.endsWith('.jpg'))
             allUrls.push(url);
+          if (tmp.pathname.endsWith('.jpeg'))
+            allUrls.push(url);
+          if (tmp.pathname.endsWith('.gif'))
+            allUrls.push(url);
+          if (tmp.pathname.endsWith('.svg'))
+            allUrls.push(url);
+          if (tmp.pathname.endsWith('.ico'))
+            allUrls.push(url);
         } catch { }
       }
     } catch (e) {
