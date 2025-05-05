@@ -12,9 +12,9 @@ const props = defineProps<{ locale: Locales }>()
       <div class="absolute inset-0 rounded-[20px] sm:rounded-[40px] border border-gray-700"></div>
 
       <div class="relative">
-        <h1 class="text-3xl sm:text-4xl md:text-[44px] leading-tight text-white font-normal mb-4 sm:mb-6">
+        <span class="text-3xl sm:text-4xl md:text-[44px] leading-tight text-white font-normal mb-4 sm:mb-6">
           {{ m.instant_updates_for_capacitor_apps({}, { locale: props.locale }) }}
-        </h1>
+        </span>
 
         <p class="max-w-3xl mb-6 text-lg font-normal leading-relaxed text-gray-300 sm:mb-8 md:mb-12 sm:text-xl">
           {{ m.instant_updates_for_capacitor_apps_description({}, { locale: props.locale }) }}
