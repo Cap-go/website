@@ -182,7 +182,7 @@ Capgo stands out by offering cost-efficient plans with enterprise-grade features
 
 ## Summary
 
-Based on the comparisons above, the market now leans toward solutions that prioritize security, speed, and cost-effectiveness. The [Capacitor OTA update plugin](https://capgo.app/blog/Release-of-a-brand-new-capacitor-social-login/) ecosystem has shifted, with standout options emerging due to their performance, features, and adoption rates.
+Based on the comparisons above, the market now leans toward solutions that prioritize security, speed, and cost-effectiveness. The [Capacitor OTA update plugin](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) ecosystem has shifted, with standout options emerging due to their performance, features, and adoption rates.
 
 Here’s a breakdown of the current choices:
 
