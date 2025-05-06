@@ -1,5 +1,5 @@
 ---
-slug: cómo-se-cuenta-tu-uso
+slug: how-your-usage-is-counted
 title: Cómo se cuenta tu uso en Capgo
 description: >-
   Comprende cómo Capgo cuenta tu uso y utilízalo de la mejor manera. Aprende a
