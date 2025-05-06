@@ -19,7 +19,7 @@ A channel represents a distribution track for your app updates. Each channel can
 ## Channel Configuration Options
 
 - **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates for older native app versions
+- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update version available in the channel (e.g., device is on version 1.2.3, but channel has 1.2.2)
 - **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
 - **ios/android**: Enable/disable for specific platforms
 - **allow_device_self_set**: Let devices choose their channel
