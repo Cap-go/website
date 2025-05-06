@@ -1,5 +1,5 @@
 ---
-slug: konfigurasi-ci-dan-cd-gitlab
+slug: configuration-ci-et-cd-gitlab
 title: Pembangunan dan Peluncuran Otomatis Aplikasi dengan GitLab
 description: >-
   Buat pipeline CI/CD Anda sendiri dengan GitLab secara gratis dan deploy
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: id
 next_blog: ''
-original_slug: configuration-ci-et-cd-gitlab
 ---
 Artikel ini akan memandu Anda tentang cara melakukan pengaturan CI/CD pipeline dengan GitLab.
 

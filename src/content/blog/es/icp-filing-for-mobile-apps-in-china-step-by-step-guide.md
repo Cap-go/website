@@ -1,5 +1,5 @@
 ---
-slug: guia-paso-a-paso-para-registrar-icp-para-aplicaciones-moviles-en-china
+slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 title: 'Registro ICP para aplicaciones móviles en China: Guía paso a paso'
 description: >-
   Aprende los pasos esenciales para la presentación del ICP para aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 ---
 Si desea que su aplicación móvil opere legalmente en China, **debe completar un registro ICP**. Este es un proceso de registro obligatorio para garantizar el cumplimiento de las regulaciones chinas. Aquí hay un resumen rápido:
 

@@ -1,6 +1,5 @@
 ---
-slug: >-
-  strumenti-migliori-per-il-debugging-del-codice-specifico-per-piattaforma-in-capacitor
+slug: top-tools-for-debugging-platform-specific-code-in-capacitor
 title: Strumenti Principali per il Debug del Codice Platform-Specific in Capacitor
 description: >-
   Esplora gli strumenti e le tecniche essenziali per il debug efficace del
@@ -21,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: top-tools-for-debugging-platform-specific-code-in-capacitor
 ---
 Il debug del codice specifico per piattaforma in [Capacitor](https://capacitorjs.com/) può essere impegnativo, ma gli strumenti giusti semplificano il processo. Ecco cosa devi sapere:
 

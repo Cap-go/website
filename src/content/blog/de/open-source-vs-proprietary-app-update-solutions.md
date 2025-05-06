@@ -1,5 +1,5 @@
 ---
-slug: Open-Source vs proprietäre App-Update-Lösungen
+slug: open-source-vs-proprietary-app-update-solutions
 title: Open Source vs. proprietäre App-Update-Lösungen
 description: >-
   Erkunden Sie die Unterschiede zwischen Open-Source- und proprietären
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: open-source-vs-proprietary-app-update-solutions
 ---
 Die Aktualisierung Ihrer App ist entscheidend für Sicherheit und Nutzerzufriedenheit. Die Wahl zwischen Open-Source- und proprietären Update-Lösungen hängt von Ihren Prioritäten ab: Flexibilität und Kosten oder Benutzerfreundlichkeit und Support.
 

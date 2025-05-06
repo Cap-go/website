@@ -1,6 +1,6 @@
 ---
 slug: >-
-  strategies-de-mise-a-jour-des-applications-mobiles-une-liste-de-verification-pour-les-developpeurs
+  estrategias-de-actualizacion-de-aplicaciones-moviles-una-lista-de-verificacion-para-desarrolladores
 title: >-
   Stratégies de mise à jour des applications mobiles : Une checklist pour les
   développeurs
@@ -23,8 +23,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  estrategias-de-actualizacion-de-aplicaciones-moviles-una-lista-de-verificacion-para-desarrolladores
 ---
 Garder votre application à jour est essentiel pour la satisfaction des utilisateurs et les performances de l'application. Voici pourquoi :
 

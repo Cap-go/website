@@ -1,5 +1,5 @@
 ---
-slug: Capacitor CLI 명령어 일반적인 문제점과 해결책
+slug: capacitor-cli-commands-common-issues-and-fixes
 title: 'Capacitor CLI 명령어: 일반적인 문제와 해결책'
 description: 'Capacitor CLI 문제를 플러그인, 빌드, 업데이트를 위한 실용적인 해결책으로 해결하여 앱 성능을 원활하게 유지하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-cli-commands-common-issues-and-fixes
 ---
 **[Capacitor](https://capacitorjs.com/) CLI 오류로 어려움을 겪고 계신가요?** 플러그인 문제, 빌드 오류, 네트워크 문제와 같은 일반적인 문제를 해결하는 빠른 가이드입니다. Capacitor CLI는 앱 스토어 심사를 우회하고 더 빠르게 수정사항을 푸시할 수 있는 무선(OTA) 업데이트를 포함한 앱 업데이트 관리에 필수적입니다. 주요 내용은 다음과 같습니다:
 

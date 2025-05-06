@@ -1,5 +1,5 @@
 ---
-slug: Bagaimana Capacitor Menangani Perbedaan Platform
+slug: Wie Capacitor Plattform-Unterschiede handhabt
 title: Bagaimana Capacitor Menangani Perbedaan Platform
 description: >-
   Pelajari cara mengelola perbedaan platform dalam pengembangan aplikasi seluler
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Wie Capacitor Plattform-Unterschiede handhabt
 ---
 [Capacitor](https://capacitorjs.com/) membantu pengembang membangun aplikasi untuk iOS dan Android menggunakan basis kode yang sama, sambil menangani perbedaan platform. Ini menyederhanakan integrasi fitur native, memastikan kepatuhan dengan pedoman platform, dan mengoptimalkan kinerja. Poin penting:
 

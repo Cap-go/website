@@ -1,5 +1,5 @@
 ---
-slug: einrichten-von-cicd-für-capacitor-apps
+slug: setting-up-cicd-for-capacitor-apps
 title: CI/CD für Capacitor Apps einrichten
 description: >-
   Lernen Sie, wie Sie Ihre App-Releases für iOS und Android mithilfe von
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: setting-up-cicd-for-capacitor-apps
 ---
 **Möchten Sie schnellere, fehlerfreie App-Releases für iOS und Android?** CI/CD-Pipelines für [Capacitor](https://capacitorjs.com/) Apps automatisieren das Erstellen, Testen und Bereitstellen, verkürzen die Release-Zeiten um bis zu 70% und reduzieren Fehler um 60%. Dieser Leitfaden behandelt alles, was Sie wissen müssen - von der Einrichtung Ihrer Umgebung bis zur Automatisierung von Live-Updates mit [Capgo](https://capgo.app/).
 

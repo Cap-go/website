@@ -1,6 +1,5 @@
 ---
-slug: >-
-  el-impacto-de-las-leyes-de-privacidad-de-datos-de-china-en-las-aplicaciones-moviles
+slug: chinas-data-privacy-laws-impact-on-mobile-apps
 title: 'Leyes de Privacidad de Datos de China: Impacto en Aplicaciones Móviles'
 description: >-
   Comprender las leyes de privacidad de datos de China es crucial para los
@@ -21,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: chinas-data-privacy-laws-impact-on-mobile-apps
 ---
 Si estás desarrollando aplicaciones móviles para el mercado chino, **el cumplimiento de las leyes de privacidad de datos de China es innegociable**. Las regulaciones clave - **[Ley de Ciberseguridad](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[Ley de Seguridad de Datos](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**, y **[Ley de Protección de Información Personal](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - requieren estricto [almacenamiento de datos](https://capgo.app/plugins/capacitor-data-storage-sqlite/), consentimiento del usuario y medidas de seguridad.
 

@@ -1,5 +1,5 @@
 ---
-slug: rollback-mechanismen-in-capacitor-plugins
+slug: rollback-mechanisms-in-capacitor-plugins
 title: Rollback-Mechanismen in Capacitor Plugins
 description: >-
   Untersuchen Sie Rollback-Mechanismen in Capacitor-Plugins, um Stabilität und
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: rollback-mechanisms-in-capacitor-plugins
 ---
 Rollback-Mechanismen gewährleisten Stabilität bei der Aktualisierung von [Capacitor](https://capacitorjs.com/) Plugins. Sie ermöglichen die Rückkehr zu einer vorherigen Version, wenn Updates Fehler oder Probleme verursachen, minimieren Ausfallzeiten und verbessern die Benutzererfahrung.
 

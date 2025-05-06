@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificacion-para-validar-actualizaciones-de-aplicaciones-capacitor
+slug: checkliste-zur-validierung-von-capacitor-app-aktualisierungen
 title: >-
   Lista de verificación para validar actualizaciones de aplicaciones de
   Capacitor
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: checkliste-zur-validierung-von-capacitor-app-aktualisierungen
 ---
 **¿Quieres entregar [actualizaciones fluidas de aplicaciones](https://capgo.app/plugins/capacitor-updater/) sin arriesgar la confianza del usuario?** Aquí hay una lista de verificación rápida y práctica para validar actualizaciones de aplicaciones [Capacitor](https://capacitorjs.com/), especialmente cuando se utilizan actualizaciones over-the-air (OTA):
 

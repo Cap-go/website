@@ -1,5 +1,5 @@
 ---
-slug: datenübertragung-zwischen-web-und-android-über-capacitor-native-bridge
+slug: capacitor-native-bridge-web-to-android-data-transfer
 title: 'Capacitor Native Bridge: Web zu Android Datentransfer'
 description: >-
   Erfahren Sie, wie Sie mit der nativen Bridge von Capacitor effizient Daten
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-native-bridge-web-to-android-data-transfer
 ---
 **Die Übertragung von Daten zwischen Web-Apps und Android in [Capacitor](https://capacitorjs.com/) kann eine Herausforderung sein, aber das Verständnis von JSON-Serialisierung und nativen Bridge-Operationen vereinfacht den Prozess.** Hier ist, was Sie wissen müssen:
 

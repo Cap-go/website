@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: testing-capacitor-ota-updates
 ---
 **[Capacitor](https://capacitorjs.com/)アプリをOTAアップデートすることで、バグの修正や機能の追加を即座に行えます - アプリストアの審査を待つ必要はありません。**以下が効果的なテスト方法です:
 

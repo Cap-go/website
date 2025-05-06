@@ -1,5 +1,5 @@
 ---
-slug: alternativa-a-appflow
+slug: alternative-to-appflow
 title: Alternativa a Ionic Appflow
 description: >-
   Ionic Appflow es una gran maquinaria para tu aplicación, lamentablemente su
@@ -19,7 +19,6 @@ tag: Alternatives
 published: true
 locale: es
 next_blog: ''
-original_slug: alternative-to-appflow
 ---
 Ionic Appflow es una plataforma de desarrollo de aplicaciones móviles basada en la nube que proporciona a los desarrolladores una variedad de herramientas y servicios para construir, probar e implementar aplicaciones móviles rápidamente. Ofrece características como integración y despliegue continuo, informes de fallos, permitiendo a los desarrolladores realizar un seguimiento del rendimiento de su aplicación y asegurar que funcione correctamente para sus usuarios.
 

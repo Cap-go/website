@@ -1,5 +1,5 @@
 ---
-slug: live-updates-faq-antworten-für-app-entwickler
+slug: live-updates-faq-answers-for-app-developers
 title: 'Live-Updates FAQ: Antworten für App-Entwickler'
 description: >-
   Entdecken Sie die Vorteile von Live-Updates für App-Entwickler, einschließlich
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: live-updates-faq-answers-for-app-developers
 ---
 Live-Updates ermöglichen es Entwicklern, Updates und Fehlerbehebungen schnell an die Apps der Benutzer zu übermitteln, ohne auf App Store-Überprüfungen warten zu müssen. Sie verwenden Over-the-Air (OTA) Technologie, um Änderungen in Echtzeit anzuwenden und verbessern so die Geschwindigkeit und Effizienz der Bereitstellung.
 

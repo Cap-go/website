@@ -1,5 +1,5 @@
 ---
-slug: norma-keamanan-utama-api-untuk-kepatuhan-app-store
+slug: normes-de-securite-des-api-principales-pour-la-conformite-de-l-app-store
 title: Standar Keamanan API Utama untuk Kepatuhan App Store
 description: >-
   Pelajari standar keamanan API utama untuk memastikan aplikasi Anda memenuhi
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: normes-de-securite-des-api-principales-pour-la-conformite-de-l-app-store
 ---
 Mengamankan API aplikasi Anda sangat penting untuk memenuhi persyaratan Apple App Store dan Google Play. Panduan ini menguraikan **lima standar keamanan API utama** untuk membantu Anda mematuhi aturan platform, melindungi data pengguna, dan meningkatkan kinerja aplikasi.
 

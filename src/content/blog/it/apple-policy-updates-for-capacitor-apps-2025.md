@@ -1,5 +1,5 @@
 ---
-slug: アップルの2025年Capacitorアプリ更新ポリシー
+slug: aggiornamenti-policy-apple-per-app-capacitor-2025
 title: Apple のアプリポリシー 2025 年の Capacitor アップデート
 description: >-
   Appleの2025年のApp Store
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: aggiornamenti-policy-apple-per-app-capacitor-2025
 ---
 **Le politiche dell'App Store di Apple del 2025 introducono regole più severe per le app [Capacitor](https://capacitorjs.com/).** Gli sviluppatori devono ora soddisfare standard più elevati per privacy, sicurezza e prestazioni. Ecco cosa devi sapere:
 

@@ -1,5 +1,5 @@
 ---
-slug: penyimpanan-aman-untuk-token-offline-di-capacitor
+slug: secure-storage-for-offline-tokens-in-capacitor
 title: Penyimpanan Aman untuk Token Offline di Capacitor
 description: >-
   Pelajari cara menyimpan token autentikasi secara aman pada saat offline
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: secure-storage-for-offline-tokens-in-capacitor
 ---
 **Ingin menjaga token autentikasi aplikasi Anda tetap aman secara offline?** Berikut yang perlu Anda ketahui:
 

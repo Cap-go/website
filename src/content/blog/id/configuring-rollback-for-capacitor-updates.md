@@ -1,5 +1,5 @@
 ---
-slug: konfigurasi-rollback-untuk-update-capacitor
+slug: konfiguration-des-rollbacks-fuer-capacitor-updates
 title: Konfigurasi Rollback untuk Pembaruan Capacitor
 description: >-
   Pelajari cara mengkonfigurasi opsi rollback untuk pembaruan Capacitor untuk
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: konfiguration-des-rollbacks-fuer-capacitor-updates
 ---
 Rollback di [Capacitor](https://capacitorjs.com/) memastikan aplikasi Anda tetap stabil selama pembaruan over-the-air (OTA). Berikut yang perlu Anda ketahui:
 

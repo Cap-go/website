@@ -1,5 +1,5 @@
 ---
-slug: migrating-cordova-zu-capacitor
+slug: migrating-cordova-to-capacitor
 title: >-
   Migration einer Web-App von Cordova zu Capacitor: Eine
   Schritt-für-Schritt-Anleitung
@@ -21,7 +21,6 @@ tag: Migration
 published: true
 locale: de
 next_blog: ''
-original_slug: migrating-cordova-to-capacitor
 ---
 # Migration einer Web-App von Cordova zu Capacitor: Eine Schritt-für-Schritt-Anleitung
 

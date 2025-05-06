@@ -1,5 +1,5 @@
 ---
-slug: comment-les-mises-à-jour-delta-réduisent-la-taille-de-la-charge-utile
+slug: wie-delta-updates-die-payload-größe-reduzieren
 title: Comment les mises à jour Delta réduisent la taille de la Payload
 description: >-
   Découvrez comment les mises à jour Delta améliorent les performances des
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-delta-updates-die-payload-größe-reduzieren
 ---
 Les mises à jour Delta rendent les mises à jour d'applications plus rapides et plus légères en envoyant uniquement les parties modifiées de l'application au lieu du fichier entier. Voici comment :
 

@@ -1,5 +1,5 @@
 ---
-slug: transfert-de-donnees-du-web-vers-android-avec-le-pont-natif-capacitor
+slug: transferencia-de-datos-de-web-a-android-con-el-puente-nativo-de-capacitor
 title: 'Pont natif Capacitor : Transfert de données de Web vers Android'
 description: >-
   Apprenez à transférer efficacement des données entre les applications web et
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: fr
 next_blog: ''
-original_slug: transferencia-de-datos-de-web-a-android-con-el-puente-nativo-de-capacitor
 ---
 **Le transfert de données entre les applications web et Android dans [Capacitor](https://capacitorjs.com/) peut être difficile, mais comprendre la sérialisation JSON et les opérations de pont natif simplifie le processus.** Voici ce que vous devez savoir :
 

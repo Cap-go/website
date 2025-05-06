@@ -1,5 +1,5 @@
 ---
-slug: bonnes-pratiques-pour-l-approbation-des-mises-a-jour-ota
+slug: mejores-prácticas-para-aprobación-de-actualizaciones-ota
 title: 'Consentement de l''utilisateur pour les mises à jour OTA : Meilleures pratiques'
 description: >-
   Apprenez-en davantage sur les meilleures pratiques pour obtenir le
@@ -21,7 +21,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: mejores-prácticas-para-aprobación-de-actualizaciones-ota
 ---
 Ignoring user consent can lead to legal issues, fines, app store removals, and damaged user trust.
 

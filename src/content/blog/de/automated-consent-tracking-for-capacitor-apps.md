@@ -1,5 +1,5 @@
 ---
-slug: automatisierte-einwilligungsverfolgung-fuer-capacitor-apps
+slug: automated-consent-tracking-for-capacitor-apps
 title: Automatisierte Einwilligungsverfolgung für Capacitor Apps
 description: >-
   Erfahren Sie, wie Sie automatisiertes Consent-Tracking in Apps implementieren,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: de
 next_blog: ''
-original_slug: automated-consent-tracking-for-capacitor-apps
 ---
 Die automatisierte Einwilligungsverfolgung ist für [Capacitor](https://capacitorjs.com/) Apps wichtig, um Datenschutzbestimmungen und Plattformregeln einzuhalten. Hier erfahren Sie, warum dies wichtig ist und wie Sie es implementieren:
 

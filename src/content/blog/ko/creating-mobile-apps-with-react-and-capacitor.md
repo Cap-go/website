@@ -1,5 +1,5 @@
 ---
-slug: 리액트와 Capacitor로 모바일 앱 만들기
+slug: creating-mobile-apps-with-react-and-capacitor
 title: React.js와 Capacitor로 모바일 앱 만들기
 description: >-
   React.js 웹 애플리케이션을 Capacitor를 활용하여 네이티브 모바일 앱으로 변환하고 Konsta UI로 네이티브 UI를 향상시키는
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: implementing-live-updates-in-your-react-capacitor-app
-original_slug: creating-mobile-apps-with-react-and-capacitor
 ---
 이 튜토리얼에서는 React, Capacitor 및 Konsta UI를 사용하여 모바일 애플리케이션을 만드는 방법을 안내합니다. 마지막에는 Capacitor를 사용하여 React.js 웹 앱을 네이티브 모바일 애플리케이션으로 변환하고 Konsta UI를 사용하여 네이티브 UI를 구현하는 방법을 알게 될 것입니다.
 

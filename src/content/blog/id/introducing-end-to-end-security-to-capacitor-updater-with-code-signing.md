@@ -1,6 +1,6 @@
 ---
 slug: >-
-  pengenalan-keamanan-end-to-end-di-capacitor-updater-dengan-penandatanganan-kode
+  introduction-de-la-securite-de-bout-en-bout-dans-capacitor-updater-avec-signature-de-code
 title: Pengenalan Enkripsi End-to-end di capacitor-updater dengan Code Signing
 description: >-
   Menggunakan enkripsi RSA + AES untuk mengenkripsi update, dirancang untuk
@@ -19,8 +19,6 @@ tag: Solution
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  introduction-de-la-securite-de-bout-en-bout-dans-capacitor-updater-avec-signature-de-code
 ---
 [Capacitor-updater](https://github.com/Cap-go/capacitor-updater/) kini mendukung enkripsi kode end-to-end. Penandatanganan kode memastikan pembaruan yang dijalankan oleh perangkat pengguna akhir tidak dirusak dan memberikan tingkat perlindungan tambahan di atas keamanan tingkat web standar Capacitor-updater.
 

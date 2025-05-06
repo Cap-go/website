@@ -1,5 +1,5 @@
 ---
-slug: tests-de-conformite-dans-cicd-pour-apps-capacitor
+slug: pruebas-de-cumplimiento-en-cicd-para-apps-capacitor
 title: Tests de Conformité CI/CD pour les Applications Capacitor
 description: >-
   Assurez-vous de la conformité des standards de vos applications Capacitor
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: pruebas-de-cumplimiento-en-cicd-para-apps-capacitor
 ---
 Les contrôles de conformité dans les pipelines CI/CD sont votre solution. Ils assurent que vos applications [Capacitor](https://capacitorjs.com/) respectent les exigences d'Apple et de [Google Play](https://support.google.com/googleplay/android-developer/answer/113513?hl=en), en maintenant une sécurité renforcée et des mises à jour rapides.
 

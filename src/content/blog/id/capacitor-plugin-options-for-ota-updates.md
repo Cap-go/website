@@ -1,5 +1,5 @@
 ---
-slug: opsi-plugin-capacitor-untuk-pembaruan-ota
+slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
 title: Opsi Plugin Capacitor untuk Pembaruan OTA
 description: >-
   Jelajahi keuntungan dan pilihan pembaruan OTA untuk aplikasi Capacitor,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
 ---
 **Ingin memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda dengan cepat dan aman tanpa penundaan dari app store?** Pembaruan Over-the-Air (OTA) memungkinkan Anda mengirim perubahan langsung ke pengguna, menghemat waktu dan bandwidth. Berikut yang perlu Anda ketahui:
 
@@ -187,7 +186,7 @@ Capgo menonjol dengan menawarkan paket hemat biaya dengan fitur kelas enterprise
 
 ## Ringkasan
 
-Berdasarkan perbandingan di atas, pasar kini condong ke solusi yang memprioritaskan keamanan, kecepatan, dan efektivitas biaya. Ekosistem [plugin pembaruan OTA Capacitor](https://capgo.app/blog/Release-of-a-brand-new-capacitor-social-login/) telah bergeser, dengan opsi menonjol muncul karena kinerja, fitur, dan tingkat adopsi mereka.
+Berdasarkan perbandingan di atas, pasar kini condong ke solusi yang memprioritaskan keamanan, kecepatan, dan efektivitas biaya. Ekosistem [plugin pembaruan OTA Capacitor](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) telah bergeser, dengan opsi menonjol muncul karena kinerja, fitur, dan tingkat adopsi mereka.
 
 Berikut rincian pilihan saat ini:
 

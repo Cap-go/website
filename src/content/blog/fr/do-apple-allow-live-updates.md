@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-sur-apple
+slug: actualizaciones-en-vivo-en-apple
 title: >-
   Apple n'autorise pas la diffusion de mises à jour en direct des applications
   sans examen préalable de l'App Store.
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: actualizaciones-en-vivo-en-apple
 ---
 La mise à jour des applications Capacitor JS sans passer par le processus de révision de l'App Store est possible sous certaines conditions définies dans les directives officielles d'Apple. Cependant, il est important de noter que ceci ne constitue pas un avis juridique. Pour que les mises à jour de code puissent être envoyées directement à une application tout en restant conformes aux directives d'Apple, les conditions suivantes doivent être respectées :
 

@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱의 오류 처리 - UX 베스트 프랙티스
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: 'Capacitor 앱의 오류 처리: UX 모범 사례'
 description: '앱에서 효과적인 오류 처리는 명확한 커뮤니케이션, 신속한 해결 및 플랫폼 전반에 걸친 일관된 관리를 통해 사용자 경험을 향상시킵니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: error-handling-in-capacitor-apps-ux-best-practices
 ---
 **오류 처리는 앱의 사용자 경험을 좌우할 수 있습니다.** 열악한 오류 관리는 사용자의 불만과 부정적인 리뷰로 이어질 수 있지만, 효과적인 오류 처리는 신뢰를 구축하고 사용자 만족도를 유지합니다. 알아야 할 사항은 다음과 같습니다:
 

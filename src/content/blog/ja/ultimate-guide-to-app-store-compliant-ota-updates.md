@@ -1,5 +1,5 @@
 ---
-slug: アプリストアに準拠したOTAアップデートの完全ガイド
+slug: guida-definitiva-agli-aggiornamenti-ota-conformi-all-app-store
 title: App Store 準拠OTAアップデートの完全ガイド
 description: >-
   App Store のガイドラインに従って Over-The-Air
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: guida-definitiva-agli-aggiornamenti-ota-conformi-all-app-store
 ---
 **アプリストアのルールを破ることなく、アプリを素早く更新したいですか?** Over-The-Air (OTA) アップデートを使用すると、アプリストアの承認を待つことなく、バグの修正、パフォーマンスの改善、ユーザー体験の向上が可能です。ただし、コンプライアンスを維持するためには、AppleとGoogleの厳格なガイドラインに従う必要があります。
 

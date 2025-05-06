@@ -1,5 +1,5 @@
 ---
-slug: iOS14以降のCapacitorアプリのプライバシーマニフェストガイド
+slug: privacy-manifest-for-capacitor-apps-guide
 title: Capacitorアプリのプライバシーマニフェスト：ガイド
 description: アプリケーションのプライバシーマニフェストを作成し、App Storeの要件に準拠しながらユーザーデータを効果的に保護する方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: privacy-manifest-for-capacitor-apps-guide
 ---
 **[App Store](https://en.wikipedia.org/wiki/App_Store_\(Apple\))でディレイなく[Capacitor](https://capacitorjs.com/)アプリをリリースしたいですか?** プライバシーマニフェストの作成から始めましょう。Appleは厳格なプライバシー基準を満たすために、このドキュメントの提出を開発者に求めています。以下が重要なポイントです:
 

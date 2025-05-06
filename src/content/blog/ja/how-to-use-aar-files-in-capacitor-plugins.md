@@ -1,5 +1,5 @@
 ---
-slug: capacitorプラグインでaarファイルを使用する方法
+slug: come-usare-file-aar-nei-plugin-capacitor
 title: Capacitorプラグインでのファイルの使用方法
 description: >-
   Capacitor プラグインで AAR ファイルを統合し、明確で詳細なガイドを通じて、ネイティブの Android 機能で Web
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-usare-file-aar-nei-plugin-capacitor
 ---
 [アシスタントの出力]
 

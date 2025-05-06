@@ -1,5 +1,5 @@
 ---
-slug: Capacitorアプリのパイプラインセキュリティ - 重要な洞察
+slug: pipeline-security-for-capacitor-apps-key-insights
 title: Capacitor アプリのパイプラインセキュリティ：重要なポイント
 description: >-
   Capacitor アプリのパイプラインを保護するための重要な戦略について学びます。シークレットの保護から OTA
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: pipeline-security-for-capacitor-apps-key-insights
 ---
 [Capacitor](https://capacitorjs.com/) アプリのパイプラインセキュリティは、機密データを保護し、確実なアップデートを保証するために不可欠です。以下が重要なポイントです：
 

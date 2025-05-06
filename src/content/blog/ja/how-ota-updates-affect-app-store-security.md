@@ -1,5 +1,5 @@
 ---
-slug: アプリストアのセキュリティにOTAアップデートが与える影響
+slug: come-gli-aggiornamenti-ota-influenzano-la-sicurezza-dell-app-store
 title: アプリストアのセキュリティにOTAアップデートが与える影響について
 description: >-
   OTA
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-gli-aggiornamenti-ota-influenzano-la-sicurezza-dell-app-store
 ---
 OTA（over-the-air）アップデートにより、アプリ開発者はアプリストアの承認を待たずに変更を直接ユーザーに提供できます。これにより、バグ修正、セキュリティパッチ、機能のロールアウトが迅速化されます。**ユーザーの95%が24時間以内にアップデートをインストール**しますが、適切に管理されていない場合、この迅速なペースはリスクをもたらす可能性があります。
 

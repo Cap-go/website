@@ -1,5 +1,5 @@
 ---
-slug: strategi-rollback-untuk-pembaruan-langsung-capacitor
+slug: estrategias-de-rollback-para-actualizaciones-en-vivo-de-capacitor
 title: Strategi Rollback untuk Capacitor Live Updates
 description: >-
   Pelajari lebih lanjut tentang strategi pembalikan yang efektif untuk pembaruan
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: estrategias-de-rollback-para-actualizaciones-en-vivo-de-capacitor
 ---
 **Hindari gangguan aplikasi dengan strategi rollback yang kuat.** [Capacitor](https://capacitorjs.com/) memungkinkan pembaruan langsung untuk menyampaikan perbaikan dengan cepat, namun 18% pembaruan gagal secara global. Rencana rollback memastikan stabilitas ketika masalah muncul. Berikut ringkasannya:
 

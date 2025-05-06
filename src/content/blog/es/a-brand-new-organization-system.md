@@ -1,5 +1,5 @@
 ---
-slug: un-nuevo-sistema-de-organizacion
+slug: a-brand-new-organization-system
 title: Un nuevo sistema de organización
 description: Una historia sobre cómo el equipo de capgo añadió un sistema de organización
 author: WcaleNieWolny
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: es
 next_blog: ''
-original_slug: a-brand-new-organization-system
 ---
 ## Introducción
 

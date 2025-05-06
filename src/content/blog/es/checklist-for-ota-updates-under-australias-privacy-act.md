@@ -1,6 +1,5 @@
 ---
-slug: >-
-  lista-de-verificacion-para-actualizaciones-ota-bajo-la-ley-de-privacidad-de-australia
+slug: checklist-for-ota-updates-under-australias-privacy-act
 title: >-
   Lista de verificación para actualizaciones OTA según la Ley de Privacidad de
   Australia
@@ -23,7 +22,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: checklist-for-ota-updates-under-australias-privacy-act
 ---
 **¿Entregas actualizaciones OTA (Over-The-Air)? Debes cumplir con los requisitos de la [Privacy Act](https://en.wikipedia.org/wiki/Privacy_Act_1988) de Australia para proteger los datos de los usuarios y evitar sanciones.**
 

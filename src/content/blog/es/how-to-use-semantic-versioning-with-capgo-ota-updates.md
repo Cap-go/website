@@ -1,5 +1,5 @@
 ---
-slug: como-usar-el-versionado-semantico-con-actualizaciones-ota-capgo
+slug: wie-man-semantic-versioning-mit-capgo-ota-updates-verwendet
 title: Cómo usar el versionado semántico con Capgo OTA Updates
 description: >-
   Aprende cómo optimizar las actualizaciones de aplicaciones y el control de
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-man-semantic-versioning-mit-capgo-ota-updates-verwendet
 ---
 **¿Quieres simplificar las [actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) y el control de versiones?** El Versionado Semántico (SemVer) combinado con las actualizaciones Over-The-Air (OTA) de [Capgo](https://capgo.app/) hace que la gestión de aplicaciones [Capacitor](https://capacitorjs.com/) sea más fácil y rápida. Aquí te explicamos cómo:
 

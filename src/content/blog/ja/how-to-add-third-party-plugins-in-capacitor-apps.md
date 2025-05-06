@@ -1,5 +1,5 @@
 ---
-slug: サードパーティプラグインをCapacitorアプリに追加する方法
+slug: how-to-add-third-party-plugins-in-capacitor-apps
 title: Capacitor アプリに サードパーティプラグインを追加する方法
 description: Capacitor アプリをサードパーティのプラグインを統合することで機能とパフォーマンスを向上させる方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: how-to-add-third-party-plugins-in-capacitor-apps
 ---
 ライブアップデート、アナリティクス、セキュアな機能など、**[Capacitor](https://capacitorjs.com/)アプリをパワフルな機能で強化したいですか?** サードパーティプラグインの追加がその方法です。Capacitorを使えば、ネイティブコーディングを深く理解することなく、プラグインを簡単に統合してアプリの機能を拡張できます。
 

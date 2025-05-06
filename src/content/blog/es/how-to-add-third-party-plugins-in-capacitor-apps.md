@@ -1,5 +1,5 @@
 ---
-slug: Cómo agregar plugins de terceros en aplicaciones Capacitor
+slug: So fügen Sie Plugins von Drittanbietern in Capacitor-Apps hinzu
 title: Cómo añadir plugins de terceros en aplicaciones Capacitor
 description: >-
   Aprende cómo mejorar tu aplicación Capacitor integrando plugins de terceros
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: So fügen Sie Plugins von Drittanbietern in Capacitor-Apps hinzu
 ---
 **¿Quieres mejorar tu aplicación de** [**Capacitor**](https://capacitorjs.com/) **con potentes funciones como actualizaciones en vivo, análisis o funcionalidad segura?** Agregar plugins de terceros es el camino a seguir. Capacitor hace que sea simple integrar plugins, expandiendo las capacidades de tu aplicación sin necesidad de programación nativa profunda.
 

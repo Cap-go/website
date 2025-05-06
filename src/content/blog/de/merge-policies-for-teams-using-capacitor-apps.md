@@ -1,5 +1,5 @@
 ---
-slug: 'Merge-Richtlinien für Teams, die Capacitor-Apps verwenden'
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Merge-Richtlinien für Teams mit Capacitor-Apps
 description: >-
   Erfahren Sie, wie Sie effektive Merge-Richtlinien für Capacitor-Apps
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: merge-policies-for-teams-using-capacitor-apps
 ---
 To ensure reliable live updates for your Capacitor app, follow these steps:
 

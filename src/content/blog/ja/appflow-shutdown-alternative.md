@@ -1,5 +1,5 @@
 ---
-slug: アプフローの代替手段
+slug: alternativa-chiusura-appflow
 title: Ionic AppFlowのシャットダウン - モバイルアプリ開発の次のステップは？
 description: >-
   Ionic
@@ -18,7 +18,6 @@ tag: News
 published: true
 locale: ja
 next_blog: ''
-original_slug: alternativa-chiusura-appflow
 ---
 Ionic AppFlowのシャットダウンの発表に伴い、多くの開発チームがモバイルアプリ開発ワークフローを維持するための代替手段を探しています。影響を受けるチームの一員である場合、朗報があります：Capgoは、AppFlowの機能を置き換えるだけでなく、より手頃な価格でさらに強化された機能を提供する包括的なソリューションを提供しています。
 

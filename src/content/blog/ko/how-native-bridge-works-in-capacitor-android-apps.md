@@ -1,5 +1,5 @@
 ---
-slug: capacitor-android-앱에서-네이티브-브릿지가-작동하는-방식
+slug: how-native-bridge-works-in-capacitor-android-apps
 title: CapacitorJS의 네이티브 브릿지가 Android 앱에서 작동하는 방법
 description: Android 앱의 네이티브 브리지가 웹 코드와 네이티브 기능 간의 통신을 향상시켜 성능과 사용자 경험을 최적화하는 방법을 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-native-bridge-works-in-capacitor-android-apps
 ---
 **[Capacitor](https://capacitorjs.com/) Android 앱의 네이티브 브릿지는 웹 기반 JavaScript와 네이티브 Android 기능 간의 원활한 통신을 가능하게 합니다.** 개발자가 카메라, 위치 정보, 저장소와 같은 Android 고유 기능을 웹 코드에서 직접 사용할 수 있어 웹 기술을 활용하면서도 네이티브처럼 느껴지는 앱을 만들 수 있습니다.
 

@@ -1,5 +1,5 @@
 ---
-slug: 진행식 출시와 전체 출시 비교
+slug: staged-rollouts-vs-full-releases-comparison
 title: '스테이지 롤아웃 vs 전체 출시: 비교'
 description: 앱의 요구사항과 사용자 기반에 가장 적합한 업데이트 전략을 결정하기 위해 단계적 출시와 전체 출시의 차이점을 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: staged-rollouts-vs-full-releases-comparison
 ---
 **스테이징 롤아웃**과 **전체 배포** 중 선택하는 것은 앱의 요구사항, 사용자 기반, 업데이트 긴급성에 따라 달라집니다. 간단히 정리하면:
 

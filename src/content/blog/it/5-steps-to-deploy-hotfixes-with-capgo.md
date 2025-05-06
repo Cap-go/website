@@ -1,5 +1,5 @@
 ---
-slug: 5-passi-per-distribuire-hotfix-con-capgo
+slug: 5-steps-to-deploy-hotfixes-with-capgo
 title: 5 Passi per Distribuire Hotfix con Capgo
 description: >-
   Scopri come distribuire hotfix in modo rapido e sicuro utilizzando un processo
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: 5-steps-to-deploy-hotfixes-with-capgo
 ---
 [Capgo](https://capgo.app/) rende il rilascio di hotfix veloce e semplice, evitando i ritardi degli app store mantenendo gli aggiornamenti sicuri e conformi alle linee guida di Apple e Google. Ecco una rapida panoramica del processo:
 

@@ -1,6 +1,5 @@
 ---
-slug: >-
-  panduan-langkah-demi-langkah-untuk-mendaftarkan-icp-untuk-aplikasi-seluler-di-china
+slug: guia-paso-a-paso-para-registrar-icp-para-aplicaciones-moviles-en-china
 title: 'Pendaftaran ICP untuk Aplikasi Mobile di China: Panduan Langkah demi Langkah'
 description: >-
   Pelajari langkah-langkah penting untuk pengajuan ICP bagi aplikasi mobile di
@@ -21,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guia-paso-a-paso-para-registrar-icp-para-aplicaciones-moviles-en-china
 ---
 Jika Anda ingin aplikasi seluler Anda beroperasi secara legal di Tiongkok, Anda **harus menyelesaikan pendaftaran ICP**. Ini adalah proses registrasi wajib untuk memastikan kepatuhan terhadap peraturan Tiongkok. Berikut ikhtisar singkatnya:
 

@@ -16,7 +16,6 @@ tag: iOS
 published: true
 locale: ko
 next_blog: ''
-original_slug: enable-ios-developer-mode-ios16
 ---
 # iOS 16에서 앱 테스트를 위한 개발자 모드 활성화 방법
 

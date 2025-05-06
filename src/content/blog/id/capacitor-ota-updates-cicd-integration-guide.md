@@ -1,5 +1,5 @@
 ---
-slug: panduan-integrasi-cicd-pembaruan-ota-capacitor
+slug: guide-d'intégration-cicd-mises-à-jour-ota-capacitor
 title: 'Pembaruan OTA Capacitor: Panduan Integrasi CI/CD'
 description: >-
   Pelajari cara mengintegrasikan pembaruan OTA ke dalam pipeline CI/CD Anda
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-d'intégration-cicd-mises-à-jour-ota-capacitor
 ---
 **Ingin memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda secara instan tanpa penundaan app store?** Pembaruan Over-the-Air (OTA) memungkinkan Anda mendorong perbaikan dan fitur langsung ke perangkat pengguna. Padukan ini dengan pipeline CI/CD, dan Anda dapat mengotomatisasi penerapan, mempercepat perbaikan bug, dan meningkatkan pengalaman pengguna.
 

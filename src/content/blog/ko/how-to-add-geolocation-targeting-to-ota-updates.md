@@ -1,5 +1,5 @@
 ---
-slug: ota-업데이트에-지역-타겟팅-추가하기
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: OTA 업데이트에 위치 정보 타겟팅을 추가하는 방법
 description: OTA 업데이트에서 지역 기반 타겟팅을 구현하여 위치 기반 기능과 시기적절한 업데이트로 사용자 참여도를 높이는 방법을 알아보세요.
 author: Martin Donadieu
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-add-geolocation-targeting-to-ota-updates
 ---
 **사용자의 위치에 맞춘 [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 제공하고 싶으신가요?** OTA(Over-the-Air) 업데이트의 위치 기반 타겟팅으로 이것이 가능합니다. 사용자 경험과 참여도를 향상시키기 위해 위치 정보와 OTA 업데이트를 결합하는 방법을 간단히 설명해드리겠습니다:
 

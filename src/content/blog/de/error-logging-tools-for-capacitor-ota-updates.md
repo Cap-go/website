@@ -1,5 +1,5 @@
 ---
-slug: fehlerprotokollierung-tools-fuer-capacitor-ota-updates
+slug: error-logging-tools-for-capacitor-ota-updates
 title: Fehlerprotokollierungstools für Capacitor OTA Updates
 description: >-
   Erkunden Sie wichtige Fehlerprotokollierungs-Tools für Capacitor OTA-Updates,
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: error-logging-tools-for-capacitor-ota-updates
 ---
 Fehler-Logging-Tools sind essentiell für die Verwaltung von Capacitor Over-the-Air (OTA) Updates. Sie helfen Entwicklern dabei, Probleme zu überwachen, Update-Performance zu verfolgen und App-Stabilität sicherzustellen. Dieser Artikel vergleicht vier beliebte Tools - **[Sentry](https://sentry.io/)**, **[LogRocket](https://logrocket.com/)**, **[Bugsnag](https://www.bugsnag.com/)** und **[Capgo](https://capgo.app/)** - und beleuchtet deren Funktionen, Preise und Einrichtungskomfort.
 

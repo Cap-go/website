@@ -1,5 +1,5 @@
 ---
-slug: gestione-dei-segreti-nelle-pipeline-cicd
+slug: managing-secrets-in-cicd-pipelines
 title: Gestione dei Segreti nei Pipeline CI/CD
 description: >-
   Scopri strategie efficaci per gestire i segreti nelle pipeline CI/CD per
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: managing-secrets-in-cicd-pipelines
 ---
 **Mantenere i segreti al sicuro nelle pipeline CI/CD è fondamentale per prevenire violazioni, interruzioni del servizio e problemi di conformità.** Ecco come farlo in modo efficace:
 

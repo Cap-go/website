@@ -1,5 +1,5 @@
 ---
-slug: iOS 앱을 위한 Apple 정책 업데이트 2025
+slug: apple-policy-updates-for-capacitor-apps-2025
 title: Capacitor 앱을 위한 애플 정책 업데이트 2025
 description: >-
   Apple의 2025년 App Store 정책은 Capacitor 앱에 대한 새로운 규정 준수 기준을 부과하며, 개인정보 보호, 보안 및
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: apple-policy-updates-for-capacitor-apps-2025
 ---
 **Apple의 2025년 App Store 정책은 [Capacitor](https://capacitorjs.com/) 앱에 대해 더 엄격한 규칙을 도입합니다.** 개발자는 이제 개인정보 보호, 보안 및 성능에 대한 더 높은 기준을 충족해야 합니다. 다음은 알아야 할 사항입니다:
 

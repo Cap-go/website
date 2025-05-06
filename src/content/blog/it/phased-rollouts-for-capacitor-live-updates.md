@@ -1,5 +1,5 @@
 ---
-slug: rollout-graduali-per-aggiornamenti-live-di-capacitor
+slug: phased-rollouts-for-capacitor-live-updates
 title: Rollout Graduali per Aggiornamenti Live di Capacitor
 description: >-
   Scopri come il rilascio graduale delle app migliora gli aggiornamenti
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: phased-rollouts-for-capacitor-live-updates
 ---
 Gli aggiornamenti graduali consentono di aggiornare le app gradualmente, partendo da un piccolo gruppo di utenti ed espandendosi man mano che la stabilità viene confermata. Questo approccio riduce i rischi, garantisce la qualità dell'app e migliora l'esperienza utente. Strumenti come [Capgo](https://capgo.app/) rendono facile gestire questi aggiornamenti rispettando le regole degli app store.
 

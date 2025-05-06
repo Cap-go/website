@@ -1,5 +1,5 @@
 ---
-slug: guia-configuracion-pipeline-cicd-capacitor
+slug: capacitor-cicd-pipeline-setup-guide
 title: Guía de configuración de la pipeline CI/CD de Capacitor
 description: >-
   Automatiza el proceso de compilación, pruebas y despliegue de tu aplicación
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-cicd-pipeline-setup-guide
 ---
 **¿Quieres [actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) más rápidas con un mínimo esfuerzo?** Configurar un pipeline de CI/CD para tu aplicación [Capacitor](https://capacitorjs.com/) automatiza la compilación, pruebas y despliegue, ahorrando tiempo y reduciendo errores. Esto es lo que lograrás:
 

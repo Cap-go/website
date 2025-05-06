@@ -1,5 +1,5 @@
 ---
-slug: wie-delta-updates-die-payload-größe-reduzieren
+slug: how-delta-updates-reduce-payload-size
 title: Wie Delta-Updates die Payload-Größe reduzieren
 description: >-
   Erfahren Sie, wie Delta-Updates die App-Leistung verbessern, indem sie die
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-delta-updates-reduce-payload-size
 ---
 Delta-Updates machen App-Updates schneller und kleiner, indem nur die geänderten Teile der App anstelle der gesamten Datei gesendet werden. So funktioniert's:
 

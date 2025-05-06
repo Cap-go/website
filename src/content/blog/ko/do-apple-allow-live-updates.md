@@ -1,5 +1,5 @@
 ---
-slug: 애플은 실시간 업데이트를 허용하나요?
+slug: do-apple-allow-live-updates
 title: 애플은 앱스토어 리뷰 없이 앱에 실시간 업데이트를 보내는 것을 허용하나요?
 description: iOS 앱에 대한 코드 업데이트를 Apple의 가이드라인을 완전히 준수하면서 프로덕션에 배포하려면 어떻게 해야 할까요?
 author: Martin Donadieu
@@ -14,7 +14,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: do-apple-allow-live-updates
 ---
 App Store 검토 과정을 거치지 않고 Capacitor JS 앱을 업데이트하는 것은 Apple의 공식 지침에 명시된 특정 조건에서 가능합니다. 다만, 이는 법률적 조언이 아님을 유의하시기 바랍니다. 앱에 직접 코드 업데이트를 푸시하고 Apple의 지침을 준수하기 위해서는 다음 조건을 충족해야 합니다:
 

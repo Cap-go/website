@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱에서 OTA 업데이트 성공 추적하는 방법
+slug: how-to-track-ota-update-success-in-capacitor-apps
 title: Capacitor 앱에서 OTA 업데이트 성공 여부 추적하기
 description: 앱에서 OTA 업데이트 성공을 효과적으로 추적하여 사용자 경험을 개선하고 문제를 신속하게 해결하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-track-ota-update-success-in-capacitor-apps
 ---
 OTA 업데이트를 통해 앱스토어 승인을 기다리지 않고 직접 사용자에게 앱 변경사항을 전달할 수 있습니다. 하지만 원활한 업데이트를 보장하고, 문제를 신속하게 해결하며, 사용자 경험을 개선하기 위해서는 업데이트 성공 여부를 추적하는 것이 중요합니다. 다음은 알아야 할 사항입니다:
 

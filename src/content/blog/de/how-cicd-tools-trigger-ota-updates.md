@@ -1,5 +1,5 @@
 ---
-slug: wie-cicd-tools-ota-updates-auslösen
+slug: how-cicd-tools-trigger-ota-updates
 title: CI/CD Tools lösen OTA-Updates aus
 description: >-
   Erfahren Sie, wie CI/CD-Tools OTA-Updates verbessern und durch automatisierte
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-cicd-tools-trigger-ota-updates
 ---
 CI/CD-Tools machen Over-the-Air (OTA) Updates durch Automatisierung schneller, sicherer und zuverlässiger. Hier ist wie:
 

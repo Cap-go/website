@@ -1,5 +1,5 @@
 ---
-slug: cara-enkripsi-ota-memenuhi-standar-app-store
+slug: comment-le-chiffrement-ota-est-conforme-aux-normes-app-store
 title: Bagaimana Enkripsi OTA Mematuhi Aturan App Store
 description: >-
   Pelajari bagaimana enkripsi OTA mengamankan pembaruan aplikasi dan memastikan
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-le-chiffrement-ota-est-conforme-aux-normes-app-store
 ---
 **Enkripsi Over-the-Air (OTA) memastikan pembaruan aplikasi yang aman sekaligus memenuhi aturan ketat dari app store Apple dan Google.** Berikut cara kerjanya dan mengapa ini penting:
 

@@ -1,5 +1,5 @@
 ---
-slug: Lisensi Open Source
+slug: Licences open source
 title: Memahami Lisensi Perangkat Lunak Open Source
 description: >-
   Dalam lisensi perangkat lunak open source, terdapat dua kategori utama.
@@ -19,7 +19,6 @@ tag: Open Source
 published: true
 locale: id
 next_blog: ''
-original_slug: Licences open source
 ---
 Ketika berbicara tentang lisensi perangkat lunak open-source, ada dua kategori besar. Beberapa lisensi termasuk dalam kategori lisensi copyleft, sementara yang lain adalah lisensi open source yang permisif.
 

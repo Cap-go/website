@@ -1,5 +1,5 @@
 ---
-slug: guide-du-développement-d'applications-mobiles-multiplateformes-2024
+slug: cross-platform-mobile-app-development-guide-2024
 title: Le Guide Ultime du Développement d'Applications Mobiles Cross-Platform en 2024
 description: >-
   Découvrez les meilleures pratiques et frameworks pour le développement
@@ -19,7 +19,6 @@ tag: cross-platform
 published: true
 locale: fr
 next_blog: top-cross-platform-frameworks-compared-2024
-original_slug: cross-platform-mobile-app-development-guide-2024
 ---
 ## Pourquoi le développement d'applications mobiles multiplateformes est important en 2024
 

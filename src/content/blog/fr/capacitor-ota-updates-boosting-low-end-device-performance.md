@@ -1,6 +1,6 @@
 ---
 slug: >-
-  mises-a-jour-ota-capacitor-amelioration-des-performances-sur-les-appareils-bas-de-gamme
+  actualizaciones-ota-de-capacitor-mejorando-el-rendimiento-en-dispositivos-de-gama-baja
 title: >-
   Mises à jour OTA de Capacitor : Amélioration des Performances sur les
   Appareils d'Entrée de Gamme
@@ -23,8 +23,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  actualizaciones-ota-de-capacitor-mejorando-el-rendimiento-en-dispositivos-de-gama-baja
 ---
 **Vous voulez que votre application fonctionne mieux sur les appareils d'entrée de gamme ? Les mises à jour OTA sont la solution.** Les mises à jour over-the-air (OTA) de [Capacitor](https://capacitorjs.com/) vous permettent de ne pousser que les changements nécessaires à votre application - pas besoin de téléchargements complets. Cela permet d'économiser du temps, de réduire l'utilisation des données et d'améliorer les performances, en particulier pour les utilisateurs disposant d'un matériel limité ou de réseaux lents.
 

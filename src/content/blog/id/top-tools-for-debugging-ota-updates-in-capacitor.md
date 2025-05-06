@@ -1,5 +1,5 @@
 ---
-slug: alat-utama-untuk-debug-pembaruan-ota-di-capacitor
+slug: herramientas-principales-para-depurar-actualizaciones-ota-en-capacitor
 title: Alat Utama untuk Debug Pembaruan OTA di Capacitor
 description: >-
   Jelajahi alat-alat penting dan strategi untuk melakukan debug pembaruan OTA
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: herramientas-principales-para-depurar-actualizaciones-ota-en-capacitor
 ---
 Men-debug pembaruan Over-the-Air (OTA) dalam aplikasi [Capacitor](https://capacitorjs.com/) bisa rumit, tetapi alat yang tepat membuat perbedaan besar. Baik Anda mengelola konflik versi, memastikan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), atau men-debug lintas platform, berikut tiga alat yang perlu dipertimbangkan:
 

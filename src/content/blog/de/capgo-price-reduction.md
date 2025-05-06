@@ -1,5 +1,5 @@
 ---
-slug: Preisreduzierung bei Capgo
+slug: capgo-price-reduction
 title: 'Capgo Preissenkung: Live Updates noch zugänglicher machen'
 description: >-
   Wir freuen uns, erhebliche Preissenkungen für alle Capgo-Pläne bekannt zu
@@ -17,7 +17,6 @@ tag: News
 published: true
 locale: de
 next_blog: ''
-original_slug: capgo-price-reduction
 ---
 Hey! 🎉
 

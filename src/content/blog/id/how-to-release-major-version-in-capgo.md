@@ -1,5 +1,5 @@
 ---
-slug: Cara Menggunakan Versi Major di Capgo
+slug: Comment faire une version majeure dans Capgo
 title: Cara mempublikasikan versi major baru di capgo
 description: >-
   Memahami bagaimana dan kapan perlu merilis versi besar dari aplikasi Anda
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: how-to-send-specific-version-to-users
-original_slug: Comment faire une version majeure dans Capgo
 ---
 ## Saat merilis versi major
 

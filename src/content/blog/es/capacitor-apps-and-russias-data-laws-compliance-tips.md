@@ -1,5 +1,5 @@
 ---
-slug: aplicaciones-capacitor-y-cumplimiento-de-leyes-de-datos-en-rusia-consejos
+slug: capacitor-apps-and-russias-data-laws-compliance-tips
 title: >-
   Aplicaciones de Capacitor y las Leyes de Datos de Rusia: Consejos de
   Cumplimiento
@@ -22,7 +22,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-apps-and-russias-data-laws-compliance-tips
 ---
 A compliant privacy policy for Russia should:
 

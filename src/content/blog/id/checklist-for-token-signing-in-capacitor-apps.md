@@ -1,5 +1,5 @@
 ---
-slug: daftar-periksa-tanda-tangan-token-dalam-aplikasi-capacitor
+slug: lista-de-verificación-para-la-firma-de-tokens-en-aplicaciones-capacitor
 title: Daftar Periksa untuk Token Signing di Aplikasi Capacitor
 description: >-
   Ikuti daftar periksa lengkap ini untuk menandatangani token secara aman di
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: lista-de-verificación-para-la-firma-de-tokens-en-aplicaciones-capacitor
 ---
 Penandatanganan token sangat penting untuk mengamankan aplikasi [Capacitor](https://capacitorjs.com/), memastikan integritas data, autentikasi, dan kepatuhan dengan standar keamanan A.S. Panduan ini memberikan daftar periksa yang jelas untuk pengaturan, implementasi, dan manajemen risiko.
 

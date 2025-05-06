@@ -1,6 +1,6 @@
 ---
 slug: >-
-  questions-frequentes-sur-les-mises-a-jour-en-direct-reponses-pour-les-developpeurs-d-applications
+  preguntas-frecuentes-sobre-actualizaciones-en-vivo-respuestas-para-desarrolladores-de-apps
 title: >-
   Questions fréquentes sur les mises à jour en direct : réponses pour les
   développeurs d'applications
@@ -23,8 +23,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  preguntas-frecuentes-sobre-actualizaciones-en-vivo-respuestas-para-desarrolladores-de-apps
 ---
 Les mises à jour en direct permettent aux développeurs de déployer rapidement des mises à jour et des correctifs aux applications des utilisateurs sans attendre les examens des app stores. Elles utilisent la technologie OTA (over-the-air) pour appliquer les changements en temps réel, améliorant la vitesse et l'efficacité du déploiement.
 

@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-cloud-maneja-semantic-rerlease-dengan-CapGo-CapacitorUpdater
+slug: como-rapido-cloud-maneja-semantic-rerlease-con-CapGo-CapacitorUpdater
 title: >-
   Bagaimana Rapido Cloud mengelola semantic release dengan Capgo
   CapacitorUpdater
@@ -21,7 +21,6 @@ tag: Case Study
 published: true
 locale: id
 next_blog: ''
-original_slug: como-rapido-cloud-maneja-semantic-rerlease-con-CapGo-CapacitorUpdater
 ---
 ## 1. Pengenalan
 

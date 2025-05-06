@@ -1,5 +1,5 @@
 ---
-slug: cómo-funciona-la-versión-en-capgo
+slug: how-version-work-in-capgo
 title: Cómo funciona el control de versiones en Capgo
 description: >-
   Comprenda cómo Capgo gestiona las versiones en su aplicación de Capacitor y
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: how-to-release-major-version-in-capgo
-original_slug: how-version-work-in-capgo
 ---
 Capgo usa 2 variables principales para gestionar las versiones en tu aplicación Capacitor:
   - Versión nativa

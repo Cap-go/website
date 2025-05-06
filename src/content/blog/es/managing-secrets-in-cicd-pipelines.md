@@ -1,5 +1,5 @@
 ---
-slug: gestion-de-secretos-en-canalizaciones-cicd
+slug: verwaltung-von-geheimnissen-in-cicd-pipelines
 title: Gestión de secretos en pipelines CI/CD
 description: >-
   Aprende estrategias efectivas para gestionar secretos en pipelines CI/CD para
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: verwaltung-von-geheimnissen-in-cicd-pipelines
 ---
 **Mantener los secretos seguros en los pipelines de CI/CD es crítico para prevenir brechas, interrupciones del servicio y problemas de cumplimiento.** Aquí te mostramos cómo hacerlo de manera efectiva:
 

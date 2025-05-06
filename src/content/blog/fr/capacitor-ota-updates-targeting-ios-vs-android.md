@@ -1,5 +1,5 @@
 ---
-slug: capactior-ota-pembaruan-cible-ios-vs-android
+slug: capacitor-ota-updates-cible-ios-vs-android
 title: 'Pembaruan OTA Capacitor: Menargetkan iOS vs Android'
 description: >-
   Jelajahi perbedaan strategi pembaruan OTA untuk iOS dan Android, dengan fokus
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: capacitor-ota-updates-cible-ios-vs-android
 ---
 **Vous souhaitez mettre à jour votre** [**Capacitor**](https://capacitorjs.com/) **app instantanément sans délais de l'app store ?** Les mises à jour Over-the-Air (OTA) vous permettent de déployer des modifications de la couche web (HTML, CSS, JavaScript) de votre application sans nouvelle soumission aux app stores. Mais iOS et Android gèrent ces mises à jour différemment, et comprendre ces différences est crucial.
 

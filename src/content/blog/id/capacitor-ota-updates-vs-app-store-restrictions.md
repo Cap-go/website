@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-ota-capacitor-vs-batasan-app-store
+slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
 title: Pembaruan OTA Capacitor vs Pembatasan App Store
 description: >-
   Pelajari bagaimana pembaruan OTA memberikan penerapan aplikasi yang lebih
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
 ---
 **Ingin [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) yang lebih cepat tanpa menunggu?** Pembaruan Over-the-Air (OTA) memungkinkan pengembang melewati penundaan toko aplikasi dan mendorong perubahan langsung ke pengguna dalam hitungan menit. Inilah mengapa hal ini penting:
 

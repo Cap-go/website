@@ -1,5 +1,5 @@
 ---
-slug: erreurs-courantes-dans-la-segmentation-des-attributs-personnalises
+slug: errores-comunes-en-la-segmentacion-de-atributos-personalizados
 title: Erreurs courantes dans la segmentation par attributs personnalisés
 description: >-
   Découvrez les principaux obstacles à la segmentation des attributs
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: errores-comunes-en-la-segmentacion-de-atributos-personalizados
 ---
 La segmentation par attributs personnalisés est cruciale pour améliorer l'engagement des utilisateurs et les performances des applications. Mais de nombreux développeurs commettent des erreurs courantes qui conduisent à des mises à jour inefficaces, un ciblage médiocre et une satisfaction réduite des utilisateurs. Voici un aperçu rapide de ce qu'il faut éviter et comment s'améliorer :
 

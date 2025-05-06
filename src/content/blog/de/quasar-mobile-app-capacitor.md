@@ -1,5 +1,5 @@
 ---
-slug: live-update-with-quasar-und-capacitor
+slug: live-update-with-quasar-and-capacitor
 title: 'Mobile Apps mit Live-Updates, Quasar und Capacitor erstellen.'
 description: >-
   So erstellen Sie eine mobile App mit Quasar, Capacitor und implementieren
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: de
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: live-update-with-quasar-and-capacitor
 ---
 In dieser Anleitung beginnen wir mit der Erstellung einer neuen Web-App mit [Quasar](https://quasar.dev/). Später lernen wir, wie man sie mit Capacitor in eine mobile App verwandelt. Wenn Sie möchten, dass Ihre App auf mobilen Geräten besser aussieht.
 

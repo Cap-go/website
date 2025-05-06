@@ -1,5 +1,5 @@
 ---
-slug: meilleures-pratiques-mises-a-jour-ota-staging
+slug: mejores-prácticas-actualizaciones-ota-staging
 title: 'Mises à jour OTA par étapes : bonnes pratiques'
 description: >-
   Découvrez les meilleures pratiques pour implémenter les mises à jour OTA, en
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: mejores-prácticas-actualizaciones-ota-staging
 ---
 Les mises à jour **Over-the-Air (OTA)** permettent aux développeurs de déployer des modifications d'applications directement aux utilisateurs sans nécessiter d'approbation des app stores. Cela accélère les corrections de bugs et le déploiement des fonctionnalités, avec **95% des utilisateurs actifs recevant les mises à jour dans les 24 heures**. Cependant, sans un environnement de staging approprié, les mises à jour peuvent échouer, causant des crashs ou des problèmes de compatibilité.
 

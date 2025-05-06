@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱의 자동 동의 추적
+slug: automated-consent-tracking-for-capacitor-apps
 title: Capacitor 앱을 위한 자동화된 동의 추적
 description: 앱 스토어 지연 없이 개인정보 보호 규정 준수와 사용자 신뢰를 높이기 위한 자동화된 동의 추적을 앱에 구현하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: automated-consent-tracking-for-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 자동화된 동의 추적은 개인정보 보호 규정과 플랫폼 규칙을 준수하기 위해 필수적입니다. 다음은 그 중요성과 구현 방법입니다:
 

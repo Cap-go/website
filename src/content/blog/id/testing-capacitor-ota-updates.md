@@ -1,5 +1,5 @@
 ---
-slug: Pengujian Pembaruan OTA Capacitor
+slug: Pruebas de actualizaciones OTA de Capacitor
 title: Pengujian Pembaruan OTA Capacitor
 description: >-
   Pelajari cara menguji pembaruan OTA secara efektif untuk aplikasi Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Pruebas de actualizaciones OTA de Capacitor
 ---
 **Pembaruan OTA memungkinkan Anda memperbaiki bug, menambahkan fitur, dan memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda secara instan - tanpa penundaan dari app store.** Berikut cara untuk mengujinya secara efektif:
 

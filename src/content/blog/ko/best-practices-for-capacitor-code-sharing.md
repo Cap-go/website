@@ -1,5 +1,5 @@
 ---
-slug: Capacitor 코드 공유를 위한 모범 사례
+slug: best-practices-for-capacitor-code-sharing
 title: Capacitor 코드 공유를 위한 모범 사례
 description: 'Capacitor 앱에서 코드 구성부터 테스트, 안전한 배포 전략까지 효율적인 코드 공유를 위한 모범 사례를 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: best-practices-for-capacitor-code-sharing
 ---
 **[Capacitor](https://capacitorjs.com/)를 사용하면 하나의 코드베이스로 iOS, Android 및 웹용 앱을 빌드할 수 있습니다.** 이 가이드에서는 크로스 플랫폼 코드를 효율적으로 구성, 테스트 및 배포하는 방법을 설명합니다. 다음과 같은 내용을 배우게 됩니다:
 

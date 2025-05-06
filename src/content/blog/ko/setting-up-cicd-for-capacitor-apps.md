@@ -1,5 +1,5 @@
 ---
-slug: capacitor-앱용-cicd-설정
+slug: setting-up-cicd-for-capacitor-apps
 title: Capacitor 앱을 위한 CI/CD 설정하기
 description: 'iOS와 Android 앱 출시를 CI/CD 파이프라인을 사용하여 간소화하고, 효율성을 높이며 오류를 줄이는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: setting-up-cicd-for-capacitor-apps
 ---
 **iOS와 Android 앱 릴리스를 더 빠르고 오류 없이 하고 싶으신가요?** [Capacitor](https://capacitorjs.com/) 앱용 CI/CD 파이프라인은 빌드, 테스트, 배포를 자동화하여 릴리스 시간을 최대 70% 단축하고 오류를 60% 줄입니다. 이 가이드에서는 환경 설정부터 [Capgo](https://capgo.app/)를 통한 실시간 업데이트 자동화까지 알아야 할 모든 것을 다룹니다.
 

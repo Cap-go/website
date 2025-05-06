@@ -1,5 +1,5 @@
 ---
-slug: keamanan-pipeline-untuk-aplikasi-capacitor-kesimpulan-penting
+slug: seguridad-de-la-pipeline-para-apps-de-capacitor-conclusiones-importantes
 title: 'Keamanan Pipeline untuk Aplikasi Capacitor: Pengetahuan Penting'
 description: >-
   Pelajari strategi penting untuk mengamankan pipeline aplikasi Capacitor, mulai
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: seguridad-de-la-pipeline-para-apps-de-capacitor-conclusiones-importantes
 ---
 Keamanan pipeline untuk aplikasi [Capacitor](https://capacitorjs.com/) sangat penting untuk melindungi data sensitif dan memastikan pembaruan yang andal. Berikut yang perlu Anda ketahui:
 

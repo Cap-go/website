@@ -1,5 +1,5 @@
 ---
-slug: OTAアップデートにおけるCI/CDのセキュリティとコンプライアンスのヒント
+slug: ota-updates-in-cicd-security-and-compliance-tips
 title: CI/CDでのOTAアップデート：セキュリティとコンプライアンスのヒント
 description: >-
   OTAアップデートに関するCI/CDパイプラインにおいて、効率的で安全なアプリのデプロイを確保するための重要なセキュリティとコンプライアンス戦略について学びましょう。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: ota-updates-in-cicd-security-and-compliance-tips
 ---
 **OTA アップデート**を使用すると、アプリストアのレビューを待つことなく、ユーザーに直接アプリの更新をプッシュできます。**CI/CD パイプライン**と組み合わせることで、迅速で自動化された安全なデプロイメントが可能になります。しかし、スピードにはリスクが伴います - セキュリティ、コンプライアンス、プライバシーを優先する必要があります。
 

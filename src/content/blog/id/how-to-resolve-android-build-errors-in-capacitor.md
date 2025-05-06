@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-cara-memperbaiki-error-kompilasi-android-dalam-capacitor
+slug: comment-résoudre-les-erreurs-de-compilation-android-dans-capacitor
 title: Mengatasi Error Kompilasi Android di Capacitor
 description: >-
   Pelajari cara mengatasi kesalahan kompilasi Android di Capacitor dengan cepat,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-résoudre-les-erreurs-de-compilation-android-dans-capacitor
 ---
 **Mengalami masalah dengan error build Android di [Capacitor](https://capacitorjs.com/)?** Error ini sering muncul karena file yang tidak terkonfigurasi dengan benar, konflik dependensi, atau masalah [ProGuard](https://www.guardsquare.com/manual/home). Memperbaiki masalah dengan cepat sangat penting untuk menjaga aplikasi Anda tetap berjalan lancar. Berikut ringkasan masalah umum dan cara mengatasinya:
 

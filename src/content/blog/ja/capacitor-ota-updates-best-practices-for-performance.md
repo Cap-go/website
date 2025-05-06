@@ -1,5 +1,5 @@
 ---
-slug: OTAアップデートのためのCapacitorパフォーマンスに関するベストプラクティス
+slug: best-practice-di-performance-per-aggiornamenti-ota-su-capacitor
 title: CapacitorのOTAアップデート：パフォーマンスのベストプラクティス
 description: >-
   Capacitorアプリケーションにおけるパフォーマンスとユーザーエクスペリエンスを向上させるため、ファイルサイズ、コード読み込み、セキュリティに関するベストプラクティスでOTAアップデートを最適化します。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: best-practice-di-performance-per-aggiornamenti-ota-su-capacitor
 ---
 OTA (エアー経由)アップデートにより、[Capacitor](https://capacitorjs.com/)アプリはアプリストアの申請なしにJavaScript、CSS、HTMLなどのコンテンツを更新できます。この便利な機能も、アプリの起動パフォーマンスに影響を与える可能性があります。以下は、パフォーマンスとユーザーエクスペリエンスを向上させるためのOTAアップデートの最適化ガイドです：
 

@@ -1,5 +1,5 @@
 ---
-slug: cómo-se-cuenta-tu-uso
+slug: how-your-usage-is-counted
 title: Cómo se cuenta tu uso en Capgo
 description: >-
   Comprende cómo Capgo cuenta tu uso y utilízalo de la mejor manera. Aprende a
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: es
 next_blog: ''
-original_slug: how-your-usage-is-counted
 ---
 En Capgo, 3 valores son contados e importantes de entender
 - Usuario's

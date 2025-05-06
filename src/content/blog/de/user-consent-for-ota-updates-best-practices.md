@@ -1,5 +1,5 @@
 ---
-slug: nutzerzustimmung-für-ota-updates-best-practices
+slug: user-consent-for-ota-updates-best-practices
 title: 'Nutzereinwilligung für OTA-Updates: Best Practices'
 description: >-
   Erfahren Sie mehr über bewährte Methoden zur Einholung der Benutzerzustimmung
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: user-consent-for-ota-updates-best-practices
 ---
 Not getting user consent can lead to legal issues, damage user trust, and violate app store policies. This could result in app removal or penalties.
 

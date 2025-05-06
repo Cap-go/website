@@ -1,5 +1,5 @@
 ---
-slug: panduan-tentang-kebijakan-privasi-untuk-aplikasi-capacitor
+slug: guide-sur-la-politique-de-confidentialité-pour-les-apps-capacitor
 title: 'Kebijakan Privasi untuk Aplikasi Capacitor: Panduan'
 description: >-
   Pelajari cara membuat Kebijakan Privasi untuk aplikasi Anda guna memenuhi
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-sur-la-politique-de-confidentialité-pour-les-apps-capacitor
 ---
 **Ingin meluncurkan aplikasi [Capacitor](https://capacitorjs.com/) Anda di [App Store](https://en.wikipedia.org/wiki/App_Store_\(Apple\)) tanpa penundaan?** Mulailah dengan membuat Privacy Manifest. Apple kini mewajibkan pengembang untuk menyertakan dokumen ini untuk memastikan aplikasi memenuhi standar privasi yang ketat. Berikut yang perlu Anda ketahui:
 

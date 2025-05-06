@@ -1,5 +1,5 @@
 ---
-slug: 새로운-조직-시스템
+slug: a-brand-new-organization-system
 title: 새로운 조직 시스템
 description: capgo 팀이 조직 시스템을 추가한 배경 이야기
 author: WcaleNieWolny
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: ko
 next_blog: ''
-original_slug: a-brand-new-organization-system
 ---
 ## 소개
 

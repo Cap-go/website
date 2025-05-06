@@ -1,5 +1,5 @@
 ---
-slug: come-le-leggi-sui-dati-cinesi-influenzano-linvio-delle-app-negli-store
+slug: how-chinas-data-laws-impact-app-store-submissions
 title: Come le leggi sui dati della Cina influenzano le sottomissioni all'App Store
 description: >-
   Esplora come le rigorose leggi sui dati della Cina influenzano l'invio delle
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-chinas-data-laws-impact-app-store-submissions
 ---
 Le severe leggi sui dati della Cina rendono difficile per gli sviluppatori di app entrare nel mercato. Ecco cosa devi sapere:
 

@@ -1,5 +1,5 @@
 ---
-slug: capacitor-plugin에서 aar 파일을 사용하는 방법
+slug: how-to-use-aar-files-in-capacitor-plugins
 title: Capacitor 플러그인에서 AAR 파일 사용하는 방법
 description: >-
   AAR 파일을 Capacitor 플러그인에 통합하여 네이티브 Android 기능으로 웹 앱을 향상시키는 방법을 명확한 단계별 가이드를 통해
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-use-aar-files-in-capacitor-plugins
 ---
 [Capacitor](https://capacitorjs.com/) 앱에 안드로이드 기능을 통합하고 싶으신가요? 이 가이드는 크로스 플랫폼 웹 앱에 네이티브 안드로이드 기능을 결합하기 위해 [Capacitor 플러그인](https://capgo.app/plugins/)에서 AAR(Android Archive) 파일을 사용하는 방법을 설명합니다.
 

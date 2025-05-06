@@ -1,5 +1,5 @@
 ---
-slug: cordova-에서-capacitor로-마이그레이션하기
+slug: migrating-cordova-to-capacitor
 title: 'Cordova에서 Capacitor로 웹 앱 마이그레이션하기: 단계별 가이드'
 description: >-
   이 단계별 가이드는 웹 앱을 Cordova에서 Capacitor로 마이그레이션하는 데 도움이 되며, 모든 섹션을 다루고 읽고 따르기 쉽게
@@ -18,7 +18,6 @@ tag: Migration
 published: true
 locale: ko
 next_blog: ''
-original_slug: migrating-cordova-to-capacitor
 ---
 # Cordova에서 Capacitor로 웹 앱 마이그레이션하기: 단계별 가이드
 

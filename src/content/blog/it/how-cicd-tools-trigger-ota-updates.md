@@ -1,5 +1,5 @@
 ---
-slug: come-gli-strumenti-cicd-attivano-aggiornamenti-ota
+slug: how-cicd-tools-trigger-ota-updates
 title: Come gli strumenti CI/CD attivano gli aggiornamenti OTA
 description: >-
   Scopri come gli strumenti CI/CD migliorano gli aggiornamenti OTA, garantendo
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-cicd-tools-trigger-ota-updates
 ---
 Gli strumenti CI/CD rendono gli aggiornamenti over-the-air (OTA) più veloci, sicuri e affidabili automatizzando il processo. Ecco come:
 

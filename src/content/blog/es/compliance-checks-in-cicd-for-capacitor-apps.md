@@ -1,5 +1,5 @@
 ---
-slug: pruebas-de-cumplimiento-en-cicd-para-apps-capacitor
+slug: compliance-pruefungen-in-cicd-fuer-capacitor-apps
 title: Pruebas de Cumplimiento en CI/CD para Aplicaciones Capacitor
 description: >-
   Garantice el cumplimiento de los estándares de conformidad de sus aplicaciones
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: compliance-pruefungen-in-cicd-fuer-capacitor-apps
 ---
 **Las comprobaciones de cumplimiento en las tuberías CI/CD son tu solución.** Aseguran que tus aplicaciones de [Capacitor](https://capacitorjs.com/) cumplan con los requisitos de Apple y [Google Play](https://support.google.com/googleplay/android-developer/answer/113513?hl=en), manteniendo la seguridad ajustada y las actualizaciones rápidas.
 

@@ -1,5 +1,5 @@
 ---
-slug: das-datenschutzmanifest-von-apple-verstehen
+slug: understanding-apples-privacy-manifest
 title: Verstehen des Apple-Datenschutzmanifests
 description: >-
   Erfahren Sie mehr über Apples obligatorisches Datenschutz-Manifest, seine
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: de
 next_blog: ''
-original_slug: understanding-apples-privacy-manifest
 ---
 **Das Privacy Manifest von Apple ist jetzt für alle iOS-Apps verpflichtend.** Ab Mai 2024 muss jede App Store-Einreichung diese JSON-Datei enthalten, die Datenerfassung, API-Nutzung, Drittanbieter-SDKs und Netzwerkdomänen detailliert aufführt. Hier ist, was Sie wissen müssen:
 

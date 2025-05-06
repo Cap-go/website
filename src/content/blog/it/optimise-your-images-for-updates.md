@@ -1,5 +1,5 @@
 ---
-slug: ottimizza-le-tue-immagini-per-gli-aggiornamenti
+slug: optimise-your-images-for-updates
 title: Ottimizza le tue immagini per gli aggiornamenti
 description: >-
   Come ottimizzare le immagini per gli aggiornamenti live e aiutare l'utente a
@@ -18,7 +18,6 @@ tag: Optimisation
 published: true
 locale: it
 next_blog: ''
-original_slug: optimise-your-images-for-updates
 ---
 WebP è un formato di immagine moderno che può offrire un significativo risparmio nelle dimensioni dei file rispetto al JPEG, mantenendo una qualità visiva simile o migliore. Convertendo le immagini JPEG in WebP nella tua app mobile, puoi potenzialmente ridurre le dimensioni della tua app, portando a tempi di download più rapidi e prestazioni migliori per i tuoi utenti.
 

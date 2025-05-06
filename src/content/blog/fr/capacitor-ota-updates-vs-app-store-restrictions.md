@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-ota-capacitor-vs-batasan-app-store
+slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
 title: Pembaruan OTA Capacitor vs Pembatasan App Store
 description: >-
   Pelajari bagaimana pembaruan OTA memberikan penerapan aplikasi yang lebih
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
 ---
 **Vous voulez des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) plus rapides sans attendre ?** Les mises à jour en direct (OTA) permettent aux développeurs de contourner les délais des app stores et de déployer des modifications directement aux utilisateurs en quelques minutes. Voici pourquoi c'est important :
 

@@ -1,5 +1,5 @@
 ---
-slug: come-proteggere-gli-aggiornamenti-ota-con-la-gestione-delle-chiavi
+slug: how-to-secure-ota-updates-with-key-management
 title: Come rendere sicuri gli aggiornamenti OTA con la gestione delle chiavi
 description: >-
   Scopri come una gestione efficace delle chiavi e la crittografia possono
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-secure-ota-updates-with-key-management
 ---
 **Vuoi mantenere gli aggiornamenti Over-the-Air (OTA) sicuri ed evitare vulnerabilità?** Ecco come la gestione delle chiavi può proteggere gli aggiornamenti della tua app da manomissioni e minacce alla sicurezza.
 

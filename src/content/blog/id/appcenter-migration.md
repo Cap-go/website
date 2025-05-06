@@ -18,7 +18,6 @@ tag: Migration
 published: true
 locale: id
 next_blog: automatic-build-and-release-with-github-actions
-original_slug: appcenter-migration
 ---
 ## Ringkasan Migrasi
 

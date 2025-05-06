@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-capacitor-ota-mantenendo-la-conformita
+slug: capacitor-ota-updates-staying-compliant
 title: 'Aggiornamenti OTA di Capacitor: Mantenersi Conformi'
 description: >-
   Scopri come implementare gli aggiornamenti OTA per le app Capacitor garantendo
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-ota-updates-staying-compliant
 ---
 **Vuoi correggere rapidamente i bug o aggiungere funzionalità senza i ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) per le app [Capacitor](https://capacitorjs.com/) ti permettono di distribuire aggiornamenti direttamente agli utenti, evitando il lungo processo di revisione dell'app store. Ma rimanere conformi alle regole di Apple e Google Play è fondamentale per evitare il rifiuto o la rimozione dell'app.
 

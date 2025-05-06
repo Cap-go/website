@@ -1,5 +1,5 @@
 ---
-slug: ota-updates-im-beta-zustand-richtlinienkonform-bleiben
+slug: ota-updates-in-beta-staying-policy-compliant
 title: 'OTA Updates in der Beta: Richtlinienkonform bleiben'
 description: >-
   Erfahren Sie, wie Sie OTA-Updates im Beta-Testing effektiv verwalten und dabei
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: ota-updates-in-beta-staying-policy-compliant
 ---
 **OTA-Updates machen Beta-Tests schneller und einfacher - aber die Einhaltung der App Store-Regeln ist entscheidend.** Hier ist, was Sie wissen müssen:
 

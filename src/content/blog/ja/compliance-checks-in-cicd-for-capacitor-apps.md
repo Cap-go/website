@@ -1,5 +1,5 @@
 ---
-slug: cicdにおけるcapacitorアプリのコンプライアンスチェック
+slug: compliance-checks-in-cicd-for-capacitor-apps
 title: Capacitor アプリのCI/CDにおけるコンプライアンスチェック
 description: Capacitor アプリの CI/CD 自動チェックを通じてコンプライアンス基準を確実に満たし、セキュリティを強化し、アップデートを迅速化します。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: compliance-checks-in-cicd-for-capacitor-apps
 ---
 **CI/CDパイプラインのコンプライアンスチェックが解決策です。** [Capacitor](https://capacitorjs.com/)アプリがAppleと[Google Play](https://support.google.com/googleplay/android-developer/answer/113513?hl=en)の要件を満たし、セキュリティを確保し、更新を迅速に行えるようにします。
 

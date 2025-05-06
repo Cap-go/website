@@ -1,5 +1,5 @@
 ---
-slug: construyendo-una-aplicacion-movil-nativa-con-nuxt-3-y-capacitor
+slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
 title: Creando aplicaciones móviles con Nuxt 3 y Capacitor
 description: >-
   Cómo crear una aplicación móvil con Nuxt 3, Capacitor e implementar UI nativa
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
 ---
 En este tutorial, comenzaremos con una nueva aplicación de [Nuxt 3](https://nuxtjs.org/) y nos moveremos al terreno nativo usando Capacitor y eventualmente también añadiremos [Konsta UI](https://konstaui.com/) para una mejor interfaz móvil con Tailwind CSS, aunque el último paso es completamente opcional.
 

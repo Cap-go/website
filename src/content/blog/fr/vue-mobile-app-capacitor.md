@@ -1,5 +1,5 @@
 ---
-slug: application-mobile-vue-capacitor
+slug: vue-mobile-app-capacitor
 title: Créer des applications mobiles avec Vue et Capacitor
 description: >-
   Découvrez comment créer une application mobile avec Vue, Capacitor et
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: vue-mobile-app-capacitor
 ---
 Dans ce tutoriel, nous vous guiderons à travers le processus de conversion d'une application web Vue en une application mobile native à l'aide de Capacitor. En option, vous pouvez également améliorer votre interface mobile avec Konsta UI, une bibliothèque d'interface mobile basée sur Tailwind CSS.
 

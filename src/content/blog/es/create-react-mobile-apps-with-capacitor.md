@@ -1,5 +1,5 @@
 ---
-slug: crear-aplicaciones-móviles-react-con-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: Creando Aplicaciones Móviles con React y Capacitor
 description: >-
   Aprende cómo construir una aplicación móvil usando React, Capacitor y mejora
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: create-react-mobile-apps-with-capacitor
 ---
 En este tutorial, comenzaremos con una nueva aplicación de [React](https://reactjs.org/) y haremos la transición al desarrollo móvil nativo usando Capacitor. Opcionalmente, también puedes agregar [Konsta UI](https://konstaui.com/) para mejorar la interfaz móvil con Tailwind CSS.
 

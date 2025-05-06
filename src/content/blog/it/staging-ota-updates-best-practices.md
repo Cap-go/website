@@ -1,5 +1,5 @@
 ---
-slug: prassi-consigliate-per-gli-aggiornamenti-ota-di-staging
+slug: staging-ota-updates-best-practices
 title: 'Staging degli aggiornamenti OTA: Best Practices'
 description: >-
   Scopri le migliori pratiche per la distribuzione degli aggiornamenti OTA,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: staging-ota-updates-best-practices
 ---
 Ecco la traduzione in italiano:
 

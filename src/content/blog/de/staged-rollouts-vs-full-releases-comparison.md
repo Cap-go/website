@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: staged-rollouts-vs-full-releases-comparison
 ---
 Die Wahl zwischen **Staged Rollouts** und **vollständigen Releases** hängt von den Anforderungen Ihrer App, der Nutzerbasis und der Dringlichkeit der Aktualisierung ab. Hier ist eine kurze Übersicht:
 

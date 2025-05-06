@@ -1,5 +1,5 @@
 ---
-slug: checkliste-zur-validierung-von-capacitor-app-aktualisierungen
+slug: checklist-for-validating-capacitor-app-updates
 title: Checkliste zur Validierung von Capacitor App-Updates
 description: >-
   Stellen Sie reibungslose App-Updates mit dieser praktischen Checkliste zur
@@ -18,7 +18,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: checklist-for-validating-capacitor-app-updates
 ---
 **Möchten Sie [reibungslose App-Updates](https://capgo.app/plugins/capacitor-updater/) bereitstellen, ohne das Vertrauen der Nutzer zu gefährden?** Hier ist eine schnelle, umsetzbare Checkliste zur Validierung von [Capacitor](https://capacitorjs.com/) App-Updates, besonders bei Over-the-Air (OTA) Updates:
 

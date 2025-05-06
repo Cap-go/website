@@ -1,5 +1,5 @@
 ---
-slug: häufige-engpässe-bei-der-cicd-pipeline-für-ota-aktualisierungen
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: Häufige CI/CD-Engpässe in OTA-Pipelines
 description: >-
   Erfahren Sie, wie Sie häufige Herausforderungen in OTA CI/CD-Pipelines
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: common-cicd-bottlenecks-in-ota-pipelines
 ---
 **CI/CD-Pipelines sind für die schnelle und effiziente Bereitstellung von Over-the-Air (OTA) Updates unverzichtbar.** Aber sie stehen oft vor Herausforderungen, die Deployments verlangsamen. Hier ist, was Sie wissen müssen:
 

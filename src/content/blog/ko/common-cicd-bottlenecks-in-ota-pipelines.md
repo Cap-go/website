@@ -1,5 +1,5 @@
 ---
-slug: OTA 파이프라인에서의 일반적인 CI/CD 병목 현상
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: OTA 파이프라인의 일반적인 CI/CD 병목 현상
 description: 'OTA CI/CD 파이프라인에서 일반적인 과제를 극복하여 업데이트 효율성, 보안 및 사용자 만족도를 향상시키는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: common-cicd-bottlenecks-in-ota-pipelines
 ---
 **무선 업데이트(OTA)를 빠르고 효율적으로 제공하기 위해서는 CI/CD 파이프라인이 필수적입니다.** 하지만 종종 배포를 지연시키는 문제에 직면합니다. 다음은 알아야 할 사항입니다:
 

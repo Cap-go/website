@@ -1,5 +1,5 @@
 ---
-slug: モバイルアプリのアップデート戦略：開発者のチェックリスト
+slug: mobile-app-update-strategies-a-developers-checklist
 title: モバイルアプリの更新戦略：開発者のチェックリスト
 description: モバイルアプリケーションの更新における重要な戦略を学び、CI/CD自動化からOTAツールまで、スムーズなデプロイメントとユーザー満足度の向上を確実にします。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: mobile-app-update-strategies-a-developers-checklist
 ---
 アプリを最新の状態に保つことは、ユーザー満足度とアプリのパフォーマンスにとって不可欠です。その理由は以下の通りです：
 

@@ -1,5 +1,5 @@
 ---
-slug: generasi-ios-otomatis-capacitor-dengan-github-action-dan-match
+slug: génération-ios-automatique-capacitor-avec-github-action-et-match
 title: Kompilasi iOS Capacitor Otomatis dengan GitHub Actions menggunakan match
 description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi iOS Ionic Menggunakan fastlane
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: id
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: génération-ios-automatique-capacitor-avec-github-action-et-match
 ---
 # Build iOS Otomatis dengan GitHub Actions menggunakan Match
 
@@ -36,7 +35,7 @@ Sebelum memulai, Anda perlu menyiapkan:
 
 ## Setup CI/CD Profesional oleh Capgo
 
-Lewati kompleksitas. [Capgo](https://capgo.app/ci-cd/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
+Lewati kompleksitas. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
 
 - **Platform Independen**: Bekerja dengan GitHub Actions, GitLab CI, atau lainnya
 - **Integrasi Mulus**: Tidak perlu beralih platform, bekerja dengan proses Anda saat ini

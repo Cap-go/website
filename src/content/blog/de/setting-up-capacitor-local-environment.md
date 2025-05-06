@@ -1,5 +1,5 @@
 ---
-slug: einrichten-der-lokalen-capacitor-umgebung
+slug: setting-up-capacitor-local-environment
 title: Einrichten der Capacitor-Lokalen Umgebung
 description: >-
   Lernen Sie mit dieser umfassenden Anleitung, wie Sie schnell eine lokale
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: setting-up-capacitor-local-environment
 ---
 **Möchten Sie iOS- und Android-Apps mit Webtechnologien erstellen? Hier erfahren Sie, wie Sie eine lokale [Capacitor](https://capacitorjs.com/) Umgebung schnell und effizient einrichten.**
 

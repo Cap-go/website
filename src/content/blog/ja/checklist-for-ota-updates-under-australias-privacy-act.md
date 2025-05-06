@@ -1,5 +1,6 @@
 ---
-slug: OTAアップデートのプライバシーに関するオーストラリアのプライバシー法に基づくチェックリスト
+slug: >-
+  checklist-per-gli-aggiornamenti-ota-ai-sensi-della-legge-sulla-privacy-australiana
 title: OTAアップデートにおけるオーストラリアのプライバシー法に基づくチェックリスト
 description: オーストラリアのプライバシー法に準拠するために、堅牢なデータセキュリティとユーザープライバシー対策を実装してOTAアップデートを確実に行ってください。
 author: Martin Donadieu
@@ -17,8 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: >-
-  checklist-per-gli-aggiornamenti-ota-ai-sensi-della-legge-sulla-privacy-australiana
 ---
 **OTA（Over-The-Air）アップデートを提供する場合、オーストラリアの[Privacy Act](https://en.wikipedia.org/wiki/Privacy_Act_1988)の要件を満たし、ユーザーデータを保護し、罰則を避ける必要があります。**
 

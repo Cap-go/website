@@ -1,5 +1,5 @@
 ---
-slug: compras-in-app-capacitor
+slug: in-app-purchases-capacitor
 title: compras dentro de la aplicación para Capacitor
 description: >-
   Cómo implementar compras dentro de la aplicación para aplicaciones Capacitor
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: ''
-original_slug: in-app-purchases-capacitor
 ---
 >> Este plugin ha sido transferido al repositorio oficial de RevenueCat. Por favor, consulta la [documentación oficial](https://www.revenuecat.com/docs/getting-started/installation/capacitor) para más información.
 

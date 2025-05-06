@@ -1,5 +1,5 @@
 ---
-slug: guida-definitiva-alla-sicurezza-degli-aggiornamenti-ota-per-le-app-capacitor
+slug: ultimate-guide-to-ota-update-security-for-capacitor-apps
 title: Guida definitiva alla sicurezza degli aggiornamenti OTA per le app Capacitor
 description: >-
   Scopri le strategie essenziali per proteggere gli aggiornamenti OTA per le app
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: ultimate-guide-to-ota-update-security-for-capacitor-apps
 ---
 Gli aggiornamenti over-the-air (OTA) sono un modo rapido per migliorare le app [Capacitor](https://capacitorjs.com/) senza ritardi dell'app store. Ma comportano rischi come manomissione del codice, attacchi di downgrade e violazioni dei dati. Ecco come proteggere i tuoi aggiornamenti:
 

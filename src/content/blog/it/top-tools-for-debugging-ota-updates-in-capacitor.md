@@ -1,5 +1,5 @@
 ---
-slug: strumenti-migliori-per-il-debugging-degli-aggiornamenti-ota-in-capacitor
+slug: top-tools-for-debugging-ota-updates-in-capacitor
 title: Migliori strumenti per il debug degli aggiornamenti OTA in Capacitor
 description: >-
   Esplora gli strumenti e le strategie essenziali per il debug efficace degli
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: top-tools-for-debugging-ota-updates-in-capacitor
 ---
 Il debug degli aggiornamenti Over-the-Air (OTA) nelle app [Capacitor](https://capacitorjs.com/) può essere complesso, ma gli strumenti giusti fanno una grande differenza. Che tu stia gestendo conflitti di versione, garantendo [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), o facendo debug su diverse piattaforme, ecco tre strumenti da considerare:
 

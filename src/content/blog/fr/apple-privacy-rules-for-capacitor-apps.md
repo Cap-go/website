@@ -1,5 +1,5 @@
 ---
-slug: règles-de-confidentialité-d'apple-pour-les-applications-capacitor
+slug: apple-privacy-rules-for-capacitor-apps
 title: Règles de confidentialité Apple pour les applications Capacitor
 description: >-
   Découvrez comment respecter les règles de confidentialité d'Apple pour le
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: apple-privacy-rules-for-capacitor-apps
 ---
 **Les règles de confidentialité d'Apple exigent désormais que les développeurs d'applications [Capacitor](https://capacitorjs.com/) se concentrent sur la transparence des données utilisateur et la conformité pour garantir l'approbation de l'App Store et maintenir la confiance des utilisateurs.**
 

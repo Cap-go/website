@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: staged-rollouts-vs-full-releases-comparison
 ---
 La scelta tra **distribuzioni graduali** e **rilasci completi** dipende dalle esigenze della tua app, dalla base utenti e dall'urgenza dell'aggiornamento. Ecco una rapida panoramica:
 

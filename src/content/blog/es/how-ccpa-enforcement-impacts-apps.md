@@ -1,5 +1,5 @@
 ---
-slug: como-afecta-el-cumplimiento-de-la-ccpa-a-las-aplicaciones
+slug: wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt
 title: Cómo la aplicación de la CCPA afecta a las aplicaciones
 description: >-
   El CCPA está cambiando la forma en que las aplicaciones móviles gestionan los
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt
 ---
 **La Ley de Privacidad del Consumidor de California (CCPA)** está transformando cómo las aplicaciones móviles manejan los datos de los usuarios. Esto es lo que necesitas saber:
 

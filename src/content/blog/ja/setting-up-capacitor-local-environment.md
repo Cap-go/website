@@ -1,5 +1,5 @@
 ---
-slug: ローカル環境構築-capacitor
+slug: configurazione-ambiente-locale-capacitor
 title: Capacitorローカル環境の設定
 description: >-
   iOS や Android のアプリを Web テクノロジーを使用して作成するための Capacitor
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: configurazione-ambiente-locale-capacitor
 ---
 **ウェブ技術を使用してiOSとAndroidアプリを構築したいですか？以下は[Capacitor](https://capacitorjs.com/)の環境を素早く効率的にセットアップする方法です。**
 

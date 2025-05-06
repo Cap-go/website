@@ -1,5 +1,5 @@
 ---
-slug: Meilleures pratiques pour le versionnage des mises à jour OTA de Capacitor
+slug: Mejores prácticas para el versionado de actualizaciones OTA de Capacitor
 title: 'Mises à jour OTA de Capacitor : Bonnes pratiques pour la gestion des versions'
 description: >-
   Découvrez les meilleures pratiques pour gérer les mises à jour OTA de
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: Mejores prácticas para el versionado de actualizaciones OTA de Capacitor
 ---
 Voici la traduction en français :
 

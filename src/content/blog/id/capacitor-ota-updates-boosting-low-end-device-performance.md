@@ -1,5 +1,6 @@
 ---
-slug: pembaruan-ota-capacitor-peningkatan-kinerja-pada-perangkat-kelas-bawah
+slug: >-
+  mises-a-jour-ota-capacitor-amelioration-des-performances-sur-les-appareils-bas-de-gamme
 title: 'Pembaruan OTA Capacitor: Peningkatan Kinerja pada Perangkat Kelas Bawah'
 description: >-
   Pelajari bagaimana pembaruan OTA meningkatkan kinerja aplikasi pada perangkat
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  mises-a-jour-ota-capacitor-amelioration-des-performances-sur-les-appareils-bas-de-gamme
 ---
 **Ingin aplikasi Anda berjalan lebih baik di perangkat low-end? Pembaruan OTA adalah jawabannya.** [Capacitor](https://capacitorjs.com/) memungkinkan pembaruan over-the-air (OTA) yang hanya mengirimkan perubahan yang diperlukan ke aplikasi Anda - tanpa perlu mengunduh keseluruhan. Ini menghemat waktu, mengurangi penggunaan data, dan meningkatkan kinerja, terutama bagi pengguna dengan perangkat keras terbatas atau jaringan lambat.
 

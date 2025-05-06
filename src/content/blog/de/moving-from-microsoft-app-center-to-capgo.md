@@ -1,5 +1,5 @@
 ---
-slug: von-microsoft-app-center-zu-capgo
+slug: moving-from-microsoft-app-center-to-capgo
 title: Von Microsoft App Center zu Capgo für Live App Updates wechseln
 description: >-
   Microsoft stellt die Unterstützung für Apps unter Cordova ein. Wechseln Sie
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: de
 next_blog: ''
-original_slug: moving-from-microsoft-app-center-to-capgo
 ---
 Microsoft hat kürzlich angekündigt, dass sie die [Unterstützung für Apps, die auf Apache Cordova laufen](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/), in ihrem Cloud-Produkt App Center einstellen werden. Dies hat Unternehmen und Teams, die App Center nutzen, dazu veranlasst, nach Alternativen zu suchen, und ich freue mich sagen zu können, dass die [Capgo](https://capgo.app/) Plattform eine fantastische Option für diejenigen ist, die vollständige Unterstützung für Capacitor-Apps suchen.
 

@@ -1,5 +1,5 @@
 ---
-slug: come-profilare-app-multi-piattaforma-con-capacitor
+slug: how-to-profile-cross-platform-apps-with-capacitor
 title: Come profilare app multipiattaforma con Capacitor
 description: >-
   Scopri come profilare e ottimizzare le app multipiattaforma create con
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-profile-cross-platform-apps-with-capacitor
 ---
 Profilare le app multipiattaforma costruite con [Capacitor](https://capacitorjs.com/) ti aiuta a identificare problemi di prestazioni su iOS, Android e piattaforme web. Ecco una guida rapida per iniziare:
 

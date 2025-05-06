@@ -1,5 +1,5 @@
 ---
-slug: daftar-periksa-untuk-validasi-pembaruan-aplikasi-capacitor
+slug: liste-de-verification-pour-valider-les-mises-a-jour-des-applications-capacitor
 title: Checklist untuk validasi update aplikasi Capacitor
 description: >-
   Pastikan pembaruan aplikasi yang mulus dengan daftar periksa praktis ini untuk
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: liste-de-verification-pour-valider-les-mises-a-jour-des-applications-capacitor
 ---
 **Ingin memberikan [pembaruan aplikasi yang mulus](https://capgo.app/plugins/capacitor-updater/) tanpa mengurangi kepercayaan pengguna?** Berikut daftar periksa yang cepat dan dapat ditindaklanjuti untuk memvalidasi pembaruan aplikasi [Capacitor](https://capacitorjs.com/), terutama saat menggunakan pembaruan over-the-air (OTA):
 

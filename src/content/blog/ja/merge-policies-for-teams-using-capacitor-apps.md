@@ -1,5 +1,5 @@
 ---
-slug: チームを結合するための Capacitor アプリ基準
+slug: criteri-di-unione-per-team-utilizzando-app-capacitor
 title: Capacitor アプリを使用するチームのためのユニオンポリシー
 description: Capacitorアプリのマージポリシーを効果的に確立し、コード品質、シンプルな更新、コンフリクト管理を確保する方法をご紹介します。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: criteri-di-unione-per-team-utilizzando-app-capacitor
 ---
 To ensure reliable live updates for your Capacitor app:
 

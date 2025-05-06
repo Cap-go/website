@@ -1,5 +1,5 @@
 ---
-slug: compliance-pruefungen-in-cicd-fuer-capacitor-apps
+slug: compliance-checks-in-cicd-for-capacitor-apps
 title: Compliance-Prüfungen in CI/CD für Capacitor-Apps
 description: >-
   Stellen Sie die Einhaltung von Compliance-Standards Ihrer Capacitor-Apps durch
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: compliance-checks-in-cicd-for-capacitor-apps
 ---
 **Compliance-Checks in CI/CD-Pipelines sind Ihre Lösung.** Sie stellen sicher, dass Ihre [Capacitor](https://capacitorjs.com/) Apps die Anforderungen von Apple und [Google Play](https://support.google.com/googleplay/android-developer/answer/113513?hl=en) erfüllen, dabei die Sicherheit aufrechterhalten und Updates schnell bleiben.
 

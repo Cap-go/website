@@ -1,5 +1,5 @@
 ---
-slug: apakah-capgo-bekerja-dengan-cordova
+slug: capgo-fonctionne-t-il-avec-cordova
 title: >-
   Mengapa Capgo tidak mendukung Cordova: Perbarui aplikasi Anda untuk mengakses
   pembaruan langsung
@@ -18,7 +18,6 @@ tag: Migration
 published: true
 locale: id
 next_blog: ''
-original_slug: capgo-fonctionne-t-il-avec-cordova
 ---
 Jika Anda mencari platform pengembangan aplikasi yang kuat dan modern, maka Capacitor adalah solusi yang sempurna. Tidak seperti Cordova yang merupakan platform usang dan ketinggalan zaman, Capacitor memanfaatkan perkembangan terbaru dalam platform dan bahasa pemrograman native untuk memberikan pengalaman pengguna terbaik.
 

@@ -1,5 +1,5 @@
 ---
-slug: développement-applications-multiplateformes-avec-capacitorjs
+slug: developing-cross-platform-apps-with-capacitorjs
 title: >-
   Développer des applications multiplateformes avec CapacitorJS : Un guide étape
   par étape
@@ -20,7 +20,6 @@ tag: Tuto
 published: true
 locale: fr
 next_blog: ''
-original_slug: developing-cross-platform-apps-with-capacitorjs
 ---
 Dans le monde en constante évolution du développement d'applications mobiles, l'essor des Applications Web Progressives (PWA) a ouvert la voie à de nouveaux environnements d'exécution multiplateformes. Ces environnements permettent aux applications web d'être présentes dans les stores d'applications sans dépendre uniquement du code natif. [**CapacitorJS**](https://capacitorjs.com/) est l'une de ces technologies qui permet aux développeurs de déployer un simple site web comme une application sur Android, iOS et le web en utilisant une base de code JavaScript unique. Cette approche réduit considérablement les coûts de développement et augmente l'efficacité du codage.
 

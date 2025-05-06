@@ -1,5 +1,5 @@
 ---
-slug: PIPEDA를 준수하는 캐나다의 모바일 앱
+slug: pipeda-compliance-for-mobile-apps-in-canada
 title: 캐나다의 모바일 앱을 위한 PIPEDA 준수
 description: 당신의 모바일 앱이 PIPEDA에 따른 캐나다 개인정보 보호법을 준수하여 사용자 데이터를 보호하고 신뢰도를 높이는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: pipeda-compliance-for-mobile-apps-in-canada
 ---
 **캐나다 개인정보보호법에 따라 모바일 앱을 준수하고 싶으신가요? [PIPEDA](https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/)에 대해 알아야 할 사항은 다음과 같습니다:**
 

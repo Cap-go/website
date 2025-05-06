@@ -1,5 +1,5 @@
 ---
-slug: cara-menggunakan-file-aar-di-plugin-capacitor
+slug: comment-utiliser-les-fichiers-aar-dans-les-plugins-capacitor
 title: Cara Menggunakan File AAR dalam Plugin Capacitor
 description: >-
   Pelajari cara mengintegrasikan file AAR ke dalam plugin Capacitor untuk
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-utiliser-les-fichiers-aar-dans-les-plugins-capacitor
 ---
 **Ingin mengintegrasikan fitur Android ke dalam aplikasi [Capacitor](https://capacitorjs.com/) Anda?** Panduan ini menjelaskan cara menggunakan file AAR (Android Archive) dalam [plugin Capacitor](https://capgo.app/plugins/) untuk menggabungkan fungsionalitas native Android dengan aplikasi web lintas platform.
 

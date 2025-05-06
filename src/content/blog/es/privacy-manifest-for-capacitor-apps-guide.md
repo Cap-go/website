@@ -1,5 +1,5 @@
 ---
-slug: manifiesto-de-privacidad-para-apps-de-capacitor-guia
+slug: datenschutz-manifest-für-capacitor-apps-leitfaden
 title: 'Manifiesto de privacidad para aplicaciones Capacitor: Guía'
 description: >-
   Aprende cómo crear un Manifiesto de Privacidad para tu aplicación para cumplir
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: datenschutz-manifest-für-capacitor-apps-leitfaden
 ---
 **¿Quieres lanzar tu app de [Capacitor](https://capacitorjs.com/) en la [App Store](https://en.wikipedia.org/wiki/App_Store_\(Apple\)) sin retrasos?** Comienza creando un Manifiesto de Privacidad. Apple ahora requiere que los desarrolladores incluyan este documento para asegurar que las apps cumplan con estrictos estándares de privacidad. Esto es lo que necesitas saber:
 

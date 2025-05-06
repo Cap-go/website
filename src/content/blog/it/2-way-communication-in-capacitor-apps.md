@@ -1,5 +1,5 @@
 ---
-slug: 双方向通信とCapacitorアプリ
+slug: 2-way-communication-in-capacitor-apps
 title: Capacitorアプリにおける双方向通信
 description: Capacitorアプリでの双方向通信が、リアルタイムなデータ交換をどのように強化し、パフォーマンスとユーザーエクスペリエンスを向上させるかを探ります。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 La comunicazione bidirezionale nelle app [Capacitor](https://capacitorjs.com/) collega i layer web e nativi, consentendo lo scambio di dati in tempo reale. Questo permette alle tecnologie web di accedere alle funzionalità native del dispositivo come la fotocamera o il GPS mentre i layer nativi interagiscono con gli elementi web. Ecco perché è importante:
 

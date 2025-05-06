@@ -1,5 +1,5 @@
 ---
-slug: 앱-개인정보-관련-미국법-점검목록
+slug: us-privacy-laws-mobile-app-checklist
 title: '미국 개인정보보호법: 모바일 앱 체크리스트'
 description: 데이터 보호와 사용자 권리에 대한 종합적인 체크리스트를 따라 미국 개인정보 보호법을 준수하는 모바일 앱을 만드세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: us-privacy-laws-mobile-app-checklist
 ---
 **모바일 앱의 개인정보 보호 준수는 매우 중요합니다.** [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act), [VCDPA](https://pro.bloomberglaw.com/insights/privacy/virginia-consumer-data-protection-act-vcdpa/), CPA와 같은 미국의 개인정보 보호법은 앱이 사용자 데이터를 보호하고, 투명성을 보장하며, 사용자 권리를 존중할 것을 요구합니다. 미준수 시 위반 건당 최대 $7,500의 벌금과 사용자 신뢰 상실을 초래할 수 있습니다. 다음은 준수 방법입니다:
 

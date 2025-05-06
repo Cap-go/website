@@ -1,5 +1,5 @@
 ---
-slug: guida-completa-al-debugging-delle-app-capacitor
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Guida definitiva al debug delle app Capacitor
 description: >-
   Impara strategie efficaci e strumenti essenziali per il debug delle app
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: ultimate-guide-to-debugging-capacitor-apps
 ---
 Ecco la traduzione in italiano:
 

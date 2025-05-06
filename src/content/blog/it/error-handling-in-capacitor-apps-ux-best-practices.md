@@ -1,5 +1,5 @@
 ---
-slug: gestione-degli-errori-nelle-app-capacitor-best-practice-ux
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: 'Gestione degli errori nelle app Capacitor: Best practice UX'
 description: >-
   La gestione efficace degli errori nelle app migliora l'esperienza utente
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: error-handling-in-capacitor-apps-ux-best-practices
 ---
 La gestione degli errori può fare la differenza nell'esperienza utente della tua app. Una gestione scadente degli errori può portare a utenti frustrati e recensioni negative, mentre una gestione efficace degli errori costruisce fiducia e mantiene gli utenti soddisfatti. Ecco cosa devi sapere:
 

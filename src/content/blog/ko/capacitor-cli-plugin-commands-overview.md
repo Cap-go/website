@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-cli-plugin-commands-overview
 ---
 [Capacitor](https://capacitorjs.com/) CLI는 플러그인 관리를 단순화하여 네이티브 기기 기능을 원활하게 통합할 수 있게 합니다. [Capgo](https://capgo.app/)와 같은 도구와 함께 사용하면 업데이트, 배포, 문제 해결이 간소화됩니다. 다음은 알아야 할 사항입니다:
 

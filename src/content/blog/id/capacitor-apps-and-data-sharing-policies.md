@@ -1,5 +1,5 @@
 ---
-slug: aplikasi-capacitor-dan-kebijakan-berbagi-data
+slug: les-applications-capacitor-et-les-politiques-de-partage-de-données
 title: Aplikasi Capacitor dan Kebijakan Berbagi Data
 description: >-
   Pelajari kebijakan penting tentang berbagi data untuk aplikasi Capacitor untuk
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: les-applications-capacitor-et-les-politiques-de-partage-de-données
 ---
 **Ingin aplikasi Anda mematuhi aturan data ketat Apple dan [Google Play](https://play.google/developer-content-policy/)? Berikut yang perlu Anda ketahui:**
 

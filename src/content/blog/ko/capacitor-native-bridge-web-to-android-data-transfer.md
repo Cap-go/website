@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 네이티브 브릿지 웹-안드로이드 데이터 전송
+slug: capacitor-native-bridge-web-to-android-data-transfer
 title: 'Capacitor 네이티브 브릿지: 웹에서 안드로이드로의 데이터 전송'
 description: >-
   웹 앱과 Android 간의 데이터를 Capacitor의 네이티브 브릿지를 사용하여 효율적으로 전송하는 방법을 배우고, 일반적인 문제와 성능
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-native-bridge-web-to-android-data-transfer
 ---
 [Capacitor](https://capacitorjs.com/)에서 웹 앱과 Android 간의 데이터 전송은 어려울 수 있지만, JSON 직렬화와 네이티브 브릿지 작업을 이해하면 프로세스가 단순화됩니다. 알아야 할 사항은 다음과 같습니다:
 

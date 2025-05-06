@@ -1,5 +1,5 @@
 ---
-slug: differenze-chiave-tra-sviluppo-e-produzione-nelle-app-capacitor
+slug: development-vs-production-key-differences-in-capacitor-apps
 title: 'Sviluppo vs. Produzione: Differenze Chiave nelle App Capacitor'
 description: >-
   Comprendi le differenze critiche tra gli ambienti di sviluppo e produzione
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: development-vs-production-key-differences-in-capacitor-apps
 ---
 **Costruire app con [Capacitor](https://capacitorjs.com/)? Ecco cosa devi sapere:** Gli ambienti di sviluppo e produzione servono a scopi diversi e richiedono configurazioni uniche. Lo sviluppo dà priorità alla velocità e al debugging, mentre la produzione si concentra su prestazioni, sicurezza ed esperienza utente.
 

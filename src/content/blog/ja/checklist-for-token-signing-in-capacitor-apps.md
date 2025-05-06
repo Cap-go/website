@@ -1,5 +1,5 @@
 ---
-slug: チェックリスト：Capacitorアプリでのトークン署名
+slug: checklist-for-token-signing-in-capacitor-apps
 title: Capacitor アプリでのトークン署名のチェックリスト
 description: Capacitorアプリでのセキュアなトークン署名について、データの整合性と米国基準への準拠を確保するための包括的なチェックリストに従ってください。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: checklist-for-token-signing-in-capacitor-apps
 ---
 トークン署名は、[Capacitor](https://capacitorjs.com/)アプリのセキュリティ、データの整合性、認証、および米国のセキュリティ基準への準拠を確保するために不可欠です。このガイドでは、セットアップ、実装、リスク管理のための明確なチェックリストを提供します。
 

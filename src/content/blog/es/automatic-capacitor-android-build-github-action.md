@@ -1,5 +1,5 @@
 ---
-slug: compilacion-automatica-de-capacitor-android-usando-github-action
+slug: automatic-capacitor-android-build-github-action
 title: Compilación automática de Android en Capacitor con acciones de GitHub
 description: >-
   Cómo configurar un pipeline CI/CD para tu aplicación Capacitor Android usando
@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: es
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: automatic-capacitor-android-build-github-action
 ---
 # Compilaciones automáticas de Android con GitHub Actions
 
@@ -39,7 +38,7 @@ Antes de comenzar, necesitarás configurar:
 
 ## Configuración profesional de CI/CD por Capgo
 
-Salta la complejidad. [Capgo](https://capgo.app/ci-cd/) configura tu pipeline de CI/CD directamente en tu plataforma preferida:
+Salta la complejidad. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura tu pipeline de CI/CD directamente en tu plataforma preferida:
 
 - **Independencia de plataforma**: Funciona con GitHub Actions, GitLab CI u otros
 - **Integración perfecta**: No necesitas cambiar de plataforma, funciona con tu proceso actual

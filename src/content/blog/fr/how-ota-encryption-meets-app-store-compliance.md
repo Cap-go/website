@@ -1,5 +1,5 @@
 ---
-slug: comment-le-chiffrement-ota-est-conforme-aux-normes-app-store
+slug: cómo-el-cifrado-ota-cumple-con-las-normas-de-la-app-store
 title: Comment le chiffrement OTA respecte les règles de l'App Store
 description: >-
   Découvrez comment le chiffrement OTA sécurise les mises à jour des
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: cómo-el-cifrado-ota-cumple-con-las-normas-de-la-app-store
 ---
 Le chiffrement Over-the-Air (OTA) garantit des mises à jour d'applications sécurisées tout en respectant les règles strictes des app stores d'Apple et Google. Voici comment cela fonctionne et pourquoi c'est essentiel :
 

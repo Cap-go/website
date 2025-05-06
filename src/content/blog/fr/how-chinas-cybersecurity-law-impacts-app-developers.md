@@ -1,6 +1,6 @@
 ---
 slug: >-
-  comment-la-loi-chinoise-sur-la-cybersecurite-affecte-les-developpeurs-dapplications
+  como-afecta-la-ley-de-ciberseguridad-china-a-los-desarrolladores-de-aplicaciones
 title: >-
   Comment la loi chinoise sur la cybersécurité affecte les développeurs
   d'applications
@@ -23,8 +23,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  como-afecta-la-ley-de-ciberseguridad-china-a-los-desarrolladores-de-aplicaciones
 ---
 **[La loi sur la cybersécurité de la Chine](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL) oblige les développeurs d'applications à suivre des règles strictes pour le traitement des données des utilisateurs, en particulier lorsqu'il s'agit d'utilisateurs chinois.** Voici ce que vous devez savoir :
 

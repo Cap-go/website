@@ -1,5 +1,5 @@
 ---
-slug: flutter-앱을-위한-실시간-업데이트
+slug: live-updates-for-flutter-app
 title: Flutter 실시간 업데이트
 description: App Store 검토 없이 Flutter 앱에 실시간 업데이트를 보내는 것이 가능한가요?
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: live-updates-for-flutter-app
 ---
 Capgo Live Update는 개발자가 기존의 앱스토어 제출 과정 없이 모바일 앱을 업데이트할 수 있게 해주는 서비스입니다. 이는 앱스토어 심사 과정을 기다리지 않고도 버그를 빠르게 수정하거나 작은 업데이트를 할 수 있는 편리한 방법입니다. 하지만 Capgo Live Update는 Flutter 앱이 네이티브 코드로 컴파일되기 때문에 Flutter 앱의 업데이트를 지원하지 않습니다.
 

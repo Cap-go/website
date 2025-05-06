@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificacion-leyes-privacidad-eeuu-apps-moviles
+slug: us-privacy-laws-mobile-app-checklist
 title: 'Leyes de Privacidad de EE.UU.: Lista de Verificación para Aplicaciones Móviles'
 description: >-
   Asegúrese de cumplir con las leyes de privacidad de EE. UU. en su aplicación
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: us-privacy-laws-mobile-app-checklist
 ---
 **El cumplimiento de la privacidad es crítico para las aplicaciones móviles.** Las leyes de privacidad de EE.UU. como [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act), [VCDPA](https://pro.bloomberglaw.com/insights/privacy/virginia-consumer-data-protection-act-vcdpa/), y CPA requieren que las aplicaciones protejan los datos de los usuarios, garanticen la transparencia y respeten los derechos de los usuarios. El incumplimiento puede llevar a multas de hasta $7,500 por infracción y pérdida de confianza del usuario. Aquí te explicamos cómo mantener el cumplimiento:
 

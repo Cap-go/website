@@ -1,5 +1,5 @@
 ---
-slug: datenschutzgesetze-der-bundesstaaten-fuer-mobile-apps-vergleich
+slug: state-privacy-laws-for-mobile-apps-comparison
 title: 'Datenschutzgesetze der Bundesstaaten für Mobile Apps: Ein Vergleich'
 description: >-
   Erkunden Sie die wichtigsten Unterschiede in den Datenschutzgesetzen für
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: state-privacy-laws-for-mobile-apps-comparison
 ---
 Die Datenschutzgesetze für mobile Apps variieren zwischen den Bundesstaaten und deren Verständnis ist für Entwickler wichtig. Hier ein kurzer Überblick über die wichtigsten Datenschutzbestimmungen in Kalifornien, Virginia und Colorado:
 

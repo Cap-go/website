@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터와 앱플로우 버전 관리의 차이점
+slug: capacitor-vs-appflow-versioning-differences
 title: 'Capacitor vs Appflow: 버전관리 차이점'
 description: '수동 및 자동화된 방식의 버전 관리 차이점을 살펴보고, 앱 개발을 위한 새로운 대안을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-vs-appflow-versioning-differences
 ---
 **앱 버전 관리는 까다로울 수 있습니다.** [Capacitor](https://capacitorjs.com/)는 [수동 업데이트](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 사용하고, [Appflow](https://ionic.io/docs/appflow)는 이 프로세스를 자동화합니다. 알아야 할 사항은 다음과 같습니다:
 

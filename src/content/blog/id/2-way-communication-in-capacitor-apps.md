@@ -1,5 +1,5 @@
 ---
-slug: Komunikasi dua arah dalam aplikasi Capacitor
+slug: 2-way-communication-in-capacitor-apps
 title: Komunikasi 2 Arah dalam Aplikasi Capacitor
 description: >-
   Pelajari bagaimana komunikasi dua arah dalam aplikasi Capacitor meningkatkan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 Komunikasi dua arah dalam aplikasi [Capacitor](https://capacitorjs.com/) menghubungkan lapisan web dan native, memungkinkan pertukaran data secara real-time. Hal ini memungkinkan teknologi web untuk mengakses fitur perangkat native seperti kamera atau GPS sementara lapisan native dapat berinteraksi dengan elemen web. Inilah mengapa hal ini penting:
 

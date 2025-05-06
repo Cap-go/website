@@ -1,5 +1,5 @@
 ---
-slug: wie-fuegt-man-abhaengigkeiten-in-capacitor-plugins-hinzu
+slug: how-to-add-dependencies-in-capacitor-plugins
 title: So fügen Sie Abhängigkeiten in Capacitor-Plugins hinzu
 description: >-
   Lernen Sie, wie Sie die Verwaltung von Abhängigkeiten in Capacitor-Plugins
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-add-dependencies-in-capacitor-plugins
 ---
 **Das Hinzufügen von Abhängigkeiten zu [Capacitor](https://capacitorjs.com/) Plugins kann überwältigend sein, aber es ist einfacher, wenn man es in klare Schritte unterteilt. Hier ist, was Sie wissen müssen:**
 

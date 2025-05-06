@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-autorisées-par-google
+slug: actualizaciones-en-vivo-permitidas-por-google
 title: >-
   Google autorise-t-il l'envoi de mises à jour en direct aux applications sans
   examen du Play Store ?
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: actualizaciones-en-vivo-permitidas-por-google
 ---
 Google Play est moins restrictif qu'Apple en ce qui concerne la mise à jour des applications.
 

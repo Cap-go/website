@@ -1,5 +1,5 @@
 ---
-slug: comandi-cli-capacitor-problemi-comuni-e-soluzioni
+slug: capacitor-cli-commands-common-issues-and-fixes
 title: 'Comandi CLI di Capacitor: Problemi Comuni e Soluzioni'
 description: >-
   Risolvi i problemi comuni della CLI di Capacitor con soluzioni pratiche per
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-cli-commands-common-issues-and-fixes
 ---
 **Hai problemi con gli errori CLI di [Capacitor](https://capacitorjs.com/)?** Ecco una guida rapida per risolvere problemi comuni come problemi con i plugin, errori di build e problemi di rete. La CLI di Capacitor è essenziale per gestire gli aggiornamenti delle app, specialmente gli aggiornamenti over-the-air (OTA), che ti permettono di bypassare le revisioni dell'app store e distribuire correzioni più velocemente. Ecco i punti chiave:
 

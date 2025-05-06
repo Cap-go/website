@@ -1,5 +1,5 @@
 ---
-slug: perbaiki-konflik-versi-capacitor
+slug: corrige-conflictos-de-version-capacitor
 title: Memperbaiki Konflik Versi Capacitor
 description: >-
   Pelajari cara mengatasi konflik versi dengan cepat di aplikasi Capacitor untuk
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: corrige-conflictos-de-version-capacitor
 ---
 **Kesalahan ketidakcocokan versi dalam aplikasi [Capacitor](https://capacitorjs.com/) dapat mengganggu proses build, menyebabkan crash saat runtime, dan menunda pembaruan.** Masalah ini muncul ketika paket inti, plugin, atau dependensi tidak selaras. Berikut cara cepat mengatasinya:
 

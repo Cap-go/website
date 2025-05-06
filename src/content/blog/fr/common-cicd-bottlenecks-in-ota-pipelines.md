@@ -1,5 +1,5 @@
 ---
-slug: problemes-frequents-dans-le-pipeline-cicd-pour-les-mises-a-jour-ota
+slug: häufige-engpässe-bei-der-cicd-pipeline-für-ota-aktualisierungen
 title: Goulots d'étranglement courants de CI/CD dans les pipelines OTA
 description: >-
   Découvrez comment surmonter les défis courants dans les pipelines CI/CD OTA
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: häufige-engpässe-bei-der-cicd-pipeline-für-ota-aktualisierungen
 ---
 **Les pipelines CI/CD sont essentiels pour livrer rapidement et efficacement les mises à jour en direct (OTA).** Mais ils font souvent face à des défis qui ralentissent les déploiements. Voici ce que vous devez savoir :
 

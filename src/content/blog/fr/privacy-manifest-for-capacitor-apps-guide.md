@@ -1,5 +1,5 @@
 ---
-slug: guide-sur-la-politique-de-confidentialité-pour-les-apps-capacitor
+slug: manifiesto-de-privacidad-para-apps-de-capacitor-guia
 title: 'Déclaration de confidentialité pour les applications Capacitor : Guide'
 description: >-
   Découvrez comment créer une Politique de Confidentialité pour votre
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: fr
 next_blog: ''
-original_slug: manifiesto-de-privacidad-para-apps-de-capacitor-guia
 ---
 Voici la traduction en français :
 

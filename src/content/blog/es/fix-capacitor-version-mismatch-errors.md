@@ -1,5 +1,5 @@
 ---
-slug: corrige-conflictos-de-version-capacitor
+slug: korrigiere-capacitor-versionskonflikte
 title: Corregir conflictos de versiones de Capacitor
 description: >-
   Aprenda cómo resolver rápidamente los conflictos de versiones en las
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: korrigiere-capacitor-versionskonflikte
 ---
 **Los errores de incompatibilidad de versiones en las aplicaciones de [Capacitor](https://capacitorjs.com/) pueden interrumpir las compilaciones, causar fallos en tiempo de ejecución y retrasar las actualizaciones.** Estos problemas surgen cuando los paquetes principales, plugins o dependencias están desalineados. Aquí te explicamos cómo resolverlos rápidamente:
 

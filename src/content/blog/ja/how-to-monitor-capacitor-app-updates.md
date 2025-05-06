@@ -1,5 +1,5 @@
 ---
-slug: アプリのアップデートを監視する方法-capacitor
+slug: come-monitorare-gli-aggiornamenti-delle-app-capacitor
 title: Capacitor アプリの更新を監視する方法
 description: Capacitorアプリの更新を監視するための効果的な戦略を学び、安定性、セキュリティ、ユーザー体験を向上させましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-monitorare-gli-aggiornamenti-delle-app-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) アプリのアップデートを監視することは、アプリの安定性を維持し、シームレスなユーザーエクスペリエンスを確保するために重要です。[Capacitor](https://capacitorjs.com/)のOTA（Over-the-Air）アップデートにより、アプリストアの遅延なしに[アップデートをプッシュ](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)できるようになります。以下が重要なポイントです：
 

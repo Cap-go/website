@@ -1,5 +1,5 @@
 ---
-slug: React Native와 Capacitor 비교
+slug: comparing-react-native-vs-capacitor
 title: React Native vs Capacitor 비교
 description: >-
   이 글에서는 React Native를 사용한 모바일 앱 개발과 React 및 Capacitor를 사용한 방식을 비교하며, 각각의 기능,
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ko
 next_blog: ''
-original_slug: comparing-react-native-vs-capacitor
 ---
 다루게 될 내용:
 

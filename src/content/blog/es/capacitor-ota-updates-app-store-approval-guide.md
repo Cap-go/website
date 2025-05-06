@@ -1,5 +1,5 @@
 ---
-slug: guía-de-aprobación-de-la-tienda-de-aplicaciones-de-capacitor-ota-updates
+slug: capacitor-ota-updates-app-store-approval-guide
 title: 'Actualizaciones OTA de Capacitor: Guía de aprobación de la App Store'
 description: >-
   Aprende cómo navegar las directrices de la App Store y Play Store para
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-ota-updates-app-store-approval-guide
 ---
 ### Puntos Clave:
 

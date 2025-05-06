@@ -1,5 +1,5 @@
 ---
-slug: capacitor-4에서-capacitor-5로-업데이트
+slug: updating-from-capacitor-4-to-capacitor-5
 title: 'Capacitor 4에서 Capacitor 5로 업데이트하기: 단계별 가이드'
 description: >-
   최소한의 주요 변경사항으로 Capacitor 4에서 Capacitor 5로 프로젝트를 업데이트하는 방법을 알아보세요. 공식 플러그인과 필요한
@@ -18,7 +18,6 @@ tag: Capacitor
 published: true
 locale: ko
 next_blog: ''
-original_slug: updating-from-capacitor-4-to-capacitor-5
 ---
 Capacitor 4에서 Capacitor 5로의 전환은 이전 업데이트에 비해 최소한의 주요 변경사항만 포함합니다. 이 가이드는 프로젝트를 Capacitor 5로 업데이트하는 단계별 지침과 공식 플러그인의 주요 변경사항 목록을 제공합니다.
 

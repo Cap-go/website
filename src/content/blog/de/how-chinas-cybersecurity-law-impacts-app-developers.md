@@ -1,5 +1,5 @@
 ---
-slug: wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt
+slug: how-chinas-cybersecurity-law-impacts-app-developers
 title: Wie sich das chinesische Cybersicherheitsgesetz auf App-Entwickler auswirkt
 description: >-
   Das chinesische Cybersicherheitsgesetz schreibt App-Entwicklern strenge Regeln
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-chinas-cybersecurity-law-impacts-app-developers
 ---
 **[Das Cybersicherheitsgesetz Chinas](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL) verpflichtet App-Entwickler zur Einhaltung strenger Regeln beim Umgang mit Nutzerdaten, insbesondere bei chinesischen Nutzern.** Hier sind die wichtigsten Punkte:
 

@@ -1,5 +1,5 @@
 ---
-slug: configuration-de-lenvironnement-local-de-capacitor
+slug: configuracion-del-entorno-local-de-capacitor
 title: Configuration de l'Environnement Local de Capacitor
 description: >-
   Apprenez à configurer rapidement un environnement local Capacitor pour créer
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: configuracion-del-entorno-local-de-capacitor
 ---
 **Vous voulez créer des applications iOS et Android en utilisant des technologies web ? Voici comment configurer rapidement et efficacement un environnement [Capacitor](https://capacitorjs.com/) local.**
 

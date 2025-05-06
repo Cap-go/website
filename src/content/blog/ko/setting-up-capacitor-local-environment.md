@@ -1,5 +1,5 @@
 ---
-slug: setting-up-capacitor-로컬-환경
+slug: setting-up-capacitor-local-environment
 title: Capacitor 로컬 환경 설정
 description: >-
   이 종합 가이드를 통해 웹 기술을 사용하여 iOS 및 Android 앱을 구축하기 위한 로컬 Capacitor 환경을 빠르게 설정하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: setting-up-capacitor-local-environment
 ---
 **웹 기술을 사용하여 iOS 및 Android 앱을 구축하고 싶으신가요? 로컬 [Capacitor](https://capacitorjs.com/) 환경을 빠르고 효율적으로 설정하는 방법을 알아보겠습니다.**
 

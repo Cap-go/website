@@ -1,5 +1,5 @@
 ---
-slug: Pembaruan OTA Capacitor vs Versi Tradisional
+slug: Mises à jour OTA de Capacitor vs Versionnement traditionnel
 title: Pembaruan OTA Capacitor vs. Penerapan Versi Tradisional
 description: >-
   Pelajari bagaimana pembaruan OTA Capacitor merevolusi distribusi aplikasi,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Mises à jour OTA de Capacitor vs Versionnement traditionnel
 ---
 **Vous voulez des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) plus rapides sans attendre les examens de l'app store ?** Les mises à jour en direct (OTA) de [Capacitor](https://capacitorjs.com/) pourraient être la solution. Contrairement aux mises à jour traditionnelles des app stores qui prennent des jours et nécessitent une action de l'utilisateur, les mises à jour OTA déploient les changements en quelques minutes et atteignent automatiquement les utilisateurs.
 

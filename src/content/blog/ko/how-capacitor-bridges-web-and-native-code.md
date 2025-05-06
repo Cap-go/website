@@ -1,5 +1,5 @@
 ---
-slug: 어떻게 Capacitor가 웹과 네이티브 코드를 연결하는가
+slug: how-capacitor-bridges-web-and-native-code
 title: Capacitor가 웹과 네이티브 코드를 연결하는 방법
 description: 네이티브 브리지가 웹과 네이티브 코드 간의 원활한 통신을 가능하게 하여 앱 성능과 사용자 경험을 향상시키는 방법을 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-capacitor-bridges-web-and-native-code
 ---
 -   **네이티브 브릿지**: JavaScript를 네이티브 동작으로 변환합니다 (예: [카메라 접근](https://capgo.app/plugins/camera-preview/) 또는 GPS).
 -   **플러그인 시스템**: 웹과 네이티브 레이어를 안전하게 연결하여 원활한 통신을 제공합니다.

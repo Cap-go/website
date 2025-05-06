@@ -1,5 +1,5 @@
 ---
-slug: come-personalizzare-gli-script-di-build-con-capacitor-cli
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: Come Personalizzare gli Script di Build con Capacitor CLI
 description: >-
   Impara come personalizzare i tuoi script di build utilizzando Capacitor CLI
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-customize-build-scripts-with-capacitor-cli
 ---
 [Capacitor](https://capacitorjs.com/) CLI consente di personalizzare il processo di build dell'app per le piattaforme iOS, Android e web. Modificando gli script di build, puoi:
 

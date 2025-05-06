@@ -1,5 +1,5 @@
 ---
-slug: mise-a-jour-de-vos-applications-capacitor-sans-probleme-avec-capacitor-updater
+slug: actualizar-sus-aplicaciones-capacitor-sin-problemas-con-capacitor-updater
 title: Mettez à jour vos applications Capacitor sans problème avec Capacitor-updater
 description: >-
   Salutations à la communauté Capacitor Ionic, aujourd'hui je vais vous aider à
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: ''
-original_slug: actualizar-sus-aplicaciones-capacitor-sin-problemas-con-capacitor-updater
 ---
 ## Qu'est-ce que Capacitor-updater ?
 

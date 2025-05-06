@@ -1,5 +1,5 @@
 ---
-slug: la-conformita-pipeda-per-app-mobili-in-canada
+slug: pipeda-compliance-for-mobile-apps-in-canada
 title: Conformità PIPEDA per App Mobile in Canada
 description: >-
   Scopri come garantire che la tua app mobile rispetti le leggi sulla privacy
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: it
 next_blog: ''
-original_slug: pipeda-compliance-for-mobile-apps-in-canada
 ---
 **Vuoi rendere la tua app mobile conforme alle leggi sulla privacy canadesi? Ecco cosa devi sapere su [PIPEDA](https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/):**
 

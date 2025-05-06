@@ -1,5 +1,5 @@
 ---
-slug: come-gestire-le-richieste-dei-dati-degli-utenti-secondo-il-ccpa
+slug: how-to-handle-user-data-requests-under-ccpa
 title: Come gestire le richieste dei dati degli utenti secondo il CCPA
 description: >-
   Scopri come gestire efficacemente le richieste dei dati degli utenti secondo
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-handle-user-data-requests-under-ccpa
 ---
 Il California Consumer Privacy Act ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)) conferisce agli utenti il controllo sui propri dati personali e stabilisce regole severe per le aziende. Ecco cosa devi sapere per essere conforme:
 

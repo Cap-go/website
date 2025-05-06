@@ -1,5 +1,5 @@
 ---
-slug: metadata-app-store-apa-yang-perlu-diketahui-pengembang
+slug: métadonnées-app-store-ce-que-les-développeurs-doivent-savoir
 title: 'Metadata App Store: Apa yang Perlu Diketahui Developer'
 description: >-
   Pelajari bagaimana metadata yang efektif di App Store dapat meningkatkan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: métadonnées-app-store-ce-que-les-développeurs-doivent-savoir
 ---
 **Ingin aplikasi Anda menonjol? Dimulai dengan metadata.** Metadata app store memengaruhi bagaimana pengguna menemukan, mengevaluasi, dan mengunduh aplikasi Anda. Berikut yang perlu Anda ketahui:
 

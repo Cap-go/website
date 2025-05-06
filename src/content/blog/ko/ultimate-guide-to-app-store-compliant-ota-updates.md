@@ -1,5 +1,5 @@
 ---
-slug: 앱스토어 규정을 준수하는 OTA 업데이트에 대한 완벽 가이드
+slug: ultimate-guide-to-app-store-compliant-ota-updates
 title: 앱스토어 규정을 준수하는 OTA 업데이트 완벽 가이드
 description: >-
   App Store 가이드라인을 준수하면서 더 나은 사용자 경험을 위해 Over-The-Air 업데이트를 효과적으로 관리하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: ultimate-guide-to-app-store-compliant-ota-updates
 ---
 **앱스토어 규정을 위반하지 않고 앱을 빠르게 업데이트하고 싶으신가요?** Over-The-Air (OTA) 업데이트를 통해 버그를 수정하고, 성능을 개선하며, 사용자 경험을 향상시킬 수 있습니다 - 앱스토어 승인을 기다릴 필요 없이 말이죠. 하지만 규정을 준수하기 위해서는 Apple과 Google의 엄격한 가이드라인을 따라야 합니다.
 

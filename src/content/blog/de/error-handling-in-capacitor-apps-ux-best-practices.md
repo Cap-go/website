@@ -1,5 +1,5 @@
 ---
-slug: fehlerbehandlung-in-capacitor-apps-ux-best-practices
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: 'Fehlerbehandlung in Capacitor Apps: UX Best Practices'
 description: >-
   Effektive Fehlerbehandlung in Apps verbessert das Nutzererlebnis durch klare
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: error-handling-in-capacitor-apps-ux-best-practices
 ---
 **Die Fehlerbehandlung kann das Nutzererlebnis Ihrer App entscheidend beeinflussen.** Schlechtes Fehlermanagement kann zu frustrierten Nutzern und negativen Bewertungen führen, während effektive Fehlerbehandlung Vertrauen aufbaut und Nutzer zufrieden hält. Hier ist, was Sie wissen müssen:
 

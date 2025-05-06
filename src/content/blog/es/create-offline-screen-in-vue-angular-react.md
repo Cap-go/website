@@ -1,5 +1,5 @@
 ---
-slug: crear-pantalla-offline-en-vue-angular-react
+slug: create-offline-screen-in-vue-angular-react
 title: >-
   Cómo Crear una Pantalla Sin Conexión en Aplicaciones Vue, Angular y React
   usando la API de Red y Capacitor
@@ -22,7 +22,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: ''
-original_slug: create-offline-screen-in-vue-angular-react
 ---
 # Cómo Crear una Pantalla Sin Conexión en Vue 3, Angular 14 o React
 

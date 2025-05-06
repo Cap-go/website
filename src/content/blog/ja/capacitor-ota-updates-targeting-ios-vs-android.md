@@ -1,5 +1,5 @@
 ---
-slug: iOSとAndroid上のCapacitorを使用したOTAアップデート
+slug: aggiornamenti-ota-su-ios-vs-android-tramite-capacitor
 title: 'Capacitor OTAアップデート: iOS と Android の違い'
 description: iOS と Android の OTA アップデート戦略の違いを詳しく見て、配布、セキュリティ、ユーザー要件に焦点を当てます。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: aggiornamenti-ota-su-ios-vs-android-tramite-capacitor
 ---
 [**Capacitor**](https://capacitorjs.com/) **アプリをアプリストアの遅延なしに即座に更新したいですか？** Over-the-Air (OTA) アップデートを使用すると、アプリストアに再提出することなく、アプリのウェブレイヤー（HTML、CSS、JavaScript）の変更をプッシュできます。ただし、iOSとAndroidではこれらの更新の扱い方が異なり、これらの違いを理解することが重要です。
 

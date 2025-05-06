@@ -1,5 +1,5 @@
 ---
-slug: déploiement-contrôlé-pour-capacitor-live-updates
+slug: despliegue-controlado-para-capacitor-live-updates
 title: Distribution de mise à jour en direct pour Capacitor
 description: >-
   Découvrez comment les déploiements progressifs améliorent les mises à jour
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: despliegue-controlado-para-capacitor-live-updates
 ---
 Les déploiements progressifs vous permettent de mettre à jour les applications graduellement, en commençant par un petit groupe d'utilisateurs et en élargissant à mesure que la stabilité est confirmée. Cette approche réduit les risques, assure la qualité des applications et améliore l'expérience utilisateur. Des outils comme [Capgo](https://capgo.app/) facilitent la gestion de ces mises à jour tout en respectant les règles des app stores.
 

@@ -1,5 +1,5 @@
 ---
-slug: pembuatan-dan-penghapusan-kanal-pembaruan-di-capacitor
+slug: creation-et-suppression-de-canaux-de-mise-a-jour-dans-capacitor
 title: Membuat dan Menghapus Saluran Pembaruan di Capacitor
 description: >-
   Pelajari cara membuat, mengelola, dan menghapus kanal pembaruan di Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: creation-et-suppression-de-canaux-de-mise-a-jour-dans-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) [saluran update](https://capgo.app/docs/webapp/channels/) memungkinkan Anda mengirim pembaruan over-the-air (OTA) ke kelompok pengguna tertentu. Ini membantu mengelola beberapa versi aplikasi, menguji fitur baru, dan meluncurkan pembaruan secara bertahap. Berikut yang perlu Anda ketahui:
 

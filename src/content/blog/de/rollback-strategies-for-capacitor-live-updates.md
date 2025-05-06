@@ -1,5 +1,5 @@
 ---
-slug: rollback-strategien-für-capacitor-live-updates
+slug: rollback-strategies-for-capacitor-live-updates
 title: Rollback-Strategien für Capacitor Live Updates
 description: >-
   Erfahre mehr über effektive Rollback-Strategien für Capacitor Live-Updates, um
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: rollback-strategies-for-capacitor-live-updates
 ---
 **Vermeiden Sie App-Störungen mit starken Rollback-Strategien.** [Capacitor](https://capacitorjs.com/)s Live-Updates ermöglichen schnelle Fehlerbehebungen, aber 18% der Updates scheitern weltweit. Ein Rollback-Plan gewährleistet Stabilität, wenn Probleme auftreten. Hier ein kurzer Überblick:
 

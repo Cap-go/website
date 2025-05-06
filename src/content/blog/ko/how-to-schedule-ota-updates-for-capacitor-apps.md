@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱의 OTA 업데이트 예약 방법
+slug: how-to-schedule-ota-updates-for-capacitor-apps
 title: Capacitor 앱의 OTA 업데이트 예약 방법
 description: 모바일 앱의 OTA 업데이트를 효과적으로 스케줄링하여 신속한 버그 수정과 향상된 사용자 경험을 보장하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-schedule-ota-updates-for-capacitor-apps
 ---
 [**Capacitor**](https://capacitorjs.com/) **앱을 앱스토어 지연 없이 업데이트하고 싶으신가요? Over-the-Air (OTA) 업데이트를 통해 실시간으로 수정사항, 새로운 기능, 개선사항을 사용자에게 직접 전달할 수 있습니다.** 다음은 효과적인 일정 관리 방법입니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: Wie Capacitor Plattform-Unterschiede handhabt
+slug: how-capacitor-handles-platform-differences
 title: Wie Capacitor Plattformunterschiede handhabt
 description: >-
   Erfahren Sie, wie Sie Plattformunterschiede in der mobilen App-Entwicklung
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-capacitor-handles-platform-differences
 ---
 [Capacitor](https://capacitorjs.com/) hilft Entwicklern dabei, Apps für iOS und Android mit der gleichen Codebasis zu erstellen und dabei plattformspezifische Unterschiede zu berücksichtigen. Es vereinfacht die Integration nativer Funktionen, stellt die Einhaltung von Plattformrichtlinien sicher und optimiert die Leistung. Wichtige Highlights:
 

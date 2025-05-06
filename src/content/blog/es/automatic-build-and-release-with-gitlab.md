@@ -1,5 +1,5 @@
 ---
-slug: compilación-y-lanzamiento-automático-con-gitlab
+slug: automatic-build-and-release-with-gitlab
 title: Construcción y lanzamiento automático con Gitlab
 description: >-
   Crea tu propio pipeline de CI/CD con Gitlab de forma gratuita, despliega tu
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: es
 next_blog: ''
-original_slug: automatic-build-and-release-with-gitlab
 ---
 Este tutorial se centra en GitLab CI, pero puedes adaptarlo con pequeños ajustes a cualquier otra plataforma CI/CD.
 

@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 보안 팁
+slug: capacitor-ota-updates-security-tips
 title: 'Capacitor OTA 업데이트: 보안 팁'
 description: 'OTA 업데이트에 필요한 암호화, 파일 확인, 접근 제어 등의 필수 보안 사례를 학습하여 모바일 앱을 보호하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-security-tips
 ---
 [Capacitor](https://capacitorjs.com/) 앱을 위한 **안전한 OTA 업데이트를 원하시나요?** 결론은 이렇습니다: OTA 업데이트는 빠르고 효율적이지만 데이터 가로채기, 파일 변조, 서버 취약점과 같은 위험이 있습니다. 업데이트를 안전하게 유지하려면 **암호화, 파일 검증, 접근 제어**에 집중하세요.
 

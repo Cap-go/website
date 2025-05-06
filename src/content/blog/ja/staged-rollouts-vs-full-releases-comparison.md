@@ -1,5 +1,5 @@
 ---
-slug: ステージド・ロールアウトとフル・リリースの比較
+slug: staged-rollouts-vs-full-releases-comparison
 title: ロールアウトの段階的展開 vs 完全リリース：比較
 description: 段階的リリースとフルリリースの違いを確認し、アプリのニーズとユーザーベースに最適なアップデート戦略を決定しましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: staged-rollouts-vs-full-releases-comparison
 ---
 **ステージドロールアウト**と**フルリリース**の選択は、アプリのニーズ、ユーザーベース、更新の緊急性によって異なります。簡単な内訳は以下の通りです：
 

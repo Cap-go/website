@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-dari-capacitor-4-ke-capacitor-5
+slug: mise-a-jour-de-capacitor-4-vers-capacitor-5
 title: 'Memperbarui Capacitor 4 ke Capacitor 5: Panduan Langkah demi Langkah'
 description: >-
   Pelajari cara memperbarui proyek Capacitor 4 Anda ke Capacitor 5 dengan
@@ -19,7 +19,6 @@ tag: Capacitor
 published: true
 locale: id
 next_blog: ''
-original_slug: mise-a-jour-de-capacitor-4-vers-capacitor-5
 ---
 Dibandingkan dengan pembaruan sebelumnya, transisi dari Capacitor 4 ke Capacitor 5 melibatkan perubahan yang minimal. Panduan ini memberikan instruksi langkah demi langkah untuk memperbarui proyek Anda ke Capacitor 5, serta daftar perubahan untuk plugin resmi.
 

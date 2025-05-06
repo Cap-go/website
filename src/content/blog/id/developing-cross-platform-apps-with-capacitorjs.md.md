@@ -1,5 +1,5 @@
 ---
-slug: pengembangan-aplikasi-multiplatform-dengan-capacitorjs
+slug: développement-applications-multiplateformes-avec-capacitorjs
 title: >-
   Mengembangkan Aplikasi Multiplatform dengan CapacitorJS: Panduan Langkah demi
   Langkah
@@ -20,7 +20,6 @@ tag: Tuto
 published: true
 locale: id
 next_blog: ''
-original_slug: développement-applications-multiplateformes-avec-capacitorjs
 ---
 Dalam dunia pengembangan aplikasi mobile yang terus berkembang, munculnya Progressive Web Applications (PWAs) telah membuka jalan bagi runtime lintas platform baru. Runtime ini memungkinkan aplikasi berbasis web hadir di app store tanpa hanya mengandalkan kode native. Salah satu teknologi yang memfasilitasi hal ini adalah [**CapacitorJS**](https://capacitorjs.com/), yang memungkinkan pengembang untuk mendeploy website sederhana sebagai aplikasi di Android, iOS, dan web menggunakan satu basis kode JavaScript. Pendekatan ini secara signifikan mengurangi biaya pengembangan dan meningkatkan efisiensi pengkodean.
 

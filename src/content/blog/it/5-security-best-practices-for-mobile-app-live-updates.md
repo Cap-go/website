@@ -1,5 +1,5 @@
 ---
-slug: 5-モバイルアプリのライブアップデートのためのセキュリティベストプラクティス
+slug: 5-security-best-practices-for-mobile-app-live-updates
 title: モバイルアプリのライブアップデートに関する5つのセキュリティベストプラクティス
 description: モバイルアプリのライブアップデートの安全性を確保し、ユーザーデータを保護し、業界標準に準拠するための重要なセキュリティプラクティスを学びます。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: 5-security-best-practices-for-mobile-app-live-updates
 ---
 Mantenere la tua app mobile sicura durante gli aggiornamenti live è fondamentale per proteggere i dati degli utenti e mantenere la fiducia. Ecco un breve riepilogo delle migliori pratiche per proteggere i tuoi aggiornamenti over-the-air (OTA):
 

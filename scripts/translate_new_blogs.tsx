@@ -44,7 +44,6 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     const destinationPath = join(langBlogDirectory, file)
     const content = await readFile(filePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
-    const originalSlug = frontmatter.slug || file.replace(/\.(md|mdx)$/, '')
     const fieldsToTranslate = ['title', 'description', 'head_image_alt', 'slug']
     for (const field of fieldsToTranslate) {
       if (frontmatter[field]) {
@@ -57,7 +56,6 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
         }
       }
     }
-    frontmatter['original_slug'] = originalSlug
     frontmatter['locale'] = lang
     const codeBlockRegex = /```[\s\S]*?```/g
     const htmlTagRegex = /<[^>]+>/g

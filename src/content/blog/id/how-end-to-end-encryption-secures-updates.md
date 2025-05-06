@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-enkripsi-end-to-end-melindungi-update
+slug: comment-le-chiffrement-de-bout-en-bout-protège-les-mises-à-jour
 title: Mengamankan Pembaruan dengan Enkripsi End-to-end
 description: >-
   Pelajari bagaimana enkripsi end-to-end mengamankan pembaruan OTA, menjamin
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-le-chiffrement-de-bout-en-bout-protège-les-mises-à-jour
 ---
 **Enkripsi end-to-end (E2EE)** adalah cara terbaik untuk mengamankan pembaruan over-the-air (OTA) untuk aplikasi. Ini memastikan bahwa hanya pengguna yang dituju yang dapat mendekripsi dan menginstal pembaruan, melindungi dari risiko seperti perusakan, injeksi kode, dan pelanggaran data. Platform seperti [Capgo](https://capgo.app/) telah menerapkan E2EE untuk melindungi integritas aplikasi sambil memenuhi standar keamanan seperti yang disyaratkan oleh Apple dan Google.
 

@@ -1,5 +1,5 @@
 ---
-slug: capgo-untuk-update-ota-yang-aman-di-app-store
+slug: capgo-for-app-store-safe-ota-updates
 title: Capgo untuk OTA Updates yang Aman di App Store
 description: >-
   Jelajahi bagaimana sebuah platform memungkinkan pembaruan aplikasi yang instan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: capgo-for-app-store-safe-ota-updates
 ---
 [Capgo](https://capgo.app/) memungkinkan pengembang untuk memberikan **pembaruan aplikasi instan dan aman** tanpa menunggu peninjauan app store. Dengan **enkripsi end-to-end**, integrasi CI/CD yang mulus, dan kepatuhan pada aturan app store, ini adalah alternatif yang hemat biaya dibandingkan pembaruan tradisional atau platform yang lebih mahal seperti [AppFlow](https://ionic.io/appflow). Lebih dari **947,6 juta pembaruan** telah diimplementasikan di **1.400 aplikasi produksi**, meningkatkan efisiensi pengembangan sebesar **81%**.
 

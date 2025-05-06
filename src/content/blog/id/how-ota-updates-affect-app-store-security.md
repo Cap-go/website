@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-pembaruan-ota-mempengaruhi-keamanan-app-store
+slug: comment-les-mises-a-jour-ota-affectent-la-securite-de-l-app-store
 title: Bagaimana OTA Update Mempengaruhi Keamanan App Store
 description: >-
   Pembaruan OTA menyederhanakan peningkatan aplikasi, namun memiliki risiko
@@ -18,7 +18,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-les-mises-a-jour-ota-affectent-la-securite-de-l-app-store
 ---
 Pembaruan OTA (over-the-air) memungkinkan pengembang aplikasi untuk mengirimkan perubahan langsung kepada pengguna tanpa menunggu persetujuan app store. Ini mempercepat perbaikan bug, patch keamanan, dan peluncuran fitur. **95% pengguna menginstal pembaruan dalam 24 jam**, tetapi kecepatan yang tinggi dapat menimbulkan risiko jika tidak dikelola dengan aman.
 

@@ -1,5 +1,5 @@
 ---
-slug: Perbandingan antara Penerapan Bertahap dan Rilis Penuh
+slug: Comparaison entre les déploiements progressifs et les versions complètes
 title: 'Deployment Progresif vs. Full Version: Sebuah Perbandingan'
 description: >-
   Jelajahi perbedaan antara penerapan bertahap dan rilis penuh untuk menentukan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Comparaison entre les déploiements progressifs et les versions complètes
 ---
 Memilih antara **staged rollouts** dan **full releases** bergantung pada kebutuhan aplikasi, basis pengguna, dan urgensi pembaruan Anda. Berikut ringkasannya:
 

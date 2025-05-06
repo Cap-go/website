@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-ota-capacitor-migliorare-prestazioni-dispositivi-basso-livello
+slug: capacitor-ota-updates-boosting-low-end-device-performance
 title: >-
   Aggiornamenti OTA di Capacitor: Miglioramento delle Prestazioni dei
   Dispositivi di Fascia Bassa
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-ota-updates-boosting-low-end-device-performance
 ---
 **Vuoi che la tua app funzioni meglio sui dispositivi di fascia bassa? Gli aggiornamenti OTA sono la risposta.** [Capacitor](https://capacitorjs.com/) con i suoi aggiornamenti over-the-air (OTA) ti permette di inviare solo le modifiche necessarie alla tua app - senza richiedere download completi. Questo fa risparmiare tempo, riduce l'utilizzo dei dati e migliora le prestazioni, specialmente per gli utenti con hardware limitato o reti lente.
 

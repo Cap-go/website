@@ -1,5 +1,5 @@
 ---
-slug: Capacitor CLI 설치 단계별 가이드
+slug: installing-capacitor-cli-step-by-step-guide
 title: 'Capacitor CLI 설치하기: 단계별 가이드'
 description: 웹 앱을 네이티브 모바일 앱으로 효율적으로 변환하기 위한 Capacitor CLI의 설치 및 구성 방법을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: installing-capacitor-cli-step-by-step-guide
 ---
 **[Capacitor](https://capacitorjs.com/) CLI는 하나의 코드베이스로 웹 앱을 네이티브 iOS 및 Android 앱으로 변환하는 데 도움을 줍니다.** 다음과 같이 빠르게 설정할 수 있습니다:
 

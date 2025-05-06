@@ -1,5 +1,5 @@
 ---
-slug: komentar-capacitor-menghubungkan-kode-web-dan-native
+slug: comment-capacitor-connecte-le-code-web-et-natif
 title: Bagaimana Capacitor Menghubungkan Kode Web dan Native
 description: >-
   Pelajari bagaimana jembatan native memungkinkan komunikasi yang mulus antara
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-capacitor-connecte-le-code-web-et-natif
 ---
 -   **Native Bridge**: Menerjemahkan JavaScript ke dalam tindakan native (contoh, [mengakses kamera](https://capgo.app/plugins/camera-preview/) atau GPS).
 -   **Sistem Plugin**: Menghubungkan lapisan web dan native secara aman untuk komunikasi yang lancar.

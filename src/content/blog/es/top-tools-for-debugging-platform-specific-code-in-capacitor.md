@@ -1,6 +1,5 @@
 ---
-slug: >-
-  las-mejores-herramientas-para-depurar-código-específico-de-plataforma-en-capacitor
+slug: top-tools-für-das-debugging-von-plattformspezifischem-code-in-capacitor
 title: >-
   Herramientas principales para depurar código específico de plataforma en
   Capacitor
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: top-tools-für-das-debugging-von-plattformspezifischem-code-in-capacitor
 ---
 La depuración de código específico de plataforma en [Capacitor](https://capacitorjs.com/) puede ser desafiante, pero las herramientas adecuadas simplifican el proceso. Esto es lo que necesitas saber:
 

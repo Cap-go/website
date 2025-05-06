@@ -1,5 +1,5 @@
 ---
-slug: クラウドホスティングオプション：Capacitorのアプリ更新（OTA）の比較
+slug: opzioni-hosting-cloud-aggiornamenti-ota-capacitor-confrontate
 title: Cloud ホスティングによるCapacitorの OTAアップデートの比較
 description: >-
   Capacitor の OTA アップデートに最適なクラウドホスティングのオプションを探り、AWS、Google
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: opzioni-hosting-cloud-aggiornamenti-ota-capacitor-confrontate
 ---
 Over-the-Air (OTA)アップデートを使用すると、アプリストアの遅延なしで[Capacitor](https://capacitorjs.com/)アプリを即座に更新できます。適切なクラウドホスティングプラットフォームを選択することは、速度、セキュリティ、使いやすさにとって重要です。
 

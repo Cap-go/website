@@ -1,5 +1,5 @@
 ---
-slug: CI/CD 파이프라인에서 비밀 관리
+slug: managing-secrets-in-cicd-pipelines
 title: CI/CD 파이프라인에서 비밀 관리하기
 description: CI/CD 파이프라인에서 보안을 강화하고 침해와 규정 준수 문제를 방지하기 위한 효과적인 비밀 관리 전략을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: managing-secrets-in-cicd-pipelines
 ---
 **CI/CD 파이프라인에서 비밀 정보를 안전하게 보관하는 것은 침해, 서비스 중단 및 규정 준수 문제를 방지하는 데 매우 중요합니다.** 다음은 효과적으로 수행하는 방법입니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: seguridad-de-la-pipeline-para-apps-de-capacitor-conclusiones-importantes
+slug: sicherheit-der-pipeline-für-capacitor-apps-wichtige-erkenntnisse
 title: 'Seguridad de Pipeline para aplicaciones Capacitor: Conocimientos importantes'
 description: >-
   Aprende estrategias importantes para asegurar los pipelines de aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: sicherheit-der-pipeline-für-capacitor-apps-wichtige-erkenntnisse
 ---
 La seguridad del pipeline para aplicaciones [Capacitor](https://capacitorjs.com/) es esencial para proteger datos sensibles y garantizar actualizaciones confiables. Esto es lo que necesitas saber:
 

@@ -1,5 +1,5 @@
 ---
-slug: カスタム属性セグメンテーションでよくあるミス
+slug: common-mistakes-in-custom-attribute-segmentation
 title: カスタム属性セグメンテーションでのよくある間違い
 description: カスタム属性セグメンテーションにおける重要な注意点と、ユーザーエンゲージメントとアプリのパフォーマンスを効果的に向上させる方法について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: common-mistakes-in-custom-attribute-segmentation
 ---
 カスタム属性セグメンテーションは、ユーザーエンゲージメントとアプリのパフォーマンスを向上させるために重要です。しかし、多くの開発者が非効率な更新、不適切なターゲティング、ユーザー満足度の低下につながる一般的な間違いを犯しています。以下に、避けるべきことと改善方法を簡単に説明します：
 

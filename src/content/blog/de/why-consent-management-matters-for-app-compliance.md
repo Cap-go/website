@@ -1,5 +1,5 @@
 ---
-slug: warum-einwilligungsmanagement-für-app-konformität-wichtig-ist
+slug: why-consent-management-matters-for-app-compliance
 title: Warum Einwilligungsmanagement für die App-Konformität wichtig ist
 description: >-
   Das Verständnis der Einwilligungsverwaltung ist entscheidend für die
@@ -21,7 +21,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: why-consent-management-matters-for-app-compliance
 ---
 **Die Verwaltung der Nutzereinwilligung ist für die App-Compliance unverzichtbar.** Datenschutzgesetze wie [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) und [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) verlangen von Apps die ausdrückliche Einwilligung der Nutzer für die Datenerhebung und -nutzung. Ohne diese riskieren Sie Bußgelder, rechtliche Probleme und den Verlust des Nutzervertrauens. Hier ist, was Sie wissen müssen:
 

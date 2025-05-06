@@ -1,5 +1,5 @@
 ---
-slug: 앱스토어-심사-우회하기
+slug: how-to-bypass-app-store-review
 title: App Store 검토 없이 Capacitor JS 앱을 업데이트하는 방법
 description: Capgo Feature를 통해 Apple의 가이드라인을 완벽히 준수하면서 iOS 아이오닉 앱에 코드 업데이트를 푸시하는 방법은 무엇일까요?
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: how-to-bypass-app-store-review
 ---
 _물어봐주셔서 기쁩니다._
 

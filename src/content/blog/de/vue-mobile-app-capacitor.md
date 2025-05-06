@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: de
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: vue-mobile-app-capacitor
 ---
 In diesem Tutorial führen wir Sie durch den Prozess der Umwandlung einer Vue-Webanwendung in eine native mobile App mit Capacitor. Optional können Sie Ihre mobile Benutzeroberfläche auch mit Konsta UI erweitern, einer auf Tailwind CSS basierenden mobilen UI-Bibliothek.
 

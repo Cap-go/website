@@ -1,5 +1,5 @@
 ---
-slug: cómo-el-cifrado-ota-cumple-con-las-normas-de-la-app-store
+slug: how-ota-encryption-meets-app-store-compliance
 title: Cómo el cifrado OTA cumple con las normas de la App Store
 description: >-
   Explora cómo el cifrado OTA asegura las actualizaciones de aplicaciones y
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: how-ota-encryption-meets-app-store-compliance
 ---
 **La encriptación Sobre el Aire (OTA) garantiza actualizaciones seguras de la aplicación mientras cumple con las estrictas reglas de las tiendas de aplicaciones de Apple y Google.** Así es como funciona y por qué es esencial:
 

@@ -1,5 +1,5 @@
 ---
-slug: 서드파티 데이터에 대한 애플과 구글의 개인정보 보호 규정 준수
+slug: apple-vs-google-privacy-compliance-for-third-party-data
 title: 'Apple vs. Google: 제3자 데이터에 대한 개인정보 보호 준수'
 description: 두 주요 기술 기업의 상반된 개인정보 보호 전략과 이것이 앱 개발자와 사용자 데이터 관리에 미치는 영향을 살펴봅니다.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: apple-vs-google-privacy-compliance-for-third-party-data
 ---
 **애플과 구글은 그들의 비즈니스 모델에 따라 사용자 개인정보 보호에 대해 서로 다른 접근 방식을 가지고 있습니다:**
 

@@ -1,5 +1,5 @@
 ---
-slug: membuat-layar-offline-di-vue-angular-react
+slug: crear-pantalla-offline-en-vue-angular-react
 title: >-
   Cara Membuat Layar Offline pada Aplikasi Vue, Angular dan React menggunakan
   Network API dan Capacitor
@@ -22,7 +22,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: ''
-original_slug: crear-pantalla-offline-en-vue-angular-react
 ---
 # Cara Membuat Layar Offline di Vue 3, Angular 14, atau React
 

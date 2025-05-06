@@ -1,5 +1,5 @@
 ---
-slug: selbst-gehostete-live-updates
+slug: self-hosted-live-updates
 title: Self-hosted Live Updates
 description: >-
   Ich freue mich, Self-hosted Live Updates anzukündigen, die nächste Iteration
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: de
 next_blog: ''
-original_slug: self-hosted-live-updates
 ---
 Ich freue mich, die Veröffentlichung von Self-hosted Live Updates anzukündigen, die die neueste Evolution von Capgos Live Updates darstellt.
 

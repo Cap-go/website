@@ -1,5 +1,5 @@
 ---
-slug: cara-menghitung-penggunaan-anda
+slug: cómo-se-cuenta-tu-uso
 title: Bagaimana Penggunaan Anda Dihitung di Capgo
 description: >-
   Pahami cara Capgo menghitung penggunaan Anda dan gunakan dengan cara terbaik.
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: id
 next_blog: ''
-original_slug: cómo-se-cuenta-tu-uso
 ---
 Di Capgo, ada 3 nilai yang dihitung dan penting untuk dipahami
 - Pengguna

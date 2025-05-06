@@ -1,5 +1,5 @@
 ---
-slug: vue-모바일-앱-capacitor
+slug: vue-mobile-app-capacitor
 title: Vue와 Capacitor로 모바일 앱 만들기
 description: 'Vue, Capacitor, 그리고 선택적으로 Konsta UI로 UI를 개선하여 모바일 앱을 만드는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: vue-mobile-app-capacitor
 ---
 이 튜토리얼에서는 Capacitor를 사용하여 Vue 웹 애플리케이션을 네이티브 모바일 앱으로 변환하는 과정을 안내합니다. 선택적으로 Tailwind CSS 기반 모바일 UI 라이브러리인 Konsta UI를 사용하여 모바일 UI를 향상시킬 수 있습니다.
 

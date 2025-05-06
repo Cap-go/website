@@ -1,5 +1,5 @@
 ---
-slug: ccpa-compliance-für-mobile-apps
+slug: ccpa-compliance-for-mobile-apps
 title: CCPA-Konformität für mobile Apps
 description: >-
   Entdecken Sie die wichtigsten Schritte für Mobile-App-Entwickler zur
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: de
 next_blog: ''
-original_slug: ccpa-compliance-for-mobile-apps
 ---
 **[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) Compliance ist ein Muss für Entwickler mobiler Apps, die personenbezogene Daten von Einwohnern Kaliforniens sammeln.** Dieses Gesetz gewährt Nutzern Rechte über ihre Daten und erlegt Apps strenge Regeln für deren Umgang auf. Nichteinhaltung riskiert hohe Geldstrafen und Reputationsschäden.
 

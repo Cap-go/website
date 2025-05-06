@@ -1,5 +1,5 @@
 ---
-slug: pembatasan-tingkat-api-untuk-kepatuhan-app-store
+slug: limitation-du-taux-api-pour-la-conformité-app-store
 title: Pembatasan Rate API untuk Kepatuhan App Store
 description: >-
   Pelajari tentang pembatasan tingkat API dan pentingnya hal tersebut untuk
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: limitation-du-taux-api-pour-la-conformité-app-store
 ---
 Pembatasan laju API memastikan aplikasi Anda memenuhi pedoman Apple dan Google sambil melindungi sistem dari kelebihan beban dan penyalahgunaan. Ini membatasi seberapa sering pengguna dapat membuat permintaan, meningkatkan keamanan, menghemat biaya, dan memastikan kinerja yang lancar. Berikut yang perlu Anda ketahui:
 

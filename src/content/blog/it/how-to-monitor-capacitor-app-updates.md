@@ -1,5 +1,5 @@
 ---
-slug: come-monitorare-gli-aggiornamenti-delle-app-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Come Monitorare gli Aggiornamenti delle App Capacitor
 description: >-
   Scopri strategie efficaci per monitorare gli aggiornamenti delle app
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-monitor-capacitor-app-updates
 ---
 Il monitoraggio degli aggiornamenti delle app [Capacitor](https://capacitorjs.com/) è fondamentale per mantenere la stabilità dell'app e garantire un'esperienza utente ottimale. Gli aggiornamenti OTA (Over-the-Air) di [Capacitor](https://capacitorjs.com/) semplificano il processo, consentendo agli sviluppatori di [distribuire aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) senza i ritardi degli app store. Ecco cosa devi sapere:
 

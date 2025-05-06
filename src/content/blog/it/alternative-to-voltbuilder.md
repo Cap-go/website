@@ -1,5 +1,5 @@
 ---
-slug: voltbuilderの代替案
+slug: alternativa-a-voltbuilder
 title: Voltbuilderの代替手段
 description: >-
   Voltbuilder
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ja
 next_blog: ''
-original_slug: alternativa-a-voltbuilder
 ---
 Voltbuilder è una piattaforma cloud che permette agli sviluppatori di convertire i loro progetti web in app mobile native per Android e iOS utilizzando HTML, CSS e JavaScript. Offre una serie di funzionalità progettate per semplificare il processo di sviluppo delle app, tra cui configurazione semplice, build e caricamento automatico delle app e supporto per i plugin Apache Cordova.
 

@@ -1,5 +1,5 @@
 ---
-slug: mobile-app-update-strategien-eine-checkliste-fuer-entwickler
+slug: mobile-app-update-strategies-a-developers-checklist
 title: 'Mobile App Update Strategien: Eine Checkliste für Entwickler'
 description: >-
   Lernen Sie wichtige Strategien für mobile App-Updates kennen, von
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: mobile-app-update-strategies-a-developers-checklist
 ---
 Ihre App aktuell zu halten ist wichtig für die Nutzerzufriedenheit und App-Performance. Hier sind die Gründe:
 

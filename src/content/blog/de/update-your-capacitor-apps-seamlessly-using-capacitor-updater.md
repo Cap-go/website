@@ -1,5 +1,5 @@
 ---
-slug: update-ihrer-capacitor-anwendungen-nahtlos-mit-capacitor-updater
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: Aktualisieren Sie Ihre Capacitor-Apps nahtlos mit Capacitor-updater
 description: >-
   Grüße an die Capacitor Ionic Community, heute werde ich Ihnen helfen,
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: de
 next_blog: ''
-original_slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 ## Was ist Capacitor-updater?
 

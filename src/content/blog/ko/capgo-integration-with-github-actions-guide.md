@@ -1,5 +1,5 @@
 ---
-slug: GitHub Actions를 활용한 Capgo 통합 가이드
+slug: capgo-integration-with-github-actions-guide
 title: 'GitHub Actions를 통한 Capgo 통합: 가이드'
 description: GitHub Actions를 Capgo와 통합하여 효율적이고 안전하며 비용 효율적인 앱 업데이트를 구현하여 개발 워크플로우를 향상시키세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capgo-integration-with-github-actions-guide
 ---
 [Capgo](https://capgo.app/)와 [GitHub Actions](https://docs.github.com/actions)를 함께 사용하면 [Capacitor](https://capacitorjs.com/) 앱의 업데이트 배포가 간단해집니다. 다음은 이 통합이 주목할 만한 이유입니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: geolocation-ota-updates-targeting-を追加する方法
+slug: come-aggiungere-il-targeting-geolocalizzato-agli-aggiornamenti-ota
 title: OTAアップデートに地理位置情報ターゲティングを追加する方法
 description: >-
   位置情報に基づいたターゲティングをOTAアップデートに実装して、位置特有の機能とタイムリーな更新によりユーザーエンゲージメントを向上させる方法をご覧ください。
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-aggiungere-il-targeting-geolocalizzato-agli-aggiornamenti-ota
 ---
 **[アプリのアップデート](https://capgo.app/plugins/capacitor-updater/)をユーザーの位置情報に合わせて配信したいですか？** Over-the-Air (OTA)アップデートの位置情報ターゲティングでこれが可能になります。ユーザーエクスペリエンスとエンゲージメントを向上させるために、位置情報とOTAアップデートを組み合わせる方法の簡単な概要をご紹介します：
 

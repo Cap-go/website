@@ -1,5 +1,5 @@
 ---
-slug: モバイルアプリのカナダのPIPEDA準拠
+slug: la-conformita-pipeda-per-app-mobili-in-canada
 title: カナダにおけるモバイルアプリのPIPEDA準拠
 description: モバイルアプリがPIPEDAに従ってカナダのプライバシー法を遵守し、ユーザーデータを保護して信頼を高める方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: la-conformita-pipeda-per-app-mobili-in-canada
 ---
 **[PIPEDA](https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/)に準拠したモバイルアプリを作成したいですか？以下がPIPEDAについて知っておくべき重要な点です：**
 

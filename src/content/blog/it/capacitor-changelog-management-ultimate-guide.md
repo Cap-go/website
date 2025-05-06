@@ -1,5 +1,5 @@
 ---
-slug: Capacitorの変更履歴管理-完全ガイド
+slug: gestione-dei-changelog-di-capacitor-guida-completa
 title: Capacitorのチェンジログ管理：完全ガイド
 description: >-
   Capacitor
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: gestione-dei-changelog-di-capacitor-guida-completa
 ---
 La gestione dei changelog è essenziale per mantenere gli [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) trasparenti e organizzati. Questa guida spiega come creare, strutturare e automatizzare i changelog per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), assicurando che sia gli sviluppatori che gli utenti rimangano informati. Ecco cosa imparerai:
 

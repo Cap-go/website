@@ -1,5 +1,5 @@
 ---
-slug: iOS와 Android 대상 캐패시터 OTA 업데이트
+slug: capacitor-ota-updates-targeting-ios-vs-android
 title: iOS 및 Android 대상으로 한 Capacitor OTA 업데이트
 description: 'iOS와 Android에서의 OTA 업데이트 전략의 차이점을 살펴보고, 배포, 보안 및 사용자 요구사항에 대해 알아봅니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-targeting-ios-vs-android
 ---
 [**Capacitor**](https://capacitorjs.com/) **앱을 앱스토어의 지연 없이 바로 업데이트하고 싶으신가요?** Over-the-Air (OTA) 업데이트를 통해 앱스토어에 재제출하지 않고도 앱의 웹 레이어(HTML, CSS, JavaScript)를 변경할 수 있습니다. 하지만 iOS와 Android는 이러한 업데이트를 다르게 처리하며, 이러한 차이점을 이해하는 것이 중요합니다.
 

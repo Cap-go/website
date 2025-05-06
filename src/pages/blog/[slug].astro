@@ -33,9 +33,9 @@ const related = blogs.filter((j) => j.data.published !== false && j.data.slug !=
 // For hreflang tags - find all available translations for this article
 const alternateVersions = []
 if (entry) {
-  // Find articles with the same original_slug or if original_slug is not present, find exact slug match
-  const originalSlug = entry.data.original_slug || entry.data.slug
-  const availableTranslations = blogs.filter((j) => (j.data.original_slug && j.data.original_slug === originalSlug) || (!j.data.original_slug && j.data.slug === originalSlug))
+  // Find articles with the same slug
+  const originalSlug = entry.data.slug
+  const availableTranslations = blogs.filter((j) => (j.data.slug === originalSlug && j.data.locale !== Astro.locals.locale))
   // Add entry for each available locale
   for (const translation of availableTranslations) {
     alternateVersions.push({

@@ -1,5 +1,5 @@
 ---
-slug: migrazione-da-cordova-a-capacitor
+slug: migrating-cordova-to-capacitor
 title: 'Migrazione di un''App Web da Cordova a Capacitor: Una Guida Passo-Passo'
 description: >-
   Questa guida passo-passo ti aiuterà a migrare la tua app web da Cordova a
@@ -18,7 +18,6 @@ tag: Migration
 published: true
 locale: it
 next_blog: ''
-original_slug: migrating-cordova-to-capacitor
 ---
 # Migrazione di un'App Web da Cordova a Capacitor: Una Guida Passo dopo Passo
 

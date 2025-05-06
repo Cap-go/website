@@ -1,5 +1,5 @@
 ---
-slug: perbedaan-kunci-antara-plugin-capacitor-cicd-dan-appflow
+slug: différences-clés-entre-les-plugins-capacitor-cicd-et-appflow
 title: 'Plugin CI/CD Capacitor vs Appflow: Perbedaan Utama'
 description: >-
   Jelajahi perbedaan antara plugin CI/CD Capacitor dan Appflow, termasuk biaya,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: différences-clés-entre-les-plugins-capacitor-cicd-et-appflow
 ---
 **Mencari cara yang lebih baik untuk mengelola pembaruan aplikasi [Capacitor](https://capacitorjs.com/) Anda?** Dengan [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) yang akan ditutup pada 2024 dan [Appflow](https://ionic.io/appflow/) yang dijadwalkan tutup pada 2026, pengembang beralih ke alternatif seperti plugin CI/CD Capacitor. Berikut ringkasannya:
 

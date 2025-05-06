@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionnent-les-mises-a-jour-en-direct-pour-capacitor
+slug: how-live-updates-for-capacitor-work
 title: Comment fonctionnent les mises à jour en direct dans Capgo
 description: >-
   Plongée technique dans l'implémentation des mises à jour en direct dans Capgo,
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: how-live-updates-for-capacitor-work
 ---
 # Comprendre les mises à jour en direct dans Capgo
 

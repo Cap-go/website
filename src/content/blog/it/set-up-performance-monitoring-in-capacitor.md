@@ -1,5 +1,5 @@
 ---
-slug: impostazione-del-monitoraggio-delle-prestazioni-in-capacitor
+slug: set-up-performance-monitoring-in-capacitor
 title: Configurare il Monitoraggio delle Prestazioni in Capacitor
 description: >-
   Scopri come configurare il monitoraggio delle prestazioni nella tua app
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: set-up-performance-monitoring-in-capacitor
 ---
 **Vuoi ottimizzare le prestazioni della tua app [Capacitor](https://capacitorjs.com/)?** Strumenti di monitoraggio come [Firebase](https://firebase.google.com/) e [Sentry](https://sentry.io/) possono aiutarti a tracciare crash, utilizzo delle risorse e tempi di risposta, garantendo un'esperienza utente più fluida. Ecco una rapida panoramica:
 

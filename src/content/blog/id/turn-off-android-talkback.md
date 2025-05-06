@@ -1,5 +1,5 @@
 ---
-slug: android-menonaktifkan-talkback
+slug: android-desactiver-talkback
 title: Cara Menonaktifkan dan Menggunakan TalkBack di Perangkat Android
 description: >-
   Instruksi langkah demi langkah untuk mengaktifkan dan menavigasi dengan
@@ -19,7 +19,6 @@ tag: Android
 published: true
 locale: id
 next_blog: ''
-original_slug: android-desactiver-talkback
 ---
 TalkBack adalah fitur penting untuk pengguna dengan gangguan penglihatan, yang terintegrasi ke dalam perangkat Android. Ini adalah pembaca layar berbasis gestur yang menyuarakan konten layar Anda, membantu dalam navigasi dan interaksi dengan berbagai elemen. Berikut panduan lengkap cara mengaktifkan dan menggunakan TalkBack.
 

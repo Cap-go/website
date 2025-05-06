@@ -1,5 +1,5 @@
 ---
-slug: firebase-crashlytics-per-app-capacitor
+slug: firebase-crashlytics-for-capacitor-apps
 title: App Firebase Crashlytics per Capacitor
 description: >-
   Scopri come integrare il reporting degli arresti anomali in tempo reale nelle
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: firebase-crashlytics-for-capacitor-apps
 ---
 **[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)** ti aiuta a monitorare i crash delle app in tempo reale, fornendo report dettagliati per risolvere rapidamente i problemi. Si integra perfettamente con [Capacitor](https://capacitorjs.com/) sia per le app iOS che Android. Ecco cosa devi sapere:
 

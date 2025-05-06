@@ -1,5 +1,5 @@
 ---
-slug: pembatasan-tingkat-api-untuk-kepatuhan-app-store
+slug: limitation-du-taux-api-pour-la-conformité-app-store
 title: Pembatasan Rate API untuk Kepatuhan App Store
 description: >-
   Pelajari tentang pembatasan tingkat API dan pentingnya hal tersebut untuk
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: limitation-du-taux-api-pour-la-conformité-app-store
 ---
 La limitation du débit d'API garantit que votre application respecte les directives d'Apple et Google tout en protégeant votre système contre la surcharge et les abus. Elle limite la fréquence à laquelle les utilisateurs peuvent faire des requêtes, améliorant la sécurité, réduisant les coûts et assurant une performance fluide. Voici ce que vous devez savoir :
 

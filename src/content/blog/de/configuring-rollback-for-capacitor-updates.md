@@ -1,5 +1,5 @@
 ---
-slug: konfiguration-des-rollbacks-fuer-capacitor-updates
+slug: configuring-rollback-for-capacitor-updates
 title: Konfiguration des Rollbacks für Capacitor-Updates
 description: >-
   Erfahren Sie, wie Sie Rollback-Optionen für Capacitor-Updates konfigurieren
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: configuring-rollback-for-capacitor-updates
 ---
 Rollback in [Capacitor](https://capacitorjs.com/) gewährleistet die Stabilität Ihrer App während Over-the-Air (OTA) Updates. Hier ist, was Sie wissen müssen:
 

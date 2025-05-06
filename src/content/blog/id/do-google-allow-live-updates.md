@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-langsung-diizinkan-oleh-google
+slug: mises-à-jour-en-direct-autorisées-par-google
 title: >-
   Apakah Google mengizinkan pengiriman pembaruan langsung ke aplikasi tanpa
   peninjauan Play Store?
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: mises-à-jour-en-direct-autorisées-par-google
 ---
 Google Play lebih tidak ketat dibandingkan Apple dalam hal memperbarui aplikasi.
 

@@ -1,5 +1,5 @@
 ---
-slug: 애플 규정을 준수하는 Capacitor 실시간 업데이트
+slug: capacitor-live-updates-staying-compliant-with-apple
 title: 'Capacitor 실시간 업데이트: Apple 규정 준수하기'
 description: 엄격한 가이드라인을 준수하여 앱 거절을 방지하면서 모바일 앱에서 라이브 업데이트를 효율적으로 구현하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-live-updates-staying-compliant-with-apple
 ---
 [Capacitor](https://capacitorjs.com/) 라이브 업데이트를 통해 개발자는 사용자가 [App Store](https://www.apple.com/app-store/)에서 업데이트를 다운로드할 필요 없이 버그 수정과 작은 변경사항을 앱에 직접 푸시할 수 있습니다. 이는 배포 속도를 최대 **81%** 향상시키고, 비용을 절감하며, 사용자 경험을 개선합니다. 하지만 앱 거절을 피하기 위해서는 Apple의 엄격한 가이드라인을 준수하는 것이 필수적입니다.
 

@@ -1,5 +1,5 @@
 ---
-slug: cara-memicu-pembaruan-ota-dengan-alat-cicd
+slug: comment-declencher-des-mises-a-jour-ota-avec-les-outils-cicd
 title: Pemicu Alat CI/CD untuk Pembaruan OTA
 description: >-
   Pelajari cara alat CI/CD meningkatkan pembaruan OTA dan memastikan deployment
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-declencher-des-mises-a-jour-ota-avec-les-outils-cicd
 ---
 CI/CD tools membuat pembaruan over-the-air (OTA) lebih cepat, aman, dan andal dengan mengotomatisasi prosesnya. Berikut penjelasannya:
 

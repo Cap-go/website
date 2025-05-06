@@ -1,5 +1,5 @@
 ---
-slug: Perbedaan Versi antara Capacitor dan Appflow
+slug: Différences de version entre Capacitor et Appflow
 title: 'Capacitor vs. Appflow: Perbedaan dalam Versi'
 description: >-
   Temukan perbedaan versi antara metode manual dan otomatis, dan jelajahi
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Différences de version entre Capacitor et Appflow
 ---
 **Mengelola versi aplikasi bisa rumit.** [Capacitor](https://capacitorjs.com/) menggunakan [pembaruan manual](https://capgo.app/docs/plugin/cloud-mode/manual-update/), sementara [Appflow](https://ionic.io/docs/appflow) mengotomatisasi prosesnya. Berikut yang perlu Anda ketahui:
 

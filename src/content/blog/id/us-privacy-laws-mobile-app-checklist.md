@@ -1,5 +1,5 @@
 ---
-slug: daftar-periksa-undang-undang-privasi-usa-aplikasi-seluler
+slug: liste-de-controle-lois-confidentialite-usa-applications-mobiles
 title: 'Undang-undang Privasi AS: Daftar Periksa untuk Aplikasi Seluler'
 description: >-
   Pastikan untuk mematuhi undang-undang privasi AS dalam aplikasi seluler Anda
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: liste-de-controle-lois-confidentialite-usa-applications-mobiles
 ---
 **Kepatuhan privasi sangat penting untuk aplikasi seluler.** Undang-undang privasi A.S. seperti [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act), [VCDPA](https://pro.bloomberglaw.com/insights/privacy/virginia-consumer-data-protection-act-vcdpa/), dan CPA mengharuskan aplikasi untuk melindungi data pengguna, memastikan transparansi, dan menghormati hak pengguna. Ketidakpatuhan dapat mengakibatkan denda hingga $7.500 per pelanggaran dan hilangnya kepercayaan pengguna. Berikut cara untuk tetap patuh:
 

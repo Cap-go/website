@@ -1,5 +1,5 @@
 ---
-slug: コード整合性の確保：Capacitorアプリのキーテクニック
+slug: integrità-del-codice-nelle-app-capacitor-tecniche-chiave
 title: Capacitor アプリのコード整合性：主要なテクニック
 description: アプリストアのガイドラインに準拠しながら、OTAアップデート、暗号化に焦点を当てて、モバイルアプリのコード整合性を確保するための重要な手法を探ります。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: integrità-del-codice-nelle-app-capacitor-tecniche-chiave
 ---
 **[Capacitor](https://capacitorjs.com/) アプリのコード整合性は、特にOTAアップデートにおいて非常に重要です。**適切な対策がなければ、悪意のあるコードの注入、APIクレデンシャルの盗難、バイナリの改変などのリスクにさらされる可能性があります。以下が重要なポイントです：
 

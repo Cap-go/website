@@ -1,5 +1,5 @@
 ---
-slug: 용량기 내 업데이트 채널 생성 및 삭제
+slug: creating-and-deleting-update-channels-in-capacitor
 title: Capacitor의 업데이트 채널 생성 및 삭제
 description: 'Capacitor에서 간소화된 앱 업데이트와 향상된 사용자 경험을 위한 업데이트 채널을 생성, 관리 및 삭제하는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: creating-and-deleting-update-channels-in-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) [업데이트 채널](https://capgo.app/docs/webapp/channels/)을 사용하면 특정 사용자 그룹에 무선(OTA) 업데이트를 전송할 수 있습니다. 이를 통해 여러 앱 버전을 관리하고, 새로운 기능을 테스트하며, 점진적으로 업데이트를 배포할 수 있습니다. 다음은 알아야 할 사항입니다:
 

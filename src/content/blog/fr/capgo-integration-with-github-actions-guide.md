@@ -1,5 +1,5 @@
 ---
-slug: Panduan Integrasi Capgo dengan GitHub Actions
+slug: Guide d'intégration de Capgo avec GitHub Actions
 title: 'Integrasi Capgo dengan GitHub Actions: Panduan'
 description: >-
   Integrasikan Capgo dengan GitHub Actions untuk pembaruan aplikasi yang
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Guide d'intégration de Capgo avec GitHub Actions
 ---
 [Capgo](https://capgo.app/) et [GitHub Actions](https://docs.github.com/actions) simplifient ensemble le déploiement des mises à jour pour les applications [Capacitor](https://capacitorjs.com/). Voici pourquoi cette intégration mérite votre attention :
 

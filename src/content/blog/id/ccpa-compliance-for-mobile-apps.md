@@ -1,5 +1,5 @@
 ---
-slug: ccpa-conformitas-untuk-aplikasi-seluler
+slug: ccpa-conformite-pour-applications-mobiles
 title: Kepatuhan CCPA untuk Aplikasi Seluler
 description: >-
   Temukan langkah-langkah paling penting bagi pengembang aplikasi mobile untuk
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: ccpa-conformite-pour-applications-mobiles
 ---
 **[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) kepatuhan adalah keharusan bagi pengembang aplikasi seluler yang mengumpulkan data pribadi dari penduduk California.** Undang-undang ini memberikan hak kepada pengguna atas data mereka dan menerapkan aturan ketat tentang bagaimana aplikasi menanganinya. Ketidakpatuhan berisiko denda besar dan kerusakan reputasi.
 

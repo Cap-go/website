@@ -1,6 +1,5 @@
 ---
-slug: >-
-  estrategias-de-actualizacion-de-aplicaciones-moviles-una-lista-de-verificacion-para-desarrolladores
+slug: mobile-app-update-strategien-eine-checkliste-fuer-entwickler
 title: >-
   Estrategias de actualización de aplicaciones móviles: Una lista de
   verificación para desarrolladores
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: mobile-app-update-strategien-eine-checkliste-fuer-entwickler
 ---
 Mantener tu aplicación actualizada es esencial para la satisfacción del usuario y el rendimiento. Aquí está el por qué:
 

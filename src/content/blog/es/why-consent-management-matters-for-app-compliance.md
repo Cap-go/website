@@ -1,6 +1,5 @@
 ---
-slug: >-
-  por-que-la-gestion-del-consentimiento-es-importante-para-la-conformidad-de-las-aplicaciones
+slug: warum-einwilligungsmanagement-für-app-konformität-wichtig-ist
 title: >-
   Por qué es importante la gestión del consentimiento para la conformidad de las
   aplicaciones
@@ -23,7 +22,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: warum-einwilligungsmanagement-für-app-konformität-wichtig-ist
 ---
 **La gestión del consentimiento del usuario es fundamental para el cumplimiento de las aplicaciones.** Las leyes de privacidad como [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) y [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) requieren que las aplicaciones obtengan el consentimiento explícito del usuario para la recopilación y uso de datos. Sin esto, te arriesgas a multas, problemas legales y pérdida de confianza del usuario. Esto es lo que necesitas saber:
 

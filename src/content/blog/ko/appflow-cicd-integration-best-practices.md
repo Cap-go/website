@@ -1,5 +1,5 @@
 ---
-slug: appflow-cicd-integration-모범사례
+slug: appflow-cicd-integration-best-practices
 title: 'Appflow CI/CD 통합: 모범 사례'
 description: 'CI/CD 솔루션을 모바일 앱 개발에 통합하는 모범 사례를 살펴보고, 주요 플랫폼의 비용과 기능을 비교해보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: appflow-cicd-integration-best-practices
 ---
 [Appflow](https://ionic.io/appflow/) CI/CD는 앱 스토어 심사를 기다리지 않고도 over-the-air(OTA) 업데이트를 통해 **24시간 이내에 95%의 사용자가 업데이트를 받을 수 있도록** 모바일 앱 업데이트를 단순화합니다. iOS와 Android 빌드, 앱 스토어 배포, 명령줄 관리를 위한 자동화 도구를 제공합니다. 하나 연간 최대 $6,000까지 상승하는 비용으로 인해 일부 팀들은 더 빠른 업데이트와 저렴한 가격을 제공하는 [Capgo](https://capgo.app/)와 같은 대안을 찾고 있습니다.
 

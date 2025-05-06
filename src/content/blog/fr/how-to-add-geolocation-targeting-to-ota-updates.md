@@ -1,5 +1,5 @@
 ---
-slug: comment-ajouter-la-geolocalisation-pour-les-mises-a-jour-ota
+slug: wie-man-geolokalisierung-für-ota-updates-hinzufügt
 title: Comment ajouter le ciblage de géolocalisation aux mises à jour OTA
 description: >-
   Découvrez comment implémenter le ciblage par géolocalisation dans les mises à
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-man-geolokalisierung-für-ota-updates-hinzufügt
 ---
 **Vous souhaitez proposer des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) adaptées à la localisation des utilisateurs ?** Le ciblage géographique dans les mises à jour Over-the-Air (OTA) rend cela possible. Voici un aperçu rapide de la façon dont vous pouvez combiner la géolocalisation avec les mises à jour OTA pour améliorer l'expérience et l'engagement des utilisateurs :
 

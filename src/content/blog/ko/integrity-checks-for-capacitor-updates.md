@@ -1,5 +1,5 @@
 ---
-slug: Capacitor 업데이트에 대한 무결성 검사
+slug: integrity-checks-for-capacitor-updates
 title: Capacitor 업데이트를 위한 무결성 검사
 description: 'Capacitor 앱에서 무결성 검사, 암호화 및 효과적인 롤백 전략을 사용하여 안전한 OTA 업데이트를 구현하는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: integrity-checks-for-capacitor-updates
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 안전한 OTA 업데이트는 사용자와 데이터를 보호하는데 필수적입니다. 다음은 안전한 업데이트를 보장하는 방법입니다:
 

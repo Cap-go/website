@@ -1,6 +1,5 @@
 ---
-slug: >-
-  comment-suivre-la-progression-des-mises-a-jour-ota-dans-les-applications-capacitor
+slug: wie-man-ota-update-erfolge-in-capacitor-apps-verfolgt
 title: Suivi des mises à jour OTA réussies dans les applications Capacitor
 description: >-
   Découvrez comment surveiller efficacement le succès des mises à jour OTA dans
@@ -19,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-man-ota-update-erfolge-in-capacitor-apps-verfolgt
 ---
 Les mises à jour OTA permettent de déployer des changements d'application directement aux utilisateurs sans attendre l'approbation des app stores. Mais suivre leur succès est essentiel pour garantir des mises à jour fluides, corriger rapidement les problèmes et améliorer l'expérience utilisateur. Voici ce que vous devez savoir :
 

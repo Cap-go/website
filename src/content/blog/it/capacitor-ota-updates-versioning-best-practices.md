@@ -1,5 +1,5 @@
 ---
-slug: best-practice-versioning-per-aggiornamenti-ota-in-capacitor
+slug: capacitor-ota-updates-versioning-best-practices
 title: 'Aggiornamenti OTA di Capacitor: Best Practices per il Versionamento'
 description: >-
   Scopri le migliori pratiche per gestire gli aggiornamenti OTA di Capacitor,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-ota-updates-versioning-best-practices
 ---
 **Vuoi distribuire gli aggiornamenti delle app istantaneamente senza attendere le approvazioni degli app store?** [Capacitor](https://capacitorjs.com/) permette di farlo con gli aggiornamenti Over-the-Air (OTA), consentendo aggiornamenti in tempo reale dei contenuti web della tua app. Ma per garantire distribuzioni fluide, hai bisogno di solide pratiche di controllo versione.
 

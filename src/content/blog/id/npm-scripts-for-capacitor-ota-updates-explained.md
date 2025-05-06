@@ -1,5 +1,5 @@
 ---
-slug: Penjelasan Script npm untuk Update OTA Capacitor
+slug: Explication des scripts npm pour les mises à jour OTA Capacitor
 title: Script NPM untuk Capacitor OTA Update Dijelaskan
 description: >-
   Pelajari cara mengotomatiskan pembaruan OTA untuk aplikasi Capacitor Anda
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Explication des scripts npm pour les mises à jour OTA Capacitor
 ---
 **Memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda belum pernah semudah ini.** Dengan menggabungkan pembaruan Over-The-Air (OTA) dengan skrip npm, Anda dapat mengotomatisasi deployment, menghemat waktu, dan memastikan pengguna Anda selalu memiliki versi terbaru - tanpa menunggu persetujuan app store.
 
