@@ -36,7 +36,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかる場
 
 ## CapgoによるプロフェッショナルなCI/CDセットアップ
 
-複雑さを回避するため、[Capgo](https://capgoapp/ci-cd/)が希望のプラットフォームで直接CI/CDパイプラインを設定します:
+複雑さを回避するため、[Capgo](https://capgo.app/docs/getting-started/cicd-integration/)が希望のプラットフォームで直接CI/CDパイプラインを設定します:
 
 - **プラットフォーム独立**: GitHub Actions、GitLab CIなどで動作
 - **シームレスな統合**: プラットフォームの切り替え不要、現在のプロセスで動作

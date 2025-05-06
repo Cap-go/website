@@ -36,7 +36,7 @@ Sebelum memulai, Anda perlu menyiapkan:
 
 ## Setup CI/CD Profesional oleh Capgo
 
-Lewati kompleksitas. [Capgo](https://capgo.app/ci-cd/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
+Lewati kompleksitas. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
 
 - **Platform Independen**: Bekerja dengan GitHub Actions, GitLab CI, atau lainnya
 - **Integrasi Mulus**: Tidak perlu beralih platform, bekerja dengan proses Anda saat ini
