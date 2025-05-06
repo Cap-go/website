@@ -1,5 +1,5 @@
 ---
-slug: panduan-langkah-demi-langkah-untuk-inisialisasi-aplikasi-capacitor
+slug: guide-étape-par-étape-pour-l'initialisation-d'une-application-capacitor
 title: Panduan Memulai Capacitor Secara Bertahap
 description: >-
   Pelajari cara mengonfigurasi dan mendeploy aplikasi mobile secara efisien
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-étape-par-étape-pour-l'initialisation-d'une-application-capacitor
 ---
 **Vous souhaitez créer des applications mobiles avec une seule base de code ?** [Capacitor](https://capacitorjs.com/) facilite la création d'applications iOS, Android et web en utilisant des frameworks comme [React](https://react.dev/), [Angular](https://angular.io/), ou [Vue](https://vuejs.org/). Ce guide explique comment configurer [Capacitor](https://capacitorjs.com/), configurer les plateformes et déployer les mises à jour efficacement.
 

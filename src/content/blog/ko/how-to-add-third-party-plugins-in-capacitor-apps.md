@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱에서 써드파티 플러그인을 추가하는 방법
+slug: how-to-add-third-party-plugins-in-capacitor-apps
 title: Capacitor 앱에서 타사 플러그인을 추가하는 방법
 description: Capacitor 앱의 기능과 성능을 향상시키기 위해 타사 플러그인을 통합하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-add-third-party-plugins-in-capacitor-apps
 ---
 [**Capacitor**](https://capacitorjs.com/) **앱에 실시간 업데이트, 분석 또는 보안 기능과 같은 강력한 기능을 추가하고 싶으신가요?** 서드파티 플러그인을 추가하는 것이 해답입니다. Capacitor는 네이티브 코딩 없이도 앱의 기능을 확장할 수 있도록 플러그인 통합을 단순화합니다.
 

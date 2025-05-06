@@ -1,5 +1,5 @@
 ---
-slug: Panduan Penggabungan untuk Tim yang Menggunakan Aplikasi Capacitor
+slug: Directives de fusion pour les équipes utilisant des applications Capacitor
 title: Petunjuk penggabungan untuk tim dengan aplikasi Capacitor
 description: >-
   Pelajari cara membuat kebijakan penggabungan yang efektif untuk aplikasi
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Directives de fusion pour les équipes utilisant des applications Capacitor
 ---
 To maintain smooth and reliable live updates for a Capacitor app, follow these key strategies:
 

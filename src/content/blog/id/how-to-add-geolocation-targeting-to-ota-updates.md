@@ -1,5 +1,5 @@
 ---
-slug: menambahkan-geolokasi-untuk-pembaharuan-ota
+slug: comment-ajouter-la-geolocalisation-pour-les-mises-a-jour-ota
 title: Cara Menambahkan Penargetan Geolokasi ke Update OTA
 description: >-
   Pelajari cara mengimplementasikan penargetan geolokasi dalam pembaruan OTA
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-ajouter-la-geolocalisation-pour-les-mises-a-jour-ota
 ---
 **Ingin mengirimkan [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) yang disesuaikan dengan lokasi pengguna?** Penargetan geolokasi dalam pembaruan Over-the-Air (OTA) membuat ini mungkin. Berikut ringkasan cara Anda dapat menggabungkan geolokasi dengan pembaruan OTA untuk meningkatkan pengalaman dan keterlibatan pengguna:
 

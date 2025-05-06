@@ -1,5 +1,5 @@
 ---
-slug: wie-man-benutzeranfragen-nach-ccpa-verarbeitet
+slug: how-to-handle-user-data-requests-under-ccpa
 title: Umgang mit Datenanfragen von Nutzern gemäß CCPA
 description: >-
   Erfahren Sie, wie Sie Benutzeranfragen zur Datenverarbeitung gemäß CCPA
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-handle-user-data-requests-under-ccpa
 ---
 Der California Consumer Privacy Act ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)) gibt Nutzern die Kontrolle über ihre persönlichen Daten und legt strenge Regeln für Unternehmen fest. Hier ist, was Sie für die Einhaltung wissen müssen:
 

@@ -1,5 +1,5 @@
 ---
-slug: Appleとグーグルのプライバシーコンプライアンスと第三者データ
+slug: apple-vs-google-privacy-compliance-per-dati-di-terze-parti
 title: Appleとグッグル：サードパーティデータのプライバシーコンプライアンス
 description: 2つの大手テクノロジー企業のプライバシー戦略の違いと、それらがアプリ開発者とユーザーデータの管理にどのような影響を与えるかを探ります。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: apple-vs-google-privacy-compliance-per-dati-di-terze-parti
 ---
 **AppleとGoogleのユーザープライバシーへのアプローチは、それぞれのビジネスモデルによって形作られています：**
 

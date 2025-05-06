@@ -1,7 +1,5 @@
 ---
-slug: >-
-  Le guide ultime de la sécurité des mises à jour OTA pour les applications
-  Capacitor
+slug: Der ultimative Leitfaden zur OTA-Update-Sicherheit für Capacitor-Apps
 title: >-
   Guide ultime sur la sécurité des mises à jour OTA pour les applications
   Capacitor
@@ -24,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: Der ultimative Leitfaden zur OTA-Update-Sicherheit für Capacitor-Apps
 ---
 Les mises à jour en direct (OTA) sont un moyen rapide d'améliorer les applications [Capacitor](https://capacitorjs.com/) sans les délais des magasins d'applications. Mais elles comportent des risques comme la falsification du code, les attaques par rétrogradation et les fuites de données. Voici comment sécuriser vos mises à jour :
 

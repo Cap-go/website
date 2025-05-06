@@ -1,5 +1,5 @@
 ---
-slug: so-passen-sie-build-skripte-mit-capacitor-cli-an
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: So passen Sie Build-Skripte mit der Capacitor CLI an
 description: >-
   Erfahren Sie, wie Sie Ihre Build-Skripte mit der Capacitor CLI für effiziente
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-customize-build-scripts-with-capacitor-cli
 ---
 [Capacitor](https://capacitorjs.com/) CLI ermöglicht es Ihnen, den Build-Prozess Ihrer App für iOS-, Android- und Web-Plattformen anzupassen. Durch Anpassung der Build-Skripte können Sie:
 

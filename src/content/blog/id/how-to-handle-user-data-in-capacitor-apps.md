@@ -1,5 +1,5 @@
 ---
-slug: mengelola-data-pengguna-di-aplikasi-capacitor
+slug: comment-gerer-les-donnees-utilisateur-dans-les-applications-capacitor
 title: Mengelola Data Pengguna dalam Aplikasi Capacitor
 description: >-
   Pelajari strategi efektif untuk mengelola data pengguna dalam aplikasi
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-gerer-les-donnees-utilisateur-dans-les-applications-capacitor
 ---
 **Penanganan data pengguna dalam aplikasi [Capacitor](https://capacitorjs.com/) memerlukan penyimpanan yang aman, kebijakan retensi yang jelas, dan kepatuhan terhadap undang-undang perlindungan data seperti [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) dan [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act).** Panduan ini menjelaskan cara meminimalkan pengumpulan data, mengamankan informasi sensitif, dan mengelola izin secara efektif. Berikut ringkasannya:
 

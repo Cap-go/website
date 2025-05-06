@@ -1,5 +1,5 @@
 ---
-slug: 5-praktik-terbaik-keamanan-untuk-pembaruan-langsung-aplikasi-seluler
+slug: 5-security-best-practices-for-mobile-app-live-updates
 title: 5 Praktik Terbaik Keamanan untuk Pembaruan Langsung Aplikasi Seluler
 description: >-
   Pelajari praktik keamanan penting untuk pembaruan aplikasi seluler secara
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: 5-security-best-practices-for-mobile-app-live-updates
 ---
 Menjaga keamanan aplikasi seluler Anda selama pembaruan langsung sangat penting untuk melindungi data pengguna dan mempertahankan kepercayaan. Berikut ringkasan praktik terbaik untuk mengamankan pembaruan over-the-air (OTA):
 

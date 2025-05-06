@@ -1,5 +1,5 @@
 ---
-slug: mejores-prácticas-para-aprobación-de-actualizaciones-ota
+slug: nutzerzustimmung-für-ota-updates-best-practices
 title: 'Consentimiento del usuario para actualizaciones OTA: Mejores prácticas'
 description: >-
   Aprende más sobre las mejores prácticas para obtener el consentimiento del
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: nutzerzustimmung-für-ota-updates-best-practices
 ---
 The main risks include:
 -   Potential legal issues from not meeting regulations

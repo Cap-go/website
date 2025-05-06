@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: it
 next_blog: null
-original_slug: automatic-capacitor-android-build-gitlab
 ---
 # Build Android Automatici con GitLab CI
 

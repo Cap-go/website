@@ -1,5 +1,5 @@
 ---
-slug: aplicaciones-capacitor-y-politicas-de-intercambio-de-datos
+slug: capacitor-apps-and-data-sharing-policies
 title: Aplicaciones Capacitor y Políticas de Compartición de Datos
 description: >-
   Conoce las políticas esenciales de intercambio de datos para aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-apps-and-data-sharing-policies
 ---
 **¿Quieres que tu aplicación cumpla con las estrictas reglas de datos de Apple y [Google Play](https://play.google/developer-content-policy/)? Esto es lo que necesitas saber:**
 

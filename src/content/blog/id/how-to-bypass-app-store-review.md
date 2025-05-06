@@ -1,5 +1,5 @@
 ---
-slug: cara-menghindari-verifikasi-app-store
+slug: comment-eviter-la-verification-de-l-app-store
 title: Cara Memperbarui Aplikasi Capacitor JS Tanpa Melewati Proses Review App Store
 description: >-
   Bagaimana fungsi Capgo dapat membantu Anda mengirimkan pembaruan kode ke
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: comment-eviter-la-verification-de-l-app-store
 ---
 _Senang Anda bertanya._
 

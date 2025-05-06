@@ -1,5 +1,5 @@
 ---
-slug: différences-entre-développement-et-production-dans-les-applications-capacitor
+slug: entwicklung-vs-produktiv-unterschiede-in-capacitor-apps
 title: >-
   Développement vs. Production : Différences essentielles dans les applications
   Capacitor
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: entwicklung-vs-produktiv-unterschiede-in-capacitor-apps
 ---
 **Création d'applications avec [Capacitor](https://capacitorjs.com/) ? Voici ce que vous devez savoir :** Les environnements de développement et de production servent des objectifs différents et nécessitent des configurations uniques. Le développement privilégie la rapidité et le débogage, tandis que la production se concentre sur les performances, la sécurité et l'expérience utilisateur.
 

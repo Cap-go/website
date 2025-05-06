@@ -1,5 +1,5 @@
 ---
-slug: APIリクエストの頻度制限によるAppStore適合対応
+slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
 title: API頻度制限のApp Store対応
 description: APIレート制限の手法とアプリストアのコンプライアンス、セキュリティ、システムパフォーマンスにおけるその重要性について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
 ---
 Il limite di velocità delle API garantisce che la tua app rispetti le linee guida di Apple e Google proteggendo il tuo sistema dal sovraccarico e dagli abusi. Limita la frequenza con cui gli utenti possono effettuare richieste, migliorando la sicurezza, riducendo i costi e garantendo prestazioni fluide. Ecco cosa devi sapere:
 

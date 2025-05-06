@@ -1,5 +1,5 @@
 ---
-slug: Androidトークバックを無効にする
+slug: disattiva-android-talkback
 title: Androidデバイスでのトークバックの無効化と使用方法
 description: Android の視覚障害者向け組み込み型スクリーンリーダーである TalkBack の有効化とナビゲーションのステップバイステップガイド。
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Android
 published: true
 locale: ja
 next_blog: ''
-original_slug: disattiva-android-talkback
 ---
 TalkBackは、Androidデバイスに組み込まれている視覚障害者向けの重要な機能です。画面の内容を音声化するジェスチャーベースのスクリーンリーダーで、さまざまな要素のナビゲーションや操作をサポートします。以下は、TalkBackを有効にして使用するための包括的なガイドです。
 

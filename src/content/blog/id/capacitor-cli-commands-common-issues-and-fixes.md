@@ -1,5 +1,5 @@
 ---
-slug: perintah-cli-capacitor-yang-umum-masalah-dan-solusi
+slug: comandos-cli-comunes-de-capacitor-problemas-y-soluciones
 title: 'Perintah CLI Capacitor: Masalah dan Solusi Umum'
 description: >-
   Selesaikan masalah umum CLI Capacitor dengan solusi praktis untuk plugin,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comandos-cli-comunes-de-capacitor-problemas-y-soluciones
 ---
 **Mengalami masalah dengan [Capacitor](https://capacitorjs.com/) CLI?** Berikut panduan cepat untuk memperbaiki masalah umum seperti masalah plugin, kesalahan build, dan masalah jaringan. Capacitor CLI sangat penting untuk mengelola pembaruan aplikasi, terutama pembaruan over-the-air (OTA), yang memungkinkan Anda melewati tinjauan app store dan mendorong perbaikan lebih cepat. Berikut poin-poin pentingnya:
 

@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-plugin-options-for-ota-updates
 ---
 **앱스토어 지연 없이 [Capacitor](https://capacitorjs.com/) 앱을 빠르고 안전하게 업데이트하고 싶으신가요?** OTA(Over-the-Air) 업데이트를 통해 사용자에게 직접 변경사항을 전달하여 시간과 대역폭을 절약할 수 있습니다. 알아야 할 사항은 다음과 같습니다:
 

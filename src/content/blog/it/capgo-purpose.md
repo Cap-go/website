@@ -1,5 +1,5 @@
 ---
-slug: Scopo di Capgo
+slug: capgo-purpose
 title: Scopo di Capgo
 description: >-
   L'articolo del blog dovrebbe essere descritto come una guida completa per gli
@@ -19,7 +19,6 @@ tag: SOLUTION
 published: true
 locale: it
 next_blog: ''
-original_slug: capgo-purpose
 ---
 ## Panoramica
 

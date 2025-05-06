@@ -1,5 +1,5 @@
 ---
-slug: エンドツーエンドセキュリティとコード署名によるCapacitor Updaterの紹介
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: capacitor-updater のコード署名によるエンドツーエンド暗号化の導入
 description: 企業向けおよびハイセキュリティアプリ向けに設計された、RSA + AES暗号化を使用したアップデートの暗号化
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Solution
 published: true
 locale: ja
 next_blog: ''
-original_slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 ---
 [Capacitor-updater](https://github.com/Cap-go/capacitor-updater/)は、エンドツーエンドのコード暗号化をサポートするようになりました。コード署名により、エンドユーザーのデバイスで実行される更新が改ざんされていないことを確認し、Capacitor-updaterの標準的なWebグレードのセキュリティに加えて、さらなる保護レベルを提供します。
 

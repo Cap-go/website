@@ -1,6 +1,5 @@
 ---
-slug: >-
-  introduction-de-la-securite-de-bout-en-bout-dans-capacitor-updater-avec-signature-de-code
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: >-
   Introduction du chiffrement de bout en bout dans capacitor-updater avec la
   signature de code
@@ -21,7 +20,6 @@ tag: Solution
 published: true
 locale: fr
 next_blog: ''
-original_slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 ---
 [Capacitor-updater](https://github.com/Cap-go/capacitor-updater/) prend désormais en charge le chiffrement de code de bout en bout. La signature de code garantit que les mises à jour exécutées par les appareils des utilisateurs finaux n'ont pas été altérées et offre un niveau de protection supplémentaire au-delà de la sécurité web standard de Capacitor-updater.
 

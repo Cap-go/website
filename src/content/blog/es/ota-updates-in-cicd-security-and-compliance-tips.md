@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-ota-en-cicd-consejos-de-seguridad-y-cumplimiento
+slug: ota-updates-in-cicd-security-and-compliance-tips
 title: 'Actualizaciones OTA en CI/CD: Consejos de Seguridad y Cumplimiento'
 description: >-
   Aprende estrategias esenciales de seguridad y cumplimiento para
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: ota-updates-in-cicd-security-and-compliance-tips
 ---
 Las actualizaciones **OTA** permiten enviar actualizaciones de aplicaciones directamente a los usuarios sin esperar las revisiones de la tienda de aplicaciones. Junto con los **pipelines de CI/CD**, permiten implementaciones rápidas, automatizadas y seguras. Pero la velocidad conlleva riesgos - la seguridad, el cumplimiento y la privacidad deben ser prioridades.
 

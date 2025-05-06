@@ -1,5 +1,5 @@
 ---
-slug: kontrollierte-bereitstellung-für-capacitor-live-updates
+slug: phased-rollouts-for-capacitor-live-updates
 title: Rollout-Verteilung für Capacitor Live Updates
 description: >-
   Erfahren Sie, wie gestaffelte Einführungen App-Updates verbessern, indem sie
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: phased-rollouts-for-capacitor-live-updates
 ---
 Gestaffelte Einführungen ermöglichen eine schrittweise App-Aktualisierung, beginnend mit einer kleinen Benutzergruppe und Erweiterung nach bestätigter Stabilität. Dieser Ansatz reduziert Risiken, sichert die App-Qualität und verbessert die Nutzererfahrung. Tools wie [Capgo](https://capgo.app/) erleichtern die Verwaltung dieser Updates unter Einhaltung der App-Store-Regeln.
 

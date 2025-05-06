@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-capgo-lahir
+slug: comment-est-né-capgo
 title: Kelahiran Capgo
 description: Kisah Tentang Bagaimana Saya Memulai Perjalanan Ini dan Membangun Capgo
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-est-né-capgo
 ---
 Hai, Saya Martin Donadieu,
 

@@ -1,5 +1,5 @@
 ---
-slug: menyiapkan-cicd-untuk-aplikasi-capacitor
+slug: einrichten-von-cicd-für-capacitor-apps
 title: Menyiapkan CI/CD untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mengoptimalkan rilis aplikasi Anda untuk iOS dan Android
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: einrichten-von-cicd-für-capacitor-apps
 ---
 **Ingin rilis aplikasi iOS dan Android yang lebih cepat dan bebas kesalahan?** Pipeline CI/CD untuk aplikasi [Capacitor](https://capacitorjs.com/) mengotomatisasi proses build, testing, dan deployment, memangkas waktu rilis hingga 70% dan mengurangi kesalahan hingga 60%. Panduan ini mencakup semua yang perlu Anda ketahui, mulai dari menyiapkan lingkungan hingga mengotomatisasi update langsung dengan [Capgo](https://capgo.app/).
 

@@ -1,5 +1,5 @@
 ---
-slug: colli-di-bottiglia-comuni-cicd-nelle-pipeline-ota
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: Comuni colli di bottiglia CI/CD nei Pipeline OTA
 description: >-
   Impara come superare le sfide comuni nelle pipeline CI/CD OTA per migliorare
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: common-cicd-bottlenecks-in-ota-pipelines
 ---
 **Le pipeline CI/CD è essenziale per distribuire aggiornamenti over-the-air (OTA) in modo rapido ed efficiente.** Ma spesso devono affrontare sfide che rallentano le distribuzioni. Ecco cosa devi sapere:
 

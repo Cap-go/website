@@ -1,5 +1,5 @@
 ---
-slug: forum-komunitas-capacitor-untuk-pengembang-plugin
+slug: foros-de-la-comunidad-capacitor-para-desarrolladores-de-plugins
 title: Forum Komunitas Capacitor untuk Pengembang Plugin
 description: >-
   Jelajahi forum-forum penting untuk pengembang plugin Capacitor untuk
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: foros-de-la-comunidad-capacitor-para-desarrolladores-de-plugins
 ---
 [Capacitor](https://capacitorjs.com/) forum sangat penting bagi pengembang plugin untuk menyelesaikan masalah, berbagi pengetahuan, dan terhubung dengan yang lain. Baik Anda sedang mencari solusi masalah, berbagi plugin, atau mempelajari praktik terbaik, forum-forum ini menyediakan sumber daya dan dukungan yang berharga.
 

@@ -1,5 +1,5 @@
 ---
-slug: wie-chinas-datenschutzgesetze-die-app-store-einreichungen-beeinflussen
+slug: how-chinas-data-laws-impact-app-store-submissions
 title: Wie sich Chinas Datenschutzgesetze auf App Store-Einreichungen auswirken
 description: >-
   Erfahren Sie, wie sich Chinas strenge Datenschutzgesetze auf App-Einreichungen
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-chinas-data-laws-impact-app-store-submissions
 ---
 Chinas strenge Datenschutzgesetze machen es App-Entwicklern schwer, in den Markt einzutreten. Hier ist, was Sie wissen müssen:
 

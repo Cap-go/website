@@ -1,5 +1,5 @@
 ---
-slug: perlindungan-privasi-apple-google-kepatuhan-data-pihak-ketiga
+slug: protection-confidentialite-apple-google-conformite-donnees-tierces
 title: 'Apple vs. Google: Kepatuhan Privasi untuk Data Pihak Ketiga'
 description: >-
   Jelajahi strategi privasi yang kontras dari dua perusahaan teknologi besar dan
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: protection-confidentialite-apple-google-conformite-donnees-tierces
 ---
 **Apple dan Google memiliki pendekatan berbeda terhadap privasi pengguna, dibentuk oleh model bisnis mereka:**
 

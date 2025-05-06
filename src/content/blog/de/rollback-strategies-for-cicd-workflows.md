@@ -1,5 +1,5 @@
 ---
-slug: rollback-strategien-für-cicd-workflows
+slug: rollback-strategies-for-cicd-workflows
 title: Rollback-Strategien für CI/CD-Workflows
 description: >-
   Erkunden Sie effektive Rollback-Strategien für CI/CD-Workflows und erfahren
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: rollback-strategies-for-cicd-workflows
 ---
 **Suchen Sie nach schnellen, zuverlässigen Möglichkeiten, problematische App-Updates rückgängig zu machen?** Hier ist das Wichtigste: Plattformen wie [Capgo](https://capgo.app/) machen Rollbacks mit Ein-Klick-Lösungen, starker Verschlüsselung und CI/CD-Integration einfach, während andere wie [Appflow](https://ionic.io/docs/appflow) und [Capawesome](https://capawesome.io/) Einschränkungen oder höhere Kosten haben. [Microsoft CodePush](https://microsoft.github.io/code-push/), einst eine kostenlose Option, wurde 2024 eingestellt.
 

@@ -1,5 +1,5 @@
 ---
-slug: capacitor-cli-プラグインコマンドの概要
+slug: capacitor-cli-plugin-commands-overview
 title: Capacitorプラグインのコマンド概要
 description: Capacitor プラグインを CLI コマンドを使用して効率的に管理する方法と、強力なプラグイン管理ツールとの統合の利点について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-cli-plugin-commands-overview
 ---
 [Capacitor](https://capacitorjs.com/) CLIは、アプリ開発におけるプラグイン管理を簡素化し、ネイティブデバイス機能のシームレスな統合を可能にします。[Capgo](https://capgo.app/)のようなツールと組み合わせることで、更新、デプロイ、トラブルシューティングを効率化します。以下が重要なポイントです：
 

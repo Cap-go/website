@@ -1,5 +1,5 @@
 ---
-slug: wie-die-native-bridge-in-capacitor-android-apps-funktioniert
+slug: how-native-bridge-works-in-capacitor-android-apps
 title: So funktioniert die Native Bridge in Capacitor Android Apps
 description: >-
   Erfahren Sie, wie die native Bridge in Android-Apps die Kommunikation zwischen
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-native-bridge-works-in-capacitor-android-apps
 ---
 **Die native Bridge in [Capacitor](https://capacitorjs.com/) Android-Apps ermöglicht eine nahtlose Kommunikation zwischen webbasiertem JavaScript und nativen Android-Funktionen.** Sie ermöglicht Entwicklern die direkte Nutzung von Android-spezifischen Funktionalitäten wie Kamera, Geolokalisierung und Speicher aus ihrem Webcode heraus, wodurch Apps entstehen, die sich nativ anfühlen und gleichzeitig Webtechnologien nutzen.
 

@@ -1,5 +1,5 @@
 ---
-slug: capacitor-앱의-버전-충돌-해결을-위한-5단계
+slug: 5-steps-for-resolving-version-conflicts-in-capacitor-apps
 title: Capacitor 앱에서 버전 충돌을 해결하기 위한 5단계
 description: Capacitor 앱의 버전 충돌을 해결하기 위한 다섯 가지 명확한 단계로 안정성을 확보하고 향후 문제를 예방하세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: 5-steps-for-resolving-version-conflicts-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱에서 버전 충돌로 어려움을 겪고 계신가요? 이러한 문제는 빌드 실패, 런타임 오류, 플러그인 오작동을 일으킬 수 있습니다. 이 가이드는 충돌을 식별, 해결, 예방하는 **5단계 실행 계획**을 간단히 설명합니다:
 

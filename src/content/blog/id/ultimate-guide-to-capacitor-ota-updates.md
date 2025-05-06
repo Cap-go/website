@@ -1,5 +1,5 @@
 ---
-slug: panduan-lengkap-untuk-capacitor-ota-updates
+slug: das-ultimative-handbuch-für-capacitor-ota-updates
 title: Panduan Lengkap untuk Pembaruan OTA Capacitor
 description: >-
   Pelajari cara Capacitor OTA Updates memungkinkan pembaruan aplikasi secara
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: das-ultimative-handbuch-für-capacitor-ota-updates
 ---
 **Ingin memperbarui aplikasi Anda secara instan tanpa menunggu peninjauan app store?** [Capacitor](https://capacitorjs.com/) OTA (Over-The-Air) memungkinkan Anda mengirimkan fitur baru, perbaikan bug, dan perubahan kode langsung ke perangkat pengguna. Tanpa unduhan manual, tanpa penundaan.
 

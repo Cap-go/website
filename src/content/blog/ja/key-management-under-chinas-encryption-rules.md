@@ -1,5 +1,5 @@
 ---
-slug: 中国の暗号法による鍵管理
+slug: key-management-under-chinas-encryption-rules
 title: 中国の暗号規則に基づく鍵管理
 description: 中国の暗号化キー管理法を理解することは、ローカルストレージ、監査、および技術規制を含むコンプライアンスにとって極めて重要です。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: key-management-under-chinas-encryption-rules
 ---
 **中国での暗号化キーの管理は複雑ですが、コンプライアンスには不可欠です。** 知っておくべきことは以下の通りです：
 

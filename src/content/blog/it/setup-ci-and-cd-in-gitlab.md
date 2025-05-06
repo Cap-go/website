@@ -1,5 +1,5 @@
 ---
-slug: configurazione-ci-e-cd-gitlab
+slug: setup-ci-and-cd-gitlab
 title: Costruzione e rilascio automatico dell'app con GitLab
 description: >-
   Crea la tua pipeline CI/CD con GitLab gratuitamente, distribuisci la tua app
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: it
 next_blog: ''
-original_slug: setup-ci-and-cd-gitlab
 ---
 Questo articolo ti guiderà nella configurazione della pipeline CI/CD con GitLab.
 

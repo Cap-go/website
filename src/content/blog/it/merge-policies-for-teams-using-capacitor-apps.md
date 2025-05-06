@@ -1,5 +1,5 @@
 ---
-slug: criteri-di-unione-per-team-utilizzando-app-capacitor
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Politiche di Unione per Team che Utilizzano App Capacitor
 description: >-
   Scopri come stabilire efficaci politiche di merge per le app Capacitor,
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: merge-policies-for-teams-using-capacitor-apps
 ---
 To ensure reliable live updates for your Capacitor app, consider these key strategies:
 

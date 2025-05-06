@@ -1,5 +1,5 @@
 ---
-slug: alternativa-chiusura-appflow
+slug: appflow-shutdown-alternative
 title: >-
   Chiusura di Ionic AppFlow - Qual è il prossimo passo per lo sviluppo della tua
   App Mobile?
@@ -21,7 +21,6 @@ tag: News
 published: true
 locale: it
 next_blog: ''
-original_slug: appflow-shutdown-alternative
 ---
 Con il recente annuncio della chiusura di Ionic AppFlow, molti team di sviluppo sono alla ricerca di alternative per mantenere il loro flusso di sviluppo di app mobili. Se sei tra coloro che ne sono stati colpiti, abbiamo buone notizie: Capgo offre una soluzione completa che non solo sostituisce le funzionalità di AppFlow ma fornisce anche funzionalità avanzate a un prezzo più accessibile.
 

@@ -1,5 +1,5 @@
 ---
-slug: configuracion-de-monitoreo-de-rendimiento-das-en-capacitor
+slug: das-performance-monitoring-in-capacitor-einrichten
 title: Configuración del monitoreo de rendimiento en Capacitor
 description: >-
   Aprenda cómo configurar el monitoreo de rendimiento en su aplicación usando
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: das-performance-monitoring-in-capacitor-einrichten
 ---
 **¿Quieres optimizar el rendimiento de tu app [Capacitor](https://capacitorjs.com/)?** Herramientas de monitoreo como [Firebase](https://firebase.google.com/) y [Sentry](https://sentry.io/) pueden ayudarte a rastrear fallos, uso de recursos y tiempos de respuesta, garantizando una mejor experiencia de usuario. Aquí un resumen rápido:
 

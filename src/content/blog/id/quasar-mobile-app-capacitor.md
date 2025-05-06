@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-langsung-dengan-quasar-dan-capacitor
+slug: mise-à-jour-en-direct-avec-quasar-et-capacitor
 title: 'Membuat aplikasi mobile dengan live update, Quasar dan Capacitor.'
 description: >-
   Cara membuat aplikasi mobile dengan Quasar, Capacitor dan mengimplementasikan
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: mise-à-jour-en-direct-avec-quasar-et-capacitor
 ---
 Dalam tutorial ini, kita akan memulai dengan membuat aplikasi web baru menggunakan [Quasar](https://quasar.dev/). Kemudian, kita akan mempelajari cara mengubahnya menjadi aplikasi mobile menggunakan Capacitor. Jika Anda ingin membuat aplikasi Anda terlihat lebih baik di mobile.
 

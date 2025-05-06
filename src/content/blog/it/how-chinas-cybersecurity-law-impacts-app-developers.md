@@ -1,5 +1,5 @@
 ---
-slug: impatto-della-legge-sulla-cybersecurity-cinese-sugli-sviluppatori-di-app
+slug: how-chinas-cybersecurity-law-impacts-app-developers
 title: >-
   Come la legge sulla sicurezza informatica cinese impatta sugli sviluppatori di
   app
@@ -22,7 +22,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-chinas-cybersecurity-law-impacts-app-developers
 ---
 **[中华人民共和国网络安全法](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China)（CSL）要求应用程序开发者在处理用户数据时遵守严格规定，尤其是涉及中国用户时。** 以下是您需要了解的内容：
 

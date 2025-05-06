@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: it
 next_blog: ''
-original_slug: self-hosted-capgo
 ---
 Questo articolo fornisce una guida passo dopo passo su come effettuare il self-hosting di Capgo, oltre a una discussione sui benefici e le sfide del self-hosting.
 

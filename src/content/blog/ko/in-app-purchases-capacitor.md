@@ -1,5 +1,5 @@
 ---
-slug: 앱내 구매-Capacitor
+slug: in-app-purchases-capacitor
 title: Capacitor의 인앱 결제
 description: Capacitor 앱에서 Capacitor Purchases 플러그인과 RevenueCat을 사용하여 인앱 구매를 구현하는 방법
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: ''
-original_slug: in-app-purchases-capacitor
 ---
 >> 이 플러그인은 이제 RevenueCat 공식 저장소로 이전되었습니다. 자세한 내용은 [공식 문서](https://www.revenuecat.com/docs/getting-started/installation/capacitor)를 참조하세요.
 

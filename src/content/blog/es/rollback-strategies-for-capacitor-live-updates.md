@@ -1,5 +1,5 @@
 ---
-slug: estrategias-de-rollback-para-actualizaciones-en-vivo-de-capacitor
+slug: rollback-strategien-für-capacitor-live-updates
 title: Estrategias de Rollback para Capacitor Live Updates
 description: >-
   Aprende más sobre estrategias efectivas de reversión para actualizaciones en
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: rollback-strategien-für-capacitor-live-updates
 ---
 **Evite interrupciones en la aplicación con estrategias sólidas de reversión.** Los Live Updates de [Capacitor](https://capacitorjs.com/) te permiten entregar correcciones rápidamente, pero el 18% de las actualizaciones fallan globalmente. Un plan de reversión asegura la estabilidad cuando surgen problemas. Aquí un resumen rápido:
 

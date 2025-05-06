@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-updates-cloud-hosting-optionen-im-vergleich
+slug: capacitor-ota-updates-cloud-hosting-options-compared
 title: 'Capacitor OTA Updates: Cloud Hosting Optionen im Vergleich'
 description: >-
   Erkunden Sie die besten Cloud-Hosting-Optionen für Capacitor OTA-Updates,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-cloud-hosting-options-compared
 ---
 Over-the-Air (OTA) Updates ermöglichen es Ihnen, Ihre [Capacitor](https://capacitorjs.com/) Apps sofort zu aktualisieren, ohne Verzögerungen durch App Stores. Die Wahl der richtigen Cloud-Hosting-Plattform ist entscheidend für Geschwindigkeit, Sicherheit und Benutzerfreundlichkeit.
 

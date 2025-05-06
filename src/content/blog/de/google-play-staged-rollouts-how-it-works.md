@@ -1,5 +1,5 @@
 ---
-slug: so-funktionieren-die-gestaffelten-google-play-rollouts
+slug: google-play-staged-rollouts-how-it-works
 title: 'Schrittweise Einführung in Google Play: So funktioniert es'
 description: >-
   Erfahren Sie, wie Sie App-Updates mit gestaffelten Einführungen im Google Play
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: google-play-staged-rollouts-how-it-works
 ---
 **Mit gestaffelten Rollouts im Google Play** können Entwickler [App-Updates](https://capgo.app/plugins/capacitor-updater/) schrittweise veröffentlichen, beginnend mit einem kleinen Prozentsatz der Nutzer, bevor sie auf alle ausgeweitet werden. Dies gewährleistet Stabilität, erkennt Probleme frühzeitig und minimiert Risiken.
 

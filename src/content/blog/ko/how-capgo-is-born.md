@@ -1,5 +1,5 @@
 ---
-slug: 캡고의 탄생 배경
+slug: how-capgo-is-born
 title: Capgo의 탄생 과정
 description: Capgo를 시작하고 구축하게 된 배경 이야기
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-capgo-is-born
 ---
 안녕하세요, 저는 Martin Donadieu입니다.
 

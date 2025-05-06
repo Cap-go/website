@@ -1,5 +1,7 @@
 ---
-slug: Penjelasan Pengalamatan Versi Update OTA Capacitor
+slug: >-
+  Explicación del direccionamiento de versiones de actualizaciones OTA de
+  Capacitor
 title: 'Pembaruan OTA Capacitor: Penjelasan Versi'
 description: >-
   Pelajari bagaimana segmentasi versi untuk pembaruan OTA memastikan stabilitas
@@ -20,9 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  Explicación del direccionamiento de versiones de actualizaciones OTA de
-  Capacitor
 ---
 [Capacitor](https://capacitorjs.com/) Over-The-Air (OTA) memungkinkan Anda mendorong perubahan aplikasi langsung ke pengguna tanpa menunggu persetujuan app store. Dengan **penargetan versi**, Anda dapat mengirimkan pembaruan ke versi aplikasi tertentu, memastikan kompatibilitas dan mengurangi risiko seperti crash.
 

@@ -1,5 +1,5 @@
 ---
-slug: Capacitorの代替
+slug: alternativa-a-capawesome
 title: Capawesome の代替
 description: Capawesomeは、Capgoシステムにインスパイアされました。このシステムはCapgoほど完全ではありませんが、良い代替手段です。
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Alternatives
 published: false
 locale: ja
 next_blog: ''
-original_slug: alternativa-a-capawesome
 ---
 Capawesome Cloud è una soluzione alternativa a Capgo, diciamo che è il suo fratellino creato da
 

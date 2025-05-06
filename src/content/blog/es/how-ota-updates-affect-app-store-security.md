@@ -1,5 +1,5 @@
 ---
-slug: como-los-ota-updates-afectan-la-seguridad-de-la-app-store
+slug: wie-sich-ota-updates-auf-die-app-store-sicherheit-auswirken
 title: Cómo afectan las actualizaciones OTA a la seguridad de la App Store
 description: >-
   Las actualizaciones OTA simplifican las mejoras de las aplicaciones, pero
@@ -18,7 +18,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-sich-ota-updates-auf-die-app-store-sicherheit-auswirken
 ---
 Las actualizaciones OTA (over-the-air) permiten a los desarrolladores de aplicaciones entregar cambios directamente a los usuarios sin esperar aprobaciones de las tiendas de aplicaciones. Esto acelera la corrección de errores, parches de seguridad y lanzamiento de funciones. **El 95% de los usuarios instalan actualizaciones dentro de las 24 horas**, pero la rapidez puede introducir riesgos si no se gestiona de forma segura.
 

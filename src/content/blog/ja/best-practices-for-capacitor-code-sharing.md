@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: best-practices-for-capacitor-code-sharing
 ---
 **[Capacitor](https://capacitorjs.com/) を使用すると、1つのコードベースでiOS、Android、Webアプリを構築できます。**このガイドでは、クロスプラットフォームコードを効率的に構造化、テスト、デプロイする方法を説明します。以下について学びます：
 

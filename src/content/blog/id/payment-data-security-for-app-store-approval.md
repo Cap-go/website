@@ -1,5 +1,5 @@
 ---
-slug: keamanan-data-pembayaran-untuk-persetujuan-toko-aplikasi
+slug: zahlungsdaten-sicherheit-fuer-app-store-genehmigung
 title: Keamanan Data Pembayaran untuk Persetujuan App Store
 description: >-
   Pastikan aplikasi Anda memenuhi persyaratan keamanan untuk data pembayaran
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: zahlungsdaten-sicherheit-fuer-app-store-genehmigung
 ---
 **Ingin aplikasi Anda disetujui oleh Apple atau Google? Mulai dengan data pembayaran yang aman.** Toko aplikasi menuntut **enkripsi end-to-end** untuk data pembayaran guna memenuhi standar kepatuhan. Tanpa itu, aplikasi Anda bisa ditolak atau dihapus. Berikut yang perlu Anda ketahui:
 

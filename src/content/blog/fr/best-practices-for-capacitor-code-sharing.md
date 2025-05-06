@@ -1,5 +1,5 @@
 ---
-slug: meilleures-pratiques-pour-le-partage-de-code-capacitor
+slug: best-practices-for-capacitor-code-sharing
 title: Meilleures pratiques pour le partage de code Capacitor
 description: >-
   Découvrez les meilleures pratiques pour partager efficacement du code dans les
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: best-practices-for-capacitor-code-sharing
 ---
 **[Capacitor](https://capacitorjs.com/) vous permet de créer des applications pour iOS, Android et le web à partir d'une seule base de code.** Ce guide explique comment structurer, tester et déployer efficacement votre code multiplateforme. Voici ce que vous apprendrez :
 

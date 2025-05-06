@@ -1,5 +1,5 @@
 ---
-slug: アップルのプライバシーマニフェストについて
+slug: understanding-apples-privacy-manifest
 title: Appleのプライバシーマニフェストについて
 description: Appleの必須プライバシーマニフェストについて、iOSアプリにおける重要性、および明確なガイドラインに従って効果的に遵守する方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: understanding-apples-privacy-manifest
 ---
 **2024年5月以降、AppleのプライバシーマニフェストがすべてのiOSアプリに必須となります。**App Storeへの提出には、データ収集、APIの使用、サードパーティSDK、ネットワークドメインの詳細を記載したJSONファイルが必要です。以下が重要なポイントです：
 

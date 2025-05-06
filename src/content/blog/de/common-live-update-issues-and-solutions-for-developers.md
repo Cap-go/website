@@ -1,5 +1,5 @@
 ---
-slug: häufige-live-update-probleme-und-lösungen-für-entwickler
+slug: common-live-update-issues-and-solutions-for-developers
 title: Häufige Live-Update-Probleme und Lösungen für Entwickler
 description: >-
   Erfahren Sie mehr über Lösungen für häufige Herausforderungen bei
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: common-live-update-issues-and-solutions-for-developers
 ---
 Live-Updates ermöglichen Entwicklern, Änderungen direkt an Benutzer zu übermitteln, ohne App-Store-Verzögerungen. Aber sie bringen Herausforderungen wie Netzwerkprobleme, Versionskonflikte und Gerätekompatibilitätsprobleme mit sich. Dieser Leitfaden bietet Lösungen für reibungslose Updates:
 

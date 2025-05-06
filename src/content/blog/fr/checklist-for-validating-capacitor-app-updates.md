@@ -1,5 +1,5 @@
 ---
-slug: liste-de-verification-pour-valider-les-mises-a-jour-des-applications-capacitor
+slug: lista-de-verificacion-para-validar-actualizaciones-de-aplicaciones-capacitor
 title: Liste de vérification pour valider les mises à jour des applications Capacitor
 description: >-
   Assurez des mises à jour fluides des applications avec cette liste de contrôle
@@ -18,7 +18,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: lista-de-verificacion-para-validar-actualizaciones-de-aplicaciones-capacitor
 ---
 **Vous souhaitez proposer des [mises à jour fluides](https://capgo.app/plugins/capacitor-updater/) sans risquer la confiance des utilisateurs ?** Voici une liste de contrôle rapide et pratique pour valider les mises à jour d'applications [Capacitor](https://capacitorjs.com/), en particulier lors de l'utilisation de mises à jour en direct (OTA) :
 

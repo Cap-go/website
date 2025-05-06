@@ -1,5 +1,5 @@
 ---
-slug: capacitor-アプリのデバッグ完全ガイド
+slug: guida-completa-al-debugging-delle-app-capacitor
 title: Capacitorアプリのデバッグ完全ガイド
 description: Capacitor アプリのデバッグに関する効果的な戦略と重要なツールを学び、すべてのプラットフォームで最適なパフォーマンスを確保しましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: guida-completa-al-debugging-delle-app-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) アプリは、Webとネイティブのテクノロジーをブレンドしたハイブリッドな性質により、デバッグが複雑になることがあります。このガイドでは、問題を効果的にトラブルシューティングするための必須ツール、テクニック、ヒントを紹介し、プロセスを簡素化します。
 

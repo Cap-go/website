@@ -1,5 +1,5 @@
 ---
-slug: aplikasi-capacitor-dan-hukum-data-rusia-saran-kepatuhan
+slug: applications-capacitor-et-lois-sur-les-donnees-russes-conseils-de-conformite
 title: 'Aplikasi Capacitor dan Undang-Undang Data Rusia: Panduan Kepatuhan'
 description: >-
   Temukan tips penting untuk kepatuhan pengembangan aplikasi di Rusia, termasuk
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: applications-capacitor-et-lois-sur-les-donnees-russes-conseils-de-conformite
 ---
 To ensure your privacy policy meets Russian data laws, you need to:
 

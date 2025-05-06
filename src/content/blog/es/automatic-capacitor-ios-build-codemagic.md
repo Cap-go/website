@@ -1,5 +1,5 @@
 ---
-slug: construcción-automática-de-capacitor-ios-en-codemagic
+slug: automatic-capacitor-ios-build-codemagic
 title: Compilación automática de Capacitor iOS con Codemagic
 description: >-
   Cómo configurar un pipeline CI/CD para tu aplicación Ionic iOS usando
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: es
 next_blog: automatic-capacitor-android-build-codemagic
-original_slug: automatic-capacitor-ios-build-codemagic
 ---
 ## Entrega continua para iOS usando Codemagic
 

@@ -1,5 +1,5 @@
 ---
-slug: pelacakan-persetujuan-otomatis-untuk-aplikasi-capacitor
+slug: automated-consent-tracking-for-capacitor-apps
 title: Pelacakan Persetujuan Otomatis untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mengimplementasikan pelacakan persetujuan otomatis dalam
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: automated-consent-tracking-for-capacitor-apps
 ---
 Pelacakan persetujuan otomatis sangat penting untuk aplikasi [Capacitor](https://capacitorjs.com/) untuk memenuhi peraturan privasi dan aturan platform. Berikut mengapa ini penting dan cara mengimplementasikannya:
 

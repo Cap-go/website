@@ -1,5 +1,5 @@
 ---
-slug: Bewährte Methoden zur Versionierung von Capacitor OTA-Updates
+slug: capacitor-ota-updates-versioning-best-practices
 title: 'Capacitor OTA Updates: Best Practices für die Versionierung'
 description: >-
   Erfahren Sie mehr über Best Practices für die Verwaltung von Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-versioning-best-practices
 ---
 Here's the German translation:
 

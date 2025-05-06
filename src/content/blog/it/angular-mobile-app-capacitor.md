@@ -1,5 +1,5 @@
 ---
-slug: app-mobile-angular-capacitor
+slug: angular-mobile-app-capacitor
 title: Creazione di app mobili con Angular e Capacitor
 description: >-
   Impara come creare un'app mobile con Angular, Capacitor e migliorare
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: angular-mobile-app-capacitor
 ---
 In questo tutorial, inizieremo con una nuova app [Angular](https://angular.io/) e passeremo al mondo delle app mobile native utilizzando Capacitor. Opzionalmente, puoi anche aggiungere [Konsta UI](https://konstaui.com/) per migliorare l'interfaccia mobile con Tailwind CSS.
 

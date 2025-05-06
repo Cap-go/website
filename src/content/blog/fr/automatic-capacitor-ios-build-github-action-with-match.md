@@ -1,5 +1,5 @@
 ---
-slug: generasi-ios-otomatis-capacitor-dengan-github-action-dan-match
+slug: génération-ios-automatique-capacitor-avec-github-action-et-match
 title: Kompilasi iOS Capacitor Otomatis dengan GitHub Actions menggunakan match
 description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi iOS Ionic Menggunakan fastlane
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: id
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: génération-ios-automatique-capacitor-avec-github-action-et-match
 ---
 # Builds iOS automatiques avec GitHub Actions en utilisant Match
 

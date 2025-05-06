@@ -1,5 +1,5 @@
 ---
-slug: panduan-debug-aplikasi-capacitor
+slug: guide-de-debogage-des-applications-capacitor
 title: Panduan Lengkap Pemecahan Masalah Aplikasi Capacitor
 description: >-
   Temukan strategi yang efektif dan alat penting untuk melakukan debug aplikasi
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-de-debogage-des-applications-capacitor
 ---
 Debugging aplikasi [Capacitor](https://capacitorjs.com/) bisa menjadi kompleks karena sifat hibridanya yang menggabungkan teknologi web dan native. Panduan ini menyederhanakan prosesnya, mencakup alat, teknik, dan tips penting untuk mengatasi masalah secara efektif.
 

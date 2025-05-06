@@ -1,5 +1,5 @@
 ---
-slug: beta環境でのOTAアップデートの導入ポリシー
+slug: aggiornamenti-ota-in-beta-rispettare-policy
 title: OTAアップデートのベータ版：ポリシーの順守
 description: アプリストアのポリシーに準拠し、ユーザーのセキュリティを向上させながら、ベータテストでのOTAアップデートを効果的に管理する方法をご紹介します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: aggiornamenti-ota-in-beta-rispettare-policy
 ---
 **OTAアップデートによってベータテストがより速く、より簡単になりますが、アプリストアのルールを遵守することが重要です。** 以下が知っておくべきポイントです：
 

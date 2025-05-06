@@ -1,5 +1,5 @@
 ---
-slug: 利用状況のカウント方法
+slug: how-your-usage-is-counted
 title: Capgoでの使用量の計算方法
 description: Capgoの使用量のカウント方法を理解し、最適に活用しましょう。プランをより良く管理する方法を学びます
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Solution
 published: true
 locale: ja
 next_blog: ''
-original_slug: how-your-usage-is-counted
 ---
 # Capgoでは、3つの値がカウントされ、理解することが重要です
 - ユーザー数

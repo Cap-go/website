@@ -1,5 +1,5 @@
 ---
-slug: モバイルアプリのCCPA準拠
+slug: conformità-ccpa-per-app-mobili
 title: モバイルアプリのCCPA準拠
 description: >-
   モバイルアプリ開発者向けのCCPA（カリフォルニア州消費者プライバシー法）への準拠のための重要なステップを探り、ユーザーデータを保護し、プライバシーの権利を維持します。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: conformità-ccpa-per-app-mobili
 ---
 **[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)に準拠することは、カリフォルニア州居住者の個人データを収集するモバイルアプリ開発者にとって必須です。**この法律はユーザーにデータに関する権利を付与し、アプリがそれを扱う方法に厳格なルールを課しています。非準拠は高額な罰金と評判の損害を招くリスクがあります。
 

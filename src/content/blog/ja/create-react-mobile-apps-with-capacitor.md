@@ -1,5 +1,5 @@
 ---
-slug: モバイル対応ReactとCapacitorでアプリを作成する
+slug: crea-app-mobile-react-con-capacitor
 title: モバイルアプリをReactとCapacitorで構築する
 description: >-
   Reactとキャパシター（Capacitor）を使用してモバイルアプリを作成し、Konsta
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: crea-app-mobile-react-con-capacitor
 ---
 このチュートリアルでは、新しい[React](https://reactjs.org/)アプリから始めて、Capacitorを使用してネイティブモバイル開発に移行します。オプションとして、[Konsta UI](https://konstaui.com/)を追加してTailwind CSSによるモバイルUIを改善することもできます。
 

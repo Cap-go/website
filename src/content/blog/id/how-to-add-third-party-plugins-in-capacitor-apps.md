@@ -1,5 +1,5 @@
 ---
-slug: Cara Menambahkan Plugin Pihak Ketiga di Aplikasi Capacitor
+slug: Cómo agregar plugins de terceros en aplicaciones Capacitor
 title: Cara Menambahkan Plugin Pihak Ketiga pada Aplikasi Capacitor
 description: >-
   Pelajari cara meningkatkan aplikasi Capacitor Anda dengan mengintegrasikan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Cómo agregar plugins de terceros en aplicaciones Capacitor
 ---
 Inilah terjemahannya:
 

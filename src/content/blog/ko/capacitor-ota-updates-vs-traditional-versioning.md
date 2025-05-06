@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 vs 전통적인 버전 관리
+slug: capacitor-ota-updates-vs-traditional-versioning
 title: Capacitor OTA 업데이트 vs 전통적인 버전 관리
 description: >-
   Capacitor의 OTA 업데이트가 기존 앱스토어 방식과 비교하여 더 빠르고 자동화된 업데이트를 제공함으로써 어떻게 앱 배포를 혁신하는지
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-vs-traditional-versioning
 ---
 **[앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 앱스토어 리뷰를 기다리지 않고 더 빠르게 하고 싶으세요?** [Capacitor](https://capacitorjs.com/)의 Over-the-Air (OTA) 업데이트가 해답이 될 수 있습니다. 며칠이 걸리고 사용자 조치가 필요한 기존 앱스토어 업데이트와 달리, OTA 업데이트는 변경사항을 몇 분 안에 배포하고 사용자에게 자동으로 전달합니다.
 

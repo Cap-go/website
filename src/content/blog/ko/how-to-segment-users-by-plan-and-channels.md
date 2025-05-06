@@ -1,5 +1,5 @@
 ---
-slug: 사용자를 요금제 및 채널별로 세분화하는 방법
+slug: how-to-segment-users-by-plan-and-channels
 title: 기능 플래그와 A/B 테스팅을 위한 채널 사용법
 description: CapGo의 채널을 사용하여 기능 플래그와 A/B 테스팅을 직접 사용자에게 할당하거나 백엔드를 활용하는 방법 알아보기
 author: Martin Donadieu
@@ -14,7 +14,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-segment-users-by-plan-and-channels
 ---
 # 기능 플래그와 A/B 테스트를 위한 채널 사용 방법
 

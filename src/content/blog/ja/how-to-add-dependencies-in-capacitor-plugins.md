@@ -1,5 +1,5 @@
 ---
-slug: capacitorプラグインに依存関係を追加する方法
+slug: come-aggiungere-dipendenze-nei-plugin-capacitor
 title: Capacitor プラグインに依存関係を追加する方法
 description: Capacitor プラグインのすべてのプラットフォームにおける依存関係の管理を、実践的なステップとベストプラクティスで最適化する方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-aggiungere-dipendenze-nei-plugin-capacitor
 ---
 [Capacitor](https://capacitorjs.com/)プラグインの依存関係の追加は大変に感じるかもしれませんが、明確な手順に分けると簡単です。以下が知っておくべきことです：
 

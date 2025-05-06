@@ -1,6 +1,5 @@
 ---
-slug: >-
-  comment-les-applications-mobiles-sont-conformes-aux-lois-de-confidentialite-des-etats-unis
+slug: como-las-aplicaciones-moviles-cumplen-con-las-leyes-de-privacidad-de-eeuu
 title: >-
   Comment les applications mobiles se conforment aux lois sur la confidentialité
   aux États-Unis
@@ -24,7 +23,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: como-las-aplicaciones-moviles-cumplen-con-las-leyes-de-privacidad-de-eeuu
 ---
 -   **Fonctionnalités clés de confidentialité** :
     

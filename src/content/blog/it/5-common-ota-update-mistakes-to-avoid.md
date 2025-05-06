@@ -1,5 +1,5 @@
 ---
-slug: 5つのよくある OTA アップデートの失敗パターンと回避方法
+slug: 5-common-ota-update-mistakes-to-avoid
 title: 5 Errori Comuni da Evitare negli Aggiornamenti OTA
 description: >-
   Evita gli errori comuni negli aggiornamenti OTA che possono causare arresti
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: 5-common-ota-update-mistakes-to-avoid
 ---
 Gli aggiornamenti OTA (Over-the-Air) possono migliorare rapidamente le app, ma gli errori possono portare a crash, rischi per la sicurezza o persino violazioni dell'[app store](https://www.apple.com/app-store/). Ecco una guida rapida per evitare le insidie comuni:
 

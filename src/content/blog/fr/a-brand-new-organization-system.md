@@ -1,5 +1,5 @@
 ---
-slug: un-nouveau-système-d-organisation
+slug: a-brand-new-organization-system
 title: Un nouveau système d'organisation
 description: Kisah di balik bagaimana tim capgo menambahkan sistem organisasi
 author: WcaleNieWolny
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: fr
 next_blog: ''
-original_slug: a-brand-new-organization-system
 ---
 ## Introduction
 

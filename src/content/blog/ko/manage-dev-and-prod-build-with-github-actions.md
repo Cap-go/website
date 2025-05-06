@@ -1,5 +1,5 @@
 ---
-slug: github-actions로-개발-및-프로덕션-빌드-관리
+slug: manage-dev-and-prod-build-with-github-actions
 title: GitHub 액션으로 개발 및 프로덕션 빌드 관리
 description: >-
   Capgo를 사용하여 특정 채널에 devbuild를 릴리스하고, Apple과 Google의 검토를 기다리지 않고도 팀이 Capacitor
@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: ko
 next_blog: how-to-send-specific-version-to-users
-original_slug: manage-dev-and-prod-build-with-github-actions
 ---
 이 튜토리얼은 GitHub 호스팅에 중점을 두고 있지만, 약간의 수정으로 다른 CI/CD 플랫폼에도 적용할 수 있습니다.
 

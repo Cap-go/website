@@ -1,5 +1,5 @@
 ---
-slug: live-updates-für-flutter-app
+slug: live-updates-for-flutter-app
 title: Flutter Live-Update
 description: >-
   Ist es möglich, Live-Updates an Flutter-Apps ohne App Store-Überprüfung zu
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: de
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: live-updates-for-flutter-app
 ---
 Capgo Live Update ist ein Dienst, der Entwicklern ermöglicht, Updates für ihre mobilen Apps bereitzustellen, ohne den traditionellen App Store-Einreichungsprozess zu durchlaufen. Dies kann eine praktische Möglichkeit sein, schnell Fehler zu beheben oder kleine Updates an einer App vorzunehmen, ohne auf den App Store-Überprüfungsprozess warten zu müssen. Allerdings unterstützt Capgo Live Update keine Aktualisierung von Flutter-Apps, da Flutter-Apps in nativen Code kompiliert werden.
 

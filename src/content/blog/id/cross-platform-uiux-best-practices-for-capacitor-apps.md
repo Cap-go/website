@@ -1,5 +1,5 @@
 ---
-slug: praktik-terbaik-ui-ux-lintas-platform-untuk-aplikasi-capacitor
+slug: pratiques-recommandees-ui-ux-multiplateforme-pour-les-applications-capacitor
 title: 'UI/UX Lintas Platform: Praktik Terbaik untuk Aplikasi Capacitor'
 description: >-
   Pelajari praktik terbaik untuk membuat UI/UX yang mulus dan lintas platform
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: pratiques-recommandees-ui-ux-multiplateforme-pour-les-applications-capacitor
 ---
 **Ingin membuat aplikasi yang terasa native di iOS, Android, dan web?** [Capacitor](https://capacitorjs.com/) membuatnya mungkin dengan memadukan fitur web dan native. Tapi menciptakan pengalaman yang mulus di berbagai platform membutuhkan desain UI/UX yang cermat. Berikut caranya:
 

@@ -1,5 +1,5 @@
 ---
-slug: capacitor로 크로스 플랫폼 앱 프로파일링 하는 방법
+slug: how-to-profile-cross-platform-apps-with-capacitor
 title: Capacitor로 크로스플랫폼 앱을 프로파일링하는 방법
 description: >-
   Capacitor로 구축된 크로스 플랫폼 앱의 성능을 iOS, Android 및 웹에서 개선하기 위한 프로파일링 및 최적화 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-profile-cross-platform-apps-with-capacitor
 ---
 [Capacitor](https://capacitorjs.com/)로 구축된 크로스 플랫폼 앱을 프로파일링하면 iOS, Android 및 웹 플랫폼에서 성능 문제를 식별하는 데 도움이 됩니다. 시작하기 위한 간단한 가이드입니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: comment-est-né-capgo
+slug: como-nacio-capgo
 title: La naissance de Capgo
 description: Histoire de comment j'ai commencé ce voyage et construit Capgo
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: fr
 next_blog: ''
-original_slug: como-nacio-capgo
 ---
 Salut, je suis Martin Donadieu,
 

@@ -1,5 +1,5 @@
 ---
-slug: integritas-kode-dalam-aplikasi-capacitor-teknik-utama
+slug: integrite-du-code-dans-les-applications-capacitor-techniques-cles
 title: 'Integritas Kode dalam Aplikasi Capacitor: Teknik-Teknik Utama'
 description: >-
   Pelajari teknik-teknik penting untuk memastikan integritas kode dalam aplikasi
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: integrite-du-code-dans-les-applications-capacitor-techniques-cles
 ---
 **Integritas kode sangat penting dalam mengamankan aplikasi [Capacitor](https://capacitorjs.com/), khususnya pada update OTA.** Tanpa langkah-langkah yang tepat, aplikasi Anda dapat menghadapi risiko seperti injeksi kode berbahaya, pencurian kredensial API, atau modifikasi biner. Berikut ringkasan yang perlu Anda ketahui:
 

@@ -1,5 +1,5 @@
 ---
-slug: come-capacitor-gestisce-le-differenze-di-piattaforma
+slug: how-capacitor-handles-platform-differences
 title: Come Capacitor Gestisce le Differenze tra Piattaforme
 description: >-
   Impara a gestire in modo efficace le differenze tra piattaforme nello sviluppo
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-capacitor-handles-platform-differences
 ---
 [Capacitor](https://capacitorjs.com/) aiuta gli sviluppatori a creare app per iOS e Android utilizzando la stessa base di codice, gestendo le differenze specifiche della piattaforma. Semplifica l'integrazione delle funzionalità native, garantisce la conformità alle linee guida della piattaforma e ottimizza le prestazioni. Punti chiave:
 

@@ -1,5 +1,5 @@
 ---
-slug: come-lapplicazione-del-ccpa-impatta-sulle-app
+slug: how-ccpa-enforcement-impacts-apps
 title: Come il rispetto del CCPA influenza le app
 description: >-
   La CCPA sta cambiando il modo in cui le app mobili gestiscono i dati degli
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-ccpa-enforcement-impacts-apps
 ---
 **Il California Consumer Privacy Act (CCPA)** sta ridefinendo il modo in cui le app mobili gestiscono i dati degli utenti. Ecco cosa devi sapere:
 

@@ -1,5 +1,5 @@
 ---
-slug: como-evitar-la-revision-de-la-app-store
+slug: how-to-bypass-app-store-review
 title: Cómo actualizar aplicaciones de Capacitor JS sin la revisión de la App Store.
 description: >-
   ¿Cómo puede la función Capgo permitirte enviar actualizaciones de código a
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: how-to-bypass-app-store-review
 ---
 _Me alegro de que lo preguntes._
 

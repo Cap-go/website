@@ -1,5 +1,5 @@
 ---
-slug: configuración-básica-de-js-css-para-aspecto-nativo
+slug: basic-js-css-config-for-native-app-look
 title: Configuraciones básicas de JS y CSS para el aspecto de una aplicación nativa
 description: >-
   Aprende cómo configurar tu aplicación web con ajustes básicos de JavaScript y
@@ -17,7 +17,6 @@ tag: Web Development
 published: true
 locale: es
 next_blog: ''
-original_slug: basic-js-css-config-for-native-app-look
 ---
 # Configuraciones básicas de JS y CSS para una apariencia de aplicación nativa
 

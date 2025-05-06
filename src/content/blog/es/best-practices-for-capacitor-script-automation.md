@@ -1,5 +1,5 @@
 ---
-slug: mejores-practicas-para-la-automatizacion-de-scripts-en-capacitor
+slug: best-practices-for-capacitor-script-automation
 title: Mejores Prácticas para la Automatización de Scripts en Capacitor
 description: >-
   Aprende las mejores prácticas para automatizar scripts de Capacitor para
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: best-practices-for-capacitor-script-automation
 ---
 [Capacitor](https://capacitorjs.com/) la automatización de scripts ayuda a los desarrolladores a actualizar aplicaciones móviles de forma rápida y eficiente. Esto es lo que necesitas saber:
 

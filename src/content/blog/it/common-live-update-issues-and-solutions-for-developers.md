@@ -1,5 +1,5 @@
 ---
-slug: problemi-comuni-e-soluzioni-di-aggiornamenti-live-per-sviluppatori
+slug: common-live-update-issues-and-solutions-for-developers
 title: >-
   Problemi e soluzioni comuni per gli aggiornamenti in tempo reale per gli
   sviluppatori
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: common-live-update-issues-and-solutions-for-developers
 ---
 Gli aggiornamenti in tempo reale permettono agli sviluppatori di inviare modifiche direttamente agli utenti senza i ritardi dell'app store. Ma presentano sfide come problemi di rete, conflitti di versione e problemi di compatibilità dei dispositivi. Questa guida fornisce soluzioni per garantire aggiornamenti fluidi:
 

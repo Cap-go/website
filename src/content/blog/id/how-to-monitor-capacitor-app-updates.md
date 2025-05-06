@@ -1,5 +1,5 @@
 ---
-slug: cara-memantau-pembaruan-aplikasi-capacitor
+slug: comment-surveiller-les-mises-à-jour-de-l'application-capacitor
 title: Memantau Pembaruan Aplikasi Capacitor
 description: >-
   Temukan strategi efektif untuk memantau pembaruan aplikasi Capacitor,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-surveiller-les-mises-à-jour-de-l'application-capacitor
 ---
 Memantau pembaruan aplikasi [Capacitor](https://capacitorjs.com/) sangat penting untuk menjaga stabilitas aplikasi dan memastikan pengalaman pengguna yang lancar. Pembaruan OTA (Over-the-Air) [Capacitor](https://capacitorjs.com/) menyederhanakan prosesnya, memungkinkan pengembang untuk [mendorong pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) tanpa penundaan app store. Berikut yang perlu Anda ketahui:
 

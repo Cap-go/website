@@ -1,5 +1,5 @@
 ---
-slug: comment-eviter-la-verification-de-l-app-store
+slug: como-evitar-la-revision-de-la-app-store
 title: >-
   Comment mettre à jour les applications Capacitor JS sans passer par la
   révision de l'App Store.
@@ -21,7 +21,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: como-evitar-la-revision-de-la-app-store
 ---
 _Je suis ravi(e) que vous posiez la question._
 

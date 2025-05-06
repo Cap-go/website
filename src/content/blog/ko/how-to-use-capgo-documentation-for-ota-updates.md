@@ -1,5 +1,5 @@
 ---
-slug: ota-업데이트를-위한-capgo-문서-사용-방법
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: Capgo 문서를 사용하여 OTA 업데이트 하는 방법
 description: >-
   Capgo의 포괄적인 문서와 단계별 안내를 통해 Capacitor 앱에서 안전한 Over-the-Air 업데이트를 구현하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-use-capgo-documentation-for-ota-updates
 ---
 앱스토어 지연 없이 [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)가 필요하신가요? [Capgo](https://capgo.app/)를 사용하면 사용자에게 안전한 무선(OTA) 업데이트를 즉시 제공할 수 있습니다. 앱스토어 심사를 건너뛰고 앱을 쉽게 최신 상태로 유지하세요.
 

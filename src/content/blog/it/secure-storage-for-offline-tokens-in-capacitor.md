@@ -1,5 +1,5 @@
 ---
-slug: memorizzazione-sicura-per-token-offline-in-capacitor
+slug: secure-storage-for-offline-tokens-in-capacitor
 title: Archiviazione sicura per token offline in Capacitor
 description: >-
   Impara come memorizzare in modo sicuro i token di autenticazione offline
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: it
 next_blog: ''
-original_slug: secure-storage-for-offline-tokens-in-capacitor
 ---
 **Vuoi mantenere i token di autenticazione della tua app al sicuro offline?** Ecco cosa devi sapere:
 

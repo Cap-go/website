@@ -1,5 +1,5 @@
 ---
-slug: wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt
+slug: how-ccpa-enforcement-impacts-apps
 title: Wie sich die CCPA-Durchsetzung auf Apps auswirkt
 description: >-
   Der CCPA verändert die Art und Weise, wie mobile Apps Benutzerdaten verwalten,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-ccpa-enforcement-impacts-apps
 ---
 **Der California Consumer Privacy Act (CCPA)** verändert den Umgang mit Nutzerdaten in mobilen Apps. Hier ist, was Sie wissen müssen:
 

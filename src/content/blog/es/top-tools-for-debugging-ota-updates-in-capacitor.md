@@ -1,5 +1,5 @@
 ---
-slug: herramientas-principales-para-depurar-actualizaciones-ota-en-capacitor
+slug: top-tools-for-debugging-ota-updates-in-capacitor
 title: Principales herramientas para depurar actualizaciones OTA en Capacitor
 description: >-
   Explora herramientas esenciales y estrategias para depurar efectivamente
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: top-tools-for-debugging-ota-updates-in-capacitor
 ---
 La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), o depurando en diferentes plataformas, aquí hay tres herramientas a considerar:
 

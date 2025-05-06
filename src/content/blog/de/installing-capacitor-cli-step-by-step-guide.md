@@ -1,5 +1,5 @@
 ---
-slug: schritt-für-schritt-anleitung-zur-installation-des-capacitor-cli
+slug: installing-capacitor-cli-step-by-step-guide
 title: 'Installation der Capacitor CLI: Schritt-für-Schritt-Anleitung'
 description: >-
   Lernen Sie die Installation und Konfiguration der Capacitor CLI für die
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: installing-capacitor-cli-step-by-step-guide
 ---
 **[Capacitor](https://capacitorjs.com/) CLI hilft Ihnen dabei, Webanwendungen mit einer einzigen Codebasis in native iOS- und Android-Apps zu transformieren.** So richten Sie es schnell ein:
 

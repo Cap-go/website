@@ -1,6 +1,5 @@
 ---
-slug: >-
-  5-mejores-practicas-de-seguridad-para-actualizaciones-en-vivo-de-aplicaciones-moviles
+slug: 5-security-best-practices-for-mobile-app-live-updates
 title: >-
   5 Mejores Prácticas de Seguridad para Actualizaciones en Vivo de Aplicaciones
   Móviles
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: 5-security-best-practices-for-mobile-app-live-updates
 ---
 Die Sicherheit Ihrer mobilen App während Live-Updates ist entscheidend für den Schutz von Benutzerdaten und die Aufrechterhaltung des Vertrauens. Hier ist eine kurze Zusammenfassung der wichtigsten Praktiken zur Absicherung Ihrer Over-the-Air (OTA) Updates:
 

@@ -1,5 +1,5 @@
 ---
-slug: 중국의-데이터-프라이버시-법률이-모바일-앱에-미치는-영향
+slug: chinas-data-privacy-laws-impact-on-mobile-apps
 title: '중국의 데이터 프라이버시 법: 모바일 앱에 미치는 영향'
 description: '모바일 앱 개발자에게 중국의 데이터 프라이버시 법률을 이해하는 것은 컴플라이언스, 사용자 동의, 데이터 보안에 중점을 두고 매우 중요합니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: chinas-data-privacy-laws-impact-on-mobile-apps
 ---
 중국 시장을 위한 모바일 앱을 개발하는 경우, **중국의 데이터 프라이버시 법률 준수는 필수적입니다**. 주요 규정 - **[사이버보안법](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[데이터보안법](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**, 그리고 **[개인정보보호법](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - 은 엄격한 [데이터 저장](https://capgo.app/plugins/capacitor-data-storage-sqlite/), 사용자 동의, 보안 조치를 요구합니다.
 

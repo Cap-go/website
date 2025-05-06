@@ -1,5 +1,5 @@
 ---
-slug: como-resolver-errores-de-compilacion-de-android-en-capacitor
+slug: how-to-resolve-android-build-errors-in-capacitor
 title: Cómo Resolver Errores de Compilación de Android en Capacitor
 description: >-
   Aprende cómo resolver rápidamente errores de compilación de Android en
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: how-to-resolve-android-build-errors-in-capacitor
 ---
 **¿Problemas con errores de compilación de Android en [Capacitor](https://capacitorjs.com/)?** Estos errores suelen derivar de archivos mal configurados, conflictos de dependencias o problemas con [ProGuard](https://www.guardsquare.com/manual/home). Solucionarlos rápidamente es esencial para mantener tu aplicación funcionando correctamente. Aquí tienes un desglose rápido de problemas comunes y cómo resolverlos:
 

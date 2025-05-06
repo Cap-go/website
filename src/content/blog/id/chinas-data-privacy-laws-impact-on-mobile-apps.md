@@ -1,5 +1,6 @@
 ---
-slug: dampak-undang-undang-privasi-data-china-pada-aplikasi-seluler
+slug: >-
+  el-impacto-de-las-leyes-de-privacidad-de-datos-de-china-en-las-aplicaciones-moviles
 title: 'Undang-Undang Privasi Data China: Dampak pada Aplikasi Seluler'
 description: >-
   Memahami undang-undang privasi data China sangat penting bagi pengembang
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  el-impacto-de-las-leyes-de-privacidad-de-datos-de-china-en-las-aplicaciones-moviles
 ---
 Jika Anda mengembangkan aplikasi mobile untuk pasar China, **kepatuhan terhadap undang-undang privasi data China tidak bisa ditawar**. Regulasi utama - **[Cybersecurity Law](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[Data Security Law](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**, dan **[Personal Information Protection Law](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - memerlukan [penyimpanan data](https://capgo.app/plugins/capacitor-data-storage-sqlite/) yang ketat, persetujuan pengguna, dan langkah-langkah keamanan.
 

@@ -1,5 +1,5 @@
 ---
-slug: アプセンターの移行
+slug: migrazione-appcenter
 title: App Center から Capgo への移行
 description: このガイドでは、Microsoft CodePushの代替となるCapgo Live Updatesへの完全な移行を行います。
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Migration
 published: true
 locale: ja
 next_blog: automatic-build-and-release-with-github-actions
-original_slug: migrazione-appcenter
 ---
 ## Riepilogo della Migrazione
 

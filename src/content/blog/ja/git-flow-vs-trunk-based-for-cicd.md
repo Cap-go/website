@@ -17,7 +17,6 @@ tag: 'Development, Technology, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: git-flow-contro-trunk-based-per-cicd
 ---
 **[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) とTrunk-Based Development (TBD)の選択は、CI/CDワークフローに大きな影響を与えます。以下に簡単な比較を示します：**
 

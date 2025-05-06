@@ -1,5 +1,5 @@
 ---
-slug: 모바일 앱 실시간 업데이트를 위한 5가지 보안 모범 사례
+slug: 5-security-best-practices-for-mobile-app-live-updates
 title: 모바일 앱 실시간 업데이트를 위한 5가지 보안 모범 사례
 description: '안전한 모바일 앱 라이브 업데이트를 위한 필수 보안 사례를 학습하고, 사용자 데이터를 보호하며 산업 표준을 준수하는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: 5-security-best-practices-for-mobile-app-live-updates
 ---
 라이브 업데이트 중 모바일 앱의 보안을 유지하는 것은 사용자 데이터를 보호하고 신뢰를 유지하는 데 매우 중요합니다. 다음은 무선(OTA) 업데이트를 보호하기 위한 주요 사례들의 요약입니다:
 

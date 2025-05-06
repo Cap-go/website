@@ -1,5 +1,5 @@
 ---
-slug: git-flow-vs-trunk-based-para-cicd
+slug: git-flow-vs-trunk-based-für-cicd
 title: Git Flow vs. Trunk-Based para CI/CD
 description: >-
   Explore las diferencias entre Git Flow y Trunk-Based Development para flujos
@@ -19,7 +19,6 @@ tag: 'Development, Technology, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: git-flow-vs-trunk-based-für-cicd
 ---
 **Elegir entre [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) y Desarrollo Basado en Trunk (TBD) puede impactar significativamente tu flujo de CI/CD. Aquí un desglose rápido:**
 

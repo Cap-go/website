@@ -1,5 +1,5 @@
 ---
-slug: 개발과 프로덕션 간의 Capacitor 앱에서의 주요 차이점
+slug: development-vs-production-key-differences-in-capacitor-apps
 title: 'Capacitor 앱의 개발과 프로덕션: 주요 차이점'
 description: Capacitor 앱의 개발 및 프로덕션 환경 간의 중요한 차이점을 이해하여 성능과 보안을 향상시키세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: development-vs-production-key-differences-in-capacitor-apps
 ---
 **[Capacitor](https://capacitorjs.com/)로 앱을 구축하시나요? 다음 사항을 알아야 합니다:** 개발 및 프로덕션 환경은 서로 다른 목적을 가지며 고유한 설정이 필요합니다. 개발은 속도와 디버깅을 우선시하고, 프로덕션은 성능, 보안 및 사용자 경험에 중점을 둡니다.
 

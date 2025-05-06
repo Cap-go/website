@@ -1,5 +1,5 @@
 ---
-slug: setup-ci-und-cd-gitlab
+slug: setup-ci-and-cd-gitlab
 title: Automatischer Build und Release von Apps mit GitLab
 description: >-
   Erstelle deine eigene CI/CD-Pipeline mit GitLab kostenlos und deploye deine
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: de
 next_blog: ''
-original_slug: setup-ci-and-cd-gitlab
 ---
 Dieser Artikel führt Sie durch die Einrichtung einer CI/CD-Pipeline mit GitLab.
 

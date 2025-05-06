@@ -1,5 +1,5 @@
 ---
-slug: Directrices de fusión para equipos que utilizan aplicaciones Capacitor
+slug: 'Merge-Richtlinien für Teams, die Capacitor-Apps verwenden'
 title: Directrices de fusión para equipos con aplicaciones Capacitor
 description: >-
   Aprenda cómo crear políticas de fusión efectivas para aplicaciones Capacitor
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: 'Merge-Richtlinien für Teams, die Capacitor-Apps verwenden'
 ---
 To ensure smooth and reliable live updates for your Capacitor app:
 

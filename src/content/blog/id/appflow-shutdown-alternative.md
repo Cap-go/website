@@ -1,5 +1,5 @@
 ---
-slug: appflow-shutdown-alternatif
+slug: appflow-shutdown-alternative
 title: >-
   Penghentian Ionic AppFlow - Apa Selanjutnya untuk Pengembangan Aplikasi Mobile
   Anda?
@@ -21,7 +21,6 @@ tag: News
 published: true
 locale: id
 next_blog: ''
-original_slug: appflow-shutdown-alternative
 ---
 Dengan pengumuman terbaru tentang penutupan Ionic AppFlow, banyak tim pengembang mencari alternatif untuk mempertahankan alur kerja pengembangan aplikasi mobile mereka. Jika Anda termasuk yang terdampak, kami punya kabar baik: Capgo menawarkan solusi komprehensif yang tidak hanya menggantikan fungsionalitas AppFlow tetapi juga menyediakan fitur yang lebih baik dengan harga yang lebih terjangkau.
 

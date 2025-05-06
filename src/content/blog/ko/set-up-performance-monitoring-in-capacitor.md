@@ -1,5 +1,5 @@
 ---
-slug: 성능 모니터링을 Capacitor로 설정하기
+slug: set-up-performance-monitoring-in-capacitor
 title: Capacitor에서 성능 모니터링 설정하기
 description: Firebase와 Sentry를 사용하여 앱의 성능을 모니터링하고 효율성과 사용자 만족도를 향상시키는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: set-up-performance-monitoring-in-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 성능을 최적화하고 싶으신가요? [Firebase](https://firebase.google.com/)와 [Sentry](https://sentry.io/)와 같은 모니터링 도구를 사용하면 충돌, 리소스 사용량, 응답 시간을 추적하여 더 나은 사용자 경험을 보장할 수 있습니다. 주요 내용은 다음과 같습니다:
 

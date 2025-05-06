@@ -1,5 +1,5 @@
 ---
-slug: schlüsselverwaltung-unter-chinas-verschlüsselungsvorschriften
+slug: key-management-under-chinas-encryption-rules
 title: Schlüsselverwaltung nach den chinesischen Verschlüsselungsvorschriften
 description: >-
   Das Verständnis der chinesischen Gesetze zur Verwaltung von
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: key-management-under-chinas-encryption-rules
 ---
 **Die Verwaltung von Verschlüsselungsschlüsseln in China ist komplex, aber für die Compliance unerlässlich.** Hier ist, was Sie wissen müssen:
 

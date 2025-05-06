@@ -1,5 +1,5 @@
 ---
-slug: プラグインと Capacitor のベースネイティブブリッジを Android でセットアップする
+slug: plugin-base-native-bridge-android-di-capacitor
 title: Capacitorのネイティブブリッジ：Androidプラグインの基本概念
 description: >-
   Capacitor Native
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: plugin-base-native-bridge-android-di-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) Native Bridgeは、JavaScriptとネイティブAndroidコードを接続することで、Androidプラグインの構築を簡素化します。以下が重要なポイントです：
 

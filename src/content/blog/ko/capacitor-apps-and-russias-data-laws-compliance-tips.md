@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱과 러시아의 데이터법 준수 팁
+slug: capacitor-apps-and-russias-data-laws-compliance-tips
 title: 러시아 데이터법 준수를 위한 Capacitor 앱 개발 팁
 description: 데이터 현지화 및 사용자 보호를 위한 개인정보 보호 정책을 포함하여 러시아에서 앱을 개발하기 위한 필수 규정 준수 팁을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-apps-and-russias-data-laws-compliance-tips
 ---
 A compliant privacy policy must:
 

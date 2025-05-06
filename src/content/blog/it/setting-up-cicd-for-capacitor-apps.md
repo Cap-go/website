@@ -1,5 +1,5 @@
 ---
-slug: configurazione-cicd-per-app-capacitor
+slug: setting-up-cicd-for-capacitor-apps
 title: Configurazione del CI/CD per le App Capacitor
 description: >-
   Scopri come ottimizzare i rilasci delle tue app per iOS e Android utilizzando
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: setting-up-cicd-for-capacitor-apps
 ---
 **Vuoi rilasci di app più veloci e senza errori per iOS e Android?** Le pipeline CI/CD per le app [Capacitor](https://capacitorjs.com/) automatizzano la build, il testing e il deployment, riducendo i tempi di rilascio fino al 70% e gli errori del 60%. Questa guida copre tutto ciò che devi sapere, dalla configurazione del tuo ambiente all'automazione degli aggiornamenti in tempo reale con [Capgo](https://capgo.app/).
 

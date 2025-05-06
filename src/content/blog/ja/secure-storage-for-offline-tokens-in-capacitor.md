@@ -1,5 +1,5 @@
 ---
-slug: トークンのオフラインでのセキュアな保存方法（Capacitor）
+slug: memorizzazione-sicura-per-token-offline-in-capacitor
 title: Capacitor でのオフライントークンのセキュアな保存
 description: モバイルアプリケーションで暗号化と生体認証を使用して、認証トークンをオフラインで安全に保存する方法を学びます。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: memorizzazione-sicura-per-token-offline-in-capacitor
 ---
 **アプリの認証トークンをオフラインで安全に保持したいですか？**以下が知っておくべきことです：
 

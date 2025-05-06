@@ -1,5 +1,5 @@
 ---
-slug: 용량-CLI를-사용한-OTA-업데이트-방법
+slug: how-to-use-capacitor-cli-for-ota-updates
 title: Capacitor CLI를 사용한 OTA 업데이트 방법
 description: >-
   Capacitor CLI를 활용하여 즉각적인 배포와 향상된 사용자 경험을 보장하는 Over-The-Air 업데이트를 수행하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-use-capacitor-cli-for-ota-updates
 ---
 Over-The-Air (OTA) 업데이트를 통해 앱스토어 승인을 기다리지 않고도 앱 수정사항과 기능을 사용자에게 직접 전달할 수 있습니다. [Capacitor](https://capacitorjs.com/) CLI와 [Capgo](https://capgo.app/)와 같은 도구를 사용하면 즉시 업데이트를 푸시하고, 성능을 추적하고, 필요한 경우 롤백할 수도 있습니다. 알아야 할 사항은 다음과 같습니다:
 

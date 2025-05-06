@@ -1,5 +1,5 @@
 ---
-slug: come-rilasciare-major-version-in-capgo
+slug: how-to-release-major-version-in-capgo
 title: Come rilasciare una versione principale in capgo
 description: >-
   Capisci come e quando è necessario rilasciare una versione principale della
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: how-to-send-specific-version-to-users
-original_slug: how-to-release-major-version-in-capgo
 ---
 ## Quando si rilascia una versione principale
 

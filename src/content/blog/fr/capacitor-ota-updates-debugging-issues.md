@@ -1,5 +1,5 @@
 ---
-slug: dépannage-des-mises-à-jour-capacitor-ota
+slug: capacitor-ota-updates-debugging-issues
 title: Débogage des Mises à Jour OTA de Capacitor
 description: >-
   Apprenez à résoudre efficacement les problèmes de mise à jour OTA, en
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: capacitor-ota-updates-debugging-issues
 ---
 **Les mises à jour OTA peuvent accélérer les améliorations des applications, mais les mises à jour échouées causent des problèmes majeurs.** Voici ce que vous devez savoir pour garantir des mises à jour fluides et résoudre rapidement les problèmes :
 

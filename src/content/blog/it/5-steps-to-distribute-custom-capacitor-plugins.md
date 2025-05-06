@@ -1,5 +1,5 @@
 ---
-slug: 5-passi-per-distribuire-plugin-capacitor-personalizzati
+slug: 5-steps-to-distribute-custom-capacitor-plugins
 title: 5 Step per Distribuire Plugin Capacitor Personalizzati
 description: >-
   Scopri come distribuire in modo efficace i plugin personalizzati per
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: 5-steps-to-distribute-custom-capacitor-plugins
 ---
 La distribuzione di plugin [Capacitor](https://capacitorjs.com/) personalizzati può migliorare le funzionalità della tua app garantendo che gli aggiornamenti raggiungano rapidamente gli utenti. Ecco una guida rapida per iniziare:
 

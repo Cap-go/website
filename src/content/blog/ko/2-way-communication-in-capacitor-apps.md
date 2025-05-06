@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱에서의 양방향 통신
+slug: 2-way-communication-in-capacitor-apps
 title: Capacitor 앱에서의 양방향 통신
 description: Capacitor 앱에서 양방향 통신이 실시간 데이터 교환을 강화하여 성능과 사용자 경험을 향상시키는 방법을 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱에서의 양방향 통신은 웹과 네이티브 레이어를 연결하여 실시간 데이터 교환을 가능하게 합니다. 이를 통해 웹 기술이 카메라나 GPS와 같은 네이티브 기기 기능에 접근할 수 있고 네이티브 레이어가 웹 요소와 상호작용할 수 있습니다. 중요성은 다음과 같습니다:
 

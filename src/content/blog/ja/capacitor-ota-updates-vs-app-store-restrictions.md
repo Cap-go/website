@@ -1,5 +1,5 @@
 ---
-slug: アプリストアの制限事項とCapacitor OTAアップデートの比較
+slug: capacitor-ota-updates-vs-app-store-restrictions
 title: CapacitorのOTAアップデート vs アプリストアの制限
 description: >-
   OTAアップデートにより、従来のアプリストアの方法と比較して、より迅速で柔軟なアプリのデプロイメントが可能になり、効率性とユーザーエクスペリエンスが向上する方法を探ります。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-ota-updates-vs-app-store-restrictions
 ---
 [アプリの更新](https://capgo.app/plugins/capacitor-updater/)をより早く実現したいですか？ Over-the-Air (OTA) アップデートを使用すると、開発者はアプリストアの遅延を回避し、数分以内に変更をユーザーに直接プッシュできます。これが重要な理由です：
 

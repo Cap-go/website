@@ -1,5 +1,5 @@
 ---
-slug: us-개인정보-보호법을-준수하는-모바일-앱
+slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 title: 모바일 앱이 미국 개인정보 보호법을 준수하는 방법
 description: '사용자 동의, 데이터 관리 및 효과적인 보안 관행을 통해 모바일 앱이 미국 개인정보 보호법을 준수하는 방법을 살펴보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 ---
 - **주요 개인정보 보호 기능**:
     

@@ -1,5 +1,5 @@
 ---
-slug: alternative-à-expo
+slug: alternative-to-expo
 title: Alternative à Expo Live Update
 description: >-
   Vous recherchez une plateforme de développement d'applications mobiles qui
@@ -19,7 +19,6 @@ tag: Alternatives
 published: true
 locale: fr
 next_blog: ''
-original_slug: alternative-to-expo
 ---
 Expo Live Update est une fonctionnalité de la plateforme Expo qui permet aux développeurs de déployer des mises à jour de leur application en temps réel, sans obliger les utilisateurs à télécharger une nouvelle version de l'application. Cela est similaire à la fonctionnalité de mise à jour en direct de Capgo, qui permet aux développeurs de mettre à jour rapidement et facilement le contenu et les fonctionnalités de leur application sans forcer les utilisateurs à passer par le processus de téléchargement et d'installation d'une mise à jour.
 

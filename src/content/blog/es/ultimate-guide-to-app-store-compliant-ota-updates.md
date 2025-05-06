@@ -1,5 +1,5 @@
 ---
-slug: guía-definitiva-para-actualizaciones-ota-compatibles-con-app-store
+slug: ultimative-anleitung-für-app-store-konforme-ota-updates
 title: Guía definitiva para actualizaciones OTA compatibles con la App Store
 description: >-
   Aprende cómo gestionar eficazmente las actualizaciones Over-The-Air mientras
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: ultimative-anleitung-für-app-store-konforme-ota-updates
 ---
 **¿Quieres actualizar tu aplicación rápidamente sin infringir las reglas de la App Store?** Las actualizaciones Over-The-Air (OTA) te permiten corregir errores, mejorar el rendimiento y optimizar la experiencia del usuario, todo sin esperar aprobaciones de las tiendas de aplicaciones. Pero para mantener el cumplimiento, debes seguir pautas estrictas de Apple y Google.
 

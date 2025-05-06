@@ -1,5 +1,5 @@
 ---
-slug: come-aggirare-controllo-app-store
+slug: how-to-bypass-app-store-review
 title: >-
   Come aggiornare le app Capacitor JS senza il processo di revisione dell'App
   Store.
@@ -21,7 +21,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: how-to-bypass-app-store-review
 ---
 _Lieto che tu l'abbia chiesto._
 

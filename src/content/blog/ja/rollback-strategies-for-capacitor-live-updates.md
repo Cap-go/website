@@ -1,5 +1,5 @@
 ---
-slug: ライブアップデートのロールバック戦略Capacitor
+slug: strategie-di-ripristino-per-gli-aggiornamenti-live-di-capacitor
 title: Capacitorのライブアップデートのロールバック戦略
 description: アプリの安定性を確保し、更新中のユーザーの中断を最小限に抑えるため、Capacitorのライブアップデートに関する効果的なロールバック戦略について学びます。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: strategie-di-ripristino-per-gli-aggiornamenti-live-di-capacitor
 ---
 **アプリの中断を防ぐための強力なロールバック戦略。** [Capacitor](https://capacitorjs.com/)のライブアップデートで素早い修正を提供できますが、世界的に18%のアップデートが失敗しています。ロールバック計画により、問題発生時の安定性を確保できます。概要は以下の通りです：
 

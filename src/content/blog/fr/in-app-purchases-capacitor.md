@@ -1,5 +1,5 @@
 ---
-slug: achats-in-app-capacitor
+slug: compras-in-app-capacitor
 title: Achats intégrés à l'application pour Capacitor
 description: >-
   Comment implémenter les achats in-app pour les applications Capacitor en
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: ''
-original_slug: compras-in-app-capacitor
 ---
 Je vais traduire le texte en français tout en conservant les éléments techniques, les liens et les balises HTML :
 

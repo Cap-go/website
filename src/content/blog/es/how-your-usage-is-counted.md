@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: es
 next_blog: ''
-original_slug: how-your-usage-is-counted
 ---
 En Capgo, 3 valores son contados e importantes de entender
 - Usuario's

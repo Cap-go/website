@@ -1,5 +1,5 @@
 ---
-slug: Android 캐패시터 앱 설정
+slug: android-setup-for-capacitor-apps
 title: Android 앱을 위한 Capacitor 설정
 description: 'Capacitor 앱 개발을 위해 필수적인 도구, 구성 및 통합 팁으로 Android 개발 환경을 설정하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: android-setup-for-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/)로 Android 앱을 개발하고 싶으신가요? 개발 환경을 빠르고 효율적으로 설정하는 데 필요한 모든 것이 여기 있습니다. Capacitor는 웹 기술과 네이티브 Android 기능을 연결하며, 시작하기 위해서는 몇 가지 필수 도구와 설정이 필요합니다.
 

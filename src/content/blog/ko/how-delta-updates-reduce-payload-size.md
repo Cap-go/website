@@ -1,5 +1,5 @@
 ---
-slug: 델타 업데이트가 페이로드 크기를 줄이는 방법
+slug: how-delta-updates-reduce-payload-size
 title: 델타 업데이트로 페이로드 크기 줄이기
 description: 델타 업데이트가 다운로드 크기를 최소화하고 신속하고 안정적인 업데이트로 사용자 경험을 개선하여 앱 성능을 향상시키는 방법에 대해 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-delta-updates-reduce-payload-size
 ---
 델타 업데이트는 전체 파일 대신 변경된 부분만 전송하여 앱 업데이트를 더 빠르고 작게 만듭니다. 방법은 다음과 같습니다:
 

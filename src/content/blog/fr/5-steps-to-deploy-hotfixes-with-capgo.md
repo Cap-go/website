@@ -1,5 +1,5 @@
 ---
-slug: 5-étapes-pour-déployer-des-correctifs-avec-capgo
+slug: 5-steps-to-deploy-hotfixes-with-capgo
 title: 5 étapes pour déployer des correctifs avec Capgo
 description: >-
   Découvrez comment déployer des correctifs rapidement et en toute sécurité
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: 5-steps-to-deploy-hotfixes-with-capgo
 ---
 [Capgo](https://capgo.app/) permet de déployer des correctifs rapidement et facilement, en évitant les délais des app stores tout en gardant les mises à jour sécurisées et conformes aux directives d'Apple et Google. Voici un aperçu rapide du processus :
 

@@ -1,5 +1,6 @@
 ---
-slug: strategi-pembaruan-aplikasi-mobile-daftar-periksa-untuk-pengembang
+slug: >-
+  strategies-de-mise-a-jour-des-applications-mobiles-une-liste-de-verification-pour-les-developpeurs
 title: 'Strategi Update Aplikasi Mobile: Checklist untuk Developer'
 description: >-
   Pelajari strategi penting untuk pembaruan aplikasi seluler, mulai dari
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  strategies-de-mise-a-jour-des-applications-mobiles-une-liste-de-verification-pour-les-developpeurs
 ---
 Menjaga aplikasi Anda tetap diperbarui sangat penting untuk kepuasan pengguna dan kinerja aplikasi. Berikut alasannya:
 

@@ -1,5 +1,5 @@
 ---
-slug: app-version-management-with-capacitor-for-ota-updates
+slug: best-practice-versioning-per-aggiornamenti-ota-in-capacitor
 title: Capacitor OTAアップデート：バージョニングのベストプラクティス
 description: >-
   Capacitor の OTA
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: best-practice-versioning-per-aggiornamenti-ota-in-capacitor
 ---
 **アプリストアの承認を待たずにアプリの更新を即座に配信したいですか?** [Capacitor](https://capacitorjs.com/)のOver-the-Air (OTA)アップデートを使用すれば、アプリのウェブコンテンツをリアルタイムで更新することができます。ただし、スムーズな展開を確実にするには、堅実なバージョン管理の実践が必要です。
 

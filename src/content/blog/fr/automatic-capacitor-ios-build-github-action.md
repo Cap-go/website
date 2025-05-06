@@ -1,5 +1,5 @@
 ---
-slug: build-ios-automatique-capacitor-github-action
+slug: automatic-capacitor-ios-build-github-action
 title: Création automatique d'iOS avec Capacitor via GitHub Actions avec certificat
 description: >-
   Comment configurer un pipeline CI/CD pour votre application iOS Ionic avec
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: fr
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: automatic-capacitor-ios-build-github-action
 ---
 # Builds iOS automatiques avec GitHub Actions en utilisant les Certificats
 

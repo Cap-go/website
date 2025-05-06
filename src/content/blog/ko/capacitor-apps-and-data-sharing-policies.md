@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱과 데이터 공유 정책
+slug: capacitor-apps-and-data-sharing-policies
 title: Capacitor 앱 및 데이터 공유 정책
 description: Capacitor 앱의 Apple과 Google Play의 개인정보 보호 기준을 준수하기 위한 필수 데이터 공유 정책에 대해 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-apps-and-data-sharing-policies
 ---
 **Apple과 [Google Play](https://play.google/developer-content-policy/)의 엄격한 데이터 규칙을 준수하고 싶으신가요? 알아야 할 사항은 다음과 같습니다:**
 

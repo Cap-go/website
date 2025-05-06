@@ -1,5 +1,5 @@
 ---
-slug: mises-a-jour-ota-dans-cicd-conseils-de-securite-et-conformite
+slug: actualizaciones-ota-en-cicd-consejos-de-seguridad-y-cumplimiento
 title: 'Mises à jour OTA en CI/CD: Conseils de Sécurité et de Conformité'
 description: >-
   Découvrez les stratégies essentielles de sécurité et de conformité pour les
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: actualizaciones-ota-en-cicd-consejos-de-seguridad-y-cumplimiento
 ---
 Les mises à jour **OTA** vous permettent de pousser les mises à jour d'applications directement aux utilisateurs sans attendre les examens de l'app store. Associées aux **pipelines CI/CD**, elles permettent des déploiements rapides, automatisés et sécurisés. Mais la rapidité comporte des risques - la sécurité, la conformité et la confidentialité doivent être prioritaires.
 

@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: managing-dependencies-in-capacitor-projects
 ---
 [Capacitor](https://capacitorjs.com/) プロジェクトでの依存関係の管理は、セキュリティの確保、技術的負債の削減、およびプラットフォーム間の互換性の維持に不可欠です。以下が重要なポイントです：
 

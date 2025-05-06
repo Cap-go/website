@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-ota-beta-tetap-patuh-pada-pedoman
+slug: mises-à-jour-ota-en-version-beta-rester-conforme-aux-directives
 title: 'Pembaruan OTA dalam beta: tetap mematuhi aturan'
 description: >-
   Pelajari cara mengelola pembaruan OTA secara efektif dalam pengujian beta
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: mises-à-jour-ota-en-version-beta-rester-conforme-aux-directives
 ---
 **Pembaruan OTA membuat pengujian beta lebih cepat dan mudah - namun tetap mematuhi aturan app store sangat penting.** Berikut yang perlu Anda ketahui:
 

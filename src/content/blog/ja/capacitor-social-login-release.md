@@ -1,5 +1,5 @@
 ---
-slug: 'リリース: 新しい Capacitor ソーシャルログイン'
+slug: release-of-a-brand-new-capacitor-social-login
 title: Capacitor ソーシャルログインプラグインの新リリース
 description: >-
   Capacitor Social Loginプラグインは、iOS、Android、Webで
@@ -18,7 +18,6 @@ tag: Capacitor
 published: true
 next_blog: ''
 locale: ja
-original_slug: release-of-a-brand-new-capacitor-social-login
 ---
 ## はじめに
 

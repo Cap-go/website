@@ -1,5 +1,5 @@
 ---
-slug: gestion-des-dependances-dans-les-projets-capacitor
+slug: gestion-de-dependencias-en-proyectos-capacitor
 title: Gestion des Dépendances dans les Projets Capacitor
 description: >-
   Découvrez des stratégies essentielles pour gérer les dépendances dans les
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: gestion-de-dependencias-en-proyectos-capacitor
 ---
 La gestion des dépendances dans les projets [Capacitor](https://capacitorjs.com/) est essentielle pour garantir la sécurité, réduire la dette technique et maintenir la compatibilité entre les plateformes. Voici ce que vous devez savoir :
 

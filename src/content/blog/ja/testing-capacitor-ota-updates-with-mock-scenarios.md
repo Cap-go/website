@@ -1,5 +1,5 @@
 ---
-slug: capacitorのotaアップデートをテストシナリオでテストする
+slug: testing-gli-aggiornamenti-ota-di-capacitor-con-scenari-di-prova
 title: Capacitorのシミュレートされたシナリオによるプログレッシブアップデートのテスト
 description: Capacitorアプリのアップデートを信頼性の高い方法でテストし、ユーザー満足度を向上させるためのOTAの効果的なテスト方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: testing-gli-aggiornamenti-ota-di-capacitor-con-scenari-di-prova
 ---
 **[Capacitor](https://capacitorjs.com/) アプリのOTAアップデートは、アプリストアの遅延なしにバグ修正や機能追加を可能にする画期的な機能です。ただし、クラッシュやデータ損失、機能の破損を避けるためには、これらのアップデートを徹底的にテストすることが重要です。**
 

@@ -1,5 +1,5 @@
 ---
-slug: pembuatan-otomatis-ios-capacitor-dengan-codemagic
+slug: création-automatique-ios-capacitor-avec-codemagic
 title: Pembangunan iOS Otomatis Capacitor dengan Codemagic
 description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi iOS Ionic Anda dengan Codemagic
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: id
 next_blog: automatic-capacitor-android-build-codemagic
-original_slug: création-automatique-ios-capacitor-avec-codemagic
 ---
 ## Livraison Continue pour iOS avec Codemagic
 

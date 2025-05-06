@@ -16,7 +16,6 @@ tag: Solution
 published: true
 locale: ja
 next_blog: ''
-original_slug: self-hosted-capgo
 ---
 このガイドでは、Capgoのセルフホスティングの方法について段階的に説明し、セルフホスティングのメリットと課題について説明します。
 

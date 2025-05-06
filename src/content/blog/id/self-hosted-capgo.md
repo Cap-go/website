@@ -1,5 +1,5 @@
 ---
-slug: auto-hosting-capgo
+slug: auto-hospedado-capgo
 title: Capgo yang Dihosting Sendiri
 description: >-
   Auto-hosting Capgo memungkinkan Anda untuk menerapkan pembaruan langsung
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: id
 next_blog: ''
-original_slug: auto-hospedado-capgo
 ---
 Artikel ini memberikan panduan langkah demi langkah tentang cara self-hosting Capgo, serta pembahasan manfaat dan tantangan melakukan self-hosting.
 

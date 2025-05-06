@@ -1,5 +1,5 @@
 ---
-slug: Was Sie über Capacitor-Plugins wissen müssen
+slug: capacitor-plugins-what-you-need-to-know
 title: 'Capacitor Plugins: Was Sie wissen müssen'
 description: >-
   Erfahren Sie, wie Sie Capacitor-Plugins für die plattformübergreifende
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-plugins-what-you-need-to-know
 ---
 [Capacitor](https://capacitorjs.com/) Plugins sind essentiell für die Entwicklung plattformübergreifender Apps und ermöglichen die Nutzung nativer Gerätefunktionen wie Kameras, Dateisysteme und Benachrichtigungen mit minimalem Aufwand. Sie kombinieren JavaScript-APIs und nativen Code für eine nahtlose Integration über iOS, Android und Web-Plattformen. Hier ist was Sie wissen müssen:
 

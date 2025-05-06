@@ -1,5 +1,5 @@
 ---
-slug: capgo-のドキュメントを使用してota-アップデートを活用する方法
+slug: come-utilizzare-la-documentazione-di-capgo-per-gli-aggiornamenti-ota
 title: Capgoのドキュメントを使用したOTAアップデートの方法
 description: >-
   Capgoの包括的なドキュメントとステップバイステップガイドで、CapacitorアプリへのセキュアなOver-the-Airアップデートの実装方法を学びましょう。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-utilizzare-la-documentazione-di-capgo-per-gli-aggiornamenti-ota
 ---
 **アプリストアの遅延なしで[アプリの更新](https://capgo.app/plugins/capacitor-updater/)を高速化したいですか?** [Capgo](https://capgo.app/)を使用すると、ユーザーにOver-the-Air (OTA)アップデートを即座に安全に配信できます。アプリストアのレビューをスキップして、アプリを簡単に最新の状態に保ちましょう。
 

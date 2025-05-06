@@ -1,5 +1,5 @@
 ---
-slug: come-utilizzare-la-documentazione-di-capgo-per-gli-aggiornamenti-ota
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: Come Utilizzare la Documentazione di Capgo per gli Aggiornamenti OTA
 description: >-
   Scopri come implementare aggiornamenti Over-the-Air sicuri nelle tue app
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-use-capgo-documentation-for-ota-updates
 ---
 **Hai bisogno di [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) più veloci senza i ritardi dell'app store?** [Capgo](https://capgo.app/) ti permette di distribuire aggiornamenti Over-the-Air (OTA) sicuri istantaneamente ai tuoi utenti. Salta le revisioni dell'app store e mantieni la tua app aggiornata con facilità.
 

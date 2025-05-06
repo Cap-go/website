@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: best-practices-for-capacitor-code-sharing
 ---
 **[Capacitor](https://capacitorjs.com/) ti permette di creare app per iOS, Android e web utilizzando un'unica base di codice.** Questa guida spiega come strutturare, testare e distribuire il tuo codice multipiattaforma in modo efficiente. Ecco cosa imparerai:
 

@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: it
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: automatic-capacitor-android-build-github-action
 ---
 # Build automatici di Android con GitHub Actions
 

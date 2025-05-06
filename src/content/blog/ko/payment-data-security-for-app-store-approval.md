@@ -1,5 +1,5 @@
 ---
-slug: 앱 스토어 승인을 위한 결제 데이터 보안
+slug: payment-data-security-for-app-store-approval
 title: 앱스토어 승인을 위한 결제 데이터 보안
 description: 앱 스토어에서 거부되지 않도록 앱이 결제 데이터 보안 요구사항을 충족하는지 확인하세요. 필수 도구와 규정 준수 표준에 대해 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: payment-data-security-for-app-store-approval
 ---
 **Apple이나 Google에서 앱 승인을 원하시나요? 안전한 결제 데이터부터 시작하세요.** 앱스토어는 규정 준수를 위해 결제 데이터에 대한 **종단간 암호화**를 요구합니다. 이것이 없다면 앱이 거절되거나 삭제될 수 있습니다. 알아야 할 사항은 다음과 같습니다:
 

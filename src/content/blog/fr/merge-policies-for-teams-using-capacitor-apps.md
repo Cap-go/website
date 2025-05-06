@@ -1,5 +1,5 @@
 ---
-slug: Directives de fusion pour les équipes utilisant des applications Capacitor
+slug: Directrices de fusión para equipos que utilizan aplicaciones Capacitor
 title: Directives de fusion pour les équipes avec des applications Capacitor
 description: >-
   Apprenez à créer des politiques de fusion efficaces pour les applications
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: Directrices de fusión para equipos que utilizan aplicaciones Capacitor
 ---
 To ensure smooth and reliable live updates for your Capacitor app:
 

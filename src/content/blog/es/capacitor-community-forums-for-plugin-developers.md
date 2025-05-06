@@ -1,5 +1,5 @@
 ---
-slug: foros-de-la-comunidad-capacitor-para-desarrolladores-de-plugins
+slug: capacitor-community-forums-for-plugin-developers
 title: Foros de la Comunidad de Capacitor para Desarrolladores de Plugins
 description: >-
   Explora los foros esenciales para desarrolladores de plugins de Capacitor para
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-community-forums-for-plugin-developers
 ---
 Los foros de [Capacitor](https://capacitorjs.com/) son esenciales para que los desarrolladores de plugins resuelvan problemas, compartan conocimientos y se conecten con otros. Ya sea que estés solucionando problemas, compartiendo plugins o aprendiendo mejores prácticas, estos foros proporcionan recursos valiosos y soporte.
 

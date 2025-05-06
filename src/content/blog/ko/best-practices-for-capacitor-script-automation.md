@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 스크립트 자동화 모범 사례
+slug: best-practices-for-capacitor-script-automation
 title: Capacitor 스크립트 자동화를 위한 모범 사례
 description: 'Capacitor 스크립트를 자동화하여 앱 업데이트를 간소화하고, 보안을 강화하며, 성능을 최적화하는 모범 사례를 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: best-practices-for-capacitor-script-automation
 ---
 [Capacitor](https://capacitorjs.com/) 스크립트 자동화는 개발자가 모바일 앱을 빠르고 효율적으로 업데이트하는 데 도움을 줍니다. 다음은 알아야 할 사항입니다:
 

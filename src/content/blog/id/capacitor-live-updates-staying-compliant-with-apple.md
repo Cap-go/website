@@ -1,5 +1,7 @@
 ---
-slug: 'Pembaruan Langsung dengan Capacitor: Tetap Mematuhi Persyaratan Apple'
+slug: >-
+  Les mises à jour en direct avec Capacitor: Rester conforme aux exigences
+  d'Apple
 title: 'Live Updates pada Capacitor: Tetap Mengikuti Persyaratan Apple'
 description: >-
   Pelajari cara mengimplementasikan pembaruan langsung dalam aplikasi seluler
@@ -20,9 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  Les mises à jour en direct avec Capacitor: Rester conforme aux exigences
-  d'Apple
 ---
 [Capacitor](https://capacitorjs.com/) live update memungkinkan pengembang untuk mengirimkan perbaikan bug dan perubahan kecil langsung ke aplikasi tanpa mengharuskan pengguna mengunduh pembaruan dari [App Store](https://www.apple.com/app-store/). Ini mempercepat deployment hingga **81%**, mengurangi biaya, dan meningkatkan pengalaman pengguna. Namun, penting untuk tetap mematuhi pedoman ketat Apple untuk menghindari penolakan aplikasi.
 

@@ -1,5 +1,5 @@
 ---
-slug: capgo-for-secure-ota-updates-app-store
+slug: capgo-per-aggiornamenti-ota-sicuri-app-store
 title: CapgoによるApp Store向けの安全なOTAアップデート
 description: >-
   アプリストアの遅延なしにアプリのリアルタイムで安全な更新を可能にするプラットフォームの仕組みを探り、開発効率とコンプライアンスを向上させる方法について説明します。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capgo-per-aggiornamenti-ota-sicuri-app-store
 ---
 [Capgo](https://capgo.app/)は、開発者が**アプリストアのレビューを待たずに即座に安全なアプリの更新**を配信することを可能にします。**エンドツーエンドの暗号化**、シームレスなCI/CD統合、アプリストアのルールへの準拠により、従来の更新方法や[AppFlow](https://ionic.io/appflow)のような高価なプラットフォームに代わる費用対効果の高い選択肢となっています。**947.6百万回**以上の更新が**1,400以上の本番アプリ**に展開され、開発効率を**81%**向上させています。
 

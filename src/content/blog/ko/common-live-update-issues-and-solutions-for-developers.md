@@ -1,5 +1,5 @@
 ---
-slug: 개발자를 위한 일반적인 실시간 업데이트 문제와 해결 방법
+slug: common-live-update-issues-and-solutions-for-developers
 title: 개발자를 위한 일반적인 라이브 업데이트 문제와 해결 방법
 description: '네트워크 문제, 버전 충돌 및 기기 호환성을 포함한 일반적인 실시간 업데이트 문제에 대한 해결책을 살펴보고 사용자 경험을 향상시킵니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: common-live-update-issues-and-solutions-for-developers
 ---
 라이브 업데이트를 통해 개발자는 앱스토어 지연 없이 변경사항을 사용자에게 직접 전달할 수 있습니다. 하지만 네트워크 문제, 버전 충돌, 기기 호환성 문제와 같은 과제가 있습니다. 이 가이드는 원활한 업데이트를 위한 해결책을 제공합니다:
 

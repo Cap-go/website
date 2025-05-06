@@ -1,5 +1,5 @@
 ---
-slug: configuracion-de-android-para-aplicaciones-capacitor
+slug: android-setup-for-capacitor-apps
 title: Configuración de Android para aplicaciones Capacitor
 description: >-
   Configura tu entorno de desarrollo Android para aplicaciones Capacitor con
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: android-setup-for-capacitor-apps
 ---
 **¿Quieres crear aplicaciones Android con [Capacitor](https://capacitorjs.com/)?** Aquí tienes todo lo que necesitas para configurar tu entorno de desarrollo de manera rápida y eficiente. Capacitor conecta las tecnologías web con las características nativas de Android, y para comenzar se requieren algunas herramientas y configuraciones esenciales.
 

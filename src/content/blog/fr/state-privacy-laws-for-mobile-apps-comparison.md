@@ -1,5 +1,5 @@
 ---
-slug: lois-etatiques-sur-la-confidentialite-des-applications-mobiles-comparaison
+slug: leyes-estatales-de-privacidad-para-apps-moviles-comparativa
 title: >-
   Lois sur la confidentialité des applications mobiles par État : Une
   comparaison
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: leyes-estatales-de-privacidad-para-apps-moviles-comparativa
 ---
 Les lois sur la confidentialité des applications mobiles varient selon les États, et il est crucial pour les développeurs de les comprendre. Voici un aperçu rapide des principales réglementations sur la confidentialité en Californie, en Virginie et au Colorado :
 

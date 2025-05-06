@@ -1,5 +1,5 @@
 ---
-slug: 'App Store アプリの承認ガイド: OTA アップデートと Capacitor'
+slug: guida-approvazione-app-store-aggiornamenti-ota-capacitor
 title: Capacitor OTAアップデート：アプリストア承認ガイド
 description: >-
   App Store と Play Store のガイドラインに従って、Capacitor アプリの OTA
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: guida-approvazione-app-store-aggiornamenti-ota-capacitor
 ---
 Ecco la traduzione in italiano:
 

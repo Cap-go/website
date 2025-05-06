@@ -1,5 +1,5 @@
 ---
-slug: configuración-del-proyecto-cli-de-capacitor
+slug: capacitor-cli-project-setup-guide
 title: 'Guía de configuración del proyecto: CLI de Capacitor'
 description: >-
   Aprenda cómo configurar Capacitor CLI para crear aplicaciones nativas para iOS
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-cli-project-setup-guide
 ---
 **¿Quieres crear aplicaciones iOS y Android con una sola base de código?** [Capacitor](https://capacitorjs.com/) CLI simplifica el proceso, permitiéndote crear aplicaciones nativas usando tecnologías web. Esto es lo que aprenderás:
 

@@ -1,5 +1,5 @@
 ---
-slug: Sicherheitstipps für Capacitor OTA-Updates
+slug: capacitor-ota-updates-security-tips
 title: 'Capacitor OTA Updates: Sicherheitstipps'
 description: >-
   Erfahren Sie mehr über wichtige Sicherheitspraktiken für OTA-Updates,
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-security-tips
 ---
 **Sie möchten sichere OTA-Updates für Ihre [Capacitor](https://capacitorjs.com/) App?** Hier ist das Wichtigste: OTA-Updates sind schnell und effizient, bergen aber Risiken wie Datenabfang, Dateimanipulation und Server-Schwachstellen. Um Ihre Updates sicher zu halten, konzentrieren Sie sich auf **Verschlüsselung, Dateiüberprüfung und Zugangskontrolle**.
 

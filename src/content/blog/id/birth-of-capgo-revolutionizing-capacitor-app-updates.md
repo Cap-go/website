@@ -1,5 +1,5 @@
 ---
-slug: kelahiran-capgo-perjalanan-menantang-saya-sebagai-pembuat-tunggal
+slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
 title: Bagaimana Sebuah Issue GitHub Berevolusi Menjadi Bisnis
 description: >-
   Temukan berbagai tantangan dan pencapaian dalam menciptakan Capgo, sebuah
@@ -19,7 +19,6 @@ tag: development
 published: true
 locale: id
 next_blog: ''
-original_slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
 ---
 ## Awal Mula: Permintaan Komunitas
 

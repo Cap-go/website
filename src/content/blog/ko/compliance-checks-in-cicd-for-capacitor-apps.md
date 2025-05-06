@@ -1,5 +1,5 @@
 ---
-slug: cicd-capacitor-앱의-컴플라이언스-검사
+slug: compliance-checks-in-cicd-for-capacitor-apps
 title: Capacitor 앱의 CI/CD에서의 컴플라이언스 검사
 description: Capacitor 앱이 자동화된 CI/CD 검사를 통해 규정 표준을 준수하도록 하여 보안을 강화하고 업데이트 속도를 높일 수 있습니다.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: compliance-checks-in-cicd-for-capacitor-apps
 ---
 **CI/CD 파이프라인의 컴플라이언스 검사가 해결책입니다.** [Capacitor](https://capacitorjs.com/) 앱이 Apple과 [Google Play](https://support.google.com/googleplay/android-developer/answer/113513?hl=en)의 요구사항을 충족하고, 보안을 강화하며 업데이트를 신속하게 진행할 수 있도록 보장합니다.
 

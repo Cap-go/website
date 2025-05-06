@@ -1,5 +1,5 @@
 ---
-slug: capacitor-업데이트-롤백-구성
+slug: configuring-rollback-for-capacitor-updates
 title: Capacitor 업데이트 롤백 구성하기
 description: >-
   Capacitor 업데이트에 대한 롤백 옵션을 구성하여 앱 안정성을 유지하고, 무선 업데이트 중 원활한 사용자 경험을 보장하는 방법을
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: configuring-rollback-for-capacitor-updates
 ---
 [Capacitor](https://capacitorjs.com/)에서 롤백은 무선 업데이트(OTA) 중 앱의 안정성을 보장합니다. 알아야 할 사항:
 

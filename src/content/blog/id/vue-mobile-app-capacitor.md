@@ -1,5 +1,5 @@
 ---
-slug: aplikasi-mobile-vue-capacitor
+slug: application-mobile-vue-capacitor
 title: Membuat Aplikasi Mobile dengan Vue dan Capacitor
 description: >-
   Pelajari cara membuat aplikasi mobile dengan Vue, Capacitor dan opsional
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: application-mobile-vue-capacitor
 ---
 Dalam tutorial ini, kami akan memandu Anda melalui proses mengkonversi aplikasi web Vue menjadi aplikasi mobile native menggunakan Capacitor. Secara opsional, Anda juga dapat meningkatkan UI mobile Anda dengan Konsta UI, sebuah library UI mobile berbasis Tailwind CSS.
 

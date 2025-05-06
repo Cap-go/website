@@ -1,5 +1,5 @@
 ---
-slug: ユニバーサルリンクのCapacitorとNext.jsへの統合
+slug: integrate-universal-links-capacitor-nextjs
 title: Next.jsでCapacitorのユニバーサルリンクを統合する方法
 description: >-
   Next.jsアプリでCapacitorを使用して、iOSとAndroidの両プラットフォームでユニバーサルリンクを設定する方法をステップバイステップで学びましょう。
@@ -17,7 +17,6 @@ tag: DeepLinking
 published: true
 locale: ja
 next_blog: ''
-original_slug: integrate-universal-links-capacitor-nextjs
 ---
 iOSのユニバーサルリンクとAndroidのAppリンクを使用すると、ユーザーはブラウザを経由せずに直接アプリに移動することができます。これは特にユーザーエクスペリエンスを向上させ、Webページからアプリへのコンテキストを維持するのに役立ちます。このガイドでは、Capacitorを使用したNext.jsアプリのディープリンクの設定プロセスについて説明します。
 

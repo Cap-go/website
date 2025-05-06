@@ -1,5 +1,5 @@
 ---
-slug: come-usare-file-aar-nei-plugin-capacitor
+slug: how-to-use-aar-files-in-capacitor-plugins
 title: Come Utilizzare i File AAR nei Plugin di Capacitor
 description: >-
   Scopri come integrare i file AAR nei plugin di Capacitor per migliorare le tue
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-use-aar-files-in-capacitor-plugins
 ---
 Ecco il testo tradotto in italiano, mantenendo i link, i tag HTML e i blocchi di codice inalterati:
 

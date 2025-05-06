@@ -1,5 +1,5 @@
 ---
-slug: panduan-penerapan-approval-update-ota
+slug: bonnes-pratiques-pour-l-approbation-des-mises-a-jour-ota
 title: 'Persetujuan Pengguna untuk Update OTA: Praktik Terbaik'
 description: >-
   Pelajari lebih lanjut tentang praktik terbaik untuk mendapatkan persetujuan
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: bonnes-pratiques-pour-l-approbation-des-mises-a-jour-ota
 ---
 | English | Indonesian |
 | Not getting proper user consent can lead to: | Tidak mendapatkan persetujuan pengguna yang tepat dapat menyebabkan: |

@@ -1,5 +1,5 @@
 ---
-slug: korrigiere-capacitor-versionskonflikte
+slug: fix-capacitor-version-mismatch-errors
 title: Beheben von Capacitor-Versionskonflikten
 description: >-
   Erfahren Sie, wie Sie Versionskonflikte in Capacitor-Apps schnell beheben
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: fix-capacitor-version-mismatch-errors
 ---
 **Versionskonflikte in [Capacitor](https://capacitorjs.com/) Apps können Builds stören, Laufzeitabstürze verursachen und Updates verzögern.** Diese Probleme entstehen, wenn Core-Pakete, Plugins oder Abhängigkeiten nicht übereinstimmen. So können Sie sie schnell beheben:
 

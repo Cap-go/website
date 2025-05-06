@@ -1,5 +1,5 @@
 ---
-slug: 중국의 데이터 법률이 앱스토어 제출에 미치는 영향
+slug: how-chinas-data-laws-impact-app-store-submissions
 title: 중국의 데이터법이 앱스토어 제출에 미치는 영향
 description: >-
   앱 제출에 영향을 미치는 중국의 엄격한 데이터법을 살펴보고, 성공적인 시장 진입을 위해 현지 데이터 저장 및 규정 준수가 필요한 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-chinas-data-laws-impact-app-store-submissions
 ---
 중국의 엄격한 데이터법으로 인해 앱 개발자들의 시장 진입이 어려워졌습니다. 알아야 할 사항은 다음과 같습니다:
 

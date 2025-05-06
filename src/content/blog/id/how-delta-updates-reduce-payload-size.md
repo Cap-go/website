@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-pembaruan-delta-mengurangi-ukuran-payload
+slug: comment-les-mises-à-jour-delta-réduisent-la-taille-de-la-charge-utile
 title: Cara Update Delta Mengurangi Ukuran Payload
 description: >-
   Pelajari bagaimana pembaruan Delta meningkatkan kinerja aplikasi dengan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-les-mises-à-jour-delta-réduisent-la-taille-de-la-charge-utile
 ---
 Delta update membuat pembaruan aplikasi lebih cepat dan lebih kecil dengan hanya mengirimkan bagian aplikasi yang berubah, bukan keseluruhan file. Berikut caranya:
 

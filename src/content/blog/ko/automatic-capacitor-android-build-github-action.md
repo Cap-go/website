@@ -1,5 +1,5 @@
 ---
-slug: 자동 Capacitor 안드로이드 빌드 GitHub 액션
+slug: automatic-capacitor-android-build-github-action
 title: GitHub 액션을 사용한 자동 Capacitor Android 빌드
 description: 5분 안에 fastlane과 GitHub Actions를 사용하여 Android Capacitor 앱의 CI/CD 파이프라인 설정하기
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: ko
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: automatic-capacitor-android-build-github-action
 ---
 # GitHub Actions를 통한 자동 Android 빌드
 

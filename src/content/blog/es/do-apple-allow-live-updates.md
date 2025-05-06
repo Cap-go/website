@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-en-apple
+slug: do-apple-allow-live-updates
 title: >-
   Apple no permite enviar actualizaciones en vivo a aplicaciones sin la revisión
   de la App Store.
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: do-apple-allow-live-updates
 ---
 La actualización de aplicaciones Capacitor JS sin pasar por el proceso de revisión de la App Store es posible bajo ciertas condiciones establecidas en las pautas oficiales de Apple. Sin embargo, es importante tener en cuenta que esto no constituye asesoramiento legal. Para que las actualizaciones de código se puedan enviar directamente a una aplicación y cumplir con las pautas de Apple, se deben cumplir las siguientes condiciones:
 

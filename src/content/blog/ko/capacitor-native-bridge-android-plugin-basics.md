@@ -1,5 +1,5 @@
 ---
-slug: Android 플러그인 기초
+slug: capacitor-native-bridge-android-plugin-basics
 title: 'Capacitor 네이티브 브릿지: Android 플러그인 기초'
 description: >-
   Capacitor Native Bridge를 사용하여 고성능 Android 플러그인을 생성하는 방법과 설정, 개발 및 테스트 모범 사례를
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-native-bridge-android-plugin-basics
 ---
 [Capacitor](https://capacitorjs.com/) 네이티브 브릿지는 JavaScript와 네이티브 Android 코드를 연결하여 Android 플러그인 개발을 단순화합니다. 알아야 할 사항은 다음과 같습니다:
 

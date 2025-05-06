@@ -1,5 +1,5 @@
 ---
-slug: Comment faire une version majeure dans Capgo
+slug: how-to-release-major-version-in-capgo
 title: Comment publier une nouvelle version majeure dans capgo
 description: >-
   Comprendre comment et quand il est nécessaire de publier une version majeure
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: how-to-send-specific-version-to-users
-original_slug: how-to-release-major-version-in-capgo
 ---
 ## Lors de la publication d'une version majeure
 

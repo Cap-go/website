@@ -1,5 +1,5 @@
 ---
-slug: comment-le-chiffrement-de-bout-en-bout-protège-les-mises-à-jour
+slug: wie-ende-zu-ende-verschlüsselung-updates-sichert
 title: La sécurisation des mises à jour avec le chiffrement de bout en bout
 description: >-
   Découvrez comment le chiffrement de bout en bout sécurise les mises à jour
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-ende-zu-ende-verschlüsselung-updates-sichert
 ---
 Le **chiffrement de bout en bout (E2EE)** est la meilleure façon de sécuriser les mises à jour en direct (OTA) pour les applications. Il garantit que seul l'utilisateur prévu peut déchiffrer et installer les mises à jour, protégeant contre les risques comme l'altération, l'injection de code et les violations de données. Des plateformes comme [Capgo](https://capgo.app/) ont implémenté l'E2EE pour protéger l'intégrité des applications tout en respectant les normes de sécurité exigées par Apple et Google.
 

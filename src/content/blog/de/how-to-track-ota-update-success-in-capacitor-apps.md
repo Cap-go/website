@@ -1,5 +1,5 @@
 ---
-slug: wie-man-ota-update-erfolge-in-capacitor-apps-verfolgt
+slug: how-to-track-ota-update-success-in-capacitor-apps
 title: So verfolgen Sie OTA-Update-Erfolgreich in Capacitor Apps
 description: >-
   Erfahren Sie, wie Sie den Erfolg von OTA-Updates in Ihren Apps effektiv
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-track-ota-update-success-in-capacitor-apps
 ---
 OTA-Updates ermöglichen es Ihnen, App-Änderungen direkt an Benutzer zu übermitteln, ohne auf die App-Store-Genehmigung warten zu müssen. Die Verfolgung ihres Erfolgs ist jedoch entscheidend, um reibungslose Updates sicherzustellen, Probleme schnell zu beheben und die Benutzererfahrung zu verbessern. Hier ist, was Sie wissen müssen:
 

@@ -1,5 +1,5 @@
 ---
-slug: masalah-umum-dalam-pipeline-cicd-untuk-pembaruan-ota
+slug: problemes-frequents-dans-le-pipeline-cicd-pour-les-mises-a-jour-ota
 title: Penyempitan Umum CI/CD dalam Pipeline OTA
 description: >-
   Pelajari cara mengatasi tantangan umum dalam pipeline CI/CD OTA untuk
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: problemes-frequents-dans-le-pipeline-cicd-pour-les-mises-a-jour-ota
 ---
 **Pipeline CI/CD sangat penting untuk memberikan pembaruan over-the-air (OTA) dengan cepat dan efisien.** Namun sering menghadapi tantangan yang memperlambat deployment. Berikut yang perlu Anda ketahui:
 

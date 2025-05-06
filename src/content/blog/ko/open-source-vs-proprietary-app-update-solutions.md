@@ -1,5 +1,5 @@
 ---
-slug: 오픈소스 vs 독점 앱 업데이트 솔루션
+slug: open-source-vs-proprietary-app-update-solutions
 title: 오픈 소스 vs 독점 앱 업데이트 솔루션
 description: 프로젝트의 필요성과 예산에 가장 적합한 솔루션을 찾기 위해 오픈소스와 독점 앱 업데이트 솔루션의 차이점을 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: open-source-vs-proprietary-app-update-solutions
 ---
 앱을 최신 상태로 유지하는 것은 보안과 사용자 만족도를 위해 매우 중요합니다. 오픈 소스와 상용 업데이트 솔루션 중 선택은 유연성과 비용 또는 사용 편의성과 지원 등 우선순위에 따라 달라집니다.
 

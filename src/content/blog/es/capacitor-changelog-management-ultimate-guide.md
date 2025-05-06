@@ -1,5 +1,5 @@
 ---
-slug: guía-definitiva-manejo-changelog-capacitor
+slug: capacitor-changelog-management-ultimate-guide
 title: 'Gestión del Registro de Cambios de Capacitor: Guía Definitiva'
 description: >-
   Aprende la gestión efectiva del registro de cambios para aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-changelog-management-ultimate-guide
 ---
 La gestión de registros de cambios es esencial para mantener las [actualizaciones de tu aplicación](https://capgo.app/plugins/capacitor-updater/) transparentes y organizadas. Esta guía explica cómo crear, estructurar y automatizar registros de cambios para [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), asegurando que tanto desarrolladores como usuarios estén informados. Esto es lo que aprenderás:
 

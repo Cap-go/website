@@ -1,5 +1,5 @@
 ---
-slug: capacitorアプリケーションにおける開発と本番環境の主な違い
+slug: differenze-chiave-tra-sviluppo-e-produzione-nelle-app-capacitor
 title: Capacitorアプリの開発と本番環境における主な違い
 description: Capacitorアプリの開発環境と本番環境の重要な違いを理解し、パフォーマンスとセキュリティを向上させましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: differenze-chiave-tra-sviluppo-e-produzione-nelle-app-capacitor
 ---
 **[Capacitor](https://capacitorjs.com/) アプリの開発について知っておくべきこと：** 開発環境と本番環境は異なる目的を持ち、固有のセットアップが必要です。開発環境はスピードとデバッグを重視し、本番環境はパフォーマンス、セキュリティ、ユーザー体験に焦点を当てます。
 

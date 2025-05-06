@@ -1,5 +1,5 @@
 ---
-slug: Reducción de precios en Capgo
+slug: Preisreduzierung bei Capgo
 title: >-
   Reducción de precios de Capgo: Haciendo las actualizaciones en vivo aún más
   accesibles
@@ -19,7 +19,6 @@ tag: News
 published: true
 locale: es
 next_blog: ''
-original_slug: Preisreduzierung bei Capgo
 ---
 ¡Hola! 🎉
 

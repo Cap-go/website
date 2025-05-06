@@ -1,5 +1,5 @@
 ---
-slug: 커스텀 Capacitor 플러그인 배포를 위한 5단계
+slug: 5-steps-to-distribute-custom-capacitor-plugins
 title: 5단계로 커스텀 Capacitor 플러그인 배포하기
 description: iOS 및 Android 플랫폼에서 향상된 앱 기능을 위한 커스텀 플러그인을 효과적으로 배포하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: 5-steps-to-distribute-custom-capacitor-plugins
 ---
 사용자 정의 [Capacitor](https://capacitorjs.com/) 플러그인을 배포하면 앱의 기능을 향상시키고 사용자에게 빠른 업데이트를 제공할 수 있습니다. 시작하기 위한 간단한 가이드입니다:
 

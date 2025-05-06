@@ -1,5 +1,5 @@
 ---
-slug: panduan-kontribusi-plugin-capacitor
+slug: guide-de-contribution-plugin-capacitor
 title: Panduan Kontribusi Plugin Capacitor
 description: >-
   Pelajari cara berkontribusi secara efektif untuk plugin Capacitor dengan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-de-contribution-plugin-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) plugin menghubungkan teknologi web dengan fitur perangkat native, memungkinkan [pengembangan aplikasi lintas platform](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/). Panduan ini membantu Anda:
 

@@ -1,5 +1,5 @@
 ---
-slug: CI/CDのOTAパイプラインにおける一般的なボトルネック
+slug: colli-di-bottiglia-comuni-cicd-nelle-pipeline-ota
 title: CI/CD パイプラインにおける一般的な OTA のボトルネック
 description: CIパイプラインやOTAアップデートにおける一般的な課題を克服し、アップデートの効率性、セキュリティ、ユーザー満足度を向上させる方法について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: colli-di-bottiglia-comuni-cicd-nelle-pipeline-ota
 ---
 **OTA（無線）アップデートを迅速かつ効率的に提供するために、CI/CDパイプラインは不可欠です。**しかし、デプロイメントを遅らせる課題に直面することがよくあります。以下が重要なポイントです：
 

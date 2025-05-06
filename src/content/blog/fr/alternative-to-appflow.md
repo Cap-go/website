@@ -1,5 +1,5 @@
 ---
-slug: alternatif-untuk-appflow
+slug: alternative-to-appflow
 title: Alternatif dari Ionic Appflow
 description: >-
   Ionic Appflow adalah mesin besar untuk aplikasi Anda, sayangnya harganya tidak
@@ -19,7 +19,6 @@ tag: Alternatives
 published: true
 locale: id
 next_blog: ''
-original_slug: alternative-to-appflow
 ---
 Ionic Appflow est une plateforme de développement d'applications mobiles basée sur le cloud qui fournit aux développeurs une gamme d'outils et de services pour créer, tester et déployer rapidement des applications mobiles. Elle offre des fonctionnalités telles que l'intégration et le déploiement continus, le reporting des crashs, permettant aux développeurs de suivre les performances de leur application et de s'assurer qu'elle fonctionne correctement pour leurs utilisateurs.
 

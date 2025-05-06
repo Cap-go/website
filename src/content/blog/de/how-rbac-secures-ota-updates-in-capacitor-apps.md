@@ -1,5 +1,5 @@
 ---
-slug: wie-rbac-ota-updates-in-capacitor-apps-absichert
+slug: how-rbac-secures-ota-updates-in-capacitor-apps
 title: Wie RBAC OTA-Updates in Capacitor-Apps absichert
 description: >-
   Erfahren Sie, wie rollenbasierte Zugriffskontrolle die Sicherheit von
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-rbac-secures-ota-updates-in-capacitor-apps
 ---
 RBAC (rollenbasierte Zugriffskontrolle) ist ein Game-Changer für die Sicherung von OTA-Updates (Over-the-Air) in [Capacitor](https://capacitorjs.com/)-Apps. Hier ist der Grund dafür:
 

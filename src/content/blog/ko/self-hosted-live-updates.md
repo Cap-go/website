@@ -1,5 +1,5 @@
 ---
-slug: 자체 호스팅 실시간 업데이트
+slug: self-hosted-live-updates
 title: 자체 호스팅 라이브 업데이트
 description: Capgo의 Live Updates의 다음 버전인 Self-hosted Live Updates를 발표하게 되어 기쁩니다!
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Solution
 published: true
 locale: ko
 next_blog: ''
-original_slug: self-hosted-live-updates
 ---
 캡고의 Live Updates의 최신 진화인 Self-hosted Live Updates 출시를 발표하게 되어 기쁩니다.
 

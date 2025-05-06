@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱의 코드 무결성 – 주요 기법
+slug: code-integrity-in-capacitor-apps-key-techniques
 title: 'Capacitor 앱의 코드 무결성: 핵심 기술'
 description: '모바일 앱의 코드 무결성을 보호하기 위한 필수 기술을 살펴보며, OTA 업데이트, 암호화, 앱 스토어 가이드라인 준수에 중점을 둡니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: code-integrity-in-capacitor-apps-key-techniques
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 코드 무결성은 특히 OTA 업데이트에서 매우 중요합니다. 적절한 조치가 없다면, 앱이 악성 코드 삽입, API 자격 증명 도난 또는 바이너리 수정과 같은 위험에 직면할 수 있습니다. 알아야 할 중요 사항은 다음과 같습니다:
 

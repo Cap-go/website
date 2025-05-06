@@ -1,5 +1,5 @@
 ---
-slug: バージョン競合の解決方法（Capacitor Live Updates）
+slug: gestione-dei-conflitti-di-versione-in-capacitor-live-updates
 title: Capacitorのライブアップデート：バージョンの競合管理
 description: >-
   アプリの安定したパフォーマンスとスムーズなユーザーエクスペリエンスを確保するため、リアルタイムアップデートにおけるバージョンの競合を管理する方法を学びましょう。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: gestione-dei-conflitti-di-versione-in-capacitor-live-updates
 ---
 [Capacitor](https://capacitorjs.com/) のライブアップデートはアプリストアのレビューをバイパスして時間を節約できますが、バージョンの競合によってアプリのパフォーマンスとユーザーエクスペリエンスが損なわれる可能性があります。知っておくべきことは以下の通りです:
 

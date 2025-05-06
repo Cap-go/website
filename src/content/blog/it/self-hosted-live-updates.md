@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-in-diretta-autohospitati
+slug: self-hosted-live-updates
 title: Aggiornamenti Live Self-hosted
 description: >-
   Sono entusiasta di annunciare i Self-hosted Live Updates, la prossima
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: it
 next_blog: ''
-original_slug: self-hosted-live-updates
 ---
 Sono lieto di annunciare il rilascio degli Aggiornamenti Live Self-hosted, che rappresenta l'ultima evoluzione degli Aggiornamenti Live di Capgo.
 

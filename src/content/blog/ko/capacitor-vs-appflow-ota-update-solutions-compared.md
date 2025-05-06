@@ -1,5 +1,5 @@
 ---
-slug: Capacitor와 Appflow OTA 업데이트 솔루션 비교
+slug: capacitor-vs-appflow-ota-update-solutions-compared
 title: 'Capacitor vs Appflow: OTA 업데이트 솔루션 비교'
 description: '앱의 보안성, 속도, 비용 효율성에 중점을 두고 OTA 업데이트 솔루션을 비교하여 가장 적합한 것을 찾으세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-vs-appflow-ota-update-solutions-compared
 ---
 **앱의 최적의 OTA 업데이트 솔루션을 찾고 계신가요?** 여기 [Capacitor](https://capacitorjs.com/)(와 [Capgo](https://capgo.app/))와 [Appflow](https://ionic.io/appflow/)의 간단한 비교가 있습니다. [Capacitor](https://capacitorjs.com/)는 빠른 업데이트, 높은 보안성, 비용 효율적인 옵션을 제공하는 반면, Appflow는 [Ionic](https://ionicframework.com/) 생태계에 종속되어 있으며 2026년에 종료될 예정입니다.
 

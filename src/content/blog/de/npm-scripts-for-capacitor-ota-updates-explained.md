@@ -1,5 +1,5 @@
 ---
-slug: npm-scripts-für-capacitor-ota-updates-erklärt
+slug: npm-scripts-for-capacitor-ota-updates-explained
 title: npm-Skripte für Capacitor OTA-Updates erklärt
 description: >-
   Erfahren Sie, wie Sie OTA-Updates für Ihre Capacitor-App mithilfe von
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: npm-scripts-for-capacitor-ota-updates-explained
 ---
 **Das Aktualisieren Ihrer [Capacitor](https://capacitorjs.com/) App war noch nie einfacher.** Durch die Kombination von Over-The-Air (OTA) Updates mit npm-Skripten können Sie Deployments automatisieren, Zeit sparen und sicherstellen, dass Ihre Nutzer immer die neueste Version haben - ohne auf App-Store-Freigaben warten zu müssen.
 

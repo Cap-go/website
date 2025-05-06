@@ -1,5 +1,5 @@
 ---
-slug: capacitor-cli로-빌드-스크립트-커스텀하는-방법
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: Capacitor CLI로 빌드 스크립트 커스터마이징하기
 description: 효율적인 배포와 플랫폼별 맞춤형 앱 업데이트를 위해 Capacitor CLI를 사용하여 빌드 스크립트를 커스터마이즈하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-customize-build-scripts-with-capacitor-cli
 ---
 [Capacitor](https://capacitorjs.com/) CLI를 사용하면 iOS, Android 및 웹 플랫폼에 대한 앱의 빌드 프로세스를 커스터마이즈할 수 있습니다. 빌드 스크립트를 수정하여 다음과 같은 작업이 가능합니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: 5-errores-comunes-de-actualizacion-ota-que-debe-evitar
+slug: 5-common-ota-update-mistakes-to-avoid
 title: 5 errores comunes de actualizaciones OTA a evitar
 description: >-
   Evita errores comunes de actualizaciones OTA que pueden provocar fallos en la
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: 5-common-ota-update-mistakes-to-avoid
 ---
 Las actualizaciones OTA (Over-the-Air) pueden mejorar las aplicaciones rápidamente, pero los errores pueden provocar fallos, riesgos de seguridad o incluso violaciones de la [app store](https://www.apple.com/app-store/). Aquí hay una guía rápida para evitar errores comunes:
 

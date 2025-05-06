@@ -1,5 +1,5 @@
 ---
-slug: マルチプラットフォームアプリをCapacitorでプロファイリングする方法
+slug: come-profilare-app-multi-piattaforma-con-capacitor
 title: Capacitorでクロスプラットフォームアプリをプロファイリングする方法
 description: >-
   Capacitor で作成したクロスプラットフォームアプリのプロファイリングと最適化を行い、iOS、Android、Web
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-profilare-app-multi-piattaforma-con-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) を使用してクロスプラットフォームアプリをプロファイリングすることで、iOS、Android、Webプラットフォーム全体でパフォーマンスの問題を特定できます。以下は、始めるためのクイックガイドです：
 

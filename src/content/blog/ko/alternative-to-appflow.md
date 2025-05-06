@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ko
 next_blog: ''
-original_slug: alternative-to-appflow
 ---
 Ionic Appflow는 개발자에게 모바일 앱을 빠르게 구축, 테스트 및 배포하기 위한 다양한 도구와 서비스를 제공하는 클라우드 기반 모바일 앱 개발 플랫폼입니다. 지속적인 통합 및 배포, 충돌 보고와 같은 기능을 제공하여 개발자가 앱의 성능을 추적하고 사용자를 위해 원활하게 실행되도록 보장할 수 있습니다.
 

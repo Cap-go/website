@@ -1,5 +1,5 @@
 ---
-slug: 2-Wege-Kommunikation-in-Capacitor-Apps
+slug: 2-way-communication-in-capacitor-apps
 title: 2-Wege-Kommunikation in Capacitor Apps
 description: >-
   Entdecken Sie, wie die bidirektionale Kommunikation in Capacitor-Apps den
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 La comunicación bidireccional en aplicaciones [Capacitor](https://capacitorjs.com/) conecta las capas web y nativas, permitiendo el intercambio de datos en tiempo real. Esto permite que las tecnologías web accedan a características nativas del dispositivo como la cámara o GPS mientras las capas nativas interactúan con elementos web. Aquí por qué es importante:
 

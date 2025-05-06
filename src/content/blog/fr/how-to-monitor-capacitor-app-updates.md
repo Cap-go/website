@@ -1,5 +1,5 @@
 ---
-slug: comment-surveiller-les-mises-à-jour-de-l'application-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Comment surveiller les mises à jour de l'application Capacitor
 description: >-
   Découvrez des stratégies efficaces pour surveiller les mises à jour des
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: how-to-monitor-capacitor-app-updates
 ---
 La surveillance des mises à jour d'applications [Capacitor](https://capacitorjs.com/) est cruciale pour maintenir la stabilité de l'application et garantir une expérience utilisateur fluide. Les mises à jour OTA (Over-the-Air) de [Capacitor](https://capacitorjs.com/) simplifient le processus, permettant aux développeurs de [pousser des mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) sans délais des app stores. Voici ce que vous devez savoir :
 

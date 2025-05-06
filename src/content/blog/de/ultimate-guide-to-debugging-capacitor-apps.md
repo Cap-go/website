@@ -1,5 +1,5 @@
 ---
-slug: leitfaden-zum-debuggen-von-capacitor-apps
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Ultimativer Leitfaden zur Fehlersuche in Capacitor-Apps
 description: >-
   Erlernen Sie effektive Strategien und wichtige Werkzeuge zur Fehlersuche in
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: ultimate-guide-to-debugging-capacitor-apps
 ---
 Das Debuggen von [Capacitor](https://capacitorjs.com/)-Apps kann aufgrund ihrer hybriden Natur, die Web- und native Technologien verbindet, komplex sein. Dieser Leitfaden vereinfacht den Prozess und behandelt die wichtigsten Tools, Techniken und Tipps zur effektiven Fehlerbehebung.
 

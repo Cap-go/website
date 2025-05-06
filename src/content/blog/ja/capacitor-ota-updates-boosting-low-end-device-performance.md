@@ -1,5 +1,5 @@
 ---
-slug: ota-アップデート-capacitor-低レベルデバイスのパフォーマンス向上
+slug: aggiornamenti-ota-capacitor-migliorare-prestazioni-dispositivi-basso-livello
 title: 'Capacitor OTA アップデート: ローエンドデバイスのパフォーマンス改善'
 description: >-
   OTA
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: aggiornamenti-ota-capacitor-migliorare-prestazioni-dispositivi-basso-livello
 ---
 **低スペックデバイスでアプリをより快適に動作させたいですか？OTA アップデートが解決策です。** [Capacitor](https://capacitorjs.com/) のオーバーザエア(OTA)アップデートでは、アプリに必要な変更のみをプッシュできます - 完全なダウンロードは不要です。これにより時間を節約し、データ使用量を削減し、特にハードウェアが限られているユーザーや低速ネットワークのユーザーのパフォーマンスを向上させます。
 

@@ -1,5 +1,5 @@
 ---
-slug: ネイティブモバイルアプリをNextjsとCapacitorで構築する
+slug: costruire-una-app-mobile-nativa-con-nextjs-e-capacitor
 title: 2024 Next.js 14とCapacitorでネイティブモバイルアプリを作成する：ステップバイステップガイド
 description: >-
   Next.js
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: costruire-una-app-mobile-nativa-con-nextjs-e-capacitor
 ---
 ## Introduzione
 

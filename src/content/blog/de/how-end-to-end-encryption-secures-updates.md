@@ -1,5 +1,5 @@
 ---
-slug: wie-ende-zu-ende-verschlüsselung-updates-sichert
+slug: how-end-to-end-encryption-secures-updates
 title: So sichert Ende-zu-Ende-Verschlüsselung Updates ab
 description: >-
   Erfahren Sie, wie Ende-zu-Ende-Verschlüsselung OTA-Updates absichert, die
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-end-to-end-encryption-secures-updates
 ---
 **Ende-zu-Ende-Verschlüsselung (E2EE)** ist der beste Weg, Over-the-Air (OTA) Updates für Apps abzusichern. Sie stellt sicher, dass nur der vorgesehene Benutzer Updates entschlüsseln und installieren kann und schützt vor Risiken wie Manipulation, Code-Injection und Datenlecks. Plattformen wie [Capgo](https://capgo.app/) haben E2EE implementiert, um die App-Integrität zu schützen und dabei Sicherheitsstandards wie die von Apple und Google zu erfüllen.
 

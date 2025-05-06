@@ -1,5 +1,5 @@
 ---
-slug: límites-de-frecuencia-de-api-para-cumplimiento-de-app-store
+slug: api-rate-limiting-für-app-store-konformität
 title: Límite de tasa de API para conformidad con la App Store
 description: >-
   Aprende sobre los métodos de limitación de velocidad de API y su importancia
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: api-rate-limiting-für-app-store-konformität
 ---
 La limitación de velocidad de API garantiza que tu aplicación cumpla con las pautas de Apple y Google mientras protege tu sistema de sobrecargas y abusos. Limita la frecuencia con la que los usuarios pueden hacer solicitudes, mejorando la seguridad, ahorrando costos y asegurando un rendimiento fluido. Esto es lo que necesitas saber:
 

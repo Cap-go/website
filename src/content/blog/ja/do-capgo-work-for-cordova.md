@@ -1,5 +1,5 @@
 ---
-slug: cordovaでもcapgoは機能する
+slug: il-capgo-funziona-per-cordova
 title: なぜCapgoはCordovaをサポートしていないのか：リアルタイムアップデートを利用するためにあなたのアプリをアップグレードしてください
 description: このガイドでは、CapgoとCordovaに関する私の経験を共有します。
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Migration
 published: true
 locale: ja
 next_blog: ''
-original_slug: il-capgo-funziona-per-cordova
 ---
 堅牢で最新のアプリ開発プラットフォームをお探しなら、Capacitorが最適なソリューションです。古くなり時代遅れのプラットフォームとなったCordovaとは異なり、Capacitorは最新のネイティブプラットフォームと言語の進化を活用して、最高のユーザーエクスペリエンスを提供します。
 

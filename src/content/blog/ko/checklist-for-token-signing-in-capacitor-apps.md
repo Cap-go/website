@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱의 토큰 서명을 위한 체크리스트
+slug: checklist-for-token-signing-in-capacitor-apps
 title: Capacitor 앱에서 토큰 서명을 위한 체크리스트
 description: Capacitor 앱에서 데이터 무결성과 미국 표준을 준수하는 안전한 토큰 서명을 위한 포괄적인 체크리스트를 따르세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: checklist-for-token-signing-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 토큰 서명은 데이터 무결성, 인증 및 미국 보안 표준 준수를 보장하는 데 필수적입니다. 이 가이드는 설정, 구현 및 위험 관리를 위한 명확한 체크리스트를 제공합니다.
 

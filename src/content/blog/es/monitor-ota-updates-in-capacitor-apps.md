@@ -1,5 +1,5 @@
 ---
-slug: monitoreo-de-actualizaciones-ota-en-aplicaciones-capacitor
+slug: monitor-ota-updates-in-capacitor-apps
 title: Monitorizar las Actualizaciones OTA en Aplicaciones Capacitor
 description: >-
   Aprende a monitorear efectivamente las actualizaciones OTA en aplicaciones
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: monitor-ota-updates-in-capacitor-apps
 ---
 **¿Quieres actualizar tu aplicación sin esperar las aprobaciones de la tienda de aplicaciones?** Las actualizaciones OTA (Over-The-Air) te permiten enviar correcciones y funciones directamente a los usuarios en tiempo real. Con herramientas como [Capgo](https://capgo.app/), puedes monitorear el rendimiento de las actualizaciones, rastrear errores e incluso revertir actualizaciones problemáticas al instante.
 

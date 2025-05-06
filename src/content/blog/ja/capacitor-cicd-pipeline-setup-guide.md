@@ -1,5 +1,5 @@
 ---
-slug: capacitorのci-cdパイプライン設定ガイド
+slug: guida-alla-configurazione-del-pipeline-ci-cd-di-capacitor
 title: Capacitor CI/CD パイプライン設定ガイド
 description: アプリケーションのビルド、テスト、デプロイメントのプロセスを、CIパイプラインを使用して自動化し、より素早いアップデートと効率性を実現しましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: guida-alla-configurazione-del-pipeline-ci-cd-di-capacitor
 ---
 **最小限の労力で[アプリのアップデート](https://capgo.app/plugins/capacitor-updater/)をより迅速に行いたいですか?** [Capacitor](https://capacitorjs.com/)アプリのCI/CDパイプラインを設定することで、ビルド、テスト、デプロイを自動化し、時間を節約しエラーを減らすことができます。以下が達成できる内容です:
 

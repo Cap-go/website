@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionnent-les-deploiements-progressifs-google-play
+slug: so-funktionieren-die-gestaffelten-google-play-rollouts
 title: 'Introduction pas à pas à Google Play : Comment ça marche'
 description: >-
   Découvrez comment gérer efficacement les mises à jour d'applications avec des
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: so-funktionieren-die-gestaffelten-google-play-rollouts
 ---
 Les **déploiements progressifs sur Google Play** permettent aux développeurs de publier des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) graduellement, en commençant par un petit pourcentage d'utilisateurs avant de s'étendre à tous. Cela garantit la stabilité, détecte les problèmes tôt et minimise les risques.
 

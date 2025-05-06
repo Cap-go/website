@@ -1,5 +1,5 @@
 ---
-slug: el-nacimiento-de-capgo-mi-desafiante-viaje-como-creador-independiente
+slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
 title: Cómo un Issue de GitHub se Convirtió en un Negocio
 description: >-
   Descubre las pruebas y triunfos detrás de la creación de Capgo, un innovador
@@ -21,7 +21,6 @@ tag: development
 published: true
 locale: es
 next_blog: ''
-original_slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
 ---
 ## La Génesis: Una Solicitud de la Comunidad
 

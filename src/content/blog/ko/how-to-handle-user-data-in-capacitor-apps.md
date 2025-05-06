@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱에서 사용자 데이터를 처리하는 방법
+slug: how-to-handle-user-data-in-capacitor-apps
 title: Capacitor 앱에서 사용자 데이터 처리하기
 description: '모바일 앱에서 보안, 규정 준수 및 데이터 관리 모범 사례에 중점을 둔 효과적인 사용자 데이터 처리 전략을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-handle-user-data-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱에서 사용자 데이터를 다룰 때는 안전한 저장소, 명확한 보존 정책, [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)과 [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)와 같은 데이터 보호법 준수가 필요합니다. 이 가이드는 데이터 수집 최소화, 민감 정보 보안, 효과적인 권한 관리 방법을 설명합니다. 주요 내용은 다음과 같습니다:
 

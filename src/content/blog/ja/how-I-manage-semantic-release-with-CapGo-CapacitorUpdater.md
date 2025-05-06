@@ -1,5 +1,5 @@
 ---
-slug: comeラピドクラウドがCapGo-CapacitorUpdaterでセマンティックリリースを管理する方法
+slug: come-rapido-cloud-gestisce-semantic-release-con-CapGo-CapacitorUpdater
 title: Capgo CapacitorUpdaterによるRapido CloudのSemantic Releaseの管理方法
 description: CapGo CapacitorUpdaterを使用するアプリケーションのリリースを管理するためのsemantic releaseの設定方法です
 author: Rupert Barrow
@@ -17,7 +17,6 @@ tag: Case Study
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-rapido-cloud-gestisce-semantic-release-con-CapGo-CapacitorUpdater
 ---
 ## 1. はじめに
 

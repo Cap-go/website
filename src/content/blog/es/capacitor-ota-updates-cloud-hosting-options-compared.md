@@ -1,6 +1,5 @@
 ---
-slug: >-
-  opciones-comparadas-de-alojamiento-en-la-nube-para-actualizaciones-ota-de-capacitor
+slug: capacitor-ota-updates-cloud-hosting-options-compared
 title: >-
   Opciones de alojamiento en la nube para actualizaciones OTA de Capacitor
   comparadas
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-ota-updates-cloud-hosting-options-compared
 ---
 Las actualizaciones Over-the-Air (OTA) te permiten actualizar tus aplicaciones [Capacitor](https://capacitorjs.com/) instantáneamente sin retrasos de la tienda de aplicaciones. Elegir la plataforma de alojamiento en la nube correcta es crítico para la velocidad, seguridad y facilidad de uso.
 

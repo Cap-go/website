@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionne-le-pont-natif-dans-les-applications-capacitor-android
+slug: como-funciona-el-puente-nativo-en-aplicaciones-capacitor-android
 title: >-
   Voici comment fonctionne le Native Bridge dans les applications Android de
   Capacitor
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: como-funciona-el-puente-nativo-en-aplicaciones-capacitor-android
 ---
 **Le pont natif dans les applications Android [Capacitor](https://capacitorjs.com/) permet une communication transparente entre le JavaScript basé sur le web et les fonctionnalités natives d'Android.** Il permet aux développeurs d'utiliser des fonctionnalités spécifiques à Android comme l'appareil photo, la géolocalisation et le stockage directement depuis leur code web, créant ainsi des applications qui semblent natives tout en exploitant les technologies web.
 

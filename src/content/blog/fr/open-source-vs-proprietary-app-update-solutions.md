@@ -1,5 +1,5 @@
 ---
-slug: Solutions de mise à jour d'applications open source vs propriétaires
+slug: Open-Source vs proprietäre App-Update-Lösungen
 title: Solutions open source vs propriétaires pour la mise à jour d'applications
 description: >-
   Explorez les différences entre les solutions de mise à jour d'applications
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: Open-Source vs proprietäre App-Update-Lösungen
 ---
 Maintenir votre application à jour est crucial pour la sécurité et la satisfaction des utilisateurs. Le choix entre les solutions de mise à jour open source et propriétaires dépend de vos priorités : flexibilité et coût ou facilité d'utilisation et support.
 

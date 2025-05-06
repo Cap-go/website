@@ -1,5 +1,5 @@
 ---
-slug: 버전 태그 지정 — 캐퍼시터 앱 관리
+slug: version-tagging-in-capacitor-apps
 title: Capacitor 앱의 버전 태깅
 description: 'Capacitor 앱에서 업데이트, 동기화, 자동화를 위한 모범 사례를 포함한 버전 태깅의 기본 사항을 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: version-tagging-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱을 관리하는데 있어 버전 태깅은 필수적입니다. iOS, Android 및 웹 플랫폼에서 원활한 업데이트, 변경 사항 추적, 앱 안정성 향상을 보장합니다. 다음은 간단한 개요입니다:
 

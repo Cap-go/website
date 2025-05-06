@@ -1,5 +1,5 @@
 ---
-slug: como-las-aplicaciones-moviles-cumplen-con-las-leyes-de-privacidad-de-eeuu
+slug: wie-mobile-apps-die-datenschutzgesetze-der-usa-einhalten
 title: Cómo las aplicaciones móviles cumplen con las leyes de privacidad de EE. UU.
 description: >-
   Descubra cómo las aplicaciones móviles pueden cumplir con los requisitos de
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-mobile-apps-die-datenschutzgesetze-der-usa-einhalten
 ---
 -   **Características clave de privacidad**:
     

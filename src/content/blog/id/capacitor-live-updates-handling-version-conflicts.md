@@ -1,5 +1,5 @@
 ---
-slug: penanganan-konflik-versi-live-updates-capacitor
+slug: capacitor-live-updates-handling-version-conflicts
 title: 'Pembaruan Langsung Capacitor: Menangani Konflik Versi'
 description: >-
   Pelajari cara mengelola konflik versi dalam pembaruan langsung, memastikan
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: capacitor-live-updates-handling-version-conflicts
 ---
 [Capacitor](https://capacitorjs.com/) live update dapat menghemat waktu dengan melewati proses review app store, namun konflik versi dapat mengganggu kinerja aplikasi dan pengalaman pengguna. Berikut yang perlu Anda ketahui:
 

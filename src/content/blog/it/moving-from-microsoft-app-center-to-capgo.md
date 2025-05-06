@@ -1,5 +1,5 @@
 ---
-slug: passaggio-da-microsoft-app-center-a-capgo
+slug: moving-from-microsoft-app-center-to-capgo
 title: >-
   Migrazione da Microsoft App Center a Capgo per gli Aggiornamenti Live delle
   App
@@ -21,7 +21,6 @@ tag: Alternatives
 published: true
 locale: it
 next_blog: ''
-original_slug: moving-from-microsoft-app-center-to-capgo
 ---
 Microsoft ha recentemente annunciato che [interromperà il supporto per le app basate su Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) nel loro prodotto cloud, App Center. Questo ha spinto aziende e team che utilizzano App Center a cercare alternative, e sono entusiasta di dire che la piattaforma [Capgo](https://capgo.app/) è un'ottima opzione per chi cerca il supporto completo per le app Capacitor.
 

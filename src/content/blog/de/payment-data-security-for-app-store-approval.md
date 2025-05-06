@@ -1,5 +1,5 @@
 ---
-slug: zahlungsdaten-sicherheit-fuer-app-store-genehmigung
+slug: payment-data-security-for-app-store-approval
 title: Sicherheit von Zahlungsdaten für die App Store-Zulassung
 description: >-
   Stellen Sie sicher, dass Ihre App die Sicherheitsanforderungen für
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: payment-data-security-for-app-store-approval
 ---
 **Möchten Sie, dass Ihre App von Apple oder Google genehmigt wird? Beginnen Sie mit sicheren Zahlungsdaten.** App Stores verlangen **Ende-zu-Ende-Verschlüsselung** für Zahlungsdaten, um Compliance-Standards zu erfüllen. Ohne diese könnte Ihre App abgelehnt oder entfernt werden. Hier ist, was Sie wissen müssen:
 

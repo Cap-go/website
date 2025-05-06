@@ -1,5 +1,5 @@
 ---
-slug: panduan-approbasi-app-store-pembaruan-ota-capacitor
+slug: guide-approbation-app-store-capacitor-ota-updates
 title: 'Pembaruan OTA Capacitor: Panduan Validasi App Store'
 description: >-
   Pelajari cara menavigasi pedoman App Store dan Play Store untuk pembaruan OTA
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-approbation-app-store-capacitor-ota-updates
 ---
 ### Poin-Poin Utama:
 

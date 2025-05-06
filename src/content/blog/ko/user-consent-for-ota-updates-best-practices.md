@@ -1,5 +1,5 @@
 ---
-slug: OTA 업데이트 사용자 동의에 대한 모범 사례
+slug: user-consent-for-ota-updates-best-practices
 title: 'OTA 업데이트를 위한 사용자 동의: 모범 사례'
 description: >-
   OTA 업데이트에 대한 사용자 동의를 얻기 위한 모범 사례를 배우고, 앱 업데이트 중 규정 준수, 보안 및 사용자 신뢰를 유지하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: user-consent-for-ota-updates-best-practices
 ---
 Without user consent, apps risk legal issues, damaged trust, and potential removal from app stores. Non-compliant apps could face fines under data protection laws and lose user confidence.
 

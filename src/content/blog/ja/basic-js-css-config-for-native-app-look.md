@@ -1,5 +1,5 @@
 ---
-slug: ネイティブアプリのような見た目のための基本的なJSとCSSの設定
+slug: basic-js-css-config-for-native-app-look
 title: ネイティブアプリの外観のための基本的なJSとCSSの設定
 description: >-
   Web アプリをネイティブアプリのような見た目と操作感にするための基本的な JavaScript と CSS
@@ -16,7 +16,6 @@ tag: Web Development
 published: true
 locale: ja
 next_blog: ''
-original_slug: basic-js-css-config-for-native-app-look
 ---
 # ネイティブアプリの外観を実現するための基本的なJSとCSSの設定
 

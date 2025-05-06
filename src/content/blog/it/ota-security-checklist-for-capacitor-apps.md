@@ -1,5 +1,5 @@
 ---
-slug: lista-di-controllo-della-sicurezza-ota-per-app-capacitor
+slug: ota-security-checklist-for-capacitor-apps
 title: Checklist di Sicurezza OTA per App Capacitor
 description: >-
   Scopri le misure di sicurezza essenziali per gli aggiornamenti OTA nelle app,
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: ota-security-checklist-for-capacitor-apps
 ---
 **Gli aggiornamenti OTA sicuri sono essenziali per proteggere i dati degli utenti e mantenere l'integrità delle app.** Ecco cosa devi sapere:
 

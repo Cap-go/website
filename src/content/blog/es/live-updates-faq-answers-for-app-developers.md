@@ -1,6 +1,5 @@
 ---
-slug: >-
-  preguntas-frecuentes-sobre-actualizaciones-en-vivo-respuestas-para-desarrolladores-de-apps
+slug: live-updates-faq-antworten-für-app-entwickler
 title: >-
   Preguntas frecuentes sobre actualizaciones en vivo: respuestas para
   desarrolladores de aplicaciones
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: live-updates-faq-antworten-für-app-entwickler
 ---
 Las actualizaciones en vivo permiten a los desarrolladores enviar rápidamente actualizaciones y correcciones a las aplicaciones de los usuarios sin esperar revisiones de la tienda de aplicaciones. Utilizan tecnología over-the-air (OTA) para aplicar cambios en tiempo real, mejorando la velocidad y eficiencia de implementación.
 

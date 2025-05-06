@@ -1,5 +1,5 @@
 ---
-slug: comment-planifier-des-mises-à-jour-ota-pour-des-applications-capacitor
+slug: wie-man-ota-updates-für-capacitor-apps-plant
 title: Comment planifier les mises à jour OTA pour les applications Capacitor
 description: >-
   Découvrez comment planifier efficacement les mises à jour OTA pour votre
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-man-ota-updates-für-capacitor-apps-plant
 ---
 **Vous souhaitez mettre à jour votre application** [**Capacitor**](https://capacitorjs.com/) **sans les délais de l'App Store ? Les mises à jour Over-the-Air (OTA) vous permettent de déployer des correctifs, de nouvelles fonctionnalités et des améliorations directement aux utilisateurs en temps réel.** Voici comment les planifier efficacement :
 

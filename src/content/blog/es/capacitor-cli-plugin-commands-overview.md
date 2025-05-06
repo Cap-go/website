@@ -1,5 +1,5 @@
 ---
-slug: comandos-y-opciones-del-cli-de-plugin
+slug: capacitor-cli-plugin-commands-overview
 title: Descripción general de los comandos de plugins de Capacitor CLI
 description: >-
   Aprende a gestionar los plugins de Capacitor de manera eficiente utilizando
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-cli-plugin-commands-overview
 ---
 [Capacitor](https://capacitorjs.com/) CLI simplifica la gestión de plugins para el desarrollo de aplicaciones, permitiendo una integración perfecta de las características nativas del dispositivo. Junto con herramientas como [Capgo](https://capgo.app/), agiliza las actualizaciones, el despliegue y la resolución de problemas. Esto es lo que necesitas saber:
 

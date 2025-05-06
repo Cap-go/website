@@ -1,5 +1,5 @@
 ---
-slug: opsi-plugin-capacitor-untuk-pembaruan-ota
+slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
 title: Opsi Plugin Capacitor untuk Pembaruan OTA
 description: >-
   Jelajahi keuntungan dan pilihan pembaruan OTA untuk aplikasi Capacitor,
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
 ---
 **Ingin memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda dengan cepat dan aman tanpa penundaan dari app store?** Pembaruan Over-the-Air (OTA) memungkinkan Anda mengirim perubahan langsung ke pengguna, menghemat waktu dan bandwidth. Berikut yang perlu Anda ketahui:
 

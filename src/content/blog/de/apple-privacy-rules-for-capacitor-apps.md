@@ -1,5 +1,5 @@
 ---
-slug: apples-datenschutzregeln-für-capacitor-apps
+slug: apple-privacy-rules-for-capacitor-apps
 title: Datenschutzregeln von Apple für Capacitor Apps
 description: >-
   Erfahren Sie, wie Sie die Datenschutzregeln von Apple für die App-Entwicklung
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: apple-privacy-rules-for-capacitor-apps
 ---
 **Die Datenschutzregeln von Apple verlangen von [Capacitor](https://capacitorjs.com/) App-Entwicklern jetzt, sich auf Transparenz bei Nutzerdaten und Compliance zu konzentrieren, um die App Store-Genehmigung zu erhalten und das Vertrauen der Nutzer zu bewahren.**
 

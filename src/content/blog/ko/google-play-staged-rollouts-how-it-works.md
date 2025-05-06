@@ -1,5 +1,5 @@
 ---
-slug: 구글 플레이 단계적 출시 방식의 작동 원리
+slug: google-play-staged-rollouts-how-it-works
 title: 'Google Play 단계적 출시: 작동 방법'
 description: Google Play에서 단계적 출시를 통해 효과적으로 앱 업데이트를 관리하여 안정성을 보장하고 위험을 최소화하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: google-play-staged-rollouts-how-it-works
 ---
 **Google Play의 단계별 출시**를 통해 개발자는 [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 작은 비율의 사용자부터 시작하여 점진적으로 모든 사용자에게 배포할 수 있습니다. 이를 통해 안정성을 보장하고, 문제를 조기에 발견하며, 위험을 최소화할 수 있습니다.
 

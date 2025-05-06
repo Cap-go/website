@@ -1,5 +1,5 @@
 ---
-slug: 캐퍼시터 앱 초기화 단계별 가이드
+slug: capacitor-app-initialization-step-by-step-guide
 title: 'Capacitor 앱 초기화: 단계별 가이드'
 description: Capacitor를 사용하여 설치부터 플랫폼별 구성까지 모바일 앱을 효율적으로 설정하고 배포하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-app-initialization-step-by-step-guide
 ---
 **모바일 앱을 단일 코드베이스로 만들고 싶으신가요?** [Capacitor](https://capacitorjs.com/)를 사용하면 [React](https://react.dev/), [Angular](https://angular.io/), 또는 [Vue](https://vuejs.org/)와 같은 프레임워크를 사용하여 iOS, Android 및 웹 앱을 쉽게 만들 수 있습니다. 이 가이드는 [Capacitor](https://capacitorjs.com/)를 설정하고, 플랫폼을 구성하며, 효율적으로 업데이트를 배포하는 방법을 설명합니다.
 

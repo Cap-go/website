@@ -1,5 +1,5 @@
 ---
-slug: top-api-security-standards-für-app-store-konformität
+slug: top-api-security-standards-for-app-store-compliance
 title: Top API Sicherheitsstandards für die App Store-Konformität
 description: >-
   Lerne die wichtigsten API-Sicherheitsstandards kennen, um sicherzustellen,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: de
 next_blog: ''
-original_slug: top-api-security-standards-for-app-store-compliance
 ---
 Die Sicherung der API Ihrer App ist entscheidend, um die Anforderungen des Apple App Store und Google Play zu erfüllen. Dieser Leitfaden beschreibt **fünf wichtige API-Sicherheitsstandards**, die Ihnen helfen, Plattformregeln einzuhalten, Benutzerdaten zu schützen und die App-Leistung zu verbessern.
 

@@ -1,5 +1,5 @@
 ---
-slug: iOSのCapacitorプロジェクトのGitHub Actionによる自動ビルド
+slug: automatic-capacitor-ios-build-github-action
 title: GitHubアクションとプロビジョニングプロファイルを使用したCapacitor iOSの自動ビルド
 description: 5分でIonicのiOSアプリ用のCI/CDパイプラインをfastlaneとGitHub Actionsで設定する方法（2024年）
 author: Martin Donadieu
@@ -14,7 +14,6 @@ tag: CI/CD
 published: true
 locale: ja
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: automatic-capacitor-ios-build-github-action
 ---
 # Build automatici iOS con GitHub Actions usando i Certificati
 

@@ -1,5 +1,5 @@
 ---
-slug: 双方向通信とCapacitorアプリ
+slug: 2-way-communication-in-capacitor-apps
 title: Capacitorアプリにおける双方向通信
 description: Capacitorアプリでの双方向通信が、リアルタイムなデータ交換をどのように強化し、パフォーマンスとユーザーエクスペリエンスを向上させるかを探ります。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/)アプリにおける双方向通信は、Webとネイティブレイヤーをブリッジして、リアルタイムのデータ交換を可能にします。これにより、WebテクノロジーでカメラやGPSなどのネイティブデバイス機能にアクセスでき、ネイティブレイヤーがWeb要素と連携できます。重要な点は以下の通りです:
 

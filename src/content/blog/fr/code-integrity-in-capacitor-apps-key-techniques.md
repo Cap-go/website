@@ -1,5 +1,5 @@
 ---
-slug: integrite-du-code-dans-les-applications-capacitor-techniques-cles
+slug: integridad-del-codigo-en-aplicaciones-capacitor-tecnicas-clave
 title: 'Intégrité du Code dans les Applications Capacitor : Techniques Clés'
 description: >-
   Explorez les techniques essentielles pour garantir l'intégrité du code dans
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: integridad-del-codigo-en-aplicaciones-capacitor-tecnicas-clave
 ---
 **L'intégrité du code est essentielle pour sécuriser les applications [Capacitor](https://capacitorjs.com/), en particulier avec les mises à jour OTA.** Sans mesures appropriées, votre application pourrait faire face à des risques comme l'injection de code malveillant, le vol d'identifiants API ou des modifications binaires. Voici un aperçu rapide de ce que vous devez savoir :
 

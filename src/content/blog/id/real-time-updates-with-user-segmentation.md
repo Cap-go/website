@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-waktu-nyata-dengan-segmentasi-pengguna
+slug: actualizaciones-en-tiempo-real-con-segmentación-de-usuarios
 title: Pembaruan Real-time dengan Segmentasi Pengguna
 description: >-
   Pelajari bagaimana pembaruan real-time dan segmentasi pengguna dapat
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: actualizaciones-en-tiempo-real-con-segmentación-de-usuarios
 ---
 Pembaruan real-time memungkinkan Anda memberikan perubahan aplikasi secara instan tanpa menunggu persetujuan app store. Menggabungkan ini dengan segmentasi pengguna memungkinkan Anda menargetkan grup tertentu, menguji fitur, dan mempersonalisasi pengalaman secara efektif. Berikut cara kerjanya:
 
