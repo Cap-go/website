@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VuePrivacy from '@/vue-pages/privacy.vue'
+import VuePrivacy from '@/vue-pages/privacy.astro'
 import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.privacy_policy({}, { locale: Astro.locals.locale })].join(' | ')
@@ -9,4 +9,4 @@ const description = m.read_our_privacy_policy({}, { locale: Astro.locals.locale 
 const content = { title, description }
 ---
 
-<Layout content={content}><VuePrivacy locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}><VuePrivacy locale={Astro.locals.locale} /></Layout>

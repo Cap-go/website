@@ -1,7 +1,7 @@
 ---
+import * as m from '@/paraglide/messages'
 import { useRuntimeConfig } from '@/config/app'
 import { type Locales, defaultLocale } from '@/services/locale'
-import * as m from '@/paraglide/messages'
 
 interface Props {
   locale: Locales
@@ -9,11 +9,11 @@ interface Props {
 
 const { locale } = Astro.props
 const config = useRuntimeConfig()
-const domain = config.public.baseUrl
 const brand = config.public.brand
+const domain = config.public.baseUrl
 ---
 
-<div class="prose prose-sm m-auto px-3 text-left">
+<div class="prose prose-sm prose-invert m-auto">
   {
     locale !== defaultLocale && (
       <span class="text-xs">
@@ -21,7 +21,7 @@ const brand = config.public.brand
       </span>
     )
   }
-  <h1>{m.privacy_title({}, { locale })}</h1>
+  <h1 class="mt-8">{m.privacy_title({}, { locale })}</h1>
   <p>{m.privacy_last_updated({}, { locale })}</p>
   <p>
     {m.privacy_description({}, { locale })}
@@ -167,5 +167,5 @@ const brand = config.public.brand
   <h2>{m.privacy_contact_us_title({}, { locale })}</h2>
   <p>{m.privacy_contact_us_description({}, { locale })}</p>
   <p set:html={m.privacy_contact_us_website({}, { locale }).replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)} />
+  <div class="mt-8 h-[1px] w-full"></div>
 </div>
-
