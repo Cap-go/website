@@ -1,0 +1,71 @@
+---
+import sampleData from '@/lib/sample-data/pricing.json'
+import * as m from '@/paraglide/messages'
+
+const { locale } = Astro.locals
+const pricing = sampleData['pay-as-you-go']
+---
+
+<section id="calculator" class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
+      <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
+        {m.calculate_your_usage({}, { locale })}<br />
+        <span class="text-xl sm:text-2xl xl:text-3xl">{m.for_the_pay_as_you_go_plan({}, { locale })}</span>
+      </h2>
+    </div>
+    <div class="relative mt-12 lg:mx-auto lg:mt-20 lg:max-w-5xl">
+      <div class="absolute -inset-2">
+        <div
+          class="mx-auto h-full w-full opacity-30 blur-lg filter"
+          style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
+        >
+        </div>
+      </div>
+      <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white sm:grid-cols-2 lg:grid-cols-4">
+        <div class="flex flex-col items-center">
+          <h3 class="calc-label">
+            MAU<br /><span class="text-[0.6rem]">{m.monthly_active_users({}, { locale })}</span>
+          </h3>
+          <p class="font-pj mt-3 text-lg text-white">
+            {pricing.mau.base}
+            {m.included({}, { locale })}<br />
+            {pricing.mau['price-per-unit']}
+            {m.per_added_user({}, { locale })}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <h3 class="calc-label">Storage<br />(GB)</h3>
+          <p class="font-pj mt-3 text-lg text-white">
+            {pricing.storage.base}
+            {m.included({}, { locale })}<br />
+            {pricing.storage['price-per-unit']}
+            {m.per_added_gb({}, { locale })}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <h3 class="calc-label" set:html={m.updates_by_month({}, { locale })} />
+          <p class="font-pj mt-3 text-lg text-white">{m.updates_explanation({}, { locale })}</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <h3 class="calc-label" set:html={m.updates_size({}, { locale })} />
+          <p class="font-pj mt-3 text-lg text-white">{m.updates_explanation({}, { locale })}</p>
+        </div>
+        <div class="flex flex-col items-center lg:col-span-2">
+          <h3 class="calc-label">{m.bandwidth({}, { locale })}</h3>
+          <p class="font-pj mt-3 text-lg text-white">
+            {pricing.bandwidth.base}
+            {m.included({}, { locale })}<br />
+            {pricing.bandwidth['price-per-unit']}
+            {m.per_added_gb({}, { locale })}
+          </p>
+        </div>
+        <div class="flex flex-col items-center lg:col-span-2">
+          <h3 class="calc-label">{m.updates({}, { locale })}</h3>
+          <p class="font-pj mt-3 text-lg text-white">{m.updates_explanation({}, { locale })}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

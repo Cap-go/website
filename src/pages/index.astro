@@ -1,9 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { shortNumber } from '@/services/misc'
-import CIExpert from '@/components/CIExpert.vue'
-import Orgs from '@/components/Orgs.vue'
-import Testimonials from '@/components/Testimonials.vue'
+import CIExpert from '@/components/CIExpert.astro'
+import Orgs from '@/components/Orgs.astro'
+import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import * as m from '@/paraglide/messages'
@@ -702,9 +702,9 @@ if (tmp.ok) {
         </div>
       </div>
     </section>
-    <Testimonials :locale="Astro.locals.locale" />
-    <Orgs :locale="Astro.locals.locale" />
-    <CIExpert :locale="Astro.locals.locale" />
+    <Testimonials locale={Astro.locals.locale} />
+    <Orgs locale={Astro.locals.locale} />
+    <CIExpert />
     <div class="relative mt-14 sm:mt-24 sm:py-16">
       <div aria-hidden="true" class="hidden sm:block">
         <div class="absolute inset-y-0 left-0 w-1/2 rounded-r-3xl bg-gray-800"></div>

@@ -1,0 +1,188 @@
+---
+import { roundNumber } from '@/services/misc'
+import type { Database } from '@/services/supabase.types'
+import * as m from '@/paraglide/messages'
+
+interface Props {
+  pricing: Database['public']['Tables']['plans']['Row'][]
+  paygBase: {
+    mau: number
+    storage: number
+    bandwidth: number
+  }
+  paygUnits: {
+    mau: number
+    storage: number
+    bandwidth: number
+  }
+  yearly: boolean
+}
+
+const { pricing, paygBase, paygUnits, yearly } = Astro.props
+const { locale } = Astro.locals
+
+const solo = pricing.find((plan) => plan.name === 'Solo')!
+const team = pricing.find((plan) => plan.name === 'Team')!
+const maker = pricing.find((plan) => plan.name === 'Maker')!
+const payg = pricing.find((plan) => plan.name === 'Pay as you go')!
+const basePrice = payg.price_m
+
+// Client-side state
+const mau = maker.mau
+const updatesSize = 4
+const updatesByMonth = 5
+
+// Computed values
+const updates = mau * updatesByMonth
+const bandwidth = (updates * updatesSize) / 1000
+const storage = (updatesByMonth * updatesSize * 12) / 1000
+
+// Suggestion logic
+const suggestion = (() => {
+  if (mau <= solo.mau && storage <= solo.storage && bandwidth <= solo.bandwidth) return 'Solo'
+  else if (mau <= maker.mau && storage <= maker.storage && bandwidth <= maker.bandwidth) return 'Maker'
+  else if (mau <= team.mau && storage <= team.storage && bandwidth <= team.bandwidth) return 'Team'
+  return 'Pay as you go'
+})()
+
+// Price calculation
+const totalPrice = (() => {
+  const mauPrice = mau > paygBase.mau ? (mau - paygBase.mau) * paygUnits.mau : 0
+  const storagePrice = storage > paygBase.storage ? (storage - paygBase.storage) * paygUnits.storage : 0
+  const bandwidthPrice = bandwidth > paygBase.bandwidth ? (bandwidth - paygBase.bandwidth) * paygUnits.bandwidth : 0
+  const sum = mauPrice + storagePrice + bandwidthPrice
+  if (sum > 0) return roundNumber(basePrice + sum) * (yearly ? 12 : 1)
+  return (suggestion ? roundNumber(pricing.find((plan) => plan.name === suggestion)!.price_m) : basePrice) * (yearly ? 12 : 1)
+})()
+---
+
+<section id="calculator">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
+      <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
+        {m.calculate_your_usage({}, { locale })}<br />
+      </h2>
+      <p class="font-pj mt-6 text-sm font-normal text-gray-600">
+        {m.enter_your_estimated_monthly_active_users({}, { locale })}
+      </p>
+    </div>
+    <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
+      <div class="absolute -inset-2">
+        <div
+          class="mx-auto h-full w-full opacity-30 blur-lg filter"
+          style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
+        >
+        </div>
+      </div>
+      <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
+        <div class="flex flex-col items-center">
+          <p class="calc-label">
+            MAU<br /><span class="text-[0.6rem]">{m.monthly_active_users({}, { locale })}</span>
+          </p>
+          <input
+            id="mau-input"
+            value={mau}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_by_month({}, { locale })} />
+          <input
+            id="updates-by-month-input"
+            value={updatesByMonth}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_size({}, { locale })} />
+          <input
+            id="updates-size-input"
+            value={updatesSize}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_total({}, { locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white">
+            {updates.toLocaleString()}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.bandwidth_gb({}, { locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white">
+            {bandwidth.toLocaleString()}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.storage({}, { locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white">
+            {storage.toLocaleString()}
+          </p>
+        </div>
+        <div class="col-span-1 flex flex-col items-center md:col-span-3">
+          <p class="text-md font-pj mt-0 mt-5 font-bold tracking-widest text-white uppercase">
+            {yearly ? m.yearly({}, { locale }) : m.monthly({}, { locale })} Price
+          </p>
+          <p class="font-pj mt-3 rounded-xl bg-white p-2 text-3xl font-bold break-all text-gray-900">{totalPrice}€</p>
+          {
+            suggestion && (
+              <p class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
+                {m.we_suggest_you_to_choose_the({}, { locale })}
+                <button id="suggestion-button" class="underline-current cursor-pointer font-bold text-red-400 uppercase underline">
+                  {suggestion}
+                </button>
+                {m.plan({}, { locale })}
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Client-side interactivity
+  const mauInput = document.getElementById('mau-input') as HTMLInputElement
+  const updatesByMonthInput = document.getElementById('updates-by-month-input') as HTMLInputElement
+  const updatesSizeInput = document.getElementById('updates-size-input') as HTMLInputElement
+  const suggestionButton = document.getElementById('suggestion-button')
+
+  function updateCalculations() {
+    const mau = Number(mauInput.value)
+    const updatesByMonth = Number(updatesByMonthInput.value)
+    const updatesSize = Number(updatesSizeInput.value)
+
+    const updates = mau * updatesByMonth
+    const bandwidth = (updates * updatesSize) / 1000
+    const storage = (updatesByMonth * updatesSize * 12) / 1000
+
+    // Update displayed values
+    const updatesElement = document.querySelector('[data-updates]')
+    const bandwidthElement = document.querySelector('[data-bandwidth]')
+    const storageElement = document.querySelector('[data-storage]')
+
+    if (updatesElement) updatesElement.textContent = updates.toLocaleString()
+    if (bandwidthElement) bandwidthElement.textContent = bandwidth.toLocaleString()
+    if (storageElement) storageElement.textContent = storage.toLocaleString()
+
+    // Update suggestion and price
+    // This would need to be implemented based on your pricing logic
+  }
+
+  mauInput.addEventListener('input', updateCalculations)
+  updatesByMonthInput.addEventListener('input', updateCalculations)
+  updatesSizeInput.addEventListener('input', updateCalculations)
+
+  suggestionButton?.addEventListener('click', () => {
+    const suggestion = suggestionButton.textContent
+    if (suggestion === 'Pay as you go') {
+      document.getElementById('pay-as-you-go')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  })
+</script>
