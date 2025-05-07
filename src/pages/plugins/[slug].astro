@@ -210,3 +210,22 @@ const { locale } = Astro.locals
     {tutorial && <div class="prose prose-invert hidden w-full px-10 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
   </div>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tutorialBtn = document.getElementById('tutorialBtn')
+    const aboutBtn = document.getElementById('aboutBtn')
+    const aboutSection = document.getElementById('aboutSection')
+    const tutorialSection = document.getElementById('tutorialSection')
+
+    tutorialBtn?.addEventListener('click', () => {
+      aboutSection?.classList.add('hidden')
+      tutorialSection?.classList.remove('hidden')
+    })
+
+    aboutBtn?.addEventListener('click', () => {
+      tutorialSection?.classList.add('hidden')
+      aboutSection?.classList.remove('hidden')
+    })
+  })
+</script>
