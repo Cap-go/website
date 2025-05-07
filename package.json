@@ -15,7 +15,8 @@
     "generate:docs:translations": "tsx scripts/generate_docs_translations.tsx",
     "generate:plugin:translations": "tsx scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
-    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
+    "clean:unused": "npx tsx scripts/clean_not_used.tsx"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.1",
