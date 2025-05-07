@@ -1,0 +1,124 @@
+---
+import { useRuntimeConfig } from '@/config/app'
+import type { Locales } from '@/services/locale'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const config = useRuntimeConfig()
+const brand = config.public.brand
+
+interface Props {
+  locale: Locales
+}
+
+const { locale } = Astro.props
+---
+
+<header class="relative py-2">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between">
+      <div class="shrink-0">
+        <a href={getRelativeLocaleUrl(locale)} title="Capgo home" aria-label="Capgo home" class="font-prompt flex items-center pr-3 text-4xl font-medium">
+          <img class="h-18 w-auto pr-1" loading="eager" height="72" width="133" alt={`${brand} logo`} title={`${brand} logo`} src="/capgo_logo.webp" />
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="text-white" title="Expand menu" id="menu-toggle">
+          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
+        <a
+          href={getRelativeLocaleUrl(locale, 'pricing')}
+          title="Pricing"
+          class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+        >
+          {m.pricing({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'blog')}
+          title="Blog"
+          class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+        >
+          {m.blog({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'docs')}
+          title="Documentation"
+          class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+        >
+          {m.documentation({}, { locale })}
+        </a>
+        <a
+          href="https://web.capgo.app/login/"
+          title="Login"
+          target="_blank"
+          class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+        >
+          {m.login({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'register')}
+          target="_blank"
+          title="Register"
+          class="font-pj rounded-xl border border-gray-300 bg-transparent px-5 py-2 text-base leading-7 font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+          role="button"
+        >
+          {m.register({}, { locale })}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden">
+    <div class="mt-2 space-y-1 bg-gray-700 px-2 pt-2 pb-3">
+      <a
+        href={getRelativeLocaleUrl(locale, 'pricing')}
+        title={m.pricing({}, { locale })}
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >
+        Pricing
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, 'blog')}
+        title={m.blog({}, { locale })}
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >
+        Blog
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, 'docs')}
+        title={m.documentation({}, { locale })}
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >
+        Documentation
+      </a>
+      <a
+        href="https://web.capgo.app/login/"
+        target="_blank"
+        title={m.login({}, { locale })}
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >
+        Login
+      </a>
+      <a
+        target="_blank"
+        title={m.register({}, { locale })}
+        href={getRelativeLocaleUrl(locale, 'register')}
+        class="font-pj block rounded-md border border-gray-300 bg-gray-900 bg-transparent px-5 py-2 text-base leading-7 font-medium text-gray-300 text-white transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+      >
+        Register
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden')
+  })
+</script>

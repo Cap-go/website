@@ -1,6 +1,6 @@
 ---
-import Footer from '@/components/Footer.vue'
-import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.astro'
+import Header from '@/components/Header.astro'
 import SEO from '@/components/SEO.astro'
 import '@/css/global.css'
 
@@ -18,7 +18,7 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
     <div class="overflow-x-hidden bg-gray-900 text-white">
       <Header locale={Astro.locals.locale} client:load />
       <slot />
-      <Footer locale={Astro.locals.locale} client:load />
+      <Footer locale={Astro.locals.locale} />
     </div>
     {
       !isLocalhost && (

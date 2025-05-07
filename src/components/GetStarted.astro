@@ -1,0 +1,35 @@
+---
+import type { Locales } from '@/services/locale'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+interface Props {
+  locale: Locales
+}
+
+const { locale } = Astro.props
+---
+
+<div>
+  <div class="relative mx-4 my-6 max-w-4xl p-4 sm:mx-auto sm:my-10 sm:p-8 md:my-14 md:p-12">
+    <!-- Border design -->
+    <div class="absolute inset-0 rounded-[20px] border border-gray-700 sm:rounded-[40px]"></div>
+
+    <div class="relative">
+      <span class="mb-4 text-3xl leading-tight font-normal text-white sm:mb-6 sm:text-4xl md:text-[44px]">
+        {m.instant_updates_for_capacitor_apps({}, { locale })}
+      </span>
+
+      <p class="mb-6 max-w-3xl text-lg leading-relaxed font-normal text-gray-300 sm:mb-8 sm:text-xl md:mb-12">
+        {m.instant_updates_for_capacitor_apps_description({}, { locale })}
+      </p>
+
+      <a
+        href={getRelativeLocaleUrl(locale, 'register')}
+        class="inline-flex w-full items-center justify-center rounded-lg bg-black px-6 py-3 text-lg text-white transition-colors duration-200 hover:bg-gray-800 sm:w-auto sm:px-10 sm:py-4 sm:text-xl"
+      >
+        {m.get_started_now({}, { locale })}
+      </a>
+    </div>
+  </div>
+</div>

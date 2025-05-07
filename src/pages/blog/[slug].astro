@@ -5,9 +5,9 @@ import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
 import { formatTime } from '@/config/app'
 import striptags from 'striptags'
-import GetStarted from '@/components/GetStarted.vue'
+import GetStarted from '@/components/GetStarted.astro'
 import Blog from '@/components/Blog.astro'
-import * as m from '@/paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const blogs = await getCollection('blog')

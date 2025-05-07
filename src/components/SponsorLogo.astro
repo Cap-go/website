@@ -1,0 +1,32 @@
+---
+interface Props {
+  name: string
+  logo: string
+  url: string
+  size?: 24 | 20 | 16 | 14
+}
+
+const { name, logo, url, size = 20 } = Astro.props
+
+const sizeClass = (() => {
+  switch (size) {
+    case 24:
+      return 'w-24 h-24'
+    case 20:
+      return 'w-20 h-20'
+    case 16:
+      return 'w-16 h-16'
+    case 14:
+      return 'w-14 h-14'
+    default:
+      return 'w-20 h-20'
+  }
+})()
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="m-3 flex flex-col items-center rounded-lg p-2 transition duration-300 hover:scale-105 hover:bg-gray-800">
+  <div class={`mb-2 flex items-center justify-center overflow-hidden rounded-full bg-white ${sizeClass}`}>
+    <img src={logo} alt={name} class="h-full w-full object-cover" />
+  </div>
+  <span class="text-center text-sm">{name}</span>
+</a>
