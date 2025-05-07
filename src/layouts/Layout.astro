@@ -16,9 +16,9 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
-      <Header locale={Astro.locals.locale} client:load />
+      <Header />
       <slot />
-      <Footer locale={Astro.locals.locale} />
+      <Footer />
     </div>
     {
       !isLocalhost && (
