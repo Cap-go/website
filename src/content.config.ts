@@ -18,7 +18,15 @@ const blog = defineCollection({
     head_image: z.string().optional(),
     head_image_alt: z.string().optional(),
     keywords: z.string().optional(),
-    tag: z.string(),
+    tag: z.string().transform((j) => {
+      let tmp = ''
+      const splitTags = j.trim().split(',')
+      splitTags.forEach((p, index) => {
+        tmp += p.trim()
+        if (index < splitTags.length - 1) tmp += ','
+      })
+      return tmp
+    }),
     published: z.boolean().optional(),
     locale: z.string() as z.ZodType<Locales>,
     next_blog: z.string().optional().nullable(),

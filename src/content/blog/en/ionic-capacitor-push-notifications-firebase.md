@@ -12,7 +12,7 @@ updated_at: 2023-06-29T00:00:00.000Z
 head_image: /push_notif.webp
 head_image_alt: Ionic Capacitor Push Notifications with Firebase
 keywords: Ionic, Capacitor, push notifications, Firebase, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
-tag: tutorial
+tag: Tutorial
 published: true
 locale: en
 next_blog: ''

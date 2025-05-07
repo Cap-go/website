@@ -1,11 +1,19 @@
 ---
+import type { GetStaticPaths } from 'astro'
+import { slug as slugify } from 'github-slugger'
 import Blog from '@/components/Blog.astro'
 import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { slug as slugify } from 'github-slugger'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = (await getCollection('blog')).filter((i) => i.data.published !== false).sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
+  const tags = new Set<string>()
+  posts.forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
+  return [...tags].map((slug) => ({ params: { slug: slugify(slug) } }))
+}
 
 const config = useRuntimeConfig()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
@@ -13,7 +21,7 @@ const content: { title?: string; description?: string; image?: string; author?: 
 const allPosts = await getCollection('blog')
 
 const posts = allPosts
-  .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale)
+  .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale && Astro.params.slug && slugify(i.data.tag).includes(slugify(Astro.params.slug.toString())))
   .sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
 const tags = new Set<string>()
@@ -33,6 +41,12 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
         {config.public.blog_description}
       </h2>
       <div class="mt-8 flex flex-wrap gap-2">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
+          class="rounded-md border border-gray-400 px-3 py-2 text-xs font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
+        >
+          All
+        </a>
         {
           uniqueTags.map((val) => (
             <a
