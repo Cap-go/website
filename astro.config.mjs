@@ -1,6 +1,5 @@
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
-import vue from '@astrojs/vue'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
@@ -50,13 +49,6 @@ export default defineConfig({
       defaultLocale,
       redirectDefaultLocale: true,
       exclude: ['pages/**/*.json.ts'],
-    }),
-    vue({
-      template: {
-        transformAssetUrls: {
-          includeAbsolute: false,
-        },
-      },
     }),
     sitemap({
       i18n: {
