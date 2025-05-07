@@ -1,9 +1,8 @@
 ---
+import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { actions } from '@/config/plugins'
 import { getSlug } from '@/services/github'
-import { type Locales } from '@/services/locale'
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
