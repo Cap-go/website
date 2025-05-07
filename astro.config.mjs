@@ -3,11 +3,9 @@ import starlight from '@astrojs/starlight'
 import vue from '@astrojs/vue'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
-import AstroPWA from '@vite-pwa/astro'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig } from 'astro/config'
 import config from './configs.json'
-import { pwa } from './src/config/pwa'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 export default defineConfig({
@@ -67,7 +65,6 @@ export default defineConfig({
       },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
     }),
-    AstroPWA(pwa),
     starlight({
       title: 'Capgo',
       disable404Route: true,
