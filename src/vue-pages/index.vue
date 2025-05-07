@@ -3,12 +3,12 @@ import CIExpert from '@/components/CIExpert.vue'
 import Orgs from '@/components/Orgs.vue'
 import Testimonials from '@/components/Testimonials.vue'
 import { useRuntimeConfig } from '@/config/app'
+import * as m from '@/paraglide/messages'
 import { type Locales } from '@/services/locale'
 import { shortNumber } from '@/services/misc'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import { reactive } from 'vue'
-import * as m from '../paraglide/messages.js'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand || ''
