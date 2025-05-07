@@ -4,10 +4,11 @@ import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { defaultLocale } from '@/services/locale'
 import { fetchWithToken, getSlug } from '@/services/github'
-import VuePluginPDP from '@/vue-pages/plugins/[id].vue'
 import type { GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
 import { marked } from 'marked'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugsSet = new Set()
@@ -31,13 +32,13 @@ if (!plugin || !plugin.title) {
   return new Response(null, { status: 404 })
 }
 
-let tutorial = ''
+let tutorialPlugin = ''
 const tuts = await getCollection('plugin')
 const thisTut = tuts.find((i) => getSlug(i.filePath || '').replace('.md', '') === Astro.params.slug && (i.data.locale || defaultLocale) === Astro.locals.locale)
-if (thisTut?.body) tutorial = thisTut.body
+if (thisTut?.body) tutorialPlugin = thisTut.body
 
-if (tutorial.length > 0) {
-  const tmp = marked.parse(tutorial)
+if (tutorialPlugin.length > 0) {
+  const tmp = marked.parse(tutorialPlugin)
   if (typeof tmp !== 'string') plugin['tutorial'] = await tmp
   else plugin['tutorial'] = tmp
 }
@@ -131,8 +132,81 @@ content['ldJSON'] = {
   ...(plugin.hasOwnProperty('datePublished') && { datePublished: plugin.datePublished }),
   ...(plugin.hasOwnProperty('dateModified') && { dateModified: plugin.dateModified }),
 }
+
+const { title, description, githubStars, npmDownloads, href, name, readme, tutorial } = plugin
+const { locale } = Astro.locals
 ---
 
 <Layout {content}>
-  <VuePluginPDP locale={Astro.locals.locale} {...plugin} client:load />
+  <div class="flex w-full flex-col items-center">
+    <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
+      <a aria-label="Back To Plugins" href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">
+        ← Back To Plugins
+      </a>
+    </div>
+    <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
+      <button class="rounded border border-white px-3 py-1 text-sm" id="tutorialBtn">
+        {m.tutorial_on({}, { locale })}
+        {title}
+      </button>
+      <button class="rounded border border-white/10 px-3 py-1 text-sm" id="aboutBtn">
+        {m.about({}, { locale })}
+        {title}
+      </button>
+    </div>
+    <div class="mt-6 flex w-full flex-col items-center">
+      <div class="z-10 mb-8 w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
+        <div class="flex w-full flex-col">
+          <h1 class="mt-4 text-2xl font-bold md:text-4xl">
+            {title}
+          </h1>
+          <h1 class="mt-8 text-lg font-light md:text-xl">
+            {description}
+          </h1>
+          {
+            githubStars && (
+              <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+                <span class="text-sm font-semibold text-gray-400">GitHub Stars</span> <span class="text-gray-600">{githubStars}</span>
+              </div>
+            )
+          }
+          {
+            npmDownloads && (
+              <div class="mt-4 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+                <span class="text-sm font-semibold text-gray-400">NPM Downloads</span> <span class="text-gray-600">{npmDownloads}</span>
+              </div>
+            )
+          }
+          <div class="flex flex-row flex-wrap items-center justify-between">
+            {
+              href && (
+                <a
+                  aria-label="View Repo URL"
+                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
+                  href={href}
+                  target="_blank"
+                >
+                  {m.view_repo({}, { locale })} &rarr;
+                </a>
+              )
+            }
+            {
+              name && (
+                <a
+                  aria-label="View NPM"
+                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
+                  href={`https://www.npmjs.com/package/${name}`}
+                  target="_blank"
+                >
+                  {m.view_npm({}, { locale })} &rarr;
+                </a>
+              )
+            }
+          </div>
+          {readme && <div id="readme" class="prose my-8" set:html={readme} />}
+        </div>
+      </div>
+    </div>
+    {tutorial && <div class="prose prose-invert hidden w-full px-10 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
+  </div>
 </Layout>
