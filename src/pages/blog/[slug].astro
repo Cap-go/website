@@ -6,7 +6,7 @@ import { getCollection, render } from 'astro:content'
 import { formatTime } from '@/config/app'
 import striptags from 'striptags'
 import GetStarted from '@/components/GetStarted.vue'
-import Blog from '@/components/Blog.vue'
+import Blog from '@/components/Blog.astro'
 import * as m from '@/paraglide/messages.js'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -35,7 +35,7 @@ const alternateVersions = []
 if (entry) {
   // Find articles with the same slug
   const originalSlug = entry.data.slug
-  const availableTranslations = blogs.filter((j) => (j.data.slug === originalSlug && j.data.locale !== Astro.locals.locale))
+  const availableTranslations = blogs.filter((j) => j.data.slug === originalSlug && j.data.locale !== Astro.locals.locale)
   // Add entry for each available locale
   for (const translation of availableTranslations) {
     alternateVersions.push({
