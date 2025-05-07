@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { Toaster } from 'vue-sonner'
+// import { Toaster } from 'vue-sonner'
 
 const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const { locale } = Astro.locals
@@ -143,13 +143,13 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     <div class="pointer-events-none absolute inset-0 overflow-hidden">
       <img class="h-full w-full transform object-cover object-top opacity-20" src="/background-pattern.webp" alt="" />
     </div>
-    <Toaster rich-colors close-button position="top-right" />
+    <!-- <Toaster rich-colors close-button position="top-right" /> -->
   </section>
 </Layout>
 
 <script>
   import { getRemoteConfig, useSupabase } from '@/services/supabase'
-  import { toast } from 'vue-sonner'
+  // import { toast } from 'vue-sonner'
 
   const form = document.getElementById('registerForm')
   const email = document.getElementById('email') as HTMLInputElement
@@ -175,7 +175,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
     if (errorDeleted) console.error(errorDeleted)
     if (!deleted) {
-      toast.error('Account is in error, please contact support at support@capgo.app')
+      // toast.error('Account is in error, please contact support at support@capgo.app')
       return
     }
 
@@ -200,7 +200,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     })
     if (error) {
       console.error('Supabase signup error', error)
-      toast.error(error.message)
+      // toast.error(error.message)
       submitButton.disabled = false
       return
     }
@@ -211,7 +211,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     const session = await supabase.auth.getSession()
     if (session.error) {
       console.error('Supabase session error', session.error)
-      toast.error(session.error.message)
+      // toast.error(session.error.message)
       submitButton.disabled = false
       return
     }

@@ -3,7 +3,7 @@ import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getSlug } from '@/services/github'
-// import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
+import ArrowUpRightIcon from 'astro-heroicons/mini/ArrowUpRight.astro'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
@@ -55,7 +55,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
               </div>
               <div class="mt-auto mb-3 flex flex-row items-center justify-between px-5 pb-3">
                 <span class="text-sm font-light text-gray-400">by {item.author}</span>
-                {/* {<ArrowUpRightIcon class="h-[18px] w-[18px] fill-gray-500 group-hover:fill-white" />} */}
+                {<ArrowUpRightIcon class="h-[18px] w-[18px] fill-gray-500 group-hover:fill-white" />}
               </div>
             </a>
           ))
