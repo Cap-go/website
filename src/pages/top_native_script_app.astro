@@ -1,8 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { useRuntimeConfig } from '@/config/app'
-import type { Locales } from '@/services/locale'
 import { renameCat, shortNumber } from '@/services/misc'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.top_native_script_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
@@ -19,7 +17,7 @@ interface App {
 }
 
 const { locale } = Astro.locals
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 
 let apps: App[] = []
 let usage = 0.13
