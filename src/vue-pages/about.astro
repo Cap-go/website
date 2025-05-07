@@ -1,13 +1,8 @@
 ---
 import AboutMartin from '@/components/AboutMartin.astro'
 import * as m from '@/paraglide/messages'
-import type { Locales } from '@/services/locale'
 
-interface Props {
-  locale: Locales
-}
-
-const { locale } = Astro.props
+const { locale } = Astro.locals
 ---
 
 <section class="relative bg-gray-900 pt-12 sm:pt-16 lg:pt-20">

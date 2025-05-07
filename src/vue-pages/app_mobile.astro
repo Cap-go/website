@@ -1,16 +1,11 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
 import * as m from '@/paraglide/messages'
-import type { Locales } from '@/services/locale'
 
 const config = useRuntimeConfig()
 const brand = config.public.brand
 
-interface Props {
-  locale: Locales
-}
-
-const { locale } = Astro.props
+const { locale } = Astro.locals
 ---
 
 <section class="font-fira-sans mx-4 lg:max-w-[85%] xl:mx-auto">

@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueAppmobile from '@/vue-pages/app_mobile.vue'
+import VueAppmobile from '@/vue-pages/app_mobile.astro'
 import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.Capacitor_Sanbox_App({}, { locale: Astro.locals.locale })].join(' | ')
@@ -13,4 +13,4 @@ const content = {
 }
 ---
 
-<Layout content={content}><VueAppmobile locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}><VueAppmobile /></Layout>

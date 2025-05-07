@@ -1,12 +1,7 @@
 ---
-import type { Locales } from '@/services/locale'
 import * as m from '@/paraglide/messages'
 
-interface Props {
-  locale: Locales
-}
-
-const { locale } = Astro.props
+const { locale } = Astro.locals
 ---
 
 <section class="bg-gray-50 py-12 sm:py-16 lg:py-20">

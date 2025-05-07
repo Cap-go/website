@@ -1,14 +1,10 @@
 ---
 import { useRuntimeConfig } from '@/config/app'
-import { locales, type Locales } from '@/services/locale'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
+import { locales } from '@/services/locale'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
-interface Props {
-  locale: Locales
-}
-
-const { locale } = Astro.props
+const { locale } = Astro.locals
 const config = useRuntimeConfig()
 const brand = config.public.brand
 const year = new Date().getFullYear()

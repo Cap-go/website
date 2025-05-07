@@ -1,12 +1,79 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueTrust from '@/vue-pages/trust.vue'
 import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.trust({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.consulting_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
+
+const { locale } = Astro.locals
 ---
 
-<Layout content={content}><VueTrust locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}>
+    <section class="bg-gray-50 py-12 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto text-center">
+                <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">{m.trust_and_security({}, { locale })}</h1>
+                <p class="font-pj mt-6 text-xl font-normal text-gray-600">{m.trust_and_security_description({}, { locale })}</p>
+            </div>
+            <div class="mt-16 space-y-16">
+                <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+                    <h2 class="text-3xl font-bold text-gray-900">{m.product_security({}, { locale })}</h2>
+                    <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
+                        <li>{m.trust_soc2_certification({}, { locale })}</li>
+                        <li>
+                            {m.source_code_protection_1({}, { locale })}
+                            <a href="https://github.com/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">GitHub</a>.
+                            {m.source_code_protection_2({}, { locale })}
+                            <a href="https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main" class="underline-current text-blue-500 underline" target="_blank"
+                                >SonarCloud</a
+                            >
+                            {m.and({}, { locale })}
+                            <a href="https://snyk.io/test/github/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">Snyk</a>
+                            {m.source_code_protection_3({}, { locale })}
+                        </li>
+                        <li class="flex items-center gap-2">
+                            SonarCloud:
+                            <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
+                                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating" />
+                            </a>
+                            <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
+                                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
+                            </a>
+                        </li>
+                        <li>{m.access_control({}, { locale })}</li>
+                    </ul>
+                </div>
+
+                <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+                    <h2 class="text-3xl font-bold text-gray-900">{m.data_security({}, { locale })}</h2>
+                    <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
+                        <li>{m.encryption_communication({}, { locale })}</li>
+                        <li>{m.source_code_encryption({}, { locale })}</li>
+                    </ul>
+                </div>
+
+                <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+                    <h2 class="text-3xl font-bold text-gray-900">{m.network_security({}, { locale })}</h2>
+                    <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
+                        <li>{m.vulnerability_scanning({}, { locale })}</li>
+                        <li>{m.architecture({}, { locale })}</li>
+                    </ul>
+                </div>
+
+                <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+                    <h2 class="text-3xl font-bold text-gray-900">{m.application_security({}, { locale })}</h2>
+                    <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
+                        <li>{m.secure_coding({}, { locale })}</li>
+                        <li>
+                            {m.site_reliability({}, { locale })}
+                            <a href="https://status.capgo.app/" class="underline-current text-blue-500 underline" target="_blank">Uptime Monitoring</a>.
+                        </li>
+                        <li>{m.application_penetration_testing({}, { locale })}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

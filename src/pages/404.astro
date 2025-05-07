@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 ---
 
 <Layout>
@@ -14,13 +15,13 @@ import Layout from '@/layouts/Layout.astro'
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
             <a
-              href="/"
+              href={getRelativeLocaleUrl(Astro.locals.locale, '/')}
               class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
             >
               Go back home
             </a>
             <a
-              href="/#support"
+              href={`${getRelativeLocaleUrl(Astro.locals.locale, '/')}#support`}
               class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
             >
               Contact support
