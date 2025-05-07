@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueImprint from '@/vue-pages/imprint.vue'
 import * as m from '@/paraglide/messages'
 
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -9,6 +8,25 @@ const title = [brand, m.imprint({}, { locale: Astro.locals.locale })].join(' | '
 const description = m.imprint_description({}, { locale: Astro.locals.locale }).replace('$1', brand)
 
 const content = { title, description }
+const { locale } = Astro.locals
+const props = { locale }
 ---
 
-<Layout content={content}><VueImprint locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}>
+  <div class="relative bg-indigo-800">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">{m.get_in_touch({}, { locale: props.locale })}</h1>
+      <p class="mt-6 max-w-3xl text-xl text-indigo-100">
+        {m.company_name({}, { locale: props.locale })}: Digital shift OÜ <br />
+        {m.register_code({}, { locale: props.locale })}: 14236508 <br />
+        {m.address({}, { locale: props.locale })}: Sepapaja 6, 15551 , Tallinn, Estonia <br />
+        {m.hosting({}, { locale: props.locale })}: Cloudflare Egde, Netlify Egde<br />
+        {m.data_storage({}, { locale: props.locale })}: AWS eu-west-2 (London) <br />
+        {m.data_processing({}, { locale: props.locale })}: Cloudflare Egde and Netlify Egde, Supabase <br />
+      </p>
+    </div>
+  </div>
+</Layout>
