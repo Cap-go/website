@@ -50,7 +50,7 @@ const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum
             <h2 class="mb-8 text-2xl font-bold">Platinum</h2>
             <div class="-mt-4 grid grid-cols-2 gap-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4">
               {platinumSponsors.map((sponsor) => (
-                <SponsorLogo client:load size={24} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+                <SponsorLogo size={24} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
               ))}
             </div>
           </div>
@@ -62,7 +62,7 @@ const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum
             <h2 class="mb-8 text-2xl font-bold">Gold</h2>
             <div class="-mt-4 grid grid-cols-3 gap-8 gap-x-4 sm:grid-cols-4 md:grid-cols-5">
               {goldSponsors.map((sponsor) => (
-                <SponsorLogo client:load size={20} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+                <SponsorLogo size={20} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
               ))}
             </div>
           </div>
@@ -74,7 +74,7 @@ const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum
             <h2 class="mb-8 text-2xl font-bold">Silver</h2>
             <div class="-mt-4 grid grid-cols-4 gap-8 gap-x-4 sm:grid-cols-5 md:grid-cols-6">
               {silverSponsors.map((sponsor) => (
-                <SponsorLogo client:load size={16} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+                <SponsorLogo size={16} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
               ))}
             </div>
           </div>
@@ -86,7 +86,7 @@ const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum
             <h2 class="mb-8 text-2xl font-bold">Baker</h2>
             <div class="ml-12 flex flex-wrap gap-8">
               {bakerSponsors.map((sponsor) => (
-                <SponsorLogo client:load size={14} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+                <SponsorLogo size={14} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
               ))}
             </div>
           </div>
