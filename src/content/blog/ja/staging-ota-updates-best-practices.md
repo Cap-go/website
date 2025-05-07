@@ -1,5 +1,5 @@
 ---
-slug: OTAステージングのベストプラクティス
+slug: prassi-consigliate-per-gli-aggiornamenti-ota-di-staging
 title: OTAアップデートのステージング：ベストプラクティス
 description: >-
   アプリのスムーズな展開とユーザー体験の向上を確保するための、効果的なテストとロールバック戦略を用いたOTAアップデート配信のベストプラクティスを学びましょう。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: prassi-consigliate-per-gli-aggiornamenti-ota-di-staging
 ---
 **Over-the-Air (OTA) アップデート**により、開発者はアプリストアの承認なしに直接ユーザーに変更を配信できます。これにより、バグ修正や機能のリリースが迅速化され、**アクティブユーザーの95%が24時間以内にアップデートを受信**できます。ただし、適切なステージング環境がないと、アップデートが失敗してクラッシュや互換性の問題を引き起こす可能性があります。
 

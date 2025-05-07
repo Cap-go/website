@@ -1,5 +1,5 @@
 ---
-slug: Pembaruan OTA Capacitor vs Versi Tradisional
+slug: Mises à jour OTA de Capacitor vs Versionnement traditionnel
 title: Pembaruan OTA Capacitor vs. Penerapan Versi Tradisional
 description: >-
   Pelajari bagaimana pembaruan OTA Capacitor merevolusi distribusi aplikasi,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Mises à jour OTA de Capacitor vs Versionnement traditionnel
 ---
 **Ingin [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) yang lebih cepat tanpa menunggu peninjauan app store?** [Capacitor](https://capacitorjs.com/) dengan pembaruan Over-the-Air (OTA) mungkin adalah jawabannya. Berbeda dengan pembaruan app store tradisional yang membutuhkan waktu berhari-hari dan tindakan pengguna, pembaruan OTA mendeploy perubahan dalam hitungan menit dan secara otomatis mencapai pengguna.
 

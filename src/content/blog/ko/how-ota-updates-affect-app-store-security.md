@@ -1,5 +1,5 @@
 ---
-slug: OTA 업데이트가 앱스토어 보안에 미치는 영향
+slug: how-ota-updates-affect-app-store-security
 title: OTA 업데이트가 앱스토어 보안에 미치는 영향
 description: OTA 업데이트는 앱 개선을 간소화하지만 보안 위험이 있습니다. 앱 스토어 표준을 준수하면서 사용자를 보호하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-ota-updates-affect-app-store-security
 ---
 OTA(Over-The-Air) 업데이트를 통해 앱 개발자는 앱 스토어 승인을 기다리지 않고 직접 사용자에게 변경사항을 전달할 수 있습니다. 이를 통해 버그 수정, 보안 패치 및 기능 출시가 빨라집니다. **사용자의 95%가 24시간 이내에 업데이트를 설치**하지만, 안전하게 관리되지 않으면 빠른 속도로 인해 위험이 발생할 수 있습니다.
 

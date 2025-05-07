@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificación-de-seguridad-para-actualizaciones-ota-en-apps-capacitor
+slug: sicherheits-checkliste-für-ota-updates-in-capacitor-apps
 title: Lista de verificación de seguridad OTA para aplicaciones Capacitor
 description: >-
   Conozca las medidas de seguridad importantes para las actualizaciones OTA en
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: sicherheits-checkliste-für-ota-updates-in-capacitor-apps
 ---
 **Las actualizaciones OTA seguras son esenciales para proteger los datos del usuario y mantener la integridad de la aplicación.** Esto es lo que necesitas saber:
 

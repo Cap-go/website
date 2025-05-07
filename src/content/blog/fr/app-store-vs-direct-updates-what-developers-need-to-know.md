@@ -1,5 +1,5 @@
 ---
-slug: mises-a-jour-app-store-vs-direct-ce-que-les-developpeurs-doivent-savoir
+slug: app-store-vs-direct-updates-what-developers-need-to-know
 title: 'App Store vs Mises à jour directes : Ce que les développeurs doivent savoir'
 description: >-
   Explorez les avantages et les inconvénients des mises à jour via l'App Store
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: app-store-vs-direct-updates-what-developers-need-to-know
 ---
 **Mises à jour App Store ou mises à jour OTA directes ?** La façon dont vous fournissez des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) peut avoir un impact significatif sur la vitesse, le contrôle et l'expérience utilisateur. Voici un aperçu rapide :
 

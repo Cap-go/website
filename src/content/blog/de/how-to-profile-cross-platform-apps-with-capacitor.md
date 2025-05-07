@@ -1,5 +1,5 @@
 ---
-slug: how-to-plattformübergreifende-apps-mit-capacitor-profilen
+slug: how-to-profile-cross-platform-apps-with-capacitor
 title: Apps mit Plattformübergreifenden Funktionen mit Capacitor profilen
 description: >-
   Erfahren Sie, wie Sie plattformübergreifende Apps, die mit Capacitor erstellt
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-profile-cross-platform-apps-with-capacitor
 ---
 Das Profiling von plattformübergreifenden Apps, die mit [Capacitor](https://capacitorjs.com/) erstellt wurden, hilft Ihnen, Leistungsprobleme auf iOS-, Android- und Web-Plattformen zu identifizieren. Hier ist eine kurze Anleitung zum Einstieg:
 

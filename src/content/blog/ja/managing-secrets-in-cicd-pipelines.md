@@ -1,5 +1,5 @@
 ---
-slug: シークレットのCI/CDパイプライン管理
+slug: gestione-dei-segreti-nelle-pipeline-cicd
 title: CI/CDパイプラインでのシークレット管理
 description: CIパイプラインで機密情報を安全に扱い、セキュリティを向上させ、漏洩や法令遵守の問題を防ぐための効果的な戦略を学びましょう。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: gestione-dei-segreti-nelle-pipeline-cicd
 ---
 **CI/CDパイプラインでの機密情報の安全な管理は、侵害、サービス中断、コンプライアンス問題を防ぐために重要です。**以下が効果的な方法です：
 

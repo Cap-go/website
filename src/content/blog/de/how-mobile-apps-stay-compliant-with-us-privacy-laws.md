@@ -1,5 +1,5 @@
 ---
-slug: wie-mobile-apps-die-datenschutzgesetze-der-usa-einhalten
+slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 title: Wie Mobile Apps die US-Datenschutzgesetze einhalten
 description: >-
   Entdecken Sie, wie mobile Apps durch Benutzereinwilligung, Datenverwaltung und
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 ---
 -   **Wichtige Datenschutzfunktionen**:
     

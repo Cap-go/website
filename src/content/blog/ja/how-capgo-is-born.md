@@ -1,5 +1,5 @@
 ---
-slug: Capgoの誕生
+slug: how-capgo-is-born
 title: Capgoが誕生した経緯
 description: Capgoを構築し、この旅を始めたきっかけ
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Story
 published: true
 locale: ja
 next_blog: ''
-original_slug: how-capgo-is-born
 ---
 こんにちは、Martin Donadieuです。
 

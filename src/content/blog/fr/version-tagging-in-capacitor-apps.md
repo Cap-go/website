@@ -1,5 +1,5 @@
 ---
-slug: étiquetage-des-versions-dans-les-applications-capacitor
+slug: etiquetado-de-versiones-en-aplicaciones-capacitor
 title: Identification des versions dans les applications Capacitor
 description: >-
   Apprenez les concepts de base du contrôle de version dans les applications
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: etiquetado-de-versiones-en-aplicaciones-capacitor
 ---
 Le marquage des versions est essentiel pour la gestion des applications [Capacitor](https://capacitorjs.com/). Il assure des mises à jour fluides, suit les changements et améliore la fiabilité des applications sur iOS, Android et les plateformes web. Voici un aperçu rapide :
 

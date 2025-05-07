@@ -1,5 +1,5 @@
 ---
-slug: 버전 충돌 처리
+slug: capacitor-live-updates-handling-version-conflicts
 title: 'Capacitor 실시간 업데이트: 버전 충돌 처리'
 description: 안정적인 앱 성능과 원활한 사용자 경험을 보장하기 위해 실시간 업데이트에서 버전 충돌을 관리하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-live-updates-handling-version-conflicts
 ---
 [Capacitor](https://capacitorjs.com/) 실시간 업데이트는 앱스토어 심사를 우회하여 시간을 절약할 수 있지만, 버전 충돌로 인해 앱 성능과 사용자 경험이 저하될 수 있습니다. 다음은 알아야 할 사항입니다:
 

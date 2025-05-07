@@ -1,5 +1,5 @@
 ---
-slug: capacitor-플러그인에-종속성-추가하는-방법
+slug: how-to-add-dependencies-in-capacitor-plugins
 title: Capacitor 플러그인에서 종속성을 추가하는 방법
 description: Capacitor 플러그인에서 플랫폼 전반에 걸친 의존성 관리를 간소화하는 방법을 실용적인 단계와 모범 사례를 통해 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-add-dependencies-in-capacitor-plugins
 ---
 **[Capacitor](https://capacitorjs.com/) 플러그인에 의존성을 추가하는 것이 부담스러울 수 있지만, 명확한 단계로 나누면 더 쉽습니다. 다음은 알아야 할 사항입니다:**
 

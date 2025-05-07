@@ -1,5 +1,5 @@
 ---
-slug: développement-d'applications-hybrides-cordova
+slug: cordova-hybrid-app-development
 title: >-
   Guide ultime d'Apache Cordova : Le développement d'applications hybrides
   simplifié
@@ -22,7 +22,6 @@ tag: cordova
 published: true
 locale: fr
 next_blog: ''
-original_slug: cordova-hybrid-app-development
 ---
 Voici la traduction en français :
 

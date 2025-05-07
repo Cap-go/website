@@ -1,5 +1,5 @@
 ---
-slug: como-se-aseguran-las-actualizaciones-ota-con-la-gestion-de-claves
+slug: so-werden-ota-updates-mit-schlüsselverwaltung-gesichert
 title: Cómo asegurar las actualizaciones OTA con gestión de claves
 description: >-
   Aprenda cómo la gestión efectiva de claves y el cifrado pueden asegurar las
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: so-werden-ota-updates-mit-schlüsselverwaltung-gesichert
 ---
 **¿Quieres mantener las actualizaciones Over-the-Air (OTA) seguras y evitar vulnerabilidades?** Aquí te explicamos cómo la gestión de claves puede proteger las actualizaciones de tu aplicación contra manipulaciones y amenazas de seguridad.
 

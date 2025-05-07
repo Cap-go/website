@@ -1,5 +1,5 @@
 ---
-slug: app-store-vs-direct-updates-개발자가-알아야-할-사항
+slug: app-store-vs-direct-updates-what-developers-need-to-know
 title: '앱 스토어 vs 다이렉트 업데이트: 개발자가 알아야 할 사항'
 description: '앱스토어 업데이트와 직접 OTA 업데이트의 장단점을 살펴보고, 개발자들이 자신의 앱에 가장 적합한 전략을 선택할 수 있도록 도와드립니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: app-store-vs-direct-updates-what-developers-need-to-know
 ---
 **앱 스토어 업데이트 또는 직접 OTA 업데이트?** [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 제공하는 방식은 속도, 제어 및 사용자 경험에 상당한 영향을 미칠 수 있습니다. 다음은 간단한 분석입니다:
 

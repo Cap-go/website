@@ -1,5 +1,5 @@
 ---
-slug: liste-de-controle-lois-confidentialite-usa-applications-mobiles
+slug: lista-de-verificacion-leyes-privacidad-eeuu-apps-moviles
 title: >-
   Lois sur la confidentialité aux États-Unis : Liste de vérification pour les
   applications mobiles
@@ -22,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: lista-de-verificacion-leyes-privacidad-eeuu-apps-moviles
 ---
 **La conformité en matière de confidentialité est essentielle pour les applications mobiles.** Les lois américaines sur la confidentialité comme [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act), [VCDPA](https://pro.bloomberglaw.com/insights/privacy/virginia-consumer-data-protection-act-vcdpa/), et CPA exigent que les applications protègent les données des utilisateurs, assurent la transparence et respectent les droits des utilisateurs. Le non-respect peut entraîner des amendes allant jusqu'à 7 500 $ par infraction et la perte de la confiance des utilisateurs. Voici comment rester conforme :
 

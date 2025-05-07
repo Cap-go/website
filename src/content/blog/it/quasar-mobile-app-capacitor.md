@@ -1,5 +1,5 @@
 ---
-slug: aggiornamento-automatico-con-quasar-e-capacitor
+slug: live-update-with-quasar-and-capacitor
 title: 'Creazione di App Mobile con aggiornamenti in tempo reale, Quasar e Capacitor.'
 description: >-
   Come creare un'app mobile con Quasar, Capacitor e implementare aggiornamenti
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: live-update-with-quasar-and-capacitor
 ---
 Ecco la traduzione in italiano:
 

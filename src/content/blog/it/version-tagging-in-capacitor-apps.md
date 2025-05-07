@@ -1,5 +1,5 @@
 ---
-slug: versioning-delle-app-in-capacitor
+slug: version-tagging-in-capacitor-apps
 title: Assegnare tag di versione nelle app Capacitor
 description: >-
   Impara gli elementi essenziali del version tagging nelle app Capacitor,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: version-tagging-in-capacitor-apps
 ---
 Il tag delle versioni è essenziale per gestire le app [Capacitor](https://capacitorjs.com/). Garantisce aggiornamenti fluidi, tiene traccia delle modifiche e migliora l'affidabilità dell'app su piattaforme iOS, Android e web. Ecco una panoramica rapida:
 

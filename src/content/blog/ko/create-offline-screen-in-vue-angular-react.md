@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: ''
-original_slug: create-offline-screen-in-vue-angular-react
 ---
 # Vue 3, Angular 14 또는 React에서 오프라인 화면 만드는 방법
 

@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-ota-di-capacitor-dengan-tetap-patuh
+slug: mises-a-jour-ota-dans-capacitor-en-restant-conforme
 title: 'Pembaruan OTA Capacitor: Tetap Patuh'
 description: >-
   Pelajari cara mengimplementasikan pembaruan OTA untuk aplikasi Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: mises-a-jour-ota-dans-capacitor-en-restant-conforme
 ---
 **Vous souhaitez corriger les bugs ou ajouter des fonctionnalités rapidement sans les délais des app stores ?** Les mises à jour Over-the-Air (OTA) pour les applications [Capacitor](https://capacitorjs.com/) vous permettent de déployer des mises à jour directement aux utilisateurs, en contournant le long processus de validation des app stores. Mais rester conforme aux règles d'Apple et de Google Play est essentiel pour éviter le rejet ou la suppression de l'application.
 

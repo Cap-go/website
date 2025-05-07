@@ -1,5 +1,5 @@
 ---
-slug: デバッグツール：CapacitorのOTAアップデートを改善する
+slug: strumenti-migliori-per-il-debugging-degli-aggiornamenti-ota-in-capacitor
 title: CapacitorのOTAアップデートをデバッグするための最適なツール
 description: Capacitorアプリのすべてのプラットフォームで、OTAアップデートの効果的なデバッグに必要なツールと戦略を探ります。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: strumenti-migliori-per-il-debugging-degli-aggiornamenti-ota-in-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)の確保、クロスプラットフォームでのデバッグなど、以下の3つのツールを検討してください：
 

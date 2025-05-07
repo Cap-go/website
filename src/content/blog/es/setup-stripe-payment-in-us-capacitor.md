@@ -1,5 +1,5 @@
 ---
-slug: アメリカでのStripeペイメントの設定-Capacitor
+slug: setup-stripe-payment-in-us-capacitor
 title: Capacitorアプリでの新しいAppleガイドラインに従ったStripe Payment Linksの実装
 description: >-
   Capacitorアプリで2025年5月1日から施行される新しいAppleのガイドラインに準拠してデジタル商品の支払いを処理するためのStripe
@@ -17,7 +17,6 @@ keywords: >-
 tag: Tutorial
 published: true
 locale: ja
-original_slug: setup-stripe-payment-in-us-capacitor
 ---
 # Implementación de Enlaces de Pago de Stripe en Aplicaciones Capacitor Siguiendo las Nuevas Directrices de Apple
 

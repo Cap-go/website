@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificación-para-la-firma-de-tokens-en-aplicaciones-capacitor
+slug: checklist-for-token-signing-in-capacitor-apps
 title: Lista de verificación para la firma de tokens en aplicaciones Capacitor
 description: >-
   Sigue esta lista de verificación completa para firmar tokens de forma segura
@@ -20,7 +20,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: checklist-for-token-signing-in-capacitor-apps
 ---
 La firma de tokens es esencial para asegurar aplicaciones de [Capacitor](https://capacitorjs.com/), garantizando la integridad de datos, autenticación y cumplimiento con los estándares de seguridad de EE.UU. Esta guía proporciona una lista clara para la configuración, implementación y gestión de riesgos.
 

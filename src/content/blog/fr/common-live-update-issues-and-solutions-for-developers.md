@@ -1,5 +1,6 @@
 ---
-slug: masalah-umum-live-update-dan-solusi-untuk-developer
+slug: >-
+  problemes-frequents-de-mise-a-jour-en-direct-et-solutions-pour-les-developpeurs
 title: Masalah dan Solusi Umum Live Updates untuk Developer
 description: >-
   Temukan lebih banyak solusi untuk tantangan umum dalam pembaruan langsung,
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  problemes-frequents-de-mise-a-jour-en-direct-et-solutions-pour-les-developpeurs
 ---
 Les mises à jour en direct permettent aux développeurs de pousser des modifications directement aux utilisateurs sans les délais de l'app store. Mais elles s'accompagnent de défis comme les problèmes de réseau, les conflits de versions et les problèmes de compatibilité des appareils. Ce guide fournit des solutions pour garantir des mises à jour fluides :
 

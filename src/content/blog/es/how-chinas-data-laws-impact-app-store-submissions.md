@@ -1,6 +1,5 @@
 ---
-slug: >-
-  como-las-leyes-de-privacidad-de-china-afectan-las-presentaciones-en-la-app-store
+slug: wie-chinas-datenschutzgesetze-die-app-store-einreichungen-beeinflussen
 title: >-
   Cómo las leyes de privacidad de datos de China afectan a las presentaciones en
   la App Store
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-chinas-datenschutzgesetze-die-app-store-einreichungen-beeinflussen
 ---
 Las estrictas leyes de datos de China hacen que sea desafiante para los desarrolladores de aplicaciones entrar en el mercado. Esto es lo que necesitas saber:
 

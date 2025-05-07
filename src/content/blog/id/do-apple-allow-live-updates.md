@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-langsung-apple
+slug: mises-à-jour-en-direct-sur-apple
 title: >-
   Apple tidak mengizinkan aplikasi untuk didistribusikan secara live update
   tanpa melalui peninjauan App Store terlebih dahulu.
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: mises-à-jour-en-direct-sur-apple
 ---
 Memperbarui aplikasi Capacitor JS tanpa melalui proses tinjauan App Store dimungkinkan dalam kondisi tertentu yang diuraikan dalam pedoman resmi Apple. Namun, perlu dicatat bahwa ini bukan nasihat hukum. Agar pembaruan kode dapat langsung dikirim ke aplikasi dan tetap mematuhi pedoman Apple, kondisi berikut harus dipenuhi:
 

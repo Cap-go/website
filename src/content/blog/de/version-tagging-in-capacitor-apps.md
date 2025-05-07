@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: version-tagging-in-capacitor-apps
 ---
 Versionskennzeichnung ist für die Verwaltung von [Capacitor](https://capacitorjs.com/)-Apps unverzichtbar. Sie gewährleistet reibungslose Updates, verfolgt Änderungen und verbessert die App-Zuverlässigkeit auf iOS-, Android- und Web-Plattformen. Hier ein kurzer Überblick:
 

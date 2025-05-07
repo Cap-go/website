@@ -1,6 +1,5 @@
 ---
-slug: >-
-  come-utilizzare-il-semantic-versioning-con-gli-aggiornamenti-capgo-otaを使用したセマンティックバージョニング
+slug: come-utilizzare-il-semantic-versioning-con-gli-aggiornamenti-capgo-ota
 title: OTAアップデートでセマンティックバージョニングを使用する方法
 description: >-
   Semantic Versioning と Capgo の OTA アップデートを使用して、Capacitor
@@ -20,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-utilizzare-il-semantic-versioning-con-gli-aggiornamenti-capgo-ota
 ---
 **[アプリの更新](https://capgo.app/plugins/capacitor-updater/)とバージョン管理を簡素化したいですか?** セマンティックバージョニング(SemVer)と[Capgo](https://capgo.app/)のOver-The-Air(OTA)アップデートを組み合わせることで、[Capacitor](https://capacitorjs.com/)アプリの管理がより簡単かつ迅速になります。以下がその方法です:
 

@@ -1,5 +1,5 @@
 ---
-slug: applications-capacitor-et-lois-sur-les-donnees-russes-conseils-de-conformite
+slug: capacitor-apps-and-russias-data-laws-compliance-tips
 title: 'Applications Capacitor et lois russes sur les données : Conseils de conformité'
 description: >-
   Découvrez les conseils essentiels de conformité pour le développement
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: capacitor-apps-and-russias-data-laws-compliance-tips
 ---
 Your app's privacy policy should be available in Russian, with clear details about:
 

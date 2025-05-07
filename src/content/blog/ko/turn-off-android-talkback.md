@@ -1,5 +1,5 @@
 ---
-slug: 안드로이드 토크백 비활성화
+slug: turn-off-android-talkback
 title: Android 기기에서 TalkBack을 끄고 사용하는 방법
 description: 'TalkBack, 시각 장애가 있는 사용자를 위한 Android 기본 제공 스크린 리더를 활성화하고 탐색하는 단계별 가이드입니다.'
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Android
 published: true
 locale: ko
 next_blog: ''
-original_slug: turn-off-android-talkback
 ---
 TalkBack은 Android 기기에 통합된 시각 장애인을 위한 필수 기능입니다. 화면의 내용을 음성으로 전달하고 다양한 요소와의 탐색 및 상호 작용을 돕는 제스처 기반 화면 읽기 프로그램입니다. 다음은 TalkBack을 활성화하고 사용하는 방법에 대한 종합 가이드입니다.
 

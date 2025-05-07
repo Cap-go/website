@@ -1,5 +1,5 @@
 ---
-slug: consenso-utente-per-aggiornamenti-ota-best-practices
+slug: user-consent-for-ota-updates-best-practices
 title: 'Consenso dell''Utente per gli Aggiornamenti OTA: Best Practices'
 description: >-
   Scopri le migliori pratiche per ottenere il consenso degli utenti per gli
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: user-consent-for-ota-updates-best-practices
 ---
 Not getting user consent for OTA updates can lead to:
 

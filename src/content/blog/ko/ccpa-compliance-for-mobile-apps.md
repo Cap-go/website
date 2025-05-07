@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: ccpa-compliance-for-mobile-apps
 ---
 **[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)는 캘리포니아 주민의 개인 정보를 수집하는 모바일 앱 개발자에게 필수적인 규정입니다.** 이 법은 사용자에게 자신의 데이터에 대한 권리를 부여하고 앱이 이를 처리하는 방식에 대해 엄격한 규칙을 부과합니다. 미준수 시 막대한 벌금과 평판 손상의 위험이 있습니다.
 

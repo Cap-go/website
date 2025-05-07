@@ -1,5 +1,5 @@
 ---
-slug: como-enviar-una-version-especifica-a-usuarios
+slug: how-to-send-specific-version-to-users
 title: Cómo enviar una actualización específica a un usuario o grupo
 description: >-
   Permita que sus usuarios prueben la versión beta sin necesidad de TestFlight o
@@ -19,7 +19,6 @@ tag: alternatives
 published: true
 locale: es
 next_blog: ''
-original_slug: how-to-send-specific-version-to-users
 ---
 ## Prefacio
 

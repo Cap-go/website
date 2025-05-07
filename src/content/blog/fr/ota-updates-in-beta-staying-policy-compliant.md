@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-ota-en-version-beta-rester-conforme-aux-directives
+slug: ota-updates-im-beta-zustand-richtlinienkonform-bleiben
 title: 'Mises à jour OTA en version bêta : rester conforme aux règles'
 description: >-
   Découvrez comment gérer efficacement les mises à jour OTA dans les tests bêta
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: ota-updates-im-beta-zustand-richtlinienkonform-bleiben
 ---
 **Les mises à jour OTA rendent les tests bêta plus rapides et plus faciles - mais il est crucial de rester conforme aux règles des app stores.** Voici ce que vous devez savoir :
 

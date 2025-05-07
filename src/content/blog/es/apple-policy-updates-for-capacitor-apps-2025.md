@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-politica-apple-para-apps-capacitor-2025
+slug: apple-policy-updates-für-capacitor-apps-2025
 title: Actualizaciones de la Política de Apple para Aplicaciones de Capacitor 2025
 description: >-
   Las pautas de la App Store de Apple para 2025 establecen nuevos estándares de
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: apple-policy-updates-für-capacitor-apps-2025
 ---
 **Las políticas de la App Store de Apple para 2025 traen reglas más estrictas para las aplicaciones [Capacitor](https://capacitorjs.com/).** Los desarrolladores ahora deben cumplir con estándares más altos de privacidad, seguridad y rendimiento. Esto es lo que necesitas saber:
 

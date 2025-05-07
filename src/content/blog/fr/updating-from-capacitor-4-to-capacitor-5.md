@@ -1,5 +1,5 @@
 ---
-slug: mise-a-jour-de-capacitor-4-vers-capacitor-5
+slug: updating-from-capacitor-4-to-capacitor-5
 title: 'Mise à jour de Capacitor 4 vers Capacitor 5 : Un guide étape par étape'
 description: >-
   Découvrez comment mettre à jour votre projet de Capacitor 4 vers Capacitor 5
@@ -19,7 +19,6 @@ tag: Capacitor
 published: true
 locale: fr
 next_blog: ''
-original_slug: updating-from-capacitor-4-to-capacitor-5
 ---
 Par rapport aux mises à jour précédentes, la transition de Capacitor 4 vers Capacitor 5 implique des changements mineurs. Ce guide fournit des instructions étape par étape pour mettre à jour votre projet vers Capacitor 5, ainsi qu'une liste des changements majeurs pour les plugins officiels.
 

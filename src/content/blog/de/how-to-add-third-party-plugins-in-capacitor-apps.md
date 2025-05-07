@@ -1,5 +1,5 @@
 ---
-slug: So fügen Sie Plugins von Drittanbietern in Capacitor-Apps hinzu
+slug: how-to-add-third-party-plugins-in-capacitor-apps
 title: So fügen Sie Plugins von Drittanbietern in Capacitor-Apps hinzu
 description: >-
   Erfahren Sie, wie Sie Ihre Capacitor-App durch die Integration von
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-add-third-party-plugins-in-capacitor-apps
 ---
 Here's the German translation:
 

@@ -1,5 +1,5 @@
 ---
-slug: Githubアクションでの自動リリースビルド
+slug: build-e-release-automatico-con-github-actions
 title: Githubアクションによるアプリの自動ビルドとリリース
 description: >-
   Github actionsを使用して無料でCI/CDパイプラインを作成し、mainにプッシュするたびにIonic Capacitor
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: ja
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: build-e-release-automatico-con-github-actions
 ---
 Questo tutorial si concentra sull'hosting GitHub, ma puoi adattarlo con piccole modifiche a qualsiasi altra piattaforma CI/CD.
 

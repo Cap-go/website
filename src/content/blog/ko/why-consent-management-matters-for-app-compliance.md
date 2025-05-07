@@ -1,5 +1,5 @@
 ---
-slug: 앱 규정 준수를 위한 동의 관리의 중요성
+slug: why-consent-management-matters-for-app-compliance
 title: 앱 규정 준수를 위한 동의 관리의 중요성
 description: >-
   개인정보 보호법을 준수하기 위해서는 동의 관리에 대한 이해가 매우 중요합니다. 사용자 동의를 효과적으로 관리하고 규정을 준수하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: why-consent-management-matters-for-app-compliance
 ---
 **앱 규정 준수를 위해 사용자 동의 관리는 필수입니다.** [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)과 [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)와 같은 개인정보보호법은 데이터 수집 및 사용에 대한 명시적인 사용자 동의를 요구합니다. 이를 준수하지 않으면 벌금, 법적 문제, 사용자 신뢰 상실의 위험이 있습니다. 알아야 할 사항은 다음과 같습니다:
 

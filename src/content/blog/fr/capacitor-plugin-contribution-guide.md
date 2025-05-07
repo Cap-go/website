@@ -1,5 +1,5 @@
 ---
-slug: panduan-kontribusi-plugin-capacitor
+slug: guide-de-contribution-plugin-capacitor
 title: Panduan Kontribusi Plugin Capacitor
 description: >-
   Pelajari cara berkontribusi secara efektif untuk plugin Capacitor dengan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-de-contribution-plugin-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) plugins connectent les technologies web aux fonctionnalités natives des appareils, permettant le [développement d'applications multi-plateformes](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/). Ce guide vous aide à :
 

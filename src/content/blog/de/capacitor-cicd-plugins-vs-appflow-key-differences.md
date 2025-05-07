@@ -1,5 +1,5 @@
 ---
-slug: plugins-und-cicd-mit-capacitor-vs-appflow-hauptunterschiede
+slug: capacitor-cicd-plugins-vs-appflow-key-differences
 title: 'Capacitor CI/CD Plugins vs. Appflow: Wichtige Unterschiede'
 description: >-
   Entdecken Sie die Unterschiede zwischen Capacitor CI/CD-Plugins und Appflow,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-cicd-plugins-vs-appflow-key-differences
 ---
 **Suchen Sie nach einer besseren Möglichkeit, Updates für Ihre [Capacitor](https://capacitorjs.com/) Apps zu verwalten?** Mit der Einstellung von [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) in 2024 und [Appflow](https://ionic.io/appflow/), das 2026 schließen wird, wenden sich Entwickler Alternativen wie Capacitor CI/CD Plugins zu. Hier ein kurzer Überblick:
 

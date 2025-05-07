@@ -1,5 +1,5 @@
 ---
-slug: OTA 업데이트를 키 관리로 보호하는 방법
+slug: how-to-secure-ota-updates-with-key-management
 title: OTA 업데이트를 키 관리로 보호하는 방법
 description: OTA 업데이트를 위한 효과적인 키 관리와 암호화를 통해 앱을 변조와 보안 위협으로부터 보호하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-secure-ota-updates-with-key-management
 ---
 **OTA(Over-the-Air) 업데이트를 안전하게 유지하고 취약점을 피하고 싶으신가요?** 키 관리를 통해 앱 업데이트를 변조와 보안 위협으로부터 보호하는 방법을 알아보세요.
 

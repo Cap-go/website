@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 테스트
+slug: testing-capacitor-ota-updates
 title: Capacitor OTA 업데이트 테스트하기
 description: >-
   Capacitor 앱을 위한 OTA 업데이트를 효과적으로 테스트하는 방법을 배우고, 필수 도구와 전략을 통해 원활한 배포와 향상된 보안을
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: testing-capacitor-ota-updates
 ---
 **[Capacitor](https://capacitorjs.com/) 앱을 즉시 수정하고, 기능을 추가하며, 업데이트할 수 있는 OTA 업데이트 - 앱 스토어 지연 없음.** 효과적인 테스트 방법은 다음과 같습니다:
 

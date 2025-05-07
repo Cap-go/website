@@ -1,5 +1,5 @@
 ---
-slug: OTA 업데이트 모범 사례 - Staging
+slug: staging-ota-updates-best-practices
 title: 'OTA 업데이트 스테이징: 모범 사례'
 description: 'OTA 업데이트 준비에 대한 모범 사례를 학습하고, 효과적인 테스트와 롤백 전략을 통해 원활한 앱 배포와 향상된 사용자 경험을 보장하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: staging-ota-updates-best-practices
 ---
 **Over-the-Air (OTA) 업데이트**를 통해 개발자는 앱스토어 승인 없이 직접 사용자에게 앱 변경사항을 푸시할 수 있습니다. 이를 통해 버그 수정과 기능 출시가 빨라지며, **24시간 내에 활성 사용자의 95%가 업데이트를 받을 수 있습니다**. 하지만 적절한 스테이징 환경 없이는 업데이트가 실패하여 충돌이나 호환성 문제가 발생할 수 있습니다.
 

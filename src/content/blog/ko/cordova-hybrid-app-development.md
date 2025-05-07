@@ -1,5 +1,5 @@
 ---
-slug: 코도바-하이브리드-앱-개발
+slug: cordova-hybrid-app-development
 title: 'Apache Cordova의 완벽 가이드: 하이브리드 앱 개발의 쉬운 길'
 description: >-
   아파치 코도바의 세계로 깊이 들어가보세요. 코도바가 개발자들에게 HTML, CSS, JavaScript와 같은 웹 기술을 사용하여 크로스
@@ -19,7 +19,6 @@ tag: cordova
 published: true
 locale: ko
 next_blog: ''
-original_slug: cordova-hybrid-app-development
 ---
 # 하이브리드 앱 개발을 위한 Apache Cordova 종합 가이드
 

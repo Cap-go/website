@@ -1,5 +1,5 @@
 ---
-slug: lancement-dune-nouvelle-connexion-sociale-capacitor
+slug: release-of-a-brand-new-capacitor-social-login
 title: Publication d'un nouveau plugin Capacitor Social Login
 description: >-
   Le plugin Capacitor Social Login est un plugin qui permet de se connecter avec
@@ -18,7 +18,6 @@ tag: Capacitor
 published: true
 next_blog: ''
 locale: fr
-original_slug: release-of-a-brand-new-capacitor-social-login
 ---
 ## Introduction
 

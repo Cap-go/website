@@ -1,5 +1,5 @@
 ---
-slug: 앱스토어 규정 준수를 위한 API 속도 제한
+slug: api-rate-limiting-for-app-store-compliance
 title: App Store 정책 준수를 위한 API 속도 제한
 description: 'API 속도 제한 방법과 앱스토어 규정 준수, 보안 및 시스템 성능에 대한 중요성에 대해 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: api-rate-limiting-for-app-store-compliance
 ---
 API 속도 제한은 앱이 Apple과 Google 가이드라인을 준수하면서 시스템을 과부하와 악용으로부터 보호합니다. 사용자가 요청할 수 있는 빈도를 제한하여 보안을 강화하고, 비용을 절감하며, 원활한 성능을 보장합니다. 알아야 할 사항은 다음과 같습니다:
 

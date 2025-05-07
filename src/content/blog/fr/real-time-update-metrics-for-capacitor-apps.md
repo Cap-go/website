@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-temps-réel-des-métriques-pour-les-applications-capacitor
+slug: real-time-update-metrics-for-capacitor-apps
 title: Métriques de Mise à Jour en Temps Réel pour les Applications Capacitor
 description: >-
   Apprenez à suivre efficacement les performances des mises à jour de vos
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: real-time-update-metrics-for-capacitor-apps
 ---
 Vous voulez garantir que les mises à jour de votre application soient rapides, fiables et impactantes ? Voici ce que vous devez savoir :
 

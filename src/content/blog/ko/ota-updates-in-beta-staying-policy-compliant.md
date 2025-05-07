@@ -1,5 +1,5 @@
 ---
-slug: 베타 단계에서 OTA 업데이트를 정책 준수 상태로 유지하기
+slug: ota-updates-in-beta-staying-policy-compliant
 title: 'OTA Updates 베타: 정책을 준수하는 업데이트'
 description: 앱스토어 정책을 준수하고 사용자 보안을 강화하면서 베타 테스트에서 OTA 업데이트를 효과적으로 관리하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: ota-updates-in-beta-staying-policy-compliant
 ---
 **OTA 업데이트를 통해 베타 테스트가 더 빠르고 쉬워집니다 - 하지만 앱스토어 규정을 준수하는 것이 중요합니다.** 알아야 할 사항들은 다음과 같습니다:
 

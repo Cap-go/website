@@ -1,5 +1,5 @@
 ---
-slug: app-store-vs-aggiornamenti-diretti-cosa-devono-sapere-gli-sviluppatori
+slug: app-store-vs-direct-updates-what-developers-need-to-know
 title: 'App Store vs aggiornamenti diretti: Cosa devono sapere gli sviluppatori'
 description: >-
   Esplora i pro e i contro degli aggiornamenti tramite App Store rispetto agli
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: app-store-vs-direct-updates-what-developers-need-to-know
 ---
 **App Store o aggiornamenti OTA diretti?** Il modo in cui distribuisci gli [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) può influire significativamente su velocità, controllo ed esperienza utente. Ecco una rapida panoramica:
 

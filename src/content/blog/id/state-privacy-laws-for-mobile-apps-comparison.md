@@ -1,5 +1,5 @@
 ---
-slug: undang-undang-privasi-negara-untuk-aplikasi-seluler-perbandingan
+slug: lois-etatiques-sur-la-confidentialite-des-applications-mobiles-comparaison
 title: 'Undang-Undang Privasi Aplikasi Seluler berdasarkan Negara: Sebuah Perbandingan'
 description: >-
   Pelajari perbedaan utama antara undang-undang privasi aplikasi seluler di
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: lois-etatiques-sur-la-confidentialite-des-applications-mobiles-comparaison
 ---
 Undang-undang privasi aplikasi seluler berbeda di setiap negara bagian, dan memahaminya sangat penting bagi pengembang. Berikut gambaran singkat tentang peraturan privasi utama di California, Virginia, dan Colorado:
 

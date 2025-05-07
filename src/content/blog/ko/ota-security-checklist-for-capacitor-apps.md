@@ -1,5 +1,5 @@
 ---
-slug: OTA 보안 체크리스트 - Capacitor 앱
+slug: ota-security-checklist-for-capacitor-apps
 title: Capacitor 앱의 OTA 보안 체크리스트
 description: 'OTA 업데이트 시 애플리케이션의 암호화, 접근 제어, 긴급 대응 전략 등 필수적인 보안 조치에 대해 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: ota-security-checklist-for-capacitor-apps
 ---
 **사용자 데이터를 보호하고 앱의 무결성을 유지하기 위해서는 안전한 OTA 업데이트가 필수적입니다.** 알아야 할 사항:
 

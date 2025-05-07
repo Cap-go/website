@@ -1,5 +1,5 @@
 ---
-slug: live-capacitor-updates-gradual-rollout
+slug: rollout-graduali-per-aggiornamenti-live-di-capacitor
 title: Capacitorでライブアップデートのロールアウトを段階的に行う
 description: >-
   段階的なアプリのリリースが、戦略的なセグメンテーションを通じてリスクを最小限に抑え、品質を向上させ、ユーザー満足度を確保しながら、アップデートを改善する方法を学びましょう。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: rollout-graduali-per-aggiornamenti-live-di-capacitor
 ---
 フェーズドロールアウトを使用すると、小規模なユーザーグループから開始して、安定性が確認されたら徐々に拡大していくことでアプリを段階的にアップデートできます。このアプローチによりリスクを軽減し、アプリの品質を確保し、ユーザー体験を向上させることができます。[Capgo](https://capgo.app/)のようなツールを使用すると、アプリストアのルールに準拠しながらこれらのアップデートを簡単に管理できます。
 

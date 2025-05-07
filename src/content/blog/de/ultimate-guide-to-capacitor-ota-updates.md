@@ -1,5 +1,5 @@
 ---
-slug: das-ultimative-handbuch-für-capacitor-ota-updates
+slug: ultimate-guide-to-capacitor-ota-updates
 title: Der ultimative Leitfaden für Capacitor OTA-Updates
 description: >-
   Erfahren Sie, wie Capacitor OTA-Updates sofortige App-Aktualisierungen
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: ultimate-guide-to-capacitor-ota-updates
 ---
 **Möchten Sie Ihre App sofort aktualisieren, ohne auf App Store-Überprüfungen zu warten?** [Capacitor](https://capacitorjs.com/) OTA (Over-The-Air) Updates ermöglichen es Ihnen, neue Funktionen, Fehlerbehebungen und Code-Änderungen direkt auf die Geräte der Benutzer zu übertragen. Keine manuellen Downloads, keine Verzögerungen.
 

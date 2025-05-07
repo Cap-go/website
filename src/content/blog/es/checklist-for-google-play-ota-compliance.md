@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificación-para-el-cumplimiento-de-google-play-ota
+slug: checklist-for-google-play-ota-compliance
 title: Lista de verificación para el cumplimiento de OTA de Google Play
 description: >-
   Asegúrate de que las actualizaciones Over-The-Air de tu aplicación cumplan con
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: checklist-for-google-play-ota-compliance
 ---
 Las actualizaciones **Over-The-Air (OTA)** te permiten enviar cambios directamente a los usuarios, evitando las revisiones de las tiendas. Pero para cumplir con las políticas de Google Play, necesitas seguir reglas estrictas de seguridad, transparencia y calidad. Aquí hay un resumen rápido:
 

@@ -1,5 +1,5 @@
 ---
-slug: capacitor-cliのビルドスクリプトをカスタマイズする方法
+slug: come-personalizzare-gli-script-di-build-con-capacitor-cli
 title: Capacitor CLIでビルドスクリプトをカスタマイズする方法
 description: >-
   Capacitor
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-personalizzare-gli-script-di-build-con-capacitor-cli
 ---
 [Capacitor](https://capacitorjs.com/) CLIを使用すると、iOS、Android、Webプラットフォーム向けのアプリのビルドプロセスをカスタマイズできます。ビルドスクリプトを調整することで以下が可能です:
 

@@ -1,5 +1,5 @@
 ---
-slug: grundlagen-native-android-plugins-für-capacitor
+slug: capacitor-native-bridge-android-plugin-basics
 title: 'Capacitor Native Bridge: Android Plugin Grundlagen'
 description: >-
   Lernen Sie, wie Sie leistungsstarke Android-Plugins mit Capacitor Native
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-native-bridge-android-plugin-basics
 ---
 [Capacitor](https://capacitorjs.com/) Native Bridge vereinfacht die Entwicklung von Android-Plugins, indem es JavaScript und nativen Android-Code verbindet. Hier sind die wichtigsten Informationen:
 

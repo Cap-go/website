@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱을 위한 실시간 업데이트 메트릭
+slug: real-time-update-metrics-for-capacitor-apps
 title: Capacitor 앱을 위한 실시간 업데이트 메트릭
 description: 앱 업데이트 성능을 효과적으로 추적하여 빠르고 안정적인 릴리스와 향상된 사용자 경험을 보장하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: real-time-update-metrics-for-capacitor-apps
 ---
 앱 업데이트가 빠르고 안정적이며 효과적인지 확인하고 싶으신가요? 알아야 할 사항은 다음과 같습니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: verwaltung-von-geheimnissen-in-cicd-pipelines
+slug: managing-secrets-in-cicd-pipelines
 title: Verwaltung von Secrets in CI/CD-Pipelines
 description: >-
   Lernen Sie effektive Strategien zur Verwaltung von Geheimnissen in
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: managing-secrets-in-cicd-pipelines
 ---
 **Die Sicherheit von Geheimnissen in CI/CD-Pipelines ist entscheidend, um Datenlecks, Serviceunterbrechungen und Compliance-Probleme zu verhindern.** Hier erfahren Sie, wie Sie dies effektiv umsetzen:
 

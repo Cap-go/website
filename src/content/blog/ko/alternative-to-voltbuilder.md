@@ -1,5 +1,5 @@
 ---
-slug: voltbuilder의 대안
+slug: alternative-to-voltbuilder
 title: Voltbuilder의 대안
 description: >-
   Voltbuilder는 웹 프로젝트를 네이티브 앱으로 변환하는 쉬운 방법을 제공하지만, 가격이 모든 사람에게 적합하지 않을 수 있습니다.
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ko
 next_blog: ''
-original_slug: alternative-to-voltbuilder
 ---
 Voltbuilder는 HTML, CSS 및 JavaScript를 사용하여 웹 프로젝트를 Android 및 iOS용 네이티브 모바일 앱으로 변환할 수 있는 클라우드 기반 플랫폼입니다. 간편한 설정, 자동 앱 빌드 및 업로드, Apache Cordova 플러그인 지원 등 앱 개발 프로세스를 단순화하기 위한 다양한 기능을 제공합니다.
 

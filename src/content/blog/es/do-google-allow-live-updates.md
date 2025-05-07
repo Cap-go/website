@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-permitidas-por-google
+slug: do-google-allow-live-updates
 title: >-
   ¿Google permite enviar actualizaciones en vivo a las aplicaciones sin la
   revisión de la Play Store?
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: do-google-allow-live-updates
 ---
 Google Play es menos restrictivo que Apple cuando se trata de actualizar aplicaciones.
 

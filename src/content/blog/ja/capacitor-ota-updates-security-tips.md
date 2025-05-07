@@ -1,5 +1,5 @@
 ---
-slug: OTAアップデートのセキュリティに関するヒント - Capacitor
+slug: suggerimenti-sulla-sicurezza-degli-aggiornamenti-ota-capacitor
 title: Capacitorの OTA アップデート：セキュリティのヒント
 description: OTAアップデートにおける暗号化、ファイル検証、アクセス制御など、モバイルアプリを保護するための重要なセキュリティプラクティスについて学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: suggerimenti-sulla-sicurezza-degli-aggiornamenti-ota-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) アプリの**安全なOTAアップデートを望みますか?** 要点は次の通りです:OTAアップデートは迅速で効率的ですが、データの傍受、ファイルの改ざん、サーバーの脆弱性などのリスクが伴います。アップデートを安全に保つために、**暗号化、ファイル検証、アクセス制御**に焦点を当ててください。
 

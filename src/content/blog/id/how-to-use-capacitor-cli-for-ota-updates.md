@@ -1,5 +1,5 @@
 ---
-slug: cara-menggunakan-cli-capacitor-untuk-update-ota
+slug: comment-utiliser-capacitor-cli-pour-les-mises-à-jour-ota
 title: Cara Menggunakan CLI Capacitor untuk Pembaruan OTA
 description: >-
   Pelajari cara menggunakan Command Line Interface Capacitor untuk pembaruan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-utiliser-capacitor-cli-pour-les-mises-à-jour-ota
 ---
 Pembaruan Over-The-Air (OTA) memungkinkan Anda mengirimkan perbaikan dan fitur aplikasi langsung ke pengguna tanpa menunggu persetujuan app store. Menggunakan CLI [Capacitor](https://capacitorjs.com/) dan alat seperti [Capgo](https://capgo.app/), Anda dapat mengirim pembaruan secara instan, melacak kinerja, dan bahkan melakukan rollback jika diperlukan. Berikut yang perlu Anda ketahui:
 

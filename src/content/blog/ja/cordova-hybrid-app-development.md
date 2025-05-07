@@ -1,5 +1,5 @@
 ---
-slug: cordova-ハイブリッドアプリ開発
+slug: cordova-hybrid-app-development
 title: Apache Cordovaの完全ガイド：ハイブリッドアプリ開発を簡単に
 description: >-
   Apacheコルドバの世界を深く掘り下げてみましょう。コルドバが開発者にHTML、CSS、JavaScriptなどのWeb技術を使用してクロスプラットフォームモバイルアプリを構築する力を与える方法について学びます。その歴史、利点、そしてCapacitorなどの代替手段との比較を探ります。
@@ -17,7 +17,6 @@ tag: cordova
 published: true
 locale: ja
 next_blog: ''
-original_slug: cordova-hybrid-app-development
 ---
 # ハイブリッドアプリ開発のための包括的なガイド：Apache Cordovaの解説
 

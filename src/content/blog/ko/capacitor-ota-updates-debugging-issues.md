@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 디버깅 이슈
+slug: capacitor-ota-updates-debugging-issues
 title: 'Capacitor OTA 업데이트: 디버깅 문제'
 description: >-
   OTA 업데이트 문제를 효과적으로 해결하는 방법을 알아보고, 모범 사례와 도구를 통해 원활한 앱 배포와 사용자 만족도를 보장하는 방법을
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-debugging-issues
 ---
 **OTA 업데이트는 앱 개선을 가속화할 수 있지만, 실패한 업데이트는 주요 문제를 일으킵니다.** 원활한 업데이트와 신속한 문제 해결을 위해 알아야 할 사항은 다음과 같습니다:
 

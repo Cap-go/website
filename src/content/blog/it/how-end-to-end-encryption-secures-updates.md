@@ -1,5 +1,5 @@
 ---
-slug: come-la-crittografia-end-to-end-protegge-gli-aggiornamenti
+slug: how-end-to-end-encryption-secures-updates
 title: Come la crittografia end-to-end protegge gli aggiornamenti
 description: >-
   Esplora come la crittografia end-to-end protegge gli aggiornamenti OTA,
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-end-to-end-encryption-secures-updates
 ---
 La **crittografia end-to-end (E2EE)** è il modo migliore per proteggere gli aggiornamenti over-the-air (OTA) per le app. Garantisce che solo l'utente previsto possa decrittografare e installare gli aggiornamenti, proteggendo da rischi come manomissioni, iniezioni di codice e violazioni dei dati. Piattaforme come [Capgo](https://capgo.app/) hanno implementato l'E2EE per salvaguardare l'integrità delle app rispettando gli standard di sicurezza richiesti da Apple e Google.
 

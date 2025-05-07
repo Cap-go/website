@@ -1,5 +1,5 @@
 ---
-slug: como-procesar-solicitudes-de-usuarios-segun-ccpa
+slug: wie-man-benutzeranfragen-nach-ccpa-verarbeitet
 title: Gestión de solicitudes de datos de usuarios según la CCPA
 description: >-
   Aprenda cómo gestionar de manera efectiva las solicitudes de los usuarios para
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-man-benutzeranfragen-nach-ccpa-verarbeitet
 ---
 La Ley de Privacidad del Consumidor de California ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)) otorga a los usuarios control sobre sus datos personales y establece reglas estrictas para las empresas. Esto es lo que necesitas saber para cumplir:
 

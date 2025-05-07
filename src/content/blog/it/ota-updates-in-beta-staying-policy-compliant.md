@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-ota-in-beta-rispettare-policy
+slug: ota-updates-in-beta-staying-policy-compliant
 title: 'Aggiornamenti OTA in Beta: Rispettare le Policy'
 description: >-
   Scopri come gestire efficacemente gli aggiornamenti OTA nei test beta
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: ota-updates-in-beta-staying-policy-compliant
 ---
 **Gli aggiornamenti OTA rendono i test beta più veloci e facili - ma è fondamentale rispettare le regole degli app store.** Ecco cosa devi sapere:
 

@@ -1,5 +1,5 @@
 ---
-slug: 중국의 암호화 규정에 따른 키 관리
+slug: key-management-under-chinas-encryption-rules
 title: 중국 암호화 규정에 따른 키 관리
 description: '중국의 암호화 키 관리법을 이해하는 것은 로컬 스토리지, 감사 및 기술 규정과 관련된 규정 준수에 매우 중요합니다.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: key-management-under-chinas-encryption-rules
 ---
 **중국에서의 암호화 키 관리는 복잡하지만 규정 준수를 위해 필수적입니다.** 알아야 할 사항은 다음과 같습니다:
 

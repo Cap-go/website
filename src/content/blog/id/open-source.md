@@ -1,5 +1,5 @@
 ---
-slug: tentang-open-source
+slug: about-open-source
 title: Pelajari apa itu open source dan mengapa itu penting!
 description: >-
   Selama perjalanan pemrograman Anda, Anda mungkin pernah mendengar istilah
@@ -18,7 +18,6 @@ tag: Open Source
 published: true
 locale: id
 next_blog: ''
-original_slug: about-open-source
 ---
 Dalam artikel ini, saya akan menjelaskan apa itu Perangkat Lunak Sumber Terbuka dan membahas bagaimana perbedaannya dengan jenis perangkat lunak lainnya. Saya juga akan membahas hal-hal positif dari Perangkat Lunak Sumber Terbuka dan cara mulai berkontribusi pada proyek-proyek.
 

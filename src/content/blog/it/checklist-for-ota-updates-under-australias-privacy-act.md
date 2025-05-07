@@ -1,6 +1,5 @@
 ---
-slug: >-
-  checklist-per-gli-aggiornamenti-ota-ai-sensi-della-legge-sulla-privacy-australiana
+slug: checklist-for-ota-updates-under-australias-privacy-act
 title: Checklist per aggiornamenti OTA secondo la legge sulla privacy australiana
 description: >-
   Assicurati che i tuoi aggiornamenti OTA siano conformi al Privacy Act
@@ -21,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: checklist-for-ota-updates-under-australias-privacy-act
 ---
 **Distribuite aggiornamenti OTA (Over-The-Air)? Devi soddisfare i requisiti del [Privacy Act](https://en.wikipedia.org/wiki/Privacy_Act_1988) australiano per proteggere i dati degli utenti ed evitare sanzioni.**
 

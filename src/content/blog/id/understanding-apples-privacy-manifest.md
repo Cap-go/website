@@ -1,5 +1,5 @@
 ---
-slug: memahami-manifes-privasi-apple
+slug: comprendiendo-el-manifiesto-de-privacidad-de-apple
 title: Memahami Manifes Privasi Apple
 description: >-
   Pelajari lebih lanjut tentang manifes privasi wajib Apple, pentingnya untuk
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: id
 next_blog: ''
-original_slug: comprendiendo-el-manifiesto-de-privacidad-de-apple
 ---
 **Privacy Manifest Apple sekarang wajib untuk semua aplikasi iOS.** Mulai Mei 2024, setiap pengajuan App Store harus menyertakan file JSON ini untuk merinci pengumpulan data, penggunaan API, SDK pihak ketiga, dan domain jaringan. Berikut yang perlu Anda ketahui:
 

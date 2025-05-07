@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-otaアップデートのデバッグとトラブルシューティング
+slug: capacitor-ota-updates-debugging-issues
 title: Capacitor OTA アップデート：デバッグの問題
 description: >-
   OTAアップデートの問題を効果的にトラブルシューティングする方法を学び、ベストプラクティスとツールを使用してスムーズなアプリのデプロイとユーザー満足度を確保しましょう。
@@ -16,7 +16,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-ota-updates-debugging-issues
 ---
 **OTAアップデートはアプリの改善を加速できますが、失敗したアップデートは重大な問題を引き起こします。**スムーズなアップデートを確実にし、問題を素早く修正するために知っておくべきことは以下の通りです:
 

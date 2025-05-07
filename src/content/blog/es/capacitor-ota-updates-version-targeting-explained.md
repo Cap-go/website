@@ -1,7 +1,5 @@
 ---
-slug: >-
-  Explicación del direccionamiento de versiones de actualizaciones OTA de
-  Capacitor
+slug: Erklärung zum Capacitor OTA Update Versions-Targeting
 title: 'Actualizaciones OTA de Capacitor: Versionado explicado'
 description: >-
   Descubra cómo la segmentación por versiones para actualizaciones OTA garantiza
@@ -23,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: Erklärung zum Capacitor OTA Update Versions-Targeting
 ---
 Las actualizaciones Over-The-Air (OTA) de [Capacitor](https://capacitorjs.com/) te permiten enviar cambios de la aplicación directamente a los usuarios sin esperar aprobaciones de las tiendas de aplicaciones. Con **segmentación por versiones**, puedes entregar actualizaciones a versiones específicas de la aplicación, asegurando compatibilidad y reduciendo riesgos como fallos.
 

@@ -1,5 +1,5 @@
 ---
-slug: 오프라인 토큰을 위한 Capacitor 보안 스토리지
+slug: secure-storage-for-offline-tokens-in-capacitor
 title: Capacitor에서 오프라인 토큰을 위한 보안 스토리지
 description: 모바일 애플리케이션에서 암호화와 생체 인식 제어를 사용하여 오프라인 인증 토큰을 안전하게 저장하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: secure-storage-for-offline-tokens-in-capacitor
 ---
 **앱의 인증 토큰을 오프라인에서 안전하게 보관하고 싶으신가요?** 다음 사항들을 알아야 합니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: iOSのCapacitorプロジェクトのGitHub Actionによる自動ビルド
+slug: automatic-capacitor-ios-build-github-action
 title: GitHubアクションとプロビジョニングプロファイルを使用したCapacitor iOSの自動ビルド
 description: 5分でIonicのiOSアプリ用のCI/CDパイプラインをfastlaneとGitHub Actionsで設定する方法（2024年）
 author: Martin Donadieu
@@ -14,7 +14,6 @@ tag: CI/CD
 published: true
 locale: ja
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: automatic-capacitor-ios-build-github-action
 ---
 # Build automatici iOS con GitHub Actions usando i Certificati
 
@@ -34,7 +33,7 @@ Prima di iniziare, avrai bisogno di:
 
 ## Setup CI/CD Professionale di Capgo
 
-Salta la complessità. [Capgo](https://capgo.app/ci-cd/) configura la tua pipeline CI/CD direttamente nella piattaforma preferita:
+Salta la complessità. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura la tua pipeline CI/CD direttamente nella piattaforma preferita:
 
 - **Indipendenza dalla Piattaforma**: Funziona con GitHub Actions, GitLab CI o altri
 - **Integrazione Completa**: Non serve cambiare piattaforma, funziona con il tuo processo attuale  

@@ -1,5 +1,5 @@
 ---
-slug: ultimative-anleitung-für-app-store-konforme-ota-updates
+slug: ultimate-guide-to-app-store-compliant-ota-updates
 title: Ultimative Anleitung für App Store-konforme OTA-Updates
 description: >-
   Erfahren Sie, wie Sie Over-The-Air-Updates effektiv verwalten und dabei die
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: ultimate-guide-to-app-store-compliant-ota-updates
 ---
 **Möchten Sie Ihre App schnell aktualisieren, ohne gegen App Store-Regeln zu verstoßen?** Over-The-Air (OTA) Updates ermöglichen es Ihnen, Fehler zu beheben, die Leistung zu verbessern und das Nutzererlebnis zu optimieren - alles ohne auf App Store-Genehmigungen warten zu müssen. Um konform zu bleiben, müssen Sie jedoch strenge Richtlinien von Apple und Google befolgen.
 

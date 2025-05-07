@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 프로젝트에서 종속성 관리하기
+slug: managing-dependencies-in-capacitor-projects
 title: Capacitor 프로젝트에서 종속성 관리하기
 description: 'Capacitor 프로젝트에서 보안을 강화하고, 기술 부채를 줄이며, 플랫폼 호환성을 보장하기 위한 필수 종속성 관리 전략을 알아보세요.'
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: managing-dependencies-in-capacitor-projects
 ---
 [Capacitor](https://capacitorjs.com/) 프로젝트에서 의존성 관리는 보안을 보장하고, 기술적 부채를 줄이며, 플랫폼 간 호환성을 유지하는데 필수적입니다. 다음은 알아야 할 사항입니다:
 

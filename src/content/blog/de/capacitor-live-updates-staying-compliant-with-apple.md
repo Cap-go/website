@@ -1,5 +1,5 @@
 ---
-slug: capacitor-live-updates-gesetzeskonform-mit-apple
+slug: capacitor-live-updates-staying-compliant-with-apple
 title: 'Capacitor Live Updates: Die Einhaltung der Apple-Richtlinien'
 description: >-
   Erfahren Sie, wie Sie Live-Updates in mobilen Apps effizient implementieren
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-live-updates-staying-compliant-with-apple
 ---
 [Capacitor](https://capacitorjs.com/) Live-Updates ermöglichen es Entwicklern, Fehlerbehebungen und kleinere Änderungen direkt an Apps zu übermitteln, ohne dass Benutzer Updates aus dem [App Store](https://www.apple.com/app-store/) herunterladen müssen. Dies beschleunigt die Bereitstellung um bis zu **81%**, reduziert Kosten und verbessert die Benutzererfahrung. Die Einhaltung der strengen Apple-Richtlinien ist jedoch unerlässlich, um App-Ablehnungen zu vermeiden.
 

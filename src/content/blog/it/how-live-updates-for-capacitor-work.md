@@ -1,5 +1,5 @@
 ---
-slug: come-funzionano-gli-aggiornamenti-live-per-capacitor
+slug: how-live-updates-for-capacitor-work
 title: Come funzionano gli aggiornamenti in tempo reale in Capgo
 description: >-
   Approfondimento nell'implementazione tecnica degli aggiornamenti in tempo
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-live-updates-for-capacitor-work
 ---
 # Comprendere gli aggiornamenti in tempo reale in Capgo
 

@@ -1,5 +1,5 @@
 ---
-slug: opzioni-plugin-capacitor-per-aggiornamenti-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: Opzioni del Plugin Capacitor per Aggiornamenti OTA
 description: >-
   Esplora i vantaggi e le opzioni degli aggiornamenti OTA per le app Capacitor,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-plugin-options-for-ota-updates
 ---
 **Vuoi aggiornare le tue app [Capacitor](https://capacitorjs.com/) in modo rapido e sicuro senza i ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) ti permettono di distribuire modifiche direttamente agli utenti, risparmiando tempo e larghezza di banda. Ecco cosa devi sapere:
 

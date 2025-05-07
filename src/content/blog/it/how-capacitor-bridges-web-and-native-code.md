@@ -1,5 +1,5 @@
 ---
-slug: come-capacitor-collega-web-e-codice-nativo
+slug: how-capacitor-bridges-web-and-native-code
 title: Come Capacitor collega il codice Web e Nativo
 description: >-
   Esplora come un bridge nativo consente una comunicazione senza soluzione di
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: how-capacitor-bridges-web-and-native-code
 ---
 -   **Bridge nativo**: Traduce JavaScript en acciones nativas (por ejemplo, [acceso a la cámara](https://capgo.app/plugins/camera-preview/) o GPS).
 -   **Sistema de plugins**: Conecta de forma segura las capas web y nativas para una comunicación fluida.

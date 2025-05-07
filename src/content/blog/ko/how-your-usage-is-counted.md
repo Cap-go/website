@@ -1,5 +1,5 @@
 ---
-slug: 사용량 산정 방식
+slug: how-your-usage-is-counted
 title: Capgo에서 사용량이 측정되는 방법
 description: Capgo 사용량을 어떻게 계산하는지 이해하고 최적으로 활용하세요. 요금제를 더 잘 관리하는 방법을 알아보세요
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Solution
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-your-usage-is-counted
 ---
 Capgo에서는 3가지 값이 중요하게 계산되고 이해되어야 합니다
 - 사용자

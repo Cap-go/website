@@ -1,5 +1,5 @@
 ---
-slug: monitoraggio-automatico-del-consenso-per-app-capacitor
+slug: automated-consent-tracking-for-capacitor-apps
 title: Monitoraggio Automatico del Consenso per le App Capacitor
 description: >-
   Scopri come implementare il tracciamento automatico del consenso nelle app per
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: it
 next_blog: ''
-original_slug: automated-consent-tracking-for-capacitor-apps
 ---
 Il tracciamento automatico del consenso è essenziale per le app [Capacitor](https://capacitorjs.com/) per soddisfare le normative sulla privacy e le regole delle piattaforme. Ecco perché è importante e come implementarlo:
 

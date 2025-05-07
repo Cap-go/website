@@ -1,5 +1,5 @@
 ---
-slug: plattformübergreifende-uiux-best-practices-für-capacitor-apps
+slug: cross-platform-uiux-best-practices-for-capacitor-apps
 title: 'Plattformübergreifende UI/UX: Best Practices für Capacitor-Apps'
 description: >-
   Lernen Sie Best Practices für die Erstellung nahtloser plattformübergreifender
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: cross-platform-uiux-best-practices-for-capacitor-apps
 ---
 **Möchten Sie Apps entwickeln, die sich auf iOS, Android und Web natürlich anfühlen?** [Capacitor](https://capacitorjs.com/) macht dies möglich, indem Web- und native Funktionen kombiniert werden. Um eine nahtlose Erfahrung über alle Plattformen hinweg zu schaffen, ist ein sorgfältiges UI/UX-Design erforderlich. So können Sie das erreichen:
 

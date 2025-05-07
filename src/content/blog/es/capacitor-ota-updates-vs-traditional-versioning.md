@@ -1,5 +1,5 @@
 ---
-slug: Actualizaciones OTA de Capacitor vs Versionamiento tradicional
+slug: Capacitor OTA-Updates vs. traditionelle Versionierung
 title: Actualizaciones OTA de Capacitor vs Versionamiento Tradicional
 description: >-
   Descubre cómo las actualizaciones OTA de Capacitor revolucionan la
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: Capacitor OTA-Updates vs. traditionelle Versionierung
 ---
 **¿Deseas actualizaciones de apps más rápidas sin esperar revisiones de la tienda de aplicaciones?** Las actualizaciones OTA (por aire) de [Capacitor](https://capacitorjs.com/) podrían ser la solución. A diferencia de las actualizaciones tradicionales de las tiendas de apps, que tardan días y requieren acción del usuario, las actualizaciones OTA despliegan cambios en minutos y llegan automáticamente a los usuarios.
 

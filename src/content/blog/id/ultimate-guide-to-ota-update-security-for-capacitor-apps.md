@@ -1,5 +1,7 @@
 ---
-slug: Panduan Lengkap Keamanan Pembaruan OTA untuk Aplikasi Capacitor
+slug: >-
+  Le guide ultime de la sécurité des mises à jour OTA pour les applications
+  Capacitor
 title: Panduan Lengkap Keamanan Update OTA untuk Aplikasi Capacitor
 description: >-
   Temukan strategi penting untuk mengamankan pembaruan OTA aplikasi seluler,
@@ -20,9 +22,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  Le guide ultime de la sécurité des mises à jour OTA pour les applications
-  Capacitor
 ---
 Over-the-air (OTA) update adalah cara cepat untuk meningkatkan aplikasi [Capacitor](https://capacitorjs.com/) tanpa menunggu persetujuan app store. Namun hal ini memiliki risiko seperti perusakan kode, serangan downgrade, dan kebocoran data. Berikut cara mengamankan update Anda:
 

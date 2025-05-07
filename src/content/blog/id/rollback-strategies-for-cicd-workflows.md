@@ -1,5 +1,5 @@
 ---
-slug: strategi-pemulihan-untuk-workflow-cicd
+slug: stratégies-de-restauration-pour-les-workflows-cicd
 title: Strategi Rollback untuk Alur Kerja CI/CD
 description: >-
   Jelajahi strategi rollback yang efektif untuk alur kerja CI/CD dan temukan
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: stratégies-de-restauration-pour-les-workflows-cicd
 ---
 **Mencari cara yang cepat dan andal untuk membalikkan pembaruan aplikasi yang bermasalah?** Inilah poin pentingnya: Platform seperti [Capgo](https://capgo.app/) membuat rollback menjadi sederhana dengan solusi satu klik, enkripsi yang kuat, dan integrasi CI/CD, sementara platform lain seperti [Appflow](https://ionic.io/docs/appflow) dan [Capawesome](https://capawesome.io/) memiliki keterbatasan atau biaya lebih tinggi. [Microsoft CodePush](https://microsoft.github.io/code-push/), yang dulunya gratis, dihentikan pada 2024.
 

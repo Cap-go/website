@@ -1,5 +1,5 @@
 ---
-slug: 단계별 Capacitor Live Updates 릴리스
+slug: phased-rollouts-for-capacitor-live-updates
 title: Capacitor Live Updates의 단계별 배포
 description: >-
   단계적 출시를 통해 전략적 사용자 세분화로 위험을 최소화하고, 품질을 향상시키며, 사용자 만족도를 보장하는 앱 업데이트 개선 방법에 대해
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: phased-rollouts-for-capacitor-live-updates
 ---
 단계적 롤아웃을 통해 소규모 사용자 그룹부터 시작하여 안정성이 확인됨에 따라 점차 확장하면서 앱을 업데이트할 수 있습니다. 이러한 접근 방식은 위험을 줄이고, 앱 품질을 보장하며, 사용자 경험을 개선합니다. [Capgo](https://capgo.app/)와 같은 도구를 사용하면 앱 스토어 규칙을 준수하면서 이러한 업데이트를 쉽게 관리할 수 있습니다.
 

@@ -14,7 +14,6 @@ tag: CI/CD
 published: true
 locale: ko
 next_blog: automatic-capacitor-android-build-codemagic
-original_slug: automatic-capacitor-ios-build-codemagic
 ---
 ## Codemagic을 사용한 iOS 지속적 배포
 

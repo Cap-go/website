@@ -1,5 +1,5 @@
 ---
-slug: 自動アップデート-クアサーとキャパシター
+slug: aggiornamento-automatico-con-quasar-e-capacitor
 title: モバイルアプリのリアルタイム更新、QuasarとCapacitorでの開発
 description: Quasar、Capacitor を使用したモバイルアプリの作成方法とリアルタイム更新の実装方法
 author: Anik Dhabal Babu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: aggiornamento-automatico-con-quasar-e-capacitor
 ---
 このチュートリアルでは、まず[Quasar](https://quasar.dev/)を使用して新しいWebアプリを作成します。その後、Capacitorを使用してモバイルアプリに変換する方法を学びます。モバイルでアプリをより良く見せたい場合に最適です。
 

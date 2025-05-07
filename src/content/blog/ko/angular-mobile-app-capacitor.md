@@ -1,5 +1,5 @@
 ---
-slug: angular-모바일-앱-capacitor
+slug: angular-mobile-app-capacitor
 title: Angular와 Capacitor로 모바일 앱 만들기
 description: 'Angular, Capacitor 및 Konsta UI로 네이티브 UI를 향상시켜 모바일 앱을 만드는 방법을 알아보세요.'
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ko
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: angular-mobile-app-capacitor
 ---
 In this tutorial, we'll begin with a new [Angular](https://angular.io/) 앱을 시작하고 Capacitor를 사용하여 네이티브 모바일 앱으로 전환하겠습니다. 선택적으로 Tailwind CSS와 함께 [Konsta UI](https://konstaui.com/)를 추가하여 모바일 UI를 개선할 수 있습니다.
 

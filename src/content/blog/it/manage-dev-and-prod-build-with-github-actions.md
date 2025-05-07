@@ -1,5 +1,5 @@
 ---
-slug: gestire-build-dev-e-prod-con-github-actions
+slug: manage-dev-and-prod-build-with-github-actions
 title: Gestisci lo sviluppo e il build di produzione con GitHub actions
 description: >-
   Usa Capgo per rilasciare il tuo devbuild su canali specifici e permettere al
@@ -19,7 +19,6 @@ tag: CI/CD
 published: true
 locale: it
 next_blog: how-to-send-specific-version-to-users
-original_slug: manage-dev-and-prod-build-with-github-actions
 ---
 Ecco la traduzione in italiano:
 

@@ -1,5 +1,5 @@
 ---
-slug: Komunikasi dua arah dalam aplikasi Capacitor
+slug: 2-way-communication-in-capacitor-apps
 title: Komunikasi 2 Arah dalam Aplikasi Capacitor
 description: >-
   Pelajari bagaimana komunikasi dua arah dalam aplikasi Capacitor meningkatkan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: 2-way-communication-in-capacitor-apps
 ---
 La communication bidirectionnelle dans les applications [Capacitor](https://capacitorjs.com/) relie les couches web et natives, permettant l'échange de données en temps réel. Cela permet aux technologies web d'accéder aux fonctionnalités natives de l'appareil comme la caméra ou le GPS tandis que les couches natives interagissent avec les éléments web. Voici pourquoi c'est important :
 

@@ -1,5 +1,5 @@
 ---
-slug: 특정 버전의 앱을 사용자에게 보내는 방법
+slug: how-to-send-specific-version-to-users
 title: 특정 사용자나 그룹에게 특정 업데이트를 보내는 방법
 description: >-
   테스트플라이트나 구글 베타 프로세스 없이도 사용자가 베타 버전을 사용할 수 있도록 하세요. Ionic 앱에 버튼만 추가하면 바로 사용할 수
@@ -18,7 +18,6 @@ tag: alternatives
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-send-specific-version-to-users
 ---
 ## 서문
 

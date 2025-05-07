@@ -1,5 +1,5 @@
 ---
-slug: fundamentos-plugin-android-nativo-bridge-capacitor
+slug: capacitor-native-bridge-android-plugin-basics
 title: Base de Complementos de Android para el Puente Nativo de Capacitor
 description: >-
   Aprende a crear plugins de Android de alto rendimiento con Capacitor Native
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-native-bridge-android-plugin-basics
 ---
 [Capacitor](https://capacitorjs.com/) Native Bridge simplifica la creación de plugins de Android al conectar JavaScript y código nativo de Android. Esto es lo que necesitas saber:
 

@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-aplikasi-capacitor-anda-dengan-lancar-menggunakan-capacitor-updater
+slug: mise-a-jour-de-vos-applications-capacitor-sans-probleme-avec-capacitor-updater
 title: Perbarui Aplikasi Capacitor Anda dengan Mudah Menggunakan Capacitor-updater
 description: >-
   Salam kepada komunitas Capacitor Ionic, hari ini saya akan membantu Anda
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: ''
-original_slug: mise-a-jour-de-vos-applications-capacitor-sans-probleme-avec-capacitor-updater
 ---
 ## Apa itu Capacitor-updater?
 

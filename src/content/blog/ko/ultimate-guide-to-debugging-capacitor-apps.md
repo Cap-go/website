@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱 디버깅을 위한 완벽 가이드
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Capacitor 앱 디버깅을 위한 완벽 가이드
 description: Capacitor 앱의 원활한 크로스 플랫폼 성능을 보장하기 위한 효과적인 전략과 필수 디버깅 도구를 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: ultimate-guide-to-debugging-capacitor-apps
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 디버깅은 웹과 네이티브 기술이 혼합된 하이브리드 특성으로 인해 복잡할 수 있습니다. 이 가이드는 이슈를 효과적으로 해결하기 위한 필수 도구, 기술 및 팁을 다루며 프로세스를 단순화합니다.
 

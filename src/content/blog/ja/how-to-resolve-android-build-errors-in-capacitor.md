@@ -1,5 +1,5 @@
 ---
-slug: androidのcapacitorのビルドエラーを解決する方法
+slug: come-risolvere-errori-di-compilazione-android-in-capacitor
 title: Capacitorでのビルドエラーを解決する方法
 description: Android の Capacitor でのビルドエラーの解決方法を、設定の問題から依存関係の競合、ProGuard の問題まで詳しく説明します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-risolvere-errori-di-compilazione-android-in-capacitor
 ---
 **[Capacitor](https://capacitorjs.com/)のAndroidビルドエラーでお困りですか?** これらのエラーは、設定ファイルの誤設定、依存関係の競合、または[ProGuard](https://www.guardsquare.com/manual/home)の問題に起因することがよくあります。アプリをスムーズに動作させ続けるには、迅速な修正が不可欠です。よくある問題とその解決方法を簡単に説明します:
 

@@ -1,5 +1,5 @@
 ---
-slug: funciona-capgo-con-cordova
+slug: funktioniert-capgo-mit-cordova
 title: >-
   Por qué Capgo no soporta Cordova: Actualiza tu app para acceder a las
   actualizaciones en vivo
@@ -18,7 +18,6 @@ tag: Migration
 published: true
 locale: es
 next_blog: ''
-original_slug: funktioniert-capgo-mit-cordova
 ---
 Si buscas una plataforma de desarrollo de aplicaciones robusta y moderna, entonces Capacitor es la solución perfecta. A diferencia de Cordova, que es una plataforma antigua y obsoleta, Capacitor aprovecha lo último en evolución de plataformas nativas y lenguajes para ofrecer la mejor experiencia de usuario posible.
 

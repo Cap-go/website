@@ -1,5 +1,6 @@
 ---
-slug: normes-de-securite-des-api-principales-pour-la-conformite-de-l-app-store
+slug: >-
+  estándares-de-seguridad-de-las-api-principales-para-la-conformidad-con-la-app-store
 title: Standar Keamanan API Utama untuk Kepatuhan App Store
 description: >-
   Pelajari standar keamanan API utama untuk memastikan aplikasi Anda memenuhi
@@ -19,8 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  estándares-de-seguridad-de-las-api-principales-para-la-conformidad-con-la-app-store
 ---
 La sécurisation de l'API de votre application est essentielle pour répondre aux exigences de l'App Store d'Apple et de Google Play. Ce guide présente **cinq normes de sécurité API clés** pour vous aider à respecter les règles des plateformes, protéger les données des utilisateurs et améliorer les performances des applications.
 

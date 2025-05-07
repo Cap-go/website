@@ -1,5 +1,5 @@
 ---
-slug: 5-langkah-untuk-menyelesaikan-konflik-versi-di-aplikasi-capacitor
+slug: 5-steps-for-resolving-version-conflicts-in-capacitor-apps
 title: 5 étapes pour résoudre les conflits de version dans les applications Capacitor
 description: >-
   Selesaikan konflik versi dalam aplikasi Capacitor dengan lima langkah jelas
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: 5-steps-for-resolving-version-conflicts-in-capacitor-apps
 ---
 **Mengalami masalah konflik versi di aplikasi [Capacitor](https://capacitorjs.com/)?** Masalah ini dapat menyebabkan kegagalan build, error runtime, dan malfungsi plugin. Panduan ini menyederhanakan proses menjadi **5 langkah yang dapat ditindaklanjuti** untuk mengidentifikasi, menyelesaikan, dan mencegah konflik ini:
 

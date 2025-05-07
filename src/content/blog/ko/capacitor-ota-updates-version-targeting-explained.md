@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 버전 대상 지정 설명
+slug: capacitor-ota-updates-version-targeting-explained
 title: 'Capacitor OTA 업데이트: 버전 타겟팅 설명'
 description: >-
   OTA 업데이트의 버전 타겟팅을 통해 특정 앱 버전을 관리하여 앱 안정성, 더 빠른 배포 및 더 나은 사용자 경험을 보장하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-version-targeting-explained
 ---
 [Capacitor](https://capacitorjs.com/) Over-The-Air (OTA) 업데이트를 통해 앱스토어 승인을 기다리지 않고 앱 변경사항을 사용자에게 직접 전달할 수 있습니다. **버전 타겟팅**을 통해 특정 앱 버전에만 업데이트를 전달하여 호환성을 보장하고 충돌과 같은 위험을 줄일 수 있습니다.
 

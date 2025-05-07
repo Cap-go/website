@@ -1,5 +1,5 @@
 ---
-slug: suivi-des-mises-a-jour-ota-dans-les-applications-capacitor
+slug: monitoreo-de-actualizaciones-ota-en-aplicaciones-capacitor
 title: Surveiller les Mises à Jour OTA dans les Applications Capacitor
 description: >-
   Apprenez à surveiller efficacement les mises à jour OTA dans les applications
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: monitoreo-de-actualizaciones-ota-en-aplicaciones-capacitor
 ---
 **Vous souhaitez mettre à jour votre application sans attendre l'approbation des stores ?** Les mises à jour OTA (Over-The-Air) vous permettent de déployer des correctifs et des fonctionnalités directement aux utilisateurs en temps réel. Avec des outils comme [Capgo](https://capgo.app/), vous pouvez surveiller la performance des mises à jour, suivre les erreurs et même annuler instantanément les mauvaises mises à jour.
 

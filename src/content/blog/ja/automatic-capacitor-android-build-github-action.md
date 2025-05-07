@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: ja
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: automatic-capacitor-android-build-github-action
 ---
 # GitHub Actionsによる自動Androidビルド
 
@@ -37,7 +36,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかるこ
 
 ## CapgoによるプロフェッショナルなCI/CDセットアップ
 
-複雑さを回避しましょう。[Capgo](https://capgo.app/ci-cd/)は、お好みのプラットフォームで直接CI/CDパイプラインを構成します：
+複雑さを回避しましょう。[Capgo](https://capgo.app/docs/getting-started/cicd-integration/)は、お好みのプラットフォームで直接CI/CDパイプラインを構成します：
 
 - **プラットフォーム独立性**: GitHub Actions、GitLab CI、その他で動作
 - **シームレスな統合**: プラットフォームの切り替え不要、現在のプロセスで動作

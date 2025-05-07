@@ -1,29 +1,18 @@
 ---
-slug: >-
-  Mengapa Anda memerlukan Capgo
+slug: |-
+  Por qué necesitas Capgo
 
+  Capgo es una excelente solución para varios escenarios:
 
-  Capgo adalah solusi yang sangat baik untuk berbagai skenario:
-
-
-  • Ketika Anda ingin menerapkan pembaruan secara instan.
-
-  • Ketika pembaruan App Store terlalu lambat.
-
-  • Tidak ingin menunggu persetujuan Apple untuk setiap pembaruan.
-
-  • Ketika Anda ingin menerapkan A/B testing untuk produksi.
-
-  • Ketika Anda membutuhkan beberapa versi dari versi native yang sama.
-
-  • Ketika Anda ingin menerapkan pembaruan secara otomatis.
-
-  • Ketika Anda perlu mengembalikan ke versi sebelumnya dengan cepat.
-
-  • Ketika Anda ingin memiliki gambaran umum tentang penerapan dan kontrol
-  versi.
-
-  • Ketika Anda membutuhkan CDN untuk aplikasi Anda.
+  • Cuando deseas desplegar actualizaciones instantáneamente.
+  • Cuando las actualizaciones de la App Store son demasiado lentas.
+  • No quieres esperar a que Apple apruebe cada actualización.
+  • Cuando quieres implementar A/B testing para producción.
+  • Cuando necesitas múltiples versiones de la misma versión nativa.
+  • Cuando deseas desplegar actualizaciones automáticamente.
+  • Cuando necesitas restaurar rápidamente a una versión anterior.
+  • Cuando deseas tener una vista general del despliegue y control de versiones.
+  • Cuando necesitas un CDN para tu aplicación.
 title: Tujuan Capgo
 description: >-
   Artikel blog ini harus dideskripsikan sebagai panduan lengkap untuk developer
@@ -43,20 +32,6 @@ tag: SOLUTION
 published: true
 locale: id
 next_blog: ''
-original_slug: |-
-  Por qué necesitas Capgo
-
-  Capgo es una excelente solución para varios escenarios:
-
-  • Cuando deseas desplegar actualizaciones instantáneamente.
-  • Cuando las actualizaciones de la App Store son demasiado lentas.
-  • No quieres esperar a que Apple apruebe cada actualización.
-  • Cuando quieres implementar A/B testing para producción.
-  • Cuando necesitas múltiples versiones de la misma versión nativa.
-  • Cuando deseas desplegar actualizaciones automáticamente.
-  • Cuando necesitas restaurar rápidamente a una versión anterior.
-  • Cuando deseas tener una vista general del despliegue y control de versiones.
-  • Cuando necesitas un CDN para tu aplicación.
 ---
 ## Ikhtisar
 

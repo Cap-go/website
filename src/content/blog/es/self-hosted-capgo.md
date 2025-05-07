@@ -1,5 +1,5 @@
 ---
-slug: auto-hospedado-capgo
+slug: self-hosted-capgo
 title: Capgo autohospedado
 description: >-
   El auto-alojamiento de Capgo te permite desplegar actualizaciones en vivo de
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: es
 next_blog: ''
-original_slug: self-hosted-capgo
 ---
 Este artículo proporciona una guía paso a paso sobre cómo autoalojar Capgo, así como un análisis de los beneficios y desafíos del autoalojamiento.
 

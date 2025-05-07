@@ -1,5 +1,5 @@
 ---
-slug: 5-erreurs-courantes-a-eviter-lors-des-mises-a-jour-ota
+slug: 5-common-ota-update-mistakes-to-avoid
 title: 5 Kesalahan Umum Update OTA yang Harus Dihindari
 description: >-
   Hindari kesalahan umum pembaruan OTA yang dapat menyebabkan aplikasi crash dan
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: 5-common-ota-update-mistakes-to-avoid
 ---
 Pembaruan OTA (Over-the-Air) dapat meningkatkan aplikasi dengan cepat, namun kesalahan dapat menyebabkan crash, risiko keamanan, atau bahkan pelanggaran [app store](https://www.apple.com/app-store/). Berikut panduan singkat untuk menghindari kesalahan umum:
 

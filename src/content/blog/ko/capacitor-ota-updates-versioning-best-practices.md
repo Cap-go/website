@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 버전 관리 모범 사례
+slug: capacitor-ota-updates-versioning-best-practices
 title: 'Capacitor OTA 업데이트: 버전 관리 모범 사례'
 description: 'Capacitor OTA 업데이트를 관리하는 모범 사례와 버전 관리 전략, 일반적인 함정, 그리고 보안 조치에 대해 알아보세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-versioning-best-practices
 ---
 **앱스토어 승인을 기다리지 않고 즉시 앱 업데이트를 제공하고 싶으신가요?** [Capacitor](https://capacitorjs.com/)의 Over-the-Air (OTA) 업데이트를 사용하면 앱의 웹 콘텐츠를 실시간으로 업데이트할 수 있습니다. 하지만 원활한 배포를 위해서는 확실한 버전 관리 방법이 필요합니다.
 

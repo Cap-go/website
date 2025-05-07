@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: it
 next_blog: null
-original_slug: automatic-capacitor-android-build-gitlab
 ---
 # Build Android Automatici con GitLab CI
 
@@ -39,7 +38,7 @@ Prima di iniziare, dovrai configurare:
 
 ## Setup CI/CD Professionale di Capgo
 
-Salta la complessità. [Capgo](https://capgo.app/ci-cd/) configura la tua pipeline CI/CD direttamente nella piattaforma che preferisci:
+Salta la complessità. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura la tua pipeline CI/CD direttamente nella piattaforma che preferisci:
 
 - **Indipendenza dalla Piattaforma**: Funziona con GitHub Actions, GitLab CI o altri
 - **Integrazione Perfetta**: Non serve cambiare piattaforma, funziona con il tuo processo attuale

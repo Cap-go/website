@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-ccpa-compliance-memengaruhi-aplikasi
+slug: comment-la-conformite-ccpa-impacte-les-applications
 title: Bagaimana CCPA Mempengaruhi Aplikasi
 description: >-
   CCPA mengubah cara aplikasi seluler menangani data pengguna, dengan fokus pada
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-la-conformite-ccpa-impacte-les-applications
 ---
 **California Consumer Privacy Act (CCPA)** sedang mengubah cara aplikasi seluler menangani data pengguna. Berikut yang perlu Anda ketahui:
 

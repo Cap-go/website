@@ -1,5 +1,5 @@
 ---
-slug: membuat-aplikasi-mobile-native-dengan-nextjs-dan-capacitor
+slug: création-dune-application-mobile-native-avec-nextjs-et-capacitor
 title: >-
   Membangun Aplikasi Mobile Native dengan Next.js 14 dan Capacitor: Panduan
   Langkah demi Langkah 2024
@@ -21,7 +21,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: création-dune-application-mobile-native-avec-nextjs-et-capacitor
 ---
 ## Introduction
 

@@ -1,5 +1,5 @@
 ---
-slug: comment-utiliser-capacitor-cli-pour-les-mises-à-jour-ota
+slug: so-verwenden-sie-die-capacitor-cli-für-ota-updates
 title: Comment utiliser l'interface CLI de Capacitor pour les mises à jour OTA
 description: >-
   Découvrez comment utiliser l'interface de ligne de commande Capacitor pour les
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: so-verwenden-sie-die-capacitor-cli-für-ota-updates
 ---
 Les mises à jour Over-The-Air (OTA) vous permettent de livrer des correctifs et des fonctionnalités directement aux utilisateurs sans attendre les approbations des stores. En utilisant [Capacitor](https://capacitorjs.com/) CLI et des outils comme [Capgo](https://capgo.app/), vous pouvez déployer des mises à jour instantanément, suivre les performances et même revenir en arrière si nécessaire. Voici ce que vous devez savoir :
 

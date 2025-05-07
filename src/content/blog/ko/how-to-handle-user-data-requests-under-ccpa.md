@@ -1,5 +1,5 @@
 ---
-slug: ccpa에 따른 사용자 데이터 요청 처리 방법
+slug: how-to-handle-user-data-requests-under-ccpa
 title: CCPA에 따른 사용자 데이터 요청 처리 방법
 description: CCPA에 따른 사용자 데이터 요청을 효과적으로 관리하여 사용자의 개인정보 보호 권리를 존중하면서 규정을 준수하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-to-handle-user-data-requests-under-ccpa
 ---
 캘리포니아 소비자 개인정보 보호법([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act))은 사용자에게 개인정보에 대한 통제권을 부여하고 기업에 엄격한 규칙을 적용합니다. 다음은 규정 준수에 필요한 사항입니다:
 

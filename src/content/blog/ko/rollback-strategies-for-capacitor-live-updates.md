@@ -1,5 +1,5 @@
 ---
-slug: Capacitor 라이브 업데이트를 위한 롤백 전략
+slug: rollback-strategies-for-capacitor-live-updates
 title: Capacitor Live Updates 롤백 전략
 description: Capacitor 실시간 업데이트를 위한 효과적인 롤백 전략을 배워 앱 안정성을 보장하고 업데이트 중 사용자 중단을 최소화하세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: rollback-strategies-for-capacitor-live-updates
 ---
 **안정적인 롤백 전략으로 앱 중단을 방지하세요.** [Capacitor](https://capacitorjs.com/)의 실시간 업데이트로 빠른 수정이 가능하지만, 전 세계적으로 18%의 업데이트가 실패합니다. 롤백 계획은 문제 발생 시 안정성을 보장합니다. 간단한 개요입니다:
 

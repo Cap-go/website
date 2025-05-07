@@ -1,5 +1,5 @@
 ---
-slug: Lo que los desarrolladores deben saber sobre los metadatos de la App Store
+slug: Was Entwickler über App Store Metadaten wissen müssen
 title: 'Metadatos de la App Store: Lo que los desarrolladores deben saber'
 description: >-
   Descubra cómo los metadatos efectivos de la App Store pueden mejorar la
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: Was Entwickler über App Store Metadaten wissen müssen
 ---
 **Möchten Sie, dass Ihre App heraussticht? Es beginnt mit Metadaten.** Metadaten im App Store beeinflussen, wie Benutzer Ihre App entdecken, bewerten und herunterladen. Hier ist, was Sie wissen müssen:
 

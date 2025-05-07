@@ -1,5 +1,5 @@
 ---
-slug: comment-capacitor-connecte-le-code-web-et-natif
+slug: como-capacitor-conecta-codigo-web-y-nativo
 title: Bagaimana Capacitor Menghubungkan Kode Web dan Native
 description: >-
   Découvrez comment un pont natif permet une communication fluide entre le code
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: como-capacitor-conecta-codigo-web-y-nativo
 ---
 -   **Pont natif** : Traduit JavaScript en actions natives (par exemple, [accès à la caméra](https://capgo.app/plugins/camera-preview/) ou GPS).
 -   **Système de plugins** : Relie de manière sécurisée les couches web et natives pour une communication fluide.

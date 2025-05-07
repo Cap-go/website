@@ -1,5 +1,5 @@
 ---
-slug: opciones-del-complemento-capacitor-para-actualizaciones-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: Opciones de Plugin de Capacitor para Actualizaciones OTA
 description: >-
   Explora los beneficios y opciones de actualizaciones OTA para aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-plugin-options-for-ota-updates
 ---
 **¿Buscas actualizar tus aplicaciones de [Capacitor](https://capacitorjs.com/) de forma rápida y segura sin retrasos en la tienda de aplicaciones?** Las actualizaciones Over-the-Air (OTA) te permiten enviar cambios directamente a los usuarios, ahorrando tiempo y ancho de banda. Esto es lo que necesitas saber:
 
@@ -188,7 +187,7 @@ Capgo destaca por ofrecer planes rentables con características de nivel empresa
 
 ## Resumen
 
-Basado en las comparaciones anteriores, el mercado ahora se inclina hacia soluciones que priorizan la seguridad, velocidad y rentabilidad. El ecosistema de [plugins de actualización OTA de Capacitor](https://capgo.app/blog/Release-of-a-brand-new-capacitor-social-login/) ha cambiado, con opciones destacadas emergiendo debido a su rendimiento, características y tasas de adopción.
+Basado en las comparaciones anteriores, el mercado ahora se inclina hacia soluciones que priorizan la seguridad, velocidad y rentabilidad. El ecosistema de [plugins de actualización OTA de Capacitor](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) ha cambiado, con opciones destacadas emergiendo debido a su rendimiento, características y tasas de adopción.
 
 Aquí hay un desglose de las opciones actuales:
 

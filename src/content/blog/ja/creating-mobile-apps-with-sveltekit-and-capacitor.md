@@ -1,5 +1,5 @@
 ---
-slug: モバイルアプリをSvelteKitとCapacitorで作成する
+slug: creazione-di-app-mobile-con-sveltekit-e-capacitor
 title: モバイルアプリケーションの作成：SvelteKitとCapacitor
 description: SvelteKitとCapacitorを使用してモバイルアプリを作成し、Konsta UIでネイティブUIを強化する方法を学びましょう。
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
-original_slug: creazione-di-app-mobile-con-sveltekit-e-capacitor
 ---
 このチュートリアルでは、新しい[SvelteKit](https://kit.svelte.dev/)アプリから始めて、Capacitorを使用してネイティブモバイル開発に移行します。オプションとして、[Konsta UI](https://konstaui.com/)を統合して、Tailwind CSSモバイルUIを強化することもできます。
 

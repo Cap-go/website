@@ -1,5 +1,6 @@
 ---
-slug: pertanyaan-umum-tentang-pembaruan-langsung-jawaban-untuk-pengembang-aplikasi
+slug: >-
+  questions-frequentes-sur-les-mises-a-jour-en-direct-reponses-pour-les-developpeurs-d-applications
 title: 'Pertanyaan Umum Pembaruan Langsung: Jawaban untuk Pengembang Aplikasi'
 description: >-
   Temukan manfaat pembaruan langsung untuk pengembang aplikasi, termasuk
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  questions-frequentes-sur-les-mises-a-jour-en-direct-reponses-pour-les-developpeurs-d-applications
 ---
 Pembaruan langsung memungkinkan pengembang untuk dengan cepat mendorong pembaruan dan perbaikan ke aplikasi pengguna tanpa menunggu peninjauan toko aplikasi. Mereka menggunakan teknologi over-the-air (OTA) untuk menerapkan perubahan secara real time, meningkatkan kecepatan dan efisiensi penerapan.
 

@@ -1,5 +1,5 @@
 ---
-slug: プランとチャンネルによるユーザーのセグメント化方法
+slug: how-to-segment-users-by-plan-and-channels
 title: チャネルを使用して機能フラグおよびA/Bテストを行う方法
 description: CapGoのチャンネルを使用して、ユーザーを自己割り当てまたはバックエンドを使用して、機能フラグやA/Bテストを行う方法を学びましょう
 author: Martin Donadieu
@@ -14,7 +14,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: ''
-original_slug: how-to-segment-users-by-plan-and-channels
 ---
 # チャンネルを使用した機能フラグとA/Bテストの方法
 

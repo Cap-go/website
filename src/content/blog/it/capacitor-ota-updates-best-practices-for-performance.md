@@ -1,5 +1,5 @@
 ---
-slug: best-practice-di-performance-per-aggiornamenti-ota-su-capacitor
+slug: capacitor-ota-updates-best-practices-for-performance
 title: CapacitorのOTAアップデート：パフォーマンスのベストプラクティス
 description: >-
   Ottimizza gli aggiornamenti OTA nelle app Capacitor per migliorare le
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-ota-updates-best-practices-for-performance
 ---
 Gli aggiornamenti OTA (Over-the-Air) consentono alle app [Capacitor](https://capacitorjs.com/) di aggiornare contenuti come JavaScript, CSS e HTML senza richiedere invii all'app store. Sebbene conveniente, questi aggiornamenti possono influire sulle prestazioni di avvio dell'app. Ecco una guida rapida per ottimizzare gli aggiornamenti OTA per migliori prestazioni ed esperienza utente:
 

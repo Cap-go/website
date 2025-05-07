@@ -1,7 +1,5 @@
 ---
-slug: >-
-  CapGo의 목적은 기존 CapacitorJS의 기능을 확장하고 간단한 업데이트 배포, 상태 관리, 앱 권한 처리, 네이티브 기능과의 통합,
-  메트릭 추적, 분석 작업을 제공하는 것입니다.
+slug: capgo-purpose
 title: Capgo 의 목적
 description: Capgo를 사용하여 Capacitor 앱 업데이트와 테스트를 관리하는 방법에 대한 개발자를 위한 종합 가이드
 author: Anik Dhabal Babu
@@ -18,7 +16,6 @@ tag: SOLUTION
 published: true
 locale: ko
 next_blog: ''
-original_slug: capgo-purpose
 ---
 ## 개요
 

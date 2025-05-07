@@ -1,5 +1,5 @@
 ---
-slug: meilleures-pratiques-de-performance-pour-les-mises-a-jour-ota-dans-capacitor
+slug: mejores-practicas-de-rendimiento-para-actualizaciones-ota-en-capacitor
 title: 'Mises à jour OTA de Capacitor : Meilleures pratiques pour les performances'
 description: >-
   Optimisez les mises à jour OTA dans les applications Capacitor pour améliorer
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: mejores-practicas-de-rendimiento-para-actualizaciones-ota-en-capacitor
 ---
 Les mises à jour OTA (Over-the-Air) permettent aux applications [Capacitor](https://capacitorjs.com/) de mettre à jour le contenu comme JavaScript, CSS et HTML sans nécessiter de soumissions aux magasins d'applications. Bien que pratiques, ces mises à jour peuvent impacter les performances de démarrage de l'application. Voici un guide rapide pour optimiser les mises à jour OTA pour de meilleures performances et expérience utilisateur :
 

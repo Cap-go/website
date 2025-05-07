@@ -1,5 +1,5 @@
 ---
-slug: Expo の代替手段
+slug: alternativa-a-expo
 title: Expo Live Update の代替手段
 description: >-
   Expoのライブアップデートの利便性を提供しながら、React
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ja
 next_blog: ''
-original_slug: alternativa-a-expo
 ---
 Expo Live Update è una funzionalità della piattaforma Expo che consente agli sviluppatori di distribuire aggiornamenti alla loro app in tempo reale, senza richiedere agli utenti di scaricare una nuova versione dell'app. Questo è simile alla funzionalità di aggiornamento live di Capgo, che permette agli sviluppatori di aggiornare rapidamente e facilmente i contenuti e le funzionalità della loro app senza costringere gli utenti a passare attraverso il processo di download e installazione di un aggiornamento.
 

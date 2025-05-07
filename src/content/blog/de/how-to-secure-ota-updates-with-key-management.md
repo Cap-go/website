@@ -1,5 +1,5 @@
 ---
-slug: so-werden-ota-updates-mit-schlüsselverwaltung-gesichert
+slug: how-to-secure-ota-updates-with-key-management
 title: So sichern Sie OTA-Updates mit Schlüsselverwaltung
 description: >-
   Erfahren Sie, wie effektives Schlüsselmanagement und Verschlüsselung
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-secure-ota-updates-with-key-management
 ---
 **Möchten Sie Over-the-Air (OTA) Updates sicher halten und Schwachstellen vermeiden?** Hier erfahren Sie, wie Schlüsselverwaltung Ihre App-Updates vor Manipulation und Sicherheitsbedrohungen schützen kann.
 

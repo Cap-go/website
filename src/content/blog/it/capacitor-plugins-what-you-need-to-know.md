@@ -1,5 +1,5 @@
 ---
-slug: cosa-dovresti-sapere-sui-plugin-capacitor
+slug: capacitor-plugins-what-you-need-to-know
 title: 'Plugin Capacitor: Quello che Devi Sapere'
 description: >-
   Scopri come sfruttare i plugin di Capacitor per lo sviluppo di app
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capacitor-plugins-what-you-need-to-know
 ---
 [Capacitor](https://capacitorjs.com/) i plugin sono essenziali per costruire app multipiattaforma, permettendoti di utilizzare funzionalità native del dispositivo come fotocamere, filesystem e notifiche con il minimo sforzo. Combinano API JavaScript e codice nativo per un'integrazione perfetta tra piattaforme iOS, Android e web. Ecco cosa devi sapere:
 

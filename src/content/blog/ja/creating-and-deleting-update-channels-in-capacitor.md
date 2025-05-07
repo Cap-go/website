@@ -1,5 +1,5 @@
 ---
-slug: アップデート用チャンネルの作成と削除（Capacitor）
+slug: creazione-ed-eliminazione-dei-canali-di-aggiornamento-in-capacitor
 title: Capacitor での更新チャンネルの作成と削除
 description: Capacitorでアップデートチャンネルを作成、管理、削除する方法を学び、アプリのアップデートを簡素化し、ユーザーエクスペリエンスを向上させましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: creazione-ed-eliminazione-dei-canali-di-aggiornamento-in-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) [アップデートチャネル](https://capgo.app/docs/webapp/channels/)を使用すると、特定のユーザーグループにOver-the-Air（OTA）アップデートを送信できます。これにより、複数のアプリバージョンの管理、新機能のテスト、段階的なアップデートの展開が可能になります。以下が重要なポイントです：
 

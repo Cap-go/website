@@ -1,5 +1,5 @@
 ---
-slug: activar-modo-desarrollador-ios16
+slug: enable-ios-developer-mode-ios16
 title: Cómo habilitar el modo desarrollador en iOS 16 para pruebas de aplicaciones
 description: >-
   Guía paso a paso para habilitar el Modo Desarrollador en iOS 16 y superior
@@ -19,7 +19,6 @@ tag: iOS
 published: true
 locale: es
 next_blog: ''
-original_slug: enable-ios-developer-mode-ios16
 ---
 # Cómo Habilitar el Modo Desarrollador en iOS 16 para Pruebas de Aplicaciones
 

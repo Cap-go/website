@@ -1,5 +1,5 @@
 ---
-slug: gli-aggiornamenti-in-tempo-reale-sono-permessi-da-apple
+slug: do-apple-allow-live-updates
 title: >-
   Apple consente di inviare aggiornamenti live alle app senza la revisione
   dell'App Store.
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: do-apple-allow-live-updates
 ---
 Ecco il testo tradotto in italiano:
 

@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-cli-project-setup-guide
 ---
 **Möchten Sie iOS- und Android-Apps mit einer Codebasis erstellen?** [Capacitor](https://capacitorjs.com/) CLI vereinfacht den Prozess und ermöglicht es Ihnen, native Apps mit Webtechnologien zu erstellen. Hier lernen Sie:
 

@@ -1,6 +1,6 @@
 ---
 slug: >-
-  les-meilleurs-outils-pour-déboguer-le-code-spécifique-à-la-plateforme-dans-capacitor
+  las-mejores-herramientas-para-depurar-código-específico-de-plataforma-en-capacitor
 title: >-
   Principaux outils pour déboguer le code spécifique à la plateforme dans
   Capacitor
@@ -23,8 +23,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: >-
-  las-mejores-herramientas-para-depurar-código-específico-de-plataforma-en-capacitor
 ---
 Je traduis le texte en français :
 

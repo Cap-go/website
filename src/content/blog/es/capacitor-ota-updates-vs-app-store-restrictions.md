@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-ota-de-capacitor-vs-restricciones-de-app-store
+slug: capacitor-ota-updates-vs-app-store-restrictions
 title: Actualizaciones OTA de Capacitor vs Restricciones de la App Store
 description: >-
   Explora cómo las actualizaciones OTA proporcionan una implementación de
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-ota-updates-vs-app-store-restrictions
 ---
 **¿Quiere [actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) más rápidas sin esperas?** Las actualizaciones Over-the-Air (OTA) permiten a los desarrolladores evitar los retrasos de las tiendas de aplicaciones y enviar cambios directamente a los usuarios en minutos. Aquí por qué esto es importante:
 

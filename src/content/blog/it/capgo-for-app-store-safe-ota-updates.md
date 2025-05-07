@@ -1,5 +1,5 @@
 ---
-slug: capgo-per-aggiornamenti-ota-sicuri-app-store
+slug: capgo-for-app-store-safe-ota-updates
 title: Capgo per aggiornamenti OTA sicuri per l'App Store
 description: >-
   Esplora come una piattaforma consente aggiornamenti istantanei e sicuri delle
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: capgo-for-app-store-safe-ota-updates
 ---
 [Capgo](https://capgo.app/) consente agli sviluppatori di fornire **aggiornamenti istantanei e sicuri delle app** senza attendere le revisioni dell'app store. Con **crittografia end-to-end**, integrazione CI/CD fluida e conformità alle regole dell'app store, è un'alternativa conveniente agli aggiornamenti tradizionali o a piattaforme più costose come [AppFlow](https://ionic.io/appflow). Oltre **947,6 milioni di aggiornamenti** sono stati distribuiti su **1.400 app in produzione**, migliorando l'efficienza dello sviluppo dell'**81%**.
 

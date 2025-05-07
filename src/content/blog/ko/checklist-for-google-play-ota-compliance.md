@@ -1,5 +1,5 @@
 ---
-slug: 구글 플레이 OTA 규정 준수를 위한 체크리스트
+slug: checklist-for-google-play-ota-compliance
 title: Google Play OTA 규정 준수 체크리스트
 description: 'Google Play의 보안, 버전 관리 및 사용자 커뮤니케이션 모범 사례를 준수하여 앱의 무선 업데이트가 이루어지도록 하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: checklist-for-google-play-ota-compliance
 ---
 **오버더에어(OTA) 업데이트**를 통해 스토어 심사를 거치지 않고 직접 사용자에게 변경 사항을 푸시할 수 있습니다. 하지만 Google Play 정책을 준수하려면 보안, 투명성, 품질에 대한 엄격한 규칙을 따라야 합니다. 다음은 간단한 개요입니다:
 

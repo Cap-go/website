@@ -1,5 +1,5 @@
 ---
-slug: menyesuaikan-skrip-build-dengan-capacitor-cli
+slug: so-passen-sie-build-skripte-mit-capacitor-cli-an
 title: Menyesuaikan Skrip Build dengan CLI Capacitor
 description: >-
   Pelajari cara menyesuaikan skrip build dengan CLI Capacitor untuk penerapan
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: so-passen-sie-build-skripte-mit-capacitor-cli-an
 ---
 [Capacitor](https://capacitorjs.com/) CLI memungkinkan Anda menyesuaikan proses build aplikasi untuk platform iOS, Android, dan web. Dengan menyesuaikan skrip build, Anda dapat:
 

@@ -1,5 +1,5 @@
 ---
-slug: CIとCDのGitLab設定
+slug: configurazione-ci-e-cd-gitlab
 title: GitLab によるアプリの自動ビルドとリリース
 description: GitLabを使用して無料でCI/CDパイプラインを作成し、mainにプッシュするたびにIonic Capacitor JSアプリをデプロイしましょう。
 author: Anik Dhabal Babu
@@ -14,7 +14,6 @@ tag: CI/CD
 published: true
 locale: ja
 next_blog: ''
-original_slug: configurazione-ci-e-cd-gitlab
 ---
 このガイドではGitLabでのCI/CDパイプラインのセットアップ方法について説明します。
 

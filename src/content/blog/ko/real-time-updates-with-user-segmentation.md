@@ -1,5 +1,5 @@
 ---
-slug: 사용자 세분화를 통한 실시간 업데이트
+slug: real-time-updates-with-user-segmentation
 title: 사용자 세분화를 통한 실시간 업데이트
 description: '실시간 업데이트와 사용자 세분화가 앱 성능, 참여도 및 타겟팅된 사용자 경험을 위한 개인화를 어떻게 향상시킬 수 있는지 알아보세요.'
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: real-time-updates-with-user-segmentation
 ---
 실시간 업데이트를 통해 앱스토어 승인을 기다리지 않고도 즉시 앱 변경사항을 전달할 수 있습니다. 이를 사용자 세분화와 결합하면 특정 그룹을 대상으로 기능을 테스트하고 경험을 개인화할 수 있습니다. 작동 방식은 다음과 같습니다:
 

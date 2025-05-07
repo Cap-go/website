@@ -1,5 +1,5 @@
 ---
-slug: Erklärung zum Capacitor OTA Update Versions-Targeting
+slug: capacitor-ota-updates-version-targeting-explained
 title: 'Capacitor OTA Updates: Versionierung erklärt'
 description: >-
   Erfahren Sie, wie das Versions-Targeting für OTA-Updates die App-Stabilität,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-version-targeting-explained
 ---
 [Capacitor](https://capacitorjs.com/) Over-The-Air (OTA) Updates ermöglichen es Ihnen, App-Änderungen direkt an Benutzer zu übertragen, ohne auf App-Store-Genehmigungen warten zu müssen. Mit **Versions-Targeting** können Sie Updates für bestimmte App-Versionen bereitstellen und so Kompatibilität gewährleisten und Risiken wie Abstürze reduzieren.
 

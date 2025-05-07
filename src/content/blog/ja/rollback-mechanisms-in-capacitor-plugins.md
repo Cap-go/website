@@ -1,5 +1,5 @@
 ---
-slug: capacitorプラグインでのロールバックメカニズム
+slug: rollback-mechanisms-in-capacitor-plugins
 title: Capacitor プラグインのロールバックメカニズム
 description: >-
   Capacitor
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: rollback-mechanisms-in-capacitor-plugins
 ---
 [Capacitor](https://capacitorjs.com/) プラグインの更新時の安定性を確保するためのロールバックメカニズムです。更新によってバグや問題が発生した場合に以前のバージョンに戻すことができ、ダウンタイムを最小限に抑えユーザー体験を向上させます。
 

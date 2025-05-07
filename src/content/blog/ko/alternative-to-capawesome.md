@@ -1,5 +1,5 @@
 ---
-slug: capawesome의 대안
+slug: alternative-to-capawesome
 title: Capawesome의 대안
 description: Capawesome은 Capgo 시스템에서 영감을 받아 만들어졌습니다. Capgo보다는 덜 완벽한 시스템이지만 여전히 좋은 대안입니다.
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Alternatives
 published: false
 locale: ko
 next_blog: ''
-original_slug: alternative-to-capawesome
 ---
 Capawesome Cloud는 Capgo의 대안 솔루션으로, 말하자면 만든 작은 형제입니다.
 

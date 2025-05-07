@@ -1,5 +1,5 @@
 ---
-slug: kompilasi-android-capacitor-otomatis-dengan-github-action
+slug: compilation-android-capacitor-automatique-avec-github-action
 title: Pembuatan Otomatis Android dengan Capacitor melalui GitHub Actions
 description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi Android Capacitor Menggunakan
@@ -18,7 +18,6 @@ tag: CI/CD
 published: true
 locale: id
 next_blog: automatic-capacitor-ios-build-github-action
-original_slug: compilation-android-capacitor-automatique-avec-github-action
 ---
 # Build Android Otomatis dengan GitHub Actions
 
@@ -39,7 +38,7 @@ Sebelum memulai, Anda perlu menyiapkan:
 
 ## Setup CI/CD Profesional oleh Capgo
 
-Lewati kerumitannya. [Capgo](https://capgo.app/ci-cd/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
+Lewati kerumitannya. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) mengkonfigurasi pipeline CI/CD Anda langsung di platform pilihan Anda:
 
 - **Independen Platform**: Bekerja dengan GitHub Actions, GitLab CI, atau lainnya
 - **Integrasi Mulus**: Tidak perlu beralih platform, bekerja dengan proses Anda saat ini

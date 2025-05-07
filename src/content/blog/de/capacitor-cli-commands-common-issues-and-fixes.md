@@ -1,5 +1,5 @@
 ---
-slug: häufige-probleme-und-lösungen-für-capacitor-cli-befehle
+slug: capacitor-cli-commands-common-issues-and-fixes
 title: 'Capacitor CLI-Befehle: Häufige Probleme und Lösungen'
 description: >-
   Beheben Sie häufige Capacitor CLI-Probleme mit praktischen Lösungen für
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-cli-commands-common-issues-and-fixes
 ---
 **Mit [Capacitor](https://capacitorjs.com/) CLI-Fehlern zu kämpfen?** Hier ist ein schneller Leitfaden zur Behebung häufiger Probleme wie Plugin-Fehler, Build-Fehler und Netzwerkprobleme. Capacitor CLI ist wichtig für die Verwaltung von App-Updates, besonders Over-the-Air (OTA) Updates, die es ermöglichen, App-Store-Überprüfungen zu umgehen und Korrekturen schneller bereitzustellen. Hier sind die wichtigsten Punkte:
 

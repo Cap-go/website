@@ -1,5 +1,5 @@
 ---
-slug: 중국 사이버보안법이 앱 개발자에게 미치는 영향
+slug: how-chinas-cybersecurity-law-impacts-app-developers
 title: 중국의 사이버보안법이 앱 개발자에게 미치는 영향
 description: 중국의 사이버 보안법은 앱 개발자들에게 엄격한 데이터 처리 규칙을 부과하여 사용자 개인정보 보호와 규정 준수 전략에 영향을 미칩니다.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-chinas-cybersecurity-law-impacts-app-developers
 ---
 **[중국의 사이버보안법](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)은 앱 개발자들이 사용자 데이터를 다룰 때, 특히 중국 사용자를 대상으로 할 때 엄격한 규칙을 따르도록 요구합니다.** 알아야 할 사항은 다음과 같습니다:
 

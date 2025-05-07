@@ -1,5 +1,5 @@
 ---
-slug: 中国のデータプライバシー法がモバイルアプリに与える影響
+slug: chinas-data-privacy-laws-impact-on-mobile-apps
 title: 中国のデータプライバシー法：モバイルアプリへの影響
 description: >-
   モバイルアプリ開発者にとって、中国のデータプライバシー法を理解することは、コンプライアンス、ユーザーの同意、データセキュリティに焦点を当てる上で非常に重要です。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: chinas-data-privacy-laws-impact-on-mobile-apps
 ---
 中国市場向けのモバイルアプリを開発する場合、**中国のデータプライバシー法への準拠は必須**です。主要な規制 - **[サイバーセキュリティ法](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**、**[データセキュリティ法](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**、**[個人情報保護法](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - では、厳格な[データストレージ](https://capgo.app/plugins/capacitor-data-storage-sqlite/)、ユーザー同意、セキュリティ対策が求められます。
 

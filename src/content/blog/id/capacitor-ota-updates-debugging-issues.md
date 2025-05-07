@@ -1,5 +1,5 @@
 ---
-slug: pemecahan-masalah-pembaruan-capacitor-ota
+slug: dépannage-des-mises-à-jour-capacitor-ota
 title: Debugging Pembaruan OTA Capacitor
 description: >-
   Pelajari cara menyelesaikan masalah pembaruan OTA secara efektif, memastikan
@@ -18,7 +18,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: dépannage-des-mises-à-jour-capacitor-ota
 ---
 **Pembaruan OTA dapat mempercepat peningkatan aplikasi, namun pembaruan yang gagal menyebabkan masalah besar.** Berikut yang perlu Anda ketahui untuk memastikan pembaruan lancar dan memperbaiki masalah dengan cepat:
 

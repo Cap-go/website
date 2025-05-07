@@ -1,5 +1,5 @@
 ---
-slug: Google Play ストアで段階的な展開をする方法
+slug: google-play-distribuzione-scaglionata-come-funziona
 title: 'Google Play でのローリングアップデート: その仕組み'
 description: Google Play での段階的なリリースを通じてアプリのアップデートを効果的に管理し、安定性を確保してリスクを最小限に抑える方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: google-play-distribuzione-scaglionata-come-funziona
 ---
 **Google Playのステージドロールアウト**では、開発者は[アプリの更新](https://capgo.app/plugins/capacitor-updater/)を段階的にリリースでき、最初は少数のユーザーから開始して、徐々に全ユーザーに展開できます。これにより、安定性が確保され、問題を早期に発見し、リスクを最小限に抑えることができます。
 

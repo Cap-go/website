@@ -1,5 +1,6 @@
 ---
-slug: masalah-umum-live-update-dan-solusi-untuk-developer
+slug: >-
+  problemes-frequents-de-mise-a-jour-en-direct-et-solutions-pour-les-developpeurs
 title: Masalah dan Solusi Umum Live Updates untuk Developer
 description: >-
   Temukan lebih banyak solusi untuk tantangan umum dalam pembaruan langsung,
@@ -20,8 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: >-
-  problemes-frequents-de-mise-a-jour-en-direct-et-solutions-pour-les-developpeurs
 ---
 Live update memungkinkan pengembang untuk mendorong perubahan langsung ke pengguna tanpa penundaan app store. Namun mereka hadir dengan tantangan seperti masalah jaringan, konflik versi, dan masalah kompatibilitas perangkat. Panduan ini memberikan solusi untuk memastikan pembaruan yang lancar:
 

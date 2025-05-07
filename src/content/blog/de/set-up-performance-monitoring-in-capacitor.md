@@ -1,5 +1,5 @@
 ---
-slug: das-performance-monitoring-in-capacitor-einrichten
+slug: set-up-performance-monitoring-in-capacitor
 title: Performance-Monitoring in Capacitor einrichten
 description: >-
   Erfahren Sie, wie Sie mithilfe von Firebase und Sentry das
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: set-up-performance-monitoring-in-capacitor
 ---
 **Möchten Sie die Leistung Ihrer [Capacitor](https://capacitorjs.com/) App optimieren?** Mit Monitoring-Tools wie [Firebase](https://firebase.google.com/) und [Sentry](https://sentry.io/) können Sie Abstürze, Ressourcennutzung und Antwortzeiten überwachen und so ein reibungsloseres Nutzererlebnis gewährleisten. Hier eine kurze Übersicht:
 

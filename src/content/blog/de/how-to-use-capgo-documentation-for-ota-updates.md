@@ -1,5 +1,5 @@
 ---
-slug: wie-man-die-capgo-dokumentation-für-ota-updates-verwendet
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: So verwenden Sie die Capgo-Dokumentation für OTA-Updates
 description: >-
   Erfahren Sie, wie Sie sichere Over-the-Air-Updates in Ihren Capacitor-Apps mit
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-use-capgo-documentation-for-ota-updates
 ---
 **Benötigen Sie schnellere [App-Updates](https://capgo.app/plugins/capacitor-updater/) ohne App Store Verzögerungen?** Mit [Capgo](https://capgo.app/) können Sie Over-the-Air (OTA) Updates sofort und sicher an Ihre Nutzer ausliefern. Überspringen Sie App Store Überprüfungen und halten Sie Ihre App mühelos aktuell.
 

@@ -1,5 +1,5 @@
 ---
-slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
+slug: opciones-del-complemento-capacitor-para-actualizaciones-ota
 title: Options du Plugin Capacitor pour les Mises à jour OTA
 description: >-
   Explorez les avantages et les options de mises à jour OTA pour les
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: opciones-del-complemento-capacitor-para-actualizaciones-ota
 ---
 **Vous cherchez à mettre à jour vos applications [Capacitor](https://capacitorjs.com/) rapidement et en toute sécurité sans les délais des magasins d'applications ?** Les mises à jour Over-the-Air (OTA) vous permettent d'envoyer des modifications directement aux utilisateurs, économisant temps et bande passante. Voici ce que vous devez savoir :
 

@@ -1,5 +1,5 @@
 ---
-slug: herramientas-de-registro-de-errores-para-actualizaciones-ota-de-capacitor
+slug: fehlerprotokollierung-tools-fuer-capacitor-ota-updates
 title: Herramientas de registro de errores para Actualizaciones OTA de Capacitor
 description: >-
   Explore las principales herramientas de registro de errores para las
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: fehlerprotokollierung-tools-fuer-capacitor-ota-updates
 ---
 Las herramientas de registro de errores son esenciales para gestionar las actualizaciones Over-the-Air (OTA) de Capacitor. Ayudan a los desarrolladores a monitorear problemas, rastrear el rendimiento de las actualizaciones y asegurar la estabilidad de la aplicación. Este artículo compara cuatro herramientas populares - **[Sentry](https://sentry.io/)**, **[LogRocket](https://logrocket.com/)**, **[Bugsnag](https://www.bugsnag.com/)**, y **[Capgo](https://capgo.app/)** - destacando sus características, precios y facilidad de configuración.
 

@@ -1,5 +1,5 @@
 ---
-slug: despliegue-controlado-para-capacitor-live-updates
+slug: kontrollierte-bereitstellung-für-capacitor-live-updates
 title: Distribución de lanzamiento para actualizaciones en vivo de Capacitor
 description: >-
   Aprende cómo los lanzamientos graduales mejoran las actualizaciones de
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: kontrollierte-bereitstellung-für-capacitor-live-updates
 ---
 Los lanzamientos graduales te permiten actualizar aplicaciones de forma progresiva, comenzando con un pequeño grupo de usuarios y expandiéndose a medida que se confirma la estabilidad. Este enfoque reduce riesgos, asegura la calidad de la app y mejora la experiencia del usuario. Herramientas como [Capgo](https://capgo.app/) facilitan la gestión de estas actualizaciones cumpliendo con las reglas de las tiendas de aplicaciones.
 

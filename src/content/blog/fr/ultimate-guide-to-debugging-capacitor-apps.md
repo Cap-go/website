@@ -1,5 +1,5 @@
 ---
-slug: guide-de-debogage-des-applications-capacitor
+slug: guía-para-depurar-aplicaciones-capacitor
 title: Guide ultime de dépannage des applications Capacitor
 description: >-
   Découvrez des stratégies efficaces et des outils essentiels pour déboguer des
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: guía-para-depurar-aplicaciones-capacitor
 ---
 Le débogage des applications [Capacitor](https://capacitorjs.com/) peut être complexe en raison de leur nature hybride, mélangeant technologies web et natives. Ce guide simplifie le processus, couvrant les outils essentiels, les techniques et les conseils pour résoudre efficacement les problèmes.
 

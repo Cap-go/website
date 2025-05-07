@@ -1,5 +1,5 @@
 ---
-slug: aturan-privasi-apple-untuk-aplikasi-capacitor
+slug: règles-de-confidentialité-d'apple-pour-les-applications-capacitor
 title: Aturan Privasi Apple untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mematuhi aturan privasi Apple untuk pengembangan aplikasi dengan
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: règles-de-confidentialité-d'apple-pour-les-applications-capacitor
 ---
 **Aturan privasi Apple sekarang mengharuskan pengembang aplikasi [Capacitor](https://capacitorjs.com/) untuk fokus pada transparansi data pengguna dan kepatuhan untuk memastikan persetujuan App Store dan mempertahankan kepercayaan pengguna.**
 

@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: us-privacy-laws-mobile-app-checklist
 ---
 **Die Einhaltung des Datenschutzes ist für mobile Apps von entscheidender Bedeutung.** US-Datenschutzgesetze wie [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act), [VCDPA](https://pro.bloomberglaw.com/insights/privacy/virginia-consumer-data-protection-act-vcdpa/) und CPA verlangen von Apps den Schutz von Nutzerdaten, Transparenz und die Achtung der Nutzerrechte. Nichteinhaltung kann zu Strafen von bis zu 7.500 $ pro Verstoß und Verlust des Nutzervertrauens führen. So bleiben Sie konform:
 

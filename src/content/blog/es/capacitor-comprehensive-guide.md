@@ -1,5 +1,5 @@
 ---
-slug: guía-completa-de-capacitor
+slug: capacitor-comprehensive-guide
 title: 'Capacitor: Una Guía Completa'
 description: >-
   CapacitorJS es una poderosa herramienta que permite a los desarrolladores web
@@ -20,7 +20,6 @@ tag: Guides
 published: true
 locale: es
 next_blog: ''
-original_slug: capacitor-comprehensive-guide
 ---
 [Capacitor](https://capacitorjs.com/) es una herramienta versátil que permite a los desarrolladores web crear aplicaciones nativas para iOS, Android, Desktop y Progressive Web Apps utilizando una única base de código web estándar. Desarrollado por el equipo detrás de Ionic, Capacitor ha ganado una atención significativa en los últimos años a medida que los desarrolladores reconocen el potencial de las tecnologías web en plataformas móviles. En esta guía completa, responderemos algunas de las preguntas más comunes sobre Capacitor y exploraremos sus capacidades, casos de uso y beneficios.
 

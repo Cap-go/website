@@ -1,5 +1,5 @@
 ---
-slug: mises-a-jour-en-direct-auto-hebergees
+slug: selbst-gehostete-live-updates
 title: Mises à jour en direct auto-hébergées
 description: >-
   Je suis ravi d'annoncer Self-hosted Live Updates, la prochaine itération de
@@ -18,7 +18,6 @@ tag: Solution
 published: true
 locale: fr
 next_blog: ''
-original_slug: selbst-gehostete-live-updates
 ---
 Je suis ravi d'annoncer la sortie des Mises à jour en direct auto-hébergées, qui représente la dernière évolution des Mises à jour en direct de Capgo.
 

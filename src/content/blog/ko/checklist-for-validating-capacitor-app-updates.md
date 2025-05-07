@@ -1,5 +1,5 @@
 ---
-slug: 앱 업데이트 유효성 검사를 위한 체크리스트
+slug: checklist-for-validating-capacitor-app-updates
 title: Capacitor 앱 업데이트 유효성 검사를 위한 체크리스트
 description: 무선으로 업데이트 유효성을 검증하고 적절한 도구를 선택하기 위한 실행 가능한 체크리스트로 원활한 앱 업데이트를 보장하세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: checklist-for-validating-capacitor-app-updates
 ---
 [사용자 신뢰를 위협하지 않으면서 부드러운 앱 업데이트를 제공](https://capgo.app/plugins/capacitor-updater/)하고 싶으신가요? 다음은 [Capacitor](https://capacitorjs.com/) 앱 업데이트를 검증하기 위한 빠르고 실행 가능한 체크리스트입니다. 특히 무선(OTA) 업데이트를 사용할 때 유용합니다:
 

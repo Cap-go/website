@@ -1,5 +1,5 @@
 ---
-slug: testeo-de-actualizaciones-ota-de-capacitor-con-escenarios-simulados
+slug: testing-von-capacitor-ota-updates-mit-mock-szenarien
 title: Pruebas de actualizaciones OTA de Capacitor con escenarios simulados
 description: >-
   Aprende cómo probar efectivamente las actualizaciones OTA en aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: testing-von-capacitor-ota-updates-mit-mock-szenarien
 ---
 **Las actualizaciones OTA son un cambio revolucionario para las aplicaciones [Capacitor](https://capacitorjs.com/), permitiendo a los desarrolladores corregir errores y añadir funciones sin retrasos en las tiendas de aplicaciones. Pero probar estas actualizaciones a fondo es crucial para evitar fallos, pérdida de datos o funcionalidades rotas.**
 

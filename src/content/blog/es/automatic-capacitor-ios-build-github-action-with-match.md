@@ -1,5 +1,5 @@
 ---
-slug: automatic-compilación-capacitor-ios-github-action-con-match
+slug: automatic-capacitor-ios-build-github-action-with-match
 title: Construcción automática de Capacitor IOS con GitHub actions usando match
 description: >-
   Cómo configurar un pipeline CI/CD para tu aplicación IOS Ionic usando fastlane
@@ -16,7 +16,6 @@ tag: CI/CD
 published: true
 locale: es
 next_blog: automatic-capacitor-android-build-github-action
-original_slug: automatic-capacitor-ios-build-github-action-with-match
 ---
 # Compilaciones automáticas de iOS con GitHub Actions usando Match
 
@@ -36,7 +35,7 @@ Antes de comenzar, necesitarás configurar:
 
 ## Configuración Profesional de CI/CD por Capgo
 
-Salta la complejidad. [Capgo](https://capgo.app/ci-cd/) configura tu pipeline CI/CD directamente en tu plataforma preferida:
+Salta la complejidad. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura tu pipeline CI/CD directamente en tu plataforma preferida:
 
 - **Independencia de Plataforma**: Funciona con GitHub Actions, GitLab CI u otros
 - **Integración Perfecta**: No necesitas cambiar de plataforma, funciona con tu proceso actual

@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionne-la-version-dans-capgo
+slug: cómo-funciona-la-versión-en-capgo
 title: Comment fonctionne le contrôle de versions dans Capgo
 description: >-
   Comprendre comment Capgo gère les versions dans votre application Capacitor et
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: how-to-release-major-version-in-capgo
-original_slug: cómo-funciona-la-versión-en-capgo
 ---
 Here's the French translation:
 

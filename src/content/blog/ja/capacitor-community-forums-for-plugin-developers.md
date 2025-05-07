@@ -1,5 +1,5 @@
 ---
-slug: capacitor-community-プラグイン開発者向けフォーラム
+slug: capacitor-community-forums-for-plugin-developers
 title: Capacitor コミュニティのプラグイン開発者向けフォーラム
 description: Capacitorプラグイン開発者がトラブルシューティング、知識共有、開発体験の向上を行うための必須フォーラムをご紹介します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-community-forums-for-plugin-developers
 ---
 [Capacitor](https://capacitorjs.com/) フォーラムは、プラグイン開発者が問題を解決し、知識を共有し、他の開発者とつながるために不可欠です。トラブルシューティング、プラグインの共有、ベストプラクティスの学習など、これらのフォーラムは貴重なリソースとサポートを提供します。
 

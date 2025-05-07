@@ -1,5 +1,5 @@
 ---
-slug: wie-man-geolokalisierung-für-ota-updates-hinzufügt
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: So fügen Sie Geolocation-Targeting zu OTA-Updates hinzu
 description: >-
   Erfahren Sie, wie Sie Geolocation-Targeting in OTA-Updates implementieren, um
@@ -21,7 +21,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-add-geolocation-targeting-to-ota-updates
 ---
 **Möchten Sie [App-Updates](https://capgo.app/plugins/capacitor-updater/) bereitstellen, die auf den Standort der Nutzer zugeschnitten sind?** Standortbasiertes Targeting bei Over-the-Air (OTA) Updates macht dies möglich. Hier ist eine kurze Übersicht, wie Sie Geolokalisierung mit OTA-Updates kombinieren können, um Nutzererfahrung und Engagement zu verbessern:
 

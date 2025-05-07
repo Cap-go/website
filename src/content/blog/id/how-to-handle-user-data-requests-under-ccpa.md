@@ -1,5 +1,5 @@
 ---
-slug: cara-memproses-permintaan-pengguna-sesuai-ccpa
+slug: como-procesar-solicitudes-de-usuarios-segun-ccpa
 title: Pengelolaan Permintaan Data Pengguna Sesuai CCPA
 description: >-
   Pelajari cara mengelola permintaan pengguna secara efektif untuk pemrosesan
@@ -19,7 +19,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: como-procesar-solicitudes-de-usuarios-segun-ccpa
 ---
 California Consumer Privacy Act ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)) memberikan pengguna kontrol atas data pribadi mereka dan menetapkan aturan ketat untuk bisnis. Berikut yang perlu Anda ketahui untuk mematuhinya:
 

@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-langsung-untuk-aplikasi-flutter
+slug: mises-à-jour-en-direct-pour-application-flutter
 title: Update Flutter Secara Live
 description: >-
   Apakah mungkin mengirim pembaruan langsung ke aplikasi Flutter tanpa melalui
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: id
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: mises-à-jour-en-direct-pour-application-flutter
 ---
 Capgo Live Update adalah layanan yang memungkinkan pengembang untuk menerapkan pembaruan ke aplikasi seluler mereka tanpa melalui proses pengajuan App Store tradisional. Ini bisa menjadi cara yang praktis untuk memperbaiki bug dengan cepat atau membuat pembaruan kecil pada aplikasi tanpa menunggu proses peninjauan App Store. Namun, Capgo Live Update tidak mendukung pembaruan aplikasi Flutter karena aplikasi Flutter dikompilasi menjadi kode native.
 

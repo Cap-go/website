@@ -1,5 +1,5 @@
 ---
-slug: Licences open source
+slug: open-source-licecing
 title: Comprendre les licences de logiciels open source
 description: >-
   En matière de licences de logiciels open source, il existe deux grandes
@@ -19,7 +19,6 @@ tag: Open Source
 published: true
 locale: fr
 next_blog: ''
-original_slug: open-source-licecing
 ---
 Lorsqu'il s'agit de licences de logiciels open source, il existe deux grandes catégories. Certaines licences relèvent de la catégorie des licences copyleft, tandis que d'autres sont des licences open source permissives.
 

@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-plugin-contribution-guide
 ---
 [Capacitor](https://capacitorjs.com/) 플러그인은 웹 기술과 네이티브 기기 기능을 연결하여 [크로스 플랫폼 앱 개발](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/)을 가능하게 합니다. 이 가이드는 다음을 도와드립니다:
 

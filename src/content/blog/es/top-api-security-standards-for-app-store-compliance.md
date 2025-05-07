@@ -1,6 +1,5 @@
 ---
-slug: >-
-  estándares-de-seguridad-de-las-api-principales-para-la-conformidad-con-la-app-store
+slug: top-api-security-standards-für-app-store-konformität
 title: >-
   Estándares de seguridad de API principales para el cumplimiento de la App
   Store
@@ -23,7 +22,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: top-api-security-standards-für-app-store-konformität
 ---
 Asegurar la API de tu aplicación es crítico para cumplir con los requisitos de Apple App Store y Google Play. Esta guía describe **cinco estándares clave de seguridad de API** para ayudarte a cumplir con las reglas de la plataforma, proteger los datos del usuario y mejorar el rendimiento de la aplicación.
 

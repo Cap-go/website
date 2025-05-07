@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-업데이트-저사양-기기-성능-향상
+slug: capacitor-ota-updates-boosting-low-end-device-performance
 title: 'Capacitor OTA 업데이트: 저사양 기기 성능 향상'
 description: 다운로드 크기를 최소화하고 업데이트 효율성을 개선하여 저사양 기기에서 OTA 업데이트가 앱 성능을 향상시키는 방법에 대해 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-boosting-low-end-device-performance
 ---
 **저사양 기기에서 앱이 더 잘 실행되길 원하시나요? OTA 업데이트가 해답입니다.** [Capacitor](https://capacitorjs.com/)의 무선(OTA) 업데이트를 통해 앱에 필요한 변경사항만 푸시할 수 있습니다 - 전체 다운로드가 필요 없습니다. 이는 시간을 절약하고, 데이터 사용량을 줄이며, 특히 제한된 하드웨어나 느린 네트워크를 가진 사용자들의 성능을 향상시킵니다.
 

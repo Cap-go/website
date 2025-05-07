@@ -1,5 +1,5 @@
 ---
-slug: panduan-konfigurasi-pipeline-cicd-capacitor
+slug: guide-configuration-pipeline-cicd-capacitor
 title: Panduan Konfigurasi Pipeline CI/CD Capacitor
 description: >-
   Otomatiskan proses kompilasi, pengujian, dan penerapan aplikasi Capacitor Anda
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-configuration-pipeline-cicd-capacitor
 ---
 **Ingin [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) lebih cepat dengan usaha minimal?** Menyiapkan pipeline CI/CD untuk aplikasi [Capacitor](https://capacitorjs.com/) Anda mengotomatisasi proses build, pengujian, dan deployment, menghemat waktu dan mengurangi kesalahan. Berikut yang akan Anda capai:
 

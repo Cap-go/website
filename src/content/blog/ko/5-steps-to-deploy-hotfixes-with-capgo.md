@@ -1,5 +1,5 @@
 ---
-slug: 5단계로 Capgo를 통해 핫픽스 배포하기
+slug: 5-steps-to-deploy-hotfixes-with-capgo
 title: Capgo로 핫픽스 배포하는 5단계
 description: 앱스토어 지연을 피하고 규정 준수를 보장하는 간소화된 프로세스를 사용하여 핫픽스를 신속하고 안전하게 배포하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: 5-steps-to-deploy-hotfixes-with-capgo
 ---
 [Capgo](https://capgo.app/)는 앱스토어의 지연을 건너뛰면서도 Apple과 Google의 가이드라인을 준수하며 안전한 업데이트를 유지하면서 핫픽스 배포를 빠르고 쉽게 만듭니다. 다음은 프로세스의 간단한 개요입니다:
 

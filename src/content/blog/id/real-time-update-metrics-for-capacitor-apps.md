@@ -1,5 +1,5 @@
 ---
-slug: pembaruan-metrik-real-time-untuk-aplikasi-capacitor
+slug: mises-à-jour-en-temps-réel-des-métriques-pour-les-applications-capacitor
 title: Metrik Pembaruan Real-Time untuk Aplikasi Capacitor
 description: >-
   Pelajari cara melacak kinerja pembaruan aplikasi Anda secara efektif,
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: mises-à-jour-en-temps-réel-des-métriques-pour-les-applications-capacitor
 ---
 Ingin memastikan pembaruan aplikasi Anda cepat, andal, dan berdampak? Berikut yang perlu Anda ketahui:
 

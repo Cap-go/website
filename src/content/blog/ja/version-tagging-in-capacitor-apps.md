@@ -1,5 +1,5 @@
 ---
-slug: アプリのバージョニング管理（Capacitor）
+slug: versioning-delle-app-in-capacitor
 title: Capacitor アプリのバージョンタグの割り当て
 description: Capacitorアプリのバージョンタギングの基本要素を学び、アップデート、同期、自動化のベストプラクティスを理解しましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: versioning-delle-app-in-capacitor
 ---
 バージョンタグ付けは、[Capacitor](https://capacitorjs.com/)アプリを管理する上で不可欠です。iOS、Android、Webプラットフォーム全体でスムーズな更新、変更の追跡、アプリの信頼性向上を確保します。概要は以下の通りです：
 

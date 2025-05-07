@@ -1,5 +1,5 @@
 ---
-slug: APIキーのセキュリティ-アプリストアコンプライアンス
+slug: sicurezza-della-chiave-api-per-la-conformità-con-app-store
 title: API キー セキュリティのストア コンプライアンス
 description: アプリストアのガイドラインを遵守し、ユーザーデータを保護するために、APIキーの保存、転送、管理を含む重要な保護戦略について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: sicurezza-della-chiave-api-per-la-conformità-con-app-store
 ---
 **[API キー](https://capgo.app/docs/webapp/api-keys/)を安全に保管することは、ユーザーデータを保護し、アプリストアの規則を満たすために重要です。** キーが漏洩すると、データ侵害、サービスの悪用、アカウントの侵害につながる可能性があります。
 

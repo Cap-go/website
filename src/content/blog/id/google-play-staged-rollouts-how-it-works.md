@@ -1,5 +1,5 @@
 ---
-slug: bagaimana-cara-kerja-peluncuran-bertahap-di-google-play
+slug: comment-fonctionnent-les-deploiements-progressifs-google-play
 title: 'Pengenalan Langkah demi Langkah ke Google Play: Bagaimana Cara Kerjanya'
 description: >-
   Pelajari cara mengelola pembaruan aplikasi secara efektif dengan penerapan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: comment-fonctionnent-les-deploiements-progressifs-google-play
 ---
 **Staged rollouts di Google Play** memungkinkan pengembang merilis [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) secara bertahap, dimulai dengan persentase kecil pengguna sebelum diperluas ke semua pengguna. Ini memastikan stabilitas, mendeteksi masalah lebih awal, dan meminimalkan risiko.
 

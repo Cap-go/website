@@ -1,5 +1,5 @@
 ---
-slug: capacitor-앱에서-ota-업데이트-모니터링
+slug: monitor-ota-updates-in-capacitor-apps
 title: Capacitor 앱에서 OTA 업데이트 모니터링하기
 description: 빠르고 안전하며 신뢰할 수 있는 배포를 위해 모바일 앱에서 OTA 업데이트를 효과적으로 모니터링하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: monitor-ota-updates-in-capacitor-apps
 ---
 **앱 스토어 승인을 기다리지 않고 앱을 업데이트하고 싶으신가요?** OTA(Over-The-Air) 업데이트를 통해 실시간으로 수정사항과 기능을 사용자에게 직접 전달할 수 있습니다. [Capgo](https://capgo.app/)와 같은 도구를 사용하면 업데이트 성능을 모니터링하고, 오류를 추적하며, 문제가 있는 업데이트를 즉시 롤백할 수 있습니다.
 

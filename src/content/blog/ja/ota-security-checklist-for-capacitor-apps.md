@@ -1,5 +1,5 @@
 ---
-slug: アプリのOTAセキュリティチェックリスト
+slug: lista-di-controllo-della-sicurezza-ota-per-app-capacitor
 title: Capacitorアプリ用OTAセキュリティチェックリスト
 description: アプリのOTAアップデートにおける重要なセキュリティ対策（暗号化、アクセス制御、緊急対応戦略を含む）について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: lista-di-controllo-della-sicurezza-ota-per-app-capacitor
 ---
 **ユーザーデータを保護しアプリの整合性を維持するために、セキュアなOTAアップデートは不可欠です。**以下が重要なポイントです:
 

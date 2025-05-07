@@ -1,5 +1,5 @@
 ---
-slug: google-play-distribuzione-scaglionata-come-funziona
+slug: google-play-staged-rollouts-how-it-works
 title: 'Distribuzioni graduali di Google Play: come funziona'
 description: >-
   Impara a gestire efficacemente gli aggiornamenti delle app con i rilasci
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: google-play-staged-rollouts-how-it-works
 ---
 **I rollout graduali su Google Play** consentono agli sviluppatori di rilasciare [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) gradualmente, iniziando con una piccola percentuale di utenti prima di estenderli a tutti. Questo garantisce stabilità, individua i problemi in anticipo e riduce al minimo i rischi.
 

@@ -1,5 +1,5 @@
 ---
-slug: panduan-lengkap-mengelola-changelog-capacitor
+slug: guía-definitiva-manejo-changelog-capacitor
 title: 'Mengelola Log Perubahan Capacitor: Panduan Lengkap'
 description: >-
   Pelajari cara pengelolaan catatan perubahan yang efektif untuk aplikasi
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: guía-definitiva-manejo-changelog-capacitor
 ---
 Mengelola changelog sangat penting untuk menjaga transparansi dan keteraturan [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) Anda. Panduan ini menjelaskan cara membuat, menyusun, dan mengotomatisasi changelog untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), memastikan pengembang dan pengguna tetap mendapat informasi. Berikut yang akan Anda pelajari:
 

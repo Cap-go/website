@@ -1,5 +1,5 @@
 ---
-slug: APIセキュリティ標準のアプリストアコンプライアンス
+slug: standard-di-sicurezza-api-per-conformita-app-store
 title: App Store コンプライアンスのためのコア API セキュリティ標準
 description: API を安全に利用するための基本的な標準を学び、ユーザーデータを保護しながらアプリストアの要件を確実に満たすようにしましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: standard-di-sicurezza-api-per-conformita-app-store
 ---
 アプリのAPIのセキュリティ確保は、Apple App StoreとGoogle Playの要件を満たすために重要です。このガイドでは、プラットフォームのルールに準拠し、ユーザーデータを保護し、アプリのパフォーマンスを向上させるための**5つの重要なAPIセキュリティ基準**を説明します。
 

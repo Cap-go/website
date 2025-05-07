@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-pour-application-flutter
+slug: actualizaciones-en-vivo-para-aplicacion-flutter
 title: Mise à jour en direct de Flutter
 description: >-
   Est-il possible d'envoyer des mises à jour en direct aux applications Flutter
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: actualizaciones-en-vivo-para-aplicacion-flutter
 ---
 Capgo Live Update est un service qui permet aux développeurs de déployer des mises à jour de leurs applications mobiles sans passer par le processus traditionnel de soumission à l'App Store. Cela peut être un moyen pratique de corriger rapidement des bugs ou d'apporter de petites mises à jour à une application sans attendre le processus de révision de l'App Store. Cependant, Capgo Live Update ne prend pas en charge la mise à jour des applications Flutter car les applications Flutter sont compilées en code natif.
 

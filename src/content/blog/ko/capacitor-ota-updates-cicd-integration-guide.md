@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA 업데이트 CI/CD 통합 가이드
+slug: capacitor-ota-updates-cicd-integration-guide
 title: 'Capacitor OTA 업데이트: CI/CD 통합 가이드'
 description: CI/CD 파이프라인에 OTA 업데이트를 통합하여 더 빠른 앱 배포와 향상된 사용자 경험을 제공하는 방법을 알아보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-cicd-integration-guide
 ---
 [Capacitor](https://capacitorjs.com/)앱을 앱스토어 지연 없이 즉시 업데이트하고 싶으신가요? OTA(Over-the-Air) 업데이트를 통해 수정사항과 기능을 사용자의 기기에 직접 푸시할 수 있습니다. CI/CD 파이프라인과 결합하면 배포를 자동화하고, 버그 수정을 가속화하며, 사용자 경험을 개선할 수 있습니다.
 

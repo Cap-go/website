@@ -1,5 +1,5 @@
 ---
-slug: penanganan-kesalahan-dalam-aplikasi-capacitor-praktik-terbaik-ux
+slug: gestion-des-erreurs-dans-les-applications-capacitor-meilleures-pratiques-ux
 title: 'Penanganan Error dalam Aplikasi Capacitor: Praktik Terbaik UX'
 description: >-
   Penanganan kesalahan yang efektif dalam aplikasi meningkatkan pengalaman
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: gestion-des-erreurs-dans-les-applications-capacitor-meilleures-pratiques-ux
 ---
 **Penanganan error dapat membuat atau menghancurkan pengalaman pengguna aplikasi Anda.** Manajemen error yang buruk dapat menyebabkan pengguna frustrasi dan ulasan negatif, sementara penanganan error yang efektif membangun kepercayaan dan membuat pengguna puas. Berikut yang perlu Anda ketahui:
 

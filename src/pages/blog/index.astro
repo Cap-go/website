@@ -1,19 +1,52 @@
 ---
+import Blog from '@/components/Blog.astro'
+import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
 import { getCollection } from 'astro:content'
-import VueBlogIndex from '@/vue-pages/blog/index.vue'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { slug as slugify } from 'github-slugger'
 
+const config = useRuntimeConfig()
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
-const posts = (await getCollection('blog'))
+const allPosts = await getCollection('blog')
+
+const posts = allPosts
   .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale)
   .sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
+const tags = new Set<string>()
+allPosts.filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale).forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
+const uniqueTags = Array.from(tags).sort()
+
 if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title
-if (Astro.locals.runtimeConfig.public.blog_description) content['description'] = Astro.locals.runtimeConfig.public.blog_description
 if (Astro.locals.runtimeConfig.public.blog_keywords) content['keywords'] = Astro.locals.runtimeConfig.public.blog_keywords
+if (Astro.locals.runtimeConfig.public.blog_description) content['description'] = Astro.locals.runtimeConfig.public.blog_description
 ---
 
 <Layout {content}>
-  <VueBlogIndex locale={Astro.locals.locale} Content={posts} client:load />
+  <div class="flex w-full flex-col items-center py-8">
+    <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
+      <h1 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{m.latest_from_the_blog({}, { locale: Astro.locals.locale })}</h1>
+      <h2 class="mt-2 text-base leading-relaxed text-gray-50">
+        {config.public.blog_description}
+      </h2>
+      <div class="mt-8 flex flex-wrap gap-2">
+        {
+          uniqueTags.map((val) => (
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(val)}`)}
+              class="rounded-md border border-gray-400 px-3 py-2 text-xs font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
+            >
+              {val}
+            </a>
+          ))
+        }
+      </div>
+      <div class="mt-8 grid max-w-md grid-cols-1 gap-4 lg:max-w-full lg:grid-cols-3">
+        {posts.map((j) => <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} locale={j.data.locale} date={j.data.created_at} image={j.data.head_image} />)}
+      </div>
+    </div>
+  </div>
 </Layout>

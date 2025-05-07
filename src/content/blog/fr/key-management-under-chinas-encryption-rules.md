@@ -1,5 +1,5 @@
 ---
-slug: gestion-des-clés-sous-la-réglementation-chinoise-sur-le-chiffrement
+slug: schlüsselverwaltung-unter-chinas-verschlüsselungsvorschriften
 title: Gestion des clés selon la réglementation chinoise sur le chiffrement
 description: >-
   La compréhension des lois chinoises sur la gestion des clés de chiffrement est
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: schlüsselverwaltung-unter-chinas-verschlüsselungsvorschriften
 ---
 **La gestion des clés de chiffrement en Chine est complexe mais essentielle pour la conformité.** Voici ce que vous devez savoir :
 

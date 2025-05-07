@@ -1,5 +1,5 @@
 ---
-slug: アプリケーションアップデートの検証チェックリスト
+slug: checklist-for-validating-capacitor-app-updates
 title: Capacitor アプリのアップデート検証チェックリスト
 description: スムーズなアプリ更新を確実にするために、OTAアップデートの検証と適切なツールの選択のためのアクションチェックリストをご活用ください。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: checklist-for-validating-capacitor-app-updates
 ---
 **[スムーズなアプリのアップデート](https://capgo.app/plugins/capacitor-updater/)をユーザーの信頼を損なうことなく提供したいですか？** [Capacitor](https://capacitorjs.com/)アプリのアップデート、特にOTA(Over-the-Air)アップデートを検証するための簡単なチェックリストをご紹介します：
 

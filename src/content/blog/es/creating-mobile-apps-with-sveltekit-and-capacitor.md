@@ -1,5 +1,5 @@
 ---
-slug: creando-aplicaciones-moviles-con-sveltekit-y-capacitor
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Creando aplicaciones móviles con SvelteKit y Capacitor
 description: >-
   Aprende cómo construir una aplicación móvil usando SvelteKit, Capacitor y
@@ -18,7 +18,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
-original_slug: creating-mobile-apps-with-sveltekit-and-capacitor
 ---
 En este tutorial, comenzaremos con una nueva aplicación de [SvelteKit](https://kit.svelte.dev/) y la transformaremos en desarrollo móvil nativo usando Capacitor. Opcionalmente, también puedes integrar [Konsta UI](https://konstaui.com/) para una interfaz móvil mejorada con Tailwind CSS.
 

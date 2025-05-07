@@ -1,5 +1,5 @@
 ---
-slug: pengelolaan-dependensi-dalam-proyek-capacitor
+slug: gestion-des-dependances-dans-les-projets-capacitor
 title: Mengelola Dependensi dalam Proyek Capacitor
 description: >-
   Temukan strategi penting untuk mengelola dependensi dalam proyek Capacitor
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: gestion-des-dependances-dans-les-projets-capacitor
 ---
 Mengelola dependensi dalam proyek [Capacitor](https://capacitorjs.com/) sangat penting untuk memastikan keamanan, mengurangi utang teknis, dan mempertahankan kompatibilitas lintas platform. Berikut yang perlu Anda ketahui:
 

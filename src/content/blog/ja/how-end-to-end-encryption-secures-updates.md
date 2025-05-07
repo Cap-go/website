@@ -1,5 +1,5 @@
 ---
-slug: エンドツーエンドの暗号化がアップデートを保護する方法
+slug: come-la-crittografia-end-to-end-protegge-gli-aggiornamenti
 title: エンドツーエンド暗号化によるアップデートの保護について
 description: エンドツーエンドの暗号化がOTAアップデートをどのように保護し、アプリの整合性とユーザーの信頼を確保し、不正アクセスや改ざんを防止するかを探ります。
 author: Martin Donadieu
@@ -15,7 +15,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-la-crittografia-end-to-end-protegge-gli-aggiornamenti
 ---
 **エンドツーエンド暗号化(E2EE)**は、アプリのOTA(Over-the-Air)アップデートを保護する最適な方法です。意図されたユーザーのみがアップデートを復号化してインストールできることを保証し、改ざん、コード注入、データ漏洩などのリスクから保護します。[Capgo](https://capgo.app/)のようなプラットフォームは、AppleやGoogleが要求するセキュリティ基準を満たしながら、アプリの完全性を保護するためにE2EEを実装しています。
 

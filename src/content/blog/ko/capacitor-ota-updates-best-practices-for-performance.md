@@ -1,5 +1,5 @@
 ---
-slug: 성능을 위한 Capacitor OTA 업데이트 모범 사례
+slug: capacitor-ota-updates-best-practices-for-performance
 title: 'Capacitor OTA 업데이트: 성능을 위한 모범 사례'
 description: >-
   Capacitor 앱에서 파일 크기, 코드 로딩, 보안에 대한 모범 사례를 통해 OTA 업데이트를 최적화하여 성능과 사용자 경험을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-best-practices-for-performance
 ---
 OTA(Over-the-Air) 업데이트를 통해 [Capacitor](https://capacitorjs.com/) 앱은 앱스토어 제출 없이 JavaScript, CSS, HTML과 같은 콘텐츠를 업데이트할 수 있습니다. 편리하지만 이러한 업데이트는 앱 시작 성능에 영향을 미칠 수 있습니다. 더 나은 성능과 사용자 경험을 위한 OTA 업데이트 최적화 가이드입니다:
 

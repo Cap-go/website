@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-updates-vs-traditionelle-testmethoden
+slug: capacitor-ota-updates-vs-traditional-testing-methods
 title: Capacitor OTA Updates vs. traditionelle Testmethoden
 description: >-
   Entdecken Sie die Unterschiede zwischen Capacitor OTA-Updates und
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-vs-traditional-testing-methods
 ---
 **Möchten Sie schnellere [App-Updates](https://capgo.app/plugins/capacitor-updater/) ohne App Store-Verzögerungen?** [Capacitor](https://capacitorjs.com/) OTA-Updates ermöglichen sofortige Änderungen, während traditionelles Testen gründliche Qualität vor der Veröffentlichung sicherstellt. Hier ein schneller Vergleich:
 

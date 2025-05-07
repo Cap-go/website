@@ -1,5 +1,5 @@
 ---
-slug: perche-la-gestione-del-consenso-e-importante-per-la-conformita-delle-app
+slug: why-consent-management-matters-for-app-compliance
 title: Perché la gestione del consenso è importante per la conformità delle app
 description: >-
   Comprendere la gestione del consenso è fondamentale per la conformità delle
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: why-consent-management-matters-for-app-compliance
 ---
 **La gestione del consenso degli utenti è fondamentale per la conformità delle app.** Leggi sulla privacy come [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) e [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) richiedono che le app ottengano il consenso esplicito degli utenti per la raccolta e l'utilizzo dei dati. Senza questo, rischi multe, problemi legali e perdita di fiducia degli utenti. Ecco cosa devi sapere:
 

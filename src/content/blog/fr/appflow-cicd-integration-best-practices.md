@@ -1,5 +1,5 @@
 ---
-slug: praktik-terbaik-untuk-integrasi-cicd-appflow
+slug: pratiques-recommandées-pour-l'intégration-cicd-appflow
 title: 'Integrasi CI/CD Appflow: Praktik Terbaik'
 description: >-
   Jelajahi praktik terbaik untuk mengintegrasikan solusi CI/CD dalam
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: pratiques-recommandées-pour-l'intégration-cicd-appflow
 ---
 [Appflow](https://ionic.io/appflow/) CI/CD simplifie les [mises à jour d'applications mobiles](https://capgo.app/plugins/capacitor-updater/) avec des mises à jour over-the-air (OTA), permettant à **95% des utilisateurs de recevoir des mises à jour dans les 24 heures**. Il offre des outils automatisés pour les builds iOS et Android, les déploiements sur l'app store et la gestion en ligne de commande. Cependant, l'augmentation des coûts (jusqu'à 6 000 € par an) a conduit certaines équipes à explorer des alternatives comme [Capgo](https://capgo.app/), qui offre des mises à jour plus rapides et des prix plus bas.
 

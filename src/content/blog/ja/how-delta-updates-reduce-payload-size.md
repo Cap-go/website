@@ -1,5 +1,5 @@
 ---
-slug: デルタ更新によってペイロードサイズがどのように削減されるか
+slug: come-gli-aggiornamenti-delta-riducono-le-dimensioni-del-payload
 title: Deltaアップデートによるペイロードサイズの削減
 description: >-
   デルタアップデートがダウンロードサイズを最小限に抑え、迅速で信頼性の高いアップデートでユーザー体験を向上させ、アプリのパフォーマンスを改善する方法をご覧ください。
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-gli-aggiornamenti-delta-riducono-le-dimensioni-del-payload
 ---
 デルタアップデートは、アプリ全体ではなく変更された部分のみを送信することで、アップデートをより速く、より小さくします。具体的には:
 

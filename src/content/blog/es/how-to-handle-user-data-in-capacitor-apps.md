@@ -1,5 +1,5 @@
 ---
-slug: como-administrar-datos-de-usuario-en-aplicaciones-capacitor
+slug: wie-man-benutzerdaten-in-capacitor-apps-verwaltet
 title: Cómo gestionar datos de usuario en aplicaciones de Capacitor
 description: >-
   Aprende estrategias efectivas para manejar datos de usuario en aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: wie-man-benutzerdaten-in-capacitor-apps-verwaltet
 ---
 **El manejo de datos de usuario en aplicaciones [Capacitor](https://capacitorjs.com/) requiere un almacenamiento seguro, políticas claras de retención y cumplimiento con leyes de protección de datos como [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) y [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act).** Esta guía explica cómo minimizar la recolección de datos, asegurar información sensible y gestionar permisos efectivamente. Aquí un resumen rápido:
 

@@ -1,5 +1,5 @@
 ---
-slug: come-inviare-una-versione-specifica-agli-utenti
+slug: how-to-send-specific-version-to-users
 title: Come inviare un aggiornamento specifico a un utente o a un gruppo
 description: >-
   Permetti ai tuoi utenti di provare la versione beta senza la necessità di
@@ -19,7 +19,6 @@ tag: alternatives
 published: true
 locale: it
 next_blog: ''
-original_slug: how-to-send-specific-version-to-users
 ---
 ## Prefazione
 

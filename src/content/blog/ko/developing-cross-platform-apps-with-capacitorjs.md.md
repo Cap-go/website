@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터js를 활용한 크로스플랫폼 앱 개발
+slug: developing-cross-platform-apps-with-capacitorjs
 title: 'CapacitorJS로 크로스 플랫폼 앱 개발하기: 단계별 가이드'
 description: >-
   CapacitorJS를 사용하여 Android, iOS 및 웹(PWA)을 위한 단일 JavaScript 코드베이스로 크로스 플랫폼
@@ -18,7 +18,6 @@ tag: Tuto
 published: true
 locale: ko
 next_blog: ''
-original_slug: developing-cross-platform-apps-with-capacitorjs
 ---
 모바일 애플리케이션 개발의 진화하는 세계에서 Progressive Web Applications(PWA)의 부상은 새로운 크로스 플랫폼 런타임의 길을 열었습니다. 이러한 런타임은 네이티브 코드에만 의존하지 않고도 웹 기반 애플리케이션이 앱 스토어에 존재할 수 있게 해줍니다. 이를 가능하게 하는 기술 중 하나가 [**CapacitorJS**](https://capacitorjs.com/)입니다. 이를 통해 개발자는 단일 JavaScript 코드베이스를 사용하여 간단한 웹사이트를 Android, iOS 및 웹 전반에 걸쳐 애플리케이션으로 배포할 수 있습니다. 이 접근 방식은 개발 비용을 크게 줄이고 코딩 효율성을 높입니다.
 

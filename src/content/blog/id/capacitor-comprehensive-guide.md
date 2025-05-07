@@ -1,5 +1,5 @@
 ---
-slug: panduan-lengkap-capacitor
+slug: guide-complet-de-capacitor
 title: 'Capacitor : Panduan Lengkap'
 description: >-
   Capacitor adalah alat yang ampuh yang memungkinkan developer web untuk membuat
@@ -20,7 +20,6 @@ tag: Guides
 published: true
 locale: id
 next_blog: ''
-original_slug: guide-complet-de-capacitor
 ---
 [Capacitor](https://capacitorjs.com/) adalah alat serbaguna yang memungkinkan pengembang web membuat aplikasi native iOS, Android, Desktop, dan Progressive Web Apps menggunakan satu basis kode web standar. Dikembangkan oleh tim di balik Ionic, Capacitor telah mendapatkan perhatian signifikan dalam beberapa tahun terakhir karena pengembang menyadari potensi teknologi web pada platform mobile. Dalam panduan komprehensif ini, kita akan menjawab beberapa pertanyaan umum tentang Capacitor dan mengeksplorasi kemampuan, kasus penggunaan, dan manfaatnya.
 

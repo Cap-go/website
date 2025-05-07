@@ -1,5 +1,5 @@
 ---
-slug: capacitor-버전-일치-불일치-오류-수정
+slug: fix-capacitor-version-mismatch-errors
 title: Capacitor 버전 불일치 오류 수정
 description: |-
   Capacitor 앱에서 버전 불일치 오류를 신속하게 해결하여 빌드 중단과
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: fix-capacitor-version-mismatch-errors
 ---
 [Capacitor](https://capacitorjs.com/) 앱의 버전 불일치 오류는 빌드를 방해하고, 런타임 충돌을 일으키며, 업데이트를 지연시킬 수 있습니다. 이러한 문제는 코어 패키지, 플러그인 또는 종속성이 잘못 정렬될 때 발생합니다. 다음과 같이 빠르게 해결할 수 있습니다:
 

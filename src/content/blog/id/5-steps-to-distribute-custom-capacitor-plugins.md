@@ -1,5 +1,5 @@
 ---
-slug: 5-langkah-untuk-mendistribusikan-plugin-kustom-capacitor
+slug: 5-steps-to-distribute-custom-capacitor-plugins
 title: 5 Langkah untuk Mendistribusikan Plugin Capacitor Kustom
 description: >-
   Pelajari cara mendistribusikan plugin kustom secara efektif untuk meningkatkan
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: 5-steps-to-distribute-custom-capacitor-plugins
 ---
 Mendistribusikan plugin [Capacitor](https://capacitorjs.com/) kustom dapat meningkatkan fungsionalitas aplikasi Anda sambil memastikan pembaruan cepat sampai ke pengguna. Berikut panduan singkat untuk memulai:
 

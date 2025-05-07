@@ -1,5 +1,5 @@
 ---
-slug: configurazione-ambiente-locale-capacitor
+slug: setting-up-capacitor-local-environment
 title: Configurazione dell'Ambiente Locale di Capacitor
 description: >-
   Scopri come configurare rapidamente un ambiente Capacitor locale per creare
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: setting-up-capacitor-local-environment
 ---
 **Vuoi creare app iOS e Android utilizzando tecnologie web? Ecco come configurare rapidamente ed efficacemente un ambiente [Capacitor](https://capacitorjs.com/) locale.**
 

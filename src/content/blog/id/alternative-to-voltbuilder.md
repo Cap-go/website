@@ -1,5 +1,5 @@
 ---
-slug: alternatif-a-voltbuilder
+slug: alternative-a-voltbuilder
 title: Alternatif untuk Voltbuilder
 description: >-
   Voltbuilder menawarkan cara sederhana untuk mengubah proyek web menjadi
@@ -19,7 +19,6 @@ tag: Alternatives
 published: true
 locale: id
 next_blog: ''
-original_slug: alternative-a-voltbuilder
 ---
 Voltbuilder adalah platform berbasis cloud yang memungkinkan pengembang mengubah proyek web mereka menjadi aplikasi seluler native untuk Android dan iOS menggunakan HTML, CSS, dan JavaScript. Platform ini menawarkan berbagai fitur yang dirancang untuk menyederhanakan proses pengembangan aplikasi, termasuk pengaturan yang mudah, pembuatan dan pengunggahan aplikasi otomatis, serta dukungan untuk plugin Apache Cordova.
 

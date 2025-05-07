@@ -1,5 +1,5 @@
 ---
-slug: wie-man-ota-updates-für-capacitor-apps-plant
+slug: how-to-schedule-ota-updates-for-capacitor-apps
 title: So planen Sie OTA-Updates für Capacitor Apps
 description: >-
   Erfahren Sie, wie Sie OTA-Updates für Ihre mobile App effektiv planen, um
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-schedule-ota-updates-for-capacitor-apps
 ---
 **Möchten Sie Ihre** [**Capacitor**](https://capacitorjs.com/) **App ohne App Store Verzögerungen aktualisieren? Over-the-Air (OTA) Updates ermöglichen es Ihnen, Fehlerbehebungen, neue Funktionen und Verbesserungen direkt und in Echtzeit an Benutzer zu übermitteln.** Hier erfahren Sie, wie Sie diese effektiv planen können:
 

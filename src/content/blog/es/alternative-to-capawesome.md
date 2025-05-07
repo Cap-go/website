@@ -1,5 +1,5 @@
 ---
-slug: alternativa-a-capawesome
+slug: alternative-to-capawesome
 title: Alternativa a Capawesome
 description: >-
   Capawesome se ha inspirado en el sistema Capgo, el sistema es menos completo
@@ -18,7 +18,6 @@ tag: Alternatives
 published: false
 locale: es
 next_blog: ''
-original_slug: alternative-to-capawesome
 ---
 Capawesome Cloud es una solución alternativa a Capgo, digamos que es su hermano pequeño hecho por
 

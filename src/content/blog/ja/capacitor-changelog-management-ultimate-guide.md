@@ -1,5 +1,5 @@
 ---
-slug: Capacitorの変更履歴管理-完全ガイド
+slug: gestione-dei-changelog-di-capacitor-guida-completa
 title: Capacitorのチェンジログ管理：完全ガイド
 description: >-
   Capacitor
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: gestione-dei-changelog-di-capacitor-guida-completa
 ---
 [アプリの更新](https://capgo.app/plugins/capacitor-updater/)を透明性を持って整理するためには、変更履歴の管理が不可欠です。このガイドでは、[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)の変更履歴の作成、構造化、自動化について説明し、開発者とユーザーの両方が情報を把握できるようにします。学べる内容:
 

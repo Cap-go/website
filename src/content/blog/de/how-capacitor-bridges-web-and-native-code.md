@@ -1,5 +1,5 @@
 ---
-slug: wie-capacitor-web-und-nativen-code-verbindet
+slug: how-capacitor-bridges-web-and-native-code
 title: Wie Capacitor Web- und nativen Code überbrückt
 description: >-
   Entdecken Sie, wie eine native Brücke die nahtlose Kommunikation zwischen Web-
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: how-capacitor-bridges-web-and-native-code
 ---
 -   **Native Bridge**: Übersetzt JavaScript in native Aktionen (z.B. [Zugriff auf die Kamera](https://capgo.app/plugins/camera-preview/) oder GPS).
 -   **Plugin-System**: Verbindet Web- und Native-Ebenen sicher für eine reibungslose Kommunikation.

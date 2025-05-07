@@ -1,6 +1,5 @@
 ---
-slug: >-
-  aggiorna-le-tue-app-capacitor-in-modo-trasparente-utilizzando-capacitor-updater
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: Aggiorna le tue app Capacitor senza interruzioni utilizzando Capacitor-updater
 description: >-
   Saluti alla Community Ionic Capacitor, oggi vi aiuterò a configurare
@@ -20,7 +19,6 @@ tag: Tutorial
 published: true
 locale: it
 next_blog: ''
-original_slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 ## Cos'è Capacitor-updater?
 

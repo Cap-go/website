@@ -1,5 +1,5 @@
 ---
-slug: Solusi Pembaruan Aplikasi Open Source vs Proprietary
+slug: Solutions de mise à jour d'applications open source vs propriétaires
 title: Solusi open source vs proprietary untuk update aplikasi
 description: >-
   Pelajari perbedaan antara solusi pembaruan aplikasi open source dan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Solutions de mise à jour d'applications open source vs propriétaires
 ---
 Menjaga aplikasi Anda tetap terbarui sangat penting untuk keamanan dan kepuasan pengguna. Pilihan antara solusi update open-source dan proprietary tergantung pada prioritas Anda: fleksibilitas dan biaya atau kemudahan penggunaan dan dukungan.
 

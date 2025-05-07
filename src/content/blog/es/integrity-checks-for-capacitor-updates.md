@@ -1,5 +1,5 @@
 ---
-slug: Verificación de integridad para actualizaciones de Capacitor
+slug: Integritätsprüfungen für Capacitor-Updates
 title: Comprobaciones de integridad para actualizaciones de Capacitor
 description: >-
   Aprende cómo implementar actualizaciones OTA seguras para aplicaciones
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: Integritätsprüfungen für Capacitor-Updates
 ---
 **Las actualizaciones OTA seguras para aplicaciones de [Capacitor](https://capacitorjs.com/) son esenciales para proteger a los usuarios y sus datos.** Aquí te mostramos cómo garantizar actualizaciones seguras:
 

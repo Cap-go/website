@@ -1,6 +1,5 @@
 ---
-slug: >-
-  problemas-frecuentes-de-actualizacion-en-vivo-y-soluciones-para-desarrolladores
+slug: häufige-live-update-probleme-und-lösungen-für-entwickler
 title: Problemas y soluciones comunes de actualizaciones en vivo para desarrolladores
 description: >-
   Aprenda más sobre las soluciones para desafíos comunes en actualizaciones en
@@ -21,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: häufige-live-update-probleme-und-lösungen-für-entwickler
 ---
 Las actualizaciones en vivo permiten a los desarrolladores enviar cambios directamente a los usuarios sin retrasos en la tienda de aplicaciones. Pero vienen con desafíos como problemas de red, conflictos de versiones y problemas de compatibilidad de dispositivos. Esta guía proporciona soluciones para garantizar actualizaciones sin problemas:
 

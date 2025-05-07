@@ -1,5 +1,5 @@
 ---
-slug: creando-aplicaciones-moviles-con-react-y-capacitor
+slug: creating-mobile-apps-with-react-and-capacitor
 title: Creando Aplicaciones Móviles con React.js y Capacitor
 description: >-
   Una guía sobre cómo transformar una aplicación web de React.js en una
@@ -19,7 +19,6 @@ tag: Tutorial
 published: true
 locale: es
 next_blog: implementing-live-updates-in-your-react-capacitor-app
-original_slug: creating-mobile-apps-with-react-and-capacitor
 ---
 Este tutorial te guiará en la creación de una aplicación móvil usando React, Capacitor y Konsta UI. Al final, sabrás cómo transformar una aplicación web React.js en una aplicación móvil nativa con Capacitor, e implementar una interfaz nativa usando Konsta UI.
 

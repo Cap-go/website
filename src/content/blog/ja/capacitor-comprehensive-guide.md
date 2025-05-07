@@ -1,5 +1,5 @@
 ---
-slug: capacitorの包括的なガイド
+slug: capacitor-comprehensive-guide
 title: 'Capacitor: 総合ガイド'
 description: >-
   CapacitorJSは、Web開発者が単一の標準WebコードベースでネイティブのiOS、Android、デスクトップ、プログレッシブWebアプリを構築できる強力なツールです。この包括的なガイドでCapacitorについて知っておくべきことをすべて学びましょう。
@@ -17,7 +17,6 @@ tag: Guides
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-comprehensive-guide
 ---
 [Capacitor](https://capacitorjs.com/) は、開発者が単一の標準的なWebコードベースを使用して、ネイティブのiOS、Android、デスクトップ、およびプログレッシブWebアプリを作成できる多目的ツールです。Ionicチームによって開発されたCapacitorは、開発者がモバイルプラットフォームでのWeb技術の可能性を認識するにつれて、近年大きな注目を集めています。この包括的なガイドでは、Capacitorに関する一般的な質問に答え、その機能、ユースケース、利点について探ります。
 

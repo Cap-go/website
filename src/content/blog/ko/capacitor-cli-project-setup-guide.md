@@ -1,5 +1,5 @@
 ---
-slug: capacitor-cli-프로젝트-설정-가이드
+slug: capacitor-cli-project-setup-guide
 title: 'Capacitor CLI: 프로젝트 설정 가이드'
 description: >-
   몇 가지 간단한 단계를 통해 웹 기술을 사용하여 네이티브 iOS 및 Android 앱을 빌드하기 위한 Capacitor CLI 설정 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-cli-project-setup-guide
 ---
 **하나의 코드베이스로 iOS와 Android 앱을 만들고 싶으신가요?** [Capacitor](https://capacitorjs.com/) CLI를 사용하면 웹 기술로 네이티브 앱을 만드는 과정이 간단해집니다. 다음과 같은 내용을 배우게 됩니다:
 

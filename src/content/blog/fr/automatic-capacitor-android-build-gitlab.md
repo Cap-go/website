@@ -39,7 +39,7 @@ Avant de commencer, vous devrez configurer :
 
 ## Configuration CI/CD professionnelle par Capgo
 
-Évitez la complexité, [Capgo](https://capgoapp/ci-cd/) configure votre pipeline CI/CD directement sur votre plateforme préférée :
+Évitez la complexité, [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configure votre pipeline CI/CD directement sur votre plateforme préférée :
 
 - **Indépendance de plateforme** : Fonctionne avec GitHub Actions, GitLab CI ou autres
 - **Intégration transparente** : Pas besoin de changer de plateforme, fonctionne avec votre processus actuel

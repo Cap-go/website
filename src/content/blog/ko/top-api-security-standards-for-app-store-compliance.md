@@ -1,5 +1,5 @@
 ---
-slug: 앱스토어 규정 준수를 위한 최고의 API 보안 표준
+slug: top-api-security-standards-for-app-store-compliance
 title: 앱스토어 규정 준수를 위한 최고의 API 보안 표준
 description: API 보안 표준을 학습하여 앱이 사용자 데이터를 보호하면서 앱 스토어 요구사항을 준수하도록 보장하세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ko
 next_blog: ''
-original_slug: top-api-security-standards-for-app-store-compliance
 ---
 앱의 API 보안은 Apple App Store 및 Google Play 요구 사항을 충족하는데 매우 중요합니다. 이 가이드는 플랫폼 규칙을 준수하고, 사용자 데이터를 보호하며, 앱 성능을 향상시키는데 도움이 되는 **다섯 가지 주요 API 보안 표준**을 설명합니다.
 

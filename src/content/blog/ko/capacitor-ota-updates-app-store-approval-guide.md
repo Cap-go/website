@@ -1,5 +1,5 @@
 ---
-slug: 스토어 승인 관련 Capacitor 자동 업데이트 가이드
+slug: capacitor-ota-updates-app-store-approval-guide
 title: 'Capacitor OTA 업데이트: 앱스토어 승인 가이드'
 description: >-
   Capacitor 앱의 OTA 업데이트에 대한 App Store와 Play Store 가이드라인을 준수하고 보안을 유지하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-ota-updates-app-store-approval-guide
 ---
 ### 주요 시사점:
 

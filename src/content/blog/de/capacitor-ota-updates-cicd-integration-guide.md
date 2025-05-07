@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-updates-ci/cd-integrationsanleitung
+slug: capacitor-ota-updates-cicd-integration-guide
 title: 'Capacitor OTA Updates: CI/CD-Integrationsleitfaden'
 description: >-
   Erfahren Sie, wie Sie OTA-Updates in Ihre CI/CD-Pipeline integrieren, um
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-cicd-integration-guide
 ---
 **Möchten Sie Ihre [Capacitor](https://capacitorjs.com/)-App sofort ohne App-Store-Verzögerungen aktualisieren?** Over-the-Air (OTA) Updates ermöglichen es Ihnen, Fehlerbehebungen und Funktionen direkt auf die Geräte der Benutzer zu übertragen. In Kombination mit einer CI/CD-Pipeline können Sie Bereitstellungen automatisieren, Fehlerbehebungen beschleunigen und die Benutzererfahrung verbessern.
 

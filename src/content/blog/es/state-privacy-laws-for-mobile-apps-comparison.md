@@ -1,5 +1,5 @@
 ---
-slug: leyes-estatales-de-privacidad-para-apps-moviles-comparativa
+slug: datenschutzgesetze-der-bundesstaaten-fuer-mobile-apps-vergleich
 title: 'Leyes de privacidad estatales para aplicaciones móviles: Una comparación'
 description: >-
   Explore las principales diferencias en las leyes de privacidad para
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: datenschutzgesetze-der-bundesstaaten-fuer-mobile-apps-vergleich
 ---
 Las leyes de privacidad de aplicaciones móviles varían según los estados, y comprenderlas es crucial para los desarrolladores. Aquí hay una descripción general rápida de las principales regulaciones de privacidad en California, Virginia y Colorado:
 

@@ -1,5 +1,5 @@
 ---
-slug: android-desactiver-talkback
+slug: android-desactivar-talkback
 title: Comment désactiver et utiliser TalkBack sur les appareils Android
 description: >-
   Instructions étape par étape pour activer et naviguer avec TalkBack, le
@@ -18,7 +18,6 @@ tag: Android
 published: true
 locale: fr
 next_blog: ''
-original_slug: android-desactivar-talkback
 ---
 TalkBack est une fonctionnalité essentielle pour les utilisateurs malvoyants, intégrée aux appareils Android. C'est un lecteur d'écran basé sur les gestes qui vocalise le contenu de votre écran, aidant à la navigation et à l'interaction avec différents éléments. Voici un guide complet sur l'activation et l'utilisation de TalkBack.
 

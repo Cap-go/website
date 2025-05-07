@@ -1,5 +1,5 @@
 ---
-slug: APIリクエストの頻度制限によるAppStore適合対応
+slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
 title: API頻度制限のApp Store対応
 description: APIレート制限の手法とアプリストアのコンプライアンス、セキュリティ、システムパフォーマンスにおけるその重要性について学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: ja
 next_blog: ''
-original_slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
 ---
 APIレート制限により、アプリがAppleとGoogleのガイドラインを満たし、システムの過負荷や乱用から保護されます。ユーザーのリクエスト頻度を制限することで、セキュリティの向上、コスト削減、スムーズなパフォーマンスを確保できます。以下が重要なポイントです：
 

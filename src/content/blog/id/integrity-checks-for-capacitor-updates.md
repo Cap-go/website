@@ -1,5 +1,5 @@
 ---
-slug: Verifikasi Integritas untuk Pembaruan Capacitor
+slug: Verificación de integridad para actualizaciones de Capacitor
 title: Pemeriksaan Integritas untuk Pembaruan Capacitor
 description: >-
   Pelajari cara menerapkan pembaruan OTA yang aman untuk aplikasi Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: Verificación de integridad para actualizaciones de Capacitor
 ---
 **Pembaruan OTA yang aman untuk aplikasi [Capacitor](https://capacitorjs.com/) sangat penting untuk melindungi pengguna dan data mereka.** Berikut cara memastikan pembaruan yang aman:
 

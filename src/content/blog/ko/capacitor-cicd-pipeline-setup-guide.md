@@ -1,5 +1,5 @@
 ---
-slug: capacitor-cicd-pipeline-설정-가이드
+slug: capacitor-cicd-pipeline-setup-guide
 title: Capacitor CI/CD 파이프라인 설정 가이드
 description: 'Capacitor 앱의 빌드, 테스트, 배포 프로세스를 CI/CD 파이프라인으로 자동화하여 더 빠른 업데이트와 향상된 효율성을 확보하세요.'
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: capacitor-cicd-pipeline-setup-guide
 ---
 **최소한의 노력으로 더 빠른 [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 원하시나요?** [Capacitor](https://capacitorjs.com/) 앱을 위한 CI/CD 파이프라인을 구축하면 빌드, 테스트, 배포를 자동화하여 시간을 절약하고 오류를 줄일 수 있습니다. 다음과 같은 이점을 얻을 수 있습니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: pengaturan-android-untuk-aplikasi-capacitor
+slug: android-setup-for-capacitor-apps
 title: Pengaturan Android untuk Aplikasi Capacitor
 description: >-
   Siapkan lingkungan pengembangan Android Anda untuk aplikasi Capacitor dengan
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: android-setup-for-capacitor-apps
 ---
 **Ingin membangun aplikasi Android dengan [Capacitor](https://capacitorjs.com/)?** Berikut semua yang Anda butuhkan untuk menyiapkan lingkungan pengembangan Anda dengan cepat dan efisien. Capacitor menghubungkan teknologi web dengan fitur Android native, dan untuk memulai diperlukan beberapa alat dan konfigurasi penting.
 

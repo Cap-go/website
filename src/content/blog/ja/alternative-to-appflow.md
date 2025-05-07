@@ -1,5 +1,5 @@
 ---
-slug: Appflowの代替
+slug: alternativa-ad-appflow
 title: Ionic Appflowの代替手段
 description: >-
   Ionic
@@ -18,7 +18,6 @@ tag: Alternatives
 published: true
 locale: ja
 next_blog: ''
-original_slug: alternativa-ad-appflow
 ---
 Ionic Appflowは、開発者がモバイルアプリを迅速に構築、テスト、デプロイするためのツールとサービスを提供するクラウドベースのモバイルアプリ開発プラットフォームです。継続的インテグレーションとデプロイメント、クラッシュレポートなどの機能を提供し、開発者がアプリのパフォーマンスを追跡し、ユーザーにとってスムーズに動作することを確認できます。
 

@@ -1,5 +1,5 @@
 ---
-slug: OTA 암호화가 앱스토어 규정을 준수하는 방법
+slug: how-ota-encryption-meets-app-store-compliance
 title: OTA 암호화가 앱스토어 규정을 준수하는 방법
 description: 앱 스토어의 엄격한 규정을 준수하고 앱 업데이트를 안전하게 보호하기 위해 OTA 암호화가 어떻게 작동하는지 살펴보세요.
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-ota-encryption-meets-app-store-compliance
 ---
 **무선 업데이트(OTA) 암호화는 Apple과 Google 앱스토어의 엄격한 규칙을 준수하면서 안전한 앱 업데이트를 보장합니다.** 다음은 작동 방식과 중요성에 대한 설명입니다:
 

@@ -1,5 +1,5 @@
 ---
-slug: creando-y-eliminando-canales-de-actualizacion-en-capacitor
+slug: creating-and-deleting-update-channels-in-capacitor
 title: Creación y Eliminación de Canales de Actualización en Capacitor
 description: >-
   Aprende cómo crear, gestionar y eliminar canales de actualización en Capacitor
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: creating-and-deleting-update-channels-in-capacitor
 ---
 Los [canales de actualización](https://capgo.app/docs/webapp/channels/) de [Capacitor](https://capacitorjs.com/) te permiten enviar actualizaciones over-the-air (OTA) a grupos específicos de usuarios. Esto ayuda a gestionar múltiples versiones de la aplicación, probar nuevas funcionalidades y desplegar actualizaciones gradualmente. Esto es lo que necesitas saber:
 

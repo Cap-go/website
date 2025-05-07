@@ -1,5 +1,5 @@
 ---
-slug: wie-segmentieren-sie-benutzer-nach-plan-und-kanälen
+slug: how-to-segment-users-by-plan-and-channels
 title: So verwenden Sie Channels für Feature Flags und A/B Testing
 description: >-
   Erfahren Sie, wie Sie die Kanäle von CapGo für Feature-Flags und A/B-Tests
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: de
 next_blog: ''
-original_slug: how-to-segment-users-by-plan-and-channels
 ---
 # Verwendung von Kanälen für Feature Flags und A/B-Tests
 

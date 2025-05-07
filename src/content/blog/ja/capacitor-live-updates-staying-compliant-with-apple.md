@@ -1,5 +1,5 @@
 ---
-slug: capacitor-live-updates-appleの規則に準拠する
+slug: capacitor-live-updates-rimanere-conformi-alle-regole-di-apple
 title: 'Capacitor Live Updates: Apple のガイドラインに準拠する'
 description: モバイルアプリのアップデートを効率的に実装し、厳格なガイドラインに従って拒否を防ぐ方法を学びましょう。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: capacitor-live-updates-rimanere-conformi-alle-regole-di-apple
 ---
 [Capacitor](https://capacitorjs.com/)のライブアップデートにより、開発者はユーザーが[App Store](https://www.apple.com/app-store/)からアップデートをダウンロードすることなく、バグ修正やマイナーな変更を直接アプリにプッシュできます。これにより、デプロイメント時間が最大**81%**短縮され、コストが削減され、ユーザーエクスペリエンスが向上します。ただし、アプリの拒否を避けるために、Appleの厳格なガイドラインに準拠することが不可欠です。
 

@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-tiempo-real-con-segmentación-de-usuarios
+slug: real-time-updates-with-user-segmentation
 title: Actualizaciones en tiempo real con segmentación de usuarios
 description: >-
   Aprende cómo las actualizaciones en tiempo real y la segmentación de usuarios
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: real-time-updates-with-user-segmentation
 ---
 Las actualizaciones en tiempo real te permiten entregar cambios en la aplicación instantáneamente sin esperar aprobaciones de la tienda de aplicaciones. Combinar esto con la segmentación de usuarios permite orientar a grupos específicos, probar funciones y personalizar experiencias de manera efectiva. Así es como funciona:
 

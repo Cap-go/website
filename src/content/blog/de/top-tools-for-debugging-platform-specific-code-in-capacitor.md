@@ -1,5 +1,5 @@
 ---
-slug: top-tools-für-das-debugging-von-plattformspezifischem-code-in-capacitor
+slug: top-tools-for-debugging-platform-specific-code-in-capacitor
 title: Top-Tools zum Debuggen von plattformspezifischem Code in Capacitor
 description: >-
   Entdecken Sie wichtige Werkzeuge und Techniken zum effektiven Debuggen von
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: top-tools-for-debugging-platform-specific-code-in-capacitor
 ---
 Das plattformspezifische Debugging in [Capacitor](https://capacitorjs.com/) kann herausfordernd sein, aber die richtigen Werkzeuge vereinfachen den Prozess. Hier ist, was Sie wissen müssen:
 

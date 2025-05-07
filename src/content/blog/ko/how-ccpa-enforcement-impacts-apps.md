@@ -1,5 +1,5 @@
 ---
-slug: CCPA 집행이 앱에 미치는 영향
+slug: how-ccpa-enforcement-impacts-apps
 title: CCPA 시행이 앱에 미치는 영향
 description: >-
   CCPA는 모바일 앱이 사용자 데이터를 관리하는 방식을 변화시키고 있으며, 규정 준수를 위해 투명성, 사용자 권한 및 엄격한 보안 조치를
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: how-ccpa-enforcement-impacts-apps
 ---
 **캘리포니아 소비자 개인정보 보호법(CCPA)**은 모바일 앱의 사용자 데이터 처리 방식을 재정립하고 있습니다. 알아야 할 사항은 다음과 같습니다:
 

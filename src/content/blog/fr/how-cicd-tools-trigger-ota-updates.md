@@ -1,5 +1,5 @@
 ---
-slug: comment-declencher-des-mises-a-jour-ota-avec-les-outils-cicd
+slug: wie-cicd-tools-ota-updates-auslösen
 title: Les outils CI/CD déclenchent des mises à jour OTA
 description: >-
   Découvrez comment les outils CI/CD améliorent les mises à jour OTA et
@@ -18,7 +18,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: wie-cicd-tools-ota-updates-auslösen
 ---
 Les outils CI/CD rendent les mises à jour par liaison radio (OTA) plus rapides, plus sûres et plus fiables en automatisant le processus. Voici comment :
 

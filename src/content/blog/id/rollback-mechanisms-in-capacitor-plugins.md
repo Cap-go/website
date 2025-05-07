@@ -1,5 +1,5 @@
 ---
-slug: mekanisme-rollback-di-capacitor-plugins
+slug: rollback-mechanismen-in-capacitor-plugins
 title: Mekanisme Rollback di Plugin Capacitor
 description: >-
   Periksa mekanisme rollback dalam plugin Capacitor untuk memastikan stabilitas
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: rollback-mechanismen-in-capacitor-plugins
 ---
 Mekanisme rollback memastikan stabilitas saat memperbarui plugin [Capacitor](https://capacitorjs.com/). Mereka memungkinkan Anda kembali ke versi sebelumnya jika pembaruan menyebabkan bug atau masalah, meminimalkan downtime dan meningkatkan pengalaman pengguna.
 

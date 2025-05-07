@@ -1,5 +1,5 @@
 ---
-slug: perbedaan-antara-pengembangan-dan-produksi-dalam-aplikasi-capacitor
+slug: différences-entre-développement-et-production-dans-les-applications-capacitor
 title: Perbedaan Kunci Untuk Aplikasi Capacitor Dalam Mode Development vs. Production
 description: >-
   Memahami perbedaan penting antara lingkungan pengembangan dan produksi dalam
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
-original_slug: différences-entre-développement-et-production-dans-les-applications-capacitor
 ---
 **Membangun aplikasi dengan [Capacitor](https://capacitorjs.com/)? Berikut yang perlu Anda ketahui:** Lingkungan pengembangan dan produksi memiliki tujuan berbeda dan membutuhkan pengaturan yang unik. Pengembangan memprioritaskan kecepatan dan debugging, sementara produksi berfokus pada performa, keamanan, dan pengalaman pengguna.
 

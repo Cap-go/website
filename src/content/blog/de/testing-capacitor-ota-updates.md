@@ -1,5 +1,5 @@
 ---
-slug: Testen von Capacitor OTA-Updates
+slug: testing-capacitor-ota-updates
 title: Testen von Capacitor OTA Updates
 description: >-
   Lernen Sie, wie Sie OTA-Updates für Ihre Capacitor-App effektiv testen können,
@@ -20,7 +20,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: testing-capacitor-ota-updates
 ---
 **OTA-Updates ermöglichen es Ihnen, Fehler zu beheben, Funktionen hinzuzufügen und Ihre [Capacitor](https://capacitorjs.com/)-App sofort zu aktualisieren - keine App Store Verzögerungen.** Hier erfahren Sie, wie Sie diese effektiv testen:
 

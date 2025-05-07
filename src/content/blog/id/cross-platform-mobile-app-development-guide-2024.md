@@ -1,5 +1,5 @@
 ---
-slug: panduan-pengembangan-aplikasi-mobile-multiplatform-2024
+slug: guide-du-développement-d'applications-mobiles-multiplateformes-2024
 title: Panduan Lengkap Pengembangan Aplikasi Mobile Cross-Platform di 2024
 description: >-
   Temukan praktik dan framework terbaik untuk pengembangan aplikasi mobile
@@ -19,7 +19,6 @@ tag: cross-platform
 published: true
 locale: id
 next_blog: top-cross-platform-frameworks-compared-2024
-original_slug: guide-du-développement-d'applications-mobiles-multiplateformes-2024
 ---
 ## Mengapa Pengembangan Aplikasi Mobile Lintas Platform Penting di 2024
 

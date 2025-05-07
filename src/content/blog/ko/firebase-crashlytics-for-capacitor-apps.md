@@ -1,5 +1,5 @@
 ---
-slug: 캐패시터 앱을 위한 파이어베이스 크래시리틱스
+slug: firebase-crashlytics-for-capacitor-apps
 title: Firebase Crashlytics for Capacitor 앱
 description: >-
   단계별 가이드를 통해 iOS와 Android 모두에서 Crashlytics를 설정하여 모바일 앱에 실시간 충돌 보고를 통합하는 방법을
@@ -19,7 +19,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ko
 next_blog: ''
-original_slug: firebase-crashlytics-for-capacitor-apps
 ---
 **[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)**는 실시간으로 앱 충돌을 추적하고, 문제를 신속하게 해결할 수 있는 상세 보고서를 제공합니다. iOS와 Android 앱 모두에서 [Capacitor](https://capacitorjs.com/)와 원활하게 통합됩니다. 알아야 할 사항은 다음과 같습니다:
 

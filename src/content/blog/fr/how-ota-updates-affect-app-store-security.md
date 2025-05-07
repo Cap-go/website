@@ -1,5 +1,5 @@
 ---
-slug: comment-les-mises-a-jour-ota-affectent-la-securite-de-l-app-store
+slug: como-los-ota-updates-afectan-la-seguridad-de-la-app-store
 title: Comment les mises à jour OTA affectent la sécurité de l'App Store
 description: >-
   Les mises à jour OTA simplifient les améliorations des applications, mais
@@ -18,7 +18,6 @@ tag: 'Mobile, Security, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: como-los-ota-updates-afectan-la-seguridad-de-la-app-store
 ---
 Les mises à jour OTA (over-the-air) permettent aux développeurs d'applications de fournir des changements directement aux utilisateurs sans attendre les approbations des app stores. Cela accélère les corrections de bugs, les correctifs de sécurité et les déploiements de fonctionnalités. **95% des utilisateurs installent les mises à jour dans les 24 heures**, mais cette rapidité peut introduire des risques si elle n'est pas gérée de manière sécurisée.
 

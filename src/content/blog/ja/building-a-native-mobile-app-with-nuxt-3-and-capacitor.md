@@ -1,5 +1,5 @@
 ---
-slug: ネイティブモバイルアプリをNuxt 3とCapacitorで構築する
+slug: costruire-una-app-mobile-nativa-con-nuxt-3-e-capacitor
 title: Nuxt 3とCapacitorでモバイルアプリを作成する
 description: Nuxt 3、Capacitor、Konsta UIのネイティブUIを実装したモバイルアプリの作り方
 author: Martin Donadieu
@@ -16,7 +16,6 @@ tag: Tutorial
 published: true
 locale: ja
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
-original_slug: costruire-una-app-mobile-nativa-con-nuxt-3-e-capacitor
 ---
 このチュートリアルでは、新しい[Nuxt 3](https://nuxtjs.org/)アプリから始めて、Capacitorを使用してネイティブの領域に移行し、最終的には[Konsta UI](https://konstaui.com/)を追加してTailwind CSSモバイルUIを改善します（最後のステップは完全にオプションです）。
 

@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA-Updates vs. traditionelle Versionierung
+slug: capacitor-ota-updates-vs-traditional-versioning
 title: Capacitor OTA Updates vs. Traditionelle Versionierung
 description: >-
   Entdecken Sie, wie Capacitors OTA-Updates die App-Bereitstellung
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: de
 next_blog: ''
-original_slug: capacitor-ota-updates-vs-traditional-versioning
 ---
 **Möchten Sie [App-Updates](https://capgo.app/plugins/capacitor-updater/) schneller ohne Wartezeit auf App-Store-Überprüfungen?** [Capacitor](https://capacitorjs.com/)s Over-the-Air (OTA) Updates könnten die Lösung sein. Im Gegensatz zu traditionellen App-Store-Updates, die Tage dauern und Benutzeraktionen erfordern, werden OTA-Updates in Minuten bereitgestellt und erreichen Benutzer automatisch.
 

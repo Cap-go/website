@@ -1,5 +1,5 @@
 ---
-slug: opzioni-plugin-capacitor-for-ota-アップデート
+slug: opzioni-plugin-capacitor-per-aggiornamenti-ota
 title: プラグイン Capacitor の OTA アップデートのオプション
 description: Capacitorアプリ向けのOTAアップデートの利点とオプションを探り、スムーズなデプロイメントのための最適なプラグインとその機能を紹介します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: opzioni-plugin-capacitor-per-aggiornamenti-ota
 ---
 **[Capacitor](https://capacitorjs.com/) アプリを、アプリストアの遅延なく素早く安全に更新したいですか？** Over-the-Air (OTA) アップデートを使用すると、変更を直接ユーザーにプッシュでき、時間と帯域幅を節約できます。以下が重要なポイントです：
 

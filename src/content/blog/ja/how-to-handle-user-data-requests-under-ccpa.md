@@ -1,5 +1,5 @@
 ---
-slug: ccpaに従ってユーザーデータリクエストを管理する方法
+slug: come-gestire-le-richieste-dei-dati-degli-utenti-secondo-il-ccpa
 title: CCPAに基づくユーザーデータリクエストの処理方法
 description: CCPAに基づいてユーザーデータのリクエストを効果的に管理し、ユーザーのプライバシー権を尊重しながらコンプライアンスを確保する方法をご紹介します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Security, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-gestire-le-richieste-dei-dati-degli-utenti-secondo-il-ccpa
 ---
 カリフォルニア州消費者プライバシー法（[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)）は、ユーザーに個人データの管理を与え、企業に厳格なルールを設定します。以下が遵守に必要な事項です：
 

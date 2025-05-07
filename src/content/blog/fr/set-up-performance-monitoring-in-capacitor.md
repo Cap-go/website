@@ -1,5 +1,5 @@
 ---
-slug: configuration-de-surveillance-des-performances-das-dans-capacitor
+slug: configuracion-de-monitoreo-de-rendimiento-das-en-capacitor
 title: Configuration de la surveillance des performances dans Capacitor
 description: >-
   Apprenez à configurer la surveillance des performances dans votre application
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: fr
 next_blog: ''
-original_slug: configuracion-de-monitoreo-de-rendimiento-das-en-capacitor
 ---
 **Vous souhaitez optimiser les performances de votre application [Capacitor](https://capacitorjs.com/) ?** Des outils de surveillance comme [Firebase](https://firebase.google.com/) et [Sentry](https://sentry.io/) peuvent vous aider à suivre les crashes, l'utilisation des ressources et les temps de réponse, garantissant une meilleure expérience utilisateur. Voici un aperçu rapide :
 

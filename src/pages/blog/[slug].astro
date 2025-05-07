@@ -6,7 +6,7 @@ import { getCollection, render } from 'astro:content'
 import { formatTime } from '@/config/app'
 import striptags from 'striptags'
 import GetStarted from '@/components/GetStarted.vue'
-import Blog from '@/components/Blog.vue'
+import Blog from '@/components/Blog.astro'
 import * as m from '@/paraglide/messages.js'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -33,9 +33,9 @@ const related = blogs.filter((j) => j.data.published !== false && j.data.slug !=
 // For hreflang tags - find all available translations for this article
 const alternateVersions = []
 if (entry) {
-  // Find articles with the same original_slug or if original_slug is not present, find exact slug match
-  const originalSlug = entry.data.original_slug || entry.data.slug
-  const availableTranslations = blogs.filter((j) => (j.data.original_slug && j.data.original_slug === originalSlug) || (!j.data.original_slug && j.data.slug === originalSlug))
+  // Find articles with the same slug
+  const originalSlug = entry.data.slug
+  const availableTranslations = blogs.filter((j) => j.data.slug === originalSlug && j.data.locale !== Astro.locals.locale)
   // Add entry for each available locale
   for (const translation of availableTranslations) {
     alternateVersions.push({
@@ -153,7 +153,7 @@ content['ldJSON'] = {
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
             <p class="text-sm text-gray-600">Written by</p>
-            <a class="group flex items-center space-x-3" href="/authors/arvind">
+            <a class="group flex items-center space-x-3" href={entry.data.author_url}>
               <img
                 width="36"
                 height="36"

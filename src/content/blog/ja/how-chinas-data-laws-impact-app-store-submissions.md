@@ -1,5 +1,5 @@
 ---
-slug: 中国のデータ法が App Store でのアプリ配布にどう影響を与えているのか
+slug: come-le-leggi-sui-dati-cinesi-influenzano-linvio-delle-app-negli-store
 title: 中国のデータ法がApp Storeの提出にどのように影響するか
 description: 中国の厳格なデータ法がアプリの配信にどのように影響を与えているか、ローカルデータストレージと規制遵守が市場参入の成功に必要とされることを説明します。
 author: Martin Donadieu
@@ -17,7 +17,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: ja
 next_blog: ''
-original_slug: come-le-leggi-sui-dati-cinesi-influenzano-linvio-delle-app-negli-store
 ---
 中国の厳格なデータ法により、アプリ開発者の市場参入は困難になっています。以下が知っておくべき重要事項です：
 

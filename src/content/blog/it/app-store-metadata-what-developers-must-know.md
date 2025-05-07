@@ -1,5 +1,5 @@
 ---
-slug: dati-dei-metadati-dell-app-store-cosa-devono-sapere-gli-sviluppatori
+slug: app-store-metadata-what-developers-must-know
 title: 'Metadati App Store: Cosa Devono Sapere gli Sviluppatori'
 description: >-
   Scopri come dei metadati efficaci per l'app store possono migliorare la
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
-original_slug: app-store-metadata-what-developers-must-know
 ---
 **Vuoi che la tua app si distingua? Tutto inizia dai metadati.** I metadati dello store influenzano il modo in cui gli utenti scoprono, valutano e scaricano la tua app. Ecco cosa devi sapere:
 

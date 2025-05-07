@@ -1,5 +1,5 @@
 ---
-slug: guía-para-depurar-aplicaciones-capacitor
+slug: leitfaden-zum-debuggen-von-capacitor-apps
 title: Guía definitiva para la solución de problemas en aplicaciones Capacitor
 description: >-
   Aprende estrategias efectivas y herramientas esenciales para depurar
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Updates'
 published: true
 locale: es
 next_blog: ''
-original_slug: leitfaden-zum-debuggen-von-capacitor-apps
 ---
 El depurado de aplicaciones [Capacitor](https://capacitorjs.com/) puede ser complejo debido a su naturaleza híbrida, que combina tecnologías web y nativas. Esta guía simplifica el proceso, cubriendo herramientas esenciales, técnicas y consejos para solucionar problemas de manera efectiva.
 

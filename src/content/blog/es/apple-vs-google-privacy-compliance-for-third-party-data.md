@@ -1,5 +1,5 @@
 ---
-slug: google-y-apple-cumplimiento-de-privacidad-para-datos-de-terceros
+slug: google-und-apple-datenschutz-compliance-fuer-drittanbieterdaten
 title: 'Apple vs. Google: Cumplimiento de privacidad para datos de terceros'
 description: >-
   Descubra las estrategias de privacidad opuestas de dos grandes empresas
@@ -20,7 +20,6 @@ tag: 'Development, Mobile, Security'
 published: true
 locale: es
 next_blog: ''
-original_slug: google-und-apple-datenschutz-compliance-fuer-drittanbieterdaten
 ---
 **Apple y Google tienen diferentes enfoques sobre la privacidad del usuario, determinados por sus modelos de negocio:**
 
