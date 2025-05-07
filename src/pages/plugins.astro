@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getSlug } from '@/services/github'
 import { ArrowUpRightIcon } from '@heroicons/vue/20/solid'
+import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 
@@ -14,19 +15,26 @@ const content = { title, description }
 
 const { locale } = Astro.locals
 
-// Process descriptions with marked
-const plugins = await Promise.all(
+let plugins = await Promise.all(
   actions.map(async (item) => ({
     ...item,
     description: await marked.parse(item.description),
   })),
 )
+
+const slugsSet = new Set()
+const tuts = await getCollection('plugin')
+tuts.forEach((i) => {
+  if (i.filePath && i.data.published !== false) slugsSet.add(getSlug(i.filePath).replace('.md', ''))
+})
+const slugs = [...slugsSet] as string[]
+plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', '')))
 ---
 
 <Layout content={content}>
   <div class="z-10 mt-24 mb-24 flex w-full flex-col md:items-center">
     <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">
-      {actions.length}
+      {plugins.length}
       {m.powerful_app_plugins({}, { locale })}
     </h1>
     <h2 class="mt-8 max-w-full px-10 text-2xl font-light md:text-center lg:max-w-[75%]">
@@ -37,7 +45,7 @@ const plugins = await Promise.all(
         {
           plugins.map((item) => (
             <a
-              href={item.href !== 'N/A' ? getRelativeLocaleUrl(locale, `plugins/${getSlug(item.href)}`) : '#'}
+              href={getRelativeLocaleUrl(locale, `plugins/${getSlug(item.href)}`)}
               class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
             >
               <div class="flex flex-col px-5 py-3">

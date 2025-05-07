@@ -2,13 +2,13 @@
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
-import { defaultLocale } from '@/services/locale'
+import * as m from '@/paraglide/messages'
 import { fetchWithToken, getSlug } from '@/services/github'
+import { defaultLocale } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
-import { marked } from 'marked'
-import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { marked } from 'marked'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugsSet = new Set()
@@ -155,7 +155,7 @@ const { locale } = Astro.locals
       </button>
     </div>
     <div class="mt-6 flex w-full flex-col items-center">
-      <div class="z-10 mb-8 w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
+      <div class="z-10 mb-8 hidden w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
         <div class="flex w-full flex-col">
           <h1 class="mt-4 text-2xl font-bold md:text-4xl">
             {title}
@@ -207,7 +207,7 @@ const { locale } = Astro.locals
         </div>
       </div>
     </div>
-    {tutorial && <div class="prose prose-invert hidden w-full px-10 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
+    {tutorial && <div class="prose prose-invert mx-auto w-full px-10 py-8 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
   </div>
 </Layout>
 
