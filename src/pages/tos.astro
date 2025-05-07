@@ -1,5 +1,4 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { defaultLocale } from '@/services/locale'
@@ -10,7 +9,7 @@ const description = m.read_our_terms_of_service({}, { locale: Astro.locals.local
 const content = { title, description }
 
 const { locale } = Astro.locals
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 const brand = config.public.brand
 const domain = config.public.baseUrl
 ---

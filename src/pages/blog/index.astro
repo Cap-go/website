@@ -1,13 +1,12 @@
 ---
 import Blog from '@/components/Blog.astro'
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { slug as slugify } from 'github-slugger'
 
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
 const allPosts = await getCollection('blog')

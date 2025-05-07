@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { useRuntimeConfig } from '@/config/app'
 import { renameCat, shortNumber } from '@/services/misc'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.top_capgo_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
@@ -10,7 +9,7 @@ const description = m.top_capgo_apps({}, { locale: Astro.locals.locale })
 const content = { title, description }
 
 const { locale } = Astro.locals
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 
 // Initialize state
 let apps: any[] = []

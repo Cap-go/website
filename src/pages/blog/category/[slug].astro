@@ -2,7 +2,6 @@
 import type { GetStaticPaths } from 'astro'
 import { slug as slugify } from 'github-slugger'
 import Blog from '@/components/Blog.astro'
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getCollection } from 'astro:content'
@@ -15,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return [...tags].map((slug) => ({ params: { slug: slugify(slug) } }))
 }
 
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
 const allPosts = await getCollection('blog')

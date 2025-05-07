@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { useRuntimeConfig } from '@/config/app'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.Capacitor_Sanbox_App({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.Capacitor_Sanbox_App_description({}, { locale: Astro.locals.locale })
@@ -12,7 +11,7 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
 }
 
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 const brand = config.public.brand
 
 const { locale } = Astro.locals

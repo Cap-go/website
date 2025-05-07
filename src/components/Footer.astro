@@ -1,12 +1,10 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import * as m from '@/paraglide/messages'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const { locale } = Astro.locals
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 const year = new Date().getFullYear()
 
 interface NavigationItem {

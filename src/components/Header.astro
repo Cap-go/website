@@ -1,10 +1,8 @@
 ---
-import { useRuntimeConfig } from '@/config/app'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const config = useRuntimeConfig()
-const brand = config.public.brand
+const brand = Astro.locals.runtimeConfig.public.brand
 
 const { locale } = Astro.locals
 ---
