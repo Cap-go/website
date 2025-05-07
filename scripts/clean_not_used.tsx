@@ -7,7 +7,16 @@ const [publicFiles, srcFiles] = await Promise.all([
   fg(['public/**/*'], {
     dot: true,
     onlyFiles: true,
-    ignore: ['public/_headers', 'public/_redirects', 'public/fonts/**/*', 'public/deepLink/**/*', 'public/react_native.webp', 'public/flutter.webp'],
+    ignore: [
+      'public/_headers',
+      'public/_redirects',
+      'public/fonts/**/*',
+      'public/deepLink/**/*',
+      'public/react_native.webp',
+      'public/flutter.webp',
+      'public/kotlin.webp',
+      'public/native_script.webp',
+    ],
   }),
   fg(['src/**/*', 'astro.config.mjs'], { dot: true, onlyFiles: true }),
 ])
