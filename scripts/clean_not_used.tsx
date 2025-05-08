@@ -8,10 +8,14 @@ const [publicFiles, srcFiles] = await Promise.all([
     dot: true,
     onlyFiles: true,
     ignore: [
+      // Used with platforms
       'public/_headers',
       'public/_redirects',
+      // Fonts used with astro-font
       'public/fonts/**/*',
+      // Used in redirects
       'public/deepLink/**/*',
+      // Used in top_y_x.astro pages
       'public/react_native.webp',
       'public/flutter.webp',
       'public/kotlin.webp',
