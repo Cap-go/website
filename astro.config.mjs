@@ -167,11 +167,12 @@ export default defineConfig({
                 },
               ],
             },
-            {
-              label: 'Other Plugins',
-              collapsed: true,
-              autogenerate: { directory: 'docs/plugins' },
-            }
+            // TODO: finish the social login plugin and then add it to the sidebar
+            // {
+            //   label: 'Other Plugins',
+            //   collapsed: true,
+            //   autogenerate: { directory: 'docs/plugins' },
+            // }
           ],
         },
         {
