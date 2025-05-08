@@ -7,6 +7,7 @@ import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig } from 'astro/config'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
+import starlightImageZoom from 'starlight-image-zoom'
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -67,6 +68,7 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
+      plugins: [starlightImageZoom()],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
