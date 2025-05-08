@@ -8,6 +8,7 @@ import { defineConfig } from 'astro/config'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 import starlightImageZoom from 'starlight-image-zoom'
+import starlightLlmsTxt from 'starlight-llms-txt'
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -68,7 +69,7 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom()],
+      plugins: [starlightImageZoom(), starlightLlmsTxt()],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
