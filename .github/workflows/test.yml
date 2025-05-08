@@ -23,3 +23,6 @@ jobs:
         run: bun install
       - name: Generate static pages
         run: bun run build
+        env:
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
