@@ -81,8 +81,8 @@ const transformedPayg = payg
           <input
             id="monthly"
             type="radio"
-            name="pricing-plans"
             checked={!yearly}
+            name="pricing-plans"
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
           <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
@@ -93,8 +93,8 @@ const transformedPayg = payg
           <input
             id="yearly"
             type="radio"
-            name="pricing-plans"
             checked={yearly}
+            name="pricing-plans"
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
           <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
@@ -115,8 +115,8 @@ const transformedPayg = payg
               </p>
             </div>
             <a
-              href="https://cal.com/martindonadieu/capgo-enterprise-inquiry"
               target="_blank"
+              href="https://cal.com/martindonadieu/capgo-enterprise-inquiry"
               class="inline-flex items-center rounded-full bg-[#0A0B2C] px-6 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-[#1A1B4C]"
             >
               Contact sales →
@@ -131,6 +131,6 @@ const transformedPayg = payg
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale })}
       </p>
     </div>
-    <Faq locale={locale} />
+    <Faq />
   </section>
 </Layout>

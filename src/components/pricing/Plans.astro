@@ -51,6 +51,7 @@ function descToEmoji(desc: string) {
               'divide-gray-200 border-gray-200': plan.name !== 'Maker',
             },
           ]}
+          data-plan={plan.name}
         >
           {plan.name === 'Maker' && (
             <div class="absolute top-0 right-0 -mt-8 flex items-start">
@@ -71,16 +72,16 @@ function descToEmoji(desc: string) {
           </div>
           <div class="px-4 py-5 sm:p-6">
             <div class="flex items-end">
-              <p class="text-5xl font-semibold text-gray-900">${yearly ? (plan.price_y / 12).toFixed() : plan.price_m}</p>
+              <p class="text-5xl font-semibold text-gray-900" data-price>
+                ${yearly ? (plan.price_y / 12).toFixed() : plan.price_m}
+              </p>
               <p class="py-1 text-sm font-normal text-gray-500">/{m.month({}, { locale })}</p>
             </div>
-            {yearly && (
-              <p class="mt-8">
-                <span class="text-gray-900">
-                  {m.billed_annually_at({}, { locale })} ${plan.price_y}
-                </span>
-              </p>
-            )}
+            <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
+              <span class="text-gray-900">
+                {m.billed_annually_at({}, { locale })} ${plan.price_y}
+              </span>
+            </p>
             <div class="mt-6">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
@@ -146,3 +147,33 @@ function descToEmoji(desc: string) {
     }
   </div>
 </section>
+
+<script define:vars={{ pricing }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const yearlyRadio = document.getElementById('yearly')
+    const monthlyRadio = document.getElementById('monthly')
+    const planElements = document.querySelectorAll('[data-plan]')
+
+    function updatePrices(isYearly) {
+      planElements.forEach((planElement) => {
+        const planName = planElement.getAttribute('data-plan')
+        console.log(planName, pricing)
+        const plan = pricing.find((p) => p.name === planName)
+        if (!plan) return
+
+        const priceElement = planElement.querySelector('[data-price]')
+        const yearlyPriceElement = planElement.querySelector('[data-yearly-price]')
+
+        if (priceElement) {
+          priceElement.textContent = `$${isYearly ? (plan.price_y / 12).toFixed() : plan.price_m}`
+        }
+
+        if (yearlyPriceElement) {
+          yearlyPriceElement.style.display = isYearly ? '' : 'none'
+        }
+      })
+    }
+    yearlyRadio.addEventListener('change', () => updatePrices(true))
+    monthlyRadio.addEventListener('change', () => updatePrices(false))
+  })
+</script>
