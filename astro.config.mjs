@@ -1,13 +1,13 @@
 import sitemap from '@astrojs/sitemap'
-import { defineConfig, envField } from 'astro/config';
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import config from './configs.json'
-import { defaultLocale, localeNames, locales } from './src/services/locale'
+import { defineConfig, envField } from 'astro/config'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
+import config from './configs.json'
+import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -16,20 +16,20 @@ export default defineConfig({
     concurrency: 10,
   },
   env: {
-		validateSecrets: true,
-		schema: {
-			ORAMA_CLOUD_ENDPOINT: envField.string({
-				context: 'client',
-				access: 'public',
-				optional: false,
-			}),
-			ORAMA_CLOUD_API_KEY: envField.string({
-				context: 'client',
-				access: 'public',
-				optional: false,
-			}),
-		},
-	},
+    validateSecrets: true,
+    schema: {
+      ORAMA_CLOUD_ENDPOINT: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: false,
+      }),
+      ORAMA_CLOUD_API_KEY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: false,
+      }),
+    },
+  },
   redirects: {
     '/docs/getting-started/': {
       status: 302,
@@ -83,9 +83,9 @@ export default defineConfig({
       customCss: ['./src/css/global.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
-      components: { 
-        LanguageSelect: './src/components/LanguageSelect.astro', 
-        Search: './src/components/doc/Search.astro' 
+      components: {
+        LanguageSelect: './src/components/LanguageSelect.astro',
+        Search: './src/components/doc/Search.astro',
       },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },
