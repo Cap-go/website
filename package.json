@@ -36,7 +36,8 @@
     "openai": "^4.85.4",
     "sitemap": "^8.0.0",
     "striptags": "^3.2.0",
-    "tailwindcss": "^4.1.5"
+    "tailwindcss": "^4.1.5",
+    "toastify-js": "^1.12.0"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.2.7",
@@ -47,6 +48,7 @@
     "@types/marked": "^6.0.0",
     "@types/node": "^22.13.0",
     "@types/semver": "^7.5.8",
+    "@types/toastify-js": "^1.12.4",
     "@unocss/astro": "^66.0.0",
     "@unocss/reset": "^66.0.0",
     "astro-font": "^1.1.0",

@@ -1,15 +1,15 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-// import { Toaster } from 'vue-sonner'
+import 'toastify-js/src/toastify.css'
 
-const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const { locale } = Astro.locals
+const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
 const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
 ---
 
-<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{enableCaptcha && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
 
 <Layout>
   <section class="flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
@@ -143,13 +143,12 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     <div class="pointer-events-none absolute inset-0 overflow-hidden">
       <img class="h-full w-full transform object-cover object-top opacity-20" src="/background-pattern.webp" alt="" />
     </div>
-    <!-- <Toaster rich-colors close-button position="top-right" /> -->
   </section>
 </Layout>
 
 <script>
   import { getRemoteConfig, useSupabase } from '@/services/supabase'
-  // import { toast } from 'vue-sonner'
+  import Toastify from 'toastify-js'
 
   const form = document.getElementById('registerForm')
   const email = document.getElementById('email') as HTMLInputElement
@@ -171,14 +170,16 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     e.preventDefault()
     if (submitButton.disabled) return
     const supabase = useSupabase()
-
     const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
     if (errorDeleted) console.error(errorDeleted)
     if (!deleted) {
-      // toast.error('Account is in error, please contact support at support@capgo.app')
-      return
+      return Toastify({
+        text: 'Account is in error, please contact support at support@capgo.app',
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
     }
-
     submitButton.disabled = true
     const { data: user, error } = await supabase.auth.signUp({
       email: email.value,
@@ -199,10 +200,14 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
       },
     })
     if (error) {
-      console.error('Supabase signup error', error)
-      // toast.error(error.message)
       submitButton.disabled = false
-      return
+      console.error('Supabase signup error', error)
+      return Toastify({
+        text: error.message,
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
     }
     if (error || !user) {
       submitButton.disabled = false
@@ -210,10 +215,14 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
     }
     const session = await supabase.auth.getSession()
     if (session.error) {
-      console.error('Supabase session error', session.error)
-      // toast.error(session.error.message)
       submitButton.disabled = false
-      return
+      console.error('Supabase session error', session.error)
+      return Toastify({
+        text: session.error.message,
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
     }
     if ((window as any).datafast) {
       ;(window as any).datafast('signup', { email: email.value })
