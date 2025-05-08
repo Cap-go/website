@@ -7,8 +7,6 @@ on:
       - renovate/**
 
   pull_request:
-    branches:
-      - main
 
 jobs:
   build:
