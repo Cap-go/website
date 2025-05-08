@@ -13,7 +13,7 @@ export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
   build: {
-    concurrency: 10,
+    concurrency: 2,
   },
   env: {
     validateSecrets: true,
