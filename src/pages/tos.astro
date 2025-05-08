@@ -8,7 +8,6 @@ const description = m.read_our_terms_of_service({}, { locale: Astro.locals.local
 
 const content = { title, description }
 
-const { locale } = Astro.locals
 const config = Astro.locals.runtimeConfig
 const brand = config.public.brand
 const domain = config.public.baseUrl
@@ -17,300 +16,300 @@ const domain = config.public.baseUrl
 <Layout content={content}>
   <div class="prose prose-sm prose-invert m-auto">
     {
-      locale !== defaultLocale && (
+      Astro.locals.locale !== defaultLocale && (
         <span class="text-xs">
           Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English
           source.
         </span>
       )
     }
-    <h1 class="mt-8">{m.tos_title({}, { locale })}</h1>
-    <p>{m.tos_last_updated({}, { locale })}</p>
-    <p>{m.tos_please_read({}, { locale })}</p>
-    <h2>{m.tos_interpretation_title({}, { locale })}</h2>
-    <h3>{m.tos_interpretation_subtitle({}, { locale })}</h3>
+    <h1 class="mt-8">{m.tos_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>{m.tos_last_updated({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.tos_please_read({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.tos_interpretation_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.tos_interpretation_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_interpretation_text({}, { locale })}
+      {m.tos_interpretation_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h3>{m.tos_definitions_subtitle({}, { locale })}</h3>
-    <p>{m.tos_definitions_intro({}, { locale })}</p>
+    <h3>{m.tos_definitions_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.tos_definitions_intro({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        <p>{m.tos_definition_application({}, { locale }).replace('$1', brand)}</p>
+        <p>{m.tos_definition_application({}, { locale: Astro.locals.locale }).replace('$1', brand)}</p>
       </li>
       <li>
         <p>
-          {m.tos_definition_application_store({}, { locale })}
+          {m.tos_definition_application_store({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_affiliate({}, { locale })}
+          {m.tos_definition_affiliate({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_account({}, { locale })}
+          {m.tos_definition_account({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_country({}, { locale })}
+          {m.tos_definition_country({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_company({}, { locale })}
+          {m.tos_definition_company({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_device({}, { locale })}
+          {m.tos_definition_device({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_feedback({}, { locale })}
+          {m.tos_definition_feedback({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_free_trial({}, { locale })}
+          {m.tos_definition_free_trial({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_in_app_purchase({}, { locale })}
+          {m.tos_definition_in_app_purchase({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
-        <p>{m.tos_definition_service({}, { locale })}</p>
+        <p>{m.tos_definition_service({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
         <p>
-          {m.tos_definition_subscriptions({}, { locale })}
-        </p>
-      </li>
-      <li>
-        <p>
-          {m.tos_definition_terms({}, { locale })}
+          {m.tos_definition_subscriptions({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_third_party_social_media({}, { locale })}
+          {m.tos_definition_terms({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.tos_definition_you({}, { locale })}
+          {m.tos_definition_third_party_social_media({}, { locale: Astro.locals.locale })}
+        </p>
+      </li>
+      <li>
+        <p>
+          {m.tos_definition_you({}, { locale: Astro.locals.locale })}
         </p>
       </li>
     </ul>
-    <h2>{m.tos_acknowledgment_title({}, { locale })}</h2>
+    <h2>{m.tos_acknowledgment_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_acknowledgment_text_1({}, { locale })}
+      {m.tos_acknowledgment_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_acknowledgment_text_2({}, { locale })}
+      {m.tos_acknowledgment_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_acknowledgment_text_3({}, { locale })}
+      {m.tos_acknowledgment_text_3({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_acknowledgment_text_4({}, { locale })}
+      {m.tos_acknowledgment_text_4({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_acknowledgment_text_5({}, { locale })}
+      {m.tos_acknowledgment_text_5({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_subscriptions_title({}, { locale })}</h2>
-    <h3>{m.tos_subscriptions_period_subtitle({}, { locale })}</h3>
+    <h2>{m.tos_subscriptions_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.tos_subscriptions_period_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_subscriptions_period_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_subscriptions_period_text_2({}, { locale })}
-    </p>
-    <h3>{m.tos_subscriptions_cancellations_subtitle({}, { locale })}</h3>
-    <p>
-      {m.tos_subscriptions_cancellations_text_1({}, { locale })}
+      {m.tos_subscriptions_period_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_cancellations_text_2({}, { locale })}
+      {m.tos_subscriptions_period_text_2({}, { locale: Astro.locals.locale })}
     </p>
-    <h3>{m.tos_subscriptions_billing_subtitle({}, { locale })}</h3>
+    <h3>{m.tos_subscriptions_cancellations_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_subscriptions_billing_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_subscriptions_billing_text_2({}, { locale })}
+      {m.tos_subscriptions_cancellations_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_billing_text_3({}, { locale })}
+      {m.tos_subscriptions_cancellations_text_2({}, { locale: Astro.locals.locale })}
     </p>
-    <h3>{m.tos_subscriptions_fee_changes_subtitle({}, { locale })}</h3>
+    <h3>{m.tos_subscriptions_billing_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_subscriptions_fee_changes_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_subscriptions_fee_changes_text_2({}, { locale })}
+      {m.tos_subscriptions_billing_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_fee_changes_text_3({}, { locale })}
-    </p>
-    <h3>{m.tos_subscriptions_refunds_subtitle({}, { locale })}</h3>
-    <p>
-      {m.tos_subscriptions_refunds_text_1({}, { locale })}
+      {m.tos_subscriptions_billing_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_refunds_text_2({}, { locale })}
+      {m.tos_subscriptions_billing_text_3({}, { locale: Astro.locals.locale })}
+    </p>
+    <h3>{m.tos_subscriptions_fee_changes_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>
+      {m.tos_subscriptions_fee_changes_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_refunds_text_3({}, { locale })}
-    </p>
-    <h3>{m.tos_subscriptions_free_trial_subtitle({}, { locale })}</h3>
-    <p>
-      {m.tos_subscriptions_free_trial_text_1({}, { locale })}
+      {m.tos_subscriptions_fee_changes_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_free_trial_text_2({}, { locale })}
+      {m.tos_subscriptions_fee_changes_text_3({}, { locale: Astro.locals.locale })}
+    </p>
+    <h3>{m.tos_subscriptions_refunds_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>
+      {m.tos_subscriptions_refunds_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_free_trial_text_3({}, { locale })}
+      {m.tos_subscriptions_refunds_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_subscriptions_free_trial_text_4({}, { locale })}
+      {m.tos_subscriptions_refunds_text_3({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_in_app_purchases_title({}, { locale })}</h2>
+    <h3>{m.tos_subscriptions_free_trial_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_in_app_purchases_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_in_app_purchases_text_2({}, { locale })}
+      {m.tos_subscriptions_free_trial_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_in_app_purchases_text_3({}, { locale })}
+      {m.tos_subscriptions_free_trial_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_in_app_purchases_text_4({}, { locale })}
+      {m.tos_subscriptions_free_trial_text_3({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_in_app_purchases_text_5({}, { locale })}
+      {m.tos_subscriptions_free_trial_text_4({}, { locale: Astro.locals.locale })}
     </p>
-    <p>{m.tos_in_app_purchases_text_6({}, { locale })}</p>
-    <h2>{m.tos_user_accounts_title({}, { locale })}</h2>
+    <h2>{m.tos_in_app_purchases_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_user_accounts_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_user_accounts_text_2({}, { locale })}
+      {m.tos_in_app_purchases_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_user_accounts_text_3({}, { locale })}
+      {m.tos_in_app_purchases_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_user_accounts_text_4({}, { locale })}
-    </p>
-    <h2>{m.tos_intellectual_property_title({}, { locale })}</h2>
-    <p>
-      {m.tos_intellectual_property_text_1({}, { locale })}
+      {m.tos_in_app_purchases_text_3({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_intellectual_property_text_2({}, { locale })}
+      {m.tos_in_app_purchases_text_4({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_intellectual_property_text_3({}, { locale })}
+      {m.tos_in_app_purchases_text_5({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_your_feedback_title({}, { locale })}</h2>
+    <p>{m.tos_in_app_purchases_text_6({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.tos_user_accounts_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_your_feedback_text({}, { locale })}
-    </p>
-    <h2>{m.tos_links_to_other_websites_title({}, { locale })}</h2>
-    <p>
-      {m.tos_links_to_other_websites_text_1({}, { locale })}
+      {m.tos_user_accounts_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_links_to_other_websites_text_2({}, { locale })}
+      {m.tos_user_accounts_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_links_to_other_websites_text_3({}, { locale })}
-    </p>
-    <h2>{m.tos_termination_title({}, { locale })}</h2>
-    <p>
-      {m.tos_termination_text_1({}, { locale })}
+      {m.tos_user_accounts_text_3({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_termination_text_2({}, { locale })}
+      {m.tos_user_accounts_text_4({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_limitation_of_liability_title({}, { locale })}</h2>
+    <h2>{m.tos_intellectual_property_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_limitation_of_liability_text_1({}, { locale })}
-    </p>
-    <p>
-      {m.tos_limitation_of_liability_text_2({}, { locale })}
+      {m.tos_intellectual_property_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_limitation_of_liability_text_3({}, { locale })}
+      {m.tos_intellectual_property_text_2({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_intellectual_property_text_3({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.tos_your_feedback_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.tos_your_feedback_text({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.tos_links_to_other_websites_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.tos_links_to_other_websites_text_1({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_links_to_other_websites_text_2({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_links_to_other_websites_text_3({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.tos_termination_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.tos_termination_text_1({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_termination_text_2({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.tos_limitation_of_liability_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.tos_limitation_of_liability_text_1({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_limitation_of_liability_text_2({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.tos_limitation_of_liability_text_3({}, { locale: Astro.locals.locale })}
     </p>
     <h2>
-      {m.tos_disclaimer_title({}, { locale })}
+      {m.tos_disclaimer_title({}, { locale: Astro.locals.locale })}
     </h2>
     <p>
-      {m.tos_disclaimer_text_1({}, { locale })}
+      {m.tos_disclaimer_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_disclaimer_text_2({}, { locale })}
+      {m.tos_disclaimer_text_2({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_disclaimer_text_3({}, { locale })}
+      {m.tos_disclaimer_text_3({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_governing_law_title({}, { locale })}</h2>
+    <h2>{m.tos_governing_law_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_governing_law_text({}, { locale })}
+      {m.tos_governing_law_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_disputes_resolution_title({}, { locale })}</h2>
+    <h2>{m.tos_disputes_resolution_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_disputes_resolution_text({}, { locale })}
+      {m.tos_disputes_resolution_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_eu_users_title({}, { locale })}</h2>
+    <h2>{m.tos_eu_users_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_eu_users_text({}, { locale })}
+      {m.tos_eu_users_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_us_federal_government_title({}, { locale })}</h2>
+    <h2>{m.tos_us_federal_government_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_us_federal_government_text({}, { locale })}
+      {m.tos_us_federal_government_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_us_legal_compliance_title({}, { locale })}</h2>
+    <h2>{m.tos_us_legal_compliance_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_us_legal_compliance_text({}, { locale })}
+      {m.tos_us_legal_compliance_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_severability_waiver_title({}, { locale })}</h2>
-    <h3>{m.tos_severability_subtitle({}, { locale })}</h3>
+    <h2>{m.tos_severability_waiver_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.tos_severability_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_severability_text({}, { locale })}
+      {m.tos_severability_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h3>{m.tos_waiver_subtitle({}, { locale })}</h3>
+    <h3>{m.tos_waiver_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.tos_waiver_text({}, { locale })}
+      {m.tos_waiver_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_translation_title({}, { locale })}</h2>
+    <h2>{m.tos_translation_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_translation_text({}, { locale })}
+      {m.tos_translation_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_changes_title({}, { locale })}</h2>
+    <h2>{m.tos_changes_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_changes_text_1({}, { locale })}
+      {m.tos_changes_text_1({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.tos_changes_text_2({}, { locale })}
+      {m.tos_changes_text_2({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.tos_contact_us_title({}, { locale })}</h2>
+    <h2>{m.tos_contact_us_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
-      {m.tos_contact_us_text({}, { locale })}
+      {m.tos_contact_us_text({}, { locale: Astro.locals.locale })}
     </p>
     <ul>
       <li>
-        {m.tos_contact_us_website({}, { locale })}
+        {m.tos_contact_us_website({}, { locale: Astro.locals.locale })}
         <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{domain}#support</a>
       </li>
     </ul>

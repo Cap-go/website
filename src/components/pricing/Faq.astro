@@ -1,18 +1,16 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
-
-const { locale } = Astro.locals
 ---
 
 <section class="bg-gray-900 py-10 sm:py-16 lg:py-24">
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
-        {m.questions_and_answers({}, { locale })}
+        {m.questions_and_answers({}, { locale: Astro.locals.locale })}
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-300">
-        {m.explore_common_questions({}, { locale })}
+        {m.explore_common_questions({}, { locale: Astro.locals.locale })}
       </p>
     </div>
     <div class="mt-12 grid grid-cols-1 gap-x-20 gap-y-16 md:mt-20 md:grid-cols-2">
@@ -21,14 +19,14 @@ const { locale } = Astro.locals
           <span class="text-lg font-semibold text-white">?</span>
         </div>
         <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.how_are_mau_counted({}, { locale })}</p>
+          <p class="text-xl font-semibold text-white">{m.how_are_mau_counted({}, { locale: Astro.locals.locale })}</p>
           <p class="mt-4 text-base text-gray-400">
-            {m.mau_counting_explanation({}, { locale })}
+            {m.mau_counting_explanation({}, { locale: Astro.locals.locale })}
           </p>
           <p class="mt-4 text-base text-gray-400">
-            {m.capgo_usage_explanation({}, { locale })}
+            {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
             <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" href={getRelativeLocaleUrl(locale, 'blog/how-your-usage-is-counted')}>
-              {m.here({}, { locale })}
+              {m.here({}, { locale: Astro.locals.locale })}
             </a>
           </p>
         </div>
@@ -38,9 +36,9 @@ const { locale } = Astro.locals
           <span class="text-lg font-semibold text-white">?</span>
         </div>
         <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_does_storage_mean({}, { locale })}</p>
+          <p class="text-xl font-semibold text-white">{m.what_does_storage_mean({}, { locale: Astro.locals.locale })}</p>
           <p class="mt-4 text-base text-gray-400">
-            {m.storage_explanation({}, { locale })}
+            {m.storage_explanation({}, { locale: Astro.locals.locale })}
           </p>
         </div>
       </div>
@@ -49,9 +47,9 @@ const { locale } = Astro.locals
           <span class="text-lg font-semibold text-white">?</span>
         </div>
         <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.how_is_bandwidth_counted({}, { locale })}</p>
+          <p class="text-xl font-semibold text-white">{m.how_is_bandwidth_counted({}, { locale: Astro.locals.locale })}</p>
           <p class="mt-4 text-base text-gray-400">
-            {m.bandwidth_explanation({}, { locale })}
+            {m.bandwidth_explanation({}, { locale: Astro.locals.locale })}
           </p>
         </div>
       </div>
@@ -60,9 +58,9 @@ const { locale } = Astro.locals
           <span class="text-lg font-semibold text-white">?</span>
         </div>
         <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.unsure_about_active_users({}, { locale })}</p>
+          <p class="text-xl font-semibold text-white">{m.unsure_about_active_users({}, { locale: Astro.locals.locale })}</p>
           <p class="mt-4 text-base text-gray-400">
-            {m.free_trial_explanation({}, { locale })}
+            {m.free_trial_explanation({}, { locale: Astro.locals.locale })}
           </p>
         </div>
       </div>
@@ -70,9 +68,9 @@ const { locale } = Astro.locals
     <div class="mt-12 flex items-center justify-center md:mt-20">
       <div class="rounded-full bg-gray-800 px-8 py-4 text-center">
         <p class="text-gray-50">
-          {m.didnt_find_answer({}, { locale })}
+          {m.didnt_find_answer({}, { locale: Astro.locals.locale })}
           <a class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" href="mailto:support@capgo.app">
-            {m.contact_support({}, { locale })}
+            {m.contact_support({}, { locale: Astro.locals.locale })}
           </a>
         </p>
       </div>

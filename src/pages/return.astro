@@ -7,83 +7,82 @@ const description = m.read_our_return_policy({}, { locale: Astro.locals.locale }
 
 const content = { title, description }
 
-const { locale } = Astro.locals
 const config = Astro.locals.runtimeConfig
 const domain = config.public.baseUrl
 ---
 
 <Layout content={content}>
   <div class="prose-sm prose prose-invert m-auto py-8">
-    <h1>{m.return_policy_title({}, { locale })}</h1>
-    <p>{m.last_updated({}, { locale })}</p>
-    <p>{m.thank_you_for_shopping({}, { locale })}</p>
+    <h1>{m.return_policy_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>{m.last_updated({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.thank_you_for_shopping({}, { locale: Astro.locals.locale })}</p>
     <p>
-      {m.not_satisfied_policy({}, { locale })}
-      <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">{m.policy_generator({}, { locale })}</a>.
+      {m.not_satisfied_policy({}, { locale: Astro.locals.locale })}
+      <a href="https://www.termsfeed.com/return-refund-policy-generator/" target="_blank">{m.policy_generator({}, { locale: Astro.locals.locale })}</a>.
     </p>
-    <p>{m.terms_applicable({}, { locale })}</p>
-    <h2>{m.interpretation_and_definitions({}, { locale })}</h2>
-    <h3>{m.interpretation({}, { locale })}</h3>
-    <p>{m.interpretation_description({}, { locale })}</p>
-    <h3>{m.definitions({}, { locale })}</h3>
-    <p>{m.definitions_purpose_refund({}, { locale })}</p>
+    <p>{m.terms_applicable({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.interpretation_and_definitions({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.interpretation({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.interpretation_description({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.definitions({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.definitions_purpose_refund({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        <p><strong>Application</strong> {m.application_definition_refund({}, { locale })}</p>
+        <p><strong>Application</strong> {m.application_definition_refund({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p><strong>Company</strong> {m.company_definition({}, { locale })}</p>
+        <p><strong>Company</strong> {m.company_definition({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p><strong>Goods</strong> {m.goods_definition({}, { locale })}</p>
+        <p><strong>Goods</strong> {m.goods_definition({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p><strong>Orders</strong> {m.orders_definition({}, { locale })}</p>
+        <p><strong>Orders</strong> {m.orders_definition({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p><strong>Service</strong> {m.service_definition({}, { locale })}</p>
+        <p><strong>Service</strong> {m.service_definition({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p><strong>You</strong> {m.you_definition({}, { locale })}</p>
+        <p><strong>You</strong> {m.you_definition({}, { locale: Astro.locals.locale })}</p>
       </li>
     </ul>
-    <h2>{m.order_cancellation_rights({}, { locale })}</h2>
-    <p>{m.cancellation_period({}, { locale })}</p>
-    <p>{m.cancellation_deadline({}, { locale })}</p>
-    <p>{m.how_to_cancel({}, { locale })}</p>
+    <h2>{m.order_cancellation_rights({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.cancellation_period({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.cancellation_deadline({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.how_to_cancel({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        {m.cancellation_link({}, { locale })}
+        {m.cancellation_link({}, { locale: Astro.locals.locale })}
         <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{domain}/#support</a>
       </li>
     </ul>
-    <p>{m.reimbursement_policy({}, { locale })}</p>
-    <h2>{m.conditions_for_returns({}, { locale })}</h2>
-    <p>{m.return_eligibility({}, { locale })}</p>
+    <p>{m.reimbursement_policy({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.conditions_for_returns({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.return_eligibility({}, { locale: Astro.locals.locale })}</p>
     <ul>
-      <li>{m.purchase_timeframe({}, { locale })}</li>
+      <li>{m.purchase_timeframe({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <p>{m.non_returnable_goods({}, { locale })}</p>
+    <p>{m.non_returnable_goods({}, { locale: Astro.locals.locale })}</p>
     <ul>
-      <li>{m.custom_goods({}, { locale })}</li>
-      <li>{m.perishable_goods({}, { locale })}</li>
-      <li>{m.unsealed_goods({}, { locale })}</li>
-      <li>{m.inseparable_goods({}, { locale })}</li>
+      <li>{m.custom_goods({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.perishable_goods({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.unsealed_goods({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.inseparable_goods({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <p>{m.right_to_refuse({}, { locale })}</p>
-    <p>{m.sale_items_policy({}, { locale })}</p>
-    <h2>{m.returning_goods({}, { locale })}</h2>
-    <p>{m.return_responsibility({}, { locale })}</p>
-    <p>{m.return_address({}, { locale })}</p>
-    <p>{m.return_shipping_disclaimer({}, { locale })}</p>
-    <h2>{m.gifts({}, { locale })}</h2>
-    <p>{m.gift_return_policy({}, { locale })}</p>
-    <p>{m.non_gift_return_policy({}, { locale })}</p>
-    <h3>{m.contact_us({}, { locale })}</h3>
-    <p>{m.questions_about_policy({}, { locale })}</p>
+    <p>{m.right_to_refuse({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.sale_items_policy({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.returning_goods({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.return_responsibility({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.return_address({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.return_shipping_disclaimer({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.gifts({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.gift_return_policy({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.non_gift_return_policy({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.contact_us({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.questions_about_policy({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        {m.contact_link({}, { locale })}
+        {m.contact_link({}, { locale: Astro.locals.locale })}
         <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{domain}/#support</a>
       </li>
     </ul>

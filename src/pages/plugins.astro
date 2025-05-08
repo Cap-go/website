@@ -13,8 +13,6 @@ const description = m.plugins_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-const { locale } = Astro.locals
-
 let plugins = await Promise.all(
   actions.map(async (item) => ({
     ...item,
@@ -35,17 +33,17 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
   <div class="z-10 mt-24 mb-24 flex w-full flex-col md:items-center">
     <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">
       {plugins.length}
-      {m.powerful_app_plugins({}, { locale })}
+      {m.powerful_app_plugins({}, { locale: Astro.locals.locale })}
     </h1>
     <h2 class="mt-8 max-w-full px-10 text-2xl font-light md:text-center lg:max-w-[75%]">
-      {m.powerful_app_plugins_description({}, { locale })}
+      {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
     </h2>
     <div class="mt-12 flex w-full flex-col items-start px-10 sm:mt-24 sm:flex-row sm:justify-center lg:max-w-6xl xl:px-0">
       <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-0 md:grid-cols-2 xl:grid-cols-3">
         {
           plugins.map((item) => (
             <a
-              href={getRelativeLocaleUrl(locale, `plugins/${getSlug(item.href)}`)}
+              href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
               class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
             >
               <div class="flex flex-col px-5 py-3">

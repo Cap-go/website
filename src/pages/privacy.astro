@@ -8,7 +8,6 @@ const description = m.read_our_privacy_policy({}, { locale: Astro.locals.locale 
 
 const content = { title, description }
 
-const { locale } = Astro.locals
 const config = Astro.locals.runtimeConfig
 const brand = config.public.brand
 const domain = config.public.baseUrl
@@ -17,159 +16,159 @@ const domain = config.public.baseUrl
 <Layout content={content}>
   <div class="prose prose-sm prose-invert m-auto">
     {
-      locale !== defaultLocale && (
+      Astro.locals.locale !== defaultLocale && (
         <span class="text-xs">
           Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English
           source.
         </span>
       )
     }
-    <h1 class="mt-8">{m.privacy_title({}, { locale })}</h1>
-    <p>{m.privacy_last_updated({}, { locale })}</p>
+    <h1 class="mt-8">{m.privacy_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>{m.privacy_last_updated({}, { locale: Astro.locals.locale })}</p>
     <p>
-      {m.privacy_description({}, { locale })}
+      {m.privacy_description({}, { locale: Astro.locals.locale })}
     </p>
     <p>
-      {m.privacy_agreement({}, { locale })}
+      {m.privacy_agreement({}, { locale: Astro.locals.locale })}
     </p>
-    <h2>{m.privacy_interpretation_title({}, { locale })}</h2>
-    <h3>{m.privacy_interpretation_subtitle({}, { locale })}</h3>
+    <h2>{m.privacy_interpretation_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.privacy_interpretation_subtitle({}, { locale: Astro.locals.locale })}</h3>
     <p>
-      {m.privacy_interpretation_text({}, { locale })}
+      {m.privacy_interpretation_text({}, { locale: Astro.locals.locale })}
     </p>
-    <h3>{m.privacy_definitions_subtitle({}, { locale })}</h3>
-    <p>{m.privacy_definitions_intro({}, { locale })}</p>
+    <h3>{m.privacy_definitions_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.privacy_definitions_intro({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        <p>{m.privacy_definition_account({}, { locale })}</p>
+        <p>{m.privacy_definition_account({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
         <p>
-          {m.privacy_definition_affiliate({}, { locale })}
+          {m.privacy_definition_affiliate({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
-        <p>{m.privacy_definition_application({}, { locale }).replace('$1', brand)}</p>
+        <p>{m.privacy_definition_application({}, { locale: Astro.locals.locale }).replace('$1', brand)}</p>
       </li>
       <li>
         <p>
-          {m.privacy_definition_business({}, { locale })}
+          {m.privacy_definition_business({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
         <p>
-          {m.privacy_definition_company({}, { locale })}
+          {m.privacy_definition_company({}, { locale: Astro.locals.locale })}
         </p>
-        <p>{m.privacy_definition_company_gdpr({}, { locale })}</p>
+        <p>{m.privacy_definition_company_gdpr({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
         <p>
-          {m.privacy_definition_consumer({}, { locale })}
+          {m.privacy_definition_consumer({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
-        <p>{m.privacy_definition_country({}, { locale })}</p>
+        <p>{m.privacy_definition_country({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
         <p>
-          {m.privacy_definition_data_controller({}, { locale })}
+          {m.privacy_definition_data_controller({}, { locale: Astro.locals.locale })}
         </p>
       </li>
       <li>
-        <p>{m.privacy_definition_device({}, { locale })}</p>
+        <p>{m.privacy_definition_device({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_do_not_track({}, { locale })}</p>
+        <p>{m.privacy_definition_do_not_track({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_personal_data({}, { locale })}</p>
-        <p>{m.privacy_definition_personal_data_gdpr({}, { locale })}</p>
-        <p>{m.privacy_definition_personal_data_ccpa({}, { locale })}</p>
+        <p>{m.privacy_definition_personal_data({}, { locale: Astro.locals.locale })}</p>
+        <p>{m.privacy_definition_personal_data_gdpr({}, { locale: Astro.locals.locale })}</p>
+        <p>{m.privacy_definition_personal_data_ccpa({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_sale({}, { locale })}</p>
+        <p>{m.privacy_definition_sale({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_service({}, { locale })}</p>
+        <p>{m.privacy_definition_service({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_service_provider({}, { locale })}</p>
+        <p>{m.privacy_definition_service_provider({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_usage_data({}, { locale })}</p>
+        <p>{m.privacy_definition_usage_data({}, { locale: Astro.locals.locale })}</p>
       </li>
       <li>
-        <p>{m.privacy_definition_you({}, { locale })}</p>
-        <p>{m.privacy_definition_you_gdpr({}, { locale })}</p>
+        <p>{m.privacy_definition_you({}, { locale: Astro.locals.locale })}</p>
+        <p>{m.privacy_definition_you_gdpr({}, { locale: Astro.locals.locale })}</p>
       </li>
     </ul>
-    <h2>{m.privacy_collecting_data_title({}, { locale })}</h2>
-    <h3>{m.privacy_types_of_data_title({}, { locale })}</h3>
-    <h4>{m.privacy_personal_data_title({}, { locale })}</h4>
-    <p>{m.privacy_personal_data_description({}, { locale })}</p>
-    <p>{m.privacy_personal_data_usage({}, { locale })}</p>
-    <h4>{m.privacy_usage_data_title({}, { locale })}</h4>
-    <p>{m.privacy_usage_data_description({}, { locale })}</p>
-    <p>{m.privacy_usage_data_details({}, { locale })}</p>
-    <p>{m.privacy_usage_data_mobile({}, { locale })}</p>
-    <p>{m.privacy_usage_data_browser({}, { locale })}</p>
-    <h2>{m.privacy_use_of_data_title({}, { locale })}</h2>
-    <p>{m.privacy_use_of_data_intro({}, { locale })}</p>
+    <h2>{m.privacy_collecting_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.privacy_types_of_data_title({}, { locale: Astro.locals.locale })}</h3>
+    <h4>{m.privacy_personal_data_title({}, { locale: Astro.locals.locale })}</h4>
+    <p>{m.privacy_personal_data_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_personal_data_usage({}, { locale: Astro.locals.locale })}</p>
+    <h4>{m.privacy_usage_data_title({}, { locale: Astro.locals.locale })}</h4>
+    <p>{m.privacy_usage_data_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_usage_data_details({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_usage_data_mobile({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_usage_data_browser({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_use_of_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_use_of_data_intro({}, { locale: Astro.locals.locale })}</p>
     <ul>
-      <li>{m.privacy_use_of_data_provide_service({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_manage_account({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_performance({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_contact({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_offers({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_requests({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_business_transfers({}, { locale })}</li>
-      <li>{m.privacy_use_of_data_other_purposes({}, { locale })}</li>
+      <li>{m.privacy_use_of_data_provide_service({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_manage_account({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_performance({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_contact({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_offers({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_requests({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_business_transfers({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_use_of_data_other_purposes({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <p>{m.privacy_share_of_data_intro({}, { locale })}</p>
+    <p>{m.privacy_share_of_data_intro({}, { locale: Astro.locals.locale })}</p>
     <ul>
-      <li>{m.privacy_share_of_data_service_providers({}, { locale })}</li>
-      <li>{m.privacy_share_of_data_business_transfers({}, { locale })}</li>
-      <li>{m.privacy_share_of_data_affiliates({}, { locale })}</li>
-      <li>{m.privacy_share_of_data_business_partners({}, { locale })}</li>
-      <li>{m.privacy_share_of_data_other_users({}, { locale })}</li>
-      <li>{m.privacy_share_of_data_consent({}, { locale })}</li>
+      <li>{m.privacy_share_of_data_service_providers({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_share_of_data_business_transfers({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_share_of_data_affiliates({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_share_of_data_business_partners({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_share_of_data_other_users({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_share_of_data_consent({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <h2>{m.privacy_retention_of_data_title({}, { locale })}</h2>
-    <p>{m.privacy_retention_of_data_description({}, { locale })}</p>
-    <p>{m.privacy_retention_of_usage_data({}, { locale })}</p>
-    <h2>{m.privacy_transfer_of_data_title({}, { locale })}</h2>
-    <p>{m.privacy_transfer_of_data_description({}, { locale })}</p>
-    <p>{m.privacy_transfer_of_data_consent({}, { locale })}</p>
-    <p>{m.privacy_transfer_of_data_safeguards({}, { locale })}</p>
-    <h2>{m.privacy_disclosure_of_data_title({}, { locale })}</h2>
-    <h3>{m.privacy_disclosure_business_transactions_title({}, { locale })}</h3>
-    <p>{m.privacy_disclosure_business_transactions_description({}, { locale })}</p>
-    <h3>{m.privacy_disclosure_law_enforcement_title({}, { locale })}</h3>
-    <p>{m.privacy_disclosure_law_enforcement_description({}, { locale })}</p>
-    <h3>{m.privacy_disclosure_other_legal_requirements_title({}, { locale })}</h3>
-    <p>{m.privacy_disclosure_other_legal_requirements_description({}, { locale })}</p>
+    <h2>{m.privacy_retention_of_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_retention_of_data_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_retention_of_usage_data({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_transfer_of_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_transfer_of_data_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_transfer_of_data_consent({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_transfer_of_data_safeguards({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_disclosure_of_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.privacy_disclosure_business_transactions_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.privacy_disclosure_business_transactions_description({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.privacy_disclosure_law_enforcement_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.privacy_disclosure_law_enforcement_description({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.privacy_disclosure_other_legal_requirements_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.privacy_disclosure_other_legal_requirements_description({}, { locale: Astro.locals.locale })}</p>
     <ul>
-      <li>{m.privacy_disclosure_other_legal_requirements_comply({}, { locale })}</li>
-      <li>{m.privacy_disclosure_other_legal_requirements_protect({}, { locale })}</li>
-      <li>{m.privacy_disclosure_other_legal_requirements_prevent({}, { locale })}</li>
-      <li>{m.privacy_disclosure_other_legal_requirements_protect_personal({}, { locale })}</li>
-      <li>{m.privacy_disclosure_other_legal_requirements_protect_legal({}, { locale })}</li>
+      <li>{m.privacy_disclosure_other_legal_requirements_comply({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_disclosure_other_legal_requirements_protect({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_disclosure_other_legal_requirements_prevent({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_disclosure_other_legal_requirements_protect_personal({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.privacy_disclosure_other_legal_requirements_protect_legal({}, { locale: Astro.locals.locale })}</li>
     </ul>
-    <h2>{m.privacy_security_of_data_title({}, { locale })}</h2>
-    <p>{m.privacy_security_of_data_description({}, { locale })}</p>
-    <h2>{m.privacy_children_privacy_title({}, { locale })}</h2>
-    <p>{m.privacy_children_privacy_description({}, { locale })}</p>
-    <p>{m.privacy_children_privacy_consent({}, { locale })}</p>
-    <h2>{m.privacy_links_to_other_websites_title({}, { locale })}</h2>
-    <p>{m.privacy_links_to_other_websites_description({}, { locale })}</p>
-    <p>{m.privacy_links_to_other_websites_control({}, { locale })}</p>
-    <h2>{m.privacy_changes_to_policy_title({}, { locale })}</h2>
-    <p>{m.privacy_changes_to_policy_description({}, { locale })}</p>
-    <p>{m.privacy_changes_to_policy_notification({}, { locale })}</p>
-    <p>{m.privacy_changes_to_policy_review({}, { locale })}</p>
-    <h2>{m.privacy_contact_us_title({}, { locale })}</h2>
-    <p>{m.privacy_contact_us_description({}, { locale })}</p>
-    <p set:html={m.privacy_contact_us_website({}, { locale }).replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)} />
+    <h2>{m.privacy_security_of_data_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_security_of_data_description({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_children_privacy_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_children_privacy_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_children_privacy_consent({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_links_to_other_websites_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_links_to_other_websites_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_links_to_other_websites_control({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_changes_to_policy_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_changes_to_policy_description({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_changes_to_policy_notification({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.privacy_changes_to_policy_review({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.privacy_contact_us_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.privacy_contact_us_description({}, { locale: Astro.locals.locale })}</p>
+    <p set:html={m.privacy_contact_us_website({}, { locale: Astro.locals.locale }).replace('$1', `<a href='${domain}/#support' target='_blank'>${domain}/#support</a>`)} />
     <div class="mt-8 h-[1px] w-full"></div>
   </div>
 </Layout>

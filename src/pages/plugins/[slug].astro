@@ -131,7 +131,6 @@ content['ldJSON'] = {
 }
 
 const { title, description, githubStars, npmDownloads, href, name, readme, tutorial } = plugin
-const { locale } = Astro.locals
 ---
 
 <Layout {content}>
@@ -143,11 +142,11 @@ const { locale } = Astro.locals
     </div>
     <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
       <button class="rounded border border-white px-3 py-1 text-sm" id="tutorialBtn">
-        {m.tutorial_on({}, { locale })}
+        {m.tutorial_on({}, { locale: Astro.locals.locale })}
         {title}
       </button>
       <button class="rounded border border-white/10 px-3 py-1 text-sm" id="aboutBtn">
-        {m.about({}, { locale })}
+        {m.about({}, { locale: Astro.locals.locale })}
         {title}
       </button>
     </div>
@@ -183,7 +182,7 @@ const { locale } = Astro.locals
                   href={href}
                   target="_blank"
                 >
-                  {m.view_repo({}, { locale })} &rarr;
+                  {m.view_repo({}, { locale: Astro.locals.locale })} &rarr;
                 </a>
               )
             }
@@ -195,7 +194,7 @@ const { locale } = Astro.locals
                   href={`https://www.npmjs.com/package/${name}`}
                   target="_blank"
                 >
-                  {m.view_npm({}, { locale })} &rarr;
+                  {m.view_npm({}, { locale: Astro.locals.locale })} &rarr;
                 </a>
               )
             }

@@ -12,7 +12,6 @@ const description = m.pricing_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-const { locale } = Astro.locals
 const config = Astro.locals.runtimeConfig
 
 let yearly = true
@@ -62,15 +61,15 @@ const transformedPayg = payg
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto text-center">
         <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">
-          {m.plans_that_scale_with_your_business({}, { locale })}
+          {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
         <p class="font-pj mt-6 text-xl font-normal text-gray-600">
-          {m.plans_that_scale_with_your_business_description({}, { locale })}
+          {m.plans_that_scale_with_your_business_description({}, { locale: Astro.locals.locale })}
         </p>
       </div>
       <p class="mt-5 text-center sm:mb-14">
         <a class="border-b-1 border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" href="#calculator">
-          {m.calculate_your_usage({}, { locale })}
+          {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
         </a>
       </p>
 
@@ -86,7 +85,7 @@ const transformedPayg = payg
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
           <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
-            {m.monthly_plan({}, { locale })}
+            {m.monthly_plan({}, { locale: Astro.locals.locale })}
           </label>
         </div>
         <div class="flex items-center">
@@ -98,10 +97,10 @@ const transformedPayg = payg
             class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
           <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
-            {m.yearly_plan({}, { locale })}
+            {m.yearly_plan({}, { locale: Astro.locals.locale })}
           </label>
           <span class="ml-1 text-sm font-medium text-blue-600">
-            ({m.save({}, { locale })} 20%)
+            ({m.save({}, { locale: Astro.locals.locale })} 20%)
           </span>
         </div>
       </div>
@@ -127,8 +126,8 @@ const transformedPayg = payg
       {transformedPayg && <PayAsYouGo yearly={yearly} payg={transformedPayg} />}
       {plansAll && paygBase && paygUnits && <Calculator yearly={yearly} pricing={plansAll} paygBase={paygBase} paygUnits={paygUnits} />}
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
-        {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale })}<br />
-        {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale })}
+        {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
+        {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>
     </div>
     <Faq />

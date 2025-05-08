@@ -1,27 +1,25 @@
 ---
 import * as m from '@/paraglide/messages'
 
-const { locale } = Astro.locals
-
 const features = [
   {
-    subtitle: m.multiple_organizations({}, { locale }),
-    title: m.manage_various_teams({}, { locale }),
-    description: m.create_oversee_organizations_from_single_account({}, { locale }),
+    subtitle: m.multiple_organizations({}, { locale: Astro.locals.locale }),
+    title: m.manage_various_teams({}, { locale: Astro.locals.locale }),
+    description: m.create_oversee_organizations_from_single_account({}, { locale: Astro.locals.locale }),
     icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
     color: 'blue',
   },
   {
-    subtitle: m.granular_permissions({}, { locale }),
-    title: m.control_access_levels({}, { locale }),
-    description: m.assign_specific_rights_and_access_levels_to_each_user_within_your_organizations({}, { locale }),
+    subtitle: m.granular_permissions({}, { locale: Astro.locals.locale }),
+    title: m.control_access_levels({}, { locale: Astro.locals.locale }),
+    description: m.assign_specific_rights_and_access_levels_to_each_user_within_your_organizations({}, { locale: Astro.locals.locale }),
     icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
     color: 'purple',
   },
   {
-    subtitle: m.flexible_management({}, { locale }),
-    title: m.adapt_as_you_grow({}, { locale }),
-    description: m.easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure({}, { locale }),
+    subtitle: m.flexible_management({}, { locale: Astro.locals.locale }),
+    title: m.adapt_as_you_grow({}, { locale: Astro.locals.locale }),
+    description: m.easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure({}, { locale: Astro.locals.locale }),
     icon: '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>',
     color: 'teal',
   },
@@ -50,9 +48,9 @@ const features = [
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-lg text-center lg:max-w-4xl">
       <h2 class="text-3xl font-semibold text-white sm:mt-8 sm:text-4xl lg:text-5xl xl:text-6xl">
-        {m.flexible_organization_management_for_your_team({}, { locale })}
+        {m.flexible_organization_management_for_your_team({}, { locale: Astro.locals.locale })}
       </h2>
-      <p class="mt-6 text-lg font-normal text-gray-400">{m.create_manage_organizations_with_ease({}, { locale })}</p>
+      <p class="mt-6 text-lg font-normal text-gray-400">{m.create_manage_organizations_with_ease({}, { locale: Astro.locals.locale })}</p>
     </div>
     <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-6 text-center sm:mt-16 lg:mt-20 lg:max-w-none lg:grid-cols-3">
       {

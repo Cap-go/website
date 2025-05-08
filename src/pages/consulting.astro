@@ -8,7 +8,6 @@ const description = m.consulting_description({}, { locale: Astro.locals.locale }
 
 const content = { title, description }
 
-const { locale } = Astro.locals
 const randomOdd = Math.random() < 0.5 ? 0 : 1
 
 const plugins = [
@@ -70,13 +69,13 @@ const plugins = [
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
           <h1 class="relative mt-0 mb-16 pb-0 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
             <strong style="line-height: 72px">CapacitorJS</strong>&nbsp;<span class="text-indigo-600" style="line-height: 72px"
-              ><strong style="line-height: 72px">{m.code_review_and_consulting({}, { locale })}</strong></span
-            >&nbsp;<strong style="line-height: 72px">{m.services({}, { locale })}</strong>
+              ><strong style="line-height: 72px">{m.code_review_and_consulting({}, { locale: Astro.locals.locale })}</strong></span
+            >&nbsp;<strong style="line-height: 72px">{m.services({}, { locale: Astro.locals.locale })}</strong>
           </h1>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="my-0 block flex-col items-center justify-end text-3xl font-medium text-gray-100 sm:text-center" style="line-height: 42px">
-            &nbsp;{m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps({}, { locale })}
+            &nbsp;{m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps({}, { locale: Astro.locals.locale })}
           </h2>
         </div>
         <a
@@ -90,7 +89,7 @@ const plugins = [
                 background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
                 background-position: 100% 50%;
               "
-          ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale })}</strong></a
+          ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
         >
       </div>
     </main>
@@ -106,7 +105,7 @@ const plugins = [
               <div role="listitem">
                 <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
                   <p class="mt-0 mb-2 italic">
-                    <span set:html={m.testimonial_consulting({}, { locale })} />
+                    <span set:html={m.testimonial_consulting({}, { locale: Astro.locals.locale })} />
                   </p>
                 </div>
                 <img
@@ -139,26 +138,26 @@ const plugins = [
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="my-0 pb-10 text-center font-sans text-6xl font-bold text-slate-900">
-            {m.code_review({}, { locale })}<br class="text-center text-6xl" style="line-height: 72px" />&amp;
-            <span class="text-center text-6xl text-indigo-600" style="text-decoration: none; line-height: 72px">{m.consulting({}, { locale })}</span>
+            {m.code_review({}, { locale: Astro.locals.locale })}<br class="text-center text-6xl" style="line-height: 72px" />&amp;
+            <span class="text-center text-6xl text-indigo-600" style="text-decoration: none; line-height: 72px">{m.consulting({}, { locale: Astro.locals.locale })}</span>
           </h2>
-          <p class="mt-0 mb-24 text-slate-900">{m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale })}:<br /><br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: Astro.locals.locale })}:<br /><br /></p>
           <div class="mt-16 text-left md:grid" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
             <div class="text-slate-900">
               <h6
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_1({}, { locale })}
+                {m.case_1({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-bold sm:text-slate-900" style="line-height: 42px">
-                {m.review_before_passing_the_code_to_the_production({}, { locale })}
+                {m.review_before_passing_the_code_to_the_production({}, { locale: Astro.locals.locale })}
               </h5>
               <p class="mt-0 mb-2">
-                {m.find_and_fix_bugs_during_the_coding_process({}, { locale })}
-                {m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it({}, { locale })}<br /><br />
+                {m.find_and_fix_bugs_during_the_coding_process({}, { locale: Astro.locals.locale })}
+                {m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it({}, { locale: Astro.locals.locale })}<br /><br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -166,30 +165,30 @@ const plugins = [
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_2({}, { locale })}
+                {m.case_2({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.optimization_of_the_existing_app({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.optimization_of_the_existing_app({}, { locale: Astro.locals.locale })}</strong>
               </h5>
-              <p class="mt-0 mb-2">{m.when_down_review({}, { locale })}<br /></p>
+              <p class="mt-0 mb-2">{m.when_down_review({}, { locale: Astro.locals.locale })}<br /></p>
             </div>
             <div class="text-slate-900">
               <h6
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_3({}, { locale })}
+                {m.case_3({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.little_experience_with_capacitorjs({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.little_experience_with_capacitorjs({}, { locale: Astro.locals.locale })}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side({}, { locale })}
-                {m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale })}<br />
+                {m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side({}, { locale: Astro.locals.locale })}
+                {m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: Astro.locals.locale })}<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -197,15 +196,17 @@ const plugins = [
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_4({}, { locale })}
+                {m.case_4({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.poor_app_quality({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.poor_app_quality({}, { locale: Astro.locals.locale })}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low({}, { locale })}<br />
+                {
+                  m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low({}, { locale: Astro.locals.locale })
+                }<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -213,15 +214,15 @@ const plugins = [
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_5({}, { locale })}
+                {m.case_5({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.something_doesn_t_work_but_you_don_t_know_why({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.something_doesn_t_work_but_you_don_t_know_why({}, { locale: Astro.locals.locale })}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it({}, { locale })}<br />
+                {m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it({}, { locale: Astro.locals.locale })}<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -229,15 +230,20 @@ const plugins = [
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_6({}, { locale })}
+                {m.case_6({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.plugin_is_missing({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.plugin_is_missing({}, { locale: Astro.locals.locale })}</strong>
               </h5>
               <p class="mt-0 mb-2">
-                {m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it({}, { locale })}<br />
+                {
+                  m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it(
+                    {},
+                    { locale: Astro.locals.locale },
+                  )
+                }<br />
               </p>
             </div>
             <div class="text-slate-900">
@@ -245,18 +251,18 @@ const plugins = [
                 class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
                 style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
               >
-                {m.case_7({}, { locale })}
+                {m.case_7({}, { locale: Astro.locals.locale })}
               </h6>
             </div>
             <div class="text-slate-900">
               <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-                <strong class="font-bold" style="line-height: 42px">{m.ci_cd_setup({}, { locale })}</strong>
+                <strong class="font-bold" style="line-height: 42px">{m.ci_cd_setup({}, { locale: Astro.locals.locale })}</strong>
               </h5>
               <p class="mt-0 mb-2">
                 {
                   m.our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment(
                     {},
-                    { locale },
+                    { locale: Astro.locals.locale },
                   )
                 }<br />
               </p>
@@ -272,11 +278,11 @@ const plugins = [
       >
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
           <h2 class="mt-0 mb-5 py-10 text-6xl font-medium" style="line-height: 72px">
-            <strong class="font-bold" style="line-height: 72px">{m.why_is_it_important({}, { locale })}</strong>
+            <strong class="font-bold" style="line-height: 72px">{m.why_is_it_important({}, { locale: Astro.locals.locale })}</strong>
           </h2>
         </div>
         <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
-          <p class="mt-0 mb-24 text-slate-900">{m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to({}, { locale })}<br /></p>
+          <p class="mt-0 mb-24 text-slate-900">{m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to({}, { locale: Astro.locals.locale })}<br /></p>
         </div>
         <div class="grid-flow-row md:grid md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
           <div class="text-slate-900">
@@ -290,7 +296,7 @@ const plugins = [
               />
             </div>
             <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{m.minimize_mistakes_and_their_impact_on_the_project({}, { locale })}</strong>
+              <strong class="font-bold" style="line-height: 42px">{m.minimize_mistakes_and_their_impact_on_the_project({}, { locale: Astro.locals.locale })}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -304,7 +310,7 @@ const plugins = [
               />
             </div>
             <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{m.ensure_that_the_project_requirements_are_fulfilled({}, { locale })}</strong>
+              <strong class="font-bold" style="line-height: 42px">{m.ensure_that_the_project_requirements_are_fulfilled({}, { locale: Astro.locals.locale })}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -318,7 +324,7 @@ const plugins = [
               />
             </div>
             <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{m.improve_overall_code_quality({}, { locale })}</strong>
+              <strong class="font-bold" style="line-height: 42px">{m.improve_overall_code_quality({}, { locale: Astro.locals.locale })}</strong>
             </h5>
           </div>
           <div class="text-slate-900">
@@ -332,7 +338,7 @@ const plugins = [
               />
             </div>
             <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-              <strong class="font-bold" style="line-height: 42px">{m.achieve_consistent_design_and_implementation({}, { locale })}</strong>
+              <strong class="font-bold" style="line-height: 42px">{m.achieve_consistent_design_and_implementation({}, { locale: Astro.locals.locale })}</strong>
             </h5>
           </div>
         </div>
@@ -344,7 +350,7 @@ const plugins = [
         style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
       >
         <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
-          <h2 class="relative mt-0 mb-24 pb-10 text-6xl font-medium" style="line-height: 72px">{m.technological_benefits({}, { locale })}</h2>
+          <h2 class="relative mt-0 mb-24 pb-10 text-6xl font-medium" style="line-height: 72px">{m.technological_benefits({}, { locale: Astro.locals.locale })}</h2>
         </div>
         <div class="gap-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch">
           <div
@@ -361,10 +367,10 @@ const plugins = [
               />
             </div>
             <h4 class="my-2 text-xl leading-6 font-medium filter-none">
-              <strong class="font-bold">{m.better_code_quality({}, { locale })}</strong>
+              <strong class="font-bold">{m.better_code_quality({}, { locale: Astro.locals.locale })}</strong>
             </h4>
             <p class="mt-auto mb-2 block text-lg whitespace-normal">
-              {m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale })}
+              {m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: Astro.locals.locale })}
             </p>
           </div>
           <div
@@ -381,10 +387,15 @@ const plugins = [
               />
             </div>
             <h4 class="my-2 text-xl leading-6 font-medium filter-none">
-              <strong class="font-bold">{m.improved_code_readability({}, { locale })}</strong><br />
+              <strong class="font-bold">{m.improved_code_readability({}, { locale: Astro.locals.locale })}</strong><br />
             </h4>
             <p class="mt-auto mb-2 block text-lg whitespace-normal">
-              {m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive({}, { locale })}
+              {
+                m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive(
+                  {},
+                  { locale: Astro.locals.locale },
+                )
+              }
             </p>
           </div>
           <div
@@ -401,10 +412,10 @@ const plugins = [
               />
             </div>
             <h4 class="my-2 text-xl leading-6 font-medium filter-none">
-              <strong class="font-bold">{m.bugs_reduction({}, { locale })}</strong>
+              <strong class="font-bold">{m.bugs_reduction({}, { locale: Astro.locals.locale })}</strong>
             </h4>
             <p class="mt-auto mb-2 block text-lg whitespace-normal">
-              {m.eliminate_the_number_of_bugs_before_passing_the_code_to_production({}, { locale })}<strong class="font-bold"></strong>
+              {m.eliminate_the_number_of_bugs_before_passing_the_code_to_production({}, { locale: Astro.locals.locale })}<strong class="font-bold"></strong>
             </p>
           </div>
         </div>
@@ -417,7 +428,7 @@ const plugins = [
       >
         <div class="flex flex-col items-center justify-center text-center" style="padding-right: 3vw; padding-left: 3vw">
           <h2
-            set:html={m.hire_capacitorjs_consultants({}, { locale }).replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)}
+            set:html={m.hire_capacitorjs_consultants({}, { locale: Astro.locals.locale }).replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)}
             class="relative my-0 pb-10 text-6xl font-medium text-white"
             style="line-height: 72px"
           />
@@ -432,7 +443,7 @@ const plugins = [
                   background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
                   background-position: 100% 50%;
                 "
-            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale })}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
           >
         </div>
       </div>
@@ -442,7 +453,7 @@ const plugins = [
       style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
     >
       <div class="mx-auto mt-5 leading-8 text-slate-900 sm:mx-auto" style="max-width: 754px">
-        <h2 class="mt-0 mb-5 py-10 text-6xl font-medium" style="line-height: 72px">{m.business_benefits({}, { locale })}</h2>
+        <h2 class="mt-0 mb-5 py-10 text-6xl font-medium" style="line-height: 72px">{m.business_benefits({}, { locale: Astro.locals.locale })}</h2>
       </div>
       <div class="items-stretch gap-4 leading-8 text-slate-900 sm:text-left md:grid" style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px">
         <div>
@@ -456,10 +467,15 @@ const plugins = [
             />
           </div>
           <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">{m.lower_cost_of_fixing_bugs({}, { locale })}</strong>
+            <strong class="font-bold" style="line-height: 42px">{m.lower_cost_of_fixing_bugs({}, { locale: Astro.locals.locale })}</strong>
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it({}, { locale })}
+            {
+              m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it(
+                {},
+                { locale: Astro.locals.locale },
+              )
+            }
           </p>
         </div>
         <div>
@@ -473,10 +489,14 @@ const plugins = [
             />
           </div>
           <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
-            <strong class="font-bold" style="line-height: 42px">{m.opportunity_for_juniors_to_develop_skills({}, { locale })}<br style="line-height: 42px" /></strong>
+            <strong class="font-bold" style="line-height: 42px"
+              >{m.opportunity_for_juniors_to_develop_skills({}, { locale: Astro.locals.locale })}<br style="line-height: 42px" /></strong
+            >
           </h5>
           <p class="mt-0 mb-2 text-slate-900">
-            {m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers({}, { locale })}<br />
+            {
+              m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers({}, { locale: Astro.locals.locale })
+            }<br />
           </p>
         </div>
       </div>
@@ -484,15 +504,15 @@ const plugins = [
     <div class="bg-dark relative my-auto block max-w-none flex-col items-center text-center font-sans leading-8 font-light text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
       <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
         <h2 class="my-0 w-full pb-10 text-6xl font-medium text-white" style="line-height: 72px">
-          {m.why_work({}, { locale })}
-          <span class="text-center text-indigo-600" style="line-height: 72px">{m.with_us({}, { locale })}</span>
+          {m.why_work({}, { locale: Astro.locals.locale })}
+          <span class="text-center text-indigo-600" style="line-height: 72px">{m.with_us({}, { locale: Astro.locals.locale })}</span>
         </h2>
       </div>
       <div class="grid-flow-row gap-6 leading-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
         <div class="flex flex-col items-center justify-center px-5 text-left">
           <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="mt-0 mb-auto inline-block max-w-full border-0 align-middle" />
           <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
-            {m.community_trusted({}, { locale })}
+            {m.community_trusted({}, { locale: Astro.locals.locale })}
             <a
               href="https://x.com/martindonadieu"
               target="_blank"
@@ -518,7 +538,7 @@ const plugins = [
             class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
           />
           <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
-            {m.experienced_in_working_on_demanding({}, { locale })}
+            {m.experienced_in_working_on_demanding({}, { locale: Astro.locals.locale })}
             <a
               href="https://github.com/Cap-go/capacitor-updater"
               target="_blank"
@@ -530,7 +550,7 @@ const plugins = [
                       all 0.3s ease 0s;
                     text-decoration: underline;
                   "
-              >{m.cordova_capacitorjs_projects({}, { locale })}</a
+              >{m.cordova_capacitorjs_projects({}, { locale: Astro.locals.locale })}</a
             >
           </p>
         </div>
@@ -549,7 +569,7 @@ const plugins = [
                 <a
                   title="Open source"
                   class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
-                  href={getRelativeLocaleUrl(locale, 'plugins')}
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
                   style="
                       transition:
                         color 450ms ease 0s,
@@ -572,7 +592,7 @@ const plugins = [
                 class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
               />
               <p
-                set:html={m.core_contributors_to_capacitorjs_and_ionic({}, { locale }).replace(
+                set:html={m.core_contributors_to_capacitorjs_and_ionic({}, { locale: Astro.locals.locale }).replace(
                   'CapacitorJS',
                   `<a
                     href='https://capacitorjs.com/'
@@ -657,7 +677,7 @@ const plugins = [
               <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">"</p>
               <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
                 <p class="mt-0 mb-2 italic">
-                  <span set:html={m.testimonial_consulting_2({}, { locale })} />
+                  <span set:html={m.testimonial_consulting_2({}, { locale: Astro.locals.locale })} />
                 </p>
               </div>
               <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="mb-4 hidden max-w-full border-0 align-middle" style="border-radius: 100%" />
@@ -686,15 +706,18 @@ const plugins = [
             class="mt-5 mb-0 block items-start justify-center bg-auto bg-no-repeat pt-0 pb-10 pl-16 text-xs leading-4 font-bold text-black uppercase"
             style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
           >
-            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{m.contact({}, { locale })}</strong><br class="text-left uppercase" style="letter-spacing: 1.7px" />
+            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{m.contact({}, { locale: Astro.locals.locale })}</strong><br
+              class="text-left uppercase"
+              style="letter-spacing: 1.7px"
+            />
           </h2>
         </div>
         <div class="flex flex-col">
           <h3 class="my-0 mr-10 w-full pt-2 pb-10 text-left font-sans text-6xl font-medium text-white" style="line-height: 72px">
-            {m.lets_work_together({}, { locale })}
+            {m.lets_work_together({}, { locale: Astro.locals.locale })}
           </h3>
           <p class="mt-auto mb-2 block bg-transparent text-left font-sans text-lg leading-8 font-light whitespace-normal text-white">
-            {m.need_help_with_cordova_or_capacitorjs_let_us_know({}, { locale })}
+            {m.need_help_with_cordova_or_capacitorjs_let_us_know({}, { locale: Astro.locals.locale })}
           </p>
           <a
             href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
@@ -707,7 +730,7 @@ const plugins = [
                   background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
                   background-position: 100% 50%;
                 "
-            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale })}</strong></a
+            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
           >
         </div>
       </div>

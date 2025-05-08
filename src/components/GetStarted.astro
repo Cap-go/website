@@ -1,8 +1,6 @@
 ---
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-
-const { locale } = Astro.locals
 ---
 
 <div>
@@ -12,18 +10,18 @@ const { locale } = Astro.locals
 
     <div class="relative">
       <span class="mb-4 text-3xl leading-tight font-normal text-white sm:mb-6 sm:text-4xl md:text-[44px]">
-        {m.instant_updates_for_capacitor_apps({}, { locale })}
+        {m.instant_updates_for_capacitor_apps({}, { locale: Astro.locals.locale })}
       </span>
 
       <p class="mb-6 max-w-3xl text-lg leading-relaxed font-normal text-gray-300 sm:mb-8 sm:text-xl md:mb-12">
-        {m.instant_updates_for_capacitor_apps_description({}, { locale })}
+        {m.instant_updates_for_capacitor_apps_description({}, { locale: Astro.locals.locale })}
       </p>
 
       <a
-        href={getRelativeLocaleUrl(locale, 'register')}
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
         class="inline-flex w-full items-center justify-center rounded-lg bg-black px-6 py-3 text-lg text-white transition-colors duration-200 hover:bg-gray-800 sm:w-auto sm:px-10 sm:py-4 sm:text-xl"
       >
-        {m.get_started_now({}, { locale })}
+        {m.get_started_now({}, { locale: Astro.locals.locale })}
       </a>
     </div>
   </div>

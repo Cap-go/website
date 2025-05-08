@@ -58,7 +58,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
         }
       </div>
       <div class="mt-8 grid max-w-md grid-cols-1 gap-4 lg:max-w-full lg:grid-cols-3">
-        {posts.map((j) => <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} locale={j.data.locale} date={j.data.created_at} image={j.data.head_image} />)}
+        {posts.map((j) => <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} date={j.data.created_at} image={j.data.head_image} />)}
       </div>
     </div>
   </div>
