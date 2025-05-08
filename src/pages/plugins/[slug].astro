@@ -27,10 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // Get the plugin from the actions set
 const plugin = actions.find((item) => getSlug(item.href) === Astro.params.slug) as Plugin
 
-if (!plugin || !plugin.title) {
-  console.log(`plugin is not found for: ${Astro.url.pathname}`)
-  return new Response(null, { status: 404 })
-}
+if (!plugin || !plugin.title) return new Response(`plugin is not found for: ${Astro.url.pathname}`, { status: 404 })
 
 let tutorialPlugin = ''
 const tuts = await getCollection('plugin')
@@ -103,7 +100,7 @@ promises.push(
     .catch(() => {}),
 )
 
-await Promise.all(promises)
+// await Promise.all(promises)
 
 const { slug: id } = Astro.params
 

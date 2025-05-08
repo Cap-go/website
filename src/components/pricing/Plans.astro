@@ -157,7 +157,6 @@ function descToEmoji(desc: string) {
     function updatePrices(isYearly) {
       planElements.forEach((planElement) => {
         const planName = planElement.getAttribute('data-plan')
-        console.log(planName, pricing)
         const plan = pricing.find((p) => p.name === planName)
         if (!plan) return
 
