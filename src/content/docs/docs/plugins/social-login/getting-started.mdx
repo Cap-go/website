@@ -1,0 +1,25 @@
+---
+title: Getting Started
+description: Learn how to install and configure the Capacitor Social Login plugin for your app.
+---
+
+## Installation
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'yarn', 'bun']} />
+
+### Steps:
+
+1. **Install the package**
+   See the tabs above for the command specific to your package manager.
+
+2. **Sync with native projects**
+   <Code code="npx cap sync" lang="bash" title="Sync with native projects" />
+
+3. **Configure the plugin**
+   - **Google**: Follow the setup instructions for Google login.
+   - **Facebook**: Follow the setup instructions for Facebook login.
+   - **Apple**: Follow the setup instructions for Apple login.

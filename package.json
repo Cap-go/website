@@ -22,6 +22,7 @@
     "@astrojs/sitemap": "^3.3.1",
     "@astrojs/starlight": "^0.34.1",
     "@astrojs/starlight-tailwind": "^4.0.1",
+    "@orama/wc-components": "^0.7.0",
     "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.5",
@@ -35,6 +36,9 @@
     "linkify-it": "^5.0.0",
     "openai": "^4.85.4",
     "sitemap": "^8.0.0",
+    "starlight-image-zoom": "^0.12.0",
+    "starlight-llms-txt": "^0.5.1",
+    "starlight-package-managers": "^0.11.0",
     "striptags": "^3.2.0",
     "tailwindcss": "^4.1.5",
     "toastify-js": "^1.12.0"

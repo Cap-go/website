@@ -1,18 +1,35 @@
 import sitemap from '@astrojs/sitemap'
+import { defineConfig, envField } from 'astro/config';
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import { defineConfig } from 'astro/config'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
+import starlightImageZoom from 'starlight-image-zoom'
+import starlightLlmsTxt from 'starlight-llms-txt'
 
 export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
   build: {
-    concurrency: 2,
+    concurrency: 10,
   },
+  env: {
+		validateSecrets: true,
+		schema: {
+			ORAMA_CLOUD_ENDPOINT: envField.string({
+				context: 'client',
+				access: 'public',
+				optional: false,
+			}),
+			ORAMA_CLOUD_API_KEY: envField.string({
+				context: 'client',
+				access: 'public',
+				optional: false,
+			}),
+		},
+	},
   redirects: {
     '/docs/getting-started/': {
       status: 302,
@@ -59,13 +76,17 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
+      plugins: [starlightImageZoom(), starlightLlmsTxt()],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
       customCss: ['./src/css/global.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
-      components: { LanguageSelect: './src/components/LanguageSelect.astro' },
+      components: { 
+        LanguageSelect: './src/components/LanguageSelect.astro', 
+        Search: './src/components/doc/Search.astro' 
+      },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },
         { icon: 'github', label: 'GitHub', href: 'https://github.com/Cap-go/' },
@@ -103,49 +124,6 @@ export default defineConfig({
           autogenerate: { directory: 'docs/live-updates' },
         },
         {
-          label: 'Plugin',
-          collapsed: true,
-          items: [
-            { label: 'Overview', link: '/docs/plugin/overview' },
-            {
-              label: 'Cloud Mode',
-              items: [
-                { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
-                { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
-                { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
-                { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
-                { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Self Hosted',
-              items: [
-                { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
-                { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
-                { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
-                { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
-                { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
-                { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
-                { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
-                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
-              ],
-              collapsed: true,
-            },
-            { label: 'Plugin methods', link: '/docs/plugin/api' },
-            { label: 'Known Issues', link: '/docs/plugin/known-issues' },
-            { label: 'Cordova', link: '/docs/plugin/cordova' },
-            { label: 'Settings', link: '/docs/plugin/settings' },
-            { label: 'Statistics', link: '/docs/plugin/statistics-api' },
-            { label: 'Debugging', link: '/docs/plugin/debugging' },
-            {
-              label: 'Migrations',
-              collapsed: true,
-              autogenerate: { directory: 'docs/upgrade' },
-            },
-          ],
-        },
-        {
           label: 'Public API',
           collapsed: true,
           autogenerate: { directory: 'docs/public-api' },
@@ -154,6 +132,61 @@ export default defineConfig({
           label: 'Web app',
           collapsed: true,
           autogenerate: { directory: 'docs/webapp' },
+        },
+        {
+          label: 'Plugins',
+          collapsed: true,
+          items: [
+            {
+              label: 'Updater',
+              collapsed: true,
+              items: [
+                { label: 'Overview', link: '/docs/plugin/overview' },
+                {
+                  label: 'Cloud Mode',
+                  items: [
+                    { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
+                    { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
+                    { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
+                    { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
+                    { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
+                  ],
+                  collapsed: true,
+                },
+                {
+                  label: 'Self Hosted',
+                  items: [
+                    { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
+                    { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
+                    { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
+                    { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
+                    { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
+                    { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
+                    { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
+                    { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
+                  ],
+                  collapsed: true,
+                },
+                { label: 'Plugin methods', link: '/docs/plugin/api' },
+                { label: 'Known Issues', link: '/docs/plugin/known-issues' },
+                { label: 'Cordova', link: '/docs/plugin/cordova' },
+                { label: 'Settings', link: '/docs/plugin/settings' },
+                { label: 'Statistics', link: '/docs/plugin/statistics-api' },
+                { label: 'Debugging', link: '/docs/plugin/debugging' },
+                {
+                  label: 'Migrations',
+                  collapsed: true,
+                  autogenerate: { directory: 'docs/upgrade' },
+                },
+              ],
+            },
+            // TODO: finish the social login plugin and then add it to the sidebar
+            // {
+            //   label: 'Other Plugins',
+            //   collapsed: true,
+            //   autogenerate: { directory: 'docs/plugins' },
+            // }
+          ],
         },
         {
           label: 'How To',
