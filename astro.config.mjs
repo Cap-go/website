@@ -111,49 +111,6 @@ export default defineConfig({
           autogenerate: { directory: 'docs/live-updates' },
         },
         {
-          label: 'Plugin',
-          collapsed: true,
-          items: [
-            { label: 'Overview', link: '/docs/plugin/overview' },
-            {
-              label: 'Cloud Mode',
-              items: [
-                { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
-                { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
-                { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
-                { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
-                { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Self Hosted',
-              items: [
-                { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
-                { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
-                { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
-                { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
-                { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
-                { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
-                { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
-                { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
-              ],
-              collapsed: true,
-            },
-            { label: 'Plugin methods', link: '/docs/plugin/api' },
-            { label: 'Known Issues', link: '/docs/plugin/known-issues' },
-            { label: 'Cordova', link: '/docs/plugin/cordova' },
-            { label: 'Settings', link: '/docs/plugin/settings' },
-            { label: 'Statistics', link: '/docs/plugin/statistics-api' },
-            { label: 'Debugging', link: '/docs/plugin/debugging' },
-            {
-              label: 'Migrations',
-              collapsed: true,
-              autogenerate: { directory: 'docs/upgrade' },
-            },
-          ],
-        },
-        {
           label: 'Public API',
           collapsed: true,
           autogenerate: { directory: 'docs/public-api' },
@@ -162,6 +119,60 @@ export default defineConfig({
           label: 'Web app',
           collapsed: true,
           autogenerate: { directory: 'docs/webapp' },
+        },
+        {
+          label: 'Plugins',
+          collapsed: true,
+          items: [
+            {
+              label: 'Updater',
+              collapsed: true,
+              items: [
+                { label: 'Overview', link: '/docs/plugin/overview' },
+                {
+                  label: 'Cloud Mode',
+                  items: [
+                    { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
+                    { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
+                    { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
+                    { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
+                    { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
+                  ],
+                  collapsed: true,
+                },
+                {
+                  label: 'Self Hosted',
+                  items: [
+                    { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
+                    { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
+                    { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
+                    { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
+                    { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
+                    { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
+                    { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
+                    { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
+                  ],
+                  collapsed: true,
+                },
+                { label: 'Plugin methods', link: '/docs/plugin/api' },
+                { label: 'Known Issues', link: '/docs/plugin/known-issues' },
+                { label: 'Cordova', link: '/docs/plugin/cordova' },
+                { label: 'Settings', link: '/docs/plugin/settings' },
+                { label: 'Statistics', link: '/docs/plugin/statistics-api' },
+                { label: 'Debugging', link: '/docs/plugin/debugging' },
+                {
+                  label: 'Migrations',
+                  collapsed: true,
+                  autogenerate: { directory: 'docs/upgrade' },
+                },
+              ],
+            },
+            {
+              label: 'Other Plugins',
+              collapsed: true,
+              autogenerate: { directory: 'docs/plugins' },
+            }
+          ],
         },
         {
           label: 'How To',
