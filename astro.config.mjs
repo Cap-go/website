@@ -52,7 +52,7 @@ export default defineConfig({
     //   .reduce((r, h) => {
     //     r[h] = defaultLocale
     //     return r
-    //   }, {}),
+    //   }, {})
     routing: {
       redirectToDefaultLocale: true,
     },
