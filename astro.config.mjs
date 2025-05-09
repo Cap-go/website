@@ -170,7 +170,7 @@ export default defineConfig({
                 { label: 'Plugin methods', link: '/docs/plugin/api' },
                 { label: 'Known Issues', link: '/docs/plugin/known-issues' },
                 { label: 'Cordova', link: '/docs/plugin/cordova' },
-                { label: 'Settings', link: '/docs/plugin/settings' },
+                { label: 'Options', link: '/docs/plugin/settings' },
                 { label: 'Statistics', link: '/docs/plugin/statistics-api' },
                 { label: 'Debugging', link: '/docs/plugin/debugging' },
                 {
