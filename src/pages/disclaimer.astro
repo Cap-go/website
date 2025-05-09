@@ -1,7 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueDisclaimer from '@/vue-pages/disclaimer.vue'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
+import { defaultLocale } from '@/services/locale'
+
+const config = Astro.locals.runtimeConfig
+const domain = config.public.baseUrl
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.disclaimer({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_disclaimer({}, { locale: Astro.locals.locale })
@@ -9,4 +12,67 @@ const description = m.read_our_disclaimer({}, { locale: Astro.locals.locale })
 const content = { title, description }
 ---
 
-<Layout content={content}><VueDisclaimer locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}>
+  <div class="prose-sm prose m-auto px-3 text-left">
+    {
+      Astro.locals.locale !== defaultLocale && (
+        <span class="text-xs">
+          Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English
+          source.
+        </span>
+      )
+    }
+    <h1>{m.disclaimer_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>{m.disclaimer_last_updated({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.interpretation_and_definitions_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.interpretation_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.interpretation_text({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.definitions_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.definitions_purpose({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>
+        <p set:html={m.company_definition({}, { locale: Astro.locals.locale })} />
+      </li>
+      <li>
+        <p set:html={m.service_definition({}, { locale: Astro.locals.locale })} />
+      </li>
+      <li>
+        <p set:html={m.you_definition({}, { locale: Astro.locals.locale })} />
+      </li>
+      <li>
+        <p set:html={m.application_definition({ brand: config.public.brand }, { locale: Astro.locals.locale })} />
+      </li>
+    </ul>
+    <h2>{m.disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.company_no_responsibility({}, { locale: Astro.locals.locale })}</p>
+    <p set:html={m.company_no_liability({}, { locale: Astro.locals.locale })} />
+    <p>{m.no_virus_warranty({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.external_links_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.external_links_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.external_links_no_guarantee({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.errors_and_omissions_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.errors_and_omissions_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.company_not_responsible({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.fair_use_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.fair_use_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.fair_use_belief({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.copyright_permission({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.views_expressed_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.views_expressed_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.user_comments_responsibility({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.no_responsibility_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.no_responsibility_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.company_no_liability_for_access({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.use_at_your_own_risk_disclaimer_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.use_at_your_own_risk_disclaimer_text({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.company_no_liability_for_decisions({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.contact_us_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.contact_us_text({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>
+        {m.contact_us_website({}, { locale: Astro.locals.locale })}: <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{domain}#support</a>
+      </li>
+    </ul>
+  </div>
+</Layout>
