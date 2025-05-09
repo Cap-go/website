@@ -1,51 +1,68 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
-import type { GetStaticPaths } from 'astro'
-import { getCollection, render } from 'astro:content'
-import { formatTime } from '@/config/app'
-import striptags from 'striptags'
-import GetStarted from '@/components/GetStarted.astro'
 import Blog from '@/components/Blog.astro'
+import GetStarted from '@/components/GetStarted.astro'
+import { formatTime, useRuntimeConfig } from '@/config/app'
+import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
+import type { Locales } from '@/services/locale'
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection, render } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import striptags from 'striptags'
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({}) => {
   const blogs = await getCollection('blog')
   const entries = blogs.filter((j) => j.data.published !== false)
-  return entries.map((post) => {
-    return {
-      params: {
-        slug: post.data.slug,
-      },
-    }
-  })
+  // For each locale, create a path for each blog post in that locale
+  // Try to parse the locale from the import.meta.url string
+  // Example: file:///.../dist/pages/de/blog/_slug_.astro.mjs
+  const match = import.meta.url.match(/\/pages\/([a-zA-Z-]+)\/blog\//)
+  const locale = match ? match[1] : 'en'
+  const paths = []
+  const otherLocaleEntries = []
+  const filteredLocaleEntries = []
+  for (const j of entries) {
+    if (j.data.locale === locale) filteredLocaleEntries.push(j)
+    else otherLocaleEntries.push(j)
+  }
+  for (const post of filteredLocaleEntries) {
+    // Find related posts in the same locale
+    const related = filteredLocaleEntries.filter((j) => j.data.slug !== post.data.slug).slice(0, 3)
+    // Find alternate versions (other locales)
+    const alternateVersions = otherLocaleEntries
+      .filter((j) => j.data.slug === post.data.slug)
+      .map((translation) => ({
+        slug: translation.data.slug,
+        locale: translation.data.locale,
+        url: `${useRuntimeConfig().public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
+      }))
+    paths.push({
+      params: { slug: post.data.slug },
+      props: { related, entry: post, alternateVersions },
+    })
+  }
+  return paths
+}
+
+// Use Astro.props to get the data
+const { entry, related, alternateVersions } = Astro.props as {
+  entry: CollectionEntry<'blog'>
+  related: CollectionEntry<'blog'>[]
+  alternateVersions: {
+    url: string
+    slug: string
+    locale: Locales
+  }[]
 }
 
 if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
 
-const blogs = await getCollection('blog')
-const entry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === Astro.locals.locale)
-const related = blogs.filter((j) => j.data.published !== false && j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
-
-// For hreflang tags - find all available translations for this article
-const alternateVersions = []
-if (entry) {
-  // Find articles with the same slug
-  const originalSlug = entry.data.slug
-  const availableTranslations = blogs.filter((j) => j.data.slug === originalSlug && j.data.locale !== Astro.locals.locale)
-  // Add entry for each available locale
-  for (const translation of availableTranslations) {
-    alternateVersions.push({
-      locale: translation.data.locale,
-      url: `${Astro.locals.runtimeConfig.public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
-      slug: translation.data.slug,
-    })
-  }
-}
-
 if (!entry) {
-  if (Astro.locals.locale !== 'en') {
-    const enEntry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === 'en')
+  // Try to find the English version for redirect
+  if (Astro.locals.locale !== 'en' && related) {
+    // Try to find the English version in related
+    const enEntry = related.find((j) => j.data.locale === 'en')
     if (enEntry)
       return new Response(
         `<!doctype html>
