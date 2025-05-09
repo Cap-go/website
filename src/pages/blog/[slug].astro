@@ -39,15 +39,16 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
       }))
     paths.push({
       params: { slug: post.data.slug },
-      props: { related, entry: post, alternateVersions },
+      props: { related, entry: post, alternateVersions, entries },
     })
   }
   return paths
 }
 
 // Use Astro.props to get the data
-const { entry, related, alternateVersions } = Astro.props as {
+const { entry, related, alternateVersions, entries } = Astro.props as {
   entry: CollectionEntry<'blog'>
+  entries: CollectionEntry<'blog'>[]
   related: CollectionEntry<'blog'>[]
   alternateVersions: {
     url: string
@@ -79,36 +80,43 @@ if (!entry) {
   return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
-const { Content, headings } = await render(entry)
+let renderEntry = entry
+
+if (import.meta.env.MODE === 'development' && Astro.locals.locale !== 'en') {
+  // @ts-ignore
+  renderEntry = entries.find(({ data }) => data.slug === Astro.params.slug && data.locale === Astro.locals.locale)
+}
+
+const { Content, headings } = await render(renderEntry)
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[]; alternateVersions?: any[] } = {}
 
-if (entry.data.title) content['title'] = entry.data.title
-if (entry.data.description) content['description'] = entry.data.description
-if (entry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${entry.data.head_image || '/capgo_banner.webp'}`
-if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
-if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
+if (renderEntry.data.title) content['title'] = renderEntry.data.title
+if (renderEntry.data.description) content['description'] = renderEntry.data.description
+if (renderEntry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${renderEntry.data.head_image || '/capgo_banner.webp'}`
+if (renderEntry.data.author) content['author'] = renderEntry.data.author || 'Capgo'
+if (renderEntry.data.keywords) content['keywords'] = renderEntry.data.keywords.split(',') || []
 if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
 
-const dateModified = entry.data.updated_at
-const datePublished = entry.data.created_at
+const dateModified = renderEntry.data.updated_at
+const datePublished = renderEntry.data.created_at
 
 content['ldJSON'] = {
   '@type': 'NewsArticle',
   '@context': 'https://schema.org',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${renderEntry.data?.slug}`,
   },
   dateModified: dateModified,
   datePublished: datePublished,
   inLanguage: Astro.locals.locale,
-  headline: entry.data?.description,
-  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${entry.data?.head_image || '/capgo_banner.webp'}`],
+  headline: renderEntry.data?.description,
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${renderEntry.data?.head_image || '/capgo_banner.webp'}`],
   author: {
     '@type': 'Person',
-    name: entry.data?.author,
-    url: entry.data?.author_url,
+    name: renderEntry.data?.author,
+    url: renderEntry.data?.author_url,
   },
   publisher: {
     name: 'Capgo',
@@ -118,9 +126,9 @@ content['ldJSON'] = {
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
-  articleBody: striptags(entry.rendered?.html || ''),
-  keywords: entry.data?.keywords || [],
-  articleSection: entry.data?.tag || [],
+  articleBody: striptags(renderEntry.rendered?.html || ''),
+  keywords: renderEntry.data?.keywords || [],
+  articleSection: renderEntry.data?.tag || [],
 }
 ---
 
@@ -133,16 +141,16 @@ content['ldJSON'] = {
             <span
               class="hover:/50 rounded-lg bg-white px-4 py-1.5 text-sm font-medium text-black shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.1)] backdrop-blur transition-all"
             >
-              {entry.data.tag}
+              {renderEntry.data.tag}
             </span>
-            <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
-              {formatTime(entry.data.updated_at)}
+            <time datetime={new Date(renderEntry.data.updated_at).toISOString()} class="text-sm text-white">
+              {formatTime(renderEntry.data.updated_at)}
             </time>
           </div>
           <h1 class="font-display mt-5 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-[1.25]">
-            {entry.data.title}
+            {renderEntry.data.title}
           </h1>
-          <p class="mt-5 text-gray-400 sm:text-lg">{entry.data.description}</p>
+          <p class="mt-5 text-gray-400 sm:text-lg">{renderEntry.data.description}</p>
         </div>
       </div>
     </div>
@@ -153,8 +161,8 @@ content['ldJSON'] = {
             id="blogImage"
             loading="eager"
             decoding="async"
-            alt={entry.data.title}
-            src={entry.data.head_image}
+            alt={renderEntry.data.title}
+            src={renderEntry.data.head_image}
             width="1536"
             height="1024"
             class="blur-0 overflow-hidden rounded border border-white/5 object-cover"
@@ -166,18 +174,18 @@ content['ldJSON'] = {
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
             <p class="text-sm text-gray-600">Written by</p>
-            <a class="group flex items-center space-x-3" href={entry.data.author_url}>
+            <a class="group flex items-center space-x-3" href={renderEntry.data.author_url}>
               <img
                 width="36"
                 height="36"
                 loading="lazy"
                 decoding="async"
-                alt={entry.data.author}
-                src={entry.data.author_image_url}
+                alt={renderEntry.data.author}
+                src={renderEntry.data.author_image_url}
                 class="blur-0 rounded-full transition-all group-hover:brightness-90"
               />
               <div class="flex flex-col">
-                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
+                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{renderEntry.data.author}</p>
                 <p class="text-sm text-gray-500">Content Marketer</p>
               </div>
             </a>
