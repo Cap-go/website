@@ -25,7 +25,7 @@ import * as m from '@/paraglide/messages'
           </p>
           <p class="mt-4 text-base text-gray-400">
             {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
-            <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" href={getRelativeLocaleUrl(locale, 'blog/how-your-usage-is-counted')}>
+            <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}>
               {m.here({}, { locale: Astro.locals.locale })}
             </a>
           </p>

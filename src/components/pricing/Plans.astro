@@ -83,7 +83,7 @@ function descToEmoji(desc: string) {
             </p>
             <div class="mt-6">
               <a
-                href={getRelativeLocaleUrl(locale, 'register')}
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
                 target="_blank"
                 title="register"
                 class:list={[
