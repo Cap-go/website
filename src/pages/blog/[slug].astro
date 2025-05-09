@@ -4,7 +4,6 @@ import GetStarted from '@/components/GetStarted.astro'
 import { formatTime, useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import type { Locales } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
@@ -14,56 +13,24 @@ import striptags from 'striptags'
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const blogs = await getCollection('blog')
   const entries = blogs.filter((j) => j.data.published !== false)
-  // For each locale, create a path for each blog post in that locale
-  // Try to parse the locale from the import.meta.url string
-  // Example: file:///.../dist/pages/de/blog/_slug_.astro.mjs
-  const match = import.meta.url.match(/\/pages\/([a-zA-Z-]+)\/blog\//)
-  const locale = match ? match[1] : 'en'
-  const paths = []
-  const otherLocaleEntries = []
-  const filteredLocaleEntries = []
-  for (const j of entries) {
-    if (j.data.locale === locale) filteredLocaleEntries.push(j)
-    else otherLocaleEntries.push(j)
-  }
-  for (const post of filteredLocaleEntries) {
-    // Find related posts in the same locale
-    const related = filteredLocaleEntries.filter((j) => j.data.slug !== post.data.slug).slice(0, 3)
-    // Find alternate versions (other locales)
-    const alternateVersions = otherLocaleEntries
-      .filter((j) => j.data.slug === post.data.slug)
-      .map((translation) => ({
-        slug: translation.data.slug,
-        locale: translation.data.locale,
-        url: `${useRuntimeConfig().public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
-      }))
-    paths.push({
-      params: { slug: post.data.slug },
-      props: { related, entry: post, alternateVersions, entries },
-    })
-  }
-  return paths
-}
-
-// Use Astro.props to get the data
-const { entry, related, alternateVersions, entries } = Astro.props as {
-  entry: CollectionEntry<'blog'>
-  entries: CollectionEntry<'blog'>[]
-  related: CollectionEntry<'blog'>[]
-  alternateVersions: {
-    url: string
-    slug: string
-    locale: Locales
-  }[]
+  const uniqueSlugs = [...new Set(entries.map((j) => j.data.slug))]
+  return uniqueSlugs.map((slug) => ({
+    params: { slug },
+    props: { entries },
+  }))
 }
 
 if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
 
+const { entries } = Astro.props as { entries: CollectionEntry<'blog'>[] }
+
+const entry = entries.find((j) => j.data.slug === Astro.params.slug && j.data.locale === Astro.locals.locale)
+
 if (!entry) {
   // Try to find the English version for redirect
-  if (Astro.locals.locale !== 'en' && related) {
+  if (Astro.locals.locale !== 'en') {
     // Try to find the English version in related
-    const enEntry = related.find((j) => j.data.locale === 'en')
+    const enEntry = entries.find((j) => j.data.locale === 'en' && j.data.slug === Astro.params.slug)
     if (enEntry)
       return new Response(
         `<!doctype html>
@@ -72,51 +39,62 @@ if (!entry) {
 <meta name="robots" content="noindex">
 <link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}/">
 <body>
-	<a href="/blog/${Astro.params.slug}">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
+	<a href="/blog/${Astro.params.slug}/">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
 </body>`,
-        { status: 302, headers: { 'Content-Type': 'text/html' } },
+        { status: 302, headers: { 'Content-Type': 'text/html', Location: `/blog/${Astro.params.slug}/` } },
       )
   }
   return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
-let renderEntry = entry
-
-if (import.meta.env.MODE === 'development' && Astro.locals.locale !== 'en') {
-  // @ts-ignore
-  renderEntry = entries.find(({ data }) => data.slug === Astro.params.slug && data.locale === Astro.locals.locale)
+const otherLocaleEntries = []
+const filteredLocaleEntries = []
+for (const j of entries) {
+  if (j.data.locale === Astro.locals.locale) filteredLocaleEntries.push(j)
+  else otherLocaleEntries.push(j)
 }
 
-const { Content, headings } = await render(renderEntry)
+// Find related posts in the same locale
+const related = filteredLocaleEntries.filter((j) => j.data.slug !== Astro.params.slug).slice(0, 3)
+// Find alternate versions (other locales)
+const alternateVersions = otherLocaleEntries
+  .filter((j) => j.data.slug === Astro.params.slug)
+  .map((translation) => ({
+    slug: translation.data.slug,
+    locale: translation.data.locale,
+    url: `${useRuntimeConfig().public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
+  }))
+
+const { Content, headings } = await render(entry)
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[]; alternateVersions?: any[] } = {}
 
-if (renderEntry.data.title) content['title'] = renderEntry.data.title
-if (renderEntry.data.description) content['description'] = renderEntry.data.description
-if (renderEntry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${renderEntry.data.head_image || '/capgo_banner.webp'}`
-if (renderEntry.data.author) content['author'] = renderEntry.data.author || 'Capgo'
-if (renderEntry.data.keywords) content['keywords'] = renderEntry.data.keywords.split(',') || []
+if (entry.data.title) content['title'] = entry.data.title
+if (entry.data.description) content['description'] = entry.data.description
+if (entry.data.head_image) content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${entry.data.head_image || '/capgo_banner.webp'}`
+if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
+if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
 if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
 
-const dateModified = renderEntry.data.updated_at
-const datePublished = renderEntry.data.created_at
+const dateModified = entry.data.updated_at
+const datePublished = entry.data.created_at
 
 content['ldJSON'] = {
   '@type': 'NewsArticle',
   '@context': 'https://schema.org',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${renderEntry.data?.slug}`,
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
   },
   dateModified: dateModified,
   datePublished: datePublished,
   inLanguage: Astro.locals.locale,
-  headline: renderEntry.data?.description,
-  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${renderEntry.data?.head_image || '/capgo_banner.webp'}`],
+  headline: entry.data?.description,
+  image: [`${Astro.locals.runtimeConfig.public.baseUrl}${entry.data?.head_image || '/capgo_banner.webp'}`],
   author: {
     '@type': 'Person',
-    name: renderEntry.data?.author,
-    url: renderEntry.data?.author_url,
+    name: entry.data?.author,
+    url: entry.data?.author_url,
   },
   publisher: {
     name: 'Capgo',
@@ -126,9 +104,9 @@ content['ldJSON'] = {
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
   },
-  articleBody: striptags(renderEntry.rendered?.html || ''),
-  keywords: renderEntry.data?.keywords || [],
-  articleSection: renderEntry.data?.tag || [],
+  articleBody: striptags(entry.rendered?.html || ''),
+  keywords: entry.data?.keywords || [],
+  articleSection: entry.data?.tag || [],
 }
 ---
 
@@ -141,16 +119,16 @@ content['ldJSON'] = {
             <span
               class="hover:/50 rounded-lg bg-white px-4 py-1.5 text-sm font-medium text-black shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.1)] backdrop-blur transition-all"
             >
-              {renderEntry.data.tag}
+              {entry.data.tag}
             </span>
-            <time datetime={new Date(renderEntry.data.updated_at).toISOString()} class="text-sm text-white">
-              {formatTime(renderEntry.data.updated_at)}
+            <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
+              {formatTime(entry.data.updated_at)}
             </time>
           </div>
           <h1 class="font-display mt-5 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-[1.25]">
-            {renderEntry.data.title}
+            {entry.data.title}
           </h1>
-          <p class="mt-5 text-gray-400 sm:text-lg">{renderEntry.data.description}</p>
+          <p class="mt-5 text-gray-400 sm:text-lg">{entry.data.description}</p>
         </div>
       </div>
     </div>
@@ -161,8 +139,8 @@ content['ldJSON'] = {
             id="blogImage"
             loading="eager"
             decoding="async"
-            alt={renderEntry.data.title}
-            src={renderEntry.data.head_image}
+            alt={entry.data.title}
+            src={entry.data.head_image}
             width="1536"
             height="1024"
             class="blur-0 overflow-hidden rounded border border-white/5 object-cover"
@@ -174,18 +152,18 @@ content['ldJSON'] = {
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
             <p class="text-sm text-gray-600">Written by</p>
-            <a class="group flex items-center space-x-3" href={renderEntry.data.author_url}>
+            <a class="group flex items-center space-x-3" href={entry.data.author_url}>
               <img
                 width="36"
                 height="36"
                 loading="lazy"
                 decoding="async"
-                alt={renderEntry.data.author}
-                src={renderEntry.data.author_image_url}
+                alt={entry.data.author}
+                src={entry.data.author_image_url}
                 class="blur-0 rounded-full transition-all group-hover:brightness-90"
               />
               <div class="flex flex-col">
-                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{renderEntry.data.author}</p>
+                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
                 <p class="text-sm text-gray-500">Content Marketer</p>
               </div>
             </a>
