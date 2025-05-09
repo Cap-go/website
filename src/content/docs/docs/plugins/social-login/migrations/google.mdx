@@ -27,9 +27,9 @@ import { Steps } from '@astrojs/starlight/components';
 
 ### Web Client ID
 The plugin now uses exclusively the Web Client ID for authentication. You'll need to:
-1. Create a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-login/google/general))
+1. Create a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-login/google/general/))
 2. Use this Web Client ID in the `webClientId` field for all platforms
-3. For Android, you still need to create an Android Client ID with your SHA1, but this is only for verification - the token won't be used ([Android setup guide](/docs/plugins/social-login/google/android))
+3. For Android, you still need to create an Android Client ID with your SHA1, but this is only for verification - the token won't be used ([Android setup guide](/docs/plugins/social-login/google/android/))
 
 ## Code Changes
 
@@ -72,7 +72,7 @@ The plugin now uses exclusively the Web Client ID for authentication. You'll nee
 
 ### Android
 
-1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android)):
+1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android/)):
 ```diff
 + import ee.forgr.capacitor.social.login.GoogleProvider;
 + import ee.forgr.capacitor.social.login.SocialLoginPlugin;
@@ -110,7 +110,7 @@ The plugin now uses exclusively the Web Client ID for authentication. You'll nee
 
 ### iOS
 
-1. No major changes needed in AppDelegate.swift ([iOS setup guide](/docs/plugins/social-login/google/ios))
+1. No major changes needed in AppDelegate.swift ([iOS setup guide](/docs/plugins/social-login/google/ios/))
 
 2. Update your configuration in `capacitor.config.json`, we don't use it in the new plugin:
 ```diff
@@ -161,7 +161,7 @@ interface GoogleLoginResponse {
 ## Additional Features
 
 The new plugin offers additional social login providers:
-- [Apple Sign-In](/docs/plugins/social-login/apple/general)
-- [Facebook Login](/docs/plugins/social-login/facebook)
+- [Apple Sign-In](/docs/plugins/social-login/apple/general/)
+- [Facebook Login](/docs/plugins/social-login/facebook/)
 
-Check the [main documentation](/docs/plugins/social-login/google/general) for setting up these additional providers. 
+Check the [main documentation](/docs/plugins/social-login/google/general/) for setting up these additional providers. 
