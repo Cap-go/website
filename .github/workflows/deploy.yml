@@ -36,11 +36,11 @@ jobs:
       - name: Set branch name
         id: vars
         run: |
-          ref=${{ github.ref }}
+          ref=${{ github.event.pull_request.head.ref }}
           if [ "$ref" == "refs/heads/main" ]; then
             echo "branch=main" >> $GITHUB_OUTPUT
           else
-            echo "branch=${ref#refs/heads/}" >> $GITHUB_OUTPUT
+            echo "branch=${ref}" >> $GITHUB_OUTPUT
           fi
       - name: Publish CF website
         run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ steps.vars.outputs.branch }}
