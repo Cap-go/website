@@ -87,8 +87,8 @@ export default defineConfig({
       plugins: [starlightImageZoom({showCaptions: false}), starlightLlmsTxt()],
       disable404Route: true,
       logo: { src: './logo.svg' },
-      markdown: { headingLinks: false},
-      customCss: ['./src/css/global.css'],
+      markdown: { headingLinks: false },
+      customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: { 
@@ -178,7 +178,7 @@ export default defineConfig({
                 { label: 'Plugin methods', link: '/docs/plugin/api' },
                 { label: 'Known Issues', link: '/docs/plugin/known-issues' },
                 { label: 'Cordova', link: '/docs/plugin/cordova' },
-                { label: 'Settings', link: '/docs/plugin/settings' },
+                { label: 'Options', link: '/docs/plugin/settings' },
                 { label: 'Statistics', link: '/docs/plugin/statistics-api' },
                 { label: 'Debugging', link: '/docs/plugin/debugging' },
                 {
