@@ -34,6 +34,7 @@
     "github-slugger": "^2.0.0",
     "ky": "^1.7.5",
     "linkify-it": "^5.0.0",
+    "mermaid": "^11.6.0",
     "openai": "^4.85.4",
     "sitemap": "^8.0.0",
     "starlight-image-zoom": "^0.12.0",

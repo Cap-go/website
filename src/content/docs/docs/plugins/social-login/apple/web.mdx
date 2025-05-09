@@ -1,6 +1,21 @@
 ---
-title: COMING SOON
-description: COMING SOON
+title: Apple login on web
+description: Learn how to configure Apple Login with Capacitor on web.
+sidebar:
+    order: 4
 ---
+import { Steps } from '@astrojs/starlight/components';
 
-COMING SOON
+# Apple login on IOS
+
+Configuring the web login is not trivial. It's more difficult than setting up `Sign in with Apple` on iOS but more difficult than setting up `Sign in with Apple` on Android.
+
+## Generating the service
+
+:::note
+This step is redundent if you have already configured `Sign in with Apple` on Android.
+:::
+
+Please follow the guide [here](/docs/plugins/social-login/apple/android/#creating-the-service-id/) to generate the service.
+
+## Configuring the `Return URLs`
