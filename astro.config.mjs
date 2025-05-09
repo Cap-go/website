@@ -73,7 +73,7 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom({showCaptions: false}), starlightLlmsTxt()],
+      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt()],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
@@ -181,8 +181,8 @@ export default defineConfig({
               label: 'Other Plugins',
               collapsed: true,
               items: [
-                { 
-                  label: 'Social Login',   
+                {
+                  label: 'Social Login',
                   items: [
                     { label: 'Overview', link: '/docs/plugins/social-login/' },
                     { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
@@ -193,7 +193,7 @@ export default defineConfig({
                   ],
                 },
               ],
-            }
+            },
           ],
         },
         {
