@@ -1,25 +1,23 @@
-import {
-  ArchiveBoxArrowDownIcon,
-  ArrowPathIcon,
-  ArrowUpOnSquareIcon,
-  Bars3Icon,
-  BoltIcon,
-  CameraIcon,
-  ChartBarIcon,
-  ChatBubbleLeftIcon,
-  CircleStackIcon,
-  CurrencyDollarIcon,
-  DevicePhoneMobileIcon,
-  FingerPrintIcon,
-  GlobeAltIcon,
-  HomeIcon,
-  MapPinIcon,
-  PlayCircleIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  UserCircleIcon,
-  VideoCameraIcon,
-} from '@heroicons/vue/20/solid'
+import ArchiveBoxArrowDownIcon from 'astro-heroicons/mini/ArchiveBoxArrowDown.astro'
+import ArrowPathIcon from 'astro-heroicons/mini/ArrowPath.astro'
+import ArrowUpOnSquareIcon from 'astro-heroicons/mini/ArrowUpOnSquare.astro'
+import Bars3Icon from 'astro-heroicons/mini/Bars3.astro'
+import BoltIcon from 'astro-heroicons/mini/Bolt.astro'
+import CameraIcon from 'astro-heroicons/mini/Camera.astro'
+import ChartBarIcon from 'astro-heroicons/mini/ChartBar.astro'
+import ChatBubbleLeftIcon from 'astro-heroicons/mini/ChatBubbleLeft.astro'
+import CircleStackIcon from 'astro-heroicons/mini/CircleStack.astro'
+import CurrencyDollarIcon from 'astro-heroicons/mini/CurrencyDollar.astro'
+import DevicePhoneMobileIcon from 'astro-heroicons/mini/DevicePhoneMobile.astro'
+import FingerPrintIcon from 'astro-heroicons/mini/FingerPrint.astro'
+import GlobeAltIcon from 'astro-heroicons/mini/GlobeAlt.astro'
+import HomeIcon from 'astro-heroicons/mini/Home.astro'
+import MapPinIcon from 'astro-heroicons/mini/MapPin.astro'
+import PlayCircleIcon from 'astro-heroicons/mini/PlayCircle.astro'
+import SpeakerWaveIcon from 'astro-heroicons/mini/SpeakerWave.astro'
+import SpeakerXMarkIcon from 'astro-heroicons/mini/SpeakerXMark.astro'
+import UserCircleIcon from 'astro-heroicons/mini/UserCircle.astro'
+import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
 
 export interface Action {
   icon?: any

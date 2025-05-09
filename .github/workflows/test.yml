@@ -3,12 +3,7 @@ name: Test
 on:
   push:
     branches:
-      - main
       - renovate/**
-
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -23,3 +18,8 @@ jobs:
         run: bun install
       - name: Generate static pages
         run: bun run build
+        env:
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}

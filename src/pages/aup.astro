@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.aup({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_aup({}, { locale: Astro.locals.locale })
@@ -9,7 +9,7 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="prose-sm prose m-auto px-3 text-left">
+  <div class="prose-sm prose prose-invert m-auto py-8">
     <h1>{m.aup({}, { locale: Astro.locals.locale })}</h1>
     <p><em>{m.last_update({}, { locale: Astro.locals.locale })}: 07/09/2024</em></p>
     <p>

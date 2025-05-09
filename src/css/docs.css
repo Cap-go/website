@@ -1,0 +1,85 @@
+@config "../../tailwind.config.mjs";
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@theme {
+  --color-gray-50: oklch(0.984 0.003 247.858);
+  --color-gray-100: oklch(0.968 0.007 247.896);
+  --color-gray-200: oklch(0.929 0.013 255.508);
+  --color-gray-300: oklch(0.869 0.022 252.894);
+  --color-gray-400: oklch(0.704 0.04 256.788);
+  --color-gray-500: oklch(0.554 0.046 257.417);
+  --color-gray-600: oklch(0.446 0.043 257.281);
+  --color-gray-700: oklch(0.372 0.044 257.287);
+  --color-gray-800: oklch(0.279 0.041 260.031);
+  --color-gray-900: oklch(0.208 0.042 265.755);
+  --color-gray-950: oklch(0.129 0.042 264.695);
+}
+
+.starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+  border-color: var(--color-gray-300);
+}
+@supports (border-color: color-mix(in srgb, --theme(--color-gray-500) 30%, transparent)) {
+  .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+    border-color: color-mix(in srgb, var(--color-gray-500) 30%, transparent);
+  }
+}
+
+@supports (border-color: color-mix(in srgb, --theme(--color-gray-500) 12%, transparent)) {
+  .starlight-aside code:not(:where(.not-content *)) {
+    background-color: color-mix(in srgb, var(--color-gray-500) 12%, transparent);
+  }
+}
+
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Dark mode colors. */
+:root {
+  --sl-color-accent-low: #131e4f;
+  --sl-color-accent: #3447ff;
+  --sl-color-accent-high: #b3c7ff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eceef2;
+  --sl-color-gray-2: #c6c8ce;
+  --sl-color-gray-3: #a0a4ae;
+  --sl-color-gray-4: #545861;
+  --sl-color-gray-5: #353841;
+  --sl-color-gray-6: #24272f;
+  --sl-color-black: #17181c;
+}
+/* Light mode colors. */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #c7d6ff;
+  --sl-color-accent: #2827e9;
+  --sl-color-accent-high: #182775;
+  --sl-color-white: #17181c;
+  --sl-color-gray-1: #24272f;
+  --sl-color-gray-2: #353841;
+  --sl-color-gray-3: #545861;
+  --sl-color-gray-4: #888b96;
+  --sl-color-gray-5: #c0c2c7;
+  --sl-color-gray-6: #eceef2;
+  --sl-color-gray-7: #f5f6f8;
+  --sl-color-black: #ffffff;
+}
