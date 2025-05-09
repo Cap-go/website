@@ -2,7 +2,6 @@
 import type { GetStaticPaths } from 'astro'
 import { slug as slugify } from 'github-slugger'
 import Blog from '@/components/Blog.astro'
-import { useRuntimeConfig } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getCollection } from 'astro:content'
@@ -15,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return [...tags].map((slug) => ({ params: { slug: slugify(slug) } }))
 }
 
-const config = useRuntimeConfig()
+const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
 const allPosts = await getCollection('blog')
@@ -59,7 +58,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
         }
       </div>
       <div class="mt-8 grid max-w-md grid-cols-1 gap-4 lg:max-w-full lg:grid-cols-3">
-        {posts.map((j) => <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} locale={j.data.locale} date={j.data.created_at} image={j.data.head_image} />)}
+        {posts.map((j) => <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} date={j.data.created_at} image={j.data.head_image} />)}
       </div>
     </div>
   </div>

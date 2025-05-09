@@ -5,9 +5,9 @@ import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
 import { formatTime } from '@/config/app'
 import striptags from 'striptags'
-import GetStarted from '@/components/GetStarted.vue'
+import GetStarted from '@/components/GetStarted.astro'
 import Blog from '@/components/Blog.astro'
-import * as m from '@/paraglide/messages.js'
+import * as m from '@/paraglide/messages'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const blogs = await getCollection('blog')
@@ -21,10 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   })
 }
 
-if (!Astro.params.slug) {
-  console.log(`Astro.params.slug is invalid for: ${Astro.url.pathname}`)
-  return new Response(null, { status: 404 })
-}
+if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
 
 const blogs = await getCollection('blog')
 const entry = blogs.find((j) => j.data.slug === Astro.params.slug && j.data.locale === Astro.locals.locale)
@@ -62,8 +59,7 @@ if (!entry) {
         { status: 302, headers: { 'Content-Type': 'text/html' } },
       )
   }
-  console.log(`entry is not found for: ${Astro.url.pathname}`)
-  return new Response(null, { status: 404 })
+  return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
 const { Content, headings } = await render(entry)
@@ -205,7 +201,7 @@ content['ldJSON'] = {
           }
         </div>
       </div>
-      <GetStarted locale={Astro.locals.locale} />
+      <GetStarted />
       <div class="mx-auto max-w-xl text-center">
         <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</h2>
         <p class="mt-4 text-base leading-7 font-normal text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
@@ -216,14 +212,7 @@ content['ldJSON'] = {
         related.length > 0 && (
           <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
             {related.map((article) => (
-              <Blog
-                tag={article.data.tag}
-                link={article.data.slug}
-                title={article.data.title}
-                locale={article.data.locale}
-                date={article.data.created_at}
-                image={article.data.head_image}
-              />
+              <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
             ))}
           </div>
         )

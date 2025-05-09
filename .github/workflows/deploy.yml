@@ -29,9 +29,9 @@ jobs:
         run: bun run build
         env:
           BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
-          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - name: Publish CF website
         run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ github.ref }}
         env:

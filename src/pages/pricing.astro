@@ -1,12 +1,135 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VuePricing from '@/vue-pages/pricing.vue'
-import * as m from '../paraglide/messages.js'
+import Calculator from '@/components/pricing/Calculator.astro'
+import Faq from '@/components/pricing/Faq.astro'
+import PayAsYouGo from '@/components/pricing/PayAsYouGo.astro'
+import Plans from '@/components/pricing/Plans.astro'
+import type { Database } from '@/services/supabase.types'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.pricing({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.pricing_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
+
+const config = Astro.locals.runtimeConfig
+
+let yearly = true
+let plansAll: Database['public']['Tables']['plans']['Row'][] = []
+
+// Fetch plans data
+const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
+plansAll = await response.json()
+
+// Filter plans
+const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Pay as you go' && p.name !== 'Free') : []
+const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go')[0] : undefined
+
+const paygBase = payg
+  ? {
+      mau: payg.mau || 0,
+      storage: payg.storage || 0,
+      bandwidth: payg.bandwidth || 0,
+    }
+  : undefined
+
+const paygUnits = payg
+  ? {
+      mau: payg.mau_unit || 0,
+      storage: payg.storage_unit || 0,
+      bandwidth: payg.bandwidth_unit || 0,
+    }
+  : undefined
+
+// Transform payg data to match PayAsYouGo component's expected type
+const transformedPayg = payg
+  ? {
+      mau: payg.mau || 0,
+      mau_unit: payg.mau_unit || 0,
+      bandwidth: payg.bandwidth || 0,
+      bandwidth_unit: payg.bandwidth_unit || 0,
+      storage: payg.storage || 0,
+      storage_unit: payg.storage_unit || 0,
+      price_m: payg.price_m || 0,
+      price_y: payg.price_y || 0,
+    }
+  : undefined
 ---
 
-<Layout content={content}><VuePricing locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}
+  ><section class="bg-gray-50 py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto text-center">
+        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">
+          {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
+        </h1>
+        <p class="font-pj mt-6 text-xl font-normal text-gray-600">
+          {m.plans_that_scale_with_your_business_description({}, { locale: Astro.locals.locale })}
+        </p>
+      </div>
+      <p class="mt-5 text-center sm:mb-14">
+        <a class="border-b-1 border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" href="#calculator">
+          {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
+        </a>
+      </p>
+
+      {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
+
+      <div class="mt-8 flex items-center justify-center space-x-6 pb-12 sm:pb-16">
+        <div class="flex items-center">
+          <input
+            id="monthly"
+            type="radio"
+            checked={!yearly}
+            name="pricing-plans"
+            class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
+          />
+          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
+            {m.monthly_plan({}, { locale: Astro.locals.locale })}
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input
+            id="yearly"
+            type="radio"
+            checked={yearly}
+            name="pricing-plans"
+            class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
+          />
+          <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
+            {m.yearly_plan({}, { locale: Astro.locals.locale })}
+          </label>
+          <span class="ml-1 text-sm font-medium text-blue-600">
+            ({m.save({}, { locale: Astro.locals.locale })} 20%)
+          </span>
+        </div>
+      </div>
+      <section class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+          <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+            <div class="max-w-2xl space-y-4">
+              <h2 class="text-4xl font-bold text-gray-900">Enterprise</h2>
+              <p class="text-xl leading-relaxed text-gray-600">
+                For enterprise teams building mission-critical apps looking for a specialized mobile DevOps package, paired with expert support and advisory services.
+              </p>
+            </div>
+            <a
+              target="_blank"
+              href="https://cal.com/martindonadieu/capgo-enterprise-inquiry"
+              class="inline-flex items-center rounded-full bg-[#0A0B2C] px-6 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-[#1A1B4C]"
+            >
+              Contact sales →
+            </a>
+          </div>
+        </div>
+      </section>
+      {transformedPayg && <PayAsYouGo yearly={yearly} payg={transformedPayg} />}
+      {plansAll && paygBase && paygUnits && <Calculator yearly={yearly} pricing={plansAll} paygBase={paygBase} paygUnits={paygUnits} />}
+      <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
+        {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
+        {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+    <Faq />
+  </section>
+</Layout>

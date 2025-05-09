@@ -1,12 +1,145 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueEula from '@/vue-pages/eula.vue'
-import * as m from '../paraglide/messages.js'
+import * as m from '@/paraglide/messages'
+import { defaultLocale } from '@/services/locale'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.eula({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_eula({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
+
+const config = Astro.locals.runtimeConfig
+const brand = config.public.brand
+const domain = config.public.baseUrl
 ---
 
-<Layout content={content}><VueEula locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}>
+  <div class="prose-sm prose prose-invert m-auto py-8">
+    {
+      Astro.locals.locale !== defaultLocale && (
+        <span class="text-xs">
+          Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English
+          source.
+        </span>
+      )
+    }
+    <h1>{m.eula_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>{m.eula_last_updated({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_read_carefully({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_interpretation_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.eula_interpretation_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>
+      {m.eula_interpretation_text({}, { locale: Astro.locals.locale })}
+    </p>
+    <h3>{m.eula_definitions_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_definitions_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>
+        <p>{m.eula_definition_agreement({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_application({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_application_store({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_company({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_content({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_country({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_device({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_family_sharing({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_third_party_services({}, { locale: Astro.locals.locale })}</p>
+      </li>
+      <li>
+        <p>{m.eula_definition_you({}, { locale: Astro.locals.locale })}</p>
+      </li>
+    </ul>
+    <h2>{m.eula_acknowledgment_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_acknowledgment_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_acknowledgment_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_acknowledgment_text_3({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_acknowledgment_text_4({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_acknowledgment_text_5({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_license_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.eula_license_scope_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_license_scope_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_license_scope_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_license_scope_text_3({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.eula_license_restrictions_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_license_restrictions_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.eula_license_restrictions_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.eula_license_restrictions_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.eula_license_restrictions_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.eula_license_restrictions_4({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <h2>{m.eula_intellectual_property_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_intellectual_property_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_intellectual_property_text_2({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_your_suggestions_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_your_suggestions_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_your_suggestions_text_2({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_modifications_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_modifications_text({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.eula_updates_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_updates_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_updates_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_updates_text_3({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.eula_maintenance_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_maintenance_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_third_party_services_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_third_party_services_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_third_party_services_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_third_party_services_text_3({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_term_and_termination_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_term_and_termination_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_term_and_termination_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_term_and_termination_text_3({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_term_and_termination_text_4({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_indemnification_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_indemnification_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_no_warranties_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_no_warranties_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_no_warranties_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_no_warranties_text_3({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_limitation_of_liability_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_limitation_of_liability_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_limitation_of_liability_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_limitation_of_liability_text_3({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_limitation_of_liability_text_4({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_severability_and_waiver_title({}, { locale: Astro.locals.locale })}</h2>
+    <h3>{m.eula_severability_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_severability_text({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.eula_waiver_subtitle({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.eula_waiver_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_product_claims_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_product_claims_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_us_legal_compliance_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_us_legal_compliance_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_changes_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_changes_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_changes_text_2({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_governing_law_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_governing_law_text({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_entire_agreement_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_entire_agreement_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.eula_entire_agreement_text_2({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.eula_contact_us_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.eula_contact_us_text({}, { locale: Astro.locals.locale })}</p>
+    <p>
+      {m.eula_contact_us_link({}, { locale: Astro.locals.locale })}
+      <a href={`${domain}/#support`} rel="external nofollow noopener" target="_blank">{domain}/#support</a>
+    </p>
+  </div>
+</Layout>

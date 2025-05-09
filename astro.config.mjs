@@ -1,36 +1,35 @@
 import sitemap from '@astrojs/sitemap'
-import { defineConfig, envField } from 'astro/config';
 import starlight from '@astrojs/starlight'
-import vue from '@astrojs/vue'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import config from './configs.json'
-import { defaultLocale, localeNames, locales } from './src/services/locale'
+import { defineConfig, envField } from 'astro/config'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
+import config from './configs.json'
+import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
   build: {
-    concurrency: 10,
+    concurrency: locales.length,
   },
   env: {
-		validateSecrets: true,
-		schema: {
-			ORAMA_CLOUD_ENDPOINT: envField.string({
-				context: 'client',
-				access: 'public',
-				optional: true,
-			}),
-			ORAMA_CLOUD_API_KEY: envField.string({
-				context: 'client',
-				access: 'public',
-				optional: true,
-			}),
-		},
-	},
+    validateSecrets: true,
+    schema: {
+      ORAMA_CLOUD_ENDPOINT: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: false,
+      }),
+      ORAMA_CLOUD_API_KEY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: false,
+      }),
+    },
+  },
   redirects: {
     '/docs/getting-started/': {
       status: 302,
@@ -68,13 +67,6 @@ export default defineConfig({
       redirectDefaultLocale: true,
       exclude: ['pages/**/*.json.ts'],
     }),
-    vue({
-      template: {
-        transformAssetUrls: {
-          includeAbsolute: false,
-        },
-      },
-    }),
     sitemap({
       i18n: {
         defaultLocale,
@@ -91,9 +83,9 @@ export default defineConfig({
       customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
-      components: { 
-        LanguageSelect: './src/components/LanguageSelect.astro', 
-        Search: './src/components/doc/Search.astro' 
+      components: {
+        LanguageSelect: './src/components/LanguageSelect.astro',
+        Search: './src/components/doc/Search.astro',
       },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },

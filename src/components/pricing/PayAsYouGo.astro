@@ -1,0 +1,234 @@
+---
+import { numberWithSpaces, toTb, updateCalc } from '@/services/misc'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+interface Props {
+  payg: {
+    mau: number
+    mau_unit: number
+    bandwidth: number
+    bandwidth_unit: number
+    storage: number
+    storage_unit: number
+    price_m: number
+    price_y: number
+  }
+  yearly: boolean
+}
+
+const { payg, yearly } = Astro.props
+---
+
+<section id="pay-as-you-go" class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <div class="flex items-center justify-center">
+        <div class="inline-flex h-24 w-24 items-center justify-center text-8xl">❤️‍🔥</div>
+        <h2 class="font-pj ml-3 text-4xl font-bold text-gray-900">{m.pay_as_you_go({}, { locale: Astro.locals.locale })}</h2>
+      </div>
+      <p class="font-pj mt-4 text-base font-normal text-gray-600">
+        +{numberWithSpaces(updateCalc(payg))}
+        {m.pay_as_you_go_description({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+    <div class="relative mx-auto mt-8 max-w-sm md:mt-12 md:max-w-3xl">
+      <div class="absolute -inset-4">
+        <div
+          class="mx-auto h-full w-full opacity-30 blur-lg filter"
+          style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
+        >
+        </div>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl border border-gray-200 bg-white">
+        <div class="p-6 md:px-10 md:py-9">
+          <div class="grid grid-cols-1 items-center gap-y-9 md:grid-cols-7 md:gap-y-0">
+            <div class="space-y-9 md:col-span-3 xl:pr-2">
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.monthly_active_users({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <span class="font-bold">{payg.mau.toLocaleString()}</span>
+                    {m.users_included({}, { locale: Astro.locals.locale })}, {m.tr_then({}, { locale: Astro.locals.locale })} ${payg.mau_unit}/{
+                      m.user({}, { locale: Astro.locals.locale })
+                    }
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.bandwidth({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <span class="font-bold">{toTb(payg.bandwidth)}</span>
+                    {m.TB_included({}, { locale: Astro.locals.locale })}, {m.tr_then({}, { locale: Astro.locals.locale })} ${payg.bandwidth_unit}
+                    {m.per_GB({}, { locale: Astro.locals.locale })}
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.cloud_storage({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">
+                    <span class="font-bold">{payg.storage.toLocaleString()}</span>
+                    {m.GB_included({}, { locale: Astro.locals.locale })}, {m.tr_then({}, { locale: Astro.locals.locale })} ${payg.storage_unit}
+                    {m.per_GB({}, { locale: Astro.locals.locale })}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="hidden md:block">
+                <svg class="mx-auto h-auto w-4 text-gray-300" viewBox="0 0 16 172" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 11)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 46)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 81)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 116)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 151)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 18)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 53)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 88)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 123)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 158)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 25)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 60)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 95)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 130)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 165)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 32)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 67)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 102)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 137)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 172)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 39)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 74)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 109)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.83205 -0.5547 -0.5547 0.83205 15 144)"></line>
+                </svg>
+              </div>
+              <div class="block md:hidden">
+                <svg class="mx-auto h-4 w-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 11 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 46 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 81 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 116 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 151 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 18 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 53 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 88 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 123 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 158 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 25 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 60 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 95 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 130 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 165 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 32 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 67 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 102 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 137 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 172 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 39 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 74 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 109 1)"></line>
+                  <line y1="-0.5" x2="18.0278" y2="-0.5" transform="matrix(-0.5547 0.83205 0.83205 0.5547 144 1)"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="space-y-9 md:col-span-3 xl:pr-2">
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.API_access({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">{m.create_anything_you_want({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.dedicated_support({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">{m.get_an_answer_in_less_than_6h({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white">
+                  <svg class="h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="font-pj text-lg font-bold text-gray-900">{m.custom_domain({}, { locale: Astro.locals.locale })}</p>
+                  <p class="font-pj mt-1 text-sm font-normal text-gray-600">{m.add_your_own_domain({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center">
+      <p class="font-pj text-base font-medium text-gray-600">{m.all_our_features_are_available_to_all_users({}, { locale: Astro.locals.locale })}</p>
+      <div class="mt-10 flex items-end justify-center">
+        <p class="font-pj text-lg font-bold text-gray-400">$</p>
+        <p class="font-pj text-6xl font-bold text-gray-900">
+          {yearly ? payg.price_y.toLocaleString() : payg.price_m.toLocaleString()}
+        </p>
+        <p class="font-pj text-lg font-bold text-gray-400">/{m.month({}, { locale: Astro.locals.locale })}</p>
+      </div>
+      <a
+        role="button"
+        target="_blank"
+        title="Register"
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+        class="font-pj hover:bg-opacity-90 relative mt-9 inline-flex items-center justify-center rounded-xl border border-transparent bg-gray-900 px-8 py-3.5 text-base font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+      >
+        {m.get_started_for_free({}, { locale: Astro.locals.locale })}
+      </a>
+    </div>
+  </div>
+</section>
