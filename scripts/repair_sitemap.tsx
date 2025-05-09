@@ -9,7 +9,7 @@ if (existsSync(sitemapPath)) {
   const xmlData = readFileSync(sitemapPath, 'utf-8')
   const jsonObj = new XMLParser().parse(xmlData)
   const urls = jsonObj.urlset.url.map(({ loc }: { loc: string }) => loc)
-  const smStream = new SitemapStream({ hostname: process.env.NEXT_PUBLIC_SITE })
+  const smStream = new SitemapStream({ hostname: "https://capgo.app" })
   urls.forEach((url: string) => smStream.write({ url }))
   smStream.end()
   const sitemap = await streamToPromise(smStream)
