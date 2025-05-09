@@ -5,6 +5,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -32,8 +33,17 @@ jobs:
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+      - name: Set branch name
+        id: vars
+        run: |
+          ref=${{ github.ref }}
+          if [ "$ref" == "refs/heads/main" ]; then
+            echo "branch=main" >> $GITHUB_OUTPUT
+          else
+            echo "branch=${ref#refs/heads/}" >> $GITHUB_OUTPUT
+          fi
       - name: Publish CF website
-        run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ github.ref }}
+        run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ steps.vars.outputs.branch }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
