@@ -5,7 +5,7 @@
     "astro": "astro",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "time paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && time astro build && time tsx ./scripts/repair_sitemap.tsx",
+    "build": "time paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && time astro sync && astro build && time tsx ./scripts/repair_sitemap.tsx",
     "preview": "astro preview",
     "types": "npx --yes supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
