@@ -22,12 +22,12 @@ export default defineConfig({
 			ORAMA_CLOUD_ENDPOINT: envField.string({
 				context: 'client',
 				access: 'public',
-				optional: false,
+				optional: true,
 			}),
 			ORAMA_CLOUD_API_KEY: envField.string({
 				context: 'client',
 				access: 'public',
-				optional: false,
+				optional: true,
 			}),
 		},
 	},
@@ -84,10 +84,10 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom(), starlightLlmsTxt()],
+      plugins: [starlightImageZoom({showCaptions: false}), starlightLlmsTxt()],
       disable404Route: true,
       logo: { src: './logo.svg' },
-      markdown: { headingLinks: false },
+      markdown: { headingLinks: false},
       customCss: ['./src/css/global.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
@@ -188,12 +188,23 @@ export default defineConfig({
                 },
               ],
             },
-            // TODO: finish the social login plugin and then add it to the sidebar
-            // {
-            //   label: 'Other Plugins',
-            //   collapsed: true,
-            //   autogenerate: { directory: 'docs/plugins' },
-            // }
+            {
+              label: 'Other Plugins',
+              collapsed: true,
+              items: [
+                { 
+                  label: 'Social Login',   
+                  items: [
+                    { label: 'Overview', link: '/docs/plugins/social-login/' },
+                    { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
+                    { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
+                    { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
+                    { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
+                    { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
+                  ],
+                },
+              ],
+            }
           ],
         },
         {

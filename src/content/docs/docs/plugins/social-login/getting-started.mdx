@@ -1,25 +1,36 @@
 ---
 title: Getting Started
 description: Learn how to install and configure the Capacitor Social Login plugin for your app.
+sidebar:
+  order: 2
 ---
 
-## Installation
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
 
-<PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'yarn', 'bun']} />
-
-### Steps:
-
+<Steps>
 1. **Install the package**
-   See the tabs above for the command specific to your package manager.
+   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sync with native projects**
-   <Code code="npx cap sync" lang="bash" title="Sync with native projects" />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configure the plugin**
-   - **Google**: Follow the setup instructions for Google login.
-   - **Facebook**: Follow the setup instructions for Facebook login.
-   - **Apple**: Follow the setup instructions for Apple login.
+   <div class="flex flex-nowrap gap-4 h-full">
+      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
+         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
+            Configure Google Sign-In for your app
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/facebook/general/" title="Facebook" icon="facebook">
+            Set up Facebook Login integration
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
+            Enable Sign in with Apple
+         </MicroCard>
+      </div>
+   </div>
+</Steps>
+
+

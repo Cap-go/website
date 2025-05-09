@@ -1,6 +1,87 @@
 ---
-title: COMING SOON
-description: COMING SOON
+title: Apple login on web
+description: Learn how to configure Apple Login with Capacitor on web.
+sidebar:
+    order: 4
 ---
+import { Steps } from '@astrojs/starlight/components';
 
-COMING SOON
+# Apple login on IOS
+
+Configuring the web login is not trivial. It's more difficult than setting up `Sign in with Apple` on iOS but more difficult than setting up `Sign in with Apple` on Android.
+
+## Generating the service
+
+:::note
+This step is redundent if you have already configured `Sign in with Apple` on Android.
+:::
+
+Please follow the guide [here](/docs/plugins/social-login/apple/android/#creating-the-service-id) to generate the service.
+
+## Configuring the `Return URLs`
+
+   :::caution
+   This step is obligatory regardless of whether or not you have configured the `Sign in with Apple` on Android.
+   :::
+
+<Steps>
+    1. Find your service ID. Open [the serivces page](https://developer.apple.com/account/resources/identifiers/list/serviceId) and click on your service ID.
+        <img src="/social-login-assets/apple_dev_open_service.webp" alt="Find your service ID" />
+    2. Click on the `Configure` button
+        <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Configure button for Sign in with Apple" />
+    3. Click on the `Plus` button
+        <img src="/social-login-assets/apple_dev_add_website_url.webp" alt="Add website URL button" />
+    4. Add your website URL into both `Domains and Subdomains` and `Return URLs`
+        <img src="/social-login-assets/apple_dev_web_auth_config_add_redirect.webp" alt="Adding website URL" />
+        
+
+        :::note
+        You can add multiple URLs if you want to. The redirect URL is the url of the page where you will have your `Sign in with Apple` button.
+        For example, this might be `https://magic-login-srvv2-48.localcan.dev/auth`
+        :::
+
+
+        :::caution
+        You **MAY NOT** add the `http://localhost` URL. It will **NOT** work.
+        :::
+
+        :::caution
+        When you add a redirect URL, you **MUST** add the `/` at the end of it otherwise it will **NOT** work.
+        
+        It's recommended to use both an URL with and without the trailing slash.
+        :::
+
+    5. Click on the `Next` button
+        <img src="/social-login-assets/apple_dev_web_auth_conf_next_redirect.webp" alt="Save button" />
+    6. Click on the `Done` button
+        <img src="/social-login-assets/apple_dev_web_auth_conf_done.webp" alt="Done button" />
+</Steps>
+
+## Using the `Sign in with Apple` in your app
+
+:::note
+I am using Vue as my framework, the exact implementation will vary depening on the framework of your choice
+:::
+
+<Steps>
+    1. Add the following code to your component.
+        ```ts
+            //  onMounted is vue specific
+            onMounted(() => {
+            SocialLogin.initialize({
+                apple: {}
+            })
+            });
+        ```
+    2. Create a button that will begin the login process.
+        This button should call the following function.
+        ```ts
+            async function loginApple() {
+                const res = await SocialLogin.login({
+                    provider: 'apple',
+                    options: {}
+                })
+        ```
+</Steps>
+
+You are done 🚀

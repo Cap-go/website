@@ -1,6 +1,111 @@
 ---
-title: COMING SOON
-description: COMING SOON
+title: Google Login on Web
+description: Learn how to configure Google Login with Capacitor on web.
+sidebar:
+    order: 4
 ---
+import { Steps } from '@astrojs/starlight/components';
 
-COMING SOON
+# Google Login setup for Web
+
+## Introduction
+
+In this guide, you will learn how to setup Google Login with Capgo Social Login for web applications.
+I assume that you have already read the [general setup guide](/docs/plugins/social-login/google/general).
+
+## Using Google login on the web
+
+Using the google login on the web is rather simple.
+In order to use it, you have to do the following:
+
+<Steps>
+1. Create a web client in the Google Console
+   
+   :::note
+   If you have already configured Google Login for Android, you can skip this step as you've already created a web client. You can proceed directly to step 2.
+   :::
+   
+   1. Click on the search bar
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+   
+   2. Search for `credentials` and click on the `APIs and Services` option (number 2 on the screenshot)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+   
+   3. Click on the `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+   
+   4. Select `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+   
+   5. Select the `Application type` as `Web application`
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+   
+   6. Name your client and click `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with name field highlighted" />
+   
+   7. Copy the client ID, you'll use this as the `webClientId` in your application
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+2. Configure the web client in the Google Console
+
+   1. Please open the [credentials page](https://console.cloud.google.com/apis/credentials) and click on your web client
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials list showing web client to click" />
+
+   2. Now, please add the `Authorized JavaScript origins`. This should include all the addresses that you might use for your app. In might case, I will **ONLY** use localhost, but since I use a custom port I have to add both `http://localhost` and `http://localhost:5173`
+    
+      1. Please click on `add URI`
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins section with ADD URI button" />
+    
+      2. Please type your URL
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI dialog with localhost URL entered" />
+    
+      3. Please repeat until you added all the URLs
+    
+      4. When you finish, your screen should look something like this
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins with multiple localhost URLs added" />
+
+   3. Now, please add some `Authorized redirect URIs`. This will depend on what page do you depend to use the CapacitorSocialLogin plugin on. In my case, I am going to be using it on `http://localhost:5173/auth` 
+    
+      1. Please click on `ADD URI`
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs section with ADD URI button" />
+    
+      2. Enter your URL and click `ADD URL` again
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI dialog with redirect URL entered" />
+
+   4. Click `save`
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save button at bottom of web client configuration" />
+
+3. Now, you should be ready to call `login` from JavaScript like so:
+
+   1. First, import `SocialLogin`
+  
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. Then, call initialize. This should be called ONLY once.
+  
+      ```typescript
+      // onMounted is Vue specific
+      // webClientId is the client ID you got in the web client creation step not the android client ID.
+      onMounted(() => {
+       SocialLogin.initialize({
+         google: {
+           webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+         }
+       })
+      })
+      ```
+  
+   3. Create a login button that calls `SocialLogin.login` when clicked
+  
+      ```typescript
+      const res = await SocialLogin.login({
+       provider: 'google',
+       options: {}
+      })
+      // Handle the response
+      console.log(JSON.stringify(res));
+      ```
+</Steps>
+
