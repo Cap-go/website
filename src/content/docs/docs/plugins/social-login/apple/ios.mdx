@@ -1,6 +1,66 @@
 ---
-title: COMING SOON
-description: COMING SOON
+title: Apple login on IOS
+description: Learn how to configure Apple Login with Capacitor on IOS.
+sidebar:
+    order: 2
 ---
 
-COMING SOON
+import { Steps } from '@astrojs/starlight/components';
+
+Let's break down what you are going to need in order to setup Apple login on IOS.
+
+<Steps>
+1. Configure the capabilities of your app.
+
+    In order to do this, please open Xcode, click on `App`
+    ![App XCode](/social-login-assets/app-xcode.png)
+
+2. Make sure that you sellect the right target.
+
+    ![XCode App Target](/social-login-assets/xcode-app-target.png)
+
+3. Please make sure that you add the `Sign in with Apple` capability.
+
+    ![App XCode Add Capability](/social-login-assets/app-xcode-add-cap.png)
+
+    ![App XCode Add Capability](/social-login-assets/sign-with-apple-cap.png)
+
+    :::caution
+    If you don't see the `Sign in with Apple` capability, configure the [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::
+
+4. Initialize the Apple Login in your app.
+
+    :::note
+    I am using Vue as my framework, the exact implementation will vary depening on the framework of your choice
+    :::
+
+    ```ts
+    //  onMounted is vue specific
+    onMounted(() => {
+    SocialLogin.initialize({
+        apple: {}
+    })
+    });
+    ```
+
+5. Create a button that will begin the login process.
+
+    Said button should call the following function:
+
+    ```ts
+    async function loginApple() {
+    const res = await SocialLogin.login({
+        provider: 'apple',
+        options: {}
+    })
+    ```
+
+6. Run your app on a **<u>PHYSICAL</u>** device and test it. 
+
+    If you followed the steps closely you will see the following screen after clicking your button.
+
+    ![Apple Sign In prompt on iOS device](/social-login-assets/apple-sign-in-ios-final.png)
+</Steps>
+
+That's it! You are all set.

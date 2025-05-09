@@ -1,0 +1,78 @@
+<script>
+  import mermaid from 'mermaid';
+
+  // Initialize on load with current theme
+  function initializeMermaid() {
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark';
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: isDarkTheme ? 'dark' : 'default',
+    });
+  }
+  
+  // Save original mermaid content for later re-rendering
+  function saveOriginalContent() {
+    document.querySelectorAll('.mermaid').forEach(element => {
+      if (!element.getAttribute('data-original-content')) {
+        element.setAttribute('data-original-content', element.innerHTML);
+      }
+    });
+  }
+  
+  // Reset mermaid elements and restore original content
+  function resetAndRender() {
+    document.querySelectorAll('.mermaid').forEach(element => {
+      const originalContent = element.getAttribute('data-original-content');
+      if (originalContent) {
+        // Remove the processed attribute so mermaid will reprocess it
+        element.removeAttribute('data-processed');
+        // Restore original content
+        element.innerHTML = originalContent;
+      }
+    });
+    
+    // Re-initialize with new theme
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark';
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDarkTheme ? 'dark' : 'default',
+    });
+    
+    // Run mermaid on all diagrams
+    mermaid.run();
+  }
+  
+  // Initial setup
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeMermaid();
+    saveOriginalContent();
+  });
+  
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        console.log('theme changed', document.documentElement.dataset.theme);
+        resetAndRender();
+      }
+    });
+  });
+
+  // Start observing theme changes
+  if (typeof document !== 'undefined') {
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+</script>
+
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <pre class="mermaid">
+        flowchart TD
+            A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
+            B --> |Pass the link| C(Open the Chrome browser)
+            C --> D(Wait for the user to login)
+            D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
+            E --> F(Redirect back to the app)
+            F --> G(Return to JS)
+        </pre>
+</div>
