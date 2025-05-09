@@ -80,7 +80,7 @@ export default defineConfig({
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
-      customCss: ['./src/css/global.css'],
+      customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: {
