@@ -1,0 +1,214 @@
+---
+import { roundNumber } from '@/services/misc'
+import type { Database } from '@/services/supabase.types'
+import * as m from '@/paraglide/messages'
+
+interface Props {
+  pricing: Database['public']['Tables']['plans']['Row'][]
+  paygBase: {
+    mau: number
+    storage: number
+    bandwidth: number
+  }
+  paygUnits: {
+    mau: number
+    storage: number
+    bandwidth: number
+  }
+  yearly: boolean
+}
+
+const { pricing, paygBase, paygUnits, yearly } = Astro.props
+
+const solo = pricing.find((plan) => plan.name === 'Solo')!
+const team = pricing.find((plan) => plan.name === 'Team')!
+const maker = pricing.find((plan) => plan.name === 'Maker')!
+const payg = pricing.find((plan) => plan.name === 'Pay as you go')!
+const basePrice = payg.price_m
+
+// Initial values for the calculator
+const initialMau = maker.mau
+const initialUpdatesSize = 4
+const initialUpdatesByMonth = 5
+
+// Initial calculations
+const initialUpdates = initialMau * initialUpdatesByMonth
+const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1000
+const initialStorage = (initialUpdatesByMonth * initialUpdatesSize * 12) / 1000
+
+// Initial suggestion
+const initialSuggestion = (() => {
+  if (initialMau <= solo.mau && initialStorage <= solo.storage && initialBandwidth <= solo.bandwidth) return 'Solo'
+  else if (initialMau <= maker.mau && initialStorage <= maker.storage && initialBandwidth <= maker.bandwidth) return 'Maker'
+  else if (initialMau <= team.mau && initialStorage <= team.storage && initialBandwidth <= team.bandwidth) return 'Team'
+  return 'Pay as you go'
+})()
+
+// Initial price calculation
+const initialTotalPrice = (() => {
+  const mauPrice = initialMau > paygBase.mau ? (initialMau - paygBase.mau) * paygUnits.mau : 0
+  const storagePrice = initialStorage > paygBase.storage ? (initialStorage - paygBase.storage) * paygUnits.storage : 0
+  const bandwidthPrice = initialBandwidth > paygBase.bandwidth ? (initialBandwidth - paygBase.bandwidth) * paygUnits.bandwidth : 0
+  const sum = mauPrice + storagePrice + bandwidthPrice
+  if (sum > 0) return roundNumber(basePrice + sum) * (yearly ? 12 : 1)
+  return (initialSuggestion ? roundNumber(pricing.find((plan) => plan.name === initialSuggestion)!.price_m) : basePrice) * (yearly ? 12 : 1)
+})()
+---
+
+<section id="calculator">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
+      <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
+        {m.calculate_your_usage({}, { locale: Astro.locals.locale })}<br />
+      </h2>
+      <p class="font-pj mt-6 text-sm font-normal text-gray-600">
+        {m.enter_your_estimated_monthly_active_users({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+    <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
+      <div class="absolute -inset-2">
+        <div
+          class="mx-auto h-full w-full opacity-30 blur-lg filter"
+          style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
+        >
+        </div>
+      </div>
+      <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
+        <div class="flex flex-col items-center">
+          <p class="calc-label">
+            MAU<br /><span class="text-[0.6rem]">{m.monthly_active_users({}, { locale: Astro.locals.locale })}</span>
+          </p>
+          <input
+            id="mau-input"
+            value={initialMau}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_by_month({}, { locale: Astro.locals.locale })} />
+          <input
+            id="updates-by-month-input"
+            value={initialUpdatesByMonth}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_size({}, { locale: Astro.locals.locale })} />
+          <input
+            id="updates-size-input"
+            value={initialUpdatesSize}
+            placeholder="0"
+            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
+          />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.updates_total({}, { locale: Astro.locals.locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-updates>
+            {initialUpdates.toLocaleString()}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.bandwidth_gb({}, { locale: Astro.locals.locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-bandwidth>
+            {initialBandwidth.toLocaleString()}
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="calc-label" set:html={m.storage({}, { locale: Astro.locals.locale })} />
+          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-storage>
+            {initialStorage.toLocaleString()}
+          </p>
+        </div>
+        <div class="col-span-1 flex flex-col items-center md:col-span-3">
+          <p class="text-md font-pj mt-0 mt-5 font-bold tracking-widest text-white uppercase">
+            {yearly ? m.yearly({}, { locale: Astro.locals.locale }) : m.monthly({}, { locale: Astro.locals.locale })} Price
+          </p>
+          <p class="font-pj mt-3 rounded-xl bg-white p-2 text-3xl font-bold break-all text-gray-900" data-total-price>
+            {initialTotalPrice}€
+          </p>
+          {
+            initialSuggestion && (
+              <p class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
+                {m.we_suggest_you_to_choose_the({}, { locale: Astro.locals.locale })}
+                <button id="suggestion-button" class="underline-current cursor-pointer font-bold text-red-400 uppercase underline" data-suggestion={initialSuggestion}>
+                  {initialSuggestion}
+                </button>
+                {m.plan({}, { locale: Astro.locals.locale })}
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ solo, team, maker, paygBase, pricing, basePrice, paygUnits }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const roundNumber = (number) => Math.round(number * 100) / 100
+
+    const mauInput = document.getElementById('mau-input')
+    const yearlyRadio = document.getElementById('yearly')
+    const monthlyRadio = document.getElementById('monthly')
+    const suggestionButton = document.getElementById('suggestion-button')
+    const updatesSizeInput = document.getElementById('updates-size-input')
+    const updatesByMonthInput = document.getElementById('updates-by-month-input')
+
+    function updateCalculations() {
+      const mau = Number(mauInput.value)
+      const updatesSize = Number(updatesSizeInput.value)
+      const updatesByMonth = Number(updatesByMonthInput.value)
+
+      const updates = mau * updatesByMonth
+      const bandwidth = (updates * updatesSize) / 1000
+      const storage = (updatesByMonth * updatesSize * 12) / 1000
+
+      // Update displayed values
+      const updatesElement = document.querySelector('[data-updates]')
+      const storageElement = document.querySelector('[data-storage]')
+      const bandwidthElement = document.querySelector('[data-bandwidth]')
+      const totalPriceElement = document.querySelector('[data-total-price]')
+
+      if (storageElement) storageElement.textContent = storage.toLocaleString()
+      if (updatesElement) updatesElement.textContent = updates.toLocaleString()
+      if (bandwidthElement) bandwidthElement.textContent = bandwidth.toLocaleString()
+
+      // Calculate suggestion
+      let suggestion = 'Pay as you go'
+      if (mau <= solo.mau && storage <= solo.storage && bandwidth <= solo.bandwidth) suggestion = 'Solo'
+      else if (mau <= maker.mau && storage <= maker.storage && bandwidth <= maker.bandwidth) suggestion = 'Maker'
+      else if (mau <= team.mau && storage <= team.storage && bandwidth <= team.bandwidth) suggestion = 'Team'
+
+      // Update suggestion button if it exists
+      if (suggestionButton) {
+        suggestionButton.textContent = suggestion
+        suggestionButton.dataset.suggestion = suggestion
+      }
+
+      // Calculate and update total price
+      if (totalPriceElement) {
+        const mauPrice = Number(mau > paygBase.mau ? (mau - paygBase.mau) * paygUnits.mau : 0)
+        const storagePrice = Number(storage > paygBase.storage ? (storage - paygBase.storage) * paygUnits.storage : 0)
+        const bandwidthPrice = Number(bandwidth > paygBase.bandwidth ? (bandwidth - paygBase.bandwidth) * paygUnits.bandwidth : 0)
+        const sum = mauPrice + storagePrice + bandwidthPrice
+        const factor = yearlyRadio.checked ? 12 : 1
+        let totalPrice = factor * roundNumber(pricing.find((plan) => plan.name === suggestion).price_m)
+        if (sum > 0) totalPrice = factor * roundNumber(basePrice + sum)
+        totalPriceElement.textContent = `${totalPrice}€`
+      }
+    }
+
+    mauInput.addEventListener('input', updateCalculations)
+    yearlyRadio.addEventListener('change', updateCalculations)
+    monthlyRadio.addEventListener('change', updateCalculations)
+    updatesSizeInput.addEventListener('input', updateCalculations)
+    updatesByMonthInput.addEventListener('input', updateCalculations)
+
+    suggestionButton?.addEventListener('click', () => {
+      const suggestion = suggestionButton.dataset.suggestion
+      document.getElementById(suggestion === 'Pay as you go' ? 'pay-as-you-go' : 'plans')?.scrollIntoView({ behavior: 'smooth' })
+    })
+  })
+</script>

@@ -160,5 +160,6 @@ module.exports = {
       },
     },
   },
+  safelist: ['from-purple-500/20', 'to-pink-500/20', 'from-pink-500/20', 'to-blue-500/20', 'from-blue-500/20', 'to-purple-500/20'],
   plugins: [require('@tailwindcss/typography')],
 }

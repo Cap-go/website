@@ -1,12 +1,739 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueConsulting from '@/vue-pages/consulting.vue'
-import * as m from '../paraglide/messages.js'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.consulting_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
+
+const randomOdd = Math.random() < 0.5 ? 0 : 1
+
+const plugins = [
+  {
+    name: 'capacitor-updater',
+    description: 'Instant updates for Capacitor apps',
+    stars: 508,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />',
+  },
+  {
+    name: 'purchases-capacitor',
+    description: 'In-app purchases and subscriptions made easy (transferred to RevenueCat)',
+    stars: 140,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  },
+  {
+    name: 'capacitor-data-storage-sqlite',
+    description: 'SQLite Plugin for iOS and Android',
+    stars: 79,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />',
+  },
+  {
+    name: 'capacitor-inappbrowser',
+    description: 'In-app browser with urlChangeEvent',
+    stars: 64,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />',
+  },
+  {
+    name: 'capacitor-native-biometric',
+    description: 'Use biometrics to authenticate users',
+    stars: 43,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />',
+  },
+  {
+    name: 'native-audio',
+    description: 'Native audio engine plugin',
+    stars: 29,
+    language: 'Android & iOS',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />',
+  },
+]
 ---
 
-<Layout content={content}><VueConsulting locale={Astro.locals.locale} client:load /></Layout>
+<Layout content={content}>
+  <div class="bg-white">
+    <main
+      class="flex h-screen items-center justify-center bg-slate-900 bg-scroll bg-no-repeat text-center leading-8 font-light text-slate-900 sm:flex-col sm:items-center md:pt-24"
+      style="background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp'); background-position: 50% 100%; background-size: 520px"
+    >
+      <div
+        class="static mb-auto flex max-w-none flex-col items-center justify-center font-sans leading-8 text-slate-900 sm:mt-auto sm:max-w-none sm:items-center sm:justify-center md:my-auto"
+        style="padding: 10vh 5vw 5vh"
+      >
+        <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
+          <h1 class="relative mt-0 mb-16 pb-0 text-4xl font-medium text-white md:text-6xl" style="line-height: 72px">
+            <strong style="line-height: 72px">CapacitorJS</strong>&nbsp;<span class="text-indigo-600" style="line-height: 72px"
+              ><strong style="line-height: 72px">{m.code_review_and_consulting({}, { locale: Astro.locals.locale })}</strong></span
+            >&nbsp;<strong style="line-height: 72px">{m.services({}, { locale: Astro.locals.locale })}</strong>
+          </h1>
+        </div>
+        <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
+          <h2 class="my-0 block flex-col items-center justify-end text-3xl font-medium text-gray-100 sm:text-center" style="line-height: 42px">
+            &nbsp;{m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps({}, { locale: Astro.locals.locale })}
+          </h2>
+        </div>
+        <a
+          href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+          target="_blank"
+          class="bg-opacity-[0] mt-8 inline-block h-12 cursor-pointer rounded-none border-2 border-solid border-white bg-white bg-auto bg-no-repeat pt-4 pr-12 pb-2 pl-6 text-xs leading-3 font-bold text-white uppercase transition-none hover:border-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
+          style="
+                transition: all 0.2s ease 0s;
+                text-decoration: none;
+                letter-spacing: 2px;
+                background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+                background-position: 100% 50%;
+              "
+          ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
+        >
+      </div>
+    </main>
+    <section class="mt-0 block pt-16 text-center leading-8 font-light text-slate-900 sm:my-0 sm:pt-24">
+      <div
+        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-slate-900 sm:max-w-none"
+        style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+      >
+        <div class="mx-auto flex flex-col items-center text-center sm:relative sm:mx-auto" style="max-width: 100vh">
+          <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">"</p>
+          <div class="text-slate-900">
+            <div role="list">
+              <div role="listitem">
+                <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
+                  <p class="mt-0 mb-2 italic">
+                    <span set:html={m.testimonial_consulting({}, { locale: Astro.locals.locale })} />
+                  </p>
+                </div>
+                <img
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                  src="/click_and_boat.webp"
+                  alt="click an boat"
+                  class="mb-4 hidden max-w-full border-0 align-middle"
+                  style="border-radius: 100%"
+                />
+                <div class="text-xl leading-6 font-medium">TC Nicolas</div>
+                <div>Click & Boat</div>
+                <a
+                  href="#"
+                  class="mt-3 inline-block max-w-full cursor-pointer bg-transparent font-normal text-indigo-600 hover:text-black"
+                  style="transition: all 0.2s ease 0s; text-decoration: none"
+                  ><img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block w-1/2 max-w-full border-0 align-middle" /></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="block pt-20 text-left leading-8 font-light text-slate-900">
+      <div
+        class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 sm:max-w-none"
+        style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+      >
+        <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
+          <h2 class="my-0 pb-10 text-center font-sans text-6xl font-bold text-slate-900">
+            {m.code_review({}, { locale: Astro.locals.locale })}<br class="text-center text-6xl" style="line-height: 72px" />&amp;
+            <span class="text-center text-6xl text-indigo-600" style="text-decoration: none; line-height: 72px">{m.consulting({}, { locale: Astro.locals.locale })}</span>
+          </h2>
+          <p class="mt-0 mb-24 text-slate-900">{m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: Astro.locals.locale })}:<br /><br /></p>
+          <div class="mt-16 text-left md:grid" style="grid-auto-columns: 1fr; grid-template-columns: 0.25fr 1fr; grid-template-rows: auto auto auto auto auto; gap: 64px 30px">
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_1({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-bold sm:text-slate-900" style="line-height: 42px">
+                {m.review_before_passing_the_code_to_the_production({}, { locale: Astro.locals.locale })}
+              </h5>
+              <p class="mt-0 mb-2">
+                {m.find_and_fix_bugs_during_the_coding_process({}, { locale: Astro.locals.locale })}
+                {m.it_s_faster_cheaper_and_requires_fewer_developers_to_do_it({}, { locale: Astro.locals.locale })}<br /><br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_2({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.optimization_of_the_existing_app({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">{m.when_down_review({}, { locale: Astro.locals.locale })}<br /></p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_3({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.little_experience_with_capacitorjs({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {m.when_developing_a_capacitorjs_app_as_a_beginner_it_s_good_to_have_an_experienced_consultant_by_your_side({}, { locale: Astro.locals.locale })}
+                {m.let_them_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: Astro.locals.locale })}<br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_4({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.poor_app_quality({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {
+                  m.somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low({}, { locale: Astro.locals.locale })
+                }<br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_5({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.something_doesn_t_work_but_you_don_t_know_why({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {m.a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it({}, { locale: Astro.locals.locale })}<br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_6({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.plugin_is_missing({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {
+                  m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it(
+                    {},
+                    { locale: Astro.locals.locale },
+                  )
+                }<br />
+              </p>
+            </div>
+            <div class="text-slate-900">
+              <h6
+                class="my-2 bg-auto bg-no-repeat pl-16 text-xs leading-3 font-bold text-black uppercase"
+                style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; letter-spacing: 1.7px"
+              >
+                {m.case_7({}, { locale: Astro.locals.locale })}
+              </h6>
+            </div>
+            <div class="text-slate-900">
+              <h5 class="mt-0 mb-2 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+                <strong class="font-bold" style="line-height: 42px">{m.ci_cd_setup({}, { locale: Astro.locals.locale })}</strong>
+              </h5>
+              <p class="mt-0 mb-2">
+                {
+                  m.our_team_helps_you_with_configuring_and_managing_automated_builds_tests_and_app_deployments_to_app_stores_through_fastlane_and_voltbuilder_in_your_cicd_environment(
+                    {},
+                    { locale: Astro.locals.locale },
+                  )
+                }<br />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-32 text-center leading-8 font-light text-slate-900">
+      <div
+        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-slate-900 sm:max-w-none"
+        style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+      >
+        <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
+          <h2 class="mt-0 mb-5 py-10 text-6xl font-medium" style="line-height: 72px">
+            <strong class="font-bold" style="line-height: 72px">{m.why_is_it_important({}, { locale: Astro.locals.locale })}</strong>
+          </h2>
+        </div>
+        <div class="mx-auto mt-5 text-center sm:mx-auto" style="max-width: 754px">
+          <p class="mt-0 mb-24 text-slate-900">{m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to({}, { locale: Astro.locals.locale })}<br /></p>
+        </div>
+        <div class="grid-flow-row md:grid md:text-left" style="gap: 64px 48px; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: auto">
+          <div class="text-slate-900">
+            <div class="mb-6 h-20">
+              <img
+                src="/5fa52311f7e41c2d850aa66a_icon-code-consulting-01.svg"
+                loading="lazy"
+                height="80"
+                alt="Icon consulting"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{m.minimize_mistakes_and_their_impact_on_the_project({}, { locale: Astro.locals.locale })}</strong>
+            </h5>
+          </div>
+          <div class="text-slate-900">
+            <div class="mb-6 h-20">
+              <img
+                src="/5fa523110b6488629923d270_icon-code-consulting-02.svg"
+                loading="lazy"
+                height="80"
+                alt="icon consulting 2"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{m.ensure_that_the_project_requirements_are_fulfilled({}, { locale: Astro.locals.locale })}</strong>
+            </h5>
+          </div>
+          <div class="text-slate-900">
+            <div class="mb-6 h-20">
+              <img
+                src="/5fa5231016002724c966c3ce_icon-code-consulting-03.svg"
+                loading="lazy"
+                height="80"
+                alt="icon consulting 3"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{m.improve_overall_code_quality({}, { locale: Astro.locals.locale })}</strong>
+            </h5>
+          </div>
+          <div class="text-slate-900">
+            <div class="mb-6 h-20">
+              <img
+                src="/5fa5231166c750849eb12738_icon-code-consulting-04.svg"
+                loading="lazy"
+                height="80"
+                alt="icon consulting 4"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+              <strong class="font-bold" style="line-height: 42px">{m.achieve_consistent_design_and_implementation({}, { locale: Astro.locals.locale })}</strong>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="block bg-indigo-600 py-0 text-center leading-8 font-light text-white sm:pt-32">
+      <div
+        class="relative clear-both my-auto block max-w-none flex-col items-center font-sans leading-8 text-white sm:max-w-none"
+        style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+      >
+        <div class="mx-auto my-0 text-center sm:mx-auto" style="max-width: 950px">
+          <h2 class="relative mt-0 mb-24 pb-10 text-6xl font-medium" style="line-height: 72px">{m.technological_benefits({}, { locale: Astro.locals.locale })}</h2>
+        </div>
+        <div class="gap-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; align-content: stretch">
+          <div
+            class="text-white opacity-100"
+            style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
+          >
+            <div class="mb-6 h-12">
+              <img
+                src="/5faa754a59f4a273466af44c_icon-cc-special-01.svg"
+                loading="lazy"
+                height="50"
+                alt="icon consulting special"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h4 class="my-2 text-xl leading-6 font-medium filter-none">
+              <strong class="font-bold">{m.better_code_quality({}, { locale: Astro.locals.locale })}</strong>
+            </h4>
+            <p class="mt-auto mb-2 block text-lg whitespace-normal">
+              {m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: Astro.locals.locale })}
+            </p>
+          </div>
+          <div
+            class="text-white opacity-100"
+            style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
+          >
+            <div class="mb-6 h-12">
+              <img
+                src="/5faa754aded9d51509ed1e5e_icon-cc-special-02.svg"
+                loading="lazy"
+                height="50"
+                alt="icon consulting special 2"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h4 class="my-2 text-xl leading-6 font-medium filter-none">
+              <strong class="font-bold">{m.improved_code_readability({}, { locale: Astro.locals.locale })}</strong><br />
+            </h4>
+            <p class="mt-auto mb-2 block text-lg whitespace-normal">
+              {
+                m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive(
+                  {},
+                  { locale: Astro.locals.locale },
+                )
+              }
+            </p>
+          </div>
+          <div
+            class="text-white opacity-100"
+            style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1"
+          >
+            <div class="mb-6 h-12">
+              <img
+                src="/5faa754a1644d1e0529a915c_icon-cc-special-03.svg"
+                loading="lazy"
+                height="50"
+                alt="icon consulting special 3"
+                class="inline-block max-w-full border-0 align-middle"
+              />
+            </div>
+            <h4 class="my-2 text-xl leading-6 font-medium filter-none">
+              <strong class="font-bold">{m.bugs_reduction({}, { locale: Astro.locals.locale })}</strong>
+            </h4>
+            <p class="mt-auto mb-2 block text-lg whitespace-normal">
+              {m.eliminate_the_number_of_bugs_before_passing_the_code_to_production({}, { locale: Astro.locals.locale })}<strong class="font-bold"></strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="block bg-slate-900 text-left leading-8 font-light text-slate-900" style="padding-top: 5vh; padding-bottom: 5vh">
+      <div
+        class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 sm:max-w-none"
+        style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+      >
+        <div class="flex flex-col items-center justify-center text-center" style="padding-right: 3vw; padding-left: 3vw">
+          <h2
+            set:html={m.hire_capacitorjs_consultants({}, { locale: Astro.locals.locale }).replace('CapacitorJS', `<span class='text-indigo-600'>CapacitorJS</span>`)}
+            class="relative my-0 pb-10 text-6xl font-medium text-white"
+            style="line-height: 72px"
+          />
+          <a
+            href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+            target="_blank"
+            class="bg-opacity-[0] mt-8 inline-block h-12 cursor-pointer rounded-none border-2 border-solid border-white bg-white bg-auto bg-no-repeat pt-4 pr-12 pb-2 pl-6 text-xs leading-3 font-bold text-white uppercase transition-none hover:border-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
+            style="
+                  transition: all 0.2s ease 0s;
+                  text-decoration: none;
+                  letter-spacing: 2px;
+                  background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+                  background-position: 100% 50%;
+                "
+            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
+          >
+        </div>
+      </div>
+    </section>
+    <div
+      class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 font-light text-slate-900 sm:max-w-none"
+      style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+    >
+      <div class="mx-auto mt-5 leading-8 text-slate-900 sm:mx-auto" style="max-width: 754px">
+        <h2 class="mt-0 mb-5 py-10 text-6xl font-medium" style="line-height: 72px">{m.business_benefits({}, { locale: Astro.locals.locale })}</h2>
+      </div>
+      <div class="items-stretch gap-4 leading-8 text-slate-900 sm:text-left md:grid" style="grid-template-columns: 0.5fr 0.5fr; grid-template-rows: auto; column-gap: 64px">
+        <div>
+          <div class="mb-6 h-20 text-slate-900">
+            <img
+              src="/5fa3f3228235fd74f2756006_icon-code-consulting-05.svg"
+              loading="lazy"
+              height="80"
+              alt="icon consulting 5"
+              class="inline-block max-w-full border-0 align-middle"
+            />
+          </div>
+          <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+            <strong class="font-bold" style="line-height: 42px">{m.lower_cost_of_fixing_bugs({}, { locale: Astro.locals.locale })}</strong>
+          </h5>
+          <p class="mt-0 mb-2 text-slate-900">
+            {
+              m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it(
+                {},
+                { locale: Astro.locals.locale },
+              )
+            }
+          </p>
+        </div>
+        <div>
+          <div class="mb-6 h-20 text-slate-900">
+            <img
+              src="/5fa3f32276aae4494f1e1e73_icon-code-consulting-06.svg"
+              loading="lazy"
+              height="80"
+              alt="icon consulting 6"
+              class="inline-block max-w-full border-0 align-middle"
+            />
+          </div>
+          <h5 class="mt-0 mb-6 block flex-col items-start justify-center text-3xl font-medium sm:text-slate-900" style="line-height: 42px">
+            <strong class="font-bold" style="line-height: 42px"
+              >{m.opportunity_for_juniors_to_develop_skills({}, { locale: Astro.locals.locale })}<br style="line-height: 42px" /></strong
+            >
+          </h5>
+          <p class="mt-0 mb-2 text-slate-900">
+            {
+              m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers({}, { locale: Astro.locals.locale })
+            }<br />
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark relative my-auto block max-w-none flex-col items-center text-center font-sans leading-8 font-light text-slate-900 sm:max-w-none" style="padding: 10vh 5vw">
+      <div class="mx-auto leading-8 text-slate-900" style="max-width: 70%">
+        <h2 class="my-0 w-full pb-10 text-6xl font-medium text-white" style="line-height: 72px">
+          {m.why_work({}, { locale: Astro.locals.locale })}
+          <span class="text-center text-indigo-600" style="line-height: 72px">{m.with_us({}, { locale: Astro.locals.locale })}</span>
+        </h2>
+      </div>
+      <div class="grid-flow-row gap-6 leading-8 md:grid md:text-left" style="grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; padding-top: 5vh">
+        <div class="flex flex-col items-center justify-center px-5 text-left">
+          <img src="/628664bc9a5b8b85917e5c1f_community.svg" loading="lazy" width="151" alt="Community icon" class="mt-0 mb-auto inline-block max-w-full border-0 align-middle" />
+          <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
+            {m.community_trusted({}, { locale: Astro.locals.locale })}
+            <a
+              href="https://x.com/martindonadieu"
+              target="_blank"
+              title=" Capgo team"
+              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              style="
+                    transition:
+                      color 450ms ease 0s,
+                      all 0.3s ease 0s;
+                    text-decoration: underline;
+                  "
+            >
+              Cordova &amp; CapacitorJS expert</a
+            >
+          </p>
+        </div>
+        <div class="flex flex-col items-center justify-center px-5 text-left">
+          <img
+            src="/628665001abcfb45461302f2_our%20work.svg"
+            loading="lazy"
+            width="151"
+            alt="RN projects icon"
+            class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
+          />
+          <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
+            {m.experienced_in_working_on_demanding({}, { locale: Astro.locals.locale })}
+            <a
+              href="https://github.com/Cap-go/capacitor-updater"
+              target="_blank"
+              title="Cordova & CapacitorJS projects"
+              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              style="
+                    transition:
+                      color 450ms ease 0s,
+                      all 0.3s ease 0s;
+                    text-decoration: underline;
+                  "
+              >{m.cordova_capacitorjs_projects({}, { locale: Astro.locals.locale })}</a
+            >
+          </p>
+        </div>
+        {
+          randomOdd ? (
+            <div class="flex flex-col items-center justify-center px-5 text-left">
+              <img
+                src="/628665198526443cedf94743_open%20source.svg"
+                loading="lazy"
+                width="151"
+                alt="Open source icon"
+                class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
+              />
+              <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
+                Creators and maintainers of many
+                <a
+                  title="Open source"
+                  class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+                  style="
+                      transition:
+                        color 450ms ease 0s,
+                        all 0.3s ease 0s;
+                      text-decoration: underline;
+                    "
+                >
+                  Open Source libraries
+                </a>
+                used by millions
+              </p>
+            </div>
+          ) : (
+            <div class="flex flex-col items-center justify-center px-5 text-left">
+              <img
+                src="/6286658deaf6961fb2d6d4c0_core%20contrubutor.svg"
+                loading="lazy"
+                width="151"
+                alt="Core contributors icon"
+                class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
+              />
+              <p
+                set:html={m.core_contributors_to_capacitorjs_and_ionic({}, { locale: Astro.locals.locale }).replace(
+                  'CapacitorJS',
+                  `<a
+                    href='https://capacitorjs.com/'
+                    title='Core contributors'
+                    class='font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600'
+                    style='
+                      transition:
+                        color 450ms ease 0s,
+                        all 0.3s ease 0s;
+                      text-decoration: underline;
+                    '
+                    >CapacitorJS</a
+                  >`,
+                )}
+                class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white"
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+    <section class="bg-indigo-600 px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{m.consulting_forged_plugins_community_embraced({}, { locale: Astro.locals.locale })}</h2>
+          <p class="mt-4 text-xl text-indigo-200">
+            {m.consulting_forged_plugins_community_embraced_description({}, { locale: Astro.locals.locale })}
+            <br />
+            {m.each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+      <div class="mt-12">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            plugins.map((plugin) => (
+              <div class="pt-6">
+                <div class="flow-root rounded-lg bg-indigo-500 px-6 pb-8">
+                  <div class="-mt-6">
+                    <div>
+                      <span class="inline-flex items-center justify-center rounded-md bg-indigo-700 p-3 shadow-lg">
+                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={plugin.icon} />
+                      </span>
+                    </div>
+                    <h3 class="mt-8 text-lg font-medium tracking-tight text-white">{plugin.name}</h3>
+                    <p class="mt-5 text-base text-indigo-200">{plugin.description}</p>
+                    <div class="mt-4 flex items-center text-sm text-indigo-300">
+                      <span class="mr-2">{plugin.language}</span>
+                      <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      {plugin.stars}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="mt-10 text-center">
+        <a
+          target="_blank"
+          href="https://cal.com/martindonadieu/get-your-custom-capacitor-plugin"
+          class="inline-flex items-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 shadow-sm hover:bg-indigo-50"
+        >
+          {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
+          <svg class="-mr-1 ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+    <div
+      class="relative clear-both my-auto block max-w-none flex-col items-center text-center font-sans leading-8 font-light text-slate-900 sm:max-w-none"
+      style="grid-area: 1 / 1 / 2 / 2; padding: 10vh 5vw 5vh"
+    >
+      <div class="leading-8 text-slate-900">
+        <div role="list" class="text-center">
+          <div role="listitem" class="text-slate-900">
+            <div class="mx-auto flex flex-col items-center sm:relative sm:mx-auto" style="max-width: 100vh">
+              <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" style="line-height: 96px">"</p>
+              <div class="clear-both mb-10 table text-lg font-normal italic" style="grid-area: 1 / 1 / 2 / 2">
+                <p class="mt-0 mb-2 italic">
+                  <span set:html={m.testimonial_consulting_2({}, { locale: Astro.locals.locale })} />
+                </p>
+              </div>
+              <img loading="lazy" height="80" src="/waynium.webp" alt="wainium logo" class="mb-4 hidden max-w-full border-0 align-middle" style="border-radius: 100%" />
+              <div class="text-xl leading-6 font-medium">Iannis</div>
+              <div>CTO &amp; Co-founder @ WAYNIUM</div>
+              <a
+                href="#"
+                class="inline-block max-w-full cursor-pointer bg-transparent font-normal text-indigo-600 hover:text-black"
+                style="transition: all 0.2s ease 0s; text-decoration: none"
+                ><img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="mt-3 inline-block max-w-full border-0 align-middle" /></a
+              >
+            </div>
+          </div>
+        </div>
+        <div role="navigation" aria-label="List" class="flex flex-wrap justify-center text-center"></div>
+      </div>
+    </div>
+    <section
+      id="contact-hireus"
+      class="relative my-auto block max-w-none flex-col items-center bg-slate-900 text-center font-sans leading-8 font-light text-slate-900 sm:max-w-none"
+      style="padding: 10vh 5vw"
+    >
+      <div class="flex w-full flex-col md:flex-row">
+        <div class="flex w-1/3 flex-col text-left font-sans leading-8 font-light text-slate-900">
+          <h2
+            class="mt-5 mb-0 block items-start justify-center bg-auto bg-no-repeat pt-0 pb-10 pl-16 text-xs leading-4 font-bold text-black uppercase"
+            style="background-image: url('/5f58c922ef1b872549f97d10_bg-subtitle.svg'); background-position: 0px 3px; filter: invert(100%); letter-spacing: 1.7px; min-width: 3px"
+          >
+            <strong class="text-left uppercase" style="letter-spacing: 1.7px">{m.contact({}, { locale: Astro.locals.locale })}</strong><br
+              class="text-left uppercase"
+              style="letter-spacing: 1.7px"
+            />
+          </h2>
+        </div>
+        <div class="flex flex-col">
+          <h3 class="my-0 mr-10 w-full pt-2 pb-10 text-left font-sans text-6xl font-medium text-white" style="line-height: 72px">
+            {m.lets_work_together({}, { locale: Astro.locals.locale })}
+          </h3>
+          <p class="mt-auto mb-2 block bg-transparent text-left font-sans text-lg leading-8 font-light whitespace-normal text-white">
+            {m.need_help_with_cordova_or_capacitorjs_let_us_know({}, { locale: Astro.locals.locale })}
+          </p>
+          <a
+            href="https://cal.com/martindonadieu/capacitor-code-review-and-consulting-services"
+            target="_blank"
+            class="bg-opacity-[0] mt-8 inline-block h-12 cursor-pointer rounded-none border-2 border-solid border-white bg-white bg-auto bg-no-repeat pt-4 pr-12 pb-2 pl-6 text-xs leading-3 font-bold text-white uppercase transition-none hover:border-indigo-300 hover:bg-indigo-300 sm:w-auto sm:max-w-none sm:flex-initial"
+            style="
+                  transition: all 0.2s ease 0s;
+                  text-decoration: none;
+                  letter-spacing: 2px;
+                  background-image: url('/5f58c92280502cbbdcae3f56_arrow-right-button-bright.svg');
+                  background-position: 100% 50%;
+                "
+            ><strong class="uppercase" style="letter-spacing: 2px">{m.book_a_consultation({}, { locale: Astro.locals.locale })}</strong></a
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

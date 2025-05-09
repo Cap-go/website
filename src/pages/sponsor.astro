@@ -1,15 +1,21 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import VueSponsor from '@/vue-pages/sponsor.vue'
+import SponsorLogo from '@/components/SponsorLogo.astro'
+
+interface Sponsor {
+  id: string
+  name: string
+  imageUrl: string
+  url: string
+  tier?: string
+}
 
 const fetchSponsors = async () => {
   try {
     const siteUrl = import.meta.env.SITE
     const response = await fetch(`${siteUrl}/sponsors.json`)
     if (!response.ok) return []
-    const data = await response.json()
-    // console.log('data', data)
-    return data
+    return (await response.json()) as Sponsor[]
   } catch (error) {
     console.error('Error fetching sponsors:', error)
     return []
@@ -17,8 +23,75 @@ const fetchSponsors = async () => {
 }
 
 const sponsors = await fetchSponsors()
+if (sponsors.length === 0) return new Response(null, { status: 404 })
+const bakerSponsors = sponsors.filter((sponsor) => sponsor.tier === 'baker')
+const silverSponsors = sponsors.filter((sponsor) => sponsor.tier === 'silver')
+const goldSponsors = sponsors.filter((sponsor) => sponsor.tier === 'gold')
+const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum')
 ---
 
 <Layout>
-  <VueSponsor client:load sponsors={sponsors} />
+  <div class="min-h-screen bg-gray-900 px-4 py-16 text-white sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h1 class="mb-4 text-4xl font-bold">Capgo Sponsors</h1>
+      <p class="mb-8 max-w-3xl text-xl text-gray-300">
+        Capgo is an open-source framework free to use thanks to our generous sponsors. If you use Capgo in your daily work and can't use our cloud service, please consider backing
+        us.
+      </p>
+      <a
+        href="https://github.com/sponsors/riderx"
+        class="mb-16 inline-block rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-colors duration-300 hover:bg-gray-200"
+      >
+        Become a sponsor
+      </a>
+      {
+        platinumSponsors.length > 0 && (
+          <div class="mb-16">
+            <h2 class="mb-8 text-2xl font-bold">Platinum</h2>
+            <div class="-mt-4 grid grid-cols-2 gap-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4">
+              {platinumSponsors.map((sponsor) => (
+                <SponsorLogo size={24} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        goldSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">Gold</h2>
+            <div class="-mt-4 grid grid-cols-3 gap-8 gap-x-4 sm:grid-cols-4 md:grid-cols-5">
+              {goldSponsors.map((sponsor) => (
+                <SponsorLogo size={20} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        silverSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">Silver</h2>
+            <div class="-mt-4 grid grid-cols-4 gap-8 gap-x-4 sm:grid-cols-5 md:grid-cols-6">
+              {silverSponsors.map((sponsor) => (
+                <SponsorLogo size={16} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        bakerSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">Baker</h2>
+            <div class="ml-12 flex flex-wrap gap-8">
+              {bakerSponsors.map((sponsor) => (
+                <SponsorLogo size={14} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
 </Layout>
