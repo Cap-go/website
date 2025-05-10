@@ -1,6 +1,6 @@
-import path from 'path'
 import fg from 'fast-glob'
 import { promises as fs } from 'fs'
+import path from 'path'
 
 const CONTENT_DIR = path.join('src', 'content')
 
