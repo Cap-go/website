@@ -9,14 +9,12 @@ import { slug as slugify } from 'github-slugger'
 const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
-const allPosts = await getCollection('blog')
+const allPosts = await getCollection('blog', ({ data }) => data.published !== false && data.locale === Astro.locals.locale)
 
-const posts = allPosts
-  .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale)
-  .sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
+const posts = allPosts.sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
 const tags = new Set<string>()
-allPosts.filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale).forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
+allPosts.forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
 const uniqueTags = Array.from(tags).sort()
 
 if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title

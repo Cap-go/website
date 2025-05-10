@@ -1,16 +1,14 @@
 ---
 interface Props {
-  items?: string[];
-  class?: string;
+  items?: string[]
+  class?: string
 }
 
-const { items = [], class: className = "" } = Astro.props;
+const { items = [], class: className = '' } = Astro.props
 ---
 
-  <div style="margin-left: 1.75rem;">
-      <ul>
-          {items.map(item => (
-          <li style="list-style: disc !important;">{item}</li>
-          ))}
-      </ul>
-  </div>
+<div style="margin-left: 1.75rem;">
+  <ul>
+    {items.map((item) => <li style="list-style: disc !important;">{item}</li>)}
+  </ul>
+</div>

@@ -1,72 +1,72 @@
 <script>
-  import mermaid from 'mermaid';
+  import mermaid from 'mermaid'
 
   // Initialize on load with current theme
   function initializeMermaid() {
-    const isDarkTheme = document.documentElement.dataset.theme === 'dark';
-    mermaid.initialize({ 
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
+    mermaid.initialize({
       startOnLoad: true,
       theme: isDarkTheme ? 'dark' : 'default',
-    });
+    })
   }
-  
+
   // Save original mermaid content for later re-rendering
   function saveOriginalContent() {
-    document.querySelectorAll('.mermaid').forEach(element => {
+    document.querySelectorAll('.mermaid').forEach((element) => {
       if (!element.getAttribute('data-original-content')) {
-        element.setAttribute('data-original-content', element.innerHTML);
+        element.setAttribute('data-original-content', element.innerHTML)
       }
-    });
+    })
   }
-  
+
   // Reset mermaid elements and restore original content
   function resetAndRender() {
-    document.querySelectorAll('.mermaid').forEach(element => {
-      const originalContent = element.getAttribute('data-original-content');
+    document.querySelectorAll('.mermaid').forEach((element) => {
+      const originalContent = element.getAttribute('data-original-content')
       if (originalContent) {
         // Remove the processed attribute so mermaid will reprocess it
-        element.removeAttribute('data-processed');
+        element.removeAttribute('data-processed')
         // Restore original content
-        element.innerHTML = originalContent;
+        element.innerHTML = originalContent
       }
-    });
-    
+    })
+
     // Re-initialize with new theme
-    const isDarkTheme = document.documentElement.dataset.theme === 'dark';
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
     mermaid.initialize({
       startOnLoad: false,
       theme: isDarkTheme ? 'dark' : 'default',
-    });
-    
+    })
+
     // Run mermaid on all diagrams
-    mermaid.run();
+    mermaid.run()
   }
-  
+
   // Initial setup
   document.addEventListener('DOMContentLoaded', () => {
-    initializeMermaid();
-    saveOriginalContent();
-  });
-  
+    initializeMermaid()
+    saveOriginalContent()
+  })
+
   // Watch for theme changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'data-theme') {
-        console.log('theme changed', document.documentElement.dataset.theme);
-        resetAndRender();
+        console.log('theme changed', document.documentElement.dataset.theme)
+        resetAndRender()
       }
-    });
-  });
+    })
+  })
 
   // Start observing theme changes
   if (typeof document !== 'undefined') {
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
   }
 </script>
 
-
 <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-    <pre class="mermaid">
+  <pre
+    class="mermaid">
         flowchart TD
             A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
             B --> |Pass the link| C(Open the Chrome browser)

@@ -1,18 +1,5 @@
 ---
-slug: |-
-  Por qué necesitas Capgo
-
-  Capgo es una excelente solución para varios escenarios:
-
-  • Cuando deseas desplegar actualizaciones instantáneamente.
-  • Cuando las actualizaciones de la App Store son demasiado lentas.
-  • No quieres esperar a que Apple apruebe cada actualización.
-  • Cuando quieres implementar A/B testing para producción.
-  • Cuando necesitas múltiples versiones de la misma versión nativa.
-  • Cuando deseas desplegar actualizaciones automáticamente.
-  • Cuando necesitas restaurar rápidamente a una versión anterior.
-  • Cuando deseas tener una vista general del despliegue y control de versiones.
-  • Cuando necesitas un CDN para tu aplicación.
+slug: capgo-purpose
 title: Tujuan Capgo
 description: >-
   Artikel blog ini harus dideskripsikan sebagai panduan lengkap untuk developer

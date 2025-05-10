@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  plugins: [require('@tailwindcss/typography')],
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
@@ -160,6 +161,5 @@ module.exports = {
       },
     },
   },
-  safelist: ['from-purple-500/20', 'to-pink-500/20', 'from-pink-500/20', 'to-blue-500/20', 'from-blue-500/20', 'to-purple-500/20'],
-  plugins: [require('@tailwindcss/typography')],
+  safelist: ['from-purple-500/20', 'to-pink-500/20', 'from-pink-500/20', 'to-blue-500/20', 'from-blue-500/20', 'to-purple-500/20', 'pl-4', 'pl-8', 'pl-12', 'pl-16', 'pl-20'],
 }
