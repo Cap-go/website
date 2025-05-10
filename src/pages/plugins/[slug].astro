@@ -6,20 +6,25 @@ import * as m from '@/paraglide/messages'
 import { fetchWithToken, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const slugsSet = new Set()
-  const tuts = await getCollection('plugin')
-  tuts.forEach((i) => {
-    if (i.filePath && i.data.published !== false) slugsSet.add(getSlug(i.filePath).replace('.md', ''))
+  const pluginPosts: { [k: string]: CollectionEntry<'plugin'>[] } = {}
+  await getCollection('plugin', (item) => {
+    const { data, filePath } = item
+    if (data.published !== false && filePath) {
+      const pluginSlug = getSlug(filePath).replace('.md', '')
+      if (!pluginPosts[pluginSlug]) pluginPosts[pluginSlug] = []
+      pluginPosts[pluginSlug].push(item)
+    }
   })
-  const slugs = [...slugsSet] as string[]
-  return slugs.map((slug) => {
+  return Object.entries(pluginPosts).map(([slug, posts]) => {
     return {
       params: { slug },
+      props: { posts },
     }
   })
 }
@@ -30,8 +35,7 @@ const plugin = actions.find((item) => getSlug(item.href) === Astro.params.slug) 
 if (!plugin || !plugin.title) return new Response(`plugin is not found for: ${Astro.url.pathname}`, { status: 404 })
 
 let tutorialPlugin = ''
-const tuts = await getCollection('plugin')
-const thisTut = tuts.find((i) => getSlug(i.filePath || '').replace('.md', '') === Astro.params.slug && (i.data.locale || defaultLocale) === Astro.locals.locale)
+const thisTut = (Astro.props.posts as CollectionEntry<'plugin'>[]).find((i) => (i.data.locale || defaultLocale) === Astro.locals.locale)
 if (thisTut?.body) tutorialPlugin = thisTut.body
 
 if (tutorialPlugin.length > 0) {
@@ -47,58 +51,58 @@ const tmp = marked.parse(`# ${plugin.title}\n\n${plugin.description}`)
 if (typeof tmp !== 'string') plugin['readme'] = await tmp
 else plugin['readme'] = tmp
 
-const promises: any[] = []
+// const promises: any[] = []
 // Fetch npm package details to get npm downloads
-const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${plugin.name}`
-promises.push(
-  fetch(npmApiUrl)
-    .then((res) => (res.ok ? res.json() : null))
-    .then((res) => {
-      if (res) plugin.npmDownloads = res.downloads
-    })
-    .catch(() => {}),
-)
+// const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${plugin.name}`
+// promises.push(
+//   fetch(npmApiUrl)
+//     .then((res) => (res.ok ? res.json() : null))
+//     .then((res) => {
+//       if (res) plugin.npmDownloads = res.downloads
+//     })
+//     .catch(() => {}),
+// )
 // Fetch npm package details to get npm modified
-const registryNpmApiUrl = `https://registry.npmjs.org/${plugin.name}`
-promises.push(
-  fetch(registryNpmApiUrl)
-    .then((res) => (res.ok ? res.json() : null))
-    .then((res) => {
-      if (res) {
-        plugin.datePublished = res.time.created
-        plugin.dateModified = res.time.modified
-      }
-    })
-    .catch(() => {}),
-)
+// const registryNpmApiUrl = `https://registry.npmjs.org/${plugin.name}`
+// promises.push(
+//   fetch(registryNpmApiUrl)
+//     .then((res) => (res.ok ? res.json() : null))
+//     .then((res) => {
+//       if (res) {
+//         plugin.datePublished = res.time.created
+//         plugin.dateModified = res.time.modified
+//       }
+//     })
+//     .catch(() => {}),
+// )
 // Extract the GitHub repository owner and name from the URL
-const githubUrlParts = plugin.href.split('/')
-const githubOwner = githubUrlParts[3]
-const githubRepo = githubUrlParts[4]
+// const githubUrlParts = plugin.href.split('/')
+// const githubOwner = githubUrlParts[3]
+// const githubRepo = githubUrlParts[4]
 // Fetch GitHub repository details to get GitHub stars
-const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
-promises.push(
-  fetch(githubApiUrl)
-    .then((res) => (res.ok ? res.json() : null))
-    .then((res) => {
-      if (res) plugin.githubStars = res.stargazers_count
-    })
-    .catch(() => {}),
-)
+// const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
+// promises.push(
+//   fetch(githubApiUrl)
+//     .then((res) => (res.ok ? res.json() : null))
+//     .then((res) => {
+//       if (res) plugin.githubStars = res.stargazers_count
+//     })
+//     .catch(() => {}),
+// )
 // Update the item with fetched data
-const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
-promises.push(
-  fetchWithToken(readmeApiUrl)
-    .then((res) => (res.ok ? res.json() : null))
-    .then((res) => {
-      if (res) {
-        const tmp = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
-        if (typeof tmp !== 'string') tmp.then((result) => (plugin.readme = result))
-        else plugin.readme = tmp
-      }
-    })
-    .catch(() => {}),
-)
+// const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
+// promises.push(
+//   fetchWithToken(readmeApiUrl)
+//     .then((res) => (res.ok ? res.json() : null))
+//     .then((res) => {
+//       if (res) {
+//         const tmp = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
+//         if (typeof tmp !== 'string') tmp.then((result) => (plugin.readme = result))
+//         else plugin.readme = tmp
+//       }
+//     })
+//     .catch(() => {}),
+// )
 
 // await Promise.all(promises)
 
@@ -145,10 +149,10 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
         {m.tutorial_on({}, { locale: Astro.locals.locale })}
         {title}
       </button>
-      <button class="rounded border border-white/10 px-3 py-1 text-sm" id="aboutBtn">
+      <!-- <button class="rounded border border-white/10 px-3 py-1 text-sm" id="aboutBtn">
         {m.about({}, { locale: Astro.locals.locale })}
         {title}
-      </button>
+      </button> -->
     </div>
     <div class="mt-6 flex w-full flex-col items-center">
       <div class="z-10 mb-8 hidden w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
@@ -207,7 +211,7 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
   </div>
 </Layout>
 
-<script>
+<!-- <script>
   document.addEventListener('DOMContentLoaded', () => {
     const tutorialBtn = document.getElementById('tutorialBtn')
     const aboutBtn = document.getElementById('aboutBtn')
@@ -224,4 +228,4 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
       aboutSection?.classList.remove('hidden')
     })
   })
-</script>
+</script> -->

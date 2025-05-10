@@ -13,18 +13,22 @@ const description = m.plugins_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-let plugins = await Promise.all(
-  actions.map(async (item) => ({
-    ...item,
-    description: await marked.parse(item.description),
-  })),
-)
-
 const slugsSet = new Set()
-const tuts = await getCollection('plugin')
-tuts.forEach((i) => {
-  if (i.filePath && i.data.published !== false) slugsSet.add(getSlug(i.filePath).replace('.md', ''))
-})
+const [_, pluginsOriginal] = await Promise.all([
+  getCollection('plugin', ({ data, filePath }) => {
+    if (data.published !== false && filePath) {
+      slugsSet.add(getSlug(filePath).replace('.md', ''))
+    }
+  }),
+  Promise.all(
+    actions.map(async (item) => ({
+      ...item,
+      description: await marked.parse(item.description),
+    })),
+  ),
+])
+
+let plugins = pluginsOriginal
 const slugs = [...slugsSet] as string[]
 plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', '')))
 ---
