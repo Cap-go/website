@@ -1,30 +1,35 @@
 ---
-import type { GetStaticPaths } from 'astro'
-import { slug as slugify } from 'github-slugger'
 import Blog from '@/components/Blog.astro'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { slug as slugify } from 'github-slugger'
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = (await getCollection('blog')).filter((i) => i.data.published !== false).sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
-  const tags = new Set<string>()
-  posts.forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
-  return [...tags].map((slug) => ({ params: { slug: slugify(slug) } }))
+  const publishedPosts = await getCollection('blog', ({ data }) => data.published !== false)
+  const tags: { [k: string]: CollectionEntry<'blog'>[] } = {}
+  publishedPosts.forEach((article) =>
+    article.data.tag.split(',').forEach((props) => {
+      if (!tags[props]) tags[props] = []
+      tags[props].push(article)
+    }),
+  )
+  return Object.entries(tags).map(([slug, posts]) => ({ params: { slug: slugify(slug) }, props: { posts } }))
 }
 
 const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 
-const allPosts = await getCollection('blog')
+const allPosts = Astro.props.posts as CollectionEntry<'blog'>[]
+const localeAllPosts = allPosts.filter((i) => i.data.locale === Astro.locals.locale)
 
-const posts = allPosts
-  .filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale && Astro.params.slug && slugify(i.data.tag).includes(slugify(Astro.params.slug.toString())))
-  .sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
+const posts = localeAllPosts.sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
 const tags = new Set<string>()
-allPosts.filter((i) => i.data.published !== false && i.data.locale === Astro.locals.locale).forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
+localeAllPosts.forEach((article) => article.data.tag.split(',').forEach((props) => tags.add(props)))
 const uniqueTags = Array.from(tags).sort()
 
 if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title
