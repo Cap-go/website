@@ -3,7 +3,7 @@
   "name": "capgo-website",
   "scripts": {
     "astro": "astro",
-    "dev": "astro dev",
+    "dev": "tsx scripts/fix_markdown_languages.tsx && astro dev",
     "start": "astro dev",
     "build": "time paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && time tsx scripts/fix_markdown_languages.tsx && time astro sync && astro build && time tsx ./scripts/repair_sitemap.tsx",
     "preview": "astro preview",

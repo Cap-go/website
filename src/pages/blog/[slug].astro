@@ -13,21 +13,23 @@ import striptags from 'striptags'
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const blogs = await getCollection('blog')
   const blogPosts: { [k: string]: CollectionEntry<'blog'>[] } = {}
+  const allPublishedEntries: CollectionEntry<'blog'>[] = []
   blogs.forEach((j) => {
     if (j.data.published !== false) {
+      allPublishedEntries.push(j)
       if (!blogPosts[j.data.slug]) blogPosts[j.data.slug] = []
       blogPosts[j.data.slug].push(j)
     }
   })
   return Object.entries(blogPosts).map(([slug, posts]) => ({
     params: { slug },
-    props: { entries: posts },
+    props: { entries: posts, allPublishedEntries },
   }))
 }
 
 if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
 
-const { entries } = Astro.props as { entries: CollectionEntry<'blog'>[] }
+const { entries, allPublishedEntries } = Astro.props as { entries: CollectionEntry<'blog'>[]; allPublishedEntries: CollectionEntry<'blog'>[] }
 
 const entry = entries.find((j) => j.data.locale === Astro.locals.locale)
 
@@ -61,7 +63,7 @@ for (const j of entries) {
 }
 
 // Find related posts in the same locale
-// const related = filteredLocaleEntries.filter((j) => j.data.slug !== Astro.params.slug).slice(0, 3)
+const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
 // Find alternate versions (other locales)
 const alternateVersions = otherLocaleEntries.map((translation) => ({
   slug: translation.data.slug,
@@ -215,7 +217,7 @@ content['ldJSON'] = {
           {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
         </p>
       </div>
-      <!-- {
+      {
         related.length > 0 && (
           <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
             {related.map((article) => (
@@ -223,7 +225,7 @@ content['ldJSON'] = {
             ))}
           </div>
         )
-      } -->
+      }
       <div class="my-12 text-center">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
