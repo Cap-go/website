@@ -1,12 +1,12 @@
 ---
 slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
-title: Creating Mobile Apps with Nuxt 3 and Capacitor.
-description: How to create a mobile app with Nuxt 3, Capacitor and implement native UI with Konsta UI.
+title: 2025 Guide:: Creating Mobile Apps with Nuxt 3.17 and Capacitor.
+description: How to create a mobile app with Nuxt 3.17, Capacitor and implement native UI with Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2023-06-03T00:00:00.000Z
+updated_at: 2025-05-12T00:00:00.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: Nuxt 3 and Capgo illustration
 keywords: Nuxt 3, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -16,7 +16,7 @@ locale: en
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-In this tutorial, we will start with a new [Nuxt 3](https://nuxtjs.org/) app and move into native land using Capacitor and eventually also add [Konsta UI](https://konstaui.com/) for an improved Tailwind CSS mobile UI, although the last step is completely optional.
+In this tutorial, we will start with a new [Nuxt 3.17](https://nuxtjs.org/) app and move into native land using Capacitor and eventually also add [Konsta UI](https://konstaui.com/) for an improved Tailwind CSS mobile UI, although the last step is completely optional.
 
 By using Capacitor, you can easily convert your Nuxt 3 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
 
