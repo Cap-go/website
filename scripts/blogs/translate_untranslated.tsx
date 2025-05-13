@@ -38,11 +38,11 @@ const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[
   return map
 }
 
-const processFile = async (file: string, lang: string, langBlogDirectory: string): Promise<void> => {
+const processFile = async (file: string, lang: string): Promise<void> => {
   try {
-    const filePath = join(defaultBlogDirectory, file)
-    const destinationPath = join(langBlogDirectory, file)
-    const content = await readFile(filePath, 'utf8')
+    const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', file)
+    const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
+    const content = await readFile(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
     const fieldsToTranslate = ['title', 'description', 'head_image_alt']
     for (const field of fieldsToTranslate) {
@@ -91,27 +91,18 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
 }
 
 const translateBlogInAllLocales = async (file: string, locales: string[]) => {
-  await Promise.all(locales.map((lang) => processFile(file, lang, join(blogDirectory, lang))))
+  await Promise.all(locales.map((lang) => processFile(file, lang)))
 }
 
 const translateBlogsInAllLocales = async (): Promise<void> => {
   const map = await mapUntranslatedBlogToLocales()
   console.log(JSON.stringify(map))
   const entries = Object.entries(map)
-  const batchSize = 3
   let processedCount = 0
   const totalCount = entries.length
-  for (let i = 0; i < totalCount; i += batchSize) {
-    const batch = entries.slice(i, i + batchSize)
-    console.log(`Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(totalCount / batchSize)}`)
-    await Promise.all(batch.map(([file, locales]) => translateBlogInAllLocales(file, locales)))
-    processedCount += batch.length
-    console.log(`Processed ${processedCount}/${totalCount}`)
-  }
-  if (totalCount % batchSize !== 0) {
-    const remainingBatch = entries.slice(totalCount - (totalCount % batchSize))
-    await Promise.all(remainingBatch.map(([file, locales]) => translateBlogInAllLocales(file, locales)))
-    processedCount += remainingBatch.length
+  for (const [file, locales] of entries) {
+    console.log(`Processing ${file} (${++processedCount}/${totalCount})`)
+    await translateBlogInAllLocales(file, locales)
     console.log(`Processed ${processedCount}/${totalCount}`)
   }
 }
