@@ -16,7 +16,7 @@ keywords: >-
   in-app purchases, external payments
 tag: Tutorial
 published: true
-locale: ja
+locale: de
 ---
 # Implementierung von Stripe Payment Links in Capacitor Apps gemäß neuer Apple-Richtlinien
 

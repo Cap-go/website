@@ -54,22 +54,21 @@ if (!entry) {
   return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
-const otherLocaleEntries = []
-const filteredLocaleEntries = []
-
-for (const j of entries) {
-  if (j.data.locale === Astro.locals.locale) filteredLocaleEntries.push(j)
-  else otherLocaleEntries.push(j)
-}
-
 // Find related posts in the same locale
 const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
 // Find alternate versions (other locales)
-const alternateVersions = otherLocaleEntries.map((translation) => ({
-  slug: translation.data.slug,
-  locale: translation.data.locale,
-  url: `${Astro.locals.runtimeConfig.public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
-}))
+const seenLocales = new Set()
+const alternateVersions = entries
+  .filter(({ data }) => {
+    if (seenLocales.has(data.locale)) return false
+    seenLocales.add(data.locale)
+    return true
+  })
+  .map(({ data }) => ({
+    slug: data.slug,
+    locale: data.locale,
+    url: `${Astro.locals.runtimeConfig.public.baseUrl}/${data.locale}/blog/${data.slug}/`,
+  }))
 
 const { Content, headings } = await render(entry)
 

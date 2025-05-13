@@ -16,7 +16,7 @@ keywords: >-
   in-app purchases, external payments
 tag: Tutorial
 published: true
-locale: ja
+locale: ko
 ---
 # iOS 앱스토어 새 지침에 따른 Capacitor 앱에서 Stripe 결제 링크 구현하기
 
