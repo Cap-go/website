@@ -18,7 +18,7 @@ keywords: >-
   apps, app visibility, user engagement, updates
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous voulez que votre application se démarque ? Tout commence par les métadonnées.** Les métadonnées de l'app store influencent la façon dont les utilisateurs découvrent, évaluent et téléchargent votre application. Voici ce que vous devez savoir :

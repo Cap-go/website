@@ -18,7 +18,7 @@ keywords: >-
   development, app updates, Capgo
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous voulez des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) plus rapides sans attendre ?** Les mises à jour en direct (OTA) permettent aux développeurs de contourner les délais des app stores et de déployer des modifications directement aux utilisateurs en quelques minutes. Voici pourquoi c'est important :

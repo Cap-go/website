@@ -17,7 +17,7 @@ keywords: >-
   security
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Ecco la traduzione in italiano:

@@ -18,7 +18,7 @@ keywords: >-
   mobile development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous voulez des [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) plus rapides avec un minimum d'effort ?** La mise en place d'un pipeline CI/CD pour votre application [Capacitor](https://capacitorjs.com/) automatise la construction, les tests et le déploiement, permettant de gagner du temps et de réduire les erreurs. Voici ce que vous obtiendrez :

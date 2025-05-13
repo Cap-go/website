@@ -15,7 +15,7 @@ keywords: >-
   fixes, mobile development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Gli aggiornamenti live di [Capacitor](https://capacitorjs.com/) consentono agli sviluppatori di rilasciare correzioni di bug e modifiche minori direttamente nelle app senza richiedere agli utenti di scaricare aggiornamenti dall'[App Store](https://www.apple.com/app-store/). Questo velocizza il deployment fino all'**81%**, riduce i costi e migliora l'esperienza utente. Tuttavia, è essenziale rispettare le rigide linee guida di Apple per evitare il rifiuto delle app.

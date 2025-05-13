@@ -15,7 +15,7 @@ keywords: >-
   updates, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 La comunicazione bidirezionale nelle app [Capacitor](https://capacitorjs.com/) collega i layer web e nativi, consentendo lo scambio di dati in tempo reale. Questo permette alle tecnologie web di accedere alle funzionalità native del dispositivo come la fotocamera o il GPS mentre i layer nativi interagiscono con gli elementi web. Ecco perché è importante:

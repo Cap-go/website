@@ -16,7 +16,7 @@ keywords: >-
   continuous integration, mobile app updates
 tag: Tutorial
 published: true
-locale: ja
+locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 ## Introduzione

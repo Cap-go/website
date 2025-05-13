@@ -16,7 +16,7 @@ keywords: >-
   integration, mobile app updates
 tag: Alternatives
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Voltbuilder è una piattaforma cloud che permette agli sviluppatori di convertire i loro progetti web in app mobile native per Android e iOS utilizzando HTML, CSS e JavaScript. Offre una serie di funzionalità progettate per semplificare il processo di sviluppo delle app, tra cui configurazione semplice, build e caricamento automatico delle app e supporto per i plugin Apache Cordova.

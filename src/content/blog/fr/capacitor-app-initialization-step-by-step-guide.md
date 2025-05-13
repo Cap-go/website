@@ -18,7 +18,7 @@ keywords: >-
   configuration, web apps, plugins, live updates
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous souhaitez créer des applications mobiles avec une seule base de code ?** [Capacitor](https://capacitorjs.com/) facilite la création d'applications iOS, Android et web en utilisant des frameworks comme [React](https://react.dev/), [Angular](https://angular.io/), ou [Vue](https://vuejs.org/). Ce guide explique comment configurer [Capacitor](https://capacitorjs.com/), configurer les plateformes et déployer les mises à jour efficacement.

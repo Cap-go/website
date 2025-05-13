@@ -17,7 +17,7 @@ keywords: >-
   customization, deployment, open-source, cost-effective solutions
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous cherchez une meilleure façon de gérer les mises à jour de vos applications [Capacitor](https://capacitorjs.com/) ?** Avec l'arrêt de [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) en 2024 et la fermeture prévue d'[Appflow](https://ionic.io/appflow/) en 2026, les développeurs se tournent vers des alternatives comme les plugins CI/CD Capacitor. Voici un rapide aperçu :

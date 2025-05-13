@@ -18,7 +18,7 @@ keywords: >-
   experience
 tag: 'Development, Security, Updates'
 published: true
-locale: it
+locale: ja
 next_blog: ''
 ---
 OTA（Over-the-Air）アップデートはアプリを迅速に改善できますが、ミスはクラッシュ、セキュリティリスク、さらには[アプリストア](https://www.apple.com/app-store/)違反につながる可能性があります。以下は一般的な落とし穴を避けるためのクイックガイドです：

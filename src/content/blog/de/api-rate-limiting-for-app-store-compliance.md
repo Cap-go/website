@@ -18,7 +18,7 @@ keywords: >-
   protection, request management
 tag: 'Development, Mobile, Security'
 published: true
-locale: es
+locale: de
 next_blog: ''
 ---
 Here's the German translation:

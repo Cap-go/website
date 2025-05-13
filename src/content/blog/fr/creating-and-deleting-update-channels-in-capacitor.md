@@ -18,7 +18,7 @@ keywords: >-
   management, version control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Les [canaux de mise à jour](https://capgo.app/docs/webapp/channels/) de [Capacitor](https://capacitorjs.com/) vous permettent d'envoyer des mises à jour over-the-air (OTA) à des groupes d'utilisateurs spécifiques. Cela aide à gérer plusieurs versions d'applications, tester de nouvelles fonctionnalités et déployer progressivement les mises à jour. Voici ce que vous devez savoir :

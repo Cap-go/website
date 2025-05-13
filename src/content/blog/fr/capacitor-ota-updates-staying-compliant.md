@@ -18,7 +18,7 @@ keywords: >-
   security protocols, over-the-air updates
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous souhaitez corriger les bugs ou ajouter des fonctionnalités rapidement sans les délais des app stores ?** Les mises à jour Over-the-Air (OTA) pour les applications [Capacitor](https://capacitorjs.com/) vous permettent de déployer des mises à jour directement aux utilisateurs, en contournant le long processus de validation des app stores. Mais rester conforme aux règles d'Apple et de Google Play est essentiel pour éviter le rejet ou la suppression de l'application.

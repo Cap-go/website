@@ -16,7 +16,7 @@ keywords: >-
   rollback, mobile development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 [Capacitor](https://capacitorjs.com/) gli aggiornamenti live possono far risparmiare tempo evitando le revisioni dell'app store, ma i conflitti di versione possono compromettere le prestazioni dell'app e l'esperienza utente. Ecco cosa devi sapere:

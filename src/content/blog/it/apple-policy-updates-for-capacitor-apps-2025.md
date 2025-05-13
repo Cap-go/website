@@ -17,7 +17,7 @@ keywords: >-
   benchmarks, OTA updates, encryption
 tag: 'Development, Mobile, Security'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 **Le politiche dell'App Store di Apple del 2025 introducono regole più severe per le app [Capacitor](https://capacitorjs.com/).** Gli sviluppatori devono ora soddisfare standard più elevati per privacy, sicurezza e prestazioni. Ecco cosa devi sapere:

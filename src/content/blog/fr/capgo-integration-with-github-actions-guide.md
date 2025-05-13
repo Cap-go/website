@@ -17,7 +17,7 @@ keywords: >-
   security
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 [Capgo](https://capgo.app/) et [GitHub Actions](https://docs.github.com/actions) simplifient ensemble le déploiement des mises à jour pour les applications [Capacitor](https://capacitorjs.com/). Voici pourquoi cette intégration mérite votre attention :

@@ -16,7 +16,7 @@ keywords: >-
   integration, mobile app updates
 tag: Alternatives
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Ionic Appflow è una piattaforma di sviluppo di app mobili basata su cloud che fornisce agli sviluppatori una serie di strumenti e servizi per creare, testare e distribuire app mobili rapidamente. Offre funzionalità come l'integrazione e la distribuzione continua, il reporting dei crash, consentendo agli sviluppatori di monitorare le prestazioni della loro app e garantire che funzioni correttamente per i loro utenti.

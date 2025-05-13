@@ -15,7 +15,7 @@ keywords: >-
   protection, request management
 tag: 'Development, Mobile, Security'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Il limite di velocità delle API garantisce che la tua app rispetti le linee guida di Apple e Google proteggendo il tuo sistema dal sovraccarico e dagli abusi. Limita la frequenza con cui gli utenti possono effettuare richieste, migliorando la sicurezza, riducendo i costi e garantendo prestazioni fluide. Ecco cosa devi sapere:

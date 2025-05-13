@@ -12,7 +12,7 @@ head_image_alt: Codemagic の TestFlight のイラスト
 keywords: 'Codemagic, CI/CD, iOS, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: ja
+locale: it
 next_blog: automatic-capacitor-android-build-codemagic
 ---
 ## Distribuzione Continua per iOS utilizzando Codemagic

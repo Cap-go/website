@@ -16,7 +16,7 @@ keywords: >-
   continuous integration, mobile app updates
 tag: Tutorial
 published: true
-locale: id
+locale: fr
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 Dans ce tutoriel, nous allons commencer avec une nouvelle application [Nuxt 3](https://nuxtjs.org/) et passer en mode natif en utilisant Capacitor, puis éventuellement ajouter [Konsta UI](https://konstaui.com/) pour une meilleure interface mobile avec Tailwind CSS, bien que cette dernière étape soit totalement optionnelle.

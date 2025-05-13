@@ -14,7 +14,7 @@ head_image_alt: Github アクション図
 keywords: 'Github actions, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: ja
+locale: it
 next_blog: automatic-capacitor-ios-build-github-action
 ---
 Questo tutorial si concentra sull'hosting GitHub, ma puoi adattarlo con piccole modifiche a qualsiasi altra piattaforma CI/CD.

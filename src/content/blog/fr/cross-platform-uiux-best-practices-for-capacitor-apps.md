@@ -17,7 +17,7 @@ keywords: >-
   design, Ionic, app updates, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous souhaitez créer des applications qui semblent natives sur iOS, Android et web ?** [Capacitor](https://capacitorjs.com/) rend cela possible en combinant les fonctionnalités web et natives. Mais créer une expérience fluide sur toutes les plateformes nécessite une conception UI/UX soignée. Voici comment faire :

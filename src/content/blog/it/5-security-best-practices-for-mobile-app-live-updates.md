@@ -15,7 +15,7 @@ keywords: >-
   security testing
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Mantenere la tua app mobile sicura durante gli aggiornamenti live è fondamentale per proteggere i dati degli utenti e mantenere la fiducia. Ecco un breve riepilogo delle migliori pratiche per proteggere i tuoi aggiornamenti over-the-air (OTA):

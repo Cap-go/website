@@ -14,7 +14,7 @@ keywords: >-
   mobile app updates
 tag: Migration
 published: true
-locale: ja
+locale: it
 next_blog: automatic-build-and-release-with-github-actions
 ---
 ## Riepilogo della Migrazione

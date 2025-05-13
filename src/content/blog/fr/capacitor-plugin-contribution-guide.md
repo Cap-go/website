@@ -18,7 +18,7 @@ keywords: >-
   documentation, contribution, open source
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 [Capacitor](https://capacitorjs.com/) plugins connectent les technologies web aux fonctionnalités natives des appareils, permettant le [développement d'applications multi-plateformes](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/). Ce guide vous aide à :

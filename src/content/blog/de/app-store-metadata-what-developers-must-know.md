@@ -18,7 +18,7 @@ keywords: >-
   apps, app visibility, user engagement, updates
 tag: 'Development, Mobile, Updates'
 published: true
-locale: es
+locale: de
 next_blog: ''
 ---
 **Möchten Sie, dass Ihre App heraussticht? Es beginnt mit Metadaten.** Metadaten im App Store beeinflussen, wie Benutzer Ihre App entdecken, bewerten und herunterladen. Hier ist, was Sie wissen müssen:

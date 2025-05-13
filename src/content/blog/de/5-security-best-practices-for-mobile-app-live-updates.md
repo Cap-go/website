@@ -20,7 +20,7 @@ keywords: >-
   security testing
 tag: 'Development, Mobile, Updates'
 published: true
-locale: es
+locale: de
 next_blog: ''
 ---
 Die Sicherheit Ihrer mobilen App während Live-Updates ist entscheidend für den Schutz von Benutzerdaten und die Aufrechterhaltung des Vertrauens. Hier ist eine kurze Zusammenfassung der wichtigsten Praktiken zur Absicherung Ihrer Over-the-Air (OTA) Updates:

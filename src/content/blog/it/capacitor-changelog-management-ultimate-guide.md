@@ -17,7 +17,7 @@ keywords: >-
   control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 La gestione dei changelog è essenziale per mantenere gli [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) trasparenti e organizzati. Questa guida spiega come creare, strutturare e automatizzare i changelog per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), assicurando che sia gli sviluppatori che gli utenti rimangano informati. Ecco cosa imparerai:

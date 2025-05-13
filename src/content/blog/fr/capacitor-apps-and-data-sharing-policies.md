@@ -17,7 +17,7 @@ keywords: >-
   mobile development, security measures
 tag: 'Development, Mobile, Security'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Vous voulez que votre application soit conforme aux règles strictes d'Apple et de [Google Play](https://play.google/developer-content-policy/) en matière de données ? Voici ce que vous devez savoir :**

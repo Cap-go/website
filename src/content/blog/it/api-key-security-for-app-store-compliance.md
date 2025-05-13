@@ -15,7 +15,7 @@ keywords: >-
   mobile security, transport security
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 **Mantenere sicure le tue [API keys](https://capgo.app/docs/webapp/api-keys/) è fondamentale per proteggere i dati degli utenti e rispettare le regole degli app store.** Esporre le chiavi può portare a violazioni dei dati, abuso del servizio e compromissione dell'account.

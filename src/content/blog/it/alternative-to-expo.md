@@ -16,7 +16,7 @@ keywords: >-
   integration, mobile app updates
 tag: Alternatives
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 Expo Live Update è una funzionalità della piattaforma Expo che consente agli sviluppatori di distribuire aggiornamenti alla loro app in tempo reale, senza richiedere agli utenti di scaricare una nuova versione dell'app. Questo è simile alla funzionalità di aggiornamento live di Capgo, che permette agli sviluppatori di aggiornare rapidamente e facilmente i contenuti e le funzionalità della loro app senza costringere gli utenti a passare attraverso il processo di download e installazione di un aggiornamento.

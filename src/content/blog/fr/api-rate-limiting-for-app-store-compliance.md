@@ -17,7 +17,7 @@ keywords: >-
   protection, request management
 tag: 'Development, Mobile, Security'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 La limitation du débit d'API garantit que votre application respecte les directives d'Apple et Google tout en protégeant votre système contre la surcharge et les abus. Elle limite la fréquence à laquelle les utilisateurs peuvent faire des requêtes, améliorant la sécurité, réduisant les coûts et assurant une performance fluide. Voici ce que vous devez savoir :

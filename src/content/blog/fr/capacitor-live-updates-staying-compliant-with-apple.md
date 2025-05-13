@@ -20,7 +20,7 @@ keywords: >-
   fixes, mobile development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Les mises à jour en direct de [Capacitor](https://capacitorjs.com/) permettent aux développeurs de pousser des correctifs de bugs et des modifications mineures directement dans les applications sans que les utilisateurs n'aient besoin de télécharger des mises à jour depuis l'[App Store](https://www.apple.com/app-store/). Cela accélère le déploiement jusqu'à **81%**, réduit les coûts et améliore l'expérience utilisateur. Cependant, il est essentiel de respecter les directives strictes d'Apple pour éviter les rejets d'applications.

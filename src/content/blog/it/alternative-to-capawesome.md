@@ -14,7 +14,7 @@ keywords: >-
   continuous integration, mobile app updates
 tag: Alternatives
 published: false
-locale: ja
+locale: it
 next_blog: ''
 ---
 Capawesome Cloud è una soluzione alternativa a Capgo, diciamo che è il suo fratellino creato da

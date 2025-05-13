@@ -18,7 +18,7 @@ keywords: >-
   rights, data sharing, enforcement
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **La loi californienne sur la protection de la vie privée des consommateurs (CCPA)** redéfinit la manière dont les applications mobiles gèrent les données des utilisateurs. Voici ce que vous devez savoir :

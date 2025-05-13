@@ -14,7 +14,7 @@ head_image_alt: Ilustrasi GitHub Action Fastlane testflight
 keywords: 'Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: id
+locale: fr
 next_blog: automatic-capacitor-android-build-github-action
 ---
 # Builds iOS automatiques avec GitHub Actions en utilisant Match

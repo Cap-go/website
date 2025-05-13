@@ -18,7 +18,7 @@ keywords: >-
   security testing
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Maintenir la sécurité de votre application mobile pendant les mises à jour en direct est essentiel pour protéger les données des utilisateurs et maintenir la confiance. Voici un résumé rapide des meilleures pratiques pour sécuriser vos mises à jour en direct (OTA) :

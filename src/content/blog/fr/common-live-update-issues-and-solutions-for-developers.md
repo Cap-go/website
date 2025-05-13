@@ -19,7 +19,7 @@ keywords: >-
   OTA updates, security, app development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Les mises à jour en direct permettent aux développeurs de pousser des modifications directement aux utilisateurs sans les délais de l'app store. Mais elles s'accompagnent de défis comme les problèmes de réseau, les conflits de versions et les problèmes de compatibilité des appareils. Ce guide fournit des solutions pour garantir des mises à jour fluides :

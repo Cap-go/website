@@ -15,7 +15,7 @@ keywords: >-
   OTA updates, CI/CD, performance optimization
 tag: 'Development, Security, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 **[Capacitor](https://capacitorjs.com/) ti permette di creare app per iOS, Android e web utilizzando un'unica base di codice.** Questa guida spiega come strutturare, testare e distribuire il tuo codice multipiattaforma in modo efficiente. Ecco cosa imparerai:

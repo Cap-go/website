@@ -17,7 +17,7 @@ keywords: >-
   plugin testing
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 [Capacitor](https://capacitorjs.com/) Native Bridge simplifie la création de plugins Android en connectant JavaScript et le code natif Android. Voici ce que vous devez savoir :

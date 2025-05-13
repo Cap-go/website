@@ -18,7 +18,7 @@ keywords: >-
   Sandbox, data protection
 tag: 'Development, Mobile, Security'
 published: true
-locale: es
+locale: de
 next_blog: ''
 ---
 **Apple und Google haben unterschiedliche Ansätze zum Datenschutz, die von ihren Geschäftsmodellen geprägt sind:**

@@ -12,7 +12,7 @@ head_image_alt: GitHubのFastlane testflightアクション図解
 keywords: 'Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: ja
+locale: it
 next_blog: automatic-capacitor-android-build-github-action
 ---
 # Build automatici iOS con GitHub Actions usando i Certificati

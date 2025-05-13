@@ -15,7 +15,7 @@ keywords: >-
   Store compliance, privacy policy
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 **Le regole sulla privacy di Apple ora richiedono agli sviluppatori di app [Capacitor](https://capacitorjs.com/) di concentrarsi sulla trasparenza dei dati degli utenti e sulla conformità per garantire l'approvazione dell'App Store e mantenere la fiducia degli utenti.**

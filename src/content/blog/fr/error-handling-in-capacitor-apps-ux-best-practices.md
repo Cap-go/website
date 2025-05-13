@@ -18,7 +18,7 @@ keywords: >-
   error messages, app development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **La gestion des erreurs peut faire ou défaire l'expérience utilisateur de votre application.** Une mauvaise gestion des erreurs peut conduire à des utilisateurs frustrés et des avis négatifs, tandis qu'une gestion efficace des erreurs crée la confiance et maintient les utilisateurs satisfaits. Voici ce que vous devez savoir :

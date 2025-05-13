@@ -18,7 +18,7 @@ keywords: >-
   strategies, user feedback
 tag: 'Development, Mobile, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Le choix entre les **déploiements progressifs** et les **versions complètes** dépend des besoins de votre application, de sa base d'utilisateurs et de l'urgence des mises à jour. Voici un aperçu rapide :

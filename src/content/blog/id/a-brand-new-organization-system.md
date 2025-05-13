@@ -14,7 +14,7 @@ keywords: >-
   backend development
 tag: Story
 published: true
-locale: fr
+locale: id
 next_blog: ''
 ---
 ## Penganalan

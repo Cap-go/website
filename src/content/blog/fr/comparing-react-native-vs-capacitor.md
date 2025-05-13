@@ -17,7 +17,7 @@ keywords: >-
   continuous integration, mobile app updates
 tag: Alternatives
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 Ce que nous allons couvrir :
