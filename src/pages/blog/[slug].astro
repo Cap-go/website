@@ -67,7 +67,8 @@ const alternateVersions = entries
   .map(({ data }) => ({
     slug: data.slug,
     locale: data.locale,
-    url: `${Astro.locals.runtimeConfig.public.baseUrl}/${data.locale}/blog/${data.slug}/`,
+    url:
+      data.locale === 'en' ? `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${data.slug}/` : `${Astro.locals.runtimeConfig.public.baseUrl}/${data.locale}/blog/${data.slug}/`,
   }))
 
 const { Content, headings } = await render(entry)
