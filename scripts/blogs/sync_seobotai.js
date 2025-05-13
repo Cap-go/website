@@ -1,3 +1,4 @@
+import '@dotenvx/dotenvx/config'
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { BlogClient } from 'seobot'

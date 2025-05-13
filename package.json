@@ -16,6 +16,7 @@
     "blogs:fix_locales_all": "tsx scripts/blogs/fix_locales_all.tsx",
     "blogs:delete_broken_all": "tsx scripts/blogs/delete_broken_all.tsx",
     "blogs:fix_code_languages_all": "tsx scripts/blogs/fix_code_languages_all.tsx",
+    "blogs:sync_seobot": "tsx scripts/blogs/sync_seobot.js",
     "docs:translate_all": "tsx scripts/generate_docs_translations.tsx",
     "plugins:translate_all": "tsx scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "tsx scripts/setup_new_locale.tsx",
