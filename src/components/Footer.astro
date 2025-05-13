@@ -163,9 +163,9 @@ const navigation: Record<string, NavigationItem[]> = {
               {
                 locales.map((item) => (
                   <a
-                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname)}
                     role="menuitem"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
                   >
                     {item.toUpperCase()}
                   </a>
