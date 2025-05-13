@@ -253,7 +253,7 @@ Error: Missing required environment variable APP_KEY
 
 Können Sie ihn beheben, indem Sie eine `.env.local`-Datei im Wurzelverzeichnis Ihres Projekts erstellen. Hier ein Beispiel:
 
-```env
+```
 APP_KEY=your-secret-key
 API_URL=https://api.example.com
 ```

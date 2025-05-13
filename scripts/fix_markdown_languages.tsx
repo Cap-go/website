@@ -9,6 +9,8 @@ async function fixMarkdownLanguagesInFile(filePath: string) {
   let updated = content
   // Replace ```gradle with ```kotlin
   updated = updated.replace(/```gradle(\r?\n)/g, '```kotlin$1')
+  // Replace ```env with ```
+  updated = updated.replace(/```env(\r?\n)/g, '```$1')
   // Replace ```proguard with ```java
   updated = updated.replace(/```proguard(\r?\n)/g, '```java$1')
   if (updated !== content) {

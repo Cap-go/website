@@ -21,12 +21,12 @@ export default defineConfig({
       ORAMA_CLOUD_ENDPOINT: envField.string({
         context: 'client',
         access: 'public',
-        optional: false,
+        optional: import.meta.env.DEV,
       }),
       ORAMA_CLOUD_API_KEY: envField.string({
         context: 'client',
         access: 'public',
-        optional: false,
+        optional: import.meta.env.DEV,
       }),
     },
   },
