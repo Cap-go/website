@@ -44,7 +44,7 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     const destinationPath = join(langBlogDirectory, file)
     const content = await readFile(filePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
-    const fieldsToTranslate = ['title', 'description', 'head_image_alt', 'slug']
+    const fieldsToTranslate = ['title', 'description', 'head_image_alt']
     for (const field of fieldsToTranslate) {
       if (frontmatter[field]) {
         try {
