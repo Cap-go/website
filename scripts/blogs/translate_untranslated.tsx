@@ -65,24 +65,16 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     const paragraphs = contentWithoutHtmlTags.split('\n\n')
     for (const paragraph of paragraphs) {
       if ((currentChunk + paragraph).length > maxChunkSize) {
-        try {
-          const translated = await translateText(currentChunk, lang)
-          if (translated) translatedParts.push(translated)
-          else throw new Error('Empty translation')
-        } catch (error) {
-          throw error
-        }
+        const translated = await translateText(currentChunk, lang)
+        if (translated) translatedParts.push(translated)
+        else throw new Error('Empty translation')
         currentChunk = paragraph
       } else currentChunk += (currentChunk ? '\n\n' : '') + paragraph
     }
     if (currentChunk) {
-      try {
-        const translated = await translateText(currentChunk, lang)
-        if (translated) translatedParts.push(translated)
-        else throw new Error('Empty translation for final chunk')
-      } catch (error) {
-        throw error
-      }
+      const translated = await translateText(currentChunk, lang)
+      if (translated) translatedParts.push(translated)
+      else throw new Error('Empty translation for final chunk')
     }
     let translatedContent = translatedParts.join('\n\n')
     codeBlocks.forEach((match) => {

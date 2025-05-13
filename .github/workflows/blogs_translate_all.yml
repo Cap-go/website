@@ -25,3 +25,18 @@ jobs:
         with:
           branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: bun run blogs:delete_broken_all
+      - run: bun run blogs:fix_locales_all
+      - run: bun run blogs:fix_code_languages_all
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "chore: delete broken blogs, fix locales and code languages"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }} 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
