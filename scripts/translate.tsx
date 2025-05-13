@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import '@dotenvx/dotenvx/config'
 
 export const translateTextOpenAI = async (text: string, lang: string) => {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {

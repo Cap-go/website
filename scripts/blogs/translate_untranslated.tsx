@@ -2,8 +2,8 @@ import { existsSync } from 'fs'
 import matter from 'gray-matter'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'path'
-import { defaultLocale, locales } from '../src/services/locale'
-import { translateText } from './translate'
+import { defaultLocale, locales } from '../../src/services/locale'
+import { translateText } from '../translate'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')

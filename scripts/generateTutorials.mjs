@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import '@dotenvx/dotenvx/config'
 import { RetrievalQAChain } from 'langchain/chains'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { Document } from 'langchain/document'

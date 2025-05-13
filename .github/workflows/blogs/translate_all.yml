@@ -1,24 +1,24 @@
-name: Translate New Blogs
+name: Translate All Blogs
 
 on:
   workflow_dispatch:
 
 jobs:
-  new-blog-translations:
+  translate-all-blogs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - run: bun generate:blog:translations:new
+      - run: bun run blogs:translate_all
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -A
-          git commit -m "chore: translate new blogs"
+          git commit -m "chore: translate all blogs"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
+          branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }} 
