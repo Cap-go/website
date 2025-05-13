@@ -15,7 +15,6 @@ jobs:
       - run: bun run blogs:sync_seobot
         env:
           SEOBOT_API_KEY: ${{ secrets.SEOBOT_API_KEY }}
-      - run: bun run blogs:translate_untranslated
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -27,3 +26,6 @@ jobs:
         with:
           branch: ${{ github.ref }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: blogs_translate_untranslated.yml

@@ -31,36 +31,24 @@ const replaceFrontmatter = (text) => {
 }
 
 async function main() {
-  if (!process.env.SEOBOT_API_KEY) {
-    throw new Error('SEOBOT_API_KEY environment variable is required')
-  }
-
+  if (!process.env.SEOBOT_API_KEY) throw new Error('SEOBOT_API_KEY environment variable is required')
   const client = new BlogClient(process.env.SEOBOT_API_KEY)
-
-  // Ensure blog directory exists
-  if (!existsSync(BLOG_DIR)) {
-    mkdirSync(BLOG_DIR, { recursive: true })
-  }
-
+  if (!existsSync(BLOG_DIR)) mkdirSync(BLOG_DIR, { recursive: true })
   let page = 0
   let hasMore = true
-
   while (hasMore) {
     try {
       const response = await client.getArticles(page, PAGE_SIZE)
       console.log(`Fetched ${response.articles.length} articles on page ${page}, total: ${response.total}`)
-
       if (!response.articles || response.articles.length === 0) {
         hasMore = false
         continue
       }
-
       for (const article of response.articles) {
         const fileName = `${article.slug}.md`
         const filePath = join(BLOG_DIR, fileName)
         const articleResponse = await client.getArticle(article.slug)
         console.log(`Fetched article ${article.slug}`)
-
         // Create frontmatter
         const frontmatter = [
           '---',
@@ -82,7 +70,6 @@ async function main() {
           '---',
           '',
         ].join('\n')
-
         const cleanMarkdown = articleResponse.markdown.replace(
           `# ${article.headline}
 `,
@@ -91,10 +78,8 @@ async function main() {
         const transformedMarkdown = cleanMarkdown.replace(iframeRegex, iframe).replace(/https:\/\/capgo\.app\/(de|en|es|fr|id|it|ja|ko)\/(.*?)\//g, 'https://capgo.app/$2/')
         // Combine frontmatter with markdown content
         const content = `${frontmatter}${transformedMarkdown}`
-
         writeFileSync(filePath, content)
       }
-
       page++
     } catch (error) {
       console.error(`Error fetching articles for page ${page}:`, error)
@@ -103,4 +88,4 @@ async function main() {
   }
 }
 
-main().catch(console.error)
+main()

@@ -47,13 +47,9 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     const fieldsToTranslate = ['title', 'description', 'head_image_alt']
     for (const field of fieldsToTranslate) {
       if (frontmatter[field]) {
-        try {
-          const translated = await translateText(frontmatter[field], lang)
-          if (translated) frontmatter[field] = translated
-          else throw new Error(`Empty translation for ${field}`)
-        } catch (error) {
-          throw error
-        }
+        const translated = await translateText(frontmatter[field], lang)
+        if (translated) frontmatter[field] = translated
+        else throw new Error(`Empty translation for ${field}`)
       }
     }
     frontmatter['locale'] = lang
@@ -108,7 +104,7 @@ const translateBlogInAllLocales = async (file: string, locales: string[]) => {
 
 const translateBlogsInAllLocales = async (): Promise<void> => {
   const map = await mapUntranslatedBlogToLocales()
-  console.log(map)
+  console.log(JSON.stringify(map))
   const entries = Object.entries(map)
   const batchSize = 3
   let processedCount = 0
