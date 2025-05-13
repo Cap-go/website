@@ -40,7 +40,7 @@ const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[
 
 const processFile = async (file: string, lang: string): Promise<void> => {
   try {
-    const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', file)
+    const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', 'en', file)
     const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
     const content = await readFile(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
@@ -90,21 +90,11 @@ const processFile = async (file: string, lang: string): Promise<void> => {
   }
 }
 
-const translateBlogInAllLocales = async (file: string, locales: string[]) => {
-  await Promise.all(locales.map((lang) => processFile(file, lang)))
-}
-
-const translateBlogsInAllLocales = async (): Promise<void> => {
-  const map = await mapUntranslatedBlogToLocales()
-  console.log(JSON.stringify(map))
-  const entries = Object.entries(map)
-  let processedCount = 0
-  const totalCount = entries.length
-  for (const [file, locales] of entries) {
-    console.log(`Processing ${file} (${++processedCount}/${totalCount})`)
-    await translateBlogInAllLocales(file, locales)
-    console.log(`Processed ${processedCount}/${totalCount}`)
+const map = await mapUntranslatedBlogToLocales()
+console.log(map)
+const entries = Object.entries(map)
+for (const [file, locales] of entries) {
+  for (const lang of locales) {
+    await processFile(file, lang)
   }
 }
-
-translateBlogsInAllLocales()
