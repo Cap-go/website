@@ -1,4 +1,4 @@
-name: Test
+name: Test build the website
 
 on:
   push:
