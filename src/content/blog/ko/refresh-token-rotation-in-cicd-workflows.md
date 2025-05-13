@@ -16,7 +16,7 @@ keywords: >-
   deployments
 tag: 'Development, Security, Technology'
 published: true
-locale: ja
+locale: ko
 next_blog: ''
 ---
 **CI/CD 워크플로우를 안전하게 유지하고 싶으신가요? 리프레시 토큰 회전으로 시작하세요.** 이 관행은 토큰의 수명을 짧게 유지하여 자격 증명의 도난 위험을 줄이고 액세스 관리를 자동화합니다. 이유는 다음과 같습니다:

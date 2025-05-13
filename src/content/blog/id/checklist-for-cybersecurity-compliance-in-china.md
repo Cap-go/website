@@ -15,7 +15,7 @@ keywords: >-
   information law, security regulations
 tag: 'Mobile, Security, Updates'
 published: true
-locale: ja
+locale: id
 next_blog: ''
 ---
 Undang-undang siber China lebih ketat dari sebelumnya pada tahun 2025. Untuk mematuhi, bisnis harus mengikuti peraturan kunci seperti **Undang-Undang Keamanan Siber (CSL)**, **Undang-Undang Keamanan Data (DSL)**, dan **Undang-Undang Perlindungan Informasi Pribadi (PIPL)**. Berikut adalah daftar periksa kepatuhan dengan cepat:

@@ -15,7 +15,7 @@ keywords: >-
   information law, security regulations
 tag: 'Mobile, Security, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
 中国的网络安全法律在2025年比以往任何时候都更加严格。为了遵守，企业必须遵循诸如**网络安全法 (CSL)**、**数据安全法 (DSL)**和**个人信息保护法 (PIPL)**等关键法规。以下是一个快速的合规检查清单：

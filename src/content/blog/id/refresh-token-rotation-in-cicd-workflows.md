@@ -16,7 +16,7 @@ keywords: >-
   deployments
 tag: 'Development, Security, Technology'
 published: true
-locale: ja
+locale: id
 next_blog: ''
 ---
 **Ingin mengamankan alur kerja CI/CD Anda? Mulailah dengan rotasi token refresh.** Praktik ini memastikan bahwa token memiliki masa berlaku singkat, mengurangi risiko kredensial dicuri, dan mengotomatisasi manajemen akses. Berikut adalah mengapa hal ini penting:

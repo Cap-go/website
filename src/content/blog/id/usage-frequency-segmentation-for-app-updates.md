@@ -17,7 +17,7 @@ keywords: >-
   mobile apps, update strategy
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: id
 next_blog: ''
 ---
 **Ingin pembaruan [aplikasi yang lebih baik](https://capgo.app/plugins/capacitor-updater/)? Mulailah dengan memahami pengguna Anda.** Segmentasi frekuensi penggunaan mengkategorikan pengguna berdasarkan seberapa sering mereka berinteraksi dengan aplikasi Anda, membantu Anda memberikan pembaruan yang benar-benar penting bagi mereka. Berikut adalah rinciannya:

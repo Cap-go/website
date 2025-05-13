@@ -15,7 +15,7 @@ keywords: >-
   app store compliance, mobile development
 tag: 'Development, Mobile, Security'
 published: true
-locale: ko
+locale: es
 next_blog: ''
 ---
 **La fijación de SSL protege tu aplicación de amenazas de seguridad como ataques de hombre en el medio (MITM) al verificar los certificados del servidor directamente dentro de tu aplicación.** Sin ello, los atacantes podrían interceptar datos sensibles o manipular las comunicaciones. Aquí te explicamos por qué es importante y cómo implementarlo de manera efectiva:

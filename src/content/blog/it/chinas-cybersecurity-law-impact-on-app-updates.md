@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: it
 next_blog: ''
 ---
 **中国新的网络安全法修正案将于2025年3月28日生效，针对应用程序开发者引入了更严格的规则。** 您需要了解的是：

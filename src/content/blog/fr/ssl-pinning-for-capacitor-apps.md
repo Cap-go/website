@@ -15,7 +15,7 @@ keywords: >-
   app store compliance, mobile development
 tag: 'Development, Mobile, Security'
 published: true
-locale: ko
+locale: fr
 next_blog: ''
 ---
 **Le pinning SSL protège votre application des menaces de sécurité telles que les attaques de type homme du milieu (MITM) en vérifiant les certificats du serveur directement dans votre application.** Sans cela, les attaquants pourraient intercepter des données sensibles ou manipuler les communications. Voici pourquoi cela est important et comment l'implémenter efficacement :

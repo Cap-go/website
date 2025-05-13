@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: ko
 next_blog: ''
 ---
 **중국의 새로운 사이버 보안 법 개정안은 2025년 3월 28일부터 발효되며 앱 개발자에게 더 엄격한 규칙을 도입합니다.** 알아야 할 사항은 다음과 같습니다:

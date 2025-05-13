@@ -18,7 +18,7 @@ keywords: >-
   development, version control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: it
+locale: id
 next_blog: ''
 ---
 **Ingin memperbarui aplikasi Anda tanpa menunggu persetujuan dari app store?** Plugin pembaruan Over-the-Air (OTA) membuatnya mungkin. Dua opsi terkemuka adalah **[Capgo](https://capgo.app/)** dan **[Capawesome](https://capawesome.io/plugins/live-update/)**. Berikut adalah ringkasan cepat untuk membantu Anda memilih:

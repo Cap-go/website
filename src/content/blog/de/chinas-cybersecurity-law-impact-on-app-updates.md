@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: de
 next_blog: ''
 ---
 **Chinas neue Änderungen des Cybersecurity-Gesetzes, die am 28. März 2025 in Kraft treten, führen strengere Regeln für App-Entwickler ein.** Hier ist, was Sie wissen müssen:

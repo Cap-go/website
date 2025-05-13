@@ -16,7 +16,7 @@ keywords: >-
   apps, plugins, device features, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: ko
 next_blog: ''
 ---
 **네이티브 브리지**는 [Capacitor](https://capacitorjs.com/)에서 웹 코드를 카메라, 센서 및 저장소와 같은 네이티브 장치 기능에 연결합니다. 이를 통해 웹 기술을 사용하여 앱을 구축하면서 iOS 및 Android에 대한 플랫폼 특정 API에 접근할 수 있습니다. 알아야 할 사항은 다음과 같습니다:

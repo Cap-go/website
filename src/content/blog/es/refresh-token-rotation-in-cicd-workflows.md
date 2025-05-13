@@ -16,7 +16,7 @@ keywords: >-
   deployments
 tag: 'Development, Security, Technology'
 published: true
-locale: ja
+locale: es
 next_blog: ''
 ---
 **¿Quieres asegurar tus flujos de trabajo de CI/CD? Comienza con la rotación de tokens de refresh.** Esta práctica asegura que los tokens tengan una vida útil corta, reduciendo los riesgos de credenciales robadas y automatizando la gestión de acceso. Aquí está por qué es importante:

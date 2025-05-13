@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: ja
 next_blog: ''
 ---
 **中国の新しいサイバーセキュリティ法改正は、2025年3月28日から施行され、アプリ開発者に対して厳格なルールを導入します。** 知っておくべきことは以下の通りです：

@@ -18,7 +18,7 @@ keywords: >-
   development, version control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: it
+locale: fr
 next_blog: ''
 ---
 **Vous souhaitez mettre à jour votre application sans attendre l'approbation des magasins d'applications ?** Les plugins de mise à jour Over-the-Air (OTA) le rendent possible. Deux options principales sont **[Capgo](https://capgo.app/)** et **[Capawesome](https://capawesome.io/plugins/live-update/)**. Voici un rapide aperçu pour vous aider à choisir :

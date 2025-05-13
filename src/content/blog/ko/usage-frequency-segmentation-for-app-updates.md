@@ -17,7 +17,7 @@ keywords: >-
   mobile apps, update strategy
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: ko
 next_blog: ''
 ---
 **더 나은 [앱 업데이트](https://capgo.app/plugins/capacitor-updater/)를 원하십니까? 사용자 이해하기부터 시작하세요.** 사용 빈도 세분화는 사용자가 앱과 상호작용하는 빈도에 따라 사용자를 분류하여, 그들에게 실제로 중요한 업데이트를 제공하도록 돕습니다. 다음은 세부 사항입니다:

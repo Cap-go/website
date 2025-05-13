@@ -16,7 +16,7 @@ keywords: >-
   integration, cloud hosting, self-hosted solutions
 tag: 'Development, Security, Updates'
 published: true
-locale: ja
+locale: es
 next_blog: ''
 ---
 **¿Buscas la mejor herramienta para actualizaciones de aplicaciones Over-the-Air (OTA) [app updates](https://capgo.app/plugins/capacitor-updater/)?** Aquí tienes un breve resumen: [Capgo](https://capgo.app/) ofrece actualizaciones instantáneas con cifrado de extremo a extremo y opciones de alojamiento flexibles, mientras que [Appflow](https://ionic.io/appflow/), una solución de larga data, está programada para cerrar en 2026 y viene con costos más altos.

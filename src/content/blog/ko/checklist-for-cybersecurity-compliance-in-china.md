@@ -15,7 +15,7 @@ keywords: >-
   information law, security regulations
 tag: 'Mobile, Security, Updates'
 published: true
-locale: ja
+locale: ko
 next_blog: ''
 ---
 중국의 사이버 보안 법률은 2025년 이래로 그 어느 때보다 엄격해졌습니다. 준수를 위해 기업은 **사이버 보안 법(CSL)**, **데이터 보안 법(DSL)**, **개인 정보 보호 법(PIPL)**와 같은 주요 규정을 따라야 합니다. 다음은 간단한 준수 체크리스트입니다:

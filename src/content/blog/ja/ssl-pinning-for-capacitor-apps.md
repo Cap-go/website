@@ -15,7 +15,7 @@ keywords: >-
   app store compliance, mobile development
 tag: 'Development, Mobile, Security'
 published: true
-locale: ko
+locale: ja
 next_blog: ''
 ---
 **SSLピンニングは、アプリ内でサーバー証明書を直接確認することで、マンインザミドル（MITM）攻撃のようなセキュリティ脅威からアプリを保護します。** これがないと、攻撃者は機密データを傍受したり通信を操作したりする可能性があります。以下はその重要性と効果的な実装方法です：

@@ -15,7 +15,7 @@ keywords: >-
   information law, security regulations
 tag: 'Mobile, Security, Updates'
 published: true
-locale: ja
+locale: de
 next_blog: ''
 ---
 Chinas Cybersecurity-Gesetze sind im Jahr 2025 strenger als je zuvor. Um compliant zu sein, müssen Unternehmen wichtige Vorschriften wie das **Cybersecurity Law (CSL)**, das **Data Security Law (DSL)** und das **Personal Information Protection Law (PIPL)** befolgen. Hier ist eine schnelle Compliance-Checkliste:

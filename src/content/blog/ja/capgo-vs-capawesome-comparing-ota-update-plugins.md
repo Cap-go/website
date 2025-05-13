@@ -18,7 +18,7 @@ keywords: >-
   development, version control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: it
+locale: ja
 next_blog: ''
 ---
 **アプリのアップデートをアプリストアの承認を待たずに行いたいですか？** オーバー・ザ・エア（OTA）アップデートプラグインで可能になります。主な選択肢は**[Capgo](https://capgo.app/)**と**[Capawesome](https://capawesome.io/plugins/live-update/)**です。選択の助けとなる簡単な要約を以下に示します：

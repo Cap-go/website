@@ -16,7 +16,7 @@ keywords: >-
   deployments
 tag: 'Development, Security, Technology'
 published: true
-locale: ja
+locale: fr
 next_blog: ''
 ---
 **Voulez-vous sécuriser vos flux de travail CI/CD ? Commencez par la rotation des tokens d'actualisation.** Cette pratique garantit que les tokens sont de courte durée, réduisant ainsi les risques de vol d'identifiants et automatisant la gestion des accès. Voici pourquoi c'est important :

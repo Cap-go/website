@@ -15,7 +15,7 @@ keywords: >-
   information law, security regulations
 tag: 'Mobile, Security, Updates'
 published: true
-locale: ja
+locale: fr
 next_blog: ''
 ---
 Les lois sur la cybersécurité en Chine sont plus strictes que jamais en 2025. Pour se conformer, les entreprises doivent suivre des réglementations clés comme la **Loi sur la cybersécurité (CSL)**, la **Loi sur la sécurité des données (DSL)** et la **Loi sur la protection des informations personnelles (PIPL)**. Voici une liste de contrôle rapide pour la conformité :

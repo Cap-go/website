@@ -16,7 +16,7 @@ keywords: >-
   deployments
 tag: 'Development, Security, Technology'
 published: true
-locale: ja
+locale: de
 next_blog: ''
 ---
 **Möchten Sie Ihre CI/CD-Workflows sichern? Beginnen Sie mit der Rotation von Refresh-Token.** Diese Praxis stellt sicher, dass Tokens eine kurze Lebensdauer haben, wodurch das Risiko gestohlener Anmeldeinformationen verringert und das Zugriffsmanagement automatisiert wird. Hier ist, warum es wichtig ist:

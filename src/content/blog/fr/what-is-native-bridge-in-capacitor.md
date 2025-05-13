@@ -16,7 +16,7 @@ keywords: >-
   apps, plugins, device features, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: fr
 next_blog: ''
 ---
 Le **Native Bridge** dans [Capacitor](https://capacitorjs.com/) connecte votre code web aux fonctionnalités natives de l'appareil telles que les caméras, les capteurs et le stockage. Il vous permet de créer des applications en utilisant des technologies web tout en accédant à des API spécifiques à la plateforme pour iOS et Android. Voici ce que vous devez savoir :

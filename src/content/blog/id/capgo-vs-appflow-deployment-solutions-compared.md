@@ -16,7 +16,7 @@ keywords: >-
   integration, cloud hosting, self-hosted solutions
 tag: 'Development, Security, Updates'
 published: true
-locale: ja
+locale: id
 next_blog: ''
 ---
 **Mencari alat terbaik untuk pembaruan aplikasi Over-the-Air (OTA) [app updates](https://capgo.app/plugins/capacitor-updater/)?** Berikut adalah ringkasan cepat: [Capgo](https://capgo.app/) memberikan pembaruan secara instan dengan enkripsi end-to-end dan opsi hosting yang fleksibel, sedangkan [Appflow](https://ionic.io/appflow/), solusi yang telah lama ada, akan ditutup pada tahun 2026 dan memiliki biaya lebih tinggi.

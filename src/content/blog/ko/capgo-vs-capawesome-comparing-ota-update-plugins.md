@@ -18,7 +18,7 @@ keywords: >-
   development, version control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: it
+locale: ko
 next_blog: ''
 ---
 **앱 스토어 승인을 기다리지 않고 앱을 업데이트하고 싶으신가요?** 오버더에어(OTA) 업데이트 플러그인이 이 가능하게 합니다. 두 가지 주요 선택지는 **[Capgo](https://capgo.app/)**와 **[Capawesome](https://capawesome.io/plugins/live-update/)**입니다. 선택하는 데 도움이 되는 빠른 개요는 다음과 같습니다:

@@ -16,7 +16,7 @@ keywords: >-
   apps, plugins, device features, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: es
 next_blog: ''
 ---
 El **Puente Nativo** en [Capacitor](https://capacitorjs.com/) conecta tu código web con características nativas del dispositivo como cámaras, sensores y almacenamiento. Te permite construir aplicaciones utilizando tecnologías web mientras accedes a APIs específicas de la plataforma para iOS y Android. Aquí tienes lo que necesitas saber:

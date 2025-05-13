@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: es
 next_blog: ''
 ---
 **Las nuevas enmiendas a la Ley de Ciberseguridad de China, efectivas a partir del 28 de marzo de 2025, introducen reglas más estrictas para los desarrolladores de aplicaciones.** Aquí tienes lo que necesitas saber:

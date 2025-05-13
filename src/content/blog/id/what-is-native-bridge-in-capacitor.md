@@ -16,7 +16,7 @@ keywords: >-
   apps, plugins, device features, performance optimization
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: id
 next_blog: ''
 ---
 Jembatan **Native Bridge** di [Capacitor](https://capacitorjs.com/) menghubungkan kode web Anda dengan fitur perangkat asli seperti kamera, sensor, dan penyimpanan. Ini memungkinkan Anda untuk membangun aplikasi menggunakan teknologi web sambil mengakses API spesifik platform untuk iOS dan Android. Berikut yang perlu Anda ketahui:

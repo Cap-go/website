@@ -15,7 +15,7 @@ keywords: >-
   app store compliance, mobile development
 tag: 'Development, Mobile, Security'
 published: true
-locale: ko
+locale: id
 next_blog: ''
 ---
 **Penyimpanan SSL melindungi aplikasi Anda dari ancaman keamanan seperti serangan man-in-the-middle (MITM) dengan memverifikasi sertifikat server secara langsung dalam aplikasi Anda.** Tanpa itu, penyerang dapat menyadap data sensitif atau memanipulasi komunikasi. Berikut adalah alasan mengapa ini penting dan cara mengimplementasikannya dengan efektif:

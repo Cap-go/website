@@ -17,7 +17,7 @@ keywords: >-
   mobile apps, update strategy
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: fr
 next_blog: ''
 ---
 **Voulez-vous de meilleures [mises à jour d'application](https://capgo.app/plugins/capacitor-updater/)? Commencez par comprendre vos utilisateurs.** La segmentation par fréquence d'utilisation catégorie les utilisateurs en fonction de la fréquence à laquelle ils interagissent avec votre application, vous aidant à fournir des mises à jour qui leur importent vraiment. Voici la répartition :

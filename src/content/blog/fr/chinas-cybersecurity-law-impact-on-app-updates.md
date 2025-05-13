@@ -18,7 +18,7 @@ keywords: >-
   compliance tracking
 tag: 'Development, Security, Updates'
 published: true
-locale: id
+locale: fr
 next_blog: ''
 ---
 **Les nouvelles modifications de la loi sur la cybersécurité en Chine, en vigueur le 28 mars 2025, introduisent des règles plus strictes pour les développeurs d'applications.** Voici ce que vous devez savoir :

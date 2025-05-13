@@ -15,7 +15,7 @@ keywords: >-
   Capgo, plugins
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: de
 next_blog: ''
 ---
 [Capacitor](https://capacitorjs.com/) CLI vereinfacht [das Aktualisieren Ihrer App](https://capgo.app/plugins/capacitor-updater/) für iOS und Android. Hier ist, was Sie wissen müssen:
