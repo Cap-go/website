@@ -26,6 +26,17 @@ jobs:
         with:
           branch: ${{ github.ref }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: benc-uk/workflow-dispatch@v1
+      - run: bun run blogs:delete_broken_all
+      - run: bun run blogs:fix_locales_all
+      - run: bun run blogs:fix_code_languages_all
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: sync blog posts from SEObot"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          workflow: blogs_translate_untranslated.yml
+          branch: ${{ github.ref }} 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
