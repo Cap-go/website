@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync-blog:
+  new-blog-translations:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,8 +15,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add src/content/blog/en/
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: sync blog posts from SEObot"
+          git add -A
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
