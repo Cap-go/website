@@ -23,7 +23,7 @@ import { locales } from '@/services/locale'
   </div>
 </div>
 
-<script define:vars={{ locales }}>
+<script define:vars={{ locales, currentLocale: Astro.locals.locale }}>
   let test = 0
   const languageMenu = document.getElementById('language-menu')
   const button = document.getElementById('language-menu-button')
@@ -46,9 +46,9 @@ import { locales } from '@/services/locale'
   button.addEventListener('click', adjustMenuPosition)
   locales.forEach((j) => {
     document.getElementById(`language_${j}`).addEventListener('click', () => {
-      const tmp = new URL(window.location.href).pathname
-      if (tmp.substring(3, 4) === '/') window.location.href = tmp.replace(tmp.substring(1, 3), j)
-      else window.location.href = '/' + j + tmp
+      const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
+      if (j === 'en') window.location.href = tmp
+      else window.location.href = `/${j}${tmp}`
     })
   })
 </script>
