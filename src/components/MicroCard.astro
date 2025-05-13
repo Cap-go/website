@@ -57,6 +57,11 @@ const { icon, customIcon, title, size = '1.333em', color, href } = Astro.props
       background-color: hsl(224, 10%, 10%);
     }
 
+    /* Light mode hover background */
+    :root[data-theme='light'] .clickable:hover {
+      background-color: hsl(224, 10%, 95%);
+    }
+
     .clickable:hover::before {
       content: '';
       position: absolute;
