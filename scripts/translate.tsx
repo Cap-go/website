@@ -1,3 +1,4 @@
+import { localeNames } from '@/services/locale'
 import '@dotenvx/dotenvx/config'
 
 export const translateTextOpenAI = async (text: string, lang: string) => {
@@ -70,7 +71,7 @@ export const translateTextAnthropic = async (text: string, lang: string) => {
     messages: [
       {
         role: 'user',
-        content: `Translate the following text to ${lang} locale:\n\n${text}`,
+        content: `Translate the following text to ${localeNames[lang as keyof typeof localeNames]} locale:\n\n${text}`,
       },
     ],
   })
