@@ -5,11 +5,13 @@ import { readdir } from 'node:fs/promises'
 import { join } from 'path'
 import { defaultLocale, locales } from '../../src/services/locale'
 import { translateText } from '../translate'
+import { execSync } from 'child_process'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
 const defaultBlogDirectory = join(blogDirectory, defaultLocale)
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
+const keepPushingArgIndex = process.argv.findIndex((arg) => arg === '--keep-pushing')
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
 
 const getUntranslatedLocales = async (file: string): Promise<string[]> => {
@@ -111,4 +113,27 @@ for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
   const batch = tasks.slice(i, i + BATCH_SIZE)
   console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(tasks.length / BATCH_SIZE)}`)
   await Promise.all(batch.map(({ file, lang }) => processFile(file, lang)))
+
+  // If --keep-pushing is set, do a git pull, add, commit, and push after each batch
+  if (keepPushingArgIndex !== -1) {
+    try {
+      // Pull latest changes
+      execSync('git pull', { stdio: 'inherit' })
+      // Set git config (email and name) as in the workflow
+      execSync('git config --local user.email "github-actions[bot]@users.noreply.github.com"', { stdio: 'inherit' })
+      execSync('git config --local user.name "github-actions[bot]"', { stdio: 'inherit' })
+      // Add all changes
+      execSync('git add -A', { stdio: 'inherit' })
+      // Commit
+      execSync('git commit -m "chore: translate untranslated blogs"', { stdio: 'inherit' })
+      // Push
+      execSync('git push', { stdio: 'inherit' })
+    } catch (err: any) {
+      // If nothing to commit, git commit will fail, that's ok
+      if (err?.status !== 1) {
+        console.error('Error during git operations:', err)
+        throw err
+      }
+    }
+  }
 }
