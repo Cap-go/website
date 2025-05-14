@@ -60,7 +60,7 @@ async function main() {
   }
 
   const batch = 30
-  const outputPath = 'verify_locales_all_results.json'
+  const outputPath = 'remove_mismatching_locales_results.json'
   const results = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, 'utf8')) : []
 
   for (let i = 0; i < checks.length; i += batch) {
