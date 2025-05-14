@@ -1,6 +1,6 @@
 import { existsSync } from 'fs'
 import matter from 'gray-matter'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'path'
 import { defaultLocale, locales } from '../../src/services/locale'
@@ -42,18 +42,22 @@ const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[
 const processFile = async (file: string, lang: string): Promise<void> => {
   try {
     const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', 'en', file)
+    const destinationDir = join(process.cwd(), 'src', 'content', 'blog', lang)
+    if (!existsSync(destinationDir)) mkdirSync(destinationDir, { recursive: true })
     const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
     const content = readFileSync(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
-    const newFrontmatter: Record<string,any> = { ...frontmatter, locale: lang }
+    const newFrontmatter: Record<string, any> = { ...frontmatter, locale: lang }
     const fieldsToTranslate = ['title', 'description', 'head_image_alt']
-    await Promise.all(fieldsToTranslate.map(async (field) => {
-      if (newFrontmatter[field]) {
-        const translated = await translateText(newFrontmatter[field], lang)
-        if (translated) newFrontmatter[field] = translated
-        else throw new Error(`Empty translation for ${field}`)
-      }
-    }))
+    await Promise.all(
+      fieldsToTranslate.map(async (field) => {
+        if (newFrontmatter[field]) {
+          const translated = await translateText(newFrontmatter[field], lang)
+          if (translated) newFrontmatter[field] = translated
+          else throw new Error(`Empty translation for ${field}`)
+        }
+      }),
+    )
     const codeBlockRegex = /```[\s\S]*?```/g
     const htmlTagRegex = /<[^>]+>/g
     const codeBlocks = [...extractedContent.matchAll(codeBlockRegex)]
@@ -93,7 +97,20 @@ const processFile = async (file: string, lang: string): Promise<void> => {
 
 const map = await mapUntranslatedBlogToLocales()
 console.log(map)
-const entries = Object.entries(map)
-for (const [file, locales] of entries) {
-  await Promise.all(locales.map(async (lang) => await processFile(file, lang)))
+
+const tasks: Array<{ file: string; lang: string }> = []
+for (const [file, locales] of Object.entries(map)) {
+  for (const lang of locales) {
+    tasks.push({ file, lang })
+  }
+}
+
+const BATCH_SIZE = 15
+
+for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
+  const batch = tasks.slice(i, i + BATCH_SIZE)
+  console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(tasks.length / BATCH_SIZE)}`)
+  await Promise.all(
+    batch.map(({ file, lang }) => processFile(file, lang))
+  )
 }
