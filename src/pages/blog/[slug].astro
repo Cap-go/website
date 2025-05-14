@@ -156,7 +156,7 @@ content['ldJSON'] = {
         </div>
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
-            <p class="text-sm text-gray-600">Written by</p>
+            <p class="text-sm text-gray-600">{m.written_by({}, { locale: Astro.locals.locale })}</p>
             <a class="group flex items-center space-x-3" href={entry.data.author_url}>
               <img
                 width="36"
@@ -169,7 +169,7 @@ content['ldJSON'] = {
               />
               <div class="flex flex-col">
                 <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-                <p class="text-sm text-gray-500">Content Marketer</p>
+                <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
               </div>
             </a>
           </div>
