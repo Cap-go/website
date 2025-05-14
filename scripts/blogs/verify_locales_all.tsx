@@ -59,7 +59,7 @@ async function main() {
     })
   }
 
-  const batch = 100
+  const batch = 30
   const outputPath = 'verify_locales_all_results.json'
   const results = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, 'utf8')) : []
 
