@@ -1,7 +1,7 @@
 import '@dotenvx/dotenvx/config'
 import fg from 'fast-glob'
 import matter from 'gray-matter'
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { relative } from 'path'
 
 const localeToLanguage: Record<string, string> = {
@@ -88,6 +88,14 @@ async function main() {
     results.push(...guideResults)
     writeFileSync(outputPath, JSON.stringify(results, null, 2), 'utf8')
     console.log(`Guide ${i + 1} done, results written to ${outputPath}`)
+  }
+
+  for (const result of results) {
+    if (!result.isMatch) {
+      if (existsSync(result.file)) {
+        unlinkSync(result.file)
+      }
+    }
   }
 }
 
