@@ -97,7 +97,5 @@ const BATCH_SIZE = 15
 for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
   const batch = tasks.slice(i, i + BATCH_SIZE)
   console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(tasks.length / BATCH_SIZE)}`)
-  await Promise.all(
-    batch.map(({ file, lang }) => processFile(file, lang))
-  )
+  await Promise.all(batch.map(({ file, lang }) => processFile(file, lang)))
 }
