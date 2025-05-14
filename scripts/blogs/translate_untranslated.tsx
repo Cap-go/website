@@ -1,6 +1,7 @@
 import { existsSync } from 'fs'
 import matter from 'gray-matter'
-import { readdir, readFile, writeFile } from 'node:fs/promises'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { readdir } from 'node:fs/promises'
 import { join } from 'path'
 import { defaultLocale, locales } from '../../src/services/locale'
 import { translateText } from '../translate'
@@ -42,17 +43,17 @@ const processFile = async (file: string, lang: string): Promise<void> => {
   try {
     const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', 'en', file)
     const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
-    const content = await readFile(sourceFilePath, 'utf8')
+    const content = readFileSync(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
+    const newFrontmatter: Record<string,any> = { ...frontmatter, locale: lang }
     const fieldsToTranslate = ['title', 'description', 'head_image_alt']
-    for (const field of fieldsToTranslate) {
-      if (frontmatter[field]) {
-        const translated = await translateText(frontmatter[field], lang)
-        if (translated) frontmatter[field] = translated
+    await Promise.all(fieldsToTranslate.map(async (field) => {
+      if (newFrontmatter[field]) {
+        const translated = await translateText(newFrontmatter[field], lang)
+        if (translated) newFrontmatter[field] = translated
         else throw new Error(`Empty translation for ${field}`)
       }
-    }
-    frontmatter['locale'] = lang
+    }))
     const codeBlockRegex = /```[\s\S]*?```/g
     const htmlTagRegex = /<[^>]+>/g
     const codeBlocks = [...extractedContent.matchAll(codeBlockRegex)]
@@ -83,7 +84,7 @@ const processFile = async (file: string, lang: string): Promise<void> => {
     htmlTags.forEach((match) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
-    await writeFile(destinationPath, matter.stringify(translatedContent, frontmatter), 'utf8')
+    writeFileSync(destinationPath, matter.stringify(translatedContent, newFrontmatter), 'utf8')
   } catch (error) {
     console.log(`Translation failed for: ${file} in ${lang} locale.`)
     throw error
@@ -94,7 +95,5 @@ const map = await mapUntranslatedBlogToLocales()
 console.log(map)
 const entries = Object.entries(map)
 for (const [file, locales] of entries) {
-  for (const lang of locales) {
-    await processFile(file, lang)
-  }
+  await Promise.all(locales.map(async (lang) => await processFile(file, lang)))
 }
