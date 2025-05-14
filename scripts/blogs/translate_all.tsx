@@ -1,116 +1,103 @@
-import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync } from 'fs'
 import matter from 'gray-matter'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { readdir } from 'node:fs/promises'
 import { join } from 'path'
 import { defaultLocale, locales } from '../../src/services/locale'
 import { translateText } from '../translate'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
+const defaultBlogDirectory = join(blogDirectory, defaultLocale)
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
 
-const defaultBlogDirectory = join(blogDirectory, defaultLocale)
-const totalFiles = readdirSync(defaultBlogDirectory).length
-const progress: { [lang: string]: number } = {}
-
-// Process all languages in parallel
-const processAllLanguages = async () => {
-  const blogFiles = readdirSync(defaultBlogDirectory)
-  console.log(`Starting translation of ${totalFiles} files for ${languages.length} languages`)
-
-  const languagePromises = languages.map(async (lang) => {
-    console.log(`Preparing the blogs for locale: ${lang}...`)
-    progress[lang] = 0
-    const langBlogDirectory = join(blogDirectory, lang)
-    if (!existsSync(langBlogDirectory)) mkdirSync(langBlogDirectory, { recursive: true })
-
-    const failedTranslations: { [file: string]: boolean } = {}
-
-    await Promise.allSettled(blogFiles.map((file) => processFile(file, lang, langBlogDirectory, failedTranslations)))
-
-    progress[lang] += blogFiles.length
-    const totalProgress = Object.values(progress).reduce((a, b) => a + b, 0)
-    console.log(`Progress: ${totalProgress}/${totalFiles * languages.length} (${Math.round((totalProgress / (totalFiles * languages.length)) * 100)}%)`)
-
-    const failedFiles = Object.keys(failedTranslations)
-    if (failedFiles.length > 0) {
-      console.log(`Retrying failed translations for ${lang}...`)
-      for (const file of failedFiles) {
-        await processFile(file, lang, langBlogDirectory, failedTranslations)
-      }
-    }
-  })
-
-  await Promise.all(languagePromises)
+const getDefaultBlogFiles = async (): Promise<string[]> => {
+  const files = await readdir(defaultBlogDirectory)
+  return files.filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
 }
 
-const processFile = async (file: string, lang: string, langBlogDirectory: string, failedTranslations: { [file: string]: boolean }): Promise<void> => {
+const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[] }> => {
+  const files = await getDefaultBlogFiles()
+  const map: { [file: string]: string[] } = {}
+  files.forEach((file) => {
+    map[file] = languages
+  })
+  return map
+}
+
+const processFile = async (file: string, lang: string): Promise<void> => {
   try {
-    const filePath = join(defaultBlogDirectory, file)
-    const destinationPath = join(langBlogDirectory, file)
-    writeFileSync(destinationPath, '', 'utf8')
-    const content = readFileSync(filePath, 'utf8')
-    const grayMatterEnd = content.indexOf('---', 4)
-    const { data: grayMatterJson } = matter(content)
-
-    if (grayMatterJson.title) {
-      const translatedTitle = await translateText(grayMatterJson.title, lang)
-      if (translatedTitle) grayMatterJson['title'] = translatedTitle
-      else failedTranslations[file] = true
-    }
-
-    if (grayMatterJson.description) {
-      const translatedDescription = await translateText(grayMatterJson.description, lang)
-      if (translatedDescription) grayMatterJson['description'] = translatedDescription
-      else failedTranslations[file] = true
-    }
-
-    if (grayMatterJson.head_image_alt) {
-      const translatedHeadImageAlt = await translateText(grayMatterJson.head_image_alt, lang)
-      if (translatedHeadImageAlt) grayMatterJson['head_image_alt'] = translatedHeadImageAlt
-      else failedTranslations[file] = true
-    }
-
-    grayMatterJson['locale'] = lang
-    appendFileSync(destinationPath, matter.stringify('', grayMatterJson), 'utf8')
-    const blogContent = content.substring(grayMatterEnd + 4)
+    const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', 'en', file)
+    const destinationDir = join(process.cwd(), 'src', 'content', 'blog', lang)
+    if (!existsSync(destinationDir)) mkdirSync(destinationDir, { recursive: true })
+    const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
+    const content = readFileSync(sourceFilePath, 'utf8')
+    const { data: frontmatter, content: extractedContent } = matter(content)
+    const newFrontmatter: Record<string, any> = { ...frontmatter, locale: lang }
+    const fieldsToTranslate = ['title', 'description', 'head_image_alt']
+    await Promise.all(
+      fieldsToTranslate.map(async (field) => {
+        if (newFrontmatter[field]) {
+          const translated = await translateText(newFrontmatter[field], lang)
+          if (translated) newFrontmatter[field] = translated
+          else throw new Error(`Empty translation for ${field}`)
+        }
+      }),
+    )
     const codeBlockRegex = /```[\s\S]*?```/g
     const htmlTagRegex = /<[^>]+>/g
-    const codeBlocks = [...blogContent.matchAll(codeBlockRegex)]
-    const htmlTags = [...blogContent.matchAll(htmlTagRegex)]
-    const blogContentWithoutCodeBlocks = blogContent.replace(codeBlockRegex, '[[CODE_BLOCK]]')
-    const blogContentWithoutHtmlTags = blogContentWithoutCodeBlocks.replace(htmlTagRegex, '[[HTML_TAG]]')
-    const sentences = blogContentWithoutHtmlTags.split('.')
+    const codeBlocks = [...extractedContent.matchAll(codeBlockRegex)]
+    const htmlTags = [...extractedContent.matchAll(htmlTagRegex)]
+    const contentWithoutCodeBlocks = extractedContent.replace(codeBlockRegex, '[[CODE_BLOCK]]')
+    const contentWithoutHtmlTags = contentWithoutCodeBlocks.replace(htmlTagRegex, '[[HTML_TAG]]')
     let currentChunk = ''
-
-    for (const sentence of sentences) {
-      if ((currentChunk + sentence).length > 4000) {
-        const tmp = await translateText(currentChunk, lang)
-        if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
-        else failedTranslations[file] = true
-        currentChunk = sentence
-      } else currentChunk += sentence
+    const maxChunkSize = 10000
+    let translatedParts: string[] = []
+    const paragraphs = contentWithoutHtmlTags.split('\n\n')
+    for (const paragraph of paragraphs) {
+      if ((currentChunk + paragraph).length > maxChunkSize) {
+        const translated = await translateText(currentChunk, lang)
+        if (translated) translatedParts.push(translated)
+        else throw new Error('Empty translation')
+        currentChunk = paragraph
+      } else currentChunk += (currentChunk ? '\n\n' : '') + paragraph
     }
-
     if (currentChunk) {
-      const tmp = await translateText(currentChunk, lang)
-      if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
-      else failedTranslations[file] = true
+      const translated = await translateText(currentChunk, lang)
+      if (translated) translatedParts.push(translated)
+      else throw new Error('Empty translation for final chunk')
     }
-
-    let translatedContent = readFileSync(destinationPath, 'utf8')
+    let translatedContent = translatedParts.join('\n\n')
     codeBlocks.forEach((match) => {
       translatedContent = translatedContent.replace('[[CODE_BLOCK]]', match[0])
     })
     htmlTags.forEach((match) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
-
-    writeFileSync(destinationPath, translatedContent, 'utf8')
+    writeFileSync(destinationPath, matter.stringify(translatedContent, newFrontmatter), 'utf8')
   } catch (error) {
-    failedTranslations[file] = true
+    console.log(`Translation failed for: ${file} in ${lang} locale.`)
+    throw error
   }
 }
 
-// Start the process
-processAllLanguages()
+const map = await mapUntranslatedBlogToLocales()
+console.log(map)
+
+const tasks: Array<{ file: string; lang: string }> = []
+for (const [file, locales] of Object.entries(map)) {
+  for (const lang of locales) {
+    tasks.push({ file, lang })
+  }
+}
+
+const BATCH_SIZE = 15
+
+for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
+  const batch = tasks.slice(i, i + BATCH_SIZE)
+  console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(tasks.length / BATCH_SIZE)}`)
+  await Promise.all(
+    batch.map(({ file, lang }) => processFile(file, lang))
+  )
+}
