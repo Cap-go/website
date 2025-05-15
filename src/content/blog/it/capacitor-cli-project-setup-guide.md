@@ -1,8 +1,8 @@
 ---
 slug: capacitor-cli-project-setup-guide
-title: Capacitor CLIを使用したプロジェクト設定ガイド
+title: 'Capacitor CLI: Guía de Configuración del Proyecto'
 description: >-
-  Scopri come configurare Capacitor CLI per creare app native iOS e Android
+  Scopri come configurare Capacitor CLI per costruire app native iOS e Android
   utilizzando tecnologie web in pochi semplici passaggi.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -11,7 +11,7 @@ created_at: 2025-04-18T03:02:50.225Z
 updated_at: 2025-04-18T03:04:53.935Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847-1744945493935.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   Capacitor, CLI, mobile apps, iOS, Android, project setup, live updates,
   troubleshooting
@@ -20,82 +20,89 @@ published: true
 locale: it
 next_blog: ''
 ---
-**Vuoi creare app iOS e Android con un'unica base di codice?** La CLI di [Capacitor](https://capacitorjs.com/) semplifica il processo, permettendoti di creare app native utilizzando tecnologie web. Ecco cosa imparerai:
+**¿Quieres crear aplicaciones para iOS y Android con una sola base de código?** [Capacitor](https://capacitorjs.com/) CLI simplifica el proceso, permitiéndote crear aplicaciones nativas utilizando tecnologías web. Esto es lo que aprenderás:
 
--   **Configurazione Rapida**: Installa la CLI Capacitor e inizializza il tuo progetto in pochi minuti.
--   **Integrazione Piattaforme**: Aggiungi il supporto per iOS e Android con semplici comandi.
--   **Aggiornamenti Live**: Usa [Capgo](https://capgo.app/) per aggiornamenti istantanei over-the-air.
--   **Soluzioni Comuni**: Risolvi problemi come errori di sincronizzazione o fallimenti di build.
+-   **Configuración Rápida**: Instala Capacitor CLI e inicializa tu proyecto en minutos.
+-   **Integración de Plataformas**: Agrega soporte para iOS y Android con simples comandos.
+-   **Actualizaciones en Vivo**: Utiliza [Capgo](https://capgo.app/) para actualizaciones instantáneas por aire.
+-   **Soluciones Comunes**: Resuelve problemas como errores de sincronización o fallos de construcción.
 
-**Passaggi Chiave per Iniziare:**
+**Pasos Clave para Comenzar:**
 
-1.  Installa [Node.js](https://nodejs.org/en), npm, JDK, [Xcode](https://developer.apple.com/xcode/) e [Android Studio](https://developer.android.com/studio).
-2.  Esegui `npm install @capacitor/core @capacitor/cli` e inizializza il tuo progetto.
-3.  Aggiungi le piattaforme iOS e Android usando `npx cap add ios` e `npx cap add android`.
-4.  Opzionale: Configura Capgo per [aggiornamenti app](https://capgo.app/plugins/capacitor-updater/) live.
+1.  Instala [Node.js](https://nodejs.org/en), npm, JDK, [Xcode](https://developer.apple.com/xcode/), y [Android Studio](https://developer.android.com/studio).
+2.  Ejecuta `npm install @capacitor/core @capacitor/cli` e inicializa tu proyecto.
+3.  Agrega plataformas para iOS y Android usando `npx cap add ios` y `npx cap add android`.
+4.  Opcional: Configura Capgo para actualizaciones en vivo [de aplicaciones](https://capgo.app/plugins/capacitor-updater/).
 
-Questa guida copre tutto ciò che ti serve per configurare la CLI Capacitor, configurare le piattaforme e distribuire la tua app. Iniziamo!
+Esta guía cubre todo lo que necesitas para configurar Capacitor CLI, configurar plataformas y desplegar tu aplicación. ¡Sumergámonos!
 
-## Introduzione a [Capacitor](https://capacitorjs.com/) Configure
+## Introduciendo [Capacitor](https://capacitorjs.com/) Configure
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
+<iframe src="https://www.youtube.com/embed/HufvY63esXs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Requisiti di Setup
+## Requisitos de Configuración
 
-Per iniziare, assicurati di avere installati i seguenti strumenti:
+Para comenzar, asegúrate de tener las siguientes herramientas instaladas:
 
--   **Node.js** (versione 14 o più recente) e **npm**
--   **Java JDK** (versione 11 o più recente)
--   **Xcode** (versione 12 o più recente per build iOS)
--   **Android Studio** (per build Android)
--   **Capacitor CLI** (versione 6 o 7)
+-   **Node.js** (versión 14 o más reciente) y **npm**
+-   **Java JDK** (versión 11 o más reciente)
+-   **Xcode** (versión 12 o más reciente para compilaciones de iOS)
+-   **Android Studio** (para compilaciones de Android)
+-   **Capacitor CLI** (versión 6 o 7)
 
-_Opzionale:_ Se vuoi abilitare gli aggiornamenti live, consulta la "[Guida alla Configurazione di Capgo](https://capgo.app/docs/plugin/cloud-mode/getting-started/)" qui sotto.
+_Optativo:_ Si deseas habilitar actualizaciones en vivo, consulta la "[Guía de Configuración de Capgo](https://capgo.app/docs/plugin/cloud-mode/getting-started/)" a continuación.
 
-## Passaggi per l'Installazione della CLI
+## Pasos de Instalación del CLI
 
-Prima di iniziare, assicurati di avere **Node.js**, **npm**, **JDK**, **Xcode** e **Android Studio** configurati. Una volta pronti, puoi installare la CLI Capacitor eseguendo:
-
-```bash
-npm install @capacitor/core @capacitor/cli
-```
-
-Questo comando installa Capacitor e configura i suoi componenti principali.
-
-Dopo aver completato questo passaggio, passa a **Creazione di un Nuovo Progetto** per strutturare la tua applicazione.
-
-## Creazione di un Nuovo Progetto
-
-Per iniziare con il tuo progetto [usando la CLI Capacitor](https://capgo.app/docs/cli/commands/), segui questi passaggi:
+Antes de comenzar, asegúrate de tener **Node.js**, **npm**, **JDK**, **Xcode** y **Android Studio** configurados. Una vez que estés listo, puedes instalar el Capacitor CLI ejecutando:
 
 ```bash
+npm install --save @capacitor/core @capacitor/cli
 npx cap init
 ```
 
-### Aggiornamento del File di Configurazione
+Este comando instala Capacitor y configura sus componentes principales.
 
-Modifica il file `capacitor.config.json` per includere le seguenti impostazioni:
+Después de completar este paso, pasa a **Crear un Nuevo Proyecto** para crear la estructura de tu aplicación.
+
+## Creando un Nuevo Proyecto
+
+Para comenzar con tu proyecto [usando Capacitor CLI](https://capgo.app/docs/cli/commands/), sigue estos pasos:
+
+```bash
+mkdir my-app && cd my-app
+npm init -y
+npx cap init my-app com.company.app --web-dir dist
+```
+
+### Actualizando el Archivo de Configuración
+
+Edita el archivo `capacitor.config.json` para incluir los siguientes ajustes:
 
 ```json
 {
-  "appId": "com.example.app",
+  "appId": "com.company.app",
   "appName": "My App",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "server": {
+    "hostname": "app.example.com",
+    "androidScheme": "https"
+  }
 }
 ```
 
-Una volta aggiornato, usa questa configurazione per impostare Capacitor per il tuo progetto.
+Una vez actualizado, utiliza esta configuración para configurar Capacitor para tu proyecto.
 
-## Configurazione delle Piattaforme
+## Configuración de la Plataforma
 
-Ora che la struttura del progetto è pronta, è il momento di configurare i target iOS e Android.
+Ahora que la creación del proyecto está lista, es hora de configurar los objetivos para iOS y Android.
 
-### Aggiunta di iOS e Android
+### Agregando iOS y Android
 
-Inizia installando i pacchetti necessari specifici per piattaforma usando la CLI Capacitor:
+Comienza instalando los paquetes específicos de la plataforma necesarios utilizando el Capacitor CLI:
 
 ```bash
 npm install @capacitor/ios @capacitor/android
@@ -103,152 +110,154 @@ npx cap add ios
 npx cap add android
 ```
 
-Per iOS, assicurati di avere Xcode 14 o successivo, [CocoaPods](https://cocoapods.org/) 1.11 o più recente e macOS 12 o superiore. Per Android, avrai bisogno di Android Studio Giraffe (2022.3.1+), JDK 17 o successivo e [Gradle](https://gradle.org/) 7.5 o superiore.
+Para iOS, asegúrate de tener Xcode 14 o posterior, [CocoaPods](https://cocoapods.org/) 1.11 o más reciente, y macOS 12 o superior. Para Android, necesitarás Android Studio Giraffe (2022.3.1+), JDK 17 o más reciente, y [Gradle](https://gradle.org/) 7.5 o superior.
 
-Una volta installato, dovrai mantenere aggiornati i tuoi target nativi con le modifiche alla tua applicazione web.
+Una vez instalados, deberás mantener tus objetivos nativos actualizados con los cambios en tu aplicación web.
 
-### Aggiornamenti Piattaforma
+### Actualizaciones de la Plataforma
 
-Per sincronizzare le tue piattaforme con le ultime modifiche web, segui questi passaggi dopo aver aggiornato la tua app web:
+Para sincronizar tus plataformas con los últimos cambios web, sigue estos pasos después de actualizar tu aplicación web:
 
 ```bash
+npm run build
 npx cap sync
 ```
 
-Il comando `cap sync` gestisce due compiti:
+El comando `cap sync` maneja dos tareas:
 
--   Copia gli asset web aggiornati nelle piattaforme native
--   Aggiorna le configurazioni native e i plugin per corrispondere alle ultime modifiche
+-   Copia los activos web actualizados a las plataformas nativas
+-   Actualiza las configuraciones nativas y los plugins para coincidir con los últimos cambios
 
-### Configurazione IDE
+### Configuración IDE
 
-Apri i progetti specifici per piattaforma negli IDE appropriati:
+Abre los proyectos específicos de la plataforma en los IDE apropiados:
 
 ```bash
-npx cap open ios
-npx cap open android
+npx cap open ios     # Opens Xcode
+npx cap open android # Opens Android Studio
 ```
 
-**In Xcode:**
+**En Xcode:**
 
-1.  Scegli il tuo team di sviluppo.
-2.  Configura i certificati di firma.
-3.  Aggiorna il tuo identificatore bundle.
+1.  Elige tu equipo de desarrollo.
+2.  Configura los certificados de firma.
+3.  Actualiza tu identificador de paquete.
 
-**In Android Studio:**
+**En Android Studio:**
 
-1.  Modifica l'ID dell'applicazione in `build.gradle`.
-2.  Configura il keystore per la firma.
-3.  Configura sia le varianti di build debug che release.
+1.  Modifica el ID de la aplicación en `build.gradle`.
+2.  Configura el keystore para la firma.
+3.  Configura tanto las variantes de compilación de depuración como de lanzamiento.
 
-Quando tutto è configurato, compila i progetti usando `npx cap build ios` o `npx cap build android`. Non dimenticare di eseguire nuovamente `npx cap sync` per assicurarti che tutti gli asset siano aggiornati.
+Cuando todo esté configurado, compila los proyectos usando `npx cap build ios` o `npx cap build android`. No olvides volver a ejecutar `npx cap sync` para asegurarte de que todos los activos estén actualizados.
 
-## Guida alla Configurazione di [Capgo](https://capgo.app/)
+## Guía de Configuración de [Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
-Configura Capgo per abilitare aggiornamenti istantanei over-the-air per la tua app.
+Configura Capgo para habilitar actualizaciones instantáneas por aire para tu aplicación.
 
-### Caratteristiche Principali di Capgo
+### Características Clave de Capgo
 
-Capgo offre diversi strumenti per semplificare gli aggiornamenti delle app:
+Capgo ofrece varias herramientas para facilitar las actualizaciones de aplicaciones:
 
--   La **crittografia end-to-end** garantisce la consegna sicura degli aggiornamenti.
--   Gli aggiornamenti vengono eseguiti **in background** all'avvio dell'app.
--   Gli **strumenti di analisi** aiutano a monitorare i tassi di successo degli aggiornamenti e il coinvolgimento degli utenti.
--   Un'opzione di **rollback con un clic** ti permette di recuperare rapidamente da aggiornamenti problematici.
--   Usa il **[sistema di canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** per rilasci graduali e test beta.
+-   **Cifrado de extremo a extremo** asegura la entrega segura de actualizaciones.
+-   Las actualizaciones se ejecutan **en segundo plano** cuando se inicia la aplicación.
+-   Las **herramientas de análisis** ayudan a rastrear las tasas de éxito de actualizaciones y el compromiso de los usuarios.
+-   Una opción de **rollback de un clic** te permite recuperarte rápidamente de actualizaciones problemáticas.
+-   Utiliza el **[sistema de canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** para lanzamientos escalonados y pruebas beta.
 
-### Installazione di Capgo
+### Instalando Capgo
 
-Segui questi passaggi per iniziare con Capgo:
+Sigue estos pasos para comenzar con Capgo:
 
-1.  [Installa la CLI Capgo](https://capgo.app/docs/self-hosted/local-dev/cli/):
+1.  [Instala el CLI de Capgo](https://capgo.app/docs/self-hosted/local-dev/cli/):
     
     ```bash
-    npm install @capgo/cli -g
+    npm install --save @capgo/cli
     ```
     
-2.  [Inizializza Capgo](https://capgo.app/docs/webapp/) nel tuo progetto:
+2.  [Inicializa Capgo](https://capgo.app/docs/webapp/) en tu proyecto:
     
     ```bash
     npx capgo init
     ```
     
-3.  Compila e rilascia gli aggiornamenti:
+3.  Compila y libera actualizaciones:
     
     ```bash
-    npx capgo upload
+    npm run build
+    npx capgo release
     ```
     
-4.  Apri l'app per attivare il processo di aggiornamento in background.
+4.  Abre la aplicación para activar el proceso de actualización en segundo plano.
     
 
-### Migliori Pratiche
+### Mejores Prácticas
 
--   Usa i canali per testare gli aggiornamenti prima di distribuirli a tutti gli utenti.
--   Monitora le analitiche per assicurarti che gli aggiornamenti vengano consegnati con successo e gli utenti rimangano coinvolti.
--   Abilita il tracciamento degli errori per individuare e risolvere i problemi tempestivamente.
--   Mantieni pronta la funzione di rollback per affrontare rapidamente eventuali problemi.
+-   Utiliza canales para probar actualizaciones antes de lanzarlas a todos los usuarios.
+-   Monitorea los análisis para asegurar que las actualizaciones se entreguen con éxito y los usuarios se mantengan comprometidos.
+-   Habilita el seguimiento de errores para detectar y corregir problemas temprano.
+-   Mantén la función de rollback lista para abordar rápidamente cualquier problema.
 
-Capgo è compatibile con Capacitor 6 e 7, si integra facilmente con le pipeline CI/CD e rispetta i requisiti degli store Apple e Google.
+Capgo es compatible con Capacitor 6 y 7, se integra sin problemas con las canalizaciones de CI/CD y cumple con los requisitos de las tiendas de Apple y Google.
 
-## Problemi Comuni e Suggerimenti
+## Problemas Comunes y Consejos
 
-Una volta completata la configurazione della piattaforma e di Capgo, potresti incontrare alcuni errori comuni. Ecco come affrontarli rapidamente.
+Una vez que hayas completado la configuración de la plataforma y de Capgo, podrías enfrentar algunos errores comunes. Aquí hay cómo abordarlos rápidamente.
 
-### Problemi di Configurazione dell'Ambiente
+### Problemas de Configuración del Entorno
 
--   **CLI Non Trovata**  
-    **Errore**: Il comando `npx cap` fallisce.  
-    **Soluzione**: Esegui `npm install --save @capacitor/cli @capacitor/core` e riprova.
+-   **CLI No Encontrado**  
+    **Error**: El comando `npx cap` falla.  
+    **Solución**: Ejecuta `npm install --save @capacitor/cli @capacitor/core` y vuelve a intentarlo.
     
--   **Mancata Corrispondenza Versione Node**  
-    **Errore**: I comandi CLI falliscono a causa di errori di versione Node.js.  
-    **Soluzione**: Installa Node.js versione 14 o superiore come indicato nei requisiti di setup.
-    
-
-### Problemi di Configurazione
-
--   **Mancata Corrispondenza Config**  
-    **Errore**: Le modifiche in `capacitor.config.json` non hanno effetto.  
-    **Soluzione**: Assicurati che i valori `appId` e `webDir` corrispondano al tuo `package.json` e alla cartella di output della build web.
-    
--   **Errori di Sincronizzazione Piattaforma**  
-    **Errore**: L'esecuzione di `npx cap sync` risulta in conflitti di versione dei plugin.  
-    **Soluzione**: Aggiorna `@capacitor/android` e `@capacitor/ios` alla stessa versione maggiore, poi riesegui il comando sync.
+-   **Incompatibilidad de Versión de Node**  
+    **Error**: Los comandos del CLI fallan debido a errores de versión de Node.js.  
+    **Solución**: Instala la versión 14 o superior de Node.js como se detalla en los requisitos de configuración.
     
 
-### Build e Deployment
+### Problemas de Configuración
 
--   **Errori di Firma Build**  
-    **Errore**: Le build iOS o Android falliscono a causa di certificati mancanti o keystore.  
-    **Soluzione**: Segui le istruzioni di configurazione IDE. Per iOS, aggiungi il tuo team di sviluppo in Xcode. Per Android, configura il keystore in `build.gradle`.
+-   **Incompatibilidad de Configuración**  
+    **Error**: Los cambios en `capacitor.config.json` no surten efecto.  
+    **Solución**: Asegúrate de que los valores de `appId` y `webDir` coincidan con tu `package.json` del proyecto y la carpeta de salida de la construcción web.
     
--   **Directory Web Non Trovata**  
-    **Errore**: `npx cap sync` non trova gli asset web.  
-    **Soluzione**: Esegui il tuo comando di build web (es. `npm run build`) prima di sincronizzare le piattaforme.
+-   **Errores de Sincronización de Plataforma**  
+    **Error**: Ejecutar `npx cap sync` resulta en conflictos de versiones de plugins.  
+    **Solución**: Actualiza `@capacitor/android` y `@capacitor/ios` a la misma versión principal, luego vuelve a ejecutar el comando de sincronización.
     
 
-### Problemi di Aggiornamento Live
+### Construcción y Despliegue
 
--   **[Errori di Aggiornamento Capgo](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
-    **Errore**: Gli aggiornamenti non appaiono nell'app in produzione.  
-    **Soluzione**: Ricontrolla la tua [chiave API Capgo](https://capgo.app/docs/webapp/api-keys/) in `capacitor.config.json` e assicurati di mirare al canale corretto.
+-   **Fallos de Firma en la Construcción**  
+    **Error**: Las construcciones de iOS o Android fallan debido a certificados faltantes o a un keystore.  
+    **Solución**: Sigue las instrucciones de configuración del IDE. Para iOS, agrega tu equipo de desarrollo en Xcode. Para Android, configura el keystore en `build.gradle`.
+    
+-   **Directorio Web No Encontrado**  
+    **Error**: `npx cap sync` no puede encontrar los activos web.  
+    **Solución**: Ejecuta tu comando de construcción web (por ejemplo, `npm run build`) antes de sincronizar las plataformas.
+    
 
-Per maggiori dettagli sulla configurazione specifica per piattaforma, rivedi la sezione Configurazione Piattaforme. Se stai lavorando con aggiornamenti live, consulta la Guida alla Configurazione di Capgo per ulteriori suggerimenti sulla risoluzione dei problemi.
+### Problemas de Actualización en Vivo
 
-## Riepilogo
+-   **[Fallos de Actualización de Capgo](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
+    **Error**: Las actualizaciones no aparecen en la aplicación de producción.  
+    **Solución**: Verifica tu [clave API de Capgo](https://capgo.app/docs/webapp/api-keys/) en `capacitor.config.json` y asegúrate de que estés apuntando al canal correcto.
 
-### Revisione Setup
+Para más detalles sobre la configuración específica de la plataforma, revisita la sección de Configuración de Plataforma. Si estás trabajando con actualizaciones en vivo, consulta la Guía de Configuración de Capgo para obtener consejos adicionales de solución de problemas.
 
-Avvia la tua app web con la CLI Capacitor, configura le piattaforme iOS e Android e opzionalmente includi Capgo per aggiornamenti live.
+## Resumen
 
-Ecco come iniziare:
+### Revisión de Configuración
 
--   Usa la CLI Capacitor per inizializzare il tuo progetto.
--   Configura l'ID del pacchetto della tua app e definisci la directory di output web.
--   Aggiungi il supporto per le piattaforme iOS e Android.
--   Installa e configura Capgo con il seguente comando: `npm install --save @capgo/cli && npx capgo init`
+Comienza tu aplicación web con Capacitor CLI, configura las plataformas de iOS y Android, y opcionalmente incluye Capgo para actualizaciones en vivo.
 
-Per istruzioni dettagliate sulla configurazione o risoluzione dei problemi, consulta la documentazione ufficiale di Capacitor e Capgo.
+Así es como puedes comenzar:
+
+-   Utiliza el Capacitor CLI para inicializar tu proyecto.
+-   Configura el ID del paquete de tu aplicación y define el directorio de salida web.
+-   Agrega soporte para plataformas de iOS y Android.
+-   Instala y configura Capgo con el siguiente comando: `npm install --save @capgo/cli && npx capgo init`
+
+Para instrucciones de configuración detalladas o solución de problemas, consulta la documentación oficial de Capacitor y Capgo.

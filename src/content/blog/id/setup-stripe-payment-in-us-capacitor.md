@@ -1,95 +1,98 @@
 ---
 slug: setup-stripe-payment-in-us-capacitor
-title: Capacitorアプリでの新しいAppleガイドラインに従ったStripe Payment Linksの実装
+title: >-
+  Mengimplementasikan Tautan Pembayaran Stripe di Aplikasi Capacitor Mengikuti
+  Pedoman Baru Apple
 description: >-
-  Capacitorアプリで2025年5月1日から施行される新しいAppleのガイドラインに準拠してデジタル商品の支払いを処理するためのStripe
-  Payment Linksの実装方法を学びましょう。
+  Pelajari cara mengimplementasikan Tautan Pembayaran Stripe di aplikasi
+  Capacitor Anda untuk memproses pembayaran barang digital sesuai dengan pedoman
+  baru Apple yang berlaku mulai 1 Mei 2025.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
 updated_at: 2025-05-01T00:00:00.000Z
 head_image: /stripe_apple.webp
-head_image_alt: Capacitorアプリケーションにおけるストライプ決済の実装
+head_image_alt: Implementasi pembayaran Stripe dalam aplikasi Capacitor
 keywords: >-
   capacitor, stripe, payment links, app store guidelines, iOS, digital goods,
   in-app purchases, external payments
 tag: Tutorial
 published: true
-locale: ja
+locale: id
 ---
-# Mengimplementasikan Stripe Payment Links di Aplikasi Capacitor Sesuai Pedoman Apple Terbaru
+# Mengimplementasikan Tautan Pembayaran Stripe di Aplikasi Capacitor Menyusul Pedoman Apple Baru
 
-Sejak 1 Mei 2025, Apple telah menerapkan perubahan signifikan pada Pedoman Peninjauan App Store setelah putusan pengadilan dalam [kasus Epic v. Apple](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). Perubahan ini secara khusus mengizinkan pengembang aplikasi di Amerika Serikat untuk mengarahkan ke metode pembayaran eksternal untuk barang dan layanan digital, membuka alternatif untuk sistem pembelian dalam aplikasi Apple.
+Mulai 1 Mei 2025, Apple telah menerapkan perubahan signifikan pada Pedoman Tinjauan App Store setelah putusan pengadilan dalam kasus [Epic v. Apple](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). Perubahan ini secara khusus memungkinkan pengembang aplikasi di Amerika Serikat untuk menghubungkan metode pembayaran eksternal untuk barang dan layanan digital, membuka alternatif untuk sistem pembelian dalam aplikasi Apple.
 
-## Pertarungan Epic yang Mengubah Pembayaran Mobile Selamanya
+## Pertarungan Epic yang Mengubah Pembayaran Seluler Selamanya
 
-Perjalanan menuju momen ini telah panjang dan penuh pertentangan. Semua dimulai pada Agustus 2020 ketika Epic Games, pencipta game populer Fortnite, secara sengaja melanggar pedoman App Store Apple dengan mengimplementasikan opsi pembayaran langsung yang melewati komisi 30% Apple. Apple segera menghapus Fortnite dari App Store, dan Epic merespons dengan mengajukan gugatan yang menantang kontrol Apple atas distribusi aplikasi iOS dan pembayaran dalam aplikasi.
+Jalan menuju momen ini telah lama dan penuh sengketa. Semua dimulai pada Agustus 2020 ketika Epic Games, pencipta game yang sangat populer Fortnite, secara sengaja melanggar pedoman App Store Apple dengan menerapkan opsi pembayaran langsung yang melewati komisi 30% Apple. Apple segera menghapus Fortnite dari App Store, dan Epic merespons dengan mengajukan gugatan yang menantang kontrol Apple atas distribusi aplikasi iOS dan pembayaran dalam aplikasi.
 
-Setelah bertahun-tahun pertarungan hukum, banding, dan banding balasan, pengadilan akhirnya memutuskan bahwa Apple harus mengizinkan pengembang untuk mengarahkan pengguna ke metode pembayaran alternatif di luar aplikasi mereka. Keputusan ini secara fundamental mengubah ekonomi ekosistem App Store, yang telah beroperasi di bawah model keuangan dasar yang sama sejak awal berdirinya pada 2008.
+Setelah bertahun-tahun pertempuran hukum, banding, dan kontra-banding, pengadilan akhirnya memutuskan bahwa Apple harus mengizinkan pengembang untuk mengarahkan pengguna ke metode pembayaran alternatif di luar aplikasi mereka. Keputusan ini secara fundamental mengubah ekonomi ekosistem App Store, yang telah beroperasi di bawah model keuangan dasar yang sama sejak didirikan pada tahun 2008.
 
-### Putusan Final - Tidak Ada Lagi Banding
+### Putusan Akhir - Tidak Ada Lagi Banding
 
-Yang membuat putusan ini sangat penting adalah bahwa ini bersifat final dan tidak dapat dibanding lebih lanjut. Mahkamah Agung menolak untuk mendengar banding Apple pada awal 2025, mengukuhkan keputusan pengadilan yang lebih rendah sebagai hukum yang berlaku. Ini berarti pengembang dapat mengimplementasikan metode pembayaran eksternal dengan keyakinan bahwa Apple tidak dapat membatalkan keputusan ini melalui tantangan hukum lebih lanjut.
+Yang membuat putusan ini sangat signifikan adalah bahwa ini bersifat final dan tidak dapat diajukan banding lebih lanjut. Mahkamah Agung menolak untuk mendengarkan banding Apple pada awal 2025, mengukuhkan keputusan pengadilan yang lebih rendah sebagai hukum yang berlaku. Ini berarti pengembang dapat menerapkan metode pembayaran eksternal dengan keyakinan bahwa Apple tidak dapat membalikkan keputusan ini melalui tantangan hukum lebih lanjut.
 
 ### Perlakuan Setara Dijamin oleh Hukum
 
-Yang terpenting, putusan tersebut secara eksplisit menyatakan bahwa Apple tidak boleh mendiskriminasi aplikasi yang menggunakan metode pembayaran eksternal. Pengadilan secara khusus melarang Apple dari:
+Paling penting, keputusan tersebut secara eksplisit menyatakan bahwa Apple tidak dapat mendiskriminasi aplikasi yang menggunakan metode pembayaran eksternal. Pengadilan secara khusus melarang Apple dari:
 
-1. Mengenakan biaya tambahan atau memberlakukan persyaratan tambahan pada aplikasi yang menggunakan metode pembayaran eksternal
-2. Memberikan perlakuan istimewa dalam hasil pencarian atau fitur untuk aplikasi yang secara eksklusif menggunakan sistem IAP Apple
-3. Menggunakan langkah-langkah teknis untuk membuat pengalaman pembayaran eksternal lebih rendah dari sistem Apple sendiri
-4. Memberlakukan persyaratan pengungkapan yang memberatkan di luar informasi konsumen dasar
+1. Membebankan biaya tambahan atau menetapkan persyaratan tambahan pada aplikasi yang menggunakan metode pembayaran eksternal
+2. Memberikan perlakuan istimewa dalam hasil pencarian atau penonjolan kepada aplikasi yang secara eksklusif menggunakan sistem IAP Apple
+3. Menggunakan langkah teknis untuk membuat pengalaman pembayaran eksternal menjadi inferior dibandingkan sistem milik Apple
+4. Menerapkan persyaratan pengungkapan yang memberatkan di luar informasi konsumen dasar
 
-Perlindungan eksplisit ini berarti pengembang dapat mengimplementasikan Stripe atau penyedia pembayaran eksternal lainnya tanpa takut pembalasan halus atau diskriminasi dari Apple. Arena persaingan telah diratakan secara hukum, dan Apple harus memperlakukan semua aplikasi secara setara terlepas dari pilihan metode pembayaran mereka.
+Perlindungan eksplisit ini berarti bahwa pengembang dapat menerapkan Stripe atau penyedia pembayaran eksternal lainnya tanpa takut akan pembalasan halus atau diskriminasi dari Apple. Lapangan permainan secara hukum telah diratakan, dan Apple harus memperlakukan semua aplikasi secara setara terlepas dari pilihan metode pembayaran mereka.
 
-Putusan ini merepresentasikan salah satu tantangan paling signifikan terhadap pendekatan walled garden Apple dan menandai pergeseran penting dalam cara monetisasi aplikasi mobile dapat bekerja. Bagi pengembang yang telah lama mengeluhkan komisi 30% Apple (diturunkan menjadi 15% untuk bisnis kecil), putusan ini menawarkan jalan menuju margin keuntungan yang lebih tinggi dan kontrol lebih besar atas pengalaman pelanggan.
+Putusan ini merupakan salah satu tantangan paling signifikan terhadap pendekatan kebun terkurung Apple dan menandai pergeseran penting dalam cara monetisasi aplikasi seluler dapat bekerja. Bagi pengembang yang telah lama mengeluh tentang komisi 30% Apple (yang dikurangi menjadi 15% untuk bisnis kecil), putusan ini menawarkan jalur menuju margin keuntungan yang lebih tinggi dan lebih banyak kontrol atas pengalaman pelanggan.
 
-## Manfaat Finansial Menggunakan Stripe Dibandingkan Pembelian Dalam Aplikasi Apple
+## Manfaat Keuangan Menggunakan Stripe Dibandingkan Pembelian Dalam Aplikasi Apple
 
-Implikasi finansial dari perubahan ini substansial bagi pengembang:
+Implikasi keuangan dari perubahan ini sangat besar bagi pengembang:
 
-- **Biaya Pemrosesan Pembayaran yang Lebih Rendah**: Apple biasanya mengenakan komisi 30% untuk pembelian dalam aplikasi (15% untuk bisnis kecil), sementara biaya Stripe hanya sekitar 2,9% + $0,30 per transaksi. Perbedaan ini dapat secara signifikan meningkatkan margin pendapatan Anda.
+- **Biaya Pemrosesan Pembayaran yang Lebih Rendah**: Apple biasanya membebankan komisi 30% pada pembelian dalam aplikasi (15% untuk bisnis kecil), sementara biaya Stripe hanya sekitar 2,9% + $0,30 per transaksi. Perbedaan ini dapat secara signifikan meningkatkan margin pendapatan Anda.
   
-- **Pembayaran Lebih Cepat**: Dengan Apple, Anda biasanya menunggu 45-90 hari untuk menerima dana Anda. Stripe, sebaliknya, menyetor pembayaran ke rekening bank Anda dalam 2-3 hari kerja.
+- **Pembayaran Lebih Cepat**: Dengan Apple, Anda biasanya menunggu 45-90 hari untuk menerima dana Anda. Stripe, di sisi lain, menyetor pembayaran ke rekening bank Anda dalam waktu 2-3 hari kerja.
 
-- **Proses Pengembalian Dana yang Disederhanakan**: Tangani pengembalian dana langsung melalui dashboard Stripe alih-alih melalui sistem pengembalian dana Apple yang lebih kompleks.
+- **Proses Pengembalian Yang Sederhana**: Tangani pengembalian langsung melalui dasbor Stripe daripada melalui sistem pengembalian Apple yang lebih rumit.
 
-Penghematan biaya dan peningkatan arus kas ini bisa menjadi game-changing, terutama untuk pengembang dan bisnis yang lebih kecil.
+Penghematan biaya dan arus kas yang ditingkatkan ini dapat mengubah permainan, terutama bagi pengembang dan bisnis kecil.
 
-Dalam artikel ini, kita akan mengeksplorasi cara mengimplementasikan Stripe Payment Links di aplikasi Capacitor Anda untuk memanfaatkan aturan baru ini, sambil memastikan kepatuhan dengan [pedoman yang diperbarui](https://developer.apple.com/app-store/review/guidelines/#business) Apple.
+Dalam artikel ini, kita akan menjelajahi cara mengimplementasikan Tautan Pembayaran Stripe di aplikasi Capacitor Anda untuk memanfaatkan aturan baru ini, sambil memastikan kepatuhan dengan [pedoman Apple yang diperbarui](https://developer.apple.com/app-store/review/guidelines/#business).
 
-> Implementasi ini didasarkan pada [dokumentasi resmi Stripe untuk Payment Links](https://docs.stripe.com/mobile/digital-goods/payment-links), yang disesuaikan khusus untuk aplikasi Capacitor.
+> Implementasi ini didasarkan pada [dokumentasi resmi Stripe untuk Tautan Pembayaran](https://docs.stripe.com/mobile/digital-goods/payment-links), yang disesuaikan khusus untuk aplikasi Capacitor.
 
 ## Memahami Pedoman Baru
 
-Pedoman Peninjauan App Store yang diperbarui sekarang mengizinkan pengembang untuk mengarahkan pengguna ke situs web eksternal untuk pemrosesan pembayaran, khususnya untuk barang dan langganan digital. Perubahan ini saat ini hanya berlaku untuk aplikasi yang didistribusikan di App Store Amerika Serikat.
+Pedoman Tinjauan App Store yang diperbarui sekarang memperbolehkan pengembang untuk mengarahkan pengguna ke situs web eksternal untuk pemrosesan pembayaran, khususnya untuk barang digital dan langganan. Perubahan ini saat ini hanya berlaku untuk aplikasi yang didistribusikan di App Store Amerika Serikat.
 
-Poin-poin penting yang perlu dipahami:
+Poin kunci yang perlu dipahami:
 
-1. Anda sekarang dapat menautkan ke opsi pembayaran eksternal untuk barang digital dalam aplikasi Anda
-2. Ini hanya berlaku untuk aplikasi di App Store A.S.
-3. Anda masih harus mematuhi persyaratan pengungkapan Apple
-4. Anda tetap bertanggung jawab atas semua dukungan pelanggan dan penanganan pengembalian dana
+1. Anda sekarang dapat menghubungkan ke opsi pembayaran eksternal untuk barang digital dalam aplikasi Anda
+2. Ini hanya berlaku untuk aplikasi di App Store AS
+3. Anda tetap harus mematuhi persyaratan pengungkapan Apple
+4. Anda bertanggung jawab atas semua dukungan pelanggan dan penanganan pengembalian dana
 
-## Menyiapkan Stripe Payment Links di Aplikasi Capacitor Anda
+## Menyiapkan Tautan Pembayaran Stripe di Aplikasi Capacitor Anda
 
-Mari kita dalami implementasi teknisnya:
+Mari kita selami implementasi teknisnya:
 
-### Langkah 1: Membuat Payment Link di Dashboard Stripe
+### Langkah 1: Buat Tautan Pembayaran di Dasbor Stripe
 
-Pertama, buat payment link di Dashboard Stripe Anda:
+Pertama, buat tautan pembayaran di Dasbor Stripe Anda:
 
-1. Navigasikan ke bagian Payment Links di Dashboard Stripe Anda
-2. Klik "+ New" untuk membuat payment link baru
-3. Tentukan detail produk atau langganan Anda
-4. Di bawah pengaturan "After payment", pilih "Don't show confirmation page"
-5. Tetapkan universal link sebagai URL sukses Anda (kita akan mengonfigurasi ini nanti)
-6. Klik "Create Link" untuk menghasilkan payment link Anda
+1. Navigasikan ke bagian Tautan Pembayaran di Dasbor Stripe Anda
+2. Klik "+ Baru" untuk membuat tautan pembayaran baru
+3. Definisikan rincian produk atau langganan Anda
+4. Di bawah pengaturan "Setelah pembayaran", pilih "Jangan tampilkan halaman konfirmasi"
+5. Atur tautan universal sebagai URL keberhasilan Anda (kita akan mengonfigurasi ini nanti)
+6. Klik "Buat Tautan" untuk menghasilkan tautan pembayaran Anda
 
-### Langkah 2: Menyiapkan Universal Links di Aplikasi Capacitor Anda
+### Langkah 2: Siapkan Tautan Universal di Aplikasi Capacitor Anda
 
-Untuk mengarahkan pengguna kembali ke aplikasi Anda setelah pembayaran selesai, konfigurasikan universal links:
+Untuk mengarahkan pengguna kembali ke aplikasi Anda setelah penyelesaian pembayaran, konfigurasikan tautan universal:
 
 1. Buat file `apple-app-site-association` di domain Anda:
 
@@ -112,11 +115,11 @@ Untuk mengarahkan pengguna kembali ke aplikasi Anda setelah pembayaran selesai, 
 }
 ```
 
-2. Host file ini di `https://yourdomain.com/.well-known/apple-app-site-association`
+2. Hosting file ini di `https://yourdomain.com/.well-known/apple-app-site-association`
 
-3. Pastikan file tersebut disajikan dengan tipe MIME yang benar `application/json`
+3. Pastikan dilayani dengan tipe MIME yang benar `application/json`
 
-4. Konfigurasikan aplikasi Capacitor Anda untuk menangani universal links dengan menambahkan entitlement yang tepat. Pertama, di `capacitor.config.ts` Anda:
+4. Konfigurasikan aplikasi Capacitor Anda untuk menangani tautan universal dengan menambahkan hak istimewa yang tepat. Pertama, di `capacitor.config.ts` Anda:
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -134,16 +137,16 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-5. Tambahkan Associated Domains entitlement ke proyek Xcode Anda:
+5. Tambahkan hak istimewa Domain Terkait ke proyek Xcode Anda:
    - Buka proyek Xcode Anda
    - Pilih target aplikasi Anda
    - Pergi ke "Signing & Capabilities"
    - Klik "+ Capability" dan pilih "Associated Domains"
    - Tambahkan `applinks:yourdomain.com`
 
-### Langkah 3: Membuat Halaman Fallback
+### Langkah 3: Buat Halaman Cadangan
 
-Buat halaman fallback di URL pengalihan untuk menangani kasus di mana aplikasi tidak terinstal:
+Buat halaman cadangan di URL pengalihan untuk menangani kasus di mana aplikasi tidak terinstal:
 
 ```html
 <!DOCTYPE html>
@@ -158,7 +161,7 @@ Buat halaman fallback di URL pengalihan untuk menangani kasus di mana aplikasi t
 </html>
 ```
 
-### Langkah 4: Mengimplementasikan Tombol Pembayaran di Aplikasi Capacitor Anda
+### Langkah 4: Terapkan Tombol Pembayaran di Aplikasi Capacitor Anda
 
 Sekarang, tambahkan tombol pembayaran ke aplikasi Anda:
 
@@ -183,11 +186,11 @@ export async function openPaymentLink(userEmail, userId) {
 }
 ```
 
-> **Mengapa Safari Penting**: Membuka payment link di Safari (melalui `window.open`) daripada browser dalam aplikasi bermanfaat karena pengguna yang sebelumnya telah menyimpan informasi pembayaran mereka dengan Stripe Link akan memiliki kredensial mereka tersedia secara otomatis. Ini menciptakan pengalaman checkout yang lebih lancar di mana pengguna tidak perlu memasukkan kembali informasi kartu kredit mereka, secara signifikan mengurangi gesekan dan tingkat abandonment.
+> **Mengapa Safari Penting**: Membuka tautan pembayaran di Safari (melalui `window.open`) daripada browser dalam aplikasi adalah keuntungan karena pengguna yang sebelumnya telah menyimpan informasi pembayaran mereka dengan Stripe Link akan memiliki kredensial mereka tersedia secara otomatis. Ini menciptakan pengalaman checkout yang lebih lancar di mana pengguna tidak perlu memasukkan informasi kartu kredit mereka lagi, secara signifikan mengurangi friksi dan tingkat pengabaian.
 
-### Langkah 5: Menangani Universal Links di Aplikasi Anda
+### Langkah 5: Tangani Tautan Universal di Aplikasi Anda
 
-Konfigurasikan aplikasi Anda untuk menangani universal links ketika pengguna diarahkan kembali:
+Konfigurasikan aplikasi Anda untuk menangani tautan universal saat pengguna dialihkan kembali:
 
 1. Pertama, instal plugin App:
 
@@ -231,9 +234,9 @@ function updatePurchaseStatus(success) {
 }
 ```
 
-### Langkah 6: Menyiapkan Webhook untuk Pemenuhan Pesanan
+### Langkah 6: Siapkan Webhook untuk Pemenuhan Pesanan
 
-Terakhir, konfigurasikan webhook di server Anda untuk menangani pembayaran yang berhasil:
+Akhirnya, konfigurasikan webhook di server Anda untuk menangani pembayaran yang berhasil:
 
 ```javascript
 // Using Express.js as an example
@@ -279,25 +282,25 @@ app.listen(3000, () => console.log('Webhook server running on port 3000'));
 
 ## Kompatibilitas Android
 
-Mari kita jelaskan: putusan Epic v. Apple telah secara fundamental mengubah lanskap pembayaran mobile. Tidak hanya berdampak langsung pada aplikasi iOS, tetapi juga memperkuat posisi pengembang Android yang telah menggunakan metode pembayaran eksternal.
+Mari kita jelaskan: putusan Epic v. Apple telah secara mendasar mengubah lanskap pembayaran seluler. Ini tidak hanya berdampak langsung pada aplikasi iOS, tetapi juga memperkuat posisi pengembang Android yang telah menggunakan metode pembayaran eksternal.
 
-**Pengembang Android sekarang dapat mengimplementasikan solusi pembayaran eksternal dengan kepercayaan penuh.** Preseden yang ditetapkan oleh putusan Apple secara efektif melindungi pengembang di seluruh platform dari kemungkinan pembatasan di masa depan. Keputusan pengadilan ini telah memvalidasi apa yang telah dilakukan banyak pengembang Android selama bertahun-tahun - menawarkan opsi pembayaran alternatif dengan biaya lebih rendah.
+**Pengembang Android sekarang dapat menerapkan solusi pembayaran eksternal dengan kepercayaan penuh.** Preseden yang ditetapkan oleh putusan Apple secara efektif melindungi pengembang di seluruh platform dari potensi pembatasan di masa depan. Keputusan pengadilan ini telah memvalidasi apa yang telah dilakukan banyak pengembang Android selama bertahun-tahun - menawarkan opsi pembayaran alternatif dengan biaya yang lebih rendah.
 
-Google Play Store selalu kurang ketat tentang metode pembayaran eksternal dibandingkan Apple, dan sekarang dengan preseden hukum yang ditetapkan, hampir tidak ada risiko dalam mengimplementasikan Stripe atau penyedia pembayaran eksternal lainnya di aplikasi Android Anda. Anda dapat melanjutkan dengan implementasi ini dengan mengetahui Anda berada di landasan hukum yang solid.
+Google Play Store selalu kurang ketat tentang metode pembayaran eksternal dibandingkan Apple, dan sekarang dengan preseden hukum yang ditetapkan, hampir tidak ada risiko dalam menerapkan Stripe atau penyedia pembayaran eksternal lainnya di aplikasi Android Anda. Anda dapat melanjutkan dengan implementasi ini dengan mengetahui bahwa Anda berada di dasar hukum yang solid.
 
-Implementasi yang telah kita bahas untuk iOS bekerja hampir identik untuk perangkat Android. Karena Google Play Store tidak memiliki pembatasan yang sama pada metode pembayaran eksternal, Anda dapat menggunakan pendekatan Stripe Payment Links yang sama tanpa memerlukan dialog pengungkapan khusus.
+Implementasi yang telah kita bahas untuk iOS bekerja hampir identik untuk perangkat Android. Karena Google Play Store tidak memiliki pembatasan yang sama pada metode pembayaran eksternal, Anda dapat menggunakan pendekatan Tautan Pembayaran Stripe yang persis sama tanpa memerlukan dialog pengungkapan khusus.
 
-Untuk menangani deep linking (setara dengan universal links di iOS), Anda perlu:
+Untuk menangani pengalihan mendalam (yang setara dengan tautan universal di iOS), Anda perlu:
 
-1. Menyiapkan App Links di `AndroidManifest.xml` Anda untuk menangani URL pengalihan
-2. Membuat file `.well-known/assetlinks.json` di domain Anda dengan detail aplikasi Anda
+1. Menyiapkan App Links di `AndroidManifest.xml` Anda untuk menangani URL pengarah
+2. Membuat file `.well-known/assetlinks.json` di domain Anda dengan rincian aplikasi Anda
 3. Menggunakan logika pendengar `appUrlOpen` yang sama untuk memproses pembayaran yang berhasil
 
-Keindahan Capacitor adalah bahwa setelah Anda mengimplementasikan konfigurasi khusus platform, kode alur pembayaran aktual tetap sama di kedua platform.
+Keindahan Capacitor adalah bahwa setelah Anda menerapkan konfigurasi spesifik platform, kode alur pembayaran yang sebenarnya tetap sama di kedua platform.
 
-## Membuat UI Pembayaran
+## Membuat Antarmuka Pembayaran
 
-Berikut adalah contoh komponen tombol pembayaran di Vue yang dapat Anda tambahkan ke aplikasi Capacitor Anda:
+Berikut adalah contoh komponen tombol pembayaran dalam Vue yang dapat Anda tambahkan ke aplikasi Capacitor Anda:
 
 ```vue
 <template>
@@ -393,7 +396,7 @@ async function handlePayment() {
 
 ## Menangani Berbagai Wilayah
 
-Karena pedoman Apple yang baru hanya berlaku untuk aplikasi di App Store A.S., Anda akan memerlukan strategi untuk mendeteksi wilayah pengguna dan menerapkan metode pembayaran yang sesuai. Berikut pendekatan yang lebih andal menggunakan geolokasi IP:
+Karena pedoman Apple yang baru hanya berlaku untuk aplikasi di App Store AS, Anda perlu strategi untuk mendeteksi wilayah pengguna dan menerapkan metode pembayaran yang tepat. Berikut adalah pendekatan yang lebih andal menggunakan geolokasi IP:
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -434,13 +437,13 @@ export async function processPayment(product, userEmail, userId) {
 }
 ```
 
-Pendekatan ini menggunakan layanan `ipapi.co` gratis untuk menentukan negara pengguna berdasarkan alamat IP mereka. Anda juga bisa menggunakan layanan geolokasi lain seperti MaxMind, atau mengimplementasikan pemeriksaan ini di sisi server untuk keamanan tambahan.
+Pendekatan ini menggunakan layanan gratis `ipapi.co` untuk menentukan negara pengguna berdasarkan alamat IP mereka. Anda juga dapat menggunakan layanan geolokasi lainnya seperti MaxMind, atau menerapkan pemeriksaan ini di sisi server untuk keamanan yang lebih baik.
 
-> **Catatan**: Meskipun pendekatan ini berhasil, penting untuk diingat bahwa geolokasi IP tidak selalu 100% akurat. Untuk aplikasi yang sangat penting, pertimbangkan untuk menggunakan beberapa metode deteksi atau memungkinkan pengguna memilih wilayah mereka secara manual.
+> **Catatan**: Meskipun pendekatan ini berhasil, penting untuk diingat bahwa geolokasi IP tidak selalu 100% akurat. Untuk aplikasi yang sangat penting, pertimbangkan untuk menggunakan beberapa metode deteksi atau memungkinkan pengguna untuk memilih wilayah mereka secara manual.
 
-### Deteksi Lokasi Lebih Akurat dengan Plugin Capacitor
+### Deteksi Lokasi yang Lebih Akurat dengan Plugin Capacitor
 
-Untuk deteksi lokasi yang lebih akurat, Anda dapat menggunakan plugin Capacitor Geolocation bersama dengan @capgo/nativegeocoder untuk menentukan negara pengguna dengan presisi yang lebih tinggi:
+Untuk deteksi lokasi yang lebih akurat, Anda dapat menggunakan plugin Geolocation dari Capacitor bersama dengan @capgo/nativegeocoder untuk menentukan negara pengguna dengan presisi yang lebih tinggi:
 
 1. Pertama, instal plugin yang diperlukan:
 
@@ -448,7 +451,7 @@ Untuk deteksi lokasi yang lebih akurat, Anda dapat menggunakan plugin Capacitor 
 npm install @capacitor/geolocation @capgo/nativegeocoder
 ```
 
-2. Konfigurasi plugin dalam proyek Capacitor Anda. Tambahkan berikut ini ke `capacitor.config.ts` Anda:
+2. Konfigurasikan plugin dalam proyek Capacitor Anda. Tambahkan yang berikut ini ke `capacitor.config.ts` Anda:
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -543,9 +546,9 @@ export async function processPayment(product, userEmail, userId) {
 }
 ```
 
-Implementasi ini menyediakan cara yang lebih akurat untuk menentukan apakah pengguna secara fisik berada di Amerika Serikat. Pertama mencoba menggunakan GPS perangkat dan geocoder native untuk menentukan negara. Jika itu gagal (karena masalah izin atau kesalahan lain), akan kembali ke deteksi berbasis IP.
+Implementasi ini memberikan cara yang lebih akurat untuk menentukan apakah pengguna berada secara fisik di Amerika Serikat. Pertama, ia mencoba menggunakan GPS perangkat dan geocoder asli untuk menentukan negara. Jika itu gagal (karena masalah izin atau kesalahan lainnya), ia kembali ke deteksi berbasis IP.
 
-Ingat untuk menambahkan izin yang diperlukan ke file `info.plist` (iOS) dan `AndroidManifest.xml` (Android):
+Ingat untuk menambahkan izin yang diperlukan ke file `info.plist` Anda (iOS) dan `AndroidManifest.xml` (Android):
 
 Untuk iOS (`ios/App/App/Info.plist`):
 ```xml
@@ -558,11 +561,11 @@ Untuk Android (`android/app/src/main/AndroidManifest.xml`):
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ```
 
-Menggunakan pendekatan ini memberikan Anda cara paling akurat untuk menentukan apakah pengguna memenuhi syarat untuk opsi pembayaran eksternal di bawah pedoman Apple yang baru.
+Menggunakan pendekatan ini memberi Anda cara yang paling akurat untuk menentukan apakah pengguna memenuhi syarat untuk opsi pembayaran eksternal di bawah pedoman baru Apple.
 
 ## Mengelola Langganan
 
-Salah satu keuntungan utama menggunakan Stripe untuk pembayaran adalah kemampuan untuk menawarkan dan mengelola langganan. Berikut cara menangani manajemen langganan di aplikasi Capacitor Anda:
+Salah satu keuntungan utama menggunakan Stripe untuk pembayaran adalah kemampuan untuk menawarkan dan mengelola langganan. Berikut adalah cara menangani manajemen langganan di aplikasi Capacitor Anda:
 
 ### 1. Membuat Halaman Manajemen Langganan
 
@@ -661,11 +664,11 @@ async function createPortalSession(customerId) {
 Untuk memastikan implementasi Anda mematuhi pedoman Apple:
 
 1. Sertakan pengungkapan yang sesuai tentang pembelian eksternal
-2. Implementasikan lembar modal yang menginformasikan pengguna bahwa mereka meninggalkan aplikasi (seperti yang disyaratkan oleh Apple)
-3. Jangan mencoba menghindari komisi Apple pada pembelian yang dilakukan dalam aplikasi
-4. Komunikasikan dengan jelas kepada pengguna bahwa Apple tidak bertanggung jawab atas transaksi
+2. Implementasikan lembar modal yang memberi tahu pengguna bahwa mereka meninggalkan aplikasi (seperti yang disyaratkan oleh Apple)
+3. Jangan mencoba untuk menghindari komisi Apple pada pembelian yang dilakukan di dalam aplikasi
+4. Komunikasikan dengan jelas kepada pengguna bahwa Apple tidak bertanggung jawab atas transaksi tersebut
 
-Berikut contoh implementasi modal pengungkapan yang diperlukan:
+Berikut adalah contoh penerapan modal pengungkapan yang diperlukan:
 
 ```typescript
 import { Dialog } from '@capacitor/dialog';
@@ -694,34 +697,34 @@ export async function initiateExternalPayment(userEmail, userId) {
 
 Untuk menguji implementasi Anda:
 
-1. Klik tombol pembayaran di aplikasi Anda, yang seharusnya menampilkan pengungkapan dan kemudian membuka halaman pembayaran Stripe
-2. Selesaikan pembayaran uji menggunakan kartu uji Stripe `4242 4242 4242 4242`
-3. Setelah pembayaran, Anda harus dialihkan kembali ke aplikasi Anda melalui tautan universal
-4. Periksa bahwa webhook Anda menerima event `checkout.session.completed`
+1. Klik tombol pembayaran Anda di aplikasi, yang akan menunjukkan pengungkapan dan kemudian membuka halaman pembayaran Stripe
+2. Lengkapi pembayaran uji menggunakan kartu uji Stripe `4242 4242 4242 4242`
+3. Setelah pembayaran, Anda harus diarahkan kembali ke aplikasi Anda melalui tautan universal
+4. Periksa bahwa webhook Anda menerima peristiwa `checkout.session.completed`
 
 ## Kesimpulan
 
-Kemampuan untuk menggunakan opsi pembayaran eksternal untuk barang digital dalam aplikasi iOS adalah perubahan signifikan yang memberikan pengembang lebih banyak fleksibilitas. Meskipun perubahan ini saat ini hanya berlaku untuk aplikasi di App Store AS, ini memberikan alternatif penting untuk sistem pembelian dalam aplikasi Apple.
+Kemampuan untuk menggunakan opsi pembayaran eksternal untuk barang digital di aplikasi iOS adalah perubahan signifikan yang memberikan lebih banyak fleksibilitas kepada pengembang. Meskipun perubahan ini saat ini hanya berlaku untuk aplikasi di App Store AS, itu memberikan alternatif penting untuk sistem pembelian dalam aplikasi Apple.
 
-Dengan menggunakan Stripe Payment Links dengan Capacitor, Anda dapat dengan cepat mengimplementasikan pengalaman checkout yang efisien sambil mempertahankan kepatuhan dengan pedoman Apple. Pendekatan ini juga memberi Anda keuntungan dari infrastruktur pembayaran Stripe yang kuat, biaya pemrosesan yang lebih rendah (3% vs 30%), dan pembayaran yang jauh lebih cepat (hari alih-alih bulan) dibandingkan dengan sistem pembelian dalam aplikasi Apple.
+Dengan menggunakan Tautan Pembayaran Stripe dengan Capacitor, Anda dapat dengan cepat menerapkan pengalaman checkout yang lancar sambil mempertahankan kepatuhan dengan pedoman Apple. Pendekatan ini juga memberi Anda keuntungan dari infrastruktur pembayaran Stripe yang kuat, biaya pemrosesan yang lebih rendah (3% dibandingkan 30%), dan pembayaran yang jauh lebih cepat (hari dibandingkan bulan) dibandingkan dengan sistem pembelian dalam aplikasi Apple.
 
-Ingat bahwa Anda perlu menangani semua dukungan pelanggan dan masalah pengembalian dana secara langsung, karena transaksi ini terjadi di luar ekosistem Apple.
+Ingatlah bahwa Anda perlu menangani semua dukungan pelanggan dan masalah pengembalian dana secara langsung, karena transaksi ini terjadi di luar ekosistem Apple.
 
-Sudahkah Anda mengimplementasikan Stripe Payment Links di aplikasi Capacitor Anda? Bagikan pengalaman Anda di komentar di bawah!
+Apakah Anda telah menerapkan Tautan Pembayaran Stripe di aplikasi Capacitor Anda? Bagikan pengalaman Anda di komentar di bawah!
 
-## FAQ
+## FAQs
 
 **T: Apakah pendekatan ini sesuai dengan pedoman Apple?**  
-J: Ya, per 1 Mei 2025, Apple mengizinkan tautan ke metode pembayaran eksternal untuk barang dan layanan digital dalam aplikasi yang didistribusikan di App Store AS, asalkan Anda menyertakan pengungkapan yang diperlukan.
+J: Ya, mulai 1 Mei 2025, Apple mengizinkan tautan ke metode pembayaran eksternal untuk barang dan layanan digital di aplikasi yang didistribusikan di App Store AS, dengan syarat Anda menyertakan pengungkapan yang diperlukan.
 
 **T: Apakah saya perlu membayar komisi Apple saat menggunakan metode pembayaran eksternal?**  
-J: Tidak, salah satu keuntungan utama dari aturan baru adalah bahwa pembayaran yang diproses di luar sistem Apple tidak dikenakan komisi mereka.
+J: Tidak, salah satu manfaat utama dari aturan baru adalah bahwa pembayaran yang diproses di luar sistem Apple tidak dikenakan komisi mereka.
 
-**T: Apakah perusahaan saya harus berbasis di Amerika Serikat untuk memanfaatkan aturan baru ini?**  
-J: Tidak, perusahaan dari mana saja di dunia dapat mengimplementasikan metode pembayaran eksternal selama aplikasi Anda tersedia di App Store AS dan pengguna yang melakukan pembelian berada di Amerika Serikat. Peraturan ini berlaku untuk marketplace (App Store AS) dan lokasi pengguna, bukan lokasi perusahaan Anda. Ini berarti pengembang dari Eropa, Asia, Amerika Selatan, atau di mana pun dapat mengimplementasikan Stripe Payment Links untuk pelanggan mereka yang berbasis di AS.
+**T: Apakah perusahaan saya perlu berbasis di Amerika Serikat untuk memanfaatkan aturan baru ini?**  
+J: Tidak, perusahaan mana pun dari mana saja di dunia dapat menerapkan metode pembayaran eksternal selama aplikasi Anda tersedia di App Store AS dan pengguna yang melakukan pembelian berada di Amerika Serikat. Putusan ini berlaku untuk pasar (App Store AS) dan lokasi pengguna, bukan lokasi perusahaan Anda. Ini berarti pengembang dari Eropa, Asia, Amerika Selatan, atau tempat lainnya dapat menerapkan Tautan Pembayaran Stripe untuk pelanggan berbasis di AS.
 
 **T: Apa yang terjadi jika pengguna di luar AS mencoba menggunakan opsi pembayaran eksternal?**  
-J: Anda harus mengimplementasikan deteksi wilayah (seperti yang ditunjukkan dalam artikel) untuk hanya menawarkan opsi pembayaran eksternal kepada pengguna di AS. Untuk wilayah lain, Anda harus terus menggunakan sistem pembelian dalam aplikasi Apple.
+J: Anda harus menerapkan deteksi wilayah (seperti yang ditunjukkan dalam artikel) untuk hanya menawarkan opsi pembayaran eksternal kepada pengguna di AS. Untuk wilayah lain, Anda harus terus menggunakan sistem pembelian dalam aplikasi Apple.
 
-**T: Bisakah saya menggunakan ini untuk barang fisik atau layanan yang dikonsumsi di luar aplikasi?**  
-J: Ya, Apple selalu mengizinkan metode pembayaran eksternal untuk barang fisik dan layanan yang dikonsumsi di luar aplikasi (seperti berbagi tumpangan atau pengiriman makanan).
+**T: Dapatkah saya menggunakan ini untuk barang fisik atau layanan yang dikonsumsi di luar aplikasi?**  
+J: Ya, Apple selalu mengizinkan metode pembayaran eksternal untuk barang fisik dan layanan yang dikonsumsi di luar aplikasi (seperti berbagi tumpangan atau pengantaran makanan).

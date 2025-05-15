@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import '@dotenvx/dotenvx/config'
 import { Document } from 'langchain/document'
 import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'

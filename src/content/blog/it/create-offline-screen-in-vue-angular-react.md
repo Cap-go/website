@@ -1,10 +1,12 @@
 ---
 slug: create-offline-screen-in-vue-angular-react
-title: 'Vue, Angular 및 React 애플리케이션에서 Network API와 Capacitor를 사용하여 오프라인 화면 만들기'
+title: >-
+  Wie man einen Offline-Bildschirm in Vue-, Angular- und React-Anwendungen mit
+  der Network-API und Capacitor erstellt
 description: >-
-  Aprende a implementar una pantalla sin conexión utilizando la API de Network y
-  Capacitor en aplicaciones Vue, Angular o React. Maneja los escenarios sin
-  conexión de manera efectiva para mejorar la experiencia del usuario.
+  Impara come implementare uno schermo offline in applicazioni Vue, Angular o
+  React utilizzando l'API di rete e Capacitor. Migliora l'esperienza dell'utente
+  gestendo efficacemente gli scenari offline.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -21,83 +23,82 @@ published: true
 locale: it
 next_blog: ''
 ---
+# Cómo crear una pantalla sin conexión en Vue 3, Angular 14 o React
 
-# Come Creare una Schermata Offline in Vue 3, Angular 14 o React
+En este tutorial, aprenderemos cómo crear una pantalla sin conexión en aplicaciones de Vue 3, Angular 14 y React utilizando la API de Red. La API de Red proporciona información sobre la red y la conectividad, lo que nos permite manejar escenarios sin conexión y ofrecer una mejor experiencia al usuario.
 
-In questo tutorial, impareremo come creare una schermata offline nelle applicazioni Vue 3, Angular 14 e React utilizzando la Network API. La Network API fornisce informazioni sulla rete e sulla connettività, permettendoci di gestire gli scenari offline e fornire una migliore esperienza utente.
+## Requisitos previos
 
-## Prerequisiti
+Antes de comenzar, asegúrate de tener instalados los siguientes elementos:
 
-Prima di iniziare, assicurati di avere installato quanto segue:
-
-- [Nodejs](https://nodejs.org/) (versione 14 o superiore)
+- [Node.js](https://nodejs.org/) (versión 14 o superior)
 - [Vue CLI](https://cli.vuejs.org/)
 - [Angular CLI](https://cli.angular.io/)
 - [Create React App](https://create-react-app.dev/)
 
-## Configurazione del Progetto
+## Configuración del proyecto
 
-Per prima cosa, creiamo un nuovo progetto utilizzando il rispettivo strumento di scaffolding per ogni framework.
+Primero, creemos un nuevo proyecto utilizando la herramienta de scaffolding respectiva para cada marco.
 
 ### Vue 3
 
-Apri il terminale ed esegui il seguente comando per creare un nuovo progetto Vue 3:
+Abre tu terminal y ejecuta el siguiente comando para crear un nuevo proyecto de Vue 3:
 
 ```shell
 vue create offline-screen-vue3
 ```
 
-Scegli il preset predefinito e attendi che il progetto venga creato.
+Elige la configuración predeterminada y espera a que se cree el proyecto.
 
 ### Angular 14
 
-Apri il terminale ed esegui il seguente comando per creare un nuovo progetto Angular 14:
+Abre tu terminal y ejecuta el siguiente comando para crear un nuevo proyecto de Angular 14:
 
 ```shell
 ng new offline-screen-angular14
 ```
 
-Segui le istruzioni e quando ti viene chiesto di selezionare funzionalità aggiuntive, seleziona "Routing" premendo il tasto **barra spaziatrice**. Attendi che il progetto venga creato.
+Sigue las indicaciones, y cuando se te pregunte por características adicionales, selecciona "Routing" presionando la tecla **barra espaciadora**. Espera a que se cree el proyecto.
 
 ### React
 
-Apri il terminale ed esegui il seguente comando per creare un nuovo progetto React:
+Abre tu terminal y ejecuta el siguiente comando para crear un nuevo proyecto de React:
 
 ```shell
 npx create-react-app offline-screen-react
 ```
 
-Attendi che il progetto venga creato.
+Espera a que se cree el proyecto.
 
-## Installazione della Network API
+## Instalando la API de Red
 
-Ora, installiamo il pacchetto `@capacitor/network`, che fornisce la Network API.
+Ahora, instalemos el paquete `@capacitor/network`, que proporciona la API de Red.
 
-Apri il terminale e naviga nella directory del tuo progetto. Quindi, esegui il seguente comando per installare il pacchetto:
+Abre tu terminal y navega a tu directorio de proyecto. Luego, ejecuta el siguiente comando para instalar el paquete:
 
 ```shell
 npm install @capacitor/network
 ```
 
-Per i progetti Capacitor, esegui anche il seguente comando per sincronizzare i file del progetto nativo:
+Para los proyectos de Capacitor, también ejecuta el siguiente comando para sincronizar los archivos del proyecto nativo:
 
 ```shell
 npx cap sync
 ```
 
-Assicurati di avere Capacitor CLI installato globalmente eseguendo:
+Asegúrate de tener instalado el CLI de Capacitor globalmente ejecutando:
 
 ```shell
 npm install -g @capacitor/cli
 ```
 
-## Implementazione della Schermata Offline
+## Implementando la pantalla sin conexión
 
-Successivamente, implementeremo la funzionalità della schermata offline in ciascun framework. Mostreremo un semplice messaggio quando l'utente va offline.
+A continuación, implementaremos la funcionalidad de la pantalla sin conexión en cada marco. Mostraremos un mensaje simple cuando el usuario esté sin conexión.
 
 ### Vue 3
 
-Nel tuo progetto Vue 3, apri il file `src/main.js` e importa il modulo `Network` da `@capacitor/network`:
+En tu proyecto de Vue 3, abre el archivo `src/main.js` e importa el módulo `Network` de `@capacitor/network`:
 
 ```javascript
 import { createApp } from 'vue';
@@ -127,7 +128,7 @@ const logCurrentNetworkStatus = async () => {
 };
 ```
 
-Nel template della tua applicazione (`App.vue`), aggiungi un elemento `<div>` con un id di `offline-screen` per mostrare il messaggio della schermata offline:
+En la plantilla de tu aplicación (`App.vue`), agrega un elemento `<div>` con un id de `offline-screen` para mostrar el mensaje de la pantalla sin conexión:
 
 ```html
 <template>
@@ -158,11 +159,11 @@ Nel template della tua applicazione (`App.vue`), aggiungi un elemento `<div>` co
 </style>
 ```
 
-Ora, quando l'utente va offline, verrà visualizzata la schermata offline. Quando l'utente torna online, la schermata offline verrà nascosta.
+Ahora, cuando el usuario esté sin conexión, se mostrará la pantalla sin conexión. Cuando el usuario vuelva a estar en línea, la pantalla sin conexión se ocultará.
 
 ### Angular 14
 
-Nel tuo progetto Angular 14, apri il file `src/app/app.component.ts` e importa il modulo `Network` da `@capacitor/network`:
+En tu proyecto de Angular 14, abre el archivo `src/app/app.component.ts` e importa el módulo `Network` de `@capacitor/network`:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -197,7 +198,7 @@ export class AppComponent {
 }
 ```
 
-Nel template della tua applicazione (`app.component.html`), aggiungi un elemento `<template>` con un id di `offline-screen` per mostrare il messaggio della schermata offline:
+En la plantilla de tu aplicación (`app.component.html`), agrega un elemento `<template>` con un id de `offline-screen` para mostrar el mensaje de la pantalla sin conexión:
 
 ```html
 <div id="offline-screen">
@@ -208,7 +209,7 @@ Nel template della tua applicazione (`app.component.html`), aggiungi un elemento
 <!-- Your application content -->
 ```
 
-Aggiungi i seguenti stili al file `app.component.css`:
+Agrega los siguientes estilos al archivo `app.component.css`:
 
 ```css
 #offline-screen {
@@ -227,11 +228,11 @@ Aggiungi i seguenti stili al file `app.component.css`:
 }
 ```
 
-Ora, quando l'utente va offline, verrà visualizzata la schermata offline. Quando l'utente torna online, la schermata offline verrà nascosta.
+Ahora, cuando el usuario esté sin conexión, se mostrará la pantalla sin conexión. Cuando el usuario vuelva a estar en línea, la pantalla sin conexión se ocultará.
 
 ### React
 
-Nel tuo progetto React, apri il file `src/App.js` e importa il modulo `Network` da `@capacitor/network`:
+En tu proyecto de React, abre el archivo `src/App.js` e importa el módulo `Network` de `@capacitor/network`:
 
 ```jsx
 import React, { useEffect } from 'react'
@@ -274,7 +275,7 @@ function App() {
 export default App
 ```
 
-Aggiungi i seguenti stili al file `App.css`:
+Agrega los siguientes estilos al archivo `App.css`:
 
 ```css
 #offline-screen {
@@ -293,12 +294,11 @@ Aggiungi i seguenti stili al file `App.css`:
 }
 ```
 
-Ora, quando l'utente va offline, verrà visualizzata la schermata offline. Quando l'utente torna online, la schermata offline verrà nascosta.
+Ahora, cuando el usuario esté sin conexión, se mostrará la pantalla sin conexión. Cuando el usuario vuelva a estar en línea, la pantalla sin conexión se ocultará.
 
-## Metodi e Interfacce di Supporto
+## Métodos y interfaces de soporte
 
-La Network API fornisce diversi metodi e interfacce per aiutarti a gestire la connessione di rete. Ecco alcuni dei principali:
+La API de Red proporciona varios métodos e interfaces para ayudarte a manejar la conexión de red. Aquí hay algunos de los más importantes:
 
-- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Interroga lo stato attuale della connessione di rete
-- [`addListener('networkStatusChange', )`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Ascolta i cambiamenti nella connessione di rete
--
+- [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Consulta el estado actual de la conexión de red.
+- [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Escucha los cambios en la conexión de red.

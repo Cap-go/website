@@ -1,10 +1,10 @@
 ---
 slug: managing-secrets-in-cicd-pipelines
-title: Administración de secretos en Pipelines de CI/CD
+title: Gestion des secrets dans les pipelines CI/CD
 description: >-
-  Découvrez des stratégies efficaces pour gérer les secrets dans les pipelines
-  CI/CD afin d'améliorer la sécurité et d'éviter les violations et les problèmes
-  de conformité.
+  Apprenez des stratégies efficaces pour gérer les secrets dans les pipelines
+  CI/CD afin d'améliorer la sécurité et de prévenir les violations et les
+  problèmes de conformité.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -19,79 +19,103 @@ published: true
 locale: fr
 next_blog: ''
 ---
+**Garder les secrets en sécurité dans les pipelines CI/CD est crucial pour prévenir les violations, les interruptions de services et les problèmes de conformité.** Voici comment le faire efficacement :
 
-**La sécurité des secrets dans les pipelines CI/CD est critique pour prévenir les fuites, les interruptions de service et les problèmes de conformité.** Voici comment le faire efficacement :
+-   **Utilisez des variables d'environnement** et **des coffres-forts sécurisés** pour stocker les secrets de manière sécurisée.
+-   **Limitez l'accès** en accordant uniquement les privilèges nécessaires et en faisant tourner les secrets régulièrement.
+-   **Automatisez la détection des secrets** avec des outils comme `git-secrets` ou `truffleHog` pour détecter les fuites tôt.
+-   **Exploitez les outils CI/CD** comme [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), ou [Jenkins](https://www.jenkins.io/) pour une gestion intégrée des secrets.
+-   **Surveillez et auditez** l'utilisation des secrets avec des journaux détaillés.
 
--   **Utilisez des variables d'environnement** et des **coffres-forts sécurisés** pour stocker les secrets en toute sécurité
--   **Limitez l'accès** en accordant uniquement les privilèges nécessaires et en faisant tourner régulièrement les secrets
--   **Automatisez la détection des secrets** avec des outils comme `git-secrets` ou `truffleHog` pour détecter les fuites rapidement
--   **Tirez parti des outils CI/CD** comme [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), ou [Jenkins](https://wwwjenkinsio/) pour la gestion intégrée des secrets
--   **Surveillez et auditez** l'utilisation des secrets avec des logs détaillés
+### Secrets CI/CD Courants
 
-### Secrets CI/CD courants
-
--   [Clés API](https://capgoapp/docs/webapp/api-keys/)
+-   [Clés API](https://capgo.app/docs/webapp/api-keys/)
 -   Identifiants de base de données
 -   Clés de chiffrement
 -   Jetons d'authentification
 -   Certificats SSL
 
-### Plateformes populaires de gestion des secrets
+### Plateformes de Gestion des Secrets Populaires
 
-| Plateforme | Fonctionnalités | Idéal pour |
+| Plateforme | Fonctionnalités | Idéal Pour |
 | --- | --- | --- |
-| **[HashiCorp Vault](https://wwwhashicorpcom/products/vault)** | Secrets dynamiques, chiffrement, contrôle d'accès | Opérations à grande échelle |
-| **[AWS Secrets Manager](https://docsawsamazoncom/secretsmanager/)** | Intégration AWS, rotation automatique | Configurations AWS |
-| **[Azure Key Vault](https://learnmicrosoftcom/en-us/azure/key-vault/)** | Gestion des certificats, rotation des clés | Environnements Microsoft |
+| **[HashiCorp Vault](https://www.hashicorp.com/products/vault)** | Secrets dynamiques, chiffrement, contrôle d'accès | Opérations à grande échelle |
+| **[AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/)** | Intégration AWS, rotation automatique | Configurations centrées sur AWS |
+| **[Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/)** | Gestion des certificats, rotation des clés | Environnements Microsoft |
 
-En suivant ces pratiques et en utilisant les bons outils, vous pouvez protéger vos pipelines CI/CD et maintenir des workflows sécurisés
+En suivant ces pratiques et en utilisant les bons outils, vous pouvez protéger vos pipelines CI/CD et maintenir des workflows sécurisés.
 
-## Directives de sécurité pour les secrets
+## Directives de Sécurité pour les Secrets
 
-### Gardez les secrets hors de votre code
+### Gardez les Secrets Hors de Votre Code
 
--   Utilisez des **variables d'environnement** pour gérer les informations sensibles
--   Stockez les secrets dans un **coffre-fort sécurisé** conçu à cet effet
--   Connectez votre pipeline CI/CD au coffre-fort pour injecter les identifiants pendant le processus de build
+-   Utilisez **des variables d'environnement** pour gérer des informations sensibles.
+-   Stockez les secrets dans un **coffre-fort sécurisé** conçu à cet effet.
+-   Connectez votre pipeline CI/CD au coffre-fort pour injecter des identifiants pendant le processus de construction.
 
-### Limitez et surveillez l'accès
+### Limitez et Surveillez l'Accès
 
-Accordez uniquement les **privilèges minimums nécessaires** à chaque utilisateur ou service, et révisez régulièrement les permissions
+Accordez uniquement les **privilèges minimaux nécessaires** à chaque utilisateur ou service, et passez en revue les autorisations fréquemment.
 
-De plus, faites tourner les secrets selon un calendrier régulier et maintenez un **journal d'audit** pour suivre et identifier toute violation potentielle
+De plus, faites tourner les secrets selon un calendrier régulier et maintenez un **journal d'audit** pour suivre et identifier toute violation potentielle.
 
-## Comment intégrer [GitLab CI](https://docsgitlabcom/ee/ci/) avec [HashiCorp Vault](https://wwwhashicorpcom/products/vault) pour récupérer
+## Comment intégrer [GitLab CI](https://docs.gitlab.com/ee/ci/) avec [HashiCorp Vault](https://www.hashicorp.com/products/vault) pour récupérer ...
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Outils de gestion des secrets
+## Outils de Gestion des Secrets
 
-Une fois les directives de sécurité en place, il est temps de déployer des outils spécifiquement conçus pour la gestion des secrets
+Une fois les directives de sécurité en place, il est temps de déployer des outils spécifiquement conçus pour gérer les secrets.
 
-### Plateformes de stockage des secrets
+### Plateformes de Stockage des Secrets
 
 Centralisez et surveillez tous vos secrets en utilisant ces outils :
 
-| Plateforme | Fonctionnalités | Idéal pour |
+| Plateforme | Fonctionnalités | Idéal Pour |
 | --- | --- | --- |
 | **HashiCorp Vault** | Secrets dynamiques, services de chiffrement, accès basé sur l'identité | Opérations à grande échelle |
-| **AWS Secrets Manager** | Intégration AWS transparente, rotation automatique, permissions granulaires | Configurations AWS |
+| **AWS Secrets Manager** | Intégration AWS transparente, rotation automatique, autorisations fines | Configurations axées sur AWS |
 | **Azure Key Vault** | Modules de sécurité matériels, gestion des certificats, rotation des clés | Environnements cloud Microsoft |
 
-Après avoir sécurisé vos secrets dans les plateformes de stockage, utilisez les fonctionnalités de gestion des secrets incluses dans vos outils CI/CD
+Après avoir sécurisé vos secrets dans des plateformes de stockage, exploitez les fonctionnalités de gestion des secrets qui accompagnent vos outils CI/CD.
 
-### Gestion des secrets CI/CD
+### Gestion des Secrets CI/CD
 
-De nombreux outils CI/CD disposent de capacités intégrées de gestion des secrets :
+De nombreux outils CI/CD disposent de fonctionnalités de gestion des secrets intégrées :
 
--   **GitHub Actions** : Propose des secrets chiffrés au niveau du dépôt et de l'organisation. Les secrets sont automatiquement masqués dans les logs et uniquement accessibles aux workflows autorisés
--   **GitLab CI** : Fournit des variables protégées et des secrets au niveau du groupe, permettant un partage sécurisé entre les projets tout en maintenant l'isolation
--   **Jenkins** : Fonctionne avec des plugins d'identification et prend en charge les stockages externes de secrets. Des plugins sont nécessaires pour garantir que les secrets sont masqués dans les logs
+-   **GitHub Actions** : Offre des secrets chiffrés à la fois au niveau du dépôt et de l'organisation. Les secrets sont automatiquement masqués dans les journaux et uniquement accessibles par des workflows autorisés.
+-   **GitLab CI** : Fournit des variables protégées et des secrets au niveau du groupe, permettant un partage sécurisé entre projets tout en maintenant l'isolement.
+-   **Jenkins** : Fonctionne avec des plugins d'identifiants et prend en charge des magasins de secrets externes. Des plugins sont nécessaires pour garantir que les secrets sont masqués dans les journaux.
 
-### Fonctionnalités de sécurité [Capgo](https://capgoapp/)
+### Fonctionnalités de Sécurité de [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
-Capgo améliore la sécurité des mises à jour en direct dans les applications Capacitor en étendant la gestion standard des secrets CI/CD. Il utilise le chiffrement de bout en bout pour garantir que seuls les utilisateurs autorisés peuvent déchiffrer les données sensibles [\[1\]](https://capgoapp/)
+Capgo améliore la sécurité des mises à jour en direct dans les applications Capacitor en étendant la gestion standard des secrets CI/CD. Il utilise le chiffrement de bout en bout pour garantir que seuls les utilisateurs autorisés peuvent déchiffrer des données sensibles [\[1\]](https://capgo.app/).
 
-Capgo s'intègre parfaitement avec des outils comme GitHub Actions, GitLab CI et Jenkins
+Capgo s'intègre parfaitement avec des outils comme GitHub Actions, GitLab CI, et Jenkins. Il prend également en charge la distribution basée sur des canaux et les contrôles d'accès basés sur les rôles, répondant aux exigences de mise à jour des plateformes Apple et Android.
+
+## Secrets dans le Contrôle de Version
+
+Protégez vos dépôts en empêchant les identifiants codés en dur de s'infiltrer. Commencez par un stockage dans des coffres-forts sécurisés, puis ajoutez des mesures supplémentaires pour bloquer les informations sensibles dans votre code.
+
+Voici comment vous pouvez renforcer votre défense :
+
+-   **Utilisez des outils comme [git-secrets](https://github.com/awslabs/git-secrets) ou des frameworks de pré-commit** pour détecter les problèmes avant que les commits ne soient effectués.
+-   **Effectuez des scans périodiques** avec des outils tels que [truffleHog](https://github.com/trufflesecurity/trufflehog) ou [GitGuardian](https://www.gitguardian.com/) pour détecter des secrets qui auraient pu passer à travers.
+-   **Automatisez les vérifications CI/CD** pour signaler et échouer les builds si des secrets sont trouvés.
+
+Ensuite, nous aborderons comment gérer efficacement les secrets exposés.
+
+## Résumé
+
+Ce guide a exploré le stockage des coffres, les scans automatisés, l'intégration des outils CI/CD, et les protections des dépôts. Capgo réunit sécurité et déploiement rapide grâce à un chiffrement de bout en bout et une intégration fluide CI/CD[\[1\]](https://capgo.app/).
+
+Points clés pour une gestion sécurisée des secrets :
+
+-   **Utilisez le stockage dans des coffres-forts** : Comptez sur des plateformes qui proposent un chiffrement tant pendant le stockage qu'en transit.
+-   **Automatisez les contrôles de sécurité** : Implémentez des outils de scan pour identifier les expositions de secrets tôt.
+-   **Suivez et surveillez l'activité** : Gardez des journaux d'audit détaillés des accès et modifications des secrets.
+-   **Préparez-vous aux incidents** : Mettez en place des processus clairs pour traiter les secrets exposés et annuler les modifications si nécessaire.
+
+Une gestion efficace des secrets transforme la sécurité d'un obstacle en un système de soutien pour la livraison continue.

@@ -1,10 +1,9 @@
 ---
 slug: how-live-updates-for-capacitor-work
-title: Comment fonctionne la mise à jour en direct dans Capgo
+title: Bagaimana Pembaruan Langsung Bekerja di Capgo
 description: >-
-  Mari kita melihat lebih dalam mengenai implementasi teknis dari Live Update
-  Capgo, dan memahami mekanisme kerja internal di kedua platform iOS dan
-  Android.
+  Penetrasi mendalam ke dalam implementasi teknis pembaruan langsung di Capgo,
+  memahami bagaimana cara kerjanya di balik layar untuk iOS dan Android.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -20,32 +19,31 @@ published: true
 locale: id
 next_blog: ''
 ---
+# Memahami Pembaruan Langsung di Capgo
 
-# Memahami Live Updates di Capgo
+Pembaruan langsung adalah salah satu fitur paling kuat dalam aplikasi Capacitor, memungkinkan pembaruan real-time tanpa pengiriman ke toko aplikasi. Mari kita selami lebih dalam bagaimana Capgo mengimplementasikan fungsionalitas ini.
 
-Live updates adalah salah satu fitur paling kuat dalam aplikasi Capacitor, memungkinkan pembaruan real-time tanpa perlu submit ke app store. Mari kita dalami bagaimana Capgo mengimplementasikan fungsionalitas ini.
-
-## Konsep Dasar
+## Konsep Inti
 
 Aplikasi Capacitor terdiri dari dua lapisan utama:
 
-1. **Lapisan Web**: Berisi file HTML, CSS, dan JavaScript yang dimuat dalam WebView
-2. **Lapisan Native**: Berisi kode platform-spesifik (Java/Kotlin untuk Android, Swift untuk iOS)
+1. **Lapisan Web**: Berisi file HTML, CSS, dan JavaScript yang dimuat di WebView
+2. **Lapisan Native**: Berisi kode spesifik platform (Java/Kotlin untuk Android, Swift untuk iOS)
 
-Sistem live update Capgo bekerja dengan mengganti lapisan web saat runtime, karena file-file ini tidak dikompilasi ke dalam binary aplikasi.
+Sistem pembaruan langsung Capgo bekerja dengan mengganti lapisan web pada saat runtime, karena file-file ini tidak dikompilasi ke dalam biner aplikasi.
 
 ## Implementasi Teknis
 
-### Path Server di Capacitor
+### Jalur Server di Capacitor
 
-Capgo mengelola dua path penting:
+Capgo mengelola dua jalur penting:
 
-- **Path Server Saat Ini**: Menunjuk ke file yang sedang dimuat di WebView
-- **Path Server Berikutnya**: Menunjuk ke file yang akan dimuat saat aplikasi di-restart
+- **Jalur Server Saat Ini**: Mengarah ke file yang saat ini dimuat di WebView
+- **Jalur Server Selanjutnya**: Mengarah ke file yang akan dimuat pada saat aplikasi di-restart
 
 ### Implementasi Android
 
-Pada Android, Capgo mengelola path melalui:
+Di Android, Capgo mengelola jalur melalui:
 
 ```java
 // Store next server path
@@ -65,7 +63,7 @@ private void setCurrentCapacitorServerPath(String path) {
 
 ### Implementasi iOS
 
-Pada iOS, path dikelola melalui:
+Di iOS, jalur dikelola melalui:
 
 ```swift
 // Store next server path
@@ -81,63 +79,63 @@ private func setCurrentCapacitorServerPath(path: String) {
 
 ## Langkah-langkah Keamanan
 
-Capgo mengimplementasikan keamanan tingkat militer melalui enkripsi end-to-end, memastikan pembaruan aplikasi Anda tetap sepenuhnya aman dari pengembangan hingga penerapan. Sistem enkripsi kami melampaui penandatanganan kode tradisional untuk memberikan keamanan zero-knowledge yang sesungguhnya.
+Capgo menerapkan keamanan tingkat militer melalui enkripsi end-to-end, memastikan pembaruan aplikasi Anda tetap sepenuhnya aman dari pengembangan hingga penerapan. Sistem enkripsi kami melampaui penandatanganan kode tradisional untuk memberikan keamanan nol-pengetahuan yang sebenarnya.
 
 ### Arsitektur Enkripsi End-to-End
 
-1. **Enkripsi End-to-End (E2EE)**: Setiap bundel pembaruan dienkripsi menggunakan enkripsi AES-256-GCM sebelum meninggalkan lingkungan pengembangan Anda. Enkripsi tingkat militer ini memastikan pembaruan aplikasi Anda tetap sepenuhnya privat dan aman selama proses pengiriman.
+1. **Enkripsi End-to-End (E2EE)**: Setiap paket pembaruan dienkripsi menggunakan enkripsi AES-256-GCM sebelum meninggalkan lingkungan pengembangan Anda. Enkripsi tingkat militer ini memastikan bahwa pembaruan aplikasi Anda tetap sepenuhnya pribadi dan aman sepanjang proses pengiriman.
 
-2. **Arsitektur Zero-Knowledge**: Berbeda dengan solusi OTA update lainnya yang hanya menandatangani pembaruan, Capgo menggunakan enkripsi zero-knowledge yang sesungguhnya. Ini berarti:
+2. **Arsitektur Nol-Pengetahuan**: Tidak seperti solusi pembaruan OTA lainnya yang hanya menandatangani pembaruan, Capgo menerapkan enkripsi nol-pengetahuan yang sebenarnya. Ini berarti:
    - Konten pembaruan dienkripsi sebelum diunggah
    - Server Capgo hanya menyimpan data terenkripsi
-   - Dekripsi hanya terjadi pada perangkat pengguna akhir
+   - Dekripsi hanya terjadi di perangkat pengguna akhir
    - Tidak ada perantara yang dapat mengakses konten pembaruan Anda
 
-3. **Manajemen Kunci Aman**: 
-   - Kunci enkripsi dibuat dan disimpan dengan aman di lingkungan CI/CD Anda
+3. **Manajemen Kunci yang Aman**: 
+   - Kunci enkripsi dihasilkan dan disimpan secara aman di lingkungan CI/CD Anda
    - Kunci privat tidak pernah menyentuh server Capgo
-   - Setiap versi aplikasi dapat menggunakan kunci enkripsi unik
+   - Setiap versi aplikasi dapat menggunakan kunci enkripsi yang unik
    - Dukungan rotasi kunci untuk keamanan yang lebih baik
 
-Pelajari lebih lanjut tentang sistem enkripsi kami dalam panduan detail: [End-to-End Encryption in Capgo Live Updates](https://capgoapp/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/)
+Pelajari lebih lanjut tentang sistem enkripsi kami dalam panduan terperinci kami: [Enkripsi End-to-End di Pembaruan Langsung Capgo](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/)
 
 ### Proses Keamanan Pembaruan
 
 1. **Enkripsi Pra-Unggah**:
-   - Pembaruan dienkripsi dalam pipeline CI/CD Anda
-   - Setiap file dienkripsi secara individual
-   - Metadata juga dienkripsi untuk privasi lengkap
+   - Pembaruan dienkripsi di jalur CI/CD Anda
+   - Setiap file dienkripsi secara individu
+   - Metadata juga dienkripsi untuk menjaga privasi penuh
 
 2. **Penyimpanan Aman**:
-   - Bundle terenkripsi disimpan di CDN global Capgo
-   - Tidak ada data teks biasa yang menyentuh server kami
+   - Paket terenkripsi disimpan di CDN global Capgo
+   - Tidak ada data teks biasa yang pernah menyentuh server kami
    - Bahkan dalam kasus pelanggaran server, data tetap aman
 
 3. **Pengiriman Aman**:
-   - Pembaruan dikirim melalui saluran terenkripsi
+   - Pembaruan dikirimkan melalui saluran terenkripsi
    - Setiap instansi aplikasi memvalidasi integritas enkripsi
-   - Mekanisme retry otomatis untuk dekripsi yang gagal
+   - Mekanisme otomatis untuk percobaan dekripsi yang gagal
 
 4. **Keamanan Sisi Klien**:
    - Pembaruan diverifikasi sebelum instalasi
-   - Dekripsi yang gagal memicu rollback otomatis
-   - Penyimpanan kunci aman di penyimpanan terproteksi aplikasi
+   - Dekripsi yang gagal memicu pengembalian otomatis
+   - Penyimpanan kunci yang aman di penyimpanan terlindungi aplikasi
 
-Pendekatan keamanan komprehensif ini memastikan pembaruan aplikasi Anda tetap terlindungi dari:
-- Serangan man-in-the-middle
+Pendekatan keamanan komprehensif ini memastikan bahwa pembaruan aplikasi Anda tetap terlindungi dari:
+- Serangan Man-in-the-middle
 - Pelanggaran sisi server
-- Modifikasi tidak sah
+- Modifikasi yang tidak sah
 - Serangan replay
-- Perusakan konten
+- Pemalsuan konten
 
 ## Siklus Hidup Pembaruan
 
-Proses pembaruan Capgo dirancang otomatis secara default. Berikut cara kerja proses otomatis:
+Proses pembaruan Capgo dirancang untuk otomatis secara default. Berikut cara kerja proses otomatis tersebut:
 
 ### 1. Pemeriksaan Pembaruan Otomatis
 
 Plugin secara otomatis memeriksa pembaruan dalam situasi berikut:
-- Saat aplikasi dimulai
+- Ketika aplikasi dimulai
 
 Perilaku ini dikendalikan oleh pengaturan `autoUpdate`:
 
@@ -156,12 +154,12 @@ Anda juga dapat memeriksa secara manual dengan `getLatest()`
 ### 2. Pengunduhan Otomatis
 
 Ketika versi baru terdeteksi, jika `autoUpdate` diaktifkan:
-1. Unduhan dimulai secara otomatis
-2. Kemajuan dilacak secara internal
-3. Unduhan yang gagal akan mencoba ulang secara otomatis setiap kali aplikasi dibuka
-4.Download yang berhasil disimpan dalam penyimpanan aplikasi
+1. Pengunduhan dimulai otomatis
+2. Progres dilacak secara internal
+3. Pengunduhan yang gagal mencoba ulang secara otomatis setiap kali aplikasi dibuka
+4. Pengunduhan yang berhasil disimpan di penyimpanan aplikasi
 
-Anda dapat memantau proses ini melalui event:
+Anda dapat memantau proses ini melalui peristiwa:
 ```typescript
 CapacitorUpdater.addListener('download', (info: DownloadEvent) => {
   console.log('Auto-download progress:', info.percent);
@@ -172,7 +170,7 @@ CapacitorUpdater.addListener('downloadComplete', (info: DownloadCompleteEvent) =
 });
 ```
 
-### 3 Instalasi Otomatis
+### 3. Instalasi Otomatis
 
 Waktu instalasi tergantung pada konfigurasi Anda:
 
@@ -192,17 +190,17 @@ Waktu instalasi tergantung pada konfigurasi Anda:
 ```
 
 Instalasi terjadi:
-- Segera jika `directUpdate` bernilai true
-- Saat aplikasi berjalan di background jika `directUpdate` bernilai false
-- Rollback otomatis jika instalasi gagal
+- Segera jika `directUpdate` benar
+- Pada arka aplikasi berikutnya jika `directUpdate` salah
+- Pengembalian otomatis jika instalasi gagal
 
-Plugin juga mengelola penyimpanan secara otomatis:
-- Menghapus update yang gagal jika `autoDeleteFailed` bernilai true
-- Membersihkan versi lama jika `autoDeletePrevious` bernilai true
+Plugin juga secara otomatis mengelola penyimpanan:
+- Menghapus pembaruan yang gagal jika `autoDeleteFailed` benar
+- Membersihkan versi lama jika `autoDeletePrevious` benar
 
-### Menunda Update
+### Menunda Pembaruan
 
-Anda dapat mengontrol kapan update diinstal menggunakan kondisi penundaan:
+Anda dapat mengontrol kapan pembaruan diinstal menggunakan kondisi penundaan:
 
 ```typescript
 // Delay until app goes to background
@@ -236,59 +234,59 @@ await CapacitorUpdater.setMultiDelay({
 ```
 
 Kondisi penundaan yang tersedia:
-- **background**: Install saat aplikasi masuk ke background
-- **date**: Install setelah tanggal/waktu tertentu
-- **nativeVersion**: Install setelah update native berikutnya
-- **kill**: Install setelah aplikasi dimatikan
+- **background**: Instal ketika aplikasi masuk ke latar belakang
+- **date**: Instal setelah tanggal/waktu tertentu
+- **nativeVersion**: Instal setelah pembaruan native berikutnya
+- **kill**: Instal setelah aplikasi dihentikan
 
 Ini berguna untuk:
-- Menjadwalkan update selama jam tidak sibuk
-- Mengkoordinasikan update dengan aktivitas pengguna
-- Memastikan pengalaman update yang lancar
-- Mencegah gangguan selama tugas penting
+- Menjadwalkan pembaruan selama jam sepi
+- Mengkoordinasikan pembaruan dengan aktivitas pengguna
+- Memastikan pengalaman pembaruan yang lancar
+- Mencegah gangguan selama tugas kritis
 
-### Status Update
+### Status Pembaruan
 
-Selama proses otomatis, bundle melewati status-status berikut:
-1. **downloading**: Unduhan sedang berlangsung
-2. **pending**: Unduhan selesai, menunggu instalasi
-3. **success**: Update terinstal dan aktif
-4. **error**: Update gagal (memicu rollback otomatis)
+Selama proses otomatis, paket beralih melalui status-status ini:
+1. **downloading**: Pengunduhan sedang berlangsung
+2. **pending**: Pengunduhan selesai, menunggu instalasi
+3. **success**: Pembaruan terinstal dan aktif
+4. **error**: Pembaruan gagal (memicu pengembalian otomatis)
 
 ## Kepatuhan Toko
 
 ### Apple App Store ✅
 
-Live Updates sepenuhnya mematuhi kebijakan Apple App Store Seperti yang tercantum dalam Perjanjian Lisensi Program Apple Developer:
+Pembaruan Langsung sepenuhnya mematuhi kebijakan Apple App Store. Seperti yang dinyatakan dalam Perjanjian Lisensi Program Pengembang Apple:
 
-> "Kode yang diinterpretasikan dapat diunduh ke Aplikasi tetapi hanya selama kode tersebut: (a) tidak mengubah tujuan utama Aplikasi dengan menyediakan fitur atau fungsionalitas yang tidak konsisten dengan tujuan yang dimaksud dan diiklankan dari Aplikasi sebagaimana diajukan ke App Store, (b) tidak membuat toko atau storefront untuk kode atau aplikasi lain, dan (c) tidak memotong signing, sandbox, atau fitur keamanan lain dari OS"
+> "Kode yang diinterpretasikan dapat diunduh ke Aplikasi tetapi hanya selama kode tersebut: (a) tidak mengubah tujuan utama Aplikasi dengan memberikan fitur atau fungsionalitas yang tidak konsisten dengan tujuan yang dimaksudkan dan diiklankan dari Aplikasi yang diajukan ke App Store, (b) tidak menciptakan toko atau etalase untuk kode atau aplikasi lain, dan (c) tidak melewati penandatanganan, sandbox, atau fitur keamanan lain dari OS."
 
-Update Capgo hanya memodifikasi lapisan web sambil menghormati semua batasan keamanan platform
+Capgo hanya memodifikasi lapisan web sambil menghormati semua batasan keamanan platform.
 
 ### Google Play Store ✅
 
-Live Updates mematuhi Kebijakan Google Play Kebijakan Penyalahgunaan Perangkat dan Jaringan secara khusus menyatakan:
+Pembaruan Langsung mematuhi Kebijakan Google Play. Kebijakan Penyalahgunaan Perangkat dan Jaringan secara khusus menyatakan:
 
-> "Pembatasan ini tidak berlaku untuk kode yang berjalan di mesin virtual atau interpreter di mana keduanya menyediakan akses tidak langsung ke API Android (seperti JavaScript di webview atau browser)"
+> "Pembatasan ini tidak berlaku untuk kode yang berjalan di mesin virtual atau interpreter di mana keduanya memberikan akses tidak langsung ke API Android (seperti JavaScript dalam webview atau browser)."
 
-Karena Capgo hanya memperbarui konten WebView, ini termasuk dalam pedoman yang diizinkan
+Karena Capgo hanya memperbarui konten WebView, maka hal ini termasuk dalam pedoman yang diizinkan.
 
 ## Praktik Terbaik
 
-1. **Rollout Bertahap**: Terapkan update secara bertahap
-2. **Kontrol Versi**: Lacak semua versi yang diterapkan
-3. **Dukungan Rollback**: Pemulihan cepat dari masalah
-4. **Update Delta**: Hanya unduh file yang berubah
+1. **Peluncuran Bertahap**: Terapkan pembaruan secara bertahap
+2. **Pengendalian Versi**: Lacak semua versi yang diterapkan
+3. **Dukungan Pengembalian**: Pemulihan cepat dari masalah
+4. **Pembaruan Delta**: Hanya unduh file yang berubah
 
-## Kapan Menggunakan Live Updates
+## Kapan Menggunakan Pembaruan Langsung
 
-Sempurna untuk:
-- Perbaikan bug
-- Perbaikan UI
-- Update konten
-- Toggle fitur
+Sangat cocok untuk:
+- Memperbaiki bug
+- Peningkatan UI
+- Pembaruan konten
+- Pengalihan fitur
 
 Tidak cocok untuk:
 - Perubahan kode native
-- Update versi major
-- Patch keamanan yang membutuhkan perubahan native
+- Pembaruan versi besar
+- Tambalan keamanan yang memerlukan perubahan native

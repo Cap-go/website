@@ -17,7 +17,7 @@ keywords: >-
   experience
 tag: 'Development, Security, Updates'
 published: true
-locale: fr
+locale: id
 next_blog: ''
 ---
 Pembaruan OTA (Over-the-Air) dapat meningkatkan aplikasi dengan cepat, namun kesalahan dapat menyebabkan crash, risiko keamanan, atau bahkan pelanggaran [app store](https://www.apple.com/app-store/). Berikut panduan singkat untuk menghindari kesalahan umum:

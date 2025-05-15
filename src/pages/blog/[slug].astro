@@ -34,9 +34,7 @@ const { entries, allPublishedEntries } = Astro.props as { entries: CollectionEnt
 const entry = entries.find((j) => j.data.locale === Astro.locals.locale)
 
 if (!entry) {
-  // Try to find the English version for redirect
   if (Astro.locals.locale !== 'en') {
-    // Try to find the English version in related
     const enEntry = entries.find((j) => j.data.locale === 'en')
     if (enEntry)
       return new Response(
@@ -54,22 +52,20 @@ if (!entry) {
   return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
-const otherLocaleEntries = []
-const filteredLocaleEntries = []
-
-for (const j of entries) {
-  if (j.data.locale === Astro.locals.locale) filteredLocaleEntries.push(j)
-  else otherLocaleEntries.push(j)
-}
-
-// Find related posts in the same locale
 const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
-// Find alternate versions (other locales)
-const alternateVersions = otherLocaleEntries.map((translation) => ({
-  slug: translation.data.slug,
-  locale: translation.data.locale,
-  url: `${Astro.locals.runtimeConfig.public.baseUrl}/${translation.data.locale}/blog/${translation.data.slug}/`,
-}))
+const seenLocales = new Set()
+const alternateVersions = entries
+  .filter(({ data }) => {
+    if (seenLocales.has(data.locale)) return false
+    seenLocales.add(data.locale)
+    return true
+  })
+  .map(({ data }) => ({
+    slug: data.slug,
+    locale: data.locale,
+    url:
+      data.locale === 'en' ? `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${data.slug}/` : `${Astro.locals.runtimeConfig.public.baseUrl}/${data.locale}/blog/${data.slug}/`,
+  }))
 
 const { Content, headings } = await render(entry)
 
@@ -93,21 +89,17 @@ content['ldJSON'] = {
   datePublished,
   '@type': 'NewsArticle',
   image: [content['image']],
+  author: {
+    '@type': 'Person',
+    name: entry.data?.author,
+    url: entry.data?.author_url,
+  },
   inLanguage: Astro.locals.locale,
   headline: content['description'],
   '@context': 'https://schema.org',
   keywords: entry.data?.keywords || [],
   articleSection: entry.data?.tag || [],
   articleBody: striptags(entry.rendered?.html || ''),
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
-  },
-  author: {
-    '@type': 'Person',
-    name: entry.data?.author,
-    url: entry.data?.author_url,
-  },
   publisher: {
     name: 'Capgo',
     '@type': 'Organization',
@@ -115,6 +107,10 @@ content['ldJSON'] = {
       '@type': 'ImageObject',
       url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
     },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
   },
 }
 ---
@@ -145,14 +141,14 @@ content['ldJSON'] = {
       <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
         <div class="relative col-span-3 md:col-span-2">
           <img
+            width="1536"
+            height="1024"
             id="blogImage"
             loading="eager"
             decoding="async"
             alt={entry.data.title}
             src={entry.data.head_image}
-            width="1536"
-            height="1024"
-            class="blur-0 overflow-hidden rounded border border-white/5 object-cover"
+            class="rounded border border-white/5 object-cover"
           />
           <article class="prose prose-invert blog min-w-full">
             <Content />
@@ -160,7 +156,7 @@ content['ldJSON'] = {
         </div>
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
-            <p class="text-sm text-gray-600">Written by</p>
+            <p class="text-sm text-gray-600">{m.written_by({}, { locale: Astro.locals.locale })}</p>
             <a class="group flex items-center space-x-3" href={entry.data.author_url}>
               <img
                 width="36"
@@ -173,7 +169,7 @@ content['ldJSON'] = {
               />
               <div class="flex flex-col">
                 <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-                <p class="text-sm text-gray-500">Content Marketer</p>
+                <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
               </div>
             </a>
           </div>
@@ -222,7 +218,7 @@ content['ldJSON'] = {
       </div>
       {
         related.length > 0 && (
-          <div class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-5 sm:mt-16 lg:max-w-none lg:grid-cols-3 xl:gap-6">
+          <div class="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
             {related.map((article) => (
               <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
             ))}
@@ -263,13 +259,9 @@ content['ldJSON'] = {
         const heading = headings[i]
         const tmp = heading.getAttribute('id')
         if (tmp) document.querySelector(`#${tmp}-link`)?.classList.remove('text-white')
-
         const rect = heading.getBoundingClientRect()
-        if (rect.top <= 50) {
-          activeHeading = heading
-        } else if (rect.top > 50 && activeHeading) {
-          break
-        }
+        if (rect.top <= 50) activeHeading = heading
+        else if (rect.top > 50 && activeHeading) break
       }
 
       if (activeHeading) {

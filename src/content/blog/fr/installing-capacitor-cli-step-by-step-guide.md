@@ -1,9 +1,9 @@
 ---
 slug: installing-capacitor-cli-step-by-step-guide
-title: 'Installation der Capacitor CLI: Schritt-für-Schritt-Anleitung'
+title: 'Installation de Capacitor CLI : Guide étape par étape'
 description: >-
-  Apprenez à installer et configurer Capacitor CLI pour transformer efficacement
-  les applications web en applications mobiles natives.
+  Apprenez à installer et configurer Capacitor CLI pour transformer des
+  applications web en applications mobiles natives de manière efficace.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -18,234 +18,348 @@ published: true
 locale: fr
 next_blog: ''
 ---
+**[Capacitor](https://capacitorjs.com/) CLI vous aide à transformer des applications web en applications natives iOS et Android avec une seule base de code.** Voici comment le configurer rapidement :
 
-**[Capacitor](https://capacitorjscom/) CLI vous aide à transformer des applications web en applications natives iOS et Android avec une seule base de code.** Voici comment le configurer rapidement :
+-   **Prérequis** : Installez [Node.js](https://nodejs.org/en) (v16+), npm et un framework web (React, Vue, Angular, etc.).
+-   **[Installez le Capacitor CLI](https://capgo.app/docs/cli/commands)** : Exécutez `npm install @capacitor/cli @capacitor/core` et initialisez votre projet avec `npx cap init`.
+-   **Préparez les plateformes** : Ajoutez le support pour iOS (`npx cap add ios`) et Android (`npx cap add android`).
+-   **Construisez et synchronisez** : Utilisez `npm run build` et `npx cap sync` pour transférer les assets web vers des projets natifs.
+-   **Mises à jour en direct optionnelles** : Utilisez des outils comme [Capgo](https://capgo.app/) pour envoyer des mises à jour instantanément sans retards d'app store.
 
--   **Prérequis** : Installez [Nodejs](https://nodejsorg/en) (v16+), npm, et un framework web (React, Vue, Angular, etc.)
--   **[Installer Capacitor CLI](https://capgoapp/docs/cli/commands)** : Exécutez `npm install @capacitor/cli @capacitor/core` et initialisez votre projet avec `npx cap init`
--   **Préparer les Plateformes** : Ajoutez le support pour iOS (`npx cap add ios`) et Android (`npx cap add android`)
--   **Build et Sync** : Utilisez `npm run build` et `npx cap sync` pour transférer les assets web vers les projets natifs
--   **Mises à jour en direct optionnelles** : Utilisez des outils comme [Capgo](https://capgoapp/) pour pousser des mises à jour instantanément sans délais de l'app store
+Le Capacitor CLI simplifie le développement et la maintenance des applications. Suivez le guide pour une configuration et un dépannage sans heurts.
 
-Capacitor CLI simplifie le développement et la maintenance des applications. Suivez le guide pour une configuration et un dépannage en douceur.
+## Créez une application mobile rapidement ! React + [Capacitor](https://capacitorjs.com/) + [Tailwind](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)
 
-## Créez une Application Mobile Rapidement ! React + [Capacitor](https://capacitorjscom/) + [Tailwind](https://tailwindcsscom/) + [DaisyUI](https://daisyuicom/)
+![Capacitor](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/67ef362eebbb9dc80641f34f/7e137b9b90adb3934b29b03381f213c1jpg)
+<iframe src="https://www.youtube.com/embed/PPXktTJXMPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-<Steps>
-
-## Avant de Commencer
+## Avant de commencer
 
 Préparez votre environnement en suivant ces étapes :
 
-### Configurer [Nodejs](https://nodejsorg/en) et npm
+### Configurez [Node.js](https://nodejs.org/en) et npm
 
-![Nodejs](https://assetsseobotaicom/capgoapp/67ef362eebbb9dc80641f34f/a74739743b1f15b8d0bf124a9c30cba9jpg)
+![Node.js](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/a74739743b1f15b8d0bf124a9c30cba9.jpg)
 
-Vous aurez besoin de Nodejs version 16 ou supérieure. La dernière version LTS est recommandée. Pour vérifier votre configuration, exécutez :
+Vous aurez besoin de la version 16 ou supérieure de Node.js. La dernière version LTS est recommandée. Pour vérifier votre configuration, exécutez :
 
-`node --version && npm --version`
+```bash
+node --version
+npm --version
+```
 
-Si vous devez mettre à jour, téléchargez Nodejs (qui inclut npm) depuis le site officiel.
+Si vous devez mettre à jour, téléchargez Node.js (qui inclut npm) depuis le site officiel.
 
-Après avoir confirmé que Nodejs est prêt, assurez-vous que votre projet web répond aux exigences nécessaires de Capacitor.
+Après avoir confirmé que Node.js est prêt, assurez-vous que votre projet web répond aux exigences nécessaires de Capacitor.
 
-### Vérifier Votre Projet Web
+### Vérifiez votre projet web
 
-Votre projet web doit avoir les éléments suivants :
+Votre projet web doit avoir ce qui suit :
 
--   **Un packagejson valide** : Assurez-vous qu'il est correctement configuré
--   **Un répertoire de build** : C'est là que résident vos assets web (généralement `dist` ou `www`)
--   **Un point d'entrée** : Votre répertoire de build doit inclure un fichier `indexhtml`
+-   **Un package.json valide** : Assurez-vous qu'il est correctement configuré.
+-   **Un répertoire de construction** : C'est là où vos assets web se trouvent (souvent `dist` ou `www`).
+-   **Un point d'entrée** : Votre répertoire de construction doit inclure un fichier `index.html`.
 
-Voici un aperçu des champs clés du `packagejson` :
+Voici un aperçu rapide des champs clés de `package.json` :
 
-| Champ Requis | Exemple de Valeur | Objectif |
+| Champ requis | Valeur d'exemple | But |
 | --- | --- | --- |
 | name | "my-app" | Identifie le projet |
-| version | "100" | Spécifie la version de l'app |
-| build directory | "dist" ou "www" | Pointe vers les assets web |
+| version | "1.0.0" | Spécifie la version de l'application |
+| build directory | "dist" ou "www" | Pointeur vers les assets web |
 
-Une fois que votre Nodejs et votre projet web sont prêts, passez à l'installation des outils spécifiques à la plateforme.
+Une fois que votre Node.js et votre projet web sont prêts, passez à l'installation des outils spécifiques à la plateforme.
 
-### Installer les Logiciels Requis
+### Installez les logiciels requis
 
-**Pour le Développement Android :**
+**Pour le développement Android :**
 
--   Téléchargez et installez la dernière version d'**[Android Studio](https://developerandroidcom/studio)**
--   Configurez le SDK Android avec au moins l'API niveau 22
--   Configurez la variable d'environnement `ANDROID_HOME`
+-   Téléchargez et installez la dernière version de **[Android Studio](https://developer.android.com/studio)**.
+-   Configurez le SDK Android avec au moins le niveau API 22.
+-   Configurez la variable d'environnement `ANDROID_HOME`.
 
-**Pour le Développement iOS (Mac uniquement) :**
+**Pour le développement iOS (Mac uniquement) :**
 
--   Installez **[Xcode](https://developerapplecom/xcode/) 14** ou une version plus récente
+-   Installez **[Xcode](https://developer.apple.com/xcode/) 14** ou une version plus récente.
     
--   Installez les Command Line Tools
+-   Installez les outils en ligne de commande.
     
--   Utilisez [Homebrew](https://brewsh/) pour installer [CocoaPods](https://cocoapodsorg/) :
+-   Utilisez [Homebrew](https://brew.sh/) pour installer [CocoaPods](https://cocoapods.org/) :
     
-    `brew install cocoapods`
+    ```bash
+    brew install cocoapods
+    ```
     
 -   Acceptez la licence Xcode :
     
-    `sudo xcodebuild -license accept`
+    ```bash
+    sudo xcodebuild -license accept
+    ```
     
 
-Lors de l'intégration de Capgo plus tard, assurez-vous d'avoir une connexion internet stable et des certificats SSL valides.
+Lorsque vous intégrerez Capgo plus tard, assurez-vous d'avoir une connexion Internet stable et de certificats SSL valides.
 
-Une fois ces étapes terminées, vous êtes prêt pour un processus de développement Capacitor fluide. Ensuite, vous installerez le CLI Capacitor.
+Une fois ces étapes terminées, vous êtes prêt pour un processus de développement Capacitor fluide. Ensuite, vous installerez le Capacitor CLI.
 
-## Installer Capacitor CLI
+## Installez le Capacitor CLI
 
-Une fois votre environnement prêt, il est temps d'installer et de configurer Capacitor CLI.
+Avec votre environnement prêt, il est temps d'installer et de configurer le Capacitor CLI.
 
-### Ajouter les Packages Capacitor
+### Ajoutez des packages Capacitor
 
 Commencez par installer les packages Capacitor CLI et Core en utilisant npm :
 
-`npm install @capacitor/cli @capacitor/core`
+```bash
+npm install @capacitor/cli @capacitor/core
+```
 
-Une fois installé, confirmez la configuration en vérifiant la [version de Capacitor](https://capgoapp/plugins/ivs-player/) :
+Une fois installé, confirmez la configuration en vérifiant la [version de Capacitor](https://capgo.app/plugins/ivs-player/) :
 
-`npx cap --version`
+```bash
+npx cap --version
+```
 
-### Configurer Votre Projet
+### Configurez votre projet
 
 Initialisez Capacitor dans votre projet avec la commande suivante :
 
-`npx cap init`
+```bash
+npx cap init
+```
 
-Pendant l'initialisation, vous serez invité à fournir ces détails :
+Lors de l'initialisation, vous serez invité à fournir ces détails :
 
 | Paramètre | Description | Exemple |
 | --- | --- | --- |
-| App Name | Le nom affiché dans les app stores | "My Awesome App" |
-| App ID | Un identifiant unique pour votre app | "commycompany" |"myapp" |
-| Répertoire Web | Chemin vers vos ressources web | "dist" ou "www" |
+| App Name | Le nom affiché dans les magasins d'applications | "My Awesome App" |
+| App ID | Un identifiant unique pour votre application | "com.mycompany.myapp" |
+| Web Directory | Chemin vers vos assets web | "dist" ou "www" |
 
-Ensuite, mettez à jour votre fichier de configuration (`capacitorconfig.ts` ou `capacitorconfig.json`) avec les paramètres appropriés :
+Ensuite, mettez à jour votre fichier de configuration (`capacitor.config.ts` ou `capacitor.config.json`) avec les paramètres pertinents :
 
-[[CODE_BLOCK]]
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
 
-### Configurer iOS et Android
+const config: CapacitorConfig = {
+  appId: 'com.mycompany.myapp',
+  appName: 'My Awesome App',
+  webDir: 'dist',
+  bundledWebRuntime: false
+};
+
+export default config;
+```
+
+### Configurez iOS et Android
 
 Ajoutez le support pour les plateformes iOS et Android avec ces commandes :
 
-[[CODE_BLOCK]]
+```bash
+npx cap add ios
+npx cap add android
+```
 
 Cela générera des projets natifs :
 
--   **iOS** : Crée un dossier `ios` contenant le projet Xcode
--   **Android** : Crée un dossier `android` pour le projet Android Studio
+-   **iOS** : Crée un dossier `ios` contenant le projet Xcode.
+-   **Android** : Crée un dossier `android` pour le projet Android Studio.
 
-Après avoir modifié vos ressources web, exécutez les commandes suivantes pour compiler et synchroniser :
+Après avoir apporté des modifications à vos assets web, exécutez les commandes suivantes pour construire et synchroniser :
 
-[[CODE_BLOCK]]
+```bash
+npm run build
+npx cap sync
+```
 
-Ce processus compile vos ressources web et les transfère vers les projets natifs, y compris les [plugins Capacitor](https://capgo.app/plugins/) installés
+Ce processus compile vos assets web et les transfère vers les projets natifs, y compris tout [plugin Capacitor](https://capgo.app/plugins/) installé.
 
-Pour ouvrir les projets natifs pour personnalisation :
+Pour ouvrir les projets natifs pour des personnalisations supplémentaires :
 
-[[CODE_BLOCK]]
+```bash
+npx cap open ios     # Opens Xcode
+npx cap open android # Opens Android Studio
+```
 
-Vous êtes maintenant prêt à tester votre configuration et résoudre les problèmes éventuels
+Vous êtes maintenant prêt à tester votre configuration et à résoudre tout problème pouvant survenir.
 
-## Résoudre les Problèmes Courants
+## Résoudre les problèmes courants
 
-Lors de la configuration du CLI Capacitor, vous pourriez rencontrer quelques difficultés courantes. Voici comment les résoudre :
+Lors de la configuration du Capacitor CLI, vous pourriez rencontrer quelques accrocs courants. Voici comment les résoudre :
 
 ### Problèmes de Gradle Android
 
 Si vous rencontrez des problèmes liés à Gradle, essayez ces étapes :
 
-1. Naviguez vers le répertoire Android et effacez le cache de build :
+1.  Naviguez jusqu'au répertoire Android et videz le cache de compilation :
     
-    [[CODE_BLOCK]]
+    ```bash
+    cd android
+    ./gradlew cleanBuildCache
+    ```
     
-2. Mettez à jour la version de Gradle dans `android/build.gradle` :
+2.  Mettez à jour la version de Gradle dans `android/build.gradle` :
     
-    [[CODE_BLOCK]]
+    ```kotlin
+    buildscript {
+        ext {
+            gradleVersion = '8.1.0'
+        }
+    }
+    ```
     
-3. Ajoutez les lignes suivantes à `android/gradle.properties` pour de meilleures performances :
+3.  Ajoutez les lignes suivantes à `android/gradle.properties` pour de meilleures performances :
     
-    [[CODE_BLOCK]]
-    
-
-Si les problèmes persistent, révisez votre configuration ou consultez des ressources de dépannage supplémentaires
-
-### L'Application Affiche un Écran Blanc
-
-Un écran blanc indique généralement un problème de configuration. Voici comment le résoudre :
-
--   **Vérifiez le Chemin du Répertoire Web** : Assurez-vous que le `webDir` correspond à votre dossier de build
-    
-    [[CODE_BLOCK]]
-    
--   **Vérifiez la Configuration du Serveur** : Confirmez que les paramètres du serveur sont corrects
-    
-    [[CODE_BLOCK]]
-    
--   **Mettez à Jour la Politique de Sécurité du Contenu** : Ajoutez cette balise meta à votre HTML pour le chargement correct des ressources
-    
-    [[CODE_BLOCK]]
+    ```properties
+    org.gradle.jvmargs=-Xmx4608m
+    org.gradle.parallel=true
+    ```
     
 
-### Plugin Ne Fonctionne Pas
+Si les problèmes persistent, revérifiez votre configuration ou consultez des ressources supplémentaires de dépannage.
 
-Si un plugin ne fonctionne pas comme prévu, suivez ces étapes :
+### L'application affiche un écran blanc
 
-1. Effectuez une installation propre des dépendances :
+Un écran blanc indique généralement un problème de configuration. Voici comment y remédier :
+
+-   **Vérifiez le chemin du répertoire web** : Assurez-vous que `webDir` correspond à votre sortie de construction.
     
-    [[CODE_BLOCK]]
+    ```typescript
+    const config: CapacitorConfig = {
+        webDir: 'dist', // Adjust if necessary
+    };
+    ```
     
-2. Vérifiez les paramètres du plugin dans `capacitorconfig.ts` pour vous assurer qu'ils sont correctement configurés :
+-   **Vérifiez la configuration du serveur** : Confirmez que les paramètres du serveur sont corrects.
     
-    [[CODE_BLOCK]]
+    ```typescript
+    server: {
+        url: 'http://localhost:3000',
+        cleartext: true
+    }
+    ```
+    
+-   **Mettez à jour la politique de sécurité de contenu** : Ajoutez cette balise meta à votre HTML pour un chargement approprié des ressources.
+    
+    ```html
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *">
+    ```
     
 
-Pour ceux qui utilisent le [plugin natif de Capgo](https://capgo.app/plugins/), il synchronise automatiquement les plugins et maintient la compatibilité pendant les mises à jour
+### Plugin non fonctionnel
 
-Après avoir appliqué ces corrections, recompilez votre projet pour vérifier les changements :
+Si un plugin ne se comporte pas comme prévu, suivez ces étapes :
 
-[[CODE_BLOCK]]
+1.  Effectuez une installation propre des dépendances :
+    
+    ```bash
+    rm -rf node_modules
+    npm cache clean --force
+    npm install
+    ```
+    
+2.  Vérifiez les paramètres du plugin dans `capacitor.config.ts` pour vous assurer qu'ils sont configurés correctement :
+    
+    ```typescript
+    plugins: {
+        PluginName: {
+            option: 'value'
+        }
+    }
+    ```
+    
 
-Une fois que tout fonctionne correctement, vous pouvez passer à l'exploration des options de mise à jour en direct avec Capgo
+Pour ceux utilisant le [plugin natif de Capgo](https://capgo.app/plugins/), il synchronise automatiquement les plugins et maintient la compatibilité lors des mises à jour.
 
-## Mises à Jour en Direct avec [Capgo](https://capgo.app/)
+Après avoir appliqué ces corrections, reconstruisez votre projet pour vérifier les modifications :
 
-![Capgo](https://assets.seobot.ai/capgo.app/67ef362eebbb9dc80641f34f/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+```bash
+npm run build && npx cap copy && npx cap sync
+```
 
-Simplifiez les [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) avec Capgo. Il vous permet de pousser des mises à jour directement aux utilisateurs, en évitant la nécessité de révisions sur l'app store
+Une fois tout fonctionnant sans problème, vous pouvez poursuivre avec l'exploration des options de mise à jour en direct avec Capgo.
 
-**Commencer est simple**. D'abord, installez les packages nécessaires :
+## Mises à jour en direct avec [Capgo](https://capgo.app/)
 
-[[CODE_BLOCK]]
+![Capgo](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+
+Simplifiez les [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) en utilisant Capgo. Il vous permet d'envoyer des mises à jour directement aux utilisateurs, en évitant le besoin d'examens dans les magasins d'applications.
+
+**Commencer est simple.** Tout d'abord, installez les packages nécessaires :
+
+```bash
+npm install @capgo/cli @capgo/capacitor-updater
+npx cap sync
+```
 
 Ensuite, initialisez Capgo dans votre projet :
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli init
+```
 
-### Plans Tarifaires
+### Plans tarifaires
 
-Capgo propose plusieurs niveaux de prix pour répondre à différents besoins :
+Capgo propose plusieurs niveaux de tarification pour répondre à différents besoins :
 
-| Plan | Utilisateurs Actifs Mensuels | Bande Passante | Stockage | Prix (Annuel) |
+| Plan | Utilisateurs actifs mensuels | Bande passante | Stockage | Prix (annuel) |
 | --- | --- | --- | --- | --- |
-| SOLO | 1 000 | 50 GO | 2 GO | 12€/mois |
-| MAKER | 10 000 | 500 GO | 5 GO | 33€/mois |
-| TEAM | 100 000 | 2 000 GO | 10 GO | 83€/mois |
+| SOLO | 1,000 | 50 Go | 2 Go | 12 $/mois |
+| MAKER | 10,000 | 500 Go | 5 Go | 33 $/mois |
+| TEAM | 100,000 | 2,000 Go | 10 Go | 83 $/mois |
 
-Pour les utilisateurs entreprise, le plan PAYG commence à 249€/mois et inclut des avantages comme l'accès API, les domaines personnalisés et le support dédié
+Pour les utilisateurs d'entreprise, le plan PAYG commence à 249 $/mois et inclut des avantages comme l'accès API, des domaines personnalisés et un support dédié.
 
-### Configuration pour les Mises à Jour en Direct
+### Configuration pour les mises à jour en direct
 
-Pour activer les mises à jour en direct, ajoutez ce qui suit à votre fichier `capacitorconfig.ts` :
+Pour activer les mises à jour en direct, ajoutez ce qui suit à votre fichier `capacitor.config.ts` :
 
-[[CODE_BLOCK]]
+```typescript
+{
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      updateUrl: 'https://api.capgo.app/updates'
+    }
+  }
+}
+```
 
-### Fonctionnalités Clés
+### Fonctionnalités clés
 
 Capgo fournit plusieurs fonctionnalités remarquables :
 
--   **[Mises à jour sécurisées](https://capgo
+-   **[Mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** avec cryptage de bout en bout
+-   **Déploiements automatisés** grâce à l'intégration CI/CD
+-   **Mises à jour ciblées** par affectation d'utilisateurs
+-   **Rollback instantané** avec contrôle de version
+-   **Analytique en temps réel** pour suivre les mises à jour
+
+### Commandes de déploiement
+
+Testez les mises à jour en développement avant de les déployer en direct. Utilisez les commandes suivantes :
+
+-   Déployez vers staging :
+    
+    ```bash
+    npx @capgo/cli deploy --channel staging
+    ```
+    
+-   Déployez en production :
+    
+    ```bash
+    npx @capgo/cli deploy --channel production
+    ```
+    
+
+Capgo garantit la conformité aux directives d'Apple et d'Android, donc vos mises à jour en direct ne risquent pas d'enfreindre les règlements des app stores. C'est un moyen efficace de gérer les applications Capacitor après installation.
+
+## Conclusion
+
+La configuration du Capacitor CLI est simple lorsque vous disposez des bons prérequis en place. Cette configuration garantit des mises à jour d'applications plus fluides et des workflows de développement efficaces.
+
+Les outils modernes rendent la maintenance des applications plus facile que jamais. Par exemple, Capgo propose désormais des mises à jour en direct, remplaçant des méthodes plus anciennes. Son intégration avec l'installation CLI en fait une excellente option pour les développeurs travaillant avec des applications Capacitor.
+
+L' [écosystème Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) s'améliore constamment avec de nouveaux outils et fonctionnalités. Installer le CLI n'est que le point de départ pour [créer des applications mobiles](https://capgo.app/blog/angular-mobile-app-capacitor/), et vous bénéficierez d'une documentation détaillée et d'une communauté de développeurs active.
+
+Assurez-vous de garder le Capacitor CLI et ses packages à jour pour éviter les problèmes de compatibilité.

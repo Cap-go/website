@@ -1,9 +1,9 @@
 ---
 slug: capacitor-cli-plugin-commands-overview
-title: Descripción general de los comandos del complemento de la CLI de Capacitor
+title: Ikhtisar Perintah Plugin CLI Capacitor
 description: >-
-  Pelajari cara mengelola plugin Capacitor secara efisien menggunakan perintah
-  CLI dan manfaat mengintegrasikan dengan alat manajemen plugin yang powerful.
+  Pelajari cara mengelola plugin Capacitor dengan efisien menggunakan perintah
+  CLI dan manfaat mengintegrasikan dengan alat manajemen plugin yang kuat.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -20,197 +20,229 @@ published: true
 locale: id
 next_blog: ''
 ---
-
-[Capacitor](https://capacitorjscom/) CLI menyederhanakan pengelolaan plugin untuk pengembangan aplikasi, memungkinkan integrasi fitur perangkat native yang mulus. Dipasangkan dengan tools seperti [Capgo](https://capgoapp/), ini memperlancar pembaruan, deployment, dan pemecahan masalah. Berikut yang perlu Anda ketahui:
+[Capacitor](https://capacitorjs.com/) CLI menyederhanakan pengelolaan plugin untuk pengembangan aplikasi, memungkinkan integrasi fitur perangkat native yang mulus. Dipadukan dengan alat seperti [Capgo](https://capgo.app/), ini memperlancar pembaruan, penerapan, dan pemecahan masalah. Berikut adalah yang perlu Anda ketahui:
 
 **Fitur Utama:**
 
--   **Instal Plugin:** Gunakan `npx @capgo/cli init` untuk menambahkan plugin, menangani dependensi, dan memperbarui konfigurasi secara otomatis
--   **Perbarui Plugin:** Perintah seperti `npm update @capacitor/*` dan `npx cap sync` memastikan pembaruan yang lancar
--   **Hapus Plugin:** Uninstal dengan bersih menggunakan `npm uninstall @capacitor/plugin-name` dan sinkronkan konfigurasi
--   **Atasi Masalah:** Perintah seperti `npx cap doctor` dan `npx cap sync --verbose` membantu mendeteksi dan menyelesaikan masalah
+- **Instal Plugin:** Gunakan `npx @capgo/cli init` untuk menambahkan plugin, menangani dependensi, dan memperbarui konfigurasi secara otomatis.
+- **Perbarui Plugin:** Perintah seperti `npm update @capacitor/*` dan `npx cap sync` memastikan pembaruan yang mulus.
+- **Hapus Plugin:** Uninstall dengan bersih menggunakan `npm uninstall @capacitor/plugin-name` dan sinkronisasi konfigurasi.
+- **Pemecahan Masalah:** Perintah seperti `npx cap doctor` dan `npx cap sync --verbose` membantu mendeteksi dan menyelesaikan masalah.
 
-**[Manfaat Capgo](https://capgoapp/consulting/):**
+**[Manfaat Capgo](https://capgo.app/consulting/):**
 
--   Pembaruan real-time
--   Enkripsi end-to-end
--   Integrasi CI/CD
--   Rollback untuk kesalahan
+- Pembaruan waktu nyata
+- Enkripsi end-to-end
+- Integrasi CI/CD
+- Pembatalan untuk kesalahan
 
-Capgo mendukung 750+ aplikasi secara global, menawarkan pembaruan cepat dan pelacakan kesalahan seharga $12/bulan
+Capgo mendukung lebih dari 750 aplikasi secara global, menawarkan pembaruan cepat dan pelacakan kesalahan seharga $12/bulan.
 
-Mulai kelola [plugin Capacitor](https://capgoapp/plugins/) secara efisien dan tingkatkan alur kerja pengembangan Anda hari ini!
+Mulailah mengelola [plugin Capacitor](https://capgo.app/plugins/) dengan efisien dan tingkatkan alur kerja pengembangan Anda hari ini!
 
-## Pengembangan Lintas Platform: Menjelajahi CapacitorJS dengan
+## Pengembangan Lintas Platform: Mengeksplorasi CapacitorJS dengan ...
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Perintah Instalasi Plugin
 
-CLI Capacitor membuat penambahan plugin ke proyek Anda menjadi mudah dan efisien. Perintah-perintah ini menangani proses integrasi, mengurus dependensi dan memastikan kompatibilitas dengan pengaturan Anda.
+Capacitor CLI membuat penambahan plugin ke proyek Anda menjadi mudah dan efisien. Perintah ini menangani proses integrasi, mengambil alih dependensi dan memastikan kompatibilitas dengan pengaturan Anda.
 
 ### Perintah Instalasi Dasar
 
 Untuk menambahkan plugin Capacitor ke proyek Anda, gunakan struktur perintah sederhana ini. Misalnya, untuk menginstal plugin Capgo, jalankan:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli init
+```
 
-Perintah ini mengurus hal-hal berikut:
+Perintah ini menangani hal berikut:
 
--   Memverifikasi bahwa plugin kompatibel dengan versi Capacitor Anda
--   Menginstal semua dependensi yang diperlukan
--   Mengatur konfigurasi khusus platform
--   Memperbarui file konfigurasi proyek Anda secara otomatis
+- Memverifikasi bahwa plugin kompatibel dengan versi Capacitor Anda
+- Menginstal semua dependensi yang diperlukan
+- Menyiapkan konfigurasi yang spesifik untuk platform
+- Memperbarui file konfigurasi proyek Anda secara otomatis
 
-Ikuti proses ini untuk menghindari kesalahan selama instalasi
+Ikuti proses ini untuk menghindari kesalahan selama instalasi.
 
-### Panduan Instalasi
+### Pedoman Instalasi
 
-Berikut cara memastikan plugin Anda terinstal tanpa masalah:
+Berikut adalah cara untuk memastikan plugin Anda terinstal tanpa masalah:
 
-**Langkah Pra-instalasi**:
+**Langkah Prainstalasi**:
 
--   Pastikan proyek Capacitor Anda sudah disiapkan
--   Navigasi ke direktori root proyek Anda
--   Periksa bahwa versi [Nodejs](https://nodejsorg/en) Anda terkini
--   Perbarui ke versi terbaru CLI Capacitor
+- Pastikan proyek Capacitor Anda sudah diatur
+- Navigasi ke direktori root proyek Anda
+- Periksa bahwa versi [Node.js](https://nodejs.org/en) Anda terbaru
+- Perbarui ke versi terbaru dari CLI Capacitor
 
 **Menangani Versi**:
 
--   Tentukan versi plugin yang Anda inginkan saat instalasi
--   Ikuti semantic versioning untuk menghindari masalah kompatibilitas
--   Uji plugin di lingkungan pengembangan Anda sebelum deploy
+- Tentukan versi plugin yang Anda inginkan saat instalasi
+- Ikuti penomoran versi semantik untuk menghindari masalah kompatibilitas
+- Uji plugin di lingkungan pengembangan Anda sebelum menerapkan
 
-> "Jalankan npx @capgo/cli init itu saja!" - Capgo [\[1\]](https://capgoapp/)
+> "Jalankan npx @capgo/cli init itu!" - Capgo [\[1\]](https://capgo.app/)
 
-Setelah instalasi, konfirmasi semuanya sudah siap dengan meninjau `packagejson` dan file konfigurasi khusus platform Anda. Untuk langkah tambahan, konsultasikan dokumentasi plugin
+Setelah instalasi, pastikan semuanya teratur dengan meninjau `package.json` dan file konfigurasi yang spesifik untuk platform. Untuk langkah tambahan, konsultasikan dokumentasi plugin.
 
 ## Perintah Pembaruan Plugin
 
-Menjaga plugin Capacitor Anda tetap up-to-date membantu menjaga stabilitas aplikasi dan memastikan akses ke fitur baru. CLI menawarkan tools untuk mengelola pembaruan plugin secara efisien.
+Mempertahankan plugin Capacitor Anda tetap terbaru membantu menjaga stabilitas aplikasi dan memastikan akses ke fitur baru. CLI menawarkan alat untuk mengelola pembaruan plugin dengan efisien.
 
-### Mencari Pembaruan yang Tersedia
+### Menemukan Pembaruan yang Tersedia
 
 Jalankan perintah ini di direktori root proyek Anda:
 
-[[CODE_BLOCK]]
+```bash
+npm outdated @capacitor/*
+npx cap doctor
+```
 
 Perintah `npx cap doctor` memeriksa pengaturan Capacitor Anda, termasuk versi plugin. Ini mengidentifikasi masalah dan menyarankan pembaruan untuk meningkatkan kinerja. Setelah Anda tahu plugin mana yang perlu diperbarui, gunakan perintah di bawah ini.
 
 ### Menjalankan Pembaruan Plugin
 
-Untuk memperbarui plugin, gunakan berikut ini:
+Untuk memperbarui plugin, gunakan yang berikut ini:
 
 **Memperbarui Satu Plugin**:
 
-[[CODE_BLOCK]]
+```bash
+npm update @capacitor/plugin-name
+npx cap sync
+```
 
 **Memperbarui Semua Plugin Sekaligus**:
 
-[[CODE_BLOCK]]
+```bash
+npm update @capacitor/*
+npx cap sync
+```
 
-Jika Anda pengguna Capgo, tool CLI mereka menyederhanakan proses pembaruan:
+Jika Anda pengguna Capgo, alat CLI mereka menyederhanakan proses pembaruan:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli update
+```
 
 ### Mengelola Dependensi Pembaruan
 
-Setelah menerapkan pembaruan, ikuti langkah-langkah ini untuk mengelola dependensi secara efektif:
+Setelah menerapkan pembaruan, ikuti langkah-langkah berikut untuk mengelola dependensi secara efektif:
 
 | Tahap | Tugas | Tujuan |
 | --- | --- | --- |
-| Pra-update | Tinjau dependensi | Periksa versi saat ini |
-| Selama update | Selesaikan konflik versi | Perbaiki ketidakcocokan |
-| Pasca-update | Jalankan tes khusus platform | Pastikan semuanya berfungsi |
+| Prabahar | Tinjau dependensi | Periksa versi saat ini |
+| Selama pembaruan | Selesaikan konflik versi | Perbaiki ketidakcocokan |
+| Pasca pembaruan | Jalankan tes spesifik platform | Pastikan semuanya berfungsi |
 
-Pengguna Capgo mendapat manfaat dari fitur lanjutan seperti controlled rolloutsSistem mereka telah membuktikan keandalan:
+Pengguna Capgo mendapatkan manfaat dari fitur canggih seperti peluncuran terkendali. Sistem mereka telah terbukti dapat diandalkan:
 
--   95% dari pembaruan selesai dalam waktu 24 jam [\[1\]](https://capgoapp/)
--   82% tingkat keberhasilan secara global untuk pembaruan [\[1\]](https://capgoapp/)
--   Kompatibilitas dengan versi Capacitor 6 dan 7 [\[1\]](https://capgoapp/)
+- 95% pembaruan diselesaikan dalam 24 jam [\[1\]](https://capgo.app/)
+- 82% tingkat keberhasilan secara global untuk pembaruan [\[1\]](https://capgo.app/)
+- Kompatibilitas dengan versi Capacitor 6 dan 7 [\[1\]](https://capgo.app/)
 
-Untuk memastikan pembaruan yang lancar:
+Untuk memastikan pembaruan berjalan lancar:
 
--   **Kontrol Versi**: Commit perubahan Anda sebelum memperbarui
--   **Pengujian**: Terapkan pembaruan di lingkungan pengembangan terlebih dahulu
--   **Peringatan Dependensi**: Atasi masalah dependensi dengan segera
+- **Kontrol Versi**: Komit perubahan Anda sebelum memperbarui.
+- **Pengujian**: Terapkan pembaruan di lingkungan pengembangan terlebih dahulu.
+- **Peringatan Dependensi**: Tangani masalah ketergantungan sesegera mungkin.
 
-Capgo juga menyediakan fitur rollback untuk membalikkan pembaruan kritis jika terjadi masalah [\[1\]](https://capgoapp/)
+Capgo juga menyediakan fitur pembatalan untuk membalikkan pembaruan kritis jika masalah muncul [\[1\]](https://capgo.app/).
 
 ## Perintah Penghapusan Plugin
 
-Menghapus plugin dengan benar sangat penting untuk menghindari masalah selama pembaruan dan menjaga lingkungan pengembangan Anda tetap bersih. Di bawah ini, Anda akan menemukan langkah-langkah untuk menghapus plugin dan memverifikasi penghapusan lengkapnya
+Menghapus plugin dengan benar sangat penting untuk menghindari masalah selama pembaruan dan menjaga lingkungan pengembangan Anda tetap bersih. Berikut adalah langkah-langkah untuk mencopot pemasangan plugin dan memverifikasi penghapusannya secara lengkap.
 
 ### Perintah Uninstall
 
-Untuk menghapus plugin Capacitor, gunakan perintah berikut:
+Untuk mencopot pemasangan plugin Capacitor, gunakan perintah berikut:
 
-[[CODE_BLOCK]]
+```bash
+npm uninstall @capacitor/plugin-name
+npx cap sync
+```
 
-Untuk pembaruan platform spesifik, jalankan:
+Untuk pembaruan spesifik platform, jalankan:
 
-[[CODE_BLOCK]]
+```bash
+npx cap update ios
+npx cap update android
+```
 
 Perlu menghapus beberapa plugin sekaligus? Gunakan ini:
 
-[[CODE_BLOCK]]
+```bash
+npm uninstall @capacitor/plugin1 @capacitor/plugin2
+npx cap sync
+```
 
-### Pembersihan Setelah Penghapusan
+### Pembersihan Pasca-penghapusan
 
-Setelah menghapus, ikuti langkah-langkah pembersihan ini untuk memastikan proyek Anda tetap stabil:
+Setelah mencopot pemasangan, ikuti langkah pembersihan berikut untuk memastikan proyek Anda tetap stabil:
 
 | Tugas | Perintah | Tujuan |
 | --- | --- | --- |
-| Perbarui dependensi | `npm install` | Membangun ulang pohon dependensi |
-| Sinkronisasi platform | `npx cap sync` | Memperbarui konfigurasi proyek native |
+| Perbarui dependensi | `npm install` | Membangun kembali pohon dependensi |
+| Sinkronkan platform | `npx cap sync` | Memperbarui konfigurasi proyek native |
 
-Selain itu, hapus secara manual entri yang tersisa dari **capacitorconfigts**, **packagejson**, dan file khusus platform
+Selain itu, hapus secara manual entri yang tersisa dari **capacitor.config.ts**, **package.json**, dan file spesifik platform apa pun.
 
-### Mengkonfirmasi Penghapusan Plugin
+### Memastikan Penghapusan Plugin
 
-Untuk memastikan plugin benar-benar dihapus, gunakan perintah ini:
+Untuk memastikan plugin benar-benar dihapus, gunakan perintah berikut:
 
-[[CODE_BLOCK]]
+```bash
+npm list @capacitor/*
+npx cap doctor
+```
 
--   **`npm list @capacitor/*`**: Memeriksa dependensi terkait Capacitor yang tersisa
--   **`npx cap doctor`**: Mengidentifikasi dependensi yang terlantar, penghapusan tidak lengkap, atau masalah konfigurasi
+- **`npm list @capacitor/*`**: Memeriksa adanya dependensi terkait Capacitor yang tersisa.
+- **`npx cap doctor`**: Mengidentifikasi dependensi yang tersisa, penghapusan yang tidak lengkap, atau masalah konfigurasi.
 
-Periksa kembali area ini untuk jejak residu:
+Periksa kembali area berikut untuk jejak yang tersisa:
 
--   **Root proyek**: Pastikan plugin tidak lagi terdaftar di `packagejson`
--   **Platform native**: Verifikasi pembersihan di direktori iOS dan Android
--   **File build**: Konfirmasi plugin tidak ada dalam aset yang dikompilasi
+- **Root proyek**: Pastikan plugin tidak terdaftar lagi di `package.json`.
+- **Platform native**: Verifikasi pembersihan di direktori iOS dan Android.
+- **File build**: Pastikan plugin tidak ada dalam aset yang dikompilasi.
 
 Jika Anda menggunakan Capgo untuk manajemen plugin, alat CLI mereka dapat membantu memverifikasi penghapusan:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli verify
+```
 
-Perintah ini memindai jejak yang tersisa yang dapat menyebabkan konflik, memastikan pembersihan menyeluruh
+Perintah ini memindai setiap jejak yang tersisa yang dapat menyebabkan konflik, memastikan pembersihan yang menyeluruh.
 
 ## Pemecahan Masalah Plugin
 
-Jika Anda masih menghadapi masalah setelah menginstal atau memperbarui plugin, berikut adalah langkah-langkah pemecahan masalah praktis untuk membantu Anda mengidentifikasi dan memperbaiki masalah umum
+Jika Anda masih menghadapi masalah setelah menginstal atau memperbarui plugin, berikut adalah beberapa langkah pemecahan masalah praktis untuk membantu Anda mengidentifikasi dan memperbaiki masalah umum.
 
-Saat bekerja dengan plugin Capacitor melalui perintah CLI, pengembang sering menghadapi tantangan yang dapat mengganggu alur kerja mereka. Di bawah ini adalah panduan untuk membantu Anda mengatasi masalah ini secara efektif
+Saat bekerja dengan plugin Capacitor melalui perintah CLI, pengembang sering menghadapi tantangan yang dapat mengganggu alur kerja mereka. Berikut adalah panduan untuk membantu Anda mengatasi masalah ini secara efektif.
 
 ### Alat Diagnostik
 
-Perintah-perintah ini dapat membantu Anda mengungkap masalah dengan konfigurasi CLI Anda:
+Perintah ini dapat membantu Anda mengungkap masalah dengan konfigurasi CLI Anda:
 
-[[CODE_BLOCK]]
+```bash
+npx cap doctor
+npx cap sync --verbose
+```
 
-Alat-alat ini dapat mendeteksi:
+Alat ini dapat mendeteksi:
 
--   Dependensi yang hilang
--   Ketidakcocokan versi
--   Kesalahan konfigurasi khusus platform
--   Masalah instalasi plugin
+- Dependensi yang hilang
+- Ketidakcocokan versi
+- Kesalahan konfigurasi yang spesifik untuk platform
+- Masalah instalasi plugin
 
-Untuk wawasan yang lebih dalam, Capgo menawarkan perintah diagnostik tambahan:
+Untuk wawasan yang lebih mendalam, Capgo menawarkan perintah diagnostik tambahan:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli diagnose
+npx @capgo/cli verify-plugins
+```
 
-Setelah menjalankan diagnostik, gunakan tabel di bawah ini untuk menerapkan perbaikan yang ditargetkan untuk kesalahan tertentu
+Setelah menjalankan diagnostik, gunakan tabel di bawah ini untuk menerapkan perbaikan yang ditargetkan untuk kesalahan tertentu.
 
 ### Perbaikan Kesalahan Umum
 
@@ -218,15 +250,124 @@ Berikut adalah perintah CLI untuk menyelesaikan masalah plugin yang sering terja
 
 | Tipe Kesalahan | Perintah | Solusi |
 | --- | --- | --- |
-| Ketidakcocokan Versi | `npx cap sync --force` | Memaksa plugin untuk sinkronisasi |
-| Konflik Platform | `npx cap update [[HTML_TAG]]` | Membangun ulang konfigurasi platform-spesifik |
-| Masalah Dependensi | `npm cache clean --force` | Membersihkan cache npm untuk instalasi baru |
-| Kerusakan Plugin | `npm rebuild` | Membangun ulang binary plugin |
+| Ketidakcocokan Versi | `npx cap sync --force` | Memaksa plugin untuk menyinkronkan |
+| Konflik Platform | `npx cap update <platform>` | Membangun kembali konfigurasi spesifik platform |
+| Masalah Dependensi | `npm cache clean --force` | Menghapus cache npm untuk instalasi yang segar |
+| Kerusakan Plugin | `npm rebuild` | Membangun kembali biner plugin |
 
-Untuk masalah pembaruan yang lebih sulit, coba urutan ini:
+Untuk masalah pembaruan yang lebih keras kepala, coba urutan ini:
 
-[[CODE_BLOCK]]
+```bash
+npm cache clean --force
+rm -rf node_modules
+npm install
+npx cap sync
+```
 
 ### CLI vs Perbaikan Manual
 
-Meskipun perintah CLI sering kali cukup, beberapa situasi mungkin memerlukan intervensi manual
+Sementara perintah CLI sering cukup, beberapa situasi mungkin memerlukan intervensi manual.
+
+**Kapan Menggunakan CLI:**
+
+- Pembaruan plugin rutin
+- Menyelesaikan konflik dependensi
+- Menjalankan diagnostik atau menyinkronkan konfigurasi platform
+
+**Ketika Perbaikan Manual Diperlukan:**
+
+- Mengedit kode platform native
+- Memperbaiki konflik penggabungan
+- Menyesuaikan pengaturan plugin
+- Memigrasikan plugin yang lebih lama ke versi yang lebih baru
+
+> "Kami menerapkan pengembangan gesit dan @Capgo sangat penting dalam memberikan terus-menerus kepada pengguna kami!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
+
+> "Membatalkan langganan @Appflow saya setelah 4 tahun. Code-Push tampaknya tidak pernah berjalan dengan baik, semoga @CapGO sudah memilikinya!" - LeVar Berry, @levarberry [\[1\]](https://capgo.app/)
+
+Akhirnya, selalu periksa log spesifik platform setelah menjalankan perintah CLI:
+
+- **iOS**: Gunakan konsol [Xcode](https://developer.apple.com/xcode/) untuk log yang lebih rinci
+- **Android**: Tinjau logcat di [Android Studio](https://developer.android.com/studio)
+- **Web**: Periksa alat pengembang browser
+
+Jika perintah CLI tidak menyelesaikan masalah, periksa repositori GitHub plugin untuk masalah yang dilaporkan atau solusi yang disediakan oleh komunitas sebelum mencoba perbaikan manual.
+
+## Integrasi [Capgo](https://capgo.app/)
+
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+
+Capgo bekerja lancar dengan CLI Capacitor, memungkinkan [pembaruan plugin waktu nyata](https://capgo.app/docs/plugin/self-hosted/auto-update) dan menyederhanakan tugas pemeliharaan untuk pengembang.
+
+### Fitur Plugin Capgo
+
+Sistem plugin CLI Capgo memberikan statistik kinerja yang mengesankan:
+
+- **23,5 juta pembaruan** berhasil disampaikan
+- **82% tingkat keberhasilan global** untuk pembaruan
+- **95% pengguna aktif** diperbarui dalam 24 jam
+- **434ms** rata-rata waktu respons API global
+
+Untuk memulai dengan Capgo, jalankan perintah berikut:
+
+```bash
+npx @capgo/cli init
+```
+
+### Alat Manajemen Plugin
+
+Capgo mendukung integrasi dengan platform CI/CD populer seperti [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), dan [Jenkins](https://www.jenkins.io/). Ini juga menyediakan analitik waktu nyata untuk melacak pembaruan, adopsi pengguna, kecepatan unduhan, dan kesalahan.
+
+| Metrik | Detail |
+| --- | --- |
+| Keberhasilan Pembaruan | Pantau pembaruan plugin yang berhasil |
+| Adopsi Pengguna | Lacak penggunaan versi di antara pengguna |
+| Kecepatan Unduh | 114ms rata-rata untuk bundel 5MB |
+| Pelacakan Kesalahan | Identifikasi masalah secara real-time |
+
+> "Capgo adalah alat yang harus dimiliki bagi pengembang yang ingin lebih produktif. Menghindari tinjauan untuk perbaikan bug adalah sesuatu yang berharga." - Bessie Cooper [\[1\]](https://capgo.app/)
+
+Fitur-fitur ini menjadikan Capgo solusi efisien untuk mengelola pembaruan.
+
+### Sistem Pembaruan Capgo
+
+Capgo memastikan kepatuhan terhadap pedoman Apple dan Google dengan menggunakan enkripsi end-to-end. Harga mulai dari $12/bulan untuk pengembang individu, dengan rencana perusahaan tersedia untuk tim yang lebih besar.
+
+Sorotan utama dari sistem pembaruan meliputi:
+
+-   **Rollback satu klik** untuk perbaikan cepat
+-   **Manajemen pengguna** untuk pengujian beta
+-   **[Sistem saluran](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** untuk pembaruan yang terarah
+-   **Pelacakan kesalahan** untuk memantau masalah
+
+Saat ini, **750 aplikasi** menggunakan Capgo dalam produksi. Platform ini juga menawarkan layanan konfigurasi CI/CD seharga $2.600, memastikan integrasi yang lancar ke dalam alur kerja. CDN globalnya mengirimkan pembaruan dengan kecepatan rata-rata **114ms** untuk bundel 5MB.
+
+> "Beralih ke @Capgo setelah @AppFlow memberi kami tagihan $5000 untuk tahun depan. Menyukai Capgo sejauh ini. Terima kasih untuk @Capgo, ini produk yang hebat." - jermaine [\[1\]](https://capgo.app/)
+
+## Kesimpulan
+
+### Ringkasan Manajemen Plugin
+
+CLI Capacitor menyederhanakan cara Anda mengelola plugin. Ketika digabungkan dengan Capgo, ini memberikan hasil yang mengesankan:
+
+-   23.5M pembaruan diselesaikan
+-   95% adopsi pengguna dalam waktu 24 jam
+-   82% tingkat keberhasilan global
+-   434ms rata-rata waktu respons API
+
+Angka-angka ini menyoroti bagaimana CLI dan Capgo bekerja bersama untuk memastikan pembaruan yang lancar dan efisien.
+
+### Langkah Selanjutnya dengan Capgo
+
+Capgo dapat membawa alur kerja Anda ke tingkat berikutnya. Ini menawarkan opsi cloud dan self-hosted, memenuhi preferensi penyebaran yang berbeda.
+
+> "Kami mempractice pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara terus-menerus kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+
+Berikut adalah apa yang dibawa Capgo ke meja:
+
+-   Analitik real-time untuk memantau kinerja pembaruan
+-   Enkripsi end-to-end untuk [pembaruan plugin yang aman](https://capgo.app/docs/plugin/self-hosted/encrypted-bundles/)
+-   Integrasi CI/CD yang mudah dengan platform utama
+-   Harga mulai dari $12/bulan untuk pengembang solo
+
+Dengan 750 aplikasi produksi yang sudah bergantung pada Capgo, ini adalah pilihan yang terbukti. Baik Anda memperbaiki bug atau meluncurkan fitur baru, menggabungkan CLI Capacitor dengan Capgo memberikan Anda alat yang dapat diandalkan dan efisien untuk pengembangan aplikasi. Mulailah menggunakan alat ini untuk memperlancar proyek Capacitor Anda hari ini.

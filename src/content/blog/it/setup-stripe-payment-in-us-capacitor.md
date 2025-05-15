@@ -1,97 +1,100 @@
 ---
 slug: setup-stripe-payment-in-us-capacitor
-title: Capacitorアプリでの新しいAppleガイドラインに従ったStripe Payment Linksの実装
+title: >-
+  Implementando enlaces de pago de Stripe en aplicaciones de Capacitor siguiendo
+  las nuevas directrices de Apple
 description: >-
-  Capacitorアプリで2025年5月1日から施行される新しいAppleのガイドラインに準拠してデジタル商品の支払いを処理するためのStripe
-  Payment Linksの実装方法を学びましょう。
+  Scopri come implementare i collegamenti per i pagamenti di Stripe nella tua
+  app Capacitor per elaborare i pagamenti di beni digitali in conformità con le
+  nuove linee guida di Apple in vigore dal 1 maggio 2025.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
 updated_at: 2025-05-01T00:00:00.000Z
 head_image: /stripe_apple.webp
-head_image_alt: Capacitorアプリケーションにおけるストライプ決済の実装
+head_image_alt: Implementación de pagos con Stripe en aplicaciones de Capacitor
 keywords: >-
   capacitor, stripe, payment links, app store guidelines, iOS, digital goods,
   in-app purchases, external payments
 tag: Tutorial
 published: true
-locale: ja
+locale: it
 ---
-# Implementazione dei Link di Pagamento Stripe nelle App Capacitor secondo le Nuove Linee Guida Apple
+# Implementazione dei collegamenti ai pagamenti Stripe nelle app Capacitor seguendo le nuove linee guida di Apple
 
-A partire dal 1° maggio 2025, Apple ha implementato cambiamenti significativi alle sue Linee Guida per la Revisione dell'App Store a seguito della sentenza nel [caso Epic v. Apple](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). Questi cambiamenti permettono specificamente agli sviluppatori di app negli Stati Uniti di collegarsi a metodi di pagamento esterni per beni e servizi digitali, aprendo alternative al sistema di acquisti in-app di Apple.
+A partire dal 1 maggio 2025, Apple ha implementato cambiamenti significativi alle sue linee guida per la revisione dell'App Store in seguito alla sentenza nel caso [Epic v. Apple](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). Questi cambiamenti consentono specificamente agli sviluppatori di app negli Stati Uniti di collegarsi a metodi di pagamento esterni per beni e servizi digitali, aprendo alternative al sistema di acquisto in-app di Apple.
 
-## La Battaglia Epic che ha Cambiato per Sempre i Pagamenti Mobile
+## La battaglia epica che ha cambiato per sempre i pagamenti mobili
 
-Il percorso fino a questo momento è stato lungo e controverso. Tutto è iniziato nell'agosto 2020 quando Epic Games, il creatore del popolarissimo gioco Fortnite, ha deliberatamente violato le linee guida dell'App Store di Apple implementando un'opzione di pagamento diretto che aggirava la commissione del 30% di Apple. Apple ha prontamente rimosso Fortnite dall'App Store ed Epic ha risposto intentando una causa che contestava il controllo di Apple sulla distribuzione delle app iOS e sui pagamenti in-app.
+Il percorso verso questo momento è stato lungo e controverso. Tutto è cominciato nell'agosto 2020 quando Epic Games, il creatore del popolarissimo gioco Fortnite, ha violato deliberatamente le linee guida dell'App Store di Apple implementando un'opzione di pagamento diretto che aggirava la commissione del 30% di Apple. Apple ha prontamente rimosso Fortnite dall'App Store e Epic ha risposto presentando una causa che contestava il controllo di Apple sulla distribuzione delle app iOS e sui pagamenti in-app.
 
-Dopo anni di battaglie legali, appelli e contro-appelli, i tribunali hanno finalmente stabilito che Apple deve permettere agli sviluppatori di indirizzare gli utenti verso metodi di pagamento alternativi al di fuori delle loro app. Questa decisione cambia fondamentalmente l'economia dell'ecosistema App Store, che operava secondo lo stesso modello finanziario di base dalla sua nascita nel 2008.
+Dopo anni di battaglie legali, appelli e contro-appelli, i tribunali hanno finalmente stabilito che Apple deve consentire agli sviluppatori di indirizzare gli utenti verso metodi di pagamento alternativi al di fuori delle loro app. Questa decisione cambia fondamentalmente l'economia dell'ecosistema dell'App Store, che ha operato secondo lo stesso modello finanziario di base dalla sua nascita nel 2008.
 
-### La Sentenza Definitiva - Niente Più Appelli
+### La sentenza finale - Niente più appelli
 
-Ciò che rende questa sentenza particolarmente significativa è che è definitiva e non può essere ulteriormente impugnata. La Corte Suprema ha rifiutato di esaminare l'appello di Apple all'inizio del 2025, consolidando la decisione della corte inferiore come legge del paese. Questo significa che gli sviluppatori possono implementare metodi di pagamento esterni con la certezza che Apple non possa ribaltare questa decisione attraverso ulteriori sfide legali.
+Ciò che rende questa sentenza particolarmente significativa è che è definitiva e non può essere ulteriormente impugnata. La Corte Suprema ha rifiutato di esaminare l'appello di Apple all'inizio del 2025, consolidando la decisione del tribunale di grado inferiore come legge del territorio. Questo significa che gli sviluppatori possono implementare metodi di pagamento esterni con la certezza che Apple non possa annullare questa decisione attraverso ulteriori sfide legali.
 
-### Parità di Trattamento Garantita dalla Legge
+### Trattamento equo garantito dalla legge
 
-Cosa più importante, la sentenza stabilisce esplicitamente che Apple non può discriminare le app che utilizzano metodi di pagamento esterni. La corte ha specificamente vietato ad Apple di:
+La cosa più importante è che la sentenza afferma esplicitamente che Apple non può discriminare le app che utilizzano metodi di pagamento esterni. Il tribunale ha specificamente vietato ad Apple di:
 
-1. Addebitare commissioni aggiuntive o imporre requisiti extra alle app che utilizzano metodi di pagamento esterni
-2. Dare trattamento preferenziale nei risultati di ricerca o in evidenza alle app che utilizzano esclusivamente il sistema IAP di Apple
-3. Utilizzare misure tecniche per rendere le esperienze di pagamento esterne inferiori al proprio sistema
-4. Imporre onerosi requisiti di divulgazione oltre alle informazioni base per i consumatori
+1. Addebitare costi aggiuntivi o imporre requisiti extra alle app che utilizzano metodi di pagamento esterni
+2. Dare un trattamento preferenziale nei risultati di ricerca o nella messa in evidenza delle app che utilizzano esclusivamente il sistema IAP di Apple
+3. Utilizzare misure tecniche per rendere le esperienze di pagamento esterne inferiori al sistema di Apple
+4. Imporre requisiti di divulgazione onerosi oltre alle informazioni di base sui consumatori
 
-Queste protezioni esplicite significano che gli sviluppatori possono implementare Stripe o altri fornitori di pagamento esterni senza timore di sottili ritorsioni o discriminazioni da parte di Apple. Il campo di gioco è stato legalmente livellato e Apple deve trattare tutte le app allo stesso modo indipendentemente dalle loro scelte di metodo di pagamento.
+Queste protezioni esplicite significano che gli sviluppatori possono implementare Stripe o altri fornitori di pagamenti esterni senza timore di ritorsioni sottili o discriminazioni da parte di Apple. Il campo di gioco è stato legalmente livellato e Apple deve trattare tutte le app in modo equo, indipendentemente dalle loro scelte di metodo di pagamento.
 
-La sentenza rappresenta una delle sfide più significative all'approccio del giardino recintato di Apple e segna un cambiamento fondamentale nel funzionamento della monetizzazione delle app mobile. Per gli sviluppatori che si sono a lungo lamentati della commissione del 30% di Apple (ridotta al 15% per le piccole imprese), questa sentenza offre un percorso verso margini di profitto più elevati e maggior controllo sull'esperienza del cliente.
+La sentenza rappresenta una delle sfide più significative all'approccio del giardino recintato di Apple e segna un cambiamento fondamentale in come può funzionare la monetizzazione delle app mobili. Per gli sviluppatori che hanno a lungo lamentato la commissione del 30% di Apple (ridotta al 15% per le piccole imprese), questa sentenza offre una via verso margini di profitto più elevati e maggiore controllo sull'esperienza del cliente.
 
-## Vantaggi Finanziari dell'Utilizzo di Stripe Rispetto agli Acquisti In-App di Apple
+## Vantaggi finanziari dell'utilizzo di Stripe rispetto agli acquisti in-app di Apple
 
 Le implicazioni finanziarie di questo cambiamento sono sostanziali per gli sviluppatori:
 
-- **Commissioni di Elaborazione Pagamenti Ridotte**: Apple tipicamente addebita una commissione del 30% sugli acquisti in-app (15% per le piccole imprese), mentre la commissione di Stripe è solo circa 2.9% + €0.30 per transazione. Questa differenza può aumentare significativamente i tuoi margini di ricavo.
-  
-- **Pagamenti Più Rapidi**: Con Apple, tipicamente si attende 45-90 giorni per ricevere i fondi. Stripe, invece, deposita i pagamenti sul tuo conto bancario entro 2-3 giorni lavorativi.
+- **Commissioni di elaborazione dei pagamenti ridotte**: Apple addebita tipicamente una commissione del 30% sugli acquisti in-app (15% per le piccole imprese), mentre la commissione di Stripe è solo di circa il 2,9% + $0,30 per transazione. Questa differenza può aumentare significativamente i tuoi margini di entrata.
 
-- **Processo di Rimborso Semplificato**: Gestisci i rimborsi direttamente attraverso la dashboard di Stripe invece di passare attraverso il sistema di rimborso più complesso di Apple.
+- **Pagamenti più veloci**: Con Apple, tipicamente aspetti 45-90 giorni per ricevere i tuoi fondi. Stripe, d'altra parte, deposita i pagamenti sul tuo conto bancario entro 2-3 giorni lavorativi.
 
-Questi risparmi sui costi e il miglioramento del flusso di cassa possono essere rivoluzionari, specialmente per gli sviluppatori e le imprese più piccole.
+- **Processo di rimborso semplificato**: Gestisci i rimborsi direttamente tramite la dashboard di Stripe invece di passare attraverso il sistema di rimborso più complesso di Apple.
 
-In questo articolo, esploreremo come implementare i Link di Pagamento Stripe nella tua app Capacitor per sfruttare queste nuove regole, assicurando al contempo la conformità con le [linee guida aggiornate](https://developer.apple.com/app-store/review/guidelines/#business) di Apple.
+Risparmi sui costi e un miglior flusso di cassa possono cambiare le regole del gioco, soprattutto per gli sviluppatori e le piccole imprese.
 
-> Questa implementazione è basata sulla [documentazione ufficiale di Stripe per i Link di Pagamento](https://docs.stripe.com/mobile/digital-goods/payment-links), adattata specificamente per le app Capacitor.
+In questo articolo, esploreremo come implementare i collegamenti ai pagamenti Stripe nella tua app Capacitor per sfruttare queste nuove regole, assicurandoti di essere conforme alle [linee guida aggiornate di Apple](https://developer.apple.com/app-store/review/guidelines/#business).
 
-## Comprendere le Nuove Linee Guida
+> Questa implementazione si basa sulla [documentazione ufficiale di Stripe per i collegamenti ai pagamenti](https://docs.stripe.com/mobile/digital-goods/payment-links), adattata specificamente per le app Capacitor.
 
-Le Linee Guida aggiornate per la Revisione dell'App Store ora permettono agli sviluppatori di indirizzare gli utenti a siti web esterni per l'elaborazione dei pagamenti, specificamente per beni digitali e abbonamenti. Questo cambiamento è attualmente applicabile solo alle app distribuite nell'App Store degli Stati Uniti.
+## Comprendere le nuove linee guida
+
+Le linee guida aggiornate per la revisione dell'App Store ora consentono agli sviluppatori di indirizzare gli utenti verso siti web esterni per l'elaborazione dei pagamenti, specificamente per beni digitali e abbonamenti. Questo cambiamento è attualmente applicabile solo alle app distribuite nell'App Store degli Stati Uniti.
 
 Punti chiave da comprendere:
 
-1. Ora puoi collegare a opzioni di pagamento esterne per beni digitali all'interno della tua app
-2. Questo si applica solo alle app nell'App Store U.S.
+1. Ora puoi collegarti a opzioni di pagamento esterne per beni digitali all'interno della tua app
+2. Questo si applica solo alle app nell'App Store statunitense
 3. Devi comunque rispettare i requisiti di divulgazione di Apple
-4. Rimani responsabile per tutto il supporto clienti e la gestione dei rimborsi
+4. Resterai responsabile per tutto il supporto clienti e la gestione dei rimborsi
 
-## Configurare i Link di Pagamento Stripe nella Tua App Capacitor
+## Impostare i collegamenti ai pagamenti Stripe nella tua app Capacitor
 
-Analizziamo l'implementazione tecnica:
+Immergiamoci nell'implementazione tecnica:
 
-### Fase 1: Creare un Link di Pagamento nella Dashboard Stripe
+### Passo 1: Crea un collegamento ai pagamenti nel dashboard di Stripe
 
-Prima, crea un link di pagamento nella tua Dashboard Stripe:
+Per prima cosa, crea un collegamento ai pagamenti nel tuo dashboard di Stripe:
 
-1. Naviga alla sezione Payment Links nella tua Dashboard Stripe
-2. Clicca "+ New" per creare un nuovo link di pagamento
+1. Naviga nella sezione Collegamenti ai pagamenti nel tuo dashboard di Stripe
+2. Clicca su "+ Nuovo" per creare un nuovo collegamento ai pagamenti
 3. Definisci i dettagli del tuo prodotto o abbonamento
-4. Nelle impostazioni "After payment", seleziona "Don't show confirmation page"
-5. Imposta un universal link come URL di successo (lo configureremo più tardi)
-6. Clicca "Create Link" per generare il tuo link di pagamento
+4. Nelle impostazioni "Dopo il pagamento", seleziona "Non mostrare la pagina di conferma"
+5. Imposta un link universale come tuo URL di successo (configureremo questo più tardi)
+6. Clicca su "Crea collegamento" per generare il tuo collegamento ai pagamenti
 
-### Fase 2: Configurare Universal Links nella Tua App Capacitor
+### Passo 2: Configura i collegamenti universali nella tua app Capacitor
 
-Per reindirizzare gli utenti alla tua app dopo il completamento del pagamento, configura gli universal links:
+Per reindirizzare gli utenti alla tua app dopo il completamento del pagamento, configura i collegamenti universali:
 
-1. Crea un file `apple-app-site-association` sul tuo dominio:
+1. Crea un file `apple-app-site-association` nel tuo dominio:
 
 ```json
 {
@@ -112,11 +115,11 @@ Per reindirizzare gli utenti alla tua app dopo il completamento del pagamento, c
 }
 ```
 
-2. Ospita questo file su `https://tuodominio.com/.well-known/apple-app-site-association`
+2. Ospita questo file a `https://yourdomain.com/.well-known/apple-app-site-association`
 
-3. Assicurati che sia servito con il tipo MIME corretto `application/json`
+3. Assicurati che venga servito con il corretto tipo MIME `application/json`
 
-4. Configura la tua app Capacitor per gestire gli universal links aggiungendo l'autorizzazione appropriata. Prima, nel tuo `capacitor.config.ts`:
+4. Configura la tua app Capacitor per gestire i collegamenti universali aggiungendo il corretto diritto. Prima, nel tuo `capacitor.config.ts`:
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -134,14 +137,14 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-5. Aggiungi l'autorizzazione Associated Domains al tuo progetto Xcode:
+5. Aggiungi il diritto dei domini associati al tuo progetto Xcode:
    - Apri il tuo progetto Xcode
-   - Seleziona il target della tua app
-   - Vai a "Signing & Capabilities"
-   - Clicca "+ Capability" e seleziona "Associated Domains"
-   - Aggiungi `applinks:tuodominio.com`
+   - Seleziona il tuo target dell'app
+   - Vai su "Signing & Capabilities"
+   - Clicca su "+ Capability" e seleziona "Domini associati"
+   - Aggiungi `applinks:yourdomain.com`
 
-### Fase 3: Creare una Pagina di Fallback
+### Passo 3: Crea una pagina di fallback
 
 Crea una pagina di fallback all'URL di reindirizzamento per gestire i casi in cui l'app non è installata:
 
@@ -158,7 +161,7 @@ Crea una pagina di fallback all'URL di reindirizzamento per gestire i casi in cu
 </html>
 ```
 
-### Fase 4: Implementare il Pulsante di Pagamento nella Tua App Capacitor
+### Passo 4: Implementa il pulsante di pagamento nella tua app Capacitor
 
 Ora, aggiungi il pulsante di pagamento alla tua app:
 
@@ -183,11 +186,11 @@ export async function openPaymentLink(userEmail, userId) {
 }
 ```
 
-> **Perché Safari è Importante**: Aprire il link di pagamento in Safari (tramite `window.open`) piuttosto che in un browser in-app è vantaggioso perché gli utenti che hanno precedentemente salvato le loro informazioni di pagamento con Stripe Link avranno le loro credenziali automaticamente disponibili. Questo crea un'esperienza di checkout più fluida dove gli utenti non dovranno reinserire le informazioni della carta di credito, riducendo significativamente l'attrito e i tassi di abbandono.
+> **Perché Safari è importante**: Aprire il collegamento ai pagamenti in Safari (attraverso `window.open`) piuttosto che in un browser in-app è vantaggioso perché gli utenti che hanno precedentemente salvato le loro informazioni di pagamento con Stripe Link avranno le loro credenziali automaticamente disponibili. Questo crea un'esperienza di checkout più fluida dove gli utenti non dovranno reinserire le informazioni della loro carta di credito, riducendo significativamente l'attrito e i tassi di abbandono.
 
-### Fase 5: Gestire Universal Links nella Tua App
+### Passo 5: Gestisci i collegamenti universali nella tua app
 
-Configura la tua app per gestire gli universal links quando gli utenti vengono reindirizzati:
+Configura la tua app per gestire i collegamenti universali quando gli utenti vengono reindirizzati di nuovo:
 
 1. Prima, installa il plugin App:
 
@@ -231,7 +234,7 @@ function updatePurchaseStatus(success) {
 }
 ```
 
-### Fase 6: Configurare Webhook per l'Evasione degli Ordini
+### Passo 6: Configura il webhook per l'evasione degli ordini
 
 Infine, configura un webhook sul tuo server per gestire i pagamenti riusciti:
 
@@ -279,25 +282,25 @@ app.listen(3000, () => console.log('Webhook server running on port 3000'));
 
 ## Compatibilità Android
 
-Chiariamo: la sentenza Epic v. Apple ha fondamentalmente cambiato il panorama dei pagamenti mobile. Non solo impatta direttamente le app iOS, ma rafforza anche la posizione degli sviluppatori Android che hanno utilizzato metodi di pagamento esterni.
+Siamo chiari: la sentenza Epic v. Apple ha cambiato fondamentalmente il panorama dei pagamenti mobili. Non solo influisce direttamente sulle app iOS, ma rafforza anche la posizione degli sviluppatori Android che hanno utilizzato metodi di pagamento esterni.
 
-**Gli sviluppatori Android possono ora implementare soluzioni di pagamento esterne con completa fiducia.** Il precedente stabilito dalla sentenza Apple protegge effettivamente gli sviluppatori su tutte le piattaforme da potenziali restrizioni future. Questa decisione del tribunale ha convalidato ciò che molti sviluppatori Android fanno da anni - offrire opzioni di pagamento alternative con commissioni più basse.
+**Gli sviluppatori Android possono ora implementare soluzioni di pagamento esterne con completa fiducia.** Il precedente stabilito dalla sentenza di Apple protegge effettivamente gli sviluppatori su entrambe le piattaforme da potenziali restrizioni future. Questa decisione del tribunale ha convalidato ciò che molti sviluppatori Android stano facendo da anni: offrendo opzioni di pagamento alternative con commissioni più basse.
 
-Il Play Store di Google è sempre stato meno restrittivo riguardo ai metodi di pagamento esterni rispetto ad Apple, e ora con il precedente legale stabilito, non c'è praticamente alcun rischio nell'implementare Stripe o altri fornitori di pagamento esterni nelle tue app Android. Puoi procedere con queste implementazioni sapendo di essere su un terreno legale solido.
+Il Play Store di Google è sempre stato meno restrittivo riguardo ai metodi di pagamento esterni rispetto ad Apple, e ora, con il precedente legale stabilito, non c'è praticamente alcun rischio nell'implementazione di Stripe o altri fornitori di pagamenti esterni nelle tue app Android. Puoi procedere con queste implementazioni sapendo di poter contare su basi legali solide.
 
-L'implementazione che abbiamo coperto per iOS funziona quasi identicamente per i dispositivi Android. Poiché il Google Play Store non ha le stesse restrizioni sui metodi di pagamento esterni, puoi utilizzare lo stesso approccio dei Link di Pagamento Stripe senza necessità di finestre di dialogo di divulgazione speciali.
+L'implementazione che abbiamo trattato per iOS funziona praticamente allo stesso modo per i dispositivi Android. Poiché il Play Store di Google non ha le stesse restrizioni sui metodi di pagamento esterni, puoi utilizzare esattamente lo stesso approccio dei collegamenti ai pagamenti Stripe senza necessità di dialoghi di divulgazione speciali.
 
-Per gestire il deep linking (equivalente agli universal links su iOS), dovrai:
+Per gestire il deep linking (equivalente ai collegamenti universali su iOS), dovrai:
 
-1. Configurare App Links nel tuo `AndroidManifest.xml` per gestire l'URL di reindirizzamento
+1. Configurare i App Links nel tuo `AndroidManifest.xml` per gestire l'URL di reindirizzamento
 2. Creare un file `.well-known/assetlinks.json` sul tuo dominio con i dettagli della tua app
-3. Utilizzare la stessa logica del listener `appUrlOpen` per elaborare i pagamenti riusciti
+3. Utilizzare la stessa logica dell'ascoltatore `appUrlOpen` per elaborare i pagamenti riusciti
 
-La bellezza di Capacitor è che una volta implementate le configurazioni specifiche della piattaforma, il codice effettivo del flusso di pagamento rimane lo stesso su entrambe le piattaforme.
+La bellezza di Capacitor è che, una volta implementate le configurazioni specifiche per la piattaforma, il codice effettivo del flusso di pagamento rimane lo stesso su entrambe le piattaforme.
 
-## Creare una UI di Pagamento
+## Creare un'interfaccia utente per il pagamento
 
-Ecco un esempio di un componente pulsante di pagamento in Vue che puoi aggiungere alla tua app Capacitor:
+Ecco un esempio di componente del pulsante di pagamento in Vue che puoi aggiungere alla tua app Capacitor:
 
 ```vue
 <template>
@@ -391,9 +394,9 @@ async function handlePayment() {
 </script>
 ```
 
-## Gestire Diverse Regioni
+## Gestire regioni diverse
 
-Poiché le nuove linee guida Apple si applicano solo alle app nell'App Store U.S., avrai bisogno di una strategia per rilevare le regioni degli utenti e applicare il metodo di pagamento appropriato. Ecco un approccio più affidabile utilizzando la geolocalizzazione IP:
+Poiché le nuove linee guida di Apple si applicano solo alle app nell'App Store degli Stati Uniti, avrai bisogno di una strategia per rilevare le regioni degli utenti e applicare il metodo di pagamento appropriato. Ecco un approccio più affidabile utilizzando la geolocalizzazione IP:
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -434,21 +437,21 @@ export async function processPayment(product, userEmail, userId) {
 }
 ```
 
-Questo approccio utilizza il servizio gratuito `ipapi.co` per determinare il paese dell'utente basandosi sul loro indirizzo IP. Potresti anche utilizzare altri servizi di geolocalizzazione come MaxMind, o implementare questo controllo lato server per una maggiore sicurezza.
+Questo approccio utilizza il servizio gratuito `ipapi.co` per determinare il paese dell'utente in base al proprio indirizzo IP. Potresti anche utilizzare altri servizi di geolocalizzazione come MaxMind o implementare questo controllo sul server per una maggiore sicurezza.
 
-> **Nota**: Sebbene questo approccio funzioni, è importante ricordare che la geolocalizzazione IP non è sempre precisa al 100%. Per applicazioni mission-critical, considera l'utilizzo di metodi di rilevamento multipli o consenti agli utenti di selezionare manualmente la loro regione.
+> **Nota**: Aunque este enfoque funciona, es importante recordar que la geolocalización por IP no siempre es 100% precisa. Para aplicaciones críticas, considere utilizar múltiples métodos de detección o permitir que los usuarios seleccionen manualmente su región.
 
-### Rilevamento della posizione più accurato con i plugin Capacitor
+### Detección de Ubicación Más Precisa con Plugins de Capacitor
 
-Per un rilevamento più accurato della posizione, puoi utilizzare il plugin Capacitor Geolocation insieme a @capgo/nativegeocoder per determinare il paese dell'utente con maggiore precisione:
+Para una detección de ubicación más precisa, puede usar el plugin de Geolocalización de Capacitor junto con @capgo/nativegeocoder para determinar el país del usuario con mayor precisión:
 
-1. Per prima cosa, installa i plugin necessari:
+1. Primero, instale los plugins requeridos:
 
 ```bash
 npm install @capacitor/geolocation @capgo/nativegeocoder
 ```
 
-2. Configura i plugin nel tuo progetto Capacitor. Aggiungi quanto segue al tuo `capacitor.config.ts`:
+2. Configure los plugins en su proyecto de Capacitor. Agregue lo siguiente a su `capacitor.config.ts`:
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -466,7 +469,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-3. Implementa il rilevamento della regione basato sulla posizione:
+3. Implemente la detección de región basada en ubicación:
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -543,30 +546,30 @@ export async function processPayment(product, userEmail, userId) {
 }
 ```
 
-Questa implementazione fornisce un modo più accurato per determinare se un utente si trova fisicamente negli Stati Uniti. Prima tenta di utilizzare il GPS del dispositivo e il geocoder nativo per determinare il paese. Se questo fallisce (a causa di problemi di permessi o altri errori), ripiegherà sul rilevamento basato su IP.
+Esta implementación proporciona una manera más precisa de determinar si un usuario se encuentra físicamente en los Estados Unidos. Primero intenta usar el GPS del dispositivo y el geocodificador nativo para determinar el país. Si eso falla (debido a problemas de permisos u otros errores), recurre a la detección basada en IP.
 
-Ricordati di aggiungere i permessi necessari ai file `info.plist` (iOS) e `AndroidManifest.xml` (Android):
+Recuerde agregar los permisos necesarios a sus archivos `info.plist` (iOS) y `AndroidManifest.xml` (Android):
 
-Per iOS (`ios/App/App/Info.plist`):
+Para iOS (`ios/App/App/Info.plist`):
 ```xml
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>We need your location to determine which payment method to use based on regional availability.</string>
 ```
 
-Per Android (`android/app/src/main/AndroidManifest.xml`):
+Para Android (`android/app/src/main/AndroidManifest.xml`):
 ```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ```
 
-Questo approccio ti offre il modo più accurato per determinare se un utente è idoneo per le opzioni di pagamento esterno secondo le nuove linee guida di Apple.
+Utilizar este enfoque le brinda la manera más precisa de determinar si un usuario es elegible para opciones de pago externas bajo las nuevas pautas de Apple.
 
-## Gestione degli abbonamenti
+## Gestión de Suscripciones
 
-Uno dei vantaggi principali dell'utilizzo di Stripe per i pagamenti è la possibilità di offrire e gestire abbonamenti. Ecco come gestire gli abbonamenti nella tua app Capacitor:
+Una ventaja clave de usar Stripe para pagos es la capacidad de ofrecer y gestionar suscripciones. Aquí le mostramos cómo manejar la gestión de suscripciones en su aplicación de Capacitor:
 
-### 1. Creazione di una pagina di gestione degli abbonamenti
+### 1. Crear una Página de Gestión de Suscripciones
 
-Aggiungi una pagina di gestione degli abbonamenti nella tua app per visualizzare gli abbonamenti attivi dell'utente:
+Agregue una página de gestión de suscripciones en su aplicación para mostrar las suscripciones activas del usuario:
 
 ```vue
 <template>
@@ -638,9 +641,9 @@ function goToPricingPage() {
 </script>
 ```
 
-### 2. Portale clienti per la gestione degli abbonamenti
+### 2. Portal de Clientes para la Gestión de Suscripciones
 
-Stripe offre un Portale Clienti che permette agli utenti di gestire i loro abbonamenti. Puoi creare un link a questo portale dal tuo server:
+Stripe ofrece un Portal de Clientes que permite a los usuarios gestionar sus suscripciones. Puede crear un enlace a este portal desde su servidor:
 
 ```javascript
 // Server-side code (Node.js)
@@ -656,16 +659,16 @@ async function createPortalSession(customerId) {
 }
 ```
 
-## Garantire la conformità con l'App Store
+## Garantizando el Cumplimiento de la App Store
 
-Per garantire che la tua implementazione sia conforme alle linee guida di Apple:
+Para asegurarse de que su implementación cumpla con las pautas de Apple:
 
-1. Includi le opportune informazioni sugli acquisti esterni
-2. Implementa un foglio modale che informi gli utenti che stanno lasciando l'app (come richiesto da Apple)
-3. Non tentare di aggirare la commissione di Apple sugli acquisti effettuati all'interno dell'app
-4. Comunica chiaramente agli utenti che Apple non è responsabile della transazione
+1. Incluya divulgaciones apropiadas sobre compras externas
+2. Implemente una hoja modal informando a los usuarios que están saliendo de la aplicación (como lo requiere Apple)
+3. No intente eludir la comisión de Apple sobre las compras realizadas dentro de la aplicación
+4. Comunique claramente a los usuarios que Apple no es responsable de la transacción
 
-Ecco un esempio di implementazione del modale informativo richiesto:
+Aquí hay un ejemplo de cómo implementar el modal de divulgación requerido:
 
 ```typescript
 import { Dialog } from '@capacitor/dialog';
@@ -690,38 +693,38 @@ export async function initiateExternalPayment(userEmail, userId) {
 }
 ```
 
-## Test dell'implementazione
+## Pruebas de Su Implementación
 
-Per testare la tua implementazione:
+Para probar su implementación:
 
-1. Clicca sul pulsante di pagamento nella tua app, che dovrebbe mostrare l'informativa e poi aprire la pagina di pagamento Stripe
-2. Completa un pagamento di test utilizzando la carta di test Stripe `4242 4242 4242 4242`
-3. Dopo il pagamento, dovresti essere reindirizzato alla tua app tramite il link universale
-4. Verifica che il tuo webhook abbia ricevuto l'evento `checkout.session.completed`
+1. Haga clic en el botón de pago en su aplicación, que debería mostrar la divulgación y luego abrir la página de pago de Stripe
+2. Complete un pago de prueba utilizando la tarjeta de prueba de Stripe `4242 4242 4242 4242`
+3. Después del pago, debería ser redirigido de regreso a su aplicación a través del enlace universal
+4. Verifique que su webhook recibió el evento `checkout.session.completed`
 
-## Conclusione
+## Conclusión
 
-La possibilità di utilizzare opzioni di pagamento esterne per i beni digitali nelle app iOS rappresenta un cambiamento significativo che offre maggiore flessibilità agli sviluppatori. Mentre questo cambiamento attualmente si applica solo alle app nell'App Store statunitense, fornisce un'importante alternativa al sistema di acquisti in-app di Apple.
+La capacidad de utilizar opciones de pago externas para bienes digitales en aplicaciones iOS es un cambio significativo que brinda a los desarrolladores más flexibilidad. Si bien este cambio actualmente solo se aplica a las aplicaciones en la App Store de EE. UU., proporciona una alternativa importante al sistema de compras dentro de la aplicación de Apple.
 
-Utilizzando Stripe Payment Links con Capacitor, puoi implementare rapidamente un'esperienza di checkout ottimizzata mantenendo la conformità con le linee guida di Apple. Questo approccio ti offre anche il vantaggio dell'infrastruttura di pagamento robusta di Stripe, commissioni di elaborazione più basse (3% invece del 30%) e pagamenti molto più rapidi (giorni invece di mesi) rispetto al sistema di acquisti in-app di Apple.
+Al utilizar los Enlaces de Pagos de Stripe con Capacitor, puede implementar rápidamente una experiencia de pago simplificada mientras mantiene el cumplimiento de las pautas de Apple. Este enfoque también le da la ventaja de la robusta infraestructura de pagos de Stripe, tarifas de procesamiento más bajas (3% frente al 30%), y pagos mucho más rápidos (días en lugar de meses) en comparación con el sistema de compras dentro de la aplicación de Apple.
 
-Ricorda che dovrai gestire direttamente tutto il supporto clienti e le questioni di rimborso, poiché queste transazioni avvengono al di fuori dell'ecosistema Apple.
+Recuerde que necesitará manejar todo el soporte al cliente y los problemas de reembolso directamente, ya que estas transacciones ocurren fuera del ecosistema de Apple.
 
-Hai implementato Stripe Payment Links nella tua app Capacitor? Condividi la tua esperienza nei commenti qui sotto!
+¿Ha implementado Enlaces de Pagos de Stripe en su aplicación Capacitor? ¡Comparta su experiencia en los comentarios a continuación!
 
-## FAQ
+## Preguntas Frecuentes
 
-**D: Questo approccio è conforme alle linee guida di Apple?**  
-R: Sì, dal 1° maggio 2025, Apple permette il collegamento a metodi di pagamento esterni per beni e servizi digitali nelle app distribuite nell'App Store statunitense, a condizione che si includano le informative richieste.
+**P: ¿Es este enfoque compatible con las pautas de Apple?**  
+R: Sí, a partir del 1 de mayo de 2025, Apple permite enlazar métodos de pago externos para bienes y servicios digitales en aplicaciones distribuidas en la App Store de EE. UU., siempre que incluya las divulgaciones requeridas.
 
-**D: Devo pagare la commissione di Apple quando uso metodi di pagamento esterni?**  
-R: No, uno dei principali vantaggi delle nuove regole è che i pagamenti elaborati al di fuori del sistema Apple non sono soggetti alla loro commissione.
+**P: ¿Necesito pagar la comisión de Apple al usar métodos de pago externos?**  
+R: No, uno de los principales beneficios de las nuevas reglas es que los pagos procesados fuera del sistema de Apple no están sujetos a su comisión.
 
-**D: La mia azienda deve avere sede negli Stati Uniti per approfittare di queste nuove regole?**  
-R: No, qualsiasi azienda da qualsiasi parte del mondo può implementare metodi di pagamento esterni purché la tua app sia disponibile nell'App Store statunitense e gli utenti che effettuano gli acquisti si trovino negli Stati Uniti. La normativa si applica al marketplace (App Store USA) e alla posizione degli utenti, non alla posizione della tua azienda. Questo significa che gli sviluppatori dall'Europa, Asia, Sud America o da qualsiasi altra parte possono implementare Stripe Payment Links per i loro clienti basati negli Stati Uniti.
+**P: ¿Mi empresa necesita estar basada en los Estados Unidos para aprovechar estas nuevas reglas?**  
+R: No, cualquier empresa de cualquier parte del mundo puede implementar métodos de pago externos siempre que su aplicación esté disponible en la App Store de EE. UU. y los usuarios que realicen las compras se encuentren en los Estados Unidos. El fallo se aplica al mercado (App Store de EE. UU.) y la ubicación de los usuarios, no a la ubicación de su empresa. Esto significa que desarrolladores de Europa, Asia, América del Sur o cualquier otro lugar pueden implementar Enlaces de Pagos de Stripe para sus clientes en EE. UU.
 
-**D: Cosa succede se un utente al di fuori degli Stati Uniti cerca di utilizzare l'opzione di pagamento esterna?**  
-R: Dovresti implementare il rilevamento della regione (come mostrato nell'articolo) per offrire opzioni di pagamento esterne solo agli utenti negli Stati Uniti. Per altre regioni, dovresti continuare a utilizzare il sistema di acquisti in-app di Apple.
+**P: ¿Qué sucede si un usuario fuera de EE. UU. intenta usar la opción de pago externa?**  
+R: Debe implementar la detección de región (como se muestra en el artículo) para ofrecer opciones de pago externas solo a usuarios en EE. UU. Para otras regiones, debe seguir utilizando el sistema de compras dentro de la aplicación de Apple.
 
-**D: Posso usare questo per beni fisici o servizi consumati al di fuori dell'app?**  
-R: Sì, Apple ha sempre permesso metodi di pagamento esterni per beni fisici e servizi consumati al di fuori dell'app (come il ride-sharing o la consegna di cibo).
+**P: ¿Puedo usar esto para bienes físicos o servicios consumidos fuera de la aplicación?**  
+R: Sí, Apple siempre ha permitido métodos de pago externos para bienes físicos y servicios consumidos fuera de la aplicación (como viajes compartidos o entrega de comida).

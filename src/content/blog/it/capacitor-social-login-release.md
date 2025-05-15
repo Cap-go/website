@@ -1,16 +1,16 @@
 ---
 slug: release-of-a-brand-new-capacitor-social-login
-title: CapacitorのSNSログインプラグインの新リリース
+title: Rilascio di un nuovissimo plugin per il login sociale di Capacitor
 description: >-
-  Il plugin Capacitor Social Login è un plugin che ti permette di effettuare
-  l'accesso con Google, Facebook e Apple su iOS, Android e Web.
+  El complemento de inicio de sesión social de Capacitor es un complemento que
+  te permite iniciar sesión con Google, Facebook y Apple en iOS, Android y Web.
 author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
 updated_at: 2024-10-08T00:00:00.000Z
 head_image: /social_login_plugin_blog.webp
-head_image_alt: Schema del sistema Capgo
+head_image_alt: Sistema de organização Capgo ilustração
 keywords: >-
   Oauth, social login, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
@@ -19,36 +19,34 @@ published: true
 next_blog: ''
 locale: it
 ---
+## Wprowadzenie
 
-## Introduzione
+Cześć, jestem Michael ([WcaleNieWolny](https://github.com/WcaleNieWolny)) 👋,
 
-Ciao, sono Michael ([WcaleNieWolny](https://githubcom/WcaleNieWolny)) 👋,
+Po miesiącu ciężkiej (i trochę bolesnej 🙃) pracy, z przyjemnością ogłaszam pierwsze wydanie Capacitor Social Login. Ten plugin został zaprojektowany, aby pomóc w obsłudze zarówno logowania Google, jak i Apple na iOS i Android. Ponadto, razem z Martinem, pracowaliśmy nad kilkoma unikalnymi funkcjami, które obejmują:
 
-Dopo un mese di duro lavoro (e un po' doloroso 🙃), sono lieto di annunciare il primo rilascio di Capacitor Social Login. Questo plugin è progettato per assistere nella gestione del Login con Google e Apple sia su iOS che Android. Inoltre, insieme a Martin, abbiamo lavorato su alcune funzionalità uniche che includono:
+ - wprowadzenie logowania z Apple na Androidzie 
+ - przyjęcie nowego Google Credentials API
+ - dodanie szczegółowej dokumentacji
 
- - L'introduzione del Login con Apple su Android
- - L'adozione della nuova API Google Credentials
- - L'aggiunta di documentazione dettagliata
+## Logowanie z Apple na Androidzie
 
-## Login con Apple su Android
+Na początek omówmy główną innowację 'Logowania z Apple' na Androidzie. To nie było trywialne, ponieważ SDK Apple nie zapewnia tej funkcjonalności. Użyłem [tego artykułu](https://johncodeos.com/how-to-add-sign-in-with-apple-button-to-your-android-app-using-kotlin/) jako punktu odniesienia, ale trochę go zmieniłem, aby uczynić go bardziej bezpiecznym. Końcowy przebieg wygląda tak:
 
-Innanzitutto, parliamo della principale innovazione del 'Login con Apple' su Android. Questo non è stato banale, poiché l'SDK di Apple non fornisce questa funzionalità. Ho utilizzato [questo articolo](https://johncodeoscom/how-to-add-sign-in-with-apple-button-to-your-android-app-using-kotlin/) come punto di riferimento, ma l'ho modificato leggermente per renderlo più sicuro. Il flusso che ho ottenuto è questo:
+<figure><img style="margin-left: auto;margin-right: auto;max-height: 600px !important;" src="/apple-login-flow-chart.svg" alt="Apple Login flow chart" /><figcaption></figcaption></figure> 
 
-<figure><img style="margin-left: auto;margin-right: auto;max-height: 600px !important;" src="/apple-login-flow-chart.svg" alt="Apple Login flow chart" /><figcaption></figcaption></figure>
+Niestety, wymaga to backendu i pewnych modyfikacji w kodzie twojej aplikacji, ale to najlepsze, co mogłem zrobić.
 
-Purtroppo, richiede un backend e alcune modifiche al codice della tua app, ma è il meglio che potevo fare.
+## Odświeżone logowanie Google na Androidzie
 
-## Google Login Rinnovato su Android
+Następnie próbowałem zaimplementować logowanie Google na Androidzie. Jak się okazało, [CapacitorGoogleAuth CodetrixStudio](https://github.com/CodetrixStudio/CapacitorGoogleAuth) wykorzystuje [wkrótce zastępowaną bibliotekę GMS](https://developer.android.com/identity/sign-in/legacy-gsi-migration#authorization). W wyniku uznania tej biblioteki GMS za przestarzałą, postanowiłem użyć [CredentialManager](https://developer.android.com/identity/sign-in/credential-manager-siwg). To uprościło proces logowania i usunęło irytujący [błąd 10](https://github.com/CodetrixStudio/CapacitorGoogleAuth/issues/332) 🎉
 
-Successivamente, ho cercato di implementare il Google Login su Android. Come si è scoperto, [CodetrixStudio's CapacitorGoogleAuth](https://githubcom/CodetrixStudio/CapacitorGoogleAuth) utilizza una [libreria GMS che sarà presto deprecata](https://developerandroidcom/identity/sign-in/legacy-gsi-migration#authorization). Come risultato di questa libreria GMS considerata obsoleta, ho deciso di utilizzare il [CredentialManager](https://developerandroidcom/identity/sign-in/credential-manager-siwg). Questo ha aiutato a semplificare il flusso di login e ha rimosso il fastidioso [errore 10](https://githubcom/CodetrixStudio/CapacitorGoogleAuth/issues/332) 🎉
+## Dokumentacja
 
-## Documentazione
+Na koniec napisałem niesamowitą ✨ dokumentację. Spędziłem wiele czasu, aby upewnić się, że dokumenty są dokładne i obszerne. Dokumenty zawierają szczegółowy przewodnik dotyczący zarówno Apple, jak i Google. Dodałem również [przykładowy backend](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo) do logowania z Apple 🍎
 
-Infine, ho scritto una fantastica ✨ documentazione. Ho dedicato molto tempo per assicurarmi che la documentazione fosse accurata ed esaustiva.
-La documentazione include una guida dettagliata per la configurazione sia di Apple che di Google. Ho anche fornito un [backend di esempio](https://githubcom/WcaleNieWolny/capgo-social-login-backend-demo) per il Login con Apple 🍎
+Nie wahaj się sprawdzić przewodników dotyczących [Apple](https://github.com/Cap-go/capacitor-social-login/blob/main/docs/setup_apple.md) i [Google](https://github.com/Cap-go/capacitor-social-login/blob/main/docs/setup_google.md)!
 
-Sentiti libero di consultare le guide [Apple](https://githubcom/Cap-go/capacitor-social-login/blob/main/docs/setup_applemd) e [Google](https://githubcom/Cap-go/capacitor-social-login/blob/main/docs/setup_googlemd)!
+## Podsumowanie
 
-## Conclusione
-
-In conclusione, il plugin Capacitor Social Login introduce molte nuove ed entusiasmanti funzionalità con altre in arrivo nel futuro 🚀
+Podsumowując, plugin Capacitor Social Login wprowadza wiele nowych i ekscytujących funkcji, a więcej ma się jeszcze pojawić w przyszłości 🚀

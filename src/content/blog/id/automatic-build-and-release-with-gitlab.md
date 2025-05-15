@@ -1,9 +1,9 @@
 ---
 slug: automatic-build-and-release-with-gitlab
-title: Gitlab을 통한 자동 빌드 및 배포
+title: Pembangunan dan rilis otomatis dengan Gitlab
 description: >-
-  Buat pipeline CI/CD Anda sendiri secara gratis dengan GitLab dan deploy
-  aplikasi Anda setiap kali melakukan push ke branch utama.
+  Buat pipeline CI/CD Anda sendiri dengan Gitlab secara gratis, terapkan
+  aplikasi Anda setiap kali Anda melakukan push ke main.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -17,24 +17,23 @@ published: true
 locale: id
 next_blog: ''
 ---
+Tutorial ini fokus pada GitLab CI, tetapi Anda dapat menyesuaikannya dengan sedikit perubahan ke platform CI/CD lainnya.
 
-Tutorial ini berfokus pada GitLab CI, tetapi Anda dapat mengadaptasinya dengan sedikit penyesuaian ke platform CI/CD lainnya
+## Pengantar 
 
-## Pendahuluan
+Pastikan Anda telah menambahkan aplikasi Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada fase upload.
 
-Pastikan Anda telah menambahkan aplikasi Anda terlebih dahulu ke Capgo, tutorial ini hanya berfokus pada tahap upload
+## Konvensi commit
 
-## Konvensi Commit
-
-Pertama Anda perlu mulai mengikuti konvensi commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) ini akan membantu peralatan memahami bagaimana meningkatkan nomor versi, hanya butuh 5 menit untuk mempelajarinya
+Pertama, Anda perlu mulai mengikuti konvensi commit [konvensional commits](https://www.conventionalcommits.org/en/v1.0.0/) ini akan membantu alat memahami cara meningkatkan nomor versi, ini hanya perlu 5 menit untuk mempelajarinya.
 
 ![Conventional commits](/conventional_commits.webp)
 
 ## GitLab CI untuk tag
 
-Kemudian Anda perlu membuat GitLab pertama Anda untuk secara otomatis membangun dan membuat tag
+Kemudian, Anda perlu membuat GitLab pertama Anda untuk secara otomatis membangun dan membuat tag.
 
-Buat file di path ini: `github/workflows/bump_version.yml`
+Buat file di jalur ini: `.github/workflows/bump_version.yml`
 
 dengan konten ini:
 
@@ -71,17 +70,17 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-Ini akan merilis tag untuk setiap commit di branch utama Anda Dan menambahkan entri changelog untuk setiap commit di branch utama di `CHANGELOG.md`
+Ini akan merilis tag untuk setiap commit di cabang utama Anda. Dan menambahkan entri changelog untuk setiap commit di cabang utama di `CHANGELOG.md`.
 
-Jangan khawatir jika Anda tidak memiliki file ini, itu akan dibuat untuk Anda
+Jangan khawatir jika Anda tidak memiliki file ini, file ini akan dibuat untuk Anda.
 
-Untuk membuatnya berfungsi, buat [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) di [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") GitHub Anda sebagai `PERSONAL_ACCESS_TOKEN`
+Untuk membuat ini berfungsi, buat [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _di dalam_ rahasia GitHub Anda [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") sebagai `PERSONAL_ACCESS_TOKEN`.
 
-Ini diperlukan untuk membiarkan CI melakukan commit pada changelog
+Ini diperlukan untuk memungkinkan CI melakukan commit changelog.
 
-Saat Anda membuat token, pilih expiration sebagai `never` dan scope sebagai `repo`
+Ketika Anda membuat token, pilih masa berlaku sebagai `never` dan lingkup sebagai `repo`.
 
-Terakhir, untuk membiarkan tool memahami di mana versi Anda disimpan, Anda harus membuat file `cz.toml` di root repositori Anda
+Terakhir, untuk memungkinkan alat memahami di mana versi Anda disimpan, Anda harus membuat file `.cz.toml` di root repositori Anda.
 
 Dan tambahkan ini di dalamnya:
 
@@ -96,15 +95,15 @@ version_files = [
 ]
 ```
 
-Atur versi dalam file ini sama dengan yang Anda miliki di file `package.json` Anda
+Set versi di file ini sama dengan yang Anda miliki di file `package.json` Anda.
 
-Ini hanya diperlukan pertama kali, kemudian tools akan tetap memperbarui
+Ini hanya diperlukan untuk pertama kali, kemudian alat akan menjaga tetap terbaru.
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat tag pertama Anda muncul di GitHub!
 
-## GitHub actions untuk build
+## Tindakan GitHub untuk build
 
-Buat file di path ini: `github/workflows/build.yml`
+Buat file di jalur ini: `.github/workflows/build.yml`
 
 dengan konten ini:
 
@@ -136,18 +135,18 @@ jobs:
         run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production
 ```
 
-Ini akan menginstal dan membangun dependensi Anda sebelum mengirimkannya ke Capgo
+Ini akan menginstal dan membangun ketergantungan Anda sebelum mengirimnya ke Capgo.
 
-Jika perintah Anda untuk build berbeda, Anda dapat mengubahnya di langkah `build_code`
+Jika perintah Anda untuk build berbeda, Anda dapat mengubahnya di langkah `build_code`.
 
-Untuk membuatnya berfungsi, Anda perlu mendapatkan API key untuk Capgo, tambahkan di [secret repositori GitHub Anda](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`
+Untuk membuat ini berfungsi, Anda perlu mendapatkan kunci API Anda untuk Capgo, tambahkan di [rahasia repositori GitHub Anda](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) sebagai `CAPGO_TOKEN`.
 
 Anda sekarang dapat melakukan commit kedua file ini dan melihat tag pertama Anda muncul di GitHub!
 
-Tambahkan commit akan menghasilkan build baru untuk channel produksi
+Menambahkan komit akan menghasilkan build baru untuk saluran produksi.
 
-Anda harus menambahkan test Anda di langkah build untuk memastikan kode Anda berfungsi
+Anda harus menambahkan pengujian Anda dalam langkah build untuk memastikan kode Anda berfungsi.
 
-Pergi ke dashboard Capgo Anda dan periksa build Anda yang baru saja muncul, sekarang Anda memiliki sistem CI/CD Anda
+Buka dasbor Capgo Anda dan periksa build Anda yang baru saja muncul, Anda sekarang memiliki sistem CI/CD Anda.
 
-Jika Anda ingin membiarkan semua pengguna Anda mendapatkan pembaruan kapan pun tersedia, pergi ke channel Anda dan atur ke `public`
+Jika Anda ingin semua pengguna Anda mendapatkan pembaruan kapan pun tersedia, pergi ke saluran Anda dan atur menjadi `public`.

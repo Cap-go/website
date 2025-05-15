@@ -1,38 +1,37 @@
 ---
-slug: build-e-release-automatico-con-github-actions
-title: Githubアクションによるアプリの自動ビルドとリリース
+slug: automatic-build-and-release-with-github-actions
+title: Automatische Erstellung und Bereitstellung von Apps mit Github-Aktionen
 description: >-
-  Github actionsを使用して無料でCI/CDパイプラインを作成し、mainにプッシュするたびにIonic Capacitor
-  JSアプリをデプロイしましょう。
+  Crea tu propia pipeline de CI/CD con acciones de Github de forma gratuita,
+  despliega tu aplicación Ionic Capacitor JS cada vez que hagas push a main.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /github_actions.webp
-head_image_alt: Github アクション図
+head_image_alt: Illustration d'action Github
 keywords: 'Github actions, CI/CD, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: ja
+locale: it
 next_blog: automatic-capacitor-ios-build-github-action
 ---
-Questo tutorial si concentra sull'hosting GitHub, ma puoi adattarlo con piccole modifiche a qualsiasi altra piattaforma CI/CD.
+Questo tutorial si concentra sull'hosting di GitHub, ma puoi adattarlo con piccole modifiche a qualsiasi altra piattaforma CI/CD.
 
 ## Prefazione
 
-Assicurati di aver prima aggiunto la tua app Capacitor a Capgo, questo tutorial si concentra solo sulla fase di caricamento.
-Se hai bisogno di aggiungere la tua app a Capgo, puoi seguire questo [Tutorial](/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)
+Assicurati di aver prima aggiunto la tua app Capacitor a Capgo, questo tutorial si concentra solo sulla fase di caricamento. Se hai bisogno di aggiungere la tua app a Capgo, puoi seguire questo [Tutorial](/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)
 
-## Convenzione dei commit
+## Convenzione di commit
 
-Per prima cosa devi iniziare a seguire la convenzione dei commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) questo aiuterà gli strumenti a capire come aggiornare il numero di versione, ci vogliono 5 minuti per impararla.
+Prima di tutto, devi iniziare a seguire la convenzione di commit [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) questo aiuterà gli strumenti a capire come aggiornare il numero di versione, ci vogliono 5 minuti per impararlo.
 
 ![Conventional commits](/conventional_commits.webp)
 
-## GitHub actions per i tag
+## Azioni GitHub per il tag
 
-Poi devi creare la tua prima GitHub action per costruire e creare automaticamente i tag.
+Poi devi creare la tua prima azione GitHub per costruire e creare automaticamente un tag.
 
 Crea un file in questo percorso: `.github/workflows/bump_version.yml`
 
@@ -71,25 +70,24 @@ jobs:
           git push $remote_repo HEAD:$CURRENT_BRANCH --follow-tags --tags
 ```
 
-Questo rilascerà un tag per ogni commit nel tuo ramo principale. E aggiungerà una voce del changelog per ogni commit nel ramo principale in `CHANGELOG.md`.
+Questo rilascerà un tag per ogni commit nel tuo ramo principale. E aggiungerà un'entrata nel changelog per ogni commit nel ramo principale in `CHANGELOG.md`.
 
 Non preoccuparti se non hai questo file, verrà creato per te.
 
-Per far funzionare questo, crea un [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) nei tuoi [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") di GitHub come `PERSONAL_ACCESS_TOKEN`.
+Per farlo funzionare, crea un [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _in_ GitHub [segreto](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") come `PERSONAL_ACCESS_TOKEN`.
 
-Questo è necessario per permettere alla CI di committare il changelog.
+Questo è necessario per consentire al CI di fare il commit del changelog.
 
-Quando crei il token, scegli la scadenza come `never` e lo scope come `repo`.
+Quando crei il token, scegli l'espirazione come `mai` e l'ambito come `repo`.
 
-Infine, imposta la versione nel tuo file `package.json`, sincronizzala con il numero di versione nativo che faciliterà il prossimo passo.
+Infine, imposta la versione nel tuo file `package.json`, sincronizzala con il tuo numero di versione nativo per facilitare, poi il passo successivo.
 
 Questo è necessario solo la prima volta, poi gli strumenti lo manterranno aggiornato.
 
-Ora puoi committare entrambi i file e vedere apparire il tuo primo tag su GitHub!
+Puoi ora fare il commit di entrambi i file e vedere il tuo primo tag apparire in GitHub!
 
-Sia la piattaforma nativa che web avranno l'incremento del numero di versione dopo ogni commit.
-
-## GitHub actions per il build
+Sia la piattaforma nativa che quella web avranno il numero di versione incrementato dopo ogni commit.
+## Azioni GitHub per la build
 
 Crea un file in questo percorso: `.github/workflows/build.yml`
 
@@ -125,18 +123,18 @@ jobs:
 
 Questo installerà e costruirà le tue dipendenze prima di inviarle a Capgo.
 
-Se il tuo comando per il build è diverso, puoi cambiarlo nello step `build_code`.
+Se il tuo comando per la build è diverso, puoi cambiarlo nel passaggio `build_code`.
 
-Per far funzionare questo, devi ottenere la tua chiave API per Capgo, aggiungila nei [secret del tuo repository GitHub](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) come `CAPGO_TOKEN`.
+Per farlo funzionare, devi ottenere la tua chiave API per Capgo, aggiungila nel [segreto del tuo repository GitHub](https://docs.github.com/en/actions/security-guides/encrypted-secrets/) come `CAPGO_TOKEN`.
 
-Ora puoi committare entrambi i file e vedere apparire il tuo primo tag su GitHub!
+Puoi ora fare il commit di entrambi i file e vedere il tuo primo tag apparire in GitHub!
 
-Il commit genererà un nuovo build per il canale di produzione.
+Aggiungere il commit genererà una nuova build per il canale di produzione.
 
-Dovresti aggiungere i tuoi test nella fase di build per assicurarti che il tuo codice funzioni.
+Dovresti aggiungere i tuoi test nel passaggio di build per garantire che il tuo codice funzioni.
 
-Vai alla tua dashboard Capgo e controlla il build che è appena apparso, ora hai il tuo sistema CI/CD.
+Vai alla tua dashboard di Capgo e controlla la tua build che è appena apparsa, ora hai il tuo sistema CI/CD.
 
-Se vuoi permettere a tutti i tuoi utenti di ottenere l'aggiornamento quando è disponibile, vai al tuo canale e impostalo come `public`.
+Se desideri permettere a tutti i tuoi utenti di ricevere l'aggiornamento ogni volta che è disponibile, vai al tuo canale e impostalo su `pubblico`.
 
-Puoi anche aggiungere il build nativo della tua app JavaScript Ionic Capacitor seguendo questo tutorial 👇
+Puoi anche aggiungere la build nativa della tua app JavaScript Ionic Capacitor seguendo questo tutorial 👇

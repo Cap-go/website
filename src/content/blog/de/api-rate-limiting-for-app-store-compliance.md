@@ -1,10 +1,10 @@
 ---
-slug: api-rate-limiting-für-app-store-konformität
-title: Límite de tasa de API para conformidad con la App Store
+slug: api-rate-limiting-for-app-store-compliance
+title: API-Ratenbegrenzung zur Einhaltung der App-Store-Vorgaben
 description: >-
-  Aprende sobre los métodos de limitación de velocidad de API y su importancia
-  para el cumplimiento de la App Store, la seguridad y el rendimiento del
-  sistema.
+  Erfahren Sie mehr über Methoden zur API-Datenratenbegrenzung und deren
+  Bedeutung für die Compliance im App Store, die Sicherheit und die
+  Systemleistung.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,165 +12,161 @@ created_at: 2025-04-02T03:23:39.305Z
 updated_at: 2025-04-02T03:23:51.231Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6-1743564231231.jpg
-head_image_alt: Desarrollo Móvil
+head_image_alt: Mobile Entwicklung
 keywords: >-
   API rate limiting, app store compliance, security, performance, overload
   protection, request management
 tag: 'Development, Mobile, Security'
 published: true
-locale: es
+locale: de
 next_blog: ''
 ---
-Here's the German translation:
+API-Ratenbegrenzung stellt sicher, dass Ihre App den Richtlinien von Apple und Google entspricht und schützt gleichzeitig Ihr System vor Überlastung und Missbrauch. Es begrenzt, wie oft Benutzer Anfragen stellen können, verbessert die Sicherheit, spart Kosten und sorgt für reibungslosen Betrieb. Hier ist, was Sie wissen müssen:
 
-API-Ratenbegrenzung stellt sicher, dass Ihre App die Richtlinien von Apple und Google erfüllt und schützt gleichzeitig Ihr System vor Überlastung und Missbrauch. Sie begrenzt die Häufigkeit von Benutzeranfragen, verbessert die Sicherheit, spart Kosten und gewährleistet eine reibungslose Leistung. Hier sind die wichtigsten Punkte:
+1.   **Warum es wichtig ist**: Verhinderung von Brute-Force-Angriffen, Verwaltung der Serverlast und Vermeidung von Ablehnungen im App Store.
+2.   **Methoden**:
+    1.   Fester Zeitrahmen: Einfach, kann jedoch zu Verkehrsspitzen führen.
+    2.   Gleitender Zeitrahmen: Sorgt für gleichmäßigeren Verkehr, benötigt jedoch mehr Speicher.
+    3.   Token-Bucket: Bewältigt Spitzenlasten, ist jedoch komplex einzurichten.
+3.   **Konformität**: Verwenden Sie exponentielles Backoff für Wiederholungen und antworten Sie mit einem 429-Statuscode, wenn die Grenzen überschritten werden.
+4.   **Werkzeuge**: Plattformen wie [Capgo](https://capgo.app/) vereinfachen die Implementierung mit Analysen, Fehlerverfolgung und Echtzeitüberwachung.
 
--   **Warum es wichtig ist**: Verhindert Brute-Force-Angriffe, verwaltet die Serverauslastung und vermeidet App-Store-Ablehnungen.
--   **Methoden**:
-    -   Festes Zeitfenster: Einfach, kann aber zu Verkehrsspitzen führen.
-    -   Gleitendes Zeitfenster: Glättet den Verkehr, benötigt aber mehr Speicher.
-    -   Token Bucket: Bewältigt Spitzen, ist aber komplex in der Einrichtung.
--   **Compliance**: Verwenden Sie exponentielles Backoff für Wiederholungsversuche und antworten Sie mit einem 429-Statuscode, wenn Limits überschritten werden.
--   **Werkzeuge**: Plattformen wie [Capgo](https://capgo.app/) vereinfachen die Implementierung mit Analysen, Fehlerverfolgung und Echtzeit-Überwachung.
+**Schneller Tipp**: Testen Sie Ihre Grenzen unter normalen, spitzen und Wiederherstellungsbedingungen, um Stabilität und Konformität sicherzustellen.
 
-**Schnelltipp**: Testen Sie Ihre Grenzen unter normalen Bedingungen, bei Spitzenlasten und in der Erholungsphase, um Stabilität und Compliance sicherzustellen.
-
-## API-Ratenlimits verstehen: Zweck, Arten und Wesentliches ...
-
-<iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+## Verständnis der API-Ratenlimits: Zweck, Arten und Wesentliches ...
 
 ## App Store API-Richtlinien
 
-API-Ratenlimits spielen eine wichtige Rolle bei der Erfüllung der App Store-Anforderungen. Sowohl Apple als auch Google haben spezifische Regeln zum Schutz von Benutzerdaten und zur Aufrechterhaltung der Systemstabilität. Hier ist eine Aufschlüsselung ihrer Richtlinien.
+API-Ratenlimits spielen eine Schlüsselrolle bei der Erfüllung der Anforderungen des App Stores. Sowohl Apple als auch Google haben spezifische Regeln zum Schutz der Benutzerdaten und zur Aufrechterhaltung der Systemstabilität. Hier ist eine Übersicht über ihre Richtlinien.
 
 ### Apples API-Ratenlimits
 
-Apple legt Grenzen in Bereichen wie Authentifizierung, Datenanfragen und öffentliche Endpunkte fest. Die Verletzung dieser Grenzen kann Konsequenzen wie App-Ablehnung während des Überprüfungsprozesses, temporäre Entfernung aus dem App Store oder erforderliche Sofortkorrekturen nach sich ziehen. Zur Verwaltung überschrittener Limits wird Entwicklern empfohlen, Methoden wie **exponentielles Backoff** zu verwenden, bei dem die Verzögerung zwischen Wiederholungsversuchen schrittweise erhöht wird.
+Apple setzt Grenzen in Bereichen wie Authentifizierung, Datenanforderungen und öffentlichen Endpunkten. Verstöße gegen diese Grenzen können Konsequenzen wie die Ablehnung der App während des Überprüfungsprozesses, vorübergehende Entfernung aus dem App Store oder erforderliche dringende Fehlerbehebungen nach sich ziehen. Um überschrittene Limits zu verwalten, wird Entwicklern geraten, Methoden wie **exponentielles Backoff** zu verwenden, das eine schrittweise Erhöhung der Verzögerung zwischen den Wiederholungen beinhaltet.
 
 ### Googles API-Ratenlimits
 
-Der [Google Play Store](https://play.google/developer-content-policy/) setzt Grenzen für den Zugriff auf öffentliche Daten, Authentifizierung und Benutzerdatenanfragen. Während kleine Aktivitätsspitzen erlaubt sind, wird die Nutzung genau überwacht. Warnungen werden ausgegeben, wenn sich Schwellenwerte nähern, und Einschränkungen werden schrittweise statt durch sofortige Sperrung angewendet.
+[Google Play Store](https://play.google/developer-content-policy/) setzt Grenzen für den Zugriff auf öffentliche Daten, Authentifizierung und Benutzerdatenanforderungen. Während kleine Verkehrsspitzen erlaubt sind, überwacht das System die Nutzung genau. Warnungen werden ausgegeben, während die Schwellenwerte erreicht werden, und Einschränkungen werden schrittweise angewendet, anstatt sofort ausgesetzt zu werden.
 
-## Schritte zur Implementierung von Ratenlimits
+## Schritte zur Implementierung der Ratenbegrenzung
 
-### Methoden der Ratenbegrenzung
+### Methoden zur Ratenbegrenzung
 
-Bei der Implementierung von API-Ratenlimits wählen Sie einen Ansatz, der zu den Anforderungen Ihrer Anwendung passt. Nachfolgend sind drei häufig verwendete Methoden aufgeführt:
+Bei der Implementierung der API-Ratenbegrenzung wählen Sie einen Ansatz, der mit den Anforderungen Ihrer Anwendung übereinstimmt. Im Folgenden sind drei häufig verwendete Methoden aufgeführt:
 
-**Fixed Window Rate Limiting**: Diese Methode legt ein Limit fest (z.B. 100 Anfragen), das sich in festen Intervallen zurücksetzt. Obwohl unkompliziert, kann sie zu Verkehrsspitzen am Ende jeder Periode führen.
+1.   **Feste Zeitrahmen-Ratenbegrenzung**: Diese Methode legt ein Limit fest (z. B. 100 Anfragen), das in festen Intervallen zurückgesetzt wird. Während es einfach ist, kann es am Ende jedes Zeitraums zu Verkehrsspitzen führen.
 
-**Sliding Window Rate Limiting**: Dieser Ansatz verwendet einen rollierenden Zeitrahmen zur Glättung des Verkehrs. Wenn beispielsweise das Limit 100 Anfragen pro Minute beträgt und ein Benutzer um 14:00:30 Uhr 50 Anfragen stellt, kann er bis 14:01:30 Uhr noch 50 weitere Anfragen stellen.
+2.   **Gleitende Zeitrahmen-Ratenbegrenzung**: Dieser Ansatz verwendet einen rollierenden Zeitrahmen, um den Verkehr zu glätten. Wenn beispielsweise das Limit 100 Anfragen pro Minute beträgt und ein Benutzer um 14:00:30 Uhr 50 Anfragen stellt, kann er bis 14:01:30 Uhr 50 weitere Anfragen stellen.
 
-**Token Bucket Algorithmus**: Diese Methode ermöglicht Flexibilität durch das Auffüllen von Tokens mit einer festgelegten Rate. Jeder API-Aufruf verbraucht ein Token, und Anfragen werden abgelehnt, wenn die Tokens aufgebraucht sind, bis sie wieder aufgefüllt werden.
+3.   **Token-Bucket-Algorithmus**: Diese Methode ermöglicht Flexibilität, indem Tokens mit einer bestimmten Rate nachgefüllt werden. Jeder API-Aufruf verwendet ein Token, und Anfragen werden abgelehnt, wenn die Tokens aufgebraucht sind, bis sie wieder aufgefüllt werden.
 
 | Methode | Vorteile | Nachteile | Am besten geeignet für |
 | --- | --- | --- | --- |
-| Fixed Window | Einfach zu implementieren, geringer Speicherverbrauch | Kann Verkehrsspitzen verursachen | Einfache API-Endpunkte |
-| Sliding Window | Gleichmäßiger Verkehrsfluss, bessere Präzision | Benötigt mehr Speicher | Benutzer-Authentifizierungs-APIs |
-| Token Bucket | Bewältigt Spitzen, anpassbar | Komplexer zu implementieren | Öffentliche APIs mit hohem Verkehrsaufkommen |
+| Fester Zeitrahmen | Einfach zu implementieren, geringer Speicherbedarf | Kann zu Verkehrsspitzen führen | Grundlegende API-Endpunkte |
+| Gleitender Zeitrahmen | Gleichmäßiger Verkehrsfluss, bessere Präzision | Benötigt mehr Speicher | Benutzer-Authentifizierungs-APIs |
+| Token-Bucket | Bewältigt Spitzen, anpassbar | Komplexer zu implementieren | Hochfrequente öffentliche APIs |
 
-Hier ist ein praktisches Beispiel unter Verwendung der Sliding-Window-Methode.
+Hier ist ein praktisches Beispiel mit der Methode des gleitenden Zeitrahmens.
 
 ### Implementierungsbeispiele
 
-Nachfolgend ein Code-Snippet, das die Implementierung des Sliding Window Rate Limiting demonstriert:
+Unten ist ein Code-Snippet, das demonstriert, wie die Ratenbegrenzung mit gleitendem Zeitrahmen implementiert werden kann:
 
-### Testen von Rate Limits
+### Testen der Ratenlimits
 
-Sobald implementiert, testen Sie Ihr Rate-Limiting-Setup gründlich, um sicherzustellen, dass es wie erwartet funktioniert. Konzentrieren Sie sich auf diese Bereiche:
+Nach der Implementierung sollten Sie Ihre Ratenbegrenzung gründlich testen, um sicherzustellen, dass sie wie erwartet funktioniert. Konzentrieren Sie sich auf diese Bereiche:
 
--   **Basis-Limit-Tests**: Senden Sie Anfragen mit normalen Raten, um die Standardfunktionalität zu bestätigen.
--   **Burst-Tests**: Simulieren Sie mehrere gleichzeitig gesendete Anfragen, um zu überprüfen, ob Limits durchgesetzt werden.
--   **Wiederherstellungs-Tests**: Prüfen Sie, wie sich das System verhält, sobald das Limit zurückgesetzt wird.
+1.   **Basislimit-Test**: Senden Sie Anfragen mit normalen Raten, um die Standardfunktionalität zu bestätigen.
+2.   **Spitzentest**: Simulieren Sie mehrere gleichzeitig gesendete Anfragen, um zu überprüfen, ob die Limits durchgesetzt werden.
+3.   **Wiederherstellungstest**: Überprüfen Sie, wie das System reagiert, sobald das Limit zurückgesetzt wird.
 
-### Leistungsüberwachung
+### Überwachung der Leistung
 
-Überwachen Sie nach der Bereitstellung wichtige Metriken, um sicherzustellen, dass Ihr Rate-Limiting-System unter verschiedenen Bedingungen gut funktioniert:
+Nach der Bereitstellung sollten Sie wichtige Kennzahlen überwachen, um sicherzustellen, dass Ihr Ratenbegrenzungssystem unter verschiedenen Bedingungen gut funktioniert:
 
--   Gesamtanzahl der Anfragen innerhalb jedes Zeitfensters
--   Anzahl der abgelehnten Anfragen
--   Antwortzeiten bei hohem Verkehrsaufkommen
--   Fehlerraten und deren Ursachen
+1.   Gesamtzahl der in jedem Zeitfenster bearbeiteten Anfragen
+2.   Anzahl der abgelehnten Anfragen
+3.   Antwortzeiten während des hohen Verkehrs
+4.   Fehlerquoten und deren Ursachen
 
-Diese Daten helfen Ihnen, Ihr System für optimale Leistung feinabzustimmen.
+Diese Daten helfen Ihnen, Ihr System für eine optimale Leistung zu optimieren.
 
-## Rate Limiting Standards
+## Standards für Ratenbegrenzung
 
-### Festlegen von Rate Limits
+### Festlegung von Ratenlimits
 
-Um die richtige Balance zwischen Benutzererfahrung und Serverschutz zu finden, evaluieren Sie die Verkehrsmuster und Endpunktanforderungen Ihrer API. Verlassen Sie sich nicht auf feste Schwellenwerte, sondern passen Sie Rate Limits an die spezifischen Bedürfnisse Ihrer API an. Passen Sie diese Limits im Laufe der Zeit basierend auf tatsächlichen Nutzungsdaten an, um ihre Effektivität und Praktikabilität zu gewährleisten.
+Um das richtige Gleichgewicht zwischen Benutzererfahrung und Serverschutz zu finden, bewerten Sie die Verkehrsmuster und die Anforderungen Ihrer API-Endpunkte. Anstatt sich auf feste Schwellenwerte zu verlassen, gestalten Sie die Ratenlimits so, dass sie den spezifischen Bedürfnissen Ihrer API entsprechen. Passen Sie diese Limits im Laufe der Zeit basierend auf realen Nutzungsdaten an, um sicherzustellen, dass sie effektiv und praktikabel bleiben.
 
-### Design der Fehlerantwort
+### Gestaltung der Fehlermeldungen
 
-Wenn ein Client das Rate Limit überschreitet, antworten Sie mit einem **429 Status Code**. Fügen Sie Header hinzu, die das Gesamtlimit, verbleibende Anfragen, Zurücksetzzeit und ein Wiederholungsintervall angeben. Dieses detaillierte Feedback hilft Entwicklern, ihre Anwendungen an die Limits Ihrer API anzupassen.
+Wenn ein Client das Ratenlimit überschreitet, antworten Sie mit einem **429-Statuscode**. Fügen Sie Header hinzu, die das gesamte Limit, verbleibende Anfragen, Rücksetzzeit und ein Wiederholungsintervall angeben. Dieses detaillierte Feedback hilft Entwicklern, ihre Anwendungen an die Limits Ihrer API anzupassen.
 
-### Prozess zur Limit-Anpassung
+### Prozess zur Anpassung der Limits
 
-Regelmäßiges Überprüfen der Rate Limits ist wichtig für die Aufrechterhaltung der Leistung und die Erfüllung von Compliance-Anforderungen. Überwachen Sie Faktoren wie Spitzenverkehr, Fehlerraten und Serverauslastung, um notwendige Anpassungen zu identifizieren. Berücksichtigen Sie Benutzerfeedback, um sicherzustellen, dass Ihre Limits sowohl die betriebliche Effizienz als auch App Store-Richtlinien unterstützen.
+Die regelmäßige Überprüfung der Ratenlimits ist entscheidend, um die Leistung aufrechtzuerhalten und die Konformitätsanforderungen zu erfüllen. Überwachen Sie Faktoren wie Spitzenverkehr, Fehlerquoten und Serverlast, um notwendige Anpassungen zu identifizieren. Berücksichtigen Sie das Feedback der Benutzer, um sicherzustellen, dass Ihre Limits sowohl die betriebliche Effizienz als auch die Richtlinien des App Stores unterstützen.
 
-## [Capgo](https://capgo.app/)'s Rate Limiting Tools
+## [Capgo](https://capgo.app/)'s Ratenbegrenzungswerkzeuge
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
-Capgo bietet integrierte Tools zur Durchsetzung von API-Rate-Limits bei gleichzeitiger Gewährleistung hoher Leistung und Einhaltung der App Store-Anforderungen.
+Capgo bietet integrierte Werkzeuge, die darauf ausgelegt sind, API-Ratenlimits durchzusetzen und gleichzeitig hohe Leistung und Konformität mit den Anforderungen des App Stores zu gewährleisten.
 
-### Capgo Compliance-Funktionen
+### Capgo-Konformitätsfunktionen
 
-Capgo bietet eine Reihe von Tools zur Einhaltung von API-Rate-Limits und App Store-Richtlinien. Sein Update-Delivery-System erreicht eine beeindruckende Update-Erfolgsrate von 82% bei einer durchschnittlichen API-Antwortzeit von 434 ms [\[1\]](https://capgo.app/). Dazu gehören:
+Capgo bietet eine Reihe von Werkzeugen, die dazu beitragen, die API-Ratenlimits aufrechtzuerhalten und die Richtlinien des App Stores zu erfüllen. Sein Update-Liefersystem erzielt eine beeindruckende Erfolgsquote von 82 % bei Updates und hat eine durchschnittliche API-Antwortzeit von 434 ms [\[1\]](https://capgo.app/). Hier ist, was es beinhaltet:
 
--   **Echtzeit-Analysen**: Verfolgen Sie Update-Verteilung und API-Nutzung.
--   **Fehlerverfolgung**: Schnelle Identifizierung und Behebung von Rate-Limit-Problemen.
--   **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: Effektives Management von Update-Rollouts.
--   **Verschlüsselung**: Schutz der API-Kommunikation.
+1.   **Echtzeitanalysen**: Verfolgen Sie die Verteilung von Updates und die API-Nutzung.
+2.   **Fehlerverfolgung**: Identifizieren und beheben Sie Probleme mit der Ratenbegrenzung schnell.
+3.   **[Kanal-System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: Verwalten Sie Aktualisierungen effektiv.
+4.   **Verschlüsselung**: Schützen Sie API-Kommunikationen.
 
-Diese Tools arbeiten neben Standard-Rate-Limiting-Praktiken und bieten Echtzeit-Daten und proaktive Fehlerbehebung. Capgos System wurde in 750 Produktions-Apps getestet und lieferte 23,5 Millionen Updates bei gleichzeitiger Einhaltung der Compliance und hoher Leistung [\[1\]](https://capgo.app/).
+Diese Werkzeuge arbeiten zusammen mit den gängigen Praktiken zur Ratenbegrenzung und bieten Echtzeitdaten und proaktive Fehlerbehebung. Das System von Capgo wurde in 750 Produktions-Apps getestet und lieferte 23,5 Millionen Updates, während es die Konformität und eine starke Leistung aufrechterhielt [\[1\]](https://capgo.app/).
 
-### Rate Limiting mit Capgo
+### Ratenbegrenzung mit Capgo
 
-Capgos Rate-Limiting-Tools integrieren sich nahtlos in Ihren [Capacitor](https://capacitorjs.com/)-Workflow. Sie helfen dabei, eine 95%ige Benutzer-Update-Rate innerhalb von 24 Stunden zu erreichen, während die API-Leistung stabil bleibt [\[1\]](https://capgo.app/).
+Die Ratenbegrenzungswerkzeuge von Capgo integrieren sich nahtlos in Ihren [Capacitor](https://capacitorjs.com/)-Arbeitsablauf. Sie helfen dabei, eine Benutzerupdate-Rate von 95 % innerhalb von 24 Stunden zu erreichen und gleichzeitig die API-Leistung stabil zu halten [\[1\]](https://capgo.app/).
 
-Hier ist eine Aufschlüsselung von Capgos Ansatz:
+Hier ist eine Übersicht über den Ansatz von Capgo:
 
 | Funktion | Implementierung | Vorteil |
 | --- | --- | --- |
-| **Globales CDN** | 114 ms Downloadgeschwindigkeit für 5 MB Bundles | Reduziert Serverauslastung |
-| **Kanal-Distribution** | Stufenweise Einführungen und Beta-Tests | Steuert API-Verkehrsfluss |
-| **Analytics Dashboard** | Echtzeit-Überwachung | Misst Rate-Limit-Leistung |
-| **Fehlermanagement** | Automatische Problemerkennung | Vermeidet Rate-Limit-Verstöße |
+| **Globale CDN** | 114 ms Downloadgeschwindigkeit für 5 MB-Bundles | Reduziert die Serverlast |
+| **Kanalverteilung** | Stufenweise Bereitstellungen und Beta-Tests | Kontrolliert den API-Verkehr |
+| **Analytisches Dashboard** | Echtzeitüberwachung | Misst die Leistung der Ratenbegrenzung |
+| **Fehlerverwaltung** | Automatische Problemerkennung | Vermeidet Verstöße gegen die Ratenbegrenzung |
 
-> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch für die kontinuierliche Auslieferung an unsere Nutzer!"
+> "Wir praktizieren agile Entwicklung und @Capgo ist unerlässlich, um kontinuierlich an unsere Benutzer zu liefern!"
 
-Führen Sie zum Einstieg folgenden Befehl aus: `npx @capgo/cli init`. Dieser Befehl richtet die notwendigen Rate-Limits ein und stellt sicher, dass Ihre App die Anforderungen von Apple und Google Store erfüllt.
+Um zu beginnen, führen Sie aus: `npx @capgo/cli init`. Dieser Befehl richtet die erforderlichen Ratenlimits ein und stellt sicher, dass Ihre App den Anforderungen von Apple und Google im Store entspricht.
 
 ## Zusammenfassung
 
 ### Hauptpunkte
 
-API-Rate-Limiting spielt eine entscheidende Rolle bei der Erfüllung von App-Store-Anforderungen und der Gewährleistung eines reibungslosen Systembetriebs. Hier ist eine kurze Aufschlüsselung:
+API-Ratenbegrenzung spielt eine entscheidende Rolle bei der Erfüllung der Anforderungen des App Stores und der Gewährleistung eines reibungslosen Betriebs Ihres Systems. Hier ist eine kurze Übersicht:
 
-| Aspekt | Anforderung | Auswirkung |
+| Aspekt | Anforderung | Auswirkungen |
 | --- | --- | --- |
-| **Sicherheit** | Ende-zu-Ende-Verschlüsselung | Schützt API-Kommunikation und Nutzerdaten |
-| **Überwachung** | Analytics | Verfolgt API-Nutzung und hilft Verstöße zu vermeiden |
+| **Sicherheit** | End-to-End-Verschlüsselung | Schützt API-Kommunikationen und Benutzerdaten |
+| **Überwachung** | Analytik | Verfolgt die API-Nutzung und hilft, Verstöße zu vermeiden |
 
-Nutzen Sie die folgende Checkliste, um Ihre Rate-Limiting-Strategie mit den App-Store-Richtlinien abzustimmen.
+Verwenden Sie die folgende Checkliste, um Ihre Ratenbegrenzungsstrategie mit den Richtlinien des App Stores in Einklang zu bringen.
 
-### Implementierungs-Checkliste
+### Implementierungscheckliste
 
-Befolgen Sie diese Schritte, um eine solide Rate-Limiting-Strategie zu implementieren:
+Um eine solide Ratenbegrenzungsstrategie umzusetzen, befolgen Sie diese Schritte:
 
--   **Rate-Limits festlegen**
+1.   **Ratenlimits festlegen**
     
-    -   Definieren Sie globale Rate-Limits basierend auf App-Store-Regeln.
-    -   Verwenden Sie exponentielles Backoff für Wiederholungsmechanismen.
-    -   Konfigurieren Sie angemessene Fehlerantworten, wie 429-Statuscodes.
--   **Überwachen und Anpassen**
+    1.   Definieren Sie globale Ratenlimits basierend auf den Vorschriften des App Stores.
+    2.   Verwenden Sie exponentielles Backoff für Wiederholmechanismen.
+    3.   Konfigurieren Sie die richtigen Fehlermeldungen, wie z. B. 429-Statuscodes.
+2.   **Überwachen und Anpassen**
     
-    -   Analysieren Sie API-Nutzung mit detaillierten Analytics.
-    -   Richten Sie automatisierte Warnungen ein, um potenzielle Verstöße frühzeitig zu erkennen.
-    -   Aktualisieren Sie Limits bei Bedarf basierend auf realer Leistung.
--   **Testen und Validieren**
+    1.   Analysieren Sie die API-Nutzung mit detaillierten Analysen.
+    2.   Stellen Sie automatisierte Warnungen ein, um potenzielle Verstöße frühzeitig zu erkennen.
+    3.   Aktualisieren Sie die Limits nach Bedarf basierend auf der realen Leistung.
+3.   **Testen und Validieren**
     
-    -   Führen Sie Lasttests durch, um Stabilität sicherzustellen.
-    -   Überprüfen Sie, ob Fehlerantworten die Compliance-Anforderungen erfüllen.
-    -   Führen Sie gründliche Dokumentation Ihrer Compliance-Bemühungen.
+    1.   Führen Sie Lasttests durch, um die Stabilität sicherzustellen.
+    2.   Überprüfen Sie, ob die Fehlermeldungen den Konformitätsanforderungen entsprechen.
+    3.   Führen Sie ausführliche Dokumentationen über Ihre Compliance-Bemühungen.

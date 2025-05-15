@@ -1,9 +1,10 @@
 ---
 slug: testing-capacitor-ota-updates
-title: Pruebas de actualizaciones OTA de Capacitor
+title: Testando atualizações OTA do Capacitor
 description: >-
-  Learn how to safely and effectively test Capacitor app updates using essential
-  tools and strategies to ensure smooth deployment and security.
+  Apprenez à tester efficacement les mises à jour OTA pour votre application
+  Capacitor, en garantissant des déploiements fluides et une sécurité renforcée
+  grâce à des outils et des stratégies essentiels.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -11,7 +12,7 @@ created_at: 2025-04-12T02:57:37.246Z
 updated_at: 2025-04-12T02:57:57.476Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   OTA updates, Capacitor, testing, Capgo, mobile app deployment, security,
   performance, version control
@@ -20,239 +21,240 @@ published: true
 locale: it
 next_blog: ''
 ---
+**OTA updates let you fix bugs, add features, and update your [Capacitor](https://capacitorjs.com/) app instantly - no app store delays.** Here's how to test them effectively:
 
-**Gli aggiornamenti OTA ti permettono di correggere bug, aggiungere funzionalità e aggiornare la tua app [Capacitor](https://capacitorjscom/) istantaneamente - nessun ritardo dell'app store** Ecco come testarli efficacemente:
+-   **What Are OTA Updates?** They push live changes directly to users' devices, skipping app store reviews. This saves time and quickly addresses issues.
+-   **Why Testing Matters:** Poorly tested updates can crash apps or break compliance. With proper testing, 95% of updates succeed within 24 hours.
+-   **Tools You'll Need:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) Plugin, and a testing framework like [Cypress](https://www.cypress.io/).
+-   **Steps to Test:**
+    1.  Configure your test environment and Capgo settings.
+    2.  Validate update processes like detection, download, installation, and rollback.
+    3.  Use Capgo's analytics and rollback tools to monitor and fix issues.
+    4.  Ensure compliance with app store rules.
 
--   **Cosa sono gli aggiornamenti OTA?** Inviano modifiche in tempo reale direttamente sui dispositivi degli utenti, saltando le revisioni dell'app store Questo fa risparmiare tempo e risolve rapidamente i problemi
--   **Perché il testing è importante:** Aggiornamenti testati male possono causare crash o violare la conformità Con test appropriati, il 95% degli aggiornamenti ha successo entro 24 ore
--   **Strumenti necessari:** Capacitor CLI (v6+), [Nodejs](https://nodejsorg/en) (v16+), Plugin [Capgo](https://capgoapp/), e un framework di testing come [Cypress](https://wwwcypressio/)
--   **Passi per testare:**
-    1. Configura il tuo ambiente di test e le impostazioni Capgo
-    2. Valida i processi di aggiornamento come rilevamento, download, installazione e rollback
-    3. Usa gli strumenti di analisi e rollback di Capgo per monitorare e risolvere problemi
-    4. Assicura la conformità con le regole dell'app store
+**Key Features of Capgo:**
 
-**Funzionalità chiave di Capgo:**
+-   End-to-end encryption for secure updates.
+-   Rollback options for quick fixes.
+-   [Channel-based rollouts](https://capgo.app/docs/webapp/channels/) for phased testing.
+-   Fast updates via a global CDN (5MB in ~114ms).
 
--   Crittografia end-to-end per aggiornamenti sicuri
--   Opzioni di rollback per correzioni rapide
--   [Rilasci basati su canali](https://capgoapp/docs/webapp/channels/) per test graduali
--   Aggiornamenti veloci tramite CDN globale (5MB in ~114ms)
+**Pro Tip:** Use staged rollouts to test updates on small user groups before full deployment. Capgo's tools make this process smooth and secure.
 
-**Suggerimento Pro:** Usa rilasci graduali per testare gli aggiornamenti su piccoli gruppi di utenti prima del rilascio completo Gli strumenti Capgo rendono questo processo fluido e sicuro
+## Explore [Capawesome](https://capawesome.io/)'s New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
 
-## Esplora il nuovo aggiornamento live Ionic [Capacitor](https://capacitorjscom/) di [Capawesome](https://capawesomeio/)
+![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
-![Capawesome](https://assetsseobotaicom/capgoapp/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54jpg)
+## Test Environment Setup
 
-## Configurazione ambiente di test
+Setting up a proper test environment is key to validating OTA updates effectively.
 
-Configurare un ambiente di test appropriato è fondamentale per validare efficacemente gli aggiornamenti OTA
+### Required Software
 
-### Software necessario
+Here are the essential tools you'll need for OTA testing:
 
-Ecco gli strumenti essenziali necessari per il testing OTA:
-
-| Componente Software | Scopo | Requisiti Versione |
+| Software Component | Purpose | Version Requirements |
 | --- | --- | --- |
-| Capacitor CLI | Strumenti di sviluppo core | 60 o superiore |
-| Nodejs | Ambiente runtime | 160+ |
-| [Plugin Capgo](https://capgoapp/plugins/) | Gestisce aggiornamenti OTA | Ultima versione |
-| Framework di Testing | Testing automatizzato (es. Cypress o [Appium](http://appiumio/)) | N/A |
+| Capacitor CLI | Core development tools | 6.0 or higher |
+| Node.js | Runtime environment | 16.0+ |
+| [Capgo Plugin](https://capgo.app/plugins/) | Manages OTA updates | Latest version |
+| Testing Framework | Automated testing (e.g., Cypress or [Appium](http://appium.io/)) | N/A |
 
-### Configurazione ambiente
+### Environment Configuration
 
-Inizia aggiornando il file `capacitorconfigjson` con le impostazioni appropriate del server di staging e le preferenze di aggiornamento
+Start by updating the `capacitor.config.json` file with the appropriate staging server settings and update preferences.
 
-Successivamente, [inizializza le configurazioni Capgo](https://capgoapp/docs/cli/commands) eseguendo il seguente comando:
+Next, [initialize Capgo configurations](https://capgo.app/docs/cli/commands) by running the following command:
 
-Una volta configurato, sei pronto per integrare gli aggiornamenti OTA nella tua app
+Once configured, you're ready to integrate OTA updates into your app.
 
-### Passaggi configurazione app
+### App Setup Steps
 
-Dopo l'inizializzazione, integra la funzionalità di aggiornamento OTA nella tua app Questo sistema gestisce attività come creazione pacchetti, controllo versioni, distribuzione e sicurezza
+After initialization, integrate the OTA update functionality into your app. This system handles tasks like package creation, version control, distribution, and security.
 
-Per sicurezza a livello enterprise, Capgo fornisce opzioni sia cloud che self-hosted
+For enterprise-level security, Capgo provides both cloud-based and self-hosted options.
 
-Quando l'integrazione è completa, compila la tua app e attiva gli aggiornamenti usando la CLI Capgo Poiché Capgo funziona perfettamente con Capacitor 6 e 7, supporta un'ampia gamma di ambienti di sviluppo moderni
+When the integration is complete, build your app and trigger updates using the Capgo CLI. Since Capgo works seamlessly with Capacitor 6 and 7, it supports a wide range of modern development environments.
 
-Questi passaggi gettano le basi per un test approfondito degli aggiornamenti OTA, che sarà trattato nella prossima sezione sui Metodi di Testing
+These steps lay the groundwork for thorough OTA update testing, which will be covered in the next section on Testing Methods.
 
-## Metodi di Testing
+## Testing Methods
 
-Con l'ambiente configurato e l'app impostata, è il momento di validare il processo di aggiornamento Il testing degli aggiornamenti over-the-air (OTA) richiede un approccio strutturato per garantire che i rilasci siano affidabili e sicuri
+With your environment configured and app set up, it’s time to validate the update process. Testing over-the-air (OTA) updates requires a structured approach to ensure deployments are reliable and secure.
 
-### Testing dei componenti 
+### Component Testing
 
-Questa fase si concentra sulla verifica dei singoli meccanismi di aggiornamento e delle loro interazioni tra i livelli web e nativi L'obiettivo è garantire un'integrazione fluida:
+This step focuses on verifying individual update mechanisms and their interactions across both web and native layers. The goal is to ensure smooth integration:
 
-| Tipo di Test | Area di Focus | Criteri di Successo |
+| Test Type | Focus Area | Success Criteria |
 | --- | --- | --- |
-| Rilevamento Aggiornamenti | Controllo versione | Tempo di risposta ~434ms |
-| Processo Download | [Download bundle](https://capgoapp/docs/webapp/bundles/) | Bundle 5MB in ~114ms |
-| Installazione | Applicazione aggiornamento | Integrazione riuscita |
-| Rollback | Reversione versione | Rollback riuscito |
+| Update Detection | Version checking | ~434ms response time |
+| Download Process | [Bundle download](https://capgo.app/docs/webapp/bundles/) | 5MB bundle in ~114ms |
+| Installation | Update application | Successful integration |
+| Rollback | Version reversion | Successful rollback |
 
-La CDN globale di Capgo aiuta a mantenere velocità di download costanti, con un tempo medio di risposta API di 434ms [\[1\]](https://capgoapp/)Questi test a livello di componente costituiscono la base per valutare le prestazioni complessive del sistema.
+Capgo’s global CDN helps maintain steady download speeds, with an average API response time of 434ms [\[1\]](https://capgo.app/). These tests at the component level form the groundwork for evaluating overall system performance.
 
-### Test di Sistema Completi
+### Full System Tests
 
-I test completi utilizzando dati di produzione dovrebbero confermare quanto segue:
+Comprehensive testing using production data should confirm the following:
 
--   Gli aggiornamenti vengono rilevati e scaricati in modo affidabile 
--   Le installazioni hanno successo su vari dispositivi
--   L'impatto sulle prestazioni è minimo
--   L'app gestisce efficacemente i problemi di rete
+-   Updates are detected and downloaded reliably
+-   Installations are successful across various devices
+-   Performance impact is minimal
+-   The app handles network issues effectively
 
-> "Abbiamo distribuito gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido; quasi tutti i nostri utenti sono aggiornati entro pochi minuti dal deployment dell'OTA su @Capgo"
-> – colenso [\[1\]](https://capgoapp/)
+> "We rolled out Capgo OTA updates in production for our user base of +5000. We're seeing very smooth operation; almost all our users are up to date within minutes of the OTA being deployed to @Capgo."  
+> – colenso [\[1\]](https://capgo.app/)
 
-### Conformità agli App Store
+### App Store Compliance
 
-Una volta verificata la funzionalità, assicurarsi che gli aggiornamenti rispettino le linee guida degli app store. Gli aggiornamenti OTA devono soddisfare requisiti come limiti di dimensione, standard dei contenuti, aspettative di prestazioni e consenso dell'utente.
+Once functionality is verified, ensure updates comply with app store guidelines. OTA updates must meet requirements such as size limits, content standards, performance expectations, and user consent.
 
-Per mantenere la conformità e migliorare l'efficienza, considerare i rollout graduali. Il [sistema di canali](https://capgoapp/docs/plugin/cloud-mode/channel-system/) di Capgo consente di targetizzare specifici gruppi di utenti per i test beta prima di una distribuzione completa. Per le app aziendali, la sua crittografia end-to-end garantisce che solo gli utenti autorizzati possano decrittografare e applicare gli aggiornamenti, mantenendo sicuri i contenuti sensibili.
+To stay compliant and improve efficiency, consider staged rollouts. Capgo’s [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) allows you to target specific user groups for beta testing before a full deployment. For enterprise apps, its end-to-end encryption ensures that only authorized users can decrypt and apply updates, keeping sensitive content secure.
 
-## Linee Guida per i Test
+## Testing Guidelines
 
-### Gestione del Rischio
+### Risk Management
 
-La gestione dei rischi negli aggiornamenti OTA comporta l'implementazione di diverse misure protettive. Un approccio chiave sono gli **aggiornamenti differenziali**, che inviano solo le parti modificate del codice. Questo riduce la dimensione dei download e minimizza i potenziali errori.
+Managing risks in OTA updates involves implementing several protective measures. One key approach is **differential updates**, which send only the modified parts of the code. This reduces the size of downloads and minimizes potential errors.
 
-| Strategia di Mitigazione del Rischio | Implementazione | Beneficio |
+| Risk Mitigation Strategy | Implementation | Benefit |
 | --- | --- | --- |
-| Aggiornamenti Differenziali | Invia solo i segmenti di codice modificati | Download più piccoli |
-| Rollout Graduali | Distribuisce gli aggiornamenti in fasi | Limita l'esposizione al rischio |
-| Meccanismo di Rollback | Permette di tornare alle versioni precedenti | Risoluzione rapida dei problemi |
+| Differential Updates | Sends only modified code segments | Smaller downloads |
+| Staged Rollouts | Distributes updates in phases | Limits risk exposure |
+| Rollback Mechanism | Allows reverting to previous versions | Quick problem resolution |
 
-Il [sistema di canali di Capgo](https://capgoapp/docs/plugin/cloud-mode/channel-system/) facilita la distribuzione degli aggiornamenti a specifici gruppi di utenti, come i beta tester, prima di distribuirli ampiamente [\[1\]](https://capgoapp/). Questo approccio graduale garantisce che gli aggiornamenti siano validati in gruppi più piccoli, riducendo la possibilità di problemi diffusi. Una volta che i rischi sono sotto controllo, gli sviluppatori possono quindi dare priorità alla sicurezza degli aggiornamenti stessi.
+[Capgo's channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) makes it easier for developers to distribute updates to specific user groups, such as beta testers, before rolling them out widely [\[1\]](https://capgo.app/). This phased approach ensures updates are validated in smaller groups, reducing the chance of widespread issues. Once risks are under control, developers can then prioritize securing the updates themselves.
 
-### Controlli di Sicurezza
+### Security Checks
 
-La sicurezza è una priorità assoluta quando si testano gli aggiornamenti OTA. L'utilizzo della **crittografia end-to-end** garantisce che solo gli utenti autorizzati possano accedere e installare gli aggiornamenti, mantenendo i dati sensibili al sicuro durante la distribuzione.
+Security is a top priority when testing OTA updates. Using **end-to-end encryption** ensures that only authorized users can access and install updates, keeping sensitive data safe during deployment.
 
-> "L'unica soluzione con vera crittografia end-to-end, gli altri si limitano a firmare gli aggiornamenti" - Capgo [\[1\]](https://capgoapp/)
+> "The only solution with true end-to-end encryption, others just sign updates" - Capgo [\[1\]](https://capgo.app/)
 
-I passaggi chiave per la sicurezza includono:
+Key security steps include:
 
--   [Crittografare gli aggiornamenti](https://capgoapp/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) dall'inizio alla fine
--   Verificare l'autenticità degli aggiornamenti prima dell'installazione
--   Limitare l'accesso agli aggiornamenti solo agli utenti autorizzati
+-   [Encrypting updates](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) from start to finish
+-   Verifying the authenticity of updates before installation
+-   Restricting access to updates to authorized users only
 
-Gli strumenti di tracciamento degli errori di Capgo aiutano ulteriormente identificando i problemi relativi alla sicurezza in anticipo, permettendo agli sviluppatori di correggere le vulnerabilità prima che influenzino gli utenti [\[1\]](https://capgoapp/)
+Capgo's error tracking tools further assist by identifying security-related problems early, allowing developers to fix vulnerabilities before they affect users [\[1\]](https://capgo.app/).
 
-### Controllo Versioni
+### Version Control
 
-Dopo aver affrontato la sicurezza, mantenere un corretto controllo delle versioni è essenziale per garantire che gli aggiornamenti funzionino come previsto. L'uso del **versionamento semantico** aiuta a strutturare i test ed evitare problemi di compatibilità.
+After addressing security, maintaining proper version control is essential to ensure updates work as intended. Using **semantic versioning** helps structure testing and avoid compatibility issues.
 
-Le migliori pratiche per il controllo delle versioni negli aggiornamenti OTA includono:
+Best practices for version control in OTA updates include:
 
--   Configurare canali separati per sviluppo, staging e produzione
--   Testare gli aggiornamenti su versioni specifiche per confermare la compatibilità
--   Assicurarsi che gli aggiornamenti vengano applicati nell'ordine corretto per prevenire conflitti
+-   Setting up separate channels for development, staging, and production
+-   Testing updates on specific versions to confirm compatibility
+-   Ensuring updates are applied in the correct order to prevent conflicts
 
-Il sistema di canali di Capgo semplifica anche la gestione delle versioni, garantendo che gli aggiornamenti vengano distribuiti in modo accurato ed efficiente.
+Capgo's channel system also simplifies managing versions, ensuring updates are deployed accurately and efficiently.
 
-## Strumenti di Test [Capgo](https://capgoapp/)
+## [Capgo](https://capgo.app/) Testing Tools
 
-![Capgo](https://assetsseobotaicom/capgoapp/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
 
-### Funzionalità di Capgo
+### Capgo Features
 
-Capgo fornisce strumenti specializzati per testare gli [aggiornamenti OTA di Capacitor](https://capgoapp/ja/）、**エンドツーエンドの暗号化**による安全な配信と、更新パフォーマンスを監視する**リアルタイム分析**を提供します。これらのツールにより、開発者は強力なセキュリティ対策を維持しながら、正確に更新をデプロイできます。
+Capgo provides specialized tools for testing [Capacitor OTA updates](https://capgo.app/ja/), ensuring secure delivery with **end-to-end encryption** and offering **real-time analytics** to monitor update performance. These tools allow developers to deploy updates accurately while maintaining strong security measures.
 
-| 機能 | 説明 |
+| Feature | Description |
 | --- | --- |
-| **アップデート配信** | スケールに応じた信頼性の高いパフォーマンス |
-| **チャネルシステム** | ターゲットを絞ったロールアウトの制御 |
-| **分析ダッシュボード** | 更新パフォーマンスのライブ追跡 |
-| **セキュリティ機能** | 更新の暗号化を確保 |
+| **Update Delivery** | Reliable performance at scale |
+| **Channel System** | Control over targeted rollouts |
+| **Analytics Dashboard** | Live tracking of update performance |
+| **Security Features** | Ensures updates are encrypted |
 
-これらの機能により、テストワークフローが簡素化・強化され、Capgo CLIによってさらに最適化されます。
+These features simplify and enhance testing workflows, which are further optimized by the Capgo CLI.
 
-### Capgoでのテスト
+### Testing with Capgo
 
-Capgo CLIを使用することで、開発者はビルドとデプロイメントのタスクを自動化し、テストをより効率的にできます。プラットフォームのチャネルシステムにより、テストフェーズ中の正確な制御が可能です：
+Using the Capgo CLI, developers can automate build and deployment tasks, making testing more efficient. The platform's channel system allows for precise control during testing phases:
 
--   **ベータテストのセットアップ**  
-    開発者は開発、ステージング、本番用の個別の環境を作成でき、構造化された制御されたテストフェーズを実現できます
+-   **Beta Testing Setup**  
+    Developers can create separate environments for development, staging, and production, enabling structured and controlled testing phases.
     
--   **更新の配布**  
-    特定のユーザーグループに更新をデプロイでき、進捗状況とパフォーマンスをリアルタイムで追跡できます
+-   **Update Distribution**  
+    Updates can be deployed to specific user groups, with real-time tracking of progress and performance.
     
 
-### Capgoでのデバッグ
+### Debug with Capgo
 
-Capgoには堅牢な[デバッグスイート](https://capgoapp/docs/plugin/debugging/)が含まれており、リアルタイム分析とエラー追跡により、開発者はテスト中の問題を素早く特定して対処できます。**ワンクリックロールバック**機能により、以前のバージョンに簡単に戻すことができ、ダウンタイムを削減できます。
+Capgo includes a robust [debugging suite](https://capgo.app/docs/plugin/debugging/) with real-time analytics and error tracking, helping developers quickly identify and address issues during testing. A **one-click rollback** feature makes it easy to revert to previous versions, reducing downtime.
 
-エラー追跡システムは以下のような洞察を提供します：
+The error tracking system provides insights such as:
 
--   更新インストールの成功率
--   ユーザーエンゲージメントの指標
--   パフォーマンスのボトルネックの特定
+-   Success rates for update installations
+-   Metrics for user engagement
+-   Identification of performance bottlenecks
 
-デバッグツールとシームレスなCI/CD統合により、Capgoはクラウドベースとセルフホスト型の両方のセットアップで効率的なテストをサポートします。[\[1\]](https://capgoapp/)
+With its debugging tools and seamless CI/CD integration, Capgo supports efficient testing for both cloud-based and self-hosted setups [\[1\]](https://capgo.app/).
 
-## 一般的な問題
+## Common Issues
 
-### バージョンの問題
+### Version Issues
 
-OTA更新中のバージョンの不一致によりデプロイメントの問題が発生する可能性があります。以下が典型的なシナリオです：
+Version mismatches during OTA updates can lead to deployment problems. Here are some typical scenarios:
 
-| 問題の種類 | 一般的な原因 | 解決策 |
+| Tipo de Problema | Causa Común | Solución |
 | --- | --- | --- |
-| 設定の不一致 | capacitor.config.jsonのバージョンが不正確 | デプロイメント設定とバージョン番号が一致していることを確認 |
-| バンドルの競合 | 配布中の複数のバージョン | Capgoのチャネルシステムを使用してバージョン管理を効果的に行う |
-| 更新順序 | 順序が不正な更新 | 適切なバージョン追跡を設定して更新が正しい順序で適用されることを確保 |
+| Desajuste de Configuración | Versión incorrecta en capacitor.config.json | Verifica que los números de versión coincidan con las configuraciones de implementación. |
+| Paquetes Conflictivos | Múltiples versiones en distribución | Utiliza el sistema de canales de Capgo para gestionar el control de versiones de manera efectiva. |
+| Secuencia de Actualización | Actualizaciones fuera de orden | Establece un seguimiento adecuado de versiones para asegurarte de que las actualizaciones se apliquen en el orden correcto. |
 
-Capgoのチャネルシステムは、個別の環境を作成することで、更新が正しい順序に従うようにし、不一致のリスクを軽減します。
+El sistema de canales de Capgo ayuda creando entornos separados, asegurando que las actualizaciones sigan la secuencia correcta y reduciendo el riesgo de desajustes.
 
-### 更新エラー
+### Errores de Actualización
 
-ネットワークの不具合や不完全なダウンロードが更新失敗の原因となることがよくあります。Capgoのエラー追跡システムはこれらの問題を特定します：
+Los fallos en la red o las descargas incompletas están a menudo detrás de las fallas de actualización. El sistema de seguimiento de errores de Capgo identifica estos problemas, que pueden incluir:
 
--   接続タイムアウト
--   不完全なバンドル転送
--   サーバーの遅延
+-   Agotamientos de conexión
+-   Transferencias de paquetes incompletas
+-   Retrasos del servidor
 
-堅牢なエラー処理と信頼性の高いCDNにより、Capgoは24時間以内に95%のアクティブユーザーに更新を届けることができます。[\[1\]](https://capgoapp/)
+Gracias a un manejo de errores robusto y a una CDN confiable, Capgo asegura que las actualizaciones lleguen al 95% de los usuarios activos en 24 horas [\[1\]](https://capgo.app/).
 
-> "詳細な分析とエラー追跡"機能により、開発者は更新中に"何か問題が発生した場合、即座にロールバックできる"ことを保証します。[\[1\]](https://capgoapp/)
+> "Las capacidades de análisis detallado y seguimiento de errores" aseguran que los desarrolladores puedan "revertir instantáneamente si algo sale mal" durante las actualizaciones [\[1\]](https://capgo.app/).
 
-### 速度の問題
+### Problemas de Velocidad
 
-Capgoのグローバルなブイ CDNは5MBのバンドルを114ミリ秒で配信し、APIの平均応答時間は434ミリ秒です。プラットフォームのスマートな差分更新により、変更された部分のみをダウンロードすることで帯域幅の使用をさらに削減します。[\[1\]](https://capgoapp/)
+La CDN global de Capgo entrega paquetes de 5MB en solo 114ms, con un tiempo de respuesta API promedio de 434ms. Las actualizaciones diferenciales inteligentes de la plataforma reducen aún más el uso de ancho de banda al descargar solo las partes que han cambiado [\[1\]](https://capgo.app/).
 
-> "部分更新：スマートな差分更新により、変更された部分のみをダウンロードし、帯域幅と時間を節約します"[\[1\]](https://capgoapp/)
+> "Actualizaciones Parciales: Actualizaciones diferenciales inteligentes. Descarga solo lo que ha cambiado, ahorrando ancho de banda y tiempo" [\[1\]](https://capgo.app/).
 
-更新を高速かつ効率的に保つために、開発者は以下を行うべきです：
+Para mantener las actualizaciones rápidas y eficientes, los desarrolladores deberían:
 
--   リアルタイム分析を使用してパフォーマンスのボトルネックを特定する
--   より迅速なデプロイメントのために部分更新を利用する
--   安定した配信速度のためにCDN配信を活用する
+-   Utilizar análisis en tiempo real para detectar cuellos de botella en el rendimiento.
+-   Confiar en actualizaciones parciales para implementaciones más rápidas.
+-   Aprovechar la distribución de la CDN para velocidades de entrega constantes.
 
-Capgoの分析ダッシュボードは、パフォーマンスの問題を特定して修正するための明確な指標を提供し、更新がユーザーにスムーズに配信されることを確保します。これらのツールはプレデプロイメントテストと連携して、信頼性の高い高速な更新を維持します。## Riepilogo
+El panel de análisis de Capgo proporciona métricas claras para identificar y solucionar problemas de rendimiento, asegurando que las actualizaciones se entreguen sin problemas a los usuarios. Estas herramientas trabajan junto con pruebas previas a la implementación para mantener actualizaciones confiables y rápidas.
 
-### Punti Principali
+## Resumen
 
-Il test OTA approfondito si concentra su aree chiave come prestazioni, sicurezza, distribuzione e monitoraggio. Strumenti come Capgo svolgono un ruolo cruciale nella semplificazione del processo di distribuzione degli aggiornamenti OTA
+### Puntos Principales
 
-| Aspetto del Test | Fattori Chiave | Impatto |
+Las pruebas OTA exhaustivas se centran en áreas clave como rendimiento, seguridad, distribución y monitoreo. Herramientas como Capgo desempeñan un papel crucial en la simplificación del proceso de implementación de actualizaciones OTA.
+
+| Aspecto de Prueba | Factores Clave | Impacto |
 | --- | --- | --- |
-| Prestazioni | Velocità CDN (114ms per 5MB) | Garantisce aggiornamenti veloci e affidabili |
-| Sicurezza | Crittografia end-to-end | Protegge le distribuzioni |
-| Distribuzione | Sistema basato su canali | Permette rollout controllati |
-| Monitoraggio | Analisi in tempo reale | Aiuta a rilevare problemi tempestivamente |
+| Rendimiento | Velocidad de CDN (114ms para 5MB) | Asegura actualizaciones rápidas y confiables |
+| Seguridad | Cifrado de extremo a extremo | Protege las implementaciones |
+| Distribución | Sistema basado en canales | Permite implementaciones controladas |
+| Monitoreo | Análisis en tiempo real | Ayuda a detectar problemas temprano |
 
-### Suggerimenti per gli Sviluppatori
+### Consejos para Desarrolladores
 
-Per migliorare il processo di test OTA, tieni a mente questi suggerimenti pratici:
+Para mejorar tu proceso de prueba OTA, ten en cuenta estos consejos prácticos:
 
--   **Monitora le Metriche**: Usa analisi in tempo reale per tracciare i tassi di successo degli aggiornamenti
--   **Sfrutta i Canali**: Conduci test beta e rollout graduali per un migliore controllo
--   **Abilita i Rollback**: Assicurati di poter ripristinare rapidamente gli aggiornamenti se necessario
--   **Automatizza i Test**: Integra i test nella pipeline CI/CD per l'efficienza
+-   **Monitorea Métricas**: Utiliza análisis en tiempo real para rastrear las tasas de éxito de las actualizaciones.
+-   **Aprovecha Canales**: Realiza pruebas beta y implementaciones escalonadas para un mejor control.
+-   **Habilita Reversiones**: Asegúrate de poder revertir actualizaciones rápidamente si es necesario.
+-   **Automatiza Pruebas**: Integra pruebas en tu pipeline de CI/CD para mayor eficiencia.
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" [\[1\]](https://capgoapp/)
+> "Practicamos desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)
 
-> "Capgo semplifica lo sviluppo eliminando i ritardi dell'app store per le correzioni di bug" [\[1\]](https://capgoapp/)
+> "Capgo agiliza el desarrollo al eliminar los retrasos de la tienda de aplicaciones para arreglos de errores." [\[1\]](https://capgo.app/)

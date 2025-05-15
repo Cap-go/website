@@ -1,10 +1,9 @@
 ---
 slug: how-to-profile-cross-platform-apps-with-capacitor
-title: Cara Melakukan Profiling Aplikasi Lintas Platform dengan Capacitor
+title: Comment profiler des applications multiplateformes avec Capacitor
 description: >-
-  Pelajari cara melakukan profiling dan optimalisasi aplikasi lintas platform
-  yang dibuat dengan Capacitor untuk meningkatkan kinerja di iOS, Android, dan
-  web.
+  Apprenez à profiler et optimiser les applications multiplateformes construites
+  avec Capacitor pour améliorer les performances sur iOS, Android et le web.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,7 +11,7 @@ created_at: 2025-04-19T02:37:04.938Z
 updated_at: 2025-04-19T02:37:25.432Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60-1745030245432.jpg
-head_image_alt: Développement Mobile
+head_image_alt: Développement mobile
 keywords: >-
   Capacitor, profiling, cross-platform apps, performance optimization, iOS,
   Android, web development, memory leaks, error tracking
@@ -21,148 +20,148 @@ published: true
 locale: fr
 next_blog: ''
 ---
+Profiling des applications multiplateformes construites avec [Capacitor](https://capacitorjs.com/) vous aide à identifier les problèmes de performance sur iOS, Android et les plateformes web. Voici un guide rapide pour commencer :
 
-Le profilage des applications multiplateformes créées avec [Capacitor](https://capacitorjscom/) vous aide à identifier les problèmes de performance sur les plateformes iOS, Android et web. Voici un guide rapide pour commencer :
-
--   **Outils nécessaires** :
+-   **Outils dont vous avez besoin** :
     
-    -   [Nodejs](https://nodejsorg/en) v16+ et npm v8+ pour la gestion des packages
-    -   Capacitor CLI v50+ pour la construction et le déploiement des applications
-    -   [Xcode](https://developerapplecom/xcode/) 14+ (iOS) et [Android Studio](https://developerandroidcom/studio) Electric Eel+ (Android) pour le développement et le profilage spécifique à la plateforme
-    -   [Chrome DevTools](https://developerchromecom/docs/devtools) pour l'analyse des performances web
+    -   [Node.js](https://nodejs.org/en) v16+ et npm v8+ pour la gestion des paquets
+    -   Capacitor CLI v5.0+ pour construire et déployer des applications
+    -   [Xcode](https://developer.apple.com/xcode/) 14+ (iOS) et [Android Studio](https://developer.android.com/studio) Electric Eel+ (Android) pour le développement et le profilage spécifiques à la plateforme
+    -   [Chrome DevTools](https://developer.chrome.com/docs/devtools) pour l'analyse de performance web
 -   **Appareils** :
     
-    -   Utilisez des **émulateurs** pour des tests rapides mais fiez-vous aux **appareils physiques** pour obtenir des métriques de performance précises
--   **Outils de profilage clés** :
+    -   Utilisez des **émulateurs** pour des tests rapides mais reposez-vous sur des **appareils physiques** pour obtenir des métriques de performance précises.
+-   **Outils de Profilage Clés** :
     
-    -   **Chrome DevTools** : Analysez l'exécution JavaScript, l'utilisation de la mémoire et l'activité réseau pour les applications web
-    -   **Xcode Instruments** : Mesurez l'utilisation du CPU, de la mémoire et de l'énergie sur iOS
-    -   **Android Studio Profilers** : Surveillez les performances CPU, mémoire et réseau sur Android
--   **Problèmes courants à résoudre** :
+    -   **Chrome DevTools** : Analysez l'exécution de JavaScript, l'utilisation de la mémoire et l'activité réseau pour les applications web.
+    -   **Instruments Xcode** : Mesurez l'utilisation du CPU, de la mémoire et de l'énergie sur iOS.
+    -   **Profils Android Studio** : Surveillez les performances CPU, mémoire et réseau sur Android.
+-   **Problèmes Courants à Corriger** :
     
-    -   Tailles importantes des bundles d'applications
+    -   Tailles de paquet d'application importantes
     -   Code non optimisé
-    -   Appels excessifs du pont JavaScript-natif
+    -   Appels de pont JavaScript-à-natif excessifs
 -   **Optimisations** :
     
-    -   Implémentez des mises à jour partielles de bundles et des mises à jour en direct pour améliorer les performances et l'expérience utilisateur
-    -   Suivez les métriques de performance et les erreurs en temps réel à l'aide d'outils comme [Capgo](https://capgoapp/)
+    -   Mettez en œuvre des mises à jour de paquets partielles et des mises à jour en direct pour améliorer la performance et l'expérience utilisateur.
+    -   Suivez les métriques de performance et les erreurs en temps réel en utilisant des outils comme [Capgo](https://capgo.app/).
 
-Cet article vous guide à travers l'utilisation d'outils spécifiques à la plateforme, la recherche de goulots d'étranglement et l'application de correctifs pour optimiser vos applications Capacitor.
+Cet article vous guide à travers l'utilisation d'outils spécifiques à la plateforme, la recherche de goulets d'étranglement en matière de performance et l'application de correctifs pour optimiser vos applications Capacitor.
 
-## Comment trouver les FUITES DE MÉMOIRE dans les applications Ionic Angular
+## Comment trouver des FUITES DE MÉMOIRE dans les applications Ionic Angular
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/vNGWpZlUOPM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Exigences de configuration
+## Exigences de Configuration
 
-Pour profiler efficacement les applications Capacitor, vous aurez besoin des bons outils, logiciels et environnements de test. Voici ce dont vous avez besoin pour une analyse précise des performances.
+Pour profiler efficacement les applications Capacitor, vous aurez besoin des bons outils, logiciels et environnements de test. Voici ce dont vous avez besoin pour une analyse de performance précise.
 
-### Outils et logiciels
+### Outils et Logiciels
 
-Assurez-vous d'avoir les éléments suivants :
+Assurez-vous de disposer des éléments suivants :
 
--   **Nodejs v16+** avec **npm v8+** pour la gestion des packages
--   **Capacitor CLI (v50+)** pour construire et déployer des applications
+-   **Node.js v16+** avec **npm v8+** pour la gestion des paquets
+-   **Capacitor CLI (v5.0+)** pour construire et déployer des applications
 -   **Xcode 14+** pour le développement et le profilage iOS
 -   **Android Studio Electric Eel** (ou plus récent) pour le développement Android
--   **Chrome DevTools** pour le profilage des performances web
+-   **Chrome DevTools** pour le profilage de performance web
 
 Une fois vos outils prêts, il est temps de choisir vos appareils de test.
 
-### Émulateurs vs Appareils physiques
+### Émulateurs vs Appareils Physiques
 
--   **Émulateurs** : Parfaits pour les tests rapides, le débogage et l'essai de différentes configurations d'appareils. Cependant, ils ne reproduisent pas totalement les performances réelles et ont un support GPU limité
--   **Appareils physiques** : Essentiels pour des métriques précises de mémoire et de GPU. Bien qu'ils puissent être plus coûteux et nécessiter une gestion supplémentaire, ils fournissent une image beaucoup plus claire des performances de votre application
+-   **Émulateurs** : Idéaux pour des tests rapides, le débogage et l'essai de différentes configurations d'appareil. Cependant, ils ne reproduisent pas entièrement les performances du monde réel et ont un support limité pour les GPU.
+-   **Appareils Physiques** : Essentiels pour des métriques précises de mémoire et de GPU. Bien qu'ils puissent être plus coûteux et nécessiter une gestion supplémentaire, ils fournissent une image beaucoup plus claire de la performance de votre application.
 
-Pour de meilleurs résultats, testez sur au moins un appareil iOS récent et un appareil Android milieu de gamme pour couvrir une gamme de scénarios de performance.
+Pour de meilleurs résultats, testez sur au moins un appareil iOS récent et un appareil Android de milieu de gamme pour couvrir une gamme de scénarios de performance.
 
-### Outils de surveillance des performances
+### Outils de Surveillance des Performances
 
-Utilisez ces outils pour surveiller et analyser les performances :
+Utilisez ces outils pour surveiller et analyser la performance :
 
--   **Instruments (iOS)**, **Android Studio CPU Profiler**, et **Chrome DevTools** pour le profilage spécifique à la plateforme
--   **Capgo** pour l'analyse multiplateforme et le suivi des erreurs en temps réel \[2\]
+-   **Instruments (iOS)**, **Profils CPU Android Studio**, et **Chrome DevTools** pour le profilage spécifique à la plateforme
+-   **Capgo** pour l'analyse multiplateforme et le suivi d'erreurs en temps réel \[2\]
 
-Enfin, configurez la journalisation dans les environnements de développement et de production pour suivre des métriques cohérentes.
+Enfin, configurez le journal dans les environnements de développement et de production pour suivre des métriques cohérentes.
 
-## Outils de profilage par plateforme
+## Outils de Profilage par Plateforme
 
-Exploitez les outils intégrés de chaque plateforme pour analyser les performances et identifier les problèmes potentiels.
+Tirez parti des outils intégrés de chaque plateforme pour analyser la performance et identifier les problèmes potentiels.
 
-### Profilage web avec [Chrome DevTools](https://developerchromecom/docs/devtools)
+### Profilage Web avec [Chrome DevTools](https://developer.chrome.com/docs/devtools)
 
-Lors de l'exécution de votre application dans Chrome, ouvrez **DevTools** (Clic droit > Inspecter) et explorez les onglets **Performance**, **Memory** ou **Network** :
+En exécutant votre application dans Chrome, ouvrez **DevTools** (Clic droit > Inspecter) et explorez les onglets **Performance**, **Mémoire** ou **Réseau** :
 
--   **Performance** : Suivez l'exécution JavaScript, le rendu et l'activité réseau
--   **Memory** : Analysez les allocations de tas et détectez les fuites de mémoire
--   **Network** : Observez les appels API, le chargement des ressources et l'utilisation de la bande passante
+-   **Performance** : Suivez l'exécution de JavaScript, le rendu et l'activité réseau.
+-   **Mémoire** : Analysez les allocations de tas et détectez les fuites de mémoire.
+-   **Réseau** : Observez les appels API, le chargement des ressources et l'utilisation de la bande passante.
 
-Pour un profilage JavaScript plus détaillé, utilisez la fonction **profil CPU du panneau Performance**Pour capturer des données d'appels de fonction détaillées, activez l'option "JavaScript Profiler" dans les paramètres
+Pour un profilage JavaScript plus détaillé, utilisez la fonction de profil CPU du panneau **Performance**. Pour capturer des données d'appels de fonctions approfondies, activez l'option "Profileur JavaScript" dans les paramètres.
 
-Une fois le profilage web terminé, passez à l'analyse des performances iOS
+Une fois le profilage web terminé, passez à l'analyse de performance iOS.
 
-### Profilage iOS avec [Xcode](https://developerapplecom/xcode/)
+### Profilage iOS avec [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assetsseobotaicom/capgoapp/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4cjpg)
+![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
-Dans Xcode, naviguez vers **Product > Profile (⌘I)** et sélectionnez un modèle de profilage :
+Dans Xcode, accédez à **Produit > Profil (⌘I)** et sélectionnez un modèle de profilage :
 
--   **Time Profiler** : Mesurer l'utilisation du CPU
--   **Allocations** : Surveiller l'utilisation de la mémoire
--   **Energy Log** : Évaluer la consommation de batterie et l'activité réseau
+-   **Profileur de Temps** : Mesurez l'utilisation du CPU.
+-   **Allocations** : Surveillez l'utilisation de la mémoire.
+-   **Journal d'Énergie** : Évaluez la consommation de batterie et l'activité réseau.
 
-Portez une attention particulière aux **temps de rendu WebView** pour évaluer la réactivité de l'application
+Accordez une attention particulière aux **temps de rendu WebView** pour évaluer la réactivité de l'application.
 
-Après le profilage iOS, concentrez-vous sur les performances Android
+Après le profilage iOS, concentrez-vous sur la performance Android.
 
 ### Outils de Profilage Android
 
-Dans Android Studio, accédez aux outils de profilage via **View > Tool Windows > App Inspection**. Les profileurs principaux incluent :
+Dans Android Studio, accédez aux outils de profilage via **Affichage > Fenêtres d'outils > Inspection de l'application**. Les principaux profileurs incluent :
 
--   **CPU Profiler** : Analyser l'activité des threads, les traces de méthodes et l'utilisation du CPU
--   **Memory Profiler** : Suivre les allocations de tas, la collecte des déchets et les fuites de mémoire
--   **Network Profiler** : Examiner le timing des requêtes et la taille des charges utiles
+-   **Profileur CPU** : Analysez l'activité des threads, les traces de méthodes et l'utilisation du CPU.
+-   **Profileur de Mémoire** : Suivez les allocations de tas, la collecte des ordures et les fuites de mémoire.
+-   **Profileur Réseau** : Vérifiez le temps des requêtes et les tailles de charge utile.
 
-Pour les applications utilisant WebView, activez le débogage avec `WebViewsetWebContentsDebuggingEnabled(true)` pour intégrer Chrome DevTools avec Android Studio pour une analyse plus complète
+Pour les applications utilisant WebView, activez le débogage avec `WebView.setWebContentsDebuggingEnabled(true)` pour intégrer Chrome DevTools avec Android Studio pour une analyse plus complète.
 
 ## Trouver et Corriger les Problèmes de Performance
 
-### Goulots d'Étranglement
+### Goulets d'Étranglement
 
-Les problèmes de performance courants dans les applications Capacitor proviennent souvent de **tailles de bundle importantes**, de **code non minifié** et d'**overhead excessif des appels bridge**. Ces facteurs peuvent ralentir votre application et impacter l'expérience utilisateur
+Les problèmes de performance courants dans les applications Capacitor proviennent souvent de **tailles de paquets importantes**, de **code non minifié** et de **surcoûts excessifs des appels de pont**. Ces facteurs peuvent ralentir votre application et affecter l'expérience utilisateur.
 
-### Analyser les Profils
+### Analyse des Profils
 
-Pour identifier les problèmes de performance, les outils comme **Chrome DevTools**, **Xcode Instruments** et les **profileurs Android Studio** sont inestimables. Utilisez-les pour traquer les pics CPU, les fuites de mémoire et les retards dans les requêtes réseau. Une fois ces zones problématiques identifiées, vous pouvez vous concentrer sur des corrections spécifiques
+Pour identifier les problèmes de performance, des outils comme **Chrome DevTools**, **Instruments Xcode**, et **profils Android Studio** sont inestimables. Utilisez-les pour détecter les pics de CPU, les fuites de mémoire et les retards dans les requêtes réseau. Une fois que vous avez identifié ces zones problématiques, vous pouvez vous concentrer sur des correctifs spécifiques.
 
 ### Corrections de Performance
 
-Après avoir recueilli les données des outils de profilage, implémentez ces optimisations ciblées :
+Après avoir rassemblé des données provenant d'outils de profilage, mettez en œuvre ces optimisations ciblées :
 
--   **Mises à jour partielles** : Au lieu de mises à jour complètes, livrez des mises à jour plus petites et incrémentales. Par exemple, le CDN de Capgo peut livrer une mise à jour de 5 MB en seulement 114 ms [\[1\]](https://capgoapp/)
--   **Déploiements contrôlés** : Utilisez la segmentation utilisateur pour déployer les mises à jour graduellement. Cette méthode peut atteindre 95% d'adoption des mises à jour en 24 heures [\[1\]](https://capgoapp/)
--   **Suivi des erreurs** : Détectez et corrigez les erreurs tôt pour maintenir la stabilité et les performances de l'application [\[1\]](https://capgoapp/)
--   **Regroupement des appels bridge** : Réduisez l'overhead en groupant les appels bridge JavaScript-natif
--   **Mises à jour en direct** : Poussez des corrections immédiates en utilisant des solutions de mise à jour en direct (ex. Capgo), en contournant les délais de l'app store
+-   **Mises à jour de paquets partielles** : Au lieu de mises à jour complètes, délivrez des mises à jour plus petites et incrémentielles. Par exemple, le CDN de Capgo peut délivrer une mise à jour de 5 Mo en seulement 114 ms [\[1\]](https://capgo.app/).
+-   **Déploiements contrôlés** : Utilisez la segmentation des utilisateurs pour déployer les mises à jour progressivement. Cette méthode peut atteindre 95 % d'adoption des mises à jour en 24 heures [\[1\]](https://capgo.app/).
+-   **Suivi des erreurs** : Détectez et corrigez les erreurs tôt pour maintenir la stabilité et la performance de l'application [\[1\]](https://capgo.app/).
+-   **Regroupement des appels de pont** : Réduisez les surcoûts en regroupant les appels de pont JavaScript-à-natif.
+-   **Mises à jour en direct** : Apportez des corrections immédiates grâce à des solutions de mises à jour en direct (par exemple, Capgo), contournant les retards des magasins d'applications.
 
 ## Surveillance et Mises à Jour
 
-Une fois que vous avez apporté des améliorations de performance, il est crucial de garder un œil sur les choses et de maintenir un système de mises à jour en direct pour s'assurer que tout reste sur la bonne voie
+Une fois que vous avez effectué des améliorations de performance, il est crucial de garder un œil sur les choses et de maintenir un système de mises à jour en direct pour s'assurer que tout reste sur la bonne voie.
 
 ### Suivi des Performances en Temps Réel
 
-Après le déploiement, surveillez les métriques importantes comme les temps de réponse API, les taux de réussite des mises à jour et l'engagement utilisateur. Utilisez des outils comme des tableaux de bord automatisés ou des logiciels de suivi d'erreurs pour collecter ces données en temps réel. Cela vous permet de repérer et d'adresser rapidement les problèmes, les empêchant d'impacter un grand nombre d'utilisateurs
+Post-déploiement, surveillez des métriques importantes telles que les temps de réponse API, les taux de succès de mise à jour, et l'engagement des utilisateurs. Utilisez des outils comme des tableaux de bord automatisés ou des logiciels de suivi d'erreurs pour rassembler ces données en temps réel. Cela vous permet de repérer et de résoudre les problèmes rapidement, empêchant qu'ils n'affectent un grand nombre d'utilisateurs.
 
-### Mises à Jour Rapides avec [Capgo](https://capgoapp/)
+### Mises à Jour Rapides avec [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
-Capgo simplifie le processus de mise à jour en offrant des mises à jour chiffrées et échelonnées avec des fonctionnalités de rollback automatique. Il fournit également des analyses en temps réel, vous aidant à contourner les délais de l'app store et assurant que les mises à jour atteignent vos utilisateurs rapidement et efficacement
+Capgo simplifie le processus de mise à jour en offrant des mises à jour chiffrées et échelonnées avec des fonctions de retour arrière automatiques. Il fournit également des analyses en temps réel, vous aidant à contourner les retards des magasins d'applications et garantissant que les mises à jour atteignent vos utilisateurs rapidement et efficacement.
 
 ## Résumé
 
-Utilisez des outils comme Chrome DevTools, Xcode Instruments et Android Studio Profiler pour affiner vos applications Capacitor. Surveillez les métriques clés et déployez des mises à jour en direct quand nécessaire. Voici sur quoi se concentrer :
+Utilisez des outils comme Chrome DevTools, Instruments Xcode, et Profiler Android Studio pour peaufiner vos applications Capacitor. Gardez un œil sur les métriques clés et déployez des mises à jour en direct lorsque cela est nécessaire. Voici sur quoi se concentrer :
 
--   **Profilez régulièrement** en utilisant des outils spécifiques aux plateformes (Chrome DevTools, Xcode, Android Studio Profiler)
--   **Suivez les performances et les erreurs** en temps réel sur toutes les plateformes
+-   **Profilez de manière cohérente** en utilisant des outils spécifiques à la plateforme (Chrome DevTools, Xcode, Profiler Android Studio).
+-   **Suivez la performance et les erreurs** en temps réel sur toutes les plateformes.
+-   **Déployez des mises à jour en direct par étapes** pour introduire des corrections de bogues et de nouvelles fonctionnalités en douceur.

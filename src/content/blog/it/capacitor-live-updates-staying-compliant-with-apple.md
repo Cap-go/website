@@ -1,7 +1,10 @@
 ---
-slug: capacitor-live-updates-rimanere-conformi-alle-regole-di-apple
-title: 'Capacitor Live Updates: Apple のガイドラインに準拠する'
-description: モバイルアプリのアップデートを効率的に実装し、厳格なガイドラインに従って拒否を防ぐ方法を学びましょう。
+slug: capacitor-live-updates-staying-compliant-with-apple
+title: 'Aggiornamenti dal vivo di Capacitor: Rimanere in conformità con Apple'
+description: >-
+  Apprenez à mettre en œuvre efficacement des mises à jour en direct dans les
+  applications mobiles tout en garantissant le respect de directives strictes
+  pour éviter les rejets.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -9,233 +12,236 @@ created_at: 2025-03-12T03:03:33.472Z
 updated_at: 2025-03-18T13:14:16.420Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d0d3f9cf9d4dc0b2c0bff2-1741748627082.jpg
-head_image_alt: モバイル開発
+head_image_alt: Sviluppo Mobile
 keywords: >-
   Capacitor, live updates, app compliance, Apple guidelines, encryption, bug
   fixes, mobile development
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
-Gli aggiornamenti live di [Capacitor](https://capacitorjs.com/) consentono agli sviluppatori di rilasciare correzioni di bug e modifiche minori direttamente nelle app senza richiedere agli utenti di scaricare aggiornamenti dall'[App Store](https://www.apple.com/app-store/). Questo velocizza il deployment fino all'**81%**, riduce i costi e migliora l'esperienza utente. Tuttavia, è essenziale rispettare le rigide linee guida di Apple per evitare il rifiuto delle app.
+[Capacitor](https://capacitorjs.com/) live updates let developers push bug fixes and minor changes directly to apps without requiring users to download updates from the [App Store](https://www.apple.com/app-store/). This speeds up deployment by up to **81%**, reduces costs, and improves user experience. However, staying compliant with Apple's strict guidelines is essential to avoid app rejections.
 
-### Punti Chiave:
+### Key Points:
 
--   **Aggiornamenti Consentiti**: Correzioni di bug, modifiche UI e aggiornamenti dei contenuti nell'ambito dello scopo originale dell'app.
--   **Aggiornamenti Vietati**: Modifiche importanti alle funzionalità o aggiornamenti delle funzionalità principali (richiedono revisione App Store).
--   **Sicurezza**: La crittografia end-to-end è obbligatoria per proteggere i dati degli utenti. 
--   **Strumenti**: [Capgo](https://capgo.app/) semplifica la gestione degli aggiornamenti live, garantendo la conformità alle regole di Apple.
+-   **Allowed Updates**: Bug fixes, UI tweaks, and content updates within the app's original purpose.
+-   **Prohibited Updates**: Major feature changes or core functionality updates (require App Store review).
+-   **Security**: End-to-end encryption is mandatory to protect user data.
+-   **Tools**: [Capgo](https://capgo.app/) simplifies live update management, ensuring compliance with Apple's rules.
 
-| **Tipo di Aggiornamento** | **Consentito** | **Approvazione Necessaria** |
+| **Update Type** | **Allowed** | **Approval Needed** |
 | --- | --- | --- |
-| Correzioni Bug | Sì | No |
-| Miglioramenti UI | Sì | A volte |
-| Aggiornamenti Contenuti | Sì | No |
-| Modifiche Funzionalità | No | Sì |
-| Patch di Sicurezza | Sì | No |
+| Bug Fixes | Yes | No  |
+| UI Improvements | Yes | Sometimes |
+| Content Updates | Yes | No  |
+| Feature Changes | No  | Yes |
+| Security Patches | Yes | No  |
 
-Per mantenere la conformità, concentrarsi sulle correzioni di bug, proteggere gli aggiornamenti con la crittografia e documentare tutte le modifiche. Strumenti come Capgo aiutano a gestire gli aggiornamenti per oltre **20 milioni di utenti**, garantendo che le app rimangano conformi rilasciando aggiornamenti rapidamente.
+To stay compliant, focus on bug fixes, secure updates with encryption, and document all changes. Tools like Capgo help manage updates for over **20 million users**, ensuring apps remain compliant while delivering updates quickly.
 
-## Aggiornamenti Live di [Appflow](https://ionic.io/appflow/live-updates): Rilascia aggiornamenti istantanei direttamente ai tuoi utenti
+## [Appflow](https://ionic.io/appflow/live-updates) Live Updates: Deploy instant updates directly to your users
 
 ![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
-## Regole di Apple per gli Aggiornamenti Live
+<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-Apple regola gli aggiornamenti delle app per proteggere gli utenti, rendendo essenziale comprendere queste regole quando si implementano aggiornamenti live nelle applicazioni Capacitor.
+## Apple's Live Update Rules
 
-### Linee Guida dell'[App Store](https://www.apple.com/app-store/) per gli Aggiornamenti
+Apple regulates app updates to protect users, making it essential to understand these rules when implementing live updates in Capacitor applications.
+
+### [App Store](https://www.apple.com/app-store/) Guidelines for Updates
 
 ![App Store](https://mars-images.imgix.net/seobot/screenshots/www.apple.com-9d9fbf06f7f9dd70143af6386e59a5d2-2025-03-12.jpg?auto=compress)
 
-Le regole di Apple delineano chiaramente cosa è e non è consentito con gli aggiornamenti over-the-air (OTA). Ecco una rapida panoramica:
+Apple's rules clearly outline what is and isn't allowed with over-the-air (OTA) updates. Here's a quick breakdown:
 
-| Tipo di Aggiornamento | Consentito | Requisiti |
+| Update Type | Allowed | Requirements |
 | --- | --- | --- |
-| Correzioni Bug | Sì | Non deve modificare le funzionalità principali |
-| Miglioramenti UI | Sì | Limitati a modifiche visive minori |
-| Aggiornamenti Contenuti | Sì | Deve rimanere nello scopo originale dell'app |
-| Modifiche Funzionalità | No | Richiede revisione App Store |
-| Patch di Sicurezza | Sì | Deve includere crittografia adeguata |
+| Bug Fixes | Yes | Must not change core functionality |
+| UI Improvements | Yes | Limited to minor visual tweaks |
+| Content Updates | Yes | Must stay within the app's original purpose |
+| Feature Changes | No  | Requires App Store review |
+| Security Patches | Yes | Must include proper encryption |
 
-Quando si utilizzano aggiornamenti live, gli sviluppatori devono dare priorità alla sicurezza dei dati degli utenti e utilizzare la crittografia end-to-end. Strumenti come Capgo sono costruiti per rispettare i requisiti di Apple, semplificando il processo.
+When using live updates, developers must prioritize user data security and use end-to-end encryption. Tools like Capgo are built to comply with Apple's requirements, simplifying the process.
 
-Comprendere queste regole può aiutare a evitare errori comuni che portano al rifiuto delle app.
+Grasping these rules can help you avoid common mistakes that lead to app rejections.
 
-### Principali Motivi di Rifiuto delle App
+### Top Reasons Apps Get Rejected
 
-Molte app vengono rifiutate per violazione delle linee guida di aggiornamento di Apple. Ecco alcuni problemi frequenti:
+Many apps are rejected for violating Apple's update guidelines. Here are some frequent issues:
 
--   **Aggiramento del Processo di Revisione**: Aggiungere nuove funzionalità importanti tramite aggiornamenti live invece di sottoporle a revisione.
--   **Problemi di Privacy**: Non proteggere adeguatamente i dati degli utenti durante gli aggiornamenti.
--   **Modifiche alle Funzionalità Core**: Utilizzare aggiornamenti live per modificare significativamente il funzionamento dell'app.
+-   **Bypassing Review Process**: Adding major new features through live updates instead of submitting them for review.
+-   **Privacy Issues**: Failing to secure user data during updates.
+-   **Core Functionality Changes**: Using live updates to significantly alter how the app works.
 
-> "Evitare la revisione per la correzione di bug è prezioso." - Bessie Cooper, @bessiecooper [\[1\]](https://capgo.app/)
+> "Avoiding review for bugfix is golden." - Bessie Cooper, @bessiecooper [\[1\]](https://capgo.app/)
 
-Questo evidenzia che gli aggiornamenti live dovrebbero concentrarsi sulle correzioni di bug, non sull'introduzione di nuove funzionalità.
+This highlights that live updates should focus on bug fixes, not introducing new features.
 
-Per rimanere conformi agli standard di Apple:
+To stay compliant with Apple's standards:
 
--   Utilizzare una forte crittografia per tutti gli aggiornamenti.
--   Limitare gli aggiornamenti a correzioni di bug e modifiche minori.
--   Mantenere registrazioni dettagliate delle modifiche apportate.
--   Testare accuratamente gli aggiornamenti prima del rilascio.
--   Monitorare regolarmente i cambiamenti nelle politiche di Apple.
+-   Use strong encryption for all updates.
+-   Limit updates to bug fixes and minor adjustments.
+-   Keep detailed records of changes made.
+-   Thoroughly test updates before release.
+-   Regularly monitor Apple's policy changes.
 
-Seguire questi passaggi aiuterà a garantire che gli aggiornamenti della tua app rimangano conformi alle rigide linee guida di Apple.
+Following these steps will help ensure your app updates remain within Apple's strict guidelines.
 
-## Configurazione di Aggiornamenti Live Conformi
+## Setting Up Compliant Live Updates
 
-Per implementare aggiornamenti live nella tua [app Capacitor](https://capgo.app/plugins/ivs-player/) rispettando le regole di conformità di Apple, avrai bisogno di una configurazione strutturata. Ecco come iniziare.
+To implement live updates in your [Capacitor app](https://capgo.app/plugins/ivs-player/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
 
-### Passaggi per la Configurazione del Progetto
+### Project Setup Steps
 
-Inizia configurando il tuo ambiente e installando il plugin di aggiornamento live di Capgo:
+Begin by configuring your environment and installing Capgo's live update plugin:
 
--   **Installa le Dipendenze Necessarie**
-
-    -   Usa la CLI di Capgo per installare il plugin di aggiornamento live e configurare gli strumenti necessari. Per esempio:
-
+-   **Install Required Dependencies**
+    
+    -   Use Capgo's CLI to install the live update plugin and set up the necessary tools. For instance:
+        
         ```bash
         npx @capgo/cli init
         ```
+        
+    -   Make sure your app includes end-to-end encryption and secure storage for update files.
+        
+-   **Configure Update Parameters**
+    
+    -   Set how often updates should occur.
+    -   Plan rollback procedures in case something goes wrong.
+    -   Keep a detailed log of version changes.
+-   **Implement Security Protocols**
+    
+    -   Enable end-to-end encryption.
+    -   Use secure transmission methods.
+    -   Require user authentication for added protection.
 
-    -   Assicurati che la tua app includa crittografia end-to-end e archiviazione sicura per i file di aggiornamento.
+### Version Control Guidelines
 
--   **Configura i Parametri di Aggiornamento**
+Managing app versions properly is key to staying compliant with Apple's guidelines. Here's a quick breakdown:
 
-    -   Imposta la frequenza degli aggiornamenti.
-    -   Pianifica procedure di rollback in caso di problemi.
-    -   Mantieni un registro dettagliato dei cambiamenti di versione.
-
--   **Implementa Protocolli di Sicurezza** 
-
-    -   Abilita la crittografia end-to-end.
-    -   Usa metodi di trasmissione sicuri.
-    -   Richiedi autenticazione utente per protezione aggiuntiva.
-
-### Linee Guida per il Controllo Versione
-
-Gestire correttamente le versioni delle app è fondamentale per rimanere conformi alle linee guida di Apple. Ecco una rapida panoramica:
-
-| Tipo di Versione | Ambito Aggiornamento | Necessita Approvazione |
+| Version Type | Update Scope | Needs Approval |
 | --- | --- | --- |
-| Patch (x.x.1) | Correzioni bug | No |
-| Minor (x.1.x) | Modifiche UI | A volte |
-| Major (1.x.x) | Aggiornamenti funzionalità | Sì |
+| Patch (x.x.1) | Fixes for bugs | No  |
+| Minor (x.1.x) | UI adjustments | Sometimes |
+| Major (1.x.x) | Feature updates | Yes |
 
-Mantieni documentazione dettagliata di tutte le modifiche per rendere più fluido il processo di revisione dell'App Store.
+Keep detailed documentation of all changes to make the App Store review process smoother.
 
-### [Capgo](https://capgo.app/): Gestione degli Aggiornamenti Live
+### [Capgo](https://capgo.app/): Live Update Management
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
-Capgo semplifica la gestione degli aggiornamenti live e garantisce la conformità ai requisiti di Apple. Ha già supportato oltre **947,6 milioni di aggiornamenti** su **1.400+ app in produzione** [\[1\]](https://capgo.app/).
+Capgo simplifies live update management and ensures compliance with Apple's requirements. It has already supported over **947.6 million updates** across **1,400+ production apps** [\[1\]](https://capgo.app/).
 
-Alcune delle sue caratteristiche principali includono:
+Some of its standout features include:
 
--   **Crittografia end-to-end** per aggiornamenti sicuri.
--   **Integrazione CI/CD** con piattaforme come [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) e [Azure DevOps](https://azure.microsoft.com/en-us/products/devops).
--   **Assegnazione utenti** per rollout controllati.
--   Strumenti per garantire che gli aggiornamenti siano allineati con le politiche di Apple.
+-   **End-to-end encryption** for secure updates.
+-   **CI/CD integration** with platforms like [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), and [Azure DevOps](https://azure.microsoft.com/en-us/products/devops).
+-   **User assignment** for controlled rollouts.
+-   Tools to help ensure updates align with Apple's policies.
 
-Una volta che la tua app è pronta, usa la CLI di Capgo per rilasciare gli aggiornamenti. Il sistema gestirà automaticamente il controllo versione, la crittografia e la distribuzione, mantenendoti conforme alle regole di Apple.
+Once your app is ready, use the Capgo CLI to push updates. The system will handle version control, encryption, and distribution automatically, keeping you compliant with Apple's rules.
 
-## Sicurezza dei Dati Durante gli Aggiornamenti
+###### sbb-itb-f9944d2
 
-Proteggere i dati durante gli aggiornamenti live è cruciale per rimanere conformi alle normative e proteggere le informazioni degli utenti. Gioca anche un ruolo chiave nel mantenere la fiducia degli utenti.
+## Data Security During Updates
 
-### Requisiti di Crittografia
+Securing data during live updates is crucial for staying compliant with regulations and protecting user information. It also plays a key role in maintaining user confidence.
 
-La crittografia end-to-end è obbligatoria per mantenere sicuri gli aggiornamenti live nelle [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Garantisce che i dati degli aggiornamenti rimangano protetti mentre si spostano dal server al dispositivo. La soluzione di aggiornamento live di Capgo applica questi standard di crittografia. Secondo Capgo: "Crittografia end-to-end. Solo i tuoi utenti possono decrittare i tuoi aggiornamenti, nessun altro" [\[1\]](https://capgo.app/). Questo approccio alla crittografia è essenziale per proteggere efficacemente i dati degli utenti.
+### Encryption Requirements
 
-### Protezione dei Dati Utente
+End-to-end encryption is a must for keeping live updates secure in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). It ensures that update data remains protected as it moves from the server to the device. Capgo's live update solution enforces these encryption standards. According to Capgo: "End-to-end encryption. Only your users can decrypt your updates, no one else" [\[1\]](https://capgo.app/). This encryption approach is essential for protecting user data effectively.
 
-Il framework di sicurezza di Capgo garantisce che solo gli utenti autorizzati possano decrittare gli aggiornamenti. Limitando l'accesso, aiuta a proteggere i dati degli utenti durante tutto il processo di aggiornamento e minimizza il rischio di accessi non autorizzati.
+### User Data Protection
 
-## Test e Invio all'App Store
+Capgo's security framework ensures that only authorized users can decrypt updates. By limiting access, it helps protect user data throughout the update process and minimizes the risk of unauthorized access.
 
-Test approfonditi prima del rilascio sono critici per una fluida presentazione all'App Store e per soddisfare gli standard di conformità.
+## Testing and App Store Submission
 
-### Test Pre-Rilascio
+Thorough testing before release is critical for a smooth App Store submission and meeting compliance standards.
 
-La funzionalità di assegnazione utenti di Capgo permette di testare gli aggiornamenti con specifici gruppi di utenti prima di distribuirli a tutti. Questo approccio controllato garantisce che le tue strategie di [crittografia e protezione dati](https://capgo.app/docs/cli/migrations/encryption/) funzionino efficacemente.
+### Pre-Release Testing
 
-Ecco un esempio di come Capgo ha gestito un rollout per oltre 5.000 utenti:
+Capgo's user assignment feature allows you to test updates with specific user groups before rolling them out to everyone. This controlled approach ensures your [encryption and data protection](https://capgo.app/docs/cli/migrations/encryption/) strategies are functioning effectively.
 
-> "Abbiamo distribuito gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo osservando un'operazione molto fluida quasi tutti i nostri utenti sono aggiornati entro minuti dal deployment dell'OTA su @Capgo." [\[1\]](https://capgo.app/)
+Here's an example of how Capgo handled a rollout for over 5,000 users:
 
-Per garantire un rollout di successo, segui questi passaggi:
+> "We rolled out Capgo OTA updates in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." [\[1\]](https://capgo.app/)
 
--   Inizia con test interni.
--   Espandi a un piccolo gruppo di utenti esterni.
--   Aumenta gradualmente la base utenti.
--   Monitora i tempi di consegna degli aggiornamenti e i tassi di successo.
+To ensure a successful rollout, follow these steps:
 
-Una volta completati i test, dovrai documentare questi passaggi per il processo di revisione dell'App Store.
+-   Start with internal testing.
+-   Expand to a small group of external users.
+-   Gradually scale the user base.
+-   Monitor update delivery times and success rates.
 
-### Linee Guida per la Revisione delle App
+Once testing is complete, you'll need to document these steps for the App Store review process.
 
-Quando invii la tua app, è importante dimostrare la conformità alle linee guida di Apple.
+### App Review Guidelines
 
-> "@Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per la correzione di bug è prezioso." - Bessie Cooper [\[1\]](https://capgo.app/)
+When submitting your app, it's important to show compliance with Apple's guidelines.
 
-Apple richiede documentazione specifica, incluso:
+> "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
--   **Documentazione Chiara**: Una spiegazione dettagliata di come vengono consegnati gli aggiornamenti.
--   **Protocolli di Sicurezza**: Prova delle misure di crittografia e protezione dati.
--   **Ambito degli Aggiornamenti**: Un breakdown dei tipi di contenuto che vengono aggiornati.
--   **Evidenza dei Test**: Dati che mostrano test approfonditi e metriche di performance.
+Apple requires specific documentation, including:
 
-| Area di Focus Revisione | Documentazione Richiesta |
+-   **Clear Documentation**: A detailed explanation of how updates are delivered.
+-   **Security Protocols**: Proof of encryption and data protection measures.
+-   **Update Scope**: A breakdown of the types of content being updated.
+-   **Testing Evidence**: Data showing thorough testing and performance metrics.
+
+| Review Focus Area | Required Documentation |
 | --- | --- |
-| Misure di Sicurezza | Protocolli di crittografia, sicurezza dati |
-| Meccanismo di Aggiornamento | Dettagli tecnici dell'implementazione |
-| Modifiche ai Contenuti | Ambito definito degli aggiornamenti |
-| Risultati dei Test | Metriche di stabilità e performance |
+| Security Measures | Encryption protocols, data safety |
+| Update Mechanism | Technical details of implementation |
+| Content Changes | Defined scope of updates |
+| Testing Results | Stability and performance metrics |
 
-Fornire documentazione chiara e dettagliata sui processi di sicurezza e aggiornamento può semplificare il processo di invio e aiutare a evitare ritardi.
+Providing clear, detailed documentation on security and update processes can simplify the submission process and help avoid delays.
 
-## Conformità Post-Lancio
+## Post-Launch Compliance
 
-Dopo il lancio della tua app, mantenere la conformità alle linee guida dell'App Store richiede monitoraggio costante e adeguamenti rapidi. Gli sviluppatori devono tenere traccia degli aggiornamenti e adattarsi a qualsiasi cambiamento nelle linee guida per garantire una conformità continua.
+After launching your app, staying compliant with App Store guidelines requires constant monitoring and quick adjustments. Developers need to keep track of updates and adapt to any changes in the guidelines to ensure ongoing compliance.
 
-### Tracciamento degli Aggiornamenti
+### Update Tracking
 
-Per mantenere la tua app in linea con le politiche dell'App Store, concentrati su queste aree chiave:
+To keep your app in line with App Store policies, focus on these key areas:
 
-| Area di Monitoraggio | Metriche Chiave | Elementi d'Azione |
+| Área de Monitoreo | Métricas Clave | Acciones |
 | --- | --- | --- |
-| Velocità di Distribuzione | Tempo di consegna aggiornamenti | Misurare la velocità con cui gli aggiornamenti raggiungono gli utenti. |
-| Tasso di Successo | % completamento aggiornamenti | Investigare gli aggiornamenti falliti e le loro cause. |
-| Copertura Utenti | Aggiornamenti utenti attivi | Assicurare che gli aggiornamenti raggiungano tutti i segmenti di utenti. |
-| Stato Sicurezza | Validazione crittografia | Verificare l'integrità della crittografia end-to-end. |
+| Velocidad de Distribución | Actualizar tiempo de entrega | Medir qué tan rápido llegan las actualizaciones a los usuarios. |
+| Tasa de Éxito | Porcentaje de finalización de actualización | Investigar actualizaciones fallidas y sus causas. |
+| Cobertura de Usuarios | Actualizaciones de usuarios activos | Asegurarse de que las actualizaciones lleguen a todos los segmentos de usuarios. |
+| Estado de Seguridad | Validación de cifrado | Comprobar la integridad del cifrado de extremo a extremo. |
 
-Queste metriche forniscono le basi per adattarsi rapidamente quando le linee guida cambiano.
+Estas métricas proporcionan la base para adaptarse rápidamente cuando cambian las pautas.
 
-### Risposta all'Aggiornamento delle Policy
+### Respuesta a Actualizaciones de Políticas
 
-Il monitoraggio di queste metriche non riguarda solo le prestazioni - aiuta anche a identificare aree che potrebbero necessitare di attenzione immediata quando Apple aggiorna le sue policy. Ecco come rispondere:
+Rastrear estas métricas no solo se trata de rendimiento, también te ayuda a identificar áreas que pueden necesitar atención inmediata cuando Apple actualiza sus políticas. Aquí está cómo responder:
 
-1.  **Revisione Modifiche:** Esaminare le nuove linee guida e determinare il loro impatto sul processo di aggiornamento attuale.
-2.  **Audit Tecnico:** Confermare che i meccanismi di aggiornamento siano allineati con i requisiti rivisti.
-3.  **Verifica Sicurezza:** Ricontrollare che i protocolli di crittografia soddisfino gli standard aggiornati.
-4.  **Aggiornamento Documentazione:** Aggiornare la documentazione di conformità per riflettere le ultime linee guida.
+1. **Revisar Cambios:** Examinar las nuevas pautas y determinar su impacto en tu proceso de actualización actual.
+2. **Auditoría Técnica:** Confirmar que tus mecanismos de actualización se alineen con los requisitos revisados.
+3. **Verificación de Seguridad:** Verificar que tus protocolos de cifrado cumplan con los estándares actualizados.
+4. **Actualización de Documentación:** Actualizar tu documentación de cumplimiento para reflejar las últimas pautas.
 
-L'utilizzo di strumenti costruiti tenendo conto dei requisiti Apple può semplificare questo processo. Per esempio, Capgo offre funzionalità come la crittografia end-to-end e l'assegnazione utenti, rendendo più facile rimanere conformi mentre si distribuiscono gli aggiornamenti in modo efficiente [\[1\]](https://capgo.app/).
+Utilizar herramientas construidas con los requisitos de Apple en mente puede simplificar este proceso. Por ejemplo, Capgo ofrece características como cifrado de extremo a extremo y asignación de usuarios, facilitando el cumplimiento mientras se entregan actualizaciones de manera eficiente [\[1\]](https://capgo.app/).
 
-Monitora regolarmente la conformità della tua app attraverso la tua [piattaforma di gestione degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Rimanere proattivi può aiutare a individuare e risolvere potenziali problemi prima che influenzino la tua posizione nell'App Store, mantenendo la tua strategia di aggiornamento in tempo reale sia efficace che conforme alle regole.
+Monitorea regularmente el cumplimiento de tu aplicación a través de tu [plataforma de gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Mantenerse proactivo puede ayudarte a detectar y resolver problemas potenciales antes de que afecten tu posición en la App Store, manteniendo tu estrategia de actualizaciones en vivo tanto efectiva como dentro de las reglas.
 
-## Conclusione
+## Conclusión
 
-Bilanciare velocità e conformità è fondamentale quando si implementano aggiornamenti in tempo reale nelle app Capacitor. Con gli strumenti giusti, l'efficienza del rilascio può migliorare fino all'81% [\[1\]](https://capgo.app/), rendendo più facile rimanere all'interno delle linee guida di Apple.
+Equilibrar velocidad y cumplimiento es clave al implementar actualizaciones en vivo en aplicaciones de Capacitor. Con las herramientas adecuadas, la eficiencia en el lanzamiento puede mejorar hasta un 81% [\[1\]](https://capgo.app/), facilitando el cumplimiento de las pautas de Apple.
 
-Piattaforme come Capgo mostrano come sia possibile soddisfare i requisiti dell'App Store continuando a fornire aggiornamenti rapidi [\[1\]](https://capgo.app/). Le rigide regole di Apple sugli aggiornamenti in tempo reale sottolineano l'importanza di rimanere conformi.
+Plataformas como Capgo demuestran cómo es posible cumplir con los requisitos de la App Store mientras se entregan actualizaciones rápidas [\[1\]](https://capgo.app/). Las estrictas reglas de Apple sobre actualizaciones en vivo resaltan la importancia de mantenerse en cumplimiento.
 
-Per garantire la conformità a lungo termine, concentrati su queste pratiche:
+Para asegurar el cumplimiento a largo plazo, enfócate en estas prácticas:
 
--   Usa la crittografia end-to-end per tutti gli aggiornamenti.
--   Integra perfettamente gli aggiornamenti nei tuoi flussi di lavoro CI/CD.
--   Monitora regolarmente le metriche degli aggiornamenti.
--   Rimani preparato per i cambiamenti delle policy.
+- Usar cifrado de extremo a extremo para todas las actualizaciones.
+- Integrar actualizaciones sin problemas en tus flujos de trabajo de CI/CD.
+- Monitorear métricas de actualización regularmente.
+- Estar preparado para cambios en las políticas.

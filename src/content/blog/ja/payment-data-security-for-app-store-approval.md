@@ -1,10 +1,8 @@
 ---
 slug: payment-data-security-for-app-store-approval
-title: Keamanan Data Pembayaran untuk Persetujuan App Store
+title: アプリストア承認のための支払いデータセキュリティ
 description: >-
-  Assicurati che la tua app soddisfi i requisiti di sicurezza dei dati di
-  pagamento per evitare il rifiuto dagli app store. Scopri gli strumenti
-  essenziali e gli standard di conformità.
+  アプリが支払いデータのセキュリティ要件を満たしていることを確認し、アプリストアからの拒否を避けてください。重要なツールとコンプライアンス基準について学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,87 +19,87 @@ published: true
 locale: ja
 next_blog: ''
 ---
+**AppleやGoogleによるアプリの承認がほしいですか？安全な支払いデータから始めましょう。** アプリストアは、コンプライアンス基準を満たすために **エンドツーエンド暗号化**を支払いデータに求めています。それがないと、アプリは拒否されたり、削除されたりする可能性があります。知っておくべきことは以下の通りです：
 
-**アプリがAppleやGoogleに承認されることを望むなら？安全な決済データから始めましょう** アプリストアは決済データに対して**エンドツーエンドの暗号化**をコンプライアンス基準として要求しています。これがないと、アプリが拒否されたり削除されたりする可能性があります。以下が重要なポイントです：
+-   **[Capgo](https://capgo.app/)**: 真のエンドツーエンド暗号化、ロールバックコントロール、および [セルフホスティングオプション](https://capgo.app/blog/self-hosted-capgo/)を提供します。初期費用は$2,600 + 月額$300です。
+-   **[Capawesome](https://capawesome.io/)**: 暗号署名を使用していますが、完全な暗号化はありません。ドイツ市場をターゲットとしています。
+-   **[Appflow](https://ionic.io/appflow/live-updates)**: 部分的な暗号化、一貫性のないパフォーマンス、年額$6,000です。2026年に廃止予定です。
+-   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: 2024年に終了、エンドツーエンド暗号化なし。
 
--   **[Capgo](https://capgoapp/)**：真のエンドツーエンド暗号化、ロールバック制御、[セルフホスティングオプション](https://capgoapp/blog/self-hosted-capgo/)を提供。初期費用2,600ドル + 月額300ドル
--   **[Capawesome](https://capawesomeio/)**：暗号署名を使用しますが、完全な暗号化はありません。ドイツ市場向け
--   **[Appflow](https://ionicio/appflow/live-updates)**：部分的な暗号化、不安定なパフォーマンス、年間6,000ドル。2026年に廃止予定
--   **[Microsoft Code Push](https://wwwredditcom/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**：2024年に廃止、エンドツーエンド暗号化なし
-
-| **ツール** | **暗号化** | **デプロイメントオプション** | **費用** | **ステータス** |
+| **ツール** | **暗号化** | **展開オプション** | **費用** | **ステータス** |
 | --- | --- | --- | --- | --- |
-| Capgo | エンドツーエンド | クラウド、セルフホスト | 初期費用2,600ドル + 月額300ドル | アクティブ |
+| Capgo | エンドツーエンド | クラウド、セルフホスト | $2,600の設定 + 月額$300 | アクティブ |
 | Capawesome | 暗号署名 | クラウド | Capgoに類似 | アクティブ |
-| Appflow | 部分的 | クラウド | 年間6,000ドル | 2026年に廃止予定 |
-| Code Push | なし | クラウド | 該当なし | 2024年に廃止 |
+| Appflow | 部分的 | クラウド | 年額$6,000 | 2026年に廃止予定 |
+| Code Push | なし | クラウド | 該当なし | 2024年に終了 |
 
-**結論**：Capgoのようなツールを使用して、決済データを保護し、コンプライアンスを満たし、アプリストアの問題を回避しましょう
+**結論**: Capgoのようなツールを使用して、支払いデータを保護し、コンプライアンスを満たし、アプリストアの問題を避けましょう。
 
-## Swift Reduce、MVPは終わった？、Apple広告、アプリセキュリティと
+## Swift Reduce, MVPは終わったのか？, Apple Ads, アプリセキュリティなど...
 
-<Steps>
+<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## 1. [Capgo](https://capgoapp/)
+## 1. [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/6806de1de572faef86998587/3963f7973abbc5791f2fae6e45924907jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/3963f7973abbc5791f2fae6e45924907.jpg)
 
-Capgoは、ライブアップデート中の安全な決済データ処理を、アプリストア基準を満たすようにデザインされたエンドツーエンド暗号化によって保証します。
+Capgoは、アプリストア基準を満たすために設計されたエンドツーエンドの暗号化を使用して、ライブアップデート中の安全な支払いデータ処理を保証します。
 
-Capgoの特徴は、エンドユーザーのみが機密性の高いアップデートを復号化できる暗号化方式です。これにより、アップデート中の不正アクセスからデータを保護します。
+Capgoの特異な点は、暗号化方法です。エンドユーザーのみがセンシティブなアップデートを復号化できます。これにより、アップデート中の無許可アクセスからデータを保護します。
 
-Capgoプラットフォームの主な機能：
+以下はCapgoプラットフォームの主な機能です：
 
--   **エンドツーエンド暗号化**：機密性の高いアップデートはエンドユーザーのみが復号化可能
--   **[セルフホスティングオプション](https://capgoapp/blog/self-hosted-capgo/)**：企業が決済データを完全にコントロール可能
--   **ロールバック制御**：問題が発生した場合、即座にアップデートを元に戻せる
--   **[チャネルシステム](https://capgoapp/docs/plugin/cloud-mode/channel-system/)**：特定のユーザーグループに向けたアップデートを送信可能
+-   **エンドツーエンド暗号化**: センシティブなアップデートはエンドユーザーのみが復号化できます。
+-   **[セルフホスティングオプション](https://capgo.app/blog/self-hosted-capgo/)**: 企業に支払いデータへの完全なコントロールを提供します。
+-   **ロールバックコントロール**: 問題が発生した場合に即座にアップデートを元に戻せます。
+-   **[チャネルシステム](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: 特定のアップデートをターゲットユーザーグループに送信します。
 
-Capgoのアプローチは、アップデートデプロイメントで82%のグローバル成功率を達成しています。企業はコンプライアンスニーズに合わせて、セキュアなクラウドホスティングまたはセルフホスティングを選択できます。
+Capgoのアプローチは、アップデートデプロイメントの82%のグローバル成功率を達成しています。企業は、コンプライアンスニーズに合わせて安全なクラウドホスティングまたはセルフホスティングのどちらかを選択できます。
 
-変更されたコンポーネントのみをダウンロードすることで、Capgoはリスクを最小限に抑え、帯域幅使用量を削減します。これまでに、プラットフォームは1155兆件の[セキュアアップデート](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)を提供しています。[\[1\]](https://capgoapp/)
+変更されたコンポーネントのみをダウンロードすることで、Capgoはリスクを最小限に抑え、帯域幅の使用を削減します。これまでに、プラットフォームは1.155兆以上の [安全なアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/)を提供しています。
 
-次に、Capawesomeが決済データのセキュリティにどのように取り組んでいるかを見てみましょう。
+次に、Capawesomeが支払いデータのセキュリティにどのように対処しているかを見ていきましょう。
 
-## 2. [Capawesome](https://capawesomeio/)
+## 2. [Capawesome](https://capawesome.io/)
 
-![Capawesome](https://assetsseobotaicom/capgoapp/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54jpg)
+![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
-2024年にドイツ市場向けに導入され、若手開発者をターゲットとするCapawesomeは、完全なエンドツーエンド暗号化ではなく、暗号署名を通じて決済データアップデートを保護します。[\[1\]](https://capgoapp/) 次に、Appflowが決済データのセキュリティをどのように処理するかを詳しく見ていきましょう。
+Capawesomeは2024年にドイツ市場向けに導入され、若い開発者をターゲットにしており、完全なエンドツーエンド暗号化ではなく暗号署名によって支払いデータのアップデートを保護します [\[1\]](https://capgo.app/)。次は、Appflowが支払いデータのセキュリティをどのように扱うかを詳しく見ていきます。
 
-## 3. [Appflow](https://ionicio/appflow/live-updates)
+## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
-![Appflow](https://assetsseobotaicom/capgoapp/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1jpg)
+![Appflow](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)
 
-Appflowはライブコードアップデートを可能にしますが、パフォーマンスが不安定で、決済データに対するエンドツーエンド暗号化が組み込まれていません。この欠点は、特にAppleとGoogleの決済処理ポリシーと矛盾するため、コンプライアンスの問題を引き起こし、ユーザーの信頼を損なう可能性があります。
+Appflowはライブコードのアップデートを許可しますが、一貫性のないパフォーマンスに苦労し、支払いデータのための組み込みのエンドツーエンド暗号化が不足しています。この欠陥はコンプライアンスの問題を引き起こし、特にAppleとGoogleの支払い処理ポリシーに抵触するため、ユーザーの信頼を損なう可能性があります。
 
-> "@Capgoは、ホットコードプッシュを賢く行う方法です（@AppFlowのような世界中のお金のためではありません）🙂" - NASA's OSIRIS‑REx チーム [\[1\]](https://capgoapp/)
+> "@Capgoはホットコードプッシュを行う賢い方法です（@AppFlowのように世界中のすべてのお金のためではなく）🙂" - NASAのOSIRIS‑RExチーム [\[1\]](https://capgo.app/)
 
-[Ionic](https://ionicframeworkcom/) は2026年にAppflowを廃止する予定であり、チームは確実なアップデートと支払いデータの強力な暗号化を確保するソリューションへの移行が必要です。次に、Microsoft Code Pushとそのセキュリティアプローチについて詳しく見ていきましょう。
+[Ionic](https://ionicframework.com/)は2026年にAppflowを廃止する予定であり、チームは信頼できるアップデートと支払いデータの強力な暗号化を保証するソリューションに移行する必要があります。次は、Microsoft Code Pushとそのセキュリティへのアプローチを詳しく見ていきます。
 
-## 4. [Microsoft Code Push](https://wwwredditcom/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/) (廃止)
+## 4. [Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/) (終了)
 
-Microsoft Code Pushは、継続的な信頼性の問題とパフォーマンスの不足により2024年に廃止されました。また、多くのアプリにとって重要な機能である支払いデータのエンドツーエンド暗号化も備えていませんでした。シャットダウン後、多くのチームはオープンソースプラットフォームの**Capgo**に移行しました。Capgoはエンドツーエンド暗号化を提供し、CI/CDとの円滑な統合を実現し、支払いデータを扱うアプリの確実なライブアップデートを確保するためのAppleとGoogleのセキュリティ基準を満たしています。
+Microsoft Code Pushは、継続的な信頼性の問題とパフォーマンスの不足により2024年に廃止されました。また、支払いデータのための組み込みのエンドツーエンド暗号化も欠如しており、多くのアプリにとって重要な機能です。終了後、多くのチームが**Capgo**というオープンソースプラットフォームに移行しました。Capgoはエンドツーエンドの暗号化、スムーズなCI/CD統合を提供し、支払いデータを処理するためのAppleとGoogleのセキュリティ基準を満たしており、センシティブな支払い情報を扱うアプリの信頼できるライブアップデートを保証しています。
 
 ## ツール比較結果
 
-セキュリティ、コンプライアンス、デプロイメントオプション、コストに基づくツールの内訳は以下の通りです：
+以下は、セキュリティ、コンプライアンス、展開オプション、コストに基づくツールの概要です：
 
-- **Capgo**: 真のエンドツーエンド暗号化を提供し、AppleとGoogleの基準に準拠し、クラウドとセルフホスティングの両方のデプロイメントをサポートし、CI/CDパイプラインと統合され、オープンソースです。価格には$2,600のセットアップ料金と月額約$300が含まれます。5年間でAppflowと比較して最大$26,100の節約が可能です。[\[1\]](https://capgoapp/)
-
-- **Capawesome**: 暗号署名を提供しますが、機能は少なめです。主にドイツ市場を対象としており、価格はCapgoと同様です。[\[1\]](https://capgoapp/)
-
-- **Appflow**: 部分的な暗号化を特徴とし、年間$6,000のコストがかかります。ただし、2026年に廃止が予定されています。\[2\]
-
-- **Microsoft Code Push**: 2024年に廃止予定です。エンドツーエンド暗号化を欠き、CI/CD統合をサポートしていません。[\[1\]](https://capgoapp/)
+-   **Capgo**: 真のエンドツーエンド暗号化、AppleとGoogleの基準に準拠、クラウドとセルフホストの両方に対応、CI/CDパイプラインと統合、オープンソースです。料金は$2,600の設定費用と約$300の月額料を含みます。5年間で、Appflowと比較して最大$26,100を節約できます [\[1\]](https://capgo.app/)。
+    
+-   **Capawesome**: 暗号署名を提供しますが、機能が少ないです。主にドイツ市場をターゲットとし、Capgoと同様の料金体系があります [\[1\]](https://capgo.app/)。
+    
+-   **Appflow**: 部分的な暗号化を特徴としており、年額$6,000の費用がかかります。しかし、2026年に廃止予定です [2]。
+    
+-   **Microsoft Code Push**: 2024年に廃止されます。エンドツーエンドの暗号化がなく、CI/CDの統合もサポートしていません [\[1\]](https://capgo.app/)。
+    
 
 ## まとめと推奨事項
 
-主なポイントは以下の通りです：
+以下は、重要なポイントの概要です：
 
-- **エンドツーエンド暗号化の実装**: アップデートと支払いデータが完全に暗号化され、アプリストアのセキュリティ基準を満たすことを確保
-- **コストの効果的な管理**: 初期セットアップ費用$2,600、月額料金$300 - Appflowの年間料金$6,000よりもはるかに低額 [\[1\]](https://capgoapp/)
-- **コンプライアンスの維持**: セキュリティ対策を定期的に更新し、アプリストアのポリシーに合わせる
-- **デプロイメントの柔軟性の提供**: クラウドまたはセルフホスティングソリューションを選択し、支払いデータのセキュリティを制御
+-   **エンドツーエンド暗号化を実装する**: アップデートと支払いデータが完全に暗号化され、アプリストアのセキュリティ基準を満たすことを確認します。
+-   **コストを効果的に管理する**: 初期設定は$2,600で、月額料金は$300 - Appflowの年額$6,000よりもはるかに低いです [\[1\]](https://capgo.app/)。
+-   **コンプライアンスを維持する**: 定期的にセキュリティ対策を更新し、アプリストアのポリシーに合わせて問題を避けます。
+-   **展開の柔軟性を提供する**: クラウドまたはセルフホストのソリューションから選択し、支払いデータのセキュリティに対するコントロールを持ちます。
 
-これらのステップに従うことで、AppleとGoogleの支払いデータ要件を満たしながら、ライブアップデートワークフローを効率化できます。
+これらのステップに従うことで、AppleとGoogleの支払いデータ要件を満たしながら、ライブアップデートのワークフローを効率化できます。

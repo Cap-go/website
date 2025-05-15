@@ -1,9 +1,9 @@
 ---
 slug: secure-storage-for-offline-tokens-in-capacitor
-title: Archiviazione sicura per token offline in Capacitor
+title: Sichere Speicherung für Offline-Token in Capacitor
 description: >-
-  Erfahren Sie, wie Sie Offline-Authentifizierungstoken mithilfe von
-  Verschlüsselung und biometrischen Kontrollen in mobilen Anwendungen sicher
+  Erfahren Sie, wie Sie Authentifizierungs-Token für die Offline-Speicherung
+  sicher mit Verschlüsselung und biometrischen Kontrollen in mobilen Anwendungen
   speichern können.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -21,65 +21,60 @@ published: true
 locale: de
 next_blog: ''
 ---
+**Möchten Sie die Authentifizierungstoken Ihrer App offline sicher aufbewahren?** Hier ist, was Sie wissen müssen:
 
-**Möchten Sie die Authentifizierungs-Tokens Ihrer App offline sicher aufbewahren?** Hier ist, was Sie wissen müssen:
+-   **Token encryptieren**: Verwenden Sie AES-256-Verschlüsselung mit iOS Keychain oder Android Keystore.
+-   **Zugriff kontrollieren**: Fügen Sie [biometrische Authentifizierung](https://capgo.app/plugins/capacitor-native-biometric/) für zusätzliche Sicherheit hinzu.
+-   **Token-Management**: Verwenden Sie kurzlebige Token, erneuern Sie diese sicher und rotieren Sie die Schlüssel regelmäßig.
+-   **Beste Werkzeuge**: Probieren Sie **@[capacitor](https://capacitorjs.com/)\-community/secure-storage** oder **[Ionic Identity Vault](https://ionic.io/docs/identity-vault/)** für plattformübergreifenden verschlüsselten Speicher aus.
 
--   **Tokens verschlüsseln**: Verwenden Sie AES-256-Verschlüsselung mit iOS Keychain oder Android Keystore
--   **Zugriffskontrolle**: Fügen Sie [biometrische Authentifizierung](https://capgoapp/plugins/capacitor-native-biometric/) für zusätzliche Sicherheit hinzu
--   **Token-Management**: Verwenden Sie kurzlebige Tokens, aktualisieren Sie sie sicher und rotieren Sie Schlüssel regelmäßig
--   **Beste Tools**: Probieren Sie **@[capacitor](https://capacitorjscom/)\-community/secure-storage** oder **[Ionic Identity Vault](https://ionicio/docs/identity-vault/)** für plattformübergreifenden verschlüsselten Speicher
+Diese Schritte schützen Benutzerdaten, verhindern den Diebstahl von Token und gewährleisten einen sicheren Offline-Zugriff. Lesen Sie weiter für detaillierte Vergleiche und Einrichtungsanleitungen.
 
-Diese Schritte schützen Benutzerdaten, verhindern Token-Diebstahl und gewährleisten sicheren Offline-Zugriff. Lesen Sie weiter für detaillierte Vergleiche und Einrichtungsanweisungen.
+## [Ionic Identity Vault](https://ionic.io/docs/identity-vault/): Sichere mobile biometrische Authentifizierung
 
-## [Ionic Identity Vault](https://ionicio/docs/identity-vault/): Sichere mobile biometrische Authentifizierung
+![Ionic Identity Vault](https://assets.seobotai.com/capgo.app/6802fa419291ae98c5002559/e2484017084695edeec1f98ae40b009b.jpg)
 
-![Ionic Identity Vault](https://assetsseobotaicom/capgoapp/6802fa419291ae98c5002559/e2484017084695edeec1f98ae40b009bjpg)
+<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-<Steps>
-1. Überprüfen Sie die unterstützten biometrischen Funktionen
-2. Initialisieren Sie den Vault mit den erforderlichen Konfigurationen
-3. Implementieren Sie die Authentifizierungslogik für sicheren Zugriff
-</Steps>
+## Sicherheitsstandards für Offline-Token
 
-## Sicherheitsstandards für Offline-Tokens
+Um eine sichere Speicherung zu gewährleisten, verwenden Sie **AES-256-Verschlüsselung** über iOS Keychain oder Android Keystore. Implementieren Sie **PKCE** während der ersten OAuth2-Codeaustausche und stellen Sie sicher, dass kurzlebige Refresh-Token nach jeder Verwendung rotiert werden. Fügen Sie zudem **biometrische Authentifizierung** hinzu, um den Zugriff auf Token zu schützen und die allgemeine Sicherheit zu erhöhen.
 
-Um eine sichere Speicherung zu gewährleisten, verwenden Sie **AES-256-Verschlüsselung** über iOS Keychain oder Android Keystore. Implementieren Sie **PKCE** während des anfänglichen OAuth2-Code-Austauschs und stellen Sie sicher, dass kurzlebige Refresh-Tokens nach jeder Verwendung rotiert werden. Fügen Sie zusätzlich **biometrische Authentifizierung** hinzu, um den Token-Zugriff zu schützen und die Gesamtsicherheit zu erhöhen.
+## Implementierung von sicherer Speicherung
 
-## Implementierung der sicheren Speicherung
-
-Um AES-256-Verschlüsselung, PKCE und biometrische Kontrollen wie zuvor besprochen zu verwenden, beginnen Sie mit der Installation des Secure Storage Plugins:
+Um die zuvor besprochenen AES‑256-Verschlüsselung, PKCE und biometrische Kontrollen zu verwenden, beginnen Sie mit der Installation des Secure Storage-Plugins:
 
 ```bash
 npm install @capacitor-community/secure-storage
 ```
 
-Überprüfen Sie die Plugin-Dokumentation für Details zur Einrichtung von Verschlüsselungsschlüsseln, [Aktivierung biometrischer Authentifizierung](https://capgoapp/plugins/capacitor-native-biometric/) und Verwaltung von Offline-Token-Speicherung, -Abruf und -Aktualisierungsprozessen.
+Überprüfen Sie die Plugin-Dokumentation für Details zur Einrichtung von Verschlüsselungsschlüsseln, [Aktivierung der biometrischen Authentifizierung](https://capgo.app/plugins/capacitor-native-biometric/) und zum Umgang mit der Speicherung, dem Abruf und der Erneuerung von Offline-Token.
 
-Sobald dies eingerichtet ist, fahren Sie mit der Definition von Methoden zur Speicherung von Tokens und Verwaltung ihres Lebenszyklus offline fort, was im nächsten Abschnitt behandelt wird.
+Sobald dies eingerichtet ist, fahren Sie mit der Definition von Methoden zur Speicherung von Token und zur Verwaltung ihres Lebenszyklus im Offline-Modus fort, die im nächsten Abschnitt behandelt wird.
 
 ## Analyse der Speicherlösungen
 
-Bei der Auswahl sicherer Speicheroptionen für Offline-Tokens in Capacitor-Anwendungen müssen Entwickler Faktoren wie [Verschlüsselungsmethoden](https://capgoapp/docs/cli/migrations/encryption/), Kompatibilität über Plattformen hinweg und Integrationseinfachheit abwägen. Nachfolgend finden Sie eine Aufschlüsselung wichtiger Secure-Storage-Plugins für die Verwaltung von Offline-Tokens.
+Bei der Auswahl sicherer Speicheroptionen für Offline-Token in Capacitor-Anwendungen müssen Entwickler Faktoren wie [Verschlüsselungsmethoden](https://capgo.app/docs/cli/migrations/encryption/), Kompatibilität zwischen Plattformen und die Integrationserleichterung abwägen. Im Folgenden finden Sie einen Überblick über wichtige Secure-Storage-Plugins zur Verwaltung von Offline-Token.
 
-### Plugin-Funktionsvergleich
+### Vergleich der Plugin-Funktionen
 
--   **@capacitor-community/secure-storage**: Bietet AES-256-Verschlüsselung mit iOS Keychain und Android Keystore, unterstützt [biometrische Entsperrung](https://capgoapp/plugins/capacitor-native-biometric/) und enthält automatische Schlüsselrotation
--   **@ionic/storage**: Enthält keine integrierte Verschlüsselung, erfordert einen manuellen Wrapper für Sicherheit und hat keine biometrischen Authentifizierungsfunktionen
--   **Native SecureStorage**: Arbeitet ausschließlich mit iOS Keychain, unterstützt aber kein Android
--   **@capawesome/secure-storage**: Bietet AES-256-Verschlüsselung, funktioniert plattformübergreifend und bietet optionale biometrische Authentifizierung
--   **@ionic-enterprise/identity-vault**: Liefert Hardware-Level-Verschlüsselung, unterstützt biometrische Authentifizierung und verwaltet den sicheren Token-Lebenszyklus effektiv
+-   **@capacitor-community/secure-storage**: Bietet AES-256-Verschlüsselung mit iOS Keychain und Android Keystore, unterstützt [biometrisches Entsperren](https://capgo.app/plugins/capacitor-native-biometric/) und umfasst eine automatische Schlüsselrotation.
+-   **@ionic/storage**: Enthält keine integrierte Verschlüsselung, benötigt einen manuellen Wrapper für die Sicherheit und verfügt nicht über Funktionen zur biometrischen Authentifizierung.
+-   **Native SecureStorage**: Funktioniert ausschließlich mit dem iOS Keychain, unterstützt jedoch kein Android.
+-   **@capawesome/secure-storage**: Bietet AES-256-Verschlüsselung, funktioniert plattformübergreifend und bietet optionale biometrische Authentifizierung.
+-   **@ionic-enterprise/identity-vault**: Bietet Hardware-verschlüsselte Speicherung, unterstützt biometrische Authentifizierung und verwaltet effektiv den sicheren Token-Lebenszyklus.
 
 ## Zusammenfassung
 
-Hier ist ein schneller Überblick über die wichtigsten Praktiken und Tools für die Offline-Token-Speicherung:
+Hier ist eine kurze Übersicht über die wichtigsten Praktiken und Werkzeuge zur Speicherung von Offline-Token:
 
--   **Tokens verschlüsseln** mit Hardware-gestützten Schlüsselspeichern, [gesichert durch Biometrie](https://capgoapp/plugins/capacitor-native-biometric/)
--   Implementieren Sie strikte Richtlinien für Token-Ausstellung, -Ablauf, -Rotation und -Aktualisierung
+-   **Token verschlüsseln** unter Verwendung von hardwaregestützten Schlüsselspeichern, [gesichert mit Biometrie](https://capgo.app/plugins/capacitor-native-biometric/).
+-   Implementieren Sie strikte Richtlinien für die Ausgabe, das Ablaufdatum, die Rotation und die Erneuerung von Token.
 
-Für plattformübergreifende Verschlüsselung sind Tools wie **@capacitor-community/secure-storage** und **Ionic Identity Vault** ausgezeichnete Optionen. Zusätzlich bietet **[Capgo](https://capgoapp/)** End-to-End-Verschlüsselung, CI/CD-Integration und nutzergezielte Rollouts unter Einhaltung der Apple- und Android-Store-Anforderungen.
+Für plattformübergreifende Verschlüsselung sind Werkzeuge wie **@capacitor-community/secure-storage** und **Ionic Identity Vault** ausgezeichnete Optionen. Außerdem bietet **[Capgo](https://capgo.app/)** End-to-End-Verschlüsselung, CI/CD-Integrationen und benutzerspezifische Rollouts und erfüllt gleichzeitig die Anforderungen der Apple- und Android-Stores.
 
-### Tools und Ressourcen
+### Werkzeuge und Ressourcen
 
--   **@capacitor-community/secure-storage**: Verschlüsselte Key-Value-Speicherung für iOS und Android
--   **Ionic Identity Vault**: Enterprise-Level-Speicherung mit biometrischer Sicherheit
--   **Capgo**: Bietet Live-Updates mit verschlüsselter CI/CD-Bereitstellung
+-   **@capacitor-community/secure-storage**: Verschlüsselte Schlüssel-Wert-Speicherung für iOS und Android.
+-   **Ionic Identity Vault**: Unternehmensspeicher mit biometrischer Sicherheit.
+-   **Capgo**: Bietet Live-Updates mit verschlüsselter CI/CD-Bereitstellung.

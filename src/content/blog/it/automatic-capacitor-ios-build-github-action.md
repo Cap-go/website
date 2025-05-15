@@ -1,170 +1,319 @@
 ---
 slug: automatic-capacitor-ios-build-github-action
-title: GitHubアクションとプロビジョニングプロファイルを使用したCapacitor iOSの自動ビルド
-description: 5分でIonicのiOSアプリ用のCI/CDパイプラインをfastlaneとGitHub Actionsで設定する方法（2024年）
+title: Costruzione automatica di Capacitor per IOS con azioni GitHub con certificato
+description: >-
+  Cómo configurar un pipeline de CI/CD para tu aplicación IOS Ionic utilizando
+  fastlane y GitHub Actions en 5 minutos (2024)
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-08-04T00:00:00.000Z
 updated_at: 2025-01-21T00:00:00.000Z
 head_image: /fastlane_ios.webp
-head_image_alt: GitHubのFastlane testflightアクション図解
+head_image_alt: Illustration de l'action GitHub TestFlight Fastlane
 keywords: 'Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates'
 tag: CI/CD
 published: true
-locale: ja
+locale: it
 next_blog: automatic-capacitor-android-build-github-action
 ---
-# Build automatici iOS con GitHub Actions usando i Certificati
+# Compilaciones automáticas de iOS con GitHub Actions usando certificados
 
-La configurazione del CI/CD per le app Capacitor può essere complessa e richiedere tempo. Ecco cosa devi sapere:
+Configurar CI/CD para aplicaciones de Capacitor puede ser complejo y consumir tiempo. Aquí tienes lo que necesitas saber:
 
-## Prerequisiti
+## Prerrequisitos
 
-Prima di iniziare, avrai bisogno di:
+Antes de comenzar, necesitarás configurar:
 
-- Un account GitHub con accesso admin
-- Iscrizione al programma sviluppatori iOS 
-- Accesso API di App Store Connect con permessi appropriati
-- Comprensione dei workflow di GitHub Actions
-- Conoscenza della configurazione di Fastlane
-- Tempo per mantenere e debuggare la pipeline
-- Certificati e profili di provisioning appropriati
+- Una cuenta de GitHub con acceso de administrador
+- Membresía en el programa de desarrollador de iOS
+- Acceso a la API de App Store Connect con los permisos adecuados
+- Comprensión de los flujos de trabajo de GitHub Actions
+- Conocimientos sobre la configuración de Fastlane
+- Tiempo para mantener y depurar la canalización
+- Certificados y perfiles de aprovisionamiento adecuados
 
-## Setup CI/CD Professionale di Capgo
+## Configuración profesional de CI/CD por Capgo
 
-Salta la complessità. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura la tua pipeline CI/CD direttamente nella piattaforma preferita:
+Salta la complejidad. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configura tu canalización de CI/CD directamente en tu plataforma preferida:
 
-- **Indipendenza dalla Piattaforma**: Funziona con GitHub Actions, GitLab CI o altri
-- **Integrazione Completa**: Non serve cambiare piattaforma, funziona con il tuo processo attuale  
-- **Configurazione Personalizzata**: Setup su misura per le tue esigenze
-- **Guida Esperta**: Abbiamo già configurato CI/CD per oltre 50 app
+- **Independencia de plataforma**: Funciona con GitHub Actions, GitLab CI u otros
+- **Integración fluida**: No es necesario cambiar de plataforma, funciona con tu proceso actual
+- **Configuración personalizada**: Configuración adaptada a las necesidades de tu proyecto
+- **Asesoramiento experto**: Ya hemos configurado CI/CD para más de 50 aplicaciones
 
-### Prezzi
-- Setup una tantum: 2.600€
-- Costi di esercizio: ~300€/anno
-- Confronto con altre soluzioni proprietarie: 6.000€/anno  
-- **Risparmio di 26.100€ in 5 anni**
+### Precios
+- Tarifa de configuración única: $2,600
+- Costos de funcionamiento: ~$300/año
+- Comparar con otras soluciones propietarias: $6,000/año
+- **Ahorra $26,100 en 5 años**
 
-[Configura CI/CD Ora](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+[Configurar CI/CD ahora](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
 
-## Guida al Setup Manuale
+## Guía de configuración manual
 
-Se vuoi configurare tutto da solo, ecco cosa devi fare:
+Si aún deseas configurar todo tú mismo, aquí tienes lo que necesitas hacer:
 
-## Continuous Delivery per iOS usando Fastlane e GitHub Actions e certificati
+## Entrega continua para iOS usando Fastlane y GitHub Actions y certificado
 
-## Prerequisiti
+## Prerrequisitos
 
-Prima di continuare con il tutorial:
+Antes de continuar con el tutorial:
 
-- Assicurati di avere Fastlane [installato](https://docs.fastlane.tools/) sulla tua macchina di sviluppo.
-- Verifica di far parte del programma sviluppatori iOS.
+- Asegúrate de tener Fastlane [instalado](https://docs.fastlane.tools/) en tu máquina de desarrollo.
+- Asegúrate de que eres parte de la membresía del programa de desarrollador de iOS.
 
-## Informazioni importanti sui prezzi
+## Información importante sobre el precio
 
-![Price GitHub Action](/price_github_actions.webp)
+![Precio GitHub Action](/price_github_actions.webp)
 
 [https://github.com/features/actions](https://github.com/features/actions/)
 
-Il servizio è 'gratuito' fino al limite, a seconda della macchina scelta.
-Useremo una macchina **_macOS_**, puoi vedere nello screenshot il prezzo e i limiti (prezzi aggiornati alla creazione del tutorial, potrebbero subire variazioni in futuro)
+El servicio es '_gratis'_ hasta el límite, dependiendo de la máquina elegida.  
+Vamos a usar una **_máquina macOS_**, puedes ver en la captura de pantalla su precio y límites (precios al momento de la creación del tutorial, pueden sufrir cambios en el futuro)
 
-**Una volta avvisati dei requisiti e prezzi, continuiamo.**
+**Una vez advertidos sobre los requisitos y precios, continuemos.**
 
-> **Nota: In questo post assumo che tu abbia già creato l'app in App Store Connect. Le informazioni importanti verranno copiate da Fastlane!**
+> **Nota: En la publicación asumo que tienes la aplicación creada en App Store Connect. ¡La información importante será copiada por Fastlane!**
 
-## Cosa imparerai nel tutorial
+## Qué aprenderás en el tutorial
 
-**Passi da seguire nel post**
+**Pasos a seguir en la publicación**
 
-1. _Usare l'API di App Store Connect con Fastlane_
-    - _Requisiti:_
-      - _Creare una chiave API di App Store Connect_
-      - _Usare una chiave API di App Store Connect_
-2. _Copiare i file Fastlane_
-3. _Configurare GitHub Actions_
+1.  _Uso de la API de App Store Connect con Fastlane_
+    - _Requisitos:_
+      - _Crear una clave de API de App Store Connect_
+      - _Usar una clave de API de App Store Connect_
+2.  _Copiar archivos de Fastlane_
+3.  _Configurar GitHub Actions_
 
-[continua...]
+## 1. Uso de la API de App Store Connect con Fastlane
 
-I've translated the first major section. Would you like me to continue with the rest?
+> A partir de febrero de 2021, se requiere autenticación de dos factores o verificación en dos pasos para que todos los usuarios inicien sesión en App Store Connect. Esta capa adicional de seguridad para tu ID de Apple ayuda a garantizar que eres la única persona que puede acceder a tu cuenta.  
+> De [Soporte de Apple](https://developer.apple.com/support/authentication/)
 
-Tuttavia, c'è un compromesso - dovrai aggiornare manualmente le informazioni di conformità della tua app in App Store Connect prima di poter distribuire la build agli utenti.
+### Requisitos
 
-Questa ottimizzazione è principalmente utile per progetti privati dove i minuti di build hanno un costo. Per progetti pubblici/gratuiti, i minuti di build sono gratuiti quindi non c'è bisogno di abilitare questa impostazione. Vedi la [pagina dei prezzi](https://github.com/pricing/) di GitHub per maggiori dettagli.
+Para que Fastlane pueda utilizar la API de App Store Connect para cargar tu aplicación, necesitas proporcionar las siguientes **tres** cosas:
 
-## 7. Configurare GitHub Actions
+1.  ID de emisor
+2.  ID de clave
+3.  Archivo de clave o contenido de clave
 
-**Configurare i segreti GitHub**
+### Obtención de una clave de API de App Store Connect
 
-Si prega di copiare i segreti dal file `.env` e incollarli nei segreti del repository GitHub.
+Para generar claves, debes tener permiso de Administrador en App Store Connect. Si no tienes ese permiso, puedes dirigir a la persona relevante a este artículo.
 
-Vai su **Settings** > **Secrets and variables** > **Actions** > **New repository secret**
+1. Inicia sesión en [App Store Connect](https://appstoreconnect.apple.com/).
 
-<1>
-  <2>
-<3>
+2. Selecciona [Usuarios y acceso](https://appstoreconnect.apple.com/access/users/).
 
-2. `BUILD_CERTIFICATE_BASE64` - Certificato codificato in Base64.
+![Acceso de usuario a App Store Connect](/select_user_access.webp)
 
-3. `BUILD_PROVISION_PROFILE_BASE64` - Profilo di provisioning codificato in Base64.
+3 — Selecciona la pestaña de Integración.
 
-4. `BUNDLE_IDENTIFIER` - l'identificatore bundle della tua app.
+![Integración de API de App Store Connect](/user_access_keys.webp)
 
-5. `APPLE_KEY_ID` — ID Chiave API App Store Connect 🔺.
+4. Haz clic en Generar clave de API o en el botón Agregar (+).
 
-6. `APPLE_ISSUER_ID` — ID Emittente API App Store Connect 🔺.
+![Crear claves de API de App Store Connect](/user_access.webp)
 
-7. `APPLE_KEY_CONTENT` — Contenuto chiave API App Store Connect 🔺 di _.p8_, [controllalo](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
+5. Ingresa un nombre para la clave. El nombre es solo para tu referencia y no es parte de la clave en sí.
 
-## 8. Configurare il file workflow di GitHub
+![Crear nombre de claves de API de App Store Connect](/gen_key.webp)
 
-Crea una directory workflow di GitHub.
+6 — En Acceso, selecciona el rol para la clave. Los roles que se aplican a las claves son los mismos que se aplican a los usuarios de tu equipo. Consulta [permisos de roles](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). Recomendamos seleccionar **Administrador de aplicaciones**.
+
+7. Haz clic en Generar.
+
+> **El acceso de una clave de API no puede limitarse a aplicaciones específicas.**
+
+El nombre de la nueva clave, el ID de la clave, un enlace de descarga y otra información aparecen en la página.
+
+![Descargar claves de App Store Connect](/download_key.webp)
+
+Puedes obtener aquí toda la información necesaria.  
+<1> ID de emisor. (`APPLE_ISSUER_ID` secreto)  
+<2> ID de clave. (`APPLE_KEY_ID` secreto)  
+<3> Haz clic en "Descargar clave de API" para descargar tu clave privada de API. El enlace de descarga solo aparece si la clave privada no se ha descargado aún. Apple no guarda una copia de la clave privada. Así que, solo puedes descargarla una vez.
+
+> _🔴_ Guarda tu clave privada en un lugar seguro. Nunca debes compartir tus claves, guardar claves en un repositorio de código o incluir claves en código del lado del cliente.
+
+### Uso de una clave de API de App Store Connect
+
+El archivo de clave API (archivo p8 que descargas), el ID de clave y el ID de emisor son necesarios para crear el token JWT para la autorización. Hay múltiples formas en que esta información se puede transmitir a Fastlane. Elegí usar la nueva acción de Fastlane `app_store_connect_api_key`. Puedes aprender otras formas en [documentación de Fastlane](https://docs.fastlane.tools/actions/app_store_connect_api_key/). Muestra este método porque creo que es la forma más fácil de trabajar con la mayoría de CI disponibles, donde puedes establecer variables de entorno.
+
+Por favor, convierte el archivo p8 que descargas a Base64 y guárdalo como un secreto (`APPLE_KEY_CONTENT`).
+
+## 2. Certificados
+
+Abre XCode y ve a **Configuración** > **Cuentas** > **ID de Apple** > **Equipos** y selecciona tu equipo.
+
+![Identidades de firma de código](/code_signing_identities.webp)
+
+Haz clic en **Administrar certificados**.
+
+Si aún no has creado un certificado, puedes crear uno nuevo.
+
+Haz clic en **+** y selecciona **Distribución de Apple**.
+
+![Distribución de Apple](/apple_distribution.webp)
+
+Luego necesitas ir a llaveros para descargar el certificado como un archivo `.p12`.
+
+Para hacerlo, debes ir a llaveros, cambiar al llavero **inicio de sesión** y luego a la pestaña **Mis certificados**.
+
+![Mis certificados](/my_certificates.webp)
+
+Luego puedes seleccionar el certificado que deseas descargar. (Busca por la fecha del certificado)
+
+Y luego haz clic derecho en la clave privada del certificado y selecciona **Exportar**.
+
+Elige el formato de archivo **Intercambio de información personal (.p12)**.
+
+Eso descargará el certificado como un archivo `.p12`.
+
+Por favor, abre el archivo en un terminal y usa el siguiente comando para convertirlo a Base64:
+
+## 3. Perfiles de aprovisionamiento
+
+Abre [Apple Developer](https://developer.apple.com/account/resources/profiles/list) y selecciona el equipo adecuado.
+
+Luego crea un nuevo perfil, haciendo clic en **+** 
+
+![Crear un nuevo perfil](/create_new_profile.webp)
+
+Y selecciona **App Store Connect**. 
+
+![Seleccionar App Store Connect](/select_app_store_connect.webp)
+
+Luego necesitas seleccionar la aplicación correcta, ten cuidado, no puedes usar un comodín, de lo contrario la firma fallará.
+
+![Seleccionar la aplicación correcta](/select_app.webp)
+
+Selecciona el certificado correcto que creaste antes (busca la fecha de vencimiento, debe ser el mismo día y mes que hoy) y haz clic en **Continuar**.
+
+![Seleccionar el certificado correcto](/select_certificate.webp)
+
+Finalmente, ingresa el nombre del perfil y haz clic en **Generar**. 
+
+> El nombre se utilizará para identificar el perfil en Fastlane, bajo el valor de `APPLE_PROFILE_NAME`.
+
+![Generar el perfil](/generate_profile.webp)
+
+Puedes descargar el perfil como un archivo `.mobileprovision`.
+
+![Descargar el perfil](/download_profile.webp)
+
+Por favor, convierte el perfil a Base64 y guárdalo como un secreto (`BUILD_PROVISION_PROFILE_BASE64`).
+
+## 4. Copiar archivos de Fastlane
+
+Fastlane es una biblioteca Ruby creada para automatizar tareas comunes de desarrollo móvil. Usando Fastlane, puedes configurar "carriles" personalizados que agrupan una serie de "acciones" que realizan tareas que normalmente realizarías usando Android Studio. Puedes hacer mucho con Fastlane, pero para los propósitos de este tutorial, solo usaremos un puñado de acciones básicas.
+
+Crea una carpeta de Fastlane en la raíz de tu proyecto y copia los siguientes archivos:
+`Fastfile`
+
+## 5. Configuración de secretos
+Localmente, Fastlane usará el archivo `.env` para los secretos.
+Aquí tienes un ejemplo del archivo `.env`:
+
+### Obtener el APP_STORE_CONNECT_TEAM_ID
+Ve al [Centro de desarrolladores](https://developer.apple.com/account) y desplázate hacia abajo hasta la sección `Detalles de membresía`.
+El `ID de equipo` es el valor que necesitas establecer en el secreto `APP_STORE_CONNECT_TEAM_ID`.
+
+### Obtener el BUNDLE_IDENTIFIER
+
+1. Abre Xcode
+2. Haz doble clic en la `Aplicación` en el navegador del proyecto
+3. Luego haz clic en la pestaña `Firma y capacidades`
+4. Copia el valor del `Identificador de paquete`. Este es el valor que necesitas establecer en el secreto `BUNDLE_IDENTIFIER`.
+
+## 6. Procesamiento de compilaciones
+
+En GitHub Actions, **se te cobra según los minutos** que has utilizado para ejecutar tu flujo de trabajo de CI/CD. Desde mi experiencia, toma alrededor de 10 a 15 minutos antes de que una compilación pueda ser procesada en App Store Connect.
+
+Para proyectos privados, el costo estimado por compilación puede llegar a **$0.08/min x 15 mins = $1.2**, o más, dependiendo de la configuración y dependencias de tu proyecto.
+
+Si te preocupa el costo para proyectos privados, puedes establecer `skip_waiting_for_build_processing` en `true`. Esto ahorrará minutos de compilación al no esperar a que App Store Connect termine de procesar la compilación.
+
+Cependant, il y a un compromis - vous devrez mettre à jour manuellement les informations de conformité de votre application dans App Store Connect avant de pouvoir distribuer la version aux utilisateurs.
+
+Cette optimisation est principalement utile pour les projets privés où les minutes de construction coûtent de l'argent. Pour les projets publics/gratuits, les minutes de construction sont gratuites, donc il n'est pas nécessaire d'activer ce paramètre. Consultez la [page de tarification de GitHub](https://github.com/pricing/) pour plus de détails.
+
+
+## 7. Configurer GitHub Actions
+
+**Configurer les secrets GitHub**
+
+Veuillez copier les secrets depuis le fichier `.env` et les coller dans les secrets du dépôt GitHub.
+
+Allez dans **Paramètres** > **Secrets et variables** > **Actions** > **Nouveau secret de dépôt**
+
+<div class="mx-auto" style="width: 100%; margin-top: 20px;">
+  <img src="/apple_team_id.webp" alt="app-store-connect-team-id">
+</div>
+
+2. `BUILD_CERTIFICATE_BASE64` - Certificat encodé en Base64.
+
+3. `BUILD_PROVISION_PROFILE_BASE64` - Profil de provisionnement encodé en Base64.
+
+4. `BUNDLE_IDENTIFIER` - identifiant du bundle de votre application.
+
+5. `APPLE_KEY_ID` — ID de clé API App Store Connect 🔺ID de clé.
+
+6. `APPLE_ISSUER_ID` — ID d'émetteur de clé API App Store Connect 🔺ID d'émetteur.
+
+7. `APPLE_KEY_CONTENT` — Contenu de la clé API App Store Connect 🔺 Contenu de la clé de _.p8_, [vérifiez-le](https://github.com/fastlane/fastlane/issues/18655/#issuecomment-881764901)
+
+## 8. Configurer le fichier de workflow GitHub
+
+Créez un répertoire de workflow GitHub.
 
 ```shell
 base64 -i APPLE_KEY_CONTENT.p8 | pbcopy
 ```
 
-All'interno della cartella `workflow`, crea un file chiamato `build-upload-ios.yml` e aggiungi quanto segue.
+Dans le dossier `workflow`, créez un fichier nommé `build-upload-ios.yml` et ajoutez ce qui suit.
 
 ```shell
 base64 -i BUILD_CERTIFICATE.p12 | pbcopy
 ```
 
-Questo workflow dovrebbe essere attivato dopo ogni _tag_ GitHub, se hai bisogno di automatizzare il tag, consulta prima [Build e release automatici con GitHub actions](/blog/automatic-build-and-release-with-github-actions/).
+Ce workflow doit être déclenché après chaque _tag_ GitHub, si vous devez automatiser le tag, veuillez consulter [Construction et publication automatiques avec les actions GitHub](/blog/automatic-build-and-release-with-github-actions/) d'abord.
 
-Quindi questo workflow preleverà le tue dipendenze NodeJS, le installerà e costruirà la tua app JavaScript.
+Ensuite, ce workflow tirera vos dépendances NodeJS, les installera et construira votre application JavaScript.
 
-> Ogni volta che invii un nuovo commit, verrà costruita una release in TestFlight.
+> Chaque fois que vous envoyez un nouveau commit, une version sera construite dans TestFlight.
 
-La tua App non deve necessariamente utilizzare Ionic, è obbligatoria solo la base Capacitor, può avere vecchi moduli Cordova, ma è preferibile utilizzare i plugin Capacitor JS.
+Votre application n'a pas besoin d'utiliser Ionic, seul le base Capacitor est obligatoire, elle peut avoir un ancien module Cordova, mais le plugin Capacitor JS doit être privilégié.
 
-## 8. Attivare il workflow
+## 8. Déclencher le workflow
 
-**Creare un Commit**
+**Créer un commit**
 
-Fai un _commit_, dovresti vedere il workflow attivo nel repository.
+Faites un _commit_, vous devriez voir le workflow actif dans le dépôt.
 
-**Attivare il workflow**
+**Déclencher le workflow**
 
-Pusha i nuovi commit nel branch `main` o `development` per attivare il workflow.
+Poussez les nouveaux commits vers la branche `main` ou `developement` pour déclencher le workflow.
 
-![Iniziato con commit](/cd_started.webp)
+![Commencé avec le commit](/cd_started.webp)
 
-Dopo alcuni minuti, la build dovrebbe essere disponibile nella dashboard di App Store Connect.
+Après quelques minutes, la construction devrait être disponible dans votre tableau de bord App Store Connect.
 
-![Dashboard Testflight](/testflight_app.webp)
+![Tableau de bord Testflight](/testflight_app.webp)
 
-## 9. Posso deployare dalla macchina locale?
+## 9. Puis-je déployer depuis la machine locale ?
 
-Sì, puoi farlo, ed è molto semplice.
+Oui, vous pouvez, et c'est très facile.
 
-Puoi utilizzare Xcode per buildare e firmare la tua app, come sempre.
+Vous pouvez utiliser Xcode pour construire et signer votre application, comme toujours.
 
-### Grazie
+### Merci
 
-Questo blog si basa sui seguenti articoli:
-- [Continuous delivery per iOS utilizzando Fastlane e GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
-- [Documentazione Fastlane](https://docs.fastlane.tools/app-store-connect-api/)
-- [Questo messaggio GitHub da @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)
-- [Questa documentazione GitHub](https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development)
+Ce blog est basé sur les articles suivants :
+- [Livraison continue pour IOS utilisant Fastlane et GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
+- [Documentation Fastlane](https://docs.fastlane.tools/app-store-connect-api/)
+- [Ce message GitHub de @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)
+- [Cette documentation GitHub](https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development)

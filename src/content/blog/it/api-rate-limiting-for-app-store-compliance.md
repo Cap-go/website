@@ -1,7 +1,9 @@
 ---
-slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
-title: API頻度制限のApp Store対応
-description: APIレート制限の手法とアプリストアのコンプライアンス、セキュリティ、システムパフォーマンスにおけるその重要性について学びましょう。
+slug: api-rate-limiting-for-app-store-compliance
+title: API Rate Limiting para Cumplimiento de la App Store
+description: >-
+  Impara i metodi di limitazione delle richieste API e la loro importanza per la
+  conformità all'app store, la sicurezza e le prestazioni del sistema.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -9,66 +11,66 @@ created_at: 2025-04-02T03:23:39.305Z
 updated_at: 2025-04-02T03:23:51.231Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6-1743564231231.jpg
-head_image_alt: モバイル開発
+head_image_alt: Desarrollo Móvil
 keywords: >-
   API rate limiting, app store compliance, security, performance, overload
   protection, request management
 tag: 'Development, Mobile, Security'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
-Il limite di velocità delle API garantisce che la tua app rispetti le linee guida di Apple e Google proteggendo il tuo sistema dal sovraccarico e dagli abusi. Limita la frequenza con cui gli utenti possono effettuare richieste, migliorando la sicurezza, riducendo i costi e garantendo prestazioni fluide. Ecco cosa devi sapere:
+API rate limiting确保您的应用符合苹果和谷歌的指南，同时保护您的系统免受过载和滥用。它限制用户发出请求的频率，提高安全性，节省成本，并确保平稳的性能。以下是您需要知道的事项：
 
--   **Perché è importante**: Previene gli attacchi di forza bruta, gestisce il carico del server ed evita i rifiuti dell'app store.
--   **Metodi**:
-    -   Finestra fissa: Semplice ma può causare picchi di traffico.
-    -   Finestra scorrevole: Uniforma il traffico ma usa più memoria.
-    -   Token Bucket: Gestisce i burst ma è complesso da configurare.
--   **Conformità**: Usa il backoff esponenziale per i tentativi e rispondi con un codice di stato 429 quando i limiti vengono superati.
--   **Strumenti**: Piattaforme come [Capgo](https://capgo.app/) semplificano l'implementazione con analisi, tracciamento degli errori e monitoraggio in tempo reale.
+-   **为什么重要**：防止暴力攻击，管理服务器负载，避免应用商店拒绝。
+-   **方法**：
+    -   固定窗口：简单但可能导致流量激增。
+    -   滑动窗口：平滑流量但使用更多内存。
+    -   令牌桶：处理突发流量但设置复杂。
+-   **合规性**：对重试使用指数退避，并在超出限制时用429状态代码响应。
+-   **工具**：像[Capgo](https://capgo.app/)这样的平台通过分析、错误跟踪和实时监控简化实施。
 
-**Suggerimento rapido**: Testa i tuoi limiti in condizioni normali, di burst e di recupero per garantire stabilità e conformità.
+**快速提示**：在正常、突发和恢复条件下测试您的限制，以确保稳定性和合规性。
 
-## Comprendere i limiti delle API: Scopo, tipi ed elementi essenziali...
+## 理解API速率限制：目的、类型和基本...
 
 <iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Linee guida API dell'App Store
+## 应用商店API指南
 
-I limiti delle API giocano un ruolo chiave nel soddisfare i requisiti dell'app store. Sia Apple che Google hanno regole specifiche per garantire la protezione dei dati degli utenti e mantenere la stabilità del sistema. Ecco una panoramica delle loro politiche.
+API速率限制在满足应用商店要求方面发挥着关键作用。苹果和谷歌都有具体规则，以确保用户数据的保护并维护系统的稳定性。以下是它们政策的细分。
 
-### Limiti API di Apple
+### 苹果的API速率限制
 
-Apple impone limiti in aree come l'autenticazione, le richieste di dati e gli endpoint pubblici. Violare questi limiti può comportare conseguenze come il rifiuto dell'app durante il processo di revisione, la rimozione temporanea dall'App Store o la necessità di correzioni urgenti. Per gestire i limiti superati, si consiglia agli sviluppatori di utilizzare metodi come il **backoff esponenziale**, che prevede l'aumento graduale del ritardo tra i tentativi.
+苹果对鉴权、数据请求和公共端点等领域施加限制。违反这些限制可能导致后果，如在审核过程中被拒绝、临时从App Store下架，或者需要进行紧急修复。为了管理超出限制的情况，建议开发者使用像**指数退避**这样的方法，逐步增加重试之间的延迟。
 
-### Limiti API di Google
+### 谷歌的API速率限制
 
-[Google Play Store](https://play.google/developer-content-policy/) imposta limiti per l'accesso ai dati pubblici, l'autenticazione e le richieste di dati degli utenti. Mentre sono consentiti piccoli burst di attività, il sistema monitora attentamente l'utilizzo. Gli avvisi vengono emessi quando ci si avvicina alle soglie e le restrizioni vengono applicate gradualmente anziché attraverso una sospensione immediata.
+[Google Play Store](https://play.google/developer-content-policy/) 对公共数据访问、鉴权和用户数据请求设置限制。虽然允许小规模的活动突发，但系统会密切跟踪使用情况。随着阈值接近，会发出警告，限制会逐步施加，而不是立即暂停服务。
 
-## Passaggi per l'implementazione del Rate Limiting
+## 速率限制实施步骤
 
-### Metodi di Rate Limiting
+### 速率限制方法
 
-Quando si implementa il rate limiting delle API, scegli un approccio che si allinea con i requisiti della tua applicazione. Di seguito sono riportati tre metodi comunemente utilizzati:
+在实施API速率限制时，选择与您应用要求相符的方法。以下是三种常用的方法：
 
-**Rate Limiting a Finestra Fissa**: Questo metodo imposta un limite (es. 100 richieste) che si resetta a intervalli fissi. Sebbene sia semplice, può causare picchi di traffico alla fine di ogni periodo.
+**固定窗口速率限制**：此方法设置一个限制（例如，100个请求），在固定时间间隔内重置。虽然简单明了，但可能在每个周期结束时导致流量激增。
 
-**Rate Limiting a Finestra Scorrevole**: Questo approccio utilizza un intervallo di tempo mobile per uniformare il traffico. Ad esempio, se il limite è di 100 richieste al minuto e un utente effettua 50 richieste alle 14:00:30, può ancora effettuare altre 50 richieste entro le 14:01:30.
+**滑动窗口速率限制**：此方法使用滚动时间范围来平滑流量。例如，如果限制是每分钟100个请求，而用户在下午2:00:30发出50个请求，则他们仍可在下午2:01:30之前发出50个请求。
 
-**Algoritmo Token Bucket**: Questo metodo offre flessibilità ricaricando i token a una velocità prestabilita. Ogni chiamata API usa un token, e le richieste vengono negate quando i token finiscono fino al loro reintegro.
+**令牌桶算法**：此方法通过以设定速率补充令牌来提供灵活性。每个API调用使用一个令牌，当令牌耗尽时，请求被拒绝，直到令牌被补充。
 
-| Metodo | Pro | Contro | Ideale per |
+| 方法 | 优势 | 劣势 | 适用 |
 | --- | --- | --- | --- |
-| Finestra Fissa | Semplice da implementare, basso uso di memoria | Può causare picchi di traffico | Endpoint API di base |
-| Finestra Scorrevole | Flusso di traffico uniforme, maggiore precisione | Richiede più memoria | API di autenticazione utente |
-| Token Bucket | Gestisce i burst, personalizzabile | Più complesso da implementare | API pubbliche ad alto traffico |
+| 固定窗口 | 易于实现，内存使用低 | 可能导致流量激增 | 基本API端点 |
+| 滑动窗口 | 平滑流量，精确更好 | 需要更多内存 | 用户鉴权API |
+| 令牌桶 | 处理突发流量，可定制 | 实施更复杂 | 高流量公共API |
 
-Ecco un esempio pratico che utilizza il metodo della finestra scorrevole.
+以下是使用滑动窗口方法的实际示例。
 
-### Esempi di implementazione
+### 实施示例
 
-Ecco uno snippet di codice che dimostra come implementare il rate limiting a finestra scorrevole:
+以下是演示如何实施滑动窗口速率限制的代码片段：
 
 ```javascript
 const rateLimit = async (userId, limit, window) => {
@@ -86,13 +88,13 @@ const rateLimit = async (userId, limit, window) => {
 };
 ```
 
-### Test dei limiti di velocità
+### 测试速率限制
 
-Una volta implementato, testa accuratamente il tuo setup di rate limiting per assicurarti che funzioni come previsto. Concentrati su queste aree:
+一旦实施，彻底测试您的速率限制设置以确保其按预期运行。重点关注以下领域：
 
--   **Test dei limiti di base**: Invia richieste a velocità normali per confermare la funzionalità standard.
--   **Test di burst**: Simula più richieste inviate simultaneamente per verificare che i limiti vengano applicati.
--   **Test di recupero**: Controlla come si comporta il sistema una volta che il limite si resetta.
+-   **基本限制测试**：以正常速率发送请求以确认标准功能。
+-   **突发测试**：模拟同时发送多个请求，以验证限制执行情况。
+-   **恢复测试**：检查限制重置后系统的表现。
 
 ```javascript
 async function testRateLimits() {
@@ -113,94 +115,94 @@ async function testRateLimits() {
 }
 ```
 
-### Monitoraggio delle prestazioni
+### 监控性能
 
-Dopo il deployment, monitora le metriche chiave per assicurarti che il tuo sistema di rate limiting funzioni bene in diverse condizioni:
+部署后，监控关键指标以确保您的速率限制系统在不同条件下表现良好：
 
--   Richieste totali gestite in ogni finestra temporale
--   Numero di richieste rifiutate
--   Tempi di risposta durante il traffico elevato
--   Tassi di errore e loro cause
+-   每个时间窗口处理的总请求数量
+-   被拒绝的请求数量
+-   高流量期间的响应时间
+-   错误率及其原因
 
-Questi dati ti aiuteranno a ottimizzare il tuo sistema per prestazioni ottimali.
+这些数据将帮助您优化系统以实现最佳性能。
 
-## Standard di Rate Limiting
+## 速率限制标准
 
-### Impostazione dei limiti di velocità
+### 设置速率限制
 
-Per trovare il giusto equilibrio tra esperienza utente e protezione del server, valuta i pattern di traffico della tua API e i requisiti degli endpoint. Invece di fare affidamento su soglie fisse, personalizza i limiti di velocità per adattarli alle esigenze specifiche della tua API. Regola questi limiti nel tempo in base ai dati di utilizzo effettivi per garantire che rimangano efficaci e pratici.
+为了在用户体验和服务器保护之间取得正确的平衡，评估API的流量模式和端点要求。与其依赖固定阈值，不如根据API的特定需求量身定制速率限制。根据实际使用数据随时间调整这些限制，以确保它们保持有效和实用。
 
-### Design delle risposte di errore
+### 错误响应设计
 
-Quando un client supera il limite di velocità, rispondi con un **codice di stato 429**. Includi header che specificano il limite totale, le richieste rimanenti, il tempo di reset e un intervallo di retry. Questo feedback dettagliato aiuta gli sviluppatori a ottimizzare le loro applicazioni per allinearsi con i limiti della tua API.
+当客户端超过速率限制时，响应一个**429状态代码**。包括指定总限制、剩余请求、重置时间和重试间隔的头部信息。这种详细反馈帮助开发者微调他们的应用以符合您的API的限制。
 
-### Processo di regolazione dei limiti
+### 限制调整过程
 
-Rivedere regolarmente i limiti di velocità è essenziale per mantenere le prestazioni e soddisfare i requisiti di conformità. Monitora fattori come il traffico di picco, i tassi di errore e il carico del server per identificare le regolazioni necessarie. Incorpora il feedback degli utenti per garantire che i tuoi limiti supportino sia l'efficienza operativa che le linee guida dell'app store.
+定期重新审视速率限制对保持性能和满足合规需求至关重要。监控高峰流量、错误率和服务器负载等因素，以识别必要的调整。结合用户反馈，以确保您的限制支持运营效率和应用商店指南。
 
-## Strumenti di Rate Limiting di [Capgo](https://capgo.app/)
+## [Capgo](https://capgo.app/)的速率限制工具
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
-Capgo offre strumenti integrati progettati per applicare i limiti delle API garantendo al contempo alte prestazioni e conformità con i requisiti dell'app store.
+Capgo提供了一系列集成工具，以实施API速率限制，同时确保高性能并符合应用商店的要求。
 
-### Funzionalità di conformità di Capgo
+### Capgo合规特性
 
-Capgo fornisce una gamma di strumenti per aiutare a mantenere i limiti delle API e soddisfare le linee guida dell'app store. Il suo sistema di distribuzione degli aggiornamenti raggiunge un impressionante tasso di successo dell'82% con un tempo di risposta API medio di 434 ms [\[1\]](https://capgo.app/). Ecco cosa include:
+Capgo提供了一系列工具，以帮助维护API速率限制并满足应用商店的指南。其更新交付系统实现了82%的更新成功率，平均API响应时间为434毫秒 [\[1\]](https://capgo.app/)。以下是它包括的内容：
 
--   **Analisi in tempo reale**: Tieni traccia della distribuzione degli aggiornamenti e dell'utilizzo delle API.
--   **Tracciamento degli errori**: Identifica e risolvi rapidamente i problemi di limite di velocità.
--   **[Sistema di canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: Gestisci efficacemente il rollout degli aggiornamenti.
--   **Crittografia**: Proteggi le comunicazioni API.
+-   **实时分析**：跟踪更新分发和API使用情况。
+-   **错误跟踪**：迅速识别和修复速率限制问题。
+-   **[通道系统](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**：有效管理更新发布。
+-   **加密**：保护API通信。
 
-Questi strumenti lavorano insieme alle pratiche standard di rate limiting, offrendo dati in tempo reale e risoluzione proattiva degli errori. Il sistema di Capgo è stato testato su 750 app in produzione, distribuendo 23,5 milioni di aggiornamenti mantenendo conformità e prestazioni elevate [\[1\]](https://capgo.app/).
+这些工具与标准的速率限制实践一起工作，提供实时数据和主动的错误解决方案。Capgo的系统在750个生产应用上进行了测试，交付了2350万次更新，同时保持合规和强劲的性能 [\[1\]](https://capgo.app/)。
 
-### Rate Limiting con Capgo
+### 与Capgo的速率限制
 
-Gli strumenti di rate limiting di Capgo si integrano perfettamente nel tuo flusso di lavoro [Capacitor](https://capacitorjs.com/). Aiutano a raggiungere un tasso di aggiornamento utente del 95% entro 24 ore mantenendo stabile le prestazioni delle API [\[1\]](https://capgo.app/).
+Capgo的速率限制工具与您的[Capacitor](https://capacitorjs.com/)工作流程无缝集成。它们帮助在24小时内实现95%的用户更新率，同时保持API性能稳定 [\[1\]](https://capgo.app/)。
 
-Ecco una panoramica dell'approccio di Capgo:
+以下是Capgo的方法的细分：
 
-| Funzionalità | Implementazione | Beneficio |
+| 特性 | 实施 | 好处 |
 | --- | --- | --- |
-| **CDN Globale** | Velocità di download di 114 ms per bundle da 5 MB | Riduce il carico del server |
-| **Distribuzione dei canali** | Rollout graduali e beta testing | Controlla il flusso del traffico API |
-| **Dashboard Analytics** | Monitoraggio in tempo reale | Misura le prestazioni dei limiti di velocità |
-| **Gestione degli errori** | Rilevamento automatico dei problemi | Evita violazioni dei limiti di velocità |
+| **全球CDN** | 5 MB包的下载速度为114毫秒 | 降低服务器负载 |
+| **通道分发** | 分阶段发布和测试版测试 | 控制API流量 |
+| **分析仪表板** | 实时监控 | 测量速率限制性能 |
+| **错误管理** | 自动问题检测 | 避免速率限制违规 |
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per la distribuzione continua ai nostri utenti!"
+> "我们实践敏捷开发，@Capgo在向我们的用户持续交付中至关重要！"
 
-Per iniziare, esegui: `npx @capgo/cli init`. Questo comando configura i limiti di velocità necessari, assicurando che la tua app sia conforme ai requisiti degli store Apple e Google.
+要开始，请运行：`npx @capgo/cli init`。此命令设置必要的速率限制，确保您的应用符合苹果和谷歌商店的要求。
 
-## Riepilogo
+## 总结
 
-### Punti principali
+### 主要观点
 
-Il rate limiting delle API gioca un ruolo cruciale nel soddisfare i requisiti dell'app store e garantire che il tuo sistema funzioni senza problemi. Ecco una rapida panoramica:
+API速率限制在满足应用商店要求和确保您的系统平稳运行方面发挥着至关重要的作用。以下是一个快速概述：
 
-| Aspetto | Requisito | Impatto |
+| 方面 | 要求 | 影响 |
 | --- | --- | --- |
-| **Sicurezza** | Crittografia end-to-end | Protegge le comunicazioni API e i dati degli utenti |
-| **Monitoraggio** | Analytics | Traccia l'utilizzo delle API e aiuta a evitare violazioni |
+| **安全性** | 端到端加密 | 保护API通信和用户数据 |
+| **监控** | 分析 | 跟踪API使用情况，帮助避免违规 |
 
-Usa la checklist seguente per allineare la tua strategia di rate limiting con le linee guida dell'app store.
+使用以下清单将您的速率限制策略与应用商店指南对齐。
 
-### Checklist di implementazione
+### 实施清单
 
-Per implementare una solida strategia di rate limiting, segui questi passaggi:
+要实施稳妥的速率限制策略，请遵循以下步骤：
 
--   **Imposta i limiti di velocità**
+-   **设置速率限制**
     
-    -   Definisci limiti globali basati sulle regole dell'app store.
-    -   Usa il backoff esponenziale per i meccanismi di retry.
-    -   Configura risposte di errore appropriate, come i codici di stato 429.
--   **Monitora e regola**
+    -   根据应用商店规则定义全局速率限制。
+    -   对重试机制使用指数退避。
+    -   配置适当的错误响应，如429状态代码。
+-   **监控和调整**
     
-    -   Analizza l'utilizzo delle API con analytics dettagliati.
-    -   Imposta avvisi automatici per individuare potenziali violazioni in anticipo.
-    -   Aggiorna i limiti secondo necessità in base alle prestazioni reali.
--   **Testa e valida**
+    -   通过详细分析分析API使用情况。
+    -   设置自动警报以尽早捕捉潜在违规情况。
+    -   根据实际性能需要更新限制。
+-   **测试和验证**
     
-    -   Conduci test di carico per garantire la stabilità.
-    -   Verifica che le risposte di errore soddisfino i requisiti di conformità.
-    -   Mantieni una documentazione accurata dei tuoi sforzi di conformità.
+    -   进行负载测试以确保稳定性。
+    -   验证错误响应符合合规要求。
+    -   保持您合规工作的详细文档。

@@ -1,14 +1,16 @@
 ---
 slug: how-to-release-major-version-in-capgo
-title: Come rilasciare una versione major in capgo
-description: アプリのクリティカルバージョンをユーザーアプリを破損することなくリリースする必要がある時期と方法を理解する
+title: Cómo lanzar una versión importante en capgo
+description: >-
+  Entiende cómo y cuándo es necesario lanzar una versión principal para tu
+  aplicación sin afectar la aplicación de tus usuarios.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /capgo-feature-image.webp
-head_image_alt: Sistema de versiones principales de Capgo
+head_image_alt: Sistema de versión principal de Capgo
 keywords: >-
   mobile app development, live updates, OTA updates, continuous integration,
   mobile app updates
@@ -17,70 +19,69 @@ published: true
 locale: es
 next_blog: how-to-send-specific-version-to-users
 ---
+## Al liberar una versión importante
 
-## Al lanzar una versión mayor
+La gestión de versiones puede ser difícil, generalmente deseas enviar una actualización importante cuando aparece un cambio significativo para los usuarios.
 
-El versionado puede ser difícil de gestionar, generalmente se quiere enviar una actualización Mayor cuando aparece un cambio importante para los usuarios
+Pero la versión no está hecha para eso, la versión de la tienda de aplicaciones es diferente de la versión nativa.
 
-Pero el versionado no está hecho para eso, la versión de la tienda de aplicaciones es diferente de la versión Nativa
+La versión nativa está diseñada para gestionar cambios incompatibles en el *código*.
 
-La versión Nativa está hecha para gestionar cambios disruptivos en el *código*
+En iOS, por ejemplo, iOS 16 es la `versión de la tienda` de Apple, pero la versión del código es `20A5283p` (no parecen usar SemVer allí).
 
-En iOS, por ejemplo, iOS 16 es la `versión de tienda` de Apple, pero la versión de código es `20A5283p` (parece que no usan SemVer allí)
+¡Ahora queda claro que no debemos mezclar ambos y usarlos para lo que están hechos!
 
-¡Ahora está claro que no los mezclamos y los usamos para lo que están hechos!
+## Lanzamiento importante
 
-## Versión mayor
+En tu aplicación de Capacitor, un lanzamiento importante es necesario cuando ocurre un cambio incompatible. 
+Por ejemplo, un nuevo objetivo de iOS (de 15 a 16), o una nueva versión de Capacitor (de 3 a 4), o un plugin (de 1.2 a 2.0) que utilizas ha sido actualizado a una versión mayor.
 
-En tu aplicación Capacitor, una versión mayor es necesaria cuando ocurre un cambio disruptivo
-Por ejemplo, un nuevo objetivo de iOS (15 a 16), o una nueva versión de Capacitor (3 a 4), o un plugin (12 a 20) que uses ha sido actualizado a una versión mayor
+Este cambio significa que todas las herramientas deben estar alineadas para manejar el cambio incompatible.
 
-Este cambio significa que todas las herramientas deben alinearse para manejar el cambio disruptivo
-
-Por eso Capgo sigue este sistema
-Así que si lanzas una versión mayor, Capgo no la enviará a un usuario que no la tenga instalada desde la tienda\
-Este comportamiento puede personalizarse. Puedes aprender más sobre esto [aquí](/docs/cli/commands/#disable-updates-strategy)
+Por eso Capgo sigue este sistema. 
+Así que si lanzas una versión importante, Capgo no la enviará a un usuario que no la haya instalado desde la tienda.\
+Este comportamiento puede ser personalizado. Puedes aprender más sobre esto [aquí](/docs/cli/commands/#disable-updates-strategy).
 
 ### Versiones
 
-Dónde Capgo encuentra la versión para comparar
+Dónde Capgo encuentra la versión para comparar.
 
-#### iOS
-  > Será utilizada por Capgo para comparar con la versión JavaScript y encontrar actualizaciones Mayores
+#### IOS
+  > Será utilizado por Capgo para comparar con la versión de JavaScript y encontrar una actualización mayor.
 
-  En iOS la variable se establece en tu proyecto aquí `ios/App/App/Infoplist` bajo la clave `CFBundleShortVersionString` o `ios/App/Appxcodeproj/projectpbxproj` bajo la clave `MARKETING_VERSION` si `MARKETING_VERSION` fue establecido en tu archivo `Infoplist`
-  > Puedes anular este comportamiento estableciendo la clave version en el archivo `capacitorconfigjson` [documentación aquí](/docs/plugin/auto-update#advanced-settings/)
+ En iOS, la variable se establece en tu proyecto aquí `ios/App/App/Info.plist` bajo la clave `CFBundleShortVersionString` o `ios/App/App.xcodeproj/project.pbxproj` bajo la clave `MARKETING_VERSION` si `MARKETING_VERSION` se estableció en tu archivo `Info.plist`.
+  > Puedes anular este comportamiento configurando la clave de versión en el archivo `capacitor.config.json` [documentos aquí](/docs/plugin/auto-update#advanced-settings/).
 
 #### Android
-  > Será utilizada por Capgo para comparar con la versión JavaScript y encontrar actualizaciones Mayores
+  > Será utilizado por Capgo para comparar con la versión de JavaScript y encontrar una actualización mayor.
 
-  En Android, la variable se establece en tu proyecto aquí `android/app/buildgradle` bajo la clave `defaultConfigversionName`
-  > Puedes anular este comportamiento estableciendo la clave version en el archivo `capacitorconfigjson` [documentación aquí](/docs/plugin/auto-update#advanced-settings/)
+  En Android, la variable se establece en tu proyecto aquí `android/app/build.gradle` bajo la clave `defaultConfig.versionName`.
+  > Puedes anular este comportamiento configurando la clave de versión en el archivo `capacitor.config.json` [documentos aquí](/docs/plugin/auto-update#advanced-settings/).
 
 #### JavaScript
-  > Será utilizada por Capgo para comparar con la versión Nativa y encontrar actualizaciones Mayores
+  > Será utilizado por Capgo para comparar con la versión nativa y encontrar una actualización mayor.
 
-  En JavaScript, la variable se establece en tu proyecto aquí `packagejson` bajo la clave `version`
+  En JavaScript, la variable se establece en tu proyecto aquí `package.json` bajo la clave `version`.
 
 ## Ejemplo
 
-Tu aplicación Ionic está actualmente lanzada con la versión `123` con Capacitor 3
+Tu aplicación Ionic fue lanzada actualmente con la versión `1.2.3` con Capacitor 3.
 
-Estás realizando la actualización a Capacitor 4
+Estás realizando la actualización a Capacitor 4.
 
-Necesitas actualizar tu número de versión a `223`, entonces todos tus paquetes incluidos Capgo notarán este gran cambio
+Necesitas actualizar tu número de versión a `2.2.3`, luego todos tus paquetes, incluido Capgo, notificarán este gran cambio.
 
-Cuando lanzas esta versión a Capgo y la App Store
+Cuando liberes esta versión a Capgo y la App Store.
 
-Todas las siguientes actualizaciones en vivo en Capgo `224` nunca serán enviadas a usuarios con versión `123` Solo con versión `223`
+Todas las siguientes actualizaciones en vivo en Capgo `2.2.4` nunca serán enviadas a usuarios con la versión `1.2.3`. Solo con la versión `2.2.3`.
 
-Si sigues este patrón, no hay que preocuparse más, todo está bien manejado
+Si sigues este patrón, no tendrás que preocuparte más, todo se maneja bien.
 
 ## Si no sigo esto
 
-En este caso, significa que tienes que enviar tu nueva aplicación con Capacitor 4 a Apple y Google, pero no a Capgo
+En este caso, eso significa que debes enviar tu nueva aplicación con Capacitor 4 a Apple y Google, pero no a Capgo.
 
-Entonces tienes que esperar que el 100% de tus usuarios, o al menos el 90%, tengan la aplicación, lo que tomará meses, probablemente
+Entonces tendrás que esperar que el 100% de tus usuarios tenga la aplicación o al menos el 90%, lo que tomará meses, probablemente.
 
-Mientras que durante este tiempo no puedes enviar ninguna actualización con Capgo, ya que los usuarios antiguos no pueden obtener la nueva versión
-No tienes una manera de seleccionar solo algunos usuarios para recibir la actualización
+Mientras tanto, durante este tiempo no podrás enviar ninguna actualización con Capgo, ya que los usuarios antiguos no pueden obtener la nueva versión.
+No tienes una forma de seleccionar solo algunos usuarios para recibir la actualización.

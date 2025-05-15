@@ -1,9 +1,10 @@
 ---
-slug: aggiornamenti-policy-apple-per-app-capacitor-2025
-title: Apple のアプリポリシー 2025 年の Capacitor アップデート
+slug: apple-policy-updates-for-capacitor-apps-2025
+title: Apple Politika Güncellemeleri için Capacitor Uygulamaları 2025
 description: >-
-  Appleの2025年のApp Store
-  ポリシーは、Capacitorアプリに対して、プライバシー、セキュリティ、パフォーマンスの面での改善を強調する新しいコンプライアンス基準を課しています。
+  Les politiques de l'App Store d'Apple pour 2025 imposent de nouvelles normes
+  de conformité pour les applications Capacitor, mettant l'accent sur la
+  confidentialité, la sécurité et les améliorations de performance.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -11,140 +12,140 @@ created_at: 2025-04-03T03:02:24.801Z
 updated_at: 2025-04-03T03:02:39.050Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
-head_image_alt: モバイル開発
+head_image_alt: Mobile Development
 keywords: >-
   Capacitor, Apple policies, app compliance, security standards, performance
   benchmarks, OTA updates, encryption
 tag: 'Development, Mobile, Security'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
-**Le politiche dell'App Store di Apple del 2025 introducono regole più severe per le app [Capacitor](https://capacitorjs.com/).** Gli sviluppatori devono ora soddisfare standard più elevati per privacy, sicurezza e prestazioni. Ecco cosa devi sapere:
+**Les politiques de l'App Store d'Apple pour 2025 apportent des règles plus strictes pour les applications [Capacitor](https://capacitorjs.com/).** Les développeurs doivent désormais répondre à des normes plus élevées en matière de confidentialité, de sécurité et de performances. Voici ce que vous devez savoir :
 
--   **Privacy**: Regole più severe per la raccolta dati e il consenso dell'utente.
--   **Sicurezza**: Sono richieste crittografia end-to-end e [autenticazione più forte](https://capgo.app/docs/webapp/mfa/) per gli aggiornamenti.
--   **Prestazioni**: Le app devono soddisfare benchmark più elevati di reattività ed efficienza.
--   **Aggiornamenti SDK**: Le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) devono utilizzare [Xcode](https://developer.apple.com/xcode/) 15+ e SDK aggiornati per rimanere conformi.
--   **Aggiornamenti Live**: Gli aggiornamenti over-the-air (OTA) devono seguire protocolli crittografati e test approfonditi sui dispositivi.
+-   **Confidentialité** : Règles plus strictes pour la collecte de données et le consentement des utilisateurs.
+-   **Sécurité** : Le chiffrement de bout en bout et [une authentification plus forte](https://capgo.app/docs/webapp/mfa/) sont nécessaires pour les mises à jour.
+-   **Performance** : Les applications doivent répondre à de meilleurs critères de réactivité et d'efficacité.
+-   **Mises à jour du SDK** : Les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) doivent utiliser [Xcode](https://developer.apple.com/xcode/) 15+ et des SDK mis à jour pour rester conformes.
+-   **Mises à jour en direct** : Les mises à jour en direct (OTA) doivent suivre des protocoles chiffrés et des tests approfondis des appareils.
 
-**Strumento Chiave**: Piattaforme come [Capgo](https://capgo.app/) semplificano la conformità automatizzando la [gestione degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/), il monitoraggio e la crittografia. Con un tasso di aggiornamento del 95% entro 24 ore e strumenti per distribuzioni sicure, [Capgo](https://capgo.app/) aiuta gli sviluppatori a rimanere allineati con le politiche di Apple.
+**Outil clé** : Des plateformes comme [Capgo](https://capgo.app/) simplifient la conformité en automatisant la [gestion des mises à jour](https://capgo.app/docs/plugin/cloud-mode/manual-update/), le suivi et le chiffrement. Avec un taux de mise à jour de 95 % dans les 24 heures et des outils pour des déploiements sécurisés, [Capgo](https://capgo.app/) aide les développeurs à rester en accord avec les politiques d'Apple.
 
-**Confronto Rapido**:
+**Comparaison rapide** :
 
-| Funzionalità | Capgo (Piano TEAM) | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
+| Fonctionnalité | Capgo (TEAM Plan) | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
 | --- | --- | --- | --- |
-| Costo Annuale | 996€ | 6.000€ | Simile a Capgo |
-| Crittografia | End-to-end | Firma base | Firma base |
-| Velocità di Aggiornamento | 95% entro 24h | Variabile | Variabile |
-| Strumenti di Conformità | Completi | Limitati | Base |
-| Esperienza di Mercato | Dal 2022 | Chiusura nel 2026 | Dal 2024 |
+| Coût annuel | 996 $ | 6 000 $ | Similaire à Capgo |
+| Chiffrement | De bout en bout | Signature de base | Signature de base |
+| Vitesse de mise à jour | 95 % dans les 24h | Variable | Variable |
+| Outils de conformité | Complet | Limité | Basique |
+| Expérience sur le marché | Depuis 2022 | Fermeture en 2026 | Depuis 2024 |
 
-Gli sviluppatori dovrebbero agire ora per garantire la conformità ed evitare interruzioni. Aggiorna il tuo [framework Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), segui le nuove politiche di Apple e considera strumenti come Capgo per aggiornamenti senza problemi.
+Les développeurs devraient agir maintenant pour garantir la conformité et éviter les perturbations. Mettez à jour votre [framework Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), suivez les nouvelles politiques d'Apple et envisagez des outils comme Capgo pour des mises à jour sans faille.
 
-## Come Integrare i Token di App e Libri con Addigy
+## Comment intégrer le Token Apps & Books avec Addigy
 
 <iframe src="https://www.youtube.com/embed/GMkQvHQcnFw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Principali Aggiornamenti delle Politiche per il 2025
+## Mises à jour majeures des politiques pour 2025
 
-Le politiche di Apple per il 2025 richiedono che le app Capacitor utilizzino versioni aggiornate di Xcode e SDK. Questi aggiornamenti sono progettati per migliorare prestazioni, sicurezza e compatibilità con l'hardware.
+Les politiques d'Apple pour 2025 exigent que les applications Capacitor utilisent des versions mises à jour d'Xcode et des SDK. Ces mises à jour sont conçues pour améliorer les performances, la sécurité et la compatibilité avec le matériel.
 
-Gli sviluppatori Capacitor dovrebbero esaminare attentamente le linee guida di Apple per assicurarsi di utilizzare gli strumenti raccomandati. Rimanere conformi non solo evita potenziali problemi ma fornisce anche accesso alle funzionalità più recenti. Questi aggiornamenti degli strumenti giocano un ruolo chiave nel definire le strategie di aggiornamento live.
+Les développeurs Capacitor devraient examiner attentivement les directives d'Apple pour s'assurer qu'ils utilisent les outils recommandés. Rester conforme évite non seulement d’éventuels problèmes, mais donne également accès aux dernières fonctionnalités. Ces mises à jour d'outils jouent un rôle clé dans l'élaboration de stratégies de mise à jour en direct.
 
-Piattaforme come Capgo si sono già allineate a questi requisiti, rendendo più facile distribuire aggiornamenti rispettando i nuovi standard di Apple.
+Des plateformes comme Capgo se sont déjà alignées sur ces exigences, facilitant ainsi la diffusion des mises à jour tout en respectant les nouvelles normes d'Apple.
 
-## Rispettare le Linee Guida di Apple
+## Respecter les directives d'Apple
 
-Rimanere allineati con le linee guida di Apple durante l'implementazione degli aggiornamenti live richiede un'attenzione particolare a protocolli specifici. Queste regole sono essenziali per garantire che la tua app rimanga funzionale, sicura e conforme agli standard di Apple.
+Rester en accord avec les directives d'Apple tout en mettant en œuvre des mises à jour en direct nécessite une attention minutieuse à des protocoles spécifiques. Ces règles sont essentielles pour garantir que votre application reste fonctionnelle, sécurisée et conforme aux normes d'Apple.
 
-### Regole per gli Aggiornamenti OTA
+### Règles de mise à jour OTA
 
-Gli aggiornamenti over-the-air (OTA) devono aderire a protocolli rigorosi per rimanere in linea con le politiche dell'App Store. Gli sviluppatori dovrebbero utilizzare la **crittografia end-to-end** per tutte le trasmissioni di aggiornamenti per proteggere i dati degli utenti. L'implementazione di Capgo garantisce che questi standard siano soddisfatti mantenendo prestazioni elevate.
+Les mises à jour en direct (OTA) doivent respecter des protocoles stricts pour rester conformes aux politiques de l'App Store. Les développeurs devraient utiliser **le chiffrement de bout en bout** pour toutes les transmissions de mise à jour afin de protéger les données des utilisateurs. L'implémentation de Capgo garantit que ces normes sont respectées tout en offrant de solides performances.
 
-### Standard di Sicurezza
+### Normes de sécurité
 
-I requisiti di sicurezza di Apple enfatizzano una robusta protezione dei dati. Queste misure sono cruciali per abilitare cicli di aggiornamento sicuri ed efficienti, garantendo che gli aggiornamenti vengano consegnati in modo sicuro senza violare le regole della piattaforma.
+Les exigences en matière de sécurité d'Apple mettent l'accent sur la protection robuste des données. Ces mesures sont cruciales pour permettre des cycles de mise à jour sécurisés et efficaces, garantissant que les mises à jour sont livrées en toute sécurité sans enfreindre les règles de la plateforme.
 
-### Protocollo di Test dei Dispositivi
+### Protocole de test des appareils
 
-Per garantire che gli aggiornamenti funzionino perfettamente su tutte le versioni iOS, è essenziale un test approfondito dei dispositivi. Gli sviluppatori dovrebbero sfruttare le **distribuzioni graduali** attraverso i canali di beta testing. Questo approccio aiuta a identificare e correggere i problemi prima di un rilascio completo. Come sottolinea Bessie Cooper:
+Pour garantir que les mises à jour fonctionnent sans problème sur toutes les versions d'iOS, des tests approfondis des appareils sont essentiels. Les développeurs devraient tirer parti des **déploiements par étapes** via des canaux de test bêta. Cette approche aide à identifier et à résoudre les problèmes avant un lancement complet. Comme le souligne Bessie Cooper :
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per la correzione dei bug è prezioso." [\[1\]](https://capgo.app/)
+> "Capgo est un outil indispensable pour les développeurs, qui souhaitent être plus productifs. Éviter la révision pour les corrections de bogues est une aubaine." [\[1\]](https://capgo.app/)
 
-Questo metodo permette uno sviluppo rapido e aggiornamenti affidabili rimanendo conformi alle linee guida di Apple.
+Cette méthode permet un développement rapide et des mises à jour fiables tout en respectant les directives d'Apple.
 
-## Aggiornamenti [Capacitor](https://capacitorjs.com/) per il 2025
+## Mises à jour [Capacitor](https://capacitorjs.com/) pour 2025
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-### Manutenzione dei Plugin
+### Maintenance des plugins
 
-Assicurati di aggiornare il tuo framework Capacitor alla versione 5.0 o successiva per soddisfare i requisiti SDK aggiornati di Apple. Rimanere conformi significa testare regolarmente le tue app con le ultime versioni di iOS SDK e Xcode. Se stai utilizzando la piattaforma Capgo, il processo è più semplice grazie ai controlli di compatibilità automatizzati e alle funzionalità di distribuzione istantanea. Questi strumenti funzionano perfettamente con Capacitor 6 e 7. Gli sviluppatori affrontano anche sfide simili quando convertono PWA in app native.
+Assurez-vous de mettre à jour votre framework Capacitor vers la version 5.0 ou ultérieure pour respecter les exigences mises à jour des SDK d'Apple. Rester conforme signifie tester régulièrement vos applications avec les dernières versions d'iOS SDK et d'Xcode. Si vous utilisez la plateforme de Capgo, le processus est plus facile grâce à des vérifications automatiques de compatibilité et des fonctionnalités de déploiement instantané. Ces outils fonctionnent parfaitement avec Capacitor 6 et 7. Les développeurs font également face à des défis similaires lors de la transition des PWA vers des applications natives.
 
-### Migrazione da PWA a Native
+### Migration de PWA vers Natif
 
-Con le politiche aggiornate di Apple, spostare le PWA verso app native richiede ora di seguire regole più severe sulla privacy e sulla gestione dei dati. È meglio valutare la funzionalità della tua app e migrare in fasi per garantire che tutto rimanga conforme. Capgo supporta questo processo offrendo correzioni istantanee e aggiornamenti rapidi durante la migrazione.
+Avec les politiques mises à jour d'Apple, le passage des PWA aux applications natives nécessite maintenant de suivre des règles plus strictes en matière de confidentialité et de traitement des données. Il est préférable d'évaluer la fonctionnalité de votre application et de migrer par étapes pour garantir que tout reste conforme. Capgo soutient ce processus en offrant des corrections instantanées et des mises à jour rapides lors de la migration.
 
-## Strumenti di Conformità [Capgo](https://capgo.app/)
+## Outils de conformité [Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
 
-Capgo offre strumenti che semplificano la manutenzione delle app garantendo che gli aggiornamenti live siano conformi alle linee guida di Apple. Questi strumenti aiutano gli sviluppatori a distribuire aggiornamenti in modo sicuro senza violare le regole dell'App Store.
+Capgo offre des outils qui simplifient la maintenance des applications tout en garantissant que les mises à jour en direct respectent les directives d'Apple. Ces outils aident les développeurs à déployer des mises à jour de manière sécurisée sans enfreindre les règles de l'App Store.
 
-### Funzionalità di Gestione degli Aggiornamenti
+### Fonctionnalités de gestion des mises à jour
 
-Capgo utilizza la crittografia end-to-end per fornire un sistema sicuro per gli aggiornamenti live, soddisfacendo gli standard di sicurezza più severi previsti per il 2025. Con 23,5 milioni di aggiornamenti distribuiti finora [\[1\]](https://capgo.app/), la piattaforma ha dimostrato la sua affidabilità e aderenza alla conformità.
+Capgo utilise le chiffrement de bout en bout pour fournir un système sécurisé pour les mises à jour en direct, répondant aux normes de sécurité plus strictes attendues en 2025. Avec 23,5 millions de mises à jour livrées jusqu'à présent [\[1\]](https://capgo.app/), la plateforme a prouvé sa fiabilité et son respect de la conformité.
 
-Le funzionalità chiave includono:
+Les principales fonctionnalités incluent :
 
--   Monitoraggio della consegna e dell'installazione degli aggiornamenti
--   Registrazione di tutte le versioni degli aggiornamenti per scopi di audit
--   Rollback istantaneo alle versioni precedenti
--   Crittografia end-to-end per proteggere gli aggiornamenti
+-   Surveillance de la livraison et de l'installation des mises à jour
+-   Enregistrement de toutes les versions de mise à jour à des fins d'audit
+-   Restauration instantanée des versions précédentes
+-   Chiffrement de bout en bout pour sécuriser les mises à jour
 
-Queste funzionalità rendono Capgo una scelta eccellente per garantire la conformità con i requisiti di Apple.
+Ces fonctionnalités font de Capgo un choix privilégié pour garantir la conformité avec les exigences d'Apple.
 
-### Confronto tra Piattaforme
+### Comparaison des plateformes
 
-Ecco come Capgo si confronta con altri strumenti per la gestione degli aggiornamenti nelle app Capacitor:
+Voici comment Capgo se compare à d'autres outils pour gérer les mises à jour dans les applications Capacitor :
 
-| Funzionalità | Capgo (Piano TEAM) | Appflow | Capawesome |
+| Fonctionnalité | Capgo (TEAM Plan) | Appflow | Capawesome |
 | --- | --- | --- | --- |
-| Costo Annuale | 996€ | 6.000€ | Simile a Capgo |
-| Crittografia | End-to-end | Firma base | Firma base |
-| Velocità di Aggiornamento | 95% entro 24h | Variabile | Variabile |
-| Strumenti di Conformità | Completi | Limitati | Base |
-| Esperienza di Mercato | Dal 2022 | Chiusura nel 2026 | Dal 2024 |
+| Coût annuel | 996 $ | 6 000 $ | Similaire à Capgo |
+| Chiffrement | De bout en bout | Signature de base | Signature de base |
+| Vitesse de mise à jour | 95 % dans les 24h | Variable | Variable |
+| Outils de conformité | Complet | Limité | Basique |
+| Expérience sur le marché | Depuis 2022 | Fermeture en 2026 | Depuis 2024 |
 
-> "@Capgo è un modo intelligente per effettuare hot code pushes (e non per tutti i soldi del mondo come con @AppFlow) 🙂" - Team OSIRIS-REx della NASA [\[1\]](https://capgo.app/)
+> "@Capgo est un moyen intelligent de réaliser des mises à jour de code à chaud (et pas pour tout l'argent du monde comme avec @AppFlow) 🙂" - L'équipe OSIRIS-REx de la NASA [\[1\]](https://capgo.app/)
 
-Capgo si integra perfettamente con i sistemi CI/CD come [GitHub Actions](https://docs.github.com/actions) e [GitLab CI](https://docs.gitlab.com/ee/ci/), rendendo più facile per gli sviluppatori seguire le ultime linee guida di Apple. Per le organizzazioni con requisiti di sicurezza rigorosi, la piattaforma offre anche un'[opzione self-hosted](https://capgo.app/blog/self-hosted-capgo/), dando ai team maggior controllo su dati e privacy.
+Capgo s'intègre parfaitement avec des systèmes CI/CD tels que [GitHub Actions](https://docs.github.com/actions) et [GitLab CI](https://docs.gitlab.com/ee/ci/), facilitant ainsi la tâche des développeurs pour suivre les dernières directives d'Apple. Pour les organisations ayant des exigences de sécurité strictes, la plateforme propose également une [option auto-hébergée](https://capgo.app/blog/self-hosted-capgo/), offrant aux équipes un meilleur contrôle sur les données et la confidentialité.
 
-## Riepilogo
+## Résumé
 
-Con l'aggiornamento delle politiche di Apple nel 2025, gli [sviluppatori di app Capacitor](https://capgo.app/docs/) dovranno adattare i loro flussi di lavoro per rimanere conformi garantendo al contempo che gli aggiornamenti vengano distribuiti in modo efficiente. Di seguito un riepilogo delle azioni chiave e delle risorse discusse in precedenza, evidenziando l'importanza di misure di sicurezza robuste e [gestione efficace degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+À mesure qu'Apple met à jour ses politiques en 2025, les [développeurs d'applications Capacitor](https://capgo.app/docs/) devront adapter leurs flux de travail pour rester conformes tout en veillant à ce que les mises à jour soient livrées efficacement. Voici un récapitulatif des principales actions et ressources discutées précédemment, soulignant l'importance de mesures de sécurité robustes et d'une [gestion efficace des mises à jour](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
-### Azioni da Intraprendere
+### Actions à entreprendre
 
-Ecco i principali passaggi su cui gli sviluppatori dovrebbero concentrarsi per rimanere conformi:
+Voici les principales étapes sur lesquelles les développeurs devraient se concentrer pour rester conformes :
 
--   **Miglioramenti della Sicurezza**: Utilizzare aggiornamenti over-the-air (OTA) crittografati end-to-end per proteggere i dati degli utenti.
--   **Gestione degli Aggiornamenti**: Creare un sistema strutturato per il controllo delle versioni e la distribuzione degli aggiornamenti.
--   **Monitoraggio e Documentazione**: Impostare un monitoraggio dettagliato per le statistiche di consegna degli aggiornamenti, la cronologia delle versioni, i tassi di adozione degli utenti e la conformità alla sicurezza.
+-   **Améliorations de la sécurité** : Utilisez des mises à jour en direct (OTA) chiffrées de bout en bout pour protéger les données des utilisateurs.
+-   **Gestion des mises à jour** : Créez un système structuré pour le contrôle des versions et les déploiements de mises à jour.
+-   **Suivi et documentation** : Configurez un suivi détaillé des statistiques de livraison des mises à jour, de l’historique des versions, des taux d'adoption des utilisateurs et de la conformité en matière de sécurité.
 
-Capgo fornisce strumenti e risorse per aiutare gli sviluppatori a implementare questi passaggi in modo efficace.
+Capgo fournit des outils et des ressources pour aider les développeurs à mettre en œuvre ces étapes de manière efficace.
 
-### Supporto Capgo
+### Support Capgo
 
-Capgo è attrezzata per assistere gli sviluppatori nel soddisfare le linee guida aggiornate di Apple. Con 750 app già che utilizzano Capgo in produzione [\[1\]](https://capgo.app/), si è dimostrata una soluzione affidabile per la conformità e la gestione degli aggiornamenti.
+Capgo est équipé pour aider les développeurs à respecter les directives mises à jour d'Apple. Avec 750 applications déjà en production utilisant Capgo [\[1\]](https://capgo.app/), cela a prouvé être une solution fiable pour la conformité et la gestion des mises à jour.
 
-Capgo affronta le sfide comuni offrendo:
+Capgo traite des défis courants en offrant :
 
--   Controlli automatizzati per garantire che gli aggiornamenti soddisfino le politiche di Apple
--   Analisi dettagliate con un tasso di successo globale degli aggiornamenti dell'82% [\[1\]](https://capgo.app/)
--   Opzioni di distribuzione flessibili adattate alle esigenze degli sviluppatori
+-   Des vérifications automatisées pour garantir que les mises à jour respectent les politiques d'Apple
+-   Des analyses détaillées avec un taux de succès mondial de mise à jour de 82 % [\[1\]](https://capgo.app/)
+-   Des options de déploiement flexibles adaptées aux besoins des développeurs
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per distribuire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer en continu à nos utilisateurs !" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Capgo si integra anche perfettamente con i flussi di lavoro CI/CD, rendendo più facile per gli sviluppatori mantenere processi di aggiornamento coerenti - essenziali per allinearsi ai requisiti Apple del 2025.
+Capgo s'intègre également sans effort dans les flux de travail CI/CD, facilitant ainsi la tâche des développeurs pour maintenir des processus de mise à jour cohérents - essentiels pour se conformer aux exigences d'Apple en 2025.

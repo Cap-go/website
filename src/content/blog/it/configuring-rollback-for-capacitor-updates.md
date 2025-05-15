@@ -1,10 +1,10 @@
 ---
 slug: configuring-rollback-for-capacitor-updates
-title: Capacitor 업데이트를 위한 롤백 구성
+title: Configurando la reversión para actualizaciones de Capacitor
 description: >-
-  Scopri come configurare le opzioni di ripristino per gli aggiornamenti di
-  Capacitor per mantenere la stabilità dell'app, garantendo un'esperienza utente
-  fluida durante gli aggiornamenti over-the-air.
+  Apprenez à configurer les options de retour arrière pour les mises à jour de
+  Capacitor afin de maintenir la stabilité de l'application, garantissant une
+  expérience utilisateur fluide lors des mises à jour par air.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,73 +12,72 @@ created_at: 2025-04-19T01:14:33.030Z
 updated_at: 2025-04-19T01:15:15.132Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74-1745025315132.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: 'Capacitor, rollback, updates, mobile development, app stability'
 tag: 'Development, Mobile, Updates'
 published: true
 locale: it
 next_blog: ''
 ---
+Rollback en [Capacitor](https://capacitorjs.com/) garantiza que tu aplicación se mantenga estable durante las actualizaciones over-the-air (OTA). Aquí tienes lo que necesitas saber:
 
-Il rollback in [Capacitor](https://capacitorjscom/) garantisce che la tua app rimanga stabile durante gli aggiornamenti over-the-air (OTA). Ecco cosa devi sapere:
+- **Rollback Automático**: Revierte automáticamente a la última versión estable si una actualización falla.
+- **Rollback Manual**: Permite a los desarrolladores revertir manualmente a una versión anterior para correcciones rápidas.
+- **Copia de Seguridad del Paquete Predeterminado**: Si todas las actualizaciones fallan, la aplicación se restaura a su paquete original.
 
--   **Rollback Automatico**: Ripristina automaticamente l'ultima versione stabile se un aggiornamento fallisce
--   **Rollback Manuale**: Permette agli sviluppatori di tornare manualmente a una versione precedente per correzioni rapide
--   **Backup Bundle Predefinito**: Se tutti gli aggiornamenti falliscono, l'app viene ripristinata al pacchetto originale
+### Cómo Configurarlo:
 
-### Come Configurarlo:
+1. **Rollback Automático**: Usa configuraciones como umbrales de tasa de éxito (por ejemplo, 95%) y períodos de monitoreo (por ejemplo, 5 minutos).
+2. **Rollback Manual**: Mantén múltiples versiones para flexibilidad (por ejemplo, las últimas 5 versiones).
 
-1.  **Rollback Automatico**: Usa configurazioni come soglie del tasso di successo (es. 95%) e periodi di monitoraggio (es. 5 minuti)
-2.  **Rollback Manuale**: Mantieni più versioni per flessibilità (es. ultime 5 versioni)
+### Consejos de Gestión:
 
-### Suggerimenti di Gestione:
+- Prueba las actualizaciones en un entorno de pruebas antes del lanzamiento.
+- Monitorea las tasas de éxito de las actualizaciones y errores para activar los rollbacks temprano.
+- Usa despliegues por fases (por ejemplo, 10%, 50%, 100%) para minimizar el impacto.
 
--   Testa gli aggiornamenti in un ambiente di staging prima del rilascio
--   Monitora i tassi di successo degli aggiornamenti e gli errori per attivare i rollback tempestivamente
--   Usa rilasci graduali (es. 10%, 50%, 100%) per minimizzare l'impatto
+### Comparación de Plataformas:
 
-### Confronto Piattaforme:
+**[Capgo](https://capgo.app/)** ofrece retrocesos con un solo clic, cifrado, análisis en tiempo real y hospedaje flexible. Alternativas como **[Capawesome](https://cloud.capawesome.io/)** y **[Appflow](https://ionic.io/appflow/)** carecen de funciones o vienen con costos más altos.
 
-**[Capgo](https://capgoapp/)** offre rollback con un click, crittografia, analytics in tempo reale e hosting flessibile. Alternative come **[Capawesome](https://cloudcapawesomeio/)** e **[Appflow](https://ionicio/appflow/)** mancano di funzionalità o hanno costi più elevati
+**Tabla de Comparación Rápida:**
 
-**Tabella di Confronto Rapido:**
-
-| Piattaforma | Tipo di Rollback | Analytics | Crittografia | Opzioni Hosting | Costo |
+| Plataforma | Tipo de Rollback | Análisis | Cifrado | Opciones de Hospedaje | Costo |
 | --- | --- | --- | --- | --- | --- |
-| **Capgo** | Auto/Manuale | Sì | Sì | Flessibile | Conveniente |
-| Capawesome | Solo Manuale | No | No | Limitato | Basso |
-| Appflow | Auto/Manuale | Parziale | No | Limitato | Alto |
+| **Capgo** | Automático/Manual | Sí | Sí | Flexible | Asequible |
+| Capawesome | Solo Manual | No | No | Limitado | Más Bajo |
+| Appflow | Automático/Manual | Parcial | No | Limitado | Alto |
 
-Con una configurazione appropriata e strumenti come Capgo, puoi garantire aggiornamenti fluidi e risolvere rapidamente i problemi per mantenere la tua app funzionante senza interruzioni
+Con una configuración adecuada y herramientas como Capgo, puedes garantizar actualizaciones fluidas y abordar rápidamente los problemas para mantener tu aplicación funcionando sin problemas.
 
-## MAD24 304 Sfruttare gli Aggiornamenti Atomici con [OSTree](https://enwikipediaorg/wiki/OSTree) per
+## MAD24 304 Aprovechando las Actualizaciones Atómicas con [OSTree](https://en.wikipedia.org/wiki/OSTree) para ...
 
 <iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Come Funziona il Rollback in [Capacitor](https://capacitorjscom/)
+## Cómo Funciona el Rollback en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-Capacitor include una funzionalità di rollback che garantisce la stabilità dell'app durante gli aggiornamenti over-the-air, fungendo da salvaguardia contro potenziali problemi
+Capacitor incluye una función de rollback que garantiza la estabilidad de la aplicación durante las actualizaciones over-the-air, actuando como una salvaguarda contra problemas potenciales.
 
-### Tipi di Rollback
+### Tipos de Rollback
 
--   **Rollback Automatico**: Se un aggiornamento fallisce, Capacitor ripristina automaticamente l'app all'ultima versione stabile
--   **Rollback Manuale**: Gli sviluppatori possono tornare manualmente a una versione precedente, permettendo correzioni rapide durante i rilasci graduali o problemi in produzione [\[1\]](https://capgoapp/)
+- **Rollback Automático**: Si una actualización falla, Capacitor revierte automáticamente la aplicación a su última versión estable.
+- **Rollback Manual**: Los desarrolladores pueden retroceder manualmente a una versión anterior, lo que permite correcciones rápidas durante los despliegues por fases o problemas de producción [\[1\]](https://capgo.app/).
 
-Come ulteriore rete di sicurezza, Capacitor si affida anche al pacchetto originale dell'app
+Como una red de seguridad adicional, Capacitor también se basa en el paquete original de la aplicación.
 
-### Utilizzo del Bundle Predefinito come Backup
+### Usando el Paquete Predeterminado como Copia de Seguridad
 
-Se tutti i tentativi di aggiornamento falliscono, Capacitor ripristina l'app utilizzando il bundle originale, assicurando che l'app rimanga funzionante
+Si todos los intentos de actualización fallan, Capacitor restaura la aplicación utilizando el paquete original, asegurando que la aplicación siga siendo funcional.
 
-## Configurazione del Rollback: Passo dopo Passo
+## Configurando el Rollback: Paso a Paso
 
-Ecco come configurare efficacemente entrambe le opzioni di rollback automatico e manuale
+Aquí tienes cómo configurar tanto opciones de rollback automático como manual de manera efectiva.
 
-### Configurazione Rollback Automatico
+### Configuración de Rollback Automático
 
-Per abilitare il rollback automatico, imposta i criteri di rilevamento e successo:
+Para habilitar el rollback automático, configura los criterios de detección y éxito:
 
 ```typescript
 const config = {
@@ -95,9 +94,9 @@ const updateConfig = {
 };
 ```
 
-### Configurazione Rollback Manuale
+### Configuración de Rollback Manual
 
-Per il rollback manuale, personalizza le opzioni secondo necessità:
+Para el rollback manual, personaliza las opciones según sea necesario:
 
 ```typescript
 const rollbackOptions = {
@@ -106,65 +105,66 @@ const rollbackOptions = {
 };
 ```
 
-Se usi Capgo, puoi avviare un rollback con un solo click a qualsiasi versione salvata
+Si usas Capgo, puedes iniciar un rollback con un solo clic a cualquier versión guardada.
 
-Per riferimento:
+Para referencia:
 
-| Tipo Rollback | Timeout | Soglia di Successo | Periodo di Monitoraggio |
+| Tipo de Rollback | Tiempo de Espera | Umbral de Éxito | Período de Monitoreo |
 | --- | --- | --- | --- |
-| Auto | 15 secondi | 95% | 5 minuti |
-| Manuale | N/D | Definito dall'utente | Continuo |
+| Automático | 15 segundos | 95% | 5 minutos |
+| Manual | N/A | Definido por el usuario | Continuo |
 
-Passa alla sezione successiva per i suggerimenti sulla gestione del rollback
+Dirígete a la siguiente sección para consejos sobre la gestión de rollbacks.
 
-## Suggerimenti per la Gestione del Rollback
+## Consejos para la Gestión de Rollbacks
 
-Mantieni basso l'impatto sugli utenti testando, monitorando e distribuendo attentamente gli aggiornamenti
+Mantén bajo el impacto en los usuarios probando, monitoreando y desplegando cuidadosamente las actualizaciones.
 
-### Test in Staging
+### Pruebas en Staging
 
-Simula scenari di rollback in un setup di staging che rispecchia la produzione
+Simula escenarios de rollback en una configuración de pruebas que refleje la producción.
 
-Per verificare la prontezza del rollback:
+Para verificar la preparación del rollback:
 
--   Distribuisci aggiornamenti beta a piccoli gruppi usando i canali Capgo [\[1\]](https://capgoapp/)
--   Se emergono problemi, attiva un rollback alla versione stabile più recente
+- Despliega actualizaciones beta a pequeños grupos usando los canales de Capgo [\[1\]](https://capgo.app/).
+- Si surgen problemas, activa un rollback a la versión estable más reciente.
 
-Dopo i test, concentrati sul monitoraggio delle prestazioni dell'aggiornamento nell'ambiente live
+Después de las pruebas, enfócate en monitorear el rendimiento de la actualización en el entorno en vivo.
 
-### Monitoraggio Prestazioni Aggiornamenti
+### Seguimiento del Rendimiento de Actualizaciones
 
-Tieni sotto controllo le prestazioni degli aggiornamenti per garantire rollback fluidi:
+Mantente al tanto del rendimiento de las actualizaciones para asegurar rollbacks fluidos:
 
--   Monitora i tassi di successo degli aggiornamenti live e il coinvolgimento degli utenti [\[1\]](https://capgoapp/)-   Tenere d'occhio gli errori per avviare i rollback tempestivamente, evitando interruzioni importanti
--   Utilizzare l'analisi per individuare e risolvere eventuali colli di bottiglia
+- Monitorea las tasas de éxito de actualizaciones en vivo y la participación del usuario [\[1\]](https://capgo.app/).
+- Mantén un ojo en los errores para iniciar rollbacks temprano, evitando interrupciones importantes.
+- Aprovecha los análisis para detectar y resolver cualquier cuello de botella.
 
-> "Abbiamo implementato gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo riscontrando un funzionamento molto fluido e quasi tutti i nostri utenti sono aggiornati entro pochi minuti dal rilascio dell'OTA su @Capgo"
->
-> -   colenso [\[1\]](https://capgoapp/)
+> "Desplegamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de más de 5000. Estamos viendo una operación muy fluida y casi todos nuestros usuarios están actualizados en minutos después de que se despliega la OTA a @Capgo."
+> 
+> - colenso [\[1\]](https://capgo.app/)
 
-Una volta implementato il monitoraggio, rilasciare gli aggiornamenti in modo incrementale
+Una vez que el monitoreo esté en su lugar, lanza actualizaciones de forma incremental.
 
-### Rilascio Graduale degli Aggiornamenti
+### Lanzamiento de Actualizaciones por Fases
 
-Distribuire gli aggiornamenti gradualmente: iniziare con il 10%, poi 50% e infine 100% degli utenti [\[1\]](https://capgoapp/)
+Distribuye las actualizaciones gradualmente: comienza con el 10%, luego el 50%, y finalmente el 100% de tus usuarios [\[1\]](https://capgo.app/).
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente aggiornamenti ai nostri utenti!"
->
-> -   Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Practicamos el desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios."
+> 
+> - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-## Funzionalità di Rollback delle Piattaforme
+## Características de Rollback de la Plataforma
 
-Ora che abbiamo discusso della configurazione del rollback e delle migliori pratiche, vediamo come le principali piattaforme gestiscono i rollback. Gli strumenti che offrono possono fare una grande differenza nella velocità e affidabilità del recupero da aggiornamenti problematici
+Ahora que hemos discutido la configuración del rollback y las mejores prácticas, veamos cómo las principales plataformas manejan los rollbacks. Las herramientas que ofrecen pueden hacer una gran diferencia en cuán rápido y confiablemente te recuperas de actualizaciones problemáticas.
 
-**Capgo** si distingue con il suo **rollback con un clic** a qualsiasi versione. Offre anche **crittografia end-to-end**, **analisi in tempo reale**, canali di distribuzione avanzati e la flessibilità di opzioni sia cloud che self-hosted [\[1\]](https://capgoapp/)
+**Capgo** se destaca con su **rollback con un solo clic** a cualquier lanzamiento. También ofrece **cifrado de extremo a extremo**, **análisis en tiempo real**, canales de despliegue avanzados y la flexibilidad de opciones de hospedaje en la nube y autohospedadas [\[1\]](https://capgo.app/).
 
-D'altra parte, **Capawesome** è carente, mancando di crittografia, analisi e flessibilità di hosting. Nel frattempo, **Appflow** ha una tariffa annuale elevata e una roadmap poco chiara, che può renderlo meno attraente [\[1\]](https://capgoapp/)
+Por otro lado, **Capawesome** se queda corto, careciendo de cifrado, análisis y flexibilidad de hospedaje. Mientras tanto, **Appflow** tiene una tarifa anual elevada y una hoja de ruta poco clara, lo que puede hacerlo menos atractivo [\[1\]](https://capgo.app/).
 
-Nella scelta di una piattaforma, i fattori chiave da considerare includono **sicurezza**, profondità delle analisi, flessibilità di distribuzione e costo complessivo. Capgo combina affidabilità del rollback, forte crittografia e convenienza, rendendolo un'opzione solida per team di tutte le dimensioni [\[1\]](https://capgoapp/)
+Al elegir una plataforma, los factores clave a considerar incluyen **seguridad**, la profundidad de los análisis, flexibilidad de despliegue y costo total. Capgo combina la confiabilidad en rollback, fuerte cifrado y costo-efectividad, convirtiéndolo en una opción sólida para equipos de todos los tamaños [\[1\]](https://capgo.app/).
 
-## Riepilogo
+## Resumen
 
-Garantire aggiornamenti fluidi per la tua app Capacitor richiede metodi di rollback affidabili dalla configurazione iniziale ai rilasci graduali. Configurando correttamente le impostazioni e scegliendo le piattaforme giuste, i team possono affrontare rapidamente i problemi degli aggiornamenti difettosi mantenendo gli utenti soddisfatti
+Asegurar actualizaciones fluidas para tu aplicación de Capacitor requiere métodos de rollback confiables desde la configuración inicial hasta los lanzamientos por fases. Al configurar los ajustes correctamente y elegir las plataformas adecuadas, los equipos pueden abordar rápidamente los problemas causados por actualizaciones defectuosas mientras mantienen a los usuarios satisfechos.
 
-Un solido piano di rollback include un mix di opzioni automatiche e manuali, monitoraggio in tempo reale, rilasci graduali e pipeline di aggiornamento sicure. Strumenti come Capgo semplificano questo processo con funzionalità come rollback con un clic, aggiornamenti crittografati e analisi integrate. Con queste strategie, la tua app può fornire aggiornamenti costanti e affidabili senza interruzioni
+Un plan sólido de rollback incluye una mezcla de opciones automáticas y manuales, monitoreo en tiempo real, despliegues graduales y canalizaciones de actualización seguras. Herramientas como Capgo simplifican este proceso con características como rollbacks con un solo clic, actualizaciones cifradas y análisis integrados. Con estas estrategias, tu aplicación puede ofrecer actualizaciones consistentes y confiables sin interrupciones.

@@ -1,9 +1,10 @@
 ---
-slug: gestione-dei-changelog-di-capacitor-guida-completa
-title: Capacitorのチェンジログ管理：完全ガイド
+slug: capacitor-changelog-management-ultimate-guide
+title: 'Gestión del registro de cambios de Capacitor: Guía definitiva'
 description: >-
-  Capacitor
-  アプリのチェンジログを効果的に管理する方法を学び、構造、自動化ツール、およびユーザーへの透明性を確保するためのベストプラクティスについて説明します。
+  Apprenez à gérer efficacement le changelog pour les applications Capacitor, en
+  couvrant la structure, les outils d'automatisation et les meilleures pratiques
+  pour la transparence des utilisateurs.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -11,236 +12,236 @@ created_at: 2025-03-27T02:52:04.098Z
 updated_at: 2025-03-27T02:52:22.012Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4b3f310051fda3b6385d9-1743043942012.jpg
-head_image_alt: モバイル開発
+head_image_alt: Desarrollo Móvil
 keywords: >-
   Capacitor, changelog management, app updates, automation tools, version
   control
 tag: 'Development, Mobile, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
-La gestione dei changelog è essenziale per mantenere gli [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) trasparenti e organizzati. Questa guida spiega come creare, strutturare e automatizzare i changelog per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), assicurando che sia gli sviluppatori che gli utenti rimangano informati. Ecco cosa imparerai:
+Gerenciar changelogs é essencial para manter suas [atualizações de aplicativo](https://capgo.app/plugins/capacitor-updater/) transparentes e organizadas. Este guia explica como criar, estruturar e automatizar changelogs para [aplicativos Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), garantindo que desenvolvedores e usuários permaneçam informados. Aqui está o que você aprenderá:
 
--   **Perché i changelog sono importanti**: Semplificano il debug, migliorano la comunicazione e costruiscono la fiducia degli utenti.
--   **Come strutturare i changelog**: Usa categorie come "Aggiunto", "Risolto" e "Sicurezza" per chiarezza.
--   **Migliori pratiche**: Aggiorna i changelog prima dei commit, automatizza con strumenti come [Capgo](https://capgo.app/) e rivedi le voci durante le pull request.
--   **Strumenti di automazione**: Usa pipeline CI/CD e standard di commit per semplificare la gestione del changelog.
--   **Aggiornamenti OTA**: Documenta gli aggiornamenti live con dettagli come numeri di versione, timestamp e tassi di successo.
+- **Por que changelogs são importantes**: Eles simplificam a depuração, melhoram a comunicação e constroem a confiança do usuário.
+- **Como estruturar changelogs**: Use categorias como "Adicionado", "Corrigido" e "Segurança" para clareza.
+- **Melhores práticas**: Atualize changelogs antes dos commits, automatize com ferramentas como [Capgo](https://capgo.app/) e revise entradas durante pull requests.
+- **Ferramentas de automação**: Use pipelines CI/CD e padrões de commit para simplificar o gerenciamento de changelogs.
+- **Atualizações OTA**: Documente atualizações ao vivo com detalhes como números de versão, carimbos de data/hora e taxas de sucesso.
 
-**Suggerimento Rapido**: Automatizza la creazione del changelog usando strumenti come Capgo per risparmiare tempo e garantire coerenza. Il 95% degli utenti si aggiorna entro 24 ore utilizzando soluzioni Over-the-Air (OTA).
+**Dica Rápida**: Automatize a criação de changelogs usando ferramentas como Capgo para economizar tempo e garantir consistência. 95% dos usuários atualizam dentro de 24 horas usando soluções Over-the-Air (OTA).
 
-Immergiti nella guida per configurare il tuo primo changelog e integrarlo perfettamente nel tuo flusso di lavoro.
+Mergulhe no guia para configurar seu primeiro changelog e integrá-lo perfeitamente ao seu fluxo de trabalho.
 
-## Come Versionare e Creare Changelog dei tuoi progetti automaticamente a...
+## Como versionar e gerenciar changelog de seus projetos automaticamente para ...
 
-<Steps>
+<iframe src="https://www.youtube.com/embed/BbdFfvZNWNw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Configurazione del Tuo Primo Changelog
+## Configurando Seu Primeiro Changelog
 
-Creare un changelog chiaro è fondamentale per tracciare e condividere gli aggiornamenti nella tua app Capacitor. Ecco come strutturarlo efficacemente e seguire le migliori pratiche.
+Criar um changelog claro é a chave para rastrear e compartilhar atualizações no seu aplicativo Capacitor. Aqui está como estruturá-lo de forma eficaz e seguir melhores práticas.
 
-### Opzioni di Formato del Changelog
+### Opções de Formato de Changelog
 
-Segui lo standard [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) per organizzare gli aggiornamenti per versione e tipo. Questo approccio utilizza categorie chiare per rendere gli aggiornamenti facili da capire:
+Siga o padrão [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) para organizar atualizações por versão e tipo. Esta abordagem usa categorias claras para tornar as atualizações fáceis de entender:
 
-| Categoria | Descrizione | Esempio di Voce |
+| Categoria | Descrição | Exemplo de Entrada |
 | --- | --- | --- |
-| **Aggiunto** | Nuove funzionalità | Aggiunto supporto notifiche push |
-| **Modificato** | Aggiornamenti a funzionalità esistenti | Aggiornato flusso di autenticazione |
-| **Deprecato** | Funzionalità che saranno rimosse presto | Deprecando endpoint API legacy |
-| **Rimosso** | Funzionalità che sono state rimosse | Rimossa analytics obsoleta |
-| **Risolto** | Correzioni di bug | Risolti permessi fotocamera iOS |
-| **Sicurezza** | Aggiornamenti di sicurezza | Migliorata crittografia dati |
+| **Adicionado** | Novos recursos | Adicionado suporte a notificações push |
+| **Alterado** | Atualizações em recursos existentes | Atualizado fluxo de autenticação |
+| **Depreciado** | Recursos a serem removidos em breve | Deprecando endpoints da API legada |
+| **Removido** | Recursos que foram removidos | Removido análise desatualizada |
+| **Corrigido** | Correções de bugs | Corrigido permissões de câmera no iOS |
+| **Segurança** | Atualizações de segurança | Aprimorada criptografia de dados |
 
-### Costruzione del CHANGELOG.md
+### Construindo Seu CHANGELOG.md
 
-Per configurare il tuo `CHANGELOG.md`, assicurati che sia organizzato in modo coerente e facile da leggere. Posizionalo nella directory principale del tuo progetto e includi questi elementi principali:
+Para configurar seu `CHANGELOG.md`, certifique-se de que está organizado de forma consistente e fácil de ler. Coloque-o no diretório raiz do seu projeto e inclua esses elementos principais:
 
--   **Sezione Intestazione**: Aggiungi il nome del progetto e una breve descrizione.
--   **Blocchi Versione**: Documenta gli aggiornamenti sotto numeri di versione semantica (MAJOR.MINOR.PATCH).
--   **Date di Rilascio**: Usa il formato ISO (YYYY-MM-DD), come `2025-03-27`.
--   **Categorie di Modifiche**: Raggruppa gli aggiornamenti sotto le intestazioni appropriate.
+- **Seção de Cabeçalho**: Adicione o nome do seu projeto e uma breve descrição.
+- **Blocos de Versão**: Documente atualizações sob números de versão semânticos (MAJOR.MINOR.PATCH).
+- **Datas de Lançamento**: Use o formato ISO (YYYY-MM-DD), como `2025-03-27`.
+- **Categorias de Mudança**: Agrupe atualizações sob os cabeçalhos apropriados.
 
-Elenca sempre le versioni in ordine cronologico inverso in modo che gli aggiornamenti più recenti siano in cima.
+Sempre liste versões em ordem cronológica inversa para que as atualizações mais novas fiquem no topo.
 
-### Aggiungere i Passaggi del Changelog allo Sviluppo
+### Adicionando Passos de Changelog ao Desenvolvimento
 
-Incorporare gli aggiornamenti del changelog nel tuo flusso di lavoro garantisce una documentazione accurata e aggiornata. Ecco alcuni suggerimenti pratici:
+Incorporar atualizações de changelog ao seu fluxo de trabalho garante documentação precisa e atualizada. Aqui estão algumas dicas práticas:
 
--   **Aggiornamenti Pre-commit**: Aggiorna il changelog prima di committare le modifiche al codice. Questo riduce la possibilità di perdere aggiornamenti importanti.
--   **Integrazione Automatizzata**: Strumenti come Capgo funzionano con [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) e [Jenkins](https://www.jenkins.io/) [\[1\]](https://capgo.app/) per semplificare il processo di aggiornamento del changelog.
--   **Processo di Revisione**: Rendi la revisione delle voci del changelog parte del processo di pull request. Questo assicura che gli aggiornamenti siano accurati e approvati prima del merge.
+- **Atualizações Pré-commit**: Atualize o changelog antes de fazer mudanças no código. Isso reduz a chance de perder atualizações importantes.
+- **Integração Automatizada**: Ferramentas como Capgo funcionam com [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) e [Jenkins](https://www.jenkins.io/) [\[1\]](https://capgo.app/) para simplificar o processo de atualização do seu changelog.
+- **Processo de Revisão**: Faça da revisão das entradas do changelog parte do seu processo de pull request. Isso garante que as atualizações sejam precisas e aprovadas antes da mesclagem.
 
-## Scrittura di Voci Chiare nel Changelog
+## Escrevendo Entradas de Changelog Claras
 
-Le voci del changelog dovrebbero trovare un equilibrio tra precisione tecnica e leggibilità, rendendole utili sia per gli sviluppatori che per gli utenti.
+As entradas de changelog devem encontrar um equilíbrio entre precisão técnica e legibilidade, tornando-as úteis tanto para desenvolvedores quanto para usuários.
 
-### Guida di Stile di Scrittura
+### Guia de Estilo de Escrita
 
-Attieniti a questi principi per assicurare che le tue voci del changelog siano chiare e coerenti:
+Siga estes princípios para garantir que suas entradas de changelog sejam claras e consistentes:
 
--   Scrivi al **tempo presente**
--   Inizia con **verbi d'azione**
--   Sii **specifico** su ciò che è cambiato
--   Menziona gli aggiornamenti delle versioni delle dipendenze
--   Usa un minimo di gergo tecnico
+- Escreva em **presente**
+- Comece com **verbos de ação**
+- Seja **específico** sobre o que mudou
+- Mencione atualizações nas versões de dependências
+- Use jargão técnico mínimo
 
-**Esempi:**
+**Exemplos:**
 
-| Voce Poco Chiara | Voce Chiara |
+| Entrada Pouco Clara | Entrada Clara |
 | --- | --- |
-| Risolti bug | Risolto il blocco dell'anteprima fotocamera su dispositivi iOS 17.4 |
-| Aggiunta roba | Aggiunto supporto autenticazione biometrica per Android |
-| Modificata API | Aggiornato endpoint profilo utente per supportare nuovi campi |
-| Correzioni di sicurezza | Corretto vulnerabilità di iniezione [SQLite](https://www.sqlite.org/) nella funzione di ricerca |
+| Corrigidos bugs | Corrigir congelamento da visualização da câmera em dispositivos iOS 17.4 |
+| Adicionado coisas | Adicionar suporte à autenticação biométrica para Android |
+| API alterada | Atualizar endpoint de perfil do usuário para suportar novos campos |
+| Correções de segurança | Corrigir vulnerabilidade de injeção no [SQLite](https://www.sqlite.org/) na função de busca |
 
-### Tipi di Modifiche e Categorie
+### Tipos e Categorias de Mudança
 
-Organizza i tuoi aggiornamenti in categorie chiare in modo che gli utenti possano trovare rapidamente ciò che interessa loro. Ecco una suddivisione delle categorie comuni:
+Organize suas atualizações em categorias claras para que os usuários possam encontrar rapidamente o que importa para eles. Aqui está uma divisão das categorias comuns:
 
--   **Aggiunto**: Introduce nuove funzionalità o funzionalità
--   **Modificato**: Aggiornamenti o modifiche a funzionalità esistenti
--   **Deprecato**: Segna funzionalità pianificate per la rimozione
--   **Rimosso**: Indica funzionalità che sono state rimosse
--   **Risolto**: Risolve bug o problemi
--   **Sicurezza**: Copre patch o aggiornamenti relativi a vulnerabilità di sicurezza
+- **Adicionado**: Introduz novos recursos ou funcionalidades
+- **Alterado**: Atualizações ou modificações em recursos existentes
+- **Depreciado**: Marca recursos ou funcionalidades planejadas para remoção
+- **Removido**: Indica recursos ou funcionalidades que foram removidos
+- **Corrigido**: Resolve bugs ou problemas
+- **Segurança**: Trata de correções ou atualizações relacionadas a vulnerabilidades de segurança
 
-Considera l'impatto sull'utente quando assegni le categorie. Per esempio, se viene aggiornata un'API core, elencala sotto "Modificato" e fornisci dettagli di migrazione se necessario. Per aggiornamenti importanti, collega alla fonte per ulteriore contesto.
+Considere o impacto para o usuário ao atribuir categorias. Por exemplo, se uma API principal for atualizada, classifique-a como "Alterado" e forneça detalhes de migração, se necessário. Para atualizações importantes, faça uma ligação para a fonte para um contexto adicional.
 
-### Aggiunta di Link di Riferimento
+### Adicionando Links de Referência
 
-Rendi il tuo changelog più utile collegando le voci alla documentazione, problemi o commit pertinenti:
+Torne seu changelog mais útil vinculando entradas a documentação, problemas ou commits relevantes:
 
-1. **Riferimenti ai Problemi**
+1. **Referências de Problemas**
 
-Collega direttamente ai problemi o pull request di GitHub relativi alla modifica:
+Vincule diretamente a problemas do GitHub ou pull requests relacionados à mudança:
 
 ```markdown
 - Fix iOS camera permissions dialog ([#234](https://github.com/your-repo/issues/234))
 ```
 
-2. **Link alla Documentazione**
+2. **Links de Documentação**
 
-Quando introduci nuove funzionalità o modifiche importanti, includi link alla documentazione aggiornata:
+Ao introduzir novos recursos ou mudanças que quebram a compatibilidade, inclua links para a documentação atualizada:
 
 ```markdown
 - Add push notification support (See [Migration Guide](https://docs.example.com/push))
 ```
 
-3. **Riferimenti ai Commit**
+3. **Referências de Commit**
 
-Per aggiornamenti importanti, fai riferimento al commit specifico:
+Para atualizações importantes, referencie o commit específico:
 
 ```markdown
 - Update authentication flow (commit: `8f4d89b`)
 ```
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per la correzione di bug è oro." - Bessie Cooper
+> "Capgo é uma ferramenta indispensável para desenvolvedores, que desejam ser mais produtivos. Evitar revisão para correções de bugs é ouro." - Bessie Cooper
 
-## Strumenti di Automazione del Changelog
+## Ferramentas de Automação de Changelog
 
-L'automazione della creazione del changelog semplifica il tuo flusso di lavoro e assicura una documentazione coerente delle modifiche in tutto il tuo progetto Capacitor.
+Automatizar a criação de changelog simplifica seu fluxo de trabalho e garante documentação consistente das mudanças ao longo do seu projeto Capacitor.
 
-### Migliori Strumenti per il Changelog
+### Principais Ferramentas de Changelog
 
-Diversi strumenti possono gestire efficacemente l'automazione del changelog. Quando ne scegli uno, concentrati su queste caratteristiche chiave:
+Várias ferramentas podem lidar com automação de changelog de forma eficaz. Ao escolher uma, concentre-se nas seguintes características principais:
 
--   **Rilevamento versione**: Individua automaticamente nuove release
--   **Analisi dei commit**: Estrae dettagli rilevanti dai messaggi di commit
--   **Capacità di integrazione**: Si adatta perfettamente alla tua pipeline CI/CD esistente
--   **Opzioni di personalizzazione**: Si adatta ai requisiti specifici del tuo progetto
+- **Detecção de versão**: Detecta automaticamente novas versões
+- **Análise de commits**: Extrai detalhes relevantes das mensagens de commit
+- **Capacidades de integração**: Se encaixa perfeitamente em seu pipeline CI/CD existente
+- **Opções de personalização**: Personaliza de acordo com os requisitos específicos do seu projeto
 
-Capgo rende più facile l'automazione del changelog integrando gli aggiornamenti live [\[1\]](https://capgo.app/). Con più di 750 app in produzione e 23,5 milioni di aggiornamenti consegnati [\[1\]](https://capgo.app/), ha dimostrato la sua affidabilità. Per ottenere il massimo da questi strumenti, assicurati che i tuoi messaggi di commit seguano una struttura chiara.
+Capgo facilita a automação de changelog integrando atualizações ao vivo [\[1\]](https://capgo.app/). Com mais de 750 aplicativos em produção e 23,5 milhões de atualizações entregues [\[1\]](https://capgo.app/), ele provou sua confiabilidade. Para obter o máximo dessas ferramentas, certifique-se de que suas mensagens de commit sigam uma estrutura clara.
 
-### Standard dei Messaggi di Commit
+### Padrões de Mensagens de Commit
 
-Usa questo formato per i messaggi di commit:
+Use este formato para mensagens de commit:
 
-_<iframe src="https://www.youtube.com/embed/BbdFfvZNWNw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen>(</iframe>): <type>_
+_<type>(<scope>): <description>_
 
-_\[corpo opzionale\]_
+_\[corpo opcional\]_
 
-_\[footer opzionale\]_
+_\[rodapé opcional\]_
 
-Ecco alcuni tipi di commit comuni:
+Aqui estão alguns tipos de commit comuns:
 
--   **feat**: Per introdurre nuove funzionalità
--   **fix**: Per risolvere bug
--   **docs**: Per modifiche alla documentazione
--   **style**: Per aggiornamenti di formattazione
--   **refactor**: Per riorganizzare il codice senza cambiarne il comportamento
--   **test**: Per aggiungere o aggiornare test
--   **chore**: Per attività di manutenzione generale
+- **feat**: Para introduzir novos recursos
+- **fix**: Para resolver bugs
+- **docs**: Para mudanças na documentação
+- **style**: Para atualizações de formatação
+- **refactor**: Para reorganizar o código sem alterar seu comportamento
+- **test**: Para adicionar ou atualizar testes
+- **chore**: Para tarefas de manutenção geral
 
-### Configurazione CI/CD per il Changelog
+### Configuração de Changelog CI/CD
 
-Combinando strumenti automatizzati con messaggi di commit standardizzati, puoi integrare la generazione del changelog nella tua pipeline CI/CD. Questa configurazione garantisce aggiornamenti rapidi e accurati. Una pipeline configurata correttamente può auto-generare changelog, controllare la formattazione dei messaggi, aggiornare la documentazione e notificare il tuo team.
+Ao combinar ferramentas automatizadas com mensagens de commit padronizadas, você pode integrar a geração de changelog em seu pipeline CI/CD. Essa configuração garante atualizações rápidas e precisas. Um pipeline bem configurado pode gerar changelogs automaticamente, verificar a formatação das mensagens, atualizar a documentação e notificar sua equipe.
 
-I risultati parlano da soli: il 95% degli utenti attivi riceve gli aggiornamenti entro 24 ore utilizzando il sistema di deployment automatizzato di Capgo [\[1\]](https://capgo.app/).
+Os resultados falam por si: 95% dos usuários ativos recebem atualizações dentro de 24 horas usando o sistema de implantação automatizado do Capgo [\[1\]](https://capgo.app/).
 
-## Gestione del Changelog per Aggiornamenti OTA
+## Gerenciamento de Changelog para Atualizações OTA
 
-La gestione dei changelog per gli aggiornamenti over-the-air (OTA) richiede un'attenzione extra perché questi aggiornamenti vengono distribuiti istantaneamente. A differenza degli aggiornamenti tradizionali dell'app store che gli utenti scaricano manualmente, gli aggiornamenti OTA raggiungono i dispositivi automaticamente. Questo rende essenziale una documentazione chiara e dettagliata per mantenere la fiducia degli utenti e garantire la trasparenza.
+Lidar com changelogs para atualizações over-the-air (OTA) requer atenção extra, pois essas atualizações são implantadas instantaneamente. Ao contrário das atualizações tradicionais da loja de aplicativos que os usuários fazem download manualmente, as atualizações OTA alcançam os dispositivos automaticamente. Isso torna a documentação clara e detalhada essencial para manter a confiança do usuário e garantir transparência.
 
-### Documentazione degli Aggiornamenti OTA
+### Documentação de Atualizações OTA
 
-Quando gestisci gli aggiornamenti live, è importante documentare dettagli chiave come la versione del bundle, la versione dell'aggiornamento OTA, i timestamp di distribuzione, i tassi di successo e le metriche di adozione degli utenti. Per rendere il changelog facile da capire, organizza gli aggiornamenti in categorie chiare:
+Quando gerencia atualizações ao vivo, é importante documentar detalhes-chave, como a versão do pacote, versão da atualização OTA, carimbos de data/hora de implantação, taxas de sucesso e métricas de adoção do usuário. Para tornar o changelog fácil de entender, organize as atualizações em categorias claras:
 
-| Categoria | Descrizione | Esempio di Voce |
+| Categoria | Descrição | Exemplo de Entrada |
 | --- | --- | --- |
-| Correzioni Critiche | Patch urgenti per problemi immediati | "Risolto crash nel flusso di autenticazione utente" |
-| Aggiornamenti Funzionalità | Funzionalità nuove o migliorate | "Aggiunto supporto modalità scura per la dashboard" |
-| Prestazioni | Miglioramenti di velocità e ottimizzazione | "Ridotto tempo di caricamento app del 40%" |
-| Sicurezza | Aggiornamenti per migliorare la sicurezza | "Migliorata crittografia dati per i trasferimenti file" |
+| Correções Críticas | Patches urgentes para problemas imediatos | "Corrigido crash no fluxo de autenticação do usuário" |
+| Atualizações de Funcionalidade | Funcionalidade nova ou melhorada | "Adicionado suporte ao modo escuro para o painel" |
+| Desempenho | Melhorias de velocidade e otimização | "Reduzido o tempo de carregamento do aplicativo em 40%" |
+| Segurança | Atualizações para melhorar segurança | "Aprimorada criptografia de dados para transferências de arquivos" |
 
-### Gestione degli Aggiornamenti [Capgo](https://capgo.app/)
+### Gerenciamento de Atualizações [Capgo](https://capgo.app/)
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
-Per gli aggiornamenti OTA live, una documentazione dettagliata è indispensabile per completare la tua strategia generale del changelog. Capgo semplifica questo processo tracciando automaticamente le versioni, monitorando le prestazioni degli aggiornamenti, registrando i rollback e registrando le distribuzioni per canale.
+Para atualizações OTA ao vivo, a documentação detalhada é imprescindível para complementar sua estratégia geral de changelog. O Capgo simplifica esse processo rastreando automaticamente versões, monitorando o desempenho das atualizações, registrando rollback e gravando implantações por canal.
 
-Uno sviluppatore che gestisce oltre 5.000 utenti ha condiviso la sua esperienza:
+Um desenvolvedor que gerencia mais de 5.000 usuários compartilhou sua experiência:
 
-> "Abbiamo implementato gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo vedendo un'operazione molto fluida quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo." – colenso [\[1\]](https://capgo.app/)
+> "Implantamos atualizações OTA do Capgo em produção para nossa base de usuários de +5000. Estamos observando uma operação muito suave, quase todos os nossos usuários estão atualizados em minutos após a OTA ser implantada no @Capgo." – colenso [\[1\]](https://capgo.app/)
 
-**Migliori Pratiche per la Gestione del Changelog OTA**:
+**Melhores Práticas para Gerenciamento de Changelog OTA**:
 
--   Registra le modifiche non appena vengono effettuate.
--   Traccia gli aggiornamenti per canale per supportare i rilasci graduali.
--   Mantieni registri chiari dei rollback per una rapida risoluzione dei problemi.
+- Registre mudanças assim que forem feitas.
+- Rastreie atualizações por canal para apoiar lançamentos em etapas.
+- Mantenha registros claros de rollback para rápida resolução de problemas.
 
-Rodrigo Mantica sottolinea l'importanza di questo approccio:
+Rodrigo Mantica destaca a importância dessa abordagem:
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" – Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Praticamos desenvolvimento ágil e @Capgo é fundamental na entrega contínua para nossos usuários!" – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-## Riepilogo
+## Resumo
 
-### Pratiche Chiave per la Gestione del Changelog
+### Práticas-Chave para Gerenciamento de Changelog
 
-La gestione efficace dei changelog migliora la chiarezza e costruisce la fiducia degli utenti. Ecco alcune pratiche essenziali:
+Gerenciar changelogs de forma eficaz melhora a clareza e constrói a confiança do usuário. Aqui estão algumas práticas essenciais:
 
-| Pratica | Descrizione | Impatto |
+| Prática | Descrição | Impacto |
 | --- | --- | --- |
-| **Tracciamento Versioni** | Tieni traccia dei numeri di versione (app e OTA). | 82% tasso di successo globale per aggiornamenti tracciati [\[1\]](https://capgo.app/) |
-| **Categorie Aggiornamenti** | [Classifica gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) per tipo (correzioni, funzionalità, sicurezza). | 95% degli utenti attivi aggiorna entro 24 ore [\[1\]](https://capgo.app/) |
-| **Registri Distribuzione** | Documenta timestamp, tassi di successo e metriche. | Supporta il monitoraggio di 23.5M aggiornamenti [\[1\]](https://capgo.app/) |
-| **Strategia Rollback** | Mantieni log delle versioni precedenti con integrazione OTA. | Permette il ripristino immediato quando necessario. |
+| **Rastreamento de Versão** | Mantenha o controle dos números de versão (aplicativo e OTA). | 82% taxa de sucesso global para atualizações rastreadas [\[1\]](https://capgo.app/) |
+| **Categorias de Atualização** | [Classifique as atualizações](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) por tipo (correções, recursos, segurança). | 95% dos usuários ativos atualizam dentro de 24 horas [\[1\]](https://capgo.app/) |
+| **Registros de Implantação** | Documente timestamps, taxas de sucesso e métricas. | Suporta o monitoramento de 23,5 milhões de atualizações [\[1\]](https://capgo.app/) |
+| **Estratégia de Reversão** | Mantenha logs de versões anteriores com integração OTA. | Permite recuperação imediata quando necessário. |
 
-### Strumenti Suggeriti per una Migliore Gestione
+### Ferramentas Sugeridas para Melhor Gerenciamento
 
-Per implementare queste pratiche efficacemente, è fondamentale utilizzare gli strumenti giusti. Le moderne app Capacitor beneficiano di strumenti come Capgo, che semplifica la gestione dei changelog con funzionalità come:
+Para implementar essas práticas de forma eficaz, é crucial usar as ferramentas certas. Aplicativos modernos Capacitor se beneficiam de ferramentas como Capgo, que simplifica o gerenciamento de changelogs com recursos como:
 
--   **Controllo Versione Automatizzato**: Traccia e documenta gli aggiornamenti facilmente usando pipeline CI/CD.
--   **Analisi in Tempo Reale**: Monitora le prestazioni degli aggiornamenti e i tassi di adozione degli utenti.
--   **Gestione dei Canali**: Abilita test beta e rilasci graduali per una distribuzione più fluida.
+-   **Controle de Versão Automatizado**: Acompanhe e documente atualizações usando pipelines CI/CD.
+-   **Análise em Tempo Real**: Acompanhe o desempenho das atualizações e as taxas de adoção dos usuários.
+-   **Gerenciamento de Canais**: Habilite testes beta e implantações faseadas para uma implantação mais suave.
 
-Nella scelta degli strumenti per la gestione dei changelog, dai priorità a:
+Ao escolher ferramentas para gerenciamento de changelog, priorize:
 
--   **Integrazione Fluida**: Compatibilità con i flussi di lavoro esistenti.
--   **Documentazione Dettagliata**: Tracciamento automatico dei dati di distribuzione.
--   **Aggiornamenti Utenti**: Comunicazione chiara e diretta sui cambiamenti.
+-   **Integração Sem Costura**: Compatibilidade com seus fluxos de trabalho existentes.
+-   **Documentação Detalhada**: Acompanhamento automático de dados de implantação.
+-   **Atualizações dos Usuários**: Comunicação clara e direta sobre as mudanças.
 
-Combinando queste pratiche con gli strumenti giusti, puoi stabilire un sistema di changelog affidabile che supporta la distribuzione continua mantenendo gli utenti informati.
+Ao combinar essas práticas com as ferramentas certas, você pode estabelecer um sistema de changelog confiável que apoie a entrega contínua enquanto mantém os usuários informados.
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" [\[1\]](https://capgo.app/)
+> "Praticamos desenvolvimento ágil e @Capgo é crítico para entregar constantemente aos nossos usuários!" [\[1\]](https://capgo.app/)

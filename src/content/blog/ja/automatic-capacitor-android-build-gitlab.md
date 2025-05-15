@@ -1,16 +1,14 @@
 ---
 slug: automatic-capacitor-android-build-gitlab
-title: Build automatico di Capacitor Android con GitLab
-description: >-
-  Cara Menyiapkan Pipeline CI/CD untuk Aplikasi Ionic Android Menggunakan
-  fastlane dan GitLab dalam 5 Menit
+title: GitLabを使用した自動Capacitor Androidビルド
+description: Android IonicアプリのためにfastlaneとGitLabを使用してCI/CDパイプラインを5分で設定する方法
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
 updated_at: 2023-09-27T00:00:00.000Z
 head_image: /andriod_app_gitlab.webp
-head_image_alt: Fastlane Google Play GitLab イラストレーション
+head_image_alt: ファストレーン Google Play GitLab イラスト
 keywords: >-
   Fastlane, CI/CD, Android, automatic build, automatic release, mobile app
   updates
@@ -19,56 +17,55 @@ published: true
 locale: ja
 next_blog: null
 ---
-
 # GitLab CIによる自動Androidビルド
 
-Capacitorアプリ用のCI/CDのセットアップは複雑で時間がかかります。以下が知っておくべきことです：
+Capacitorアプリに対するCI/CDの設定は複雑で時間がかかる場合があります。以下のことを知っておく必要があります。
 
 ## 前提条件
 
-開始前に、以下のセットアップが必要です：
+始める前に、以下の設定を行う必要があります：
 
-- 管理者アクセス権を持つGitLabアカウント
-- 適切な署名でGoogle Play Storeに既に公開されているアプリ
+- 管理者アクセスを持つGitLabアカウント
+- 正しく署名されている状態でGoogle Playストアに既に公開されたアプリ
 - Android署名キーとキーストアファイル
-- Play Store APIが有効なGoogle Cloud Consoleプロジェクト
+- PlayストアAPIが有効なGoogle Cloud Consoleプロジェクト
 - 適切な権限を持つサービスアカウント
 - GitLab CI/CDワークフローの理解
 - Fastlaneの設定に関する知識
-- パイプラインの保守とデバッグの時間
+- パイプラインの維持とデバッグにかける時間
 
-## CapgoによるプロフェッショナルなCI/CDセットアップ
+## CapgoによるプロフェッショナルCI/CD設定
 
-複雑さを回避して[Capgo](https://capgo.app/docs/getting-started/cicd-integration/)があなたの好みのプラットフォームで直接CI/CDパイプラインを設定します：
+複雑さをスキップしましょう。 [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) は、お好みのプラットフォームで直接CI/CDパイプラインを設定します：
 
-- **プラットフォーム独立性**: GitHub Actions、GitLab CI、その他で動作
-- **シームレスな統合**: プラットフォームの切り替え不要、現在のプロセスで動作
-- **カスタマイズ可能な設定**: プロジェクトのニーズに合わせた設定
-- **専門家のガイダンス**: 既に50以上のアプリでCI/CDを設定済み
+- **プラットフォーム非依存**：GitHub Actions、GitLab CIなどで動作
+- **シームレスな統合**：プラットフォームの切り替えは不要、現在のプロセスで動作
+- **カスタマイズされた設定**：プロジェクトのニーズに合わせた設定
+- **専門的なガイダンス**：すでに50以上のアプリのCI/CDを設定済み
 
-### 価格
-- 一回限りの設定料: $2,600
-- 運用コスト: 年間約$300
-- 他の独自ソリューションとの比較: 年間$6,000
+### 料金
+- 一時的な設定料：$2,600
+- 運用コスト：年間約$300
+- 他の独自ソリューションと比較：年間$6,000
 - **5年間で$26,100の節約**
 
-[CI/CDを今すぐセットアップ](https://calcom/martindonadieu/mobile-ci-cd-done-for-you/)
+[今すぐCI/CDを設定](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
 
-## 手動セットアップガイド
+## マニュアル設定ガイド
 
-すべて自分でセットアップする場合は、以下の手順が必要です：
+もしすべてを自分で設定したい場合は、以下の手順に従ってください：
 
 **投稿内の手順**
 
-1. _Fastlaneファイルのコピー_
-2. _GitLab暗号化シークレットへの秘密情報の保存_
-3. _Google Playサービスアカウントキーの作成と保存_
-4. _Android署名キーの保存_
-5. _GitLabワークフローymlファイルの設定_
+1.  _Fastlaneファイルをコピーする_
+2.  _GitLabの暗号化されたシークレットに秘密情報を保存する_
+3.  _Google Playサービスアカウントキーを作成し保存する_
+4.  _Android署名キーを保存する_
+5.  _GitLabワークフローの.ymlファイルを設定する_
 
-## 1. Fastlaneファイルのコピー
+## 1. Fastlaneファイルをコピーする
 
-Fastlaneは、一般的なモバイル開発タスクを自動化するために作成されたRubyライブラリです。Fastlaneを使用すると、通常Android Studioで実行するタスクを実行する「アクション」をバンドルするカスタム「レーン」を設定できます。Fastlaneでは多くのことができますが、このチュートリアルでは、主要なアクションの一部のみを使用します。
+Fastlaneは、一般的なモバイル開発タスクを自動化するために作成されたRubyライブラリです。Fastlaneを使用すると、通常はAndroid Studioを使用して実行するタスクを実行する一連の「アクション」をバンドルするカスタム「レーン」を設定できます。Fastlaneで多くのことができますが、このチュートリアルの目的上、コアアクションのほんの一部だけを使用します。
 
 プロジェクトのルートにFastlaneフォルダを作成し、以下のファイルをコピーします：
 Fastlane
@@ -155,56 +152,56 @@ platform :android do
 end
 ```
 
-### GitLab CI/CD変数への秘密情報の保存
+### GitLab CI/CD変数にシークレットを保存する
 
-GitLabは、GitHubのリポジトリシークレットと同様に、暗号化されたCI/CD変数を保存する方法を提供します。機密情報を安全に保存するには：
+GitLabは、GitHubのリポジトリシークレットに類似した暗号化されたCI/CD変数を保存する方法を提供します。機密情報を安全に保存するために。
 
-1. GitLabプロジェクトの設定に移動
-2. CI/CD > 変数に移動
-3. 以下の変数を追加：
+1. GitLabプロジェクトの設定に移動します。
+2. CI/CD > 変数を選択します。
+3. 以下の変数を追加します：
 
-- ANDROID_KEYSTORE_FILE: Androidビルドの署名に使用するbase64エンコードされた`jks`または`keystore`ファイル。これはアップロードキー（Play App Signing使用時）またはアプリ署名キーに関連付けられたキーストアファイルです
-- KEYSTORE_KEY_PASSWORD: キーストアファイルに関連付けられたパスワード
-- KEYSTORE_KEY_ALIAS: キーストアエイリアス
-- KEYSTORE_STORE_PASSWORD: プライベートキーのパスワード
-- DEVELOPER_PACKAGE_NAME: comexampleappのようなandroidアプリID
-- PLAY_CONFIG_JSON: base64エンコードされたサービスアカウントキーJSON
+-   ANDROID_KEYSTORE_FILE: Androidビルドの署名に使用されるbase64エンコードされた`.jks`または`.keystore`ファイル。このファイルは、アップロードキーに関連付けられたキーストアファイル（Playアプリの署名を使用する場合）またはアプリの署名キーになります。
+-   KEYSTORE_KEY_PASSWORD: キーストアファイルに関連付けられたパスワード
+-   KEYSTORE_KEY_ALIAS: キーストアエイリアス
+-   KEYSTORE_STORE_PASSWORD: プライベートキーのパスワード
+-   DEVELOPER_PACKAGE_NAME: com.example.appのようなAndroidアプリのID
+-   PLAY_CONFIG_JSON: Base64エンコードされたサービスアカウントキーのJSON。
 
 ### Google Playサービスアカウントキーの作成
 
 `PLAY_CONFIG_JSON`シークレットを生成するには、以下の手順に従います：
 
-1. [Google Cloud Console](https://consolecloudgooglecom/)に移動
-2. 新しいプロジェクトを作成するか、既存のプロジェクトを選択
-3. Google Play Android Developer APIを有効化
-4. サービスアカウントを作成：
-   - "IAM & Admin" > "Service Accounts"に移動
-   - "Create Service Account"をクリック
-   - 名前と説明を入力
-   - "Create and Continue"をクリック
-   - ロール割り当てをスキップして"Done"をクリック
-5. JSONキーを生成：
-   - リストからサービスアカウントを見つける
-   - 3点メニュー > "Manage keys"をクリック
-   - "Add Key" > "Create new key"をクリック
-   - JSONフォーマットを選択
-   - "Create"をクリック
-6. Play Consoleでサービスアカウントにアプリへのアクセスを許可：
-   - [Play Console](https://playgooglecom/console)に移動
-   - "Users and permissions"に移動
-   - "Invite new users"をクリック
-   - サービスアカウントのメール（@*iamgserviceaccountcom で終わる）を入力
-   - "Release to production"権限を付与
-   - "Invite user"をクリック
-7.JSONキーをbase64に変換します:
-```bash
+1. [Google Cloud Console](https://console.cloud.google.com/)に移動します。
+2. 新しいプロジェクトを作成するか、既存のプロジェクトを選択します。
+3. Google Play Android Developer APIを有効にします。
+4. サービスアカウントを作成します：
+   - "IAMと管理" > "サービスアカウント"に移動します。
+   - "サービスアカウントを作成"をクリックします。
+   - 名前と説明を付けます。
+   - "作成して続行"をクリックします。
+   - ロールの割り当てをスキップし、"完了"をクリックします。
+5. JSONキーを生成します：
+   - リスト内からサービスアカウントを見つけます。
+   - 三点メニューをクリックし、"キーを管理"を選択します。
+   - "キーを追加" > "新しいキーを作成"をクリックします。
+   - JSONフォーマットを選択します。
+   - "作成"をクリックします。
+6. Play Consoleでアプリにサービスアカウントへのアクセスを付与します：
+   - [Play Console](https://play.google.com/console)に移動します。
+   - "ユーザーと権限"に移動します。
+   - "新しいユーザーを招待"をクリックします。
+   - サービスアカウントのメールアドレスを入力します（@*.iam.gserviceaccount.comで終わる）。
+   - "生産へのリリース"権限を付与します。
+   - "ユーザーを招待"をクリックします。
+7. JSONキーをbase64に変換します：
+   ```bash
    base64 -i path/to/your/service-account-key.json | pbcopy
    ```
-8. `PLAY_CONFIG_JSON`変数として、base64でエンコードされた文字列をGitLabに追加します
+8. base64エンコードされた文字列をGitLabの`PLAY_CONFIG_JSON`変数として追加します。
 
-## GitLab CI/CDパイプラインのセットアップ
+## GitLab CI/CDパイプラインを設定する
 
-プロジェクトのルートにgitlab-ci.ymlファイルを作成して、CI/CDパイプラインを定義します。以下はパイプラインの構造化の例です:
+プロジェクトのルートに.gitlab-ci.ymlファイルを作成して、CI/CDパイプラインを定義します。以下はパイプラインの構造の一例です：
 
 ```yaml
 
@@ -269,12 +266,12 @@ build_and_upload_android:
 
 ```
 
-## パイプラインのトリガー
+## パイプラインをトリガーする
 
-GitLabリポジトリに新しいタグをプッシュするたびに、GitLab CI/CDは定義されたパイプラインを自動的にトリガーし、Fastlaneを使用してAndroidアプリをビルドおよびデプロイします。
+新しいタグをGitLabリポジトリにプッシュすると、GitLab CI/CDが自動的に定義されたパイプラインをトリガーし、Fastlaneを使用してAndroidアプリをビルドおよびデプロイします。
 
-プロジェクトの構造と要件に応じてパスと依存関係を調整してください。このセットアップにより、GitLab CI/CDでのAndroidアプリのデプロイを自動化することができます。
+プロジェクトの構造と要件に応じて、パスや依存関係を調整してください。この設定により、GitLab CI/CD上でのAndroidアプリのデプロイを自動化できます。
 
 ## 結論
 
-mingc/android-build-box DockerイメージでGitLab CI/CDを設定することで、Androidアプリのビルドプロセスを自動化し、開発ワークフローをより効率的で信頼性の高いものにすることができます。この自動化により、アプリ開発の核心的な側面に集中する時間が確保され、最終的により高品質なAndroidアプリをより効率的に提供することができます。
+GitLab CI/CDをmingc/android-build-box Dockerイメージで構成することで、Androidアプリのビルドプロセスを自動化し、開発ワークフローをより効率的で信頼性の高いものにできます。この自動化により、アプリ開発の核心事項に集中する時間が生まれ、結果的に高品質なAndroidアプリをより効率的に提供できるようになります。

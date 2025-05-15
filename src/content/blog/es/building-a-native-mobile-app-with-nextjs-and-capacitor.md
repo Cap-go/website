@@ -1,59 +1,57 @@
 ---
 slug: building-a-native-mobile-app-with-nextjs-and-capacitor
 title: >-
-  Construction d'Applications Mobiles Natives avec Next.js 14 et Capacitor : Un
-  Guide Étape par Étape 2024
+  2025 Construir aplicaciones móviles nativas con Next.js 15 y Capacitor: Una
+  guía paso a paso
 description: >-
-  Découvrez dans ce guide complet comment créer une application mobile native
-  avec Next.js 14 et Capacitor. Apprenez les meilleures pratiques et les
-  techniques les plus récentes pour développer des applications mobiles robustes
-  et riches en fonctionnalités.
+  Aprende a crear aplicaciones móviles nativas utilizando Next.js 15 y Capacitor
+  en esta guía completa. Descubre las últimas mejores prácticas y técnicas para
+  construir aplicaciones móviles de alto rendimiento y ricas en características.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2024-09-19T00:00:00.000Z
+updated_at: 2025-05-12T00:00:00.000Z
 head_image: /next_capgo.webp
-head_image_alt: Ilustración de Next.js 14 y Capacitor
+head_image_alt: Ilustración de Next.js 15 y Capacitor
 keywords: >-
-  Next.js 14, Capacitor, mobile app development, live updates, OTA updates,
+  Next.js 15, Capacitor, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-
 ## Introducción
 
-En este tutorial, exploraremos cómo crear aplicaciones móviles nativas utilizando la poderosa combinación de [Nextjs](https://nextjsorg/) 14 y [Capacitor](https://capacitorjscom/) en 2024. Aprovechando las últimas versiones de estas tecnologías, puedes construir aplicaciones móviles de alto rendimiento y ricas en funcionalidades con facilidad. También demostraremos cómo mejorar la interfaz móvil usando [Konsta UI](https://konstauicom/) y Tailwind CSS, aunque este paso es opcional.
+En este tutorial, exploraremos cómo crear aplicaciones móviles nativas utilizando la poderosa combinación de [Next.js](https://nextjs.org/) 15 y [Capacitor](https://capacitorjs.com/) en 2024. Al aprovechar las versiones más recientes de estas tecnologías, puedes construir aplicaciones móviles de alto rendimiento y ricas en características con facilidad. También demostraremos cómo mejorar la interfaz de usuario móvil utilizando [Konsta UI](https://konstaui.com/) y Tailwind CSS, aunque este paso es opcional.
 
-Nextjs, un popular framework de React, proporciona una base sólida para construir aplicaciones web, mientras que Capacitor te permite transformar tu aplicación Nextjs en una aplicación móvil nativa sin modificaciones significativas o la necesidad de aprender nuevas habilidades como React Native. Este tutorial te guiará a través del proceso, comenzando con la configuración de una nueva aplicación Nextjs e integrando Capacitor para crear una experiencia móvil nativa.
+Next.js, un popular marco de React, proporciona una base sólida para construir aplicaciones web, mientras que Capacitor te permite transformar tu aplicación de Next.js en una aplicación móvil nativa sin modificaciones significativas o la necesidad de aprender nuevas habilidades como React Native. Este tutorial te guiará a través del proceso, comenzando con la configuración de una nueva aplicación Next.js e integrando Capacitor para crear una experiencia móvil nativa.
 
-### Beneficios de Usar Nextjs y Capacitor
+### Beneficios de Usar Next.js y Capacitor
 
-- **Reutilización de Código**: Nextjs te permite escribir componentes reutilizables y compartir código entre tus aplicaciones web y móviles, ahorrando tiempo y esfuerzo en el desarrollo.
-- **Rendimiento**: Nextjs ofrece optimizaciones de rendimiento incorporadas, como renderizado del lado del servidor y división de código, asegurando tiempos de carga rápidos y una experiencia de usuario fluida.
-- **Capacidades Nativas**: Capacitor proporciona acceso a características nativas del dispositivo como la cámara, geolocalización y más, permitiéndote construir aplicaciones móviles ricas en funcionalidades.
-- **Desarrollo Simplificado**: Con Capacitor, puedes desarrollar y probar tu aplicación móvil usando tecnologías web familiares, reduciendo la curva de aprendizaje y agilizando el proceso de desarrollo.
+- **Reusabilidad de Código**: Next.js te permite escribir componentes reutilizables y compartir código entre tus aplicaciones web y móviles, ahorrando tiempo y esfuerzo en el desarrollo.
+- **Rendimiento**: Next.js ofrece optimizaciones de rendimiento integradas, como renderizado del lado del servidor y división de código, asegurando tiempos de carga rápidos y una experiencia de usuario fluida.
+- **Capacidades Nativas**: Capacitor proporciona acceso a características nativas del dispositivo como la cámara, geolocalización y más, permitiéndote construir aplicaciones móviles ricas en características.
+- **Desarrollo Simplificado**: Con Capacitor, puedes desarrollar y probar tu aplicación móvil utilizando tecnologías web familiares, reduciendo la curva de aprendizaje y agilizando el proceso de desarrollo.
 
-## Preparando Tu Aplicación Nextjs
+## Preparando Tu Aplicación Next.js
 
-Para comenzar, vamos a crear una nueva aplicación Nextjs usando el comando `create-next-app`:
+Para comenzar, creemos una nueva aplicación Next.js utilizando el comando `create-next-app`:
 
 ```shell
 npx create-next-app@latest my-app
 ```
 
-Este comando configurará un proyecto Nextjs en blanco con la configuración recomendada para la última versión.
+Este comando configurará un proyecto Next.js en blanco con la configuración recomendada para la última versión.
 
-Luego, navega al directorio del proyecto:
+A continuación, navega al directorio del proyecto:
 
 ```shell
 cd my-app
 ```
 
-Para crear una aplicación móvil nativa, necesitamos generar una exportación estática de nuestro proyecto Nextjs. Actualiza el archivo `package.json` para incluir un script para construir y exportar el proyecto:
+Para crear una aplicación móvil nativa, necesitamos generar un export estático de nuestro proyecto Next.js. Actualiza el archivo `package.json` para incluir un script que construya y exporte el proyecto:
 
 ```json
 {
@@ -67,7 +65,7 @@ Para crear una aplicación móvil nativa, necesitamos generar una exportación e
 }
 ```
 
-Ejecutar el comando `npm run static` puede resultar en errores debido a incompatibilidad con la optimización de imágenes. Para resolverlo, abre el archivo `next.config.js` y modifícalo de la siguiente manera:
+Ejecutar el comando `npm run static` puede resultar en errores debido a incompatibilidad con la optimización de imágenes. Para resolver esto, abre el archivo `next.config.js` y modifícalo de la siguiente manera:
 
 ```javascript
 /** @type {import('next').NextConfig} */
@@ -83,19 +81,19 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Ahora, ejecutar `npm run static` debería funcionar sin problemas, y encontrarás una nueva carpeta `out` en la raíz de tu proyecto. Esta carpeta será utilizada por Capacitor en los siguientes pasos.
+Ahora, ejecutar `npm run static` debería funcionar sin problemas, y encontrarás una nueva carpeta `out` en la raíz de tu proyecto. Esta carpeta será utilizada por Capacitor en los próximos pasos.
 
-## Añadiendo Capacitor a Tu Aplicación Nextjs 14
+## Añadiendo Capacitor a Tu Aplicación Next.js 15
 
-Para empaquetar tu aplicación Nextjs en un contenedor móvil nativo, sigue estos pasos:
+Para empaquetar tu aplicación Next.js en un contenedor móvil nativo, sigue estos pasos:
 
-1. Instala el [Capacitor CLI](https://capacitorjscom/docs/cli/) como dependencia de desarrollo:
+1. Instala el [Capacitor CLI](https://capacitorjs.com/docs/cli/) como una dependencia de desarrollo:
 
 ```shell
 npm install -D @capacitor/cli
 ```
 
-2. Inicializa Capacitor en tu proyecto Nextjs:
+2. Inicializa Capacitor en tu proyecto Next.js:
 
 ```shell
 npx cap init
@@ -103,7 +101,7 @@ npx cap init
 
 Durante el proceso de inicialización, puedes presionar "Enter" para aceptar los valores predeterminados para el nombre de la aplicación y el ID del paquete.
 
-3. Instala los paquetes requeridos de Capacitor:
+3. Instala los paquetes necesarios de Capacitor:
 
 ```shell
 npm install @capacitor/core @capacitor/ios @capacitor/android
@@ -118,11 +116,11 @@ npx cap add android
 
 Capacitor creará carpetas para cada plataforma (`ios` y `android`) en la raíz de tu proyecto. Estas carpetas contienen los proyectos nativos para iOS y Android, respectivamente.
 
-Para acceder y construir el proyecto Android, necesitas tener instalado [Android Studio](https://developerandroidcom/studio). Para desarrollo iOS, necesitas una Mac con [Xcode](https://developerapplecom/xcode/) instalado.
+Para acceder y construir el proyecto de Android, necesitas tener [Android Studio](https://developer.android.com/studio) instalado. Para el desarrollo de iOS, necesitas un Mac con [Xcode](https://developer.apple.com/xcode/) instalado.
 
 5. Configura Capacitor:
 
-Abre el archivo `capacitor.config.ts` y actualiza la propiedad `webDir` para que apunte al directorio de salida de tu build de Nextjs:
+Abre el archivo `capacitor.config.ts` y actualiza la propiedad `webDir` para apuntar al directorio de salida de tu construcción de Next.js:
 
 ```json
 {
@@ -140,10 +138,12 @@ npm run static
 npx cap sync
 ```
 
-El comando `npm run static` construye tu proyecto Nextjs y exporta los archivos estáticos, mientras que `npx cap sync` sincroniza el código web con las plataformas nativas.## Construyendo y Desplegando Aplicaciones Nativas
+El comando `npm run static` construye tu proyecto Next.js y exporta los archivos estáticos, mientras que `npx cap sync` sincroniza el código web con las plataformas nativas.
+
+## Construyendo y Desplegando Aplicaciones Nativas
 
 Para construir y desplegar tu aplicación móvil nativa, sigue estos pasos:
-Para desarrollar aplicaciones iOS, necesitas tener **Xcode** instalado, y para aplicaciones Android, necesitas tener **Android Studio** instalado. Además, si planeas distribuir tu aplicación en la tienda de aplicaciones, necesitas inscribirte en el Programa de Desarrollador de Apple para iOS y en la Google Play Console para Android.
+Para desarrollar aplicaciones iOS, necesitas tener **Xcode** instalado, y para aplicaciones Android, necesitas tener **Android Studio** instalado. Además, si planeas distribuir tu aplicación en la tienda de aplicaciones, necesitas inscribirte en el Programa de Desarrolladores de Apple para iOS y en la Consola de Google Play para Android.
 
 1. Abre los proyectos nativos:
 
@@ -159,19 +159,19 @@ npx cap open android
 
 2. Construye y ejecuta la aplicación:
 
-![android-studio-run](/android-studio-runwebp)
+![android-studio-run](/android-studio-run.webp)
 
-- En Android Studio, espera a que el proyecto esté listo y luego haz clic en el botón "Run" para desplegar la aplicación en un dispositivo conectado o emulador
-![xcode-run](/xcode-runwebp)
+- En Android Studio, espera a que el proyecto esté listo, y luego haz clic en el botón "Ejecutar" para desplegar la aplicación en un dispositivo o emulador conectado.
+![xcode-run](/xcode-run.webp)
 
-- En Xcode, configura tu cuenta de firma para desplegar la aplicación en un dispositivo real. Si no lo has hecho antes, Xcode te guiará a través del proceso (ten en cuenta que necesitas estar inscrito en el Programa de Desarrollador de Apple). Una vez configurado, haz clic en el botón "Play" para ejecutar la aplicación en tu dispositivo conectado
+- En Xcode, configura tu cuenta de firma para desplegar la aplicación en un dispositivo real. Si no has hecho esto antes, Xcode te guiará a través del proceso (ten en cuenta que necesitas estar inscrito en el Programa de Desarrolladores de Apple). Una vez configurado, haz clic en el botón "Reproducir" para ejecutar la aplicación en tu dispositivo conectado.
 
-¡Felicitaciones! Has desplegado exitosamente tu aplicación web Nextjs en un dispositivo móvil
+¡Felicidades! Has desplegado con éxito tu aplicación web de Next.js en un dispositivo móvil.
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/nextjs-mobile-app.webp" alt="nextjs-mobile-app">
 </div>
-Pero espera, también hay una forma más rápida de hacer esto durante el desarrollo
+Pero espera, hay una forma más rápida de hacer esto durante el desarrollo...
 
 ## Recarga en Vivo de Capacitor
 
@@ -188,7 +188,7 @@ Durante el desarrollo, puedes aprovechar la recarga en vivo para ver los cambios
   ```shell
   ipconfig
   ```
-  Busca la dirección IPv4 en la salida
+  Busca la dirección IPv4 en la salida.
 
 2. Actualiza el archivo `capacitor.config.ts` para incluir la configuración del servidor:
 
@@ -209,7 +209,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Reemplaza `YOUR_IP_ADDRESS` con tu dirección IP local
+Reemplaza `YOUR_IP_ADDRESS` con tu dirección IP local.
 
 3. Aplica los cambios a tu proyecto nativo:
 
@@ -217,25 +217,25 @@ Reemplaza `YOUR_IP_ADDRESS` con tu dirección IP local
 npx cap copy
 ```
 
-El comando `copy` copia la carpeta web y los cambios de configuración al proyecto nativo sin actualizar todo el proyecto
+El comando `copy` copia la carpeta web y los cambios de configuración al proyecto nativo sin actualizar todo el proyecto.
 
-4. Reconstruye y ejecuta la aplicación en tu dispositivo usando Android Studio o Xcode
+4. Reconstruye y ejecuta la aplicación en tu dispositivo utilizando Android Studio o Xcode.
 
-Ahora, cuando hagas cambios en tu aplicación Nextjs, la aplicación móvil se recargará automáticamente para reflejar esos cambios
+Ahora, cada vez que hagas cambios en tu aplicación Next.js, la aplicación móvil se recargará automáticamente para reflejar esos cambios.
 
-Nota: Si instalas nuevos plugins o haces cambios en archivos nativos, necesitarás reconstruir el proyecto nativo ya que la recarga en vivo solo se aplica a cambios en el código web
+Nota: Si instalas nuevos complementos o haces cambios en archivos nativos, necesitarás reconstruir el proyecto nativo ya que la recarga en vivo solo se aplica a cambios en el código web.
 
 ## Usando Plugins de Capacitor
 
-Los plugins de Capacitor te permiten acceder a características nativas del dispositivo desde tu aplicación Nextjs. Veamos cómo usar el [plugin Share](https://capacitorjs.com/docs/apis/share/) como ejemplo:
+Los plugins de Capacitor te permiten acceder a características nativas del dispositivo desde tu aplicación Next.js. Exploraremos cómo usar el [plugin de Compartir](https://capacitorjs.com/docs/apis/share/) como ejemplo:
 
-1. Instala el plugin Share:
+1. Instala el plugin de Compartir:
 
 ```shell
 npm i @capacitor/share
 ```
 
-2. Actualiza el archivo `pages/index.js` para usar el plugin Share:
+2. Actualiza el archivo `pages/index.js` para usar el plugin de Compartir:
 
 ```javascript
 import Head from 'next/head';
@@ -277,39 +277,39 @@ export default function Home() {
 
 3. Sincroniza los cambios con el proyecto nativo:
 
-Como se mencionó anteriormente, al instalar nuevos plugins, necesitamos realizar una operación de sincronización y luego redesplegar la aplicación en nuestro dispositivo. Para hacer esto, ejecuta el siguiente comando:
+Como se mencionó anteriormente, al instalar nuevos plugins, necesitamos realizar una operación de sincronización y luego volver a desplegar la aplicación en nuestro dispositivo. Para hacer esto, ejecuta el siguiente comando:
 
 ```shell
 npx cap sync
 ```
 
-4. Reconstruye y ejecuta la aplicación en tu dispositivo
+4. Reconstruye y ejecuta la aplicación en tu dispositivo.
 
-Ahora, cuando hagas clic en el botón "Share now!", aparecerá el diálogo nativo de compartir, permitiéndote compartir el contenido con otras aplicaciones
+Ahora, cuando hagas clic en el botón "¡Compartir ahora!", aparecerá el cuadro de diálogo de compartir nativo, lo que te permitirá compartir el contenido con otras aplicaciones.
 
 <div className={styles.container}>
   <Head>
 <title>
 
-Para hacer que el botón se vea más amigable para móviles, podemos agregar algo de estilo usando mi biblioteca de componentes UI favorita para aplicaciones web - Nextjs (sin juego de palabras)
+Para que el botón luzca más amigable para móviles, podemos agregar algo de estilo utilizando mi biblioteca de componentes de UI favorita para aplicaciones web - Next.js (sin juegos de palabras).
 
-## Agregando Konsta UI
+## Añadiendo Konsta UI
 
-He trabajado años con [Ionic](https://ionicframework.com/) para construir increíbles aplicaciones multiplataforma y fue una de las mejores opciones durante años
-Pero ahora no lo recomiendo más, es muy complicado integrarlo con Nextjs y no vale realmente la pena cuando ya tienes [tailwindcss](https://tailwindcss.com/)
+He trabajado durante años con [Ionic](https://ionicframework.com/) para construir excelentes aplicaciones multiplataforma y ha sido una de las mejores elecciones durante años.
+Pero ahora ya no lo recomiendo, es muy complicado integrarlo con Next.js y realmente no vale la pena cuando ya tienes [tailwindcss](https://tailwindcss.com/).
 
-Si quieres una UI móvil que se vea realmente bien y que se adapte al estilo específico de iOS y Android, recomiendo Konsta UI
+Si deseas una UI móvil realmente atractiva que se adapte a los estilos específicos de iOS y Android, te recomiendo Konsta UI.
 
-Necesitas tener [tailwind ya instalado](https://tailwindcss.com/docs/guides/nextjs/)
-Para mejorar la UI móvil de tu aplicación Nextjs, puedes usar [Konsta UI](https://konsta.ui.com/), una biblioteca de componentes UI amigable para móviles que se adapta al estilo de iOS y Android. Sigue estos pasos para integrar Konsta UI:
+Necesitas tener [tailwind instalado](https://tailwindcss.com/docs/guides/nextjs/) 
+Para mejorar la UI móvil de tu aplicación Next.js, puedes usar [Konsta UI](https://konstaui.com/), una biblioteca de componentes de UI amigable para móviles que se adapta a los estilos de iOS y Android. Sigue estos pasos para integrar Konsta UI:
 
-1.Instale los paquetes requeridos:
+1. Instala los paquetes requeridos:
 
 ```shell
 npm i konsta
 ```
 
-2. Actualice el archivo `tailwind.config.js`:
+2. Actualiza el archivo `tailwind.config.js`:
 
 ```javascript
 const konstaConfig = require('konsta/config');
@@ -326,7 +326,7 @@ module.exports = konstaConfig({
 });
 ```
 
-3. Envuelva su aplicación con el componente `App` de Konsta UI en `pages/_app.js`:
+3. Envuelve tu aplicación con el componente `App` de Konsta UI en `pages/_app.js`:
 
 ```javascript
 import { App } from 'konsta/react';
@@ -342,12 +342,11 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 ```
-
 ### Página de Ejemplo
 
-Ahora que todo está configurado, podemos usar los componentes React de Konsta UI en nuestras páginas de Next.js
+Ahora que todo está configurado, podemos usar componentes de React de Konsta UI en nuestras páginas de Next.js.
 
-4. Actualice el archivo `pages/index.js` para usar componentes de Konsta UI:
+4. Actualiza el archivo `pages/index.js` para usar componentes de Konsta UI:
 
 ```javascript
 import {
@@ -385,37 +384,37 @@ export default function Home() {
 }
 ```
 
-5. Reinicie el servidor de desarrollo y reconstruya la aplicación
+5. Reinicia el servidor de desarrollo y reconstruye la aplicación.
 
-Su aplicación Next.js ahora debería tener una interfaz móvil de aspecto nativo impulsada por Konsta UI
+Tu aplicación Next.js ahora debería tener una UI móvil con apariencia nativa impulsada por Konsta UI.
 
 ## Optimización del Rendimiento
 
-Para garantizar un rendimiento óptimo de su aplicación Next.js y Capacitor, considere las siguientes mejores prácticas:
+Para asegurar un rendimiento óptimo de tu aplicación Next.js y Capacitor, considera las siguientes mejores prácticas:
 
-- Minimice el tamaño de la aplicación eliminando dependencias y recursos no utilizados
-- Optimice imágenes y otros archivos multimedia para reducir los tiempos de carga
-- Implemente la carga diferida para componentes y páginas para mejorar el rendimiento de carga inicial
-- Use renderizado del lado del servidor (SSR) con Next.js para mejorar la velocidad de carga de la aplicación y la optimización para motores de búsqueda (SEO)
-- Aproveche las optimizaciones incorporadas de Capacitor, como el almacenamiento en caché de la vista web y el empaquetado de aplicaciones
+- Minimiza el tamaño de la aplicación eliminando dependencias y activos no utilizados.
+- Optimiza imágenes y otros archivos multimedia para reducir los tiempos de carga.
+- Implementa la carga diferida para componentes y páginas para mejorar el rendimiento de carga inicial.
+- Utiliza el renderizado del lado del servidor (SSR) con Next.js para mejorar la velocidad de carga de la aplicación y la optimización para motores de búsqueda (SEO).
+- Aprovecha las optimizaciones integradas de Capacitor, como almacenamiento en caché de web views y empaquetado de aplicaciones.
 
 ## Conclusión
 
-En este tutorial, exploramos cómo construir aplicaciones móviles nativas usando Next.js y Capacitor. Al aprovechar el poder de estas tecnologías, puede crear aplicaciones móviles de alto rendimiento y ricas en funciones con facilidad.
+En este tutorial, exploramos cómo construir aplicaciones móviles nativas utilizando Next.js y Capacitor. Al aprovechar el poder de estas tecnologías, puedes crear aplicaciones móviles de alto rendimiento y ricas en características con facilidad.
 
-Cubrimos los pasos para configurar una aplicación Next.js, integrar Capacitor, y construir y desplegar la aplicación en dispositivos móviles. Además, discutimos el uso de plugins de Capacitor, la adición de Konsta UI para una interfaz móvil mejorada y técnicas de optimización de rendimiento.
+Cubrimos los pasos para configurar una aplicación Next.js, integrar Capacitor y construir y desplegar la aplicación en dispositivos móviles. Además, discutimos el uso de plugins de Capacitor, añadir Konsta UI para una interfaz móvil mejorada y técnicas de optimización del rendimiento.
 
-Para llevar su aplicación Next.js y Capacitor al siguiente nivel, considere explorar [Capgo](https://capgo.app/) para actualizaciones en vivo sin problemas, asegurando que sus usuarios siempre tengan acceso a las últimas funciones y correcciones de errores.
+Para llevar tu aplicación de Next.js y Capacitor al siguiente nivel, considera explorar [Capgo](https://capgo.app/) para actualizaciones en vivo sin problemas, asegurando que tus usuarios siempre tengan acceso a las últimas características y correcciones de errores.
 
-Siguiendo las mejores prácticas y técnicas descritas en esta guía, estará bien equipado para construir impresionantes aplicaciones móviles nativas usando Next.js y Capacitor.
+Siguiendo las mejores prácticas y técnicas descritas en esta guía, estarás bien equipado para construir impresionantes aplicaciones móviles nativas utilizando Next.js y Capacitor.
 
 ## Recursos
 
 - [Documentación de Next.js](https://nextjs.org/docs)
 - [Documentación de Capacitor](https://capacitorjs.com/docs)
-- [Documentación de Konsta UI](https://konsta.ui.com/docs)
-- [Capgo - Actualizaciones en vivo para aplicaciones Capacitor](https://capgo.app/)
+- [Documentación de Konsta UI](https://konstaui.com/docs)
+- [Capgo - Actualizaciones en Vivo para Apps de Capacitor](https://capgo.app/)
 
-¡Feliz desarrollo de aplicaciones!
+¡Feliz construcción de aplicaciones!
 
-Aprenda cómo Capgo puede ayudarlo a construir mejores aplicaciones más rápido, [regístrese para obtener una cuenta gratuita](/register/) hoy
+Aprende cómo Capgo puede ayudarte a construir mejores aplicaciones más rápido, [regístrate para obtener una cuenta gratuita](/register/) hoy.

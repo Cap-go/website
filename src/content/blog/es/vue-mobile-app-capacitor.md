@@ -1,9 +1,9 @@
 ---
 slug: vue-mobile-app-capacitor
-title: Créer des Applications Mobiles avec Vue et Capacitor
+title: Construyendo aplicaciones móviles con Vue y Capacitor
 description: >-
-  Aprende cómo crear una aplicación móvil usando Vue, Capacitor y,
-  opcionalmente, mejora la interfaz de usuario con Konsta UI.
+  Aprende a crear una aplicación móvil usando Vue, Capacitor y opcionalmente
+  mejorar la interfaz de usuario con Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -19,14 +19,13 @@ published: true
 locale: es
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-
-En este tutorial, te guiaremos a través del proceso de convertir una aplicación web Vue en una aplicación móvil nativa usando Capacitor. Opcionalmente, también puedes mejorar tu interfaz móvil con Konsta UI, una biblioteca de interfaz móvil basada en Tailwind CSS.
+En este tutorial, te guiaremos a través del proceso de convertir una aplicación web de Vue en una aplicación móvil nativa usando Capacitor. Opcionalmente, también puedes mejorar tu interfaz de usuario móvil con Konsta UI, una biblioteca de interfaz de usuario móvil basada en Tailwind CSS.
 
 ## Acerca de Capacitor
 
-Capacitor es una herramienta revolucionaria que te permite integrarlo fácilmente en cualquier proyecto web y convertir tu aplicación en una aplicación móvil nativa. Genera proyectos nativos de Xcode y Android Studio para ti y proporciona acceso a funciones nativas del dispositivo como la cámara a través de un puente JavaScript.
+Capacitor es una herramienta revolucionaria que te permite integrarlo fácilmente en cualquier proyecto web y convertir tu aplicación en una aplicación móvil nativa. Genera proyectos nativos de Xcode y Android Studio para ti y proporciona acceso a características nativas del dispositivo como la cámara a través de un puente JavaScript.
 
-## Preparando Tu Aplicación Vue
+## Preparando tu aplicación Vue
 
 Primero, crea una nueva aplicación Vue ejecutando el siguiente comando:
 
@@ -36,7 +35,7 @@ cd my-app
 npm install
 ```
 
-Para preparar tu aplicación Vue para el despliegue móvil nativo, necesitarás exportar tu proyecto. Añade un script en tu archivo **package.json** para construir y copiar el proyecto Vue:
+Para preparar tu aplicación Vue para el despliegue móvil nativo, necesitarás exportar tu proyecto. Agrega un script en tu archivo **package.json** para construir y copiar el proyecto de Vue:
 
 ```json
 {
@@ -49,15 +48,15 @@ Para preparar tu aplicación Vue para el despliegue móvil nativo, necesitarás 
 
 Después de ejecutar el comando `build`, deberías ver una nueva carpeta `dist` en el directorio raíz de tu proyecto. Esta carpeta será utilizada por Capacitor más adelante.
 
-## Añadiendo Capacitor a Tu Aplicación Vue
+## Agregando Capacitor a tu aplicación Vue
 
-Para convertir tu aplicación web Vue en un contenedor móvil nativo, sigue estos pasos:
+Para convertir tu aplicación web de Vue en un contenedor móvil nativo, sigue estos pasos:
 
-1. Instala el CLI de Capacitor como dependencia de desarrollo y configúralo dentro de tu proyecto. Acepta los valores predeterminados para el nombre y el ID del paquete durante la configuración.
+1. Instala la CLI de Capacitor como una dependencia de desarrollo y configúralo dentro de tu proyecto. Acepta los valores predeterminados para el nombre y el ID del paquete durante la configuración.
 
 2. Instala el paquete principal y los paquetes relevantes para las plataformas iOS y Android.
 
-3. Añade las plataformas, y Capacitor creará carpetas para cada plataforma en la raíz de tu proyecto:
+3. Agrega las plataformas, y Capacitor creará carpetas para cada plataforma en la raíz de tu proyecto:
 
 ```shell
 # Install the Capacitor CLI locally
@@ -74,9 +73,9 @@ npx cap add ios
 npx cap add android
 ```
 
-Ahora deberías ver nuevas carpetas **ios** y **android** en tu proyecto Vue.
+Ahora deberías ver nuevas carpetas **iOS** y **android** en tu proyecto de Vue.
 
-Actualiza el archivo **capacitor.config.json** para que el **webDir** apunte al resultado de tu comando de construcción:
+Actualiza el archivo **capacitor.config.json** para apuntar **webDir** al resultado de tu comando de construcción:
 
 ```json
 {
@@ -86,18 +85,18 @@ Actualiza el archivo **capacitor.config.json** para que el **webDir** apunte al 
 }
 ```
 
-Ahora, puedes construir tu proyecto Vue y sincronizarlo con Capacitor:
+Ahora, puedes construir tu proyecto de Vue y sincronizarlo con Capacitor:
 
 ```shell
 npm run build
 npx cap sync
 ```
 
-## Construir y Desplegar Aplicaciones Nativas
+## Construir y desplegar aplicaciones nativas
 
-Para desarrollar aplicaciones iOS, necesitas tener Xcode instalado, y para aplicaciones Android, necesitas Android Studio instalado. Además, necesitas inscribirte en el Apple Developer Program para iOS y en la Google Play Console para Android para distribuir tu aplicación en la tienda de aplicaciones.
+Para desarrollar aplicaciones iOS, necesitas tener Xcode instalado, y para aplicaciones Android, necesitas tener Android Studio instalado. Además, necesitas inscribirte en el Programa de Desarrolladores de Apple para iOS y en la Consola de Google Play para Android para distribuir tu aplicación en la tienda de aplicaciones.
 
-Usa el CLI de Capacitor para abrir ambos proyectos nativos:
+Utiliza la CLI de Capacitor para abrir ambos proyectos nativos:
 
 ```shell
 npx cap open ios
@@ -106,11 +105,11 @@ npx cap open android
 
 Despliega tu aplicación en un dispositivo conectado usando Android Studio o Xcode.
 
-## Recarga en Vivo de Capacitor
+## Recarga en vivo de Capacitor
 
-Habilita la recarga en vivo en tu dispositivo móvil haciendo que la aplicación Capacitor cargue el contenido desde una URL específica en tu red.
+Habilita la recarga en vivo en tu dispositivo móvil haciendo que la aplicación de Capacitor cargue el contenido desde una URL específica en tu red.
 
-Encuentra tu dirección IP local y actualiza el archivo `capacitor.config.ts` con la IP y el puerto correctos:
+Encuentra tu dirección IP local y actualiza el archivo `capacitor.config.ts` con la IP y puerto correctos:
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -129,17 +128,17 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Aplica estos cambios copiándolos a tu proyecto nativo:
+Aplica estos cambios copiándolos en tu proyecto nativo:
 
 ```shell
 npx cap copy
 ```
 
-Ahora, tu aplicación se recargará automáticamente y mostrará los cambios cuando actualices tu aplicación Vue.
+Ahora, tu aplicación se recargará automáticamente y mostrará cambios cuando actualices tu aplicación Vue.
 
-## Usando Plugins de Capacitor
+## Usando plugins de Capacitor
 
-Instala un plugin de Capacitor, como el plugin Share, y úsalo en tu aplicación Vue:
+Instala un plugin de Capacitor, como el plugin de Compartir, y úsalo en tu aplicación Vue:
 
 ```shell
 npm i @capacitor/share
@@ -175,7 +174,7 @@ Después de instalar nuevos plugins, ejecuta el comando `sync` y vuelve a desple
 npx cap sync
 ```
 
-## Añadiendo Konsta UI
+## Agregando Konsta UI
 
 Para usar Konsta UI en tu aplicación Vue, necesitas tener [tailwind ya instalado](https://tailwindcss.com/docs/guides/vite/#vue) y para instalar el paquete:
 Para usar Konsta UI en tu aplicación Vue, instala el paquete y modifica tu archivo `tailwind.config.js`:
@@ -184,10 +183,10 @@ Para usar Konsta UI en tu aplicación Vue, instala el paquete y modifica tu arch
 npm i konsta
 ```
 
-Envuelve tu aplicación con el componente `App` en el archivo `pages/_app.vue`, y usa los componentes Vue de Konsta UI en tus páginas Vue.
+Envuelve tu aplicación con el componente `App` en el archivo `pages/_app.vue`, y utiliza componentes de Vue de Konsta UI en tus páginas de Vue.
 
 ## Conclusión
 
-Capacitor es una gran opción para construir aplicaciones nativas basadas en un proyecto web existente. Con la adición de Capgo, es aún más fácil añadir actualizaciones en vivo a tu aplicación, asegurando que tus usuarios siempre tengan acceso a las últimas características y correcciones de errores.
+Capacitor es una excelente opción para construir aplicaciones nativas basadas en un proyecto web existente. Con la adición de Capgo, es aún más fácil agregar actualizaciones en vivo a tu aplicación, asegurando que tus usuarios siempre tengan acceso a las últimas funciones y correcciones de errores.
 
-Aprende cómo Capgo puede ayudarte a construir mejores aplicaciones más rápido, [regístrate para obtener una cuenta gratuita](/register/) hoy.
+Descubre cómo Capgo puede ayudarte a construir mejores aplicaciones más rápido, [regístrate para obtener una cuenta gratuita](/register/) hoy.

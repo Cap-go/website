@@ -1,7 +1,10 @@
 ---
 slug: best-practices-for-capacitor-code-sharing
-title: Capacitorコード共有のベストプラクティス
-description: Capacitorアプリでコードを効率的に共有するためのベストプラクティスを学び、コードの整理からテスト、安全な配布戦略までをマスターしましょう。
+title: Best Practices for Capacitor Code Sharing
+description: >-
+  Apprenez les meilleures pratiques pour partager efficacement du code dans les
+  applications Capacitor, de l'organisation aux tests et aux stratégies de
+  déploiement sécurisé.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -9,223 +12,223 @@ created_at: 2025-04-14T02:12:07.567Z
 updated_at: 2025-04-14T02:12:19.629Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4-1744596739629.jpg
-head_image_alt: モバイル開発
+head_image_alt: Desarrollo Móvil
 keywords: >-
   Capacitor, code sharing, mobile development, testing, deployment, security,
   OTA updates, CI/CD, performance optimization
 tag: 'Development, Security, Updates'
 published: true
-locale: ja
+locale: it
 next_blog: ''
 ---
-**[Capacitor](https://capacitorjs.com/) ti permette di creare app per iOS, Android e web utilizzando un'unica base di codice.** Questa guida spiega come strutturare, testare e distribuire il tuo codice multipiattaforma in modo efficiente. Ecco cosa imparerai:
+**[Capacitor](https://capacitorjs.com/) te permite crear aplicaciones para iOS, Android y la web utilizando una sola base de código.** Esta guía explica cómo estructurar, probar y desplegar tu código multiplataforma de manera eficiente. Aquí está lo que aprenderás:
 
--   **Perché la Condivisione del Codice è Importante**: Risparmia tempo, semplifica la manutenzione e aggiorna le app più velocemente su tutte le piattaforme.
--   **Sfide Comuni**: Gestisci bug specifici della piattaforma, differenze nell'esperienza utente e problemi di prestazioni.
--   **Migliori Pratiche**:
-    -   **Organizza il Codice**: Usa cartelle chiare per i file condivisi e specifici della piattaforma.
-    -   **Strumenti di Test**: Usa [Jest](https://jestjs.io/), [Cypress](https://www.cypress.io/) e [Appium](http://appium.io/) per test unitari, di integrazione e end-to-end.
-    -   **Distribuisci Aggiornamenti**: Configura pipeline CI/CD e usa aggiornamenti Over-the-Air (OTA) per implementare modifiche rapidamente.
--   **Sicurezza e Velocità**: Crittografa gli aggiornamenti, gestisci gli accessi e ottimizza le prestazioni per una distribuzione più rapida.
+-   **Por qué importa compartir código**: Ahorra tiempo, simplifica el mantenimiento y actualiza aplicaciones más rápido en todas las plataformas.
+-   **Desafíos comunes**: Manejar errores específicos de la plataforma, diferencias en la experiencia del usuario y problemas de rendimiento.
+-   **Mejores prácticas**:
+    -   **Organiza el código**: Usa carpetas claras para archivos compartidos y específicos de la plataforma.
+    -   **Herramientas de prueba**: Usa [Jest](https://jestjs.io/), [Cypress](https://www.cypress.io/) y [Appium](http://appium.io/) para pruebas unitarias, de integración y de extremo a extremo.
+    -   **Desplegar actualizaciones**: Configura pipelines de CI/CD y utiliza actualizaciones Over-the-Air (OTA) para implementar cambios rápidamente.
+-   **Seguridad y velocidad**: Encripta actualizaciones, gestiona el acceso y optimiza el rendimiento para una entrega más rápida.
 
-**Suggerimento Rapido**: Strumenti come [Capgo](https://capgo.app/) semplificano gli aggiornamenti OTA, garantendo che il 95% degli utenti sia aggiornato entro 24 ore.
+**Consejo rápido**: Herramientas como [Capgo](https://capgo.app/) simplifican las actualizaciones OTA, asegurando que el 95% de los usuarios se actualicen dentro de 24 horas.
 
-Continua a leggere per strategie dettagliate per ottimizzare lo sviluppo della tua app Capacitor.
+Sigue leyendo para estrategias detalladas que agilicen el desarrollo de tu aplicación Capacitor.
 
-## Capacitor 2.0: App mobili e PWA da un'unica base di codice
+## Capacitor 2.0: Aplicaciones móviles y PWAs de una sola base de código
 
 <iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Configurazione della Struttura del Codice
+## Configuración de la estructura de código
 
-Avere una struttura del codice ben organizzata è fondamentale quando si sviluppano app Capacitor. Ecco uno sguardo ai modi pratici per organizzare i file di progetto e costruire componenti riutilizzabili.
+Tener una estructura de código bien organizada es clave al escalar aplicaciones de Capacitor. Aquí hay una mirada a formas prácticas de organizar los archivos del proyecto y construir componentes reutilizables.
 
-### Organizzazione delle Cartelle
+### Organización de carpetas
 
-Una struttura di cartelle chiara aiuta a separare il codice condiviso dalle implementazioni specifiche per piattaforma. Ecco un esempio di layout:
+Una estructura de carpetas clara ayuda a separar el código compartido de las implementaciones específicas de la plataforma. Aquí hay un ejemplo de diseño:
 
-| Directory | Scopo | Contenuti di Esempio |
+| Directorio | Propósito | Contenidos de ejemplo |
 | --- | --- | --- |
-| **/shared** | Codice usato su tutte le piattaforme | Servizi, utilità, interfacce |
-| **/platforms** | Implementazioni specifiche per piattaforma | Plugin nativi, modifiche UI |
-| **/components** | Elementi UI riutilizzabili | Widget personalizzati, elementi |
-| **/assets** | Risorse statiche | Immagini, font, icone |
-| **/services** | Logica di business | Client API, gestione dello stato |
+| **/shared** | Código utilizado en todas las plataformas | Servicios, utilidades, interfaces |
+| **/platforms** | Implementaciones específicas de la plataforma | Plugins nativos, ajustes de UI |
+| **/components** | Elementos de UI reutilizables | Widgets personalizados, elementos |
+| **/assets** | Recursos estáticos | Imágenes, fuentes, íconos |
+| **/services** | Lógica de negocio | Clientes de API, gestión de estado |
 
-### Creazione di Moduli Riutilizzabili
+### Creando módulos reutilizables
 
-Una solida struttura delle cartelle è il primo passo verso la creazione di moduli riutilizzabili. Per rendere i tuoi moduli facili da usare e mantenere, considera queste strategie:
+Una estructura de carpetas sólida es el primer paso para construir módulos reutilizables. Para hacer que tus módulos sean fáciles de usar y mantener, considera estas estrategias:
 
--   **Astrarre le Differenze tra Piattaforme**: Usa livelli di interfaccia per gestire le variazioni specifiche della piattaforma.
--   **Controllo Versione**: Tieni traccia degli aggiornamenti con protocolli di versionamento rigorosi.
--   **Documentazione**: Fornisci istruzioni chiare e concise per l'uso e l'integrazione dei moduli.
+-   **Abstracta las diferencias de plataforma**: Utiliza capas de interfaz para gestionar variaciones específicas de la plataforma.
+-   **Control de versiones**: Mantén un seguimiento de las actualizaciones con protocolos de versionado estrictos.
+-   **Documentación**: Proporciona instrucciones claras y concisas para usar e integrar módulos.
 
-### Suggerimenti per la Gestione dei File
+### Consejos de gestión de archivos
 
-Le buone pratiche di gestione dei file possono rendere gli aggiornamenti e lo sviluppo multipiattaforma molto più fluidi:
+Buenas prácticas de gestión de archivos pueden hacer que las actualizaciones y el desarrollo multiplataforma sean mucho más fluidos:
 
--   **Organizza le Risorse**: Raggruppa le risorse in base alla compatibilità della piattaforma per ridurre le dimensioni dei bundle e migliorare l'efficienza.
--   **Gestisci la Cache Efficacemente**: Usa strategie di caching robuste per migliorare le prestazioni offline e i tempi di caricamento.
--   **Semplifica gli Aggiornamenti**: Sfrutta le funzionalità di aggiornamento di Capacitor. Usando un sistema di canali, puoi distribuire aggiornamenti a gruppi specifici di utenti prima di un rilascio completo.
+-   **Organiza los activos**: Agrupa activos según la compatibilidad de la plataforma para reducir el tamaño de los paquetes y mejorar la eficiencia.
+-   **Administra la caché de manera efectiva**: Utiliza estrategias de caché robustas para mejorar el rendimiento fuera de línea y los tiempos de carga.
+-   **Agiliza las actualizaciones**: Aprovecha las características de actualización de Capacitor. Usando un sistema de canales, puedes implementar actualizaciones a grupos de usuarios específicos antes de un lanzamiento completo.
 
-## Metodi di Test e Debug
+## Métodos de prueba y depuración
 
-Il test del codice condiviso nelle app Capacitor richiede un approccio chiaro e strutturato per garantire prestazioni costanti. Di seguito, tratteremo strumenti e metodi efficaci sia per il testing che per il debugging.
+Probar el código compartido en aplicaciones de Capacitor requiere un enfoque claro y estructurado para garantizar un rendimiento consistente. A continuación, cubriremos herramientas y métodos efectivos tanto para pruebas como para depuración.
 
-### Pianificazione dei Test
+### Planificación de pruebas
 
-Per testare correttamente il codice condiviso Capacitor, hai bisogno di un piano completo che affronti ogni livello della tua app. Ecco una suddivisione di come organizzare il processo di testing:
+Para probar adecuadamente el código compartido de Capacitor, necesitas un plan integral que aborde cada capa de tu aplicación. Aquí tienes un desglose de cómo organizar tu proceso de pruebas:
 
-| **Livello di Test** | **Strumenti e Approcci** | **Aree Chiave di Focus** |
+| **Nivel de Prueba** | **Herramientas y enfoques** | **Áreas de enfoque clave** |
 | --- | --- | --- |
-| **Test Unitari** | Jest, [Mocha](https://mochajs.org/) | Logica di business, metodi di utilità |
-| **Test di Integrazione** | Cypress, [Selenium](https://www.selenium.dev/) | Funzionalità multipiattaforma |
-| **Test End-to-End** | Appium, [Detox](https://wix.github.io/Detox/) | Flussi utente, funzionalità native |
-| **Test delle Prestazioni** | [Lighthouse](https://developer.chrome.com/docs/lighthouse), [WebPageTest](https://www.webpagetest.org/) | Velocità di caricamento, uso delle risorse |
+| **Pruebas unitarias** | Jest, [Mocha](https://mochajs.org/) | Lógica de negocio, métodos de utilidad |
+| **Pruebas de integración** | Cypress, [Selenium](https://www.selenium.dev/) | Funcionalidad multiplataforma |
+| **Pruebas de extremo a extremo** | Appium, [Detox](https://wix.github.io/Detox/) | Flujos de trabajo de usuario, características nativas |
+| **Pruebas de rendimiento** | [Lighthouse](https://developer.chrome.com/docs/lighthouse), [WebPageTest](https://www.webpagetest.org/) | Velocidades de carga, uso de recursos |
 
-Considera l'uso di test beta basati su canali per rilasciare la tua app a gruppi specifici di utenti. Questo aiuta a raccogliere feedback mirati, identificare problemi specifici della piattaforma precocemente e distribuire gli aggiornamenti gradualmente. Un piano di test solido non solo garantisce la qualità ma rende anche il debugging molto più fluido.
+Considera usar pruebas beta basadas en canales para lanzar tu aplicación a grupos de usuarios específicos. Esto te ayuda a recopilar comentarios dirigidos, identificar problemas específicos de la plataforma temprano y desplegar actualizaciones gradualmente. Un sólido plan de pruebas no solo asegura calidad, sino que también facilita la depuración.
 
-### Strumenti e Suggerimenti per il Debug
+### Herramientas y consejos de depuración
 
-Una volta implementato il testing, pratiche efficaci di debugging sono essenziali per mantenere le prestazioni dell'app. Ecco strategie e strumenti chiave per migliorare gli sforzi di debugging.
+Una vez que las pruebas están en su lugar, las prácticas de depuración efectivas son esenciales para mantener el rendimiento de la aplicación. Aquí hay estrategias y herramientas clave para mejorar los esfuerzos de depuración.
 
-**Configurazione del Monitoraggio degli Errori**  
-Configura sistemi di monitoraggio degli errori che controllano sia gli errori web che nativi. Questi strumenti dovrebbero fornire tracce dettagliate dello stack, registrare le interazioni degli utenti e generare automaticamente report. Questa configurazione ti aiuta a identificare e risolvere rapidamente i problemi su tutte le piattaforme.
+**Configuración de seguimiento de errores**  
+Configura sistemas de seguimiento de errores que monitoreen tanto errores web como nativos. Estas herramientas deberían proporcionar trazas detalladas, registrar interacciones de usuarios y generar informes automáticamente. Esta configuración ayuda a identificar y abordar rápidamente problemas en todas las plataformas.
 
-**Integrazione CI/CD**  
-Incorpora strumenti di debugging nella tua pipeline CI/CD. Questo semplifica il rilevamento e la risoluzione dei problemi, risparmiando tempo durante lo sviluppo.
+**Integración de CI/CD**  
+Incorpora herramientas de depuración en tu pipeline de CI/CD. Esto simplifica la detección y resolución de problemas, ahorrando tiempo durante el desarrollo.
 
-**Panoramica dei Costi**
+**Resumen de costos**
 
--   **Operazioni CI/CD mensili**: ~€300
--   **Costo di configurazione una tantum**: ~€2.600 [\[1\]](https://capgo.app/)
+-   **Operaciones de CI/CD mensuales**: ~$300
+-   **Costo de configuración única**: ~$2,600 [\[1\]](https://capgo.app/)
 
-**Suggerimenti Avanzati per il Debug**
+**Consejos avanzados de depuración**
 
--   Usa strumenti di sviluppo specifici per piattaforma per identificare e risolvere i problemi.
--   Implementa source map per tracciare gli errori fino al codice originale.
--   Automatizza il monitoraggio dei percorsi critici nella tua app.
--   Configura il reporting dei crash sia per il livello web che nativo per individuare i problemi precocemente.
+-   Usa herramientas de desarrollador específicas de la plataforma para identificar y solucionar problemas.
+-   Implementa mapas de origen para rastrear errores de vuelta a su código original.
+-   Automatiza la supervisión de rutas críticas en tu aplicación.
+-   Configura informes de fallos tanto para capas web como nativas para detectar problemas temprano.
 
-## Aggiornamenti e Distribuzione
+## Actualizaciones y despliegue
 
-Gestire efficacemente gli aggiornamenti e le distribuzioni garantisce che la tua app funzioni in modo consistente su tutte le piattaforme. Dopo test e debugging approfonditi, un processo di distribuzione fluido mantiene la tua app in esecuzione in modo affidabile.
+Gestión efectiva de actualizaciones y despliegues asegura que tu aplicación funcione de manera consistente en todas las plataformas. Después de pruebas y depuración exhaustivas, un proceso de despliegue suave mantiene tu aplicación funcionando de manera fiable.
 
-### Configurazione CI/CD
+### Configuración de CI/CD
 
-Configurare una pipeline CI/CD semplifica le distribuzioni integrandosi perfettamente con il tuo flusso di lavoro esistente, evitando la necessità di strumenti aggiuntivi.
+Configurar un pipeline de CI/CD simplifica los despliegues al integrarse sin problemas con tu flujo de trabajo existente, evitando la necesidad de herramientas adicionales.
 
-| Componente CI/CD | Caratteristiche Chiave | Vantaggi |
+| Componente de CI/CD | Características clave | Ventajas |
 | --- | --- | --- |
-| [GitHub Actions](https://docs.github.com/actions) | Integrazione diretta, build automatizzate | Ambiente familiare, facile da configurare |
-| [GitLab CI](https://docs.gitlab.com/ee/ci/) | Strumenti pipeline integrati, registro container | Soluzione DevOps tutto-in-uno |
-| [Jenkins](https://www.jenkins.io/) | Supporto workflow personalizzato, plugin estesi | Alto livello di personalizzazione |
+| [GitHub Actions](https://docs.github.com/actions) | Integración directa, compilaciones automatizadas | Entorno familiar, fácil de configurar |
+| [GitLab CI](https://docs.gitlab.com/ee/ci/) | Herramientas de pipeline integradas, registro de contenedores | Solución DevOps todo en uno |
+| [Jenkins](https://www.jenkins.io/) | Soporte a flujos de trabajo personalizados, extensos plugins | Alto nivel de personalización |
 
-In media, la configurazione CI/CD costa circa €2.600, con una manutenzione mensile di circa €300. In cinque anni, questo potrebbe farti risparmiare fino a €26.100 rispetto ad altri approcci [\[1\]](https://capgo.app/).
+En promedio, la configuración de CI/CD cuesta alrededor de $2,600, con un mantenimiento mensual que promedia $300. En cinco años, esto podría ahorrarte hasta $26,100 en comparación con otros enfoques [\[1\]](https://capgo.app/).
 
-> "Configuriamo la tua pipeline CI/CD direttamente nella tua piattaforma preferita, che sia GitHub Actions, GitLab CI o altri. Non ospitiamo CI/CD né ti addebitiamo costi per mantenerlo." - Capgo [\[1\]](https://capgo.app/)
+> "Configuramos tu pipeline de CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI o similares. No alojamos CI/CD ni te cobramos por mantenerlo." - Capgo [\[1\]](https://capgo.app/)
 
-Una volta che la tua pipeline CI/CD è operativa, puoi concentrarti sull'implementazione di aggiornamenti OTA veloci ed efficienti.
+Una vez que tu pipeline de CI/CD esté operativo, puedes desviar tu atención a implementar actualizaciones OTA rápidas y eficientes.
 
-### Sistemi di Aggiornamento OTA
+### Sistemas de actualización OTA
 
-Un sistema di aggiornamento OTA robusto garantisce che gli utenti ricevano correzioni e nuove funzionalità senza ritardi causati dalle approvazioni degli app store. Questo processo accelera la distribuzione e migliora l'esperienza utente.
+Un sólido sistema de actualización OTA asegura que los usuarios reciban correcciones y nuevas características sin retrasos causados por aprobaciones de la tienda de aplicaciones. Este proceso acelera la entrega y mejora la experiencia del usuario.
 
-Statistiche chiave:
+Estadísticas clave:
 
--   82% tasso di successo globale per gli aggiornamenti
--   Tempo medio di download di 114ms per un bundle di 5MB [\[1\]](https://capgo.app/)
+-   82% de tasa de éxito global para actualizaciones
+-   Tiempo de descarga promedio de 114 ms para un paquete de 5 MB [\[1\]](https://capgo.app/)
 
-> "Abbiamo implementato gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo vedendo un'operazione molto fluida quasi tutti i nostri utenti sono aggiornati entro minuti dal deployment dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Desplegamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de +5000. Estamos viendo un funcionamiento muy fluido, casi todos nuestros usuarios están actualizados en minutos después de que se desplegó el OTA en @Capgo." - colenso [\[1\]](https://capgo.app/)
 
-Importanti funzionalità OTA da considerare:
+Características importantes de OTA a considerar:
 
-| Funzionalità | Implementazione | Beneficio |
+| Característica | Implementación | Beneficio |
 | --- | --- | --- |
-| Crittografia End-to-End | Distribuzione sicura degli aggiornamenti | Garantisce la sicurezza del codice |
-| Aggiornamenti Parziali | Scarica solo i file modificati | Risparmia larghezza di banda |
-| Sistema di Canali | Capacità di test beta | Gestisce rollout controllati |
-| Integrazione Analytics | Monitoraggio prestazioni in tempo reale | Monitora i tassi di successo degli aggiornamenti |
+| Encriptación de extremo a extremo | Entrega segura de actualizaciones | Asegura la seguridad del código |
+| Actualizaciones parciales | Solo descarga archivos modificados | Ahorra ancho de banda |
+| Sistema de canales | Capacidades de pruebas beta | Maneja implementaciones controladas |
+| Integración de analíticas | Seguimiento de rendimiento en tiempo real | Monitorea tasas de éxito de actualizaciones |
 
-Quando configuri gli aggiornamenti OTA, assicurati di rispettare i requisiti della piattaforma, mantieni il controllo delle versioni per facili rollback e utilizza analytics in tempo reale per monitorare le prestazioni. Il testing automatizzato prima che gli aggiornamenti vadano in produzione è essenziale per mantenere alta la qualità e l'affidabilità del codice.
+Al configurar actualizaciones OTA, asegúrate de cumplir con los requisitos de la plataforma, mantener un control de versiones para facilitar los retrocesos y utilizar analíticas en tiempo real para rastrear el rendimiento. Las pruebas automáticas antes de que las actualizaciones se activen son esenciales para mantener una alta calidad y fiabilidad del código.
 
-## Sicurezza e Velocità
+## Seguridad y velocidad
 
-Misure di sicurezza robuste e prestazioni efficienti sono fondamentali quando si condivide codice Capacitor.
+Fuertes medidas de seguridad y un rendimiento eficiente son clave al compartir código de Capacitor.
 
-### Linee Guida per la Sicurezza
+### Directrices de seguridad
 
-Proteggi il tuo codice condiviso e i dati degli utenti con un approccio di sicurezza a livelli. I metodi moderni si concentrano sulla crittografia e sui controlli di accesso precisi. Ecco alcune pratiche efficaci:
+Protege tu código compartido y los datos de los usuarios con un enfoque de seguridad en capas. Los métodos modernos se centran en la encriptación y controles de acceso precisos. Aquí hay algunas prácticas efectivas:
 
-| **Funzionalità di Sicurezza** | **Implementazione** | **Scopo** |
+| **Característica de seguridad** | **Implementación** | **Propósito** |
 | --- | --- | --- |
-| Crittografia End-to-End | Crittografa i bundle di aggiornamento | Previene accessi non autorizzati |
-| Gestione Accessi | Permessi basati sui ruoli | Regola la collaborazione del team |
-| Canali di Aggiornamento | Beta/produzione separati | Riduce i rischi di deployment |
-| Capacità di Rollback | Usa il controllo versione | Risolve rapidamente i problemi |
+| Encriptación de extremo a extremo | Encripta paquetes de actualización | Previene accesos no autorizados |
+| Gestión de acceso | Permisos basados en roles | Regula la colaboración del equipo |
+| Canales de actualización | Beta/producción separados | Reduce riesgos de despliegue |
+| Capacidad de retroceso | Usa control de versiones | Resuelve problemas rápidamente |
 
-Distribuire aggiornamenti in modo sicuro aumenta i tassi di successo. Per esempio, Capgo enfatizza l'importanza della crittografia negli aggiornamenti sicuri [\[1\]](https://capgo.app/).
+Entregar actualizaciones de manera segura aumenta las tasas de éxito. Por ejemplo, Capgo enfatiza la importancia de la encriptación en actualizaciones seguras [\[1\]](https://capgo.app/).
 
-> "L'unica soluzione con vera crittografia end-to-end, gli altri si limitano a firmare gli aggiornamenti" - Capgo [\[1\]](https://capgo.app/)
+> "La única solución con verdadera encriptación de extremo a extremo, los demás solo firman actualizaciones" - Capgo [\[1\]](https://capgo.app/)
 
-Una volta implementata la sicurezza, concentrati sull'ottimizzazione delle prestazioni per aggiornamenti più veloci e affidabili.
+Una vez que la seguridad esté en su lugar, enfócate en optimizar el rendimiento para actualizaciones más rápidas y fiables.
 
-### Miglioramenti della Velocità
+### Mejoras de velocidad
 
-L'ottimizzazione delle prestazioni gioca un ruolo importante nell'esperienza utente e nell'affidabilità dell'app. Sistemi di aggiornamento veloci ed efficienti sono non negoziabili. Considera questi benchmark di prestazione:
+La optimización del rendimiento juega un gran papel en la experiencia del usuario y la fiabilidad de la aplicación. Los sistemas de actualización rápidos y eficientes son imprescindibles. Considera estos puntos de referencia de rendimiento:
 
-| **Metrica** | **Obiettivo** | **Perché è Importante** |
+| **Métrica** | **Objetivo** | **Por qué es importante** |
 | --- | --- | --- |
-| Velocità Download Bundle | Sotto 120ms/5MB | Garantisce la soddisfazione dell'utente |
-| Tempo di Risposta API | Sotto 450ms | Migliora la reattività dell'app |
-| Tasso di Successo Aggiornamenti | Sopra 90% | Aumenta l'affidabilità |
-| Tempo di Aggiornamento Utenti Attivi | Entro 24 ore | Mantiene la consistenza del codice |
+| Velocidad de descarga del paquete | Menos de 120 ms/5 MB | Asegura la satisfacción del usuario |
+| Tiempo de respuesta de la API | Menos de 450 ms | Mejora la capacidad de respuesta de la aplicación |
+| Tasa de éxito de actualización | Superior al 90% | Mejora la fiabilidad |
+| Tiempo de actualización de usuarios activos | Dentro de 24 horas | Mantiene la consistencia del código |
 
-Usando aggiornamenti parziali e una CDN globale si possono raggiungere velocità di download fino a 114ms per un bundle di 5MB [\[1\]](https://capgo.app/).
+Usar actualizaciones parciales y un CDN global puede lograr velocidades de descarga tan bajas como 114 ms para un paquete de 5 MB [\[1\]](https://capgo.app/).
 
-> "La community ne aveva bisogno e @Capgo sta facendo qualcosa di davvero importante!" - Lincoln Baxter, @lincolnthree [\[1\]](https://capgo.app/)
+> "La comunidad necesitaba esto y @Capgo está haciendo algo realmente importante!" - Lincoln Baxter, @lincolnthree [\[1\]](https://capgo.app/)
 
-Per massimizzare sia la sicurezza che la velocità, segui questi passaggi:
+Para maximizar tanto la seguridad como la velocidad, sigue estos pasos:
 
--   **Implementa aggiornamenti parziali** per risparmiare larghezza di banda e velocizzare la distribuzione.
--   **Utilizza un sistema di canali** per rilasci controllati e test beta.
--   **Abilita il monitoraggio degli errori in tempo reale** per identificare e risolvere rapidamente i problemi.
--   **Monitora l'analisi** per tracciare i tassi di successo degli aggiornamenti e migliorare nel tempo.
+-   **Implementar actualizaciones parciales** para ahorrar ancho de banda y acelerar la entrega.
+-   **Usar un sistema de canales** para despliegues controlados y pruebas beta.
+-   **Habilitar el seguimiento de errores en tiempo real** para identificar y solucionar problemas rápidamente.
+-   **Monitorear analíticas** para rastrear las tasas de éxito de las actualizaciones y mejorar con el tiempo.
 
-## Riepilogo
+## Resumen
 
-### Punti Chiave
+### Puntos Clave
 
-Per condividere efficacemente il codice Capacitor, concentrati su una struttura modulare, test automatizzati, distribuzione mirata e crittografia forte.
+Para compartir eficazmente el código de Capacitor, concéntrate en una estructura modular, pruebas automatizadas, despliegue dirigido y fuerte encriptación.
 
-| Area di Focus | Migliore Pratica | Impatto |
+| Área de Enfoque | Mejor Práctica | Impacto |
 | --- | --- | --- |
-| **Struttura del Codice** | Architettura modulare | Migliora la manutenibilità |
-| **Testing** | CI/CD automatizzato | Raggiunge un tasso di successo dell'82% a livello globale |
-| **Distribuzione** | Distribuzione basata su canali | 95% degli utenti si aggiorna entro 24 ore |
-| **Sicurezza** | Crittografia end-to-end | Protegge da accessi non autorizzati |
+| **Estructura del Código** | Arquitectura modular | Mejora la mantenibilidad |
+| **Pruebas** | CI/CD automatizado | Logra una tasa de éxito del 82% a nivel global |
+| **Despliegue** | Distribución basada en canales | El 95% de los usuarios actualiza en 24 horas |
+| **Seguridad** | Encriptación de extremo a extremo | Protege contra accesos no autorizados |
 
-Questi metodi sono stati implementati con successo in oltre 750 app in produzione [\[1\]](https://capgo.app/). Capgo si basa su questi fondamenti, offrendo strumenti che semplificano e migliorano i processi di condivisione del codice.
+Estos métodos se han implementado con éxito en más de 750 aplicaciones de producción [\[1\]](https://capgo.app/). Capgo se basa en estos fundamentos, ofreciendo herramientas que simplifican y mejoran los procesos de compartir código.
 
-### Integrazione [Capgo](https://capgo.app/)
+### [Integración de Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
 
-Capgo si allinea con queste pratiche, ottimizzando lo sviluppo Capacitor con aggiornamenti over-the-air (OTA) avanzati e flussi di lavoro CI/CD integrati. Offre risultati impressionanti, inclusi velocità di download di 114ms per bundle di 5MB tramite CDN globale, un tempo medio di risposta API di 434ms in tutto il mondo e 23,5 milioni di aggiornamenti riusciti [\[1\]](https://capgo.app/).
+Capgo se alinea con estas prácticas, optimizando el desarrollo de Capacitor con actualizaciones avanzadas por aire (OTA) y flujos de trabajo de CI/CD integrados. Ofrece resultados impresionantes, incluidos tiempos de descarga de 114 ms para paquetes de 5 MB a través de un CDN global, un tiempo promedio de respuesta de API de 434 ms en todo el mundo y 23.5 millones de actualizaciones exitosas [\[1\]](https://capgo.app/).
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Practicamos el desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Una caratteristica distintiva è la sua flessibilità nelle opzioni di distribuzione, supportando configurazioni sia cloud che self-hosted.
+Una característica destacada son sus opciones de despliegue flexibles, que admiten configuraciones tanto en la nube como autoalojadas.
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione delle app per le correzioni dei bug è rivoluzionario." - Bessie Cooper [\[1\]](https://capgo.app/)
+> "Capgo es una herramienta imprescindible para los desarrolladores que desean ser más productivos. Evitar la revisión de aplicaciones para correcciones de errores es un cambio de juego." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Le funzionalità di Capgo rafforzano le migliori pratiche per la condivisione del codice:
+Las características de Capgo refuerzan las mejores prácticas para compartir código:
 
-| Funzionalità | Beneficio | Impatto nel Mondo Reale |
+| Característica | Beneficio | Impacto en el Mundo Real |
 | --- | --- | --- |
-| **Integrazione CI/CD** | Automatizza la distribuzione | Semplifica i flussi di lavoro |
-| **Sistema di Canali** | Permette aggiornamenti mirati | Migliora le capacità di test beta |
-| **Dashboard Analytics** | Monitora le prestazioni | Fornisce insight in tempo reale |
-| **Capacità di Rollback** | Riduce i rischi | Permette il controllo immediato delle versioni |
+| **Integración de CI/CD** | Automatiza el despliegue | Simplifica los flujos de trabajo |
+| **Sistema de Canales** | Permite actualizaciones dirigidas | Mejora las capacidades de pruebas beta |
+| **Tablero de Analíticas** | Rastrear rendimiento | Proporciona información en tiempo real |
+| **Capacidad de Reversión** | Reduce riesgos | Permite control de versiones instantáneo |
 
-Questi strumenti creano un ambiente di condivisione del codice sicuro ed efficiente garantendo la conformità con le linee guida degli app store [\[1\]](https://capgo.app/).
+Estas herramientas crean un entorno de intercambio de código seguro y eficiente, asegurando el cumplimiento de las directrices de la tienda de aplicaciones [\[1\]](https://capgo.app/).

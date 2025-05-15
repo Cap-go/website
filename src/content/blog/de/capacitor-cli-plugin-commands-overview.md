@@ -1,7 +1,10 @@
 ---
 slug: capacitor-cli-plugin-commands-overview
-title: Vue d'ensemble des commandes du Plugin CLI Capacitor
-description: Capacitor 플러그인을 CLI 명령어로 효율적으로 관리하는 방법과 강력한 플러그인 관리 도구와의 통합 혜택에 대해 알아보세요.
+title: Übersicht über die Befehle des Capacitor CLI-Plugins
+description: >-
+  Erfahren Sie, wie Sie Capacitor-Plugins effizient mit CLI-Befehlen verwalten
+  und profitieren Sie von der Integration in ein leistungsstarkes
+  Plugin-Management-Tool.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -18,298 +21,354 @@ published: true
 locale: de
 next_blog: ''
 ---
+[Capacitor](https://capacitorjs.com/) CLI vereinfacht die Verwaltung von Plugins für die App-Entwicklung und ermöglicht eine nahtlose Integration von nativen Gerätefunktionen. In Kombination mit Tools wie [Capgo](https://capgo.app/) werden Updates, Bereitstellungen und Fehlersuche optimiert. Hier ist, was Sie wissen sollten:
 
-[Capacitor](https://capacitorjscom/) CLI vereinfacht die Verwaltung von Plugins für die App-Entwicklung und ermöglicht eine nahtlose Integration nativer Gerätefunktionen. In Kombination mit Tools wie [Capgo](https://capgoapp/) werden Updates, Bereitstellung und Fehlerbehebung optimiert. Hier ist, was Sie wissen müssen:
+**Wichtige Funktionen:**
 
-**Hauptfunktionen:**
+-   **Plugins installieren:** Verwenden Sie `npx @capgo/cli init`, um Plugins hinzuzufügen, Abhängigkeiten zu verwalten und Konfigurationen automatisch zu aktualisieren.
+-   **Plugins aktualisieren:** Befehle wie `npm update @capacitor/*` und `npx cap sync` sorgen für reibungslose Updates.
+-   **Plugins entfernen:** Deinstallieren Sie sauber mit `npm uninstall @capacitor/plugin-name` und synchronisieren Sie die Konfigurationen.
+-   **Probleme beheben:** Befehle wie `npx cap doctor` und `npx cap sync --verbose` helfen, Probleme zu erkennen und zu lösen.
 
--   **Plugins installieren:** Verwenden Sie `npx @capgo/cli init` um Plugins hinzuzufügen, Abhängigkeiten zu verwalten und Konfigurationen automatisch zu aktualisieren
--   **Plugins aktualisieren:** Befehle wie `npm update @capacitor/*` und `npx cap sync` gewährleisten reibungslose Updates
--   **Plugins entfernen:** Saubere Deinstallation mit `npm uninstall @capacitor/plugin-name` und Synchronisierung der Konfigurationen
--   **Probleme beheben:** Befehle wie `npx cap doctor` und `npx cap sync --verbose` helfen beim Erkennen und Lösen von Problemen
-
-**[Capgo Vorteile](https://capgoapp/consulting/):**
+**[Capgo Vorteile](https://capgo.app/consulting/):**
 
 -   Echtzeit-Updates
--   Ende-zu-Ende-Verschlüsselung
+-   End-to-End-Verschlüsselung
 -   CI/CD-Integration
 -   Rollback bei Fehlern
 
-Capgo unterstützt weltweit über 750 Apps und bietet schnelle Updates und Fehlerverfolgung für 12$/Monat
+Capgo unterstützt über 750 Apps weltweit und bietet schnelle Updates und Fehlerverfolgung für $12/Monat.
 
-Beginnen Sie noch heute mit der effizienten Verwaltung von [Capacitor Plugins](https://capgoapp/plugins/) und verbessern Sie Ihren Entwicklungsworkflow!
+Beginnen Sie noch heute mit der effizienten Verwaltung von [Capacitor-Plugins](https://capgo.app/plugins/) und verbessern Sie Ihren Entwicklungsworkflow!
 
-## Plattformübergreifende Entwicklung: Erkundung von CapacitorJS mit
+## Plattformübergreifende Entwicklung: CapacitorJS erkunden mit ...
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Plugin-Installationsbefehle
+## Befehle zur Plugin-Installation
 
-Die Capacitor CLI macht das Hinzufügen von Plugins zu Ihrem Projekt unkompliziert und effizient. Diese Befehle übernehmen den Integrationsprozess, kümmern sich um Abhängigkeiten und stellen die Kompatibilität mit Ihrem Setup sicher.
+Das Capacitor CLI macht das Hinzufügen von Plugins zu Ihrem Projekt einfach und effizient. Diese Befehle kümmern sich um den Integrationsprozess, verwalten die Abhängigkeiten und stellen die Kompatibilität mit Ihrer Einrichtung sicher.
 
 ### Grundlegende Installationsbefehle
 
-Um ein Capacitor-Plugin zu Ihrem Projekt hinzuzufügen, verwenden Sie diese einfache Befehlsstruktur. Um beispielsweise das Capgo-Plugin zu installieren, führen Sie aus:
+Um ein Capacitor-Plugin zu Ihrem Projekt hinzuzufügen, verwenden Sie diese einfache Befehlsstruktur. Zum Beispiel, um das Capgo-Plugin zu installieren, führen Sie folgendes aus:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli init
+```
 
 Dieser Befehl kümmert sich um Folgendes:
 
--   Überprüft die Kompatibilität des Plugins mit Ihrer Capacitor-Version
+-   Überprüft, ob das Plugin mit Ihrer Capacitor-Version kompatibel ist
 -   Installiert alle erforderlichen Abhängigkeiten
 -   Richtet plattformspezifische Konfigurationen ein
 -   Aktualisiert automatisch die Konfigurationsdateien Ihres Projekts
 
-Halten Sie sich an diesen Prozess, um Fehler bei der Installation zu vermeiden.
+Halten Sie sich an diesen Prozess, um Fehler während der Installation zu vermeiden.
 
 ### Installationsrichtlinien
 
-So stellen Sie sicher, dass Ihr Plugin ohne Probleme installiert wird:
+Hier erfahren Sie, wie Sie sicherstellen, dass Ihr Plugin ohne Probleme installiert wird:
 
-**Schritte vor der Installation**:
+**Vorinstallationsschritte**:
 
 -   Stellen Sie sicher, dass Ihr Capacitor-Projekt bereits eingerichtet ist
 -   Navigieren Sie zum Stammverzeichnis Ihres Projekts
--   Überprüfen Sie, ob Ihre [Nodejs](https://nodejsorg/en) Version aktuell ist
--   Aktualisieren Sie auf die neueste Version der Capacitor CLI
+-   Überprüfen Sie, dass Ihre [Node.js](https://nodejs.org/en) Version aktuell ist
+-   Aktualisieren Sie auf die neueste Version des Capacitor CLI
 
-**Umgang mit Versionen**:
+**Versionsverwaltung**:
 
--   Geben Sie die gewünschte Plugin-Version während der Installation an
--   Befolgen Sie die semantische Versionierung, um Kompatibilitätsprobleme zu vermeiden
--   Testen Sie das Plugin in Ihrer Entwicklungsumgebung vor der Bereitstellung
+-   Geben Sie die Plugin-Version an, die Sie während der Installation wünschen
+-   Folgen Sie der semantischen Versionsverwaltung, um Kompatibilitätsprobleme zu vermeiden
+-   Testen Sie das Plugin in Ihrer Entwicklungsumgebung, bevor Sie es bereitstellen
 
-> "Führen Sie npx @capgo/cli init aus, das war's!" - Capgo [\[1\]](https://capgoapp/)
+> "Führen Sie npx @capgo/cli init aus und das war's!" - Capgo [\[1\]](https://capgo.app/)
 
-Überprüfen Sie nach der Installation alles, indem Sie Ihre `packagejson` und plattformspezifischen Konfigurationsdateien überprüfen. Für zusätzliche Schritte konsultieren Sie die Plugin-Dokumentation.
+Nach der Installation bestätigen Sie, dass alles in Ordnung ist, indem Sie Ihre `package.json` und plattformspezifischen Konfigurationsdateien überprüfen. Für zusätzliche Schritte konsultieren Sie die Dokumentation des Plugins.
 
-## Plugin-Update-Befehle
+## Befehle zur Plugin-Aktualisierung
 
-Die Aktualisierung Ihrer Capacitor-Plugins hilft, die App-Stabilität zu erhalten und stellt den Zugriff auf neue Funktionen sicher. Die CLI bietet Tools zur effizienten Verwaltung von Plugin-Updates.
+Die Aktualisierung Ihrer Capacitor-Plugins trägt zur Stabilität der App bei und stellt sicher, dass Sie auf neue Funktionen zugreifen können. Das CLI bietet Werkzeuge zur effizienten Verwaltung von Plugin-Updates.
 
 ### Verfügbare Updates finden
 
 Führen Sie diese Befehle im Stammverzeichnis Ihres Projekts aus:
 
-[[CODE_BLOCK]]
+```bash
+npm outdated @capacitor/*
+npx cap doctor
+```
 
-Der Befehl `npx cap doctor` überprüft Ihr Capacitor-Setup, einschließlich Plugin-Versionen. Er identifiziert Probleme und schlägt Updates zur Leistungsverbesserung vor. Sobald Sie wissen, welche Plugins Aktualisierungen benötigen, verwenden Sie die folgenden Befehle.
+Der Befehl `npx cap doctor` überprüft Ihre Capacitor-Einrichtung, einschließlich der Plugin-Versionen. Er identifiziert Probleme und schlägt Updates zur Leistungsverbesserung vor. Sobald Sie wissen, welche Plugins aktualisiert werden müssen, verwenden Sie die folgenden Befehle.
 
-### Plugin-Updates ausführen
+### Ausführung von Plugin-Updates
 
-Verwenden Sie Folgendes für Updates:
+Um Plugins zu aktualisieren, verwenden Sie Folgendes:
 
-**Ein einzelnes Plugin aktualisieren**:
+**Einzelnes Plugin aktualisieren**:
 
-[[CODE_BLOCK]]
+```bash
+npm update @capacitor/plugin-name
+npx cap sync
+```
 
 **Alle Plugins auf einmal aktualisieren**:
 
-[[CODE_BLOCK]]
+```bash
+npm update @capacitor/*
+npx cap sync
+```
 
-Wenn Sie Capgo-Benutzer sind, vereinfacht deren CLI-Tool den Update-Prozess:
+Wenn Sie ein Capgo-Nutzer sind, vereinfacht ihr CLI-Tool den Aktualisierungsprozess:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli update
+```
 
-### Update-Abhängigkeiten verwalten
+### Verwaltung der Update-Abhängigkeiten
 
-Befolgen Sie nach dem Anwenden von Updates diese Schritte, um Abhängigkeiten effektiv zu verwalten:
+Nach der Anwendung von Updates befolgen Sie diese Schritte zur effektiven Verwaltung der Abhängigkeiten:
 
-| Phase | Aufgabe | Zweck |
+| Stufe | Aufgabe | Zweck |
 | --- | --- | --- |
-| Vor dem Update | Abhängigkeiten überprüfen | Aktuelle Versionen prüfen |
-| Während des Updates | Versionskonflikte lösen | Inkompatibilitäten beheben |
-| Nach dem Update | Plattformspezifische Tests durchführen | Sicherstellen, dass alles funktioniert |
+| Vor-Update | Abhängigkeiten überprüfen | Aktuelle Versionen prüfen |
+| Während des Updates | Versionskonflikte beheben | Inkompatibilitäten beheben |
+| Nach-Update | plattformspezifische Tests durchführen | Sicherstellen, dass alles funktioniert |
 
-Capgo-Benutzer profitieren von erweiterten Funktionen wie kontrollierten Rollouts.Ihr System hat sich als zuverlässig erwiesen:
+Capgo-Nutzer profitieren von erweiterten Funktionen wie kontrollierten Rollouts. Ihr System hat sich als zuverlässig erwiesen:
 
--   95% der Updates werden innerhalb von 24 Stunden abgeschlossen [\[1\]](https://capgoapp/)
--   82% globale Erfolgsrate bei Updates [\[1\]](https://capgoapp/)
--   Kompatibilität mit Capacitor 6 und 7 Versionen [\[1\]](https://capgoapp/)
+-   95% der Updates werden innerhalb von 24 Stunden abgeschlossen [\[1\]](https://capgo.app/)
+-   82% Erfolgsquote weltweit für Updates [\[1\]](https://capgo.app/)
+-   Kompatibilität mit Capacitor 6 und 7 Versionen [\[1\]](https://capgo.app/)
 
-Für reibungslose Updates:
+Um reibungslose Updates sicherzustellen:
 
--   **Versionskontrolle**: Vor dem Update Änderungen committen
--   **Tests**: Updates zuerst in einer Entwicklungsumgebung anwenden
--   **Abhängigkeitswarnungen**: Peer-Dependency-Probleme umgehend beheben
+-   **Versionskontrolle**: Committen Sie Ihre Änderungen vor dem Update.
+-   **Tests**: Wenden Sie Updates zunächst in einer Entwicklungsumgebung an.
+-   **Abhängigkeitshinweise**: Beheben Sie etwaige Probleme mit Peer-Abhängigkeiten umgehend.
 
-Capgo bietet auch eine Rollback-Funktion, um kritische Updates bei Problemen rückgängig zu machen [\[1\]](https://capgoapp/)
+Capgo bietet auch eine Rollback-Funktion, um kritische Updates bei auftretenden Problemen rückgängig zu machen [\[1\]](https://capgo.app/).
 
-## Plugin-Entfernungsbefehle
+## Befehle zur Plugin-Entfernung
 
-Das korrekte Entfernen von Plugins ist entscheidend, um Probleme bei Updates zu vermeiden und Ihre Entwicklungsumgebung sauber zu halten. Nachfolgend finden Sie die Schritte zum Deinstallieren von Plugins und zur Überprüfung ihrer vollständigen Entfernung.
+Plugins ordnungsgemäß zu entfernen, ist entscheidend, um Probleme während der Updates zu vermeiden und Ihre Entwicklungsumgebung sauber zu halten. Unten finden Sie die Schritte zum Deinstallieren von Plugins und zur Überprüfung ihrer vollständigen Entfernung.
 
 ### Deinstallationsbefehle
 
-Um ein Capacitor-Plugin zu deinstallieren, verwenden Sie folgenden Befehl:
+Um ein Capacitor-Plugin zu deinstallieren, verwenden Sie den folgenden Befehl:
 
-[[CODE_BLOCK]]
+```bash
+npm uninstall @capacitor/plugin-name
+npx cap sync
+```
 
 Für plattformspezifische Updates führen Sie aus:
 
-[[CODE_BLOCK]]
+```bash
+npx cap update ios
+npx cap update android
+```
 
-Müssen mehrere Plugins gleichzeitig entfernt werden? Verwenden Sie dies:
+Müssen Sie mehrere Plugins auf einmal entfernen? Verwenden Sie dies:
 
-[[CODE_BLOCK]]
+```bash
+npm uninstall @capacitor/plugin1 @capacitor/plugin2
+npx cap sync
+```
 
-### Aufräumen nach der Entfernung
+### Nach der Entfernung Bereinigen
 
-Befolgen Sie nach der Deinstallation diese Aufräumschritte, um die Stabilität Ihres Projekts zu gewährleisten:
+Nach der Deinstallation befolgen Sie diese Bereinigungsschritte, um sicherzustellen, dass Ihr Projekt stabil bleibt:
 
 | Aufgabe | Befehl | Zweck |
 | --- | --- | --- |
-| Abhängigkeiten aktualisieren | `npm install` | Erstellt den Abhängigkeitsbaum neu |
+| Abhängigkeiten aktualisieren | `npm install` | Baut den Abhängigkeitsbaum neu auf |
 | Plattformen synchronisieren | `npx cap sync` | Aktualisiert native Projektkonfigurationen |
 
-Entfernen Sie zusätzlich manuell verbleibende Einträge aus **capacitorconfigts**, **packagejson** und plattformspezifischen Dateien.
+Darüber hinaus entfernen Sie manuell verbleibende Einträge aus **capacitor.config.ts**, **package.json** und allen plattformspezifischen Dateien.
 
-### Plugin-Entfernung bestätigen
+### Bestätigen der Plugin-Entfernung
 
 Um zu bestätigen, dass das Plugin vollständig entfernt wurde, verwenden Sie diese Befehle:
 
-[[CODE_BLOCK]]
+```bash
+npm list @capacitor/*
+npx cap doctor
+```
 
--   **`npm list @capacitor/*`**: Prüft auf verbleibende Capacitor-bezogene Abhängigkeiten
--   **`npx cap doctor`**: Identifiziert verwaiste Abhängigkeiten, unvollständige Entfernungen oder Konfigurationsprobleme
+-   **`npm list @capacitor/*`**: Überprüft, ob noch Capacitor-bezogene Abhängigkeiten vorhanden sind.
+-   **`npx cap doctor`**: Identifiziert verwaiste Abhängigkeiten, unvollständige Entfernungen oder Konfigurationsprobleme.
 
-Überprüfen Sie diese Bereiche auf Überreste:
+Überprüfen Sie diese Bereiche auf verbleibende Rückstände:
 
--   **Projektwurzel**: Stellen Sie sicher, dass das Plugin nicht mehr in `packagejson` aufgeführt ist
--   **Native Plattformen**: Überprüfen Sie die Bereinigung in iOS- und Android-Verzeichnissen
--   **Build-Dateien**: Bestätigen Sie, dass das Plugin in kompilierten Assets nicht vorhanden ist
+-   **Projektstamm**: Stellen Sie sicher, dass das Plugin nicht mehr in `package.json` aufgeführt ist.
+-   **Native Plattformen**: Überprüfen Sie die Bereinigung in iOS- und Android-Verzeichnissen.
+-   **Build-Dateien**: Bestätigen Sie, dass das Plugin aus kompilierte Assets abwesend ist.
 
-Wenn Sie Capgo für das Plugin-Management verwenden, kann deren CLI-Tool bei der Überprüfung der Entfernung helfen:
+Wenn Sie Capgo zur Plugin-Verwaltung verwenden, kann Ihnen deren CLI-Tool helfen, die Entfernung zu überprüfen:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli verify
+```
 
-Dieser Befehl sucht nach verbleibenden Spuren, die Konflikte verursachen könnten, und gewährleistet eine gründliche Bereinigung
+Dieser Befehl sucht nach verbleibenden Spuren, die Konflikte verursachen könnten, und sorgt für eine gründliche Bereinigung.
 
 ## Plugin-Fehlerbehebung
 
-Wenn Sie nach der Installation oder Aktualisierung von Plugins immer noch Probleme haben, finden Sie hier einige praktische Schritte zur Fehlerbehebung, die Ihnen helfen, häufige Probleme zu identifizieren und zu beheben
+Wenn Sie nach der Installation oder Aktualisierung von Plugins weiterhin Probleme haben, finden Sie hier einige praktische Schritte zur Fehlerbehebung, die Ihnen helfen, häufige Probleme zu identifizieren und zu beheben.
 
-Bei der Arbeit mit Capacitor-Plugins über CLI-Befehle stoßen Entwickler oft auf Herausforderungen, die ihren Arbeitsablauf stören können. Nachfolgend finden Sie einen Leitfaden, der Ihnen hilft, diese Probleme effektiv anzugehen
+Bei der Arbeit mit Capacitor-Plugins über CLI-Befehle stoßen Entwickler häufig auf Herausforderungen, die ihren Workflow stören können. Unten finden Sie einen Leitfaden, um diese Probleme effektiv anzugehen.
 
-### Diagnose-Tools
+### Diagnosetools
 
 Diese Befehle können Ihnen helfen, Probleme mit Ihrer CLI-Konfiguration aufzudecken:
 
-[[CODE_BLOCK]]
+```bash
+npx cap doctor
+npx cap sync --verbose
+```
 
 Diese Tools können erkennen:
 
 -   Fehlende Abhängigkeiten
--   Versionsunterschiede
--   Plattformspezifische Konfigurationsfehler
--   Plugin-Installationsprobleme
+-   Versionskonflikte
+-   Konfigurationsfehler, die plattformspezifisch sind
+-   Probleme bei der Installation von Plugins
 
-Für tiefere Einblicke bietet Capgo zusätzliche Diagnosebefehle:
+Für tiefere Einblicke bietet Capgo zusätzliche Diagnoseschritte:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli diagnose
+npx @capgo/cli verify-plugins
+```
 
-Nach der Durchführung der Diagnose verwenden Sie die folgende Tabelle, um gezielte Korrekturen für spezifische Fehler anzuwenden
+Nach der Durchführung von Diagnosen verwenden Sie die unten stehende Tabelle, um gezielte Lösungen für spezifische Fehler anzuwenden.
 
 ### Häufige Fehlerbehebungen
 
-Hier sind CLI-Befehle zur Behebung häufiger Plugin-Probleme:
+Hier sind CLI-Befehle, um häufige Plugin-Probleme zu lösen:
 
 | Fehlertyp | Befehl | Lösung |
 | --- | --- | --- |
-| Versionskonflikt | `npx cap sync --force` | Erzwingt die Synchronisierung von Plugins |
-| Plattformkonflikte | `npx cap update [[HTML_TAG]]` | Erstellt plattformspezifische Konfigurationen neu |
-| Abhängigkeitsprobleme | `npm cache clean --force` | Leert npm-Cache für Neuinstallationen |
-| Plugin-Beschädigung | `npm rebuild` | Erstellt Plugin-Binärdateien neu |
+| Versionskonflikt | `npx cap sync --force` | Zwingt Plugins zur Synchronisation |
+| Plattformkonflikte | `npx cap update <platform>` | Baut plattformspezifische Konfigurationen neu auf |
+| Abhängigkeitsprobleme | `npm cache clean --force` | Leert den npm-Cache für frische Installationen |
+| Plugin-Korruption | `npm rebuild` | Baut Plugin-Binärdateien neu |
 
-Für hartnäckigere Update-Probleme versuchen Sie diese Sequenz:
+Für hartnäckigere Update-Probleme versuchen Sie diese Reihenfolge:
 
-[[CODE_BLOCK]]
+```bash
+npm cache clean --force
+rm -rf node_modules
+npm install
+npx cap sync
+```
 
-### CLI vs. Manuelle Korrekturen
+### CLI vs manuelle Fehlerbehebungen
 
-Während CLI-Befehle oft ausreichen, können einige Situationen manuelle Eingriffe erfordern**Wann CLI verwenden:**
+Während CLI-Befehle oft ausreichend sind, erfordern einige Situationen möglicherweise manuelle Eingriffe.
+
+**Wann CLI verwenden:**
 
 -   Routinemäßige Plugin-Updates
--   Auflösen von Abhängigkeitskonflikten
--   Durchführen von Diagnosen oder Synchronisieren von Plattform-Konfigurationen
+-   Behebung von Abhängigkeitskonflikten
+-   Ausführen von Diagnosen oder Synchronisieren von Plattformkonfigurationen
 
-**Wann manuelle Korrekturen erforderlich sind:**
+**Wann manuelle Behebungen erforderlich sind:**
 
--   Bearbeiten von nativem Plattform-Code
--   Beheben von Merge-Konflikten
+-   Ändern von Code für native Plattformen
+-   Behebung von Merge-Konflikten
 -   Anpassen von Plugin-Einstellungen
--   Migration älterer Plugins auf neuere Versionen
+-   Migrieren älterer Plugins auf neuere Versionen
 
-> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch für die kontinuierliche Auslieferung an unsere Nutzer!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgoapp/)
+> "Wir praktizieren agile Entwicklung und @Capgo ist entscheidend für die kontinuierliche Bereitstellung an unsere Nutzer!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
-> "Nach 4 Jahren mein @Appflow-Abonnement gekündigt. Code-Push schien nie gut zu funktionieren, hoffentlich hat @CapGO es besser im Griff" - LeVar Berry, @levarberry [\[1\]](https://capgoapp/)
+> "Habe mein @Appflow-Abonnement nach 4 Jahren gekündigt. Code-Push schien nie gut zu funktionieren, hoffentlich hat @CapGO das im Griff" - LeVar Berry, @levarberry [\[1\]](https://capgo.app/)
 
-Überprüfen Sie schließlich immer die plattformspezifischen Logs nach der Ausführung von CLI-Befehlen:
+Überprüfen Sie abschließend immer die plattformspezifischen Protokolle nach dem Ausführen von CLI-Befehlen:
 
--   **iOS**: Nutzen Sie [Xcode](https://developerapplecom/xcode/)'s Konsole für detaillierte Logs
--   **Android**: Überprüfen Sie logcat in [Android Studio](https://developerandroidcom/studio)
--   **Web**: Inspizieren Sie die Browser-Entwicklertools
+-   **iOS**: Verwenden Sie die Konsole von [Xcode](https://developer.apple.com/xcode/) für detaillierte Protokolle
+-   **Android**: Überprüfen Sie logcat in [Android Studio](https://developer.android.com/studio)
+-   **Web**: Inspizieren Sie die Entwicklerwerkzeuge Ihres Browsers
 
-Wenn CLI-Befehle das Problem nicht lösen, prüfen Sie das GitHub-Repository des Plugins auf gemeldete Probleme oder Community-Lösungen, bevor Sie manuelle Korrekturen vornehmen
+Wenn CLI-Befehle das Problem nicht lösen, überprüfen Sie das GitHub-Repository des Plugins auf gemeldete Probleme oder von der Community bereitgestellte Lösungen, bevor Sie manuelle Behebungen versuchen.
 
-## [Capgo](https://capgoapp/) Integration
+## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
-Capgo arbeitet nahtlos mit der Capacitor CLI zusammen und ermöglicht [Echtzeit-Plugin-Updates](https://capgoapp/docs/plugin/self-hosted/auto-update) und vereinfacht Wartungsaufgaben für Entwickler
+Capgo arbeitet nahtlos mit dem Capacitor CLI zusammen und ermöglicht [Echtzeit-Plugin-Updates](https://capgo.app/docs/plugin/self-hosted/auto-update) und vereinfacht Wartungsaufgaben für Entwickler.
 
 ### Capgo Plugin-Funktionen
 
-Capgos CLI-Plugin-System liefert beeindruckende Leistungsstatistiken:
+Das CLI-Pluginsystem von Capgo bietet beeindruckende Leistungsstatistiken:
 
--   **235M Updates** erfolgreich ausgeliefert
+-   **23,5 Millionen Updates** erfolgreich bereitgestellt
 -   **82% globale Erfolgsquote** für Updates
--   **95% der aktiven Nutzer** innerhalb von 24 Stunden aktualisiert
--   **434ms** durchschnittliche globale API-Antwortzeit
+-   **95% aktiver Nutzer** innerhalb von 24 Stunden aktualisiert
+-   **434 ms** durchschnittliche globale API-Antwortzeit
 
-Um mit Capgo zu beginnen, führen Sie folgenden Befehl aus:
+Um mit Capgo zu beginnen, führen Sie den folgenden Befehl aus:
 
-[[CODE_BLOCK]]
+```bash
+npx @capgo/cli init
+```
 
-### Plugin-Management-Tools
+### Tools zur Plugin-Verwaltung
 
-Capgo unterstützt die Integration mit beliebten CI/CD-Plattformen wie [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/) und [Jenkins](https://wwwjenkinsio/). Es bietet auch Echtzeit-Analysen zur Verfolgung von Updates, Nutzerakzeptanz, Download-Geschwindigkeiten und Fehlern
+Capgo unterstützt die Integration mit beliebten CI/CD-Plattformen wie [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) und [Jenkins](https://www.jenkins.io/). Es bietet auch Echtzeitanalysen zum Verfolgen von Updates, Benutzerakzeptanz, Downloadgeschwindigkeiten und Fehlern.
 
-| Metrik | Details |
+| Kennzahl | Einzelheiten |
 | --- | --- |
-| Update-Erfolg | Überwachung erfolgreicher Plugin-Updates |
-| Nutzerakzeptanz | Verfolgung der Versionsnutzung über Benutzer hinweg |
-| Download-Geschwindigkeit | 114ms Durchschnitt für 5MB Bundles |
-| Fehlerverfolgung | Identifizierung von Problemen in Echtzeit |
+| Aktualisierungserfolg | Überwachen erfolgreicher Plugin-Aktualisierungen |
+| Benutzerakzeptanz | Nachverfolgen der Versionsnutzung über Benutzer |
+| Downloadgeschwindigkeit | 114 ms Durchschnitt für 5 MB Pakete |
+| Fehlermanagement | Probleme in Echtzeit identifizieren |
 
-> "Capgo ist ein Muss für Entwickler, die produktiver sein wollen. Die Vermeidung von Reviews für Fehlerbehebungen ist goldwert." - Bessie Cooper [\[1\]](https://capgoapp/)
+> "Capgo ist ein unverzichtbares Tool für Entwickler, die produktiver sein wollen. Die Vermeidung von Überprüfungen für Fehlerbehebungen ist goldwert." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Diese Funktionen machen Capgo zu einer effizienten Lösung für das Update-Management
+Diese Funktionen machen Capgo zu einer effizienten Lösung für das Management von Updates.
 
-### Capgo Update-System
+### Capgo Aktualisierungssystem
 
-Capgo gewährleistet die Einhaltung der Apple- und Google-Richtlinien durch Ende-zu-Ende-Verschlüsselung. Die Preise beginnen bei 12$/Monat für einzelne Entwickler, mit Enterprise-Plänen für größere Teams
+Capgo gewährleistet die Einhaltung der Richtlinien von Apple und Google durch die Verwendung von Ende-zu-Ende-Verschlüsselung. Die Preise beginnen bei 12 $/Monat für einzelne Entwickler, mit Unternehmensplänen für größere Teams.
 
-Wichtige Highlights des Update-Systems sind:
+Wichtige Highlights des Aktualisierungssystems sind:
 
--   **Ein-Klick-Rollback** für schnelle Korrekturen
+-   **Rollback mit einem Klick** für schnelle Fehlerbehebungen
 -   **Benutzerverwaltung** für Beta-Tests
--   **[Channel-System](https://capgoapp/docs/plugin/cloud-mode/channel-system/)** für gezielte Updates
--   **Fehlerverfolgung** zur Überwachung von Problemen
+-   **[Kanal-System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** für gezielte Updates
+-   **Fehlermanagement** zur Überwachung von Problemen
 
-Derzeit nutzen **750 Apps** Capgo in Produktion. Die Plattform bietet auch CI/CD-Konfigurationsdienste für 2.600$, um eine reibungslose Integration in Workflows zu gewährleisten. Ihr globales CDN liefert Updates mit einer durchschnittlichen Geschwindigkeit von **114ms** für 5MB Bundles
+Aktuell verwenden **750 Apps** Capgo in der Produktion. Die Plattform bietet auch CI/CD-Konfigurationsdienste für 2.600 $, um eine reibungslose Integration in Arbeitsabläufe zu gewährleisten. Ihr globales CDN liefert Updates mit einer durchschnittlichen Geschwindigkeit von **114 ms** für 5 MB Pakete.
 
-> "Bin zu @Capgo gewechselt, nachdem @AppFlow uns mit einer $5000-Rechnung für das Jahr konfrontiert hat. Liebe Capgo bisher. Danke an @Capgo, es ist ein großartiges Produkt" - jermaine [\[1\]](https://capgoapp/)
+> "Ich bin nach @Capgo gewechselt, nachdem @AppFlow uns mit einer Rechnung von 5000 $ für das Jahr getroffen hat, um weiterzumachen. Ich liebe Capgo bis jetzt. Danke an @Capgo, es ist ein großartiges Produkt." - jermaine [\[1\]](https://capgo.app/)
 
 ## Fazit
 
-### Plugin-Management Zusammenfassung
+### Zusammenfassung des Plugin-Managements
 
-Die Capacitor CLI vereinfacht die Verwaltung von Plugins. In Kombination mit Capgo liefert sie beeindruckende Ergebnisse:
+Die Capacitor CLI vereinfacht, wie Sie Plugins verwalten. In Kombination mit Capgo liefert sie beeindruckende Ergebnisse:
 
--   235M Updates abgeschlossen
--   95% Nutzerakzeptanz innerhalb von 24 Stunden
--   82% globale Erfolgsquote
--   434ms durchschnittliche API-Antwortzeit
+-   23,5 Millionen abgeschlossenen Updates
+-   95 % Benutzerakzeptanz innerhalb von 24 Stunden
+-   82 % globale Erfolgsquote
+-   434 ms durchschnittliche API-Antwortzeit
 
-Diese Zahlen zeigen, wie CLI und Capgo zusammenarbeiten, um reibungslose und effiziente Updates zu gewährleisten
+Diese Zahlen heben hervor, wie die CLI und Capgo zusammenarbeiten, um reibungslose und effiziente Updates zu gewährleisten.
+
+### Nächste Schritte mit Capgo
+
+Capgo kann Ihre Arbeitsabläufe auf die nächste Stufe heben. Es bietet sowohl Cloud- als auch selbstgehostete Optionen, die verschiedenen Bereitstellungsvorlieben gerecht werden.
+
+> "Wir praktizieren agile Entwicklung und @Capgo ist in der Bereitstellung für unsere Benutzer von entscheidender Bedeutung!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+
+Hier ist, was Capgo zu bieten hat:
+
+-   Echtzeitanalysen zur Überwachung der Update-Leistung
+-   Ende-zu-Ende-Verschlüsselung für [sichere Plugin-Aktualisierungen](https://capgo.app/docs/plugin/self-hosted/encrypted-bundles/)
+-   Einfache CI/CD-Integration mit großen Plattformen
+-   Preise, die bei 12 $/Monat für Einzelentwickler beginnen
+
+Mit bereits 750 Produktions-Apps, die sich auf Capgo verlassen, ist es eine bewährte Wahl. Egal, ob Sie Fehler beheben oder neue Funktionen einführen, die Kombination von Capacitor CLI und Capgo bietet Ihnen ein zuverlässiges und effizientes Toolkit für die Anwendungsentwicklung. Beginnen Sie noch heute mit der Nutzung dieser Tools, um Ihre Capacitor-Projekte zu optimieren.

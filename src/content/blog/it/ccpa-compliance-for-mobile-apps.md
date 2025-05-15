@@ -1,8 +1,10 @@
 ---
 slug: ccpa-compliance-for-mobile-apps
-title: モバイルアプリのCCPA準拠
+title: Cumplimiento de CCPA para aplicaciones móviles
 description: >-
-  モバイルアプリ開発者向けのCCPA（カリフォルニア州消費者プライバシー法）への準拠のための重要なステップを探り、ユーザーデータを保護し、プライバシーの権利を維持します。
+  Esplora i passaggi essenziali per gli sviluppatori di app mobili per garantire
+  la conformità al CCPA, proteggendo i dati degli utenti e mantenendo i diritti
+  alla privacy.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -10,7 +12,7 @@ created_at: 2025-04-27T00:40:38.043Z
 updated_at: 2025-04-27T00:44:36.586Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680d75de5a08fca89179eb81-1745714676586.jpg
-head_image_alt: モバイル開発
+head_image_alt: Desarrollo Móvil
 keywords: >-
   CCPA compliance, mobile apps, personal data protection, user rights, data
   security
@@ -19,292 +21,290 @@ published: true
 locale: it
 next_blog: ''
 ---
-**[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) la conformità è obbligatoria per gli sviluppatori di app mobili che raccolgono dati personali dai residenti della California.** Questa legge garantisce agli utenti diritti sui propri dati e impone regole severe su come le app li gestiscono. La non conformità rischia pesanti multe e danni alla reputazione.
+**[CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) compliance is a must for mobile app developers collecting personal data from California residents.** Esta ley otorga a los usuarios derechos sobre sus datos e impone estrictas reglas sobre cómo las aplicaciones los manejan. No cumplir con esta normativa puede resultar en multas elevadas y daños a la reputación.
 
-### Punti Chiave:
+### Puntos Clave:
 
--   **Chi deve conformarsi?** App che soddisfano uno di questi requisiti:
-    -   Oltre 25M$ di fatturato annuo.
-    -   Dati da più di 50.000 californiani.
-    -   50%+ di ricavi dalla vendita di dati personali.
--   **Diritti degli utenti secondo il CCPA:**
-    -   **Diritto di Sapere e Cancellare**: Accedere e cancellare dati personali.
-    -   **Diritto di Opt-Out**: Rifiutare la vendita dei dati.
-    -   **Diritto alla Non-Discriminazione**: Servizio uguale indipendentemente dall'opt-out.
--   **Sanzioni per non conformità:**
-    -   $2.500 per violazione non intenzionale.
-    -   $7.500 per violazione intenzionale.
-    -   $100-$750 per consumatore per violazione dei dati.
+-   **¿Quién debe cumplir?** Aplicaciones que cumplan con cualquiera de estos:
+    -   Más de $25 millones de ingresos anuales.
+    -   Datos de más de 50,000 californianos.
+    -   Más del 50% de los ingresos provienen de la venta de datos personales.
+-   **Derechos de los usuarios bajo el CCPA:**
+    -   **Derecho a Saber y Eliminar**: Acceder y eliminar datos personales.
+    -   **Derecho a Excluirse**: Rechazar la venta de datos.
+    -   **Derecho a No Discriminación**: Servicio igualitario independientemente de la exclusión.
+-   **Penalidades por incumplimiento:**
+    -   $2,500 por violación no intencional.
+    -   $7,500 por violación intencional.
+    -   $100–$750 por consumidor por cada violación de datos.
 
-### Passi per Garantire la Conformità:
+### Pasos para Asegurar el Cumplimiento:
 
-1. **Audit delle Pratiche sui Dati**: Mappare tutti i dati personali raccolti e archiviati.
-2. **Aggiornare le [Privacy Policy](https://capgo.app/dp/)**: Delineare chiaramente l'uso dei dati e i diritti degli utenti.
-3. **Aggiungere Controlli Utente**: Includere opzioni in-app per opt-out e gestione dati.
-4. **Proteggere i Dati**: Utilizzare crittografia, controlli di accesso e audit regolari.
-5. **Rispondere alle Richieste**: Configurare sistemi per gestire le richieste degli utenti entro 45 giorni.
+1.  **Auditar Prácticas de Datos**: Mapear todos los datos personales recolectados y almacenados.
+2.  **Actualizar [Políticas de Privacidad](https://capgo.app/dp/)**: Delimitar claramente el uso de datos y los derechos de los usuarios.
+3.  **Agregar Controles para Usuarios**: Incluir opciones de exclusión y gestión de datos dentro de la aplicación.
+4.  **Proteger Datos**: Usar cifrado, controles de acceso y auditorías regulares.
+5.  **Responder a Solicitudes**: Establecer sistemas para manejar consultas de datos de los usuarios dentro de 45 días.
 
-**Strumenti come [Capgo](https://capgo.app/)** possono semplificare la conformità proteggendo gli aggiornamenti e gestendo le impostazioni sulla privacy degli utenti.
+**Herramientas como [Capgo](https://capgo.app/)** pueden simplificar el cumplimiento al asegurar actualizaciones y gestionar la configuración de privacidad de los usuarios.
 
-**Prossimi Passi Attuabili:**
+**Próximos Pasos Accionables:**
 
--   Condurre un inventario dei dati.
--   Implementare funzionalità dell'app orientate alla privacy.
--   Formare il team sui protocolli di conformità.
+-   Realizar un inventario de datos.
+-   Implementar características de aplicación centradas en la privacidad.
+-   Capacitar a tu equipo sobre los protocolos de cumplimiento.
 
-## Requisiti [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) per App Mobili
+## Requisitos de [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) para Aplicaciones Móviles
 
-### Tipi di Dati Personali
+### Tipos de Datos Personales
 
-Il CCPA protegge diversi tipi di dati personali comunemente raccolti dalle app mobili. Ecco una rapida panoramica:
+El CCPA protege varios tipos de datos personales comúnmente recolectados por aplicaciones móviles. Aquí hay un desglose rápido:
 
-| **Categoria di Dati** | **Esempi** | **Metodo di Raccolta** |
+| **Categoría de Datos** | **Ejemplos** | **Método de Recolección** |
 | --- | --- | --- |
-| Identificatori Dispositivo | IDFA, AAID, indirizzo MAC | Raccolti automaticamente dai sistemi |
-| Dati di Localizzazione | Coordinate GPS, indirizzo IP | Raccolti tramite permessi app |
-| Dati di Utilizzo | Durata sessione, utilizzo funzionalità | Tracciati attraverso analytics |
-| Dettagli Personali | Nome, email, numero di telefono | Forniti tramite form di input utente |
-| Informazioni Finanziarie | Dettagli pagamento, cronologia acquisti | [Raccolti durante transazioni in-app](https://capgo.app/plugins/purchases-capacitor/) |
-| Dati Biometrici | Impronte digitali, pattern Face ID | Acquisiti attraverso funzionalità di sicurezza del dispositivo |
+| Identificadores de Dispositivo | IDFA, AAID, dirección MAC | Recolectados automáticamente por los sistemas |
+| Datos de Ubicación | Coordenadas GPS, dirección IP | Reunidos a través de permisos de la aplicación |
+| Datos de Uso | Duración de sesión, uso de características | Rastreado a través de análisis |
+| Detalles Personales | Nombre, correo electrónico, número de teléfono | Proporcionados a través de formularios de entrada del usuario |
+| Información Financiera | Detalles de pago, historial de compras | [Recolectados durante transacciones en la aplicación](https://capgo.app/plugins/purchases-capacitor/) |
+| Datos Biométricos | Huellas digitales, patrones de Face ID | Capturados a través de funciones de seguridad del dispositivo |
 
-### Diritti degli Utenti
+### Derechos del Usuario
 
-Secondo il CCPA, gli utenti hanno diritti specifici riguardo i loro dati personali:
+Bajo el CCPA, los usuarios tienen derecho a ciertos derechos respecto a sus datos personales:
 
--   **Diritto di Sapere e Cancellare**: Gli utenti possono richiedere informazioni sui dati personali raccolti negli ultimi 12 mesi e chiederne la cancellazione.
--   **Diritto di Opt-Out**: Gli utenti devono poter rifiutare la vendita dei loro dati personali.
--   **Diritto alla Non-Discriminazione**: Gli utenti che esercitano i loro diritti sotto il CCPA non possono essere penalizzati con prezzi più alti o qualità del servizio ridotta.
+-   **Derecho a Saber y Eliminar**: Los usuarios pueden solicitar información sobre los datos personales recolectados en los últimos 12 meses y pedir su eliminación.
+-   **Derecho a Excluirse**: Los usuarios deben poder optar por no participar en la venta de sus datos personales.
+-   **Derecho a No Discriminación**: Los usuarios que ejercen sus derechos bajo el CCPA no pueden ser penalizados con precios más altos o reducción en la calidad del servicio.
 
-### Requisiti per gli Sviluppatori
+### Requisitos para Desarrolladores
 
-Per conformarsi al CCPA, gli sviluppatori devono seguire queste linee guida:
+Para cumplir con el CCPA, los desarrolladores necesitan seguir estas pautas:
 
--   **Sistemi di Verifica**  
-    Utilizzare [autenticazione multi-fattore](https://capgo.app/docs/webapp/mfa/) o metodi simili per confermare l'identità degli utenti che fanno richieste sui dati.
+-   **Sistemas de Verificación**  
+    Utilizar [autenticación multifactor](https://capgo.app/docs/webapp/mfa/) o métodos similares para confirmar la identidad de los usuarios que hacen solicitudes de datos.
     
--   **Canali di Risposta**  
-    Configurare canali dedicati per gestire le richieste degli utenti. Hai una finestra di 45 giorni per rispondere, con possibili estensioni se necessario.
+-   **Canales de Respuesta**  
+    Establecer canales dedicados para manejar solicitudes de usuarios. Tienes un plazo de 45 días para responder, con posibles extensiones si es necesario.
     
--   **Controlli Tecnici**  
-    Assicurarsi che l'app includa le misure tecniche necessarie per gestire e proteggere i dati degli utenti, come delineato in precedenza.
+-   **Controles Técnicos**  
+    Asegurarte de que tu aplicación incluya las medidas técnicas necesarias para gestionar y proteger los datos de los usuarios, como se mencionó anteriormente.
     
--   **Requisiti di Documentazione**  
-    Mantenere registri dettagliati di:
+-   **Requisitos de Documentación**  
+    Mantener registros detallados de lo siguiente:
     
-    -   Attività di raccolta e elaborazione dati
-    -   Richieste degli utenti e relative risposte
-    -   Aggiornamenti alle policy sulla privacy
-    -   Materiali di formazione del personale relativi alla conformità CCPA
+    -   Actividades de recolección y procesamiento de datos
+    -   Solicitudes de usuarios y tus respuestas
+    -   Actualizaciones a políticas de privacidad
+    -   Materiales de capacitación del personal relacionados con el cumplimiento del CCPA
 
-Per aggiornamenti in tempo reale, strumenti come [Capgo](https://capgo.app) possono aiutare a mantenere efficacemente le impostazioni sulla privacy degli utenti.
+Para actualizaciones en vivo, herramientas como [Capgo](https://capgo.app) pueden ayudar a mantener las configuraciones de privacidad de los usuarios de manera efectiva.
 
-I prossimi passi ti guideranno su come integrare questi requisiti nella tua app mobile.
+Los próximos pasos te guiarán sobre cómo integrar estos requisitos en tu aplicación móvil.
 
-## Passi per la Conformità CCPA
+## Pasos para el Cumplimiento del CCPA
 
-### Inventario dei Dati
+### Inventario de Datos
 
-Inizia creando una mappa completa di tutti i dati personali che la tua organizzazione raccoglie. Ecco una suddivisione di esempio:
+Comienza creando un mapa completo de todos los datos personales que tu organización recolecta. Aquí hay un desglose de muestra:
 
-| Categoria di Dati | Punti di Raccolta | Luogo di Archiviazione | Controlli di Accesso |
+| Categoría de Datos | Puntos de Recolección | Ubicación de Almacenamiento | Controles de Acceso |
 | --- | --- | --- | --- |
-| Input Utente | Form di registrazione, aggiornamenti profilo | Database locale, cloud storage | Autenticazione basata su ruoli |
-| Raccolta Automatica | Avvio app, tracciamento sessione | Server analytics | Crittografia, chiavi API |
-| Dati di Terze Parti | Login social, processori pagamenti | Servizi esterni | Accordi di servizio |
-| Dati Dispositivo | Permessi sistema, sensori | Storage dispositivo, server backup | Gestione permessi |
+| Entrada del Usuario | Formularios de registro, actualizaciones de perfil | Base de datos local, almacenamiento en la nube | Autenticación basada en roles |
+| Recolección Automática | Lanzamiento de la aplicación, seguimiento de sesiones | Servidores de análisis | Cifrado, claves de API |
+| Datos de Terceros | Inicio de sesión social, procesadores de pago | Servicios externos | Acuerdos de servicio |
+| Datos del Dispositivo | Permisos del sistema, sensores | Almacenamiento del dispositivo, servidores de respaldo | Gestión de permisos |
 
-Una volta mappati i dati, assicurati che la privacy policy rifletta accuratamente queste pratiche.
+Una vez que tus datos estén mapeados, asegúrate de que tu política de privacidad refleje estas prácticas de manera precisa.
 
-### Aggiornamenti Privacy Policy
+### Actualizaciones de la Política de Privacidad
 
-La tua privacy policy deve comunicare chiaramente come i dati vengono raccolti, utilizzati e gestiti. Includi questi punti chiave:
+Tu política de privacidad necesita comunicar claramente cómo se recolectan, usan y gestionan los datos. Incluye estos puntos clave:
 
--   **Ambito Raccolta Dati**: Specificare le categorie di informazioni personali raccolte.
--   **Scopo Utilizzo**: Spiegare perché ogni tipo di dato viene raccolto e come viene utilizzato.
--   **Pratiche di Condivisione**: Identificare eventuali terze parti che ricevono i dati degli utenti.
--   **Diritti Utente**: Delineare i diritti CCPA e fornire istruzioni chiare per esercitarli.
--   **Metodi di Contatto**: Offrire almeno due modi per gli utenti di inviare richieste, come email o form web.
+-   **Ámbito de Recolección de Datos**: Especificar las categorías de información personal recolectada.
+-   **Propósito de Uso**: Explicar por qué se recolecta cada tipo de dato y cómo se utiliza.
+-   **Prácticas de Compartición**: Identificar cualquier tercero que reciba datos de usuarios.
+-   **Derechos del Usuario**: Delimitar los derechos del CCPA y proporcionar instrucciones claras para ejercerlos.
+-   **Métodos de Contacto**: Ofrecer al menos dos formas en que los usuarios pueden enviar solicitudes, como correo electrónico o un formulario web.
 
-### Funzionalità di Controllo Utente
+### Características de Control del Usuario
 
-Aggiungi strumenti in-app per dare agli utenti controllo sui loro dati:
+Agrega herramientas dentro de la aplicación para dar a los usuarios control sobre sus datos:
 
-**Toggle Privacy** per:
+**Interruptores de Privacidad** para:
 
--   Preferenze raccolta dati
--   Comunicazioni marketing
--   Condivisione dati con terze parti
+-   Preferencias de recolección de datos
+-   Comunicaciones de marketing
+-   Compartición de datos con terceros
 
-**Gestione Consenso**:
+**Gestión de Consentimiento**:
 
--   Fornire opzioni chiare di opt-in e opt-out
--   Registrare le preferenze utente con timestamp
--   Permettere agli utenti di aggiornare facilmente le loro preferenze
+-   Proporcionar opciones claras de optar por participar y excluirse.
+-   Registrar las preferencias de los usuarios con marcas de tiempo.
+-   Permitir que los usuarios actualicen sus preferencias fácilmente.
 
-Queste funzionalità danno potere agli utenti mantenendo l'app conforme.
+Estas características empoderan a los usuarios mientras mantienen tu aplicación en cumplimiento.
 
-### Sistema Richieste Dati
+### Sistema de Solicitud de Datos
 
-Configura un sistema per gestire le richieste degli utenti relative ai loro diritti CCPA. Ecco un framework suggerito:
+Establecer un sistema para manejar solicitudes de los usuarios relacionadas con sus derechos bajo el CCPA. Aquí hay un marco sugerido:
 
-| Tipo Richiesta | Tempo di Risposta | Metodo di Verifica |
+| Tipo de Solicitud | Tiempo de Respuesta | Método de Verificación |
 | --- | --- | --- |
-| Accesso Dati | 45 giorni | Autenticazione a due fattori |
-| Cancellazione Dati | 45 giorni | Password account + conferma email |
-| Esportazione Dati | 45 giorni | Verifica documento d'identità |
-| Conferma Opt-out | Immediata | Login account |
+| Acceso a Datos | 45 días | Autenticación de dos factores |
+| Eliminación de Datos | 45 días | Contraseña de la cuenta + confirmación por correo electrónico |
+| Exportación de Datos | 45 días | Verificación de ID gubernamental |
+| Confirmación de Exclusión | Inmediata | Inicio de sesión de la cuenta |
 
-Questo assicura che le richieste vengano elaborate in modo efficiente e sicuro.
+Esto garantiza que las solicitudes se procesen de manera eficiente y segura.
 
-### Protezione Dati
+### Protección de Datos
 
-Prima del deployment, conferma che queste salvaguardie siano in atto:
+Antes de la implementación, confirma que se hayan establecido estas salvaguardias:
 
--   **Crittografia**: Proteggere i dati in transito e a riposo.
--   **Controllo Accessi**: Implementare accesso basato su ruoli.
--   **Raccolta Dati Minimizzata**: Raccogliere solo ciò che è necessario.
--   **Audit**: Condurre revisioni trimestrali delle tue pratiche sui dati.
--   **Risposta Violazioni**: Mantenere una procedura documentata per gestire violazioni dei dati.
+-   **Cifrado**: Proteger datos en tránsito y en reposo.
+-   **Control de Acceso**: Implementar acceso basado en roles.
+-   **Recolección de Datos Minimizada**: Recolectar solo lo necesario.
+-   **Auditorías**: Realizar revisiones trimestrales de tus prácticas de datos.
+-   **Respuesta a Incidentes**: Mantener un procedimiento documentado para manejar violaciones de datos.
 
-Per aggiornamenti in tempo reale, assicurati che le impostazioni sulla privacy rimangano intatte. Strumenti come Capgo possono assistere fornendo crittografia end-to-end durante il deployment.
+Para actualizaciones en vivo, asegúrate de que las configuraciones de privacidad permanezcan intactas. Herramientas como Capgo pueden ayudar proporcionando cifrado de extremo a extremo durante la implementación.
 
-## Rischi privacy trascurati presentati dall'app mobile
+## Riesgos de privacidad pasados por alto presentados por aplicaciones móviles
 
 <iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Strumenti per la Conformità CCPA
+## Herramientas para el Cumplimiento del CCPA
 
-Gli strumenti efficaci sono essenziali per mantenere la protezione dei dati e soddisfare i requisiti CCPA. Gli strumenti giusti non solo aiutano a salvaguardare i dati degli utenti ma semplificano anche gli sforzi di conformità.
+Las herramientas efectivas son esenciales para mantener la protección de datos y cumplir con los requisitos del CCPA. Las herramientas adecuadas no solo ayudan a salvaguardar los datos de los usuarios, sino que también simplifican los esfuerzos de cumplimiento.
 
-### Aggiornamenti [Capgo](https://capgo.app/)
+### Actualizaciones de [Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/680d75de5a08fca89179eb81/002013533a2d2ba7b874d9490aa8d76e.jpg)
 
-Capgo fornisce aggiornamenti app sicuri ed efficienti che si allineano con i requisiti CCPA. Utilizzando la crittografia end-to-end, assicura che i dati sensibili rimangano protetti durante gli aggiornamenti. Impressionantemente, Capgo mantiene il 95% degli utenti attivi aggiornati entro 24 ore [\[1\]](https://capgo.app/).
+Capgo proporciona actualizaciones de aplicaciones seguras y eficientes que se alinean con los requisitos del CCPA. Al utilizar cifrado de extremo a extremo, asegura que los datos sensibles permanezcan protegidos durante las actualizaciones. Impresionantemente, Capgo mantiene el 95% de los usuarios activos actualizados dentro de las 24 horas [\[1\]](https://capgo.app/).
 
-Ecco cosa offre Capgo per la conformità:
+Aquí está lo que Capgo ofrece para el cumplimiento:
 
-| Funzionalità | Come Aiuta con la Conformità |
+| Característica | Cómo Ayuda con el Cumplimiento |
 | --- | --- |
-| **Crittografia End-to-End** | Protegge i dati utente durante gli aggiornamenti |
-| **Capacità di Rollback** | Ripristina rapidamente gli aggiornamenti in caso di problemi |
-| **Assegnazione Utenti** | Distribuisce aggiornamenti privacy mirati |
-| **Dashboard Analytics** | Monitora aggiornamenti e coinvolgimento utenti |
-| **[Sistema dei Canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Testa aggiornamenti con gruppi specifici di utenti |
+| **Cifrado de Extremo a Extremo** | Protege datos de usuario durante las actualizaciones |
+| **Capacidad de Reversión** | Restaura rápidamente actualizaciones si ocurren problemas |
+| **Asignación de Usuarios** | Proporciona actualizaciones de privacidad específicas |
+| **Panel de Análisis** | Monitorea actualizaciones y participación de usuarios |
+| **[Sistema de Canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Prueba actualizaciones con grupos específicos de usuarios |
 
-Capgo funziona perfettamente insieme agli strumenti CI/CD per automatizzare gli aggiornamenti di conformità.
+Capgo trabaja en conjunto con herramientas CI/CD para automatizar las actualizaciones de cumplimiento.
 
-### Strumenti CI/CD
+### Herramientas CI/CD
 
-Strumenti CI/CD come [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), e [Jenkins](https://www.jenkins.io/) riducono gli errori manuali e accelerano il deployment di aggiornamenti critici. Questi strumenti assicurano che gli aggiornamenti sulla privacy vengano distribuiti efficientemente mantenendo gli standard di conformità.
+Las herramientas CI/CD como [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), y [Jenkins](https://www.jenkins.io/) reducen errores manuales y aceleran la implementación de actualizaciones críticas. Estas herramientas aseguran que las actualizaciones de privacidad se implementen de manera eficiente mientras se mantienen los estándares de cumplimiento.
 
-Per chi cerca opzioni più personalizzabili, gli strumenti open-source sono un'ottima alternativa.
+Para aquellos que buscan opciones más personalizables, las herramientas de código abierto son una gran alternativa.
 
-### Soluzioni Open-Source
+### Soluciones de Código Abierto
 
-Gli strumenti open-source offrono flessibilità e trasparenza, permettendoti di adattare la gestione della conformità alle esigenze della tua app. Beneficiano anche di pratiche verificate dalla comunità, rendendoli un'opzione affidabile.
+Las herramientas de código abierto ofrecen flexibilidad y transparencia, permitiéndote adaptar la gestión de cumplimiento a las necesidades de tu aplicación. También se benefician de prácticas validadas por la comunidad, lo que las convierte en una opción confiable.
 
-Quando scegli strumenti per la conformità CCPA, concentrati su funzionalità come:
+Al elegir herramientas para el cumplimiento del CCPA, enfócate en características como:
 
--   Controlli dettagliati dei permessi per i membri del team
--   Log di audit per tracciare le attività di conformità
--   Controlli automatizzati durante il deployment
--   Crittografia per i dati sia a riposo che in transito
--   Strumenti efficaci per gestire le richieste di dati degli utenti
+-   Controles de permiso detallados para miembros del equipo
+-   Registros de auditoría para rastrear actividades de cumplimiento
+-   Verificaciones automatizadas durante la implementación
+-   Cifrado de datos tanto en reposo como en tránsito
+-   Herramientas efectivas para gestionar solicitudes de datos de usuarios
 
-## Gestione Continua della Conformità
+## Gestión Continua del Cumplimiento
 
-Mantenere la conformità con il CCPA non è un'attività una tantum. Richiede monitoraggio continuo e aggiustamenti al variare delle normative.
+Mantenerse en cumplimiento con el CCPA no es una tarea única. Requiere monitoreo continuo y ajustes a medida que cambian las regulaciones.
 
-### Controlli di Conformità
+### Verificaciones de Cumplimiento
 
-Rivedere regolarmente i tuoi processi aiuta a individuare e correggere i problemi tempestivamente. Automatizzare queste revisioni con strumenti CI/CD può rendere il processo più fluido, concentrandosi su aree come:
+Revisar regularmente tus procesos ayuda a detectar y corregir problemas tempranamente. Automatizar estas revisiones con herramientas CI/CD puede hacer que el proceso sea más fluido, enfocándose en áreas como:
 
--   **Pratiche di raccolta dati**
--   **Accuratezza privacy policy**
--   **Gestione diritti utente**
--   **Misure di sicurezza**
--   **Conformità servizi di terze parti**
+-   **Prácticas de recolección de datos**
+-   **Precisión de la política de privacidad**
+-   **Gestión de derechos de usuario**
+-   **Medidas de seguridad**
+-   **Cumplimiento de servicios de terceros**
 
-La dashboard analytics di Capgo può aiutare a tracciare i deployment degli aggiornamenti e il coinvolgimento degli utenti, rendendo più facile rimanere al passo con i cambiamenti relativi alla privacy. Queste revisioni preparano anche il terreno per un'efficace formazione del team sulla conformità.
-
-### Formazione del Team
+El panel de análisis de Capgo puede ayudar a rastrear el despliegue de actualizaciones y la participación de usuarios, facilitando el seguimiento de los cambios relacionados con la privacidad. Estas revisiones también preparan el terreno para una capacitación efectiva del equipo sobre el cumplimiento.
 
 Assicurati che il tuo team comprenda i requisiti del CCPA. Il tuo programma di formazione dovrebbe includere:
 
--   **Onboarding Iniziale:** Formazione obbligatoria per tutti i nuovi dipendenti
--   **Aggiornamenti Regolari:** Sessioni periodiche per coprire i cambiamenti nelle normative e le migliori pratiche
--   **Guida Specifica per Ruolo:** Istruzioni personalizzate per sviluppatori, staff di supporto e product manager su codifica sicura, diritti degli utenti e controlli di conformità
+-   **Orientamento Iniziale:** Formazione obbligatoria per tutti i nuovi dipendenti
+-   **Aggiornamenti Regolari:** Sessioni periodiche per coprire le modifiche alle normative e le migliori pratiche
+-   **Indicazioni Specifiche per Ruolo:** Istruzioni personalizzate per sviluppatori, personale di supporto e product manager su codifica sicura, diritti degli utenti e controlli di conformità
 
 ### Aggiornamenti Normativi
 
-Mantieniti aggiornato sui cambiamenti seguendo i canali normativi ufficiali e i forum del settore. Utilizza strumenti di deployment automatizzati per implementare gli aggiornamenti in modo rapido e uniforme. Capgo può aiutare a garantire che gli aggiornamenti siano sia veloci che verificabili. Inoltre, imposta un piano di risposta rapida per gestire gli aggiornamenti critici, garantendo azioni tempestive e una comunicazione chiara con gli utenti.
+Resta aggiornato con le modifiche seguendo i canali normativi ufficiali e i forum di settore. Utilizza strumenti di distribuzione automatizzati per implementare aggiornamenti in modo rapido e coerente. Capgo può aiutarti a garantire che gli aggiornamenti siano sia rapidi che auditabili. Inoltre, predisponi un piano di risposta rapida per gestire aggiornamenti critici, garantendo azioni tempestive e una comunicazione chiara con gli utenti.
 
 ## Riepilogo
 
-Mantieni l'allineamento con i requisiti CCPA mantenendo una supervisione vigile e utilizzando strumenti efficaci per proteggere i dati degli utenti senza compromettere l'esperienza dell'app. Di seguito, troverai passaggi attuabili derivati dai metodi delineati in precedenza.
+Rimani allineato con i requisiti del CCPA mantenendo una vigilanza attenta e utilizzando strumenti efficaci per proteggere i dati degli utenti senza compromettere l'esperienza dell'app. Di seguito troverai passaggi praticabili derivati dai metodi esposti in precedenza.
 
-### Elementi d'Azione
+### Elementi di Azione
 
 Ecco i passaggi chiave per garantire la conformità al CCPA:
 
--   **Valutazione Inventario Dati**: Identifica e documenta tutti i punti in cui vengono raccolti i dati personali.
--   **Implementazione Privacy Policy**: Crea e condividi avvisi sulla privacy chiari e facili da comprendere.
--   **Revisione Protocolli dei Diritti**: Rafforza i sistemi per la gestione dei diritti degli utenti.
--   **Misure di Sicurezza**: Utilizza una forte crittografia e altre protezioni per proteggere i dati.
--   **Protocollo di Formazione del Team**: Programma sessioni di formazione regolari per mantenere il tuo team informato sulle migliori pratiche di conformità.
+-   **Valutazione dell'Inventario Dati:** Identifica e documenta tutti i punti in cui vengono raccolti dati personali.
+-   **Implementazione della Politica sulla Privacy:** Crea e condividi avvisi sulla privacy chiari e facili da comprendere.
+-   **Revisione dei Protocollo sui Diritti:** Rafforza i sistemi per la gestione dei diritti degli utenti.
+-   **Misure di Sicurezza:** Utilizza crittografia forte e altre misure di protezione per salvaguardare i dati.
+-   **Protocollo di Formazione del Team:** Pianifica sessioni di formazione regolari per mantenere il tuo team informato sulle migliori pratiche di conformità.
 
-Questi passaggi forniscono una roadmap chiara per gestire efficacemente la privacy degli utenti.
+Questi passaggi forniscono una chiara tabella di marcia per gestire efficacemente la privacy degli utenti.
 
 ### Strumenti di Aggiornamento
 
-Per implementare questi passaggi in modo efficiente, considera l'utilizzo di strumenti di aggiornamento avanzati che danno priorità all'integrità dei dati. Per esempio, Capgo supporta aggiornamenti globali con risultati impressionanti - fornendo 947,6 milioni di aggiornamenti in tutto il mondo e raggiungendo un tasso di aggiornamento del 95% degli utenti attivi entro 24 ore [\[1\]](https://capgo.app/).
+Per implementare questi passaggi in modo efficiente, considera di utilizzare strumenti di aggiornamento avanzati che danno priorità all'integrità dei dati. Ad esempio, Capgo supporta aggiornamenti globali con risultati impressionanti - consegnando 947,6 milioni di aggiornamenti in tutto il mondo e raggiungendo un tasso di aggiornamento degli utenti attivi del 95% entro 24 ore [\[1\]](https://capgo.app/).
 
-> "Pratichiamo lo sviluppo agile e Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Pratichiamo lo sviluppo agile e Capgo è fondamentale per fornire continuità ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Strumenti come Capgo possono automatizzare gli aggiornamenti relativi alla conformità e garantire che la tua applicazione rimanga aggiornata con il minimo sforzo.
 
 ### Prossimi Passi
 
-Per sviluppare queste pratiche, inizia:
+Per costruire su queste pratiche, inizia con:
 
--   **Verificando le Pratiche Attuali**: Rivedi i tuoi attuali processi di raccolta dati e privacy.
--   **Implementando gli Strumenti**: Integra strumenti di gestione focalizzati sulla conformità.
--   **Creando Documentazione**: Sviluppa documentazione dettagliata sulla conformità.
--   **Preparando il Tuo Team**: Pianifica e conduci sessioni di formazione per mantenere il tuo team pronto.
+-   **Audit delle Pratiche Correnti:** Rivedi i tuoi attuali processi di raccolta dati e privacy.
+-   **Implementazione di Strumenti:** Integra strumenti di gestione focalizzati sulla conformità.
+-   **Creazione della Documentazione:** Sviluppa documentazione dettagliata sulla conformità.
+-   **Preparazione del Tuo Team:** Pianifica e conduci sessioni di formazione per tenere il tuo team pronto.
 
 ## FAQ
 
 ::: faq
-### Come possono gli sviluppatori di app mobile determinare se la loro app deve conformarsi al California Consumer Privacy Act (CCPA)?
+### Come possono gli sviluppatori di app mobili determinare se la loro app deve conformarsi alla California Consumer Privacy Act (CCPA)?
 
-Per determinare se la tua app mobile deve conformarsi al **California Consumer Privacy Act (CCPA)**, considera i seguenti fattori chiave:
+Per determinare se la tua app mobile deve conformarsi alla **California Consumer Privacy Act (CCPA)**, considera i seguenti fattori chiave:
 
-1.  **Dimensione dell'Azienda**: La tua app o l'azienda che la sviluppa ha un fatturato lordo annuo superiore a 25 milioni di dollari?
-2.  **Gestione dei Dati**: La tua app acquista, vende o condivide le informazioni personali di 50.000 o più residenti, famiglie o dispositivi della California annualmente?
-3.  **Ricavi dai Dati**: La tua app deriva il 50% o più dei suoi ricavi annuali dalla vendita di informazioni personali dei residenti della California?
+1.  **Dimensione dell'Azienda:** La tua app o l'azienda dietro di essa ha ricavi lordi annuali superiori a 25 milioni di dollari?
+2.  **Gestione dei Dati:** La tua app acquista, vende o condivide le informazioni personali di 50.000 o più residenti, nuclei familiari o dispositivi californiani ogni anno?
+3.  **Ricavi dai Dati:** La tua app ricava il 50% o più del suo fatturato annuale dalla vendita delle informazioni personali dei residenti californiani?
 
-Se la tua app o azienda soddisfa uno qualsiasi di questi criteri, è probabilmente soggetta ai requisiti CCPA. Inoltre, anche se la tua app non soddisfa direttamente queste soglie, è buona pratica rivedere le tue pratiche di raccolta dati e privacy per garantire la conformità con le più ampie aspettative sulla privacy.
+Se la tua app o azienda soddisfa uno di questi criteri, è probabile che sia soggetta ai requisiti del CCPA. Inoltre, anche se la tua app non soddisfa direttamente queste soglie, è una buona prassi rivedere i tuoi processi di raccolta dati e privacy per garantire la conformità alle aspettative di privacy più ampie.
 
-Per gli sviluppatori che utilizzano **Capgo**, la sua soluzione di aggiornamento live per le app Capacitor garantisce aggiornamenti senza interruzioni mantenendo la conformità sia con le linee guida Apple che Android, che possono supportare la strategia di conformità complessiva della tua app.
+Per gli sviluppatori che utilizzano **Capgo**, la sua soluzione di aggiornamento live per app Capacitor garantisce aggiornamenti senza interruzioni mantenendo la conformità con sia le linee guida di Apple che quelle di Android, supportando così la strategia complessiva di conformità della tua app.
 :::
 
 ::: faq
-### Come possono le app mobile garantire la conformità al California Consumer Privacy Act (CCPA) proteggendo i dati degli utenti?
+### Come possono le app mobili garantire la conformità con la California Consumer Privacy Act (CCPA) proteggendo i dati degli utenti?
 
-Per conformarsi al **California Consumer Privacy Act (CCPA)** e proteggere i dati degli utenti, le app mobile dovrebbero concentrarsi su alcune pratiche chiave:
+Per conformarsi alla **California Consumer Privacy Act (CCPA)** e proteggere i dati degli utenti, le app mobili dovrebbero concentrarsi su alcune pratiche chiave:
 
--   **Trasparenza nella Raccolta Dati**: Informare chiaramente gli utenti sui tipi di dati raccolti, lo scopo della raccolta e come verranno utilizzati.
--   **Fornire Diritti agli Utenti**: Implementare funzionalità che permettano agli utenti di accedere, cancellare o rinunciare alla vendita dei loro dati personali, come richiesto dal CCPA.
--   **Rafforzare la Sicurezza dei Dati**: Utilizzare [soluzioni di crittografia e archiviazione sicura](https://capgo.app/docs/cli/migrations/encryption/) per proteggere le informazioni degli utenti da accessi o violazioni non autorizzati.
+-   **Trasparenza nella Raccolta dei Dati:** Informa chiaramente gli utenti sui tipi di dati raccolti, sullo scopo della raccolta e su come saranno utilizzati.
+-   **Fornire Diritti agli Utenti:** Implementa funzionalità che consentano agli utenti di accedere, eliminare o rinunciare alla vendita dei propri dati personali, come richiesto dal CCPA.
+-   **Rafforzare la Sicurezza dei Dati:** Utilizza soluzioni di [crittografia e archiviazione sicura](https://capgo.app/docs/cli/migrations/encryption/) per proteggere le informazioni degli utenti da accessi non autorizzati o violazioni.
 
-Inoltre, strumenti come **Capgo** possono migliorare gli sforzi di conformità della tua app consentendo aggiornamenti istantanei per affrontare vulnerabilità di sicurezza o modifiche relative alla privacy senza richiedere approvazioni dell'app store. Questo garantisce che la tua app rimanga conforme in tempo reale offrendo esperienze utente senza interruzioni. Consulta sempre esperti legali per garantire la piena aderenza ai requisiti CCPA.
+Inoltre, strumenti come **Capgo** possono migliorare gli sforzi di conformità della tua app abilitando aggiornamenti istantanei per affrontare vulnerabilità di sicurezza o modifiche relative alla privacy senza la necessità di approvazioni da parte degli app store. Questo garantisce che la tua app rimanga conforme in tempo reale mentre offre esperienze senza interruzioni agli utenti. Consulta sempre esperti legali per garantire la piena conformità ai requisiti del CCPA.
 :::
 
 ::: faq
-### Come impatta il CCPA sull'uso dei servizi di terze parti da parte degli sviluppatori di app mobile?
+### Qual è l'impatto della CCPA sull'uso di servizi di terze parti da parte degli sviluppatori di app mobili?
 
-Il California Consumer Privacy Act (CCPA) richiede agli sviluppatori di app mobile di garantire che qualsiasi servizio di terze parti che utilizzano rispetti le sue normative sulla privacy dei dati. Ciò significa che gli sviluppatori devono valutare attentamente come i fornitori di terze parti gestiscono i dati degli utenti, assicurandosi che seguano le linee guida CCPA per la raccolta, l'archiviazione e la condivisione dei dati. Inoltre, gli sviluppatori dovrebbero stabilire accordi chiari con questi fornitori per proteggere i diritti degli utenti, come la possibilità di accedere, cancellare o rinunciare alla raccolta dei dati.
+La California Consumer Privacy Act (CCPA) richiede agli sviluppatori di app mobili di garantire che qualsiasi servizio di terze parti utilizzato sia conforme alle sue normative sulla privacy dei dati. Ciò significa che gli sviluppatori devono valutare attentamente come i fornitori di terze parti gestiscono i dati degli utenti, assicurandosi che seguano le linee guida del CCPA per la raccolta, l'archiviazione e la condivisione dei dati. Inoltre, gli sviluppatori dovrebbero stabilire accordi chiari con questi fornitori per proteggere i diritti degli utenti, come la possibilità di accedere, eliminare o rinunciare alla raccolta dei dati.
 
-Se stai utilizzando strumenti come Capgo per gestire gli aggiornamenti delle app, è essenziale confermare che questi servizi si allineino con i requisiti CCPA. Capgo, per esempio, supporta la gestione sicura dei dati con funzionalità come la crittografia end-to-end, garantendo la conformità mentre offre aggiornamenti in tempo reale per la tua app. Collaborando con fornitori conformi, gli sviluppatori possono mantenere la fiducia ed evitare potenziali problemi legali ai sensi del CCPA.
+Se stai utilizzando strumenti come Capgo per gestire gli aggiornamenti delle app, è essenziale confermare che questi servizi siano allineati con i requisiti del CCPA. Capgo, ad esempio, supporta la gestione sicura dei dati con funzionalità come la crittografia end-to-end, garantendo conformità mentre offre aggiornamenti in tempo reale per la tua app. Collaborando con fornitori conformi, gli sviluppatori possono mantenere la fiducia e evitare potenziali problemi legali ai sensi del CCPA.
 :::

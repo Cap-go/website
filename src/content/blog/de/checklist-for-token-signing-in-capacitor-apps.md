@@ -1,10 +1,10 @@
 ---
 slug: checklist-for-token-signing-in-capacitor-apps
-title: Capacitor 앱의 토큰 서명 체크리스트
+title: Checkliste für die Token-Signierung in Capacitor-Apps
 description: >-
-  Befolgen Sie diese umfassende Checkliste für die sichere Token-Signierung in
-  Capacitor-Anwendungen, um Datenintegrität und die Einhaltung amerikanischer
-  Standards zu gewährleisten.
+  Befolgen Sie diese umfassende Checkliste für die sichere Token-signierung in
+  Capacitor-Apps, um die Datenintegrität und die Einhaltung der US-Standards zu
+  gewährleisten.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,140 +21,140 @@ published: true
 locale: de
 next_blog: ''
 ---
-
-Token-Signierung ist essenziell für die Sicherung von [Capacitor](https://capacitorjscom/) Apps, gewährleistet Datenintegrität, Authentifizierung und Einhaltung der US-Sicherheitsstandards. Dieser Leitfaden bietet eine übersichtliche Checkliste für Einrichtung, Implementierung und Risikomanagement.
+Token-Signierung ist entscheidend für die Sicherheit von [Capacitor](https://capacitorjs.com/) Apps, um Datenintegrität, Authentifizierung und die Einhaltung der US-Sicherheitsstandards zu gewährleisten. Dieser Leitfaden bietet eine klare Checkliste für die Einrichtung, Implementierung und Risikomanagement.
 
 **Wichtige Schritte zur Token-Signierung:**
 
--   Wählen Sie eine sichere kryptographische Bibliothek (z.B. [CryptoJS](https://cryptojsgitbookio/docs), [jose](https://wwwnpmjscom/package/jose), [libsodium](https://doclibsodiumorg/))
--   Nutzen Sie sichere Schlüsselspeicherung (iOS: [Secure Enclave](https://supportapplecom/guide/security/secure-enclave-sec59b0b31ff/web)/[Keychain](https://enwikipediaorg/wiki/Keychain_\(software\)); Android: [Keystore](https://developerandroidcom/privacy-and-security/keystore))
--   Definieren Sie Token-Payload-Felder (`iss`, `exp`, `sub`, benutzerdefinierte Ansprüche)
--   Wählen Sie einen Signieralgorithmus (HS256, RS256, ES256)
--   Signieren und verifizieren Sie Tokens sicher
+-   Wählen Sie eine sichere kryptografische Bibliothek (z. B. [CryptoJS](https://cryptojs.gitbook.io/docs), [jose](https://www.npmjs.com/package/jose), [libsodium](https://doc.libsodium.org/)).
+-   Verwenden Sie sichere Schlüsselablage (iOS: [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/web)/[Keychain](https://en.wikipedia.org/wiki/Keychain_\(software\)); Android: [Keystore](https://developer.android.com/privacy-and-security/keystore)).
+-   Definieren Sie die Payload-Felder des Tokens (`iss`, `exp`, `sub`, benutzerdefinierte Ansprüche).
+-   Wählen Sie einen Signaturalgorithmus (HS256, RS256, ES256).
+-   Signieren und verifizieren Sie Tokens sicher.
 
-**Sicherheits-Best-Practices:**
+**Sicherheitsbest Practices:**
 
--   Setzen Sie die Token-Ablaufzeit auf 15 Minuten
--   Rotieren Sie Signierungsschlüssel alle 30 Tage
--   Validieren Sie alle Token-Felder
--   Schützen Sie private Schlüssel in plattformspezifischen sicheren Speichern
+-   Setzen Sie die Token-Ablaufzeit auf 15 Minuten.
+-   Rotieren Sie die Signaturschlüssel alle 30 Tage.
+-   Validieren Sie alle Token-Felder.
+-   Schützen Sie private Schlüssel in plattformspezifischen sicheren Speichern.
 
 **Live-Updates:**
 
--   Verwenden Sie signierte Tokens zur [Absicherung von Updates](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)
--   Aktivieren Sie Rollback-Optionen für kompromittierte Updates
--   Überwachen Sie Nutzerengagement und Update-Erfolgsraten
+-   Verwenden Sie signierte Tokens, um [Updates zu sichern](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Aktivieren Sie Rollback-Optionen für kompromittierte Updates.
+-   Überwachen Sie das Engagement der Benutzer und die Erfolgsquoten der Updates.
 
-**Compliance-Anforderungen:**
+**Einhaltungsanforderungen:**
 
--   Ausrichtung an US-Vorgaben wie CCPA, HIPAA, NIST SP 800-63 und FIPS 140-2
--   Verschlüsseln Sie Tokens mit sensiblen Daten und gewährleisten Sie sicheres Schlüsselmanagement
+-   Richten Sie sich nach US-Vorgaben wie CCPA, HIPAA, NIST SP 800‑63 und FIPS 140‑2.
+-   Verschlüsseln Sie Tokens, die sensible Daten enthalten, und stellen Sie ein sicheres Schlüsselmanagement sicher.
 
-Token-Signierung gewährleistet sichere Live-Updates unter Einhaltung regulatorischer Standards. Befolgen Sie diese Schritte zum Schutz Ihrer App und Nutzer.
+Token-Signierung gewährleistet sichere Live-Updates, während sie regulatorische Standards erfüllt. Befolgen Sie diese Schritte, um Ihre App und Benutzer zu schützen.
 
-## JWT-Token mit RSA-Public und Private Key signieren und validieren
+## Signieren und Validieren von JWT-Token mit RSA-öffentlich und ...
 
-## Erforderliche Einrichtung für Token-Signierung
+## Erforderliche Einrichtung für die Token-Signierung
 
-Für eine sichere Token-Signierung konzentrieren Sie sich auf zwei Hauptbereiche:
+Um eine sichere Token-Signierung zu gewährleisten, konzentrieren Sie sich auf zwei Schlüsselbereiche:
 
-1.  **Auswahl und Validierung Ihres kryptographischen Toolkits**:
-    
-    -   Wählen Sie eine zuverlässige Bibliothek wie _CryptoJS_, _jose_ oder _libsodium_
-    -   Bestätigen Sie, dass die Bibliothek aktiv gepflegt wird und regelmäßige Sicherheitsaudits durchläuft
-    -   Prüfen Sie deren Akzeptanz in der Entwickler-Community
-    -   Überprüfen Sie die Schwachstellenhistorie zur Risikobewertung
+1.  **Auswahl und Validierung Ihres kryptografischen Werkzeugs**:
 
-2.  **Implementierung sicherer Schlüsselspeicherung**:
-    
-    -   Für iOS, nutzen Sie Secure Enclave oder Keychain
-    -   Für Android, verlassen Sie sich auf das Keystore-System
-    -   Prüfen Sie die Einhaltung der FIPS 140-2 Standards
-    -   Stellen Sie sicher, dass die Lösung eine Common Criteria Zertifizierung besitzt
+    -   Wählen Sie eine zuverlässige Bibliothek wie _CryptoJS_, _jose_ oder _libsodium_.
+    -   Bestätigen Sie, dass die Bibliothek aktiv gewartet wird und regelmäßigen Sicherheitsprüfungen unterzogen wird.
+    -   Informieren Sie sich über deren Verbreitung innerhalb der Entwickler-Community.
+    -   Überprüfen Sie die Schwachstellengeschichte, um potenzielle Risiken zu bewerten.
+2.  **Implementierung eines sicheren Schlüsselmanagements**:
 
-Diese Entscheidungen spielen eine kritische Rolle bei der Aufrechterhaltung von **Authentifizierung** und **Integrität**. Sie stellen sicher, dass jeder signierte Token mit US-Compliance-Standards übereinstimmt und sowohl aktuelle als auch zukünftige Sicherheitsanforderungen unterstützt.
+    -   Verwenden Sie für iOS Secure Enclave oder Keychain.
+    -   Verlassen Sie sich für Android auf das Keystore-System.
+    -   Überprüfen Sie die Einhaltung der FIPS 140-2 Standards.
+    -   Stellen Sie sicher, dass die Lösung eine Common Criteria-Zertifizierung hat.
 
-In Systemen mit Live-Updates haben diese Praktiken eine 95%ige Erfolgsrate bei Deployments gezeigt [\[1\]](https://capgoapp/)
+Diese Entscheidungen spielen eine entscheidende Rolle für die **Authentifizierung** und **Integrität**. Sie stellen sicher, dass jedes signierte Token mit den US-Einhaltungsstandards übereinstimmt und sowohl die aktuellen als auch die zukünftigen Sicherheitsbedürfnisse unterstützt.
 
-## Implementierungsschritte der Token-Signierung
+In Systemen, die Live-Updates erfordern, hat die Einhaltung dieser Praktiken eine Erfolgsquote von 95% bei Bereitstellungen gezeigt [\[1\]](https://capgo.app/).
 
-Für eine sichere Token-Signierung und -Verifizierung befolgen Sie diese Schritte:
+## Schritte zur Implementierung der Token-Signierung
 
--   **Definieren Sie die Token-Payload-Felder**: Fügen Sie Felder wie `iss` (Aussteller), `exp` (Ablauf), `sub` (Betreff) und benötigte benutzerdefinierte Ansprüche hinzu
--   **Wählen Sie einen Signieralgorithmus**: Entscheiden Sie zwischen Optionen wie HS256 oder RS256 und konfigurieren Sie entsprechend
--   **Behandeln Sie den privaten Schlüssel sicher**: Laden oder generieren Sie den privaten Schlüssel in **Keychain** für iOS oder **Keystore** für Android
--   **Signieren Sie den Token**: Verwenden Sie Ihre bevorzugte kryptographische Bibliothek zur Token-Signierung
--   **Verifizieren Sie die Token-Signatur**: Validieren Sie immer die Signatur vor der Verarbeitung jeglicher Update-Payload
+Um eine sichere Token-Signierung und -Verifizierung zu gewährleisten, befolgen Sie diese Schritte:
 
-Diese Schritte helfen, die Sicherheit und Zuverlässigkeit Ihres tokenbasierten Live-Update-Prozesses zu gewährleisten.
+-   **Definieren Sie die Payload-Felder des Tokens**: Fügen Sie Felder wie `iss` (Aussteller), `exp` (Ablauf), `sub` (Subjekt) und alle benötigten benutzerdefinierten Ansprüche hinzu.
+-   **Wählen Sie einen Signaturalgorithmus**: Entscheiden Sie sich zwischen Optionen wie HS256 oder RS256 und konfigurieren Sie ihn entsprechend.
+-   **Behandeln Sie den privaten Schlüssel sicher**: Laden oder generieren Sie den privaten Schlüssel in **Keychain** für iOS oder **Keystore** für Android.
+-   **Signieren Sie das Token**: Verwenden Sie Ihre bevorzugte kryptografische Bibliothek, um das Token zu signieren.
+-   **Überprüfen Sie die Signatur des Tokens**: Validieren Sie stets die Signatur, bevor Sie ein Update-Payload verarbeiten.
+
+Diese Schritte helfen, die Sicherheit und Zuverlässigkeit Ihres tokenbasierten Live-Update-Prozesses aufrechtzuerhalten.
 
 ## Sicherheitsrichtlinien und Risiken
 
-Bei der Implementierung der Signierung ist es wichtig, potenzielle Missbräuche und Schwachstellen zu adressieren. So bleiben Sie sicher:
+Bei der Implementierung der Signierung ist es entscheidend, potenzielle Fehlanwendungen und Schwachstellen zu adressieren. So bleiben Sie sicher:
 
-### Token-Sicherheitsregeln
+### Regeln zur Token-Sicherheit
 
--   Setzen Sie die Token-Ablaufzeit auf maximal **15 Minuten**
--   Rotieren Sie Signierungsschlüssel alle **30 Tage** zur Reduzierung der Exposition
--   Stellen Sie sicher, dass alle Token-Felder vor der Verarbeitung validiert werden
--   Speichern Sie private Schlüssel ausschließlich in **sicheren Plattform-Keystores**### Häufige Sicherheitsrisiken
+-   Setzen Sie die Token-Ablaufzeit auf maximal **15 Minuten**.
+-   Rotieren Sie die Signaturschlüssel alle **30 Tage**, um die Exposition zu reduzieren.
+-   Stellen Sie sicher, dass alle Token-Felder vor der Verarbeitung validiert werden.
+-   Lagern Sie private Schlüssel ausschließlich in **sicheren Plattform-Keystores**.
 
--   **Schlüssellecks** durch unsachgemäße Speicher- oder Übertragungsmethoden
--   **Token-Replay-Angriffe**, bei denen gültige Token abgefangen und wiederverwendet werden
--   **Algorithmus-Manipulation**, die die Signaturüberprüfung umgeht
+### Häufige Sicherheitsrisiken
+
+-   **Schlüsselleck** verursacht durch unsachgemäße Speicherung oder Übertragungsmethoden.
+-   **Token-Wiederholungsangriffe**, bei denen gültige Tokens abgefangen und wiederverwendet werden.
+-   **Manipulation von Algorithmen**, die die Signaturverifizierung umgehen.
 
 ### Vergleich von Signaturalgorithmen
 
--   **HS256**: Verwendet ein gemeinsames Geheimnis für symmetrische Signierung. Am besten geeignet für Umgebungen, in denen alle Parteien vertrauenswürdig sind
--   **RS256**: Verwendet öffentliche/private Schlüsselpaare für asymmetrische Signierung, ideal für verteilte Systeme
--   **ES256**: Nutzt elliptische Kurvenkryptographie für hohe Sicherheit bei kleineren Schlüsselgrößen
+-   **HS256**: Verwendet ein gemeinsames Geheimnis für symmetrische Signierung. Am besten geeignet für Umgebungen, in denen alle Parteien vertrauenswürdig sind.
+-   **RS256**: Verwendet öffentliche/private Schlüsselpaare für asymmetrische Signierung, was es ideal für verteilte Systeme macht.
+-   **ES256**: Nutzt elliptische Kurven-Kryptographie für starke Sicherheit mit kleineren Schlüsseln.
 
-## Live-Update-Sicherheit
+## Sicherheit von Live-Updates
 
-Die Gewährleistung sicherer Live-Updates umfasst die Verwendung signierter Token, die Überprüfung der Datenintegrität und die Einhaltung von Store-Compliance-Standards. Dies baut auf dem zuvor beschriebenen Token-Signierungsprozess auf und erweitert ihn auf Live-Update-Workflows
+Die Gewährleistung sicherer Live-Updates umfasst die Verwendung von signierten Tokens, die Verifizierung der Datenintegrität und die Einhaltung der Compliance-Standards. Dies baut auf dem zuvor beschriebenen Token-Signierungsprozess auf und erstreckt sich auf Workflows für Live-Updates.
 
 ### Token-Sicherheit für Updates
 
-Bei Live-Update-Szenarien schützen signierte Token jedes Update-Paket von seiner Quelle bis zum Gerät. Hier sind einige wichtige Praktiken:
+In Szenarien mit Live-Updates schützen signierte Tokens jedes Update-Paket von der Quelle bis zum Gerät. Hier sind einige wichtige Praktiken, die zu beachten sind:
 
--   Detaillierte Tester-Berechtigungen ermöglichen und Ein-Klick-Rollback-Optionen aktivieren
--   Überwachung der Update-Erfolgsraten und Benutzerengagement in Echtzeit
--   Verwaltung von Testern und Beta-Nutzern mit präzisen Berechtigungseinstellungen
+-   Erlauben Sie detaillierte Testerberechtigungen und aktivieren Sie One-Click-Rollback-Optionen.
+-   Überwachen Sie die Erfolgsraten von Updates und das Benutzerengagement, während sie geschehen.
+-   Verwalten Sie Tester und Betanutzer mit präzisen Berechtigungseinstellungen.
 
-Plattformen wie [Capgo](https://capgoapp/) implementieren diese Praktiken mit Funktionen wie Verschlüsselung, Signaturprüfungen, Versionskontrolle und Rollback-Optionen, um Over-the-Air (OTA) Updates abzusichern. Diese Methoden haben sich als effektiv erwiesen, wobei 95% der aktiven Nutzer Updates innerhalb von 24 Stunden erhalten [\[1\]](https://capgoapp/)
+Plattformen wie [Capgo](https://capgo.app/) implementieren diese Praktiken mit Funktionen wie Verschlüsselung, Signaturprüfungen, Versionskontrolle und Rollback-Optionen, um Over-the-Air (OTA) Updates zu sichern. Diese Methoden haben sich als effektiv erwiesen, wobei 95% der aktiven Benutzer innerhalb von 24 Stunden Updates erhalten [\[1\]](https://capgo.app/).
 
 ### Sicherheitsimplementierung
 
-Bei der Implementierung der Token-Signierung für Live-Updates sollten Sie sich auf Folgendes konzentrieren:
+Um die Token-Signierung für Live-Updates zu implementieren, konzentrieren Sie sich auf Folgendes:
 
--   Sichere Verwaltung von Signierungsschlüsseln für Update-Pakete
--   Versionskontrolle in Verbindung mit kryptographischer Verifizierung
--   Automatisierte Signaturvalidierung direkt auf den Geräten
--   Sofortige Rollback-Optionen für kompromittierte Updates
+-   Verwalten Sie die Signaturschlüssel sicher für Update-Pakete.
+-   Verwenden Sie die Versionskontrolle in Verbindung mit kryptografischer Verifizierung.
+-   Automatisieren Sie die Signaturvalidierung direkt auf Geräten.
+-   Bieten Sie sofortige Rollback-Optionen für kompromittierte Updates an.
 
-Dies stellt sicher, dass nur authentifizierte und ordnungsgemäß signierte Updates an Benutzer ausgeliefert werden und gleichzeitig die Plattformanforderungen erfüllt werden
+Dies stellt sicher, dass nur authentisierte und ordnungsgemäß signierte Updates an Benutzer geliefert werden, während auch die Anforderungen der Plattform eingehalten werden.
 
-## US-Standards und -Anforderungen
+## US-Standards und Anforderungen
 
-Um US-Regulierungsanforderungen zu erfüllen, integrieren Sie Live-Update-Token-Praktiken in Ihre Prozesse. Stellen Sie sicher, dass Ihre Token-Signierungsmethoden mit wichtigen US-Mandaten wie **CCPA** für Verbraucherdatenschutz, **HIPAA** für Gesundheitsdatenschutz, **NIST SP 800-63** für Identitätsverifizierung und **FIPS 140-2** für kryptographische Module übereinstimmen [\[1\]](https://capgoapp/)
+Um den US-regulatorischen Anforderungen zu entsprechen, integrieren Sie Live-Update-Token-Praktiken in Ihre Prozesse. Stellen Sie sicher, dass Ihre Token-Signierungsmethoden mit den wichtigsten US-Vorgaben wie **CCPA** für den Datenschutz von Verbrauchern, **HIPAA** für den Schutz von Gesundheitsdaten, **NIST SP 800‑63** für die Identitätsüberprüfung und **FIPS 140‑2** für kryptografische Module übereinstimmen [\[1\]](https://capgo.app/).
 
-So werden diese Standards auf die Token-Signierung angewendet:
+So gelten diese Standards für die Token-Signierung:
 
--   **CCPA**: Sicherstellen, dass Token-Payloads die Nutzereinwilligung respektieren und Datenlöschungsanfragen unterstützen
--   **HIPAA**: Verschlüsselung von Tokens mit geschützten Gesundheitsinformationen (PHI) sowohl im Ruhezustand als auch während der Übertragung
--   **NIST SP 800-63**: Verwendung von [Multi-Faktor-Authentifizierung](https://capgoapp/docs/webapp/mfa/) zur Sicherung des Zugriffs auf Signierungsschlüssel
--   **FIPS 140-2**: Bestätigung, dass Ihre Signierungsbibliothek validierte kryptographische Module verwendet
+-   **CCPA**: Stellen Sie sicher, dass Token-Payloads die Zustimmung der Benutzer respektieren und Anfragen zur Datenlöschung unterstützen.
+-   **HIPAA**: Verschlüsseln Sie Tokens, die geschützte Gesundheitsinformationen (PHI) enthalten, sowohl im Ruhezustand als auch während der Übertragung.
+-   **NIST SP 800‑63**: Verwenden Sie [Multi-Faktor-Authentifizierung](https://capgo.app/docs/webapp/mfa/), um den Zugang zu Signaturschlüsseln zu sichern.
+-   **FIPS 140‑2**: Bestätigen Sie, dass Ihre Signaturbibliothek validierte kryptografische Module verwendet.
 
-[\[1\]](https://capgoapp/) Entwickler sollten sich über US-Bundes- und Staatsdatenschutzgesetze, einschließlich CCPA, auf dem Laufenden halten
+[\[1\]](https://capgo.app/) Entwickler sollten über die US-Bundes- und Landesgesetze zum Datenschutz informiert bleiben, einschließlich CCPA.
 
 ## Fazit
 
-Sichere Token-Signierung und Live-Update-Integration sind entscheidend für die Aufrechterhaltung der Integrität Ihrer Capacitor-App und die Erfüllung von Compliance-Anforderungen
+Sichere Token-Signierung und Integration von Live-Updates sind entscheidend für die Aufrechterhaltung der Integrität Ihrer Capacitor-App und die Erfüllung der Compliance-Anforderungen.
 
-Beachten Sie die bereitgestellte Checkliste, um sicherzustellen, dass Ihre Implementierung den Sicherheitsstandards und US-Vorschriften entspricht
+Beziehen Sie sich auf die bereitgestellte Checkliste, um sicherzustellen, dass Ihre Implementierung den Sicherheitsstandards und US-Vorschriften entspricht.
 
-### Wichtige Punkte zum Merken
+### Wichtige Punkte, an die Sie sich erinnern sollten
 
--   Stellen Sie sicher, dass die Token-Signierung mit US-Vorschriften wie CCPA und HIPAA übereinstimmt und verwenden Sie starke Verschlüsselungsmethoden
--   Implementieren Sie Versionskontrolle und ermöglichen Sie sofortige Rollbacks für Updates zur Aufrechterhaltung der Stabilität
--   Überwachen und verbessern Sie die Geschwindigkeit von Signierungs- und Update-Bereitstellungsprozessen
+-   Stellen Sie sicher, dass die Token-Signierung mit den US-Vorschriften wie CCPA und HIPAA übereinstimmt, und verwenden Sie starke Verschlüsselungsmethoden.
+-   Implementieren Sie Versionskontrolle und erlauben Sie sofortige Rollbacks für Updates, um die Stabilität aufrechtzuerhalten.
+-   Überwachen und verbessern Sie die Geschwindigkeit der Signierungs- und Update-Lieferprozesse.

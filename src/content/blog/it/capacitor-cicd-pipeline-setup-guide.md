@@ -1,7 +1,9 @@
 ---
 slug: capacitor-cicd-pipeline-setup-guide
-title: Capacitor CI/CD パイプライン設定ガイド
-description: アプリケーションのビルド、テスト、デプロイメントのプロセスを、CIパイプラインを使用して自動化し、より素早いアップデートと効率性を実現しましょう。
+title: Guía de configuración de la tubería CI/CD de Capacitor
+description: >-
+  Automatizza il processo di build, test e deploy della tua app Capacitor con
+  una pipeline CI/CD per aggiornamenti più rapidi e maggiore efficienza.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -9,7 +11,7 @@ created_at: 2025-04-23T00:48:58.202Z
 updated_at: 2025-04-23T00:49:09.370Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c-1745369349370.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   Capacitor, CI/CD, pipeline setup, app updates, Capgo, deployment automation,
   mobile development
@@ -18,55 +20,55 @@ published: true
 locale: it
 next_blog: ''
 ---
-**Vuoi [aggiornamenti delle app](https://capgo.app/plugins/capacitor-updater/) più veloci con il minimo sforzo?** Configurare una pipeline CI/CD per la tua app [Capacitor](https://capacitorjs.com/) automatizza la build, il testing e il deployment, risparmiando tempo e riducendo gli errori. Ecco cosa otterrai:
+**¿Quieres actualizaciones de [aplicaciones](https://capgo.app/plugins/capacitor-updater/) más rápidas con un esfuerzo mínimo?** Configurar una tubería de CI/CD para tu aplicación [Capacitor](https://capacitorjs.com/) automatiza la construcción, prueba y despliegue, ahorrando tiempo y reduciendo errores. Esto es lo que lograrás:
 
--   **Aggiornamenti Live**: Distribuisci aggiornamenti istantaneamente senza i ritardi degli app store. Il 95% degli utenti riceve gli aggiornamenti entro 24 ore.
--   **Pipeline Essenziali**: Automatizza le build attivate dall'attività dei branch (`main`, `staging`, `feature/*`) e definisci ambienti separati per staging e produzione.
--   **Integrazione [Capgo](https://capgo.app/)**: Usa Capgo per distribuire aggiornamenti sicuri e criptati, gestire i [canali di aggiornamento](https://capgo.app/docs/webapp/channels/) e monitorare le prestazioni.
--   **Piani Convenienti**: I piani partono da $12/mese per aggiornamenti live e analytics.
+-   **Actualizaciones en Vivo**: Envía actualizaciones al instante sin retrasos en la tienda de aplicaciones. El 95% de los usuarios recibe actualizaciones en 24 horas.
+-   **Esenciales de la Tubería**: Automatiza las construcciones activadas por la actividad de la rama (`main`, `staging`, `feature/*`) y define entornos separados para staging y producción.
+-   **Integración de [Capgo](https://capgo.app/)**: Usa Capgo para desplegar actualizaciones seguras y encriptadas, gestionar [canales de actualización](https://capgo.app/docs/webapp/channels/) y monitorear el rendimiento.
+-   **Planes Asequibles**: Los planes comienzan en $12/mes para actualizaciones en vivo y analíticas.
 
-Le pipeline CI/CD di Capacitor semplificano i flussi di lavoro, migliorano l'efficienza e assicurano che la tua app rimanga aggiornata senza problemi. Entriamo nei dettagli.
+Las tuberías de CI/CD de Capacitor simplifican los flujos de trabajo, mejoran la eficiencia y aseguran que tu aplicación esté siempre actualizada sin problemas. Vamos a profundizar en los detalles.
 
-## Requisiti di Setup
+## Requisitos de Configuración
 
-### Prerequisiti
+### Prerrequisitos
 
-Assicurati di avere installato e configurato:
+Asegúrate de tener instalado y configurado lo siguiente:
 
--   **[Node.js](https://nodejs.org/en) LTS**, **Capacitor CLI** e **Git**
--   Un account sulla piattaforma CI preferita (come [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) o [Jenkins](https://www.jenkins.io/))
--   Un **account Capgo** per gestire gli aggiornamenti live
+-   **[Node.js](https://nodejs.org/en) LTS**, **Capacitor CLI**, y **Git**
+-   Una cuenta en tu plataforma de CI preferida (como [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), o [Jenkins](https://www.jenkins.io/))
+-   Una **cuenta de Capgo** para gestionar actualizaciones en vivo
 
-Una volta pronti questi elementi, procedi a definire i trigger e gli step di build nella tua piattaforma CI.
+Una vez que estén listos, procede a definir tus activadores de construcción y pasos dentro de tu plataforma de CI.
 
-## Integra Appflow con la tua Pipeline CICD
+## Integra Appflow con tu Tubería CICD
 
 <iframe src="https://www.youtube.com/embed/CakTj3A3wbM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Passaggi per il Setup della Pipeline
+## Pasos de Configuración de la Tubería
 
-Ora che hai gestito i prerequisiti, è il momento di configurare i trigger della pipeline e le impostazioni dell'ambiente.
+Ahora que has manejado los prerrequisitos, es hora de configurar los activadores y ajustes de entorno de tu tubería.
 
-### Trigger e Step di Build
+### Activadores y Pasos de Construcción
 
-Configura la tua pipeline CI/CD per attivare automaticamente le build in base a specifiche attività dei branch. Ecco come configurarla:
+Configura tu tubería de CI/CD para activar automáticamente construcciones basadas en la actividad específica de la rama. Así es como configurarlo:
 
--   **Trigger dei branch**:
+-   **Activadores de rama**:
     
-    -   Usa `main` per le build di produzione.
-    -   Usa `staging` per i test.
-    -   Usa `feature/*` per lo sviluppo.
--   **Step di build**:
+    -   Usa `main` para construcciones de producción.
+    -   Usa `staging` para propósitos de prueba.
+    -   Usa `feature/*` para trabajo de desarrollo.
+-   **Pasos de construcción**:
     
-    -   Installa tutte le dipendenze necessarie.
-    -   Esegui i test unitari per garantire la qualità del codice.
-    -   Compila gli asset web per l'applicazione.
-    -   Genera i binari nativi per piattaforme mobile o desktop.
-    -   Distribuisci la build nel tuo ambiente di test per ulteriori validazioni.
+    -   Instala todas las dependencias necesarias.
+    -   Ejecuta pruebas unitarias para asegurar la calidad del código.
+    -   Construye activos web para la aplicación.
+    -   Genera binarios nativos para plataformas móviles o de escritorio.
+    -   Despliega la construcción en tu entorno de prueba para validación adicional.
 
-### Impostazioni dell'Ambiente
+### Ajustes de Entorno
 
-Definisci file di configurazione separati per staging e produzione per mantenere l'organizzazione e la sicurezza. Ecco un esempio di setup:
+Define archivos de configuración de entorno separados para staging y producción para mantener las cosas organizadas y seguras. Aquí hay un ejemplo de configuración:
 
 ```yaml
 # staging.env
@@ -80,31 +82,31 @@ API_ENDPOINT=https://api.example.com
 LIVE_UPDATES_ENABLED=true
 ```
 
-Per i dati sensibili come chiavi API e certificati, assicurati di memorizzarli in modo sicuro nel sistema di gestione dei segreti della tua piattaforma CI. Questo garantisce che la tua pipeline rimanga sia funzionale che sicura.
+Para datos sensibles como claves API y certificados, asegúrate de almacenarlos de forma segura en el sistema de gestión de secretos de tu plataforma de CI. Esto garantiza que tu tubería siga siendo funcional y segura.
 
-## Guida all'Integrazione di [Capgo](https://capgo.app/)
+## Guía de Integración de [Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
-Una volta configurate le fasi di build e deploy, è il momento di integrare Capgo. Questo ti permette di distribuire aggiornamenti live direttamente alla tua app, evitando i ritardi di approvazione degli app store.
+Una vez que hayas configurado tus etapas de construcción y despliegue, es hora de integrar Capgo. Esto te permite enviar actualizaciones en vivo directamente a tu aplicación, evitando retrasos en la aprobación de la tienda de aplicaciones.
 
-### Passaggi per il Setup di Capgo
+### Pasos de Configuración de Capgo
 
-Dopo aver preparato la tua pipeline CI/CD, segui questi passaggi per aggiungere Capgo al tuo progetto:
+Después de preparar tu tubería de CI/CD, sigue estos pasos para añadir Capgo a tu proyecto:
 
-Prima, installa la [Capgo CLI](https://capgo.app/docs/cli/commands):
+Primero, instala el [Capgo CLI](https://capgo.app/docs/cli/commands):
 
 ```bash
 npx @capgo/cli init
 ```
 
-Quindi, procedi con questi comandi:
+Luego, procede con estos comandos:
 
--   **Compila la tua app**: `npm install && npm run build`
--   **Distribuisci gli aggiornamenti**: `npx @capgo/cli deploy`
--   **Ripristina gli aggiornamenti**: `npx @capgo/cli rollback`
+-   **Construye tu aplicación**: `npm install && npm run build`
+-   **Despliega actualizaciones**: `npx @capgo/cli deploy`
+-   **Revierte actualizaciones**: `npx @capgo/cli rollback`
 
-Ecco un esempio di un job GitHub Actions per la distribuzione degli aggiornamenti:
+Aquí hay un ejemplo de un trabajo de GitHub Actions para desplegar actualizaciones:
 
 ```yaml
 - name: Deploy to Capgo
@@ -115,63 +117,63 @@ Ecco un esempio di un job GitHub Actions per la distribuzione degli aggiornament
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-### Caratteristiche Principali di Capgo
+### Características Clave de Capgo
 
-Capgo porta diversi benefici alle app Capacitor, tra cui:
+Capgo aporta varios beneficios a las aplicaciones de Capacitor, incluidos:
 
--   **Aggiornamenti sicuri ed efficienti**: Aggiornamenti differenziali criptati riducono le dimensioni del payload garantendo una distribuzione sicura.
--   **Gestione dei canali**: Crea canali di staging e produzione per controllare come vengono distribuiti gli aggiornamenti.
--   **Dashboard analytics**: Traccia i tassi di successo degli aggiornamenti e monitora l'adozione degli utenti con insight dettagliati.
+-   **Actualizaciones seguras y eficientes**: Actualizaciones encriptadas y diferenciales reducen el tamaño de los paquetes mientras aseguran una entrega segura.
+-   **Gestión de canales**: Crea canales de staging y producción para controlar cómo se despliegan las actualizaciones.
+-   **Tablero de analíticas**: Rastrear tasas de éxito de actualizaciones y monitorear la adopción por parte de los usuarios con información detallada.
 
-### Piani e Prezzi di Capgo
+### Planes y Precios de Capgo
 
-Capgo offre piani flessibili per diverse esigenze:
+Capgo ofrece planes flexibles para satisfacer diferentes necesidades:
 
--   **SOLO**: $12/mese (1.000 MAU, 2 GB storage, 50 GB bandwidth)
--   **MAKER**: $33/mese (10.000 MAU, 5 GB storage, 500 GB bandwidth)
--   **TEAM**: $83/mese (100.000 MAU, 10 GB storage, 2.000 GB bandwidth)
--   **PAYG**: A partire da $249/mese, con opzioni per scaling personalizzato, accesso API e domini personalizzati.
+-   **SOLO**: $12/mes (1,000 MAU, 2 GB de almacenamiento, 50 GB de ancho de banda)
+-   **MAKER**: $33/mes (10,000 MAU, 5 GB de almacenamiento, 500 GB de ancho de banda)
+-   **TEAM**: $83/mes (100,000 MAU, 10 GB de almacenamiento, 2,000 GB de ancho de banda)
+-   **PAYG**: A partir de $249/mes, con opciones para escalado personalizado, acceso a API y dominios personalizados.
 
-Attualmente, Capgo supporta oltre 1.900 app in produzione, rendendolo una scelta affidabile per il continuous deployment [\[1\]](https://capgo.app/).
+Actualmente, Capgo soporta más de 1,900 aplicaciones en producción, convirtiéndola en una elección fiable para el despliegue continuo [\[1\]](https://capgo.app/).
 
-## Gestione della Pipeline
+## Gestión de la Tubería
 
-### Monitoraggio dello Stato
+### Seguimiento de Estado
 
-Tenere sotto controllo la tua pipeline è fondamentale per mantenere la qualità dell'app e la soddisfazione degli utenti. Usa la tua piattaforma CI/CD per configurare avvisi automatici per:
+Mantener un estrecho control sobre tu tubería es clave para mantener la calidad de la aplicación y mantener a los usuarios satisfechos. Usa tu plataforma de CI/CD para configurar alertas automáticas para:
 
--   **Stato della build e progresso del deployment**
--   **Tassi di successo degli aggiornamenti**
--   **Metriche di adozione degli utenti**
--   **Report di errori e log di crash**
+-   **Estado de construcción y progreso del despliegue**
+-   **Tasas de éxito de actualizaciones**
+-   **Métricas de adopción de usuarios**
+-   **Informes de errores y registros de fallos**
 
-Abbina questi avvisi a una documentazione chiara per garantire un monitoraggio fluido e una rapida risoluzione dei problemi.
+Combina estas alertas con una documentación clara para garantizar un monitoreo fluido y una rápida resolución de problemas.
 
-### Guida alla Documentazione
+### Guía de Documentación
 
-Una buona documentazione mantiene il tuo team allineato e le tue operazioni fluide. Assicurati che la tua documentazione copra:
+Buena documentación mantiene a tu equipo en la misma página y tus operaciones funcionando sin problemas. Asegúrate de que tu documentación cubra:
 
--   **Configurazione Pipeline**: Dettagli come trigger di build, variabili d'ambiente e impostazioni di sicurezza.
--   **Procedure di Aggiornamento**: Passaggi per i deployment, istruzioni di rollback e [gestione dei canali di aggiornamento](https://capgo.app/docs/webapp/channels/).
--   **Setup del Monitoraggio**: Come configurare gli avvisi, tracciare le metriche e rispondere ai problemi.
--   **Linee Guida di Conformità**: Regole specifiche della piattaforma, restrizioni sugli aggiornamenti e altri requisiti.
+-   **Configuración de la Tubería**: Detalles como activadores de construcción, variables de entorno y configuraciones de seguridad.
+-   **Procedimientos de Actualización**: Pasos para despliegues, instrucciones de reversión y [gestión de canales de actualización](https://capgo.app/docs/webapp/channels/).
+-   **Configuración de Monitoreo**: Cómo configurar alertas, rastrear métricas y responder a problemas.
+-   **Guías de Cumplimiento**: Reglas específicas de la plataforma, restricciones de actualización y otros requisitos.
 
-Conserva tutta la documentazione nel controllo versione e aggiornala ogni volta che la tua pipeline cambia. Includi passaggi di troubleshooting per errori comuni per risparmiare tempo quando sorgono problemi.
+Almacena toda la documentación en control de versiones y actualízala cada vez que tu tubería cambie. Incluye pasos de solución de problemas para errores comunes para ahorrar tiempo cuando surjan problemas.
 
-### Linee Guida della Piattaforma
+### Directrices de la Plataforma
 
-Segui le politiche di aggiornamento di Apple e Android utilizzando il sistema di canali di Capgo per garantire rollout fluidi e conformi:
+Sigue las políticas de actualización de Apple y Android utilizando el sistema de canales de Capgo para garantizar un despliegue fluido y conforme:
 
--   **Beta Testing**: [Rilascia aggiornamenti a piccoli gruppi di utenti](https://capgo.app/blog/how-to-send-specific-version-to-users/) per validare le modifiche.
--   **Rollout Graduali**: Distribuisci gli aggiornamenti gradualmente per individuare i problemi in anticipo.
--   **Fix di Emergenza**: Ripristina rapidamente gli aggiornamenti con un solo clic se qualcosa va storto.
+-   **Pruebas Beta**: [Lanza actualizaciones a pequeños grupos de usuarios](https://capgo.app/blog/how-to-send-specific-version-to-users/) para validar los cambios.
+-   **Despliegues por Etapas**: Despliega actualizaciones gradualmente para detectar problemas pronto.
+-   **Correcciones de Emergencia**: Revierte rápidamente actualizaciones con un solo clic si algo sale mal.
 
-## Riepilogo
+## Resumen
 
-### Panoramica dei Passaggi di Setup
+### Resumen de Pasos de Configuración
 
-Per iniziare, dovrai installare la CLI, configurare build e variabili d'ambiente, proteggere i tuoi segreti, abilitare il monitoraggio e distribuire gli aggiornamenti. Questo processo si integra perfettamente con gli strumenti di monitoraggio e rollback, garantendo che la tua app rimanga online con tempi di inattività minimi.
+Para empezar, tendrás que instalar la CLI, configurar construcciones y variables de entorno, asegurar tus secretos, habilitar el monitoreo y desplegar actualizaciones. Este proceso se integra sin problemas con herramientas de monitoreo y reversión, asegurando que tu aplicación esté en línea con un tiempo de inactividad mínimo.
 
-### Benefici CI/CD
+### Beneficios de CI/CD
 
-La connessione tra setup e risultati mostra come Capgo aumenti l'efficienza: gli aggiornamenti raggiungono il **95% degli utenti in sole 24 ore**. Inoltre, i prezzi di Capgo - da **$12/mese a $83/mese** - offrono un enorme vantaggio di costo rispetto ai servizi legacy che possono costare oltre **$500/mese**. Attualmente, Capgo supporta più di **1.900 app in produzione** [\[1\]](https://capgo.app/).
+La conexión entre la configuración y los resultados muestra cómo Capgo impulsa la eficiencia: las actualizaciones llegan al **95% de los usuarios en solo 24 horas**. Además, los precios de Capgo - que oscilan entre **$12/mes y $83/mes** - ofrecen una gran ventaja de costo en comparación con servicios tradicionales que pueden cobrar más de **$500/mes**. Actualmente, Capgo admite más de **1,900 aplicaciones en producción** [\[1\]](https://capgo.app/).

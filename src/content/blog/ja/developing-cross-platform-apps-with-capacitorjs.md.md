@@ -1,8 +1,8 @@
 ---
 slug: developing-cross-platform-apps-with-capacitorjs
-title: 'Sviluppare App Multi-Piattaforma con CapacitorJS: Una Guida Passo dopo Passo'
+title: 'CapacitorJSを使ったクロスプラットフォームアプリの開発: ステップバイステップガイド'
 description: >-
-  Javascriptのコードベース1つで、Android、iOS、web（PWA）向けのクロスプラットフォームアプリケーションをCapacitorJSを使用して作成する方法を学びましょう。
+  CapacitorJSを使用して、Android、iOS、Web（PWA）向けに単一のJavaScriptコードベースでクロスプラットフォームアプリケーションを作成する方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
@@ -13,36 +13,35 @@ head_image_alt: クロスプラットフォームアプリ開発
 keywords: >-
   Capacitor, cross-platform, PWA, mobile app development, live updates, OTA
   updates, continuous integration, mobile app updates
-tag: Tuto
+tag: Tutorial
 published: true
 locale: ja
 next_blog: ''
 ---
+モバイルアプリケーション開発の進化する世界において、プログレッシブ・ウェブ・アプリケーション（PWA）の台頭は新しいクロスプラットフォームのランタイムの道を開きました。これらのランタイムは、ネイティブコードのみに依存することなく、ウェブベースのアプリケーションをアプリストアに展開できるようにします。このプロセスをサポートする技術の一つが[**CapacitorJS**](https://capacitorjs.com/)であり、開発者は単一のJavaScriptコードベースを使用してAndroid、iOS、およびウェブのアプリケーションとしてシンプルなウェブサイトを展開できます。このアプローチは、開発コストを大幅に削減し、コーディングの効率を高めます。
 
-モバイルアプリケーション開発の進化する世界において、プログレッシブウェブアプリケーション（PWA）の台頭により、新しいクロスプラットフォームランタイムの道が開かれました。これらのランタイムにより、ネイティブコードのみに依存することなく、Webベースのアプリケーションをアプリストアで提供することが可能になりました。[**CapacitorJS**](https://capacitorjs.com/)はそのような技術の1つで、開発者が単一のJavaScriptコードベースを使用して、シンプルなウェブサイトをAndroid、iOS、およびWebアプリケーションとしてデプロイすることを可能にします。このアプローチにより、開発コストが大幅に削減され、コーディング効率が向上します。
-
-このガイドでは、追加のフレームワークを使用せず、純粋なJavaScriptを使用してアプリケーションを作成することに焦点を当てます。2021年において純粋なJavaScriptアプリ開発のリソースを見つけることは課題ですが、CapacitorJSを使用してアプリケーションを構築し、ネイティブプラグインを活用する包括的なチュートリアルを提供します。
+このガイドでは、追加のフレームワークを使用せずに純粋なJavaScriptでアプリケーションを作成することに焦点を当てます。2021年における純粋なJavaScriptアプリ開発のリソースを見つけることの難しさにもかかわらず、私たちはアプリケーションを構築し、CapacitorJSでネイティブプラグインを活用するための包括的なチュートリアルを提供するためにここにいます。
 
 ## ‣ 前提条件
 
-開始する前に、以下のツールがインストールされていることを確認してください：
+始める前に、以下のツールがインストールされていることを確認してください：
 
-- [**Node.js**](https://nodejs.org/en/) **(v14.16.1)** 以上
-- **NPM (v7.6.2)** 以上
-- [**Android Studio**](https://developer.android.com/studio/) Android アプリ開発用
-- [**Xcode**](https://apps.apple.com/de/app/xcode/id497799835/?mt=12) iOS アプリ開発用（macOSのみ）
+1. [**Node.js**](https://nodejs.org/en/) **(v14.16.1)** 以上
+2. **NPM (v7.6.2)** 以上
+3. [**Android Studio**](https://developer.android.com/studio/) for Androidアプリ開発
+4. [**Xcode**](https://apps.apple.com/de/app/xcode/id497799835/?mt=12) for iOSアプリ開発（macOSのみ）
 
-> **注意**: iOSアプリの開発はmacOSデバイスでのみ可能です
+> **注意**：iOSアプリ開発はmacOSデバイスでのみ可能です。
 
 ## ‣ Capacitorプロジェクトのセットアップ
 
-Capacitorアプリケーションを作成するには、希望のフォルダに移動し、ターミナルで以下のコマンドを実行します：
+Capacitorアプリケーションを作成するには、希望するフォルダーに移動し、ターミナルで以下のコマンドを実行します：
 
 ```
 npm init @capacitor/app
 ```
 
-プロンプトに従ってパッケージをインストールし、プロジェクトをセットアップします。Capacitor v3では、プロジェクトディレクトリは以下のようになります：
+プロンプトに従ってパッケージをインストールし、プロジェクトをセットアップします。Capacitor v3の場合、プロジェクトディレクトリは以下のようになります：
 
 ```
 www/
@@ -58,16 +57,16 @@ package.json
 README.md
 ```
 
-初期セットアップが完了したら、次に進む準備が整いました。
+初期セットアップが完了したら、次のステップに進む準備が整いました。
 
 ## ‣ プロジェクトの再構築
 
-JavaScriptファイルをバンドルするためにViteを使用するので、それに応じてプロジェクトを再構築しましょう：
+私たちはViteを使用してJavaScriptファイルをバンドルするので、プロジェクトを次のように再構築します：
 
-- メインディレクトリに新しいフォルダ `src` を**作成**
-- `src/` に新しいスクリプトファイル `index.js` を**作成**
-- メインディレクトリにVite設定ファイル `vite.config.js` を**作成**
-- `www/js/` から `capacitor-welcome.js` ファイルを**削除**
+1. **新しい**フォルダー`src`をメインディレクトリに作成します。
+2. **新しい**スクリプトファイル`index.js`を`src/`に作成します。
+3. **メインディレクトリに**Vite設定ファイル`vite.config.js`を作成します。
+4. `www/js/`から`capacitor-welcome.js`ファイルを**削除**します。
 
 新しいフォルダ構造は以下のようになります：
 
@@ -89,26 +88,26 @@ vite.config.js
 
 ## ‣ 純粋なJavaScriptへの適応
 
-純粋なJavaScriptで動作するようにいくつかのファイルを修正しましょう：
+純粋なJavaScriptで作業するためにいくつかのファイルを修正しましょう：
 
 ## www/index.html
 
-1. アプリをPWAとしてリリースしない場合は、[**Ionic PWA Elements**](https://capacitorjs.com/docs/web/pwa-elements/)のスクリプトインポートを削除します：
+1. アプリをPWAとしてリリースしない場合、[**Ionic PWA Elements**](https://capacitorjs.com/docs/web/pwa-elements/)のためのスクリプトインポートを削除します：
 
 ```
 <script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"></script>
 <script nomodule src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
 ```
 
-2. bodyから`<script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js">`HTML要素を削除します
+2. ボディから`<script type="module" src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js">` HTML要素を削除します。
 
-3. スクリプトインポートを`capacitor.js`から`js/main.js`に更新します。これが私たちのバンドルされたJavaScriptファイルになります
+3. スクリプトインポートを`capacitor.js`から`js/main.js`に更新します。これがバンドルされたJavaScriptファイルになります。
 
-4. `js/capacitor-welcome.js`のインポートを削除します。これで`index.html`の準備が整いました
+4. `js/capacitor-welcome.js`のインポートを削除します。これで`index.html`は準備完了です。
 
 ## vite.config.js
 
-[**Vite**](https://vitejs.dev/)でNodejsモジュールをバンドルするには、バンドルされたスクリプトの出力先を指定する設定ファイルが必要です。以下の設定により、`src/index.js`ファイルを取得し、`www/js/main.js`として本番用にバンドルします：
+Node.jsモジュールを[**Vite**](https://vitejs.dev/)でバンドルするために、バンドルされたスクリプトの出力先を指定する設定ファイルが必要です。以下の設定は、`src/index.js`ファイルを取り込み、`www/js/main.js`としてプロダクション用にバンドルします：
 
 ```javascript
 import { defineConfig } from 'vite';
@@ -130,47 +129,47 @@ export default defineConfig({
 
 ## capacitor.config.json
 
-`capacitor.config.json`ファイルで、`"bundledWebRuntime": true`プロパティを探し、`false`に変更します。この調整により、Capacitorがファイルをバンドルせず、代わりにViteを使用できるようになります。
+`capacitor.config.json`ファイルで、 `"bundledWebRuntime": true`プロパティを見つけ、`false`に変更します。この調整は、Capacitorがファイルをバンドルせず、その目的のためにViteを使用できるようにします。
 
-これらの変更により、Capacitorアプリケーションの基本的なセットアップが完了し、純粋なJavaScriptでアプリの開発を開始する準備が整いました。
+これらの変更により、あなたのCapacitorアプリケーションの基本設定は完了し、純粋なJavaScriptでアプリを開発する準備が整いました。
 
 ## ‣ アプリの開発
 
-基礎が整ったので、`src/index.js`ファイルでアプリケーションロジックの記述を開始できます。ここで、必要なNodejsモジュールをインポートし、アプリの機能を定義し、Capacitorのネイティブプラグインと対話することができます。
+基盤が整ったので、`src/index.js`ファイルでアプリケーションのロジックを書き始めることができます。ここで、必要なNode.jsモジュールをインポートし、アプリの機能を定義し、Capacitorのネイティブプラグインと対話することができます。
 
-変更を加えるたびに、Viteのビルドコマンドを実行してJavaScriptファイルをバンドルすることを忘れないでください：
+変更を加えるたびに、JavaScriptファイルをバンドルするためにViteのビルドコマンドを実行することを忘れないでください：
 
 ```bash
 vite build
 ```
 
-このコマンドにより、`index.html`ファイルが参照する`www/js`ディレクトリに`main.js`ファイルが生成されます。
+このコマンドは、`www/js`ディレクトリ内に`main.js`ファイルを生成し、`index.html`ファイルで参照されることになります。
 
 ## ‣ テストとデバッグ
 
-Capacitorは、様々なプラットフォームでアプリケーションをテストする便利な方法を提供します。それぞれのプラットフォームの開発環境でアプリを開くには、以下のコマンドを使用します：
+Capacitorは、さまざまなプラットフォームでアプリケーションをテストする便利な方法を提供します。以下のコマンドを使用して、各プラットフォームの開発環境でアプリを開くことができます：
 
-For Android:
+Androidの場合：
 ```bash
 npx cap add android
 npx cap open android
 ```
 
-For iOS (macOS only):
+iOSの場合（macOSのみ）：
 ```bash
 npx cap add ios
 npx cap open ios
 ```
 
-For Web/PWA:
+Web/PWAの場合：
 ```bash
 npx cap serve
 ```
 
-これらのコマンドを使用することで、Android Studio、Xcode、またはウェブブラウザでアプリケーションを実行し、必要に応じてテストやデバッグを行うことができます。
+これらのコマンドを使用すると、Android Studio、Xcode、またはウェブブラウザーでアプリケーションを実行でき、必要に応じてテストおよびデバッグを行うことができます。
 
-## ‣ まとめ
+## ‣ 結論
 
-純粋なJavaScriptを使用してCapacitorJSでクロスプラットフォームアプリケーションを開発することは、単一のコードベースで複数のプラットフォーム向けのアプリを作成する、コスト効率の良い効果的な方法です。このガイドに従うことで、プロジェクトのセットアップ、Vite用の再構築、そして開発のためのアプリの準備が整いました。この基盤があれば、堅牢で汎用性の高いアプリケーションを構築する準備が整っています。
+純粋なJavaScriptを使用してCapacitorJSでクロスプラットフォームのアプリケーションを開発することは、単一のコードベースで複数のプラットフォーム用のアプリを作成するためのコスト効果が高く効率的な方法です。このガイドに従って、プロジェクトを設定し、Vite用に再構築し、アプリの開発の準備を整えました。この基盤をもとに、頑丈で多用途のアプリケーションを構築する道を進んでいます。
 
-すべてのプラットフォームで徹底的にテストを行い、Capacitorのネイティブプラグインを活用してアプリの機能を強化することを忘れないでください。ハッピーコーディング！
+すべてのプラットフォームでしっかりとテストし、Capacitorのネイティブプラグインを活用してアプリの機能を向上させることを忘れないでください。楽しいコーディングを！

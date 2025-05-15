@@ -1,16 +1,17 @@
 ---
 slug: creating-mobile-apps-with-react-and-capacitor
-title: モバイルアプリをピュアReact.jsとCapacitorで構築する
+title: Construindo Aplicativos Móveis com Pure React.js e Capacitor
 description: >-
-  Panduan untuk mengubah aplikasi web React.js menjadi aplikasi mobile native
-  dengan Capacitor dan meningkatkan tampilan native menggunakan Konsta UI.
+  Un guide sur la façon de transformer une application web React.js en une
+  application mobile native en utilisant Capacitor, et d'améliorer l'interface
+  utilisateur native avec Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-29T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /react_capacitor.webp
-head_image_alt: Illustrazione di React.js e Capacitor
+head_image_alt: Illustration de React.js et Capacitor
 keywords: >-
   React, Capacitor, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
@@ -19,42 +20,39 @@ published: true
 locale: it
 next_blog: implementing-live-updates-in-your-react-capacitor-app
 ---
+Este tutorial te guiará para crear una aplicación móvil utilizando React, Capacitor y Konsta UI. Al final, sabrás cómo transformar una aplicación web de React.js en una aplicación móvil nativa con Capacitor, e implementar una interfaz de usuario nativa utilizando Konsta UI.
 
-Ecco la traduzione in italiano:
+Capacitor permite la fácil transformación de tu aplicación web de React.js en una aplicación móvil nativa, sin requerir alteraciones sustanciales o el aprendizaje de nuevas estrategias como React Native.
 
-Questo tutorial ti guiderà nella creazione di un'applicazione mobile utilizzando React, Capacitor e Konsta UI. Alla fine, saprai come trasformare un'app web Reactjs in un'applicazione mobile nativa con Capacitor e implementare un'interfaccia utente nativa utilizzando Konsta UI.
+El proceso implica unos pocos pasos simples, y antes de que te des cuenta, tu aplicación de React.js será una aplicación móvil completamente funcional. Así que, acompáñanos mientras te guiamos en este viaje.
 
-Capacitor permette di trasformare facilmente la tua app web Reactjs in un'applicazione mobile nativa, senza richiedere modifiche sostanziali o l'apprendimento di nuove strategie come React Native.
+## Descripción general de Capacitor
 
-Il processo coinvolge alcuni semplici passaggi e, prima che tu te ne accorga, la tua app Reactjs sarà un'applicazione mobile completamente funzionante. Quindi, resta con noi mentre ti guidiamo in questo percorso.
+CapacitorJS es un cambio de juego. Puede integrarse sin problemas con cualquier proyecto web y envolver tu aplicación en una vista web nativa mientras genera el proyecto nativo de Xcode y Android Studio. Además, a través de sus complementos, puedes acceder a funciones nativas del dispositivo como la cámara a través de un puente JS.
 
-## Panoramica di Capacitor
+Capacitor ofrece una forma sencilla de crear una aplicación móvil nativa sin complicaciones ni una curva de aprendizaje pronunciada. Su API simple y funcionalidad optimizada facilitan su incorporación a tu proyecto.
 
-CapacitorJS è rivoluzionario. Può integrarsi perfettamente con qualsiasi progetto web e racchiudere la tua app in una webview nativa generando il progetto nativo per Xcode e Android Studio. Inoltre, attraverso i suoi plugin, puoi accedere alle funzionalità native del dispositivo come la fotocamera tramite un bridge JS.
+## Configurando tu aplicación React.js
 
-Capacitor offre un modo semplice per creare un'applicazione mobile nativa senza problemi o curve di apprendimento ripide. La sua API semplice e la funzionalità ottimizzata lo rendono facile da incorporare nel tuo progetto.
-
-## Configurazione della tua App Reactjs
-
-Usiamo il metodo più semplice per iniziare un'applicazione React. Utilizzeremo il gestore di pacchetti npm per creare una nuova app React:
+Vamos a optar por el método más sencillo para iniciar una aplicación React. Usaremos el administrador de paquetes npm para crear una nueva aplicación de React:
 
 ```shell
 npx create-react-app my-app
 ```
 
-Per trasformare il nostro progetto in un'app mobile nativa, è necessario un **export** della nostra app.
+Para transformar nuestro proyecto en una aplicación móvil nativa, se requiere un **export** de nuestra aplicación.
 
-Torneremo su questo tra un momento. Prima, capiamo come integrare Capacitor nella nostra app React.
+Regresaremos a esto en un momento. Primero, entendamos cómo integrar Capacitor en nuestra aplicación React.
 
-## Integrazione di Capacitor nella tua App Reactjs
+## Integrando Capacitor en tu aplicación React.js
 
-I passaggi iniziali di configurazione potrebbero essere un po' dettagliati, ma dopo, aggiornare il wrapper dell'app nativa diventa semplice come eseguire un comando `sync`.
+Los pasos de configuración inicial pueden ser un poco detallados, pero después de eso, actualizar el contenedor de tu aplicación nativa se convierte en tan simple como ejecutar un comando `sync`.
 
-Prima, installeremo la CLI di Capacitor come dipendenza di sviluppo e la configureremo nel nostro progetto. Durante la configurazione, accetta i valori predefiniti per nome e ID bundle premendo "invio".
+Primero, instalaremos la CLI de Capacitor como una dependencia de desarrollo y la configuraremos dentro de nuestro proyecto. Durante la configuración, acepta los valores predeterminados para el nombre y el ID del paquete presionando “enter”.
 
-Successivamente, installeremo il pacchetto core e i pacchetti relativi per le piattaforme iOS e Android.
+A continuación, instalaremos el paquete central y los paquetes relevantes para las plataformas iOS y Android.
 
-Infine, aggiungeremo le piattaforme, e Capacitor creerà cartelle per ciascuna piattaforma nella root del nostro progetto:
+Finalmente, agregaremos las plataformas y Capacitor creará carpetas para cada plataforma en la raíz de nuestro proyecto:
 
 ```shell
 # Install the Capacitor CLI locally
@@ -71,11 +69,11 @@ npx cap add ios
 npx cap add android
 ```
 
-Le directory **ios** e **android** sono ora presenti nel tuo progetto Reactjs.
+Los directorios **ios** y **android** ahora están presentes en tu proyecto de React.js.
 
-Per accedere al progetto Android successivamente, installa [Android Studio](https://developer.android.com/studio/). Per iOS, hai bisogno di un Mac e dovresti installare [Xcode](https://developer.apple.com/xcode/).
+Para acceder al proyecto de Android más tarde, instala [Android Studio](https://developer.android.com/studio/). Para iOS, necesitas un Mac y deberías instalar [Xcode](https://developer.apple.com/xcode/).
 
-Successivamente, aggiorna il **webDir** nel tuo file **capacitor.config.json** come mostrato di seguito:
+A continuación, actualiza el **webDir** en tu archivo **capacitor.config.json** como se muestra a continuación:
 
 ```json
 {
@@ -86,45 +84,45 @@ Successivamente, aggiorna il **webDir** nel tuo file **capacitor.config.json** c
 }
 ```
 
-Esegui il comando build e sincronizza il tuo progetto con Capacitor:
+Ejecuta el comando de construcción y sincroniza tu proyecto con Capacitor:
 
 ```shell
 npm run build
 npx cap sync
 ```
 
-Il comando `npm run build` compilerà il tuo progetto Reactjs, mentre `npx cap sync` allineerà il codice web nei punti corretti delle piattaforme native in modo che possano essere eseguiti in un'app.
+El comando `npm run build` construirá tu proyecto de React.js, mientras que `npx cap sync` alineará el código web en los lugares adecuados de las plataformas nativas para que puedan ser ejecutados en una aplicación.
 
-Ora, con un po' di fortuna e senza errori, la tua app Reactjs dovrebbe essere pronta per il lancio su un dispositivo!
+Ahora, con un poco de suerte y sin errores, ¡tu aplicación de React.js debería estar lista para ser lanzada en un dispositivo!
 
-## Compilazione e Distribuzione delle tue App Native
+## Construyendo y desplegando tus aplicaciones nativas
 
-Lo sviluppo di app iOS richiede **Xcode**, e le app Android necessitano di **Android Studio**. Se prevedi di distribuire la tua app sullo store, devi iscriverti all'Apple Developer Program per iOS e alla Google Play Console per Android.
+Desarrollar aplicaciones iOS requiere **Xcode**, y las aplicaciones de Android necesitan **Android Studio**. Si planeas distribuir tu aplicación en la tienda de aplicaciones, debes inscribirte en el Programa de Desarrolladores de Apple para iOS y en la Consola de Google Play para Android.
 
-La CLI di Capacitor semplifica il processo di apertura di entrambi i progetti nativi:
+La CLI de Capacitor simplifica el proceso de apertura de ambos proyectos nativos:
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-Una volta configurati i tuoi progetti nativi, distribuire la tua app su un dispositivo connesso è un processo semplice.
+Una vez que tus proyectos nativos estén configurados, desplegar tu aplicación en un dispositivo conectado es un proceso sencillo.
 
-Per Android Studio, attendi che tutto si carichi e poi distribuisci la tua app su un dispositivo connesso.
+Para Android Studio, espera a que todo se cargue y luego despliega tu aplicación en un dispositivo conectado.
 
-Per Xcode, configura il tuo account di firma per distribuire la tua app su un dispositivo reale invece che solo sul simulatore. Dopo averlo fatto, premi semplicemente play per eseguire l'app sul tuo dispositivo connesso, che puoi scegliere in alto.
+Para Xcode, establece tu cuenta de firma para desplegar tu aplicación en un dispositivo real en lugar de solo el simulador. Después de eso, simplemente presiona play para ejecutar la aplicación en tu dispositivo conectado, que puedes elegir en la parte superior.
 
-Se tutto è andato bene, avrai convertito il tuo React.app web js in un'applicazione mobile nativa!
+Si todo ha ido bien, ¡habrás convertido tu aplicación web de React.js en una aplicación móvil nativa!
 
-## Live Reload di Capacitor
+## Recarga en vivo de Capacitor
 
-I framework di sviluppo moderni di solito includono l'hot reload e, fortunatamente, puoi averlo anche con Capacitor ma **sul tuo dispositivo mobile**!
+Los frameworks de desarrollo modernos suelen venir con recarga en caliente, y afortunadamente, puedes tener lo mismo con Capacitor, pero **en tu dispositivo móvil**.
 
-Puoi rendere la tua applicazione ospitata localmente accessibile con il live reload sulla tua rete facendo caricare all'app Capacitor il contenuto da un URL specifico
+Puedes hacer que tu aplicación alojada localmente sea accesible con recarga en vivo en tu red haciendo que la aplicación Capacitor cargue el contenido desde una URL específica.
 
-Prima, determina il tuo indirizzo IP locale. Su Mac, puoi farlo eseguendo `ipconfig getifaddr en0` nel terminale. Su Windows, esegui `ipconfig` e cerca l'indirizzo IPv4
+Primero, determina tu dirección IP local. En un Mac, puedes hacerlo ejecutando `ipconfig getifaddr en0` en la terminal. En Windows, ejecuta `ipconfig` y busca la dirección IPv4.
 
-Dopo questo, indica a Capacitor di caricare l'app direttamente dal server aggiungendo un altro parametro al tuo file `capacitor.config.ts`:
+Después de esto, instruye a Capacitor para cargar la aplicación directamente desde el servidor añadiendo otro parámetro a tu archivo `capacitor.config.ts`:
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -143,21 +141,21 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Assicurati di usare l'IP e la porta corretti. Esegui `npx cap copy` per applicare queste modifiche al nostro progetto nativo
+Asegúrate de usar la IP y el puerto correctos. Ejecuta `npx cap copy` para aplicar estos cambios a nuestro proyecto nativo.
 
-Dopo aver distribuito la tua app ancora una volta tramite Android Studio o Xcode, qualsiasi modifica nella tua app React verrà automaticamente ricaricata e visualizzata sulla tua app!
+Después de desplegar tu aplicación una vez más a través de Android Studio o Xcode, cualquier cambio en tu aplicación React se recargará automáticamente y se mostrará en tu aplicación.
 
-Tieni presente che se vengono installati nuovi plugin, come la fotocamera, è necessaria una ricostruzione del tuo progetto nativo. Questo perché i file nativi saranno cambiati e non possono essere aggiornati al volo
+Ten en cuenta que si se instalan nuevos complementos, como la cámara, es necesario reconstruir tu proyecto nativo. Esto se debe a que los archivos nativos habrán cambiado y no se pueden actualizar sobre la marcha.
 
-## Utilizzare i Plugin di Capacitor
+## Usando complementos de Capacitor
 
-Diamo un'occhiata rapida a come utilizzare un plugin Capacitor. Installiamo uno semplice, il [plugin Share](https://capacitorjs.com/docs/apis/share/), che mostra la finestra di dialogo di condivisione nativa:
+Echemos un vistazo rápido a cómo usar un complemento de Capacitor. Instalemos uno simple, el [complemento Share](https://capacitorjs.com/docs/apis/share/), que solicita el diálogo de compartir nativo:
 
 ```shell
 npm i @capacitor/share
 ```
 
-Per utilizzarlo, importa il pacchetto e chiama la rispettiva funzione `share()` dalla nostra app. Considera l'**App.js**:
+Para usarlo, importa el paquete y llama a la respectiva función `share()` desde nuestra aplicación. Considera el **App.js**:
 
 ```javascript
 import { Share } from '@capacitor/share';
@@ -182,19 +180,19 @@ function ShareButton() {
 export default ShareButton;
 ```
 
-Dopo aver installato un nuovo plugin, ricordati di sincronizzare nuovamente il tuo progetto React usando `npx cap sync`
+Después de instalar un nuevo complemento, recuerda sincronizar tu proyecto React nuevamente usando `npx cap sync`.
 
-## Implementare Konsta UI: UI Mobile dall'Aspetto Migliore
+## Implementando Konsta UI: Interfaz móvil de mejor apariencia
 
-Per un'esperienza UI mobile dall'aspetto migliore, useremo Konsta UI. Fornisce stili specifici per iOS e Android ed è facile da utilizzare
+Para una mejor experiencia de interfaz móvil, usaremos Konsta UI. Proporciona estilos específicos para iOS y Android, y es fácil de trabajar.
 
-Per utilizzare Konsta UI, installa il pacchetto React:
+Para usar Konsta UI, instala el paquete de React:
 
 ```shell
 npm i konsta
 ```
 
-Modifica il tuo file `tailwind.config.js` così:
+Modifica tu archivo `tailwind.config.js` de la siguiente manera:
 
 ```javascript
 // import konstaConfig config
@@ -216,9 +214,9 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` integrerà la tua configurazione Tailwind CSS attuale con varianti e utilità aggiuntive necessarie per Konsta UI
+`konstaConfig` complementará tu configuración actual de Tailwind CSS con variantes y utilidades adicionales necesarias para Konsta UI.
 
-Ora, configura il componente App principale per impostare parametri globali come `theme`. Avvolgi l'app principale con App nel `src/index.js`:
+Ahora, configura el componente principal de la aplicación para establecer parámetros globales como `theme`. Envuelve la aplicación principal con App en el `src/index.js`:
 
 ```javascript
 import React from 'react';
@@ -237,7 +235,7 @@ ReactDOM.render(
 );
 ```
 
-Utilizziamo i componenti React di Konsta UI nelle nostre pagine React.js. Apri `src/App.js` e modificalo in:
+Utilicemos los componentes de React de Konsta UI en nuestras páginas de React.js. Abre `src/App.js` y modifícalo a:
 
 ```javascript
 // Konsta UI components
@@ -273,12 +271,12 @@ export default function MyApp() {
 }
 ```
 
-Se tutto è stato fatto correttamente, dovresti vedere un'integrazione perfetta tra React e Konsta UI per dare alla tua app mobile un aspetto nativo
+Si todo se ha hecho correctamente, deberías ver una integración sin esfuerzo entre React y Konsta UI para darle a tu aplicación móvil una apariencia nativa.
 
-## Conclusione
+## Conclusión
 
-Capacitor offre un modo semplice di costruire app native basate su un progetto web esistente, fornendo un modo semplice per condividere il codice e avere UI coerente
+Capacitor ofrece un medio fluido para construir aplicaciones nativas basadas en un proyecto web existente, proporcionando una forma simple de compartir código y tener una interfaz de usuario consistente.
 
-Grazie a tecnologie come Capacitor, costruire applicazioni mobili da app web React.js non è mai stato così facile. Porta le tue competenze di sviluppo web al livello successivo creando impressionanti app mobile native. Buon coding!
+Gracias a tecnologías como Capacitor, construir aplicaciones móviles a partir de aplicaciones web de React.js nunca ha sido tan fácil. Lleva tus habilidades de desarrollo web al siguiente nivel creando impresionantes aplicaciones móviles nativas. ¡Feliz codificación!
 
-Per saperne di più su come puoi accelerare il tuo processo di sviluppo app, [registra un account gratuito](/register/) oggi stesso!
+Para más información sobre cómo puedes acelerar tu proceso de desarrollo de aplicaciones, [regístrate para obtener una cuenta gratuita](/register/) hoy.

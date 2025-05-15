@@ -1,12 +1,7 @@
 ---
 slug: chinas-data-privacy-laws-impact-on-mobile-apps
-title: >-
-  Les lois sur la protection des données en Chine : Impact sur les applications
-  mobiles
-description: >-
-  Comprendre les lois chinoises sur la confidentialité des données est essentiel
-  pour les développeurs d'applications mobiles, en mettant l'accent sur la
-  conformité, le consentement des utilisateurs et la sécurité des données.
+title: 中国的数据隐私法律：对移动应用的影响
+description: 理解中国的数据隐私法律对于移动应用开发者至关重要，重点关注合规性、用户同意和数据安全。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -14,7 +9,7 @@ created_at: 2025-04-12T02:08:36.971Z
 updated_at: 2025-04-12T02:08:48.582Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f9b0a22e221594daf2d518-1744423728582.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   China, data privacy, mobile apps, compliance, user consent, Cybersecurity Law,
   Data Security Law, Personal Information Protection Law
@@ -23,61 +18,145 @@ published: true
 locale: it
 next_blog: ''
 ---
+如果您正在为中国市场开发移动应用程序，**遵守中国的数据隐私法律是不可谈判的**。关键法规 - **[网络安全法](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**，**[数据安全法](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**，和**[个人信息保护法](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - 要求严格的[数据存储](https://capgo.app/plugins/capacitor-data-storage-sqlite/)、用户同意和安全措施。
 
-Se stai sviluppando app mobile per il mercato cinese, **la conformità alle leggi sulla privacy dei dati della Cina è non negoziabile**. Le normative chiave - **[Cybersecurity Law](https://enwikipediaorg/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[Data Security Law](https://enwikipediaorg/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)** e **[Personal Information Protection Law](https://enwikipediaorg/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - richiedono rigorosi [data storage](https://capgoapp/plugins/capacitor-data-storage-sqlite/), consenso degli utenti e misure di sicurezza.
+### 关键要点：
 
-### Punti Chiave:
+-   **数据本地化**：应用程序必须将中国用户的数据存储在中国境内的服务器上（CSL）。
+-   **同意规则**：收集数据必须获得明确、明确的用户同意（PIPL）。
+-   **跨境转移**：敏感数据通常在未获批准的情况下不能离开中国（DSL）。
+-   **处罚**：不合规可能导致高达5000万元人民币（约770万美元）的罚款或年度收入的5%。
 
--   **Localizzazione dei Dati**: Le app devono memorizzare i dati degli utenti cinesi su server in Cina (CSL)
--   **Regole sul Consenso**: È obbligatorio il consenso esplicito e chiaro dell'utente per la raccolta dati (PIPL)
--   **Trasferimenti Transfrontalieri**: I dati sensibili spesso non possono lasciare la Cina senza approvazione (DSL)
--   **Sanzioni**: La non conformità può comportare multe fino a ¥50M (~$77M) o 5% del fatturato annuo
+### 快速概览：
 
-### Panoramica Rapida:
-
-| Regolamento | Focus | Requisiti Chiave |
+| 法规 | 重点 | 主要要求 |
 | --- | --- | --- |
-| CSL | Sicurezza di Rete | Archiviazione locale dei dati, revisioni di sicurezza, segnalazione incidenti |
-| DSL | Classificazione Dati | Valutazioni del rischio, registrazioni, restrizioni transfrontaliere |
-| PIPL | Dati Personali | Consenso utente, minimizzazione dei dati, diritti degli utenti |
+| CSL | 网络安全 | 本地数据存储、安全审查、事件报告 |
+| DSL | 数据分类 | 风险评估、记录、跨境限制 |
+| PIPL | 个人数据 | 用户同意、数据最小化、用户权利 |
 
-La conformità richiede investimenti significativi in soluzioni tecniche come crittografia, audit regolari e processi di aggiornamento robusti. **Il mancato rispetto rischia sanzioni finanziarie e rimozione dell'app dagli store cinesi**.
+遵守要求需要在技术解决方案方面进行大量投资，例如加密、定期审计和强有力的更新流程。**未能合规可能会面临经济处罚和应用程序从中国应用商店中移除的风险。**
 
-## Principali Leggi sulla Privacy in Cina
+## 中国主要隐私法律
 
-### Requisiti [Cybersecurity Law](https://enwikipediaorg/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)
+### [网络安全法](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL) 要求
 
-La CSL, in vigore dal 1° giugno 2017, stabilisce regole severe per gli operatori di rete e infrastrutture. Per le app mobile, i requisiti chiave includono:
+自2017年6月1日起生效的CSL制定了网络和基础设施运营商的严格规则。对于移动应用程序，关键要求包括：
 
--   **Localizzazione dei Dati**: I dati personali devono essere archiviati su server situati nella Cina continentale
--   **Revisioni di Sicurezza**: Le app che gestiscono dati sensibili devono sottoporsi a valutazioni di sicurezza obbligatorie
--   **Protezione della Rete**: Gli operatori devono adottare misure di sicurezza di rete multi-livello
--   **Segnalazione Incidenti**: Gli incidenti di sicurezza devono essere segnalati entro tempi specificati
+-   **数据本地化**：个人数据必须存储在位于中国大陆的服务器上。
+-   **安全审查**：处理敏感数据的应用程序必须接受强制的安全评估。
+-   **网络保护**：运营商需要采取多层次的网络安全措施。
+-   **事件报告**：安全事件必须在规定的时间内报告。
 
-### Standard [Data Security Law](https://enwikipediaorg/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)
+### [数据安全法](https://en.wikipedia.org/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL) 标准
 
-Il DSL si basa sul CSL introducendo un approccio strutturato alla gestione dei dati, concentrandosi sulla classificazione. Ecco come i dati sono categorizzati secondo questa legge:
+DSL在CSL的基础上，引入了一种结构化的数据管理方法，侧重于分类。以下是根据该法对数据的分类：
 
-| Classificazione Dati | Requisiti di Sicurezza | Trasferimento Transfrontaliero |
+| 数据分类 | 安全要求 | 跨境转移 |
 | --- | --- | --- |
-| Dati Statali Core | Protezione più rigorosa | Non consentito |
-| Dati Importanti | Protezione di alto livello | Richiede valutazione di sicurezza |
-| Dati Generali | Protezione base | Deve seguire regole standard |
+| 核心国家数据 | 最严格的保护 | 不允许 |
+| 重要数据 | 高级保护 | 需要安全评估 |
+| 一般数据 | 基本保护 | 必须遵循标准规则 |
 
-Le app mobile devono seguire queste pratiche:
+移动应用程序必须遵循以下做法：
 
--   Utilizzare sistemi di classificazione dati gerarchici
--   Eseguire regolari valutazioni del rischio
--   Mantenere registrazioni dettagliate delle attività di elaborazione dati
--   Stabilire un meccanismo di risposta alle emergenze
+-   使用分层数据分类系统。
+-   进行定期风险评估。
+-   保留详细的数据处理活动记录。
+-   建立应急响应机制。
 
-### Regole [Personal Information Protection Law](https://enwikipediaorg/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)
+### [个人信息保护法](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL) 规则
 
-Il PIPL fornisce regolamenti dettagliati sulla gestione dei dati personali. Le app mobile devono rispettare queste regole chiave:
+PIPL提供了处理个人数据的详细规定。移动应用程序必须遵守以下关键规则：
 
--   **Consenso Utente**: Ottenere un consenso chiaro ed esplicito per ogni tipo di dato raccolto
--   **Minimizzazione dei Dati**: Raccogliere solo le informazioni assolutamente necessarie
--   **Diritti Utente**: Offrire strumenti per accedere, correggere o eliminare i propri dati
--   **Portabilità dei Dati**: Permettere agli utenti di trasferire i loro dati ad altre piattaforme
+-   **用户同意**：在收集每种类型的数据时，获得明确和详细的同意。
+-   **数据最小化**：仅收集绝对必要的信息。
+-   **用户权利**：提供工具让用户访问、纠正或删除他们的数据。
+-   **数据可携带性**：允许用户将他们的数据转移到其他平台。
 
-La non conformità può comportare severe sanzioni, incluse multe fino a 50 milioni di yuan (circa $77 milioni) o 5% del fatturato dell'anno precedente. Questo spinge gli sviluppatori a dare priorità alla conformità e adottare robuste misure di protezione dei dati.
+不合规可能导致严重的处罚，包括高达5000万元人民币（约770万美元）的罚款或上年度收入的5%。这迫使开发人员优先考虑合规性并采取强有力的数据保护措施。
+
+这三条法律共同形成了中国移动应用程序开发者面临的严格监管环境，尤其是涉及敏感信息（如财务数据、健康记录或位置信息）的应用程序。
+
+## 移动应用开发要求
+
+### 用户权限标准
+
+在中国，移动应用程序必须在收集任何数据之前获得用户的明确和详细的同意。应用程序还应为用户提供简单明了的权限控制。为实现这一目标，使用简单、易于理解的界面，解释每个数据请求的必要性。这种方法有助于保持透明度，并与监管期望对齐。
+
+### 应用商店提交流程
+
+在中国提交应用程序涉及多个步骤。您需要经过验证的商业凭据、详细的技术文档（如[隐私政策](https://capgo.app/dp/)和系统架构），并且您的应用程序必须通过严格的安全审查，这些审查通常由第三方机构进行。如果您的应用程序处理敏感数据或跨境传输数据，您还需要与获得许可的本地合作伙伴合作，以满足监管要求。
+
+## 中国个人信息的域外适用...
+
+<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+
+## 开发人员风险和障碍
+
+开发人员面临一系列挑战，这些挑战超越了技术更新，使得遵守中国隐私法律尤其具有挑战性。
+
+### 实施成本
+
+满足中国隐私法要求通常需要在技术和资金上进行大量投资。开发人员可能需要改善他们的数据存储系统，以遵守本地化规则，并升级安全措施以满足严格标准。许多公司还会寻求合规专家或第三方服务的帮助，以确保他们的系统满足监管期望。这些前期成本只是开始，为持续挑战奠定了基础。
+
+### 不合规后果
+
+未能遵守中国隐私法律可能导致严重后果。这些后果包括经济处罚、监管行动，甚至应用程序从本地应用商店中移除。这些结果凸显了严格遵守规则的重要性。
+
+### 规则变化和更新
+
+中国的数据隐私法规处于不断变化之中。像[中国网络空间管理局](https://www.cac.gov.cn/) (CAC)等监管机构经常发布新的指导方针和解释。开发人员必须具备能够快速适应这些变化的系统。定期监控、定期审查和更新数据管理做法在这一不断变化的环境中至关重要。
+
+## 合规方法和解决方案
+
+满足合规要求涉及实施强有力的技术措施和遵循明确、结构化的流程。
+
+### 技术解决方案
+
+端到端加密在保护数据方面发挥着关键作用。[Capgo](https://capgo.app/)确保数据传输和存储的安全，将访问限制在授权用户之内。
+
+CI/CD集成有助于减少人为错误并确保更新符合监管要求。例如，自动化系统已被证明在24小时内实现95%的用户更新率 [\[1\]](https://capgo.app/)。
+
+版本控制和回滚功能在需要时提供快速修复，同时保持适当的审计记录。以下是详细信息：
+
+| 功能 | 合规益处 | 实施影响 |
+| --- | --- | --- |
+| 端到端加密 | 保护数据在传输过程中的安全 | 符合PIPL数据保护规则 |
+| 自动化部署 | 减少更新中的人为错误 | 确保持续合规 |
+| 版本控制 | 保持详细的审计记录 | 有助于监管文档 |
+| 回滚能力 | 在需要时快速解决问题 | 降低不合规的风险 |
+
+这些工具直接应对合规挑战。然而，仅仅依靠技术解决方案还不足够——开发人员还必须遵循结构化做法以保持合规。
+
+### 开发人员指南
+
+为补充技术工具，开发人员应遵循特定做法，以满足合规需求：
+
+**数据保护措施**  
+实施符合PIPL标准的协议，如安全同意机制和详细的数据处理活动记录。
+
+**定期合规审计**  
+定期审查您的应用程序如何处理数据。正如贝西·库珀强调的：
+
+> "Capgo是想要提高生产效率的开发人员必备的工具。避免因漏洞修复而被审查是至关重要的。"
+
+**用户同意管理**  
+创建清晰、透明的用户同意流程，解释为什么要收集数据。罗德里戈·曼蒂卡分享：
+
+> "我们实行敏捷开发，Capgo在为我们的用户持续交付中至关重要！"
+
+**[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) 策略**  
+由于法规不断变化，拥有一个稳固的更新管理方法至关重要。数据显示[有效的更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)在维持合规方面的全球成功率为82% [\[1\]](https://capgo.app/)。
+
+## 结论
+
+中国的数据隐私法规重新塑造了移动应用开发行业，要求开发人员实施严格的合规措施和先进的技术解决方案。网络安全法（CSL）、数据安全法（DSL）和个人信息保护法（PIPL）等关键法律推出了具有挑战性的监管环境，强调用户权限、数据存储和安全协议。
+
+开发人员已调整他们的做法以符合这些法规。例如，95%的活跃用户在24小时内更新到最新的应用程序版本 [\[1\]](https://capgo.app/)，强调了高效合规流程的重要性。像Capgo这样的平台展示了如何实现精简的合规，全球成功率高达82% [\[1\]](https://capgo.app/)。
+
+满足这些要求需要重大的财务和运营投资。开发者必须优先考虑技术措施，例如端到端加密，保持详细的审计追踪，有效管理用户同意，确保无缝的更新过程，以便在中国市场取得成功。
+
+随着监管的不断变化，灵活性对于保持合规性至关重要。Capgo因其能够提供符合严格标准的成本高效和灵活的更新解决方案而受到认可 [\[1\]](https://capgo.app/)。
+
+为了实现长期成功，中国的应用程序开发者必须采取一种积极的战略，结合强大的技术系统、严格的监管遵从和高效的更新管理。

@@ -1,8 +1,9 @@
 ---
 slug: integrate-universal-links-capacitor-nextjs
-title: Capacitor로 Next.js에서 유니버설 링크를 통합하는 방법
+title: Comment intégrer des liens universels dans Next.js avec Capacitor
 description: >-
-  Next.jsアプリのユニバーサルリンクを、iOSとAndroidの両プラットフォームでCapacitorを使用して設定する方法をステップバイステップで学びましょう。
+  Apprenez étape par étape comment configurer des liens universels pour votre
+  application Next.js avec Capacitor sur les plateformes iOS et Android.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
@@ -18,14 +19,13 @@ published: true
 locale: fr
 next_blog: ''
 ---
+Les liens universels sur iOS et les liens d'application sur Android permettent aux utilisateurs d'entrer directement dans votre application à partir d'un lien, contournant ainsi le navigateur. Cela est particulièrement utile pour améliorer l'expérience utilisateur et maintenir le contexte d'une page web à une application. Dans ce guide, nous allons passer en revue le processus de configuration de ces liens profonds pour une application Next.js utilisant Capacitor.
 
-Les liens universels sur iOS et les App Links sur Android permettent aux utilisateurs d'être dirigés directement vers votre application depuis un lien, en contournant le navigateur. Ceci est particulièrement utile pour améliorer l'expérience utilisateur et maintenir le contexte d'une page web vers une application. Dans ce guide, nous allons parcourir le processus de configuration de ces liens profonds pour une application Nextjs utilisant Capacitor.
+Configurer des liens profonds ne nécessite pas beaucoup de code, mais cela implique une certaine configuration. À la fin de ce guide, vous pourrez cliquer sur un lien tel que `https://www.capgo.app/details/22` et voir votre application s'ouvrir à la bonne page si elle est installée.
 
-La configuration des liens profonds ne nécessite pas beaucoup de code, mais implique une certaine configuration. À la fin de ce guide, vous pourrez cliquer sur un lien comme `https://www.capgo.app/details/22` et votre application s'ouvrira à la bonne page si elle est installée.
+## Configuration des liens profonds Next.js
 
-## Configuration des liens profonds Nextjs
-
-Tout d'abord, nous allons créer une nouvelle application Nextjs et une page de détails pour les tests :
+Tout d'abord, nous allons créer une nouvelle application Next.js et une page de détails pour les tests :
 
 ```sh
 npx create-next-app@latest capgoLinks
@@ -37,7 +37,7 @@ npx cap add ios
 npx cap add android
 ```
 
-Assurez-vous que votre **bundle ID** est correctement défini dans le fichier **capacitor.config.json**, car il est crucial pour la configuration :
+Assurez-vous que votre **ID de bundle** est correctement défini dans le fichier **capacitor.config.json**, car il est crucial pour la configuration :
 
 ```json
 {
@@ -48,9 +48,9 @@ Assurez-vous que votre **bundle ID** est correctement défini dans le fichier **
 }
 ```
 
-Pour le routage, Nextjs utilise le routage basé sur les fichiers, donc en créant un fichier à `pages/details/[id].js`, nous avons déjà configuré notre route générique.
+Pour le routage, Next.js utilise un routage basé sur les fichiers, donc en créant un fichier à `pages/details/[id].js`, nous avons déjà configuré notre route wildcard.
 
-Dans `pages/details/[id].js`, nous pouvons récupérer l'ID depuis l'URL en utilisant le routeur intégré de Nextjs :
+Dans `pages/details/[id].js`, nous pouvons récupérer l'ID à partir de l'URL en utilisant le routeur intégré de Next.js :
 
 ```jsx
 import { useRouter } from 'next/router'
@@ -91,11 +91,11 @@ function MyApp({ Component, pageProps }) {
 export default MyApp
 ```
 
-Ce code écoute l'événement `appUrlOpen` et navigue vers la route appropriée dans votre application Nextjs.
+Ce code écoute l'événement `appUrlOpen` et navigue vers la route appropriée à l'intérieur de votre application Next.js.
 
 ## Configuration iOS
 
-Pour iOS, vous aurez besoin d'un ID d'application avec les Domaines Associés activés. Créez un fichier **apple-app-site-association** avec le contenu suivant, en remplaçant `YOURTEAMID` et `com.your.bundleid` par votre ID d'équipe et bundle ID réels :
+Pour iOS, vous aurez besoin d'un ID d'application avec les domaines associés activés. Créez un fichier **apple-app-site-association** avec le contenu suivant, en remplaçant `YOURTEAMID` et `com.your.bundleid` par votre ID d'équipe réel et l'ID de bundle :
 
 ```json
 {
@@ -113,16 +113,16 @@ Pour iOS, vous aurez besoin d'un ID d'application avec les Domaines Associés ac
 
 Téléchargez ce fichier dans le répertoire `.well-known` sur votre domaine, le rendant accessible à `https://www.capgo.app/.well-known/apple-app-site-association`.
 
-Dans Xcode, ajoutez le domaine aux droits de votre application en utilisant le format `applinks:capgo.app`.
+Dans Xcode, ajoutez le domaine aux droits (entitlements) de votre application en utilisant le format `applinks:capgo.app`.
 
 ## Configuration Android
 
-Pour les App Links Android, suivez ces étapes :
+Pour les liens d'application Android, suivez ces étapes :
 
-1. Générez un fichier keystore si vous n'en avez pas
-2. Obtenez l'empreinte SHA256 du keystore
-3. Créez un fichier **assetlinks.json** avec votre nom de package et l'empreinte SHA256
-4. Téléchargez ce fichier dans le répertoire `.well-known` sur votre domaine
+1. Générer un fichier de keystore si vous n'en avez pas.
+2. Obtenir l'empreinte SHA256 à partir du keystore.
+3. Créer un fichier **assetlinks.json** avec votre nom de paquet et l'empreinte SHA256.
+4. Téléchargez ce fichier dans le répertoire `.well-known` sur votre domaine.
 
 Dans votre `AndroidManifest.xml`, ajoutez un `intent-filter` à l'élément `activity` qui gère les liens profonds :
 
@@ -137,7 +137,7 @@ Dans votre `AndroidManifest.xml`, ajoutez un `intent-filter` à l'élément `act
 </activity>
 ```
 
-Après avoir téléchargé le fichier `assetlinks.json`, vous pouvez le vérifier en utilisant l'outil Digital Asset Links de Google. Si tout est correctement configuré, vous verrez une coche verte.
+Après avoir téléchargé le fichier `assetlinks.json`, vous pouvez le vérifier en utilisant l'outil Digital Asset Links de Google. Si tout est configuré correctement, vous verrez une coche verte.
 
 Pour construire et signer votre application, utilisez les commandes suivantes :
 
@@ -152,9 +152,9 @@ adb install capgo.apk
 
 Cela installera l'application signée sur votre appareil Android connecté.
 
-## Configuration Capacitor pour les paramètres du projet natif
+## Configurer Capacitor pour les paramètres du projet natif
 
-Pour automatiser les paramètres du projet natif, envisagez d'utiliser le [package Capacitor configure](https://github.com/ionic-team/capacitor-configure/). Installez-le dans votre projet :
+Pour automatiser les paramètres du projet natif, envisagez d'utiliser le [package de configuration Capacitor](https://github.com/ionic-team/capacitor-configure/). Installez-le dans votre projet :
 
 ```sh
 npm install @capacitor/configure
@@ -177,7 +177,7 @@ platforms:
     packageName: $PACKAGE_NAME
 ```
 
-Exécutez l'outil de configuration avec cette config :
+Exécutez l'outil de configuration avec cette configuration :
 
 ```sh
 npx cap-config run capacitor.config.yaml
@@ -187,4 +187,4 @@ Cela appliquera les paramètres spécifiés dans le fichier YAML à vos projets 
 
 ## Conclusion
 
-La configuration des liens profonds avec Capacitor pour une application Nextjs implique la configuration de votre domaine et des paramètres de projet pour iOS et Android. Bien que le processus nécessite une attention aux détails, il est simplifié par rapport aux anciennes méthodes et ne nécessite pas de plugins supplémentaires. Assurez-vous que vos fichiers de vérification de domaine sont correctement servis et vérifiez-les avec les outils de plateforme respectifs. Une fois configurée, votre application s'ouvrira de manière transparente à partir des liens web, offrant une transition fluide pour vos utilisateurs du web vers l'application.
+Configurer des liens profonds avec Capacitor pour une application Next.js implique de configurer votre domaine et les paramètres du projet tant pour iOS que pour Android. Bien que le processus nécessite une attention aux détails, il est fluidifié par rapport aux anciennes méthodes et ne nécessite pas de plugins supplémentaires. Assurez-vous que vos fichiers de vérification de domaine sont correctement servis et vérifiez-les avec les outils des plateformes respectives. Une fois configurée, votre application s'ouvrira facilement à partir de liens web, offrant une transition fluide pour vos utilisateurs entre le web et l'application.

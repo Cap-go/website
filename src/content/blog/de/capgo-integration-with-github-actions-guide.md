@@ -1,9 +1,9 @@
 ---
 slug: capgo-integration-with-github-actions-guide
-title: 'Intégration de Capgo avec GitHub Actions : Guide'
+title: 'Capgo-Integration mit GitHub Actions: Anleitung'
 description: >-
-  Integrieren Sie Capgo mit GitHub Actions für effiziente, sichere und
-  kostengünstige App-Updates, um Ihren Entwicklungsworkflow zu verbessern.
+  Integriere Capgo mit GitHub Actions für effiziente, sichere und kostengünstige
+  App-Updates, die deinen Entwicklungsworkflow verbessern.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -20,22 +20,21 @@ published: true
 locale: de
 next_blog: ''
 ---
+[Capgo](https://capgo.app/) und [GitHub Actions](https://docs.github.com/actions) vereinfachen gemeinsam das Bereitstellen von Updates für [Capacitor](https://capacitorjs.com/) Apps. Hier sind die Gründe, warum diese Integration Ihre Aufmerksamkeit verdient:
 
-[Capgo](https://capgoapp/) und [GitHub Actions](https://docsgithubcom/actions) vereinfachen gemeinsam die Bereitstellung von Updates für [Capacitor](https://capacitorjscom/) Apps. Hier sind die Gründe, warum diese Integration Ihre Aufmerksamkeit verdient:
+-   **Geld Sparen**: Senken Sie die CI/CD-Kosten um bis zu 26.100 $ über 5 Jahre im Vergleich zu [AppFlow](https://ionic.io/appflow/).
+-   **Schnelle Updates**: Pushen Sie Updates sofort mit 95 % der Nutzer, die sie innerhalb von 24 Stunden erhalten.
+-   **Sichere Bereitstellungen**: Ende-zu-Ende-Verschlüsselung stellt sicher, dass Updates sicher sind.
+-   **Optimierter Workflow**: Automatisieren Sie Builds und Bereitstellungen direkt in Ihrem GitHub-Repository.
 
--   **Geld sparen**: Reduzieren Sie CI/CD-Kosten um bis zu 26.100 € über 5 Jahre im Vergleich zu [AppFlow](https://ionicio/appflow/)
--   **Schnelle Updates**: Sofortige Update-Bereitstellung mit 95% Nutzererreichung innerhalb von 24 Stunden
--   **Sichere Bereitstellungen**: Ende-zu-Ende-Verschlüsselung gewährleistet sichere Updates
--   **Optimierter Workflow**: Automatisieren Sie Builds und Bereitstellungen direkt in Ihrem GitHub Repository
+### Schnellübersicht
 
-### Kurzer Überblick
+1.  **Anforderungen**: GitHub-Konto, [Capgo-Konto](https://capgo.app/disclaimer/) (ab 12 $/Monat), Capacitor-Projekt, [Node.js](https://nodejs.org/en).
+2.  **Einrichtung**: Installieren Sie [Capgo CLI](https://capgo.app/docs/cli/commands) mit `npx @capgo/cli init`, konfigurieren Sie GitHub Actions mit einem YAML-Workflow.
+3.  **Bereitstellung**: Verwenden Sie Befehle wie `npx @capgo/cli deploy`, um [Updates zu automatisieren](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+4.  **Tests**: Stellen Sie vor der Produktion auf Testkanäle (z. B. Beta, Staging) bereit.
 
-1.  **Voraussetzungen**: GitHub Account, [Capgo Account](https://capgoapp/disclaimer/) (ab 12€/Monat), Capacitor Projekt, [Nodejs](https://nodejsorg/en)
-2.  **Einrichtung**: Installieren Sie [Capgo CLI](https://capgoapp/docs/cli/commands) mit `npx @capgo/cli init`, konfigurieren Sie GitHub Actions mit einem YAML Workflow
-3.  **Bereitstellung**: Nutzen Sie Befehle wie `npx @capgo/cli deploy` zur [Automatisierung von Updates](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)
-4.  **Testen**: Bereitstellen in Testkanälen (z.B. Beta, Staging) vor der Produktion
-
-**Beispiel Workflow (YAML)**:
+**Beispiel-Workflow (YAML)**:
 
 ```yaml
 name: Capgo Deploy  
@@ -60,64 +59,64 @@ jobs:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}  
 ```
 
-Diese Integration gewährleistet schnelle, sichere und kosteneffektive App-Updates, ideal für agile Entwicklungsteams
+Diese Integration stellt schnelle, sichere und kosteneffiziente App-Updates sicher und ist ideal für agile Entwicklungsteams.
 
-## [GitHub Actions](https://docsgithubcom/actions) Tutorial - Grundkonzepte und CI/CD Pipeline
+## [GitHub Actions](https://docs.github.com/actions) Tutorial - Grundlegende Konzepte und CI/CD-Pipeline
 
-![GitHub Actions](https://mars-imagesimgixnet/seobot/screenshots/docsgithubcom-90237daad1b336de5d9b7f1a85aa7441-2025-03-16jpg?auto=compress)
+![GitHub Actions](https://mars-images.imgix.net/seobot/screenshots/docs.github.com-90237daad1b336de5d9b7f1a85aa7441-2025-03-16.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/R8_veQiYBjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Einrichtungsvoraussetzungen
 
-[Die Integration von Capgo](https://capgoapp/docs/webapp/) mit GitHub Actions erfordert die Einrichtung der notwendigen Tools und Konfigurationen
+[Die Integration von Capgo](https://capgo.app/docs/webapp/) mit GitHub Actions umfasst die Einrichtung der erforderlichen Tools und Konfigurationen.
 
 ### Erforderliche Tools und Konten
 
-Stellen Sie sicher, dass Sie folgende Konten und Tools bereit haben:
+Stellen Sie sicher, dass Sie die folgenden Konten und Tools bereit haben:
 
-| Voraussetzung | Zweck | Details |
+| Anforderung | Zweck | Einzelheiten |
 | --- | --- | --- |
-| **GitHub Account** | Versionskontrolle & CI/CD | Aktives Konto mit Zugriff auf Repositories |
-| **Capgo Account** | Live-Update-Verwaltung | Tarife beginnen bei 12€/Monat für den SOLO-Plan |
-| **Capacitor Projekt** | App-Entwicklung | Ein funktionsfähiges Projekt bereit zur Integration |
-| **Nodejs** | Laufzeitumgebung | Neueste LTS-Version wird empfohlen |
+| **GitHub-Konto** | Versionskontrolle & CI/CD | Aktives Konto mit Zugriff auf Repositories |
+| **Capgo-Konto** | Verwaltung von Live-Updates | Pläne beginnen bei 12 $/Monat für den SOLO-Plan |
+| **Capacitor-Projekt** | App-Entwicklung | Ein funktionales Projekt, das bereit für die Integration ist |
+| **Node.js** | Laufzeitumgebung | Die neueste LTS-Version wird empfohlen |
 
-Sobald diese vorhanden sind, können Sie mit der Integration von Capgo in Ihr Projekt für automatisierte Live-Updates fortfahren
+Sobald diese bereit sind, können Sie Capgo zu Ihrem Projekt für automatisierte Live-Updates hinzufügen.
 
-### [Capgo](https://capgoapp/) zu Ihrem Projekt hinzufügen
+### Hinzufügen von [Capgo](https://capgo.app/) zu Ihrem Projekt
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
 
-Um Capgo zu integrieren, installieren Sie es in Ihrem Capacitor-Projekt mit dem CLI-Tool. Laut Martin Donadieu, Gründer von Capgo:
+Um Capgo zu integrieren, installieren Sie es in Ihrem Capacitor-Projekt mit seinem CLI-Tool. Laut Martin Donadieu, dem Gründer von Capgo:
 
-> "Führen Sie npx @capgo/cli init aus, das war's!" [\[1\]](https://capgoapp/)
+> "Führen Sie npx @capgo/cli init aus, das reicht!" [\[1\]](https://capgo.app/)
 
-Dieser Befehl richtet das Plugin und seine erforderlichen Abhängigkeiten ein
+Dieser Befehl wird das Plugin und seine erforderlichen Abhängigkeiten einrichten.
 
-### GitHub Repository Einrichtung
+### GitHub-Repository-Einrichtung
 
-Bereiten Sie Ihr GitHub Repository vor, um die Anforderungen für CI/CD-Integration mit Capgo zu erfüllen. Wie in ihrer Dokumentation erwähnt:
+Bereiten Sie Ihr GitHub-Repository vor, um die Anforderungen für die CI/CD-Integration mit Capgo zu erfüllen. Wie in deren Dokumentation erwähnt:
 
-> "Wir konfigurieren Ihre CI/CD-Pipeline direkt in Ihrer bevorzugten Plattform, sei es GitHub Actions, GitLab CI oder andere. Wir hosten keine CI/CD oder berechnen Ihnen deren Wartung" [\[1\]](https://capgoapp/)
+> "Wir konfigurieren Ihre CI/CD-Pipeline direkt in Ihrer bevorzugten Plattform, sei es GitHub Actions, GitLab CI oder andere. Wir hosten CI/CD nicht oder berechnen Ihnen keine Kosten für die Wartung." [\[1\]](https://capgo.app/)
 
-Capgo bietet diese Einrichtung für eine einmalige Gebühr von 2.600 € und ~300 €/Monat, was günstiger ist als AppFlows jährliche Gebühr von 6.000 € [\[1\]](https://capgoapp/)
+Capgo bietet dieses Setup gegen eine einmalige Gebühr von 2.600 $ und etwa 300 $/Monat an, was im Vergleich zu AppFlows jährlichen 6.000 $ Gebühr günstiger ist [\[1\]](https://capgo.app/).
 
-So richten Sie Ihr Repository ein:
+Hier ist, wie Sie Ihr Repository einrichten können:
 
--   **Repository-Struktur**: Organisieren Sie Ihr Repository mit separaten Verzeichnissen für Quellcode, Assets und Konfigurationsdateien, um alles übersichtlich und verwaltbar zu halten
--   **Umgebungskonfiguration**: Erstellen Sie verschiedene Umgebungen für Entwicklung, Staging und Produktion, und stellen Sie sicher, dass entsprechende Zugriffskontrollen und Sicherheitsmaßnahmen vorhanden sind
--   **Zugriffsverwaltung**: Legen Sie Repository-Berechtigungen sorgfältig fest, um die [Capgo-Integration](https://capgoapp/consulting/) zu ermöglichen und gleichzeitig die Sicherheit zu gewährleisten
+-   **Repository-Struktur**: Organisieren Sie Ihr Repository mit separaten Verzeichnissen für Quellcode, Assets und Konfigurationsdateien, um alles sauber und handhabbar zu halten.
+-   **Umgebungs-Konfiguration**: Erstellen Sie unterschiedliche Umgebungen für Entwicklung, Staging und Produktion, um sicherzustellen, dass angemessene Zugriffssteuerungen und Sicherheitsmaßnahmen vorhanden sind.
+-   **Zugriffsverwaltung**: Legen Sie die Berechtigungen des Repositories sorgfältig fest, um die [Capgo-Integration](https://capgo.app/consulting/) zu ermöglichen und gleichzeitig die Sicherheit aufrechtzuerhalten.
 
-Diese Schritte stellen sicher, dass Ihr Projekt bereit für den GitHub Actions Workflow ist, der im nächsten Abschnitt beschrieben wird
+Diese Schritte stellen sicher, dass Ihr Projekt bereit für den GitHub Actions-Workflow ist, der im nächsten Abschnitt umrissen wird.
 
-## GitHub Actions Workflow Einrichtung
+## GitHub Actions Workflow-Einrichtung
 
-Automatisieren Sie Ihre [Capgo-Bereitstellungen](https://capgoapp/docs/cli/commands/) mit GitHub Actions zur Optimierung Ihres CI/CD-Prozesses
+Automatisieren Sie Ihre [Capgo-Bereitstellungen](https://capgo.app/docs/cli/commands/) mit GitHub Actions, um Ihren CI/CD-Prozess zu optimieren.
 
 ### Erstellen der Workflow-Datei
 
-Beginnen Sie mit der Erstellung einer YAML-Datei im Verzeichnis `github/workflows` Ihres Repositories. Hier ein Beispiel:
+Beginnen Sie damit, eine YAML-Datei im Verzeichnis `.github/workflows` Ihres Repositories zu erstellen. Hier ist ein Beispiel:
 
 ```yaml
 name: Capgo Deploy
@@ -145,40 +144,40 @@ jobs:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-Diese Konfiguration gewährleistet sichere und automatisierte Deployments. Nachdem Sie die Datei eingerichtet haben, wählen Sie die richtigen Auslöser für Ihren Workflow.
+Diese Konfiguration sorgt für sichere und automatisierte Bereitstellungen. Nachdem Sie die Datei eingerichtet haben, wählen Sie die richtigen Trigger für Ihren Workflow aus.
 
-### Workflow-Auslöser Optionen
+### Workflow-Trigger-Optionen
 
-GitHub Actions ermöglicht es Ihnen, den Zeitpunkt der Workflow-Ausführung anzupassen. Hier sind einige Auslöser-Optionen:
+GitHub Actions ermöglicht es Ihnen, anzupassen, wann Workflows ausgeführt werden. Hier sind einige Trigger-Optionen:
 
-| **Auslöser-Typ** | **Anwendungsfall** | **Konfiguration** |
+| **Trigger-Typ** | **Anwendungsfall** | **Konfiguration** |
 | --- | --- | --- |
-| Push-Events | Deployment bei Code-Änderungen | Aktiviert wenn Code in bestimmte Branches gepusht wird |
-| Manuelle Ausführung | Bedarfsgesteuerte Updates | Erlaubt manuelles Starten des Workflows |
-| Zeitplan | Zeitgesteuerte Releases | Führt Deployments in festgelegten Intervallen aus |
-| Pull Request | Test von Updates | Testet Änderungen vor dem Merge in Hauptbranches |
+| Push-Events | Bereitstellung bei Codeänderungen | Aktiviert, wenn Code in bestimmte Branches gepusht wird |
+| Manuelle Auslösung | On-Demand-Updates | Ermöglicht Ihnen, den Workflow manuell zu starten |
+| Zeitplan | Zeitgesteuerte Veröffentlichungen | Führt Bereitstellungen in festgelegten Intervallen aus |
+| Pull Request | Testing von Updates | Testet Änderungen, bevor sie in die Hauptzweige integriert werden |
 
-### Verwaltung von Geheimen Schlüsseln
+### Verwaltung von geheimen Schlüsseln
 
-Für sichere Deployments müssen Sie Ihre geheimen Schlüssel richtig verwalten. GitHub Actions bietet dafür ein verschlüsseltes Geheimnis-Verwaltungssystem.
+Um sichere Bereitstellungen zu gewährleisten, müssen Sie Ihre geheimen Schlüssel ordnungsgemäß verwalten. GitHub Actions bietet ein verschlüsseltes Geheimnisverwaltungs-System zu diesem Zweck.
 
-**Schritte zur Einrichtung sicherer Authentifizierung:**
+**Schritte zur Einrichtung einer sicheren Authentifizierung:**
 
-1. **Repository-Einstellungen aufrufen**  
-    Gehen Sie zu den Einstellungen Ihres Repositories und finden Sie den Bereich "Secrets and variables" unter dem "Security" Tab
+1.  **Zugriff auf Repository-Einstellungen**  
+    Gehen Sie zu den Einstellungen Ihres Repositories und finden Sie den Abschnitt "Secrets und Variablen" unter dem Tab "Sicherheit".
     
-2. **[Capgo Anmeldedaten](https://capgoapp/trust/) hinzufügen**  
-    Speichern Sie Ihren Capgo Authentifizierungs-Token als Repository-Geheimnis. Nennen Sie es `CAPGO_TOKEN`
+2.  **[Capgo-Anmeldedaten](https://capgo.app/trust/) hinzufügen**  
+    Speichern Sie Ihr Capgo-Authentifizierungstoken als geheimes Repository. Benennen Sie es `CAPGO_TOKEN`.
     
-3. **Geheimnisse in Workflows referenzieren**  
-    Verwenden Sie Ihre gespeicherten Geheimnisse im Workflow, indem Sie sie wie folgt referenzieren: `${{ secrets.CAPGO_TOKEN }}`
+3.  **Geheimnisse in Workflows referenzieren**  
+    Verwenden Sie Ihre gespeicherten Geheimnisse im Workflow, indem Sie sie so referenzieren: `${{ secrets.CAPGO_TOKEN }}`.
     
 
-## Capgo Befehle in Workflows
+## Capgo-Befehle in Workflows
 
-Sobald Ihre GitHub Actions Umgebung eingerichtet ist, können Sie Deployments durch Integration von Capgo CLI Befehlen automatisieren.
+Sobald Ihre GitHub Actions-Umgebung eingerichtet ist, können Sie Bereitstellungen automatisieren, indem Sie Capgo CLI-Befehle integrieren.
 
-### Installation der Capgo CLI
+### Installation von Capgo CLI
 
 Fügen Sie den folgenden Schritt zu Ihrem Workflow hinzu, um die Capgo CLI zu installieren:
 
@@ -201,17 +200,17 @@ Authentifizieren Sie die CLI sicher mit dem `CAPGO_TOKEN`:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-### Deployment Befehle
+### Bereitbefehle
 
-Hier sind die wichtigsten Befehle für das Erstellen, Versionieren und Deployen Ihrer Updates:
+Hier sind die wichtigsten Befehle zum Handhaben von Build, Versionierung und Bereitstellung Ihrer Updates:
 
-| Befehl | Zweck | Verwendungsbeispiel |
+| Befehl | Zweck | Anwendungsbeispiel |
 | --- | --- | --- |
-| `build` | Erstellt ein [produktionsreifes Bundle](https://capgoapp/docs/webapp/bundles/) | `npx @capgo/cli build` |
-| `deploy` | Überträgt Updates zu Capgo | `npx @capgo/cli deploy` |
+| `build` | Erstellt ein [produktionsbereites Bundle](https://capgo.app/docs/webapp/bundles/) | `npx @capgo/cli build` |
+| `deploy` | Pushen von Updates an Capgo | `npx @capgo/cli deploy` |
 | `version` | Setzt die Version für das Update | `npx @capgo/cli version 1.2.0` |
 
-Um den gesamten Deployment-Prozess zu automatisieren, verwenden Sie die Befehle zusammen wie folgt:
+Um den gesamten Bereitstellungsprozess zu automatisieren, verwenden Sie die Befehle zusammen wie folgt:
 
 ```yaml
 steps:
@@ -224,13 +223,13 @@ steps:
       CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-Diese Einrichtung stellt sicher, dass Ihre Updates automatisch erstellt, versioniert und deployed werden, wenn der Workflow ausgeführt wird. Das Geheimnis-Verwaltungssystem von GitHub hält Ihre Anmeldedaten während des gesamten Prozesses sicher.
+Dieses Setup stellt sicher, dass Ihre Updates automatisch gebaut, versioniert und bereitgestellt werden, wann immer der Workflow ausgeführt wird. Das Geheimnisverwaltungssystem von GitHub schützt Ihre Anmeldedaten während des gesamten Prozesses.
 
 ## Tests und Fehlerbehebung
 
-### Test-Workflows ausführen
+### Ausführen von Test-Workflows
 
-Sie können Ihren GitHub Actions Workflow testen, indem Sie einen dedizierten [Capgo Test-Kanal](https://capgoapp/docs/plugin/cloud-mode/channel-system/) verwenden. Dies ermöglicht es Ihnen, Updates zu validieren, bevor sie live gehen.
+Sie können Ihren GitHub Actions-Workflow testen, indem Sie einen speziellen [Capgo-Testkanal](https://capgo.app/docs/plugin/cloud-mode/channel-system/) verwenden. Dies ermöglicht es Ihnen, Updates zu validieren, bevor sie live gehen.
 
 ```yaml
 - name: Test Build Deployment
@@ -241,60 +240,61 @@ Sie können Ihren GitHub Actions Workflow testen, indem Sie einen dedizierten [C
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-Das Kanal-System von Capgo hilft Ihnen, separate Deployment-Pfade für verschiedene Stufen zu erstellen:
+Das Kanalsystem von Capgo hilft Ihnen, separate Bereitstellungspfade für verschiedene Stufen zu erstellen:
 
 | Kanal | Zweck | Zielgruppe |
 | --- | --- | --- |
-| beta | Pre-Release Tests | Internes Team |
-| staging | QA-Validierung | Testbenutzer |
-| production | Live-Deployment | Alle Benutzer |
+| beta | Vorab-Test | Internes Team |
+| staging | QA-Validierung | Testnutzer |
+| produktion | Live-Bereitstellung | Alle Nutzer |
 
-### Fehlerlösungen
+### Fehlerslösungen
 
-Hier sind einige häufige Integrationsprobleme und wie Sie diese angehen:
+Hier sind einige häufige Integrationsprobleme und wie man sie behebt:
 
 1. **Authentifizierungsfehler**
 
-Überprüfen Sie den CAPGO_TOKEN in den GitHub Secrets. Wenn er abgelaufen ist, generieren Sie ihn neu, um eine reibungslose Authentifizierung sicherzustellen.
+Überprüfen Sie das CAPGO\_TOKEN in GitHub Secrets. Wenn es abgelaufen ist, regenerieren Sie es, um eine reibungslose Authentifizierung zu gewährleisten.
 
 2. **Build-Fehler**
 
-Stellen Sie sicher, dass Ihre Build-Konfiguration den Anforderungen Ihrer Deployment-Umgebung entspricht.
+Stellen Sie sicher, dass Ihre Build-Konfiguration den Anforderungen Ihrer Bereitstellungsumgebung entspricht.
 
-> "Wir haben Capgo OTA-Updates in der Produktion für unsere Nutzerbasis von +5000 eingeführt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach dem OTA-Deployment auf @Capgo auf dem neuesten Stand" [\[1\]](https://capgoapp/)
+> "Wir haben Capgo OTA-Updates in der Produktion für unsere Nutzerbasis von über 5000 ausgerollt. Wir sehen eine sehr reibungslose Operation, fast alle unsere Nutzer sind innerhalb von Minuten nach der Bereitstellung der OTA auf @Capgo." [\[1\]](https://capgo.app/)
 
 3. **Versionskonflikte**
 
-Halten Sie sich an semantische Versionierung und erhöhen Sie Versionen ordnungsgemäß, um Konflikte während des Deployments zu vermeiden.
+Halten Sie sich an die semantische Versionierung und erhöhen Sie die Versionen ordnungsgemäß, um Konflikte während der Bereitstellungen zu vermeiden.
 
 ### Wartungstipps
 
-- Nutzen Sie [Capgo Analytics](https://capgoapp/dp/) zur Überwachung der Update-Erfolgsraten-   Aktivieren Sie automatische Rollbacks für Updates, die Probleme verursachen könnten
--   Testen Sie Pull Requests (PRs) mit Kanal-Selektoren für bessere Kontrolle
--   Halten Sie Ihren Workflow mit den neuesten Capgo CLI-Befehlen aktuell
+-   Verwenden Sie [Capgo-Analysen](https://capgo.app/dp/), um die Erfolgsquoten von Updates zu überwachen.
+-   Aktivieren Sie automatische Rollbacks für Updates, die Probleme verursachen könnten.
+-   Testen Sie Pull Requests (PRs) mithilfe von Kanalwählern für bessere Kontrolle.
+-   Halten Sie Ihren Workflow mit den neuesten Capgo CLI-Befehlen aktuell.
 
-Für Deployments mit hoher Priorität nutzen Sie Capgos Fehlerverfolgung, um potenzielle Probleme frühzeitig zu erkennen. Falls etwas schief geht, ermöglicht die Rollback-Funktion eine schnelle Rückkehr zu einer stabilen Version, wodurch Störungen minimiert werden. Diese Praktiken helfen dabei, Ihre Deployments reibungslos am Laufen zu halten, während Sie sich der Produktion nähern.
+Für hochpriorisierte Bereitstellungen nutzen Sie die Fehlerverfolgung von Capgo, um potenzielle Probleme frühzeitig zu erkennen. Wenn etwas schiefgeht, ermöglicht die Rollback-Funktion, schnell auf eine stabile Version zurückzukehren, was die Störung minimiert. Diese Praktiken helfen, Ihre Bereitstellungen reibungslos zu halten, während Sie sich der Produktion nähern.
 
 ## Fazit
 
-### Wichtige Punkte
+### Wichtige Höhepunkte
 
-Capgos Integration mit GitHub Actions vereinfacht den Deployment-Prozess für [Capacitor Apps](https://capgoapp/blog/capacitor-comprehensive-guide/) und bietet Entwicklungsteams große Vorteile. Mit einer globalen Erfolgsrate von 82% für Updates und 95% der aktiven Nutzer, die Updates innerhalb von 24 Stunden erhalten [\[1\]](https://capgoapp/), sticht diese Lösung durch ihre Effizienz hervor.
+Die Integration von Capgo mit GitHub Actions vereinfacht den Bereitstellungsprozess für [Capacitor-Apps](https://capgo.app/blog/capacitor-comprehensive-guide/), was erhebliche Vorteile für Entwicklungsteams mit sich bringt. Mit einer globalen Erfolgsquote von 82 % für Updates und 95 % der aktiven Nutzer, die Updates innerhalb von 24 Stunden erhalten [\[1\]](https://capgo.app/), hebt sich diese Lösung durch ihre Effizienz hervor.
 
 Hier sind einige herausragende Funktionen:
 
--   **Automatisierte Workflows**: Durch die direkte Konfiguration von Workflows in GitHub Actions ist kein externes CI/CD-Hosting erforderlich. Dieser Ansatz reduziert die Betriebskosten und spart im Vergleich zu Alternativen wie AppFlow über fünf Jahre etwa 26.100 $ [\[1\]](https://capgoapp/)
--   **Schnelles Deployment**: Updates können sofort bereitgestellt werden, ohne App-Store-Verzögerungen
--   **Hohe Sicherheit**: Ende-zu-Ende-Verschlüsselung gewährleistet sichere Update-Auslieferung, während Capgos Kanalsystem kontrollierte, gestufte Einführungen ermöglicht
+-   **Automatisierte Workflows**: Durch die direkte Konfiguration von Workflows in GitHub Actions ist kein externes CI/CD-Hosting erforderlich. Dieser Ansatz senkt die Betriebskosten und spart etwa 26.100 $ über fünf Jahre im Vergleich zu Alternativen wie AppFlow [\[1\]](https://capgo.app/).
+-   **Schnelle Bereitstellung**: Updates können sofort bereitgestellt werden, wodurch Verzögerungen im App-Store umgangen werden.
+-   **Starke Sicherheit**: Die Ende-zu-Ende-Verschlüsselung stellt sicher, dass Updates sicher ausgeliefert werden, während das Kanalsystem von Capgo kontrollierte, stufenweise Rollouts ermöglicht.
 
-Diese Funktionen ebnen den Weg für maßgeschneiderte Lösungen und verbesserte Leistung, die nachfolgend näher erläutert werden.
+Diese Funktionen ebnen den Weg für maßgeschneiderte Lösungen und verbesserte Leistung, die weiter unten näher erforscht werden. 
 
-### Fortgeschrittene Strategien
+### Erweiterte Strategien
 
 Um das Beste aus Ihrer Capgo- und GitHub Actions-Integration herauszuholen, erkunden Sie diese fortgeschrittenen Taktiken:
 
--   **Benutzerdefinierte API-Workflows**: Nutzen Sie Capgos öffentliche API, um Deployment-Workflows zu erstellen, die den spezifischen Bedürfnissen Ihres Teams entsprechen. Dies ermöglicht White-Label-Erfahrungen und nahtlose Integration mit Ihren aktuellen Tools [\[1\]](https://capgoapp/)
--   **[Kanalbasierte Releases](https://capgoapp/docs/webapp/channels/)**: Optimieren Sie Ihren Deployment-Prozess durch die Nutzung von Capgos Kanalfunktionen für gestufte und kontrollierte Updates
--   **Optimierte Leistung**: Nutzen Sie Capgos partielle Updates, um die Bandbreitennutzung zu reduzieren und Updates zu beschleunigen. Mit 235 Millionen ausgelieferten Updates über 750 Produktions-Apps [\[1\]](https://capgoapp/) hat das System seine Fähigkeit bewiesen, große Anforderungen zu bewältigen
+-   **Benutzerdefinierte API-Workflows**: Verwenden Sie die öffentliche API von Capgo, um Bereitstellungs-Workflows zu gestalten, die den spezifischen Bedürfnissen Ihres Teams entsprechen. Dies kann weiße Etikett-Erlebnisse und nahtlose Integration mit Ihren aktuellen Tools ermöglichen [\[1\]](https://capgo.app/).
+-   **[Kanalbasierte Veröffentlichungen](https://capgo.app/docs/webapp/channels/)**: Optimieren Sie Ihren Bereitstellungsprozess, indem Sie die Kanal-Funktionen von Capgo für gestaffelte und kontrollierte Updates verwenden.
+-   **Optimierte Leistung**: Nutzen Sie die partiellen Updates von Capgo, um den Bandbreitenverbrauch zu reduzieren und die Updates zu beschleunigen. Mit 23,5 Millionen gelieferten Updates über 750 Produktionsanwendungen [\[1\]](https://capgo.app/) hat das System seine Fähigkeit bewiesen, große Anforderungen zu bewältigen.
 
-Für noch bessere Ergebnisse erwägen Sie die Nutzung von Capgos Self-Hosting-Optionen oder benutzerdefinierten API-Einrichtungen. Schauen Sie in den vorherigen Abschnitten nach detaillierten Einrichtungs- und Testanweisungen, um diese Strategien vollständig umzusetzen.
+Für noch bessere Ergebnisse sollten Sie die Self-Hosting-Optionen oder benutzerdefinierte API-Setups von Capgo in Betracht ziehen. Überprüfen Sie frühere Abschnitte für detaillierte Einrichtungs- und Testanleitungen, um diese Strategien vollständig umzusetzen.

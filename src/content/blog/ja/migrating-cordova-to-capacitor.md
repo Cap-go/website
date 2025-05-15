@@ -1,15 +1,15 @@
 ---
 slug: migrating-cordova-to-capacitor
-title: 'Cordova에서 Capacitor로 웹 앱 마이그레이션하기: 단계별 가이드'
+title: CordovaからCapacitorへのWebアプリの移行：ステップバイステップガイド
 description: >-
-  このステップバイステップのガイドでは、CordovaからCapacitorへのWebアプリの移行について、全てのセクションをカバーし、読みやすく理解しやすい形で説明します。
+  このステップバイステップガイドは、CordovaからCapacitorへのウェブアプリの移行を助けるもので、すべてのセクションを網羅し、読みやすく従いやすくしています。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /migrating-cordova-to-capacitor.webp
-head_image_alt: Cordova から Capacitor への移行の説明
+head_image_alt: CordovaからCapacitorへの移行イラストレーション
 keywords: >-
   Cordova, Capacitor, migration, mobile app development, live updates, OTA
   updates, continuous integration, mobile app updates
@@ -18,73 +18,72 @@ published: true
 locale: ja
 next_blog: ''
 ---
+# CordovaからCapacitorへのWebアプリの移行：ステップバイステップガイド
 
-# Cordovaから Capacitorへのウェブアプリ移行：ステップバイステップガイド
+このガイドは、CordovaからCapacitorへのWebアプリの移行を手助けし、読みやすく、フォローしやすい形で進めます。全セクションをカバーし、ステップバイステップのアプローチを提供します。
 
-このガイドは、CordovaからCapacitorへのウェブアプリの移行を、読みやすく理解しやすい形で支援します。すべてのセクションを網羅し、段階的なアプローチを提供します。
+## CordovaとCapacitorの紹介
 
-## CordovaとCapacitorの概要
-
-CordovaとCapacitorは、どちらもウェブ開発者がHTML、CSS、JavaScriptを使用して、様々なプラットフォーム向けのネイティブアプリケーションを作成できるツールです。類似点はありますが、ネイティブプロジェクト管理、プラグイン管理、CLI/バージョン管理においてアプローチが異なります。
+CordovaとCapacitorは、Web開発者がHTML、CSS、およびJavaScriptを使用してさまざまなプラットフォーム向けにネイティブアプリケーションを作成するためのツールです。両者には共通点がありますが、ネイティブプロジェクト管理、プラグイン管理、CLI/バージョン管理へのアプローチにおいて重要な違いがあります。
 
 ## 移行戦略
 
-CordovaからCapacitorへの移行は、アプリの複雑さに応じて、段階的に行うことも、完全に置き換えることもできます。Capacitorは Cordovaと後方互換性があり、既存のウェブアプリを準備が整った時点で切り替えることができます。
+CordovaからCapacitorへの移行は、アプリの複雑さに応じて段階的に行うことも、完全に置き換えることもできます。CapacitorはCordovaとの後方互換性があるため、準備ができ次第、既存のWebアプリを切り替えることが可能です。
 
-移行を支援するために、[Ionic VS Code Extension](https://marketplacevisualstudiocom/items/?itemName=ionicionic)の使用と、既存のCordovaプラグインの監査を検討してください。必要に応じてCordovaプラグインを継続して使用することも、Capacitorの同等のものに置き換えることもできます。
+移行を支援するために、[Ionic VS Code Extension](https://marketplace.visualstudio.com/items/?itemName=ionic.ionic)を使用することや、既存のCordovaプラグインを監査することを検討してください。必要に応じて、Cordovaプラグインを引き続き使用することも、Capacitorの同等品に置き換えることもできます。
 
-## ステップバイステップ移行ガイド
+## ステップバイステップの移行ガイド
 
-CordovaからCapacitorへウェブアプリを移行するには、以下の手順に従ってください：
+CordovaからCapacitorへWebアプリを移行するための手順は以下の通りです。
 
-1. **別のコードブランチで作業する**: これらの変更を適用する際は、別のコードブランチで作業することを推奨します。
+1. **別のコードブランチで作業する**：これらの変更を適用する際には、別のコードブランチで作業することをお勧めします。
 
-2. **Capacitorでアプリを初期化する**: ターミナルでプロジェクトを開き、[ウェブアプリへのCapacitorの追加](https://capacitorjscom/docs/getting-started/#adding-capacitor-to-your-app)または[IonicアプリへのCapacitorの追加](https://capacitorjscom/docs/getting-started/with-ionic/#existing-ionic-project)のガイドに従います。Cordovaの`configxml`ファイルからアプリ名とBundle IDの情報を使用してください。
+2. **Capacitorでアプリを初期化する**：ターミナルでプロジェクトを開き、[WebアプリにCapacitorを追加する方法](https://capacitorjs.com/docs/getting-started/#adding-capacitor-to-your-app)または[IonicアプリにCapacitorを追加する方法](https://capacitorjs.com/docs/getting-started/with-ionic/#existing-ionic-project)のガイドに従ってください。アプリ名とバンドルIDのために、Cordovaの`config.xml`ファイルの情報を使用します。
 
-3. **ウェブアプリをビルドする**: ネイティブプラットフォームを追加する前に、ウェブプロジェクトを少なくとも1回ビルドします。これにより、`www`フォルダがCapacitor設定ファイルで適切に構成されます。
+3. **Webアプリをビルドする**：ネイティブプラットフォームを追加する前に、少なくとも1回はWebプロジェクトをビルドしてください。これにより、`www`フォルダがCapacitorの設定ファイルで正しく構成されます。
 
-4. **プラットフォームを追加する**: `npx cap add ios`と`npx cap add android`を実行して、iOSとAndroidのプラットフォームを追加します。これにより、プロジェクトのルートに個別のネイティブプロジェクトフォルダが作成されます。
+4. **プラットフォームを追加する**：`npx cap add ios`と`npx cap add android`を実行して、iOSとAndroidプラットフォームを追加します。これにより、プロジェクトのルートに別々のネイティブプロジェクトフォルダが作成されます。
 
-5. **アイコンとスプラッシュスクリーンを生成する**: 既存のアイコンとスプラッシュスクリーン画像がある場合は、`cordova-res`ツールを使用してそれらを生成し、ネイティブプロジェクトにコピーします。
+5. **アイコンとスプラッシュスクリーンを生成する**：既存のアイコンとスプラッシュスクリーンの画像がある場合は、`cordova-res`ツールを使用して生成し、ネイティブプロジェクトにコピーします。
 
-6. **既存のCordovaプラグインを監査し移行する**: 既存のCordovaプラグインを確認し、可能な場合はCapacitorの同等のものに置き換えます。不要なプラグインを削除します。
+6. **既存のCordovaプラグインを監査し移行する**：既存のCordovaプラグインを確認し、可能な限りCapacitorの同等物に置き換えます。不要なプラグインは削除します。
 
-7. **Cordovaプラグインを削除する**: Cordovaプラグインを置き換えるか削除した後、プラグインをアンインストールし、`npx cap sync`を実行してネイティブプロジェクトからプラグインコードを削除します。
+7. **Cordovaプラグインを削除する**：Cordovaプラグインを置き換えたり削除した後は、プラグインをアンインストールし、`npx cap sync`を実行して、ネイティブプロジェクトからプラグインコードを削除します。
 
-8. **追加の権限を適用する**: 必要な権限を適用するために、`pluginxml`とiOSおよびAndroidの必要な設定との間でマッピングを行います。
+8. **追加の権限を適用する**：`plugin.xml`とiOSおよびAndroidの必要な設定の間でマッピングして、必要な権限を適用します。
 
-9. **設定を構成する**: `configxml`から設定をCapacitor設定ファイルに手動で追加します。
+9. **設定を構成する**：`config.xml`の設定を手動でCapacitorの設定ファイルに追加します。
 
-10. **プラットフォーム固有の設定を処理する**: 必要に応じて、各プラットフォーム（iOSとAndroid）の`configxml`の要素を設定します。
+10. **プラットフォーム固有の設定を処理する**：必要に応じて、各プラットフォーム（iOSとAndroid）のために`config.xml`から要素を構成します。
 
-11. **コンテンツ提供のスキームを変更する**: 必要な場合は、データ損失を避けるためにアプリでコンテンツを提供するために使用されるスキームを変更します。
+11. **コンテンツ提供のスキームを変更する**：必要に応じて、アプリ内のコンテンツ提供に使用するスキームを変更して、データ損失を避けます。
 
-12. **テストしCordovaを削除する**: 移行したアプリをテストして、すべての変更が正しく適用されていることを確認します。問題がなければ、プロジェクトからCordovaを削除するか、Cordovaプラグインを引き続き使用する予定がある場合は残しておくことができます。
+12. **テストしてCordovaを削除する**：移行したアプリをテストして、すべての変更が正しく適用されていることを確認します。満足したら、プロジェクトからCordovaを削除するか、Cordovaプラグインを引き続き使用する予定がある場合はそのまま残します。
 
-おめでとうございます！CordovaからCapacitorへのウェブアプリの移行が完了しました。Capacitorプロジェクトでのプラグインの使用やCapacitor開発ワークフローについての詳細は、[公式Capacitorドキュメント](https://capacitorjscom/docs/)をご覧ください。
+おめでとうございます！CordovaからCapacitorへのWebアプリの移行に成功しました。CapacitorプロジェクトでCordovaプラグインを使用する方法やCapacitorの開発ワークフローについて詳しく学ぶには、[公式Capacitorドキュメント](https://capacitorjs.com/docs/)をご覧ください。
 
 ## Capgoサービスによるライブアップデート
 
-私たちは、Capacitorアプリのライブアップデートを可能にするソリューションであるCapgoを提供しており、適正な価格でOver-The-Air（OTA）アップデートを提供できます。この機能は、迅速な修正の適用、新機能のデプロイ、そしてアプリストアの承認を待つことなくユーザーが常に最新バージョンのアプリを利用できるようにする上で特に有用です。
+Capgoを提供できることを誇りに思います。これは、Capacitorアプリ向けのライブアップデートを可能にし、公正な価格でOTA（Over-The-Air）アップデートを提供します。この機能は、迅速な修正、新機能の展開、およびユーザーがアプリストアの承認を待つことなく常にアプリの最新バージョンを持つことを保証するのに特に便利です。
 
 ### Capgoサービスの仕組み
 
-Capgoは、Capacitorアプリにライブアップデートをデプロイできるクラウドベースのサービスです。Webダッシュボードとアプリに統合できるネイティブSDKで構成されています。SDKは起動時または特定の間隔でアップデートを確認し、バックグラウンドでダウンロードします。アップデートが利用可能な場合、SDKはユーザーにインストールを促します。ユーザーが承認すると、アップデートは即座にインストールされ適用されます。
+Capgoは、Capacitorアプリにライブアップデートをデプロイできるクラウドベースのサービスです。Webダッシュボードと、アプリに統合できるネイティブSDKで構成されています。SDKは、起動時または特定の間隔で更新を確認し、バックグラウンドでダウンロードします。更新が利用可能な場合、SDKはユーザーにインストールを促します。ユーザーが承諾すれば、更新が即座にインストールされ、適用されます。
 
-### Capgoライブアップデートのメリット
+### Capgoライブアップデートの利点
 
-- **より迅速なアップデート：** アププストアの承認を待つことなく、即座にアップデートをデプロイ
-- **App Storeへの依存度低下：** アプリストアの制限や制約をバイパス
-- **ユーザー体験の向上：** ユーザーが手動でアップデートする必要なく、最新の機能とバグ修正を提供
+- **迅速な更新**：アプリストアの承認を待つことなく、即座に更新をデプロイします。
+- **Apple Storeへの依存の削減**：アプリストアの制限を回避します。
+- **ユーザー体験の向上**：ユーザーが手動でアプリを更新することなく、最新の機能とバグ修正を提供し続けます。
 
 ### Capgoライブアップデートの実装方法
 
-Capacitorプロジェクトでのライブアップデートの実装手順：
-- [Capgoアカウント](https://webcapgoapp/)に登録
-- プロジェクトにCapgo SDKをインストール
-- 起動時または特定の間隔でアップデートを確認するようアプリを設定
-- Capgoダッシュボードを使用してアプリにアップデートをデプロイ
+CapgoライブアップデートをCapacitorプロジェクトで実装するには、以下の手順に従います：
+- [Capgoアカウント](https://web.capgo.app/)にサインアップします。
+- プロジェクトにCapgo SDKをインストールします。
+- アプリを起動時または特定の間隔で更新を確認するように構成します。
+- Capgoダッシュボードを使用してアプリに更新をデプロイします。
 
-## まとめ
+## 結論
 
-このガイドがWebアプリをCordovaからCapacitorへの移行の参考になれば幸いです。移行プロセスについて質問がある場合や支援が必要な場合は、[discord](https://discordgg/VnYRvBfgA6)サーバーでお気軽にお問い合わせください。
+このガイドが、あなたのWebアプリをCordovaからCapacitorに移行するのに役立ったことを願っています。質問や移行プロセスに関して支援が必要な場合は、[discord](https://discord.gg/VnYRvBfgA6)サーバーでお気軽にお問い合わせください。

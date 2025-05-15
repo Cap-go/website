@@ -1,7 +1,9 @@
 ---
 slug: monitor-ota-updates-in-capacitor-apps
-title: Capacitor 앱에서 OTA 업데이트 모니터링
-description: 빠르고 안전하며 안정적인 배포를 보장하기 위해 모바일 앱에서 OTA 업데이트를 효과적으로 모니터링하는 방법을 알아보세요.
+title: Monitore as Atualizações OTA em Aplicativos Capacitor
+description: >-
+  Apprenez à surveiller efficacement les mises à jour OTA dans les applications
+  mobiles pour des déploiements rapides, sécurisés et fiables.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -9,7 +11,7 @@ created_at: 2025-04-05T01:34:45.665Z
 updated_at: 2025-04-05T01:34:57.363Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988-1743816897363.jpg
-head_image_alt: Sviluppo mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   OTA updates, app monitoring, error tracking, real-time analytics, mobile app
   development
@@ -18,148 +20,194 @@ published: true
 locale: it
 next_blog: ''
 ---
+**¿Quieres actualizar tu aplicación sin esperar a las aprobaciones de la tienda de aplicaciones?** Las actualizaciones OTA (Over-The-Air) te permiten enviar correcciones y funciones directamente a los usuarios en tiempo real. Con herramientas como [Capgo](https://capgo.app/), puedes controlar el rendimiento de las actualizaciones, rastrear errores e incluso revertir actualizaciones defectuosas al instante.
 
-**Vuoi aggiornare la tua app senza attendere le approvazioni dell'app store?** Gli aggiornamenti OTA (Over-The-Air) ti permettono di distribuire correzioni e funzionalità direttamente agli utenti in tempo reale. Con strumenti come [Capgo](https://capgoapp/), puoi monitorare le prestazioni degli aggiornamenti, tracciare gli errori e persino ripristinare istantaneamente aggiornamenti problematici.
+### Beneficios Clave de Monitorear Actualizaciones OTA:
 
-### Principali Vantaggi del Monitoraggio degli Aggiornamenti OTA:
+-   **Actualizaciones Rápidas**: Alcanza hasta el 95% de los usuarios activos en 24 horas.
+-   **Rastreo de Errores**: Detecta y soluciona problemas de implementación temprano.
+-   **Entrega Segura**: La encriptación de extremo a extremo asegura que las actualizaciones sean seguras.
+-   **Analíticas en Tiempo Real**: Monitorea las tasas de éxito (promedio global: 82%) y métricas de rendimiento.
 
--   **Aggiornamenti Rapidi**: Raggiungi fino al 95% degli utenti attivi entro 24 ore
--   **Tracciamento Errori**: Individua e risolvi i problemi di distribuzione tempestivamente
--   **Distribuzione Sicura**: La crittografia end-to-end garantisce aggiornamenti sicuri
--   **Analisi in Tempo Reale**: Monitora i tassi di successo (media globale: 82%) e le metriche di prestazione
+### Pasos Rápidos para la Configuración:
 
-### Passaggi per la Configurazione Rapida:
+1.  Instala el [plugin de Capgo](https://capgo.app/plugins/): `npx @capgo/cli init`.
+2.  Usa control de versiones con canales (Producción, Beta, Staging).
+3.  Habilita analíticas en tiempo real y rastreo de errores.
+4.  Configura la reversión automática para actualizaciones fallidas.
 
-1. Installa il [plugin Capgo](https://capgoapp/plugins/): `npx @capgo/cli init`
-2. Usa il controllo versione con i canali (Produzione, Beta, Staging)
-3. Abilita analisi in tempo reale e tracciamento errori
-4. Configura il ripristino automatico per gli aggiornamenti falliti
+Capgo ya ha gestionado **23.5M actualizaciones en 750 aplicaciones** con rápidas velocidades de descarga (114 ms para un paquete de 5 MB). Comienza a monitorear tus actualizaciones hoy para una gestión de aplicaciones más fluida.
 
-Capgo ha già gestito **235M aggiornamenti su 750 app** con velocità di download elevate (114ms per un bundle di 5MB). Inizia oggi a monitorare i tuoi aggiornamenti per una gestione più fluida dell'app.
+## Explora el Nuevo [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) de [Capawesome](https://capawesome.io/) Live Update ...
 
-## Esplora il Nuovo Live Update di [Capawesome](https://capawesomeio/) per [Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjscom/)
+![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
-![Capawesome](https://assetsseobotaicom/capgoapp/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bcjpg)
+<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-[[HTML_TAG]][[HTML_TAG]]
+## Configuración del Monitoreo de Actualizaciones
 
-## Configurazione del Monitoraggio degli Aggiornamenti
+Aquí se explica cómo configurar el monitoreo de actualizaciones OTA para tu aplicación:
 
-Ecco come configurare il monitoraggio degli aggiornamenti OTA per la tua app:
+### Instalación del Plugin Requerido
 
-### Installazione del Plugin Necessario
+Primero, instala el plugin de Capgo ejecutando:
 
-Prima, installa il plugin Capgo eseguendo:
+```bash
+npx @capgo/cli init
+```
 
-[[CODE_BLOCK]]
+Este plugin funciona sin problemas con Capacitor 6 y 7, lo que lo hace compatible con una variedad de versiones de aplicaciones.
 
-Questo plugin funziona perfettamente con Capacitor 6 e 7, rendendolo compatibile con una vasta gamma di versioni dell'app.
+### Gestión de Versiones de Actualización
 
-### Gestione delle Versioni degli Aggiornamenti
+El control de versiones juega un papel clave en el manejo de actualizaciones OTA. El [sistema de canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/) de Capgo te ayuda a gestionar la distribución de actualizaciones de manera eficiente:
 
-Il controllo versione gioca un ruolo chiave nella gestione degli aggiornamenti OTA. Il [sistema dei canali](https://capgoapp/docs/plugin/cloud-mode/channel-system/) di Capgo ti aiuta a gestire la distribuzione degli aggiornamenti in modo efficiente:
-
-| Tipo di Canale | Scopo | Caso d'Uso Migliore |
+| Tipo de Canal | Propósito | Mejor Caso de Uso |
 | --- | --- | --- |
-| Produzione | Canale di rilascio principale | Aggiornamenti stabili per tutti gli utenti |
-| Beta | Canale di test | Funzionalità in accesso anticipato |
-| Staging | Test pre-rilascio | Test QA interno |
+| Producción | Canal de lanzamiento principal | Actualizaciones estables para todos los usuarios |
+| Beta | Canal de pruebas | Características de acceso anticipado |
+| Staging | Pruebas previas al lanzamiento | Pruebas internas de QA |
 
-Ogni canale mantiene la propria cronologia delle versioni, permettendo agli sviluppatori di tracciare le modifiche e gestire gli aggiornamenti sistematicamente. Inoltre, il sistema offre opzioni di ripristino istantaneo, così puoi affrontare rapidamente qualsiasi problema di distribuzione.
+Cada canal mantiene su propio historial de versiones, lo que permite a los desarrolladores rastrear cambios y gestionar actualizaciones de forma sistemática. Además, el sistema ofrece opciones de reversión instantánea, para que puedas abordar rápidamente cualquier problema de implementación.
 
-Una volta configurato il controllo versione, puoi monitorare gli aggiornamenti per garantire sicurezza e prestazioni.
+Una vez que se establece el control de versiones, puedes monitorear actualizaciones para asegurar seguridad y rendimiento.
 
-### Configurazione del Monitoraggio [Capgo](https://capgoapp/)
+### Configuración del Monitoreo de [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
-1. **Configura l'Integrazione Analytics**: Utilizza analisi in tempo reale per monitorare le prestazioni degli aggiornamenti e il coinvolgimento degli utenti
-2. **Abilita il Tracciamento Errori**: Attiva il tracciamento errori per acquisire log dettagliati e metriche di prestazione
-3. **Imposta Regole di Distribuzione**: Definisci parametri di rollout per controllare la velocità di aggiornamento e target specifici gruppi di utenti
+1.  **Configura la Integración de Analíticas**: Utiliza analíticas en tiempo real para monitorear el rendimiento de las actualizaciones y el compromiso del usuario.
+2.  **Habilita el Rastreo de Errores**: Activa el rastreo de errores para capturar registros detallados y métricas de rendimiento.
+3.  **Establece Reglas de Distribución**: Define parámetros de lanzamiento para controlar la velocidad de actualización y orientar grupos específicos de usuarios.
 
-Questi passaggi creano un sistema di monitoraggio affidabile per la tua app.
+Estos pasos crean un sistema de monitoreo confiable para tu aplicación.
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per le correzioni di bug è prezioso" - Bessie Cooper [\[1\]](https://capgoapp/)
+> "Capgo es una herramienta imprescindible para los desarrolladores que quieren ser más productivos. Evitar la revisión por correcciones de errores es oro." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Capgo garantisce una distribuzione sicura degli aggiornamenti con crittografia end-to-end, mentre le analisi integrate, le opzioni di ripristino e il monitoraggio in tempo reale aiutano a mantenere la stabilità dell'app.
+Capgo asegura una entrega de actualizaciones segura con encriptación de extremo a extremo, mientras que las analíticas integradas, las opciones de reversión y el monitoreo en tiempo real ayudan a mantener la estabilidad de la aplicación.
 
-## Gestione e Tracciamento degli Errori
+## Manejo y Seguimiento de Errores
 
-### Monitoraggio a Livello App
+### Monitoreo a Nivel de Aplicación
 
-Un efficace monitoraggio a livello app è fondamentale per garantire prestazioni fluide degli aggiornamenti OTA. Il sistema di Capgo fornisce informazioni dettagliate sulla distribuzione e l'installazione degli aggiornamenti, raggiungendo un tasso di successo globale dell'82% [\[1\]](https://capgoapp/)
+Un monitoreo efectivo a nivel de aplicación es clave para asegurar un rendimiento fluido de las actualizaciones OTA. El sistema de Capgo proporciona detalles sobre la entrega e instalación de actualizaciones, logrando una tasa de éxito global del 82% [\[1\]](https://capgo.app/).
 
-Ecco come puoi configurare il monitoraggio a livello app:
+Así es como puedes configurar el monitoreo a nivel de aplicación:
 
-[[CODE_BLOCK]]
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-Per un quadro completo, combina questo con il tracciamento degli errori backend per affrontare i problemi da entrambe le parti.
+// Listen for update events
+CapacitorUpdater.addListener('updateAvailable', (info) => {
+  console.log('New update available:', info.version)
+})
 
-### Tracciamento Errori Backend
+// Track installation progress
+CapacitorUpdater.addListener('downloadComplete', (info) => {
+  console.log('Update downloaded:', info.version)
+})
+```
 
-Il monitoraggio backend completa le informazioni a livello app concentrandosi sulle prestazioni complessive del sistema. Con Capgo che gestisce 235M aggiornamenti in tutto il mondo [\[1\]](https://capgoapp/), il tracciamento degli errori backend è essenziale per mantenere l'affidabilità.| Metrica di Tracciamento | Scopo | Impatto |
+Para tener una imagen completa, combina esto con el rastreo de errores del backend para abordar problemas desde ambos extremos.
+
+### Rastreo de Errores del Backend
+
+El monitoreo del backend complementa las ideas a nivel de aplicación al centrarse en el rendimiento general del sistema. Con Capgo gestionando 23.5M actualizaciones en todo el mundo [\[1\]](https://capgo.app/), rastrear errores del backend es esencial para mantener la fiabilidad.
+
+| Métrica de Rastreo | Propósito | Impacto |
 | --- | --- | --- |
-| Tasso di Successo degli Aggiornamenti | Traccia le installazioni riuscite | Mantiene il 95% degli utenti aggiornati entro 24 ore [\[1\]](https://capgoapp/) |
-| Performance di Download | Monitora l'utilizzo della banda | Migliora la velocità di consegna |
-| Frequenza degli Errori | Identifica problemi ricorrenti | Riduce i tassi di fallimento |
+| Tasa de Éxito de Actualización | Rastrea instalaciones exitosas | Mantiene actualizados al 95% de los usuarios en 24 horas [\[1\]](https://capgo.app/) |
+| Rendimiento de Descarga | Monitorea el uso del ancho de banda | Mejora la velocidad de entrega |
+| Frecuencia de Errores | Identifica problemas recurrentes | Reduce las tasas de fallo |
 
-Tenendo sotto controllo queste metriche, puoi identificare e risolvere rapidamente i problemi, garantendo un processo di aggiornamento fluido
+Al mantener un control sobre estas métricas, puedes identificar y resolver problemas rápidamente, asegurando un proceso de actualización fluido.
 
-### Configurazione del Rollback Automatico
+### Configuración de Reversión Automática
 
-Quando si verificano errori di distribuzione, il rollback automatico previene interruzioni per l'utente. La funzione di rollback di Capgo si attiva istantaneamente, minimizzando i tempi di inattività durante la distribuzione [\[1\]](https://capgoapp/)
+Cuando ocurren errores de implementación, la reversión automática previene la interrupción del usuario. La función de reversión de Capgo se activa al instante, minimizando el tiempo de inactividad durante la implementación [\[1\]](https://capgo.app/).
 
-Ecco un esempio di come configurare il rollback automatico:
+Aquí hay un ejemplo de cómo configurar la reversión automática:
 
-[[CODE_BLOCK]]
+```typescript
+try {
+  await CapacitorUpdater.download({
+    version: 'latest'
+  })
+} catch (error) {
+  // Automatically trigger rollback
+  await CapacitorUpdater.rollback()
+}
+```
 
-Questo approccio si è dimostrato affidabile, con 750 app che attualmente utilizzano il sistema Capgo in produzione [\[1\]](https://capgoapp/). La sua ampia adozione evidenzia l'affidabilità di questi strumenti di gestione degli errori
+Este enfoque ha demostrado ser confiable, con 750 aplicaciones que actualmente utilizan el sistema de Capgo en producción [\[1\]](https://capgo.app/). Su amplia adopción destaca la fiabilidad de estas herramientas de manejo de errores.
 
-## Linee Guida per il Monitoraggio
+## Pautas de Monitoreo
 
-Queste linee guida sfruttano gli strumenti di monitoraggio di Capgo per rendere ogni aggiornamento misurabile, sicuro e attentamente distribuito
+Estas pautas aprovechan las herramientas de monitoreo de Capgo para hacer que cada actualización sea medible, segura y cuidadosamente desplegada.
 
-### Tracciamento delle Performance degli Aggiornamenti
+### Seguimiento del Rendimiento de Actualización
 
-Tieni sotto controllo le performance degli aggiornamenti OTA monitorando metriche chiave come il tasso di successo, il coinvolgimento degli utenti, la velocità di download e la frequenza degli errori. Ecco uno snippet di codice per aiutare a tracciare queste metriche:
+Mantén un control cercano sobre el rendimiento de las actualizaciones OTA monitorizando métricas clave como la tasa de éxito, el compromiso del usuario, la velocidad de descarga y la frecuencia de errores. Aquí hay un fragmento de código para ayudar a rastrear estas métricas:
 
-[[CODE_BLOCK]]
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-Usa questi insight per guidare efficacemente i tuoi piani di distribuzione graduale
+// Set up performance tracking
+CapacitorUpdater.addListener('updateStats', (stats) => {
+  console.log('Download speed:', stats.downloadSpeed)
+  console.log('Success rate:', stats.successRate)
+})
+```
 
-### Distribuzioni Graduate degli Aggiornamenti
+Usa estos conocimientos para guiar tus planes de despliegue por etapas de manera efectiva.
 
-Le distribuzioni graduate aiutano a minimizzare i rischi rilasciando gradualmente gli aggiornamenti a specifici gruppi di utenti. Il Sistema di Canali di Capgo rende facile gestire distribuzioni controllate. Inizia con i tester interni, passa agli utenti beta e poi espandi al pubblico generale. Monitora ogni fase per almeno 24 ore prima di procedere. Questo metodo ha contribuito a far raggiungere a Capgo un tasso di successo globale dell'82% [\[1\]](https://capgoapp/)
+### Despliegues de Actualización por Fases
 
-### Sicurezza e Conformità agli Store
+Los despliegues por fases ayudan a minimizar riesgos al liberar actualizaciones gradualmente a grupos específicos de usuarios. El Sistema de Canales de Capgo facilita la gestión de despliegues controlados. Comienza con testers internos, pasa a usuarios beta y luego expande a la audiencia general. Monitorea cada fase durante al menos 24 horas antes de continuar. Este método ha contribuido a que Capgo logre una tasa de éxito del 82% a nivel global [\[1\]](https://capgo.app/).
 
-Per completare le distribuzioni graduate, la consegna sicura degli aggiornamenti è fondamentale. Abilita la verifica sicura degli aggiornamenti usando il seguente codice:
+### Seguridad y Cumplimiento con la Tienda
 
-[[CODE_BLOCK]]
+Para complementar los despliegues por fases, la entrega segura de actualizaciones es crítica. Habilita la verificación segura de actualizaciones utilizando el siguiente código:
 
-> "L'unica soluzione con vera crittografia end-to-end, gli altri si limitano a firmare gli aggiornamenti" - Capgo [\[1\]](https://capgoapp/)
+```typescript
+// Enable secure update verification
+await CapacitorUpdater.download({
+  version: 'latest',
+  validateSignature: true,
+  checksum: true
+})
+```
 
-Questo assicura che gli aggiornamenti rispettino gli standard di sicurezza e mantiene i dati degli utenti al sicuro attraverso regolari audit e processi di validazione
+> "La única solución con verdadera encriptación de extremo a extremo, los demás solo firman actualizaciones" - Capgo [\[1\]](https://capgo.app/)
 
-## Riepilogo
+Esto garantiza que las actualizaciones cumplan con los estándares de seguridad y mantenga los datos del usuario seguros a través de auditorías y procesos de validación regulares.
 
-Questa sezione riassume i passaggi principali per il monitoraggio degli aggiornamenti OTA e evidenzia le caratteristiche che rendono Capgo una scelta eccellente per la [gestione degli aggiornamenti](https://capgoapp/docs/plugin/cloud-mode/manual-update/)
+## Resumen
 
-### Passaggi Chiave del Monitoraggio
+Esta sección recapitula los pasos principales para monitorear actualizaciones OTA y destaca las características que hacen de Capgo una elección destacada para la [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
-Il monitoraggio efficace degli aggiornamenti OTA coinvolge diversi componenti critici. Questi passaggi, discussi in precedenza, assicurano che gli aggiornamenti vengano distribuiti efficientemente e i problemi vengano affrontati rapidamente:
+### Pasos Clave para el Monitoreo
 
-| Componente di Monitoraggio | Scopo | Impatto |
+El monitoreo efectivo de actualizaciones OTA involucra varios componentes críticos. Estos pasos, discutidos anteriormente, aseguran que las actualizaciones se implementen de manera eficiente y que se aborden rápidamente los problemas:
+
+| Componente de Monitoreo | Propósito | Impacto |
 | --- | --- | --- |
-| Analisi in Tempo Reale | Misura il successo degli aggiornamenti e il coinvolgimento degli utenti | Identifica immediatamente i problemi |
-| Tracciamento Errori | Rileva e risolve i problemi precocemente | Minimizza le interruzioni per gli utenti |
-| Controllo Versioni | Gestisce come vengono distribuiti gli aggiornamenti | Mantiene le distribuzioni controllate e prevedibili |
-| Metriche di Performance | Traccia velocità di download e tassi di successo | Preserva un'esperienza utente fluida |
+| Analíticas en Tiempo Real | Medir el éxito de la actualización y el compromiso del usuario | Identifica problemas de inmediato |
+| Rastreo de Errores | Detectar y resolver problemas temprano | Minimiza interrupciones para los usuarios |
+| Control de Versiones | Gestionar cómo se distribuyen las actualizaciones | Mantiene los despliegues controlados y predecibles |
+| Métricas de Rendimiento | Rastrear velocidades de descarga y tasas de éxito | Preserva una experiencia fluida para el usuario |
 
-### Panoramica delle Funzionalità di Capgo
+### Resumen de Características de Capgo
 
-Dal suo lancio nel 2022, Capgo è diventato uno strumento di riferimento per il monitoraggio degli aggiornamenti OTA, offrendo soluzioni che aiutano i team ad abbandonare i metodi di aggiornamento obsoleti
+Desde su lanzamiento en 2022, Capgo se ha convertido en una herramienta esencial para el monitoreo de actualizaciones OTA, ofreciendo soluciones que ayudan a los equipos a alejarse de métodos de actualización obsoletos.
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per consegnare continuamente ai nostri utenti!" – Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Practizamos desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios." – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Gli strumenti di Capgo sono costruiti per gestire gli aggiornamenti OTA con precisione
+Las herramientas de Capgo están diseñadas para manejar actualizaciones OTA con precisión. Aquí hay lo que lo distingue:
+
+-   **Analíticas en Tiempo Real**: Rastrear tasas de éxito de actualizaciones para abordar problemas rápidamente
+-   **Encriptación de Extremo a Extremo**: Protege las actualizaciones con protocolos de seguridad fuertes
+-   **Sistema de Canales**: Permite monitoreo dirigido para grupos específicos de usuarios
+-   **Reversión con un Clic**: Volver rápidamente a una versión anterior si surgen problemas
+
+Estas características han ganado popularidad entre los desarrolladores, lo que se refleja en tasas de adopción crecientes y comentarios positivos de los usuarios.

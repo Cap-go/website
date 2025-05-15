@@ -1,10 +1,7 @@
 ---
 slug: key-management-under-chinas-encryption-rules
-title: 中国の暗号化規則における鍵管理
-description: >-
-  Comprendere le leggi cinesi sulla gestione delle chiavi di crittografia è
-  fondamentale per la conformità, coinvolgendo archiviazione locale, audit e
-  regolamenti tecnici.
+title: 中国加密规则下的密钥管理
+description: 理解中国的加密密钥管理法律对于合规至关重要，包括本地存储、审计和技术法规。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,7 +9,7 @@ created_at: 2025-04-03T02:41:08.008Z
 updated_at: 2025-04-03T02:41:23.390Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67eddf34ebbb9dc806408915-1743648083390.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   encryption, key management, China, compliance, data residency, encryption
   standards, audits, government oversight
@@ -21,124 +18,125 @@ published: true
 locale: it
 next_blog: ''
 ---
+**在中国管理加密密钥是复杂的，但对合规性至关重要。** 以下是您需要了解的内容：
 
-**La gestione delle chiavi di crittografia in Cina è complessa ma essenziale per la conformità.** Ecco cosa devi sapere:
+-   **加密法基础**：将密钥存储在中国大陆服务器上，使用批准的加密方法，接受审核，并保持详细记录。
+-   **挑战**：
+    -   服务器必须位于中国，具备冗余和严格的数据驻留要求。
+    -   政府监督包括审计、访问协议和合规报告。
+    -   技术限制限制算法、密钥长度和协议。
+-   **解决方案**：
+    -   选择本地、混合云、托管服务或自托管设置。
+    -   使用像 [Capgo](https://capgo.app/) 这样的工具进行本地托管、端到端加密和合规自动化。
+-   **提示**：
+    -   定期检查合规性。
+    -   与当地专家合作。
+    -   使用符合中国加密标准的工具。
 
--   **Principi Base della Legge sulla Crittografia**: Conserva le chiavi su server nella Cina continentale, usa metodi di crittografia approvati, sottoponi a verifiche e mantieni registri dettagliati
--   **Sfide**:
-    -   I server devono essere in Cina, con ridondanza e rigida residenza dei dati
-    -   La supervisione governativa include verifiche, protocolli di accesso e rapporti di conformità
-    -   I limiti tecnici restringono algoritmi, lunghezze delle chiavi e protocolli
--   **Soluzioni**:
-    -   Scegli tra configurazioni on-premises, cloud ibrido, servizi gestiti o self-hosted
-    -   Usa strumenti come [Capgo](https://capgoapp/) per hosting locale, crittografia end-to-end e automazione della conformità
--   **Suggerimenti**:
-    -   Controlla regolarmente la conformità
-    -   Collabora con esperti locali
-    -   Usa strumenti allineati agli standard di crittografia cinesi
+**快速比较**：
 
-**Confronto Rapido**:
-
-| Metodo | Posizione Storage | Livello Conformità | Complessità |
+| 方法 | 存储位置 | 合规等级 | 复杂性 |
 | --- | --- | --- | --- |
-| HSM on-premises | Data center locale | Alto | Alta |
-| Cloud Ibrido | Mix di locale e cloud | Medio-Alto | Media |
-| KMS Gestito | Cloud certificato | Alto | Bassa |
-| Self-hosted | Infrastruttura privata | Alto | Medio-Alta |
+| 本地 HSM | 本地数据中心 | 高 | 高 |
+| 混合云 | 本地和云的混合 | 中高 | 中 |
+| 托管 KMS | 认证云 | 高 | 低 |
+| 自托管 | 私有基础设施 | 高 | 中高 |
 
-Per avere successo, concentrati su conformità, strumenti sicuri e guida esperta
+要想成功，关注合规性、安全工具和专家指导。
 
-## Konstantinos Karagiannis | La Cina ha violato la crittografia
+## Konstantinos Karagiannis | 中国是否违反加密 ...
 
-## Sfide nella Gestione delle Chiavi in Cina
+<iframe src="https://www.youtube.com/embed/Ay_Qxy3bBI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-La gestione delle chiavi di crittografia secondo le normative cinesi presenta una serie di sfide che richiedono soluzioni tecniche precise e attenta conformità
+## 中国的密钥管理挑战
 
-### Regole per l'Archiviazione dei Dati
+在中国法规下处理加密密钥面临一系列挑战，这些挑战需要精确的技术解决方案和细致的合规。
 
-La [Personal Information Protection Law](https://enwikipediaorg/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL) cinese impone regole severe per l'archiviazione delle chiavi di crittografia. I sistemi di archiviazione delle chiavi devono:
+### 数据存储规则
 
--   Ospitare server fisici interamente all'interno della Cina continentale, come richiesto dalla legge
--   Utilizzare ridondanza tra più data center nel paese
--   Garantire che i dati rimangano entro i confini nazionali durante l'elaborazione
--   Mantenere registri dettagliati di tutti gli accessi e le modifiche alle chiavi
+中国的 [个人信息保护法](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL) 强制执行严格的加密密钥存储规则。密钥存储系统必须：
 
-Questo significa che gli sviluppatori spesso necessitano di configurazioni di archiviazione separate per le operazioni dentro e fuori dalla Cina. Mentre l'archiviazione sicura è un must, il livello di supervisione aggiunge ulteriori livelli di complessità
+-   完全在大陆中国内托管物理服务器，法律要求如此。
+-   在国家内的多个数据中心之间使用冗余。
+-   确保在处理时数据保持在国家边界内。
+-   维护所有密钥访问和修改的详细日志。
 
-### Requisiti di Supervisione Governativa
+这意味着开发人员通常需要为中国内外的操作设置单独的存储设置。虽然安全存储是必须的，但监督程度增加了额外的复杂性。
 
-Oltre alle regole di archiviazione, la supervisione governativa introduce più ostacoli alla gestione delle chiavi di crittografia. Ecco una panoramica dei requisiti chiave e del loro impatto:
+### 政府监督要求
 
-| Requisito | Impatto sullo Sviluppo | Implicazioni Tecniche |
+除了存储规则外，政府监督还增加了管理加密密钥的更多障碍。以下是主要要求及其影响的详细说明：
+
+| 要求 | 对开发的影响 | 技术影响 |
 | --- | --- | --- |
-| Verifiche Regolari | Revisioni di sicurezza trimestrali | Richiede tracce di audit dettagliate |
-| Protocolli di Accesso | Protocolli di accesso delle autorità | Endpoint sicuri per la supervisione |
-| Sistemi di Reporting | Report mensili di conformità | Sistemi di monitoraggio automatizzati |
-| Backup delle Chiavi | Setup di archiviazione secondaria | Maggiori spese infrastrutturali |
+| 定期审核 | 季度安全审查 | 需要详细的审计跟踪 |
+| 访问协议 | 权限访问协议 | 监督的安全端点 |
+| 报告系统 | 每月合规报告 | 自动监控系统 |
+| 密钥备份 | 二级存储设置 | 更高的基础设施费用 |
 
-Questi requisiti non solo aumentano i costi operativi ma richiedono anche soluzioni tecniche avanzate per soddisfare gli standard di conformità
+这些要求不仅增加了运营成本，还要求先进的技术解决方案以满足合规标准。
 
-### Limiti Tecnici
+### 技术限制
 
-Oltre all'archiviazione e alla supervisione, le restrizioni tecniche creano ostacoli aggiuntivi per le [pratiche di crittografia](https://capgoapp/docs/cli/migrations/encryption/). Gli sviluppatori devono navigare:
+除了存储和监督外，技术限制还为 [加密实践](https://capgo.app/docs/cli/migrations/encryption/) 造成了额外障碍。开发人员必须应对：
 
--   **Algoritmi Approvati**: Possono essere utilizzati solo metodi di crittografia certificati dal governo
--   **Restrizioni sulla Lunghezza delle Chiavi**: Le lunghezze massime delle chiavi sono rigorosamente regolamentate
--   **Limitazioni dei Protocolli**: Certi protocolli sono esplicitamente proibiti
+-   **批准的算法**：只能使用政府认证的加密方法。
+-   **密钥长度限制**：最大密钥长度受到严格监管。
+-   **协议限制**：某些协议被明确禁止。
 
-Questi vincoli possono rendere difficile implementare funzionalità sicure, in particolare nelle app che richiedono aggiornamenti frequenti o gestione dei dati in tempo reale. Di conseguenza, molti sviluppatori si rivolgono a strumenti e servizi specializzati per bilanciare conformità con prestazioni e necessità di sicurezza
+这些限制可能使实施安全功能变得困难，特别是在需要频繁更新或实时数据处理的应用程序中。因此，许多开发人员转向专业工具和服务，以平衡合规性与性能和安全需求。
 
-## Soluzioni per la Gestione delle Chiavi in Cina
+## 中国密钥管理解决方案
 
-### Archiviazione Locale e Conformità
+### 本地存储与合规
 
-Le normative cinesi richiedono che i sistemi di gestione delle chiavi garantiscano la sovranità dei dati attraverso il self-hosting conforme. L'opzione di [self-hosting](https://capgo) di Capgoapp/blog/self-hosted-capgo/) mantiene tutti i dati all'interno della Cina continentale, offrendo un approccio sicuro alla gestione delle chiavi di crittografia in linea con queste regole. Questa configurazione getta le basi per soddisfare efficacemente gli standard di crittografia.
+中国的法规要求密钥管理系统确保数据主权，通过符合要求的自托管。Capgo 的 [自托管选项](https://capgo.app/blog/self-hosted-capgo/) 将所有数据保留在中国大陆，为管理加密密钥提供了安全的方法，以符合这些规则。此设置为有效满足加密标准奠定了基础。
 
-### Aggiornamento dei Sistemi e Sicurezza della Crittografia
+### 更新系统和加密安全
 
-Le leggi sulla crittografia cinesi richiedono che gli [aggiornamenti delle app](https://capgoapp/plugins/capacitor-updater/) siano gestiti attraverso piattaforme approvate. Capgo affronta questo utilizzando la crittografia end-to-end, garantendo che solo gli utenti autorizzati possano decrittare i dati. La sua integrazione CI/CD semplifica il processo automatizzando i controlli di conformità, mentre il controllo versione integrato offre dettagliati audit trail per monitorare le modifiche della crittografia.
+中国的加密法律要求 [应用更新](https://capgo.app/plugins/capacitor-updater/) 通过批准的平台进行处理。Capgo通过使用端到端加密来解决这一点，确保只有授权用户可以解密数据。其CI/CD集成通过自动化合规检查简化了此过程，而内置的版本控制提供了详细的审计跟踪，以监测加密更改。
 
-## Metodi di Gestione delle Chiavi
+## 密钥管理方法
 
-Gestire efficacemente le chiavi di crittografia in Cina significa bilanciare normative rigorose con esigenze operative. Le organizzazioni devono scegliere metodi che soddisfino le regole di sovranità dei dati considerando opzioni come archiviazione on-premises, configurazioni cloud ibride, servizi di chiavi gestite o soluzioni self-hosted.
+在中国有效管理加密密钥意味着在严格的法规与运营需求之间找到平衡。组织必须选择符合数据主权规则的方法，同时考虑本地存储、混合云设置、托管密钥服务或自托管解决方案等选择。
 
-### Tabella Comparativa dei Metodi
+### 方法比较图表
 
-| Metodo | Posizione Archiviazione | Livello di Conformità | Complessità Implementazione |
+| 方法 | 存储位置 | 合规等级 | 实施复杂性 |
 | --- | --- | --- | --- |
-| HSM on-premises | Data center locale in Cina | Alto | Alta |
-| Cloud Ibrido | Mix di data center locali e provider approvati | Medio-Alto | Media |
-| KMS Gestito | Provider cloud certificato in Cina | Alto | Bassa |
-| Self-hosted | Infrastruttura privata in Cina | Alto | Medio-Alta |
+| 本地 HSM | 中国的本地数据中心 | 高 | 高 |
+| 混合云 | 本地数据中心与批准的供应商混合 | 中高 | 中 |
+| 托管 KMS | 中国境内的认证云供应商 | 高 | 低 |
+| 自托管 | 中国的私有基础设施 | 高 | 中高 |
 
-Ogni opzione presenta i propri vantaggi. I moduli HSM on-premises offrono il massimo livello di controllo ma richiedono significativi investimenti infrastrutturali. Le soluzioni cloud ibride permettono un mix di risorse cloud locali e approvate, trovando un equilibrio tra flessibilità e conformità. I servizi di chiavi gestite semplificano il deployment, anche se potrebbero essere meno personalizzabili. Le configurazioni self-hosted stanno guadagnando terreno per le organizzazioni che necessitano di un controllo dettagliato sui loro sistemi di crittografia in Cina.
+每个选项都有其自身的优点。本地硬件安全模块 (HSM) 提供最高的控制水平，但需要大量的基础设施投资。混合云解决方案允许本地和批准的云资源的混合，在灵活性与合规性之间取得平衡。托管密钥服务简化了部署，尽管它们可能不那么可定制。自托管设置在需要对加密系统在中国进行详细控制的组织中越来越受欢迎。
 
-Nella scelta di un metodo, dare priorità alle opzioni che supportano manutenzione continua, controlli di conformità e audit regolari. Queste considerazioni preparano il terreno per le linee guida pratiche trattate nella prossima sezione.
+在选择方法时，应优先考虑支持持续维护、合规检查和定期审核的选项。这些考虑为下一部分涵盖的实用指南奠定了基础。
 
-## Linee Guida per gli Sviluppatori
+## 开发者指南
 
-La gestione delle chiavi di crittografia secondo le normative cinesi richiede un approccio strutturato. Queste linee guida aiutano gli sviluppatori ad allineare le esigenze normative con l'applicazione pratica.
+在中国的法规下管理加密密钥需要结构化的方法。这些指南帮助开发人员将法规需求与实际应用对齐。
 
-### Controlli Regolari delle Regole
+### 定期规则检查
 
-Gli sviluppatori dovrebbero stabilire un processo di routine per garantire la conformità alle normative sulla crittografia. Questo include la revisione regolare dei metodi di archiviazione delle chiavi, la verifica dell'uso degli algoritmi di crittografia, il controllo degli accessi e la conferma dell'aderenza alle regole sulla residenza dei dati. Mantenere registrazioni dettagliate di queste revisioni per dimostrare la conformità agli standard di crittografia cinesi.
+开发人员应建立常规流程，以确保遵守加密法规。这包括定期审查密钥存储方法、验证加密算法的使用、检查访问控制，并确认遵循数据驻留规则。保留这些检查的详细记录，以证明遵守中国加密标准。
 
-### Collaborazione con Esperti Locali
+### 与地方专家合作
 
-Navigare tra i requisiti di crittografia cinesi può essere impegnativo. Collaborare con professionisti legali e della sicurezza locali è fondamentale. Questi esperti possono aiutare a implementare standard di crittografia approvati, preparare la documentazione necessaria in mandarino e assistere durante gli audit governativi per garantire che tutto sia in ordine.
+应对中国的加密要求可能具有挑战性。与当地法律和安全专业人士合作至关重要。这些专家可以帮助实施批准的加密标准，准备必要的中文文件，并在政府审计时提供协助，以确保一切正常。
 
-### Scelta di Strumenti Conformi
+### 选择合规工具
 
-Utilizzare strumenti che soddisfano i requisiti di crittografia cinesi è fondamentale per mantenere la sicurezza senza sacrificare l'efficienza. Per esempio, Capgo supporta gli aggiornamenti delle app con crittografia end-to-end e opzioni di hosting locale [\[1\]](https://capgoapp/). Questo si allinea con le strategie precedenti per la gestione degli aggiornamenti. Nella scelta degli strumenti, concentrarsi su funzionalità come [archiviazione locale dei dati](https://capgoapp/plugins/capacitor-data-storage-sqlite/), metodi di crittografia approvati, audit trail dettagliati e controlli di accesso rigorosi. I dati mostrano che gli sviluppatori che utilizzano strumenti come Capgo hanno raggiunto un tasso di aggiornamento del 95% degli utenti attivi entro 24 ore mantenendo la conformità [\[1\]](https://capgoapp/)
+使用符合中国加密要求的工具对于在不牺牲效率的情况下维持安全至关重要。例如，Capgo支持具有端到端加密和本地托管选项的应用更新 [\[1\]](https://capgo.app/)。这与之前管理更新的策略相一致。在选择工具时，关注像 [本地数据存储](https://capgo.app/plugins/capacitor-data-storage-sqlite/) 等功能、批准的加密方法、详细的审计跟踪和强大的访问控制。数据显示，使用像Capgo这样的工具的开发人员在24小时内实现了95%的活跃用户更新率，同时保持合规性 [\[1\]](https://capgo.app/)。
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per le correzioni di bug è oro" - Bessie Cooper [\[1\]](https://capgoapp/)
+> “Capgo是希望提高生产力的开发人员必备的工具。避免对bug修复的审核真是太好了。” - 贝西·库珀 [\[1\]](https://capgo.app/)
 
-## Riepilogo
+## 总结
 
-La gestione delle chiavi di crittografia in Cina richiede l'archiviazione locale dei dati, il rispetto degli standard approvati e il mantenimento di dettagliati registri di audit. Bilanciare queste rigide regole con operazioni efficienti è fondamentale per il successo nel mercato cinese.
+在中国管理加密密钥需要本地数据存储、遵循批准的标准并保持详细的审计跟踪。在严格规则与高效运营之间取得平衡对于在中国市场的成功至关重要。
 
-Dalla chiusura di [Microsoft CodePush](https://microsoftgithubio/code-push/) nel 2024, nuovi strumenti sono subentrati per affrontare sia le esigenze tecniche che normative. Un esempio è Capgo, che combina solide pratiche di sicurezza con una distribuzione semplificata delle app.
+自 [微软 CodePush](https://microsoft.github.io/code-push/) 在2024年关闭以来，新工具已经出现，以解决技术和监管需求。例如，Capgo将强大的安全实践与简化的应用部署结合在一起。
 
-Per rimanere conformi alle leggi sulla crittografia della Cina mantenendo allo stesso tempo la velocità di sviluppo, è fondamentale utilizzare gli strumenti giusti, mantenere aggiornata la documentazione, condurre audit regolari e collaborare con esperti. Questi passaggi sono fondamentali per navigare efficacemente nel complesso ambiente normativo cinese.
+为了在保持开发速度的同时遵循中国的加密法律，使用正确的工具、保持文档更新、进行定期审核以及与专家合作至关重要。这些步骤是有效应对中国复杂监管环境的关键。
 
-> "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per le correzioni di bug è prezioso" - Bessie Cooper [\[1\]](https://capgoapp/)
+> “Capgo是希望提高生产力的开发人员必备的工具。避免对bug修复的审核真是太好了。” - 贝西·库珀 [\[1\]](https://capgo.app/)

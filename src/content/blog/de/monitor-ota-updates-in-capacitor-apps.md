@@ -1,6 +1,6 @@
 ---
 slug: monitor-ota-updates-in-capacitor-apps
-title: Monitorear actualizaciones OTA en aplicaciones Capacitor
+title: OTA-Updates in Capacitor-Apps überwachen
 description: >-
   Erfahren Sie, wie Sie OTA-Updates in mobilen Apps effektiv überwachen können,
   um schnelle, sichere und zuverlässige Bereitstellungen zu gewährleisten.
@@ -20,80 +20,79 @@ published: true
 locale: de
 next_blog: ''
 ---
+**Möchten Sie Ihre App aktualisieren, ohne auf die Genehmigung des App-Stores zu warten?** OTA (Over-The-Air) Updates ermöglichen es Ihnen, Fehlerbehebungen und Funktionen in Echtzeit direkt an die Benutzer zu senden. Mit Tools wie [Capgo](https://capgo.app/) können Sie die Update-Leistung überwachen, Fehler verfolgen und sogar unerwünschte Updates sofort zurücksetzen.
 
-**Möchten Sie Ihre App ohne Wartezeit auf App-Store-Genehmigungen aktualisieren?** OTA (Over-The-Air) Updates ermöglichen es Ihnen, Fehlerbehebungen und Funktionen in Echtzeit direkt an Benutzer zu übermitteln. Mit Tools wie [Capgo](https://capgoapp/) können Sie die Update-Leistung überwachen, Fehler verfolgen und fehlerhafte Updates sofort rückgängig machen.
+### Wichtige Vorteile der Überwachung von OTA-Updates:
 
-### Wichtige Vorteile der OTA-Update-Überwachung:
+-   **Schnelle Updates**: Erreichen Sie bis zu 95 % der aktiven Benutzer innerhalb von 24 Stunden.
+-   **Fehlerverfolgung**: Erkennen und beheben Sie Bereitstellungsprobleme frühzeitig.
+-   **Sichere Lieferung**: Die Ende-zu-Ende-Verschlüsselung sorgt dafür, dass Updates sicher sind.
+-   **Echtzeit-Analysen**: Überwachen Sie Erfolgsquoten (globaler Durchschnitt: 82 %) und Leistungsmetriken.
 
--   **Schnelle Updates**: Erreichen Sie bis zu 95% der aktiven Nutzer innerhalb von 24 Stunden
--   **Fehlerverfolgung**: Erkennen und beheben Sie Bereitstellungsprobleme frühzeitig
--   **Sichere Übermittlung**: Ende-zu-Ende-Verschlüsselung gewährleistet sichere Updates
--   **Echtzeit-Analysen**: Überwachen Sie Erfolgsraten (globaler Durchschnitt: 82%) und Leistungskennzahlen
+### Schnelle Einrichtungsmaßnahmen:
 
-### Schnelle Einrichtungsschritte:
+1.  Installieren Sie das [Capgo-Plugin](https://capgo.app/plugins/): `npx @capgo/cli init`.
+2.  Verwenden Sie Versionskontrolle mit Kanälen (Produktion, Beta, Staging).
+3.  Aktivieren Sie Echtzeitanalysen und Fehlerverfolgung.
+4.  Richten Sie Auto-Rollback für fehlgeschlagene Updates ein.
 
-1. Installieren Sie das [Capgo Plugin](https://capgoapp/plugins/): `npx @capgo/cli init`
-2. Nutzen Sie Versionskontrolle mit Kanälen (Produktion, Beta, Staging)
-3. Aktivieren Sie Echtzeit-Analysen und Fehlerverfolgung
-4. Richten Sie automatisches Rollback für fehlgeschlagene Updates ein
+Capgo hat bereits **23,5 Millionen Updates über 750 Apps** mit schnellen Downloadgeschwindigkeiten (114 ms für ein 5 MB-Paket) verwaltet. Beginnen Sie noch heute mit der Überwachung Ihrer Updates für eine reibungslosere App-Verwaltung.
 
-Capgo hat bereits **235 Mio. Updates über 750 Apps** mit schnellen Download-Geschwindigkeiten (114ms für ein 5MB-Paket) verwaltet. Beginnen Sie noch heute mit der Überwachung Ihrer Updates für ein reibungsloseres App-Management.
+## Erkunden Sie [Capawesome](https://capawesome.io/)'s Neues [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) Live Update ...
 
-## Entdecken Sie [Capawesome](https://capawesomeio/)'s Neues [Ionic](https://ionicframeworkcom/) Capacitor Live Update 
-
-![Capawesome](https://assetsseobotaicom/capgoapp/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bcjpg)
+![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Einrichten der Update-Überwachung
+## Einrichtung der Update-Überwachung
 
 So richten Sie die OTA-Update-Überwachung für Ihre App ein:
 
 ### Installation des erforderlichen Plugins
 
-Installieren Sie zunächst das Capgo-Plugin mit folgendem Befehl:
+Zuerst installieren Sie das Capgo-Plugin, indem Sie folgendes ausführen:
 
 ```bash
 npx @capgo/cli init
 ```
 
-Dieses Plugin funktioniert nahtlos mit Capacitor 6 und 7 und ist damit mit verschiedenen App-Versionen kompatibel.
+Dieses Plugin funktioniert nahtlos mit Capacitor 6 und 7 und macht es mit einer Vielzahl von App-Versionen kompatibel.
 
 ### Verwaltung von Update-Versionen
 
-Die Versionskontrolle spielt eine wichtige Rolle bei der Handhabung von OTA-Updates. Capgos [Kanalsystem](https://capgoapp/docs/plugin/cloud-mode/channel-system/) hilft Ihnen bei der effizienten Verwaltung der Update-Verteilung:
+Die Versionskontrolle spielt eine wichtige Rolle bei der Handhabung von OTA-Updates. Das [Kanal-System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) von Capgo hilft Ihnen, die Update-Verteilung effizient zu verwalten:
 
-| Kanaltyp | Zweck | Bester Anwendungsfall |
+| Kanaldtyp | Zweck | Bester Anwendungsfall |
 | --- | --- | --- |
-| Produktion | Haupt-Release-Kanal | Stabile Updates für alle Nutzer |
-| Beta | Test-Kanal | Frühzugang zu Funktionen |
-| Staging | Pre-Release-Tests | Interne QA-Tests |
+| Produktion | Hauptfreigabekanal | Stabile Updates für alle Benutzer |
+| Beta | Testkanal | Früher Zugang zu Funktionen |
+| Staging | Vorab-Testen | Interne QA-Tests |
 
-Jeder Kanal behält seine eigene Versionshistorie bei, sodass Entwickler Änderungen verfolgen und Updates systematisch verwalten können. Außerdem bietet das System sofortige Rollback-Optionen, damit Sie schnell auf Bereitstellungsprobleme reagieren können.
+Jeder Kanal führt seine eigene Versionshistorie, sodass Entwickler Änderungen verfolgen und Updates systematisch verwalten können. Darüber hinaus bietet das System sofortige Rollback-Optionen, sodass Sie schnell auf Bereitstellungsprobleme reagieren können.
 
 Sobald die Versionskontrolle eingerichtet ist, können Sie Updates überwachen, um Sicherheit und Leistung zu gewährleisten.
 
-### Einrichten der [Capgo](https://capgoapp/) Überwachung
+### Einrichtung der [Capgo](https://capgo.app/) Überwachung
 
-![Capgo](https://assetsseobotaicom/capgoapp/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
-1. **Analytics-Integration konfigurieren**: Nutzen Sie Echtzeit-Analysen zur Überwachung der Update-Leistung und Nutzerinteraktion
-2. **Fehlerverfolgung aktivieren**: Aktivieren Sie die Fehlerverfolgung, um detaillierte Protokolle und Leistungsmetriken zu erfassen
-3. **Verteilungsregeln festlegen**: Definieren Sie Rollout-Parameter zur Steuerung der Update-Geschwindigkeit und Zielgruppen
+1.  **Analytik-Integration konfigurieren**: Verwenden Sie Echtzeitanalysen, um die Update-Leistung und das Benutzerengagement zu überwachen.
+2.  **Fehlerverfolgung aktivieren**: Aktivieren Sie die Fehlerverfolgung, um detaillierte Protokolle und Leistungsmetriken zu erfassen.
+3.  **Verteilungsregeln festlegen**: Definieren Sie Rollout-Parameter, um die Update-Geschwindigkeit zu steuern und bestimmte Benutzergruppen anzusprechen.
 
 Diese Schritte schaffen ein zuverlässiges Überwachungssystem für Ihre App.
 
-> "Capgo ist ein unverzichtbares Tool für Entwickler, die produktiver sein möchten. Die Vermeidung von Reviews für Fehlerbehebungen ist Gold wert" - Bessie Cooper [\[1\]](https://capgoapp/)
+> "Capgo ist ein unverzichtbares Werkzeug für Entwickler, die produktiver sein möchten. Die Vermeidung von Überprüfungen für Bugfixes ist Gold wert." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Capgo gewährleistet eine sichere Update-Übermittlung mit Ende-zu-Ende-Verschlüsselung, während integrierte Analysen, Rollback-Optionen und Echtzeit-Überwachung die App-Stabilität aufrechterhalten.
+Capgo gewährleistet eine sichere Update-Lieferung mit Ende-zu-Ende-Verschlüsselung, während integrierte Analysen, Rollback-Optionen und Echtzeit-Überwachung dazu beitragen, die Stabilität der App aufrechtzuerhalten.
 
 ## Fehlerbehandlung und -verfolgung
 
 ### App-Level-Überwachung
 
-Eine effektive App-Level-Überwachung ist der Schlüssel zur Gewährleistung einer reibungslosen OTA-Update-Leistung. Capgos System bietet detaillierte Einblicke in die Update-Bereitstellung und -Installation mit einer globalen Erfolgsrate von 82% [\[1\]](https://capgoapp/)
+Eine effektive App-Level-Überwachung ist der Schlüssel zur Gewährleistung einer reibungslosen OTA-Update-Leistung. Das System von Capgo bietet detaillierte Einblicke in die Update-Lieferung und -Installation und erreicht eine globale Erfolgsquote von 82 % [\[1\]](https://capgo.app/).
 
-Hier können Sie die App-Level-Überwachung einrichten:
+So können Sie die App-Level-Überwachung einrichten:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -109,23 +108,25 @@ CapacitorUpdater.addListener('downloadComplete', (info) => {
 })
 ```
 
-Für ein vollständiges Bild kombinieren Sie dies mit Backend-Fehlerverfolgung, um Probleme von beiden Seiten anzugehen.
+Für ein vollständiges Bild kombinieren Sie dies mit der Fehlerverfolgung im Backend, um Probleme von beiden Seiten zu adressieren.
 
-### Backend-Fehlerverfolgung
+### Fehlerverfolgung im Backend
 
-Die Backend-Überwachung ergänzt die App-Level-Einblicke durch Fokussierung auf die Gesamtsystemleistung. Da Capgo weltweit 235 Mio. Updates verwaltet [\[1\]](https://capgoapp/), ist die Verfolgung von Backend-Fehlern essentiell für die Aufrechterhaltung der Zuverlässigkeit.| Tracking-Metrik | Zweck | Auswirkung |
+Das Backend-Monitoring ergänzt die Einblicke auf App-Ebene, indem es sich auf die Gesamtleistung des Systems konzentriert. Da Capgo weltweit 23,5 Millionen Updates verwaltet [\[1\]](https://capgo.app/), ist die Verfolgung von Fehlern im Backend entscheidend für die Aufrechterhaltung der Zuverlässigkeit.
+
+| Verfolgungsmessung | Zweck | Einfluss |
 | --- | --- | --- |
-| Erfolgsrate der Aktualisierung | Verfolgt erfolgreiche Installationen | Hält 95% der Nutzer innerhalb von 24 Stunden auf dem neuesten Stand [\[1\]](https://capgoapp/) |
-| Download-Leistung | Überwacht Bandbreitennutzung | Verbessert die Bereitstellungsgeschwindigkeit |
-| Fehlerhäufigkeit | Identifiziert wiederkehrende Probleme | Reduziert Fehlerraten |
+| Update-Erfolgsquote | Verfolgt erfolgreiche Installationen | Hält 95 % der Benutzer innerhalb von 24 Stunden auf dem neuesten Stand [\[1\]](https://capgo.app/) |
+| Download-Leistung | Überwacht die Bandbreitennutzung | Verbessert die Liefergeschwindigkeit |
+| Fehlerhäufigkeit | Identifiziert wiederkehrende Probleme | Reduziert die Ausfallraten |
 
-Durch die Überwachung dieser Metriken können Sie Probleme schnell erkennen und lösen und einen reibungslosen Aktualisierungsprozess gewährleisten
+Indem Sie diese Metriken im Blick behalten, können Sie Probleme schnell identifizieren und lösen, um einen reibungslosen Update-Prozess zu gewährleisten.
 
-### Automatische Rollback-Einrichtung
+### Auto-Rollback-Einrichtung
 
-Bei Bereitstellungsfehlern verhindert automatisches Rollback Benutzerunterbrechungen. Die Rollback-Funktion von Capgo wird sofort aktiviert und minimiert Ausfallzeiten während der Bereitstellung [\[1\]](https://capgoapp/)
+Wenn Bereitstellungsfehler auftreten, verhindert ein automatisches Rollback Unterbrechungen für die Benutzer. Die Rollback-Funktion von Capgo wird sofort aktiviert und minimiert Ausfallzeiten während der Bereitstellung [\[1\]](https://capgo.app/).
 
-Hier ist ein Beispiel für die Konfiguration des automatischen Rollbacks:
+Hier ist ein Beispiel, wie Sie ein Auto-Rollback konfigurieren können:
 
 ```typescript
 try {
@@ -138,15 +139,15 @@ try {
 }
 ```
 
-Dieser Ansatz hat sich als zuverlässig erwiesen, wobei derzeit 750 Apps das Capgo-System in der Produktion verwenden [\[1\]](https://capgoapp/) Die breite Akzeptanz unterstreicht die Zuverlässigkeit dieser Fehlerbehandlungswerkzeuge
+Dieser Ansatz hat sich als zuverlässig erwiesen, wobei derzeit 750 Apps das System von Capgo in der Produktion nutzen [\[1\]](https://capgo.app/). Seine breite Akzeptanz unterstreicht die Zuverlässigkeit dieser Fehlerbehandlungswerkzeuge.
 
 ## Überwachungsrichtlinien
 
-Diese Richtlinien nutzen die Überwachungstools von Capgo, um jedes Update messbar, sicher und sorgfältig bereitzustellen
+Diese Richtlinien nutzen die Überwachungstools von Capgo, um jedes Update messbar, sicher und sorgfältig zu verteilen.
 
-### Überwachung der Update-Leistung
+### Verfolgung der Update-Leistung
 
-Behalten Sie die OTA-Update-Leistung im Auge, indem Sie wichtige Metriken wie Erfolgsrate, Benutzerinteraktion, Download-Geschwindigkeit und Fehlerhäufigkeit überwachen. Hier ist ein Code-Snippet zur Verfolgung dieser Metriken:
+Behalten Sie die OTA-Update-Leistung aufmerksam im Auge, indem Sie wichtige Metriken wie Erfolgsquote, Benutzerengagement, Downloadgeschwindigkeit und Fehlerhäufigkeit überwachen. Hier ist ein Codeausschnitt, der Ihnen hilft, diese Metriken zu verfolgen:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -158,15 +159,15 @@ CapacitorUpdater.addListener('updateStats', (stats) => {
 })
 ```
 
-Nutzen Sie diese Erkenntnisse, um Ihre gestaffelten Bereitstellungspläne effektiv zu steuern
+Verwenden Sie diese Erkenntnisse, um Ihre gestaffelten Bereitstellungspläne effektiv zu steuern.
 
-### Phasenweise Update-Einführungen
+### Gestaffelte Update-Rollouts
 
-Phasenweise Einführungen minimieren Risiken durch schrittweise Freigabe von Updates für bestimmte Benutzergruppen. Das Channel-System von Capgo erleichtert die Verwaltung kontrollierter Bereitstellungen. Beginnen Sie mit internen Testern, wechseln Sie zu Beta-Nutzern und erweitern Sie dann auf das allgemeine Publikum. Überwachen Sie jede Phase mindestens 24 Stunden, bevor Sie fortfahren. Diese Methode hat dazu beigetragen, dass Capgo global eine Erfolgsquote von 82% erreicht [\[1\]](https://capgoapp/)
+Gestaffelte Rollouts helfen, Risiken zu minimieren, indem Updates schrittweise an bestimmte Benutzergruppen verteilt werden. Das Kanal-System von Capgo erleichtert das Management kontrollierter Bereitstellungen. Beginnen Sie mit internen Testern, wechseln Sie zu Beta-Benutzern und erweitern Sie dann auf das allgemeine Publikum. Überwachen Sie jede Phase mindestens 24 Stunden, bevor Sie fortfahren. Diese Methode hat dazu beigetragen, dass Capgo eine globale Erfolgsquote von 82 % erreicht [\[1\]](https://capgo.app/).
 
-### Sicherheit und Store-Konformität
+### Sicherheit und Store-Compliance
 
-Als Ergänzung zu phasenweisen Einführungen ist die sichere Update-Bereitstellung von entscheidender Bedeutung. Aktivieren Sie die sichere Update-Überprüfung mit folgendem Code:
+Um gestaffelte Rollouts zu ergänzen, ist eine sichere Update-Zustellung entscheidend. Aktivieren Sie die sichere Update-Überprüfung mithilfe des folgenden Codes:
 
 ```typescript
 // Enable secure update verification
@@ -177,36 +178,36 @@ await CapacitorUpdater.download({
 })
 ```
 
-> "Die einzige Lösung mit echter Ende-zu-Ende-Verschlüsselung, andere signieren nur Updates" - Capgo [\[1\]](https://capgoapp/)
+> "Die einzige Lösung mit echter Ende-zu-Ende-Verschlüsselung, andere signieren nur Updates" - Capgo [\[1\]](https://capgo.app/)
 
-Dies stellt sicher, dass Updates den Sicherheitsstandards entsprechen und Benutzerdaten durch regelmäßige Audits und Validierungsprozesse geschützt bleiben
+Dies stellt sicher, dass Updates den Sicherheitsstandards entsprechen und die Benutzerdaten durch regelmäßige Audits und Validierungsprozesse sicher bleiben.
 
 ## Zusammenfassung
 
-Dieser Abschnitt fasst die wichtigsten Schritte zur Überwachung von OTA-Updates zusammen und hebt die Funktionen hervor, die Capgo zu einer herausragenden Wahl für das [Update-Management](https://capgoapp/docs/plugin/cloud-mode/manual-update/) machen
+In diesem Abschnitt werden die wichtigsten Schritte zur Überwachung von OTA-Updates zusammengefasst und die Funktionen hervorgehoben, die Capgo zu einer herausragenden Wahl für [Update-Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) machen.
 
 ### Wichtige Überwachungsschritte
 
-Die effektive OTA-Update-Überwachung umfasst mehrere kritische Komponenten. Diese zuvor besprochenen Schritte stellen sicher, dass Updates effizient bereitgestellt und Probleme schnell behoben werden:
+Eine effektive Überwachung von OTA-Updates umfasst mehrere kritische Komponenten. Diese zuvor besprochenen Schritte stellen sicher, dass Updates effizient bereitgestellt und Probleme schnell angegangen werden:
 
-| Überwachungskomponente | Zweck | Auswirkung |
+| Überwachungsbestandteil | Zweck | Einfluss |
 | --- | --- | --- |
-| Echtzeit-Analyse | Misst Update-Erfolg und Benutzerinteraktion | Identifiziert Probleme sofort |
-| Fehlerverfolgung | Erkennt und löst Probleme frühzeitig | Minimiert Störungen für Benutzer |
-| Versionskontrolle | Verwaltet die Verteilung von Updates | Hält Einführungen kontrolliert und vorhersehbar |
-| Leistungsmetriken | Verfolgt Download-Geschwindigkeiten und Erfolgsraten | Bewahrt eine reibungslose Benutzererfahrung |
+| Echtzeit-Analytik | Messen Sie den Update-Erfolg und das Benutzerengagement | Identifiziert Probleme sofort |
+| Fehlerverfolgung | Erkennen und Beheben von Problemen frühzeitig | Minimiert Unterbrechungen für die Benutzer |
+| Versionskontrolle | Verwalten, wie Updates verteilt werden | Hält Rollouts kontrolliert und vorhersehbar |
+| Leistungsmetriken | Verfolgen Sie Downloadgeschwindigkeiten und Erfolgsquoten | Bewahrt ein reibungsloses Benutzererlebnis |
 
-### Capgo Funktionsübersicht
+### Übersicht der Capgo-Funktionen
 
-Seit seiner Einführung im Jahr 2022 ist Capgo zu einem bevorzugten Werkzeug für OTA-Update-Überwachung geworden und bietet Lösungen, die Teams helfen, sich von veralteten Update-Methoden zu lösen
+Seit seiner Einführung im Jahr 2022 ist Capgo zu einem unverzichtbaren Tool für die Überwachung von OTA-Updates geworden und bietet Lösungen, die Teams helfen, sich von veralteten Aktualisierungsmethoden zu entfernen.
 
-> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Bereitstellung an unsere Nutzer!" – Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Wir praktizieren agile Entwicklung und @Capgo ist entscheidend für die kontinuierliche Bereitstellung an unsere Benutzer!" – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Die Tools von Capgo sind darauf ausgelegt, OTA-Updates mit Präzision zu handhabenHier sind die besonderen Merkmale:
+Die Tools von Capgo sind darauf ausgelegt, OTA-Updates mit Präzision zu verwalten. Hier sind die Merkmale, die es auszeichnen:
 
--   **Echtzeit-Analytik**: Verfolgt Aktualisierungserfolgsraten, um Probleme schnell zu beheben
--   **Ende-zu-Ende-Verschlüsselung**: Schützt Aktualisierungen mit starken Sicherheitsprotokollen
--   **Kanal-System**: Ermöglicht gezieltes Monitoring für bestimmte Benutzergruppen
--   **Ein-Klick-Rollback**: Schnelles Zurücksetzen auf eine frühere Version bei Problemen
+-   **Echtzeit-Analysen**: Verfolgt Erfolgsquoten von Updates, um Probleme schnell zu beheben
+-   **Ende-zu-Ende-Verschlüsselung**: Schützt Updates mit starken Sicherheitsprotokollen
+-   **Kanal-System**: Ermöglicht eine gezielte Überwachung für bestimmte Benutzergruppen
+-   **One-Click-Rollback**: Schnell zu einer früheren Version zurückkehren, falls Probleme auftreten
 
-Diese Funktionen haben bei Entwicklern an Bedeutung gewonnen, was sich in steigenden Akzeptanzraten und positivem Feedback von Benutzern widerspiegelt
+Diese Funktionen haben bei Entwicklern an Bedeutung gewonnen, was sich in steigenden Akzeptanzeraten und positivem Feedback von Benutzern widerspiegelt.

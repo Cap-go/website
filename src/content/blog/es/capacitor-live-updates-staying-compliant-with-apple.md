@@ -1,10 +1,10 @@
 ---
 slug: capacitor-live-updates-staying-compliant-with-apple
-title: 'Capacitor Live Updates: Appleのコンプライアンスを遵守する'
+title: 'Actualizaciones en Vivo de Capacitor: Manteniéndose en Cumplimiento con Apple'
 description: >-
-  Aprende cómo implementar actualizaciones en vivo de manera eficiente en
-  aplicaciones móviles mientras aseguras el cumplimiento de pautas estrictas
-  para evitar rechazos.
+  Aprenda a implementar actualizaciones en vivo de manera eficiente en
+  aplicaciones móviles, asegurando el cumplimiento de directrices estrictas para
+  evitar rechazos.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,222 +21,227 @@ published: true
 locale: es
 next_blog: ''
 ---
-
-Las [actualizaciones en vivo](https://capacitorjscom/) de Capacitor permiten a los desarrolladores enviar correcciones de errores y cambios menores directamente a las aplicaciones sin requerir que los usuarios descarguen actualizaciones desde la [App Store](https://wwwapplecom/app-store/). Esto acelera el despliegue hasta un **81%**, reduce costos y mejora la experiencia del usuario. Sin embargo, es esencial mantener el cumplimiento de las estrictas pautas de Apple para evitar rechazos de aplicaciones.
+[Capacitor](https://capacitorjs.com/) las actualizaciones en vivo permiten a los desarrolladores enviar correcciones de errores y cambios menores directamente a las aplicaciones sin requerir que los usuarios descarguen actualizaciones desde la [App Store](https://www.apple.com/app-store/). Esto acelera el despliegue en hasta **81%**, reduce costos y mejora la experiencia del usuario. Sin embargo, es esencial cumplir con las estrictas directrices de Apple para evitar el rechazo de la aplicación.
 
 ### Puntos Clave:
 
--   **Actualizaciones Permitidas**: Correcciones de errores, ajustes de UI y actualizaciones de contenido dentro del propósito original de la app
--   **Actualizaciones Prohibidas**: Cambios importantes de funcionalidad o actualizaciones de funciones principales (requieren revisión de App Store)
--   **Seguridad**: La encriptación de extremo a extremo es obligatoria para proteger los datos del usuario
--   **Herramientas**: [Capgo](https://capgoapp/) simplifica la gestión de actualizaciones en vivo, asegurando el cumplimiento de las reglas de Apple
+-   **Actualizaciones Permitidas**: Correcciones de errores, ajustes de UI y actualizaciones de contenido dentro del propósito original de la app.
+-   **Actualizaciones Prohibidas**: Cambios importantes en las funcionalidades o actualizaciones de funcionalidades centrales (requieren revisión de la App Store).
+-   **Seguridad**: La encriptación de extremo a extremo es obligatoria para proteger los datos del usuario.
+-   **Herramientas**: [Capgo](https://capgo.app/) simplifica la gestión de actualizaciones en vivo, asegurando el cumplimiento de las reglas de Apple.
 
 | **Tipo de Actualización** | **Permitido** | **Aprobación Necesaria** |
 | --- | --- | --- |
-| Correcciones de Errores | Sí | No |
+| Correcciones de Errores | Sí | No  |
 | Mejoras de UI | Sí | A veces |
-| Actualizaciones de Contenido | Sí | No |
-| Cambios de Funcionalidad | No | Sí |
-| Parches de Seguridad | Sí | No |
+| Actualizaciones de Contenido | Sí | No  |
+| Cambios de Funcionalidad | No  | Sí |
+| Parches de Seguridad | Sí | No  |
 
-Para mantener el cumplimiento, concéntrate en las correcciones de errores, asegura las actualizaciones con encriptación y documenta todos los cambios. Herramientas como Capgo ayudan a gestionar actualizaciones para más de **20 millones de usuarios**, asegurando que las apps permanezcan conformes mientras entregan actualizaciones rápidamente.
+Para mantener el cumplimiento, enfócate en correcciones de errores, actualizaciones seguras con encriptación y documenta todos los cambios. Herramientas como Capgo ayudan a gestionar actualizaciones para más de **20 millones de usuarios**, asegurando que las aplicaciones permanezcan en cumplimiento mientras entregan actualizaciones rápidamente.
 
-## Actualizaciones en Vivo de [Appflow](https://ionicio/appflow/live-updates): Despliega actualizaciones instantáneas directamente a tus usuarios
+## [Appflow](https://ionic.io/appflow/live-updates) Actualizaciones en Vivo: Despliega actualizaciones instantáneas directamente a tus usuarios
 
-![Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-03-12jpg?auto=compress)
+![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Reglas de Actualizaciones en Vivo de Apple
+## Reglas de Actualización en Vivo de Apple
 
-Apple regula las actualizaciones de apps para proteger a los usuarios, haciendo esencial entender estas reglas al implementar actualizaciones en vivo en aplicaciones Capacitor.
+Apple regula las actualizaciones de aplicaciones para proteger a los usuarios, lo que hace esencial comprender estas reglas al implementar actualizaciones en vivo en aplicaciones de Capacitor.
 
-### Pautas de [App Store](https://wwwapplecom/app-store/) para Actualizaciones
+### Directrices de la [App Store](https://www.apple.com/app-store/) para Actualizaciones
 
-![App Store](https://mars-imagesimgixnet/seobot/screenshots/wwwapplecom-9d9fbf06f7f9dd70143af6386e59a5d2-2025-03-12jpg?auto=compress)
+![App Store](https://mars-images.imgix.net/seobot/screenshots/www.apple.com-9d9fbf06f7f9dd70143af6386e59a5d2-2025-03-12.jpg?auto=compress)
 
-Las reglas de Apple detallan claramente lo que está y no está permitido con actualizaciones over-the-air (OTA). Aquí un desglose rápido:
+Las reglas de Apple describen claramente lo que está y no está permitido con actualizaciones por aire (OTA). Aquí hay un resumen rápido:
 
 | Tipo de Actualización | Permitido | Requisitos |
 | --- | --- | --- |
-| Correcciones de Errores | Sí | No debe cambiar la funcionalidad principal |
-| Mejoras de UI | Sí | Limitado a ajustes visuales menores |
-| Actualizaciones de Contenido | Sí | Debe mantenerse dentro del propósito original de la app |
-| Cambios de Funcionalidad | No | Requiere revisión de App Store |
-| Parches de Seguridad | Sí | Debe incluir encriptación adecuada |
+| Correcciones de Errores | Sí | No debe cambiar la funcionalidad central |
+| Mejoras de UI | Sí | Limitado a pequeños ajustes visuales |
+| Actualizaciones de Contenido | Sí | Debe permanecer dentro del propósito original de la app |
+| Cambios de Funcionalidad | No  | Requiere revisión de la App Store |
+| Parches de Seguridad | Sí | Debe incluir la encriptación adecuada |
 
-Al usar actualizaciones en vivo, los desarrolladores deben priorizar la seguridad de los datos del usuario y usar encriptación de extremo a extremo. Herramientas como Capgo están construidas para cumplir con los requisitos de Apple, simplificando el proceso.
+Al usar actualizaciones en vivo, los desarrolladores deben priorizar la seguridad de los datos del usuario y utilizar la encriptación de extremo a extremo. Herramientas como Capgo están diseñadas para cumplir con los requisitos de Apple, simplificando el proceso.
 
-Comprender estas reglas puede ayudarte a evitar errores comunes que llevan a rechazos de apps.
+Comprender estas reglas puede ayudarte a evitar errores comunes que conducen al rechazo de aplicaciones.
 
-### Principales Razones de Rechazo de Apps
+### Principales Razones por las que las Apps Son Rechazadas
 
-Muchas apps son rechazadas por violar las pautas de actualización de Apple. Aquí algunos problemas frecuentes:
+Muchas aplicaciones son rechazadas por violar las directrices de actualización de Apple. Aquí hay algunos problemas frecuentes:
 
--   **Eludir el Proceso de Revisión**: Agregar nuevas funciones importantes a través de actualizaciones en vivo en lugar de enviarlas para revisión
--   **Problemas de Privacidad**: No asegurar los datos del usuario durante las actualizaciones
--   **Cambios de Funcionalidad Principal**: Usar actualizaciones en vivo para alterar significativamente cómo funciona la app
+-   **Eludir el Proceso de Revisión**: Agregar características nuevas importantes a través de actualizaciones en vivo en lugar de enviarlas para revisión.
+-   **Problemas de Privacidad**: No asegurar los datos del usuario durante las actualizaciones.
+-   **Cambios en la Funcionalidad Central**: Usar actualizaciones en vivo para alterar significativamente cómo funciona la app.
 
-> "Evitar la revisión para corrección de errores es oro" - Bessie Cooper, @bessiecooper [\[1\]](https://capgoapp/)
+> "Evitar la revisión para correcciones de errores es oro." - Bessie Cooper, @bessiecooper [\[1\]](https://capgo.app/)
 
-Esto resalta que las actualizaciones en vivo deben enfocarse en correcciones de errores, no en introducir nuevas funciones.
+Esto destaca que las actualizaciones en vivo deben centrarse en correcciones de errores, no en introducir nuevas funciones.
 
 Para mantener el cumplimiento con los estándares de Apple:
 
--   Usa encriptación fuerte para todas las actualizaciones
--   Limita las actualizaciones a correcciones de errores y ajustes menores
--   Mantén registros detallados de los cambios realizados
--   Prueba exhaustivamente las actualizaciones antes del lanzamiento
--   Monitorea regularmente los cambios en las políticas de Apple
+-   Usa encriptación fuerte para todas las actualizaciones.
+-   Limita las actualizaciones a correcciones de errores y ajustes menores.
+-   Mantén un registro detallado de los cambios realizados.
+-   Prueba exhaustivamente las actualizaciones antes de lanzarlas.
+-   Monitorea regularmente los cambios en las políticas de Apple.
 
-Seguir estos pasos ayudará a asegurar que las actualizaciones de tu app permanezcan dentro de las estrictas pautas de Apple.
+Seguir estos pasos ayudará a garantizar que las actualizaciones de tu app permanezcan dentro de las estrictas directrices de Apple.
 
-## Configurando Actualizaciones en Vivo Conformes
+## Configuración de Actualizaciones en Vivo Cumplidoras
 
-Para implementar actualizaciones en vivo en tu [aplicación Capacitor](https://capgoapp/plugins/ivs-player/) mientras cumples con las reglas de conformidad de Apple, necesitarás una configuración estructurada. Aquí te mostramos cómo puedes comenzar### Pasos de Configuración del Proyecto
+Para implementar actualizaciones en vivo en tu [app de Capacitor](https://capgo.app/plugins/ivs-player/) mientras cumples con las reglas de cumplimiento de Apple, necesitarás una configuración estructurada. Aquí te mostramos cómo puedes comenzar.
 
-Comience configurando su entorno e instalando el plugin de actualización en vivo de Capgo:
+### Pasos de Configuración del Proyecto
+
+Comienza configurando tu entorno e instalando el plugin de actualización en vivo de Capgo:
 
 -   **Instalar Dependencias Requeridas**
     
-    -   Use el CLI de Capgo para instalar el plugin de actualización en vivo y configurar las herramientas necesarias. Por ejemplo:
+    -   Usa la CLI de Capgo para instalar el plugin de actualización en vivo y configurar las herramientas necesarias. Por ejemplo:
         
-        [[CODE_BLOCK]]
+        ```bash
+        npx @capgo/cli init
+        ```
         
-    -   Asegúrese de que su aplicación incluya cifrado de extremo a extremo y almacenamiento seguro para los archivos de actualización
+    -   Asegúrate de que tu app incluya encriptación de extremo a extremo y almacenamiento seguro para los archivos de actualización.
         
 -   **Configurar Parámetros de Actualización**
     
-    -   Establezca la frecuencia de las actualizaciones
-    -   Planifique procedimientos de reversión en caso de problemas
-    -   Mantenga un registro detallado de cambios de versión
+    -   Establece con qué frecuencia deben ocurrir las actualizaciones.
+    -   Planifica procedimientos de reversión en caso de que algo salga mal.
+    -   Mantén un registro detallado de los cambios de versión.
 -   **Implementar Protocolos de Seguridad**
     
-    -   Habilite el cifrado de extremo a extremo
-    -   Use métodos de transmisión seguros
-    -   Requiera autenticación de usuario para protección adicional
+    -   Habilita la encriptación de extremo a extremo.
+    -   Usa métodos de transmisión seguros.
+    -   Requiere autenticación de usuario para mayor protección.
 
-### Pautas de Control de Versiones
+### Directrices de Control de Versiones
 
-Gestionar correctamente las versiones de la aplicación es clave para mantener el cumplimiento con las pautas de Apple. Aquí un desglose rápido:
+Gestionar las versiones de la app correctamente es clave para cumplir con las directrices de Apple. Aquí hay un resumen rápido:
 
 | Tipo de Versión | Alcance de Actualización | Necesita Aprobación |
 | --- | --- | --- |
-| Parche (xx1) | Correcciones de errores | No |
-| Menor (x1x) | Ajustes de UI | A veces |
-| Mayor (1xx) | Actualizaciones de funciones | Sí |
+| Parche (x.x.1) | Correcciones de errores | No  |
+| Menor (x.1.x) | Ajustes de UI | A veces |
+| Mayor (1.x.x) | Actualizaciones de características | Sí |
 
-Mantenga documentación detallada de todos los cambios para facilitar el proceso de revisión del App Store
+Mantén documentación detallada de todos los cambios para hacer el proceso de revisión de la App Store más fluido.
 
-### [Capgo](https://capgoapp/): Gestión de Actualizaciones en Vivo
+### [Capgo](https://capgo.app/): Gestión de Actualizaciones en Vivo
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
-Capgo simplifica la gestión de actualizaciones en vivo y asegura el cumplimiento con los requisitos de Apple. Ya ha respaldado más de **9476 millones de actualizaciones** en **más de 1,400 aplicaciones en producción** [\[1\]](https://capgoapp/)
+Capgo simplifica la gestión de actualizaciones en vivo y asegura el cumplimiento de los requisitos de Apple. Ya ha respaldado más de **947.6 millones de actualizaciones** en más de **1,400 apps de producción** [\[1\]](https://capgo.app/).
 
 Algunas de sus características destacadas incluyen:
 
--   **Cifrado de extremo a extremo** para actualizaciones seguras
--   **Integración CI/CD** con plataformas como [GitHub](https://githubcom/), [GitLab](https://aboutgitlabcom/), y [Azure DevOps](https://azuremicrosoftcom/en-us/products/devops)
--   **Asignación de usuarios** para despliegues controlados
--   Herramientas para ayudar a asegurar que las actualizaciones cumplan con las políticas de Apple
+-   **Encriptación de extremo a extremo** para actualizaciones seguras.
+-   **Integración CI/CD** con plataformas como [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), y [Azure DevOps](https://azure.microsoft.com/en-us/products/devops).
+-   **Asignación de usuarios** para despliegues controlados.
+-   Herramientas para ayudar a garantizar que las actualizaciones se alineen con las políticas de Apple.
 
-Una vez que su aplicación esté lista, use el CLI de Capgo para enviar actualizaciones. El sistema manejará automáticamente el control de versiones, cifrado y distribución, manteniéndolo en cumplimiento con las reglas de Apple
+Una vez que tu app esté lista, utiliza la CLI de Capgo para enviar actualizaciones. El sistema manejará automáticamente el control de versiones, la encriptación y la distribución, manteniéndote en cumplimiento con las reglas de Apple.
 
 ###### sbb-itb-f9944d2
 
-## Seguridad de Datos Durante las Actualizaciones
+## Seguridad de Datos Durante Actualizaciones
 
-Asegurar los datos durante las actualizaciones en vivo es crucial para mantener el cumplimiento con las regulaciones y proteger la información del usuario. También juega un papel clave en mantener la confianza del usuario
+Asegurar los datos durante las actualizaciones en vivo es crucial para cumplir con las regulaciones y proteger la información del usuario. También juega un papel clave en mantener la confianza del usuario.
 
-### Requisitos de Cifrado
+### Requisitos de Encriptación
 
-El cifrado de extremo a extremo es imprescindible para mantener seguras las actualizaciones en vivo en [aplicaciones Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/). Asegura que los datos de actualización permanezcan protegidos mientras se mueven del servidor al dispositivo. La solución de actualización en vivo de Capgo impone estos estándares de cifrado. Según Capgo: "Cifrado de extremo a extremo. Solo sus usuarios pueden descifrar sus actualizaciones, nadie más" [\[1\]](https://capgoapp/) Este enfoque de cifrado es esencial para proteger efectivamente los datos del usuario
+La encriptación de extremo a extremo es imprescindible para mantener las actualizaciones en vivo seguras en [apps de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Asegura que los datos de actualización permanezcan protegidos mientras se trasladan del servidor al dispositivo. La solución de actualización en vivo de Capgo impone estos estándares de encriptación. Según Capgo: "Encriptación de extremo a extremo. Solo tus usuarios pueden desencriptar tus actualizaciones, nadie más" [\[1\]](https://capgo.app/). Esta forma de encriptación es esencial para proteger eficazmente los datos del usuario.
 
 ### Protección de Datos del Usuario
 
-El marco de seguridad de Capgo asegura que solo los usuarios autorizados puedan descifrar las actualizaciones. Al limitar el acceso, ayuda a proteger los datos del usuario durante el proceso de actualización y minimiza el riesgo de acceso no autorizado
+El marco de seguridad de Capgo asegura que solo los usuarios autorizados pueden desencriptar las actualizaciones. Al limitar el acceso, ayuda a proteger los datos del usuario durante todo el proceso de actualización y minimiza el riesgo de acceso no autorizado.
 
-## Pruebas y Envío al App Store
+## Pruebas y Envío a la App Store
 
-Las pruebas exhaustivas antes del lanzamiento son críticas para un envío fluido al App Store y cumplir con los estándares de conformidad
+Las pruebas exhaustivas antes del lanzamiento son críticas para un envío fluido a la App Store y para cumplir con los estándares.
 
-### Pruebas Pre-Lanzamiento
+### Pruebas Previas al Lanzamiento
 
-La función de asignación de usuarios de Capgo le permite probar actualizaciones con grupos específicos de usuarios antes de implementarlas para todos. Este enfoque controlado asegura que sus estrategias de [cifrado y protección de datos](https://capgoapp/docs/cli/migrations/encryption/) estén funcionando efectivamente
+La función de asignación de usuarios de Capgo te permite probar actualizaciones con grupos de usuarios específicos antes de lanzarlas a todos. Este enfoque controlado asegura que tus [estrategias de encriptación y protección de datos](https://capgo.app/docs/cli/migrations/encryption/) estén funcionando efectivamente.
 
-Aquí hay un ejemplo de cómo Capgo manejó un despliegue para más de 5,000 usuarios:
+Aquí hay un ejemplo de cómo Capgo manejó una implementación para más de 5,000 usuarios:
 
-> "Implementamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo" [\[1\]](https://capgoapp/)
+> "Lanzamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos desde que se desplegó el OTA a @Capgo." [\[1\]](https://capgo.app/)
 
-Para asegurar un despliegue exitoso, siga estos pasos:
+Para asegurar un despliegue exitoso, sigue estos pasos:
 
--   Comience con pruebas internas-   Expandir a un pequeño grupo de usuarios externos
--   Aumentar gradualmente la base de usuarios
--   Monitorear los tiempos de entrega y tasas de éxito de las actualizaciones
+-   Comienza con pruebas internas.
+-   Expande a un pequeño grupo de usuarios externos.
+-   Escala gradualmente la base de usuarios.
+-   Monitorea los tiempos de entrega de actualizaciones y las tasas de éxito.
 
-Una vez completadas las pruebas, necesitarás documentar estos pasos para el proceso de revisión del App Store
+Una vez que las pruebas estén completas, necesitarás documentar estos pasos para el proceso de revisión de la App Store.
 
-### Pautas de Revisión de App
+### Directrices de Revisión de Apps
 
-Al enviar tu aplicación, es importante demostrar el cumplimiento de las pautas de Apple
+Al enviar tu aplicación, es importante mostrar cumplimiento con las directrices de Apple.
 
-> "@Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar revisiones para correcciones de errores es oro puro" - Bessie Cooper [\[1\]](https://capgoapp/)
+> "@Capgo es una herramienta imprescindible para los desarrolladores que quieren ser más productivos. Evitar la revisión para correcciones de errores es oro." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Apple requiere documentación específica, incluyendo:
+Apple requiere documentación específica, que incluye:
 
--   **Documentación Clara**: Una explicación detallada de cómo se entregan las actualizaciones
--   **Protocolos de Seguridad**: Prueba de medidas de encriptación y protección de datos
--   **Alcance de Actualización**: Un desglose de los tipos de contenido que se actualizan
--   **Evidencia de Pruebas**: Datos que muestren pruebas exhaustivas y métricas de rendimiento
+-   **Documentación Clara**: Una explicación detallada de cómo se entregan las actualizaciones.
+-   **Protocolos de Seguridad**: Prueba de encriptación y medidas de protección de datos.
+-   **Alcance de Actualización**: Un desglose de los tipos de contenido que se están actualizando.
+-   **Evidencia de Pruebas**: Datos que muestran pruebas exhaustivas y métricas de rendimiento.
 
 | Área de Enfoque de Revisión | Documentación Requerida |
 | --- | --- |
 | Medidas de Seguridad | Protocolos de encriptación, seguridad de datos |
-| Mecanismo de Actualización | Detalles técnicos de implementación |
-| Cambios de Contenido | Alcance definido de actualizaciones |
+| Mecanismo de Actualización | Detalles técnicos de la implementación |
+| Cambios de Contenido | Alcance definido de las actualizaciones |
 | Resultados de Pruebas | Métricas de estabilidad y rendimiento |
 
-Proporcionar documentación clara y detallada sobre seguridad y procesos de actualización puede simplificar el proceso de envío y ayudar a evitar retrasos
+Proporcionar documentación clara y detallada sobre los procesos de seguridad y actualización puede simplificar el proceso de envío y ayudar a evitar retrasos.
 
 ## Cumplimiento Post-Lanzamiento
 
-Después de lanzar tu aplicación, mantenerse en cumplimiento con las pautas del App Store requiere monitoreo constante y ajustes rápidos. Los desarrolladores necesitan realizar seguimiento de las actualizaciones y adaptarse a cualquier cambio en las pautas para asegurar el cumplimiento continuo
+Después de lanzar tu aplicación, mantenerse en cumplimiento con las directrices de la App Store requiere monitoreo constante y ajustes rápidos. Los desarrolladores necesitan hacer un seguimiento de las actualizaciones y adaptarse a cualquier cambio en las directrices para asegurar el cumplimiento continuo.
 
 ### Seguimiento de Actualizaciones
 
-Para mantener tu aplicación en línea con las políticas del App Store, enfócate en estas áreas clave:
+Para mantener tu aplicación alineada con las políticas de la App Store, enfócate en estas áreas clave:
 
 | Área de Monitoreo | Métricas Clave | Elementos de Acción |
 | --- | --- | --- |
-| Velocidad de Distribución | Tiempo de entrega de actualización | Medir qué tan rápido llegan las actualizaciones a los usuarios |
-| Tasa de Éxito | % de finalización de actualización | Investigar actualizaciones fallidas y sus causas |
-| Cobertura de Usuarios | Actualizaciones de usuarios activos | Asegurar que las actualizaciones lleguen a todos los segmentos de usuarios |
-| Estado de Seguridad | Validación de encriptación | Verificar la integridad de la encriptación de extremo a extremo |
+| Velocidad de Distribución | Actualizar tiempo de entrega | Medir qué tan rápido llegan las actualizaciones a los usuarios. |
+| Tasa de Éxito | % de finalización de actualizaciones | Investigar actualizaciones fallidas y sus causas. |
+| Cobertura de Usuarios | Actualizaciones de usuarios activos | Asegurar que las actualizaciones lleguen a todos los segmentos de usuarios. |
+| Estado de Seguridad | Validación de cifrado | Comprobar la integridad del cifrado de extremo a extremo. |
 
-Estas métricas proporcionan la base para adaptarse rápidamente cuando las pautas cambien
+Estas métricas proporcionan la base para adaptarse rápidamente cuando las pautas cambian.
 
-### Respuesta a Actualizaciones de Políticas
+### Respuesta a la Actualización de Políticas
 
-El seguimiento de estas métricas no es solo sobre rendimiento - también te ayuda a identificar áreas que podrían necesitar atención inmediata cuando Apple actualiza sus políticas. Aquí está cómo responder:
+El seguimiento de estas métricas no se trata solo de rendimiento; también ayuda a identificar áreas que pueden necesitar atención inmediata cuando Apple actualiza sus políticas. Así es como responder:
 
-1. **Revisar Cambios:** Examinar nuevas pautas y determinar su impacto en tu proceso actual de actualización
-2. **Auditoría Técnica:** Confirmar que tus mecanismos de actualización se alinean con los requisitos revisados
-3. **Verificación de Seguridad:** Volver a verificar que tus protocolos de encriptación cumplan con los estándares actualizados
-4. **Actualización de Documentación:** Actualizar tu documentación de cumplimiento para reflejar las últimas pautas
+1.  **Revisar Cambios:** Examinar nuevas pautas y determinar su impacto en su proceso de actualización actual.
+2.  **Auditoría Técnica:** Confirmar que sus mecanismos de actualización se alineen con los requisitos revisados.
+3.  **Verificación de Seguridad:** Comprobar que sus protocolos de cifrado cumplan con los estándares actualizados.
+4.  **Actualización de Documentación:** Actualizar su documentación de cumplimiento para reflejar las últimas pautas.
 
-Usar herramientas construidas con los requisitos de Apple en mente puede simplificar este proceso. Por ejemplo, Capgo ofrece características como encriptación de extremo a extremo y asignación de usuarios, facilitando mantener el cumplimiento mientras se entregan actualizaciones eficientemente [\[1\]](https://capgoapp/)
+Utilizar herramientas diseñadas con los requisitos de Apple en mente puede simplificar este proceso. Por ejemplo, Capgo ofrece funciones como cifrado de extremo a extremo y asignación de usuarios, facilitando el cumplimiento mientras se entregan actualizaciones de manera eficiente [\[1\]](https://capgo.app/).
 
-Monitorea regularmente el cumplimiento de tu aplicación a través de tu [plataforma de gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/). Mantenerse proactivo puede ayudarte a detectar y resolver problemas potenciales antes de que afecten tu posición en el App Store, manteniendo tu estrategia de actualización en vivo tanto efectiva como dentro de las reglas
+Monitoree regularmente el cumplimiento de su aplicación a través de su [plataforma de gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Mantenerse proactivo puede ayudarle a detectar y resolver problemas potenciales antes de que afecten su posición en la App Store, manteniendo su estrategia de actualizaciones en vivo tanto efectiva como dentro de las reglas.
 
 ## Conclusión
 
-Equilibrar velocidad y cumplimiento es clave al implementar actualizaciones en vivo en aplicaciones Capacitor. Con las herramientas correctas, la eficiencia de lanzamiento puede mejorar hasta un 81% [\[1\]](https://capgoapp/), facilitando mantenerse dentro de las pautas de Apple
+Equilibrar la velocidad y el cumplimiento es clave al implementar actualizaciones en vivo en aplicaciones de Capacitor. Con las herramientas adecuadas, la eficiencia en los lanzamientos puede mejorar hasta en un 81% [\[1\]](https://capgo.app/), facilitando el cumplimiento de las pautas de Apple.
 
-Plataformas como Capgo muestran cómo es posible cumplir con los requisitos del App Store mientras se entregan actualizaciones rápidas [\[1\]](https://capgoapp/). Las estrictas reglas de Apple en torno a las actualizaciones en vivo resaltan la importancia de mantener el cumplimiento
+Plataformas como Capgo demuestran cómo es posible cumplir con los requisitos de la App Store mientras se entregan actualizaciones rápidas [\[1\]](https://capgo.app/). Las estrictas reglas de Apple sobre actualizaciones en vivo destacan la importancia de mantenerse en cumplimiento.
 
-Para asegurar el cumplimiento a largo plazo, enfócate en estas prácticas:
+Para asegurar el cumplimiento a largo plazo, enfóquese en estas prácticas:
 
--   Usar encriptación de extremo a extremo para todas las actualizaciones
--   Integrar actualizaciones sin problemas en tus flujos de trabajo CI/CD
--   Monitorear métricas de actualización regularmente
+-   Utilice cifrado de extremo a extremo para todas las actualizaciones.
+-   Integre sin problemas las actualizaciones en sus flujos de trabajo de CI/CD.
+-   Monitoree las métricas de actualización regularmente.
+-   Manténgase preparado para cambios en las políticas.

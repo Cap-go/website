@@ -1,16 +1,16 @@
 ---
 slug: creating-mobile-apps-with-react-and-capacitor
-title: Creando Aplicaciones Móviles con React.js Puro y Capacitor
+title: Pure React.js と Capacitor を使用してモバイルアプリを構築する
 description: >-
-  React.jsのWebアプリケーションをCapacitorを使用してネイティブモバイルアプリケーションに変換し、Konsta
-  UIを使用してネイティブな外観を向上させるガイド。
+  React.jsウェブアプリケーションをCapacitorを利用してネイティブモバイルアプリに変換し、Konsta
+  UIでネイティブUIを強化する方法に関するガイド。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-29T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
 head_image: /react_capacitor.webp
-head_image_alt: React.js と Capacitor の説明
+head_image_alt: React.jsおよびCapacitorのイラスト
 keywords: >-
   React, Capacitor, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
@@ -19,40 +19,39 @@ published: true
 locale: ja
 next_blog: implementing-live-updates-in-your-react-capacitor-app
 ---
+このチュートリアルでは、React、Capacitor、およびKonsta UIを使用してモバイルアプリケーションを作成する方法を説明します。最後には、React.jsウェブアプリをCapacitorを使用してネイティブモバイルアプリに変換する方法と、Konsta UIを使ってネイティブUIを実装する方法を学ぶことができます。
 
-このチュートリアルでは、React、Capacitor、Konsta UIを使用してモバイルアプリケーションを作成する方法を説明します。最終的に、ReactjsのWebアプリをCapacitorを使用してネイティブモバイルアプリケーションに変換し、Konsta UIを使用してネイティブUIを実装する方法を理解できるようになります。
+Capacitorは、React.jsウェブアプリをネイティブモバイルアプリに簡単に変換できる機能を提供し、React Nativeのような新しい戦略を学ぶ必要がありません。
 
-Capacitorを使用すると、ReactjsのWebアプリを、React Nativeのような新しい戦略を学ぶことや大幅な変更を必要とせずに、ネイティブモバイルアプリケーションに簡単に変換できます。
-
-プロセスはいくつかの簡単なステップで構成されており、すぐにReactjsアプリが完全に機能するモバイルアプリケーションになります。では、このプロセスをご案内していきましょう。
+このプロセスは簡単な手順を含んでおり、すぐにあなたのReact.jsアプリは完全に機能するモバイルアプリになります。ですので、この旅にあなたを案内するので、一緒にいてください。
 
 ## Capacitorの概要
 
-CapacitorJSは革新的なツールです。任意のWebプロジェクトとシームレスに統合し、アプリをネイティブWebviewでラップしながら、ネイティブのXcodeとAndroid Studioプロジェクトを生成します。さらに、そのプラグインを通じて、JSブリッジを介してカメラなどのネイティブデバイス機能にアクセスできます。
+CapacitorJSはゲームチェンジャーです。これは、任意のウェブプロジェクトにシームレスに統合でき、アプリをネイティブウェブビューにラップしながら、ネイティブのXcodeおよびAndroid Studioプロジェクトを生成します。さらに、プラグインを通じて、JSブリッジを介してカメラなどのネイティブデバイス機能にアクセスできます。
 
-Capacitorは、面倒な作業や急な学習曲線なしに、ネイティブモバイルアプリケーションを作成する簡単な方法を提供します。シンプルなAPIと合理化された機能により、プロジェクトへの組み込みが容易になります。
+Capacitorは、手間なく簡単にネイティブモバイルアプリを作成する方法を提供します。そのシンプルなAPIとスムーズな機能は、プロジェクトに統合するのを容易にします。
 
-## Reactjsアプリのセットアップ
+## React.jsアプリのセットアップ
 
-Reactアプリケーションを開始する最も簡単な方法を選びましょう。npmパッケージマネージャーを使用して新しいReactアプリを作成します：
+Reactアプリケーションを開始する最も簡単な方法に取り組んでみましょう。npmパッケージマネージャーを使用して新しいReactアプリを作成します。
 
 ```shell
 npx create-react-app my-app
 ```
 
-ネイティブモバイルアプリに変換するには、アプリの**エクスポート**が必要です。
+プロジェクトをネイティブモバイルアプリに変換するには、アプリの**エクスポート**が必要です。
 
-この点については後ほど戻ってきます。まず、CapacitorをReactアプリに統合する方法を理解しましょう。
+これについては後ほど詳しく説明します。まず、CapacitorをReactアプリに統合する方法を理解しましょう。
 
-## ReactjsアプリへのCapacitorの統合
+## React.jsアプリにCapacitorを統合する
 
-初期セットアップのステップは少し詳細かもしれませんが、その後は、ネイティブアプリラッパーの更新は`sync`コマンドを実行するだけの簡単な作業になります。
+初期設定の手順は少し詳細になるかもしれませんが、その後はネイティブアプリラッパーを更新するのが`sync`コマンドを実行するのと同じくらい簡単になります。
 
-まず、Capacitor CLIを開発依存関係としてインストールし、プロジェクト内でセットアップします。セットアップ中、名前とバンドルIDのデフォルト値は「Enter」キーを押して受け入れてください。
+最初に、Capacitor CLIを開発依存関係としてインストールし、プロジェクト内で設定します。セットアップ中に、名前とバンドルIDのデフォルト値を受け入れるには「enter」を押します。
 
 次に、コアパッケージとiOSおよびAndroidプラットフォーム用の関連パッケージをインストールします。
 
-最後に、プラットフォームを追加すると、Capacitorがプロジェクトルートに各プラットフォーム用のフォルダを作成します：
+最後に、プラットフォームを追加し、Capacitorはプロジェクトのルートに各プラットフォーム用のフォルダーを作成します。
 
 ```shell
 # Install the Capacitor CLI locally
@@ -69,11 +68,11 @@ npx cap add ios
 npx cap add android
 ```
 
-**ios**と**android**ディレクトリがReactjsプロジェクトに作成されました。
+**ios**および**android**ディレクトリが、あなたのReact.jsプロジェクトに存在しています。
 
 後でAndroidプロジェクトにアクセスするには、[Android Studio](https://developer.android.com/studio/)をインストールしてください。iOSの場合は、Macが必要で、[Xcode](https://developer.apple.com/xcode/)をインストールする必要があります。
 
-次に、**capacitor.config.json**ファイルの**webDir**を以下のように更新します：
+次に、以下のように**capacitor.config.json**ファイルの**webDir**を更新します。
 
 ```json
 {
@@ -84,45 +83,45 @@ npx cap add android
 }
 ```
 
-ビルドコマンドを実行し、プロジェクトをCapacitorと同期します：
+ビルドコマンドを実行して、プロジェクトをCapacitorと同期させます。
 
 ```shell
 npm run build
 npx cap sync
 ```
 
-`npm run build`コマンドはReactjsプロジェクトをビルドし、`npx cap sync`はWebコードをネイティブプラットフォームの正確な場所に配置して、アプリで実行できるようにします。
+`npm run build`コマンドは、あなたのReact.jsプロジェクトをビルドし、`npx cap sync`はネイティブプラットフォームの正確な場所にウェブコードを配置して、アプリで実行できるようにします。
 
-これでエラーがなければ、Reactjsアプリをデバイスでローンチする準備が整いました！
+さあ、少しの運とエラーがなければ、あなたのReact.jsアプリはデバイスで起動できる状態になっているはずです！
 
-## ネイティブアプリのビルドとデプロイ
+## ネイティブアプリをビルドしてデプロイする
 
-iOSアプリの開発には**Xcode**が、Androidアプリには**Android Studio**が必要です。アプリストアでアプリを配布する予定がある場合は、iOSの場合はApple Developer Program、Androidの場合はGoogle Play Consoleに登録する必要があります。
+iOSアプリの開発には**Xcode**が必要で、Androidアプリには**Android Studio**が必要です。アプリをアプリストアで配布する予定がある場合は、iOS用のApple Developer ProgramやAndroid用のGoogle Play Consoleに登録する必要があります。
 
-Capacitor CLIは両方のネイティブプロジェクトを開くプロセスを簡素化します：
+Capacitor CLIは、両方のネイティブプロジェクトを開くプロセスを簡素化します。
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-ネイティブプロジェクトのセットアップが完了すると、接続されたデバイスへのアプリのデプロイは簡単なプロセスです。
+ネイティブプロジェクトのセットアップが完了したら、接続されたデバイスにアプリをデプロイするのは簡単なプロセスです。
 
-Android Studioの場合、すべてがロードされるのを待ってから、接続されたデバイスにアプリをデプロイします。
+Android Studioでは、すべてが読み込まれるまで待ち、接続されたデバイスにアプリをデプロイします。
 
-Xcodeの場合、シミュレータだけでなく実際のデバイスにアプリをデプロイするために、署名アカウントを設定します。設定後、上部で選択できる接続されたデバイスでアプリを実行するには、単にプレイを押すだけです。
+Xcodeでは、アプリをシミュレーターではなく実際のデバイスにデプロイするために、サインインアカウントを設定します。それが終わったら、アプリを接続されたデバイスで実行するために再生ボタンを押すだけです。接続されているデバイスは、上部で選択できます。
 
-すべてが順調に進めば、Reactを変換することができます。js web アプリをネイティブモバイルアプリケーションに変換！
+すべてがうまくいけば、あなたはReact.jsウェブアプリをネイティブモバイルアプリに変換したことになります！
 
-## Capacitor ライブリロード
+## Capacitorライブリロード
 
-最新の開発フレームワークには通常ホットリロードが付属していますが、幸運なことに、Capacitorでも**モバイルデバイス上で**同じことができます！
+最新の開発フレームワークは通常ホットリロードを備えており、幸運なことに、Capacitorでも**モバイルデバイス上で**同様のことが可能です！
 
-ローカルでホストされているアプリケーションを、特定のURLからコンテンツを読み込むようCapacitorアプリを設定することで、ネットワーク上でライブリロードを使用してアクセス可能にできます。
+ローカルホストされたアプリケーションをライブリロードでネットワーク上でアクセス可能にするために、Capacitorアプリが特定のURLからコンテンツを読み込むようにできます。
 
-まず、ローカルIPアドレスを確認します。Macでは、ターミナルで`ipconfig getifaddr en0`を実行します。Windowsでは、`ipconfig`を実行してIPv4アドレスを探します。
+最初に、ローカルIPアドレスを特定します。Macでは、ターミナルで`ipconfig getifaddr en0`を実行します。Windowsでは、`ipconfig`を実行し、IPv4アドレスを探します。
 
-次に、`capacitor.config.ts`ファイルに別のパラメータを追加して、サーバーから直接アプリを読み込むようCapacitorに指示します：
+これが終わったら、`capacitor.config.ts`ファイルに別のパラメータを追加して、Capacitorにサーバーからアプリを直接読み込むよう指示します。
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -141,21 +140,21 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-正確なIPとポートを使用してください。これらの変更をネイティブプロジェクトに適用するために`npx cap copy`を実行します。
+正確なIPとポートを使用することを確認してください。変更をネイティブプロジェクトに適用するために`npx cap copy`を実行します。
 
-Android StudioまたはXcodeを通じてアプリをもう一度デプロイすると、Reactアプリの変更が自動的にリロードされ、アプリに表示されます！
+Android StudioまたはXcodeを通じて再度アプリをデプロイすると、Reactアプリの変更が自動的に再読み込みされ、アプリに表示されます！
 
-カメラなどの新しいプラグインをインストールした場合は、ネイティブプロジェクトの再ビルドが必要になることに注意してください。これは、ネイティブファイルが変更され、その場での更新ができないためです。
+新しいプラグイン、たとえばカメラがインストールされた場合、ネイティブプロジェクトの再ビルドが必要になることに注意してください。これは、ネイティブファイルが変更され、即時に更新できなくなるためです。
 
 ## Capacitorプラグインの使用
 
-Capacitorプラグインの使用方法を簡単に見てみましょう。シンプルな例として、ネイティブの共有ダイアログを表示する[Shareプラグイン](https://capacitorjs.com/docs/apis/share/)をインストールしましょう：
+Capacitorプラグインの使用方法を簡単に見てみましょう。シンプルなプラグイン、[Shareプラグイン](https://capacitorjs.com/docs/apis/share/)をインストールして、ネイティブ共有ダイアログを表示します。
 
 ```shell
 npm i @capacitor/share
 ```
 
-使用するには、パッケージをインポートし、アプリから該当する`share()`関数を呼び出します。**App.js**を考えてみましょう：
+使用するには、パッケージをインポートし、アプリから対応する`share()`関数を呼び出します。**App.js**を考えてみてください。
 
 ```javascript
 import { Share } from '@capacitor/share';
@@ -180,19 +179,19 @@ function ShareButton() {
 export default ShareButton;
 ```
 
-新しいプラグインをインストールした後は、`npx cap sync`を使用してReactプロジェクトを再同期することを忘れないでください。
+新しいプラグインをインストールした後は、`npx cap sync`を再度使ってReactプロジェクトを同期することを忘れないでください。
 
-## Konsta UIの実装：より見栄えの良いモバイルUI
+## Konsta UIの実装：より良い見た目のモバイルUI
 
-より見栄えの良いモバイルUIエクスペリエンスのために、Konsta UIを使用します。iOSとAndroid固有のスタイリングを提供し、使用が簡単です。
+より良い見た目のモバイルUI体験を得るために、Konsta UIを使用します。これにより、iOSおよびAndroid固有のスタイリングが提供され、作業が容易です。
 
-Konsta UIを使用するには、Reactパッケージをインストールします：
+Konsta UIを使用するために、Reactパッケージをインストールします。
 
 ```shell
 npm i konsta
 ```
 
-`tailwind.config.js`ファイルを以下のように変更します：
+`tailwind.config.js`ファイルを次のように変更します。
 
 ```javascript
 // import konstaConfig config
@@ -214,9 +213,9 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig`は、Konsta UIに必要な追加のバリアントとユーティリティを現在のTailwind CSS設定に補完します。
+`konstaConfig`は、Konsta UIに必要な追加のバリアントとユーティリティで、現在のTailwind CSS設定を補完します。
 
-次に、`theme`などのグローバルパラメータを設定するためにメインのAppコンポーネントを設定します。`src/index.js`でAppをメインアプリでラップします：
+次に、テーマなどのグローバルパラメータを設定するために、主要なAppコンポーネントを設定します。`src/index.js`のメインアプリをAppでラップします。
 
 ```javascript
 import React from 'react';
@@ -235,7 +234,7 @@ ReactDOM.render(
 );
 ```
 
-Konsta UI Reactコンポーネントを私たちのReactjsページで使用しましょう。`src/App.js`を開いて以下のように変更します：
+React.jsページ内でKonsta UI Reactコンポーネントを使用しましょう。`src/App.js`を開いて、次のように変更します。
 
 ```javascript
 // Konsta UI components
@@ -271,12 +270,12 @@ export default function MyApp() {
 }
 ```
 
-すべてが正しく行われていれば、ReactとKonsta UIの間のシームレスな統合により、モバイルアプリにネイティブな外観が与えられるはずです。
+すべてが正しく行われていれば、ReactとKonsta UIの間でスムーズな統合が実現し、モバイルアプリにネイティブの見た目を与えることができるでしょう。
 
 ## 結論
 
-Capacitorは、既存のWebプロジェクトに基づいてネイティブアプリを構築するためのシームレスな手段を提供し、コードを共有し、一貫したUIを持つ簡単な方法を提供します。
+Capacitorは、既存のウェブプロジェクトに基づいてネイティブアプリを構築するシームレスな手段を提供し、コードを共有し、一貫したUIを持つ簡単な方法を提供します。
 
-Capacitorのような技術のおかげで、ReactjsのWebアプリからモバイルアプリケーションを構築することがかつてないほど簡単になりました。印象的なネイティブモバイルアプリを作成することで、Webの開発スキルを次のレベルに引き上げましょう。ハッピーコーディング！
+Capacitorのような技術のおかげで、React.jsウェブアプリからモバイルアプリケーションを構築することはこれまでにないほど簡単になりました。あなたのウェブ開発スキルを次のレベルに引き上げて、印象的なネイティブモバイルアプリを作成してください。コーディングを楽しんでください！
 
-アプリ開発プロセスを迅速化する方法の詳細については、[無料アカウントに登録](/register/)してください。
+アプリ開発プロセスを加速する方法についてもっと知りたい方は、[無料アカウントにサインアップ](/register/)してください。

@@ -1,9 +1,10 @@
 ---
 slug: capacitor-plugin-contribution-guide
-title: Guida alla Contribuzione dei Plugin di Capacitor
+title: Guía de Contribución de Plugins de Capacitor
 description: >-
-  Aprende cómo contribuir efectivamente a los plugins de Capacitor con una guía
-  completa sobre configuración, estándares de código, pruebas y documentación.
+  Aprende a contribuir de manera efectiva a los plugins de Capacitor con una
+  guía completa sobre configuración, estándares de codificación, pruebas y
+  documentación.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -20,92 +21,99 @@ published: true
 locale: es
 next_blog: ''
 ---
+[Capacitor](https://capacitorjs.com/) los plugins conectan tecnologías web con características nativas del dispositivo, lo que permite el [desarrollo de aplicaciones multiplataforma](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/). Esta guía te ayuda a:
 
-[Capacitor](https://capacitorjscom/) los plugins conectan tecnologías web con funciones nativas del dispositivo, permitiendo el [desarrollo de aplicaciones multiplataforma](https://capgoapp/blog/cross-platform-mobile-app-development-guide-2024/) Esta guía te ayuda a:
-
--   **Configurar Tu Entorno**: Herramientas como [Nodejs](https://nodejsorg/en), [Xcode](https://developerapplecom/xcode/), y [Android Studio](https://developerandroidcom/studio) son esenciales
--   **Seguir Estándares de Código**: Usa [TypeScript](https://wwwtypescriptlangorg/), [Swift](https://developerapplecom/swift/), y [Kotlin](https://kotlinlangorg/) con convenciones de nomenclatura y manejo de errores consistentes
--   **Probar Exhaustivamente**: Escribe pruebas unitarias para JavaScript, iOS y Android para garantizar la fiabilidad
--   **Documentar Claramente**: Utiliza archivos JSDoc y README para una fácil adopción
--   **Enviar un Pull Request**: Asegura código de alta calidad, pruebas y documentación antes de contribuir
+-   **Configurar tu entorno**: Herramientas como [Node.js](https://nodejs.org/en), [Xcode](https://developer.apple.com/xcode/), y [Android Studio](https://developer.android.com/studio) son esenciales.
+-   **Seguir los estándares de código**: Usa [TypeScript](https://www.typescriptlang.org/), [Swift](https://developer.apple.com/swift/), y [Kotlin](https://kotlinlang.org/) con convenciones de nomenclatura consistentes y manejo de errores.
+-   **Probar exhaustivamente**: Escribe pruebas unitarias para JavaScript, iOS, y Android para asegurar la fiabilidad.
+-   **Documentar claramente**: Usa JSDoc y archivos README para una fácil adopción.
+-   **Enviar una solicitud de extracción**: Asegúrate de tener un código de alta calidad, pruebas y documentación antes de contribuir.
 
 ## Guía Completa de Código Abierto - Cómo Contribuir
 
-[[HTML_TAG]][[HTML_TAG]]
+<iframe src="https://www.youtube.com/embed/yzeVMecydCE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuración del Entorno de Desarrollo
 
-Crear un entorno de desarrollo adecuado es clave para el desarrollo eficiente de plugins. Una configuración bien preparada permite una codificación, prueba e implementación fluida de tus plugins.
+Crear un entorno de desarrollo adecuado es clave para el desarrollo eficiente de plugins. Una configuración bien preparada permite una codificación, prueba y despliegue fluidos de tus plugins.
 
-### Herramientas y Habilidades que Necesitarás
+### Herramientas y habilidades que necesitarás
 
-Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
+Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas:
 
 | Categoría | Requisitos |
 | --- | --- |
-| **Herramientas Principales** | Nodejs (LTS), npm 6+, Git |
-| **IDE/Editores** | [Visual Studio Code](https://codevisualstudiocom/) o tu editor preferido |
-| **Desarrollo iOS** | Xcode, [SwiftLint](https://githubcom/realm/SwiftLint), [CocoaPods](https://cocoapodsorg/) |
-| **Desarrollo Android** | Android Studio, Android SDK, JDK |
+| **Herramientas Básicas** | Node.js (LTS), npm 6+, Git |
+| **IDE/Editors** | [Visual Studio Code](https://code.visualstudio.com/) o tu editor preferido |
+| **Desarrollo en iOS** | Xcode, [SwiftLint](https://github.com/realm/SwiftLint), [CocoaPods](https://cocoapods.org/) |
+| **Desarrollo en Android** | Android Studio, Android SDK, JDK |
 
-También deberías sentirte cómodo con TypeScript para desarrollo web y Swift (para iOS) o Java/Kotlin (para Android) para tareas de desarrollo nativo [\[1\]](https://githubcom/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTINGmd)[\[2\]](https://githubcom/ionic-team/capacitor-plugins/blob/main/CONTRIBUTINGmd)
+También deberías sentirte cómodo con TypeScript para desarrollo web y ya sea Swift (para iOS) o Java/Kotlin (para Android) para tareas de desarrollo nativo [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md)[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Configurando el Monorepo
 
-El ecosistema de [plugins de Capacitor](https://capgoapp/plugins/) se basa en una estructura de monorepo. Este enfoque asegura que tu trabajo se alinee con los estándares de la comunidad desde el principio.
+El ecosistema de [plugins de Capacitor](https://capgo.app/plugins/) se basa en una estructura de monorepo. Este enfoque asegura que tu trabajo esté alineado con los estándares de la comunidad desde el principio.
 
-1.  **Hacer Fork y Clonar el Repositorio**  
-    Comienza haciendo fork del repositorio de plugins de Capacitor en GitHub. Luego, clona tu repositorio forkeado:
+1.  **Fork y Clonar el Repositorio**  
+    Comienza haciendo un fork del repositorio de plugins de Capacitor en GitHub. Luego, clona tu repositorio forkeado:
     
-    [[CODE_BLOCK]]
+    ```bash
+    git clone https://github.com/your-username/capacitor-plugins.git
+    cd capacitor-plugins
+    npm install
+    ```
     
 2.  **Instalar Dependencias y Construir**  
     Ejecuta el siguiente comando para instalar todo lo que necesitas y construir los plugins:
     
-    [[CODE_BLOCK]]
+    ```bash
+    npm run build
+    ```
     
-3.  **Configurar el Control de Versiones**  
-    Usa ramas de características para tus cambios y mantén tu fork sincronizado con el repositorio upstream
+3.  **Configurar Control de Versiones**  
+    Usa ramas de características para tus cambios y mantén tu fork sincronizado con el repositorio principal.
     
 
-### Preparando Plataformas Nativas
+### Preparando las Plataformas Nativas
 
-Para el desarrollo multiplataforma, necesitarás configurar ambos entornos de iOS y Android
+Para el desarrollo multiplataforma, necesitarás configurar tanto los entornos de iOS como de Android.
 
 **Para iOS:**
 
--   Descarga Xcode desde la Mac App Store
+-   Descarga Xcode desde la App Store de Mac.
     
--   Instala las herramientas de línea de comandos usando:
+-   Instala herramientas de línea de comandos usando:
     
-    [[CODE_BLOCK]]
+    ```bash
+    xcode-select --install
+    ```
     
 -   Instala CocoaPods con:
     
-    [[CODE_BLOCK]]
+    ```bash
+    sudo gem install cocoapods
+    ```
     
--   Configura una cuenta de Apple Developer y los certificados necesarios
+-   Configura una cuenta de desarrollador de Apple y los certificados necesarios.
     
--   Usa SwiftLint (opcional) para mantener la calidad del código
+-   Usa SwiftLint (opcional) para mantener la calidad del código.
     
 
 **Para Android:**
 
--   Instala Android Studio junto con el SDK más reciente y un dispositivo virtual
--   Asegúrate de tener instalado un JDK
--   Configura el SDK de Android correctamente dentro de Android Studio
+-   Instala Android Studio junto con el SDK más reciente y un dispositivo virtual.
+-   Asegúrate de tener un JDK instalado.
+-   Configura el SDK de Android correctamente dentro de Android Studio.
 
-Una vez que estas plataformas estén configuradas, estarás listo para seguir las prácticas de codificación establecidas y sumergirte en el desarrollo de plugins
+Una vez que estas plataformas estén configuradas, estarás listo para seguir prácticas de codificación establecidas y sumergirte en el desarrollo de plugins.
 
 ## Guía de Estándares de Código
 
-Ahora que tu entorno de desarrollo está configurado, sigue estas pautas para construir plugins que sean fáciles de mantener y usar
+Ahora que tu entorno de desarrollo está configurado, adhiérete a estas pautas para construir plugins que sean fáciles de mantener y usar.
 
 ### Cumplimiento de la Guía de Estilo
 
-El [ecosistema de plugins de Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/) impone estrictos estándares de codificación utilizando herramientas como [ESLint](https://eslintorg/), [Prettier](https://prettierio/), y SwiftLintHere's the translation to Spanish:
-
-Aquí hay una descripción general rápida del formato requerido:
+El [ecosistema de plugins de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) impone estrictos estándares de codificación utilizando herramientas como [ESLint](https://eslint.org/), [Prettier](https://prettier.io/) y SwiftLint. Aquí hay un resumen rápido del formato requerido:
 
 | Componente | Formato |
 | --- | --- |
@@ -114,94 +122,171 @@ Aquí hay una descripción general rápida del formato requerido:
 | Métodos | `getLanguageCode()` (camelCase) |
 | Constantes | `MAX_RETRY_COUNT` (SNAKE\_CASE) |
 
-Los plugins deben usar TypeScript para una mejor seguridad de tipos y características ES6+ como `async/await`. Además, sigue las convenciones de código específicas de la plataforma para Swift (iOS) y Kotlin (Android).
+Los plugins deben usar TypeScript para una mejor seguridad de tipos y características ES6+ como `async/await`. Además, sigue las convenciones de codificación específicas de la plataforma para Swift (iOS) y Kotlin (Android).
 
-### Gestión de Errores y Tipos
+### Manejo de Errores y Tipos
 
 El manejo consistente de errores es crucial para la compatibilidad multiplataforma. Aquí hay un ejemplo:
 
-[[CODE_BLOCK]]
+```typescript
+async checkPermissions(): Promise<PermissionStatus> {
+  try {
+    const result = await this.implementation.checkPermissions();
+    return result;
+  } catch (error) {
+    throw new Error(`Permission check failed: ${error.message}`);
+  }
+}
+```
 
 Para la seguridad de tipos:
 
--   Usa interfaces enfocadas adaptadas a casos de uso específicos
--   Aplica tipos union para variaciones específicas de plataforma
--   Implementa guardias de tipo para validar tipos en tiempo de ejecución [\[1\]](https://githubcom/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTINGmd)
+-   Utiliza interfaces enfocadas adaptadas a casos de uso específicos.
+-   Aplica tipos de unión para variaciones específicas de la plataforma.
+-   Implementa guardianes de tipo para validar tipos en tiempo de ejecución [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Documentación del Código
 
-Una buena documentación es clave para hacer que tu plugin sea accesible y fácil de usar. Apégate a estas prácticas:
+Una buena documentación es clave para hacer que tu plugin sea accesible y fácil de usar. Cumple con estas prácticas:
 
-1.  **Documentación de API**: Escribe comentarios JSDoc que funcionen con `@capacitor/docgen`. Por ejemplo:
+1.  **Documentación de la API**: Escribe comentarios JSDoc que funcionen con `@capacitor/docgen`. Por ejemplo:
 
-[[CODE_BLOCK]]
+```typescript
+/**
+ * @description Get the device's current battery level
+ * @returns Promise with the battery level percentage
+ */
+async getBatteryLevel(): Promise<{ level: number }>;
+```
 
-2.  **Estructura README**: Incluye información esencial como pasos de instalación, instrucciones de configuración, requisitos específicos de plataforma, ejemplos de uso y una referencia detallada de API
+2.  **Estructura del README**: Incluye información esencial como pasos de instalación, instrucciones de configuración, requisitos específicos de la plataforma, ejemplos de uso, y una referencia de API detallada.
 
-Una documentación bien escrita asegura que tu plugin sea fácil de adoptar y contribuye a la comunidad más amplia de Capacitor
+Una documentación bien escrita asegura que tu plugin sea fácil de adoptar y contribuye a la comunidad más amplia de Capacitor.
 
 ###### sbb-itb-f9944d2
 
 ## Guía de Pruebas de Plugins
 
-Las pruebas de plugins de Capacitor implican enfocarse en algunas áreas críticas para garantizar una funcionalidad y fiabilidad fluidas
+Probar los plugins de Capacitor implica centrarse en algunas áreas críticas para asegurar una funcionalidad y fiabilidad fluidas.
 
 ### Pruebas del Puente Nativo
 
-Las pruebas del puente nativo aseguran una comunicación adecuada entre JavaScript y el código nativo. Para comenzar, configura tu entorno de pruebas con frameworks adaptados a cada plataforma.
+Las pruebas del puente nativo aseguran una comunicación adecuada entre JavaScript y el código nativo. Para comenzar, configura tu entorno de pruebas con marcos adaptados a cada plataforma.
 
-Aquí hay un ejemplo de una prueba unitaria [Jest](https://jestjsio/) para el lado JavaScript:
+Aquí hay un ejemplo de una prueba unitaria de [Jest](https://jestjs.io/) para el lado de JavaScript:
 
-[[CODE_BLOCK]]
+```typescript
+// Example of a Jest unit test for the JavaScript bridge
+describe('DeviceInfo Plugin', () => {
+  test('getBatteryLevel returns valid percentage', async () => {
+    const result = await DeviceInfo.getBatteryLevel();
+    expect(result.level).toBeGreaterThanOrEqual(0);
+    expect(result.level).toBeLessThanOrEqual(100);
+  });
+});
+```
 
-Para pruebas en el lado nativo, usa XCTest para iOS y JUnit para Android. Aquí hay un ejemplo para Android:
+Para las pruebas en el lado nativo, usa XCTest para iOS y JUnit para Android. A continuación, un ejemplo para Android:
 
-[[CODE_BLOCK]]
+```kotlin
+@Test
+fun testBatteryLevel() {
+    val plugin = DeviceInfo()
+    val result = plugin.getBatteryLevel()
+    assertTrue(result.level in 0..100)
+}
+```
 
-Una vez que hayas confirmado que la funcionalidad básica del puente funciona como se espera, pasa a probar flujos de trabajo completos.
+Una vez que hayas confirmado que la funcionalidad principal del puente funciona como se esperaba, pasa a probar flujos de trabajo completos del usuario.
 
-### Pruebas Completas del Plugin
+### Pruebas Completas de Plugins
 
-Para asegurar que tu plugin funcione bien en diferentes escenarios, prueba varias categorías:
+Para asegurarte de que tu plugin funciona bien en diferentes escenarios, prueba varias categorías:
 
 | Categoría de Prueba | Áreas Clave de Enfoque |
 | --- | --- |
 | Pruebas de Integración | Funcionalidad multiplataforma |
 | Pruebas de Rendimiento | Uso de recursos y tiempos de respuesta |
-| Pruebas de Seguridad | Manejo de datos y verificación de permisos |
+| Pruebas de Seguridad | Manejo de datos y comprobaciones de permisos |
 
 Para plugins con características complejas, simula escenarios de usuario del mundo real. Por ejemplo, si estás probando un plugin DeviceInfo, verifica:
 
 -   Cargas exitosas bajo diferentes condiciones de red
--   Informes precisos de progreso
+-   Informes de progreso precisos
 -   Uso de memoria durante transferencias de archivos grandes
 
-### Pruebas OTA con [Capgo](https://capgoapp/)
+### Pruebas OTA con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
-Las herramientas de código abierto de Capgo facilitan la implementación y prueba rápida de actualizaciones. Así es cómo usarlo:
+Las herramientas de código abierto de Capgo facilitan el despliegue y prueba de actualizaciones rápidamente. Aquí se explica cómo usarlo:
 
-1.  Configura [canales de actualización](https://capgoapp/docs/webapp/channels/) como desarrollo, staging y producción
-2.  Automatiza las implementaciones con herramientas CI/CD
-3.  Envía actualizaciones instantáneamente
-4.  Monitorea el rendimiento y problemas a través del [panel de Capgo](https://capgoapp/docs/webapp/)
+1.  Configura [canales de actualización](https://capgo.app/docs/webapp/channels/) como dev, staging, y producción.
+2.  Automatiza los despliegues con herramientas de CI/CD.
+3.  Envía actualizaciones al instante.
+4.  Monitorea el rendimiento y problemas a través del [tablero de Capgo](https://capgo.app/docs/webapp/).
 
-Para lanzamientos graduales, Capgo permite limitar las actualizaciones a un pequeño porcentaje de usuarios. Por ejemplo, puedes implementar una nueva versión al 25% de los usuarios cada 24 horas:
+Para despliegues por fases, Capgo te permite limitar las actualizaciones a un pequeño porcentaje de usuarios. Por ejemplo, puedes implementar una nueva versión al 25% de los usuarios cada 24 horas:
 
-[[CODE_BLOCK]]
+```typescript
+// Example configuration for staged rollout
+{
+  "plugin": "camera-plugin",
+  "version": "1.2.0",
+  "rollout": {
+    "percentage": 25,
+    "interval": "24h"
+  }
+}
+```
 
-Este enfoque gradual ayuda a identificar problemas temprano aprovechando la retroalimentación de la comunidad antes de un lanzamiento completo.
+Este enfoque gradual ayuda a identificar problemas temprano aprovechando los comentarios de la comunidad antes de un lanzamiento completo.
 
-## Proceso de Pull Request
+## Proceso de Solicitud de Extracción
 
-Una vez que hayas probado exhaustivamente tus cambios, sigue estos pasos para enviar tu pull request:
+Una vez que hayas probado exhaustivamente tus cambios, sigue estos pasos para enviar tu solicitud de extracción:
 
-### Lista de Verificación de PR
+### Lista de Verificación para la Presentación de PR
 
 Antes de enviar, asegúrate de haber cubierto estas áreas clave:
 
-| **Categoría** | **Qué Verificar** |
+| **Categoría** | **Qué Comprobar** |
 | --- | --- |
-| **Calidad del Código** | \- Asegurar que las implementaciones Swift/Kotlin se alineen con la API web |
-| **Pruebas** | \- Agregar pruebas unitarias para cualquier nueva funcionalidad
+| **Calidad del Código** | \- Asegúrate de que las implementaciones de Swift/Kotlin estén alineadas con la API web. |
+| **Pruebas** | \- Añade pruebas unitarias para cualquier nueva funcionalidad.  <PermissionStatus>\- Confirma que las verificaciones de la pipeline de CI/CD sean exitosas. |
+| **Documentación** | \- Actualiza el README, la documentación en línea, y el CHANGELOG según sea necesario. |
+
+### Pautas de la Comunidad
+
+Al colaborar, adhiérete a estas mejores prácticas:
+
+-   Responde rápidamente a los comentarios de los revisores.
+-   Mantén las discusiones centradas en detalles técnicos.
+-   Usa la función de sugerencia de GitHub para proponer cambios de código.
+-   Envía solicitudes de extracción pequeñas y enfocadas que aborden una característica o problema a la vez.
+
+Para cambios más grandes, es buena idea crear un problema primero y discutir tu enfoque. El equipo de Capacitor se basa en GitHub Actions para verificaciones automatizadas, y todas las verificaciones deben pasar antes de que tu solicitud de extracción pueda ser revisada.
+
+### Guía de Integración con Capgo
+
+Si tu plugin implica actualizaciones en vivo, asegúrate de que funcione sin problemas con Capgo antes de enviar:
+
+1.  **Control de Versiones**  
+    Utiliza una clara versión semántica para tu plugin y documenta todos los cambios en el changelog. El sistema de Capgo ayuda a rastrear la adopción de versiones en los dispositivos de los usuarios.
+    
+2.  **Integración de CI/CD**  
+    Integra Capgo en tu pipeline de CI/CD para automatizar los despliegues de actualizaciones.
+    
+3.  **Monitoreo de Actualizaciones**  
+    Monitorea las tasas de éxito de los despliegues y asegura el cumplimiento con las directrices de la tienda de aplicaciones.
+    
+
+## Resumen
+
+Para hacer una contribución significativa con tu plugin, es importante seguir el proceso establecido y cumplir con los estándares de la comunidad. Esto incluye adherirse a las pautas de codificación de Capacitor y probar exhaustivamente tu trabajo.
+
+La lista de verificación de PR destaca la necesidad de presentaciones de alta calidad. Si tu plugin admite actualizaciones en vivo, integrarse con Capgo (como se mencionó anteriormente) puede ayudarte a lanzar actualizaciones rápidamente sin esperar aprobaciones de la tienda de aplicaciones.
+
+Una vez que tu PR esté fusionada, mantente involucrado rastreando problemas y liberando actualizaciones de versiones. La interacción regular con la comunidad, el mantenimiento constante y [mantenerse al día con las actualizaciones de Capacitor](https://capgo.app/plugins/capacitor-updater/) asegurarán que tu plugin siga siendo útil y relevante.
+
+Presta atención a los comentarios de los usuarios y realiza actualizaciones según sea necesario. Este esfuerzo continuo ayuda a mantener la calidad general del ecosistema y mantiene tu plugin valioso para los desarrolladores.

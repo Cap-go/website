@@ -1,10 +1,10 @@
 ---
 slug: checklist-for-token-signing-in-capacitor-apps
-title: Capacitorアプリでのトークン署名のチェックリスト
+title: Checklist per la firma dei token nelle app Capacitor
 description: >-
-  Befolgen Sie diese umfassende Checkliste für die sichere Token-Signierung in
-  Capacitor-Anwendungen, um Datenintegrität und die Einhaltung amerikanischer
-  Standards zu gewährleisten.
+  Sigue esta lista de verificación completa para la firma de tokens seguros en
+  aplicaciones de Capacitor, asegurando la integridad de los datos y el
+  cumplimiento de los estándares de EE. UU.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,7 +12,7 @@ created_at: 2025-04-20T02:15:22.429Z
 updated_at: 2025-04-20T02:15:38.258Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680454b86000445eb1a68ab2-1745115338258.jpg
-head_image_alt: Mobile Development
+head_image_alt: Desarrollo Móvil
 keywords: >-
   token signing, Capacitor apps, data integrity, security standards, compliance,
   JWT, cryptographic library
@@ -21,141 +21,140 @@ published: true
 locale: it
 next_blog: ''
 ---
+Token signing is essential for securing [Capacitor](https://capacitorjs.com/) apps, ensuring data integrity, authentication, and compliance with U.S. security standards. This guide provides a clear checklist for setup, implementation, and risk management.
 
-La firma dei token è essenziale per proteggere le app [Capacitor](https://capacitorjscom/), garantendo l'integrità dei dati, l'autenticazione e la conformità agli standard di sicurezza statunitensi. Questa guida fornisce una checklist chiara per la configurazione, l'implementazione e la gestione del rischio.
+**Key Steps for Token Signing:**
 
-**Passaggi chiave per la firma dei token:**
+-   Choose a secure cryptographic library (e.g., [CryptoJS](https://cryptojs.gitbook.io/docs), [jose](https://www.npmjs.com/package/jose), [libsodium](https://doc.libsodium.org/)).
+-   Use secure key storage (iOS: [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/web)/[Keychain](https://en.wikipedia.org/wiki/Keychain_\(software\)); Android: [Keystore](https://developer.android.com/privacy-and-security/keystore)).
+-   Define token payload fields (`iss`, `exp`, `sub`, custom claims).
+-   Select a signing algorithm (HS256, RS256, ES256).
+-   Sign and verify tokens securely.
 
--   Scegliere una libreria crittografica sicura (es. [CryptoJS](https://cryptojsgitbookio/docs), [jose](https://wwwnpmjscom/package/jose), [libsodium](https://doclibsodiumorg/))
--   Utilizzare l'archiviazione sicura delle chiavi (iOS: [Secure Enclave](https://supportapplecom/guide/security/secure-enclave-sec59b0b31ff/web)/[Keychain](https://enwikipediaorg/wiki/Keychain_\(software\)); Android: [Keystore](https://developerandroidcom/privacy-and-security/keystore))
--   Definire i campi del payload del token (`iss`, `exp`, `sub`, richieste personalizzate)
--   Selezionare un algoritmo di firma (HS256, RS256, ES256)
--   Firmare e verificare i token in modo sicuro
+**Security Best Practices:**
 
-**Migliori pratiche di sicurezza:**
+-   Set token expiration to 15 minutes.
+-   Rotate signing keys every 30 days.
+-   Validate all token fields.
+-   Protect private keys in platform-specific secure stores.
 
--   Impostare la scadenza del token a 15 minuti
--   Ruotare le chiavi di firma ogni 30 giorni
--   Validare tutti i campi del token
--   Proteggere le chiavi private in archivi sicuri specifici per piattaforma
+**Live Updates:**
 
-**Aggiornamenti in tempo reale:**
+-   Use signed tokens to [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Enable rollback options for compromised updates.
+-   Monitor user engagement and update success rates.
 
--   Utilizzare token firmati per [proteggere gli aggiornamenti](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)
--   Abilitare le opzioni di rollback per gli aggiornamenti compromessi
--   Monitorare il coinvolgimento degli utenti e i tassi di successo degli aggiornamenti
+**Compliance Requirements:**
 
-**Requisiti di conformità:**
+-   Align with U.S. mandates like CCPA, HIPAA, NIST SP 800‑63, and FIPS 140‑2.
+-   Encrypt tokens containing sensitive data and ensure secure key management.
 
--   Allinearsi ai mandati statunitensi come CCPA, HIPAA, NIST SP 800-63 e FIPS 140-2
--   Crittografare i token contenenti dati sensibili e garantire una gestione sicura delle chiavi
+Token signing ensures secure live updates while meeting regulatory standards. Follow these steps to protect your app and users.
 
-La firma dei token garantisce aggiornamenti sicuri in tempo reale rispettando gli standard normativi. Segui questi passaggi per proteggere la tua app e i tuoi utenti.
+## Signing and Validating JWT Token Using RSA public and ...
 
-## Firma e convalida del token JWT utilizzando RSA pubblico e
+## Required Setup for Token Signing
 
-<iframe src="https://www.youtube.com/embed/mtZS6Cg6Nd8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+To ensure secure token signing, focus on two key areas:
 
-## Configurazione richiesta per la firma dei token
-
-Per garantire una firma sicura dei token, concentrati su due aree chiave:
-
-1.  **Scelta e convalida del toolkit crittografico**:
+1.  **Choosing and validating your cryptographic toolkit**:
     
-    -   Scegli una libreria affidabile come _CryptoJS_, _jose_ o _libsodium_
-    -   Conferma che la libreria sia mantenuta attivamente e sottoposta a regolari controlli di sicurezza
-    -   Esamina la sua adozione all'interno della comunità degli sviluppatori
-    -   Esamina la sua cronologia delle vulnerabilità per valutare i potenziali rischi
-2.  **Implementazione dell'archiviazione sicura delle chiavi**:
+    -   Pick a reliable library such as _CryptoJS_, _jose_, or _libsodium_.
+    -   Confirm the library is actively maintained and undergoes regular security audits.
+    -   Look into its adoption within the developer community.
+    -   Review its vulnerability history to assess potential risks.
+2.  **Implementing secure key storage**:
     
-    -   Per iOS, usa Secure Enclave o Keychain
-    -   Per Android, affidati al sistema Keystore
-    -   Verifica la conformità agli standard FIPS 140-2
-    -   Assicurati che la soluzione abbia una certificazione Common Criteria
+    -   For iOS, use Secure Enclave or Keychain.
+    -   For Android, rely on the Keystore System.
+    -   Check for compliance with FIPS 140-2 standards.
+    -   Ensure the solution holds a Common Criteria certification.
 
-Queste decisioni svolgono un ruolo fondamentale nel mantenere **autenticazione** e **integrità**. Garantiscono che ogni token firmato sia allineato con gli standard di conformità statunitensi e supporti le esigenze di sicurezza attuali e future.
+These decisions play a critical role in maintaining **authentication** and **integrity**. They ensure that every signed token aligns with U.S. compliance standards and supports both current and future security needs.
 
-Nei sistemi che richiedono aggiornamenti in tempo reale, seguire queste pratiche ha mostrato un tasso di successo del 95% nelle implementazioni [\[1\]](https://capgoapp/)
+In systems requiring live updates, following these practices has shown a 95% success rate in deployments [\[1\]](https://capgo.app/).
 
-## Passaggi per l'implementazione della firma dei token
+## Token Signing Implementation Steps
 
-Per garantire una firma e una verifica sicura dei token, segui questi passaggi:
+To ensure secure token signing and verification, follow these steps:
 
--   **Definire i campi del payload del token**: Includi campi come `iss` (emittente), `exp` (scadenza), `sub` (soggetto) e qualsiasi richiesta personalizzata necessaria
--   **Scegliere un algoritmo di firma**: Decidi tra opzioni come HS256 o RS256 e configuralo di conseguenza
--   **Gestire la chiave privata in modo sicuro**: Carica o genera la chiave privata in **Keychain** per iOS o **Keystore** per Android
--   **Firma il token**: Usa la tua libreria crittografica preferita per firmare il token
--   **Verifica la firma del token**: Convalida sempre la firma prima di elaborare qualsiasi payload di aggiornamento
+-   **Define the token's payload fields**: Include fields like `iss` (issuer), `exp` (expiration), `sub` (subject), and any custom claims needed.
+-   **Choose a signing algorithm**: Decide between options like HS256 or RS256 and configure it accordingly.
+-   **Handle the private key securely**: Load or generate the private key in **Keychain** for iOS or **Keystore** for Android.
+-   **Sign the token**: Use your preferred cryptographic library to sign the token.
+-   **Verify the token's signature**: Always validate the signature before processing any update payload.
 
-Questi passaggi aiutano a mantenere la sicurezza e l'affidabilità del processo di aggiornamento in tempo reale basato su token.
+These steps help maintain the security and reliability of your token-based live update process.
 
-## Linee guida per la sicurezza e rischi
+## Security Guidelines and Risks
 
-Durante l'implementazione della firma, è fondamentale affrontare potenziali abusi e vulnerabilità. Ecco come rimanere sicuri:
+When implementing signing, it's crucial to address potential misuse and vulnerabilities. Here's how to stay secure:
 
-### Regole di sicurezza dei token
+### Token Security Rules
 
--   Imposta la scadenza del token a un massimo di **15 minuti**
--   Ruota le chiavi di firma ogni **30 giorni** per ridurre l'esposizione
--   Assicurati che tutti i campi del token siano convalidati prima dell'elaborazione
--   Archivia le chiavi private esclusivamente in **keystore sicuri della piattaforma**### Rischi di Sicurezza Comuni
+-   Set token expiration to a maximum of **15 minutes**.
+-   Rotate signing keys every **30 days** to reduce exposure.
+-   Ensure all token fields are validated before processing.
+-   Store private keys exclusively in **secure platform keystores**.
 
--   **Perdita di chiavi** causata da metodi impropri di archiviazione o trasmissione
--   **Attacchi di replica del token** dove i token validi vengono intercettati e riutilizzati
--   **Manipolazione dell'algoritmo** che aggira la verifica della firma
+### Common Security Risks
 
-### Confronto tra Algoritmi di Firma
+-   **Key leakage** caused by improper storage or transmission methods.
+-   **Token replay attacks** where valid tokens are intercepted and reused.
+-   **Algorithm manipulation** that bypasses signature verification.
 
--   **HS256**: Utilizza un segreto condiviso per la firma simmetrica. Più adatto per ambienti dove tutte le parti sono fidate
--   **RS256**: Impiega coppie di chiavi pubbliche/private per la firma asimmetrica, rendendolo ideale per sistemi distribuiti
--   **ES256**: Utilizza la crittografia a curva ellittica per una forte sicurezza con dimensioni delle chiavi più piccole
+### Comparing Signing Algorithms
 
-## Sicurezza degli Aggiornamenti Live
+-   **HS256**: Uses a shared secret for symmetric signing. Best suited for environments where all parties are trusted.
+-   **RS256**: Employs public/private keypairs for asymmetric signing, making it ideal for distributed systems.
+-   **ES256**: Utilizes elliptic curve cryptography for strong security with smaller key sizes.
 
-Garantire aggiornamenti live sicuri implica l'uso di token firmati, la verifica dell'integrità dei dati e il rispetto degli standard dei negozi digitali. Questo si basa sul processo di firma dei token descritto in precedenza, estendendolo ai flussi di lavoro degli aggiornamenti live
+## Live Update Security
 
-### Sicurezza dei Token per gli Aggiornamenti
+Ensuring secure live updates involves using signed tokens, verifying data integrity, and meeting store-compliance standards. This builds on the token-signing process described earlier, extending it into live-update workflows.
 
-Negli scenari di aggiornamento live, i token firmati proteggono ogni pacchetto di aggiornamento dalla sua fonte al dispositivo. Ecco alcune pratiche chiave da seguire:
+### Token Security for Updates
 
--   Consentire permessi dettagliati per i tester e abilitare opzioni di rollback con un clic
--   Monitorare i tassi di successo degli aggiornamenti e il coinvolgimento degli utenti in tempo reale
--   Gestire tester e utenti beta con impostazioni precise dei permessi
+In live-update scenarios, signed tokens protect each update package from its source to the device. Here are some key practices to follow:
 
-Piattaforme come [Capgo](https://capgoapp/) implementano queste pratiche con funzionalità come crittografia, controlli delle firme, controllo versione e opzioni di rollback per proteggere gli aggiornamenti over-the-air (OTA). Questi metodi si sono dimostrati efficaci, con il 95% degli utenti attivi che ricevono gli aggiornamenti entro 24 ore [\[1\]](https://capgoapp/)
+-   Allow detailed tester permissions and enable one-click rollback options.
+-   Monitor update success rates and user engagement as they happen.
+-   Manage testers and beta users with precise permission settings.
 
-### Implementazione della Sicurezza
+Platforms like [Capgo](https://capgo.app/) implement these practices with features like encryption, signature checks, version control, and rollback options to secure over-the-air (OTA) updates. These methods have proven effective, with 95% of active users receiving updates within 24 hours [\[1\]](https://capgo.app/).
 
-Per implementare la firma dei token per gli aggiornamenti live, concentrarsi su:
+### Security Implementation
 
--   Gestire in modo sicuro le chiavi di firma per i pacchetti di aggiornamento
--   Utilizzare il controllo versione abbinato alla verifica crittografica
--   Automatizzare la validazione della firma direttamente sui dispositivi
--   Offrire opzioni di rollback immediate per eventuali aggiornamenti compromessi
+To implement token signing for live updates, focus on the following:
 
-Questo garantisce che solo gli aggiornamenti autenticati e correttamente firmati vengano consegnati agli utenti, rispettando anche i requisiti della piattaforma
+-   Manage signing keys securely for update packages.
+-   Use version control paired with cryptographic verification.
+-   Automate signature validation directly on devices.
+-   Offer immediate rollback options for any compromised updates.
 
-## Standard e Requisiti USA
+This ensures only authenticated and properly signed updates are delivered to users, while also adhering to platform requirements.
 
-Per conformarsi ai requisiti normativi statunitensi, integrare le pratiche dei token per gli aggiornamenti live nei propri processi. Assicurarsi che i metodi di firma dei token siano allineati con i principali mandati USA come **CCPA** per la privacy dei consumatori, **HIPAA** per la protezione dei dati sanitari, **NIST SP 800-63** per la verifica dell'identità e **FIPS 140-2** per i moduli crittografici [\[1\]](https://capgoapp/)
+## U.S. Standards and Requirements
 
-Ecco come questi standard si applicano alla firma dei token:
+To comply with U.S. regulatory requirements, integrate live-update token practices into your processes. Ensure your token signing methods align with key U.S. mandates like **CCPA** for consumer privacy, **HIPAA** for health data protection, **NIST SP 800‑63** for identity verification, and **FIPS 140‑2** for cryptographic modules [\[1\]](https://capgo.app/).
 
--   **CCPA**: Garantire che i payload dei token rispettino il consenso dell'utente e supportino le richieste di cancellazione dei dati
--   **HIPAA**: Crittografare i token contenenti Informazioni Sanitarie Protette (PHI) sia a riposo che durante la trasmissione
--   **NIST SP 800-63**: Utilizzare [l'autenticazione multi-fattore](https://capgoapp/docs/webapp/mfa/) per proteggere l'accesso alle chiavi di firma
--   **FIPS 140-2**: Confermare che la libreria di firma utilizzi moduli crittografici validati
+Here’s how these standards apply to token signing:
 
-[\[1\]](https://capgoapp/) Gli sviluppatori dovrebbero mantenersi informati sulle leggi federali e statali USA sulla protezione dei dati, incluso il CCPA
+-   **CCPA**: Ensure token payloads respect user consent and support data deletion requests.
+-   **HIPAA**: Encrypt tokens containing Protected Health Information (PHI) both at rest and during transmission.
+-   **NIST SP 800‑63**: Use [multi-factor authentication](https://capgo.app/docs/webapp/mfa/) to secure access to signing keys.
+-   **FIPS 140‑2**: Confirm that your signing library uses validated cryptographic modules.
 
-## Conclusione
+[\[1\]](https://capgo.app/) Developers should stay informed about U.S. federal and state data protection laws, including CCPA.
 
-La firma sicura dei token e l'integrazione degli aggiornamenti live sono cruciali per mantenere l'integrità della tua app Capacitor e soddisfare i requisiti di conformità
+## Conclusion
 
-Fare riferimento alla checklist fornita per garantire che l'implementazione rispetti gli standard di sicurezza e le normative USA
+Secure token signing and live-update integration are crucial for maintaining your Capacitor app's integrity and meeting compliance requirements.
 
-### Punti Chiave da Ricordare
+Refer to the checklist provided to ensure your implementation adheres to security standards and U.S. regulations.
 
--   Assicurarsi che la firma dei token sia conforme alle normative USA come CCPA e HIPAA e utilizzare metodi di crittografia forti
--   Implementare il controllo versione e consentire rollback istantanei per gli aggiornamenti per mantenere la stabilità
--   Monitorare e migliorare la velocità dei processi di firma e consegna degli aggiornamenti
+### Key Points to Remember
+
+-   Ensure token signing aligns with U.S. regulations like CCPA and HIPAA, and use strong encryption methods.
+-   Implement version control and allow instant rollbacks for updates to maintain stability.
+-   Monitor and improve the speed of signing and update delivery processes.

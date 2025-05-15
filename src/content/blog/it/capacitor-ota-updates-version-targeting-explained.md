@@ -1,8 +1,10 @@
 ---
 slug: capacitor-ota-updates-version-targeting-explained
-title: 'Capacitor OTA アップデート: バージョンターゲティングの解説'
+title: 'Capacitor OTA Atualizações: Explicação sobre O Alvo da Versão'
 description: >-
-  特定のアプリバージョンを管理することで、OTAアップデートのバージョンターゲティングがアプリの安定性、迅速なデプロイメント、より良いユーザーエクスペリエンスを確保する方法について学びましょう。
+  Scopri come il targeting delle versioni per gli aggiornamenti OTA garantisce
+  la stabilità dell'app, implementazioni più rapide e migliori esperienze utente
+  gestendo versioni specifiche dell'app.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -10,7 +12,7 @@ created_at: 2025-03-14T03:00:49.720Z
 updated_at: 2025-03-24T13:14:15.818Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d37b87bca46a2e63b4584d-1741921265630.jpg
-head_image_alt: Sviluppo Mobile
+head_image_alt: Desarrollo Móvil
 keywords: >-
   OTA updates, version targeting, Capacitor, mobile app updates, semantic
   versioning, app stability, bug fixes
@@ -19,88 +21,257 @@ published: true
 locale: it
 next_blog: ''
 ---
+[Capacitor](https://capacitorjs.com/) Over-The-Air (OTA) updates te permiten enviar cambios de la aplicación directamente a los usuarios sin esperar la aprobación de las tiendas de aplicaciones. Con **el direccionamiento por versión**, puedes entregar actualizaciones a versiones específicas de la aplicación, asegurando la compatibilidad y reduciendo riesgos como los bloqueos.
 
-[Capacitor](https://capacitorjscom/) Gli aggiornamenti Over-The-Air (OTA) ti permettono di inviare modifiche all'app direttamente agli utenti senza attendere le approvazioni degli app store. Con il **targeting delle versioni**, puoi distribuire aggiornamenti a versioni specifiche dell'app, garantendo compatibilità e riducendo rischi come i crash.
+Aquí tienes lo que aprenderás:
 
-Ecco cosa imparerai:
-
--   **Cosa Sono gli Aggiornamenti OTA**: Invia modifiche istantaneamente agli utenti rispettando le regole degli app store
+-   **Qué son las Actualizaciones OTA**: Envía cambios instantáneamente a los usuarios mientras cumples con las reglas de la tienda de aplicaciones.
     
--   **Targeting delle Versioni**: Invia aggiornamenti solo a specifiche versioni dell'app per correggere bug, rilasciare funzionalità o supportare utenti legacy
+-   **Direccionamiento por Versión**: Envía actualizaciones solo a versiones específicas de la aplicación para corregir errores, lanzar características o dar soporte a usuarios antiguos.
     
--   **Benefici**:
+-   **Beneficios**:
     
-    -   Aggiornamenti più rapidi (minuti, non settimane)
+    -   Actualizaciones más rápidas (minutos, no semanas).
         
-    -   Maggiore stabilità dell'app e rollout controllati
+    -   Mejor estabilidad de la aplicación y despliegues controlados.
         
-    -   Migliore esperienza utente evitando aggiornamenti non necessari
+    -   Experiencia de usuario mejorada al evitar actualizaciones innecesarias.
         
--   **Come Utilizzarlo**:
+-   **Cómo Usarlo**:
     
-    -   Segui il versionamento semantico (**MAJORMINORPATCH**)
+    -   Sigue el versionado semántico (**MAJOR.MINOR.PATCH**).
         
-    -   [Configura gli aggiornamenti](https://capgoapp/docs/plugin/cloud-mode/manual-update/) nel tuo progetto Capacitor
+    -   [Configura las actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/) en tu proyecto de Capacitor.
         
-    -   Testa accuratamente tra le versioni target
+    -   Prueba exhaustivamente en las versiones dirigidas.
         
 
-**Confronto Rapido**:
+**Comparación Rápida**:
 
-| **Aspetto** | **Aggiornamenti Tradizionali** | **OTA con Targeting delle Versioni** |
+| **Aspecto** | **Actualizaciones Tradicionales** | **OTA con Direccionamiento por Versión** |
 | --- | --- | --- |
-| Tempo di Deployment | Giorni o settimane | Minuti |
-| Precisione Aggiornamento | Stesso aggiornamento per tutti | Aggiornamenti mirati per versione |
-| Gestione del Rischio | Rischio maggiore di problemi diffusi | Rollout controllato per versione |
+| Tiempo de Despliegue | Días a semanas | Minutos |
+| Precisión de Actualización | La misma actualización para todos los usuarios | Actualizaciones dirigidas por versión |
+| Gestión de Riesgos | Mayor riesgo de problemas generales | Despliegue controlado por versión |
 
-[Capgo](https://capgoapp/), una piattaforma leader, riporta un **aumento dell'efficienza dell'81%** nei cicli di rilascio e ha distribuito oltre **9476 milioni di aggiornamenti** globalmente.
+[Capgo](https://capgo.app/), una plataforma líder, informa un **aumento de eficiencia del 81%** en los ciclos de lanzamiento y ha entregado más de **947.6 millones de actualizaciones** a nivel mundial.
 
-Vuoi imparare come configurarlo ed evitare errori comuni? Continua a leggere per una guida passo-passo.
+¿Quieres aprender a configurarlo y evitar errores comunes? Sigue leyendo para una guía paso a paso.
 
-## Esplora il Plugin di Live Update Ionic [Capacitor](https://capacitorjscom/) di [Capgo](https://capgoapp/plugins)
+## Explora el Plugin de Actualización en Vivo de Ionic [Capacitor](https://capacitorjs.com/) de [Capgo](https://capgo.app/plugins)
 
-**Guida Tecnica al Targeting delle Versioni**
+**Guía Técnica de Direccionamiento por Versión**
 
-Il versionamento semantico è cruciale per gestire efficacemente gli aggiornamenti OTA, garantendo compatibilità e transizioni fluide per gli utenti.
+El versionado semántico es fundamental para gestionar las actualizaciones OTA de manera efectiva, asegurando compatibilidad y transiciones suaves para los usuarios.
 
-### Numeri di Versione Semantica
+### Números de Versión Semántica
 
-Capacitor usa un formato **MAJORMINORPATCH** per il versionamento semantico. Ogni parte ha un ruolo distinto:
+Capacitor utiliza un formato **MAJOR.MINOR.PATCH** para el versionado semántico. Cada parte tiene un rol distinto:
 
-| Componente Versione | Quando Incrementare | Esempio |
+| Componente de Versión | Cuándo Incrementar | Ejemplo |
 | --- | --- | --- |
-| **MAJOR** | Per modifiche che rompono la compatibilità | 2.0.0 → 3.0.0 |
-| **MINOR** | Per aggiungere nuove funzionalità compatibili | 2.1.0 → 2.2.0 |
-| **PATCH** | Per correggere bug senza rompere la compatibilità | 2.1.1 → 2.1.2 |
+| **MAJOR** | Para cambios que rompen la compatibilidad | 2.0.0 → 3.0.0 |
+| **MINOR** | Para agregar nuevas características que permanezcan compatibles | 2.1.0 → 2.2.0 |
+| **PATCH** | Para corregir errores sin romper la compatibilidad | 2.1.1 → 2.1.2 |
 
-Questa struttura assicura che gli aggiornamenti vengano distribuiti in modo accurato ed efficiente.
+Esta estructura asegura que las actualizaciones se distribuyan de manera precisa y eficiente.
 
-### Setup e Configurazione
+### Configuración e Instalación
 
-Segui questi passaggi per configurare il targeting delle versioni nel tuo progetto Capacitor:
+Sigue estos pasos para configurar el direccionamiento por versión en tu proyecto de Capacitor:
 
-1. **Setup Iniziale**
+1. **Instalación Inicial**
 
-Esegui `npx @capgo/cli init` nella directory del tuo progetto. Questo inizializza gli strumenti necessari per gli aggiornamenti OTA.
+Ejecuta `npx @capgo/cli init` en el directorio de tu proyecto. Esto inicializa las herramientas necesarias para las actualizaciones OTA.
 
-2. **Configurazione della Versione**
+2. **Configuración de Versión**
 
-Definisci i parametri di versione nel file di configurazione Capacitor. Ecco un esempio:
+Define los parámetros de versión en tu archivo de configuración de Capacitor. Aquí tienes un ejemplo:
 
-[[CODE_BLOCK]]
+```json
+{
+  "appId": "com.example.app",
+  "appName": "MyApp",
+  "versionName": "2.1.0",
+  "versionCode": 21
+}
+```
 
-3. **Processo di Build**
+3. **Proceso de Construcción**
 
-Una volta configurato, compila la tua app come al solito. Il sistema di targeting delle versioni gestirà la distribuzione degli aggiornamenti in base a queste impostazioni.
+Una vez configurado, construye tu aplicación como de costumbre. El sistema de direccionamiento por versión se encargará de la distribución de actualizaciones según estos ajustes.
 
-Questi passaggi garantiscono che i tuoi aggiornamenti OTA siano affidabili e personalizzati per versioni specifiche dell'app.
+Estos pasos aseguran que tus actualizaciones OTA sean confiables y personalizadas a versiones específicas de la aplicación.
 
-> "Con Capgo, puoi lanciare più rilasci a settimana con un impressionante aumento dell'efficienza dell'81%" - Capgo [\[1\]](https://capgoapp/)
+> "Con Capgo, puedes lanzar múltiples versiones por semana con un impresionante aumento del 81% en eficiencia." - Capgo [\[1\]](https://capgo.app/)
 
-Il sistema di Capgo ha distribuito quasi 9476 milioni di aggiornamenti globalmente, supportando oltre 1.400 app in produzione [\[1\]](https://capgoapp/). Questo dimostra l'affidabilità degli aggiornamenti OTA con targeting delle versioni.
+El sistema de Capgo ha entregado casi 947.6 millones de actualizaciones a nivel mundial, apoyando más de 1,400 aplicaciones en producción [\[1\]](https://capgo.app/). Esto muestra la confiabilidad de las actualizaciones OTA dirigidas por versión.
 
-Gli aggiornamenti vengono applicati in background, minimizzando l'interruzione per l'utente - un approccio efficace per gestire più versioni dell'app.
+Las actualizaciones se aplican en segundo plano, minimizando la interrupción para el usuario, una manera efectiva de gestionar múltiples versiones de la aplicación.
 
-## Quando Usare il Targeting delle Versioni
+## Cuándo Usar el Direccionamiento por Versión
 
-Il targeting delle versioni aiuta a gestire gli aggiornamenti tra diversi gruppi di utenti, garantendo stabilità dell'app e una migliore esperienza utente.
+El direccionamiento por versión ayuda a gestionar actualizaciones a través de diferentes grupos de usuarios, asegurando estabilidad en la aplicación y una mejor experiencia de usuario.
+
+### Casos de Uso Clave
+
+Aquí es donde el direccionamiento por versión puede ser particularmente útil:
+
+| Escenario | Implementación | Beneficios |
+| --- | --- | --- |
+| Correcciones de Errores Críticos | Enfocar actualizaciones en versiones con el error | Limita el impacto en usuarios sin el problema |
+| Despliegues de Características | Lanzar gradualmente características a versiones más nuevas | Permite una monitorización y pruebas cuidadosas |
+| Soporte para Legados | Mantener versiones anteriores compatibles | Asegura que todos los usuarios puedan seguir usando la aplicación |
+| Pruebas Beta | Dirigir actualizaciones a grupos de versiones específicas | Crea un entorno controlado de pruebas |
+
+Vamos a desglosar las ventajas específicas que ofrece este enfoque.
+
+### Principales Ventajas
+
+El direccionamiento por versión ofrece beneficios claros tanto para desarrolladores como para usuarios:
+
+**Mejor Estabilidad**
+
+-   Minimiza los bloqueos asegurando que las actualizaciones sean compatibles con versiones específicas.
+    
+-   Permite retrocesos rápidos si algo sale mal.
+    
+-   Mantiene el rendimiento de la aplicación constante a través de diferentes versiones.
+    
+
+**Proceso de Desarrollo Optimizado**
+
+-   Proporciona a los equipos un control preciso sobre cómo se distribuyen las actualizaciones.
+    
+-   Acelera las correcciones de errores para versiones específicas.
+    
+-   Reduce los riesgos relacionados con el lanzamiento de nuevas características.
+    
+
+**Experiencia de Usuario Mejorada**
+
+Al entregar solo actualizaciones relevantes, los usuarios evitan cambios innecesarios. El desarrollador Andrew Peacock destaca su impacto:
+
+> "Con Capgo, podemos implementar cambios de código en vivo según nuestro calendario, asegurando que nuestros usuarios siempre tengan las últimas características y correcciones sin la larga espera" [\[1\]](https://capgo.app/)
+
+Este enfoque es particularmente efectivo en entornos empresariales donde múltiples versiones de la aplicación necesitan coexistir. También se integra perfectamente con discusiones anteriores sobre la configuración técnica, mostrando cómo las actualizaciones OTA personalizadas pueden marcar una diferencia real.
+
+###### sbb-itb-f9944d2
+
+## Directrices de Implementación
+
+Ahora que tienes la base técnica cubierta, es hora de planificar y ejecutar tu [estrategia de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) de manera efectiva.
+
+### Planificación de tu Estrategia de Actualización
+
+Para asegurar un direccionamiento por versión fluido, es importante establecer políticas claras. El equipo de Capgo sugiere enfocarse en tres componentes principales:
+
+| Componente | Propósito | Cómo Implementar |
+| --- | --- | --- |
+| **Categorías de Versión** | Definir tipos de actualizaciones | Usar versionado semántico (mayor.minor.patch) |
+| **Calendario de Lanzamiento** | Planificar la frecuencia de actualizaciones | Establecer intervalos consistentes pero mantenerse flexible para correcciones urgentes |
+| **Protocolo de Pruebas** | Asegurar estabilidad en las actualizaciones | Probar exhaustivamente en rangos de versiones dirigidas antes de lanzar |
+
+Una vez que tu estrategia esté en su lugar, asegúrate de evitar errores comunes que pueden interrumpir tu despliegue.
+
+### Errores Comunes a Evitar
+
+Los equipos de desarrollo a menudo enfrentan problemas al gestionar el direccionamiento por versión. Aquí hay algunas trampas a tener en cuenta:
+
+-   **Cobertura de Pruebas Insuficiente**  
+    Siempre prueba las actualizaciones en todas las versiones dirigidas para evitar problemas pasados por alto.
+    
+-   **Control de Versión deficiente**  
+    Mantén una documentación estricta de las versiones y define límites claros de compatibilidad.
+    
+-   **Falta de Comunicación**  
+    Mantén a los usuarios informados sobre los requisitos de versión y los cambios venideros para minimizar la confusión.
+    
+
+### Mantenimiento de Versiones Anteriores
+
+Apoyar versiones antiguas es tan importante como implementar nuevas. Aquí te mostramos cómo puedes gestionar esto de manera efectiva mientras aseguras la retrocompatibilidad:
+
+-   **Banderas de Características**
+    
+    -   Controla qué características están disponibles en versiones específicas.
+        
+    -   Lanza gradualmente actualizaciones a grupos de versiones dirigidas.
+        
+    -   Desactiva rápidamente características si causan problemas.
+        
+-   **Pruebas Específicas de Versión**
+    
+    -   Establece entornos de prueba dedicados para cada versión soportada.
+        
+    -   Verifica que las actualizaciones no interfieran con la funcionalidad existente mientras introduces nuevas características para versiones compatibles.
+        
+-   **Documentación Integral**
+    
+    -   Mantén documentación detallada para cada versión, incluyendo cambios de API, necesidades de configuración y cualquier limitación conocida.
+
+## Solucionar Problemas de Direccionamiento por Versión
+
+El direccionamiento por versión en [actualizaciones OTA de Capacitor](https://capgo.app/ja/) a veces puede crear desafíos que interrumpen la funcionalidad. A continuación se presentan pasos para ayudar a identificar y abordar estos problemas de manera efectiva.
+
+### Problemas Conocidos
+
+Aquí hay algunos problemas comunes que pueden surgir durante los despliegues OTA:
+
+| **Tipo de Problema** | **Causas Comunes** | **Impacto** |
+| --- | --- | --- |
+| Desajuste de Versión | Uso incorrecto de SemVer | Las actualizaciones no se aplican |
+| Errores de Configuración | Configuraciones de aplicación desalineadas | Problemas de despliegue |
+| Problemas de Red | Conexiones inestables | Actualizaciones incompletas |
+
+Estos problemas pueden afectar negativamente el rendimiento de la aplicación y la experiencia del usuario.
+
+### Pasos para Solucionar Problemas
+
+Para solucionar problemas de direccionamiento por versión, sigue estos pasos:
+
+1.  **Verificar la Configuración de la Versión**  
+    Revisa los archivos de configuración de tu aplicación para asegurarte de que los números de versión utilicen correctamente el formato SemVer (MAJOR.MINOR.PATCH). Confirma la consistencia en todos los entornos de despliegue.
+    
+2.  **Ejecutar Diagnósticos**  
+    Prueba en versiones de aplicaciones dirigidas para identificar problemas de compatibilidad. Utiliza herramientas como los diagnósticos CLI de Capgo para una solución de problemas rápida.
+    
+3.  **Revisar la Implementación**  
+    Considera tu estrategia de actualización, tomando en cuenta factores como la fiabilidad de la red durante las actualizaciones, la compatibilidad de dispositivos y las limitaciones de almacenamiento.
+    
+
+### Recursos de Ayuda
+
+Si necesitas asistencia adicional, aquí hay algunos recursos útiles:
+
+| **Tipo de Recurso** | **Propósito** | **Acceso** |
+| --- | --- | --- |
+| Documentación | Instrucciones técnicas | Documentos oficiales de Capacitor |
+| Foros de la Comunidad | Consejos y soluciones de pares | Comunidades de desarrolladores |
+| Herramientas de Soporte | Solución de problemas automatizada | Plataforma Capgo |
+
+Estos recursos pueden ayudarte a resolver problemas de manera eficiente y evitar retrasos en el despliegue, asegurando actualizaciones más suaves y un mejor rendimiento de la aplicación.
+
+## Resumen
+
+El direccionamiento por versión para actualizaciones OTA ofrece una forma más inteligente de gestionar los despliegues de aplicaciones. Al permitir actualizaciones a versiones específicas de la aplicación, proporciona control preciso, minimiza problemas de compatibilidad y asegura operaciones más suaves.
+
+| Beneficio | Impacto | Resultado Medible |
+| --- | --- | --- |
+| Eficiencia en el Despliegue | Acelera los ciclos de lanzamiento | 81% de aumento en lanzamientos semanales |
+| Control de Actualizaciones | Gestiona versiones con precisión | Entrega específica a 947.6M+ actualizaciones |
+| Ahorro de Costos | Reduce gastos operativos | $2,600 de configuración frente a $6,000 de alternativas anuales |
+
+Este método asegura que las actualizaciones se envíen solo a dispositivos compatibles, reduciendo los desafíos relacionados con versiones.
+
+### Comenzando
+
+Para aprovechar al máximo la segmentación de versiones, un plan sólido es clave para mantener la compatibilidad de la aplicación. Plataformas como Capgo simplifican este proceso con funciones como gestión automatizada, [encriptación segura](https://capgo.app/docs/cli/migrations/encryption/), y cumplimiento con las normas de la tienda de aplicaciones. Aquí hay algunos pasos para comenzar de manera efectiva:
+
+<Steps>
+-   **Establecer Reglas de Versión**: Definir restricciones claras para gestionar la distribución de actualizaciones.
+    
+-   **Rastrear Despliegues**: Monitorear las tasas de éxito de las actualizaciones entre varias versiones de la aplicación.
+    
+-   **Soportar Versiones Legadas**: Mantener funcionales las versiones críticas antiguas mientras se incentiva a los usuarios a actualizar.
+</Steps>

@@ -1,39 +1,41 @@
 ---
-slug: costruire-una-app-mobile-nativa-con-nuxt-3-e-capacitor
-title: Nuxt 3とCapacitorでモバイルアプリを作成する
-description: Nuxt 3、Capacitor、Konsta UIのネイティブUIを実装したモバイルアプリの作り方
+slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
+title: '2025 Guía: Creando aplicaciones móviles con Nuxt 3.17 y Capacitor.'
+description: >-
+  Cómo crear una aplicación móvil con Nuxt 3.17, Capacitor e implementar una
+  interfaz de usuario nativa con Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2023-06-03T00:00:00.000Z
+updated_at: 2025-05-12T00:00:00.000Z
 head_image: /nuxt_capgo.webp
-head_image_alt: Nuxt 3とCapgoのイラストレーション
+head_image_alt: Nuxt 3 e a ilustração do Capgo
 keywords: >-
   Nuxt 3, Capacitor, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
 tag: Tutorial
 published: true
-locale: ja
+locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-In questo tutorial, inizieremo con una nuova app [Nuxt 3](https://nuxtjs.org/) e ci sposteremo nel territorio nativo utilizzando Capacitor e infine aggiungeremo anche [Konsta UI](https://konstaui.com/) per una migliore UI mobile con Tailwind CSS, anche se quest'ultimo passaggio è completamente opzionale.
+În acest tutorial, vom începe cu o nouă aplicație [Nuxt 3.17](https://nuxtjs.org/) și ne vom ocupa de partea nativă folosind Capacitor și, în cele din urmă, vom adăuga și [Konsta UI](https://konstaui.com/) pentru a îmbunătăți interfața mobilă Tailwind CSS, deși ultimul pas este complet opțional.
 
-Utilizzando Capacitor, puoi facilmente convertire la tua applicazione web Nuxt 3 in un'app mobile nativa senza richiedere modifiche significative o imparare una nuova competenza come React Native.
+Folosind Capacitor, poți transforma cu ușurință aplicația web Nuxt 3 într-o aplicație mobilă nativă fără a necesita modificări semnificative sau învățarea unei noi abilități cum ar fi React Native.
 
-Con pochi semplici passaggi, la maggior parte delle applicazioni Nuxt 3 può essere trasformata in app mobile.
+Cu doar câțiva pași simpli, majoritatea aplicațiilor Nuxt 3 pot fi transformate în aplicații mobile.
 
-Questo tutorial ti guiderà attraverso il processo, partendo da una nuova app Nuxt 3 e poi incorporando Capacitor per spostarti nel mondo delle app mobile native. Inoltre, puoi opzionalmente utilizzare [Konsta UI](https://konstaui.com/) per migliorare la tua UI mobile con Tailwind CSS.
+Acest tutorial te va ghida prin proces, începând cu o nouă aplicație Nuxt 3 și apoi încorporând Capacitor pentru a pătrunde în domeniul aplicațiilor mobile native. În plus, poți folosi opțional [Konsta UI](https://konstaui.com/) pentru a-ți îmbunătăți interfața mobilă cu Tailwind CSS.
 
-## Riguardo Capacitor
+## Despre Capacitor
 
-Capacitor è davvero rivoluzionario! Puoi incorporarlo facilmente in qualsiasi progetto web, e avvolgerà la tua applicazione in una webview nativa, generando il progetto nativo Xcode e Android Studio per te. Inoltre, i suoi plugin forniscono accesso alle funzionalità native del dispositivo come la fotocamera tramite un bridge JS.
+CapacitorJS este cu adevărat un schimbător de joc! Poți să-l încorporezi fără efort în orice proiect web, iar acesta va învălui aplicația ta într-o webview nativă, generând proiectul nativ Xcode și Android Studio pentru tine. În plus, pluginurile sale oferă acces la caracteristici native ale dispozitivului, cum ar fi camera, printr-un pod JS.
 
-Con Capacitor, ottieni un'app mobile nativa fantastica senza alcuna configurazione complicata o curva di apprendimento ripida. La sua API snella e la funzionalità ottimizzata lo rendono facilissimo da integrare nel tuo progetto. Fidati, rimarrai stupito da quanto sia semplice ottenere un'app nativa completamente funzionale con Capacitor!
+Cu Capacitor, obții o aplicație mobilă nativă fantastică fără configurări complicate sau o curbă de învățare abruptă. API-ul său subțire și funcționalitatea sa simplificată fac integrarea în proiectul tău floare la ureche. Crede-mă, vei fi uimit de cât de ușor este să obții o aplicație nativă complet funcțională cu Capacitor!
 
-## Preparare la tua App Nuxt 3
+## Pregătirea Aplicației Tale Nuxt 3
 
-Per creare una nuova app Nuxt 3, esegui il seguente comando:
+Pentru a crea o nouă aplicație Nuxt 3, rulează următoarea comandă:
 
 ```shell
 npx nuxi init my-app
@@ -41,9 +43,9 @@ cd my-app
 npm install
 ```
 
-Scegli "Nuxt 3" quando ti viene chiesta la versione di Nuxt.
+Alege "Nuxt 3" atunci când ți se solicită versiunea Nuxt.
 
-Per creare un'app mobile nativa, abbiamo bisogno di un **export** del nostro progetto. Quindi, includiamo uno script semplice nel nostro **package.json** che può essere utilizzato per compilare e copiare il progetto Nuxt:
+Pentru a crea o aplicație mobilă nativă, avem nevoie de un **export** al proiectului nostru. Astfel, să includem un script simplu în **package.json**, care poate fi utilizat pentru a construi și copia proiectul Nuxt:
 
 ```json
 {
@@ -54,19 +56,19 @@ Per creare un'app mobile nativa, abbiamo bisogno di un **export** del nostro pro
 }
 ```
 
-Dopo aver eseguito il comando `generate`, dovresti essere in grado di vedere una nuova cartella `dist` nella root del tuo progetto.
+După ce execuți comanda `generate`, ar trebui să poți observa un nou folder `dist` la rădăcina proiectului tău.
 
-Questa cartella sarà utilizzata da Capacitor più tardi, ma per ora, dobbiamo configurarla correttamente.
+Acest folder va fi folosit de Capacitor mai târziu, dar deocamdată, trebuie să-l configurăm corect.
 
-## Aggiungere Capacitor alla tua App Nuxt 3
+## Adăugarea Capacitor la Aplicația Ta Nuxt 3
 
-Per impacchettare qualsiasi app web in un container mobile nativo, dobbiamo seguire alcuni passaggi iniziali, ma successivamente è semplice come eseguire un singolo comando `sync`.
+Pentru a împacheta orice aplicație web într-un container mobil nativ, trebuie să urmăm câțiva pași inițiali, dar după aceea este la fel de simplu ca executarea unei singure comenzi `sync`.
 
-Prima di tutto, possiamo installare il [Capacitor CLI](https://capacitorjs.com/docs/cli/) come dipendenza di sviluppo, e poi configurarlo nel nostro progetto. Durante la configurazione, puoi premere "enter" per accettare i valori predefiniti per nome e ID del bundle.
+În primul rând, putem instala [Capacitor CLI](https://capacitorjs.com/docs/cli/) ca o dependență de dezvoltare și apoi să-l configurăm în cadrul proiectului nostru. În timpul setup-ului, poți apăsa “enter” pentru a accepta valorile implicite pentru nume și ID-ul pachetului.
 
-Successivamente, dobbiamo installare il pacchetto core e i pacchetti rilevanti per le piattaforme iOS e Android.
+Apoi, trebuie să instalăm pachetul de bază și pachetele relevante pentru platformele iOS și Android.
 
-Infine, possiamo aggiungere le piattaforme, e Capacitor creerà cartelle per ciascuna piattaforma nella root del nostro progetto:
+În cele din urmă, putem adăuga platformele, iar Capacitor va crea foldere pentru fiecare platformă la rădăcina proiectului nostru:
 
 ```shell
 # Install the Capacitor CLI locally
@@ -83,15 +85,15 @@ npx cap add ios
 npx cap add android
 ```
 
-A questo punto, dovresti essere in grado di vedere nuove cartelle **ios** e **android** nel tuo progetto Nuxt 3.
+Până acum, ar trebui să poți observa folderele **ios** și **android** în proiectul tău Nuxt 3.
 
-**Questi sono progetti nativi reali!**
+**Acestea sunt adevărate proiecte native!**
 
-Per accedere al progetto Android più tardi, devi installare [Android Studio](https://developer.android.com/studio/). Per iOS, hai bisogno di un Mac e dovresti installare [Xcode](https://developer.apple.com/xcode/).
+Pentru a accesa proiectul Android mai târziu, trebuie să instalezi [Android Studio](https://developer.android.com/studio/). Pentru iOS, ai nevoie de un Mac și ar trebui să instalezi [Xcode](https://developer.apple.com/xcode/).
 
-Inoltre, dovresti trovare un file **capacitor.config.ts** nel tuo progetto, che contiene alcune impostazioni fondamentali di Capacitor utilizzate durante la sincronizzazione. L'unica cosa a cui devi prestare attenzione è il **webDir**, che deve puntare al risultato del tuo comando di build. Attualmente, è impreciso.
+În plus, ar trebui să găsești un fișier **capacitor.config.ts** în proiectul tău, care conține câteva setări fundamentale Capacitor folosite în timpul sincronizării. Singurul lucru la care trebuie să fii atent este **webDir**, care trebuie să indice rezultatul comenzii tale de construire. În prezent, este incorect.
 
-Per correggere questo, apri il file **capacitor.config.json** e aggiorna il **webDir**:
+Pentru a corecta acest lucru, deschide fișierul **capacitor.config.json** și actualizează **webDir**:
 
 ```json
 {
@@ -101,67 +103,67 @@ Per correggere questo, apri il file **capacitor.config.json** e aggiorna il **we
 }
 ```
 
-Puoi provarlo eseguendo i seguenti comandi:
+Poți încerca executând următoarele comenzi:
 
 ```shell
 npm run generate
 npx cap sync
 ```
 
-Il primo comando `npm run generate` semplicemente compilerà il tuo progetto Nuxt 3 e copierà la build statica, mentre il secondo comando `npx cap sync` sincronizzerà tutto il codice web nei posti giusti delle piattaforme native in modo che possano essere visualizzati in un'app.
+Prima comandă `npm run generate` va construi pur și simplu proiectul tău Nuxt 3 și va copia construcția statică, în timp ce a doua comandă `npx cap sync` va sincroniza tot codul web în locurile corecte ale platformelor native, astfel încât să poată fi afișate într-o aplicație.
 
-Inoltre, il comando sync potrebbe aggiornare le piattaforme native e installare plugin, quindi quando installi nuovi [plugin Capacitor](https://capacitorjs.com/docs/plugins/) è il momento di eseguire nuovamente `npx cap sync`.
+În plus, comanda de sincronizare ar putea actualiza platformele native și instala pluginuri, astfel încât când instalezi un nou [plugin Capacitor](https://capacitorjs.com/docs/plugins/) este timpul să rulezi din nou `npx cap sync`.
 
-Senza accorgertene, hai ora effettivamente finito, quindi vediamo l'app su un dispositivo!
+Fără să-ți dai seama, ai terminat, așa că hai să vedem aplicația pe un dispozitiv!
 
-## Compilare e Distribuire app native
+## Construirea și Implementarea aplicațiilor native
 
-Per sviluppare app iOS, devi avere **Xcode** installato, e per le app Android, devi avere **Android Studio** installato. Inoltre, se prevedi di distribuire la tua app sull'app store, devi iscriverti all'Apple Developer Program per iOS e alla Google Play Console per Android.
+Pentru a dezvolta aplicații iOS, trebuie să ai **Xcode** instalat, iar pentru aplicații Android, trebuie să ai **Android Studio** instalat. În plus, dacă intenționezi să distribui aplicația pe App Store, trebuie să te înscrii în Programul de Dezvoltatori Apple pentru iOS și în Consola Google Play pentru Android.
 
-Se sei nuovo nello sviluppo mobile nativo, puoi utilizzare il CLI di Capacitor per aprire facilmente entrambi i progetti nativi:
+Dacă ești nou în dezvoltarea mobilă nativă, poți folosi Capacitor CLI pentru a deschide ușor ambele proiecte native:
 
 ```shell
 npx cap open ios
 npx cap open android
 ```
 
-Una volta configurati i tuoi progetti nativi, distribuire la tua app su un dispositivo connesso è facile. In Android Studio, devi solo attendere che tutto sia pronto, e puoi distribuire la tua app su un dispositivo connesso senza modificare alcuna impostazione. Ecco un esempio:
+Odată ce ai configurat proiectele tale native, implementarea aplicației tale pe un dispozitiv conectat este ușoară. În Android Studio, trebuie doar să aștepți ca totul să fie gata și poți implementa aplicația ta pe un dispozitiv conectat fără a schimba nicio setare. Iată un exemplu:
 
 ![android-studio-run](/android-studio-run.webp)
 
-In Xcode, devi configurare il tuo account di firma per distribuire la tua app su un dispositivo reale invece che solo sul simulatore. Se non l'hai mai fatto prima, Xcode ti guida attraverso il processo (ma ancora una volta, devi essere iscritto al Developer Program). Dopo di che, puoi semplicemente premere play per eseguire l'app sul tuo dispositivo connesso, che puoi selezionare in alto. Ecco un esempio:
+În Xcode, trebuie să îți configurezi contul de semnare pentru a-ți implementa aplicația pe un dispozitiv real în loc de simulator. Dacă nu ai făcut asta înainte, Xcode te ghidează prin proces (dar din nou, trebuie să te înscrii în Programul de Dezvoltatori). După aceea, poți pur și simplu să apeși pe play pentru a rula aplicația pe dispozitivul tău conectat, pe care îl poți selecta în partea de sus. Iată un exemplu:
 
 ![xcode-run](/xcode-run.webp)
 
-Congratulazioni! Hai distribuito con successo la tua app web Nuxt 3 su un dispositivo mobile. Ecco un esempio:
+Felicitări! Ai implementat cu succes aplicația ta web Nuxt 3 pe un dispozitiv mobil. Iată un exemplu:
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/nuxtjs-mobile-app.webp" alt="nuxtjs-mobile-app">
 </div>
 
-Ma aspetta, c'è anche un modo più veloce per farlo durante lo sviluppo...
+Dar așteaptă, există și o modalitate mai rapidă de a face acest lucru în timpul dezvoltării...
 
-## Live Reload di Capacitor
+## Capacitor Live Reload
 
-A questo punto, probabilmente sei abituato ad avere il hot reload con tutti i framework moderni, e la buona notizia è che puoi avere la stessa funzionalità **su un dispositivo mobile** con uno sforzo minimo!
+Până acum, probabil că te-ai obișnuit cu reîncărcarea rapidă cu toate cadrele moderne, iar vestea bună este că poți avea aceeași funcționalitate **pe un dispozitiv mobil** cu un efort minim!
 
-Abilita l'accesso alla tua applicazione ospitata localmente con live reload **sulla tua rete** facendo caricare all'app Capacitor il contenuto dall'URL specifico.
+Activează accesul la aplicația ta găzduită local cu live reload **pe rețeaua ta** prin încărcarea conținutului de către aplicația Capacitor dintr-o URL specifică.
 
-Il primo passo è scoprire il tuo indirizzo IP locale. Se stai usando un Mac, puoi scoprirlo eseguendo il seguente comando nel terminale:
+Primul pas este să îți dai seama de adresa ta IP locală. Dacă folosești un Mac, poți afla acest lucru rulând următoarea comandă în terminal:
 
 ```shell
 ipconfig getifaddr en0
 ```
 
-Su Windows, esegui:
+Pe Windows, rulează:
 
 ```shell
 ipconfig
 ```
 
-Poi cerca l'indirizzo IPv4.
+Apoi caută adresa IPv4.
 
-Possiamo istruire Capacitor per caricare l'app direttamente dal server aggiungendo un'altra voce al nostro file `capacitor.config.ts`:
+Putem instrui Capacitor să încarce aplicația direct de pe server prin adăugarea unei noi înregistrări în fișierul nostru `capacitor.config.ts`:
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -180,31 +182,31 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Assicurati di usare **l'IP e la porta corretti**, ho usato la porta predefinita di Nuxt 3 in questo esempio.
+Asigură-te că folosești **IP-ul și portul corect**, eu am folosit portul default Nuxt 3 în acest exemplu.
 
-Ora, possiamo applicare queste modifiche copiandole nel nostro progetto nativo:
+Acum, putem aplica aceste modificări copiindu-le în proiectul nostru nativ:
 
 ```shell
 npx cap copy
 ```
 
-Il comando `copy` è simile a `sync`, ma copierà solo **le modifiche apportate alla cartella web** e alla configurazione, senza aggiornare il progetto nativo.
+Comanda `copy` este similară cu `sync`, dar va **copia doar modificările efectuate în folderul web** și configurația, fără a actualiza proiectul nativ.
 
-Ora puoi distribuire la tua app ancora una volta attraverso Android Studio o Xcode. Dopo di che, se cambi qualcosa nella tua app Nuxt, **l'app si ricaricherà automaticamente** e mostrerà le modifiche!
+Poți acum să implementezi aplicația ta din nou prin Android Studio sau Xcode. După aceea, dacă schimbi ceva în aplicația ta Nuxt, **aplicația se va reîncărca automat** și va afișa modificările!
 
-**Tieni presente** che se installi nuovi plugin come la fotocamera, è ancora necessaria una ricompilazione del tuo progetto nativo. Questo perché i file nativi vengono modificati, e non può essere fatto al volo.
+**Ține minte** că dacă instalezi noi pluginuri, cum ar fi camera, este necesară o recompilare a proiectului tău nativ. Acest lucru se datorează faptului că fișierele native sunt modificate, și nu se poate face din mers.
 
-Nota che dovresti usare l'IP e la porta corretti nella tua configurazione. Il blocco di codice sopra mostra la porta predefinita di Nuxt 3 a scopo dimostrativo.
+Reține că ar trebui să folosești IP-ul și portul corect în configurația ta. Blocul de cod de mai sus arată portul default Nuxt 3 în scopuri demonstrație.
 
-## Utilizzare i Plugin Capacitor
+## Utilizarea Pluginurilor Capacitor
 
-Diamo un'occhiata a come utilizzare un plugin Capacitor in azione, che abbiamo menzionato alcune volte prima. Per fare questo, possiamo installare un plugin abbastanza semplice eseguendo:
+Să ne uităm la cum să folosim un plugin Capacitor în acțiune, de care am menționat de câteva ori înainte. Pentru a face acest lucru, putem instala un plugin destul de simplu rulând:
 
 ```shell
 npm i @capacitor/share
 ```
 
-Non c'è niente di particolare nel [plugin Share](https://capacitorjs.com/docs/apis/share/), ma comunque fa apparire la finestra di dialogo di condivisione nativa! Per questo ora dobbiamo solo importare il pacchetto e chiamare la relativa funzione `share()` dalla nostra app, quindi modifichiamo il **pages/index.vue** in questo:
+Nu este nimic fancy în legătură cu [pluginul Share](https://capacitorjs.com/docs/apis/share/), dar oricum deschide dialogul de partajare nativ! Pentru aceasta, acum trebuie doar să importăm pachetul și să apelăm funcția `share()` din aplicația noastră, așa că să schimbăm **pages/index.vue** în acest fel:
 
 ```html
 <template>
@@ -228,23 +230,23 @@ async function share() {
 </script>
 ```
 
-Come menzionato in precedenza, quando installiamo nuovi plugin, dobbiamo eseguire un'operazione di sincronizzazione e poi ridistribuire l'app al nostro dispositivo. Per fare questo, esegui il seguente comando:
+Așa cum am menționat mai devreme, atunci când instalăm noi pluginuri, trebuie să efectuăm o operațiune de sincronizare și apoi să redeployăm aplicația pe dispozitivul nostru. Pentru a face acest lucru, rulează următoarea comandă:
 
 ```
 npx cap sync
 ```
 
-Dopo aver premuto il pulsante, puoi vedere in azione la bellissima finestra di dialogo di condivisione nativa!
+După apăsarea butonului, poți observa frumosul dialog de partajare nativ în acțiune!
 
-## Aggiungere Konsta UI
+## Adăugarea Konsta UI
 
-Per utilizzare Konsta UI nella tua app Nuxt 3, devi avere [tailwind già installato](https://tailwindcss.com/docs/guides/nuxtjs/) e installare il pacchetto:
+Pentru a folosi Konsta UI în aplicația ta Nuxt 3, trebuie să ai [tailwind deja instalat](https://tailwindcss.com/docs/guides/nuxtjs/) și să instalezi pachetul:
 
 ```shell
 npm i konsta
 ```
 
-Inoltre, devi modificare il tuo file `tailwind.config.js`:
+În plus, trebuie să modifici fișierul tău `tailwind.config.js`:
 
 ```javascript
 // import konstaConfig config
@@ -267,11 +269,11 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` estenderà la configurazione predefinita (o la tua personalizzata) di Tailwind CSS con alcune varianti extra e utility helper richieste per Konsta UI.
+`konstaConfig` va extinde configurarea Tailwind CSS implicită (sau personalizată) cu unele variante suplimentare și utilitare necesare pentru Konsta UI.
 
-Ora dobbiamo configurare il componente principale [App](https://konstaui.com/vue/app/) in modo da poter impostare alcuni parametri globali (come `theme`).
+Acum trebuie să configurăm componenta principală [App](https://konstaui.com/vue/app/) astfel încât să putem seta unele parametri globali (cum ar fi `theme`).
 
-Dobbiamo avvolgere l'intera app con `App` in `pages/_app.vue`:
+Trebuie să învăluim întreaga aplicație cu `App` în `pages/_app.vue`:
 
 ```html
 <template>
@@ -285,11 +287,11 @@ import { App } from 'konsta/vue';
 </script>
 ```
 
-### Pagina di Esempio
+### Pagină Exemplu
 
-Ora che tutto è configurato, possiamo utilizzare i componenti Vue di Konsta UI nelle nostre pagine Nuxt 3.
+Acum că totul este configurat, putem folosi componentele Konsta UI Vue în paginile noastre Nuxt 3.
 
-Per esempio, apriamo `pages/index.vue` e modifichiamolo nel seguente modo:
+De exemplu, să deschidem `pages/index.vue` și să o schimbăm în următoarea:
 
 ```html
 <template>
@@ -328,22 +330,22 @@ import {
 </script>
 ```
 
-Se il live reload è fuori sync dopo aver installato tutti i componenti necessari, prova a riavviare tutto. Una volta fatto questo, dovresti vedere un'app mobile con un aspetto un po' nativo, costruita con Nuxt 3 e Capacitor!
+Dacă reîncărcarea rapidă este dezacordată după instalarea tuturor componentelor necesare, încearcă să repornești tot. Odată ce ai făcut asta, ar trebui să vezi o aplicație mobilă cu un aspect oarecum nativ, construită cu Nuxt 3 și Capacitor!
 
-Dovresti vedere la seguente pagina come risultato:
+Ar trebui să vezi următoarea pagină ca rezultat:
 
 <template>
   <div>
 <h1>
 
-## Conclusione
+## Concluzie
 
-Capacitor è un'eccellente opzione per costruire applicazioni native basate su un progetto web esistente, offrendo un modo semplice per condividere codice e mantenere una UI coerente.
+Capacitor este o opțiune excelentă pentru construirea aplicațiilor native pe baza unui proiect web existent, oferind o modalitate simplă de a împărtăși codul și de a menține o interfață utilizator consistentă.
 
-E con l'aggiunta di [Capgo](https://capgo.app/), è ancora più facile aggiungere aggiornamenti live alla tua app, assicurando che i tuoi utenti abbiano sempre accesso alle ultime funzionalità e correzioni di bug.
+Și cu adăugarea [Capgo](https://capgo.app/), este și mai ușor să adaugi actualizări live la aplicația ta, asigurându-te că utilizatorii tăi au mereu acces la cele mai recente caracteristici și corecturi de erori.
 
-Se vuoi imparare come aggiungere Capgo alla tua app Next.js, dai un'occhiata al prossimo articolo:
+Dacă dorești să înveți cum să adaugi Capgo la aplicația ta Next.js, aruncă o privire la articolul următor:
 
-## Crediti
+## Credite
 
-Grazie mille a Simon, questo articolo è basato su [questo articolo](https://devdactic.com/nextjs-and-capacitor/) riscritto per nuxt3 con chat-gpt-4 e adattato.
+Mulțumiri mari lui Simon, acest articol este bazat pe [acest articol](https://devdactic.com/nextjs-and-capacitor/) rescris pentru nuxt3 cu chat-gpt-4 și adaptat.

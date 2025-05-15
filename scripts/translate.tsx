@@ -1,4 +1,5 @@
-import 'dotenv/config'
+import { localeNames } from '@/services/locale'
+import '@dotenvx/dotenvx/config'
 
 export const translateTextOpenAI = async (text: string, lang: string) => {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -70,7 +71,7 @@ export const translateTextAnthropic = async (text: string, lang: string) => {
     messages: [
       {
         role: 'user',
-        content: `Translate the following text to ${lang} locale:\n\n${text}`,
+        content: `Translate the following text to ${localeNames[lang as keyof typeof localeNames]} locale:\n\n${text}`,
       },
     ],
   })

@@ -1311,5 +1311,7 @@
   "instant_rollback": "Instant Rollback",
   "one_click_rollback": "One-Click Rollback",
   "real_time_metrics": "Real-Time Metrics",
-  "unlimited_live_updates": "Unlimited Live Updates"
+  "unlimited_live_updates": "Unlimited Live Updates",
+  "written_by": "Written by",
+  "content_marketer": "Content Marketer"
 }

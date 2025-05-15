@@ -1,10 +1,10 @@
 ---
 slug: capacitor-ota-updates-best-practices-for-performance
-title: CapacitorのOTAアップデート：パフォーマンスのベストプラクティス
+title: 'Capacitor OTA Updates: Best Practices for Performance'
 description: >-
-  Ottimizza gli aggiornamenti OTA nelle app Capacitor per migliorare le
-  prestazioni e l'esperienza utente con le migliori pratiche per la dimensione
-  dei file, il caricamento del codice e la sicurezza.
+  Optimizar las actualizaciones OTA en aplicaciones de Capacitor para mejorar el
+  rendimiento y la experiencia del usuario con las mejores prácticas para el
+  tamaño de archivo, carga de código y seguridad.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,194 +21,203 @@ published: true
 locale: it
 next_blog: ''
 ---
-Gli aggiornamenti OTA (Over-the-Air) consentono alle app [Capacitor](https://capacitorjs.com/) di aggiornare contenuti come JavaScript, CSS e HTML senza richiedere invii all'app store. Sebbene conveniente, questi aggiornamenti possono influire sulle prestazioni di avvio dell'app. Ecco una guida rapida per ottimizzare gli aggiornamenti OTA per migliori prestazioni ed esperienza utente:
+OTA (Over-the-Air) updates allow [Capacitor](https://capacitorjs.com/) apps to update content like JavaScript, CSS, and HTML without requiring app store submissions. While convenient, these updates can impact app startup performance. Here's a quick guide to optimize OTA updates for better performance and user experience:
 
-- **Minimizzare la dimensione del file di aggiornamento**: Utilizzare tecniche come aggiornamenti differenziali, compressione (es. [ZSTD](https://en.wikipedia.org/wiki/Zstd)) ed eliminare modifiche non necessarie ai file.
+1. **Minimize Update File Size**: Use techniques like differential updates, compression (e.g., [ZSTD](https://en.wikipedia.org/wiki/Zstd)), and eliminating unnecessary file changes.
+    
+2. **Efficient Code Loading**: Prioritize loading core features first, delay non-critical components, and use lazy loading for heavy modules.
+    
+3. **Incremental Updates**: Break updates into smaller steps, schedule them during idle times, and use A/B systems for seamless rollbacks.
+    
+4. [**Secure Updates**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Protect files with encryption, checksums, and code signing to ensure integrity.
+    
+5. **Testing & Compliance**: Test updates thoroughly and follow app store guidelines to avoid approval issues.
+    
 
-- **Caricamento efficiente del codice**: Dare priorità al caricamento delle funzionalità principali, ritardare i componenti non critici e utilizzare il caricamento lazy per i moduli pesanti.
+**Quick Comparison of OTA Tools**:
 
-- **Aggiornamenti incrementali**: Suddividere gli aggiornamenti in passaggi più piccoli, programmarli durante i tempi di inattività e utilizzare sistemi A/B per rollback senza interruzioni.
-
-- [**Aggiornamenti sicuri**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Proteggere i file con crittografia, checksum e firma del codice per garantire l'integrità.
-
-- **Test e conformità**: Testare accuratamente gli aggiornamenti e seguire le linee guida dell'app store per evitare problemi di approvazione.
-
-**Confronto rapido degli strumenti OTA**:
-
-| Funzionalità | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| Feature | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
-| Metodo di aggiornamento | Confronto checksum | [Aggiornamenti in-app](https://capgo.app/plugins/capacitor-updater/) | Aggiornamenti bundle JS |
-| Impatto sulle prestazioni | Minimo | Medio | Basso |
-| Aggiornamenti in background | No | Sì (Android) | Sì |
-| Supporto rollback | Limitato | Dipende dalla piattaforma | Integrato |  
-| Integrazione CI/CD | Manuale | Manuale | Automatizzata |
+| Update Method | Checksum comparison | In-[app updates](https://capgo.app/plugins/capacitor-updater/) | JS bundle updates |
+| Performance Impact | Minimal | Medium | Low |
+| Background Updates | No  | Yes (Android) | Yes |
+| Rollback Support | Limited | Platform-dependent | Built-in |
+| CI/CD Integration | Manual | Manual | Automated |
 
-Capgo si distingue con funzionalità come aggiornamenti in background, crittografia end-to-end e monitoraggio delle prestazioni, rendendolo una scelta valida per gestire gli aggiornamenti OTA nelle [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/).
+Capgo stands out with features like background updates, end-to-end encryption, and performance tracking, making it a strong choice for managing OTA updates in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/).
 
-## Distribuisci aggiornamenti in tempo reale agli utenti della tua app Ionic
+## Ship real-time updates to your Ionic app users
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Suggerimenti sulle prestazioni per gli aggiornamenti OTA
+## Performance Tips for OTA Updates
 
-Queste strategie affrontano i ritardi di avvio e garantiscono processi di aggiornamento OTA più fluidi concentrandosi sulla riduzione delle dimensioni dei file e sul caricamento efficiente del codice.
+These strategies tackle startup delays and ensure smoother OTA update processes by focusing on file size reduction and efficient code loading.
 
-### Riduzione della dimensione del file di aggiornamento
+### Reducing Update File Size
 
-Mantenere piccole le dimensioni dei file di aggiornamento è essenziale per download più veloci e avvii più rapidi. L'idea è trasferire meno dati senza sacrificare le funzionalità. Ecco come puoi ottenerlo:
+Keeping update file sizes small is essential for quicker downloads and faster startups. The idea is to transfer less data without sacrificing functionality. Here's how you can achieve this:
 
-- Crea un `live-update-manifest.json` per abilitare gli aggiornamenti differenziali.
+1. Create a `live-update-manifest.json` to enable differential updates.
+    
+2. Use **ZSTD compression** for non-A/B devices to shrink full image updates.
+    
+3. Eliminate build timestamps and standardize build tools to avoid unnecessary file changes.
+    
+4. For A/B OTA updates, apply Puffin recompression to generate patches more efficiently.
+    
 
-- Usa la **compressione ZSTD** per dispositivi non-A/B per ridurre gli aggiornamenti dell'immagine completa.
+### Managing Code Loading
 
-- Elimina i timestamp di build e standardizza gli strumenti di build per evitare modifiche non necessarie ai file.
+Startup speed isn't just about file size - when code loads also matters. Here's a smart approach to manage code loading:
 
-- Per gli aggiornamenti OTA A/B, applica la ricompressione Puffin per generare patch in modo più efficiente.
+1. **Core Features First**: Load essential functions like authentication and main navigation immediately.
+    
+2. **Secondary Features Later**: Delay loading for non-critical components like advanced settings, analytics, and animations.
+    
+3. **Efficient Resource Use**: Apply progressive or lazy loading for heavy modules and media after the app has launched.
+    
 
-### Gestione del caricamento del codice
+### Step-by-Step Updates
 
-La velocità di avvio non riguarda solo la dimensione del file - anche quando il codice si carica è importante. Ecco un approccio intelligente per gestire il caricamento del codice:
+Breaking updates into smaller steps reduces disruptions during startup. Incremental updates are a practical way to ensure a seamless experience. For example, Android 8.0 uses streaming updates that require only about 100 KiB of metadata storage instead of downloading the entire package [\[3\]](https://source.android.com/docs/core/ota/ab).
 
-- **Prima le funzionalità principali**: Carica immediatamente funzioni essenziali come autenticazione e navigazione principale.
+1. Schedule updates during idle times, such as overnight, and prioritize Wi-Fi connections.
+    
+2. Protect update files with encryption and checksum verification [\[1\]](https://www.trio.so/blog/over-the-air-update/)[\[2\]](https://mender.io/blog/how-does-an-ota-firmware-update-work).
+    
+3. Use A/B partition systems to allow updates without interrupting app functionality [\[3\]](https://source.android.com/docs/core/ota/ab).
+    
 
-- **Funzionalità secondarie dopo**: Ritarda il caricamento di componenti non critici come impostazioni avanzate, analytics e animazioni.
+Capgo provides built-in tools for secure, incremental updates, featuring end-to-end encryption and flexible deployment options.
 
-- **Uso efficiente delle risorse**: Applica il caricamento progressivo o lazy per moduli pesanti e media dopo l'avvio dell'app.
+###### sbb-itb-f9944d2
 
-### Aggiornamenti passo dopo passo
-
-Suddividere gli aggiornamenti in passaggi più piccoli riduce le interruzioni durante l'avvio. Gli aggiornamenti incrementali sono un modo pratico per garantire un'esperienza senza interruzioni. Ad esempio, Android 8.0 utilizza aggiornamenti in streaming che richiedono solo circa 100 KiB di storage di metadati invece di scaricare l'intero pacchetto [\[3\]](https://source.android.com/docs/core/ota/ab).
-
-- Programma gli aggiornamenti durante i tempi di inattività, come durante la notte, e dai priorità alle connessioni Wi-Fi.
-
-- Proteggi i file di aggiornamento con crittografia e verifica del checksum [\[1\]](https://www.trio.so/blog/over-the-air-update/)[\[2\]](https://mender.io/blog/how-does-an-ota-firmware-update-work).
-
-- Usa sistemi di partizione A/B per consentire aggiornamenti senza interrompere la funzionalità dell'app [\[3\]](https://source.android.com/docs/core/ota/ab).
-
-Capgo fornisce strumenti integrati per aggiornamenti sicuri e incrementali, con crittografia end-to-end e opzioni di distribuzione flessibili.
-
-## Configurazione degli aggiornamenti OTA in [Capacitor](https://capacitorjs.com/)
+## Setting Up OTA Updates in [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
 
-La configurazione degli aggiornamenti Over-the-Air (OTA) in Capacitor richiede test accurati e l'adesione a linee guida rigorose.
+Setting up Over-the-Air (OTA) updates in Capacitor requires careful testing and adherence to strict guidelines.
 
-### Test pre-rilascio
+### Pre-Release Testing
 
-Prima di distribuire gli aggiornamenti, è essenziale un test approfondito:
+Before rolling out updates, thorough testing is essential:
 
-- Usa ambienti di test che replicano fedelmente le impostazioni di produzione.
+1. Use testing environments that closely replicate production settings.
+    
+2. Record baseline metrics like startup time, memory usage, bandwidth, and battery consumption.
+    
+3. Verify fallback mechanisms to ensure the server path resets if an update fails [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
+    
 
-- Registra metriche di base come tempo di avvio, utilizzo della memoria, larghezza di banda e consumo della batteria.
+Once performance is stable, check that the updates meet app store regulations.
 
-- Verifica i meccanismi di fallback per assicurarsi che il percorso del server si ripristini se un aggiornamento fallisce [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
+### App Store Rules
 
-Una volta che le prestazioni sono stabili, verifica che gli aggiornamenti rispettino le normative dell'app store.
+To avoid issues with app store approvals, follow these platform-specific rules:
 
-### Regole dell'App Store
+**Apple App Store Requirements:**
 
-Per evitare problemi con le approvazioni dell'app store, segui queste regole specifiche per piattaforma:
+> "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)
 
-**Requisiti Apple App Store:**
+**Google Play Store Guidelines:**
 
-> "Il codice interpretato può essere scaricato in un'Applicazione solo se tale codice: (a) non modifica lo scopo principale dell'Applicazione fornendo funzionalità non coerenti con lo scopo previsto e pubblicizzato dell'Applicazione come inviata all'App Store, (b) non crea un negozio o vetrina per altro codice o applicazioni e (c) non aggira la firma, il sandbox o altre funzionalità di sicurezza del sistema operativo." [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)
+> "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)." [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)
 
-**Linee guida Google Play Store:**
-
-> "Questa restrizione non si applica al codice eseguito in una macchina virtuale o in un interprete che fornisce accesso indiretto alle API Android (come JavaScript in una webview o browser)." [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)
-
-### Utilizzo di [Capgo](https://capgo.app/) per gli aggiornamenti
+### Using [Capgo](https://capgo.app/) for Updates
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
 
-Dopo i test e la verifica della conformità, distribuire gli aggiornamenti in modo efficiente diventa il passo successivo. Capgo è uno strumento che semplifica questo processo.
+After testing and ensuring compliance, deploying updates efficiently becomes the next step. Capgo is a tool that simplifies this process.
 
-A febbraio 2025, Capgo ha gestito **449 milioni di aggiornamenti** su **1.8K app in produzione** [\[5\]](https://capgo.app/). Le funzionalità principali includono:
+In February 2025, Capgo managed **449 million updates** across **1.8K production apps** [\[5\]](https://capgo.app/). Key features include:
 
-- **Crittografia end-to-end** per proteggere la consegna degli aggiornamenti.
+1. **End-to-end encryption** to secure update delivery.
+    
+2. **Caching** of the latest bundle for faster load times [\[6\]](https://capgo.app/docs/faq/).
+    
+3. **Code signing** to verify update authenticity.
+    
+4. **CI/CD integration** for smooth deployment.
+    
+5. **Controlled rollouts** through user assignment.
+    
+6. **Version control** with instant rollback capabilities.
+    
+7. **Performance tracking** with analytics.
+    
+8. Tools to monitor compliance.
+    
 
-- **Caching** dell'ultimo bundle per tempi di caricamento più rapidi [\[6\]](https://capgo.app/docs/faq/).
+By uploading only compiled code meant for app store distribution, Capgo minimizes overhead and boosts efficiency. This approach has reportedly led to an **81% improvement in release efficiency** for users [\[5\]](https://capgo.app/).
 
-- **Firma del codice** per verificare l'autenticità dell'aggiornamento.
+> "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica, @manticarodrigo [\[5\]](https://capgo.app/)
 
-- **Integrazione CI/CD** per una distribuzione fluida.
+Capgo also uses a custom Dart interpreter for iOS updates. This ensures updates remain within app store guidelines while still allowing for quick deployment [\[6\]](https://capgo.app/docs/faq/).
 
-- **Rollout controllati** attraverso l'assegnazione degli utenti.
+## OTA Update Tools Analysis
 
-- **Controllo versione** con capacità di rollback istantaneo.
+OTA tools for Capacitor differ in functionality and performance. Here's a breakdown of how they stack up and what to keep in mind when choosing one.
 
-- **Monitoraggio delle prestazioni** con analytics.
+### OTA Platform Comparison
 
-- Strumenti per monitorare la conformità.
+Here's a quick comparison of key features across popular OTA tools:
 
-Caricando solo codice compilato destinato alla distribuzione nell'app store, Capgo minimizza l'overhead e aumenta l'efficienza. Questo approccio ha portato a un **miglioramento dell'81% nell'efficienza dei rilasci** per gli utenti [\[5\]](https://capgo.app/).
-
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica, @manticarodrigo [\[5\]](https://capgo.app/)
-
-Capgo usa anche un interprete Dart personalizzato per gli aggiornamenti iOS. Questo assicura che gli aggiornamenti rimangano entro le linee guida dell'app store permettendo comunque una distribuzione rapida [\[6\]](https://capgo.app/docs/faq/).
-
-## Analisi degli strumenti OTA 
-
-Gli strumenti OTA per Capacitor differiscono in funzionalità e prestazioni. Ecco un'analisi di come si confrontano e cosa tenere a mente quando se ne sceglie uno.
-
-### Confronto piattaforme OTA
-
-Ecco un rapido confronto delle funzionalità chiave tra i popolari strumenti OTA:
-
-| Funzionalità | capacitor-app-updater | capacitor-app-update | Capgo |
+| Feature | capacitor-app-updater | capacitor-app-update | Capgo |
 | --- | --- | --- | --- |
-| Metodo di aggiornamento | Confronto checksum | [Aggiornamenti in-app](https://capgo.app/plugins/capacitor-updater/) (Android) | Aggiornamenti bundle JS |
-| Impatto sulle prestazioni | Minimo (download selettivi) | Medio ([aggiornamenti app completi](https://capgo.app/plugins/capacitor-updater/)) | Basso (controlli in background) |
-| Ambito aggiornamento | Solo contenuto web | Aggiornamenti app completi | Codice JS e dipendenze |
-| Supporto piattaforme | iOS e Android | Focalizzato su Android | iOS e Android |
-| Aggiornamenti in background | No | Sì (Android) | Sì |
-| Supporto rollback | Limitato | Dipende dalla piattaforma | Integrato |
-| Integrazione CI/CD | Manuale | Manuale | Automatizzata |
+| Update Method | Checksum comparison | [In-app updates](https://capgo.app/plugins/capacitor-updater/) (Android) | JS bundle updates |
+| Performance Impact | Minimal (selective downloads) | Medium ([full app updates](https://capgo.app/plugins/capacitor-updater/)) | Low (background checks) |
+| Update Scope | Web content only | Full app updates | JS code and dependencies |
+| Platform Support | iOS & Android | Android-focused | iOS & Android |
+| Background Updates | No  | Yes (Android) | Yes |
+| Rollback Support | Limited | Platform-dependent | Built-in |
+| CI/CD Integration | Manual | Manual | Automated |
 
-Ad esempio, mentre **capacitor-app-updater** usa download selettivi per minimizzare l'impatto sulle prestazioni, **Capgo** impiega un meccanismo di aggiornamento in background che mantiene l'app reattiva durante gli aggiornamenti [\[6\]](https://capgo.app/docs/faq/). Queste distinzioni sono cruciali quando si seleziona lo strumento giusto.
+For instance, while **capacitor-app-updater** uses selective downloads to minimize performance impact, **Capgo** employs a background update mechanism that keeps the app responsive during updates [\[6\]](https://capgo.app/docs/faq/). These distinctions are crucial when selecting the right tool.
 
-### Criteri di selezione
+### Selection Criteria
 
-Basandosi sul confronto, ecco alcuni fattori importanti da considerare quando si sceglie uno strumento OTA:
+Based on the comparison, here are some important factors to consider when picking an OTA tool:
 
 -   **Aggiornamento dell'efficienza**  
-    Il sistema di aggiornamento in background di Capgo ha gestito 449 milioni di aggiornamenti su 1.8K app in produzione senza influenzare le prestazioni [\[5\]](https://capgo.app/).
+    Il sistema di aggiornamento in background di Capgo ha gestito 449 milioni di aggiornamenti su 1.8K app in produzione senza influire sulle prestazioni [\[5\]](https://capgo.app/).
     
--   [**Gestione dimensione bundle**](https://capgo.app/docs/webapp/bundles/)  
-    Cerca strumenti che riducono i tempi di aggiornamento ottimizzando le dimensioni dei pacchetti con download differenziali [\[7\]](https://github.com/objektlabs/capacitor-app-updater).
+-   [**Gestione delle dimensioni del pacchetto**](https://capgo.app/docs/webapp/bundles/)  
+    Cerca strumenti che riducano i tempi di aggiornamento ottimizzando le dimensioni dei pacchetti con download differenziali [\[7\]](https://github.com/objektlabs/capacitor-app-updater).
     
 -   **Gestione del codice nativo**  
-    Assicurati che lo strumento escluda le modifiche al codice nativo dagli aggiornamenti. Capgo, per esempio, avvisa gli sviluppatori se vengono rilevate modifiche al codice nativo [\[6\]](https://capgo.app/docs/faq/).
+    Assicurati che lo strumento escluda le modifiche al codice nativo dagli aggiornamenti. Capgo, ad esempio, avvisa gli sviluppatori se vengono rilevate modifiche al codice nativo [\[6\]](https://capgo.app/docs/faq/).
     
--   **Impatto sull'avvio**  
-    Scegli strumenti che consentono ritardi configurabili per i controlli degli aggiornamenti per mantenere prestazioni di avvio fluide. Questa funzionalità è disponibile in **capacitor-app-updater** [\[7\]](https://github.com/objektlabs/capacitor-app-updater).
+-   **Impatto all'avvio**  
+    Scegli strumenti che consentano ritardi configurabili per i controlli degli aggiornamenti per mantenere prestazioni di avvio fluide. Questa funzione è disponibile in **capacitor-app-updater** [\[7\]](https://github.com/objektlabs/capacitor-app-updater).
     
 -   **Verifica degli aggiornamenti**  
-    Metodi di verifica affidabili, come i sistemi di checksum, sono essenziali per garantire l'integrità dell'aggiornamento. Sia **capacitor-app-updater** che **Capgo** lo offrono, con Capgo che aggiunge la crittografia end-to-end per maggiore sicurezza [\[6\]](https://capgo.app/docs/faq/).
+    Metodi di verifica affidabili, come i sistemi di checksum, sono essenziali per garantire l'integrità degli aggiornamenti. Sia **capacitor-app-updater** che **Capgo** offrono questo, con Capgo che aggiunge crittografia end-to-end per una maggiore sicurezza [\[6\]](https://capgo.app/docs/faq/).
+    
 
 ## Conclusione
 
-### Suggerimenti chiave sulle prestazioni
+### Suggerimenti chiave per le prestazioni
 
-Quando si aggiungono aggiornamenti OTA alle app Capacitor, è essenziale concentrarsi sia sulla sicurezza che sulle prestazioni. Ecco alcune strategie da tenere a mente:
+Quando si aggiungono aggiornamenti OTA alle app Capacitor, è fondamentale concentrarsi su sicurezza e prestazioni. Di seguito sono riportate alcune strategie da tenere a mente:
 
-| Strategia | Come implementare | Perché è importante |
+| Strategia | Come implementarla | Perché è importante |
 | --- | --- | --- |
-| **Sicurezza prima di tutto** | Costruire su protocolli di sicurezza esistenti | Protegge l'integrità degli aggiornamenti |
-| **Ottimizzazione dimensioni** | Usa le tecniche di compressione discusse prima | Riduce i tempi di attesa dell'utente |
-| **Pianificazione aggiornamenti** | [Elabora gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) in background, solo Wi-Fi | Riduce l'interruzione per l'utente |
-| **Controllo versioni** | Aggiornamenti separati per livelli web e nativi | Garantisce conformità fluida |
+| **Sicurezza prima di tutto** | Costruisci su protocolli di sicurezza esistenti | Protegge l'integrità degli aggiornamenti |
+| **Ottimizzazione delle dimensioni** | Utilizza tecniche di compressione discusse in precedenza | Riduce i tempi di attesa per gli utenti |
+| **Pianificazione degli aggiornamenti** | [Processa gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) in background, solo Wi-Fi | Riduce le interruzioni per l'utente |
+| **Controllo delle versioni** | Aggiornamenti separati per livelli web e nativi | Garantisce conformità fluida |
 
-> "Gli aggiornamenti OTA sono una componente infrastrutturale critica per quasi ogni dispositivo IoT embedded" [\[8\]](https://www.beningo.com/5-best-practices-for-over-the-air-ota-updates/)
+> "Gli aggiornamenti OTA sono un componente critico dell'infrastruttura per quasi ogni dispositivo IoT incorporato" [\[8\]](https://www.beningo.com/5-best-practices-for-over-the-air-ota-updates/)
 
-Questo evidenzia l'importanza di creare un sistema di aggiornamento affidabile che bilanci prestazioni e sicurezza. Usa queste strategie per rafforzare il tuo processo di aggiornamento OTA.
+Questo mette in evidenza l'importanza di creare un sistema di aggiornamento affidabile che equilibri prestazioni e sicurezza. Usa queste strategie per rafforzare il tuo processo di aggiornamento OTA.
 
 ### Prossimi passi
 
 Per massimizzare l'efficienza degli aggiornamenti OTA nella tua app Capacitor, assicurati di:
 
--   **Configurare la crittografia**: Usa firme digitali per verificare gli aggiornamenti [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
+-   **Impostare la crittografia**: Utilizza firme digitali per verificare gli aggiornamenti [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
     
--   **Ottimizzare la distribuzione degli aggiornamenti**: Considera strumenti come Capgo per aggiornamenti fluidi in background.
+-   **Snellire la consegna degli aggiornamenti**: Considera strumenti come Capgo per aggiornamenti fluidi in background.
     
--   **Preparare sistemi di fallback**: Assicurati che l'app rimanga funzionale anche se un aggiornamento fallisce [\[9\]](https://dzone.com/articles/why-device-firmware-updates-are-critical-to-produc).
+-   **Preparare sistemi di fallback**: Assicurati che l'app rimanga funzionante anche se un aggiornamento fallisce [\[9\]](https://dzone.com/articles/why-device-firmware-updates-are-critical-to-produc).

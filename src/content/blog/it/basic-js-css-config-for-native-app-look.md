@@ -1,30 +1,32 @@
 ---
 slug: basic-js-css-config-for-native-app-look
-title: Configuraciones básicas de JS y CSS para un aspecto de aplicación nativa
+title: >-
+  Configuraciones básicas de JS y CSS para la apariencia de una aplicación
+  nativa
 description: >-
-  호버 효과 비활성화를 포함하여 웹 앱이 네이티브 앱처럼 보이고 느껴지도록 기본 JavaScript와 CSS 설정으로 구성하는 방법을
-  알아보세요.
+  Aprenda a configurar seu aplicativo da web com configurações básicas de
+  JavaScript e CSS para torná-lo parecido e com a sensação de um aplicativo
+  nativo, incluindo a desativação de efeitos de hover.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2023-06-05T00:00:00.000Z
 head_image: /native_app_look.webp
-head_image_alt: Illustrazione dell'aspetto di un'app nativa
+head_image_alt: Illustration de l'apparence d'une application native
 keywords: 'tailwind css, css, mobile design, mobile app development'
 tag: Web Development
 published: true
 locale: it
 next_blog: ''
 ---
+# Configurações Básicas de JS e CSS para Aparência de App Nativo
 
-# Configurazioni di base JS e CSS per un aspetto da App Nativa
+Ao construir um aplicativo web, é essencial fazê-lo parecer e sentir como um aplicativo nativo para proporcionar uma experiência de usuário contínua. Neste artigo, cobriremos as configurações básicas de JavaScript e CSS necessárias para alcançar uma aparência de aplicativo nativo, incluindo a desativação dos efeitos de hover.
 
-Quando si costruisce un'app web, è essenziale farla apparire e comportare come un'app nativa per fornire un'esperienza utente fluida. In questo articolo, tratteremo le configurazioni base JavaScript e CSS necessarie per ottenere un aspetto da app nativa, inclusa la disattivazione degli effetti hover.
+## Desativar Efeitos de Hover
 
-## Disattivare gli Effetti Hover
-
-Sui dispositivi touch, gli effetti hover possono essere problematici poiché non hanno un vero stato hover come i dispositivi desktop. Per disattivare gli effetti hover sui dispositivi touch, puoi utilizzare il seguente codice CSS:
+Em dispositivos de toque, os efeitos de hover podem ser problemáticos, pois não possuem um estado de hover verdadeiro como os dispositivos desktop. Para desativar os efeitos de hover em dispositivos de toque, você pode usar o seguinte código CSS:
 
 ```css
 @media (hover: none) {
@@ -37,11 +39,11 @@ Sui dispositivi touch, gli effetti hover possono essere problematici poiché non
 }
 ```
 
-Sostituisci `element` con il selettore appropriato per gli elementi su cui vuoi disattivare gli effetti hover.
+Substitua `.element` pelo seletor apropriado para os elementos nos quais você deseja desativar os efeitos de hover.
 
-## Disattivare l'Anteprima dei Link
+## Desativar Pré-visualização de Links
 
-Per disattivare l'anteprima dei link sui dispositivi touch, puoi utilizzare il seguente codice JavaScript:
+Para desativar a pré-visualização de links em dispositivos de toque, você pode usar o seguinte código JavaScript:
 
 ```javascript
 document.addEventListener('touchstart', function(event) {
@@ -51,9 +53,9 @@ document.addEventListener('touchstart', function(event) {
 });
 ```
 
-## Disattivare la Selezione
+## Desativar Seleção
 
-Per disattivare la selezione del testo, aggiungi il seguente codice CSS al tuo foglio di stile:
+Para desativar a seleção de texto, adicione o seguinte código CSS ao seu stylesheet:
 
 ```css
 body {
@@ -66,17 +68,17 @@ body {
 }
 ```
 
-## Disattivare lo Zoom
+## Desativar Zoom
 
-Per disattivare lo zoom, aggiungi il seguente meta tag all'head del tuo file HTML:
+Para desativar o zoom, adicione a seguinte meta tag ao cabeçalho do seu arquivo HTML:
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 ```
 
-## Aggiungere una Zona CSS Sicura
+## Adicionar Zona Segura de CSS
 
-Per assicurarti che il tuo contenuto sia visualizzato all'interno dell'area sicura del dispositivo, aggiungi il seguente codice CSS al tuo foglio di stile:
+Para garantir que seu conteúdo seja exibido dentro da área segura do dispositivo, adicione o seguinte código CSS ao seu stylesheet:
 
 ```css
 body {
@@ -84,10 +86,10 @@ body {
 }
 ```
 
-## Suggerimenti Aggiuntivi
+## Dicas Adicionais
 
-1. Usa tecniche di design responsive per assicurarti che la tua app appaia ottimale su tutti i dispositivi
-2. Ottimizza le prestazioni della tua app minimizzando l'uso di librerie e framework JavaScript pesanti
-3. Testa la tua app su vari dispositivi e browser per garantire compatibilità e un'esperienza utente coerente
+- Use técnicas de design responsivo para garantir que seu aplicativo tenha uma ótima aparência em todos os dispositivos.
+- Otimize o desempenho do seu aplicativo minimizando o uso de bibliotecas e frameworks JavaScript pesados.
+- Teste seu aplicativo em vários dispositivos e navegadores para garantir compatibilidade e uma experiência de usuário consistente.
 
-Seguendo queste configurazioni base JavaScript e CSS, puoi creare un'app web che appare e si comporta come un'app nativa, fornendo un'esperienza utente fluida e piacevole.
+Seguindo essas configurações básicas de JavaScript e CSS, você pode criar um aplicativo web que pareça e sinta como um aplicativo nativo, proporcionando uma experiência de usuário contínua e agradável.

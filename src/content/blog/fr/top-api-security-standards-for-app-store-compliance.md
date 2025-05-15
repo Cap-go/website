@@ -1,10 +1,10 @@
 ---
-slug: >-
-  estándares-de-seguridad-de-las-api-principales-para-la-conformidad-con-la-app-store
-title: Standar Keamanan API Utama untuk Kepatuhan App Store
+slug: top-api-security-standards-for-app-store-compliance
+title: Normes de sécurité des API de premier plan pour la conformité de l'App Store
 description: >-
-  Pelajari standar keamanan API utama untuk memastikan aplikasi Anda memenuhi
-  persyaratan App Store sambil melindungi data pengguna.
+  Apprenez les normes de sécurité API essentielles pour garantir que votre
+  application respecte les exigences des magasins d'applications tout en
+  protégeant les données des utilisateurs.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -12,7 +12,7 @@ created_at: 2025-04-24T01:52:28.048Z
 updated_at: 2025-04-24T01:52:43.928Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78-1745459563928.jpg
-head_image_alt: Pengembangan Mobile
+head_image_alt: Développement mobile
 keywords: >-
   API security, OAuth 2.0, OpenID Connect, TLS, JWT, app store compliance, user
   data protection
@@ -21,186 +21,186 @@ published: true
 locale: fr
 next_blog: ''
 ---
-La sécurisation de l'API de votre application est essentielle pour répondre aux exigences de l'App Store d'Apple et de Google Play. Ce guide présente **cinq normes de sécurité API clés** pour vous aider à respecter les règles des plateformes, protéger les données des utilisateurs et améliorer les performances des applications.
+Sécuriser l'API de votre application est essentiel pour répondre aux exigences de l'App Store d'Apple et de Google Play. Ce guide décrit **cinq normes clés de sécurité API** pour vous aider à vous conformer aux règles de la plateforme, protéger les données des utilisateurs et améliorer les performances de l'application.
 
-### Points clés :
+### Points Clés :
 
--   **[OAuth 2.0](https://oauth.net/2/)** : Authentification sécurisée des utilisateurs avec accès par jeton.
--   **[OpenID Connect](https://de.wikipedia.org/wiki/OpenID_Connect)** : Ajout d'une couche d'identité pour une vérification utilisateur renforcée.
--   **TLS/SSL** : [Chiffrement des données](https://capgo.app/docs/cli/migrations/encryption/) en transit pour empêcher les manipulations.
--   **Sécurité JWT** : Protection des jetons avec signature et stockage appropriés.
--   **Contrôles du taux d'API** : Protection des API contre les abus avec des limites de requêtes.
+-   **[OAuth 2.0](https://oauth.net/2/)** : Authentification utilisateur sécurisée avec accès basé sur des jetons.
+-   **[OpenID Connect](https://de.wikipedia.org/wiki/OpenID_Connect)** : Ajoutez une couche d'identité pour une vérification utilisateur améliorée.
+-   **TLS/SSL** : [Chiffrez les données](https://capgo.app/docs/cli/migrations/encryption/) en transit pour éviter toute falsification.
+-   **Sécurité JWT** : Protégez les jetons avec une signature et un stockage appropriés.
+-   **Contrôles de Taux d'API** : Protégez les API contre les abus avec des limites de requêtes.
 
-En mettant en œuvre ces normes, vous vous assurerez que votre [application Capacitor](https://capgo.app/plugins/ivs-player/) répond aux critères d'approbation tout en protégeant les données des utilisateurs. Prêt à approfondir ? Décomposons étape par étape.
+En mettant en œuvre ces normes, vous vous assurez que votre [application Capacitor](https://capgo.app/plugins/ivs-player/) répond aux critères d'approbation tout en maintenant la sécurité des données utilisateurs. Prêt à aller plus loin ? Décomposons cela étape par étape.
 
-## Sécuriser la clé API dans l'application frontale à l'aide d'un serveur proxy et de l'utilisateur...
+## Clé d'API Sécurisée dans l'Application Front End utilisant un Serveur Proxy & Utilisateur ...
 
 <iframe src="https://www.youtube.com/embed/-HJeBV70zIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## 1. Mise en œuvre de [OAuth 2.0](https://oauth.net/2/)
+## 1. [Implémentation OAuth 2.0](https://oauth.net/2/)
 
 ![OAuth 2.0](https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78/d1868b22bd285dedc49624e0c0ea2ab6.jpg)
 
-OAuth 2.0 est un protocole largement utilisé pour autoriser en toute sécurité les applications mobiles. Il permet aux applications tierces d'accéder aux ressources des utilisateurs sans exposer les informations d'identification sensibles. Les plateformes comme Apple et Google exigent une authentification sécurisée conforme aux normes, et OAuth 2.0 répond à ces exigences grâce à la sécurité basée sur les jetons et l'accès contrôlé aux API.
+OAuth 2.0 est un protocole largement utilisé pour autoriser en toute sécurité les applications mobiles. Il permet aux applications tierces d'accéder aux ressources des utilisateurs sans exposer les informations d'identification sensibles. Les plateformes comme Apple et Google exigent une authentification sécurisée et conforme aux normes, et OAuth 2.0 répond à ces exigences grâce à une sécurité basée sur des jetons et un accès API contrôlé.
 
 Voici comment configurer OAuth 2.0 dans votre application Capacitor :
 
-### Flux d'autorisation clés
+### Flux d'Autorisation Clés
 
--   **Code d'autorisation avec PKCE (Proof Key for Code Exchange)** : Le flux le plus sécurisé, idéal pour les applications mobiles.
--   **Flux implicite** : À utiliser uniquement si nécessaire pour les systèmes plus anciens.
--   **Identifiants client** : Pour la communication de service à service.
+-   **Code d'Autorisation avec PKCE (Proof Key for Code Exchange)** : Le flux le plus sécurisé, idéal pour les applications mobiles.
+-   **Flux Implicite** : À utiliser uniquement si nécessaire pour des systèmes plus anciens.
+-   **Identifiants du Client** : Pour la communication de service à service.
 
-### Étapes d'intégration
+### Étapes d'Intégration
 
-1.  **Gestion des jetons**
+1.  **Gestion des Jetons**
     
-    -   Récupérer les jetons en toute sécurité.
-    -   Stocker les jetons dans un [stockage chiffré](https://capgo.app/docs/cli/migrations/encryption/) pour empêcher tout accès non autorisé.
-    -   Automatiser l'actualisation des jetons pour assurer un accès ininterrompu.
-    -   Valider les signatures des jetons pour confirmer l'authenticité.
-2.  **Mesures de sécurité**
+    -   Récupérez les jetons de manière sécurisée.
+    -   Stockez les jetons dans un [stockage encrypté](https://capgo.app/docs/cli/migrations/encryption/) pour prévenir tout accès non autorisé.
+    -   Automatisez le rafraîchissement des jetons pour garantir un accès ininterrompu.
+    -   Validez les signatures des jetons pour confirmer leur authenticité.
+2.  **Mesures de Sécurité**
     
-    -   Limiter l'accès en configurant les portées.
-    -   Définir les délais d'expiration des jetons pour réduire les risques.
-    -   Appliquer la limitation du débit pour prévenir les abus.
-    -   Surveiller les tentatives d'authentification pour détecter les activités suspectes.
-3.  **Conformité App Store**
+    -   Limitez l'accès en configurant les portées.
+    -   Définissez des temps d'expiration des jetons pour réduire les risques.
+    -   Appliquez une limitation de taux pour prévenir les abus.
+    -   Surveillez les tentatives d'authentification pour détecter des activités suspectes.
+3.  **Conformité à l'App Store**
     
-    -   Utiliser des fournisseurs OAuth approuvés par Apple.
-    -   Respecter les directives de sécurité de Google Play.
-    -   Documenter clairement les flux d'authentification de votre application.
-    -   Conserver les journaux d'audit pour examen et dépannage.
+    -   Utilisez des fournisseurs OAuth approuvés par Apple.
+    -   Respectez les directives de sécurité de Google Play.
+    -   Documentez clairement les flux d'authentification de votre application.
+    -   Conservez des journaux d'audit pour révision et dépannage.
 
-Pour une protection accrue, envisagez de superposer OAuth 2.0 avec d'autres méthodes d'authentification. Cette approche protège non seulement les données sensibles des utilisateurs, mais aide également à sécuriser les points d'accès API, assurant la conformité aux exigences de la plateforme [\[1\]](https://capgo.app/)\[2\].
+Pour une protection supplémentaire, envisagez de superposer OAuth 2.0 avec d'autres méthodes d'authentification. Cette approche non seulement protège les données sensibles des utilisateurs, mais aide également à sécuriser les points de terminaison API, garantissant la conformité aux exigences de la plateforme [\[1\]](https://capgo.app/)\[2\].
 
-## 2. Configuration [OpenID Connect](https://de.wikipedia.org/wiki/OpenID_Connect)
+## 2. [Configuration OpenID Connect](https://de.wikipedia.org/wiki/OpenID_Connect)
 
-OpenID Connect s'appuie sur OAuth 2.0 en ajoutant une couche d'identité pour garantir une authentification sécurisée des utilisateurs.
+OpenID Connect s'appuie sur OAuth 2.0 en ajoutant une couche d'identité pour assurer une authentification utilisateur sécurisée.
 
-### Étapes clés de mise en œuvre
+### Étapes Clés de Mise en Œuvre
 
-1.  **Paramètres du jeton d'identité**
+1.  **Paramètres de Jeton d'Identité**
     
-    -   Définir les portées comme `openid`, `profile` et `email`.
-    -   Définir la durée de vie des jetons d'accès entre 15 et 30 minutes.
-    -   Activer la rotation des jetons d'actualisation pour une sécurité renforcée.
-2.  **Processus d'authentification utilisateur**
+    -   Définissez des portées comme `openid`, `profile`, et `email`.
+    -   Définissez des durées de vie des jetons d'accès entre 15 et 30 minutes.
+    -   Activez la rotation des jetons de rafraîchissement pour une sécurité accrue.
+2.  **Processus d'Authentification de l'Utilisateur**
     
-    -   Utiliser l'authentification native via les navigateurs système et la biométrie des appareils.
-    -   Stocker les jetons en toute sécurité dans un stockage chiffré.
-    -   Toujours valider les jetons côté serveur.
-3.  **Gestion des revendications**
+    -   Utilisez l'authentification native via les navigateurs systèmes et les biométriques des appareils.
+    -   Stockez les jetons de manière sécurisée dans un stockage encrypté.
+    -   Validez toujours les jetons du côté serveur.
+3.  **Gestion des Revendications**
     
-    -   Ne demander que les informations utilisateur dont vous avez réellement besoin.
-    -   Mettre en œuvre une gestion appropriée des sessions pour maintenir la sécurité.
+    -   Demandez uniquement les informations utilisateur dont vous avez réellement besoin.
+    -   Mettez en place une gestion des sessions appropriée pour maintenir la sécurité.
 
-### Directives spécifiques aux plateformes
+### Directives Spécifiques à la Plateforme
 
 **Pour iOS :**
 
--   Utiliser **ASWebAuthenticationSession** pour une authentification sécurisée.
--   Prendre en charge **Sign in with Apple** si nécessaire.
--   Stocker les jetons en toute sécurité à l'aide du trousseau.
--   Activer l'épinglage de certificat pour une protection accrue.
+-   Utilisez **ASWebAuthenticationSession** pour une authentification sécurisée.
+-   Prévoyez **Se connecter avec Apple** si nécessaire.
+-   Stockez les jetons de manière sécurisée à l'aide du trousseau.
+-   Activez le pinning de certificat pour une protection supplémentaire.
 
 **Pour Android :**
 
--   Utiliser **Chrome Custom Tabs** pour les flux d'authentification.
--   Sécuriser les identifiants avec le keystore Android.
--   Intégrer **Google Sign-In** le cas échéant.
--   Activer l'attestation **[SafetyNet](https://developers.google.com/android/reference/com/google/android/gms/safetynet/SafetyNetApi)** pour une sécurité supplémentaire.
+-   Utilisez **Chrome Custom Tabs** pour les flux d'authentification.
+-   Sécurisez les informations d'identification avec le keystore Android.
+-   Intégrez **Google Sign-In** lorsque c'est applicable.
+-   Activez **[SafetyNet](https://developers.google.com/android/reference/com/google/android/gms/safetynet/SafetyNetApi) attestation** pour une sécurité supplémentaire.
 
-### Meilleures pratiques de sécurité
+### Bonnes Pratiques de Sécurité
 
--   Mettre en œuvre des processus de déconnexion pour effacer efficacement les sessions.
--   Utiliser des paramètres d'état pour se protéger contre les attaques CSRF.
--   Activer **HTTP Strict Transport Security (HSTS)** pour des connexions sécurisées.
--   Surveiller les tentatives d'authentification pour détecter les comportements suspects.
+-   Mettez en œuvre des processus de déconnexion efficaces pour effacer les sessions.
+-   Utilisez des paramètres d'état pour vous protéger contre les attaques CSRF.
+-   Activez **HTTP Strict Transport Security (HSTS)** pour des connexions sécurisées.
+-   Surveillez les tentatives d'authentification pour détecter un comportement suspect.
 
 Enfin, assurez-vous que tous les échanges d'authentification sont protégés en transit en appliquant TLS/SSL.
 
 ## 3. Sécurité TLS/SSL
 
-TLS/SSL garantit que vos données restent chiffrées pendant leur transmission. TLS (Transport Layer Security) protège le trafic API, le mettant à l'abri des écoutes ou des manipulations.
+TLS/SSL garantit que vos données restent chiffrées pendant leur transmission. TLS (Transport Layer Security) protège le trafic API, le gardant à l'abri de l'écoute ou de la falsification.
 
-### Pratiques de sécurité clés
+### Pratiques de Sécurité Clés
 
--   Utiliser **TLS v1.2 ou supérieur** pour toutes les communications API. Cela maintient les jetons OAuth et les assertions d'identité OpenID privés entre le client et le serveur.
--   Appliquer **l'épinglage de certificat** pour les applications iOS et Android.
--   Activer **HTTP Strict Transport Security (HSTS)** sur vos serveurs pour imposer des connexions sécurisées.
+-   Utilisez **TLS v1.2 ou supérieur** pour toutes les communications API. Cela garde privés les jetons OAuth et les assertions d'identité OpenID entre le client et le serveur.
+-   Appliquez le **pinning de certificat** pour les applications iOS et Android.
+-   Activez **HTTP Strict Transport Security (HSTS)** sur vos serveurs pour imposer des connexions sécurisées.
 
 ### Configuration Capacitor
 
-Configurez le plugin HTTP de Capacitor ou WKWebView/NSSecureTransport pour bloquer les certificats invalides. Pour les mises à jour en direct, des outils comme Capgo offrent un chiffrement de bout en bout qui répond aux directives d'Apple et de Google [\[1\]](https://capgo.app/).
+Configurez le plugin HTTP de Capacitor ou WKWebView/NSSecureTransport pour bloquer les certificats non valides. Pour les mises à jour en direct, des outils comme Capgo offrent un cryptage de bout en bout qui respecte les directives d'Apple et de Google [\[1\]](https://capgo.app/).
 
-## 4. Mesures de sécurité JWT
+## 4. Mesures de Sécurité JWT
 
-Les JSON Web Tokens (JWT) sont essentiels pour sécuriser les communications API, en particulier pour assurer la conformité aux exigences de l'App Store. Ils améliorent votre configuration OAuth 2.0 et OpenID Connect en se concentrant sur la sécurité des jetons eux-mêmes.
+Les JSON Web Tokens (JWT) sont essentiels pour sécuriser les communications API, en particulier pour assurer la conformité aux exigences des magasins d'applications. Ils améliorent votre configuration OAuth 2.0 et OpenID Connect en se concentrant sur la sécurité des jetons eux-mêmes.
 
-### Directives de signature des jetons
+### Directives de Signature des Jetons
 
--   Utiliser **asymmetric RS256 (RSA-SHA256)** pour signer les jetons, et faire pivoter les clés privées tous les 90 jours.
--   Stocker les JWT dans un **[stockage sécurisé chiffré](https://capgo.app/docs/cli/migrations/encryption/)** pour empêcher tout accès non autorisé.
--   Valider les éléments clés tels que la **signature**, l'**émetteur (iss)**, l'**audience (aud)** et l'**expiration**.
--   Garder la charge utile minimale - inclure uniquement les revendications nécessaires, ajouter un identifiant unique (_jti_) et éviter les données sensibles.
+-   Utilisez **RS256 asymétrique (RSA-SHA256)** pour signer les jetons et faites tourner les clés privées tous les 90 jours.
+-   Stockez les JWT dans un **[stockage sécurisé encrypté](https://capgo.app/docs/cli/migrations/encryption/)** pour prévenir tout accès non autorisé.
+-   Validez les éléments clés tels que la **signature**, **éméteur (iss)**, **auditoire (aud)**, et **expiration**.
+-   Gardez la charge utile minimale - incluez uniquement les revendications nécessaires, ajoutez un identifiant unique (_jti_), et évitez les données sensibles.
 
-### Gestion des cycles de vie des jetons
+### Gestion des Cycles de Vie des Jetons
 
--   Actualiser les jetons **5 minutes avant leur expiration** pour assurer un accès ininterrompu.
--   Maintenir une **liste de révocation** (par exemple, en utilisant [Redis](https://redis.io/)) pour invalider immédiatement les jetons compromis.
+-   Rafraîchissez les jetons **5 minutes avant leur expiration** pour garantir un accès ininterrompu.
+-   Maintenez une **liste de révocation** (par exemple, en utilisant [Redis](https://redis.io/)) pour invalider immédiatement les jetons compromis.
 
-### Gestion des erreurs
+### Gestion des Erreurs
 
-En cas d'erreur, renvoyer des **messages d'erreur génériques** comme `invalid_token` pour éviter d'exposer les détails de validation.
+Lorsqu'une erreur se produit, retournez des **messages d'erreur génériques** tels que `invalid_token` pour éviter d'exposer des détails de validation.
 
-### Conformité App Store
+### Conformité à l'App Store
 
-Pour les exigences spécifiques à l'App Store, assurez-vous que votre implémentation JWT :
+Pour les exigences spécifiques aux magasins d'applications, assurez-vous que votre implémentation JWT :
 
--   Respecte les **directives de stockage du trousseau** de la plateforme.
--   Inclut une **journalisation d'audit** appropriée pour toutes les opérations liées aux jetons.
+-   Respecte les **directives de stockage dans le trousseau** de la plateforme.
+-   Inclut une **journalisation des audits** appropriée pour toutes les opérations liées aux jetons.
 
-## 5. Contrôles du taux d'API
+## 5. Contrôles de Taux d'API
 
-La gestion de la fréquence à laquelle les utilisateurs peuvent accéder à votre API est tout aussi importante que sa sécurisation. Les limites de taux aident à prévenir les abus, à protéger contre les attaques DDoS et à garantir que les ressources sont partagées équitablement entre les utilisateurs.
+Gérer la fréquence à laquelle les utilisateurs peuvent accéder à votre API est tout aussi important que de la sécuriser. Les limites de taux aident à prévenir les abus, protègent contre les attaques DDoS, et garantissent que les ressources sont partagées équitablement entre les utilisateurs.
 
-### Stratégies de limitation de taux
+### Stratégies de Limitation de Taux
 
 Une fois vos jetons sécurisés, il est temps de décider combien de requêtes chaque client peut effectuer.
 
-**Limites de requêtes**
+**Limites de Requêtes**
 
--   Restreindre les requêtes basées sur les adresses IP
--   Définir des quotas par utilisateur liés aux clés API
--   Autoriser des pics occasionnels pour gérer les pics de trafic
+-   Restreignez les requêtes en fonction des adresses IP.
+-   Définissez des quotas par utilisateur liés aux clés API.
+-   Autorisez des pointes occasionnelles pour gérer les pics de trafic.
 
-**Limites basées sur le temps**
+**Limites Basées sur le Temps**
 
--   _Fenêtre fixe_ : Réinitialise les limites à intervalles réguliers (par exemple, toutes les minutes ou heures)
--   _Fenêtre glissante_ : Suit l'utilisation sur une période de temps variable
--   _Token bucket_ : Émet des jetons pour les requêtes, réapprovisionnés au fil du temps
+-   _Fenêtre fixe_ : Réinitialise les limites à intervalles réguliers (par exemple, chaque minute ou heure).
+-   _Fenêtre glissante_ : Suit l'utilisation sur une période de temps glissante.
+-   _Seau de jetons_ : Émet des jetons pour les requêtes, reconstitués au fil du temps.
 
-### Directives de mise en œuvre
+### Directives de Mise en Œuvre
 
-**En-têtes et codes de réponse**
+**En-têtes et Codes de Réponse**
 
 Lors de l'application des limites, incluez des en-têtes utiles dans vos réponses :
 
--   Utiliser HTTP 429 ("Too Many Requests") lorsque les limites sont dépassées
--   Ajouter des en-têtes comme `X-RateLimit-Limit`, `X-RateLimit-Remaining` et `X-RateLimit-Reset` pour tenir les utilisateurs informés
--   Inclure un en-tête `Retry-After` pour indiquer quand ils peuvent réessayer
+-   Utilisez le code HTTP 429 ("Trop de Requêtes") lorsque les limites sont dépassées.
+-   Ajoutez des en-têtes tels que `X-RateLimit-Limit`, `X-RateLimit-Remaining`, et `X-RateLimit-Reset` pour tenir les utilisateurs informés.
+-   Incluez un en-tête `Retry-After` pour indiquer quand ils peuvent réessayer.
 
-### Surveillance et alertes
+### Surveillance et Alertes
 
 Surveillez l'utilisation de votre API avec ces étapes :
 
--   Surveiller l'utilisation de l'API en temps réel pour repérer les modèles
--   Identifier et bloquer les activités suspectes
--   Configurer des alertes pour les pics de trafic inhabituels
--   Enregistrer les violations de limite de taux pour analyse future
+-   Surveillez l'utilisation de l'API en temps réel pour repérer les tendances.
+-   Identifiez et bloquez les activités suspectes.
+-   Configurez des alertes pour des pics de trafic inhabituel.
+-   Enregistrez les violations de limite de taux pour une analyse future.
 
-### Exemple de réponse d'erreur
+### Exemple de Réponse d'Erreur
 
 Lorsqu'un client dépasse la limite de taux, répondez avec un message JSON clair. Par exemple :
 
@@ -212,149 +212,150 @@ Lorsqu'un client dépasse la limite de taux, répondez avec un message JSON clai
 }
 ```
 
-### Stockage des limites de taux
+### Stockage de Limitation de Taux
 
-Pour appliquer efficacement les limites de taux, utilisez un cache distribué comme Redis ou [Memcached](https://memcached.org/). Ces systèmes aident à suivre le nombre de requêtes sur plusieurs instances tout en maintenant des performances élevées.
+Pour appliquer les limites de taux efficacement, utilisez un cache distribué comme Redis ou [Memcached](https://memcached.org/). Ces systèmes aident à suivre les comptes de requêtes à travers plusieurs instances tout en maintenant une performance élevée.
 
-Suivant : Règles de sécurité de l'App Store.
+Suivant : Règles de Sécurité de l'App Store.
 
-## Règles de sécurité de l'App Store
+## Règles de Sécurité de l'App Store
 
-Examinons les exigences de sécurité réseau et de stockage imposées par Apple et Google. Ces règles vont au-delà des jetons OAuth et des limites de taux, garantissant que votre application répond aux normes de la plateforme.
+Plongeons dans les exigences de sécurité réseau et de stockage imposées par Apple et Google. Ces règles vont au-delà des jetons OAuth et des limites de taux, assurant que votre application respecte les normes de la plateforme.
 
 ### Exigences iOS
 
 -   **App Transport Security (ATS)** doit être activé :
     -   TLS 1.2 ou plus récent
-    -   Perfect Forward Secrecy (PFS)
+    -   Secret de Transmission Parfait (PFS)
     -   Certificats avec au moins SHA-256
--   Protéger les données sensibles à l'aide du trousseau.
--   Configurer l'épinglage de certificat pour une communication sécurisée.
--   Chiffrer toutes les données locales.
+-   Protégez les données sensibles à l'aide du Trousseau.
+-   Configurez le pinning de certificat pour une communication sécurisée.
+-   Chiffrez toutes les données locales.
 
 ### Exigences Android
 
--   Utiliser **Network Security Config** pour :
+-   Utilisez **Network Security Config** pour :
     -   Restreindre le trafic en texte clair.
-    -   Définir les règles d'épinglage de certificat.
+    -   Définir des règles de pinning de certificat.
     -   Spécifier des autorités de certification personnalisées si nécessaire.
--   Chiffrer les fichiers en toute sécurité.
--   Configurer l'attestation SafetyNet pour les vérifications d'intégrité des appareils.
--   Utiliser le Android Keystore pour une gestion sécurisée des clés.
+-   Chiffrez les fichiers de manière sécurisée.
+-   Configurez SafetyNet attestation pour les contrôles d'intégrité des appareils.
+-   Utilisez le Keystore Android pour une gestion sécurisée des clés.
 
-### Règles communes aux plateformes
+### Règles Communes aux Plateformes
 
-Les deux plateformes partagent plusieurs exigences de sécurité clés :
+Les deux plateformes partagent plusieurs exigences clés en matière de sécurité :
 
--   Utiliser HTTPS pour toutes les connexions.
--   Valider correctement les certificats.
--   S'assurer que les paramètres SSL/TLS sont configurés de manière sécurisée.
--   Protéger le stockage local avec le chiffrement.
--   Conserver des journaux d'audit détaillés.
--   Fournir la documentation de vos mesures de sécurité.
+-   Utilisez HTTPS pour toutes les connexions.
+-   Validez correctement les certificats.
+-   Assurez-vous que les paramètres SSL/TLS sont configurés de manière sécurisée.
+-   Protégez le stockage local par chiffrement.
+-   Conservez des journaux d'audit détaillés.
+-   Fournissez une documentation de vos mesures de sécurité.
 
-## Méthodes de Contrôle d'Accès à l'API
+## Méthodes de Contrôle d'Accès API
 
-La protection de vos points d'accès API va au-delà de la simple sécurisation du transport et des jetons. Des contrôles d'accès précis sont essentiels pour garantir la sécurité de votre API.
+Protéger vos endpoints API dépasse la simple sécurisation du transport de la plateforme et des tokens. Des contrôles d'accès minutieusement réglés sont essentiels pour garantir que votre API reste sécurisée.
 
-### Méthodes Principales de Contrôle d'Accès
+### Méthodes Clés de Contrôle d'Accès
 
--   **Validation des Clés API**  
-    Utilisez des clés cryptographiquement sécurisées avec des dates d'expiration définies. Automatisez la rotation des clés tous les 90 jours et imposez des limites de taux et des quotas d'utilisation par clé. Enregistrez toujours l'utilisation des clés à des fins d'audit. Cette méthode fonctionne bien avec OAuth 2.0 pour les appels de service à service.
+-   **Validation de Clé API**  
+    Utilisez des clés cryptographiquement sécurisées avec des dates d'expiration définies. Automatisez la rotation des clés tous les 90 jours et imposez des limites de débit et des quotas d'utilisation par clé. Enregistrez toujours l'utilisation des clés à des fins d'audit. Cette méthode fonctionne bien avec OAuth 2.0 pour les appels service à service.
     
--   **Application des Périmètres OAuth**  
-    Attribuez des périmètres spécifiques aux autorisations API et validez-les à chaque requête. Rejetez toute demande sans autorisation appropriée et documentez clairement les exigences de périmètre pour les examens de l'app store. L'association des périmètres aux revendications JWT peut aider à restreindre davantage l'accès.
+-   **Application des Scopes OAuth**  
+    Assignez des scopes spécifiques aux autorisations API et validez-les à chaque requête. Rejetez toute requête manquant d'une autorisation appropriée et documentez clairement les exigences de scope pour les revues des magasins d'applications. Associer les scopes avec des claims JWT peut aider à restreindre encore davantage l'accès.
     
 -   **Contrôle d'Accès Basé sur les Rôles (RBAC)**  
-    Définissez des rôles avec des permissions précises et attribuez-les via votre système d'authentification. Vérifiez les autorisations de rôle pour chaque appel API et stockez en toute sécurité les attributions de rôles dans un stockage chiffré.
+    Définissez des rôles avec des permissions précises et assignez-les via votre système d'authentification. Vérifiez les autorisations de rôle pour chaque appel API et stockez en toute sécurité les assignments de rôle dans un stockage chiffré.
     
--   **Introspection et Révocation des Jetons**  
-    Effectuez une validation des jetons en temps réel et maintenez une liste noire centralisée pour les jetons compromis. Permettez la révocation immédiate et configurez une surveillance pour signaler les activités suspectes des jetons.
+-   **Introspection & Révocation de Tokens**  
+    Effectuez une validation en temps réel des tokens et maintenez une liste noire centralisée pour les tokens compromis. Autorisez la révocation immédiate et mettez en place une surveillance pour signaler des activités suspectes de tokens.
+    
 
-### Conformité aux Plateformes
+### Conformité à la Plateforme
 
-Pour l'approbation sur des plateformes comme l'App Store d'Apple ou Google Play :
+Pour obtenir une approbation sur des plateformes comme l'App Store d'Apple ou Google Play :
 
--   Documentez clairement vos méthodes de contrôle d'accès lors des examens de sécurité.
--   Gérez les requêtes non autorisées avec des réponses d'erreur appropriées.
+-   Documentez clairement vos méthodes de contrôle d'accès lors des revues de sécurité.
+-   Gérez les demandes non autorisées avec des réponses d'erreur appropriées.
 -   Conservez des journaux d'accès détaillés à des fins d'audit.
 -   Activez la surveillance en temps réel pour traiter rapidement les incidents de sécurité.
 
-Ces mesures s'alignent sur les directives de sécurité d'Apple et de Google, garantissant que votre API répond à leurs normes.
+Ces mesures sont en accord avec les directives de sécurité d'Apple et de Google, garantissant que votre API respecte leurs normes.
 
 ## Outils de Sécurité API pour Capacitor
 
-Une fois les contrôles d'accès configurés, l'étape suivante consiste à intégrer des outils qui implémentent ces protections dans votre flux de travail Capacitor. Les outils prenant en charge OAuth, TLS et les protocoles JWT sont essentiels pour sécuriser les applications Capacitor tout en garantissant des mises à jour fluides.
+Une fois que vous avez mis en place des contrôles d'accès, l'étape suivante consiste à intégrer des outils qui mettent en œuvre ces protections dans votre flux de travail Capacitor. Les outils qui prennent en charge OAuth, TLS et les protocoles JWT sont essentiels pour sécuriser les applications Capacitor tout en garantissant des mises à jour fluides.
 
-### Fonctionnalités de Sécurité Essentielles à Rechercher
+### Caractéristiques de Sécurité Clés à Rechercher
 
-Les outils de sécurité efficaces pour Capacitor doivent inclure :
+Les outils de sécurité efficaces pour Capacitor devraient inclure :
 
 -   **Chiffrement de bout en bout** pour protéger les données et permettre des mises à jour instantanées
--   **Analyses et suivi des erreurs** pour surveiller les performances et les problèmes
--   **Fonctionnalité de retour arrière** pour des corrections rapides
+-   **Analyse et suivi des erreurs** pour surveiller la performance et les problèmes de l'application
+-   **Fonctionnalité de retour en arrière** pour des corrections rapides
 -   **Intégration CI/CD** et options d'hébergement flexibles
--   **Vérifications de conformité à l'app store** pour répondre aux exigences de la plateforme
+-   **Vérifications de conformité aux magasins d'applications** pour répondre aux exigences de la plateforme
 -   **Capacités de déploiement progressif** pour des mises à jour contrôlées
--   **Retours de version instantanés** pour résoudre les problèmes critiques
+-   **Revertissements de version instantanés** pour résoudre des problèmes critiques
 -   **Contrôle ciblé des utilisateurs** pour des mises à jour personnalisées
 
-### Meilleur Choix : [Capgo](https://capgo.app/)
+### Choix Principal : [Capgo](https://capgo.app/)
 
 ![Capgo](https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78/29f394e74984c052f31714ba4759b80a.jpg)
 
-Capgo est un outil remarquable pour gérer les mises à jour en direct dans les applications Capacitor tout en restant conforme aux directives d'Apple et Google. Il affiche un taux de réussite global de mise à jour de 82% et un impressionnant temps de réponse API moyen de 434 ms [\[1\]](https://capgo.app/).
+Capgo est un outil remarquable pour gérer les mises à jour en direct dans les applications Capacitor tout en restant conforme aux directives d'Apple et de Google. Il affiche un taux de succès de mise à jour mondial de 82 % et un temps de réponse API moyen impressionnant de 434 ms [\[1\]](https://capgo.app/).
 
 ### Métriques de Performance
 
 Capgo assure des mises à jour rapides et efficaces :
 
--   **95% des utilisateurs** reçoivent les mises à jour dans les 24 heures
--   Utilisé par **plus de 1 900 applications** en production dans le monde [\[1\]](https://capgo.app/)
+-   **95 % des utilisateurs** reçoivent des mises à jour dans les 24 heures
+-   Fiable pour **plus de 1 900 applications en production** dans le monde entier [\[1\]](https://capgo.app/)
 
 ### Surveillance et Analytique
 
-Pour maintenir les performances et la conformité de l'application, concentrez-vous sur le suivi de ces métriques :
+Pour maintenir la performance de l'application et la conformité, concentrez-vous sur le suivi de ces métriques :
 
--   **Taux de réussite des mises à jour** : Le pourcentage d'utilisateurs exécutant la dernière version
+-   **Taux de succès des mises à jour** : Le pourcentage d'utilisateurs utilisant la dernière version
 -   **Temps de réponse API** : Une mesure critique de la vitesse de livraison des mises à jour
 
-L'examen régulier de ces métriques aide à garantir que votre application répond aux exigences de l'app store et offre une expérience utilisateur fluide.  
+Examiner régulièrement ces métriques aide à garantir que votre application respecte les exigences des magasins d'applications et offre une expérience utilisateur fluide.  
 [\[1\]](https://capgo.app/) Statistiques d'utilisation de Capgo
 
-## Pour Conclure
+## Récapitulatif
 
-Pour tout assembler, voici comment s'alignent les cinq normes clés : **Authentification sécurisée** (OAuth 2.0 avec PKCE, OpenID Connect), **chiffrement fort** (TLS 1.2+ et utilisation appropriée de JWT), et **limitation du taux d'API** sont essentiels pour répondre aux exigences des app stores Apple et Google dans les applications Capacitor.
+Pour résumer tout cela, voici comment les cinq normes clés s'alignent : **Authentification sécurisée** (OAuth 2.0 avec PKCE, OpenID Connect), **chiffrement fort** (TLS 1.2+ et utilisation appropriée des JWT), et **limitation du taux API** sont essentiels pour respecter les exigences des magasins d'applications d'Apple et de Google dans les applications Capacitor.
 
-Concentrez-vous sur le maintien du **chiffrement de bout en bout**, la **surveillance continue**, les **déploiements progressifs** via des canaux bêta, et l'intégration des **pipelines CI/CD** avec options de retour arrière. Ces étapes ont montré un succès réel, avec des implémentations atteignant un impressionnant taux de réussite global de 82% dans la livraison des mises à jour [\[1\]](https://capgo.app/).
+Concentrez-vous sur le maintien de **chiffrement de bout en bout**, **surveillance continue**, **déploiements progressifs** via des canaux beta, et l'intégration des **pipelines CI/CD** avec des options de retour en arrière. Ces étapes ont montré un succès dans le monde réel, avec des implémentations atteignant un impressionnant taux de succès mondial de 82 % dans la livraison des mises à jour [\[1\]](https://capgo.app/).
 
 ## FAQs
 
 ::: faq
-### Comment puis-je implémenter OAuth 2.0 dans mon application Capacitor pour répondre aux normes de sécurité de l'app store ?
+### Comment puis-je implémenter OAuth 2.0 dans mon application Capacitor pour répondre aux normes de sécurité des magasins d'applications ?
 
-Pour implémenter **OAuth 2.0** dans votre application Capacitor tout en assurant la conformité aux normes de sécurité de l'app store, vous devez suivre quelques étapes clés :
+Pour implémenter **OAuth 2.0** dans votre application Capacitor tout en garantissant la conformité aux normes de sécurité des magasins d'applications, vous devrez suivre quelques étapes clés :
 
-1.  **Configurer un fournisseur OAuth** : Enregistrez votre application auprès d'un fournisseur OAuth (par exemple, Google, Apple ou un autre service) et obtenez les identifiants requis, tels que l'ID Client et le Secret Client.
-2.  **Intégrer une bibliothèque OAuth** : Utilisez une bibliothèque comme `@capacitor-community/oauth2` pour une intégration transparente avec les applications Capacitor. Cela aide à gérer les flux d'authentification et la gestion des jetons.
-3.  **Configurer les URIs de redirection** : Assurez-vous que les URIs de redirection de votre application sont correctement configurées dans les paramètres du fournisseur OAuth pour gérer en toute sécurité les rappels d'authentification.
-4.  **Gérer les jetons de manière sécurisée** : Utilisez un stockage sécurisé (par exemple, le plugin Secure Storage de Capacitor) pour stocker les jetons d'accès et les jetons de rafraîchissement, garantissant un chiffrement de bout en bout.
+1.  **Configurer un fournisseur OAuth** : Enregistrez votre application auprès d'un fournisseur OAuth (par exemple, Google, Apple, ou un autre service) et obtenez les identifiants requis, tels que l'ID Client et le Secret Client.
+2.  **Intégrer une bibliothèque OAuth** : Utilisez une bibliothèque comme `@capacitor-community/oauth2` pour une intégration fluide avec les applications Capacitor. Cela aide à gérer les flux d'authentification et le traitement des tokens.
+3.  **Configurer les URIs de redirection** : Assurez-vous que les URIs de redirection de votre application sont correctement configurées dans les paramètres du fournisseur OAuth pour gérer en toute sécurité les callbacks d'authentification.
+4.  **Gérer les tokens de manière sécurisée** : Utilisez un stockage sécurisé (par exemple, le plugin Secure Storage de Capacitor) pour stocker les tokens d'accès et les tokens de rafraîchissement, garantissant un chiffrement de bout en bout.
 
-En suivant ces étapes, vous pouvez garantir que votre application répond aux normes de sécurité tout en offrant une expérience d'authentification fluide. Des plateformes comme **Capgo** peuvent également améliorer le processus de mise à jour de votre application, assurant la conformité aux exigences d'Apple et Google tout en livrant des mises à jour en temps réel aux utilisateurs.
+En suivant ces étapes, vous pouvez garantir que votre application respecte les normes de sécurité tout en offrant une expérience d'authentification fluide. Des plateformes comme **Capgo** peuvent également améliorer le processus de mise à jour de votre application, garantissant la conformité avec les exigences d'Apple et de Google tout en fournissant des mises à jour en temps réel aux utilisateurs.
 :::
 
 ::: faq
-### Quelles mesures puis-je prendre pour garantir que mon API répond aux normes de sécurité d'Apple et Google pour la conformité à l'app store ?
+### Quelles étapes puis-je entreprendre pour garantir que mon API respecte les normes de sécurité d'Apple et de Google pour la conformité aux magasins d'applications ?
 
-Pour garantir que votre API s'aligne sur les normes de sécurité d'Apple et Google, concentrez-vous sur la mise en œuvre de pratiques de sécurité robustes comme le **chiffrement de bout en bout**, des méthodes d'authentification sécurisées et des mesures de confidentialité des données. Ces éléments sont essentiels pour répondre aux exigences de conformité.
+Pour garantir que votre API s'aligne sur les normes de sécurité d'Apple et de Google, concentrez-vous sur la mise en œuvre de pratiques de sécurité robustes comme **le chiffrement de bout en bout**, les méthodes d'authentification sécurisées, et les mesures de protection de la vie privée des données. Celles-ci sont essentielles pour répondre aux exigences de conformité.
 
-Si vous développez des applications Capacitor, des outils comme Capgo peuvent simplifier la conformité. Capgo vous permet de pousser instantanément des mises à jour, des corrections et des fonctionnalités sans nécessiter d'approbations de l'app store, tout en respectant les directives d'Apple et Android. Cela garantit que votre application reste sécurisée et à jour sans effort.
+Si vous développez des applications Capacitor, des outils comme Capgo peuvent simplifier la conformité. Capgo vous permet de pousser instantanément des mises à jour, des corrections, et des fonctionnalités sans avoir besoin d'approbations des magasins d'applications, tout en respectant les directives d'Apple et d'Android. Cela garantit que votre application reste sécurisée et à jour sans effort.
 :::
 
 ::: faq
-### Quels sont les meilleurs outils et pratiques pour surveiller et gérer la sécurité API dans mon application ?
+### Quels sont les meilleurs outils et pratiques pour surveiller et gérer la sécurité de l'API dans mon application ?
 
-Pour une gestion efficace de la sécurité API dans votre application, considérez des outils qui permettent des mises à jour en temps réel, le chiffrement et une intégration transparente avec les flux de travail de développement. **Capgo** fournit une solution puissante pour les applications Capacitor, permettant aux développeurs de pousser des mises à jour, des corrections et de nouvelles fonctionnalités instantanément sans attendre les approbations de l'app store. Cela garantit que votre application reste conforme et à jour.
+Pour une gestion efficace de la sécurité de l'API dans votre application, envisagez des outils qui permettent des mises à jour en temps réel, le chiffrement, et une intégration fluide avec les flux de travail de développement. **Capgo** fournit une solution puissante pour les applications Capacitor, permettant aux développeurs de pousser instantanément des mises à jour, des corrections, et de nouvelles fonctionnalités sans attendre les approbations des magasins d'applications. Cela garantit que votre application reste conforme et à jour.
 
-Capgo offre également un **chiffrement de bout en bout**, une intégration avec les pipelines CI/CD et la capacité d'attribuer des mises à jour à des groupes d'utilisateurs spécifiques. Ces fonctionnalités améliorent non seulement la sécurité mais rationalisent également le processus de mise à jour, facilitant le maintien de la conformité aux exigences des app stores Apple et Google.
+Capgo propose également un **chiffrement de bout en bout**, une intégration avec des pipelines CI/CD, et la capacité d'assigner des mises à jour à des groupes d'utilisateurs spécifiques. Ces fonctionnalités non seulement améliorent la sécurité, mais simplifient également le processus de mise à jour, facilitant le maintien de la conformité avec les exigences des magasins d'applications d'Apple et de Google.
 :::

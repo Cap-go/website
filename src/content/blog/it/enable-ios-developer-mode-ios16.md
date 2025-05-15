@@ -1,16 +1,17 @@
 ---
 slug: enable-ios-developer-mode-ios16
-title: Cómo Habilitar el Modo Desarrollador en iOS 16 para Pruebas de Aplicaciones
+title: Come attivare la modalità sviluppatore su iOS 16 per il test delle app
 description: >-
-  Pasos para habilitar el modo de desarrollador en iOS 16+ para ejecutar
-  aplicaciones de distribución interna y desarrollo local en dispositivos iOS.
+  Guía paso a paso para habilitar el Modo Desarrollador en iOS 16 y versiones
+  superiores para ejecutar distribuciones internas y compilaciones de desarrollo
+  local en su dispositivo.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
-head_image_alt: Abilitare la modalità sviluppatore su iPhone
+head_image_alt: Aktivieren des iOS-Entwicklermodus auf iPhone
 keywords: >-
   iOS, Developer Mode, mobile app development, live updates, OTA updates,
   continuous integration, mobile app updates
@@ -19,49 +20,48 @@ published: true
 locale: it
 next_blog: ''
 ---
+# Como Habilitar el Modo Desarrollador en iOS 16 para Pruebas de Aplicaciones
 
-# Come Abilitare la Modalità Sviluppatore su iOS 16 per il Test delle App
+Para los desarrolladores y testers que trabajan con iOS 16 y versiones superiores, habilitar el Modo Desarrollador es un paso crucial para ejecutar builds de distribución interna y builds de desarrollo local directamente en un iPhone o iPad. Esta guía te guiará a través del proceso de activar el Modo Desarrollador en tu dispositivo iOS.
 
-Per gli sviluppatori e i tester che lavorano con iOS 16 e versioni successive, l'abilitazione della Modalità Sviluppatore è un passaggio cruciale per eseguire build di distribuzione interna e build di sviluppo locale direttamente su iPhone o iPad. Questa guida ti accompagnerà nel processo di attivazione della Modalità Sviluppatore sul tuo dispositivo iOS.
+## Requisitos Previos
 
-## Prerequisiti
+Antes de continuar, asegúrate de haber instalado el build de desarrollo en tu dispositivo iOS. Esta configuración solo se requiere una vez por dispositivo.
 
-Prima di procedere, assicurati di aver installato la build di sviluppo sul tuo dispositivo iOS. Questa configurazione è necessaria solo una volta per dispositivo.
+## Guía Paso a Paso para Habilitar el Modo Desarrollador
 
-## Guida Passo-Passo per Abilitare la Modalità Sviluppatore
+### Paso 1: Activar la Alerta del Modo Desarrollador
 
-### Step 1: Attivare l'Avviso della Modalità Sviluppatore
+Después de instalar el build en tu dispositivo, toca el icono de la aplicación. Aparecerá una alerta, pidiéndote que habilites el Modo Desarrollador. Haz clic en **OK** para continuar.
 
-Dopo aver installato la build sul dispositivo, tocca l'icona dell'app. Apparirà un avviso che ti chiederà di abilitare la Modalità Sviluppatore. Clicca su **OK** per procedere.
+<div class="mx-auto" style="width: 50%;">
+  <img src="/ios-16-developer-mode-0.webp" alt="Navigating to Developer Mode setting">
+</div>
 
-<Steps>
-  1. Installa e avvia l'app
-</Steps>
+### Paso 2: Acceder a la Configuración del Modo Desarrollador
 
-### Step 2: Accedere alle Impostazioni della Modalità Sviluppatore
+Abre la aplicación de Configuración en tu dispositivo iOS. Navega a **Privacidad y Seguridad** y luego selecciona **Modo Desarrollador**.
 
-Apri l'app Impostazioni sul tuo dispositivo iOS. Vai su **Privacy e Sicurezza** e poi seleziona **Modalità Sviluppatore**.
+![Navegando a la configuración del Modo Desarrollador](/ios-16-developer-mode-1.webp)
 
-![Navigazione alle impostazioni della Modalità Sviluppatore](/ios-16-developer-mode-1.webp)
+### Paso 3: Habilitar el Modo Desarrollador y Reiniciar
 
-### Step 3: Abilitare la Modalità Sviluppatore e Riavviare
+Activa el interruptor del Modo Desarrollador. iOS te pedirá que reinicies tu dispositivo para que los cambios surtan efecto. Toca **Reiniciar** para iniciar el reinicio.
 
-Attiva l'interruttore della Modalità Sviluppatore. iOS ti chiederà di riavviare il dispositivo per applicare le modifiche. Tocca **Riavvia** per iniziare il riavvio.
+![Mensaje de reinicio del Modo Desarrollador](/ios-16-developer-mode-2.webp)
 
-![Prompt di riavvio della Modalità Sviluppatore](/ios-16-developer-mode-2.webp)
+### Paso 4: Finalizar la Activación
 
-### Step 4: Finalizzare l'Attivazione
+Una vez que tu dispositivo se reinicie y lo desbloquees, aparecerá una alerta del sistema. Haz clic en **Activar** e ingresa el código de acceso de tu dispositivo cuando se te solicite para completar la activación del Modo Desarrollador.
 
-Una volta riavviato il dispositivo e sbloccato, apparirà un avviso di sistema. Clicca su **Attiva** e inserisci il codice di sblocco del dispositivo quando richiesto per completare l'attivazione della Modalità Sviluppatore.
+![Alerta y solicitud de código de acceso](/ios-16-developer-mode-3.webp)
 
-![Avviso e richiesta del codice di sblocco](/ios-16-developer-mode-3.webp)
+Con el Modo Desarrollador ahora activo, puedes interactuar plenamente con tus builds de distribución interna y builds de desarrollo local.
 
-Con la Modalità Sviluppatore ora attiva, puoi interagire completamente con le tue build di distribuzione interna e di sviluppo locale.
+Recuerda, puedes deshabilitar el Modo Desarrollador en cualquier momento a través de la misma configuración. Sin embargo, volver a habilitarlo requerirá que sigas estos pasos nuevamente.
 
-Ricorda che puoi disattivare la Modalità Sviluppatore in qualsiasi momento attraverso le stesse impostazioni. Tuttavia, per riattivarla dovrai seguire nuovamente questi passaggi.
+## Método Alternativo para Habilitar el Modo Desarrollador
 
-## Metodo Alternativo per Abilitare la Modalità Sviluppatore
+Si encuentras problemas con el método anterior y tienes acceso a una Mac, puedes habilitar el Modo Desarrollador conectando tu dispositivo iOS a tu Mac y siguiendo las instrucciones proporcionadas en [la documentación oficial de Apple](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
 
-Se riscontri problemi con il metodo precedente e hai accesso a un Mac, puoi abilitare la Modalità Sviluppatore collegando il tuo dispositivo iOS al Mac e seguendo le istruzioni fornite nella [documentazione ufficiale Apple](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
-
-Seguendo questi passaggi, sarai pronto per testare e sviluppare app in modo efficace sul tuo dispositivo iOS con iOS 16 o versioni successive.
+Siguiendo estos pasos, estarás listo para probar y desarrollar aplicaciones de manera efectiva en tu dispositivo iOS que ejecuta iOS 16 o posterior.

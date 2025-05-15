@@ -1,10 +1,10 @@
 ---
 slug: api-key-security-for-app-store-compliance
-title: Keamanan API Key untuk Kepatuhan App Store
+title: API-Schlüssel-Sicherheit für die Einhaltung der App Store-Richtlinien
 description: >-
-  Découvrez des stratégies essentielles pour protéger les clés API afin de
-  sécuriser les données des utilisateurs et de respecter les directives des app
-  stores, y compris le stockage, le transport et la gestion.
+  Erlernen Sie wesentliche Strategien zur Sicherung von API-Schlüsseln, um
+  Benutzerdaten zu schützen und die Richtlinien der App-Stores einzuhalten,
+  einschließlich Speicherung, Transport und Verwaltung.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,30 +21,29 @@ published: true
 locale: de
 next_blog: ''
 ---
-
-**Die Sicherheit Ihrer [API-Schlüssel](https://capgoapp/docs/webapp/api-keys/) ist entscheidend für den Schutz von Benutzerdaten und die Einhaltung der App Store-Regeln.** Die Offenlegung von Schlüsseln kann zu Datenlecks, Servicemissbrauch und Kontoübernahmen führen.
+**Die Sicherheit Ihrer [API-Schlüssel](https://capgo.app/docs/webapp/api-keys/) ist entscheidend, um Benutzerdaten zu schützen und die Richtlinien der App-Stores einzuhalten.** Das Offenlegen von Schlüsseln kann zu Datenschutzverletzungen, Missbrauch von Diensten und Kompromittierung von Konten führen.
 
 ### Wichtige Erkenntnisse:
 
--   **Keine Schlüssel im Code speichern**: Umgebungsvariablen oder sichere Dateien verwenden
--   **Plattform-Tools nutzen**: iOS Keychain und Android [EncryptedSharedPreferences](https://developerandroidcom/reference/androidx/security/crypto/EncryptedSharedPreferences)
--   **API-Schlüssel verschlüsseln**: Zusätzliche Sicherheitsebene durch AES-256-Verschlüsselung
--   **Sichere Übertragung**: Immer HTTPS verwenden und SSL-Zertifikat-Pinning in Betracht ziehen
--   **Schlüssel überwachen und rotieren**: Regelmäßige Schlüsselrotation und Nutzungsüberwachung auf Anomalien
+-   **Vermeiden Sie das Speichern von Schlüsseln im Code**: Verwenden Sie Umgebungsvariablen oder sichere Dateien.
+-   **Nutzen Sie plattformspezifische Tools**: iOS Keychain und Android [EncryptedSharedPreferences](https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences).
+-   **Verschlüsseln Sie API-Schlüssel**: Fügen Sie eine zusätzliche Sicherheitsschicht mit AES-256-Verschlüsselung hinzu.
+-   **Sichere Übertragung**: Verwenden Sie immer HTTPS und ziehen Sie die Verwendung von SSL-Zertifikat-Pinning in Betracht.
+-   **Überwachen und Rotieren von Schlüsseln**: Rotieren Sie regelmäßig die Schlüssel und verfolgen Sie die Nutzung auf Anomalien.
 
-Durch die Implementierung dieser Praktiken können Sie Ihre App schützen, Apple- und Google-Richtlinien einhalten und Ihre Benutzer schützen.
+Durch die Umsetzung dieser Praktiken können Sie Ihre App schützen, die Richtlinien von Apple und Google einhalten und Ihre Benutzer schützen.
 
-## Sichere API-Schlüssel-Speichermethoden
+## Sichere Methoden zur Speicherung von API-Schlüsseln
 
 ### API-Schlüssel aus dem Quellcode entfernen
 
-Das direkte Einbinden von API-Schlüsseln in den Quellcode kann durch Dekompilierung oder Repository-Lecks zu Offenlegungen führen. Erwägen Sie diese Ansätze:
+Das direkte Einfügen von API-Schlüsseln in den Quellcode kann durch Dekompilierung oder Lecks im Repository zu einer Offenlegung führen. Um dies zu vermeiden, ziehen Sie diese Ansätze in Betracht:
 
--   **Umgebungsvariablen** für lokale Entwicklung verwenden
--   Schlüssel in **sicheren Konfigurationsdateien** speichern, die von der Versionskontrolle ausgeschlossen sind
--   **Remote-Konfigurationsdienste** zur Verwaltung von Schlüsseln nutzen
+-   Verwenden Sie **Umgebungsvariablen** für die lokale Entwicklung.
+-   Speichern Sie Schlüssel in **sicheren Konfigurationsdateien**, die von der Versionskontrolle ausgeschlossen sind.
+-   Verlassen Sie sich auf **Remote-Konfigurationsdienste**, um Schlüssel zu verwalten.
 
-Für iOS sollten Sie **XCConfig-Dateien** verwenden, um Konfigurationen von Ihrem Code zu trennen. Unter Android können Sie Schlüssel mit `gradleproperties` verwalten:
+Für iOS sollten Sie **XCConfig-Dateien** verwenden, um Konfigurationen von Ihrem Codebasis zu trennen. Auf Android können Sie Schlüssel mit `gradle.properties` verwalten:
 
 ```kotlin
 # Store in ~/.gradle/gradle.properties
@@ -54,11 +53,11 @@ API_KEY=your_key_here
 buildConfigField "String", "API_KEY", "\"${project.API_KEY}\""
 ```
 
-### Plattform-Sicherheitstools
+### Plattform-Sicherheitswerkzeuge
 
-Nutzen Sie plattformspezifische Tools zur Verbesserung der Sicherheit bei der Speicherung von API-Schlüsseln.
+Nutzen Sie plattformspezifische Werkzeuge, um die Sicherheit beim Speichern von API-Schlüsseln zu erhöhen.
 
-Unter iOS verwenden Sie **[Keychain Services](https://developerapplecom/documentation/security/keychain-services)** für sichere Speicherung:
+Für iOS verwenden Sie **[Keychain-Dienste](https://developer.apple.com/documentation/security/keychain-services)** für sichere Speicherung:
 
 ```swift
 let query: [String: Any] = [
@@ -69,7 +68,7 @@ let query: [String: Any] = [
 let status = SecItemAdd(query as CFDictionary, nil)
 ```
 
-Für Android nutzen Sie **EncryptedSharedPreferences** für sichere Schlüsselspeicherung:
+Für Android nutzen Sie **EncryptedSharedPreferences** für die sichere Speicherung von Schlüsseln:
 
 ```kotlin
 val masterKey = MasterKey.Builder(context)
@@ -87,27 +86,27 @@ val sharedPreferences = EncryptedSharedPreferences.create(
 
 ### Schlüssel nach Umgebung trennen
 
-Verwenden Sie unterschiedliche API-Schlüssel für Entwicklungs-, Staging- und Produktionsumgebungen. Jede Umgebung sollte haben:
+Verwenden Sie unterschiedliche API-Schlüssel für Entwicklungs-, Staging- und Produktionsumgebungen. Jede Umgebung sollte über verfügen:
 
--   Einen einzigartigen Rotationsplan
--   Nutzungsüberwachung
--   Strikte Zugriffskontrollen
+-   Einen einzigartigen Schlüsseldrehplan.
+-   Nutzungskontrolle.
+-   Strenge Zugriffskontrollen.
 
-Speichern Sie umgebungsspezifische Schlüssel in **sicheren CI/CD-Variablen** anstelle von Konfigurationsdateien. Dies gewährleistet den Schutz der Schlüssel bei gleichzeitiger Unterstützung automatisierter Build-Prozesse. Stellen Sie zusätzlich sichere Übertragungsmechanismen zum Schutz der Schlüssel während der Übermittlung bereit.
+Speichern Sie umgebungsspezifische Schlüssel in **sicheren CI/CD-Variablen** und nicht in Konfigurationsdateien. Dadurch bleiben die Schlüssel geschützt, während automatisierte Build-Prozesse unterstützt werden. Stellen Sie außerdem sicher, dass sichere Übertragungsmechanismen vorhanden sind, um die Schlüssel während der Übertragung zu schützen.
 
-## Erweiterte Mobile iOS-Sicherheit – Laufzeitangriffe & API-Schlüssel
+## Erweiterte mobile iOS-Sicherheit – Laufzeitangriffe & API-Schlüssel ...
 
 <iframe src="https://www.youtube.com/embed/HfRP0lCbqZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## API-Schlüssel-Übertragungssicherheit
+## API-Schlüssel-Transport-Sicherheit
 
-Die Sicherheit von API-Schlüsseln während der Übertragung ist essentiell für den Schutz von Benutzerdaten und die Einhaltung der App Store-Anforderungen. Starke Übertragungssicherheitsmaßnahmen helfen, Angriffe wie Man-in-the-Middle und unbefugten Zugriff zu verhindern.
+Die Sicherheit von API-Schlüsseln während des Transports ist entscheidend, um Benutzerdaten zu schützen und die Anforderungen der App-Stores einzuhalten. Starke Transport-Sicherheitsmaßnahmen helfen, Angriffe wie Man-in-the-Middle und unbefugten Zugriff zu verhindern.
 
 ### HTTPS-Implementierung
 
-Um API-Kommunikation zu sichern, leiten Sie HTTP-Verkehr immer zu HTTPS um. Verwenden Sie TLS 1.3 oder höher und beziehen Sie SSL-Zertifikate von einer vertrauenswürdigen Zertifizierungsstelle.
+Um die API-Kommunikation zu sichern, leiten Sie den HTTP-Verkehr immer auf HTTPS um. Verwenden Sie TLS 1.3 oder höher und erhalten Sie SSL-Zertifikate von einer vertrauenswürdigen Zertifizierungsstelle.
 
-Hier ist ein einfaches Beispiel zur Durchsetzung von HTTPS in einer Nodejs [Express](https://expressjscom/) Anwendung:
+Hier ist ein einfaches Beispiel, wie man HTTPS in einer Node.js [Express](https://expressjs.com/) Anwendung durchsetzt:
 
 ```javascript
 const express = require('express');
@@ -122,13 +121,13 @@ app.use((req, res, next) => {
 });
 ```
 
-Für eine zusätzliche Schutzebene sollten Sie Zertifikat-Pinning in Betracht ziehen.
+Für eine zusätzliche Schutzschicht ziehen Sie die Implementierung von Zertifikat-Pinning in Betracht.
 
 ### SSL-Zertifikat-Pinning
 
-Zertifikat-Pinning stellt sicher, dass das SSL-Zertifikat des Servers mit einer vertrauenswürdigen Kopie übereinstimmt und verhindert die Verwendung gefälschter Zertifikate.
+Zertifikat-Pinning stellt sicher, dass das SSL-Zertifikat des Servers mit einer vertrauenswürdigen Kopie übereinstimmt, um die Verwendung gefälschter Zertifikate zu verhindern.
 
-Unter iOS können Sie Zertifikat-Pinning mit `URLSession` implementieren. Hier ein Beispiel:
+Für iOS können Sie das Zertifikat-Pinning mit `URLSession` implementieren. Hier ist ein Beispiel:
 
 ```swift
 class APIManager: NSObject, URLSessionDelegate {
@@ -149,15 +148,15 @@ class APIManager: NSObject, URLSessionDelegate {
 }
 ```
 
-Zusätzlich zur Übertragungssicherung verschlüsseln Sie API-Schlüssel auf Anwendungsebene.
+Zusätzlich zur Sicherstellung des Transports sollten API-Schlüssel auf Anwendungsebene verschlüsselt werden.
 
 ### API-Schlüssel-Verschlüsselung
 
-[Die Verschlüsselung von API-Schlüsseln](https://capgoapp/docs/webapp/api-keys/) fügt eine weitere Sicherheitsebene hinzu. Capgo verwendet beispielsweise Ende-zu-Ende-Verschlüsselung für App-Updates.
+[Die Verschlüsselung von API-Schlüsseln](https://capgo.app/docs/webapp/api-keys/) fügt eine weitere Sicherheitsebene hinzu. Capgo verwendet beispielsweise End-to-End-Verschlüsselung für App-Updates.
 
-> "Die einzige Lösung mit echter Ende-zu-Ende-Verschlüsselung, andere signieren nur Updates" - Capgo [\[1\]](https://capgoapp/)
+> "Die einzige Lösung mit echter End-to-End-Verschlüsselung, andere signieren nur Updates" - Capgo [\[1\]](https://capgo.app/)
 
-Um API-Schlüssel zu verschlüsseln, verwenden Sie zuverlässige Verschlüsselungsalgorithmen. Hier ist ein Beispiel für die Verschlüsselung eines API-Schlüssels mit AES-256-GCM in Nodejs:
+Um API-Schlüssel zu verschlüsseln, verwenden Sie zuverlässige Verschlüsselungsalgorithmen. Unten finden Sie ein Beispiel für die Verschlüsselung eines API-Schlüssels mit AES-256-GCM in Node.js:
 
 ```javascript
 const crypto = require('crypto');
@@ -177,20 +176,22 @@ function encryptAPIKey(apiKey, encryptionKey) {
 }
 ```
 
-Die Kombination von HTTPS, Zertifikat-Pinning und Verschlüsselung gewährleistet eine starke Verteidigung Ihrer API-Schlüssel.## API-Schlüssel Sicherheitsmanagement
+Die Kombination aus HTTPS, Zertifikat-Pinning und Verschlüsselung gewährleistet einen starken Schutz Ihrer API-Schlüssel.
 
-Ein effektives Management von API-Schlüsseln bedeutet, deren Nutzung genau zu überwachen, sie regelmäßig zu rotieren und strikte Zugriffskontrollen durchzusetzen. Diese Schritte helfen dabei, sensible Daten zu schützen und die Einhaltung der App Store-Anforderungen sicherzustellen.
+## API-Schlüssel-Sicherheitsmanagement
+
+Die effektive Verwaltung von API-Schlüsseln bedeutet, die Nutzung genau zu überwachen, sie regelmäßig zu rotieren und strenge Zugriffskontrollen durchzusetzen. Diese Schritte helfen, sensible Daten zu schützen und die Einhaltung der Anforderungen der App-Stores sicherzustellen.
 
 ### Nutzungsüberwachung
 
-Die Überwachung der API-Schlüssel-Nutzung ist entscheidend, um ungewöhnliche Aktivitäten zu erkennen. Nutzen Sie Echtzeitanalysen zur Überwachung von:
+Die Verfolgung der Nutzung von API-Schlüsseln ist entscheidend, um ungewöhnliche Aktivitäten zu erkennen. Verwenden Sie Echtzeitanalysen, um zu überwachen:
 
--   Anfragemuster und -volumen
--   Geografische Zugriffsstandorte
--   Fehlerraten und -typen
+-   Anforderungsmuster und -volumen
+-   Geografische Standorte des Zugriffs
+-   Fehlerquoten und -arten
 -   Authentifizierungsfehler
 
-Hier ein Beispiel in Nodejs:
+Hier ist ein Beispiel in Node.js:
 
 ```javascript
 const apiMetrics = {
@@ -212,15 +213,15 @@ const apiMetrics = {
 };
 ```
 
-### Schlüssel-Rotationsplan
+### Schlüsseldrehplan
 
-Sobald Sie die Nutzung im Griff haben, stellen Sie sicher, dass Sie Ihre Schlüssel regelmäßig rotieren. Automatisierte Rotationsprozesse können Ihnen helfen, die App Store-Anforderungen einzuhalten. Hier einige Rotationsstrategien:
+Sobald Sie ein Verständnis für die Nutzung haben, stellen Sie sicher, dass Sie Ihre Schlüssel regelmäßig rotieren. Automatisierte Rotationsprozesse können Ihnen helfen, die Anforderungen der App-Stores einzuhalten. Hier sind einige Rotationsstrategien:
 
--   **Notfallrotation:** Sofortige Deaktivierung der Schlüssel bei Verdacht auf eine Verletzung
--   **Geplante Rotation:** Vierteljährliche Aktualisierung der Produktionsschlüssel
--   **Entwicklungsrotation:** Monatliche Aktualisierung der Schlüssel für Testumgebungen
+-   **Notfallrotation:** Deaktivieren Sie sofort Schlüssel, wenn Sie einen Verstoß vermuten.
+-   **Geplante Rotation:** Aktualisieren Sie Produktionsschlüssel vierteljährlich.
+-   **Entwicklungsrotation:** Erneuern Sie Schlüssel für Testumgebungen monatlich.
 
-Um Störungen zu minimieren, verwenden Sie eine Übergangsphase während der Schlüsseländerungen:
+Um Störungen zu minimieren, verwenden Sie eine Übergangszeit während der Schlüsseländerungen:
 
 ```javascript
 const keyRotation = {
@@ -231,9 +232,9 @@ const keyRotation = {
 };
 ```
 
-### Zugriffssteuerung einrichten
+### Zugriffskontrolle einrichten
 
-Überwachung und Rotation sind nur ein Teil der Gleichung. Sie müssen auch strikte Zugriffskontrollen durchsetzen. Weisen Sie Berechtigungen nach Notwendigkeit zu und halten Sie sich an das Prinzip der geringsten Privilegien:
+Überwachung und Rotation sind nur ein Teil der Gleichung. Sie müssen auch strenge Zugriffskontrollen durchsetzen. Weisen Sie Berechtigungen basierend auf Notwendigkeit zu und befolgen Sie das Prinzip der minimalen Berechtigung:
 
 ```javascript
 const accessControl = {
@@ -246,17 +247,17 @@ const accessControl = {
 };
 ```
 
-Überprüfen Sie regelmäßig, wer Zugriff hat, passen Sie Berechtigungen bei Bedarf an und richten Sie automatisierte Warnungen für ungewöhnliche Aktivitäten ein. Diese Maßnahmen helfen Ihnen, eine starke Sicherheit aufrechtzuerhalten und dabei die App Store-Regeln einzuhalten.
+Überprüfen Sie regelmäßig, wer Zugriff hat, passen Sie die Berechtigungen nach Bedarf an und richten Sie automatisierte Warnungen für ungewöhnliche Aktivitäten ein. Diese Maßnahmen helfen Ihnen, eine starke Sicherheit aufrechtzuerhalten und gleichzeitig die Anforderungen der App-Stores einzuhalten.
 
-## [Capgo](https://capgoapp/) Sicherheitsfunktionen
+## [Capgo](https://capgo.app/) Sicherheitsmerkmale
 
-![Capgo](https://assetsseobotaicom/capgoapp/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
-Capgo stärkt die App-Sicherheit durch die Kombination sicherer Speicher- und Transportmethoden mit fortschrittlichen Funktionen, die in seine Plattform integriert sind.
+Capgo stärkt die Sicherheit von Apps, indem es sichere Speicher- und Transportmethoden mit fortschrittlichen Funktionen kombiniert, die in seine Plattform integriert sind.
 
 ### Capgo Sicherheitsarchitektur
 
-Capgos System hat erfolgreich über 235 Millionen [sichere Updates](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) an 750 Produktions-Apps geliefert [\[1\]](https://capgoapp/). Es verwendet **Ende-zu-Ende-Verschlüsselung**, die sicherstellt, dass nur autorisierte Benutzer Updates entschlüsseln können. Hier ein Blick auf die Sicherheitseinrichtung:
+Das System von Capgo hat erfolgreich über 23,5 Millionen [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) an 750 Produktionsanwendungen geliefert [\[1\]](https://capgo.app/). Es verwendet **End-to-End-Verschlüsselung**, die sicherstellt, dass nur autorisierte Benutzer Updates entschlüsseln können. Hier ist ein Blick auf seine Sicherheitskonzeption:
 
 ```javascript
 const capgoSecurity = {
@@ -274,19 +275,19 @@ const capgoSecurity = {
 };
 ```
 
-Dieses Design schützt nicht nur API-Schlüssel, sondern vereinfacht auch die Einhaltung der App Store-Anforderungen.
+Dieses Design schützt nicht nur API-Schlüssel, sondern vereinfacht auch die Einhaltung der Anforderungen der App-Stores.
 
-### Einhaltung der App Store-Richtlinien
+### Einhaltung der Richtlinien der App-Stores
 
-Capgo stellt sicher, dass Updates schnell und sicher geliefert werden, mit einer globalen Erfolgsrate von 82%, wobei 95% der aktiven Nutzer Updates innerhalb von 24 Stunden erhalten [\[1\]](https://capgoapp/). Seine Funktionen helfen bei der Bekämpfung potenzieller Schwachstellen:
+Capgo stellt sicher, dass Updates schnell und sicher bereitgestellt werden, mit einer globalen Erfolgsquote von 82 %, wobei 95 % der aktiven Benutzer innerhalb von 24 Stunden Updates erhalten [\[1\]](https://capgo.app/). Seine Funktionen helfen, potenzielle Schwachstellen zu beseitigen:
 
--   Automatisierte Schlüsselrotation in Übereinstimmung mit App Store-Richtlinien
--   Bereitstellungskontrollen, die auf spezifische Umgebungen zugeschnitten sind
--   Feingranulare Berechtigungen für die Update-Verwaltung
+-   Automatisierte Schlüsseldrehung im Einklang mit den Richtlinien der App-Stores
+-   Bereitstellungskontrollen, die auf spezifische Umgebungen abgestimmt sind
+-   Detaillierte Berechtigungen zum Verwalten von Updates
 
-### CI/CD Sicherheitsintegration
+### CI/CD-Sicherheitsintegration
 
-Capgo arbeitet nahtlos mit CI/CD-Plattformen zusammen, um den API-Schlüsselschutz zu verbessern. Hier ein Beispiel für die Integration:
+Capgo arbeitet nahtlos mit CI/CD-Plattformen zusammen, um den Schutz von API-Schlüsseln zu verbessern. Hier ist ein Beispiel für seine Integration:
 
 ```yaml
 capgo_deployment:
@@ -299,43 +300,45 @@ capgo_deployment:
         - access_control: role_based
 ```
 
-| Sicherheitsfunktion | Implementierung |
+| Sicherheitsmerkmal | Implementierung |
 | --- | --- |
-| Schlüsselverschlüsselung | Ende-zu-Ende-Verschlüsselung während Build und Bereitstellung |
-| Zugriffskontrolle | Rollenbasierte Berechtigungen für Bereitstellungsauslöser |
-| Audit-Protokollierung | Umfassende Protokolle aller Bereitstellungsaktivitäten |
-| Versionskontrolle | Sichere Verfolgung bereitgestellter Updates |
+| Schlüsselsicherheit | End-to-End-Verschlüsselung während des Builds und der Bereitstellung |
+| Zugriffskontrolle | Rollenbasierte Berechtigungen für Bereitstellungsereignisse |
+| Prüfprotokollierung | Umfassende Protokolle aller Bereitstellungstätigkeiten |
+| Versionskontrolle | Sichere Nachverfolgung der bereitgestellten Updates |
 
-> "Ende-zu-Ende-Verschlüsselung. Nur Ihre Benutzer können Ihre Updates entschlüsseln, sonst niemand" [\[1\]](https://capgoapp/) - Capgo
+> "End-to-End-Verschlüsselung. Nur Ihre Benutzer können Ihre Updates entschlüsseln, niemand sonst." [\[1\]](https://capgo.app/) - Capgo
 
 ## Zusammenfassung
 
-Die Sicherung von API-Schlüsseln ist entscheidend für die Erfüllung von App Store-Anforderungen und den Schutz von Benutzerdaten. Hier ein kurzer Überblick über wichtige Praktiken und die nächsten Schritte.### Sicherheits-Checkliste
+Die Sicherheit von API-Schlüsseln ist entscheidend, um die Anforderungen der App-Stores zu erfüllen und Benutzerdaten zu schützen. Hier ist eine schnelle Übersicht über wichtige Praktiken und was als Nächstes zu tun ist.
 
-Die folgende Tabelle zeigt wichtige Schritte zum Schutz von API-Schlüsseln unter Berücksichtigung der Apple- und Google-Standards:
+### Sicherheits-Checkliste
 
-| Sicherheitsmaßnahme | Implementierungsanforderungen | Compliance-Auswirkung |
+Die folgende Tabelle hebt wichtige Schritte zum Schutz von API-Schlüsseln hervor und bleibt dabei im Einklang mit den Richtlinien von Apple und Google:
+
+| Sicherheitsmaßnahme | Implementierungsanforderungen | Compliance-Auswirkungen |
 | --- | --- | --- |
-| **Speichersicherheit** | Verwendung von Ende-zu-Ende-Verschlüsselung und getrennten Umgebungen | Entspricht den Datenschutzregeln von Apple/Google |
-| **Transport-Layer** | HTTPS erzwingen und SSL-Zertifikat-Pinning verwenden | Sichert Daten während der Übertragung |
-| **Zugangskontrolle** | Rollenbasierte Berechtigungen anwenden und [Zugriffsprotokollen](https://capgoapp/docs/webapp/logs/) verfolgen | Blockiert unbefugten Zugriff |
-| **Schlüsselverwaltung** | Automatische Schlüsselrotation und umgebungsspezifische Schlüssel verwenden | Gewährleistet kontinuierliche, starke Sicherheit |
+| **Speicher-Sicherheit** | Verwenden Sie End-to-End-Verschlüsselung und trennen Sie Umgebungen | Entspricht den Datenschutzbestimmungen von Apple/Google |
+| **Transportebene** | Durchsetzen von HTTPS und Verwendung von SSL-Zertifikat-Pinning | Sichert Daten während der Übertragung |
+| **Zugriffskontrolle** | Anwendung rollenbasierter Berechtigungen und Nachverfolgung von [Zugriffsprotokollen](https://capgo.app/docs/webapp/logs/) | Blockiert unbefugten Zugriff |
+| **Schlüsselmanagement** | Automatisches Rotieren von Schlüsseln und Verwendung umgebungsspezifischer Schlüssel | Gewährleistet langfristige Sicherheit |
 
-Verwenden Sie diese Checkliste als Leitfaden zur Sicherung Ihrer API-Schlüssel
+Verwenden Sie diese Checkliste als Leitfaden zur Sicherung Ihrer API-Schlüssel.
 
 ### Nächste Schritte
 
-1. **Überprüfung der aktuellen Implementierung**
+1.  **Aktuelle Implementierung überprüfen**
+
+    Überprüfen Sie Ihre bestehenden Schlüsselstorage- und Transportmethoden auf Sicherheitsanfälligkeiten, insbesondere hinsichtlich Verschlüsselung und Quellcodeoffenlegung.
     
-    Überprüfen Sie Ihre bestehenden Schlüsselspeicher- und Transportmethoden auf Schwachstellen, insbesondere im Hinblick auf Verschlüsselung und Quellcode-Exposition
+2.  **Sicherheitsmaßnahmen umsetzen**
+
+    Wenden Sie End-to-End-Verschlüsselung an, um Risiken zu reduzieren und die Anforderungen der App-Stores zu erfüllen.
     
-2. **Sicherheitsmaßnahmen implementieren**
-    
-    Wenden Sie Ende-zu-Ende-Verschlüsselung an, um Risiken zu reduzieren und App-Store-Anforderungen zu erfüllen
-    
-3. **Überwachungssysteme einrichten**
-    
-    Richten Sie automatisierte Warnungen ein und führen Sie regelmäßige Audits durch, um kontinuierliche Sicherheit zu gewährleisten
+3.  **Überwachungssysteme einrichten**
+
+    Richten Sie automatisierte Warnungen ein und führen Sie regelmäßige Prüfungen durch, um die Sicherheit aufrechtzuerhalten.
     
 
-> "App Store konform" - Capgo [\[1\]](https://capgoapp/)
+> "App Store konform" - Capgo [\[1\]](https://capgo.app/)
