@@ -1,16 +1,34 @@
 ---
 title: "Logs"
-description: "Learn how to use the logs page"
+description: "Understand and utilize the application logs for updates and diagnostics."
 sidebar:
   order: 8
 ---
 
-## Show all logs
-First, let's take a look at the logs page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the updates tab](/docs/webapp/main-app-page).
-From there you should see a page like this:
+## Understanding Application Logs
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption></figcaption></figure>
+The Logs page provides a detailed history of update events and diagnostic information for your application. This is crucial for monitoring the update process, troubleshooting issues, and understanding how your devices interact with Capgo. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the "Logs" tab (previously named "updates" in some older screenshots or documentation)](/docs/webapp/main-app-page).
 
-## Getting more details about a log
+From there you should see a page similar to this, displaying a list of log entries:
 
-If you click on a log it will take you to a [devices' page](/docs/webapp/devices/)
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption>Logs Page Overview</figcaption></figure>
+
+Each log entry typically includes information such as the timestamp, the device ID, the log message or code, and the bundle version involved.
+
+### Example Log Entries and Meanings
+
+Here are a few examples of common log codes you might encounter:
+
+*   **`noNew`**: This indicates that the device checked for an update but already has the latest available version for its assigned channel.
+*   **`get`**: Signifies that the device successfully received information to download a new bundle.
+*   **`download_complete`**: Confirms that a new bundle has been successfully downloaded to the device.
+*   **`set`**: Means a downloaded bundle has been successfully installed and set as the active version on the device.
+*   **`update_fail`**: Indicates that a new bundle was installed, but the application failed to confirm its readiness (e.g., `notifyAppReady` was not called), leading to a rollback.
+
+These are just a few examples. For a comprehensive list of all possible log codes (both from the backend and the device) and their detailed explanations, please refer to our detailed debugging guide:
+
+➡️ **[Full Log Code Reference and Debugging Guide](/docs/plugin/debugging/#understanding-cloud-logs)**
+
+## Getting More Details About a Log
+
+If you click on a specific log entry, it will typically take you to the [device's page](/docs/webapp/devices/). This allows you to see the full history for that particular device, which can be very helpful for diagnosing device-specific issues or understanding its update journey.
