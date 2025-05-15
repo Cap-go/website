@@ -9,6 +9,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import striptags from 'striptags'
+import { slug as slugify } from 'github-slugger'
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const blogs = await getCollection('blog')
@@ -120,12 +121,17 @@ content['ldJSON'] = {
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <div class="relative z-0 mx-auto pt-16 pb-12">
         <div class="relative max-w-(--breakpoint-sm)">
-          <div class="flex items-center space-x-4">
-            <span
-              class="hover:/50 rounded-lg bg-white px-4 py-1.5 text-sm font-medium text-black shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.1)] backdrop-blur transition-all"
-            >
-              {entry.data.tag}
-            </span>
+          <div class="flex flex-row flex-wrap items-center gap-3">
+            {
+              entry.data.tag.split(',').map((i) => (
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
+                  class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
+                >
+                  {i.trim()}
+                </a>
+              ))
+            }
             <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
               {formatTime(entry.data.updated_at)}
             </time>
