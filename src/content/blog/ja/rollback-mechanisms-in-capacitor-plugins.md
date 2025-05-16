@@ -134,7 +134,7 @@ Capgoは2024年の[Microsoft Code Push](https://learn.microsoft.com/en-us/appcen
 
 > "私たちはアジャイル開発を実践しており、@Capgoはユーザーへの継続的な提供に不可欠です！" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-よりハンズオンのアプローチを好む人には、[Capacitor Live Update Plugin](https://capgo.app/confirm_email/)も検討する価値があります。
+よりハンズオンのアプローチを好む人には、[Capacitor Live Update Plugin](https://capgo.app/register/)も検討する価値があります。
 
 ### Capacitor Live Update Plugin
 

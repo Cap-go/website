@@ -134,7 +134,7 @@ Capgo entwickelte sich nach der Einstellung von [Microsoft Code Push](https://le
 
 > "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Auslieferung an unsere Nutzer!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Für diejenigen, die einen praktischeren Ansatz bevorzugen, ist das [Capacitor Live Update Plugin](https://capgo.app/confirm_email/) eine weitere beachtenswerte Option.
+Für diejenigen, die einen praktischeren Ansatz bevorzugen, ist das [Capacitor Live Update Plugin](https://capgo.app/register/) eine weitere beachtenswerte Option.
 
 ### Capacitor Live Update Plugin
 

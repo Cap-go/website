@@ -136,7 +136,7 @@ Capgo apareció como una fuerte solución de gestión de retrocesos tras el cier
 
 > "Practicamos desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Para quienes prefieren un enfoque más práctico, el [Complemento de Actualización en Vivo de Capacitor](https://capgo.app/confirm_email/) es otra opción que vale la pena considerar.
+Para quienes prefieren un enfoque más práctico, el [Complemento de Actualización en Vivo de Capacitor](https://capgo.app/register/) es otra opción que vale la pena considerar.
 
 ### Complemento de Actualización en Vivo de Capacitor
 

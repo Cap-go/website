@@ -135,7 +135,7 @@ Capgo a émergé comme une solution de gestion des retours en arrière solide ap
 
 > "Nous pratiquons le développement agile et @Capgo est essentiel pour livrer continuellement à nos utilisateurs !" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Pour ceux qui préfèrent une approche plus pratique, le [Plugin Live Update de Capacitor](https://capgo.app/confirm_email/) est une autre option à considérer.
+Pour ceux qui préfèrent une approche plus pratique, le [Plugin Live Update de Capacitor](https://capgo.app/register/) est une autre option à considérer.
 
 ### Plugin Live Update de Capacitor
 
