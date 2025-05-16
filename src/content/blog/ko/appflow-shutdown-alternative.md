@@ -46,7 +46,7 @@ Capgo는 독점 CI/CD 시스템에 잠기지 않고, 다음을 허용합니다:
 - 기존 CI/CD 인프라와 통합
 - GitHub Actions와 같은 인기 플랫폼 사용
 - 빌드 프로세스에 대한 완전한 제어 유지
-- [iOS](https://capgo.app/blog/github-action-capacitor/) 설정을 위한 자세한 튜토리얼 참조
+- [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) 설정을 위한 자세한 튜토리얼 참조
 - 또는 [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you) 서비스를 통해 모든 것을 처리하도록 저희에게 맡기세요.
 
 ## Capgo를 선택해야 하는 이유
