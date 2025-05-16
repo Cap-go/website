@@ -74,7 +74,7 @@ Dann wird das Verhalten:
 
 #### Automatische Upgrade-Strategie deaktivieren
 
-Es gibt mehrere Strategien, aus denen Sie wählen können. Mehr darüber erfahren Sie [hier](/docs/tooling/cli/#disable-updates-strategy)
+Es gibt mehrere Strategien, aus denen Sie wählen können. Mehr darüber erfahren Sie [hier](/docs/cli/commands//#disable-updates-strategy)
 
 ## JavaScript Bundle-Version
 
