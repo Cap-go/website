@@ -36,7 +36,7 @@ next_blog: ''
 
 Capacitorを使用すると、JavaScriptコードを使用してモバイルアプリケーションを作成できます。その後、電話のネイティブWebViewを使用してアプリをレンダリングします。CapacitorのプラグインやAPIを使用すると、カメラ、スピーカーなどのネイティブ機能にアクセスできます。
 
-Capacitorは、React、Vue、Angular、バニラJSなど、さまざまなJavaScriptフレームワークと互換性があります。[CapacitorとReactを使用したクロスプラットフォームアプリの構築についてもっと学ぶ](https://capacitorjs.com/solution/react/)。
+Capacitorは、React、Vue、Angular、バニラJSなど、さまざまなJavaScriptフレームワークと互換性があります。[CapacitorとReactを使用したクロスプラットフォームアプリの構築についてもっと学ぶ](https://capacitorjs.com/solution/react/) 。
 
 ## React Nativeとは何ですか？
 
@@ -102,15 +102,15 @@ Capacitorアプリは、低スペックのデバイスや古いハードウェ�
 
 また、アプリがデバイスのネイティブビューでレンダリングされない場合、デバイスのハードウェアの能力を完全に活用できないため、パフォーマンスが鈍くなります。
 
-Capacitorでは、アプリをウェブブラウザで実行することが許可されているため、テストが容易です。React Nativeでは、[アプリをコンパイル、実行、およびテストするにはXcodeをインストールする必要があります](https://blog.logrocket.com/xcode-for-react-native-developers-tutorial-and-best-practices/)。これにより、コンパイルプロセスにもう1つのステップが追加されます。
+Capacitorでは、アプリをウェブブラウザで実行することが許可されているため、テストが容易です。React Nativeでは、[アプリをコンパイル、実行、およびテストするにはXcodeをインストールする必要があります](https://blog.logrocket.com/xcode-for-react-native-developers-tutorial-and-best-practices/) 。これにより、コンパイルプロセスにもう1つのステップが追加されます。
 
-Expoを使用すると[Xcode/Android Studioのステップをスキップできます](https://blog.logrocket.com/getting-started-with-react-native-and-expo-sdk/)が、Expoは[制限がないわけではありません](https://docs.expo.dev/faq/)。
+Expoを使用すると[Xcode/Android Studioのステップをスキップできます](https://blog.logrocket.com/getting-started-with-react-native-and-expo-sdk/)が、Expoは[制限がないわけではありません](https://docs.expo.dev/faq/) 。
 
 CapacitorのようなハイブリッドWebViewツールは、コストと多くの時間を節約してくれます。しかし、高いパフォーマンスが非常に重要であるか、安価なデバイスや古いハードウェアで実行される可能性のある複雑なアプリケーションを構築している場合、React Nativeの方がより良い選択かもしれません。
 
 React Nativeのアプリは、デバイスのネイティブ言語に変換され、ネイティブ機能と直接連携するため、通常、より迅速でパフォーマンスが高いです。
 
-[2000人以上の貢献者と約70万人のユーザーがGitHubにいます](https://github.com/facebook/react-native/)。また、[Stack Overflowには大規模なコミュニティがあります](https://stackoverflow.com/questions/tagged/react-native/?sort=Newest)。React Nativeは、開発者がフレームワークを学び、成長するために必要なサポートを提供します。
+[2000人以上の貢献者と約70万人のユーザーがGitHubにいます](https://github.com/facebook/react-native/) 。また、[Stack Overflowには大規模なコミュニティがあります](https://stackoverflow.com/questions/tagged/react-native/?sort=Newest)。React Nativeは、開発者がフレームワークを学び、成長するために必要なサポートを提供します。
 
 さらに、React NativeはJavaScriptに基づいており、クロスプラットフォームフレームワークであるため、開発者にとってアクセスしやすく、人気があります。
 
@@ -125,7 +125,7 @@ FacebookがReact Nativeを作成したため、人気が高くなりました。
 5. Shopify
 6. Instagram
 
-Capacitorはまだ比較的新しいため、開発者が利用できるリソースや資料はそれほど多くありません。GitHubには[300人未満の貢献者](https://github.com/ionic-team/capacitor/)がいますし、[Stack Overflowのコミュニティも小規模です](https://stackoverflow.com/questions/tagged/capacitor/)。しかし、[包括的なドキュメント](https://capacitorjs.com/)はあります。
+Capacitorはまだ比較的新しいため、開発者が利用できるリソースや資料はそれほど多くありません。GitHubには[300人未満の貢献者](https://github.com/ionic-team/capacitor/)がいますし、[Stack Overflowのコミュニティも小規模です](https://stackoverflow.com/questions/tagged/capacitor/) 。しかし、[包括的なドキュメント](https://capacitorjs.com/)はあります。
 
 現在Capacitorを使用している企業には以下があります：
 
@@ -151,7 +151,7 @@ JSXにより、これらのコンポーネントの作成が簡単になり、�
 
 また、コンパイル時にコードを最適化するため、JSXによって生成されたJavaScriptコードは、直接JavaScriptで書かれた同等のコードよりも早く実行されます。
 
-これにより、開発者はCSSを使用したスタイリングができず、[JavaScriptのみでスタイリングすることができます](https://blog.logrocket.com/react-native-styling-tutorial-with-examples/)。
+これにより、開発者はCSSを使用したスタイリングができず、[JavaScriptのみでスタイリングすることができます](https://blog.logrocket.com/react-native-styling-tutorial-with-examples/) 。
 
 JSX自体は特に難しいわけではありませんが、ほとんどの開発者はマークアップとスタイリングにHTMLとCSSを使用しているため、この新しいパラダイムに適応するには時間がかかるかもしれません。
 

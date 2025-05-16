@@ -40,7 +40,7 @@ next_blog: ''
 
 ### 中国サイバーセキュリティ法（CSL）
 
-中国のサイバーセキュリティ法（CSL）は、ネットワークセキュリティを維持するための基本的な要件を定めています。これには、実名登録、強力なセキュリティ対策の実施、定期的な評価の実施、そして事件の迅速な報告が含まれます。2025年3月に発効する最近の改正では、進化するデータ保護基準に合わせて違反に対する厳しい罰則が導入されます [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国のサイバーセキュリティ法（CSL）は、ネットワークセキュリティを維持するための基本的な要件を定めています。これには、実名登録、強力なセキュリティ対策の実施、定期的な評価の実施、そして事件の迅速な報告が含まれます。2025年3月に発効する最近の改正では、進化するデータ保護基準に合わせて違反に対する厳しい罰則が導入されます [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### 個人情報保護法（PIPL）
 
@@ -62,7 +62,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 -   **技術的保護手段**：データを分類し、アクセス制御を実施し、センシティブな情報を暗号化します。
 -   **インシデント対応**：セキュリティインシデントに対処するための堅牢な文書と技術的措置を維持します。
 
-これらの更新は、施行を強化し新たなサイバーセキュリティの課題に対処することを目的としています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+これらの更新は、施行を強化し新たなサイバーセキュリティの課題に対処することを目的としています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 更新やセキュリティパッチに取り組むアプリ開発者は、[安全な更新プラットフォーム](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を利用することで、これらの規則のコンプライアンスを簡素化できます。例えば、**Capgo** (https://capgo.app)はエンドツーエンドの暗号化とリアルタイムの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)を提供しており、400万以上のモバイルアプリと世界で最も大規模なモバイルインターネットユーザーを有する市場では特に価値があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
@@ -76,7 +76,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 ### データストレージ要件
 
-中国のユーザーデータはすべて、中国本土にあるサーバーに保存する必要があり、2025年1月1日に発効するネットワークデータセキュリティ管理規則に従わなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。データを国外に移転する必要がある場合は、まず政府のセキュリティレビューを受けるか、明示的なユーザーの同意を得なければなりません [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
+中国のユーザーデータはすべて、中国本土にあるサーバーに保存する必要があり、2025年1月1日に発効するネットワークデータセキュリティ管理規則に従わなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。データを国外に移転する必要がある場合は、まず政府のセキュリティレビューを受けるか、明示的なユーザーの同意を得なければなりません [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
 
 これらの要件を満たすために、[アリババクラウド](https://www.alibabacloud.com/)や[テンセントクラウド](https://www.tencentcloud.com/)などの公認中国クラウドプロバイダーと協力してください。これにより、ユーザーデータが指定された地理的境界内に留まることが保証されます。
 
@@ -93,7 +93,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 更新を管理する開発者向けに、Capgoのようなプラットフォームは、これらのセキュリティ要件に沿ったエンドツーエンドの暗号化を提供しています。
 
-定期的な監査とテストは、すべてのセキュリティ対策が効果的で最新の状態にあることを確認するために重要です [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+定期的な監査とテストは、すべてのセキュリティ対策が効果的で最新の状態にあることを確認するために重要です [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ## 中国におけるサイバーセキュリティおよびデータ保護のコンプライアンス、課題、ヒント
 
@@ -101,11 +101,11 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 ## 技術的セキュリティ要件
 
-中国のサイバーセキュリティ規制は、組織がコンプライアンスを維持するために詳細な技術的セキュリティ対策を実施することを要求しています。2025年3月に[中国サイバー空間管理局](https://en.wikipedia.org/wiki/Cyberspace_Administration_of_China)（CAC）は、これらの要件を概説するためにサイバーセキュリティ法（CSL）の改正を導入しました。これにより法的義務を実行可能な慣行に翻訳しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国のサイバーセキュリティ規制は、組織がコンプライアンスを維持するために詳細な技術的セキュリティ対策を実施することを要求しています。2025年3月に[中国サイバー空間管理局](https://en.wikipedia.org/wiki/Cyberspace_Administration_of_China)（CAC）は、これらの要件を概説するためにサイバーセキュリティ法（CSL）の改正を導入しました。これにより法的義務を実行可能な慣行に翻訳しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### セキュリティスキャンのスケジュール
 
-モバイルアプリケーションは、CAC承認のスキャニングツールを使用して月次セキュリティチェックを受けなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。これらの評価は、アプリのセキュリティのさまざまな側面に焦点を当てています：
+モバイルアプリケーションは、CAC承認のスキャニングツールを使用して月次セキュリティチェックを受けなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。これらの評価は、アプリのセキュリティのさまざまな側面に焦点を当てています：
 
 | **セキュリティ側面** | **評価頻度** | **必要な文書** |
 | --- | --- | --- |
@@ -117,7 +117,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 ### ユーザー権限管理
 
-ロールベースのアクセス制御（RBAC）は、中国で動作するモバイルアプリケーションにとっては譲れない要件です [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。開発者は次のことを期待されています：
+ロールベースのアクセス制御（RBAC）は、中国で動作するモバイルアプリケーションにとっては譲れない要件です [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。開発者は次のことを期待されています：
 
 -   ユーザー役割に基づいて正確な権限レベルを設定します。
 -   アクセス活動の詳細なログを保持します。
@@ -137,13 +137,13 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 インシデント後、根本原因、修正アクション、およびセキュリティプロトコルの更新を文書化してください。その後、詳細なレポートを規制当局に提出する必要があります。
 
-> 「最新のCSL改正により、施行が強化され、他の主要なデータ保護法（PIPLやDSLなど）に合わせた罰金額が引き上げられました」と、2025年3月のガイダンスで中国サイバー空間管理局は述べています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+> 「最新のCSL改正により、施行が強化され、他の主要なデータ保護法（PIPLやDSLなど）に合わせた罰金額が引き上げられました」と、2025年3月のガイダンスで中国サイバー空間管理局は述べています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 定期的なセキュリティ訓練とスタッフ研修セッションも必要であり、関連する文書はすべて規制当局の調査のために手元に保管されている必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)[\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)。
 
 ## アプリストアの要件
 
-中国でアプリを公開する際、技術基準を満たすことは始まりに過ぎません。開発者は、中国サイバー空間管理局（CAC）および[工業情報化省](https://en.wikipedia.org/wiki/Ministry_of_Industry_and_Information_Technology)（MIIT）の規制にも遵守する必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国でアプリを公開する際、技術基準を満たすことは始まりに過ぎません。開発者は、中国サイバー空間管理局（CAC）および[工業情報化省](https://en.wikipedia.org/wiki/Ministry_of_Industry_and_Information_Technology)（MIIT）の規制にも遵守する必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### MIIT登録プロセス
 
@@ -184,18 +184,18 @@ MIITに登録するために、開発者は以下を準備する必要があり�
 
 ## 更新管理
 
-中国では、更新の管理は単なる技術的な調整にとどまらず、常に進化する厳格なサイバーセキュリティ規制を満たすことに関わっています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国では、更新の管理は単なる技術的な調整にとどまらず、常に進化する厳格なサイバーセキュリティ規制を満たすことに関わっています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### OTA更新要件
 
-中国におけるOTA（Over-the-Air）更新は、厳格なセキュリティおよびコンプライアンスルールに従う必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。ここに必要な要件があります：
+中国におけるOTA（Over-the-Air）更新は、厳格なセキュリティおよびコンプライアンスルールに従う必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。ここに必要な要件があります：
 
-1. **エンドツーエンドの暗号化**：更新パッケージは送信中に暗号化され、真偽を確認するためのデジタル署名を含めなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+1. **エンドツーエンドの暗号化**：更新パッケージは送信中に暗号化され、真偽を確認するためのデジタル署名を含めなければなりません [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 2. **ユーザー検証**：更新は、通常は携帯電話番号の検証を通じて確認される明示的なユーザーの同意の後にのみ進めさなければなりません [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 3. **データのローカリゼーション**：中国のユーザーのために更新を提供するために使用されるインフラは、物理的に中国国内に置かなければなりません [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)。
 4. **文書化**：ユーザーの同意、アクセス記録、およびセキュリティ評価に関する情報を含めて、更新の詳細なログを少なくとも60日間保管しておく必要があります [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
 
-重要なセキュリティパッチに対して、中国サイバー空間管理局（CAC）は迅速な対応を強制しています。企業は脆弱性通知を直ちに発行し、修正の展開を迅速化する必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+重要なセキュリティパッチに対して、中国サイバー空間管理局（CAC）は迅速な対応を強制しています。企業は脆弱性通知を直ちに発行し、修正の展開を迅速化する必要があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 これらの要件は、よく整理されたバージョン管理システムに密接に関連しています。
 
@@ -212,7 +212,7 @@ MIITに登録するために、開発者は以下を準備する必要があり�
 
 ロールバック機能は必須であり、企業は以前のバージョンに迅速に戻ることができる必要があります。これらの古いバージョンも、少なくとも60日間保管されなければなりません [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
 
-バージョン管理のためにサードパーティのサービスを使用する場合、企業は以下を確保しなければなりません：中国当局への登録、ローカライズされたインフラの展開、責任の明確な文書化、データローカリゼーション法への準拠 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+バージョン管理のためにサードパーティのサービスを使用する場合、企業は以下を確保しなければなりません：中国当局への登録、ローカライズされたインフラの展開、責任の明確な文書化、データローカリゼーション法への準拠 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 敏感なデータを管理するプラットフォームでは、データ収集方法またはアクセス権限を変更する更新には、規制準拠を維持するための追加のテストと検証が必要です [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
@@ -222,7 +222,7 @@ Capgo（https://capgo.app）のようなツールは、暗号化、シームレ�
 
 ## コンプライアンス文書
 
-中国のサイバーセキュリティフレームワークは、徹底的な文書化に強い重きを置いています。2025年3月の改正により、要求事項が厳格になり、コンプライアンス違反に対する罰則が大幅に増加しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国のサイバーセキュリティフレームワークは、徹底的な文書化に強い重きを置いています。2025年3月の改正により、要求事項が厳格になり、コンプライアンス違反に対する罰則が大幅に増加しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### 必要な年次監査
 
@@ -263,7 +263,7 @@ Capgo（https://capgo.app）のようなツールは、暗号化、シームレ�
     
     -   保存要件：最低60日間 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)
 
-これらのログを保持しないことは、年間収益の最大5%の罰金につながる可能性があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。さらに、自動更新サービスは、コンプライアンスを示すために、すべての更新関連活動を文書化する必要があります。
+これらのログを保持しないことは、年間収益の最大5%の罰金につながる可能性があります [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。さらに、自動更新サービスは、コンプライアンスを示すために、すべての更新関連活動を文書化する必要があります。
 
 適切な文書管理は、すべての他のコンプライアンス対策、スタッフのトレーニングやインシデント対応計画を含む、の基盤です。
 
@@ -271,7 +271,7 @@ Capgo（https://capgo.app）のようなツールは、暗号化、シームレ�
 
 ### 違反対応計画
 
-2025年3月のCSL改正は、違反に対処するための詳細なプロトコルを持つことの重要性を強調しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。確固たる対応計画には、通常次の主要なフェーズが含まれます：
+2025年3月のCSL改正は、違反に対処するための詳細なプロトコルを持つことの重要性を強調しています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。確固たる対応計画には、通常次の主要なフェーズが含まれます：
 
 | **対応フェーズ** | **必要なアクション** |
 | --- | --- |
@@ -300,7 +300,7 @@ CACはまた、迅速で文書化された対応が必要であることを強�
 -   トレーニング文書が常に最新であることを確認する
 -   規制更新への承認を追跡する
 
-組織はまた、重要な規制変更が発生するたびに追加のトレーニングを提供する必要があります。たとえば、2025年3月28日に予定されているCSLの改正などです [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+組織はまた、重要な規制変更が発生するたびに追加のトレーニングを提供する必要があります。たとえば、2025年3月28日に予定されているCSLの改正などです [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 **効果的なトレーニングのための実践的なステップ**
 

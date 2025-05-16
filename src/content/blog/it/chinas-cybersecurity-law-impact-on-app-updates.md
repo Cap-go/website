@@ -67,7 +67,7 @@ next_blog: ''
 
 ### 更新审核延迟
 
-修订后的安全审核流程已经延缓了更新时间表，推迟了关键补丁和新功能的发布。为了适应这一变化，许多开发者正创建单独的更新轨道或合规的实时更新系统，以处理小的更改而不触发完整的审核流程。增加压力的是，与年度收入百分比相关的处罚——而不是固定金额——使合规变成一种高风险的商业问题 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。这些障碍突显出制定灵活策略以应对不断发展的监管环境的重要性。
+修订后的安全审核流程已经延缓了更新时间表，推迟了关键补丁和新功能的发布。为了适应这一变化，许多开发者正创建单独的更新轨道或合规的实时更新系统，以处理小的更改而不触发完整的审核流程。增加压力的是，与年度收入百分比相关的处罚——而不是固定金额——使合规变成一种高风险的商业问题 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。这些障碍突显出制定灵活策略以应对不断发展的监管环境的重要性。
 
 ## 满足要求的方法
 
@@ -75,7 +75,7 @@ next_blog: ''
 
 ### 自动化安全检查
 
-将自动化安全检查纳入CI/CD管道是至关重要的，尤其是要控制符合数据安全法（DSL）和个人信息保护法（PIPL）标准 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+将自动化安全检查纳入CI/CD管道是至关重要的，尤其是要控制符合数据安全法（DSL）和个人信息保护法（PIPL）标准 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 以下是有效的自动化安全设置的一些关键元素：
 

@@ -66,7 +66,7 @@ AWS 提供多个工具来保护您的更新：
 -   **KMS**：处理加密密钥管理。
 -   **CloudTrail**：跟踪和记录用户活动以进行审计。
 
-话虽如此，满足应用商店安全性和合规性要求需要手动配置。这与那些具有内置加密和合规工具的平台相比，便捷性较差 [\[1\]](https://capgo.app/)。
+话虽如此，满足应用商店安全性和合规性要求需要手动配置。这与那些具有内置加密和合规工具的平台相比，便捷性较差 [\[1\]](https://capgo.app/) 。
 
 ### 部署管理
 
@@ -126,7 +126,7 @@ Microsoft Azure 提供一系列云服务，使得为 [Capacitor 应用](https://
 
 在安全性方面，Azure 提供了多个工具。**Key Vault** 帮助管理加密密钥，**Active Directory** 控制访问，**Security Center** 监控威胁，**DDoS 保护** 保护免受网络攻击。这些工具共同营造了一个安全的 OTA 更新环境。
 
-如果您需要一个定制的 OTA 更新解决方案，Azure 可以满足您的需求。使用 **Azure DevOps** 和无服务器工具如 **Azure Pipelines** 来 [自动化构建和部署](https://capgo.app/blog/automatic-build-and-release-with-gitlab/)。添加 **Azure Functions** 来触发更新工作流，并依靠 **Azure Monitor** 来追踪性能和指标。
+如果您需要一个定制的 OTA 更新解决方案，Azure 可以满足您的需求。使用 **Azure DevOps** 和无服务器工具如 **Azure Pipelines** 来 [自动化构建和部署](https://capgo.app/blog/automatic-build-and-release-with-gitlab/) 。添加 **Azure Functions** 来触发更新工作流，并依靠 **Azure Monitor** 来追踪性能和指标。
 
 Azure 还支持分阶段推出和自动回滚机制，这对于符合应用商店指南和行业标准至关重要。其合规性特性使设计符合监管要求的更新策略变得更加轻松。
 
@@ -153,7 +153,7 @@ Capgo 的渠道系统使管理更新变得简单有效。主要特性包括：
 | 版本控制 | 管理多个应用版本 | 轻松支持迭代测试 |
 | 即时回滚 | 迅速恢复到以前的版本 | 快速修复问题更新 |
 
-该平台在实际场景中证明了其可靠性。支持 750 个应用，交付超过 2350 万个更新，Capgo 在 24 小时内实现了 95% 的更新率和 82% 的全球部署成功率 [\[1\]](https://capgo.app/)。
+该平台在实际场景中证明了其可靠性。支持 750 个应用，交付超过 2350 万个更新，Capgo 在 24 小时内实现了 95% 的更新率和 82% 的全球部署成功率 [\[1\]](https://capgo.app/) 。
 
 Capgo 还与 CI/CD 工具如 [GitHub Actions](https://docs.github.com/actions) 和 [Jenkins](https://www.jenkins.io/) 无缝集成，自动化部署以节省时间并减少手动工作。其增量更新系统仅下载代码中更改的部分，提高了速度和带宽效率。
 

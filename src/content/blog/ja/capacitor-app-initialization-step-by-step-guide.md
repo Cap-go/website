@@ -79,7 +79,7 @@ Capacitorを使用するには、以下のツールが必要です：
     
     [[CODE_BLOCK]]
     
-    これにより、[更新管理](https://capgoapp/docs/plugin/cloud-mode/manual-update/)に必要な設定が構成されます[\[1\]](https://capgoapp/)。アプリのビルド、テスト、デプロイのプロセスが簡素化されます。
+    これにより、[更新管理](https://capgoapp/docs/plugin/cloud-mode/manual-update/)に必要な設定が構成されます[\[1\]](https://capgoapp/) 。アプリのビルド、テスト、デプロイのプロセスが簡素化されます。
 
 ## 新しいCapacitorプロジェクトの開始
 

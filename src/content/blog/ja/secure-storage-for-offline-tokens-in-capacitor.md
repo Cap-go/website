@@ -65,7 +65,7 @@ Capacitorアプリケーションでオフライントークンのセキュア�
 
 オフライントークンストレージの主要な実践とツールの概要です：
 
--   ハードウェアバックアップされたキーストアを使用して**トークンを暗号化**し、[生体認証で保護](https://capgo.app/plugins/capacitor-native-biometric/)。
+-   ハードウェアバックアップされたキーストアを使用して**トークンを暗号化**し、[生体認証で保護](https://capgo.app/plugins/capacitor-native-biometric/) 。
 -   トークンの発行、有効期限、ローテーション、更新に関する厳格なポリシーを実装。
 
 クロスプラットフォームの暗号化には、**@capacitor-community/secure-storage**と**Ionic Identity Vault**が優れたオプションです。さらに、**[Capgo](https://capgo.app/)**はエンドツーエンドの暗号化、CI/CD統合、ユーザーターゲットのロールアウトを提供し、AppleとAndroidストアの要件を満たします。

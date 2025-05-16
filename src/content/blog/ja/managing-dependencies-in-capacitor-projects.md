@@ -143,7 +143,7 @@ Capacitorプロジェクトでの効果的な依存関係管理には、自動�
 
 ### 依存関係のドキュメント化とテスト
 
-ワークフローの一部として依存関係のドキュメント化とテストを行うことは重要です。**依存性注入（DI）**を使用することで、コードをモジュール化し、テストを容易にすることができます [\[10\]](https://hackeryarn.com/post/universally-testable-dependencies/)。
+ワークフローの一部として依存関係のドキュメント化とテストを行うことは重要です。**依存性注入（DI）**を使用することで、コードをモジュール化し、テストを容易にすることができます [\[10\]](https://hackeryarn.com/post/universally-testable-dependencies/) 。
 
 Capacitorプラグインのテストには、TypeScriptのパスマッピングを設定できます。**mocks**ディレクトリを作成し、`tsconfig.spec.json`を更新して`@capacitor/*`をモック実装にマッピングすることで、制御された環境でコンポーネントをテストできます [\[9\]](https://github.com/ionic-team/cap-plugin-mock-jasmine)。
 
@@ -159,7 +159,7 @@ Capacitorプラグインのテストには、TypeScriptのパスマッピング�
     問題を解決した後、更新された依存関係を徹底的にテストします。JasmineなどのテストフレームワークでCapacitorプラグインのモックを使用します [\[9\]](https://github.com/ionic-team/cap-plugin-mock-jasmine)。
     
 
-長期的なテストとメンテナンスを容易にするために、依存関係を`deps`オブジェクトにエクスポートします。これにより、テスト中のモック化が簡単になり、本番環境に影響を与える前に問題を検出できます [\[10\]](https://hackeryarn.com/post/universally-testable-dependencies/)。
+長期的なテストとメンテナンスを容易にするために、依存関係を`deps`オブジェクトにエクスポートします。これにより、テスト中のモック化が簡単になり、本番環境に影響を与える前に問題を検出できます [\[10\]](https://hackeryarn.com/post/universally-testable-dependencies/) 。
 
 ## [Capgo](https://capgo.app/)を使用した依存関係の更新
 
@@ -186,7 +186,7 @@ npx @capgo/cli@latest init [APIKEY]
 
 ### 開発チームにとってのメリット
 
-Capgoを使用しているチームは、**リリース効率が81%向上**しています[\[14\]](https://capgo.app/)。以下が特徴的な点です:
+Capgoを使用しているチームは、**リリース効率が81%向上**しています[\[14\]](https://capgo.app/) 。以下が特徴的な点です:
 
 - **迅速なデプロイメント**: 素早くアップデートをプッシュし、ユーザー割り当てやロールバックオプションなどの機能で管理できます。
 - **手頃な価格**: $2,600の一回限りのCI/CDセットアップ料金で、他のツールと比べて予算に優しい選択肢です。

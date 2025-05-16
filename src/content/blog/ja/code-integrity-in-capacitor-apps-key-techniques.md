@@ -152,7 +152,7 @@ Capacitorアプリのコード整合性を維持するには、監視システ�
 
 ### 監視システム
 
-効果的な監視には、自動化ツールと手動監査を組み合わせた複数のチェックレイヤーの使用が含まれます。ここでの重要なツールはGoogle Play Integrity APIで、応答時間200ms未満でデバイスレベルのアテステーションを提供します[\[1\]](https://ionic.io/docs/tutorials/mobile-security/play-integrity)[\[2\]](https://github.com/capacitor-community/play-integrity/)。
+効果的な監視には、自動化ツールと手動監査を組み合わせた複数のチェックレイヤーの使用が含まれます。ここでの重要なツールはGoogle Play Integrity APIで、応答時間200ms未満でデバイスレベルのアテステーションを提供します[\[1\]](https://ionic.io/docs/tutorials/mobile-security/play-integrity)[\[2\]](https://github.com/capacitor-community/play-integrity/) 。
 
 | 監視レイヤー | 実装 |
 | --- | --- |
@@ -181,7 +181,7 @@ Capacitorアプリのコード整合性を維持するには、監視システ�
 
 以下はスピードとセキュリティの両方を確保するためのいくつかの戦略です：
 
-- **段階的検証**: 完全な暗号化検証に進む前に基本的な署名チェックから開始[\[2\]](https://github.com/capacitor-community/play-integrity/)。
+- **段階的検証**: 完全な暗号化検証に進む前に基本的な署名チェックから開始[\[2\]](https://github.com/capacitor-community/play-integrity/) 。
 - **リスクベースの認証**: 異常なユーザーの位置やデバイスプロファイルなどのリスク信号に基づいて検証の強度を調整。
 - **オフライン対応の検証**: 重要なセキュリティトークンをキャッシュしフォールバックメカニズムを使用することで、ネットワーク状態が悪い場合でもシステムが機能するようにする。
 

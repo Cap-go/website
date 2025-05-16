@@ -62,7 +62,7 @@ OTAアップデートの一般的な用途:
 
 ### アプリストアのルールに従う
 
-アプリストア、特にAppleのApp Storeは、OTAを通じて更新できる内容について厳格なルールを持っています。AppleはGoogle Playよりも厳しい制限を設けており、特にOTAアップデートを通じた主要な機能のデプロイメントを制限しています[\[2\]](https://pagepro.co/blog/react-native-over-the-air-updates/)。許可される内容の簡単な内訳は以下の通りです:
+アプリストア、特にAppleのApp Storeは、OTAを通じて更新できる内容について厳格なルールを持っています。AppleはGoogle Playよりも厳しい制限を設けており、特にOTAアップデートを通じた主要な機能のデプロイメントを制限しています[\[2\]](https://pagepro.co/blog/react-native-over-the-air-updates/) 。許可される内容の簡単な内訳は以下の通りです:
 
 | アップデートの種類 | OTAで許可 | ストアレビューが必要 |
 | --- | --- | --- |
@@ -76,7 +76,7 @@ OTAアップデートの一般的な用途:
 
 ### OTAアップデートが重要な理由
 
-OTAアップデートは開発者とユーザーの両方にとってメリットがあります。例えば、2017年の[Newport Folk Festival](https://en.wikipedia.org/wiki/Newport_Folk_Festival)では、開発者はOTAアップデートを使用してイベントスケジュールに影響を与えるタイムゾーンのバグを素早く修正しました[\[4\]](https://cantina.co/streamline-mobile-app-deployments-with-react-native-and-over-the-air-updates/)。同様に、[Your Call Football](https://en.wikipedia.org/wiki/Your_Call_Football)はスケジュールが変更された際にOTAアップデートを使用して試合時間を即座に調整しました[\[4\]](https://cantina.co/streamline-mobile-app-deployments-with-react-native-and-over-the-air-updates/)。
+OTAアップデートは開発者とユーザーの両方にとってメリットがあります。例えば、2017年の[Newport Folk Festival](https://en.wikipedia.org/wiki/Newport_Folk_Festival)では、開発者はOTAアップデートを使用してイベントスケジュールに影響を与えるタイムゾーンのバグを素早く修正しました[\[4\]](https://cantina.co/streamline-mobile-app-deployments-with-react-native-and-over-the-air-updates/) 。同様に、[Your Call Football](https://en.wikipedia.org/wiki/Your_Call_Football)はスケジュールが変更された際にOTAアップデートを使用して試合時間を即座に調整しました[\[4\]](https://cantina.co/streamline-mobile-app-deployments-with-react-native-and-over-the-air-updates/) 。
 
 主なメリット:
 
@@ -100,11 +100,11 @@ Appleは新規アプリとアップデートの両方に対して厳格なレビ
 
 | 要件 | 説明 |
 | --- | --- |
-| API使用 | アプリは公開APIのみを使用し、現在のOSと互換性がある必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。 |
-| コード実行 | アプリは機能や機能性を変更するコードをダウンロードまたは実行できません[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。 |
-| アップデートの説明 | 変更点と新機能は「What's New」セクションで明確に説明する必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。 |
-| テスト | アプリは安定性を確保しバグを修正するために徹底的にテストする必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。 |
-| ドキュメンテーション | 即座に理解できない可能性のある機能について詳細な説明を提供する必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。 |
+| API使用 | アプリは公開APIのみを使用し、現在のOSと互換性がある必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。 |
+| コード実行 | アプリは機能や機能性を変更するコードをダウンロードまたは実行できません[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。 |
+| アップデートの説明 | 変更点と新機能は「What's New」セクションで明確に説明する必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。 |
+| テスト | アプリは安定性を確保しバグを修正するために徹底的にテストする必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。 |
+| ドキュメンテーション | 即座に理解できない可能性のある機能について詳細な説明を提供する必要があります[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。 |
 
 Appleはまた、アップデートの整合性を確保し、パーソナライズし、ダウングレード攻撃をブロックするために安全なアップデートシステムを使用しています[\[5\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。
 
@@ -126,13 +126,13 @@ Googleは依然としてセキュリティ対策を実施し、ポリシー違�
 アプリを更新する際に避けるべき一般的な落とし穴:
 
 1. **セキュリティの見落とし**  
-   アップデートを適切に検証しないとぜい弱性が露呈する可能性があります。常にデジタル署名とHTTPSを使用してアップデートの配信を安全に行ってください[\[7\]](https://bluegoatcyber.com/blog/ota-update-vulnerabilities/)。
+   アップデートを適切に検証しないとぜい弱性が露呈する可能性があります。常にデジタル署名とHTTPSを使用してアップデートの配信を安全に行ってください[\[7\]](https://bluegoatcyber.com/blog/ota-update-vulnerabilities/) 。
 
 2. **機能の行き過ぎ**  
    over-the-air (OTA)アップデートを通じて主要な新機能を追加することはストアポリシーに違反する可能性があります[\[8\]](https://stackoverflow.com/questions/43951710/does-apple-allow-ota-updates-of-application)。
 
 3. **ユーザーとのコミュニケーション**  
-   アップデートに関する不十分なコミュニケーションはユーザーを混乱させ、セキュリティを弱める可能性があります[\[7\]](https://bluegoatcyber.com/blog/ota-update-vulnerabilities/)。
+   アップデートに関する不十分なコミュニケーションはユーザーを混乱させ、セキュリティを弱める可能性があります[\[7\]](https://bluegoatcyber.com/blog/ota-update-vulnerabilities/) 。
 
 コンプライアンスを維持するために:
 
@@ -140,7 +140,7 @@ Googleは依然としてセキュリティ対策を実施し、ポリシー違�
 -   機械学習を使用してアップデートパターンを分析する。
 -   アップデートの目的をユーザーに明確に説明する。
 -   OTAアップデートを通じてアプリの核となる機能を変更することを避ける[\[8\]](https://stackoverflow.com/questions/43951710/does-apple-allow-ota-updates-of-application)。
--   サブスクリプションと価格の詳細について透明性を保つ[\[3\]](https://developer.apple.com/app-store/review/guidelines/)。
+-   サブスクリプションと価格の詳細について透明性を保つ[\[3\]](https://developer.apple.com/app-store/review/guidelines/) 。
 
 これらのルールに従うことで、プラットフォームの要件を満たしながらユーザーを満足させ、情報を提供し続けることができます。
 
@@ -183,12 +183,12 @@ Googleは依然としてセキュリティ対策を実施し、ポリシー違�
 
 セキュリティ基準を遵守するために:
 
--   開発パイプラインにセキュリティテストを組み込む [\[12\]](https://www.nowsecure.com/blog/2024/08/28/navigating-mobile-app-security-privacy-regulations-how-nowsecure-can-help-ensure-compliance/)。
+-   開発パイプラインにセキュリティテストを組み込む [\[12\]](https://www.nowsecure.com/blog/2024/08/28/navigating-mobile-app-security-privacy-regulations-how-nowsecure-can-help-ensure-compliance/) 。
 -   セキュアバイデザインの原則を適用する。
 -   各地域の規制要件を常に把握する。
 -   すべてのセキュリティプロトコルとテスト手順を文書化する。
 
-2025年2月27日現在、Capgoは世界中で5億200万件のアップデートを配信し、1.8Kのアプリが本番環境でプラットフォームを使用していると報告しています [\[9\]](https://capgo.app/)。これは、厳格なセキュリティとコンプライアンス基準を維持しながら、大規模なOTAアップデートが実現可能であることを示しています。
+2025年2月27日現在、Capgoは世界中で5億200万件のアップデートを配信し、1.8Kのアプリが本番環境でプラットフォームを使用していると報告しています [\[9\]](https://capgo.app/) 。これは、厳格なセキュリティとコンプライアンス基準を維持しながら、大規模なOTAアップデートが実現可能であることを示しています。
 
 セキュリティ対策を整えた後は、ユーザーにスムーズなアップデート体験を提供することが次のステップとなります。
 
@@ -210,13 +210,13 @@ Capgoは、以下の特徴的な機能により、安全で準拠したOTAアッ
 | **ユーザー割り当て** | アップデート対象者の制御 | ターゲットを絞ったロールアウトが可能 |
 | **バージョン管理** | アップデート履歴の簡単な管理 | メンテナンスの簡素化 |
 
-このプラットフォームは、独自のDartインタープリタを使用してコンプライアンスと高パフォーマンスも確保しています [\[13\]](https://capgo.app/docs/faq/)。これらの機能により、Capgoはアプリストアのポリシーを遵守する信頼できる選択肢となっています。
+このプラットフォームは、独自のDartインタープリタを使用してコンプライアンスと高パフォーマンスも確保しています [\[13\]](https://capgo.app/docs/faq/) 。これらの機能により、Capgoはアプリストアのポリシーを遵守する信頼できる選択肢となっています。
 
 ### Capgoのコンプライアンス維持方法
 
 Capgoは以下の方法でアプリストアのガイドラインを厳密に遵守しています：
 
--   [JavaScriptバンドル](https://capgo.app/docs/webapp/bundles/)のみを更新し、ネイティブコードの変更を避ける [\[14\]](https://capgo.app/docs/getting-started/quickstart/)。
+-   [JavaScriptバンドル](https://capgo.app/docs/webapp/bundles/)のみを更新し、ネイティブコードの変更を避ける [\[14\]](https://capgo.app/docs/getting-started/quickstart/) 。
 -   アップデートがアプリの本来の目的に沿っていること、新しいストアフロントを作成しないこと、システムのセキュリティを損なわないことを確認する。
 
 > 「インタープリタによるコードのダウンロードは、以下の条件を満たす場合にのみ許可されます：(a) アプリケーションの主要な目的を変更せず、App Storeに提出されたアプリケーションの意図された目的と一致しない機能を提供しないこと、(b) 他のコードやアプリケーションのストアやストアフロントを作成しないこと、(c) OSの署名、サンドボックス、その他のセキュリティ機能を迂回しないこと。」

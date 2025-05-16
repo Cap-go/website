@@ -185,7 +185,7 @@ next_blog: ''
 
 オープンソースツールは、柔軟性とカスタマイズが必要なプロジェクトに最適です。特に、カスタマイズされた統合やコスト効率の良いオプションを求めているチームにとって、有用です。[Capacitor Live Updateプラグイン](https://www.npmjs.com/package/@capgo/capacitor-updater)は、このアプローチの良い例です。Capawesomeが説明するように：
 
-> "Capacitorの最大の利点の1つは、アプリをアプリストアに再提出することなく、リアルタイムで更新を配信できる能力です" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)。
+> "Capacitorの最大の利点の1つは、アプリをアプリストアに再提出することなく、リアルタイムで更新を配信できる能力です" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/) 。
 
 このオプションは以下に適しています：
 
