@@ -216,7 +216,7 @@ MIITに登録するために、開発者は以下を準備する必要があり�
 
 敏感なデータを管理するプラットフォームでは、データ収集方法またはアクセス権限を変更する更新には、規制準拠を維持するための追加のテストと検証が必要です [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
-Capgo（https://capgo.app）のようなツールは、暗号化、シームレスなCI/CD統合、および詳細なバージョン管理機能を含む[ライブ更新ソリューション](https://capgo.app/blog/self-hosted-live-updates/)を提供します。
+Capgo（https://capgo.app）のようなツールは、暗号化、シームレスなCI/CD統合、および詳細なバージョン管理機能を含む[ライブ更新ソリューション](https://capgo.app/blog/self-hosted-live-updates/) を提供します。
 
 これらの規制に従わないと、前年度の収益の最大5%に達する罰金や、中国のアプリストアからの削除など、重大な結果を招く可能性があります [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)。
 

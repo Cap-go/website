@@ -90,7 +90,7 @@ next_blog: ''
 
 ### 快速更新系统
 
-中国严格的应用审核流程可能成为瓶颈，但合规的[实时更新解决方案](https://capgo.app/blog/self-hosted-live-updates/)提供了一种迅速推送修复的方式，同时保持在法规边界内。
+中国严格的应用审核流程可能成为瓶颈，但合规的[实时更新解决方案](https://capgo.app/blog/self-hosted-live-updates/) 提供了一种迅速推送修复的方式，同时保持在法规边界内。
 
 例如，[Capgo](https://capgo.app/)的平台取得了显著的成果，在仅24小时内实现了95%的用户更新率 [\[2\]](https://capgo.app)。
 
