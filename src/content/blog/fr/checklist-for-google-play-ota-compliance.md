@@ -50,7 +50,7 @@ Ce niveau de documentation facilite grandement le dépannage.
 
 Des mesures de sécurité fortes sont essentielles pour que les mises à jour OTA répondent aux normes de Google Play. Deux pratiques essentielles incluent l'utilisation du chiffrement de bout en bout et la signature des paquets de mise à jour.
 
-Comme l'explique l'équipe de développement de Capgo, _"La seule solution avec un véritable chiffrement de bout en bout, les autres ne font que signer les mises à jour"_ [\[1\]](https://capgoapp/) Les audits de sécurité réguliers et le respect des meilleures pratiques de l'industrie aident à garantir que les mises à jour restent sécurisées et fiables.
+Comme l'explique l'équipe de développement de Capgo, _"La seule solution avec un véritable chiffrement de bout en bout, les autres ne font que signer les mises à jour"_ [\[1\]](https://capgo.app/) Les audits de sécurité réguliers et le respect des meilleures pratiques de l'industrie aident à garantir que les mises à jour restent sécurisées et fiables.
 
 ## Sécurité de la Distribution des Mises à Jour
 
@@ -60,7 +60,7 @@ Ces mesures aident à protéger les données utilisateur et garantissent que les
 
 Le chiffrement est la clé d'une distribution OTA sécurisée. L'approche la plus fiable est le **chiffrement de bout en bout**, qui protège les paquets de mise à jour tout au long du processus de transmission. La simple signature des mises à jour n'est pas suffisante - le chiffrement de bout en bout garantit que seuls vos utilisateurs peuvent accéder aux mises à jour.
 
-> "Chiffrement de bout en bout. Seuls vos utilisateurs peuvent déchiffrer vos mises à jour, personne d'autre" [\[1\]](https://capgoapp/)
+> "Chiffrement de bout en bout. Seuls vos utilisateurs peuvent déchiffrer vos mises à jour, personne d'autre" [\[1\]](https://capgo.app/)
 
 Associez le chiffrement à des stratégies de récupération solides pour maintenir un service fluide.
 
@@ -91,10 +91,10 @@ Google Play exige des notifications claires pour les mises à jour en attente af
 
 Différents types de mises à jour en direct (OTA) nécessitent des niveaux spécifiques d'autorisations utilisateur :
 
-**[Mises à jour automatiques](https://capgoapp/docs/plugin/cloud-mode/auto-update/)**
+**[Mises à jour automatiques](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**
 
 -   Utilisées pour les petits correctifs et modifications mineures
--   Aucune action nécessaire de l'utilisateur [\[1\]](https://capgoapp/)
+-   Aucune action nécessaire de l'utilisateur [\[1\]](https://capgo.app/)
 
 **Approbation manuelle**
 
@@ -115,7 +115,7 @@ Fournissez toujours des notes de mise à jour brèves et claires incluant les d�
 -   Changements de fonctionnalités
 -   Corrections de bugs
 
-> "Chiffrement de bout en bout. Seuls vos utilisateurs peuvent déchiffrer vos mises à jour, personne d'autre" [\[1\]](https://capgoapp/)
+> "Chiffrement de bout en bout. Seuls vos utilisateurs peuvent déchiffrer vos mises à jour, personne d'autre" [\[1\]](https://capgo.app/)
 
 Cette approche maintient les utilisateurs informés et garantit que les mises à jour sont à la fois efficaces et conformes aux normes Google Play
 
@@ -145,7 +145,7 @@ Déployez les mises à jour graduellement, en commençant petit et en élargissa
 3.  **Phase d'expansion** : Augmenter le déploiement par incréments de 20%
 4.  **Version complète** : Déployer à tous les utilisateurs après confirmation de la stabilité
 
-> "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo" - colenso, @colenso [\[1\]](https://capgoapp/)
+> "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo" - colenso, @colenso [\[1\]](https://capgo.app/)
 
 ### Suivi des performances
 
@@ -159,15 +159,15 @@ Suivez ces métriques clés pendant et après le déploiement :
 
 Les outils d'analyse et de suivi des erreurs sont essentiels pour identifier et résoudre rapidement les problèmes. Les fonctionnalités de retour arrière instantané sont cruciales pour maintenir la qualité du service en cas de problème.
 
-> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer en continu à nos utilisateurs !" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgoapp/)
+> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer en continu à nos utilisateurs !" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
 Pour les tests bêta et les déploiements progressifs, utilisez des systèmes de canaux pour cibler des groupes d'utilisateurs spécifiques avec différentes versions. Cette approche contrôlée assure des tests approfondis tout en restant conforme aux exigences du Google Play Store.
 
-## Outils de conformité [Capgo](https://capgoapp/)
+## Outils de conformité [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223.jpg)
 
-Capgo s'appuie sur des protocoles stricts de mise à jour et de sécurité pour fournir des outils conçus pour la conformité. Avec plus de 235 millions de mises à jour distribuées sur 750 applications en production [\[1\]](https://capgoapp/), Capgo assure des mises à jour fluides tout en respectant les normes essentielles. Ces outils sont fondés sur des principes tels que le contrôle de version, la sécurité et l'assurance qualité.
+Capgo s'appuie sur des protocoles stricts de mise à jour et de sécurité pour fournir des outils conçus pour la conformité. Avec plus de 235 millions de mises à jour distribuées sur 750 applications en production [\[1\]](https://capgo.app/), Capgo assure des mises à jour fluides tout en respectant les normes essentielles. Ces outils sont fondés sur des principes tels que le contrôle de version, la sécurité et l'assurance qualité.
 
 ### Fonctionnalités de Sécurité
 
@@ -188,7 +188,7 @@ Capgo s'intègre facilement dans les flux de développement existants tout en re
 | Pipeline CI/CD | Prend en charge [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), [Jenkins](https://wwwjenkinsio/) | Automatise les contrôles de conformité |
 | Outils CLI | Déploiements en une commande | Standardise le processus de mise à jour |
 | Accès API | API publique pour configurations personnalisées | Offre une gestion flexible de la conformité |
-| [Système de Canaux](https://capgoapp/docs/plugin/cloud-mode/channel-system/) | Tests bêta et déploiements progressifs | Permet des versions contrôlées |
+| [Système de Canaux](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Tests bêta et déploiements progressifs | Permet des versions contrôlées |
 
 L'intégration CI/CD est disponible pour environ 300€ par mois.
 
@@ -203,7 +203,7 @@ Capgo fournit des outils pour gérer efficacement les mises à jour tout en s'al
 | Mises à Jour Partielles | Taille moyenne du bundle de 5MB | Améliore l'efficacité de la livraison |
 | Contrôles d'Organisation | Permissions granulaires | Sécurise l'autorité des mises à jour |
 
-> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer continuellement à nos utilisateurs !" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer continuellement à nos utilisateurs !" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Capgo propose également des options d'hébergement flexibles, incluant des solutions cloud et auto-hébergées. Ces options permettent aux organisations de maintenir le contrôle sur leur infrastructure de mise à jour tout en respectant les normes de sécurité de Google Play. Les fonctionnalités comme la surveillance en temps réel et le retour arrière instantané aident à atteindre le référentiel de 82% de taux de réussite global.
 
@@ -224,6 +224,6 @@ Rester à jour avec ces exigences aide à éviter les rejets et assure des opér
 
 ### Utilisation de Capgo
 
-Capgo fournit des outils conçus pour simplifier la conformité aux normes Google Play. Avec ses fonctionnalités, les développeurs peuvent gérer des millions de mises à jour à travers diverses applications de manière transparente [\[1\]](https://capgoapp/)
+Capgo fournit des outils conçus pour simplifier la conformité aux normes Google Play. Avec ses fonctionnalités, les développeurs peuvent gérer des millions de mises à jour à travers diverses applications de manière transparente [\[1\]](https://capgo.app/)
 
 > "Capgo est essentiel pour les développeurs - permettant des corrections de bugs sans examen de la boutique" [\[1\]](https://capgo

@@ -22,7 +22,7 @@ next_blog: ''
 
 Die Samen von Capgo wurden tatsächlich lange vor meiner Reise als Solo-Entwickler gepflanzt. Am 8. Juli 2020 reichte ein Community-Mitglied namens alexcroox eine Plugin-Anfrage ein, die schließlich zur Blaupause für Capgo werden sollte.
 
-![Ursprüngliche Plugin-Anfrage](/capgo-initial-requestwebp)
+![Ursprüngliche Plugin-Anfrage](/capgo-initial-request.webp)
 
 Diese Anfrage skizzierte den Bedarf für ein "Capacitor Hot Code Push"-Plugin mit folgenden Kernpunkten:
 
@@ -44,7 +44,7 @@ Die Begeisterung der Community für dieses vorgeschlagene Plugin, kombiniert mit
 
 Bevor wir in die Capgo-Geschichte eintauchen, ist es wichtig, die Bühne zu bereiten. 2021 traf ich die lebensverändernde Entscheidung, meine Position als CTO von Cashstory zu kündigen und meine Anteile zu verkaufen. Dies markierte den Beginn meiner Reise als Solo-Entwickler, ein Weg voller Ungewissheit, aber auch endloser Möglichkeiten.
 
-![Digitales Nomadenleben in Lissabon](/capgo-lisbon-nomadwebp)
+![Digitales Nomadenleben in Lissabon](/capgo-lisbon-nomad.webp)
 
 Mit meinen Ersparnissen als Sicherheitsnetz begab ich mich auf ein neues Abenteuer. Ich lebte als digitaler Nomade in Lissabon, Portugal, und genoss die lebendige Tech-Szene und Kultur der Stadt, während ich mich auf meine Leidenschaftsprojekte konzentrierte. Mein Hauptfokus lag auf Captime, einer mobilen App für Crossfit-Timer. Ich ahnte nicht, dass dieses Projekt mich dazu bringen würde, etwas viel Größeres zu erschaffen.
 
@@ -54,7 +54,7 @@ Die Energie des Startup-Ökosystems in Lissabon und die Freiheit des digitalen N
 
 Während der Arbeit an Captime stieß ich auf ein erhebliches Hindernis - das Fehlen einer erschwinglichen und flexiblen Update-Lösung für Capacitor-Apps. Im Oktober 2021 äußerte ich diese Bedenken in einem GitHub-Thread.
 
-![Ursprünglicher Vorschlag für Capgo](/capgo-initial-proposalwebp)
+![Ursprünglicher Vorschlag für Capgo](/capgo-initial-proposal.webp)
 
 Die Hauptprobleme, die ich identifizierte, waren:
 
@@ -66,7 +66,7 @@ Die Hauptprobleme, die ich identifizierte, waren:
 
 Meine Bedenken trafen einen Nerv bei anderen Entwicklern. Viele teilten die Meinung, dass bestehende Lösungen für unabhängige Entwickler und kleine Teams überteuert waren.
 
-![Community-Feedback](/capgo-community-feedbackwebp)
+![Community-Feedback](/capgo-community-feedback.webp)
 
 Ein Entwickler fasste die Gefühle der Community zusammen:
 

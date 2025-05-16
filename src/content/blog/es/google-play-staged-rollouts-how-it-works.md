@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**Los lanzamientos graduales en Google Play** permiten a los desarrolladores publicar [actualizaciones de aplicaciones](https://capgoapp/plugins/capacitor-updater/) gradualmente, comenzando con un pequeño porcentaje de usuarios antes de expandirse a todos. Esto asegura la estabilidad, detecta problemas temprano y minimiza riesgos.
+**Los lanzamientos graduales en Google Play** permiten a los desarrolladores publicar [actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) gradualmente, comenzando con un pequeño porcentaje de usuarios antes de expandirse a todos. Esto asegura la estabilidad, detecta problemas temprano y minimiza riesgos.
 
 ### Beneficios Principales:
 
@@ -36,7 +36,7 @@ next_blog: ''
 1.  Elige un porcentaje de lanzamiento (ej., 5-10%) en la [Google Play Console](https://developerandroidcom/distribute/console)
 2.  Monitorea métricas como tasas de fallos, comentarios de usuarios y rendimiento
 3.  Ajusta el porcentaje de lanzamiento o pausalo si surgen problemas
-4.  Usa herramientas como [Capgo](https://capgoapp/) para actualizaciones más rápidas y mejor seguimiento
+4.  Usa herramientas como [Capgo](https://capgo.app/) para actualizaciones más rápidas y mejor seguimiento
 
 ### Consejos Rápidos:
 
@@ -79,7 +79,7 @@ Las métricas para la nueva versión y la versión anterior se muestran por sepa
 
 Si surgen problemas, toma acción inmediata usando este plan:
 
-> "Reversión con un clic a cualquier versión anterior si es necesario" - Capgo [\[1\]](https://capgoapp/)
+> "Reversión con un clic a cualquier versión anterior si es necesario" - Capgo [\[1\]](https://capgo.app/)
 
 1.  **Evaluación Inmediata**  
     Revisa reportes de fallos y comentarios de usuarios para determinar qué tan severo es el problema. Presta atención a qué dispositivos, versiones de Android o características están afectadas.
@@ -106,7 +106,7 @@ Planifica tus implementaciones durante períodos de baja actividad de usuarios p
 
 ### Herramientas de Gestión de Actualizaciones
 
-Usar herramientas de [gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/), como Capgo, puede ayudar a acelerar las tasas de adopción - **95% de los usuarios actualizan dentro de 24 horas**, con una **tasa de éxito del 82%** [\[1\]](https://capgoapp/). Busca herramientas con características como estas:
+Usar herramientas de [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/), como Capgo, puede ayudar a acelerar las tasas de adopción - **95% de los usuarios actualizan dentro de 24 horas**, con una **tasa de éxito del 82%** [\[1\]](https://capgo.app/). Busca herramientas con características como estas:
 
 | Característica | Propósito | Impacto |
 | --- | --- | --- |
@@ -115,9 +115,9 @@ Usar herramientas de [gestión de actualizaciones](https://capgoapp/docs/plugin/
 | Control de Versiones | Gestiona múltiples lanzamientos | Mantiene organizadas las implementaciones |
 | Capacidad de Reversión | Revierte actualizaciones rápidamente | Reduce el impacto en usuarios |
 
-Al seleccionar una herramienta, enfócate en aquellas que ofrezcan monitoreo automatizado. Herramientas con un tiempo de respuesta promedio de **434ms globalmente** [\[1\]](https://capgoapp/) permiten una acción rápida cuando surgen problemas.
+Al seleccionar una herramienta, enfócate en aquellas que ofrezcan monitoreo automatizado. Herramientas con un tiempo de respuesta promedio de **434ms globalmente** [\[1\]](https://capgo.app/) permiten una acción rápida cuando surgen problemas.
 
-Para aún más control, considera usar un [sistema de canales](https://capgoapp/docs/plugin/cloud-mode/channel-system/) para la distribución de actualizaciones. Esto te permite dirigirte a grupos específicos de usuarios con diferentes versiones, facilitando las pruebas beta y los lanzamientos por etapas. Además, la capacidad de implementar cambios de código en vivo mientras se mantiene el cumplimiento con las reglas de la tienda de aplicaciones puede simplificar y acelerar tu [proceso de actualización](https://capgoapp/docs/plugin/cloud-mode/manual-update/).
+Para aún más control, considera usar un [sistema de canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/) para la distribución de actualizaciones. Esto te permite dirigirte a grupos específicos de usuarios con diferentes versiones, facilitando las pruebas beta y los lanzamientos por etapas. Además, la capacidad de implementar cambios de código en vivo mientras se mantiene el cumplimiento con las reglas de la tienda de aplicaciones puede simplificar y acelerar tu [proceso de actualización](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ## Reglas y Restricciones
 
@@ -171,11 +171,11 @@ Los lanzamientos graduales combinados con un monitoreo exhaustivo aseguran actua
 -   Mantener las aplicaciones estables en varios dispositivos Android
 -   Reducir la probabilidad de reseñas y calificaciones negativas
 
-Los estudios muestran que los lanzamientos graduales bien ejecutados logran una tasa de éxito global del 82% [\[1\]](https://capgoapp/), demostrando su valor en mantener un buen rendimiento de la aplicación
+Los estudios muestran que los lanzamientos graduales bien ejecutados logran una tasa de éxito global del 82% [\[1\]](https://capgo.app/), demostrando su valor en mantener un buen rendimiento de la aplicación
 
-### Cómo [Capgo](https://capgoapp/) Agrega Valor
+### Cómo [Capgo](https://capgo.app/) Agrega Valor
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22jpg?auto=compress)
 
 Para aplicaciones de [Capacitor](https://capacitorjscom/), Capgo agiliza los lanzamientos graduales ofreciendo una gestión precisa de actualizaciones mientras cumple con las pautas de Google Play. Su sistema de canales se integra perfectamente con los planes de lanzamiento existentes
 
@@ -194,6 +194,6 @@ Capgo simplifica el proceso de actualización para desarrolladores con funciones
 -   Grupos de usuarios específicos para lanzamientos controlados
 -   Canales de implementación cifrados para mayor seguridad
 
-> "Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar la revisión para corrección de errores es excelente" [\[1\]](https://capgoapp/)
+> "Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar la revisión para corrección de errores es excelente" [\[1\]](https://capgo.app/)
 
 Estas herramientas permiten a los equipos implementar actualizaciones rápidamente mientras aseguran que sus lanzamientos permanezcan estables para usuarios en todo el mundo

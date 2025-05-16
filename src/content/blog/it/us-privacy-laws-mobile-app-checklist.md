@@ -24,7 +24,7 @@ next_blog: ''
 
 **La conformità alla privacy è fondamentale per le app mobile.** Le leggi sulla privacy degli Stati Uniti come [CCPA](https://enwikipediaorg/wiki/California_Consumer_Privacy_Act), [VCDPA](https://probloomberglawcom/insights/privacy/virginia-consumer-data-protection-act-vcdpa/) e CPA richiedono che le app proteggano i dati degli utenti, garantiscano trasparenza e rispettino i diritti degli utenti. La non conformità può portare a multe fino a $7,500 per violazione e perdita della fiducia degli utenti. Ecco come mantenersi conformi:
 
-- **[Privacy Policy](https://capgoapp/dp/):** Spiegare chiaramente la raccolta, l'utilizzo, la condivisione dei dati e i diritti degli utenti
+- **[Privacy Policy](https://capgo.app/dp/):** Spiegare chiaramente la raccolta, l'utilizzo, la condivisione dei dati e i diritti degli utenti
 - **Permessi Utente:** Ottenere il consenso esplicito e permettere agli utenti di gestire i loro dati
 - **Richieste Dati:** Rispondere alle richieste degli utenti (accesso, cancellazione, opt-out) entro i termini legali
 - **Protezione Dati dei Minori:** Rispettare il [COPPA](https://enwikipediaorg/wiki/Children%27s_Online_Privacy_Protection_Act) per utenti sotto i 13 anni
@@ -32,7 +32,7 @@ next_blog: ''
 - **Verifiche Regolari:** Condurre revisioni trimestrali delle pratiche sui dati e dei permessi
 - **Formazione del Team:** Educare il team sulle leggi sulla privacy e sulla gestione sicura dei dati
 
-Mantenersi aggiornati sulle leggi in evoluzione e utilizzare strumenti come [Capgo](https://capgoapp/) per implementare aggiornamenti sicuri in modo efficiente. La conformità alla privacy non riguarda solo evitare sanzioni - si tratta di costruire fiducia con i propri utenti.
+Mantenersi aggiornati sulle leggi in evoluzione e utilizzare strumenti come [Capgo](https://capgo.app/) per implementare aggiornamenti sicuri in modo efficiente. La conformità alla privacy non riguarda solo evitare sanzioni - si tratta di costruire fiducia con i propri utenti.
 
 ## [USENIX Security](https://wwwusenixorg/conference/usenixsecurity25) '24 - Navigare nella Conformità alla Privacy
 

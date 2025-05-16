@@ -66,7 +66,7 @@ Sebelum melanjutkan tutorial:
 
 ## Informasi penting tentang harga
 
-![Price GitHub Action](/price_github_actionswebp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -109,18 +109,18 @@ Untuk menghasilkan kunci, Anda harus memiliki izin Admin di App Store Connect. J
 
 2. Pilih [Users and Access](https://appstoreconnectapplecom/access/users/)
 
-![App Store Connect user access](/select_user_accesswebp)
+![App Store Connect user access](/select_user_access.webp)
 
 3. Pilih tab Integration
 
-![App Store Connect API Integration](/user_access_keyswebp)
+![App Store Connect API Integration](/user_access_keys.webp)
 
 4. Klik Generate API Key atau tombol Add (+)
 
-![App Store Connect API keys create](/user_accesswebp)
+![App Store Connect API keys create](/user_access.webp)
 
 5. Masukkan nama untuk kunci. Nama ini hanya untuk referensi Anda dan bukan bagian dari kunci itu sendiri
 
-![App Store Connect API keys create name](/gen_keywebp)
+![App Store Connect API keys create name](/gen_key.webp)
 
 6. Di bawah Access, pilih peran untuk kunci

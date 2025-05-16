@@ -129,11 +129,11 @@ npx cap open android
 
 Sobald Sie Ihre nativen Projekte eingerichtet haben, ist die Bereitstellung Ihrer App auf einem verbundenen Gerät einfach. In Android Studio müssen Sie nur warten, bis alles bereit ist, und Sie können Ihre App ohne Änderung von Einstellungen auf einem verbundenen Gerät bereitstellen. Hier ein Beispiel:
 
-![android-studio-run](/android-studio-runwebp)
+![android-studio-run](/android-studio-run.webp)
 
 In Xcode müssen Sie Ihr Signing-Konto einrichten, um Ihre App auf einem echten Gerät und nicht nur im Simulator bereitzustellen. Wenn Sie das noch nie gemacht haben, führt Sie Xcode durch den Prozess (aber auch hier müssen Sie am Developer Program teilnehmen). Anschließend können Sie einfach auf "Play" drücken, um die App auf Ihrem verbundenen Gerät auszuführen, das Sie oben auswählen können. Hier ein Beispiel:
 
-![xcode-run](/xcode-runwebp)
+![xcode-run](/xcode-run.webp)
 
 Herzlichen Glückwunsch! Sie haben Ihre Angular Web-App erfolgreich auf einem mobilen Gerät bereitgestellt. Hier ein Beispiel:
 

@@ -17,10 +17,10 @@ locale: es
 next_blog: ''
 ---
 
-[Capgo](https://capgoapp/) facilita el despliegue de correcciones rápidas, evitando retrasos en la tienda de aplicaciones mientras mantiene las actualizaciones seguras y conformes con las pautas de Apple y Google. Aquí hay una descripción general del proceso:
+[Capgo](https://capgo.app/) facilita el despliegue de correcciones rápidas, evitando retrasos en la tienda de aplicaciones mientras mantiene las actualizaciones seguras y conformes con las pautas de Apple y Google. Aquí hay una descripción general del proceso:
 
 1. **Crea y Prueba Tu Corrección**: Escribe cambios precisos en el código, prueba minuciosamente en dispositivos y asegura la compatibilidad
-2. **[Configura Capgo](https://capgoapp/docs/webapp/)**: Instala el [CLI de Capgo](https://capgoapp/docs/cli/commands) con `npx @capgo/cli init`, configura el cifrado e integra con herramientas CI/CD
+2. **[Configura Capgo](https://capgo.app/docs/webapp/)**: Instala el [CLI de Capgo](https://capgo.app/docs/cli/commands) con `npx @capgo/cli init`, configura el cifrado e integra con herramientas CI/CD
 3. **Sube Tu Corrección**: Usa el CLI para cargar tu actualización de forma segura, etiquétala claramente y prepárala para el despliegue
 4. **Elige la Configuración de Actualización**: Dirige a usuarios o grupos específicos, programa lanzamientos y define requisitos de versión
 5. **Rastrea Tu Actualización**: Monitorea tasas de entrega, velocidad de actualización y cobertura de usuarios. Revierte instantáneamente si es necesario
@@ -44,7 +44,7 @@ Aquí hay una guía rápida para estructurar tu corrección:
 
 Con la capacidad de actualización instantánea de Capgo, puedes concentrarte en corregir el error sin preocuparte por agrupar cambios no relacionados. Este método ha demostrado ser efectivo, como destaca colenso:
 
-> "Implementamos [actualizaciones OTA de Capgo](https://webcapgoapp/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo" [\[1\]](https://capgoapp/)
+> "Implementamos [actualizaciones OTA de Capgo](https://webcapgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo" [\[1\]](https://capgo.app/)
 
 ### Prueba en Tu Dispositivo
 
@@ -56,13 +56,13 @@ Las pruebas exhaustivas son críticas para asegurar que la corrección funcione 
 
 Automatiza tanto como sea posible del proceso de pruebas usando herramientas CI/CD.
 
-> "¡Practicamos desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "¡Practicamos desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Una vez que tu corrección haya pasado todas las pruebas, estás listo para configurar Capgo para el despliegue.
 
-## Paso 2: Configura [Capgo](https://capgoapp/)
+## Paso 2: Configura [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13jpg?auto=compress)
 
 ### Instala los Paquetes Requeridos
 
@@ -74,7 +74,7 @@ npx @capgo/cli init
 
 Este comando hace el trabajo pesado por ti:
 
--   Instala el [plugin de Capgo](https://capgoapp/plugins/)
+-   Instala el [plugin de Capgo](https://capgo.app/plugins/)
 -   Configura tu proyecto automáticamente
 -   Prepara tu proyecto para los servicios de Capgo
 
@@ -92,11 +92,11 @@ Capgo asegura que tu proyecto esté listo con estándares de cifrado y cumplimie
 
 Esta configuración ha sido validada por desarrolladoresComo explica Bessie Cooper:
 
-> "@Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar revisiones para correcciones de errores es oro puro" [\[1\]](https://capgoapp/)
+> "@Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar revisiones para correcciones de errores es oro puro" [\[1\]](https://capgo.app/)
 
 Para equipos más grandes, Capgo ofrece funciones como configuraciones multi-organización y gestión detallada de permisos. Se integra con plataformas como [GitHub](https://githubcom/about), [GitLab](https://aboutgitlabcom/), [Azure DevOps](https://azuremicrosoftcom/en-us/products/devops) y [Jenkins](https://wwwjenkinsio/), facilitando los flujos de trabajo de implementación automatizada. Rodrigo Mantica destaca su importancia para equipos ágiles:
 
-> "¡Practicamos el desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" [\[1\]](https://capgoapp/)
+> "¡Practicamos el desarrollo ágil y @Capgo es crítico para entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)
 
 Con tu proyecto completamente configurado, estás listo para subir tu hotfix e implementarlo instantáneamente.
 
@@ -104,7 +104,7 @@ Con tu proyecto completamente configurado, estás listo para subir tu hotfix e i
 
 ### Envía Archivos a Capgo
 
-Después de configurar tu proyecto, es momento de subir tu hotfix usando la [herramienta CLI de Capgo](https://capgoapp/docs/cli/commands/). Esto asegura una transferencia segura y eficiente de tu actualización. Comienza construyendo tu app como lo harías normalmente durante el desarrollo.
+Después de configurar tu proyecto, es momento de subir tu hotfix usando la [herramienta CLI de Capgo](https://capgo.app/docs/cli/commands/). Esto asegura una transferencia segura y eficiente de tu actualización. Comienza construyendo tu app como lo harías normalmente durante el desarrollo.
 
 Así es como funciona:
 
@@ -124,7 +124,7 @@ El etiquetado claro es clave para gestionar y rastrear tus hotfixes. Al subir tu
 
 Martin Donadieu, fundador de Capgo, ha diseñado un sistema de versionado que se integra perfectamente con flujos de trabajo CI/CD. Este sistema facilita el seguimiento de actualizaciones y la reversión si es necesario.
 
-La [gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/) de Capgo también incluye características como cifrado de extremo a extremo e implementación instantánea, asegurando que tus hotfixes sean seguros mientras llegan rápidamente a los usuarios.
+La [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/) de Capgo también incluye características como cifrado de extremo a extremo e implementación instantánea, asegurando que tus hotfixes sean seguros mientras llegan rápidamente a los usuarios.
 
 Una vez que tu hotfix está subido y etiquetado, pasa al Paso 4 para configurar tus ajustes de actualización.
 
@@ -191,15 +191,15 @@ Después de revisar estas métricas, esté listo para abordar cualquier desafío
 
 Rodrigo Mantica, un desarrollador de negocios, destaca la importancia de Capgo:
 
-> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgoapp/)
+> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)
 
-La interfaz web de Capgo facilita el monitoreo del progreso de su actualización con registros detallados y métricas de rendimiento. Sus funciones de seguimiento han ayudado a organizaciones a mejorar la eficiencia de lanzamientos hasta en un 81% [\[1\]](https://capgoapp/), asegurando un rendimiento estable de la aplicación mientras se abordan rápidamente cualquier problema.
+La interfaz web de Capgo facilita el monitoreo del progreso de su actualización con registros detallados y métricas de rendimiento. Sus funciones de seguimiento han ayudado a organizaciones a mejorar la eficiencia de lanzamientos hasta en un 81% [\[1\]](https://capgo.app/), asegurando un rendimiento estable de la aplicación mientras se abordan rápidamente cualquier problema.
 
 ## Resumen
 
 ### Puntos Principales
 
-Capgo simplifica el proceso de implementar hotfixes rápida y efectivamente, con un historial probado de entregar **9476 millones de actualizaciones** en **1,400 aplicaciones de producción** [\[1\]](https://capgoapp/)
+Capgo simplifica el proceso de implementar hotfixes rápida y efectivamente, con un historial probado de entregar **9476 millones de actualizaciones** en **1,400 aplicaciones de producción** [\[1\]](https://capgo.app/)
 
 | Paso | Acción | Objetivo |
 | --- | --- | --- |

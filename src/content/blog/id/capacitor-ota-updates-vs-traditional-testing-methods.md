@@ -22,9 +22,9 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin [app updates](https://capgoapp/plugins/capacitor-updater/) lebih cepat tanpa penundaan app store?** [Capacitor](https://capacitorjscom/) OTA updates memungkinkan Anda memberikan perubahan secara instan, sementara pengujian tradisional memastikan kualitas pra-rilis yang menyeluruh. Berikut perbandingan singkatnya:
+**Ingin [app updates](https://capgo.app/plugins/capacitor-updater/) lebih cepat tanpa penundaan app store?** [Capacitor](https://capacitorjscom/) OTA updates memungkinkan Anda memberikan perubahan secara instan, sementara pengujian tradisional memastikan kualitas pra-rilis yang menyeluruh. Berikut perbandingan singkatnya:
 
--   **[Capacitor OTA Updates](https://capgoapp/ja/)**: Langsung mendorong pembaruan ke pengguna tanpa persetujuan app store. Ideal untuk perbaikan cepat dan peluncuran fitur
+-   **[Capacitor OTA Updates](https://capgo.app/ja/)**: Langsung mendorong pembaruan ke pengguna tanpa persetujuan app store. Ideal untuk perbaikan cepat dan peluncuran fitur
 -   **Pengujian Tradisional**: Mengikuti fase terstruktur seperti pengujian unit, integrasi, dan sistem sebelum rilis. Memastikan keandalan tetapi membutuhkan waktu lebih lama
 
 **Perbandingan Cepat:**
@@ -33,10 +33,10 @@ next_blog: ''
 | --- | --- | --- |
 | **Penerapan Update** | Pengiriman langsung melalui udara | Memerlukan pengajuan ke app store |
 | **Lingkup Pengujian** | Fokus pada perubahan spesifik | Pengujian sistem menyeluruh |
-| **Pengalaman Pengguna** | [Pembaruan otomatis di latar belakang](https://capgoapp/docs/plugin/self-hosted/auto-update/) | Pengguna memperbarui aplikasi secara manual |
+| **Pengalaman Pengguna** | [Pembaruan otomatis di latar belakang](https://capgo.app/docs/plugin/self-hosted/auto-update/) | Pengguna memperbarui aplikasi secara manual |
 | **Manajemen Risiko** | Kemampuan rollback instan | Memerlukan pengajuan baru untuk perbaikan |
 
-Pembaruan Capacitor OTA, didukung oleh alat seperti [Capgo](https://capgoapp/), memberikan fleksibilitas dan kecepatan, sementara metode tradisional memastikan kualitas yang komprehensif. Keduanya memiliki tempat masing-masing tergantung kebutuhan aplikasi Anda.
+Pembaruan Capacitor OTA, didukung oleh alat seperti [Capgo](https://capgo.app/), memberikan fleksibilitas dan kecepatan, sementara metode tradisional memastikan kualitas yang komprehensif. Keduanya memiliki tempat masing-masing tergantung kebutuhan aplikasi Anda.
 
 ## [Appflow](https://ionicio/appflow/) Deploy: Kirim pembaruan real-time ke pengguna aplikasi Ionic Anda
 
@@ -48,7 +48,7 @@ Pembaruan Capacitor OTA, didukung oleh alat seperti [Capgo](https://capgoapp/), 
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21jpg?auto=compress)
 
-Pembaruan OTA dalam [aplikasi Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/) menyederhanakan pemeliharaan aplikasi setelah rilis. Alih-alih memerlukan pengajuan app store lengkap, pengembang dapat mendorong pembaruan langsung ke pengguna.
+Pembaruan OTA dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) menyederhanakan pemeliharaan aplikasi setelah rilis. Alih-alih memerlukan pengajuan app store lengkap, pengembang dapat mendorong pembaruan langsung ke pengguna.
 
 ### Apa yang Membuat OTA Updates Menonjol?
 
@@ -65,9 +65,9 @@ Berikut rincian fitur utama:
 
 Fitur-fitur ini memberikan pengembang fleksibilitas dan kontrol yang lebih besar, terutama ketika dipasangkan dengan alat seperti Capgo.
 
-### Peran [Capgo](https://capgoapp/) dalam OTA Updates
+### Peran [Capgo](https://capgo.app/) dalam OTA Updates
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21jpg?auto=compress)
 
 Capgo menyederhanakan proses pengelolaan pembaruan OTA untuk aplikasi Capacitor. Platformnya memprioritaskan keamanan dengan enkripsi end-to-end, memastikan konten pembaruan tetap terlindungi.
 

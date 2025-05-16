@@ -112,17 +112,17 @@ La configurazione di una pipeline CI/CD per app mobile inizia con un solido cont
 
 Una volta che la pipeline è pronta, aggiungere gli aggiornamenti OTA rende più veloce e facile la distribuzione delle modifiche agli utenti.
 
-### Utilizzo degli Aggiornamenti OTA di Capacitor con [Capgo](https://capgoapp/)
+### Utilizzo degli Aggiornamenti OTA di Capacitor con [Capgo](https://capgo.app/)
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7djpg?auto=compress)
 
 Capgo rende gli aggiornamenti OTA semplici, sicuri e veloci con funzionalità come crittografia e conformità. Ecco come iniziare:
 
-1. Installa il [plugin Capgo](https://capgoapp/plugins/) nel tuo progetto Capacitor
+1. Installa il [plugin Capgo](https://capgo.app/plugins/) nel tuo progetto Capacitor
     
 2. Configura le impostazioni di aggiornamento e il tracciamento delle versioni della tua app
     
-3. Usa la [dashboard Capgo](https://capgoapp/docs/webapp/) per distribuire gli aggiornamenti direttamente agli utenti
+3. Usa la [dashboard Capgo](https://capgo.app/docs/webapp/) per distribuire gli aggiornamenti direttamente agli utenti
 
 ### Panoramica Prezzi e Funzionalità di Capgo
 

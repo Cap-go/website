@@ -68,7 +68,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかる場
 
 ## 料金に関する重要な情報
 
-![Price GitHub Action](/price_github_actionswebp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -113,17 +113,17 @@ App Store Connect APIを使用するために、Fastlaneには**3つ**の要素�
 
 2. [ユーザーとアクセス](https://appstoreconnectapplecom/access/users/)を選択
 
-![App Store Connect user access](/select_user_accesswebp)
+![App Store Connect user access](/select_user_access.webp)
 
-3. 統合タブを選択![App Store Connect API Integration](/user_access_keyswebp)
+3. 統合タブを選択![App Store Connect API Integration](/user_access_keys.webp)
 
 4. — API キーを生成、または追加（+）ボタンをクリックします
 
-![App Store Connect API keys create](/user_accesswebp)
+![App Store Connect API keys create](/user_access.webp)
 
 5. — キーの名前を入力します。この名前は参照用であり、キー自体の一部ではありません
 
-![App Store Connect API keys create name](/gen_keywebp)
+![App Store Connect API keys create name](/gen_key.webp)
 
 6. — アクセス権で、キーの役割を選択します。キーに適用される役割は、チームのユーザーに適用される役割と同じです。[役割の権限](https://helpapplecom/app-store-connect/#/deve5f9a89d7/)を参照してください。**App manager**を選択することをお勧めします
 
@@ -133,7 +133,7 @@ App Store Connect APIを使用するために、Fastlaneには**3つ**の要素�
 
 新しいキーの名前、キーID、ダウンロードリンク、その他の情報がページに表示されます
 
-![App Store Connect download keys](/download_keywebp)
+![App Store Connect download keys](/download_key.webp)
 
 ここで必要な3つの情報を取得できます  
 [[HTML_TAG]] Issue ID  

@@ -19,10 +19,10 @@ locale: de
 next_blog: ''
 ---
 
-Das Debuggen von Over-the-Air (OTA) Updates in [Capacitor](https://capacitorjscom/) Apps kann knifflig sein, aber die richtigen Tools machen einen großen Unterschied. Ob Sie Versionskonflikte verwalten, [sichere Updates](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) gewährleisten oder plattformübergreifend debuggen, hier sind drei Tools zur Auswahl:
+Das Debuggen von Over-the-Air (OTA) Updates in [Capacitor](https://capacitorjscom/) Apps kann knifflig sein, aber die richtigen Tools machen einen großen Unterschied. Ob Sie Versionskonflikte verwalten, [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) gewährleisten oder plattformübergreifend debuggen, hier sind drei Tools zur Auswahl:
 
--   **[Capgo](https://capgoapp/)**: Sichere OTA-Updates mit Ende-zu-Ende-Verschlüsselung, CI/CD-Integration und benutzerspezifischen Rollouts. Beginnt bei 12$/Monat
--   **@capawesome/capacitor-live-update**: Ein kostenloses, einfaches Plugin für grundlegendes OTA [Update-Management](https://capgoapp/docs/plugin/cloud-mode/manual-update/) mit automatischem Rollback
+-   **[Capgo](https://capgo.app/)**: Sichere OTA-Updates mit Ende-zu-Ende-Verschlüsselung, CI/CD-Integration und benutzerspezifischen Rollouts. Beginnt bei 12$/Monat
+-   **@capawesome/capacitor-live-update**: Ein kostenloses, einfaches Plugin für grundlegendes OTA [Update-Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) mit automatischem Rollback
 -   **[Inspectdev](https://inspectdev/)**: Debuggen Sie sowohl Android- als auch iOS-Apps, selbst unter Windows, mit [Chrome DevTools](https://developerchromecom/docs/devtools) Integration. Kostet 49$/Jahr
 
 ### Schneller Vergleich
@@ -30,7 +30,7 @@ Das Debuggen von Over-the-Air (OTA) Updates in [Capacitor](https://capacitorjsco
 | Funktion | Capgo | @capawesome/capacitor-live-update | Inspectdev |
 | --- | --- | --- | --- |
 | Update-Management | Erweitert (Verschlüsselung, CI/CD) | Basic (Cloud-basiert) | Nicht zutreffend |
-| [Debugging-Tools](https://capgoapp/docs/plugin/debugging/) | Versionskontrolle, Rollback | Automatischer Rollback | Chrome DevTools |
+| [Debugging-Tools](https://capgo.app/docs/plugin/debugging/) | Versionskontrolle, Rollback | Automatischer Rollback | Chrome DevTools |
 | Plattform-Unterstützung | Android, iOS | Android, iOS | Android, iOS (Windows-Unterstützung) |
 | Preisgestaltung | 12$/Monat | Kostenlos | 49$/Jahr |
 
@@ -40,7 +40,7 @@ Wählen Sie basierend auf den Anforderungen Ihrer App: **Capgo** für Sicherheit
 
 ### Plattform-Anforderungen
 
-[Capacitor OTA-Updates](https://capgoapp/ja/) benötigen eine ordnungsgemäße native Integration, um reibungslos zu funktionieren. Für iOS bedeutet dies strikte Code-Signierung und Update-Validierung. Bei Android ist die Verwaltung von Versionscodes und die Sicherstellung der Kompatibilität entscheidend, um Update-Probleme zu vermeiden.
+[Capacitor OTA-Updates](https://capgo.app/ja/) benötigen eine ordnungsgemäße native Integration, um reibungslos zu funktionieren. Für iOS bedeutet dies strikte Code-Signierung und Update-Validierung. Bei Android ist die Verwaltung von Versionscodes und die Sicherstellung der Kompatibilität entscheidend, um Update-Probleme zu vermeiden.
 
 Wichtige Plattform-Überprüfungen umfassen:
 
@@ -52,11 +52,11 @@ Sobald diese vorhanden sind, ist es Zeit, OTA-Verteilungsoptionen zu erkunden
 
 ### Update-Verteilungsmethoden
 
-[Capacitor Apps](https://capgoapp/blog/capacitor-comprehensive-guide/) unterstützen mehrere OTA-Update-Methoden. Tools wie Capgo stellen die Einhaltung sowohl der Apple- als auch der Android-Richtlinien sicher
+[Capacitor Apps](https://capgo.app/blog/capacitor-comprehensive-guide/) unterstützen mehrere OTA-Update-Methoden. Tools wie Capgo stellen die Einhaltung sowohl der Apple- als auch der Android-Richtlinien sicher
 
 | Verteilungsmethode | Hauptfunktionen | Am besten geeignet für |
 | --- | --- | --- |
-| [Manuelle Updates](https://capgoapp/docs/plugin/cloud-mode/manual-update/) | Volle Kontrolle über den Update-Prozess, unterstützt benutzerdefinierte URLs | Kleinere Apps, Tests |
+| [Manuelle Updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Volle Kontrolle über den Update-Prozess, unterstützt benutzerdefinierte URLs | Kleinere Apps, Tests |
 | Capgo | Bietet Ende-zu-Ende-Verschlüsselung, CI/CD-Integration und Benutzerzuweisung | Unternehmensanwendungen |
 | @capawesome/capacitor-live-update | Verwaltet Versionen und bietet grundlegende Update-Funktionalität | Einfache Apps |
 
@@ -64,7 +64,7 @@ Wählen Sie die Methode, die am besten zu den Anforderungen und dem Workflow Ihr
 
 ### Entwicklungseinrichtung
 
-Die Einrichtung Ihrer Umgebung beinhaltet die Verwendung von [Capacitor CLI-Befehlen](https://capgoapp/docs/cli/commands/) und die korrekte Konfiguration der Einstellungen
+Die Einrichtung Ihrer Umgebung beinhaltet die Verwendung von [Capacitor CLI-Befehlen](https://capgo.app/docs/cli/commands/) und die korrekte Konfiguration der Einstellungen
 
 Wichtige Einrichtungsschritte:
 
@@ -84,15 +84,15 @@ Halten Sie die Versionskontrolle organisiert, um Änderungen zu verfolgen und da
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20jpg?auto=compress)
 
-Diese Tools helfen Entwicklern, spezifische [Debugging-Herausforderungen](https://capgoapp/docs/plugin/debugging/) beim Verwalten von OTA-Updates effektiv zu bewältigen
+Diese Tools helfen Entwicklern, spezifische [Debugging-Herausforderungen](https://capgo.app/docs/plugin/debugging/) beim Verwalten von OTA-Updates effektiv zu bewältigen
 
-### [Capgo](https://capgoapp)
+### [Capgo](https://capgo.app
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20jpg?auto=compress)
 
 Capgo bietet eine zuverlässige Lösung für OTA-Updates in Capacitor-Apps. Es gewährleistet sichere und schnelle Updates unter Einhaltung der Plattform-Richtlinien.
 
-#### [Capgo](https://capgoapp/) Funktionsübersicht
+#### [Capgo](https://capgo.app/) Funktionsübersicht
 
 | **Funktion** | **Beschreibung** | **Vorteil** |
 | --- | --- | --- |
@@ -111,9 +111,9 @@ Dieses Capacitor-Plugin ist eine unkomplizierte Option für OTA-Updates, ideal f
 
 #### Hauptfunktionen von @capawesome/capacitor-live-update
 
-Dieses Plugin konzentriert sich auf wesentliche Update-Funktionen, wie ein [Cloud-basiertes Bundle-Management-System](https://capgoapp/docs/webapp/bundles/), das sowohl Android als auch iOS unterstützt. Es enthält auch eine automatische Rollback-Funktion, die Stabilität gewährleistet, indem es zur letzten funktionierenden Version zurückkehrt, falls ein Update fehlschlägt.
+Dieses Plugin konzentriert sich auf wesentliche Update-Funktionen, wie ein [Cloud-basiertes Bundle-Management-System](https://capgo.app/docs/webapp/bundles/), das sowohl Android als auch iOS unterstützt. Es enthält auch eine automatische Rollback-Funktion, die Stabilität gewährleistet, indem es zur letzten funktionierenden Version zurückkehrt, falls ein Update fehlschlägt.
 
-Für ein [Debugging-Tool](https://capgoapp/docs/plugin/debugging/) mit plattformübergreifenden Fähigkeiten, schauen Sie sich **Inspectdev** an.
+Für ein [Debugging-Tool](https://capgo.app/docs/plugin/debugging/) mit plattformübergreifenden Fähigkeiten, schauen Sie sich **Inspectdev** an.
 
 ### [Inspectdev](https://inspectdev/)
 

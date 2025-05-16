@@ -24,7 +24,7 @@ next_blog: ''
 [Capacitor](https://capacitorjscom/) plugin sangat penting untuk membangun aplikasi lintas platform, memungkinkan Anda menggunakan fitur perangkat native seperti kamera, sistem file, dan notifikasi dengan usaha minimal. Mereka menggabungkan API JavaScript dan kode native untuk integrasi yang mulus di platform iOS, Android, dan web. Berikut yang perlu Anda ketahui:
 
 -   **Plugin Inti**: Dibuat oleh tim [Ionic](https://ionicframeworkcom/), mencakup dasar-dasar seperti penyimpanan file (`FilesystemwriteFile`) dan pemeriksaan jaringan (`NetworkgetStatus`)
--   **Plugin Komunitas**: Menawarkan fitur khusus seperti [Firebase Analytics](https://firebasegooglecom/docs/analytics), [pembelian dalam aplikasi](https://capgoapp/plugins/native-purchases/), dan pembaruan langsung
+-   **Plugin Komunitas**: Menawarkan fitur khusus seperti [Firebase Analytics](https://firebasegooglecom/docs/analytics), [pembelian dalam aplikasi](https://capgo.app/plugins/native-purchases/), dan pembaruan langsung
 -   **Plugin Kustom**: Buat sendiri untuk kebutuhan perangkat keras atau bisnis yang unik
 
 ### Gambaran Singkat
@@ -33,7 +33,7 @@ next_blog: ''
 | --- | --- | --- |
 | Kecepatan Pengembangan | Implementasi fitur lebih cepat | Menambahkan fungsi kamera dengan mudah |
 | Efisiensi Kode | Penggunaan ulang di berbagai platform | API bersama untuk iOS dan Android |
-| [Performa Native](https://capgoapp/plugins/native-audio/) | Akses langsung ke kemampuan perangkat | Optimisasi khusus platform |
+| [Performa Native](https://capgo.app/plugins/native-audio/) | Akses langsung ke kemampuan perangkat | Optimisasi khusus platform |
 
 Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahankan performa native. Baik Anda menggunakan plugin yang sudah ada atau membuat yang kustom, mereka membantu Anda fokus membangun fitur, bukan menangani kompleksitas khusus platform.
 
@@ -52,7 +52,7 @@ Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahan
 
 ## Struktur Teknis Plugin
 
-[Plugin Capacitor](https://capgoapp/plugins/) dibangun dengan desain jembatan lintas platform, memungkinkan interaksi yang mulus antara lingkungan web dan native. Memahami cara kerjanya dapat membantu pengembang membangun dan men-debug plugin lebih efisien.
+[Plugin Capacitor](https://capgo.app/plugins/) dibangun dengan desain jembatan lintas platform, memungkinkan interaksi yang mulus antara lingkungan web dan native. Memahami cara kerjanya dapat membantu pengembang membangun dan men-debug plugin lebih efisien.
 
 ### Komponen Plugin: Web dan Native
 
@@ -184,7 +184,7 @@ Saat meningkatkan versi major, ikuti langkah-langkah berikut:
 
 Dokumentasikan kustomisasi atau solusi sementara yang telah Anda implementasikan
 
-2. **[Strategi Pembaruan](https://capgoapp/docs/plugin/cloud-mode/hybrid-update)**
+2. **[Strategi Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**
 
 Kembangkan rencana pembaruan detail yang mencakup:
 

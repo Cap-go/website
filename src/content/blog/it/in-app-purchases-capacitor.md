@@ -86,7 +86,7 @@ Da **Project Settings > Apps** nel menu a sinistra della dashboard del progetto,
 
 Dashboard del progetto per selezionare la piattaforma dell'app
 
-Il campo **Nome app** è richiesto per aggiungere la tua app a RevenueCat. Gli altri campi di configurazione possono essere aggiunti successivamente. Per effettuare acquisti di test e di produzione, devono essere configurati l'ID Bundle (iOS) / Nome Pacchetto (Android) e il Segreto Condiviso (iOS) / Credenziali di Servizio (Android).![RevenueCat step 3](/revenuecat_step3webp)
+Il campo **Nome app** è richiesto per aggiungere la tua app a RevenueCat. Gli altri campi di configurazione possono essere aggiunti successivamente. Per effettuare acquisti di test e di produzione, devono essere configurati l'ID Bundle (iOS) / Nome Pacchetto (Android) e il Segreto Condiviso (iOS) / Credenziali di Servizio (Android).![RevenueCat step 3](/revenuecat_step3.webp)
 
 Pagina di configurazione dell'app per un'app dell'App Store Apple
 
@@ -94,7 +94,7 @@ Pagina di configurazione dell'app per un'app dell'App Store Apple
 > 
 > 💡 Ecco un suggerimento!
 > 
-> Dopo aver registrato la tua app, RevenueCat consiglia di configurare le [Notifiche Server della Piattaforma](https://wwwrevenuecatcom/docs/server-notifications/) Queste notifiche non sono obbligatorie, ma velocizzeranno i [webhook](https://wwwrevenuecatcom/docs/webhooks/) e i tempi di consegna dell'integrazione e ridurranno i tempi di latenza nell'aggiornamento dei tuoi abbonati
+> Dopo aver registrato la tua app, RevenueCat consiglia di configurare le [Notifiche Server della Piattaforma](https://www.revenuecat.com/docs/server-notifications/) Queste notifiche non sono obbligatorie, ma velocizzeranno i [webhook](https://www.revenuecat.com/docs/webhooks/) e i tempi di consegna dell'integrazione e ridurranno i tempi di latenza nell'aggiornamento dei tuoi abbonati
 
 > ### 📘
 > 
@@ -108,7 +108,7 @@ Pagina di configurazione dell'app per un'app dell'App Store Apple
 
 ### ▶️ Credenziali di Servizio
 
-Le credenziali di servizio devono essere configurate affinché RevenueCat possa comunicare con gli app store per tuo conto Consulta le guide RevenueCat [Segreto Condiviso App Store Connect](https://wwwrevenuecatcom/docs/itunesconnect-app-specific-shared-secret/), [Credenziali Servizio Play](https://wwwrevenuecatcom/docs/creating-play-service-credentials/) e [Segreto Condiviso Amazon Appstore](https://wwwrevenuecatcom/docs/service-credentials/amazon-appstore-credentials/) per maggiori informazioni
+Le credenziali di servizio devono essere configurate affinché RevenueCat possa comunicare con gli app store per tuo conto Consulta le guide RevenueCat [Segreto Condiviso App Store Connect](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret/), [Credenziali Servizio Play](https://www.revenuecat.com/docs/creating-play-service-credentials/) e [Segreto Condiviso Amazon Appstore](https://www.revenuecat.com/docs/service-credentials/amazon-appstore-credentials/) per maggiori informazioni
 
 Nota che le credenziali del servizio Play possono richiedere fino a 36 ore per propagarsi attraverso i server di Google
 
@@ -116,7 +116,7 @@ Nota che le credenziali del servizio Play possono richiedere fino a 36 ore per p
 
 ### ▶️ Configurazione Store
 
-Prima di poter iniziare a utilizzare RevenueCat per recuperare i prodotti, devi configurare i tuoi prodotti nei rispettivi store Consulta le seguenti guide per [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console](https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) e [Stripe](https://wwwrevenuecatcom/docs/stripe-products/) per aiutarti a navigare in questo processo
+Prima di poter iniziare a utilizzare RevenueCat per recuperare i prodotti, devi configurare i tuoi prodotti nei rispettivi store Consulta le seguenti guide per [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/) e [Stripe](https://www.revenuecat.com/docs/stripe-products/) per aiutarti a navigare in questo processo
 
 Se stai vendendo prodotti iOS, assicurati di firmare il tuo 'Accordo Applicazioni a Pagamento' e compilare le informazioni bancarie e fiscali in **App Store Connect > Accordi, Fisco e Bancario** **Questo deve essere completato prima di poter testare qualsiasi acquisto**
 
@@ -126,13 +126,13 @@ Se stai vendendo prodotti iOS, assicurati di firmare il tuo 'Accordo Applicazion
 > 
 > Su iOS, puoi ritardare la configurazione dei prodotti in App Store Connect testando invece con i file di Configurazione StoreKit Questi file di configurazione richiedono una configurazione minima e sono configurabili direttamente tramite Xcode
 > 
-> Leggi di più sulla configurazione dei file StoreKit Configuration nella guida [Test Sandbox](https://wwwrevenuecatcom/docs/apple-app-store/#ios-14-only-testing-on-the-simulator) di RevenueCat
+> Leggi di più sulla configurazione dei file StoreKit Configuration nella guida [Test Sandbox](https://www.revenuecat.com/docs/apple-app-store/#ios-14-only-testing-on-the-simulator) di RevenueCat
 
 ### ▶️ Configura Prodotti e Diritti in RevenueCat
 
-Una volta che i tuoi prodotti in-app sono stati configurati in [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console](https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) o [Stripe](https://wwwrevenuecatcom/docs/stripe-products/), dovrai copiare quella configurazione nella dashboard RevenueCat RevenueCat utilizza un sistema di Diritti per controllare l'accesso alle funzionalità premium e Offerte per gestire l'insieme di prodotti che offri ai clienti
+Una volta che i tuoi prodotti in-app sono stati configurati in [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/) o [Stripe](https://www.revenuecat.com/docs/stripe-products/), dovrai copiare quella configurazione nella dashboard RevenueCat RevenueCat utilizza un sistema di Diritti per controllare l'accesso alle funzionalità premium e Offerte per gestire l'insieme di prodotti che offri ai clienti
 
 I Diritti sono il livello di accesso a cui un cliente ha "diritto" dopo aver acquistato un prodotto specifico
 Le Offerte sono un modo semplice per organizzare i prodotti in-app che desideri "offrire" nel tuo paywall e configurarli da remoto RevenueCat **raccomanda** di utilizzare queste funzionalità per semplificare il tuo codice e permetterti di cambiare i prodotti senza rilasciare un aggiornamento dell'app
 
-Consulta [Configurazione Prodotti](https://wwwrevenuecatcom/docs/entitlements/) per configurare i tuoi prodotti e organizzarli in Offerte o Diritti
+Consulta [Configurazione Prodotti](https://www.revenuecat.com/docs/entitlements/) per configurare i tuoi prodotti e organizzarli in Offerte o Diritti

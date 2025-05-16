@@ -197,7 +197,7 @@ Capgo a livré 235 millions de mises à jour, atteignant un taux de mise à jour
 
 Le système de canaux de Capgo facilite la gestion des mises à jour. Les développeurs peuvent tester des fonctionnalités spécifiques à iOS avec des utilisateurs bêta, déployer des mises à jour Android par étapes et suivre les métriques de performance de manière transparente.
 
-La plateforme respecte les exigences de mise à jour over-the-air d'Apple et Google [\[1\]](https://capgo.app/)Actuellement, 750 applications en production s'appuient sur Capgo, maintenant un taux de réussite global des mises à jour de 82% [\[1\]](https://capgoapp/) Son intégration CI/CD simplifie les déploiements, tandis que la fonction de rollback permet aux développeurs de revenir instantanément aux versions précédentes en cas de problème. Les analyses en temps réel fournissent des informations sur les performances des mises à jour et aident à maintenir la stabilité de l'application.
+La plateforme respecte les exigences de mise à jour over-the-air d'Apple et Google [\[1\]](https://capgo.app/)Actuellement, 750 applications en production s'appuient sur Capgo, maintenant un taux de réussite global des mises à jour de 82% [\[1\]](https://capgo.app/) Son intégration CI/CD simplifie les déploiements, tandis que la fonction de rollback permet aux développeurs de revenir instantanément aux versions précédentes en cas de problème. Les analyses en temps réel fournissent des informations sur les performances des mises à jour et aident à maintenir la stabilité de l'application.
 
 ## Conclusion
 
@@ -205,10 +205,10 @@ La plateforme respecte les exigences de mise à jour over-the-air d'Apple et Goo
 
 La gestion efficace des différences de plateformes dans Capacitor améliore le développement multiplateforme. Ses outils intégrés pour la détection et la configuration des plateformes permettent aux développeurs de créer des expériences fluides pour iOS et Android, tout en respectant les normes de conception et les fonctionnalités uniques de chaque plateforme.
 
-En se concentrant sur une bonne gestion des plateformes, les équipes de développement peuvent publier des mises à jour plus rapidement et améliorer la satisfaction des utilisateurs. Des outils comme Capgo ont montré comment une gestion cohérente des plateformes peut conduire à des taux de réussite plus élevés des mises à jour et de meilleures expériences utilisateur [\[1\]](https://capgoapp/)
+En se concentrant sur une bonne gestion des plateformes, les équipes de développement peuvent publier des mises à jour plus rapidement et améliorer la satisfaction des utilisateurs. Des outils comme Capgo ont montré comment une gestion cohérente des plateformes peut conduire à des taux de réussite plus élevés des mises à jour et de meilleures expériences utilisateur [\[1\]](https://capgo.app/)
 
 > "Nous pratiquons le développement agile et @Capgo est essentiel pour livrer en continu à nos utilisateurs !"  
-> – Rodrigo Mantica [\[1\]](https://capgoapp/)
+> – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Ces informations peuvent vous guider pour apporter des améliorations pratiques.
 

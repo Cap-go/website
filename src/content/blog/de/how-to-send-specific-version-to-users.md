@@ -52,7 +52,7 @@ Dies kann nützlich sein, wenn Sie kein eigenes Backend für die Kanaleinstellun
 
 Bei dieser Methode müssen Sie nur einen Ihrer Kanäle zur Selbsteinstellung freigeben.
 
-![Selbsteinstellung in Capgo erlauben](/self_setwebp)
+![Selbsteinstellung in Capgo erlauben](/self_set.webp)
 
 Fügen Sie dann Folgendes in den Code Ihrer Ionic-App ein. Für die beste Erfahrung verwenden Sie dies, nachdem der Benutzer auf eine Schaltfläche wie "Für Beta registrieren" geklickt hat:
 ```js

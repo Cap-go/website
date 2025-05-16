@@ -46,7 +46,7 @@ Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://c
 -   **Optimisasi**:
     
     -   Terapkan pembaruan bundle parsial dan pembaruan langsung untuk meningkatkan kinerja dan pengalaman pengguna
-    -   Pantau metrik kinerja dan error secara real-time menggunakan alat seperti [Capgo](https://capgoapp/)
+    -   Pantau metrik kinerja dan error secara real-time menggunakan alat seperti [Capgo](https://capgo.app/)
 
 Artikel ini memandu Anda menggunakan alat khusus platform, menemukan bottleneck kinerja, dan menerapkan perbaikan untuk mengoptimalkan aplikasi Capacitor Anda
 

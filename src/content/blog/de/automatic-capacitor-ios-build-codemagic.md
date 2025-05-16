@@ -296,11 +296,11 @@ Ihre App muss nicht Ionic verwenden, nur die Capacitor-Basis ist obligatorisch. 
 
 Pushen Sie die neuen Commits zum Branch 'main' oder 'developement', um den Workflow auszulösen
 
-![Gestartet mit Commit](/build_resultwebp)
+![Gestartet mit Commit](/build_result.webp)
 
 Nach einigen Minuten sollte der Build in Ihrem App Store Connect-Dashboard verfügbar sein
 
-![Testflight Dashboard](/testflight_appwebp)
+![Testflight Dashboard](/testflight_app.webp)
 
 ## Manuell starten
 
@@ -308,21 +308,21 @@ Sie können den Workflow manuell starten
 
 Wählen Sie zuerst die App aus, die Sie bauen möchten, und klicken Sie dann auf **Neuen Build starten**
 
-![App auswählen](/select_app_codemagicwebp)
+![App auswählen](/select_app_codemagic.webp)
 
 Wählen Sie dann den Branch aus, den Sie bauen möchten
 
-![Branch auswählen](/select_branchwebp)
+![Branch auswählen](/select_branch.webp)
 
 Und klicken Sie auf **Neuen Build starten**
 
 Gehen Sie dann zur Build-Liste
 
-![Build-Liste](/build_listwebp)
+![Build-Liste](/build_list.webp)
 
 Und klicken Sie auf den Build, um das Ergebnis zu sehen
 
-![Build-Ergebnis](/build_resultwebp)
+![Build-Ergebnis](/build_result.webp)
 
 ## Kann von lokalem Rechner deployen
 

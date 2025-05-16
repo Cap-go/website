@@ -96,7 +96,7 @@ Capgo는 종단간 암호화를 통해 군사급 보안을 구현하여 개발�
    - 각 앱 버전은 고유한 암호화 키 사용 가능
    - 향상된 보안을 위한 키 교체 지원
 
-암호화 시스템에 대해 자세히 알아보기: [Capgo 실시간 업데이트의 종단간 암호화](https://capgoapp/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/)
+암호화 시스템에 대해 자세히 알아보기: [Capgo 실시간 업데이트의 종단간 암호화](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/)
 
 ### 업데이트 보안 프로세스
 

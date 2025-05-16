@@ -66,7 +66,7 @@ Capacitor 앱용 CI/CD 설정은 복잡하고 시간이 많이 걸릴 수 있습
 
 ## 가격에 대한 중요 사항
 
-![Price GitHub Action](/price_github_actionswebp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -112,6 +112,6 @@ App Store Connect API를 사용하기 위해 Fastlane은 **세 가지**가 필�
 
 2 — [사용자 및 액세스](https://appstoreconnectapplecom/access/users/)를 선택하세요
 
-![App Store Connect user access](/select_user_accesswebp)
+![App Store Connect user access](/select_user_access.webp)
 
 3 — 통합 탭을 선택하세요

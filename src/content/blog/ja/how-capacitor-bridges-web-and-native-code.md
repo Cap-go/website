@@ -21,7 +21,7 @@ locale: ja
 next_blog: ''
 ---
 
--   **ネイティブブリッジ**: JavaScriptをネイティブアクション(例:[カメラへのアクセス](https://capgoapp/plugins/camera-preview/)やGPS)に変換
+-   **ネイティブブリッジ**: JavaScriptをネイティブアクション(例:[カメラへのアクセス](https://capgo.app/plugins/camera-preview/)やGPS)に変換
 -   **プラグインシステム**: Webとネイティブ層を安全にリンクしてスムーズな通信を実現
 -   **ライブアップデート**: アプリストアの遅延なしで直接ユーザーにアップデートを配信
 -   **カスタムプラグイン**: 生体認証や特殊なセンサーなどの高度なデバイス機能にアクセスするプラグインを作成
@@ -34,9 +34,9 @@ next_blog: ''
 | **カメラアクセス** | `Camera.getPhoto()` | 簡単に写真を撮影 |
 | **位置情報** | `Geolocation.getCurrentPosition()` | ユーザーの位置を追跡 |
 | **ファイルシステム** | `Filesystem.readFile()` | デバイスストレージの管理 |
-| **ライブアップデート** | 114msで配信 | [ユーザーへの迅速なアップデート](https://capgoapp/blog/optimise-your-images-for-updates/) |
+| **ライブアップデート** | 114msで配信 | [ユーザーへの迅速なアップデート](https://capgo.app/blog/optimise-your-images-for-updates/) |
 
-[Capacitor](https://capacitorjs.com/)は、Web開発の柔軟性とネイティブアプリのパワーを組み合わせることを開発者に可能にします。その仕組みと[Capgo](https://capgoapp/)のようなツールがどのように改善するかについて、続けてご覧ください。
+[Capacitor](https://capacitorjs.com/)は、Web開発の柔軟性とネイティブアプリのパワーを組み合わせることを開発者に可能にします。その仕組みと[Capgo](https://capgo.app/)のようなツールがどのように改善するかについて、続けてご覧ください。
 
 ## [Capacitor](https://capacitorjs.com/) 3でWebネイティブアプリを構築する
 
@@ -63,20 +63,20 @@ Capacitorのネイティブブリッジは、Webアプリケーションがネ�
 
 | メリット | 説明 | 影響 |
 | --- | --- | --- |
-| 読み込み時間 | 5MBのバンドルで平均114ms [\[1\]](https://capgoapp/) | アプリの応答時間が向上 |
-| アップデート到達率 | 24時間以内に95%のユーザーがアップデート [\[1\]](https://capgoapp/) | 迅速な機能展開 |
-| 市場カバー率 | 82%のグローバル成功率 [\[1\]](https://capgoapp/) | 世界中で信頼性の高いパフォーマンス |
-| APIレスポンス時間 | グローバルで平均434ms [\[1\]](https://capgoapp/) | スムーズで効率的な相互作用 |
+| 読み込み時間 | 5MBのバンドルで平均114ms [\[1\]](https://capgo.app/) | アプリの応答時間が向上 |
+| アップデート到達率 | 24時間以内に95%のユーザーがアップデート [\[1\]](https://capgo.app/) | 迅速な機能展開 |
+| 市場カバー率 | 82%のグローバル成功率 [\[1\]](https://capgo.app/) | 世界中で信頼性の高いパフォーマンス |
+| APIレスポンス時間 | グローバルで平均434ms [\[1\]](https://capgo.app/) | スムーズで効率的な相互作用 |
 
-> "私たちはアジャイル開発を実践しており、@Capgoはユーザーへの継続的なデリバリーに不可欠です！" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgoapp/)
+> "私たちはアジャイル開発を実践しており、@Capgoはユーザーへの継続的なデリバリーに不可欠です！" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
 ### プラグイン通信システム
 
 プラグインシステムは、標準化されたAPIを使用してWebとネイティブ層間のデータ交換を簡素化し、安全にします。実際のアプリケーションで以下のような効果が実証されています：
 
--   **スケール**: 現在本番環境で750のアプリで使用 [\[1\]](https://capgoapp/)
--   **信頼性**: 2億3500万回以上のアップデートを配信 [\[1\]](https://capgoapp/)
--   **パフォーマンス**: グローバルで平均434msのAPIレスポンス時間 [\[1\]](https://capgoapp/)
+-   **スケール**: 現在本番環境で750のアプリで使用 [\[1\]](https://capgo.app/)
+-   **信頼性**: 2億3500万回以上のアップデートを配信 [\[1\]](https://capgo.app/)
+-   **パフォーマンス**: グローバルで平均434msのAPIレスポンス時間 [\[1\]](https://capgo.app/)
 
 このシステムはエンドツーエンドの暗号化も含み、安全なデータ転送を保証します。開発者にプラットフォーム間でシームレスに動作する、安全で高性能なアプリを作成するためのツールを提供します。
 
@@ -133,7 +133,7 @@ CapgoのCDNは5 MBのバンドルをわずか114ミリ秒で配信し、更新�
 - **イベントデバウンシング**: システムに負荷をかけないよう高頻度のネイティブイベントを制限する
 - **エラー処理**: ネイティブ側とWeb側の両方で強力なエラー管理戦略を使用する
 
-Capacitorのブリッジと[Capgoの更新システム](https://capgoapp/docs/plugin/cloud-mode/manual-update/)の組み合わせにより、ネイティブからWebへの通信に信頼性の高いセットアップが作成されます
+Capacitorのブリッジと[Capgoの更新システム](https://capgo.app/docs/plugin/cloud-mode/manual-update/)の組み合わせにより、ネイティブからWebへの通信に信頼性の高いセットアップが作成されます
 
 ## カスタムプラグインの作成
 
@@ -167,9 +167,9 @@ iOSとAndroid向けのプラットフォーム固有の機能を追加します�
 
 | ユースケース | プラグインカテゴリ | 例 |
 | --- | --- | --- |
-| [生体認証](https://capgoapp/plugins/capacitor-native-biometric/) | セキュリティ | 指紋や顔認識 |
+| [生体認証](https://capgo.app/plugins/capacitor-native-biometric/) | セキュリティ | 指紋や顔認識 |
 | カスタムハードウェア | デバイス | 特殊なセンサーの統合 |
-| ファイル処理 | ストレージ | ファイルの[カスタム暗号化](https://capgoapp/docs/cli/migrations/encryption/) |
+| ファイル処理 | ストレージ | ファイルの[カスタム暗号化](https://capgo.app/docs/cli/migrations/encryption/) |
 
 カスタムプラグインを作成する際は、以下のヒントを念頭に置いてください：
 

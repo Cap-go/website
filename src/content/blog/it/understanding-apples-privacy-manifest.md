@@ -28,7 +28,7 @@ next_blog: ''
     -   API e SDK di terze parti utilizzati
     -   Domini esterni accessibili
 -   **Perché è importante**: Garantisce trasparenza e conformità agli standard di privacy di Apple
--   **Come conformarsi**: Aggiungi il manifest al bundle della tua app iOS e aggiornalo regolarmente, specialmente se utilizzi strumenti di aggiornamento live come [Capgo](https://capgoapp/)
+-   **Come conformarsi**: Aggiungi il manifest al bundle della tua app iOS e aggiornalo regolarmente, specialmente se utilizzi strumenti di aggiornamento live come [Capgo](https://capgo.app/)
 
 **Suggerimento Rapido**: Strumenti come Capgo semplificano la conformità automatizzando gli aggiornamenti del manifest, offrendo deployment istantanei e fornendo analytics per monitorare il successo
 
@@ -53,7 +53,7 @@ Ora, vedremo come creare e verificare il tuo manifest in un progetto Capacitor
 
 ## Configurazione del Privacy Manifest in [Capacitor](https://capacitorjscom/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Creazione del File Manifest
 
@@ -72,13 +72,13 @@ Dopo aver creato questo file, apri [Xcode](https://developerapplecom/xcode/) per
 
 In Xcode, vai su **Product > Analyze** per generare un Report sulla Privacy. Esamina attentamente il report per eventuali avvisi o API non dichiarate e apporta le modifiche necessarie per evitare problemi. Una volta che tutto è a posto, procedi con il deployment degli aggiornamenti
 
-### Aggiornamenti con [Capgo](https://capgoapp/)
+### Aggiornamenti con [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Dopo aver superato l'analisi di Xcode, usa Capgo per gli aggiornamenti live per mantenere aggiornato il privacy manifest della tua app. Capgo fornisce:
 
--   **Deployment istantanei**: il 95% degli utenti riceve gli aggiornamenti entro 24 ore [\[1\]](https://capgoapp/)
+-   **Deployment istantanei**: il 95% degli utenti riceve gli aggiornamenti entro 24 ore [\[1\]](https://capgo.app/)
 -   **Rollback con un click** per correzioni rapide
 -   **Strumenti di analytics** per monitorare il successo degli aggiornamenti e garantire la conformità
 
@@ -90,22 +90,22 @@ Dopo aver verificato il tuo manifest in Xcode, è importante assicurarsi che la 
 
 ### Pratiche Raccomandate
 
-Considera l'utilizzo di Capgo per distribuire istantaneamente gli aggiornamenti del manifest, evitando ritardi causati dalle revisioni dell'App Store. Questo strumento supporta anche i rollout graduali, permettendoti di testare le modifiche con analytics in tempo reale prima di distribuirle a tutti gli utenti [\[1\]](https://capgoapp/)
+Considera l'utilizzo di Capgo per distribuire istantaneamente gli aggiornamenti del manifest, evitando ritardi causati dalle revisioni dell'App Store. Questo strumento supporta anche i rollout graduali, permettendoti di testare le modifiche con analytics in tempo reale prima di distribuirle a tutti gli utenti [\[1\]](https://capgo.app/)
 
 ### Errori Comuni
 
-Affidarsi agli [aggiornamenti manuali](https://capgoapp/docs/plugin/cloud-mode/manual-update/) può essere lento, poiché dipendono dai tempi di revisione dell'App Store, che possono richiedere giorni o persino settimane. Questo spesso lascia la documentazione obsoletaD'altra parte, gli strumenti automatizzati consentono aggiornamenti istantanei, forniscono analisi per monitorare le distribuzioni e facilitano il rollback delle modifiche in caso di problemi [\[1\]](https://capgoapp/)
+Affidarsi agli [aggiornamenti manuali](https://capgo.app/docs/plugin/cloud-mode/manual-update/) può essere lento, poiché dipendono dai tempi di revisione dell'App Store, che possono richiedere giorni o persino settimane. Questo spesso lascia la documentazione obsoletaD'altra parte, gli strumenti automatizzati consentono aggiornamenti istantanei, forniscono analisi per monitorare le distribuzioni e facilitano il rollback delle modifiche in caso di problemi [\[1\]](https://capgo.app/)
 
 ### Aggiornamenti Manuali vs Automatizzati
 
 Ecco un rapido confronto tra i metodi di aggiornamento manuali e automatizzati:
 
--   **Velocità di Consegna**: Gli aggiornamenti manuali possono richiedere giorni o settimane, mentre gli [aggiornamenti automatizzati](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) raggiungono il 95% degli utenti entro 24 ore [\[1\]](https://capgoapp/)
--   **Monitoraggio del Successo**: I metodi manuali variano, ma gli aggiornamenti automatizzati raggiungono un tasso di successo dell'82% in tutto il mondo [\[1\]](https://capgoapp/)
+-   **Velocità di Consegna**: Gli aggiornamenti manuali possono richiedere giorni o settimane, mentre gli [aggiornamenti automatizzati](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) raggiungono il 95% degli utenti entro 24 ore [\[1\]](https://capgo.app/)
+-   **Monitoraggio del Successo**: I metodi manuali variano, ma gli aggiornamenti automatizzati raggiungono un tasso di successo dell'82% in tutto il mondo [\[1\]](https://capgo.app/)
 -   **Opzioni di Rollback**: Gli aggiornamenti manuali offrono un recupero limitato, mentre gli aggiornamenti automatizzati consentono rollback immediati
--   **Monitoraggio**: I controlli manuali richiedono tempo, mentre gli strumenti automatizzati forniscono analisi in tempo reale [\[1\]](https://capgoapp/)
--   **Distribuzione**: I sistemi manuali sono basilari, mentre gli strumenti automatizzati supportano canali di distribuzione avanzati [\[1\]](https://capgoapp/)
--   **Sicurezza**: Gli aggiornamenti manuali mancano di crittografia integrata, mentre i sistemi automatizzati utilizzano la crittografia end-to-end [\[1\]](https://capgoapp/)
+-   **Monitoraggio**: I controlli manuali richiedono tempo, mentre gli strumenti automatizzati forniscono analisi in tempo reale [\[1\]](https://capgo.app/)
+-   **Distribuzione**: I sistemi manuali sono basilari, mentre gli strumenti automatizzati supportano canali di distribuzione avanzati [\[1\]](https://capgo.app/)
+-   **Sicurezza**: Gli aggiornamenti manuali mancano di crittografia integrata, mentre i sistemi automatizzati utilizzano la crittografia end-to-end [\[1\]](https://capgo.app/)
 
 ## Confronto tra Strumenti di Aggiornamento Live
 
@@ -116,10 +116,10 @@ Approfondiamo il confronto tra due popolari piattaforme di aggiornamento live e 
 | Caratteristica | Capgo | [Appflow](https://ionicio/appflow/) |
 | --- | --- | --- |
 | Crittografia end-to-end | **Sì** | \-  |
-| Tasso di successo aggiornamenti | **82% mondiale** [\[1\]](https://capgoapp/) | \-  |
-| Tempo di consegna aggiornamenti | **95% entro 24h** [\[1\]](https://capgoapp/) | \-  |
-| Velocità download bundle | **114 ms (5 MB)** [\[1\]](https://capgoapp/) | \-  |
-| Costo annuale (Piano Team) | **€996** | **€6.000** [\[1\]](https://capgoapp/) |
+| Tasso di successo aggiornamenti | **82% mondiale** [\[1\]](https://capgo.app/) | \-  |
+| Tempo di consegna aggiornamenti | **95% entro 24h** [\[1\]](https://capgo.app/) | \-  |
+| Velocità download bundle | **114 ms (5 MB)** [\[1\]](https://capgo.app/) | \-  |
+| Costo annuale (Piano Team) | **€996** | **€6.000** [\[1\]](https://capgo.app/) |
 
 **Conclusione rapida**: Capgo offre un costo del primo anno molto più basso - €996 rispetto ai €6.000 di Appflow
 
@@ -127,7 +127,7 @@ Ora, vediamo come Capgo si distingue specificamente per gli aggiornamenti del Pr
 
 ### Privacy Manifest: Vantaggi di Capgo
 
-Il codice open-source di Capgo lo rende una scelta valida per gestire gli aggiornamenti del Privacy Manifest. Permette rapide modifiche per soddisfare gli standard di privacy in evoluzione, garantendo una gestione della conformità più semplice [\[1\]](https://capgoapp/)
+Il codice open-source di Capgo lo rende una scelta valida per gestire gli aggiornamenti del Privacy Manifest. Permette rapide modifiche per soddisfare gli standard di privacy in evoluzione, garantendo una gestione della conformità più semplice [\[1\]](https://capgo.app/)
 
 ## Riepilogo
 

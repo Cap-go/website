@@ -94,11 +94,11 @@ Si vous débutez dans le développement mobile natif, vous pouvez utiliser le CL
 
 Une fois vos projets natifs configurés, déployer votre application sur un appareil connecté est facile. Dans Android Studio, vous devez simplement attendre que tout soit prêt, et vous pouvez déployer votre application sur un appareil connecté sans modifier de paramètres. Voici un exemple :
 
-![android-studio-run](/android-studio-runwebp)
+![android-studio-run](/android-studio-run.webp)
 
 Dans Xcode, vous devez configurer votre compte de signature pour déployer votre application sur un appareil réel plutôt que sur le simulateur. Si vous ne l'avez jamais fait, Xcode vous guide à travers le processus (mais encore une fois, vous devez être inscrit au Programme Développeur). Ensuite, vous pouvez simplement appuyer sur lecture pour exécuter l'application sur votre appareil connecté, que vous pouvez sélectionner en haut. Voici un exemple :
 
-![xcode-run](/xcode-runwebp)
+![xcode-run](/xcode-run.webp)
 
 Félicitations ! Vous avez réussi à déployer votre application web Angular sur un appareil mobile. Voici un exemple :
 

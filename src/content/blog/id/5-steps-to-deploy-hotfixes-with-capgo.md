@@ -19,10 +19,10 @@ locale: id
 next_blog: ''
 ---
 
-[Capgo](https://capgoapp/) membuat penerapan hotfix menjadi cepat dan mudah, melewati penundaan app store sambil menjaga pembaruan tetap aman dan sesuai dengan pedoman Apple dan Google. Berikut ikhtisar prosesnya:
+[Capgo](https://capgo.app/) membuat penerapan hotfix menjadi cepat dan mudah, melewati penundaan app store sambil menjaga pembaruan tetap aman dan sesuai dengan pedoman Apple dan Google. Berikut ikhtisar prosesnya:
 
 1. **Buat dan Uji Hotfix Anda**: Tulis perubahan kode yang tepat, uji secara menyeluruh pada perangkat, dan pastikan kompatibilitas
-2. **[Siapkan Capgo](https://capgoapp/docs/webapp/)**: Instal [Capgo CLI](https://capgoapp/docs/cli/commands) dengan `npx @capgo/cli init`, konfigurasikan enkripsi, dan integrasikan dengan alat CI/CD
+2. **[Siapkan Capgo](https://capgo.app/docs/webapp/)**: Instal [Capgo CLI](https://capgo.app/docs/cli/commands) dengan `npx @capgo/cli init`, konfigurasikan enkripsi, dan integrasikan dengan alat CI/CD
 3. **Unggah Hotfix Anda**: Gunakan CLI untuk mengunggah pembaruan Anda secara aman, beri label dengan jelas, dan siapkan untuk penerapan
 4. **Pilih Pengaturan Pembaruan**: Target pengguna atau grup tertentu, jadwalkan peluncuran, dan tetapkan persyaratan versi
 5. **Pantau Pembaruan Anda**: Monitor tingkat pengiriman, kecepatan pembaruan, dan cakupan pengguna. Lakukan rollback segera jika diperlukan
@@ -46,7 +46,7 @@ Berikut panduan singkat untuk menyusun hotfix Anda:
 
 Dengan kemampuan pembaruan instan Capgo, Anda dapat fokus memperbaiki bug tanpa khawatir tentang penggabungan perubahan yang tidak terkait. Metode ini terbukti efektif, seperti yang disoroti oleh colenso:
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://webcapgoapp/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgoapp/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://webcapgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgo.app/)
 
 ### Uji pada Perangkat Anda
 
@@ -58,13 +58,13 @@ Pengujian menyeluruh sangat penting untuk memastikan hotfix berfungsi dengan lan
 
 Otomatiskan sebanyak mungkin proses pengujian menggunakan alat CI/CD
 
-> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Setelah hotfix Anda lulus semua pengujian, Anda siap menyiapkan Capgo untuk penerapan.
 
-## Langkah 2: Siapkan [Capgo](https://capgoapp/)
+## Langkah 2: Siapkan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13jpg?auto=compress)
 
 ### Instal Paket yang Diperlukan
 
@@ -74,7 +74,7 @@ Untuk memulai dengan Capgo dalam proyek Capacitor Anda, gunakan alat CLI-nya. Cu
 
 Perintah ini melakukan pekerjaan berat untuk Anda:
 
--   Menginstal [plugin Capgo](https://capgoapp/plugins/)
+-   Menginstal [plugin Capgo](https://capgo.app/plugins/)
 -   Mengkonfigurasi proyek Anda secara otomatis
 -   Mempersiapkan proyek Anda untuk layanan Capgo
 
@@ -92,11 +92,11 @@ Capgo memastikan proyek Anda siap dengan standar enkripsi dan kepatuhan untuk Ap
 
 Pengaturan ini telah divalidasi oleh pengembangSeperti yang dijelaskan Bessie Cooper:
 
-> "@Capgo adalah alat yang wajib dimiliki pengembang yang ingin lebih produktif. Menghindari review untuk perbaikan bug sangatlah berharga" [\[1\]](https://capgoapp/)
+> "@Capgo adalah alat yang wajib dimiliki pengembang yang ingin lebih produktif. Menghindari review untuk perbaikan bug sangatlah berharga" [\[1\]](https://capgo.app/)
 
 Untuk tim yang lebih besar, Capgo menawarkan fitur seperti pengaturan multi-organisasi dan manajemen izin yang detail. Terintegrasi dengan platform seperti [GitHub](https://githubcom/about), [GitLab](https://aboutgitlabcom/), [Azure DevOps](https://azuremicrosoftcom/en-us/products/devops), dan [Jenkins](https://wwwjenkinsio/), membuat alur kerja deployment otomatis menjadi mudah. Rodrigo Mantica menekankan pentingnya untuk tim agile:
 
-> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" [\[1\]](https://capgoapp/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" [\[1\]](https://capgo.app/)
 
 Dengan proyek Anda telah sepenuhnya diatur, Anda siap untuk mengunggah hotfix dan men-deploy-nya secara instan.
 
@@ -104,7 +104,7 @@ Dengan proyek Anda telah sepenuhnya diatur, Anda siap untuk mengunggah hotfix da
 
 ### Mengirim File ke Capgo
 
-Setelah mengatur proyek Anda, saatnya mengunggah hotfix menggunakan [Capgo CLI tool](https://capgoapp/docs/cli/commands/). Ini memastikan transfer update Anda aman dan efisien. Mulailah dengan membangun aplikasi Anda seperti biasa selama pengembangan.
+Setelah mengatur proyek Anda, saatnya mengunggah hotfix menggunakan [Capgo CLI tool](https://capgo.app/docs/cli/commands/). Ini memastikan transfer update Anda aman dan efisien. Mulailah dengan membangun aplikasi Anda seperti biasa selama pengembangan.
 
 Begini cara kerjanya:
 
@@ -124,7 +124,7 @@ Pelabelan yang jelas sangat penting untuk mengelola dan melacak hotfix Anda. Saa
 
 Martin Donadieu, pendiri Capgo, telah merancang sistem versi yang terintegrasi dengan baik dengan alur kerja CI/CD. Sistem ini memudahkan pelacakan update dan rollback jika diperlukan.
 
-[Manajemen update](https://capgoapp/docs/plugin/cloud-mode/manual-update/) Capgo juga mencakup fitur seperti enkripsi end-to-end dan deployment instan, memastikan hotfix Anda aman saat mencapai pengguna dengan cepat.
+[Manajemen update](https://capgo.app/docs/plugin/cloud-mode/manual-update/) Capgo juga mencakup fitur seperti enkripsi end-to-end dan deployment instan, memastikan hotfix Anda aman saat mencapai pengguna dengan cepat.
 
 Setelah hotfix Anda diunggah dan dilabeli, lanjutkan ke Step 4 untuk mengkonfigurasi pengaturan update Anda.
 

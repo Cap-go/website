@@ -35,7 +35,7 @@ next_blog: ''
 
 ## [PIPEDA](https://wwwprivgcca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/) : Votre guide sur la protection des données au Canada
 
-![PIPEDA](https://assetsseobotaicom/capgoapp/67eb5b27283d21cbd67d62bd/058da1c33c3afe5c8597c27b588d4b3ejpg)
+![PIPEDA](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/058da1c33c3afe5c8597c27b588d4b3e.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -65,7 +65,7 @@ Selon PIPEDA, les applications doivent obtenir un consentement clair et éclair�
 -   **Calendrier** : Obtenir le consentement avant ou au moment de la collecte des données
 -   **Langage simple** : Utiliser des termes simples et faciles à comprendre
 -   **Informations essentielles** : Rendre les détails clés sur la confidentialité facilement accessibles
--   **Explications détaillées** : Fournir des informations supplémentaires sur la confidentialité via des ressources comme les FAQ ou les [politiques de confidentialité](https://capgoapp/dp/)
+-   **Explications détaillées** : Fournir des informations supplémentaires sur la confidentialité via des ressources comme les FAQ ou les [politiques de confidentialité](https://capgo.app/dp/)
 
 Pour les données sensibles, comme les informations de santé ou financières, le consentement explicite est obligatoire
 
@@ -75,8 +75,8 @@ Des pratiques solides en matière de sécurité et de qualité des données sont
 
 | Exigence de sécurité | Exemple de mise en œuvre |
 | --- | --- |
-| [Cryptage des données](https://capgoapp/docs/cli/migrations/encryption/) | Utiliser le cryptage de bout en bout pour les transferts de données |
-| Contrôles d'accès | Appliquer l'[authentification multifacteur](https://capgoapp/docs/webapp/mfa/) pour l'accès administrateur |
+| [Cryptage des données](https://capgo.app/docs/cli/migrations/encryption/) | Utiliser le cryptage de bout en bout pour les transferts de données |
+| Contrôles d'accès | Appliquer l'[authentification multifacteur](https://capgo.app/docs/webapp/mfa/) pour l'accès administrateur |
 | Mises à jour régulières | Publier des correctifs de sécurité en temps opportun et effectuer des contrôles de vulnérabilité |
 | Exactitude des données | Fournir des outils permettant aux utilisateurs d'examiner et de mettre à jour leurs informations |
 | Détection des violations | Mettre en place une surveillance en temps réel et des systèmes d'alerte |

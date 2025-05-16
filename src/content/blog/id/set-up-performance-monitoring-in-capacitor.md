@@ -42,7 +42,7 @@ next_blog: ''
 | Metrik Kustom | Dasar | Fleksibel |
 | Kompleksitas Integrasi | Alur kerja berbasis Google | Pengaturan SDK sederhana |
 
-Untuk pembaruan langsung, integrasikan alat seperti **[Capgo](https://capgoapp/)** untuk menerapkan perbaikan secara instan tanpa delay app store. Mulai pemantauan hari ini untuk meningkatkan efisiensi dan kepuasan pengguna aplikasi Anda.
+Untuk pembaruan langsung, integrasikan alat seperti **[Capgo](https://capgo.app/)** untuk menerapkan perbaikan secara instan tanpa delay app store. Mulai pemantauan hari ini untuk meningkatkan efisiensi dan kepuasan pengguna aplikasi Anda.
 
 ## Optimalkan kesehatan aplikasi dengan [Firebase](https://firebasegooglecom/) Performance Monitoring
 
@@ -77,4 +77,4 @@ Saat memilih antara alat-alat ini, pertimbangkan hal berikut:
 
 ## Panduan Pengaturan Firebase
 
-Mengatur Firebase Performance Monitoring di [aplikasi Capacitor](https://capgoapp/plugins/ivs-player/) Anda memerlukan beberapa langkah jelas untuk memastikan pelacakan data yang akurat
+Mengatur Firebase Performance Monitoring di [aplikasi Capacitor](https://capgo.app/plugins/ivs-player/) Anda memerlukan beberapa langkah jelas untuk memastikan pelacakan data yang akurat

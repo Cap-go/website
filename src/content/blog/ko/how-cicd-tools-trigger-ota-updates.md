@@ -27,7 +27,7 @@ CI/CD 도구는 프로세스를 자동화하여 무선(OTA) 업데이트를 더 
     -   **보안:** HTTPS, 코드 서명, 암호화를 사용하여 업데이트 보호
     -   **단계별 출시:** 문제를 조기에 발견하기 위해 소규모 그룹에 먼저 업데이트 배포
     -   **롤백 옵션:** 오류율이 증가하면 자동으로 업데이트 되돌리기
--   **주요 도구:** [Capgo](https://capgoapp/)는 CLI 명령, 웹훅 통합, 상세 메트릭 추적으로 OTA 업데이트를 단순화합니다
+-   **주요 도구:** [Capgo](https://capgo.app/)는 CLI 명령, 웹훅 통합, 상세 메트릭 추적으로 OTA 업데이트를 단순화합니다
 
 OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 안정성을 보장합니다. 아래에서 [Capacitor](https://capacitorjscom/) 앱을 CI/CD 파이프라인과 설정하는 단계별 지침을 확인할 수 있습니다.
 
@@ -47,7 +47,7 @@ OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 �
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
-[자동화된 무선](https://capgoapp/blog/open-source-licecing/) (OTA) 업데이트를 위한 Capacitor 설정에는 세 가지 주요 단계가 포함됩니다: 설정 구성, 보안 조치 구현, [업데이트 시스템 통합](https://capgoapp/docs/plugin/cloud-mode/hybrid-update). 이 프로세스는 앱을 안전하게 유지하면서 CI/CD 자동화와의 호환성을 보장합니다.
+[자동화된 무선](https://capgo.app/blog/open-source-licecing/) (OTA) 업데이트를 위한 Capacitor 설정에는 세 가지 주요 단계가 포함됩니다: 설정 구성, 보안 조치 구현, [업데이트 시스템 통합](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). 이 프로세스는 앱을 안전하게 유지하면서 CI/CD 자동화와의 호환성을 보장합니다.
 
 ### capacitorconfigjson에서 OTA 설정 구성하기
 
@@ -88,9 +88,9 @@ OTA 업데이트 프로세스를 보호하여 무단 업데이트를 방지하�
 }
 ```
 
-### [Capgo](https://capgoapp/)를 OTA 업데이트용으로 구성하기
+### [Capgo](https://capgo.app/)를 OTA 업데이트용으로 구성하기
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
 
 Capgo는 OTA 업데이트 프로세스를 단순화합니다. 필요한 플러그인을 설치하여 시작하세요:
 
@@ -137,7 +137,7 @@ Capgo CLI는 파이프라인 내 업데이트 관리를 간소화하는 주요 �
 | 단계 | 명령어 | 목적 |
 | --- | --- | --- |
 | 빌드 | `capgo deploy --channel production` | 새로운 빌드 아티팩트 업로드 |
-| 테스트 | `capgo promote build-123 --group beta` | [테스트 그룹에 업데이트 배포](https://capgoapp/blog/how-to-send-specific-version-to-users/) |
+| 테스트 | `capgo promote build-123 --group beta` | [테스트 그룹에 업데이트 배포](https://capgo.app/blog/how-to-send-specific-version-to-users/) |
 | 검증 | `capgo metrics get --last-24h` | 업데이트 성공 지표 확인 |
 | 배포 | `capgo promote build-123 --channel stable` | 모든 사용자에게 업데이트 배포 |
 
@@ -161,7 +161,7 @@ Capgo CLI는 파이프라인 내 업데이트 관리를 간소화하는 주요 �
 
 ### 지표 기반 업데이트 트리거
 
-성능 지표를 기반으로 [업데이트 자동화](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)는 시간을 절약하고 문제를 예방할 수 있습니다. 모니터링 웹훅을 설정하여 중요 지표를 추적하고 업데이트 진행 또는 중단을 결정할 수 있습니다:
+성능 지표를 기반으로 [업데이트 자동화](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)는 시간을 절약하고 문제를 예방할 수 있습니다. 모니터링 웹훅을 설정하여 중요 지표를 추적하고 업데이트 진행 또는 중단을 결정할 수 있습니다:
 
 | 지표 유형 | 임계값 | 조치 |
 | --- | --- | --- |

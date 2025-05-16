@@ -37,7 +37,7 @@ CapgoはアプリのJavaScriptバンドルをCapgoサーバーと同期し、ユ
 
 私は構築するすべてのプロジェクトでCapgoを使用しています。それによってApp Storeのレビュープロセスにかける時間を減らすことができます
 
-詳細は[こちら](https://capgoapp/)でご覧いただけます
+詳細は[こちら](https://capgo.app/)でご覧いただけます
 
 ## 制限事項はありますか？
 
@@ -49,7 +49,7 @@ Capacitor JSではほとんどすべてのコードをJS、CSS、HTMLで書く�
 これらのディレクトリの内容はネイティブバイナリのコンパイルに使用され、OTAではアップデートできないためです
 ネイティブアプリでもこの部分はアップデートできません
 
-ただし、CI/CDでこの部分を処理するように設定できます。その方法については[こちらのiOS向けチュートリアル](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)で説明しています
+ただし、CI/CDでこの部分を処理するように設定できます。その方法については[こちらのiOS向けチュートリアル](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)で説明しています
 
 ## 自動Capgo設定
 
@@ -57,7 +57,7 @@ Capacitor JSではほとんどすべてのコードをJS、CSS、HTMLで書く�
 
 Capgoにログインすると、オンボーディングページが表示されます
 
-![オンボーディングページ](/onboarding_1_newwebp)
+![オンボーディングページ](/onboarding_1_new.webp)
 
 オンボーディングページの手順に従って最初のアプリを追加してください
 
@@ -93,7 +93,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUDにログイン
 
-まず、アカウントにある`all` [apikey](https://webcapgoapp/dashboard/apikeys/)を使用してCLIでログインします：
+まず、アカウントにある`all` [apikey](https://webcapgo.app/dashboard/apikeys/)を使用してCLIでログインします：
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -112,9 +112,9 @@ CLIでCapgo Cloudに最初のアプリを作成しましょう
 
 デフォルトでは、バージョン名は`packagejson`ファイルのものが使用されます
 
-[Capgo](https://webcapgoapp/)でビルドが存在することを確認してください
+[Capgo](https://webcapgo.app/)でビルドが存在することを確認してください
 
-[モバイルサンドボックスアプリ](https://capgoapp/app_mobile/)でテストすることもできます
+[モバイルサンドボックスアプリ](https://capgo.app/app_mobile/)でテストすることもできます
 
 ### チャンネルをデフォルトに設定
 

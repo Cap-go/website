@@ -81,7 +81,7 @@ Konfigurationsseite für eine Apple App Store App
 > 
 > 💡 Hier ist ein Tipp!
 > 
-> Nach der Registrierung Ihrer App empfiehlt RevenueCat, [Platform Server Notifications](https://wwwrevenuecatcom/docs/server-notifications/) einzurichten. Diese Benachrichtigungen sind nicht erforderlich, beschleunigen aber [Webhooks](https://wwwrevenuecatcom/docs/webhooks/) und Integrationslieferzeiten und reduzieren die Verzögerung bei der Aktualisierung Ihrer Abonnenten.
+> Nach der Registrierung Ihrer App empfiehlt RevenueCat, [Platform Server Notifications](https://www.revenuecat.com/docs/server-notifications/) einzurichten. Diese Benachrichtigungen sind nicht erforderlich, beschleunigen aber [Webhooks](https://www.revenuecat.com/docs/webhooks/) und Integrationslieferzeiten und reduzieren die Verzögerung bei der Aktualisierung Ihrer Abonnenten.
 
 > ### 📘
 > 
@@ -95,7 +95,7 @@ Konfigurationsseite für eine Apple App Store App
 
 ### ▶️ Service-Anmeldeinformationen
 
-Service-Anmeldeinformationen müssen eingerichtet werden, damit RevenueCat in Ihrem Namen mit den App Stores kommunizieren kann. Siehe RevenueCat-Anleitungen [App Store Connect Shared Secret](https://wwwrevenuecatcom/docs/itunesconnect-app-specific-shared-secret/), [Play Service Credentials](https://wwwrevenuecatcom/docs/creating-play-service-credentials/) und [Amazon Appstore Shared Secret](https://wwwrevenuecatcom/docs/service-credentials/amazon-appstore-credentials/) für weitere Informationen.
+Service-Anmeldeinformationen müssen eingerichtet werden, damit RevenueCat in Ihrem Namen mit den App Stores kommunizieren kann. Siehe RevenueCat-Anleitungen [App Store Connect Shared Secret](https://www.revenuecat.com/docs/itunesconnect-app-specific-shared-secret/), [Play Service Credentials](https://www.revenuecat.com/docs/creating-play-service-credentials/) und [Amazon Appstore Shared Secret](https://www.revenuecat.com/docs/service-credentials/amazon-appstore-credentials/) für weitere Informationen.
 
 Beachten Sie, dass es bis zu 36 Stunden dauern kann, bis sich Play Service-Anmeldeinformationen in Googles Servern verbreitet haben.
 
@@ -103,7 +103,7 @@ Beachten Sie, dass es bis zu 36 Stunden dauern kann, bis sich Play Service-Anmel
 
 ### ▶️ Store-Einrichtung
 
-Bevor Sie RevenueCat zum Abrufen von Produkten verwenden können, müssen Sie Ihre Produkte in den jeweiligen Stores konfigurieren. Siehe die folgenden Anleitungen für [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console](https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) und [Stripe](https://wwwrevenuecatcom/docs/stripe-products/) für Hilfe bei der Navigation durch diesen Prozess.
+Bevor Sie RevenueCat zum Abrufen von Produkten verwenden können, müssen Sie Ihre Produkte in den jeweiligen Stores konfigurieren. Siehe die folgenden Anleitungen für [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/) und [Stripe](https://www.revenuecat.com/docs/stripe-products/) für Hilfe bei der Navigation durch diesen Prozess.
 
 Wenn Sie iOS-Produkte verkaufen, stellen Sie sicher, dass Sie Ihre 'Paid Applications Agreement' unterzeichnen und Ihre Bank- und Steuerinformationen in **App Store Connect > Agreements, Tax, and Banking** ausfüllen. **Dies muss abgeschlossen sein, bevor Sie Käufe testen können.**
 
@@ -113,24 +113,24 @@ Wenn Sie iOS-Produkte verkaufen, stellen Sie sicher, dass Sie Ihre 'Paid Applica
 > 
 > Unter iOS können Sie die Konfiguration von Produkten in App Store Connect verzögern, indem Sie stattdessen mit StoreKit-Konfigurationsdateien testen. Diese Konfigurationsdateien erfordern minimale Einrichtung und sind direkt über Xcode konfigurierbar.
 > 
-> Lesen Sie mehr über die Einrichtung von StoreKit-Konfigurationsdateien im RevenueCat [Sandbox Testing](https://wwwrevenuecatcom/docs/apple-app-store/#ios-14-only-testing-on-the-simulator) Leitfaden.
+> Lesen Sie mehr über die Einrichtung von StoreKit-Konfigurationsdateien im RevenueCat [Sandbox Testing](https://www.revenuecat.com/docs/apple-app-store/#ios-14-only-testing-on-the-simulator) Leitfaden.
 
 ### ▶️ Konfigurieren Sie Produkte und Berechtigungen in RevenueCat
 
-Sobald Ihre In-App-Produkte in [App Store Connect](https://wwwrevenuecatcom/docs/ios-products/), [Google Play Console](https://wwwrevenuecatcom/docs/android-products/), [Amazon Appstore](https://wwwrevenuecatcom/docs/amazon-product-setup/) oder [Stripe](https://wwwrevenuecatcom/docs/stripe-products/) konfiguriert wurden, müssen Sie diese Konfiguration in das RevenueCat-Dashboard kopieren. RevenueCat verwendet ein Berechtigungssystem, um den Zugriff auf Premium-Funktionen zu steuern, und Angebote, um den Satz von Produkten zu verwalten, die Sie Kunden anbieten.
+Sobald Ihre In-App-Produkte in [App Store Connect](https://www.revenuecat.com/docs/ios-products/), [Google Play Console](https://www.revenuecat.com/docs/android-products/), [Amazon Appstore](https://www.revenuecat.com/docs/amazon-product-setup/) oder [Stripe](https://www.revenuecat.com/docs/stripe-products/) konfiguriert wurden, müssen Sie diese Konfiguration in das RevenueCat-Dashboard kopieren. RevenueCat verwendet ein Berechtigungssystem, um den Zugriff auf Premium-Funktionen zu steuern, und Angebote, um den Satz von Produkten zu verwalten, die Sie Kunden anbieten.
 
 Berechtigungen sind das Zugriffsrecht, das ein Kunde nach dem Kauf eines bestimmten Produkts "berechtigt" ist.
 Angebote sind eine einfache Möglichkeit für Sie, die In-App-Produkte zu organisieren, die Sie auf Ihrer Paywall anbieten möchten, und sie ferngesteuert zu konfigurieren. RevenueCat **empfiehlt** die Nutzung dieser Funktionen, um Ihren Code zu vereinfachen und es Ihnen zu ermöglichen, Produkte ohne App-Update zu ändern.
 
-Siehe [Configuring Products](https://wwwrevenuecatcom/docs/entitlements/), um Ihre Produkte einzurichten und sie dann in Angebote oder Berechtigungen zu organisieren.
+Siehe [Configuring Products](https://www.revenuecat.com/docs/entitlements/), um Ihre Produkte einzurichten und sie dann in Angebote oder Berechtigungen zu organisieren.
 
-![RevenueCat Schritt 4](/revenuecat_step4webp)
+![RevenueCat Schritt 4](/revenuecat_step4.webp)
 
 ## 4Verwendung des RevenueCat Purchases SDK
 
 RevenueCat SDK implementiert nahtlos Käufe und Abonnements über Plattformen hinweg und synchronisiert dabei Token mit dem RevenueCat-Server
 
-Bei Problemen mit dem SDK finden Sie in [Fehlerbehebung der SDKs](https://wwwrevenuecatcom/docs/troubleshooting-the-sdks/) Hilfestellung
+Bei Problemen mit dem SDK finden Sie in [Fehlerbehebung der SDKs](https://www.revenuecat.com/docs/troubleshooting-the-sdks/) Hilfestellung
 
 > ### 📘
 > 
@@ -142,7 +142,7 @@ Sie sollten die gemeinsam genutzte Instanz von _Purchases_ nur einmal konfigurie
 
 Weitere Informationen und Best Practices finden Sie im RevenueCat-Leitfaden zur [SDK-Konfiguration](https://docsrevenuecatcom/docs/configuring-sdk/)
 
-Stellen Sie sicher, dass Sie _Purchases_ nur mit Ihrem öffentlichen SDK-Schlüssel konfigurieren. Mehr über die verschiedenen verfügbaren API-Schlüssel in RevenueCat finden Sie im [Authentifizierungsleitfaden](https://wwwrevenuecatcom/docs/authentication/)
+Stellen Sie sicher, dass Sie _Purchases_ nur mit Ihrem öffentlichen SDK-Schlüssel konfigurieren. Mehr über die verschiedenen verfügbaren API-Schlüssel in RevenueCat finden Sie im [Authentifizierungsleitfaden](https://www.revenuecat.com/docs/authentication/)
 
 ```javascript
 import { CapacitorPurchases } from '@capgo/capacitor-purchases'
@@ -156,19 +156,19 @@ if (isPlatform('ios')) {
 }
 ```
 
-Während der Entwicklung empfiehlt RevenueCat, ausführlichere Debug-Logs zu aktivieren. Weitere Informationen zu diesen Logs finden Sie in ihrem [Debugging](https://wwwrevenuecatcom/docs/debugging/)-Leitfaden
+Während der Entwicklung empfiehlt RevenueCat, ausführlichere Debug-Logs zu aktivieren. Weitere Informationen zu diesen Logs finden Sie in ihrem [Debugging](https://www.revenuecat.com/docs/debugging/)-Leitfaden
 
-Wenn Sie RevenueCat neben Ihrem bestehenden Kaufcode verwenden möchten, konsultieren Sie ihren Leitfaden zum [Beobachtermodus](https://wwwrevenuecatcom/docs/observer-mode/)
+Wenn Sie RevenueCat neben Ihrem bestehenden Kaufcode verwenden möchten, konsultieren Sie ihren Leitfaden zum [Beobachtermodus](https://www.revenuecat.com/docs/observer-mode/)
 
 > ### 📘
 > 
 > Konfiguration von Purchases mit Benutzer-IDs
 > 
-> Wenn Sie ein Benutzerauthentifizierungssystem in Ihrer App haben, können Sie zum Zeitpunkt der Konfiguration oder zu einem späteren Zeitpunkt mit einem Aufruf von `logIn()` eine Benutzerkennung bereitstellen. Weitere Informationen finden Sie im RevenueCat-Leitfaden zur [Benutzeridentifizierung](https://wwwrevenuecatcom/docs/user-ids/)
+> Wenn Sie ein Benutzerauthentifizierungssystem in Ihrer App haben, können Sie zum Zeitpunkt der Konfiguration oder zu einem späteren Zeitpunkt mit einem Aufruf von `logIn()` eine Benutzerkennung bereitstellen. Weitere Informationen finden Sie im RevenueCat-Leitfaden zur [Benutzeridentifizierung](https://www.revenuecat.com/docs/user-ids/)
 
-Das SDK ruft automatisch die [konfigurierten Angebote](https://wwwrevenuecatcom/docs/entitlements/#offerings) ab und holt die Produktinformationen von Apple, Google oder Amazon. Somit sind verfügbare Produkte bereits geladen, wenn Kunden Ihren Kaufbildschirm aufrufen
+Das SDK ruft automatisch die [konfigurierten Angebote](https://www.revenuecat.com/docs/entitlements/#offerings) ab und holt die Produktinformationen von Apple, Google oder Amazon. Somit sind verfügbare Produkte bereits geladen, wenn Kunden Ihren Kaufbildschirm aufrufen
 
-Nachfolgend ein Beispiel zum Abrufen von Angeboten. Sie können Angebote nutzen, um Ihren Paywall-Bildschirm zu organisieren. Weitere Informationen und Best Practices finden Sie im RevenueCat-Leitfaden zur [Anzeige von Produkten](https://wwwrevenuecatcom/docs/displaying-products/)
+Nachfolgend ein Beispiel zum Abrufen von Angeboten. Sie können Angebote nutzen, um Ihren Paywall-Bildschirm zu organisieren. Weitere Informationen und Best Practices finden Sie im RevenueCat-Leitfaden zur [Anzeige von Produkten](https://www.revenuecat.com/docs/displaying-products/)
 
 ### ▶️ Verfügbare Produkte abrufen und anzeigen
 
@@ -176,11 +176,11 @@ Nachfolgend ein Beispiel zum Abrufen von Angeboten. Sie können Angebote nutzen,
 > 
 > Konfiguration von Purchases mit Benutzer-IDs
 > 
-> Wenn Sie ein Benutzerauthentifizierungssystem in Ihrer App haben, können Sie zum Zeitpunkt der Konfiguration oder zu einem späteren Zeitpunkt mit einem Aufruf von `logIn()` eine Benutzerkennung bereitstellen. Weitere Informationen finden Sie im RevenueCat-Leitfaden zur [Benutzeridentifizierung](https://wwwrevenuecatcom/docs/user-ids/)
+> Wenn Sie ein Benutzerauthentifizierungssystem in Ihrer App haben, können Sie zum Zeitpunkt der Konfiguration oder zu einem späteren Zeitpunkt mit einem Aufruf von `logIn()` eine Benutzerkennung bereitstellen. Weitere Informationen finden Sie im RevenueCat-Leitfaden zur [Benutzeridentifizierung](https://www.revenuecat.com/docs/user-ids/)
 
-Das SDK ruft automatisch die [konfigurierten Angebote](https://wwwrevenuecatcom/docs/entitlements/#offerings) ab und holt die Produktinformationen von Apple, Google oder Amazon. Somit sind verfügbare Produkte bereits geladen, wenn Kunden Ihren Kaufbildschirm aufrufen
+Das SDK ruft automatisch die [konfigurierten Angebote](https://www.revenuecat.com/docs/entitlements/#offerings) ab und holt die Produktinformationen von Apple, Google oder Amazon. Somit sind verfügbare Produkte bereits geladen, wenn Kunden Ihren Kaufbildschirm aufrufen
 
-Nachfolgend ein Beispiel zum Abrufen von Angeboten. Sie können Angebote nutzen, um Ihren Paywall-Bildschirm zu organisieren. Weitere Informationen und Best Practices finden Sie im RevenueCat-Leitfaden zur [Anzeige von Produkten](https://wwwrevenuecatcom/docs/displaying-products/)
+Nachfolgend ein Beispiel zum Abrufen von Angeboten. Sie können Angebote nutzen, um Ihren Paywall-Bildschirm zu organisieren. Weitere Informationen und Best Practices finden Sie im RevenueCat-Leitfaden zur [Anzeige von Produkten](https://www.revenuecat.com/docs/displaying-products/)
 
 ```javascript
 const { offerings } = await CapacitorPurchases.getOfferings()
@@ -189,7 +189,7 @@ if (offerings.current !== null) {
 }
 ```
 
-Wenn das Abrufen Ihrer [Angebote](https://wwwrevenuecatcom/docs/entitlements/#offerings), [Produkte](https://wwwrevenuecatcom/docs/entitlements/#products) oder verfügbaren [Pakete](https://wwwrevenuecatcom/docs/entitlements/#adding-packages) leer ist, liegt das an einem Konfigurationsproblem im jeweiligen Store
+Wenn das Abrufen Ihrer [Angebote](https://www.revenuecat.com/docs/entitlements/#offerings), [Produkte](https://www.revenuecat.com/docs/entitlements/#products) oder verfügbaren [Pakete](https://www.revenuecat.com/docs/entitlements/#adding-packages) leer ist, liegt das an einem Konfigurationsproblem im jeweiligen Store
 
 Die häufigsten Gründe dafür im App Store Connect sind eine veraltete 'Paid Applications Agreement' oder Produkte, die sich nicht mindestens im Status 'Ready To Submit' befinden. In GooglePlay tritt dies in der Regel auf, wenn die App nicht auf einem geschlossenen Track veröffentlicht und ein gültiger Testbenutzer hinzugefügt wurde
 
@@ -247,8 +247,8 @@ Wenn Sie eine tiefere Nutzung des Capacitor SDK benötigen, überprüfen Sie die
 - Wenn Sie es noch nicht getan haben, stellen Sie sicher, dass Ihre Produkte korrekt konfiguriert sind, indem Sie den RevenueCat-[Leitfaden zu Berechtigungen](https://www.revenuecat.com/docs/entitlements/) überprüfen.
 - Wenn Sie Ihre eigenen Benutzeridentifikatoren verwenden möchten, lesen Sie über das [Festlegen von App-Benutzer-IDs](https://www.revenuecat.com/docs/user-ids/).
 - Wenn Sie von einem anderen System zu RevenueCat wechseln, lesen Sie den RevenueCat-Leitfaden zur [Migration Ihrer bestehenden Abonnements](https://www.revenuecatcom/docs/migrating-existing-subscriptions/)
--   Sobald Sie bereit sind, Ihre Integration zu testen, können Sie den RevenueCat-Leitfaden zum [Testen und Debuggen](https://wwwrevenuecatcom/docs/debugging/) befolgen
--   Wenn Sie für das App Store Small Business Program qualifiziert sind, sehen Sie sich den RevenueCat-Leitfaden zur [Bewerbung und Information von RevenueCat](https://wwwrevenuecatcom/docs/app-store-small-business-program/) an
+-   Sobald Sie bereit sind, Ihre Integration zu testen, können Sie den RevenueCat-Leitfaden zum [Testen und Debuggen](https://www.revenuecat.com/docs/debugging/) befolgen
+-   Wenn Sie für das App Store Small Business Program qualifiziert sind, sehen Sie sich den RevenueCat-Leitfaden zur [Bewerbung und Information von RevenueCat](https://www.revenuecat.com/docs/app-store-small-business-program/) an
 
 
 Wenn Sie Live-Updates in Ihrer App benötigen

@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) Plugins verbinden Webtechnologien mit nativen Gerätefunktionen und ermöglichen die [plattformübergreifende App-Entwicklung](https://capgoapp/blog/cross-platform-mobile-app-development-guide-2024/) Diese Anleitung hilft dir bei:
+[Capacitor](https://capacitorjscom/) Plugins verbinden Webtechnologien mit nativen Gerätefunktionen und ermöglichen die [plattformübergreifende App-Entwicklung](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) Diese Anleitung hilft dir bei:
 
 -   **Einrichtung deiner Entwicklungsumgebung**: Tools wie [Nodejs](https://nodejsorg/en), [Xcode](https://developerapplecom/xcode/) und [Android Studio](https://developerandroidcom/studio) sind essentiell
 -   **Einhaltung von Code-Standards**: Verwende [TypeScript](https://wwwtypescriptlangorg/), [Swift](https://developerapplecom/swift/) und [Kotlin](https://kotlinlangorg/) mit einheitlichen Namenskonventionen und Fehlerbehandlung
@@ -53,7 +53,7 @@ Du solltest auch mit TypeScript für Web-Entwicklung und entweder Swift (für iO
 
 ### Einrichtung des Monorepo
 
-Das [Capacitor-Plugins](https://capgoapp/plugins/) Ökosystem basiert auf einer Monorepo-Struktur Dieser Ansatz stellt sicher, dass deine Arbeit von Anfang an mit den Community-Standards übereinstimmt
+Das [Capacitor-Plugins](https://capgo.app/plugins/) Ökosystem basiert auf einer Monorepo-Struktur Dieser Ansatz stellt sicher, dass deine Arbeit von Anfang an mit den Community-Standards übereinstimmt
 
 1.  **Repository forken und klonen**  
     Beginne damit, das Capacitor-Plugins-Repository auf GitHub zu forken Klone dann dein geforktes Repository:
@@ -104,4 +104,4 @@ Nachdem deine Entwicklungsumgebung eingerichtet ist, halte dich an diese Richtli
 
 ### Einhaltung der Style-Guides
 
-Das [Capacitor-Plugin-Ökosystem](https://capgoapp/blog/capacitor-comprehensive-guide/) setzt strenge Coding-Standards durch, unter Verwendung von Tools wie [ESLint](https://eslintorg/), [Prettier](https://prettierio/) und SwiftLint
+Das [Capacitor-Plugin-Ökosystem](https://capgo.app/blog/capacitor-comprehensive-guide/) setzt strenge Coding-Standards durch, unter Verwendung von Tools wie [ESLint](https://eslintorg/), [Prettier](https://prettierio/) und SwiftLint

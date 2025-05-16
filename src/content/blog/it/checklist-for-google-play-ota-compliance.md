@@ -50,7 +50,7 @@ Questo livello di documentazione rende molto più semplice la risoluzione dei pr
 
 Misure di sicurezza robuste sono fondamentali per gli aggiornamenti OTA per soddisfare gli standard di Google Play. Due pratiche essenziali includono l'uso della crittografia end-to-end e la firma dei pacchetti di aggiornamento.
 
-Come spiega il team di sviluppo di Capgo, _"L'unica soluzione con vera crittografia end-to-end, gli altri si limitano a firmare gli aggiornamenti"_ [\[1\]](https://capgoapp/). Audit di sicurezza regolari e l'aderenza alle migliori pratiche del settore aiutano a garantire che gli aggiornamenti rimangano sicuri e affidabili.
+Come spiega il team di sviluppo di Capgo, _"L'unica soluzione con vera crittografia end-to-end, gli altri si limitano a firmare gli aggiornamenti"_ [\[1\]](https://capgo.app/). Audit di sicurezza regolari e l'aderenza alle migliori pratiche del settore aiutano a garantire che gli aggiornamenti rimangano sicuri e affidabili.
 
 ## Sicurezza nella Distribuzione degli Aggiornamenti
 
@@ -60,7 +60,7 @@ Queste misure aiutano a proteggere i dati degli utenti e garantire che gli aggio
 
 La crittografia è fondamentale per una distribuzione OTA sicura. L'approccio più affidabile è la **crittografia end-to-end**, che protegge i pacchetti di aggiornamento durante l'intero processo di trasmissione. La semplice firma degli aggiornamenti non è sufficiente - la crittografia end-to-end garantisce che solo i tuoi utenti possano accedere agli aggiornamenti.
 
-> "Crittografia end-to-end. Solo i tuoi utenti possono decrittare i tuoi aggiornamenti, nessun altro" [\[1\]](https://capgoapp/)
+> "Crittografia end-to-end. Solo i tuoi utenti possono decrittare i tuoi aggiornamenti, nessun altro" [\[1\]](https://capgo.app/)
 
 Abbina la crittografia a solide strategie di recupero per mantenere un servizio senza interruzioni.
 
@@ -91,10 +91,10 @@ Google Play richiede notifiche chiare per gli aggiornamenti in sospeso per mante
 
 Diversi tipi di aggiornamenti over-the-air (OTA) richiedono livelli specifici di autorizzazioni utente:
 
-**[Aggiornamenti Automatici](https://capgoapp/docs/plugin/cloud-mode/auto-update/)**
+**[Aggiornamenti Automatici](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**
 
 - Utilizzati per piccole patch e correzioni minori
-- Nessuna azione richiesta dall'utente [\[1\]](https://capgoapp/)
+- Nessuna azione richiesta dall'utente [\[1\]](https://capgo.app/)
 
 **Approvazione Manuale**
 
@@ -115,7 +115,7 @@ Fornire sempre note di aggiornamento brevi e chiare che includano dettagli essen
 - Modifiche alle funzionalità
 - Correzioni di bug
 
-> "Crittografia end-to-end. Solo i tuoi utenti possono decrittare i tuoi aggiornamenti, nessun altro" [\[1\]](https://capgoapp/)
+> "Crittografia end-to-end. Solo i tuoi utenti possono decrittare i tuoi aggiornamenti, nessun altro" [\[1\]](https://capgo.app/)
 
 Questo approccio mantiene gli utenti informati e garantisce che gli aggiornamenti siano efficienti e conformi agli standard di Google Play
 
@@ -145,7 +145,7 @@ Distribuire gli aggiornamenti gradualmente, partendo in piccolo ed espandendo ma
 3. **Fase di Espansione**: Aumentare la distribuzione in incrementi del 20%
 4. **Rilascio Completo**: Distribuire a tutti gli utenti dopo aver confermato la stabilità
 
-> "Abbiamo distribuito gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo vedendo un'operazione molto fluida, quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo" - colenso, @colenso [\[1\]](https://capgoapp/)
+> "Abbiamo distribuito gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo vedendo un'operazione molto fluida, quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo" - colenso, @colenso [\[1\]](https://capgo.app/)
 
 ### Monitoraggio delle Prestazioni
 
@@ -159,15 +159,15 @@ Monitorare queste metriche chiave durante e dopo il rilascio:
 
 Gli strumenti di analisi e tracciamento errori sono essenziali per identificare e risolvere rapidamente i problemi. Le funzionalità di rollback istantaneo sono cruciali per mantenere la qualità del servizio in caso di problemi
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgoapp/)
+> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
 Per i test beta e i rilasci graduali, utilizzare sistemi di canali per indirizzare gruppi specifici di utenti con versioni diverse. Questo approccio controllato garantisce test approfonditi mantenendo la conformità con i requisiti del Google Play Store
 
-## Strumenti di Conformità [Capgo](https://capgoapp/)
+## Strumenti di Conformità [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223)jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223).jpg)
 
-Capgo si basa su protocolli di aggiornamento e sicurezza rigorosi per fornire strumenti progettati per la conformità. Con oltre 235 milioni di aggiornamenti distribuiti su 750 app in produzione [\[1\]](https://capgoapp/), Capgo garantisce aggiornamenti fluidi rispettando gli standard chiave. Questi strumenti si basano su principi come il controllo versione, la sicurezza e la garanzia della qualità.
+Capgo si basa su protocolli di aggiornamento e sicurezza rigorosi per fornire strumenti progettati per la conformità. Con oltre 235 milioni di aggiornamenti distribuiti su 750 app in produzione [\[1\]](https://capgo.app/), Capgo garantisce aggiornamenti fluidi rispettando gli standard chiave. Questi strumenti si basano su principi come il controllo versione, la sicurezza e la garanzia della qualità.
 
 ### Funzionalità di Sicurezza
 
@@ -188,7 +188,7 @@ Capgo si integra facilmente nei flussi di lavoro di sviluppo esistenti rispettan
 | Pipeline CI/CD | Supporta [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), [Jenkins](https://wwwjenkinsio/) | Automatizza i controlli di conformità |
 | Strumenti CLI | Deployment con un comando | Standardizza il processo di aggiornamento |
 | Accesso API | API pubblica per configurazioni personalizzate | Offre gestione flessibile della conformità |
-| [Sistema di Canali](https://capgoapp/docs/plugin/cloud-mode/channel-system/) | Test beta e rollout graduali | Permette rilasci controllati degli aggiornamenti |
+| [Sistema di Canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Test beta e rollout graduali | Permette rilasci controllati degli aggiornamenti |
 
 L'integrazione CI/CD è disponibile a circa 300€ al mese
 
@@ -203,7 +203,7 @@ Capgo fornisce strumenti per gestire efficacemente gli aggiornamenti allineandos
 | Aggiornamenti Parziali | Dimensione media bundle di 5MB | Migliora l'efficienza di consegna |
 | Controlli Organizzativi | Permessi granulari | Protegge l'autorità di aggiornamento |
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per distribuire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per distribuire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Capgo offre anche opzioni di hosting flessibili, incluse soluzioni cloud e self-hosted. Queste opzioni permettono alle organizzazioni di mantenere il controllo sulla loro infrastruttura di aggiornamento rispettando gli standard di sicurezza di Google Play. Funzionalità come il monitoraggio in tempo reale e il rollback istantaneo aiutano a raggiungere il benchmark del 82% di tasso di successo globale.
 
@@ -224,6 +224,6 @@ Rimanere al passo con questi requisiti aiuta a evitare rifiuti e garantisce oper
 
 ### Utilizzo di Capgo
 
-Capgo fornisce strumenti progettati per semplificare la conformità agli standard di Google Play. Con le sue funzionalità, gli sviluppatori possono gestire milioni di aggiornamenti su varie app senza problemi [\[1\]](https://capgoapp/)
+Capgo fornisce strumenti progettati per semplificare la conformità agli standard di Google Play. Con le sue funzionalità, gli sviluppatori possono gestire milioni di aggiornamenti su varie app senza problemi [\[1\]](https://capgo.app/)
 
 > "Capgo è essenziale per gli sviluppatori - permettendo correzioni di bug senza revisione dello store" [\[1\]](https://capgo

@@ -29,7 +29,7 @@ next_blog: ''
 -   **Tools installieren**: [Nodejs](https://nodejsorg/en), npm, Git und einen Code-Editor wie [VS Code](https://codevisualstudiocom/)
 -   **Capacitor einrichten**: Installieren Sie die Capacitor CLI und initialisieren Sie Ihr Projekt
 -   **Plattformen konfigurieren**: Fügen Sie iOS- und Android-Unterstützung hinzu, passen Sie Einstellungen an und synchronisieren Sie Ihren Code
--   **Testen und Bereitstellen**: Erstellen Sie Apps, führen Sie sie auf Geräten aus und nutzen Sie Live-Update-Tools wie [Capgo](https://capgoapp/) für nahtlose Aktualisierungen
+-   **Testen und Bereitstellen**: Erstellen Sie Apps, führen Sie sie auf Geräten aus und nutzen Sie Live-Update-Tools wie [Capgo](https://capgo.app/) für nahtlose Aktualisierungen
 
 Capacitor verbindet Web-Apps mit nativen Gerätefunktionen und gewährleistet eine reibungslose Leistung über alle Plattformen hinweg. Folgen Sie diesem Leitfaden, um Ihren App-Entwicklungsprozess zu vereinfachen!
 
@@ -83,7 +83,7 @@ Bringen Sie die Capacitor CLI mit diesen Schritten zum Laufen:
     npx @capgo/cli init
     ```
     
-    Dies konfiguriert die notwendigen Einstellungen, um [Updates zu verwalten](https://capgoapp/docs/plugin/cloud-mode/manual-update/) [\[1\]](https://capgoapp/) Es vereinfacht den Prozess zum Erstellen, Testen und Bereitstellen Ihrer App.
+    Dies konfiguriert die notwendigen Einstellungen, um [Updates zu verwalten](https://capgo.app/docs/plugin/cloud-mode/manual-update/) [\[1\]](https://capgo.app/) Es vereinfacht den Prozess zum Erstellen, Testen und Bereitstellen Ihrer App.
     
 
 ## Ein neues Capacitor-Projekt starten
@@ -225,7 +225,7 @@ Mit diesen Konfigurationen sind Sie bereit, Ihre App auf mobilen Geräten zu ers
 
 ## Erstellen und Testen
 
-Mit der zuvor beschriebenen Einrichtung können Sie nun Ihre [Capacitor App](https://capgoapp/plugins/ivs-player/) erstellen und testen, um sicherzustellen, dass sie auf verschiedenen Geräten korrekt funktioniert.
+Mit der zuvor beschriebenen Einrichtung können Sie nun Ihre [Capacitor App](https://capgo.app/plugins/ivs-player/) erstellen und testen, um sicherzustellen, dass sie auf verschiedenen Geräten korrekt funktioniert.
 
 ### Build- und Ausführungsbefehle
 
@@ -254,7 +254,7 @@ Diese Befehle erstellen und starten Ihre App entweder in einem Simulator oder au
 
 ### Capacitor-Plugins hinzufügen
 
-[Capacitor-Plugins](https://capgoapp/plugins/) ermöglichen es Ihnen, native Funktionen zu Ihrer App hinzuzufügen. Um beispielsweise Kamera-, Geolocation- und Speicherfunktionen einzubinden, führen Sie aus:
+[Capacitor-Plugins](https://capgo.app/plugins/) ermöglichen es Ihnen, native Funktionen zu Ihrer App hinzuzufügen. Um beispielsweise Kamera-, Geolocation- und Speicherfunktionen einzubinden, führen Sie aus:
 
 ```bash
 npm install @capacitor/camera @capacitor/geolocation @capacitor/storage
@@ -265,15 +265,15 @@ Nach der Installation konfigurieren Sie die Plugins in Ihren nativen Projekten. 
 
 | **Plugin** | **iOS-Konfiguration** | **Android-Konfiguration** |
 | --- | --- | --- |
-| Kamera | [Datenschutzbeschreibung](https://capgoapp/privacy/) hinzufügen | Berechtigungen zum Manifest hinzufügen |
+| Kamera | [Datenschutzbeschreibung](https://capgo.app/privacy/) hinzufügen | Berechtigungen zum Manifest hinzufügen |
 | Geolocation | Standortnutzungsbeschreibung hinzufügen | Standortberechtigungen hinzufügen |
 | Speicher | Keine zusätzliche Einrichtung erforderlich | Keine zusätzliche Einrichtung erforderlich |
 
-### Live-Updates mit [Capgo](https://capgoapp/)
+### Live-Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28jpg?auto=compress)
 
-Um die Bereitstellung und das Testen zu vereinfachen, können Sie Live-Update-Tools wie Capgo integrieren. Dieser Dienst hat bereits über 235 Millionen Updates ausgeliefert, wobei 95% der Nutzer Updates innerhalb von 24 Stunden erhalten und eine globale Erfolgsquote von 82% erreicht wird [\[1\]](https://capgoapp/)
+Um die Bereitstellung und das Testen zu vereinfachen, können Sie Live-Update-Tools wie Capgo integrieren. Dieser Dienst hat bereits über 235 Millionen Updates ausgeliefert, wobei 95% der Nutzer Updates innerhalb von 24 Stunden erhalten und eine globale Erfolgsquote von 82% erreicht wird [\[1\]](https://capgo.app/)
 
 So fügen Sie Capgo zu Ihrer App hinzu:
 
@@ -299,7 +299,7 @@ Dieser Leitfaden hat alle Phasen der Einrichtung und Bereitstellung einer Capaci
 
 Die Erstellung einer Capacitor-App erfordert sorgfältige Beachtung bei Einrichtung, Konfiguration und plattformspezifischen Anpassungen. Die Einrichtung Ihrer Entwicklungsumgebung - einschließlich Tools wie **Nodejs** und der **Capacitor CLI** - ist ein entscheidender Ausgangspunkt. Die Konfiguration von Plattformen wie iOS und Android stellt sicher, dass die App nahtlos auf nativen Systemen funktioniert
 
-Die Verwendung eines Update-Systems wie **Capgo** kann das Release-Management vereinfachen und zur Stabilität der App beitragen [\[1\]](https://capgoapp/)
+Die Verwendung eines Update-Systems wie **Capgo** kann das Release-Management vereinfachen und zur Stabilität der App beitragen [\[1\]](https://capgo.app/)
 
 Hier ist eine Aufschlüsselung der wichtigsten Phasen:
 

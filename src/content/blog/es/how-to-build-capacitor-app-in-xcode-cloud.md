@@ -32,7 +32,7 @@ Usar Ionic es opcional, para Cordova podría funcionar, pero no lo he probado
 
 ## Importante sobre el precio
 
-![Price Xcode Cloud](/xcode_cloud_pricewebp)
+![Price Xcode Cloud](/xcode_cloud_price.webp)
 
 [https://developerapplecom/xcode-cloud/](https://developerapplecom/xcode-cloud/)
 
@@ -96,28 +96,28 @@ Luego haz este archivo ejecutable con este comando `chmod +x ios/App/ci_scripts/
 Abre Xcode (sí, para quitar Xcode necesitas Xcode)
 
 Y ve a esta pestaña:
-![Xcode step 1](/xcode_step_1webp)
+![Xcode step 1](/xcode_step_1.webp)
 
 Haz clic en crear flujo de trabajo, selecciona tu aplicación, haz clic en siguiente como se muestra a continuación
 
-![Xcode step 2](/xcode_step_2webp)
+![Xcode step 2](/xcode_step_2.webp)
 
 Haz clic en Editar flujo de trabajo en la izquierda
-![Xcode step 2](/xcode_step_3webp)
+![Xcode step 2](/xcode_step_3.webp)
 
 Ve a la pestaña de entornos y elige como se muestra a continuación Mac 124 y marca la opción adecuada
-![Xcode step 3](/xcode_step_3webp)
+![Xcode step 3](/xcode_step_3.webp)
 
 Elige tu condición de inicio
 Si usas la misma compilación que nosotros, sugiero usar Tag en lugar de rama, para evitar compilaciones dobles
 
 Configura tu variable de entorno
-![Xcode step 4](/xcode_step_4webp)
+![Xcode step 4](/xcode_step_4.webp)
 
 Conecta tu cuenta de GitHub
-![Xcode step 5](/xcode_step_5webp)
+![Xcode step 5](/xcode_step_5.webp)
 
-![Xcode step 6](/xcode_step_6webp)
+![Xcode step 6](/xcode_step_6.webp)
 
 Luego habilita el flujo de trabajo y realiza tu primer cambio, deberías ver tu compilación ejecutándose en Xcode
 

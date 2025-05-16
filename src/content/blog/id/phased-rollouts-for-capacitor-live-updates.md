@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-Peluncuran bertahap memungkinkan Anda memperbarui aplikasi secara perlahan, dimulai dengan sekelompok kecil pengguna dan diperluas seiring konfirmasi stabilitas. Pendekatan ini mengurangi risiko, memastikan kualitas aplikasi, dan meningkatkan pengalaman pengguna. Tools seperti [Capgo](https://capgoapp/) memudahkan pengelolaan pembaruan ini sambil mematuhi aturan app store.
+Peluncuran bertahap memungkinkan Anda memperbarui aplikasi secara perlahan, dimulai dengan sekelompok kecil pengguna dan diperluas seiring konfirmasi stabilitas. Pendekatan ini mengurangi risiko, memastikan kualitas aplikasi, dan meningkatkan pengalaman pengguna. Tools seperti [Capgo](https://capgo.app/) memudahkan pengelolaan pembaruan ini sambil mematuhi aturan app store.
 
 ### Manfaat Utama:
 
@@ -59,7 +59,7 @@ Peluncuran bertahap memerlukan perencanaan cermat dan pembagian basis pengguna u
 
 ### Pembagian Grup Pengguna
 
-Dengan fitur penugasan Capgo, Anda dapat mensegmentasi pengguna ke dalam grup berbeda, menentukan peran spesifik untuk fase pengujian [\[1\]](https://capgoapp/) Ini membantu Anda mengelola pembaruan secara sistematis.
+Dengan fitur penugasan Capgo, Anda dapat mensegmentasi pengguna ke dalam grup berbeda, menentukan peran spesifik untuk fase pengujian [\[1\]](https://capgo.app/) Ini membantu Anda mengelola pembaruan secara sistematis.
 
 Berikut contoh cara menyusun grup pengguna Anda:
 
@@ -72,7 +72,7 @@ Berikut contoh cara menyusun grup pengguna Anda:
 
 ### Mengatur Persentase Pembaruan
 
-Tools manajemen Capgo memungkinkan Anda mengatur persentase peluncuran secara presisi, membantu menjaga stabilitas aplikasi selama pembaruan [\[1\]](https://capgoapp/)
+Tools manajemen Capgo memungkinkan Anda mengatur persentase peluncuran secara presisi, membantu menjaga stabilitas aplikasi selama pembaruan [\[1\]](https://capgo.app/)
 
 Berikut saran rencana peluncuran bertahap:
 
@@ -85,7 +85,7 @@ Berikut saran rencana peluncuran bertahap:
 
 ### Pelacakan Kemajuan
 
-Antarmuka web Capgo memudahkan pemantauan pembaruan secara real-time, melacak distribusi dan adopsi pengguna [\[1\]](https://capgoapp/) Perhatikan metrik berikut saat melakukan peluncuran:
+Antarmuka web Capgo memudahkan pemantauan pembaruan secara real-time, melacak distribusi dan adopsi pengguna [\[1\]](https://capgo.app/) Perhatikan metrik berikut saat melakukan peluncuran:
 
 | Kategori Metrik | Indikator Utama | Pemicu Tindakan |
 | --- | --- | --- |
@@ -101,7 +101,7 @@ Langkah-langkah ini membantu Anda mengelola peluncuran secara efektif sambil mem
 
 ### Konfigurasi Live Update
 
-Mulai dengan menginstal [plugin Capgo](https://capgoapp/plugins/) untuk mengaktifkan pembaruan over-the-air (OTA) untuk proyek Capacitor Anda:
+Mulai dengan menginstal [plugin Capgo](https://capgo.app/plugins/) untuk mengaktifkan pembaruan over-the-air (OTA) untuk proyek Capacitor Anda:
 
 [[CODE_BLOCK]]
 

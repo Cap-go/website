@@ -309,11 +309,11 @@ Wenn alles gut gelaufen ist, sollten Sie etwas Ähnliches sehen:
 
 Generierte Zertifikate und Bereitstellungsprofile werden in die Ressourcen des Zertifikate-Repositories hochgeladen.
 
-![App Store Connect Zertifikate](/certificateswebp)
+![App Store Connect Zertifikate](/certificates.webp)
 
 Öffnen Sie zuletzt Ihr `Projekt` in Xcode und aktualisieren Sie das Bereitstellungsprofil für die Release-Konfiguration Ihrer App.
 
-![XCode Zertifikate](/xcode_certwebp)
+![XCode Zertifikate](/xcode_cert.webp)
 
 ## Einige Dinge zu beachten 💡
 
@@ -323,7 +323,7 @@ Damit CI/CD die Zertifikate und Bereitstellungsprofile importieren kann, muss es
 
 Gehen Sie in GitHub zu **Einstellungen** → **Entwicklereinstellungen** → **Persönliche Zugriffs-Token** → klicken Sie auf `Neues Token generieren` → markieren Sie den `repo`-Umfang → dann klicken Sie auf `Token generieren`
 
-![Persönliches Zugriffs-Token erstellen](/personal_access_tokenwebp)
+![Persönliches Zugriffs-Token erstellen](/personal_access_token.webp)
 
 Machen Sie eine Kopie des generierten persönlichen Zugriffs-Tokens. Sie werden es später für die Umgebungsvariable `GIT_TOKEN` verwenden.
 
@@ -517,26 +517,26 @@ fastlane/*.env
 
 Es sollte genauso funktionieren wie bei GitHub Actions auf der Remote-Maschine, aber auf unserem lokalen Rechner 🍻
 
-![Lokaler Fastlane-Lauf](/local_fastlanewebp)
+![Lokaler Fastlane-Lauf](/local_fastlane.webp)
 
 Terminal-Ausführung: $ Fastlane closed\_beta
 
 **_Wenn Sie bis hierher gekommen sind, meine Glückwünsche, jetzt haben Sie einen vollständig automatisierten Prozess für Ihre iOS-Apps mit Fastlane und GitHub Actions_**
 
 > Jedes Mal, wenn Sie einen neuen Commit senden, wird im Google Play Konsole, Beta-Kanal, ein Release erstellt
-Ich werde diesen Blog mit Ihrem Feedback verbessern. Wenn Sie Fragen oder Vorschläge haben, lassen Sie es mich bitte per E-Mail wissen: martin@capgoapp
+Ich werde diesen Blog mit Ihrem Feedback verbessern. Wenn Sie Fragen oder Vorschläge haben, lassen Sie es mich bitte per E-Mail wissen: martin@capgo.app
 
 ### Auf Ihrem Gerät bauen
 
 Wenn Sie immer noch auf Ihrem Gerät bauen müssen, müssen Sie sie manuell zur Bereitstellung hinzufügen
 Verbinden Sie Ihr Gerät mit Ihrem Mac und öffnen Sie das Gerätemenü
-![iOS-Gerätemenü finden](/find_ios_devicewebp)
+![iOS-Gerätemenü finden](/find_ios_device.webp)
 Kopieren Sie dann Ihre Kennung 
-![iOS-Kennung finden](/find_ios_identifierwebp)
+![iOS-Kennung finden](/find_ios_identifier.webp)
 Und starten Sie dann den Befehl:
 `fastlane register_new_device`
 Es wird Sie auffordern, einen Gerätenamen und die Kennung einzugeben:
-![iOS-Kennung setzen](/set_identifierwebp)
+![iOS-Kennung setzen](/set_identifier.webp)
 
 ### Wenn Sie auf Probleme stoßen
 

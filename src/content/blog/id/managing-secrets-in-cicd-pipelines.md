@@ -29,7 +29,7 @@ next_blog: ''
 
 ### Rahasia Umum CI/CD
 
--   [Kunci API](https://capgoapp/docs/webapp/api-keys/)
+-   [Kunci API](https://capgo.app/docs/webapp/api-keys/)
 -   Kredensial database
 -   Kunci enkripsi
 -   Token autentikasi
@@ -87,10 +87,10 @@ Banyak alat CI/CD dilengkapi dengan kemampuan manajemen rahasia bawaan:
 -   **GitLab CI**: Menyediakan variabel yang dilindungi dan rahasia tingkat grup, memungkinkan berbagi yang aman antar proyek sambil mempertahankan isolasi
 -   **Jenkins**: Bekerja dengan plugin kredensial dan mendukung penyimpanan rahasia eksternal. Plugin diperlukan untuk memastikan rahasia disamarkan dalam log
 
-### Fitur Keamanan [Capgo](https://capgoapp/)
+### Fitur Keamanan [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
-Capgo meningkatkan keamanan pembaruan langsung dalam aplikasi Capacitor dengan memperluas manajemen rahasia CI/CD standar. Ini menggunakan enkripsi end-to-end untuk memastikan hanya pengguna yang berwenang yang dapat mendekripsi data sensitif [\[1\]](https://capgoapp/)
+Capgo meningkatkan keamanan pembaruan langsung dalam aplikasi Capacitor dengan memperluas manajemen rahasia CI/CD standar. Ini menggunakan enkripsi end-to-end untuk memastikan hanya pengguna yang berwenang yang dapat mendekripsi data sensitif [\[1\]](https://capgo.app/)
 
 Capgo terintegrasi dengan mulus dengan alat seperti GitHub Actions, GitLab CI, dan Jenkins

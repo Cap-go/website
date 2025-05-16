@@ -20,7 +20,7 @@ locale: es
 next_blog: ''
 ---
 
-**El cifrado de extremo a extremo (E2EE)** es la mejor manera de asegurar las actualizaciones Over-the-Air (OTA) para aplicaciones. Garantiza que solo el usuario previsto pueda descifrar e instalar actualizaciones, protegiendo contra riesgos como manipulación, inyección de código y brechas de datos. Plataformas como [Capgo](https://capgoapp/) han implementado E2EE para salvaguardar la integridad de las aplicaciones mientras cumplen con estándares de seguridad requeridos por Apple y Google.
+**El cifrado de extremo a extremo (E2EE)** es la mejor manera de asegurar las actualizaciones Over-the-Air (OTA) para aplicaciones. Garantiza que solo el usuario previsto pueda descifrar e instalar actualizaciones, protegiendo contra riesgos como manipulación, inyección de código y brechas de datos. Plataformas como [Capgo](https://capgo.app/) han implementado E2EE para salvaguardar la integridad de las aplicaciones mientras cumplen con estándares de seguridad requeridos por Apple y Google.
 
 ### Beneficios Clave de las Actualizaciones OTA Cifradas:
 
@@ -35,7 +35,7 @@ next_blog: ''
 2. El intercambio seguro de claves garantiza que solo los dispositivos autorizados puedan descifrar
 3. Los dispositivos verifican la autenticidad e instalan la actualización de forma segura
 
-La solución de Capgo ha entregado 235 millones de actualizaciones globalmente, logrando una **tasa de adopción del 95% en 24 horas** y una **tasa de éxito del 82% a nivel mundial**. Al [cifrar actualizaciones](https://capgoapp/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/), los desarrolladores pueden implementar de manera más rápida, segura y confiable.
+La solución de Capgo ha entregado 235 millones de actualizaciones globalmente, logrando una **tasa de adopción del 95% en 24 horas** y una **tasa de éxito del 82% a nivel mundial**. Al [cifrar actualizaciones](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/), los desarrolladores pueden implementar de manera más rápida, segura y confiable.
 
 ## Actualizaciones OTA seguras para [ESP32](https://enwikipediaorg/wiki/ESP32) – Configurar firma de código con
 
@@ -49,7 +49,7 @@ El cifrado de extremo a extremo (E2EE) asegura que los paquetes de actualizació
 
 E2EE establece una conexión segura entre el sistema de compilación del desarrollador y el dispositivo del usuario. Esto significa que incluso si alguien intercepta la actualización, no podrá acceder a su contenido. Como explica Capgo:
 
-> "Solo tus usuarios pueden descifrar tus actualizaciones, nadie más" [\[1\]](https://capgoapp/)
+> "Solo tus usuarios pueden descifrar tus actualizaciones, nadie más" [\[1\]](https://capgo.app/)
 
 En esta configuración, las claves de cifrado se almacenan solo en los puntos finales. Esto asegura que ni siquiera la plataforma que entrega la actualización pueda descifrar el contenido, siguiendo un principio estricto de confianza cero.
 
@@ -67,15 +67,15 @@ El proceso de asegurar una actualización OTA involucra varios pasos:
 
 Capgo enfatiza este enfoque, afirmando:
 
-> "La única solución con verdadero cifrado de extremo a extremo, otros solo firman actualizaciones" [\[1\]](https://capgoapp/)
+> "La única solución con verdadero cifrado de extremo a extremo, otros solo firman actualizaciones" [\[1\]](https://capgo.app/)
 
 Este proceso de múltiples pasos asegura que las actualizaciones estén protegidas desde el momento en que se crean hasta que se instalan, ofreciendo un nivel más fuerte de seguridad que los enfoques que dependen únicamente de firmar actualizaciones.
 
 ## Configurando el Cifrado de Extremo a Extremo en [Capacitor](https://capacitorjscom/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-Esta sección explica cómo implementar el cifrado de extremo a extremo en [aplicaciones Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/), basándose en los conceptos cubiertos anteriormente.
+Esta sección explica cómo implementar el cifrado de extremo a extremo en [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), basándose en los conceptos cubiertos anteriormente.
 
 Para asegurar actualizaciones over-the-air (OTA) en Capacitor, use protocolos de cifrado diseñados para alta seguridad. La plataforma de Capgo simplifica la gestión de claves de cifrado mientras se adhiere a los estándares de seguridad líderes.
 

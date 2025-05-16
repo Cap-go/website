@@ -22,23 +22,23 @@ locale: id
 next_blog: ''
 ---
 
-**Butuh [pembaruan aplikasi](https://capgoapp/plugins/capacitor-updater/) yang lebih cepat tanpa penundaan app store?** [Capgo](https://capgoapp/) memungkinkan Anda memberikan pembaruan Over-the-Air (OTA) yang aman secara instan kepada pengguna Anda. Lewati tinjauan app store dan jaga aplikasi Anda tetap up-to-date dengan mudah.
+**Butuh [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) yang lebih cepat tanpa penundaan app store?** [Capgo](https://capgo.app/) memungkinkan Anda memberikan pembaruan Over-the-Air (OTA) yang aman secara instan kepada pengguna Anda. Lewati tinjauan app store dan jaga aplikasi Anda tetap up-to-date dengan mudah.
 
 ### Poin Penting:
 
 -   **Apa itu Capgo?** Platform open-source untuk pembaruan langsung di aplikasi [Capacitor](https://capacitorjscom/)
 -   **Mengapa OTA Updates?** Hemat waktu, tingkatkan pengalaman pengguna, dan perbaiki bug dengan cepat
 -   **Bagaimana Cara Memulai?**
-    -   Instal [plugin Capgo](https://capgoapp/plugins/): `npm install @capgo/capacitor-updater`
+    -   Instal [plugin Capgo](https://capgo.app/plugins/): `npm install @capgo/capacitor-updater`
     -   Konfigurasi aplikasi Anda dengan API key
     -   Gunakan channel seperti "production" atau "beta" untuk peluncuran yang ditargetkan
 -   **Fitur Lanjutan:** Enkripsi end-to-end, penanganan kesalahan, dan integrasi CI/CD
 
-Dokumentasi Capgo ([capgoapp/docs](https://capgoapp/docs)) menyediakan instruksi langkah demi langkah untuk pengaturan, keamanan, dan pemecahan masalah. Dari instalasi hingga konfigurasi lanjutan, ini adalah panduan lengkap Anda untuk pembaruan yang mulus.
+Dokumentasi Capgo ([capgo.app/docs](https://capgo.app/docs)) menyediakan instruksi langkah demi langkah untuk pengaturan, keamanan, dan pemecahan masalah. Dari instalasi hingga konfigurasi lanjutan, ini adalah panduan lengkap Anda untuk pembaruan yang mulus.
 
-## [Capgo](https://capgoapp/), Plugin CapacitorJs untuk Pembaruan Langsung
+## [Capgo](https://capgo.app/), Plugin CapacitorJs untuk Pembaruan Langsung
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/NzXXKoyhTIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -48,11 +48,11 @@ Menavigasi dokumentasi secara efektif sangat penting saat bekerja dengan pembaru
 
 ### Di Mana Menemukan Dokumentasi
 
-Anda dapat mengakses dokumentasi Capgo di [capgoapp/docs](https://capgoapp/docs) [\[1\]](https://githubcom/Cap-go/capacitor-updater). Dokumentasi ini disusun dalam bagian-bagian berdasarkan tujuan spesifik:
+Anda dapat mengakses dokumentasi Capgo di [capgo.app/docs](https://capgo.app/docs) [\[1\]](https://githubcom/Cap-go/capacitor-updater). Dokumentasi ini disusun dalam bagian-bagian berdasarkan tujuan spesifik:
 
 | **Bagian** | **Tujuan** | **Topik Utama** |
 | --- | --- | --- |
-| Getting Started | Pengaturan awal | Langkah instalasi, [pengaturan API key](https://capgoapp/docs/webapp/api-keys/) |
+| Getting Started | Pengaturan awal | Langkah instalasi, [pengaturan API key](https://capgo.app/docs/webapp/api-keys/) |
 | Configuration | Pengaturan inti | Konfigurasi plugin, pengaturan lingkungan |
 | API Reference | Detail teknis | Metode, parameter, nilai return |
 | Security | Langkah perlindungan | Pengaturan enkripsi, verifikasi tanda tangan |
@@ -347,11 +347,11 @@ Menggunakan sumber daya Capgo, pengembang dapat mengimplementasikan fitur pentin
 | --- | --- | --- |
 | **Keamanan** | Enkripsi dan pemeriksaan integritas | Bagian _Fitur Keamanan_ |
 | **Kepatuhan** | Memenuhi persyaratan Apple dan Android | Panduan _Aturan App Store_ |
-| **[Manajemen Pembaruan](https://capgoapp/docs/plugin/cloud-mode/manual-update/)** | Kontrol versi dan opsi rollback | Panduan _[Metode Pembaruan](https://capgoapp/docs/plugin/cloud-mode/hybrid-update)_ |
+| **[Manajemen Pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Kontrol versi dan opsi rollback | Panduan _[Metode Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ |
 | **Penanganan Error** | Langkah pencatatan dan pemecahan masalah | _Panduan Pemecahan Masalah_ |
 
 Area-area ini membentuk tulang punggung sistem manajemen pembaruan Capgo
 
-CLI dan alat analitik Capgo menyederhanakan [pengelolaan pembaruan](https://capgoapp/docs/plugin/cloud-mode/manual-update/) sepanjang siklus hidup aplikasi Anda [\[1\]](https://githubcom/Cap-go/capacitor-updater)
+CLI dan alat analitik Capgo menyederhanakan [pengelolaan pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) sepanjang siklus hidup aplikasi Anda [\[1\]](https://githubcom/Cap-go/capacitor-updater)
 
 Untuk dukungan lebih lanjut, Anda dapat menjelajahi sumber daya tambahan seperti **dokumentasi API**, **proyek contoh**, dan **forum komunitas** [\[2\]](https://devto/arnosolo/ionic-appflow-live-update-alternative-55c3)

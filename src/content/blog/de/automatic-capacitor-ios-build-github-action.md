@@ -31,7 +31,7 @@ Bevor Sie mit dem Tutorial fortfahren…
 
 ## Wichtiges zum Preis
 
-![Preis GitHub Action](/price_github_actionswebp)
+![Preis GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -74,19 +74,19 @@ Um Schlüssel zu generieren, müssen Sie Admin-Berechtigung in App Store Connect
 
 2 — Wählen Sie [Benutzer und Zugriff](https://appstoreconnectapplecom/access/users/)
 
-![App Store Connect Benutzerzugriff](/select_user_accesswebp)
+![App Store Connect Benutzerzugriff](/select_user_access.webp)
 
 3 — Wählen Sie die Registerkarte API-Schlüssel
 
-![App Store Connect API-Schlüssel](/user_access_keyswebp)
+![App Store Connect API-Schlüssel](/user_access_keys.webp)
 
 4 — Klicken Sie auf API-Schlüssel generieren oder auf die Schaltfläche Hinzufügen (+)
 
-![App Store Connect API-Schlüssel erstellen](/user_accesswebp)
+![App Store Connect API-Schlüssel erstellen](/user_access.webp)
 
 5 — Geben Sie einen Namen für den Schlüssel ein. Der Name dient nur zu Ihrer Information und ist nicht Teil des Schlüssels selbst
 
-![App Store Connect API-Schlüssel Namen erstellen](/gen_keywebp)
+![App Store Connect API-Schlüssel Namen erstellen](/gen_key.webp)
 
 6 — Wählen Sie unter Zugriff die Rolle für den Schlüssel aus. Die für Schlüssel geltenden Rollen sind die gleichen Rollen, die für Benutzer in Ihrem Team gelten. Siehe [Rollenberechtigungen](https://helpapplecom/app-store-connect/#/deve5f9a89d7/). Wir empfehlen, **App-Verwaltung** auszuwählen.
 
@@ -96,7 +96,7 @@ Um Schlüssel zu generieren, müssen Sie Admin-Berechtigung in App Store Connect
 
 Der Name des neuen Schlüssels, die Schlüssel-ID, ein Download-Link und andere Informationen erscheinen auf der Seite
 
-![App Store Connect Schlüssel herunterladen](/download_keywebp)
+![App Store Connect Schlüssel herunterladen](/download_key.webp)
 
 Hier können Sie alle drei notwendigen Informationen erhalten.
 <1> Aussteller-ID
@@ -117,11 +117,11 @@ _Jetzt können wir Fastlane mit dem App Store Connect API-Schlüssel verwalten, 
 
 Öffnen Sie XCode und gehen Sie zu **Einstellungen** > **Konten** > **Apple ID** > **Teams** und wählen Sie Ihr Team aus.
 
-![Code-Signierungsidentitäten](/code_signing_identitieswebp)
+![Code-Signierungsidentitäten](/code_signing_identities.webp)
 
 Klicken Sie auf **Zertifikate verwalten** > **+** und wählen Sie **Apple Distribution**
 
-![Apple Distribution](/apple_distributionwebp)
+![Apple Distribution](/apple_distribution.webp)
 
 Dann können Sie ein neues Zertifikat erstellen.
 
@@ -129,7 +129,7 @@ Anschließend müssen Sie zum Schlüsselbund gehen, um das Zertifikat als `p12`-
 
 Dazu müssen Sie zum Schlüsselbund wechseln, den **Anmelde**-Schlüsselbund auswählen und dann den Tab **Meine Zertifikate**
 
-![Meine Zertifikate](/my_certificateswebp)
+![Meine Zertifikate](/my_certificates.webp)
 
 Dann können Sie das Zertifikat auswählen, das Sie herunterladen möchten (Achten Sie auf das Datum des Zertifikats)
 
@@ -145,29 +145,29 @@ Dadurch wird das Zertifikat als `p12`-Datei heruntergeladen.
 
 Erstellen Sie dann ein neues Profil, indem Sie auf **+** klicken.
 
-![Neues Profil erstellen](/create_new_profilewebp)
+![Neues Profil erstellen](/create_new_profile.webp)
 
 Und wählen Sie **App Store Connect**
 
-![App Store Connect auswählen](/select_app_store_connectwebp)
+![App Store Connect auswählen](/select_app_store_connect.webp)
 
 Dann müssen Sie die richtige App auswählen, achten Sie darauf, dass Sie keine Platzhalter verwenden, sonst schlägt die Signierung fehl.
 
-![Die richtige App auswählen](/select_appwebp)
+![Die richtige App auswählen](/select_app.webp)
 
 Wählen Sie das richtige Zertifikat aus, das Sie zuvor erstellt haben (achten Sie auf das Ablaufdatum, es sollte der gleiche Tag und Monat wie heute sein) und klicken Sie auf **Weiter**
 
-![Das richtige Zertifikat auswählen](/select_certificatewebp)
+![Das richtige Zertifikat auswählen](/select_certificate.webp)
 
 Geben Sie schließlich den Namen des Profils ein und klicken Sie auf **Generieren**
 
 > Der Name wird verwendet, um das Profil in Fastlane zu identifizieren, unter dem Wert von `APPLE_PROFILE_NAME`
 
-![Profil generieren](/generate_profilewebp)
+![Profil generieren](/generate_profile.webp)
 
 Sie können das Profil als `mobileprovision`-Datei herunterladen.
 
-![Profil herunterladen](/download_profilewebp)
+![Profil herunterladen](/download_profile.webp)
 
 ### GitHub-Geheimnisse für Ihr Zertifikat und Bereitstellungsprofil erstellen
 

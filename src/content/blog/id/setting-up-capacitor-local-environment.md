@@ -52,11 +52,11 @@ next_blog: ''
     -   Build aset web (`npm run build`) dan sinkronkan dengan platform native (`npx cap sync`)
 8.  **Aktifkan Pembaruan Langsung**:
     
-    -   Gunakan [Capgo](https://capgoapp/) untuk pembaruan real-time dengan:
+    -   Gunakan [Capgo](https://capgo.app/) untuk pembaruan real-time dengan:
         
         [[CODE_BLOCK]]
         
-9.  **[Uji Aplikasi Anda](https://capgoapp/docs/plugin/debugging/)**:
+9.  **[Uji Aplikasi Anda](https://capgo.app/docs/plugin/debugging/)**:
     
     -   Gunakan iOS Simulator (`npx cap open ios`) atau Android Emulator (`npx cap open android`)
 

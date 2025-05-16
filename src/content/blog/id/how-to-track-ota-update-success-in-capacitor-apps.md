@@ -54,7 +54,7 @@ Pembaruan OTA memungkinkan Anda mendorong perubahan aplikasi langsung ke penggun
     -   Opsi pembatalan
         
 
-## Jelajahi [Capgo](https://capgoapp/)'s New [Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjscom/) Live Update 
+## Jelajahi [Capgo](https://capgo.app/)'s New [Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjscom/) Live Update 
 
 **Menyiapkan Pelacakan Pembaruan**
 
@@ -131,7 +131,7 @@ Pencatatan server membantu Anda mengumpulkan data penting tentang pembaruan, ter
     -   Amati perubahan durasi sesi
         
 
-> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Menggabungkan manajemen versi, pelacakan dalam aplikasi, dan pencatatan server memberi Anda pandangan komprehensif tentang kinerja pembaruan OTA Anda
 

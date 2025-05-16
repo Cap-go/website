@@ -24,7 +24,7 @@ locale: fr
 next_blog: ''
 ---
 
-Si vous développez des applications mobiles pour le marché chinois, **la conformité aux lois chinoises sur la confidentialité des données est non négociable**. Les réglementations clés - **[Cybersecurity Law](https://enwikipediaorg/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[Data Security Law](https://enwikipediaorg/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**, et **[Personal Information Protection Law](https://enwikipediaorg/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - exigent des mesures strictes de [data storage](https://capgoapp/plugins/capacitor-data-storage-sqlite/), de consentement des utilisateurs et de sécurité.
+Si vous développez des applications mobiles pour le marché chinois, **la conformité aux lois chinoises sur la confidentialité des données est non négociable**. Les réglementations clés - **[Cybersecurity Law](https://enwikipediaorg/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) (CSL)**, **[Data Security Law](https://enwikipediaorg/wiki/Data_Security_Law_of_the_People%27s_Republic_of_China) (DSL)**, et **[Personal Information Protection Law](https://enwikipediaorg/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL)** - exigent des mesures strictes de [data storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/), de consentement des utilisateurs et de sécurité.
 
 ### Points Clés :
 

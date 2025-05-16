@@ -25,12 +25,12 @@ next_blog: ''
 **Kebijakan App Store Apple 2025 membawa aturan yang lebih ketat untuk aplikasi [Capacitor](https://capacitorjscom/)** Para pengembang sekarang harus memenuhi standar yang lebih tinggi untuk privasi, keamanan, dan performa. Berikut yang perlu Anda ketahui:
 
 -   **Privasi**: Aturan lebih ketat untuk pengumpulan data dan persetujuan pengguna
--   **Keamanan**: Enkripsi end-to-end dan [autentikasi yang lebih kuat](https://capgoapp/docs/webapp/mfa/) diperlukan untuk pembaruan
+-   **Keamanan**: Enkripsi end-to-end dan [autentikasi yang lebih kuat](https://capgo.app/docs/webapp/mfa/) diperlukan untuk pembaruan
 -   **Performa**: Aplikasi harus memenuhi tolok ukur responsivitas dan efisiensi yang lebih tinggi
--   **Pembaruan SDK**: [Aplikasi Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/) harus menggunakan [Xcode](https://developerapplecom/xcode/) 15+ dan SDK terbaru untuk tetap patuh
+-   **Pembaruan SDK**: [Aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) harus menggunakan [Xcode](https://developerapplecom/xcode/) 15+ dan SDK terbaru untuk tetap patuh
 -   **Pembaruan Langsung**: Pembaruan over-the-air (OTA) harus mengikuti protokol terenkripsi dan pengujian perangkat menyeluruh
 
-**Alat Utama**: Platform seperti [Capgo](https://capgoapp/) mempermudah kepatuhan dengan mengotomatisasi [manajemen pembaruan](https://capgoapp/docs/plugin/cloud-mode/manual-update/), pelacakan, dan enkripsi. Dengan tingkat pembaruan 95% dalam 24 jam dan alat untuk peluncuran yang aman, [Capgo](https://capgoapp/) membantu pengembang tetap selaras dengan kebijakan Apple
+**Alat Utama**: Platform seperti [Capgo](https://capgo.app/) mempermudah kepatuhan dengan mengotomatisasi [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/), pelacakan, dan enkripsi. Dengan tingkat pembaruan 95% dalam 24 jam dan alat untuk peluncuran yang aman, [Capgo](https://capgo.app/) membantu pengembang tetap selaras dengan kebijakan Apple
 
 **Perbandingan Cepat**:
 
@@ -42,7 +42,7 @@ next_blog: ''
 | Alat Kepatuhan | Komprehensif | Terbatas | Dasar |
 | Pengalaman Pasar | Sejak 2022 | Tutup 2026 | Sejak 2024 |
 
-Pengembang harus bertindak sekarang untuk memastikan kepatuhan dan menghindari gangguan. Perbarui [framework Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/) Anda, ikuti kebijakan baru Apple, dan pertimbangkan alat seperti Capgo untuk pembaruan yang lancar
+Pengembang harus bertindak sekarang untuk memastikan kepatuhan dan menghindari gangguan. Perbarui [framework Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) Anda, ikuti kebijakan baru Apple, dan pertimbangkan alat seperti Capgo untuk pembaruan yang lancar
 
 ## Cara Mengintegrasikan Token Apps & Books dengan Addigy
 
@@ -72,7 +72,7 @@ Persyaratan keamanan Apple menekankan perlindungan data yang kuat. Langkah-langk
 
 Untuk memastikan pembaruan berjalan lancar di semua versi iOS, pengujian perangkat menyeluruh sangat penting. Pengembang harus memanfaatkan **peluncuran bertahap** melalui saluran pengujian beta. Pendekatan ini membantu mengidentifikasi dan memperbaiki masalah sebelum rilis penuh. Seperti yang disorot Bessie Cooper:
 
-> "Capgo adalah alat yang harus dimiliki pengembang, yang ingin lebih produktif. Menghindari tinjauan untuk perbaikan bug sangatlah berharga" [\[1\]](https://capgoapp/)
+> "Capgo adalah alat yang harus dimiliki pengembang, yang ingin lebih produktif. Menghindari tinjauan untuk perbaikan bug sangatlah berharga" [\[1\]](https://capgo.app/)
 
 Metode ini memungkinkan pengembangan cepat dan pembaruan yang andal sambil tetap patuh pada pedoman Apple
 

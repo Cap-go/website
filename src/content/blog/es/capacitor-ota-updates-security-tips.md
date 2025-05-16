@@ -26,13 +26,13 @@ next_blog: ''
 
 ### Puntos Clave:
 
--   **[Cifra tus actualizaciones](https://capgoapp/docs/cli/migrations/encryption/)**: Usa [TLS](https://enwikipediaorg/wiki/Transport_Layer_Security) 1.3 y cifrado de extremo a extremo para prevenir interceptación
+-   **[Cifra tus actualizaciones](https://capgo.app/docs/cli/migrations/encryption/)**: Usa [TLS](https://enwikipediaorg/wiki/Transport_Layer_Security) 1.3 y cifrado de extremo a extremo para prevenir interceptación
 -   **Verifica archivos**: Valida firmas digitales y sumas de verificación para asegurar la integridad de la actualización
--   **Controla el acceso**: Usa permisos basados en roles, verificación de ID de dispositivo y [claves API seguras](https://capgoapp/docs/webapp/api-keys/)
+-   **Controla el acceso**: Usa permisos basados en roles, verificación de ID de dispositivo y [claves API seguras](https://capgo.app/docs/webapp/api-keys/)
 
 ### Comparación Rápida de Plataformas OTA:
 
-| Característica | [Capgo](https://capgoapp/) | [AppFlow](https://ionicio/appflow/) | [Capawesome](https://cloudcapawesomeio/) |
+| Característica | [Capgo](https://capgo.app/) | [AppFlow](https://ionicio/appflow/) | [Capawesome](https://cloudcapawesomeio/) |
 | --- | --- | --- | --- |
 | Cifrado de Extremo a Extremo | Sí | No | No |
 | Capacidad de Reversión | Instantánea | Manual | Manual |
@@ -52,7 +52,7 @@ Las actualizaciones OTA pueden abrir la puerta a vulnerabilidades que compromete
 
 Los ataques de intermediario pueden interceptar datos de actualización OTA, permitiendo cambios no autorizados que podrían afectar a millones de usuarios. Para prevenir esto, el **cifrado de extremo a extremo** es esencial.
 
-> "La única solución con verdadero cifrado de extremo a extremo, otros solo firman actualizaciones" [\[1\]](https://capgoapp/)
+> "La única solución con verdadero cifrado de extremo a extremo, otros solo firman actualizaciones" [\[1\]](https://capgo.app/)
 
 Sin el cifrado adecuado, los archivos interceptados pueden ser manipulados, llevando a graves consecuencias.
 
@@ -70,7 +70,7 @@ La siguiente tabla describe las debilidades clave del servidor y sus posibles im
 | Gestión Insuficiente de Roles | Liberación de actualizaciones no probadas |
 | Claves API Comprometidas | Distribución de código malicioso |
 
-Estos ejemplos muestran por qué la seguridad debe ir más allá de simplemente firmar actualizaciones. Un enfoque por capas - incluyendo cifrado, verificación y controles de acceso estrictos - es crítico para proteger el [proceso de actualización](https://capgoapp/docs/plugin/cloud-mode/manual-update/)
+Estos ejemplos muestran por qué la seguridad debe ir más allá de simplemente firmar actualizaciones. Un enfoque por capas - incluyendo cifrado, verificación y controles de acceso estrictos - es crítico para proteger el [proceso de actualización](https://capgo.app/docs/plugin/cloud-mode/manual-update/)
 
 ## Pasos de Seguridad para Actualizaciones OTA
 

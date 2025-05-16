@@ -26,7 +26,7 @@ CI/CDツールは、over-the-air (OTA)アップデートのプロセスを自動
     -   **セキュリティ:** HTTPS、コード署名、暗号化を使用してアップデートを保護
     -   **段階的なロールアウト:** 小規模グループに先行してアップデートを展開し、早期に問題を発見
     -   **ロールバックオプション:** エラー率が上昇した場合、自動的にアップデートを元に戻す
--   **ハイライトされるツール:** [Capgo](https://capgoapp/)は、CLIコマンド、Webhook統合、詳細なメトリクス追跡でOTAアップデートを簡素化します
+-   **ハイライトされるツール:** [Capgo](https://capgo.app/)は、CLIコマンド、Webhook統合、詳細なメトリクス追跡でOTAアップデートを簡素化します
 
 OTAアップデートを自動化することで、より速い配信、少ないエラー、そしてより良いアプリの安定性が確保されます。以下では、[Capacitor](https://capacitorjscom/)アプリをCI/CDパイプラインで設定するための段階的な手順を説明します。
 
@@ -47,7 +47,7 @@ OTAアップデートを自動化することで、より速い配信、少な�
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
-Capacitorの[自動over-the-air](https://capgoapp/blog/open-source-licecing/) (OTA)アップデートの設定には、セットアップの構成、セキュリティ対策の実装、[アップデートシステムの統合](https://capgoapp/docs/plugin/cloud-mode/hybrid-update)という3つの重要なステップが含まれます。このプロセスにより、CI/CD自動化との互換性を確保しながら、アプリのセキュリティを維持します。
+Capacitorの[自動over-the-air](https://capgo.app/blog/open-source-licecing/) (OTA)アップデートの設定には、セットアップの構成、セキュリティ対策の実装、[アップデートシステムの統合](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)という3つの重要なステップが含まれます。このプロセスにより、CI/CD自動化との互換性を確保しながら、アプリのセキュリティを維持します。
 
 ### capacitorconfigjsonでのOTA設定の構成
 
@@ -88,9 +88,9 @@ OTAアップデートプロセスのセキュリティ確保は、不正なア�
 }
 ```
 
-### [Capgo](https://capgoapp/)のOTAアップデート設定
+### [Capgo](https://capgo.app/)のOTAアップデート設定
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
 
 Capgoは、OTAアップデートプロセスを簡素化します。まず、必要なプラグインをインストールします：
 
@@ -145,7 +145,7 @@ Capgo CLIは、パイプライン内のアップデート管理を効率化す�
 | ステージ | コマンド | 目的 |
 | --- | --- | --- |
 | ビルド | `capgo deploy --channel production` | 新しいビルドアーティファクトをアップロード |
-| テスト | `capgo promote build-123 --group beta` | [テストグループへのアップデートのリリース](https://capgoapp/blog/how-to-send-specific-version-to-users/) |
+| テスト | `capgo promote build-123 --group beta` | [テストグループへのアップデートのリリース](https://capgo.app/blog/how-to-send-specific-version-to-users/) |
 | 検証 | `capgo metrics get --last-24h` | アップデート成功メトリクスの確認 |
 | リリース | `capgo promote build-123 --channel stable` | 全ユーザーへのアップデートのデプロイ |
 
@@ -169,7 +169,7 @@ Capgo CLIは、パイプライン内のアップデート管理を効率化す�
 
 ### メトリクスベースのアップデートトリガー
 
-パフォーマンスメトリクスに基づいて[アップデートを自動化する](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)ことで、時間を節約し問題を防ぐことができます。監視webhookを設定することで、重要なメトリクスを追跡し、アップデートを継続するか一時停止するかを判断できます:
+パフォーマンスメトリクスに基づいて[アップデートを自動化する](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)ことで、時間を節約し問題を防ぐことができます。監視webhookを設定することで、重要なメトリクスを追跡し、アップデートを継続するか一時停止するかを判断できます:
 
 | メトリクスタイプ | しきい値 | アクション |
 | --- | --- | --- |

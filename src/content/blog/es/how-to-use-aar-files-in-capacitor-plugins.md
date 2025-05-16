@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres integrar funciones de Android en tu app de [Capacitor](https://capacitorjscom/)?** Esta guía explica cómo usar archivos AAR (Android Archive) en [plugins de Capacitor](https://capgoapp/plugins/) para combinar funcionalidad nativa de Android con aplicaciones web multiplataforma
+**¿Quieres integrar funciones de Android en tu app de [Capacitor](https://capacitorjscom/)?** Esta guía explica cómo usar archivos AAR (Android Archive) en [plugins de Capacitor](https://capgo.app/plugins/) para combinar funcionalidad nativa de Android con aplicaciones web multiplataforma
 
 ### Puntos Clave:
 
@@ -34,9 +34,9 @@ next_blog: ''
 ### Pasos Rápidos:
 
 1. **Configura tu entorno:** Instala las herramientas necesarias y configura Android Studio
-2. **Organiza tu proyecto:** Crea una estructura clara para tu [plugin de Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/)
+2. **Organiza tu proyecto:** Crea una estructura clara para tu [plugin de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/)
 3. **Agrega archivos AAR:** Colócalos en `android/libs` y actualiza las dependencias de Gradle
-4. **Escribe el código del plugin:** Vincula la funcionalidad AAR con JavaScript usando la [API de Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/)
+4. **Escribe el código del plugin:** Vincula la funcionalidad AAR con JavaScript usando la [API de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/)
 5. **Prueba exhaustivamente:** Usa el depurador de Android Studio para asegurar una integración fluida
 
 Siguiendo esta guía, podrás incorporar archivos AAR en tus plugins de Capacitor, desbloqueando capacidades nativas de Android para tus aplicaciones web

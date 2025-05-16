@@ -29,7 +29,7 @@ next_blog: ''
 -   **Prestazioni principali:**
     -   Tempo di risposta API: **434ms** (media globale)
     -   Trasferimento dati: **114ms** per bundle da 5MB
-    -   Adozione aggiornamenti: **95% completato entro 24 ore** utilizzando strumenti come [Capgo](https://capgoapp/)
+    -   Adozione aggiornamenti: **95% completato entro 24 ore** utilizzando strumenti come [Capgo](https://capgo.app/)
 -   **Come funziona:**
     -   **Da JavaScript ad Android:** Invia richieste serializzate ai metodi Android nativi
     -   **Da Android a JavaScript:** Utilizza callback per la trasmissione di eventi, risposte dirette e aggiornamenti di stato
@@ -50,7 +50,7 @@ Capgo, uno strumento per aggiornamenti over-the-air, si integra con il ponte nat
 
 ## Flusso di Comunicazione del Ponte Nativo
 
-Il ponte nativo nelle [app Android Capacitor](https://capgoapp/top_capacitor_app/) consente una comunicazione bidirezionale tra i livelli web e nativi. Questo sistema di trasmissione messaggi garantisce uno scambio di dati fluido e in tempo reale senza compromettere le prestazioni. Di seguito, analizziamo come fluisce la comunicazione in entrambe le direzioni e come vengono gestiti i dati.
+Il ponte nativo nelle [app Android Capacitor](https://capgo.app/top_capacitor_app/) consente una comunicazione bidirezionale tra i livelli web e nativi. Questo sistema di trasmissione messaggi garantisce uno scambio di dati fluido e in tempo reale senza compromettere le prestazioni. Di seguito, analizziamo come fluisce la comunicazione in entrambe le direzioni e come vengono gestiti i dati.
 
 ### Comunicazione da JavaScript ad Android
 
@@ -100,7 +100,7 @@ Inizia configurando sia il progetto Android nativo che il livello dell'applicazi
 
 | Componente Setup | Configurazione Richiesta |
 | --- | --- |
-| **[Capacitor Version](https://capgoapp/plugins/ivs-player/)** | Usa versione 6.x o 7.x |
+| **[Capacitor Version](https://capgo.app/plugins/ivs-player/)** | Usa versione 6.x o 7.x |
 | **[Android Studio](https://developerandroidcom/studio)** | Installa l'ultima versione stabile |
 | **Dipendenze Gradle** | Includi la libreria `capacitor-android` |
 | **Struttura Progetto** | Configura correttamente `AndroidManifest.xml` |

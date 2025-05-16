@@ -21,11 +21,11 @@ locale: ko
 next_blog: ''
 ---
 
-[app updates](https://capgoapp/plugins/capacitor-updater/)의 투명성과 체계성을 유지하기 위해 변경 로그 관리는 필수적입니다. 이 가이드는 [Capacitor apps](https://capgoapp/blog/capacitor-comprehensive-guide/)의 변경 로그를 생성, 구성 및 자동화하는 방법을 설명하며, 개발자와 사용자 모두에게 정보를 제공합니다. 다음 내용을 배우게 됩니다:
+[app updates](https://capgo.app/plugins/capacitor-updater/)의 투명성과 체계성을 유지하기 위해 변경 로그 관리는 필수적입니다. 이 가이드는 [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/)의 변경 로그를 생성, 구성 및 자동화하는 방법을 설명하며, 개발자와 사용자 모두에게 정보를 제공합니다. 다음 내용을 배우게 됩니다:
 
 - **변경 로그의 중요성**: 디버깅을 단순화하고, 의사소통을 개선하며, 사용자 신뢰를 구축합니다
 - **변경 로그 구조화 방법**: 명확성을 위해 "추가됨", "수정됨", "보안" 등의 카테고리를 사용합니다
-- **모범 사례**: 커밋 전 변경 로그 업데이트, [Capgo](https://capgoapp/)와 같은 도구로 자동화, 풀 리퀘스트 중 항목 검토
+- **모범 사례**: 커밋 전 변경 로그 업데이트, [Capgo](https://capgo.app/)와 같은 도구로 자동화, 풀 리퀘스트 중 항목 검토
 - **자동화 도구**: CI/CD 파이프라인과 커밋 표준을 사용하여 변경 로그 관리를 간소화합니다
 - **OTA 업데이트**: 버전 번호, 타임스탬프, 성공률과 같은 세부 정보로 실시간 업데이트를 문서화합니다
 
@@ -70,7 +70,7 @@ next_blog: ''
 워크플로우에 변경 로그 업데이트를 통합하면 정확하고 최신 문서를 보장할 수 있습니다. 다음은 실용적인 팁입니다:
 
 - **커밋 전 업데이트**: 코드 변경을 커밋하기 전에 변경 로그를 업데이트하세요. 이는 중요한 업데이트를 놓칠 가능성을 줄입니다
-- **자동화된 통합**: Capgo는 [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Jenkins](https://www.jenkins.io/) [\[1\]](https://capgoapp/)와 함께 작동하여 변경 로그 업데이트 프로세스를 단순화합니다
+- **자동화된 통합**: Capgo는 [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Jenkins](https://www.jenkins.io/) [\[1\]](https://capgo.app/)와 함께 작동하여 변경 로그 업데이트 프로세스를 단순화합니다
 - **검토 프로세스**: 풀 리퀘스트 프로세스의 일부로 변경 로그 항목 검토를 포함하세요. 이는 병합하기 전에 업데이트가 정확하고 승인되도록 보장합니다
 
 ## 명확한 변경 로그 항목 작성하기

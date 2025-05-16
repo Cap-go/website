@@ -26,7 +26,7 @@ next_blog: ''
 
 -   **Que sont les mises à jour OTA ?** Elles déploient des changements en direct directement sur les appareils des utilisateurs, évitant les validations des app stores Cela économise du temps et résout rapidement les problèmes
 -   **Pourquoi les tests sont importants :** Des mises à jour mal testées peuvent planter les applications ou enfreindre la conformité Avec des tests appropriés, 95% des mises à jour réussissent en 24 heures
--   **Outils nécessaires :** Capacitor CLI (v6+), [Nodejs](https://nodejsorg/en) (v16+), Plugin [Capgo](https://capgoapp/), et un framework de test comme [Cypress](https://wwwcypressio/)
+-   **Outils nécessaires :** Capacitor CLI (v6+), [Nodejs](https://nodejsorg/en) (v16+), Plugin [Capgo](https://capgo.app/), et un framework de test comme [Cypress](https://wwwcypressio/)
 -   **Étapes de test :**
     1. Configurer votre environnement de test et les paramètres Capgo
     2. Valider les processus de mise à jour comme la détection, le téléchargement, l'installation et le rollback
@@ -37,14 +37,14 @@ next_blog: ''
 
 -   Chiffrement de bout en bout pour des mises à jour sécurisées
 -   Options de rollback pour des corrections rapides
--   [Déploiements par canaux](https://capgoapp/docs/webapp/channels/) pour des tests progressifs
+-   [Déploiements par canaux](https://capgo.app/docs/webapp/channels/) pour des tests progressifs
 -   Mises à jour rapides via un CDN mondial (5MB en ~114ms)
 
 **Conseil Pro :** Utilisez des déploiements progressifs pour tester les mises à jour sur de petits groupes d'utilisateurs avant un déploiement complet Les outils de Capgo rendent ce processus fluide et sécurisé
 
 ## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjscom/) de [Capawesome](https://capawesomeio/) pour Ionic
 
-![Capawesome](https://assetsseobotaicom/capgoapp/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54jpg)
+![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -60,14 +60,14 @@ Voici les outils essentiels dont vous aurez besoin pour les tests OTA :
 | --- | --- | --- |
 | Capacitor CLI | Outils de développement principaux | 60 ou supérieur |
 | Nodejs | Environnement d'exécution | 160+ |
-| [Plugin Capgo](https://capgoapp/plugins/) | Gère les mises à jour OTA | Dernière version |
+| [Plugin Capgo](https://capgo.app/plugins/) | Gère les mises à jour OTA | Dernière version |
 | Framework de test | Tests automatisés (ex Cypress ou [Appium](http://appiumio/)) | N/A |
 
 ### Configuration de l'environnement
 
 Commencez par mettre à jour le fichier `capacitorconfigjson` avec les paramètres appropriés du serveur de staging et les préférences de mise à jour
 
-Ensuite, [initialisez les configurations Capgo](https://capgoapp/docs/cli/commands) en exécutant la commande suivante :
+Ensuite, [initialisez les configurations Capgo](https://capgo.app/docs/cli/commands) en exécutant la commande suivante :
 
 [[CODE_BLOCK]]
 
@@ -94,11 +94,11 @@ Cette étape se concentre sur la vérification des mécanismes de mise à jour i
 | Type de test | Zone de focus | Critères de réussite |
 | --- | --- | --- |
 | Détection de mise à jour | Vérification de version | Temps de réponse ~434ms |
-| Processus de téléchargement | [Téléchargement du bundle](https://capgoapp/docs/webapp/bundles/) | Bundle de 5MB en ~114ms |
+| Processus de téléchargement | [Téléchargement du bundle](https://capgo.app/docs/webapp/bundles/) | Bundle de 5MB en ~114ms |
 | Installation | Application de la mise à jour | Intégration réussie |
 | Rollback | Retour de version | Rollback réussi |
 
-Le CDN mondial de Capgo aide à maintenir des vitesses de téléchargement stables, avec un temps de réponse API moyen de 434ms [\[1\]](https://capgoapp/)Ces tests au niveau des composants constituent la base pour évaluer les performances globales du système.
+Le CDN mondial de Capgo aide à maintenir des vitesses de téléchargement stables, avec un temps de réponse API moyen de 434ms [\[1\]](https://capgo.app/)Ces tests au niveau des composants constituent la base pour évaluer les performances globales du système.
 
 ### Tests Système Complets
 
@@ -110,13 +110,13 @@ Les tests complets utilisant des données de production doivent confirmer les po
 -   L'application gère efficacement les problèmes de réseau
 
 > "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous observons un fonctionnement très fluide ; presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo"
-> – colenso [\[1\]](https://capgoapp/)
+> – colenso [\[1\]](https://capgo.app/)
 
 ### Conformité App Store
 
 Une fois la fonctionnalité vérifiée, assurez-vous que les mises à jour respectent les directives des app stores. Les mises à jour OTA doivent répondre aux exigences telles que les limites de taille, les normes de contenu, les attentes de performance et le consentement des utilisateurs.
 
-Pour rester conforme et améliorer l'efficacité, envisagez des déploiements par étapes. Le [système de canaux](https://capgoapp/docs/plugin/cloud-mode/channel-system/) de Capgo vous permet de cibler des groupes d'utilisateurs spécifiques pour les tests bêta avant un déploiement complet. Pour les applications d'entreprise, son chiffrement de bout en bout garantit que seuls les utilisateurs autorisés peuvent déchiffrer et appliquer les mises à jour, sécurisant ainsi le contenu sensible.
+Pour rester conforme et améliorer l'efficacité, envisagez des déploiements par étapes. Le [système de canaux](https://capgo.app/docs/plugin/cloud-mode/channel-system/) de Capgo vous permet de cibler des groupes d'utilisateurs spécifiques pour les tests bêta avant un déploiement complet. Pour les applications d'entreprise, son chiffrement de bout en bout garantit que seuls les utilisateurs autorisés peuvent déchiffrer et appliquer les mises à jour, sécurisant ainsi le contenu sensible.
 
 ## Directives de Test
 
@@ -130,21 +130,21 @@ La gestion des risques dans les mises à jour OTA implique la mise en œuvre de 
 | Déploiements par étapes | Distribue les mises à jour par phases | Limite l'exposition aux risques |
 | Mécanisme de retour en arrière | Permet de revenir aux versions précédentes | Résolution rapide des problèmes |
 
-Le [système de canaux de Capgo](https://capgoapp/docs/plugin/cloud-mode/channel-system/) facilite la distribution des mises à jour par les développeurs à des groupes d'utilisateurs spécifiques, comme les testeurs bêta, avant de les déployer largement [\[1\]](https://capgoapp/). Cette approche par phases garantit que les mises à jour sont validées dans des groupes plus restreints, réduisant le risque de problèmes généralisés. Une fois les risques maîtrisés, les développeurs peuvent alors prioriser la sécurisation des mises à jour elles-mêmes.
+Le [système de canaux de Capgo](https://capgo.app/docs/plugin/cloud-mode/channel-system/) facilite la distribution des mises à jour par les développeurs à des groupes d'utilisateurs spécifiques, comme les testeurs bêta, avant de les déployer largement [\[1\]](https://capgo.app/). Cette approche par phases garantit que les mises à jour sont validées dans des groupes plus restreints, réduisant le risque de problèmes généralisés. Une fois les risques maîtrisés, les développeurs peuvent alors prioriser la sécurisation des mises à jour elles-mêmes.
 
 ### Vérifications de Sécurité
 
 La sécurité est une priorité absolue lors des tests des mises à jour OTA. L'utilisation du **chiffrement de bout en bout** garantit que seuls les utilisateurs autorisés peuvent accéder aux mises à jour et les installer, protégeant les données sensibles pendant le déploiement.
 
-> "La seule solution avec un véritable chiffrement de bout en bout, les autres ne font que signer les mises à jour" - Capgo [\[1\]](https://capgoapp/)
+> "La seule solution avec un véritable chiffrement de bout en bout, les autres ne font que signer les mises à jour" - Capgo [\[1\]](https://capgo.app/)
 
 Les étapes clés de sécurité comprennent :
 
--   [Le chiffrement des mises à jour](https://capgoapp/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) du début à la fin
+-   [Le chiffrement des mises à jour](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) du début à la fin
 -   La vérification de l'authenticité des mises à jour avant l'installation
 -   La restriction de l'accès aux mises à jour aux utilisateurs autorisés uniquement
 
-Les outils de suivi des erreurs de Capgo aident davantage en identifiant tôt les problèmes liés à la sécurité, permettant aux développeurs de corriger les vulnérabilités avant qu'elles n'affectent les utilisateurs [\[1\]](https://capgoapp/)
+Les outils de suivi des erreurs de Capgo aident davantage en identifiant tôt les problèmes liés à la sécurité, permettant aux développeurs de corriger les vulnérabilités avant qu'elles n'affectent les utilisateurs [\[1\]](https://capgo.app/)
 
 ### Contrôle de Version
 
@@ -158,13 +158,13 @@ Les meilleures pratiques pour le contrôle de version dans les mises à jour OTA
 
 Le système de canaux de Capgo simplifie également la gestion des versions, garantissant que les mises à jour sont déployées avec précision et efficacité.
 
-## Outils de Test [Capgo](https://capgoapp/)
+## Outils de Test [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 ### Fonctionnalités Capgo
 
-Capgo fournit des outils spécialisés pour tester les [mises à jour OTA Capacitor](https://capgoapp/ja/), assurant une livraison sécurisée avec **chiffrement de bout en bout** et offrant des **analyses en temps réel** pour surveiller les performances des mises à jour. Ces outils permettent aux développeurs de déployer des mises à jour avec précision tout en maintenant des mesures de sécurité strictes
+Capgo fournit des outils spécialisés pour tester les [mises à jour OTA Capacitor](https://capgo.app/ja/), assurant une livraison sécurisée avec **chiffrement de bout en bout** et offrant des **analyses en temps réel** pour surveiller les performances des mises à jour. Ces outils permettent aux développeurs de déployer des mises à jour avec précision tout en maintenant des mesures de sécurité strictes
 
 | Fonctionnalité | Description |
 | --- | --- |
@@ -188,7 +188,7 @@ En utilisant le CLI Capgo, les développeurs peuvent automatiser les tâches de 
 
 ### Déboguer avec Capgo
 
-Capgo inclut une robuste [suite de débogage](https://capgoapp/docs/plugin/debugging/) avec des analyses en temps réel et un suivi des erreurs, aidant les développeurs à identifier et résoudre rapidement les problèmes pendant les tests. Une fonction de **retour arrière en un clic** permet de revenir facilement aux versions précédentes, réduisant les temps d'arrêt
+Capgo inclut une robuste [suite de débogage](https://capgo.app/docs/plugin/debugging/) avec des analyses en temps réel et un suivi des erreurs, aidant les développeurs à identifier et résoudre rapidement les problèmes pendant les tests. Une fonction de **retour arrière en un clic** permet de revenir facilement aux versions précédentes, réduisant les temps d'arrêt
 
 Le système de suivi des erreurs fournit des informations telles que :
 
@@ -196,7 +196,7 @@ Le système de suivi des erreurs fournit des informations telles que :
 -   Métriques d'engagement utilisateur
 -   Identification des goulots d'étranglement de performance
 
-Avec ses outils de débogage et son intégration CI/CD transparente, Capgo prend en charge des tests efficaces pour les configurations cloud et auto-hébergées [\[1\]](https://capgoapp/)
+Avec ses outils de débogage et son intégration CI/CD transparente, Capgo prend en charge des tests efficaces pour les configurations cloud et auto-hébergées [\[1\]](https://capgo.app/)
 
 ## Problèmes courants
 
@@ -220,15 +220,15 @@ Les problèmes réseau ou les téléchargements incomplets sont souvent à l'ori
 -   Transferts de paquets incomplets
 -   Retards serveur
 
-Grâce à une gestion robuste des erreurs et un CDN fiable, Capgo garantit que les mises à jour atteignent 95% des utilisateurs actifs en 24 heures [\[1\]](https://capgoapp/)
+Grâce à une gestion robuste des erreurs et un CDN fiable, Capgo garantit que les mises à jour atteignent 95% des utilisateurs actifs en 24 heures [\[1\]](https://capgo.app/)
 
-> Les capacités "d'analyse détaillée et de suivi des erreurs" garantissent que les développeurs peuvent "revenir instantanément en arrière si quelque chose ne va pas" pendant les mises à jour [\[1\]](https://capgoapp/)
+> Les capacités "d'analyse détaillée et de suivi des erreurs" garantissent que les développeurs peuvent "revenir instantanément en arrière si quelque chose ne va pas" pendant les mises à jour [\[1\]](https://capgo.app/)
 
 ### Problèmes de vitesse
 
-Le CDN mondial de Capgo livre des paquets de 5 Mo en seulement 114 ms, avec un temps de réponse API moyen de 434 ms. Les mises à jour différentielles intelligentes de la plateforme réduisent davantage l'utilisation de la bande passante en ne téléchargeant que les parties modifiées [\[1\]](https://capgoapp/)
+Le CDN mondial de Capgo livre des paquets de 5 Mo en seulement 114 ms, avec un temps de réponse API moyen de 434 ms. Les mises à jour différentielles intelligentes de la plateforme réduisent davantage l'utilisation de la bande passante en ne téléchargeant que les parties modifiées [\[1\]](https://capgo.app/)
 
-> "Mises à jour partielles : Les mises à jour différentielles intelligentes ne téléchargent que ce qui a changé, économisant bande passante et temps" [\[1\]](https://capgoapp/)
+> "Mises à jour partielles : Les mises à jour différentielles intelligentes ne téléchargent que ce qui a changé, économisant bande passante et temps" [\[1\]](https://capgo.app/)
 
 Pour maintenir des mises à jour rapides et efficaces, les développeurs devraient :
 

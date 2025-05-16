@@ -31,21 +31,21 @@ next_blog: ''
     2.  Mettre en place une surveillance pour les alertes d'erreur en temps réel
     3.  Définir les déclencheurs de rollback et les protocoles de réponse
 
-Des plateformes comme [Capgo](https://capgoapp/) offrent des mises à jour rapides (114ms pour 5MB), des taux de réussite élevés (82%) et des solutions rentables (à partir de 12$/mois). Elles prennent également en charge l'automatisation du rollback, le suivi en temps réel et la segmentation des utilisateurs, ce qui en fait un choix fiable pour gérer les mises à jour en direct.
+Des plateformes comme [Capgo](https://capgo.app/) offrent des mises à jour rapides (114ms pour 5MB), des taux de réussite élevés (82%) et des solutions rentables (à partir de 12$/mois). Elles prennent également en charge l'automatisation du rollback, le suivi en temps réel et la segmentation des utilisateurs, ce qui en fait un choix fiable pour gérer les mises à jour en direct.
 
 | **Fonctionnalité** | **Capgo** | **[Capawesome](https://capawesomeio/)** | **[Appflow](https://ionicio/appflow/)** |
 | --- | --- | --- | --- |
 | Vitesse de mise à jour | 114ms | Standard | Standard |
 | Taux de réussite | 82% | Non publié | Non publié |
 | Chiffrement de bout en bout | Oui | Non | Non |
-| [Option d'auto-hébergement](https://capgoapp/blog/self-hosted-capgo/) | Oui | Non | Non |
+| [Option d'auto-hébergement](https://capgo.app/blog/self-hosted-capgo/) | Oui | Non | Non |
 | Coût mensuel | À partir de 12$ | Similaire | ~500$ |
 
 Mettez en place des outils de rollback aujourd'hui pour assurer des mises à jour fluides et maintenir la confiance des utilisateurs.
 
 ## Comment Migrer Votre Application [Ionic](https://ionicframeworkcom/) vers [Capacitor](https://capacitorjscom/) 3
 
-![Ionic](https://assetsseobotaicom/capgoapp/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196jpg)
+![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 

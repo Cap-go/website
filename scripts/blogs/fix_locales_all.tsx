@@ -18,12 +18,21 @@ for (const filePath of files) {
   const parts = relPath.split(path.sep)
   const locale = parts[1]
   if (!locales.includes(locale)) continue
-  const fileContent = await readFile(filePath, 'utf8')
+  let fileContent = await readFile(filePath, 'utf8')
   const parsed = matter(fileContent)
   if (parsed.data.locale !== locale) {
     parsed.data.locale = locale
-    await writeFile(filePath, matter.stringify(parsed.content, parsed.data), 'utf8')
+    fileContent = matter.stringify(parsed.content, parsed.data)
     changedCount++
   }
+  fileContent = fileContent
+    .replace(/capgoapp/g, 'capgo.app')
+    .replace(/([^.\s])png\)/g, '$1.png)')
+    .replace(/([^.\s])jpg\)/g, '$1.jpg)')
+    .replace(/([^.\s])gif\)/g, '$1.gif)')
+    .replace(/([^.\s])webp\)/g, '$1.webp)')
+    .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
+    .replace(/assetsseobotaicom/g, 'assets.seobotai.com')
+  await writeFile(filePath, fileContent, 'utf8')
 }
 console.log(`Checked ${files.length} files. Updated ${changedCount} files.`)

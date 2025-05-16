@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) [Update-Kanäle](https://capgoapp/docs/webapp/channels/) ermöglichen Over-the-Air (OTA) Updates für bestimmte Benutzergruppen. Dies hilft bei der Verwaltung mehrerer App-Versionen, dem Testen neuer Funktionen und der schrittweisen Einführung von Updates. Hier ist, was Sie wissen müssen:
+[Capacitor](https://capacitorjscom/) [Update-Kanäle](https://capgo.app/docs/webapp/channels/) ermöglichen Over-the-Air (OTA) Updates für bestimmte Benutzergruppen. Dies hilft bei der Verwaltung mehrerer App-Versionen, dem Testen neuer Funktionen und der schrittweisen Einführung von Updates. Hier ist, was Sie wissen müssen:
 
 -   **Vorteile**:
     
@@ -31,7 +31,7 @@ next_blog: ''
     -   Problematische Updates sofort zurücksetzen
 -   **Einrichtung**:
     
-    -   Verwendung von Tools wie Capacitor CLI, [Nodejs](https://nodejsorg/en) und [Capgo](https://capgoapp/) CLI
+    -   Verwendung von Tools wie Capacitor CLI, [Nodejs](https://nodejsorg/en) und [Capgo](https://capgo.app/) CLI
     -   Rollen zuweisen (Admin, Entwickler, Betrachter) zur Verwaltung von Berechtigungen
     -   Integration mit CI/CD-Tools für automatisierte Workflows
 -   **Kanäle verwalten**:
@@ -60,14 +60,14 @@ Stellen Sie sicher, dass Sie Folgendes haben:
 
 -   **Capacitor CLI**: Dies ist das Hauptwerkzeug für die Handhabung von App-Updates
 -   **Nodejs**: Version 14.0 oder höher wird benötigt
--   **[Capgo CLI](https://capgoapp/docs/cli/commands)**: Wird für die Einrichtung und Verwaltung von Update-Kanälen verwendet
+-   **[Capgo CLI](https://capgo.app/docs/cli/commands)**: Wird für die Einrichtung und Verwaltung von Update-Kanälen verwendet
 -   **Entwicklungsumgebung**: Wählen Sie eine IDE, die Capacitor unterstützt
 
 Um Capgo CLI zu initialisieren, führen Sie diesen Befehl aus:
 
 [[CODE_BLOCK]]
 
-Dies richtet Ihr Projekt mit den notwendigen Konfigurationsdateien ein und verbindet es mit Capgos [Update-Service](https://capgoapp/docs/plugin/cloud-mode/manual-update/)
+Dies richtet Ihr Projekt mit den notwendigen Konfigurationsdateien ein und verbindet es mit Capgos [Update-Service](https://capgo.app/docs/plugin/cloud-mode/manual-update/)
 
 ### Zugriff und Berechtigungen konfigurieren
 

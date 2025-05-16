@@ -27,15 +27,15 @@ next_blog: ''
 -   **Apa itu Manajemen Persetujuan?** Ini tentang mengumpulkan, menyimpan, dan melacak izin pengguna untuk penggunaan data
 -   **Mengapa Ini Penting:** Regulasi seperti GDPR dan CCPA menuntut transparansi dan kontrol pengguna atas data pribadi
 -   **Tantangan Utama:** Menangani pembaruan berkala, menjaga kepatuhan di berbagai wilayah, dan mengelola catatan persetujuan secara aman
--   **Solusi untuk Pengembang:** Gunakan komunikasi yang jelas, izin selektif, dan alat seperti platform pembaruan langsung (mis., [Capgo](https://capgoapp/)) untuk memastikan kepatuhan dan efisiensi pembaruan
+-   **Solusi untuk Pengembang:** Gunakan komunikasi yang jelas, izin selektif, dan alat seperti platform pembaruan langsung (mis., [Capgo](https://capgo.app/)) untuk memastikan kepatuhan dan efisiensi pembaruan
 
 **Ikhtisar Singkat Alat Kepatuhan:**
 
 | Metode Pembaruan | Kecepatan | Dukungan Kepatuhan | Dampak Pengguna |
 | --- | --- | --- | --- |
-| Pembaruan App Store | 3-7 hari | Proses peninjauan lengkap | [Pembaruan manual pengguna](https://capgoapp/docs/plugin/cloud-mode/manual-update/) |
+| Pembaruan App Store | 3-7 hari | Proses peninjauan lengkap | [Pembaruan manual pengguna](https://capgo.app/docs/plugin/cloud-mode/manual-update/) |
 | Kontrol Sisi Server | Instan | Pengawasan terbatas | Tidak perlu tindakan pengguna |
-| Pembaruan Langsung (mis., Capgo) | Kurang dari 24 jam | Patuh platform | [Pembaruan otomatis](https://capgoapp/docs/plugin/cloud-mode/auto-update/) |
+| Pembaruan Langsung (mis., Capgo) | Kurang dari 24 jam | Patuh platform | [Pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
 
 **Kesimpulan:** Tetap patuh dengan menerapkan pembaruan persetujuan real-time, mengamankan data pengguna, dan menggunakan alat yang beradaptasi cepat dengan perubahan regulasi
 
@@ -60,15 +60,15 @@ Tantangan bertambah ketika aplikasi harus mengikuti aturan dari berbagai wilayah
 
 ### Penalti Ketidakpatuhan
 
-Kegagalan memenuhi standar privasi dapat menyebabkan denda besar dan masalah hukum. Bahkan kesalahan kecil dalam menangani persetujuan bisa mengakibatkan tindakan regulasi. Ini membuat penting untuk mengeluarkan [pembaruan aman](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) dengan cepat agar tetap patuh.
+Kegagalan memenuhi standar privasi dapat menyebabkan denda besar dan masalah hukum. Bahkan kesalahan kecil dalam menangani persetujuan bisa mengakibatkan tindakan regulasi. Ini membuat penting untuk mengeluarkan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dengan cepat agar tetap patuh.
 
 ### Masalah Manajemen Pembaruan
 
 Untuk aplikasi yang dibangun dengan Capacitor, pembaruan yang sering dapat memperumit manajemen persetujuan. Proses pembaruan app store tradisional sering menunda perubahan penting, meningkatkan risiko ketidakpatuhan.
 
-> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Platform pembaruan modern membantu menyelesaikan ini dengan memastikan 95% pengguna aktif menerima pembaruan terkait persetujuan dalam 24 jam [\[1\]](https://capgoapp/). Platform ini juga memprioritaskan keamanan, menggunakan enkripsi end-to-end dan memastikan kompatibilitas antar versi aplikasi sambil memenuhi standar privasi.
+Platform pembaruan modern membantu menyelesaikan ini dengan memastikan 95% pengguna aktif menerima pembaruan terkait persetujuan dalam 24 jam [\[1\]](https://capgo.app/). Platform ini juga memprioritaskan keamanan, menggunakan enkripsi end-to-end dan memastikan kompatibilitas antar versi aplikasi sambil memenuhi standar privasi.
 
 Mengatasi tantangan ini sangat penting - tidak hanya untuk tetap patuh, tetapi juga untuk mempertahankan kepercayaan pengguna seiring perubahan regulasi privasi.
 
@@ -96,7 +96,7 @@ Pembaruan real-time sangat penting untuk menjaga catatan kepatuhan yang akurat. 
 
 ## Menyiapkan Persetujuan di Aplikasi Capacitor
 
-![Capacitor](https://assetsseobotaicom/capgoapp/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Membuat UI Persetujuan
 
@@ -149,12 +149,12 @@ Berikut bagaimana berbagai metode pembaruan bekerja dalam menangani manajemen pe
 | --- | --- | --- | --- |
 | Pembaruan App Store | 3-7 hari | Proses peninjauan penuh | Memerlukan pembaruan manual |
 | Kontrol Sisi Server | Instan | Pengawasan terbatas | Tidak perlu tindakan pengguna |
-| Pembaruan Langsung | Kurang dari 24 jam | Patuh platform | [Pembaruan otomatis di latar belakang](https://capgoapp/docs/plugin/self-hosted/auto-update/) |
+| Pembaruan Langsung | Kurang dari 24 jam | Patuh platform | [Pembaruan otomatis di latar belakang](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
 
 Tabel ini menunjukkan bagaimana pembaruan langsung unggul dalam hal kecepatan dan kemudahan penggunaan. Capgo memanfaatkan sepenuhnya pendekatan ini untuk memberikan solusi yang efisien.
 
 ### Fitur Pembaruan Capgo
 
-![Capgo](https://assetsseobotaicom/capgoapp/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo memanfaatkan pembaruan langsung untuk menyederhanakan manajemen persetujuan untuk aplikasi Capacitor.

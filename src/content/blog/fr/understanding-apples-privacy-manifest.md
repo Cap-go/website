@@ -29,7 +29,7 @@ next_blog: ''
     -   Les API et SDK tiers utilisés
     -   Les domaines externes accédés
 -   **Pourquoi c'est important** : Assure la transparence et la conformité aux normes de confidentialité d'Apple
--   **Comment se conformer** : Ajoutez le manifeste à votre bundle d'application iOS et mettez-le à jour régulièrement, particulièrement si vous utilisez des outils de mise à jour en direct comme [Capgo](https://capgoapp/)
+-   **Comment se conformer** : Ajoutez le manifeste à votre bundle d'application iOS et mettez-le à jour régulièrement, particulièrement si vous utilisez des outils de mise à jour en direct comme [Capgo](https://capgo.app/)
 
 **Conseil rapide** : Des outils comme Capgo simplifient la conformité en automatisant les mises à jour du manifeste, offrant des déploiements instantanés et fournissant des analyses pour suivre le succès
 
@@ -53,7 +53,7 @@ Ensuite, nous verrons comment créer et vérifier votre manifeste dans un projet
 
 ## Configuration du Privacy Manifest dans [Capacitor](https://capacitorjscom/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Création du fichier manifeste
 
@@ -72,13 +72,13 @@ Après avoir créé ce fichier, ouvrez [Xcode](https://developerapplecom/xcode/)
 
 Dans Xcode, naviguez vers **Product > Analyze** pour générer un rapport de confidentialité. Examinez attentivement le rapport pour détecter les avertissements ou les API non déclarées, et effectuez les ajustements nécessaires pour éviter les problèmes. Une fois tout vérifié, procédez au déploiement de vos mises à jour
 
-### Mises à jour avec [Capgo](https://capgoapp/)
+### Mises à jour avec [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Après avoir passé l'analyse Xcode, utilisez Capgo pour les mises à jour en direct afin de maintenir à jour le manifeste de confidentialité de votre application. Capgo fournit :
 
--   **Déploiements instantanés** : 95% des utilisateurs reçoivent les mises à jour dans les 24 heures [\[1\]](https://capgoapp/)
+-   **Déploiements instantanés** : 95% des utilisateurs reçoivent les mises à jour dans les 24 heures [\[1\]](https://capgo.app/)
 -   **Retour en arrière en un clic** pour des corrections rapides
 -   **Outils d'analyse** pour suivre le succès des mises à jour et assurer la conformité
 
@@ -90,22 +90,22 @@ Après avoir vérifié votre manifeste dans Xcode, il est important de s'assurer
 
 ### Pratiques recommandées
 
-Envisagez d'utiliser Capgo pour pousser les mises à jour du manifeste instantanément, évitant les retards causés par les examens de l'App Store. Cet outil prend également en charge les déploiements progressifs, vous permettant de tester les changements avec des analyses en temps réel avant de les déployer à tous les utilisateurs [\[1\]](https://capgoapp/)
+Envisagez d'utiliser Capgo pour pousser les mises à jour du manifeste instantanément, évitant les retards causés par les examens de l'App Store. Cet outil prend également en charge les déploiements progressifs, vous permettant de tester les changements avec des analyses en temps réel avant de les déployer à tous les utilisateurs [\[1\]](https://capgo.app/)
 
 ### Pièges courants
 
-S'appuyer sur les [mises à jour manuelles](https://capgoapp/docs/plugin/cloud-mode/manual-update/) peut être lent, car elles dépendent des temps d'examen de l'App Store, qui peuvent prendre des jours voire des semaines. Cela laisse souvent la documentation obsolèteD'autre part, les outils automatisés permettent des mises à jour instantanées, fournissent des analyses pour surveiller les déploiements et facilitent le retour en arrière si quelque chose ne va pas [\[1\]](https://capgoapp/)
+S'appuyer sur les [mises à jour manuelles](https://capgo.app/docs/plugin/cloud-mode/manual-update/) peut être lent, car elles dépendent des temps d'examen de l'App Store, qui peuvent prendre des jours voire des semaines. Cela laisse souvent la documentation obsolèteD'autre part, les outils automatisés permettent des mises à jour instantanées, fournissent des analyses pour surveiller les déploiements et facilitent le retour en arrière si quelque chose ne va pas [\[1\]](https://capgo.app/)
 
 ### Mises à jour manuelles vs automatisées
 
 Voici une comparaison rapide des méthodes de mise à jour manuelles et automatisées :
 
--   **Vitesse de livraison** : Les mises à jour manuelles peuvent prendre des jours ou des semaines, tandis que les [mises à jour automatisées](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) atteignent 95% des utilisateurs en 24 heures [\[1\]](https://capgoapp/)
--   **Suivi du succès** : Les méthodes manuelles varient, mais les mises à jour automatisées atteignent un taux de réussite de 82% dans le monde [\[1\]](https://capgoapp/)
+-   **Vitesse de livraison** : Les mises à jour manuelles peuvent prendre des jours ou des semaines, tandis que les [mises à jour automatisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) atteignent 95% des utilisateurs en 24 heures [\[1\]](https://capgo.app/)
+-   **Suivi du succès** : Les méthodes manuelles varient, mais les mises à jour automatisées atteignent un taux de réussite de 82% dans le monde [\[1\]](https://capgo.app/)
 -   **Options de retour en arrière** : Les mises à jour manuelles offrent une récupération limitée, tandis que les mises à jour automatisées permettent des retours immédiats
--   **Surveillance** : Les vérifications manuelles prennent du temps, tandis que les outils automatisés fournissent des analyses en temps réel [\[1\]](https://capgoapp/)
--   **Distribution** : Les systèmes manuels sont basiques, tandis que les outils automatisés prennent en charge des canaux de distribution avancés [\[1\]](https://capgoapp/)
--   **Sécurité** : Les mises à jour manuelles manquent de chiffrement intégré, tandis que les systèmes automatisés utilisent le chiffrement de bout en bout [\[1\]](https://capgoapp/)
+-   **Surveillance** : Les vérifications manuelles prennent du temps, tandis que les outils automatisés fournissent des analyses en temps réel [\[1\]](https://capgo.app/)
+-   **Distribution** : Les systèmes manuels sont basiques, tandis que les outils automatisés prennent en charge des canaux de distribution avancés [\[1\]](https://capgo.app/)
+-   **Sécurité** : Les mises à jour manuelles manquent de chiffrement intégré, tandis que les systèmes automatisés utilisent le chiffrement de bout en bout [\[1\]](https://capgo.app/)
 
 ## Comparaison des outils de mise à jour en direct
 
@@ -116,10 +116,10 @@ Plongeons dans une comparaison de deux plateformes de mise à jour en direct pop
 | Fonctionnalité | Capgo | [Appflow](https://ionicio/appflow/) |
 | --- | --- | --- |
 | Chiffrement de bout en bout | **Oui** | \-  |
-| Taux de réussite des mises à jour | **82% mondial** [\[1\]](https://capgoapp/) | \-  |
-| Temps de livraison des mises à jour | **95% en 24h** [\[1\]](https://capgoapp/) | \-  |
-| Vitesse de téléchargement | **114 ms (5 MB)** [\[1\]](https://capgoapp/) | \-  |
-| Coût annuel (Plan équipe) | **996 €** | **6 000 €** [\[1\]](https://capgoapp/) |
+| Taux de réussite des mises à jour | **82% mondial** [\[1\]](https://capgo.app/) | \-  |
+| Temps de livraison des mises à jour | **95% en 24h** [\[1\]](https://capgo.app/) | \-  |
+| Vitesse de téléchargement | **114 ms (5 MB)** [\[1\]](https://capgo.app/) | \-  |
+| Coût annuel (Plan équipe) | **996 €** | **6 000 €** [\[1\]](https://capgo.app/) |
 
 **En bref** : Capgo offre un coût de première année beaucoup plus bas - 996 € contre 6 000 € pour Appflow
 
@@ -127,7 +127,7 @@ Maintenant, voyons comment Capgo se démarque spécifiquement pour les mises à 
 
 ### Privacy Manifest : Avantages de Capgo
 
-Le code source ouvert de Capgo en fait un choix solide pour la gestion des mises à jour du Privacy Manifest. Il permet des ajustements rapides pour répondre aux normes de confidentialité en évolution, garantissant une conformité gérable [\[1\]](https://capgoapp/)
+Le code source ouvert de Capgo en fait un choix solide pour la gestion des mises à jour du Privacy Manifest. Il permet des ajustements rapides pour répondre aux normes de confidentialité en évolution, garantissant une conformité gérable [\[1\]](https://capgo.app/)
 
 ## Résumé
 

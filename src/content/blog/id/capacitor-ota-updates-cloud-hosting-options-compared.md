@@ -29,7 +29,7 @@ Pembaruan Over-the-Air (OTA) memungkinkan Anda memperbarui aplikasi [Capacitor](
 -   **[AWS](https://awsamazoncom/)**: Kuat tapi setup kompleks. Bagus untuk alur kerja kustom
 -   **Google Cloud**: Keamanan dan otomatisasi yang kuat tapi membutuhkan keahlian
 -   **[Azure](https://azuremicrosoftcom/en-us)**: Fleksibel dan terukur dengan tools yang baik untuk rollout bertahap
--   **[Capgo](https://capgoapp/)**: Dibuat khusus untuk pembaruan OTA. Cepat, aman, dan mudah digunakan
+-   **[Capgo](https://capgo.app/)**: Dibuat khusus untuk pembaruan OTA. Cepat, aman, dan mudah digunakan
 
 ### Perbandingan Cepat:
 
@@ -53,7 +53,7 @@ Untuk pembaruan OTA yang cepat, aman, dan andal, **Capgo** menonjol, terutama de
 
 ## 1. AWS untuk Pembaruan OTA
 
-AWS adalah pilihan andal untuk hosting [pembaruan OTA Capacitor](https://capgoapp/ja/), meskipun membutuhkan lebih banyak setup dibandingkan platform yang dirancang khusus untuk tujuan ini. Mari kita uraikan fitur utama AWS untuk mengirimkan pembaruan OTA.
+AWS adalah pilihan andal untuk hosting [pembaruan OTA Capacitor](https://capgo.app/ja/), meskipun membutuhkan lebih banyak setup dibandingkan platform yang dirancang khusus untuk tujuan ini. Mari kita uraikan fitur utama AWS untuk mengirimkan pembaruan OTA.
 
 ### Penyimpanan dan Pengiriman Konten
 
@@ -67,7 +67,7 @@ AWS menawarkan berbagai tools untuk mengamankan pembaruan Anda:
 -   **KMS**: Menangani manajemen kunci enkripsi
 -   **CloudTrail**: Melacak dan mencatat aktivitas pengguna untuk audit
 
-Meski demikian, memenuhi persyaratan keamanan dan kepatuhan app store membutuhkan konfigurasi manual. Ini kurang nyaman dibandingkan platform yang dilengkapi tools enkripsi dan kepatuhan bawaan [\[1\]](https://capgoapp/)
+Meski demikian, memenuhi persyaratan keamanan dan kepatuhan app store membutuhkan konfigurasi manual. Ini kurang nyaman dibandingkan platform yang dilengkapi tools enkripsi dan kepatuhan bawaan [\[1\]](https://capgo.app/)
 
 ### Manajemen Deployment
 
@@ -121,13 +121,13 @@ GCP menggunakan model harga **pay-as-you-go**, yang cocok untuk deployment skala
 
 ## 3. Azure untuk Pembaruan OTA
 
-Microsoft Azure menawarkan berbagai layanan cloud yang memungkinkan implementasi pembaruan OTA (Over-the-Air) untuk [Capacitor apps](https://capgoapp/blog/capacitor-comprehensive-guide/). Dengan menggabungkan layanan intinya, Anda dapat membangun alur kerja yang disesuaikan untuk mengelola pembaruan secara efisien.
+Microsoft Azure menawarkan berbagai layanan cloud yang memungkinkan implementasi pembaruan OTA (Over-the-Air) untuk [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). Dengan menggabungkan layanan intinya, Anda dapat membangun alur kerja yang disesuaikan untuk mengelola pembaruan secara efisien.
 
 Mulai dengan **Azure Blob Storage** untuk hosting file pembaruan Anda. Pasangkan dengan **Azure's Content Delivery Network (CDN)** untuk memastikan distribusi pembaruan yang cepat dan andal di seluruh dunia. Pengaturan ini memberikan dasar yang solid untuk menyimpan dan mengirimkan pembaruan.
 
 Untuk keamanan, Azure membawa beberapa alat ke meja. **Key Vault** membantu mengelola kunci enkripsi, **Active Directory** mengontrol akses, **Security Center** memantau ancaman, dan **DDoS Protection** melindungi dari serangan jaringan. Bersama-sama, alat-alat ini menciptakan lingkungan yang aman untuk pembaruan OTA.
 
-Jika Anda membutuhkan solusi pembaruan OTA kustom, Azure siap membantu. Gunakan **Azure DevOps** dan alat serverless seperti **Azure Pipelines** untuk [mengotomatisasi build dan deployment](https://capgoapp/blog/automatic-build-and-release-with-gitlab/). Tambahkan **Azure Functions** untuk memicu alur kerja pembaruan, dan andalkan **Azure Monitor** untuk melacak kinerja dan metrik.
+Jika Anda membutuhkan solusi pembaruan OTA kustom, Azure siap membantu. Gunakan **Azure DevOps** dan alat serverless seperti **Azure Pipelines** untuk [mengotomatisasi build dan deployment](https://capgo.app/blog/automatic-build-and-release-with-gitlab/). Tambahkan **Azure Functions** untuk memicu alur kerja pembaruan, dan andalkan **Azure Monitor** untuk melacak kinerja dan metrik.
 
 Azure juga mendukung peluncuran bertahap dan mekanisme rollback otomatis, yang penting untuk memenuhi pedoman app store dan standar industri. Fitur kepatuhannya memudahkan perancangan strategi pembaruan yang selaras dengan persyaratan regulasi.
 

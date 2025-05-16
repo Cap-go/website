@@ -33,7 +33,7 @@ next_blog: ''
 -   **Cara Tetap Patuh**:
     -   Hindari mengubah fungsi inti aplikasi
     -   Gunakan metode pengiriman aman seperti HTTPS dan tanda tangan digital
-    -   Komunikasikan dengan jelas [tujuan pembaruan](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) kepada pengguna
+    -   Komunikasikan dengan jelas [tujuan pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) kepada pengguna
 
 ### Perbandingan Cepat Aturan OTA
 
@@ -135,7 +135,7 @@ Berikut kesalahan umum yang harus dihindari saat memperbarui aplikasi:
 
 Untuk tetap patuh:
 
--   Audit secara rutin [proses pembaruan](https://capgoapp/docs/plugin/cloud-mode/manual-update/) Anda untuk masalah keamanan
+-   Audit secara rutin [proses pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) Anda untuk masalah keamanan
 -   Gunakan pembelajaran mesin untuk menganalisis pola pembaruan  
 -   Jelaskan dengan jelas tujuan pembaruan kepada pengguna
 -   Hindari mengubah fungsionalitas inti aplikasi melalui pembaruan OTA [\[8\]](https://stackoverflowcom/questions/43951710/does-apple-allow-ota-updates-of-application)

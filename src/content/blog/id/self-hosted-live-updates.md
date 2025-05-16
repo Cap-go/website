@@ -32,7 +32,7 @@ Menerapkan Capgo-hosted Live Updates sangat mudah menggunakan [Capgo SDK](https:
 
 Untuk memastikan pengiriman artefak build web terbaru yang aman dan terkoordinasi kepada pengguna akhir, Capgo sekarang memungkinkan plugin Capacitor Live Updates menggunakan pasangan kunci publik/privat. Ketika menggunakan Self-hosted Live Updates, handshake tambahan dilakukan untuk memastikan bahwa artefak yang diunduh melalui plugin dari infrastruktur perusahaan tidak dimodifikasi.
 
-![Capgo encryption schema](/encryption_flowwebp)
+![Capgo encryption schema](/encryption_flow.webp)
 
 Berikut adalah langkah-langkah untuk membuat pasangan kunci dan proses selanjutnya untuk memberikan pengalaman yang diperbarui kepada pengguna akhir.
 

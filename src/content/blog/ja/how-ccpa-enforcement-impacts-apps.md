@@ -30,7 +30,7 @@ next_blog: ''
 -   **執行**：違反1件につき最大7,988ドルの罰金。注目すべき事例には[Sephora](https://enwikipediaorg/wiki/Sephora)（1,200万ドルの罰金）や[DoorDash](https://enwikipediaorg/wiki/DoorDash)（37.5万ドルの罰金）があります
 -   **よくある間違い**：「販売拒否」リンクの欠如、グローバルプライバシーコントロール（GPC）シグナルの無視、規制のないデータ共有
 
-**クイックヒント**：データ監査から始め、[プライバシーポリシー](https://capgoapp/dp/)を更新し、[OneTrust](https://wwwonetrustcom/solutions/privacy-automation/)や[Osano](https://wwwosanocom/)などのツールを使用してコンプライアンスを簡素化しましょう。コンプライアンスは罰金を避けるだけでなく、ユーザーの信頼を構築し、ビジネスを保護します。
+**クイックヒント**：データ監査から始め、[プライバシーポリシー](https://capgo.app/dp/)を更新し、[OneTrust](https://wwwonetrustcom/solutions/privacy-automation/)や[Osano](https://wwwosanocom/)などのツールを使用してコンプライアンスを簡素化しましょう。コンプライアンスは罰金を避けるだけでなく、ユーザーの信頼を構築し、ビジネスを保護します。
 
 ## CCPAのアプリに関する主要要件
 

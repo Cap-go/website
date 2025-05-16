@@ -25,7 +25,7 @@ next_blog: ''
 ¿Quieres asegurar que las actualizaciones de tu aplicación sean rápidas, confiables e impactantes? Esto es lo que necesitas saber:
 
 -   **¿Por qué Rastrear Actualizaciones?**  
-    Rastrea el rendimiento de las actualizaciones para entregarlas más rápido, solucionar problemas rápidamente y mejorar la experiencia del usuario. Herramientas como [Capgo](https://capgoapp/) pueden aumentar la eficiencia de las versiones en un 81%
+    Rastrea el rendimiento de las actualizaciones para entregarlas más rápido, solucionar problemas rápidamente y mejorar la experiencia del usuario. Herramientas como [Capgo](https://capgo.app/) pueden aumentar la eficiencia de las versiones en un 81%
     
 -   **Métricas Clave para Monitorear:**
     
@@ -34,7 +34,7 @@ next_blog: ''
     -   **Impacto en Usuarios:** Fallos post-actualización y uso de funciones
 -   **Herramientas Principales para Rastrear:**
     
-    -   **Capgo:** [Gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/) segura con soporte CI/CD
+    -   **Capgo:** [Gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/) segura con soporte CI/CD
     -   **[Firebase Performance Monitoring](https://firebasegooglecom/docs/perf-mon):** Insights de rendimiento en tiempo real gratuitos
     -   **[New Relic](https://newreliccom/):** Rastrea errores, solicitudes de red y más
 -   **Pasos Rápidos de Configuración:**
@@ -45,9 +45,9 @@ next_blog: ''
 
 Monitorear actualizaciones te ayuda a entregar actualizaciones sin problemas, solucionar errores y mejorar el rendimiento de la aplicación. Profundicemos en los detalles
 
-## [Capgo](https://capgoapp/), plugin de Capacitor para actualizaciones en vivo
+## [Capgo](https://capgo.app/), plugin de Capacitor para actualizaciones en vivo
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-02jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-02jpg?auto=compress)
 
 ## Configuración del Seguimiento de Actualizaciones
 
@@ -65,7 +65,7 @@ Comienza eligiendo una herramienta de seguimiento que se ajuste a tus necesidade
     
     Sigue las instrucciones de configuración proporcionadas en la documentación
     
--   **New Relic**: Esta herramienta ayuda a monitorear errores de JavaScript, solicitudes de red y eventos personalizados [\[2\]](https://docsnewreliccom/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/) Ha sido utilizada por empresas como Colenso para actualizar casi todos sus 5,000+ usuarios en solo minutos [\[1\]](https://capgoapp/)
+-   **New Relic**: Esta herramienta ayuda a monitorear errores de JavaScript, solicitudes de red y eventos personalizados [\[2\]](https://docsnewreliccom/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/) Ha sido utilizada por empresas como Colenso para actualizar casi todos sus 5,000+ usuarios en solo minutos [\[1\]](https://capgo.app/)
     
 
 ### Métricas Principales para Rastrear
@@ -85,9 +85,9 @@ Estas métricas te darán una imagen clara de qué tan bien están funcionando t
 Ajusta tu configuración de seguimiento para recopilar los datos más relevantes. Dependiendo de la herramienta que elijas, esto es lo que puedes hacer:
 
 -   **New Relic**: Ofrece funciones como análisis, registro personalizado, informes de fallos, monitoreo de red y captura del cuerpo de respuesta HTTP [\[2\]](https://docsnewreliccom/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/)
--   **Capgo**: Permite habilitar el cifrado para [actualizaciones seguras](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) y asignar actualizaciones a usuarios específicos para mejor orientación [\[1\]](https://capgoapp/)
+-   **Capgo**: Permite habilitar el cifrado para [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) y asignar actualizaciones a usuarios específicos para mejor orientación [\[1\]](https://capgo.app/)
 
-> "Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar revisiones para correcciones de errores es oro" - Bessie Cooper [\[1\]](https://capgoapp/)
+> "Capgo es una herramienta imprescindible para desarrolladores que quieren ser más productivos. Evitar revisiones para correcciones de errores es oro" - Bessie Cooper [\[1\]](https://capgo.app/)
 
 ## Lectura de Datos de Rendimiento de Actualizaciones
 
@@ -97,7 +97,7 @@ El seguimiento de cómo los usuarios adoptan las actualizaciones te ayuda a ente
 
 -   **Tasa de Adopción**: Calcúlala como _(Nuevos Usuarios de la Actualización / Total de Usuarios) × 100_ Esto muestra cuántos usuarios están cambiando a la versión actualizada
 -   **Tiempo hasta la Primera Acción**: Mide cuánto tardan los usuarios en interactuar con las nuevas funciones después de actualizar
--   **Tasa de Éxito de Actualización**: Usa _(Actualizaciones Exitosas / Total de Intentos de Actualización) × 100_ para medir qué tan fluido está funcionando el [proceso de actualización](https://capgoapp/docs/plugin/cloud-mode/manual-update/)
+-   **Tasa de Éxito de Actualización**: Usa _(Actualizaciones Exitosas / Total de Intentos de Actualización) × 100_ para medir qué tan fluido está funcionando el [proceso de actualización](https://capgo.app/docs/plugin/cloud-mode/manual-update/)
 
 Una vez que tengas estas métricas, profundiza en cómo las actualizaciones influyen en el comportamiento del usuario
 
@@ -117,7 +117,7 @@ El siguiente paso es probar sistemáticamente diferentes versiones de actualizac
 
 ### Probando Versiones de Actualización
 
-La plataforma de Capgo, con más de 9476 millones de actualizaciones entregadas globalmente [\[1\]](https://capgoapp/), ofrece información sobre estrategias efectivas de prueba. Aquí está en qué enfocarse:
+La plataforma de Capgo, con más de 9476 millones de actualizaciones entregadas globalmente [\[1\]](https://capgo.app/), ofrece información sobre estrategias efectivas de prueba. Aquí está en qué enfocarse:
 
 -   **Monitoreo de Rendimiento en Tiempo Real**: Mantén un ojo en los tiempos de respuesta y tasas de error inmediatamente después de implementar actualizaciones
 -   **Utilización de Recursos**: Asegúrate de que la actualización no sobrecargue los recursos del sistema ni reduzca el rendimiento de la app
@@ -227,12 +227,12 @@ Plataformas como Capgo pueden proporcionar análisis detallados y permitir rever
 
 Las herramientas modernas de seguimiento de actualizaciones han demostrado ser revolucionarias para los equipos de desarrollo:
 
--   Equipos de desarrollo en todo el mundo han entregado **5195 millones de actualizaciones** usando estas herramientas [\[1\]](https://capgoapp/)
--   Los equipos reportan un **81% de aumento en eficiencia** gracias a ciclos de lanzamiento más rápidos [\[1\]](https://capgoapp/)
+-   Equipos de desarrollo en todo el mundo han entregado **5195 millones de actualizaciones** usando estas herramientas [\[1\]](https://capgo.app/)
+-   Los equipos reportan un **81% de aumento en eficiencia** gracias a ciclos de lanzamiento más rápidos [\[1\]](https://capgo.app/)
 
 Al combinar el seguimiento efectivo de métricas con actualizaciones en vivo, los desarrolladores han reimaginado cómo mantienen y mejoran sus apps. Incluso el equipo de [OSIRIS-REx](https://sciencenasagov/mission/osiris-rex/) de la NASA ha elogiado este enfoque:
 
-> "@Capgo es una forma inteligente de hacer actualizaciones de código en caliente (y no por todo el dinero del mundo como con @AppFlow) :-)" [\[1\]](https://capgoapp/)
+> "@Capgo es una forma inteligente de hacer actualizaciones de código en caliente (y no por todo el dinero del mundo como con @AppFlow) :-)" [\[1\]](https://capgo.app/)
 
 ¿Listo para ver estos resultados por ti mismo? Sigue los pasos a continuación para comenzar a rastrear actualizaciones de manera efectiva
 
@@ -253,4 +253,4 @@ Así es como empezar a rastrear métricas de actualización:
 
 Como compartió un usuario:
 
-> "Practicamos desarrollo ágil y @Capgo es crucial para entregar continuamente a nuestros usuarios!" [\[1\]](https://capgoapp/)
+> "Practicamos desarrollo ágil y @Capgo es crucial para entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)

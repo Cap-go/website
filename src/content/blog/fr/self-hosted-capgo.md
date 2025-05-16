@@ -27,7 +27,7 @@ Cet article fournit un guide étape par étape sur l'auto-hébergement de Capgo,
 
 L'auto-hébergement consiste à faire fonctionner votre propre site web ou application en configurant vous-même un serveur et un réseau. Au lieu d'utiliser une Plateforme en tant que Service ou un Fournisseur de Cloud Public, ceux qui choisissent l'auto-hébergement géreront leurs propres réseaux et seront responsables de la maintenance et du temps de fonctionnement en plus de la construction de leur site web ou application.
 
-La façon la plus simple de démarrer avec Capgo est d'utiliser notre [service géré officiel dans le cloud](https://capgoapp/), mais si vous préférez gérer le vôtre, vous pouvez également auto-héberger Capgo sur votre serveur.
+La façon la plus simple de démarrer avec Capgo est d'utiliser notre [service géré officiel dans le cloud](https://capgo.app/), mais si vous préférez gérer le vôtre, vous pouvez également auto-héberger Capgo sur votre serveur.
 
 ## Qu'est-ce que l'auto-hébergement ?
 
@@ -51,7 +51,7 @@ Il existe de nombreuses raisons pour lesquelles les gens choisissent l'auto-héb
 
 Il n'existe qu'une seule version de Capgo. Mes produits Cloud et Auto-hébergés sont complètement égaux. Il n'y a pas de version commerciale premium et exclusive avec un ensemble de fonctionnalités meilleur ou plus complet.
 
-Vous obtenez le même tableau de bord, les mêmes métriques exploitables et le même engagement à [respecter la confidentialité de vos visiteurs](https://capgoapp/privacy/) avec les deux.
+Vous obtenez le même tableau de bord, les mêmes métriques exploitables et le même engagement à [respecter la confidentialité de vos visiteurs](https://capgo.app/privacy/) avec les deux.
 
 J'ai commencé à développer Capgo en décembre 2018, et j'ai lancé l'activité d'abonnement SaaS en mai 2019. Le projet est très vivant, activement développé et en croissance rapide. Il est également robuste et éprouvé.
 
@@ -90,7 +90,7 @@ const config: CapacitorConfig = {
 };
 ```
 
-Note : Pour obtenir localSupaAnon, veuillez suivre ce [tutoriel](https://capgoapp/docs/self-hosted/local-dev/getting-started/) et copiez la clé anon dans localSupaAnon
+Note : Pour obtenir localSupaAnon, veuillez suivre ce [tutoriel](https://capgo.app/docs/self-hosted/local-dev/getting-started/) et copiez la clé anon dans localSupaAnon
 
 # Utilisation du capacitor updater avec capgo auto-hébergé
 
@@ -122,4 +122,4 @@ Cela vous permettra d'utiliser capgo local en développement. Cependant, par dé
 
 En conclusion, l'auto-hébergement de Capgo peut être une bonne option pour les organisations qui disposent des ressources et de l'expertise nécessaires. Il offre plusieurs avantages, notamment le contrôle du processus de mise à jour, la sécurité et la conformité. Cependant, il est important de bien évaluer les avantages et les défis avant de décider d'auto-héberger.
 
-Si vous envisagez d'auto-héberger Capgo, je vous recommande de commencer par lire la [documentation d'auto-hébergement](https://capgoapp/docs/self-hosted/getting-started/) de Capgo. Cela vous donnera une bonne compréhension des exigences et des risques de l'auto-hébergement.
+Si vous envisagez d'auto-héberger Capgo, je vous recommande de commencer par lire la [documentation d'auto-hébergement](https://capgo.app/docs/self-hosted/getting-started/) de Capgo. Cela vous donnera une bonne compréhension des exigences et des risques de l'auto-hébergement.

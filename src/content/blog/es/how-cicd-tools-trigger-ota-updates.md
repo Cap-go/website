@@ -28,7 +28,7 @@ Las herramientas de CI/CD hacen que las actualizaciones over-the-air (OTA) sean 
     -   **Seguridad:** Usa HTTPS, firma de código y encriptación para proteger las actualizaciones
     -   **Despliegues graduales:** Implementa actualizaciones a grupos pequeños primero para detectar problemas temprano
     -   **Opciones de reversión:** Revierte automáticamente las actualizaciones si aumentan las tasas de error
--   **Herramientas destacadas:** [Capgo](https://capgoapp/) simplifica las actualizaciones OTA con comandos CLI, integración de webhooks y seguimiento detallado de métricas
+-   **Herramientas destacadas:** [Capgo](https://capgo.app/) simplifica las actualizaciones OTA con comandos CLI, integración de webhooks y seguimiento detallado de métricas
 
 La automatización de actualizaciones OTA asegura una entrega más rápida, menos errores y mejor estabilidad de la aplicación. A continuación, encontrarás instrucciones paso a paso para configurar aplicaciones [Capacitor](https://capacitorjscom/) con pipelines CI/CD.
 
@@ -42,7 +42,7 @@ La automatización de actualizaciones OTA asegura una entrega más rápida, meno
 
 ![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
-La configuración de Capacitor para [actualizaciones over-the-air automatizadas](https://capgoapp/blog/open-source-licecing/) (OTA) involucra tres pasos clave: configurar la instalación, implementar medidas de seguridad e [integrar un sistema de actualización](https://capgoapp/docs/plugin/cloud-mode/hybrid-update). Este proceso asegura la compatibilidad con la automatización CI/CD mientras mantiene tu aplicación segura.
+La configuración de Capacitor para [actualizaciones over-the-air automatizadas](https://capgo.app/blog/open-source-licecing/) (OTA) involucra tres pasos clave: configurar la instalación, implementar medidas de seguridad e [integrar un sistema de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Este proceso asegura la compatibilidad con la automatización CI/CD mientras mantiene tu aplicación segura.
 
 ### Configurando ajustes OTA en capacitorconfigjson
 
@@ -86,9 +86,9 @@ Para aplicar estas características de seguridad, incluye lo siguiente en tu con
 }
 ```
 
-### Configurando [Capgo](https://capgoapp/) para actualizaciones OTA
+### Configurando [Capgo](https://capgo.app/) para actualizaciones OTA
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
+![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
 
 Capgo simplifica el proceso de actualización OTA. Comienza instalando el plugin requerido:
 
@@ -137,7 +137,7 @@ jobs:
           https://api.capgo.app/deploy
 ```
 
-Asegúrate de almacenar tus claves API y secretos de forma segura en el [almacenamiento encriptado](https://capgoapp/docs/cli/migrations/encryption/) para proteger datos sensibles
+Asegúrate de almacenar tus claves API y secretos de forma segura en el [almacenamiento encriptado](https://capgo.app/docs/cli/migrations/encryption/) para proteger datos sensibles
 
 ### Comandos de Actualización de Capgo CLI
 
@@ -146,7 +146,7 @@ El CLI de Capgo ofrece comandos clave para optimizar la gestión de actualizacio
 | Etapa | Comando | Propósito |
 | --- | --- | --- |
 | Compilación | `capgo deploy --channel production` | Subir nuevos artefactos de compilación |
-| Pruebas | `capgo promote build-123 --group beta` | [Liberar actualizaciones a un grupo de prueba](https://capgoapp/blog/how-to-send-specific-version-to-users/) |
+| Pruebas | `capgo promote build-123 --group beta` | [Liberar actualizaciones a un grupo de prueba](https://capgo.app/blog/how-to-send-specific-version-to-users/) |
 | Validación | `capgo metrics get --last-24h` | Verificar métricas de éxito de actualización |
 | Lanzamiento | `capgo promote build-123 --channel stable` | Implementar la actualización a todos los usuarios |
 
@@ -176,7 +176,7 @@ Las actualizaciones por etapas te permiten controlar cómo se implementan las ac
 
 ### Activadores de Actualización Basados en Métricas
 
-[Automatizar actualizaciones](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) basadas en métricas de rendimiento puede ahorrar tiempo y prevenir problemas. Al configurar webhooks de monitoreo, puedes rastrear métricas importantes y decidir si continuar o pausar una actualización:
+[Automatizar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) basadas en métricas de rendimiento puede ahorrar tiempo y prevenir problemas. Al configurar webhooks de monitoreo, puedes rastrear métricas importantes y decidir si continuar o pausar una actualización:
 
 | Tipo de Métrica | Umbral | Acción |
 | --- | --- | --- |

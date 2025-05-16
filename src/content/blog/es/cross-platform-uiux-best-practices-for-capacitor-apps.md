@@ -31,7 +31,7 @@ next_blog: ''
 -   **Optimiza para Tamaños de Pantalla**: Utiliza cuadrículas responsivas, puntos de quiebre y componentes escalables para diseños fluidos en todos los dispositivos
 -   **Aprovecha Herramientas Como [Ionic](https://ionicframeworkcom/)**: Los componentes pre-construidos se adaptan a los estilos de la plataforma, ahorrando tiempo y esfuerzo
 -   **Prueba en Diferentes Dispositivos**: Cubre diferentes tamaños de pantalla, versiones de SO e interacciones de usuario para garantizar la fiabilidad
--   **Usa Actualizaciones en Vivo**: Herramientas como [Capgo](https://capgoapp/) entregan actualizaciones instantáneamente sin retrasos de la tienda de aplicaciones, manteniendo a los usuarios actualizados
+-   **Usa Actualizaciones en Vivo**: Herramientas como [Capgo](https://capgo.app/) entregan actualizaciones instantáneamente sin retrasos de la tienda de aplicaciones, manteniendo a los usuarios actualizados
 
 **Consejo Rápido**: Capgo ha habilitado 235 millones de actualizaciones para más de 750 aplicaciones, con 95% de usuarios actualizados en 24 horas
 
