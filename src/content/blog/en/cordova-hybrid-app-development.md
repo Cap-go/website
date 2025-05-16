@@ -105,10 +105,10 @@ Capgo is a comprehensive platform explicitly designed to simplify and enhance th
 
 ### Key Benefits of Integrating Capgo into Your Workflow:
 
-- **Seamless Over-the-Air Updates:** [Capgo](capgo.app) empowers you to deliver instant app updates to your users' devices without requiring them to go through the hassle of downloading new versions from app stores. This ensures that your users always have the latest features, bug fixes, and content at their fingertips.
-- **Simplified Update Workflow and Management:**  [Capgo](capgo.app) streamlines the entire update process, making it incredibly easy to push new features, critical bug fixes, and fresh content updates to your users. Its intuitive interface and automation capabilities free up developers to focus on building great apps rather than managing complex update procedures.
-- **Enhanced User Experience with Minimal Disruptions:**  [Capgo](capgo.app) prioritizes the user experience by delivering updates seamlessly and unobtrusively. This ensures that your users can enjoy the latest enhancements without interruptions or delays, keeping them engaged and satisfied.
-- **Accelerated Development Cycles and Rapid Iteration:** [Capgo](capgo.app) empowers development teams to iterate faster and more efficiently by enabling instant deployment and testing of app updates. This rapid feedback loop fosters innovation and allows for quicker response times to user feedback or changing market demands.
+- **Seamless Over-the-Air Updates:** [Capgo](https://capgo.app) empowers you to deliver instant app updates to your users' devices without requiring them to go through the hassle of downloading new versions from app stores. This ensures that your users always have the latest features, bug fixes, and content at their fingertips.
+- **Simplified Update Workflow and Management:**  [Capgo](https://capgo.app) streamlines the entire update process, making it incredibly easy to push new features, critical bug fixes, and fresh content updates to your users. Its intuitive interface and automation capabilities free up developers to focus on building great apps rather than managing complex update procedures.
+- **Enhanced User Experience with Minimal Disruptions:**  [Capgo](https://capgo.app) prioritizes the user experience by delivering updates seamlessly and unobtrusively. This ensures that your users can enjoy the latest enhancements without interruptions or delays, keeping them engaged and satisfied.
+- **Accelerated Development Cycles and Rapid Iteration:** [Capgo](https://capgo.app) empowers development teams to iterate faster and more efficiently by enabling instant deployment and testing of app updates. This rapid feedback loop fosters innovation and allows for quicker response times to user feedback or changing market demands.
 
 ## Why Capgo Exclusively Supports Capacitor for Live Updates
 
