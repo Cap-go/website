@@ -12,3 +12,4 @@ docs/plugin/know-issues docs/plugin/known-issues/ 200
 /sitemap-0.xml/ /sitemap-0.xml 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 302
 /en/* /:splat 302
+/login/ /register/ 302
