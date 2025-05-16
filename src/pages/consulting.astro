@@ -8,8 +8,6 @@ const description = m.consulting_description({}, { locale: Astro.locals.locale }
 
 const content = { title, description }
 
-const randomOdd = Math.random() < 0.5 ? 0 : 1
-
 const plugins = [
   {
     name: 'capacitor-updater',
@@ -545,58 +543,26 @@ const plugins = [
             >
           </p>
         </div>
-        {
-          randomOdd ? (
-            <div class="flex flex-col items-center justify-center px-5 text-left">
-              <img width="151" loading="lazy" alt="Open source icon" src="/bulb_open_source.svg" class="mt-0 mb-auto inline-block max-w-full border-0 align-middle" />
-              <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
-                Creators and maintainers of many
-                <a
-                  title="Open source"
-                  class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-                  style="
-                      transition:
-                        color 450ms ease 0s,
-                        all 0.3s ease 0s;
-                      text-decoration: underline;
-                    "
-                >
-                  Open Source libraries
-                </a>
-                used by millions
-              </p>
-            </div>
-          ) : (
-            <div class="flex flex-col items-center justify-center px-5 text-left">
-              <img
-                src="/6286658deaf6961fb2d6d4c0_core%20contrubutor.svg"
-                loading="lazy"
-                width="151"
-                alt="Core contributors icon"
-                class="mt-0 mb-auto inline-block max-w-full border-0 align-middle"
-              />
-              <p
-                set:html={m.core_contributors_to_capacitorjs_and_ionic({}, { locale: Astro.locals.locale }).replace(
-                  'CapacitorJS',
-                  `<a
-                    href='https://capacitorjs.com/'
-                    title='Core contributors'
-                    class='font-normal text-indigo-600 cursor-pointer hover:font-normal hover:text-indigo-600'
-                    style='
-                      transition:
-                        color 450ms ease 0s,
-                        all 0.3s ease 0s;
-                      text-decoration: underline;
-                    '
-                    >CapacitorJS</a
-                  >`,
-                )}
-                class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white"
-              />
-            </div>
-          )
-        }
+        <div class="flex flex-col items-center justify-center px-5 text-left">
+          <img width="151" loading="lazy" alt="Open source icon" src="/bulb_open_source.svg" class="mt-0 mb-auto inline-block max-w-full border-0 align-middle" />
+          <p class="mt-0 mb-auto block text-center text-lg whitespace-normal text-white">
+            Creators and maintainers of many
+            <a
+              title="Open source"
+              class="cursor-pointer font-normal text-indigo-600 hover:font-normal hover:text-indigo-600"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+              style="
+                  transition:
+                    color 450ms ease 0s,
+                    all 0.3s ease 0s;
+                  text-decoration: underline;
+                "
+            >
+              Open Source libraries
+            </a>
+            used by millions
+          </p>
+        </div>
       </div>
     </div>
     <section class="bg-indigo-600 px-4 py-16 sm:px-6 lg:px-8">
