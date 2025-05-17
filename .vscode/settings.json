@@ -4,7 +4,7 @@
   "i18n-ally.sortKeys": true,
   "search.exclude": {
     "dist": true,
-    "public": true,
+    // "public": true,
     "node_modules": true
     // "src/content/blog/de": true,
     // "src/content/blog/es": true,

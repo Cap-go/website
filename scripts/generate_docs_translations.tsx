@@ -95,14 +95,42 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     for (const sentence of sentences) {
       if ((currentChunk + sentence).length > 8000) {
         const tmp = await translateText(currentChunk, lang)
-        if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+        if (tmp)
+          appendFileSync(
+            destinationPath,
+            tmp
+              .replace(/capgoapp/g, 'capgo.app')
+              .replace(/([^.\s])png\)/g, '$1.png)')
+              .replace(/([^.\s])jpg\)/g, '$1.jpg)')
+              .replace(/([^.\s])gif\)/g, '$1.gif)')
+              .replace(/([^.\s])webp\)/g, '$1.webp)')
+              .replace(/update\/\)を/g, 'update/) を')
+              .replace(/capacitorjscom/g, 'capacitorjs.com')
+              .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
+              .replace(/assetsseobotaicom/g, 'assets.seobotai.com'),
+            'utf8',
+          )
         else failedTranslations[file] = true
         currentChunk = sentence
       } else currentChunk += sentence
     }
     if (currentChunk) {
       const tmp = await translateText(currentChunk, lang)
-      if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+      if (tmp)
+        appendFileSync(
+          destinationPath,
+          tmp
+            .replace(/capgoapp/g, 'capgo.app')
+            .replace(/([^.\s])png\)/g, '$1.png)')
+            .replace(/([^.\s])jpg\)/g, '$1.jpg)')
+            .replace(/([^.\s])gif\)/g, '$1.gif)')
+            .replace(/([^.\s])webp\)/g, '$1.webp)')
+            .replace(/update\/\)を/g, 'update/) を')
+            .replace(/capacitorjscom/g, 'capacitorjs.com')
+            .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
+            .replace(/assetsseobotaicom/g, 'assets.seobotai.com'),
+          'utf8',
+        )
       else failedTranslations[file] = true
     }
     spinner.success({ text: `Blog translated in ${lang}: ${file}` })
