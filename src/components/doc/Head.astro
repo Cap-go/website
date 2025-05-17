@@ -1,14 +1,16 @@
 ---
 const { head } = Astro.locals.starlightRoute
 const xDefault = head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel === 'alternate' && attrs?.hreflang === 'en')
-head.push({
-  tag: 'link',
-  attrs: {
-    rel: 'alternate',
-    hreflang: 'x-default',
-    href: xDefault?.attrs?.href,
-  },
-})
+if (xDefault && !head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel === 'alternate' && attrs?.hreflang === 'x-default')) {
+  head.push({
+    tag: 'link',
+    attrs: {
+      rel: 'alternate',
+      hreflang: 'x-default',
+      href: xDefault?.attrs?.href,
+    },
+  })
+}
 ---
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
