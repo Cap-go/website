@@ -64,7 +64,7 @@ Setelah hotfix Anda lulus semua pengujian, Anda siap menyiapkan Capgo untuk pene
 
 ## Langkah 2: Siapkan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13.jpg?auto=compress)
 
 ### Instal Paket yang Diperlukan
 
@@ -132,7 +132,7 @@ Setelah hotfix Anda diunggah dan dilabeli, lanjutkan ke Step 4 untuk mengkonfigu
 
 ## Sistem Live Update Capgo untuk Aplikasi [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 

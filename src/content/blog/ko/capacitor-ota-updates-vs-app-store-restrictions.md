@@ -38,7 +38,7 @@ next_blog: ''
 
 ## [Appflow](https://ionicio/appflow/) Deploy: [Ionic](https://ionicframeworkcom/) 앱 사용자에게 실시간 업데이트 배포
 
-![Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19jpg?auto=compress)
+![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -68,7 +68,7 @@ Apple과 Google 모두 엄격한 검토 절차를 시행하여 작은 업데이�
 
 ## Capacitor OTA 업데이트 작동 방식
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 [Capacitor OTA 업데이트](https://capgo.app/ja/)는 앱 배포를 더 빠르고 효율적으로 만들어 개발자가 앱스토어 승인을 기다리지 않고 변경사항을 푸시할 수 있게 합니다.
 
@@ -89,7 +89,7 @@ OTA 업데이트는 속도뿐만 아니라 개발자에게 [업데이트 프로�
 
 ### [Capgo](https://capgo.app/)의 OTA 도구
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo는 추가 도구와 기능으로 OTA 업데이트 경험을 향상시킵니다. 엔드투엔드 암호화로 승인된 사용자만 업데이트에 액세스할 수 있도록 하여 보안이 최우선 순위입니다 [\[1\]](https://capgo.app/) 주요 기능은 다음과 같습니다:
 

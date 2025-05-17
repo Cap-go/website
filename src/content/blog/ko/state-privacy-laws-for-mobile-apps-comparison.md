@@ -74,7 +74,7 @@ next_blog: ''
 
 ## 2. 버지니아 데이터 보호법 ([VCDPA](https://probloomberglawcom/insights/privacy/virginia-consumer-data-protection-act-vcdpa/))
 
-![VCDPA](https://mars-imagesimgixnet/seobot/screenshots/probloomberglawcom-e2d26366f154a86b70aef4e66139addc-2025-03-22)jpg?auto=compress)
+![VCDPA](https://mars-images.imgix.net/seobot/screenshots/probloomberglawcom-e2d26366f154a86b70aef4e66139addc-2025-03-22).jpg?auto=compress)
 
 2023년 1월 1일부터 버지니아 소비자 데이터 보호법(VCDPA)은 연간 최소 100,000명의 버지니아 주민의 개인 데이터를 처리하거나 관리하는 기업, 또는 데이터 처리로 수익의 절반 이상을 얻는 경우 25,000명의 주민에 대해 적용됩니다.
 

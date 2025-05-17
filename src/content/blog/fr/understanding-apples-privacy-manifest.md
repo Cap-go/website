@@ -66,7 +66,7 @@ Commencez par ajouter un fichier nommé `ios/App/Resources/PrivacyInfoxcprivacy`
 }
 ```
 
-Après avoir créé ce fichier, ouvrez [Xcode](https://developerapplecom/xcode/) pour vous assurer qu'il est correctement inclus dans votre projet
+Après avoir créé ce fichier, ouvrez [Xcode](https://developer.apple.com/xcode/) pour vous assurer qu'il est correctement inclus dans votre projet
 
 ### Tests et vérification
 

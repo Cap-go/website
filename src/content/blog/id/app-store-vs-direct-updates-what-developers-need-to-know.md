@@ -51,7 +51,7 @@ Pembaruan App Store adalah metode utama untuk mengirimkan pembaruan perangkat lu
 
 ### Bagaimana Pembaruan App Store Bekerja
 
-Mengirimkan pembaruan ke App Store berarti menyiapkan paket yang memenuhi persyaratan Apple dan melewati proses peninjauan. Apple memeriksa pembaruan untuk keamanan, kinerja, pedoman konten, dan fungsionalitas. Menggunakan [App Store Connect](https://developerapplecom/app-store-connect/), pengembang mengirimkan pembaruan mereka, yang menjalani evaluasi menyeluruh, termasuk pengujian pada perangkat yang didukung, pemeriksaan keamanan, dan tinjauan kepatuhan.
+Mengirimkan pembaruan ke App Store berarti menyiapkan paket yang memenuhi persyaratan Apple dan melewati proses peninjauan. Apple memeriksa pembaruan untuk keamanan, kinerja, pedoman konten, dan fungsionalitas. Menggunakan [App Store Connect](https://developer.apple.com/app-store-connect/), pengembang mengirimkan pembaruan mereka, yang menjalani evaluasi menyeluruh, termasuk pengujian pada perangkat yang didukung, pemeriksaan keamanan, dan tinjauan kepatuhan.
 
 ### Manfaat Pembaruan App Store
 
@@ -150,7 +150,7 @@ Capgo menyediakan pembaruan OTA yang aman dengan enkripsi dan alat manajemen yan
 
 Memilih metode pembaruan yang tepat sepenuhnya tergantung pada kebutuhan Anda. Seperti yang disorot dalam Forum Pengembang Apple:
 
-> "Jika Anda mengirimkan aplikasi macOS di luar Mac App Store, Anda harus menyediakan fungsi pembaruan sendiri" [\[3\]](https://forumsdeveloperapplecom/forums/thread/107576)
+> "Jika Anda mengirimkan aplikasi macOS di luar Mac App Store, Anda harus menyediakan fungsi pembaruan sendiri" [\[3\]](https://forumsdeveloper.apple.com/forums/thread/107576)
 
 ## Mengintegrasikan Pembaruan OTA ke Pipeline CI/CD
 
@@ -158,7 +158,7 @@ Bagi pengembang yang mempertimbangkan pembaruan OTA langsung, mengintegrasikan p
 
 ### Menggunakan Alat Seperti [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5)jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5).jpg?auto=compress)
 
 Mengirimkan pembaruan dengan cepat dan efisien adalah keharusan bagi tim pengembangan modern. Alat seperti **Capgo** menyederhanakan hal ini dengan menawarkan fitur seperti kontrol versi, analitik, dan peluncuran bertahap. Kemampuan ini memudahkan pengelolaan pembaruan OTA, terutama untuk tim enterprise yang menangani deployment skala besar. Penargetan pengguna dan opsi deployment yang fleksibel semakin meningkatkan prosesnya.
 

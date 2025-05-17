@@ -47,7 +47,7 @@ Untuk pembaruan OTA yang cepat, aman, dan andal, **Capgo** menonjol, terutama de
 
 ## Membandingkan Pemimpin Cloud Computing: [AWS](https://awsamazoncom/) vs [Azure](https://azuremicrosoftcom/en-us) vs Google Cloud
 
-![AWS](https://mars-imagesimgixnet/seobot/screenshots/awsamazoncom-b122ef446c917f923466f58329a1ff9c-2025-03-17jpg?auto=compress)
+![AWS](https://mars-images.imgix.net/seobot/screenshots/awsamazoncom-b122ef446c917f923466f58329a1ff9c-2025-03-17.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 

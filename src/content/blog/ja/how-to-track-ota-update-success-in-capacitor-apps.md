@@ -210,7 +210,7 @@ OTAデプロイメントの効果を把握するために、ユーザーがど�
 
 ### [Capgo](https://capgo.app/)パフォーマンスツール
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgoはアップデート中の監視とトラブルシューティングを簡素化するツールを提供します:
 

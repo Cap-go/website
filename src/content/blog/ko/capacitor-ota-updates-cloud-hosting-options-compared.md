@@ -46,7 +46,7 @@ Over-the-Air (OTA) 업데이트를 통해 앱스토어 지연 없이 [Capacitor]
 
 ## 클라우드 컴퓨팅 리더 비교: [AWS](https://awsamazoncom/) vs [Azure](https://azuremicrosoftcom/en-us) vs Google Cloud
 
-![AWS](https://mars-imagesimgixnet/seobot/screenshots/awsamazoncom-b122ef446c917f923466f58329a1ff9c-2025-03-17jpg?auto=compress)
+![AWS](https://mars-images.imgix.net/seobot/screenshots/awsamazoncom-b122ef446c917f923466f58329a1ff9c-2025-03-17.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/ftnGqNQzLNU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -136,7 +136,7 @@ Azure는 또한 앱 스토어 가이드라인과 산업 표준을 충족하는 �
 
 ## 4. [Capgo](https://capgo.app/)를 통한 OTA 업데이트
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
 
 Capgo는 일반 클라우드 제공업체를 넘어서 Capacitor OTA 업데이트를 위한 전용 솔루션을 제공합니다. 5MB 번들을 단 114ms 만에 다운로드하고 전 세계적으로 평균 API 응답 시간이 434ms로, 업데이트가 빠르고 안정적임을 보장합니다.
 

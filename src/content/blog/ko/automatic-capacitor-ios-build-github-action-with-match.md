@@ -92,7 +92,7 @@ Capacitor 앱용 CI/CD 설정은 복잡하고 시간이 많이 걸릴 수 있습
 ## 1. Fastlane Match로 App Store Connect API 사용하기
 
 > 2021년 2월부터 모든 사용자는 App Store Connect에 로그인할 때 2단계 인증 또는 2단계 확인이 필요합니다. Apple ID에 대한 이 추가 보안 계층은 계정에 접근할 수 있는 유일한 사람이 귀하임을 보장합니다.  
-> [Apple Support](https://developerapplecom/support/authentication/)에서
+> [Apple Support](https://developer.apple.com/support/authentication/)에서
 
 > match를 시작하려면 기존 인증서를 취소해야 합니다. 하지만 걱정하지 마세요, 새로운 인증서를 바로 받을 수 있습니다.
 

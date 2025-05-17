@@ -38,7 +38,7 @@ Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjs.com/) 앱을 
 
 ## 기업용 [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/m2kFUvSFcSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -163,7 +163,7 @@ Capgo는 의심스러운 업데이트를 격리하고 심층 분석을 위한 �
 
 ## [Capgo](https://capgo.app/) 보안 기능
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
 
 Capgo는 모니터링 시스템과 함께 작동하는 세 가지 주요 접근 방식을 통해 보안을 보장합니다:
 

@@ -89,7 +89,7 @@ Capacitor 앱의 CI/CD 설정은 복잡하고 시간이 많이 소요될 수 있
 ## 1. Fastlane과 함께 App Store Connect API 사용하기
 
 > 2021년 2월부터 App Store Connect에 로그인하려면 2단계 인증 또는 2단계 확인이 필요합니다. Apple ID에 대한 이 추가 보안 계층은 계정에 접근할 수 있는 유일한 사람이 귀하임을 보장합니다.  
-> [Apple Support](https://developerapplecom/support/authentication/) 참조
+> [Apple Support](https://developer.apple.com/support/authentication/) 참조
 
 ### 요구사항
 
@@ -188,7 +188,7 @@ base64 -i BUILD_CERTIFICATE.p12 | pbcopy
 
 ## 3. 프로비저닝 프로필
 
-[Apple Developer](https://developerapplecom/account/resources/profiles/list)를 열고 올바른 팀을 선택하세요.
+[Apple Developer](https://developer.apple.com/account/resources/profiles/list)를 열고 올바른 팀을 선택하세요.
 
 그런 다음 **+**를 클릭하여 새 프로필을 생성하세요.
 

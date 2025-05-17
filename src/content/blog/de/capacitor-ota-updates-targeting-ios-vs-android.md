@@ -53,7 +53,7 @@ iOS und Android verfolgen unterschiedliche Ansätze beim Umgang mit OTA (Over-th
 
 ### iOS App Store Update-Regeln
 
-Apple hat strenge Richtlinien für OTA-Updates. Geräte müssen bestimmte technische Bedingungen erfüllen: Sie müssen iOS 5 oder höher ausführen, mit einem stabilen WLAN-Netzwerk verbunden sein und entweder mindestens 50% Akkulaufzeit haben oder an eine Stromquelle angeschlossen sein [\[5\]](https://osxdailycom/2011/11/10/ios-ota-update-not-working-fix/). Über diese technischen Anforderungen hinaus setzt Apple einen strengen Überprüfungsprozess durch, der Updates auf Sicherheit, Leistung, Geschäftskonformität, Design und rechtliche Standards prüft [\[4\]](https://developerapplecom/app-store/review/guidelines/).
+Apple hat strenge Richtlinien für OTA-Updates. Geräte müssen bestimmte technische Bedingungen erfüllen: Sie müssen iOS 5 oder höher ausführen, mit einem stabilen WLAN-Netzwerk verbunden sein und entweder mindestens 50% Akkulaufzeit haben oder an eine Stromquelle angeschlossen sein [\[5\]](https://osxdailycom/2011/11/10/ios-ota-update-not-working-fix/). Über diese technischen Anforderungen hinaus setzt Apple einen strengen Überprüfungsprozess durch, der Updates auf Sicherheit, Leistung, Geschäftskonformität, Design und rechtliche Standards prüft [\[4\]](https://developer.apple.com/app-store/review/guidelines/).
 
 ### Google Play Store Update-Regeln
 
@@ -151,7 +151,7 @@ Für Entwickler, die mit Tools wie Capgo arbeiten, ist das Verständnis dieser U
 
 ## [Capgo](https://capgo.app/) Plattform-Überblick
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
 
 Capgo vereint plattformspezifische OTA-Update-Regeln in einer optimierten Update-Plattform.
 

@@ -45,7 +45,7 @@ Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi C
 
 ## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 Pipeline CI/CD yang dirancang dengan baik menyederhanakan penerapan dan membantu memastikan aplikasi Anda secara konsisten memenuhi pedoman app store
 
@@ -96,7 +96,7 @@ Untuk aplikasi iOS, pemeriksaan otomatis harus mencakup:
 
 ### Persyaratan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en)
 
-![Google Play](https://mars-imagesimgixnet/seobot/screenshots/supportgooglecom-6a40cdc10f6ab14acd7c2475e5b73e8c-2025-03-24jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/supportgooglecom-6a40cdc10f6ab14acd7c2475e5b73e8c-2025-03-24.jpg?auto=compress)
 
 Saat menargetkan Google Play, fokuskan pada verifikasi kunci berikut:
 
@@ -109,7 +109,7 @@ Menggunakan tools bawaan untuk otomatisasi kepatuhan dapat membuat proses ini le
 
 ### Tool Kepatuhan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo meningkatkan alur kerja kepatuhan dengan tools yang terintegrasi langsung ke pipeline CI/CD Anda. Berikut cara Capgo dapat membantu:
 

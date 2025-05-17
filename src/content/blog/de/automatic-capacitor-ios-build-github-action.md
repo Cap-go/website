@@ -56,7 +56,7 @@ Wir werden eine **_macOS_**-Maschine verwenden, Sie können im Screenshot den Pr
 ## 1. Verwendung der App Store Connect API mit Fastlane
 
 > Ab Februar 2021 ist eine Zwei-Faktor-Authentifizierung oder Zwei-Schritt-Verifizierung für alle Benutzer erforderlich, um sich bei App Store Connect anzumelden. Diese zusätzliche Sicherheitsebene für Ihre Apple-ID hilft sicherzustellen, dass nur Sie auf Ihr Konto zugreifen können.
-> Von [Apple Support](https://developerapplecom/support/authentication/)
+> Von [Apple Support](https://developer.apple.com/support/authentication/)
 
 ## Anforderungen
 
@@ -141,7 +141,7 @@ Dadurch wird das Zertifikat als `p12`-Datei heruntergeladen.
 
 #### Bereitstellungsprofile
 
-Öffnen Sie [Apple Developer](https://developerapplecom/account/resources/profiles/list) und wählen Sie das richtige Team aus.
+Öffnen Sie [Apple Developer](https://developer.apple.com/account/resources/profiles/list) und wählen Sie das richtige Team aus.
 
 Erstellen Sie dann ein neues Profil, indem Sie auf **+** klicken.
 

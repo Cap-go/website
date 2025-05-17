@@ -46,7 +46,7 @@ Untuk pembaruan langsung, integrasikan alat seperti **[Capgo](https://capgo.app/
 
 ## Optimalkan kesehatan aplikasi dengan [Firebase](https://firebasegooglecom/) Performance Monitoring
 
-![Firebase](https://mars-imagesimgixnet/seobot/screenshots/firebasegooglecom-ab24bd47674782df651734052f495a0c-2025-03-23jpg?auto=compress)
+![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebasegooglecom-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 ## Pilih Alat Pemantauan
 

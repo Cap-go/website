@@ -80,13 +80,13 @@ iOS 앱 검사를 위해 Inspectdev는 Windows와 Chrome DevTools와 호환되�
 
 ## [Capacitor](https://capacitorjs.com/) OTA 업데이트를 위한 3가지 주요 디버깅 도구
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
 이러한 도구들은 개발자가 OTA 업데이트를 관리하면서 특정 [디버깅 과제](https://capgo.app/docs/plugin/debugging/)를 효과적으로 해결하는 데 도움을 줍니다.
 
 ### [Capgo](https://capgo.app
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
 
 Capgo는 Capacitor 앱에서 OTA 업데이트를 처리하기 위한 안정적인 솔루션을 제공합니다. 플랫폼 가이드라인을 준수하면서 안전하고 빠른 업데이트를 보장합니다.
 
@@ -115,7 +115,7 @@ Capgo의 가격은 개인 개발자를 위한 월 12달러부터 시작하며, �
 
 ### [Inspectdev](https://inspectdev/)
 
-![Inspectdev](https://mars-imagesimgixnet/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20jpg?auto=compress)
+![Inspectdev](https://mars-images.imgix.net/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
 
 Inspectdev는 개발자들에게 일반적인 과제인 Windows에서의 iOS 디버깅을 포함하여 Android와 iOS 모두를 위한 디버깅을 단순화하도록 설계되었습니다.
 

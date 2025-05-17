@@ -49,7 +49,7 @@ iOS의 경우 **XCConfig 파일**을 사용하여 코드베이스에서 구성�
 
 API 키 저장 시 보안을 강화하기 위해 플랫폼별 도구를 활용하세요
 
-iOS에서는 보안 저장을 위해 **[Keychain Services](https://developerapplecom/documentation/security/keychain-services)**를 사용하세요:
+iOS에서는 보안 저장을 위해 **[Keychain Services](https://developer.apple.com/documentation/security/keychain-services)**를 사용하세요:
 
 [[CODE_BLOCK]]
 

@@ -97,7 +97,7 @@ Langkah-langkah ini membantu Anda mengelola peluncuran secara efektif sambil mem
 
 ## Menyiapkan Peluncuran Bertahap di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### Konfigurasi Live Update
 

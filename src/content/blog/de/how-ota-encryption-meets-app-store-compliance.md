@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Schützt Updates**: Verschlüsselung verhindert Datenabfangen, Manipulation und unbefugten Zugriff während der Update-Übertragung
 -   **Befolgt App Store Regeln**:
-    -   Apple: Erfordert HTTPS (TLS 12+), [App Transport Security](https://developerapplecom/documentation/security/preventing-insecure-network-connections) (ATS) und Code-Signierung
+    -   Apple: Erfordert HTTPS (TLS 12+), [App Transport Security](https://developer.apple.com/documentation/security/preventing-insecure-network-connections) (ATS) und Code-Signierung
     -   Google: Erzwingt SSL-Pinning, [Play Protect](https://developersgooglecom/android/play-protect) Scanning und Industriestandard-Verschlüsselung
 -   **Verwendet [AES-256](https://enwikipediaorg/wiki/Advanced_Encryption_Standard)**: Ein hochsicherer Verschlüsselungsstandard mit 256-Bit-Schlüsseln für robusten Datenschutz
 -   **Ende-zu-Ende-Sicherheit**: Updates werden von der Erstellung bis zur Installation verschlüsselt, um Integrität und gerätespezifische Entschlüsselung sicherzustellen

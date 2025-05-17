@@ -9,7 +9,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
-head_image: /convert_jpg.webp
+head_image: /convert.jpg.webp.webp
 head_image_alt: Convertir a ilustración webp
 keywords: >-
   mobile app development, live updates, OTA updates, continuous integration,

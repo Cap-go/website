@@ -46,7 +46,7 @@ Capgo は、無線経由のアップデートツールで、ネイティブブ�
 
 ## プロジェクト固有のローカルプラグインを作成する方法 | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
 
 ## ネイティブブリッジの通信フロー
 
@@ -205,7 +205,7 @@ JavaScriptとネイティブコンポーネント間のデータ送信を保護�
 
 ## [Capgo](https://capgo.app/)統合
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgoは、インスタントオーバーザエア（OTA）更新を可能にすることで、ネイティブブリッジのパフォーマンスを向上させます。750のアプリで2億3,500万の更新を配信し、ネイティブブリッジを通じた更新管理の信頼できるツールとなっています。### Capgo ブリッジの機能
 

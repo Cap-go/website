@@ -29,7 +29,7 @@ next_blog: ''
 
 ## ✅ \[解決済み\] [npm](https://wwwnpmjscom/) ERR! ERESOLVE 解決できない
 
-![npm](https://mars-imagesimgixnet/seobot/screenshots/wwwnpmjscom-ac76028e07fa565ed4006978107f5ce6-2025-03-25jpg?auto=compress)
+![npm](https://mars-images.imgix.net/seobot/screenshots/wwwnpmjscom-ac76028e07fa565ed4006978107f5ce6-2025-03-25.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -39,7 +39,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) CLIでバージョンを確認
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor CLIは、プロジェクトの依存関係バージョンを検査するための便利なコマンドを提供します。ターミナルを開き、プロジェクトディレクトリに移動して実行:
 

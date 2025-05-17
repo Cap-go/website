@@ -73,7 +73,7 @@ An diesem Punkt sollten Sie neue **ios**- und **android**-Ordner in Ihrem Svelte
 
 **Dies sind echte native Projekte!**
 
-Um später auf das Android-Projekt zuzugreifen, müssen Sie [Android Studio](https://developerandroidcom/studio/) installieren. Für iOS benötigen Sie einen Mac und sollten [Xcode](https://developerapplecom/xcode/) installieren.
+Um später auf das Android-Projekt zuzugreifen, müssen Sie [Android Studio](https://developerandroidcom/studio/) installieren. Für iOS benötigen Sie einen Mac und sollten [Xcode](https://developer.apple.com/xcode/) installieren.
 
 Zusätzlich sollten Sie eine **capacitorconfigts**-Datei in Ihrem Projekt finden, die einige grundlegende Capacitor-Einstellungen enthält, die während der Synchronisierung verwendet werden. Das Einzige, worauf Sie achten müssen, ist das **webDir**, das auf das Ergebnis Ihres Build-Befehls zeigen muss. Derzeit ist es falsch.
 

@@ -91,7 +91,7 @@ Kita akan menggunakan mesin **_macOS_**, Anda dapat melihat harga dan batasannya
 ## 1. Menggunakan API App Store Connect dengan Fastlane
 
 > Mulai Februari 2021, verifikasi dua faktor atau verifikasi dua langkah diperlukan untuk semua pengguna saat masuk ke App Store Connect. Lapisan keamanan tambahan untuk Apple ID Anda ini membantu memastikan bahwa hanya Anda yang dapat mengakses akun Anda.
-> Dari [Apple Support](https://developerapplecom/support/authentication/)
+> Dari [Apple Support](https://developer.apple.com/support/authentication/)
 
 ### Persyaratan
 

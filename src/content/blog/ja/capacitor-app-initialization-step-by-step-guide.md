@@ -34,7 +34,7 @@ Capacitorは、Webアプリとネイティブデバイス機能を橋渡しし�
 
 ## [CAPACITOR](https://capacitorjs.com/)でネイティブアプリを作る5つのステップ | Ionicリリースガイド
 
-![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
+![CAPACITOR](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28.jpg?auto=compress)
 
 <Steps>
 <Steps>
@@ -59,7 +59,7 @@ Capacitorを使用するには、以下のツールが必要です：
 - **NodejsとNPM**: 公式[Nodejsウェブサイト](https://nodejsorg)からダウンロードしてインストール
 - **コードエディタ**: VS Code、[WebStorm](https://wwwjetbrainscom/webstorm/)、[Sublime Text](https://wwwsublimetextcom/)などから選択して最新の安定版をインストール
 - **Git**: [git-scmcom](https://git-scmcom)から入手
-- **プラットフォーム固有のツール**: macOS用の[Xcode](https://developerapplecom/xcode/)やAndroid開発用の[Android Studio](https://developerandroidcom/studio)など、プラットフォーム固有のツールをインストール
+- **プラットフォーム固有のツール**: macOS用の[Xcode](https://developer.apple.com/xcode/)やAndroid開発用の[Android Studio](https://developerandroidcom/studio)など、プラットフォーム固有のツールをインストール
 
 これらをインストールしたら、Capacitor CLIのセットアップに進みます。
 

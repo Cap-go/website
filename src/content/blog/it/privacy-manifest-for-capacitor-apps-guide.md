@@ -39,7 +39,7 @@ next_blog: ''
     
     -   Usa JSON per definire i dettagli della raccolta dati
     -   Posiziona il file `PrivacyInfo.xcprivacy` nella directory corretta del tuo progetto
-    -   Validalo con strumenti come [Xcode](https://developerapplecom/xcode/) per evitare errori
+    -   Validalo con strumenti come [Xcode](https://developer.apple.com/xcode/) per evitare errori
 -   **Strumenti per semplificare il processo:**  
     Usa piattaforme come [Capgo](https://capgo.app/) per la validazione automatica del privacy manifest, aggiornamenti in tempo reale e tracciamento degli errori
     

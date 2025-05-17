@@ -49,7 +49,7 @@ Questi strumenti soddisfano diverse esigenze, dai piccoli team alle grandi impre
 
 ## 1. [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 Capgo si concentra sulla distribuzione di aggiornamenti over-the-air (OTA) rapidi per le app Capacitor, evitando i ritardi causati dalle approvazioni degli app store nel 2025. Combina solide misure di sicurezza con opzioni di integrazione fluide, inclusa la crittografia end-to-end e il controllo dettagliato delle versioni, il tutto rimanendo conforme alle linee guida Apple e Android.
 
@@ -76,7 +76,7 @@ Come piattaforma open-source, Capgo promuove la trasparenza e incoraggia la crea
 
 ## 2. [Automox](https://wwwautomoxcom/)
 
-![Automox](https://mars-imagesimgixnet/seobot/screenshots/wwwautomoxcom-06187acabed7a8a7c05012071bb9b83e-2025-02-06jpg?auto=compress)
+![Automox](https://mars-images.imgix.net/seobot/screenshots/wwwautomoxcom-06187acabed7a8a7c05012071bb9b83e-2025-02-06.jpg?auto=compress)
 
 Automox rende semplice la gestione degli aggiornamenti delle app su Windows, macOS e Linux, un vantaggio chiave per i team di sviluppo che gestiscono diversi ambienti applicativi nel 2025.
 
@@ -90,7 +90,7 @@ Automox semplifica il processo di aggiornamento con la sua ampia compatibilità 
 
 ## 3. [Ionic Appflow](https://ionicio/appflow/)
 
-![Ionic Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-06jpg?auto=compress)
+![Ionic Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-06.jpg?auto=compress)
 
 Ionic Appflow è una piattaforma creata per semplificare gli aggiornamenti delle app e ottimizzare lo [sviluppo di app mobile ibride](https://capgo.app/blog/cordova-hybrid-app-development/) per iOS e Android. Progettato per funzionare perfettamente con il framework Ionic, affronta le sfide comuni degli sviluppatori come sicurezza, velocità e controllo versione.
 
@@ -150,7 +150,7 @@ Per le organizzazioni profondamente integrate nell'ecosistema Microsoft, Intune 
 
 ## 5. [Jamf Pro](https://wwwjamfcom/products/jamf-pro/)
 
-![Jamf Pro](https://mars-imagesimgixnet/seobot/screenshots/wwwjamfcom-452a677727a22c487d11e38ebd1e7a94-2025-02-06jpg?auto=compress)
+![Jamf Pro](https://mars-images.imgix.net/seobot/screenshots/wwwjamfcom-452a677727a22c487d11e38ebd1e7a94-2025-02-06.jpg?auto=compress)
 
 Jamf Pro è progettato specificamente per la gestione dei dispositivi Apple, offrendo una profonda integrazione con l'ecosistema Apple. Gestisce gli aggiornamenti delle app per iOS, iPadOS, macOS e tvOS, dando ai team IT un controllo preciso sulla distribuzione e gli aggiornamenti delle app.
 

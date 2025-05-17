@@ -90,7 +90,7 @@ Una volta che la configurazione è pronta, il prossimo passo è configurare Andr
 
 ## Configurazione di [Android Studio](https://developerandroidcom/studio)
 
-![Android Studio](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20jpg?auto=compress)
+![Android Studio](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20.jpg?auto=compress)
 
 Android Studio è indispensabile per sviluppare con Capacitor su Android. Configurarlo correttamente garantisce un flusso di lavoro fluido e prestazioni migliori.
 
@@ -200,7 +200,7 @@ Se riscontri errori di permessi su macOS o Linux, risolvili eseguendo:
 
 Dopo aver completato questi passaggi, il tuo Android SDK è pronto per essere utilizzato con Capacitor## Configurazione Android di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### Installazione della Piattaforma
 
@@ -283,7 +283,7 @@ Risolvere questi problemi preparerà il tuo ambiente per funzionalità avanzate 
 
 ## Integrazione con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Una volta che il tuo ambiente Android è pronto, è il momento di integrare Capgo. Questo strumento semplifica il tuo [processo di aggiornamento](https://capgo.app/docs/plugin/cloud-mode/manual-update/) permettendoti di inviare aggiornamenti alla tua app Capacitor istantaneamente - senza necessità di revisione del Play Store.
 

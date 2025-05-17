@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Hauptvorteile von [Capgo](https://capgo.app/):
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07.jpg?auto=compress)
 
 -   **Sofortige Updates**: Beheben Sie Fehler oder führen Sie Funktionen ohne Verzögerungen ein
 -   **Sichere Bereitstellungen**: Updates sind verschlüsselt und nur für autorisierte Benutzer zugänglich

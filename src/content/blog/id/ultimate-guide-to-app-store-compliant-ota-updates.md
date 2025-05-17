@@ -99,17 +99,17 @@ Apple memiliki proses peninjauan yang ketat untuk aplikasi baru dan pembaruan, b
 
 | Persyaratan | Deskripsi |
 | --- | --- |
-| Penggunaan API | Aplikasi harus menggunakan API publik saja dan kompatibel dengan OS saat ini [\[3\]](https://developerapplecom/app-store/review/guidelines/) |
-| Eksekusi Kode | Aplikasi tidak boleh mengunduh atau mengeksekusi kode yang mengubah fitur atau fungsionalitas [\[3\]](https://developerapplecom/app-store/review/guidelines/) |
-| Deskripsi Pembaruan | Perubahan dan fitur baru harus dijelaskan dengan jelas di bagian "What's New" [\[3\]](https://developerapplecom/app-store/review/guidelines/) |
-| Pengujian | Aplikasi perlu diuji secara menyeluruh untuk memastikan stabilitas dan memperbaiki bug [\[3\]](https://developerapplecom/app-store/review/guidelines/) |
-| Dokumentasi | Berikan penjelasan detail untuk fitur yang mungkin tidak langsung jelas [\[3\]](https://developerapplecom/app-store/review/guidelines/) |
+| Penggunaan API | Aplikasi harus menggunakan API publik saja dan kompatibel dengan OS saat ini [\[3\]](https://developer.apple.com/app-store/review/guidelines/) |
+| Eksekusi Kode | Aplikasi tidak boleh mengunduh atau mengeksekusi kode yang mengubah fitur atau fungsionalitas [\[3\]](https://developer.apple.com/app-store/review/guidelines/) |
+| Deskripsi Pembaruan | Perubahan dan fitur baru harus dijelaskan dengan jelas di bagian "What's New" [\[3\]](https://developer.apple.com/app-store/review/guidelines/) |
+| Pengujian | Aplikasi perlu diuji secara menyeluruh untuk memastikan stabilitas dan memperbaiki bug [\[3\]](https://developer.apple.com/app-store/review/guidelines/) |
+| Dokumentasi | Berikan penjelasan detail untuk fitur yang mungkin tidak langsung jelas [\[3\]](https://developer.apple.com/app-store/review/guidelines/) |
 
 Apple juga menggunakan sistem pembaruan yang aman untuk memastikan integritas pembaruan, mempersonalisasikannya, dan memblokir serangan downgrade [\[5\]](https://supportapplecom/guide/deployment/about-software-updates-depc4c80847a/web)
 
 ### Aturan Pembaruan [Google Play](https://playgooglecom/console/signup)
 
-![Google Play](https://mars-imagesimgixnet/seobot/screenshots/playgooglecom-b46db7cd42211b9b8ee493afb4b93a4d-2025-02-28jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/playgooglecom-b46db7cd42211b9b8ee493afb4b93a4d-2025-02-28.jpg?auto=compress)
 
 Google Play mengambil pendekatan berbeda, mengandalkan otomatisasi dan AI untuk mempercepat proses peninjauan. Persetujuan sering selesai dalam hitungan jam [\[6\]](https://thisisglancecom/blog/apple-store-vs-google-play-store). Aspek utamanya meliputi:
 
@@ -139,7 +139,7 @@ Untuk tetap patuh:
 -   Gunakan pembelajaran mesin untuk menganalisis pola pembaruan  
 -   Jelaskan dengan jelas tujuan pembaruan kepada pengguna
 -   Hindari mengubah fungsionalitas inti aplikasi melalui pembaruan OTA [\[8\]](https://stackoverflowcom/questions/43951710/does-apple-allow-ota-updates-of-application)
--   Transparan tentang langganan dan detail harga [\[3\]](https://developerapplecom/app-store/review/guidelines/)
+-   Transparan tentang langganan dan detail harga [\[3\]](https://developer.apple.com/app-store/review/guidelines/)
 
 Mengikuti aturan-aturan ini membantu memastikan pembaruan Anda memenuhi persyaratan platform sambil menjaga pengguna tetap senang dan terinformasi
 

@@ -31,7 +31,7 @@ next_blog: ''
     -   [Capgo](https://capgo.app/)などのツールを導入し、迅速な更新とコンプライアンス追跡を実現
 -   **[App Store](https://wwwapplecom/app-store/)のルール**:
     
-    -   Apple: [App Tracking Transparency](https://developerapplecom/documentation/apptrackingtransparency) (ATT)に従い、プライバシーラベルを更新
+    -   Apple: [App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency) (ATT)に従い、プライバシーラベルを更新
     -   Google: データ安全性宣言を提出し、詳細な[プライバシーポリシー](https://capgo.app/privacy/)を維持
 -   **コンプライアンスのステップ**:
     
@@ -109,7 +109,7 @@ next_blog: ''
 
 ## [App Store](https://wwwapplecom/app-store/) プライバシールール
 
-![App Store](https://mars-imagesimgixnet/seobot/screenshots/wwwapplecom-9d9fbf06f7f9dd70143af6386e59a5d2-2025-03-06jpg?auto=compress)
+![App Store](https://mars-images.imgix.net/seobot/screenshots/wwwapplecom-9d9fbf06f7f9dd70143af6386e59a5d2-2025-03-06.jpg?auto=compress)
 
 主要なアプリストアが定めるプライバシー基準に準拠することは、アプリを利用可能な状態に保ち、ユーザーの信頼を得るために重要です。AppleとGoogleの両方が、開発者が順守しなければならない厳格な要件を設定しています
 
@@ -127,7 +127,7 @@ AppleのApp StoreはApp Tracking Transparency (ATT)フレームワークを通�
 
 ### [Google Play](https://playgooglecom/store/games?hl=en_US&gl=US) プライバシー基準
 
-![Google Play](https://mars-imagesimgixnet/seobot/screenshots/playgooglecom-16a80c4cf416aa7572b6b4b1e8b92617-2025-03-06jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/playgooglecom-16a80c4cf416aa7572b6b4b1e8b92617-2025-03-06.jpg?auto=compress)
 
 Google Playストアは、開発者にデータ取り扱いに関する明確な詳細の提供を求めています。主な要件は以下の通りです：
 

@@ -40,13 +40,13 @@ Pembaruan Capacitor OTA, didukung oleh alat seperti [Capgo](https://capgo.app/),
 
 ## [Appflow](https://ionicio/appflow/) Deploy: Kirim pembaruan real-time ke pengguna aplikasi Ionic Anda
 
-![Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21jpg?auto=compress)
+![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
 ## Penjelasan [Capacitor](https://capacitorjs.com/) OTA Updates
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
 
 Pembaruan OTA dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) menyederhanakan pemeliharaan aplikasi setelah rilis. Alih-alih memerlukan pengajuan app store lengkap, pengembang dapat mendorong pembaruan langsung ke pengguna.
 
@@ -67,7 +67,7 @@ Fitur-fitur ini memberikan pengembang fleksibilitas dan kontrol yang lebih besar
 
 ### Peran [Capgo](https://capgo.app/) dalam OTA Updates
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
 
 Capgo menyederhanakan proses pengelolaan pembaruan OTA untuk aplikasi Capacitor. Platformnya memprioritaskan keamanan dengan enkripsi end-to-end, memastikan konten pembaruan tetap terlindungi.
 

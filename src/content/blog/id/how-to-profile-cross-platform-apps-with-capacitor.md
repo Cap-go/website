@@ -28,7 +28,7 @@ Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://c
     
     -   [Nodejs](https://nodejsorg/en) v16+ dan npm v8+ untuk manajemen paket
     -   Capacitor CLI v50+ untuk membangun dan mendeploy aplikasi
-    -   [Xcode](https://developerapplecom/xcode/) 14+ (iOS) dan [Android Studio](https://developerandroidcom/studio) Electric Eel+ (Android) untuk pengembangan dan profiling platform tertentu
+    -   [Xcode](https://developer.apple.com/xcode/) 14+ (iOS) dan [Android Studio](https://developerandroidcom/studio) Electric Eel+ (Android) untuk pengembangan dan profiling platform tertentu
     -   [Chrome DevTools](https://developerchromecom/docs/devtools) untuk analisis kinerja web
 -   **Perangkat**:
     

@@ -111,7 +111,7 @@ Capgoのツールを使用すると、ユーザーの行動の変化に応じて
 
 ### [Capgo](https://capgo.app/)の更新管理システム
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 これらのパーソナライズされたインタラクションをサポートするために、効果的な[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)が重要です。Capgoのチャネルシステムは更新の正確な制御を提供し、ベータテスト、段階的展開、特定のユーザーセグメントを対象とした機能リリースを可能にします。リアルタイム分析と詳細な権限設定により、Capgoはアプリストアのルールへの準拠を確保します - これは特にエンタープライズアプリにとって重要です。
 

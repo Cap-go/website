@@ -44,7 +44,7 @@ next_blog: ''
 | Problème | Commande/Action de correction | Plateformes |
 | --- | --- | --- |
 | Plugins manquants | Effacer le cache npm, synchroniser les fichiers | iOS & Android |
-| Échecs de build [Xcode](https://developerapplecom/xcode/) | `pod install` | iOS |
+| Échecs de build [Xcode](https://developer.apple.com/xcode/) | `pod install` | iOS |
 | Problèmes de synchronisation Gradle | Effacer le cache `gradle` | Android |
 | Incompatibilité de version | Mettre à jour tous les packages Capacitor | iOS & Android |
 

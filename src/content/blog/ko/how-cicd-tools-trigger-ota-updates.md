@@ -33,7 +33,7 @@ OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 �
 
 ## [Appflow](https://ionicio/appflow/live-updates) 실시간 업데이트: 사용자에게 즉각적인 업데이트 배포
 
-![Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12jpg?auto=compress)
+![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
 
 <Steps>
 
@@ -45,7 +45,7 @@ OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 �
 
 ## [Capacitor](https://capacitorjs.com/)를 OTA 업데이트용으로 준비하기
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
 [자동화된 무선](https://capgo.app/blog/open-source-licecing/) (OTA) 업데이트를 위한 Capacitor 설정에는 세 가지 주요 단계가 포함됩니다: 설정 구성, 보안 조치 구현, [업데이트 시스템 통합](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). 이 프로세스는 앱을 안전하게 유지하면서 CI/CD 자동화와의 호환성을 보장합니다.
 
@@ -90,7 +90,7 @@ OTA 업데이트 프로세스를 보호하여 무단 업데이트를 방지하�
 
 ### [Capgo](https://capgo.app/)를 OTA 업데이트용으로 구성하기
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
 
 Capgo는 OTA 업데이트 프로세스를 단순화합니다. 필요한 플러그인을 설치하여 시작하세요:
 

@@ -32,7 +32,7 @@ Over-The-Air (OTA) アップデートを使用すると、アプリストアの�
 
 ### 要件：
 
--   **[Nodejs](https://nodejsorg/en)** (v14.0+)、**Capacitor CLI** (v6.0+または7.0+)、**[Android Studio](https://developerandroidcom/studio)**、および**[Xcode](https://developerapplecom/xcode/)** (iOS用)
+-   **[Nodejs](https://nodejsorg/en)** (v14.0+)、**Capacitor CLI** (v6.0+または7.0+)、**[Android Studio](https://developerandroidcom/studio)**、および**[Xcode](https://developer.apple.com/xcode/)** (iOS用)
 
 ### 開始手順：
 

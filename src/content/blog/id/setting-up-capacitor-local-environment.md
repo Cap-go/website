@@ -31,7 +31,7 @@ next_blog: ''
     -   Persyaratan sistem: RAM 8GB, penyimpanan 256GB, prosesor Intel i5/AMD Ryzen 5
 2.  **Pengaturan iOS** (khusus macOS):
     
-    -   macOS 13.0+ (Ventura), [Xcode](https://developerapplecom/xcode/) 16.0+, [CocoaPods](https://cocoapodsorg/) 1.12.0+, dan akun Apple Developer aktif
+    -   macOS 13.0+ (Ventura), [Xcode](https://developer.apple.com/xcode/) 16.0+, [CocoaPods](https://cocoapodsorg/) 1.12.0+, dan akun Apple Developer aktif
 3.  **Pengaturan Android**:
     
     -   [Android Studio](https://developerandroidcom/studio) Hedgehog (2023.1.1)+, Android SDK API level 23+, JDK 17, dan [Gradle](https://gradleorg/) 8.0+

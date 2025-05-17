@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)プロジェクトを自動的に設定する方法 ⚡️
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
 
 ## スクリプト作成基準
 
@@ -212,7 +212,7 @@ Capgoの暗号化は、デプロイメントコンテンツを確実に保護し
 
 ### [Capgo](https://capgo.app/)の機能
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
 
 Capgoの自動化プラットフォームは、実際のシナリオで高いパフォーマンスを発揮します。**24時間以内に95%のユーザーアップデート率**と**アップデートの82%のグローバル成功率**を達成しています[\[1\]](https://capgo.app/) 。主な機能の内訳は以下の通りです：
 

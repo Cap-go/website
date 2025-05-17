@@ -27,7 +27,7 @@ next_blog: ''
 -   **Privasi**: Aturan lebih ketat untuk pengumpulan data dan persetujuan pengguna
 -   **Keamanan**: Enkripsi end-to-end dan [autentikasi yang lebih kuat](https://capgo.app/docs/webapp/mfa/) diperlukan untuk pembaruan
 -   **Performa**: Aplikasi harus memenuhi tolok ukur responsivitas dan efisiensi yang lebih tinggi
--   **Pembaruan SDK**: [Aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) harus menggunakan [Xcode](https://developerapplecom/xcode/) 15+ dan SDK terbaru untuk tetap patuh
+-   **Pembaruan SDK**: [Aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) harus menggunakan [Xcode](https://developer.apple.com/xcode/) 15+ dan SDK terbaru untuk tetap patuh
 -   **Pembaruan Langsung**: Pembaruan over-the-air (OTA) harus mengikuti protokol terenkripsi dan pengujian perangkat menyeluruh
 
 **Alat Utama**: Platform seperti [Capgo](https://capgo.app/) mempermudah kepatuhan dengan mengotomatisasi [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/), pelacakan, dan enkripsi. Dengan tingkat pembaruan 95% dalam 24 jam dan alat untuk peluncuran yang aman, [Capgo](https://capgo.app/) membantu pengembang tetap selaras dengan kebijakan Apple

@@ -93,7 +93,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかる場
 ## 1. FastlaneMatchでApp Store Connect APIを使用する
 
 > 2021年2月より、App Store Connectへのサインインには二要素認証または二段階認証が必要になりました。この追加のセキュリティ層により、アカウントにアクセスできるのはあなただけになります。
-> [Apple Support](https://developerapplecom/support/authentication/)より
+> [Apple Support](https://developer.apple.com/support/authentication/)より
 
 > matchを始めるには既存の証明書を取り消す必要がありますが、心配いりません。新しい証明書が直接取得できます
 

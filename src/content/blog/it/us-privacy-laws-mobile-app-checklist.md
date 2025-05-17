@@ -36,7 +36,7 @@ Mantenersi aggiornati sulle leggi in evoluzione e utilizzare strumenti come [Cap
 
 ## [USENIX Security](https://wwwusenixorg/conference/usenixsecurity25) '24 - Navigare nella Conformità alla Privacy
 
-![USENIX Security](https://mars-imagesimgixnet/seobot/screenshots/wwwusenixorg-d8a0181fef2b5e2513a1acfa3938daca-2025-03-23jpg?auto=compress)
+![USENIX Security](https://mars-images.imgix.net/seobot/screenshots/wwwusenixorg-d8a0181fef2b5e2513a1acfa3938daca-2025-03-23.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -66,7 +66,7 @@ Diversi stati hanno emanato le proprie normative sulla privacy:
 
 ### Leggi Federali e Regole [FTC](https://wwwftcgov/)
 
-![FTC](https://mars-imagesimgixnet/seobot/screenshots/wwwftcgov-ce439e87b8dcc2429a2bbfa28a3503d6-2025-03-23jpg?auto=compress)
+![FTC](https://mars-images.imgix.net/seobot/screenshots/wwwftcgov-ce439e87b8dcc2429a2bbfa28a3503d6-2025-03-23.jpg?auto=compress)
 
 Le leggi federali stabiliscono una base per la protezione della privacy in tutte le app USA, con la Federal Trade Commission (FTC) che applica linee guida chiave:
 

@@ -58,7 +58,7 @@ Examinons maintenant les capacités de relecture de session de LogRocket.
 
 ### [LogRocket](https://logrocketcom/) : Suivi des Sessions
 
-![LogRocket](https://mars-imagesimgixnet/seobot/screenshots/logrocketcom-25aea0309421424eb663500e40eea18d-2025-03-18jpg?auto=compress)
+![LogRocket](https://mars-images.imgix.net/seobot/screenshots/logrocketcom-25aea0309421424eb663500e40eea18d-2025-03-18.jpg?auto=compress)
 
 LogRocket vous permet d'explorer les expériences utilisateur pendant les mises à jour OTA avec sa fonction de relecture de session. Il enregistre les interactions utilisateur, les requêtes réseau et les logs de console, facilitant la compréhension des problèmes.
 
@@ -73,13 +73,13 @@ Bugsnag, quant à lui, se concentre sur la priorisation des erreurs et la stabil
 
 ### [Bugsnag](https://wwwbugsnagcom/) : Gestion des Erreurs
 
-![Bugsnag](https://mars-imagesimgixnet/seobot/screenshots/wwwbugsnagcom-76749d2e4d72514946f463d57dc57ffc-2025-03-18jpg?auto=compress)
+![Bugsnag](https://mars-images.imgix.net/seobot/screenshots/wwwbugsnagcom-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
 
 Bugsnag aide à prioriser les erreurs et surveiller la stabilité des applications. Sa fonction de score de stabilité évalue l'impact des mises à jour OTA sur les performances globales de l'application. Les fonctionnalités supplémentaires incluent le regroupement automatique des erreurs, le suivi des versions et l'intégration avec les pipelines CI/CD.
 
 ### [Capgo](https://capgo.app/) : Suivi des Erreurs Intégré
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Capgo adopte une approche différente en intégrant directement le suivi des erreurs dans son processus de mise à jour OTA.
 

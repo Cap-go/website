@@ -114,7 +114,7 @@ Una volta che la pipeline è pronta, aggiungere gli aggiornamenti OTA rende più
 
 ### Utilizzo degli Aggiornamenti OTA di Capacitor con [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7djpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo rende gli aggiornamenti OTA semplici, sicuri e veloci con funzionalità come crittografia e conformità. Ecco come iniziare:
 

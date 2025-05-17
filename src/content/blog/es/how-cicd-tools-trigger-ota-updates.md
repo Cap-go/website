@@ -34,13 +34,13 @@ La automatización de actualizaciones OTA asegura una entrega más rápida, meno
 
 ## [Appflow](https://ionicio/appflow/live-updates) Live Updates: Implementa actualizaciones instantáneas directamente a tus usuarios
 
-![Appflow](https://mars-imagesimgixnet/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12jpg?auto=compress)
+![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Preparando [Capacitor](https://capacitorjs.com/) para actualizaciones OTA
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
 La configuración de Capacitor para [actualizaciones over-the-air automatizadas](https://capgo.app/blog/open-source-licecing/) (OTA) involucra tres pasos clave: configurar la instalación, implementar medidas de seguridad e [integrar un sistema de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Este proceso asegura la compatibilidad con la automatización CI/CD mientras mantiene tu aplicación segura.
 
@@ -88,7 +88,7 @@ Para aplicar estas características de seguridad, incluye lo siguiente en tu con
 
 ### Configurando [Capgo](https://capgo.app/) para actualizaciones OTA
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
 
 Capgo simplifica el proceso de actualización OTA. Comienza instalando el plugin requerido:
 

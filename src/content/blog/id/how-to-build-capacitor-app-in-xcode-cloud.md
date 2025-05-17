@@ -34,7 +34,7 @@ Menggunakan Ionic adalah opsional, untuk Cordova mungkin bisa berfungsi, tapi sa
 
 ![Price Xcode Cloud](/xcode_cloud_price.webp)
 
-[https://developerapplecom/xcode-cloud/](https://developerapplecom/xcode-cloud/)
+[https://developer.apple.com/xcode-cloud/](https://developer.apple.com/xcode-cloud/)
 
 Layanan ini '_gratis_' sampai batas tertentu  
 Anda dapat melihat harga dan batas di screenshot (harga pada saat tutorial dibuat, bisa berubah di masa mendatang)

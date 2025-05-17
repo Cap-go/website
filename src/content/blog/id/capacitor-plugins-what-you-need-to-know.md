@@ -39,7 +39,7 @@ Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahan
 
 ## Cara Membangun Plugin [Capacitor](https://capacitorjs.com/) Anda Sendiri
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <Steps>
 
@@ -61,7 +61,7 @@ Plugin Capacitor menggunakan pengaturan dua lapis, memisahkan fungsionalitas web
 | Komponen | Implementasi |
 | --- | --- |
 | API JavaScript | Definisi [TypeScript](https://wwwtypescriptlangorg/) dengan metode yang diekspor |
-| Kode Native | [Swift](https://developerapplecom/swift/) (iOS) dan [Kotlin](https://kotlinlangorg/)/Java (Android) |
+| Kode Native | [Swift](https://developer.apple.com/swift/) (iOS) dan [Kotlin](https://kotlinlangorg/)/Java (Android) |
 | Lapisan Jembatan | Serialisasi pesan JSON |
 
 Struktur ini menyederhanakan tugas seperti mengkonversi tipe data antara lingkungan JavaScript dan native. Misalnya, plugin Filesystem secara otomatis mengkonversi data biner ke Base64 untuk transfer, sementara tipe data primitif ditangani menggunakan JSON [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjs.com/docs/plugins)

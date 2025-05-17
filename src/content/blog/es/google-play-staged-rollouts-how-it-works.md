@@ -50,7 +50,7 @@ Los lanzamientos graduales equilibran la entrega rápida con riesgo controlado, 
 
 ### Configuración en [Google Play Console](https://developerandroidcom/distribute/console)
 
-![Google Play Console](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-ed168370876f8cab0f4fb973291444ec-2025-03-22jpg?auto=compress)
+![Google Play Console](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-ed168370876f8cab0f4fb973291444ec-2025-03-22.jpg?auto=compress)
 
 Para iniciar un lanzamiento gradual, dirígete a la sección 'Release' en Google Play Console. Elige tu track objetivo (Producción, Beta o Alpha) y crea un nuevo lanzamiento. Durante este proceso, encontrarás el selector de porcentaje bajo "Release settings".
 
@@ -175,7 +175,7 @@ Los estudios muestran que los lanzamientos graduales bien ejecutados logran una 
 
 ### Cómo [Capgo](https://capgo.app/) Agrega Valor
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Para aplicaciones de [Capacitor](https://capacitorjs.com/), Capgo agiliza los lanzamientos graduales ofreciendo una gestión precisa de actualizaciones mientras cumple con las pautas de Google Play. Su sistema de canales se integra perfectamente con los planes de lanzamiento existentes
 

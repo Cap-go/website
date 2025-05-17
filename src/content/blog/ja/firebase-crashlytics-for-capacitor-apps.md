@@ -29,7 +29,7 @@ next_blog: ''
     -   重大なエラーを監視してアプリの安定性を維持
 -   **セットアップ要件：**
     
-    -   **[Nodejs](https://nodejsorg/en) (v16以上)**、**Capacitor (v4以上)**、**[Xcode](https://developerapplecom/xcode/) 14以上**と**[Android Studio](https://developerandroidcom/studio) Electric Eel**などのツールをインストール
+    -   **[Nodejs](https://nodejsorg/en) (v16以上)**、**Capacitor (v4以上)**、**[Xcode](https://developer.apple.com/xcode/) 14以上**と**[Android Studio](https://developerandroidcom/studio) Electric Eel**などのツールをインストール
     -   [Firebase](https://firebasegooglecom/)設定ファイル（iOS用の`GoogleService-Infoplist`、Android用の`google-servicesjson`）をダウンロード
     -   `Podfile`（iOS）や`buildgradle`（Android）などのプラットフォーム固有のファイルを更新
 -   **主要なステップ：**

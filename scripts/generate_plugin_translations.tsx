@@ -3,8 +3,8 @@ import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
-import { translateText } from './translate'
 import { commonReplacements } from './commonReplacements'
+import { translateText } from './translate'
 
 const batchSize = 20
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))

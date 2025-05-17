@@ -87,7 +87,7 @@ Android Studioとエミュレータはシステムに負荷がかかることに
 
 ## [Android Studio](https://developerandroidcom/studio) のセットアップ
 
-![Android Studio](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20jpg?auto=compress)
+![Android Studio](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20.jpg?auto=compress)
 
 Android StudioはAndroidでCapacitorを開発する際に必須です。正しくセットアップすることで、スムーズなワークフローとより良いパフォーマンスが確保されます。
 

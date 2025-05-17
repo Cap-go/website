@@ -24,7 +24,7 @@ next_blog: ''
 
 ### Wichtige Erkenntnisse:
 
--   [**Apple App Store**](https://developerapplecom/app-store/guidelines/): OTA-Updates sind auf JavaScript und Asset-Dateien beschränkt. Keine Änderungen am nativen Code oder der Kernfunktionalität
+-   [**Apple App Store**](https://developer.apple.com/app-store/guidelines/): OTA-Updates sind auf JavaScript und Asset-Dateien beschränkt. Keine Änderungen am nativen Code oder der Kernfunktionalität
     
 -   [**Google Play Store**](https://developerandroidcom/distribute/play-policies): Mehr Flexibilität, aber Updates müssen weiterhin Sicherheits- und Missbrauchsschutzrichtlinien folgen
     
@@ -48,9 +48,9 @@ next_blog: ''
 
 ## App Store-Regeln für OTA-Updates
 
-### [Apple App Store](https://developerapplecom/app-store/guidelines/) Regeln
+### [Apple App Store](https://developer.apple.com/app-store/guidelines/) Regeln
 
-![Apple App Store](https://mars-imagesimgixnet/seobot/screenshots/developerapplecom-647d6fa866954dfb3c8455f75fc9840a-2025-02-15jpg?auto=compress)
+![Apple App Store](https://mars-images.imgix.net/seobot/screenshots/developer.apple.com-647d6fa866954dfb3c8455f75fc9840a-2025-02-15.jpg?auto=compress)
 
 Apples Richtlinien, insbesondere §3.3.2, setzen strenge Grenzen für OTA-Updates von Capacitor-Anwendungen. Updates sind **nur** für JavaScript und Assets erlaubt. Wichtige Einschränkungen sind:
 
@@ -64,7 +64,7 @@ Apples Richtlinien, insbesondere §3.3.2, setzen strenge Grenzen für OTA-Update
 
 ### [Google Play Store](https://developerandroidcom/distribute/play-policies) Regeln
 
-![Google Play Store](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-e3029ffd689b429daa7c9abf93d9ce47-2025-02-15jpg?auto=compress)
+![Google Play Store](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-e3029ffd689b429daa7c9abf93d9ce47-2025-02-15.jpg?auto=compress)
 
 Google Play verfolgt einen weniger strengen Ansatz bei OTA-Updates, setzt aber dennoch klare Grenzen zur Verhinderung von Missbrauch. Ihre Richtlinien konzentrieren sich auf:
 
@@ -99,7 +99,7 @@ Um diese Probleme zu vermeiden, ist es wichtig, die Capacitor-spezifischen Imple
 
 ## OTA Update-Richtlinien für [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### Technische Compliance-Schritte
 
@@ -149,7 +149,7 @@ Diese Sicherheitsmaßnahmen entsprechen Apples Code-Signing-Anforderungen und Go
 
 ## [Capgo](https://capgo.app/) Update-Managementsystem
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo bietet eine sichere Möglichkeit, [Capacitor OTA-Updates](https://capgo.app/) bereitzustellen und zu verwalten, um eine reibungslose Verteilung unter Einhaltung der Compliance-Standards zu gewährleisten. Es bietet auch fortschrittliche Tools für [Update-Management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) auf Unternehmensebene
 

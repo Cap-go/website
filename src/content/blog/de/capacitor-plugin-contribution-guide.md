@@ -24,8 +24,8 @@ next_blog: ''
 
 [Capacitor](https://capacitorjs.com/) Plugins verbinden Webtechnologien mit nativen Gerätefunktionen und ermöglichen die [plattformübergreifende App-Entwicklung](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) Diese Anleitung hilft dir bei:
 
--   **Einrichtung deiner Entwicklungsumgebung**: Tools wie [Nodejs](https://nodejsorg/en), [Xcode](https://developerapplecom/xcode/) und [Android Studio](https://developerandroidcom/studio) sind essentiell
--   **Einhaltung von Code-Standards**: Verwende [TypeScript](https://wwwtypescriptlangorg/), [Swift](https://developerapplecom/swift/) und [Kotlin](https://kotlinlangorg/) mit einheitlichen Namenskonventionen und Fehlerbehandlung
+-   **Einrichtung deiner Entwicklungsumgebung**: Tools wie [Nodejs](https://nodejsorg/en), [Xcode](https://developer.apple.com/xcode/) und [Android Studio](https://developerandroidcom/studio) sind essentiell
+-   **Einhaltung von Code-Standards**: Verwende [TypeScript](https://wwwtypescriptlangorg/), [Swift](https://developer.apple.com/swift/) und [Kotlin](https://kotlinlangorg/) mit einheitlichen Namenskonventionen und Fehlerbehandlung
 -   **Gründliches Testen**: Schreibe Unit-Tests für JavaScript, iOS und Android zur Gewährleistung der Zuverlässigkeit
 -   **Klare Dokumentation**: Nutze JSDoc und README-Dateien für eine einfache Übernahme
 -   **Pull Request einreichen**: Stelle hohe Code-Qualität, Tests und Dokumentation vor dem Beitrag sicher

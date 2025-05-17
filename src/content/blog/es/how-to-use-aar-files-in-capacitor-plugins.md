@@ -43,7 +43,7 @@ Siguiendo esta guía, podrás incorporar archivos AAR en tus plugins de Capacito
 
 ## Cómo integrar una biblioteca Android (archivo AAR) en un plugin de [capacitor](https://capacitorjs.com/)
 
-![capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-15jpg?auto=compress)
+![capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-15.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -140,7 +140,7 @@ Mantener los archivos de configuración en subdirectorios específicos del prove
 
 ## Pasos de Configuración de [Gradle](https://gradleorg/)
 
-![Gradle](https://mars-imagesimgixnet/seobot/screenshots/gradleorg-85d271057dfb5e2e134ec99beaad5682-2025-03-15jpg?auto=compress)
+![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradleorg-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
 
 ### Actualizando buildgradle
 

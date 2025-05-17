@@ -43,7 +43,7 @@ Esta integración asegura actualizaciones rápidas, seguras y rentables, hacién
 
 ## Tutorial de [GitHub Actions](https://docsgithubcom/actions) - Conceptos Básicos y Pipeline CI/CD
 
-![GitHub Actions](https://mars-imagesimgixnet/seobot/screenshots/docsgithubcom-90237daad1b336de5d9b7f1a85aa7441-2025-03-16jpg?auto=compress)
+![GitHub Actions](https://mars-images.imgix.net/seobot/screenshots/docsgithubcom-90237daad1b336de5d9b7f1a85aa7441-2025-03-16.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -66,7 +66,7 @@ Una vez que estos estén listos, puedes proceder a agregar Capgo a tu proyecto p
 
 ### Agregando [Capgo](https://capgo.app/) a Tu Proyecto
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
 
 Para integrar Capgo, instálalo en tu proyecto Capacitor usando su herramienta CLI. Según Martin Donadieu, fundador de Capgo:
 
