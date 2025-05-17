@@ -68,7 +68,7 @@ OTAアップデートとバージョン管理を簡単に管理するためのCa
 
 ### 初期セットアップ手順
 
-[Capgoアップデータープラグイン](https://capgo.app/docs/plugin/self-hosted/manual-update/)をインストールから始めます:
+[Capgoアップデータープラグイン](https://capgo.app/docs/plugin/self-hosted/manual-update/) をインストールから始めます:
 
 ```bash
 npm install @capgo/capacitor-updater
@@ -112,7 +112,7 @@ CapacitorUpdater.initialize({
 
 ### バージョン管理の統合
 
-Capgoは、CI/CDプラットフォームとうまく連携し、[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を簡単にします。サポートされているプラットフォームには以下があります:
+Capgoは、CI/CDプラットフォームとうまく連携し、[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を簡単にします。サポートされているプラットフォームには以下があります:
 
 - [GitHub Actions](https://docs.github.com/actions)
 - [GitLab CI](https://docs.gitlab.com/ee/ci/)

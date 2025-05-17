@@ -241,7 +241,7 @@ OTAアップデートのベストプラクティスについての簡単な概�
 | 配信 | リスクを最小限に | ターゲットチャネルを使用して更新を展開 |
 | 監視 | 信頼性を確保 | 更新成功率と採用率を追跡 |
 
-これらのプラクティスは、Capgoのようなプラットフォームが迅速で [安全なアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を提供するために不可欠です。
+これらのプラクティスは、Capgoのようなプラットフォームが迅速で [安全なアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を提供するために不可欠です。
 
 ### [Capgo](https://capgo.app/) の機能
 

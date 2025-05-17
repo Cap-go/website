@@ -118,7 +118,7 @@ Capgoはセキュリティを確保し、CI/CDワークフローとシームレ�
 
 ![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08jpg?auto=compress)
 
-CapgoはCapacitorアプリ向けの一流OTAソリューションで、[アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)を簡素化するツールを提供します：
+CapgoはCapacitorアプリ向けの一流OTAソリューションで、[アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を簡素化するツールを提供します：
 
 -   **セキュリティ機能**: アップデートはエンドツーエンドで暗号化され、認可されたユーザーのみがアクセス可能
 -   **CI/CD統合**: [GitHub](https://githubcom/)、[GitLab](https://aboutgitlabcom/)、[Azure DevOps](https://azuremicrosoftcom/en-us/products/devops)などのプラットフォームとシームレスに連携

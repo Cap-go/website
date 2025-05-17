@@ -115,7 +115,7 @@ Capgoなどの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-upd
 
 ツールを選択する際は、自動監視を提供するものに注目してください。**世界的に434msの平均応答時間**[\[1\]](https://capgo.app/)を持つツールにより、問題が発生した際に迅速な対応が可能になります。
 
-さらなる制御のために、更新配信用の[チャネルシステム](https://capgo.app/docs/plugin/cloud-mode/channel-system/)の使用を検討してください。これにより、特定のユーザーグループに異なるバージョンをターゲットにでき、ベータテストとステージドロールアウトがスムーズになります。さらに、アプリストアのルールを遵守しながらライブコードの変更をプッシュする機能により、[更新プロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/)を簡素化し、スピードアップすることができます。
+さらなる制御のために、更新配信用の[チャネルシステム](https://capgo.app/docs/plugin/cloud-mode/channel-system/)の使用を検討してください。これにより、特定のユーザーグループに異なるバージョンをターゲットにでき、ベータテストとステージドロールアウトがスムーズになります。さらに、アプリストアのルールを遵守しながらライブコードの変更をプッシュする機能により、[更新プロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を簡素化し、スピードアップすることができます。
 
 ## ルールと制限
 

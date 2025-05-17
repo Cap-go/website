@@ -81,6 +81,7 @@ const processFile = async (file: string, lang: string): Promise<void> => {
       .replace(/([^.\s])jpg\)/g, '$1.jpg)')
       .replace(/([^.\s])gif\)/g, '$1.gif)')
       .replace(/([^.\s])webp\)/g, '$1.webp)')
+      .replace(/update\/\)を/g, 'update/) を')
       .replace(/capacitorjscom/g, 'capacitorjs.com')
       .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
       .replace(/assetsseobotaicom/g, 'assets.seobotai.com')

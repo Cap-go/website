@@ -254,7 +254,7 @@ Capgoは、安全な保存と転送方法をプラットフォームに組み込
 
 ### Capgoのセキュリティアーキテクチャ
 
-Capgoのシステムは、750の本番アプリに2,350万以上の[安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を正常に配信しています[\[1\]](https://capgo.app/) 。**エンドツーエンド暗号化**を使用し、認可されたユーザーのみが更新を復号化できることを保証します。以下がそのセキュリティ設定です：
+Capgoのシステムは、750の本番アプリに2,350万以上の[安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を正常に配信しています[\[1\]](https://capgo.app/) 。**エンドツーエンド暗号化**を使用し、認可されたユーザーのみが更新を復号化できることを保証します。以下がそのセキュリティ設定です：
 
 ```javascript
 const capgoSecurity = {

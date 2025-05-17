@@ -32,7 +32,7 @@ next_blog: ''
 -   **コンプライアンスを維持する方法**:
     -   アプリの核となる機能を変更しない。
     -   HTTPSやデジタル署名などの安全な配信方法を使用。
-    -   [アップデートの目的](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)をユーザーに明確に伝える。
+    -   [アップデートの目的](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) をユーザーに明確に伝える。
 
 ### OTAルールの比較
 
@@ -136,7 +136,7 @@ Googleは依然としてセキュリティ対策を実施し、ポリシー違�
 
 コンプライアンスを維持するために:
 
--   セキュリティの問題について[アップデートプロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/)を定期的に監査する。
+-   セキュリティの問題について[アップデートプロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を定期的に監査する。
 -   機械学習を使用してアップデートパターンを分析する。
 -   アップデートの目的をユーザーに明確に説明する。
 -   OTAアップデートを通じてアプリの核となる機能を変更することを避ける[\[8\]](https://stackoverflow.com/questions/43951710/does-apple-allow-ota-updates-of-application)。

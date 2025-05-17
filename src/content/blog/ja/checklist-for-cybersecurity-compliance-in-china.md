@@ -64,7 +64,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 これらの更新は、施行を強化し新たなサイバーセキュリティの課題に対処することを目的としています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
-更新やセキュリティパッチに取り組むアプリ開発者は、[安全な更新プラットフォーム](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を利用することで、これらの規則のコンプライアンスを簡素化できます。例えば、**Capgo** (https://capgo.app)はエンドツーエンドの暗号化とリアルタイムの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)を提供しており、400万以上のモバイルアプリと世界で最も大規模なモバイルインターネットユーザーを有する市場では特に価値があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
+更新やセキュリティパッチに取り組むアプリ開発者は、[安全な更新プラットフォーム](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を利用することで、これらの規則のコンプライアンスを簡素化できます。例えば、**Capgo** (https://capgo.app)はエンドツーエンドの暗号化とリアルタイムの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を提供しており、400万以上のモバイルアプリと世界で最も大規模なモバイルインターネットユーザーを有する市場では特に価値があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
 ## データプライバシー要件
 

@@ -44,7 +44,7 @@ npx @capgo/cli init
 
 このコマンドは、以下を含むOTAアップデートに必要なコンポーネントを設定します：
 
-- [セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)を確保するための**エンドツーエンド暗号化**
+- [セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を確保するための**エンドツーエンド暗号化**
 
 - アップデートのロールアウトを管理する**バージョン管理**
 
