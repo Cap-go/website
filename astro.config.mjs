@@ -84,8 +84,9 @@ export default defineConfig({
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: {
-        LanguageSelect: './src/components/LanguageSelect.astro',
+        Head: './src/components/doc/Head.astro',
         Search: './src/components/doc/Search.astro',
+        LanguageSelect: './src/components/doc/LanguageSelect.astro',
       },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },
