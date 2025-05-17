@@ -22,7 +22,7 @@ locale: it
 next_blog: ''
 ---
 
-I meccanismi di rollback garantiscono stabilità durante l'aggiornamento dei plugin [Capacitor](https://capacitorjscom/) Consentono di tornare a una versione precedente se gli aggiornamenti causano bug o problemi, minimizzando i tempi di inattività e migliorando l'esperienza utente
+I meccanismi di rollback garantiscono stabilità durante l'aggiornamento dei plugin [Capacitor](https://capacitorjs.com/) Consentono di tornare a una versione precedente se gli aggiornamenti causano bug o problemi, minimizzando i tempi di inattività e migliorando l'esperienza utente
 
 ### Punti Chiave:
 
@@ -63,7 +63,7 @@ Nei [plugin Capacitor](https://capgo.app/plugins/), i meccanismi di rollback fun
 
 I rollback sono essenziali quando un aggiornamento causa problemi come bug critici, prestazioni più lente, conflitti di versione, problemi di integrazione o importanti reclami degli utenti Capgo riporta che l'82% degli aggiornamenti ha successo globalmente [\[1\]](https://capgo.app/), ma per i casi rimanenti, avere un sistema di rollback affidabile è cruciale per risolvere rapidamente i problemi
 
-### Architettura di Rollback [Capacitor](https://capacitorjscom/)
+### Architettura di Rollback [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 

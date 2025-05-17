@@ -21,7 +21,7 @@ locale: es
 next_blog: ''
 ---
 
-[Capgo](https://capgo.app/) y [GitHub Actions](https://docsgithubcom/actions) juntos simplifican la implementación de actualizaciones para aplicaciones [Capacitor](https://capacitorjscom/). Aquí está por qué esta integración merece tu atención:
+[Capgo](https://capgo.app/) y [GitHub Actions](https://docsgithubcom/actions) juntos simplifican la implementación de actualizaciones para aplicaciones [Capacitor](https://capacitorjs.com/). Aquí está por qué esta integración merece tu atención:
 
 -   **Ahorra Dinero**: Reduce costos de CI/CD hasta $26,100 en 5 años comparado con [AppFlow](https://ionicio/appflow/)
 -   **Actualizaciones Rápidas**: Implementa actualizaciones instantáneamente con 95% de usuarios recibiéndolas en 24 horas

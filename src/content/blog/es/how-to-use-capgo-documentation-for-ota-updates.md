@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Puntos Clave:
 
--   **¿Qué es Capgo?** Una plataforma de código abierto para actualizaciones en vivo en aplicaciones de [Capacitor](https://capacitorjscom/)
+-   **¿Qué es Capgo?** Una plataforma de código abierto para actualizaciones en vivo en aplicaciones de [Capacitor](https://capacitorjs.com/)
 -   **¿Por qué actualizaciones OTA?** Ahorra tiempo, mejora la experiencia del usuario y corrige errores rápidamente
 -   **¿Cómo Empezar?**
     -   Instala el [plugin de Capgo](https://capgo.app/plugins/): `npm install @capgo/capacitor-updater`

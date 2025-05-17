@@ -24,7 +24,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Vous souhaitez simplifier [les mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) et le contrôle de version ?** La gestion sémantique des versions (SemVer) combinée aux mises à jour Over-The-Air (OTA) de [Capgo](https://capgo.app/) rend la gestion des applications [Capacitor](https://capacitorjscom/) plus simple et plus rapide. Voici comment :
+**Vous souhaitez simplifier [les mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) et le contrôle de version ?** La gestion sémantique des versions (SemVer) combinée aux mises à jour Over-The-Air (OTA) de [Capgo](https://capgo.app/) rend la gestion des applications [Capacitor](https://capacitorjs.com/) plus simple et plus rapide. Voici comment :
 
 -   **Principes de base du versionnement sémantique :** Les versions utilisent le format `MAJOR.MINOR.PATCH` :
     

@@ -12,7 +12,7 @@ Questa versione principale è qui per seguire la versione principale di Capacito
 
 Prima segui la guida di migrazione di Capacitor:
 
-[https://capacitorjscom/docs/updating/5-0](https://capacitorjscom/docs/updating/5-0/)
+[https://capacitorjs.com/docs/updating/5-0](https://capacitorjs.com/docs/updating/5-0/)
 
 ## Installazione
 

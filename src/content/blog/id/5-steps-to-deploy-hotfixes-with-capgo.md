@@ -130,9 +130,9 @@ Setelah hotfix Anda diunggah dan dilabeli, lanjutkan ke Step 4 untuk mengkonfigu
 
 ###### sbb-itb-f9944d2
 
-## Sistem Live Update Capgo untuk Aplikasi [Capacitor](https://capacitorjscom/)
+## Sistem Live Update Capgo untuk Aplikasi [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 

@@ -109,7 +109,7 @@ AndroidとiOSのみで利用可能
 
 AndroidとiOSのみで利用可能
 
-デフォルト：`https://apicapgoapp/updates`
+デフォルト：`https://apicapgo.app/updates`
 
 ```json
 // capacitorconfigjson
@@ -128,7 +128,7 @@ AndroidとiOSのみで利用可能
 
 AndroidとiOSのみで利用可能。統計レポートを無効にするには""に設定します
 
-デフォルト：`https://apicapgoapp/stats`
+デフォルト：`https://apicapgo.app/stats`
 
 ```json
 // capacitorconfigjson
@@ -188,7 +188,7 @@ AndroidとiOSのみで利用可能
 ストアアップデートが発生した場合、ネイティブバージョンへの強制リセットを無効にします
 :::
 
-[ウェブアプリ](https://webcapgoapp/login)でのみ利用可能な設定が他にもたくさんあります
+[ウェブアプリ](https://webcapgo.app/login)でのみ利用可能な設定が他にもたくさんあります
 
 プラグインを設定するには、以下の設定を使用します：
 

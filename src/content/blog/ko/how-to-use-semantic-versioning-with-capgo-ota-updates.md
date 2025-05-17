@@ -19,7 +19,7 @@ locale: ko
 next_blog: ''
 ---
 
-**[앱 업데이트](https://capgo.app/plugins/capacitor-updater/)와 버전 관리를 단순화하고 싶으신가요?** Semantic Versioning (SemVer)과 [Capgo](https://capgo.app/)의 무선 업데이트(OTA)를 결합하면 [Capacitor](https://capacitorjscom/) 앱 관리가 더 쉽고 빨라집니다. 방법은 다음과 같습니다:
+**[앱 업데이트](https://capgo.app/plugins/capacitor-updater/)와 버전 관리를 단순화하고 싶으신가요?** Semantic Versioning (SemVer)과 [Capgo](https://capgo.app/)의 무선 업데이트(OTA)를 결합하면 [Capacitor](https://capacitorjs.com/) 앱 관리가 더 쉽고 빨라집니다. 방법은 다음과 같습니다:
 
 -   **시맨틱 버전 관리 기본사항:** 버전은 `MAJORMINORPATCH` 형식을 사용합니다:
     

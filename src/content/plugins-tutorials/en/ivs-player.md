@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/ivs-player
 
 ## Installation

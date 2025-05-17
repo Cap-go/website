@@ -68,7 +68,7 @@ Apple과 Google 모두 엄격한 검토 절차를 시행하여 작은 업데이�
 
 ## Capacitor OTA 업데이트 작동 방식
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19jpg?auto=compress)
 
 [Capacitor OTA 업데이트](https://capgo.app/ja/)는 앱 배포를 더 빠르고 효율적으로 만들어 개발자가 앱스토어 승인을 기다리지 않고 변경사항을 푸시할 수 있게 합니다.
 

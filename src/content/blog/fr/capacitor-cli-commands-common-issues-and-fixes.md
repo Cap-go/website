@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Vous rencontrez des problèmes avec la CLI [Capacitor](https://capacitorjscom/) ?** Voici un guide rapide pour résoudre les problèmes courants comme les erreurs de plugins, les erreurs de build et les problèmes réseau. La CLI Capacitor est essentielle pour gérer les mises à jour d'applications, en particulier les mises à jour over-the-air (OTA), qui vous permettent de contourner les révisions de l'app store et de déployer les correctifs plus rapidement. Voici les points essentiels :
+**Vous rencontrez des problèmes avec la CLI [Capacitor](https://capacitorjs.com/) ?** Voici un guide rapide pour résoudre les problèmes courants comme les erreurs de plugins, les erreurs de build et les problèmes réseau. La CLI Capacitor est essentielle pour gérer les mises à jour d'applications, en particulier les mises à jour over-the-air (OTA), qui vous permettent de contourner les révisions de l'app store et de déployer les correctifs plus rapidement. Voici les points essentiels :
 
 -   **Problèmes courants et solutions** :
     
@@ -50,7 +50,7 @@ next_blog: ''
 
 **En résumé** : Une gestion efficace des commandes CLI assure des mises à jour fluides et de meilleures performances. Des outils comme Capgo simplifient les déploiements et réduisent les erreurs. Suivez ces étapes pour maintenir votre application en bon état de fonctionnement.
 
-## Comment corriger la commande Dev Quasar-Framework et [Capacitor](https://capacitorjscom/)
+## Comment corriger la commande Dev Quasar-Framework et [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
 

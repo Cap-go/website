@@ -30,7 +30,7 @@ Las herramientas de CI/CD hacen que las actualizaciones over-the-air (OTA) sean 
     -   **Opciones de reversión:** Revierte automáticamente las actualizaciones si aumentan las tasas de error
 -   **Herramientas destacadas:** [Capgo](https://capgo.app/) simplifica las actualizaciones OTA con comandos CLI, integración de webhooks y seguimiento detallado de métricas
 
-La automatización de actualizaciones OTA asegura una entrega más rápida, menos errores y mejor estabilidad de la aplicación. A continuación, encontrarás instrucciones paso a paso para configurar aplicaciones [Capacitor](https://capacitorjscom/) con pipelines CI/CD.
+La automatización de actualizaciones OTA asegura una entrega más rápida, menos errores y mejor estabilidad de la aplicación. A continuación, encontrarás instrucciones paso a paso para configurar aplicaciones [Capacitor](https://capacitorjs.com/) con pipelines CI/CD.
 
 ## [Appflow](https://ionicio/appflow/live-updates) Live Updates: Implementa actualizaciones instantáneas directamente a tus usuarios
 
@@ -38,9 +38,9 @@ La automatización de actualizaciones OTA asegura una entrega más rápida, meno
 
 <iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Preparando [Capacitor](https://capacitorjscom/) para actualizaciones OTA
+## Preparando [Capacitor](https://capacitorjs.com/) para actualizaciones OTA
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
 La configuración de Capacitor para [actualizaciones over-the-air automatizadas](https://capgo.app/blog/open-source-licecing/) (OTA) involucra tres pasos clave: configurar la instalación, implementar medidas de seguridad e [integrar un sistema de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Este proceso asegura la compatibilidad con la automatización CI/CD mientras mantiene tu aplicación segura.
 
@@ -172,7 +172,7 @@ Para actualizaciones de alto riesgo, considera usar la función de implementaci�
 
 ### Actualizaciones por Etapas y Grupos de Usuarios
 
-Las actualizaciones por etapas te permiten controlar cómo se implementan las actualizaciones, asegurando una experiencia fluida para los usuarios. Por ejemplo, el comando _promote_ de Capgo (discutido anteriormente) ayuda a gestionar grupos beta. Con datos empresariales que muestran que casi la mitad de las apps (49%) necesitan actualizaciones mensuales [\[4\]](https://capacitorjscom/docs/guides/ci-cd), la implementación por etapas se convierte en una estrategia clave para mantener las apps estables mientras se implementan cambios gradualmente.
+Las actualizaciones por etapas te permiten controlar cómo se implementan las actualizaciones, asegurando una experiencia fluida para los usuarios. Por ejemplo, el comando _promote_ de Capgo (discutido anteriormente) ayuda a gestionar grupos beta. Con datos empresariales que muestran que casi la mitad de las apps (49%) necesitan actualizaciones mensuales [\[4\]](https://capacitorjs.com/docs/guides/ci-cd), la implementación por etapas se convierte en una estrategia clave para mantener las apps estables mientras se implementan cambios gradualmente.
 
 ### Activadores de Actualización Basados en Métricas
 
@@ -234,7 +234,7 @@ Este tipo de configuración asegura que las fallas críticas se aborden rápidam
 
 ### Reducción del Uso de Datos
 
-Las actualizaciones delta son una excelente manera de reducir el uso de datos, reduciendo los tamaños de carga entre 70-90% en comparación con las actualizaciones completas [\[4\]](https://capacitorjscom/docs/guides/ci-cd). Estas optimizaciones pueden integrarse directamente en tu pipeline de CI/CD con reglas como estas:
+Las actualizaciones delta son una excelente manera de reducir el uso de datos, reduciendo los tamaños de carga entre 70-90% en comparación con las actualizaciones completas [\[4\]](https://capacitorjs.com/docs/guides/ci-cd). Estas optimizaciones pueden integrarse directamente en tu pipeline de CI/CD con reglas como estas:
 
 -   **Actualizaciones Delta**: Crear diferencias binarias para incluir solo los componentes que han cambiado
 -   **Optimización de Recursos**: Convertir imágenes a formatos como WebP o AVIF para reducir tamaños de archivo

@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-Le suivi automatisé du consentement est essentiel pour les applications [Capacitor](https://capacitorjscom/) afin de respecter les réglementations sur la confidentialité et les règles des plateformes. Voici pourquoi c'est important et comment le mettre en œuvre :
+Le suivi automatisé du consentement est essentiel pour les applications [Capacitor](https://capacitorjs.com/) afin de respecter les réglementations sur la confidentialité et les règles des plateformes. Voici pourquoi c'est important et comment le mettre en œuvre :
 
 -   **Pourquoi c'est important** :
     

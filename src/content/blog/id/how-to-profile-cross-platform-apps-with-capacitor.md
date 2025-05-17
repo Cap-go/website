@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://capacitorjscom/) membantu Anda mengidentifikasi masalah kinerja di platform iOS, Android, dan web. Berikut panduan singkat untuk memulai:
+Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://capacitorjs.com/) membantu Anda mengidentifikasi masalah kinerja di platform iOS, Android, dan web. Berikut panduan singkat untuk memulai:
 
 -   **Alat yang Dibutuhkan**:
     

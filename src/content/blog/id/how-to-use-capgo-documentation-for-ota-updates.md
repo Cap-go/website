@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Poin Penting:
 
--   **Apa itu Capgo?** Platform open-source untuk pembaruan langsung di aplikasi [Capacitor](https://capacitorjscom/)
+-   **Apa itu Capgo?** Platform open-source untuk pembaruan langsung di aplikasi [Capacitor](https://capacitorjs.com/)
 -   **Mengapa OTA Updates?** Hemat waktu, tingkatkan pengalaman pengguna, dan perbaiki bug dengan cepat
 -   **Bagaimana Cara Memulai?**
     -   Instal [plugin Capgo](https://capgo.app/plugins/): `npm install @capgo/capacitor-updater`

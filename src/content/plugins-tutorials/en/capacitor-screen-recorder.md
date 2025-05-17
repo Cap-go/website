@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/capacitor-screen-recorder
 A Capacitor plugin for recording the device's screen.
 

@@ -97,7 +97,7 @@ La tenue de registres précis est essentielle pour respecter les réglementation
 
 Les mises à jour en temps réel sont cruciales pour maintenir des registres de conformité précis. À mesure que les lois sur la confidentialité évoluent, les applications doivent rapidement ajuster leurs systèmes de consentement tout en conservant une piste d'audit détaillée de toutes les mises à jour. Ce niveau de documentation est particulièrement important pour les applications opérant dans plusieurs régions, car il fournit une preuve de conformité aux lois locales sur la confidentialité et réduit le risque de problèmes juridiques.
 
-## Configuration du Consentement dans les Applications [Capacitor](https://capacitorjscom/)
+## Configuration du Consentement dans les Applications [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 

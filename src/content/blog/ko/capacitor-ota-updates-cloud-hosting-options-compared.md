@@ -21,7 +21,7 @@ locale: ko
 next_blog: ''
 ---
 
-Over-the-Air (OTA) 업데이트를 통해 앱스토어 지연 없이 [Capacitor](https://capacitorjscom/) 앱을 즉시 업데이트할 수 있습니다. 속도, 보안 및 사용 편의성을 위해 적절한 클라우드 호스팅 플랫폼을 선택하는 것이 중요합니다.
+Over-the-Air (OTA) 업데이트를 통해 앱스토어 지연 없이 [Capacitor](https://capacitorjs.com/) 앱을 즉시 업데이트할 수 있습니다. 속도, 보안 및 사용 편의성을 위해 적절한 클라우드 호스팅 플랫폼을 선택하는 것이 중요합니다.
 
 ### 주요 내용:
 

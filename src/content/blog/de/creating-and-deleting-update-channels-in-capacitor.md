@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) [Update-Kanäle](https://capgo.app/docs/webapp/channels/) ermöglichen Over-the-Air (OTA) Updates für bestimmte Benutzergruppen. Dies hilft bei der Verwaltung mehrerer App-Versionen, dem Testen neuer Funktionen und der schrittweisen Einführung von Updates. Hier ist, was Sie wissen müssen:
+[Capacitor](https://capacitorjs.com/) [Update-Kanäle](https://capgo.app/docs/webapp/channels/) ermöglichen Over-the-Air (OTA) Updates für bestimmte Benutzergruppen. Dies hilft bei der Verwaltung mehrerer App-Versionen, dem Testen neuer Funktionen und der schrittweisen Einführung von Updates. Hier ist, was Sie wissen müssen:
 
 -   **Vorteile**:
     

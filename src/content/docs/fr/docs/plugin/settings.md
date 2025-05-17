@@ -109,7 +109,7 @@ Par défaut : `true`
 
 Disponible uniquement pour Android et iOS
 
-Par défaut : `https://apicapgoapp/updates`
+Par défaut : `https://apicapgo.app/updates`
 
 ```json
 // capacitorconfigjson
@@ -128,7 +128,7 @@ Par défaut : `https://apicapgoapp/updates`
 
 Disponible uniquement pour Android et iOS. Définissez à "" pour désactiver les rapports de statistiques
 
-Par défaut : `https://apicapgoapp/stats`
+Par défaut : `https://apicapgo.app/stats`
 
 ```json
 // capacitorconfigjson
@@ -188,7 +188,7 @@ Par défaut : `undefined`
 Lorsqu'une mise à jour du store se produit, désactive la réinitialisation forcée vers la version native
 :::
 
-Il existe beaucoup plus de paramètres disponibles uniquement sur l'[application web](https://webcapgoapp/login)
+Il existe beaucoup plus de paramètres disponibles uniquement sur l'[application web](https://webcapgo.app/login)
 
 Pour configurer le plugin, utilisez ces paramètres :
 

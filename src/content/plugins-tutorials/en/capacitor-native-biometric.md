@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-native-biometric Package
 
 The `@capgo/capacitor-native-biometric` package allows you to use biometric authentication in your Capacitor applications. This package provides methods for checking the availability of biometric authentication hardware, verifying the user's identity, and handling user credentials securely. Here is a step-by-step tutorial on how to use this package:

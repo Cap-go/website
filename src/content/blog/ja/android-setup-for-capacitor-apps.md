@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Capacitor](https://capacitorjscom/) でAndroidアプリを作りたいですか?** Android開発環境を迅速かつ効率的にセットアップするために必要なすべてをご紹介します。Capacitorはウェブ技術とネイティブのAndroid機能を橋渡しし、始めるには基本的なツールと設定が必要です。
+**[Capacitor](https://capacitorjs.com/) でAndroidアプリを作りたいですか?** Android開発環境を迅速かつ効率的にセットアップするために必要なすべてをご紹介します。Capacitorはウェブ技術とネイティブのAndroid機能を橋渡しし、始めるには基本的なツールと設定が必要です。
 
 ### 必要なもの:
 

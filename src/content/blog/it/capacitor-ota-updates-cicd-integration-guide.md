@@ -21,7 +21,7 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi aggiornare la tua app [Capacitor](https://capacitorjscom/) istantaneamente senza ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) ti permettono di inviare correzioni e funzionalità direttamente sui dispositivi degli utenti. Combinalo con una pipeline CI/CD e potrai automatizzare i deployment, velocizzare la correzione dei bug e migliorare l'esperienza utente.
+**Vuoi aggiornare la tua app [Capacitor](https://capacitorjs.com/) istantaneamente senza ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) ti permettono di inviare correzioni e funzionalità direttamente sui dispositivi degli utenti. Combinalo con una pipeline CI/CD e potrai automatizzare i deployment, velocizzare la correzione dei bug e migliorare l'esperienza utente.
 
 ### Punti Chiave:
 

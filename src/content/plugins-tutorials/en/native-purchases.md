@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/native-purchases Package
 
 The @capgo/native-purchases package is a plugin for Capacitor that provides easy in-app purchase functionality. In this tutorial, we will walk through the steps of installing and using the package in your Capacitor project.

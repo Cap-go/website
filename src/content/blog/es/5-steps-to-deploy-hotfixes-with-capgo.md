@@ -130,9 +130,9 @@ Una vez que tu hotfix está subido y etiquetado, pasa al Paso 4 para configurar 
 
 ###### sbb-itb-f9944d2
 
-## Sistema de Actualización en Vivo de Capgo para Apps de [Capacitor](https://capacitorjscom/)
+## Sistema de Actualización en Vivo de Capgo para Apps de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/NzXXKoyhTIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

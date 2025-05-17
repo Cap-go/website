@@ -12,7 +12,7 @@ Esta versión mayor está aquí para seguir la versión mayor de Capacitor
 
 Primero sigue la guía de migración de Capacitor:
 
-[https://capacitorjscom/docs/updating/6-0](https://capacitorjscom/docs/updating/6-0/)
+[https://capacitorjs.com/docs/updating/6-0](https://capacitorjs.com/docs/updating/6-0/)
 
 ## Instalación
 

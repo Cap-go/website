@@ -3,10 +3,11 @@ import matter from 'gray-matter'
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'path'
 import { locales } from '../../src/services/locale'
+import { commonReplacements } from '../commonReplacements'
 
 const contentDirectory = path.join(process.cwd(), 'src', 'content')
 
-const patterns = locales.map((locale) => `blog/${locale}/**/*.{md,mdx}`)
+const patterns = locales.map((locale) => `**/${locale}/**/*.{md,mdx}`)
 const files = await fg(patterns, {
   absolute: true,
   onlyFiles: true,
@@ -25,14 +26,6 @@ for (const filePath of files) {
     fileContent = matter.stringify(parsed.content, parsed.data)
     changedCount++
   }
-  fileContent = fileContent
-    .replace(/capgoapp/g, 'capgo.app')
-    .replace(/([^.\s])png\)/g, '$1.png)')
-    .replace(/([^.\s])jpg\)/g, '$1.jpg)')
-    .replace(/([^.\s])gif\)/g, '$1.gif)')
-    .replace(/([^.\s])webp\)/g, '$1.webp)')
-    .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
-    .replace(/assetsseobotaicom/g, 'assets.seobotai.com')
-  await writeFile(filePath, fileContent, 'utf8')
+  await writeFile(filePath, commonReplacements(fileContent), 'utf8')
 }
 console.log(`Checked ${files.length} files. Updated ${changedCount} files.`)

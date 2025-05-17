@@ -34,11 +34,11 @@ Wenn Sie Android verwenden, müssen Sie einige zusätzliche Änderungen an Ihrem
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-Für weitere Hilfe verweisen Sie auf die [Capacitor-Dokumentation](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)
+Für weitere Hilfe verweisen Sie auf die [Capacitor-Dokumentation](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/)
 
 ### Zusätzliche Schritte zur Installation für iOS
 
-Wenn Sie iOS verwenden, müssen Sie zwei Berechtigungen zu Ihrer `Info.plist`-Datei hinzufügen. Folgen Sie der [Capacitor-Dokumentation](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist) und fügen Sie die Berechtigungen `NSCameraUsageDescription` und `NSMicrophoneUsageDescription` hinzu. Die Berechtigung `NSMicrophoneUsageDescription` ist nur erforderlich, wenn Sie Audio verwenden möchten. Wenn Sie kein Audio benötigen, können Sie die Option `disableAudio` auf `true` setzen, um die Anforderung der Mikrofonberechtigung zu deaktivieren.
+Wenn Sie iOS verwenden, müssen Sie zwei Berechtigungen zu Ihrer `Info.plist`-Datei hinzufügen. Folgen Sie der [Capacitor-Dokumentation](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist) und fügen Sie die Berechtigungen `NSCameraUsageDescription` und `NSMicrophoneUsageDescription` hinzu. Die Berechtigung `NSMicrophoneUsageDescription` ist nur erforderlich, wenn Sie Audio verwenden möchten. Wenn Sie kein Audio benötigen, können Sie die Option `disableAudio` auf `true` setzen, um die Anforderung der Mikrofonberechtigung zu deaktivieren.
 
 ### Zusätzliche Schritte zur Installation für Web
 

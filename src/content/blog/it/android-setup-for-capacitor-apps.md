@@ -22,7 +22,7 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi creare app Android con [Capacitor](https://capacitorjscom/)?** Ecco tutto ciò che ti serve per configurare rapidamente ed efficacemente il tuo ambiente di sviluppo. Capacitor collega le tecnologie web con le funzionalità native di Android e per iniziare sono necessari alcuni strumenti e configurazioni essenziali.
+**Vuoi creare app Android con [Capacitor](https://capacitorjs.com/)?** Ecco tutto ciò che ti serve per configurare rapidamente ed efficacemente il tuo ambiente di sviluppo. Capacitor collega le tecnologie web con le funzionalità native di Android e per iniziare sono necessari alcuni strumenti e configurazioni essenziali.
 
 ### Di cosa avrai bisogno:
 
@@ -198,9 +198,9 @@ Se riscontri errori di permessi su macOS o Linux, risolvili eseguendo:
 
 [[CODE_BLOCK]]
 
-Dopo aver completato questi passaggi, il tuo Android SDK è pronto per essere utilizzato con Capacitor## Configurazione Android di [Capacitor](https://capacitorjscom/)
+Dopo aver completato questi passaggi, il tuo Android SDK è pronto per essere utilizzato con Capacitor## Configurazione Android di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20jpg?auto=compress)
 
 ### Installazione della Piattaforma
 

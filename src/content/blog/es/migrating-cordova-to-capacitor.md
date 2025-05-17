@@ -41,7 +41,7 @@ Sigue estos pasos para migrar tu aplicación web de Cordova a Capacitor:
 
 1. **Trabaja en una rama de código separada**: Se recomienda trabajar en una rama de código separada al aplicar estos cambios.
 
-2. **Inicializa tu aplicación con Capacitor**: Abre tu proyecto en la terminal y sigue las guías para [agregar Capacitor a una aplicación web](https://capacitorjscom/docs/getting-started/#adding-capacitor-to-your-app) o [agregar Capacitor a una aplicación Ionic](https://capacitorjscom/docs/getting-started/with-ionic/#existing-ionic-project). Usa la información de tu archivo `configxml` de Cordova para el nombre de la aplicación y el ID del Bundle.
+2. **Inicializa tu aplicación con Capacitor**: Abre tu proyecto en la terminal y sigue las guías para [agregar Capacitor a una aplicación web](https://capacitorjs.com/docs/getting-started/#adding-capacitor-to-your-app) o [agregar Capacitor a una aplicación Ionic](https://capacitorjs.com/docs/getting-started/with-ionic/#existing-ionic-project). Usa la información de tu archivo `configxml` de Cordova para el nombre de la aplicación y el ID del Bundle.
 
 3. **Construye tu aplicación web**: Construye tu proyecto web al menos una vez antes de agregar plataformas nativas. Esto asegura que la carpeta `www` esté configurada correctamente en el archivo de configuración de Capacitor.
 
@@ -63,7 +63,7 @@ Sigue estos pasos para migrar tu aplicación web de Cordova a Capacitor:
 
 12. **Prueba y elimina Cordova**: Prueba tu aplicación migrada para asegurarte de que todos los cambios se han aplicado correctamente. Una vez satisfecho, puedes eliminar Cordova de tu proyecto o dejarlo si planeas continuar usando plugins de Cordova.
 
-¡Felicitaciones! Has migrado exitosamente tu aplicación web de Cordova a Capacitor. Para aprender más sobre el uso de plugins de Cordova en un proyecto de Capacitor o el flujo de trabajo de desarrollo de Capacitor, visita la [documentación oficial de Capacitor](https://capacitorjscom/docs/)
+¡Felicitaciones! Has migrado exitosamente tu aplicación web de Cordova a Capacitor. Para aprender más sobre el uso de plugins de Cordova en un proyecto de Capacitor o el flujo de trabajo de desarrollo de Capacitor, visita la [documentación oficial de Capacitor](https://capacitorjs.com/docs/)
 
 ## Actualizaciones en vivo con nuestro servicio Capgo
 

@@ -52,7 +52,7 @@ OTAアップデートにより、アプリストアの承認を待たずに直�
     -   ロールバックオプション
         
 
-## [Capgo](https://capgo.app/)の新しい[Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjscom/) ライブアップデートを探る
+## [Capgo](https://capgo.app/)の新しい[Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjs.com/) ライブアップデートを探る
 
 **アップデート追跡の設定**
 

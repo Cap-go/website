@@ -21,7 +21,7 @@ locale: it
 next_blog: ''
 ---
 
-**Il ponte nativo nelle app Android di [Capacitor](https://capacitorjscom/) permette una comunicazione fluida tra JavaScript basato sul web e funzionalità native Android.** Consente agli sviluppatori di utilizzare funzionalità specifiche di Android come fotocamera, geolocalizzazione e archiviazione direttamente dal loro codice web, creando app che sembrano native pur sfruttando le tecnologie web.
+**Il ponte nativo nelle app Android di [Capacitor](https://capacitorjs.com/) permette una comunicazione fluida tra JavaScript basato sul web e funzionalità native Android.** Consente agli sviluppatori di utilizzare funzionalità specifiche di Android come fotocamera, geolocalizzazione e archiviazione direttamente dal loro codice web, creando app che sembrano native pur sfruttando le tecnologie web.
 
 ### Punti Chiave:
 
@@ -44,9 +44,9 @@ Capgo, uno strumento per aggiornamenti over-the-air, si integra con il ponte nat
 
 **Vuoi creare app veloci e reattive che combinano la flessibilità del codice web con le prestazioni native di Android? Continua a leggere per scoprire come funziona il ponte nativo e come ottimizzarlo per i tuoi progetti.**
 
-## Come creare un plugin locale specifico per il progetto | Ionic | [Capacitor](https://capacitorjscom/)
+## Come creare un plugin locale specifico per il progetto | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22jpg?auto=compress)
 
 ## Flusso di Comunicazione del Ponte Nativo
 

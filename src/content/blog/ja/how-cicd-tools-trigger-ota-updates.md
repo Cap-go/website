@@ -28,7 +28,7 @@ CI/CDツールは、over-the-air (OTA)アップデートのプロセスを自動
     -   **ロールバックオプション:** エラー率が上昇した場合、自動的にアップデートを元に戻す
 -   **ハイライトされるツール:** [Capgo](https://capgo.app/)は、CLIコマンド、Webhook統合、詳細なメトリクス追跡でOTAアップデートを簡素化します
 
-OTAアップデートを自動化することで、より速い配信、少ないエラー、そしてより良いアプリの安定性が確保されます。以下では、[Capacitor](https://capacitorjscom/)アプリをCI/CDパイプラインで設定するための段階的な手順を説明します。
+OTAアップデートを自動化することで、より速い配信、少ないエラー、そしてより良いアプリの安定性が確保されます。以下では、[Capacitor](https://capacitorjs.com/)アプリをCI/CDパイプラインで設定するための段階的な手順を説明します。
 
 ## [Appflow](https://ionicio/appflow/live-updates) ライブアップデート：即時アップデートをユーザーに直接デプロイ
 
@@ -43,9 +43,9 @@ OTAアップデートを自動化することで、より速い配信、少な�
 
 </Steps>
 
-## [Capacitor](https://capacitorjscom/)のOTAアップデート準備
+## [Capacitor](https://capacitorjs.com/)のOTAアップデート準備
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
 Capacitorの[自動over-the-air](https://capgo.app/blog/open-source-licecing/) (OTA)アップデートの設定には、セットアップの構成、セキュリティ対策の実装、[アップデートシステムの統合](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)という3つの重要なステップが含まれます。このプロセスにより、CI/CD自動化との互換性を確保しながら、アプリのセキュリティを維持します。
 
@@ -165,7 +165,7 @@ Capgo CLIは、パイプライン内のアップデート管理を効率化す�
 
 ### ステージドアップデートとユーザーグループ
 
-ステージドアップデートにより、アップデートのロールアウトを制御し、ユーザーにスムーズな体験を提供できます。例えば、Capgoの_promote_コマンド（前述）はベータグループの管理に役立ちます。エンタープライズのデータによると、アプリの約半数（49%）が月次アップデートを必要としており[\[4\]](https://capacitorjscom/docs/guides/ci-cd)、段階的なデプロイメントは変更を徐々にロールアウトしながらアプリの安定性を維持するための重要な戦略となっています。
+ステージドアップデートにより、アップデートのロールアウトを制御し、ユーザーにスムーズな体験を提供できます。例えば、Capgoの_promote_コマンド（前述）はベータグループの管理に役立ちます。エンタープライズのデータによると、アプリの約半数（49%）が月次アップデートを必要としており[\[4\]](https://capacitorjs.com/docs/guides/ci-cd)、段階的なデプロイメントは変更を徐々にロールアウトしながらアプリの安定性を維持するための重要な戦略となっています。
 
 ### メトリクスベースのアップデートトリガー
 

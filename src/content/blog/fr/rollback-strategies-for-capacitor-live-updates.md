@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Évitez les perturbations d'applications avec des stratégies de rollback solides** [Capacitor](https://capacitorjscom/) permet des mises à jour en direct rapides, mais 18% des mises à jour échouent globalement. Un plan de rollback assure la stabilité lorsque des problèmes surviennent. Voici un aperçu rapide :
+**Évitez les perturbations d'applications avec des stratégies de rollback solides** [Capacitor](https://capacitorjs.com/) permet des mises à jour en direct rapides, mais 18% des mises à jour échouent globalement. Un plan de rollback assure la stabilité lorsque des problèmes surviennent. Voici un aperçu rapide :
 
 -   **Outils Clés** : Contrôle de version, suivi des erreurs, analyses et rollback en un clic
 -   **Quand Faire un Rollback** : Ralentissements sévères, fonctionnalités défectueuses, risques de sécurité ou problèmes de données
@@ -43,7 +43,7 @@ Des plateformes comme [Capgo](https://capgo.app/) offrent des mises à jour rapi
 
 Mettez en place des outils de rollback aujourd'hui pour assurer des mises à jour fluides et maintenir la confiance des utilisateurs.
 
-## Comment Migrer Votre Application [Ionic](https://ionicframeworkcom/) vers [Capacitor](https://capacitorjscom/) 3
+## Comment Migrer Votre Application [Ionic](https://ionicframeworkcom/) vers [Capacitor](https://capacitorjs.com/) 3
 
 ![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 

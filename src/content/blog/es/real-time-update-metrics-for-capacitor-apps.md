@@ -55,7 +55,7 @@ Para rastrear actualizaciones de manera efectiva, necesitarás configurar las he
 
 ### Agregando Herramientas de Seguimiento
 
-Comienza eligiendo una herramienta de seguimiento que se ajuste a tus necesidades. Para aplicaciones [Capacitor](https://capacitorjscom/), aquí hay dos opciones populares:
+Comienza eligiendo una herramienta de seguimiento que se ajuste a tus necesidades. Para aplicaciones [Capacitor](https://capacitorjs.com/), aquí hay dos opciones populares:
 
 -   **Plugin Capgo**: Instala el plugin Capgo usando la línea de comandos:
     

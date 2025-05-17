@@ -20,7 +20,7 @@ locale: de
 next_blog: ''
 ---
 
-Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjscom/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates schnell bei den Nutzern ankommen. Hier ist eine kurze Anleitung zum Einstieg:
+Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjs.com/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates schnell bei den Nutzern ankommen. Hier ist eine kurze Anleitung zum Einstieg:
 
 1. **Entwickeln und Testen**: Entwickeln Sie Ihr Plugin mit der [Capacitor Plugin API](https://capgo.app/blog/capacitor-comprehensive-guide/), testen Sie es gründlich auf iOS- und Android-Geräten und behandeln Sie Randfälle effektiv
 2. **Distribution einrichten**: Erstellen Sie ein npm-Paket mit klarer Dokumentation, einschließlich Installationsschritte, API-Referenzen und Nutzungsbeispiele
@@ -30,7 +30,7 @@ Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjscom/) Plugi
 
 Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfach zu integrieren und bereit für den Einsatz auf iOS- und Android-Plattformen ist
 
-## Wie man ein [Capacitor](https://capacitorjscom/) Plugin für iOS/Android erstellt
+## Wie man ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android erstellt
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 

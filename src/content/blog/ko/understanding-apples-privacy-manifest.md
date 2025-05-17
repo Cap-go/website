@@ -51,7 +51,7 @@ Apple의 개인정보 보호 매니페스트는 세 가지 주요 구성 요소�
 
 다음으로, Capacitor 프로젝트에서 매니페스트를 생성하고 확인하는 방법을 살펴보겠습니다.
 
-## [Capacitor](https://capacitorjscom/)에서 개인정보 보호 매니페스트 설정하기
+## [Capacitor](https://capacitorjs.com/)에서 개인정보 보호 매니페스트 설정하기
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 

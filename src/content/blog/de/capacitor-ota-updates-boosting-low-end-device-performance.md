@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-**Möchten Sie, dass Ihre App auf Low-End-Geräten besser läuft? OTA-Updates sind die Antwort.** [Capacitor](https://capacitorjscom/)s Over-the-Air (OTA) Updates ermöglichen es Ihnen, nur die notwendigen Änderungen an Ihre App zu übertragen - keine vollständigen Downloads erforderlich. Dies spart Zeit, reduziert die Datennutzung und verbessert die Leistung, besonders für Nutzer mit eingeschränkter Hardware oder langsamen Netzwerken.
+**Möchten Sie, dass Ihre App auf Low-End-Geräten besser läuft? OTA-Updates sind die Antwort.** [Capacitor](https://capacitorjs.com/)s Over-the-Air (OTA) Updates ermöglichen es Ihnen, nur die notwendigen Änderungen an Ihre App zu übertragen - keine vollständigen Downloads erforderlich. Dies spart Zeit, reduziert die Datennutzung und verbessert die Leistung, besonders für Nutzer mit eingeschränkter Hardware oder langsamen Netzwerken.
 
 ### Hauptvorteile:
 

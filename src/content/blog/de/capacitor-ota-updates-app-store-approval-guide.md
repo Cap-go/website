@@ -97,9 +97,9 @@ Häufige Gründe für die Ablehnung von Apps sind:
 
 Um diese Probleme zu vermeiden, ist es wichtig, die Capacitor-spezifischen Implementierungsrichtlinien zu befolgen. Tools mit automatisierten Compliance-Prüfungen können diesen Prozess erheblich erleichtern. Zum Beispiel hilft Capgos Ende-zu-Ende-Verschlüsselungsfunktion dabei, Update-Pakete zu sichern und die Anforderungen beider App Stores zu erfüllen [\[7\]](https://developermozillaorg/en-US/docs/Web/HTML/Element/Heading_Elements)
 
-## OTA Update-Richtlinien für [Capacitor](https://capacitorjscom/)
+## OTA Update-Richtlinien für [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15jpg?auto=compress)
 
 ### Technische Compliance-Schritte
 

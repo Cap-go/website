@@ -63,6 +63,6 @@ getWindow().setDecorFitsSystemWindows(false);
 
 ## クレジット
 
-このプラグインは、[Kickcom](https://kickcom/) のために [Capgo](https://capgoapp/) によって最初に作成されました。
+このプラグインは、[Kickcom](https://kickcom/) のために [Capgo](https://capgo.app/) によって最初に作成されました。
 
-詳細な情報やアップデートについては、[Capgo](https://capgoapp/) をご覧ください。
+詳細な情報やアップデートについては、[Capgo](https://capgo.app/) をご覧ください。

@@ -21,7 +21,7 @@ locale: de
 next_blog: ''
 ---
 
-**Möchten Sie Ihre** [**Capacitor**](https://capacitorjscom/) **App sofort ohne App Store Verzögerungen aktualisieren?** Over-the-Air (OTA) Updates ermöglichen es Ihnen, Änderungen an der Web-Ebene (HTML, CSS, JavaScript) Ihrer App ohne erneute Einreichung in App Stores zu übertragen. iOS und Android behandeln diese Updates jedoch unterschiedlich, und das Verständnis dieser Unterschiede ist entscheidend.
+**Möchten Sie Ihre** [**Capacitor**](https://capacitorjs.com/) **App sofort ohne App Store Verzögerungen aktualisieren?** Over-the-Air (OTA) Updates ermöglichen es Ihnen, Änderungen an der Web-Ebene (HTML, CSS, JavaScript) Ihrer App ohne erneute Einreichung in App Stores zu übertragen. iOS und Android behandeln diese Updates jedoch unterschiedlich, und das Verständnis dieser Unterschiede ist entscheidend.
 
 ### Wichtige Erkenntnisse:
 

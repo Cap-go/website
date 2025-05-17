@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/capacitor-updater Package Tutorial
 
 This tutorial will guide you through the process of using the `@capgo/capacitor-updater` package to enable auto-updates in your Ionic Capacitor app.

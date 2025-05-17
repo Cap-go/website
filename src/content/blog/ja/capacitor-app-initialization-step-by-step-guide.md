@@ -21,7 +21,7 @@ locale: ja
 next_blog: ''
 ---
 
-**シングルコードベースでモバイルアプリを構築したいですか？** [Capacitor](https://capacitorjscom/)を使用すると、[React](https://reactdev/)、[Angular](https://angulario/)、[Vue](https://vuejsorg/)などのフレームワークを使用してiOS、Android、Webアプリを簡単に作成できます。このガイドでは、[Capacitor](https://capacitorjscom/)のセットアップ方法、プラットフォームの構成方法、効率的な更新のデプロイ方法について説明します。
+**シングルコードベースでモバイルアプリを構築したいですか？** [Capacitor](https://capacitorjs.com/)を使用すると、[React](https://reactdev/)、[Angular](https://angulario/)、[Vue](https://vuejsorg/)などのフレームワークを使用してiOS、Android、Webアプリを簡単に作成できます。このガイドでは、[Capacitor](https://capacitorjs.com/)のセットアップ方法、プラットフォームの構成方法、効率的な更新のデプロイ方法について説明します。
 
 ### 始めるための重要なステップ：
 
@@ -32,9 +32,9 @@ next_blog: ''
 
 Capacitorは、Webアプリとネイティブデバイス機能を橋渡しし、プラットフォーム間でスムーズなパフォーマンスを確保します。このガイドに従って、アプリ開発プロセスを簡素化しましょう！
 
-## [CAPACITOR](https://capacitorjscom/)でネイティブアプリを作る5つのステップ | Ionicリリースガイド
+## [CAPACITOR](https://capacitorjs.com/)でネイティブアプリを作る5つのステップ | Ionicリリースガイド
 
-![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
+![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
 
 <Steps>
 <Steps>

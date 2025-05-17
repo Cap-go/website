@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/capacitor-data-storage-sqlite Tutorial
 
 This tutorial will guide you through the process of using the `@capgo/capacitor-data-storage-sqlite` package to implement a key-value permanent store for simple string data in your Ionic Capacitor app.

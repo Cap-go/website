@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/native-audio Package
 
 This tutorial will guide you on how to use the `@capgo/native-audio` package for playing sounds in your Capacitor application.

@@ -26,11 +26,11 @@ Android を使用している場合、プロジェクトにいくつかの追加
 
 [[コードブロック]]
 
-詳細については、[Capacitor ドキュメント](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)を参照してください。
+詳細については、[Capacitor ドキュメント](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/)を参照してください。
 
 ### iOS の追加インストール手順
 
-iOS を使用している場合は、`Infoplist` ファイルに 2 つの権限を追加する必要があります。[Capacitor ドキュメント](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist) に従って、`NSCameraUsageDescription` および `NSMicrophoneUsageDescription` 権限を追加します。`NSMicrophoneUsageDescription` 権限は、オーディオを使用する場合のみ必要です。オーディオが不要な場合は、`disableAudio` オプションを `true` に設定してマイクロフォン権限リクエストを無効にできます。
+iOS を使用している場合は、`Infoplist` ファイルに 2 つの権限を追加する必要があります。[Capacitor ドキュメント](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist) に従って、`NSCameraUsageDescription` および `NSMicrophoneUsageDescription` 権限を追加します。`NSMicrophoneUsageDescription` 権限は、オーディオを使用する場合のみ必要です。オーディオが不要な場合は、`disableAudio` オプションを `true` に設定してマイクロフォン権限リクエストを無効にできます。
 
 ### Web の追加インストール手順
 

@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-Las actualizaciones en vivo de [Capacitor](https://capacitorjscom/) pueden ahorrar tiempo evitando las revisiones de la tienda de aplicaciones, pero los conflictos de versiones pueden interrumpir el rendimiento y la experiencia del usuario. Esto es lo que necesitas saber:
+Las actualizaciones en vivo de [Capacitor](https://capacitorjs.com/) pueden ahorrar tiempo evitando las revisiones de la tienda de aplicaciones, pero los conflictos de versiones pueden interrumpir el rendimiento y la experiencia del usuario. Esto es lo que necesitas saber:
 
 -   **Problemas comunes**: Las implementaciones escalonadas, actualizaciones fallidas (18% de tasa de fallo) y la mezcla de canales beta y producción suelen causar conflictos
 -   **Soluciones rápidas**: Volver a una versión estable, limitar implementaciones y habilitar registro detallado
@@ -31,7 +31,7 @@ Las actualizaciones en vivo de [Capacitor](https://capacitorjscom/) pueden ahorr
 
 Para gestionar los conflictos de versiones eficientemente, concéntrate en el monitoreo en tiempo real, implementaciones por etapas y planes de reversión. Usa herramientas como Capgo para simplificar el proceso y mantener la estabilidad de la aplicación.
 
-## Conflictos de versiones en actualizaciones en vivo de [Capacitor](https://capacitorjscom/)
+## Conflictos de versiones en actualizaciones en vivo de [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
 

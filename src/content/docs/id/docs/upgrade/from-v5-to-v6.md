@@ -12,7 +12,7 @@ Versi mayor ini hadir untuk mengikuti versi mayor Capacitor
 
 Pertama ikuti panduan migrasi Capacitor:
 
-[https://capacitorjscom/docs/updating/6-0](https://capacitorjscom/docs/updating/6-0/)
+[https://capacitorjs.com/docs/updating/6-0](https://capacitorjs.com/docs/updating/6-0/)
 
 ## Instalasi
 

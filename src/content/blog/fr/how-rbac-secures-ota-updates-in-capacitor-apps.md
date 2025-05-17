@@ -24,7 +24,7 @@ locale: fr
 next_blog: ''
 ---
 
-Le contrôle d'accès basé sur les rôles (RBAC) est un élément décisif pour sécuriser les mises à jour OTA (Over-the-Air) dans les applications [Capacitor](https://capacitorjscom/). Voici pourquoi c'est important :
+Le contrôle d'accès basé sur les rôles (RBAC) est un élément décisif pour sécuriser les mises à jour OTA (Over-the-Air) dans les applications [Capacitor](https://capacitorjs.com/). Voici pourquoi c'est important :
 
 -   **Risques de Sécurité Majeurs** : Les mises à jour OTA peuvent être vulnérables à l'injection de code malveillant, l'interception et l'utilisation abusive si les permissions ne sont pas gérées correctement
 -   **Comment le RBAC Aide** : En attribuant des rôles (comme développeur, testeur, administrateur) avec des permissions spécifiques, le RBAC garantit que seuls les utilisateurs autorisés peuvent déployer des mises à jour, gérer les testeurs ou effectuer des rollbacks, réduisant ainsi les risques

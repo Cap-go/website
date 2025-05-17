@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres actualizar tu aplicación de** [**Capacitor**](https://capacitorjscom/) **sin retrasos de la tienda de aplicaciones? Las actualizaciones Over-the-Air (OTA) te permiten enviar correcciones, nuevas funciones y mejoras directamente a los usuarios en tiempo real.** Aquí te mostramos cómo puedes programarlas de manera efectiva:
+**¿Quieres actualizar tu aplicación de** [**Capacitor**](https://capacitorjs.com/) **sin retrasos de la tienda de aplicaciones? Las actualizaciones Over-the-Air (OTA) te permiten enviar correcciones, nuevas funciones y mejoras directamente a los usuarios en tiempo real.** Aquí te mostramos cómo puedes programarlas de manera efectiva:
 
 -   **¿Qué son las actualizaciones OTA?** Permiten entregar cambios de la aplicación directamente a los usuarios, descargando solo las partes actualizadas para ahorrar tiempo y ancho de banda
     
@@ -82,7 +82,7 @@ Aquí algunos puntos de referencia de rendimiento [\[1\]](https://capgo.app/):
 -   **Tasa de éxito de actualización**: 82% mundialmente
     
 
-## Explora la Nueva Actualización en Vivo de [Capgo](https://capgo.app/) para Ionic [Capacitor](https://capacitorjscom/)
+## Explora la Nueva Actualización en Vivo de [Capgo](https://capgo.app/) para Ionic [Capacitor](https://capacitorjs.com/)
 
 **Planificación de Programación de Actualizaciones**
 

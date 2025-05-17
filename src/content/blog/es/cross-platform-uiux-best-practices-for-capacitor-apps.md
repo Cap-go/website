@@ -24,7 +24,7 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres crear aplicaciones que se sientan nativas en iOS, Android y web?** [Capacitor](https://capacitorjscom/) lo hace posible combinando características web y nativas. Pero crear una experiencia fluida en todas las plataformas requiere un diseño UI/UX cuidadoso. Aquí te mostramos cómo hacerlo:
+**¿Quieres crear aplicaciones que se sientan nativas en iOS, Android y web?** [Capacitor](https://capacitorjs.com/) lo hace posible combinando características web y nativas. Pero crear una experiencia fluida en todas las plataformas requiere un diseño UI/UX cuidadoso. Aquí te mostramos cómo hacerlo:
 
 -   **Sigue las Pautas Específicas de Plataforma**: Respeta los estándares de iOS (Human Interface) y Android (Material Design) para navegación, tipografía y gestos
 -   **Usa un Sistema de Diseño**: Crea tokens de diseño reutilizables, componentes y documentación para mantener consistencia
@@ -35,7 +35,7 @@ next_blog: ''
 
 **Consejo Rápido**: Capgo ha habilitado 235 millones de actualizaciones para más de 750 aplicaciones, con 95% de usuarios actualizados en 24 horas
 
-## Construye Componentes Multiplataforma con [Stencil](https://stenciljscom/) y [Capacitor](https://capacitorjscom/)
+## Construye Componentes Multiplataforma con [Stencil](https://stenciljscom/) y [Capacitor](https://capacitorjs.com/)
 
 ![Stencil](https://mars-imagesimgixnet/seobot/screenshots/stenciljscom-6020276454429265c3dac5ec0634b1fb-2025-03-24jpg?auto=compress)
 

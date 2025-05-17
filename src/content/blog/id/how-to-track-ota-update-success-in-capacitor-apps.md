@@ -54,7 +54,7 @@ Pembaruan OTA memungkinkan Anda mendorong perubahan aplikasi langsung ke penggun
     -   Opsi pembatalan
         
 
-## Jelajahi [Capgo](https://capgo.app/)'s New [Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjscom/) Live Update 
+## Jelajahi [Capgo](https://capgo.app/)'s New [Ionic](https://ionicframeworkcom/) [Capacitor](https://capacitorjs.com/) Live Update 
 
 **Menyiapkan Pelacakan Pembaruan**
 

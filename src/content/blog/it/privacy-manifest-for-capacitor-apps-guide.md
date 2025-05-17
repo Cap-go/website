@@ -21,7 +21,7 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi lanciare la tua app [Capacitor](https://capacitorjscom/) sull'[App Store](https://enwikipediaorg/wiki/App_Store_\(Apple\)) senza ritardi?** Inizia creando un Privacy Manifest. Apple ora richiede agli sviluppatori di includere questo documento per garantire che le app soddisfino rigidi standard di privacy. Ecco cosa devi sapere:
+**Vuoi lanciare la tua app [Capacitor](https://capacitorjs.com/) sull'[App Store](https://enwikipediaorg/wiki/App_Store_\(Apple\)) senza ritardi?** Inizia creando un Privacy Manifest. Apple ora richiede agli sviluppatori di includere questo documento per garantire che le app soddisfino rigidi standard di privacy. Ecco cosa devi sapere:
 
 -   **Cos'è un Privacy Manifest?**  
     Un file strutturato che delinea le pratiche di raccolta dati della tua app, l'utilizzo delle API e i domini di tracciamento
@@ -82,7 +82,7 @@ Ecco gli elementi principali da includere nel tuo privacy manifest per allineart
 
 Secondo Capgo, il 95% degli utenti si adegua agli aggiornamenti entro 24 ore. Con oltre 235 milioni di aggiornamenti consegnati [\[1\]](https://capgo.app/), mantenere aggiornata la documentazione sulla privacy è essenziale per mantenere la fiducia degli utenti
 
-## Costruire Privacy Manifest per [Capacitor](https://capacitorjscom/)
+## Costruire Privacy Manifest per [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 

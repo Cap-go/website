@@ -109,7 +109,7 @@ Default: `true`
 
 Hanya tersedia untuk Android dan iOS
 
-Default: `https://apicapgoapp/updates`
+Default: `https://apicapgo.app/updates`
 
 ```json
 // capacitorconfigjson
@@ -128,7 +128,7 @@ Default: `https://apicapgoapp/updates`
 
 Hanya tersedia untuk Android dan iOS. Setel ke "" untuk menonaktifkan pelaporan statistik
 
-Default: `https://apicapgoapp/stats`
+Default: `https://apicapgo.app/stats`
 
 ```json
 // capacitorconfigjson
@@ -188,7 +188,7 @@ Default: `undefined`
 Ketika pembaruan toko terjadi, nonaktifkan reset paksa ke versi native
 :::
 
-Ada banyak pengaturan lain yang tersedia hanya di [web app](https://webcapgoapp/login)
+Ada banyak pengaturan lain yang tersedia hanya di [web app](https://webcapgo.app/login)
 
 Untuk mengonfigurasi plugin, gunakan pengaturan ini:
 

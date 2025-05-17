@@ -21,7 +21,7 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin membangun aplikasi iOS dan Android menggunakan teknologi web? Berikut cara menyiapkan lingkungan [Capacitor](https://capacitorjscom/) lokal dengan cepat dan efisien**
+**Ingin membangun aplikasi iOS dan Android menggunakan teknologi web? Berikut cara menyiapkan lingkungan [Capacitor](https://capacitorjs.com/) lokal dengan cepat dan efisien**
 
 ### Langkah-langkah Utama:
 

@@ -17,7 +17,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Capacitor](https://capacitorjscom/) アプリのバージョン競合でお困りですか?** これらの問題はビルドの失敗、ランタイムエラー、プラグインの誤動作を引き起こす可能性があります。このガイドでは、これらの競合を特定、解決、防止するための **5つの実行可能なステップ** を簡単に説明します:
+**[Capacitor](https://capacitorjs.com/) アプリのバージョン競合でお困りですか?** これらの問題はビルドの失敗、ランタイムエラー、プラグインの誤動作を引き起こす可能性があります。このガイドでは、これらの競合を特定、解決、防止するための **5つの実行可能なステップ** を簡単に説明します:
 
 1. **競合を見つける**: `npx cap doctor` とエラーログを使用してバージョンの不一致を検出
 2. **依存関係を確認**: `packagejson` を確認し、`npm outdated` などのコマンドを実行して不整合を発見
@@ -37,9 +37,9 @@ next_blog: ''
 
 バージョン競合を早期に発見することで、デバッグの時間を節約し、潜在的なクラッシュを防ぐことができます。以下が問題を効果的に特定する方法です。
 
-### [Capacitor](https://capacitorjscom/) CLIでバージョンを確認
+### [Capacitor](https://capacitorjs.com/) CLIでバージョンを確認
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25jpg?auto=compress)
 
 Capacitor CLIは、プロジェクトの依存関係バージョンを検査するための便利なコマンドを提供します。ターミナルを開き、プロジェクトディレクトリに移動して実行:
 

@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Capacitor](https://capacitorjscom/) アプリのアップデート管理により良い方法をお探しですか？** 2024年に[Microsoft CodePush](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/)が終了し、2026年に[Appflow](https://ionicio/appflow/)が閉鎖予定となる中、開発者はCapacitor CI/CDプラグインなどの代替手段に注目しています。概要は以下の通りです：
+**[Capacitor](https://capacitorjs.com/) アプリのアップデート管理により良い方法をお探しですか？** 2024年に[Microsoft CodePush](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/)が終了し、2026年に[Appflow](https://ionicio/appflow/)が閉鎖予定となる中、開発者はCapacitor CI/CDプラグインなどの代替手段に注目しています。概要は以下の通りです：
 
 - **Capacitor CI/CDプラグイン**：オープンソースで、カスタマイズ可能、[GitHub Actions](https://docsgithubcom/actions)や[GitLab CI](https://docsgitlabcom/ee/ci/)などのツールと統合。ライブアップデート、エンドツーエンド暗号化、部分アップデートなどの機能を提供。月額300ドル、初期設定料金2,600ドル
 - **Appflow**：ビルドとデプロイメントの集中プラットフォームだが柔軟性に欠ける。年間6,000ドルで2026年に終了予定

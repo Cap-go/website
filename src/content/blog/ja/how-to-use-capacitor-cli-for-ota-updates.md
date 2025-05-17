@@ -21,7 +21,7 @@ locale: ja
 next_blog: ''
 ---
 
-Over-The-Air (OTA) アップデートを使用すると、アプリストアの承認を待つことなく、アプリの修正や機能をユーザーに直接提供できます。[Capacitor](https://capacitorjscom/) CLIと[Capgo](https://capgo.app/)などのツールを使用することで、即座にアップデートをプッシュし、パフォーマンスを追跡し、必要に応じてロールバックすることも可能です。以下が重要なポイントです：
+Over-The-Air (OTA) アップデートを使用すると、アプリストアの承認を待つことなく、アプリの修正や機能をユーザーに直接提供できます。[Capacitor](https://capacitorjs.com/) CLIと[Capgo](https://capgo.app/)などのツールを使用することで、即座にアップデートをプッシュし、パフォーマンスを追跡し、必要に応じてロールバックすることも可能です。以下が重要なポイントです：
 
 ### OTAアップデートの主なメリット：
 
@@ -57,7 +57,7 @@ Capgoは、迅速なアップデート（24時間以内に95%）、強力なセ�
 
 OTAアップデートは時間を節約し、ユーザー体験を向上させ、アプリの安定性を確保します。Capgoなどのツールを活用することで、アプリストアのルールに準拠しながら、迅速で安全なアップデートを提供できます。
 
-## [Capawesome](https://capawesomeio/)の新しいIonic [Capacitor](https://capacitorjscom/) ライブアップデートを探る
+## [Capawesome](https://capawesomeio/)の新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデートを探る
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 

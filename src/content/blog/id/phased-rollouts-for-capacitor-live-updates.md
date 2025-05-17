@@ -95,9 +95,9 @@ Antarmuka web Capgo memudahkan pemantauan pembaruan secara real-time, melacak di
 
 Langkah-langkah ini membantu Anda mengelola peluncuran secara efektif sambil meminimalkan risiko.
 
-## Menyiapkan Peluncuran Bertahap di [Capacitor](https://capacitorjscom/)
+## Menyiapkan Peluncuran Bertahap di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11jpg?auto=compress)
 
 ### Konfigurasi Live Update
 

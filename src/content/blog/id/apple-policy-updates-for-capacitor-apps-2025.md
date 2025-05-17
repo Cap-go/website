@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-**Kebijakan App Store Apple 2025 membawa aturan yang lebih ketat untuk aplikasi [Capacitor](https://capacitorjscom/)** Para pengembang sekarang harus memenuhi standar yang lebih tinggi untuk privasi, keamanan, dan performa. Berikut yang perlu Anda ketahui:
+**Kebijakan App Store Apple 2025 membawa aturan yang lebih ketat untuk aplikasi [Capacitor](https://capacitorjs.com/)** Para pengembang sekarang harus memenuhi standar yang lebih tinggi untuk privasi, keamanan, dan performa. Berikut yang perlu Anda ketahui:
 
 -   **Privasi**: Aturan lebih ketat untuk pengumpulan data dan persetujuan pengguna
 -   **Keamanan**: Enkripsi end-to-end dan [autentikasi yang lebih kuat](https://capgo.app/docs/webapp/mfa/) diperlukan untuk pembaruan
@@ -76,6 +76,6 @@ Untuk memastikan pembaruan berjalan lancar di semua versi iOS, pengujian perangk
 
 Metode ini memungkinkan pengembangan cepat dan pembaruan yang andal sambil tetap patuh pada pedoman Apple
 
-## Pembaruan [Capacitor](https://capacitorjscom/) untuk 2025
+## Pembaruan [Capacitor](https://capacitorjs.com/) untuk 2025
 
 ![Capacitor](https://assets

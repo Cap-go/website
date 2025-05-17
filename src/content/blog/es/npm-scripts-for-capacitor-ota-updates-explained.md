@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**Actualizar tu aplicación [Capacitor](https://capacitorjscom/) nunca ha sido más fácil** Al combinar actualizaciones Over-The-Air (OTA) con scripts npm, puedes automatizar despliegues, ahorrar tiempo y asegurar que tus usuarios siempre tengan la última versión - sin esperar aprobaciones de las tiendas de aplicaciones
+**Actualizar tu aplicación [Capacitor](https://capacitorjs.com/) nunca ha sido más fácil** Al combinar actualizaciones Over-The-Air (OTA) con scripts npm, puedes automatizar despliegues, ahorrar tiempo y asegurar que tus usuarios siempre tengan la última versión - sin esperar aprobaciones de las tiendas de aplicaciones
 
 **Esto es lo que aprenderás:**
 
@@ -46,7 +46,7 @@ next_blog: ''
 
 Con plataformas como Capgo ofreciendo actualizaciones rápidas (95% de adopción de usuarios en 24 horas) y precios accesibles, gestionar actualizaciones OTA nunca ha sido más eficiente
 
-## Explora la Nueva Actualización en Vivo de [Capawesome](https://capawesomeio/) para [Capacitor](https://capacitorjscom/) Ionic
+## Explora la Nueva Actualización en Vivo de [Capawesome](https://capawesomeio/) para [Capacitor](https://capacitorjs.com/) Ionic
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

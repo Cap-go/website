@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin mengoptimalkan performa aplikasi [Capacitor](https://capacitorjscom/) Anda?** Alat pemantauan seperti [Firebase](https://firebasegooglecom/) dan [Sentry](https://sentryio/) dapat membantu Anda melacak crash, penggunaan sumber daya, dan waktu respons, memastikan pengalaman pengguna yang lebih baik. Berikut ringkasannya:
+**Ingin mengoptimalkan performa aplikasi [Capacitor](https://capacitorjs.com/) Anda?** Alat pemantauan seperti [Firebase](https://firebasegooglecom/) dan [Sentry](https://sentryio/) dapat membantu Anda melacak crash, penggunaan sumber daya, dan waktu respons, memastikan pengalaman pengguna yang lebih baik. Berikut ringkasannya:
 
 -   **Mengapa Memantau Performa**: Mengidentifikasi crash, mengoptimalkan penggunaan sumber daya, dan meningkatkan waktu respons
 -   **Alat yang Digunakan**:

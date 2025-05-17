@@ -51,7 +51,7 @@ Le Privacy Manifest d'Apple comprend trois composants principaux :
 
 Ensuite, nous verrons comment créer et vérifier votre manifeste dans un projet Capacitor
 
-## Configuration du Privacy Manifest dans [Capacitor](https://capacitorjscom/)
+## Configuration du Privacy Manifest dans [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 

@@ -19,7 +19,7 @@ locale: ko
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) 앱의 업데이트를 관리하는 더 나은 방법을 찾고 계신가요? 2024년에 [Microsoft CodePush](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/)가 종료되고 2026년에 [Appflow](https://ionicio/appflow/)가 중단될 예정임에 따라, 개발자들은 Capacitor CI/CD 플러그인과 같은 대안을 찾고 있습니다. 간단히 살펴보겠습니다:
+[Capacitor](https://capacitorjs.com/) 앱의 업데이트를 관리하는 더 나은 방법을 찾고 계신가요? 2024년에 [Microsoft CodePush](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/)가 종료되고 2026년에 [Appflow](https://ionicio/appflow/)가 중단될 예정임에 따라, 개발자들은 Capacitor CI/CD 플러그인과 같은 대안을 찾고 있습니다. 간단히 살펴보겠습니다:
 
 -   **Capacitor CI/CD 플러그인**: 오픈소스, 커스터마이징 가능, [GitHub Actions](https://docsgithubcom/actions)와 [GitLab CI](https://docsgitlabcom/ee/ci/)와 같은 도구와 통합됩니다. 실시간 업데이트, 종단간 암호화, 부분 업데이트와 같은 기능을 제공합니다. 월 $300에 일회성 설정 비용 $2,600이 듭니다.
 -   **Appflow**: 빌드와 배포를 위한 중앙화된 플랫폼이지만 유연성이 부족합니다. 연간 $6,000의 비용이 들며 2026년에 중단될 예정입니다.

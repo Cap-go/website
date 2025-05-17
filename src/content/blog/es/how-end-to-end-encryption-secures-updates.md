@@ -71,7 +71,7 @@ Capgo enfatiza este enfoque, afirmando:
 
 Este proceso de múltiples pasos asegura que las actualizaciones estén protegidas desde el momento en que se crean hasta que se instalan, ofreciendo un nivel más fuerte de seguridad que los enfoques que dependen únicamente de firmar actualizaciones.
 
-## Configurando el Cifrado de Extremo a Extremo en [Capacitor](https://capacitorjscom/)
+## Configurando el Cifrado de Extremo a Extremo en [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 

@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-**Möchten Sie mobile Apps mit einer einzigen Codebasis erstellen?** [Capacitor](https://capacitorjscom/) macht es einfach, iOS-, Android- und Web-Apps mit Frameworks wie [React](https://reactdev/), [Angular](https://angulario/) oder [Vue](https://vuejsorg/) zu erstellen. Dieser Leitfaden erklärt, wie Sie [Capacitor](https://capacitorjscom/) einrichten, Plattformen konfigurieren und Updates effizient bereitstellen.
+**Möchten Sie mobile Apps mit einer einzigen Codebasis erstellen?** [Capacitor](https://capacitorjs.com/) macht es einfach, iOS-, Android- und Web-Apps mit Frameworks wie [React](https://reactdev/), [Angular](https://angulario/) oder [Vue](https://vuejsorg/) zu erstellen. Dieser Leitfaden erklärt, wie Sie [Capacitor](https://capacitorjs.com/) einrichten, Plattformen konfigurieren und Updates effizient bereitstellen.
 
 ### Wichtige Schritte zum Start:
 
@@ -33,9 +33,9 @@ next_blog: ''
 
 Capacitor verbindet Web-Apps mit nativen Gerätefunktionen und gewährleistet eine reibungslose Leistung über alle Plattformen hinweg. Folgen Sie diesem Leitfaden, um Ihren App-Entwicklungsprozess zu vereinfachen!
 
-## 5 Schritte zur NATIVE APP mit [CAPACITOR](https://capacitorjscom/) | Ionic Release Guide
+## 5 Schritte zur NATIVE APP mit [CAPACITOR](https://capacitorjs.com/) | Ionic Release Guide
 
-![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
+![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/SSv--IrWH3c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

@@ -21,7 +21,7 @@ locale: it
 next_blog: ''
 ---
 
-**Gli errori di mancata corrispondenza delle versioni nelle app [Capacitor](https://capacitorjscom/) possono interrompere le build, causare crash durante l'esecuzione e ritardare gli aggiornamenti** Questi problemi si verificano quando i pacchetti core, i plugin o le dipendenze non sono allineati. Ecco come risolverli rapidamente:
+**Gli errori di mancata corrispondenza delle versioni nelle app [Capacitor](https://capacitorjs.com/) possono interrompere le build, causare crash durante l'esecuzione e ritardare gli aggiornamenti** Questi problemi si verificano quando i pacchetti core, i plugin o le dipendenze non sono allineati. Ecco come risolverli rapidamente:
 
 -   **Cause comuni**:
     
@@ -39,7 +39,7 @@ next_blog: ''
     -   Automatizza i controlli delle versioni con strumenti CI/CD
     -   Usa strumenti di aggiornamento live come [Capgo](https://capgo.app/) per correzioni più rapide
 
-## Risoluzione dell'eccezione No Matching View in [Capacitor](https://capacitorjscom/)
+## Risoluzione dell'eccezione No Matching View in [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 

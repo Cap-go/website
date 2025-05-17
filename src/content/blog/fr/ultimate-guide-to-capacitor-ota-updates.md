@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Vous voulez mettre à jour votre application instantanément sans attendre les examens de l'App Store ?** Les mises à jour OTA (Over-The-Air) de [Capacitor](https://capacitorjscom/) vous permettent de livrer de nouvelles fonctionnalités, des corrections de bugs et des modifications de code directement sur les appareils des utilisateurs. Pas de téléchargements manuels, pas de délais.
+**Vous voulez mettre à jour votre application instantanément sans attendre les examens de l'App Store ?** Les mises à jour OTA (Over-The-Air) de [Capacitor](https://capacitorjs.com/) vous permettent de livrer de nouvelles fonctionnalités, des corrections de bugs et des modifications de code directement sur les appareils des utilisateurs. Pas de téléchargements manuels, pas de délais.
 
 ### Pourquoi les mises à jour OTA sont importantes :
 

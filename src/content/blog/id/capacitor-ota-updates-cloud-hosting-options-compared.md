@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-Pembaruan Over-the-Air (OTA) memungkinkan Anda memperbarui aplikasi [Capacitor](https://capacitorjscom/) Anda secara instan tanpa penundaan app store. Memilih platform cloud hosting yang tepat sangat penting untuk kecepatan, keamanan, dan kemudahan penggunaan.
+Pembaruan Over-the-Air (OTA) memungkinkan Anda memperbarui aplikasi [Capacitor](https://capacitorjs.com/) Anda secara instan tanpa penundaan app store. Memilih platform cloud hosting yang tepat sangat penting untuk kecepatan, keamanan, dan kemudahan penggunaan.
 
 ### Poin Penting:
 

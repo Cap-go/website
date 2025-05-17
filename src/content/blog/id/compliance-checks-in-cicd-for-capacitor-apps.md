@@ -20,7 +20,7 @@ locale: id
 next_blog: ''
 ---
 
-**Pemeriksaan kepatuhan dalam pipeline CI/CD adalah solusi Anda** Mereka memastikan aplikasi [Capacitor](https://capacitorjscom/) Anda memenuhi persyaratan Apple dan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en), menjaga keamanan yang ketat dan pembaruan yang cepat
+**Pemeriksaan kepatuhan dalam pipeline CI/CD adalah solusi Anda** Mereka memastikan aplikasi [Capacitor](https://capacitorjs.com/) Anda memenuhi persyaratan Apple dan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en), menjaga keamanan yang ketat dan pembaruan yang cepat
 
 Berikut mengapa pemeriksaan kepatuhan penting:
 
@@ -43,9 +43,9 @@ Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi C
 
 [[HTML_TAG]][[HTML_TAG]]
 
-## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjscom/)
+## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24jpg?auto=compress)
 
 Pipeline CI/CD yang dirancang dengan baik menyederhanakan penerapan dan membantu memastikan aplikasi Anda secara konsisten memenuhi pedoman app store
 

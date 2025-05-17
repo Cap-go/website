@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'path'
 import { defaultLocale, locales } from '../../src/services/locale'
+import { commonReplacements } from '../commonReplacements'
 import { translateText } from '../translate'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
@@ -90,17 +91,7 @@ const processFile = async (file: string, lang: string): Promise<void> => {
     htmlTags.forEach((match) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
-    translatedContent = translatedContent
-      .replace(/capgoapp/g, 'capgo.app')
-      .replace(/([^.\s])png\)/g, '$1.png)')
-      .replace(/([^.\s])jpg\)/g, '$1.jpg)')
-      .replace(/([^.\s])gif\)/g, '$1.gif)')
-      .replace(/([^.\s])webp\)/g, '$1.webp)')
-      .replace(/update\/\)を/g, 'update/) を')
-      .replace(/capacitorjscom/g, 'capacitorjs.com')
-      .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
-      .replace(/assetsseobotaicom/g, 'assets.seobotai.com')
-    writeFileSync(destinationPath, matter.stringify(translatedContent, newFrontmatter), 'utf8')
+    writeFileSync(destinationPath, matter.stringify(commonReplacements(translatedContent), newFrontmatter), 'utf8')
   } catch (error) {
     console.log(`Translation failed for: ${file} in ${lang} locale.`)
     throw error

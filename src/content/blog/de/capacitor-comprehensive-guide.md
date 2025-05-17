@@ -19,7 +19,7 @@ locale: de
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) ist ein vielseitiges Werkzeug, das Webentwicklern ermöglicht, native iOS-, Android-, Desktop- und Progressive Web Apps mit einer einzigen standardisierten Web-Codebasis zu erstellen. Entwickelt vom Team hinter Ionic, hat Capacitor in den letzten Jahren erhebliche Aufmerksamkeit erlangt, da Entwickler das Potenzial von Webtechnologien auf mobilen Plattformen erkannt haben. In diesem umfassenden Leitfaden beantworten wir einige der häufigsten Fragen zu Capacitor und untersuchen seine Fähigkeiten, Anwendungsfälle und Vorteile.
+[Capacitor](https://capacitorjs.com/) ist ein vielseitiges Werkzeug, das Webentwicklern ermöglicht, native iOS-, Android-, Desktop- und Progressive Web Apps mit einer einzigen standardisierten Web-Codebasis zu erstellen. Entwickelt vom Team hinter Ionic, hat Capacitor in den letzten Jahren erhebliche Aufmerksamkeit erlangt, da Entwickler das Potenzial von Webtechnologien auf mobilen Plattformen erkannt haben. In diesem umfassenden Leitfaden beantworten wir einige der häufigsten Fragen zu Capacitor und untersuchen seine Fähigkeiten, Anwendungsfälle und Vorteile.
 
 ## Was ist Capacitor?
 
@@ -101,4 +101,4 @@ Ja, die [Ionic VS Code-Erweiterung](https://marketplace.visualstudio.com/items/?
 
 Ja, Capgo bietet [Enterprise-Support und -Funktionen](https://capgo.app/) für Capacitor, einschließlich dediziertem Support, nativen Plugins für Live-Update und Authentifizierung und mehr.## Wie fange ich mit Capacitor an?
 
-Besuchen Sie die [Capacitor-Dokumentation](https://capacitorjscom/docs/) und folgen Sie den Anweisungen, um Capacitor in Ihrer App zu installieren. Wenn Sie mit einer vordefinierten Capacitor-App mit Ionic Framework und Angular/React/Vue beginnen möchten, folgen Sie dem Einstiegsablauf auf der [Ionic Framework-Website](https://ionicframeworkcom/)
+Besuchen Sie die [Capacitor-Dokumentation](https://capacitorjs.com/docs/) und folgen Sie den Anweisungen, um Capacitor in Ihrer App zu installieren. Wenn Sie mit einer vordefinierten Capacitor-App mit Ionic Framework und Angular/React/Vue beginnen möchten, folgen Sie dem Einstiegsablauf auf der [Ionic Framework-Website](https://ionicframeworkcom/)

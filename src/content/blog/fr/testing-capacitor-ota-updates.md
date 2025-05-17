@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Les mises à jour OTA vous permettent de corriger les bugs, d'ajouter des fonctionnalités et de mettre à jour votre application [Capacitor](https://capacitorjscom/) instantanément - sans délais de l'App Store** Voici comment les tester efficacement :
+**Les mises à jour OTA vous permettent de corriger les bugs, d'ajouter des fonctionnalités et de mettre à jour votre application [Capacitor](https://capacitorjs.com/) instantanément - sans délais de l'App Store** Voici comment les tester efficacement :
 
 -   **Que sont les mises à jour OTA ?** Elles déploient des changements en direct directement sur les appareils des utilisateurs, évitant les validations des app stores Cela économise du temps et résout rapidement les problèmes
 -   **Pourquoi les tests sont importants :** Des mises à jour mal testées peuvent planter les applications ou enfreindre la conformité Avec des tests appropriés, 95% des mises à jour réussissent en 24 heures
@@ -42,7 +42,7 @@ next_blog: ''
 
 **Conseil Pro :** Utilisez des déploiements progressifs pour tester les mises à jour sur de petits groupes d'utilisateurs avant un déploiement complet Les outils de Capgo rendent ce processus fluide et sécurisé
 
-## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjscom/) de [Capawesome](https://capawesomeio/) pour Ionic
+## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de [Capawesome](https://capawesomeio/) pour Ionic
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

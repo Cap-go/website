@@ -19,7 +19,7 @@ locale: ko
 next_blog: ''
 ---
 
-Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjscom/) 앱을 앱스토어 지연 없이 개선할 수 있는 빠른 방법입니다. 하지만 코드 변조, 다운그레이드 공격, 데이터 유출과 같은 위험이 따릅니다. 다음은 업데이트를 안전하게 하는 방법입니다:
+Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjs.com/) 앱을 앱스토어 지연 없이 개선할 수 있는 빠른 방법입니다. 하지만 코드 변조, 다운그레이드 공격, 데이터 유출과 같은 위험이 따릅니다. 다음은 업데이트를 안전하게 하는 방법입니다:
 
 1. **모든 것을 암호화**: 업데이트 파일에는 AES-256을, 보안 키 교환에는 RSA-2048을 사용
 2. **업데이트 번들 서명**: 개인/공개 키 쌍으로 업데이트를 인증하여 변조 방지
@@ -36,9 +36,9 @@ Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjscom/) 앱을 �
 
 앱스토어와 [GDPR](https://enwikipediaorg/wiki/General_Data_Protection_Regulation) 규정을 준수하기 위해 업데이트가 안전하고 투명하며 사용자 데이터를 보호하는지 확인하세요. [Capgo](https://capgo.app/)와 같은 도구를 사용하면 더 안전한 OTA 업데이트를 위한 암호화, 서명, 모니터링을 자동화할 수 있습니다.
 
-## 기업용 [Capacitor](https://capacitorjscom/)
+## 기업용 [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/m2kFUvSFcSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

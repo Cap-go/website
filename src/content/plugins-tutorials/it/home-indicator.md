@@ -52,6 +52,6 @@ Uso de exemplo:
 
 ## Créditos
 
-Este plugin foi criado originalmente para [Kickcom](https://kickcom/) por [Capgo](https://capgoapp/).
+Este plugin foi criado originalmente para [Kickcom](https://kickcom/) por [Capgo](https://capgo.app/).
 
-Para mais informações e atualizações, confira [Capgo](https://capgoapp/).
+Para mais informações e atualizações, confira [Capgo](https://capgo.app/).

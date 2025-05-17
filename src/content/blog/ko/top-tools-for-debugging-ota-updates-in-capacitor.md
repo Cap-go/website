@@ -17,7 +17,7 @@ locale: ko
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) 앱에서 Over-the-Air (OTA) 업데이트를 디버깅하는 것은 까다로울 수 있지만, 적절한 도구를 사용하면 큰 차이가 있습니다. 버전 충돌을 관리하거나, [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 보장하거나, 플랫폼 간 디버깅을 할 때 고려할만한 세 가지 도구가 있습니다:
+[Capacitor](https://capacitorjs.com/) 앱에서 Over-the-Air (OTA) 업데이트를 디버깅하는 것은 까다로울 수 있지만, 적절한 도구를 사용하면 큰 차이가 있습니다. 버전 충돌을 관리하거나, [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 보장하거나, 플랫폼 간 디버깅을 할 때 고려할만한 세 가지 도구가 있습니다:
 
 - **[Capgo](https://capgo.app/)**: 엔드투엔드 암호화, CI/CD 통합, 사용자별 출시가 가능한 보안 OTA 업데이트. 월 12달러부터 시작
 - **@capawesome/capacitor-live-update**: 자동 롤백이 있는 기본적인 OTA [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 위한 무료 심플 플러그인
@@ -78,9 +78,9 @@ iOS 앱 검사를 위해 Inspectdev는 Windows와 Chrome DevTools와 호환되�
 
 [[HTML_TAG]][[HTML_TAG]]
 
-## [Capacitor](https://capacitorjscom/) OTA 업데이트를 위한 3가지 주요 디버깅 도구
+## [Capacitor](https://capacitorjs.com/) OTA 업데이트를 위한 3가지 주요 디버깅 도구
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20jpg?auto=compress)
 
 이러한 도구들은 개발자가 OTA 업데이트를 관리하면서 특정 [디버깅 과제](https://capgo.app/docs/plugin/debugging/)를 효과적으로 해결하는 데 도움을 줍니다.
 

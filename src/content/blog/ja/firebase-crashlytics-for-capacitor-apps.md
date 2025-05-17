@@ -20,7 +20,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Firebase Crashlytics](https://firebasegooglecom/docs/crashlytics)** はアプリのクラッシュをリアルタイムで追跡し、問題を素早く修正するための詳細なレポートを提供します。[Capacitor](https://capacitorjscom/) を使用したiOSとAndroidアプリの両方にシームレスに統合できます。以下が重要なポイントです：
+**[Firebase Crashlytics](https://firebasegooglecom/docs/crashlytics)** はアプリのクラッシュをリアルタイムで追跡し、問題を素早く修正するための詳細なレポートを提供します。[Capacitor](https://capacitorjs.com/) を使用したiOSとAndroidアプリの両方にシームレスに統合できます。以下が重要なポイントです：
 
 -   **Crashlyticsを使用する理由：**
     

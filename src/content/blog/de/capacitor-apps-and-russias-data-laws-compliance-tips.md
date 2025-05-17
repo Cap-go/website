@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-Um die russischen Datenlokalisierungsgesetze bei der Entwicklung von [Capacitor](https://capacitorjscom/) Apps einzuhalten, müssen Sie sicherstellen, dass personenbezogene Daten russischer Nutzer auf Servern gespeichert werden, die sich physisch in Russland befinden. Nichteinhaltung kann zu Strafen und App-Store-Ablehnungen führen. Hier ist, was Sie wissen müssen:
+Um die russischen Datenlokalisierungsgesetze bei der Entwicklung von [Capacitor](https://capacitorjs.com/) Apps einzuhalten, müssen Sie sicherstellen, dass personenbezogene Daten russischer Nutzer auf Servern gespeichert werden, die sich physisch in Russland befinden. Nichteinhaltung kann zu Strafen und App-Store-Ablehnungen führen. Hier ist, was Sie wissen müssen:
 
 -   **Server-Einrichtung**: Nutzen Sie zertifizierte russische Rechenzentren (z.B. [YandexCloud](https://yandexcloud/en/solutions/gateway-to-russia), [Mailru Cloud Solutions](https://cloudmailru/)) und implementieren Sie Geo-Routing, um Daten innerhalb Russlands zu halten
 -   **[Datenschutzerklärung](https://capgo.app/privacy/)**: Stellen Sie eine russischsprachige Datenschutzerklärung bereit, die [Datenspeicherung](https://capgo.app/plugins/capacitor-data-storage-sqlite/), Nutzerrechte und Verarbeitungspraktiken detailliert beschreibt

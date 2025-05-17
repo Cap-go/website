@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/home-indicator
 
 The `@capgo/home-indicator` package allows you to hide and show the home button indicator in your Capacitor app.

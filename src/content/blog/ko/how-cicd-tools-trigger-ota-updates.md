@@ -29,7 +29,7 @@ CI/CD 도구는 프로세스를 자동화하여 무선(OTA) 업데이트를 더 
     -   **롤백 옵션:** 오류율이 증가하면 자동으로 업데이트 되돌리기
 -   **주요 도구:** [Capgo](https://capgo.app/)는 CLI 명령, 웹훅 통합, 상세 메트릭 추적으로 OTA 업데이트를 단순화합니다
 
-OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 안정성을 보장합니다. 아래에서 [Capacitor](https://capacitorjscom/) 앱을 CI/CD 파이프라인과 설정하는 단계별 지침을 확인할 수 있습니다.
+OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 안정성을 보장합니다. 아래에서 [Capacitor](https://capacitorjs.com/) 앱을 CI/CD 파이프라인과 설정하는 단계별 지침을 확인할 수 있습니다.
 
 ## [Appflow](https://ionicio/appflow/live-updates) 실시간 업데이트: 사용자에게 즉각적인 업데이트 배포
 
@@ -43,9 +43,9 @@ OTA 업데이트 자동화는 더 빠른 전달, 적은 오류, 더 나은 앱 �
 
 </Steps>
 
-## [Capacitor](https://capacitorjscom/)를 OTA 업데이트용으로 준비하기
+## [Capacitor](https://capacitorjs.com/)를 OTA 업데이트용으로 준비하기
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12jpg?auto=compress)
 
 [자동화된 무선](https://capgo.app/blog/open-source-licecing/) (OTA) 업데이트를 위한 Capacitor 설정에는 세 가지 주요 단계가 포함됩니다: 설정 구성, 보안 조치 구현, [업데이트 시스템 통합](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). 이 프로세스는 앱을 안전하게 유지하면서 CI/CD 자동화와의 호환성을 보장합니다.
 
@@ -157,7 +157,7 @@ Capgo CLI는 파이프라인 내 업데이트 관리를 간소화하는 주요 �
 
 ### 단계적 업데이트와 사용자 그룹
 
-단계적 업데이트를 통해 업데이트 배포를 제어하여 사용자에게 원활한 경험을 제공할 수 있습니다. 예를 들어, Capgo의 _promote_ 명령어(앞서 논의됨)는 베타 그룹 관리를 돕습니다. 기업 데이터에 따르면 앱의 거의 절반(49%)이 월간 업데이트가 필요하므로 [\[4\]](https://capacitorjscom/docs/guides/ci-cd), 단계적 배포는 점진적으로 변경사항을 적용하면서 앱의 안정성을 유지하는 핵심 전략이 됩니다.
+단계적 업데이트를 통해 업데이트 배포를 제어하여 사용자에게 원활한 경험을 제공할 수 있습니다. 예를 들어, Capgo의 _promote_ 명령어(앞서 논의됨)는 베타 그룹 관리를 돕습니다. 기업 데이터에 따르면 앱의 거의 절반(49%)이 월간 업데이트가 필요하므로 [\[4\]](https://capacitorjs.com/docs/guides/ci-cd), 단계적 배포는 점진적으로 변경사항을 적용하면서 앱의 안정성을 유지하는 핵심 전략이 됩니다.
 
 ### 지표 기반 업데이트 트리거
 

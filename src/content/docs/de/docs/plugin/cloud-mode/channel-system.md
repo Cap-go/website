@@ -26,7 +26,7 @@ Sie können ein Gerät auch direkt einem Bundle zuweisen
 
 ## Kanal-Optionen
 
-<figure><img src="/channel_setting_1webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
 
 Details zu jeder Option:
 

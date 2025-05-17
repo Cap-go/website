@@ -21,7 +21,7 @@ locale: de
 next_blog: ''
 ---
 
-Die Überwachung von [Capacitor](https://capacitorjscom/) App-Updates ist entscheidend für die Aufrechterhaltung der App-Stabilität und die Gewährleistung einer nahtlosen Benutzererfahrung. [Capacitor](https://capacitorjscom/)s OTA (Over-the-Air) Updates vereinfachen den Prozess und ermöglichen Entwicklern [Updates zu pushen](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) ohne App Store Verzögerungen. Hier ist was Sie wissen müssen:
+Die Überwachung von [Capacitor](https://capacitorjs.com/) App-Updates ist entscheidend für die Aufrechterhaltung der App-Stabilität und die Gewährleistung einer nahtlosen Benutzererfahrung. [Capacitor](https://capacitorjs.com/)s OTA (Over-the-Air) Updates vereinfachen den Prozess und ermöglichen Entwicklern [Updates zu pushen](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) ohne App Store Verzögerungen. Hier ist was Sie wissen müssen:
 
 -   **Warum Updates überwachen?**
     

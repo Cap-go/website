@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin memperbarui aplikasi** [**Capacitor**](https://capacitorjscom/) **Anda tanpa tertunda di app store? Update Over-the-Air (OTA) memungkinkan Anda mengirim perbaikan, fitur baru, dan peningkatan langsung ke pengguna secara real time.** Berikut cara menjadwalkannya secara efektif:
+**Ingin memperbarui aplikasi** [**Capacitor**](https://capacitorjs.com/) **Anda tanpa tertunda di app store? Update Over-the-Air (OTA) memungkinkan Anda mengirim perbaikan, fitur baru, dan peningkatan langsung ke pengguna secara real time.** Berikut cara menjadwalkannya secara efektif:
 
 -   **Apa itu Update OTA?** Memungkinkan Anda mengirim perubahan aplikasi langsung ke pengguna, hanya mengunduh bagian yang diperbarui untuk menghemat waktu dan bandwidth
     
@@ -84,7 +84,7 @@ Berikut beberapa tolok ukur kinerja [\[1\]](https://capgo.app/):
 -   **Tingkat keberhasilan pembaruan**: 82% di seluruh dunia
     
 
-## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjscom/) Ionic Baru dari [Capgo](https://capgo.app/)
+## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjs.com/) Ionic Baru dari [Capgo](https://capgo.app/)
 
 **Merencanakan Jadwal Pembaruan**
 

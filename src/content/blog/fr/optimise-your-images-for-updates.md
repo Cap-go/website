@@ -9,7 +9,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
-head_image: /convert_webp.webp
+head_image: /convert_.webp.webp
 head_image_alt: Convertir en illustration webp
 keywords: >-
   mobile app development, live updates, OTA updates, continuous integration,
@@ -23,7 +23,7 @@ Le format WebP est un format d'image moderne qui peut offrir des économies sign
 
 Le format WebP est bien pris en charge par la plupart des principales plateformes et appareils mobiles, y compris Android et iOS. Contrairement au JPEG, WebP offre une qualité d'image supérieure avec une taille de fichier plus petite, ce qui se traduit par des temps de téléchargement plus rapides, une utilisation de données réduite et une meilleure expérience utilisateur. C'est particulièrement important pour les applications mobiles utilisées sur les réseaux cellulaires, où l'utilisation des données et les temps de téléchargement sont des préoccupations majeures.
 
-En ce qui concerne la conversion de vos images en WebP, plusieurs options sont disponibles. Une option populaire est d'utiliser un outil en ligne de commande comme `cwebp`, qui peut être facilement intégré dans le processus de construction de votre application. Une autre option est de convertir vos images en WebP dans [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/webp/), qui peut être utilisé pour convertir manuellement vos images. Vous pouvez également utiliser un plugin pour votre système de gestion de contenu (CMS) ou un service automatisé comme Kraken.io.
+En ce qui concerne la conversion de vos images en WebP, plusieurs options sont disponibles. Une option populaire est d'utiliser un outil en ligne de commande comme `c.webp`, qui peut être facilement intégré dans le processus de construction de votre application. Une autre option est de convertir vos images en WebP dans [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/.webp/), qui peut être utilisé pour convertir manuellement vos images. Vous pouvez également utiliser un plugin pour votre système de gestion de contenu (CMS) ou un service automatisé comme Kraken.io.
 
 Une fois que vous avez converti vos images en WebP, il est important de tester les performances de votre application pour voir s'il y a une amélioration. Vous pouvez utiliser des outils comme [le plugin Firebase Performance Monitoring](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/performance/) ou d'autres outils de test de performance pour mesurer les performances de l'application. Vous devriez également envisager de tester l'application sur différents appareils et réseaux pour obtenir une image plus précise de l'impact de la conversion en WebP sur les performances de l'application.
 

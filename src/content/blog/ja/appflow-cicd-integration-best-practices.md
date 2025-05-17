@@ -52,7 +52,7 @@ Appflowを使用すると、チームはアプリストアのレビューを待�
 
 ### iOSとAndroidのビルドツール
 
-Appflowは、iOSとAndroidの両プラットフォームのビルドプロセスを自動化します。iOSでは、コード署名、プロビジョニング、Xcodeの設定を管理します。Androidでは、Gradle自動化、キーストア管理を処理し、APKやアプリバンドルを生成します。これにより[React Native](https://reactnativedev/)や[Capacitor](https://capacitorjscom/)などのフレームワークで一貫したビルドが保証されます。
+Appflowは、iOSとAndroidの両プラットフォームのビルドプロセスを自動化します。iOSでは、コード署名、プロビジョニング、Xcodeの設定を管理します。Androidでは、Gradle自動化、キーストア管理を処理し、APKやアプリバンドルを生成します。これにより[React Native](https://reactnativedev/)や[Capacitor](https://capacitorjs.com/)などのフレームワークで一貫したビルドが保証されます。
 
 ### アプリストアデプロイメント
 

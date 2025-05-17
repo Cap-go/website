@@ -22,7 +22,7 @@ locale: it
 next_blog: ''
 ---
 
-La sicurezza della pipeline per le app [Capacitor](https://capacitorjscom/) è essenziale per proteggere i dati sensibili e garantire aggiornamenti affidabili. Ecco cosa devi sapere:
+La sicurezza della pipeline per le app [Capacitor](https://capacitorjs.com/) è essenziale per proteggere i dati sensibili e garantire aggiornamenti affidabili. Ecco cosa devi sapere:
 
 - **Proteggere i Segreti**: Utilizza la crittografia end-to-end e strumenti sicuri di gestione dei segreti per proteggere le credenziali come le [API keys](https://capgo.app/docs/webapp/api-keys/)
 - **Controllo Accessi**: Implementa il controllo degli accessi basato sui ruoli (RBAC), [autenticazione multi-fattore](https://capgo.app/docs/webapp/mfa/) (MFA) e monitoraggio in tempo reale per prevenire modifiche non autorizzate alla pipeline
@@ -33,7 +33,7 @@ La sicurezza della pipeline per le app [Capacitor](https://capacitorjscom/) è e
 
 ## Cos'è la Sicurezza CI/CD? Strategie per rafforzarla
 
-## Rischi di Sicurezza nelle Pipeline delle App [Capacitor](https://capacitorjscom/)
+## Rischi di Sicurezza nelle Pipeline delle App [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 

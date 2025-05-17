@@ -21,7 +21,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Capacitor](https://capacitorjscom/) Android アプリのネイティブブリッジは、Web ベースの JavaScript とネイティブ Android 機能間のシームレスな通信を可能にします**。開発者が Web コードから直接カメラ、位置情報、ストレージなどの Android 固有の機能を使用できるようにし、Web テクノロジーを活用しながらネイティブな感覚のアプリを作成できます。
+**[Capacitor](https://capacitorjs.com/) Android アプリのネイティブブリッジは、Web ベースの JavaScript とネイティブ Android 機能間のシームレスな通信を可能にします**。開発者が Web コードから直接カメラ、位置情報、ストレージなどの Android 固有の機能を使用できるようにし、Web テクノロジーを活用しながらネイティブな感覚のアプリを作成できます。
 
 ### 重要なポイント：
 
@@ -44,9 +44,9 @@ Capgo は、無線経由のアップデートツールで、ネイティブブ�
 
 **Web コードの柔軟性とネイティブ Android のパフォーマンスを組み合わせた、高速で応答性の高いアプリを構築したいですか？ネイティブブリッジの仕組みと最適化方法について詳しく見ていきましょう。**
 
-## プロジェクト固有のローカルプラグインを作成する方法 | Ionic | [Capacitor](https://capacitorjscom/)
+## プロジェクト固有のローカルプラグインを作成する方法 | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22jpg?auto=compress)
 
 ## ネイティブブリッジの通信フロー
 

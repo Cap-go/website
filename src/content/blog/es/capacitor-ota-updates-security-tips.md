@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres actualizaciones OTA seguras para tu aplicación [Capacitor](https://capacitorjscom/)?** Aquí está el resumen: Las actualizaciones OTA son rápidas y eficientes pero conllevan riesgos como interceptación de datos, manipulación de archivos y vulnerabilidades del servidor. Para mantener tus actualizaciones seguras, concéntrate en **cifrado, verificación de archivos y control de acceso**
+**¿Quieres actualizaciones OTA seguras para tu aplicación [Capacitor](https://capacitorjs.com/)?** Aquí está el resumen: Las actualizaciones OTA son rápidas y eficientes pero conllevan riesgos como interceptación de datos, manipulación de archivos y vulnerabilidades del servidor. Para mantener tus actualizaciones seguras, concéntrate en **cifrado, verificación de archivos y control de acceso**
 
 ### Puntos Clave:
 

@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) スクリプト自動化により、開発者は素早く効率的にモバイルアプリを更新できます。以下が重要なポイントです:
+[Capacitor](https://capacitorjs.com/) スクリプト自動化により、開発者は素早く効率的にモバイルアプリを更新できます。以下が重要なポイントです:
 
 - **迅速な更新**: アプリストアの遅延をスキップし、24時間以内に95%のユーザーに変更が反映
 - **エラー削減**: 自動化により人的ミスを最小限に
@@ -38,9 +38,9 @@ next_blog: ''
 
 自動化により、より速く、より安全で、より信頼性の高いアプリ更新が可能になります。詳細を確認してワークフローを最適化しましょう！
 
-## [Capacitor](https://capacitorjscom/)プロジェクトを自動的に設定する方法 ⚡️
+## [Capacitor](https://capacitorjs.com/)プロジェクトを自動的に設定する方法 ⚡️
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21jpg?auto=compress)
+![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21jpg?auto=compress)
 
 ## スクリプト作成基準
 

@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-shake
 
 The `@capgo/capacitor-shake` package allows you to detect shake gestures on a device. Here is a tutorial on how to use this package in your Capacitor app.

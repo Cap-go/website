@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-**アプリストアの遅延なしにバグを修正したり機能を追加したいですか？** [Capacitor](https://capacitorjscom/)アプリのOver-The-Air (OTA)アップデートを使用すると、長いアプリストアのレビュープロセスを回避して、直接ユーザーにアップデートをプッシュできます。ただし、アプリの拒否や削除を避けるためには、AppleとGoogle Playのルールに準拠することが重要です。
+**アプリストアの遅延なしにバグを修正したり機能を追加したいですか？** [Capacitor](https://capacitorjs.com/)アプリのOver-The-Air (OTA)アップデートを使用すると、長いアプリストアのレビュープロセスを回避して、直接ユーザーにアップデートをプッシュできます。ただし、アプリの拒否や削除を避けるためには、AppleとGoogle Playのルールに準拠することが重要です。
 
 ### 重要なポイント:
 
@@ -32,7 +32,7 @@ next_blog: ''
 
 コンプライアンスを維持しながらOTAアップデートを実装するための段階的なガイドをご覧ください。
 
-## [Capacitor](https://capacitorjscom/)のOTAアップデートの基本
+## [Capacitor](https://capacitorjs.com/)のOTAアップデートの基本
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
 

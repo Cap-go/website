@@ -21,7 +21,7 @@ locale: fr
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) aide les développeurs à créer des applications pour iOS et Android en utilisant la même base de code, tout en gérant les différences spécifiques à chaque plateforme. Il simplifie l'intégration des fonctionnalités natives, assure la conformité aux directives des plateformes et optimise les performances. Points clés :
+[Capacitor](https://capacitorjs.com/) aide les développeurs à créer des applications pour iOS et Android en utilisant la même base de code, tout en gérant les différences spécifiques à chaque plateforme. Il simplifie l'intégration des fonctionnalités natives, assure la conformité aux directives des plateformes et optimise les performances. Points clés :
 
 -   **Détection de Plateforme** : Utilisez `Capacitor.getPlatform()` pour appliquer du code spécifique à la plateforme
 -   **Plugins Intégrés** : APIs unifiées pour les fonctionnalités comme la Caméra, le Stockage et la Géolocalisation

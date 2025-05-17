@@ -19,7 +19,7 @@ locale: fr
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) CLI simplifie la gestion des plugins pour le développement d'applications, permettant une intégration transparente des fonctionnalités natives de l'appareil. Associé à des outils comme [Capgo](https://capgo.app/), il rationalise les mises à jour, le déploiement et le dépannage. Voici ce que vous devez savoir :
+[Capacitor](https://capacitorjs.com/) CLI simplifie la gestion des plugins pour le développement d'applications, permettant une intégration transparente des fonctionnalités natives de l'appareil. Associé à des outils comme [Capgo](https://capgo.app/), il rationalise les mises à jour, le déploiement et le dépannage. Voici ce que vous devez savoir :
 
 **Fonctionnalités principales :**
 
