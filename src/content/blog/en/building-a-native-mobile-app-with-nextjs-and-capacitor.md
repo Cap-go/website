@@ -5,7 +5,7 @@ title: >-
   Guide
 description: >-
   Learn how to create native mobile apps using Next.js 15 and Capacitor in this
-  comprehensive guide. Discover the latest best practices and techniques for
+  guide. Discover the latest best practices for
   building high-performance, feature-rich mobile applications.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'

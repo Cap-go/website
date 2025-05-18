@@ -18,9 +18,6 @@ locale: en
 next_blog: ''
 ---
 
-
-# How to Enable Developer Mode on iOS 16 for App Testing
-
 For developers and testers working with iOS 16 and above, enabling Developer Mode is a crucial step for running internal distribution builds and local development builds directly on an iPhone or iPad. This guide will walk you through the process of activating Developer Mode on your iOS device.
 
 ## Prerequisites

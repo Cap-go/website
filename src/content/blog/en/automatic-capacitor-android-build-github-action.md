@@ -18,8 +18,6 @@ locale: en
 next_blog: automatic-capacitor-ios-build-github-action
 ---
 
-# Automatic Android Builds with GitHub Actions
-
 Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
 
 ## Prerequisites
