@@ -1,7 +1,7 @@
 ---
 slug: how-to-segment-users-by-plan-and-channels
 title: "How to Use Channels for Feature Flags and A/B Testing"
-description: "Learn how to use CapGo's channels for feature flags and A/B testing by self-assigning users or using your backend"
+description: "Learn how to use Capgo's channels for feature flags and A/B testing by self-assigning users or using your backend"
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://twitter.com/martindonadieu'
@@ -18,11 +18,11 @@ next_blog: ''
 
 # How to Use Channels for Feature Flags and A/B Testing
 
-CapGo's channel system provides a flexible way to segment users and control feature access. While CapGo doesn't have built-in plan management or A/B testing, you can implement these features by managing channel assignments yourself.
+Capgo's channel system provides a flexible way to segment users and control feature access. While Capgo doesn't have built-in plan management or A/B testing, you can implement these features by managing channel assignments yourself.
 
 ## Understanding Channels
 
-Channels in CapGo allow you to:
+Channels in Capgo allow you to:
 - Target specific user groups with different features
 - Run A/B tests by assigning users to different channels
 - Gradually roll out new features
@@ -35,7 +35,7 @@ Channels in CapGo allow you to:
 This is the more secure method. It involves:
 1. Getting the device ID from the updater
 2. Sending it to your backend
-3. Your backend calls the CapGo API to assign the device
+3. Your backend calls the Capgo API to assign the device
 
 Here's how to implement it:
 
@@ -51,7 +51,7 @@ const getDeviceId = async () => {
 // Send device ID to your backend
 const assignToChannel = async (channel: string) => {
   const deviceId = await getDeviceId()
-  // Your backend will call CapGo API to assign the device
+  // Your backend will call Capgo API to assign the device
   await yourBackend.assignDeviceToChannel(deviceId, channel)
 }
 ```
@@ -59,11 +59,11 @@ const assignToChannel = async (channel: string) => {
 ### Backend Implementation
 
 Your backend needs to:
-1. Get an API key from CapGo dashboard
-2. Call the CapGo API to assign the device to a channel
+1. Get an API key from Capgo dashboard
+2. Call the Capgo API to assign the device to a channel
 
 To get your API key:
-1. Log in to your CapGo dashboard
+1. Log in to your Capgo dashboard
 2. Go to Settings > API Keys
 3. Click "Generate New Key"
 4. Select `all` mode to manage devices and channels
@@ -128,9 +128,9 @@ const getCurrentChannel = async () => {
 }
 ```
 
-Before users can self-assign to a channel, you need to enable this feature in the CapGo dashboard:
+Before users can self-assign to a channel, you need to enable this feature in the Capgo dashboard:
 
-1. Go to the Channels section in your CapGo dashboard
+1. Go to the Channels section in your Capgo dashboard
 2. Click on the channel name you want to manage
 3. In the channel settings, enable "Allow devices to self associate"
 4. Save the changes
@@ -174,6 +174,6 @@ const assignToABTest = async (userId: string) => {
 
 ## Conclusion
 
-By leveraging CapGo's channel system, you can create more personalized app experiences and run A/B tests. For production use, always prefer the backend assignment method for better security and control.
+By leveraging Capgo's channel system, you can create more personalized app experiences and run A/B tests. For production use, always prefer the backend assignment method for better security and control.
 
 For more details on channel management, check out our [channels documentation](/docs/live-updates/channels/). 

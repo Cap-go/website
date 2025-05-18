@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "All available settings for Capacitor Updater"
+description: "All available settings for Capacitor Updater, all the configuration you can set in you capacitor config and what they used for"
 sidebar:
   order: 8
 ---

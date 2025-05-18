@@ -1,6 +1,6 @@
 ---
 title: "Auto update"
-description: "How to use auto-update with capacitor-updater"
+description: "A detailed guide on implementing auto-update functionality using capacitor-updater, enabling seamless updates through Capgo channels or similar mechanisms for enhanced app management and user experience"
 sidebar:
   order: 2
 ---

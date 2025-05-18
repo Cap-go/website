@@ -1,6 +1,6 @@
 ---
 title: "Channel system"
-description: "How to use the channel system with capacitor-updater"
+description: "How to use the channel system with Capgo, and our updater, undertsand what channel are for and how to make your device use them"
 sidebar:
   order: 6
 ---

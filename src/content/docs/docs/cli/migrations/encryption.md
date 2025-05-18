@@ -1,11 +1,11 @@
 ---
 title: "Encryption"
-description: "How to encrypt your data with new encryption"
+description: "How to encrypt your data with encryption v2, secure your app and ensure only you can update your users with your updates"
 sidebar:
   order: 5
 ---
 
-This documentation explains how to migrate to the new encryption system. Learn more about the new encryption system in the [blog post](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing).
+This documentation explains how to migrate to the encryption v2 system. Learn more about the encryption v2 system in the [blog post](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing).
 
 ## 1. Create Key Pair
 

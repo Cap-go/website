@@ -1,6 +1,6 @@
 ---
 title: "Functions and settings"
-description: "All available method and settings of the plugin"
+description: "Learn about all available method and settings of the updater plugin of Capgo, and how to use it"
 sidebar:
   order: 2
 ---

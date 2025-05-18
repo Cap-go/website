@@ -1154,8 +1154,8 @@
     "detectedLanguage": "German",
     "localePassed": "de (German)",
     "reason": "The title is written in German, containing German words and proper German syntax. Key German words include 'Wie' (how) and 'das' (the), and the sentence structure follows German grammar rules.",
-    "file": "src/content/blog/de/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
-    "title": "Wie Rapido Cloud das Semantic Release mit CapGo CapacitorUpdater verwaltet",
+    "file": "src/content/blog/de/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
+    "title": "Wie Rapido Cloud das Semantic Release mit Capgo CapacitorUpdater verwaltet",
     "locale": "de",
     "language": "German"
   },
@@ -3404,7 +3404,7 @@
     "detectedLanguage": "Spanish",
     "localePassed": "es (Spanish)",
     "reason": "The title is correctly written in Spanish, containing Spanish words and proper Spanish grammar structure. It includes Spanish terms like 'Cómo' (how), 'con' (with), and follows Spanish syntax patterns. The technical terms 'Rapido Cloud', 'Capgo', and 'CapacitorUpdater' are product names that remain unchanged across languages.",
-    "file": "src/content/blog/es/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/es/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Cómo Rapido Cloud gestiona el lanzamiento semántico con Capgo CapacitorUpdater",
     "locale": "es",
     "language": "Spanish"
@@ -5654,7 +5654,7 @@
     "detectedLanguage": "Indonesian",
     "localePassed": "id",
     "reason": "The title is correctly written in Indonesian. It uses Indonesian words and proper Indonesian grammar structure: 'Bagaimana' (how), 'mengelola' (manage), 'dengan' (with) are all Indonesian words, and the sentence structure follows Indonesian language patterns.",
-    "file": "src/content/blog/id/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/id/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Bagaimana Rapido Cloud mengelola semantic release dengan Capgo CapacitorUpdater",
     "locale": "id",
     "language": "Indonesian"
@@ -7904,7 +7904,7 @@
     "detectedLanguage": "Spanish",
     "localePassed": "French",
     "reason": "The title is written in Spanish ('Cómo' is Spanish for 'How', 'Rapido' is Spanish for 'Fast') while the specified locale is French. A French equivalent would be something like 'Comment Rapido Cloud gère Semantic Release avec Capgo CapacitorUpdater'",
-    "file": "src/content/blog/fr/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/fr/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Cómo Rapido Cloud gestiona Semantic Release con Capgo CapacitorUpdater",
     "locale": "fr",
     "language": "French"
@@ -10154,7 +10154,7 @@
     "detectedLanguage": "Italian",
     "localePassed": "it",
     "reason": "The title is correctly written in Italian. It contains Italian words and proper Italian grammar structure: 'Come' (how), 'Rapido' (rapid), 'gestisce' (manages), and 'con' (with) are all Italian words. The sentence follows Italian syntax patterns.",
-    "file": "src/content/blog/it/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/it/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Come Rapido Cloud gestisce il Semantic Release con Capgo CapacitorUpdater",
     "locale": "it",
     "language": "Italian"
@@ -12404,7 +12404,7 @@
     "detectedLanguage": "Japanese",
     "localePassed": "ja",
     "reason": "The title is written in Japanese (with katakana and kanji) mixed with English technical terms. The structure '～による～の～方法' is a typical Japanese grammatical pattern, and words like 'による' and '方法' are Japanese.",
-    "file": "src/content/blog/ja/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/ja/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Capgo CapacitorUpdaterによるRapido CloudのSemantic Releaseの管理方法",
     "locale": "ja",
     "language": "Japanese"
@@ -14654,7 +14654,7 @@
     "detectedLanguage": "Korean",
     "localePassed": "ko",
     "reason": "The title is written in Korean (한글) with Korean characters and grammar structure, including words like '와', '함께', '가', and '방법'. The text contains Korean-specific terms and follows Korean syntax patterns.",
-    "file": "src/content/blog/ko/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater.md",
+    "file": "src/content/blog/ko/how-I-manage-semantic-release-with-Capgo-CapacitorUpdater.md",
     "title": "Capgo CapacitorUpdater와 함께 Rapido Cloud가 시맨틱 릴리스를 관리하는 방법",
     "locale": "ko",
     "language": "Korean"

@@ -1,6 +1,6 @@
 ---
 title: "From V2 to V3"
-description: "How to upgrade from V2 to V3"
+description: "A comprehensive guide on transitioning from version 2 to version 3 of Capgo updater, detailing the necessary steps and considerations for a successful upgrade process"
 sidebar:
   order: 4
 ---

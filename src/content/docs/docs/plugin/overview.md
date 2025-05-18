@@ -1,6 +1,6 @@
 ---
 title: "Overview"
-description: "Explanation of the two different approaches"
+description: "Comprehensive guide comparing Cloud and Self-Hosted Modes for effective update management, security, and control, helping you choose the best approach for your needs."
 sidebar:
   order: 1
 ---
