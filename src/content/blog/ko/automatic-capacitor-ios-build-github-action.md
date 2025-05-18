@@ -402,7 +402,7 @@ APPLE_PROFILE_NAME=
 </div>
 3. `Bundle identifier` 값을 복사하세요. 이 값을 `BUNDLE_IDENTIFIER` 시크릿에 설정해야 합니다.
 <div class="mx-auto" style="width: 100%;">
-  <img src="/xcode_app_click.webp" alt="bundle-identifier-xcode">
+  <img src="/social-login-assets/xcode_app_click.webp" alt="bundle-identifier-xcode">
 </div>
 
 ## 6. 빌드 처리

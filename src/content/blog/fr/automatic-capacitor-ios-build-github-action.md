@@ -401,7 +401,7 @@ Le `Team ID` est la valeur que vous devez définir dans le secret `APP_STORE_CON
 1. Ouvrez Xcode
 2. Double-cliquez sur `App` dans le navigateur de projet
 <div class="mx-auto" style="width: 100%;">
-  <img src="/xcode_app_click.webp" alt="bundle-identifier-xcode">
+  <img src="/social-login-assets/xcode_app_click.webp" alt="bundle-identifier-xcode">
 </div>
 3. Copiez la valeur du `Bundle identifier`. C'est la valeur que vous devez définir dans le secret `BUNDLE_IDENTIFIER`.
 <div class="mx-auto" style="width: 100%;">
