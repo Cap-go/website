@@ -52,6 +52,7 @@ if (typeof tmp !== 'string') plugin['readme'] = await tmp
 else plugin['readme'] = tmp
 
 // const promises: any[] = []
+
 // Fetch npm package details to get npm downloads
 // const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${plugin.name}`
 // promises.push(
@@ -62,6 +63,7 @@ else plugin['readme'] = tmp
 //     })
 //     .catch(() => {}),
 // )
+
 // Fetch npm package details to get npm modified
 // const registryNpmApiUrl = `https://registry.npmjs.org/${plugin.name}`
 // promises.push(
@@ -75,10 +77,12 @@ else plugin['readme'] = tmp
 //     })
 //     .catch(() => {}),
 // )
+
 // Extract the GitHub repository owner and name from the URL
 // const githubUrlParts = plugin.href.split('/')
 // const githubOwner = githubUrlParts[3]
 // const githubRepo = githubUrlParts[4]
+
 // Fetch GitHub repository details to get GitHub stars
 // const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
 // promises.push(
@@ -89,6 +93,7 @@ else plugin['readme'] = tmp
 //     })
 //     .catch(() => {}),
 // )
+
 // Update the item with fetched data
 // const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
 // promises.push(
@@ -104,6 +109,7 @@ else plugin['readme'] = tmp
 //     .catch(() => {}),
 // )
 
+// Await all the items to be fetched
 // await Promise.all(promises)
 
 const { slug: id } = Astro.params
@@ -160,9 +166,9 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
           <h1 class="mt-4 text-2xl font-bold md:text-4xl">
             {title}
           </h1>
-          <h1 class="mt-8 text-lg font-light md:text-xl">
+          <span class="mt-8 text-lg font-light md:text-xl">
             {description}
-          </h1>
+          </span>
           {
             githubStars && (
               <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
@@ -203,7 +209,7 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
               )
             }
           </div>
-          {readme && <div id="readme" class="prose my-8" set:html={readme} />}
+          <!-- {readme && <div id="readme" class="prose my-8" set:html={readme} />} -->
         </div>
       </div>
     </div>
@@ -213,19 +219,15 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
 
 <!-- <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const tutorialBtn = document.getElementById('tutorialBtn')
     const aboutBtn = document.getElementById('aboutBtn')
+    const tutorialBtn = document.getElementById('tutorialBtn')
     const aboutSection = document.getElementById('aboutSection')
     const tutorialSection = document.getElementById('tutorialSection')
-
-    tutorialBtn?.addEventListener('click', () => {
-      aboutSection?.classList.add('hidden')
-      tutorialSection?.classList.remove('hidden')
-    })
-
-    aboutBtn?.addEventListener('click', () => {
-      tutorialSection?.classList.add('hidden')
-      aboutSection?.classList.remove('hidden')
-    })
+    const toggleSections = () => {
+      aboutSection?.classList.toggle('hidden')
+      tutorialSection?.classList.toggle('hidden')
+    }
+    aboutBtn?.addEventListener('click', toggleSections)
+    tutorialBtn?.addEventListener('click', toggleSections)
   })
 </script> -->

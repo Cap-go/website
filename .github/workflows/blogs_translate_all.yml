@@ -27,7 +27,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: bun run blogs:delete_broken_all
       - run: bun run blogs:fix_locales_all
-      - run: bun run blogs:fix_code_languages_all
+      - run: bun run fix_code_languages_all
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"

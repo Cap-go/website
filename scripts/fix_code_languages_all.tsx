@@ -1,6 +1,6 @@
 import fg from 'fast-glob'
 import { promises as fs } from 'fs'
-import { commonReplacements } from '../commonReplacements'
+import { commonReplacements } from './commonReplacements'
 
 const files = await fg(['src/content/**/*.md*'], { absolute: true, onlyFiles: true })
 let changedCount = 0
