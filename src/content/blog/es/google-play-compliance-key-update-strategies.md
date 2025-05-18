@@ -22,7 +22,7 @@ locale: es
 next_blog: ''
 ---
 
-**Mantener el cumplimiento con las políticas de [Google Play](https://playgooglecom/console/signup) en 2025 es crítico para evitar eliminaciones de aplicaciones, suspensiones de cuenta y pérdida de ingresos.** Los desarrolladores deben actuar rápidamente ante los cambios de política y usar herramientas como [Capgo](https://capgo.app/) para entregar actualizaciones al **95% de los usuarios en 24 horas.** Esto es lo que necesitas saber:
+**Mantener el cumplimiento con las políticas de [Google Play](https://play.google.com/console/signup) en 2025 es crítico para evitar eliminaciones de aplicaciones, suspensiones de cuenta y pérdida de ingresos.** Los desarrolladores deben actuar rápidamente ante los cambios de política y usar herramientas como [Capgo](https://capgo.app/) para entregar actualizaciones al **95% de los usuarios en 24 horas.** Esto es lo que necesitas saber:
 
 -   **Cambios de Política 2025**: Reglas más estrictas para contenido (ej., etiquetas "Ad" claras, verificación de edad), privacidad de datos (ej., paneles de privacidad en la app, registros en tiempo real), y seguridad de cuenta (ej., [autenticación de dos factores](https://capgo.app/docs/webapp/mfa/) obligatoria, retenciones de seguridad de 24 horas)
 -   **Errores Comunes**: Malentendidos de reglas, APIs obsoletas y falta de divulgaciones
@@ -34,7 +34,7 @@ next_blog: ''
 
 **Enfócate en actualizaciones rápidas, verificaciones automatizadas de cumplimiento y planificación a largo plazo para mantenerte adelante.** Profundicemos en los detalles para asegurar que tu app permanezca segura y fácil de usar.
 
-## Problemas de Cumplimiento de [Google Play](https://playgooglecom/console/signup)
+## Problemas de Cumplimiento de [Google Play](https://play.google.com/console/signup)
 
 ![Google Play](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/6fab1123dba2d1a9b508fae064f81971.jpg)
 

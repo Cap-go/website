@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Rester conforme aux politiques de [Google Play](https://playgooglecom/console/signup) en 2025 est crucial pour éviter les suppressions d'applications, les suspensions de compte et les pertes de revenus.** Les développeurs doivent agir rapidement face aux changements de politique et utiliser des outils comme [Capgo](https://capgo.app/) pour livrer des mises à jour à **95% des utilisateurs en 24 heures.** Voici ce que vous devez savoir :
+**Rester conforme aux politiques de [Google Play](https://play.google.com/console/signup) en 2025 est crucial pour éviter les suppressions d'applications, les suspensions de compte et les pertes de revenus.** Les développeurs doivent agir rapidement face aux changements de politique et utiliser des outils comme [Capgo](https://capgo.app/) pour livrer des mises à jour à **95% des utilisateurs en 24 heures.** Voici ce que vous devez savoir :
 
 -   **Changements de politique 2025** : Règles plus strictes pour le contenu (ex. labels "Publicité" clairs, vérification de l'âge), confidentialité des données (ex. tableaux de bord de confidentialité intégrés, journaux en temps réel) et sécurité des comptes (ex. [authentification à deux facteurs](https://capgo.app/docs/webapp/mfa/) obligatoire, délais de sécurité de 24 heures)
 -   **Pièges courants** : Mauvaise compréhension des règles, APIs obsolètes et manque d'informations
@@ -34,7 +34,7 @@ next_blog: ''
 
 **Concentrez-vous sur les mises à jour rapides, les vérifications de conformité automatisées et la planification à long terme pour garder une longueur d'avance.** Plongeons dans les détails pour garantir que votre application reste sécurisée et conviviale.
 
-## Problèmes de conformité [Google Play](https://playgooglecom/console/signup)
+## Problèmes de conformité [Google Play](https://play.google.com/console/signup)
 
 ![Google Play](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/6fab1123dba2d1a9b508fae064f81971.jpg)
 

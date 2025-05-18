@@ -21,7 +21,7 @@ locale: id
 next_blog: ''
 ---
 
-**Mematuhi kebijakan [Google Play](https://playgooglecom/console/signup) pada tahun 2025 sangat penting untuk menghindari penghapusan aplikasi, penangguhan akun, dan kerugian pendapatan.** Pengembang harus bertindak cepat terhadap perubahan kebijakan dan menggunakan alat seperti [Capgo](https://capgo.app/) untuk mengirimkan pembaruan ke **95% pengguna dalam waktu 24 jam.** Berikut yang perlu Anda ketahui:
+**Mematuhi kebijakan [Google Play](https://play.google.com/console/signup) pada tahun 2025 sangat penting untuk menghindari penghapusan aplikasi, penangguhan akun, dan kerugian pendapatan.** Pengembang harus bertindak cepat terhadap perubahan kebijakan dan menggunakan alat seperti [Capgo](https://capgo.app/) untuk mengirimkan pembaruan ke **95% pengguna dalam waktu 24 jam.** Berikut yang perlu Anda ketahui:
 
 -   **Perubahan Kebijakan 2025**: Aturan lebih ketat untuk konten (misalnya, label "Iklan" yang jelas, verifikasi usia), privasi data (misalnya, dasbor privasi dalam aplikasi, log waktu nyata), dan keamanan akun (misalnya, wajib [autentikasi dua faktor](https://capgo.app/docs/webapp/mfa/), penangguhan keamanan 24 jam)
 -   **Kesalahan Umum**: Kesalahpahaman aturan, API yang usang, dan kurangnya pengungkapan
@@ -33,7 +33,7 @@ next_blog: ''
 
 **Fokus pada pembaruan cepat, pemeriksaan kepatuhan otomatis, dan perencanaan jangka panjang untuk tetap unggul.** Mari kita dalami detailnya untuk memastikan aplikasi Anda tetap aman dan ramah pengguna.
 
-## Masalah Kepatuhan [Google Play](https://playgooglecom/console/signup)
+## Masalah Kepatuhan [Google Play](https://play.google.com/console/signup)
 
 ![Google Play](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/6fab1123dba2d1a9b508fae064f81971.jpg)
 

@@ -125,9 +125,9 @@ AppleのApp StoreはApp Tracking Transparency (ATT)フレームワークを通�
 
 セキュリティを強化するため、データ送信には端末間暗号化を使用します。Capgoのようなツールは、Appleのセキュリティガイドラインに沿った暗号化されたアップデートを提供することで役立ちます [\[1\]](https://capgo.app/) 一方、Google Playもデータ取り扱いに関する厳格な透明性とユーザーコントロールを強制しています
 
-### [Google Play](https://playgooglecom/store/games?hl=en_US&gl=US) プライバシー基準
+### [Google Play](https://play.google.com/store/games?hl=en_US&gl=US) プライバシー基準
 
-![Google Play](https://mars-images.imgix.net/seobot/screenshots/playgooglecom-16a80c4cf416aa7572b6b4b1e8b92617-2025-03-06.jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/play.google.com-16a80c4cf416aa7572b6b4b1e8b92617-2025-03-06.jpg?auto=compress)
 
 Google Playストアは、開発者にデータ取り扱いに関する明確な詳細の提供を求めています。主な要件は以下の通りです：
 

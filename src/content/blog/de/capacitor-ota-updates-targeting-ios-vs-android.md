@@ -53,7 +53,7 @@ iOS und Android verfolgen unterschiedliche Ansätze beim Umgang mit OTA (Over-th
 
 ### iOS App Store Update-Regeln
 
-Apple hat strenge Richtlinien für OTA-Updates. Geräte müssen bestimmte technische Bedingungen erfüllen: Sie müssen iOS 5 oder höher ausführen, mit einem stabilen WLAN-Netzwerk verbunden sein und entweder mindestens 50% Akkulaufzeit haben oder an eine Stromquelle angeschlossen sein [\[5\]](https://osxdailycom/2011/11/10/ios-ota-update-not-working-fix/). Über diese technischen Anforderungen hinaus setzt Apple einen strengen Überprüfungsprozess durch, der Updates auf Sicherheit, Leistung, Geschäftskonformität, Design und rechtliche Standards prüft [\[4\]](https://developer.apple.com/app-store/review/guidelines/).
+Apple hat strenge Richtlinien für OTA-Updates. Geräte müssen bestimmte technische Bedingungen erfüllen: Sie müssen iOS 5 oder höher ausführen, mit einem stabilen WLAN-Netzwerk verbunden sein und entweder mindestens 50% Akkulaufzeit haben oder an eine Stromquelle angeschlossen sein [\[5\]](https://osxdaily.com/2011/11/10/ios-ota-update-not-working-fix/). Über diese technischen Anforderungen hinaus setzt Apple einen strengen Überprüfungsprozess durch, der Updates auf Sicherheit, Leistung, Geschäftskonformität, Design und rechtliche Standards prüft [\[4\]](https://developer.apple.com/app-store/review/guidelines/).
 
 ### Google Play Store Update-Regeln
 
@@ -67,8 +67,8 @@ Die wichtigsten Unterschiede zwischen iOS- und Android-OTA-Updates sind nachfolg
 | --- | --- | --- |
 | Update-Bereitstellung | Sofortige Vollversion | Stufenweise Einführung (1% → 25% → 50% → 100%) |
 | Hintergrund-Updates | Eingeschränkt | Unterstützt A/B-Updates im Hintergrund [\[8\]](https://sourceandroidcom/docs/core/ota/ab) |
-| Speicherverwaltung | Erfordert vollständigen Download | Unterstützt Streaming-Updates [\[8\]](https://sourceandroid| Stromanforderungen | Mindestens 50% Akku oder angeschlossen [\[5\]](https://osxdailycom/2011/11/10/ios-ota-update-not-working-fix/) | Flexible Stromanforderungen |
-| Netzwerkanforderungen | WLAN-Verbindung erforderlich [\[5\]](https://osxdailycom/2011/11/10/ios-ota-update-not-working-fix/) | Unterstützt verschiedene Verbindungstypen |
+| Speicherverwaltung | Erfordert vollständigen Download | Unterstützt Streaming-Updates [\[8\]](https://sourceandroid| Stromanforderungen | Mindestens 50% Akku oder angeschlossen [\[5\]](https://osxdaily.com/2011/11/10/ios-ota-update-not-working-fix/) | Flexible Stromanforderungen |
+| Netzwerkanforderungen | WLAN-Verbindung erforderlich [\[5\]](https://osxdaily.com/2011/11/10/ios-ota-update-not-working-fix/) | Unterstützt verschiedene Verbindungstypen |
 
 Das A/B-Update-System von Android zeichnet sich dadurch aus, dass Updates im Hintergrund installiert werden können, ohne den Benutzer zu unterbrechen. Dieses System verwendet zwei Slots für boot-kritische Partitionen und vermeidet die Notwendigkeit von doppelten Partitionen, wodurch der Speicherplatz im Vergleich zu älteren Methoden optimiert wird [\[6\]](https://sourceandroidcom/docs/core/ota). iOS hingegen folgt einem stärker kontrollierten und unmittelbaren Update-Prozess, der Stabilität und Benutzeraufsicht priorisiert.
 

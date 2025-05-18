@@ -54,7 +54,7 @@ Die Veröffentlichung einer [Capacitor-App](https://capgo.app/plugins/ivs-player
 
 ### Store-Zulassungsanforderungen
 
-Um Ihre App im [Apple App Store](https://developer.apple.com/app-store/guidelines/) oder [Google Play Store](https://playgooglecom/console/signup) zu listen, stellen Sie sicher, dass Sie alle erforderlichen Dokumentationen bereitstellen, klare [Datenschutzrichtlinien](https://capgo.app/dp/) einbinden und Nutzereinwilligungsfunktionen implementieren, die sowohl den Plattformregeln als auch den russischen Datengesetzen entsprechen.
+Um Ihre App im [Apple App Store](https://developer.apple.com/app-store/guidelines/) oder [Google Play Store](https://play.google.com/console/signup) zu listen, stellen Sie sicher, dass Sie alle erforderlichen Dokumentationen bereitstellen, klare [Datenschutzrichtlinien](https://capgo.app/dp/) einbinden und Nutzereinwilligungsfunktionen implementieren, die sowohl den Plattformregeln als auch den russischen Datengesetzen entsprechen.
 
 ### Erfüllung rechtlicher Standards
 

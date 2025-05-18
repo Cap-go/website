@@ -107,9 +107,9 @@ Apple memiliki proses peninjauan yang ketat untuk aplikasi baru dan pembaruan, b
 
 Apple juga menggunakan sistem pembaruan yang aman untuk memastikan integritas pembaruan, mempersonalisasikannya, dan memblokir serangan downgrade [\[5\]](https://supportapplecom/guide/deployment/about-software-updates-depc4c80847a/web)
 
-### Aturan Pembaruan [Google Play](https://playgooglecom/console/signup)
+### Aturan Pembaruan [Google Play](https://play.google.com/console/signup)
 
-![Google Play](https://mars-images.imgix.net/seobot/screenshots/playgooglecom-b46db7cd42211b9b8ee493afb4b93a4d-2025-02-28.jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/play.google.com-b46db7cd42211b9b8ee493afb4b93a4d-2025-02-28.jpg?auto=compress)
 
 Google Play mengambil pendekatan berbeda, mengandalkan otomatisasi dan AI untuk mempercepat proses peninjauan. Persetujuan sering selesai dalam hitungan jam [\[6\]](https://thisisglancecom/blog/apple-store-vs-google-play-store). Aspek utamanya meliputi:
 
