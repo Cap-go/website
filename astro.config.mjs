@@ -130,11 +130,6 @@ export default defineConfig({
           autogenerate: { directory: 'docs/public-api' },
         },
         {
-          label: 'Web app',
-          collapsed: true,
-          autogenerate: { directory: 'docs/webapp' },
-        },
-        {
           label: 'Plugins',
           collapsed: true,
           items: [
@@ -204,6 +199,11 @@ export default defineConfig({
               ],
             },
           ],
+        },
+        {
+          label: 'Web app',
+          collapsed: true,
+          autogenerate: { directory: 'docs/webapp' },
         },
         {
           label: 'How To',
